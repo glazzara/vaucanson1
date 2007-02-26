@@ -34,7 +34,7 @@
 /// This file is also used in Tiger Compiler, where it is compiled in
 /// a C library, so INLINE_TIMER_CC should be defined to empty in that
 /// case.
-# if VAUCANSON
+# if defined VAUCANSON
 #  define INLINE_TIMER_CC inline
 # else
 #  define INLINE_TIMER_CC
@@ -83,14 +83,14 @@ namespace misc
   {
     begin.now ();
     if (initial)
-      {
-	initial = false;
+    {
+      initial = false;
 
-	// First time task is seen
-	// cumulated is set to 0.
-	saved_accumulated_times = cumulated;
-	first = begin;
-      }
+      // First time task is seen
+      // cumulated is set to 0.
+      saved_accumulated_times = cumulated;
+      first = begin;
+    }
   }
 
   INLINE_TIMER_CC
@@ -145,7 +145,7 @@ namespace misc
   {
     begin /= n;
     elapsed /= n;
-    cumulated /= n;;
+    cumulated /= n;
     first /= n;
     initial = false;
 
@@ -239,18 +239,18 @@ namespace misc
   {
     // If magic is asked on destruction, let it happen completely.
     if (dump_stream)
+    {
+      // Consider that if the tasks were not properly closed, then
+      // stop was not invoked either.
+      if (!tasks.empty ())
       {
-	// Consider that if the tasks were not properly closed, then
-	// stop was not invoked either.
-	if (!tasks.empty ())
-	  {
-	    do
-	      pop ();
-	    while (!tasks.empty ());
-	    stop ();
-	  }
-	print (*dump_stream, true);
+	do
+	  pop ();
+	while (!tasks.empty ());
+	stop ();
       }
+      print (*dump_stream, true);
+    }
   }
 
 
@@ -310,23 +310,23 @@ namespace misc
     o << "Execution times (seconds)" << std::endl;
     for (std::list<std::string>::const_iterator i = task_ordered.begin ();
 	 i != task_ordered.end (); ++i)
-      {
-	task_map_type::const_iterator ii = tasksmap.find(*i);
-	if (ii->second)
-	  print_time (ii->first, ii->second.elapsed,
-		      total.elapsed, o, tree_mode);
-      }
+    {
+      task_map_type::const_iterator ii = tasksmap.find(*i);
+      if (ii->second)
+	print_time (ii->first, ii->second.elapsed,
+		    total.elapsed, o, tree_mode);
+    }
     o << std::endl;
 
     o << "Cumulated times (seconds)" << std::endl;
     for (std::list<std::string>::const_iterator i = task_ordered.begin ();
 	 i != task_ordered.end (); ++i)
-      {
-	task_map_type::const_iterator ii = tasksmap.find(*i);
-	if (ii->second)
-	  print_time (ii->first, ii->second.cumulated,
-		      total.elapsed, o, tree_mode);
-      }
+    {
+      task_map_type::const_iterator ii = tasksmap.find(*i);
+      if (ii->second)
+	print_time (ii->first, ii->second.cumulated,
+		    total.elapsed, o, tree_mode);
+    }
     o << std::endl;
 
     if (tree_mode)
@@ -364,22 +364,22 @@ namespace misc
       tasks.top ()->stop ();
 
     if (tasksmap.find (task_name) == tasksmap.end ())
-      {
-	// Adjustment for Display
-	task_ordered.push_back(task_name);
-	for (unsigned i = 1; i <= tasks.size (); ++i)
-	  if (i == tasks.size ())
-	    tabs += "|___";
-	  else
-	    tabs += "   ";
-      }
+    {
+      // Adjustment for Display
+      task_ordered.push_back(task_name);
+      for (unsigned i = 1; i <= tasks.size (); ++i)
+	if (i == tasks.size ())
+	  tabs += "|___";
+	else
+	  tabs += "   ";
+    }
 
     if (tab_to_disp.find (task_name) == tab_to_disp.end ())
       tab_to_disp[task_name] = tabs;
     TimeVar& current = tasksmap[task_name]; // FIXME : Bug is task is
-					    // already in taskmap
-					    // (first is not
-					    // reinitialized)
+    // already in taskmap
+    // (first is not
+    // reinitialized)
     // Reset current to initial
     current.initial = true;
 
@@ -463,13 +463,13 @@ namespace misc
     Timer res = *this;
     for (task_map_type::const_iterator i = tasksmap.begin ();
 	 i != tasksmap.end (); ++i)
-      {
-	task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
-	if (j != rhs.tasksmap.end())
-	  res[i->first] = i->second.min(j->second);
-	else
-	  res[i->first] = i->second;
-      }
+    {
+      task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
+      if (j != rhs.tasksmap.end())
+	res[i->first] = i->second.min(j->second);
+      else
+	res[i->first] = i->second;
+    }
     return res;
   }
 
@@ -481,13 +481,13 @@ namespace misc
     Timer res = *this;
     for (task_map_type::const_iterator i = tasksmap.begin ();
 	 i != tasksmap.end (); ++i)
-      {
-	task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
-	if (j != rhs.tasksmap.end())
-	  res[i->first] = i->second.max(j->second);
-	else
-	  res[i->first] = i->second;
-      }
+    {
+      task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
+      if (j != rhs.tasksmap.end())
+	res[i->first] = i->second.max(j->second);
+      else
+	res[i->first] = i->second;
+    }
     return res;
   }
 
@@ -508,12 +508,16 @@ namespace misc
 
 } // namespace misc
 
+NAMESPACE_VCSN_END
+
+# undef INLINE_TIMER_CC
+
 
   /*--------.
   | Tests.  |
   `--------*/
 
-# if TEST_TIMER
+# if defined TEST_TIMER
 
 #  include <iostream>
 
@@ -521,14 +525,18 @@ namespace misc
 int
 main ()
 {
+#  if defined VAUCANSON
+  using namespace vcsn;
+#  endif
+
   misc::Timer timer;
   enum timevar
-    {
-      One = 1,
-      Two,
-      Three,
-      Four
-    };
+  {
+    One = 1,
+    Two,
+    Three,
+    Four
+  };
 
   timer.name (One, "One");
   timer.name (Two, "Two");
@@ -558,11 +566,7 @@ main ()
   return 0;
 }
 
-# endif
-
-NAMESPACE_VCSN_END
-
-# undef INLINE_TIMER_CC
+# endif // TEST_TIMER
 
 #endif //!VCSN_MISC_TIMER_CC
 
