@@ -26,21 +26,21 @@ namespace vcsn
 
     template <template <class> class C, class T>
     inline
-    class SelfIterator::SelfIterator (const C<T>& c)
+    SelfIterator<C, T>::SelfIterator (const C<T>& c)
       : c_ (&c),
 	pos_ (c.begin ())
     {}
 
     template <template <class> class C, class T>
     inline
-    class SelfIterator::SelfIterator ()
+    SelfIterator<C, T>::SelfIterator ()
       : c_ (0),
 	pos_ ()
     {}
 
     template <template <class> class C, class T>
     inline
-    class SelfIterator::SelfIterator (const SelfIterator& s)
+    SelfIterator<C, T>::SelfIterator (const SelfIterator& s)
       : c_ (s.c_),
 	pos_ (s.pos_)
     {}
@@ -48,15 +48,15 @@ namespace vcsn
     template <template <class> class C, class T>
     inline
     const T&
-    class SelfIterator::operator* () const
+    SelfIterator<C, T>::operator* () const
     {
       return *pos_;
     }
 
     template <template <class> class C, class T>
     inline
-    const SelfIterator&
-    class SelfIterator::operator++ ()
+    const SelfIterator<C, T>&
+    SelfIterator<C, T>::operator++ ()
     {
       pos_++;
       return *this;
@@ -64,18 +64,18 @@ namespace vcsn
 
     template <template <class> class C, class T>
     inline
-    SelfIterator
-    class SelfIterator::operator++ (int)
+    SelfIterator<C, T>
+    SelfIterator<C, T>::operator++ (int)
     {
-      SelfIterator tmp (*this);
+      SelfIterator<C, T> res (*this);
       ++pos_;
-      return tmp;
+      return res;
     }
 
     template <template <class> class C, class T>
     inline
     bool
-    class SelfIterator::operator!= (const SelfIterator& o) const
+    SelfIterator<C, T>::operator!= (const SelfIterator<C, T>& o) const
     {
       if (c_ == 0)
 	if (o.c_ == 0)
@@ -90,7 +90,7 @@ namespace vcsn
     template <template <class> class C, class T>
     inline
     bool
-    class SelfIterator::operator== (const SelfIterator& o) const
+    SelfIterator<C, T>::operator== (const SelfIterator<C, T>& o) const
     {
       if (c_ == 0)
 	return o.c_ == 0 || o.pos_ == o.c_->end ();
@@ -102,4 +102,4 @@ namespace vcsn
   } // misc
 } // vcsn
 
-#endif // ! VCSN_MISC_SUPPORT_HXX
+#endif // ! VCSN_MISC_SELF_ITERATOR_HXX
