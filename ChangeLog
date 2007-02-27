@@ -1,5 +1,21 @@
 2007-02-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix AUTOMATON_FREEMONOID_TYPES_EXACT use.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh:
+	Don't do it.
+
+	* include/vaucanson/r_automaton_structures.hh,
+	* include/vaucanson/z_automaton_structures.hh,
+	* include/vaucanson/boolean_automaton_structures.hh,
+	* include/vaucanson/z_min_plus_automaton_structures.hh,
+	* include/vaucanson/z_max_plus_automaton_structures.hh:
+	Do it.
+
+2007-02-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix SelfIterator.
 	* include/vaucanson/misc/self_iterator.hxx: Fix big syntax mistakes
 	I made when extracting this file from the *.hh file.

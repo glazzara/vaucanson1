@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,14 +22,6 @@
 # define VCSN_CONTEXT_NAMESPACE namespace z_max_plus_automaton
 
 # include <vaucanson/contexts/automaton_functions.thh>
-
-namespace vcsn
-{
-  VCSN_CONTEXT_NAMESPACE
-  {
-    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
-  }
-}
 
 # undef VCSN_CONTEXT_NAMESPACE
 

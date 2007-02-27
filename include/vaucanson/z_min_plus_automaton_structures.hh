@@ -28,6 +28,14 @@
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
 
+namespace vcsn
+{
+  VCSN_CONTEXT_NAMESPACE
+  {
+    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+  }
+}
+
 # undef VCSN_CONTEXT_NAMESPACE
 
 #endif // !VCSN_Z_MIN_PLUS_AUTOMATON_STRUCTURES_HH
