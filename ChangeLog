@@ -1,3 +1,17 @@
+2007-02-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Obey the coding style.
+	* include/vaucanson/boolean_automaton_structures.hh,
+	* include/vaucanson/boolean_transducer_structures.hh,
+	* include/vaucanson/fmp_transducer_structures.hh,
+	* include/vaucanson/r_automaton_structures.hh,
+	* include/vaucanson/z_automaton_structures.hh,
+	* include/vaucanson/z_fmp_transducer_structures.hh,
+	* include/vaucanson/z_max_plus_automaton_structures.hh,
+	* include/vaucanson/z_min_plus_automaton_structures.hh,
+	* include/vaucanson/z_transducer_structures.hh:
+	Use correct CPP guards.
+
 2007-02-26  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Correct some erroneous preconditions. 

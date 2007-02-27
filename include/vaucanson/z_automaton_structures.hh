@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_Z_HH_
-# define VCSN_Z_HH_
+#ifndef VCSN_Z_AUTOMATON_STRUCTURES_HH
+# define VCSN_Z_AUTOMATON_STRUCTURES_HH
 
 # define VCSN_CONTEXT_NAMESPACE namespace z_automaton
 
@@ -30,4 +30,4 @@
 
 # undef VCSN_CONTEXT_NAMESPACE
 
-#endif // !VCSN_Z_HH_ //
+#endif // !VCSN_Z_AUTOMATON_STRUCTURES_HH
