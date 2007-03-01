@@ -1,3 +1,12 @@
+2007-03-01  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Refactoring of product algorithm
+	The function is now a functor called Product
+	* include/vaucanson/algorithms/product.hh:
+	  Add preconditions and references to ETA.
+	* include/vaucanson/algorithms/product.hxx:
+	  Refactoring of product.
+
 2007-02-27  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix AUTOMATON_FREEMONOID_TYPES_EXACT use.

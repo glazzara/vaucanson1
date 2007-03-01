@@ -22,6 +22,7 @@
  * @file product.hh
  *
  * Declarations of product().
+ * Algorithm described in ETA, Chapter 1, Section 1.2.b.
  *
  * @see product()
  */
@@ -43,6 +44,9 @@ namespace vcsn
 
   /// @name Product algorithm
   /// @{
+  ///
+  /// @pre is_realtime.
+  ///
   /// Returns a fresh automaton that is the product of the two input ones.
   template<typename A, typename T, typename U>
   Element<A, T>

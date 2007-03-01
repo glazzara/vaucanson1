@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,227 +29,268 @@
 # include <vaucanson/automata/implementation/geometry.hh>
 # include <vaucanson/misc/static.hh>
 
-# define if_(cond, then_clause, else_clause)			\
-  misc::static_if_simple<cond, then_clause, else_clause>::t
+namespace vcsn
+{
 
-# define eq_(type1, type2)			\
-  misc::static_eq<type1, type2>::value
+  /*--------------------------------.
+  | Functor for product algorithm.  |
+  `--------------------------------*/
+  template<typename A, typename T, typename U>
+  class Product
+  {
+    public:
+      typedef AutomataBase<A> structure_t;
+      typedef Element<A, T> lhs_t;
+      typedef Element<A, U> rhs_t;
+      typedef lhs_t	    output_t;
+      typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> > pair_map_t;
 
+      Product (const structure_t& structure,
+	       const bool use_geometry)
+	: use_geometry_(use_geometry),
+	  series_(structure.series()),
+	  monoid_(series_.monoid()),
+	  semiring_zero_(series_.semiring().zero(SELECT(semiring_elt_value_t)))
+      {
+      }
 
-namespace vcsn {
+      // returns the product of @c lhs and @c rhs (and put it also in @c output)
+      output_t&
+      operator() (output_t& output,
+		  const lhs_t& lhs,
+		  const rhs_t& rhs,
+		  pair_map_t& m)
+      {
+	TIMER_SCOPED("product");
+	visited_.clear();
 
-  namespace geom {
+	precondition(is_realtime(lhs));
+	precondition(is_realtime(rhs));
 
-    // Some little graphic tools
-    struct grphx {
+	this->initialize_queue(output, lhs, rhs, m);
 
-	// Diagonal alignement with a depth-first traversal
-	template<typename I>
-	static
-	void align(const I& a)
+	delta_ret_t transition_lhs;
+	delta_ret_t transition_rhs;
+	while (not to_process_.empty())
 	{
-	  AUTOMATON_TYPES(I);
-	  int x = 0;
-	  std::map<hstate_t,bool> visited;
-	  std::stack<hstate_t> stack;
+	  const pair_hstate_t current_pair = to_process_.front();
+	  to_process_.pop();
 
-	  for_all_states(i, a) {
-	    visited[*i] = false;
-	    // ensure inaccessible states will be visited
-	    stack.push(*i);
+	  const hstate_t lhs_s	     = current_pair.first;
+	  const hstate_t rhs_s	     = current_pair.second;
+	  const hstate_t current_state = visited_[current_pair];
+
+	  output.set_initial(current_state,
+	      lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
+	  output.set_final(current_state,
+	      lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
+
+	  transition_lhs.clear();
+	  transition_rhs.clear();
+	  lhs.deltac(transition_lhs, lhs_s, delta_kind::transitions());
+	  rhs.deltac(transition_rhs, rhs_s, delta_kind::transitions());
+
+	  for_all_const_(delta_ret_t, l, transition_lhs)
+	    for_all_const_(delta_ret_t, r, transition_rhs)
+	    {
+	      series_set_elt_t	prod_series(series_);
+
+	      if (is_product_not_null(lhs, rhs, l, r, prod_series))
+	      {
+		const pair_hstate_t new_pair(lhs.dst_of(*l), rhs.dst_of(*r));
+		typename visited_t::const_iterator found = visited_.find(new_pair);
+
+		hstate_t dst;
+		if (found == visited_.end())
+		{
+		  dst = output.add_state();
+
+		  this->add_state_to_process(output, lhs, rhs, m, dst, new_pair);
+		}
+		else
+		  dst = found->second;
+		output.add_series_transition(current_state, dst, prod_series);
+	      }
+	    }
+	}
+	return output;
+      }
+
+    private:
+      // Some little graphic tools
+      class grphx
+      {
+	public:
+	  template <typename Output, typename Lhs, typename Rhs>
+	  static void
+	  setcoordfrom (Output& a,
+			const Lhs& lhs,
+			const Rhs& rhs,
+			const hstate_t state,
+			const hstate_t x_state,
+			const hstate_t y_state)
+	  {
+	    std::map<hstate_t, std::pair<double, double> >::const_iterator iter;
+	    double x = 0, y = 0;
+
+	    iter = lhs.geometry().states().find(x_state);
+	    if (iter != lhs.geometry().states().end())
+	      x = iter->second.first;
+
+	    iter = rhs.geometry().states().find(y_state);
+	    if (iter != rhs.geometry().states().end())
+	      y = iter->second.second;
+
+	    a.geometry().states()[state] = std::make_pair(x, y);
 	  }
+	private:
+	// Diagonal alignement with a depth-first traversal
+	  template<typename I>
+	  void
+	  align (const I& a)
+	  {
+	    AUTOMATON_TYPES(I);
+	    std::map<hstate_t,bool> visited;
+	    std::stack<hstate_t> stack;
 
-	  for_all_initial_states(i, a)
-	    stack.push(*i);
+	    for_all_states(i, a)
+	    {
+	      visited[*i] = false;
+	      // ensure inaccessible states will be visited
+	      stack.push(*i);
+	    }
 
-	  while (!stack.empty()) {
-	    hstate_t i = stack.top();
-	    stack.pop();
+	    for_all_initial_states(i, a)
+	      stack.push(*i);
 
-	    if (!visited[i]) {
-	      visited[i] = true;
+	    int x = 0;
+	    while (!stack.empty())
+	    {
+	      hstate_t i = stack.top();
+	      stack.pop();
 
-	      a.geometry()[i] = std::make_pair(x, x);
-	      x++;
+	      if (!visited[i])
+	      {
+		visited[i] = true;
 
-	      std::list<htransition_t> dst;
-	      a.deltac(dst, i, delta_kind::transitions());
-	      for_all_const_(std::list<htransition_t>, j, dst)
-		stack.push(a.dst_of(*j));
+		a.geometry()[i] = std::make_pair(x, x);
+		x++;
+
+		std::vector<htransition_t> dst;
+		a.deltac(dst, i, delta_kind::transitions());
+		for_all_const_(std::vector<htransition_t>, j, dst)
+		  stack.push(a.dst_of(*j));
+	      }
 	    }
 	  }
-	}
 
+      };
+      class no_grphx
+      {
+	public:
+	  template <typename Output, typename Lhs, typename Rhs>
+	  static void
+	  setcoordfrom (Output& a,
+			const Lhs& lhs,
+			const Rhs& rhs,
+			const hstate_t state,
+			const hstate_t x_state,
+			const hstate_t y_state) {};
+      };
 
-	template <typename Output, typename Lhs, typename Rhs>
-	static
-	void setcoordfrom(Output& a,
-			  const Lhs& lhs,
-			  const Rhs& rhs,
-			  const hstate_t state,
-			  const hstate_t x_state,
-			  const hstate_t y_state)
-	{
-	  std::map<hstate_t, std::pair<double, double> >::const_iterator iter;
-	  double x = 0, y = 0;
+      // useful typedefs
+      AUTOMATON_TYPES(output_t);
 
-	  iter = lhs.geometry().states().find(x_state);
-	  if (iter != lhs.geometry().states().end())
-	    x = iter->second.first;
+      typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
+      typedef std::set<htransition_t>			delta_ret_t;
+      typedef std::map<pair_hstate_t, hstate_t>		visited_t;
+      typedef typename series_set_elt_t::support_t	support_t;
 
-	  iter = rhs.geometry().states().find(y_state);
-	  if (iter != rhs.geometry().states().end())
-	    y = iter->second.second;
+      // add a @c new_state in the queue
+      inline void
+      add_state_to_process (output_t& output,
+			    const lhs_t& lhs,
+			    const rhs_t& rhs,
+			    pair_map_t& m,
+			    const hstate_t& new_state,
+			    const pair_hstate_t& new_pair)
+      {
+	m[new_state] = new_pair;
+	visited_[new_pair] = new_state;
+	to_process_.push(new_pair);
 
-	  a.geometry().states()[state] = std::make_pair(x, y);
-	}
+# define if_(Cond, ThenClause, ElseClause)			\
+  misc::static_if_simple<Cond, ThenClause, ElseClause>::t
+# define eq_(Type1, Type2)			\
+  misc::static_eq<Type1, Type2>::value
 
-    };
+	if (use_geometry_)
+	  if_(eq_(typename output_t::geometry_t, geometry) and	\
+	      eq_(typename rhs_t::geometry_t, geometry) and		\
+	      eq_(typename lhs_t::geometry_t, geometry),		\
+	      grphx, no_grphx)
+	    ::setcoordfrom(output, lhs, rhs,
+			   new_state, new_pair.first, new_pair.second);
+# undef if_
+# undef eq_
+      }
 
-    struct no_grphx
-    {
-	template <typename Output, typename Lhs, typename Rhs>
-	static
-	void setcoordfrom(Output& a,
-			  const Lhs& lhs,
-			  const Rhs& rhs,
-			  const hstate_t state,
-			  const hstate_t x_state,
-			  const hstate_t y_state)
-	{}
+      // initialize queue with all pairs of intials states from @c lhs and @c rhs
+      inline void
+      initialize_queue (output_t& output,
+		        const lhs_t& lhs,
+		        const rhs_t& rhs,
+			pair_map_t& m)
+      {
+	for_all_initial_states(lhs_s, lhs)
+	  for_all_initial_states(rhs_s, rhs)
+	  {
+	    const pair_hstate_t	new_pair(*lhs_s, *rhs_s);
+	    const hstate_t	new_state = output.add_state();
 
-    };
+	    this->add_state_to_process(output, lhs, rhs, m, new_state, new_pair);
+	  }
+      }
 
-  } // ! geom
-
-
-  /*-------------.
-  | do_product.  |
-  `-------------*/
-
-  template <typename A, typename lhs_t, typename rhs_t, typename output_t>
-  void
-  do_product(const AutomataBase<A>&,
-	     output_t& output,
-	     const lhs_t& lhs,
-	     const rhs_t& rhs,
-	     std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m,
-	     const bool use_geometry = false)
-  {
-    TIMER_SCOPED("product");
-    AUTOMATON_TYPES(output_t);
-
-    typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
-    typedef std::set<htransition_t>			delta_ret_t;
-    typedef std::map<pair_hstate_t, hstate_t>		visited_t;
-    typedef typename series_set_elt_t::support_t	support_t;
-
-    const series_set_t&	series	 = output.structure().series();
-    const monoid_t&	monoid	 = series.monoid();
-    const semiring_t&	semiring = series.semiring();
-
-    const semiring_elt_t  semiring_zero =
-      semiring.zero(SELECT(semiring_elt_value_t));
-
-    visited_t			visited;
-    std::queue<pair_hstate_t>	to_process;
-
-
-    /*------------------------------------.
-    | Get initial states of the product.  |
-    `------------------------------------*/
-    for_all_initial_states(lhs_s, lhs)
-      for_all_initial_states(rhs_s, rhs)
-    {
-      const hstate_t		new_state = output.add_state();
-      const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
-
-      m[new_state] = new_pair;
-      visited[new_pair] = new_state;
-      to_process.push(new_pair);
-
-      if (use_geometry)
-	if_(eq_(typename output_t::geometry_t, geometry) and	\
-	    eq_(typename rhs_t::geometry_t, geometry) and	\
-	    eq_(typename lhs_t::geometry_t, geometry),	\
-	    geom::grphx, geom::no_grphx)
-	  ::setcoordfrom(output, lhs, rhs, new_state, *lhs_s, *rhs_s);
-    }
-
-    /*-------------.
-    | Processing.  |
-    `-------------*/
-    while (not to_process.empty())
-    {
-      const pair_hstate_t current_pair	= to_process.front();
-      to_process.pop();
-
-      const hstate_t lhs_s	     = current_pair.first;
-      const hstate_t rhs_s	     = current_pair.second;
-      const hstate_t current_state = visited[current_pair];
-
-      output.set_initial(current_state,
-			 lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
-      output.set_final(current_state,
-		       lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
-
-      delta_ret_t transition_lhs;
-      delta_ret_t transition_rhs;
-      lhs.deltac(transition_lhs, lhs_s, delta_kind::transitions());
-      rhs.deltac(transition_rhs, rhs_s, delta_kind::transitions());
-
-      for_all_const_(delta_ret_t, l, transition_lhs)
-	for_all_const_(delta_ret_t, r, transition_rhs)
+      inline bool
+      is_product_not_null (const lhs_t& lhs,
+			   const rhs_t& rhs,
+			   const delta_ret_t::const_iterator& l,
+			   const delta_ret_t::const_iterator& r,
+			   series_set_elt_t&  prod_series) const
       {
 	const series_set_elt_t	left_series  = lhs.series_of(*l);
 	const series_set_elt_t	right_series = rhs.series_of(*r);
-	series_set_elt_t	    prod_series (series);
 
-	bool		    prod_is_null (true);
+	bool			prod_is_not_null = false;
 	for_all_(support_t, supp, left_series.supp())
 	{
-	  const monoid_elt_t   supp_elt (monoid, *supp);
+	  const monoid_elt_t   supp_elt (monoid_, *supp);
 	  const semiring_elt_t l = left_series.get(supp_elt);
 	  const semiring_elt_t r = right_series.get(supp_elt);
 	  const semiring_elt_t p = l * r;
-	  if (p != semiring_zero)
+	  if (p != semiring_zero_)
 	  {
 	    prod_series.assoc(*supp, p.value());
-	    prod_is_null = false;
+	    prod_is_not_null = true;
 	  }
 	}
-
-	if (not prod_is_null)
-	{
-	  const pair_hstate_t new_pair (lhs.dst_of(*l), rhs.dst_of(*r));
-
-	  typename visited_t::const_iterator found =
-	    visited.find(new_pair);
-
-	  hstate_t dst;
-	  if (found == visited.end())
-	  {
-	    dst = output.add_state();
-	    visited[new_pair] = dst;
-	    m[dst] = new_pair;
-	    to_process.push(new_pair);
-
-	    if (use_geometry)
-	      if_(eq_(typename output_t::geometry_t, geometry) and  \
-		  eq_(typename rhs_t::geometry_t, geometry) and	    \
-		  eq_(typename lhs_t::geometry_t, geometry),	    \
-		  geom::grphx, geom::no_grphx)
-		::setcoordfrom(output, lhs, rhs, dst,
-			       new_pair.first, new_pair.second);
-	  }
-	  else
-	    dst = found->second;
-	  output.add_series_transition(current_state, dst, prod_series);
-	}
+	return (prod_is_not_null);
       }
-    }
-  }
 
+      // If set to true, <geometry> tags of the result automaton should be filled
+      const bool	use_geometry_;
+
+      // keep traces of new states created
+      visited_t			visited_;
+      // @c to_process_ stores all states of output that needs are not
+      std::queue<pair_hstate_t>	to_process_;
+
+      // frequently used objects in computation
+      const series_set_t&	series_;
+      const monoid_t&		monoid_;
+      const semiring_elt_t&	semiring_zero_;
+  };
 
   /*-----------.
   | Wrappers.  |
@@ -257,29 +298,24 @@ namespace vcsn {
 
   template<typename A, typename T, typename U>
   Element<A, T>
-  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
-	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m,
-	  const bool use_geometry)
+  product (const Element<A, T>& lhs, const Element<A, U>& rhs,
+	   std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m,
+	   const bool use_geometry)
   {
     Element<A, T> ret(rhs.structure());
-    do_product(ret.structure(), ret, lhs, rhs, m, use_geometry);
-    return ret;
+    Product<A, T, U> do_product(ret.structure(), use_geometry);
+    return do_product (ret, lhs, rhs, m);
   }
 
   template<typename A, typename T, typename U>
   Element<A, T>
-  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
-	  const bool use_geometry)
+  product (const Element<A, T>& lhs, const Element<A, U>& rhs,
+	   const bool use_geometry)
   {
     std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
     return product (lhs, rhs, m, use_geometry);
   }
 
 } // End of namespace vcsn.
-
-
-# undef if_
-# undef eq_
-
 
 #endif // ! VCSN_ALGORITHMS_PRODUCT_HXX
