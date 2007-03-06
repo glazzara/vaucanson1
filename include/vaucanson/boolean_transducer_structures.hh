@@ -55,6 +55,8 @@ namespace vcsn
   } // End of namespace VCSN_CONTEXT_NAMESPACE
 } // End of namespace vcsn
 
+# include <vaucanson/contexts/transducer_maker.thh>
+
 # undef AUTOMATON_CONTEXT
 # undef VCSN_CONTEXT_NAMESPACE
 

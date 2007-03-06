@@ -1,0 +1,71 @@
+//                                                             -*- C++ -*-
+// automaton_maker.thh: this file is part of the Vaucanson project.
+//
+// Vaucanson, a generic library for finite state machines.
+//
+// Copyright (C) 2007 The Vaucanson Group.
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// The complete GNU General Public Licence Notice can be found as the
+// `COPYING' file in the root directory.
+//
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
+
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
+
+namespace vcsn
+{
+  VCSN_CONTEXT_NAMESPACE
+  {
+    template <class T>
+    automaton_t make_automaton(const T& alphabet);
+
+    template <class InputIterator>
+    automaton_t make_automaton(InputIterator begin,
+		               InputIterator end);
+
+    template <class T>
+    gen_automaton_t make_gen_automaton(const T& alphabet);
+
+    template <class InputIterator>
+    gen_automaton_t make_gen_automaton(InputIterator begin,
+			               InputIterator end);
+
+    template <class Iterator>
+    rat_exp_t
+    make_rat_exp(const Iterator& begin,
+		 const Iterator& end,
+		 const std::string& exp = "0");
+
+    template <class T>
+    rat_exp_t
+    make_rat_exp(const T& alphabet, const std::string& exp = "0");
+
+    template <class SeriesSet, class SeriesImpl>
+    automaton_t
+    standard_of(const Element<SeriesSet, SeriesImpl>& e);
+
+
+    template <class SeriesSet, class SeriesImpl>
+    automaton_t
+    thompson_of(const Element<SeriesSet, SeriesImpl>& e);
+
+    rat_exp_t
+    aut_to_exp(const automaton_t& a);
+
+    template <class Chooser>
+    rat_exp_t
+    aut_to_exp(const automaton_t& a, const Chooser& c);
+  }
+}
+
+# include <vaucanson/contexts/automaton_maker.thxx>
+

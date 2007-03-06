@@ -1,5 +1,5 @@
 //							-*- C++ -*-
-// fmp_transducer_functions.thxx: this file is part of the Vaucanson project.
+// fmp_transducer_maker.thxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -21,8 +21,8 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
-#include <vaucanson/algorithms/evaluation_fmp.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
+#include <vaucanson/algorithms/evaluation_fmp.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/trim.hh>
 #include <vaucanson/algorithms/realtime.hh>
@@ -119,12 +119,10 @@ namespace vcsn
 		  const Element<TransStruct, TransImpl>& t,
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
-      AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::
-	make_automaton(t.structure().series()
-		       .monoid().first_monoid().alphabet());
-      AUTOMATON_CONTEXT::automaton_t result = AUTOMATON_CONTEXT::
-	make_automaton(t.structure().series()
-		       .monoid().second_monoid().alphabet());
+      AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::make_automaton(t.structure().series()
+	  .monoid().first_monoid().alphabet());
+      AUTOMATON_CONTEXT::automaton_t result = AUTOMATON_CONTEXT::make_automaton(t.structure().series()
+	  .monoid().second_monoid().alphabet());
       standard_of(w, input);
       evaluation_fmp(t, quotient(w), result);
       return aut_to_exp(generalized(quotient(realtime(trim(result)))),

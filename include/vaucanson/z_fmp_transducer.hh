@@ -17,7 +17,7 @@
 #ifndef VCSN_Z_FMP_TRANSDUCER_HH
 # define VCSN_Z_FMP_TRANSDUCER_HH
 
-# include <vaucanson/z_fmp_transducers_structures.hh>
+# include <vaucanson/z_fmp_transducer_structures.hh>
 
 # define VCSN_CONTEXT_NAMESPACE namespace z_fmp_transducer
 # define AUTOMATON_CONTEXT z_automaton

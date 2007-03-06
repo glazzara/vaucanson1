@@ -1,0 +1,67 @@
+//							       -*- C++ -*-
+// fmp_automaton_maker.thh: this file is part of the Vaucanson project.
+//
+// Vaucanson, a generic library for finite state machines.
+//
+// Copyright (C) 2005, 2006 The Vaucanson Group.
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// The complete GNU General Public Licence Notice can be found as the
+// `COPYING' file in the root directory.
+//
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
+
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
+
+namespace vcsn
+{
+
+  VCSN_CONTEXT_NAMESPACE
+  {
+
+    template <class T1, class T2>
+    automaton_t make_automaton(const T1& first_alphabet,
+			       const T2& second_alphabet);
+
+    template <class FirstInputIterator, class SecondInputIterator>
+    automaton_t make_automaton(const FirstInputIterator first_begin,
+			       const FirstInputIterator first_end,
+			       const SecondInputIterator second_begin,
+			       const SecondInputIterator second_end);
+
+    template <class T1, class T2>
+    monoid_elt_t make_couple(const T1& first_alphabet,
+			     const T2& second_alphabet,
+			     const std::string& first_exp = "",
+			     const std::string& second_exp = "");
+
+    template <class FirstIterator, class SecondIterator>
+    monoid_elt_t make_couple(const FirstIterator first_begin,
+			     const FirstIterator first_end,
+			     const SecondIterator second_begin,
+			     const SecondIterator second_end,
+			     const std::string& first_exp,
+			     const std::string& second_exp);
+
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename ArgStruct,
+	      typename ArgImpl>
+    AUTOMATON_CONTEXT::rat_exp_t
+    evaluation(const Element<TransStruct, TransImpl>& t,
+	       const Element<ArgStruct, ArgImpl>& input);
+
+  } // End of VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.
+
+# include <vaucanson/contexts/fmp_transducer_maker.thxx>
+

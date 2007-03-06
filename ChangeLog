@@ -1,3 +1,37 @@
+	Many functions like make_automaton were declared in
+	contexts/*_functions.thh.
+	They are now declared in new files: *_maker.t{hh,hxx}.
+	These new files are included in the *_structures.hh.
+
+	This patch will be useful for libvcsn-*.
+	We may be able to instantiate the make_automaton functions
+	in a .cc file to speed up the compilation.
+
+2007-03-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Include the make_automaton functions in the structures' headers.
+	* include/Makefile.am: Add the new files in the list.
+	* include/vaucanson/boolean_automaton_structures.hh: .
+	* include/vaucanson/boolean_transducer_structures.hh: .
+	* include/vaucanson/contexts/automaton_functions.thh: .
+	* include/vaucanson/contexts/automaton_functions.thxx: Remove.
+	* include/vaucanson/contexts/automaton_maker.thh: New.
+	* include/vaucanson/contexts/automaton_maker.thxx: New.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: .
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Remove.
+	* include/vaucanson/contexts/fmp_transducer_maker.thh: New.
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx: New.
+	* include/vaucanson/contexts/transducer_functions.thh: .
+	* include/vaucanson/contexts/transducer_functions.thxx: Remove.
+	* include/vaucanson/contexts/transducer_maker.thh: New.
+	* include/vaucanson/contexts/transducer_maker.thxx: New.
+	* include/vaucanson/fmp_transducer_structures.hh: .
+	* include/vaucanson/r_automaton_structures.hh: .
+	* include/vaucanson/z_automaton_structures.hh: .
+	* include/vaucanson/z_fmp_transducer.hh: .
+	* include/vaucanson/z_fmp_transducer_structures.hh: .
+	* include/vaucanson/z_transducer_structures.hh: .
+
 	This patch is the continuation of the patch #1573.
 	These files were forgotten in the patch #1573.
 

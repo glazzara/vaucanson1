@@ -45,6 +45,8 @@ namespace vcsn
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
 
+# include <vaucanson/contexts/fmp_transducer_maker.thh>
+
 # undef AUTOMATON_CONTEXT
 # undef VCSN_CONTEXT_NAMESPACE
 

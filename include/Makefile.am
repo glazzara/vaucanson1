@@ -57,8 +57,6 @@ vaucanson/misc/misc.hh				\
 vaucanson/misc/random.hh			\
 vaucanson/misc/random.hxx			\
 vaucanson/misc/selectors.hh			\
-vaucanson/misc/self_iterator.hh			\
-vaucanson/misc/self_iterator.hxx		\
 vaucanson/misc/sparse_interval.hh		\
 vaucanson/misc/sparse_interval.hxx		\
 vaucanson/misc/special_char_traits.hh		\
@@ -408,22 +406,34 @@ vaucanson/automata/implementation/transpose_view.hxx
 
 nobase_include_HEADERS +=				\
 vaucanson/boolean_automaton.hh				\
+vaucanson/boolean_automaton_structures.hh               \
 vaucanson/boolean_transducer.hh				\
+vaucanson/boolean_transducer_structures.hh              \
 vaucanson/contexts/automaton_functions.thh		\
-vaucanson/contexts/automaton_functions.thxx		\
+vaucanson/contexts/automaton_maker.thh                  \
+vaucanson/contexts/automaton_maker.thxx                 \
 vaucanson/contexts/fmp_transducer_functions.thh		\
-vaucanson/contexts/fmp_transducer_functions.thxx	\
+vaucanson/contexts/fmp_transducer_maker.thh             \
+vaucanson/contexts/fmp_transducer_maker.thxx            \
 vaucanson/contexts/transducer_functions.thh		\
-vaucanson/contexts/transducer_functions.thxx		\
+vaucanson/contexts/transducer_maker.thh                 \
+vaucanson/contexts/transducer_maker.thxx		\
 vaucanson/fmp_transducer.hh				\
+vaucanson/fmp_transducer_structures.hh                  \
 vaucanson/r_automaton.hh				\
+vaucanson/r_automaton_structures.hh                     \
 vaucanson/standard_algorithms.hh			\
 vaucanson/vaucanson.hh					\
 vaucanson/z_automaton.hh				\
+vaucanson/z_automaton_structures.hh                     \
 vaucanson/z_fmp_transducer.hh				\
+vaucanson/z_fmp_transducer_structures.hh                \
 vaucanson/z_max_plus_automaton.hh			\
+vaucanson/z_max_plus_automaton_structures.hh            \
 vaucanson/z_min_plus_automaton.hh			\
-vaucanson/z_transducer.hh
+vaucanson/z_min_plus_automaton_structures.hh            \
+vaucanson/z_transducer.hh \
+vaucanson/z_transducer_structures.hh
 
 nobase_include_HEADERS += 			\
 vaucanson/xml/XML.hh				\

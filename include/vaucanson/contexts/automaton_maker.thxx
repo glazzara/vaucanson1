@@ -1,9 +1,9 @@
 //								-*- C++ -*-
-// automaton_functions.thxx: this file is part of the Vaucanson project.
+// automaton_maker.thxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,11 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
+#include <vaucanson/algorithms/krat_exp_expand.hh>
+#include <vaucanson/algorithms/aut_to_exp.hh>
+#include <vaucanson/algorithms/standard_of.hh>
+#include <vaucanson/algorithms/thompson.hh>
+
 namespace vcsn
 {
 
@@ -32,40 +37,45 @@ namespace vcsn
     `-----------------*/
 
     template <class InputIterator>
-    automata_set_t make_automata_set(InputIterator begin,
-				     InputIterator end)
+    automata_set_t 
+    make_automata_set(InputIterator begin,
+		      InputIterator end)
     {
       alphabet_t		alpha;
       for (InputIterator e = begin; e != end; ++e)
 	alpha.insert(*e);
       semiring_t		semiring;
-      monoid_t			freemonoid (alpha);
+      monoid_t		freemonoid (alpha);
       series_set_t		series (semiring, freemonoid);
       return automata_set_t (series);
     }
 
     template <class InputIterator>
-    automaton_t make_automaton(InputIterator begin,
-			       InputIterator end)
+    automaton_t 
+    make_automaton(InputIterator begin,
+		   InputIterator end)
     {
       return automaton_t (make_automata_set(begin, end));
     }
 
     template <class T>
-    automaton_t make_automaton(const T& alphabet)
+    automaton_t 
+    make_automaton(const T& alphabet)
     {
       return make_automaton(alphabet.begin(), alphabet.end());
     }
 
     template <class InputIterator>
-    gen_automaton_t make_gen_automaton(InputIterator begin,
-				       InputIterator end)
+    gen_automaton_t 
+    make_gen_automaton(InputIterator begin,
+		       InputIterator end)
     {
       return gen_automaton_t (make_automata_set(begin, end));
     }
 
     template <class T>
-    gen_automaton_t make_gen_automaton(const T& alphabet)
+    gen_automaton_t 
+    make_gen_automaton(const T& alphabet)
     {
       return make_gen_automaton(alphabet.begin(), alphabet.end());
     }
@@ -76,9 +86,10 @@ namespace vcsn
     `---------------*/
 
     template <class Iterator>
-    rat_exp_t make_rat_exp(const Iterator& begin,
-			   const Iterator& end,
-			   const std::string& exp)
+    rat_exp_t 
+    make_rat_exp(const Iterator& begin,
+	         const Iterator& end,
+	         const std::string& exp)
     {
       alphabet_t	alphabet;
       for (Iterator i = begin; i != end; ++i)
@@ -96,7 +107,8 @@ namespace vcsn
     }
 
     template <class T>
-    rat_exp_t make_rat_exp(const T& alphabet, const std::string& exp)
+    rat_exp_t 
+    make_rat_exp(const T& alphabet, const std::string& exp)
     {
       return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
     }
