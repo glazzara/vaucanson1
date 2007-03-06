@@ -215,6 +215,8 @@ namespace vcsn {
 
 } // vcsn
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/design_pattern/default_ops.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_DESIGN_PATTERN_DEFAULT_OPS_HH

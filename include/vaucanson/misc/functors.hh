@@ -42,6 +42,8 @@ namespace vcsn
 } // End of namespace vcsn.
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/misc/functors.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_MISC_FUNCTORS_HH

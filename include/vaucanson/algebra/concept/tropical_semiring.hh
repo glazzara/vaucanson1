@@ -113,7 +113,9 @@ namespace vcsn {
 } // vcsn
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/concept/tropical_semiring.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_TROPICAL_SEMIRING_HH

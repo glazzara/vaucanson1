@@ -522,7 +522,9 @@ namespace vcsn {
 # undef AutoType
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/automata/implementation/automaton_view.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_AUTOMATON_VIEW_HH

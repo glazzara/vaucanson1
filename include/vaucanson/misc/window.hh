@@ -148,6 +148,8 @@ namespace vcsn {
   } // misc
 } // vcsn
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/misc/window.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_MISC_WINDOW_HH

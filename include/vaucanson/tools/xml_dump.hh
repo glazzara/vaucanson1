@@ -41,7 +41,7 @@ namespace vcsn
   }
 }
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/tools/xml_dump.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

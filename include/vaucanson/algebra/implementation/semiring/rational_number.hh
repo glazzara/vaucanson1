@@ -231,6 +231,8 @@ namespace vcsn
   } // misc
 } // vcsn
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/implementation/semiring/rational_number.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH

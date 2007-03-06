@@ -104,6 +104,8 @@ namespace vcsn
 
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/automata/implementation/geometry.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GEOMETRY_HH

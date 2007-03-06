@@ -29,7 +29,9 @@ static inline bool operator==(const vcsn::NoTag& a, const vcsn::NoTag& b);
 static inline bool operator!=(const vcsn::NoTag& a, const vcsn::NoTag& b);
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/automata/concept/tags.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_TAGS_HH

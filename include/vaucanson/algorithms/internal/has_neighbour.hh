@@ -46,7 +46,7 @@ namespace vcsn
 			 const hstate_t		s);
 }
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/internal/has_neighbour.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

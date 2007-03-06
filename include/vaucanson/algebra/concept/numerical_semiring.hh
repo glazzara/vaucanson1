@@ -79,7 +79,9 @@ namespace vcsn {
 } // vcsn
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/concept/numerical_semiring.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_NUMERICAL_SEMIRING_HH

@@ -88,7 +88,9 @@ namespace vcsn {
 } // vcsn
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/algebra/implementation/series/krat_conversion.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_CONVERSION_HH

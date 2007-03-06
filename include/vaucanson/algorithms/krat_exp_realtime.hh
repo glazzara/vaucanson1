@@ -29,7 +29,7 @@
 
 // INTERFACE: Exp realtime(const Exp& e) { return vcsn::realtime(e); }
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/krat_exp_realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

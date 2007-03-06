@@ -68,7 +68,7 @@ namespace misc
 
 NAMESPACE_VCSN_END
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/misc/bencher.hxx>
 #  if VAUCANSON
 #   include <vaucanson/misc/bencher.cc>

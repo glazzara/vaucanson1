@@ -118,6 +118,8 @@ namespace vcsn {
 
 } // vcsn
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/concept/monoid_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_MONOID_BASE_HH

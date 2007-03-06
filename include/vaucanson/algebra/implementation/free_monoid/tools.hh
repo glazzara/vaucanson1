@@ -87,6 +87,8 @@ namespace vcsn {
   typedef vcsn::algebra::list_or_string< Letter >::ret WordValue; \
   typedef vcsn::Element<Words, WordValue> Word;
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/algebra/implementation/free_monoid/tools.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_TOOLS_HH

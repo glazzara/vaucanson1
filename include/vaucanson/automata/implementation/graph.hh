@@ -511,6 +511,8 @@ namespace vcsn
 }
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/automata/implementation/graph.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH

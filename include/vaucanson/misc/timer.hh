@@ -302,9 +302,11 @@ namespace misc
 
 NAMESPACE_VCSN_END
 
-# include <vaucanson/misc/timer.hxx>
-# if defined VAUCANSON
-#  include <vaucanson/misc/timer.cc>
-# endif
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
+#  include <vaucanson/misc/timer.hxx>
+#  if defined VAUCANSON
+#   include <vaucanson/misc/timer.cc>
+#  endif
+# endif // !VCSN_USE_INTERFACE_ONLY
 
 #endif // !VCSN_MISC_TIMER_HH

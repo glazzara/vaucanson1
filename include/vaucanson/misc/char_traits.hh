@@ -119,6 +119,8 @@ namespace vcsn
 } // end of namespace vcsn
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/misc/char_traits.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_MISC_CHAR_TRAITS_HH

@@ -208,6 +208,8 @@ namespace vcsn {
 
 }
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/design_pattern/slots.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_DESIGN_PATTERN_SLOTS_HH

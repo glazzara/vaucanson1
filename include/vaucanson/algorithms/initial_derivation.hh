@@ -29,7 +29,7 @@
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/initial_derivation.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

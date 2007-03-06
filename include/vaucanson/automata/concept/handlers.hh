@@ -89,7 +89,9 @@ namespace std {
 } // std
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/automata/concept/handlers.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_HANDLERS_HH

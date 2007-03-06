@@ -334,6 +334,8 @@ namespace std {
 
 } // std
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/design_pattern/element_ops.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_DESIGN_PATTERN_ELEMENT_OPS_HH

@@ -42,7 +42,7 @@ namespace vcsn
   }
 }
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/xml/error_handler.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

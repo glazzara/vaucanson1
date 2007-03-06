@@ -99,6 +99,8 @@ namespace vcsn {
 
 } // vcsn
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/concept/semigroup_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_SEMIGROUP_BASE_HH

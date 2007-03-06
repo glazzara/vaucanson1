@@ -32,7 +32,9 @@ namespace vcsn {
 } // vcsn
 
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/algebra/implementation/series/transpose.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_TRANSPOSE_HH

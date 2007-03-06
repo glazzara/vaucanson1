@@ -75,16 +75,15 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 /*
  * Include the declaration of realtime().
  *
  * Must  be  included _after_  the  .hxx  file  because it  needs  the
  * declarations of do_realtime_here() and do_realtime().
  */
-# include <vaucanson/algorithms/realtime_decl.hh>
+#  include <vaucanson/algorithms/realtime_decl.hh>
 
 #endif // ! VCSN_ALGORITHMS_REALTIME_HH

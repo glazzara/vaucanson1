@@ -30,9 +30,9 @@
  */
 /** @} */
 
-# include <vaucanson/algorithms/realtime_decl.hh>
+# include <vaucanson/algorithms/realtime.hh>
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/is_realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

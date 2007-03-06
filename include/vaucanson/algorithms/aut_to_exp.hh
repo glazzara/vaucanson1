@@ -79,9 +79,73 @@ namespace vcsn {
 
   /** @} */
 
+
+
+  /**
+   * Default chooser for aut_to_exp().
+   *
+   * @pre There must be at least one state in the automaton.
+   * @see aut_to_exp()
+   */
+  struct DefaultChooser
+  {
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const;
+  };
+
+  /**
+   * Choose randomly a state between all currently choosable
+   * @pre There must be at least one state in the automaton.
+   * @see aut_to_exp()
+   */
+
+  struct RandomChooser
+  {
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const;
+  };
+
+
+  struct HChooser
+  {
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const;
+  };
+
+  struct DMChooser
+  {
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const;
+  };
+
+  /**
+   * Chooser for aut_to_exp().
+   *
+   * This chooser  is built  using a std::list<hstate_t>.   It returns
+   * the states of the automaton with the same order as in the list.
+   *
+   * @see aut_to_exp().
+   */
+  class ListChooser
+  {
+    public :
+      ListChooser(const std::list<hstate_t>& l);
+
+      template <class Auto_>
+      hstate_t operator() (const Auto_&);
+
+    private :
+      std::list<hstate_t>	list_;
+      std::list<hstate_t>::const_iterator pos_;
+  };
+
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/aut_to_exp.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
