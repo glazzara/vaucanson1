@@ -144,7 +144,7 @@ namespace vcsn {
 }
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && defined VCSN_USE_LIB
 #include <vaucanson/algorithms/internal/build_pattern.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 

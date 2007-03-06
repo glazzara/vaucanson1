@@ -1,3 +1,22 @@
+	This patch is the continuation of the patch #1573.
+	These files were forgotten in the patch #1573.
+
+2007-03-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add forgotten VCSN_USE_LIB ifndef
+	* include/vaucanson/algorithms/composition_cover.hh: .
+	* include/vaucanson/algorithms/internal/build_pattern.hh: .
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh: .
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh: .
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hh: .
+	* include/vaucanson/tools/dot_dump.hh: .
+	* include/vaucanson/tools/dot_format.hh: .
+	* include/vaucanson/tools/gen_book.hh: .
+	* include/vaucanson/tools/io.hh: .
+	* include/vaucanson/tools/simple_dump.hh: .
+	* include/vaucanson/tools/simple_format.hh: .
+	* include/vaucanson/tools/usual_io.hh: .
+
         This patch restores the VCSN_USE_INTERFACE_ONLY condition in the
         .hxx files (revert the patch #1561).
         A new define, VCSN_USE_LIB, has been created to explicitly not
