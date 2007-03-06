@@ -1,3 +1,16 @@
+	While building the test suite, these two files could
+	lead to a compiling error.
+
+
+2007-03-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix includes issues
+	* include/vaucanson/algorithms/aut_to_exp.hxx: A header was missing.
+	* include/vaucanson/algorithms/product.hxx: Few structures were
+		only declared and implemented in this file. The structure's
+		declarations have been moved to the .hh and now we keep the
+		implementations only.
+
 	Many functions like make_automaton were declared in
 	contexts/*_functions.thh.
 	They are now declared in new files: *_maker.t{hh,hxx}.

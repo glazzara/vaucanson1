@@ -36,96 +36,76 @@
 
 namespace vcsn {
 
-  /*---------------.
-  | DefaultChooser |
-  `---------------*/
+    /*---------------.
+    | DefaultChooser |
+    `---------------*/
 
-  /**
-     * Default chooser for aut_to_exp().
-     *
-     * @pre There must be at least one state in the automaton.
-     * @see aut_to_exp()
-     */
-  struct DefaultChooser
+  template <class Auto_>
+  hstate_t
+  DefaultChooser::operator()(const Auto_& a) const
   {
-      template <class Auto_>
-      hstate_t
-      operator()(const Auto_& a) const
+    assertion(a.states().size() > 0);
+    typename Auto_::state_iterator s = a.states().begin();
+    typename Auto_::state_iterator k = s;
+    while ((k != a.states().end()) &&
+	   ((a.is_initial(*k)) || (a.is_final(*k))))
+      ++k;
+    s = k;
+    return *s;
+  }
+
+
+  /*--------------.
+  | RandomChooser |
+  `--------------*/
+
+  template <class Auto_>
+  hstate_t
+  RandomChooser::operator()(const Auto_& a) const
+  {
+    assertion(a.states().size() > 0);
+
+    int n_init = 0;
+    int n_final = 0;
+    for (typename Auto_::state_iterator i = a.states().begin();
+	 i != a.states().end();
+	 ++i)
+    {
+      if (a.is_initial(*i))
+	++n_init;
+      if (a.is_final(*i))
+	++n_final;
+    }
+
+    unsigned n = misc::random::generate((unsigned) 0,
+					a.states().size() -
+					(n_init + n_final));
+
+    typename Auto_::state_iterator k = a.states().begin();
+    unsigned kk = 0;
+    while (kk <= n || k == a.states().end() ||
+	   ((a.is_initial(*k)) || (a.is_final(*k))))
+    {
+      if (k == a.states().end())
       {
-	assertion(a.states().size() > 0);
-	typename Auto_::state_iterator s = a.states().begin();
-	typename Auto_::state_iterator k = s;
-	while ((k != a.states().end()) &&
-	       ((a.is_initial(*k)) || (a.is_final(*k))))
-	  ++k;
-	s = k;
-	return *s;
+	k = a.states().begin();
+	continue;
       }
-  };
+      ++k;
+      ++kk;
+    }
+    return *k;
+  }
 
 
-/*--------------.
-| RandomChooser |
-`--------------*/
+    /*----------------------------.
+    |    Heuristic chooser:	  |
+    | Transition Number Heuristic |
+    `----------------------------*/
 
-  /**
-     * Choose randomly a state between all currently choosable
-     * @pre There must be at least one state in the automaton.
-     * @see aut_to_exp()
-     */
-
-  struct RandomChooser
-  {
       template <class Auto_>
       hstate_t
-      operator()(const Auto_& a) const
-      {
-	assertion(a.states().size() > 0);
-
-	int n_init = 0;
-	int n_final = 0;
-	for (typename Auto_::state_iterator i = a.states().begin();
-	     i != a.states().end();
-	     ++i)
-	{
-	  if (a.is_initial(*i))
-	    ++n_init;
-	  if (a.is_final(*i))
-	    ++n_final;
-	}
-
-	unsigned n = misc::random::generate((unsigned) 0,
-					       a.states().size() -
-					       (n_init + n_final));
-
-	typename Auto_::state_iterator k = a.states().begin();
-	unsigned kk = 0;
-	while (kk <= n || k == a.states().end() ||
-	       ((a.is_initial(*k)) || (a.is_final(*k))))
-	{
-	  if (k == a.states().end())
-	  {
-	    k = a.states().begin();
-	    continue;
-	  }
-	  ++k;
-	  ++kk;
-	}
-	return *k;
-      }
-  };
-
-
-  /*----------------------------.
-  |    Heuristic chooser:	|
-  | Transition Number Heuristic |
-  `----------------------------*/
-
-  struct HChooser
-  {
-      template <class Auto_>
-      hstate_t
-      operator()(const Auto_& a) const
+      HChooser::operator()(const Auto_& a) const
       {
 	assertion(a.states().size() > 0);
 
@@ -176,19 +156,18 @@ namespace vcsn {
 	}
 	return *s;
       }
-  };
+
 
 
   /*-------------------------.
-  | Heuristic chooser:	     |
-  | from Delgado & Morais    |
-  | (Proposed in CIAA 2004)  |
-  `-------------------------*/
-  struct DMChooser
-  {
+    | Heuristic chooser:	     |
+    | from Delgado & Morais    |
+    | (Proposed in CIAA 2004)  |
+    `-------------------------*/
+
       template <class Auto_>
       hstate_t
-      operator()(const Auto_& a) const
+      DMChooser::operator()(const Auto_& a) const
       {
 	assertion(a.states().size() > 0);
 
@@ -258,46 +237,33 @@ namespace vcsn {
 	}
 	return *s;
       }
-  };
 
 
 
 
   /*------------.
-  | ListChooser |
-  `------------*/
+    | ListChooser |
+    `------------*/
 
-  /**
-     * Chooser for aut_to_exp().
-     *
-     * This chooser  is built  using a std::list<hstate_t>.   It returns
-     * the states of the automaton with the same order as in the list.
-     *
-     * @see aut_to_exp().
-     */
-  class ListChooser
+  ListChooser::ListChooser(const std::list<hstate_t>& l) :
+    list_(l),
+    pos_(l.begin())
   {
-    public :
-      ListChooser(const std::list<hstate_t>& l) :
-	list_(l),
-	pos_(l.begin())
-      {}
+  }
 
-      template <class Auto_>
-      hstate_t operator() (const Auto_&)
-      {
-	assertion(pos_ != list_.end());
-	return *pos_++;
-      }
+  template <class Auto_>
+  hstate_t
+  ListChooser::operator() (const Auto_&)
+  {
+    assertion(pos_ != list_.end());
+    return *pos_++;
+  }
 
-    private :
-      std::list<hstate_t>	list_;
-      std::list<hstate_t>::const_iterator pos_;
-  };
+
 
   /*-----------.
-  | aut_to_exp |
-  `-----------*/
+    | aut_to_exp |
+    `-----------*/
 
   template <class A_, typename Auto_, typename Chooser_>
   typename Auto_::series_set_elt_t
@@ -369,10 +335,10 @@ namespace vcsn {
       //Slow
       for_all_const_(sums_t, in, in_sums)
 	for_all_const_(sums_t, out, out_sums)
-      {
-	series_set_elt_t res = in->second * loop_sum * out->second;
-	a.add_series_transition(in->first, out->first, res);
-      }
+	{
+	  series_set_elt_t res = in->second * loop_sum * out->second;
+	  a.add_series_transition(in->first, out->first, res);
+	}
       a.del_state(q);
     }
     series_set_elt_t final(a_set.series());
@@ -382,8 +348,8 @@ namespace vcsn {
   }
 
   /*-----------.
-  | aut_to_exp |
-  `-----------*/
+    | aut_to_exp |
+    `-----------*/
 
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_set_elt_t
