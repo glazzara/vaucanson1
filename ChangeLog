@@ -1,3 +1,14 @@
+	Fix a wrong ifndef condition.
+
+2007-03-07  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix a wrong ifndef condition
+	* composition_cover.hh: .
+	* internal/build_pattern.hh: .
+	* internal/partial_rat_exp.hh: .
+	* internal/partial_rat_exp_constant_term.hh: .
+	* internal/partial_rat_exp_derivation.hh: .
+
 	While building the test suite, these two files could
 	lead to a compiling error.
 
