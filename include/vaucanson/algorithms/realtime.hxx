@@ -31,9 +31,9 @@
 namespace vcsn {
 
 
-  /*-----------------.
-  | realtime_words.  |
-  `-----------------*/
+  /*--------------------.
+  | do_realtime_words.  |
+  `--------------------*/
 
   template <class Auto, class Label>
   int do_realtime_words(Auto& a,
@@ -42,17 +42,14 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto);
     hstate_t			s1;
-
-    semiring_elt_t s_ident =
-      algebra::identity_as<semiring_elt_value_t>
+    semiring_elt_t		s_ident = algebra::identity_as<semiring_elt_value_t>
       ::of(a.structure().series().semiring());
+
 
     monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
     monoid_elt_value_t w1 = m1.value();
 
-    int cpt = 0;
-
-    unsigned int size = w1.size();
+    unsigned int size = m1.length();
 
     if (size > 1)
     {
@@ -60,8 +57,9 @@ namespace vcsn {
 
       semiring_elt_t s = label.get(m1);
       series_set_elt_t in_series(a.structure().series());
+      typename monoid_elt_t::iterator l = m1.begin();
 
-      m = w1.substr(cpt++, 1);
+      m = *l;
 
       in_series.assoc(m, s);
 
@@ -79,9 +77,11 @@ namespace vcsn {
 	a.add_series_transition(s0, s1, in_series);
       }
 
-      for (unsigned int i = 1; i < size - 1; ++i)
+      l++;
+      for (typename monoid_elt_t::iterator end = m1.begin() + (size - 1);
+	   l != end; ++l)
       {
-	m = w1.substr(cpt++, 1);
+	m = *l;
 	hstate_t s0 = s1;
 	s1 = a.add_state();
 	series_set_elt_t series(a.structure().series());
@@ -89,7 +89,7 @@ namespace vcsn {
 	a.add_series_transition(s0, s1, series);
       }
 
-      m = w1.substr(cpt++, 1);
+      m = *l;
 
       series_set_elt_t out_series(a.structure().series());
       out_series.assoc(m, s_ident);
@@ -119,26 +119,21 @@ namespace vcsn {
     // perform cut-up.
     cut_up_here(res);
 
+    vector_t tmp(res.initial().size());
+    for_all_initial_states(i, res)
+      tmp.push_back(*i);
+    for_all(vector_t, i, tmp)
+      do_realtime_words(res, hstate_t(), *i, res.get_initial(*i), true, false);
+
+    tmp.clear();
+    for_all_final_states(f, res)
+      tmp.push_back(*f);
+    for_all(vector_t, f, tmp)
+      do_realtime_words(res, *f, hstate_t(), res.get_final(*f), false, true);
+
     transitions_t transitions = res.transitions();
-    vector_t i_states; i_states.reserve(res.initial().size());
-    vector_t f_states; f_states.reserve(res.final().size());
-
-    for_all_initial_states(f, res)
-      i_states.push_back(*f);
-    for_all_final_states(i, res)
-      f_states.push_back(*i);
-
-    for_all_(vector_t, i, i_states)
-      do_realtime_words(res, hstate_t(), *i,
-			res.get_initial(*i), true, false);
-
-    for_all_(vector_t, f, f_states)
-      do_realtime_words(res, *f, hstate_t(),
-			res.get_final(*f), false, true);
-
     for_all_(transitions_t, e, transitions)
-      if (do_realtime_words(res, res.src_of(*e), res.dst_of(*e),
-			    res.series_of(*e), false, false))
+      if (do_realtime_words(res, res.src_of(*e), res.dst_of(*e), res.series_of(*e), false, false))
 	res.del_transition(*e);
   }
 

@@ -1,5 +1,11 @@
 2007-03-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Make do_realtime_words more generic.
+	* include/vaucanson/algorithms/realtime.hxx: Use monoid_elt_t::iterator
+	for iterating through letter instead of string::substr.
+
+2007-03-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Correct dispatch in image.hxx.
 	* algorithms/image.hxx: Change void return type of image_dispatch2 to
 	output_projection_helper. Use overloading to dispatch method calls with
