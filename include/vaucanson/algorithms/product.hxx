@@ -82,9 +82,9 @@ namespace vcsn
 	  const hstate_t current_state = visited_[current_pair];
 
 	  output.set_initial(current_state,
-	      lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
+			     lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
 	  output.set_final(current_state,
-	      lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
+			   lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
 
 	  transition_lhs.clear();
 	  transition_rhs.clear();
@@ -145,7 +145,7 @@ namespace vcsn
 	    a.geometry().states()[state] = std::make_pair(x, y);
 	  }
 	private:
-	// Diagonal alignement with a depth-first traversal
+	  // Diagonal alignement with a depth-first traversal
 	  template<typename I>
 	  void
 	  align (const I& a)
@@ -155,11 +155,11 @@ namespace vcsn
 	    std::stack<hstate_t> stack;
 
 	    for_all_states(i, a)
-	    {
-	      visited[*i] = false;
-	      // ensure inaccessible states will be visited
-	      stack.push(*i);
-	    }
+	      {
+		visited[*i] = false;
+		// ensure inaccessible states will be visited
+		stack.push(*i);
+	      }
 
 	    for_all_initial_states(i, a)
 	      stack.push(*i);
@@ -239,8 +239,8 @@ namespace vcsn
       // initialize queue with all pairs of intials states from @c lhs and @c rhs
       inline void
       initialize_queue (output_t& output,
-		        const lhs_t& lhs,
-		        const rhs_t& rhs,
+			const lhs_t& lhs,
+			const rhs_t& rhs,
 			pair_map_t& m)
       {
 	for_all_initial_states(lhs_s, lhs)
@@ -265,17 +265,17 @@ namespace vcsn
 
 	bool			prod_is_not_null = false;
 	for_all_(support_t, supp, left_series.supp())
-	{
-	  const monoid_elt_t   supp_elt (monoid_, *supp);
-	  const semiring_elt_t l = left_series.get(supp_elt);
-	  const semiring_elt_t r = right_series.get(supp_elt);
-	  const semiring_elt_t p = l * r;
-	  if (p != semiring_zero_)
 	  {
-	    prod_series.assoc(*supp, p.value());
-	    prod_is_not_null = true;
+	    const monoid_elt_t	 supp_elt (monoid_, *supp);
+	    const semiring_elt_t l = left_series.get(supp_elt);
+	    const semiring_elt_t r = right_series.get(supp_elt);
+	    const semiring_elt_t p = l * r;
+	    if (p != semiring_zero_)
+	    {
+	      prod_series.assoc(*supp, p.value());
+	      prod_is_not_null = true;
+	    }
 	  }
-	}
 	return (prod_is_not_null);
       }
 
@@ -290,7 +290,8 @@ namespace vcsn
       // frequently used objects in computation
       const series_set_t&	series_;
       const monoid_t&		monoid_;
-      const semiring_elt_t&	semiring_zero_;
+      // This variable's type must not be set to a reference.
+      const semiring_elt_t	semiring_zero_;
   };
 
   /*-----------.

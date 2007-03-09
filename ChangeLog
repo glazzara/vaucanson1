@@ -1,3 +1,9 @@
+2007-03-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Eliminate reference to the zero of a semiring in product.
+	* include/vaucanson/algorithms/product.hxx: Change reference type to
+	type for attribute semiring_zero_.
+
 	Fix a wrong ifndef condition.
 
 2007-03-07  Guillaume Lazzara  <z@lrde.epita.fr>
