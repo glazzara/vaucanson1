@@ -1,3 +1,14 @@
+	Split the fsm_dump.{hh,hxx} files in two other files according to the documentation.
+
+2007-03-14  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Split fsm_dump.{hh,hxx} according to the documentation.
+	* ../../../doc/manual/developer.tex: .
+	* fsm_dump.hh: .
+	* fsm_dump.hxx: .
+	* fsm_load.hh: New.
+	* fsm_load.hxx: New.
+
 2007-03-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Make do_realtime_words more generic.

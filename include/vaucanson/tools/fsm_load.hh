@@ -1,4 +1,4 @@
-// fsm_dump.hh: this file is part of the Vaucanson project.
+// fsm_load.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TOOLS_FSM_DUMP_HH
-# define VCSN_TOOLS_FSM_DUMP_HH
+#ifndef VCSN_TOOLS_FSM_LOAD_HH
+# define VCSN_TOOLS_FSM_LOAD_HH
 
 /**
  * @file fsm_dump.hh
@@ -32,21 +32,19 @@ namespace vcsn {
   namespace tools {
 
     /*---------.
-    | fsm_dump |
+    | fsm_load |
     `---------*/
-    /** Basic and non configurable saver in the 'fsm' format.
-     *
-     * Every elements (series, state_content ...) must be printable.
+    /** Basic and non configurable loader in the 'fsm' format.
      */
-    template <typename St, typename auto_t>
-    void fsm_dump(St& out, const auto_t& a);
+    template <typename St, typename AutoType_>
+    void fsm_load(St& in, AutoType_& a);
 
   } // tools
 
 } // vcsn
 
-# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/tools/fsm_dump.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/tools/fsm_load.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_TOOLS_FSM_DUMP_HH
+#endif // ! VCSN_TOOLS_FSM_LOAD_HH
