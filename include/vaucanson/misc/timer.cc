@@ -51,12 +51,21 @@ namespace misc
 
   INLINE_TIMER_CC
   void
-  Timer::Time::now ()
+  Timer::Time::set_to_now ()
   {
-    struct tms tms;
+    tms tms;
     wall = times (&tms);
     user = tms.tms_utime;
     sys	 = tms.tms_stime;
+  }
+
+  INLINE_TIMER_CC
+  Timer::Time
+  Timer::Time::now ()
+  {
+    Timer::Time res;
+    res.set_to_now();
+    return res;
   }
 
   INLINE_TIMER_CC
@@ -74,33 +83,51 @@ namespace misc
 
   INLINE_TIMER_CC
   Timer::TimeVar::TimeVar ()
-    : initial (true)
   { }
+
+
+  INLINE_TIMER_CC
+  Timer::Time
+  Timer::TimeVar::lap ()
+  {
+    // The lap time is credited to self and cumulated times.
+    Time now = Timer::Time::now();
+    Time res = now - begin;
+    begin = now;
+    return res;
+  }
 
   INLINE_TIMER_CC
   void
   Timer::TimeVar::start ()
   {
-    begin.now ();
-    if (initial)
-    {
-      initial = false;
+    begin = Timer::Time::now();
+  }
 
-      // First time task is seen
-      // cumulated is set to 0.
-      saved_accumulated_times = cumulated;
-      first = begin;
-    }
+  INLINE_TIMER_CC
+  void
+  Timer::TimeVar::start_child ()
+  {
+    // The lap time is credited to self and cumulated times.
+    Time lap_time = lap();
+    elapsed += lap_time;
+    cumulated += lap_time;
+  }
+
+  INLINE_TIMER_CC
+  void
+  Timer::TimeVar::stop_child ()
+  {
+    // The time run by the child contributes to the cumulated time.
+    cumulated += lap();
   }
 
   INLINE_TIMER_CC
   void
   Timer::TimeVar::stop ()
   {
-    Time now;
-    now.now ();
-    elapsed += now - begin;
-    cumulated = saved_accumulated_times + elapsed;
+    // Same as starting a child.  We only update begin for nothing.
+    start_child();
   }
 
   INLINE_TIMER_CC
@@ -110,7 +137,6 @@ namespace misc
     begin.clear ();
     elapsed.clear ();
     cumulated.clear ();
-    first.clear ();
   }
 
   INLINE_TIMER_CC
@@ -123,13 +149,8 @@ namespace misc
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::operator+= (const TimeVar& rhs)
   {
-    // FIXME: A lot of this does not make sense.
-    begin += rhs.begin;
     elapsed += rhs.elapsed;
     cumulated += rhs.cumulated;
-    first += rhs.first;
-    initial = false;
-
     return *this;
   }
 
@@ -143,43 +164,16 @@ namespace misc
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::operator/= (unsigned n)
   {
-    begin /= n;
     elapsed /= n;
     cumulated /= n;
-    first /= n;
-    initial = false;
-
     return *this;
   }
 
   INLINE_TIMER_CC
-  Timer::TimeVar Timer::TimeVar::min (const Timer::TimeVar& rhs) const
+  bool
+  Timer::TimeVar::operator< (const Timer::TimeVar& rhs) const
   {
-    Timer::TimeVar res;
-
-    res.begin = begin.min (rhs.begin);
-    res.first = first.min (rhs.first);
-
-    res.elapsed = elapsed.min (rhs.elapsed);
-    res.cumulated = cumulated.min (rhs.cumulated);
-    res.initial = false;
-
-    return res;
-  }
-
-  INLINE_TIMER_CC
-  Timer::TimeVar Timer::TimeVar::max (const Timer::TimeVar& rhs) const
-  {
-    Timer::TimeVar res;
-
-    res.begin = begin.max (rhs.begin);
-    res.first = first.max (rhs.first);
-
-    res.elapsed = elapsed.max (rhs.elapsed);
-    res.cumulated = cumulated.max (rhs.cumulated);
-    res.initial = false;
-
-    return res;
+    return cumulated < rhs.cumulated;
   }
 
   INLINE_TIMER_CC
@@ -281,18 +275,14 @@ namespace misc
 
   INLINE_TIMER_CC
   std::ostream&
-  Timer::print_time (const std::string& s,
+  Timer::print_time (std::string s,
 		     const Time& t, const Time& total, std::ostream& o,
 		     const bool tree_mode = false) const
   {
-    std::string s2 = s;
     if (tree_mode && tab_to_disp.find(s) != tab_to_disp.end())
-      s2 = tab_to_disp.find(s)->second + s;
-
-    if (tree_mode)
-      o << " " << s2 << std::setw (50 - s2.length ()) << ": ";
-    else
-      o << " " << s2 << std::setw (26 - s2.length ()) << ": ";
+      s = tab_to_disp.find(s)->second + s;
+    int w = tree_mode ? 50 : 26;
+    o << " " << s << std::setw (w - s.length ()) << ": ";
     print_time (t.user, total.user, o);
     o << "  ";
     print_time (t.sys, total.sys, o);
@@ -311,9 +301,9 @@ namespace misc
     for (std::list<std::string>::const_iterator i = task_ordered.begin ();
 	 i != task_ordered.end (); ++i)
     {
-      task_map_type::const_iterator ii = tasksmap.find(*i);
-      if (ii->second)
-	print_time (ii->first, ii->second.elapsed,
+      task_map_type::const_iterator j = tasksmap.find(*i);
+      if (j->second)
+	print_time (j->first, j->second.elapsed,
 		    total.elapsed, o, tree_mode);
     }
     o << std::endl;
@@ -322,33 +312,30 @@ namespace misc
     for (std::list<std::string>::const_iterator i = task_ordered.begin ();
 	 i != task_ordered.end (); ++i)
     {
-      task_map_type::const_iterator ii = tasksmap.find(*i);
-      if (ii->second)
-	print_time (ii->first, ii->second.cumulated,
+      task_map_type::const_iterator j = tasksmap.find(*i);
+      if (j->second)
+	print_time (j->first, j->second.cumulated,
 		    total.elapsed, o, tree_mode);
     }
     o << std::endl;
 
-    if (tree_mode)
-      o << " TOTAL (seconds)"	 << std::setw (35) << ": ";
-    else
-      o << " TOTAL (seconds)"	 << std::setw (5) << ": ";
-    o  << std::setiosflags (std::ios::left) << std::setw (7)
-       << (float) total.elapsed.user / clocks_per_sec
-       << std::setw (11)
-       << "user,"
+    o << " TOTAL (seconds)"	 << std::setw (tree_mode ? 35 : 5) << ": "
+      << std::setiosflags (std::ios::left) << std::setw (7)
+      << (float) total.elapsed.user / clocks_per_sec
+      << std::setw (11)
+      << "user,"
 
-       << std::setw (7)
-       << (float) total.elapsed.sys / clocks_per_sec
-       << std::setw (11)
-       << "system,"
+      << std::setw (7)
+      << (float) total.elapsed.sys / clocks_per_sec
+      << std::setw (11)
+      << "system,"
 
-       << std::setw (7)
-       << (float) total.elapsed.wall / clocks_per_sec
-       << "wall"
+      << std::setw (7)
+      << (float) total.elapsed.wall / clocks_per_sec
+      << "wall"
 
-       << std::resetiosflags (std::ios::left)
-       << std::endl;
+      << std::resetiosflags (std::ios::left)
+      << std::endl;
 
     return o;
   }
@@ -361,7 +348,7 @@ namespace misc
 
     // If stack isn't empty, we set elapsed time for the current task.
     if (!tasks.empty ())
-      tasks.top ()->stop ();
+      tasks.top ()->start_child ();
 
     if (tasksmap.find (task_name) == tasksmap.end ())
     {
@@ -376,12 +363,9 @@ namespace misc
 
     if (tab_to_disp.find (task_name) == tab_to_disp.end ())
       tab_to_disp[task_name] = tabs;
-    TimeVar& current = tasksmap[task_name]; // FIXME : Bug is task is
-    // already in taskmap
-    // (first is not
-    // reinitialized)
-    // Reset current to initial
-    current.initial = true;
+    // FIXME : Bug is task is already in taskmap (first is not
+    // reinitialized) Reset current to initial.
+    TimeVar& current = tasksmap[task_name];
 
     // FIXME: Do we know for a fact that maps don't move their
     // content?  We might need an iterator here.
@@ -395,7 +379,7 @@ namespace misc
   {
     precondition (!tasks.empty ());
 
-    // Set the Elapsed time for the task we are closing
+    // Set the elapsed time for the task we are closing.
     tasks.top ()->stop ();
 
     // Current task is removed of the stack
@@ -403,7 +387,7 @@ namespace misc
 
     // We set the start time of the previous task at current time
     if (!tasks.empty ())
-      tasks.top ()->start ();
+      tasks.top ()->stop_child ();
   }
 
   INLINE_TIMER_CC
@@ -432,6 +416,7 @@ namespace misc
 	 i != rhs.tasksmap.end (); ++i)
       tasksmap[i->first] += i->second;
     intmap.insert (rhs.intmap.begin (), rhs.intmap.end ());
+    total += rhs.total;
     return *this;
   }
 
@@ -443,6 +428,7 @@ namespace misc
     for (task_map_type::iterator i = tasksmap.begin ();
 	 i != tasksmap.end (); ++i)
       i->second /= rhs;
+    total /= rhs;
     return *this;
   }
 
@@ -454,43 +440,6 @@ namespace misc
     Timer res = *this;
     return res /= rhs;
   }
-
-
-  INLINE_TIMER_CC
-  Timer
-  Timer::min (const Timer& rhs) const
-  {
-    Timer res = *this;
-    for (task_map_type::const_iterator i = tasksmap.begin ();
-	 i != tasksmap.end (); ++i)
-    {
-      task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
-      if (j != rhs.tasksmap.end())
-	res[i->first] = i->second.min(j->second);
-      else
-	res[i->first] = i->second;
-    }
-    return res;
-  }
-
-
-  INLINE_TIMER_CC
-  Timer
-  Timer::max (const Timer& rhs) const
-  {
-    Timer res = *this;
-    for (task_map_type::const_iterator i = tasksmap.begin ();
-	 i != tasksmap.end (); ++i)
-    {
-      task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
-      if (j != rhs.tasksmap.end())
-	res[i->first] = i->second.max(j->second);
-      else
-	res[i->first] = i->second;
-    }
-    return res;
-  }
-
 
 
 

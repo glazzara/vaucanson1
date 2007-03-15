@@ -1,3 +1,18 @@
+2007-03-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix various issues in the timers
+	* include/vaucanson/misc/timer.hh,
+	* include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/timer.cc (min, max): Remove them all.
+        (operator<): New, for Timer, TimeVar, and Time.
+        (TimeVar::lap, TimeVar::start_child, TimeVar::stop_child): New.
+        (Time::initial, Time::first, Time::saved_cumulated): Remove.
+        (Timer::operator+=, Timer::operator/=): Don't forget the member "total".
+
+	* include/vaucanson/misc/bencher.cc: Adjust.
+        Make it compilable as a standalone test again.
+        Use ?: where it makes more sense that if.
+
 2007-03-15  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Clean up eps-removal.

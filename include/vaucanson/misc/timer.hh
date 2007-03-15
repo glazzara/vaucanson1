@@ -117,11 +117,10 @@ namespace misc
     /// \brief Divide.
     Timer operator/ (unsigned rhs) const;
 
-    /// \brief Min.
-    Timer min (const Timer& rhs) const;
-
-    /// \brief Max.
-    Timer max (const Timer& rhs) const;
+    /// \brief Comparison between two Timers.
+    /// This operators enables the use of std::min and std::max.
+    /// It check only the \a total time, so it's a strict weak ordering.
+    bool operator< (const Timer& rhs) const;
 
     /// Reset all timers to zero.
     void clear();
@@ -139,7 +138,10 @@ namespace misc
       /// Initially set to 0.
       Time ();
       /// Set to the current time.
-      void now ();
+      void set_to_now ();
+      /// Return the time now.
+      static Time now ();
+
       /// Reset to 0.
       void clear ();
 
@@ -169,11 +171,10 @@ namespace misc
       Time operator/ (unsigned n) const;
       /// \}
 
-      /// Return a new Time with the min of all three fields.
-      /// It does not necessarily return the smallest of \a this and \a rhs.
-      Time min (const Time& rhs) const;
-      /// See min().
-      Time max (const Time& rhs) const;
+      /// \brief Comparison between two Times.
+      /// This operators enables the use of std::min and std::max.
+      /// It check only the \a total time, so it's a strict weak ordering.
+      bool operator< (const Time& rhs) const;
 
     private:
       /// User time.
@@ -192,9 +193,16 @@ namespace misc
       friend class Bencher;
 
       TimeVar ();
-      ///
+      /// The task is started.
       void start ();
+      /// We activate a child.
+      void start_child ();
+      /// We just left a child.
+      void stop_child ();
+      /// The task is left.
       void stop ();
+
+      /// Reset to 0.
       void clear ();
 
       /// \name Comparison to 0.
@@ -205,37 +213,29 @@ namespace misc
       bool operator ! () const;
       /// \}
 
-      TimeVar operator+ (const TimeVar& rhs) const;
       TimeVar operator+= (const TimeVar& rhs);
-      TimeVar operator/ (unsigned n) const;
+      TimeVar operator+ (const TimeVar& rhs) const;
       TimeVar operator/= (unsigned n);
+      TimeVar operator/ (unsigned n) const;
 
-      /// Fixme : Document
-      TimeVar min (const TimeVar& rhs) const;
-      TimeVar max (const TimeVar& rhs) const;
+      /// \brief Comparison between two TimeVars.
+      /// This operators enables the use of std::min and std::max.
+      /// It check only the \a total time, so it's a strict weak ordering.
+      bool operator< (const TimeVar& rhs) const;
+
 
     private:
-      /// The date of the latest start() invocation.
+      /// Return the elapsed time since begin, and reset begin.
+      Time lap ();
+
+      /// The date of the latest activation.
       Time begin;
 
-      /// The time spend in the latest start()-stop() interval.
+      /// The time spent in this TimeVar (all the start()-stop() intervals).
       Time elapsed;
 
-      /// The accumulated elapsed times.
+      /// The time spent in this TimeVar and its children.
       Time cumulated;
-
-      Time saved_accumulated_times;
-
-      /// The date of the first call to start().
-      Time first;
-
-      /// Whether this is the first time we use this time var.
-      ///
-      /// This is used to detect the first invocation of start()
-      /// that is expected to initialize first.
-      ///
-      /// \todo Maybe it would be smarter to rely on first being null.
-      bool initial;
     };
 
     /// Format timing results.
@@ -246,7 +246,7 @@ namespace misc
     /// \param tot		total Time \a t is a part of
     /// \param o		output stream
     /// \param tree_mode	Activate tree mode display
-    std::ostream& print_time (const std::string& s,
+    std::ostream& print_time (std::string s,
 			      const Time& t, const Time& tot,
 			      std::ostream& o,
 			      const bool tree_mode) const;

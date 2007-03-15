@@ -25,6 +25,8 @@
 #ifndef VCSN_MISC_BENCHER_CC
 # define VCSN_MISC_BENCHER_CC
 
+# include <vaucanson/misc/bencher.hh>
+
 /// This file is also used in Tiger Compiler, where it is compiled in
 /// a C library, so INLINE_TIMER_CC should be defined to empty in that
 /// case.
@@ -45,9 +47,8 @@ namespace misc
   Bencher::sum () const
   {
     Timer res;
-    // Summarize total times by classic mean.
-    for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
-	 i != this->timers_.end (); ++i)
+    for (std::vector< Timer >::const_iterator i = timers_.begin ();
+	 i != timers_.end (); ++i)
       res += *i;
     return res;
   }
@@ -65,11 +66,7 @@ namespace misc
   Bencher::min () const
   {
     precondition (!timers_.empty());
-    std::vector< Timer >::const_iterator i = timers_.begin ();
-    Timer res = *i;
-    for (/* nothing. */; i != this->timers_.end (); ++i)
-      res = res.min (*i);
-    return res;
+    return *std::min_element(timers_.begin (), timers_.end ());
   }
 
   INLINE_BENCHER_CC
@@ -77,11 +74,7 @@ namespace misc
   Bencher::max () const
   {
     precondition (!timers_.empty());
-    std::vector< Timer >::const_iterator i = timers_.begin ();
-    Timer res = *i;
-    for (/* nothing. */; i != this->timers_.end (); ++i)
-      res = res.max (*i);
-    return res;
+    return *std::max_element(timers_.begin (), timers_.end ());
   }
 
   INLINE_BENCHER_CC
@@ -102,24 +95,15 @@ namespace misc
     std::vector< Timer >::const_iterator i;
     for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
     {
-      o << "------------------------" << std::endl
+      o << line << std::endl
 	<< (*i);
     }
     o << std::endl
-      << line << std::endl
-      << "        SUMMARY" << std::endl
-      << line << std::endl
-      << "ARITHMETIC MEANS" << std::endl
-      << std::endl
-      << prepare(mean())
-      << line << std::endl
-      << "MIN" << std::endl
-      << std::endl
-      << prepare(min())
-      << line << std::endl
-      << "MAX" << std::endl
-      << std::endl
-      << prepare(max());
+      << line << " SUMMARY " << line << std::endl
+      << line << " Arithmetic means" << std::endl << prepare(mean())
+      // << line << " Sum"              << std::endl << prepare(sum())
+      << line << " Min"              << std::endl << prepare(min())
+      << line << " Max"              << std::endl << prepare(max());
     return o;
   }
 
@@ -165,6 +149,10 @@ NAMESPACE_VCSN_END
 int
 main ()
 {
+#  if defined VAUCANSON
+  using namespace vcsn;
+#  endif
+
   misc::Bencher b;
   misc::Timer timer;
   enum timevar

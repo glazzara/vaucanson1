@@ -83,13 +83,13 @@ namespace misc
   void
   Timer::clear ()
   {
-    precondition(this->tasks.empty ());
+    precondition(tasks.empty ());
 
-    this->tasksmap.clear ();
-    this->intmap.clear ();
-    this->total.clear ();
-    this->tab_to_disp.clear ();
-    this->task_ordered.clear ();
+    tasksmap.clear ();
+    intmap.clear ();
+    total.clear ();
+    tab_to_disp.clear ();
+    task_ordered.clear ();
   }
 
   inline
@@ -97,6 +97,13 @@ namespace misc
   Timer::operator[] (const std::string& s)
   {
     return tasksmap[s];
+  }
+
+  inline
+  bool
+  Timer::operator< (const Timer& rhs) const
+  {
+    return total < rhs.total;
   }
 
 
@@ -183,26 +190,14 @@ namespace misc
   }
 
   inline
-  Timer::Time
-  Timer::Time::min (const Timer::Time& rhs) const
+  bool
+  Timer::Time::operator< (const Timer::Time& rhs) const
   {
-    Timer::Time res;
-    res.wall = std::min (this->wall, rhs.wall);
-    res.user = std::min (this->user, rhs.user);
-    res.sys = std::min (this->sys, rhs.sys);
-    return res;
+    return (user + sys < rhs.user + rhs.sys
+	    || user < rhs.user
+	    || wall < rhs.wall);
   }
 
-  inline
-  Timer::Time
-  Timer::Time::max (const Timer::Time& rhs) const
-  {
-    Timer::Time res;
-    res.wall = std::max (this->wall, rhs.wall);
-    res.user = std::max (this->user, rhs.user);
-    res.sys = std::max (this->sys, rhs.sys);
-    return res;
-  }
 
   /*--------------.
   | ScopedTimer.  |
