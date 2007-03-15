@@ -1,3 +1,9 @@
+2007-03-15  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Clean up eps-removal.
+	* eps_removal.hxx: Use vector instead of list. Define operator() for
+	functor. Constifie attributes of Finder.
+
 	Split the fsm_dump.{hh,hxx} files in two other files according to the documentation.
 
 2007-03-14  Guillaume Lazzara  <z@lrde.epita.fr>

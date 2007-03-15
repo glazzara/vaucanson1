@@ -54,10 +54,10 @@ namespace vcsn {
       index_to_state.resize(size);
       int i = 0;
       for_all_states(s, a)
-	{
-	  index_to_state[i] = *s;
-	  state_to_index[*s] = i++;
-	}
+      {
+	index_to_state[i] = *s;
+	state_to_index[*s] = i++;
+      }
 
       // Initialize m_semiring_elt matrix with epsilon transitions,
       // and suppress them.
@@ -134,25 +134,25 @@ namespace vcsn {
       for_all_states(s, a)
       {
 	std::list<htransition_t> transition_list;
-	  a.rdeltac(transition_list, *s, delta_kind::transitions());
-	  int dst = state_to_index[*s];
-	  for_all_const_(std::list<htransition_t>, e, transition_list)
-	  {
-	    int src = state_to_index[a.src_of(*e)];
-	    series_set_elt_t t = a.series_of(*e);
-	    for (int k = 0; k < size; k++)
-	    {
-	      semiring_elt_t w = m_semiring_elt[k][src];
-	      if (w != semiring_elt_zero)
-		a.add_series_transition(index_to_state[k], *s, w * t);
-	    }
-	    a.del_transition(*e);
-	  }
-	  series_set_elt_t tw = null_series;
+	a.rdeltac(transition_list, *s, delta_kind::transitions());
+	int dst = state_to_index[*s];
+	for_all_const_(std::list<htransition_t>, e, transition_list)
+	{
+	  int src = state_to_index[a.src_of(*e)];
+	  series_set_elt_t t = a.series_of(*e);
 	  for (int k = 0; k < size; k++)
-	    tw += m_semiring_elt[dst][k] * m_wfinal[k];
-	  if (tw != null_series)
-	    a.set_final(*s, tw);
+	  {
+	    semiring_elt_t w = m_semiring_elt[k][src];
+	    if (w != semiring_elt_zero)
+	      a.add_series_transition(index_to_state[k], *s, w * t);
+	  }
+	  a.del_transition(*e);
+	}
+	series_set_elt_t tw = null_series;
+	for (int k = 0; k < size; k++)
+	  tw += m_semiring_elt[dst][k] * m_wfinal[k];
+	if (tw != null_series)
+	  a.set_final(*s, tw);
       }
     }
 
@@ -221,11 +221,11 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto);
 
   public:
-    Finder(const automaton_t& aut)
+    Finder (const automaton_t& aut)
       : a_(aut), find_(false)
     {}
 
-    bool find(const hstate_t src, const label_t l, const hstate_t dst)
+    bool operator() (const hstate_t src, const label_t l, const hstate_t dst)
     {
       find_ = false;
       dst_ = dst;
@@ -260,8 +260,8 @@ namespace vcsn {
     typedef std::vector<series_set_elt_t>		vector_series_t;
     typedef std::queue<htransition_t>			tr_queue_t;
     typedef std::queue<hstate_t>			state_queue_t;
-    typedef std::list<htransition_t>			list_t;
-    typedef std::list<hstate_t>				state_list_t;
+    typedef std::vector<htransition_t>			ctransitions_t;
+    typedef std::vector<hstate_t>			cstates_t;
 
   public:
     EpsilonRemover(const AutomataBase<A_>&,
@@ -289,8 +289,10 @@ namespace vcsn {
       for_all_transitions(t, a)
       {
 	series_set_elt_t s = a.series_of(*t);
-	if (s.get(monoid_identity) != semiring_elt_zero)
-	  s.assoc(monoid_identity.value(), semiring_elt_zero.value());
+	if (s.get(monoid_identity) == semiring_elt_zero)
+	  continue;
+
+	s.assoc(monoid_identity.value(), semiring_elt_zero.value());
 	if (s != null_series)
 	  a.add_series_transition(a.src_of(*t), a.dst_of(*t), s);
 	a.del_transition(*t);
@@ -300,8 +302,8 @@ namespace vcsn {
     void forward_closure ()
     {
       // Closure.
-      Finder<automaton_t> f(a);
-      state_list_t st_out;
+      Finder<automaton_t> find(a);
+      cstates_t st_out;
 
       while (!tr_q.empty())
       {
@@ -312,9 +314,9 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, mid, delta_kind::states());
-	for_all_const(state_list_t, dst, st_out)
+	for_all_const(cstates_t, dst, st_out)
 	{
-	  if (!f.find(src, l, *dst))
+	  if (!find(src, l, *dst))
 	  {
 	    htransition_t new_tr = a.add_transition(src, *dst, l);
 	    tr_q.push(new_tr);
@@ -333,7 +335,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, i, delta_kind::states());
-	for_all_const(state_list_t, s, st_out)
+	for_all_const(cstates_t, s, st_out)
 	{
 	  if (!a.is_initial(*s))
 	  {
@@ -345,12 +347,11 @@ namespace vcsn {
       }
     }
 
-
     void backward_closure ()
     {
       // Closure.
-      Finder<automaton_t> f(a);
-      state_list_t st_in;
+      Finder<automaton_t> find(a);
+      cstates_t st_in;
 
       while (!tr_q.empty())
       {
@@ -361,9 +362,9 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, mid, delta_kind::states());
-	for_all_const(state_list_t, src, st_in)
+	for_all_const(cstates_t, src, st_in)
 	{
-	  if (!f.find(*src, l, dst))
+	  if (!find(*src, l, dst))
 	  {
 	    htransition_t new_tr = a.add_transition(*src, dst, l);
 	    tr_q.push(new_tr);
@@ -382,7 +383,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, i, delta_kind::states());
-	for_all_const(state_list_t, s, st_in)
+	for_all_const(cstates_t, s, st_in)
 	{
 	  if (!a.is_final(*s))
 	  {
@@ -398,9 +399,9 @@ namespace vcsn {
     automaton_t&	a;
 
     // zero and identity of used algebraic structure.
-    series_set_elt_t	null_series;
-    semiring_elt_t	semiring_elt_zero;
-    monoid_elt_t	monoid_identity;
+    const series_set_elt_t	null_series;
+    const semiring_elt_t	semiring_elt_zero;
+    const monoid_elt_t		monoid_identity;
 
     // Queue of transitions.
     tr_queue_t		tr_q;
