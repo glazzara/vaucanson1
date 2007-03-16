@@ -1,3 +1,12 @@
+2007-03-16  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Correct do_realtime_here.
+	Epsilon removal must be done after cutting words in letter. By this way,
+	the algorithm may generate less transitions.
+	* include/vaucanson/algorithms/realtime.hxx: Move the call to
+	eps_removal after do_realtime_words_here. Remove useless code which was
+	doing a epsilon removal after eps_removal's call.
+
 2007-03-16  Akim Demaille  <akim@lrde.epita.fr>
 
 	White space changes.
