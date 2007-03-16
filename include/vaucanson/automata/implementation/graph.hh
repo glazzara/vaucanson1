@@ -72,11 +72,9 @@ namespace vcsn
   };
 
   /// Needed containers.
-  typedef misc::SparseInterval<hstate_t, std::set<hstate_t> >
-  StateContainer;
-
-  typedef misc::SparseInterval<hedge_t, std::set<hedge_t> >
-  EdgeContainer;
+  /// FIXME: How about using std::vector instead of std::set?
+  typedef misc::SparseInterval<hstate_t, std::set<hstate_t> > StateContainer;
+  typedef misc::SparseInterval<hedge_t, std::set<hedge_t> > EdgeContainer;
 
 
   /// Graph
@@ -125,8 +123,8 @@ namespace vcsn
       edges_t edges() const;
 
       /// Initial/final state supports.
-      initial_support_t		initial() const;
-      final_support_t		final() const;
+      initial_support_t initial() const;
+      final_support_t final() const;
 
       /** @name State's manipulation
        ** @{ */
@@ -139,60 +137,77 @@ namespace vcsn
       /// Remove state \a n.
       ///
       /// \pre \a n is a state of this graph.
-      void			del_state(hstate_t n);
+      void del_state(hstate_t n);
 
     public:
-      void			set_initial(hstate_t,
-					    const series_set_elt_value_t&,
-					    const series_set_elt_value_t&);
-      const series_set_elt_value_t& get_initial(hstate_t,
-						const
-						series_set_elt_value_t&) const;
-      void			clear_initial();
-      void			set_final(hstate_t,
-					  const series_set_elt_value_t&,
-					  const series_set_elt_value_t&);
-      const series_set_elt_value_t& get_final(hstate_t,
-					      const
-					      series_set_elt_value_t&) const;
-      void			clear_final();
+      /// Change whether a state is initial or not.
+      /// \param s  the state
+      /// \param v  its associated label
+      /// \param z  the zero for the labels
+      ///
+      /// \note If v == z then state is removed from the set of initial
+      /// states.  Because of this, one cannot simply write
+      /// \code
+      /// typename automaton_t::series_set_elt_t some_weight = ...;
+      /// for_all_final_states(f, aut)
+      ///   lhs.set_final(*f, aut.get_final(*f) * some_weight);
+      /// \endcode
+      /// because if \c some_weight is equal to \c z, then the state
+      /// is removed from the set of final states, and invalidates all
+      /// the iterators: the loop is broken.
+      void set_initial(hstate_t s,
+		       const series_set_elt_value_t& v,
+		       const series_set_elt_value_t& z);
+      const series_set_elt_value_t&
+      get_initial(hstate_t, const series_set_elt_value_t&) const;
+      void clear_initial();
+
+      /// Change whether a state is final or not.
+      /// \param s  the state
+      /// \param v  its associated label
+      /// \param z  the zero for the labels
+      ///
+      /// \sa set_initial().
+      void set_final(hstate_t,
+		     const series_set_elt_value_t&,
+		     const series_set_elt_value_t&);
+      const series_set_elt_value_t&
+      get_final(hstate_t, const series_set_elt_value_t&) const;
+      void clear_final();
       /** @}*/
 
 
       /** @name Edge's manipulation
        ** @{ */
     public:
-      bool			has_edge(hedge_t n) const;
+      bool has_edge(hedge_t n) const;
 
     public:
-      hedge_t			add_edge(hstate_t h1, hstate_t h2,
-					 const label_t& v);
-      void			del_edge(hedge_t e);
+      hedge_t add_edge(hstate_t h1, hstate_t h2, const label_t& v);
+      void del_edge(hedge_t e);
 
     public:
-      hstate_t			src_of(hedge_t e1) const;
-      hstate_t			dst_of(hedge_t e2) const;
+      hstate_t src_of(hedge_t e1) const;
+      hstate_t dst_of(hedge_t e2) const;
 
     public:
-      const label_t&		label_of(hedge_t n) const;
-      void			update(hedge_t, label_t);
+      const label_t& label_of(hedge_t n) const;
+      void update(hedge_t, label_t);
       /** @} */
 
       /** @name Only automaton related methods
        ** @{ */
     public:
       template <class S>
-      bool			exists(const AutomataBase<S>& s) const;
+      bool exists(const AutomataBase<S>& s) const;
 
     public:
 
       /// Delta, Reverse deltas, for functor and iterator.
 # define DECLARE_DELTA_FUNCTION(DeltaName, DKind)			\
-      template <class OutputIterator, class Query>			\
-      void			DeltaName(OutputIterator res,		\
-					  hstate_t from,		\
-					  const Query& q,		\
-					  delta_kind::DKind) const
+    template <class OutputIterator, typename Query>			\
+    void DeltaName(OutputIterator res, hstate_t from,			\
+		   const Query& q, delta_kind::DKind) const
       DECLARE_DELTA_FUNCTION (delta, states);
       DECLARE_DELTA_FUNCTION (delta, edges);
       DECLARE_DELTA_FUNCTION (rdelta, states);
@@ -200,12 +215,10 @@ namespace vcsn
 # undef DECLARE_DELTA_FUNCTION
 
 # define DECLARE_DELTAF_BOOL_FUNCTION(DeltaName, DKind, IsBool)		\
-      template <class Functor, class Query>				\
-      void			DeltaName(Functor& fun,			\
-					  hstate_t from,		\
-					  const Query& q,		\
-					  delta_kind::DKind,		\
-					  misc::IsBool ## _t) const
+    template <class Functor, typename Query>				\
+    void DeltaName(Functor& fun, hstate_t from,				\
+		   const Query& q, delta_kind::DKind,			\
+		   misc::IsBool ## _t) const
       DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
       DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
       DECLARE_DELTAF_BOOL_FUNCTION (deltaf, edges, true);
@@ -217,11 +230,9 @@ namespace vcsn
 # undef DECLARE_DELTAF_BOOL_FUNCTION
 
 # define DECLARE_DELTAF_FUNCTION(DeltaName)				\
-      template <class Functor, class Query, typename DKind>		\
-      void			DeltaName(Functor& fun,			\
-					  hstate_t from,		\
-					  const Query& q,		\
-					  delta_kind::kind<DKind>) const
+    template <class Functor, typename Query, typename DKind>		\
+    void DeltaName(Functor& fun, hstate_t from,				\
+		   const Query& q, delta_kind::kind<DKind>) const
       DECLARE_DELTAF_FUNCTION (deltaf);
       DECLARE_DELTAF_FUNCTION (rdeltaf);
 
@@ -229,9 +240,9 @@ namespace vcsn
 
       /** @}*/
 
-      // FIXME: Not implemented.
     public:
-      self_t&			clone() const;
+      /// FIXME: Not implemented.
+      self_t& clone() const;
 
       /** @name Tag access
        ** @{ */

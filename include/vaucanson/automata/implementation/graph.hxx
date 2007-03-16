@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,12 +35,11 @@ namespace vcsn
   `---------------------------*/
 
   template<typename EdgeLabel>
-  edge_value<EdgeLabel>::edge_value(hstate_t h1,
-				    hstate_t h2,
-				    const EdgeLabel& l) :
-    label(l),
-    from(h1),
-    to(h2)
+  edge_value<EdgeLabel>::edge_value(hstate_t h1, hstate_t h2,
+				    const EdgeLabel& l)
+    : label(l),
+      from(h1),
+      to(h2)
   {}
 
   inline
@@ -48,9 +47,9 @@ namespace vcsn
   {}
 
 
-  /*------------------.
-  | Convenient macros |
-  `------------------*/
+  /*--------------------.
+  | Convenient macros.  |
+  `--------------------*/
 
 # define TParam								\
   template <class Kind, class WordValue, class WeightValue,		\
@@ -60,31 +59,30 @@ namespace vcsn
   Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
 
 
-  /*-----------------------.
-  | Graph's implementation |
-  `-----------------------*/
+  /*-------------------------.
+  | Graph's implementation.  |
+  `-------------------------*/
 
-  /*-------------.
-  | Constructors |
-  `-------------*/
+  /*---------------.
+  | Constructors.  |
+  `---------------*/
 
   TParam
   GClass::Graph()
   { }
 
   TParam
-  GClass::Graph
-  (unsigned initial_number_of_state,
-   unsigned reserve_number_of_edge)
+  GClass::Graph (unsigned initial_number_of_state,
+		 unsigned reserve_number_of_edge)
   {
     states_.resize(initial_number_of_state);
     edges_.reserve(reserve_number_of_edge);
   }
 
 
-  /*----------------.
-  | Basic accessors |
-  `----------------*/
+  /*------------------.
+  | Basic accessors.  |
+  `------------------*/
 
   TParam
   typename GClass::states_t
@@ -118,9 +116,10 @@ namespace vcsn
     return final_support_t(final_);
   }
 
-  /*---------------------.
-  | State's manipulation |
-  `---------------------*/
+
+  /*----------------------.
+  | States manipulation.  |
+  `----------------------*/
 
   TParam
   bool
@@ -248,9 +247,9 @@ namespace vcsn
   }
 
 
-  /*--------------------.
-  | Edge's manipulation |
-  `--------------------*/
+  /*---------------------.
+  | Edges manipulation.  |
+  `---------------------*/
 
   TParam
   bool
@@ -380,9 +379,9 @@ namespace vcsn
     return true;
   }
 
-  /*----------------.
-  | Delta functions |
-  `----------------*/
+  /*------------------.
+  | Delta functions.  |
+  `------------------*/
 
   // Classical ones.
 
@@ -403,7 +402,7 @@ namespace vcsn
   }									\
 
   DEFINE_DELTA_FUNCTION (delta, edges, output, *e);
-  DEFINE_DELTA_FUNCTION (delta, states, output, edges_[*e].to;);
+  DEFINE_DELTA_FUNCTION (delta, states, output, edges_[*e].to);
   DEFINE_DELTA_FUNCTION (rdelta, edges, input, *e);
   DEFINE_DELTA_FUNCTION (rdelta, states, input, edges_[*e].from);
 
@@ -421,7 +420,7 @@ namespace vcsn
 		    hstate_t from,					\
 		    const Query& query,					\
 		    delta_kind::DKind,					\
-		    misc::IsBool ## _t) const			\
+		    misc::IsBool ## _t) const				\
   {									\
     assertion(has_state(from));						\
     const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
@@ -477,9 +476,9 @@ namespace vcsn
 # undef DEFINE_DELTAF_HELPER
 # undef is_returning_bool
 
-  /*----.
-  | Tag |
-  `----*/
+  /*------.
+  | Tag.  |
+  `------*/
 
   TParam
   inline
@@ -513,9 +512,9 @@ namespace vcsn
   }
 
 
-  /*---------.
-  | Geometry |
-  `---------*/
+  /*-----------.
+  | Geometry.  |
+  `-----------*/
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag, class Geometry, class I>

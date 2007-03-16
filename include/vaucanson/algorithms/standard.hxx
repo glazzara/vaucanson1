@@ -50,8 +50,8 @@ namespace vcsn {
       a.deltac(transition_oi, *oi, delta_kind::transitions());
       for_all_const_(std::set<htransition_t>, oil, transition_oi)
       {
-	series_set_elt_t t = s*a.series_of(*oil);
-	a.add_series_transition(i,a.dst_of(*oil),t);
+	series_set_elt_t t = s * a.series_of(*oil);
+	a.add_series_transition(i, a.dst_of(*oil), t);
       }
     }
     a.clear_initial();

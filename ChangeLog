@@ -1,3 +1,15 @@
+2007-03-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	White space changes.
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx:
+	Improve readability (according to my book...).
+	Space around bin ops.
+	More doxumentation.
+	Remove a spurious `;'.
+
 2007-03-15  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix various issues in the timers
