@@ -1,3 +1,10 @@
+	Add a new include to avoid compilation issues.
+
+2007-03-18  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix a make check issue
+	* aut_to_exp.hh: Add a new include.
+
 2007-03-16  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Correct do_realtime_here.
