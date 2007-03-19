@@ -122,7 +122,7 @@ namespace vcsn
        *
        */
       template <class U>
-      void ensure_monoid_type(const xercesc::DOMElement* node, 
+      void ensure_monoid_type(const xercesc::DOMElement* node,
 			      const U& param);
 
       /**
@@ -139,6 +139,21 @@ namespace vcsn
       template <class T, class U>
       void ensure_semiring_type(const xercesc::DOMElement* node, const T& a,
 				const U& param);
+
+      /**
+       * Print XML tree to output stream.
+       *
+       * @arg \c OStream	Type of output stream.
+       *
+       * @param impl	XML implementation
+       * @param node	XML root node to print.
+       * @param os	Output stream.
+       *
+       */
+      template <class OStream>
+      void print_document(xercesc::DOMImplementationLS* impl,
+			  xercesc::DOMElement* node,
+			  OStream& os);
     } // tools
 
   } // xml

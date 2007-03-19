@@ -18,7 +18,6 @@
 # define VCSN_XML_XML_CONVERTER_HXX
 
 # include <vaucanson/xml/tools.hh>
-# include <vaucanson/xml/xml_xerces_stream.hh>
 
 /**
    * @file xml_converter.hxx
@@ -48,18 +47,7 @@ namespace vcsn
 				   const std::string& name)
     {
       create_document(aut, name);
-
-      using namespace xercesc;
-
-      XMLXercesStream<OStream>* target = new XMLXercesStream<OStream>(os);
-      DOMWriter* theSerializer = ((DOMImplementationLS*) impl_)->createDOMWriter();
-
-      if (theSerializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-	theSerializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
-      theSerializer->writeNode(target, *root_);
-      theSerializer->release();
-      os << std::endl;
-      delete target;
+      tools::print_document((xercesc::DOMImplementationLS*) impl_, root_, os);
     }
 
     template <class Auto>

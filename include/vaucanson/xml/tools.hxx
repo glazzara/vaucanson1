@@ -18,6 +18,8 @@
 #ifndef VCSN_XML_TOOLS_HXX
 # define VCSN_XML_TOOLS_HXX
 
+# include <vaucanson/xml/xml_xerces_stream.hh>
+
 /**
  * @file xml/tools.hxx
  *
@@ -839,6 +841,23 @@ namespace vcsn
 	check_consistency (node,
 			   "monoid", "type", "product",
 			   tools::get_monoid_type(param));
+      }
+
+      template <class OStream>
+      void print_document(xercesc::DOMImplementationLS* impl,
+			  xercesc::DOMElement* node,
+			  OStream& os)
+      {
+	using namespace xercesc;
+
+	XMLXercesStream<OStream>* target = new XMLXercesStream<OStream>(os);
+	DOMWriter* theSerializer = (impl)->createDOMWriter();
+
+	if (theSerializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
+	  theSerializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
+	theSerializer->writeNode(target, *node);
+	theSerializer->release();
+	os << std::endl;
       }
 
     } // ! tools

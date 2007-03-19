@@ -1,5 +1,15 @@
 2007-03-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Fix a bug introduced in r1587
+	r1587 removed print_document, even if session.hxx was still
+	using it. print_document is back, with new arguments.
+	* session.hxx: update use of print_document.
+	* tools.hh: add a new print_document function
+	* tools.hxx: add a new print_document function
+	* xml_converter.hxx: use print_document again.
+
+2007-03-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	fix ticket #98 by using DOMWriter
 	See ticket #98: https://trac.lrde.org/vaucanson/trac.cgi/ticket/98
 	Allow to use &quot; as " (and similar) in the XML desc.
