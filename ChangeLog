@@ -1,3 +1,14 @@
+2007-03-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	fix ticket #98 by using DOMWriter
+	See ticket #98: https://trac.lrde.org/vaucanson/trac.cgi/ticket/98
+	Allow to use &quot; as " (and similar) in the XML desc.
+	* tools.hh: remove unused functions.
+	* tools.hxx: remove unused functions.
+	* xml_converter.hxx: use of DOMWriter from Xerces Library.
+	* xml_xerces_stream.hh: New,
+	  New Xerces Class for output on a C++ stream.
+
 	Add a new include to avoid compilation issues.
 
 2007-03-18  Guillaume Lazzara  <z@lrde.epita.fr>

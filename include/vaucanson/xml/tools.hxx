@@ -841,68 +841,6 @@ namespace vcsn
 			   tools::get_monoid_type(param));
       }
 
-
-      template <class OStream>
-      void print_transition(const xercesc::DOMElement* n,
-			    OStream& os,
-			    std::string& spacing)
-      {
-	os << spacing << "<" << xml2str(n->getNodeName());
-# define VCSN_TRANS_OUTPUT(What)					\
-	if (has_attribute(n, What))					\
-	  os << " " What "=\"" << get_attribute(n, What) << "\""
-	VCSN_TRANS_OUTPUT("src");
-	VCSN_TRANS_OUTPUT("dst");
-	VCSN_TRANS_OUTPUT("label");
-	VCSN_TRANS_OUTPUT("weight");
-	VCSN_TRANS_OUTPUT("in");
-	VCSN_TRANS_OUTPUT("out");
-# undef VCSN_TRANS_OUTPUT
-      }
-
-
-      // FIXME: I don't understand why we have to do that.
-      // Xerces provides no function to do it??? --- ad.
-      template <class OStream>
-      void print_tree(const xercesc::DOMElement* node,
-		      OStream& os,
-		      std::string spacing)
-      {
-	using namespace xercesc;
-
-	if (xml2str(node->getNodeName()) == "transition")
-	  print_transition(static_cast<const DOMElement*>(node), os, spacing);
-	else
-	{
-	  os << spacing << "<" << xml2str(node->getNodeName());
-	  DOMNamedNodeMap* m = node->getAttributes();
-	  for (unsigned i = 0; i < m->getLength(); ++i)
-	    os << " " << xml2str(m->item(i)->getNodeName())
-	       << "=\"" << xml2str(m->item(i)->getNodeValue())
-	       << "\"";
-	}
-	if (node->hasChildNodes())
-	  os << ">";
-	else
-	  os << "/>";
-	os << std::endl;
-	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
-	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
-	    print_tree(static_cast<const DOMElement*>(n), os, spacing + "  ");
-	if (node->hasChildNodes())
-	  os << spacing << "</" << xml2str(node->getNodeName()) << ">"
-	     << std::endl;
-      }
-
-
-      template <class OStream>
-      void print_document(xercesc::DOMElement* node, OStream& os)
-      {
-	set_attribute(node, "xmlns", "http://vaucanson.lrde.epita.fr");
-	print_tree(node, os, "");
-      }
-
-
     } // ! tools
 
   } // ! xml
