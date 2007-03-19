@@ -1,3 +1,9 @@
+2007-03-19  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Optimize eps-removal for Boolean automaton.
+	* eps_removal.hxx: Use a map to check if a transition already exist.
+	* realtime.hxx: Remove useless output.
+
 2007-03-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix a bug introduced in r1587

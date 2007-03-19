@@ -24,6 +24,8 @@
 
 # include <vector>
 # include <queue>
+# include <map>
+# include <utility>
 
 namespace vcsn {
 
@@ -222,28 +224,26 @@ namespace vcsn {
 
   public:
     Finder (const automaton_t& aut)
-      : a_(aut), find_(false)
-    {}
+      : a_(aut)
+    {
+      for_all_transitions(t, a_)
+	map_[make_pair(a_.src_of(*t), make_pair(a_.label_of(*t),
+						a_.dst_of(*t)))] = true;
+    }
+
+    void insert(const hstate_t src, const label_t l, const hstate_t dst)
+    {
+      map_[make_pair(src, make_pair(l, dst))] = true;
+    }
 
     bool operator() (const hstate_t src, const label_t l, const hstate_t dst)
     {
-      find_ = false;
-      dst_ = dst;
-      l_ = l;
-      a_.deltaf(*this, src, delta_kind::transitions());
-      return find_;
-    }
-
-    bool operator() (htransition_t t)
-    {
-      return !(find_ = (a_.label_of(t) == l_ && a_.dst_of(t) == dst_));
+      return map_[make_pair(src, make_pair(l, dst))];
     }
 
   private:
     const automaton_t& a_;
-    hstate_t dst_;
-    label_t l_;
-    bool find_;
+    std::map<std::pair<hstate_t, std::pair<label_t, hstate_t> >, bool> map_;
   };
 
 
@@ -320,6 +320,7 @@ namespace vcsn {
 	  {
 	    htransition_t new_tr = a.add_transition(src, *dst, l);
 	    tr_q.push(new_tr);
+	    find.insert(src, l, *dst);
 	  }
 	}
 	tr_q.pop();
@@ -368,6 +369,7 @@ namespace vcsn {
 	  {
 	    htransition_t new_tr = a.add_transition(*src, dst, l);
 	    tr_q.push(new_tr);
+	    find.insert(*src, l, dst);
 	  }
 	}
 	tr_q.pop();

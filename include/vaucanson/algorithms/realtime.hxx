@@ -171,18 +171,14 @@ namespace vcsn {
   do_realtime_here(const AutomataBase<A_>&, Auto_& a,
 		   misc::direction_type type = misc::forward)
   {
-    std::cerr << "realtime_word" << std::endl;
     realtime_words_here(a);
 
-    std::cerr << "eps_removal" << std::endl;
     eps_removal_here(a, type);
 
-    std::cerr << "access" << std::endl;
     if (type == misc::forward)
       coaccessible_here(a);
     else
       accessible_here(a);
-    std::cerr << "quit realtime" << std::endl;
   }
 
 
