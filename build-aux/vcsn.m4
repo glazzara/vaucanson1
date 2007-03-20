@@ -1,7 +1,7 @@
 # vcsn.m4                                     -*- Autoconf -*-
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,15 +19,15 @@ m4_pattern_forbid([^_?VCSN_])
 
 # VCSN_PATH_LOCAL([RELATIVE-PATH-TO-VAUCANSON-SOURCES])
 # -----------------------------------------------------
-# Tries to detect Vaucanson sources "near" the current source directory.
-# This macro is noticeably used in the Vaucanson distribution itself
+# Detect Vaucanson sources "near" the current source directory.
+# Used in the Vaucanson distribution itself
 # to instruct "configure" to use the bundled Vaucanson sources.
 #
 # User projects can use this macro to point their "configure" to a
 # nonstandard Vaucanson sources location, by invoking it _before_ using
 # AC_WITH_VCSN.
 AC_DEFUN([VCSN_PATH_LOCAL],
-[ifelse([$1], [], [vcsn_cv_local_src=no], [dnl
+[m4_if([$1], [], [vcsn_cv_local_src=no], [dnl
     AC_CACHE_CHECK([for Vaucanson sources in local distribution],
 		   [vcsn_cv_local_src],
 		   [vcsn_cv_local_src=no
@@ -137,7 +137,7 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
   AC_REQUIRE([AC_PROG_CXX])
   AC_LANG_PUSH([C++])
 
-  cxx_tdepth=ifelse([$1], , 50, [$1])
+  cxx_tdepth=m4_if([$1], , 50, [$1])
   AC_CACHE_CHECK([for C++ template recursion upto $cxx_tdepth levels],
 		 [cxx_cv_cxx_template_flags],
 		 [cxx_cv_cxx_template_flags=direct
