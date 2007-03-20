@@ -89,10 +89,10 @@
 
 	Split fsm_dump.{hh,hxx} according to the documentation.
 	* ../../../doc/manual/developer.tex: .
-	* fsm_dump.hh: .
-	* fsm_dump.hxx: .
-	* fsm_load.hh: New.
-	* fsm_load.hxx: New.
+      	* fsm_load.hh: New, extracted from...
+	* fsm_dump.hh: ... here.
+	* fsm_load.hxx: New, extracted from...
+	* fsm_dump.hxx: ... here.
 
 2007-03-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
@@ -133,9 +133,9 @@
 	Fix includes issues
 	* include/vaucanson/algorithms/aut_to_exp.hxx: A header was missing.
 	* include/vaucanson/algorithms/product.hxx: Few structures were
-		only declared and implemented in this file. The structure's
-		declarations have been moved to the .hh and now we keep the
-		implementations only.
+	only declared and implemented in this file. The structure's
+	declarations have been moved to the .hh and now we keep the
+	implementations only.
 
 	Many functions like make_automaton were declared in
 	contexts/*_functions.thh.
@@ -150,26 +150,40 @@
 
 	Include the make_automaton functions in the structures' headers.
 	* include/Makefile.am: Add the new files in the list.
-	* include/vaucanson/boolean_automaton_structures.hh: .
-	* include/vaucanson/boolean_transducer_structures.hh: .
-	* include/vaucanson/contexts/automaton_functions.thh: .
-	* include/vaucanson/contexts/automaton_functions.thxx: Remove.
-	* include/vaucanson/contexts/automaton_maker.thh: New.
-	* include/vaucanson/contexts/automaton_maker.thxx: New.
-	* include/vaucanson/contexts/fmp_transducer_functions.thh: .
-	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Remove.
-	* include/vaucanson/contexts/fmp_transducer_maker.thh: New.
-	* include/vaucanson/contexts/fmp_transducer_maker.thxx: New.
-	* include/vaucanson/contexts/transducer_functions.thh: .
-	* include/vaucanson/contexts/transducer_functions.thxx: Remove.
-	* include/vaucanson/contexts/transducer_maker.thh: New.
-	* include/vaucanson/contexts/transducer_maker.thxx: New.
-	* include/vaucanson/fmp_transducer_structures.hh: .
-	* include/vaucanson/r_automaton_structures.hh: .
-	* include/vaucanson/z_automaton_structures.hh: .
-	* include/vaucanson/z_fmp_transducer.hh: .
-	* include/vaucanson/z_fmp_transducer_structures.hh: .
-	* include/vaucanson/z_transducer_structures.hh: .
+	* include/vaucanson/boolean_automaton_structures.hh: Add a new
+	include.
+	* include/vaucanson/boolean_transducer_structures.hh: Add a new
+	include.
+	* include/vaucanson/contexts/automaton_functions.thh: Remove
+	make_automaton declaration.
+	* include/vaucanson/contexts/automaton_functions.thxx: Remove, move
+	its content in automaton_maker.thxx
+	* include/vaucanson/contexts/automaton_maker.thh: New, contains the
+	make_automaton declaration
+	* include/vaucanson/contexts/automaton_maker.thxx: New, contains the
+	make_automaton implementation.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Add a new
+	include.
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Remove,
+	move its content in fmp_transducer_maker.thxx.
+	* include/vaucanson/contexts/fmp_transducer_maker.thh: New, contains
+	the make_automaton declaration.
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx: New, contains
+	the make_automaton implementation.
+	* include/vaucanson/contexts/transducer_functions.thh: Add a new
+	include.
+	* include/vaucanson/contexts/transducer_functions.thxx: Remove, move
+	its content to transducer_maker.thxx
+	* include/vaucanson/contexts/transducer_maker.thh: New, contains the
+	make_automaton declaration.
+	* include/vaucanson/contexts/transducer_maker.thxx: New, contains the
+	make_automaton implementation.
+	* include/vaucanson/fmp_transducer_structures.hh: Add a new include.
+	* include/vaucanson/r_automaton_structures.hh: Add a new include.
+	* include/vaucanson/z_automaton_structures.hh: Add a new include.
+	* include/vaucanson/z_fmp_transducer.hh: Add a new include.
+	* include/vaucanson/z_fmp_transducer_structures.hh: Add anew include.
+	* include/vaucanson/z_transducer_structures.hh: Add a new include.
 
 	This patch is the continuation of the patch #1573.
 	These files were forgotten in the patch #1573.
