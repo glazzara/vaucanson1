@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,31 +51,31 @@ namespace vcsn
 
     template <class IStream>
     xercesc::DOMDocument*
-    xerces_parser::loaddocument(xercesc::DOMBuilder* parser, IStream& is)
+    xerces_parser::load_document(xercesc::DOMBuilder* parser, IStream& is)
     {
       using namespace xercesc;
 
-# define PARSER_SET_PROPERTY(prop)			\
+# define PARSER_SET_FEATURE(prop)			\
       if (parser->canSetFeature(XMLUni::prop, true))	\
 	parser->setFeature(XMLUni::prop, true);
 
-      PARSER_SET_PROPERTY(fgDOMValidation);
-      PARSER_SET_PROPERTY(fgDOMNamespaces);
-      PARSER_SET_PROPERTY(fgDOMDatatypeNormalization);
-      PARSER_SET_PROPERTY(fgXercesSchema);
-      PARSER_SET_PROPERTY(fgXercesUseCachedGrammarInParse);
-      PARSER_SET_PROPERTY(fgXercesCacheGrammarFromParse);
+      PARSER_SET_FEATURE(fgDOMValidation);
+      PARSER_SET_FEATURE(fgDOMNamespaces);
+      PARSER_SET_FEATURE(fgDOMDatatypeNormalization);
+      PARSER_SET_FEATURE(fgXercesSchema);
+      PARSER_SET_FEATURE(fgXercesUseCachedGrammarInParse);
+      PARSER_SET_FEATURE(fgXercesCacheGrammarFromParse);
 
-# undef PARSER_SET_PROPERTY
+# undef PARSER_SET_FEATURE
 
 
-# define PARSER_SET_VALUE(prop, value) \
+# define PARSER_SET_PROPERTY(prop, value) \
 	parser->setProperty(XMLUni::prop, value);
 
-      PARSER_SET_VALUE(fgXercesSchemaExternalSchemaLocation,
-		       transcode("http://vaucanson.lrde.epita.fr " + get_xsd_path ()));
+      PARSER_SET_PROPERTY(fgXercesSchemaExternalSchemaLocation,
+			  transcode(VCSN_XMLNS " " + get_xsd_path ()));
 
-# undef PARSER_SET_VALUE
+# undef PARSER_SET_PROPERTY
 
 
       myDOMErrorHandler* err = new myDOMErrorHandler();
@@ -119,18 +119,15 @@ namespace vcsn
       DOMBuilder* parser = static_cast<DOMImplementationLS*> (impl)
 	->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
 
-      DOMDocument* doc = loaddocument(parser, is);
+      DOMDocument* doc = load_document(parser, is);
 
-      DOMNodeList* nodelist;
-
-      nodelist = doc->getElementsByTagName(transcode("session"));
+      DOMNodeList* nodelist = doc->getElementsByTagName(transcode("session"));
       if (! nodelist->getLength())
 	nodelist = doc->getElementsByTagName(transcode("automaton"));
       if (! nodelist->getLength())
 	FAIL("Cannot find any appropriate root.");
 
-      DOMElement* node = static_cast<DOMElement*>(nodelist->item(0));
-      return node;
+      return static_cast<DOMElement*>(nodelist->item(0));
     }
 
   } // xml

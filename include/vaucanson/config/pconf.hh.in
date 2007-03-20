@@ -14,3 +14,6 @@
 #ifndef VCSN_DATA_PATH
 # undef VCSN_DATA_PATH
 #endif
+
+/** The XML namespace for this package. */
+#undef VCSN_XMLNS

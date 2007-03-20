@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -62,8 +62,8 @@ namespace vcsn
     private:
       template <class IStream>
       static
-      xercesc::DOMDocument* loaddocument(xercesc::DOMBuilder* parser,
-					 IStream& is);
+      xercesc::DOMDocument* load_document(xercesc::DOMBuilder* parser,
+					  IStream& is);
     };
   } // xml
 

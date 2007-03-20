@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -60,15 +60,10 @@ namespace vcsn
       typedef typename Auto::final_iterator final_iterator;
       using namespace xercesc;
 
-      map_t state2str;
-      const char* root_name = "automaton";
-      const char* xml_namespace = "http://vaucanson.lrde.epita.fr";
-      DOMElement* node;
-
       // Document creation.
       impl_ = DOMImplementationRegistry::getDOMImplementation(transcode("LS"));
-      doc_ = impl_->createDocument(transcode(xml_namespace),
-				   transcode(root_name), 0);
+      doc_ = impl_->createDocument(transcode(VCSN_XMLNS),
+				   transcode("automaton"), 0);
       root_ = doc_->getDocumentElement();
 
       tools::xset_attribute(root_, "name", aut.geometry().name());
@@ -77,17 +72,18 @@ namespace vcsn
       // Create type tag.
       chooser_.create_type_tag(aut, doc_, root_);
 
-      DOMElement* content = doc_->createElement(transcode("content"));
+      DOMElement* content = tools::create_element(doc_, "content");
       root_->appendChild(content);
 
       // Create states.
-      node = doc_->createElement(transcode("states"));
+      DOMElement* node = tools::create_element(doc_, "states");
       content->appendChild(node);
+      map_t state2str;
       for_all_states(s, aut)
 	state2str[*s] = create_state(*s, aut, node);
 
       // Create transitions.
-      node = doc_->createElement(transcode("transitions"));
+      node = tools::create_element(doc_, "transitions");
       content->appendChild(node);
       for_all_transitions(e, aut)
 	create_transition(*e, aut, node, state2str);
@@ -111,14 +107,15 @@ namespace vcsn
 
     // Create a state in the XML document.
     template <class Auto>
-    std::string xml_converter<Auto>::create_state(hstate_t s,
-						  const Auto& aut,
-						  xercesc::DOMElement* root)
+    std::string
+    xml_converter<Auto>::create_state(hstate_t s,
+				      const Auto& aut,
+				      xercesc::DOMElement* root)
     {
+      xercesc::DOMElement* node = tools::create_element(doc_, "state");
+      root->appendChild(node);
       std::ostringstream os;
       os << "s" << s;
-      xercesc::DOMElement* node = doc_->createElement(transcode("state"));
-      root->appendChild(node);
       tools::set_attribute(node, "name", os.str());
       add_xml_geometry(aut.geometry().states(), s, node);
 
@@ -134,7 +131,7 @@ namespace vcsn
 					   xercesc::DOMElement* root,
 					   map_t& state2str)
     {
-      xercesc::DOMElement* node = doc_->createElement(transcode("transition"));
+      xercesc::DOMElement* node = tools::create_element(doc_, "transition");
       root->appendChild(node);
       tools::set_attribute(node, "src", state2str[aut.src_of(e)]);
       tools::set_attribute(node, "dst", state2str[aut.dst_of(e)]);
@@ -151,7 +148,7 @@ namespace vcsn
 					xercesc::DOMElement* root,
 					map_t& state2str)
     {
-      xercesc::DOMElement* node = doc_->createElement(transcode("initial"));
+      xercesc::DOMElement* node = tools::create_element(doc_, "initial");
       root->appendChild(node);
       tools::set_attribute(node, "state", state2str[s]);
       chooser_.create_initial_label(doc_, s, aut, node, use_label_node_);
@@ -167,7 +164,7 @@ namespace vcsn
 				      xercesc::DOMElement* root,
 				      map_t& state2str)
     {
-      xercesc::DOMElement* node = doc_->createElement(transcode("final"));
+      xercesc::DOMElement* node = tools::create_element(doc_, "final");
       root->appendChild(node);
       tools::set_attribute(node, "state", state2str[s]);
       chooser_.create_final_label(doc_, s, aut, node, use_label_node_);
@@ -178,16 +175,17 @@ namespace vcsn
     // Add geometry informations in the XML document.
     template <class Auto>
     template <class Map, class Key>
-    void xml_converter<Auto>::add_xml_geometry(Map& map,
-					       Key& key,
-					       xercesc::DOMElement* root)
+    void
+    xml_converter<Auto>::add_xml_geometry(Map& map,
+					  Key& key,
+					  xercesc::DOMElement* root)
     {
       typename Map::const_iterator iter;
       if ((iter = map.find(key)) != map.end())
       {
 	std::ostringstream osx, osy;
 	osx << iter->second.first;
-	xercesc::DOMElement* nd = doc_->createElement(transcode("geometry"));
+	xercesc::DOMElement* nd = tools::create_element(doc_, "geometry");
 	root->appendChild(nd);
 	tools::set_attribute(nd, "x", osx.str());
 	osy << iter->second.second;
@@ -199,16 +197,17 @@ namespace vcsn
     // Add drawing informations in the XML document.
     template <class Auto>
     template <class Map, class Key>
-    void xml_converter<Auto>::add_xml_drawing(Map& map,
-					      Key& key,
-					      xercesc::DOMElement* root)
+    void
+    xml_converter<Auto>::add_xml_drawing(Map& map,
+					 Key& key,
+					 xercesc::DOMElement* root)
     {
       typename Map::const_iterator iter;
       if ((iter = map.find(key)) != map.end())
       {
 	std::ostringstream osx, osy;
 	osx << iter->second.first;
-	xercesc::DOMElement* nd = doc_->createElement(transcode("drawing"));
+	xercesc::DOMElement* nd = tools::create_element(doc_, "drawing");
 	root->appendChild(nd);
 	tools::set_attribute(nd, "labelPositionX", osx.str());
 	osy << iter->second.second;
@@ -232,8 +231,8 @@ namespace vcsn
        */
     template <class Auto>
     template <class IStream>
-    void xml_converter<Auto>::load(Auto& aut,
-				   IStream& in)
+    void
+    xml_converter<Auto>::load(Auto& aut, IStream& in)
     {
       root_ = xerces_parser::stream_parser(in);
 

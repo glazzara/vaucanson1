@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,8 +40,7 @@ namespace vcsn
 
       XMLPlatformUtils::Initialize();
       impl = DOMImplementationRegistry::getDOMImplementation(transcode("LS"));
-      doc = impl->createDocument(transcode("http://vaucanson.lrde.epita.fr"),
-				 transcode("session"), 0);
+      doc = impl->createDocument(transcode(VCSN_XMLNS), transcode("session"), 0);
       root = doc->getDocumentElement();
     }
 
@@ -94,19 +93,19 @@ namespace vcsn
       FAIL("No more automaton in session");
     for (DOMNode* n = s.root->getFirstChild(); n; n = n->getNextSibling())
       if (n->getNodeType() == DOMNode::ELEMENT_NODE)
-	{
-	  DOMElement* elt = static_cast<DOMElement*>(n);
+      {
+	DOMElement* elt = static_cast<DOMElement*>(n);
 
-	  typedef Element<S, T> automaton_t;
-	  typedef Node<automaton_t> node_t;
-	  Factory<node_t, std::string> f;
-	  register_all_factory(f, automaton_t);
-	  typename node_t::map_t str2state;
+	typedef Element<S, T> automaton_t;
+	typedef Node<automaton_t> node_t;
+	Factory<node_t, std::string> f;
+	register_all_factory(f, automaton_t);
+	typename node_t::map_t str2state;
 
-	  node_t* node = factory_create(f, xml2str(n->getNodeName()));
-	  node->process(elt, a, str2state, f);
-	  s.root->removeChild(n);
-	}
+	node_t* node = factory_create(f, xml2str(n->getNodeName()));
+	node->process(elt, a, str2state, f);
+	s.root->removeChild(n);
+      }
     op_assign(structure.self(), value, a.value());
 
     return s;

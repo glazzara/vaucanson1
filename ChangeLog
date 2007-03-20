@@ -1,5 +1,23 @@
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	XML clean up.
+	* configure.ac (VCSN_XMLNS): New.
+	* include/vaucanson/config/pconf.hh.in: Adjust.
+	* include/vaucanson/xml/session.hxx: Use it.
+	* include/vaucanson/xml/xml_chooser.hxx: Use tools::create_element.
+	* include/vaucanson/xml/xml_converter.hxx: Idem.
+	Also, remove useless vars.
+	Use VCSN_XMLNS.
+	Formatting changes.
+	* include/vaucanson/xml/xerces_parser.hh,
+	* include/vaucanson/xml/xerces_parser.hxx (loaddocument): Rename as...
+	(load_document): this.
+	(PARSER_SET_VALUE, PARSER_SET_PROPERTY): Rename as...
+	(PARSER_SET_PROPERTY, PARSER_SET_FEATURE): these, for consistency.
+	* include/vaucanson/xml/tools.hxx: Formatting changes.
+
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/xml/xml_converter.hh: More doxumentation.
 
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>

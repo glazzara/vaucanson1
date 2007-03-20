@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ namespace vcsn
 					    xercesc::DOMDocument* doc,
 					    xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(transcode("labelType"));
+      xercesc::DOMElement* type = tools::create_element(doc, "labelType");
       xercesc::DOMElement* monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
       tools::create_alphabet(aut.structure().series().monoid().alphabet(),
@@ -110,7 +110,7 @@ namespace vcsn
 		      xercesc::DOMDocument* doc,
 		      xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(transcode("labelType"));
+      xercesc::DOMElement* type = tools::create_element(doc, "labelType");
       xercesc::DOMElement* in_monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
       tools::create_alphabet(aut.structure().series().monoid().alphabet(),
@@ -140,7 +140,7 @@ namespace vcsn
 					  xercesc::DOMDocument* doc,
 					  xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(transcode("labelType"));
+      xercesc::DOMElement* type = tools::create_element(doc, "labelType");
       xercesc::DOMElement* monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
 

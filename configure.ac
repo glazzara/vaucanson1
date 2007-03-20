@@ -32,6 +32,7 @@ AC_PROG_CC
 VCSN_PATH_LOCAL([.])
 AC_WITH_VCSN
 
+
 # Awk is used.
 AC_PROG_AWK
 
@@ -102,12 +103,18 @@ AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$VCSN_DATA_PATH"],
 prefix=$old_prefix
 
 # Package misc variables.
-AC_DEFINE_UNQUOTED([VCSN_PACKAGE_NAME], ["$PACKAGE_NAME"], [Full name.])
+AC_DEFINE_UNQUOTED([VCSN_PACKAGE_NAME], ["$PACKAGE_NAME"],
+                   [Package Full name.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_BUGREPORT], ["$PACKAGE_BUGREPORT"],
 		   [Bug report address.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_STRING], ["$PACKAGE_STRING"],
 		   [Full name and version.])
-AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"], [Version.])
+AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"],
+                   [Package Version.])
+
+# XML namespace.
+AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
+		   [Root of the XML namespace.])
 
 
 ## ------------ ##
