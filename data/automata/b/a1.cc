@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,10 +22,9 @@ using namespace vcsn::boolean_automaton;
 #include <vaucanson/tools/dumper.hh>
 
 
-   /*----------------------------------------------------------.
-   | This automaton comes from the book ETA (Fig 1.1 p. 58).|
+   /*---------------------------------------------------------.
+   | This automaton comes from the book ETA (Fig 1.1 p. 58).| |
    `---------------------------------------------------------*/
-
 
 int
 main(int argc, char **argv)

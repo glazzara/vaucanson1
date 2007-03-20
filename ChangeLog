@@ -1,5 +1,15 @@
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix interface.
+	* data/automata/b/a1.cc, data/automata/b/b1.cc,
+	* data/automata/b/divkbaseb.cc, data/automata/b/double_ring.cc,
+	* data/automata/b/ladybird.cc, data/automata/tdc/t1.cc:
+	Be more tolerant on the input: accept the format as last optional
+	argument.
+	* data/automata/b/double_ring.cc: Catch invalid arguments.
+
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	Default fmt is xml, not error.
 	* include/vaucanson/tools/dumper.hh,
 	* include/vaucanson/tools/dumper.hxx (dumper): Let the format argument

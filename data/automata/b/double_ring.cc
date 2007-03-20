@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,16 +19,17 @@
 #include <vaucanson/boolean_automaton.hh>
 
 using namespace vcsn::boolean_automaton;
+
 #include <vaucanson/tools/dumper.hh>
 
 int
 main(int argc, char** argv)
 {
-  if (argc < 2)
+  if (argc < 3)
   {
     std::cerr << "Usage:" << std::endl
 	      << "\t" << argv[0] << " <number of states>"
-	      << " [list of final states...]" << std::endl;
+	      << " [list of final states...] [format]" << std::endl;
     return 1;
   }
 
@@ -55,9 +56,14 @@ main(int argc, char** argv)
   a.add_letter_transition (0, n - 1, 'b');
 
   int i;
-  for (i = 2; i < argc - 1; ++i)
+  for (i = 2; argv[i] && std::isdigit(argv[i][0]); ++i)
   {
     int s = vcsn::tools::string_to_int (argv[i]);
+    if (s >= n)
+    {
+      std::cerr << argv[0] << ": too big a state number: " << s << std::endl;
+      exit (2);
+    }
     a.set_final (s);
   }
 

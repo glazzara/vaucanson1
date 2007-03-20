@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@ using namespace vcsn::fmp_transducer;
 
 
 
-   /*---------------------------------------------------------.
-   | This transducer comes from the article Inside Vaucanson. |
-   `--------------------------------------------------------*/
+   /*----------------------------------------------------------.
+   | This transducer comes from the article Inside Vaucanson.  |
+   `----------------------------------------------------------*/
 
 
 
@@ -42,9 +42,9 @@ main ()
   B.insert('x');
   B.insert('y');
 
-  /*--------------------------.
-  | Creation of transducer T1 |
-  `-------------------------*/
+  /*----------------------------.
+  | Creation of transducer T1.  |
+  `----------------------------*/
 
   automaton_t t1 = make_automaton(A, B);
 

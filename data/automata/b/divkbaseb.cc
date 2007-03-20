@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@ using namespace vcsn::boolean_automaton;
 int
 main(int argc, char** argv)
 {
-  if (argc < 3)
+  if (argc != 3 && argc != 4)
   {
     std::cerr << "Usage:" << std::endl
 	      << "\t" << argv[0] << " <divisor> <base> [<fmt>]" << std::endl;
