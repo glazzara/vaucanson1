@@ -57,9 +57,9 @@ namespace vcsn {
     typedef std::vector<hstate_t>			    delta_ret_t;
 
 
-    /*---------------.
-    | Initialization |
-    `---------------*/
+    /*-----------------.
+    | Initialization.  |
+    `-----------------*/
 
     hstate_t qi_hstate = output.add_state();
     subset_t qi;
@@ -79,37 +79,34 @@ namespace vcsn {
     m[qi_hstate] = qi;
 
 
-    /*----------.
-    | Main loop |
-    `----------*/
+    /*------------.
+    | Main loop.  |
+    `------------*/
 
-    subset_t s;
     subset_t q;
     const alphabet_t& alphabet(input.structure().series().monoid().alphabet());
     delta_ret_t dst;
     dst.reserve(input.states().size());
     std::queue<subset_t> path;
     path.push(qi);
-    do {
-      s = path.front();
+    while (!path.empty())
+    {
+      subset_t s = path.front();
       hstate_t s_hstate = subset_set[s];
       path.pop();
 
       for_all_letters(e, alphabet)
       {
 	q.clear ();
-	is_final = false;
-	for (typename subset_t::const_iterator j = s.begin();
-	     j != s.end(); ++j)
+	bool is_final = false;
+	for_all_const_ (subset_t, j, s)
 	{
 	  dst.clear();
-
 	  input.letter_deltac(dst, *j, *e, delta_kind::states());
 	  for_all_const_(delta_ret_t, k, dst)
 	  {
-	    hstate_t state = *k;
-	    q.insert(state);
-	    is_final |= input.is_final(state);
+	    q.insert(*k);
+	    is_final |= input.is_final(*k);
 	  }
 	}
 	typename subset_set_t::const_iterator current = subset_set.find(q);
@@ -125,7 +122,7 @@ namespace vcsn {
 	}
 	output.add_letter_transition(s_hstate, (*current).second, *e);
       }
-    } while (!path.empty());
+    }
   }
 
   template<typename A, typename T>
@@ -137,9 +134,9 @@ namespace vcsn {
     return res;
   }
 
-  /*------------.
-  | determinize |
-  `------------*/
+  /*--------------.
+  | determinize.  |
+  `--------------*/
   template <typename A, typename input_t, typename output_t>
   void
   do_determinize(const AutomataBase<A>&	a_set,

@@ -1,5 +1,12 @@
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	Readability.
+	* include/vaucanson/algorithms/determinize.hxx: Shorten scopes.
+	Use a while-loop instead of a do-loop.  The difference here is
+	negligible but while-loops are more traditional and easier to read.
+
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix interface.
 	* data/automata/b/a1.cc, data/automata/b/b1.cc,
 	* data/automata/b/divkbaseb.cc, data/automata/b/double_ring.cc,
