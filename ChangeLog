@@ -1,5 +1,10 @@
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	Update pconf.hh.
+	* Makefile.am (BUILT_SOURCES): New.
+
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	* build-aux/vcsn.m4: Prefer m4_* macros.
 
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>

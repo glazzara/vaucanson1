@@ -31,6 +31,9 @@ $(srcdir)/NEWS: $(srcdir)/doc/NEWS.txt
 	cp $(srcdir)/doc/NEWS.txt $(srcdir)/NEWS
 	chmod -w $(srcdir)/NEWS
 
+# Be sure to use files up to date.
+BUILT_SOURCES = include/vaucanson/config/pconf.hh
+
 
 ###
 ### Autoconf needs additional macros.
