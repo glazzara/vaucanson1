@@ -1,5 +1,9 @@
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/xml/xml_converter.hh: More doxumentation.
+
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	Readability.
 	* include/vaucanson/algorithms/determinize.hxx: Shorten scopes.
 	Use a while-loop instead of a do-loop.  The difference here is

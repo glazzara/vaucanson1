@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,8 +21,8 @@
 /**
  * @file xml_converter.hh
  *
- * XML conversion class. Used to convert stream containing XML to automaton,
- * and vice et versa.
+ * XML conversion class.  Convert stream containing XML to automaton,
+ * and conversely.
  *
  * @see vcsn::xml::xml_chooser, vcsn::xml::Node, vcsn::Factory
  *
@@ -86,12 +86,14 @@ namespace vcsn
       template <class IStream>
       void load(Auto& a, IStream& in);
 
+      /// Create the DOM document for @a aut, named @a name.
       void create_document(const Auto& aut, const std::string& name = "");
 
+      /// The root of the created DOM document.
       xercesc::DOMElement* root_get();
 
     private:
-      std::string create_state(hstate_t s, const Auto& aut, 
+      std::string create_state(hstate_t s, const Auto& aut,
 			       xercesc::DOMElement* root);
       void create_transition(htransition_t e, const Auto& aut,
 			     xercesc::DOMElement* root, map_t& state2str);
