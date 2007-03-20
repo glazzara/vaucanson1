@@ -1,8 +1,8 @@
-// set_alphabet.hxx: this file is part of the Vaucanson project.
+// alphabet_set.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,11 +14,11 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_SET_ALPHABET_HXX
-# define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_SET_ALPHABET_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HXX
 
 # include <vaucanson/algebra/concept/letter.hh>
-# include <vaucanson/algebra/implementation/alphabets/set_alphabet.hh>
+# include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
 
 # include <limits>
 
@@ -58,4 +58,4 @@ namespace vcsn
 
 } // vcsn
 
-#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_SET_ALPHABET_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HXX

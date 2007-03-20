@@ -1,5 +1,20 @@
 2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	Catch up with [156].
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hh,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hxx:
+	Rename as...
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hh,
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx:
+	these.
+	* include/Makefile.am,
+	* include/vaucanson/algebra/implementation/alphabets/predefs.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hh:
+	Adjust.
+	* include/vaucanson/boolean_automaton_structures.hh: Comment fix.
+
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	Update pconf.hh.
 	* Makefile.am (BUILT_SOURCES): New.
 

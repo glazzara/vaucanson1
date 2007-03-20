@@ -1,8 +1,8 @@
-// set_alphabet.hh: this file is part of the Vaucanson project.
+// alphabet_set.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_SET_ALPHABET_HH
-# define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_SET_ALPHABET_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HH
 
 # include <vaucanson/algebra/implementation/alphabets/alphabets.hh>
 
@@ -34,8 +34,8 @@ namespace vcsn {
     template<typename L>
     struct alphabet_traits<AlphabetSet<L>, std::set<L> >
     {
-      /// The type of letters held by the alphabet.
-      typedef L			letter_t;
+	/// The type of letters held by the alphabet.
+	typedef L			letter_t;
     };
 
     /** @} */
@@ -59,8 +59,8 @@ namespace vcsn {
   struct MetaElement<algebra::AlphabetSet<L>, std::set<L> >
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, std::set<L> >
   {
-    /// An alphabet implemented with std::set is a dynamic value.
-    static const bool dynamic_value = true;
+      /// An alphabet implemented with std::set is a dynamic value.
+      static const bool dynamic_value = true;
   };
 
   /** @} */
@@ -82,7 +82,7 @@ namespace vcsn {
 } // vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/algebra/implementation/alphabets/set_alphabet.hxx>
+#  include <vaucanson/algebra/implementation/alphabets/alphabet_set.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_SET_ALPHABET_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HH

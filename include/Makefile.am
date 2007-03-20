@@ -160,8 +160,8 @@ vaucanson/algebra/implementation/alphabets/alphabets.hh				     \
 vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh		     \
 vaucanson/algebra/implementation/alphabets/decorated_alphabet.hxx		     \
 vaucanson/algebra/implementation/alphabets/predefs.hh				     \
-vaucanson/algebra/implementation/alphabets/set_alphabet.hh			     \
-vaucanson/algebra/implementation/alphabets/set_alphabet.hxx			     \
+vaucanson/algebra/implementation/alphabets/alphabet_set.hh			     \
+vaucanson/algebra/implementation/alphabets/alphabet_set.hxx			     \
 vaucanson/algebra/implementation/free_monoid/predefs.hh				     \
 vaucanson/algebra/implementation/free_monoid/str_words.hh			     \
 vaucanson/algebra/implementation/free_monoid/str_words.hxx			     \
