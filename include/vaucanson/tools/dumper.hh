@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
  *
  * @brief Wrap calls to dumpers for various formats.
  *
- * This file was written quickly and somewhat dirtyly but Raphaël Poss,
+ * This file was written quickly and somewhat dirtily by Raphaël Poss,
  * and slightly cleaned by Akim Demaille.  Undoubtedly, more polishing
  * and thinking might be very useful.  No doubt that such a feature
  * (dumping to several formats) is pleasant.
@@ -47,6 +47,7 @@ namespace vcsn
     struct dumper
     {
 	/// Build a dumper which arguments are in @a argv starting at @a pos.
+        /// Dumps for "xml", unless argv[pos] specifies otherwise.
 	dumper (int argc, char **argv, int pos = 1);
 
 	/// Display a help message, and exit with status @a estatus.

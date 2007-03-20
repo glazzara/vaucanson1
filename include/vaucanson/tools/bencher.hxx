@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,25 +31,28 @@ namespace vcsn
   {}
 
   void bencher::start()
-  { start_ = dtime(); }
+  {
+    start_ = dtime();
+  }
 
 
   void bencher::stop()
-  { stop_ = dtime(); }
+  {
+    stop_ = dtime();
+  }
 
 
   double bencher::get_time()
-  { return stop_ - start_; }
-
-  double	bencher::dtime()
   {
-    double		q;
-    struct rusage	rusage;
+    return stop_ - start_;
+  }
 
+  double bencher::dtime()
+  {
+    rusage rusage;
     getrusage(RUSAGE_SELF, &rusage);
-    q = (double)(rusage.ru_utime.tv_sec);
-    q = q + (double)(rusage.ru_utime.tv_usec) * 1.0e-06;
-    return q;
+    return ((double)(rusage.ru_utime.tv_sec)
+	    + (double)(rusage.ru_utime.tv_usec) * 1.0e-06);
   }
 }
 # endif // ! VCSN_BENCH

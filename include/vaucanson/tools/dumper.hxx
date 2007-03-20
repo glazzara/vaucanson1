@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,27 +40,27 @@ namespace vcsn
       char *cp;
       long res = std::strtol (ccp, &cp, 10);
       if (*cp || INT_MAX < res || errno)
-	{
-	  std::cerr << "integer out of bounds: " << s;
-	  if (errno)
-	    std::cerr << " (" << std::strerror (errno) << ")";
-	  std::cerr << std::endl;
-	  exit (1);
-	}
+      {
+	std::cerr << "integer out of bounds: " << s;
+	if (errno)
+	  std::cerr << " (" << std::strerror (errno) << ")";
+	std::cerr << std::endl;
+	exit (1);
+      }
       return res;
     }
 
     dumper::dumper (int argc, char **argv, int pos)
-      : fmt_ (fmt_error), argc_ (argc), argv_ (argv)
+      : fmt_ (fmt_xml), argc_ (argc), argv_ (argv)
     {
       if (pos < argc_)
 	fmt_ = dump_format (argv_[pos]);
 
       if (fmt_ == fmt_error)
-	{
-	  std::cerr << "Invalid input: " << pos << " " << argv_[pos] << std::endl;
-	  usage (1);
-	}
+      {
+	std::cerr << "Invalid input: " << pos << " " << argv_[pos] << std::endl;
+	usage (1);
+      }
     }
 
     void
@@ -68,10 +68,10 @@ namespace vcsn
     {
       std::cerr << "Usage: " << argv_[0] << " ... <fmt>" << std::endl
 		<< "where fmt is one of:" << std::endl
-		<< "  dot : graphviz format" << std::endl
-		<< "  fsm : FSM toolbox format" << std::endl
-		<< "  simple : internal Vaucanson format" << std::endl
-		<< "  xml : Vaucanson XML I/O format" << std::endl;
+		<< "  dot     graphviz format" << std::endl
+		<< "  fsm     FSM toolbox format" << std::endl
+		<< "  simple  internal Vaucanson format" << std::endl
+		<< "  xml     Vaucanson XML I/O format" << std::endl;
       exit (estatus);
     }
 

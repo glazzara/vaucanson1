@@ -1,3 +1,12 @@
+2007-03-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Default fmt is xml, not error.
+	* include/vaucanson/tools/dumper.hh,
+	* include/vaucanson/tools/dumper.hxx (dumper): Let the format argument
+	be optional.
+	* include/vaucanson/tools/bencher.hxx: White space changes.
+	Get rid of useless variables.
+
 2007-03-19  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Optimize eps-removal for Boolean automaton.
