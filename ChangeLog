@@ -1,5 +1,15 @@
 2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix libvcsn-*
+	* lib/Makefile.am:
+	Now creating a .so instead of .a
+	The distclean rule is now called maintainer-clean.
+	* lib/generate_libvcsn.rb:
+	The parsing method has changed. We are now taking advantage of
+	the interface of vaucanswig to generate libvcsn.
+
+2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Correct vaucanswig interface.
 	* eps_removal.hh,
 	* normalized.hh,

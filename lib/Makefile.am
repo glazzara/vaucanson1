@@ -13,13 +13,9 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-#SUBDIRS = vcsn-b vcsn-r vcsn-z vcsn-z-max vcsn-z-min \
-	  vcsn-fmp-tdc vcsn-tdc vcsn-z-fmp-tdc vcsn-z-tdc
+AUTOMAKE_OPTIONS = subdir-objects
 
-#OBJDIR = vcsn-b vcsn-z-tdc vcsn-z-fmp-tdc vcsn-z-min \
-#	 vcsn-r vcsn-fmp-tdc vcsn-b vcsn-z-max vcsn-tdc vcsn-z
-
-noinst_LTLIBRARIES =
+lib_LTLIBRARIES =
 MAINTAINERCLEANFILES =
 
 include vcsn-b/libvcsn-b.mk
@@ -32,7 +28,23 @@ include vcsn-tdc/libvcsn-tdc.mk
 include vcsn-z-fmp-tdc/libvcsn-z-fmp-tdc.mk
 include vcsn-z-tdc/libvcsn-z-tdc.mk
 
-distclean-local:
-	rm -rf vcsn-b vcsn-z-tdc vcsn-z-fmp-tdc vcsn-z-min \
-	  vcsn-r vcsn-fmp-tdc vcsn-b vcsn-z-max vcsn-tdc vcsn-z
+maintainer-clean-local:
+	rm -rf $(top_builddir)/lib/vcsn-b		\
+	       $(top_builddir)/lib/vcsn-r		\
+	       $(top_builddir)/lib/vcsn-z		\
+	       $(top_builddir)/lib/vcsn-z-min		\
+	       $(top_builddir)/lib/vcsn-z-max		\
+	       $(top_builddir)/lib/vcsn-z-fmp-tdc	\
+	       $(top_builddir)/lib/vcsn-z-tdc		\
+	       $(top_builddir)/lib/vcsn-fmp-tdc		\
+	       $(top_builddir)/lib/vcsn-tdc
+	rm -rf $(top_srcdir)/lib/vcsn-b			\
+	       $(top_srcdir)/lib/vcsn-r			\
+	       $(top_srcdir)/lib/vcsn-z			\
+	       $(top_srcdir)/lib/vcsn-z-min		\
+	       $(top_srcdir)/lib/vcsn-z-max		\
+	       $(top_srcdir)/lib/vcsn-z-fmp-tdc		\
+	       $(top_srcdir)/lib/vcsn-z-tdc		\
+	       $(top_srcdir)/lib/vcsn-fmp-tdc		\
+	       $(top_srcdir)/lib/vcsn-tdc
 

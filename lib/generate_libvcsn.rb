@@ -32,18 +32,21 @@ vcsn.each_key { |type| system("mkdir -p " + type) }
 
 # testing if a source file needs to be created
 def create?(type, file)
+  file !~ /finite_support_conversion.hh/ and
+  file !~ /krat_exp_cderivation.hh/ and
+  file !~ /thompson.hh/ and
   (
-    ! File.exist?(type + "/" + type + "_" + File.basename(file, ".hh") + ".cc") or
-    File.new(file, "r").stat > File.new(type + "/" + type + "_" + File.basename(file, ".hh") + ".cc").stat
+    ! File.exist?(type + "/" + File.basename(file, ".hh") + ".cc") or
+    File.new(file, "r").stat > File.new(type + "/" + File.basename(file, ".hh") + ".cc").stat
   ) and
-  # FIXME list of ignored files for each shall be removed later
-  file !~ /krat_exp_linearize.hh/ and	# weird parsing which shall be done soon
   (
+    # FIXME: The following tests shall be removed
+    # FIXME: more comments with the some specs on the algorithms must be added to do so
     (
       ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type ) and
-      file !~ /backward_realtime.hh/ and	# realtime
-      file !~ /realtime_decl.hh/ and		# realtime
+      file !~ /backward_realtime.hh/ and
+      file !~ /realtime_decl.hh/ and
       file !~ /composition_cover.hh/ and	# transducer
       file !~ /extension.hh/ and		# transducer
       file !~ /invert.hh/ and			# transducer
@@ -52,70 +55,33 @@ def create?(type, file)
       file !~ /normalized_composition.hh/	# transducer
     ) or
     (
-      "vcsn-tdc" == type and
-      file !~ /accessible.hh/ and
-      file !~ /aut_to_exp.hh/ and
-      file !~ /backward_realtime.hh/ and	# should work ?
+      (
+	"vcsn-fmp-tdc" == type or "vcsn-tdc" == type or
+	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type
+      ) and
+      file !~ /berry_sethi.hh/ and
+      file !~ /brzozowski.hh/ and
+      file !~ /derived_term_automaton.hh/ and
+      file !~ /eval.hh/ and
+      file !~ /standard.hh/ and
+      file !~ /standard_of.hh/ and
+      file !~ /aci_canonical.hh/ and
+      file !~ /krat_exp.*.hh/ and
+      file !~ /backward_realtime.hh/ and
       file !~ /complement.hh/ and
       file !~ /complete.hh/ and
-      file !~ /composition_cover.hh/ and	# should work ?
+      file !~ /composition_cover.hh/ and
       file !~ /determinize.hh/ and
       file !~ /extension.hh/ and
-      file !~ /invert.hh/ and			# should work ?
+      file !~ /forward_realtime.hh/ and
       file !~ /is_letterized.hh/ and
       file !~ /is_normalized.hh/ and
-      file !~ /minimization_hopcroft.hh/ and
-      file !~ /normalized_composition.hh/ and
-      file !~ /realtime_decl.hh/ and		# should work ?
-      file !~ /standard.hh/
-    ) or
-    (
-      "vcsn-fmp-tdc" == type and
-      file !~ /backward_realtime.hh/ and	# should work ?
-      file !~ /complement.hh/ and
-      file !~ /complete.hh/ and
-      file !~ /composition_cover.hh/ and	# should work ?
-      file !~ /determinize.hh/ and
-      file !~ /extension.hh/ and
-      file !~ /forward_realtime.hh/ and	 	# should work ?
-      file !~ /is_letterized.hh/ and
-      file !~ /is_normalized.hh/ and
+      file !~ /letter_to_letter_composition.hh/ and
       file !~ /minimization_hopcroft.hh/ and
       file !~ /minimization_moore.hh/ and
       file !~ /normalized_composition.hh/ and
-      file !~ /realtime.hh/ and			# should work ?
-      file !~ /realtime_decl.hh/		# should work ?
-    ) or
-    (
-      "vcsn-z-fmp-tdc" == type and
-      file !~ /backward_realtime.hh/ and	# should work ?
-      file !~ /complement.hh/ and
-      file !~ /complete.hh/ and
-      file !~ /composition_cover.hh/ and	# should work ?
-      file !~ /determinize.hh/ and
-      file !~ /extension.hh/ and
-      file !~ /forward_realtime.hh/ and	 	# should work ?
-      file !~ /is_letterized.hh/ and
-      file !~ /is_normalized.hh/ and
-      file !~ /minimization_hopcroft.hh/ and
-      file !~ /minimization_moore.hh/ and
-      file !~ /normalized_composition.hh/ and
-      file !~ /realtime.hh/ and			# should work ?
-      file !~ /realtime_decl.hh/		# should work ?
-    ) or
-    (
-      "vcsn-z-tdc" == type and
-      file !~ /aut_to_exp.hh/ and
-      file !~ /backward_realtime.hh/ and	# should work ?
-      file !~ /composition_cover.hh/ and	# should work ?
-      file !~ /extension.hh/ and
-      file !~ /invert.hh/ and			# should work ?
-      file !~ /is_letterized.hh/ and
-      file !~ /is_normalized.hh/ and
-      file !~ /minimization_hopcroft.hh/ and
-      file !~ /normalized_composition.hh/ and
-      file !~ /realtime_decl.hh/ and		# should work ?
-      file !~ /standard.hh/
+      file !~ /realtime.hh/ and
+      file !~ /realtime_decl.hh/
     )
   )
 end
@@ -137,9 +103,10 @@ def write_makefile(type, context)
 	     "##",
 	     "## The Vaucanson Group consists of people listed in the `AUTHORS' file.",
 	     "##",
+	     "## NOTE: this file was generated automatically with generate_libvcsn.rb",
+	     "##",
 	     "",
-#	     "INCLUDES\t\t=  -I$(top_builddir)/include -I$(top_srcdir)/include",
-	     "noinst_LTLIBRARIES\t+= lib" + type + ".la",
+	     "lib_LTLIBRARIES\t+= lib" + type + ".la",
 	     "lib" + type.gsub(/-/, "_") + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
 	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
     out.print "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
@@ -154,8 +121,8 @@ end
 # write the output file `type`/`fname` with `contents`
 # headers are written according to the `type`
 def write_src(type, context, fname, contents)
-  puts "Generating " + type + "/" + type + "_" + fname
-  File.open(type + '/' + type + "_" + fname, "w") { |out|
+  puts "Generating " + type + "/" + fname
+  File.open(type + '/' + fname, "w") { |out|
     out.puts("// " + fname + ": this file is part of the Vaucanson project.",
 	     "//",
 	     "// Vaucanson, a generic library for finite state machines.",
@@ -172,6 +139,8 @@ def write_src(type, context, fname, contents)
 	     "//",
 	     "// The Vaucanson Group consists of people listed in the `AUTHORS' file.",
 	     "//",
+	     "// NOTE: this file was generated automatically with generate_libvcsn.rb",
+	     "//",
 	     "",
 	     "#include <vaucanson/" + context + "_structures.hh>",
 	     "#include <vaucanson/algorithms/" + File.basename(fname, ".cc") + ".hh>",
@@ -182,7 +151,7 @@ end
 
 # retrieve an array with all the headers contained
 # in ./include/vaucanson/algorithms
-files = Dir.glob("../include/vaucanson/algorithms/*.hh")
+files = Dir.glob("../include/vaucanson/algorithms/*.hh").sort!
 
 # read the directory
 files.each { |file|
@@ -192,32 +161,26 @@ files.each { |file|
     output = Array.new
     empty = true
 
+    output.push("namespace vcsn", "{")
     i = 0
     while i < contents.length
-      # template has been found
+      # `// INTERFACE` has been found
       # process the file declaration
-      if contents[i] =~ /template\s*<typename\s*[A-Z]*,\s*typename\s*[A-Z]*>/
+      if contents[i] =~ /\/\/\s*INTERFACE/
 	empty = false
-	output.push(contents[i].gsub(/\s*<.*>/, ""))
-	while i < contents.length and contents[i] !~ />/
-	  i = i.next
+	# GenAutomaton is ignored to avoid multiple definitions
+	if contents[i] !~ /GenAutomaton/
+	  tmp = contents[i].gsub(/^\s*\/\/\s*INTERFACE:\s*(.*)\s+\{.*/, '  \1;')
+	  tmp = tmp.gsub(/Automaton/, 'VCSN_CONTEXT::automaton_t')
+	  tmp = tmp.gsub(/HList/, 'std::set<hstate_t>')
+	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_CONTEXT::rat_exp_impl_t')
+	  tmp = tmp.gsub(/Exp/, 'VCSN_CONTEXT::rat_exp_t')
+	  output.push("  template", tmp)
 	end
-	i = i.next
-	while i < contents.length
-	  output.push(contents[i].gsub(/(typename\s*)*Element<\w*,\s*\w*>/, "VCSN_CONTEXT::automaton_t"))
-	  if contents[i] =~ /;/
-	    output.push("")
-	    break
-	  end
-	  i = i.next
-	end
-      elsif ( contents[i] =~ /namespace/ or contents[i] =~ /(\{|\})/ ) and
-	    ( contents[i] !~ /(\};|\*)/ )
-	output.push(contents[i])
       end
-
       i = i.next
     end
+    output.push("} // End of namespace vcsn", "")
 
     vcsn.each { |type, context|
       if create?(type, file) and ! empty
@@ -229,6 +192,6 @@ files.each { |file|
   }
 }
 
-# writing Makefiles
+# writing */lib*.mk files which are included in Makefile.am 
 vcsn.each { |type, context| write_makefile(type, context) }
 
