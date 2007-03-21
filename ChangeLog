@@ -1,3 +1,15 @@
+2007-03-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix invalid iterator after deletion of an item (last part)
+	* include/vaucanson/algorithms/standard.hxx:
+	Fix invalid iterator after deletion of an item
+	Calling the set_final method in a loop iterating on the final states
+	set can lead to invalid iterators, since set_final can delete an
+	item in this set under certain circumstancies.
+	This patch fix this problem.
+
+	This part was missing in the patch #1549.
+
 2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Link taf-kit against libvcsn-{b,z,tdc}

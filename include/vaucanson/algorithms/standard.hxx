@@ -218,8 +218,14 @@ namespace vcsn {
     // Multiply final transitions of lhs by the final multiplicity of the
     // initial state of rhs.
     typename lhs_t::series_set_elt_t rhs_iw = rhs.get_final(rhs_i);
-    for_all_final_states(f, lhs)
+    typename lhs_t::final_support_t support = lhs.final();
+    for (typename lhs_t::final_iterator next = lhs.final().begin();
+	 next != lhs.final().end();)
+    {
+      typename lhs_t::final_iterator f = next;
+      next++;
       lhs.set_final(*f, lhs.get_final(*f) * rhs_iw);
+    }
 
     // Set transitions coming from rhs to final if needed.
     for_all_const_(map_t, nf, map_h)
