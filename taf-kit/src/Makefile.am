@@ -41,16 +41,19 @@ COMMON_SOURCES = commands.hh			\
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh common_automaton_commands.hh b_commands.cc
-vcsn_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=boolean_automaton
+vcsn_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=boolean_automaton -D_VCSN_USE_LIB
+vcsn_b_LDFLAGS = $(AM_LDFLAGS) -L$(top_builddir)/lib -lvcsn-b
 
 vcsn_z_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh common_automaton_commands.hh z_commands.cc
-vcsn_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton
+vcsn_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton -D_VCSN_USE_LIB
+vcsn_z_LDFLAGS = $(AM_LDFLAGS) -L$(top_builddir)/lib -lvcsn-z
 
 vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
 		   tdc_commands.cc
-vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=fmp_transducer		\
-		    -DWITH_TWO_ALPHABETS
+vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=fmp_transducer 	\
+		    -DWITH_TWO_ALPHABETS -D_VCSN_USE_LIB
+vcsn_tdc_LDFLAGS = $(AM_LDFLAGS) -L$(top_builddir)/lib -lvcsn-tdc
 
 
 ## ------ ##

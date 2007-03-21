@@ -1,5 +1,11 @@
 2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Link taf-kit against libvcsn-{b,z,tdc}
+	* taf-kit/src/Makefile.am:
+	Update rules to add the support of libvcsn.
+
+2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix libvcsn-*
 	* lib/Makefile.am:
 	Now creating a .so instead of .a
