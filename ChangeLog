@@ -1,5 +1,15 @@
 2007-03-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix compilation issues during make check (next part)
+	* include/vaucanson/contexts/transducer_maker.thh:
+	Add missing includes.
+	* include/vaucanson/contexts/transducer_maker.thxx:
+	Specify namespaces for certain function calls.
+	* include/vaucanson/z_min_plus_automaton_structures.hh:
+	Add a missing include.
+
+2007-03-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix invalid iterator after deletion of an item (last part)
 	* include/vaucanson/algorithms/standard.hxx:
 	Fix invalid iterator after deletion of an item

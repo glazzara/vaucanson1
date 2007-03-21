@@ -21,6 +21,9 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
+#include <vaucanson/algorithms/trim.hh>
+#include <vaucanson/algorithms/invert.hh>
+
 namespace vcsn
 {
 
