@@ -30,8 +30,8 @@
  */
 /** @} */
 
-// INTERFACE: void thompson_of_here(Automaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
-// INTERFACE: void thompson_of_here(GenAutomaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
+// INTERFACE: void thompson_of(Automaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
+// INTERFACE: void thompson_of(GenAutomaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
 
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/automata.hh>

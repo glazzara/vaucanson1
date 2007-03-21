@@ -38,8 +38,8 @@
 // INTERFACE: void standardize(Automaton& a) { return vcsn::standardize(*a); }
 // INTERFACE: void standardize(GenAutomaton& a) { return vcsn::standardize(*a); }
 
-// INTERFACE: bool is_standard(Automaton& a) { return vcsn::is_standard(*a); }
-// INTERFACE: bool is_standard(GenAutomaton& a) { return vcsn::is_standard(*a); }
+// INTERFACE: bool is_standard(const Automaton& a) { return vcsn::is_standard(*a); }
+// INTERFACE: bool is_standard(const GenAutomaton& a) { return vcsn::is_standard(*a); }
 
 // INTERFACE: void union_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
 // INTERFACE: void union_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }

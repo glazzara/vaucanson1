@@ -42,10 +42,10 @@
 // INTERFACE: Automaton backward_eps_removal(const Automaton& a) { return vcsn::backward_eps_removal(*a); }
 // INTERFACE: GenAutomaton backward_eps_removal(const GenAutomaton& a) { return vcsn::backward_eps_removal(*a); }
 
-// INTERFACE: void eps_removal_here(Automaton& a) { return vcsn::eps_removal_here(*a); }
+// INTERFACE: void eps_removal_here(Automaton& a, misc::direction_type dir) { return vcsn::eps_removal_here(*a); }
 // INTERFACE: void eps_removal_here(GenAutomaton& a) { return vcsn::eps_removal_here(*a); }
 
-// INTERFACE: Automaton eps_removal(const Automaton& a) { return vcsn::eps_removal(*a); }
+// INTERFACE: Automaton eps_removal(const Automaton& a, misc::direction_type dir) { return vcsn::eps_removal(*a); }
 // INTERFACE: GenAutomaton eps_removal(const GenAutomaton& a) { return vcsn::eps_removal(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>

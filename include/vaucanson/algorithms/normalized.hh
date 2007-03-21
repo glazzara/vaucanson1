@@ -55,8 +55,8 @@
 // INTERFACE: void star_of_normalized_here(Automaton& a) { return vcsn::star_of_normalized_here(*a); }
 // INTERFACE: void star_of_normalized_here(GenAutomaton& a) { return vcsn::star_of_normalized_here(*a); }
 
-// INTERFACE: Automaton star_of_normalized(Automaton& a) { return vcsn::star_of_normalized(*a); }
-// INTERFACE: GenAutomaton star_of_normalized(GenAutomaton& a) { return vcsn::star_of_normalized(*a); }
+// INTERFACE: Automaton star_of_normalized(const Automaton& a) { return vcsn::star_of_normalized(*a); }
+// INTERFACE: GenAutomaton star_of_normalized(const GenAutomaton& a) { return vcsn::star_of_normalized(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

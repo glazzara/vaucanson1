@@ -30,11 +30,11 @@
  */
 /** @} */
 
-// INTERFACE: Automaton sub_automaton(const Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
-// INTERFACE: GenAutomaton sub_automaton(const GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
+// INTERFACE: Automaton sub_automaton(const Automaton& a, const HList& s, bool c) { return vcsn::sub_automaton(*a, s, c); }
+// INTERFACE: GenAutomaton sub_automaton(const GenAutomaton& a, const HList& s, bool c) { return vcsn::sub_automaton(*a, s, c); }
 
-// INTERFACE: void sub_automaton_here(Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
-// INTERFACE: void sub_automaton_here(GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
+// INTERFACE: void sub_automaton_here(Automaton& a, const HList& s, bool c) { return vcsn::sub_automaton_here(*a, s, c); }
+// INTERFACE: void sub_automaton_here(GenAutomaton& a, const HList& s, bool c) { return vcsn::sub_automaton_here(*a, s, c); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

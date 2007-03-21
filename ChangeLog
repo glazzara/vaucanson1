@@ -1,5 +1,18 @@
 2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Correct vaucanswig interface.
+	* eps_removal.hh,
+	* normalized.hh,
+	* product.hh,
+	* realtime.hh,
+	* standard.hh,
+	* standard_of.hh,
+	* sub_automaton.hh,
+	* thompson.hh:
+	Corrected wrong interface comments.
+
+2007-11-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add a missing inline
 	* include/vaucanson/algorithms/aut_to_exp.hxx:
 	Added a missing inline to correct a multiple definition error found

@@ -30,8 +30,8 @@
  */
 /** @} */
 
-// INTERFACE: void standard_of(Automaton& a, const Exp& e) { return vcsn::standard_of(*a, e.value()); }
-// INTERFACE: void standard_of(GenAutomaton& a, const Exp& e) { return vcsn::standard_of(*a, e.value()); }
+// INTERFACE: void standard_of(Automaton& a, const ExpImpl& e) { return vcsn::standard_of(*a, e.value()); }
+// INTERFACE: void standard_of(GenAutomaton& a, const ExpImpl& e) { return vcsn::standard_of(*a, e.value()); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

@@ -30,8 +30,8 @@
  */
 /** @} */
 
-// INTERFACE: bool is_realtime(Automaton& a) { return vcsn::is_realtime(*a); }
-// INTERFACE: bool is_realtime(GenAutomaton& a) { return vcsn::is_realtime(*a); }
+// INTERFACE: bool is_realtime(const Automaton& a) { return vcsn::is_realtime(*a); }
+// INTERFACE: bool is_realtime(const GenAutomaton& a) { return vcsn::is_realtime(*a); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/direction.hh>
