@@ -245,7 +245,7 @@ namespace vcsn {
     | ListChooser |
     `------------*/
 
-  ListChooser::ListChooser(const std::list<hstate_t>& l) :
+  inline ListChooser::ListChooser(const std::list<hstate_t>& l) :
     list_(l),
     pos_(l.begin())
   {
