@@ -1,5 +1,10 @@
 2007-03-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix the compilation of libvcsn before taf-kit
+	* Makefile.am: Add an entry for the lib directory in SUBDIRS.
+
+2007-03-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix compilation issues during make check (next part)
 	* include/vaucanson/contexts/transducer_maker.thh:
 	Add missing includes.
