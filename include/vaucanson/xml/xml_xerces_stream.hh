@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -47,10 +47,7 @@ class XMLPARSER_EXPORT XMLXercesStream : public XMLFormatTarget
      */
     virtual void writeChars (const XMLByte* const toWrite,
 			     const unsigned int,
-			     XMLFormatter* const)
-    {
-      os_ << toWrite;
-    }
+			     XMLFormatter* const);
 
     virtual void flush() {};
 
@@ -65,5 +62,9 @@ class XMLPARSER_EXPORT XMLXercesStream : public XMLFormatTarget
 };
 
 XERCES_CPP_NAMESPACE_END
+
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
+#  include <vaucanson/xml/xml_xerces_stream.hxx>
+# endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
 #endif // ! VCSN_XML_XERCES_STREAM_HH

@@ -47,7 +47,7 @@ namespace vcsn
 				   const std::string& name)
     {
       create_document(aut, name);
-      tools::print_document((xercesc::DOMImplementationLS*) impl_, root_, os);
+      tools::print_document(impl_, root_, os);
     }
 
     template <class Auto>

@@ -853,12 +853,12 @@ namespace vcsn
 	using namespace xercesc;
 
 	XMLXercesStream<OStream>* target = new XMLXercesStream<OStream>(os);
-	DOMWriter* theSerializer = (impl)->createDOMWriter();
+	DOMWriter* writer = (impl)->createDOMWriter();
 
-	if (theSerializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-	  theSerializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
-	theSerializer->writeNode(target, *node);
-	theSerializer->release();
+	if (writer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
+	  writer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
+	writer->writeNode(target, *node);
+	writer->release();
 	os << std::endl;
       }
 

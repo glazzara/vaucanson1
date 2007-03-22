@@ -132,7 +132,7 @@ namespace vcsn
   OStream& operator << (OStream& out, const xml::xml_session& s)
   {
     xercesc::XMLPlatformUtils::Initialize();
-    xml::tools::print_document((xercesc::DOMImplementationLS*) s.impl, s.root, out);
+    xml::tools::print_document(s.impl, s.root, out);
 
     return out;
   }

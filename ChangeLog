@@ -1,3 +1,13 @@
+2007-03-22  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Clean up XML part 
+	* xml/session.hxx: remove useless cast.
+	* xml/tools.hxx: conform to standard.
+	* xml/xml_converter.hxx: remove useless cast.
+	* xml/xml_xerces_stream.hh: remove implementation in hh.
+	  correct header copyright.
+	* xml/xml_xerces_stream.hxx: New. Add implementation in hxx.
+
 2007-03-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix the compilation of libvcsn before taf-kit
