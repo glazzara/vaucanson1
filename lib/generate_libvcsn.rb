@@ -88,7 +88,6 @@ end
 
 # write a *.mk for `type`
 def write_makefile(type, context)
-  puts("Generating " + type + "/lib" + type + ".mk")
   File.open(type + "/lib" + type + ".mk", "w") { |out|
     out.puts("## Vaucanson, a generic library for finite state machines.",
 	     "## Copyright (C) " + Time.now.strftime("%Y") + " The Vaucanson Group.",
@@ -111,11 +110,19 @@ def write_makefile(type, context)
 	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
     out.print "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
     files = Dir.glob(type + "/*cc").sort!
-    files.each { |filename| out.print "\\\n\t\t\t", filename, "\t" }
+    files.each { |filename|
+      if File.exist?("../include/vaucanson/algorithms/" + File.basename(filename, ".cc") + ".hh")
+	out.print "\\\n\t\t\t", filename, "\t"
+      else
+	File.unlink(filename)
+	puts "Removing " + filename
+      end
+    }
     out.print "\n\n"
     out.puts("MAINTAINERCLEANFILES += $(lib" + type.gsub(/-/, "_") + "_la_SOURCES) " +
 	      type + "/lib" + type + ".mk")
   }
+  puts("Generating " + type + "/lib" + type + ".mk")
 end
 
 # write the output file `type`/`fname` with `contents`

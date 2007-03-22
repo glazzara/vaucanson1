@@ -1,3 +1,10 @@
+2007-03-22  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix compilation errors in libvcsn
+	* lib/generate_libvcsn.rb: fix.
+	Automatically remove .cc files in lib/vcsn-*/ which do not have a
+	corresponding header in include/vaucanson/algorithms/
+
 2007-03-22  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Clean up XML part 
