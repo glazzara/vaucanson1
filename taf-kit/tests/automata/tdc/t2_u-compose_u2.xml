@@ -1,4 +1,6 @@
+
 <automaton xmlns="http://vaucanson.lrde.epita.fr">
+
   <labelType>
     <monoid generatorType="letters" type="product">
       <monoid generatorType="letters" type="free">
@@ -12,6 +14,7 @@
     </monoid>
     <semiring operations="classical" set="B"/>
   </labelType>
+
   <content>
     <states>
       <state name="s0"/>
@@ -23,16 +26,16 @@
       <state name="s10"/>
     </states>
     <transitions>
-      <transition src="s1" dst="s0" out="v"/>
-      <transition src="s2" dst="s4" in="a"/>
-      <transition src="s8" dst="s10" out="u"/>
-      <transition src="s9" dst="s0" out="v"/>
-      <transition src="s0" dst="s1" in="b"/>
-      <transition src="s0" dst="s2" in="b"/>
-      <transition src="s4" dst="s8" in="a"/>
-      <transition src="s10" dst="s8" in="a"/>
-      <transition src="s4" dst="s9" out="u"/>
-      <transition src="s10" dst="s9" out="u"/>
+      <transition dst="s0" out="v" src="s1"/>
+      <transition dst="s4" in="a" src="s2"/>
+      <transition dst="s10" out="u" src="s8"/>
+      <transition dst="s0" out="v" src="s9"/>
+      <transition dst="s1" in="b" src="s0"/>
+      <transition dst="s2" in="b" src="s0"/>
+      <transition dst="s8" in="a" src="s4"/>
+      <transition dst="s8" in="a" src="s10"/>
+      <transition dst="s9" out="u" src="s4"/>
+      <transition dst="s9" out="u" src="s10"/>
       <initial state="s0"/>
       <initial state="s1"/>
       <initial state="s2"/>
@@ -42,4 +45,5 @@
       <final state="s10"/>
     </transitions>
   </content>
+
 </automaton>

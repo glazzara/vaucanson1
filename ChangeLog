@@ -1,3 +1,10 @@
+2007-03-23  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	update tests according to the new output
+	We should at end avoid using 'diff' to compare automata.
+	* tests/automata/tdc/t1_compose_u1.xml: here.
+	* tests/automata/tdc/t2_u-compose_u2.xml: here.
+
 2007-03-22  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix compilation errors in libvcsn
