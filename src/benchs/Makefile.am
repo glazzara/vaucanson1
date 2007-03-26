@@ -1,10 +1,10 @@
 SUBDIRS = common determinization 				\
 	  minimization_debruijn	minimization_2n derived_terms	\
-	  quotient composition
+	  quotient composition eps_removal
 
 BENCHDIRS = determinization minimization_debruijn 		\
 	    derived_terms minimization_2n quotient		\
-	    composition 
+	    composition eps_removal
 
 benchs:
 	for f in $(BENCHDIRS); do				\

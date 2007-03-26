@@ -1,3 +1,14 @@
+2007-03-26  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add benchmarks for eps_removal.
+	* Makefile.am: Add eps_removal to {BENCH,SUB}DIRS.
+	* common/bench_constructs.hh: Add an automaton contruction function
+	dedicated to benching eps_removal.
+	* eps_removal/Makefile.am,
+	* eps_removal/eps_removal-bench.cc,
+	* eps_removal/eps_removal_bench.hh,
+	* eps_removal: New.
+
 2007-03-23  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	update tests according to the new output

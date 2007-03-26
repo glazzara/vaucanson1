@@ -52,4 +52,28 @@ void debruijn(unsigned n_value, automaton_t& an)
   }
 }
 
+/// Create a special automaton for benching eps_removal
+void aut_linear_eps(unsigned n, automaton_t& a)
+{
+  int size = n * 500;
+
+  std::vector<hstate_t> c(size);
+  monoid_elt_t monoid_identity =
+    vcsn::algebra::identity_as<monoid_elt_value_t>::of(a.series().monoid());
+  semiring_elt_t semiring_elt_id =
+    vcsn::algebra::identity_as<semiring_elt_value_t>::of(a.series().semiring());
+  series_set_elt_t s(a.series());
+
+  s.assoc(monoid_identity.value(), semiring_elt_id.value());
+  for (unsigned i = 0; i < size; ++i)
+    c[i] = a.add_state();
+  for (unsigned i = 0; i < size; ++i)
+    if (i % 2)
+      a.add_series_transition(c[i], c[(i+1) % size], s);
+    else
+      a.add_letter_transition(c[i], c[(i+1) % size], 'a');
+  a.set_initial(c[0]);
+  a.set_final(c[size - 1]);
+}
+
 #endif // ! VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH
