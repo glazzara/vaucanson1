@@ -73,7 +73,8 @@ namespace vcsn {
     }
 
     initial_iterator i;
-    for_all_initial_states(next, a)
+    for (initial_iterator next = a.initial().begin();
+	 next != a.initial().end();)
     {
       //We need to store the next iterator before using the current one
       //to avoid an invalid iterator after having called set_final.
@@ -89,7 +90,8 @@ namespace vcsn {
     }
 
     final_iterator f;
-    for_all_final_states(next, a)
+    for (final_iterator next = a.final().begin();
+	 next != a.final().end();)
     {
       //We need to store the next iterator before using the current one
       //to avoid an invalid iterator after having called set_final.

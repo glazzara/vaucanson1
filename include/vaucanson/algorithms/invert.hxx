@@ -53,7 +53,8 @@ namespace vcsn
       map_t_u[*p] = u.add_state ();
 
     initial_iterator i_it;
-    for_all_initial_states (next, t)
+    for (initial_iterator next = t.initial().begin(), next_end = t.initial().end();
+	 next != next_end;)
     {
       //We need to store the next iterator before using the current one
       //to avoid an invalid iterator after having called set_final.
@@ -65,7 +66,8 @@ namespace vcsn
     }
 
     final_iterator f_it;
-    for_all_final_states (next, t)
+    for (final_iterator next = t.final().begin(), next_end = t.final().end();
+	 next != next_end;)
     {
       //We need to store the next iterator before using the current one
       //to avoid an invalid iterator after having called set_final.

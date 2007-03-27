@@ -1,3 +1,11 @@
+2007-03-27  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix bug in invert and extension
+	A macro loop was still used even if the iterator was
+	manually incremented.
+	* extension.hxx: Remove the faulty macros.
+	* invert.hxx: Remove the faulty macros.
+
 2007-03-26  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Add benchmarks for eps_removal.
