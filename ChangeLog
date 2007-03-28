@@ -1,3 +1,11 @@
+2007-03-28  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Correct some mistakes on eps_removal benchs.
+	* src/benchs/eps_removal/Makefile.am: Suppress calls to FSM binaries.
+	* src/benchs/eps_removal/eps_removal-bench.cc,
+	* src/benchs/eps_removal/eps_removal_bench.hh: Correct name and
+	copyright in header.
+
 2007-03-27  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix bug in invert and extension

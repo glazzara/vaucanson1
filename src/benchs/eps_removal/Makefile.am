@@ -19,11 +19,7 @@ benchs: $(EXTRA_PROGRAMS)
 		echo "----------------------For $$n_states states";	\
 		echo "--------------VCSN boolean:";			\
 		./eps_removal_boolean-bench $$n_states;			\
-		echo "--------------VCSN z:";				\
+		echo "--------------VCSN Z:";				\
 		./eps_removal_z-bench $$n_states;			\
-		if [ ! -z "$$FSM_PATH" ]; then				\
-		  echo "--------------FSM:";				\
-		  time sh tmp.det $$n_states;				\
-		fi;							\
-	done;								\
-	rm -f tmp.det
+	done;
+

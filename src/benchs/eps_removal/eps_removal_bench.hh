@@ -1,4 +1,4 @@
-// determinization_bench.hh: this file is part of the Vaucanson project.
+// eps_removal_bench.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
