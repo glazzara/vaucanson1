@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -84,31 +84,33 @@ namespace vcsn {
   {
     TIMER_SCOPED("union_of_normalized");
     AUTOMATON_TYPES(lhs_t);
-    std::stack<hstate_t> init;
-    sum_here(lhs, rhs);
+    monoid_elt_t monoid_identity =
+      lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
     hstate_t new_i = lhs.add_state();
     hstate_t new_f = lhs.add_state();
-    monoid_elt_t ident =
-      lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
+
+    sum_here(lhs, rhs);
+
     for_all_initial_states(i, lhs)
+      lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(monoid_identity));
+    typename lhs_t::initial_iterator i;
+    for (typename lhs_t::initial_iterator next = lhs.initial().begin();
+	 next != lhs.initial().end();)
     {
-      lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(ident));
-      init.push(*i);
+      i = next;
+      ++next;
+      lhs.unset_initial(*i);
     }
-    while (!init.empty())
-    {
-      lhs.unset_initial(init.top());
-      init.pop();
-    }
+
     for_all_final_states(f, lhs)
+      lhs.add_spontaneous(*f, new_f, lhs.get_final(*f).get(monoid_identity));
+    typename lhs_t::final_iterator f;
+    for (typename lhs_t::final_iterator next = lhs.final().begin();
+	 next != lhs.final().end();)
     {
-      lhs.add_spontaneous(*f, new_f, lhs.get_final(*f).get(ident));
-      init.push(*f);
-    }
-    while (!init.empty())
-    {
-      lhs.unset_final(init.top());
-      init.pop();
+      f = next;
+      ++next;
+      lhs.unset_final(*f);
     }
     lhs.set_final(new_f);
     lhs.set_initial(new_i);
@@ -143,19 +145,21 @@ namespace vcsn {
   {
     TIMER_SCOPED("is_normalized");
     typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
+    typedef typename auto_t::series_set_elt_t		series_set_elt_t;
 
-    if (a.initial().size() != 1
-	|| a.final().size() != 1
-	|| (a.get_initial(*a.initial().begin())
-	    != a.series().identity(SELECT(series_set_elt_value_t)))
-	|| (a.get_final(*a.final().begin())
-	    != a.series().identity(SELECT(series_set_elt_value_t))))
+    series_set_elt_t series_identity =
+      a.series().identity(SELECT(series_set_elt_value_t));
+
+    if (a.initial().size() != 1	||
+	a.final().size() != 1 ||
+	a.get_initial(*a.initial().begin()) != series_identity ||
+	a.get_final(*a.final().begin()) != series_identity)
       return false;
 
     // Check that there is no input transition on the initial state
     // and no output transition on the final state.
-    return !has_successors(a, *a.final().begin())
-      && !has_predecessors(a, *a.initial().begin());
+    return !has_successors(a, *a.final().begin()) &&
+      !has_predecessors(a, *a.initial().begin());
   }
 
   template<typename A, typename T>
@@ -175,8 +179,8 @@ namespace vcsn {
   {
     TIMER_SCOPED("concatenate_of_normalized");
     AUTOMATON_TYPES(rhs_t);
-    typedef std::map<hstate_t, hstate_t>	       map_lhs_rhs_t;
-    typedef std::set<htransition_t>			       delta_ret_t;
+    typedef std::map<hstate_t, hstate_t>	map_lhs_rhs_t;
+    typedef std::set<htransition_t>		delta_ret_t;
 
     hstate_t	glue_state = *lhs.final().begin();
 
@@ -213,31 +217,26 @@ namespace vcsn {
     /*------------------------.
     | Concat of transitions.  |
     `------------------------*/
-    delta_ret_t	dst;
-    for_all_states(i, rhs)
-    {
-      dst.clear();
-      rhs.deltac(dst, *i, delta_kind::transitions());
-      for (typename delta_ret_t::const_iterator d = dst.begin();
-	   d != dst.end();
-	   ++d)
-	lhs.add_transition(map_h[rhs.src_of(*d)],
-			   map_h[rhs.dst_of(*d)],
-			   rhs.label_of(*d));
-    }
+    for_all_transitions(t, rhs)
+      lhs.add_transition(map_h[rhs.src_of(*t)],
+			 map_h[rhs.dst_of(*t)],
+			 rhs.label_of(*t));
+
     // If initial multiplicity of rhs isn't 1, add a spontaneous transition
     // between lhs final state and rhs initial state, with lhs final
     // multiplicity * rhs initial multiplicity.
     if (!merge_lhs_final_and_rhs_initial)
     {
-      monoid_elt_t ident =
+      monoid_elt_t monoid_identity =
 	rhs.series().monoid().identity(SELECT(monoid_elt_value_t));
-      lhs.add_spontaneous(*lhs.final().begin(),
-			  map_h[*rhs.initial().begin()],
-			  lhs.get_final(*lhs.final().begin()).get(ident) *
-			  rhs.get_initial(*rhs.initial().begin()).get(ident));
-      lhs.unset_final(*lhs.final().begin());
-      lhs.unset_initial(map_h[*rhs.initial().begin()]);
+      hstate_t i = *rhs.initial().begin();
+      hstate_t f = *lhs.final().begin();
+
+      lhs.add_spontaneous(f, map_h[i],
+			  lhs.get_final(f).get(monoid_identity) *
+			  rhs.get_initial(i).get(monoid_identity));
+      lhs.unset_final(f);
+      lhs.unset_initial(map_h[i]);
     }
   }
 
@@ -269,17 +268,16 @@ namespace vcsn {
   {
     TIMER_SCOPED("star_of_normalized");
     AUTOMATON_TYPES(auto_t);
-    monoid_elt_t ident =
+    monoid_elt_t monoid_identity =
       a.series().monoid().identity(SELECT(monoid_elt_value_t));
-    a.add_spontaneous(*a.final().begin(),
-		      *a.initial().begin(),
-		      a.get_initial(*a.initial().begin()).get(ident));
     hstate_t old_i = *a.initial().begin();
     hstate_t old_f = *a.final().begin();
     hstate_t new_i = a.add_state();
     hstate_t new_f = a.add_state();
-    a.add_spontaneous(new_i, old_i, a.get_initial(old_i).get(ident));
-    a.add_spontaneous(old_f, new_f, a.get_final(old_f).get(ident));
+
+    a.add_spontaneous(old_f, old_i, a.get_initial(old_i).get(monoid_identity));
+    a.add_spontaneous(new_i, old_i, a.get_initial(old_i).get(monoid_identity));
+    a.add_spontaneous(old_f, new_f, a.get_final(old_f).get(monoid_identity));
     a.add_spontaneous(new_i, new_f);
     a.set_final(new_f);
     a.unset_final(old_f);

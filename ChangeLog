@@ -1,3 +1,9 @@
+2007-03-29  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Clean up normalized.hxx.
+	* include/vaucanson/algorithms/normalized.hxx: Iterate on transitions
+	instead of iterating on transitions of each state. Rename variables.
+
 2007-03-28  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Correct some mistakes on eps_removal benchs.
