@@ -1,4 +1,4 @@
-#include <vaucanson/algebra/implementation/alphabets/set_alphabet.hh>
+#include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
 #include <set>
 #include <utility>
 
