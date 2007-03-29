@@ -121,7 +121,7 @@ bool thompson_test(tests::Tester& tg)
   using vcsn::algebra::zero_as;
   using vcsn::algebra::identity_as;
 
-  TEST_ON("0", zero_as<exp_t>::of(ss), 0, 0, 0, 0);
+  TEST_ON("0", zero_as<exp_t>::of(ss), 2, 0, 0, 0);
   TEST_ON("1", identity_as<exp_t>::of(ss), 2, 0, 0, 1);
   TEST_ON("a", a, 2, 1, 0, 0);
   TEST_ON("b", b, 2, 0, 1, 0);
