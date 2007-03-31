@@ -127,10 +127,8 @@ namespace vcsn {
       zero()
       {
 	auto_ = new automaton_t(automata_set_t(series_));
-	hstate_t new_i = auto_->add_state();
-	hstate_t new_f = auto_->add_state();
-	auto_->set_initial(new_i);
-	auto_->set_final(new_f);
+	auto_->set_initial(auto_->add_state());
+	auto_->set_final(auto_->add_state());
       }
 
       virtual void

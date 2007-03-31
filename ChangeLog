@@ -1,3 +1,9 @@
+2007-03-31  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Respect coding standards.
+	* include/vaucanson/algorithms/normalized.hxx: Follow coding standards.
+	* include/vaucanson/algorithms/thompson.hxx: Remove unused variables.
+
 2007-03-29  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Follow the renaming done in r1598.

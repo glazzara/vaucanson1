@@ -150,16 +150,16 @@ namespace vcsn {
     series_set_elt_t series_identity =
       a.series().identity(SELECT(series_set_elt_value_t));
 
-    if (a.initial().size() != 1	||
-	a.final().size() != 1 ||
-	a.get_initial(*a.initial().begin()) != series_identity ||
-	a.get_final(*a.final().begin()) != series_identity)
+    if (a.initial().size() != 1
+	|| a.final().size() != 1
+	|| a.get_initial(*a.initial().begin()) != series_identity
+	|| a.get_final(*a.final().begin()) != series_identity)
       return false;
 
     // Check that there is no input transition on the initial state
     // and no output transition on the final state.
-    return !has_successors(a, *a.final().begin()) &&
-      !has_predecessors(a, *a.initial().begin());
+    return !has_successors(a, *a.final().begin())
+      && !has_predecessors(a, *a.initial().begin());
   }
 
   template<typename A, typename T>
