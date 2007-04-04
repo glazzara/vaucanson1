@@ -32,7 +32,6 @@ vcsn.each_key { |type| system("mkdir -p " + type) }
 
 # testing if a source file needs to be created
 def create?(type, file)
-  file !~ /finite_support_conversion.hh/ and
   file !~ /krat_exp_cderivation.hh/ and
   file !~ /thompson.hh/ and
   (
@@ -73,6 +72,7 @@ def create?(type, file)
       file !~ /composition_cover.hh/ and
       file !~ /determinize.hh/ and
       file !~ /extension.hh/ and
+      file !~ /finite_support_conversion.hh/ and
       file !~ /forward_realtime.hh/ and
       file !~ /is_letterized.hh/ and
       file !~ /is_normalized.hh/ and
@@ -182,6 +182,7 @@ files.each { |file|
 	  tmp = tmp.gsub(/HList/, 'std::set<hstate_t>')
 	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_CONTEXT::rat_exp_impl_t')
 	  tmp = tmp.gsub(/Exp/, 'VCSN_CONTEXT::rat_exp_t')
+	  tmp = tmp.gsub(/Series/, 'VCSN_CONTEXT::series_set_elt_t')
 	  output.push("  template", tmp)
 	end
       end
