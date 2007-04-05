@@ -1,5 +1,18 @@
 2007-04-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix vaucanswig
+	* configure.ac: enable the use of vaucanswig.
+	* include/vaucanson/algorithms/eps_removal.hh: fix vaucanswig interface.
+	* vaucanswig/expand.sh,
+	* vaucanswig/meta/automaton.hh,
+	* vaucanswig/meta/context.hh,
+	* vaucanswig/meta/vaucanswig_automaton.i:
+	    Resolve various compilation issues.
+	    Use xml for input/output instead of io.
+	    Use vaucanson *_structures.hh.
+
+2007-04-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix do_backward_realtime_here definition.
 	* include/vaucanson/algorithms/backward_realtime.hxx:
 	remove a const which shouldn't be here.

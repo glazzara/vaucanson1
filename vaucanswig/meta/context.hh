@@ -57,7 +57,7 @@ struct vcsn_context : vcsn::virtual_context
     virtual std::list<char> alphabet_letters() const
     { return std::list<char>(alphabet().begin(), alphabet().end()); }
 
-    virtual std::string describe_alphabet(bool cpp) const
+    virtual std::string describe_alphabet(bool cpp = true) const
     {
       std::ostringstream ret;
       ret << "Alphabet (" << alphabet() << ')';
@@ -66,7 +66,7 @@ struct vcsn_context : vcsn::virtual_context
       return ret.str();
     }
 
-    virtual std::string describe_semiring(bool cpp) const
+    virtual std::string describe_semiring(bool cpp = true) const
     {
       std::string ret = "Semiring";
       if (cpp)
@@ -74,7 +74,7 @@ struct vcsn_context : vcsn::virtual_context
       return ret;
     }
 
-    virtual std::string describe_monoid(bool cpp) const
+    virtual std::string describe_monoid(bool cpp = true) const
     {
       std::string ret = "Monoid (" + describe_alphabet(cpp) + ')';
       if (cpp)
@@ -82,7 +82,7 @@ struct vcsn_context : vcsn::virtual_context
       return ret;
     }
 
-    virtual std::string describe_series(bool cpp) const
+    virtual std::string describe_series(bool cpp = true) const
     {
       std::string ret = "Series (" + describe_semiring(cpp)
 	+ ", " + describe_monoid(cpp) + ')';
@@ -91,7 +91,7 @@ struct vcsn_context : vcsn::virtual_context
       return ret;
     }
 
-    virtual std::string describe_automata_structure(bool cpp) const
+    virtual std::string describe_automata_structure(bool cpp = true) const
     {
       std::string ret = "AutomataSet (" + describe_series(cpp) + ')';
       if (cpp)

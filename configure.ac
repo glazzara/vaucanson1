@@ -46,9 +46,7 @@ AM_PATH_PYTHON([2.2])
 
 AC_ARG_ENABLE([vaucanswig],
 	[AC_HELP_STRING([--enable-vaucanswig],
-			[enable building vaucanswig])],
-	[enable_vaucanswig=no
-	 AC_MSG_WARN([Vaucanswig  WILL NOT  be  built])])
+			[enable building vaucanswig])])
 
 if test "x$enable_vaucanswig" = "xyes"; then
   AC_CHECK_SWIG13

@@ -68,6 +68,7 @@ do_family_interface_impl() {
   afapp "$AF" "%define alg_${AF}_interface_impl(Automaton, GenAutomaton, Series, Exp, HList)"
   cat "$VAUC/vaucanson/algorithms/$AF.hh" \
      | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE:,static ,g;p;}' \
+     | sed -e 's/ExpImpl/Exp/' \
      >>"$AFDB"
   afapp "$AF" "%enddef"
 }
@@ -78,6 +79,7 @@ do_family_interface() {
   afapp "$AF" "%define alg_${AF}_interface(Automaton, GenAutomaton, Series, Exp, HList)"
   cat "$VAUC/vaucanson/algorithms/$AF.hh" \
      | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE: \([^{]*\).*$,static \1;,g;p;}' \
+     | sed -e 's/ExpImpl/Exp/' \
      >>"$AFDB"
   afapp "$AF" "%enddef"
 }
@@ -198,7 +200,7 @@ INCLUDES = -I/usr/include/python\$(PYTHON_VERSION) -I\$(srcdir)/../src -I\$(srcd
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS
 AM_CXXFLAGS = \$(CXXFLAGS_DEBUG)
-AM_LDFLAGS = -module -avoid-version
+AM_LDFLAGS = -avoid-version
 
 EOF
 }
@@ -235,17 +237,23 @@ dump_python()
     for mod in $MODULES; do
       echo "libvs_$(canonical $mod)_la_SOURCES = vaucanswig_$(canonical $mod)_wrap.cxx"
       if [ "$mod" = "core" ]; then
-        echo "libvs_core_la_LIBADD = ../meta/libvv.la -lswigpy"
+        echo "libvs_core_la_LIBADD = ../meta/libvv.la"
       else
         if test -r "$VAUCANSWIG/src/$mod.deps"; then
            printf "libvs_$(canonical $mod)_la_LIBADD ="
            for dep in `cat "$VAUCANSWIG/src/$mod.deps"`; do
               printf " libvs_${dep}.la"
            done
-           echo
         else
-           echo "libvs_$(canonical $mod)_la_LIBADD = libvs_core.la"
+           printf "libvs_$(canonical $mod)_la_LIBADD = libvs_core.la"
         fi
+#	case "$mod" in
+#	  boolean_automaton*) printf ' $(top_builddir)/lib/libvcsn-b.la';;
+#	  z_automaton*) printf ' $(top_builddir)/lib/libvcsn-z.la';;
+#	  z_max_plus_automaton*) printf ' $(top_builddir)/lib/libvcsn-z-max.la';;
+#	  z_min_plus_automaton*) printf ' $(top_builddir)/lib/libvcsn-z-min.la';;
+#	esac
+	echo
       fi
     done
     echo
@@ -257,7 +265,7 @@ dump_python()
          sdir=meta
       fi
       echo "vaucanswig_${mod}_wrap.cxx vaucanswig_${mod}.py: \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
-      printf "\t\$(SWIG) -noruntime -c++ -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
+      printf "\t\$(SWIG) -c++ -fcompact -fvirtual -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
       echo
     done
 

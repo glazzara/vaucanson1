@@ -19,6 +19,7 @@
 
 #include "context.hh"
 #include "vauto.hh"
+#include <vaucanson/xml/XML.hh>
 #include <vaucanson/tools/io.hh>
 #include <vaucanson/tools/usual_io.hh>
 #include <vaucanson/tools/simple_format.hh>
@@ -426,9 +427,9 @@ struct vcsn_automaton : vcsn::virtual_automaton
     virtual void load(std::istream& in, const std::string& format)
     {
       if (format.substr(0, 6) == "simple")
-      {
 	in >> vcsn::automaton_loader(*auto_, conv_, vcsn::io::simple());
-      }
+      else if (format.substr(0, 3) == "XML")
+	in >> vcsn::automaton_loader(*auto_, conv_, vcsn::xml::XML());
       else
 	throw std::runtime_error("format not supported: " + format);
     }
@@ -446,6 +447,8 @@ struct vcsn_automaton : vcsn::virtual_automaton
       }
       else if (format.substr(0, 6) == "simple")
 	out << vcsn::automaton_saver(*auto_, conv_, vcsn::io::simple());
+      else if (format.substr(0, 3) == "XML")
+	out << vcsn::automaton_saver(*auto_, conv_, vcsn::xml::XML());
       else
 	throw std::runtime_error("format not supported: " + format);
     }

@@ -9,10 +9,10 @@
   %import vaucanswig_## Kind ##_context.i
 
   %{
-#include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/z_automaton.hh>
-#include <vaucanson/z_max_plus_automaton.hh>
-#include <vaucanson/z_min_plus_automaton.hh>
+#include <vaucanson/boolean_automaton_structures.hh>
+#include <vaucanson/z_automaton_structures.hh>
+#include <vaucanson/z_max_plus_automaton_structures.hh>
+#include <vaucanson/z_min_plus_automaton_structures.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 #include <vaucanson/automata/implementation/generalized.hh>
 #include <stdexcept>
@@ -58,7 +58,7 @@ namespace Kind ##_types
 
       const Kind ##_automata_set_t& structure() const;
 
-      virtual const virtual_context &context() const;
+      virtual const vcsn::virtual_context &context() const;
 
       virtual bool has_state(int) const;
       virtual bool has_transition(int) const;
@@ -128,14 +128,14 @@ namespace Kind ##_types
 	  std::ifstream in(fname);
 	  if (!in)
 	    throw std::runtime_error(std::string("cannot open file: ") + fname);
-	  self->load(in, "simple");
+	  self->load(in, "XML");
 	}
 	void save(const char* fname) const
 	{
 	  std::ofstream out(fname);
 	  if (!out)
 	    throw std::runtime_error(std::string("cannot open file: ") + fname);
-	  self->save(out, "simple");
+	  self->save(out, "XML");
 	}
       }
 
@@ -171,7 +171,7 @@ namespace Kind ##_types
       const Kind ##_automata_set_t& structure() const;
 
 
-      virtual const virtual_context &context() const;
+      virtual const vcsn::virtual_context &context() const;
 
       virtual bool has_state(int) const;
       virtual bool has_transition(int) const;
@@ -240,14 +240,14 @@ namespace Kind ##_types
 	  std::ifstream in(fname.c_str());
 	  if (!in)
 	    throw std::runtime_error("cannot open file: " + fname);
-	  self->load(in, "simple");
+	  self->load(in, "XML");
 	}
 	bool save(const std::string& fname) const
 	{
 	  std::ofstream out(fname.c_str());
 	  if (!out)
 	    throw std::runtime_error("cannot open file: " + fname);
-	  self->save(out, "simple");
+	  self->save(out, "XML");
 	}
       }
   };
