@@ -1,3 +1,9 @@
+2007-04-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix do_backward_realtime_here definition.
+	* include/vaucanson/algorithms/backward_realtime.hxx:
+	remove a const which shouldn't be here.
+
 2007-04-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	libvcsn, add support for finite_support_conversion.

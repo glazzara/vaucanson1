@@ -28,7 +28,7 @@ namespace vcsn {
 
   template <class A_, typename Auto_>
   void
-  do_backward_realtime_here(const AutomataBase<A_>&b, const Auto_& a)
+  do_backward_realtime_here(const AutomataBase<A_>&b, Auto_& a)
   {
     do_realtime_here (b, a, misc::backward);
   }
