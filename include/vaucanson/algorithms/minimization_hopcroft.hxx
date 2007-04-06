@@ -49,48 +49,48 @@ namespace vcsn
       template <typename input_t>
       struct splitter_functor
       {
-	  AUTOMATON_TYPES (input_t);
-	  AUTOMATON_FREEMONOID_TYPES (input_t);
-	  HOPCROFT_TYPES ();
+	AUTOMATON_TYPES (input_t);
+	AUTOMATON_FREEMONOID_TYPES (input_t);
+	HOPCROFT_TYPES ();
 
-	  const input_t& input_;
-	  hstates_t going_in_;
-	  class_of_t& class_of_;
-	  std::list<unsigned> maybe_splittable_;
-	  std::vector<unsigned> count_for_;
+	const input_t& input_;
+	hstates_t going_in_;
+	class_of_t& class_of_;
+	std::list<unsigned> maybe_splittable_;
+	std::vector<unsigned> count_for_;
 
-	  splitter_functor (const input_t& input, hstate_t max_state,
-			    class_of_t& class_of)
-	    : input_ (input), going_in_ (), class_of_(class_of),
-	      count_for_ (max_state)
-	  {}
+	splitter_functor (const input_t& input, hstate_t max_state,
+			  class_of_t& class_of)
+	  : input_ (input), going_in_ (), class_of_(class_of),
+	    count_for_ (max_state)
+	{}
 
-	  /// True if there's states going in states with letter \a l.
-	  bool compute_states_going_in (const hstates_t& ss, letter_t l)
-	  {
-	    going_in_.clear ();
-	    maybe_splittable_.clear ();
-	    for_all_const (hstates_t, i, ss)
-	      input_.letter_rdeltaf (*this, *i, l, delta_kind::states ());
-	    return not going_in_.empty ();
-	  }
+	/// True if there's states going in states with letter \a l.
+	bool compute_states_going_in (const hstates_t& ss, letter_t l)
+	{
+	  going_in_.clear ();
+	  maybe_splittable_.clear ();
+	  for_all_const (hstates_t, i, ss)
+	    input_.letter_rdeltaf (*this, *i, l, delta_kind::states ());
+	  return not going_in_.empty ();
+	}
 
-	  /// For each state, store its class (partition) and count.
-	  void operator () (hstate_t state)
-	  {
-	    unsigned class_of_state = class_of_[state];
+	/// For each state, store its class (partition) and count.
+	void operator () (hstate_t state)
+	{
+	  unsigned class_of_state = class_of_[state];
 
-	    if (count_for_[class_of_state] == 0)
-	      maybe_splittable_.push_back (class_of_state);
-	    count_for_[class_of_state]++;
-	    going_in_.insert (state);
-	  }
+	  if (count_for_[class_of_state] == 0)
+	    maybe_splittable_.push_back (class_of_state);
+	  count_for_[class_of_state]++;
+	  going_in_.insert (state);
+	}
 
-	  /// Split @a partition if needed.
-	  void execute (partition_t& partition, to_treat_t& to_treat,
-			unsigned& n_partition)
-	  {
-	    for_all (std::list<unsigned>, inpartition, maybe_splittable_)
+	/// Split @a partition if needed.
+	void execute (partition_t& partition, to_treat_t& to_treat,
+		      unsigned& n_partition)
+	{
+	  for_all (std::list<unsigned>, inpartition, maybe_splittable_)
 	    {
 	      hstates_t& states = partition[*inpartition];
 	      if (states.size () == count_for_[*inpartition])
@@ -129,39 +129,39 @@ namespace vcsn
 	      to_treat.push (std::make_pair (&states_minus_going_in,
 					     n_partition++));
 	    }
-	  }
+	}
       };
 
       /// Functor (self functor for deltaf) that constructs the transitions.
       template <typename input_t, typename output_t>
       struct transition_adder_functor
       {
-	  AUTOMATON_TYPES (input_t);
-	  HOPCROFT_TYPES ();
+	AUTOMATON_TYPES (input_t);
+	HOPCROFT_TYPES ();
 
-	  const input_t& input_;
-	  output_t& output_;
-	  const class_of_t& class_of_;
+	const input_t& input_;
+	output_t& output_;
+	const class_of_t& class_of_;
 
-	  hstate_t src_;
+	hstate_t src_;
 
-	  transition_adder_functor (const input_t& input, output_t& output,
-				    const class_of_t& class_of)
-	    : input_ (input), output_ (output), class_of_ (class_of)
-	  {}
+	transition_adder_functor (const input_t& input, output_t& output,
+				  const class_of_t& class_of)
+	  : input_ (input), output_ (output), class_of_ (class_of)
+	{}
 
-	  /// Add the transitions needed by @a representative.
-	  void execute (hstate_t representative)
-	  {
-	    src_ = class_of_ [representative];
-	    input_.deltaf (*this, representative, delta_kind::transitions ());
-	  }
+	/// Add the transitions needed by @a representative.
+	void execute (hstate_t representative)
+	{
+	  src_ = class_of_ [representative];
+	  input_.deltaf (*this, representative, delta_kind::transitions ());
+	}
 
-	  void operator () (htransition_t t)
-	  {
-	    output_.add_series_transition (src_, class_of_[input_.dst_of (t)],
-					   input_.series_of (t));
-	  }
+	void operator () (htransition_t t)
+	{
+	  output_.add_series_transition (src_, class_of_[input_.dst_of (t)],
+					 input_.series_of (t));
+	}
       };
     }
   }
@@ -238,13 +238,13 @@ namespace vcsn
 
 	// For each letter l in Alphabet,
 	for_all_letters (letter, alphabet)
-	{
-	  if (not splitter.compute_states_going_in (states, *letter))
-	    continue;
-	  splitter.execute (partition, to_treat, n_partition);
-	  if (n_partition == max_state)
-	    break;
-	}
+	  {
+	    if (not splitter.compute_states_going_in (states, *letter))
+	      continue;
+	    splitter.execute (partition, to_treat, n_partition);
+	    if (n_partition == max_state)
+	      break;
+	  }
       }
     }
 
@@ -291,9 +291,115 @@ namespace vcsn
   }
 
 
-  /*----------------------------.
-  | hopcroft_minimization_undet |
-  `----------------------------*/
+  /*-------------------------------------.
+  | Quotient with Boolean multiplicities |
+  `-------------------------------------*/
+  namespace internal
+  {
+    namespace hopcroft_minimization_undet
+    {
+
+# define QUOTIENT_TYPES()						\
+      typedef std::list<hstate_t> partition_t;				\
+      typedef std::vector<partition_t> partition_set_t;			\
+      typedef typename partition_t::iterator partition_iterator;	\
+      typedef std::vector<partition_iterator> places_t;			\
+      typedef std::vector<unsigned> class_of_t;				\
+      typedef std::set<hstate_t> delta_ret_t;
+
+      template <typename input_t>
+      class quotient_splitter
+      {
+      public:
+	AUTOMATON_TYPES(input_t);
+	AUTOMATON_FREEMONOID_TYPES(input_t);
+	QUOTIENT_TYPES();
+
+	quotient_splitter (const automaton_t& input, class_of_t& class_of,
+			   places_t& place, unsigned max_states)
+	  : input_(input),
+	    class_(class_of),
+	    place_(place),
+	    count_for_(max_states, 0),
+	    twin_(max_states, 0),
+	    going_in_(max_states, false)
+	{ }
+
+	/// True if there's states going in states of \a p with letter \a a.
+	bool compute_going_in_states (partition_t& p, letter_t a)
+	{
+	  for_all_(std::vector<bool>, m, going_in_)
+	    *m = false;
+
+	  for_all_(partition_t, s, p)
+	    input_.letter_rdeltaf(*this, *s, a, delta_kind::states());
+	  return !met_class.empty();
+	}
+
+	/// For each state, store its class (partition) and count.
+	void operator() (hstate_t s)
+	{
+	  if (!going_in_[s])
+	  {
+	    going_in_[s] = true;
+	    unsigned i = class_[s];
+	    if (!count_for_[i])
+	      met_class.push_back(i);
+	    count_for_[i]++;
+	  }
+	}
+
+	/// Split partition @a p if needed.
+	void split (partition_set_t& part, partition_t& p, unsigned& max_partitions)
+	{
+	  std::queue<partition_iterator> to_erase;
+
+	  for_all_(std::list<unsigned>, b, met_class)
+	  {
+	    // if all states are predecessors there is no needed split
+	    if (count_for_[*b] == part[*b].size())
+	      continue;
+
+	    twin_[*b] = max_partitions;
+	    ++max_partitions;
+	    bool t = going_in_[part[*b].front()];
+	    for_all_(partition_t, q, part[*b])
+	    {
+	      if (t != going_in_[*q])
+		to_erase.push(place_[*q]);
+	    }
+	  }
+
+	  while (!to_erase.empty())
+	  {
+	    partition_iterator b = to_erase.front();
+	    to_erase.pop();
+	    unsigned i = twin_[class_[*b]];
+	    place_[*b] = part[i].insert(part[i].end(), *b);
+	    class_[*b] = i;
+	    p.erase(b);
+	  }
+
+	  for_all_(std::list<unsigned>, b, met_class)
+	  {
+	    count_for_[*b] = 0;
+	    twin_[*b] = 0;
+	  }
+	  met_class.clear();
+	}
+
+      private:
+	const automaton_t& input_;
+	class_of_t& class_;
+	places_t& place_;
+	std::vector<unsigned> count_for_;
+	std::vector<unsigned> twin_;
+	std::vector<bool> going_in_;
+	std::list<unsigned> met_class;
+      };
+
+    }
+  }
 
   template <typename A, typename input_t, typename output_t>
   void
@@ -305,20 +411,18 @@ namespace vcsn
   {
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
-    typedef std::list<hstate_t> state_list;
-    typedef typename state_list::iterator state_list_iterator;
-    typedef std::set<hstate_t> delta_ret_t;
+    QUOTIENT_TYPES();
 
+    using namespace internal::hopcroft_minimization_undet;
+
+    const alphabet_t& alphabet_(input.series().monoid().alphabet());
     unsigned max_states = 0;
+
     for_all_states(i, input)
       max_states = std::max(unsigned(*i), max_states);
     ++max_states;
     // to avoid special case problem (one state initial and final ...)
     max_states = std::max(max_states, 2u);
-
-    const alphabet_t& alphabet_(input.series().monoid().alphabet());
-    std::vector<letter_t> alphabet(alphabet_.begin(), alphabet_.end());
-    unsigned max_letters = alphabet.size();
 
     /*--------------------------.
     | To label the subsets of Q |
@@ -328,41 +432,23 @@ namespace vcsn
     /*-----------------------------------------.
     | To manage efficiently the partition of Q |
     `-----------------------------------------*/
-    std::vector<unsigned>	  class_(max_states);
-    std::vector<state_list>	  part(max_states);
-    // Avoid singular iterators in the construction.
-    std::vector<state_list_iterator> place(max_states, state_list().end());
-
-    /*------------------------.
-    | To manage the splitting |
-    `------------------------*/
-    std::vector<bool>	  split(max_states);
-    std::vector<unsigned> twin(max_states);
+    class_of_t		class_(max_states);
+    partition_set_t	part(max_states);
+    places_t		place(max_states);
 
     /*-------------------------.
     | To have a list of (P, a) |
     `-------------------------*/
-    typedef std::pair<unsigned, unsigned> pair_t;
-    std::list<pair_t>	list;
-    // FIXME: There is no delete.
-    // FIXME: There is no better structure for a Boolean matrix?
-    // It looks expensive (I guess a bool is a char at best here).
-    // FIXME: RL says that vector<bool> is expected to be fast and
-    // space efficient: give it a try.
-    bool** list_mat = new bool*[max_states];
-    for (unsigned p = 0; p < max_states; ++p)
-      list_mat[p] = new bool[max_letters];
+    typedef std::pair<unsigned, letter_t> pair_t;
+    std::list<pair_t>	to_treat;
 
     /*-------------------------.
     | Initialize the partition |
     `-------------------------*/
-    // unsigned nb_final = 0;
 
-    for (typename input_t::state_iterator p = input.states().begin();
-	 p != input.states().end(); ++p)
+    for_all_states (p, input)
     {
       unsigned c = input.is_final(*p) ? 1 : 0;
-      // nb_final += c;
       class_[*p] = c;
       place[*p] = part[c].insert(part[c].end(), *p);
     }
@@ -370,186 +456,80 @@ namespace vcsn
     /*------------------------------.
     | Initialize the list of (P, a) |
     `------------------------------*/
-    for (unsigned e = 0; e < max_letters; ++e)
-    {
-      list.push_back(pair_t(0, e));
-      list_mat[0][e] = true;
-    }
-    for (unsigned e = 0; e < max_letters; ++e)
-    {
-      list.push_back(pair_t(1, e));
-      list_mat[1][e] = true;
-    }
 
+    for_all_letters (e, alphabet_)
+      to_treat.push_back(pair_t(0, *e));
 
-    /*-------------------.
-    | Initialize Inverse |
-    `-------------------*/
-    typedef std::set<hstate_t>**	mat_element_t;
-    std::set<hstate_t>	***inverse = new mat_element_t[max_states];
-    for (unsigned i = 0; i < max_states; ++i)
-    {
-      inverse[i] = new std::set<hstate_t>*[max_letters];
-      for (unsigned j = 0; j < max_letters; ++j)
-	inverse[i][j] = 0;
-    }
-
-    delta_ret_t delta_ret;
-    for (typename input_t::state_iterator p = input.states().begin();
-	 p != input.states().end();
-	 ++p)
-      for (unsigned e = 0; e < max_letters; ++e)
-      {
-	delta_ret.clear();
-	input.letter_deltac(delta_ret, *p, alphabet[e], delta_kind::states());
-	for_all_(delta_ret_t, i, delta_ret)
-	{
-	  if (inverse[*i][e] == 0)
-	    inverse[*i][e] = new std::set<hstate_t>();
-	  inverse[*i][e]->insert(*p);
-	}
-      }
+    for_all_letters (e, alphabet_)
+      to_treat.push_back(pair_t(1, *e));
 
     /*----------.
     | Main loop |
     `----------*/
-
-    while (!list.empty())
     {
-	/*----.
-	| (a) |
-	`----*/
-      pair_t c = list.front();
-      list.pop_front();
-      unsigned p = c.first;
-      unsigned a = c.second;
-      list_mat[p][a] = false;
-      std::vector<bool>	  met_set(max_states);
-
-      //	std::cerr << "Part by : " << p << "," << a << std::endl;
-	/*----.
-	| (b) |
-	`----*/
-      std::list<unsigned> met_class;
-      for_all_(state_list, b, part[p])
-	if (inverse[*b][a] != 0)
-	  for_all_(std::set<hstate_t>, q, *inverse[*b][a])
-	  {
-	    if(!met_set[*q])
-	    {
-	      met_set[*q]=true;
-	      unsigned i = class_[*q];
-	      if (!split[i])
-	      {
-		split[i] = true;
-		met_class.push_back(i);
-	      }
-	    }
-	  }
-
-	/*----.
-	| (c) |
-	`----*/
-      std::queue<state_list_iterator> to_erase;
-
-      for_all_(std::list<unsigned>, b, met_class)
+      quotient_splitter<input_t> splitter(input, class_, place, max_states);
+      while (!to_treat.empty())
       {
-	bool t = met_set[part[*b].front()];
-	for_all_(state_list, q, part[*b])
-	{
-	  if (t != met_set[*q])
-	  {
-	    if (twin[*b] == 0)
-	    {
-	      twin[*b] = max_partitions;
-	      ++max_partitions;
-	    }
-	    to_erase.push(place[*q]);
-	  }
-	}
-      }
-      while (!to_erase.empty())
-      {
-	state_list_iterator b = to_erase.front();
-	to_erase.pop();
-	unsigned i = twin[class_[*b]];
-	place[*b] = part[i].insert(part[i].end(), *b);
-	class_[*b] = i;
-	part[p].erase(b);
-      }
+	pair_t c = to_treat.front();
+	to_treat.pop_front();
+	unsigned p = c.first;
+	letter_t a = c.second;
+	unsigned old_max_partitions = max_partitions;
 
-	/*----.
-	| (d) |
-	`----*/
-      for_all_(std::list<unsigned>, b, met_class)
-	if (twin[*b] != 0)
-	{
-	  for (unsigned e = 0; e < max_letters; ++e)
-	  {
-	    if (list_mat[*b][e] == false)
-	    {
-	      list_mat[*b][e] = true;
-	      list.push_back(pair_t(*b, e));
-	    }
-	    list_mat[twin[*b]][e] = true;
-	    list.push_back(pair_t(twin[*b], e));
-	  }
-	}
-      for_all_(std::list<unsigned>, b, met_class)
-      {
-	split[*b] = false;
-	twin[*b] = 0;
+	if (!splitter.compute_going_in_states(part[p], a))
+	  continue;
+	splitter.split(part, part[p], max_partitions);
+
+	for (unsigned c = old_max_partitions; c < max_partitions; ++c)
+	  for_all_letters (e, alphabet_)
+	    to_treat.push_back(pair_t(c, *e));
       }
     }
 
     /*------------------------------------.
     | Construction of the ouput automaton |
     `------------------------------------*/
-    std::vector<hstate_t> out_states(max_partitions);
-
     // Create the states
     for (unsigned i = 0; i < max_partitions; ++i)
-      if (part[i].size() != 0)
-      {
-	// FIXME : log history ?
-	out_states[i] = output.add_state();
-      }
+      output.add_state();
 
+    delta_ret_t delta_ret;
+    std::set<unsigned> already_linked;
     for (unsigned i = 0; i < max_partitions; ++i)
-      if (part[i].size() != 0)
+    {
+      // Get the first state of the partition => each state has the
+      // same behaviour
+      hstate_t s = part[i].front();
+
+      if (input.is_final(s))
+	output.set_final(i);
+
+      // Create the transitions
+      for_all_letters (e, alphabet_)
       {
-	// Get the first state of the partition => each state has the
-	// same behaviour
-	hstate_t s = part[i].front();
+	delta_ret.clear();
+	already_linked.clear();
 
-	if (input.is_final(s))
-	  output.set_final(out_states[i]);
-
-	// Create the transitions
-	for (unsigned e = 0; e < max_letters; ++e)
+	input.letter_deltac(delta_ret, s, *e, delta_kind::states());
+	for_all_(delta_ret_t, out, delta_ret)
 	{
-	  delta_ret.clear();
-	  std::set<unsigned> already_linked;
-	  input.letter_deltac(delta_ret, s, alphabet[e],
-			      delta_kind::states());
-	  for_all_(delta_ret_t, out, delta_ret)
+	  unsigned c = class_[*out];
+	  if (already_linked.find(c) == already_linked.end())
 	  {
-	    unsigned c = class_[*out];
-	    if (already_linked.find(c) == already_linked.end())
-	    {
-	      already_linked.insert(c);
-	      output.add_letter_transition(out_states[i],
-					   out_states[c],
-					   alphabet[e]);
-	    }
+	    already_linked.insert(c);
+	    output.add_letter_transition(i, c, *e);
 	  }
 	}
       }
+    }
 
     // Set initial states.
     for_all_initial_states(i, input)
-      output.set_initial(out_states[class_[*i]]);
+      output.set_initial(class_[*i]);
   }
+
+# undef QUOTIENT_TYPES
+
 
   /*----------------------------------------.
   | Quotient with multiplicities (covering) |
@@ -623,72 +603,72 @@ namespace vcsn
 
     for_all_states(q, input)
       for_all_letters(a, alphabet)
-    {
-
-      for_all_const_(set_states_t, r, states_visited)
-	old_weight[*r] = weight_zero;
-      states_visited.clear();
-
-      set_transitions_t transitions_comming;
-      input.letter_rdeltac(transitions_comming, *q, *a,
-			   delta_kind::transitions());
-
-      for_all_const_(set_transitions_t, e, transitions_comming)
       {
-	hstate_t		p = input.src_of(*e);
-	if (states_visited.find(p) != states_visited.end())
-	  inverse[*q][pos_of_letter[*a]].
-	    erase(pair_state_semiring_elt_t (p, old_weight[p]));
-	else
-	  states_visited.insert(p);
-	series_set_elt_t	sd = input.series_of(*e);
-	monoid_elt_t	md (input.structure().series().monoid(), *a);
-	semiring_elt_t	wsd = sd.get(md);
-	old_weight[p] += wsd;
-	inverse[*q][pos_of_letter[*a]].
-	  insert(pair_state_semiring_elt_t (p, old_weight[p]));
+
+	for_all_const_(set_states_t, r, states_visited)
+	  old_weight[*r] = weight_zero;
+	states_visited.clear();
+
+	set_transitions_t transitions_comming;
+	input.letter_rdeltac(transitions_comming, *q, *a,
+			     delta_kind::transitions());
+
+	for_all_const_(set_transitions_t, e, transitions_comming)
+	  {
+	    hstate_t		p = input.src_of(*e);
+	    if (states_visited.find(p) != states_visited.end())
+	      inverse[*q][pos_of_letter[*a]].
+		erase(pair_state_semiring_elt_t (p, old_weight[p]));
+	    else
+	      states_visited.insert(p);
+	    series_set_elt_t	sd = input.series_of(*e);
+	    monoid_elt_t	md (input.structure().series().monoid(), *a);
+	    semiring_elt_t	wsd = sd.get(md);
+	    old_weight[p] += wsd;
+	    inverse[*q][pos_of_letter[*a]].
+	      insert(pair_state_semiring_elt_t (p, old_weight[p]));
+	  }
       }
-    }
 
     /*-----------------------------------------------------------.
     | Initialize the partition with as many classes as there are |
-    | final values.						 |
+    | final values.                                              |
     `-----------------------------------------------------------*/
 
     bool	 empty = true;
     unsigned	 class_non_final (0);
 
     for_all_states(q, input)
-    {
-      if (not input.is_final(*q))
       {
-	if (empty == true)
+	if (not input.is_final(*q))
 	{
-	  empty = false;
-	  class_non_final = max_partition;
-	  max_partition++;
-	}
-	classes[class_non_final].insert(*q);
-	class_of_state[*q] = class_non_final;
-      }
-      else
-      {
-	semiring_elt_t w = input.get_final(*q).get(monoid_identity);
-	if (semiring_had_class.find(w) == semiring_had_class.end())
-	{
-	  semiring_had_class.insert(w);
-	  classes[max_partition].insert(*q);
-	  class_of_weight[w] = max_partition;
-	  class_of_state[*q] = max_partition;
-	  max_partition++;
+	  if (empty == true)
+	  {
+	    empty = false;
+	    class_non_final = max_partition;
+	    max_partition++;
+	  }
+	  classes[class_non_final].insert(*q);
+	  class_of_state[*q] = class_non_final;
 	}
 	else
 	{
-	  classes[class_of_weight[w]].insert(*q);
-	  class_of_state[*q] = class_of_weight[w];
+	  semiring_elt_t w = input.get_final(*q).get(monoid_identity);
+	  if (semiring_had_class.find(w) == semiring_had_class.end())
+	  {
+	    semiring_had_class.insert(w);
+	    classes[max_partition].insert(*q);
+	    class_of_weight[w] = max_partition;
+	    class_of_state[*q] = max_partition;
+	    max_partition++;
+	  }
+	  else
+	  {
+	    classes[class_of_weight[w]].insert(*q);
+	    class_of_state[*q] = class_of_weight[w];
+	  }
 	}
       }
-    }
 
     /*-----------------------------------------------------.
     | Initialize the queue with pairs <class_id, letter>.  |
@@ -719,13 +699,13 @@ namespace vcsn
       for_all_const_(set_states_t, q, classes[pair.first])
 	for_all_const_(set_pair_state_semiring_elt_t, pair_,
 		       inverse[*q][pos_of_letter[pair.second]])
-      {
-	unsigned  state = pair_->first;
-	if (met_classes.find(class_of_state[state]) ==
-	    met_classes.end())
-	  met_classes.insert(class_of_state[state]);
-	val[state] += pair_->second;
-      }
+	{
+	  unsigned  state = pair_->first;
+	  if (met_classes.find(class_of_state[state]) ==
+	      met_classes.end())
+	    met_classes.insert(class_of_state[state]);
+	  val[state] += pair_->second;
+	}
 
       // Next, for each met class, do the partition.
       for_all_const_(set<unsigned>, class_id, met_classes)
@@ -779,7 +759,7 @@ namespace vcsn
     }
 
     /*------------------.
-    | Form the output.	|
+    | Form the output.  |
     `------------------*/
 
     typedef vector<series_set_elt_t> vector_series_set_elt_t;
@@ -818,18 +798,18 @@ namespace vcsn
 		   delta_kind::transitions());
 
       for_all_const_(set_transitions_t, e, transitions_leaving)
-      {
-	series_set_elt_t	se = input.series_of(*e);
-	unsigned		cs = class_of_state[input.dst_of(*e)];
-
-	if (met_classes.find(cs) == met_classes.end())
 	{
-	  met_classes.insert(cs);
-	  seriesof[cs] = se;
+	  series_set_elt_t	se = input.series_of(*e);
+	  unsigned		cs = class_of_state[input.dst_of(*e)];
+
+	  if (met_classes.find(cs) == met_classes.end())
+	  {
+	    met_classes.insert(cs);
+	    seriesof[cs] = se;
+	  }
+	  else
+	    seriesof[cs] += se;
 	}
-	else
-	  seriesof[cs] += se;
-      }
 
       for_all_const_(set<unsigned>, cs, met_classes)
 	output.add_series_transition(out_states[i],

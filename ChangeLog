@@ -1,3 +1,8 @@
+2007-04-06  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Rewrite quotient for automaton with Boolean multiplicities.
+	* minimization_hopcroft.hxx: Do it.
+
 2007-04-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix vaucanswig
