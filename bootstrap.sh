@@ -46,7 +46,6 @@ done
 
 run src/tests/test-suites ./generate-all.sh
 run src/tests/sanity      ./generate_files.sh .
-run vaucanswig            ./expand.sh .
 run src/benchs            ./generate_benchs.sh --all
 run .                     build-aux/find_tests.sh
 run lib			  ./generate_libvcsn.rb

@@ -13,23 +13,7 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = argp lib include src data taf-kit doc build-aux debian
-if ENABLE_VAUCANSWIG
-  SUBDIRS += vaucanswig
-endif
-
-EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
-
-# Prevent accidental edition of generated files.
-$(srcdir)/README: cp $(srcdir)/doc/README.txt
-	rm -f $(srcdir)/README
-	cp $(srcdir)/doc/README.txt $(srcdir)/README
-	chmod -w $(srcdir)/README
-
-$(srcdir)/NEWS: $(srcdir)/doc/NEWS.txt
-	rm -f $(srcdir)/NEWS
-	cp $(srcdir)/doc/NEWS.txt $(srcdir)/NEWS
-	chmod -w $(srcdir)/NEWS
+SUBDIRS = lib include src data taf-kit build-aux argp
 
 # Be sure to use files up to date.
 BUILT_SOURCES = include/vaucanson/config/pconf.hh
@@ -76,10 +60,6 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
-
-# Build debian packages.
-deb:
-	$(MAKE) -C debian deb
 
 # Update headers.
 rehead:

@@ -1,8 +1,0 @@
-%						-*- LaTeX -*-
-% Ask for the same languages.
-\usepackage[\@pkg@opts]{babel}
-
-% Note that to be nice looking, you must not leave a space before
-% the \fg invocation.  \og{}This is an example\fg.
-\newcommand{\og}{«~}
-\newcommand{\fg}{~»\xspace}

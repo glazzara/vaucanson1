@@ -36,33 +36,6 @@ AC_WITH_VCSN
 # Awk is used.
 AC_PROG_AWK
 
-
-## ------------ ##
-## Vaucanswig.  ##
-## ------------ ##
-
-# SWIG and Python used.
-AM_PATH_PYTHON([2.2])
-
-AC_ARG_ENABLE([vaucanswig],
-	[AC_HELP_STRING([--enable-vaucanswig],
-			[enable building vaucanswig])])
-
-if test "x$enable_vaucanswig" = "xyes"; then
-  AC_CHECK_SWIG13
-  if test "x$ac_cv_recent_swig" != "xyes"; then
-    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
-  else
-    AC_CONFIG_FILES([vaucanswig/Makefile
-		     vaucanswig/meta/Makefile
-		     vaucanswig/src/Makefile
-		     vaucanswig/python/Makefile])
-  fi
-fi
-AM_CONDITIONAL([ENABLE_VAUCANSWIG],
-	       [test "x$enable_vaucanswig" = "xyes"])
-
-
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -120,38 +93,6 @@ AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
 ## ------------ ##
 
 AC_CONFIG_SUBDIRS([argp])
-
-
-
-## --------------- ##
-## Documentation.  ##
-## --------------- ##
-
-# VCSN_ARG_PROGS(PROG, DOC, [PROGRAMS...])
-# ----------------------------------------
-m4_define([VCSN_ARG_PROGS],
-[AC_ARG_VAR(m4_toupper([$1]), [$2])
-AC_CHECK_PROGS(m4_toupper([$1]), [m4_default([$3], [$1])],
-	       [$am_aux_dir/missing $1])
-])
-
-
-VCSN_ARG_PROGS([doxygen],   [the Doxygen documentation generation program])
-VCSN_ARG_PROGS([texi2dvi],  [program to create DVI from TeX files])
-VCSN_ARG_PROGS([rst2latex],
-	       [reStructuredText to LaTeX converter],
-	       [rst2latex rst2latex.py])
-VCSN_ARG_PROGS([rst2html],
-	       [reStructuredText to HTML converter],
-	       [rst2html rst2html.py])
-VCSN_ARG_PROGS([tar],       [the tape archiver program])
-
-AC_CONFIG_FILES([
-   doc/Makefile
-   doc/doc.doxy
-	doc/manual/Makefile
-	doc/xml/Makefile
-])
 
 
 ## ------- ##
@@ -223,8 +164,7 @@ AC_CONFIG_FILES([
 	    src/benchs/quotient/Makefile
 	    src/benchs/composition/Makefile
 	    src/benchs/derived_terms/Makefile
-	include/Makefile
-	debian/Makefile])
+	include/Makefile])
 
 m4_include([build-aux/tests.m4])
 
