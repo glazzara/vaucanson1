@@ -95,8 +95,9 @@ namespace vcsn
       typedef state_value			state_value_t;
       typedef edge_value<label_t>		edge_value_t;
 
+// FIXME: clean from automaton_traits
       typedef std::vector<state_value_t>	state_data_t;
-      typedef std::vector<edge_value_t>		edge_data_t;
+// FIXME rm?     typedef std::vector<edge_value_t>		edge_data_t;
 
       typedef StateContainer		states_t;
       typedef EdgeContainer		edges_t;

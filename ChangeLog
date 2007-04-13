@@ -1,3 +1,11 @@
+2007-04-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add boost_graph.h{h,xx}
+	Added a draft of BoostGraph, the BMI based graph implementation.
+	* boost_graph.hh: New.
+	* boost_graph.hxx: New.
+	* graph.hh: .
+
 2007-04-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Creating a new branch `bmi'.
