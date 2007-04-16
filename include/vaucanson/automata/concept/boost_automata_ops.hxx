@@ -120,16 +120,11 @@ namespace vcsn {
 
   template <class S, class T>
   bool
-  op_is_initial(const AutomataBase<S>& s,
+  op_is_initial(const AutomataBase<S>&,
 		 const T& v,
 		 hstate_t state)
   {
-    return (typename Element<S, T>::series_set_elt_t
-      (s.series(),
-       v.get_initial(state,
-		     zero_value(s.series(),
-				SELECT(AutoType(series_set_elt_value_t)))))
-       != s.series().zero(SELECT(series_set_elt_value_t)));
+    return v.is_initial(state);
   }
 
   template <class S, class T>
@@ -159,17 +154,11 @@ namespace vcsn {
 
   template <class S, class T>
   bool
-  op_is_final(const AutomataBase<S>& s,
+  op_is_final(const AutomataBase<S>&,
 	      const T& v,
 	      hstate_t state)
   {
-    return (typename Element<S, T>::series_set_elt_t
-      (s.series(),
-       v.get_final(state,
-		   zero_value(s.series(),
-			      SELECT(AutoType(series_set_elt_value_t)))))
-	!= algebra::zero_as<series_set_elt_value_t>::of(s.series());
-    );
+    return v.is_final(state);
   }
 
   template <class S, class T>

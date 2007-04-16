@@ -89,6 +89,12 @@ namespace vcsn {
 		 hstate_t state);
 
   template <class S, class T>
+  bool
+  op_is_initial(const AutomataBase<S>&,
+		const T&,
+		hstate_t state);
+
+  template <class S, class T>
   void
   op_set_final(const AutomataBase<S>&, T&,
 	       hstate_t state,
@@ -99,6 +105,12 @@ namespace vcsn {
   op_get_final(const AutomataBase<S>&,
 	       const T&,
 	       hstate_t state);
+
+  template <class S, class T>
+  bool
+  op_is_final(const AutomataBase<S>&,
+	      const T&,
+	      hstate_t state);
 
   template <class S, class T>
   void
@@ -425,7 +437,7 @@ namespace vcsn {
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/concept/automata_ops.hxx>
+#  include <vaucanson/automata/concept/boost_automata_ops.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 

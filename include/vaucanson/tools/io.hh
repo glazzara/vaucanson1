@@ -66,7 +66,7 @@ namespace vcsn
 
     struct string_out
     {
-	std::string check_empty_word(const std::string&) const;
+	std::string check_VCSN_EMPTY_word(const std::string&) const;
 
 	template<typename S, typename T>
 	std::string operator()(const AutomataBase<S>&, const T&) const;

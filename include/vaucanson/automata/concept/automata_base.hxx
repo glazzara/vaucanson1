@@ -137,8 +137,7 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::is_initial(hstate_t state) const
   {
-    return (op_get_initial(this->structure(), this->value(), state) !=
-	    this->structure().series().zero(SELECT(series_set_elt_value_t)));
+    return op_is_initial(this->structure(), this->value(), state);
   }
 
   /** Return true if the state is final (ie it is in the final support). */
@@ -146,10 +145,7 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::is_final(hstate_t state) const
   {
-    return
-      op_get_final(this->structure(), this->value(), state) !=
-      algebra::zero_as<series_set_elt_value_t>::
-      of(this->structure().series());
+    return op_is_final(this->structure(), this->value(), state);
   }
 
   /** Set the state to be initial. */

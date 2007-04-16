@@ -25,7 +25,7 @@
 # include <vaucanson/algebra/implementation/series/generalized.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/automata/implementation/graph.hh>
+# include <vaucanson/automata/implementation/boost_graph.hh>
 
 
 namespace vcsn {

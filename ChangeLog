@@ -1,3 +1,28 @@
+2007-04-16  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Many changes
+	* configure.ac: .
+	* include/vaucanson/algebra/implementation/series/krat.hxx: .
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/evaluation.hxx: .
+	* include/vaucanson/algorithms/extension.hxx: .
+	* include/vaucanson/algorithms/image.hxx: .
+	* include/vaucanson/algorithms/invert.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/realtime_composition.hxx: .
+	* include/vaucanson/automata/concept/automata_base.hxx: .
+	* include/vaucanson/automata/concept/automata_ops.hh: .
+	* include/vaucanson/automata/concept/automata_ops.hxx: .
+	* include/vaucanson/automata/concept/boost_automata_ops.hxx: New.
+	* include/vaucanson/automata/implementation/boost_graph.hh: .
+	* include/vaucanson/automata/implementation/generalized.hh: .
+	* include/vaucanson/contexts/generic_automaton_impl.thh: .
+	* include/vaucanson/misc/counter_support.hh: New.
+	* include/vaucanson/misc/counter_support.hxx: New.
+	* include/vaucanson/misc/usual_macros.hh: .
+	* include/vaucanson/tools/io.hh: .
+	* include/vaucanson/tools/io.hxx: .
+
 2007-04-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add boost_graph.h{h,xx}

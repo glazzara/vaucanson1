@@ -32,7 +32,7 @@
 
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/implementation/graph.hh>
+# include <vaucanson/automata/implementation/boost_graph.hh>
 
 # include <vaucanson/misc/contract.hh>
 

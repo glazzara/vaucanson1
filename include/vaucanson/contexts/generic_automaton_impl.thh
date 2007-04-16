@@ -21,7 +21,7 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
-#include <vaucanson/automata/implementation/graph.hh>
+#include <vaucanson/automata/implementation/boost_graph.hh>
 #include <vaucanson/automata/implementation/geometry.hh>
 
 namespace vcsn
@@ -30,7 +30,7 @@ namespace vcsn
   VCSN_CONTEXT_NAMESPACE
   {
 
-    typedef vcsn::Graph<
+    typedef vcsn::BoostGraph<
       labels_are_series,
       series_set_elt_t::value_t::monoid_elt_value_t,
       series_set_elt_t::value_t::semiring_elt_value_t,

@@ -127,7 +127,7 @@ namespace vcsn
     typedef Element<S, T>  Trans_t;
     AUTOMATON_TYPES(Trans_t);
 
-    monoid_elt_t empty = t.series().monoid().empty_;
+    monoid_elt_t empty = t.series().monoid().VCSN_EMPTY_;
     std::map<hstate_t, hstate_t> m;
 
     for_all_states(p, t)

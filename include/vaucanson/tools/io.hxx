@@ -62,7 +62,7 @@ namespace vcsn
     }
 
     inline
-    std::string string_out::check_empty_word(const std::string& str) const
+    std::string string_out::check_VCSN_EMPTY_word(const std::string& str) const
     {
       if (str.empty())
 	return std::string("1");
@@ -82,7 +82,7 @@ namespace vcsn
     {
       std::ostringstream os;
       os << t;
-      return check_empty_word(os.str());
+      return check_VCSN_EMPTY_word(os.str());
     }
 
   } // io

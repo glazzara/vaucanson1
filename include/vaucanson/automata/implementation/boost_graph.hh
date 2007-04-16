@@ -23,6 +23,19 @@
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 
+//NEW INCLUDES
+#include <boost/multi_index_container.hpp>
+#include <boost/multi_index/member.hpp>
+#include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index/hashed_index.hpp>
+#include <boost/functional/hash/hash.hpp>
+#include <boost/multi_index/sequenced_index.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/multi_index/composite_key.hpp>
+#include <boost/dynamic_bitset.hpp>
+#include <vaucanson/misc/counter_support.hh>
+#include <functional>
+
 namespace vcsn
 {
   // FIXME: add comments?
@@ -35,40 +48,70 @@ namespace vcsn
 
   // FIXME: full public or {access,gett}ors
   // Edge decorator
-  template <typename EdgeLabel>
   struct EdgeValue
   {
-    public:
-      EdgeValue (hstate_t from, hstate_t to, const EdgeLabel& l = EdgeLabel());
+    EdgeValue (hstate_t from, hstate_t to, unsigned l = 0);
 
-      operator const EdgeLabel& () const;
-      operator EdgeLabel& ();
+//      operator const unsigned int& () const;
+//      operator unsigned int& ();
 
-      EdgeLabel label () const;
-      hstate_t from () const;
-      hstate_t to () const;
-
-    private:
-      EdgeLabel label_;
-      hstate_t from_;
-      hstate_t to_;
-
+    unsigned label_; //FIXME: Define a type? | How to handle label comparison?
+    hstate_t from_;
+    hstate_t to_;
   }; // End of class edge_value
 
+struct succ {};
+struct pred {};
+struct src {};
+struct dst {};
 
-  // State decorator FIXME rm?
-  class StateValue
-  {
-    public:
-      typedef /* FIXME: std::set<hedge_t> */ edges_t;
+using ::boost::multi_index_container;
+using ::boost::multi_index::hashed_non_unique;
+using ::boost::multi_index::indexed_by;
+using ::boost::multi_index::composite_key;
+using ::boost::multi_index::hashed_non_unique;
+using ::boost::multi_index::tag;
+using ::boost::multi_index::member;
 
-      StateValue (); // TODO
+using ::boost::dynamic_bitset;
 
-    private:
-      edges_t input_edges_;
-      edges_t output_edges_;
-
-  }; // End of class state_value
+typedef multi_index_container
+<
+  EdgeValue,
+  indexed_by
+  <
+    hashed_non_unique
+    <
+      tag<succ>,
+      composite_key
+      <
+	EdgeValue,
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, unsigned, label_)
+      >
+    >,
+    hashed_non_unique
+    <
+      tag<pred>,
+      composite_key
+      <
+	EdgeValue,
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, unsigned, label_)
+      >
+    >,
+    hashed_non_unique
+    <
+      tag<src>,
+      BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_)
+    >,
+    hashed_non_unique
+    <
+      tag<dst>,
+      BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_)
+    >
+  >
+> GraphContainer;
 
 
   // class Graph.
@@ -88,17 +131,47 @@ namespace vcsn
       typedef typename LabelOf<Kind, WordValue, WeightValue,
 			       SeriesValue, Letter>::ret label_t;
 
-      typedef StateValue state_value_t;
-      typedef EdgeValue<label_t> edge_value_t;
+//      typedef StateValue state_value_t;
+      typedef EdgeValue edge_value_t;
       typedef SeriesValue series_set_elt_value_t;
 
-      typedef /* FIXME: std::vector<StateValue_t> */ state_data_t;
-      typedef /* FIXME: std::vector<EdgeValue_t> */ edge_data_t;
+//      typedef /* FIXME: std::vector<StateValue_t> */ state_data_t;
+//      typedef /* FIXME: std::vector<EdgeValue_t> */ edge_data_t;
 
-      typedef /* FIXME: StateContainer */ states_t;
-      typedef /* FIXME: EdgeContainer */ edges_t;
+//      typedef /* FIXME: StateContainer */ states_t;
+      typedef GraphContainer graph_data_t;
+      //The graph stores  edges only, thus we can define this type.
+      typedef graph_data_t edges_t;
+      typedef misc::CounterSupport states_t;
 
-      /* FIXME: {initial,final}{states,support} */
+      struct InitialValue
+      {
+	InitialValue(hstate_t state, series_set_elt_value_t series)
+	  : state_(state),
+	series_(series) {}
+
+        hstate_t state_;
+	series_set_elt_value_t series_;
+      };
+
+      typedef multi_index_container
+      <
+        InitialValue,
+        indexed_by
+        <
+	  hashed_non_unique
+	  <
+	    BOOST_MULTI_INDEX_MEMBER(InitialValue, hstate_t, state_)
+	  >
+	>
+      > InitialContainer;
+
+
+      typedef InitialValue initial_t;
+      typedef InitialValue final_t;
+
+      typedef misc::Support<initial_t>	initial_support_t;
+      typedef misc::Support<final_t>	final_support_t;
 
       typedef Tag tag_t;
       typedef Geometry geometry_t;
@@ -147,7 +220,7 @@ namespace vcsn
       ** FIXME: nice comments
       ** TODO: implementation
       */
-# define DECLARE_DELTA_FUNCTION (FunName, DeltaKind)			\
+# define DECLARE_DELTA_FUNCTION(FunName, DeltaKind)			\
       template <typename OutputIterator, typename Query>		\
       void FunName (OutputIterator res, hstate_t from,			\
 		    const Query& q, delta_kind::DeltaKind) const
@@ -157,7 +230,7 @@ namespace vcsn
       DECLARE_DELTA_FUNCTION (rdelta, edges);
 # undef DECLARE_DELTA_FUNCTION
 
-# define DECLARE_DELTAF_BOOL_FUNCTION (FunName, DeltaKind, IsBool)	\
+# define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
       template <typename Functor, typename Query>			\
       void FunName (Functor& f, hstate_t from, const Query& q,		\
 		    delta_kind::DeltaKind, misc::IsBool ## _t) const
@@ -171,7 +244,7 @@ namespace vcsn
       DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, edges, false);
 # undef DECLARE_DELTAF_BOOL_FUNCTION
 
-# define DECLARE_DELTAF_FUNCTION (FunName)				\
+# define DECLARE_DELTAF_FUNCTION(FunName)				\
       template <typename Functor, typename Query, typename DeltaKind>	\
       void FunName (Functor& f, hstate_t from,				\
 		    const Query& q, delta_kind::kind<DeltaKind>) const
@@ -182,9 +255,10 @@ namespace vcsn
 
     private:
       geometry_t geometry_;
-      state_data_t states_;
-      /* FIXME */ removed_states_;
-      /* FIXME */ removed_edges_;
+      graph_data_t graph_;
+//      state_data_t states_;
+//      /* FIXME */ removed_states_;
+//      /* FIXME */ removed_edges_;
       tag_t tag_;
       final_t final_;
       initial_t initial_;
