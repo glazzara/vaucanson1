@@ -33,12 +33,14 @@ namespace vcsn
       : i (n)
     {}
 
+    inline
     unsigned
     CounterSupportIterator::operator* () const
     {
       return i;
     }
 
+    inline
     CounterSupportIterator&
     CounterSupportIterator::operator++ ()
     {
@@ -46,6 +48,7 @@ namespace vcsn
       return *this;
     }
 
+    inline
     CounterSupportIterator
     CounterSupportIterator::operator++ (int)
     {
@@ -54,12 +57,14 @@ namespace vcsn
       return tmp;
     }
 
+    inline
     bool
     CounterSupportIterator::operator!= (const CounterSupportIterator& o) const
     {
       return o.i != i;
     }
 
+    inline
     bool
     CounterSupportIterator::operator== (const CounterSupportIterator& o) const
     {
@@ -84,12 +89,14 @@ namespace vcsn
     {
     }
 
+    inline
     unsigned
     CounterSupport::size () const
     {
       return i_;
     }
 
+    inline
     CounterSupport::iterator
     CounterSupport::find (unsigned k) const
     {
@@ -98,12 +105,14 @@ namespace vcsn
       return iterator(k);
     }
 
+    inline
     bool
     CounterSupport::empty () const
     {
       return i_ == 0;
     }
 
+    inline
     unsigned
     CounterSupport::operator* () const
     {
@@ -111,12 +120,14 @@ namespace vcsn
       return 0;
     }
 
+    inline
     CounterSupport::iterator
     CounterSupport::begin () const
     {
       return iterator (0);
     }
 
+    inline
     CounterSupport::iterator
     CounterSupport::end () const
     {

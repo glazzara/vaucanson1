@@ -1,5 +1,13 @@
 2007-04-16  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix compilation issues and inline functions in CounterSupport
+	* include/vaucanson/automata/implementation/boost_graph.hh: .
+	* include/vaucanson/automata/implementation/boost_graph.hxx: .
+	* include/vaucanson/contexts/generic_automaton_impl.thh: .
+	* include/vaucanson/misc/counter_support.hxx: .
+
+2007-04-16  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Many changes
 	* configure.ac: .
 	* include/vaucanson/algebra/implementation/series/krat.hxx: .

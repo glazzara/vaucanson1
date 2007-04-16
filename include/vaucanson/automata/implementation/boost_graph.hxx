@@ -26,15 +26,13 @@ namespace vcsn
   ** class EdgeLabel
   */
 
-  template <typename EdgeLabel>
   inline
-  EdgeValue<EdgeLabel>::EdgeValue (hstate_t h1, hstate_t h2, const EdgeLabel& l)
+  EdgeValue::EdgeValue (hstate_t h1, hstate_t h2, unsigned l)
     : label_ (l), from_ (h1), to_ (h2)
   { }
 
-  template <typename EdgeLabel>
-  inline
-  EdgeValue<EdgeLabel>::operator const EdgeLabel& () const
+/*  inline
+  EdgeValue::operator const EdgeLabel& () const
   {
     return label_;
   }
@@ -45,7 +43,7 @@ namespace vcsn
   {
     return label_;
   }
-
+*/
 
   /*
   ** class BoostGraph
@@ -54,13 +52,13 @@ namespace vcsn
   // Syntactic sugar
 # define BOOSTGRAPH_TPARAM							\
   template <typename Kind, typename WordValue, typename WeightValue,		\
-	    typename SeriesValue, typename Letter, typename Geometry>
+	    typename SeriesValue, typename Letter, typename Tag, typename Geometry>
 # define BOOSTGRAPH								\
-  BoostGraph<Kind, WordValue, WeightValue, SeriesValue, Letter, Geometry>
+  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
 
   BOOSTGRAPH_TPARAM
   inline
-  BOOSTGRAPH::BoostGraph ()
+  BOOSTGRAPH::Graph ()
   { }
 
   // End of syntactic sugar

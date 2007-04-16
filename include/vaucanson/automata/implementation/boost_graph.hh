@@ -20,8 +20,10 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
+# include <vaucanson/automata/concept/tags.hh>
 
 //NEW INCLUDES
 #include <boost/multi_index_container.hpp>
@@ -35,6 +37,8 @@
 #include <boost/dynamic_bitset.hpp>
 #include <vaucanson/misc/counter_support.hh>
 #include <functional>
+
+using namespace vcsn::misc;
 
 namespace vcsn
 {
@@ -117,7 +121,7 @@ typedef multi_index_container
   // class Graph.
   template <typename Kind, typename WordValue, typename WeightValue,
 	    typename SeriesValue, typename Letter, typename Tag, typename Geometry>
-  class BoostGraph
+  class Graph
   {
     public:
       /*
@@ -125,7 +129,7 @@ typedef multi_index_container
       */
 
       // self definition.
-      typedef BoostGraph<Kind, WordValue, WeightValue,
+      typedef Graph<Kind, WordValue, WeightValue,
 			 SeriesValue, Letter, Tag, Geometry> self_t;
 
       typedef typename LabelOf<Kind, WordValue, WeightValue,
@@ -142,7 +146,7 @@ typedef multi_index_container
       typedef GraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef graph_data_t edges_t;
-      typedef misc::CounterSupport states_t;
+      typedef CounterSupport states_t;
 
       struct InitialValue
       {
@@ -177,8 +181,8 @@ typedef multi_index_container
       typedef Geometry geometry_t;
 
 
-      BoostGraph ();
-      BoostGraph (unsigned int initial_number_of_state,
+      Graph ();
+      Graph (unsigned int initial_number_of_state,
 		  unsigned int number_of_edge_initially_allocated); // TODO
 
       // FIXME: add const rettype& versions?
@@ -263,14 +267,253 @@ typedef multi_index_container
       final_t final_;
       initial_t initial_;
 
-  }; // End of class BoostGraph
+  }; // End of class Graph
 
   // FIXME: add some nice comments
-# define BOOSTGRAPH_TPARAM							\
-  template <typename S, typename WordValue, typename WeightValue,		\
-	    typename SeriesValue, typename Letter, typename Tag, typename Geometry>
-  // FIXME: add ADAPT_* here
+
+# define BOOSTGRAPH_TPARAM								\
+  template <class S, class WordValue, class WeightValue, class SeriesValue, \
+	    class Letter, class Tag, class Geometry>
+
+  BOOSTGRAPH_TPARAM
+  ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(Graph<labels_are_series,
+					      WordValue, WeightValue,
+					      SeriesValue, Letter, Tag, Geometry>);
+
+
+  BOOSTGRAPH_TPARAM
+  ADAPT_LETTER_OF_TO_SERIES_LABEL(Graph<labels_are_series,
+				  WordValue, WeightValue,
+				  SeriesValue, Letter, Tag, Geometry>);
+
+  BOOSTGRAPH_TPARAM
+  ADAPT_WORD_OF_TO_SERIES_LABEL(Graph<labels_are_series,
+				WordValue, WeightValue,
+				SeriesValue, Letter, Tag, Geometry>);
+
+  BOOSTGRAPH_TPARAM
+  ADAPT_WORD_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
+				 WordValue, WeightValue,
+				 SeriesValue, Letter, Tag, Geometry>);
+
+  BOOSTGRAPH_TPARAM
+  ADAPT_SERIE_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
+				  WordValue, WeightValue,
+				  SeriesValue, Letter, Tag, Geometry>);
+
+  BOOSTGRAPH_TPARAM
+  ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(Graph<labels_are_letters,
+					      WordValue, WeightValue,
+					      SeriesValue, Letter, Tag, Geometry>);
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+	    class Letter, class Tag, class Geometry, class I>
+  Tag& op_tag(const AutomataBase<I>&,
+	      Graph<Kind, WordValue, WeightValue,
+	      SerieValue, Letter, Tag, Geometry>&);
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+	    class Letter, class Tag, class Geometry, class I>
+  const Tag& op_tag(const AutomataBase<I>&,
+		    const Graph<Kind, WordValue, WeightValue,
+		    SerieValue, Letter, Tag, Geometry>&);
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+	    class Letter, class Tag, class Geometry, class I>
+  Geometry&
+  op_geometry(const AutomataBase<I>&,
+	      Graph<Kind, WordValue, WeightValue,
+	      SerieValue, Letter, Tag, Geometry>&);
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+	    class Letter, class Tag, class Geometry, class I>
+  const Geometry&
+  op_geometry(const AutomataBase<I>&,
+	      const Graph<Kind, WordValue, WeightValue,
+	      SerieValue, Letter, Tag, Geometry>&);
+
+
+
 # undef BOOSTGRAPH_TPARAM
+
+  // This implementation can be used as an implementation of automaton.
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SeriesValue,
+	    class Letter,
+	    class Tag,
+	    class Geometry>
+  struct automaton_traits<Graph<Kind,
+				WordValue,
+				WeightValue,
+				SeriesValue,
+				Letter,
+				Tag,
+				Geometry>  >
+  {
+      typedef SeriesValue				series_set_elt_value_t;
+      typedef WordValue					word_value_t;
+      typedef WordValue					monoid_elt_value_t;
+      typedef WeightValue				semiring_elt_value_t;
+      typedef Letter					letter_t;
+      typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
+      ::ret						label_t;
+      typedef Tag					tag_t;
+
+      typedef GraphContainer			transitions_t;
+      typedef CounterSupport				states_t;
+
+      typedef typename states_t::iterator		state_iterator;
+      typedef typename transitions_t::iterator		transition_iterator;
+
+      typedef typename Graph<Kind, WordValue, WeightValue, SeriesValue,
+	      Letter, Tag, Geometry>::InitialValue	initial_t;
+      typedef typename Graph<Kind, WordValue, WeightValue, SeriesValue,
+	      Letter, Tag, Geometry>::InitialValue	final_t;
+      typedef misc::Support<initial_t>			initial_support_t;
+      typedef misc::Support<final_t>			final_support_t;
+      typedef typename initial_support_t::iterator	initial_iterator;
+      typedef typename final_support_t::iterator	final_iterator;
+
+      typedef Geometry					geometry_t;
+  };
+
+  // This implementation can be used as a transducer one.
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SeriesValue,
+	    class Letter,
+	    class Tag,
+	    class Geometry>
+  struct transducer_traits<Graph<Kind,
+				 WordValue,
+				 WeightValue,
+				 SeriesValue,
+				 Letter,
+				 Tag,
+				 Geometry>  >
+  {
+      typedef WordValue			input_monoid_elt_value_t;
+      typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t
+      output_monoid_elt_value_t;
+      typedef typename algebra::series_traits<WeightValue>::semiring_elt_value_t
+      output_semiring_elt_value_t;
+  };
+
+  // Explain how to project type of transducer into input automaton type.
+  template <class S,
+	    class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SeriesValue,
+	    class Letter,
+	    class Tag,
+	    class Geometry>
+  struct projection_traits<S, Graph<Kind,
+				    WordValue,
+				    WeightValue,
+				    SeriesValue,
+				    Letter,
+				    Tag,
+				    Geometry>  >
+  {
+      typedef Graph<Kind, WordValue, WeightValue, SeriesValue,
+		    Letter, Tag, Geometry>			self_t;
+      typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
+      semiring_elt_value_t;
+      typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
+      monoid_elt_value_t;
+      typedef typename algebra::mute_series_impl<SeriesValue,
+						 semiring_elt_value_t,
+						 monoid_elt_value_t>
+      ::ret series_set_elt_value_t;
+
+      typedef
+      Graph<Kind,
+	    monoid_elt_value_t,
+	    semiring_elt_value_t,
+	    series_set_elt_value_t,
+	    Letter,
+	    Tag,
+	    Geometry>
+      ret;
+  };
+
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SeriesValue,
+	    class Letter,
+	    class Tag,
+	    class Geometry>
+  struct output_projection_traits<Graph<Kind,
+					WordValue,
+					WeightValue,
+					SeriesValue,
+					Letter,
+					Tag, Geometry>	>
+  {
+      typedef Graph<Kind, WordValue, WeightValue, SeriesValue,
+		    Letter, Tag, Geometry>			self_t;
+
+      typedef typename automaton_traits<self_t>::semiring_elt_value_t
+      series_set_elt_value_t;
+
+      typedef typename
+      algebra::series_traits<series_set_elt_value_t>::monoid_elt_value_t
+      monoid_elt_value_t;
+
+      typedef typename
+      algebra::series_traits<series_set_elt_value_t>::semiring_elt_value_t
+      semiring_elt_value_t;
+
+      typedef
+      Graph<Kind,
+	    monoid_elt_value_t,
+	    semiring_elt_value_t,
+	    series_set_elt_value_t,
+	    Letter,
+	    Tag,
+	    Geometry>
+      ret;
+  };
+
+  // Explain how to extend an input automaton into a transducer.
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SeriesValue,
+	    class Letter,
+	    class Tag,
+	    class Geometry>
+  struct extension_traits<Graph<Kind,
+				WordValue,
+				WeightValue,
+				SeriesValue,
+				Letter,
+				Tag,
+				Geometry>  >
+  {
+      typedef Graph<Kind, WordValue, WeightValue,
+		    SeriesValue, Letter, Tag, Geometry>		self_t;
+      typedef typename automaton_traits<self_t>::monoid_elt_value_t
+      monoid_elt_value_t;
+      typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
+      ::ret series_set_elt_value_t;
+
+      typedef
+      Graph<Kind,
+	    monoid_elt_value_t,
+	    SeriesValue,
+	    series_set_elt_value_t,
+	    Letter,
+	    Tag,
+	    Geometry>
+      ret;
+  };
+
 
 } // End of namespace vcsn
 
