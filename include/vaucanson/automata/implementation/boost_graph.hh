@@ -64,59 +64,82 @@ namespace vcsn
     hstate_t to_;
   }; // End of class edge_value
 
-struct succ {};
-struct pred {};
-struct src {};
-struct dst {};
+  struct succ {};
+  struct pred {};
+  struct src {};
+  struct dst {};
 
-using ::boost::multi_index_container;
-using ::boost::multi_index::hashed_non_unique;
-using ::boost::multi_index::indexed_by;
-using ::boost::multi_index::composite_key;
-using ::boost::multi_index::hashed_non_unique;
-using ::boost::multi_index::tag;
-using ::boost::multi_index::member;
+  using ::boost::multi_index_container;
+  using ::boost::multi_index::hashed_non_unique;
+  using ::boost::multi_index::indexed_by;
+  using ::boost::multi_index::composite_key;
+  using ::boost::multi_index::hashed_non_unique;
+  using ::boost::multi_index::tag;
+  using ::boost::multi_index::member;
+  using ::boost::dynamic_bitset;
 
-using ::boost::dynamic_bitset;
+  struct SuccessorKey : composite_key <
+    EdgeValue,
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, unsigned, label_)
+  > {};
 
-typedef multi_index_container
-<
-  EdgeValue,
-  indexed_by
+  struct PredecessorKey : composite_key <
+    EdgeValue,
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, unsigned, label_)
+  > {};
+
+  struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
+    EdgeValue, hstate_t, from_
+  ) {};
+
+  struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
+    EdgeValue, hstate_t, to_
+  ) {};
+
+  struct SourceAndLabel : hashed_non_unique <
+    tag<succ>,
+    SuccessorKey
+  > {};
+
+  struct DestinationAndLabel : hashed_non_unique <
+    tag<pred>,
+    PredecessorKey
+  > {};
+
+  struct Source : hashed_non_unique <
+    tag<src>,
+    SourceKey
+  > {};
+
+  struct Destination : hashed_non_unique <
+    tag<dst>,
+    DestinationKey
+  > {};
+
+  typedef multi_index_container
   <
-    hashed_non_unique
+    EdgeValue,
+    indexed_by
     <
-      tag<succ>,
-      composite_key
-      <
-	EdgeValue,
-	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-	BOOST_MULTI_INDEX_MEMBER(EdgeValue, unsigned, label_)
-      >
-    >,
-    hashed_non_unique
-    <
-      tag<pred>,
-      composite_key
-      <
-	EdgeValue,
-	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
-	BOOST_MULTI_INDEX_MEMBER(EdgeValue, unsigned, label_)
-      >
-    >,
-    hashed_non_unique
-    <
-      tag<src>,
-      BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_)
-    >,
-    hashed_non_unique
-    <
-      tag<dst>,
-      BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_)
+      SourceAndLabel,
+      DestinationAndLabel,
+      Source,
+      Destination
     >
-  >
-> GraphContainer;
+  > GraphContainer;
 
+  template <typename S>
+  struct InitialValue
+  {
+    InitialValue(hstate_t state, S series)
+      : state_(state),
+    series_(series) {}
+
+    hstate_t state_;
+    S series_;
+  };
 
   // class Graph.
   template <typename Kind, typename WordValue, typename WeightValue,
@@ -148,34 +171,15 @@ typedef multi_index_container
       typedef graph_data_t edges_t;
       typedef CounterSupport states_t;
 
-      struct InitialValue
-      {
-	InitialValue(hstate_t state, series_set_elt_value_t series)
-	  : state_(state),
-	series_(series) {}
+      //FIXME: find a better name than initial_container_t. The word initial
+      //is ambiguous since we use it also for final_t
+      typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, hstate_t>
+	initial_container_t;
+      typedef typename initial_container_t::Type initial_t;
+      typedef initial_t final_t;
 
-        hstate_t state_;
-	series_set_elt_value_t series_;
-      };
-
-      typedef multi_index_container
-      <
-        InitialValue,
-        indexed_by
-        <
-	  hashed_non_unique
-	  <
-	    BOOST_MULTI_INDEX_MEMBER(InitialValue, hstate_t, state_)
-	  >
-	>
-      > InitialContainer;
-
-
-      typedef InitialValue initial_t;
-      typedef InitialValue final_t;
-
-      typedef misc::Support<initial_t>	initial_support_t;
-      typedef misc::Support<final_t>	final_support_t;
+      typedef misc::Support<initial_container_t>	initial_support_t;
+      typedef misc::Support<initial_container_t>	final_support_t;
 
       typedef Tag tag_t;
       typedef Geometry geometry_t;
@@ -214,9 +218,9 @@ typedef multi_index_container
 
       self_t& clone () const; // TODO
 
-      tag_t& tag () const; // TODO
+      tag_t& tag (); // TODO
       const tag_t& tag () const; // TODO
-      geometry_t geometry () const; // TODO
+      geometry_t geometry (); // TODO
       const geometry_t geometry () const; // TODO
 
       /*
@@ -367,12 +371,14 @@ typedef multi_index_container
       typedef typename states_t::iterator		state_iterator;
       typedef typename transitions_t::iterator		transition_iterator;
 
-      typedef typename Graph<Kind, WordValue, WeightValue, SeriesValue,
-	      Letter, Tag, Geometry>::InitialValue	initial_t;
-      typedef typename Graph<Kind, WordValue, WeightValue, SeriesValue,
-	      Letter, Tag, Geometry>::InitialValue	final_t;
-      typedef misc::Support<initial_t>			initial_support_t;
-      typedef misc::Support<final_t>			final_support_t;
+      typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, hstate_t>
+	initial_container_t;
+      typedef typename initial_container_t::Type initial_t;
+      typedef initial_t final_t;
+
+      typedef misc::Support<initial_container_t>	initial_support_t;
+      typedef misc::Support<initial_container_t>	final_support_t;
+
       typedef typename initial_support_t::iterator	initial_iterator;
       typedef typename final_support_t::iterator	final_iterator;
 

@@ -26,6 +26,15 @@
 # include <iterator>
 # include <map>
 # include <string>
+#include <boost/multi_index_container.hpp>
+#include <boost/multi_index/member.hpp>
+#include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index/hashed_index.hpp>
+#include <boost/functional/hash/hash.hpp>
+#include <boost/multi_index/sequenced_index.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/multi_index/composite_key.hpp>
+
 
 namespace vcsn
 {
@@ -54,16 +63,16 @@ namespace vcsn
 	typedef key_type&				 reference;
 
 	/*
-	 * This is a default constructor. 
+	 * This is a default constructor.
 	 * WARNING: this constructor instantiates an invalid iterator.
-	 * 	    To use an iterator instantiated by this constructor,
-	 * 	    you need to initialize it thanks to the '=' operator.
+	 *	    To use an iterator instantiated by this constructor,
+	 *	    you need to initialize it thanks to the '=' operator.
 	 *
 	 * This constructor is useful whenever you want to use an iterator as
 	 * a temporary variable in a loop. For instance:
 	 *
-	 * for (SupportIterator tmp, it = aut.final().begin(); 
-	 * 	it != aut.final().end();)
+	 * for (SupportIterator tmp, it = aut.final().begin();
+	 *	it != aut.final().end();)
 	 * {
 	 *	tmp = it++;
 	 *	if (something)
@@ -120,6 +129,58 @@ namespace vcsn
 	U max () const;
       private:
 	const std::map<U, T>&	m_;
+    };
+
+
+    template <typename U, typename HState>
+    struct InitialContainer
+    {
+
+      typedef boost::multi_index_container
+      <
+	U,
+	boost::multi_index::indexed_by
+	<
+	  boost::multi_index::ordered_unique<
+	    BOOST_MULTI_INDEX_MEMBER(U, HState, state_)
+	  >
+	>
+      > Type;
+    };
+
+
+    /// Support<map<U, T> > is a const adapter of std::map to container.
+    template <class U, class HState>
+    class Support<InitialContainer<U, HState> >
+    {
+	typedef typename InitialContainer<U, HState>::Type container_t;
+
+      public:
+	typedef SupportIterator<container_t > iterator;
+	typedef SupportIterator<container_t > const_iterator;
+	/// The type of the values.
+	typedef typename container_t::value_type value_type;
+
+	Support (const container_t&);
+	Support (const Support&);
+
+	/** Return the one and only element of the support.
+	 @pre There is exactly one element in the support.  */
+	value_type operator* () const;
+
+	iterator begin () const;
+	iterator end () const;
+	unsigned size () const;
+
+	// Find the element associated to \a k.
+	iterator find (const U& k) const;
+
+	/// Whether it's empty.
+	bool empty () const;
+
+	U max () const;
+      private:
+	const container_t&	m_;
     };
 
     /** @} */

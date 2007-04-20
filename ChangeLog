@@ -1,3 +1,9 @@
+2007-04-20  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add support for {initial, final}_support_t
+	* include/vaucanson/automata/implementation/boost_graph.hh: .
+	* include/vaucanson/misc/support.hh: .
+
 2007-04-16  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix compilation issues and inline functions in CounterSupport
