@@ -104,6 +104,8 @@ namespace vcsn
 	/// Whether it's empty.
 	bool empty () const;
 
+	unsigned max () const;
+
       private:
 	unsigned	i_;
     };

@@ -29,6 +29,7 @@ namespace vcsn
   | SupportIterator.  |
   `------------------*/
 
+    inline
     CounterSupportIterator::CounterSupportIterator (unsigned n)
       : i (n)
     {}
@@ -79,15 +80,15 @@ namespace vcsn
 
 
     /// support<map<U, T> > is a const adapter of std::map to container.
+    inline
     CounterSupport::CounterSupport (const CounterSupport& s)
       : i_ (s.i_)
-    {
-    }
+    { }
 
+    inline
     CounterSupport::CounterSupport (unsigned i)
       : i_ (i)
-    {
-    }
+    { }
 
     inline
     unsigned
@@ -132,6 +133,13 @@ namespace vcsn
     CounterSupport::end () const
     {
       return iterator (i_);
+    }
+
+    inline
+    unsigned
+    CounterSupport::max () const
+    {
+      return i_;
     }
   } // misc
 } // vcsn

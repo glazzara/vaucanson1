@@ -67,10 +67,10 @@ namespace vcsn {
       typedef undefined_type letter_t;
       typedef undefined_type tag_t;
       typedef undefined_type states_t;
-      typedef undefined_type state_data_t;
+// FIXME: RM?      typedef undefined_type state_data_t;
       typedef undefined_type state_iterator;
       typedef undefined_type transitions_t;
-      typedef undefined_type transition_data_t;
+// FIXME: RM?      typedef undefined_type transition_data_t;
       typedef undefined_type transition_iterator;
       typedef undefined_type initial_iterator;
       typedef undefined_type initial_support_t;

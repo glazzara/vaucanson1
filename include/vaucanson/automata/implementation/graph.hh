@@ -38,6 +38,8 @@
 namespace vcsn
 {
 
+  typedef handler<state_h, int> hstate_t;
+  typedef handler<transition_h, int> htransition_t;
 
   typedef htransition_t hedge_t;
   namespace delta_kind
@@ -366,8 +368,8 @@ namespace vcsn
       typedef Tag					tag_t;
       typedef edge_value<label_t>			transition_value_t;
       typedef state_value				state_value_t;
-      typedef std::vector<state_value_t>		state_data_t;
-      typedef std::vector<transition_value_t>		transition_data_t;
+// FIXME: RM?      typedef std::vector<state_value_t>		state_data_t;
+// FIXME: RM?      typedef std::vector<transition_value_t>		transition_data_t;
 
       typedef StateContainer				states_t;
       typedef EdgeContainer				transitions_t;

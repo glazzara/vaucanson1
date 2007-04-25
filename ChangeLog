@@ -1,3 +1,17 @@
+2007-04-25  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Various fix in boost implementation.
+	* automata/concept/automata_base.hh: Remove unused typedef.
+	* automata/concept/handlers.hh,
+	* automata/concept/handlers.hxx: Enhance the genericity of handler.
+	* automata/implementation/boost_graph.hh,
+	* automata/implementation/boost_graph.hxx: Various implementation fix.
+	* automata/implementation/graph.hh,
+	* automata/implementation/transpose_view.hh: Remove unused typedef.
+	* misc/counter_support.hh,
+	* misc/counter_support.hxx: Fix multiple definitions.
+	* misc/support.hh: Renaming structures.
+
 2007-04-20  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add support for {initial, final}_support_t

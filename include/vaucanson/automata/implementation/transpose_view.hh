@@ -84,11 +84,11 @@ namespace vcsn {
       typedef typename automaton_traits<T>::letter_t	letter_t;
       typedef typename automaton_traits<T>::tag_t		tag_t;
       typedef typename automaton_traits<T>::states_t	states_t;
-      typedef typename automaton_traits<T>::state_data_t	state_data_t;
+// FIXME: RM?      typedef typename automaton_traits<T>::state_data_t	state_data_t;
       typedef typename automaton_traits<T>::state_iterator
       state_iterator;
       typedef typename automaton_traits<T>::transitions_t	transitions_t;
-      typedef typename automaton_traits<T>::transition_data_t	transition_data_t;
+// FIXME: RM?      typedef typename automaton_traits<T>::transition_data_t	transition_data_t;
       typedef typename automaton_traits<T>::transition_iterator	transition_iterator;
       typedef typename automaton_traits<T>::initial_t	initial_t;
       typedef typename automaton_traits<T>::initial_iterator

@@ -61,6 +61,13 @@ namespace vcsn
   BOOSTGRAPH::Graph ()
   { }
 
+
+  BOOSTGRAPH_TPARAM
+  hstate_t
+  BOOSTGRAPH::src_of (hedge_t h) const
+  {
+  }
+
   // End of syntactic sugar
 # undef BOOSTGRAPH_TPARAM
 # undef BOOSTGRAPH

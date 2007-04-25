@@ -38,6 +38,10 @@
 #include <vaucanson/misc/counter_support.hh>
 #include <functional>
 
+// FIXME: how to handle htransition_t?
+// FIXME: do we have enough to handle it?
+
+// FIXME: Z this is so UGLY
 using namespace vcsn::misc;
 
 namespace vcsn
@@ -134,11 +138,33 @@ namespace vcsn
   struct InitialValue
   {
     InitialValue(hstate_t state, S series)
-      : state_(state),
-    series_(series) {}
+      : first(state),
+    second(series) {}
 
-    hstate_t state_;
-    S series_;
+    hstate_t first; // state
+    S second; // series
+  };
+
+  class VGraphContainerIterator : public GraphContainer::iterator
+  {
+    public:
+      VGraphContainerIterator(const GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
+      htransition_t operator*()
+      {
+	// FIXME: remove this const_cast
+	return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
+      }
+  };
+
+  class VGraphContainer : public GraphContainer
+  {
+    public:
+      typedef VGraphContainerIterator iterator;
+
+      VGraphContainer() {}
+
+      iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
+      iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
   };
 
   // class Graph.
@@ -166,7 +192,7 @@ namespace vcsn
 //      typedef /* FIXME: std::vector<EdgeValue_t> */ edge_data_t;
 
 //      typedef /* FIXME: StateContainer */ states_t;
-      typedef GraphContainer graph_data_t;
+      typedef VGraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef graph_data_t edges_t;
       typedef CounterSupport states_t;
@@ -200,6 +226,23 @@ namespace vcsn
       bool has_state (hstate_t h) const; // TODO
       hstate_t add_state (); // TODO
       hstate_t del_state (hstate_t h); // TODO
+
+      void set_initial(hstate_t s,
+		       const series_set_elt_value_t& v,
+		       const series_set_elt_value_t& z);
+      const series_set_elt_value_t&
+      get_initial(hstate_t, const series_set_elt_value_t&) const;
+      void clear_initial();
+
+      void set_final(hstate_t,
+		     const series_set_elt_value_t&,
+		     const series_set_elt_value_t&);
+      const series_set_elt_value_t&
+      get_final(hstate_t, const series_set_elt_value_t&) const;
+      void clear_final();
+
+      bool is_final(hstate_t s) const;
+      bool is_initial(hstate_t s) const;
 
       // edge manipulations
       bool has_edge (hedge_t h) const; // TODO
@@ -365,7 +408,7 @@ namespace vcsn
       ::ret						label_t;
       typedef Tag					tag_t;
 
-      typedef GraphContainer			transitions_t;
+      typedef VGraphContainer			transitions_t;
       typedef CounterSupport				states_t;
 
       typedef typename states_t::iterator		state_iterator;

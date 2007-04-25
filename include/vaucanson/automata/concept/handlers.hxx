@@ -22,41 +22,41 @@
 namespace vcsn
 {
 
-  template<typename Tag>
-  handler<Tag>::handler() : v_(0)
+  template<typename Tag, typename Type>
+  handler<Tag, Type>::handler() : v_(0)
   {}
 
-  template<typename Tag>
-  handler<Tag>::handler(int h) : v_(h)
+  template<typename Tag, typename Type>
+  handler<Tag, Type>::handler(Type h) : v_(h)
   {}
 
-  template<typename Tag>
-  handler<Tag>::handler(const handler& h) : v_(h.v_)
+  template<typename Tag, typename Type>
+  handler<Tag, Type>::handler(const handler& h) : v_(h.v_)
   {}
 
-  template<typename Tag>
-  handler<Tag>& 
-  handler<Tag>::operator=(const handler<Tag>& h)
+  template<typename Tag, typename Type>
+  handler<Tag, Type>& 
+  handler<Tag, Type>::operator=(const handler<Tag, Type>& h)
   {
     v_ = h.v_;
     return *this;
   }
 
-  template<typename Tag>
-  handler<Tag>& handler<Tag>::operator=(int h)
+  template<typename Tag, typename Type>
+  handler<Tag, Type>& handler<Tag, Type>::operator=(Type h)
   {
     v_ = h;
     return *this;
   }
 
-  template<typename Tag>
-  int handler<Tag>::value() const
+  template<typename Tag, typename Type>
+  Type handler<Tag, Type>::value() const
   {
     return v_;
   }
 
-  template<typename Tag>
-  handler<Tag>::operator int () const
+  template<typename Tag, typename Type>
+  handler<Tag, Type>::operator Type () const
   {
     return v_;
   }
@@ -64,9 +64,9 @@ namespace vcsn
 } // vcsn
 
 #define HOPERATOR(Op)					\
-template<typename kind>					\
-bool operator Op (const handler<kind>& h1,	\
-                  const handler<kind>& h2)	\
+template<typename Tag, typename Type>			\
+bool operator Op (const handler<Tag, Type>& h1,		\
+                  const handler<Tag, Type>& h2)		\
 { return h1.value() Op h2.value(); }
 
 namespace vcsn {
@@ -80,9 +80,9 @@ HOPERATOR(>=);
 
 namespace std {
 
-  template <typename kind>
+  template <typename Tag, typename Type>
   std::ostream&
-  operator<<(std::ostream& out, const vcsn::handler<kind>& h)
+  operator<<(std::ostream& out, const vcsn::handler<Tag, Type>& h)
   {
     out << h.value();
     return out;
