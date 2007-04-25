@@ -1,3 +1,9 @@
+2007-04-25  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Implemention of Support
+	* support.hh,
+	* support.hxx: Implementation of Support for BMI.
+
 2007-04-25  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Various fix in boost implementation.

@@ -173,12 +173,12 @@ namespace vcsn
 	unsigned size () const;
 
 	// Find the element associated to \a k.
-	iterator find (const U& k) const;
+	iterator find (const HState& k) const;
 
 	/// Whether it's empty.
 	bool empty () const;
 
-	U max () const;
+	HState max () const;
       private:
 	const container_t&	m_;
     };

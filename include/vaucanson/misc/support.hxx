@@ -140,6 +140,70 @@ namespace vcsn
       return *max_element (begin (), end ());
     }
 
+    /// support<InitialContainer<U, HState> is a const adapter of InitialContainer to container.
+    template <class U, class HState>
+    Support<InitialContainer<U, HState> >::Support (const Support& s)
+      : m_ (s.m_)
+    {
+    }
+
+    template <class U, class HState>
+    Support<InitialContainer<U, HState> >::Support (const Support::container_t& m)
+      : m_ (m)
+    {
+    }
+
+    template <class U, class HState>
+    unsigned
+    Support<InitialContainer<U, HState> >::size () const
+    {
+      return m_.size ();
+    }
+
+    template <class U, class HState>
+    typename Support<InitialContainer<U, HState> >::iterator
+    Support<InitialContainer<U, HState> >::find (const HState& k) const
+    {
+      return m_.find (k);
+    }
+
+    template <class U, class HState>
+    bool
+    Support<InitialContainer<U, HState> >::empty () const
+    {
+      return m_.empty ();
+    }
+
+    template <class U, class HState>
+    typename Support<InitialContainer<U, HState> >::value_type
+    Support<InitialContainer<U, HState> >::operator* () const
+    {
+      precondition (m_.size () == 1);
+      return *m_.begin ();
+    }
+
+    template <class U, class HState>
+    typename Support<InitialContainer<U, HState> >::iterator
+    Support<InitialContainer<U, HState> >::begin () const
+    {
+      return iterator (m_.begin ());
+    }
+
+    template <class U, class HState>
+    typename Support<InitialContainer<U, HState> >::iterator
+    Support<InitialContainer<U, HState> >::end () const
+    {
+      return iterator (m_.end ());
+    }
+
+    template <class U, class HState>
+    HState
+    Support<InitialContainer<U, HState> >::max () const
+    {
+      return *max_element (begin (), end ());
+    }
+
+
 
   } // misc
 } // vcsn
