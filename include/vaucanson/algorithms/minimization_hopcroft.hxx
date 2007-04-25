@@ -563,7 +563,7 @@ namespace vcsn
 
     series_set_elt_t	null_series	= input.series().zero_;
     semiring_elt_t	weight_zero	= input.series().semiring().wzero_;
-    monoid_elt_t	monoid_identity	= input.series().monoid().empty_;
+    monoid_elt_t	monoid_identity	= input.series().monoid().vcsn_empty;
     const alphabet_t&	alphabet (input.series().monoid().alphabet());
 
     queue<pair_class_letter_t>				the_queue;

@@ -48,7 +48,7 @@ namespace vcsn {
 	size(aut.states().size()),
 	null_series(aut.series().zero_),
 	semiring_elt_zero(aut.series().semiring().wzero_),
-	monoid_identity(aut.series().monoid().empty_)
+	monoid_identity(aut.series().monoid().vcsn_empty)
     {
 
       /// @bug FIXME: This converters should be removed
@@ -269,7 +269,7 @@ namespace vcsn {
       : a(aut),
 	null_series(aut.series().zero_),
 	semiring_elt_zero(aut.series().semiring().wzero_),
-	monoid_identity(aut.series().monoid().empty_)
+	monoid_identity(aut.series().monoid().vcsn_empty)
     {
       for_all_transitions(t, a)
 	tr_q.push(*t);

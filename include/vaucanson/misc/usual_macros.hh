@@ -178,7 +178,7 @@
 // !! * must be well documented * !!
 # define zero_	zero(SELECT(typename series_set_elt_t::value_t))
 # define one_	identity(SELECT(typename series_set_elt_t::value_t))
-# define empty_	identity(SELECT(typename monoid_elt_t::value_t))
+# define vcsn_empty	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
 
 # include <vaucanson/misc/global_timer.hh>

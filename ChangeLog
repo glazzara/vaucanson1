@@ -1,3 +1,15 @@
+2007-04-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix conflict with boost and empty_ macro.  
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/evaluation.hxx: .
+	* include/vaucanson/algorithms/extension.hxx: .
+	* include/vaucanson/algorithms/image.hxx: .
+	* include/vaucanson/algorithms/invert.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/realtime_composition.hxx: .
+	* include/vaucanson/misc/usual_macros.hh: .
+
 2007-04-06  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Rewrite quotient for automaton with Boolean multiplicities.

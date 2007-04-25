@@ -70,7 +70,7 @@ namespace vcsn {
     Auto_t tmp_auto(auto_structure);
 
     AUTOMATON_TYPES(Auto_t);
-    monoid_elt_t empty = tmp_auto.series().monoid().empty_;
+    monoid_elt_t empty = tmp_auto.series().monoid().vcsn_empty;
     standard_of(tmp_auto, exp.get(empty).value());
     partial_1(tmp_auto, t, state_exp_pair_set);
   }

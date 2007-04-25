@@ -44,7 +44,7 @@ namespace vcsn {
 			 a.structure().series().monoid()));
     ret_t	   t_ret(ts);
 
-    monoid_elt_t   neutre   = a.series().monoid().empty_;
+    monoid_elt_t   neutre   = a.series().monoid().vcsn_empty;
     monoid_elt_t	t_neutre = t_ret.series().monoid().
       identity(SELECT(typename t_monoid_elt_t::value_t));
 

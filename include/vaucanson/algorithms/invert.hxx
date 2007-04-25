@@ -102,7 +102,7 @@ namespace vcsn
 
       typename semiring_elt_t::semiring_elt_t
 	o_sm_zero (u.structure().series().semiring().semiring());
-      monoid_elt_t monoid_identity = u.series().monoid().empty_;
+      monoid_elt_t monoid_identity = u.series().monoid().vcsn_empty;
 
       monoid_elt_t a (u.structure().series().monoid());
       semiring_elt_t sm (u.structure().series().semiring());
