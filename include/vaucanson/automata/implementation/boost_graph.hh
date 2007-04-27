@@ -145,26 +145,25 @@ namespace vcsn
     S second; // series
   };
 
-  class VGraphContainerIterator : public GraphContainer::iterator
+  struct VGraphContainerIterator : GraphContainer::iterator
   {
-    public:
-      VGraphContainerIterator(const GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
-      htransition_t operator*()
-      {
-	// FIXME: remove this const_cast
-	return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
-      }
+    VGraphContainerIterator(const GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
+    htransition_t operator*()
+    {
+      // FIXME: remove this const_cast
+      return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
+    }
   };
 
-  class VGraphContainer : public GraphContainer
+  struct VGraphContainer : GraphContainer
   {
-    public:
-      typedef VGraphContainerIterator iterator;
+    typedef VGraphContainerIterator iterator;
 
-      VGraphContainer() {}
+    VGraphContainer() {}
+    //VGraphContainer(const VGraphContainer&c) : GraphContainer(c) {}
 
-      iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
-      iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
+    iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
+    iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
   };
 
   // class Graph.
@@ -213,7 +212,7 @@ namespace vcsn
 
       Graph ();
       Graph (unsigned int initial_number_of_state,
-		  unsigned int number_of_edge_initially_allocated); // TODO
+		  unsigned int number_of_edge_initially_allocated);
 
       // FIXME: add const rettype& versions?
 
@@ -313,6 +312,13 @@ namespace vcsn
       tag_t tag_;
       final_t final_;
       initial_t initial_;
+
+      //NEW ATTRIBUTES
+      dynamic_bitset<> initial_bitset_;
+      dynamic_bitset<> final_bitset_;
+      unsigned  have_epsilon_;
+//      alphabet_t    alpha_;
+      unsigned  number_of_state_;
 
   }; // End of class Graph
 
@@ -571,3 +577,4 @@ namespace vcsn
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_ //
+

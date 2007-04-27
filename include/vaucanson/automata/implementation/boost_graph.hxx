@@ -45,27 +45,74 @@ namespace vcsn
   }
 */
 
-  /*
-  ** class BoostGraph
-  */
+  /*--------------------.
+  | Convenient macros.  |
+  `--------------------*/
 
-  // Syntactic sugar
-# define BOOSTGRAPH_TPARAM							\
-  template <typename Kind, typename WordValue, typename WeightValue,		\
-	    typename SeriesValue, typename Letter, typename Tag, typename Geometry>
-# define BOOSTGRAPH								\
+# define BOOSTGRAPH_TPARAM						\
+  template <class Kind, class WordValue, class WeightValue,		\
+	    class SeriesValue, class Letter, class Tag, class Geometry>
+
+# define BOOSTGRAPH							\
   Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
+
+
+  /*-------------------------.
+  | Graph's implementation.  |
+  `-------------------------*/
+
+  /*---------------.
+  | Constructors.  |
+  `---------------*/
 
   BOOSTGRAPH_TPARAM
   inline
   BOOSTGRAPH::Graph ()
+    : number_of_state_(0),
+      have_epsilon_(0)
   { }
+
+  /*!
+  **  Constructor provided for convenience.
+  **  Keep compatibility with other implementations.
+  **  Because of BMI, this constructor doesn't allocate memory in advance
+  **  even if the 'reserve_number_of_edge' is specified.
+  **
+  **  However, the 'initial_number_of_state' parameter is used and implies
+  **  the creation of this number of states.
+  */
+  BOOSTGRAPH_TPARAM
+  BOOSTGRAPH::Graph (unsigned initial_number_of_state,
+		     unsigned reserve_number_of_edge)
+    : number_of_state_(initial_number_of_state),
+      have_epsilon_(0)
+  { }
+
+  /*------------------.
+  | Basic accessors.  |
+  `------------------*/
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::states_t
+  BOOSTGRAPH::states() const
+  {
+    return states_t();
+  }
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::edges_t
+  BOOSTGRAPH::edges() const
+  {
+    return graph_;
+  }
+
 
 
   BOOSTGRAPH_TPARAM
   hstate_t
-  BOOSTGRAPH::src_of (hedge_t h) const
+  BOOSTGRAPH::src_of (hedge_t) const
   {
+    return hstate_t(0);
   }
 
   // End of syntactic sugar
