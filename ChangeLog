@@ -1,5 +1,14 @@
 2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Various fix.
+	* include/vaucanson/automata/concept/handlers.hh: Add a parent to EdgeValue.
+	* include/vaucanson/automata/implementation/boost_graph.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hxx:
+	  Many fixes to add hlabel_t to EdgeValue,
+	  Add SmartLabelContainer.
+
+2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add a set of functor to hash the label.
 	* include/vaucanson/misc/hash_label.hh: New.
 	* include/vaucanson/misc/hash_label.hxx: New.

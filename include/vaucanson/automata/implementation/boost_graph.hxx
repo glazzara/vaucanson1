@@ -26,8 +26,9 @@ namespace vcsn
   ** class EdgeLabel
   */
 
+  template <typename Label>
   inline
-  EdgeValue::EdgeValue (hstate_t h1, hstate_t h2, unsigned l)
+  EdgeValue<Label>::EdgeValue (hstate_t h1, hstate_t h2, hlabel_t l)
     : label_ (l), from_ (h1), to_ (h2)
   { }
 
@@ -68,8 +69,10 @@ namespace vcsn
   BOOSTGRAPH_TPARAM
   inline
   BOOSTGRAPH::Graph ()
-    : number_of_state_(0),
-      have_epsilon_(0)
+    : initial_bitset_(0),
+      final_bitset_(0),
+      number_of_state_(0),
+      number_of_epsilon_(0)
   { }
 
   /*!
@@ -84,8 +87,10 @@ namespace vcsn
   BOOSTGRAPH_TPARAM
   BOOSTGRAPH::Graph (unsigned initial_number_of_state,
 		     unsigned reserve_number_of_edge)
-    : number_of_state_(initial_number_of_state),
-      have_epsilon_(0)
+    : initial_bitset_(initial_number_of_state),
+      final_bitset_(initial_number_of_state),
+      number_of_epsilon_(0),
+      number_of_state_(initial_number_of_state)
   { }
 
   /*------------------.
@@ -96,6 +101,7 @@ namespace vcsn
   typename BOOSTGRAPH::states_t
   BOOSTGRAPH::states() const
   {
+    // FIXME: is that correct ?
     return states_t();
   }
 
@@ -106,15 +112,75 @@ namespace vcsn
     return graph_;
   }
 
-
-
   BOOSTGRAPH_TPARAM
   hstate_t
   BOOSTGRAPH::src_of (hedge_t) const
   {
+    // FIXME: is that correct ?
     return hstate_t(0);
   }
 
+  /*----------------------.
+  | State manipulations.  |
+  `----------------------*/
+
+  BOOSTGRAPH_TPARAM
+  hstate_t
+  BOOSTGRAPH::add_state ()
+  {
+    initial_bitset_.append(false);
+    final_bitset_.append(false);
+    return hstate_t (++number_of_state_);
+  }
+
+  BOOSTGRAPH_TPARAM
+  void
+  BOOSTGRAPH::set_initial (hstate_t s,
+			   const series_set_elt_value_t& v,
+			   const series_set_elt_value_t& z)
+  {
+    if (z == v)
+    {
+      initial_.erase (s);
+      initial_bitset_[s.value()] = false;
+    }
+    else
+    {
+      initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
+      initial_bitset_[s.value()] = true;
+    }
+  }
+
+  BOOSTGRAPH_TPARAM
+  void
+  BOOSTGRAPH::set_final(hstate_t s,
+		        const series_set_elt_value_t& v,
+		        const series_set_elt_value_t& z)
+  {
+    if (z == v)
+    {
+      final_.erase (s);
+      final_bitset_[s.value()] = false;
+    }
+    else
+    {
+      final_.insert (InitialValue<series_set_elt_value_t> (s, v));
+      final_bitset_[s.value()] = true;
+    }
+  }
+
+  /*---------------------.
+  | Edge manipulations.  |
+  `---------------------*/
+
+  BOOSTGRAPH_TPARAM
+  hedge_t
+  BOOSTGRAPH::add_edge (hstate_t from, hstate_t to, const label_t& l)
+  {
+    hlabel_t hl = label_container_.insert (l);
+    // FIXME
+    return hedge_t ();
+  }
   // End of syntactic sugar
 # undef BOOSTGRAPH_TPARAM
 # undef BOOSTGRAPH
