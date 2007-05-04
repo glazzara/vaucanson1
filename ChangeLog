@@ -1,5 +1,11 @@
 2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Add SmartLabelContainer.
+	* include/vaucanson/automata/concept/smart_label.hh: New.
+	* include/vaucanson/automata/concept/smart_label.hxx: New.
+
+2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add missing constructor
 	* include/vaucanson/misc/counter_support.hh,
 	* include/vaucanson/misc/counter_support.hxx: add missing constructor.
