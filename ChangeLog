@@ -1,5 +1,11 @@
 2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Add a set of functor to hash the label.
+	* include/vaucanson/misc/hash_label.hh: New.
+	* include/vaucanson/misc/hash_label.hxx: New.
+
+2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add SmartLabelContainer.
 	* include/vaucanson/automata/concept/smart_label.hh: New.
 	* include/vaucanson/automata/concept/smart_label.hxx: New.
