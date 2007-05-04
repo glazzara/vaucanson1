@@ -87,6 +87,7 @@ namespace vcsn
 	typedef CounterSupportIterator iterator;
 	typedef CounterSupportIterator const_iterator;
 
+	CounterSupport ();
 	CounterSupport (unsigned);
 	CounterSupport (const CounterSupport&);
 

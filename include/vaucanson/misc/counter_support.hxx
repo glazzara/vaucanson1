@@ -81,6 +81,10 @@ namespace vcsn
 
     /// support<map<U, T> > is a const adapter of std::map to container.
     inline
+    CounterSupport::CounterSupport ()
+    { }
+
+    inline
     CounterSupport::CounterSupport (const CounterSupport& s)
       : i_ (s.i_)
     { }

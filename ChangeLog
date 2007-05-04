@@ -1,3 +1,9 @@
+2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add missing constructor
+	* include/vaucanson/misc/counter_support.hh,
+	* include/vaucanson/misc/counter_support.hxx: add missing constructor.
+
 2007-04-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Few method implementations
