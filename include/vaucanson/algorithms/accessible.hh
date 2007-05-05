@@ -50,7 +50,7 @@
 // INTERFACE: void coaccessible_here(GenAutomaton& a) { return vcsn::coaccessible_here(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/automata/concept/handlers.hh>
+//# include <vaucanson/automata/concept/handlers.hh>
 
 # include <set>
 
@@ -68,7 +68,7 @@ namespace vcsn {
    * @see accessible(), coaccessible(), coaccessible_states()
    */
   template<typename A, typename T>
-  std::set<hstate_t>
+  std::set<typename automaton_traits<T>::hstate_t>
   accessible_states(const Element<A, T>& a);
 
   /**
@@ -113,7 +113,7 @@ namespace vcsn {
    * @see coaccessible(), accessible(), accessible_states()
    */
   template<typename A, typename T>
-  std::set<hstate_t>
+  std::set<typename automaton_traits<T>::hstate_t>
   coaccessible_states(const Element<A, T>& a);
 
   /**

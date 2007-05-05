@@ -22,13 +22,25 @@
 
 namespace vcsn
 {
+  /*--------------------.
+  | Convenient macros.  |
+  `--------------------*/
+
+# define BOOSTGRAPH_TPARAM						\
+  template <class Kind, class WordValue, class WeightValue,		\
+	    class SeriesValue, class Letter, class Tag, class Geometry>
+
+# define BOOSTGRAPH							\
+  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
+
+
   /*
   ** class EdgeLabel
   */
 
-  template <typename Label>
+  BOOSTGRAPH_TPARAM
   inline
-  EdgeValue<Label>::EdgeValue (hstate_t h1, hstate_t h2, hlabel_t l)
+  BOOSTGRAPH::EdgeValue::EdgeValue (hstate_t h1, hstate_t h2, hlabel_t l)
     : label_ (l), from_ (h1), to_ (h2)
   { }
 
@@ -45,18 +57,6 @@ namespace vcsn
     return label_;
   }
 */
-
-  /*--------------------.
-  | Convenient macros.  |
-  `--------------------*/
-
-# define BOOSTGRAPH_TPARAM						\
-  template <class Kind, class WordValue, class WeightValue,		\
-	    class SeriesValue, class Letter, class Tag, class Geometry>
-
-# define BOOSTGRAPH							\
-  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
-
 
   /*-------------------------.
   | Graph's implementation.  |
@@ -101,8 +101,7 @@ namespace vcsn
   typename BOOSTGRAPH::states_t
   BOOSTGRAPH::states() const
   {
-    // FIXME: is that correct ?
-    return states_t();
+    return states_t(number_of_state_);
   }
 
   BOOSTGRAPH_TPARAM
@@ -113,11 +112,19 @@ namespace vcsn
   }
 
   BOOSTGRAPH_TPARAM
-  hstate_t
-  BOOSTGRAPH::src_of (hedge_t) const
+  typename BOOSTGRAPH::hstate_t
+  BOOSTGRAPH::src_of (hedge_t h) const
   {
-    // FIXME: is that correct ?
-    return hstate_t(0);
+    return h.value()->from();
+  }
+
+  BOOSTGRAPH_TPARAM
+  const typename BOOSTGRAPH::label_t&
+  BOOSTGRAPH::label_of (hedge_t h) const
+  {
+    hlabel_t hl;
+    h.value()->label(hl);
+    return hl.value()->value();
   }
 
   /*----------------------.
@@ -125,7 +132,7 @@ namespace vcsn
   `----------------------*/
 
   BOOSTGRAPH_TPARAM
-  hstate_t
+  typename BOOSTGRAPH::hstate_t
   BOOSTGRAPH::add_state ()
   {
     initial_bitset_.append(false);
@@ -174,12 +181,12 @@ namespace vcsn
   `---------------------*/
 
   BOOSTGRAPH_TPARAM
-  hedge_t
+  typename BOOSTGRAPH::hedge_t
   BOOSTGRAPH::add_edge (hstate_t from, hstate_t to, const label_t& l)
   {
     hlabel_t hl = label_container_.insert (l);
-    // FIXME
-    return hedge_t ();
+
+    return hedge_t (&*graph_.insert (EdgeValue (from, to, hl)).first);
   }
   // End of syntactic sugar
 # undef BOOSTGRAPH_TPARAM

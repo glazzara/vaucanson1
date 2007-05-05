@@ -31,7 +31,7 @@ namespace vcsn
    */
   template<typename A, typename T>
   bool	has_successors(const Element<A, T>&	a,
-		       const hstate_t		s);
+		       const typename automaton_traits<T>::hstate_t		s);
 
   /**
    * @brief    Whether a state has predecessors.
@@ -43,7 +43,7 @@ namespace vcsn
    */
   template<typename A, typename T>
   bool	has_predecessors(const Element<A, T>& a,
-			 const hstate_t		s);
+			 const typename automaton_traits<T>::hstate_t		s);
 }
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB

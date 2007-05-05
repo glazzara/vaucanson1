@@ -18,6 +18,7 @@
 # define VCSN_AUTOMATA_CONCEPT_HANDLERS_HH
 
 # include <iostream>
+# include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn {
 
@@ -50,13 +51,6 @@ namespace vcsn {
     protected:
       Type v_;
   };
-
-  struct GenEdgeValue
-  { };
-
-  // FIXME: move to boost_graph.hh
-  typedef handler<state_h, int> hstate_t;
-  typedef handler<transition_h, GenEdgeValue*> htransition_t;
 
   template<typename Tag, typename Type>
   bool operator==(const handler<Tag, Type>& h1,

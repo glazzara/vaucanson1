@@ -35,7 +35,7 @@ namespace vcsn {
   `-----------------------*/
 
   template <class A_, typename Auto_>
-  std::set<hstate_t>
+  std::set<typename Auto_::hstate_t>
   do_accessible_states(const AutomataBase<A_>&,
 		       const Auto_&		   a)
   {
@@ -77,7 +77,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  std::set<hstate_t>
+  std::set<typename automaton_traits<T>::hstate_t>
   accessible_states(const Element<A, T>& a)
   {
     TIMER_SCOPED ("accessible_states");
@@ -103,7 +103,7 @@ namespace vcsn {
   `-----------------------*/
 
   template <class A_, typename Auto_>
-  std::set<hstate_t>
+  std::set<typename Auto_::hstate_t>
   do_coaccessible_states(const AutomataBase<A_>&,
 			 const Auto_&	       a)
   {
@@ -111,7 +111,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  std::set<hstate_t>
+  std::set<typename automaton_traits<T>::hstate_t>
   coaccessible_states(const Element<A, T>& a)
   {
     return do_coaccessible_states(a.structure(), a);

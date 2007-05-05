@@ -24,15 +24,13 @@ namespace vcsn
   template <typename T>
   struct SmartLabel_ref_inc
   {
-      SmartLabel_ref_inc(const SmartLabel<T>&)
-      { }
+    SmartLabel_ref_inc (const SmartLabel<T>&)
+    { }
 
-      int operator() (SmartLabel<T>& sl)
-      {
-	return sl.ref_inc ();
-      }
-
-    private:
+    int operator() (SmartLabel<T>& sl)
+    {
+      return sl.ref_inc ();
+    }
   };
 
 
@@ -40,20 +38,15 @@ namespace vcsn
   typename SmartLabelContainer<T>::hlabel_t
   SmartLabelContainer<T>::insert (const T& l)
   {
-    typename label_container_t::iterator i = data_.find(l);
+    typename label_container_t::iterator i = data_.find (l);
 
-    if (i != data_.end())
+    if (i != data_.end ())
     {
       data_.modify (i, SmartLabel_ref_inc<T> (*i));
-      return (hlabel_t(&*i));
+      return hlabel_t (&*i);
     }
-    /*
     else
-    {
-      // FIXME
-      SmartLabel<T> sl(l);
-      return hlabel_t(&sl);
-    }*/
+      return hlabel_t (&*data_.insert (SmartLabel<T> (l)).first);
   }
 
 } // End of namespace vcsn

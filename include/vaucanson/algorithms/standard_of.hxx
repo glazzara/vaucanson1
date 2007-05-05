@@ -55,6 +55,9 @@ namespace vcsn {
 	typedef typename automaton_t::monoid_elt_t	monoid_elt_t;
 	typedef typename automaton_t::semiring_elt_t	semiring_elt_t;
 
+	typedef typename automaton_t::hstate_t		hstate_t;
+	typedef typename automaton_t::htransition_t	htransition_t;
+
 	typedef typename Exp_::monoid_elt_value_t	monoid_elt_value_t;
 	typedef typename Exp_::semiring_elt_value_t	semiring_elt_value_t;
 

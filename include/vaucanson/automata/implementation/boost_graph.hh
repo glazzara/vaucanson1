@@ -25,6 +25,7 @@
 # include <vaucanson/automata/concept/smart_label.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/concept/tags.hh>
+# include <vaucanson/misc/hash.hh>
 
 //NEW INCLUDES
 #include <boost/multi_index_container.hpp>
@@ -48,7 +49,6 @@ using namespace vcsn::misc;
 namespace vcsn
 {
   // FIXME: add comments?
-  typedef htransition_t hedge_t;
   namespace delta_kind
   {
     typedef transitions edges;
@@ -59,28 +59,28 @@ namespace vcsn
 /*
   struct GenEdgeLabel
   { };
-  template <typename Label>
+
   struct EdgeLabel : public GenEdgeLabel,
     public SmartLabelContainer<Label>::hlabel_t
   { };
 */
+/*
 
-  template <typename Label>
-  struct EdgeValue : public GenEdgeValue
+  struct EdgeValue
   {
     typedef typename SmartLabelContainer<Label>::hlabel_t hlabel_t;
     EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
+
+    hstate_t from() const;
+    hstate_t to() const;
+    void label() const;
+    void label(hlabel_t&) const;
 
     hlabel_t label_;
     hstate_t from_;
     hstate_t to_;
   }; // End of class EdgeValue
-
-  struct succ {};
-  struct pred {};
-  struct src {};
-  struct dst {};
-
+*/
   // FIXME use VCSN_BMI and remove those using
 # define VCSN_BMI(Type) ::boost::multi_index::Type
   using ::boost::multi_index_container;
@@ -92,102 +92,6 @@ namespace vcsn
   using ::boost::multi_index::member;
   using ::boost::dynamic_bitset;
 
-  template <typename Label>
-  struct SuccessorKey : composite_key <
-    EdgeValue<Label>,
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue<Label>, hstate_t, from_),
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue<Label>, typename EdgeValue<Label>::hlabel_t, label_)
-  > {};
-
-  template <typename Label>
-  struct PredecessorKey : composite_key <
-    EdgeValue<Label>,
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue<Label>, hstate_t, from_),
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue<Label>, typename EdgeValue<Label>::hlabel_t, label_)
-  > {};
-
-  template <typename Label>
-  struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
-    EdgeValue<Label>, hstate_t, from_
-  ) {};
-
-  template <typename Label>
-  struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
-    EdgeValue<Label>, hstate_t, to_
-  ) {};
-
-  template <typename Label>
-  struct SourceAndLabel : hashed_non_unique <
-    tag<succ>,
-    SuccessorKey<Label>
-  > {};
-
-  template <typename Label>
-  struct DestinationAndLabel : hashed_non_unique <
-    tag<pred>,
-    PredecessorKey<Label>
-  > {};
-
-  template <typename Label>
-  struct Source : hashed_non_unique <
-    tag<src>,
-    SourceKey<Label>
-  > {};
-
-  template <typename Label>
-  struct Destination : hashed_non_unique <
-    tag<dst>,
-    DestinationKey<Label>
-  > {};
-
-  template <typename Label>
-  struct GraphContainer
-  : public multi_index_container
-  <
-    EdgeValue<Label>,
-    indexed_by
-    <
-      SourceAndLabel<Label>,
-      DestinationAndLabel<Label>,
-      Source<Label>,
-      Destination<Label>
-    >
-  >
-  { };
-
-  template <typename S>
-  struct InitialValue
-  {
-    InitialValue(const hstate_t& state, const S& series)
-      : first(state),
-    second(series) {}
-
-    hstate_t first; // state
-    S second; // series
-  };
-
-  template <typename Label>
-  struct VGraphContainerIterator : GraphContainer<Label>::iterator
-  {
-    VGraphContainerIterator(const typename GraphContainer<Label>::iterator& i) : GraphContainer<Label>::iterator(i) {}
-    htransition_t operator*()
-    {
-      // FIXME: remove this const_cast
-      return htransition_t(const_cast<EdgeValue<Label>*>(&(GraphContainer<Label>::iterator::operator*())));
-    }
-  };
-
-  template <typename Label>
-  struct VGraphContainer : GraphContainer<Label>
-  {
-    typedef VGraphContainerIterator<Label> iterator;
-
-    VGraphContainer() {}
-    //VGraphContainer(const VGraphContainer&c) : GraphContainer(c) {}
-
-    iterator begin() { return VGraphContainerIterator<Label>(GraphContainer<Label>::begin()); }
-    iterator end() { return VGraphContainerIterator<Label>(GraphContainer<Label>::end()); }
-  };
 
   // class Graph.
   template <typename Kind, typename WordValue, typename WeightValue,
@@ -207,16 +111,139 @@ namespace vcsn
 			       SeriesValue, Letter>::ret label_t;
 
       typedef typename SmartLabelContainer<label_t>::hlabel_t hlabel_t;
+      typedef handler<state_h, int>			hstate_t;
 
 //      typedef StateValue state_value_t;
-      typedef EdgeValue<label_t> edge_value_t;
+
+      struct EdgeValue
+      {
+//	typedef typename SmartLabelContainer<Label>::hlabel_t hlabel_t;
+	EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
+
+	hlabel_t label_;
+	hstate_t from_;
+	hstate_t to_;
+      }; // End of class EdgeValue
+      typedef EdgeValue edge_value_t;
       typedef SeriesValue series_set_elt_value_t;
+      typedef handler<transition_h, EdgeValue* > htransition_t;
+      typedef htransition_t			hedge_t;
+
+  struct succ {};
+  struct pred {};
+  struct src {};
+  struct dst {};
+
+
+  struct SuccessorKey : composite_key <
+    EdgeValue,
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, typename EdgeValue::hlabel_t, label_)
+  > {};
+
+
+  struct PredecessorKey : composite_key <
+    EdgeValue,
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, typename EdgeValue::hlabel_t, label_)
+  > {};
+
+
+  struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
+    EdgeValue, hstate_t, from_
+  ) {};
+
+
+  struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
+    EdgeValue, hstate_t, to_
+  ) {};
+
+
+  struct SourceAndLabel : hashed_non_unique <
+    tag<succ>,
+    SuccessorKey,
+    VCSN_BMI(composite_key_hash)<
+      misc::hash_handler<hstate_t>,
+      misc::hash_handler<typename EdgeValue::hlabel_t>
+    >
+  > {};
+
+
+  struct DestinationAndLabel : hashed_non_unique <
+    tag<pred>,
+    PredecessorKey,
+    VCSN_BMI(composite_key_hash)<
+      misc::hash_handler<hstate_t>,
+      misc::hash_handler<typename EdgeValue::hlabel_t>
+    >
+  > {};
+
+
+  struct Source : hashed_non_unique <
+    tag<src>,
+    SourceKey
+  > {};
+
+
+  struct Destination : hashed_non_unique <
+    tag<dst>,
+    DestinationKey
+  > {};
+
+
+  struct GraphContainer
+  : public multi_index_container
+  <
+    EdgeValue,
+    indexed_by
+    <
+      SourceAndLabel,
+      DestinationAndLabel,
+      Source,
+      Destination
+    >
+  >
+  { };
+
+  template <typename S>
+  struct InitialValue
+  {
+    InitialValue(const hstate_t& state, const S& series)
+      : first(state),
+    second(series) {}
+
+    hstate_t first; // state
+    S second; // series
+  };
+
+
+  struct VGraphContainerIterator : GraphContainer::iterator
+  {
+    VGraphContainerIterator(const typename GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
+    htransition_t operator*()
+    {
+      // FIXME: remove this const_cast
+      return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
+    }
+  };
+
+
+  struct VGraphContainer : GraphContainer
+  {
+    typedef VGraphContainerIterator iterator;
+
+    VGraphContainer() {}
+    //VGraphContainer(const VGraphContainer&c) : GraphContainer(c) {}
+
+    iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
+    iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
+  };
 
 //      typedef /* FIXME: std::vector<StateValue_t> */ state_data_t;
 //      typedef /* FIXME: std::vector<EdgeValue_t> */ edge_data_t;
 
 //      typedef /* FIXME: StateContainer */ states_t;
-      typedef VGraphContainer<label_t> graph_data_t;
+      typedef VGraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef graph_data_t edges_t;
       typedef CounterSupport states_t;
@@ -444,13 +471,20 @@ namespace vcsn
       ::ret						label_t;
       typedef Tag					tag_t;
 
-      typedef VGraphContainer<label_t>			transitions_t;
+      typedef handler<state_h, int>			hstate_t;
+      typedef handler<transition_h, typename Graph<Kind, WordValue, WeightValue,
+	            SeriesValue, Letter, Tag, Geometry>::edge_data_t* > htransition_t;
+
+      typedef typename Graph<Kind, WordValue, WeightValue,
+	            SeriesValue, Letter, Tag, Geometry>::graph_data_t
+		      transitions_t;
       typedef CounterSupport				states_t;
 
       typedef typename states_t::iterator		state_iterator;
       typedef typename transitions_t::iterator		transition_iterator;
 
-      typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, hstate_t>
+      typedef typename Graph<Kind, WordValue, WeightValue,
+	               SeriesValue, Letter, Tag, Geometry>::initial_container_t
 	initial_container_t;
       typedef typename initial_container_t::Type initial_t;
       typedef initial_t final_t;
@@ -462,6 +496,7 @@ namespace vcsn
       typedef typename final_support_t::iterator	final_iterator;
 
       typedef Geometry					geometry_t;
+
   };
 
   // This implementation can be used as a transducer one.

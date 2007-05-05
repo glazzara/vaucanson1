@@ -1,3 +1,43 @@
+2007-05-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Various fix.
+	* include/vaucanson/algorithms/accessible.hh,
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/internal/has_neighbour.hh,
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/sum.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/boost_automata_ops.hxx,
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/smart_label.hh,
+	* include/vaucanson/automata/concept/smart_label.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/boost_graph.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hxx,
+	* include/vaucanson/misc/usual_macros.hh:
+	  Reduce the scope of hstate_t and htransition_t.
+	  This is necessary to have both implemention simultaneously.
+
+	* include/vaucanson/misc/hash.hh: New,
+	* include/vaucanson/misc/hash.hxx: New,
+	  Add functor to hash the handlers stored in a boost::multi_index.
+
+	* include/vaucanson/misc/hash_label.hh: Remove.
+	* include/vaucanson/misc/hash_label.hxx: Remove.
+
 2007-05-04  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Various fix.

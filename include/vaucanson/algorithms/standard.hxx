@@ -76,10 +76,10 @@ namespace vcsn {
 				 const rhs_t& rhs)
   {
     TIMER_SCOPED("union_of_standard");
-    typedef typename std::set<htransition_t> edelta_ret_t;
+    typedef std::set<typename lhs_t::htransition_t> edelta_ret_t;
 
     // The resulting initial state is that of lhs.
-    hstate_t new_i = *lhs.initial().begin();
+    typename lhs_t::hstate_t new_i = *lhs.initial().begin();
     sum_here(lhs, rhs);
 
     // Adjust new_i, and handle old_i, the state that was the initial
@@ -89,7 +89,7 @@ namespace vcsn {
     // There are two initial states, old_i is the other.
     assertion (initial.size() == 2);
     typename lhs_t::initial_iterator i = initial.begin();
-    hstate_t old_i = *i != new_i ? *i : *++i;
+    typename lhs_t::hstate_t old_i = *i != new_i ? *i : *++i;
 
     lhs.set_final(new_i,
 		  lhs.get_final(new_i) + lhs.get_final(old_i));
@@ -142,7 +142,7 @@ namespace vcsn {
       return false;
 
     // Check the multiplicity of the initial state.
-    hstate_t s = *a.initial().begin();
+    typename auto_t::hstate_t s = *a.initial().begin();
     if (a.get_initial(s)
 	!= a.series().identity(SELECT(series_set_elt_value_t)))
       return false;

@@ -22,10 +22,11 @@
 namespace vcsn {
   // Determine wether there is at least a successor of a state.
   namespace internal {
+    template <typename T>
     struct has_neighbour_helper
     {
       has_neighbour_helper () : has_neighbour_ (false) {}
-      bool operator() (htransition_t)
+      bool operator() (typename automaton_traits<T>::htransition_t)
       {
 	this->has_neighbour_ = true;
 	// Stop the loop over successors by returning false.
@@ -37,20 +38,20 @@ namespace vcsn {
 
   template<typename A, typename T>
   bool	has_successors(const Element<A, T>& a,
-		       const hstate_t s)
+		       const typename automaton_traits<T>::hstate_t s)
   {
     precondition (a.has_state (s));
-    internal::has_neighbour_helper functor;
+    internal::has_neighbour_helper<T> functor;
     a.deltaf (functor, s, delta_kind::transitions());
     return functor.has_neighbour_;
   }
 
   template<typename A, typename T>
   bool	has_predecessors(const Element<A, T>& a,
-			 const hstate_t s)
+			 const typename automaton_traits<T>::hstate_t s)
   {
     precondition (a.has_state (s));
-    internal::has_neighbour_helper functor;
+    internal::has_neighbour_helper<T> functor;
     a.rdeltaf (functor, s, delta_kind::transitions());
     return functor.has_neighbour_;
   }

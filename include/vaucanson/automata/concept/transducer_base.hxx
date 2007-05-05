@@ -42,23 +42,23 @@ namespace vcsn {
 
   template <typename Self, typename T>
   typename MetaElement<TransducerBase<Self>, T>::input_monoid_elt_t
-  MetaElement<TransducerBase<Self>, T>::input_of(htransition_t e) const
+  MetaElement<TransducerBase<Self>, T>::input_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_input_of(this->structure(), this->value(), e);
   }
 
   template <typename Self, typename T>
   typename MetaElement<TransducerBase<Self>, T>::output_series_set_elt_t
-  MetaElement<TransducerBase<Self>, T>::output_of(htransition_t e) const
+  MetaElement<TransducerBase<Self>, T>::output_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_output_of(this->structure(), this->value(), e);
   }
 
   template <typename Self, typename T>
-  htransition_t
+  typename automaton_traits<T>::htransition_t
   MetaElement<TransducerBase<Self>, T>::
-  add_io_transition(hstate_t from,
-		    hstate_t to,
+  add_io_transition(typename automaton_traits<T>::hstate_t from,
+		    typename automaton_traits<T>::hstate_t to,
 		    input_monoid_elt_value_t i,
 		    output_monoid_elt_value_t o,
 		    output_semiring_elt_t w)
@@ -76,9 +76,9 @@ namespace vcsn {
 
 
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<TransducerBase<Self>, T>::add_io_transition(hstate_t from,
-							  hstate_t to,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<TransducerBase<Self>, T>::add_io_transition(typename automaton_traits<T>::hstate_t from,
+							  typename automaton_traits<T>::hstate_t to,
 							  input_letter_t i,
 							  output_letter_t o,
 							  output_semiring_elt_t w)
@@ -91,9 +91,9 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<TransducerBase<Self>, T>::add_o_transition(hstate_t from,
-							 hstate_t to,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<TransducerBase<Self>, T>::add_o_transition(typename automaton_traits<T>::hstate_t from,
+							 typename automaton_traits<T>::hstate_t to,
 							 output_letter_t o,
 							 output_semiring_elt_t w)
   {
@@ -106,9 +106,9 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<TransducerBase<Self>, T>::add_i_transition(hstate_t from,
-							 hstate_t to,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<TransducerBase<Self>, T>::add_i_transition(typename automaton_traits<T>::hstate_t from,
+							 typename automaton_traits<T>::hstate_t to,
 							 input_letter_t i,
 							 output_semiring_elt_t w)
   {
@@ -123,7 +123,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void
   MetaElement<TransducerBase<Self>, T>::
-  set_o_final(hstate_t final,
+  set_o_final(typename automaton_traits<T>::hstate_t final,
 	      output_monoid_elt_value_t o)
   {
     op_set_o_final(this->structure(), this->value(), final, o);
@@ -132,7 +132,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void
   MetaElement<TransducerBase<Self>, T>::
-  set_o_initial(hstate_t initial,
+  set_o_initial(typename automaton_traits<T>::hstate_t initial,
 		output_monoid_elt_value_t o)
   {
     op_set_o_initial(this->structure(), this->value(), initial, o);

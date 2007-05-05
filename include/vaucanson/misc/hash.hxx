@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_MISC_HASH_LABEL_HXX_
-# define VCSN_MISC_HASH_LABEL_HXX_
+#ifndef VCSN_MISC_HASH_HXX_
+# define VCSN_MISC_HASH_HXX_
 
 # include <boost/functional/hash/hash.hpp>
 
@@ -39,7 +39,14 @@ namespace vcsn
       }
       return seed;
     }
+
+    template <typename Kind, typename Type>
+    std::size_t
+    hash_handler<handler<Kind, Type> >::operator() (const handler<Kind, Type>& h) const
+    {
+      return ::boost::hash_value (h.value());
+    }
   }
 }
 
-#endif // ! VCSN_MISC_HASH_LABEL_HXX_ //
+#endif // ! VCSN_MISC_HASH_HXX_ //

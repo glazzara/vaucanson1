@@ -25,11 +25,11 @@ namespace vcsn {
   /// automaton simpler.
 
 #define ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(T...)		\
-  htransition_t								\
+  typename automaton_traits<T>::htransition_t								\
   op_add_letter_transition(const AutomataBase<S>& s,			\
 			   T& v,					\
-			   hstate_t from,				\
-			   hstate_t to,					\
+			   typename automaton_traits<T>::hstate_t from,				\
+			   typename automaton_traits<T>::hstate_t to,					\
 			   const typename Element<S, T >::letter_t & l)	\
   {									\
     typedef typename S::series_set_t		series_set_t;		\
@@ -55,7 +55,7 @@ namespace vcsn {
   typename Element<AutomataBase<S>, T >::letter_t			\
   op_letter_of(const AutomataBase<S>& s,				\
 	       const T& v,						\
-	       htransition_t e)						\
+	       typename automaton_traits<T>::htransition_t e)						\
   {									\
     typedef typename S::series_set_t series_set_t;			\
     typedef typename series_set_t::monoid_t monoid_t;			\
@@ -75,7 +75,7 @@ namespace vcsn {
   typename Element<AutomataBase<S>, T >::monoid_elt_t			\
   op_word_of(const AutomataBase<S>& s,					\
 	     const T& v,						\
-	     htransition_t e)						\
+	     typename automaton_traits<T>::htransition_t e)						\
   {									\
     typedef typename S::series_set_t series_set_t;			\
     typedef typename series_set_t::monoid_t monoid_t;			\
@@ -91,11 +91,11 @@ namespace vcsn {
   }
 
 #define ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(T...)		\
-  htransition_t								\
+  typename automaton_traits<T>::htransition_t								\
   op_add_series_transition(const AutomataBase<S>& a_set,		\
 			   T& v,					\
-			   hstate_t from,				\
-			   hstate_t to,					\
+			   typename automaton_traits<T>::hstate_t from,				\
+			   typename automaton_traits<T>::hstate_t to,					\
 			   const typename Element<S,T >::series_set_elt_t& s) \
   {									\
     assertion(s.supp().size() == 1);					\
@@ -106,7 +106,7 @@ namespace vcsn {
   typename Element<AutomataBase<S>, T >::monoid_elt_t		\
   op_word_of(const AutomataBase<S>& a_set,			\
 	     const T& v,					\
-	     htransition_t e)					\
+	     typename automaton_traits<T>::htransition_t e)					\
   {								\
     typedef T value_t;						\
     typedef typename S::series_set_t series_set_t;		\
@@ -123,7 +123,7 @@ namespace vcsn {
   typename Element<AutomataBase<S>, T >::series_set_elt_t		\
   op_series_of(const AutomataBase<S>& a_set,				\
 	       const T& v,						\
-	       htransition_t e)						\
+	       typename automaton_traits<T>::htransition_t e)						\
   {									\
     typedef T value_t;							\
 									\

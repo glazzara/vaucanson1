@@ -64,7 +64,10 @@
   typedef Typename Prefix##series_set_elt_t::semiring_elt_t	Prefix##semiring_elt_t;	\
   typedef Typename Prefix##semiring_elt_t::value_t		Prefix##semiring_elt_value_t; \
   typedef Typename AutoType::label_t				Prefix##label_t; \
-  typedef Typename AutoType::tag_t				Prefix##tag_t;
+  typedef Typename AutoType::tag_t				Prefix##tag_t; \
+  typedef Typename AutoType::hstate_t				Prefix##hstate_t; \
+  typedef Typename AutoType::htransition_t			Prefix##htransition_t; \
+  typedef Typename AutoType::hlabel_t				Prefix##hlabel_t;
 
 # define AUTOMATON_TYPES_(AutoType,Prefix)			\
   AUTOMATON_TYPES_MAYBE_TYPENAME(AutoType, Prefix, typename)

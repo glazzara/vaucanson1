@@ -77,6 +77,9 @@ namespace vcsn {
       typedef undefined_type final_iterator;
       typedef undefined_type final_support_t;
       typedef undefined_type geometry_t;
+      typedef undefined_type hstate_t;
+      typedef undefined_type htransition_t;
+      typedef undefined_type hlabel_t;
   };
 
   /*-----------------------------------.
@@ -184,6 +187,10 @@ namespace vcsn {
 
       /// Type of the geometry map containing state coordinates.
       typedef typename automaton_traits<T>::geometry_t	geometry_t;
+
+      /// Type of handlers
+      typedef typename automaton_traits<T>::hstate_t hstate_t;
+      typedef typename automaton_traits<T>::htransition_t htransition_t;
 
       /// The set of series from which is build the automaton (const version).
       const series_set_t& series() const;

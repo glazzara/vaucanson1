@@ -135,7 +135,7 @@ namespace vcsn {
    support) . */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::is_initial(hstate_t state) const
+  MetaElement<AutomataBase<Self>, T>::is_initial(typename automaton_traits<T>::hstate_t state) const
   {
     return op_is_initial(this->structure(), this->value(), state);
   }
@@ -143,7 +143,7 @@ namespace vcsn {
   /** Return true if the state is final (ie it is in the final support). */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::is_final(hstate_t state) const
+  MetaElement<AutomataBase<Self>, T>::is_final(typename automaton_traits<T>::hstate_t state) const
   {
     return op_is_final(this->structure(), this->value(), state);
   }
@@ -151,7 +151,7 @@ namespace vcsn {
   /** Set the state to be initial. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::set_initial(hstate_t state)
+  MetaElement<AutomataBase<Self>, T>::set_initial(typename automaton_traits<T>::hstate_t state)
   {
     op_set_initial(this->structure(),
 		   this->value(),
@@ -164,7 +164,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void
   MetaElement<AutomataBase<Self>, T>::
-  set_initial(hstate_t state, const series_set_elt_t& s)
+  set_initial(typename automaton_traits<T>::hstate_t state, const series_set_elt_t& s)
   {
     op_set_initial(this->structure(), this->value(), state, s);
   }
@@ -172,7 +172,7 @@ namespace vcsn {
   /** Set the state to be final. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::set_final(hstate_t state)
+  MetaElement<AutomataBase<Self>, T>::set_final(typename automaton_traits<T>::hstate_t state)
   {
     op_set_final(this->structure(),
 		 this->value(),
@@ -185,7 +185,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void
   MetaElement<AutomataBase<Self>, T>::
-  set_final(hstate_t state, const series_set_elt_t& s)
+  set_final(typename automaton_traits<T>::hstate_t state, const series_set_elt_t& s)
   {
     op_set_final(this->structure(), this->value(), state, s);
   }
@@ -193,7 +193,7 @@ namespace vcsn {
   /** Set the state not to be initial. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::unset_initial(hstate_t state)
+  MetaElement<AutomataBase<Self>, T>::unset_initial(typename automaton_traits<T>::hstate_t state)
   {
     op_set_initial(this->structure(),
 		   this->value(),
@@ -205,7 +205,7 @@ namespace vcsn {
   /** Set the set not to be final. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::unset_final(hstate_t state)
+  MetaElement<AutomataBase<Self>, T>::unset_final(typename automaton_traits<T>::hstate_t state)
   {
     op_set_final(this->structure(),
 		 this->value(),
@@ -233,7 +233,7 @@ namespace vcsn {
   /** Return the initial multiplicity of the state. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
-  MetaElement<AutomataBase<Self>, T>::get_initial(hstate_t state) const
+  MetaElement<AutomataBase<Self>, T>::get_initial(typename automaton_traits<T>::hstate_t state) const
   {
     return op_get_initial(this->structure(), this->value(), state);
   }
@@ -241,14 +241,14 @@ namespace vcsn {
   /** Return the final multiplicity of the state. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
-  MetaElement<AutomataBase<Self>, T>::get_final(hstate_t what) const
+  MetaElement<AutomataBase<Self>, T>::get_final(typename automaton_traits<T>::hstate_t what) const
   {
     return op_get_final(this->structure(), this->value(), what);
   }
 
   /** Add a new state to the automaton. */
   template <typename Self, typename T>
-  hstate_t
+  typename automaton_traits<T>::hstate_t
   MetaElement<AutomataBase<Self>, T>::add_state()
   {
     return op_add_state(this->structure(), this->value());
@@ -257,7 +257,7 @@ namespace vcsn {
   /** Return a randomly chosen state. (valid only if the automaton
    is not empty) */
   template <typename Self, typename T>
-  hstate_t
+  typename automaton_traits<T>::hstate_t
   MetaElement<AutomataBase<Self>, T>::choose_state() const
   {
     return op_choose_state(this->structure(), this->value());
@@ -265,9 +265,9 @@ namespace vcsn {
 
   /** Add a new transition between @c src and @c to labelled by @c label */
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<AutomataBase<Self>, T>::add_transition(hstate_t src,
-						     hstate_t dst,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_transition(typename automaton_traits<T>::hstate_t src,
+						     typename automaton_traits<T>::hstate_t dst,
 						     const label_t& label)
   {
     return op_add_transition(this->structure(), this->value(),
@@ -276,10 +276,10 @@ namespace vcsn {
 
   /** Add a new weighted transition. */
   template <typename Self, typename T>
-  htransition_t
+  typename automaton_traits<T>::htransition_t
   MetaElement<AutomataBase<Self>, T>::
-  add_weighted_transition(hstate_t src,
-			  hstate_t dst,
+  add_weighted_transition(typename automaton_traits<T>::hstate_t src,
+			  typename automaton_traits<T>::hstate_t dst,
 			  const semiring_elt_t& w,
 			  const monoid_elt_value_t& m)
   {
@@ -291,9 +291,9 @@ namespace vcsn {
   /** If the underlying implementation is not sufficiently general
    *  to support this operation, you will have several transitions created.*/
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<AutomataBase<Self>, T>::add_series_transition(hstate_t src,
-							    hstate_t dst,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_series_transition(typename automaton_traits<T>::hstate_t src,
+							    typename automaton_traits<T>::hstate_t dst,
 							    const series_set_elt_t& e)
   {
     return op_add_series_transition(this->structure(), this->value(),
@@ -302,9 +302,9 @@ namespace vcsn {
 
   /** Add a spontaneous transition between @c src and @c dst. */
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<AutomataBase<Self>, T>::add_spontaneous(hstate_t src,
-						      hstate_t dst)
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_spontaneous(typename automaton_traits<T>::hstate_t src,
+						      typename automaton_traits<T>::hstate_t dst)
   {
     semiring_elt_t w(this->structure().series().semiring());
     w = algebra::identity_as<semiring_elt_value_t>
@@ -313,9 +313,9 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<AutomataBase<Self>, T>::add_spontaneous(hstate_t src,
-						      hstate_t dst,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_spontaneous(typename automaton_traits<T>::hstate_t src,
+						      typename automaton_traits<T>::hstate_t dst,
 						      const semiring_elt_t& w)
   {
     return op_add_spontaneous(this->structure(), this->value(), src, dst, w);
@@ -323,9 +323,9 @@ namespace vcsn {
 
   /** Add a transition between @c src and @c dst labelled by a letter. */
   template <typename Self, typename T>
-  htransition_t
-  MetaElement<AutomataBase<Self>, T>::add_letter_transition(hstate_t src,
-							    hstate_t dst,
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_letter_transition(typename automaton_traits<T>::hstate_t src,
+							    typename automaton_traits<T>::hstate_t dst,
 							    const letter_t& l)
   {
     return op_add_letter_transition(this->structure(), this->value(),
@@ -335,7 +335,7 @@ namespace vcsn {
   /** Update the label of a transition. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::update(htransition_t e, const label_t& l)
+  MetaElement<AutomataBase<Self>, T>::update(typename automaton_traits<T>::htransition_t e, const label_t& l)
   {
     op_update(this->structure(), this->value(), e, l);
   }
@@ -343,7 +343,7 @@ namespace vcsn {
   /** Delete the state @c s. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::del_state(hstate_t s)
+  MetaElement<AutomataBase<Self>, T>::del_state(typename automaton_traits<T>::hstate_t s)
   {
     return op_del_state(this->structure(), this->value(), s);
   }
@@ -351,7 +351,7 @@ namespace vcsn {
   /** Delete the transition @c e. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::del_transition(htransition_t e)
+  MetaElement<AutomataBase<Self>, T>::del_transition(typename automaton_traits<T>::htransition_t e)
   {
     return op_del_transition(this->structure(), this->value(), e);
   }
@@ -359,7 +359,7 @@ namespace vcsn {
   /** Check if the state @c s is in the automaton. */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::has_state(hstate_t s) const
+  MetaElement<AutomataBase<Self>, T>::has_state(typename automaton_traits<T>::hstate_t s) const
   {
     return op_has_state(this->structure(), this->value(), s);
   }
@@ -367,23 +367,23 @@ namespace vcsn {
   /** Check if the transition @c e is in the automaton. */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::has_transition(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::has_transition(typename automaton_traits<T>::htransition_t e) const
   {
     return op_has_transition(this->structure(), this->value(), e);
   }
 
   /** Return the origin of the transition @c e. */
   template <typename Self, typename T>
-  hstate_t
-  MetaElement<AutomataBase<Self>, T>::src_of(htransition_t e) const
+  typename automaton_traits<T>::hstate_t
+  MetaElement<AutomataBase<Self>, T>::src_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_src_of(this->structure(), this->value(), e);
   }
 
   /** Return the aim of the transition @c e. */
   template <typename Self, typename T>
-  hstate_t
-  MetaElement<AutomataBase<Self>, T>::dst_of(htransition_t e) const
+  typename automaton_traits<T>::hstate_t
+  MetaElement<AutomataBase<Self>, T>::dst_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_dst_of(this->structure(), this->value(), e);
   }
@@ -391,7 +391,7 @@ namespace vcsn {
   /** Return the label of the transition @c e. */
   template <typename Self, typename T>
   typename automaton_traits<T>::label_t
-  MetaElement<AutomataBase<Self>, T>::label_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::label_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_label_of(this->structure(), this->value(), e);
   }
@@ -399,7 +399,7 @@ namespace vcsn {
   /** Return the label seen as a series. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
-  MetaElement<AutomataBase<Self>, T>::series_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::series_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_series_of(this->structure(), this->value(), e);
   }
@@ -407,7 +407,7 @@ namespace vcsn {
   /** Return the label seen as a series implementation. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_set_elt_value_t
-  MetaElement<AutomataBase<Self>, T>::series_value_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::series_value_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_series_value_of(this->structure(), this->value(), e);
   }
@@ -415,7 +415,7 @@ namespace vcsn {
   /** Return true if the transition is spontaneous. */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::is_spontaneous(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::is_spontaneous(typename automaton_traits<T>::htransition_t e) const
   {
     return op_is_spontaneous(this->structure(), this->value(), e);
   }
@@ -423,7 +423,7 @@ namespace vcsn {
   /** Return the label seen as a word. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_t
-  MetaElement<AutomataBase<Self>, T>::word_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::word_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_word_of(this->structure(), this->value(), e);
   }
@@ -431,7 +431,7 @@ namespace vcsn {
   /** Return the label seen as a weight. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::semiring_elt_t
-  MetaElement<AutomataBase<Self>, T>::weight_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::weight_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_weight_of(this->structure(), this->value(), e);
   }
@@ -439,7 +439,7 @@ namespace vcsn {
   /** Returns the label seen as word implementation. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_value_t
-  MetaElement<AutomataBase<Self>, T>::word_value_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::word_value_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_word_value_of(this->structure(), this->value(), e);
   }
@@ -449,7 +449,7 @@ namespace vcsn {
    *  probably invalidated. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::letter_t
-  MetaElement<AutomataBase<Self>, T>::letter_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::letter_of(typename automaton_traits<T>::htransition_t e) const
   {
     return op_letter_of(this->structure(), this->value(), e);
   }
@@ -462,7 +462,7 @@ namespace vcsn {
   template <typename OutputIterator, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
-					    hstate_t src,
+					    typename automaton_traits<T>::hstate_t src,
 					    delta_kind::kind<Kind> k) const
   {
     op_delta(this->structure(), this->value(), res, src, k);
@@ -472,7 +472,7 @@ namespace vcsn {
   template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
-					    hstate_t src,
+					    typename automaton_traits<T>::hstate_t src,
 					    const L& query,
 					    delta_kind::kind<Kind> k) const
   {
@@ -483,7 +483,7 @@ namespace vcsn {
   template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_delta(OutputIterator res,
-						   hstate_t src,
+						   typename automaton_traits<T>::hstate_t src,
 						   const L& letter,
 						   delta_kind::kind<Kind> k) const
   {
@@ -495,7 +495,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_delta(OutputIterator res,
-		      hstate_t src,
+		      typename automaton_traits<T>::hstate_t src,
 		      delta_kind::kind<Kind> k) const
   {
     return op_spontaneous_delta(this->structure(), this->value(), res, src, k);
@@ -508,7 +508,7 @@ namespace vcsn {
   template <typename Self, typename T>
   template <typename Container, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::deltac(Container& res, hstate_t src,
+  MetaElement<AutomataBase<Self>, T>::deltac(Container& res, typename automaton_traits<T>::hstate_t src,
 					     delta_kind::kind<Kind> k) const
   {
     op_deltac(this->structure(), this->value(), res, src, k);
@@ -518,7 +518,7 @@ namespace vcsn {
   template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res,
-					     hstate_t src,
+					     typename automaton_traits<T>::hstate_t src,
 					     const L& query,
 					     delta_kind::kind<Kind> k) const
   {
@@ -529,7 +529,7 @@ namespace vcsn {
   template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_deltac(Container& res,
-						    hstate_t src,
+						    typename automaton_traits<T>::hstate_t src,
 						    const L& letter,
 						    delta_kind::kind<Kind> k) const
   {
@@ -541,7 +541,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_deltac(Container& res,
-		       hstate_t src,
+		       typename automaton_traits<T>::hstate_t src,
 		       delta_kind::kind<Kind> k) const
   {
     op_spontaneous_deltac(this->structure(), this->value(), res, src, k);
@@ -554,7 +554,7 @@ namespace vcsn {
   template <typename Self, typename T>
   template <typename Functor, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::deltaf(Functor& fun, hstate_t src,
+  MetaElement<AutomataBase<Self>, T>::deltaf(Functor& fun, typename automaton_traits<T>::hstate_t src,
 					     delta_kind::kind<Kind> k) const
   {
     op_deltaf(this->structure(), this->value(), fun, src, k);
@@ -564,7 +564,7 @@ namespace vcsn {
   template <typename Functor, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::deltaf(Functor& fun,
-					     hstate_t src,
+					     typename automaton_traits<T>::hstate_t src,
 					     const L& query,
 					     delta_kind::kind<Kind> k) const
   {
@@ -575,7 +575,7 @@ namespace vcsn {
   template <typename Functor, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_deltaf(Functor& fun,
-						    hstate_t src,
+						    typename automaton_traits<T>::hstate_t src,
 						    const L& letter,
 						    delta_kind::kind<Kind> k) const
   {
@@ -587,7 +587,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_deltaf(Functor& fun,
-		       hstate_t src,
+		       typename automaton_traits<T>::hstate_t src,
 		       delta_kind::kind<Kind> k) const
   {
     op_spontaneous_deltaf(this->structure(), this->value(), fun, src, k);
@@ -601,7 +601,7 @@ namespace vcsn {
   template <typename OutputIterator, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					     hstate_t src,
+					     typename automaton_traits<T>::hstate_t src,
 					     delta_kind::kind<Kind> k) const
   {
     op_rdelta(this->structure(), this->value(), res, src, k);
@@ -611,7 +611,7 @@ namespace vcsn {
   template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					     hstate_t src,
+					     typename automaton_traits<T>::hstate_t src,
 					     const L& query,
 					     delta_kind::kind<Kind> k) const
   {
@@ -622,7 +622,7 @@ namespace vcsn {
   template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdelta(OutputIterator res,
-						    hstate_t src,
+						    typename automaton_traits<T>::hstate_t src,
 						    const L& letter,
 						    delta_kind::kind<Kind> k) const
   {
@@ -634,7 +634,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdelta(OutputIterator res,
-		       hstate_t src,
+		       typename automaton_traits<T>::hstate_t src,
 		       delta_kind::kind<Kind> k) const
   {
     return op_spontaneous_rdelta(this->structure(), this->value(), res, src, k);
@@ -647,7 +647,7 @@ namespace vcsn {
   template <typename Self, typename T>
   template <typename Container, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t src,
+  MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, typename automaton_traits<T>::hstate_t src,
 					      delta_kind::kind<Kind> k) const
   {
     op_rdeltac(this->structure(), this->value(), res, src, k);
@@ -657,7 +657,7 @@ namespace vcsn {
   template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res,
-					      hstate_t src,
+					      typename automaton_traits<T>::hstate_t src,
 					      const L& query,
 					      delta_kind::kind<Kind> k) const
   {
@@ -668,7 +668,7 @@ namespace vcsn {
   template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdeltac(Container& res,
-						     hstate_t src,
+						     typename automaton_traits<T>::hstate_t src,
 						     const L& letter,
 						     delta_kind::kind<Kind> k) const
   {
@@ -680,7 +680,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdeltac(Container& res,
-			hstate_t src,
+			typename automaton_traits<T>::hstate_t src,
 			delta_kind::kind<Kind> k) const
   {
     op_spontaneous_rdeltac(this->structure(), this->value(), res, src, k);
@@ -693,7 +693,7 @@ namespace vcsn {
   template <typename Self, typename T>
   template <typename Functor, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::rdeltaf(Functor& fun, hstate_t src,
+  MetaElement<AutomataBase<Self>, T>::rdeltaf(Functor& fun, typename automaton_traits<T>::hstate_t src,
 					      delta_kind::kind<Kind> k) const
   {
     op_rdeltaf(this->structure(), this->value(), fun, src, k);
@@ -703,7 +703,7 @@ namespace vcsn {
   template <typename Functor, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltaf(Functor& fun,
-					      hstate_t src,
+					      typename automaton_traits<T>::hstate_t src,
 					      const L& query,
 					      delta_kind::kind<Kind> k) const
   {
@@ -714,7 +714,7 @@ namespace vcsn {
   template <typename Functor, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdeltaf(Functor& fun,
-						     hstate_t src,
+						     typename automaton_traits<T>::hstate_t src,
 						     const L& letter,
 						     delta_kind::kind<Kind> k) const
   {
@@ -726,7 +726,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdeltaf(Functor& fun,
-			hstate_t src,
+			typename automaton_traits<T>::hstate_t src,
 			delta_kind::kind<Kind> k) const
   {
     op_spontaneous_rdeltaf(this->structure(), this->value(), fun, src, k);

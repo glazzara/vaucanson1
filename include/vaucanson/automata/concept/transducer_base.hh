@@ -217,41 +217,41 @@ namespace vcsn {
       output_semiring_elt_t;
 
       /// Return the input of a transition
-      input_monoid_elt_t input_of(htransition_t) const;
+      input_monoid_elt_t input_of(typename automaton_traits<T>::htransition_t) const;
 
       /// Return the output of a transition
-      output_series_set_elt_t output_of(htransition_t) const;
+      output_series_set_elt_t output_of(typename automaton_traits<T>::htransition_t) const;
 
       /** Add a transition specified as an input word value and
        * output word value. */
-      htransition_t
-      add_io_transition(hstate_t, hstate_t,
+      typename automaton_traits<T>::htransition_t
+      add_io_transition(typename automaton_traits<T>::hstate_t, typename automaton_traits<T>::hstate_t,
 			input_monoid_elt_value_t,
 			output_monoid_elt_value_t,
 			output_semiring_elt_t = output_semiring_elt_t());
 
       /** Add a transition specified using an input letter, an output letter and
        * a weight linked to it. */
-      htransition_t
-      add_io_transition(hstate_t, hstate_t, input_letter_t, output_letter_t,
+      typename automaton_traits<T>::htransition_t
+      add_io_transition(typename automaton_traits<T>::hstate_t, typename automaton_traits<T>::hstate_t, input_letter_t, output_letter_t,
 			output_semiring_elt_t = output_semiring_elt_t());
 
       /// Add an only-output transition (epsilon as input).
-      htransition_t
-      add_o_transition(hstate_t, hstate_t, output_letter_t,
+      typename automaton_traits<T>::htransition_t
+      add_o_transition(typename automaton_traits<T>::hstate_t, typename automaton_traits<T>::hstate_t, output_letter_t,
 		       output_semiring_elt_t = output_semiring_elt_t());
 
       /// Add an only-input transition (epsilon as output).
-      htransition_t
-      add_i_transition(hstate_t, hstate_t, input_letter_t,
+      typename automaton_traits<T>::htransition_t
+      add_i_transition(typename automaton_traits<T>::hstate_t, typename automaton_traits<T>::hstate_t, input_letter_t,
 		       output_semiring_elt_t = output_semiring_elt_t());
 
       /// Set a weight on the final transition, specifying an output_monoid value.
-      void set_o_final(hstate_t, output_monoid_elt_value_t);
+      void set_o_final(typename automaton_traits<T>::hstate_t, output_monoid_elt_value_t);
 
       /** Set a weight on the initial transition, specifying an output_monoid
        value. */
-      void set_o_initial(hstate_t, output_monoid_elt_value_t);
+      void set_o_initial(typename automaton_traits<T>::hstate_t, output_monoid_elt_value_t);
 
     protected:
       MetaElement();

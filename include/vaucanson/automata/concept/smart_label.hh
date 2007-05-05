@@ -24,7 +24,7 @@
 #include <boost/multi_index/hashed_index.hpp>
 
 # include <vaucanson/automata/concept/handlers.hh>
-# include <vaucanson/misc/hash_label.hh>
+# include <vaucanson/misc/hash.hh>
 
 namespace vcsn
 {
