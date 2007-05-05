@@ -79,7 +79,6 @@ namespace vcsn {
       typedef undefined_type geometry_t;
       typedef undefined_type hstate_t;
       typedef undefined_type htransition_t;
-      typedef undefined_type hlabel_t;
   };
 
   /*-----------------------------------.

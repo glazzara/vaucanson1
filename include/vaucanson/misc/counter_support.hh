@@ -34,14 +34,17 @@ namespace vcsn
 
     /** @addtogroup misc *//** @{ */
 
+    template <typename HState>
     class CounterSupport;
 
     /// Iterator over the Support generic class.
     /// @bug is not STL compliant yet.
+    template <typename HState>
     class CounterSupportIterator
     {
       public:
-	typedef CounterSupportIterator			 self_t;
+	typedef CounterSupportIterator<HState>			 self_t;
+	typedef HState hstate_t;
 
 	/*
 	 * This is a default constructor. 
@@ -70,26 +73,27 @@ namespace vcsn
 	CounterSupportIterator () {}
 	CounterSupportIterator (unsigned);
 
-	unsigned operator* () const;
+	hstate_t operator* () const;
 	self_t&	 operator++ ();
 	self_t	 operator++ (int);
-	bool	 operator!= (const CounterSupportIterator&) const;
-	bool	 operator== (const CounterSupportIterator&) const;
+	bool	 operator!= (const CounterSupportIterator<hstate_t>&) const;
+	bool	 operator== (const CounterSupportIterator<hstate_t>&) const;
 
       private:
 	unsigned	i;
     };
 
     /// Support<map<U, T> > is a const adapter of std::map to container.
+    template <typename HState>
     class CounterSupport
     {
       public:
-	typedef CounterSupportIterator iterator;
-	typedef CounterSupportIterator const_iterator;
+	typedef CounterSupportIterator<HState> iterator;
+	typedef CounterSupportIterator<HState> const_iterator;
 
 	CounterSupport ();
 	CounterSupport (unsigned);
-	CounterSupport (const CounterSupport&);
+	CounterSupport (const CounterSupport<HState>&);
 
 	/** Return the one and only element of the support.
 	 @pre There is exactly one element in the support.  */

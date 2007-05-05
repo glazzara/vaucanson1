@@ -115,16 +115,14 @@ namespace vcsn
   typename BOOSTGRAPH::hstate_t
   BOOSTGRAPH::src_of (hedge_t h) const
   {
-    return h.value()->from();
+    return h.value()->from_;
   }
 
   BOOSTGRAPH_TPARAM
   const typename BOOSTGRAPH::label_t&
   BOOSTGRAPH::label_of (hedge_t h) const
   {
-    hlabel_t hl;
-    h.value()->label(hl);
-    return hl.value()->value();
+    return h.value()->label_.value()->value();
   }
 
   /*----------------------.

@@ -28,15 +28,21 @@ namespace vcsn {
   struct transition_h
   {};
 
+  template <typename Tag>
+  struct GenHandler
+  { };
+
   template<typename Tag, typename Type>
-  class handler
+  class handler : public GenHandler<Tag>
   {
     public:
       typedef Tag kind;
 
       handler();
 
-      handler(Type h);
+//      handler(Type h);
+
+      handler(const Type& h);
 
       handler(const handler& h);
 

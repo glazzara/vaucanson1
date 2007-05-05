@@ -38,8 +38,9 @@ namespace vcsn {
   {
     public :
       typedef Auto_					automaton_t;
-      typedef typename automaton_t::set_t			automata_set_t;
-      typedef typename automaton_t::series_set_t		series_set_t;
+      typedef typename automaton_t::hstate_t		hstate_t;
+      typedef typename automaton_t::set_t		automata_set_t;
+      typedef typename automaton_t::series_set_t	series_set_t;
       typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
       typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
       typedef Monoid_					monoid_elt_value_t;

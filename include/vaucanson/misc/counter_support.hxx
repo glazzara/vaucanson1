@@ -29,45 +29,51 @@ namespace vcsn
   | SupportIterator.  |
   `------------------*/
 
+    template <typename HState>
     inline
-    CounterSupportIterator::CounterSupportIterator (unsigned n)
+    CounterSupportIterator<HState>::CounterSupportIterator (unsigned n)
       : i (n)
     {}
 
+    template <typename HState>
     inline
-    unsigned
-    CounterSupportIterator::operator* () const
+    typename CounterSupportIterator<HState>::hstate_t
+    CounterSupportIterator<HState>::operator* () const
     {
-      return i;
+      return hstate_t (i);
     }
 
+    template <typename HState>
     inline
-    CounterSupportIterator&
-    CounterSupportIterator::operator++ ()
+    CounterSupportIterator<HState>&
+    CounterSupportIterator<HState>::operator++ ()
     {
       ++i;
       return *this;
     }
 
+    template <typename HState>
     inline
-    CounterSupportIterator
-    CounterSupportIterator::operator++ (int)
+    CounterSupportIterator<HState>
+    CounterSupportIterator<HState>::operator++ (int)
     {
       CounterSupportIterator tmp = *this;
       ++i;
       return tmp;
     }
 
+    template <typename HState>
     inline
     bool
-    CounterSupportIterator::operator!= (const CounterSupportIterator& o) const
+    CounterSupportIterator<HState>::operator!= (const CounterSupportIterator<HState>& o) const
     {
       return o.i != i;
     }
 
+    template <typename HState>
     inline
     bool
-    CounterSupportIterator::operator== (const CounterSupportIterator& o) const
+    CounterSupportIterator<HState>::operator== (const CounterSupportIterator& o) const
     {
       return i == o.i;
     }
@@ -79,69 +85,79 @@ namespace vcsn
   `----------*/
 
 
-    /// support<map<U, T> > is a const adapter of std::map to container.
+    /// support<map<U, T> > is a const adapter of std<HState>::map to container.
+    template <typename HState>
     inline
-    CounterSupport::CounterSupport ()
+    CounterSupport<HState>::CounterSupport ()
     { }
 
+    template <typename HState>
     inline
-    CounterSupport::CounterSupport (const CounterSupport& s)
+    CounterSupport<HState>::CounterSupport (const CounterSupport& s)
       : i_ (s.i_)
     { }
 
+    template <typename HState>
     inline
-    CounterSupport::CounterSupport (unsigned i)
+    CounterSupport<HState>::CounterSupport (unsigned i)
       : i_ (i)
     { }
 
+    template <typename HState>
     inline
     unsigned
-    CounterSupport::size () const
+    CounterSupport<HState>::size () const
     {
       return i_;
     }
 
+    template <typename HState>
     inline
-    CounterSupport::iterator
-    CounterSupport::find (unsigned k) const
+    typename CounterSupport<HState>::iterator
+    CounterSupport<HState>::find (unsigned k) const
     {
       if (k >= i_)
 	return iterator(i_);
       return iterator(k);
     }
 
+    template <typename HState>
     inline
     bool
-    CounterSupport::empty () const
+    CounterSupport<HState>::empty () const
     {
       return i_ == 0;
     }
 
+    template <typename HState>
     inline
     unsigned
-    CounterSupport::operator* () const
+    CounterSupport<HState>::operator* () const
     {
       precondition (i_ == 1);
       return 0;
     }
 
+    template <typename HState>
     inline
-    CounterSupport::iterator
-    CounterSupport::begin () const
+    typename CounterSupport<HState>::iterator
+    CounterSupport<HState>::begin () const
     {
       return iterator (0);
     }
 
+    template <typename HState>
     inline
-    CounterSupport::iterator
-    CounterSupport::end () const
+    typename CounterSupport<HState>::iterator
+    CounterSupport<HState>::end () const
     {
       return iterator (i_);
     }
 
+    template <typename HState>
     inline
     unsigned
-    CounterSupport::max () const
+    CounterSupport<HState>::max () const
     {
       return i_;
     }

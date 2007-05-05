@@ -34,6 +34,9 @@ namespace vcsn
    */
   struct geometry
   {
+    typedef GenHandler<state_h> hstate_t;
+    typedef GenHandler<transition_h> htransition_t;
+
       // Store in this map state coordinates.
       typedef std::map<hstate_t, std::pair<double, double> >
       states_geometry_map_t;

@@ -124,9 +124,9 @@ namespace vcsn
 	hstate_t from_;
 	hstate_t to_;
       }; // End of class EdgeValue
-      typedef EdgeValue edge_value_t;
+      typedef EdgeValue edge_data_t;
       typedef SeriesValue series_set_elt_value_t;
-      typedef handler<transition_h, EdgeValue* > htransition_t;
+      typedef handler<transition_h, const EdgeValue* > htransition_t;
       typedef htransition_t			hedge_t;
 
   struct succ {};
@@ -138,14 +138,14 @@ namespace vcsn
   struct SuccessorKey : composite_key <
     EdgeValue,
     BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue, typename EdgeValue::hlabel_t, label_)
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
   > {};
 
 
   struct PredecessorKey : composite_key <
     EdgeValue,
     BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue, typename EdgeValue::hlabel_t, label_)
+    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
   > {};
 
 
@@ -164,7 +164,7 @@ namespace vcsn
     SuccessorKey,
     VCSN_BMI(composite_key_hash)<
       misc::hash_handler<hstate_t>,
-      misc::hash_handler<typename EdgeValue::hlabel_t>
+      misc::hash_handler<hlabel_t>
     >
   > {};
 
@@ -174,7 +174,7 @@ namespace vcsn
     PredecessorKey,
     VCSN_BMI(composite_key_hash)<
       misc::hash_handler<hstate_t>,
-      misc::hash_handler<typename EdgeValue::hlabel_t>
+      misc::hash_handler<hlabel_t>
     >
   > {};
 
@@ -246,7 +246,7 @@ namespace vcsn
       typedef VGraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef graph_data_t edges_t;
-      typedef CounterSupport states_t;
+      typedef CounterSupport<hstate_t> states_t;
 
       //FIXME: find a better name than initial_container_t. The word initial
       //is ambiguous since we use it also for final_t
@@ -471,14 +471,15 @@ namespace vcsn
       ::ret						label_t;
       typedef Tag					tag_t;
 
-      typedef handler<state_h, int>			hstate_t;
-      typedef handler<transition_h, typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, Geometry>::edge_data_t* > htransition_t;
+      typedef typename Graph<Kind, WordValue, WeightValue,
+	            SeriesValue, Letter, Tag, Geometry>::hstate_t hstate_t;
+      typedef typename Graph<Kind, WordValue, WeightValue,
+	            SeriesValue, Letter, Tag, Geometry>::htransition_t htransition_t;
 
       typedef typename Graph<Kind, WordValue, WeightValue,
 	            SeriesValue, Letter, Tag, Geometry>::graph_data_t
 		      transitions_t;
-      typedef CounterSupport				states_t;
+      typedef CounterSupport<hstate_t>			states_t;
 
       typedef typename states_t::iterator		state_iterator;
       typedef typename transitions_t::iterator		transition_iterator;

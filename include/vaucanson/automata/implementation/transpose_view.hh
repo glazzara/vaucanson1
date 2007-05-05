@@ -101,6 +101,9 @@ namespace vcsn {
       typedef typename automaton_traits<T>::final_support_t
       final_support_t;
       typedef typename automaton_traits<T>::geometry_t	geometry_t;
+
+      typedef typename automaton_traits<T>::hstate_t	hstate_t;
+      typedef typename automaton_traits<T>::htransition_t	htransition_t;
   };
 
 #define AutoType(Type)				\

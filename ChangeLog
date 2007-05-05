@@ -1,6 +1,30 @@
 2007-05-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Various fix.
+	* algorithms/aut_to_exp.hh: .
+	* algorithms/aut_to_exp.hxx: .
+	* algorithms/internal/build_pattern.hxx: .
+	* algorithms/thompson.hxx: .
+	* automata/concept/automata_base.hh: .
+	* automata/concept/copy.hxx: .
+	* automata/concept/handlers.hh: .
+	* automata/concept/handlers.hxx: .
+	* automata/implementation/boost_graph.hh: .
+	* automata/implementation/boost_graph.hxx: .
+	* automata/implementation/geometry.hh: .
+	* automata/implementation/transpose_view.hh: .
+	* misc/counter_support.hh: .
+	* misc/counter_support.hxx: .
+	* misc/usual_macros.hh: .
+
+	Fix handler type definition.
+	Pursuing the hstate_t and htransition_t scope reduction.
+	Fix constness issues with the handlers.
+	Fix CounterSupport.
+
+2007-05-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Various fix.
 	* include/vaucanson/algorithms/accessible.hh,
 	* include/vaucanson/algorithms/accessible.hxx,
 	* include/vaucanson/algorithms/internal/has_neighbour.hh,
