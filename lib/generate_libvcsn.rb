@@ -179,7 +179,7 @@ files.each { |file|
 	if contents[i] !~ /GenAutomaton/
 	  tmp = contents[i].gsub(/^\s*\/\/\s*INTERFACE:\s*(.*)\s+\{.*/, '  \1;')
 	  tmp = tmp.gsub(/Automaton/, 'VCSN_CONTEXT::automaton_t')
-	  tmp = tmp.gsub(/HList/, 'std::set<hstate_t>')
+	  tmp = tmp.gsub(/HList/, 'std::set<VCSN_CONTEXT::automaton_t::hstate_t>')
 	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_CONTEXT::rat_exp_impl_t')
 	  tmp = tmp.gsub(/Exp/, 'VCSN_CONTEXT::rat_exp_t')
 	  tmp = tmp.gsub(/Series/, 'VCSN_CONTEXT::series_set_elt_t')

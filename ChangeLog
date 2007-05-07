@@ -1,3 +1,9 @@
+2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix libvcsn script
+	* lib/generate_libvcsn.rb: Take into account the modification made on
+	  hstate_t.
+
 2007-05-05  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Various fix.
