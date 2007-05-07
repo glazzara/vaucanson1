@@ -34,10 +34,9 @@ namespace vcsn
     public:
       typedef T value_type;
 
-      SmartLabel(const T& l) : value_(l), ref_(1)
-      { }
+      explicit SmartLabel(const T& l);
 
-      T& value () const;
+      const T& value () const;
 
       // Handle the reference count
       int ref () const;
@@ -62,7 +61,7 @@ namespace vcsn
 	  ::boost::multi_index::indexed_by<
 	    ::boost::multi_index::hashed_unique<
 	      ::boost::multi_index::tag<label>,
-	      BOOST_MULTI_INDEX_CONST_MEM_FUN (SmartLabel<T>, T&, value),
+	      BOOST_MULTI_INDEX_CONST_MEM_FUN (SmartLabel<T>, const T&, value),
 	      misc::hash_label<T>
 	    >
 	  >

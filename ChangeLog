@@ -1,5 +1,15 @@
 2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add SmartLabel implementation
+	* include/vaucanson/automata/concept/smart_label.hh,
+	* include/vaucanson/automata/concept/smart_label.hxx:
+
+	Add SmartLabel implementation.
+	Add missing inlines.
+	Add missing const.
+
+2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	hstate_t and htransition_t scope reduction complete.
 	* include/vaucanson/algorithms/determinize.hh: .
 	* include/vaucanson/algorithms/determinize.hxx: .

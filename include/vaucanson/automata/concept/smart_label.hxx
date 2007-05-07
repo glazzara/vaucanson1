@@ -33,6 +33,53 @@ namespace vcsn
     }
   };
 
+  /*-----------`
+  | SmartLabel |
+  \-----------*/
+
+  template <typename T>
+  inline
+  SmartLabel<T>::SmartLabel(const T& l)
+    : value_(l),
+      ref_(1)
+  { }
+
+  template <typename T>
+  inline
+  const T&
+  SmartLabel<T>::value() const
+  {
+    return value_;
+  }
+
+  template <typename T>
+  inline
+  int
+  SmartLabel<T>::ref() const
+  {
+    return ref_;
+  }
+
+  template <typename T>
+  inline
+  int
+  SmartLabel<T>::ref_dec()
+  {
+    return --ref_;
+  }
+
+  template <typename T>
+  inline
+  int
+  SmartLabel<T>::ref_inc()
+  {
+    return ++ref_;
+  }
+
+
+ /*---------------------`
+  | SmartLabelContainer |
+  \--------------------*/
 
   template <typename T>
   typename SmartLabelContainer<T>::hlabel_t
