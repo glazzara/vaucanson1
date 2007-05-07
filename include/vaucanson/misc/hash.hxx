@@ -18,7 +18,9 @@
 #ifndef VCSN_MISC_HASH_HXX_
 # define VCSN_MISC_HASH_HXX_
 
+# include <utility>
 # include <boost/functional/hash/hash.hpp>
+# include <vaucanson/algebra/implementation/series/rat/hash_visitor.hh>
 
 namespace vcsn
 {
@@ -32,9 +34,95 @@ namespace vcsn
 
       for (typename algebra::polynom<Word, Weight>::const_iterator i = l.begin ();
 	   i != l.end ();
-	   i++)
+	   ++i)
       {
-	::boost::hash_range (seed, i->first.begin(), i->first.end()); // std::string
+	::boost::hash_combine (seed, i->first); // std::string
+	::boost::hash_combine (seed, i->second);
+      }
+      return seed;
+    }
+
+    template <typename Word, typename LetterT, typename WeightT>
+    std::size_t
+    hash_label<algebra::polynom<Word, rat::exp<LetterT, WeightT> > >::operator() (
+	  const algebra::polynom<Word, rat::exp<LetterT, WeightT> >& l) const
+    {
+      std::size_t seed (0);
+      hash_label hash;
+
+      for (typename algebra::polynom<Word, rat::exp<LetterT,
+	    WeightT> >::const_iterator i = l.begin ();
+	   i != l.end ();
+	   ++i)
+      {
+	::boost::hash_combine (seed, hash(i->first));
+	::boost::hash_combine (seed, i->second);
+      }
+      return seed;
+    }
+
+    template <typename Word, typename WeightT>
+    std::size_t
+    hash_label<algebra::polynom<Word, rat::exp<std::string, WeightT> > >::operator() (
+	const rat::exp<std::string, WeightT>& l) const
+    {
+      rat::HashVisitor<std::string, WeightT> visitor;
+      l.accept(visitor);
+      return visitor.hash_value();
+    }
+
+
+    template <typename Word, typename WeightT>
+    std::size_t
+    hash_label<algebra::polynom<Word, rat::exp<std::string, WeightT> > >::operator() (
+	  const algebra::polynom<Word, rat::exp<std::string, WeightT> >& l) const
+    {
+      std::size_t seed (0);
+      hash_label hash;
+
+      for (typename algebra::polynom<Word, rat::exp<std::string,
+	    WeightT> >::const_iterator i = l.begin ();
+	   i != l.end ();
+	   ++i)
+      {
+	::boost::hash_combine (seed, i->first);
+	::boost::hash_combine (seed, hash(i->second));
+      }
+      return seed;
+    }
+
+/*    template <typename Word, typename LetterT, typename WeightT>
+    std::size_t
+    hash_label<algebra::polynom<Word, rat::exp<std::string, rat::exp<LetterT, WeightT > > > >::operator() (
+	  const algebra::polynom<Word, rat::exp<std::string, rat::exp<LetterT, WeightT> > >& l) const
+    {
+      std::size_t seed (0);
+
+      for (typename algebra::polynom<Word, rat::exp<std::string,
+	    rat::exp<LetterT, WeightT> > >::const_iterator i = l.begin ();
+	   i != l.end ();
+	   ++i)
+      {
+	::boost::hash_combine (seed, i->first);
+	::boost::hash_combine (seed, hash_label(i->second));
+      }
+      return seed;
+    }
+*/
+
+    template <typename Weight, typename T, typename U>
+    std::size_t
+    hash_label<algebra::polynom<std::pair<T, U>, Weight> >::operator() (
+	const algebra::polynom<std::pair<T, U>, Weight >& l) const
+    {
+      std::size_t seed (0);
+
+      for (typename algebra::polynom<std::pair<T, U>, Weight>::const_iterator i = l.begin ();
+	   i != l.end ();
+	   ++i)
+      {
+	::boost::hash_combine (seed, i->first.first);
+	::boost::hash_combine (seed, i->first.second);
 	::boost::hash_combine (seed, i->second);
       }
       return seed;
@@ -45,6 +133,15 @@ namespace vcsn
     hash_handler<handler<Kind, Type> >::operator() (const handler<Kind, Type>& h) const
     {
       return ::boost::hash_value (h.value());
+    }
+
+    template <typename Word, typename Weight>
+    std::size_t
+    hash_label<rat::exp<Word, Weight> >::operator() (const rat::exp<Word, Weight>& l) const
+    {
+      rat::HashVisitor<Word, Weight> visitor;
+      l.accept(visitor);
+      return visitor.hash_value();
     }
   }
 }

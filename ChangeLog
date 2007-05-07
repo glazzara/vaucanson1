@@ -1,5 +1,14 @@
 2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add new hash functions
+	* include/vaucanson/algebra/implementation/series/rat/hash_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/hash_visitor.hxx:
+	  New. This visitor computes a hash value for rational expressions.
+	* include/vaucanson/misc/hash.hh,
+	* include/vaucanson/misc/hash.hxx: Add new hash functions.
+
+2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix libvcsn script
 	* lib/generate_libvcsn.rb: Take into account the modification made on
 	  hstate_t.
