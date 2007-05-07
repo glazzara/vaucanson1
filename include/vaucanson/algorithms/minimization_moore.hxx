@@ -32,12 +32,12 @@
 
 // Iterator on a list of groups.
 # define for_all_groups(I, P)						\
-  for (groupid_to_group_t::iterator I = ((P).begin()); I != (P).end(); ++I)
+  for (typename groupid_to_group_t::iterator I = ((P).begin()); I != (P).end(); ++I)
 
 // Iterator on state in a group. We don't iterate on the first not
 // processed state.
 # define for_all_state_in_groups(I, P)					\
-  for (group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
+  for (typename group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
 
 namespace vcsn {
 
@@ -159,7 +159,7 @@ namespace vcsn {
 	      break;
 	  if (i != letter_count)
 	  {
-	    group_t::iterator istate_save = istate;
+	    typename group_t::iterator istate_save = istate;
 
 	    istate_save--;
 	    if (group_created == false)

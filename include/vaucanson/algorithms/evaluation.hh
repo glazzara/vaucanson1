@@ -75,7 +75,7 @@ namespace vcsn {
   void
   partial_2(const Element<SA, TA>&,
 	    const Element<ST, TT>&,
-	    const hstate_t, Exp&);
+	    const typename TA::hstate_t, Exp&);
 
   template<typename SA, typename TA,
 	   typename ST, typename TT,
@@ -83,7 +83,7 @@ namespace vcsn {
   void
   partial_3(const Element<SA, TA>&,
 	    const Element<ST, TT>&,
-	    const hstate_t, M&);
+	    const typename TA::hstate_t, M&);
 
   /** @} */
 

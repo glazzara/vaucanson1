@@ -76,7 +76,7 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a,
-	      std::map<hstate_t, std::set<hstate_t> >&m);
+	      std::map<typename T::hstate_t, std::set<typename T::hstate_t> >&m);
   //@}
 
   /** @} */

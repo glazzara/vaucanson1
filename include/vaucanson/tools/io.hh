@@ -95,6 +95,8 @@ namespace vcsn
     struct automaton_loader_
     {
 	typedef Auto automaton_t;
+	typedef typename Auto::hstate_t hstate_t;
+	typedef typename Auto::htransition_t htransition_t;
 	typedef TransitionConverter transition_converter_t;
 	typedef Format format_t;
 

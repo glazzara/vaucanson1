@@ -70,7 +70,7 @@ namespace vcsn
 	  {
 	    going_in_.clear ();
 	    maybe_splittable_.clear ();
-	    for_all_const (hstates_t, i, ss)
+	    for_all_const (typename hstates_t, i, ss)
 	      input_.letter_rdeltaf (*this, *i, l, delta_kind::states ());
 	    return not going_in_.empty ();
 	  }
@@ -124,7 +124,7 @@ namespace vcsn
 	      }
 	      else
 		states.swap (states_inter_going_in);
-	      for_all (hstates_t, istate, states_minus_going_in)
+	      for_all (typename hstates_t, istate, states_minus_going_in)
 		class_of_[*istate] = n_partition;
 	      to_treat.push (std::make_pair (&states_minus_going_in,
 					     n_partition++));
@@ -256,7 +256,7 @@ namespace vcsn
     transition_adder_functor<input_t, output_t>
       transition_adder (input, output, class_of);
 
-    partition_t::iterator istates = partition.begin ();
+    typename partition_t::iterator istates = partition.begin ();
     for (unsigned i = 0; i < n_partition; ++i, ++istates)
     {
       int representative = *(*istates).begin();

@@ -57,7 +57,8 @@ namespace vcsn
   Element<A, T>
   product(const Element<A, T>& lhs,
 	  const Element<A, U>& rhs,
-	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >&,
+	  std::map<typename T::hstate_t,
+	    std::pair<typename T::hstate_t, typename U::hstate_t> >&,
 	  const bool use_geometry = false);
   /** @} */
 

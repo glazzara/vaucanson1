@@ -45,7 +45,7 @@ namespace vcsn {
     do_outsplitting(const AutomataBase<S>&,
 		    const algebra::FreeMonoidProduct<M1, M2>&,
 		    const Auto_t& aut,
-		    std::set<hstate_t>& m)
+		    std::set<typename Auto_t::hstate_t>& m)
     {
       AUTOMATON_TYPES(Auto_t);
 
@@ -144,7 +144,7 @@ namespace vcsn {
     do_insplitting(const AutomataBase<S>&,
 		   const algebra::FreeMonoidProduct<M1, M2>&,
 		   const Auto_t& aut,
-		   std::set<hstate_t>& m)
+		   std::set<typename Auto_t::hstate_t>& m)
     {
       AUTOMATON_TYPES(Auto_t);
 
@@ -237,7 +237,8 @@ namespace vcsn {
 
     template <typename S, typename T>
     Element<S, T>
-    outsplitting(const Element<S, T>& aut, std::set<hstate_t>& states)
+    outsplitting(const Element<S, T>& aut,
+		 std::set<typename T::hstate_t>& states)
     {
       return do_outsplitting(aut.structure(),
 			     aut.structure().series().monoid(),
@@ -248,7 +249,8 @@ namespace vcsn {
 
     template <typename S, typename T>
     Element<S, T>
-    insplitting(const Element<S, T>& aut, std::set<hstate_t>& states)
+    insplitting(const Element<S, T>& aut,
+		std::set<typename T::hstate_t>& states)
     {
       return do_insplitting(aut.structure(),
 			    aut.structure().series().monoid(),
@@ -262,7 +264,7 @@ namespace vcsn {
     Element<S, T>
     outsplitting(const Element<S, T>& aut)
     {
-      std::set<hstate_t>		states;
+      std::set<typename T::hstate_t>		states;
       return do_outsplitting(aut.structure(),
 			     aut.structure().series().monoid(),
 			     aut,
@@ -274,7 +276,7 @@ namespace vcsn {
     Element<S, T>
     insplitting(const Element<S, T>& aut)
     {
-      std::set<hstate_t>		states;
+      std::set<typename T::hstate_t>		states;
       return do_insplitting(aut.structure(),
 			    aut.structure().series().monoid(),
 			    aut,

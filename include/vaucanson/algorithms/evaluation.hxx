@@ -224,6 +224,7 @@ namespace vcsn {
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_ret_t, ret_);
 
+    typedef typename Auto_t::hstate_t hstate_t;
     typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
       state_pair_map_t;
     typedef std::map<hstate_t, hstate_t> state_state_map_t;
@@ -298,8 +299,9 @@ namespace vcsn {
 	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
-	       const hstate_t p,
+	       const typename SA::hstate_t p,
 	       Exp& exp)
+
   {
     typedef typename Trans_t::value_t T;
     typedef typename output_projection_helper<ST, T>::ret    Auto_ret_t;
@@ -329,7 +331,7 @@ namespace vcsn {
   void
   partial_2(const Element<SA, TA>& a,
 	    const Element<ST, TT>& t,
-	    const hstate_t p, Exp& exp)
+	    const typename TA::hstate_t p, Exp& exp)
   {
     do_partial_2(a.structure(), t.structure(), a, t, p, exp);
   }
@@ -344,7 +346,7 @@ namespace vcsn {
 	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
-	       const hstate_t p,
+	       const typename Auto_t::hstate_t p,
 	       M& state_exp_pair_set)
   {
     Trans_t tt = t;
@@ -360,7 +362,7 @@ namespace vcsn {
   void
   partial_3(const Element<SA, TA>& a,
 	    const Element<ST, TT>& t,
-	    const hstate_t p,
+	    const typename TA::hstate_t p,
 	    M& state_exp_pair_set)
   {
     do_partial_3(a.structure(), t.structure(), a, t, p, state_exp_pair_set);

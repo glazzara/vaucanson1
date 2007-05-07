@@ -37,7 +37,8 @@ namespace vcsn {
 
   template <class Auto, class Label>
   int do_realtime_words(Auto& a,
-			hstate_t start, hstate_t stop,
+			typename Auto::hstate_t start,
+			typename Auto::hstate_t stop,
 			const Label& label, bool initial, bool final)
   {
     AUTOMATON_TYPES(Auto);
@@ -125,13 +126,13 @@ namespace vcsn {
     vector_t tmp(res.initial().size());
     for_all_initial_states(i, res)
       tmp.push_back(*i);
-    for_all(vector_t, i, tmp)
+    for_all(typename vector_t, i, tmp)
       do_realtime_words(res, hstate_t(), *i, res.get_initial(*i), true, false);
 
     tmp.clear();
     for_all_final_states(f, res)
       tmp.push_back(*f);
-    for_all(vector_t, f, tmp)
+    for_all(typename vector_t, f, tmp)
       do_realtime_words(res, *f, hstate_t(), res.get_final(*f), false, true);
 
     transitions_t transitions = res.transitions();

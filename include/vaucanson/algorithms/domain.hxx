@@ -75,7 +75,7 @@ namespace vcsn
   do_rw_domain(const src_t& src, dst_t& dst)
   {
     TIMER_SCOPED("rw_domain");
-    std::map<hstate_t, hstate_t> m;
+    std::map<typename src_t::hstate_t, typename dst_t::hstate_t> m;
     AUTOMATON_TYPES(src_t);
 
     for_all_states(p, src)

@@ -58,6 +58,8 @@ namespace vcsn
     {
       xml_converter(bool use_label_node = false);
 
+      typedef typename Auto::hstate_t			hstate_t;
+      typedef typename Auto::htransition_t		htransition_t;
       typedef std::map<hstate_t, std::string>		map_t;
       typedef typename Auto::set_t			auto_set_t;
       typedef typename Auto::value_t			auto_impl_t;

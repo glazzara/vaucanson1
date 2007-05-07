@@ -314,7 +314,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, mid, delta_kind::states());
-	for_all_const(cstates_t, dst, st_out)
+	for_all_const(typename cstates_t, dst, st_out)
 	{
 	  if (!find(src, l, *dst))
 	  {
@@ -336,7 +336,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, i, delta_kind::states());
-	for_all_const(cstates_t, s, st_out)
+	for_all_const(typename cstates_t, s, st_out)
 	{
 	  if (!a.is_initial(*s))
 	  {
@@ -363,7 +363,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, mid, delta_kind::states());
-	for_all_const(cstates_t, src, st_in)
+	for_all_const(typename cstates_t, src, st_in)
 	{
 	  if (!find(*src, l, dst))
 	  {
@@ -385,7 +385,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, i, delta_kind::states());
-	for_all_const(cstates_t, s, st_in)
+	for_all_const(typename cstates_t, s, st_in)
 	{
 	  if (!a.is_final(*s))
 	  {

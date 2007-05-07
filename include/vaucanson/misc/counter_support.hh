@@ -89,7 +89,7 @@ namespace vcsn
     {
       public:
 	typedef CounterSupportIterator<HState> iterator;
-	typedef CounterSupportIterator<HState> const_iterator;
+	typedef iterator const_iterator;
 
 	CounterSupport ();
 	CounterSupport (unsigned);
@@ -104,7 +104,7 @@ namespace vcsn
 	unsigned size () const;
 
 	// Find the element associated to \a k.
-	iterator find (unsigned k) const;
+	iterator find (const HState& k) const;
 
 	/// Whether it's empty.
 	bool empty () const;

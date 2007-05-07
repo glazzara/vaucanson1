@@ -114,9 +114,9 @@ namespace vcsn
     template <typename HState>
     inline
     typename CounterSupport<HState>::iterator
-    CounterSupport<HState>::find (unsigned k) const
+    CounterSupport<HState>::find (const HState& k) const
     {
-      if (k >= i_)
+      if (k.value() >= i_)
 	return iterator(i_);
       return iterator(k);
     }

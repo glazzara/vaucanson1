@@ -77,7 +77,8 @@ namespace vcsn {
 
   template <class Auto, class Label>
   int do_sub_normalize_transition(Auto& a,
-				  hstate_t start, hstate_t stop,
+				  typename Auto::hstate_t start,
+				  typename Auto::hstate_t stop,
 				  const Label& label, bool initial, bool final)
   {
     TIMER_SCOPED("sub_normalize_transition");

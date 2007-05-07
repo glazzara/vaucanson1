@@ -32,7 +32,7 @@ namespace vcsn
     AUTOMATON_TYPES(auto_t);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
-    std::map<hstate_t, hstate_t>	stmap;
+    std::map<typename trans_t::hstate_t, typename auto_t::hstate_t>	stmap;
 
     const series_set_t&		series = res.structure().series();
     const monoid_t&		monoid = res.structure().series().monoid();
@@ -121,7 +121,7 @@ namespace vcsn
   typename output_projection_helper<S, T>::ret
   do_rw_image(const Element<S, T>& t,
 	      Auto_t& ret,
-	      std::map<hstate_t, hstate_t>& m_)
+	      std::map<typename Auto_t::hstate_t, typename T::hstate_t>& m_)
   {
     TIMER_SCOPED("image (transducer to automaton)");
     typedef Element<S, T>  Trans_t;
@@ -176,7 +176,7 @@ namespace vcsn
 		 const TransducerBase<ST>&,
 		 const algebra::FreeMonoidBase<M1>&,
 		 Element<S2, T2>& dst,
-		 std::map<hstate_t, hstate_t>& m)
+		 std::map<typename T::hstate_t, typename T2::hstate_t>& m)
   {
     do_rw_image(src, dst, m);
   }
@@ -198,7 +198,7 @@ namespace vcsn
   typename output_projection_helper<S, T>::ret
   image_dispatch2(const Element<S,T>& src,
 		  const TransducerBase<ST>&,
-		  std::map<hstate_t, hstate_t>& m)
+		  std::map<typename T::hstate_t, typename T::hstate_t>& m)
   {
     MAKE_RET_AUTOMATON();
 
@@ -261,7 +261,7 @@ namespace vcsn
   template <typename S, typename T>
   typename output_projection_helper<S, T>::ret
   image(const Element<S, T>& src,
-	std::map<hstate_t, hstate_t>& m)
+	std::map<typename T::hstate_t, typename T::hstate_t>& m)
   {
     return image_dispatch2(src, src.structure(), m);
   }

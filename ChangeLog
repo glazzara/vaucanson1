@@ -1,5 +1,46 @@
 2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	hstate_t and htransition_t scope reduction complete.
+	* include/vaucanson/algorithms/determinize.hh: .
+	* include/vaucanson/algorithms/determinize.hxx: .
+	* include/vaucanson/algorithms/domain.hxx: .
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/evaluation.hh: .
+	* include/vaucanson/algorithms/evaluation.hxx: .
+	* include/vaucanson/algorithms/extension.hxx: .
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx: .
+	* include/vaucanson/algorithms/image.hh: .
+	* include/vaucanson/algorithms/image.hxx: .
+	* include/vaucanson/algorithms/internal/outsplitting.hh: .
+	* include/vaucanson/algorithms/internal/outsplitting.hxx: .
+	* include/vaucanson/algorithms/internal/skeleton.hh: .
+	* include/vaucanson/algorithms/is_ambiguous.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/minimization_moore.hxx: .
+	* include/vaucanson/algorithms/normalized_composition.hxx: .
+	* include/vaucanson/algorithms/product.hh: .
+	* include/vaucanson/algorithms/projection.hh: .
+	* include/vaucanson/algorithms/projection.hxx: .
+	* include/vaucanson/algorithms/realtime.hxx: .
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx: .
+	* include/vaucanson/algorithms/sub_normalize.hxx: .
+	* include/vaucanson/algorithms/trim.hh: .
+	* include/vaucanson/algorithms/trim.hxx: .
+	* include/vaucanson/automata/concept/handlers.hh: .
+	* include/vaucanson/misc/counter_support.hh: .
+	* include/vaucanson/misc/counter_support.hxx: .
+	* include/vaucanson/misc/usual_macros.hh: .
+	* include/vaucanson/tools/dot_format.hxx: .
+	* include/vaucanson/tools/io.hh: .
+	* include/vaucanson/tools/io.hxx: .
+	* include/vaucanson/xml/xml_chooser.hh: .
+	* include/vaucanson/xml/xml_converter.hh: .
+
+	Libvcsn and Taf-Kit compile :)
+	Now it's time to write method implementations for the Graph.
+
+2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Make Geometry Templated
 	* include/vaucanson/algorithms/product.hxx,
 	* include/vaucanson/automata/concept/automata_base.hh,

@@ -26,7 +26,8 @@ namespace vcsn {
   template <typename auto_t, typename trans_t>
   void
   set_states(const trans_t& fmp_trans, auto_t& res,
-	     std::map<hstate_t, hstate_t>& stmap)
+	     std::map<typename trans_t::hstate_t, typename auto_t::hstate_t>&
+	      stmap)
   {
     AUTOMATON_TYPES_(trans_t, trans_);
     AUTOMATON_TYPES(auto_t);

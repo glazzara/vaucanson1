@@ -130,6 +130,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_t, a_);
+    typedef typename Auto_t::hstate_t hstate_t;
     typedef typename Trans_t::series_set_elt_t	t_output_series_set_elt_t;
     typedef typename Auto_t::series_set_elt_t::support_t a_support_t;
     typedef typename Trans_t::semiring_elt_t	t_weight_t;

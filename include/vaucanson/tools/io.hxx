@@ -132,7 +132,8 @@ namespace vcsn
     {}
 
     template<typename Auto, typename TransitionConverter, typename Format>
-    hstate_t automaton_loader_<Auto, TransitionConverter, Format>::
+    typename Auto::hstate_t
+    automaton_loader_<Auto, TransitionConverter, Format>::
     add_state(unsigned s)
     {
       if (smap_.find(s) == smap_.end())

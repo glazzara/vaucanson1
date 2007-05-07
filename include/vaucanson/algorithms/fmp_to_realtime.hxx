@@ -36,8 +36,9 @@ namespace vcsn
 		     const vcsn::Element<S, T>& fmp,
 		     vcsn::Element<SS, TT>& res)
   {
+    typedef typename T::hstate_t hstate_t;
     // Map source automaton's states with result's states
-    std::map<vcsn::hstate_t, vcsn::hstate_t> m;
+    std::map<hstate_t, hstate_t> m;
 
     // Input FMP type
     typedef vcsn::Element<S, T> FMP_t;
