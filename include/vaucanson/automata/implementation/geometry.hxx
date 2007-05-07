@@ -1,4 +1,4 @@
-// geometry.hxx: this file is part of the Vaucanson project.
+// GEOMETRY.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -19,26 +19,36 @@
 
 namespace vcsn
 {
+# define GEOMETRY_TPARAM \
+  template<typename HState, typename HTransition, typename Coords>
+
+# define GEOMETRY \
+  geometry<HState, HTransition, Coords>
+
+  GEOMETRY_TPARAM
   inline
-  geometry::geometry()
+  GEOMETRY::geometry()
     : states_(0), transitions_(0), initials_(0), finals_(0), name_(0)
   {}
 
+  GEOMETRY_TPARAM
   inline
-  geometry& geometry::operator=(const geometry& obj)
+  GEOMETRY& GEOMETRY::operator=(const GEOMETRY& obj)
   {
     return copy_from(obj);
   }
 
+  GEOMETRY_TPARAM
   inline
-  geometry::geometry(const geometry& obj)
+  GEOMETRY::geometry(const GEOMETRY& obj)
     : states_(0), transitions_(0), initials_(0), finals_(0), name_(0)
   {
     copy_from(obj);
   }
 
+  GEOMETRY_TPARAM
   inline
-  geometry& geometry::copy_from(const geometry& obj)
+  GEOMETRY& GEOMETRY::copy_from(const GEOMETRY& obj)
   {
     if (obj.states_ != 0)
     {
@@ -68,8 +78,9 @@ namespace vcsn
     return *this;
   }
 
+  GEOMETRY_TPARAM
   inline
-  geometry::~geometry()
+  GEOMETRY::~geometry()
   {
     delete states_;
     delete transitions_;
@@ -79,16 +90,20 @@ namespace vcsn
   }
 
 
+  GEOMETRY_TPARAM
   inline
-  geometry::states_geometry_map_t& geometry::states()
+  typename GEOMETRY::states_geometry_map_t&
+  GEOMETRY::states()
   {
     if (! states_)
       states_ = new states_geometry_map_t();
     return *states_;
   }
 
+  GEOMETRY_TPARAM
   inline
-  const geometry::states_geometry_map_t& geometry::states() const
+  const typename GEOMETRY::states_geometry_map_t&
+  GEOMETRY::states() const
   {
     if (! states_)
       states_ = new states_geometry_map_t();
@@ -96,16 +111,20 @@ namespace vcsn
   }
 
 
+  GEOMETRY_TPARAM
   inline
-  geometry::transitions_geometry_map_t& geometry::transitions()
+  typename GEOMETRY::transitions_geometry_map_t&
+  GEOMETRY::transitions()
   {
     if (! transitions_)
       transitions_ = new transitions_geometry_map_t();
     return *transitions_;
   }
 
+  GEOMETRY_TPARAM
   inline
-  const geometry::transitions_geometry_map_t& geometry::transitions() const
+  const typename GEOMETRY::transitions_geometry_map_t&
+  GEOMETRY::transitions() const
   {
     if (! transitions_)
       transitions_ = new transitions_geometry_map_t();
@@ -113,16 +132,20 @@ namespace vcsn
   }
 
 
+  GEOMETRY_TPARAM
   inline
-  geometry::initials_geometry_map_t& geometry::initials()
+  typename GEOMETRY::initials_geometry_map_t&
+  GEOMETRY::initials()
   {
     if (! initials_)
       initials_ = new initials_geometry_map_t();
     return *initials_;
   }
 
+  GEOMETRY_TPARAM
   inline
-  const geometry::initials_geometry_map_t& geometry::initials() const
+  const typename GEOMETRY::initials_geometry_map_t&
+  GEOMETRY::initials() const
   {
     if (! initials_)
       initials_ = new initials_geometry_map_t();
@@ -130,16 +153,20 @@ namespace vcsn
   }
 
 
+  GEOMETRY_TPARAM
   inline
-  geometry::finals_geometry_map_t& geometry::finals()
+  typename GEOMETRY::finals_geometry_map_t&
+  GEOMETRY::finals()
   {
     if (! finals_)
       finals_ = new finals_geometry_map_t();
     return *finals_;
   }
 
+  GEOMETRY_TPARAM
   inline
-  const geometry::finals_geometry_map_t& geometry::finals() const
+  const typename GEOMETRY::finals_geometry_map_t&
+  GEOMETRY::finals() const
   {
     if (! finals_)
       finals_ = new finals_geometry_map_t();
@@ -147,16 +174,20 @@ namespace vcsn
   }
 
 
+  GEOMETRY_TPARAM
   inline
-  std::string& geometry::name()
+  std::string&
+  GEOMETRY::name()
   {
     if (! name_)
       name_ = new std::string();
     return *name_;
   }
 
+  GEOMETRY_TPARAM
   inline
-  const std::string& geometry::name() const
+  const std::string&
+  GEOMETRY::name() const
   {
     if (! name_)
       name_ = new std::string();

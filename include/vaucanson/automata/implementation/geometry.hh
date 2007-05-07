@@ -32,25 +32,27 @@ namespace vcsn
    * finals_ map is used to store the label position for final transitions.
    *
    */
+  template<typename HState, typename HTransition, typename Coords>
   struct geometry
   {
-    typedef GenHandler<state_h> hstate_t;
-    typedef GenHandler<transition_h> htransition_t;
+    typedef HState hstate_t;
+    typedef HTransition htransition_t;
+    typedef Coords coords_t;
 
       // Store in this map state coordinates.
-      typedef std::map<hstate_t, std::pair<double, double> >
+      typedef std::map<hstate_t, coords_t>
       states_geometry_map_t;
 
       // Store in this map label coordinates for transitions.
-      typedef std::map<htransition_t, std::pair<double, double> >
+      typedef std::map<htransition_t, coords_t>
       transitions_geometry_map_t;
 
       // Store in this map label coordinates for initial transitions.
-      typedef std::map<hstate_t, std::pair<double, double> >
+      typedef std::map<hstate_t, coords_t>
       initials_geometry_map_t;
 
       // Store in this map label coordinates for final transitions.
-      typedef std::map<hstate_t, std::pair<double, double> >
+      typedef std::map<hstate_t, coords_t>
       finals_geometry_map_t;
 
       geometry();

@@ -187,6 +187,9 @@ namespace vcsn {
       /// Type of the geometry map containing state coordinates.
       typedef typename automaton_traits<T>::geometry_t	geometry_t;
 
+       /// Type of the coordinates used in the geometry map.
+      typedef typename automaton_traits<T>::geometry_coords_t geometry_coords_t;
+
       /// Type of handlers
       typedef typename automaton_traits<T>::hstate_t hstate_t;
       typedef typename automaton_traits<T>::htransition_t htransition_t;

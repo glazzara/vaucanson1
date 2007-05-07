@@ -279,7 +279,7 @@ namespace vcsn
 			  typename Node<T>::map_t& m,
 			  typename Node<T>::factory_t& f)
     {
-      hstate_t state = aut.add_state();
+      typename T::hstate_t state = aut.add_state();
       m[xml2str(node->getAttribute(transcode("name")))] = state;
       typename Node<T>::map_state_pair_t p(aut.geometry().states(), state);
       handle_geometry(node, aut, p, m, f);
@@ -295,10 +295,10 @@ namespace vcsn
 			       typename Node<T>::map_t& m,
 			       typename Node<T>::factory_t& f)
     {
-      hstate_t src = m[xml2str(node->getAttribute(transcode("src")))];
-      hstate_t dst = m[xml2str(node->getAttribute(transcode("dst")))];
+      typename T::hstate_t src = m[xml2str(node->getAttribute(transcode("src")))];
+      typename T::hstate_t dst = m[xml2str(node->getAttribute(transcode("dst")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
-      htransition_t e = aut.add_series_transition(src, dst, s);
+      typename T::htransition_t e = aut.add_series_transition(src, dst, s);
       typename Node<T>::map_transition_pair_t p(aut.geometry().transitions(), e);
       handle_geometry(node, aut, p, m, f);
     }
@@ -313,7 +313,7 @@ namespace vcsn
 			    typename Node<T>::map_t& m,
 			    typename Node<T>::factory_t& f)
     {
-      hstate_t state = m[xml2str(node->getAttribute(transcode("state")))];
+      typename T::hstate_t state = m[xml2str(node->getAttribute(transcode("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_initial(state, s);
       typename Node<T>::map_state_pair_t p(aut.geometry().initials(), state);
@@ -330,7 +330,7 @@ namespace vcsn
 			  typename Node<T>::map_t& m,
 			  typename Node<T>::factory_t& f)
     {
-      hstate_t state = m[xml2str(node->getAttribute(transcode("state")))];
+      typename T::hstate_t state = m[xml2str(node->getAttribute(transcode("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_final(state, s);
       typename Node<T>::map_state_pair_t p(aut.geometry().finals(), state);

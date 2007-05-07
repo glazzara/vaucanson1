@@ -24,6 +24,7 @@
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/smart_label.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
+# include <vaucanson/automata/implementation/geometry.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/misc/hash.hh>
 
@@ -95,7 +96,7 @@ namespace vcsn
 
   // class Graph.
   template <typename Kind, typename WordValue, typename WeightValue,
-	    typename SeriesValue, typename Letter, typename Tag, typename Geometry>
+	    typename SeriesValue, typename Letter, typename Tag, typename GeometryCoords>
   class Graph
   {
     public:
@@ -105,13 +106,13 @@ namespace vcsn
 
       // self definition.
       typedef Graph<Kind, WordValue, WeightValue,
-			 SeriesValue, Letter, Tag, Geometry> self_t;
+			 SeriesValue, Letter, Tag, GeometryCoords> self_t;
 
       typedef typename LabelOf<Kind, WordValue, WeightValue,
 			       SeriesValue, Letter>::ret label_t;
 
       typedef typename SmartLabelContainer<label_t>::hlabel_t hlabel_t;
-      typedef handler<state_h, int>			hstate_t;
+      typedef handler<state_h, int>		      hstate_t;
 
 //      typedef StateValue state_value_t;
 
@@ -124,10 +125,11 @@ namespace vcsn
 	hstate_t from_;
 	hstate_t to_;
       }; // End of class EdgeValue
-      typedef EdgeValue edge_data_t;
-      typedef SeriesValue series_set_elt_value_t;
-      typedef handler<transition_h, const EdgeValue* > htransition_t;
-      typedef htransition_t			hedge_t;
+
+      typedef EdgeValue				      edge_data_t;
+      typedef SeriesValue			      series_set_elt_value_t;
+      typedef handler<transition_h, const EdgeValue*> htransition_t;
+      typedef htransition_t			      hedge_t;
 
   struct succ {};
   struct pred {};
@@ -258,8 +260,9 @@ namespace vcsn
       typedef misc::Support<initial_container_t>	initial_support_t;
       typedef misc::Support<initial_container_t>	final_support_t;
 
-      typedef Tag tag_t;
-      typedef Geometry geometry_t;
+      typedef Tag					tag_t;
+      typedef GeometryCoords				geometry_coords_t;
+      typedef geometry<hstate_t, htransition_t, GeometryCoords> geometry_t;
 
 
       Graph ();
@@ -381,69 +384,61 @@ namespace vcsn
 
   // FIXME: add some nice comments
 
-# define BOOSTGRAPH_TPARAM								\
+# define BOOSTGRAPH_TPARAM						    \
   template <class S, class WordValue, class WeightValue, class SeriesValue, \
-	    class Letter, class Tag, class Geometry>
+	    class Letter, class Tag, class GeometryCoords>
+
+# define BOOSTGRAPH_SERIES					\
+  Graph<labels_are_series, WordValue, WeightValue, SeriesValue, \
+        Letter, Tag, GeometryCoords>
 
   BOOSTGRAPH_TPARAM
-  ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(Graph<labels_are_series,
-					      WordValue, WeightValue,
-					      SeriesValue, Letter, Tag, Geometry>);
-
+  ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
 
   BOOSTGRAPH_TPARAM
-  ADAPT_LETTER_OF_TO_SERIES_LABEL(Graph<labels_are_series,
-				  WordValue, WeightValue,
-				  SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_LETTER_OF_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
 
   BOOSTGRAPH_TPARAM
-  ADAPT_WORD_OF_TO_SERIES_LABEL(Graph<labels_are_series,
-				WordValue, WeightValue,
-				SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_WORD_OF_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
+
+# undef BOOSTGRAPH_SERIES
+# define BOOSTGRAPH_LETTERS					\
+  Graph<labels_are_letters, WordValue, WeightValue, SeriesValue, \
+        Letter, Tag, GeometryCoords>
 
   BOOSTGRAPH_TPARAM
-  ADAPT_WORD_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
-				 WordValue, WeightValue,
-				 SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_WORD_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
 
   BOOSTGRAPH_TPARAM
-  ADAPT_SERIE_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
-				  WordValue, WeightValue,
-				  SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_SERIE_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
 
   BOOSTGRAPH_TPARAM
-  ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(Graph<labels_are_letters,
-					      WordValue, WeightValue,
-					      SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+
+# undef BOOSTGRAPH
+# define BOOSTGRAPH						\
+  Graph<Kind, WordValue, WeightValue, SerieValue, \
+        Letter, Tag, GeometryCoords>
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
-  Tag& op_tag(const AutomataBase<I>&,
-	      Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, Geometry>&);
+	    class Letter, class Tag, class GeometryCoords, class I>
+  Tag& op_tag(const AutomataBase<I>&, BOOSTGRAPH&);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
-  const Tag& op_tag(const AutomataBase<I>&,
-		    const Graph<Kind, WordValue, WeightValue,
-		    SerieValue, Letter, Tag, Geometry>&);
+	    class Letter, class Tag, class GeometryCoords, class I>
+  const Tag& op_tag(const AutomataBase<I>&, BOOSTGRAPH&);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
-  Geometry&
-  op_geometry(const AutomataBase<I>&,
-	      Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, Geometry>&);
+	    class Letter, class Tag, class GeometryCoords, class I>
+  typename BOOSTGRAPH::geometry_t&
+  op_geometry(const AutomataBase<I>&, BOOSTGRAPH&);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
-  const Geometry&
-  op_geometry(const AutomataBase<I>&,
-	      const Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, Geometry>&);
+	    class Letter, class Tag, class GeometryCoords, class I>
+  typename BOOSTGRAPH::geometry_t&
+  op_geometry(const AutomataBase<I>&, const BOOSTGRAPH&);
 
-
-
+# undef BOOSTGRAPH
 # undef BOOSTGRAPH_TPARAM
 
   // This implementation can be used as an implementation of automaton.
@@ -453,14 +448,14 @@ namespace vcsn
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
-	    class Geometry>
+	    class GeometryCoords>
   struct automaton_traits<Graph<Kind,
 				WordValue,
 				WeightValue,
 				SeriesValue,
 				Letter,
 				Tag,
-				Geometry>  >
+				GeometryCoords>  >
   {
       typedef SeriesValue				series_set_elt_value_t;
       typedef WordValue					word_value_t;
@@ -472,12 +467,12 @@ namespace vcsn
       typedef Tag					tag_t;
 
       typedef typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, Geometry>::hstate_t hstate_t;
+	            SeriesValue, Letter, Tag, GeometryCoords>::hstate_t hstate_t;
       typedef typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, Geometry>::htransition_t htransition_t;
+	            SeriesValue, Letter, Tag, GeometryCoords>::htransition_t htransition_t;
 
       typedef typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, Geometry>::graph_data_t
+	            SeriesValue, Letter, Tag, GeometryCoords>::graph_data_t
 		      transitions_t;
       typedef CounterSupport<hstate_t>			states_t;
 
@@ -485,7 +480,7 @@ namespace vcsn
       typedef typename transitions_t::iterator		transition_iterator;
 
       typedef typename Graph<Kind, WordValue, WeightValue,
-	               SeriesValue, Letter, Tag, Geometry>::initial_container_t
+	               SeriesValue, Letter, Tag, GeometryCoords>::initial_container_t
 	initial_container_t;
       typedef typename initial_container_t::Type initial_t;
       typedef initial_t final_t;
@@ -496,8 +491,8 @@ namespace vcsn
       typedef typename initial_support_t::iterator	initial_iterator;
       typedef typename final_support_t::iterator	final_iterator;
 
-      typedef Geometry					geometry_t;
-
+      typedef geometry<hstate_t, htransition_t, GeometryCoords>	geometry_t;
+      typedef GeometryCoords				geometry_coords_t;
   };
 
   // This implementation can be used as a transducer one.
@@ -507,14 +502,14 @@ namespace vcsn
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
-	    class Geometry>
+	    class GeometryCoords>
   struct transducer_traits<Graph<Kind,
 				 WordValue,
 				 WeightValue,
 				 SeriesValue,
 				 Letter,
 				 Tag,
-				 Geometry>  >
+				 GeometryCoords>  >
   {
       typedef WordValue			input_monoid_elt_value_t;
       typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t
@@ -531,17 +526,17 @@ namespace vcsn
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
-	    class Geometry>
+	    class GeometryCoords>
   struct projection_traits<S, Graph<Kind,
 				    WordValue,
 				    WeightValue,
 				    SeriesValue,
 				    Letter,
 				    Tag,
-				    Geometry>  >
+				    GeometryCoords>  >
   {
       typedef Graph<Kind, WordValue, WeightValue, SeriesValue,
-		    Letter, Tag, Geometry>			self_t;
+		    Letter, Tag, GeometryCoords>			self_t;
       typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
       semiring_elt_value_t;
       typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
@@ -558,7 +553,7 @@ namespace vcsn
 	    series_set_elt_value_t,
 	    Letter,
 	    Tag,
-	    Geometry>
+	    GeometryCoords>
       ret;
   };
 
@@ -568,16 +563,16 @@ namespace vcsn
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
-	    class Geometry>
+	    class GeometryCoords>
   struct output_projection_traits<Graph<Kind,
 					WordValue,
 					WeightValue,
 					SeriesValue,
 					Letter,
-					Tag, Geometry>	>
+					Tag, GeometryCoords>	>
   {
       typedef Graph<Kind, WordValue, WeightValue, SeriesValue,
-		    Letter, Tag, Geometry>			self_t;
+		    Letter, Tag, GeometryCoords>			self_t;
 
       typedef typename automaton_traits<self_t>::semiring_elt_value_t
       series_set_elt_value_t;
@@ -597,7 +592,7 @@ namespace vcsn
 	    series_set_elt_value_t,
 	    Letter,
 	    Tag,
-	    Geometry>
+	    GeometryCoords>
       ret;
   };
 
@@ -608,17 +603,17 @@ namespace vcsn
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
-	    class Geometry>
+	    class GeometryCoords>
   struct extension_traits<Graph<Kind,
 				WordValue,
 				WeightValue,
 				SeriesValue,
 				Letter,
 				Tag,
-				Geometry>  >
+				GeometryCoords>  >
   {
       typedef Graph<Kind, WordValue, WeightValue,
-		    SeriesValue, Letter, Tag, Geometry>		self_t;
+		    SeriesValue, Letter, Tag, GeometryCoords>		self_t;
       typedef typename automaton_traits<self_t>::monoid_elt_value_t
       monoid_elt_value_t;
       typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
@@ -631,7 +626,7 @@ namespace vcsn
 	    series_set_elt_value_t,
 	    Letter,
 	    Tag,
-	    Geometry>
+	    GeometryCoords>
       ret;
   };
 
@@ -642,6 +637,8 @@ namespace vcsn
 #  include <vaucanson/automata/implementation/boost_graph.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
+
+//FIXME: Useful???
 # undef BOOST_BMI
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_ //

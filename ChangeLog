@@ -1,5 +1,26 @@
 2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Make Geometry Templated
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hxx,
+	* include/vaucanson/automata/implementation/geometry.hh,
+	* include/vaucanson/automata/implementation/geometry.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/contexts/generic_automaton_impl.thh,
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx:
+
+	Geometry is now templated by hstate_t and the coordinates container.
+	It is dependant on the graph structure.
+	The Geometry template parameter for Graph is replaced by the
+	coordinates container type.
+	The user can't change the Geometry object anymore. One can only change
+	the coordinates type.
+
+2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Add new hash functions
 	* include/vaucanson/algebra/implementation/series/rat/hash_visitor.hh,
 	* include/vaucanson/algebra/implementation/series/rat/hash_visitor.hxx:

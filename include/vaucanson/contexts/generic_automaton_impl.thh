@@ -22,7 +22,6 @@
  */
 
 #include <vaucanson/automata/implementation/boost_graph.hh>
-#include <vaucanson/automata/implementation/geometry.hh>
 
 namespace vcsn
 {
@@ -37,7 +36,7 @@ namespace vcsn
       series_set_elt_t::value_t,
       series_set_elt_t::set_t::monoid_t::letter_t,
       NoTag,
-      geometry
+      std::pair<double, double>
       >
     automaton_impl_t;
 

@@ -28,10 +28,10 @@ namespace vcsn
 
 # define BOOSTGRAPH_TPARAM						\
   template <class Kind, class WordValue, class WeightValue,		\
-	    class SeriesValue, class Letter, class Tag, class Geometry>
+	    class SeriesValue, class Letter, class Tag, class GeometryCoords>
 
 # define BOOSTGRAPH							\
-  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
+  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
 
 
   /*
@@ -71,8 +71,8 @@ namespace vcsn
   BOOSTGRAPH::Graph ()
     : initial_bitset_(0),
       final_bitset_(0),
-      number_of_state_(0),
-      number_of_epsilon_(0)
+      number_of_epsilon_(0),
+      number_of_state_(0)
   { }
 
   /*!
