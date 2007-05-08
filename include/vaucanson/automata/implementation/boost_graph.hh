@@ -91,6 +91,7 @@ namespace vcsn
   using ::boost::multi_index::hashed_non_unique;
   using ::boost::multi_index::tag;
   using ::boost::multi_index::member;
+  using ::boost::multi_index::index_iterator;
   using ::boost::dynamic_bitset;
 
 
@@ -131,120 +132,137 @@ namespace vcsn
       typedef handler<transition_h, const EdgeValue*> htransition_t;
       typedef htransition_t			      hedge_t;
 
-  struct succ {};
-  struct pred {};
-  struct src {};
-  struct dst {};
+      // Functor needed to update the key of an item extracted from a subset
+      // of a multi index ordered with one single key.
+      struct update_state : public std::unary_function<EdgeValue, void>
+      {
+	inline
+        update_state(hstate_t i_)
+        : i(i_)
+        {}
+
+	inline
+        void operator()(hstate_t &key)
+        {
+          key = i;
+        }
+
+	hstate_t i;
+      };
+
+      struct succ {};
+      struct pred {};
+      struct src {};
+      struct dst {};
 
 
-  struct SuccessorKey : composite_key <
-    EdgeValue,
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
-  > {};
+      struct SuccessorKey : composite_key <
+	EdgeValue,
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
+      > {};
 
 
-  struct PredecessorKey : composite_key <
-    EdgeValue,
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
-  > {};
+      struct PredecessorKey : composite_key <
+        EdgeValue,
+        BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+        BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
+      > {};
 
 
-  struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
-    EdgeValue, hstate_t, from_
-  ) {};
+      struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
+        EdgeValue, hstate_t, from_
+      ) {};
 
 
-  struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
-    EdgeValue, hstate_t, to_
-  ) {};
+      struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
+        EdgeValue, hstate_t, to_
+      ) {};
 
 
-  struct SourceAndLabel : hashed_non_unique <
-    tag<succ>,
-    SuccessorKey,
-    VCSN_BMI(composite_key_hash)<
-      misc::hash_handler<hstate_t>,
-      misc::hash_handler<hlabel_t>
-    >
-  > {};
+      struct SourceAndLabel : hashed_non_unique <
+        tag<succ>,
+        SuccessorKey,
+        VCSN_BMI(composite_key_hash)<
+          misc::hash_handler<hstate_t>,
+          misc::hash_handler<hlabel_t>
+	>
+      > {};
 
 
-  struct DestinationAndLabel : hashed_non_unique <
-    tag<pred>,
-    PredecessorKey,
-    VCSN_BMI(composite_key_hash)<
-      misc::hash_handler<hstate_t>,
-      misc::hash_handler<hlabel_t>
-    >
-  > {};
+      struct DestinationAndLabel : hashed_non_unique <
+        tag<pred>,
+        PredecessorKey,
+        VCSN_BMI(composite_key_hash)<
+          misc::hash_handler<hstate_t>,
+          misc::hash_handler<hlabel_t>
+        >
+      > {};
 
 
-  struct Source : hashed_non_unique <
-    tag<src>,
-    SourceKey
-  > {};
+      struct Source : hashed_non_unique <
+        tag<src>,
+        SourceKey
+      > {};
 
 
-  struct Destination : hashed_non_unique <
-    tag<dst>,
-    DestinationKey
-  > {};
+      struct Destination : hashed_non_unique <
+        tag<dst>,
+        DestinationKey
+      > {};
 
 
-  struct GraphContainer
-  : public multi_index_container
-  <
-    EdgeValue,
-    indexed_by
-    <
-      SourceAndLabel,
-      DestinationAndLabel,
-      Source,
-      Destination
-    >
-  >
-  { };
+      struct GraphContainer
+      : public multi_index_container
+      <
+        EdgeValue,
+        indexed_by
+        <
+          SourceAndLabel,
+          DestinationAndLabel,
+          Source,
+          Destination
+        >
+      >
+      { };
 
-  template <typename S>
-  struct InitialValue
-  {
-    InitialValue(const hstate_t& state, const S& series)
-      : first(state),
-    second(series) {}
+      template <typename S>
+      struct InitialValue
+      {
+	//FIXME: move the implementation in .hxx
+        InitialValue(const hstate_t& state, const S& series)
+          : first(state),
+            second(series)
+	{}
 
-    hstate_t first; // state
-    S second; // series
-  };
-
-
-  struct VGraphContainerIterator : GraphContainer::iterator
-  {
-    VGraphContainerIterator(const typename GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
-    htransition_t operator*()
-    {
-      // FIXME: remove this const_cast
-      return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
-    }
-  };
+        hstate_t first; // state
+        S second; // series
+      };
 
 
-  struct VGraphContainer : GraphContainer
-  {
-    typedef VGraphContainerIterator iterator;
+      struct VGraphContainerIterator : GraphContainer::iterator
+      {
+	//FIXME: move the implementation in .hxx
+        VGraphContainerIterator(const typename GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
+        htransition_t operator*()
+        {
+          // FIXME: remove this const_cast
+          return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
+        }
+      };
 
-    VGraphContainer() {}
-    //VGraphContainer(const VGraphContainer&c) : GraphContainer(c) {}
 
-    iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
-    iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
-  };
+      struct VGraphContainer : GraphContainer
+      {
+        typedef VGraphContainerIterator iterator;
 
-//      typedef /* FIXME: std::vector<StateValue_t> */ state_data_t;
-//      typedef /* FIXME: std::vector<EdgeValue_t> */ edge_data_t;
+        VGraphContainer() {}
 
-//      typedef /* FIXME: StateContainer */ states_t;
+	//FIXME: move the implementation in .hxx
+        iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
+        iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
+      };
+
       typedef VGraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef graph_data_t edges_t;
@@ -263,6 +281,26 @@ namespace vcsn
       typedef Tag					tag_t;
       typedef GeometryCoords				geometry_coords_t;
       typedef geometry<hstate_t, htransition_t, GeometryCoords> geometry_t;
+
+      //Definition of various iterator types for the graph structure.
+      typedef typename VGraphContainer::iterator	  iterator;
+      typedef iterator					  const_iterator;
+      typedef typename index_iterator<VGraphContainer, src>::type
+							  src_iterator;
+      typedef src_iterator				  src_const_iterator;
+      typedef typename index_iterator<VGraphContainer, dst>::type
+							  dst_iterator;
+      typedef dst_iterator				  dst_const_iterator;
+      typedef typename index_iterator<VGraphContainer, pred>::type
+							  pred_iterator;
+      typedef pred_iterator				  pred_const_iterator;
+      typedef typename index_iterator<VGraphContainer, succ>::type
+							  succ_iterator;
+      typedef succ_iterator				  succ_const_iterator;
+      typedef std::pair<src_iterator, src_iterator>	  src_range;
+      typedef std::pair<dst_iterator, dst_iterator>	  dst_range;
+      typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
+      typedef std::pair<succ_iterator, succ_iterator>	  succ_range;
 
 
       Graph ();

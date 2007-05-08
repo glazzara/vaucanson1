@@ -1,5 +1,10 @@
 2007-05-08  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add iterator types
+	* ../../include/vaucanson/automata/implementation/boost_graph.hh: .
+
+2007-05-08  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Add some method implementations for Boost Graph
 	* include/vaucanson/automata/implementation/boost_graph.hh,
 	* include/vaucanson/automata/implementation/boost_graph.hxx: .
