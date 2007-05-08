@@ -1,3 +1,14 @@
+2007-05-08  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Require is_initial and is_final to be implemented in the Graph structure.
+	* include/vaucanson/automata/concept/automata_ops.hh: .
+	* include/vaucanson/automata/concept/automata_ops.hxx: .
+	* include/vaucanson/automata/concept/boost_automata_ops.hxx: Remove.
+
+	op_is_initial and op_is_final doesn't use get_initial and get_final
+	anymore. With this patch we force the Graph to have an implementation
+	for is_initial and is_final.
+
 2007-05-07  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add SmartLabel implementation
