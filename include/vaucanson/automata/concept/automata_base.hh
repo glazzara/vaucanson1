@@ -67,19 +67,56 @@ namespace vcsn {
       typedef undefined_type letter_t;
       typedef undefined_type tag_t;
       typedef undefined_type states_t;
-// FIXME: RM?      typedef undefined_type state_data_t;
       typedef undefined_type state_iterator;
       typedef undefined_type transitions_t;
-// FIXME: RM?      typedef undefined_type transition_data_t;
       typedef undefined_type transition_iterator;
       typedef undefined_type initial_iterator;
+      typedef undefined_type initial_t;
       typedef undefined_type initial_support_t;
       typedef undefined_type final_iterator;
+      typedef undefined_type final_t;
       typedef undefined_type final_support_t;
       typedef undefined_type geometry_t;
       typedef undefined_type hstate_t;
       typedef undefined_type htransition_t;
   };
+
+# define VCSN_MAKE_AUTOMATON_TRAITS(Type)					\
+  template <typename Kind,							\
+	    typename WordValue,							\
+	    typename WeightValue,						\
+	    typename SeriesValue,						\
+	    typename Letter,							\
+	    typename Tag,							\
+	    typename GeometryCoords>						\
+  struct automaton_traits<Type<Kind, WeightValue, WordValue, SeriesValue,	\
+			  Letter, Tag, GeometryCoords> >			\
+  {										\
+    typedef Type<Kind, WeightValue, WordValue, SeriesValue,			\
+		 Letter, Tag, GeometryCoords>		graph_t;		\
+    typedef typename graph_t::semiring_elt_value_t	semiring_elt_value_t;	\
+    typedef typename graph_t::word_value_t		word_value_t;		\
+    typedef typename graph_t::series_set_elt_value_t	series_set_elt_value_t;	\
+    typedef typename graph_t::letter_t			letter_t;		\
+    typedef typename graph_t::tag_t			tag_t;			\
+    typedef typename graph_t::geometry_t		geometry_t;		\
+    typedef typename graph_t::label_t			label_t;		\
+    typedef typename graph_t::states_t			states_t;		\
+    typedef typename states_t::iterator			state_iterator;		\
+    typedef typename graph_t::hstate_t			hstate_t;		\
+    typedef typename graph_t::graph_data_t		transitions_t;		\
+    typedef typename transitions_t::iterator		transition_iterator;	\
+    typedef typename graph_t::htransition_t		htransition_t;		\
+    typedef typename graph_t::initial_t			initial_t;		\
+    typedef typename graph_t::initial_support_t		initial_support_t;	\
+    typedef typename initial_support_t::iterator	initial_iterator;	\
+    typedef typename graph_t::final_t			final_t;		\
+    typedef typename graph_t::final_support_t		final_support_t;	\
+    typedef typename final_support_t::iterator		final_iterator;		\
+  }
+
+
+
 
   /*-----------------------------------.
   | virtual_types<AutomataBase<Self> > |
@@ -188,7 +225,7 @@ namespace vcsn {
       typedef typename automaton_traits<T>::geometry_t	geometry_t;
 
        /// Type of the coordinates used in the geometry map.
-      typedef typename automaton_traits<T>::geometry_coords_t geometry_coords_t;
+      typedef typename automaton_traits<T>::geometry_t::coords_t geometry_coords_t;
 
       /// Type of handlers
       typedef typename automaton_traits<T>::hstate_t hstate_t;

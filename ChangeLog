@@ -1,3 +1,11 @@
+2007-05-08  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Update automaton_traits
+	* ../concept/automata_base.hh: .
+	* ../implementation/boost_graph.hh: .
+	* ../implementation/graph.hh: .
+	* ../implementation/transpose_view.hh: .
+
 2007-05-08  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add iterator types

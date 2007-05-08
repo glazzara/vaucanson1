@@ -109,17 +109,19 @@ namespace vcsn
       typedef Graph<Kind, WordValue, WeightValue,
 			 SeriesValue, Letter, Tag, GeometryCoords> self_t;
 
+      typedef WeightValue				semiring_elt_value_t;
+      typedef WordValue					word_value_t;
+      typedef SeriesValue				series_set_elt_value_t;
+      typedef Letter					letter_t;
+      typedef Tag					tag_t;
       typedef typename LabelOf<Kind, WordValue, WeightValue,
 			       SeriesValue, Letter>::ret label_t;
 
       typedef typename SmartLabelContainer<label_t>::hlabel_t hlabel_t;
       typedef handler<state_h, unsigned>		      hstate_t;
 
-//      typedef StateValue state_value_t;
-
       struct EdgeValue
       {
-//	typedef typename SmartLabelContainer<Label>::hlabel_t hlabel_t;
 	EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
 
 	hlabel_t label_;
@@ -128,7 +130,6 @@ namespace vcsn
       }; // End of class EdgeValue
 
       typedef EdgeValue				      edge_data_t;
-      typedef SeriesValue			      series_set_elt_value_t;
       typedef handler<transition_h, const EdgeValue*> htransition_t;
       typedef htransition_t			      hedge_t;
 
@@ -278,7 +279,6 @@ namespace vcsn
       typedef misc::Support<initial_container_t>	initial_support_t;
       typedef misc::Support<initial_container_t>	final_support_t;
 
-      typedef Tag					tag_t;
       typedef GeometryCoords				geometry_coords_t;
       typedef geometry<hstate_t, htransition_t, GeometryCoords> geometry_t;
 
@@ -480,58 +480,7 @@ namespace vcsn
 # undef BOOSTGRAPH_TPARAM
 
   // This implementation can be used as an implementation of automaton.
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SeriesValue,
-	    class Letter,
-	    class Tag,
-	    class GeometryCoords>
-  struct automaton_traits<Graph<Kind,
-				WordValue,
-				WeightValue,
-				SeriesValue,
-				Letter,
-				Tag,
-				GeometryCoords>  >
-  {
-      typedef SeriesValue				series_set_elt_value_t;
-      typedef WordValue					word_value_t;
-      typedef WordValue					monoid_elt_value_t;
-      typedef WeightValue				semiring_elt_value_t;
-      typedef Letter					letter_t;
-      typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
-      ::ret						label_t;
-      typedef Tag					tag_t;
-
-      typedef typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, GeometryCoords>::hstate_t hstate_t;
-      typedef typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, GeometryCoords>::htransition_t htransition_t;
-
-      typedef typename Graph<Kind, WordValue, WeightValue,
-	            SeriesValue, Letter, Tag, GeometryCoords>::graph_data_t
-		      transitions_t;
-      typedef CounterSupport<hstate_t>			states_t;
-
-      typedef typename states_t::iterator		state_iterator;
-      typedef typename transitions_t::iterator		transition_iterator;
-
-      typedef typename Graph<Kind, WordValue, WeightValue,
-	               SeriesValue, Letter, Tag, GeometryCoords>::initial_container_t
-	initial_container_t;
-      typedef typename initial_container_t::Type initial_t;
-      typedef initial_t final_t;
-
-      typedef misc::Support<initial_container_t>	initial_support_t;
-      typedef misc::Support<initial_container_t>	final_support_t;
-
-      typedef typename initial_support_t::iterator	initial_iterator;
-      typedef typename final_support_t::iterator	final_iterator;
-
-      typedef geometry<hstate_t, htransition_t, GeometryCoords>	geometry_t;
-      typedef GeometryCoords				geometry_coords_t;
-  };
+  VCSN_MAKE_AUTOMATON_TRAITS(Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,

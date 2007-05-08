@@ -90,16 +90,13 @@ namespace vcsn
 		    Letter, Tag, Geometry>			self_t;
 
       /// Typedefs on automaton related graphs elements.
-    public:
       typedef typename LabelOf<K, WordValue, WeightValue, SeriesValue, Letter>
       ::ret label_t;
 
       typedef state_value			state_value_t;
       typedef edge_value<label_t>		edge_value_t;
 
-// FIXME: clean from automaton_traits
       typedef std::vector<state_value_t>	state_data_t;
-// FIXME rm?     typedef std::vector<edge_value_t>		edge_data_t;
 
       typedef StateContainer		states_t;
       typedef EdgeContainer		edges_t;
@@ -112,7 +109,6 @@ namespace vcsn
       typedef misc::Support<initial_t>	initial_support_t;
       typedef misc::Support<final_t>	final_support_t;
 
-    public:
       // we guarantee that the handlers of state are indexed from 0 to
       // initial_number_of_state - 1 when using this constructor.
       Graph();
@@ -131,10 +127,8 @@ namespace vcsn
 
       /** @name State's manipulation
        ** @{ */
-    public:
       bool has_state(hstate_t n) const;
 
-    public:
       hstate_t add_state();
 
       /// Remove state \a n.
@@ -142,7 +136,6 @@ namespace vcsn
       /// \pre \a n is a state of this graph.
       void del_state(hstate_t n);
 
-    public:
       /// Change whether a state is initial or not.
       /// \param s  the state
       /// \param v  its associated label
@@ -182,29 +175,22 @@ namespace vcsn
 
       /** @name Edge's manipulation
        ** @{ */
-    public:
       bool has_edge(hedge_t n) const;
 
-    public:
       hedge_t add_edge(hstate_t h1, hstate_t h2, const label_t& v);
       void del_edge(hedge_t e);
 
-    public:
       hstate_t src_of(hedge_t e1) const;
       hstate_t dst_of(hedge_t e2) const;
 
-    public:
       const label_t& label_of(hedge_t n) const;
       void update(hedge_t, label_t);
       /** @} */
 
       /** @name Only automaton related methods
        ** @{ */
-    public:
       template <class S>
       bool exists(const AutomataBase<S>& s) const;
-
-    public:
 
       /// Delta, Reverse deltas, for functor and iterator.
 # define DECLARE_DELTA_FUNCTION(DeltaName, DKind)			\
@@ -243,13 +229,11 @@ namespace vcsn
 
       /** @}*/
 
-    public:
       /// FIXME: Not implemented.
       self_t& clone() const;
 
       /** @name Tag access
        ** @{ */
-    public:
       typedef Tag tag_t;
       tag_t& tag();
       const tag_t& tag() const;
@@ -257,7 +241,6 @@ namespace vcsn
 
       /** @name Geometry access
        ** @{ */
-    public:
       typedef Geometry geometry_t;
       geometry_t& geometry();
       const geometry_t&	geometry() const;
@@ -368,8 +351,6 @@ namespace vcsn
       typedef Tag					tag_t;
       typedef edge_value<label_t>			transition_value_t;
       typedef state_value				state_value_t;
-// FIXME: RM?      typedef std::vector<state_value_t>		state_data_t;
-// FIXME: RM?      typedef std::vector<transition_value_t>		transition_data_t;
 
       typedef StateContainer				states_t;
       typedef EdgeContainer				transitions_t;
