@@ -112,22 +112,30 @@ namespace vcsn
   }
 
   BOOSTGRAPH_TPARAM
-  typename BOOSTGRAPH::hstate_t
-  BOOSTGRAPH::src_of (hedge_t h) const
+  typename BOOSTGRAPH::initial_support_t
+  BOOSTGRAPH::initial () const
   {
-    return h.value()->from_;
+    return initial_support_t(initial_);
   }
 
   BOOSTGRAPH_TPARAM
-  const typename BOOSTGRAPH::label_t&
-  BOOSTGRAPH::label_of (hedge_t h) const
+  typename BOOSTGRAPH::final_support_t
+  BOOSTGRAPH::final () const
   {
-    return h.value()->label_.value()->value();
+    return final_support_t(final_);
   }
+
 
   /*----------------------.
   | State manipulations.  |
   `----------------------*/
+
+  BOOSTGRAPH_TPARAM
+  bool
+  BOOSTGRAPH::has_state (hstate_t h) const
+  {
+    return h.value() < number_of_state_;
+  }
 
   BOOSTGRAPH_TPARAM
   typename BOOSTGRAPH::hstate_t
@@ -136,6 +144,13 @@ namespace vcsn
     initial_bitset_.append(false);
     final_bitset_.append(false);
     return hstate_t (++number_of_state_);
+  }
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::hstate_t
+  BOOSTGRAPH::del_state (hstate_t h)
+  {
+
   }
 
   BOOSTGRAPH_TPARAM
@@ -154,6 +169,20 @@ namespace vcsn
       initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
       initial_bitset_[s.value()] = true;
     }
+  }
+
+  BOOSTGRAPH_TPARAM
+  bool
+  BOOSTGRAPH::is_initial(const hstate_t s, const series_set_elt_value_t&) const
+  {
+    return initial_bitset_[s.value()];
+  }
+
+  BOOSTGRAPH_TPARAM
+  bool
+  BOOSTGRAPH::is_final(const hstate_t s, const series_set_elt_value_t&) const
+  {
+    return final_bitset_[s.value()];
   }
 
   BOOSTGRAPH_TPARAM
@@ -186,6 +215,93 @@ namespace vcsn
 
     return hedge_t (&*graph_.insert (EdgeValue (from, to, hl)).first);
   }
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::hstate_t
+  BOOSTGRAPH::src_of (hedge_t h) const
+  {
+    return h.value()->from_;
+  }
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::hstate_t
+  BOOSTGRAPH::dst_of (hedge_t h) const
+  {
+    return h.value()->to_;
+  }
+
+  BOOSTGRAPH_TPARAM
+  const typename BOOSTGRAPH::label_t&
+  BOOSTGRAPH::label_of (hedge_t h) const
+  {
+    return h.value()->label_.value()->value();
+  }
+
+  BOOSTGRAPH_TPARAM
+  inline
+  typename BOOSTGRAPH::tag_t&
+  BOOSTGRAPH::tag ()
+  {
+    return tag_;
+  }
+
+  BOOSTGRAPH_TPARAM
+  inline
+  const typename BOOSTGRAPH::tag_t&
+  BOOSTGRAPH::tag () const
+  {
+    return tag_;
+  }
+
+  BOOSTGRAPH_TPARAM
+  inline
+  typename BOOSTGRAPH::geometry_t&
+  BOOSTGRAPH::geometry ()
+  {
+    return geometry_;
+  }
+
+  BOOSTGRAPH_TPARAM
+  inline
+  const typename BOOSTGRAPH::geometry_t&
+  BOOSTGRAPH::geometry () const
+  {
+    return geometry_;
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SeriesValue,
+	    class Letter, class Tag, class GeometryCoords, class I>
+  Tag&
+  op_tag(const AutomataBase<I>&, BOOSTGRAPH &g)
+  {
+    return g.tag();
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SeriesValue,
+	    class Letter, class Tag, class GeometryCoords, class I>
+  const Tag&
+  op_tag(const AutomataBase<I>&, BOOSTGRAPH &g)
+  {
+    return g.tag();
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SeriesValue,
+	    class Letter, class Tag, class GeometryCoords, class I>
+  typename BOOSTGRAPH::geometry_t&
+  op_geometry(const AutomataBase<I>&, BOOSTGRAPH &g)
+  {
+    return g.geometry();
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SeriesValue,
+	    class Letter, class Tag, class GeometryCoords, class I>
+  const typename BOOSTGRAPH::geometry_t&
+  op_geometry(const AutomataBase<I>&, const BOOSTGRAPH &g)
+  {
+    return g.geometry();
+  }
+
+
   // End of syntactic sugar
 # undef BOOSTGRAPH_TPARAM
 # undef BOOSTGRAPH

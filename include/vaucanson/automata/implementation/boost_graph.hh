@@ -17,6 +17,7 @@
 
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_
 # define VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_
+# include <functional>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
@@ -26,6 +27,7 @@
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 # include <vaucanson/automata/concept/tags.hh>
+# include <vaucanson/misc/counter_support.hh>
 # include <vaucanson/misc/hash.hh>
 
 //NEW INCLUDES
@@ -38,8 +40,6 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/multi_index/composite_key.hpp>
 #include <boost/dynamic_bitset.hpp>
-#include <vaucanson/misc/counter_support.hh>
-#include <functional>
 
 // FIXME: how to handle htransition_t?
 // FIXME: do we have enough to handle it?
@@ -112,7 +112,7 @@ namespace vcsn
 			       SeriesValue, Letter>::ret label_t;
 
       typedef typename SmartLabelContainer<label_t>::hlabel_t hlabel_t;
-      typedef handler<state_h, int>		      hstate_t;
+      typedef handler<state_h, unsigned>		      hstate_t;
 
 //      typedef StateValue state_value_t;
 
@@ -271,13 +271,13 @@ namespace vcsn
 
       // FIXME: add const rettype& versions?
 
-      states_t states () const; // TODO
-      edges_t edges () const; // TODO
-      initial_support_t initial () const; // TODO
-      final_support_t final () const; // TODO
+      states_t states () const;
+      edges_t edges () const;
+      initial_support_t initial () const;
+      final_support_t final () const;
 
       // state manipulations
-      bool has_state (hstate_t h) const; // TODO
+      bool has_state (hstate_t h) const;
       hstate_t add_state ();
       hstate_t del_state (hstate_t h); // TODO
 
@@ -285,28 +285,28 @@ namespace vcsn
 		       const series_set_elt_value_t& v,
 		       const series_set_elt_value_t& z);
       const series_set_elt_value_t&
-      get_initial(hstate_t, const series_set_elt_value_t&) const;
-      void clear_initial();
+      get_initial(hstate_t, const series_set_elt_value_t&) const; // TODO
+      void clear_initial(); // TODO
 
       void set_final(hstate_t,
 		     const series_set_elt_value_t&,
 		     const series_set_elt_value_t&);
       const series_set_elt_value_t&
-      get_final(hstate_t, const series_set_elt_value_t&) const;
-      void clear_final();
+      get_final(hstate_t, const series_set_elt_value_t&) const; // TODO
+      void clear_final(); // TODO
 
-      bool is_final(hstate_t s) const;
-      bool is_initial(hstate_t s) const;
+      bool is_final(hstate_t s, const series_set_elt_value_t&) const;
+      bool is_initial(hstate_t s, const series_set_elt_value_t&) const;
 
       // edge manipulations
       bool has_edge (hedge_t h) const; // TODO
-      hedge_t add_edge (hstate_t from, hstate_t to, const label_t& l); // TODO
+      hedge_t add_edge (hstate_t from, hstate_t to, const label_t& l);
       hedge_t del_edge (hedge_t h); // TODO
 
-      hstate_t src_of (hedge_t h) const; // TODO
-      hstate_t dst_of (hedge_t h) const; // TODO
+      hstate_t src_of (hedge_t h) const;
+      hstate_t dst_of (hedge_t h) const;
 
-      const label_t& label_of (hedge_t h) const; // TODO
+      const label_t& label_of (hedge_t h) const;
       void update(hedge_t h, const label_t& l); // TODO
 
       // check the consistency of an automata
@@ -315,10 +315,10 @@ namespace vcsn
 
       self_t& clone () const; // TODO
 
-      tag_t& tag (); // TODO
-      const tag_t& tag () const; // TODO
-      geometry_t geometry (); // TODO
-      const geometry_t geometry () const; // TODO
+      tag_t& tag ();
+      const tag_t& tag () const;
+      geometry_t& geometry ();
+      const geometry_t& geometry () const;
 
       /*
       ** delta...
@@ -435,7 +435,7 @@ namespace vcsn
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag, class GeometryCoords, class I>
-  typename BOOSTGRAPH::geometry_t&
+  const typename BOOSTGRAPH::geometry_t&
   op_geometry(const AutomataBase<I>&, const BOOSTGRAPH&);
 
 # undef BOOSTGRAPH

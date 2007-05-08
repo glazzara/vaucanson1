@@ -1,5 +1,13 @@
 2007-05-08  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add some method implementations for Boost Graph
+	* include/vaucanson/automata/implementation/boost_graph.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hxx: .
+
+	New method implementations.
+
+2007-05-08  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Require is_initial and is_final to be implemented in the Graph structure.
 	* include/vaucanson/automata/concept/automata_ops.hh: .
 	* include/vaucanson/automata/concept/automata_ops.hxx: .
