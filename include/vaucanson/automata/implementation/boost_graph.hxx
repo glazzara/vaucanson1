@@ -398,6 +398,94 @@ namespace vcsn
     return g.geometry();
   }
 
+  /*------------------.
+  | Delta functions.  |
+  `------------------*/
+
+# define DEFINE_DELTA_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
+  BOOSTGRAPH_TPARAM								\
+  template <typename OutputIterator, typename Query>				\
+  void										\
+  BOOSTGRAPH::FunName(OutputIterator res,					\
+		      typename BOOSTGRAPH::hstate_t s,				\
+		      const Query& query,					\
+		      delta_kind::DeltaKind) const				\
+  {										\
+    assertion(has_state(s));							\
+    Target##_range r = graph_.get<Target>().equal_range(s);			\
+    for (Target##_iterator e = r.first; e != r.second; e++)			\
+      if (query(hedge_t(&*e)))							\
+	*res++ = GetElt;							\
+  }
+
+  DEFINE_DELTA_FUNCTION (delta, edges, dst, hedge_t(&*e));
+  DEFINE_DELTA_FUNCTION (delta, states, dst, e->to_);
+  DEFINE_DELTA_FUNCTION (rdelta, edges, src, hedge_t(&*e));
+  DEFINE_DELTA_FUNCTION (rdelta, states, src, e->from_);
+
+# undef DEFINE_DELTA_FUNCTION
+
+# define DEFINE_DELTAF_FUNCTION(FunName, DeltaKind, Target, IsBool, Action)	\
+  BOOSTGRAPH_TPARAM								\
+  template <typename Functor, typename Query>					\
+  void										\
+  BOOSTGRAPH::FunName(Functor& f,						\
+		      typename BOOSTGRAPH::hstate_t s,				\
+		      const Query& query,					\
+		      delta_kind::DeltaKind,					\
+		      misc::IsBool##_t) const					\
+  {										\
+    assertion(has_state(s));							\
+    Target##_range r = graph_.get<Target>().equal_range(s);			\
+    for (Target##_iterator e = r.first; e != r.second; e++)			\
+      if (query(htransition_t(&*e)))						\
+      {										\
+	Action;									\
+      }										\
+  }
+
+  DEFINE_DELTAF_FUNCTION (deltaf, edges, dst, true, if (not f(hedge_t(&*e))) break);
+  DEFINE_DELTAF_FUNCTION (deltaf, edges, dst, false, f(hedge_t(&*e)));
+  DEFINE_DELTAF_FUNCTION (deltaf, states, dst, true, if (not f(e->to_)) break);
+  DEFINE_DELTAF_FUNCTION (deltaf, states, dst, false, f(e->to_));
+
+  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, src, true, if (not f(hedge_t(&*e))) break);
+  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, src, false, f(hedge_t(&*e)));
+  DEFINE_DELTAF_FUNCTION (rdeltaf, states, src, true, if (not f(e->from_)) break);
+  DEFINE_DELTAF_FUNCTION (rdeltaf, states, src, false, f(e->from_));
+
+# undef DEFINE_DELTAF_FUNCTION
+
+  namespace deltaf_helper {
+    template <typename T, typename R, typename Arg>
+    char is_returning_bool_helper (R (T::*) (Arg));
+
+    template <typename T, typename Arg>
+    int is_returning_bool_helper (bool (T::*) (Arg));
+
+# define is_returning_bool(T)							\
+    (sizeof (deltaf_helper::is_returning_bool_helper (T)) == sizeof (int))
+  }
+
+# define DEFINE_DELTAF_HELPER(FunName)						\
+  BOOSTGRAPH_TPARAM								\
+  template <typename Functor, class Query, typename DeltaKind>			\
+  void										\
+  BOOSTGRAPH::FunName(Functor& f,						\
+		  typename BOOSTGRAPH::hstate_t s,				\
+		  const Query& query,						\
+		  delta_kind::kind<DeltaKind> k) const				\
+  {										\
+    FunName (f, s, query, k,							\
+	     BOOL_TO_TYPE (is_returning_bool (&Functor::operator ())) ());	\
+  }
+
+  DEFINE_DELTAF_HELPER (deltaf);
+  DEFINE_DELTAF_HELPER (rdeltaf);
+
+# undef DEFINE_DELTAF_HELPER
+# undef is_returning_bool
+
 
   // End of syntactic sugar
 # undef BOOSTGRAPH_TPARAM
