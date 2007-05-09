@@ -92,6 +92,9 @@ namespace vcsn
   using ::boost::multi_index::tag;
   using ::boost::multi_index::member;
   using ::boost::multi_index::index_iterator;
+  using ::boost::multi_index::get;
+  using ::boost::multi_index::project;
+  using ::boost::multi_index::composite_key_hash;
   using ::boost::dynamic_bitset;
 
 
@@ -149,6 +152,23 @@ namespace vcsn
         }
 
 	hstate_t i;
+      };
+
+      // Functor used to update the label of a transition.
+      struct update_label : public std::unary_function<EdgeValue, void>
+      {
+	inline
+        update_label(hlabel_t i_)
+        : i(i_)
+        {}
+
+	inline
+        void operator()(hlabel_t &key)
+        {
+          key = i;
+        }
+
+	hlabel_t i;
       };
 
       struct succ {};
@@ -317,35 +337,35 @@ namespace vcsn
       // state manipulations
       bool has_state (hstate_t h) const;
       hstate_t add_state ();
-      hstate_t del_state (hstate_t h); // TODO
+      hstate_t del_state (hstate_t h);
 
       void set_initial(hstate_t s,
 		       const series_set_elt_value_t& v,
 		       const series_set_elt_value_t& z);
       const series_set_elt_value_t&
-      get_initial(hstate_t, const series_set_elt_value_t&) const; // TODO
-      void clear_initial(); // TODO
+      get_initial(hstate_t, const series_set_elt_value_t&) const;
+      bool is_initial(hstate_t s, const series_set_elt_value_t&) const;
+      void clear_initial();
 
       void set_final(hstate_t,
 		     const series_set_elt_value_t&,
 		     const series_set_elt_value_t&);
       const series_set_elt_value_t&
-      get_final(hstate_t, const series_set_elt_value_t&) const; // TODO
-      void clear_final(); // TODO
-
+      get_final(hstate_t, const series_set_elt_value_t&) const;
       bool is_final(hstate_t s, const series_set_elt_value_t&) const;
-      bool is_initial(hstate_t s, const series_set_elt_value_t&) const;
+      void clear_final();
+
 
       // edge manipulations
-      bool has_edge (hedge_t h) const; // TODO
+      bool has_edge (hedge_t h) const;
       hedge_t add_edge (hstate_t from, hstate_t to, const label_t& l);
-      hedge_t del_edge (hedge_t h); // TODO
+      void del_edge (hedge_t h);
 
       hstate_t src_of (hedge_t h) const;
       hstate_t dst_of (hedge_t h) const;
 
       const label_t& label_of (hedge_t h) const;
-      void update(hedge_t h, const label_t& l); // TODO
+      void update(hedge_t h, const label_t& l);
 
       // check the consistency of an automata
       template <class S>

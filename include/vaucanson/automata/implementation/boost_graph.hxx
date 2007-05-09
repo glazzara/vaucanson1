@@ -150,7 +150,31 @@ namespace vcsn
   typename BOOSTGRAPH::hstate_t
   BOOSTGRAPH::del_state (hstate_t h)
   {
+    // One removes the state h
+    graph_.get<src>().erase(h);
+    graph_.get<dst>().erase(h);
 
+    // One picks up the state with the highest ID and changes its ID to
+    // h.value().
+    // First, one updates its outgoing transitions.
+    src_range src_r = graph_.get<src>().equal_range(number_of_state_ - 1);
+    src_iterator src_tmp;
+    for (src_iterator src_it = src_r.first; src_it != src_r.second;)
+    {
+      src_tmp = src_it++;
+      graph_.get<src>().modify_key(src_tmp, update_state(h.value()));
+    }
+
+    // Then, one updates its incoming transition.
+    dst_range dst_r = graph_.get<dst>().equal_range(number_of_state_ - 1);
+    dst_iterator dst_tmp;
+    for (dst_iterator dst_it = dst_r.first; dst_it != dst_r.second;)
+    {
+      dst_tmp = dst_it++;
+      graph_.get<dst>().modify_key(dst_tmp, update_state(h.value()));
+    }
+
+    --number_of_state_;
   }
 
   BOOSTGRAPH_TPARAM
@@ -172,6 +196,17 @@ namespace vcsn
   }
 
   BOOSTGRAPH_TPARAM
+  const typename BOOSTGRAPH::series_set_elt_value_t&
+  BOOSTGRAPH::get_initial(hstate_t state, const series_set_elt_value_t &zero) const
+  {
+    typename initial_t::const_iterator it = initial_.find(state);
+
+    if (it == initial_.end())
+      return zero;
+    return it->second;
+  }
+
+  BOOSTGRAPH_TPARAM
   bool
   BOOSTGRAPH::is_initial(const hstate_t s, const series_set_elt_value_t&) const
   {
@@ -179,10 +214,11 @@ namespace vcsn
   }
 
   BOOSTGRAPH_TPARAM
-  bool
-  BOOSTGRAPH::is_final(const hstate_t s, const series_set_elt_value_t&) const
+  void
+  BOOSTGRAPH::clear_initial()
   {
-    return final_bitset_[s.value()];
+    initial_.clear();
+    initial_bitset_.reset();
   }
 
   BOOSTGRAPH_TPARAM
@@ -203,9 +239,49 @@ namespace vcsn
     }
   }
 
+  BOOSTGRAPH_TPARAM
+  const typename BOOSTGRAPH::series_set_elt_value_t&
+  BOOSTGRAPH::get_final(hstate_t state, const series_set_elt_value_t &zero) const
+  {
+    typename final_t::const_iterator it = final_.find(state);
+
+    if (it == final_.end())
+      return zero;
+    return it->second;
+  }
+
+  BOOSTGRAPH_TPARAM
+  bool
+  BOOSTGRAPH::is_final(const hstate_t s, const series_set_elt_value_t&) const
+  {
+    return final_bitset_[s.value()];
+  }
+
+  BOOSTGRAPH_TPARAM
+  void
+  BOOSTGRAPH::clear_final()
+  {
+    final_.clear();
+    final_bitset_.reset();
+  }
+
   /*---------------------.
   | Edge manipulations.  |
   `---------------------*/
+
+  BOOSTGRAPH_TPARAM
+  bool
+  BOOSTGRAPH::has_edge (hedge_t h) const
+  {
+    succ_range r = graph_.get<succ>().find(boost::make_tuple(h.value()->from_,
+					   h.value()->label_));
+    succ_iterator it;
+    hstate_t to = h.value()->to_;
+    for (it = r.begin(); it != r.end() && it->to_ != to; ++it)
+      /*Nothing*/;
+
+    return it != graph_.get<succ>().end();
+  }
 
   BOOSTGRAPH_TPARAM
   typename BOOSTGRAPH::hedge_t
@@ -214,6 +290,19 @@ namespace vcsn
     hlabel_t hl = label_container_.insert (l);
 
     return hedge_t (&*graph_.insert (EdgeValue (from, to, hl)).first);
+  }
+
+  BOOSTGRAPH_TPARAM
+  void
+  BOOSTGRAPH::del_edge (hedge_t h)
+  {
+    succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
+							    h.value()->label_));
+    hstate_t to = h.value()->to_;
+    succ_iterator it = r.first;
+    for (; it != r.second && it->to_ == to; ++it)
+      /* NOTHING */;
+    graph_.get<succ>().erase(it);
   }
 
   BOOSTGRAPH_TPARAM
@@ -235,6 +324,14 @@ namespace vcsn
   BOOSTGRAPH::label_of (hedge_t h) const
   {
     return h.value()->label_.value()->value();
+  }
+
+  BOOSTGRAPH_TPARAM
+  void
+  BOOSTGRAPH::update(hedge_t h, const label_t& l)
+  {
+    iterator it = graph_.find(h);
+    graph_.get<succ>().modify(graph_.project<succ>(it), update_label(h.value()));
   }
 
   BOOSTGRAPH_TPARAM

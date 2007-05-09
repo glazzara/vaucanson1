@@ -128,13 +128,6 @@ namespace vcsn
       return seed;
     }
 
-    template <typename Kind, typename Type>
-    std::size_t
-    hash_handler<handler<Kind, Type> >::operator() (const handler<Kind, Type>& h) const
-    {
-      return ::boost::hash_value (h.value());
-    }
-
     template <typename Word, typename Weight>
     std::size_t
     hash_label<rat::exp<Word, Weight> >::operator() (const rat::exp<Word, Weight>& l) const
@@ -142,6 +135,13 @@ namespace vcsn
       rat::HashVisitor<Word, Weight> visitor;
       l.accept(visitor);
       return visitor.hash_value();
+    }
+
+    template <typename Kind, typename Type>
+    std::size_t
+    hash_handler<handler<Kind, Type> >::operator() (const handler<Kind, Type>& h) const
+    {
+      return ::boost::hash_value (h.value());
     }
   }
 }

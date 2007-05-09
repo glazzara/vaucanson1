@@ -156,8 +156,8 @@ namespace vcsn
 	typedef typename InitialContainer<U, HState>::Type container_t;
 
       public:
-	typedef SupportIterator<container_t > iterator;
-	typedef SupportIterator<container_t > const_iterator;
+	typedef SupportIterator<container_t> iterator;
+	typedef SupportIterator<container_t> const_iterator;
 	/// The type of the values.
 	typedef typename container_t::value_type value_type;
 

@@ -1,3 +1,11 @@
+2007-05-09  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add new Graph method implementations.
+	* automata/implementation/boost_graph.hh: .
+	* automata/implementation/boost_graph.hxx: .
+	* misc/hash.hxx: .
+	* misc/support.hh: .
+
 2007-05-08  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Update automaton_traits
