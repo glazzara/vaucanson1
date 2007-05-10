@@ -276,12 +276,13 @@ namespace vcsn
       struct VGraphContainer : GraphContainer
       {
         typedef VGraphContainerIterator iterator;
+	typedef iterator		const_iterator;
 
         VGraphContainer() {}
 
 	//FIXME: move the implementation in .hxx
-        iterator begin() { return VGraphContainerIterator(GraphContainer::begin()); }
-        iterator end() { return VGraphContainerIterator(GraphContainer::end()); }
+        iterator begin() const { return VGraphContainerIterator(GraphContainer::begin()); }
+        iterator end() const { return VGraphContainerIterator(GraphContainer::end()); }
       };
 
       typedef VGraphContainer graph_data_t;
@@ -304,7 +305,8 @@ namespace vcsn
 
       //Definition of various iterator types for the graph structure.
       typedef typename VGraphContainer::iterator	  iterator;
-      typedef iterator					  const_iterator;
+      typedef typename VGraphContainer::const_iterator	  const_iterator;
+      typedef iterator					  transition_iterator;
       typedef typename index_iterator<VGraphContainer, src>::type
 							  src_iterator;
       typedef src_iterator				  src_const_iterator;
@@ -337,7 +339,7 @@ namespace vcsn
       // state manipulations
       bool has_state (hstate_t h) const;
       hstate_t add_state ();
-      hstate_t del_state (hstate_t h);
+      void del_state (hstate_t h);
 
       void set_initial(hstate_t s,
 		       const series_set_elt_value_t& v,
@@ -369,7 +371,7 @@ namespace vcsn
 
       // check the consistency of an automata
       template <class S>
-      bool exists (const AutomataBase<S>& s) const; // TODO
+      bool exists (const AutomataBase<S>& s) const;
 
       self_t& clone () const; // TODO
 

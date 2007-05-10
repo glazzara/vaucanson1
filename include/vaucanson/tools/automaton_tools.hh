@@ -25,11 +25,11 @@
 namespace vcsn {
 
   template <class Auto>
-  std::deque<hstate_t>
+  std::deque<typename Auto::hstate_t>
   choose_n_states(const Auto& a, unsigned n)
   {
-    std::deque<hstate_t> s;
-    std::insert_iterator<std::deque<hstate_t> > i(s, s.begin());
+    std::deque<typename Auto::hstate_t> s;
+    std::insert_iterator<std::deque<typename Auto::hstate_t> > i(s, s.begin());
     misc::random::sample_n(a.states().begin(),
 			      a.states().end(),
 			      i,

@@ -48,9 +48,9 @@ bool cut_up_test(tests::Tester& tg)
   automata_set_t	aa (ss);
   automaton_t		a (aa);
 
-  vcsn::hstate_t s0 = a.add_state();
-  vcsn::hstate_t s1 = a.add_state();
-  vcsn::hstate_t s2 = a.add_state();
+  hstate_t s0 = a.add_state();
+  hstate_t s1 = a.add_state();
+  hstate_t s2 = a.add_state();
 
   automaton_t a1(a.structure());
   automaton_t a2(a.structure());
@@ -117,9 +117,9 @@ bool cut_up_test(tests::Tester& tg)
   gen_automaton_t gena(a.structure());
   gen_automaton_t gena1(gena.structure());
 
-  vcsn::hstate_t gs0 = gena.add_state();
-  vcsn::hstate_t gs1 = gena.add_state();
-  vcsn::hstate_t gs2 = gena.add_state();
+  typename gen_automaton_t::hstate_t gs0 = gena.add_state();
+  typename gen_automaton_t::hstate_t gs1 = gena.add_state();
+  typename gen_automaton_t::hstate_t gs2 = gena.add_state();
 
   gena.add_series_transition(gs0, gs1, ss1);
   gena.add_series_transition(gs0, gs1, ss2);

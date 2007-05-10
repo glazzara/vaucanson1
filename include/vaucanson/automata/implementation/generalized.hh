@@ -56,6 +56,9 @@ namespace vcsn {
 	   NoTag,
 	   geometry_t>
     > automaton_t;
+
+    typedef typename automaton_t::hstate_t		hstate_t;
+    typedef typename automaton_t::htransition_t		htransition_t;
   };
 
 

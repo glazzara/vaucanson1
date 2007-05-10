@@ -147,7 +147,7 @@ namespace vcsn
   }
 
   BOOSTGRAPH_TPARAM
-  typename BOOSTGRAPH::hstate_t
+  void
   BOOSTGRAPH::del_state (hstate_t h)
   {
     // One removes the state h
@@ -332,6 +332,37 @@ namespace vcsn
   {
     iterator it = graph_.find(h);
     graph_.get<succ>().modify(graph_.project<succ>(it), update_label(h.value()));
+  }
+
+  BOOSTGRAPH_TPARAM
+  template <class S>
+  bool
+  BOOSTGRAPH::exists (const AutomataBase<S>& s) const
+  {
+    typename WordValue::iterator	it;
+    typename label_t::const_iterator	r;
+    label_t				l;
+    WordValue				w;
+
+    for (iterator i = graph_.begin(); i != graph_.end(); ++i)
+    {
+      // Make sure that source and destination of edge are part of the
+      // automaton.
+      if (!has_state(dst_of(hedge_t(*i))) ||
+	  !has_state(src_of(hedge_t(*i))))
+	return false;
+
+      // Make sure that every letter of the edge is in the alphabet.
+      l = label_of(hedge_t(*i));
+      for (r = l.begin(); r != l.end(); ++r)
+      {
+	w = r->first;
+	for (it = w.begin(); it != w.end(); ++it)
+	  if (!s.series().monoid().alphabet().contains(*it))
+	    return false;
+      }
+    }
+    return true;
   }
 
   BOOSTGRAPH_TPARAM

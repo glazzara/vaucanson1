@@ -17,6 +17,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_HASH_VISITOR_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_HASH_VISITOR_HXX
 
+# include <boost/functional/hash/hash.hpp>
 # include <vaucanson/algebra/implementation/series/rat/dump_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 

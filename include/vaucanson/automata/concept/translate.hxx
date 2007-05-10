@@ -29,7 +29,7 @@ namespace vcsn {
 				  const F& translate_fun)
   {
     lhs_t dst;
-    std::map<hstate_t, hstate_t> stmap;
+    std::map<typename rhs_t::hstate_t, typename lhs_t::hstate_t> stmap;
 
     dst.create();
     dst.series() = from.series();
@@ -37,7 +37,7 @@ namespace vcsn {
 	 i != from.states().end();
 	 ++i)
     {
-      hstate_t s = dst.add_state();
+      typename lhs_t::hstate_t s = dst.add_state();
       dst.set_final(s, from.get_final(*i));
       dst.set_initial(s, from.get_initial(*i));
       stmap[*i] = s;

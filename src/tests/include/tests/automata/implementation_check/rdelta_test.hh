@@ -46,8 +46,8 @@ unsigned rdelta_test(tests::Tester& tg)
   automaton_t		automaton(automata);
 
   // States.
-  vcsn::hstate_t s1 = automaton.add_state();
-  vcsn::hstate_t s2 = automaton.add_state();
+  automaton_t::hstate_t s1 = automaton.add_state();
+  automaton_t::hstate_t s2 = automaton.add_state();
 
   // Transitions.
   automaton.add_letter_transition(s1, s2, a);

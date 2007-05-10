@@ -45,9 +45,9 @@ unsigned sub_automaton_test(tests::Tester& tg)
   automaton_t		automaton(automata);
 
   // States.
-  vcsn::hstate_t s1 = automaton.add_state();
-  vcsn::hstate_t s2 = automaton.add_state();
-  vcsn::hstate_t s3 = automaton.add_state();
+  automaton_t::hstate_t s1 = automaton.add_state();
+  automaton_t::hstate_t s2 = automaton.add_state();
+  automaton_t::hstate_t s3 = automaton.add_state();
   automaton.set_initial(s1);
   automaton.set_initial(s3);
   automaton.set_final(s2);

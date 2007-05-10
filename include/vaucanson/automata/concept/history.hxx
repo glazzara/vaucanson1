@@ -128,7 +128,7 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    const Event<hstate_t>
+    const Event<typename AutoType_::hstate_t>
     AutomatonHistory<AutoType_>::get_state_event_about(event_kind_t e,
 						       hstate_t	    s) const
     {
@@ -193,7 +193,7 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    const Event<htransition_t>
+    const Event<typename AutoType_::htransition_t>
     AutomatonHistory<AutoType_>::get_transition_event_about(event_kind_t e,
 							    htransition_t transition
       ) const
