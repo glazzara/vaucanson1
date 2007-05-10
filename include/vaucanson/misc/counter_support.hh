@@ -43,8 +43,8 @@ namespace vcsn
     class CounterSupportIterator
     {
       public:
-	typedef CounterSupportIterator<HState>			 self_t;
-	typedef HState hstate_t;
+	typedef CounterSupportIterator<HState>	self_t;
+	typedef HState				hstate_t;
 
 	/*
 	 * This is a default constructor. 
@@ -76,13 +76,35 @@ namespace vcsn
 	hstate_t operator* () const;
 	self_t&	 operator++ ();
 	self_t	 operator++ (int);
+	self_t&  operator-- ();
+	self_t	 operator-- (int);
 	bool	 operator!= (const CounterSupportIterator<hstate_t>&) const;
 	bool	 operator== (const CounterSupportIterator<hstate_t>&) const;
 
       private:
 	unsigned	i;
     };
+  }
+}
 
+namespace std
+{
+  template<typename HState>
+  struct iterator_traits<vcsn::misc::CounterSupportIterator<HState> >
+  {
+      typedef input_iterator_tag iterator_category;
+      typedef HState		   value_type;
+      typedef int		   difference_type;
+      typedef int*		   pointer;
+      typedef int&		   reference;
+  };
+} // std
+
+
+namespace vcsn
+{
+  namespace misc
+  {
     /// Support<map<U, T> > is a const adapter of std::map to container.
     template <typename HState>
     class CounterSupport

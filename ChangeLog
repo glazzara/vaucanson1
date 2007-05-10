@@ -1,3 +1,9 @@
+2007-05-10  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add a missing traits for the Counter Support Iterator
+	* include/vaucanson/misc/counter_support.hh: .
+	* include/vaucanson/misc/counter_support.hxx: .
+
 2007-05-09  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add delta functions.

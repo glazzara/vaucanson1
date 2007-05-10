@@ -64,6 +64,25 @@ namespace vcsn
 
     template <typename HState>
     inline
+    CounterSupportIterator<HState>&
+    CounterSupportIterator<HState>::operator-- ()
+    {
+      --i;
+      return *this;
+    }
+
+    template <typename HState>
+    inline
+    CounterSupportIterator<HState>
+    CounterSupportIterator<HState>::operator-- (int)
+    {
+      CounterSupportIterator tmp = *this;
+      --i;
+      return tmp;
+    }
+
+    template <typename HState>
+    inline
     bool
     CounterSupportIterator<HState>::operator!= (const CounterSupportIterator<HState>& o) const
     {
