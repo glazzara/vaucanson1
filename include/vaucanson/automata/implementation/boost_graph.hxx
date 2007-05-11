@@ -302,6 +302,7 @@ namespace vcsn
     succ_iterator it = r.first;
     for (; it != r.second && it->to_ == to; ++it)
       /* NOTHING */;
+    label_container_.erase(it->label_);
     graph_.get<succ>().erase(it);
   }
 
@@ -331,6 +332,7 @@ namespace vcsn
   BOOSTGRAPH::update(hedge_t h, const label_t& l)
   {
     iterator it = graph_.find(h);
+    label_container_.update(h->label_, l);
     graph_.get<succ>().modify(graph_.project<succ>(it), update_label(h.value()));
   }
 

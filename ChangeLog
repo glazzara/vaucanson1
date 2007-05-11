@@ -1,3 +1,10 @@
+2007-05-11  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Include SmartLabelContainer in BoostGraph.
+	* automata/concept/smart_label.hh: .
+	* automata/concept/smart_label.hxx: .
+	* automata/implementation/boost_graph.hxx: .
+
 2007-05-11  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Boolean automata's make-check compiles

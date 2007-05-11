@@ -22,6 +22,18 @@ namespace vcsn
 {
 
   template <typename T>
+  struct SmartLabel_ref_dec
+  {
+    SmartLabel_ref_dec (const SmartLabel<T>&)
+    { }
+
+    int operator() (SmartLabel<T>& sl)
+    {
+      return sl.ref_dec ();
+    }
+  };
+
+   template <typename T>
   struct SmartLabel_ref_inc
   {
     SmartLabel_ref_inc (const SmartLabel<T>&)
@@ -94,6 +106,41 @@ namespace vcsn
     }
     else
       return hlabel_t (&*data_.insert (SmartLabel<T> (l)).first);
+  }
+
+  template <typename T>
+  void
+  SmartLabelContainer<T>::erase (const hlabel_t& h)
+  {
+    if (h.value()->ref () > 1)
+    {
+      typename label_container_t::iterator i = data_.find (h.value()->value());
+      data_.modify (i, SmartLabel_ref_dec<T> (*i));
+    }
+    else
+      data_.erase (h.value()->value());
+  }
+
+  template <typename T>
+  typename SmartLabelContainer<T>::hlabel_t
+  SmartLabelContainer<T>::update (const hlabel_t& h, const T& l)
+  {
+    erase (h);
+    return insert (l);
+  }
+
+  template <typename T>
+  const T&
+  SmartLabelContainer<T>::get_label (const hlabel_t& h) const
+  {
+    return h->value();
+  }
+
+  template <typename T>
+  typename SmartLabelContainer<T>::hlabel_t
+  SmartLabelContainer<T>::get_hlabel (const T& l) const
+  {
+    return hlabel_t (&*data_.find (l));
   }
 
 } // End of namespace vcsn

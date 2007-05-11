@@ -75,11 +75,11 @@ namespace vcsn
       typedef handler<label_h, const SmartLabel<T>*> hlabel_t;
 
       hlabel_t insert (const T&);
-      void erase (hlabel_t);
-      hlabel_t update (hlabel_t);
+      void erase (const hlabel_t&);
+      hlabel_t update (const hlabel_t&, const T&);
 
-      T get_label (hlabel_t) const;
-      hlabel_t get_hlabel (T) const;
+      const T& get_label (const hlabel_t&) const;
+      hlabel_t get_hlabel (const T&) const;
   };
 
 } // End of namespace vcsn
