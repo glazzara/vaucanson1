@@ -1,5 +1,10 @@
 2007-05-11  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix del_edge.
+	* include/vaucanson/automata/implementation/boost_graph.hxx: .
+
+2007-05-11  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add missing type to automaton_traits.
 	* automata/concept/automata_base.hh: .
 	* automata/implementation/boost_graph.hh: .

@@ -298,12 +298,18 @@ namespace vcsn
   {
     succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
 							    h.value()->label_));
+
     hstate_t to = h.value()->to_;
     succ_iterator it = r.first;
-    for (; it != r.second && it->to_ == to; ++it)
+    for (; it != r.second && it->to_ != to; ++it)
       /* NOTHING */;
-    label_container_.erase(it->label_);
-    graph_.get<succ>().erase(it);
+    if (it != r.second)
+    {
+      hlabel_t l = h.value()->label_;
+      graph_.get<succ>().erase(it);
+      label_container_.erase(l);
+    }
+    /* FIXME: error handling ? */
   }
 
   BOOSTGRAPH_TPARAM
