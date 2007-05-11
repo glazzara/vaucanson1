@@ -95,6 +95,7 @@ namespace vcsn {
     typedef Type<Kind, WeightValue, WordValue, SeriesValue,			\
 		 Letter, Tag, GeometryCoords>		graph_t;		\
     typedef typename graph_t::semiring_elt_value_t	semiring_elt_value_t;	\
+    typedef typename graph_t::monoid_elt_value_t	monoid_elt_value_t;	\
     typedef typename graph_t::word_value_t		word_value_t;		\
     typedef typename graph_t::series_set_elt_value_t	series_set_elt_value_t;	\
     typedef typename graph_t::letter_t			letter_t;		\

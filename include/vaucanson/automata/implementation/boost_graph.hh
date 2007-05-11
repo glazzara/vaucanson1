@@ -113,6 +113,7 @@ namespace vcsn
 			 SeriesValue, Letter, Tag, GeometryCoords> self_t;
 
       typedef WeightValue				semiring_elt_value_t;
+      typedef WordValue					monoid_elt_value_t;
       typedef WordValue					word_value_t;
       typedef SeriesValue				series_set_elt_value_t;
       typedef Letter					letter_t;
