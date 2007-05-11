@@ -45,16 +45,16 @@ unsigned sub_automaton_test(tests::Tester& tg)
   automaton_t		automaton(automata);
 
   // States.
-  automaton_t::hstate_t s1 = automaton.add_state();
-  automaton_t::hstate_t s2 = automaton.add_state();
-  automaton_t::hstate_t s3 = automaton.add_state();
+  hstate_t s1 = automaton.add_state();
+  hstate_t s2 = automaton.add_state();
+  hstate_t s3 = automaton.add_state();
   automaton.set_initial(s1);
   automaton.set_initial(s3);
   automaton.set_final(s2);
   automaton.set_final(s3);
 
   // Show me the bug!
-  std::set<vcsn::hstate_t> to_be_kept;
+  std::set<hstate_t> to_be_kept;
   to_be_kept.insert(s1);
   to_be_kept.insert(s2);
   automaton_t r = sub_automaton(automaton, to_be_kept);

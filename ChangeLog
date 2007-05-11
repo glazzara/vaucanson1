@@ -1,3 +1,12 @@
+2007-05-11  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Boolean automata's make-check compiles
+	* include/vaucanson/automata/implementation/generalized.hh: .
+	* include/vaucanson/automata/implementation/geometry.hh: .
+	* src/tests/include/tests/automata/algos/graphs/sub_automaton_test.hh: .
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh: .
+
 2007-05-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix make check issues

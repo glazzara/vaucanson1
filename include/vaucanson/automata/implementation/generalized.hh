@@ -54,7 +54,7 @@ namespace vcsn {
 	   rat::exp<monoid_elt_value_t, semiring_elt_value_t>,
 	   typename monoid_t::letter_t,
 	   NoTag,
-	   geometry_t>
+	   typename geometry_t::coords_t>
     > automaton_t;
 
     typedef typename automaton_t::hstate_t		hstate_t;

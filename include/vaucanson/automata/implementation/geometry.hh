@@ -56,7 +56,7 @@ namespace vcsn
       finals_geometry_map_t;
 
       geometry();
-      geometry(const geometry& obj);
+      explicit geometry(const geometry& obj);
       ~geometry();
       inline geometry& operator=(const geometry& obj);
       inline geometry& copy_from(const geometry& obj);
