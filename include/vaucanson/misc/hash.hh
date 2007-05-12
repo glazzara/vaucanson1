@@ -77,6 +77,11 @@ namespace vcsn
     {
       std::size_t operator() (const handler<Kind, Type>& h) const;
     };
+
+    struct hash_state_handler
+    {
+      std::size_t operator() (const handler<state_h, unsigned*>& h) const;
+    };
   }
 } // End of namespace vcsn
 

@@ -85,14 +85,31 @@ namespace vcsn
   **  the creation of this number of states.
   */
   BOOSTGRAPH_TPARAM
-  BOOSTGRAPH::Graph (unsigned initial_number_of_state,
+  BOOSTGRAPH::Graph (unsigned initial_number_of_states,
 		     unsigned reserve_number_of_edge)
-    : initial_bitset_(initial_number_of_state),
-      final_bitset_(initial_number_of_state),
+    : initial_bitset_(initial_number_of_states),
+      final_bitset_(initial_number_of_states),
       number_of_epsilon_(0),
-      number_of_state_(initial_number_of_state)
-  { }
+      number_of_state_(initial_number_of_states),
+      states_(initial_number_of_states)
+  {
+    for (unsigned i = 0; i < initial_number_of_states; ++i)
+      states_[i] = hstate_t(new unsigned(i));
+  }
 
+  /*---------------.
+  | Constructors.  |
+  `---------------*/
+
+  BOOSTGRAPH_TPARAM
+  inline
+  BOOSTGRAPH::~Graph ()
+  {
+    for (states_t::iterator i = states_.begin();
+	 i != states_.end();
+	 ++i)
+      delete i->value();
+  }
   /*------------------.
   | Basic accessors.  |
   `------------------*/
@@ -101,7 +118,7 @@ namespace vcsn
   typename BOOSTGRAPH::states_t
   BOOSTGRAPH::states() const
   {
-    return states_t(number_of_state_);
+    return states_;
   }
 
   BOOSTGRAPH_TPARAM
@@ -134,7 +151,12 @@ namespace vcsn
   bool
   BOOSTGRAPH::has_state (hstate_t h) const
   {
-    return h.value() < number_of_state_;
+    typename states_t::const_iterator i;
+    for (i = states_.begin();
+	 i != states_.end() && *i != h;
+	 ++i)
+      ;
+    return i != states_.end();
   }
 
   BOOSTGRAPH_TPARAM
@@ -143,7 +165,9 @@ namespace vcsn
   {
     initial_bitset_.append(false);
     final_bitset_.append(false);
-    return hstate_t (number_of_state_++);
+    hstate_t h(new unsigned(number_of_state_++));
+    states_.push_back(h);
+    return h;
   }
 
   BOOSTGRAPH_TPARAM
@@ -157,51 +181,31 @@ namespace vcsn
     graph_.get<src>().erase(h);
     graph_.get<dst>().erase(h);
 
-    if (h.value() != number_of_state_ && number_of_state_)
+    if (*h.value() != number_of_state_ && number_of_state_)
     {
-      hstate_t last_state(number_of_state_);
-      // One picks up the state with the highest ID and changes its ID to
-      // h.value().
-      // First, one updates its outgoing transitions.
-      src_range src_r = graph_.get<src>().equal_range(last_state);
-      src_iterator src_tmp;
-      for (src_iterator src_it = src_r.first; src_it != src_r.second;)
-      {
-	src_tmp = src_it++;
-	graph_.get<src>().modify_key(src_tmp, update_state(h));
-      }
-
-      // Then, one updates its incoming transition.
-      dst_range dst_r = graph_.get<dst>().equal_range(last_state);
-      dst_iterator dst_tmp;
-      for (dst_iterator dst_it = dst_r.first; dst_it != dst_r.second;)
-      {
-	dst_tmp = dst_it++;
-	graph_.get<dst>().modify_key(dst_tmp, update_state(h));
-      }
+      *(states_.back().value()) = *h.value();
+      states_[*h.value()] = states_.back();
 
 # define VCSN_UPDATE(Set)					      \
-      if (Set##bitset_[number_of_state_])				      \
+      if (Set##bitset_[number_of_state_])			      \
       {								      \
-	if (Set##bitset_[h.value()])				      \
-	Set.erase(h);						      \
+	if (Set##bitset_[*h.value()])				      \
+	  Set.erase(h);						      \
 	else							      \
-	Set##bitset_[h.value()] = true;				      \
-	Set.modify_key(Set.find(last_state), update_state(h));	      \
+	  Set##bitset_[*h.value()] = true;			      \
       }								      \
       else							      \
       {								      \
-	if (Set##bitset_[h.value()])				      \
-	{								      \
-	  Set##bitset_[h.value()] = false;			      \
+	if (Set##bitset_[*h.value()])				      \
+	{							      \
+	  Set##bitset_[*h.value()] = false;			      \
 	  Set.erase(h);						      \
-	}								      \
+	}							      \
       }
 
       //Updating initial/final states information
       VCSN_UPDATE(initial_)
       VCSN_UPDATE(final_)
-
 # undef VCSN_UPDATE
     }
     else
@@ -210,6 +214,8 @@ namespace vcsn
       final_.erase(h);
     }
 
+    states_.pop_back();
+    delete h.value();
     initial_bitset_.resize(number_of_state_);
     final_bitset_.resize(number_of_state_);
 
@@ -226,13 +232,13 @@ namespace vcsn
     if (z == v)
     {
       initial_.erase (s);
-      initial_bitset_[s.value()] = false;
+      initial_bitset_[*s.value()] = false;
     }
     else
-      if (!initial_bitset_[s.value()])
+      if (!initial_bitset_[*s.value()])
       {
 	initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
-	initial_bitset_[s.value()] = true;
+	initial_bitset_[*s.value()] = true;
       }
   }
 
@@ -251,7 +257,7 @@ namespace vcsn
   bool
   BOOSTGRAPH::is_initial(const hstate_t s, const series_set_elt_value_t&) const
   {
-    return initial_bitset_[s.value()];
+    return initial_bitset_[*s.value()];
   }
 
   BOOSTGRAPH_TPARAM
@@ -271,13 +277,13 @@ namespace vcsn
     if (z == v)
     {
       final_.erase (s);
-      final_bitset_[s.value()] = false;
+      final_bitset_[*s.value()] = false;
     }
     else
-      if (!final_bitset_[s.value()])
+      if (!final_bitset_[*s.value()])
       {
 	final_.insert (InitialValue<series_set_elt_value_t> (s, v));
-	final_bitset_[s.value()] = true;
+	final_bitset_[*s.value()] = true;
       }
   }
 
@@ -296,7 +302,7 @@ namespace vcsn
   bool
   BOOSTGRAPH::is_final(const hstate_t s, const series_set_elt_value_t&) const
   {
-    return final_bitset_[s.value()];
+    return final_bitset_[*s.value()];
   }
 
   BOOSTGRAPH_TPARAM

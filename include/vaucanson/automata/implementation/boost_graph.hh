@@ -55,33 +55,6 @@ namespace vcsn
     typedef transitions edges;
   } // End of namespace delta_kind
 
-  // FIXME: full public or {access,gett}ors
-  // Edge decorator
-/*
-  struct GenEdgeLabel
-  { };
-
-  struct EdgeLabel : public GenEdgeLabel,
-    public SmartLabelContainer<Label>::hlabel_t
-  { };
-*/
-/*
-
-  struct EdgeValue
-  {
-    typedef typename SmartLabelContainer<Label>::hlabel_t hlabel_t;
-    EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
-
-    hstate_t from() const;
-    hstate_t to() const;
-    void label() const;
-    void label(hlabel_t&) const;
-
-    hlabel_t label_;
-    hstate_t from_;
-    hstate_t to_;
-  }; // End of class EdgeValue
-*/
   // FIXME use VCSN_BMI and remove those using
 # define VCSN_BMI(Type) ::boost::multi_index::Type
   using ::boost::multi_index_container;
@@ -122,7 +95,7 @@ namespace vcsn
 			       SeriesValue, Letter>::ret label_t;
 
       typedef typename SmartLabelContainer<label_t>::hlabel_t hlabel_t;
-      typedef handler<state_h, unsigned>		      hstate_t;
+      typedef handler<state_h, unsigned*>		      hstate_t;
 
       struct EdgeValue
       {
@@ -136,24 +109,6 @@ namespace vcsn
       typedef EdgeValue				      edge_data_t;
       typedef handler<transition_h, const EdgeValue*> htransition_t;
       typedef htransition_t			      hedge_t;
-
-      // Functor needed to update the key of an item extracted from a subset
-      // of a multi index ordered with one single key.
-      struct update_state : public std::unary_function<hstate_t, void>
-      {
-	inline
-        update_state(hstate_t i_)
-        : i(i_)
-        {}
-
-	inline
-        void operator()(hstate_t &key)
-        {
-          key = i;
-        }
-
-	hstate_t i;
-      };
 
       // Functor used to update the label of a transition.
       struct update_label : public std::unary_function<hlabel_t, void>
@@ -206,7 +161,7 @@ namespace vcsn
         tag<succ>,
         SuccessorKey,
         VCSN_BMI(composite_key_hash)<
-          misc::hash_handler<hstate_t>,
+          misc::hash_state_handler,
           misc::hash_handler<hlabel_t>
 	>
       > {};
@@ -216,7 +171,7 @@ namespace vcsn
         tag<pred>,
         PredecessorKey,
         VCSN_BMI(composite_key_hash)<
-          misc::hash_handler<hstate_t>,
+          misc::hash_state_handler,
           misc::hash_handler<hlabel_t>
         >
       > {};
@@ -224,13 +179,15 @@ namespace vcsn
 
       struct Source : hashed_non_unique <
         tag<src>,
-        SourceKey
+        SourceKey,
+	misc::hash_state_handler
       > {};
 
 
       struct Destination : hashed_non_unique <
         tag<dst>,
-        DestinationKey
+        DestinationKey,
+	misc::hash_state_handler
       > {};
 
 
@@ -312,7 +269,7 @@ namespace vcsn
       typedef GraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef VGraphContainer edges_t;
-      typedef CounterSupport<hstate_t> states_t;
+      typedef std::vector<hstate_t> states_t;
 
       //FIXME: find a better name than initial_container_t. The word initial
       //is ambiguous since we use it also for final_t
@@ -353,6 +310,7 @@ namespace vcsn
       Graph ();
       Graph (unsigned int initial_number_of_state,
 		  unsigned int number_of_edge_initially_allocated);
+      ~Graph ();
 
       // FIXME: add const rettype& versions?
 
@@ -462,6 +420,7 @@ namespace vcsn
       // FIXME: specify its range
       // number_of_state_ == 0 => there is no state.
       unsigned  number_of_state_;
+      states_t states_;
 
       SmartLabelContainer<label_t> label_container_;
 

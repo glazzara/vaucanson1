@@ -1,5 +1,13 @@
 2007-05-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	New state handling. 
+	* ../../include/vaucanson/automata/implementation/boost_graph.hh: .
+	* ../../include/vaucanson/automata/implementation/boost_graph.hxx: .
+	* ../../include/vaucanson/misc/hash.hh: .
+	* ../../include/vaucanson/misc/hash.hxx: .
+
+2007-05-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix two tests.
 	* ../../src/tests/include/tests/automata/implementation_check/add_state_test.hh,
 	* ../../src/tests/include/tests/automata/implementation_check/add_transition_test.hh: .
