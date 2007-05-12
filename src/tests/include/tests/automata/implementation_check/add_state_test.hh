@@ -65,6 +65,8 @@ unsigned add_state_test(tests::Tester& tg)
   EQTEST(t, "Number of state after total deletion in growing order = 0.",
 	 automaton.states().size(), 0);
 
+  s.clear();
+
   for (unsigned i = 0; i < 3; ++i)
     s.insert(automaton.add_state());
   EQTEST(t, "Number of state after three state additions = 3.",

@@ -79,6 +79,9 @@ unsigned add_transition_test(tests::Tester& tg)
     s.insert(automaton.add_series_transition(p1, p2,
 					     series_set_elt_t(automaton.structure().series())));
   }
+
+  s.clear();
+
   EQTEST(t, "Number of transition after three transition additions = 3.",
 	 automaton.transitions().size(), 3);
   for (typename std::set<htransition_t>::const_reverse_iterator i = sc.rbegin();

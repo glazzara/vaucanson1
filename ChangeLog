@@ -1,3 +1,11 @@
+2007-05-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix two tests.
+	* ../../src/tests/include/tests/automata/implementation_check/add_state_test.hh,
+	* ../../src/tests/include/tests/automata/implementation_check/add_transition_test.hh: .
+
+	Clear temporary structures between tests.
+
 2007-05-12  Type Your Name Here  <your.mail.here@FIXME.com>
 
 	Many fixes
