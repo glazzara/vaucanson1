@@ -108,7 +108,7 @@ namespace vcsn
   typename BOOSTGRAPH::edges_t
   BOOSTGRAPH::edges() const
   {
-    return graph_;
+    return VGraphContainer(graph_);
   }
 
   BOOSTGRAPH_TPARAM
@@ -143,38 +143,78 @@ namespace vcsn
   {
     initial_bitset_.append(false);
     final_bitset_.append(false);
-    return hstate_t (++number_of_state_);
+    return hstate_t (number_of_state_++);
   }
 
   BOOSTGRAPH_TPARAM
   void
   BOOSTGRAPH::del_state (hstate_t h)
   {
+    precondition (has_state(h));
+    --number_of_state_;
+
     // One removes the state h
     graph_.get<src>().erase(h);
     graph_.get<dst>().erase(h);
 
-    // One picks up the state with the highest ID and changes its ID to
-    // h.value().
-    // First, one updates its outgoing transitions.
-    src_range src_r = graph_.get<src>().equal_range(number_of_state_ - 1);
-    src_iterator src_tmp;
-    for (src_iterator src_it = src_r.first; src_it != src_r.second;)
+    if (h.value() != number_of_state_ && number_of_state_)
     {
-      src_tmp = src_it++;
-      graph_.get<src>().modify_key(src_tmp, update_state(h.value()));
+      hstate_t last_state(number_of_state_);
+      // One picks up the state with the highest ID and changes its ID to
+      // h.value().
+      // First, one updates its outgoing transitions.
+      src_range src_r = graph_.get<src>().equal_range(last_state);
+      src_iterator src_tmp;
+      for (src_iterator src_it = src_r.first; src_it != src_r.second;)
+      {
+	src_tmp = src_it++;
+	graph_.get<src>().modify_key(src_tmp, update_state(h));
+      }
+
+      // Then, one updates its incoming transition.
+      dst_range dst_r = graph_.get<dst>().equal_range(last_state);
+      dst_iterator dst_tmp;
+      for (dst_iterator dst_it = dst_r.first; dst_it != dst_r.second;)
+      {
+	dst_tmp = dst_it++;
+	graph_.get<dst>().modify_key(dst_tmp, update_state(h));
+      }
+
+# define VCSN_UPDATE(Set)					      \
+      if (Set##bitset_[number_of_state_])				      \
+      {								      \
+	if (Set##bitset_[h.value()])				      \
+	Set.erase(h);						      \
+	else							      \
+	Set##bitset_[h.value()] = true;				      \
+	Set.modify_key(Set.find(last_state), update_state(h));	      \
+      }								      \
+      else							      \
+      {								      \
+	if (Set##bitset_[h.value()])				      \
+	{								      \
+	  Set##bitset_[h.value()] = false;			      \
+	  Set.erase(h);						      \
+	}								      \
+      }
+
+      //Updating initial/final states information
+      VCSN_UPDATE(initial_)
+      VCSN_UPDATE(final_)
+
+# undef VCSN_UPDATE
+    }
+    else
+    {
+      initial_.erase(h);
+      final_.erase(h);
     }
 
-    // Then, one updates its incoming transition.
-    dst_range dst_r = graph_.get<dst>().equal_range(number_of_state_ - 1);
-    dst_iterator dst_tmp;
-    for (dst_iterator dst_it = dst_r.first; dst_it != dst_r.second;)
-    {
-      dst_tmp = dst_it++;
-      graph_.get<dst>().modify_key(dst_tmp, update_state(h.value()));
-    }
+    initial_bitset_.resize(number_of_state_);
+    final_bitset_.resize(number_of_state_);
 
-    --number_of_state_;
+    //Useless postcondition since the states are 'renamed'
+    //postcondition(!has_state(h));
   }
 
   BOOSTGRAPH_TPARAM
@@ -189,10 +229,11 @@ namespace vcsn
       initial_bitset_[s.value()] = false;
     }
     else
-    {
-      initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
-      initial_bitset_[s.value()] = true;
-    }
+      if (!initial_bitset_[s.value()])
+      {
+	initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
+	initial_bitset_[s.value()] = true;
+      }
   }
 
   BOOSTGRAPH_TPARAM
@@ -233,10 +274,11 @@ namespace vcsn
       final_bitset_[s.value()] = false;
     }
     else
-    {
-      final_.insert (InitialValue<series_set_elt_value_t> (s, v));
-      final_bitset_[s.value()] = true;
-    }
+      if (!final_bitset_[s.value()])
+      {
+	final_.insert (InitialValue<series_set_elt_value_t> (s, v));
+	final_bitset_[s.value()] = true;
+      }
   }
 
   BOOSTGRAPH_TPARAM
@@ -273,11 +315,11 @@ namespace vcsn
   bool
   BOOSTGRAPH::has_edge (hedge_t h) const
   {
-    succ_range r = graph_.get<succ>().find(boost::make_tuple(h.value()->from_,
-					   h.value()->label_));
+    succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
+						  h.value()->label_));
     succ_iterator it;
     hstate_t to = h.value()->to_;
-    for (it = r.begin(); it != r.end() && it->to_ != to; ++it)
+    for (it = r.first; it != r.second && it->to_ != to; ++it)
       /*Nothing*/;
 
     return it != graph_.get<succ>().end();
@@ -296,6 +338,8 @@ namespace vcsn
   void
   BOOSTGRAPH::del_edge (hedge_t h)
   {
+    precondition (has_edge(h));
+
     succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
 							    h.value()->label_));
 
@@ -303,13 +347,13 @@ namespace vcsn
     succ_iterator it = r.first;
     for (; it != r.second && it->to_ != to; ++it)
       /* NOTHING */;
-    if (it != r.second)
-    {
-      hlabel_t l = h.value()->label_;
-      graph_.get<succ>().erase(it);
-      label_container_.erase(l);
-    }
-    /* FIXME: error handling ? */
+    hlabel_t l = h.value()->label_;
+    graph_.get<succ>().erase(it);
+    label_container_.erase(l);
+
+    // h points to an invalid edgeValue since it is already destroyed.
+    // We can't check this postcondition anymore!
+    //postcondition(!has_edge(h));
   }
 
   BOOSTGRAPH_TPARAM

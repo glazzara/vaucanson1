@@ -33,18 +33,20 @@ namespace vcsn {
   {
     public:
       typedef Tag kind;
+      typedef handler<Tag, Type> self_t;
 
       handler();
 
 //      handler(Type h);
 
+      //FIXME : add an explicit keyword?
       handler(const Type& h);
 
-      handler(const handler& h);
+      handler(const self_t& h);
 
-      handler& operator=(const handler& h);
+      self_t& operator=(const self_t& h);
 
-      handler& operator=(Type h);
+      self_t& operator=(Type h);
 
       Type value() const;
 

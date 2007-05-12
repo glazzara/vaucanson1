@@ -141,7 +141,7 @@ namespace vcsn
 	U,
 	boost::multi_index::indexed_by
 	<
-	  boost::multi_index::ordered_unique<
+	  boost::multi_index::ordered_non_unique<
 	    BOOST_MULTI_INDEX_MEMBER(U, HState, first)
 	  >
 	>

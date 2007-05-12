@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef   	VCSN_ALGORITHMS_IMAGE_HXX
-# define   	VCSN_ALGORITHMS_IMAGE_HXX
+#ifndef VCSN_ALGORITHMS_IMAGE_HXX
+# define VCSN_ALGORITHMS_IMAGE_HXX
 
 # include <vaucanson/algorithms/image.hh>
 # include <vaucanson/algorithms/projection.hh>
@@ -32,7 +32,7 @@ namespace vcsn
     AUTOMATON_TYPES(auto_t);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
-    std::map<typename trans_t::hstate_t, typename auto_t::hstate_t>	stmap;
+    std::map<trans_hstate_t, hstate_t>	stmap;
 
     const series_set_t&		series = res.structure().series();
     const monoid_t&		monoid = res.structure().series().monoid();

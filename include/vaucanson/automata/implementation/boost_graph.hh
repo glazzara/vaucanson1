@@ -139,7 +139,7 @@ namespace vcsn
 
       // Functor needed to update the key of an item extracted from a subset
       // of a multi index ordered with one single key.
-      struct update_state : public std::unary_function<EdgeValue, void>
+      struct update_state : public std::unary_function<hstate_t, void>
       {
 	inline
         update_state(hstate_t i_)
@@ -156,7 +156,7 @@ namespace vcsn
       };
 
       // Functor used to update the label of a transition.
-      struct update_label : public std::unary_function<EdgeValue, void>
+      struct update_label : public std::unary_function<hlabel_t, void>
       {
 	inline
         update_label(hlabel_t i_)
@@ -262,33 +262,56 @@ namespace vcsn
       };
 
 
-      struct VGraphContainerIterator : GraphContainer::iterator
+      class VGraphContainerIterator
       {
-	//FIXME: move the implementation in .hxx
-        VGraphContainerIterator(const typename GraphContainer::iterator& i) : GraphContainer::iterator(i) {}
-        htransition_t operator*()
-        {
-          // FIXME: remove this const_cast
-          return htransition_t(const_cast<EdgeValue*>(&(GraphContainer::iterator::operator*())));
-        }
+	public:
+	  //FIXME: move the implementation in .hxx
+	  VGraphContainerIterator(typename GraphContainer::iterator i) : it_(i) {}
+	  htransition_t operator*()
+	  {
+	    // FIXME: remove this const_cast
+	    return htransition_t(&(*it_));
+	  }
+
+	  bool operator==(const VGraphContainerIterator& v) const
+	  { return v.it_ == it_; }
+	  bool operator!=(const VGraphContainerIterator& v) const
+	  { return v.it_ != it_; }
+	  VGraphContainerIterator& operator++()
+	  {
+	    ++it_;
+	    return *this;
+	  }
+	  VGraphContainerIterator operator++(int)
+	  {
+	    ++it_;
+	    return VGraphContainerIterator(it_);
+	  }
+
+	private:
+	  typename GraphContainer::iterator& it_;
       };
 
-
-      struct VGraphContainer : GraphContainer
+      class VGraphContainer
       {
-        typedef VGraphContainerIterator iterator;
-	typedef iterator		const_iterator;
+	public:
+          typedef VGraphContainerIterator iterator;
+	  typedef iterator		const_iterator;
 
-        VGraphContainer() {}
+	  VGraphContainer(const GraphContainer& g) : graph_(g) { }
 
-	//FIXME: move the implementation in .hxx
-        iterator begin() const { return VGraphContainerIterator(GraphContainer::begin()); }
-        iterator end() const { return VGraphContainerIterator(GraphContainer::end()); }
+	  //FIXME: move the implementation in .hxx
+	  iterator begin() const { return VGraphContainerIterator(graph_.begin()); }
+	  iterator end() const { return VGraphContainerIterator(graph_.end()); }
+	  size_t size() const { return graph_.size(); }
+
+	private:
+	  const GraphContainer& graph_;
       };
 
-      typedef VGraphContainer graph_data_t;
+      typedef GraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
-      typedef graph_data_t edges_t;
+      typedef VGraphContainer edges_t;
       typedef CounterSupport<hstate_t> states_t;
 
       //FIXME: find a better name than initial_container_t. The word initial
@@ -308,16 +331,17 @@ namespace vcsn
       typedef typename VGraphContainer::iterator	  iterator;
       typedef typename VGraphContainer::const_iterator	  const_iterator;
       typedef iterator					  transition_iterator;
-      typedef typename index_iterator<VGraphContainer, src>::type
+
+      typedef typename index_iterator<GraphContainer, src>::type
 							  src_iterator;
       typedef src_iterator				  src_const_iterator;
-      typedef typename index_iterator<VGraphContainer, dst>::type
+      typedef typename index_iterator<GraphContainer, dst>::type
 							  dst_iterator;
       typedef dst_iterator				  dst_const_iterator;
-      typedef typename index_iterator<VGraphContainer, pred>::type
+      typedef typename index_iterator<GraphContainer, pred>::type
 							  pred_iterator;
       typedef pred_iterator				  pred_const_iterator;
-      typedef typename index_iterator<VGraphContainer, succ>::type
+      typedef typename index_iterator<GraphContainer, succ>::type
 							  succ_iterator;
       typedef succ_iterator				  succ_const_iterator;
       typedef std::pair<src_iterator, src_iterator>	  src_range;

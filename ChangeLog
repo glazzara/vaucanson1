@@ -1,3 +1,20 @@
+2007-05-12  Type Your Name Here  <your.mail.here@FIXME.com>
+
+	Many fixes
+	* ../../include/vaucanson/algorithms/image.hxx: .
+	* ../../include/vaucanson/automata/concept/automata_base.hh: .
+	* ../../include/vaucanson/automata/concept/handlers.hh: .
+	* ../../include/vaucanson/automata/concept/handlers.hxx: .
+	* ../../include/vaucanson/automata/implementation/boost_graph.hh: .
+	* ../../include/vaucanson/automata/implementation/boost_graph.hxx: .
+	* ../../include/vaucanson/automata/implementation/graph.hh: .
+	* ../../include/vaucanson/automata/implementation/graph.hxx: .
+	* ../../include/vaucanson/misc/support.hh: .
+	* ../../src/tests/include/tests/context_headers/automata/global_consistency_test.hh: .
+
+	Working graph structure. Edges and states deletion is unsafe. hlabel_t and 
+	htransition_t are invalidated upon deletion.
+
 2007-05-11  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix del_edge.

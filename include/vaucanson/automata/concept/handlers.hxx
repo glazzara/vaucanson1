@@ -35,11 +35,11 @@ namespace vcsn
   {}
 
   template<typename Tag, typename Type>
-  handler<Tag, Type>::handler(const handler& h) : v_(h.v_)
+  handler<Tag, Type>::handler(const handler<Tag, Type>& h) : v_(h.v_)
   {}
 
   template<typename Tag, typename Type>
-  handler<Tag, Type>& 
+  handler<Tag, Type>&
   handler<Tag, Type>::operator=(const handler<Tag, Type>& h)
   {
     v_ = h.v_;

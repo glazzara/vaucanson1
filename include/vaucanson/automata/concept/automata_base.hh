@@ -105,7 +105,7 @@ namespace vcsn {
     typedef typename graph_t::states_t			states_t;		\
     typedef typename states_t::iterator			state_iterator;		\
     typedef typename graph_t::hstate_t			hstate_t;		\
-    typedef typename graph_t::graph_data_t		transitions_t;		\
+    typedef typename graph_t::edges_t			transitions_t;		\
     typedef typename transitions_t::iterator		transition_iterator;	\
     typedef typename graph_t::htransition_t		htransition_t;		\
     typedef typename graph_t::initial_t			initial_t;		\

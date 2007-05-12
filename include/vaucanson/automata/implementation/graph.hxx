@@ -53,10 +53,10 @@ namespace vcsn
 
 # define TParam								\
   template <class Kind, class WordValue, class WeightValue,		\
-	    class SeriesValue, class Letter, class Tag, class Geometry>
+	    class SeriesValue, class Letter, class Tag, class GeometryCoords>
 
 # define GClass								\
-  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
+  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
 
 
   /*-------------------------.
@@ -300,8 +300,7 @@ namespace vcsn
   void
   GClass::del_edge(hedge_t e)
   {
-    if (!has_edge(e))
-      return;
+    precondition (has_edge(e));
 
     const edge_value_t& ev = edges_[e];
     states_[ev.from].output_edges.erase(e);
@@ -494,19 +493,19 @@ namespace vcsn
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class GeometryCoords, class I>
   Tag& op_tag(const AutomataBase<I>&,
 	      Graph<Kind, WordValue, WeightValue,
-	      SerieValue ,Letter, Tag, Geometry>& v)
+	      SerieValue ,Letter, Tag, GeometryCoords>& v)
   {
     return v.tag();
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class GeometryCoords, class I>
   const Tag& op_tag(const AutomataBase<I>&,
 		    const Graph<Kind, WordValue, WeightValue,
-		    SerieValue ,Letter, Tag, Geometry>& v)
+		    SerieValue ,Letter, Tag, GeometryCoords>& v)
   {
     return v.tag();
   }
@@ -517,21 +516,21 @@ namespace vcsn
   `-----------*/
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class GeometryCoords, class I>
   Geometry&
   op_geometry(const AutomataBase<I>&,
 	      Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, Geometry>& v)
+	      SerieValue, Letter, Tag, GeometryCoords>& v)
   {
     return v.geometry();
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class GeometryCoords, class I>
   const Geometry&
   op_geometry(const AutomataBase<I>&,
 	      const Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, Geometry>& v)
+	      SerieValue, Letter, Tag, GeometryCoords>& v)
   {
     return v.geometry();
   }
