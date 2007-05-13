@@ -310,7 +310,10 @@ namespace vcsn
       Graph ();
       Graph (unsigned int initial_number_of_state,
 		  unsigned int number_of_edge_initially_allocated);
+      Graph (const self_t&);
       ~Graph ();
+
+      self_t& operator= (const self_t&);
 
       // FIXME: add const rettype& versions?
 
@@ -402,6 +405,8 @@ namespace vcsn
 
 
     private:
+      typename graph_data_t::const_iterator
+      find_edge(const hstate_t&, const hstate_t&, const hlabel_t&) const;
       geometry_t geometry_;
       graph_data_t graph_;
 //      state_data_t states_;

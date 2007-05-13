@@ -18,10 +18,11 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_SMART_LABEL_HH_
 # define VCSN_AUTOMATA_CONCEPT_SMART_LABEL_HH_
 
-#include <boost/multi_index_container.hpp>
-#include <boost/multi_index/member.hpp>
-#include <boost/multi_index/mem_fun.hpp>
-#include <boost/multi_index/hashed_index.hpp>
+# include <boost/multi_index_container.hpp>
+# include <boost/multi_index/member.hpp>
+# include <boost/multi_index/mem_fun.hpp>
+# include <boost/multi_index/hashed_index.hpp>
+# include <boost/shared_ptr.hpp>
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/misc/hash.hh>
@@ -34,7 +35,7 @@ namespace vcsn
     public:
       typedef T value_type;
 
-      explicit SmartLabel(const T& l);
+      explicit SmartLabel(const ::boost::shared_ptr<T>& l);
 
       const T& value () const;
 
@@ -44,7 +45,7 @@ namespace vcsn
       int ref_inc ();
 
    private:
-      T value_;
+      ::boost::shared_ptr<T> value_;
       int ref_;
   };
 

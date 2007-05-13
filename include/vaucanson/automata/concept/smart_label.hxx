@@ -33,7 +33,7 @@ namespace vcsn
     }
   };
 
-   template <typename T>
+  template <typename T>
   struct SmartLabel_ref_inc
   {
     SmartLabel_ref_inc (const SmartLabel<T>&)
@@ -51,8 +51,8 @@ namespace vcsn
 
   template <typename T>
   inline
-  SmartLabel<T>::SmartLabel(const T& l)
-    : value_(l),
+  SmartLabel<T>::SmartLabel(const boost::shared_ptr<T>& p)
+    : value_(p),
       ref_(1)
   { }
 
@@ -61,7 +61,7 @@ namespace vcsn
   const T&
   SmartLabel<T>::value() const
   {
-    return value_;
+    return *value_;
   }
 
   template <typename T>
@@ -105,7 +105,10 @@ namespace vcsn
       return hlabel_t (&*i);
     }
     else
-      return hlabel_t (&*data_.insert (SmartLabel<T> (l)).first);
+    {
+      ::boost::shared_ptr<T> p(new T(l));
+      return hlabel_t (&*data_.insert (SmartLabel<T> (p)).first);
+    }
   }
 
   template <typename T>
@@ -133,7 +136,7 @@ namespace vcsn
   const T&
   SmartLabelContainer<T>::get_label (const hlabel_t& h) const
   {
-    return h->value();
+    return h.value()->value();
   }
 
   template <typename T>

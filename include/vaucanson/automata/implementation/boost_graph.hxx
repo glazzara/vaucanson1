@@ -97,9 +97,72 @@ namespace vcsn
       states_[i] = hstate_t(new unsigned(i));
   }
 
-  /*---------------.
-  | Constructors.  |
-  `---------------*/
+  BOOSTGRAPH_TPARAM
+  BOOSTGRAPH::Graph (const self_t& g)
+    : tag_(g.tag_),
+      initial_bitset_(g.initial_bitset_),
+      final_bitset_(g.final_bitset_),
+      number_of_epsilon_(g.number_of_epsilon_),
+      number_of_state_(g.number_of_state_),
+      label_container_(g.label_container_)
+  {
+    for (states_data_t::iterator i = states_.begin();
+	 i != states_.end();
+	 ++i)
+      delete i->value();
+    states_.resize(g.number_of_state_);
+    for (unsigned i = 0; i < g.number_of_state_; ++i)
+      states_[i] = hstate_t(new unsigned(i));
+    /*FIXME*/
+    graph_.clear();
+    for (typename graph_data_t::const_iterator i = g.graph_.begin();
+	 i != g.graph_.end();
+	 ++i)
+      graph_.insert(EdgeValue(states_[*i->from_.value()],
+	                      states_[*i->to_.value()],
+			      label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
+# define VCSN_COPY_I_T(Set)									\
+    Set.clear();										\
+    for (typename Set##t::const_iterator i = g.Set.begin();					\
+	 i != g.Set.end();									\
+	 ++i)											\
+      Set.insert(InitialValue<series_set_elt_value_t> (states_[*i->first.value()], i->second));
+    VCSN_COPY_I_T(initial_)
+    VCSN_COPY_I_T(final_)
+# undef VCSN_COPY_I_T
+
+# define VCSN_COPY_GEOMETRY(Type)									\
+    {													\
+      typename geometry_t::Type##_geometry_map_t& map_##Type = geometry_.Type();			\
+      map_##Type.clear();										\
+      for (typename geometry_t::Type##_geometry_map_t::const_iterator i = g.geometry_.Type().begin();	\
+	   i != g.geometry_.Type().end();								\
+	   ++i)												\
+	map_##Type[states_[*i->first.value()]] = i->second;						\
+    }
+    VCSN_COPY_GEOMETRY(states)
+    VCSN_COPY_GEOMETRY(initials)
+    VCSN_COPY_GEOMETRY(finals)
+# undef VCSN_COPY_GEOMETRY
+    {
+      typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
+      map_transitions.clear();
+      for (typename geometry_t::transitions_geometry_map_t::const_iterator i = g.geometry_.transitions().begin();
+	   i != g.geometry_.transitions().end();
+	   ++i)
+      {
+	typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_.value()],
+				                              states_[*i->first.value()->to_.value()],
+				                              label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
+	if (tmp != graph_.end())
+	  map_transitions[htransition_t(&*tmp)] = i->second;
+      }
+    }
+  }
+
+  /*--------------.
+  | Destructors.  |
+  `--------------*/
 
   BOOSTGRAPH_TPARAM
   inline
@@ -485,6 +548,18 @@ namespace vcsn
   op_geometry(const AutomataBase<I>&, const BOOSTGRAPH &g)
   {
     return g.geometry();
+  }
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::graph_data_t::const_iterator
+  BOOSTGRAPH::find_edge(const hstate_t& from, const hstate_t& to,
+			const hlabel_t& label) const
+  {
+    succ_range r = graph_.get<succ>().equal_range(::boost::make_tuple(from, label));
+    for (succ_iterator i = r.first; i != r.second; ++i)
+      if (i->to_ == to)
+	return graph_.project<0>(i);
+    return graph_.end();
   }
 
   /*------------------.

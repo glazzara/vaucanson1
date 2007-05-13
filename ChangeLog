@@ -1,3 +1,12 @@
+2007-05-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add copy constructor.
+	* ../../automata/concept/smart_label.hh,
+	* ../../automata/concept/smart_label.hxx: use boost::shared_ptr to hold label
+	* ../../automata/implementation/boost_graph.hh,
+	* ../../automata/implementation/boost_graph.hxx:
+	Add copy constructor and shared label between copies of automata.
+
 2007-05-13  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add Support specialization for BoostGraph's states_data_t
