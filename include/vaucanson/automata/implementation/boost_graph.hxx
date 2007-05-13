@@ -99,13 +99,36 @@ namespace vcsn
 
   BOOSTGRAPH_TPARAM
   BOOSTGRAPH::Graph (const self_t& g)
-    : tag_(g.tag_),
-      initial_bitset_(g.initial_bitset_),
-      final_bitset_(g.final_bitset_),
-      number_of_epsilon_(g.number_of_epsilon_),
-      number_of_state_(g.number_of_state_),
-      label_container_(g.label_container_)
   {
+    *this = g;
+  }
+
+  /*--------------.
+  | Destructors.  |
+  `--------------*/
+
+  BOOSTGRAPH_TPARAM
+  inline
+  BOOSTGRAPH::~Graph ()
+  {
+    for (states_data_t::iterator i = states_.begin();
+	 i != states_.end();
+	 ++i)
+      delete i->value();
+  }
+
+  BOOSTGRAPH_TPARAM
+  typename BOOSTGRAPH::self_t&
+  BOOSTGRAPH::operator= (const self_t& g)
+  {
+    if (this == &g)
+      return *this;
+    tag_ = g.tag_;
+    initial_bitset_ = g.initial_bitset_;
+    final_bitset_ = g.final_bitset_;
+    number_of_epsilon_ = g.number_of_epsilon_;
+    number_of_state_ = g.number_of_state_;
+    label_container_ = g.label_container_;
     for (states_data_t::iterator i = states_.begin();
 	 i != states_.end();
 	 ++i)
@@ -113,7 +136,6 @@ namespace vcsn
     states_.resize(g.number_of_state_);
     for (unsigned i = 0; i < g.number_of_state_; ++i)
       states_[i] = hstate_t(new unsigned(i));
-    /*FIXME*/
     graph_.clear();
     for (typename graph_data_t::const_iterator i = g.graph_.begin();
 	 i != g.graph_.end();
@@ -158,21 +180,9 @@ namespace vcsn
 	  map_transitions[htransition_t(&*tmp)] = i->second;
       }
     }
+    return *this;
   }
 
-  /*--------------.
-  | Destructors.  |
-  `--------------*/
-
-  BOOSTGRAPH_TPARAM
-  inline
-  BOOSTGRAPH::~Graph ()
-  {
-    for (states_data_t::iterator i = states_.begin();
-	 i != states_.end();
-	 ++i)
-      delete i->value();
-  }
   /*------------------.
   | Basic accessors.  |
   `------------------*/

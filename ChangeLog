@@ -1,5 +1,10 @@
 2007-05-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Add operator= for BoostGraph.
+	* boost_graph.hxx: .
+
+2007-05-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add copy constructor.
 	* ../../automata/concept/smart_label.hh,
 	* ../../automata/concept/smart_label.hxx: use boost::shared_ptr to hold label
