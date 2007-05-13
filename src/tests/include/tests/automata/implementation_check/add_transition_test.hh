@@ -72,6 +72,8 @@ unsigned add_transition_test(tests::Tester& tg)
   EQTEST(t, "Number of transition after total deletion in growing order = 0.",
 	 automaton.transitions().size(), 0);
 
+  s.clear();
+
   for (unsigned i = 0; i < 3; ++i)
   {
     hstate_t p1 = automaton.add_state();
@@ -79,8 +81,6 @@ unsigned add_transition_test(tests::Tester& tg)
     s.insert(automaton.add_series_transition(p1, p2,
 					     series_set_elt_t(automaton.structure().series())));
   }
-
-  s.clear();
 
   EQTEST(t, "Number of transition after three transition additions = 3.",
 	 automaton.transitions().size(), 3);

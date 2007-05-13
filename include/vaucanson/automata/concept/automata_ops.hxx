@@ -189,7 +189,7 @@ namespace vcsn {
   op_choose_state(const AutomataBase<S>& s, const T& v)
   {
     typedef typename automaton_traits<T>::states_t states_t;
-    typedef typename states_t::iterator state_iterator;
+    typedef typename states_t::const_iterator state_iterator;
     const states_t& st = op_states(s, v);
     assertion(st.size() > 0);
     int n = misc::random::generate(0, int(st.size() - 1));

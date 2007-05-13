@@ -1,3 +1,18 @@
+2007-05-13  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add Support specialization for BoostGraph's states_data_t
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/implementation/boost_graph.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hxx:
+	  Introduce states_data_t type.
+	* include/vaucanson/misc/counter_support.hh,
+	* include/vaucanson/misc/counter_support.hxx: Remove.
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/support.hxx: .
+	  Add Support specialization for BoostGraph's states_data_t.
+	* src/tests/include/tests/automata/implementation_check/add_transition_test.hh:
+	  Fix the test.
+
 2007-05-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	New state handling. 

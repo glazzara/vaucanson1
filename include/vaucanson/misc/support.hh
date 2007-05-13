@@ -26,14 +26,16 @@
 # include <iterator>
 # include <map>
 # include <string>
-#include <boost/multi_index_container.hpp>
-#include <boost/multi_index/member.hpp>
-#include <boost/multi_index/ordered_index.hpp>
-#include <boost/multi_index/hashed_index.hpp>
-#include <boost/functional/hash/hash.hpp>
-#include <boost/multi_index/sequenced_index.hpp>
-#include <boost/tuple/tuple.hpp>
-#include <boost/multi_index/composite_key.hpp>
+# include <vector>
+# include <vaucanson/automata/concept/handlers.hh>
+# include <boost/multi_index_container.hpp>
+# include <boost/multi_index/member.hpp>
+# include <boost/multi_index/ordered_index.hpp>
+# include <boost/multi_index/hashed_index.hpp>
+# include <boost/functional/hash/hash.hpp>
+# include <boost/multi_index/sequenced_index.hpp>
+# include <boost/tuple/tuple.hpp>
+# include <boost/multi_index/composite_key.hpp>
 
 
 namespace vcsn
@@ -99,6 +101,59 @@ namespace vcsn
 	map_iterator	i;
     };
 
+    template <typename T, typename U>
+    class SupportIterator<std::vector<handler<T, U> > >
+    {
+      public:
+	typedef handler<T, U>				    data_type;
+	typedef typename std::vector<data_type>::const_iterator
+							    vector_iterator;
+	typedef SupportIterator<std::vector<data_type> >    self_t;
+
+	typedef typename vector_iterator::iterator_category iterator_category;
+	typedef typename vector_iterator::difference_type   difference_type;
+	typedef data_type				    value_type;
+	typedef data_type*				    pointer;
+	typedef data_type&				    reference;
+
+	/*
+	 * This is a default constructor.
+	 * WARNING: this constructor instantiates an invalid iterator.
+	 *	    To use an iterator instantiated by this constructor,
+	 *	    you need to initialize it thanks to the '=' operator.
+	 *
+	 * This constructor is useful whenever you want to use an iterator as
+	 * a temporary variable in a loop. For instance:
+	 *
+	 * for (SupportIterator tmp, it = aut.final().begin();
+	 *	it != aut.final().end();)
+	 * {
+	 *	tmp = it++;
+	 *	if (something)
+	 *		del_state(*tmp);
+	 * }
+	 *
+	 * In this example, we delete an object in a set we are already iterating on.
+	 * So we need to save a copy of the next element before deleting the current one.
+	 * Since declaring a temporary variable inside a loop can slow down performances,
+	 * it is declared inside the 'for loop' declaration and, in that case, we are really
+	 * interested in such a constructor.
+	 *
+	 */
+	SupportIterator () {}
+	SupportIterator (vector_iterator);
+
+	data_type operator* () const;
+	self_t&	 operator++ ();
+	self_t&	 operator-- ();
+	self_t	 operator++ (int);
+	bool	 operator!= (const SupportIterator&) const;
+	bool	 operator== (const SupportIterator&) const;
+
+      private:
+	vector_iterator	i;
+    };
+
     /// Support<map<U, T> > is a const adapter of std::map to container.
     template <class U, class T>
     class Support<std::map<U, T> >
@@ -131,6 +186,37 @@ namespace vcsn
 	const std::map<U, T>&	m_;
     };
 
+    /// Support<vector<T> > is a const adapter of std::vector to container.
+    template <class T, class U>
+    class Support<std::vector<handler<T, U> > >
+    {
+      public:
+	typedef SupportIterator<std::vector<handler<T, U> > > iterator;
+	typedef SupportIterator<std::vector<handler<T, U> > > const_iterator;
+	/// The type of the values.
+	typedef typename std::vector<handler<T, U> >::value_type value_type;
+
+	Support (const std::vector<handler<T, U> >&);
+	Support (const Support&);
+
+	/** Return the one and only element of the support.
+	 @pre There is exactly one element in the support.  */
+	value_type operator* () const;
+
+	iterator begin () const;
+	iterator end () const;
+	unsigned size () const;
+
+	// Find the element associated to \a k.
+	iterator find (const handler<T, U>& k) const;
+
+	/// Whether it's empty.
+	bool empty () const;
+
+	handler<T, U> max () const;
+      private:
+	const std::vector<handler<T, U> >&	m_;
+    };
 
     template <typename U, typename HState>
     struct InitialContainer

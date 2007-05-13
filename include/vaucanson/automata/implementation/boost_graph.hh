@@ -27,7 +27,6 @@
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 # include <vaucanson/automata/concept/tags.hh>
-# include <vaucanson/misc/counter_support.hh>
 # include <vaucanson/misc/hash.hh>
 
 //NEW INCLUDES
@@ -269,7 +268,8 @@ namespace vcsn
       typedef GraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef VGraphContainer edges_t;
-      typedef std::vector<hstate_t> states_t;
+      typedef std::vector<hstate_t> states_data_t;
+      typedef misc::Support<states_data_t> states_t;
 
       //FIXME: find a better name than initial_container_t. The word initial
       //is ambiguous since we use it also for final_t
@@ -420,7 +420,7 @@ namespace vcsn
       // FIXME: specify its range
       // number_of_state_ == 0 => there is no state.
       unsigned  number_of_state_;
-      states_t states_;
+      states_data_t states_;
 
       SmartLabelContainer<label_t> label_container_;
 

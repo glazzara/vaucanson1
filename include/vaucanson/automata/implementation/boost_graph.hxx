@@ -105,7 +105,7 @@ namespace vcsn
   inline
   BOOSTGRAPH::~Graph ()
   {
-    for (states_t::iterator i = states_.begin();
+    for (states_data_t::iterator i = states_.begin();
 	 i != states_.end();
 	 ++i)
       delete i->value();
@@ -118,7 +118,7 @@ namespace vcsn
   typename BOOSTGRAPH::states_t
   BOOSTGRAPH::states() const
   {
-    return states_;
+    return misc::Support<states_data_t>(states_);
   }
 
   BOOSTGRAPH_TPARAM
