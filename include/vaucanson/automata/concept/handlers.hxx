@@ -65,6 +65,46 @@ namespace vcsn
     return v_;
   }
 
+  //Int specialization
+  template<typename Tag>
+  handler<Tag, int>::handler() : v_(0)
+  {}
+
+  template<typename Tag>
+  handler<Tag, int>::handler(const int& h) : v_(h)
+  {}
+
+  template<typename Tag>
+  handler<Tag, int>::handler(const handler<Tag, int>& h) : v_(h.v_)
+  {}
+
+  template<typename Tag>
+  handler<Tag, int>&
+  handler<Tag, int>::operator=(const handler<Tag, int>& h)
+  {
+    v_ = h.v_;
+    return *this;
+  }
+
+  template<typename Tag>
+  handler<Tag, int>& handler<Tag, int>::operator=(int h)
+  {
+    v_ = h;
+    return *this;
+  }
+
+  template<typename Tag>
+  int handler<Tag, int>::value() const
+  {
+    return v_;
+  }
+
+  template<typename Tag>
+  handler<Tag, int>::operator int () const
+  {
+    return v_;
+  }
+
 } // vcsn
 
 #define HOPERATOR(Op)					\

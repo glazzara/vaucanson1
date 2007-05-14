@@ -56,6 +56,34 @@ namespace vcsn {
       Type v_;
   };
 
+  template<typename Tag>
+  class handler<Tag, int>
+  {
+    public:
+      typedef Tag kind;
+      typedef handler<Tag, int> self_t;
+
+      handler();
+
+//      handler(int h);
+
+      //FIXME : add an explicit keyword?
+      handler(const int& h);
+
+      handler(const self_t& h);
+
+      self_t& operator=(const self_t& h);
+
+      self_t& operator=(int h);
+
+      int value() const;
+
+      operator int () const;
+
+    protected:
+      int v_;
+  };
+
   template<typename Tag, typename Type>
   bool operator==(const handler<Tag, Type>& h1,
 		  const handler<Tag, Type>& h2);

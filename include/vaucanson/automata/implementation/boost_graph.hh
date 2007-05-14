@@ -94,15 +94,16 @@ namespace vcsn
 			       SeriesValue, Letter>::ret label_t;
 
       typedef typename SmartLabelContainer<label_t>::hlabel_t hlabel_t;
-      typedef handler<state_h, unsigned*>		      hstate_t;
+      typedef handler<state_h, int>			      hstate_t;
+      typedef handler<state_h, unsigned*>		      bgstate_t;
 
       struct EdgeValue
       {
-	EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
+	EdgeValue (bgstate_t from, bgstate_t to, hlabel_t l);
 
 	hlabel_t label_;
-	hstate_t from_;
-	hstate_t to_;
+	bgstate_t from_;
+	bgstate_t to_;
       }; // End of class EdgeValue
 
       typedef EdgeValue				      edge_data_t;
@@ -134,25 +135,25 @@ namespace vcsn
 
       struct SuccessorKey : composite_key <
 	EdgeValue,
-	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+	BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, from_),
 	BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
       > {};
 
 
       struct PredecessorKey : composite_key <
         EdgeValue,
-        BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
+        BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, from_),
         BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
       > {};
 
 
       struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
-        EdgeValue, hstate_t, from_
+        EdgeValue, bgstate_t, from_
       ) {};
 
 
       struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
-        EdgeValue, hstate_t, to_
+        EdgeValue, bgstate_t, to_
       ) {};
 
 
@@ -208,12 +209,12 @@ namespace vcsn
       struct InitialValue
       {
 	//FIXME: move the implementation in .hxx
-        InitialValue(const hstate_t& state, const S& series)
+        InitialValue(const bgstate_t& state, const S& series)
           : first(state),
             second(series)
 	{}
 
-        hstate_t first; // state
+        bgstate_t first; // state
         S second; // series
       };
 
@@ -268,12 +269,12 @@ namespace vcsn
       typedef GraphContainer graph_data_t;
       //The graph stores  edges only, thus we can define this type.
       typedef VGraphContainer edges_t;
-      typedef std::vector<hstate_t> states_data_t;
+      typedef std::vector<bgstate_t> states_data_t;
       typedef misc::Support<states_data_t> states_t;
 
       //FIXME: find a better name than initial_container_t. The word initial
       //is ambiguous since we use it also for final_t
-      typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, hstate_t>
+      typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, bgstate_t>
 	initial_container_t;
       typedef typename initial_container_t::Type initial_t;
       typedef initial_t final_t;
@@ -406,7 +407,7 @@ namespace vcsn
 
     private:
       typename graph_data_t::const_iterator
-      find_edge(const hstate_t&, const hstate_t&, const hlabel_t&) const;
+      find_edge(const bgstate_t&, const bgstate_t&, const hlabel_t&) const;
       geometry_t geometry_;
       graph_data_t graph_;
 //      state_data_t states_;

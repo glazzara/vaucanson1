@@ -78,10 +78,10 @@ namespace vcsn
     {}
 
     template <typename T, typename U>
-    typename SupportIterator<std::vector<handler<T, U> > >::data_type
+    handler<state_h, int>
     SupportIterator<std::vector<handler<T, U> > >::operator* () const
     {
-      return *i;
+      return handler<state_h, int>(*i->value());
     }
 
     template <typename T, typename U>
@@ -123,6 +123,49 @@ namespace vcsn
       return ! (*this != o);
     }
 
+    //Specialization for InitialContainer.
+    template <typename T, typename U>
+    SupportIterator<boost::multi_index_container<T, U> >::SupportIterator (map_iterator mp)
+      : i (mp)
+    {}
+
+    template <typename T, typename U>
+    handler<state_h, int>
+    SupportIterator<boost::multi_index_container<T, U> >::operator* () const
+    {
+      return handler<state_h, int>(*i->first.value());
+    }
+
+    template <typename T, typename U>
+    SupportIterator<boost::multi_index_container<T, U> >&
+    SupportIterator<boost::multi_index_container<T, U> >::operator++ ()
+    {
+      ++i;
+      return *this;
+    }
+
+    template <typename T, typename U>
+    SupportIterator<boost::multi_index_container<T, U> >
+    SupportIterator<boost::multi_index_container<T, U> >::operator++ (int)
+    {
+      SupportIterator<boost::multi_index_container<T, U> > tmp = *this;
+      ++i;
+      return tmp;
+    }
+
+    template <typename T, typename U>
+    bool
+    SupportIterator<boost::multi_index_container<T, U> >::operator!= (const SupportIterator& o) const
+    {
+      return o.i != i;
+    }
+
+    template <typename T, typename U>
+    bool
+    SupportIterator<boost::multi_index_container<T, U> >::operator== (const SupportIterator& o) const
+    {
+      return ! (*this != o);
+    }
 
   /*----------.
   | Support.  |
@@ -227,7 +270,7 @@ namespace vcsn
     }
 
     template <class T, class U>
-    typename Support<std::vector<handler<T, U> > >::value_type
+    handler<state_h, int>
     Support<std::vector<handler<T, U> > >::operator* () const
     {
       precondition (m_.size () == 1);
@@ -249,10 +292,10 @@ namespace vcsn
     }
 
     template <class T, class U>
-    handler<T, U>
+    int
     Support<std::vector<handler<T, U> > >::max () const
     {
-      return m_.back();
+      return m_.size() - 1;
     }
     /// support<InitialContainer<U, HState> is a const adapter of InitialContainer to container.
     template <class U, class HState>
@@ -289,7 +332,7 @@ namespace vcsn
     }
 
     template <class U, class HState>
-    typename Support<InitialContainer<U, HState> >::value_type
+    handler<state_h, int>
     Support<InitialContainer<U, HState> >::operator* () const
     {
       precondition (m_.size () == 1);
@@ -311,10 +354,10 @@ namespace vcsn
     }
 
     template <class U, class HState>
-    HState
+    int
     Support<InitialContainer<U, HState> >::max () const
     {
-      return *max_element (begin (), end ());
+      return (*max_element (begin (), end ())).value();
     }
 
 

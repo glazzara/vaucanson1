@@ -42,6 +42,22 @@ namespace vcsn
 {
   namespace misc
   {
+    template <typename U, typename HState>
+    struct InitialContainer
+    {
+
+      typedef boost::multi_index_container
+      <
+	U,
+	boost::multi_index::indexed_by
+	<
+	  boost::multi_index::ordered_non_unique<
+	    BOOST_MULTI_INDEX_MEMBER(U, HState, first)
+	  >
+	>
+      > Type;
+    };
+
 
     /** @addtogroup misc *//** @{ */
 
@@ -143,7 +159,7 @@ namespace vcsn
 	SupportIterator () {}
 	SupportIterator (vector_iterator);
 
-	data_type operator* () const;
+	handler<state_h, int> operator* () const;
 	self_t&	 operator++ ();
 	self_t&	 operator-- ();
 	self_t	 operator++ (int);
@@ -152,6 +168,79 @@ namespace vcsn
 
       private:
 	vector_iterator	i;
+    };
+  } // misc
+} // vcsn
+
+namespace std
+{
+
+  template <class T, class U>
+  struct iterator_traits<vcsn::misc::SupportIterator<std::vector<vcsn::handler<T, U> > > >
+  {
+      typedef input_iterator_tag   iterator_category;
+      typedef U			   value_type;
+      typedef int		   difference_type;
+      typedef int*		   pointer;
+      typedef int&		   reference;
+  };
+
+} // std
+
+namespace vcsn
+{
+  namespace misc
+  {
+    template <typename T, typename U>
+    class SupportIterator<boost::multi_index_container<T, U> >
+    {
+      public:
+        typedef typename ::boost::multi_index_container<T, U>::key_type	      key_type;
+	typedef typename ::boost::multi_index_container<T, U>::const_iterator map_iterator;
+	typedef SupportIterator<typename ::boost::multi_index_container<T, U> >	self_t;
+
+	typedef typename map_iterator::iterator_category iterator_category;
+	typedef typename map_iterator::difference_type	 difference_type;
+	typedef key_type				 value_type;
+	typedef key_type*				 pointer;
+	typedef key_type&				 reference;
+
+	/*
+	 * This is a default constructor.
+	 * WARNING: this constructor instantiates an invalid iterator.
+	 *	    To use an iterator instantiated by this constructor,
+	 *	    you need to initialize it thanks to the '=' operator.
+	 *
+	 * This constructor is useful whenever you want to use an iterator as
+	 * a temporary variable in a loop. For instance:
+	 *
+	 * for (SupportIterator tmp, it = aut.final().begin();
+	 *	it != aut.final().end();)
+	 * {
+	 *	tmp = it++;
+	 *	if (something)
+	 *		del_state(*tmp);
+	 * }
+	 *
+	 * In this example, we delete an object in a set we are already iterating on.
+	 * So we need to save a copy of the next element before deleting the current one.
+	 * Since declaring a temporary variable inside a loop can slow down performances,
+	 * it is declared inside the 'for loop' declaration and, in that case, we are really
+	 * interested in such a constructor.
+	 *
+	 */
+	SupportIterator () {}
+	SupportIterator (map_iterator);
+
+	handler<state_h, int> operator* () const;
+	self_t&	 operator++ ();
+	self_t&	 operator-- ();
+	self_t	 operator++ (int);
+	bool	 operator!= (const SupportIterator&) const;
+	bool	 operator== (const SupportIterator&) const;
+
+      private:
+	map_iterator	i;
     };
 
     /// Support<map<U, T> > is a const adapter of std::map to container.
@@ -201,7 +290,7 @@ namespace vcsn
 
 	/** Return the one and only element of the support.
 	 @pre There is exactly one element in the support.  */
-	value_type operator* () const;
+	handler<state_h, int> operator* () const;
 
 	iterator begin () const;
 	iterator end () const;
@@ -213,25 +302,9 @@ namespace vcsn
 	/// Whether it's empty.
 	bool empty () const;
 
-	handler<T, U> max () const;
+	int max () const;
       private:
 	const std::vector<handler<T, U> >&	m_;
-    };
-
-    template <typename U, typename HState>
-    struct InitialContainer
-    {
-
-      typedef boost::multi_index_container
-      <
-	U,
-	boost::multi_index::indexed_by
-	<
-	  boost::multi_index::ordered_non_unique<
-	    BOOST_MULTI_INDEX_MEMBER(U, HState, first)
-	  >
-	>
-      > Type;
     };
 
 
@@ -252,7 +325,7 @@ namespace vcsn
 
 	/** Return the one and only element of the support.
 	 @pre There is exactly one element in the support.  */
-	value_type operator* () const;
+	handler<state_h, int>  operator* () const;
 
 	iterator begin () const;
 	iterator end () const;
@@ -264,7 +337,7 @@ namespace vcsn
 	/// Whether it's empty.
 	bool empty () const;
 
-	HState max () const;
+	int max () const;
       private:
 	const container_t&	m_;
     };
