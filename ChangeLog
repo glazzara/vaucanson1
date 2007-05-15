@@ -1,3 +1,11 @@
+2007-05-15  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix BoostGraph
+	* include/vaucanson/automata/implementation/boost_graph.hh: .
+	* include/vaucanson/automata/implementation/boost_graph.hxx: .
+
+	It's working! (at least for Boolean automata)
+
 2007-05-13  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add operator= for BoostGraph.

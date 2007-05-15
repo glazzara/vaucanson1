@@ -69,7 +69,6 @@ namespace vcsn
   using ::boost::multi_index::composite_key_hash;
   using ::boost::dynamic_bitset;
 
-
   // class Graph.
   template <typename Kind, typename WordValue, typename WeightValue,
 	    typename SeriesValue, typename Letter, typename Tag, typename GeometryCoords>
@@ -132,7 +131,6 @@ namespace vcsn
       struct src {};
       struct dst {};
 
-
       struct SuccessorKey : composite_key <
 	EdgeValue,
 	BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, from_),
@@ -146,49 +144,38 @@ namespace vcsn
         BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
       > {};
 
-
-      struct SourceKey : BOOST_MULTI_INDEX_MEMBER (
-        EdgeValue, bgstate_t, from_
-      ) {};
-
-
-      struct DestinationKey : BOOST_MULTI_INDEX_MEMBER (
-        EdgeValue, bgstate_t, to_
-      ) {};
-
-
-      struct SourceAndLabel : hashed_non_unique <
+      typedef hashed_non_unique <
         tag<succ>,
         SuccessorKey,
         VCSN_BMI(composite_key_hash)<
           misc::hash_state_handler,
           misc::hash_handler<hlabel_t>
 	>
-      > {};
+      > SourceAndLabel;
 
 
-      struct DestinationAndLabel : hashed_non_unique <
+      typedef hashed_non_unique <
         tag<pred>,
         PredecessorKey,
         VCSN_BMI(composite_key_hash)<
           misc::hash_state_handler,
           misc::hash_handler<hlabel_t>
         >
-      > {};
+      > DestinationAndLabel;
 
 
-      struct Source : hashed_non_unique <
+      typedef hashed_non_unique <
         tag<src>,
-        SourceKey,
+        BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, from_),
 	misc::hash_state_handler
-      > {};
+      > Source;
 
 
-      struct Destination : hashed_non_unique <
+      typedef hashed_non_unique <
         tag<dst>,
-        DestinationKey,
+        BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, to_),
 	misc::hash_state_handler
-      > {};
+      > Destination;
 
 
       struct GraphContainer
@@ -246,7 +233,7 @@ namespace vcsn
 	  }
 
 	private:
-	  typename GraphContainer::iterator& it_;
+	  typename GraphContainer::iterator it_;
       };
 
       class VGraphContainer

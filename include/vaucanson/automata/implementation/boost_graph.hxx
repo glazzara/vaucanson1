@@ -86,7 +86,63 @@ namespace vcsn
   BOOSTGRAPH_TPARAM
   BOOSTGRAPH::Graph (const self_t& g)
   {
-    *this = g;
+    tag_ = g.tag_;
+    initial_bitset_ = g.initial_bitset_;
+    final_bitset_ = g.final_bitset_;
+    number_of_epsilon_ = g.number_of_epsilon_;
+    number_of_state_ = g.number_of_state_;
+    label_container_ = g.label_container_;
+    for (states_data_t::iterator i = states_.begin();
+	 i != states_.end();
+	 ++i)
+      delete i->value();
+    states_.resize(g.number_of_state_);
+    for (unsigned i = 0; i < g.number_of_state_; ++i)
+      states_[i] = bgstate_t(new unsigned(i));
+    graph_.clear();
+    for (typename graph_data_t::const_iterator i = g.graph_.begin();
+	 i != g.graph_.end();
+	 ++i)
+      graph_.insert(EdgeValue(states_[*i->from_.value()],
+	                      states_[*i->to_.value()],
+			      label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
+# define VCSN_COPY_I_T(Set)									\
+    Set.clear();										\
+    for (typename Set##t::const_iterator i = g.Set.begin();					\
+	 i != g.Set.end();									\
+	 ++i)											\
+      Set.insert(InitialValue<series_set_elt_value_t> (states_[*i->first.value()], i->second));
+    VCSN_COPY_I_T(initial_)
+    VCSN_COPY_I_T(final_)
+# undef VCSN_COPY_I_T
+
+# define VCSN_COPY_GEOMETRY(Type)									\
+    {													\
+      typename geometry_t::Type##_geometry_map_t& map_##Type = geometry_.Type();			\
+      map_##Type.clear();										\
+      for (typename geometry_t::Type##_geometry_map_t::const_iterator i = g.geometry_.Type().begin();	\
+	   i != g.geometry_.Type().end();								\
+	   ++i)												\
+	map_##Type[i->first] = i->second;								\
+    }
+    VCSN_COPY_GEOMETRY(states)
+    VCSN_COPY_GEOMETRY(initials)
+    VCSN_COPY_GEOMETRY(finals)
+# undef VCSN_COPY_GEOMETRY
+    {
+      typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
+      map_transitions.clear();
+      for (typename geometry_t::transitions_geometry_map_t::const_iterator i = g.geometry_.transitions().begin();
+	   i != g.geometry_.transitions().end();
+	   ++i)
+      {
+	typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_.value()],
+				                              states_[*i->first.value()->to_.value()],
+				                              label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
+	if (tmp != graph_.end())
+	  map_transitions[htransition_t(&*tmp)] = i->second;
+      }
+    }
   }
 
   /*--------------.
@@ -403,7 +459,6 @@ namespace vcsn
     bgstate_t from(states_[f.value()]);
     bgstate_t to(states_[t.value()]);
     hlabel_t hl = label_container_.insert (l);
-
     return hedge_t (&*graph_.insert (EdgeValue (from, to, hl)).first);
   }
 
@@ -586,10 +641,10 @@ namespace vcsn
 	*res++ = GetElt;							\
   }
 
-  DEFINE_DELTA_FUNCTION (delta, edges, dst, hedge_t(&*e));
-  DEFINE_DELTA_FUNCTION (delta, states, dst, hstate_t(*e->to_.value()));
-  DEFINE_DELTA_FUNCTION (rdelta, edges, src, hedge_t(&*e));
-  DEFINE_DELTA_FUNCTION (rdelta, states, src, hstate_t(*e->from_.value()));
+  DEFINE_DELTA_FUNCTION (delta, edges, src, hedge_t(&*e));
+  DEFINE_DELTA_FUNCTION (delta, states, src, hstate_t(*e->to_.value()));
+  DEFINE_DELTA_FUNCTION (rdelta, edges, dst, hedge_t(&*e));
+  DEFINE_DELTA_FUNCTION (rdelta, states, dst, hstate_t(*e->from_.value()));
 
 # undef DEFINE_DELTA_FUNCTION
 
@@ -613,15 +668,15 @@ namespace vcsn
       }										\
   }
 
-  DEFINE_DELTAF_FUNCTION (deltaf, edges, dst, true, if (not f(hedge_t(&*e))) break);
-  DEFINE_DELTAF_FUNCTION (deltaf, edges, dst, false, f(hedge_t(&*e)));
-  DEFINE_DELTAF_FUNCTION (deltaf, states, dst, true, if (not f(hstate_t(*e->to_.value()))) break);
-  DEFINE_DELTAF_FUNCTION (deltaf, states, dst, false, f(hstate_t(*e->to_.value())));
+  DEFINE_DELTAF_FUNCTION (deltaf, edges, src, true, if (not f(hedge_t(&*e))) break);
+  DEFINE_DELTAF_FUNCTION (deltaf, edges, src, false, f(hedge_t(&*e)));
+  DEFINE_DELTAF_FUNCTION (deltaf, states, src, true, if (not f(hstate_t(*e->to_.value()))) break);
+  DEFINE_DELTAF_FUNCTION (deltaf, states, src, false, f(hstate_t(*e->to_.value())));
 
-  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, src, true, if (not f(hedge_t(&*e))) break);
-  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, src, false, f(hedge_t(&*e)));
-  DEFINE_DELTAF_FUNCTION (rdeltaf, states, src, true, if (not f(hstate_t(*e->from_.value()))) break);
-  DEFINE_DELTAF_FUNCTION (rdeltaf, states, src, false, f(hstate_t(*e->from_.value())));
+  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, dst, true, if (not f(hedge_t(&*e))) break);
+  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, dst, false, f(hedge_t(&*e)));
+  DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, true, if (not f(hstate_t(*e->from_.value()))) break);
+  DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, false, f(hstate_t(*e->from_.value())));
 
 # undef DEFINE_DELTAF_FUNCTION
 
