@@ -1,4 +1,4 @@
-## src/demos/vgrep/Makefile.am                         -*- Makefile -*-
+# src/demos/vgrep/Makefile.am                         -*- Makefile -*-
 #
 # Vaucanson, a generic library for finite state machines.
 # Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
@@ -13,10 +13,6 @@
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 #
-
- Makefile.am
-#
-# $Id$
 
 include $(top_srcdir)/vaucanson.mk
 

@@ -11,7 +11,7 @@ This document describes major updates to the Vaucanson_ project.
 
 
 Vaucanson 1.0a
-=============
+==============
 
 - Documentation
 
@@ -19,11 +19,12 @@ Vaucanson 1.0a
     compressed.
 
 - Algorithms
+
   + eps_removal(a);
-    Various optimizations
+    Various optimizations.
 
   + minimize(a);
-    Various optimizations
+    Various optimizations.
 
   + transpose(a);
     Transition labels are now transposed too.
@@ -33,11 +34,13 @@ Vaucanson 1.0a
     for both FMP transducers and RW transducers.
 
 - XML
-  + New SAX implementation
-  + Bug fixes
-  + I/O optimizations
+
+  + New SAX implementation.
+  + Bug fixes.
+  + I/O optimizations.
 
 - Utilities
+
   + Lib VCSN
     Provides C++ libraries for the main automaton types.
 
