@@ -1,5 +1,11 @@
 2007-06-09  Florian Lesaint  <florian.lesaint@epita.fr>
 
+	[1.0a] Fix bug with z_max_plus_automata 
+	* include/vaucanson/z_max_plus_automaton_structures.hh:
+	  Add missing include.
+
+2007-06-09  Florian Lesaint  <florian.lesaint@epita.fr>
+
 	[1.0a] Fix configure.ac
 	* configure.ac: Add eps_romval Makefile in the list.
 
