@@ -10,7 +10,7 @@ This document describes major updates to the Vaucanson_ project.
 
 
 
-Vaucanson 1.1
+Vaucanson 1.0a
 =============
 
 - Documentation
@@ -19,6 +19,11 @@ Vaucanson 1.1
     compressed.
 
 - Algorithms
+  + eps_removal(a);
+    Various optimizations
+
+  + minimize(a);
+    Various optimizations
 
   + transpose(a);
     Transition labels are now transposed too.
@@ -26,6 +31,15 @@ Vaucanson 1.1
   + image(a, b) and domain(a, b);
     they replace output_projection and input_projection. These algorithms work
     for both FMP transducers and RW transducers.
+
+- XML
+  + New SAX implementation
+  + Bug fixes
+  + I/O optimizations
+
+- Utilities
+  + Lib VCSN
+    Provides C++ libraries for the main automaton types.
 
 - TAF-Kit
 
