@@ -112,8 +112,31 @@ Year 2008 students
   - Bug fixes.
 
 * Guillaume Lazzara			guillaume.lazzara@lrde.epita.fr
-  - Performances in Vaucanson.
+  - Performances in Vaucanson,
+  - Lib VCSN,
+  - Bug fixes.
 
 * Guillaume Leroi			guillaume.leroi@lrde.epita.fr
   - Implementation of TAF-Kit's vcsn-tdc,
-  - Transducer synchronization.
+  - Transducer synchronization,
+  - Algorithms optimization,
+  - Bug fixes.
+
+
+==================
+Year 2009 students
+==================
+
+* Vivien Delmon				vivien.delmon@lrde.epita.fr
+  - eps_removal algorithm,
+  - Bug fixes.
+
+* Florian Lesaint			floriant.lesaint@lrde.epita.fr
+  - New SAX XML parser,
+  - XML proposal rewriting,
+  - Bug fixes.
+
+* Jimmy Ma				jimmy.ma@lrde.epita.fr
+  - Performances in Vaucanson,
+  - Lib VCSN,
+  - Bug fixes.
