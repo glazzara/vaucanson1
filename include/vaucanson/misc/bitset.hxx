@@ -838,7 +838,7 @@ namespace vcsn
     inline
     Bitset::const_iterator::const_iterator () : bs_ (0), cbit_ ()
     {
-      warning ("The constructor Bitset::const_iterator::const_iterator () "
+      WARNING ("The constructor Bitset::const_iterator::const_iterator () "
 	       "is dangerous and therefore should not be used.");
     }
 
@@ -973,7 +973,7 @@ namespace vcsn
     inline
     Bitset::iterator::iterator () : bs_ (0), cbit_ ()
     {
-      warning ("The constructor Bitset::iterator::iterator () is dangerous "
+      WARNING ("The constructor Bitset::iterator::iterator () is dangerous "
 	       "and therefore should not be used.");
     }
 

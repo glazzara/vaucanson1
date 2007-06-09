@@ -206,7 +206,7 @@ namespace vcsn {
       result = return_type();
       if (m.length() != 1)
       {
-	warning("PartialExp base is not realtime.");
+	WARNING("PartialExp base is not realtime.");
 	undefined = true;
 	return;
       }

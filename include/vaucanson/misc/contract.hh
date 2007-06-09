@@ -188,7 +188,7 @@ namespace vcsn {
 #   define weakness(Feature) static_cast<void> (0)
 #   define incompletion(Feature) static_cast<void> (0)
 
-#   define warning(Message) static_cast<void> (0)
+#   define WARNING(Message) static_cast<void> (0)
 
 #  else // ! INTERNAL_CHECKS
 
@@ -207,7 +207,7 @@ namespace vcsn {
 #   define deprecation(Feature) __inconsistency ("Deprecated feature", Feature)
 #   define weakness(Feature) __inconsistency ("Weak feature", Feature)
 #   define incompletion(Feature) __inconsistency ("Incomplete implementation", Feature)
-#   define warning(Message) __inconsistency ("Warning", Message)
+#   define WARNING(Message) __inconsistency ("Warning", Message)
 
 #  endif // INTERNAL_CHECKS
 
@@ -236,7 +236,7 @@ namespace vcsn {
 #  define weakness(Feature) static_cast<void> (0)
 #  define incompletion(Feature) static_cast<void> (0)
 
-#  define warning(Message) static_cast<void> (0)
+#  define WARNING(Message) static_cast<void> (0)
 
 # endif // ! VCSN_NDEBUG
 

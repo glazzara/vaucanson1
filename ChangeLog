@@ -1,3 +1,14 @@
+2007-06-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix warning macro typo
+	Change the warning macro to WARNING.
+	Lead to conflict with SAX Implementation of Xercesc.
+	* algorithms/internal/partial_rat_exp_derivation.hxx: Here.
+	* algorithms/search.hxx: Here.
+	* misc/bitset.hxx: Here.
+	* misc/contract.hh: Here.
+	* misc/deferrer.hxx: Here.
+
 2007-06-09  Florian Lesaint  <florian.lesaint@epita.fr>
 
 	[1.0a] Fix bug with z_max_plus_automata 
