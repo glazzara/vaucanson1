@@ -223,6 +223,7 @@ AC_CONFIG_FILES([
 	    src/benchs/quotient/Makefile
 	    src/benchs/composition/Makefile
 	    src/benchs/derived_terms/Makefile
+	    src/benchs/eps_removal/Makefile
 	include/Makefile
 	debian/Makefile])
 

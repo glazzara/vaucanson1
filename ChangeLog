@@ -1,3 +1,8 @@
+2007-06-09  Florian Lesaint  <florian.lesaint@epita.fr>
+
+	[1.0a] Fix configure.ac
+	* configure.ac: Add eps_romval Makefile in the list.
+
 2007-04-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix conflict with boost and empty_ macro.  
