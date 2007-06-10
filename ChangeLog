@@ -1,3 +1,18 @@
+2007-06-10  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update XML tests
+	according to the new output format.
+	* b_ref.xml: Here.
+	* fmp_ref.xml: Here.
+	* geometry_ref.xml: Here.
+	* label_node_ref.xml: Here.
+	* r_ref.xml: Here.
+	* session_ref.xml: Here.
+	* trans_ref.xml: Here.
+	* z_max_plus_ref.xml: Here.
+	* z_min_plus_ref.xml: Here.
+	* z_ref.xml: Here.
+
 2007-06-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix warning macro typo
