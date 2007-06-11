@@ -257,7 +257,7 @@ namespace edition_commands
 	else
 	  a.set_final (n_state);
       else
-	a.unset_initial (n_state);
+	a.unset_final (n_state);
   }
 
   /// Print the automaton @c a .
