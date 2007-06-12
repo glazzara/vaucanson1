@@ -27,6 +27,7 @@
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>
+# include <vaucanson/misc/bitset.hh>
 
 namespace vcsn
 {
@@ -91,44 +92,44 @@ namespace vcsn
 		      unsigned& n_partition)
 	{
 	  for_all (std::list<unsigned>, inpartition, maybe_splittable_)
-	    {
-	      hstates_t& states = partition[*inpartition];
-	      if (states.size () == count_for_[*inpartition])
-	      { // All elements in states are predecessors, no split.
-		count_for_[*inpartition] = 0;
-		continue;
-	      }
+	  {
+	    hstates_t& states = partition[*inpartition];
+	    if (states.size () == count_for_[*inpartition])
+	    { // All elements in states are predecessors, no split.
 	      count_for_[*inpartition] = 0;
-	      hstates_t states_inter_going_in;
-	      hstates_t& states_minus_going_in = partition[n_partition];
-	      // Compute @a states \ @a going_in_.
-	      set_difference
-		(states.begin (), states.end (),
-		 going_in_.begin (), going_in_.end (),
-		 std::insert_iterator<hstates_t> (states_minus_going_in,
-						  states_minus_going_in.begin ()));
-	      // Compute @a states Inter @a going_in_.
-	      set_intersection
-		(states.begin(), states.end (),
-		 going_in_.begin (), going_in_.end (),
-		 std::insert_iterator<hstates_t> (states_inter_going_in,
-						  states_inter_going_in.begin ()));
-	      // A split MUST occur.
-	      assertion (not (states_inter_going_in.empty ()
-			      or states_minus_going_in.empty ()));
-	      // @a states must be the bigger one.
-	      if (states_minus_going_in.size () > states_inter_going_in.size ())
-	      {
-		states.swap (states_minus_going_in);
-		states_minus_going_in.swap (states_inter_going_in);
-	      }
-	      else
-		states.swap (states_inter_going_in);
-	      for_all (hstates_t, istate, states_minus_going_in)
-		class_of_[*istate] = n_partition;
-	      to_treat.push (std::make_pair (&states_minus_going_in,
-					     n_partition++));
+	      continue;
 	    }
+	    count_for_[*inpartition] = 0;
+	    hstates_t states_inter_going_in;
+	    hstates_t& states_minus_going_in = partition[n_partition];
+	    // Compute @a states \ @a going_in_.
+	    set_difference
+	      (states.begin (), states.end (),
+	       going_in_.begin (), going_in_.end (),
+	       std::insert_iterator<hstates_t> (states_minus_going_in,
+						states_minus_going_in.begin ()));
+	    // Compute @a states Inter @a going_in_.
+	    set_intersection
+	      (states.begin(), states.end (),
+	       going_in_.begin (), going_in_.end (),
+	       std::insert_iterator<hstates_t> (states_inter_going_in,
+						states_inter_going_in.begin ()));
+	    // A split MUST occur.
+	    assertion (not (states_inter_going_in.empty ()
+			    or states_minus_going_in.empty ()));
+	    // @a states must be the bigger one.
+	    if (states_minus_going_in.size () > states_inter_going_in.size ())
+	    {
+	      states.swap (states_minus_going_in);
+	      states_minus_going_in.swap (states_inter_going_in);
+	    }
+	    else
+	      states.swap (states_inter_going_in);
+	    for_all (hstates_t, istate, states_minus_going_in)
+	      class_of_[*istate] = n_partition;
+	    to_treat.push (std::make_pair (&states_minus_going_in,
+					   n_partition++));
+	  }
 	}
       };
 
@@ -153,7 +154,7 @@ namespace vcsn
 	/// Add the transitions needed by @a representative.
 	void execute (hstate_t representative)
 	{
-	  src_ = class_of_ [representative];
+	  src_ = class_of_[representative];
 	  input_.deltaf (*this, representative, delta_kind::transitions ());
 	}
 
@@ -314,12 +315,12 @@ namespace vcsn
 	AUTOMATON_TYPES(input_t);
 	AUTOMATON_FREEMONOID_TYPES(input_t);
 	QUOTIENT_TYPES();
+	typedef std::vector<bool> going_in_t;
 
 	quotient_splitter (const automaton_t& input, class_of_t& class_of,
-			   places_t& place, unsigned max_states)
+			   unsigned max_states)
 	  : input_(input),
 	    class_(class_of),
-	    place_(place),
 	    count_for_(max_states, 0),
 	    twin_(max_states, 0),
 	    going_in_(max_states, false)
@@ -328,8 +329,8 @@ namespace vcsn
 	/// True if there's states going in states of \a p with letter \a a.
 	bool compute_going_in_states (partition_t& p, letter_t a)
 	{
-	  for_all_(std::vector<bool>, m, going_in_)
-	    *m = false;
+	  for_all_(going_in_t, s, going_in_)
+	    *s = false;
 
 	  for_all_(partition_t, s, p)
 	    input_.letter_rdeltaf(*this, *s, a, delta_kind::states());
@@ -349,41 +350,41 @@ namespace vcsn
 	  }
 	}
 
-	/// Split partition @a p if needed.
-	void split (partition_set_t& part, partition_t& p, unsigned& max_partitions)
+	/// Split partition @a b if needed.
+	void split (partition_set_t& part, unsigned& max_partitions)
 	{
 	  std::queue<partition_iterator> to_erase;
 
-	  for_all_(std::list<unsigned>, b, met_class)
+	  for_all_(std::list<unsigned>, p, met_class)
 	  {
 	    // if all states are predecessors there is no needed split
-	    if (count_for_[*b] == part[*b].size())
+	    if (count_for_[*p] == part[*p].size())
 	      continue;
 
-	    twin_[*b] = max_partitions;
+	    twin_[*p] = max_partitions;
+	    unsigned twin_class = max_partitions;
 	    ++max_partitions;
-	    bool t = going_in_[part[*b].front()];
-	    for_all_(partition_t, q, part[*b])
+	    partition_t::iterator q;
+	    int i = 0;
+	    for (partition_t::iterator next = part[*p].begin();
+		 next != part[*p].end();)
 	    {
-	      if (t != going_in_[*q])
-		to_erase.push(place_[*q]);
+	      q = next;
+	      ++next;
+	      if (going_in_[*q])
+	      {
+		class_[*q] = twin_class;
+		part[twin_class].insert(part[twin_class].end(), *q);
+		part[*p].erase(q);
+		i++;
+	      }
 	    }
 	  }
 
-	  while (!to_erase.empty())
+	  for_all_(std::list<unsigned>, p, met_class)
 	  {
-	    partition_iterator b = to_erase.front();
-	    to_erase.pop();
-	    unsigned i = twin_[class_[*b]];
-	    place_[*b] = part[i].insert(part[i].end(), *b);
-	    class_[*b] = i;
-	    p.erase(b);
-	  }
-
-	  for_all_(std::list<unsigned>, b, met_class)
-	  {
-	    count_for_[*b] = 0;
-	    twin_[*b] = 0;
+	    count_for_[*p] = 0;
+	    twin_[*p] = 0;
 	  }
 	  met_class.clear();
 	}
@@ -391,10 +392,9 @@ namespace vcsn
       private:
 	const automaton_t& input_;
 	class_of_t& class_;
-	places_t& place_;
 	std::vector<unsigned> count_for_;
 	std::vector<unsigned> twin_;
-	std::vector<bool> going_in_;
+	going_in_t going_in_;
 	std::list<unsigned> met_class;
       };
 
@@ -434,7 +434,6 @@ namespace vcsn
     `-----------------------------------------*/
     class_of_t		class_(max_states);
     partition_set_t	part(max_states);
-    places_t		place(max_states);
 
     /*-------------------------.
     | To have a list of (P, a) |
@@ -450,7 +449,7 @@ namespace vcsn
     {
       unsigned c = input.is_final(*p) ? 1 : 0;
       class_[*p] = c;
-      place[*p] = part[c].insert(part[c].end(), *p);
+      part[c].insert(part[c].end(), *p);
     }
 
     /*------------------------------.
@@ -467,7 +466,7 @@ namespace vcsn
     | Main loop |
     `----------*/
     {
-      quotient_splitter<input_t> splitter(input, class_, place, max_states);
+      quotient_splitter<input_t> splitter(input, class_, max_states);
       while (!to_treat.empty())
       {
 	pair_t c = to_treat.front();
@@ -478,7 +477,7 @@ namespace vcsn
 
 	if (!splitter.compute_going_in_states(part[p], a))
 	  continue;
-	splitter.split(part, part[p], max_partitions);
+	splitter.split(part, max_partitions);
 
 	for (unsigned c = old_max_partitions; c < max_partitions; ++c)
 	  for_all_letters (e, alphabet_)

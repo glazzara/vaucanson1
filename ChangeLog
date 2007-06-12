@@ -1,3 +1,9 @@
+2007-06-12  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Correct minimization algorithm for undeterministic automata.
+	* minimization_hopcroft.hxx: Move correctly states between partition.
+	Suppress unused variables.
+
 2007-06-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix command 8 in TAF-Kit
