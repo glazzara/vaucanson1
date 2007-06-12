@@ -35,7 +35,6 @@ Vaucanson 1.0a
 
 - XML
 
-  + New SAX implementation.
   + Bug fixes.
   + I/O optimizations.
 
@@ -43,6 +42,8 @@ Vaucanson 1.0a
 
   + Lib VCSN
     Provides C++ libraries for the main automaton types.
+  + SWIG
+    Fix compilation issues.
 
 - TAF-Kit
 
