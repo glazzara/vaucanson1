@@ -1,3 +1,19 @@
+2007-06-13  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add epsilon_removal_sp 
+	eps_removal_sp is another epsilon-removal based on a shortest-path
+	algorithm.
+	* include/Makefile.am: .
+	* include/vaucanson/algorithms/eps_removal_sp.hh: New.
+	* include/vaucanson/algorithms/eps_removal_sp.hxx: New.
+	* include/vaucanson/contexts/automaton_functions.thh: .
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: .
+	* include/vaucanson/contexts/transducer_functions.thh: .
+	* include/vaucanson/misc/usual_macros.hh: .
+	* taf-kit/src/common_automaton_commands.hh: .
+	* taf-kit/src/common_commands.hh: .
+	* taf-kit/src/tdc_commands.cc: .
+
 2007-06-12  Type Your Name Here  <your.mail.here@FIXME.com>
 
 	Fix distcheck issues 

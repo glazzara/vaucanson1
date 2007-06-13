@@ -154,6 +154,8 @@ DEFINE_COMMAND (NAME (star_of_standard)
 		   "Give the maximal accessible subautomaton of `aut'."), \
     COMMAND_ENTRY (eps_removal, Aut,					\
 		   "Give `aut' closed over epsilon transitions."),	\
+    COMMAND_ENTRY (eps_removal_sp, Aut,					\
+		   "Give `aut' closed over epsilon transitions."),	\
     COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,			\
 		      "Give the maximal coaccessible subautomaton of `aut'."), \
     COMMAND_ENTRY (complete, Aut, "Give the complete version of `aut'."), \
