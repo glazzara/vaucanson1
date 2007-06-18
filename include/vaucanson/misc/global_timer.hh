@@ -27,15 +27,25 @@
 #  define TIMER_PUSH(Task)   GLOBAL_TIMER.push (Task)
 #  define TIMER_POP(Task)    GLOBAL_TIMER.pop (Task)
 #  define TIMER_STOP()       GLOBAL_TIMER.stop ()
-#  define TIMER_SCOPED(Task) vcsn::misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
-#  define TIMER_PRINT(Stream) Stream << GLOBAL_TIMER << std::endl
+#  define TIMER_SCOPED(Task) vcsn::misc::ScopedTimer stimer\
+                                                          (GLOBAL_TIMER, Task)
+#  define TIMER_PRINT(Stream)             GLOBAL_TIMER.print(Stream)
+#  define TIMER_PRINT_VD(Stream, Vd)      GLOBAL_TIMER.print(Stream, Vd)
+#  define TIMER_EXPORT_DOT(Stream)        GLOBAL_TIMER.export_dot(Stream)
+#  define TIMER_EXPORT_DOT_VD(Stream, Vd) GLOBAL_TIMER.export_dot(Stream, Vd)
+#  define TIMER_EXPORT_DOT_VD_CR(Stream, Vd, Cr)\
+                                       GLOBAL_TIMER.export_dot(Stream, Vd, Cr)
 # else
 #  define TIMER_START()      ((void) 0)
 #  define TIMER_PUSH(Task)   ((void) 0)
 #  define TIMER_POP(Task)    ((void) 0)
 #  define TIMER_STOP()       ((void) 0)
 #  define TIMER_SCOPED(Task) ((void) 0)
-#  define TIMER_PRINT(Stream) ((void) 0)
+#  define TIMER_PRINT(Stream)                   ((void) 0)
+#  define TIMER_PRINT_VD(Stream, Vd)            ((void) 0)
+#  define TIMER_EXPORT_DOT(Stream)              ((void) 0)
+#  define TIMER_EXPORT_DOT_VD(Stream, Vd)       ((void) 0)
+#  define TIMER_EXPORT_DOT_VD_CR(Stream, Vd, Cr)((void) 0)
 # endif
 
 

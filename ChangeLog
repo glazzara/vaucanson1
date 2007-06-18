@@ -1,3 +1,21 @@
+2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Update timer and bencher for taf-kit
+	* bencher.cc,
+	* global_timer.hh,
+	* timer.cc,
+	* timer.hh,
+	* timer.hxx:
+
+	The implementation of the timer used in taf-kit changes:
+	it now builds a graph of the results using Graph from Boost.
+	Bencher is modified to work with the new implementation.
+	All current macro names used in taf-kit still work, and new
+	ones are added to access new features, such as export of
+	the graph in DOT language.
+	Basic documentation will be provided within a few days.
+	NOTE: taf-kit might not compile in this revision.
+
 2007-04-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix conflict with boost and empty_ macro.  
