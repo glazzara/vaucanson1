@@ -48,7 +48,7 @@ const char* argp_program_version =
 const char* argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 
 /// A global timer.
-vcsn::misc::Timer timer;
+vcsn::misc::Timer global_timer;
 
 /// A global bencher.
 vcsn::misc::Bencher bencher;

@@ -1,3 +1,37 @@
+2007-06-20  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Split timer.* into smaller files & add documentation
+	* include/vaucanson/misc/global_timer.hh:
+	Make it work outside vaucanson.
+	* include/vaucanson/misc/timer.cc:
+	Remove implementation of misc::Timer internal classes.
+	* include/vaucanson/misc/timer.hh:
+	Remove declaration of misc::Timer internal classes.
+	* include/vaucanson/misc/timer.hxx:
+	Move inline methods of misc::Timer here
+	* include/vaucanson/misc/timer_internal_gathering.cc,
+	* include/vaucanson/misc/timer_internal_gathering.hh,
+	* include/vaucanson/misc/timer_internal_gathering.hxx:
+	Move declaration & implementation of misc::Timer internal
+	classes regarding data gathering in those three files.
+	* include/vaucanson/misc/timer_internal_graph.cc,
+	* include/vaucanson/misc/timer_internal_graph.hh,
+	* include/vaucanson/misc/timer_internal_graph.hxx:
+	Move declaration & implementation of misc::Timer internal
+	classes regarding result computation in those three files.
+	* taf-kit/src/common.hh,
+	* taf-kit/src/main.cc:
+	Change global timer name from timer to global_timer to avoid
+	conflicts with the new namespace.
+
+	Former private classes of misc::Timer are now in the separate
+	namespace misc::timer.  Minor changes are made to the taf-kit
+	source to work with the new implementation.
+	Documentation is provided in include/vaucanson/misc/timer.hh.
+
+	Clean source code (thanks for pointing out what was wrong).
+	
+
 2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Update timer and bencher for taf-kit

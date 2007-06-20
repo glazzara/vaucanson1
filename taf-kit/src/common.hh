@@ -55,10 +55,10 @@
 # include <string>
 
 // Use a global timer and bencher.
-# define GLOBAL_TIMER timer
+# define GLOBAL_TIMER global_timer
 # define GLOBAL_BENCHER bencher
 # include <vaucanson/misc/usual_macros.hh>
-extern vcsn::misc::Timer timer;
+extern vcsn::misc::Timer global_timer;
 extern vcsn::misc::Bencher bencher;
 
 struct arguments_t

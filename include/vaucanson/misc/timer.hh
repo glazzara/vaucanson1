@@ -19,8 +19,120 @@
 # define VCSN_MISC_TIMER_HH
 
 /**
- ** \file misc/timer.hh
- ** \brief Timer: Timing nested tasks.
+ *  \file misc/timer.hh
+ *  \brief Timing nested tasks.
+ *
+ *  The purpose of the class Timer provided here is to measure the
+ *  time user-defined tasks use in the execution of a program.
+ *
+ *  Each task is identified by a unique name (std::string), or
+ *  alternatively, once task has been declared, by an id number.
+ *
+ *  The program source code must be equipped with calls to methods of
+ *  the Timer instance.
+ *
+ *  For the timing to be accurate, a task should take 1ms of execution
+ *  time or more (preferably over 10ms).
+ *
+ *  Once all the relevant timing data are gathered, the Timer object
+ *  builds a graph of the results (using the boost graph library),
+ *  which can be printed to a stream or exported in DOT format.
+ *  Alternatively, export of the complete results in XML format for
+ *  further analysis will be made available.
+ *
+ *
+ *
+ *  How to use this timer in Vaucauson (taf-kit):
+ *
+ *      A global timer is declared in taf-kit/src/common.hh.
+ *      See misc/global_timer.hh for a list of commands on the global
+ *      timer (using macro definitions).
+ *      Refer to the description of the class's methods below.
+ *
+ *
+ *  How to use this timer outside Vaucanson:
+ *
+ *      - Create an instance of misc::Timer.
+ *
+ *      - Before the beginning of the sequence of tasks (which can be
+ *        nested), insert a call to Timer.start ().
+ *        This will initialize the timer, discarding any previous
+ *        data.  The special task _program_ will be initialized here.
+ *        This task compute the total time of the program: Do not
+ *        use it elsewhere.
+ *
+ *      - Declare and execute tasks.  The data gathering process is
+ *        based on a stack (comparable to a system call stack): use
+ *        push () and pop () methods accordingly.
+ *
+ *        There are two ways to refer to a given task:
+ *
+ *              - Its unique name can be passed to every function
+ *                requiring it (as in Timer.push ("MyTask")).  This
+ *                leads to a map lookup which can be costly with
+ *                a large number of tasks.
+ *
+ *              - It can be declared using Timer.task ("MyTask"). This
+ *                method returns the task's id (creating the task in
+ *                the process if it doesn't exist).  This id is an int
+ *                and can be used in place of the task's full name.  It
+ *                removes the map lookup, thus decreasing the
+ *                influence of the timer's data gathering on the
+ *                program.
+ *
+ *        There are two ways to time a task:
+ *
+ *              - Calls can be explicitely made to Timer.push (Task)
+ *                and Timer.pop ().  Tasks may be nested, recursive,
+ *                and may form cycles e.g. A -> B -> A.
+ *                Only the last started task can be stopped.
+ *                Timer.pop (Task) fails if the Task is not the task
+ *                on top of the timer's internal stack.
+ *
+ *              - A class ScopedTimer (Timer, Task) is provided.
+ *                It simply calls Timer.push (Task) upon creation
+ *                and Timer.pop () upon destruction. Instanciate it in
+ *                a scope, i.e. at the beginning of a function.
+ *
+ *      - After the part of the program to be timed, insert a call to
+ *        Timer.stop ().  This computes the data into a graph.  The
+ *        timer can't be resumed.
+ *
+ *      * Once stopped, standard arithmetic operators (+, +=, /, /=)
+ *        can be used on timers, e.g. to calculate the mean of several
+ *        iterations of the same program.  The structure of timers
+ *        added to each other must be strictly identical (same
+ *        function calls).
+ *        A Timer.join () method might appear in the future.
+ *
+ *      - Print the results using Timer.print (Stream,
+ *        VerboseDegree).  VerboseDegree represents the amount of
+ *        information printed.  Available VerboseDegree values are:
+ *          misc::timer::VERBOSE_NONE
+ *          misc::timer::VERBOSE_MINIMAL
+ *          misc::timer::VERBOSE_NORMAL (Default)
+ *          misc::timer::VERBOSE_MAXIMAL
+ *
+ *      - Export the results in DOT format using Timer.export(Stream,
+ *        VerboseDegree, ChargeColorRatio).  VerboseDegree is the same
+ *        as above.  ChargeColorRatio controls the adjustement of the
+ *        graph node colors to the task's self charge.  The node color
+ *        ranges from cyan to red.  Increasing ChargeColorRatio
+ *        makes nodes attain red for lower charges.  This is for fine
+ *        tuning, as the color is internally adjusted to the number of
+ *        tasks.  Default value for ChargeColorRatio is 1.0.
+ *
+ *      - Subsequent calls to Timer.start () would initialize the
+ *        timer, thus allowing the same timer to time different sets
+ *        of tasks in a row (results are discarded upon calling
+ *        Timer.start ()).
+ *
+ *
+ *  Note on performance: The data gathering process is generally
+ *  non-obtrusive (timing one task by its id takes about 1 extra
+ *  microsecond).
+ *  However, for a large number of small tasks, using only full name
+ *  lookup may impact the results.
  */
 
 # include <stack>
@@ -38,13 +150,16 @@
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
 #  include <vaucanson/misc/contract.hh>
+#  include <vaucanson/misc/timer_internal_graph.hh>
+#  include <vaucanson/misc/timer_internal_gathering.hh>
 # else
 #  define NAMESPACE_VCSN_BEGIN
 #  define NAMESPACE_VCSN_END
 #  include <cassert>
+#  include "timer_internal_graph.hh"
+#  include "timer_internal_gathering.hh"
 #  define precondition(C) assert(C)
 # endif
-
 
 NAMESPACE_VCSN_BEGIN
 
@@ -58,16 +173,16 @@ namespace misc
   {
   public:
     /// Start timing a new task upon creation.
-    /// \param timer	the timer within which the task is executed.
-    /// \param i	the id of the task in the timer (must be declared).
+    /// \param timer    the timer within which the task is executed.
+    /// \param i        the id of the task in the timer (must be declared).
     ScopedTimer (Timer& timer, const unsigned int i);
 
     /// Start timing a new task upon creation.
-    /// \param timer	the timer within which the task is executed.
-    /// \param name	the name of the task in the timer (does not
+    /// \param timer    the timer within which the task is executed.
+    /// \param name     the name of the task in the timer (does not
     /// have to be declared yet).
     ScopedTimer (Timer& timer, const std::string& name);
-  
+
     /// Upon destruction, stop the task on top of the timer's stack.
     /// It is _not_ guaranteed this task is the one started upon creation.
     ~ScopedTimer ();
@@ -78,28 +193,25 @@ namespace misc
   class Timer
   {
   public:
-    /// Enumerate the different verbose degrees for dot format graph export.
-    typedef enum verbose_degree { VERBOSE_NONE, VERBOSE_MINIMAL,
-				  VERBOSE_NORMAL, VERBOSE_MAXIMAL };
 
     /// Gather system information (clock ticks per second) upon creation.
     Timer ();
     /// Copy a timer.  It is not recommended to copy a running timer.
-    /// \param rhs	the timer to be duplicated.
+    /// \param rhs      the timer to be duplicated.
     Timer (const Timer& rhs);
 
     ~Timer ();
 
     /// Make this timer a copy of the timer.  It is not recommended to
     /// duplicate a running timer.
-    /// \param rhs	the timer to be duplicated.
+    /// \param rhs      the timer to be duplicated.
     const Timer& operator= (const Timer& rhs);
 
     /// Return the id associated to the unique task name provided if
     /// the association exists.  Otherwise, create the association and
     /// return its id.
     /// The timer has to be running.
-    /// \param name	the task name.
+    /// \param name     the task name.
     unsigned int task (const std::string& name);
 
     /// Clear any data in the timer (task names associations and
@@ -118,8 +230,9 @@ namespace misc
     /// Write a summary of the results. The timer must have been stopped.
     /// \param o the output stream.
     /// \param vd determines the amount of information printed
-    std::ostream& print (std::ostream&  o,
-			 verbose_degree vd = VERBOSE_NORMAL) const;
+    std::ostream& print (std::ostream&         o,
+                         timer::verbose_degree vd = timer::VERBOSE_NORMAL)
+      const;
 
     /// Export the task graph in dot format. The timer must have been stopped.
     /// \param o the output stream.
@@ -127,9 +240,9 @@ namespace misc
     /// graph.
     /// \param ccr adjusts how much the task self charge affects the
     /// node color
-    std::ostream& export_dot (std::ostream&  o,
-			      verbose_degree vd = VERBOSE_NORMAL,
-			      double         ccr = 1) const;
+    std::ostream& export_dot (std::ostream&         o,
+                              timer::verbose_degree vd = timer::VERBOSE_NORMAL,
+                              double                ccr = 1) const;
 
     /// Start a sub-timer for a task using an unique string identifier
     /// (the task doesn't have to be declared beforehand).
@@ -163,9 +276,17 @@ namespace misc
     /// defined and executed in the same order) and _must not_ be
     /// running.
     /// Alternatively, this timer can be empty (just initialized or cleared)
-    /// Only the measured times are stacked (not call counts).
+    /// Only the measured times are accumulated (not call counts).
     /// Average values are updated.
     Timer& operator+= (const Timer& rhs);
+
+    /// \brief Sum two timers
+    /// The two timers _must_ have the _exact same structure_ (ie: tasks
+    /// defined and executed in the same order) and _must not_ be
+    /// running.
+    /// Only the measured times are accumulated (not call counts).
+    /// Average values are updated.
+    Timer operator+ (const Timer& rhs);
 
     /// \brief Divide in place.
     /// Typically used to compute the mean of several timers.
@@ -180,366 +301,73 @@ namespace misc
     Timer operator/ (unsigned rhs) const;
 
   private:
-    // Internal Time representation
-    class TimeStamp;
+    /*------------------------------.
+    | Timer: Internal structures.   |
+    `------------------------------*/
 
+    /*// Internal Time representation
+    class timer::TimeStamp;
 
     // Data collection classes
-    class Task;
-    class Call;
-    class StackedCall;
+    class timer::Task;
+    class timer::Call;
+    class timer::StackedCall;*/
 
     // Graph output writers
-    friend class GraphWriter;
-    friend class VertexWriter;
-    friend class EdgeWriter;
+    friend class timer::GraphWriter;
+    friend class timer::VertexWriter;
+    friend class timer::EdgeWriter;
+
+    /*    // Graph contents
+    struct timer::GraphCall;
+    struct timer::GraphTask;
+    struct timer::GraphComponent;*/
 
-    // Data analysis structures
-    struct GraphCall
-    {
-      // clear on init
-      GraphCall();
-
-      void add_times(TimeStamp&		total,
-		     TimeStamp&		self,
-		     TimeStamp&		program,
-		     unsigned int	cnt);
-
-      void add_self_time(TimeStamp&		self,
-			 unsigned int		cnt);
-
-      void add_total_time(TimeStamp&		total,
-			  unsigned int		cnt);
-
-      void compute_average(clock_t		program_cpu);
-
-
-      unsigned int	count;
-      unsigned int	from;
-      unsigned int	to;
-
-      clock_t	total_wall;
-      clock_t	total_user;
-      clock_t	total_system;
-      clock_t	total_cpu;
-      double	total_average;
-      double	total_charge;
-
-      clock_t	self_wall;
-      clock_t	self_user;
-      clock_t	self_system;
-      clock_t	self_cpu;
-      double	self_average;
-      double	self_charge;
-    };
-
-    struct GraphTask
-    {
-      // clear on init
-      GraphTask();
-
-      void add_times(TimeStamp&		total,
-		     TimeStamp&		self,
-		     TimeStamp&		program,
-		     unsigned int	cnt);
-
-      void add_int_time(TimeStamp&		self,
-			 unsigned int		cnt);
-
-      /*      void add_total_time(TimeStamp&		total,
-	      unsigned int		cnt);*/
-
-      void compute_average(clock_t		program_cpu);
-
-
-      // Ordering using CPU time.
-      bool operator < (const GraphTask& task) const;
-
-      unsigned int	id;
-      std::string	name;
-
-      unsigned int	count;
-      unsigned int	recursive_count;
-      unsigned int	int_count;
-
-      clock_t	total_wall;
-      clock_t	total_user;
-      clock_t	total_system;
-      clock_t	total_cpu;
-      double	total_average;
-      double	total_charge;
-
-      clock_t	self_wall;
-      clock_t	self_user;
-      clock_t	self_system;
-      clock_t	self_cpu;
-      double	self_average;
-      double	self_charge;
-    };
-
-    struct GraphComponent
-    {
-      // clear on init
-      GraphComponent ();
-
-      void add_member(GraphTask&	task);
-
-      void add_call_inc(GraphCall&	call);
-
-      void add_call_out(GraphCall&	call);
-
-      void add_call_internal(GraphCall&	call);
-
-      void compute_average(clock_t	program_cpu);
-
-      unsigned int	member_count;
-      std::list<int>	members;
-
-      std::list<GraphCall*> calls_in;
-      std::list<GraphCall*> calls_out;
-
-      unsigned int	out_calls;
-      unsigned int	int_calls;
-      unsigned int	calls;
-
-      unsigned int	id;
-
-      clock_t	total_wall;
-      clock_t	total_user;
-      clock_t	total_system;
-      clock_t	total_cpu;
-      double	total_average;
-      double	total_charge;
-
-      clock_t	self_wall;
-      clock_t	self_user;
-      clock_t	self_system;
-      clock_t	self_cpu;
-      double	self_average;
-      double	self_charge;
-
-      double	int_average;
-    };
-
-
-
-    typedef std::map<const std::string, int> task_names_map;
-    typedef std::vector<Task> task_vector;
-    typedef std::map<int, Call> call_map;
-    typedef std::stack<StackedCall> call_stack;
-
-    typedef boost::adjacency_list<boost::vecS, boost::vecS,
-				  boost::bidirectionalS,
-				  GraphTask,
-				  GraphCall> output_graph;
-
-    typedef std::pair<output_graph::vertex_iterator,
-		      output_graph::vertex_iterator> vertex_range;
-    typedef std::pair<output_graph::edge_iterator,
-		      output_graph::edge_iterator> edge_range;
-    typedef std::pair<output_graph::in_edge_iterator,
-		      output_graph::in_edge_iterator> in_edge_range;
-    typedef std::pair<output_graph::out_edge_iterator,
-		      output_graph::out_edge_iterator> out_edge_range;
-
-    typedef std::vector<int> component_id_vector;
-    typedef std::vector<GraphComponent> component_vector;
-
-
-    class VertexWriter {
-    public:
-      VertexWriter (const Timer& timer,
-		    const	 verbose_degree vd,
-		    double       ccr);
-
-      void operator()(std::ostream& out,
-		      const output_graph::vertex_descriptor& v) const;
-    private:
-      const output_graph&	 g_;
-      const component_vector&    c_;
-      const component_id_vector& c_id_;
-      verbose_degree             vd_;
-      double                     chrg_col_ratio_;
-      clock_t			 tps_;
-    };
-
-    class EdgeWriter {
-    public:
-      EdgeWriter (const Timer&         timer,
-		  const verbose_degree vd,
-		  double               ccr);
-
-      void operator()(std::ostream& out,
-		      const output_graph::edge_descriptor& e) const;
-    private:
-      verbose_degree             vd_;
-      const output_graph&        g_;
-      const component_id_vector& c_id_;
-      double                     chrg_col_ratio_;
-      clock_t		         tps_;
-    };
-
-    class GraphWriter {
-    public:
-      GraphWriter (const Timer&         timer,
-		   const verbose_degree vd,
-		   double               ccr);
-
-      void operator()(std::ostream& out) const;
-    private:
-      verbose_degree             vd_;
-      const output_graph&        g_;
-      const component_vector&    c_;
-      const component_id_vector& c_id_;
-      double                     chrg_col_ratio_;
-      clock_t			 tps_;
-    };
-
-    class TimeStamp
-    {
-      friend class Timer;
-
-      TimeStamp ();
-
-      // Set to the current time
-      void set_to_now ();
-
-      // Set to the difference between the current time and the time
-      // previously set.time_.set_to_lap();
-      void set_to_lap ();
-
-      // Set internal values to 0;
-      void clear ();
-
-      std::ostream& print (std::ostream& o) const;
-
-      TimeStamp& operator += (const TimeStamp& rhs);
-      TimeStamp& operator -= (const TimeStamp& rhs);
-
-      // Returns the divison of the total CPU time by n
-      double operator/ (unsigned int n) const;
-
-      // Ordering using CPU time.
-      bool operator < (const TimeStamp& rhs) const;
-
-    private:
-      clock_t	wall_;
-      clock_t	user_;
-      clock_t	sys_;
-    };
-
-    // Data collection classes
-    class Task
-    {
-    public:
-      friend class Timer;
-
-      Task ();
-
-      Task (const Task& task);
-
-      // Create a new task.
-      Task (const std::string&	name,
-	    const unsigned int	id);
-
-      // Free call list upon destruction.
-      ~Task ();
-
-      // Add the call if it doesn't exist.  Return the call to the
-      // called task.
-      Call& call (unsigned int called);
-
-    private:
-      std::string	name_;
-      unsigned int	id_;
-      call_map		calls_;
-    };
-
-    class Call
-    {
-    public:
-      friend class Timer;
-      friend class Task;
-
-      // Initialize upon creation.
-      Call (unsigned int called = 0);
-
-      // Sum up the call stats;
-      Call& operator += (const Call& call);
-
-    private:
-      // Adds the calculated time of a task instance to the associated
-      // call on Timer::pop()
-      void add(const StackedCall&	call);
-
-
-      // Total time of the called task and its children.
-      TimeStamp total_;
-
-      // Time of the called task itself only.
-      TimeStamp self_;
-
-      // Number of calls with the same calling and called tasks.
-      unsigned int count_;
-
-      unsigned int called_;
-    };
-
-    class StackedCall
-    {
-    public:
-      friend class Timer;
-      friend class Task;
-      friend class Call;
-
-      StackedCall (unsigned int called = 0);
-      StackedCall ();
-
-    private:
-      TimeStamp    total_;
-      TimeStamp    children_;
-
-      unsigned int called_;
-    };
-
-    clock_t		ticks_per_sec_;
-
-    call_stack		calls_;
-    task_vector		tasks_;
-    task_names_map	names_;
-    TimeStamp		time_;
 
     // Add task vertices and call edges to the graph
     void build_output_graph ();
     // Build connected component array
-    void build_connected_components();
+    void build_connected_components ();
 
     // Compute task & call times in graph
     void compute_output_graph ();
     // Compute component times in graph
     void compute_connected_components ();
 
-    void print_output_graph (std::ostream& o,
-			     verbose_degree vd = VERBOSE_NORMAL) const;
+    void print_output_graph (std::ostream&         o,
+                             timer::verbose_degree vd = timer::VERBOSE_NORMAL)
+      const;
 
-    output_graph	graph_;
-    component_id_vector comp_id_;
-    component_vector	comp_;
-    unsigned int	comp_count_;
-    unsigned int	task_count_;
 
-    bool		is_running_;
+    clock_t                     ticks_per_sec_;
 
-    bool		cleared_;
+    timer::call_stack           calls_;
+    timer::task_vector          tasks_;
+    timer::task_names_map       names_;
+    timer::TimeStamp            time_;
+
+    timer::output_graph         graph_;
+    timer::component_id_vector  comp_id_;
+    timer::component_vector     comp_;
+    unsigned int                comp_count_;
+    unsigned int                task_count_;
+
+    bool                        is_running_;
+
+    bool                        cleared_;
   };
 } // namespace misc
 
 NAMESPACE_VCSN_END
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  /*include <vaucanson/misc/timer.hxx>*/
 #  if defined VAUCANSON
+#   include <vaucanson/misc/timer.hxx>
+#   include <vaucanson/misc/timer_internal_gathering.cc>
+#   include <vaucanson/misc/timer_internal_graph.cc>
 #   include <vaucanson/misc/timer.cc>
+#  else
+#   include "timer.hxx"
 #  endif
 # endif // !VCSN_USE_INTERFACE_ONLY
 
