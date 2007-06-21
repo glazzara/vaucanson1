@@ -27,6 +27,8 @@
  *
  *  Each task is identified by a unique name (std::string), or
  *  alternatively, once task has been declared, by an id number.
+ *  Special characters in task names must be escaped for the XML export
+ *  to work properly.
  *
  *  The program source code must be equipped with calls to methods of
  *  the Timer instance.
@@ -47,7 +49,22 @@
  *      A global timer is declared in taf-kit/src/common.hh.
  *      See misc/global_timer.hh for a list of commands on the global
  *      timer (using macro definitions).
+ *
  *      Refer to the description of the class's methods below.
+ *
+ *      The global timer is automatically started and stopped in
+ *      taf-kit/tests/vcsn* programs.  Only the source code of
+ *      automata manipulation algorithm has to be equipped with
+ *      declaration an execution of tasks (using TIMER_SCOPED(Task)
+ *      alone or TIMER_PUSH(Task) and TIMER_POP() together).
+ *
+ *      To obtain a detailed report of the results on std::cerr, use
+ *      the command-line option --report-time (results are not printed
+ *      otherwise).
+ *
+ *      To benchmark several executions of the same set of tasks, use
+ *      the command-line option --bench=X where X is the number of
+ *      iterations.  A summary of the result is printed on std::cerr.
  *
  *
  *  How to use this timer outside Vaucanson:
@@ -113,6 +130,8 @@
  *          misc::timer::VERBOSE_NORMAL (Default)
  *          misc::timer::VERBOSE_MAXIMAL
  *
+ *      * In this report, task names can be truncated to fit the layout.
+ *
  *      - Export the results in DOT format using Timer.export(Stream,
  *        VerboseDegree, ChargeColorRatio).  VerboseDegree is the same
  *        as above.  ChargeColorRatio controls the adjustement of the
@@ -144,6 +163,7 @@
 # include <boost/graph/strong_components.hpp>
 # include <boost/graph/graphviz.hpp>
 
+/* Disable this when outside Vaucanson */
 # define VAUCANSON 1
 
 # if defined VAUCANSON
@@ -244,6 +264,13 @@ namespace misc
                               timer::verbose_degree vd = timer::VERBOSE_NORMAL,
                               double                ccr = 1) const;
 
+    /// Dump the task graph in XML format for post-processing.
+    /// All the information gathered is printed and include a large
+    /// amount of redundancy.
+    /// The Timer must be stopped.
+    std::ostream& dump (std::ostream&         o) const;
+
+
     /// Start a sub-timer for a task using an unique string identifier
     /// (the task doesn't have to be declared beforehand).
     /// The timer must be running.
@@ -276,7 +303,7 @@ namespace misc
     /// defined and executed in the same order) and _must not_ be
     /// running.
     /// Alternatively, this timer can be empty (just initialized or cleared)
-    /// Only the measured times are accumulated (not call counts).
+    /// Call counts are accumulated as well as measured times.
     /// Average values are updated.
     Timer& operator+= (const Timer& rhs);
 
@@ -284,7 +311,7 @@ namespace misc
     /// The two timers _must_ have the _exact same structure_ (ie: tasks
     /// defined and executed in the same order) and _must not_ be
     /// running.
-    /// Only the measured times are accumulated (not call counts).
+    /// Call counts are accumulated as well as measured times.
     /// Average values are updated.
     Timer operator+ (const Timer& rhs);
 

@@ -76,6 +76,13 @@ namespace misc
       double	charge;
 
       TimeStats ();
+
+      friend class misc::Timer;
+
+    private:
+      // Dump time in XML
+      void dump (std::ostream&  o,
+		 std::string	name) const;
     };
 
     // Data analysis structures
@@ -182,6 +189,8 @@ namespace misc
 		      output_graph::in_edge_iterator> in_edge_range;
     typedef std::pair<output_graph::out_edge_iterator,
 		      output_graph::out_edge_iterator> out_edge_range;
+    typedef std::pair<output_graph::edge_iterator,
+		      output_graph::edge_iterator> edge_range;
 
     typedef std::vector<int> component_id_vector;
     typedef std::vector<GraphComponent> component_vector;

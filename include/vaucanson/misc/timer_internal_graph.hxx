@@ -46,7 +46,9 @@ namespace misc
     bool
     GraphTask::operator< (const GraphTask& task) const
     {
-      return self.cpu > task.self.cpu;
+      return (self.cpu == task.self.cpu) ?
+	(id < task.id) :
+	(self.cpu > task.self.cpu);
     }
 
     /*------------------------.

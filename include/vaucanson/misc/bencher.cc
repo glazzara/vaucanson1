@@ -98,7 +98,7 @@ namespace misc
     }
     o << std::endl
       << line << " SUMMARY " << line << std::endl
-      << line << " Arithmetic means" << std::endl << prepare(mean())
+      << line << " Arithmetic mean"  << std::endl << prepare(mean())
       << line << " Sum"              << std::endl << prepare(sum())
       << line << " Min"              << std::endl << prepare(min())
       << line << " Max"              << std::endl << prepare(max());

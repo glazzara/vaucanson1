@@ -361,6 +361,10 @@ namespace misc
 	graph_[vd].self.system  += rhs.graph_[vd2].self.system;
 	graph_[vd].self.cpu     += rhs.graph_[vd2].self.cpu;
 
+	graph_[vd].count            += rhs.graph_[vd2].count;
+	graph_[vd].recursive_count  += rhs.graph_[vd2].recursive_count;
+	graph_[vd].int_count        += rhs.graph_[vd2].int_count;
+
 	graph_[vd].compute_average (total_cpu);
       }
 
@@ -428,6 +432,10 @@ namespace misc
 	graph_[vd].self.system  /= rhs;
 	graph_[vd].self.cpu     /= rhs;
 
+	graph_[vd].count	        /= rhs;
+	graph_[vd].recursive_count	/= rhs;
+	graph_[vd].int_count		/= rhs;
+
 	graph_[vd].compute_average (total_cpu);
       }
 
@@ -445,6 +453,8 @@ namespace misc
 	graph_[ed].self.user    /= rhs;
 	graph_[ed].self.system  /= rhs;
 	graph_[ed].self.cpu     /= rhs;
+
+	graph_[ed].count        /= rhs;
 
 	graph_[ed].compute_average (total_cpu);
       }
@@ -606,6 +616,113 @@ namespace misc
   `-----------*/
 
   INLINE_TIMER_CC
+  std::ostream&
+  Timer::dump (std::ostream&         o) const
+  {
+    timer::output_graph::vertex_iterator   vx;
+    timer::output_graph::edge_iterator	   ed;
+
+    timer::vertex_range   vxrange;
+    timer::edge_range	  edrange;
+
+
+    o << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+
+      << "<timer>\n"
+
+      << "  ";
+    graph_[0].total.dump (o, "total");
+    o << "\n"
+
+      << "  <taskList>\n";
+
+    for (vxrange =  vertices (graph_), vx = vxrange.first;
+	 vx != vxrange.second; ++vx)
+      {
+	const timer::GraphTask& task = (graph_[*vx]);
+
+	o << "    <task\n"
+	  << "      id=\""             << task.id              << "\"\n"
+	  << "      name=\""           << task.name            << "\"\n"
+	  << "      calls=\""          << task.count           << "\"\n"
+	  << "      recursiveCalls=\"" << task.recursive_count << "\"\n"
+	  << "      cycleCalls=\""     << task.int_count       << "\"\n"
+	  << "      component=\""      << comp_id_[task.id]    << "\"\n"
+	  << "    >\n";
+
+	o << "      ";
+	task.total.dump (o, "total");
+
+	o << "\n      ";
+	task.self.dump (o, "self");
+	
+	o << "\n    </task>\n";
+      }
+
+    o << "  </taskList>" << std::endl;
+
+
+    o << "  <callList>\n";
+
+    for (edrange = edges (graph_), ed = edrange.first;
+	 ed != edrange.second; ++ed)
+      {
+	const timer::GraphCall& call   = graph_[*ed];
+
+	o << "    <call\n"
+	  << "      source=\""   << call.from  << "\"\n"
+	  << "      target=\""   << call.to    << "\"\n"
+	  << "      count=\""    << call.count << "\"\n"
+	  << "    >\n";
+
+	o << "      ";
+	call.total.dump (o, "total");
+
+	o << "\n      ";
+	call.self.dump (o, "self");
+
+	o << "\n    </call>\n";
+      }
+
+    o << "  </callList>" << std::endl;
+
+    o << "  <componentlist>\n";
+
+    for (unsigned int c = 0; c < comp_count_; ++c)
+      {
+	o << "    <component id=\""      << c                     << "\"\n"
+	  << "      memberCount=\""      << comp_[c].member_count << "\"\n"
+	  << "      inboundCalls=\""     << comp_[c].calls        << "\"\n"
+	  << "      outgoingCalls=\""    << comp_[c].out_calls    << "\"\n"
+	  << "      internalCalls=\""    << comp_[c].int_calls    << "\"\n"
+	  << "      internalAverage=\""  << comp_[c].int_average  << "\"\n"
+	  << "    >\n";
+
+	o << "      ";
+	comp_[c].total.dump (o, "total");
+
+	o << "\n      ";
+	comp_[c].self.dump (o, "self");
+	o << "\n";
+
+	for (std::list<int>::const_iterator li = comp_[c].members.begin ();
+	     li != comp_[c].members.end (); ++li)
+	  {
+	    o << "      <member id=\"" << *li << "\" />\n";
+	  }
+
+	o << "    </component>\n";
+
+      }
+
+    o << "  </componentList>\n";
+
+    o << "</timer>" << std::endl;
+
+    return o;
+  }
+
+  INLINE_TIMER_CC
   void
   Timer::print_output_graph (std::ostream&         o,
 			     timer::verbose_degree vd) const
@@ -635,21 +752,24 @@ namespace misc
     for (std::list<timer::GraphTask>::iterator li = gtlist.begin ();
 	 li != gtlist.end (); ++li)
       {
-	o << " " << std::setw (4) << std::setprecision (3)
+	o << std::setiosflags (std::ios::fixed)
+	  << std::setw (5) << std::setprecision (1)
 	  << li->self.charge << "% "
-	  << std::setw(3) <<  li->id << ":"
-	  << std::setw(18) << li->name << "   ";
+	  << std::setw (3) <<  li->id << ":"
+	  << std::setw (18) << li->name.substr (0, 18) << "   ";
 
 	if (comp_[comp_id_[li->id]].member_count > 1)
 	  o << " (C:" << std::setw (3) << comp_id_[li->id] << ")";
 	else
-	  o << std::setprecision (3) << std::setw (7)
+	  o << std::setprecision (2) << std::setw (7)
 	    << double (li->total.cpu) / ticks_per_sec_ << "s";
 
-	o << std::setprecision (3) << std::setw (7)
+	o << std::setprecision (2) << std::setw (7)
 	  << double (li->self.cpu) / ticks_per_sec_ << "s";
 
-	o << std::setprecision (3) << std::setw (9)
+	o << std::resetiosflags(std::ios::fixed);
+
+	o << std::setprecision (7) << std::setw (9)
 	  << li->count + li->recursive_count + li->int_count << " ";
 
 	o << std::setprecision (5) << std::setw (9)
@@ -733,7 +853,7 @@ namespace misc
 		  << double (int (task.self.average * 1000))
 		  / ticks_per_sec_ << "ms";
 
-		o << std::setw (24) << task.name;
+		o << std::setw (24) << task.name.substr(0, 24);
 
 		o << std::endl;
 	      }
@@ -765,7 +885,7 @@ namespace misc
 	    o << "<-" << std::setw (3)
 	      << task.id << ":";
 
-	    o << std::setw (16) << task.name;
+	    o << std::setw (16) << task.name.substr (0, 16);
 
 	    o << std::setprecision (3) << std::setw (6)
 	      << call.self.charge * 100 / graph_[*vx].self.charge << "% ";
@@ -791,7 +911,7 @@ namespace misc
 	o << "  " << std::setw (3)
 	  << task.id << ":";
 
-	o << std::setw (16) << task.name;
+	o << std::setw (16) << task.name.substr (0, 16);
 
 	o << std::setprecision (3) << std::setw (6)
 	  << task.self.charge << "% ";
@@ -836,7 +956,7 @@ namespace misc
 	    o << "->" << std::setw (3)
 	      << task.id << ":";
 
-	    o << std::setw (16) << task.name;
+	    o << std::setw (16) << task.name.substr (0, 16);
 
 	    o << std::setprecision (3) << std::setw (6)
 	      << call.self.charge * 100 / task.self.charge << "% ";

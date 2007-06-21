@@ -377,6 +377,23 @@ namespace misc
     {
     }
 
+    // " in task names would produce unwanted results.
+    INLINE_TIMER_CC
+    void
+    TimeStats::dump (std::ostream&      o,
+		     std::string	name) const
+    {
+      o << "<time name=\"" << name
+	<< "\" wall=\"" << wall
+	<< "\" user=\"" << user
+	<< "\" system=\"" << system
+	<< "\" cpu=\"" << cpu
+	<< "\" average=\"" << average
+	<< "\" charge=\"" << charge
+	<< "\" />";
+    }
+
+
     /*-------------------.
     | Timer::GraphCall.  |
     `-------------------*/
