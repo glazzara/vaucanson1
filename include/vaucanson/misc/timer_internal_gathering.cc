@@ -27,7 +27,7 @@
 
 # include <sys/times.h>
 
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  include <vaucanson/misc/timer_internal_gathering.hh>
 # else
 #  include "timer_internal_gathering.hh"
@@ -149,14 +149,14 @@ namespace misc
 
     INLINE_TIMER_CC
     void
-    Call::add (const StackedCall&	call)
+    Call::add (const StackedCall&       call)
     {
       total_ += call.total_;
 
       self_  -= call.children_;
       self_  += call.total_;
 
-      count_++;
+      ++count_;
     }
 
   } // namespace timer

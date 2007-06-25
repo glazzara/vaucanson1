@@ -105,9 +105,9 @@ namespace misc
       bool operator< (const TimeStamp& rhs) const;
 
     private:
-      clock_t	wall_;
-      clock_t	user_;
-      clock_t	sys_;
+      clock_t   wall_;
+      clock_t   user_;
+      clock_t   sys_;
     };
 
     // Data collection classes
@@ -121,8 +121,8 @@ namespace misc
       Task (const Task& task);
 
       // Create a new task.
-      Task (const std::string&	name,
-	    const unsigned int	id);
+      Task (const std::string&  name,
+            unsigned int        id);
 
       // Free call list upon destruction.
       ~Task ();
@@ -132,9 +132,9 @@ namespace misc
       Call& call (unsigned int called);
 
     private:
-      std::string	name_;
-      unsigned int	id_;
-      call_map		calls_;
+      std::string       name_;
+      unsigned int      id_;
+      call_map          calls_;
     };
 
     class Call
@@ -144,7 +144,7 @@ namespace misc
       friend class Task;
 
       // Initialize upon creation.
-      Call (unsigned int called = 0);
+      explicit Call (unsigned int called = 0);
 
       // Sum up the call stats;
       Call& operator+= (const Call& call);
@@ -152,7 +152,7 @@ namespace misc
     private:
       // Adds the calculated time of a task instance to the associated
       // call on Timer::pop()
-      void add (const StackedCall&	call);
+      void add (const StackedCall&      call);
 
 
       // Total time of the called task and its children.
@@ -189,7 +189,7 @@ namespace misc
 NAMESPACE_VCSN_END
 
 // Include full definition of all classes.
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  include <vaucanson/misc/timer.hh>
 #  include <vaucanson/misc/timer_internal_graph.hh>
 #  include <vaucanson/misc/timer_internal_gathering.hh>
@@ -200,7 +200,7 @@ NAMESPACE_VCSN_END
 # endif
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  if defined VAUCANSON
+#  ifdef VAUCANSON
 #   include <vaucanson/misc/timer_internal_gathering.hxx>
 #  else
 #   include "timer_internal_gathering.hxx"

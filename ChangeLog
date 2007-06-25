@@ -1,3 +1,24 @@
+2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Change time display in timer report
+	* global_timer.hh: Fix alignment.
+	* timer.cc,
+	* timer.hh,
+	* timer.hxx:
+        Change time display.
+	* timer_internal_gathering.cc,
+	* timer_internal_gathering.hh,
+	* timer_internal_gathering.hxx,
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh,
+	* timer_internal_graph.hxx,
+	Fix naming conventions, untabify.
+
+	The unit used to display times in the standard report
+	is now adjusted automatically.
+
+	Add some documentation in timer.hh
+
 2007-06-21  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Add timer XML export, fix several issues.

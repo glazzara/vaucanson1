@@ -57,7 +57,10 @@ namespace misc
 
     /// Enumerate the different verbose degrees for dot format graph export.
     typedef enum verbose_degree { VERBOSE_NONE, VERBOSE_MINIMAL,
-				  VERBOSE_NORMAL, VERBOSE_MAXIMAL };
+                                  VERBOSE_NORMAL, VERBOSE_MAXIMAL };
+
+    // Return the corresponding verbose_degree.
+    verbose_degree get_verbose_degree (int i);
 
     // Graph output writers
     class GraphWriter;
@@ -68,12 +71,12 @@ namespace misc
     // (compare TimeStamp in timer_internal_gathering.hh)
     struct TimeStats
     {
-      clock_t	wall;
-      clock_t	user;
-      clock_t	system;
-      clock_t	cpu;
-      double	average;
-      double	charge;
+      clock_t   wall;
+      clock_t   user;
+      clock_t   system;
+      clock_t   cpu;
+      double    average;
+      double    charge;
 
       TimeStats ();
 
@@ -81,8 +84,8 @@ namespace misc
 
     private:
       // Dump time in XML
-      void dump (std::ostream&  o,
-		 std::string	name) const;
+      void dump (std::ostream& o,
+                 const std::string& name) const;
     };
 
     // Data analysis structures
@@ -91,26 +94,26 @@ namespace misc
       // clear on init
       GraphCall ();
 
-      void add_times (TimeStamp&		_total,
-		      TimeStamp&		_self,
-		      TimeStamp&		_program,
-		      unsigned int		cnt);
+      void add_times (TimeStamp&                total,
+                      TimeStamp&                self,
+                      TimeStamp&                program,
+                      unsigned int              cnt);
 
-      void add_self_time (TimeStamp&		_self,
-			  unsigned int		cnt);
+      void add_self_time (TimeStamp&            self,
+                          unsigned int          cnt);
 
-      void add_total_time (TimeStamp&		_total,
-			   unsigned int		cnt);
+      void add_total_time (TimeStamp&           total,
+                           unsigned int         cnt);
 
-      void compute_average (clock_t		program_cpu);
+      void compute_average (clock_t             program_cpu);
 
 
-      unsigned int	count;
-      unsigned int	from;
-      unsigned int	to;
+      unsigned int      count;
+      unsigned int      from;
+      unsigned int      to;
 
-      TimeStats		total;
-      TimeStats		self;
+      TimeStats         total;
+      TimeStats         self;
     };
 
     struct GraphTask
@@ -118,29 +121,29 @@ namespace misc
       // clear on init
       GraphTask ();
 
-      void add_times (TimeStamp&		_total,
-		      TimeStamp&		_self,
-		      TimeStamp&		_program,
-		      unsigned int		cnt);
+      void add_times (TimeStamp&                total,
+                      TimeStamp&                self,
+                      TimeStamp&                program,
+                      unsigned int              cnt);
 
-      void add_int_time (TimeStamp&		_self,
-			 unsigned int		cnt);
+      void add_int_time (TimeStamp&             self,
+                         unsigned int           cnt);
 
-      void compute_average (clock_t		program_cpu);
+      void compute_average (clock_t             program_cpu);
 
 
       // Ordering using CPU time.
       bool operator< (const GraphTask& task) const;
 
-      unsigned int	id;
-      std::string	name;
+      unsigned int      id;
+      std::string       name;
 
-      unsigned int	count;
-      unsigned int	recursive_count;
-      unsigned int	int_count;
+      unsigned int      count;
+      unsigned int      recursive_count;
+      unsigned int      int_count;
 
-      TimeStats		total;
-      TimeStats		self;
+      TimeStats         total;
+      TimeStats         self;
     };
 
     struct GraphComponent
@@ -148,49 +151,49 @@ namespace misc
       // clear on init
       GraphComponent ();
 
-      void add_member (GraphTask&		task);
+      void add_member (GraphTask&               task);
 
-      void add_call_inc (GraphCall&		call);
+      void add_call_inc (GraphCall&             call);
 
-      void add_call_out (GraphCall&		call);
+      void add_call_out (GraphCall&             call);
 
-      void add_call_internal (GraphCall&	call);
+      void add_call_internal (GraphCall&        call);
 
-      void compute_average (clock_t		program_cpu);
+      void compute_average (clock_t             program_cpu);
 
-      unsigned int	member_count;
-      std::list<int>	members;
+      unsigned int      member_count;
+      std::list<int>    members;
 
       std::list<GraphCall*> calls_in;
       std::list<GraphCall*> calls_out;
 
-      unsigned int	out_calls;
-      unsigned int	int_calls;
-      unsigned int	calls;
+      unsigned int      out_calls;
+      unsigned int      int_calls;
+      unsigned int      calls;
 
-      unsigned int	id;
+      unsigned int      id;
 
-      TimeStats		total;
-      TimeStats		self;
+      TimeStats         total;
+      TimeStats         self;
 
-      double		int_average;
+      double            int_average;
     };
 
     typedef boost::adjacency_list<boost::vecS, boost::vecS,
-				  boost::bidirectionalS,
-				  GraphTask,
-				  GraphCall> output_graph;
+                                  boost::bidirectionalS,
+                                  GraphTask,
+                                  GraphCall> output_graph;
 
     typedef std::pair<output_graph::vertex_iterator,
-		      output_graph::vertex_iterator> vertex_range;
+                      output_graph::vertex_iterator> vertex_range;
     typedef std::pair<output_graph::edge_iterator,
-		      output_graph::edge_iterator> edge_range;
+                      output_graph::edge_iterator> edge_range;
     typedef std::pair<output_graph::in_edge_iterator,
-		      output_graph::in_edge_iterator> in_edge_range;
+                      output_graph::in_edge_iterator> in_edge_range;
     typedef std::pair<output_graph::out_edge_iterator,
-		      output_graph::out_edge_iterator> out_edge_range;
+                      output_graph::out_edge_iterator> out_edge_range;
     typedef std::pair<output_graph::edge_iterator,
-		      output_graph::edge_iterator> edge_range;
+                      output_graph::edge_iterator> edge_range;
 
     typedef std::vector<int> component_id_vector;
     typedef std::vector<GraphComponent> component_vector;
@@ -198,44 +201,44 @@ namespace misc
     class VertexWriter
     {
     public:
-      VertexWriter (const Timer&	 timer,
-		    const verbose_degree vd,
-		    double               ccr);
+      VertexWriter (const Timer&         timer,
+                    const verbose_degree vd,
+                    double               ccr);
 
-      void operator() (std::ostream&                          out,
-		       const output_graph::vertex_descriptor& v) const;
+      void operator() (std::ostream& out,
+                       const output_graph::vertex_descriptor& v) const;
     private:
-      const output_graph&	 g_;
+      const output_graph&        g_;
       const component_vector&    c_;
       const component_id_vector& c_id_;
       verbose_degree             vd_;
       double                     chrg_col_ratio_;
-      clock_t			 tps_;
+      clock_t                    tps_;
     };
 
     class EdgeWriter
     {
     public:
       EdgeWriter (const Timer&         timer,
-		  const verbose_degree vd,
-		  double               ccr);
+                  const verbose_degree vd,
+                  double               ccr);
 
-      void operator() (std::ostream&                        out,
-		       const output_graph::edge_descriptor& e) const;
+      void operator() (std::ostream& out,
+                       const output_graph::edge_descriptor& e) const;
     private:
       const output_graph&        g_;
       const component_id_vector& c_id_;
       verbose_degree             vd_;
       double                     chrg_col_ratio_;
-      clock_t		         tps_;
+      clock_t                    tps_;
     };
 
     class GraphWriter
     {
     public:
       GraphWriter (const Timer&         timer,
-		   const verbose_degree vd,
-		   double               ccr);
+                   const verbose_degree vd,
+                   double               ccr);
 
       void operator() (std::ostream& out) const;
     private:
@@ -244,7 +247,7 @@ namespace misc
       const component_id_vector& c_id_; 
       verbose_degree             vd_;
       double                     chrg_col_ratio_;
-      clock_t			 tps_;
+      clock_t                    tps_;
     };
   } // namespace timer
 } // namespace misc
@@ -252,7 +255,7 @@ namespace misc
 NAMESPACE_VCSN_END
 
 // Include full definition of all classes.
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  include <vaucanson/misc/timer.hh>
 #  include <vaucanson/misc/timer_internal_graph.hh>
 #  include <vaucanson/misc/timer_internal_gathering.hh>
@@ -263,7 +266,7 @@ NAMESPACE_VCSN_END
 # endif
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  if defined VAUCANSON
+#  ifdef VAUCANSON
 #   include <vaucanson/misc/timer_internal_graph.hxx>
 #  else
 #   include "timer_internal_graph.hxx"

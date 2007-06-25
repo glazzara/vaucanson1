@@ -60,11 +60,20 @@
  *
  *      To obtain a detailed report of the results on std::cerr, use
  *      the command-line option --report-time (results are not printed
- *      otherwise).
+ *      otherwise). This option takes an optional int argument as the
+ *      verbose degree of the report (from 1 to 3, default 2)
+ *
+ *      To export the graph of the timing results in DOT format on
+ *      std::cerr, use the command-line option --export-time-dot.
+ *      This option takes an optional int argument as the
+ *      verbose degree of the graph (from 0 to 3, default 2)
+ *
+ *      To dump the timer in XML format on std::cerr, use the
+ *      command-line option --export-time-xml.
  *
  *      To benchmark several executions of the same set of tasks, use
  *      the command-line option --bench=X where X is the number of
- *      iterations.  A summary of the result is printed on std::cerr.
+ *      iterations.  A summary of the results is printed on std::cerr.
  *
  *
  *  How to use this timer outside Vaucanson:
@@ -75,7 +84,7 @@
  *        nested), insert a call to Timer.start ().
  *        This will initialize the timer, discarding any previous
  *        data.  The special task _program_ will be initialized here.
- *        This task compute the total time of the program: Do not
+ *        This task computes the total time of the program: Do not
  *        use it elsewhere.
  *
  *      - Declare and execute tasks.  The data gathering process is
@@ -102,7 +111,7 @@
  *              - Calls can be explicitely made to Timer.push (Task)
  *                and Timer.pop ().  Tasks may be nested, recursive,
  *                and may form cycles e.g. A -> B -> A.
- *                Only the last started task can be stopped.
+ *                Only the task started last can be stopped.
  *                Timer.pop (Task) fails if the Task is not the task
  *                on top of the timer's internal stack.
  *
@@ -130,7 +139,8 @@
  *          misc::timer::VERBOSE_NORMAL (Default)
  *          misc::timer::VERBOSE_MAXIMAL
  *
- *      * In this report, task names can be truncated to fit the layout.
+ *      * In this report, task names can be truncated to fit the
+ *        layout.  See the description of the report's fields below.
  *
  *      - Export the results in DOT format using Timer.export(Stream,
  *        VerboseDegree, ChargeColorRatio).  VerboseDegree is the same
@@ -147,11 +157,100 @@
  *        Timer.start ()).
  *
  *
- *  Note on performance: The data gathering process is generally
- *  non-obtrusive (timing one task by its id takes about 1 extra
- *  microsecond).
+ *
+ *  Note on performance:
+ *
+ *  The data gathering process is generally non-obtrusive
+ *  (timing one task by its id takes about 1 extra microsecond).
  *  However, for a large number of small tasks, using only full name
  *  lookup may impact the results.
+ *
+ *
+ *  Documentation for the standard report:
+ *
+ *  The report obtained using Timer.print () is 80 columns wide.
+ *  Task names are truncated to fit.  Times are reported in the most
+ *  accurate unit (among hours, minutes, seconds, and milliseconds),
+ *  except in the task list where the same unit is shared between all
+ *  tasks's total and self times.
+ *
+ *  Task list:
+ *    - charge: Percentage of the total program time the task has
+ *      taken by itself.
+ *    - total: Total time spent in the task and its children.  If the
+ *      task is part of a cycle (total time is irrelevant), the cycle
+ *      id is printed there.
+ *    - self: Time spent in the task itself.
+ *    - calls: Total number of calls to the task, including recursive
+ *      calls
+ *    - self avg.: Average time spent in the task itself per call.
+ *    - total avg.: Average time a call to the task takes to return.
+ *      If the task is part of a cycle (total time is irrelevant), the cycle
+ *      id is printed there.
+ *
+ *  Call graph (VERBOSE_NORMAL or higer):
+ *
+ *  Cycles:
+ *    - charge: percentage of the program time spent in the cycle/task.
+ *    - total: total time spent in the cycle and the external tasks it
+ *      called.
+ *    - self: time spend in the cycle/task itself.
+ *    - calls:e/i: (e) Calls to the cycle/task from outside the cycle.
+ *                 (i) Calls to the cycle/task from inside the cycle.
+ *    - int avg.: (cycle) Average time spent in a member per internal
+ *                        call.
+ *                (task) Average time spent in the task itself per call.
+ *    - self avg.: Average time spent in the cycle itself per call
+ *      from outside.
+ *    - total avg.: (cycle) Average time a call to the cycle from outside
+ *                          takes to return.
+ *                  (task) Task name is printed here.
+ *
+ *  Tasks:
+ *    This section lists each task, as well as its incoming and
+ *    outgoing calls.  Incoming calls are listed above the task (D:
+ *    <-), while outgoing calls are listed below (D: ->).
+ *
+ *    - Incoming calls:
+ *        - name: Name of the caller.
+ *        - charge: Percentage of the called task's charge caused by the
+ *          call.
+ *        - self: Part of the called task's self time caused by the call.
+ *        - calls: Number of calls from this caller.
+ *        - self avg.: Average time spend in the called task per call
+ *          from this caller.
+ *
+ *    - Task:
+ *      See Task list.
+ *
+ *    - Outgoing calls:
+ *        - name: Name of the called task.
+ *        - charge: Percentage of the called task's charge caused by
+ *          the call.
+ *        - self: Part of the called task's self time caused by the call.
+ *        - calls: Number of calls to this task.
+ *        - self avg.: Average time spend in the called task per call.
+ *
+ *    Note: Recursive calls are listed both in incoming and outgoing
+ *    calls.
+ *
+ *
+ *  Detailed tasks (VERBOSE_MAXIMAL):
+ *
+ *    Each task is listed here with its gathered data.
+ *
+ *    Self time refers to the time spent in the task itself.
+ *    Total time refers to the time spent in the task and its
+ *    children.
+ *
+ *    All times are in clock ticks.
+ *
+ *    User time is the time spent in user code.
+ *    System time is the time spent in system calls.
+ *    Cpu time is the total time the cpu spent in the program.  It is
+ *    the value used in the previous parts of the report.
+ *    Wall time is the reality time spent in the task, i.e. the time
+ *    observed by the user.
  */
 
 # include <stack>
@@ -166,7 +265,7 @@
 /* Disable this when outside Vaucanson */
 # define VAUCANSON 1
 
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
 #  include <vaucanson/misc/contract.hh>
@@ -250,7 +349,7 @@ namespace misc
     /// Write a summary of the results. The timer must have been stopped.
     /// \param o the output stream.
     /// \param vd determines the amount of information printed
-    std::ostream& print (std::ostream&         o,
+    std::ostream& print (std::ostream& o,
                          timer::verbose_degree vd = timer::VERBOSE_NORMAL)
       const;
 
@@ -268,7 +367,7 @@ namespace misc
     /// All the information gathered is printed and include a large
     /// amount of redundancy.
     /// The Timer must be stopped.
-    std::ostream& dump (std::ostream&         o) const;
+    std::ostream& dump (std::ostream& o) const;
 
 
     /// Start a sub-timer for a task using an unique string identifier
@@ -332,24 +431,20 @@ namespace misc
     | Timer: Internal structures.   |
     `------------------------------*/
 
-    /*// Internal Time representation
-    class timer::TimeStamp;
-
-    // Data collection classes
-    class timer::Task;
-    class timer::Call;
-    class timer::StackedCall;*/
-
     // Graph output writers
     friend class timer::GraphWriter;
     friend class timer::VertexWriter;
     friend class timer::EdgeWriter;
 
-    /*    // Graph contents
-    struct timer::GraphCall;
-    struct timer::GraphTask;
-    struct timer::GraphComponent;*/
+    // Time units for printing
+    typedef enum time_unit { TIME_DEFAULT, TIME_H,
+                             TIME_M, TIME_S,
+                             TIME_MS };
 
+    // Print time in given unit (time is in seconds)
+    std::ostream& print_time (std::ostream& o,
+                              double        time,
+                              time_unit     u = TIME_DEFAULT) const;
 
     // Add task vertices and call edges to the graph
     void build_output_graph ();
@@ -361,7 +456,7 @@ namespace misc
     // Compute component times in graph
     void compute_connected_components ();
 
-    void print_output_graph (std::ostream&         o,
+    void print_output_graph (std::ostream& o,
                              timer::verbose_degree vd = timer::VERBOSE_NORMAL)
       const;
 
@@ -388,7 +483,7 @@ namespace misc
 NAMESPACE_VCSN_END
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  if defined VAUCANSON
+#  ifdef VAUCANSON
 #   include <vaucanson/misc/timer.hxx>
 #   include <vaucanson/misc/timer_internal_gathering.cc>
 #   include <vaucanson/misc/timer_internal_graph.cc>

@@ -28,7 +28,7 @@
 
 # include <unistd.h>
 
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  include <vaucanson/misc/timer.hh>
 # else
 #  include "timer.hh"
@@ -39,7 +39,7 @@
 /// This file is also used in Tiger Compiler, where it is compiled in
 /// a C library, so INLINE_TIMER_CC should be defined to empty in that
 /// case.
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  define INLINE_TIMER_CC inline
 # else
 #  define INLINE_TIMER_CC
@@ -57,11 +57,11 @@ namespace misc
 
   INLINE_TIMER_CC
   Timer::Timer ()
-    : ticks_per_sec_  (sysconf (_SC_CLK_TCK)),
-      comp_count_     (0),
-      task_count_     (1),
-      is_running_     (false),
-      cleared_        (true)
+    : ticks_per_sec_ (sysconf (_SC_CLK_TCK)),
+      comp_count_    (0),
+      task_count_    (1),
+      is_running_    (false),
+      cleared_       (true)
   {
   }
 
@@ -148,22 +148,22 @@ namespace misc
   {
     if (is_running_)
       {
-	while (!calls_.empty ())
-	  pop();
+        while (!calls_.empty ())
+          pop();
 
-	time_.set_to_lap ();
+        time_.set_to_lap ();
 
-	task_count_ = tasks_.size ();
+        task_count_ = tasks_.size ();
 
-	build_output_graph ();
-	build_connected_components ();
+        build_output_graph ();
+        build_connected_components ();
 
-	compute_output_graph ();
-	compute_connected_components ();
+        compute_output_graph ();
+        compute_connected_components ();
 
-	tasks_.clear ();
-	names_.clear ();
-	time_.clear ();
+        tasks_.clear ();
+        names_.clear ();
+        time_.clear ();
       }
 
     is_running_ = false;
@@ -186,16 +186,16 @@ namespace misc
 
     if (iter == names_.end ())
       {
-	i = tasks_.size ();
-	tasks_.resize (i + 1);
+        i = tasks_.size ();
+        tasks_.resize (i + 1);
 
-	names_[name]    = i;
-	tasks_[i].name_ = name;
-	tasks_[i].id_   = i;
+        names_[name]    = i;
+        tasks_[i].name_ = name;
+        tasks_[i].id_   = i;
       }
     else
       {
-	i = iter->second;
+        i = iter->second;
       }
 
     _call.called_ = i;
@@ -210,19 +210,19 @@ namespace misc
 
     if (iter == names_.end ())
       {
-	unsigned int i;
+        unsigned int i;
 
-	i = tasks_.size ();
-	tasks_.resize (i + 1);
+        i = tasks_.size ();
+        tasks_.resize (i + 1);
 
-	names_[name]    = i;
-	tasks_[i].name_ = name;
-	tasks_[i].id_   = i;
-	return i;
+        names_[name]    = i;
+        tasks_[i].name_ = name;
+        tasks_[i].id_   = i;
+        return i;
       }
     else
       {
-	return iter->second;
+        return iter->second;
       }
   }
 
@@ -234,9 +234,9 @@ namespace misc
 
     if (i >= tasks_.size ())
       {
-	std::cerr << "Timer.push: Task id does not exist" << std::endl;
-	precondition (false);
-	return;
+        std::cerr << "Timer.push: Task id does not exist" << std::endl;
+        precondition (false);
+        return;
       }
 
     _call.called_ = i;
@@ -248,11 +248,11 @@ namespace misc
   Timer::pop (const std::string& task_name)
   {
     if (!(calls_.empty ()) &&
-	tasks_[(calls_.top ().called_)].name_ == task_name)
+        tasks_[(calls_.top ().called_)].name_ == task_name)
       {
-	std::cerr << "Timer.pop: Task on top has wrong name" << std::endl;
-	precondition (false);
-	return;
+        std::cerr << "Timer.pop: Task on top has wrong name" << std::endl;
+        precondition (false);
+        return;
       }
     pop ();
   }
@@ -262,11 +262,11 @@ namespace misc
   Timer::pop (const unsigned int i)
   {
     if (!(calls_.empty ()) &&
-	calls_.top ().called_ == i)
+        calls_.top ().called_ == i)
       {
-	std::cerr << "Timer.pop: Task on top has wrong id" << std::endl;
-	precondition (false);
-	return;
+        std::cerr << "Timer.pop: Task on top has wrong id" << std::endl;
+        precondition (false);
+        return;
       }
     pop();
   }
@@ -279,24 +279,24 @@ namespace misc
 
     if (!calls_.empty ())
       {
-	timer::StackedCall call = (calls_.top ());
-	calls_.pop ();
+        timer::StackedCall call = (calls_.top ());
+        calls_.pop ();
 
-	call.total_.set_to_lap ();
-	if (!calls_.empty ())
-	  {
-	    calls_.top ().children_ += call.total_;
-	    task = & (tasks_[calls_.top ().called_]);
-	  }
-	else
-	  task = & (tasks_[0]);
+        call.total_.set_to_lap ();
+        if (!calls_.empty ())
+          {
+            calls_.top ().children_ += call.total_;
+            task = & (tasks_[calls_.top ().called_]);
+          }
+        else
+          task = & (tasks_[0]);
 
-	(task->call (call.called_)).add (call);
+        (task->call (call.called_)).add (call);
       }
     else
       {
-	std::cout << "Timer.pop: Call stack empty" << std::endl;
-	precondition (false);
+        std::cout << "Timer.pop: Call stack empty" << std::endl;
+        precondition (false);
       }
   }
 
@@ -338,54 +338,54 @@ namespace misc
 
     if (this->cleared_)
       {
-	*this = rhs;
-	return *this;
+        *this = rhs;
+        return *this;
       }
 
-    clock_t	total_cpu = graph_[0].total.cpu + rhs.graph_[0].total.cpu;
+    clock_t total_cpu = graph_[0].total.cpu + rhs.graph_[0].total.cpu;
 
     for (vxrange = vertices (graph_), vx = vxrange.first,
-	   vxrange2 = vertices (rhs.graph_), vx2 = vxrange2.first;
-	 vx != vxrange.second && vx2 != vxrange2.second; ++vx, ++vx2)
+           vxrange2 = vertices (rhs.graph_), vx2 = vxrange2.first;
+         vx != vxrange.second && vx2 != vxrange2.second; ++vx, ++vx2)
       {
-	vd  = *vx;
-	vd2 = *vx2;
+        vd  = *vx;
+        vd2 = *vx2;
 
-	graph_[vd].total.wall   += rhs.graph_[vd2].total.wall;
-	graph_[vd].total.user   += rhs.graph_[vd2].total.user;
-	graph_[vd].total.system += rhs.graph_[vd2].total.system;
-	graph_[vd].total.cpu    += rhs.graph_[vd2].total.cpu;
+        graph_[vd].total.wall   += rhs.graph_[vd2].total.wall;
+        graph_[vd].total.user   += rhs.graph_[vd2].total.user;
+        graph_[vd].total.system += rhs.graph_[vd2].total.system;
+        graph_[vd].total.cpu    += rhs.graph_[vd2].total.cpu;
 
-	graph_[vd].self.wall    += rhs.graph_[vd2].self.wall;
-	graph_[vd].self.user    += rhs.graph_[vd2].self.user;
-	graph_[vd].self.system  += rhs.graph_[vd2].self.system;
-	graph_[vd].self.cpu     += rhs.graph_[vd2].self.cpu;
+        graph_[vd].self.wall    += rhs.graph_[vd2].self.wall;
+        graph_[vd].self.user    += rhs.graph_[vd2].self.user;
+        graph_[vd].self.system  += rhs.graph_[vd2].self.system;
+        graph_[vd].self.cpu     += rhs.graph_[vd2].self.cpu;
 
-	graph_[vd].count            += rhs.graph_[vd2].count;
-	graph_[vd].recursive_count  += rhs.graph_[vd2].recursive_count;
-	graph_[vd].int_count        += rhs.graph_[vd2].int_count;
+        graph_[vd].count            += rhs.graph_[vd2].count;
+        graph_[vd].recursive_count  += rhs.graph_[vd2].recursive_count;
+        graph_[vd].int_count        += rhs.graph_[vd2].int_count;
 
-	graph_[vd].compute_average (total_cpu);
+        graph_[vd].compute_average (total_cpu);
       }
 
     for (erange = edges (graph_), ei = erange.first,
-	   erange2 =  edges (rhs.graph_), ei2 = erange2.first;
-	 ei != erange.second && ei2 != erange2.second; ++ei, ++ei2)
+           erange2 =  edges (rhs.graph_), ei2 = erange2.first;
+         ei != erange.second && ei2 != erange2.second; ++ei, ++ei2)
       {
-	ed  = *ei;
-	ed2 = *ei2;
+        ed  = *ei;
+        ed2 = *ei2;
 
-	graph_[ed].total.wall   += rhs.graph_[ed2].total.wall;
-	graph_[ed].total.user   += rhs.graph_[ed2].total.user;
-	graph_[ed].total.system += rhs.graph_[ed2].total.system;
-	graph_[ed].total.cpu    += rhs.graph_[ed2].total.cpu;
+        graph_[ed].total.wall   += rhs.graph_[ed2].total.wall;
+        graph_[ed].total.user   += rhs.graph_[ed2].total.user;
+        graph_[ed].total.system += rhs.graph_[ed2].total.system;
+        graph_[ed].total.cpu    += rhs.graph_[ed2].total.cpu;
 
-	graph_[ed].self.wall    += rhs.graph_[ed2].self.wall;
-	graph_[ed].self.user    += rhs.graph_[ed2].self.user;
-	graph_[ed].self.system  += rhs.graph_[ed2].self.system;
-	graph_[ed].self.cpu     += rhs.graph_[ed2].self.cpu;
+        graph_[ed].self.wall    += rhs.graph_[ed2].self.wall;
+        graph_[ed].self.user    += rhs.graph_[ed2].self.user;
+        graph_[ed].self.system  += rhs.graph_[ed2].self.system;
+        graph_[ed].self.cpu     += rhs.graph_[ed2].self.cpu;
 
-	graph_[ed].compute_average (total_cpu);
+        graph_[ed].compute_average (total_cpu);
       }
     
     return *this;
@@ -415,48 +415,48 @@ namespace misc
     timer::vertex_range vxrange;
     timer::edge_range   erange;
 
-    clock_t	 total_cpu = graph_[0].total.cpu / rhs;
+    clock_t      total_cpu = graph_[0].total.cpu / rhs;
 
     for (vxrange = vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+         vx != vxrange.second; ++vx)
       {
-	vd = *vx;
+        vd = *vx;
 
-	graph_[vd].total.wall   /= rhs;
-	graph_[vd].total.user   /= rhs;
-	graph_[vd].total.system /= rhs;
-	graph_[vd].total.cpu    /= rhs;
+        graph_[vd].total.wall   /= rhs;
+        graph_[vd].total.user   /= rhs;
+        graph_[vd].total.system /= rhs;
+        graph_[vd].total.cpu    /= rhs;
 
-	graph_[vd].self.wall    /= rhs;
-	graph_[vd].self.user    /= rhs;
-	graph_[vd].self.system  /= rhs;
-	graph_[vd].self.cpu     /= rhs;
+        graph_[vd].self.wall    /= rhs;
+        graph_[vd].self.user    /= rhs;
+        graph_[vd].self.system  /= rhs;
+        graph_[vd].self.cpu     /= rhs;
 
-	graph_[vd].count	        /= rhs;
-	graph_[vd].recursive_count	/= rhs;
-	graph_[vd].int_count		/= rhs;
+        graph_[vd].count                /= rhs;
+        graph_[vd].recursive_count      /= rhs;
+        graph_[vd].int_count            /= rhs;
 
-	graph_[vd].compute_average (total_cpu);
+        graph_[vd].compute_average (total_cpu);
       }
 
     for (erange = edges (graph_), ei = erange.first;
-	 ei != erange.second; ++ei)
+         ei != erange.second; ++ei)
       {
-	ed = *ei;
+        ed = *ei;
 
-	graph_[ed].total.wall   /= rhs;
-	graph_[ed].total.user   /= rhs;
-	graph_[ed].total.system /= rhs;
-	graph_[ed].total.cpu    /= rhs;
+        graph_[ed].total.wall   /= rhs;
+        graph_[ed].total.user   /= rhs;
+        graph_[ed].total.system /= rhs;
+        graph_[ed].total.cpu    /= rhs;
 
-	graph_[ed].self.wall    /= rhs;
-	graph_[ed].self.user    /= rhs;
-	graph_[ed].self.system  /= rhs;
-	graph_[ed].self.cpu     /= rhs;
+        graph_[ed].self.wall    /= rhs;
+        graph_[ed].self.user    /= rhs;
+        graph_[ed].self.system  /= rhs;
+        graph_[ed].self.cpu     /= rhs;
 
-	graph_[ed].count        /= rhs;
+        graph_[ed].count        /= rhs;
 
-	graph_[ed].compute_average (total_cpu);
+        graph_[ed].compute_average (total_cpu);
       }
     
     return *this;
@@ -471,8 +471,8 @@ namespace misc
   void
   Timer::compute_output_graph ()
   {
-    timer::Task*	task = 0;
-    timer::Call*	call = 0;
+    timer::Task*        task = 0;
+    timer::Call*        call = 0;
 
     timer::output_graph::vertex_iterator   vx;
     timer::output_graph::vertex_iterator   vx2;
@@ -484,43 +484,43 @@ namespace misc
     timer::out_edge_range oerange;
 
     for (vxrange = vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+         vx != vxrange.second; ++vx)
       {
-	task = & (tasks_[graph_[*vx].id]);
-	for (oerange = out_edges (*vx, graph_), oe = oerange.first;
-	     oe != oerange.second; ++oe)
-	  {
-	    ed   = *oe;
-	    call = & (task->call (graph_[ed].to));
+        task = & (tasks_[graph_[*vx].id]);
+        for (oerange = out_edges (*vx, graph_), oe = oerange.first;
+             oe != oerange.second; ++oe)
+          {
+            ed   = *oe;
+            call = & (task->call (graph_[ed].to));
 
-	    graph_[ed].add_times (call->total_, call->self_,
-				  time_, call->count_);
+            graph_[ed].add_times (call->total_, call->self_,
+                                  time_, call->count_);
 
-	    vx2 = (target (ed, graph_));
-	    vd  = *vx2;
+            vx2 = (target (ed, graph_));
+            vd  = *vx2;
 
-	    if (comp_id_[graph_[ed].to] == comp_id_[graph_[ed].from])
-	      {
-		graph_[vd].add_int_time (call->self_, call->count_);
+            if (comp_id_[graph_[ed].to] == comp_id_[graph_[ed].from])
+              {
+                graph_[vd].add_int_time (call->self_, call->count_);
 
-		if (graph_[ed].to == graph_[ed].from)
-		  {
-		    graph_[vd].recursive_count += call->count_;
-		    graph_[vd].int_count -= call->count_;
-		  }
-	      }
-	    else
-	      graph_[vd].add_times (call->total_, call->self_,
-				    time_, call->count_);
-	  }
+                if (graph_[ed].to == graph_[ed].from)
+                  {
+                    graph_[vd].recursive_count += call->count_;
+                    graph_[vd].int_count -= call->count_;
+                  }
+              }
+            else
+              graph_[vd].add_times (call->total_, call->self_,
+                                    time_, call->count_);
+          }
       }
 
     graph_[0].add_times (time_, time_, time_, 1);
 
     for (vxrange = vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+         vx != vxrange.second; ++vx)
       {
-	graph_[*vx].compute_average (time_.sys_ + time_.user_);
+        graph_[*vx].compute_average (time_.sys_ + time_.user_);
       }
 
   }
@@ -534,37 +534,37 @@ namespace misc
 
     for (unsigned int i = 0; i < num_vertices (graph_); ++i)
       {
-	timer::output_graph::in_edge_iterator  ie;
-	timer::output_graph::out_edge_iterator oe;
-	timer::in_edge_range                   ierange;
-	timer::out_edge_range                  oerange;
+        timer::output_graph::in_edge_iterator  ie;
+        timer::output_graph::out_edge_iterator oe;
+        timer::in_edge_range                   ierange;
+        timer::out_edge_range                  oerange;
 
-	comp_[comp_id_[i]].add_member (graph_[boost::vertex (i, graph_)]);
+        comp_[comp_id_[i]].add_member (graph_[boost::vertex (i, graph_)]);
 
-	for (ierange = in_edges (boost::vertex (i, graph_), graph_),
-	       ie = ierange.first;
-	     ie != ierange.second; ++ie)
-	  {
-	    if (comp_id_[graph_[*ie].from] == comp_id_[i])
-	      comp_[comp_id_[i]].add_call_internal (graph_[*ie]);
-	    else
-	      comp_[comp_id_[i]].add_call_inc (graph_[*ie]);
-	  }
+        for (ierange = in_edges (boost::vertex (i, graph_), graph_),
+               ie = ierange.first;
+             ie != ierange.second; ++ie)
+          {
+            if (comp_id_[graph_[*ie].from] == comp_id_[i])
+              comp_[comp_id_[i]].add_call_internal (graph_[*ie]);
+            else
+              comp_[comp_id_[i]].add_call_inc (graph_[*ie]);
+          }
 
-	for (oerange = out_edges(boost::vertex (i, graph_), graph_),
-	       oe = oerange.first;
-	     oe != oerange.second; ++oe)
-	  {
-	    if (comp_id_[graph_[*oe].to] != comp_id_[i])
-	      comp_[comp_id_[i]].add_call_out (graph_[*oe]);
-	  }
+        for (oerange = out_edges(boost::vertex (i, graph_), graph_),
+               oe = oerange.first;
+             oe != oerange.second; ++oe)
+          {
+            if (comp_id_[graph_[*oe].to] != comp_id_[i])
+              comp_[comp_id_[i]].add_call_out (graph_[*oe]);
+          }
 
-	comp_[comp_id_[i]].compute_average (graph_[0].total.cpu);
+        comp_[comp_id_[i]].compute_average (graph_[0].total.cpu);
       }
 
     for (unsigned int i = 0; i < comp_count_; ++i)
       {
-	comp_[i].id = i;
+        comp_[i].id = i;
       }
   }
 
@@ -573,39 +573,39 @@ namespace misc
   void
   Timer::build_output_graph ()
   {
-    timer::Task*	task = 0;
-    timer::Call*	call = 0;
+    timer::Task*        task = 0;
+    timer::Call*        call = 0;
 
-    timer::output_graph::vertex_iterator	vx;
-    timer::output_graph::edge_descriptor	ed;
+    timer::output_graph::vertex_iterator        vx;
+    timer::output_graph::edge_descriptor        ed;
 
     timer::vertex_range vxrange;
 
     for (timer::task_vector::iterator task_ = tasks_.begin();
-	 task_ != tasks_.end (); ++task_)
+         task_ != tasks_.end (); ++task_)
       {
-	task = & (*task_);
-	vx   = add_vertex (graph_);
+        task = & (*task_);
+        vx   = add_vertex (graph_);
 
-	graph_[*vx].name = task->name_;
-	graph_[*vx].id   = task->id_;
+        graph_[*vx].name = task->name_;
+        graph_[*vx].id   = task->id_;
       }
 
     for (timer::task_vector::iterator task_ = tasks_.begin ();
-	 task_ != tasks_.end (); ++task_)
+         task_ != tasks_.end (); ++task_)
       {
-	task = & (*task_);
-	for (timer::call_map::iterator call_ = task->calls_.begin ();
-	     call_ != task->calls_.end (); ++call_)
-	  {
-	    call = & (call_->second);
-	    ed   = (add_edge (vertex ((*task_).id_, graph_),
-			      vertex (call_->first, graph_),
-			      graph_)).first;
+        task = & (*task_);
+        for (timer::call_map::iterator call_ = task->calls_.begin ();
+             call_ != task->calls_.end (); ++call_)
+          {
+            call = & (call_->second);
+            ed   = (add_edge (vertex ((*task_).id_, graph_),
+                              vertex (call_->first, graph_),
+                              graph_)).first;
 
-	    graph_[ed].to   = call_->first;
-	    graph_[ed].from = (*task_).id_;
-	  }
+            graph_[ed].to   = call_->first;
+            graph_[ed].from = (*task_).id_;
+          }
       }
 
   }
@@ -620,10 +620,10 @@ namespace misc
   Timer::dump (std::ostream&         o) const
   {
     timer::output_graph::vertex_iterator   vx;
-    timer::output_graph::edge_iterator	   ed;
+    timer::output_graph::edge_iterator     ed;
 
     timer::vertex_range   vxrange;
-    timer::edge_range	  edrange;
+    timer::edge_range     edrange;
 
 
     o << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -637,26 +637,26 @@ namespace misc
       << "  <taskList>\n";
 
     for (vxrange =  vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+         vx != vxrange.second; ++vx)
       {
-	const timer::GraphTask& task = (graph_[*vx]);
+        const timer::GraphTask& task = (graph_[*vx]);
 
-	o << "    <task\n"
-	  << "      id=\""             << task.id              << "\"\n"
-	  << "      name=\""           << task.name            << "\"\n"
-	  << "      calls=\""          << task.count           << "\"\n"
-	  << "      recursiveCalls=\"" << task.recursive_count << "\"\n"
-	  << "      cycleCalls=\""     << task.int_count       << "\"\n"
-	  << "      component=\""      << comp_id_[task.id]    << "\"\n"
-	  << "    >\n";
+        o << "    <task\n"
+          << "      id=\""             << task.id              << "\"\n"
+          << "      name=\""           << task.name            << "\"\n"
+          << "      calls=\""          << task.count           << "\"\n"
+          << "      recursiveCalls=\"" << task.recursive_count << "\"\n"
+          << "      cycleCalls=\""     << task.int_count       << "\"\n"
+          << "      component=\""      << comp_id_[task.id]    << "\"\n"
+          << "    >\n";
 
-	o << "      ";
-	task.total.dump (o, "total");
+        o << "      ";
+        task.total.dump (o, "total");
 
-	o << "\n      ";
-	task.self.dump (o, "self");
-	
-	o << "\n    </task>\n";
+        o << "\n      ";
+        task.self.dump (o, "self");
+        
+        o << "\n    </task>\n";
       }
 
     o << "  </taskList>" << std::endl;
@@ -665,23 +665,23 @@ namespace misc
     o << "  <callList>\n";
 
     for (edrange = edges (graph_), ed = edrange.first;
-	 ed != edrange.second; ++ed)
+         ed != edrange.second; ++ed)
       {
-	const timer::GraphCall& call   = graph_[*ed];
+        const timer::GraphCall& call   = graph_[*ed];
 
-	o << "    <call\n"
-	  << "      source=\""   << call.from  << "\"\n"
-	  << "      target=\""   << call.to    << "\"\n"
-	  << "      count=\""    << call.count << "\"\n"
-	  << "    >\n";
+        o << "    <call\n"
+          << "      source=\""   << call.from  << "\"\n"
+          << "      target=\""   << call.to    << "\"\n"
+          << "      count=\""    << call.count << "\"\n"
+          << "    >\n";
 
-	o << "      ";
-	call.total.dump (o, "total");
+        o << "      ";
+        call.total.dump (o, "total");
 
-	o << "\n      ";
-	call.self.dump (o, "self");
+        o << "\n      ";
+        call.self.dump (o, "self");
 
-	o << "\n    </call>\n";
+        o << "\n    </call>\n";
       }
 
     o << "  </callList>" << std::endl;
@@ -690,28 +690,28 @@ namespace misc
 
     for (unsigned int c = 0; c < comp_count_; ++c)
       {
-	o << "    <component id=\""      << c                     << "\"\n"
-	  << "      memberCount=\""      << comp_[c].member_count << "\"\n"
-	  << "      inboundCalls=\""     << comp_[c].calls        << "\"\n"
-	  << "      outgoingCalls=\""    << comp_[c].out_calls    << "\"\n"
-	  << "      internalCalls=\""    << comp_[c].int_calls    << "\"\n"
-	  << "      internalAverage=\""  << comp_[c].int_average  << "\"\n"
-	  << "    >\n";
+        o << "    <component id=\""      << c                     << "\"\n"
+          << "      memberCount=\""      << comp_[c].member_count << "\"\n"
+          << "      inboundCalls=\""     << comp_[c].calls        << "\"\n"
+          << "      outgoingCalls=\""    << comp_[c].out_calls    << "\"\n"
+          << "      internalCalls=\""    << comp_[c].int_calls    << "\"\n"
+          << "      internalAverage=\""  << comp_[c].int_average  << "\"\n"
+          << "    >\n";
 
-	o << "      ";
-	comp_[c].total.dump (o, "total");
+        o << "      ";
+        comp_[c].total.dump (o, "total");
 
-	o << "\n      ";
-	comp_[c].self.dump (o, "self");
-	o << "\n";
+        o << "\n      ";
+        comp_[c].self.dump (o, "self");
+        o << "\n";
 
-	for (std::list<int>::const_iterator li = comp_[c].members.begin ();
-	     li != comp_[c].members.end (); ++li)
-	  {
-	    o << "      <member id=\"" << *li << "\" />\n";
-	  }
+        for (std::list<int>::const_iterator li = comp_[c].members.begin ();
+             li != comp_[c].members.end (); ++li)
+          {
+            o << "      <member id=\"" << *li << "\" />\n";
+          }
 
-	o << "    </component>\n";
+        o << "    </component>\n";
 
       }
 
@@ -723,9 +723,42 @@ namespace misc
   }
 
   INLINE_TIMER_CC
+  std::ostream&
+  Timer::print_time (std::ostream& o,
+                     double        time,
+                     time_unit     u) const
+  {
+    switch (u)
+      {
+      case TIME_DEFAULT:
+        if (time < 0.200)
+          return o << time * 1000 << "ms";
+        if (time < 300)
+          return o << time << "s ";
+        time /= 60;
+        if (time < 60)
+          return o << time << "m ";
+        time /= 60;
+        return o << time << "h ";
+        break;
+      case TIME_H:
+        return o << time / 3600 << "h ";
+        break;
+      case TIME_M:
+        return o << time / 60 << "m ";
+        break;
+      case TIME_S:
+        return o << time << "s ";
+        break;
+      default:
+        return o << time * 1000 << "ms";
+      }
+  }
+
+  INLINE_TIMER_CC
   void
   Timer::print_output_graph (std::ostream&         o,
-			     timer::verbose_degree vd) const
+                             timer::verbose_degree vd) const
   {
     timer::output_graph::vertex_iterator   vx;
     timer::output_graph::in_edge_iterator  ie;
@@ -737,52 +770,68 @@ namespace misc
 
     std::list<timer::GraphTask> gtlist;
 
-    o << "[Task list:]\n\n"
-      << "Charge  id:        <name>          total"
-      "    self    calls   self avg. total avg.\n";
+    time_unit time_unit =
+      int(graph_[0].self.cpu) < 0.2 * int(task_count_ * ticks_per_sec_)
+      ? TIME_MS :
+      int(graph_[0].self.cpu) < 120 * int(task_count_ * ticks_per_sec_)
+      ? TIME_S :
+      int(graph_[0].self.cpu) < 7200 * int(task_count_ * ticks_per_sec_)
+      ? TIME_M :
+      TIME_H;
 
-    for (vxrange =  vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+    o << "[Task list:]\n\n"
+      << "Charge  id:        <name>        total"
+      "     self     calls   self avg. total avg.\n";
+
+    for (vxrange = vertices (graph_), vx = vxrange.first;
+         vx != vxrange.second; ++vx)
       {
-	gtlist.push_front (graph_[*vx]);
+        gtlist.push_front (graph_[*vx]);
       }
 
     gtlist.sort ();
 
     for (std::list<timer::GraphTask>::iterator li = gtlist.begin ();
-	 li != gtlist.end (); ++li)
+         li != gtlist.end (); ++li)
       {
-	o << std::setiosflags (std::ios::fixed)
-	  << std::setw (5) << std::setprecision (1)
-	  << li->self.charge << "% "
-	  << std::setw (3) <<  li->id << ":"
-	  << std::setw (18) << li->name.substr (0, 18) << "   ";
+        o << std::setiosflags (std::ios::fixed)
+          << std::setw (5) << std::setprecision (1)
+          << li->self.charge << "% "
+          << std::setw (3) <<  li->id << ":"
+          << std::setw (18) << li->name.substr (0, 18) << " ";
 
-	if (comp_[comp_id_[li->id]].member_count > 1)
-	  o << " (C:" << std::setw (3) << comp_id_[li->id] << ")";
-	else
-	  o << std::setprecision (2) << std::setw (7)
-	    << double (li->total.cpu) / ticks_per_sec_ << "s";
+        if (comp_[comp_id_[li->id]].member_count > 1)
+          o << " (C:" << std::setw (3) << comp_id_[li->id] << ") ";
+        else
+          {
+            o << std::setprecision (2) << std::setw (7);
+            print_time (o, double (li->total.cpu) / ticks_per_sec_, time_unit);
+          }
 
-	o << std::setprecision (2) << std::setw (7)
-	  << double (li->self.cpu) / ticks_per_sec_ << "s";
+        o << std::setprecision (2) << std::setw (7);
+        print_time (o, double (li->self.cpu) / ticks_per_sec_, time_unit);
 
-	o << std::resetiosflags(std::ios::fixed);
+        o << std::resetiosflags (std::ios::fixed);
 
-	o << std::setprecision (7) << std::setw (9)
-	  << li->count + li->recursive_count + li->int_count << " ";
+        o << std::setprecision (7) << std::setw (9)
+          << li->count + li->recursive_count + li->int_count << " ";
 
-	o << std::setprecision (5) << std::setw (9)
-	  << double (int (li->self.average * 1000)) / ticks_per_sec_ << "ms";
+        o << std::setiosflags (std::ios::fixed);
 
-	if (comp_[comp_id_[li->id]].member_count > 1)
-	  o << "    (C:" << std::setw (3) << comp_id_[li->id] << ")";
-	else
-	  o << std::setprecision (5) << std::setw (9)
-	    << double (int (li->total.average * 1000)) / ticks_per_sec_
-	    << "ms";
+        o << std::setprecision (2) << std::setw (9);
+        print_time (o, double (li->self.average) / ticks_per_sec_);
 
-	o << "\n";
+        if (comp_[comp_id_[li->id]].member_count > 1)
+          o << "    (C:" << std::setw (3) << comp_id_[li->id] << ")";
+        else
+          {
+            o << std::setprecision (2) << std::setw (9);
+            print_time (o, double (li->total.average) / ticks_per_sec_);
+          }
+
+        o << std::resetiosflags (std::ios::fixed);
+
+        o << "\n";
 
       }
 
@@ -795,186 +844,222 @@ namespace misc
     o << "[Call graph:]\n\n\n";
 
     o << "Cycles:\n"
-      << "<cycle>  charge    total     self  calls:e/i    int avg."
+      << "<cycle>  charge   total     self   calls:e/i    int avg."
          "   self avg.  total avg.\n";
 
 
     for (unsigned int c = 0; c < comp_count_; ++c)
       {
-	if (comp_[c].member_count > 1)
-	  {
-	    o << ".................................."
+        if (comp_[c].member_count > 1)
+          {
+            o << ".................................."
                  "..............................................\n";
 
-	    o << "(C:" << std::setw (3) << comp_[c].id << ")"
-	      << "  " << std::setw (5) << std::setprecision (3)
-	      << comp_[c].self.charge << "%"
-	      << std::setprecision (3) << std::setw (8)
-	      << double (comp_[c].total.cpu) / ticks_per_sec_ << "s";
+            o << "(C:" << std::setw (3) << comp_[c].id << ")";
 
-	    o << std::setprecision (3) << std::setw (8)
-	      << double (comp_[c].self.cpu) / ticks_per_sec_ << "s";
+            o << std::setiosflags (std::ios::fixed);
 
-	    o << std::setw (5) << comp_[c].calls << "/";
-	    o << std::setw (5) << comp_[c].int_calls << "";
+            o << "  " << std::setw (5) << std::setprecision (1)
+              << comp_[c].self.charge << "%";
 
-	    o << std::setprecision (4) << std::setw (10)
-	      << double (int (comp_[c].int_average * 1000))
-	      / ticks_per_sec_ << "ms";
+            o << std::setprecision (2) << std::setw (7);
+            print_time (o, double (comp_[c].total.cpu) / ticks_per_sec_);
 
-	    o << std::setprecision (4) << std::setw (10)
-	      << double (int (comp_[c].self.average * 1000))
-	      / ticks_per_sec_ << "ms";
+            o << std::setprecision (2) << std::setw (7);
+            print_time (o, double (comp_[c].self.cpu) / ticks_per_sec_);
 
-	    o << std::setprecision (4) << std::setw (10)
-	      << double (int (comp_[c].total.average * 1000))
-	      / ticks_per_sec_ << "ms";
+            o << std::resetiosflags (std::ios::fixed);
 
-	    o << std::endl << std::endl;
+            o << std::setw (5) << comp_[c].calls << "/";
+            o << std::setw (5) << comp_[c].int_calls << "";
 
-	    for (std::list<int>::const_iterator li = comp_[c].members.begin ();
-		 li != comp_[c].members.end (); ++li)
-	      {
-		const timer::GraphTask& task = (graph_[vertex (*li, graph_)]);
-		o << std::setw (6) << task.id << ":  "
-		  << std::setw (5) << std::setprecision (3)
-		  << task.self.charge * 100 / comp_[c].self.charge << "%";
+            o << std::setiosflags (std::ios::fixed);
 
-		o << "         ";
+            o << std::setprecision (2) << std::setw (10);
+            print_time (o, double (comp_[c].int_average) / ticks_per_sec_);
 
-		o << std::setprecision (3) << std::setw (8)
-		  << double (task.self.cpu) / ticks_per_sec_ << "s";
+            o << std::setprecision (2) << std::setw (10);
+            print_time (o, double (comp_[c].self.average) / ticks_per_sec_);
 
-		o << std::setw (5) << task.count << "/";
-		o << std::setw (5)
-		  << task.int_count + task.recursive_count << "";
+            o << std::setprecision (2) << std::setw (10);
+            print_time (o, double (comp_[c].total.average) / ticks_per_sec_);
 
-		o << std::setprecision (4) << std::setw (10)
-		  << double (int (task.self.average * 1000))
-		  / ticks_per_sec_ << "ms";
+            o << std::resetiosflags (std::ios::fixed);
 
-		o << std::setw (24) << task.name.substr(0, 24);
+            o << std::endl << std::endl;
 
-		o << std::endl;
-	      }
-	  }
+            for (std::list<int>::const_iterator li = comp_[c].members.begin ();
+                 li != comp_[c].members.end (); ++li)
+              {
+                const timer::GraphTask& task = (graph_[vertex (*li, graph_)]);
+                o << std::setw (6) << task.id << ":  ";
+
+                o << std::setiosflags (std::ios::fixed);
+
+                o << std::setw (5) << std::setprecision (1)
+                  << task.self.charge * 100 / comp_[c].self.charge << "%";
+
+                o << "         ";
+
+                o << std::setprecision (2) << std::setw (7);
+                print_time (o, double (task.self.cpu) / ticks_per_sec_);
+
+                o << std::resetiosflags (std::ios::fixed);
+
+                o << std::setw (5) << task.count << "/";
+                o << std::setw (5)
+                  << task.int_count + task.recursive_count << "";
+
+                o << std::setiosflags (std::ios::fixed);
+
+                o << std::setprecision (2) << std::setw (10);
+                print_time (o, double (task.self.average) / ticks_per_sec_);
+
+                o << std::resetiosflags (std::ios::fixed);
+
+                o << std::setw (24) << task.name.substr(0, 24);
+
+                o << std::endl;
+              }
+          }
       }
 
     o << "__________________________________"
          "______________________________________________\n\n\n";
  
     o << "Tasks:\n"
-      << "D  id:        <name>   charge    total    self calls(rec.)"
+      << "D  id:        <name>   charge   total    self        calls"
          "  self avg. total avg.\n";
 
     for (vxrange =  vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+         vx != vxrange.second; ++vx)
       {
-	o << ".................................."
+        o << ".................................."
              "..............................................\n";
 
-	o << "[" << graph_[*vx].id << "] " << graph_[*vx].name
-	  << std::endl << std::endl;
-	
-	for (ierange = in_edges (*vx, graph_), ie = ierange.first;
-	     ie != ierange.second; ++ie)
-	  {
-	    const timer::GraphTask& task = (graph_[source (*ie, graph_)]);
-	    const timer::GraphCall& call = graph_[*ie];
+        o << "[" << graph_[*vx].id << "] " << graph_[*vx].name
+          << std::endl << std::endl;
+        
+        for (ierange = in_edges (*vx, graph_), ie = ierange.first;
+             ie != ierange.second; ++ie)
+          {
+            const timer::GraphTask& task = (graph_[source (*ie, graph_)]);
+            const timer::GraphCall& call = graph_[*ie];
 
-	    o << "<-" << std::setw (3)
-	      << task.id << ":";
+            o << "<-" << std::setw (3)
+              << task.id << ":";
 
-	    o << std::setw (16) << task.name.substr (0, 16);
+            o << std::setw (16) << task.name.substr (0, 16);
 
-	    o << std::setprecision (3) << std::setw (6)
-	      << call.self.charge * 100 / graph_[*vx].self.charge << "% ";
+            o << std::setiosflags (std::ios::fixed);
 
-	    o << "        ";
+            o << std::setprecision (1) << std::setw (6)
+              << (graph_[*vx].self.charge == 0 ? 100 :
+                  call.self.charge * 100 / graph_[*vx].self.charge)
+              << "% ";
 
-	    o << std::setprecision (3) << std::setw (7)
-	      << double (call.self.cpu) / ticks_per_sec_ << "s";
+            o << "        ";
 
-	    o << std::setw (6)
-	      << call.count << "      ";
+            o << std::setprecision (2) << std::setw (6);
+            print_time (o, double (call.self.cpu) / ticks_per_sec_);
 
-	    o << std::setprecision (5) << std::setw (9)
-	      << double (int (call.self.average * 1000))
-	      / ticks_per_sec_ << "ms";
+            o << std::setw (12)
+              << call.count;
 
-	    o << std::endl;
-	  }
-	o << std::endl;
+            o << std::setprecision (2) << std::setw (9);
+            print_time (o, double (call.self.average) / ticks_per_sec_);
 
-	const timer::GraphTask& task = (graph_[*vx]);
+            o << std::resetiosflags (std::ios::fixed);
 
-	o << "  " << std::setw (3)
-	  << task.id << ":";
+            o << std::endl;
+          }
+        o << std::endl;
 
-	o << std::setw (16) << task.name.substr (0, 16);
+        const timer::GraphTask& task = (graph_[*vx]);
 
-	o << std::setprecision (3) << std::setw (6)
-	  << task.self.charge << "% ";
+        o << "  " << std::setw (3)
+          << task.id << ":";
 
-	if (comp_[comp_id_[task.id]].member_count > 1)
-	  o << " (C:" << std::setw (3)
-	    << comp_id_[task.id] << ")";
-	else
-	  o << std::setprecision (3) << std::setw (7)
-	    << double (task.total.cpu) / ticks_per_sec_ << "s";
+        o << std::setw (16) << task.name.substr (0, 16);
 
-	o << std::setprecision (3) << std::setw (7)
-	  << double (task.self.cpu) / ticks_per_sec_ << "s";
+        o << std::setiosflags (std::ios::fixed);
 
-	o << std::setw (6)
-	  << task.count + task.int_count << "("
-	  << std::setw (4)
-	  << task.recursive_count << ")";
+        o << std::setprecision (1) << std::setw (6)
+          << task.self.charge << "% ";
 
-	o << std::setprecision (5) << std::setw (9)
-	  << double (int (task.self.average * 1000))
-	  / ticks_per_sec_ << "ms";
+        if (comp_[comp_id_[task.id]].member_count > 1)
+          o << "(C:" << std::setw (3)
+            << comp_id_[task.id] << ") ";
+        else
+          {
+            o << std::setprecision (2) << std::setw (6);
+            print_time (o, double (task.total.cpu) / ticks_per_sec_);
+          }
 
-	if (comp_[comp_id_[task.id]].member_count > 1)
-	  o << "    (C:" << std::setw (3)
-	    << comp_id_[task.id] << ")";
-	else
-	  o << std::setprecision (5) << std::setw (9)
-	    << double (int (task.total.average * 1000))
-	    / ticks_per_sec_
-	    << "ms";
+        o << std::setprecision (2) << std::setw (6);
+        print_time (o, double (task.self.cpu) / ticks_per_sec_);
 
-	o << std::endl << std::endl;
+        o << std::resetiosflags (std::ios::fixed);
+
+        o << std::setw (12)
+          << task.count + task.int_count + task.recursive_count;
+
+        o << std::setiosflags (std::ios::fixed);
+
+        o << std::setprecision (2) << std::setw (9);
+        print_time (o, double (task.self.average) / ticks_per_sec_);
+
+        if (comp_[comp_id_[task.id]].member_count > 1)
+          o << "   (C:" << std::setw (3)
+            << comp_id_[task.id] << ") ";
+        else
+          {
+            o << std::setprecision (2) << std::setw (9);
+            print_time (o, double (task.total.average) / ticks_per_sec_);
+          }
+
+        o << std::resetiosflags (std::ios::fixed);
+
+        o << std::endl << std::endl;
 
 
-	for (oerange = out_edges (*vx, graph_), oe = oerange.first;
-	     oe != oerange.second; ++oe)
-	  {
-	    const timer::GraphTask& task = (graph_[target (*oe, graph_)]);
-	    const timer::GraphCall& call = graph_[*oe];
+        for (oerange = out_edges (*vx, graph_), oe = oerange.first;
+             oe != oerange.second; ++oe)
+          {
+            const timer::GraphTask& task = (graph_[target (*oe, graph_)]);
+            const timer::GraphCall& call = graph_[*oe];
 
-	    o << "->" << std::setw (3)
-	      << task.id << ":";
+            o << "->" << std::setw (3)
+              << task.id << ":";
 
-	    o << std::setw (16) << task.name.substr (0, 16);
+            o << std::setw (16) << task.name.substr (0, 16);
 
-	    o << std::setprecision (3) << std::setw (6)
-	      << call.self.charge * 100 / task.self.charge << "% ";
+            o << std::setiosflags (std::ios::fixed);
 
-	    o << "        ";
+            o << std::setprecision (1) << std::setw (6)
+              << (task.self.charge == 0 ? 100 :
+                  call.self.charge * 100 / task.self.charge)
+              << "% ";
 
-	    o << std::setprecision (3) << std::setw (7)
-	      << double (call.self.cpu) / ticks_per_sec_ << "s";
+            o << "        ";
 
-	    o << std::setw (6)
-	      << call.count << "      ";
+            o << std::setprecision (2) << std::setw (6);
+            print_time (o, double (call.self.cpu) / ticks_per_sec_);
 
-	    o << std::setprecision (5) << std::setw (9)
-	      << double (int (call.self.average * 1000))
-	      / ticks_per_sec_ << "ms";
+            o << std::resetiosflags (std::ios::fixed);
 
-	    o << std::endl;
-	  }
+            o << std::setw (12)
+              << call.count;
+
+            o << std::setiosflags (std::ios::fixed);
+
+            o << std::setprecision (2) << std::setw (9);
+            print_time (o, double (call.self.average) / ticks_per_sec_);
+
+            o << std::resetiosflags (std::ios::fixed);
+
+            o << std::endl;
+          }
       }
     if (vd < timer::VERBOSE_MAXIMAL)
       return;
@@ -985,55 +1070,69 @@ namespace misc
     o << "[Detailed tasks:]\n\n";
 
     for (vxrange =  vertices (graph_), vx = vxrange.first;
-	 vx != vxrange.second; ++vx)
+         vx != vxrange.second; ++vx)
       {
-	o << ".................................."
+        o << ".................................."
              "..............................................\n";
 
-	const timer::GraphTask& task = (graph_[*vx]);
+        const timer::GraphTask& task = (graph_[*vx]);
 
-	o << "[" << task.id << "] " << task.name
-	  << "\n\n";
+        o << "[" << task.id << "] " << task.name
+          << "\n\n";
 
-	o << "Calls from exterior:    " << std::setw (10) << task.count
-	  << "\n";
-	o << "Calls from within cycle:" << std::setw (10) << task.int_count
-	  << "\n";
-	o << "Recursive calls:        " << std::setw (10)
-	  << task.recursive_count << "\n";
+        o << "Calls from exterior:    " << std::setw (10) << task.count
+          << "\n";
+        o << "Calls from within cycle:" << std::setw (10) << task.int_count
+          << "\n";
+        o << "Recursive calls:        " << std::setw (10)
+          << task.recursive_count << "\n";
 
-	o << "\n";
+        o << "\n";
 
-	o << "Clock ticks per second: " << std::setw (10) << ticks_per_sec_
-	  << "\n\n";
+        o << "Clock ticks per second: " << std::setw (10) << ticks_per_sec_
+          << "\n\n";
 
-	o << "Self wall time:         " << std::setw (10) << task.self.wall
-	  << "\n";
-	o << "Self cpu time:          " << std::setw (10) << task.self.cpu
-	  << "\n";
-	o << "Self user time:         " << std::setw (10) << task.self.user
-	  << "\n";
-	o << "Self system time:       " << std::setw (10) << task.self.system
-	  << "\n";
-	o << "Self average cpu time:  " << std::setw (10)
-	  << task.self.average << "\n";
-	o << "Self charge:            " << std::setw (10)
-	  << task.self.charge << "%\n";
+        o << "Self wall time:         " << std::setw (10) << task.self.wall
+          << "\n";
+        o << "Self cpu time:          " << std::setw (10) << task.self.cpu
+          << "\n";
+        o << "Self user time:         " << std::setw (10) << task.self.user
+          << "\n";
+        o << "Self system time:       " << std::setw (10) << task.self.system
+          << "\n";
 
-	o << "\n";
+        o << std::setiosflags (std::ios::fixed);
 
-	o << "Total wall time:        " << std::setw (10) << task.total.wall
-	  << "\n";
-	o << "Total cpu time:         " << std::setw (10) << task.total.cpu
-	  << "\n";
-	o << "Total user time:        " << std::setw (10) << task.total.user
-	  << "\n";
-	o << "Total system timer:     " << std::setw (10) << task.total.system
-	  << "\n";
-	o << "Total average cpu time: " << std::setw (10)
-	  << task.total.average << "\n";
-	o << "Total charge:           " << std::setw (10)
-	  << task.total.charge << "%\n";
+        o << "Self average cpu time:  " << std::setw (10)
+	  << std::setprecision (2)
+          << task.self.average << "\n";
+        o << "Self charge:            " << std::setw (10)
+	  << std::setprecision (1)
+          << task.self.charge << "%\n";
+
+	o << std::resetiosflags (std::ios::fixed);
+
+        o << "\n";
+
+        o << "Total wall time:        " << std::setw (10) << task.total.wall
+          << "\n";
+        o << "Total cpu time:         " << std::setw (10) << task.total.cpu
+          << "\n";
+        o << "Total user time:        " << std::setw (10) << task.total.user
+          << "\n";
+        o << "Total system timer:     " << std::setw (10) << task.total.system
+          << "\n";
+
+        o << std::setiosflags (std::ios::fixed);
+
+        o << "Total average cpu time: " << std::setw (10)
+	  << std::setprecision (2)
+          << task.total.average << "\n";
+        o << "Total charge:           " << std::setw (10)
+	  << std::setprecision (1)
+          << task.total.charge << "%\n";
+
+	o << std::resetiosflags (std::ios::fixed);
       }
   }
 } // namespace misc

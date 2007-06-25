@@ -24,8 +24,8 @@
 # ifdef GLOBAL_TIMER
 #  ifdef VAUCANSON
 #   include <vaucanson/misc/timer.hh>
-#   define TIMER_SCOPED(Task) vcsn::misc::ScopedTimer stimer\
-                                                          (GLOBAL_TIMER, Task)
+#   define TIMER_SCOPED(Task)\
+             vcsn::misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
 #  else
 #   include "timer.hh"
 #   define TIMER_SCOPED(Task) misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
@@ -41,7 +41,7 @@
 #  define TIMER_EXPORT_DOT(Stream)        GLOBAL_TIMER.export_dot (Stream)
 #  define TIMER_EXPORT_DOT_VD(Stream, Vd) GLOBAL_TIMER.export_dot (Stream, Vd)
 #  define TIMER_EXPORT_DOT_VD_CR(Stream, Vd, Cr)\
-                                       GLOBAL_TIMER.export_dot (Stream, Vd, Cr)
+            GLOBAL_TIMER.export_dot (Stream, Vd, Cr)
 # else
 #  define TIMER_START()      ((void) 0)
 #  define TIMER_PUSH(Task)   ((void) 0)

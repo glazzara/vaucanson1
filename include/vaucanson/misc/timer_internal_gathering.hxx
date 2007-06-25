@@ -28,7 +28,7 @@
 # include <iostream>
 # include <iomanip>
 
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  include <vaucanson/misc/timer_internal_gathering.hh>
 # else
 #  include "timer_internal_gathering.hh"
@@ -53,7 +53,7 @@ namespace misc
     std::ostream&
     TimeStamp::print (std::ostream& o) const
     {
-      return o << "(" << wall_ << "," << user_ << "," << sys_ << ")";
+      return o << '(' << wall_ << ',' << user_ << ',' << sys_ << ')';
     }
 
     inline
@@ -82,9 +82,9 @@ namespace misc
 
     inline
     Task::Task (const std::string& name,
-		       const unsigned int id)
+		unsigned int       id)
       : name_ (name),
-	id_   (id)
+        id_   (id)
     {
     }
 

@@ -26,7 +26,7 @@
 #ifndef VCSN_MISC_TIMER_INTERNAL_GRAPH_HXX
 # define VCSN_MISC_TIMER_INTERNAL_GRAPH_HXX
 
-# if defined VAUCANSON
+# ifdef VAUCANSON
 #  include <vaucanson/misc/timer_internal_graph.hh>
 # else
 #  include "timer_internal_graph.hh"
@@ -46,9 +46,9 @@ namespace misc
     bool
     GraphTask::operator< (const GraphTask& task) const
     {
-      return (self.cpu == task.self.cpu) ?
-	(id < task.id) :
-	(self.cpu > task.self.cpu);
+      return self.cpu == task.self.cpu ?
+        id < task.id :
+        self.cpu > task.self.cpu;
     }
 
     /*------------------------.
@@ -57,7 +57,7 @@ namespace misc
 
     inline
     void
-    GraphComponent::add_call_out (GraphCall&	call)
+    GraphComponent::add_call_out (GraphCall&    call)
     {
       out_calls += call.count;
 
@@ -66,7 +66,7 @@ namespace misc
 
     inline
     void
-    GraphComponent::add_call_internal (GraphCall&	call)
+    GraphComponent::add_call_internal (GraphCall&       call)
     {
       int_calls += call.count;
     }
