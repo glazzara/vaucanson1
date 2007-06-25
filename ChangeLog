@@ -1,5 +1,21 @@
 2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
+	Add timer command-line options in taf-kit
+	* src/common.hh,
+	* src/main.cc:
+	Add two command-line options to taf-kit binaries.
+	The global timer in taf-kit can now be exported in
+	DOT format using --export-time-dot and in XML format
+	using --export-time-xml.
+
+	Additionally, --report-time now takes the verbose
+	level of the report as an optional parameter.
+
+	See ../include/vaucanson/misc/timer.hh for
+	documentation.
+
+2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
 	Change time display in timer report
 	* global_timer.hh: Fix alignment.
 	* timer.cc,

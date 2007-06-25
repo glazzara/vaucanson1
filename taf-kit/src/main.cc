@@ -66,8 +66,12 @@ namespace
      "List the commands handled by the program", 0 },
     { "verbose",		'v', 0, 0,
       "Be more verbose (print boolean results)", 0 },
-    { "report-time",	'T', 0, 0,
+    { "report-time",	'T', "VERBOSE_DEGREE", OPTION_ARG_OPTIONAL,
       "Report time statistics", 0 },
+    { "export-time-dot", 'D', "VERBOSE_DEGREE", OPTION_ARG_OPTIONAL,
+      "Export time statistics in DOT format", 0 },
+    { "export-time-xml", 'X', 0, 0,
+      "Export time statistics in XML format", 0 },
     { "bench",	'B', "NB_ITERATIONS", 0,
       "Bench", 0 },
     { "bench-plot-output", 'O', "OUTPUT_FILENAME", 0,
@@ -153,6 +157,14 @@ namespace
 	break;
       case 'T':
 	args.report_time = true;
+	args.report_degree = arg ? atoi(arg) : 2;
+	break;
+      case 'D':
+	args.export_time_dot = true;
+	args.export_dot_degree = arg ? atoi(arg) : 2;
+	break;
+      case 'X':
+	args.export_time_xml = true;
 	break;
 
       case 'B':
@@ -210,7 +222,13 @@ int main (int argc, char* argv[])
     TIMER_STOP ();
 
     if (args.report_time)
-      TIMER_PRINT(std::cerr);
+      TIMER_PRINT_VD(std::cerr,
+		     timer::get_verbose_degree (args.report_degree));
+    if (args.export_time_dot)
+      TIMER_EXPORT_DOT_VD(std::cerr,
+			  timer::get_verbose_degree (args.export_dot_degree));
+    if (args.export_time_xml)
+      TIMER_DUMP(std::cerr);
   }
 
   if (args.bench)
