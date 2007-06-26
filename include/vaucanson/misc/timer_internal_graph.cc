@@ -62,16 +62,12 @@ namespace misc
         {
         case 0:
           return VERBOSE_NONE;
-          break;
         case 1:
           return VERBOSE_MINIMAL;
-          break;
         case 2:
           return VERBOSE_NORMAL;
-          break;
         case 3:
           return VERBOSE_MAXIMAL;
-          break;
         default:
           return VERBOSE_NORMAL;
         }
@@ -125,7 +121,7 @@ namespace misc
 
                 case VERBOSE_MINIMAL:
                   out << "caption" << i << "[label=\""
-                      << "(C:" << std::setw (3) << i << ")"
+                      << "(C:" << std::setw (3) << i << ')'
                       << "\\lIncoming calls: " << std::setw (7)
                       << c_[i].calls
                       << "\\lInternal calls: " << std::setw (7)
@@ -140,7 +136,7 @@ namespace misc
 
                 case VERBOSE_NORMAL:
                   out << "caption" << i << "[label=\""
-                      << "(C:" << std::setw (3) << i << ")"
+                      << "(C:" << std::setw (3) << i << ')'
                       << "\\l"
                       << "\\lIncoming calls: " << std::setw (7)
                       << c_[i].calls
@@ -151,18 +147,18 @@ namespace misc
                       << "\\l"
                       << "\\lSelf time:      " << std::setw (7)
                       << double (c_[i].self.cpu) / tps_
-                      << "s"
+                      << 's'
                       << "\\lSelf average:   " << std::setprecision (5)
                       << std::setw (7)
                       << double (int (c_[i].self.average * 1000)) / tps_
                       << "ms"
                       << "\\lSelf charge:    " << std::setprecision (3)
                       << std::setw (7)
-                      << c_[i].self.charge << "%"
+                      << c_[i].self.charge << '%'
                       << "\\l"
                       << "\\lTotal time:     " << std::setw (7)
                       << double (c_[i].total.cpu) / tps_
-                      << "s"
+                      << 's'
                       << "\\lTotal charge:   " << std::setprecision (3)
                       << std::setw (7)
                       << c_[i].total.charge << "%\\l\""
@@ -171,7 +167,7 @@ namespace misc
 
                 default:
                   out << "caption" << i << "[label=\""
-                      << "(C:" << std::setw (3) << i << ")"
+                      << "(C:" << std::setw (3) << i << ')'
                       << "\\l"
                       << "\\lIncoming calls:  " << std::setw (7)
                       << c_[i].calls
@@ -182,7 +178,7 @@ namespace misc
                       << "\\l"
                       << "\\lSelf time:       " << std::setw (7)
                       << double (c_[i].self.cpu) / tps_
-                      << "s"
+                      << 's'
                       << "\\lSelf user time:  " << std::setw (7)
                       << c_[i].self.user << "ct"
                       << "\\lSelf syst. time: "<< std::setw (7)
@@ -193,18 +189,18 @@ namespace misc
                       << "ms"
                       << "\\lSelf charge:     " << std::setprecision (3)
                       << std::setw (7)
-                      << c_[i].self.charge << "%"
+                      << c_[i].self.charge << '%'
                       << "\\l"
                       << "\\lTotal time:      " << std::setw (7)
                       << double (c_[i].total.cpu) / tps_
-                      << "s"
+                      << 's'
                       << "\\lTotal average:   " << std::setprecision (5)
                       << std::setw (7)
                       << double (int (c_[i].total.average * 1000)) / tps_
                       << "ms"
                       << "\\lTotal charge:    " << std::setprecision (3)
                       << std::setw (7)
-                      << c_[i].total.charge << "%"
+                      << c_[i].total.charge << '%'
                       << "\\l"
                       << "\\lInternal average:" << std::setprecision (5)
                       << std::setw (7)
@@ -218,11 +214,11 @@ namespace misc
                   << std::max
                 (0.35 - c_[i].self.charge * chrg_col_ratio_ * c_.size () / 700,
                  0.)
-                  << ","
+                  << ','
                   << std::min
                 (0.1 + c_[i].self.charge * chrg_col_ratio_ * c_.size () / 700,
                  0.4)
-                  << ","
+                  << ','
                   << "0.99" << "\";" << std::endl;
 
               for (std::list<int>::const_iterator li = c_[i].members.begin();
@@ -266,7 +262,7 @@ namespace misc
           out << "\\lCalls:     " << std::setw (7)
               << g_[v].count + g_[v].recursive_count + g_[v].int_count
               << "\\lSelf time: " << std::setw (7)
-              << double (g_[v].self.cpu) / tps_ << "s";
+              << double (g_[v].self.cpu) / tps_ << 's';
           break;
 
         case VERBOSE_NORMAL:
@@ -275,18 +271,18 @@ namespace misc
               << g_[v].count + g_[v].recursive_count + g_[v].int_count
               << "\\l"
               << "\\lSelf time:    " << std::setw (7)
-              << double (g_[v].self.cpu) / tps_ << "s"
+              << double (g_[v].self.cpu) / tps_ << 's'
               << "\\lSelf average: " << std::setprecision (5) << std::setw (7)
               << double (int (g_[v].self.average * 1000)) / tps_ << "ms"
               << "\\lSelf charge:  " << std::setprecision (3)
-              << std::setw (7) << g_[v].self.charge << "%";
+              << std::setw (7) << g_[v].self.charge << '%';
           if (c_[c_id_[g_[v].id]].member_count <= 1)
             {
               out << "\\l"
                   << "\\lTotal time:   " << std::setw (7)
-                  << double (g_[v].total.cpu) / tps_ << "s"
+                  << double (g_[v].total.cpu) / tps_ << 's'
                   << "\\lTotal charge: " << std::setprecision (3)
-                  << std::setw (7) << g_[v].total.charge << "%";
+                  << std::setw (7) << g_[v].total.charge << '%';
             }
           break;
 
@@ -297,7 +293,7 @@ namespace misc
               << g_[v].count + g_[v].recursive_count + g_[v].int_count
               << "\\l"
               << "\\lSelf time:       " << std::setw (7)
-              << double (g_[v].self.cpu) / tps_ << "s"
+              << double (g_[v].self.cpu) / tps_ << 's'
               << "\\lSelf user time:  " << std::setw (7)
               << g_[v].self.user << "ct"
               << "\\lSelf system time:" << std::setw (7)
@@ -306,27 +302,27 @@ namespace misc
               << std::setw (7)
               << double (int (g_[v].self.average * 1000)) / tps_ << "ms"
               << "\\lSelf charge:     " << std::setprecision (3)
-              << std::setw (7) << g_[v].self.charge << "%";
+              << std::setw (7) << g_[v].self.charge << '%';
           if (c_[c_id_[g_[v].id]].member_count <= 1)
             {
               out << "\\l"
                   << "\\lTotal time:      " << std::setw (7)
-                  << double (g_[v].total.cpu) / tps_ << "s"
+                  << double (g_[v].total.cpu) / tps_ << 's'
                   << "\\lTotal average:   " << std::setprecision (5)
                   << std::setw (7)
                   << double (int (g_[v].total.average * 1000)) / tps_ << "ms"
                   << "\\lTotal charge:    " << std::setprecision (3)
-                  << std::setw (7) << g_[v].total.charge << "%";
+                  << std::setw (7) << g_[v].total.charge << '%';
             }
         }
       out << "\\l\""
           << ", fillcolor=\""
           << std::max
         (0.35 - g_[v].self.charge * chrg_col_ratio_ * c_.size () / 700, 0.)
-          << ","
+          << ','
           << std::min
         (0.1 + g_[v].self.charge * chrg_col_ratio_ * c_.size () / 700, 0.4)
-          << ","
+          << ','
           << "0.99"<< "\"]";
     }
 

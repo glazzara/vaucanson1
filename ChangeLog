@@ -1,3 +1,12 @@
+2007-06-26  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Fix ugly code
+	* timer.cc,
+	* timer.hh,
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh:
+	Fix ugly code and a couple of typos.
+
 2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Add timer command-line options in taf-kit

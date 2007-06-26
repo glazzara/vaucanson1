@@ -172,7 +172,7 @@
  *  Task names are truncated to fit.  Times are reported in the most
  *  accurate unit (among hours, minutes, seconds, and milliseconds),
  *  except in the task list where the same unit is shared between all
- *  tasks's total and self times.
+ *  tasks' total and self times.
  *
  *  Task list:
  *    - charge: Percentage of the total program time the task has
@@ -249,8 +249,8 @@
  *    System time is the time spent in system calls.
  *    Cpu time is the total time the cpu spent in the program.  It is
  *    the value used in the previous parts of the report.
- *    Wall time is the reality time spent in the task, i.e. the time
- *    observed by the user.
+ *    Wall time is the real time spent in the task, i.e. the time
+ *    observed by the user on a wall clock.
  */
 
 # include <stack>
@@ -437,9 +437,14 @@ namespace misc
     friend class timer::EdgeWriter;
 
     // Time units for printing
-    typedef enum time_unit { TIME_DEFAULT, TIME_H,
-                             TIME_M, TIME_S,
-                             TIME_MS };
+    typedef enum time_unit
+      {
+        TIME_DEFAULT,
+        TIME_H,
+        TIME_M,
+        TIME_S,
+        TIME_MS
+      };
 
     // Print time in given unit (time is in seconds)
     std::ostream& print_time (std::ostream& o,

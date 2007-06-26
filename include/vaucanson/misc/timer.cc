@@ -632,7 +632,7 @@ namespace misc
 
       << "  ";
     graph_[0].total.dump (o, "total");
-    o << "\n"
+    o << '\n'
 
       << "  <taskList>\n";
 
@@ -703,7 +703,7 @@ namespace misc
 
         o << "\n      ";
         comp_[c].self.dump (o, "self");
-        o << "\n";
+        o << '\n';
 
         for (std::list<int>::const_iterator li = comp_[c].members.begin ();
              li != comp_[c].members.end (); ++li)
@@ -740,16 +740,12 @@ namespace misc
           return o << time << "m ";
         time /= 60;
         return o << time << "h ";
-        break;
       case TIME_H:
         return o << time / 3600 << "h ";
-        break;
       case TIME_M:
         return o << time / 60 << "m ";
-        break;
       case TIME_S:
         return o << time << "s ";
-        break;
       default:
         return o << time * 1000 << "ms";
       }
@@ -797,8 +793,8 @@ namespace misc
         o << std::setiosflags (std::ios::fixed)
           << std::setw (5) << std::setprecision (1)
           << li->self.charge << "% "
-          << std::setw (3) <<  li->id << ":"
-          << std::setw (18) << li->name.substr (0, 18) << " ";
+          << std::setw (3) <<  li->id << ':'
+          << std::setw (18) << li->name.substr (0, 18) << ' ';
 
         if (comp_[comp_id_[li->id]].member_count > 1)
           o << " (C:" << std::setw (3) << comp_id_[li->id] << ") ";
@@ -814,7 +810,7 @@ namespace misc
         o << std::resetiosflags (std::ios::fixed);
 
         o << std::setprecision (7) << std::setw (9)
-          << li->count + li->recursive_count + li->int_count << " ";
+          << li->count + li->recursive_count + li->int_count << ' ';
 
         o << std::setiosflags (std::ios::fixed);
 
@@ -822,7 +818,7 @@ namespace misc
         print_time (o, double (li->self.average) / ticks_per_sec_);
 
         if (comp_[comp_id_[li->id]].member_count > 1)
-          o << "    (C:" << std::setw (3) << comp_id_[li->id] << ")";
+          o << "    (C:" << std::setw (3) << comp_id_[li->id] << ')';
         else
           {
             o << std::setprecision (2) << std::setw (9);
@@ -831,7 +827,7 @@ namespace misc
 
         o << std::resetiosflags (std::ios::fixed);
 
-        o << "\n";
+        o << '\n';
 
       }
 
@@ -855,12 +851,12 @@ namespace misc
             o << ".................................."
                  "..............................................\n";
 
-            o << "(C:" << std::setw (3) << comp_[c].id << ")";
+            o << "(C:" << std::setw (3) << comp_[c].id << ')';
 
             o << std::setiosflags (std::ios::fixed);
 
             o << "  " << std::setw (5) << std::setprecision (1)
-              << comp_[c].self.charge << "%";
+              << comp_[c].self.charge << '%';
 
             o << std::setprecision (2) << std::setw (7);
             print_time (o, double (comp_[c].total.cpu) / ticks_per_sec_);
@@ -870,8 +866,8 @@ namespace misc
 
             o << std::resetiosflags (std::ios::fixed);
 
-            o << std::setw (5) << comp_[c].calls << "/";
-            o << std::setw (5) << comp_[c].int_calls << "";
+            o << std::setw (5) << comp_[c].calls << '/';
+            o << std::setw (5) << comp_[c].int_calls;
 
             o << std::setiosflags (std::ios::fixed);
 
@@ -897,7 +893,7 @@ namespace misc
                 o << std::setiosflags (std::ios::fixed);
 
                 o << std::setw (5) << std::setprecision (1)
-                  << task.self.charge * 100 / comp_[c].self.charge << "%";
+                  << task.self.charge * 100 / comp_[c].self.charge << '%';
 
                 o << "         ";
 
@@ -906,9 +902,9 @@ namespace misc
 
                 o << std::resetiosflags (std::ios::fixed);
 
-                o << std::setw (5) << task.count << "/";
+                o << std::setw (5) << task.count << '/';
                 o << std::setw (5)
-                  << task.int_count + task.recursive_count << "";
+                  << task.int_count + task.recursive_count;
 
                 o << std::setiosflags (std::ios::fixed);
 
@@ -937,7 +933,7 @@ namespace misc
         o << ".................................."
              "..............................................\n";
 
-        o << "[" << graph_[*vx].id << "] " << graph_[*vx].name
+        o << '[' << graph_[*vx].id << "] " << graph_[*vx].name
           << std::endl << std::endl;
         
         for (ierange = in_edges (*vx, graph_), ie = ierange.first;
@@ -947,7 +943,7 @@ namespace misc
             const timer::GraphCall& call = graph_[*ie];
 
             o << "<-" << std::setw (3)
-              << task.id << ":";
+              << task.id << ':';
 
             o << std::setw (16) << task.name.substr (0, 16);
 
@@ -978,7 +974,7 @@ namespace misc
         const timer::GraphTask& task = (graph_[*vx]);
 
         o << "  " << std::setw (3)
-          << task.id << ":";
+          << task.id << ':';
 
         o << std::setw (16) << task.name.substr (0, 16);
 
@@ -1030,7 +1026,7 @@ namespace misc
             const timer::GraphCall& call = graph_[*oe];
 
             o << "->" << std::setw (3)
-              << task.id << ":";
+              << task.id << ':';
 
             o << std::setw (16) << task.name.substr (0, 16);
 
@@ -1077,57 +1073,57 @@ namespace misc
 
         const timer::GraphTask& task = (graph_[*vx]);
 
-        o << "[" << task.id << "] " << task.name
+        o << '[' << task.id << "] " << task.name
           << "\n\n";
 
         o << "Calls from exterior:    " << std::setw (10) << task.count
-          << "\n";
+          << '\n';
         o << "Calls from within cycle:" << std::setw (10) << task.int_count
-          << "\n";
+          << '\n';
         o << "Recursive calls:        " << std::setw (10)
-          << task.recursive_count << "\n";
+          << task.recursive_count << '\n';
 
-        o << "\n";
+        o << '\n';
 
         o << "Clock ticks per second: " << std::setw (10) << ticks_per_sec_
           << "\n\n";
 
         o << "Self wall time:         " << std::setw (10) << task.self.wall
-          << "\n";
+          << '\n';
         o << "Self cpu time:          " << std::setw (10) << task.self.cpu
-          << "\n";
+          << '\n';
         o << "Self user time:         " << std::setw (10) << task.self.user
-          << "\n";
+          << '\n';
         o << "Self system time:       " << std::setw (10) << task.self.system
-          << "\n";
+          << '\n';
 
         o << std::setiosflags (std::ios::fixed);
 
         o << "Self average cpu time:  " << std::setw (10)
 	  << std::setprecision (2)
-          << task.self.average << "\n";
+          << task.self.average << '\n';
         o << "Self charge:            " << std::setw (10)
 	  << std::setprecision (1)
           << task.self.charge << "%\n";
 
 	o << std::resetiosflags (std::ios::fixed);
 
-        o << "\n";
+        o << '\n';
 
         o << "Total wall time:        " << std::setw (10) << task.total.wall
-          << "\n";
+          << '\n';
         o << "Total cpu time:         " << std::setw (10) << task.total.cpu
-          << "\n";
+          << '\n';
         o << "Total user time:        " << std::setw (10) << task.total.user
-          << "\n";
+          << '\n';
         o << "Total system timer:     " << std::setw (10) << task.total.system
-          << "\n";
+          << '\n';
 
         o << std::setiosflags (std::ios::fixed);
 
         o << "Total average cpu time: " << std::setw (10)
 	  << std::setprecision (2)
-          << task.total.average << "\n";
+          << task.total.average << '\n';
         o << "Total charge:           " << std::setw (10)
 	  << std::setprecision (1)
           << task.total.charge << "%\n";

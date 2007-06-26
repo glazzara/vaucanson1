@@ -56,8 +56,13 @@ namespace misc
     class TimeStamp;
 
     /// Enumerate the different verbose degrees for dot format graph export.
-    typedef enum verbose_degree { VERBOSE_NONE, VERBOSE_MINIMAL,
-                                  VERBOSE_NORMAL, VERBOSE_MAXIMAL };
+    typedef enum verbose_degree
+      {
+        VERBOSE_NONE,
+        VERBOSE_MINIMAL,
+        VERBOSE_NORMAL,
+        VERBOSE_MAXIMAL
+      };
 
     // Return the corresponding verbose_degree.
     verbose_degree get_verbose_degree (int i);
