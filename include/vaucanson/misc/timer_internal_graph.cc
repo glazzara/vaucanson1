@@ -484,9 +484,11 @@ namespace misc
     GraphCall::compute_average (clock_t         program_cpu)
     {
       total.average = total.cpu / double (count);
-      total.charge  = total.cpu * 100 / double (program_cpu);
+      total.charge  =
+	(program_cpu == 0 ? 0 : total.cpu * 100 / double (program_cpu));
       self.average  = self.cpu / double (count);
-      self.charge   = self.cpu * 100 / double (program_cpu);
+      self.charge   =
+	(program_cpu == 0 ? 0 : self.cpu * 100 / double (program_cpu));
     }
 
     /*-------------------.
@@ -516,16 +518,18 @@ namespace misc
       this->total.system   += total.sys_;
       this->total.cpu      += total.sys_ + total.user_;
       this->total.average  = this->total.cpu / double (count);
-      this->total.charge   = this->total.cpu * 100 /
-                       double (program.sys_ + program.user_);
+      this->total.charge   =
+	(program.sys_ + program.user_ == 0 ? 0 : this->total.cpu * 100 /
+	 double (program.sys_ + program.user_));
 
       this->self.wall      += self.wall_;
       this->self.user      += self.user_;
       this->self.system    += self.sys_;
       this->self.cpu       += self.sys_ + self.user_;
       this->self.average   = this->self.cpu / double (count);
-      this->self.charge    = this->self.cpu * 100 /
-                       double (program.sys_ + program.user_);
+      this->self.charge    =
+	(program.sys_ + program.user_ == 0 ? 0 :this->self.cpu * 100 /
+	 double (program.sys_ + program.user_));
     }
 
     INLINE_TIMER_CC
@@ -546,9 +550,11 @@ namespace misc
     GraphTask::compute_average (clock_t         program_cpu)
     {
       total.average = total.cpu / double (count + int_count + recursive_count);
-      total.charge  = total.cpu * 100 / double (program_cpu);
+      total.charge  =
+	(program_cpu == 0 ? 0 : total.cpu * 100 / double (program_cpu));
       self.average  = self.cpu / double (count + int_count + recursive_count);
-      self.charge   = self.cpu * 100 / double (program_cpu);
+      self.charge   =
+	(program_cpu == 0 ? 0 : self.cpu * 100 / double (program_cpu));
     }
 
     /*------------------------.
@@ -596,10 +602,12 @@ namespace misc
     void
     GraphComponent::compute_average (clock_t program_cpu)
     {
-      self.charge   = self.cpu * 100 / double (program_cpu); 
+      self.charge   =
+	(program_cpu == 0 ? 0 : self.cpu * 100 / double (program_cpu)); 
       self.average  = self.cpu / double (calls);
 
-      total.charge  = total.cpu * 100 / double (program_cpu); 
+      total.charge  =
+	(program_cpu == 0 ? 0 : total.cpu * 100 / double (program_cpu)); 
       total.average = total.cpu / double (calls);
 
       int_average   = self.cpu / double (int_calls);
