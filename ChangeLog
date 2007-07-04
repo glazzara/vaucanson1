@@ -1,5 +1,12 @@
 2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
+	Improve detection of the time unit in report
+	* timer.cc:
+	Improve detection of the time unit for large numbers of
+	tasks.
+
+2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
 	Fix divide by zero
 	* timer_internal_graph.cc:
 	Change charge values from NaN to zero when total program time

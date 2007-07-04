@@ -767,11 +767,14 @@ namespace misc
     std::list<timer::GraphTask> gtlist;
 
     time_unit time_unit =
-      int(graph_[0].self.cpu) < 0.2 * int(task_count_ * ticks_per_sec_)
+      (int (graph_[0].self.cpu) < 0.2 * int (task_count_ * ticks_per_sec_)
+       && int (graph_[0].self.cpu) < 10 * ticks_per_sec_)
       ? TIME_MS :
-      int(graph_[0].self.cpu) < 120 * int(task_count_ * ticks_per_sec_)
+      (int (graph_[0].self.cpu) < 120 * int (task_count_ * ticks_per_sec_)
+       && int (graph_[0].self.cpu) < 10000 * ticks_per_sec_)
       ? TIME_S :
-      int(graph_[0].self.cpu) < 7200 * int(task_count_ * ticks_per_sec_)
+      (int (graph_[0].self.cpu) < 7200 * int (task_count_ * ticks_per_sec_)
+       && int (graph_[0].self.cpu) < 600000 * ticks_per_sec_)
       ? TIME_M :
       TIME_H;
 
