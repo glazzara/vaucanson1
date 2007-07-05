@@ -1,3 +1,169 @@
+2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Merge timer into the trunk
+	* ChangeLog: .
+
+	* include/vaucanson/misc/bencher.cc: Change to work with
+	the new Timer implementation.
+
+	* include/vaucanson/misc/global_timer.hh: .
+	* include/vaucanson/misc/timer.cc: .
+	* include/vaucanson/misc/timer.hh: .
+	* include/vaucanson/misc/timer.hxx: .
+	* include/vaucanson/misc/timer_internal_gathering.cc: New.
+	* include/vaucanson/misc/timer_internal_gathering.hh: New.
+	* include/vaucanson/misc/timer_internal_gathering.hxx: New.
+	* include/vaucanson/misc/timer_internal_graph.cc: New.
+	* include/vaucanson/misc/timer_internal_graph.hh: New.
+	* include/vaucanson/misc/timer_internal_graph.hxx: New.
+	New implementation of the Timer.
+	Read documentation in include/vaucanson/misc/timer.hh.
+
+	* taf-kit/src/common.hh,
+	* taf-kit/src/main.cc: Add command-line option to manipulate
+	the global timer.  Fix name conflict due to the new namespace
+	timer.
+
+2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Improve detection of the time unit in report
+	* timer.cc:
+	Improve detection of the time unit for large numbers of
+	tasks.
+
+2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Fix divide by zero
+	* timer_internal_graph.cc:
+	Change charge values from NaN to zero when total program time
+	is less than 1ms.
+
+2007-06-26  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Fix ugly code
+	* timer.cc,
+	* timer.hh,
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh:
+	Fix ugly code and a couple of typos.
+
+2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Add timer command-line options in taf-kit
+	* src/common.hh,
+	* src/main.cc:
+	Add two command-line options to taf-kit binaries.
+	The global timer in taf-kit can now be exported in
+	DOT format using --export-time-dot and in XML format
+	using --export-time-xml.
+
+	Additionally, --report-time now takes the verbose
+	level of the report as an optional parameter.
+
+	See ../include/vaucanson/misc/timer.hh for
+	documentation.
+
+2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Change time display in timer report
+	* global_timer.hh: Fix alignment.
+	* timer.cc,
+	* timer.hh,
+	* timer.hxx:
+        Change time display.
+	* timer_internal_gathering.cc,
+	* timer_internal_gathering.hh,
+	* timer_internal_gathering.hxx,
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh,
+	* timer_internal_graph.hxx,
+	Fix naming conventions, untabify.
+
+	The unit used to display times in the standard report
+	is now adjusted automatically.
+
+	Add some documentation in timer.hh
+
+2007-06-21  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Add timer XML export, fix several issues.
+	* bencher.cc: Fix a typo.
+	* global_timer.hh: Add dump macro.
+	* timer.cc:
+	Add dump method to Timer.
+	Change behavior of arithmetic operators slightly.
+	Fix task ordering in display.
+	* timer.hh:
+	Add dump method to Timer.
+	Add documentation on command-line options in vaucanson.
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh,
+	* timer_internal_graph.hxx: Add internal dump method.
+
+	Timer instances can now be exported in XML format
+	using Timer.dump (Stream).
+	The structure of the XML output is far from definitive.
+
+	Information on command-line options for taf-kit regarding
+	the global timer is added to include/misc/timer.hh.
+
+	Summing timers now also sums calls, making the bencher
+	output logical.
+
+	Long task names are now truncated in standard display.
+
+2007-06-20  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Split timer.* into smaller files & add documentation
+	* include/vaucanson/misc/global_timer.hh:
+	Make it work outside vaucanson.
+	* include/vaucanson/misc/timer.cc:
+	Remove implementation of misc::Timer internal classes.
+	* include/vaucanson/misc/timer.hh:
+	Remove declaration of misc::Timer internal classes.
+	* include/vaucanson/misc/timer.hxx:
+	Move inline methods of misc::Timer here
+	* include/vaucanson/misc/timer_internal_gathering.cc,
+	* include/vaucanson/misc/timer_internal_gathering.hh,
+	* include/vaucanson/misc/timer_internal_gathering.hxx:
+	Move declaration & implementation of misc::Timer internal
+	classes regarding data gathering in those three files.
+	* include/vaucanson/misc/timer_internal_graph.cc,
+	* include/vaucanson/misc/timer_internal_graph.hh,
+	* include/vaucanson/misc/timer_internal_graph.hxx:
+	Move declaration & implementation of misc::Timer internal
+	classes regarding result computation in those three files.
+	* taf-kit/src/common.hh,
+	* taf-kit/src/main.cc:
+	Change global timer name from timer to global_timer to avoid
+	conflicts with the new namespace.
+
+	Former private classes of misc::Timer are now in the separate
+	namespace misc::timer.  Minor changes are made to the taf-kit
+	source to work with the new implementation.
+	Documentation is provided in include/vaucanson/misc/timer.hh.
+
+	Clean source code (thanks for pointing out what was wrong).
+	
+
+2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Update timer and bencher for taf-kit
+	* bencher.cc,
+	* global_timer.hh,
+	* timer.cc,
+	* timer.hh,
+	* timer.hxx:
+
+	The implementation of the timer used in taf-kit changes:
+	it now builds a graph of the results using Graph from Boost.
+	Bencher is modified to work with the new implementation.
+	All current macro names used in taf-kit still work, and new
+	ones are added to access new features, such as export of
+	the graph in DOT language.
+	Basic documentation will be provided within a few days.
+	NOTE: taf-kit might not compile in this revision.
+
 2007-04-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix conflict with boost and empty_ macro.  
