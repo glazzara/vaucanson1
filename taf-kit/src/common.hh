@@ -61,6 +61,11 @@
 extern vcsn::misc::Timer global_timer;
 extern vcsn::misc::Bencher bencher;
 
+// Use a global command result.
+# include "pipe.hh"
+# define GLOBAL_RESULT last_command_output
+extern command_output last_command_output;
+
 struct arguments_t
 {
     arguments_t (const std::string& name)

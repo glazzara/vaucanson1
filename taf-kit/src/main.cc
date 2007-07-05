@@ -53,6 +53,13 @@ vcsn::misc::Timer global_timer;
 /// A global bencher.
 vcsn::misc::Bencher bencher;
 
+// A global command output;
+command_output last_command_output;
+# include "pipe_command_sequence.hh"
+
+// Writer for final output
+# include "pipe_writers.hh"
+
 /**
  * Documentation of the program, of the arguments we accept and the
  * options we understand.
@@ -204,36 +211,104 @@ using namespace vcsn::misc;
 
 int main (int argc, char* argv[])
 {
-  arguments_t	args (argv[0]);
-  argp_parse (&argp_setup, argc, argv, 0, 0, &args);
+  std::list<pipe_command> command_list;
 
-  int status = 0;
+  // Cut the command line
+  int i = 0;
+  int j = 0;
+  for (; i < argc; ++i)
+    {
+      if (std::string ("|").compare(argv[i]) == 0)
+	{
+	  command_list.push_back (pipe_command (argv, j, i));
+	  j = i;
+	}
+    }
+  command_list.push_back (pipe_command (argv, j, i));
+
+  GLOBAL_RESULT.set_state (PIPE_GET_FROM_STDIN);
+
+  arguments_t args ("");
+
+  // Parse each command
+  for (std::list<pipe_command>::iterator li = command_list.begin ();
+       li != command_list.end (); ++li)
+    {
+      argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
+
+      if (li->args.bench)
+	{
+	  args.bench = li->args.bench;
+	  args.nb_iterations = li->args.nb_iterations;
+	}
+      if (li->args.report_time)
+	{
+	  args.report_time = li->args.report_time;
+	  args.report_degree = li->args.report_degree;
+	}
+      if (li->args.export_time_dot)
+	{
+	  args.export_time_dot = li->args.export_time_dot;
+	  args.export_dot_degree = li->args.export_dot_degree;
+	}
+      args.export_time_xml = args.export_time_xml || li->args.export_time_xml;
+      if (!li->args.plot_output_filename.empty ())
+	args.plot_output_filename = li->args.plot_output_filename;
+    }
 
   BENCH_DO(args.nb_iterations)
-  {
-    TIMER_START ();
-    try {
-      status = execute_command (args);
-    }
-    catch (const std::logic_error& err) {
-      warn (argv[0] << ": " << err.what ());
-      status = -1;
-    }
-    TIMER_STOP ();
+    {
+      int task_number = 0;
 
-    if (args.report_time)
-      TIMER_PRINT_VD(std::cerr,
-		     timer::get_verbose_degree (args.report_degree));
-    if (args.export_time_dot)
-      TIMER_EXPORT_DOT_VD(std::cerr,
-			  timer::get_verbose_degree (args.export_dot_degree));
-    if (args.export_time_xml)
-      TIMER_DUMP(std::cerr);
-  }
+      TIMER_START ();
+
+      // Execute commands
+      for (std::list<pipe_command>::iterator li = command_list.begin ();
+	   li != command_list.end (); ++li, ++task_number)
+	{
+	  arguments_t& args = li->args;
+
+	  int& status = li->status;
+
+	  try
+	    {
+	      std::ostringstream os;
+	      os << "CMD[" << task_number << "]: ";
+	      TIMER_SCOPED(os.str () + std::string (args.args[0]));
+	      status = execute_command (args);
+	    }
+	  catch (const std::logic_error& err) {
+	    warn (argv[0] << ": " << err.what ());
+	    status = -1;
+	  }
+
+	  // Break upon error
+	  if (status != 0)
+	    break;
+	}
+
+      boost::apply_visitor (automaton_final_output (),
+			    GLOBAL_RESULT.output);
+
+      TIMER_STOP ();
+
+      if (args.report_time)
+	TIMER_PRINT_VD(std::cerr,
+		       timer::get_verbose_degree (args.report_degree));
+      if (args.export_time_dot)
+	TIMER_EXPORT_DOT_VD(std::cerr,
+			    timer::get_verbose_degree
+			(args.export_dot_degree));
+      if (args.export_time_xml)
+	TIMER_DUMP(std::cerr);
+
+      GLOBAL_RESULT.set_state (PIPE_BENCH);
+    }
 
   if (args.bench)
     BENCH_PRINT(std::cerr);
   if (!args.plot_output_filename.empty())
     BENCH_SAVE_PLOT(args.plot_output_filename.c_str());
-  return status;
+
+  return GLOBAL_RESULT.status;
 }

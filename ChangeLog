@@ -1,5 +1,55 @@
 2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
+	Add internal pipe
+	* commands_macros.hh: Change command definition macros to
+	keep results between commands.
+
+	* common.hh: Add access to the global result.
+
+	* common_automaton_commands.hh,
+	* common_commands.hh: Change command output to
+	keep results.
+
+	* getters.hh,
+	* getters.hxx: Allow getters to get data from the global
+	result.
+
+	* main.cc: Allow internal command sequencing using "\|"
+
+	* pipe.hh: New.
+	* pipe.hxx: New.
+	* pipe_command_sequence.hh: New.
+	* pipe_command_sequence.hxx: New.
+	* pipe_getters.hh: New.
+	* pipe_getters.hxx: New.
+	* pipe_writers.hh: New.
+	* pipe_writers.hxx: New.
+	Implementation of the internal pipe.  Documentation will be
+	provided shortly.
+
+	* ratexp_commands.hh,
+	* tdc_commands.cc: Change command output to
+	keep results.
+
+	Implementation of internal pipe in taf-kit (See Ticket #93):
+	Commands can be sequenced using "\|" in tak-kit binaries.
+	Command-line options are specific to their command except
+	Timer & Bencher manipulation options (--report-time, --bench,
+	--export-time-dot, --export-time-xml), which are global to
+	the whole sequence.
+	i.e.: --bench will benchmark the whole sequence.  The defect
+	described in ticket #104 is also resolved.
+
+	Note: In vcsn-b and vcsn-z, both automata and regular
+	expressions keep their internal representation between
+	commands.  In vcsn-tdc, both boolean automata and
+	transducers do, but there might be issues about
+	boolean_transducer namespace not being declared in
+	CONTEXT_HEADER.
+	The binaries have yet to be extensively tested.
+
+2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
 	Merge trunk into pipe
 	* ChangeLog: .
 	* include/vaucanson/misc/bencher.cc: .

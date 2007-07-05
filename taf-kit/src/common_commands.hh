@@ -86,7 +86,7 @@ DEFINE_COMMAND (NAME (info)
 
 DEFINE_COMMAND (NAME (identity)
 		CODE (automaton_t a = get_aut (args.args[1]))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (display)
