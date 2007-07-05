@@ -1,4 +1,4 @@
-// timer.hh: this file is part of the Vaucanson project.
+// timer.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -23,201 +23,129 @@
 #ifndef VCSN_MISC_TIMER_HXX
 # define VCSN_MISC_TIMER_HXX
 
-# include <vaucanson/misc/timer.hh>
+# include <iosfwd>
+
+# include <sys/times.h>
+# include <unistd.h>
+
+# ifdef VAUCANSON
+#  include <vaucanson/misc/timer.hh>
+# else
+#  include "timer.hh"
+# endif
 
 NAMESPACE_VCSN_BEGIN
 
 namespace misc
 {
 
-  /*--------.
-  | Timer.  |
-  `--------*/
+  /*------------------.
+  | Timer.            |
+  | General methods.  |
+  `------------------*/
 
   inline
-  void
-  Timer::push (const int i)
+  Timer::~Timer ()
   {
-    precondition (intmap.find (i) != intmap.end ());
-    push (intmap[i]);
   }
 
-  inline
-  void
-  Timer::pop (const std::string& task_name)
-  {
-    precondition (tasksmap[task_name] == *tasks.top ());
-    pop ();
-  }
-
-  inline
-  void
-  Timer::pop (const int i)
-  {
-    pop (intmap[i]);
-  }
-
-
-  inline
-  void
-  Timer::print_on_destruction (std::ostream& o)
-  {
-    dump_stream = &o;
-  }
-
-  inline
-  void
-  Timer::start ()
-  {
-    total.start ();
-  }
-
-  inline
-  void
-  Timer::stop ()
-  {
-    total.stop ();
-  }
-
-  inline
-  void
-  Timer::clear ()
-  {
-    precondition(tasks.empty ());
-
-    tasksmap.clear ();
-    intmap.clear ();
-    total.clear ();
-    tab_to_disp.clear ();
-    task_ordered.clear ();
-  }
-
-  inline
-  Timer::TimeVar&
-  Timer::operator[] (const std::string& s)
-  {
-    return tasksmap[s];
-  }
+  /*--------------.
+  | Timer.        |
+  | Arithmetics.  |
+  `--------------*/
 
   inline
   bool
   Timer::operator< (const Timer& rhs) const
   {
-    return total < rhs.total;
+    precondition (! (is_running_ || rhs.is_running_));
+
+    return graph_[0].total.cpu < rhs.graph_[0].total.cpu;
   }
 
-
-  /*--------------.
-  | Timer::Time.  |
-  `--------------*/
-
-  inline
-  Timer::Time::Time ()
-    : user (0), sys (0), wall (0)
-  { }
+  /*----------------------.
+  | Timer.                |
+  | Result computation.   |
+  `----------------------*/
 
   inline
-  Timer::Time::operator bool () const
+  void
+  Timer::build_connected_components ()
   {
-    return (false
-	    || wall
-	    || user
-	    || sys);
+    comp_id_.resize (num_vertices (graph_));
+    comp_count_ = strong_components (graph_, &comp_id_[0]);
+  }
+
+  /*-----------.
+  | Timer.     |
+  | Printing.  |
+  `-----------*/
+
+  inline
+  std::ostream&
+  Timer::print (std::ostream&         o,
+                timer::verbose_degree vd) const
+  {
+    print_output_graph(o, vd);
+
+    return o;
   }
 
   inline
-  bool
-  Timer::Time::operator ! () const
+  std::ostream&
+  Timer::export_dot (std::ostream&         o,
+                     timer::verbose_degree vd,
+                     double                ccr) const
   {
-    return (true
-	    && !wall
-	    && !user
-	    && !sys);
+    write_graphviz (o, graph_,
+                    timer::VertexWriter (*this, vd, ccr),
+                    timer::EdgeWriter   (*this, vd, ccr),
+                    timer::GraphWriter  (*this, vd, ccr));
+    return o;
   }
-
-  inline
-  Timer::Time&
-  Timer::Time::operator+= (const Time& lhs)
-  {
-    wall += lhs.wall;
-    user += lhs.user;
-    sys  += lhs.sys;
-    return *this;
-  }
-
-  inline
-  Timer::Time
-  Timer::Time::operator+ (const Time& lhs) const
-  {
-    Timer::Time res = *this;
-    return res += lhs;
-  }
-
-  inline
-  Timer::Time&
-  Timer::Time::operator-= (const Time& lhs)
-  {
-    wall -= lhs.wall;
-    user -= lhs.user;
-    sys  -= lhs.sys;
-    return *this;
-  }
-
-  inline
-  Timer::Time
-  Timer::Time::operator- (const Time& lhs) const
-  {
-    Timer::Time res = *this;
-    return res -= lhs;
-  }
-
-  inline
-  Timer::Time&
-  Timer::Time::operator/= (unsigned n)
-  {
-    wall /= n;
-    user /= n;
-    sys  /= n;
-    return *this;
-  }
-
-  inline
-  Timer::Time
-  Timer::Time::operator/ (unsigned n) const
-  {
-    Timer::Time res = *this;
-    return res /= n;
-  }
-
-  inline
-  bool
-  Timer::Time::operator< (const Timer::Time& rhs) const
-  {
-    return (user + sys < rhs.user + rhs.sys
-	    || user < rhs.user
-	    || wall < rhs.wall);
-  }
-
 
   /*--------------.
   | ScopedTimer.  |
   `--------------*/
 
   inline
-  ScopedTimer::ScopedTimer (Timer& timer, const std::string& key)
-    : timer_ (timer), key_ (key)
+  ScopedTimer::ScopedTimer (Timer&             timer,
+                            const unsigned int i)
   {
-    timer_.push (key_);
+    timer_ = &timer;
+    timer.push (i);
+  }
+
+  inline
+  ScopedTimer::ScopedTimer (Timer&             timer,
+                            const std::string& name)
+  {
+    timer_ = &timer;
+    timer.push (name);
   }
 
   inline
   ScopedTimer::~ScopedTimer ()
   {
-    timer_.pop (key_);
+    timer_->pop ();
   }
+
+  /*--------------------------.
+  | Free standing functions.  |
+  `--------------------------*/
+
+  /// Dump \a t on \a o.
+  inline
+  std::ostream&
+  operator<< (std::ostream& o,
+              const Timer&  t)
+  {
+    return t.print (o, timer::VERBOSE_NONE);
+  }
+
 
 } // namespace misc
 
 NAMESPACE_VCSN_END
 
-#endif // !VCSN_MISC_TIMER_HXX
+#endif //!VCSN_MISC_TIMER_HXX
