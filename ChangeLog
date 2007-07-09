@@ -1,28 +1,35 @@
-2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
+2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
-	Merge timer into the trunk
+	Merge changes to timer into the trunk
 	* ChangeLog: .
-
-	* include/vaucanson/misc/bencher.cc: Change to work with
-	the new Timer implementation.
-
-	* include/vaucanson/misc/global_timer.hh: .
 	* include/vaucanson/misc/timer.cc: .
 	* include/vaucanson/misc/timer.hh: .
-	* include/vaucanson/misc/timer.hxx: .
-	* include/vaucanson/misc/timer_internal_gathering.cc: New.
-	* include/vaucanson/misc/timer_internal_gathering.hh: New.
-	* include/vaucanson/misc/timer_internal_gathering.hxx: New.
-	* include/vaucanson/misc/timer_internal_graph.cc: New.
-	* include/vaucanson/misc/timer_internal_graph.hh: New.
-	* include/vaucanson/misc/timer_internal_graph.hxx: New.
-	New implementation of the Timer.
-	Read documentation in include/vaucanson/misc/timer.hh.
+	* include/vaucanson/misc/timer_internal_gathering.cc: .
+	* include/vaucanson/misc/timer_internal_gathering.hh: .
+	* include/vaucanson/misc/timer_internal_gathering.hxx: .
+	* include/vaucanson/misc/timer_internal_graph.cc: .
+	* include/vaucanson/misc/timer_internal_graph.hh: .
 
-	* taf-kit/src/common.hh,
-	* taf-kit/src/main.cc: Add command-line option to manipulate
-	the global timer.  Fix name conflict due to the new namespace
-	timer.
+	Merge changes made in r1685 (branch timer) into the trunk.
+
+2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Change timer sytem call.
+	* timer.cc: Adjustements in timer printing.
+	* timer.hh: Adjustements to new type.
+	* timer_internal_gathering.cc,
+	* timer_internal_gathering.hh, 
+	* timer_internal_gathering.hxx: New type for time representation.
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh: Adjustements to new type.
+
+	Change the system call that gets the system time
+	(getrusage (...) instead of times (...)).
+	Timer gains precision (+-4ms instead of +-10ms), and the
+	output is cleaner.
+	A new type for time representation is defined, along with
+	standard arithmetics, hence the heavy changes.
+	Inclusion chain (#include) changes slightly.
 
 2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
 

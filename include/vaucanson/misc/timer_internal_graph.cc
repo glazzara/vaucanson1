@@ -30,9 +30,15 @@
 # include <iomanip>
 
 # ifdef VAUCANSON
+#  include <vaucanson/misc/timer.hh>
 #  include <vaucanson/misc/timer_internal_graph.hh>
+#  include <vaucanson/misc/timer_internal_graph.hxx>
+#  include <vaucanson/misc/timer_internal_gathering.hxx>
 # else
+#  include "timer.hh"
 #  include "timer_internal_graph.hh"
+#  include "timer_internal_graph.hxx"
+#  include "timer_internal_gathering.hxx"
 # endif
 
 
@@ -90,8 +96,7 @@ namespace misc
         c_              (timer.comp_),
         c_id_           (timer.comp_id_),
         vd_             (vd),
-        chrg_col_ratio_ (ccr),
-        tps_            (timer.ticks_per_sec_)
+        chrg_col_ratio_ (ccr)
     {
     }
 
@@ -129,8 +134,8 @@ namespace misc
                       << "\\lOutgoing calls: " << std::setw (7)
                       << c_[i].out_calls
                       << "\\lSelf time:      " << std::setw (7)
-                      << double (c_[i].self.cpu) / tps_
-                      << "s\\l\""
+                      << c_[i].self.cpu
+                      << "\\l\""
                       << ",style=solid,shape=box]";
                   break;
 
@@ -145,23 +150,20 @@ namespace misc
                       << "\\lOutgoing calls: " << std::setw (7)
                       << c_[i].out_calls
                       << "\\l"
+		      << std::setiosflags (std::ios::fixed)
+		      << std::setprecision (2)
                       << "\\lSelf time:      " << std::setw (7)
-                      << double (c_[i].self.cpu) / tps_
-                      << 's'
-                      << "\\lSelf average:   " << std::setprecision (5)
-                      << std::setw (7)
-                      << double (int (c_[i].self.average * 1000)) / tps_
-                      << "ms"
-                      << "\\lSelf charge:    " << std::setprecision (3)
-                      << std::setw (7)
+                      << c_[i].self.cpu
+                      << "\\lSelf average:   " << std::setw (7)
+                      << c_[i].self.average
+                      << "\\lSelf charge:    " << std::setw (7)
                       << c_[i].self.charge << '%'
                       << "\\l"
                       << "\\lTotal time:     " << std::setw (7)
-                      << double (c_[i].total.cpu) / tps_
-                      << 's'
-                      << "\\lTotal charge:   " << std::setprecision (3)
-                      << std::setw (7)
+                      << c_[i].total.cpu
+                      << "\\lTotal charge:   " << std::setw (7)
                       << c_[i].total.charge << "%\\l\""
+		      << std::resetiosflags (std::ios::fixed)
                       << ",style=solid,shape=box]";
                   break;
 
@@ -176,41 +178,37 @@ namespace misc
                       << "\\lOutgoing calls:  " << std::setw (7)
                       << c_[i].out_calls
                       << "\\l"
+		      << std::setiosflags (std::ios::fixed)
+		      << std::setprecision (2)
                       << "\\lSelf time:       " << std::setw (7)
-                      << double (c_[i].self.cpu) / tps_
-                      << 's'
+                      << c_[i].self.cpu
                       << "\\lSelf user time:  " << std::setw (7)
-                      << c_[i].self.user << "ct"
-                      << "\\lSelf syst. time: "<< std::setw (7)
-                      << c_[i].self.system << "ct"
-                      << "\\lSelf average:    " << std::setprecision (5)
-                      << std::setw (7)
-                      << double (int (c_[i].self.average * 1000)) / tps_
-                      << "ms"
-                      << "\\lSelf charge:     " << std::setprecision (3)
-                      << std::setw (7)
+                      << c_[i].self.user
+                      << "\\lSelf syst. time: " << std::setw (7)
+                      << c_[i].self.system
+                      << "\\lSelf average:    " << std::setw (7)
+                      << c_[i].self.average
+                      << "\\lSelf charge:     " << std::setw (7)
                       << c_[i].self.charge << '%'
                       << "\\l"
                       << "\\lTotal time:      " << std::setw (7)
-                      << double (c_[i].total.cpu) / tps_
-                      << 's'
-                      << "\\lTotal average:   " << std::setprecision (5)
-                      << std::setw (7)
-                      << double (int (c_[i].total.average * 1000)) / tps_
-                      << "ms"
-                      << "\\lTotal charge:    " << std::setprecision (3)
-                      << std::setw (7)
+                      << c_[i].total.cpu
+                      << "\\lTotal average:   " << std::setw (7)
+                      << c_[i].total.average
+                      << "\\lTotal charge:    " << std::setw (7)
                       << c_[i].total.charge << '%'
                       << "\\l"
-                      << "\\lInternal average:" << std::setprecision (5)
-                      << std::setw (7)
-                      << double (int (c_[i].int_average * 1000)) / tps_
-                      << "ms\\l\""
+                      << "\\lInternal average:" << std::setw (7)
+                      << c_[i].int_average
+                      << "\\l\""
+		      << std::resetiosflags (std::ios::fixed)
                       << ",style=solid,shape=box]";
                 }
               out << std::endl
                   << "style=filled\n"
                   << "fillcolor=\""
+		  << std::setiosflags (std::ios::fixed)
+		  << std::setprecision (2)
                   << std::max
                 (0.35 - c_[i].self.charge * chrg_col_ratio_ * c_.size () / 700,
                  0.)
@@ -219,7 +217,9 @@ namespace misc
                 (0.1 + c_[i].self.charge * chrg_col_ratio_ * c_.size () / 700,
                  0.4)
                   << ','
-                  << "0.99" << "\";" << std::endl;
+                  << "0.99" << "\";"
+		  << std::resetiosflags (std::ios::fixed)
+		  << std::endl;
 
               for (std::list<int>::const_iterator li = c_[i].members.begin();
                    li != c_[i].members.end(); li++)
@@ -241,8 +241,7 @@ namespace misc
         c_                (timer.comp_),
         c_id_             (timer.comp_id_),
         vd_               (vd),
-        chrg_col_ratio_   (ccr),
-        tps_              (timer.ticks_per_sec_)
+        chrg_col_ratio_   (ccr)
     {
     }
 
@@ -262,7 +261,7 @@ namespace misc
           out << "\\lCalls:     " << std::setw (7)
               << g_[v].count + g_[v].recursive_count + g_[v].int_count
               << "\\lSelf time: " << std::setw (7)
-              << double (g_[v].self.cpu) / tps_ << 's';
+              << g_[v].self.cpu;
           break;
 
         case VERBOSE_NORMAL:
@@ -270,20 +269,23 @@ namespace misc
               << "\\lCalls:        " << std::setw (7)
               << g_[v].count + g_[v].recursive_count + g_[v].int_count
               << "\\l"
+	      << std::setiosflags (std::ios::fixed)
+	      << std::setprecision (2)
               << "\\lSelf time:    " << std::setw (7)
-              << double (g_[v].self.cpu) / tps_ << 's'
-              << "\\lSelf average: " << std::setprecision (5) << std::setw (7)
-              << double (int (g_[v].self.average * 1000)) / tps_ << "ms"
-              << "\\lSelf charge:  " << std::setprecision (3)
-              << std::setw (7) << g_[v].self.charge << '%';
+              << g_[v].self.cpu
+              << "\\lSelf average: " << std::setw (7)
+              << g_[v].self.average
+              << "\\lSelf charge:  " << std::setw (7)
+	      << g_[v].self.charge << '%';
           if (c_[c_id_[g_[v].id]].member_count <= 1)
             {
               out << "\\l"
                   << "\\lTotal time:   " << std::setw (7)
-                  << double (g_[v].total.cpu) / tps_ << 's'
-                  << "\\lTotal charge: " << std::setprecision (3)
-                  << std::setw (7) << g_[v].total.charge << '%';
+                  << g_[v].total.cpu
+                  << "\\lTotal charge: " << std::setw (7)
+		  << g_[v].total.charge << '%';
             }
+	  out << std::resetiosflags (std::ios::fixed);
           break;
 
 
@@ -292,38 +294,42 @@ namespace misc
               << "\\lCalls:           " << std::setw (7)
               << g_[v].count + g_[v].recursive_count + g_[v].int_count
               << "\\l"
+	      << std::setiosflags (std::ios::fixed)
+	      << std::setprecision (2)
               << "\\lSelf time:       " << std::setw (7)
-              << double (g_[v].self.cpu) / tps_ << 's'
+              << g_[v].self.cpu
               << "\\lSelf user time:  " << std::setw (7)
-              << g_[v].self.user << "ct"
+              << g_[v].self.user
               << "\\lSelf system time:" << std::setw (7)
-              << g_[v].self.system << "ct"
-              << "\\lSelf average:    " << std::setprecision (5)
-              << std::setw (7)
-              << double (int (g_[v].self.average * 1000)) / tps_ << "ms"
-              << "\\lSelf charge:     " << std::setprecision (3)
+              << g_[v].self.system
+              << "\\lSelf average:    " << std::setw (7)
+              << g_[v].self.average
+              << "\\lSelf charge:     "
               << std::setw (7) << g_[v].self.charge << '%';
           if (c_[c_id_[g_[v].id]].member_count <= 1)
             {
               out << "\\l"
                   << "\\lTotal time:      " << std::setw (7)
-                  << double (g_[v].total.cpu) / tps_ << 's'
-                  << "\\lTotal average:   " << std::setprecision (5)
-                  << std::setw (7)
-                  << double (int (g_[v].total.average * 1000)) / tps_ << "ms"
-                  << "\\lTotal charge:    " << std::setprecision (3)
+                  << g_[v].total.cpu
+                  << "\\lTotal average:   " << std::setw (7)
+                  << g_[v].total.average
+                  << "\\lTotal charge:    "
                   << std::setw (7) << g_[v].total.charge << '%';
             }
+	  out << std::setiosflags (std::ios::fixed);
         }
       out << "\\l\""
           << ", fillcolor=\""
+	  << std::setiosflags (std::ios::fixed)
+	  << std::setprecision (2)
           << std::max
         (0.35 - g_[v].self.charge * chrg_col_ratio_ * c_.size () / 700, 0.)
           << ','
           << std::min
         (0.1 + g_[v].self.charge * chrg_col_ratio_ * c_.size () / 700, 0.4)
           << ','
-          << "0.99"<< "\"]";
+          << "0.99" << "\"]"
+	  << std::setiosflags (std::ios::fixed);
     }
 
     /*-----------------------.
@@ -337,8 +343,7 @@ namespace misc
       : g_              (timer.graph_),
         c_id_           (timer.comp_id_),
         vd_             (vd),
-        chrg_col_ratio_ (ccr),
-        tps_            (timer.ticks_per_sec_)
+        chrg_col_ratio_ (ccr)
     {
     }
 
@@ -364,23 +369,27 @@ namespace misc
               << "Calls: " << std::setw (7) << g_[e].count;
           if (c_id_[g_[e].to] != c_id_[g_[e].from])
             {
-              out << "\\lT.avg: " << std::setprecision (5) << std::setw (7)
-                  << double (int (g_[e].total.average * 1000)) / tps_ << "ms";
+              out << std::setiosflags (std::ios::fixed)
+		  << "\\lT.avg: " << std::setprecision (2) << std::setw (7)
+                  << g_[e].total.average;
             }
-          out << "\\l\"]";
+          out << "\\l\"]"
+	      << std::resetiosflags (std::ios::fixed);
           break;
 
         default:
           out << "[label=\""
               << "Calls: " << std::setw (7) << g_[e].count
-              << "\\lS.avg: " << std::setprecision (5) << std::setw (7)
-              << double (int (g_[e].self.average * 1000)) / tps_ << "ms";
+	      << std::setiosflags (std::ios::fixed)
+              << "\\lS.avg: " << std::setprecision (2) << std::setw (7)
+              << g_[e].self.average;
           if (c_id_[g_[e].to] != c_id_[g_[e].from])
             {
-              out << "\\lT.avg: " << std::setprecision (5) << std::setw (7)
-                  << double (int (g_[e].total.average * 1000)) / tps_ << "ms";
+              out << "\\lT.avg: " << std::setw (7)
+                  << g_[e].total.average;
             }
-          out << "\\l\"]";
+          out << "\\l\"]"
+	      << std::resetiosflags (std::ios::fixed);
         }
     }
 
@@ -390,13 +399,12 @@ namespace misc
 
     INLINE_TIMER_CC
     TimeStats::TimeStats ()
-      : wall    (0),
-        user    (0),
-        system  (0),
-        cpu     (0),
-        average (0),
+      : average (0),
         charge  (0)
     {
+      cpu.clear ();
+      user.clear ();
+      system.clear ();
     }
 
     // " in task names would produce unwanted results.
@@ -406,7 +414,6 @@ namespace misc
                      const std::string& name) const
     {
       o << "<time name=\"" << name
-        << "\" wall=\"" << wall
         << "\" user=\"" << user
         << "\" system=\"" << system
         << "\" cpu=\"" << cpu
@@ -437,20 +444,18 @@ namespace misc
     {
       count           += cnt;
 
-      this->total.wall      += total.wall_;
       this->total.user      += total.user_;
       this->total.system    += total.sys_;
       this->total.cpu       += total.sys_ + total.user_;
       this->total.average   = this->total.cpu / double (count);
-      this->total.charge    = this->total.cpu * 100 /
-	double (program.sys_ + program.user_);
-      this->self.wall       += self.wall_;
+      this->total.charge    =
+	100 * this->total.cpu.s () / (program.sys_ + program.user_).s ();
       this->self.user       += self.user_;
       this->self.system     += self.sys_;
       this->self.cpu        += self.sys_ + self.user_;
       this->self.average    = this->self.cpu / double (count);
-      this->self.charge     = this->self.cpu * 100 /
-	double (program.sys_ + program.user_);
+      this->self.charge     =
+	100 * this->self.cpu.s () / (program.sys_ + program.user_).s ();
     }
 
     INLINE_TIMER_CC
@@ -460,7 +465,6 @@ namespace misc
     {
       count         += cnt;
 
-      this->self.wall     += self.wall_;
       this->self.user     += self.user_;
       this->self.system   += self.sys_;
       this->self.cpu      += self.sys_ + self.user_;
@@ -473,7 +477,6 @@ namespace misc
     {
       count         += cnt;
 
-      this->total.wall    += total.wall_;
       this->total.user    += total.user_;
       this->total.system  += total.sys_;
       this->total.cpu     += total.sys_ + total.user_;
@@ -481,14 +484,14 @@ namespace misc
 
     INLINE_TIMER_CC
     void
-    GraphCall::compute_average (clock_t         program_cpu)
+    GraphCall::compute_average (TimeVal         program_cpu)
     {
       total.average = total.cpu / double (count);
       total.charge  =
-	(program_cpu == 0 ? 0 : total.cpu * 100 / double (program_cpu));
+	(program_cpu == 0 ? 0 : 100 * total.cpu.s () / program_cpu.s ());
       self.average  = self.cpu / double (count);
       self.charge   =
-	(program_cpu == 0 ? 0 : self.cpu * 100 / double (program_cpu));
+	(program_cpu == 0 ? 0 : 100 * self.cpu.s () / program_cpu.s ());
     }
 
     /*-------------------.
@@ -513,23 +516,21 @@ namespace misc
     {
       count          += cnt;
 
-      this->total.wall     += total.wall_;
       this->total.user     += total.user_;
       this->total.system   += total.sys_;
       this->total.cpu      += total.sys_ + total.user_;
       this->total.average  = this->total.cpu / double (count);
       this->total.charge   =
-	(program.sys_ + program.user_ == 0 ? 0 : this->total.cpu * 100 /
-	 double (program.sys_ + program.user_));
+	(program.sys_ + program.user_ == 0 ? 0 :
+	 100 * this->total.cpu.s () / (program.sys_ + program.user_).s ());
 
-      this->self.wall      += self.wall_;
       this->self.user      += self.user_;
       this->self.system    += self.sys_;
       this->self.cpu       += self.sys_ + self.user_;
       this->self.average   = this->self.cpu / double (count);
       this->self.charge    =
-	(program.sys_ + program.user_ == 0 ? 0 :this->self.cpu * 100 /
-	 double (program.sys_ + program.user_));
+	(program.sys_ + program.user_ == 0 ? 0 :
+	 100 * this->self.cpu.s () / (program.sys_ + program.user_).s ());
     }
 
     INLINE_TIMER_CC
@@ -539,7 +540,6 @@ namespace misc
     {
       int_count    += cnt;
     
-      this->self.wall    += self.wall_;
       this->self.user    += self.user_;
       this->self.system  += self.sys_;
       this->self.cpu     += self.sys_ + self.user_;
@@ -547,14 +547,18 @@ namespace misc
 
     INLINE_TIMER_CC
     void
-    GraphTask::compute_average (clock_t         program_cpu)
+    GraphTask::compute_average (TimeVal         program_cpu)
     {
-      total.average = total.cpu / double (count + int_count + recursive_count);
+      total.average = 
+	(count + int_count + recursive_count == 0 ? 0 :
+	 total.cpu / double (count + int_count + recursive_count));
       total.charge  =
-	(program_cpu == 0 ? 0 : total.cpu * 100 / double (program_cpu));
-      self.average  = self.cpu / double (count + int_count + recursive_count);
+	(program_cpu == 0 ? 0 : 100 * total.cpu.s () / program_cpu.s ());
+      self.average  =
+	(count + int_count + recursive_count == 0 ? 0 :
+	 self.cpu / double (count + int_count + recursive_count));
       self.charge   =
-	(program_cpu == 0 ? 0 : self.cpu * 100 / double (program_cpu));
+	(program_cpu == 0 ? 0 : 100 * self.cpu.s () / program_cpu.s ());
     }
 
     /*------------------------.
@@ -581,7 +585,6 @@ namespace misc
       self.cpu    += task.self.cpu;
       self.user   += task.self.user;
       self.system += task.self.system;
-      self.wall   += task.self.wall;
     }
 
     INLINE_TIMER_CC
@@ -591,7 +594,6 @@ namespace misc
       total.cpu    += call.total.cpu;
       total.user   += call.total.user;
       total.system += call.total.system;
-      total.wall   += call.total.wall;
 
       calls += call.count;
 
@@ -600,17 +602,20 @@ namespace misc
 
     INLINE_TIMER_CC
     void
-    GraphComponent::compute_average (clock_t program_cpu)
+    GraphComponent::compute_average (TimeVal program_cpu)
     {
       self.charge   =
-	(program_cpu == 0 ? 0 : self.cpu * 100 / double (program_cpu)); 
-      self.average  = self.cpu / double (calls);
+	(program_cpu == 0 ? 0 : 100 * self.cpu.s () / program_cpu.s ()); 
+      self.average  =
+	(calls == 0 ? 0 : self.cpu / double (calls));
 
       total.charge  =
-	(program_cpu == 0 ? 0 : total.cpu * 100 / double (program_cpu)); 
-      total.average = total.cpu / double (calls);
+	(program_cpu == 0 ? 0 : 100 * total.cpu.s () / program_cpu.s ()); 
+      total.average =
+	(calls == 0 ? 0 : total.cpu / double (calls));
 
-      int_average   = self.cpu / double (int_calls);
+      int_average   =
+	(int_calls == 0 ? 0 : self.cpu / double (int_calls));
     }
   } // namespace timer
 } // namespace misc
@@ -618,6 +623,5 @@ namespace misc
 NAMESPACE_VCSN_END
 
 # undef INLINE_TIMER_CC
-
 
 #endif //!VCSN_MISC_TIMER_INTERNAL_GRAPH_CC

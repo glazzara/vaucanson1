@@ -25,12 +25,15 @@
 #ifndef VCSN_MISC_TIMER_INTERNAL_GATHERING_CC
 # define VCSN_MISC_TIMER_INTERNAL_GATHERING_CC
 
-# include <sys/times.h>
+# include <sys/time.h>
+# include <sys/resource.h>
 
 # ifdef VAUCANSON
 #  include <vaucanson/misc/timer_internal_gathering.hh>
+#  include <vaucanson/misc/timer_internal_gathering.hxx>
 # else
 #  include "timer_internal_gathering.hh"
+#  include "timer_internal_gathering.hxx"
 # endif
 
 
@@ -49,6 +52,36 @@ namespace misc
 {
   namespace timer
   {
+    /*-----------------.
+    | Timer::TimeVal.  |
+    `-----------------*/
+
+    INLINE_TIMER_CC
+    std::ostream&
+    TimeVal::print (std::ostream&  o,
+		    time_unit      u) const
+    {
+      switch (u)
+	{
+	case TIME_DEFAULT:
+	  if (ms () < 200)
+	    return o << ms () << "ms";
+	  if (s () < 300)
+	    return o << s () << "s ";
+	  if (m () < 60)
+	    return o << m () << "m ";
+	  return o << h () << "h ";
+	case TIME_H:
+	  return o << h () << "h ";
+	case TIME_M:
+	  return o << m () << "m ";
+	case TIME_S:
+	  return o << s () << "s ";
+	default:
+	  return o << ms () << "ms";
+	}
+    }
+
     /*-------------------.
     | Timer::TimeStamp.  |
     `-------------------*/
@@ -57,41 +90,37 @@ namespace misc
     void
     TimeStamp::clear ()
     {
-      wall_ = 0;
-      user_ = 0;
-      sys_  = 0;
+      user_.clear ();
+      sys_.clear ();
     }
 
     INLINE_TIMER_CC
     void
     TimeStamp::set_to_now ()
     {
-      tms tms;
+      struct rusage ru;
 
-      wall_ = times (&tms);
-      user_ = tms.tms_utime;
-      sys_  = tms.tms_stime;
+      getrusage (RUSAGE_SELF, &ru);
+      user_.set (ru.ru_utime);
+      sys_.set (ru.ru_stime);
     }
 
     INLINE_TIMER_CC
     void
     TimeStamp::set_to_lap ()
     {
-      clock_t wall;
-      tms     tms;
+      struct rusage ru;
 
-      wall  = times (&tms);
+      getrusage (RUSAGE_SELF, &ru);
 
-      wall_ = wall - wall_;
-      user_ = tms.tms_utime - user_;
-      sys_  = tms.tms_stime - sys_;
+      user_ = (TimeVal (ru.ru_utime)) - user_;
+      sys_  = (TimeVal (ru.ru_stime)) - sys_;
     }
 
     INLINE_TIMER_CC
     TimeStamp&
     TimeStamp::operator+= (const TimeStamp& rhs)
     {
-      wall_ += rhs.wall_;
       user_ += rhs.user_;
       sys_  += rhs.sys_;
 
@@ -102,7 +131,6 @@ namespace misc
     TimeStamp&
     TimeStamp::operator-= (const TimeStamp& rhs)
     {
-      wall_ -= rhs.wall_;
       user_ -= rhs.user_;
       sys_  -= rhs.sys_;
 
@@ -165,6 +193,5 @@ namespace misc
 NAMESPACE_VCSN_END
 
 # undef INLINE_TIMER_CC
-
 
 #endif //!VCSN_MISC_TIMER_INTERNAL_GATHERING_CC

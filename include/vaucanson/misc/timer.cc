@@ -32,6 +32,9 @@
 #  include <vaucanson/misc/timer.hh>
 # else
 #  include "timer.hh"
+#  include "timer_internal_gathering.hxx"
+#  include "timer_internal_graph.hxx"
+#  include "timer.hxx"
 # endif
 
 
@@ -57,8 +60,7 @@ namespace misc
 
   INLINE_TIMER_CC
   Timer::Timer ()
-    : ticks_per_sec_ (sysconf (_SC_CLK_TCK)),
-      comp_count_    (0),
+    : comp_count_    (0),
       task_count_    (1),
       is_running_    (false),
       cleared_       (true)
@@ -67,8 +69,7 @@ namespace misc
 
   INLINE_TIMER_CC
   Timer::Timer       (const Timer& rhs)
-    : ticks_per_sec_ (rhs.ticks_per_sec_),
-      calls_         (rhs.calls_),
+    : calls_         (rhs.calls_),
       tasks_         (rhs.tasks_),
       names_         (rhs.names_),
       time_          (rhs.time_),
@@ -88,7 +89,6 @@ namespace misc
     if (this == &rhs)
       return *this;
 
-    ticks_per_sec_ = rhs.ticks_per_sec_;
     names_         = rhs.names_;
     time_          = rhs.time_;
     graph_         = rhs.graph_;
@@ -342,7 +342,8 @@ namespace misc
         return *this;
       }
 
-    clock_t total_cpu = graph_[0].total.cpu + rhs.graph_[0].total.cpu;
+    timer::TimeVal total_cpu =
+      graph_[0].total.cpu + rhs.graph_[0].total.cpu;
 
     for (vxrange = vertices (graph_), vx = vxrange.first,
            vxrange2 = vertices (rhs.graph_), vx2 = vxrange2.first;
@@ -351,12 +352,10 @@ namespace misc
         vd  = *vx;
         vd2 = *vx2;
 
-        graph_[vd].total.wall   += rhs.graph_[vd2].total.wall;
         graph_[vd].total.user   += rhs.graph_[vd2].total.user;
         graph_[vd].total.system += rhs.graph_[vd2].total.system;
         graph_[vd].total.cpu    += rhs.graph_[vd2].total.cpu;
 
-        graph_[vd].self.wall    += rhs.graph_[vd2].self.wall;
         graph_[vd].self.user    += rhs.graph_[vd2].self.user;
         graph_[vd].self.system  += rhs.graph_[vd2].self.system;
         graph_[vd].self.cpu     += rhs.graph_[vd2].self.cpu;
@@ -375,12 +374,10 @@ namespace misc
         ed  = *ei;
         ed2 = *ei2;
 
-        graph_[ed].total.wall   += rhs.graph_[ed2].total.wall;
         graph_[ed].total.user   += rhs.graph_[ed2].total.user;
         graph_[ed].total.system += rhs.graph_[ed2].total.system;
         graph_[ed].total.cpu    += rhs.graph_[ed2].total.cpu;
 
-        graph_[ed].self.wall    += rhs.graph_[ed2].self.wall;
         graph_[ed].self.user    += rhs.graph_[ed2].self.user;
         graph_[ed].self.system  += rhs.graph_[ed2].self.system;
         graph_[ed].self.cpu     += rhs.graph_[ed2].self.cpu;
@@ -415,19 +412,17 @@ namespace misc
     timer::vertex_range vxrange;
     timer::edge_range   erange;
 
-    clock_t      total_cpu = graph_[0].total.cpu / rhs;
+    timer::TimeVal total_cpu = graph_[0].total.cpu / rhs;
 
     for (vxrange = vertices (graph_), vx = vxrange.first;
          vx != vxrange.second; ++vx)
       {
         vd = *vx;
 
-        graph_[vd].total.wall   /= rhs;
         graph_[vd].total.user   /= rhs;
         graph_[vd].total.system /= rhs;
         graph_[vd].total.cpu    /= rhs;
 
-        graph_[vd].self.wall    /= rhs;
         graph_[vd].self.user    /= rhs;
         graph_[vd].self.system  /= rhs;
         graph_[vd].self.cpu     /= rhs;
@@ -444,12 +439,10 @@ namespace misc
       {
         ed = *ei;
 
-        graph_[ed].total.wall   /= rhs;
         graph_[ed].total.user   /= rhs;
         graph_[ed].total.system /= rhs;
         graph_[ed].total.cpu    /= rhs;
 
-        graph_[ed].self.wall    /= rhs;
         graph_[ed].self.user    /= rhs;
         graph_[ed].self.system  /= rhs;
         graph_[ed].self.cpu     /= rhs;
@@ -723,35 +716,6 @@ namespace misc
   }
 
   INLINE_TIMER_CC
-  std::ostream&
-  Timer::print_time (std::ostream& o,
-                     double        time,
-                     time_unit     u) const
-  {
-    switch (u)
-      {
-      case TIME_DEFAULT:
-        if (time < 0.200)
-          return o << time * 1000 << "ms";
-        if (time < 300)
-          return o << time << "s ";
-        time /= 60;
-        if (time < 60)
-          return o << time << "m ";
-        time /= 60;
-        return o << time << "h ";
-      case TIME_H:
-        return o << time / 3600 << "h ";
-      case TIME_M:
-        return o << time / 60 << "m ";
-      case TIME_S:
-        return o << time << "s ";
-      default:
-        return o << time * 1000 << "ms";
-      }
-  }
-
-  INLINE_TIMER_CC
   void
   Timer::print_output_graph (std::ostream&         o,
                              timer::verbose_degree vd) const
@@ -766,17 +730,17 @@ namespace misc
 
     std::list<timer::GraphTask> gtlist;
 
-    time_unit time_unit =
-      (int (graph_[0].self.cpu) < 0.2 * int (task_count_ * ticks_per_sec_)
-       && int (graph_[0].self.cpu) < 10 * ticks_per_sec_)
-      ? TIME_MS :
-      (int (graph_[0].self.cpu) < 120 * int (task_count_ * ticks_per_sec_)
-       && int (graph_[0].self.cpu) < 10000 * ticks_per_sec_)
-      ? TIME_S :
-      (int (graph_[0].self.cpu) < 7200 * int (task_count_ * ticks_per_sec_)
-       && int (graph_[0].self.cpu) < 600000 * ticks_per_sec_)
-      ? TIME_M :
-      TIME_H;
+    timer::time_unit time_unit =
+      (graph_[0].self.cpu.ms () < 200 * int (task_count_)
+       && graph_[0].self.cpu.ms () < 10000)
+      ? timer::TIME_MS :
+      (graph_[0].self.cpu.s () < 120 * int (task_count_)
+       && graph_[0].self.cpu.s () < 10000)
+      ? timer::TIME_S :
+      (graph_[0].self.cpu.m () < 120 * int (task_count_)
+       && graph_[0].self.cpu.m () < 10000)
+      ? timer::TIME_M :
+      timer::TIME_H;
 
     o << "[Task list:]\n\n"
       << "Charge  id:        <name>        total"
@@ -804,11 +768,11 @@ namespace misc
         else
           {
             o << std::setprecision (2) << std::setw (7);
-            print_time (o, double (li->total.cpu) / ticks_per_sec_, time_unit);
+            li->total.cpu.print (o, time_unit);
           }
 
         o << std::setprecision (2) << std::setw (7);
-        print_time (o, double (li->self.cpu) / ticks_per_sec_, time_unit);
+        li->self.cpu.print (o, time_unit);
 
         o << std::resetiosflags (std::ios::fixed);
 
@@ -818,14 +782,14 @@ namespace misc
         o << std::setiosflags (std::ios::fixed);
 
         o << std::setprecision (2) << std::setw (9);
-        print_time (o, double (li->self.average) / ticks_per_sec_);
+        li->self.average.print (o);
 
         if (comp_[comp_id_[li->id]].member_count > 1)
           o << "    (C:" << std::setw (3) << comp_id_[li->id] << ')';
         else
           {
             o << std::setprecision (2) << std::setw (9);
-            print_time (o, double (li->total.average) / ticks_per_sec_);
+            li->total.average.print (o);
           }
 
         o << std::resetiosflags (std::ios::fixed);
@@ -862,10 +826,10 @@ namespace misc
               << comp_[c].self.charge << '%';
 
             o << std::setprecision (2) << std::setw (7);
-            print_time (o, double (comp_[c].total.cpu) / ticks_per_sec_);
+            comp_[c].total.cpu.print (o);
 
             o << std::setprecision (2) << std::setw (7);
-            print_time (o, double (comp_[c].self.cpu) / ticks_per_sec_);
+            comp_[c].self.cpu.print (o);
 
             o << std::resetiosflags (std::ios::fixed);
 
@@ -875,13 +839,13 @@ namespace misc
             o << std::setiosflags (std::ios::fixed);
 
             o << std::setprecision (2) << std::setw (10);
-            print_time (o, double (comp_[c].int_average) / ticks_per_sec_);
+            comp_[c].int_average.print (o);
 
             o << std::setprecision (2) << std::setw (10);
-            print_time (o, double (comp_[c].self.average) / ticks_per_sec_);
+            comp_[c].self.average.print (o);
 
             o << std::setprecision (2) << std::setw (10);
-            print_time (o, double (comp_[c].total.average) / ticks_per_sec_);
+            comp_[c].total.average.print (o);
 
             o << std::resetiosflags (std::ios::fixed);
 
@@ -901,7 +865,7 @@ namespace misc
                 o << "         ";
 
                 o << std::setprecision (2) << std::setw (7);
-                print_time (o, double (task.self.cpu) / ticks_per_sec_);
+                task.self.cpu.print (o);
 
                 o << std::resetiosflags (std::ios::fixed);
 
@@ -912,7 +876,7 @@ namespace misc
                 o << std::setiosflags (std::ios::fixed);
 
                 o << std::setprecision (2) << std::setw (10);
-                print_time (o, double (task.self.average) / ticks_per_sec_);
+                task.self.average.print (o);
 
                 o << std::resetiosflags (std::ios::fixed);
 
@@ -960,13 +924,13 @@ namespace misc
             o << "        ";
 
             o << std::setprecision (2) << std::setw (6);
-            print_time (o, double (call.self.cpu) / ticks_per_sec_);
+            call.self.cpu.print (o);
 
             o << std::setw (12)
               << call.count;
 
             o << std::setprecision (2) << std::setw (9);
-            print_time (o, double (call.self.average) / ticks_per_sec_);
+            call.self.average.print (o);
 
             o << std::resetiosflags (std::ios::fixed);
 
@@ -992,11 +956,11 @@ namespace misc
         else
           {
             o << std::setprecision (2) << std::setw (6);
-            print_time (o, double (task.total.cpu) / ticks_per_sec_);
+            task.total.cpu.print (o);
           }
 
         o << std::setprecision (2) << std::setw (6);
-        print_time (o, double (task.self.cpu) / ticks_per_sec_);
+        task.self.cpu.print (o);
 
         o << std::resetiosflags (std::ios::fixed);
 
@@ -1006,7 +970,7 @@ namespace misc
         o << std::setiosflags (std::ios::fixed);
 
         o << std::setprecision (2) << std::setw (9);
-        print_time (o, double (task.self.average) / ticks_per_sec_);
+        task.self.average.print (o);
 
         if (comp_[comp_id_[task.id]].member_count > 1)
           o << "   (C:" << std::setw (3)
@@ -1014,7 +978,7 @@ namespace misc
         else
           {
             o << std::setprecision (2) << std::setw (9);
-            print_time (o, double (task.total.average) / ticks_per_sec_);
+            task.total.average.print (o);
           }
 
         o << std::resetiosflags (std::ios::fixed);
@@ -1043,7 +1007,7 @@ namespace misc
             o << "        ";
 
             o << std::setprecision (2) << std::setw (6);
-            print_time (o, double (call.self.cpu) / ticks_per_sec_);
+            call.self.cpu.print (o);
 
             o << std::resetiosflags (std::ios::fixed);
 
@@ -1053,7 +1017,7 @@ namespace misc
             o << std::setiosflags (std::ios::fixed);
 
             o << std::setprecision (2) << std::setw (9);
-            print_time (o, double (call.self.average) / ticks_per_sec_);
+            call.self.average.print (o);
 
             o << std::resetiosflags (std::ios::fixed);
 
@@ -1088,19 +1052,17 @@ namespace misc
 
         o << '\n';
 
-        o << "Clock ticks per second: " << std::setw (10) << ticks_per_sec_
-          << "\n\n";
-
-        o << "Self wall time:         " << std::setw (10) << task.self.wall
-          << '\n';
-        o << "Self cpu time:          " << std::setw (10) << task.self.cpu
-          << '\n';
-        o << "Self user time:         " << std::setw (10) << task.self.user
-          << '\n';
-        o << "Self system time:       " << std::setw (10) << task.self.system
-          << '\n';
-
         o << std::setiosflags (std::ios::fixed);
+
+        o << "Self cpu time:          " << std::setw (10)
+	  << std::setprecision (2) << task.self.cpu
+          << '\n';
+        o << "Self user time:         " << std::setw (10)
+	  << std::setprecision (2) << task.self.user
+          << '\n';
+        o << "Self system time:       " << std::setw (10)
+	  << std::setprecision (2) << task.self.system
+          << '\n';
 
         o << "Self average cpu time:  " << std::setw (10)
 	  << std::setprecision (2)
@@ -1109,20 +1071,16 @@ namespace misc
 	  << std::setprecision (1)
           << task.self.charge << "%\n";
 
-	o << std::resetiosflags (std::ios::fixed);
-
         o << '\n';
-
-        o << "Total wall time:        " << std::setw (10) << task.total.wall
+        o << "Total cpu time:         " << std::setw (10)
+	  << std::setprecision (2) << task.total.cpu
           << '\n';
-        o << "Total cpu time:         " << std::setw (10) << task.total.cpu
+        o << "Total user time:        " << std::setw (10)
+	  << std::setprecision (2) << task.total.user
           << '\n';
-        o << "Total user time:        " << std::setw (10) << task.total.user
+        o << "Total system time:      " << std::setw (10)
+	  << std::setprecision (2) << task.total.system
           << '\n';
-        o << "Total system timer:     " << std::setw (10) << task.total.system
-          << '\n';
-
-        o << std::setiosflags (std::ios::fixed);
 
         o << "Total average cpu time: " << std::setw (10)
 	  << std::setprecision (2)
