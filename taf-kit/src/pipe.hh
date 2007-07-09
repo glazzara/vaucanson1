@@ -21,7 +21,19 @@
 /**
  * @file pipe.hh
  *
- * This file contains class declarations that allow sequences of commands.
+ * This file contains class declarations that allow sequences of
+ * commands.
+ *
+ * In taf-kit binaries, commands can sequenced using "\|".
+ * Command-line options are specific to their command except
+ * Timer & Bencher manipulation options (--report-time, --bench,
+ * --export-time-dot, --export-time-xml), which are global to
+ * the whole sequence.
+ * i.e.: --bench will benchmark the whole sequence.
+ *
+ * When possible, the internal representation of the object being
+ * manipulated (e.g. automaton or rational expression) is kept
+ * between commands.
  */
 
 # include "common.hh"
@@ -60,7 +72,11 @@ class command_output
 {
 public:
   void input ();
+  void clear ();
+
   void set_state (int);
+  void set_name  (std::string&);
+  void set_name  (char*&);
 
   void init ();
 
@@ -72,6 +88,8 @@ public:
   std::ostringstream     stream;
   command_output_variant output;
   int                    status;
+  std::string		 name;
+  bool			 empty;
 };
 
 #endif /* !PIPE_HH */

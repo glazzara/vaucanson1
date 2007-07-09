@@ -272,6 +272,8 @@ int main (int argc, char* argv[])
 
 	  try
 	    {
+	      GLOBAL_RESULT.set_name (args.args[0]);
+	      GLOBAL_RESULT.clear ();
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
 	      TIMER_SCOPED(os.str () + std::string (args.args[0]));
@@ -287,8 +289,9 @@ int main (int argc, char* argv[])
 	    break;
 	}
 
-      boost::apply_visitor (automaton_final_output (),
-			    GLOBAL_RESULT.output);
+      if (!GLOBAL_RESULT.empty)
+	boost::apply_visitor (pipe_stream_writer (std::cout),
+			      GLOBAL_RESULT.output);
 
       TIMER_STOP ();
 

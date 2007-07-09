@@ -38,10 +38,12 @@ using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 using namespace vcsn::io;
 
-class automaton_final_output
+class pipe_stream_writer
   : public boost::static_visitor<>
 {
 public:
+  pipe_stream_writer (std::ostream&);
+
   void operator() (int& i) const;
 
   void operator() (std::string& str) const;
@@ -59,6 +61,8 @@ public:
 
   template<typename T>
   void operator() (T&) const;
+
+  std::ostream& o;
 };
 
 #endif /* !PIPE_WRITERS_HH */

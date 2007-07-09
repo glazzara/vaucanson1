@@ -31,53 +31,59 @@ using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 using namespace vcsn::io;
 
-void
-automaton_final_output::operator() (int&) const
+
+pipe_stream_writer::pipe_stream_writer (std::ostream& os)
+  : o (os)
 {
-  std::cout << "Last command output is not a printable type" << std::endl;
 }
 
 void
-automaton_final_output::operator() (std::string& str) const
+pipe_stream_writer::operator() (int&) const
 {
-  std::cout << str;
 }
 
 void
-automaton_final_output::operator() (automaton_t& a) const
+pipe_stream_writer::operator() (std::string& str) const
 {
-  std::cout << automaton_saver (a, string_out (), XML ());
+  o << str;
+}
+
+void
+pipe_stream_writer::operator() (automaton_t& a) const
+{
+  o << automaton_saver (a, string_out (), XML ());
 }
 
 # ifndef WITH_TWO_ALPHABETS
 void
-automaton_final_output::operator() (rat_exp_t& a) const
+pipe_stream_writer::operator() (rat_exp_t& a) const
 {
-  std::cout << a << std::endl;
+  o << a << std::endl;
 }
 # endif // !WITH_TWO_ALPHABETS
 
 # ifdef WITH_TWO_ALPHABETS
 void
-automaton_final_output::operator()
+pipe_stream_writer::operator()
   (boolean_transducer::automaton_t& a) const
 {
-  std::cout << automaton_saver (a, string_out (), XML ());
+  o << automaton_saver (a, string_out (), XML ());
 }
 
 void
-automaton_final_output::operator()
+pipe_stream_writer::operator()
   (boolean_automaton::automaton_t& a) const
 {
-  std::cout << automaton_saver (a, string_out (), XML ());
+  o << automaton_saver (a, string_out (), XML ());
 }
 # endif // !WITH_TWO_ALPHABETS
 
 template<typename T>
 void
-automaton_final_output::operator() (T&) const
+pipe_stream_writer::operator() (T&) const
 {
-  std::cout << "Last command output is not a printable type" << std::endl;
+  o << "Last command output is not a printable type" << std::endl;
 }
+
 
 #endif /* !PIPE_WRITERS_HXX */

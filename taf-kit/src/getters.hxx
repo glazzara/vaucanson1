@@ -82,8 +82,9 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 # ifdef GLOBAL_RESULT
   if (exp == "-")
     {
-      return boost::apply_visitor(rat_exp_getter (get_alphabet (alphabet)),
-				  GLOBAL_RESULT.output);
+      return boost::apply_visitor (rat_exp_getter (get_alphabet (alphabet),
+						   GLOBAL_RESULT.name),
+				   GLOBAL_RESULT.output);
     }
 # endif // !GLOBAL_RESULT
   
@@ -103,8 +104,8 @@ static automaton_t get_aut (const std::string& s)
 # ifdef GLOBAL_RESULT
     if (s == "-")
       {
-	automaton_t a = boost::apply_visitor(automaton_getter (),
-					     GLOBAL_RESULT.output);
+	automaton_t a = boost::apply_visitor
+	  (automaton_getter (GLOBAL_RESULT.name), GLOBAL_RESULT.output);
 	return a;
       }
 # endif // !GLOBAL_RESULT
@@ -142,7 +143,7 @@ static boolean_automaton::automaton_t get_boolean_aut(std::string s)
     if (s == "-")
     {
       boolean_automaton::automaton_t a =
-	boost::apply_visitor(boolean_automaton_getter (),
+	boost::apply_visitor(boolean_automaton_getter (GLOBAL_RESULT.name),
 			     GLOBAL_RESULT.output);
       return a;
     }

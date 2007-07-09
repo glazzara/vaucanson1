@@ -25,6 +25,11 @@
  * is to be included within getters.hh
  */
 
+automaton_getter::automaton_getter (std::string& cmd)
+  : command (cmd)
+{
+}
+
 automaton_t 
 automaton_getter::operator() (automaton_t& a) const
 {
@@ -58,7 +63,8 @@ automaton_getter::operator() (int& i) const
 		    << std::endl;
 	  exit (1);
 	}
-      std::cerr << "Last command does not return an automaton"
+      std::cerr << command
+		<< ": Incorrect input type"
 		<< std::endl;
       exit (1);
     }
@@ -77,15 +83,17 @@ template<typename T>
 automaton_t 
 automaton_getter::operator()(T&) const
 {
-  std::cerr << "Last command does not return an automaton"
+  std::cerr << command
+	    << ": Incorrect input type"
 	    << std::endl;
   exit (1);
 }
 
 
 # ifndef WITH_TWO_ALPHABETS
-rat_exp_getter::rat_exp_getter (alphabet_t a)
-  : alphabet (a)
+rat_exp_getter::rat_exp_getter (alphabet_t a, std::string& cmd)
+  : alphabet (a),
+    command  (cmd)
 {
 }
 
@@ -109,7 +117,8 @@ rat_exp_getter::operator() (int& i) const
 		    << std::endl;
 	  exit (1);
 	}
-      std::cerr << "Last command does not return a regular expression"
+      std::cerr << command
+		<< ": Incorrect input type"
 		<< std::endl;
       exit (1);
     }
@@ -128,7 +137,8 @@ template<typename T>
 rat_exp_t
 rat_exp_getter::operator() (T&) const
 {
-  std::cerr << "Last command does not return a regular expression"
+  std::cerr << command
+	    << ": Incorrect input type"
 	    << std::endl;
   exit (1);
 }
@@ -136,6 +146,11 @@ rat_exp_getter::operator() (T&) const
 
 
 # ifdef WITH_TWO_ALPHABETS
+boolean_automaton_getter::boolean_automaton_getter (std::string& cmd)
+  : command (cmd)
+{
+}
+
 boolean_automaton::automaton_t
 boolean_automaton_getter::operator()
   (boolean_automaton::automaton_t& a) const
@@ -159,7 +174,8 @@ boolean_automaton_getter::operator() (int& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
     {
-      std::cerr << "Last command does not return an automaton"
+      std::cerr << command
+		<< ": Incorrect input type"
 		<< std::endl;
       exit (1);
     }
@@ -175,7 +191,8 @@ template<typename T>
 boolean_automaton::automaton_t
 boolean_automaton_getter::operator() (T&) const
 {
-  std::cerr << "Last command does not return an automaton"
+  std::cerr << command
+	    << ": Incorrect input type"
 	    << std::endl;
   exit (1);
 }
@@ -212,7 +229,8 @@ boolean_transducer_getter::operator() (int& i) const
 		    << std::endl;
 	  exit (1);
 	}
-      std::cerr << "Last command does not return an automaton"
+      std::cerr << command
+		<< ": Incorrect input type"
 		<< std::endl;
       exit (1);
     }
@@ -228,7 +246,8 @@ template<typename T>
 boolean_transducer::automaton_t
 boolean_transducer_getter::operator() (T&) const
 {
-  std::cerr << "Last command does not return an automaton"
+  std::cerr << command
+	    << ": Incorrect input type"
 	    << std::endl;
   exit (1);
 }

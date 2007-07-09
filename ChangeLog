@@ -1,3 +1,18 @@
+2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Improve virtual pipe output
+	* getters.hxx,
+	* main.cc: Adjustements to new protoypes.
+	* pipe.hh,
+	* pipe.hxx: Add methods to command_output class.
+	* pipe_getters.hh,
+	* pipe_getters.hxx: Improve clarity of error messages.
+	* pipe_writers.hh,
+	* pipe_writers.hxx: Remove default output for commands
+	that return nothing.
+
+	Add some documentation in pipe.hh.
+
 2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Add internal pipe

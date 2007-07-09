@@ -24,15 +24,33 @@
  * This file contains implementation for pipe.hh.
  */
 
+void command_output::clear ()
+{
+  empty = true;
+}
+
 void command_output::input ()
 {
   output = int (PIPE_GET_FROM_STDIN);
+  empty = false;
 }
 
 void command_output::set_state (int s)
 {
   output = s;
+  empty = false;
 }
+
+void command_output::set_name (std::string& str)
+{
+  name = str;
+}
+
+void command_output::set_name (char*& str)
+{
+  name = std::string (str);
+}
+
 
 void command_output::init ()
 {
@@ -42,6 +60,7 @@ void command_output::init ()
 void command_output::finalize ()
 {
   output = stream.str ();
+  empty = false;
   stream.str ("");
 }
 
@@ -49,6 +68,7 @@ template<typename Content>
 void command_output::keep (const Content& content)
 {
   output = content;
+  empty = false;
 }
 
 #endif /* !PIPE_HXX */

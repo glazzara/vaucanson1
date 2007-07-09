@@ -35,12 +35,16 @@ class automaton_getter
   : public boost::static_visitor<automaton_t>
 {
 public:
+  automaton_getter (std::string& command);
+
   automaton_t operator() (automaton_t& a) const;
   automaton_t operator() (std::string& str) const;
   automaton_t operator() (int& i) const;
 
   template<typename T>
   automaton_t operator() (T&) const;
+
+  std::string command;
 };
 
 # ifndef WITH_TWO_ALPHABETS
@@ -48,7 +52,7 @@ class rat_exp_getter
   : public boost::static_visitor<rat_exp_t>
 {
 public:
-  rat_exp_getter (alphabet_t);
+  rat_exp_getter (alphabet_t, std::string& command);
 
   rat_exp_t operator() (std::string& str) const;
   rat_exp_t operator() (int& i) const;
@@ -58,6 +62,7 @@ public:
   rat_exp_t operator() (T&) const;
 
   alphabet_t alphabet;
+  std::string command;
 };
 # endif // !WITH_TWO_ALPHABETS
 
@@ -66,6 +71,8 @@ class boolean_automaton_getter
   : public boost::static_visitor<boolean_automaton::automaton_t>
 {
 public:
+  boolean_automaton_getter (std::string& command);
+
   boolean_automaton::automaton_t
   operator() (boolean_automaton::automaton_t& a) const;
 
@@ -76,6 +83,8 @@ public:
 
   template<typename T>
   boolean_automaton::automaton_t operator() (T&) const;
+
+  std::string command;
 };
 # endif // !WITH_TWO_ALPHABETS
 
