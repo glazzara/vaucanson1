@@ -34,6 +34,9 @@
 # include <string>
 # include <iosfwd>
 
+# include <sys/time.h>
+# include <sys/resource.h>
+
 # ifdef VAUCANSON
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
@@ -72,6 +75,62 @@ namespace misc
     class GraphComponent;
     class GraphTask;
 
+
+    // Time units for printing
+    typedef enum time_unit
+      {
+        TIME_DEFAULT,
+        TIME_H,
+        TIME_M,
+        TIME_S,
+        TIME_MS
+      };
+
+    struct TimeVal
+    {
+      TimeVal ();
+
+      // \param d: Time in seconds.
+      TimeVal (double d);
+      // \param i: Time in seconds.
+      TimeVal (int i);
+      TimeVal (const TimeVal& tv);
+      TimeVal (const timeval& tv);
+
+      TimeVal operator+ (const TimeVal& tv) const;
+      TimeVal operator- (const TimeVal& tv) const;
+      TimeVal& operator+= (const TimeVal& tv);
+      TimeVal& operator-= (const TimeVal& tv);
+      TimeVal& operator= (const TimeVal& tv);
+
+      TimeVal& operator/= (double d);
+      TimeVal operator/ (double d) const;
+
+      bool operator== (const TimeVal& tv) const;
+      bool operator< (const TimeVal& tv) const;
+      bool operator> (const TimeVal& tv) const;
+
+      double us () const;
+      double ms () const;
+      double s () const;
+      double m () const;
+      double h () const;
+
+      std::ostream& print (std::ostream&  o,
+			   time_unit      u = TIME_DEFAULT) const;
+
+      void clear ();
+      void set (const timeval&);
+
+      long tv_sec;
+      long tv_usec;
+    };
+
+    // Print time in given unit
+    std::ostream& print_time (std::ostream&   o,
+                              timer::TimeVal& time,
+                              time_unit       u = TIME_DEFAULT);
+
     class TimeStamp
     {
       friend class misc::Timer;
@@ -98,16 +157,12 @@ namespace misc
       TimeStamp& operator+= (const TimeStamp& rhs);
       TimeStamp& operator-= (const TimeStamp& rhs);
 
-      // Returns the divison of the total CPU time by n
-      double operator/ (unsigned int n) const;
-
       // Ordering using CPU time.
       bool operator< (const TimeStamp& rhs) const;
 
     private:
-      clock_t   wall_;
-      clock_t   user_;
-      clock_t   sys_;
+      TimeVal   user_;
+      TimeVal   sys_;
     };
 
     // Data collection classes
@@ -187,24 +242,5 @@ namespace misc
 } // namespace misc
 
 NAMESPACE_VCSN_END
-
-// Include full definition of all classes.
-# ifdef VAUCANSON
-#  include <vaucanson/misc/timer.hh>
-#  include <vaucanson/misc/timer_internal_graph.hh>
-#  include <vaucanson/misc/timer_internal_gathering.hh>
-# else
-#  include "timer.hh"
-#  include "timer_internal_graph.hh"
-#  include "timer_internal_gathering.hh"
-# endif
-
-# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  ifdef VAUCANSON
-#   include <vaucanson/misc/timer_internal_gathering.hxx>
-#  else
-#   include "timer_internal_gathering.hxx"
-#  endif
-# endif // !VCSN_USE_INTERFACE_ONLY
 
 #endif // !VCSN_MISC_TIMER_INTERNAL_GATHERING_HH

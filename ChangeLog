@@ -1,3 +1,22 @@
+2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Change timer sytem call.
+	* timer.cc: Adjustements in timer printing.
+	* timer.hh: Adjustements to new type.
+	* timer_internal_gathering.cc,
+	* timer_internal_gathering.hh, 
+	* timer_internal_gathering.hxx: New type for time representation.
+	* timer_internal_graph.cc,
+	* timer_internal_graph.hh: Adjustements to new type.
+
+	Change the system call that gets the system time
+	(getrusage (...) instead of times (...)).
+	Timer gains precision (+-4ms instead of +-10ms), and the
+	output is cleaner.
+	A new type for time representation is defined, along with
+	standard arithmetics, hence the heavy changes.
+	Inclusion chain (#include) changes slightly.
+
 2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Improve detection of the time unit in report

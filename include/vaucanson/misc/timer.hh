@@ -269,15 +269,15 @@
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
 #  include <vaucanson/misc/contract.hh>
-#  include <vaucanson/misc/timer_internal_graph.hh>
 #  include <vaucanson/misc/timer_internal_gathering.hh>
+#  include <vaucanson/misc/timer_internal_graph.hh>
 # else
 #  define NAMESPACE_VCSN_BEGIN
 #  define NAMESPACE_VCSN_END
 #  include <cassert>
-#  include "timer_internal_graph.hh"
-#  include "timer_internal_gathering.hh"
 #  define precondition(C) assert(C)
+#  include "timer_internal_gathering.hh"
+#  include "timer_internal_graph.hh"
 # endif
 
 NAMESPACE_VCSN_BEGIN
@@ -369,7 +369,6 @@ namespace misc
     /// The Timer must be stopped.
     std::ostream& dump (std::ostream& o) const;
 
-
     /// Start a sub-timer for a task using an unique string identifier
     /// (the task doesn't have to be declared beforehand).
     /// The timer must be running.
@@ -436,21 +435,6 @@ namespace misc
     friend class timer::VertexWriter;
     friend class timer::EdgeWriter;
 
-    // Time units for printing
-    typedef enum time_unit
-      {
-        TIME_DEFAULT,
-        TIME_H,
-        TIME_M,
-        TIME_S,
-        TIME_MS
-      };
-
-    // Print time in given unit (time is in seconds)
-    std::ostream& print_time (std::ostream& o,
-                              double        time,
-                              time_unit     u = TIME_DEFAULT) const;
-
     // Add task vertices and call edges to the graph
     void build_output_graph ();
     // Build connected component array
@@ -464,9 +448,6 @@ namespace misc
     void print_output_graph (std::ostream& o,
                              timer::verbose_degree vd = timer::VERBOSE_NORMAL)
       const;
-
-
-    clock_t                     ticks_per_sec_;
 
     timer::call_stack           calls_;
     timer::task_vector          tasks_;
@@ -489,11 +470,15 @@ NAMESPACE_VCSN_END
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  ifdef VAUCANSON
+#   include <vaucanson/misc/timer_internal_gathering.hxx>
+#   include <vaucanson/misc/timer_internal_graph.hxx>
 #   include <vaucanson/misc/timer.hxx>
 #   include <vaucanson/misc/timer_internal_gathering.cc>
 #   include <vaucanson/misc/timer_internal_graph.cc>
 #   include <vaucanson/misc/timer.cc>
 #  else
+#   include "timer_internal_gathering.hxx"
+#   include "timer_internal_graph.hxx"
 #   include "timer.hxx"
 #  endif
 # endif // !VCSN_USE_INTERFACE_ONLY

@@ -37,13 +37,14 @@
 # ifdef VAUCANSON
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
+#  include <vaucanson/misc/timer_internal_gathering.hh>
 # else
 #  define NAMESPACE_VCSN_BEGIN
 #  define NAMESPACE_VCSN_END
 #  include <cassert>
+#  include "timer_internal_gathering.hh"
 #  define precondition(C) assert(C)
 # endif
-
 
 NAMESPACE_VCSN_BEGIN
 
@@ -76,11 +77,10 @@ namespace misc
     // (compare TimeStamp in timer_internal_gathering.hh)
     struct TimeStats
     {
-      clock_t   wall;
-      clock_t   user;
-      clock_t   system;
-      clock_t   cpu;
-      double    average;
+      TimeVal   user;
+      TimeVal   system;
+      TimeVal   cpu;
+      TimeVal   average;
       double    charge;
 
       TimeStats ();
@@ -110,7 +110,7 @@ namespace misc
       void add_total_time (TimeStamp&           total,
                            unsigned int         cnt);
 
-      void compute_average (clock_t             program_cpu);
+      void compute_average (TimeVal             program_cpu);
 
 
       unsigned int      count;
@@ -134,7 +134,7 @@ namespace misc
       void add_int_time (TimeStamp&             self,
                          unsigned int           cnt);
 
-      void compute_average (clock_t             program_cpu);
+      void compute_average (TimeVal             program_cpu);
 
 
       // Ordering using CPU time.
@@ -164,7 +164,7 @@ namespace misc
 
       void add_call_internal (GraphCall&        call);
 
-      void compute_average (clock_t             program_cpu);
+      void compute_average (TimeVal             program_cpu);
 
       unsigned int      member_count;
       std::list<int>    members;
@@ -181,7 +181,7 @@ namespace misc
       TimeStats         total;
       TimeStats         self;
 
-      double            int_average;
+      TimeVal           int_average;
     };
 
     typedef boost::adjacency_list<boost::vecS, boost::vecS,
@@ -218,7 +218,6 @@ namespace misc
       const component_id_vector& c_id_;
       verbose_degree             vd_;
       double                     chrg_col_ratio_;
-      clock_t                    tps_;
     };
 
     class EdgeWriter
@@ -235,7 +234,6 @@ namespace misc
       const component_id_vector& c_id_;
       verbose_degree             vd_;
       double                     chrg_col_ratio_;
-      clock_t                    tps_;
     };
 
     class GraphWriter
@@ -252,30 +250,10 @@ namespace misc
       const component_id_vector& c_id_; 
       verbose_degree             vd_;
       double                     chrg_col_ratio_;
-      clock_t                    tps_;
     };
   } // namespace timer
 } // namespace misc
 
 NAMESPACE_VCSN_END
-
-// Include full definition of all classes.
-# ifdef VAUCANSON
-#  include <vaucanson/misc/timer.hh>
-#  include <vaucanson/misc/timer_internal_graph.hh>
-#  include <vaucanson/misc/timer_internal_gathering.hh>
-# else
-#  include "timer.hh"
-#  include "timer_internal_graph.hh"
-#  include "timer_internal_gathering.hh"
-# endif
-
-# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  ifdef VAUCANSON
-#   include <vaucanson/misc/timer_internal_graph.hxx>
-#  else
-#   include "timer_internal_graph.hxx"
-#  endif
-# endif // !VCSN_USE_INTERFACE_ONLY
 
 #endif // !VCSN_MISC_TIMER_INTERNAL_GRAPH_HH
