@@ -84,6 +84,11 @@ namespace
     { "bench-plot-output", 'O', "OUTPUT_FILENAME", 0,
       "Bench output filename", 0 },
 
+    { "input-type", 'i', "INPUT_TYPE", 0,
+      "Automaton input type (FSM or XML)", 0 },
+    { "output-type", 'o', "OUTPUT_TYPE", 0,
+      "Automaton input type (FSM, XML or DOT)", 0 },
+
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,
       "Set the first alphabet for rational expressions", 0 },
@@ -183,6 +188,33 @@ namespace
 	args.plot_output_filename = arg;
 	break;
 
+      case 'i':
+	if (std::string (arg).compare ("XML") == 0)
+	  args.input_type = INPUT_TYPE_XML;
+	else if (std::string (arg).compare ("FSM") == 0)
+	  args.input_type = INPUT_TYPE_FSM;
+	else
+	{
+	  std::cerr << "Unknown input type: " << arg << std::endl;
+	  return ARGP_ERR_UNKNOWN;
+	}
+	break;
+
+      case 'o':
+	if (std::string (arg).compare ("XML") == 0)
+	  args.output_type = OUTPUT_TYPE_XML;
+	else if (std::string (arg).compare ("FSM") == 0)
+	  args.output_type = OUTPUT_TYPE_FSM;
+	else if (std::string (arg).compare ("DOT") == 0)
+	  args.output_type = OUTPUT_TYPE_DOT;
+	else
+	{
+	  std::cerr << "Unknown output type: " << arg << std::endl;
+	  return ARGP_ERR_UNKNOWN;
+	}
+	break;
+
+
       case 'v':
 	args.verbose = true;
 	break;
@@ -272,8 +304,10 @@ int main (int argc, char* argv[])
 
 	  try
 	    {
-	      GLOBAL_RESULT.set_name (args.args[0]);
 	      GLOBAL_RESULT.clear ();
+	      GLOBAL_RESULT.set_name (args.args[0]);
+	      GLOBAL_RESULT.output_type = args.output_type;
+	      GLOBAL_RESULT.input_type = args.input_type;
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
 	      TIMER_SCOPED(os.str () + std::string (args.args[0]));
@@ -290,7 +324,8 @@ int main (int argc, char* argv[])
 	}
 
       if (!GLOBAL_RESULT.empty)
-	boost::apply_visitor (pipe_stream_writer (std::cout),
+	boost::apply_visitor (pipe_stream_writer (std::cout,
+						  GLOBAL_RESULT.output_type),
 			      GLOBAL_RESULT.output);
 
       TIMER_STOP ();

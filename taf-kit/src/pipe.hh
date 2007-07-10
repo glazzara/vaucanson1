@@ -54,7 +54,13 @@ using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 using namespace vcsn::io;
 
-typedef boost::variant<int,
+enum command_output_status
+{
+  PIPE_GET_FROM_STDIN,
+  PIPE_BENCH
+};
+
+typedef boost::variant<command_output_status,
 		       automaton_t,
 # ifndef WITH_TWO_ALPHABETS
 		       rat_exp_t,
@@ -65,16 +71,29 @@ typedef boost::variant<int,
 # endif // !WITH_TWO_ALPHABETS
 		       std::string> command_output_variant;
 
-# define PIPE_GET_FROM_STDIN 42
-# define PIPE_BENCH 21
+// i/o types for automaton_loader and automaton_saver.
+enum input_format_t
+{
+  INPUT_TYPE_FSM,
+  INPUT_TYPE_XML
+};
+
+enum output_format_t
+{
+  OUTPUT_TYPE_FSM,
+  OUTPUT_TYPE_XML,
+  OUTPUT_TYPE_DOT
+};
 
 class command_output
 {
 public:
+  command_output ();
+
   void input ();
   void clear ();
 
-  void set_state (int);
+  void set_state (command_output_status);
   void set_name  (std::string&);
   void set_name  (char*&);
 
@@ -90,6 +109,8 @@ public:
   int                    status;
   std::string		 name;
   bool			 empty;
+  input_format_t	 input_type;
+  output_format_t	 output_type;
 };
 
 #endif /* !PIPE_HH */

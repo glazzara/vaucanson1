@@ -42,9 +42,9 @@ class pipe_stream_writer
   : public boost::static_visitor<>
 {
 public:
-  pipe_stream_writer (std::ostream&);
+  pipe_stream_writer (std::ostream&, output_format_t);
 
-  void operator() (int& i) const;
+  void operator() (command_output_status& i) const;
 
   void operator() (std::string& str) const;
 
@@ -63,6 +63,7 @@ public:
   void operator() (T&) const;
 
   std::ostream& o;
+  output_format_t f;
 };
 
 #endif /* !PIPE_WRITERS_HH */

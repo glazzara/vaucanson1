@@ -35,16 +35,17 @@ class automaton_getter
   : public boost::static_visitor<automaton_t>
 {
 public:
-  automaton_getter (std::string& command);
+  automaton_getter (std::string& command, input_format_t);
 
   automaton_t operator() (automaton_t& a) const;
   automaton_t operator() (std::string& str) const;
-  automaton_t operator() (int& i) const;
+  automaton_t operator() (command_output_status& i) const;
 
   template<typename T>
   automaton_t operator() (T&) const;
 
   std::string command;
+  input_format_t f;
 };
 
 # ifndef WITH_TWO_ALPHABETS
@@ -55,7 +56,7 @@ public:
   rat_exp_getter (alphabet_t, std::string& command);
 
   rat_exp_t operator() (std::string& str) const;
-  rat_exp_t operator() (int& i) const;
+  rat_exp_t operator() (command_output_status& i) const;
   rat_exp_t operator() (rat_exp_t& e) const;
 
   template<typename T>
@@ -71,7 +72,7 @@ class boolean_automaton_getter
   : public boost::static_visitor<boolean_automaton::automaton_t>
 {
 public:
-  boolean_automaton_getter (std::string& command);
+  boolean_automaton_getter (std::string& command, input_format_t);
 
   boolean_automaton::automaton_t
   operator() (boolean_automaton::automaton_t& a) const;
@@ -79,12 +80,13 @@ public:
   boolean_automaton::automaton_t
   operator() (std::string& str) const;
 
-  boolean_automaton::automaton_t operator() (int& i) const;
+  boolean_automaton::automaton_t operator() (command_output_status& i) const;
 
   template<typename T>
   boolean_automaton::automaton_t operator() (T&) const;
 
   std::string command;
+  input_format_t f;
 };
 # endif // !WITH_TWO_ALPHABETS
 
@@ -105,7 +107,7 @@ public:
   boolean_transducer::automaton_t
   operator() (std::string& str) const;
 
-  boolean_transducer::automaton_t operator() (int& i) const;
+  boolean_transducer::automaton_t operator() (command_output_status& i) const;
 
   template<typename T>
   boolean_transducer::automaton_t operator() (T&) const;

@@ -25,8 +25,11 @@
  * is to be included within getters.hh
  */
 
-automaton_getter::automaton_getter (std::string& cmd)
-  : command (cmd)
+using namespace vcsn::tools;
+
+automaton_getter::automaton_getter (std::string& cmd, input_format_t fmt)
+  : command (cmd),
+    f (fmt)
 {
 }
 
@@ -47,12 +50,25 @@ automaton_getter::operator() (std::string& str) const
   automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
 # endif // !WITH_TWO_ALPHABETS
 
-  is >> automaton_loader (a, string_out (), XML ());
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      is >> automaton_loader(a, string_out (), XML ());
+      break;
+# ifndef WITH_TWO_ALPHABETS
+    case INPUT_TYPE_FSM:
+      fsm_load(is, a);
+      break;
+# endif // !WITH_TWO_ALPHABETS
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
   return a;
 }
 
 automaton_t 
-automaton_getter::operator() (int& i) const
+automaton_getter::operator() (command_output_status& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
     {
@@ -75,7 +91,20 @@ automaton_getter::operator() (int& i) const
   automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
 # endif // !WITH_TWO_ALPHABETS
 
-  std::cin >> automaton_loader (a, string_out (), XML ());
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      std::cin >> automaton_loader(a, string_out (), XML ());
+      break;
+# ifndef WITH_TWO_ALPHABETS
+    case INPUT_TYPE_FSM:
+      fsm_load(std::cin, a);
+      break;
+# endif // !WITH_TWO_ALPHABETS
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
   return a;
 }
 
@@ -104,7 +133,7 @@ rat_exp_getter::operator() (std::string& str) const
 }
 
 rat_exp_t
-rat_exp_getter::operator() (int& i) const
+rat_exp_getter::operator() (command_output_status& i) const
 {
   std::string str;
 
@@ -146,8 +175,10 @@ rat_exp_getter::operator() (T&) const
 
 
 # ifdef WITH_TWO_ALPHABETS
-boolean_automaton_getter::boolean_automaton_getter (std::string& cmd)
-  : command (cmd)
+boolean_automaton_getter::boolean_automaton_getter (std::string& cmd,
+						    input_format_t fmt)
+  : command (cmd),
+    f (fmt)
 {
 }
 
@@ -165,12 +196,24 @@ boolean_automaton_getter::operator() (std::string& str) const
 
   boolean_automaton::automaton_t a =
     boolean_automaton::make_automaton (first_alphabet_t());
-  is >> automaton_loader (a, string_out (), XML ());
+
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      is >> automaton_loader(a, string_out (), XML ());
+      break;
+    case INPUT_TYPE_FSM:
+      fsm_load(is, a);
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
   return a;
 }
 
 boolean_automaton::automaton_t
-boolean_automaton_getter::operator() (int& i) const
+boolean_automaton_getter::operator() (command_output_status& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
     {
@@ -183,7 +226,18 @@ boolean_automaton_getter::operator() (int& i) const
   boolean_automaton::automaton_t a =
     boolean_automaton::make_automaton (first_alphabet_t ());
 
-  std::cin >> automaton_loader (a, string_out (), XML ());
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      std::cin >> automaton_loader(a, string_out (), XML ());
+      break;
+    case INPUT_TYPE_FSM:
+      fsm_load(std::cin, a);
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
   return a;
 }
 
@@ -213,12 +267,21 @@ boolean_transducer_getter::operator() (std::string& str) const
 
   boolean_transducer::automaton_t a =
     boolean_transducer::make_automaton (first_alphabet_t());
-  is >> automaton_loader (a, string_out (), XML ());
+
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      is >> automaton_loader(a, string_out (), XML ());
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
   return a;
 }
 
 boolean_transducer::automaton_t
-boolean_transducer_getter::operator() (int& i) const
+boolean_transducer_getter::operator() (command_output_status& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
     {
@@ -238,7 +301,15 @@ boolean_transducer_getter::operator() (int& i) const
   boolean_transducer::automaton_t a =
     boolean_transducer::make_automaton (first_alphabet_t ());
 
-  std::cin >> automaton_loader (a, string_out (), XML ());
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      std::cin >> automaton_loader(a, string_out (), XML ());
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
   return a;
 }
 

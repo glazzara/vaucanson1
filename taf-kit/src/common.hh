@@ -82,7 +82,9 @@ struct arguments_t
 	nb_iterations (1),
 	report_time (false),
 	export_time_dot (false),
-	export_time_xml (false)
+	export_time_xml (false),
+	input_type (INPUT_TYPE_XML),
+	output_type (OUTPUT_TYPE_XML)
     {}
 
     std::string	progname;
@@ -106,6 +108,9 @@ struct arguments_t
     int         export_dot_degree;
 
     bool        export_time_xml;
+
+    input_format_t	input_type;
+    output_format_t	output_type;
 };
 
 #endif /* !COMMON_HH */

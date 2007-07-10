@@ -24,6 +24,14 @@
  * This file contains implementation for pipe.hh.
  */
 
+command_output::command_output ()
+  : name        (""),
+    empty       (true),
+    input_type  (INPUT_TYPE_XML),
+    output_type (OUTPUT_TYPE_XML)
+{
+}
+
 void command_output::clear ()
 {
   empty = true;
@@ -31,11 +39,11 @@ void command_output::clear ()
 
 void command_output::input ()
 {
-  output = int (PIPE_GET_FROM_STDIN);
+  output = PIPE_GET_FROM_STDIN;
   empty = false;
 }
 
-void command_output::set_state (int s)
+void command_output::set_state (command_output_status s)
 {
   output = s;
   empty = false;

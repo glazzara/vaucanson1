@@ -1,3 +1,31 @@
+2007-07-10  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Add support for different i/o format
+	* common.hh: Adjust to new command-line options
+	* getters.hxx: Adjust automaton loader to new formats
+	* main.cc: Adjust to new command-line options
+	* pipe.hh: 
+	* pipe.hxx, Add i/o format information to
+	result container.
+	* pipe_getters.hh,
+	* pipe_getters.hxx: Add new i/o format getters
+	* pipe_writers.hh,
+	* pipe_writers.hxx: Add new i/o format writer.
+
+	Automaton i/o format can be specified in taf-kit using
+	-i, --input-type=INPUT_TYPE and -o, --output_type=OUTPUT_TYPE.
+	In command sequences, this is specific to each command.
+
+	Supported types:
+	Input:
+	  vcsn-b: FSM, XML.
+	  vcsn-z: FSM, XML.
+	  vcsn-tdc: XML.
+	Output:
+	  vcsn-b: FSM, XML, DOT.
+	  vcsn-z: FSM, XML, DOT.
+	  vcsn-tdc: XML, DOT.
+
 2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Improve virtual pipe output

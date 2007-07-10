@@ -25,20 +25,24 @@
  * is to be included within main.cc
  */
 
+# include <vaucanson/tools/fsm_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
+
 # include "pipe_writers.hh"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 using namespace vcsn::io;
+using namespace vcsn::tools;
 
-
-pipe_stream_writer::pipe_stream_writer (std::ostream& os)
-  : o (os)
+pipe_stream_writer::pipe_stream_writer (std::ostream& os, output_format_t fmt)
+  : o (os),
+    f (fmt)
 {
 }
 
 void
-pipe_stream_writer::operator() (int&) const
+pipe_stream_writer::operator() (command_output_status&) const
 {
 }
 
@@ -51,7 +55,20 @@ pipe_stream_writer::operator() (std::string& str) const
 void
 pipe_stream_writer::operator() (automaton_t& a) const
 {
-  o << automaton_saver (a, string_out (), XML ());
+  switch (f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton." << std::endl;
+    }
 }
 
 # ifndef WITH_TWO_ALPHABETS
@@ -67,14 +84,40 @@ void
 pipe_stream_writer::operator()
   (boolean_transducer::automaton_t& a) const
 {
-  o << automaton_saver (a, string_out (), XML ());
+  switch (f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton." << std::endl;
+    }
 }
 
 void
 pipe_stream_writer::operator()
   (boolean_automaton::automaton_t& a) const
 {
-  o << automaton_saver (a, string_out (), XML ());
+  switch (f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton." << std::endl;
+    }
 }
 # endif // !WITH_TWO_ALPHABETS
 
