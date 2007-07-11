@@ -97,22 +97,21 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 /// Getter for automaton.
 static automaton_t get_aut (const std::string& s)
 {
+# ifdef GLOBAL_RESULT
+  if (s == "-")
+    {
+      automaton_t a = boost::apply_visitor
+	(automaton_getter (GLOBAL_RESULT.name,
+			   GLOBAL_RESULT.input_type), GLOBAL_RESULT.output);
+      return a;
+    }
+# endif // !GLOBAL_RESULT
+
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str ()));
   if (not is->fail ())
   {
     using namespace vcsn::io;
     using namespace vcsn::xml;
-
-# ifdef GLOBAL_RESULT
-    if (s == "-")
-      {
-	automaton_t a = boost::apply_visitor
-	  (automaton_getter (GLOBAL_RESULT.name,
-			     GLOBAL_RESULT.input_type), GLOBAL_RESULT.output);
-	return a;
-      }
-# endif // !GLOBAL_RESULT
-
 
 # ifndef WITH_TWO_ALPHABETS
     automaton_t a = make_automaton (alphabet_t ());
@@ -153,22 +152,22 @@ static automaton_t get_aut (const std::string& s)
 #ifdef WITH_TWO_ALPHABETS
 static boolean_automaton::automaton_t get_boolean_aut(std::string s)
 {
+# ifdef GLOBAL_RESULT
+  if (s == "-")
+  {
+    boolean_automaton::automaton_t a =
+      boost::apply_visitor(boolean_automaton_getter
+			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_type),
+			   GLOBAL_RESULT.output);
+    return a;
+  }
+# endif // !GLOBAL_RESULT
+
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
   {
     using namespace vcsn::io;
     using namespace vcsn::xml;
-
-# ifdef GLOBAL_RESULT
-    if (s == "-")
-    {
-      boolean_automaton::automaton_t a =
-	boost::apply_visitor(boolean_automaton_getter
-			     (GLOBAL_RESULT.name, GLOBAL_RESULT.input_type),
-			     GLOBAL_RESULT.output);
-      return a;
-    }
-# endif // !GLOBAL_RESULT
 
     boolean_automaton::automaton_t a =
       boolean_automaton::make_automaton(first_alphabet_t());

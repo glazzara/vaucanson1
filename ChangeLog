@@ -1,3 +1,10 @@
+2007-07-11  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Fix automaton getter in taf-kit
+	* src/getters.hxx: Here.
+	This improves the error handling when --bench is used
+	with a command reading from stdin.
+
 2007-07-10  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Add support for different i/o format
