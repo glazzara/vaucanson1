@@ -1,5 +1,20 @@
 2007-07-18  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Update data due to the new output method
+	Add newlines.
+	Put attributes in lexical order.
+	* automata/b/a1.xml: Here.
+	* automata/b/b1.xml: Here.
+	* automata/b/div3base2.xml: Here.
+	* automata/b/double-3-1.xml: Here.
+	* automata/b/ladybird-6.xml: Here.
+	* automata/tdc/t1.xml: Here.
+	* automata/tdc/u1.xml: Here.
+	* automata/z/b1.xml: Here.
+	* automata/z/c1.xml: Here.
+
+2007-07-18  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add SAX XML parser 
 	Work still not done:
 	  - Remove dead code (node.h*,...).
