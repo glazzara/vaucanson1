@@ -1,3 +1,26 @@
+2007-07-18  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add SAX XML parser 
+	Work still not done:
+	  - Remove dead code (node.h*,...).
+	  - Add tests to the test-suite.
+	Notice:
+	  Developed to fit with a future refcard,
+	  - it is not too restrictive, to fit both 'XSD'
+	  - transducers with complex labels are not well supported.
+	  - Some code is already there but commented.
+	  - Default values and sugar in labelType is no more supported.
+	* xml/XML.hh: Updated to use the new parser.
+	* xml/XML.hxx: Updated to use the new parser.
+	* xml/builders.hh: New, Dispatch tool.
+	* xml/builders.hxx: New, Dispatch tool.
+	* xml/handlers.hh: New.
+	* xml/handlers.hxx: New.
+	* xml/parsers.hh: New.
+	* xml/parsers.hxx: New.
+	* xml/xmleq.hh: New, Conversion tool.
+	* xml/xmleq.hxx: New, Conversion tool.
+
 2007-07-18  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Improve epsilon_removal_sp performance and fix bug
