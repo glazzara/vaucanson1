@@ -46,6 +46,19 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto);
   public:
+    struct tr_t
+    {
+      tr_t(hstate_t src_, hstate_t dst_, series_set_elt_t series_)
+	  : src(src_),
+	    dst(dst_),
+	    series(series_)
+      {}
+
+      hstate_t src;
+      hstate_t dst;
+      series_set_elt_t series;
+    };
+
     struct s_shortest
     {
       s_shortest(const hstate_t src_, const hstate_t dst_, semiring_elt_t& d_, semiring_elt_t& r_)
@@ -136,6 +149,19 @@ namespace vcsn {
 
     void operator() (misc::direction_type dir)
     {
+      // Remove epsilon-transitions
+      for_all_transitions(e,a)
+      {
+	series_set_elt_t t = a.series_of(*e);
+	if (t.get(monoid_identity) != semiring_elt_zero)
+	{
+	  t.assoc(monoid_identity.value(), semiring_elt_zero.value());
+	  if (t != null_series)
+	    a.add_series_transition(a.src_of(*e), a.dst_of(*e), t);
+	  a.del_transition(*e);
+	}
+      }
+
       if (dir == misc::backward)
 	backward_remove();
       else
@@ -192,97 +218,61 @@ namespace vcsn {
 
     void backward_remove()
     {
-      // Backward_eps_removal
-      // Initialize the m_wfinal
-      for_all_transitions(e,a)
-      {
-	series_set_elt_t t = a.series_of(*e);
-	if (t.get(monoid_identity) != semiring_elt_zero)
-	{
-	  t.assoc(monoid_identity.value(), semiring_elt_zero.value()); // remove epsilon trans into t
-	  if (t != null_series)
-	    a.add_series_transition(a.src_of(*e), a.dst_of(*e), t);
-	  a.del_transition(*e);
-	}
-      }
-      std::map<hstate_t, series_set_elt_t>	state_to_wfinal;
-      for_all_states(s, a)
-	state_to_wfinal.insert(std::make_pair(*s, a.get_final(*s)));
-      a.clear_final();
+      std::stack<tr_t> tr_st;
+      std::stack<std::pair<hstate_t, series_set_elt_t> > fin_st;
 
-      // Compute the backward_eps_removal
-      for_all_states(s, a)
+      std::list<htransition_t> transition_list;
+      for_all_(s_shortest_hash, it, shortest_hash)
       {
-	std::list<htransition_t> transition_list;
-	a.rdeltac(transition_list, *s, delta_kind::transitions());
+	transition_list.clear();
+	a.deltac(transition_list, it->dst, delta_kind::transitions());
 	for_all_const_(std::list<htransition_t>, e, transition_list)
-	{
-	  series_set_elt_t t = a.series_of(*e);
-	  for_all_states(s1, a)
-	  {
-	    typename s_shortest_hash::iterator it = shortest_hash.find(boost::make_tuple(*s1, a.src_of(*e)));
-	    if (it != shortest_hash.end() && it->dist != semiring_elt_zero)
-	      a.add_series_transition(*s1, *s, it->dist * t);
-	  }
-	  a.del_transition(*e);
-	}
-	series_set_elt_t tw = null_series;
-	for_all_states(s1, a)
-	{
-	  typename s_shortest_hash::iterator it = shortest_hash.find(boost::make_tuple(*s, *s1));
-	  if (it != shortest_hash.end())
-	    tw += it->dist * state_to_wfinal.find(*s1)->second;
-	}
-	if (tw != null_series)
-	  a.set_final(*s, tw);
+	  tr_st.push(tr_t(it->src, a.dst_of(*e), it->dist * a.series_of(*e)));
+	if (a.is_final(it->dst))
+	  fin_st.push(make_pair(it->src, it->dist * a.get_final(it->dst)));
+      }
+
+      while (!tr_st.empty())
+      {
+	a.add_series_transition(tr_st.top().src, tr_st.top().dst, tr_st.top().series);
+	tr_st.pop();
+      }
+
+      while (!fin_st.empty())
+      {
+	a.set_final(fin_st.top().first, a.get_final(fin_st.top().first) +
+					     fin_st.top().second);
+	fin_st.pop();
       }
     }
 
     void forward_remove()
     {
-      // Forward eps_removal
-      // Initialize the m_wfinal
-      for_all_transitions(e,a)
-      {
-	series_set_elt_t t = a.series_of(*e);
-	if (t.get(monoid_identity) != semiring_elt_zero)
-	{
-	  t.assoc(monoid_identity.value(), semiring_elt_zero.value()); // remove epsilon trans into t
-	  if (t != null_series)
-	    a.add_series_transition(a.src_of(*e), a.dst_of(*e), t);
-	  a.del_transition(*e);
-	}
-      }
-      std::map<hstate_t, series_set_elt_t>	state_to_winitial;
-      for_all_states(s, a)
-	state_to_winitial.insert(std::make_pair(*s, a.get_initial(*s)));
-      a.clear_final();
+      std::stack<tr_t> tr_st;
+      std::stack<std::pair<hstate_t, series_set_elt_t> > init_st;
 
-      // Compute the forward_eps_removal
-      for_all_states(s, a)
+      std::list<htransition_t> transition_list;
+      for_all_(s_shortest_hash, it, shortest_hash)
       {
-	std::list<htransition_t> transition_list;
-	a.deltac(transition_list, *s, delta_kind::transitions());
+	transition_list.clear();
+	a.rdeltac(transition_list, it->src, delta_kind::transitions());
 	for_all_const_(std::list<htransition_t>, e, transition_list)
-	{
-	  series_set_elt_t t = a.series_of(*e);
-	  for_all_states(s1, a)
-	  {
-	    typename s_shortest_hash::iterator it = shortest_hash.find(boost::make_tuple(a.dst_of(*e), *s1));
-	    if (it != shortest_hash.end() && it->dist != semiring_elt_zero)
-	      a.add_series_transition(*s, *s1, it->dist * t);
-	  }
-	  a.del_transition(*e);
-	}
-	series_set_elt_t tw = null_series;
-	for_all_states(s1, a)
-	{
-	  typename s_shortest_hash::iterator it = shortest_hash.find(boost::make_tuple(*s1, *s));
-	  if (it != shortest_hash.end())
-	    tw += it->dist * state_to_winitial.find(*s1)->second;
-	}
-	if (tw != null_series)
-	  a.set_initial(*s, tw);
+	  tr_st.push(tr_t(a.src_of(*e), it->dst, a.series_of(*e) * it->dist));
+	if (a.is_initial(it->src))
+	  init_st.push(make_pair(it->dst, a.get_initial(it->src) * it->dist));
+      }
+
+      while (!tr_st.empty())
+      {
+	a.add_series_transition(tr_st.top().src, tr_st.top().dst, tr_st.top().series);
+	tr_st.pop();
+      }
+
+      while (!init_st.empty())
+      {
+	a.set_initial(init_st.top().first, a.get_initial(init_st.top().first) +
+					     init_st.top().second);
+	init_st.pop();
       }
     }
 
@@ -323,9 +313,9 @@ namespace vcsn {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
 
-    do_eps_removal_here(a.structure(),
-			SELECT(semiring_elt_value_t),
-			a, dir);
+    do_eps_removal_here_sp(a.structure(),
+			   SELECT(semiring_elt_value_t),
+			   a, dir);
   }
 
   template<typename  A, typename  T>
@@ -336,9 +326,9 @@ namespace vcsn {
     AUTOMATON_TYPES(auto_t);
 
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(),
-			SELECT(semiring_elt_value_t),
-			ret, dir);
+    do_eps_removal_here_sp(ret.structure(),
+			   SELECT(semiring_elt_value_t),
+			   ret, dir);
     return ret;
   }
 
@@ -349,9 +339,9 @@ namespace vcsn {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
 
-    do_eps_removal_here(a.structure(),
-			SELECT(semiring_elt_value_t),
-			a, misc::backward);
+    do_eps_removal_here_sp(a.structure(),
+			   SELECT(semiring_elt_value_t),
+			   a, misc::backward);
   }
 
   template<typename  A, typename  T>
@@ -362,9 +352,9 @@ namespace vcsn {
     AUTOMATON_TYPES(auto_t);
 
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(),
-			SELECT(semiring_elt_value_t),
-			ret, misc::backward);
+    do_eps_removal_here_sp(ret.structure(),
+			   SELECT(semiring_elt_value_t),
+			   ret, misc::backward);
     return ret;
   }
 
@@ -375,9 +365,9 @@ namespace vcsn {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
 
-    do_eps_removal_here(a.structure(),
-			SELECT(semiring_elt_value_t),
-			a, misc::forward);
+    do_eps_removal_here_sp(a.structure(),
+			   SELECT(semiring_elt_value_t),
+			   a, misc::forward);
   }
 
   template<typename  A, typename  T>
@@ -388,9 +378,9 @@ namespace vcsn {
     AUTOMATON_TYPES(auto_t);
 
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(),
-			SELECT(semiring_elt_value_t),
-			ret, misc::forward);
+    do_eps_removal_here_sp(ret.structure(),
+			   SELECT(semiring_elt_value_t),
+			   ret, misc::forward);
     return ret;
   }
 

@@ -1,3 +1,8 @@
+2007-07-18  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Improve epsilon_removal_sp performance and fix bug
+	* include/vaucanson/algorithms/eps_removal_sp.hxx: .
+
 2007-07-18  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix an ambiguity problem
