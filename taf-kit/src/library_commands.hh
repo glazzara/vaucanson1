@@ -95,7 +95,7 @@ static int dump_automaton_command (const arguments_t& args)
     std::cerr << "Error: cannot open `" << file << "'." << std::endl;
     exit (-3);
   }
-  echo_ (in.rdbuf ());
+  PRINT_RESULT (in.rdbuf ());
   return 0;
 }
 

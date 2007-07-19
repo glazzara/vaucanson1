@@ -1,3 +1,9 @@
+2007-07-19  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Fix dump-automaton command in taf-kit
+	* library_commands.hh: Fix dump-automaton command when
+	used in internal command sequences.
+
 2007-07-11  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Fix automaton getter in taf-kit
