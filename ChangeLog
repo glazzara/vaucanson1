@@ -1,3 +1,10 @@
+2007-07-20  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update XSD to fit to the new SAX parser.
+	Remove range attribute.
+	Set it mandatory to have a monoid and semiring.
+	* data/vaucanson.xsd: Here.
+
 2007-07-18  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Update data due to the new output method
