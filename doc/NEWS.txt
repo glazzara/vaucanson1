@@ -10,8 +10,16 @@ This document describes major updates to the Vaucanson_ project.
 
 
 
-Vaucanson 1.0a
-==============
+Vaucanson 1.1
+=============
+
+- XML
+
+  + New XML Parser (SAX implementation)
+    With New XSD.
+
+Vaucanson 1.0a, June 13th, 2007
+===============================
 
 - Documentation
 
