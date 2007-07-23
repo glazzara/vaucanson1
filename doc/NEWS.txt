@@ -17,6 +17,7 @@ Vaucanson 1.1
 
   + New XML Parser (SAX implementation)
     With New XSD.
+  + Parser doesn't omit transitions with bad label anymore instead of failing
 
 Vaucanson 1.0a, June 13th, 2007
 ===============================

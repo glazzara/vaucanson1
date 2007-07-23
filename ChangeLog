@@ -1,3 +1,9 @@
+2007-07-23  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add details to NEWS.txt
+	* AUTHORS: Fix a mistake.
+	* doc/NEWS.txt: Add details.
+
 2007-07-20  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Update NEWS.txt for version 1.1
