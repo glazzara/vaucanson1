@@ -1,3 +1,11 @@
+2007-07-23  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update taf-kit tests 
+	Replace 'pipes' by 'internal pipes'
+	* vcsn-b.test: Here.
+	* vcsn-tdc.test: Here.
+	* vcsn-z.test: Here.
+
 2007-07-19  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Fix dump-automaton command in taf-kit

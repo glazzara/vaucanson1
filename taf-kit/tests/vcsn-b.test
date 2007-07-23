@@ -53,7 +53,7 @@ vcsn-b dot-dump all.xml | dot
 # Check that each builtin automaton can be dumped.
 for a in $(vcsn-b list-automata | sed -n 's/^  * - \([-a-z0-9]*\).*/\1/p')
 do
-  vcsn-b dump-automaton $a | vcsn-b info -
+  vcsn-b dump-automaton $a \| vcsn-b info -
 done
 
 vcsn-b identity all.xml >all2.xml
@@ -80,11 +80,11 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 # is-complete
 ! vcsn-b is-complete $a1
-  vcsn-b complete $a1 | vcsn-b is-complete -
+  vcsn-b complete $a1 \| is-complete -
 
 # is-deterministic
 ! vcsn-b is-deterministic $a1
-  vcsn-b determinize $a1 | vcsn-b is-deterministic -
+  vcsn-b determinize $a1 \| is-deterministic -
 
 # is-empty.
 ! vcsn-b is-empty $a1
@@ -99,7 +99,7 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 # is-standard
 ! vcsn-b is-standard $a1
 ! vcsn-b is-standard $void_b_automaton
-  vcsn-b standardize $a1 | vcsn-b is-standard -
+  vcsn-b standardize $a1 \| is-standard -
 
 
 ## --------------------------------- ##
@@ -107,8 +107,7 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 ## --------------------------------- ##
 
 # transpose
-  vcsn-b transpose $b_to_transpose |
-      vcsn-b are-isomorphic $b_transposed -
+  vcsn-b transpose $b_to_transpose \| are-isomorphic $b_transposed -
 
 ## --------------------------------------- ##
 ## Boolean automaton specific algorithms.  ##
@@ -123,12 +122,12 @@ test $all = '(a+b)*'
 vcsn-b --alphabet=ab exp-to-aut "$all" >aut2.xml
 
 # standard
-vcsn-b -a a standard 0 | vcsn-b is-standard -
-vcsn-b -a a standard a | vcsn-b is-standard -
-vcsn-b -a ab standard 'a+b' | vcsn-b is-standard -
-vcsn-b -a ab standard '(a+b)*' | vcsn-b is-standard -
-vcsn-b -a ab standard 'a.b' | vcsn-b is-standard -
-vcsn-b -a ab standard '(a.b)*' | vcsn-b is-standard -
-vcsn-b -a ab standard '(a*.b*)*' | vcsn-b is-standard -
+vcsn-b -a a standard 0 \| is-standard -
+vcsn-b -a a standard a \| is-standard -
+vcsn-b -a ab standard 'a+b' \| is-standard -
+vcsn-b -a ab standard '(a+b)*' \| is-standard -
+vcsn-b -a ab standard 'a.b' \| is-standard -
+vcsn-b -a ab standard '(a.b)*' \| is-standard -
+vcsn-b -a ab standard '(a*.b*)*' \| is-standard -
 
 exit 0
