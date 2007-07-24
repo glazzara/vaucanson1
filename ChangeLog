@@ -1,3 +1,10 @@
+2007-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Fix op_choose_from_supp in polynoms.hxx
+	See Trac #54
+	* polynoms.hxx: Compute a valid index, even if rand() return RAND_MAX.
+	Don't call rand() if polynom's size is 1.
+
 2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Merge changes to timer into the trunk

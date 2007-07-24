@@ -698,17 +698,24 @@ namespace vcsn {
   {
     typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;
 
-    if (p.size() == 0)
+    const unsigned size = p.size();
+
+    if (size == 0)
       return Tm();
 
-    unsigned       index = rand() * p.size() / RAND_MAX;
     const_iterator i = p.begin();
-    while ((index > 0) && (i != p.end()))
-      {
-	--index;
-	++i;
-      }
-    return (*i).first;
+
+    // No need to call rand in this case
+    if (size == 1)
+      return i->first;
+
+    unsigned index = rand() % size;
+    while (index > 0)
+    {
+      --index;
+      ++i;
+    }
+    return i->first;
   }
 
 
