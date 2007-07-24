@@ -19,6 +19,11 @@ Vaucanson 1.1
     With New XSD.
   + Parser doesn't omit transitions with bad label anymore instead of failing
 
+- Algorithms
+
+  + eps_removal_sp(a);
+    Various optimizations.
+
 Vaucanson 1.0a, June 13th, 2007
 ===============================
 
@@ -29,8 +34,8 @@ Vaucanson 1.0a, June 13th, 2007
 
 - Algorithms
 
-  + eps_removal(a);
-    Various optimizations.
+  + eps_removal_sp(a);
+    New generic epsilon_removal algorithm based on shortest_path.
 
   + minimize(a);
     Various optimizations.
