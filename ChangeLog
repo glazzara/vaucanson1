@@ -1,5 +1,21 @@
 2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add timer
+	Merge done with the trunk.
+	* misc/bencher.cc: .
+	* misc/global_timer.hh: .
+	* misc/timer.cc: .
+	* misc/timer.hh: .
+	* misc/timer.hxx: .
+	* misc/timer_internal_gathering.cc: New.
+	* misc/timer_internal_gathering.hh: New.
+	* misc/timer_internal_gathering.hxx: New.
+	* misc/timer_internal_graph.cc: New.
+	* misc/timer_internal_graph.hh: New.
+	* misc/timer_internal_graph.hxx: New.
+
+2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add missing include directives
 	* algorithms/eps_removal_sp.hxx: Here.
 	* xml/builders.hh: Here.
