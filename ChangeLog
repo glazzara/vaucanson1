@@ -1,7 +1,20 @@
-2007-07-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Fix op_choose_from_supp in polynoms.hxx
+	Merge of the trunk
+	* ChangeLog: Here.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Here.
+
+2007-07-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 	Update NEWS.txt
 	* NEWS.txt: .
+
+2007-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Fix op_choose_from_supp in polynoms.hxx
+	See Trac #54
+	* polynoms.hxx: Compute a valid index, even if rand() return RAND_MAX.
+	Don't call rand() if polynom's size is 1.
 
 2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
