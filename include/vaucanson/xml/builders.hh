@@ -30,6 +30,12 @@
 
 # include <string>
 # include <xercesc/sax2/Attributes.hpp>
+# include <xercesc/sax2/SAX2XMLReader.hpp>
+# include <xercesc/sax2/DefaultHandler.hpp>
+
+# include <xercesc/sax/SAXException.hpp>
+# include <xercesc/util/XMLString.hpp>
+
 
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -37,8 +43,7 @@
 # include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/xml/tools.hh>
-
-# include <vaucanson/xml/handlers.hh>
+# include <vaucanson/xml/xmleq.hh>
 
 # define TParm					\
     template <class S, class T>
@@ -60,6 +65,13 @@ namespace vcsn
 {
   namespace xml
   {
+    class MonoidHandler;
+    class SemiringHandler;
+    template <typename T>
+    class RegExpHandler;
+    template <typename T>
+    class LabelHandler;
+
     namespace builders
     {
       // Processing monoid

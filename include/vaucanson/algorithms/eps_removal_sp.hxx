@@ -33,6 +33,7 @@
 # include <map>
 # include <utility>
 # include <set>
+# include <stack>
 
 namespace vcsn {
 
