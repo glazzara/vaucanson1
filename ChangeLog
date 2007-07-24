@@ -1,5 +1,11 @@
 2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add Timer ... part 2
+	* common.hh: Here.
+	* main.cc: Here.
+
+2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add timer
 	Merge done with the trunk.
 	* misc/bencher.cc: .

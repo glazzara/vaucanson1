@@ -55,10 +55,10 @@
 # include <string>
 
 // Use a global timer and bencher.
-# define GLOBAL_TIMER timer
+# define GLOBAL_TIMER global_timer
 # define GLOBAL_BENCHER bencher
 # include <vaucanson/misc/usual_macros.hh>
-extern vcsn::misc::Timer timer;
+extern vcsn::misc::Timer global_timer;
 extern vcsn::misc::Bencher bencher;
 
 struct arguments_t
@@ -73,9 +73,11 @@ struct arguments_t
 	epsilon2 (0),
 # endif /* ! WITH_TWO_ALPHABETS */
 	verbose (false),
-	report_time (false),
 	bench (false),
-	nb_iterations (1)
+	nb_iterations (1),
+	report_time (false),
+	export_time_dot (false),
+	export_time_xml (false)
     {}
 
     std::string	progname;
@@ -88,10 +90,17 @@ struct arguments_t
     char	epsilon2;
 # endif /* ! WITH_TWO_ALPHABETS */
     bool	verbose;
-    bool	report_time;
     bool	bench;
     unsigned	nb_iterations;
     std::string plot_output_filename;
+
+    bool        report_time;
+    int         report_degree;
+
+    bool        export_time_dot;
+    int         export_dot_degree;
+
+    bool        export_time_xml;
 };
 
 #endif /* !COMMON_HH */
