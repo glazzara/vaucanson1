@@ -60,18 +60,17 @@ DEFINE_COMMAND (NAME (derived_term_automaton)
 		  rat_exp_t   e = get_exp (args.args[1]);
 		  automaton_t a = make_automaton (get_alphabet (args.alphabet));
 		  derived_term_automaton (a, e))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (aut_to_exp)
 		CODE (/* Empty */)
-		OUTPUT (aut_to_exp (get_aut (args.args[1]), DMChooser ())
-			<< std::endl)
+		KEEP (aut_to_exp (get_aut (args.args[1]), DMChooser ()))
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (expand)
 		CODE (/* Empty */)
-		OUTPUT (expand (get_exp (args.args[1])))
+		KEEP (expand (get_exp (args.args[1])))
 		RETURNVALUE (0));
 
 # define USE_RATEXP_COMMAND_GROUP()					\

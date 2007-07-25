@@ -24,6 +24,14 @@ Vaucanson 1.1
   + eps_removal_sp(a);
     Various optimizations.
 
+- TAF-Kit
+  
+  + Timer has been improved.
+  + Intern pipe can now be used:
+    ./vcsn-b identity ab.xml \| product b.xml - 
+    is equivalent to
+    ./vcsn-b identity ab.xml | ./vcsn-b product b.xml -
+
 Vaucanson 1.0a, June 13th, 2007
 ===============================
 

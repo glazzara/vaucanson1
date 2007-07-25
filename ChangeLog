@@ -1,3 +1,332 @@
+2007-07-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Merge pipe branch 
+	* ChangeLog: .
+	* doc/NEWS.txt: .
+	* taf-kit/src/commands_macros.hh: .
+	* taf-kit/src/common.hh: .
+	* taf-kit/src/common_automaton_commands.hh: .
+	* taf-kit/src/common_commands.hh: .
+	* taf-kit/src/getters.hh: .
+	* taf-kit/src/getters.hxx: .
+	* taf-kit/src/library_commands.hh: .
+	* taf-kit/src/main.cc: .
+	* taf-kit/src/pipe.hh: New.
+	* taf-kit/src/pipe.hxx: New.
+	* taf-kit/src/pipe_command_sequence.hh: New.
+	* taf-kit/src/pipe_command_sequence.hxx: New.
+	* taf-kit/src/pipe_getters.hh: New.
+	* taf-kit/src/pipe_getters.hxx: New.
+	* taf-kit/src/pipe_writers.hh: New.
+	* taf-kit/src/pipe_writers.hxx: New.
+	* taf-kit/src/ratexp_commands.hh: .
+	* taf-kit/src/tdc_commands.cc: .
+	* taf-kit/tests/vcsn-b.test: .
+	* taf-kit/tests/vcsn-tdc.test: .
+	* taf-kit/tests/vcsn-z.test: .
+
+2007-07-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+  Merge pipe branch:
+  
+  2007-07-23  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	  Update taf-kit tests 
+	  Replace 'pipes' by 'internal pipes'
+	  * vcsn-b.test: Here.
+	  * vcsn-tdc.test: Here.
+	  * vcsn-z.test: Here.
+
+  2007-07-19  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Fix dump-automaton command in taf-kit
+	  * library_commands.hh: Fix dump-automaton command when
+	  used in internal command sequences.
+
+  2007-07-11  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Fix automaton getter in taf-kit
+	  * src/getters.hxx: Here.
+	  This improves the error handling when --bench is used
+	  with a command reading from stdin.
+
+  2007-07-10  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Add support for different i/o format
+	  * common.hh: Adjust to new command-line options
+	  * getters.hxx: Adjust automaton loader to new formats
+	  * main.cc: Adjust to new command-line options
+	  * pipe.hh: 
+	  * pipe.hxx, Add i/o format information to
+	  result container.
+	  * pipe_getters.hh,
+	  * pipe_getters.hxx: Add new i/o format getters
+	  * pipe_writers.hh,
+	  * pipe_writers.hxx: Add new i/o format writer.
+
+	  Automaton i/o format can be specified in taf-kit using
+	  -i, --input-type=INPUT_TYPE and -o, --output_type=OUTPUT_TYPE.
+	  In command sequences, this is specific to each command.
+
+	  Supported types:
+	  Input:
+	    vcsn-b: FSM, XML.
+	    vcsn-z: FSM, XML.
+	    vcsn-tdc: XML.
+	  Output:
+	    vcsn-b: FSM, XML, DOT.
+	    vcsn-z: FSM, XML, DOT.
+	    vcsn-tdc: XML, DOT.
+
+  2007-07-09  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Improve virtual pipe output
+	  * getters.hxx,
+	  * main.cc: Adjustements to new protoypes.
+	  * pipe.hh,
+	  * pipe.hxx: Add methods to command_output class.
+	  * pipe_getters.hh,
+	  * pipe_getters.hxx: Improve clarity of error messages.
+	  * pipe_writers.hh,
+	  * pipe_writers.hxx: Remove default output for commands
+	  that return nothing.
+
+	  Add some documentation in pipe.hh.
+
+  2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Add internal pipe
+	  * commands_macros.hh: Change command definition macros to
+	  keep results between commands.
+
+	  * common.hh: Add access to the global result.
+
+	  * common_automaton_commands.hh,
+	  * common_commands.hh: Change command output to
+	  keep results.
+
+	  * getters.hh,
+	  * getters.hxx: Allow getters to get data from the global
+	  result.
+
+	  * main.cc: Allow internal command sequencing using "\|"
+
+	  * pipe.hh: New.
+	  * pipe.hxx: New.
+	  * pipe_command_sequence.hh: New.
+	  * pipe_command_sequence.hxx: New.
+	  * pipe_getters.hh: New.
+	  * pipe_getters.hxx: New.
+	  * pipe_writers.hh: New.
+	  * pipe_writers.hxx: New.
+	  Implementation of the internal pipe.  Documentation will be
+	  provided shortly.
+
+	  * ratexp_commands.hh,
+	  * tdc_commands.cc: Change command output to
+	  keep results.
+
+	  Implementation of internal pipe in taf-kit (See Ticket #93):
+	  Commands can be sequenced using "\|" in tak-kit binaries.
+	  Command-line options are specific to their command except
+	  Timer & Bencher manipulation options (--report-time, --bench,
+	  --export-time-dot, --export-time-xml), which are global to
+	  the whole sequence.
+	  i.e.: --bench will benchmark the whole sequence.  The defect
+	  described in ticket #104 is also resolved.
+
+	  Note: In vcsn-b and vcsn-z, both automata and regular
+	  expressions keep their internal representation between
+	  commands.  In vcsn-tdc, both boolean automata and
+	  transducers do, but there might be issues about
+	  boolean_transducer namespace not being declared in
+	  CONTEXT_HEADER.
+	  The binaries have yet to be extensively tested.
+
+  2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Merge trunk into pipe
+	  * ChangeLog: .
+	  * include/vaucanson/misc/bencher.cc: .
+	  * include/vaucanson/misc/global_timer.hh: .
+	  * include/vaucanson/misc/timer.cc: .
+	  * include/vaucanson/misc/timer.hh: .
+	  * include/vaucanson/misc/timer.hxx: .
+	  * include/vaucanson/misc/timer_internal_gathering.cc: New.
+	  * include/vaucanson/misc/timer_internal_gathering.hh: New.
+	  * include/vaucanson/misc/timer_internal_gathering.hxx: New.
+	  * include/vaucanson/misc/timer_internal_graph.cc: New.
+	  * include/vaucanson/misc/timer_internal_graph.hh: New.
+	  * include/vaucanson/misc/timer_internal_graph.hxx: New.
+	  * taf-kit/src/common.hh: .
+	  * taf-kit/src/main.cc: .
+	  Get changes resulting from merging timer into the trunk.
+
+  2007-07-05  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Merge timer into the trunk
+	  * ChangeLog: .
+
+	  * include/vaucanson/misc/bencher.cc: Change to work with
+	  the new Timer implementation.
+
+	  * include/vaucanson/misc/global_timer.hh: .
+	  * include/vaucanson/misc/timer.cc: .
+	  * include/vaucanson/misc/timer.hh: .
+	  * include/vaucanson/misc/timer.hxx: .
+	  * include/vaucanson/misc/timer_internal_gathering.cc: New.
+	  * include/vaucanson/misc/timer_internal_gathering.hh: New.
+	  * include/vaucanson/misc/timer_internal_gathering.hxx: New.
+	  * include/vaucanson/misc/timer_internal_graph.cc: New.
+	  * include/vaucanson/misc/timer_internal_graph.hh: New.
+	  * include/vaucanson/misc/timer_internal_graph.hxx: New.
+	  New implementation of the Timer.
+	  Read documentation in include/vaucanson/misc/timer.hh.
+
+	  * taf-kit/src/common.hh,
+	  * taf-kit/src/main.cc: Add command-line option to manipulate
+	  the global timer.  Fix name conflict due to the new namespace
+	  timer.
+
+  2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Improve detection of the time unit in report
+	  * timer.cc:
+	  Improve detection of the time unit for large numbers of
+	  tasks.
+
+  2007-07-04  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Fix divide by zero
+	  * timer_internal_graph.cc:
+	  Change charge values from NaN to zero when total program time
+	  is less than 1ms.
+
+  2007-06-26  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Fix ugly code
+	  * timer.cc,
+	  * timer.hh,
+	  * timer_internal_graph.cc,
+	  * timer_internal_graph.hh:
+	  Fix ugly code and a couple of typos.
+
+  2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Add timer command-line options in taf-kit
+	  * src/common.hh,
+	  * src/main.cc:
+	  Add two command-line options to taf-kit binaries.
+	  The global timer in taf-kit can now be exported in
+	  DOT format using --export-time-dot and in XML format
+	  using --export-time-xml.
+
+	  Additionally, --report-time now takes the verbose
+	  level of the report as an optional parameter.
+
+	  See ../include/vaucanson/misc/timer.hh for
+	  documentation.
+
+  2007-06-25  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Change time display in timer report
+	  * global_timer.hh: Fix alignment.
+	  * timer.cc,
+	  * timer.hh,
+	  * timer.hxx:
+	  Change time display.
+	  * timer_internal_gathering.cc,
+	  * timer_internal_gathering.hh,
+	  * timer_internal_gathering.hxx,
+	  * timer_internal_graph.cc,
+	  * timer_internal_graph.hh,
+	  * timer_internal_graph.hxx,
+	  Fix naming conventions, untabify.
+
+	  The unit used to display times in the standard report
+	  is now adjusted automatically.
+
+	  Add some documentation in timer.hh
+
+  2007-06-21  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Add timer XML export, fix several issues.
+	  * bencher.cc: Fix a typo.
+	  * global_timer.hh: Add dump macro.
+	  * timer.cc:
+	  Add dump method to Timer.
+	  Change behavior of arithmetic operators slightly.
+	  Fix task ordering in display.
+	  * timer.hh:
+	  Add dump method to Timer.
+	  Add documentation on command-line options in vaucanson.
+	  * timer_internal_graph.cc,
+	  * timer_internal_graph.hh,
+	  * timer_internal_graph.hxx: Add internal dump method.
+
+	  Timer instances can now be exported in XML format
+	  using Timer.dump (Stream).
+	  The structure of the XML output is far from definitive.
+
+	  Information on command-line options for taf-kit regarding
+	  the global timer is added to include/misc/timer.hh.
+
+	  Summing timers now also sums calls, making the bencher
+	  output logical.
+
+	  Long task names are now truncated in standard display.
+
+  2007-06-20  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Split timer.* into smaller files & add documentation
+	  * include/vaucanson/misc/global_timer.hh:
+	  Make it work outside vaucanson.
+	  * include/vaucanson/misc/timer.cc:
+	  Remove implementation of misc::Timer internal classes.
+	  * include/vaucanson/misc/timer.hh:
+	  Remove declaration of misc::Timer internal classes.
+	  * include/vaucanson/misc/timer.hxx:
+	  Move inline methods of misc::Timer here
+	  * include/vaucanson/misc/timer_internal_gathering.cc,
+	  * include/vaucanson/misc/timer_internal_gathering.hh,
+	  * include/vaucanson/misc/timer_internal_gathering.hxx:
+	  Move declaration & implementation of misc::Timer internal
+	  classes regarding data gathering in those three files.
+	  * include/vaucanson/misc/timer_internal_graph.cc,
+	  * include/vaucanson/misc/timer_internal_graph.hh,
+	  * include/vaucanson/misc/timer_internal_graph.hxx:
+	  Move declaration & implementation of misc::Timer internal
+	  classes regarding result computation in those three files.
+	  * taf-kit/src/common.hh,
+	  * taf-kit/src/main.cc:
+	  Change global timer name from timer to global_timer to avoid
+	  conflicts with the new namespace.
+
+	  Former private classes of misc::Timer are now in the separate
+	  namespace misc::timer.  Minor changes are made to the taf-kit
+	  source to work with the new implementation.
+	  Documentation is provided in include/vaucanson/misc/timer.hh.
+
+	  Clean source code (thanks for pointing out what was wrong).
+	  
+  2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	  Update timer and bencher for taf-kit
+	  * bencher.cc,
+	  * global_timer.hh,
+	  * timer.cc,
+	  * timer.hh,
+	  * timer.hxx:
+
+	  The implementation of the timer used in taf-kit changes:
+	  it now builds a graph of the results using Graph from Boost.
+	  Bencher is modified to work with the new implementation.
+	  All current macro names used in taf-kit still work, and new
+	  ones are added to access new features, such as export of
+	  the graph in DOT language.
+	  Basic documentation will be provided within a few days.
+	  NOTE: taf-kit might not compile in this revision.
+
 2007-07-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix op_choose_from_supp in polynoms.hxx
@@ -361,6 +690,7 @@
 
 	[1.0a] Fix configure.ac
 	* configure.ac: Add eps_romval Makefile in the list.
+
 
 2007-04-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 

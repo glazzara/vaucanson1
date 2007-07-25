@@ -31,12 +31,19 @@
 
 # include CONTEXT_HEADER
 # include <vaucanson/xml/XML.hh>
+# include <vaucanson/tools/fsm_load.hh>
 # include <string>
 # include <cstdlib>
 # include "getters.hh"
+# include "pipe_getters.hh"
+# include "pipe_writers.hh"
+# include "pipe.hxx"
+# include "pipe_getters.hxx"
+# include "pipe_writers.hxx"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
+using namespace vcsn::tools;
 
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |
@@ -74,6 +81,15 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 				   const char* alphabet,
 				   char /* @bug epsilon */)
 {
+# ifdef GLOBAL_RESULT
+  if (exp == "-")
+    {
+      return boost::apply_visitor (rat_exp_getter (get_alphabet (alphabet),
+						   GLOBAL_RESULT.name),
+				   GLOBAL_RESULT.output);
+    }
+# endif // !GLOBAL_RESULT
+  
   return make_rat_exp (get_alphabet (alphabet), exp);
 }
 # endif // !WITH_TWO_ALPHABETS
@@ -81,6 +97,16 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 /// Getter for automaton.
 static automaton_t get_aut (const std::string& s)
 {
+# ifdef GLOBAL_RESULT
+  if (s == "-")
+    {
+      automaton_t a = boost::apply_visitor
+	(automaton_getter (GLOBAL_RESULT.name,
+			   GLOBAL_RESULT.input_type), GLOBAL_RESULT.output);
+      return a;
+    }
+# endif // !GLOBAL_RESULT
+
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str ()));
   if (not is->fail ())
   {
@@ -93,7 +119,24 @@ static automaton_t get_aut (const std::string& s)
     automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
 # endif // !WITH_TWO_ALPHABETS
 
-    *is >> automaton_loader (a, string_out (), XML ());
+# ifdef GLOBAL_RESULT
+    switch (GLOBAL_RESULT.input_type)
+      {
+      case INPUT_TYPE_XML:
+	*is >> automaton_loader(a, string_out (), XML ());
+	break;
+# ifndef WITH_TWO_ALPHABETS
+      case INPUT_TYPE_FSM:
+	fsm_load(*is, a);
+	break;
+# endif // !WITH_TWO_ALPHABETS
+      default:
+	std::cerr << "FATAL: Could not load automaton." << std::endl;
+	exit(1);
+      }
+# else
+    *is >> automaton_loader(a, string_out (), XML ());
+# endif // !GLOBAL_RESULT
 
     if (s != "-")
       delete is;
@@ -109,6 +152,17 @@ static automaton_t get_aut (const std::string& s)
 #ifdef WITH_TWO_ALPHABETS
 static boolean_automaton::automaton_t get_boolean_aut(std::string s)
 {
+# ifdef GLOBAL_RESULT
+  if (s == "-")
+  {
+    boolean_automaton::automaton_t a =
+      boost::apply_visitor(boolean_automaton_getter
+			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_type),
+			   GLOBAL_RESULT.output);
+    return a;
+  }
+# endif // !GLOBAL_RESULT
+
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
   {
@@ -117,7 +171,23 @@ static boolean_automaton::automaton_t get_boolean_aut(std::string s)
 
     boolean_automaton::automaton_t a =
       boolean_automaton::make_automaton(first_alphabet_t());
+
+# ifdef GLOBAL_RESULT
+    switch (GLOBAL_RESULT.input_type)
+      {
+      case INPUT_TYPE_XML:
+	*is >> automaton_loader(a, string_out (), XML ());
+	break;
+      case INPUT_TYPE_FSM:
+	fsm_load(*is, a);
+	break;
+      default:
+	std::cerr << "FATAL: Could not load automaton." << std::endl;
+	exit(1);
+      }
+# else
     *is >> automaton_loader(a, string_out (), XML ());
+# endif // !GLOBAL_RESULT
 
     if (s != "-")
       delete is;
