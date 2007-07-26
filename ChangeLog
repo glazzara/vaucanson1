@@ -1,5 +1,13 @@
 2007-07-26  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix derivation tests
+	* src/tests/test-suites/algebra_series_krat_cderivation.defs,
+	* src/tests/test-suites/algebra_series_krat_derivation.defs,
+	* src/tests/test-suites/algebra_series_krat_partial_derivation.defs:
+		Use algebra namespace to get NumericalSemiring type.
+
+2007-07-26  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Move evaluation.h{h,xx} according to ticket #42.
 	* evaluation.hh,
 	* evaluation.hxx: Remove.
