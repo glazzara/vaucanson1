@@ -32,7 +32,7 @@ namespace vcsn {
     template <typename Auto, class IStream>
     void xml_load(IStream& i, Auto& a)
     {
-      i >> automaton_loader(a, io::string_out(), xml::XML());
+      i >> automaton_loader(a, tools::string_out(), xml::XML());
     }
 
   } // tools

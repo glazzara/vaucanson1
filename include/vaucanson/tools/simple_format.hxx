@@ -22,7 +22,7 @@
 
 namespace vcsn
 {
-  namespace io
+  namespace tools
   {
     template<typename Saver, typename Conv>
     void simple::operator()(std::ostream& o, const Saver& s, const Conv& conv) const

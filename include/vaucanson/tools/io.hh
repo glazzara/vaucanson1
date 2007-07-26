@@ -27,7 +27,7 @@
 namespace vcsn
 {
 
-  namespace io
+  namespace tools
   {
 
     /*-------.
@@ -79,13 +79,13 @@ namespace vcsn
   }
 
   template<typename Auto, typename TransitionConverter, typename Format>
-  io::automaton_saver_<Auto, TransitionConverter, Format>
+  tools::automaton_saver_<Auto, TransitionConverter, Format>
   automaton_saver(const Auto&,
 		  const TransitionConverter& e = TransitionConverter(),
 		  const Format& f = Format());
 
 
-  namespace io
+  namespace tools
   {
     /*------.
     | Input |
@@ -130,16 +130,15 @@ namespace vcsn
     operator>>(std::istream&, automaton_loader_<Auto, TransitionConverter, Format>);
 
 
-  }
+  } //tools
 
 
   template<typename Auto, typename TransitionConverter, typename Format>
-  io::automaton_loader_<Auto, TransitionConverter, Format>
+  tools::automaton_loader_<Auto, TransitionConverter, Format>
   automaton_loader(Auto& a,
 		   const TransitionConverter& e = TransitionConverter(),
 		   const Format& f = Format(),
 		   bool merge_states = false);
-
 } // vcsn
 
 

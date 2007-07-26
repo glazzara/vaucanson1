@@ -261,8 +261,6 @@ vaucanson/algorithms/eps_removal.hh				\
 vaucanson/algorithms/eps_removal.hxx				\
 vaucanson/algorithms/eval.hh					\
 vaucanson/algorithms/eval.hxx					\
-vaucanson/algorithms/evaluation.hh				\
-vaucanson/algorithms/evaluation.hxx				\
 vaucanson/algorithms/evaluation_fmp.hh				\
 vaucanson/algorithms/evaluation_fmp.hxx				\
 vaucanson/algorithms/extension.hh				\
@@ -279,6 +277,8 @@ vaucanson/algorithms/initial_derivation.hh			\
 vaucanson/algorithms/initial_derivation.hxx			\
 vaucanson/algorithms/internal/build_pattern.hh			\
 vaucanson/algorithms/internal/build_pattern.hxx			\
+vaucanson/algorithms/internal/evaluation.hh			\
+vaucanson/algorithms/internal/evaluation.hxx			\
 vaucanson/algorithms/internal/has_neighbour.hh			\
 vaucanson/algorithms/internal/has_neighbour.hxx			\
 vaucanson/algorithms/internal/outsplitting.hh			\

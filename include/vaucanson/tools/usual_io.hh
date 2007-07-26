@@ -21,7 +21,7 @@
 
 namespace vcsn
 {
-  namespace io
+  namespace tools
   {
     struct usual_converter_exp
     {
@@ -39,8 +39,8 @@ namespace vcsn
       template<typename Auto>
       std::string operator()(const Auto&, const typename Auto::series_set_elt_t& poly_series) const;
     };
-  }
-}
+  } // tools
+} // vcsn
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
