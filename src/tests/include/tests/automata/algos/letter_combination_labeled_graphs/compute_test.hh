@@ -22,6 +22,7 @@
 # include <vaucanson/algorithms/eval.hh>
 
 using namespace vcsn;
+using namespace vcsn::tools;
 
 template <class Auto, class Letter>
 bool odd_language_test(const Auto& a, const Letter& l)
@@ -61,7 +62,7 @@ bool compute_test(tests::Tester& t)
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
   TEST_MSG("Basic test on a well-known automaton.");
-  vcsn::GenRandomAutomata<Auto> gen;
+  vcsn::tools::GenRandomAutomata<Auto> gen;
   Auto	a = gen.empty();
   hstate_t h1 = a.add_state();
   hstate_t h2 = a.add_state();

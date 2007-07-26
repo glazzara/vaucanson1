@@ -22,6 +22,7 @@
 # include <tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh>
 
 using namespace vcsn;
+using namespace vcsn::tools;
 
 template <class Expr, class Derivation>
 bool krat_exp_partial_derivation_zero_test(tests::Tester& tg)

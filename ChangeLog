@@ -1,5 +1,40 @@
 2007-07-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix tests compilation
+	* src/tests/include/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh: .
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh: .
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh: .
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/krat_exp_realtime_conflict_test.hh: .
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/realtime_test.hh: .
+	* src/tests/include/tests/automata/algos/graphs/accessible_test.hh: .
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh: .
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh: .
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh: .
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh: .
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_random_test.hh: .
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_test.hh: .
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/compute_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/add_state_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/add_transition_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/coherence_state_transition_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/geometry_equal_operator_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/global_consistency_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/init_final_test.hh: .
+
+2007-07-27  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Move objects and functions in tools namespace
 	* Makefile.am: .
 	* vaucanson/tools/automaton_tools.hh: .

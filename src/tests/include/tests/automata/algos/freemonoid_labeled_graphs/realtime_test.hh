@@ -29,7 +29,7 @@ unsigned realtime_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   tests::Tester t(tg);
-  vcsn::GenRandomAutomata<Auto> gen;
+  vcsn::tools::GenRandomAutomata<Auto> gen;
 
   const unsigned nb_ok_tests     = 20;
   const unsigned nb_non_ok_tests = 20;

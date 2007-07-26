@@ -63,7 +63,7 @@ unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
 	}
     }
 
-  vcsn::GenRandomAutomata<Auto> generator;
+  vcsn::tools::GenRandomAutomata<Auto> generator;
   try
     {
       automaton_t	a = realtime(generator.generate(50, 60));

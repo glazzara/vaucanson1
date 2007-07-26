@@ -34,6 +34,7 @@ unsigned add_state_test(tests::Tester& tg)
 
 
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
   typedef Auto automaton_t;

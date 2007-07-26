@@ -35,6 +35,7 @@ unsigned global_consistency_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
   GenRandomAutomata<Auto> gen;

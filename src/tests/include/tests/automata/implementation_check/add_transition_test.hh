@@ -33,6 +33,7 @@ unsigned add_transition_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
   typedef Auto automaton_t;

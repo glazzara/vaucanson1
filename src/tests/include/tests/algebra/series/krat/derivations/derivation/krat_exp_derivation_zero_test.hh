@@ -21,6 +21,7 @@
 # include <vaucanson/algorithms/krat_exp_derivation.hh>
 
 using namespace vcsn;
+using namespace tools;
 
 template <class Expr, class Derivation>
 bool krat_exp_derivation_zero_test(tests::Tester& tg)
