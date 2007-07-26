@@ -1,3 +1,11 @@
+2007-07-26  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Move evaluation.h{h,xx} according to ticket #42.
+	* evaluation.hh,
+	* evaluation.hxx: Remove.
+	* internal/evaluation.hh,
+	* internal/evaluation.hxx: New.
+
 2007-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Fix op_choose_from_supp in polynoms.hxx
