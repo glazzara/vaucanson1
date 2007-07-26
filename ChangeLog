@@ -1,3 +1,11 @@
+2007-07-27  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix wrong includes
+	* vaucanson/algorithms/internal/evaluation.hh: .
+	* vaucanson/algorithms/internal/evaluation.hxx: .
+	* vaucanson/contexts/transducer_functions.thh: .
+	* vaucanson/contexts/transducer_maker.thxx: .
+
 2007-07-26  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix derivation tests

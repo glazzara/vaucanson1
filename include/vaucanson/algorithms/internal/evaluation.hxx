@@ -17,7 +17,7 @@
 #ifndef VCSN_ALGORITHMS_EVALUATION_HXX
 # define VCSN_ALGORITHMS_EVALUATION_HXX
 
-# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/internal/evaluation.hh>
 
 # include <vaucanson/automata/concept/transducer_base.hh>
 

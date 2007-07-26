@@ -90,7 +90,7 @@ namespace vcsn {
 }
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-#  include<vaucanson/algorithms/evaluation.hxx>
+#  include<vaucanson/algorithms/internal/evaluation.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_EVALUATION_HH

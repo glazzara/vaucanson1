@@ -22,7 +22,7 @@
  */
 
 # include <vaucanson/algorithms/eps_removal.hh>
-# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/internal/evaluation.hh>
 # include <vaucanson/algorithms/krat_exp_expand.hh>
 # include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/realtime.hh>
