@@ -261,13 +261,6 @@ value.
 -->
 <xs:complexType name="generator">
   <xs:attribute name="value" type="xs:string"/>
-  <xs:attribute name="range">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="implicitAlphabet|digits|ascii"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
 </xs:complexType>
 
 <xs:complexType name="monoid">
@@ -301,10 +294,10 @@ if necessary.
 -->
 <xs:complexType name="typeAutomaton">
   <xs:sequence>
-    <xs:element name="monoid" type="monoid" minOccurs="0"/>
+    <xs:element name="monoid" type="monoid"/>
     <xs:choice>
-      <xs:element name="semiring" type="semiring" minOccurs="0"/>
-      <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
+      <xs:element name="semiring" type="semiring"/>
+      <xs:element name="numericalSemiring" type="numericalSemiring"/>
     </xs:choice>
   </xs:sequence>
 </xs:complexType>
@@ -471,7 +464,7 @@ be set.
 -->
 <xs:complexType name="automaton">
   <xs:sequence>
-    <xs:element name="labelType" type="typeAutomaton" minOccurs="0"/>
+    <xs:element name="labelType" type="typeAutomaton"/>
     <xs:element name="content" type="contentAutomaton"/>
     <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>

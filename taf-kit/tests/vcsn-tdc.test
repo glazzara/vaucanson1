@@ -53,8 +53,7 @@ vcsn-tdc info $t1
   diff tmp.xml $t2_ucompose_u2
 
 ## Inversion of t1
-  vcsn-tdc invert $t1 |
-	  vcsn-tdc are-isomorphic $inverted_t1 -
+  vcsn-tdc invert $t1 \| are-isomorphic $inverted_t1 -
 
   input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
   vcsn-tdc --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-b eval - abba

@@ -26,6 +26,7 @@
 
 # include <vaucanson/algorithms/composition_cover.hh>
 # include <vaucanson/algorithms/eps_removal.hh>
+# include <vaucanson/algorithms/eps_removal_sp.hh>
 # include <vaucanson/algorithms/evaluation_fmp.hh>
 # include <vaucanson/algorithms/fmp_to_realtime.hh>
 # include <vaucanson/algorithms/projection.hh>

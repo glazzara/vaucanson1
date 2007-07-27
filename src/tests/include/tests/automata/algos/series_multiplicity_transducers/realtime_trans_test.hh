@@ -26,6 +26,7 @@ template <class Transducer>
 unsigned realtime_trans_test(tests::Tester& tg)
 {
   using namespace vcsn;
+  using namespace vcsn::tools;
   AUTOMATON_TYPES(Transducer);
 
   tests::Tester t(tg);

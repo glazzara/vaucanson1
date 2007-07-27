@@ -13,6 +13,28 @@ This document describes major updates to the Vaucanson_ project.
 Vaucanson 1.1
 =============
 
+- XML
+
+  + New XML Parser (SAX implementation)
+    With New XSD.
+  + Parser doesn't omit transitions with bad label anymore instead of failing
+
+- Algorithms
+
+  + eps_removal_sp(a);
+    Various optimizations.
+
+- TAF-Kit
+  
+  + Timer has been improved.
+  + Intern pipe can now be used:
+    ./vcsn-b identity ab.xml \| product b.xml - 
+    is equivalent to
+    ./vcsn-b identity ab.xml | ./vcsn-b product b.xml -
+
+Vaucanson 1.0a, June 13th, 2007
+===============================
+
 - Documentation
 
   + The Doxygen documentation is now installed expanded, rather than
@@ -20,12 +42,30 @@ Vaucanson 1.1
 
 - Algorithms
 
+  + eps_removal_sp(a);
+    New generic epsilon_removal algorithm based on shortest_path.
+
+  + minimize(a);
+    Various optimizations.
+
   + transpose(a);
     Transition labels are now transposed too.
 
   + image(a, b) and domain(a, b);
     they replace output_projection and input_projection. These algorithms work
     for both FMP transducers and RW transducers.
+
+- XML
+
+  + Bug fixes.
+  + I/O optimizations.
+
+- Utilities
+
+  + Lib VCSN
+    Provides C++ libraries for the main automaton types.
+  + SWIG
+    Fix compilation issues.
 
 - TAF-Kit
 

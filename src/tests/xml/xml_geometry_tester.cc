@@ -23,6 +23,7 @@
 int main(int argc, char** argv)
 {
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::xml;
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
@@ -45,7 +46,7 @@ int main(int argc, char** argv)
 
     a.geometry().states()[s2] = make_pair(12, 14);
 
-    std::cout << automaton_saver(a, io::string_out(), xml::XML());
+    std::cout << automaton_saver(a, string_out(), xml::XML());
   }
   else
   {
@@ -54,7 +55,7 @@ int main(int argc, char** argv)
     alphabet_t alpha;
     automaton_t a = make_automaton(alpha);
 
-    std::cin >> automaton_loader(a, io::string_out(), xml::XML());
+    std::cin >> automaton_loader(a, string_out(), xml::XML());
     vcsn::tools::dot_dump(std::cout, a, "A");
   }
 }

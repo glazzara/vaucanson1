@@ -21,7 +21,7 @@ endif
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 
 # Prevent accidental edition of generated files.
-$(srcdir)/README: cp $(srcdir)/doc/README.txt
+$(srcdir)/README: $(srcdir)/doc/README.txt
 	rm -f $(srcdir)/README
 	cp $(srcdir)/doc/README.txt $(srcdir)/README
 	chmod -w $(srcdir)/README
@@ -107,7 +107,7 @@ distcheck: dist
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac
-	chmod -R a-w $(distdir); chmod a+w $(distdir)
+	chmod -R a+w $(distdir)
 	mkdir $(distdir)/_build
 	mkdir $(distdir)/_inst
 	chmod a-w $(distdir)
@@ -126,7 +126,7 @@ distcheck: dist
 	  && $(MAKE) $(AM_MAKEFLAGS) distuninstallcheck_dir="$$dc_install_base" \
 	        distuninstallcheck \
 	  && echo "$$dc_install_base" \
-	  && chmod -R a-w "$$dc_install_base" \
+	  && chmod -R a+w "$$dc_install_base" \
 	  && ({ \
 	       (cd ../.. && umask 077 && mkdir "$$dc_destdir") \
 	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" install \

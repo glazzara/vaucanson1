@@ -284,7 +284,7 @@ namespace vcsn {
   {
     if (m.size() == 0)
       {
-	Tw val (0);
+	Tw val (zero_value(SELECT(typename Self::semiring_t), SELECT(Tw)));
 	op_in_star(SELECT(typename Self::semiring_t), val);
 	m.insert(identity_value(SELECT(typename Self::monoid_t), SELECT(Tm)),
 		 val);

@@ -43,10 +43,7 @@ DEFINE_COMMAND (NAME (compose)
 
 		  if (!is_sub_normalized(b))
 		    sub_normalize_here(b))
-		OUTPUT (
-		  automaton_saver(compose(a,b),
-				  string_out (),
-				  XML ()))
+		KEEP_AUTOMATON (compose(a,b))
 		RETURNVALUE (0));
 
 
@@ -60,18 +57,14 @@ DEFINE_COMMAND (NAME (u_compose)
 
 		  if (!is_sub_normalized(b))
 		    sub_normalize_here(b))
-		OUTPUT (
-		  automaton_saver(u_compose(a,b),
-				  string_out (),
-				  XML ()))
+		KEEP_AUTOMATON (u_compose(a,b))
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (invert)
 		CODE (
 		  automaton_t a = get_aut(args.args[1]);
 		  automaton_t fmp = invert(a))
-		OUTPUT (
-		  automaton_saver(fmp, string_out (), XML ()))
+		KEEP_AUTOMATON (fmp)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation)
@@ -89,8 +82,7 @@ DEFINE_COMMAND (NAME (evaluation_fmp)
 		  boolean_automaton::automaton_t res =
 		  boolean_automaton::make_automaton(get_second_alphabet(args.alphabet2));
 		  evaluation_fmp(get_aut(args.args[1]), a, res))
-		OUTPUT (
-		  automaton_saver(res, string_out (), XML ()))
+		KEEP_AUTOMATON (res)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (domain)
@@ -98,8 +90,7 @@ DEFINE_COMMAND (NAME (domain)
 		  boolean_automaton::automaton_t a =
 		  boolean_automaton::make_automaton(get_first_alphabet(args.alphabet));
 		  domain(get_aut(args.args[1]), a))
-		OUTPUT (
-		  automaton_saver(a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (image)
@@ -107,8 +98,7 @@ DEFINE_COMMAND (NAME (image)
 		  boolean_automaton::automaton_t a =
 		  boolean_automaton::make_automaton(get_second_alphabet(args.alphabet2));
 		  image(get_aut(args.args[1]), a))
-		OUTPUT (
-		  automaton_saver(a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (to_rt)
@@ -117,8 +107,7 @@ DEFINE_COMMAND (NAME (to_rt)
 		  boolean_transducer::make_automaton(first_alphabet_t(),
 						     second_alphabet_t());
 		  fmp_to_realtime(get_aut(args.args[1]), a))
-		OUTPUT (
-		  automaton_saver(a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 
@@ -130,8 +119,7 @@ DEFINE_COMMAND (NAME (intersection)
 		  a.structure().series().monoid().alphabet();
 		  automaton_t fmp = make_automaton(A,A);
 		  identity(a, fmp))
-		OUTPUT (
-		  automaton_saver(fmp, string_out (), XML ()))
+		KEEP_AUTOMATON (fmp)
 		RETURNVALUE (0));
 
 
@@ -170,6 +158,7 @@ const command_t command_map[] =
     "Generic algorithm for transducers:",
 
     COMMAND_ENTRY (eps_removal, Aut, "epsilon-removal algorithm."),
+    COMMAND_ENTRY (eps_removal_sp, Aut, "epsilon-removal algorithm."),
     COMMAND_ENTRY (domain, Aut,
 		   "Give the automaton that accepts all inputs accepted by `aut'."),
     COMMAND_ENTRY_CN (eval, evaluation, AutExp,

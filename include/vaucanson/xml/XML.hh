@@ -35,30 +35,35 @@ namespace vcsn
 {
   namespace xml
   {
-
-    struct XML
+    class XML
     {
-      XML(const std::string& name = "", bool use_label_node = false);
+      public:
+	XML(const std::string& name = "", bool use_label_node = false);
+	XML(const XML& old);
+	~XML();
 
-      /// Write on @a out.
-      template <typename Saver, typename Conv>
-      void operator()(std::ostream& out,
-		      const Saver& s,
-		      const Conv& conv) const;
+	void
+	check(bool check);
 
-      /// Load from @a in.
-      template<typename Loader>
-      void operator()(std::istream& in, Loader& l);
+	/// Write an automaton to @a out.
+	template <typename Saver, typename Conv>
+	void operator()(std::ostream& out,
+			const Saver& s,
+			const Conv& conv) const;
 
-    protected:
-      const std::string name_;
-      bool use_label_node_;
+
+	/// Load an automaton from @a in.
+	template <typename Loader>
+	void operator()(std::istream& in, Loader& l);
+
+	static int inst_;
+      protected:
+	const	std::string name_;
+	bool	use_label_node_;
+	bool	check_;
     };
-
   } // !xml
-
 } // !vcsn
-
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/xml/XML.hxx>

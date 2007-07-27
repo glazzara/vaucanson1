@@ -53,6 +53,13 @@ vcsn::misc::Timer global_timer;
 /// A global bencher.
 vcsn::misc::Bencher bencher;
 
+// A global command output;
+command_output last_command_output;
+# include "pipe_command_sequence.hh"
+
+// Writer for final output
+# include "pipe_writers.hh"
+
 /**
  * Documentation of the program, of the arguments we accept and the
  * options we understand.
@@ -76,6 +83,11 @@ namespace
       "Bench", 0 },
     { "bench-plot-output", 'O', "OUTPUT_FILENAME", 0,
       "Bench output filename", 0 },
+
+    { "input-type", 'i', "INPUT_TYPE", 0,
+      "Automaton input type (FSM or XML)", 0 },
+    { "output-type", 'o', "OUTPUT_TYPE", 0,
+      "Automaton input type (FSM, XML or DOT)", 0 },
 
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,
@@ -176,6 +188,33 @@ namespace
 	args.plot_output_filename = arg;
 	break;
 
+      case 'i':
+	if (std::string (arg).compare ("XML") == 0)
+	  args.input_type = INPUT_TYPE_XML;
+	else if (std::string (arg).compare ("FSM") == 0)
+	  args.input_type = INPUT_TYPE_FSM;
+	else
+	{
+	  std::cerr << "Unknown input type: " << arg << std::endl;
+	  return ARGP_ERR_UNKNOWN;
+	}
+	break;
+
+      case 'o':
+	if (std::string (arg).compare ("XML") == 0)
+	  args.output_type = OUTPUT_TYPE_XML;
+	else if (std::string (arg).compare ("FSM") == 0)
+	  args.output_type = OUTPUT_TYPE_FSM;
+	else if (std::string (arg).compare ("DOT") == 0)
+	  args.output_type = OUTPUT_TYPE_DOT;
+	else
+	{
+	  std::cerr << "Unknown output type: " << arg << std::endl;
+	  return ARGP_ERR_UNKNOWN;
+	}
+	break;
+
+
       case 'v':
 	args.verbose = true;
 	break;
@@ -204,36 +243,110 @@ using namespace vcsn::misc;
 
 int main (int argc, char* argv[])
 {
-  arguments_t	args (argv[0]);
-  argp_parse (&argp_setup, argc, argv, 0, 0, &args);
+  std::list<pipe_command> command_list;
 
-  int status = 0;
+  // Cut the command line
+  int i = 0;
+  int j = 0;
+  for (; i < argc; ++i)
+    {
+      if (std::string ("|").compare(argv[i]) == 0)
+	{
+	  command_list.push_back (pipe_command (argv, j, i));
+	  j = i;
+	}
+    }
+  command_list.push_back (pipe_command (argv, j, i));
+
+  GLOBAL_RESULT.set_state (PIPE_GET_FROM_STDIN);
+
+  arguments_t args ("");
+
+  // Parse each command
+  for (std::list<pipe_command>::iterator li = command_list.begin ();
+       li != command_list.end (); ++li)
+    {
+      argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
+
+      if (li->args.bench)
+	{
+	  args.bench = li->args.bench;
+	  args.nb_iterations = li->args.nb_iterations;
+	}
+      if (li->args.report_time)
+	{
+	  args.report_time = li->args.report_time;
+	  args.report_degree = li->args.report_degree;
+	}
+      if (li->args.export_time_dot)
+	{
+	  args.export_time_dot = li->args.export_time_dot;
+	  args.export_dot_degree = li->args.export_dot_degree;
+	}
+      args.export_time_xml = args.export_time_xml || li->args.export_time_xml;
+      if (!li->args.plot_output_filename.empty ())
+	args.plot_output_filename = li->args.plot_output_filename;
+    }
 
   BENCH_DO(args.nb_iterations)
-  {
-    TIMER_START ();
-    try {
-      status = execute_command (args);
-    }
-    catch (const std::logic_error& err) {
-      warn (argv[0] << ": " << err.what ());
-      status = -1;
-    }
-    TIMER_STOP ();
+    {
+      int task_number = 0;
 
-    if (args.report_time)
-      TIMER_PRINT_VD(std::cerr,
-		     timer::get_verbose_degree (args.report_degree));
-    if (args.export_time_dot)
-      TIMER_EXPORT_DOT_VD(std::cerr,
-			  timer::get_verbose_degree (args.export_dot_degree));
-    if (args.export_time_xml)
-      TIMER_DUMP(std::cerr);
-  }
+      TIMER_START ();
+
+      // Execute commands
+      for (std::list<pipe_command>::iterator li = command_list.begin ();
+	   li != command_list.end (); ++li, ++task_number)
+	{
+	  arguments_t& args = li->args;
+
+	  int& status = li->status;
+
+	  try
+	    {
+	      GLOBAL_RESULT.clear ();
+	      GLOBAL_RESULT.set_name (args.args[0]);
+	      GLOBAL_RESULT.output_type = args.output_type;
+	      GLOBAL_RESULT.input_type = args.input_type;
+	      std::ostringstream os;
+	      os << "CMD[" << task_number << "]: ";
+	      TIMER_SCOPED(os.str () + std::string (args.args[0]));
+	      status = execute_command (args);
+	    }
+	  catch (const std::logic_error& err) {
+	    warn (argv[0] << ": " << err.what ());
+	    status = -1;
+	  }
+
+	  // Break upon error
+	  if (status != 0)
+	    break;
+	}
+
+      if (!GLOBAL_RESULT.empty)
+	boost::apply_visitor (pipe_stream_writer (std::cout,
+						  GLOBAL_RESULT.output_type),
+			      GLOBAL_RESULT.output);
+
+      TIMER_STOP ();
+
+      if (args.report_time)
+	TIMER_PRINT_VD(std::cerr,
+		       timer::get_verbose_degree (args.report_degree));
+      if (args.export_time_dot)
+	TIMER_EXPORT_DOT_VD(std::cerr,
+			    timer::get_verbose_degree
+			(args.export_dot_degree));
+      if (args.export_time_xml)
+	TIMER_DUMP(std::cerr);
+
+      GLOBAL_RESULT.set_state (PIPE_BENCH);
+    }
 
   if (args.bench)
     BENCH_PRINT(std::cerr);
   if (!args.plot_output_filename.empty())
     BENCH_SAVE_PLOT(args.plot_output_filename.c_str());
-  return status;
+
+  return GLOBAL_RESULT.status;
 }

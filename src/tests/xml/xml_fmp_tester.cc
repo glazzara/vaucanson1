@@ -24,6 +24,7 @@
 int main(int argc, char** argv)
 {
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::xml;
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
     a.set_final(s2, ss3);
 
 
-    std::cout << automaton_saver(a, io::string_out(), xml::XML());
+    std::cout << automaton_saver(a, string_out(), xml::XML());
   }
   else
   {
@@ -71,7 +72,7 @@ int main(int argc, char** argv)
 
     automaton_t a = make_automaton(alpha1, alpha2);
 
-    std::cin >> automaton_loader(a, io::string_out(), xml::XML());
+    std::cin >> automaton_loader(a, string_out(), xml::XML());
     vcsn::tools::dot_dump(std::cout, a, "FMP");
   }
 }

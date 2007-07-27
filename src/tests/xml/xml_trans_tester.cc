@@ -25,6 +25,7 @@ int main(int argc, char** argv)
 {
   using namespace vcsn;
   using namespace vcsn::xml;
+  using namespace vcsn::tools;
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
   {
@@ -47,7 +48,7 @@ int main(int argc, char** argv)
     a.add_io_transition(s0, s1, "a", "y");
     a.add_io_transition(s1, s2, "b", "x");
 
-    std::cout << automaton_saver(a, io::string_out(), xml::XML());
+    std::cout << automaton_saver(a, string_out(), xml::XML());
   }
   else
   {
@@ -58,8 +59,8 @@ int main(int argc, char** argv)
 
     automaton_t a = make_automaton(alpha1, alpha2);
 
-    std::cin >> automaton_loader(a, io::string_out(), xml::XML());
-    vcsn::tools::dot_dump(std::cout, a, "T");
+    std::cin >> automaton_loader(a, string_out(), xml::XML());
+    dot_dump(std::cout, a, "T");
   }
 }
 

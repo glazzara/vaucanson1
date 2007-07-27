@@ -19,7 +19,7 @@
 
 # include <vaucanson/algorithms/evaluation_fmp.hh>
 # include <vaucanson/algorithms/fmp_to_realtime.hh>
-# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/internal/evaluation.hh>
 # include <vaucanson/boolean_transducer.hh>
 # include <vaucanson/boolean_automaton.hh>
 

@@ -25,6 +25,7 @@ int main(int argc, char** argv)
 {
   using namespace vcsn;
   using namespace vcsn::xml;
+  using namespace vcsn::tools;
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
   {
@@ -51,7 +52,7 @@ int main(int argc, char** argv)
     a.add_series_transition(s1, s0, make_rat_exp(alpha, "5 (a.b)"));
     a.add_series_transition(s1, s1, make_rat_exp(alpha, "5 (a+b)"));
 
-    std::cout << automaton_saver(a, io::string_out(), xml::XML("", true));
+    std::cout << automaton_saver(a, string_out(), xml::XML("", true));
   }
   else
   {
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
     alphabet_t alpha;
     automaton_t a = make_automaton(alpha);
 
-    std::cin >> automaton_loader(a, io::string_out(), xml::XML());
-    vcsn::tools::dot_dump(std::cout, a, "A");
+    std::cin >> automaton_loader(a, string_out(), xml::XML());
+    dot_dump(std::cout, a, "A");
   }
 }

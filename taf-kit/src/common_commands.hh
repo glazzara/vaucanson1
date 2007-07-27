@@ -34,7 +34,7 @@
 using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
-using namespace vcsn::io;
+using namespace vcsn::tools;
 using vcsn::xml::XML;
 
 # include <cstdlib>
@@ -58,6 +58,10 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal)
 				  ARG_KIND (aut)
 				  ALGOS (accessible, eps_removal));
+
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
+				  ARG_KIND (aut)
+				  ALGOS (accessible, eps_removal_sp));
 
 DEFINE_COMMAND (NAME (are_isomorphic)
 		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
@@ -86,7 +90,7 @@ DEFINE_COMMAND (NAME (info)
 
 DEFINE_COMMAND (NAME (identity)
 		CODE (automaton_t a = get_aut (args.args[1]))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (display)

@@ -56,6 +56,8 @@ vaucanson/misc/limits.hh			\
 vaucanson/misc/misc.hh				\
 vaucanson/misc/random.hh			\
 vaucanson/misc/random.hxx			\
+vaucanson/misc/self_iterator.hh 		\
+vaucanson/misc/self_iterator.hxx 		\
 vaucanson/misc/selectors.hh			\
 vaucanson/misc/sparse_interval.hh		\
 vaucanson/misc/sparse_interval.hxx		\
@@ -91,6 +93,8 @@ vaucanson/tools/dumper.hh			\
 vaucanson/tools/dumper.hxx			\
 vaucanson/tools/fsm_dump.hh			\
 vaucanson/tools/fsm_dump.hxx			\
+vaucanson/tools/fsm_load.hh			\
+vaucanson/tools/fsm_load.hxx			\
 vaucanson/tools/gen_book.hh			\
 vaucanson/tools/gen_book.hxx			\
 vaucanson/tools/gen_random.hh			\
@@ -259,6 +263,8 @@ vaucanson/algorithms/determinize.hh				\
 vaucanson/algorithms/determinize.hxx				\
 vaucanson/algorithms/eps_removal.hh				\
 vaucanson/algorithms/eps_removal.hxx				\
+vaucanson/algorithms/eps_removal_sp.hh				\
+vaucanson/algorithms/eps_removal_sp.hxx				\
 vaucanson/algorithms/eval.hh					\
 vaucanson/algorithms/eval.hxx					\
 vaucanson/algorithms/evaluation_fmp.hh				\
@@ -455,4 +461,6 @@ vaucanson/xml/xerces_parser.hxx			\
 vaucanson/xml/xml_chooser.hh			\
 vaucanson/xml/xml_chooser.hxx			\
 vaucanson/xml/xml_converter.hh			\
-vaucanson/xml/xml_converter.hxx
+vaucanson/xml/xml_converter.hxx 		\
+vaucanson/xml/xml_xerces_stream.hh 		\
+vaucanson/xml/xml_xerces_stream.hxx

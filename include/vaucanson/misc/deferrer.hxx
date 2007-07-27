@@ -57,7 +57,7 @@ namespace vcsn
     DeferrerDebugPart<T, B>::set_valid (bool b)
     {
       if (is_valid_)
-	warning ("Modifying a valid Deferrer<T, true>.");
+	WARNING ("Modifying a valid Deferrer<T, true>.");
       is_valid_ = b;
     }
 

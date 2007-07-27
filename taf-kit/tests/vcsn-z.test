@@ -45,8 +45,7 @@ test $(vcsn-z eval $c1 bababa) -eq 42
 ## --------------------------------- ##
 
 # star-of-standard
-vcsn-z star-of-standard $standard_c1 | \
-    vcsn-z is-standard -
+vcsn-z star-of-standard $standard_c1 \| is-standard -
 
 # construct ((2 a).(4 1))*
 vcsn-z star-of-standard 2a_41.xml > star_2a_41.xml
@@ -57,10 +56,8 @@ test $(vcsn-z eval star_2a_41.xml aa) -eq 64
 test $(vcsn-z eval star_2a_41.xml aaa) -eq 512
 
 # union-of-standard
-vcsn-z union-of-standard $standard_c1 $standard_c1 | \
-    vcsn-z is-standard -
-vcsn-z concat-of-standard $standard_c1 $standard_c1 | \
-    vcsn-z is-standard -
+vcsn-z union-of-standard $standard_c1 $standard_c1 \| is-standard -
+vcsn-z concat-of-standard $standard_c1 $standard_c1 \| is-standard -
 
 # concat-of-standard
 
