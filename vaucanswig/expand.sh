@@ -196,7 +196,7 @@ cat <<EOF
 ## NOTE: this file was generated automatically by expand.sh
 ##
 
-INCLUDES = -I/usr/include/python\$(PYTHON_VERSION) -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
+INCLUDES = -I$(PYTHON_PREFIX)/include/python\$(PYTHON_VERSION) -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS
 AM_CXXFLAGS = \$(CXXFLAGS_DEBUG)
