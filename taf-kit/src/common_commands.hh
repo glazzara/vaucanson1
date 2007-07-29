@@ -30,6 +30,7 @@
 # include <vaucanson/xml/XML.hh>
 # include <vaucanson/tools/dot_display.hh>
 # include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/algorithms/isomorph.hh>
 
 using namespace CONTEXT_NAMESPACE;
 
