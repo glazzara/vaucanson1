@@ -63,6 +63,9 @@ AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 	       [test "x$enable_vaucanswig" = "xyes"])
 
 
+#Boost
+AX_BOOST_BASE([1.33])
+
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL

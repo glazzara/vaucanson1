@@ -16,7 +16,7 @@
 ###
 
 m4datadir = $(datadir)/aclocal
-dist_m4data_DATA = vcsn.m4 vcsn-xml.m4
+dist_m4data_DATA = vcsn.m4 vcsn-xml.m4 vcsn-boost.m4
 
 
 EXTRA_DIST =					\

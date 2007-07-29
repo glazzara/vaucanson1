@@ -1,5 +1,13 @@
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Check Boost in configure
+	* build-aux/Makefile.am,
+	* build-aux/vcsn-boost.m4,
+	* configure.ac: Add the test for Boost.
+	* vaucanswig/expand.sh: Fix a bug.
+
+2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Switch from full headers to structures headers 
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/xml_chooser.hh,
