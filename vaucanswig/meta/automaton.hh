@@ -427,7 +427,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     virtual void load(std::istream& in, const std::string& format)
     {
       if (format.substr(0, 6) == "simple")
-	in >> vcsn::automaton_loader(*auto_, conv_, vcsn::io::simple());
+	in >> vcsn::automaton_loader(*auto_, conv_, vcsn::tools::simple());
       else if (format.substr(0, 3) == "XML")
 	in >> vcsn::automaton_loader(*auto_, conv_, vcsn::xml::XML());
       else
@@ -443,10 +443,10 @@ struct vcsn_automaton : vcsn::virtual_automaton
 	if (name.size() < 2)
 	  name = ":automaton";
 	name.erase(name.begin(), name.begin() + 1);
-	out << vcsn::automaton_saver(*auto_, vcsn::io::string_out(), vcsn::io::dot(name));
+	out << vcsn::automaton_saver(*auto_, vcsn::tools::string_out(), vcsn::tools::dot(name));
       }
       else if (format.substr(0, 6) == "simple")
-	out << vcsn::automaton_saver(*auto_, conv_, vcsn::io::simple());
+	out << vcsn::automaton_saver(*auto_, conv_, vcsn::tools::simple());
       else if (format.substr(0, 3) == "XML")
 	out << vcsn::automaton_saver(*auto_, conv_, vcsn::xml::XML());
       else
@@ -464,8 +464,8 @@ struct vcsn_automaton : vcsn::virtual_automaton
 #define MAKE_VAUTO_TYPES(FAMILY)					\
   namespace FAMILY ##_types						\
   {									\
-    typedef vcsn_automaton<automaton_t, vcsn::io::usual_converter_poly<FAMILY ##_exp_t> > FAMILY ##_auto_t; \
-    typedef vcsn_automaton<generalized_automaton_t, vcsn::io::usual_converter_exp> gen_## FAMILY ##_auto_t; \
+    typedef vcsn_automaton<automaton_t, vcsn::tools::usual_converter_poly<FAMILY ##_exp_t> > FAMILY ##_auto_t; \
+    typedef vcsn_automaton<generalized_automaton_t, vcsn::tools::usual_converter_exp> gen_## FAMILY ##_auto_t; \
   }
 
 

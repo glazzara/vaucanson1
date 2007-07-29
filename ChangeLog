@@ -1,5 +1,10 @@
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix Vaucanswig compilation issues
+	* ../trunk/vaucanswig/meta/automaton.hh: Fix compilation issues.
+
+2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Check Boost in configure
 	* build-aux/Makefile.am,
 	* build-aux/vcsn-boost.m4,
