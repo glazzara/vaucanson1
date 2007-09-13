@@ -214,18 +214,19 @@ AC_CONFIG_FILES([
 	lib/Makefile
 	src/Makefile
 	  src/demos/Makefile
-	    src/demos/vgrep/Makefile
-	    src/demos/function_library/Makefile
 	    src/demos/algorithms/Makefile
+	    src/demos/function_library/Makefile
 	    src/demos/one_rule_rewriting/Makefile
+	    src/demos/vgrep/Makefile
 	  src/benchs/Makefile
 	    src/benchs/common/Makefile
-	    src/benchs/determinization/Makefile
-	    src/benchs/minimization_debruijn/Makefile
-	    src/benchs/minimization_2n/Makefile
-	    src/benchs/quotient/Makefile
 	    src/benchs/composition/Makefile
 	    src/benchs/derived_terms/Makefile
+	    src/benchs/determinization/Makefile
+	    src/benchs/eps_removal/Makefile
+	    src/benchs/minimization_2n/Makefile
+	    src/benchs/minimization_debruijn/Makefile
+	    src/benchs/quotient/Makefile
 	include/Makefile
 	debian/Makefile])
 

@@ -442,14 +442,18 @@ vaucanson/z_transducer.hh \
 vaucanson/z_transducer_structures.hh
 
 nobase_include_HEADERS += 			\
-vaucanson/xml/XML.hh				\
-vaucanson/xml/XML.hxx				\
+vaucanson/xml/builders.hh			\
+vaucanson/xml/builders.hxx			\
 vaucanson/xml/error_handler.hh			\
 vaucanson/xml/error_handler.hxx			\
+vaucanson/xml/handlers.hh			\
+vaucanson/xml/handlers.hxx			\
 vaucanson/xml/ios.hh				\
 vaucanson/xml/ios.hxx				\
 vaucanson/xml/node.hh				\
 vaucanson/xml/node.hxx				\
+vaucanson/xml/parsers.hh			\
+vaucanson/xml/parsers.hxx			\
 vaucanson/xml/session.hh			\
 vaucanson/xml/session.hxx			\
 vaucanson/xml/strings.hh			\
@@ -462,5 +466,9 @@ vaucanson/xml/xml_chooser.hh			\
 vaucanson/xml/xml_chooser.hxx			\
 vaucanson/xml/xml_converter.hh			\
 vaucanson/xml/xml_converter.hxx 		\
+vaucanson/xml/xmleq.hh				\
+vaucanson/xml/xmleq.hxx				\
+vaucanson/xml/XML.hh				\
+vaucanson/xml/XML.hxx				\
 vaucanson/xml/xml_xerces_stream.hh 		\
 vaucanson/xml/xml_xerces_stream.hxx

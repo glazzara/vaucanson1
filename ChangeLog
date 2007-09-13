@@ -1,3 +1,10 @@
+2007-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* configure.ac (AC_CONFIG_FILES): Add missing
+	src/benchs/eps_removal/Makefile and sort the list.
+	* include/Makefile.am (nobase_include_HEADERS): Add several
+	missing files from vaucanson/xml/.
+
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix Vaucanswig compilation issues
