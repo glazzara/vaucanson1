@@ -1,3 +1,17 @@
+	
+2007-09-19  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix a compilation issue and configure tests. 
+	
+	The LDFLAGS and CPPFLAGS were not set properly after a configure.
+	A Makefile was not generated in the src/bench directory. 
+
+	* ../build-aux/vcsn-boost.m4: Set LDFLAGS and CPPFLAGS correctly.
+	* ../build-aux/vcsn-xml.m4: Improve the path resolution for xerces.
+	* ../src/benchs/eps_removal/Makefile.am,
+	* ../src/benchs/eps_removal/eps_removal-bench.cc,
+	* ../src/benchs/generate_benchs.sh: Fix a missing file generation.
+
 2007-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac (AC_CONFIG_FILES): Add missing

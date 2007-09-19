@@ -180,6 +180,9 @@ if test "x$want_boost" = "xyes"; then
 	fi
 
 	if test "$succeeded" != "yes" ; then
+		CPPFLAGS="$CPPFLAGS_SAVED"
+		LDFLAGS="$LDFLAGS_SAVED"
+
 		if test "$_version" = "0" ; then
 			AC_MSG_ERROR([[We could not detect the boost libraries (version $boost_lib_version_req_shorten or higher). If you have a staged boost library (still not installed) please specify \$BOOST_ROOT in your environment and do not give a PATH to --with-boost option.  If you are sure you have boost installed, then check your version number looking in <boost/version.hpp>. See http://randspringer.de/boost for more documentation.]])
 		else
@@ -190,9 +193,6 @@ if test "x$want_boost" = "xyes"; then
 		AC_SUBST(BOOST_LDFLAGS)
 		AC_DEFINE(HAVE_BOOST,,[define if the Boost library is available])
 	fi
-
-        CPPFLAGS="$CPPFLAGS_SAVED"
-       	LDFLAGS="$LDFLAGS_SAVED"
 fi
 
 ])

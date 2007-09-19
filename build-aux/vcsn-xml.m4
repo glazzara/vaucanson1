@@ -25,7 +25,14 @@ AC_DEFUN([_VCSN_CHECK_XML],
    else
       XERCES_EXTRA_CPPFLAGS=''
       XERCES_EXTRA_LDFLAGS=''
-   fi
+      for ac_xerces_path_tmp in /usr /usr/local /opt /opt/local ; do
+	if test -d "$ac_xerces_path_tmp/include/xercesc" && test -r "$ac_xerces_path_tmp/include/xercesc"; then
+	  XERCES_EXTRA_LDFLAGS="-L$ac_xerces_path_tmp/lib"
+	  XERCES_EXTRA_CPPFLAGS="-I$ac_xerces_path_tmp/include"
+	  break;
+	fi
+      done
+    fi
 
    AC_LANG_PUSH([C++])
 
