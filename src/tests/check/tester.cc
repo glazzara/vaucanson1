@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
 #include <iomanip>
 #include <string>
 #include <cassert>
+#include <cstdlib>  // getenv()
 #include "tests/check/tester.hh"
 
 namespace tests {
@@ -82,10 +83,10 @@ namespace tests {
     // --seed=[time, SEED]
     else if (arg == "--seed=time")
       seed_ = seed_time;
-    else if (arg.substr (0, strlen ("--seed=")) == "--seed=")
+    else if (arg.compare (0, sizeof ("--seed=") - 1, "--seed=") == 0)
       {
 	unsigned long res =
-	  strtoul (arg.substr (strlen ("--seed=")).c_str (), 0, 0);
+	  strtoul (arg.c_str () + sizeof ("--seed=") - 1, 0, 0);
 	assert (res <= static_cast <unsigned long> (UINT_MAX));
 	seed_ = static_cast <unsigned> (res);
       }

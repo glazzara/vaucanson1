@@ -1,3 +1,11 @@
+2007-09-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Compiling on FreeBSD chokes on getenv() and strlen().
+	Report from Alexandre Hamez.
+
+	* src/tests/check/tester.cc: Include <cstdlib> for
+	getenv() and get rid of strlen().
+
 2007-09-20  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Disable are_isomorphic in TAF-Kit
