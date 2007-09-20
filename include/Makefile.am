@@ -68,6 +68,12 @@ vaucanson/misc/support.hxx			\
 vaucanson/misc/timer.hh				\
 vaucanson/misc/timer.hxx			\
 vaucanson/misc/timer.cc				\
+vaucanson/misc/timer_internal_gathering.hh 	\
+vaucanson/misc/timer_internal_gathering.hxx 	\
+vaucanson/misc/timer_internal_gathering.cc 	\
+vaucanson/misc/timer_internal_graph.hh 		\
+vaucanson/misc/timer_internal_graph.hxx		\
+vaucanson/misc/timer_internal_graph.cc 		\
 vaucanson/misc/bencher.hh			\
 vaucanson/misc/bencher.hxx			\
 vaucanson/misc/bencher.cc			\
