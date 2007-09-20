@@ -1,5 +1,15 @@
 2007-09-20  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Disable are_isomorphic in TAF-Kit
+	Since the meaning of "isomorphic" is not correctly defined in
+	Vaucanson yet, this algorithm is temporarily disabled in TAF-Kit.
+	It remains accesible through the usual headers if necessary.
+
+	* taf-kit/src/tdc_commands.cc,
+	* taf-kit/src/z_commands.cc: Disable are_isomorphic.
+
+2007-09-20  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix missing entries in Makefile.am 
 
 	Many new files were not declared in the Makefile.am files.

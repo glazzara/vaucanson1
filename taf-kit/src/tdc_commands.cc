@@ -145,8 +145,8 @@ const command_t command_map[] =
   COMMAND_GROUP (
     "Tests and evaluation on transducers:",
 
-    COMMAND_ENTRY (are_isomorphic, AutAut,
-		   "Test if `aut1' and `aut2' are isomorphic."),
+    //COMMAND_ENTRY (are_isomorphic, AutAut,
+//		   "Test if `aut1' and `aut2' are isomorphic."),
     COMMAND_ENTRY (is_empty, Aut,
 		   "Test if `aut' realizes the empty relation."),
     COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized.")
