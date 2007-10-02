@@ -1,5 +1,15 @@
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix the PYTHON_PREFIX detection.
+	Add a new test to override the default python prefix.
+	The python prefix was set to PREFIX by default. However,
+	you may want to change it and it is usually installed in
+	a different path than PREFIX.
+
+	* configure.ac: add the test.
+
+2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Make the doc generation optional.
 	Make the doc generation optional.
 	You need to type 'make docs' to generate the docs.

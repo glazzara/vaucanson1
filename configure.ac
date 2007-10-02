@@ -42,11 +42,14 @@ AC_PROG_AWK
 ## ------------ ##
 
 # SWIG and Python used.
-AM_PATH_PYTHON([2.2])
-
 AC_ARG_ENABLE([vaucanswig],
 	[AC_HELP_STRING([--enable-vaucanswig],
 			[enable building vaucanswig])])
+
+AC_ARG_WITH([python],
+	[AC_HELP_STRING([--with-python@<:@=DIR@:>@],
+			[set python prefix (default is PREFIX)])],
+	[ac_python_path="$withval"],[])
 
 if test "x$enable_vaucanswig" = "xyes"; then
   AC_CHECK_SWIG13
@@ -57,8 +60,23 @@ if test "x$enable_vaucanswig" = "xyes"; then
 		     vaucanswig/meta/Makefile
 		     vaucanswig/src/Makefile
 		     vaucanswig/python/Makefile])
+
+    AM_PATH_PYTHON([2.2])
+
+    if test "x$ac_python_path" != "x"; then
+      PYTHON_PREFIX="$ac_python_path"
+    else
+      for ac_python_path_tmp in /usr /usr/local /opt /opt/local ; do
+	if test -f "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h" && test -r "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h"; then
+	    PYTHON_PREFIX="$ac_python_path_tmp"
+	    break;
+	fi
+      done
+    fi
   fi
 fi
+
+
 AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 	       [test "x$enable_vaucanswig" = "xyes"])
 
