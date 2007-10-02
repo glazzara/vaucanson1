@@ -21,10 +21,9 @@ SUBDIRS = manual xml
 ## Doxygen documentation.  ##
 ## ----------------------- ##
 
-all: $(srcdir)/ref
 DOCDIR = ref
 DOXYFILE = doc.doxy
-$(srcdir)/ref: $(DOXYFILE).in
+docs: $(DOXYFILE).in
 	rm -rf $(DOCDIR).tmp $(srcdir)/$(DOCDIR)
 	$(MAKE) $(AM_MAKEFLAGS) $(DOXYFILE)
 	$(DOXYGEN) $(DOXYFILE)

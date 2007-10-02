@@ -81,6 +81,10 @@ maintainer-check:
 deb:
 	$(MAKE) -C debian deb
 
+# Build technical documentation
+docs: 
+	$(MAKE) -C doc docs
+
 # Update headers.
 rehead:
 	$(find_headers) | \
