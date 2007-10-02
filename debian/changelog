@@ -1,3 +1,9 @@
+vaucanson (1.1) stable; urgency=low
+
+  * Release.
+
+ -- Guillaume Lazzara <guillaume.lazzara@lrde.epita.fr>  Fri, 30 Jul 2007 18:26:05 +0200
+
 vaucanson (1.0) stable; urgency=low
 
   * Release.

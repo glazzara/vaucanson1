@@ -1,5 +1,12 @@
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add a new entry in debian changeLog
+	Add a new entry in debian changeLog.
+	Useful while generating deb package.
+	* changelog: .
+
+2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix the PYTHON_PREFIX detection.
 	Add a new test to override the default python prefix.
 	The python prefix was set to PREFIX by default. However,
