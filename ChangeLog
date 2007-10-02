@@ -1,3 +1,18 @@
+2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Cleanup demos directory
+	Rename/Remove files according to what Jacques wanted.
+	Some output from the demos has also been changed.
+
+	* src/demos/algorithms/Makefile.am: update file name.
+	* src/demos/algorithms/are_equivalent.cc: Remove.
+	* src/demos/algorithms/aut_are_equivalent.cc: New.
+	* src/demos/algorithms/classics.cc: Remove.
+	* src/demos/algorithms/contains_factor.cc: Output changed.
+	* src/demos/algorithms/equivalent_functions.cc: Output changed.
+	* src/demos/algorithms/exp_are_equivalent.cc: New.
+	* src/demos/algorithms/exp_equiv.cc: Remove.
+
 2007-09-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Compiling on FreeBSD chokes on getenv() and strlen().

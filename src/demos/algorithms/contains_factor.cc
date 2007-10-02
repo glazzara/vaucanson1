@@ -25,7 +25,6 @@ main(int argc, char** argv)
     return 1;
   }
 
-
   rat_exp_t exp = get_exp(argv[2]);
   automaton_t a = standard_of(exp);
   alphabet_t alpha = a.structure().series().monoid().alphabet();
@@ -48,13 +47,13 @@ main(int argc, char** argv)
 
   if (a.states().size() != 0)
   {
-    std::cout << "The factor \"" << argv[2]
-	      << "\" is recognized by the automaton " << argv[1]
+    std::cout << "The word \"" << argv[2]
+	      << "\" is a factor of a word accepted by the automaton " << argv[1]
 	      << "." << std::endl;
     return 0;
   }
-  std::cout << "The factor \"" << argv[2]
-	    << "\" is NOT recognized by the automaton " << argv[1]
+  std::cout << "The word \"" << argv[2]
+	    << "\" is NOT a factor of a word accepted by the automaton " << argv[1]
 	    << "." << std::endl;
   return 1;
 }

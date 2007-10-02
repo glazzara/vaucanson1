@@ -37,7 +37,7 @@ get_aut(std::string s)
   std::istream* is (new std::ifstream (s.c_str()));
   if (not is->fail())
   {
-    using namespace vcsn::io;
+    using namespace vcsn::tools;
     using namespace vcsn::xml;
 
     automaton_t a = make_automaton(alphabet_t ());
