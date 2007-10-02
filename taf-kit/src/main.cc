@@ -105,7 +105,7 @@ namespace
 #endif /* 0 */
 
     { 0, 0, 0, 0, "The following alphabets are predefined:\n"
-      "	 `ascii': Use all the ascii table as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
+      "	 `ascii': Use all the ascii table as the alphabet, except the \" character, and " DEFAULT_EPSILON " as epsilon\n"
       "	 `a-z': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `a-zA-Z': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `ab': Use `ab' as the alphabet, " DEFAULT_EPSILON " as epsilon", 0 },

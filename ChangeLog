@@ -1,5 +1,13 @@
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Remove the double quote character from the ASCII alphabet in TAF-Kit
+	Remove the double quote character from the ASCII alphabet in TAF-Kit.
+
+	* taf-kit/src/main.cc: Document this change.
+	* taf-kit/src/predefined_alphabets.hh: Apply the change.
+
+2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Cleanup demos directory
 	Rename/Remove files according to what Jacques wanted.
 	Some output from the demos has also been changed.
