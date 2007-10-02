@@ -1,5 +1,11 @@
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Update the README file.
+	Update the README file.
+	* doc/README.txt: updated.
+
+2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Add a new entry in debian changeLog
 	Add a new entry in debian changeLog.
 	Useful while generating deb package.

@@ -59,8 +59,10 @@ the command prompt::
 
 	./configure
 	make
+	make demos ([1]
+	make docs ([2])
 	make sanity-check
-	make check ([1])
+	make check ([3])
 	make install (as root)
 
 Note that an installation is  specific to the compiler used to install
@@ -68,7 +70,10 @@ it. Indeed, the call  to ``./configure`` enables some workarounds and,
 consequently,  users must  compile  with the  same  compiler to  avoid
 compatibility problems.
 
-[1]: Optional: check  the whole library. Note that  this process takes
+[1]: Optional: Build demo binaries
+[2]: Optional: Generate the technical documentation. Doxygen is 
+required on the system.
+[3]: Optional: check  the whole library. Note that  this process takes
 about 1.5 Go of free space (memory swap included) and several hours.
 
 Additional features
@@ -80,16 +85,13 @@ to spare, use::
 
 	./configure --enable-vaucanswig
 
-There  is an  XML  I/O subsystem  in  the library.  It  is enabled  by
-default,  but  requires a  working  installation  of another  software
-package called Xerces-C++. If you do  not have this package, or if you
-do not want to use XML I/O in Vaucanson, you can use::
-
-	./configure --disable-xml
-
 To specify a special path for the Xerces-C library::
 
 	./configure --with-xerces=/absolute/path/to/xerces
+
+To specify a special path for the Boost-C++ library::
+
+       ./configure --with-boost=/absolute/path/to/boost
 
 For further configure options, type::
 
@@ -155,7 +157,7 @@ Requirements
 ============
 
 Vaucanson was tested with the `GNU C++ Compiler (GCC)`_ version 3.[34]
-and 4.0,  and should work  with ICC_ 9.   The code is  fully compliant
+and 4.1.x,  and should work  with ICC_ 9.   The code is  fully compliant
 with  the  ISO  C++  standard  (ISO-IEC  14882)  to  permit  a  higher
 portability in the future.
 
@@ -180,6 +182,21 @@ DarwinPorts on MacOS should pay attention to the compiler that was
 used to build their version of the Xerces-C++ library, as it might
 differ from the one used to build Vaucanson.
 
+.. _Boost-C++: http://www.boost.org/
+
+Dependency introduced since Vaucanson 1.1. Boost is a C++ library which
+provides many useful objects, including hash tables. Currently, Boost 
+is used in algorithms only, but its use shall be extended to automata
+structures and other portions of code.
+
+
+.. _doxygen: http://www.doxygen.org
+
+You may need this dependency if you want to build the documentation.
+
+.. _python-docutils: http://www.python.org
+
+You may need this dependency if you want to build the documentation.
 
 Using Vaucanson
 ===============
