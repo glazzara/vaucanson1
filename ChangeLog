@@ -1,5 +1,11 @@
 2007-10-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix the return value in TAF-Kit
+	TAF-Kit returned 0 when a command was unknown.
+	* taf-kit/src/main.cc: here.
+
+2007-10-03  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Disable are-isomorphic in TAF-Kit
 	* taf-kit/src/b_commands.cc,
 	* taf-kit/src/common_commands.hh: here.

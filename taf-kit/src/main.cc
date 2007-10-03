@@ -318,6 +318,7 @@ int main (int argc, char* argv[])
 	    status = -1;
 	  }
 
+	  GLOBAL_RESULT.status = status;
 	  // Break upon error
 	  if (status != 0)
 	    break;
