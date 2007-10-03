@@ -64,7 +64,7 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
 				  ARG_KIND (aut)
 				  ALGOS (accessible, eps_removal_sp));
 
-DEFINE_COMMAND (NAME (are_isomorphic)
+/*DEFINE_COMMAND (NAME (are_isomorphic)
 		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
 					       get_aut (args.args[2])))
 		OUTPUT_ON_VERBOSE (
@@ -72,7 +72,7 @@ DEFINE_COMMAND (NAME (are_isomorphic)
 		   ? "Automata are isomorphic\n"
 		   : "Automata are not isomorphic\n"))
 		RETURNVALUE (b ? 0 : 1));
-
+*/
 DEFINE_COMMAND (NAME (is_empty)
 		CODE (
 		  int states = trim (get_aut (args.args[1])).states ().size ())
