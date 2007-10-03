@@ -304,9 +304,10 @@ namespace vcsn
       typedef std::list<hstate_t> partition_t;				\
       typedef std::vector<partition_t> partition_set_t;			\
       typedef typename partition_t::iterator partition_iterator;	\
-      typedef std::vector<partition_iterator> places_t;			\
       typedef std::vector<unsigned> class_of_t;				\
-      typedef std::set<hstate_t> delta_ret_t;
+      typedef std::set<hstate_t> delta_ret_t;				\
+      typedef std::pair<unsigned, letter_t> pair_t;			\
+      typedef std::list<pair_t> to_treat_t;
 
       template <typename input_t>
       class quotient_splitter
@@ -315,11 +316,13 @@ namespace vcsn
 	AUTOMATON_TYPES(input_t);
 	AUTOMATON_FREEMONOID_TYPES(input_t);
 	QUOTIENT_TYPES();
+
 	typedef std::vector<bool> going_in_t;
 
 	quotient_splitter (const automaton_t& input, class_of_t& class_of,
 			   unsigned max_states)
 	  : input_(input),
+	    alphabet_(input.series().monoid().alphabet()),
 	    class_(class_of),
 	    count_for_(max_states, 0),
 	    twin_(max_states, 0),
@@ -334,7 +337,7 @@ namespace vcsn
 
 	  for_all_(partition_t, s, p)
 	    input_.letter_rdeltaf(*this, *s, a, delta_kind::states());
-	  return !met_class.empty();
+	  return !met_class_.empty();
 	}
 
 	/// For each state, store its class (partition) and count.
@@ -343,61 +346,81 @@ namespace vcsn
 	  if (!going_in_[s])
 	  {
 	    going_in_[s] = true;
-	    unsigned i = class_[s];
-	    if (!count_for_[i])
-	      met_class.push_back(i);
+	    const unsigned i = class_[s];
+	    if (count_for_[i] == 0)
+	      met_class_.push_back(i);
 	    count_for_[i]++;
 	  }
 	}
 
 	/// Split partition @a b if needed.
-	void split (partition_set_t& part, unsigned& max_partitions)
+	void split (partition_set_t& parts, unsigned& max_partitions)
 	{
-	  std::queue<partition_iterator> to_erase;
-
-	  for_all_(std::list<unsigned>, p, met_class)
+	  for_all_(std::list<unsigned>, klass, met_class_)
 	  {
 	    // if all states are predecessors there is no needed split
-	    if (count_for_[*p] == part[*p].size())
+	    if (count_for_[*klass] == parts[*klass].size())
 	      continue;
 
-	    twin_[*p] = max_partitions;
-	    unsigned twin_class = max_partitions;
-	    ++max_partitions;
+	    if (twin_[*klass] == 0)
+	      twin_[*klass] = max_partitions++;
+	    unsigned new_klass = twin_[*klass];
+
 	    partition_t::iterator q;
-	    int i = 0;
-	    for (partition_t::iterator next = part[*p].begin();
-		 next != part[*p].end();)
+	    for (partition_t::iterator next = parts[*klass].begin();
+		 next != parts[*klass].end();)
 	    {
 	      q = next;
 	      ++next;
 	      if (going_in_[*q])
 	      {
-		class_[*q] = twin_class;
-		part[twin_class].insert(part[twin_class].end(), *q);
-		part[*p].erase(q);
-		i++;
+		parts[new_klass].insert(parts[new_klass].end(), *q);
+		class_[*q] = new_klass;
+		parts[*klass].erase(q);
+	      }
+	    }
+	  }
+	}
+
+	void add_new_partitions(to_treat_t&		to_treat,
+				const partition_set_t&	part,
+				const unsigned		current_part)
+	{
+	  for_all_(std::list<unsigned>, klass, met_class_)
+	  {
+	    if (twin_[*klass] != 0)
+	    {
+	      for_all_letters(e, alphabet_)
+	      {
+		if (find(to_treat.begin(), to_treat.end(), pair_t(*klass, *e)) !=
+		    to_treat.end())
+		  to_treat.push_back(pair_t(twin_[*klass], *e));
+		else
+		  if (part[*klass].size() < part[twin_[*klass]].size())
+		    to_treat.push_back(pair_t(*klass, *e));
+		  else
+		    to_treat.push_back(pair_t(twin_[*klass], *e));
 	      }
 	    }
 	  }
 
-	  for_all_(std::list<unsigned>, p, met_class)
+	  for_all_(std::list<unsigned>, klass, met_class_)
 	  {
-	    count_for_[*p] = 0;
-	    twin_[*p] = 0;
+	    count_for_[*klass] = 0;
+	    twin_[*klass] = 0;
 	  }
-	  met_class.clear();
+	  met_class_.clear();
 	}
 
       private:
 	const automaton_t& input_;
+	const alphabet_t& alphabet_;
 	class_of_t& class_;
 	std::vector<unsigned> count_for_;
 	std::vector<unsigned> twin_;
 	going_in_t going_in_;
-	std::list<unsigned> met_class;
+	std::list<unsigned> met_class_;
       };
-
     }
   }
 
@@ -438,8 +461,7 @@ namespace vcsn
     /*-------------------------.
     | To have a list of (P, a) |
     `-------------------------*/
-    typedef std::pair<unsigned, letter_t> pair_t;
-    std::list<pair_t>	to_treat;
+    to_treat_t		to_treat;
 
     /*-------------------------.
     | Initialize the partition |
@@ -479,9 +501,7 @@ namespace vcsn
 	  continue;
 	splitter.split(part, max_partitions);
 
-	for (unsigned c = old_max_partitions; c < max_partitions; ++c)
-	  for_all_letters (e, alphabet_)
-	    to_treat.push_back(pair_t(c, *e));
+	splitter.add_new_partitions(to_treat, part, p);
       }
     }
 

@@ -1,3 +1,10 @@
+2007-10-03  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Correct a bug in quotient for undeterministic automata
+	* minimization_hopcroft.hxx: Add a new method add_new_partitions to
+	correctly add partitions to the to_treat list. Rename variables to more
+	explicit names.
+
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Update the README file.
