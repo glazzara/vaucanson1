@@ -400,11 +400,13 @@ l'écriture desquels les membres du LRDE ont collaboré depuis 1999.
 \bigskip
 
 Le tableau suivant résume de manière quantitative le document.
-\og Journal\fg{} et \og conférences\fg{} ne font référence qu'aux publications
-relues par des pairs.  Le corps de ce document est consacré à la
-bibliographie détaillée classée selon différents critères.
+\og{}Journal\fg{} et \og{}conférences\fg{} ne font référence qu'aux
+publications relues par des pairs.  Le corps de ce document est
+consacré à la bibliographie détaillée classée selon différents
+critères.
 
 EOF
+# Emacs:'
 print count_by_publication_type ();
 print <<'EOF';
 \newpage

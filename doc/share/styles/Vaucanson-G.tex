@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                           
-%                  Vaucanson_v4.tex                      
+%                  Vaucanson-G.tex                      
 %                                                           
 %       Automata drawer based on Pstricks
 %                       
@@ -10,6 +10,12 @@
 %  Chg Vaucanson to Vaucanson-G
 %                V 0.3 - 03/09/10
 %  VCPref-main is no more required to initialize VC-G
+%                V 0.3.1 - 06/07/06
+%  Remove ``\ifVCName\makebox[0pt][r]{\fbox{{\scriptsize #2}}}\fi%''
+%  in the definition of \VCDraw
+%                V 0.3.2 - 06/07/06
+%  Replace \renewcommand{\StateLabelCol} by \renewcommand{\StateLabelColor}
+%  in \SetStateLabelColor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commands for geometric constructions
@@ -277,14 +283,13 @@
 \newcommand{\ShowName}{\VCNametrue}
 \newcommand{\VCDraw}[2][\VCGridScale]{%
 \psset{unit=#1cm}%
-\ifVCName\makebox[0pt][r]{\fbox{{\scriptsize #2}}}\fi%
 \scalebox{\VCScale}{#2}%
-\psset{unit=1cm}}
+\psset{unit=1cm}}%
 \newcommand{\VCCall}[2][\VCGridScale]{%
 \psset{unit=#1cm}%
 \ifVCName\makebox[0pt][r]{\fbox{{\scriptsize #2}}}\fi%
 \scalebox{\VCScale}{\input{\VCDirectory #2}}%
-\psset{unit=1cm}}
+\psset{unit=1cm}}%
 %%% commands
 \newcommand{\VCPut}[3][0]{\rput{#1}#2{#3}}% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -398,7 +403,7 @@
 \newcommand{\ChgStateLabelColor}[1]{\renewcommand{\StateLabelCol}{#1}}
 \newcommand{\RstStateLabelColor}{\ChgStateLabelColor{\StateLabelColor}}
 \newcommand{\SetStateLabelColor}[1]%
-    {\renewcommand{\StateLabelCol}{#1}\RstStateLabelColor}
+    {\renewcommand{\StateLabelColor}{#1}\RstStateLabelColor}
 %%% label scale
 \newcommand{\ChgStateLabelScale}[1]{\renewcommand{\StateLabelSca}{#1}}
 \newcommand{\RstStateLabelScale}{\ChgStateLabelScale{1}}
@@ -505,7 +510,7 @@
           \ifVCShowState%
       \nput[labelsep=-.5\StateDiam]{0}{#3}%
         {\makebox[0pt]{\VaucStateLabel{#1}}}%
-      \fi
+      \fi%
       \ifthenelse{\equal{\VCIFflag}{0}}{}{%
         \pnode(-\VaucAOS,0){#3w}\pnode(\VaucAOS,0){#3e}%
         \pnode(0,\VaucAOS){#3n}\pnode(0,-\VaucAOS){#3s}%

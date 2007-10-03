@@ -60,7 +60,9 @@ sub learn_from_bib ($)
       elsif (/oldkeys\s*=\s*\{(.+?)\}/)
 	{
 	  my $older = '\Q' . join ('\E|\Q', split (/,\s*/, $1)) . '\E';
-	  $updater = $updater . "s<\b$older\b><$key>gm;\n";
+	  $updater = $updater
+	    # Unfortunately look-behinds must be fixed width.
+	    . "s!(?<=[{, ])${older}(?=[.}])!$key!gm;\n";
 	}
     }
   print "$updater\n";
@@ -98,8 +100,8 @@ sub parse_options ()
   Getopt::Long::config ("bundling", "pass_through");
   Getopt::Long::GetOptions
     (
-     'share:s' 	=> \$share,
-     'h|help'   => sub {}
+     's|share=s' => \$share,
+     'h|help'    => sub { help; },
     )
     or die;
 
@@ -118,7 +120,7 @@ sub parse_options ()
 my @tex = parse_options ();
 learn_from_bib ($_)
   foreach bsd_glob ('share/bib/*.bib');
-update ("article.tex")
+update ($_)
   foreach @tex;
 
 ### Setup "GNU" style for perl-mode and cperl-mode.

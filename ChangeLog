@@ -1,3 +1,9 @@
+2007-10-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/Makefile.am (dist-hook): New rule to remove
+	svn and backup files from the tarball.
+	* doc/share/: Update its external repository.
+
 2007-10-03  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Correct a bug in quotient for undeterministic automata

@@ -19,7 +19,12 @@ all: check lrde.pdf
 ## Check.  ##
 ## ------- ##
 
-check: check-warning check-bib check-mnt-dload check-urllrde
+# Our own *.bib that should obey our rules.
+BIBS = lrde.bib csi.bib
+
+# We don't use the dependencies here so that all the checks are run.
+check:
+	$(MAKE) -k check-warning check-bib check-mnt-dload check-urllrde
 
 maintainer-check: check check-wiki
 
@@ -55,24 +60,29 @@ check-mnt-dload:
 
 check-urllrde:
 	$(QUIET)echo >&2 "*** Checking for urllrde: ..."
-	$(QUIET)bib2bib -c 'not urllrde : "."' -oc check.bib $(share_bib_dir)/lrde.bib >/dev/null 2>&1
-	$(QUIET)if test -s check.bib; then					\
-	  echo >&2 "lrde.bib entries that lack a urllrde field:";	\
-	  sed >&2 -e 's/^/  /' check.bib;				\
-	  exit 2;							\
-	fi
-	rm -f check.bib
-	$(QUIET)echo >&2 "*** Checking for urllrde: OK"
+	$(QUIET)for b in $(BIBS); do					\
+	  bib2bib -q -c 'not urllrde : "."' -oc check.bib		\
+	    $(share_bib_dir)/$$b >/dev/null &&				\
+	  if test -s check.bib; then					\
+	    echo >&2 "$$b: entries that lack an urllrde field:";	\
+	    sed >&2 -e 's/^/  /' check.bib;				\
+	    fail=1;							\
+	  fi &&								\
+	  rm -f check.bib;						\
+	done;								\
+	test -z "$$fail"
 
 check-wiki:
-	$(QUIET)sed -ne 's/.*urllrde.*{\(.*\)\}.*/\1/p' $(share_bib_dir)/lrde.bib | \
-	  while read u;								    \
-	  do									    \
-	    if ! wget -q -O /dev/null http://publis.lrde.epita.fr/$$; then	    \
-	      echo >&2 "broken urllrde: $$u";					    \
-	      fail=1;								    \
-	    fi;									    \
-	  done;									    \
+	$(QUIET)for b in $(BIBS); do						\
+	  sed -ne 's/.*urllrde.*{\(.*\)\}.*/\1/p' $(share_bib_dir)/$$b |	\
+	    while read u;							\
+	    do									\
+	      if ! wget -q -O /dev/null http://publis.lrde.epita.fr/$$; then	\
+	        echo >&2 "$$b: broken urllrde: $$u";				\
+	        fail=1;								\
+	      fi;								\
+	    done;								\
+	done; 									\
 	test -z "$$fail"
 
 ## ------------------------------- ##
@@ -89,7 +99,7 @@ check-wiki:
 # Create a LaTeX document to force the BibTeX check on lrde.bib.
 make_bib = $(share_bin_dir)/make-bib.pl
 %.tex: $(share_bib_dir)/%.bib $(make_bib)
-	$(make_bib) $(share_bib_dir)/$*.bib >$*.tmp
+	perl $(make_bib) $(share_bib_dir)/$*.bib >$*.tmp
 	mv $*.tmp $*.tex
 
 %-private.tex: $(share_bib_dir)/%.bib $(share_bin_dir)/make-bib.pl
@@ -125,10 +135,11 @@ ci checkin: diff check
 ## Updating from masters.  ##
 ## ----------------------- ##
 
-.PHONY: update
+.PHONY: update update-bib update-styles
 
+update: update-bib
 BIB_EXTERNALS = kernighan richie strategoxt
-update:
+update-bib:
 	cd bib && chmod a+w $(BIB_EXTERNALS:=.bib)
 	wget http://netlib.bell-labs.com/cm/cs/bib/bwk.bib -O bib/kernighan.bib
 	wget http://cm.bell-labs.com/cm/cs/bib/dmr.bib -O bib/richie.bib
@@ -137,3 +148,13 @@ update:
 	cd bib && perl -pi -e 's/(.\})$/\1,/g' $(BIB_EXTERNALS:=.bib)
 # Avoid accidental edition.
 	cd bib && chmod a-w $(BIB_EXTERNALS:=.bib)
+
+update: update-styles
+update-styles:
+	wget http://www.lsv.ens-cachan.fr/~gastin/gastex/gastex.sty -O styles/gastex.sty
+	wget http://www.lsv.ens-cachan.fr/~gastin/gastex/gastex.pro -O styles/gastex.pro
+	wget http://igm.univ-mlv.fr/~lombardy/Vaucanson-G/vaucanson-g.tgz
+	tar zxvf vaucanson-g.tgz
+	rm vaucanson-g/VCManual.ps.gz
+	mv vaucanson-g/* styles/
+	rm -rf vaucanson-g vaucanson-g.tgz

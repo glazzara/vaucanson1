@@ -155,7 +155,7 @@ Des fichiers .bib contenant des définitions de sigles/acronymes
 disponibles dans ce répertoire.  Leur intérêt est double ; d'une part,
 ils permettent de raccourcir les entrées BibTeX (par ex., le titres
 d'une conférence); et d'autre part, comme ces définitions existent en
-version longue (IEEEfull.bib, acronyms.bib) et courte (IEEEabrv.bib, 
+version longue (IEEEfull.bib, acronyms.bib) et courte (IEEEabrv.bib,
 acronyms-abrv.bib), il est possible de réduire la taille de la
 bibliographie produite par LaTeX et BibTeX en changeant un (ou
 plusieurs) fichiers .bib dans la commande \bibliography.
@@ -173,7 +173,7 @@ Par exemple, considérons l'entrée suivante du fichier sip.bib :
      pages =	 {555--570},
      lrdedoc =	 {sip/image/morpho/connected_filters/salembier.98.itip.pdf},
    }
-      
+
 La chaîne « IEEE_J_IP » dispose d'une définition longue dans
 IEEEfull.bib :
 
@@ -212,7 +212,36 @@ computer-history.bib de ce fichier.
 ** csi.bib
 Tous les rapports des étudiants.  Suivre le même style que conseillé
 pour lrde.bib.  Utiliser des clefs NOM.ANNEE.seminar, voire
-NOM.ANNEE.seminar.TOPIC en cas de conflit.
+NOM.ANNEE.seminar.TOPIC en cas de conflit et seulement dans ce cas.
+Comme partout ailleurs, seul le premier auteur entre dans la clef.
+Le champ url n'est pas nécessaire, contrairement au champ urllrde.
+Remplir le champs "abstract" serait un bien.  Par exemple :
+
+    @TechReport{berger.05.seminar,
+      author =       {Christophe Berger and Nicolas Widynski},
+      title =        {Using connected operators to manipulate image
+                      components},
+      institution =  {EPITA Research and Development Laboratory (LRDE)},
+      urllrde =      {200507-Seminar-Berger-Widynski},
+      year =         2005,
+      abstract =     {Connected operators are morphological filters which
+                      have the property of keeping objects contours when
+                      simplifying images. They bring to the light objects
+                      situated in the image. To do it, an implementation
+                      of the Tarjan's Union-find algorithm is used for an
+                      easy manipulation of image components. A binary
+                      partition tree is built, in order to simplify the
+                      objects attributes computation and the filtering of
+                      image.  First of all, we will introduce
+                      morphological filters and connected operators, then
+                      we will propose an overview of different kinds of
+                      methods used in the literature in order to create a
+                      binary partition tree and we will explain the
+                      Tarjan's "union-find" algorithm for the image
+                      filtering. At last, we will apply this method in
+                      order to clean and delete stars in space's images.},
+    }
+
 
 ** richie.bib
 Denis Ritchie.

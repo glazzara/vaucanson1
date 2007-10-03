@@ -26,7 +26,12 @@ Mettre
 ** Articles non publiés
 Faire
 
-  note = {Submitted} ou {Accepted} ou {Rejected}
+  note = {Submitted} ou {Accepted}
+
+Les articles rejetés ne doivent pas apparaître dans lrde.bib ni dans
+le répertoire courant des publications du labo.  En revanche, un
+espace existe si vous souhaitez entreposer des publications rejetées :
+  /lrde/doc/lrde/papers/rejected/
 
 ** URL LRDE
 Pensez à inclure l'URL au LRDE de cette façon :

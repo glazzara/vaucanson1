@@ -6,18 +6,18 @@
 %% derived from 'RNews.sty' file
 %% kindly provided by the R Project..
 %%
-\def\fileversion{v0.4}
+\def\fileversion{v0.5}
 \def\filename{lrde-bulletin}
-\def\filedate{2006/11/22}
+\def\filedate{2007/09/14}
 \def\docdate {2001/10/31}
 %%
 %% Package `lrde-bulletin' to use with LaTeX2e
-%% Copyright (C) 2004, 2005, 2006 GRASS Development Team
+%% Copyright (C) 2004, 2005, 2006, 2007 GRASS Development Team
 %%
 %% -*- LaTeX -*-
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{\filename}[\filedate\space\fileversion\space
-                        lrde-bulletin package]
+			lrde-bulletin package]
 \typeout{Package: `\filename\space\fileversion \@spaces <\filedate>'}
 \typeout{English documentation as of <\docdate>}
 \RequirePackage{ifthen}
@@ -32,6 +32,13 @@
 % Pretend the twoside option was passed for fancyhdr's sake.
 \@twosidetrue
 \RequirePackage{fancyhdr}
+%
+\RequirePackage[latin1]{inputenc}
+\RequirePackage[francais]{mybabel}
+%
+\RequirePackage{wrapfig}
+\RequirePackage{myhyperref}
+%
 % Volume numbers.
 \newcommand{\volume}[1]{\def\lrdebulletin@volume{#1}}
 \newcommand{\subvolume}[1]{\def\lrdebulletin@subvolume{#1}}
@@ -42,6 +49,7 @@
 \newcommand{\volumetitle}[1]{\def\lrdebulletin@volumetitle{#1}}
 \newcommand{\volnumber}[1]{\def\lrdebulletin@number{#1}}
 \renewcommand{\date}[1]{\def\lrdebulletin@date{#1}}
+% Making an article.
 \setcounter{secnumdepth}{-1}
 \renewcommand{\author}[1]{\def\lrdebulletin@author{#1}}
 \renewcommand{\title}[1]{\def\lrdebulletin@title{#1}}
@@ -49,9 +57,21 @@
 \newcommand{\photo}[1]{\def\lrdebulletin@photo{#1}}
 \newenvironment{article}{%
   \author{}\title{}\subtitle{}\photo{}}{\end{multicols}}
+% \inputarticle{FILE-NAME}
+% ------------------------
+\newcommand{\inputarticle}[1]
+{%
+  \squeeze%
+  \begin{article}%
+    \input{#1}%
+  \end{article}%
+}%
+% \maketitle
+% ----------
+% To use with the {article} env.  Use \title, \author, and \photo.
 \renewcommand{\maketitle}{
-  \begin{multicols}{2}[\chapter{\lrdebulletin@title}\vspace{-.3cm}\refstepcounter{chapter}][3cm]%
-    \ifx\empty\lrdebulletin@subtitle\else\noindent\textbf{\lrdebulletin@subtitle}%
+  \begin{multicols}{2}[\chapter{\lrdebulletin@title}\refstepcounter{chapter}][3cm]%
+    \ifx\empty\lrdebulletin@subtitle\else\noindent\textbf{\LARGE \lrdebulletin@subtitle}%
     \par\nobreak\fi%
     \ifx\empty\lrdebulletin@photo\else%
     \begin{wrapfigure}{l}{.3\linewidth}%
@@ -63,6 +83,14 @@
     \par\nobreak%\addvspace{\baselineskip}%
     \fi%
     \@afterindentfalse\@nobreaktrue\@afterheading\par\noindent}
+\renewcommand\chapter{\secdef\lrdebulletin@chapter\@schapter}
+\newcommand{\lrdebulletin@chapter}{%
+  \renewcommand{\@seccntformat}[1]{}%
+  \@startsection{chapter}{0}{0mm}{%
+    -2\baselineskip \@plus -\baselineskip \@minus -.2ex}{\p@}{%
+    \normalfont\huge\bfseries\raggedright}}
+\renewcommand*\l@chapter{\@dottedtocline{0}{0pt}{1em}}
+\def\@schapter#1{\section*#1}
 % \makesubtitle
 % -------------
 % Like \maketitle, but produces a \section instead of a \chapter.  Use
@@ -75,17 +103,7 @@
       \textit{\lrdebulletin@author}%
       \par\nobreak\addvspace{0.5\baselineskip}%
     \fi%
-    \@afterindentfalse\@nobreaktrue\@afterheading}
-\renewcommand\chapter{\secdef\lrdebulletin@chapter\@schapter}
-\providecommand{\nohyphens}{%
-  \hyphenpenalty=10000\exhyphenpenalty=10000\relax}
-\newcommand{\lrdebulletin@chapter}{%
-  \renewcommand{\@seccntformat}[1]{}%
-  \@startsection{chapter}{0}{0mm}{%
-    -2\baselineskip \@plus -\baselineskip \@minus -.2ex}{\p@}{%
-    \normalfont\Huge\bfseries\raggedright}}
-\renewcommand*\l@chapter{\@dottedtocline{0}{0pt}{1em}}
-\def\@schapter#1{\section*#1}
+    \@afterindentfalse\@nobreaktrue\@afterheading\par\noindent}
 % Reduce the space around titles of sections.
 \renewcommand\section{\@startsection {section}{1}{\z@}%
   {-1.5ex \@plus -1ex \@minus -.2ex}%
@@ -129,11 +147,11 @@
       \medskip
 
       \fi
-      N°~\lrdebulletin@volume
+      \No\lrdebulletin@volume
       \ifx\lrdebulletin@volumetitle\undefined\else
 
-        \medskip
-        \lrdebulletin@volumetitle
+	\medskip
+	{\huge \lrdebulletin@volumetitle}
       \fi
     \end{center}
   \end{tabular}
@@ -149,8 +167,9 @@ de rien}
   \rule{\textwidth}{.5pt}\\[-.7\baselineskip]%
   \rule{\textwidth}{2pt}%
   \fancyhf{}%
-  \fancyhead[RO,LE]{L'air de rien}%
-  \fancyhead[LO,RE]{N°~\lrdebulletin@completevolume, \lrdebulletin@date}%
+  \fancyhead[RO,LE]{L'air de rien%
+    \ifx\lrdebulletin@volumetitle\undefined\else ~---~\lrdebulletin@volumetitle\fi}%
+  \fancyhead[LO,RE]{\No\lrdebulletin@completevolume, \lrdebulletin@date}%
 % \fancyfoot[LO,RE]{ISSN 1614-8746}
   \fancyfoot[RO,LE]{\thepage}%
   \thispagestyle{empty}%
@@ -162,7 +181,7 @@ de rien}
 %     \end{multicols}
 %   \end{bottombox}
   \vspace{-1cm}% Remove some of the pre-space coming from the first
-               % article title.
+	       % article title.
 }
 % FIXME: Use geometry instead?
 \setlength{\textheight}{240mm}
@@ -172,6 +191,8 @@ de rien}
 \setlength{\evensidemargin}{-6mm}
 \setlength{\columnseprule}{.1pt}
 \setlength{\columnsep}{20pt}
+\providecommand{\nohyphens}{%
+  \hyphenpenalty=10000\exhyphenpenalty=10000\relax}
 \RequirePackage{ae,mathpple}
 \RequirePackage[T1]{fontenc}
 \renewcommand{\rmdefault}{ppl}
@@ -189,8 +210,8 @@ de rien}
     \begin{center}
       \noindent
       \begin{lrbox}{\lrdebulletin@box}
-        \begin{minipage}{0.99\textwidth}}{%
-        \end{minipage}
+	\begin{minipage}{0.99\textwidth}}{%
+	\end{minipage}
       \end{lrbox}
       \addtolength{\lrdebulletin@len}{\fboxsep}
       \addtolength{\lrdebulletin@len}{\fboxrule}
@@ -257,8 +278,6 @@ de rien}
 \newcommand{\COR}{\operatorname{cor}}
 \RequirePackage{amsfonts}
 
-\newcommand{\inputarticle}[1]{\squeeze\begin{article}\input{#1}\end{article}}
-
 \newcounter{foot}
 \newcommand{\newfootnote}[1]{\addtocounter{foot}{1}\footnote{#1}}
 \renewcommand{\thefootnote}{\thefoot}
@@ -273,8 +292,52 @@ de rien}
 
 \newenvironment{legend}{\begin{quote}\small}{\end{quote}}
 
-% For LRDE seminars.
+
+%% ------------------- %%
+%% For LRDE seminars.  %%
+%% ------------------- %%
 \newcommand{\seminardate}[1]{\hfill\Clocklogo\ \textit{#1}}
+
+%% \begin{seminarTimeTable}{16 mai 14h00 -- 17h15}{amphi 2}
+%%   \seminarSession{Olena -- Traitement d'image}
+%%   14h00 & Une bibliothèque de conteneurs --- Thomas Moulard \\
+%%
+%%   \seminarSession{DD -- Diagramme de Décision}
+%%   14h30 & Diagrammes de décision --- Samuel Charron \\
+%%
+%%   \seminarSession{Transformers -- Transformation de programme}
+%%   15h00 & Préprocesseur C/\Cxx --- Quentin Hocquet \\
+%%   15h45 & Désambiguïsation --- Nicolas Pierron \\
+%%   16h15 & Désambiguïsation sémantique --- Renaud Durlin \\
+%%   16h45 & Centaur --- Benoît Sigoure \\
+%% \end{seminarTimeTable}
+
+%% \begin{seminarTimeTable}{DATE}{LOCATION}
+%%   ...
+%% \end{seminarTimeTable}
+%% Create a time table for one Seminar session group.
+\newenvironment{seminarTimeTable}[2]
+{%
+  \small%
+  \noindent%
+  \begin{tabular}{|c|p{.8\linewidth}|}%
+    \seminarSession{\large #1 --- #2}%
+  }%
+  {%
+    \hline%
+  \end{tabular}%
+}
+
+%% \seminarSession{TITLE}
+%% To use within seminarTimeTable.
+\newcommand{\seminarSession}[1]
+{%
+  \hline%
+  \multicolumn{2}{|c|}{\textbf{#1}}%
+  \\%
+  \hline%
+}
+
 
 % Project names.
 \newcommand{\Vauc}{\textsc{Vaucanson}\xspace}

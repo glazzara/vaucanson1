@@ -1,6 +1,6 @@
 %%% facture.cls --- Classe LaTeX pour les factures LRDE
 
-%% Copyright (C) 2002, 2006 Didier Verna.
+%% Copyright (C) 2002, 2006, 2007 Didier Verna.
 
 %% Author:        Didier Verna <didier@lrde.epita.fr>
 %% Maintainer:    Didier Verna <didier@lrde.epita.fr>
@@ -105,21 +105,19 @@
 
 \newcommand\espace[1]{&&~\vspace{#1}&&&\\\hline}
 
-\newcommand\totalht[1]{%
-  \multicolumn{3}{l}{}&\multicolumn{2}{|r|}{Total H.T.}&#1\\
+\newcommand\itemTotal[2]{%
+  \multicolumn{3}{l}{}&\multicolumn{2}{|r|}{#1}&#2\\
   \cline{4-6}}
+
+\newcommand\totalht[1]{%
+  \itemTotal{Total H.T.}{#1}}
 
 \newcommand\tva[2]{%
-  \multicolumn{3}{l}{}&\multicolumn{2}{|r|}{T.V.A.: #1}&\gdef\@tva{#2}\@tva\\
-  \cline{4-6}}
+  \itemTotal{T.V.A.: #1}{\gdef\@tva{#2}\@tva}}
 
 \newcommand\totalttc[1]{%
-  \multicolumn{3}{l}{} &
-  \multicolumn{2}{|r|}{\textbf{Total T.T.C.}}&#1\\
-  \cline{4-6}
-  \multicolumn{3}{l}{} &
-  \multicolumn{2}{|r|}{\textbf{Dont T.V.A.}}&\@tva\\
-  \cline{4-6}}
+  \itemTotal{\textbf{Total T.T.C.}}{#1}
+  \itemTotal{\textbf{Dont T.V.A.}}{\@tva}}
 
 \AtBeginDocument{%
   \begin{minipage}{.5\textwidth}
@@ -133,8 +131,8 @@
   \end{minipage}
   \hfill
   \begin{minipage}{.385\textwidth}
-    {\LARGE{\bfseries \@kind}\par
-      \@numero}
+    {\LARGE{\bfseries \@kind}}\par
+    {\@numero}
   \end{minipage}
   \thispagestyle{empty}
 

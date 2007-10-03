@@ -73,16 +73,22 @@ $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 
 # Create a file defining \SvnRev as the revision of the ChangeLog.
 # Robust to new existing svn.
+svn_to_tex =				\
+'s<^([\w\s]+):\s+(.*)$$>			\
+<$$val = $$2;				\
+ ($$var = $$1) =~ s| ||g;		\
+ "\\newcommand{\\Svn$$var}{$$val}">ex'
+
 rev.tex: $(ChangeLog)
-	if svn --version >/dev/null 2>&1; then				    \
-	  LC_ALL=C svn info $< |					    \
-	   sed -n							    \
-	      '/^Revision: *\(.*\)$$/{s//\\newcommand{\\SvnRev}{\1}/;p;q;}' \
-	   >$@;								    \
-	elif test -f $@; then						    \
-	  touch $@;							    \
-	else								    \
-	  echo '\\newcommand{\\SvnRev}{}' >$@;				    \
+	if svn --version >/dev/null 2>&1; then			\
+	  LC_ALL=C svn info $< |				\
+	  (perl -pe $(svn_to_tex) &&				\
+	   echo '\newcommand{\SvnRev}{\SvnRevision}')		\
+	   >$@;							\
+	elif test -f $@; then					\
+	  touch $@;						\
+	else							\
+	  echo '\\newcommand{\\SvnRev}{}' >$@;			\
 	fi
 
 CLEANFILES += rev.tex

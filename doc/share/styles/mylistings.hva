@@ -16,6 +16,7 @@
 \input{ldf/box.ldf}
 \input{ldf/grammar.ldf}
 \input{ldf/hir.ldf}
+\input{ldf/leopard.ldf}
 \input{ldf/lex.ldf}
 \input{ldf/mips.ldf}
 \input{ldf/parse-testsuite.ldf}

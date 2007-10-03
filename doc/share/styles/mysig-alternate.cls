@@ -65,13 +65,26 @@
 
 %% A more compact description environment.
 \newenvironment{compactdescription}
-{\vspace{-0.4\baselineskip}\begin{description}\addtolength{\itemsep}{-0.6\baselineskip}
-}{\end{description}\vspace{-0.4\baselineskip}}
+{%
+  \vspace{-0.4\baselineskip}%
+  \begin{description}%
+    \addtolength{\itemsep}{-0.6\baselineskip}%
+  }{%
+  \end{description}%
+  \vspace{-0.4\baselineskip}%
+}
 
 %% A more compact itemize environment.
 \newenvironment{compactitemize}
-{\vspace{-0.4\baselineskip}\begin{itemize}\addtolength{\itemsep}{-0.6\baselineskip}
-}{\end{itemize}\vspace{-0.4\baselineskip}}
+{%
+  \vspace{-0.4\baselineskip}%
+  \leftmargini 12.5pt
+  \begin{itemize}%
+    \addtolength{\itemsep}{-0.6\baselineskip}%
+  }{%
+  \end{itemize}%
+  \vspace{-0.4\baselineskip}%
+}
 
 
 %% mysig-alternate.cls ends here.

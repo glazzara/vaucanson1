@@ -22,8 +22,12 @@
   \definecolor{darkorange}{rgb}{1,.25,0}
   \definecolor{darkgreen}{rgb}{0,.5,0}
 
+  %% Like \alert, but remains in violet.
+  \ifx\warn\undefined
+    \newcommand{\warn}[1]{\alt<.>{\alert{#1}}{{\color{violet}{#1}}}}
+  \fi
+
   % Some parameters to color the code and avoid visible spaces.
-  \newcommand{\warn}[1]{\alt<.>{\alert{#1}}{{\color{violet}{#1}}}}
   \lstdefinestyle{ttcolor}
      {basicstyle={\ttfamily\scriptsize},%
       showstringspaces=false,

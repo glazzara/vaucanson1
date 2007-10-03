@@ -1,8 +1,26 @@
 %						-*- LaTeX -*-
-% Ask for the same languages.
-\usepackage[\@pkg@opts]{babel}
 
-% Note that to be nice looking, you must not leave a space before
-% the \fg invocation.  \og{}This is an example\fg.
-\newcommand{\og}{«~}
-\newcommand{\fg}{~»\xspace}
+\ifhevea
+  % Ask for the same languages.
+  \usepackage[\@pkg@opts]{babel}
+
+  % Note that to be nice looking, you must not leave a space before
+  % the \fg invocation.  \og{}This is an example\fg.
+  \newcommand{\og}{«~}
+  \newcommand{\fg}{~»\xspace}
+
+  %% Guillemets français.
+  \newcommand{\gf}[1]{\og{}#1\fg{}\xspace}
+\fi
+
+
+%% Using \oe{} is really a pain: it looks ugly, and annoys the
+%% spell-checker which wants to know what "uds" is in "n\oe{}uds".
+\newcommand{\coeurs} {c\oe{}urs\xspace}
+\newcommand{\coeur}  {c\oe{}ur\xspace}
+\newcommand{\noeuds} {n\oe{}uds\xspace}
+\newcommand{\noeud}  {n\oe{}ud\xspace}
+\newcommand{\oeuvres}{\oe{}uvres\xspace}
+\newcommand{\oeuvre} {\oe{}uvre\xspace}
+\newcommand{\soeurs} {s\oe{}urs\xspace}
+\newcommand{\soeur}  {s\oe{}ur\xspace}

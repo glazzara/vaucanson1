@@ -1,3 +1,582 @@
+2007-10-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	\coeur.
+	* styles/mybabel.hva: Define a few \oe words.
+	* styles/mybabel.sty: Include it.
+
+2007-10-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update.
+	* bin/texi2dvi: From Master.
+
+2007-09-27  Akim Demaille  <akim.demaille@free.fr>
+
+	Kill a few warnings.
+	* styles/misc.sty: Don't require myhyperref, since that prevents
+	passing it options.  Rather, use its features if available.
+	* styles/myhyperref.sty (\gf): A local definition avoiding PDF
+	warnings.
+
+2007-09-25  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bulletin changes
+	* styles/lrde-bulletin.sty (\chapter): Have a bigger subtitle.
+	Remove tricks to squeeze the room here: that's the wrong
+	approach, rather play with \@plus etc. in \@startsection.
+
+2007-09-19  Akim Demaille  <akim.demaille@free.fr>
+
+	volumetitle use
+	* styles/lrde-bulletin.sty: Put it in \huge in the title page,
+	and use it in the headers.
+
+2007-09-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	Start a bibliography for Olena.
+
+	* bib/lrde.bib (geraud.06.scoop-pres, olena.www): Move these
+	entries...
+	* bib/olena.bib: ...here (new file).
+
+2007-09-19  Thierry Geraud  <thierry.geraud@lrde.epita.fr>
+
+	Add URL in an lrde.bib entry.
+
+	* bib/lrde.bib (geraud.06.scoop-pres): Add urllrde.
+
+2007-09-19  Didier Verna  <didier@lrde.epita.fr>
+
+	* styles/lrde-bulletin.sty (\titlepage): Use babel's \No macro.
+
+2007-09-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update Vaucanson-g again
+	* Makefile (update-styles): Fetch Vcn where it lives.
+	* styles/vaucanson-g.sty: Update.
+
+2007-09-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update Vaucanson-G
+	* styles/FinalStateVar.tex: New.
+	* styles/VCPref-beamer.tex: New.
+	* styles/VCPref-gastex.tex: New.
+	* styles/VCPref-main.tex: New.
+	* styles/VCPref-slides.tex: New.
+	* styles/VCpatch-pstricks-1-10.tex: New.
+	* styles/Vaucanson-G.tex, styles/vaucanson-g.sty: Update from upstream.
+
+2007-09-17  Akim Demaille  <demaille@gostai.com>
+
+	\inputarticle
+	* share/styles/lrde-bulletin.sty: Well, not new, existed
+	already!
+	(inputenc, mybabel): Require them.
+	For some reason it doesn't appear to be working properly:
+	the "N^o" part of the title page comes out badly. Didier?
+
+2007-09-17  Akim Demaille  <demaille@gostai.com>
+
+	\gf
+	* styles/mybabel.hva, styles/mybabel.sty (\gf): New.
+	Don't use \g which is reported to be defined by "some"
+	package.
+
+2007-09-17  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix key style
+	* bib/lrde.bib: Use the style defined in the README.
+
+2007-09-17  Reda Dehak  <reda@lrde.epita.fr>
+
+	* bib/lrde.bib: add dehak.08a.odyssey, dehak.08b.odyssey and
+	kenny.08b.odyssey.
+
+2007-09-14  Akim Demaille  <demaille@gostai.com>
+
+	Update lrde-bulletin.sty
+	* styles/lrde-bulletin.sty (myhyperref, wrapfig): Require them,
+	we use them.
+	(\chapter): Use \huge instead of \Huge.
+
+2007-09-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	More compact.
+	* styles/mysig-alternate.cls (\leftmargini): Redefine.
+
+2007-09-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	Comments.
+	* styles/mysig-alternate.cls: Fix command definitions.
+
+2007-08-31  Akim Demaille  <akim@lrde.epita.fr>
+
+	seminarTimeTable.
+	* styles/lrde-bulletin.sty (seminarTimeTable, seminarSession):
+	New.
+
+2007-08-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix instantiate-template.sh.
+
+	* bin/instantiate-template.sh: Have Perl regexp be robust to
+	quotes (') and at (@).
+
+2007-08-06  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (conceptgcc.07.www): New entry.
+
+2007-08-06  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (boost.07.www): New entry..
+
+2007-08-06  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (chiba.95.oopsla): New entry.
+
+2007-08-06  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (cgal.07.www): New entry.
+
+2007-08-04  Roland Levillain  <roland@lrde.epita.fr>
+
+	Protect upper case letters in gp.bib.
+
+	* bib/gp.bib (gil.07.www, jarvi.01.tmpw, lumsdaine.01.itl)
+	(siek.98.iscope, siek.98.poosc, siek.00.bccl, siek.01.bgl)
+	(stepanov.00.book): Protect upper case letters.
+
+2007-08-01  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (zolyomi.03.gpce): New.
+	(jarvi.03.gpce, zolyomi.04.gpce): Add acronym GPCE to `booktitle'.
+
+2007-07-31  Roland Levillain  <roland@lrde.epita.fr>
+
+	More entries in gp.bib (cont.).
+
+	* bib/gp.bib (dosreis.05.lcsdm, siek.00.bccl, zolyomi.04.gpce):
+	New entries.
+	(gurtovoy.04.mpl): Write the full first names of authors.
+	Rename field `conflocation' as `address'.
+	Typo in `publisher' field.
+	* bib/lrde.bib (duret.00.gcse): Typo in `booktitle' field.
+
+2007-07-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	Even more entries in gp.bib.
+
+	* bib/gp.bib (garcia.03.oopsla): Fix the `author' field.
+	(siek.00.tmpw): Add a `lrdedoc' field.
+	(veldhuizen.99.tech): Turn entry into a technical report.
+	Complete entry.
+	(abrahams.01.tmpw, jarvi.03.gpce, jarvi.06.pldi, lumsdaine.01.itl)
+	(powell.00.cuj, siek.98.iscope, siek.98.poosc, siek.98.siamoo)
+	(weiser.00.tmpw): New entries.
+	* bib/lrde.bib (geraud.06.scoop-pres): Use \url in `howpublished'
+	field.
+	(olena.www): Rename field `url' as `howpublished'.
+
+2007-07-27  Roland Levillain  <roland@lrde.epita.fr>
+
+	More entries in gp.bib.
+
+	* bib/gp.bib (coplien.96.cppgems): Fix title.
+	(abrahams.04.metaprog, myers.95.cppr): Protect the case of `C++'.
+	(gil.07.www, siek.01.bgl): More entries.
+
+2007-07-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix BibTeX entry abrahams.04.metaprog.
+
+	* bib/gp.bib (abrahams.04.metaprog): Move URL from field
+	`note' to field `annote'.
+
+2007-07-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	Remove duplicate entry olena.www.
+
+	* bib/gp.bib, bib/transformers.bib (olena.www): Move entry...
+	* bib/lrde.bib (olena.www): ...here.
+
+2007-07-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	Update gp.bib.
+
+	* bib/gp.bib (abrahams.04.metaprog): New entry.
+	(gurtovoy.02.boost): Update entry and rename it as...
+	(gurtovoy.04.mpl): ...this.
+
+2007-07-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update texi2dvi, myenumerate
+	* bin/texi2dvi: Update from master.
+	* styles/myenumerate.sty: New.
+
+2007-07-17  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/lrde.bib: Add geraud.06.scoop-pres.
+
+2007-07-09  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/fixme.sty: Update to FiXme 3.2.
+
+2007-07-06  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add/update the ACM SIG Proceedings Templates.
+	(From http://www.acm.org/sigs/pubs/proceed/template.html.)
+
+	* styles/acm_proc_article-sp.cls: New (ACM LaTeX2e Style File
+	V3.1SP (June 2007)).
+	* styles/sig-alternate.cls: Update (Alternate ACM LaTeX2e
+	Style File V2.3 (June 2007)).
+
+2007-06-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix csi.bib.
+	* doc/share.txt: More about csi.bib.
+	* bib/csi.bib: Fix keys and other mistakes.
+
+2007-06-26  Charles-Alban Deledalle  <deledalle@lrde.epita.fr>
+
+	Add deledalle report reference.
+
+	* bib/csi.bib: .
+
+2007-06-25  Benoit Sigoure  <tsuna@lrde.epita.fr>
+
+	* bib/csi.bib: Add revCPP report.
+
+2007-06-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bin/instantiate-template.sh: Also instantiate the ignores..
+
+2007-06-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes.
+	* bib/lrde.bib: Pay attention to upper case letters in titles.
+
+2007-06-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	\warn.
+	* styles/mylistings.sty (\warn): Protect again multiple definitions.
+	* styles/beamerthemeKremlinBicetre.sty (\warn): New.
+
+2007-06-18  Akim Demaille  <akim@lrde.epita.fr>
+
+	Clean lrde.bib.
+	* bib/lrde.bib: A few fixes.
+	 (geraud.06.ivc): Remove.
+
+2007-06-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	Check csi.bib.
+	* Makefile (BIBS): New.
+	Use to check several *.bib instead of just lrde.bib.
+	* bib/csi.bib: Fix some errors.
+	Sort.
+
+2007-06-14  Maxime van Noppen  <maxime.van-noppen@lrde.epita.fr>
+
+	Add seminar
+	* csi.bib: Add seminar.
+
+2007-06-14  Florian Queze  <Florian.Queze@lrde.epita.fr>
+
+	Add entry for my seminar
+	* csi.bib: Add entry for my repport.
+
+2007-06-14  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add entry for seminar
+	* bib/csi.bib: Here.
+
+2007-06-14  Antoine Leblanc  <leblanc@lrde.epita.fr>
+
+	Report 0745 SMALLSUBJECT updated
+	* bib/csi.bib: SMALLSUBJECT updated.
+
+2007-06-08  Antoine Leblanc  <leblanc@lrde.epita.fr>
+
+	Report 0745 added in csi.bib
+	* bib/csi.bib: Report 0745 added.
+
+2007-06-07  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add baillard.07.gretsi to bib/lrde.bib.
+
+	* bib/lrde.bib: Add entry baillard.07.gretsi.
+
+2007-06-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	More Svn info.
+	* TODO: New.
+	* make/tex.mk: Pass all the infos.
+
+2007-05-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	styles/gretsi.cls.
+
+	* styles/gretsi.cls: New.
+
+2007-05-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add style file for Signal Processing Society Conferences
+	(ICASSP, ICIP).
+
+	* styles/spconf.sty: New.
+
+2007-05-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add package newalg.
+
+	* styles/newalg.sty: New.
+
+2007-05-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Missing tags.
+	* bib/lrde.bib: More transformers.
+
+2007-05-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix attribution.
+	* bib/lrde.bib: Properly tag vcn papers.
+
+2007-05-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bin/texi2dvi: Update DVIPSHEADERS so that dvips finds its
+	special headers.
+
+2007-05-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add Gastex.
+	* Makefile (update-styles): New.
+	* styles/gastex.pro: New.
+	* styles/gastex.sty: New.
+
+2007-05-21  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/sip.bib: Fix the previous patch.
+
+2007-05-14  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib: Add siek.04.clfpg.
+
+2007-05-03  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/lrde-bulletin.sty: Have a bigger space between a title
+	and an article.
+
+2007-05-03  Thierry Geraud  <thierry.geraud@lrde.epita.fr>
+
+	Update lrde.bib.
+
+	* bib/lrde.bib (berger.07.icip): Update status.
+	Add urllrde.
+
+2007-04-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix lrde.bib.
+	* bin/make-bib.pl: Minor changes.
+	* bib/lrde.bib: Add missing comma.
+	* Makefile: Use perl to invoke make-bib.pl.
+
+2007-04-25  Olivier Ricou <ricou@lrde.epita.fr>
+
+	* bib/lrde.bib: Add ricou.07.eceg
+
+2007-04-24  Didier Verna  <didier@lrde.epita.fr>
+
+	* bib/lrde.bib (verna.06.ijcs): New.
+
+2007-04-23  Daniela Becker  <daniela@lrde.epita.fr>
+
+	Add itemTotal
+	* styles/facture.cls (\itemTotal): New.
+	Use it.
+
+2007-04-23  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add a listings language style file for Leopard.
+
+	* styles/ldf/leopard.ldf: New file.
+	* styles/mylistings.hva: Include it.
+
+2007-04-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/llncs.cls: Update to version 2.14.
+
+2007-04-17  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib (cardelli.96.csur): Fix the entry.
+
+2007-04-17  Roland Levillain  <roland@lrde.epita.fr>
+
+	More on cardelli.96.csur.
+
+	* bib/compilation.bib (cardelli.96.acmcs): Rename as...
+	(cardelli.96.csur): ...this.
+	Fix title.
+	Use the long form of the title of the journal.
+	Add a WWW URL and a location in LRDE's documentation repository.
+
+2007-04-17  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib (ieee.98.float, goldberg.91.csur): New
+	citations.
+
+2007-04-16  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix update-cite.
+
+	* bin/update-cite (learn_from_bib): Use `!' as separator for the
+	substitution command instead of `<' and `>', since it tends to mix
+	up with the `<' of the f of the `(?<=[{, ])' pattern.
+	* bib/compilation.bib (aiken.96.sigplan): s/Sigplan/SIGPLAN/.
+	(automake.www) Add `automake' to `oldkeys'.
+	(visser.01.sigplan): New entry.
+
+2007-04-04  Akim Demaille  <akim.demaille@free.fr>
+
+	* styles/myhyperref.sty (\subfigureautorefname): New.
+
+2007-04-02  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib (edwards.03.ln): Add `edwardsln' to oldkeys.
+
+2007-03-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	eta.bib.
+	* bib/eta.bib: New.
+	Courtesy from Jacques Sakarovitch.
+
+2007-03-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bib changes.
+	* bib/gp.bib (iso.98.cpp): Remove, duplicates...
+	* bib/transformers.bib (iso.98.c++): this.
+	Complete these entries.
+	* bib/vaucanson.bib: Add years to produce nicer bibliographies, and
+	nicer keys.
+	(thompson.68.cacm): New.
+
+2007-03-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	More for automata.
+	* styles/myacronym.sty (stl): New.
+	* bib/ciaa-04.bib: New.
+
+2007-03-19  Thierry Geraud  <thierry.geraud@lrde.epita.fr>
+
+	Fix ambiguity about Rejected papers.
+
+	* doc/update-lrde-bib.txt: Fix text on 'Rejected' papers.
+	* bib/lrde.bib (geraud.06.lcsd-abstract): Remove.
+
+2007-03-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes.
+	* bib/lrde.bib (hamez.07.pohll): Fix.
+	* Makefile (check): Run all the checks.
+
+2007-03-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bib/lrde.bib: Add le-quoc.07.ntms..
+
+2007-03-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	* styles/splncs.bst: New.
+
+2007-03-14  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix the `-s, --share' option in bin/update-cite.
+
+	* bin/update-cite (parse_options): Do it.
+
+2007-03-12  Akim Demaille  <akim.demaille@free.fr>
+
+	* bin/update-cite: Strengthen the RE.
+
+2007-03-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	More history.
+
+	* bib/compilation.bib: More history entries.
+
+2007-03-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Beware of local implementation as a function.
+
+	* bin/texi2dvi: Don't rely on non-IFS splitting when using local.
+	Maybe we should just not use local at all.
+	Or never use it to assign at the same time: declare, then assign.
+
+2007-03-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	More compilation.bib.
+
+	* bib/compilation.bib: Extend it.
+
+2007-03-02  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Add student reports 0702.
+	* bib/csi.bib: here.
+
+2007-03-02  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bib/ciaa-05.bib: New.
+
+2007-03-01  Akim Demaille  <demaille@gostai.com>
+
+	Fixes
+	* bin/update-cite: Fixes.
+	* make/dist.mk (DISTDIR): Rename as...
+	(distdir): this.
+
+2007-02-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes.
+	* styles/beamerthemeKremlinBicetre.sty: Include misc instead of
+	defining again \lrde etc.
+	Don't rely on the graphpath.
+	* styles/myhyperref.sty: Do not change the link colors when
+	using Beamer.  One bad result was the use of blue over... blue
+	for the internal links, such as the short title in each bottom
+	line (which in Beamer is a link to the toc).
+
+2007-02-28  Roland Levillain  <roland@lrde.epita.fr>
+
+	Move geraud.06.lcsd-abstract to lrde/papers/rejected/.
+
+	* bib/lrde.bib (geraud.06.lcsd-abstract): Tag as rejected.
+
+2007-02-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Enable the disabling of local tocs.
+	* styles/beamerthemeKremlinBicetre.sty: Check whether \NoSectionToc
+	or \NoSubsectionToc are defined.
+	Maybe there are means to pass arguments to themes?
+
+2007-02-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	Title fixes.
+	* bib/lrde.bib (borghi.06.crossroads): here.
+
+2007-02-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix the size of the references.
+	* styles/facture.cls: here.
+
+2007-02-20  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Add paper: Strategic Graph Rewriting -- Transforming and Traversing Terms with References
+	* transformers.bib: Add paper.
+
+2007-02-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	rivf-07.bib.
+	* bib/rivf-07.bib: New.
+	* bib/lrde.bib: Fix/complete.
+
 2007-02-12  Akim Demaille  <akim@lrde.epita.fr>
 
 	One more simplification.

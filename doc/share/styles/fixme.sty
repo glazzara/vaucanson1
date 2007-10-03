@@ -8,7 +8,7 @@
 %% 
 
 
-%% Copyright (C) 1998, 1999, 2000, 2001, 2002, 2004, 2005 Didier Verna
+%% Copyright (C) 1998, 1999, 2000, 2001, 2002, 2004, 2005, 2006 Didier Verna
 
 %% This file is part of FiXme.
 
@@ -39,7 +39,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesPackage{fixme}[2005/01/31 v3.1
+\ProvidesPackage{fixme}[2006/04/12 v3.2
                         Insert fixme notes in your documents]
 
 \RequirePackage{ifthen}
@@ -47,6 +47,7 @@
 
 \newcommand*\fixmelogo{\textsf{FiXme}}
 
+\let\l@fixme\l@figure
 \newcommand\listoffixmes{}
 \def\listoffixmes@final{}
 \def\listoffixmes@draft{%
@@ -55,6 +56,8 @@
   \IfFileExists{\jobname .lox}{\@listoffixmes@posttoc}{}%
   }
 
+\def\listoffixmes@draft@amsbook{\@starttoc{lox}\listfixmename}
+
 \newcommand*\listfixmename{}
 
 \def\@listoffixmes@pretoc@article{%
@@ -62,7 +65,6 @@
     \@mkboth{\MakeUppercase\listfixmename}{\MakeUppercase\listfixmename}}%
   }
 \def\@listoffixmes@posttoc@article{}
-\def\l@fixme@article{\@dottedtocline{1}{1.5em}{2.3em}}
 
 \def\@listoffixmes@pretoc@report{%
   \if@twocolumn
@@ -74,7 +76,6 @@
     \@mkboth{\MakeUppercase\listfixmename}{\MakeUppercase\listfixmename}}%
   }
 \def\@listoffixmes@posttoc@report{\if@restonecol\twocolumn\fi}
-\def\l@fixme@report{\@dottedtocline{1}{1.5em}{2.3em}}
 
 \def\@listoffixmes@pretoc@book{%
   \if@twocolumn
@@ -86,14 +87,12 @@
     \@mkboth{\MakeUppercase\listfixmename}{\MakeUppercase\listfixmename}}%
   }
 \def\@listoffixmes@posttoc@book{\if@restonecol\twocolumn\fi}
-\def\l@fixme@book{\@dottedtocline{1}{1.5em}{2.3em}}
 
 \def\@listoffixmes@pretoc@scrartcl{%
   \section*{\listfixmename%
     \@mkboth{\listfixmename}{\listfixmename}}%
   }
 \def\@listoffixmes@posttoc@scrartcl{}
-\def\l@fixme@scrartcl{\@dottedtocline{1}{1.5em}{2.3em}}
 
 \def\@listoffixmes@pretoc@scrreprt{%
   \if@twocolumn
@@ -105,7 +104,6 @@
     \@mkboth{\listfixmename}{\listfixmename}}%
   }
 \def\@listoffixmes@posttoc@scrreprt{\if@restonecol\twocolumn\fi}
-\def\l@fixme@scrreprt{\@dottedtocline{1}{1.5em}{2.3em}}
 
 \def\@listoffixmes@pretoc@scrbook{%
   \if@twocolumn
@@ -117,12 +115,13 @@
     \@mkboth{\listfixmename}{\listfixmename}}%
   }
 \def\@listoffixmes@posttoc@scrbook{\if@restonecol\twocolumn\fi}
-\def\l@fixme@scrbook{\@dottedtocline{1}{1.5em}{2.3em}}
 
 \newcommand\FXInline[2]{%
   \textbf{#1}: \emph{#2}}
 \newcommand\FXMargin[2]{%
   \marginpar{\footnotesize\raggedleft\textbf{#1}: \emph{#2}}}
+\newcommand\FXMarginClue[1]{%
+  \marginpar{\footnotesize\raggedleft\textbf{#1}~!}}
 \newcommand\FXFootnote[2]{%
   \footnote{\textbf{#1}: \emph{#2}}}
 
@@ -143,20 +142,43 @@
 
 \newif\iffixme@inline
 \newif\iffixme@margin
+\newif\iffixme@marginclue
 \newif\iffixme@footnote
 \newif\iffixme@user
 \newif\iffixme@index
 
+\let\fixme@setinline\fixme@inlinetrue
+\def\fixme@setmargin{%
+  \iffixme@marginclue%
+    \PackageWarning{FiXme}{%
+      Marginal notes requested; tunrning marginal clues off}%
+    \fixme@margincluefalse%
+  \fi%
+  \fixme@margintrue}
+\def\fixme@setmarginclue{%
+  \iffixme@margin%
+    \PackageWarning{FiXme}{%
+      Marginal clues requested; tunrning marginal notes off}%
+    \fixme@marginfalse%
+  \fi%
+  \fixme@margincluetrue}
+\let\fixme@setfootnote\fixme@fottnotetrue
+\let\fixme@setuser\fixme@usertrue
+\let\fixme@setindex\fixme@indextrue
+
 \def\fixme@text#1#2{%
   \iffixme@inline\FXInline{#1}{#2}\fi%
   \iffixme@margin\FXMargin{#1}{#2}\fi%
+  \iffixme@marginclue\FXMarginClue{#1}\fi%
   \iffixme@footnote\FXFootnote{#1}{#2}\fi%
   \iffixme@user\FXUser{#1}{#2}\fi}
 
-\DeclareOption{inline}{\fixme@inlinetrue}
+\DeclareOption{inline}{\fixme@setinline}
 \DeclareOption{noinline}{\fixme@inlinefalse}
-\DeclareOption{margin}{\fixme@margintrue}
+\DeclareOption{margin}{\fixme@setmargin}
 \DeclareOption{nomargin}{\fixme@marginfalse}
+\DeclareOption{marginclue}{\fixme@setmarginclue}
+\DeclareOption{nomarginclue}{\fixme@margincluefalse}
 \DeclareOption{footnote}{\fixme@footnotetrue}
 \DeclareOption{nofootnote}{\fixme@footnotefalse}
 \DeclareOption{user}{\fixme@usertrue}
@@ -202,10 +224,10 @@
   \fixme@text{\fixmenoteprefix}{#1}%
   \iffixme@index\FXIndex{\fixmenoteindexname\thefixmenotecount: #1}\fi%
   \iffixme@silent\else\FXNote{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmenoteprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmenoteprefix: #1}}
 \def\fixme@note@final#1{%
   \iffixme@silent\else\FXNote{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmenoteprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmenoteprefix: #1}}
 
 \newcommand*\fixmewarningprefix{}
 \newcommand*\fixmewarningindexname{}
@@ -213,10 +235,10 @@
   \fixme@text{\fixmewarningprefix}{#1}%
   \iffixme@index\FXIndex{\fixmewarningindexname\thefixmewarningcount: #1}\fi%
   \iffixme@silent\else\FXWarning{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmewarningprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmewarningprefix: #1}}
 \def\fixme@warning@final#1{%
   \iffixme@silent\else\FXWarning{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmewarningprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmewarningprefix: #1}}
 
 \newcommand*\fixmeerrorprefix{}
 \newcommand*\fixmeerrorindexname{}
@@ -224,21 +246,22 @@
   \fixme@text{\fixmeerrorprefix}{#1}%
   \iffixme@index\FXIndex{\fixmeerrorindexname\thefixmeerrorcount: #1}\fi%
   \iffixme@silent\else\FXError{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmeerrorprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmeerrorprefix: #1}}
 \def\fixme@error@final#1{%
   \iffixme@silent\else\FXError{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmeerrorprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmeerrorprefix: #1}}
 
 \newcommand*\fixmefatalindexname{}
 \def\fixme@fatal@draft#1{%
   \iffixme@inline\FiXmeInline{#1}\fi%
   \iffixme@margin\FiXmeMargin{#1}\fi%
+  \iffixme@marginclue\FXMarginClue{\fixmefatalprefix}\fi%
   \iffixme@footnote\FiXmeFootnote{#1}\fi%
   \iffixme@user\FiXmeUser{#1}\fi%
   \iffixme@index\FiXmeIndex{%
     \fixmefatalindexname\thefixmefatalcount: #1}\fi%
   \iffixme@silent\else\FXFatal{#1}\fi%
-  \addcontentsline{lox}{fixme}{\fixmefatalprefix: #1}}
+  \addcontentsline{lox}{fixme}{\protect\fixmefatalprefix: #1}}
 \def\fixme@fatal@final#1{%
   \PackageError{FiXme}{`#1' fixme left in final version}{%
     You are processing your document in final mode,\MessageBreak
@@ -253,19 +276,21 @@
   \bgroup%
   \fixme@inlinefalse%
   \fixme@marginfalse%
+  \fixme@margincluefalse%
   \fixme@footnotefalse%
   \fixme@userfalse%
   \fixme@indexfalse%
   \@for\fixme@option:=#2\do{%
     \expandafter\ifx\csname fixme@\fixme@option true\endcsname\relax
       \PackageError{FiXme}{Unknown layout option `\fixme@option'}{%
-        You have given an invalid option to \string\fixme, %
-        or an \string\fx command.\MessageBreak
-        Valid options are `inline', `margin', `footnote' and `index'.%
-        \MessageBreak
+        You have given an invalid option to \string\fixme, or an \string\fx %
+        command.\MessageBreak
+        Valid options are `inline', `margin', `marginclue', `footnote', %
+        `user',\MessageBreak
+        and `index'.\MessageBreak
         Type X to quit, fix your document, and rerun LaTeX.}%
       \else%
-      \csname fixme@\fixme@option true\endcsname%
+      \csname fixme@set\fixme@option\endcsname%
     \fi}%
   \@@fixme{#1}{#3}%
   \egroup}
@@ -283,10 +308,14 @@
 
 \def\@fxenvbegin@draft#1#2{%
   \FXEnvBegin
-  \edef\fixme@args{inline\iffixme@index,index\fi}%
+  \edef\fixme@args{inline%
+    \iffixme@index,index\fi%
+    \iffixme@marginclue,marginclue\fi}%
   \csname#1\endcsname[\fixme@args]{#2}}
 \def\@fxenvbegin@final#1#2{
-  \edef\fixme@args{inline\iffixme@index,index\fi}%
+  \edef\fixme@args{inline%
+    \iffixme@index,index\fi%
+    \iffixme@marginclue,marginclue\fi}%
   \csname#1\endcsname[\fixme@args]{#2}
   \comment
 }
@@ -376,6 +405,17 @@
   \renewcommand*\fixmeerrorindexname{**c@Fejl:!}
   \renewcommand*\fixmefatalindexname{}
   \renewcommand*{\listfixmename}{Rettelser}}
+\DeclareOption{croatian}{%
+  \renewcommand*\fixmenoteprefix{\fixmelogo\nobreakspace Poruka}
+  \renewcommand*\fixmewarningprefix{\fixmelogo\nobreakspace Upozorenje}
+  \renewcommand*\fixmeerrorprefix{\fixmelogo\nobreakspace Gre\v ska}
+  \renewcommand*\fixmefatalprefix{\fixmelogo}
+  \renewcommand*\fixmeindexname{\fixmelogo}
+  \renewcommand*\fixmenoteindexname{**a@Poruke:!}
+  \renewcommand*\fixmewarningindexname{**b@Upozorenja:!}
+  \renewcommand*\fixmeerrorindexname{**c@Greske:!}
+  \renewcommand*\fixmefatalindexname{}
+  \renewcommand*{\listfixmename}{Popis korekcija}}
 
 \DeclareOption{final}{
   \let\fixme@note\fixme@note@final
@@ -388,6 +428,35 @@
   }
 
 \DeclareOption{draft}{
+  \@ifclassloaded{article}{
+    \let\@listoffixmes@pretoc\@listoffixmes@pretoc@article
+    \let\@listoffixmes@posttoc\@listoffixmes@posttoc@article}{
+    \@ifclassloaded{report}{
+      \let\@listoffixmes@pretoc\@listoffixmes@pretoc@report
+      \let\@listoffixmes@posttoc\@listoffixmes@posttoc@report}{
+      \@ifclassloaded{book}{
+        \let\@listoffixmes@pretoc\@listoffixmes@pretoc@book
+        \let\@listoffixmes@posttoc\@listoffixmes@posttoc@book}{
+        \@ifclassloaded{scrartcl}{
+          \let\@listoffixmes@pretoc\@listoffixmes@pretoc@scrartcl
+          \let\@listoffixmes@posttoc\@listoffixmes@posttoc@scrartcl}{
+          \@ifclassloaded{scrreprt}{
+            \let\@listoffixmes@pretoc\@listoffixmes@pretoc@scrreprt
+            \let\@listoffixmes@posttoc\@listoffixmes@posttoc@scrreprt}{
+            \@ifclassloaded{scrbook}{
+              \let\@listoffixmes@pretoc\@listoffixmes@pretoc@scrbook
+              \let\@listoffixmes@posttoc\@listoffixmes@posttoc@scrbook}{
+              \@ifclassloaded{amsbook}{
+                \let\listoffixmes@draft\listoffixmes@draft@amsbook}{
+                %% Use the article layout by default.
+                \let\@listoffixmes@pretoc\@listoffixmes@pretoc@article
+                \let\@listoffixmes@posttoc\@listoffixmes@posttoc@article}
+            }
+          }
+        }
+      }
+    }
+  }
   \let\fixme@note\fixme@note@draft
   \let\fixme@warning\fixme@warning@draft
   \let\fixme@error\fixme@error@draft
@@ -395,40 +464,7 @@
   \let\@fxenvbegin\@fxenvbegin@draft
   \let\@fxenvend\@fxenvend@draft
   \let\listoffixmes\listoffixmes@draft
-  \@ifclassloaded{article}{
-    \let\@listoffixmes@pretoc\@listoffixmes@pretoc@article
-    \let\@listoffixmes@posttoc\@listoffixmes@posttoc@article
-    \let\l@fixme\l@fixme@article}{
-    \@ifclassloaded{report}{
-      \let\@listoffixmes@pretoc\@listoffixmes@pretoc@report
-      \let\@listoffixmes@posttoc\@listoffixmes@posttoc@report
-      \let\l@fixme\l@fixme@report}{
-      \@ifclassloaded{book}{
-        \let\@listoffixmes@pretoc\@listoffixmes@pretoc@book
-        \let\@listoffixmes@posttoc\@listoffixmes@posttoc@book
-        \let\l@fixme\l@fixme@book}{
-        \@ifclassloaded{scrartcl}{
-          \let\@listoffixmes@pretoc\@listoffixmes@pretoc@scrartcl
-          \let\@listoffixmes@posttoc\@listoffixmes@posttoc@scrartcl
-          \let\l@fixme\l@fixme@scrartcl}{
-          \@ifclassloaded{scrreprt}{
-            \let\@listoffixmes@pretoc\@listoffixmes@pretoc@scrreprt
-            \let\@listoffixmes@posttoc\@listoffixmes@posttoc@scrreprt
-            \let\l@fixme\l@fixme@scrreprt}{
-            \@ifclassloaded{scrbook}{
-              \let\@listoffixmes@pretoc\@listoffixmes@pretoc@scrbook
-              \let\@listoffixmes@posttoc\@listoffixmes@posttoc@scrbook
-              \let\l@fixme\l@fixme@scrbook}{
-              %% Use the article layout by default.
-              \let\@listoffixmes@pretoc\@listoffixmes@pretoc@article
-              \let\@listoffixmes@posttoc\@listoffixmes@posttoc@article
-              \let\l@fixme\l@fixme@article}
-            }
-          }
-        }
-      }
-    }
-  }
+}
 
 \ExecuteOptions{english,final,margin,nosilent}
 \ProcessOptions*
