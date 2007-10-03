@@ -1,5 +1,12 @@
 2007-10-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Disable TAF-Kit's tests related to are-isomorphic.
+	* taf-kit/tests/vcsn-b.test,
+	* taf-kit/tests/vcsn-tdc.test,
+	* taf-kit/tests/vcsn-z.test: here.
+
+2007-10-03  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix the return value in TAF-Kit
 	TAF-Kit returned 0 when a command was unknown.
 	* taf-kit/src/main.cc: here.

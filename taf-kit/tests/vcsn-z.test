@@ -28,7 +28,11 @@ vcsn-z info $c1
 ## Tests and evaluation on automata.  ##
 ## ---------------------------------- ##
 
-  vcsn-z are-isomorphic $c1 $c1
+#FIXME: Disable are-isomorphic test
+# as long as this algorithm is not correctly
+# defined.
+#  vcsn-z are-isomorphic $c1 $c1
+#
 test $(vcsn-z eval $c1 bababa) -eq 42
 ! vcsn-z is-ambiguous $c1
 ! vcsn-z is-empty $c1
