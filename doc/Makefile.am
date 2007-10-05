@@ -16,6 +16,13 @@ include $(srcdir)/doc.mk
 
 SUBDIRS = manual xml
 
+all-local: $(srcdir)/stamp
+
+# Run "make doc" to forcefully rebuild the Doxygen documentation.
+.PHONY: doc
+doc:
+	-rm -f $(srcdir)/stamp
+	$(MAKE) $(srcdir)/stamp
 
 ## ----------------------- ##
 ## Doxygen documentation.  ##
@@ -23,11 +30,17 @@ SUBDIRS = manual xml
 
 DOCDIR = ref
 DOXYFILE = doc.doxy
-docs: $(DOXYFILE).in
-	rm -rf $(DOCDIR).tmp $(srcdir)/$(DOCDIR)
+
+$(srcdir)/stamp: $(srcdir)/$(DOXYFILE).in $(top_srcdir)/configure.ac
+	-rm -rf $(DOCDIR).tmp
 	$(MAKE) $(AM_MAKEFLAGS) $(DOXYFILE)
 	$(DOXYGEN) $(DOXYFILE)
+	-rm -rf $(srcdir)/$(DOCDIR)
+## FIXME: moving directories between file systems is not portable.
 	mv $(DOCDIR).tmp $(srcdir)/$(DOCDIR)
+	touch $(srcdir)/stamp
+
+$(srcdir)/$(DOCDIR): $(srcdir)/stamp
 
 # We install by hand, otherwise Automake produces "install .../srcdoc
 # .../srcdoc", which installs our dir into the previous one, instead
@@ -49,10 +62,10 @@ maintainer-clean-local:
 ## ----------------------- ##
 
 dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
-MAINTAINERCLEANFILES = $(dist_pdf_DATA)
+MAINTAINERCLEANFILES = $(dist_pdf_DATA) $(srcdir)/stamp
 
 EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
-	     share
+	     share $(srcdir)/stamp $(srcdir)/$(DOCDIR)
 
 # Do not distribute subversion and backup files from the share/ directory.
 DIST_IGNORE = -name '*~' -o -name '.svn' -o -name '+committed'

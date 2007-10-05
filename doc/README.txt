@@ -59,22 +59,25 @@ the command prompt::
 
 	./configure
 	make
-	make demos ([1]
-	make docs ([2])
-	make sanity-check
-	make check ([3])
-	make install (as root)
+	make install     (as root)
 
 Note that an installation is  specific to the compiler used to install
 it. Indeed, the call  to ``./configure`` enables some workarounds and,
 consequently,  users must  compile  with the  same  compiler to  avoid
 compatibility problems.
 
-[1]: Optional: Build demo binaries
-[2]: Optional: Generate the technical documentation. Doxygen is 
-required on the system.
-[3]: Optional: check  the whole library. Note that  this process takes
-about 1.5 Go of free space (memory swap included) and several hours.
+Between ``make`` and ``make install``, you may also want to run::
+
+	make demos
+	make sanity-check
+	make check
+
+``make demos`` will build example binaries.  ``make sanity-check``
+will make sure that Vaucanson's header files can be included and
+compiled.  ``make check`` will run the test suite to check the whole
+library.  Running the test suite may require up to 1.5GB of free space
+and several hours.
+
 
 Additional features
 -------------------
@@ -91,7 +94,7 @@ To specify a special path for the Xerces-C library::
 
 To specify a special path for the Boost-C++ library::
 
-       ./configure --with-boost=/absolute/path/to/boost
+	./configure --with-boost=/absolute/path/to/boost
 
 For further configure options, type::
 
@@ -185,7 +188,7 @@ differ from the one used to build Vaucanson.
 .. _Boost-C++: http://www.boost.org/
 
 Dependency introduced since Vaucanson 1.1. Boost is a C++ library which
-provides many useful objects, including hash tables. Currently, Boost 
+provides many useful objects, including hash tables. Currently, Boost
 is used in algorithms only, but its use shall be extended to automata
 structures and other portions of code.
 

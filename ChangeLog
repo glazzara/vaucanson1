@@ -1,3 +1,17 @@
+2007-10-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Distribute the HTML documentation.
+
+	* Makefile.am (docs): Remove target.
+	* doc/Makefile.am (docs): Rename this target as ...
+	($(srcdir)/stamp): ... this, and update it whenever 
+	configure.ac or doc.doxy.in change.
+	(EXTRA_DIST): Distribute $(srcdir)/stamp and the 
+	HTML documentation.
+	(MAINTAINERCLEANFILES): Clean $(srcdir)/stamp.
+	* doc/README.txt: Do not mention "make docs".  Reword a few
+	paragraphs.
+
 2007-10-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Disable TAF-Kit's tests related to are-isomorphic.
