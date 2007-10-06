@@ -1,5 +1,11 @@
 2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Change the target directory for the generated context headers.
+	Move the generated context headers to vaucanson/contexts/$impl/
+	* generate_headers.sh: .
+
+2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Introduce new context headers for each graph implementation.
 	The context headers will be generated for each kind of graph
 	implementation. A new script is now called during the bootstrap in

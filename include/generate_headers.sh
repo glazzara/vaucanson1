@@ -23,7 +23,7 @@ MK_FILE=generic_contexts.mk
 function write_context()
 {
     UpperName=`echo $1| sed -e 's/\./\_/g' | tr "[:lower:]" "[:upper:]"`
-    cat > vaucanson/$1 <<-EOF 
+    cat > $1 <<-EOF 
 #ifndef $UpperName
 # define $UpperName
 # define VCSN_GRAPH_IMPL $2
@@ -34,7 +34,7 @@ function write_context()
 #endif // !$UpperName
 EOF
 
-  echo "  vaucanson/$1	  \\" >> $MK_FILE
+  echo "  $1	  \\" >> $MK_FILE
 
 }
 
@@ -65,13 +65,18 @@ function main()
 
   echo "GENERIC_CONTEXTS +=	  \\" >> $MK_FILE
 
+#Creating directories
+  for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
+    mkdir -p vaucanson/contexts/$impl
+  done
+
   for header in `find vaucanson/automata/generic_contexts/ -name '*.hh' -printf '%f\n'`; do
     for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
 
       if [ "$impl" = "$DEFAULT_GRAPH_IMPLEMENTATION" ]; then
-	write_context $header $impl $header
+	write_context vaucanson/$header $impl $header
       fi
-	write_context $impl\_$header $impl $header
+	write_context vaucanson/contexts/$impl/$header $impl $header
 
     done
   done
