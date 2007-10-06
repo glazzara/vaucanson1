@@ -1,4 +1,4 @@
-// boost_graph.hh: this file is part of the Vaucanson project.
+// boost_graph_impl.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_
-# define VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_IMPL_HH_
+# define VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_IMPL_HH_
 # include <functional>
 
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -620,12 +620,12 @@ namespace vcsn
 } // End of namespace vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/implementation/boost_graph.hxx>
+#  include <vaucanson/automata/implementation/boost_graph_impl.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
 
 //FIXME: Useful???
 # undef BOOST_BMI
 
-#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HH_ //
+#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_IMPL_HH_ //
 

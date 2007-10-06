@@ -1,3 +1,18 @@
+2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Rename graph implementation files and fix compilation issues.
+	The renaming will help soon when we will want to use several
+	implementations.
+	Many compilation issues in graph.{hh,hxx} are also fixed.
+	* include/vaucanson/automata/implementation/boost_graph.hh,
+	* include/vaucanson/automata/implementation/boost_graph.hxx,
+	* include/vaucanson/automata/implementation/boost_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boost_graph_impl.hxx: Renaming.
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh,
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx: Renaming and compilation issues fixing.
+
 2007-05-15  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix BoostGraph

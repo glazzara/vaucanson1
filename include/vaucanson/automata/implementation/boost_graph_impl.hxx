@@ -15,10 +15,10 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HXX_
-# define VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HXX_
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_IMPL_HXX_
+# define VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_IMPL_HXX_
 
-# include <vaucanson/automata/implementation/boost_graph.hh>
+# include <vaucanson/automata/implementation/boost_graph_impl.hh>
 
 namespace vcsn
 {
@@ -717,4 +717,4 @@ namespace vcsn
 
 } // End of namespace vcsn
 
-#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_HXX_ //
+#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOST_GRAPH_IMPL_HXX_ //

@@ -1,4 +1,4 @@
-// graph.hh: this file is part of the Vaucanson project.
+// legacy_graph_impl.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH
-# define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HH
+# define VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HH
 
 # include <set>
 # include <map>
@@ -37,47 +37,10 @@
 
 namespace vcsn
 {
-
-  typedef handler<state_h, int> hstate_t;
-  typedef handler<transition_h, int> htransition_t;
-
-  typedef htransition_t hedge_t;
   namespace delta_kind
   {
     typedef transitions edges;
   }
-
-  /// Edge decorator.
-  template<typename EdgeLabel>
-  struct edge_value
-  {
-      edge_value(hstate_t, hstate_t, const EdgeLabel& v = EdgeLabel());
-
-      operator const EdgeLabel& () const
-      { return label; }
-      operator EdgeLabel& ()
-      { return label; }
-
-      EdgeLabel	label;
-      hstate_t	from;
-      hstate_t	to;
-  };
-
-  /// State decorator.
-  struct state_value
-  {
-      typedef std::set<hedge_t> edges_t;
-      state_value();
-
-      edges_t output_edges;
-      edges_t input_edges;
-  };
-
-  /// Needed containers.
-  /// FIXME: How about using std::vector instead of std::set?
-  typedef misc::SparseInterval<hstate_t, std::set<hstate_t> > StateContainer;
-  typedef misc::SparseInterval<hedge_t, std::set<hedge_t> > EdgeContainer;
-
 
   /// Graph
   template <class K, class WordValue, class WeightValue,
@@ -89,19 +52,65 @@ namespace vcsn
       typedef Graph<K, WordValue, WeightValue, SeriesValue,
 		    Letter, Tag, GeometryCoords>		self_t;
 
+      typedef WeightValue				semiring_elt_value_t;
+      typedef WordValue					monoid_elt_value_t;
+      typedef WordValue					word_value_t;
+      typedef SeriesValue				series_set_elt_value_t;
+      typedef Letter					letter_t;
+      typedef Tag					tag_t;
+
       /// Typedefs on automaton related graphs elements.
       typedef typename LabelOf<K, WordValue, WeightValue, SeriesValue, Letter>
       ::ret label_t;
+
+      typedef handler<state_h, int> hstate_t;
+      typedef handler<transition_h, int> htransition_t;
+      typedef htransition_t hedge_t;
+
+      /// Edge decorator.
+      template<typename EdgeLabel>
+      struct edge_value
+      {
+	inline edge_value(hstate_t h1, hstate_t h2,
+	    const EdgeLabel& l = EdgeLabel())
+	: label(l),
+          from(h1),
+	  to(h2)
+        {}
+
+	inline operator const EdgeLabel& () const
+	{ return label; }
+	inline operator EdgeLabel& ()
+	{ return label; }
+
+	EdgeLabel	label;
+	hstate_t	from;
+	hstate_t	to;
+      };
+
+      /// State decorator.
+      struct state_value
+      {
+	typedef std::set<hedge_t> edges_t;
+	inline state_value() {}
+
+	edges_t output_edges;
+	edges_t input_edges;
+      };
+
+      /// Needed containers.
+      /// FIXME: How about using std::vector instead of std::set?
+      typedef misc::SparseInterval<hstate_t, std::set<hstate_t> > StateContainer;
+      typedef misc::SparseInterval<hedge_t, std::set<hedge_t> > EdgeContainer;
 
       typedef state_value			state_value_t;
       typedef edge_value<label_t>		edge_value_t;
 
       typedef std::vector<state_value_t>	state_data_t;
+      typedef std::vector<edge_value_t>		edge_data_t;
 
       typedef StateContainer		states_t;
       typedef EdgeContainer		edges_t;
-
-      typedef SeriesValue			series_set_elt_value_t;
 
       typedef std::map<hstate_t, series_set_elt_value_t> initial_t;
       typedef std::map<hstate_t, series_set_elt_value_t> final_t;
@@ -234,14 +243,13 @@ namespace vcsn
 
       /** @name Tag access
        ** @{ */
-      typedef Tag tag_t;
       tag_t& tag();
       const tag_t& tag() const;
       /** @}*/
 
       /** @name Geometry access
        ** @{ */
-      typedef Geometry<hstate_t, hedge_t, GeometryCoords> geometry_t;
+      typedef geometry<hstate_t, hedge_t, GeometryCoords> geometry_t;
       geometry_t& geometry();
       const geometry_t&	geometry() const;
       /** @}*/
@@ -263,37 +271,42 @@ namespace vcsn
 # define TParam								\
   template <class S, class WordValue, class WeightValue, class SeriesValue, \
 	    class Letter, class Tag, class GeometryCoords>
+# define GRAPH \
+  Graph<Kind, WordValue, WeightValue, SerieValue, \
+	    Letter, Tag, GeometryCoords>
+
+
 
   TParam
   ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(Graph<labels_are_series,
 					      WordValue, WeightValue,
-					      SeriesValue, Letter, Tag, Geometry>);
+					      SeriesValue, Letter, Tag, GeometryCoords>);
 
 
   TParam
   ADAPT_LETTER_OF_TO_SERIES_LABEL(Graph<labels_are_series,
 				  WordValue, WeightValue,
-				  SeriesValue, Letter, Tag, Geometry>);
+				  SeriesValue, Letter, Tag, GeometryCoords>);
 
   TParam
   ADAPT_WORD_OF_TO_SERIES_LABEL(Graph<labels_are_series,
 				WordValue, WeightValue,
-				SeriesValue, Letter, Tag, Geometry>);
+				SeriesValue, Letter, Tag, GeometryCoords>);
 
   TParam
   ADAPT_WORD_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
 				 WordValue, WeightValue,
-				 SeriesValue, Letter, Tag, Geometry>);
+				 SeriesValue, Letter, Tag, GeometryCoords>);
 
   TParam
   ADAPT_SERIE_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
 				  WordValue, WeightValue,
-				  SeriesValue, Letter, Tag, Geometry>);
+				  SeriesValue, Letter, Tag, GeometryCoords>);
 
   TParam
   ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(Graph<labels_are_letters,
 					      WordValue, WeightValue,
-					      SeriesValue, Letter, Tag, Geometry>);
+					      SeriesValue, Letter, Tag, GeometryCoords>);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag, class GeometryCoords, class I>
@@ -309,14 +322,14 @@ namespace vcsn
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag, class GeometryCoords, class I>
-  Geometry&
+  typename GRAPH::geometry_t&
   op_geometry(const AutomataBase<I>&,
 	      Graph<Kind, WordValue, WeightValue,
 	      SerieValue, Letter, Tag, GeometryCoords>&);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag, class GeometryCoords, class I>
-  const Geometry&
+  const typename GRAPH::geometry_t&
   op_geometry(const AutomataBase<I>&,
 	      const Graph<Kind, WordValue, WeightValue,
 	      SerieValue, Letter, Tag, GeometryCoords>&);
@@ -324,9 +337,10 @@ namespace vcsn
 
 
 # undef TParam
+# undef GRAPH
 
   // This implementation can be used as an implementation of automaton.
-  VCSN_MAKE_AUTOMATON_TRAITS(Graph)
+  VCSN_MAKE_AUTOMATON_TRAITS(Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,
@@ -467,7 +481,7 @@ namespace vcsn
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/implementation/graph.hxx>
+#  include <vaucanson/automata/implementation/legacy_graph_impl.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HH

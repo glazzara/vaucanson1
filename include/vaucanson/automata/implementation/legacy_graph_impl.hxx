@@ -1,4 +1,4 @@
-// graph.hxx: this file is part of the Vaucanson project.
+// legacy_graph_impl.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
-# define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HXX
+# define VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HXX
 
 # include <fstream>
 # include <sstream>
@@ -23,30 +23,12 @@
 # include <algorithm>
 # include <utility>
 
-# include <vaucanson/automata/implementation/graph.hh>
+# include <vaucanson/automata/implementation/legacy_graph_impl.hh>
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/static.hh>
 
 namespace vcsn
 {
-
-  /*---------------------------.
-  | Decorators' implementation |
-  `---------------------------*/
-
-  template<typename EdgeLabel>
-  edge_value<EdgeLabel>::edge_value(hstate_t h1, hstate_t h2,
-				    const EdgeLabel& l)
-    : label(l),
-      from(h1),
-      to(h2)
-  {}
-
-  inline
-  state_value::state_value()
-  {}
-
-
   /*--------------------.
   | Convenient macros.  |
   `--------------------*/
@@ -57,7 +39,6 @@ namespace vcsn
 
 # define GClass								\
   Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
-
 
   /*-------------------------.
   | Graph's implementation.  |
@@ -139,7 +120,7 @@ namespace vcsn
   }
 
   TParam
-  hstate_t
+  typename GClass::hstate_t
   GClass::add_state()
   {
     if (removed_states_.size() == 0)
@@ -166,9 +147,9 @@ namespace vcsn
     precondition (has_state(n));
 
     const state_value_t& v = states_[n];
-    state_value::edges_t::const_iterator e = v.output_edges.begin();
-    state_value::edges_t::const_iterator end = v.output_edges.end();
-    state_value::edges_t::const_iterator next = e;
+    typename state_value::edges_t::const_iterator e = v.output_edges.begin();
+    typename state_value::edges_t::const_iterator end = v.output_edges.end();
+    typename state_value::edges_t::const_iterator next = e;
 
     for (; e != end; e = next)
     {
@@ -268,7 +249,7 @@ namespace vcsn
   }
 
   TParam
-  hedge_t
+  typename GClass::hedge_t
   GClass::add_edge(hstate_t n1, hstate_t n2,
 		   const label_t& v)
   {
@@ -312,7 +293,7 @@ namespace vcsn
 
 
   TParam
-  hstate_t
+  typename GClass::hstate_t
   GClass::src_of(hedge_t e1) const
   {
     precondition(has_edge(e1));
@@ -320,7 +301,7 @@ namespace vcsn
   }
 
   TParam
-  hstate_t
+  typename GClass::hstate_t
   GClass::dst_of(hedge_t e2) const
   {
     precondition(has_edge(e2));
@@ -515,36 +496,36 @@ namespace vcsn
   | Geometry.  |
   `-----------*/
 
-  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+  template <class Kind, class WordValue, class WeightValue, class SeriesValue,
 	    class Letter, class Tag, class GeometryCoords, class I>
-  Geometry&
+  typename GClass::geometry_t&
   op_geometry(const AutomataBase<I>&,
 	      Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, GeometryCoords>& v)
+	      SeriesValue, Letter, Tag, GeometryCoords>& v)
   {
     return v.geometry();
   }
 
-  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+  template <class Kind, class WordValue, class WeightValue, class SeriesValue,
 	    class Letter, class Tag, class GeometryCoords, class I>
-  const Geometry&
+  const typename GClass::geometry_t&
   op_geometry(const AutomataBase<I>&,
 	      const Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag, GeometryCoords>& v)
+	      SeriesValue, Letter, Tag, GeometryCoords>& v)
   {
     return v.geometry();
   }
 
 
   TParam
-  const Geometry&
+  const typename GClass::geometry_t&
   GClass::geometry() const
   {
     return geometry_;
   }
 
   TParam
-  Geometry&
+  typename GClass::geometry_t&
   GClass::geometry()
   {
     return geometry_;
@@ -557,4 +538,4 @@ namespace vcsn
 
 }
 
-#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HXX
