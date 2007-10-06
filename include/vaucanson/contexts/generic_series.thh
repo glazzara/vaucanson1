@@ -28,18 +28,19 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    typedef
-    vcsn::rat::exp<monoid_elt_t::value_t, semiring_elt_t::value_t>
-    rat_exp_impl_t;
+      typedef
+	vcsn::rat::exp<monoid_elt_t::value_t, semiring_elt_t::value_t>
+	rat_exp_impl_t;
 
-    typedef
-    vcsn::Element<series_set_t, rat_exp_impl_t>
-    rat_exp_t;
+      typedef
+	vcsn::Element<series_set_t, rat_exp_impl_t>
+	rat_exp_t;
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of namespace VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

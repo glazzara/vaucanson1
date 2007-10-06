@@ -25,17 +25,18 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    typedef
-    vcsn::algebra::FreeMonoidProduct<first_monoid_t, second_monoid_t>
-    monoid_t;
+      typedef
+	vcsn::algebra::FreeMonoidProduct<first_monoid_t, second_monoid_t>
+	monoid_t;
 
-    typedef std::pair<std::string, std::string>		monoid_elt_value_t;
-    typedef vcsn::Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
+      typedef std::pair<std::string, std::string>		monoid_elt_value_t;
+      typedef vcsn::Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

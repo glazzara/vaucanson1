@@ -1,5 +1,72 @@
 2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Introduce new context headers for each graph implementation.
+	The context headers will be generated for each kind of graph
+	implementation. A new script is now called during the bootstrap in
+	order to do it.
+	I also moved the previous headers in a new directory since they are
+	actually included in the new generated headers.
+
+	* bootstrap.sh: call generate_headers.sh.
+	* include/Makefile.am: include a mk file.
+	* include/generate_headers.sh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/r_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/r_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts: New.
+	* include/vaucanson/boolean_automaton.hh: Remove.
+	* include/vaucanson/boolean_automaton_structures.hh: Remove.
+	* include/vaucanson/boolean_transducer.hh: Remove.
+	* include/vaucanson/boolean_transducer_structures.hh: Remove.
+	* include/vaucanson/contexts/automaton.thh: .
+	* include/vaucanson/contexts/automaton_functions.thh: .
+	* include/vaucanson/contexts/automaton_maker.thh: .
+	* include/vaucanson/contexts/automaton_maker.thxx: .
+	* include/vaucanson/contexts/boolean_semiring.thh: .
+	* include/vaucanson/contexts/char_letter.thh: .
+	* include/vaucanson/contexts/dynamic_alphabet.thh: .
+	* include/vaucanson/contexts/free_monoid.thh: .
+	* include/vaucanson/contexts/free_monoid_product.thh: .
+	* include/vaucanson/contexts/generic_series.thh: .
+	* include/vaucanson/contexts/polynom_series.thh: .
+	* include/vaucanson/contexts/r_semiring.thh: .
+	* include/vaucanson/contexts/ratseries_semiring.thh: .
+	* include/vaucanson/contexts/transducer.thh: .
+	* include/vaucanson/contexts/z_max_plus_semiring.thh: .
+	* include/vaucanson/contexts/z_min_plus_semiring.thh: .
+	* include/vaucanson/contexts/z_semiring.thh: .
+	* include/vaucanson/fmp_transducer.hh: Remove.
+	* include/vaucanson/fmp_transducer_structures.hh: Remove.
+	* include/vaucanson/r_automaton.hh: Remove.
+	* include/vaucanson/r_automaton_structures.hh: Remove.
+	* include/vaucanson/z_automaton.hh: Remove.
+	* include/vaucanson/z_automaton_structures.hh: Remove.
+	* include/vaucanson/z_fmp_transducer.hh: Remove.
+	* include/vaucanson/z_fmp_transducer_structures.hh: Remove.
+	* include/vaucanson/z_max_plus_automaton.hh: Remove.
+	* include/vaucanson/z_max_plus_automaton_structures.hh: Remove.
+	* include/vaucanson/z_min_plus_automaton.hh: Remove.
+	* include/vaucanson/z_min_plus_automaton_structures.hh: Remove.
+	* include/vaucanson/z_transducer.hh: Remove.
+	* include/vaucanson/z_transducer_structures.hh: Remove.
+
+2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Introduce VCSN_GRAPH_IMPL macro.
 	This new macro introduces the possibility of using different graph
 	implementations.

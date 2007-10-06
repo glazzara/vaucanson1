@@ -364,76 +364,77 @@ vaucanson/algorithms/transpose.hxx				\
 vaucanson/algorithms/trim.hh					\
 vaucanson/algorithms/trim.hxx
 
-nobase_include_HEADERS +=					\
-vaucanson/automata/concept/automata.hh				\
-vaucanson/automata/concept/automata.hxx				\
-vaucanson/automata/concept/automata_base.hh			\
-vaucanson/automata/concept/automata_base.hxx			\
-vaucanson/automata/concept/automata_kind.hh			\
-vaucanson/automata/concept/automata_ops.hh			\
-vaucanson/automata/concept/automata_ops.hxx			\
-vaucanson/automata/concept/copy.hh				\
-vaucanson/automata/concept/copy.hxx				\
-vaucanson/automata/concept/delta_kind.hh			\
-vaucanson/automata/concept/handlers.hh				\
-vaucanson/automata/concept/handlers.hxx				\
-vaucanson/automata/concept/history.hh				\
-vaucanson/automata/concept/history.hxx				\
-vaucanson/automata/concept/kinds.hh				\
-vaucanson/automata/concept/kinds.hxx				\
-vaucanson/automata/concept/tags.hh				\
-vaucanson/automata/concept/tags.hxx				\
-vaucanson/automata/concept/transducer.hh			\
-vaucanson/automata/concept/transducer.hxx			\
-vaucanson/automata/concept/transducer_base.hh			\
-vaucanson/automata/concept/transducer_base.hxx			\
-vaucanson/automata/concept/transducer_ops.hh			\
-vaucanson/automata/concept/transducer_ops.hxx			\
-vaucanson/automata/concept/translate.hh				\
-vaucanson/automata/concept/translate.hxx			\
-vaucanson/automata/implementation/automaton_view.hh		\
-vaucanson/automata/implementation/automaton_view.hxx		\
-vaucanson/automata/implementation/generalized.hh		\
-vaucanson/automata/implementation/generalized.hxx		\
-vaucanson/automata/implementation/geometry.hh			\
-vaucanson/automata/implementation/geometry.hxx			\
-vaucanson/automata/implementation/graph.hh			\
-vaucanson/automata/implementation/graph.hxx			\
-vaucanson/automata/implementation/kind_adapter.hh		\
-vaucanson/automata/implementation/kind_adapter.hxx		\
-vaucanson/automata/implementation/transpose_view.hh		\
-vaucanson/automata/implementation/transpose_view.hxx
+nobase_include_HEADERS +=						\
+vaucanson/automata/concept/automata.hh					\
+vaucanson/automata/concept/automata.hxx					\
+vaucanson/automata/concept/automata_base.hh				\
+vaucanson/automata/concept/automata_base.hxx				\
+vaucanson/automata/concept/automata_kind.hh				\
+vaucanson/automata/concept/automata_ops.hh				\
+vaucanson/automata/concept/automata_ops.hxx				\
+vaucanson/automata/concept/copy.hh					\
+vaucanson/automata/concept/copy.hxx					\
+vaucanson/automata/concept/delta_kind.hh				\
+vaucanson/automata/concept/handlers.hh					\
+vaucanson/automata/concept/handlers.hxx					\
+vaucanson/automata/concept/history.hh					\
+vaucanson/automata/concept/history.hxx					\
+vaucanson/automata/concept/kinds.hh					\
+vaucanson/automata/concept/kinds.hxx					\
+vaucanson/automata/concept/tags.hh					\
+vaucanson/automata/concept/tags.hxx					\
+vaucanson/automata/concept/transducer.hh				\
+vaucanson/automata/concept/transducer.hxx				\
+vaucanson/automata/concept/transducer_base.hh				\
+vaucanson/automata/concept/transducer_base.hxx				\
+vaucanson/automata/concept/transducer_ops.hh				\
+vaucanson/automata/concept/transducer_ops.hxx				\
+vaucanson/automata/concept/translate.hh					\
+vaucanson/automata/concept/translate.hxx				\
+vaucanson/automata/generic_headers/boolean_automaton.hh			\
+vaucanson/automata/generic_headers/boolean_automaton_structures.hh      \
+vaucanson/automata/generic_headers/boolean_transducer.hh		\
+vaucanson/automata/generic_headers/boolean_transducer_structures.hh     \
+vaucanson/automata/generic_headers/contexts/automaton_functions.thh	\
+vaucanson/automata/generic_headers/contexts/automaton_maker.thh         \
+vaucanson/automata/generic_headers/contexts/automaton_maker.thxx        \
+vaucanson/automata/generic_headers/contexts/fmp_transducer_functions.thh\
+vaucanson/automata/generic_headers/contexts/fmp_transducer_maker.thh    \
+vaucanson/automata/generic_headers/contexts/fmp_transducer_maker.thxx   \
+vaucanson/automata/generic_headers/contexts/transducer_functions.thh	\
+vaucanson/automata/generic_headers/contexts/transducer_maker.thh        \
+vaucanson/automata/generic_headers/contexts/transducer_maker.thxx	\
+vaucanson/automata/generic_headers/fmp_transducer.hh			\
+vaucanson/automata/generic_headers/fmp_transducer_structures.hh         \
+vaucanson/automata/generic_headers/r_automaton.hh			\
+vaucanson/automata/generic_headers/r_automaton_structures.hh            \
+vaucanson/automata/generic_headers/standard_algorithms.hh		\
+vaucanson/automata/generic_headers/vaucanson.hh				\
+vaucanson/automata/generic_headers/z_automaton.hh			\
+vaucanson/automata/generic_headers/z_automaton_structures.hh            \
+vaucanson/automata/generic_headers/z_fmp_transducer.hh			\
+vaucanson/automata/generic_headers/z_fmp_transducer_structures.hh       \
+vaucanson/automata/generic_headers/z_max_plus_automaton.hh		\
+vaucanson/automata/generic_headers/z_max_plus_automaton_structures.hh   \
+vaucanson/automata/generic_headers/z_min_plus_automaton.hh		\
+vaucanson/automata/generic_headers/z_min_plus_automaton_structures.hh   \
+vaucanson/automata/generic_headers/z_transducer.hh 			\
+vaucanson/automata/generic_headers/z_transducer_structures.hh 		\
+vaucanson/automata/implementation/automaton_view.hh			\
+vaucanson/automata/implementation/automaton_view.hxx			\
+vaucanson/automata/implementation/boost_graph_impl.hh 			\
+vaucanson/automata/implementation/boost_graph_impl.hxx 			\
+vaucanson/automata/implementation/generalized.hh			\
+vaucanson/automata/implementation/generalized.hxx			\
+vaucanson/automata/implementation/geometry.hh				\
+vaucanson/automata/implementation/geometry.hxx				\
+vaucanson/automata/implementation/legacy_graph_impl.hh			\
+vaucanson/automata/implementation/legacy_graph_impl.hxx			\
+vaucanson/automata/implementation/kind_adapter.hh			\
+vaucanson/automata/implementation/kind_adapter.hxx			\
+vaucanson/automata/implementation/transpose_view.hh			\
+vaucanson/automata/implementation/transpose_view.hxx	
 
-nobase_include_HEADERS +=				\
-vaucanson/boolean_automaton.hh				\
-vaucanson/boolean_automaton_structures.hh               \
-vaucanson/boolean_transducer.hh				\
-vaucanson/boolean_transducer_structures.hh              \
-vaucanson/contexts/automaton_functions.thh		\
-vaucanson/contexts/automaton_maker.thh                  \
-vaucanson/contexts/automaton_maker.thxx                 \
-vaucanson/contexts/fmp_transducer_functions.thh		\
-vaucanson/contexts/fmp_transducer_maker.thh             \
-vaucanson/contexts/fmp_transducer_maker.thxx            \
-vaucanson/contexts/transducer_functions.thh		\
-vaucanson/contexts/transducer_maker.thh                 \
-vaucanson/contexts/transducer_maker.thxx		\
-vaucanson/fmp_transducer.hh				\
-vaucanson/fmp_transducer_structures.hh                  \
-vaucanson/r_automaton.hh				\
-vaucanson/r_automaton_structures.hh                     \
-vaucanson/standard_algorithms.hh			\
-vaucanson/vaucanson.hh					\
-vaucanson/z_automaton.hh				\
-vaucanson/z_automaton_structures.hh                     \
-vaucanson/z_fmp_transducer.hh				\
-vaucanson/z_fmp_transducer_structures.hh                \
-vaucanson/z_max_plus_automaton.hh			\
-vaucanson/z_max_plus_automaton_structures.hh            \
-vaucanson/z_min_plus_automaton.hh			\
-vaucanson/z_min_plus_automaton_structures.hh            \
-vaucanson/z_transducer.hh \
-vaucanson/z_transducer_structures.hh
 
 nobase_include_HEADERS += 			\
 vaucanson/xml/XML.hh				\
@@ -456,3 +457,5 @@ vaucanson/xml/xml_chooser.hh			\
 vaucanson/xml/xml_chooser.hxx			\
 vaucanson/xml/xml_converter.hh			\
 vaucanson/xml/xml_converter.hxx
+
+include generic_contexts.mk

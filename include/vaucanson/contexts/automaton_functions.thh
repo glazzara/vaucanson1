@@ -21,9 +21,9 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
-#include <vaucanson/automata/implementation/generalized.hh>
+# include <vaucanson/automata/implementation/generalized.hh>
 
-#include <vaucanson/misc/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/algorithms/complement.hh>
@@ -50,7 +50,7 @@
 
 # include <vaucanson/algorithms/krat_exp_expand.hh>
 
-#include <vaucanson/algorithms/aut_to_exp.hh>
-#include <vaucanson/algorithms/standard_of.hh>
-#include <vaucanson/algorithms/thompson.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/algorithms/thompson.hh>
 

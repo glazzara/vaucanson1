@@ -48,6 +48,7 @@ run src/tests/test-suites ./generate-all.sh
 run src/tests/sanity      ./generate_files.sh .
 run src/benchs            ./generate_benchs.sh --all
 run .                     build-aux/find_tests.sh
+run include		  ./generate_headers.sh
 run lib			  ./generate_libvcsn.rb
 
 # Will also boostrap argp/.
