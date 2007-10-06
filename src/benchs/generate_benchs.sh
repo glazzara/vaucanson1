@@ -100,7 +100,7 @@ case $1:$# in
     --all:1)
 	BENCH_DIRS="determinization 				\
 	 minimization_debruijn derived_terms minimization_2n	\
-         quotient composition"
+         quotient composition eps_removal"
 	;;
     --all:* | *:0)
 	echo >&2 "invalid arguments: $@"

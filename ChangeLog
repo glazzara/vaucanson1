@@ -1,5 +1,18 @@
 2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix various compilation issues
+	A hash function was declared in a .hxx file even though
+	it was not templated.
+	The makefile associated to the eps_removal bench was not generated.
+	* include/vaucanson/misc/hash.hh,
+	* include/vaucanson/misc/hash.hxx: make a hash function inline.
+	* src/benchs/eps_removal/Makefile.am,
+	* src/benchs/eps_removal/eps_removal-bench.cc,
+	* src/benchs/generate_benchs.sh:
+	 fix the generation of the related Makefile.
+
+2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Rename graph implementation files and fix compilation issues.
 	The renaming will help soon when we will want to use several
 	implementations.

@@ -143,12 +143,6 @@ namespace vcsn
     {
       return ::boost::hash_value (h.value());
     }
-
-    std::size_t
-    hash_state_handler::operator() (const handler<state_h, unsigned*>& h) const
-    {
-      return ::boost::hash_value (reinterpret_cast<unsigned int>(h.value()));
-    }
   }
 }
 

@@ -80,7 +80,10 @@ namespace vcsn
 
     struct hash_state_handler
     {
-      std::size_t operator() (const handler<state_h, unsigned*>& h) const;
+      inline std::size_t operator() (const handler<state_h, unsigned*>& h) const
+      {
+	return ::boost::hash_value (reinterpret_cast<unsigned int>(h.value()));
+      }
     };
   }
 } // End of namespace vcsn
