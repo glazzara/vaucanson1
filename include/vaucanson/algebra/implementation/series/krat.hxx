@@ -32,8 +32,8 @@
 
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/implementation/boost_graph.hh>
 
+# include GRAPH_IMPL_HEADER
 # include <vaucanson/misc/contract.hh>
 
 

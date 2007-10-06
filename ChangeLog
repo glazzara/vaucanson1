@@ -1,5 +1,18 @@
 2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Introduce VCSN_GRAPH_IMPL macro.
+	This new macro introduces the possibility of using different graph
+	implementations.
+	A new macro has also been defined to include graph implementation
+	headers according to the current value of VCSN_GRAPH_IMPL.
+	This patch also introduce a new dependency : Boost preprocessor.
+	* include/vaucanson/algebra/implementation/series/krat.hxx: .
+	* include/vaucanson/automata/implementation/generalized.hh: .
+	* include/vaucanson/contexts/generic_automaton_impl.thh: .
+	* include/vaucanson/misc/usual_macros.hh: .
+
+2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix various compilation issues
 	A hash function was declared in a .hxx file even though
 	it was not templated.

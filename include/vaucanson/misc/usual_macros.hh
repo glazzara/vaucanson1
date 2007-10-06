@@ -19,6 +19,7 @@
 
 # include <fstream>
 # include <vaucanson/config/system.hh>
+# include <boost/preprocessor/cat.hpp>
 
 /// Import the Type from From qualified with Qual, with a Typename prepended.
 # define IMPORT_TYPEDEF_TYPENAME(From, Qual, Type, Typename) \
@@ -182,6 +183,13 @@
 # define one_	identity(SELECT(typename series_set_elt_t::value_t))
 # define VCSN_EMPTY_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
+
+
+# define VARIANT_INCLUDE_FILE(PATH, FILE, SUFFIX) \
+    <PATH/BOOST_PP_CAT(FILE, SUFFIX)>
+
+# define GRAPH_IMPL_HEADER \
+    VARIANT_INCLUDE_FILE(vaucanson/automata/implementation,VCSN_GRAPH_IMPL,_graph_impl.hh)
 
 # include <vaucanson/misc/global_timer.hh>
 
