@@ -1,5 +1,12 @@
 2007-10-10  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Rename predefined alphabets
+	`ascii' has been suppress too, because the xml parser cannot handle `"',
+	and Vaucanson does not handle correctly alphabets with digits.
+	* taf-kit/src/main.cc: Rename `a-z' to letters and `a-zA-Z' to alpha.
+
+2007-10-10  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Remove unused variables.
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Remove
 	unused variable in quotient, and a unused paramater of

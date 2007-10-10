@@ -105,10 +105,9 @@ namespace
 #endif /* 0 */
 
     { 0, 0, 0, 0, "The following alphabets are predefined:\n"
-      "	 `ascii': Use all the ascii table as the alphabet, except the \" character, and " DEFAULT_EPSILON " as epsilon\n"
-      "	 `a-z': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `a-zA-Z': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `ab': Use `ab' as the alphabet, " DEFAULT_EPSILON " as epsilon", 0 },
+      "	 `letters': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
+      "	 `alpha': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
+      "	 `ab': Use `ab' as the alphabet, " DEFAULT_EPSILON " as epsilon. Never use the \" character.", 0 },
 
     { 0, 0, 0, 0, 0, 0 }
   };
@@ -118,9 +117,8 @@ namespace
     char*	name;
     char*	alphabet;
     char	epsilon;
-  } predefined_alphabets[] = { { "ascii", ALPHABET_ASCII, DEFAULT_EPSILON[0] },
-			       { "a-z", ALPHABET_AZ, DEFAULT_EPSILON[0] },
-			       { "a-zA-Z", ALPHABET_AZAZ, DEFAULT_EPSILON[0] },
+  } predefined_alphabets[] = { { "letters", ALPHABET_AZ, DEFAULT_EPSILON[0] },
+			       { "alpha", ALPHABET_AZAZ, DEFAULT_EPSILON[0] },
 			       { "ab", ALPHABET_AB, DEFAULT_EPSILON[0] },
 			       { 0, 0, 0 } };
 
