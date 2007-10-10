@@ -1,3 +1,10 @@
+2007-10-10  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Remove unused variables.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Remove
+	unused variable in quotient, and a unused paramater of
+	add_new_partitions.
+
 2007-10-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Update README file

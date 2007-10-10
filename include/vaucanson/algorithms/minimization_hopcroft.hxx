@@ -383,8 +383,7 @@ namespace vcsn
 	}
 
 	void add_new_partitions(to_treat_t&		to_treat,
-				const partition_set_t&	part,
-				const unsigned		current_part)
+				const partition_set_t&	part)
 	{
 	  for_all_(std::list<unsigned>, klass, met_class_)
 	  {
@@ -495,13 +494,12 @@ namespace vcsn
 	to_treat.pop_front();
 	unsigned p = c.first;
 	letter_t a = c.second;
-	unsigned old_max_partitions = max_partitions;
 
 	if (!splitter.compute_going_in_states(part[p], a))
 	  continue;
 	splitter.split(part, max_partitions);
 
-	splitter.add_new_partitions(to_treat, part, p);
+	splitter.add_new_partitions(to_treat, part);
       }
     }
 
