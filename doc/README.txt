@@ -59,7 +59,7 @@ the command prompt::
 
 	./configure
 	make
-	make install     (as root)
+	make install (as root)
 
 Note that an installation is  specific to the compiler used to install
 it. Indeed, the call  to ``./configure`` enables some workarounds and,
@@ -187,19 +187,16 @@ differ from the one used to build Vaucanson.
 
 .. _Boost-C++: http://www.boost.org/
 
-Dependency introduced since Vaucanson 1.1. Boost is a C++ library which
-provides many useful objects, including hash tables. Currently, Boost
-is used in algorithms only, but its use shall be extended to automata
-structures and other portions of code.
-
-
-.. _doxygen: http://www.doxygen.org
-
-You may need this dependency if you want to build the documentation.
+`Boost-C++`_ has been introduced since Vaucanson 1.1. It is a C++ library
+which provides many useful objects, including hash tables. Currently,
+Boost is used in algorithms only, but its use shall be extended to
+automata structures and other portions of code. You must install this
+library on your system.
 
 .. _python-docutils: http://www.python.org
 
-You may need this dependency if you want to build the documentation.
+You may need python-docutils_ if you want to build the documentation.
+
 
 Using Vaucanson
 ===============

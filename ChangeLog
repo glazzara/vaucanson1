@@ -1,3 +1,10 @@
+2007-10-10  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Update README file
+	Fix some strange changes made in patch 1731, according
+	to Alexandre's comments.
+	* doc/README.txt: here.
+
 2007-10-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Distribute the HTML documentation.
