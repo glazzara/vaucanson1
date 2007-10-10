@@ -1,5 +1,14 @@
 2007-10-10  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Remove contains_factors demo.
+	The algortihm is false, and failed to check if the language
+	recognized by an automaton is factor of a language recognized
+	by an other automaton.
+	* src/demos/algorithms/Makefile.am: Remove target {b,z}_contains_factor.
+	* src/demos/algorithms/contains_factor.cc: Remove.
+
+2007-10-10  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Rename predefined alphabets
 	`ascii' has been suppress too, because the xml parser cannot handle `"',
 	and Vaucanson does not handle correctly alphabets with digits.

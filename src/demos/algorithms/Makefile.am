@@ -18,7 +18,7 @@ EXTRA_DIST = equivalent_functions.hh
 AM_CPPFLAGS += $(XSD_CPPFLAGS)
 
 TESTERS = universal aut_are_equivalent	\
-	exp_are_equivalent b_contains_factor z_contains_factor
+	exp_are_equivalent
 
 universal_SOURCES = universal.cc
 
@@ -31,14 +31,4 @@ exp_are_equivalent_SOURCES = exp_are_equivalent.cc equivalent_functions.cc
 exp_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-
-b_contains_factor_SOURCES = contains_factor.cc equivalent_functions.cc
-b_contains_factor_CPPFLAGS = $(AM_CPPFLAGS)			\
-	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-
-z_contains_factor_SOURCES = contains_factor.cc equivalent_functions.cc
-z_contains_factor_CPPFLAGS =  $(AM_CPPFLAGS)			\
-	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"		\
-	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
 
