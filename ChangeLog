@@ -1,3 +1,13 @@
+2007-10-11  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix make distcheck
+	The vaucanswig's Makefiles were not generated properly.
+	Morover, the make distcheck now use two configure options:
+	--enable-demos and --enable-vaucanswig.
+
+	* Makefile.am: Fix the distcheck options.
+	* configure.ac: Fix the vaucanswig's makefiles generation.
+
 2007-10-10  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Remove contains_factors demo.

@@ -56,11 +56,6 @@ if test "x$enable_vaucanswig" = "xyes"; then
   if test "x$ac_cv_recent_swig" != "xyes"; then
     AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
   else
-    AC_CONFIG_FILES([vaucanswig/Makefile
-		     vaucanswig/meta/Makefile
-		     vaucanswig/src/Makefile
-		     vaucanswig/python/Makefile])
-
     AM_PATH_PYTHON([2.2])
 
     if test "x$ac_python_path" != "x"; then
@@ -75,6 +70,12 @@ if test "x$enable_vaucanswig" = "xyes"; then
     fi
   fi
 fi
+
+AC_CONFIG_FILES([vaucanswig/Makefile
+		 vaucanswig/meta/Makefile
+	         vaucanswig/src/Makefile
+	         vaucanswig/python/Makefile])
+
 
 
 AM_CONDITIONAL([ENABLE_VAUCANSWIG],
