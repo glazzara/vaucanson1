@@ -29,7 +29,7 @@
 using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
-using namespace vcsn::io;
+using namespace vcsn::tools;
 using vcsn::xml::XML;
 
 static
@@ -69,7 +69,7 @@ get_aut(std::string s)
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
   {
-    using namespace vcsn::io;
+    using namespace vcsn::tools;
     using namespace vcsn::xml;
 
     automaton_t a = make_automaton(first_alphabet(), second_alphabet());
@@ -93,7 +93,7 @@ get_boolean_aut(std::string s)
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
   {
-    using namespace vcsn::io;
+    using namespace vcsn::tools;
     using namespace vcsn::xml;
 
     boolean_automaton::automaton_t a =
@@ -133,10 +133,10 @@ compose_command(int argc, char** argv)
   automaton_t b = get_aut(argv[3]);
 
   if (!is_sub_normalized(a))
-    a = sub_normalize(a);
+    sub_normalize_here(a);
 
   if (!is_sub_normalized(b))
-    b = sub_normalize(b);
+    sub_normalize_here(b);
 
   std::cout << automaton_saver(u_compose(a,b),
 			       string_out (),

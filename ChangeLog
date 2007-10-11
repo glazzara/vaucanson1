@@ -1,3 +1,13 @@
+2007-10-11  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Rename vcsn::io to vcsn::tools in src/demos
+	Namespace vcsn::io has been removed, vcsn::tools replaces
+	it. Some demos were still not updated accordingly.
+
+	* src/demos/function_library/algorithms.cc:,
+	* src/demos/function_library/rt_tdc_algorithms.cc:,
+	* src/demos/function_library/tdc_algorithms.cc: Do it.
+
 2007-10-11  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix make distcheck
