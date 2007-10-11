@@ -1,3 +1,9 @@
+2007-10-12  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Rename {input,ouput]_projection calls to domain,image.
+	* src/demos/function_library/rt_tdc_algorithms.cc: Do it. Suppress
+	are_isomorphic functionality.
+
 2007-10-11  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Rename vcsn::io to vcsn::tools in src/demos
