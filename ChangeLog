@@ -1,5 +1,15 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Remove useless namespace
+	hstate_t type is now graph structure dependent and is not part
+	of the vcsn namespace anymore, at least not directly.
+
+	BMI branch now compiles, w00t! \o/
+
+	* data/automata/b/ladybird.cc: fixed there.
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Remove useless inline keyword
 	In a previous patch, I forgot to remove this keyword after having moved
 	the function implementations in a .hxx file.
