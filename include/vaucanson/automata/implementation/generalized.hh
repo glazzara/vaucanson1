@@ -48,7 +48,7 @@ namespace vcsn {
 
     typedef vcsn::Element
     <vcsn::Automata<series_set_t>,
-     Graph<labels_are_series,
+     VCSN_GRAPH_IMPL::Graph<labels_are_series,
 	   monoid_elt_value_t,
 	   semiring_elt_value_t,
 	   rat::exp<monoid_elt_value_t, semiring_elt_value_t>,

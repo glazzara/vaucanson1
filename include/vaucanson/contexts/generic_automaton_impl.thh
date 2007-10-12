@@ -31,7 +31,7 @@ namespace vcsn
     VCSN_CONTEXT_NAMESPACE
     {
 
-      typedef vcsn::Graph<
+      typedef vcsn::VCSN_GRAPH_IMPL::Graph<
 	labels_are_series,
 	series_set_elt_t::value_t::monoid_elt_value_t,
 	series_set_elt_t::value_t::semiring_elt_value_t,

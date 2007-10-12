@@ -618,7 +618,7 @@ namespace vcsn {
     typedef typename algebra::Series<W,M>		series_set_t;
     typedef typename algebra::polynom<Tm, Tw>		series_set_elt_value_t;
     typedef typename rat::exp<Tm, Tw>			exp_t;
-    typedef Graph
+    typedef VCSN_GRAPH_IMPL::Graph
       <
       labels_are_series,
       Tm,

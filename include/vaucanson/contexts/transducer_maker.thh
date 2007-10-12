@@ -26,30 +26,31 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    template <class T>
-    automaton_t make_automaton(const T& input_alphabet,
-			       const T& output_alphabet);
+      template <class T>
+      automaton_t make_automaton(const T& input_alphabet,
+				 const T& output_alphabet);
 
-    template <class InputIterator>
-    automaton_t make_automaton(InputIterator input_alphabet_begin,
-			       InputIterator input_alphabet_end,
-			       InputIterator output_alphabet_begin,
-			       InputIterator output_alphabet_end);
+      template <class InputIterator>
+      automaton_t make_automaton(InputIterator input_alphabet_begin,
+				 InputIterator input_alphabet_end,
+				 InputIterator output_alphabet_begin,
+				 InputIterator output_alphabet_end);
 
-    template <typename TransStruct,
-	      typename TransImpl,
-	      typename ArgStruct,
-	      typename ArgImpl>
-    output_series_set_elt_t
-    evaluation(const Element<TransStruct, TransImpl>& t,
-	       const Element<ArgStruct, ArgImpl>& input);
+      template <typename TransStruct,
+		typename TransImpl,
+		typename ArgStruct,
+		typename ArgImpl>
+      output_series_set_elt_t
+      evaluation(const Element<TransStruct, TransImpl>& t,
+		 const Element<ArgStruct, ArgImpl>& input);
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.
 
 #include <vaucanson/contexts/transducer_maker.thxx>

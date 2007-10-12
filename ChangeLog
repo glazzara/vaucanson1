@@ -1,5 +1,23 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Move portions of code in VCSN_GRAPH_IMPL namespace
+	This code depends on the graph structure thus it had to be part of the
+	VCSN_GRAPH_IMPL namespace.
+	Some declarations also needed to have the VCSN_GRAPH_IMPL namespace
+	specified.
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx: .
+	* include/vaucanson/automata/implementation/generalized.hh: .
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx: .
+	* include/vaucanson/contexts/fmp_transducer_maker.thh: .
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx: .
+	* include/vaucanson/contexts/generic_automaton_impl.thh: .
+	* include/vaucanson/contexts/transducer_maker.thh: .
+	* include/vaucanson/contexts/transducer_maker.thxx: .
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Introduce a third graph structure
 	Currently this is exactly the same structure as the legacy one.
 	However, it will become a distinct structure in a near future.
