@@ -1,5 +1,17 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Rename boost namespace to boostg
+	Since the boost library uses boost as namespace name, using also
+	this namespace for the graph structure in Vaucanson introduced strange
+	conflits.
+
+	* include/vaucanson/automata/implementation/boost_graph_impl.hh: Remove.
+	* include/vaucanson/automata/implementation/boost_graph_impl.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx: New.
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Introduce new macros to include files
 	Since we need to include headers according to the graph
 	implementation used, we needed new macros to choose the
