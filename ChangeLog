@@ -1,5 +1,14 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Introduce new macros to include files
+	Since we need to include headers according to the graph
+	implementation used, we needed new macros to choose the
+	correct path where to find these headers.
+
+	* include/vaucanson/misc/usual_macros.hh: defined there.
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Introduce VCSN_DEFAULT_GRAPH_IMPL macro
 	Since we would like to have a basic implementation converted into
 	others automatically in the algorithms, we needed a macro to define

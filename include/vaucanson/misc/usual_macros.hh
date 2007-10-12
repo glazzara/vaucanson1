@@ -191,6 +191,15 @@
 # define GRAPH_IMPL_HEADER \
     VARIANT_INCLUDE_FILE(vaucanson/automata/implementation,VCSN_GRAPH_IMPL,_graph_impl.hh)
 
+# define GRAPH_DEFAULT_IMPL_HEADER \
+    VARIANT_INCLUDE_FILE(vaucanson/automata/implementation,VCSN_DEFAULT_GRAPH_IMPL,_graph_impl.hh)
+
+# define GRAPH_CONTEXT_HEADER(Impl, Context) \
+    VARIANT_INCLUDE_FILE(vaucanson/contexts,Impl,/Context)
+
+# define GRAPH_CONTEXT_HEADER_(Context) \
+    <vaucanson/contexts/VCSN_GRAPH_IMPL/Context>
+
 # include <vaucanson/misc/global_timer.hh>
 
 #endif // ! VCSN_MISC_USUAL_MACROS_HH
