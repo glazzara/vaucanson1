@@ -1,5 +1,13 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Remove useless inline keyword
+	In a previous patch, I forgot to remove this keyword after having moved
+	the function implementations in a .hxx file.
+
+	* include/vaucanson/automata/concept/smart_label.hxx: fixed there.
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix generic context headers includes
 	There were some problems with function redefinitions/missing functions
 	while compiling with different kind of automata.

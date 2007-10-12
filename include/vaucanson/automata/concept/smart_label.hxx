@@ -50,14 +50,12 @@ namespace vcsn
   \-----------*/
 
   template <typename T>
-  inline
   SmartLabel<T>::SmartLabel(const boost::shared_ptr<T>& p)
     : value_(p),
       ref_(1)
   { }
 
   template <typename T>
-  inline
   const T&
   SmartLabel<T>::value() const
   {
@@ -65,7 +63,6 @@ namespace vcsn
   }
 
   template <typename T>
-  inline
   int
   SmartLabel<T>::ref() const
   {
@@ -73,7 +70,6 @@ namespace vcsn
   }
 
   template <typename T>
-  inline
   int
   SmartLabel<T>::ref_dec()
   {
@@ -81,7 +77,6 @@ namespace vcsn
   }
 
   template <typename T>
-  inline
   int
   SmartLabel<T>::ref_inc()
   {
