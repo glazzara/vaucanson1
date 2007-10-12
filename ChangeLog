@@ -1,5 +1,15 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Introduce a third graph structure
+	Currently this is exactly the same structure as the legacy one.
+	However, it will become a distinct structure in a near future.
+	It is usefull for my current tests.
+
+	* include/vaucanson/automata/implementation/light_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/light_graph_impl.hxx: New.
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Rename boost namespace to boostg
 	Since the boost library uses boost as namespace name, using also
 	this namespace for the graph structure in Vaucanson introduced strange
