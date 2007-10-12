@@ -1,5 +1,12 @@
 2007-10-12  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Fix some compilations issues in one_rule_rewriting
+	* src/demos/one_rule_rewriting/ORR_demo.cc:,
+	* src/demos/one_rule_rewriting/fibonacci_demo.cc: Suppress include of
+	evaluation.hh.
+
+2007-10-12  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Fix some typos.
 	* include/vaucanson/algorithms/domain.hxx: Modify first argument's type
 	of image_dispatch, replace type S by AutomataBase<S>.

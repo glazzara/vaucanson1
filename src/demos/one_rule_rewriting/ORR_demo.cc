@@ -18,10 +18,6 @@
 #include <vaucanson/boolean_transducer.hh>
 
 #include <vaucanson/tools/dot_display.hh>
-#include <vaucanson/algorithms/krat_exp_expand.hh>
-#include <vaucanson/algorithms/evaluation.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
-#include <vaucanson/algorithms/transpose.hh>
 
 using namespace vcsn;
 using namespace vcsn::boolean_transducer;
