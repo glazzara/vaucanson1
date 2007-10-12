@@ -14,10 +14,13 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_Z_FMP_TRANSDUCER_HH
-# define VCSN_Z_FMP_TRANSDUCER_HH
 
-# include <vaucanson/z_fmp_transducer_structures.hh>
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_GRAPH_IMPL could be changed.
+ */
+
+# include GRAPH_CONTEXT_HEADER_(z_fmp_transducer_structures.hh)
 
 # define VCSN_CONTEXT_NAMESPACE namespace z_fmp_transducer
 # define AUTOMATON_CONTEXT z_automaton
@@ -27,4 +30,3 @@
 # undef VCSN_CONTEXT_NAMESPACE
 # undef AUTOMATON_CONTEXT
 
-#endif // ! VCSN_Z_FMP_TRANSDUCER_HH

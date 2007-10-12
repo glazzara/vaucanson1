@@ -14,10 +14,13 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_BOOLEAN_TRANSDUCER_HH
-# define VCSN_BOOLEAN_TRANSDUCER_HH
 
-# include <vaucanson/boolean_transducer_structures.hh>
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_GRAPH_IMPL could be changed.
+ */
+
+# include GRAPH_CONTEXT_HEADER_(boolean_transducer_structures.hh)
 
 # define VCSN_CONTEXT_NAMESPACE namespace boolean_transducer
 # define AUTOMATON_CONTEXT boolean_automaton
@@ -27,4 +30,3 @@
 # undef AUTOMATON_CONTEXT
 # undef VCSN_CONTEXT_NAMESPACE
 
-#endif // ! VCSN_BOOLEAN_TRANSDUCER_HH

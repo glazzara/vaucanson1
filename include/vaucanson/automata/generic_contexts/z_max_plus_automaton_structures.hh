@@ -15,8 +15,10 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_Z_MAX_PLUS_AUTOMATON_STRUCTURES_HH
-# define VCSN_Z_MAX_PLUS_AUTOMATON_STRUCTURES_HH
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_GRAPH_IMPL could be changed.
+ */
 
 # define VCSN_CONTEXT_NAMESPACE namespace z_max_plus_automaton
 
@@ -30,12 +32,14 @@
 
 namespace vcsn
 {
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
-    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+    VCSN_CONTEXT_NAMESPACE
+    {
+      AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+    }
   }
 }
 
 # undef VCSN_CONTEXT_NAMESPACE
 
-#endif // !VCSN_Z_MAX_PLUS_AUTOMATON_STRUCTURES_HH

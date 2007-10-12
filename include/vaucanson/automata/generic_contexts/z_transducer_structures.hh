@@ -15,11 +15,13 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_Z_TRANSDUCER_STRUCTURES_HH
-# define VCSN_Z_TRANSDUCER_STRUCTURES_HH
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_GRAPH_IMPL could be changed.
+ */
 
-# include <vaucanson/z_automaton_structures.hh>
-# include <vaucanson/boolean_automaton_structures.hh>
+# include GRAPH_CONTEXT_HEADER_(z_automaton_structures.hh)
+# include GRAPH_CONTEXT_HEADER_(boolean_automaton_structures.hh)
 
 # define AUTOMATON_CONTEXT z_automaton
 # define VCSN_CONTEXT_NAMESPACE namespace z_transducer
@@ -30,16 +32,19 @@
 
 namespace vcsn
 {
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
-    typedef AUTOMATON_CONTEXT::semiring_elt_t	output_semiring_elt_t;
-    typedef output_semiring_elt_t::set_t	output_semiring_t;
-    typedef output_semiring_elt_t::value_t	output_semiring_elt_value_t;
+    VCSN_CONTEXT_NAMESPACE
+    {
+      typedef AUTOMATON_CONTEXT::semiring_elt_t	output_semiring_elt_t;
+      typedef output_semiring_elt_t::set_t	output_semiring_t;
+      typedef output_semiring_elt_t::value_t	output_semiring_elt_value_t;
 
-    typedef AUTOMATON_CONTEXT::rat_exp_t	output_series_set_elt_t;
-    typedef output_series_set_elt_t::set_t	output_series_set_t;
-    typedef output_series_set_elt_t::value_t	output_series_set_elt_value_t;
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+      typedef AUTOMATON_CONTEXT::rat_exp_t	output_series_set_elt_t;
+      typedef output_series_set_elt_t::set_t	output_series_set_t;
+      typedef output_series_set_elt_t::value_t	output_series_set_elt_value_t;
+    } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of namespace VCSN_GRAPH_IMPL
 } // namespace vcsn
 
 # include <vaucanson/contexts/ratseries_semiring.thh>
@@ -49,11 +54,14 @@ namespace vcsn
 
 namespace vcsn
 {
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
-    AUTOMATON_TYPES_EXACT(automaton_t);
-    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
-  } // End of namespace VCSN_CONTEXT_NAMESPACE
+    VCSN_CONTEXT_NAMESPACE
+    {
+      AUTOMATON_TYPES_EXACT(automaton_t);
+      AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+    } // End of namespace VCSN_CONTEXT_NAMESPACE
+  } // End of namespace VCSN_GRAPH_IMPL
 } // End of namespace vcsn
 
 # include <vaucanson/contexts/transducer_maker.thh>
@@ -61,4 +69,3 @@ namespace vcsn
 # undef AUTOMATON_CONTEXT
 # undef VCSN_CONTEXT_NAMESPACE
 
-#endif // !VCSN_Z_TRANSDUCER_STRUCTURES_HH

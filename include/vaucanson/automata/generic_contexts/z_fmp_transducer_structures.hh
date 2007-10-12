@@ -15,28 +15,33 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_Z_FMP_TRANSDUCER_STRUCTURES_HH
-# define VCSN_Z_FMP_TRANSDUCER_STRUCTURES_HH
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_GRAPH_IMPL could be changed.
+ */
 
-# include <vaucanson/z_automaton_structures.hh>
+# include GRAPH_CONTEXT_HEADER_(z_automaton_structures.hh)
 
 # define AUTOMATON_CONTEXT z_automaton
 # define VCSN_CONTEXT_NAMESPACE namespace z_fmp_transducer
 
 namespace vcsn
 {
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
-    typedef AUTOMATON_CONTEXT::monoid_elt_t	first_monoid_elt_t;
-    typedef first_monoid_elt_t::set_t		first_monoid_t;
-    typedef first_monoid_elt_t::value_t		first_monoid_elt_value_t;
-    typedef first_monoid_t::alphabet_t		first_alphabet_t;
+    VCSN_CONTEXT_NAMESPACE
+    {
+      typedef AUTOMATON_CONTEXT::monoid_elt_t	first_monoid_elt_t;
+      typedef first_monoid_elt_t::set_t		first_monoid_t;
+      typedef first_monoid_elt_t::value_t		first_monoid_elt_value_t;
+      typedef first_monoid_t::alphabet_t		first_alphabet_t;
 
-    typedef AUTOMATON_CONTEXT::monoid_elt_t	second_monoid_elt_t;
-    typedef second_monoid_elt_t::set_t		second_monoid_t;
-    typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
-    typedef second_monoid_t::alphabet_t		second_alphabet_t;
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+      typedef AUTOMATON_CONTEXT::monoid_elt_t	second_monoid_elt_t;
+      typedef second_monoid_elt_t::set_t		second_monoid_t;
+      typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
+      typedef second_monoid_t::alphabet_t		second_alphabet_t;
+    } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of namespace VCSN_GRAPH_IMPL
 } // End of namespace vcsn
 
 # include <vaucanson/contexts/free_monoid_product.thh>
@@ -50,4 +55,3 @@ namespace vcsn
 # undef AUTOMATON_CONTEXT
 # undef VCSN_CONTEXT_NAMESPACE
 
-#endif // !VCSN_Z_FMP_TRANSDUCER_STRUCTURES_HH

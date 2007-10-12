@@ -16,21 +16,61 @@
 #
 
 # Set the default graph implementation here
-DEFAULT_GRAPH_IMPLEMENTATION="legacy"
+DEFAULT_GRAPH_IMPLEMENTATION="light"
 
 MK_FILE=generic_contexts.mk
 
-function write_context()
+write_default_context()
 {
-    UpperName=`echo $1| sed -e 's/\./\_/g' | tr "[:lower:]" "[:upper:]"`
+  fullname="vaucanson/$1"
+  UpperName=`echo $fullname| sed -e 's/[\.\/]/\_/g' | tr "[:lower:]" "[:upper:]"`
+  context=`echo $1 | cut -d '.' -f 1 | sed -e 's/_structures//g'`
+
+  cat > $fullname <<-EOF 
+#ifndef $UpperName
+# define $UpperName
+
+# include <vaucanson/misc/usual_macros.hh>
+EOF
+
+  for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
+    echo "# include <vaucanson/contexts/$impl/$1>" >> $fullname
+  done
+
+  cat >> $fullname <<-EOF
+
+# include <vaucanson/config/pconf.hh>
+namespace vcsn
+{
+  namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
+}
+
+#endif // !$UpperName
+EOF
+
+  echo "  $fullname	  \\" >> $MK_FILE
+}
+
+write_context()
+{
+    UpperName=`echo $1| sed -e 's/[\.\/]/\_/g' | tr "[:lower:]" "[:upper:]"`
     cat > $1 <<-EOF 
 #ifndef $UpperName
 # define $UpperName
-# define VCSN_GRAPH_IMPL $2
+# ifndef VCSN_GRAPH_IMPL
+#  define VCSN_GRAPH_IMPL $2
+# else
+#  define DONT_UNDEF
+# endif
 
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/generic_contexts/$3>
 
-# undef VCSN_GRAPH_IMPL
+# ifndef DONT_UNDEF
+#  undef VCSN_GRAPH_IMPL
+# else
+#  undef DONT_UNDEF
+# endif
 #endif // !$UpperName
 EOF
 
@@ -38,7 +78,7 @@ EOF
 
 }
 
-function write_gpl_header()
+write_gpl_header()
 {
   cat > $MK_FILE <<-EOF
 ## Vaucanson, a generic library for finite state machines.
@@ -59,30 +99,26 @@ function write_gpl_header()
 EOF
 }
 
-function main()
+main()
 {
   write_gpl_header
 
-  echo "GENERIC_CONTEXTS +=	  \\" >> $MK_FILE
+  echo "GENERIC_CONTEXTS =	  \\" >> $MK_FILE
 
 #Creating directories
   for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
-    mkdir -p vaucanson/contexts/$impl
+      mkdir -p vaucanson/contexts/$impl
   done
 
   for header in `find vaucanson/automata/generic_contexts/ -name '*.hh' -printf '%f\n'`; do
+     write_default_context $header
     for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
-
-      if [ "$impl" = "$DEFAULT_GRAPH_IMPLEMENTATION" ]; then
-	write_context vaucanson/$header $impl $header
-      fi
 	write_context vaucanson/contexts/$impl/$header $impl $header
-
     done
   done
 
   echo "nobase_include_HEADERS += \$(GENERIC_CONTEXTS)" >> $MK_FILE
-  echo "MAINTAINERCLEANFILES += \$(GENERIC_CONTEXTS)" >> $MK_FILE
+  echo "MAINTAINERCLEANFILES = \$(GENERIC_CONTEXTS)" >> $MK_FILE
 }
 
 main

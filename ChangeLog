@@ -1,5 +1,37 @@
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix generic context headers includes
+	There were some problems with function redefinitions/missing functions
+	while compiling with different kind of automata.
+	CPP guards have been removed in the generic contexts and are now
+	correctly instanciated according to the graph implementation.
+	A new macro also prevents the VCSN_GRAPH_IMPL from being undefined while
+	including several graph implementation headers.
+
+	* include/Makefile.am: Update path to header files.
+	* include/generate_headers.sh: Fix the generated headers.
+	* include/vaucanson/automata/generic_contexts/boolean_automaton.hh,
+	* include/vaucanson/automata/generic_contexts/boolean_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/boolean_transducer.hh,
+	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/fmp_transducer.hh,
+	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/r_automaton.hh,
+	* include/vaucanson/automata/generic_contexts/r_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_automaton.hh,
+	* include/vaucanson/automata/generic_contexts/z_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer.hh,
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton.hh,
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton.hh,
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_transducer.hh,
+	* include/vaucanson/automata/generic_contexts/z_transducer_structures.hh:
+	CPP guards removed.
+
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Move portions of code in VCSN_GRAPH_IMPL namespace
 	This code depends on the graph structure thus it had to be part of the
 	VCSN_GRAPH_IMPL namespace.

@@ -14,10 +14,13 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_R_AUTOMATON_HH
-# define VCSN_R_AUTOMATON_HH
 
-# include <vaucanson/r_automaton_structures.hh>
+/*
+ * CPP guard should not be inserted here as
+ * VCSN_GRAPH_IMPL could be changed.
+ */
+
+# include GRAPH_CONTEXT_HEADER_(r_automaton_structures.hh)
 
 # define VCSN_CONTEXT_NAMESPACE namespace r_automaton
 
@@ -25,4 +28,3 @@
 
 # undef VCSN_CONTEXT_NAMESPACE
 
-#endif // ! VCSN_R_AUTOMATON_HH
