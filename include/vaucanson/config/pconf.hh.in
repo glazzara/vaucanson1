@@ -17,3 +17,9 @@
 
 /** The XML namespace for this package. */
 #undef VCSN_XMLNS
+
+/** Default graph implementation */
+#ifndef VCSN_DEFAULT_GRAPH_IMPL
+# undef VCSN_DEFAULT_GRAPH_IMPL
+#endif
+

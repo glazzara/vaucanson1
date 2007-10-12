@@ -87,6 +87,9 @@ AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"],
 AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
 		   [Root of the XML namespace.])
 
+AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [light],
+		   [Default graph implementation.])
+
 
 ## ------------ ##
 ## Components.  ##
@@ -159,6 +162,7 @@ AC_CONFIG_FILES([
 	  src/benchs/Makefile
 	    src/benchs/common/Makefile
 	    src/benchs/determinization/Makefile
+	    src/benchs/eps_removal/Makefile
 	    src/benchs/minimization_debruijn/Makefile
 	    src/benchs/minimization_2n/Makefile
 	    src/benchs/quotient/Makefile

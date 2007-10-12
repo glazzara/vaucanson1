@@ -1,3 +1,17 @@
+2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Introduce VCSN_DEFAULT_GRAPH_IMPL macro
+	Since we would like to have a basic implementation converted into
+	others automatically in the algorithms, we needed a macro to define
+	it and let the user change it as needed.
+	The default value is set during the configure and written in the
+	pconf.hh file.
+	The default graph implementation is also used in libvcsn.
+
+	* configure.ac: Set the default value of this macro.
+	* include/vaucanson/config/pconf.hh.in: Ask configure to write it there.
+	* lib/generate_libvcsn.rb: Use the default implementation.
+
 2007-10-06  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Change the target directory for the generated context headers.

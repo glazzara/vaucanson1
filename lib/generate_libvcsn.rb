@@ -178,11 +178,11 @@ files.each { |file|
 	# GenAutomaton is ignored to avoid multiple definitions
 	if contents[i] !~ /GenAutomaton/
 	  tmp = contents[i].gsub(/^\s*\/\/\s*INTERFACE:\s*(.*)\s+\{.*/, '  \1;')
-	  tmp = tmp.gsub(/Automaton/, 'VCSN_CONTEXT::automaton_t')
-	  tmp = tmp.gsub(/HList/, 'std::set<VCSN_CONTEXT::automaton_t::hstate_t>')
-	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_CONTEXT::rat_exp_impl_t')
-	  tmp = tmp.gsub(/Exp/, 'VCSN_CONTEXT::rat_exp_t')
-	  tmp = tmp.gsub(/Series/, 'VCSN_CONTEXT::series_set_elt_t')
+	  tmp = tmp.gsub(/Automaton/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t')
+	  tmp = tmp.gsub(/HList/, 'std::set<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::hstate_t>')
+	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_impl_t')
+	  tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
+	  tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
 	  output.push("  template", tmp)
 	end
       end
