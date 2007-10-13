@@ -26,7 +26,7 @@ tmp=$out.tmp
 # Compute files to test.
 (cd ../../../include && 
     find vaucanson -type f -name \*.hh) |
-grep -vE 'old/|obsolete/|\.svn/|contextual_(automaton|transducer)_' > files.tmp
+grep -vE 'generic_contexts/|old/|obsolete/|\.svn/|contextual_(automaton|transducer)_' > files.tmp
 
 # Set check_PROGRAMS.
 cat > $tmp << EOF

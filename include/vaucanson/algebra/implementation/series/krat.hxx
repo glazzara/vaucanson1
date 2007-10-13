@@ -33,7 +33,19 @@
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/automata/concept/automata.hh>
 
-# include GRAPH_IMPL_HEADER
+# ifdef VCSN_GRAPH_IMPL
+#
+#  include GRAPH_IMPL_HEADER
+#
+# else
+#
+#  include <vaucanson/config/pconf.hh>
+#  include GRAPH_DEFAULT_IMPL_HEADER
+#
+#  define VCSN_GRAPH_IMPL VCSN_DEFAULT_GRAPH_IMPL
+#  define UNDEF_VCSN_GRAPH_IMPL
+#
+# endif
 # include <vaucanson/misc/contract.hh>
 
 
@@ -730,5 +742,10 @@ namespace vcsn {
   }
 
 } // vcsn
+
+#ifdef UNDEF_VCSN_GRAPH_IMPL
+# undef VCSN_GRAPH_IMPL
+# undef UNDEF_VCSN_GRAPH_IMPL
+#endif
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_HXX

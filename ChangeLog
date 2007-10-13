@@ -1,3 +1,14 @@
+2007-10-13  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix compilation issues
+	The make check didn't compile properly and useless tests were generated.
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/automata/implementation/generalized.hh: Fix includes.
+	* include/vaucanson/misc/sparse_interval.hh: Add a const_iterator.
+	* src/tests/sanity/generate_files.sh: ignore the generic_context directory
+	for the test generation.
+
 2007-10-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Remove useless namespace

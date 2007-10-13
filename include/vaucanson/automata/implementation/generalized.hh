@@ -26,7 +26,20 @@
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/misc/usual_macros.hh>
-# include GRAPH_IMPL_HEADER
+# ifdef VCSN_GRAPH_IMPL
+#
+#  include GRAPH_IMPL_HEADER
+#
+# else
+#
+#  include <vaucanson/config/pconf.hh>
+#  include GRAPH_DEFAULT_IMPL_HEADER
+#
+#  define VCSN_GRAPH_IMPL VCSN_DEFAULT_GRAPH_IMPL
+#  define UNDEF_VCSN_GRAPH_IMPL
+#
+# endif
+
 
 namespace vcsn {
 
@@ -72,6 +85,11 @@ namespace vcsn {
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/automata/implementation/generalized.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
+
+#ifdef UNDEF_VCSN_GRAPH_IMPL
+# undef VCSN_GRAPH_IMPL
+# undef UNDEF_VCSN_GRAPH_IMPL
+#endif
 
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GENERALIZED_HH
