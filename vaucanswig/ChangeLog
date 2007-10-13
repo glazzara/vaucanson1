@@ -1,3 +1,10 @@
+2007-10-13  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix vaucanswig Makefile.am
+	There was a mistyped variable name.
+
+	* vaucanswig/Makefile.am: here.
+
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix Python include path

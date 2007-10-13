@@ -12,4 +12,4 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 SUBDIRS = meta src python
-EXTRA_DIRST = expand.sh
+EXTRA_DIST = expand.sh
