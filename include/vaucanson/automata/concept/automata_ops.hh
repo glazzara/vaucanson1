@@ -40,6 +40,13 @@ namespace vcsn {
   /// @name Default operation on automata.
   //@{
 
+  /// Assignement operator between two implementations of a Structure<S>.
+  template<typename S, typename T, typename U>
+  void
+  op_assign(const Structure<S>& s,
+	    T& dst, const U& src);
+
+
   template <class S, class T>
   const typename automaton_traits<T>::tag_t&
   op_get_tag(const AutomataBase<S>&, const T&);

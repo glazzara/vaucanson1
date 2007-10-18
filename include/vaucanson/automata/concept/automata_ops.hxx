@@ -28,6 +28,50 @@ namespace vcsn {
 #define AutoType(Type)				\
   typename Element<S, T>::Type
 
+  template<typename S, typename T, typename U>
+  void
+  op_assign(const AutomataBase<S>& concept, T& dst, const U& src)
+  {
+    typedef typename automaton_traits<T>::hstate_t dst_hstate_t;
+    typedef typename automaton_traits<U>::hstate_t src_hstate_t;
+    typedef typename automaton_traits<U>::transition_iterator transition_iterator;
+    typedef typename automaton_traits<U>::final_iterator final_iterator;
+    typedef typename automaton_traits<U>::initial_iterator initial_iterator;
+    typedef typename automaton_traits<U>::state_iterator state_iterator;
+
+    dst = T(0, op_transitions(concept, src).size());
+
+    std::map<src_hstate_t, dst_hstate_t> states_map;
+    //Mapping src's states to dst's states
+    for (state_iterator s = op_states(concept, src).begin(),
+	  s_end = op_states(concept, src).end(); s != s_end; ++s)
+      states_map[*s] = dst.add_state();
+
+    //Adding all transitions
+    for (transition_iterator t = op_transitions(concept, src).begin(),
+	  t_end = op_transitions(concept, src).end(); t != t_end; ++t)
+      op_add_transition(concept,
+			dst,
+			states_map[src.src_of(*t)],
+			states_map[src.dst_of(*t)],
+			src.label_of(*t));
+
+    for (initial_iterator i = op_initial(concept, src).begin(),
+	  i_end = op_initial(concept, src).end(); i != i_end; ++i)
+      op_set_initial(concept,
+		     dst,
+		     states_map[*i],
+		     op_get_initial(concept, src, *i));
+
+    for (final_iterator f = op_final(concept, src).begin(),
+	  f_end = op_final(concept, src).end(); f != f_end; ++f)
+      op_set_final(concept,
+		   dst,
+		   states_map[*f], op_get_final(concept, src, *f));
+
+    //FIXME: geometry isn't preserved during this conversion.
+  }
+
   template <class S, class T>
   const typename automaton_traits<T>::tag_t&
   op_get_tag(const AutomataBase<S>&, const T& v)

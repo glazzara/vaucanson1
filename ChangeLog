@@ -1,5 +1,17 @@
 2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Enable generic Graph structure conversion.
+	By default, the source Graph was just copied to the destination one.
+	Since the structures can be different, I needed to implement a generic
+	Graph copy using the op_* operators.
+	Be careful, currently this copy doesn't preserve the Geometry object.
+	* include/vaucanson/automata/concept/automata_ops.hh: .
+	* include/vaucanson/automata/concept/automata_ops.hxx: .
+	* include/vaucanson/design_pattern/default_ops.hh: .
+	* inclu de/vaucanson/design_pattern/default_ops.hxx: .
+
+2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Various small fixes
 	* Makefile.am: Fix a compilation dependency issue.
 	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
