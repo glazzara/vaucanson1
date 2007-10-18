@@ -1,3 +1,11 @@
+2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix MacOs compatibility for the header generation script
+	The script failed with errors.
+	gfind must be used on MacOs.
+	Double quotes had to be replaced by simple quotes.
+	* include/generate_headers.sh: here. 
+
 2007-10-13  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix compilation issues

@@ -19,6 +19,11 @@
 DEFAULT_GRAPH_IMPLEMENTATION="light"
 
 MK_FILE=generic_contexts.mk
+FIND="find"
+if [ -z "`find -printf '%f' 2>/dev/null`" ]; then
+  FIND="gfind"
+fi
+
 
 write_default_context()
 {
@@ -33,7 +38,7 @@ write_default_context()
 # include <vaucanson/misc/usual_macros.hh>
 EOF
 
-  for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
+  for impl in `$FIND vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' 2>/dev/null | sed -e 's/_graph_impl.hh//g'`; do 
     echo "# include <vaucanson/contexts/$impl/$1>" >> $fullname
   done
 
@@ -103,22 +108,22 @@ main()
 {
   write_gpl_header
 
-  echo "GENERIC_CONTEXTS =	  \\" >> $MK_FILE
+  echo 'GENERIC_CONTEXTS =	  \\' >> $MK_FILE
 
 #Creating directories
-  for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
+  for impl in `$FIND vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' 2>/dev/null | sed -e 's/_graph_impl.hh//g'`; do 
       mkdir -p vaucanson/contexts/$impl
   done
 
-  for header in `find vaucanson/automata/generic_contexts/ -name '*.hh' -printf '%f\n'`; do
+  for header in `$FIND vaucanson/automata/generic_contexts/ -name '*.hh' -printf '%f\n' 2>/dev/null`; do
      write_default_context $header
-    for impl in `find vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' | sed -e 's/_graph_impl.hh//g'`; do 
+    for impl in `$FIND vaucanson/automata/implementation -name '*_graph_impl.hh' -printf '%f\n' 2>/dev/null | sed -e 's/_graph_impl.hh//g'`; do 
 	write_context vaucanson/contexts/$impl/$header $impl $header
     done
   done
 
-  echo "nobase_include_HEADERS += \$(GENERIC_CONTEXTS)" >> $MK_FILE
-  echo "MAINTAINERCLEANFILES = \$(GENERIC_CONTEXTS)" >> $MK_FILE
+  echo 'nobase_include_HEADERS += \$(GENERIC_CONTEXTS)' >> $MK_FILE
+  echo 'MAINTAINERCLEANFILES = \$(GENERIC_CONTEXTS)' >> $MK_FILE
 }
 
 main
