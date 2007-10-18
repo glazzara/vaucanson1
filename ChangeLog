@@ -1,5 +1,9 @@
 2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	update svn:ignore property 
+
+2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Enable generic Graph structure conversion.
 	By default, the source Graph was just copied to the destination one.
 	Since the structures can be different, I needed to implement a generic
