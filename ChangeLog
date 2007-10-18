@@ -1,5 +1,13 @@
 2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Various small fixes
+	* Makefile.am: Fix a compilation dependency issue.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* include/vaucanson/automata/implementation/light_graph_impl.hh: Fix variable names.
+
+2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix MacOs compatibility for the header generation script
 	The script failed with errors.
 	gfind must be used on MacOs.

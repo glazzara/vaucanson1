@@ -306,8 +306,8 @@ namespace vcsn
 
 
 	Graph ();
-	Graph (unsigned int initial_number_of_state,
-	       unsigned int number_of_edge_initially_allocated);
+	Graph (unsigned int reserve_number_of_state,
+	       unsigned int reserve_number_edge);
 	Graph (const self_t&);
 	~Graph ();
 
@@ -497,7 +497,7 @@ namespace vcsn
 # undef BOOSTGRAPH
 # undef BOOSTGRAPH_TPARAM
 
-  } // End of namespace boost
+  } // End of namespace boostg
 
   // This implementation can be used as an implementation of automaton.
   VCSN_MAKE_AUTOMATON_TRAITS(boostg::Graph);

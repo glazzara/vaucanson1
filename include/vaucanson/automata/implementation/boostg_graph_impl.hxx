@@ -75,7 +75,7 @@ namespace vcsn
     */
     BOOSTGRAPH_TPARAM
     BOOSTGRAPH::Graph (unsigned initial_number_of_states,
-                      unsigned reserve_number_of_edge)
+                      unsigned)
       : initial_bitset_(initial_number_of_states),
         final_bitset_(initial_number_of_states),
         number_of_epsilon_(0),

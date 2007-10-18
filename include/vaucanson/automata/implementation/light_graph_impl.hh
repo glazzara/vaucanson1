@@ -124,7 +124,7 @@ namespace vcsn
 	// initial_number_of_state - 1 when using this constructor.
 	Graph();
 	Graph(unsigned initial_number_of_state,
-	      unsigned number_of_edge_initially_allocated);
+	      unsigned reserve_number_of_edge);
 
 	/// Return states set.
 	states_t	    states() const;
