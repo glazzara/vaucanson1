@@ -1,5 +1,42 @@
 2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	New script to help the developers to add a new graph structure.
+	Thanks to this script, developers can develop their own structures in
+	their projects. Then they can run the script over their graph
+	implementation headers and it will generate all the context headers
+	they would need to use their structure with Vaucanson.
+	
+	Example:
+	========
+	
+	Project directory:
+	
+	    * include/
+	      * mine_graph_impl.hh
+	      * mine_graph_impl.hxx
+
+	in the include directory, run:
+
+	  vcsn_add_impl.sh mine_graph_impl.hh --vcsn-include-dir=path/to/vcsn/include
+	
+	Then in your project directory you have now:
+	    * include/
+	      * mine
+		* boolean_automaton.hh
+		* boolean_transducer.hh
+		* fmp_transducer.hh
+		* ...
+	      * mine_graph_impl.hh
+	      * mine_graph_impl.hxx
+	
+	You just need to include the proper header to use your graph structure
+	with Vaucanson.
+	
+	* tools/vcsn_add_impl.sh: New.
+	* tools: New.
+
+2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Introduce two news macros. 
 	I needed to introduce VCSN_GRAPH_IMPL_INCLUDE_PATH and
 	VCSN_CONTEXT_INCLUDE_PATH in order to make easier the possibility
