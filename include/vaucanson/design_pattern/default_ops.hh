@@ -117,11 +117,6 @@ namespace vcsn {
   | Assignment |
   `-----------*/
 
-  template<typename S, typename T, typename U>
-  void
-  op_assign(const Structure<S>& s,
-	    T& dst, const T& src);
-
   /**
    * @brief Assignement operator between two implementations of two
    *        differents structures.

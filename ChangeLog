@@ -1,3 +1,11 @@
+2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
+
+ 	Remove multiple declarations of op_assign operator.
+	* include/vaucanson/automata/concept/automata_ops.hxx: cleanup.
+	* include/vaucanson/design_pattern/default_ops.hh,
+	* include/vaucanson/design_pattern/default_ops.hxx:
+	remove multiple declarations.
+
 2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	update svn:ignore property 

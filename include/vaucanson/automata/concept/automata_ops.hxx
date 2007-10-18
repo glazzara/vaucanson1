@@ -42,6 +42,7 @@ namespace vcsn {
     dst = T(0, op_transitions(concept, src).size());
 
     std::map<src_hstate_t, dst_hstate_t> states_map;
+
     //Mapping src's states to dst's states
     for (state_iterator s = op_states(concept, src).begin(),
 	  s_end = op_states(concept, src).end(); s != s_end; ++s)
@@ -56,6 +57,7 @@ namespace vcsn {
 			states_map[src.dst_of(*t)],
 			src.label_of(*t));
 
+    //Adding initial states
     for (initial_iterator i = op_initial(concept, src).begin(),
 	  i_end = op_initial(concept, src).end(); i != i_end; ++i)
       op_set_initial(concept,
@@ -63,6 +65,7 @@ namespace vcsn {
 		     states_map[*i],
 		     op_get_initial(concept, src, *i));
 
+    //Adding final states
     for (final_iterator f = op_final(concept, src).begin(),
 	  f_end = op_final(concept, src).end(); f != f_end; ++f)
       op_set_final(concept,
