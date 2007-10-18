@@ -189,16 +189,16 @@
     <PATH/BOOST_PP_CAT(FILE, SUFFIX)>
 
 # define GRAPH_IMPL_HEADER \
-    VARIANT_INCLUDE_FILE(vaucanson/automata/implementation,VCSN_GRAPH_IMPL,_graph_impl.hh)
+    VARIANT_INCLUDE_FILE(VCSN_GRAPH_IMPL_INCLUDE_PATH,VCSN_GRAPH_IMPL,_graph_impl.hh)
 
 # define GRAPH_DEFAULT_IMPL_HEADER \
-    VARIANT_INCLUDE_FILE(vaucanson/automata/implementation,VCSN_DEFAULT_GRAPH_IMPL,_graph_impl.hh)
+    VARIANT_INCLUDE_FILE(VCSN_GRAPH_IMPL_INCLUDE_PATH,VCSN_DEFAULT_GRAPH_IMPL,_graph_impl.hh)
 
 # define GRAPH_CONTEXT_HEADER(Impl, Context) \
-    VARIANT_INCLUDE_FILE(vaucanson/contexts,Impl,/Context)
+    VARIANT_INCLUDE_FILE(VCSN_CONTEXT_INCLUDE_PATH,Impl,/Context)
 
 # define GRAPH_CONTEXT_HEADER_(Context) \
-    <vaucanson/contexts/VCSN_GRAPH_IMPL/Context>
+    <VCSN_CONTEXT_INCLUDE_PATH/VCSN_GRAPH_IMPL/Context>
 
 # include <vaucanson/misc/global_timer.hh>
 

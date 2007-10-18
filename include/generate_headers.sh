@@ -64,6 +64,8 @@ write_context()
 # define $UpperName
 # ifndef VCSN_GRAPH_IMPL
 #  define VCSN_GRAPH_IMPL $2
+#  define VCSN_GRAPH_IMPL_INCLUDE_PATH vaucanson/automata/implementation
+#  define VCSN_CONTEXT_INCLUDE_PATH vaucanson/contexts
 # else
 #  define DONT_UNDEF
 # endif
@@ -73,6 +75,8 @@ write_context()
 
 # ifndef DONT_UNDEF
 #  undef VCSN_GRAPH_IMPL
+#  undef VCSN_GRAPH_IMPL_INCLUDE_PATH
+#  undef VCSN_CONTEXT_INCLUDE_PATH
 # else
 #  undef DONT_UNDEF
 # endif
