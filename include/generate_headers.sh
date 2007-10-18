@@ -44,11 +44,14 @@ EOF
 
   cat >> $fullname <<-EOF
 
-# include <vaucanson/config/pconf.hh>
+# ifndef ALIAS_$context
+#  define ALIAS_$context
+#  include <vaucanson/config/pconf.hh>
 namespace vcsn
 {
   namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
 }
+# endif
 
 #endif // !$UpperName
 EOF

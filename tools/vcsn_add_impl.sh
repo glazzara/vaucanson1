@@ -27,8 +27,9 @@ EOF
 
 write_context()
 {
-    UpperName=`echo "$1/$2/$3" | sed -e 's/[\.\/]/\_/g' | tr "[:lower:]" "[:upper:]"`
-    cat > "$1/$2/$3" <<-EOF 
+  UpperName=`echo "$1/$2/$3" | sed -e 's/[\.\/]/\_/g' | tr "[:lower:]" "[:upper:]"`
+  context=`echo $3 | cut -d '.' -f 1 | sed -e 's/_structures//g'`
+  cat > "$1/$2/$3" <<-EOF 
 #ifndef $UpperName
 # define $UpperName
 # ifndef VCSN_GRAPH_IMPL
@@ -49,6 +50,15 @@ write_context()
 # else
 #  undef DONT_UNDEF
 # endif
+
+# ifndef ALIAS_$context && ifdef VCSN_DEFAULT_GRAPH_IMPL
+#  define ALIAS_$context
+namespace vcsn
+{
+  namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
+}
+# endif
+
 #endif // !$UpperName
 EOF
 }

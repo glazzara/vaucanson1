@@ -1,5 +1,14 @@
 2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Provide namespace aliases for external graph structures . 
+	In case the developer would like to use only his own structure,
+	we want to provide the namespace alias if he sets that
+	structure as the default one.
+	* include/generate_headers.sh,
+	* tools/vcsn_add_impl.sh: here.
+
+2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	New script to help the developers to add a new graph structure.
 	Thanks to this script, developers can develop their own structures in
 	their projects. Then they can run the script over their graph
