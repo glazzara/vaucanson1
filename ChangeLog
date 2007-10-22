@@ -1,5 +1,10 @@
 2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add a better usage output for vsn_add_impl.sh
+	* vcsn_add_impl.sh: here.
+
+2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix compilation issues 
 	Since krat.hxx can be included without any automata structure
 	headers included, we need to provide default values to specific

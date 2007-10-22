@@ -21,7 +21,42 @@ INCLUDE_DIR="/usr/local/include"
 usage()
 {
   cat << EOF
-    Usage: vcsn_add_impl.sh --vcsn-include-dir=<path> [--output-dir=<path>] [path/*_graph_impl.hh]
+Usage: vcsn_add_impl.sh --vcsn-include-dir=<path> [--output-dir=<path>] [path/*_graph_impl.hh]
+
+    Decription:
+    ===========
+
+
+    How to use it?
+    ==============
+    
+    1) In your project directory you may have the following hierarchy:
+      
+      * include/
+	  * mine_graph_impl.hh
+      * mine_graph_impl.hxx
+  
+	
+    2) in the include directory, run:
+
+	vcsn_add_impl.sh mine_graph_impl.hh --vcsn-include-dir=path/to/vcsn/include
+  	
+	
+    3) Then in your project directory you have now:
+    
+      * include/
+	* mine
+	  * boolean_automaton.hh
+	  * boolean_transducer.hh
+	  * fmp_transducer.hh
+	  * ...
+	* mine_graph_impl.hh
+	* mine_graph_impl.hxx
+					
+								      
+	4) You just need to include the proper header to use your graph structure
+	   with Vaucanson.
+    
 EOF
 }
 
@@ -69,6 +104,8 @@ parse_option()
     INCLUDE_DIR="`echo $1 | sed -ne s/--vcsn-include-path=//p`"
   elif ! [ -z "`echo $1 | sed -ne '/--output-dir='/p`" ]; then
     OUTPUT_DIR="`echo $1 | sed -ne s/--output-dir=//p`"
+  elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+    usage
   else
     return 1
   fi
