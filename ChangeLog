@@ -1,3 +1,9 @@
+2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Don't build examples in data/ with 'all' anymore.  
+	Examples in data are now built with 'make demos'.
+	* Makefile.am: here.
+
 2007-10-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Fix taf-kit output for commmands with two arguments.
