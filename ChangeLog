@@ -1,3 +1,13 @@
+2007-10-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Fix taf-kit output for commmands with two arguments.
+	Commands taking two parameters were outputing nothing.
+	This was due to change in macros since internal pipe was add.
+
+	* taf-kit/src/commands_macros.hh: Use KEEP_AUTOMATON instead of OUTPUT.
+	* taf-kit/tests/vcsn-b.test: Add tests on two paramater	commands to
+	check that they ouput some XML.
+
 2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Remove obsolete xml proposal from doc

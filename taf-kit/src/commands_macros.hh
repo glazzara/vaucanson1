@@ -94,7 +94,7 @@
 # define DEFINE_TWO_ARGS_COMMAND_(GetArg, Algo)		\
   DEFINE_COMMAND (NAME (Algo)				\
 		  CODE (/* Empty */)			\
-		  OUTPUT (				\
+		  KEEP_AUTOMATON (			\
 		    Algo (GetArg (args.args[1]),	\
 			  GetArg (args.args[2])))	\
 		  RETURNVALUE (0))

@@ -110,6 +110,9 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
 
+vcsn-b product $a1 $a1 \| identity -
+vcsn-b concatenate $a1 $a1 \| identity -
+
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
