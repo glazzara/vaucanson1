@@ -1,3 +1,12 @@
+2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Remove obsolete xml proposal from doc
+	This patch follows Jacques's comments about the documentation.
+	* Makefile.am: remove xml directory subdir.
+	* xml/Makefile.am: Remove.
+	* xml/xml_proposal.tex: Remove.
+	* xml: Remove.
+
 2007-10-12  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Fix some compilations issues in one_rule_rewriting

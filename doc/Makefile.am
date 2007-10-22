@@ -14,7 +14,7 @@
 include $(top_srcdir)/vaucanson.mk
 include $(srcdir)/doc.mk
 
-SUBDIRS = manual xml
+SUBDIRS = manual
 
 all-local: $(srcdir)/stamp
 
