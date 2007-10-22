@@ -133,6 +133,13 @@ namespace vcsn {
   `-----------*/
 
   template<typename S, typename T, typename U>
+  void
+  op_assign(const Structure<S>&, T& dst, const U& src)
+  {
+    dst = src;
+  }
+
+  template<typename S, typename T, typename U>
   void op_assign(const Structure<S>& s1,
 		 const Structure<S>& s2,
 		 T& dst,

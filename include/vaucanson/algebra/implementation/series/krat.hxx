@@ -40,6 +40,8 @@
 # else
 #
 #  include <vaucanson/config/pconf.hh>
+#  define VCSN_GRAPH_IMPL_INCLUDE_PATH vaucanson/automata/implementation
+#  define VCSN_CONTEXT_INCLUDE_PATH vaucanson/contexts
 #  include GRAPH_DEFAULT_IMPL_HEADER
 #
 #  define VCSN_GRAPH_IMPL VCSN_DEFAULT_GRAPH_IMPL

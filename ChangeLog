@@ -1,3 +1,24 @@
+2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix compilation issues 
+	Since krat.hxx can be included without any automata structure
+	headers included, we need to provide default values to specific
+	macros.
+	Also, when I moved the op_assign function, I removed the default
+	implementation which was used for the series. So I restored
+	the default implementation.
+	The op_assign function in automata_ops.hh was not specialized 
+	for AutomataBase.
+  
+	* include/vaucanson/algebra/implementation/series/krat.hxx:
+	Set default values to VCSN_GRAPH_IMPL_INCLUDE_PATH and 
+	VCSN_CONTEXT_INCLUDE_PATH macros.
+	* include/vaucanson/automata/concept/automata_ops.hh: Update
+	op_assign function declaration.
+	* include/vaucanson/design_pattern/default_ops.hh,
+	* include/vaucanson/design_pattern/default_ops.hxx: restore
+	an op_assign function previously moved to automata_ops_.hh.
+
 2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Provide namespace aliases for external graph structures . 
