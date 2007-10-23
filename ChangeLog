@@ -1,5 +1,18 @@
 2007-10-23  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Fix is-ambiguous taf-kit's tests.
+	Ambiguous and non-ambiguous automata were swapped.
+	* taf-kit/tests/automata/b/ambiguous.xml: Rename as...
+	* taf-kit/tests/automata/b/non_ambiguous.xml: Here.
+	* taf-kit/tests/automata/b/ambiguous1.xml: Rename as...
+	* taf-kit/tests/automata/b/non_ambiguous1.xml: Here.
+	* taf-kit/tests/automata/b/ambiguous2.xml: Rename as...
+	* taf-kit/tests/automata/b/non_ambiguous2.xml: Here.
+	* taf-kit/tests/defs.in: Rename variables accordingly to renaming.
+	* taf-kit/tests/vcsn-b.test: Update tests accordingly to renaming.
+
+2007-10-23  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Fix is_ambiguous return value.
 	is_ambiguous was returning true when it should return false,
 	and vice-versa.

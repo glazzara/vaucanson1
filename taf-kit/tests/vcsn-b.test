@@ -78,9 +78,9 @@ test "$(vcsn-b eval $a1 'ab')" = 1
 test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 # is-ambiguous
+  vcsn-b is-ambiguous $ambiguous1
+  vcsn-b is-ambiguous $ambiguous2
 ! vcsn-b is-ambiguous $non_ambiguous1
-! vcsn-b is-ambiguous $non_ambiguous2
-  vcsn-b is-ambiguous $ambiguous
 
 # is-complete
 ! vcsn-b is-complete $a1
