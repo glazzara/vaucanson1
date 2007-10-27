@@ -35,6 +35,7 @@ write_default_context()
 #ifndef $UpperName
 # define $UpperName
 
+# include <vaucanson/config/pconf.hh>
 # include <vaucanson/misc/usual_macros.hh>
 EOF
 
@@ -46,7 +47,6 @@ EOF
 
 # ifndef ALIAS_$context
 #  define ALIAS_$context
-#  include <vaucanson/config/pconf.hh>
 namespace vcsn
 {
   namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
@@ -73,8 +73,22 @@ write_context()
 #  define DONT_UNDEF
 # endif
 
+# ifndef VCSN_DEFAULT_GRAPH_IMPL
+#  define VCSN_DEFAULT_GRAPH_IMPL $2
+#  define VCSN_ALIAS_NAMESPACE
+# endif
+ 
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/generic_contexts/$3>
+
+# if !defined(ALIAS_$context) && defined(VCSN_ALIAS_NAMESPACE)
+#  define ALIAS_$context
+namespace vcsn
+{
+  namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
+}
+#  undef VCSN_ALIAS_NAMESPACE
+# endif
 
 # ifndef DONT_UNDEF
 #  undef VCSN_GRAPH_IMPL

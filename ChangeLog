@@ -1,5 +1,14 @@
 2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Improve generated context headers
+	The default implementation is now set up automagically when
+	an implementation is used alone by including its headers.
+	In case several context headers are included, the first
+	implementation included is the default one.
+	* include/generate_headers.sh: here.
+
+2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix a test.
 	A templated function was specialized with a wrong type.
 	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh: .
