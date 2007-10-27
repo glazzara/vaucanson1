@@ -60,8 +60,8 @@ global_consistency_test(tests::Tester& t)
   automata_set_t	aa (ss);
 
   rat_exp_t		e (ss);
-  rat_exp_t		f = make_rat_exp<Automaton>(at);
-  rat_exp_t		g = make_rat_exp<Automaton>(at, "a+b");
+  rat_exp_t		f = make_rat_exp(at);
+  rat_exp_t		g = make_rat_exp(at, "a+b");
   TEST(t, "make_rat_exp works. [1/3]", e == f);
   TEST(t, "make_rat_exp works. [2/3]", g != f);
 

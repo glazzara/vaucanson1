@@ -1,3 +1,9 @@
+2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix a test.
+	A templated function was specialized with a wrong type.
+	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh: .
+
 2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add a better usage output for vsn_add_impl.sh
