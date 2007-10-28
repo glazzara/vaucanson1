@@ -32,14 +32,21 @@ namespace vcsn {
   void
   op_assign(const AutomataBase<S>& concept, T& dst, const U& src)
   {
-    typedef typename automaton_traits<T>::hstate_t dst_hstate_t;
-    typedef typename automaton_traits<U>::hstate_t src_hstate_t;
-    typedef typename automaton_traits<U>::transition_iterator transition_iterator;
-    typedef typename automaton_traits<U>::final_iterator final_iterator;
-    typedef typename automaton_traits<U>::initial_iterator initial_iterator;
-    typedef typename automaton_traits<U>::state_iterator state_iterator;
+    dst = op_convert(concept, dst, src);
+  }
 
-    dst = T(0, op_transitions(concept, src).size());
+  template<typename S, typename R, typename T>
+  R op_convert(const AutomataBase<S>& concept,
+	       SELECTOR(R), const T& src)
+  {
+    typedef typename automaton_traits<R>::hstate_t dst_hstate_t;
+    typedef typename automaton_traits<T>::hstate_t src_hstate_t;
+    typedef typename automaton_traits<T>::transition_iterator transition_iterator;
+    typedef typename automaton_traits<T>::final_iterator final_iterator;
+    typedef typename automaton_traits<T>::initial_iterator initial_iterator;
+    typedef typename automaton_traits<T>::state_iterator state_iterator;
+
+    R dst(0, op_transitions(concept, src).size());
 
     std::map<src_hstate_t, dst_hstate_t> states_map;
 
@@ -73,7 +80,10 @@ namespace vcsn {
 		   states_map[*f], op_get_final(concept, src, *f));
 
     //FIXME: geometry isn't preserved during this conversion.
+
+    return dst;
   }
+
 
   template <class S, class T>
   const typename automaton_traits<T>::tag_t&

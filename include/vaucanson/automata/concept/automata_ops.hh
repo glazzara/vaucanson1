@@ -40,6 +40,12 @@ namespace vcsn {
   /// @name Default operation on automata.
   //@{
 
+  /// Default conversion between value types with computation
+  template<typename S, typename R, typename T>
+  R op_convert(const AutomataBase<S> &se,
+	       SELECTOR(R), const T& data);
+
+
   /// Assignement operator between two implementations of a Structure<S>.
   template<typename S, typename T, typename U>
   void

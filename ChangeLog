@@ -1,5 +1,14 @@
 2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add a missing operator for AutomataBase.
+	I needed to reimplement the op_convert operator and use it
+	in op_assign. Having these two operators allows structure
+	convertion on assignement and copy.
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx: here.
+
+2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix various header includes 
 	* include/generate_headers.sh: Improve the way the namespace aliases are made.
 	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh:
