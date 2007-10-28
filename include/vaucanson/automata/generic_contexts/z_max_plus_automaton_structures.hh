@@ -41,5 +41,7 @@ namespace vcsn
   }
 }
 
+# include <vaucanson/contexts/automaton_maker.thh>
+
 # undef VCSN_CONTEXT_NAMESPACE
 

@@ -24,6 +24,36 @@ if [ -z "`find -printf '%f' 2>/dev/null`" ]; then
   FIND="gfind"
 fi
 
+write_namespace_alias()
+{
+  conditional_alias=""
+  if $3; then
+    conditional_alias=" && defined(VCSN_ALIAS_NAMESPACE)"
+  fi
+  
+  cat >> $1 <<-EOF
+# if !defined(ALIAS_$2)$conditional_alias
+#  define ALIAS_$2
+namespace vcsn
+{
+  namespace $2 = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$2;
+}
+# endif
+EOF
+}
+
+insert_specific_alias()
+{
+  if [ "$2" == "boolean_transducer" ]; then
+    write_namespace_alias $1 "boolean_automaton" $3
+  elif [ "$2" == "fmp_transducer" ]; then
+    write_namespace_alias $1 "boolean_automaton" $3
+  elif [ "$2" == "z_fmp_transducer" ]; then
+    write_namespace_alias $1 "z_automaton" $3
+  elif [ "$2" == "z_transducer" ]; then
+    write_namespace_alias $1 "z_automaton" $3
+  fi
+}
 
 write_default_context()
 {
@@ -43,16 +73,10 @@ EOF
     echo "# include <vaucanson/contexts/$impl/$1>" >> $fullname
   done
 
+  write_namespace_alias $fullname $context false
+  insert_specific_alias $fullname $context false
+
   cat >> $fullname <<-EOF
-
-# ifndef ALIAS_$context
-#  define ALIAS_$context
-namespace vcsn
-{
-  namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
-}
-# endif
-
 #endif // !$UpperName
 EOF
 
@@ -80,15 +104,12 @@ write_context()
  
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/generic_contexts/$3>
+EOF
 
-# if !defined(ALIAS_$context) && defined(VCSN_ALIAS_NAMESPACE)
-#  define ALIAS_$context
-namespace vcsn
-{
-  namespace $context = vcsn::VCSN_DEFAULT_GRAPH_IMPL::$context;
-}
-#  undef VCSN_ALIAS_NAMESPACE
-# endif
+write_namespace_alias $1 $context true
+insert_specific_alias $1 $context true
+
+cat >> $1 <<-EOF 
 
 # ifndef DONT_UNDEF
 #  undef VCSN_GRAPH_IMPL

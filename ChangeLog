@@ -1,5 +1,13 @@
 2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix various header includes 
+	* include/generate_headers.sh: Improve the way the namespace aliases are made.
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh:
+	Add a missing include.
+	* include/vaucanson/xml/tools.hh: Use structure headers instead.
+
+2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Improve generated context headers
 	The default implementation is now set up automagically when
 	an implementation is used alone by including its headers.
