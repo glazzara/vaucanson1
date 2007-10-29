@@ -1,4 +1,4 @@
-<automaton name="Non_ambiguous" xmlns="http://vaucanson.lrde.epita.fr">
+<automaton name="ambiguous" xmlns="http://vaucanson.lrde.epita.fr">
   <labelType>
     <monoid generatorType="letters" type="free">
       <generator value="a"/>

@@ -1,5 +1,14 @@
 2007-10-29  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Follow up renaming of (non-)ambiguous automata.
+	* taf-kit/tests/Makefile.am: Update EXTRA_DIST following
+	previous renaming.
+	* taf-kit/tests/automata/b/ambiguous1.xml:,
+	* taf-kit/tests/automata/b/ambiguous2.xml:,
+	* taf-kit/tests/automata/b/non_ambiguous1.xml: Update XML "name" tags.
+
+2007-10-29  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Fix final transitions handling in standardize.
 	* include/vaucanson/algorithms/standard.hxx: Accumulate final
 	transitions series and add the result to the new initial state.
