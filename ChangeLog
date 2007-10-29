@@ -1,5 +1,9 @@
 2007-10-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* ChangeLog: Cleanup some recent entries.
+
+2007-10-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* configure.ac: Do not output doc/xml/Makefile, as
 	per 2007-07-29's removal of doc/xml/.
 
@@ -44,7 +48,7 @@
 
 2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Don't build examples in data/ with 'all' anymore.  
+	Don't build examples in data/ with 'all' anymore.
 	Examples in data are now built with 'make demos'.
 	* Makefile.am: here.
 
@@ -62,10 +66,10 @@
 
 	Remove obsolete xml proposal from doc
 	This patch follows Jacques's comments about the documentation.
-	* Makefile.am: remove xml directory subdir.
-	* xml/Makefile.am: Remove.
-	* xml/xml_proposal.tex: Remove.
-	* xml: Remove.
+	* doc/Makefile.am: remove xml directory subdir.
+	* doc/xml/Makefile.am: Remove.
+	* doc/xml/xml_proposal.tex: Remove.
+	* doc/xml: Remove.
 
 2007-10-12  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
@@ -144,9 +148,9 @@
 
 	* Makefile.am (docs): Remove target.
 	* doc/Makefile.am (docs): Rename this target as ...
-	($(srcdir)/stamp): ... this, and update it whenever 
+	($(srcdir)/stamp): ... this, and update it whenever
 	configure.ac or doc.doxy.in change.
-	(EXTRA_DIST): Distribute $(srcdir)/stamp and the 
+	(EXTRA_DIST): Distribute $(srcdir)/stamp and the
 	HTML documentation.
 	(MAINTAINERCLEANFILES): Clean $(srcdir)/stamp.
 	* doc/README.txt: Do not mention "make docs".  Reword a few
@@ -186,16 +190,12 @@
 
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Update the README file.
-	Update the README file.
-	* doc/README.txt: updated.
+	* doc/README.txt: Update.
 
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Add a new entry in debian changeLog
-	Add a new entry in debian changeLog.
-	Useful while generating deb package.
-	* changelog: .
+	* debian/changelog: Add a new entry. Useful while generating deb
+	package.
 
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
@@ -210,7 +210,6 @@
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Make the doc generation optional.
-	Make the doc generation optional.
 	You need to type 'make docs' to generate the docs.
 	Avoid dependencies issues when the user doesn't have
 	doxygen installed.
@@ -221,7 +220,6 @@
 2007-10-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Remove the double quote character from the ASCII alphabet in TAF-Kit
-	Remove the double quote character from the ASCII alphabet in TAF-Kit.
 
 	* taf-kit/src/main.cc: Document this change.
 	* taf-kit/src/predefined_alphabets.hh: Apply the change.
@@ -261,25 +259,25 @@
 
 2007-09-20  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix missing entries in Makefile.am 
+	Fix missing entries in Makefile.am
 
 	Many new files were not declared in the Makefile.am files.
 	* include/Makefile.am,
 	* taf-kit/src/Makefile.am: Fix missing entries.
 
-	
+
 2007-09-19  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix a compilation issue and configure tests. 
-	
-	The LDFLAGS and CPPFLAGS were not set properly after a configure.
-	A Makefile was not generated in the src/bench directory. 
+	Fix a compilation issue and configure tests.
 
-	* ../build-aux/vcsn-boost.m4: Set LDFLAGS and CPPFLAGS correctly.
-	* ../build-aux/vcsn-xml.m4: Improve the path resolution for xerces.
-	* ../src/benchs/eps_removal/Makefile.am,
-	* ../src/benchs/eps_removal/eps_removal-bench.cc,
-	* ../src/benchs/generate_benchs.sh: Fix a missing file generation.
+	The LDFLAGS and CPPFLAGS were not set properly after a configure.
+	A Makefile was not generated in the src/bench directory.
+
+	* build-aux/vcsn-boost.m4: Set LDFLAGS and CPPFLAGS correctly.
+	* build-aux/vcsn-xml.m4: Improve the path resolution for xerces.
+	* src/benchs/eps_removal/Makefile.am,
+	* src/benchs/eps_removal/eps_removal-bench.cc,
+	* src/benchs/generate_benchs.sh: Fix a missing file generation.
 
 2007-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
@@ -291,7 +289,7 @@
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix Vaucanswig compilation issues
-	* ../trunk/vaucanswig/meta/automaton.hh: Fix compilation issues.
+	* vaucanswig/meta/automaton.hh: Fix compilation issues.
 
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
@@ -303,7 +301,7 @@
 
 2007-07-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Switch from full headers to structures headers 
+	Switch from full headers to structures headers
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/xml_chooser.hh,
 	* taf-kit/src/common_commands.hh: replace old header includes.
@@ -314,7 +312,7 @@
 
 2007-07-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Merge 1.0a Branch in trunk 
+	Merge 1.0a Branch in trunk
 
 	* AUTHORS: .
 	* ChangeLog: .
@@ -516,7 +514,7 @@
 	* timer.cc: Adjustements in timer printing.
 	* timer.hh: Adjustements to new type.
 	* timer_internal_gathering.cc,
-	* timer_internal_gathering.hh, 
+	* timer_internal_gathering.hh,
 	* timer_internal_gathering.hxx: New type for time representation.
 	* timer_internal_graph.cc,
 	* timer_internal_graph.hh: Adjustements to new type.
@@ -649,7 +647,7 @@
 	Documentation is provided in include/vaucanson/misc/timer.hh.
 
 	Clean source code (thanks for pointing out what was wrong).
-	
+
 
 2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
@@ -671,7 +669,7 @@
 
 2007-07-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
-	Merge pipe branch 
+	Merge pipe branch
 	* ChangeLog: .
 	* doc/NEWS.txt: .
 	* taf-kit/src/commands_macros.hh: .
@@ -699,10 +697,10 @@
 2007-07-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
   Merge pipe branch:
-  
+
   2007-07-23  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
-	  Update taf-kit tests 
+	  Update taf-kit tests
 	  Replace 'pipes' by 'internal pipes'
 	  * vcsn-b.test: Here.
 	  * vcsn-tdc.test: Here.
@@ -727,7 +725,7 @@
 	  * common.hh: Adjust to new command-line options
 	  * getters.hxx: Adjust automaton loader to new formats
 	  * main.cc: Adjust to new command-line options
-	  * pipe.hh: 
+	  * pipe.hh:
 	  * pipe.hxx, Add i/o format information to
 	  result container.
 	  * pipe_getters.hh,
@@ -979,7 +977,7 @@
 	  Documentation is provided in include/vaucanson/misc/timer.hh.
 
 	  Clean source code (thanks for pointing out what was wrong).
-	  
+
   2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	  Update timer and bencher for taf-kit
@@ -1070,7 +1068,7 @@
 	  * timer.cc: Adjustements in timer printing.
 	  * timer.hh: Adjustements to new type.
 	  * timer_internal_gathering.cc,
-	  * timer_internal_gathering.hh, 
+	  * timer_internal_gathering.hh,
 	  * timer_internal_gathering.hxx: New type for time representation.
 	  * timer_internal_graph.cc,
 	  * timer_internal_graph.hh: Adjustements to new type.
@@ -1203,7 +1201,7 @@
 	  Documentation is provided in include/vaucanson/misc/timer.hh.
 
 	  Clean source code (thanks for pointing out what was wrong).
-	  
+
 
   2007-06-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
@@ -1258,7 +1256,7 @@
 
 2007-07-18  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
-	Add SAX XML parser 
+	Add SAX XML parser
 	Work still not done:
 	  - Remove dead code (node.h*,...).
 	  - Add tests to the test-suite.
@@ -1292,7 +1290,7 @@
 
 2007-06-13  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
-	Add epsilon_removal_sp 
+	Add epsilon_removal_sp
 	eps_removal_sp is another epsilon-removal based on a shortest-path
 	algorithm.
 	* include/Makefile.am: .
@@ -1308,7 +1306,7 @@
 
 2007-06-12  Type Your Name Here  <your.mail.here@FIXME.com>
 
-	Fix distcheck issues 
+	Fix distcheck issues
 	* Makefile.am: Add missing files.
 	* configure.ac: Change the revision.
 	* doc/NEWS.txt: Add new features details.
@@ -1353,7 +1351,7 @@
 
 2007-06-09  Florian Lesaint  <florian.lesaint@epita.fr>
 
-	[1.0a] Fix bug with z_max_plus_automata 
+	[1.0a] Fix bug with z_max_plus_automata
 	* include/vaucanson/z_max_plus_automaton_structures.hh:
 	  Add missing include.
 
@@ -1365,7 +1363,7 @@
 
 2007-04-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
-	Fix conflict with boost and empty_ macro.  
+	Fix conflict with boost and empty_ macro.
 	* include/vaucanson/algorithms/eps_removal.hxx: .
 	* include/vaucanson/algorithms/evaluation.hxx: .
 	* include/vaucanson/algorithms/extension.hxx: .
@@ -1476,7 +1474,7 @@
 
 2007-03-22  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
-	Clean up XML part 
+	Clean up XML part
 	* xml/session.hxx: remove useless cast.
 	* xml/tools.hxx: conform to standard.
 	* xml/xml_converter.hxx: remove useless cast.
@@ -2034,7 +2032,7 @@
 
 2007-02-26  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
-	Correct some erroneous preconditions. 
+	Correct some erroneous preconditions.
 	* include/vaucanson/algorithms/determinize.hh: .
 	* include/vaucanson/algorithms/minimization_moore.hh: .
 
@@ -2189,7 +2187,7 @@
 
 2007-02-23  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
-	Reorganize libvcsn 
+	Reorganize libvcsn
 	Remove the sub-Makefiles in lib/vcsn-*/
 	* configure.ac: Remove lib/vcsn-*/Makefile
 	* lib/Makefile.am: Update.
@@ -2217,7 +2215,7 @@
 
 	Automake style.
 	*  lib/generate_libvcsn.rb: Use MAINTAINERCLEANFILES
-	to remove files generated.  distclean means to return to the 
+	to remove files generated.  distclean means to return to the
 	fresh tarball.
 	Use $(), not @@.
 
@@ -2427,7 +2425,7 @@
 2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fixes in Bencher.
-	* include/vaucanson/misc/timer.cc, 
+	* include/vaucanson/misc/timer.cc,
 	* include/vaucanson/misc/timer.hxx,
 	* include/vaucanson/misc/bencher.cc,
 	* include/vaucanson/misc/bencher.hxx,
