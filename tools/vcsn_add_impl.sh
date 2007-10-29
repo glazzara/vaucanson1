@@ -16,12 +16,42 @@
 #
 
 OUTPUT_DIR="."
-INCLUDE_DIR="/usr/local/include"
+INCLUDE_PATH="$VCSN_INCLUDE_PATH"
+if [ -z "$INCLUDE_PATH" ]; then
+    INCLUDE_PATH="/usr/local/include"
+fi
+
+DATA_PATH="$VCSN_DATA_PATH"
+if [ -z "$DATA_PATH" ]; then
+    DATA_PATH="/usr/local/vaucanson/data"
+fi
+
+IMPL_NAME=""
 
 usage()
 {
   cat << EOF
-Usage: vcsn_add_impl.sh --vcsn-include-dir=<path> [--output-dir=<path>] [path/*_graph_impl.hh]
+Usage: vcsn_add_impl.sh [--new-impl=<name> [--data-path=<path>]]
+			[[--include-dir=<path>] <path/*_graph_impl.hh>]
+			[--output-dir=<path>]
+
+    Options:
+    ========
+
+    --new-impl=<name>		Create a new graph implementation template
+				with name 'name'
+				
+    --data-path=<path>		Path to the Vaucanson data directory.
+				(default = VCSN_DATA_PATH
+				  or /usr/local/vaucanson/data)
+    
+    --include-dir=<path>	Path to the Vaucanson include directory.
+				(default = VCSN_INCLUDE_PATH
+				  or /usr/local/vaucanson/include)
+    
+    --output-dir=<path>		Path where the files are generated.
+
+
 
     Decription:
     ===========
@@ -100,12 +130,20 @@ EOF
 
 parse_option()
 {
-  if ! [ -z "`echo $1 | sed -ne '/--vcsn-include-path='/p`" ]; then
-    INCLUDE_DIR="`echo $1 | sed -ne s/--vcsn-include-path=//p`"
+  if ! [ -z "`echo $1 | sed -ne '/--include-path='/p`" ]; then
+    INCLUDE_PATH="`echo $1 | sed -ne s/--include-path=//p`"
   elif ! [ -z "`echo $1 | sed -ne '/--output-dir='/p`" ]; then
     OUTPUT_DIR="`echo $1 | sed -ne s/--output-dir=//p`"
+  elif ! [ -z "`echo $1 | sed -ne '/--new-impl='/p`" ]; then
+    IMPL_NAME="`echo $1 | sed -ne s/--new-impl=//p`"
+  elif ! [ -z "`echo $1 | sed -ne '/--data-path='/p`" ]; then
+    DATA_PATH="`echo $1 | sed -ne s/--data-path=//p`"
   elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
     usage
+  elif ! [ -z "`echo $1 | sed -ne s/--//p`" ]; then
+    echo "Bad option: $1"
+    usage
+    exit 1
   else
     return 1
   fi
@@ -114,28 +152,60 @@ parse_option()
 
 files=()
 
+write_headers()
+{
+  for file in ${files[@]}; do
+    impl=`basename $file`
+    impl=`echo "$impl" | sed -ne "/.*_graph_impl\.hh/p" | cut -d '_' -f 1`
+    mkdir -p "$OUTPUT_DIR/$impl"
+    for header in `find $INCLUDE_PATH/vaucanson/automata/generic_contexts/ -name '*.hh'`; do
+      write_context "$OUTPUT_DIR" $impl `basename $header` `dirname $file` 
+    done
+  done
+}
+ 
+write_impl_template()
+{
+  echo -n "Copying template files from $DATA_PATH to $OUTPUT_DIR..."
+  IMPL_NAME_=`echo "$IMPL_NAME" | sed -e 's/[\.\/]/\_/g' | tr "[:lower:]" "[:upper:]"`
+  
+  cat "$DATA_PATH/template_graph_impl.hh" | sed -e "s/#IMPL_NAME#/$IMPL_NAME/g" \
+	| sed -e "s/#IMPL_NAME_#/${IMPL_NAME_}/g" > "$OUTPUT_DIR/${IMPL_NAME}_graph_impl.hh"
+
+  cat "$DATA_PATH/template_graph_impl.hxx" | sed -e "s/#IMPL_NAME#/$IMPL_NAME/g" \
+	| sed -e "s/#IMPL_NAME_#/${IMPL_NAME_}/g" > "$OUTPUT_DIR/${IMPL_NAME}_graph_impl.hxx"
+
+  echo " done."
+}
+
 main()
 {
+  if [ $# -eq 0 ]; then
+    usage
+  fi
+  
   for arg in $@; do
     if ! parse_option $arg; then
       impl=`echo "$arg" | sed -ne "/.*_graph_impl\.hh/p" | cut -d '_' -f 1`
       if [ -z "$impl" ]; then
-	echo "Error : invalid header name (a *_graph_impl.hh form is expected) or invalid option."
+	echo "Error : invalid header name (a *_graph_impl.hh form is expected) or invalid option:"
+	echo "$arg"
 	echo "Use the --help option to get more information."
 	exit 1
       fi
       files=( "${files[@]}" "$arg" )
     fi
   done
-
-  for file in ${files[@]}; do
-      impl=`basename $file`
-      impl=`echo "$impl" | sed -ne "/.*_graph_impl\.hh/p" | cut -d '_' -f 1`
-      mkdir -p "$OUTPUT_DIR/$impl"
-      for header in `find $INCLUDE_DIR/vaucanson/automata/generic_contexts/ -name '*.hh'`; do
-	write_context "$OUTPUT_DIR" $impl `basename $header` `dirname $file` 
-      done
-  done
+  
+  if [ -z "$INCLUDE_PATH" ]; then
+    INCLUDE_PATH="/usr/local/include"
+  fi
+  
+  if [ -z "$IMPL_NAME" ]; then
+    write_headers
+  else
+    write_impl_template
+  fi
 
 }
 

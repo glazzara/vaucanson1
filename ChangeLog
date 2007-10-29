@@ -1,3 +1,17 @@
+2007-10-29  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add graph implementation templates
+	To help the user developping new graph implementations,
+	the vcsn_add_impl.sh script now provides templates with all
+	the basics which must be declared/implemented.
+
+	* data/Makefile.am: Add the template files to the tarball.
+	* data/template_graph_impl.hh: New.
+	* data/template_graph_impl.hxx: New.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh:
+	cleanup comments.
+	* tools/vcsn_add_impl.sh: add new options to use the templates.
+
 2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add a missing operator for AutomataBase.

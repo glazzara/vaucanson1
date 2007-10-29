@@ -415,9 +415,6 @@ namespace vcsn
 
 	geometry_t	  geometry_;
 	graph_data_t	  graph_;
-	//      state_data_t states_;
-	//      /* FIXME */ removed_states_;
-	//      /* FIXME */ removed_edges_;
 	tag_t		  tag_;
 	final_t		  final_;
 	initial_t	  initial_;
@@ -426,9 +423,7 @@ namespace vcsn
 	dynamic_bitset<>  initial_bitset_;
 	dynamic_bitset<>  final_bitset_;
 	unsigned	  number_of_epsilon_;
-	//      alphabet_t    alpha_;
-	// FIXME: starting from 0??
-	// FIXME: specify its range
+
 	// number_of_state_ == 0 => there is no state.
 	unsigned	  number_of_state_;
 	states_data_t	  states_;
