@@ -42,10 +42,14 @@ namespace vcsn {
 
     hstate_t i = a.add_state();
     std::set<htransition_t> transition_oi;
+    series_set_elt_t final_series =
+      algebra::zero_as<series_set_elt_value_t>::of(a.series());
 
     for_all_initial_states(oi, a)
     {
       series_set_elt_t s = a.get_initial(*oi);
+
+      // Handle each transitions.
       transition_oi.clear();
       a.deltac(transition_oi, *oi, delta_kind::transitions());
       for_all_const_(std::set<htransition_t>, oil, transition_oi)
@@ -53,10 +57,25 @@ namespace vcsn {
 	series_set_elt_t t = s * a.series_of(*oil);
 	a.add_series_transition(i, a.dst_of(*oil), t);
       }
+      // Accumulate final transition series of each initial state.
+      final_series += s * a.get_final(*oi);
+    }
+
+    // Suppress initial states which are not accessible.  We don't use
+    // @c accessible_here for efficienty issues, and because the
+    // definition of a standard automaton does not imply the
+    // admissible property.
+    for (initial_iterator oi = a.initial().begin(), next = oi;
+	 oi != a.initial().end();
+	 oi = next)
+    {
+      ++next;
+      if (!has_predecessors(a, *oi))
+	a.del_state(*oi);
     }
     a.clear_initial();
     a.set_initial(i);
-    accessible_here(a);
+    a.set_final(i, final_series);
   }
 
   template<typename A, typename T>
@@ -75,6 +94,9 @@ namespace vcsn {
 				 lhs_t& lhs,
 				 const rhs_t& rhs)
   {
+    precondition(is_standard(lhs));
+    precondition(is_standard(rhs));
+
     TIMER_SCOPED("union_of_standard");
     typedef typename std::set<htransition_t> edelta_ret_t;
 
@@ -166,6 +188,9 @@ namespace vcsn {
 				  lhs_t& lhs,
 				  const rhs_t& rhs)
   {
+    precondition(is_standard(lhs));
+    precondition(is_standard(rhs));
+
     TIMER_SCOPED("concat_of_standard");
     AUTOMATON_TYPES(lhs_t);
     typedef std::map<hstate_t, hstate_t>	map_t;
@@ -259,6 +284,8 @@ namespace vcsn {
   void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
   {
+    precondition(is_standard(a));
+
     TIMER_SCOPED("star_of_standard");
     AUTOMATON_TYPES(auto_t);
     typedef std::set<htransition_t>		edelta_ret_t;

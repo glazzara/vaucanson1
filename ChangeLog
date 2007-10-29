@@ -1,3 +1,13 @@
+2007-10-29  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Fix final transitions handling in standardize.
+	* include/vaucanson/algorithms/standard.hxx: Accumulate final
+	transitions series and add the result to the new initial state.
+	Suppress only non-accessible initial states, not all
+	non-accessible states.
+	* taf-kit/tests/vcsn-b.test: Add a test on standardize. Check
+	that final transitions are handle.
+
 2007-10-23  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Fix is-ambiguous taf-kit's tests.

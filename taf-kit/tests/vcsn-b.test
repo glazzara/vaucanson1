@@ -104,7 +104,7 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 ! vcsn-b is-standard $a1
 ! vcsn-b is-standard $void_b_automaton
   vcsn-b standardize $a1 \| is-standard -
-
+  vcsn-b standard -a ab "1" \| standardize - \| is-standard -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
