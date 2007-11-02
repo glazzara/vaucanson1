@@ -49,7 +49,21 @@ static bool test_exp(const Auto& trans,
   exp2 = evaluation (trans, exp1);
   exp3 = evaluation (trans_inverse, exp2);
 
-  return (exp3 == exp1);
+  // Do not test exp1 == exp3 here, because
+  // (a.(b.(a.b))) and (a.((b.a).b))
+  // would appear as different.
+  //
+  // Since these expressions are always concatenations in this test
+  // case we can compare the output strings (where superfluous
+  // parentheses are omitted by default).
+  std::stringstream s1;
+  std::stringstream s3;
+  s1 << exp1;
+  s3 << exp3;
+  std::cout << s1.str() << std::endl;
+  std::cout << s3.str() << std::endl;
+
+  return s1.str() == s3.str();
 }
 
 

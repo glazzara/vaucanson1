@@ -1,3 +1,13 @@
+2007-11-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make boolean_rw_transducers/invert-test PASS.
+
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh:
+	Use string comparisons to compare rational expressions in this
+	specific case.  The previous tree comparison failed to
+	equate (a.(b.(a.b))) with (a.((b.a).b)).  String comparison is
+	still gross and a real RatExp comparison would be welcome here.
+
 2007-10-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* ChangeLog: Cleanup some recent entries.
