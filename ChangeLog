@@ -1,3 +1,12 @@
+2007-11-08  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Use alphabets of input transducer in 'to-rt'.
+	* taf-kit/src/tdc_commands.cc: Use alphabets of input
+	fmp-tranducer to construct output transducer in 'to-rt'
+	algorithm.
+	* taf-kit/tests/vcsn-tdc.test: Add a test to at least check
+	that no exception is raised in a basic example.
+
 2007-11-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Make boolean_rw_transducers/invert-test PASS.

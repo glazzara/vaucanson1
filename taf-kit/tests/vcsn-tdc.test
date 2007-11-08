@@ -68,3 +68,5 @@ vcsn-tdc info $t1
   input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
   vcsn-tdc --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-b eval - abba
   vcsn-tdc --alphabet1=ab --alphabet2=xy image $t1 | vcsn-b eval - $input
+
+  vcsn-tdc to-rt $t1

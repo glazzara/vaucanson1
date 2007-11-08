@@ -103,10 +103,12 @@ DEFINE_COMMAND (NAME (image)
 
 DEFINE_COMMAND (NAME (to_rt)
 		CODE (
+		  automaton_t fmp = get_aut(args.args[1]);
+		  automaton_t::monoid_t m = fmp.structure().series().monoid();
 		  boolean_transducer::automaton_t a =
-		  boolean_transducer::make_automaton(first_alphabet_t(),
-						     second_alphabet_t());
-		  fmp_to_realtime(get_aut(args.args[1]), a))
+		  boolean_transducer::make_automaton(m.first_monoid().alphabet(),
+						     m.second_monoid().alphabet());
+		  fmp_to_realtime(fmp, a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
