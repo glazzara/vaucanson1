@@ -1,5 +1,9 @@
 2007-11-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* ChangeLog.1: Whitespace cleanup.
+
+2007-11-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* build-aux/vcsn-boost.m4 (AX_BOOST_BASE): Do not export
 	CPPFLAGS and LDFLAGS.  This is pointless and breaks
 	`configure -C'.
