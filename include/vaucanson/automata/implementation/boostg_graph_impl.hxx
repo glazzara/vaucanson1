@@ -36,17 +36,6 @@ namespace vcsn
   # define BOOSTGRAPH							\
     Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
 
-
-    /*
-    ** class EdgeLabel
-    */
-
-    BOOSTGRAPH_TPARAM
-    inline
-    BOOSTGRAPH::EdgeValue::EdgeValue (bgstate_t h1, bgstate_t h2, hlabel_t l)
-      : label_ (l), from_ (h1), to_ (h2)
-    { }
-
     /*-------------------------.
     | Graph's implementation.  |
     `-------------------------*/

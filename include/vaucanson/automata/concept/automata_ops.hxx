@@ -46,23 +46,23 @@ namespace vcsn {
     typedef typename automaton_traits<T>::initial_iterator initial_iterator;
     typedef typename automaton_traits<T>::state_iterator state_iterator;
 
-    R dst(0, op_transitions(concept, src).size());
-
+    //R dst(0, op_transitions(concept, src).size());
+    R dst;
     std::map<src_hstate_t, dst_hstate_t> states_map;
 
     //Mapping src's states to dst's states
     for (state_iterator s = op_states(concept, src).begin(),
 	  s_end = op_states(concept, src).end(); s != s_end; ++s)
-      states_map[*s] = dst.add_state();
+      states_map[*s] = op_add_state(concept, dst);
 
     //Adding all transitions
     for (transition_iterator t = op_transitions(concept, src).begin(),
 	  t_end = op_transitions(concept, src).end(); t != t_end; ++t)
       op_add_transition(concept,
 			dst,
-			states_map[src.src_of(*t)],
-			states_map[src.dst_of(*t)],
-			src.label_of(*t));
+			states_map[op_src_of(concept, src, *t)],
+			states_map[op_dst_of(concept, src, *t)],
+			op_label_of(concept, src, *t));
 
     //Adding initial states
     for (initial_iterator i = op_initial(concept, src).begin(),

@@ -22,6 +22,7 @@
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/handlers.hh>
+# include <boost/functional/hash/hash.hpp>
 
 namespace vcsn
 {

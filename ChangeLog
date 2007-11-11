@@ -1,3 +1,30 @@
+2007-11-11  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Split graph structures related files.
+	Each implementation usually needs its own specialization of objects provided
+	by Vaucanson such as Support. Thus, I moved all the specialized code into
+	directories dedicated for each implementation.
+
+	* include/generate_headers.sh: Remove a useless variable.
+	* include/vaucanson/automata/concept/automata_ops.hxx:
+	Use the proper op_* functions.
+	* include/vaucanson/automata/implementation/boostg/boost_functors.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx: New.
+	* include/vaucanson/automata/implementation/boostg: New.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx: Clean up.
+	* include/vaucanson/automata/implementation/legacy: New.
+	* include/vaucanson/automata/implementation/light/light_support.hh: New.
+	* include/vaucanson/automata/implementation/light/light_support.hxx: New.
+	* include/vaucanson/automata/implementation/light: New.
+	* include/vaucanson/automata/implementation/light_graph_impl.hh,
+	* include/vaucanson/automata/implementation/light_graph_impl.hxx: Clean up.
+	* include/vaucanson/misc/hash.hh: add a missing include.
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/support.hxx: remove specialized code.
+
 2007-10-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add graph implementation templates

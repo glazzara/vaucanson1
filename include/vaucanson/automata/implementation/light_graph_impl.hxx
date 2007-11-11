@@ -56,11 +56,12 @@ namespace vcsn
     { }
 
     TParam
-    GClass::Graph (unsigned initial_number_of_state,
+    GClass::Graph (unsigned reserve_number_of_state,
                    unsigned reserve_number_of_edge)
     {
-      states_.resize(initial_number_of_state);
+      states_.reserve(reserve_number_of_state);
       edges_.reserve(reserve_number_of_edge);
+			edge_data_.reserve(reserve_number_of_edge);
     }
 
     /*------------------.
@@ -71,24 +72,29 @@ namespace vcsn
     typename GClass::states_t
     GClass::states() const
     {
-      return states_t(hstate_t(0),
-                      hstate_t(states_.size()) - 1,
-                      removed_states_);
+      std::cout << "states() " << std::endl;
+      for (unsigned i = 0; i < states_.size(); ++i)
+	std::cout << states_[i] << ", ";
+      std::cout << std::endl;
+      return states_t(states_);
     }
 
     TParam
     typename GClass::edges_t
     GClass::edges() const
     {
-      return edges_t(hedge_t(0),
-		     hedge_t(edges_.size()) - 1,
-                     removed_edges_);
+      std::cout << "edges() " << std::endl;
+      for (unsigned i = 0; i < edges_.size(); ++i)
+	std::cout << "(" << edge_data_[i].from_ << ", " << edge_data_[i].to_ << "), ";
+      std::cout << std::endl;
+      return edges_t(edges_);
     }
 
     TParam
     typename GClass::initial_support_t
     GClass::initial() const
     {
+      std::cout << "initial() " << std::endl;
       return initial_support_t(initial_);
     }
 
@@ -96,6 +102,7 @@ namespace vcsn
     typename GClass::final_support_t
     GClass::final() const
     {
+      std::cout << "final() " << std::endl;
       return final_support_t(final_);
     }
 
@@ -108,38 +115,15 @@ namespace vcsn
     bool
     GClass::has_state(hstate_t n) const
     {
-      bool res = ((removed_states_.find(n) == removed_states_.end())
-                      && n >= 0
-                      && n < int(states_.size()));
-      # ifndef VCSN_NDEBUG
-      if (res == false)
-      for (int i = 0; i < int(edges_.size()); ++i)
-              if (removed_edges_.find(hedge_t(i)) == removed_edges_.end())
-              postcondition(edges_[i].from != n
-                              && edges_[i].to != n);
-      # endif // !VCSN_NDEBUG
-      return res;
+      return n >= 0 && n < int(states_.size());
     }
 
     TParam
     typename GClass::hstate_t
     GClass::add_state()
     {
-      if (removed_states_.size() == 0)
-      {
-        states_.push_back(state_value_t());
+        states_.push_back(states_.size());
         return states_.size() - 1;
-      }
-
-      hstate_t n = *removed_states_.begin();
-      removed_states_.erase(n);
-      assertion(n < int(states_.size()));
-
-      states_[n].output_edges.clear();
-      states_[n].input_edges.clear();
-
-      postcondition(has_state(n));
-      return n;
     }
 
     TParam
@@ -147,30 +131,55 @@ namespace vcsn
     GClass::del_state(hstate_t n)
     {
       precondition (has_state(n));
+      std::cout << "del_state = " << n << std::endl;
 
-      const state_value_t& v = states_[n];
-      typename state_value::edges_t::const_iterator e = v.output_edges.begin();
-      typename state_value::edges_t::const_iterator end = v.output_edges.end();
-      typename state_value::edges_t::const_iterator next = e;
-
-      for (; e != end; e = next)
-      {
-        ++next;
-        this->del_edge(*e);
-      }
-
-      e = v.input_edges.begin();
-      end = v.input_edges.end();
-      for (next = e; e != end; e = next)
-      {
-        ++next;
-        this->del_edge(*e);
-      }
-
-      removed_states_.insert(n);
       initial_.erase(n);
       final_.erase(n);
-      postcondition(!has_state(n));
+
+      if (states_.size() > 1 && n != int(states_.size() - 1))
+      {
+	int moved_state = states_.size() - 1;
+	for (unsigned i = 0; i < edges_.size();)
+	{
+	  if (edge_data_[i].from_ == n || edge_data_[i].to_ == n)
+	  {
+	    edges_.erase(edges_.begin() + i);
+	    edge_data_.erase(edge_data_.begin() + i);
+	  }
+	  else
+	  {
+	    if (edge_data_[i].from_ == moved_state)
+	      edge_data_[i].from_ = n;
+	    else if (edge_data_[i].to_ == moved_state)
+	      edge_data_[i].to_ = n;
+	    ++i;
+	  }
+	}
+	if (initial_.find(moved_state) != initial_.end())
+	{
+	  initial_[n] = initial_[moved_state];
+	  initial_.erase(moved_state);
+	}
+	if (final_.find(moved_state) != final_.end())
+	{
+	  final_[n] = final_[moved_state];
+	  final_.erase(moved_state);
+	}
+      }
+      else
+      {
+	for (unsigned i = 0; i < edges_.size();)
+	{
+	  if (edge_data_[i].from_ == n || edge_data_[i].to_ == n)
+	  {
+	    edges_.erase(edges_.begin() + i);
+	    edge_data_.erase(edge_data_.begin() + i);
+	  }
+	  else
+	    ++i;
+	}
+      }
+      states_.pop_back();
     }
 
     TParam
@@ -252,16 +261,7 @@ namespace vcsn
     bool
     GClass::has_edge(hedge_t e) const
     {
-      bool res = (removed_edges_.find(e) == removed_edges_.end()
-                  && (e < int(edges_.size())));
-      # ifndef VCSN_NDEBUG
-      if (res == false)
-        for (int i = 0; i < int(states_.size()); ++i)
-          if (removed_states_.find(hstate_t(i)) == removed_states_.end())
-            postcondition(states_[i].output_edges.find(e) ==
-                          states_[i].output_edges.end());
-      # endif // !VCSN_NDEBUG
-      return res;
+      return e >= 0 && e < int(edges_.size());
     }
 
     TParam
@@ -269,42 +269,33 @@ namespace vcsn
     GClass::add_edge(hstate_t n1, hstate_t n2,
 		     const label_t& v)
     {
+				std::cout << "add_edge() " << std::endl;
       precondition(has_state(n1));
       precondition(has_state(n2));
-      hedge_t e;
-      if (removed_edges_.size() == 0)
-      {
-        edges_.push_back(edge_value_t(n1, n2, v));
-        e = edges_.size() - 1;
-      }
-      else
-      {
-        e = *removed_edges_.begin();
-        removed_edges_.erase(e);
-        assertion(e < int(edges_.size()));
-        edges_[e].from = n1;
-        edges_[e].to = n2;
-        edges_[e].label = v;
-      }
-      states_[n1].output_edges.insert(e);
-      states_[n2].input_edges.insert(e);
 
-      postcondition(has_edge(e));
-      return e;
+      edge_data_.push_back(EdgeValue(n1, n2, v));
+			edges_.push_back(edges_.size());
+      return edges_.size() - 1;
     }
 
     TParam
     void
     GClass::del_edge(hedge_t e)
     {
+      std::cout << "del_edge() " << std::endl;
       precondition (has_edge(e));
 
-      const edge_value_t& ev = edges_[e];
-      states_[ev.from].output_edges.erase(e);
-      states_[ev.to].input_edges.erase(e);
-      removed_edges_.insert(e);
-
-      postcondition(!has_edge(e));
+      if (edges_.size() > 1)
+      {
+	edge_data_[e] = edge_data_[edge_data_.size() - 1];
+	edge_data_.erase(edge_data_.begin() + edge_data_.size() - 1);
+	edges_.erase(edges_.begin() + edges_.size() - 1);
+      }
+      else
+      {
+	edges_.erase(edges_.begin() + e);
+	edge_data_.erase(edge_data_.begin() + e);
+      }
     }
 
 
@@ -313,15 +304,16 @@ namespace vcsn
     GClass::src_of(hedge_t e1) const
     {
       precondition(has_edge(e1));
-      return edges_[e1].from;
+      return edge_data_[e1].from_;
     }
 
     TParam
     typename GClass::hstate_t
     GClass::dst_of(hedge_t e2) const
     {
+      std::cout << "dst_of " << e2 << " = " << edge_data_[e2].to_<< std::endl;
       precondition(has_edge(e2));
-      return edges_[e2].to;
+      return edge_data_[e2].to_;
     }
 
     TParam
@@ -329,7 +321,7 @@ namespace vcsn
     GClass::label_of(hedge_t n) const
     {
       precondition(has_edge(n));
-      return edges_[n];
+      return edge_data_[n].label_;
     }
 
     TParam
@@ -337,7 +329,7 @@ namespace vcsn
     GClass::update(hedge_t e, label_t l)
     {
       precondition(has_edge(e));
-      edges_[e].label = l;
+      edge_data_[e].label_ = l;
     }
 
 
@@ -354,8 +346,6 @@ namespace vcsn
 
       for (int i = 0; i < int(edges_.size()); ++i)
       {
-        if (removed_edges_.find(hedge_t(i)) != removed_edges_.end())
-          continue;
         // Make sure that source and destination of edge are part of the
         // automaton.
         if (!has_state(dst_of(hedge_t(i)))
@@ -391,16 +381,18 @@ namespace vcsn
                       ::vcsn::delta_kind::DKind) const			\
     {									\
       assertion(has_state(from));					\
-      const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
-      for_all_const_(std::set<hedge_t>, e, edges)			\
-      if (query(*e))							\
-              *res++ = WhatFromE;					\
+      for_all_const_(std::vector<htransition_t>, e, edges_)		\
+	if (IO == from && query(*e))					\
+	{								\
+	  std::cout << "add this to the result: " << WhatFromE << std::endl; \
+	  *res++ = WhatFromE;						\
+	}								\
     }									\
 
-    DEFINE_DELTA_FUNCTION (delta, transitions, output, *e);
-    DEFINE_DELTA_FUNCTION (delta, states, output, edges_[*e].to);
-    DEFINE_DELTA_FUNCTION (rdelta, transitions, input, *e);
-    DEFINE_DELTA_FUNCTION (rdelta, states, input, edges_[*e].from);
+    DEFINE_DELTA_FUNCTION (delta, transitions, src_of(*e), *e);
+    DEFINE_DELTA_FUNCTION (delta, states, src_of(*e), dst_of(*e));
+    DEFINE_DELTA_FUNCTION (rdelta, transitions, dst_of(*e), *e);
+    DEFINE_DELTA_FUNCTION (rdelta, states, dst_of(*e), src_of(*e));
 
     # undef DEFINE_DELTA_FUNCTION
 
@@ -419,25 +411,24 @@ namespace vcsn
                       misc::IsBool ## _t) const				\
     {									\
       assertion(has_state(from));					\
-      const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
-      for_all_const_(std::set<hedge_t>, e, edges)			\
-        if (query(*e))							\
+      for_all_const_(std::vector<htransition_t>, e, edges_)		\
+        if (IO == from && query(*e))					\
           { Action; }							\
     }
 
-    DEFINE_DELTAF_FUNCTION (deltaf, states, output, true,
-                            if (not fun(edges_[*e].to)) break);
-    DEFINE_DELTAF_FUNCTION (deltaf, states, output, false, fun(edges_[*e].to));
-    DEFINE_DELTAF_FUNCTION (deltaf, transitions, output, true,
+    DEFINE_DELTAF_FUNCTION (deltaf, states, edge_data_[*e].from_, true,
+                            if (not fun(edge_data_[*e].to_)) break);
+    DEFINE_DELTAF_FUNCTION (deltaf, states, edge_data_[*e].from_, false, fun(edge_data_[*e].to_));
+    DEFINE_DELTAF_FUNCTION (deltaf, transitions, edge_data_[*e].from_, true,
                             if (not fun(*e)) break);
-    DEFINE_DELTAF_FUNCTION (deltaf, transitions, output, false, fun(*e));
+    DEFINE_DELTAF_FUNCTION (deltaf, transitions, edge_data_[*e].from_, false, fun(*e));
 
-    DEFINE_DELTAF_FUNCTION (rdeltaf, states, input, true,
-                            if (not fun(edges_[*e].from)) break);
-    DEFINE_DELTAF_FUNCTION (rdeltaf, states, input, false, fun(edges_[*e].from));
-    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, input, true,
+    DEFINE_DELTAF_FUNCTION (rdeltaf, states, edge_data_[*e].to_, true,
+                            if (not fun(edge_data_[*e].from_)) break);
+    DEFINE_DELTAF_FUNCTION (rdeltaf, states, edge_data_[*e].to_, false, fun(edge_data_[*e].from_));
+    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, edge_data_[*e].to_, true,
                             if (not fun(*e)) break);
-    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, input, false, fun(*e));
+    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, edge_data_[*e].to_, false, fun(*e));
 
     # undef DEFINE_DELTAF_FUNCTION
 

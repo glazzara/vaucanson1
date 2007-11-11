@@ -22,7 +22,6 @@
 # include <vector>
 
 # include <vaucanson/misc/sparse_interval.hh>
-# include <vaucanson/misc/support.hh>
 # include <vaucanson/misc/static.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
@@ -33,7 +32,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
-
+# include <vaucanson/automata/implementation/light/light_support.hh>
 
 namespace vcsn
 {
@@ -47,75 +46,45 @@ namespace vcsn
       /// Self type definition.
       public:
 	typedef Graph<K, WordValue, WeightValue, SeriesValue,
-		      Letter, Tag, GeometryCoords>	self_t;
+		      Letter, Tag, GeometryCoords>  self_t;
 
-	typedef WeightValue				semiring_elt_value_t;
-	typedef WordValue				monoid_elt_value_t;
-	typedef WordValue				word_value_t;
-	typedef SeriesValue				series_set_elt_value_t;
-	typedef Letter					letter_t;
-	typedef Tag					tag_t;
+        typedef WeightValue             semiring_elt_value_t;
+        typedef WordValue               monoid_elt_value_t;
+	typedef WordValue               word_value_t;
+        typedef SeriesValue             series_set_elt_value_t;
+        typedef Letter                  letter_t;
+        typedef Tag                 tag_t;
 
 	/// Typedefs on automaton related graphs elements.
 	typedef typename LabelOf<K, WordValue, WeightValue, SeriesValue, Letter>
 	  ::ret						label_t;
 
-	typedef handler<state_h, int>			hstate_t;
+	typedef handler<state_h, int>				hstate_t;
 	typedef handler<transition_h, int>		htransition_t;
-	typedef htransition_t				hedge_t;
+	typedef htransition_t								hedge_t;
 
-	/// Edge decorator.
-	template<typename EdgeLabel>
-	struct edge_value
+
+	struct EdgeValue
 	{
-	  inline edge_value(hstate_t h1, hstate_t h2,
-	      const EdgeLabel& l = EdgeLabel())
-	    : label(l),
-	    from(h1),
-	    to(h2)
-	  {}
+	  EdgeValue (hstate_t from, hstate_t to, label_t l)
+	    : from_(from), to_(to), label_(l) {}
 
-	  inline operator const EdgeLabel& () const
-	  { return label; }
+	  hstate_t from_;
+	  hstate_t to_;
+	  label_t label_;
+	}; // End of class EdgeValue
 
-	  inline operator EdgeLabel& ()
-	  { return label; }
-
-	  EdgeLabel	label;
-	  hstate_t	from;
-	  hstate_t	to;
-	};
-
-	/// State decorator.
-	struct state_value
-	{
-	  typedef std::set<hedge_t> edges_t;
-	  inline state_value() {}
-
-	  edges_t output_edges;
-	  edges_t input_edges;
-	};
-
-	/// Needed containers.
-	/// FIXME: How about using std::vector instead of std::set?
-	typedef misc::SparseInterval<hstate_t, std::set<hstate_t> >
-							StateContainer;
-	typedef misc::SparseInterval<hedge_t, std::set<hedge_t> >
-							EdgeContainer;
-
-	typedef state_value				state_value_t;
-	typedef edge_value<label_t>			edge_value_t;
-
-	typedef std::vector<state_value_t>		state_data_t;
-	typedef std::vector<edge_value_t>		edge_data_t;
-
-	typedef StateContainer				states_t;
-	typedef EdgeContainer				edges_t;
+	typedef hstate_t				state_data_t;
+	typedef std::vector<hstate_t>			states_base_t;
+	typedef misc::Support<states_base_t>		states_t;
+	typedef std::vector<htransition_t>		edges_base_t;
+	typedef misc::Support<edges_base_t>		edges_t;
+	typedef std::vector<EdgeValue>			edge_data_t;
 
 	typedef std::map<hstate_t, series_set_elt_value_t>
-							initial_t;
+	  initial_t;
 	typedef std::map<hstate_t, series_set_elt_value_t>
-							final_t;
+	  final_t;
 
 	typedef misc::Support<initial_t>		initial_support_t;
 	typedef misc::Support<final_t>			final_support_t;
@@ -123,7 +92,7 @@ namespace vcsn
 	// we guarantee that the handlers of state are indexed from 0 to
 	// initial_number_of_state - 1 when using this constructor.
 	Graph();
-	Graph(unsigned initial_number_of_state,
+	Graph(unsigned reserve_number_of_state,
 	      unsigned reserve_number_of_edge);
 
 	/// Return states set.
@@ -261,23 +230,19 @@ namespace vcsn
 
 	/** @name Geometry access
 	** @{ */
-	typedef geometry<hstate_t, hedge_t, GeometryCoords>
-			    geometry_t;
+	typedef geometry<hstate_t, hedge_t, GeometryCoords> geometry_t;
 	geometry_t&	    geometry();
 	const geometry_t&   geometry() const;
 	/** @}*/
 
-      private:
-	geometry_t	    geometry_;
-
-      public:
-	state_data_t	    states_;
-	edge_data_t	    edges_;
-	std::set<hstate_t>  removed_states_;
-	std::set<hedge_t>   removed_edges_;
-	tag_t		    tag_;
-	final_t		    final_;
-	initial_t	    initial_;
+      	private:
+	  geometry_t	    geometry_;
+	  states_base_t	    states_;
+	  edges_base_t	    edges_;
+	  edge_data_t	    edge_data_;
+	  tag_t		    tag_;
+	  final_t	    final_;
+	  initial_t	    initial_;
     };
 
 

@@ -15,9 +15,6 @@
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 #
 
-# Set the default graph implementation here
-DEFAULT_GRAPH_IMPLEMENTATION="light"
-
 MK_FILE=generic_contexts.mk
 FIND="find"
 if [ -z "`find -printf '%f' 2>/dev/null`" ]; then
