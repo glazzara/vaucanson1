@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ namespace vcsn {
 		const Element<S, T>& a,
 		const std::string& name,
 		const bool bg,
-		char *const argv[],
+		const char *const argv[],
 		void (*function)(std::ostream& o,
 				 const Element<S, T>& a,
 				 const std::string& name))
@@ -87,7 +87,11 @@ namespace vcsn {
 	  close(filedes[1]);
 	  dup2(filedes[0], STDIN_FILENO);
 	  close(filedes[0]);
-	  execvp(argv[0], argv);
+	  // execvp will treat its second argument as if it was
+	  // "const char* const*".  See the following page for an
+	  // explanation of why it is only declared as "char* const*".
+	  // http://www.opengroup.org/onlinepubs/000095399/functions/exec.html
+	  execvp(argv[0], const_cast<char *const *>(argv));
 	  return false;
 	}
     }

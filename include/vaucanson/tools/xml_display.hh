@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,14 +34,14 @@ namespace vcsn
 {
   namespace tools
   {
-    static char *const xml_argv[] = { "./VGI", 0 };
+    static const char *const xml_argv[] = { "./VGI", 0 };
 
     template <class S, class T>
     bool
     xml_display(const Element<S, T>& a,
 		const std::string& name,
 		const bool bg = false,
-		char *const argv[] = xml_argv);
+		const char *const argv[] = xml_argv);
   }
 }
 

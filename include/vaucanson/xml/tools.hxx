@@ -405,7 +405,7 @@ namespace vcsn
 	typedef typename A::series_set_elt_t::semiring_elt_t::value_t value_t;
 	xercesc::DOMElement* s = NULL;
 
-	if (get_semiring_set(semiring, value_t()) != "ratSeries")
+	if (strcmp(get_semiring_set(semiring, value_t()), "ratSeries"))
 	{
 	  s = create_element(doc, "semiring");
 	  set_attribute(s, "operations", get_semiring_operations(semiring));
