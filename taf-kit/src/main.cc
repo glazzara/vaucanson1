@@ -114,8 +114,8 @@ namespace
 
   const struct alphabet
   {
-    char*	name;
-    char*	alphabet;
+    const char*	name;
+    const char*	alphabet;
     char	epsilon;
   } predefined_alphabets[] = { { "letters", ALPHABET_AZ, DEFAULT_EPSILON[0] },
 			       { "alpha", ALPHABET_AZAZ, DEFAULT_EPSILON[0] },

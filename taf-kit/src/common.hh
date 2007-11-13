@@ -88,12 +88,12 @@ struct arguments_t
     {}
 
     std::string	progname;
-    char*	args[3];
+    const char*	args[3];
     int		n_args;
-    char*	alphabet;
+    const char*	alphabet;
     char	epsilon;
 # ifdef WITH_TWO_ALPHABETS
-    char*	alphabet2;
+    const char*	alphabet2;
     char	epsilon2;
 # endif /* ! WITH_TWO_ALPHABETS */
     bool	verbose;

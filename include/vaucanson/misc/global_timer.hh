@@ -81,13 +81,10 @@
 
 # define BENCH_SAVE_PLOT(Filename)					\
   do {									\
-    if (Filename != "")							\
-    {									\
-      std::ofstream o (args.plot_output_filename.c_str(),		\
-		       std::ofstream::out | std::ofstream::trunc);	\
-      BENCH_PLOT(o);							\
-      o.close();							\
-    }									\
+    std::ofstream o (Filename,						\
+	             std::ofstream::out | std::ofstream::trunc);	\
+    BENCH_PLOT(o);							\
+    o.close();								\
   } while (0)
 
 # else

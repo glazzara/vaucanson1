@@ -1,5 +1,19 @@
 2007-11-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Kill more warnings from recent GCCs.
+
+	* include/vaucanson/misc/global_timer.hh: Simplify.  The only
+	caller in taf-kit/src/main.cc is already checking for the
+	emptyness of the string, and the previous code was using !=
+	to compare two char*.
+	* taf-kit/src/common.hh (arguments_t::args, arguments_t::alphabet,
+	arguments_t::alphabet2): Declare as const char*.
+	* taf-kit/src/main.cc (alphabet::name, alphabet::alphabet): Idem.
+	* taf-kit/src/pipe.hh, taf-kit/src/pipe.hxx (set_name): Take
+	a const argument.
+
+2007-11-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	According to Andrew Pinski in GCC bug 34073
         (http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34073)
 	name lookup for overloaded template functions works

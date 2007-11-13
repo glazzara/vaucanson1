@@ -49,12 +49,12 @@ void command_output::set_state (command_output_status s)
   empty = false;
 }
 
-void command_output::set_name (std::string& str)
+void command_output::set_name (const std::string& str)
 {
   name = str;
 }
 
-void command_output::set_name (char*& str)
+void command_output::set_name (const char*& str)
 {
   name = std::string (str);
 }
