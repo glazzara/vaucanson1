@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 
 namespace vcsn {
 
+  namespace algebra {
+
     // We provide a generic implementation of tropical semirings
     // formed with C++-builtins and standard operations (std::min,
     // std::max, +).
@@ -29,13 +31,16 @@ namespace vcsn {
     | Identity value |
     `---------------*/
     template<class TropicalKind, typename T>
-    T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T));
+    T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>),
+		     SELECTOR(T));
 
     template<typename T>
-    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T));
+    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>),
+		 SELECTOR(T));
 
     template<typename T>
-    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T));
+    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>),
+		 SELECTOR(T));
 
     /*------------.
     | op_contains |
@@ -65,10 +70,12 @@ namespace vcsn {
 		   T& dst, U arg);
 
     template<typename T, typename U>
-    T op_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T a, U b);
+    T op_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s,
+	     T a, U b);
 
     template<typename T, typename U>
-    T op_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T a, U b);
+    T op_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s,
+	     T a, U b);
 
     /*-----.
     | Star |
@@ -95,18 +102,18 @@ namespace vcsn {
 
     template <class TropicalKind, typename T>
     bool
-    op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
-			    SELECTOR(T));
+    op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>&
+			       set, SELECTOR(T));
 
     template <class TropicalKind, typename T>
     Element<algebra::TropicalSemiring<TropicalKind>, T>
     op_choose_starable(const algebra::TropicalSemiring<TropicalKind>& set,
-			SELECTOR(T));
+		       SELECTOR(T));
 
     template <class TropicalKind, typename T>
     Element<algebra::TropicalSemiring<TropicalKind>, T>
     op_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
-			    SELECTOR(T));
+			   SELECTOR(T));
 
     /*---------------.
     | Pretty printer |
@@ -119,7 +126,7 @@ namespace vcsn {
     St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s,
 		St& st, const T& v);
 
-//  } // algebra
+  } // algebra
 
 } // vcsn
 

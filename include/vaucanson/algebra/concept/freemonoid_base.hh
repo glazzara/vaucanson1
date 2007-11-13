@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -166,20 +166,24 @@ namespace vcsn {
   /** @} */
   /** @} */
 
-  template <typename S, typename T, typename CharContainer>
-  bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v,
-		const std::string&,
-		typename std::string::const_iterator&,
-		const CharContainer& escaped);
+  namespace algebra {
 
-  template<typename Self, typename T>
-  void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);
+    template <typename S, typename T, typename CharContainer>
+    bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v,
+		  const std::string&,
+		  typename std::string::const_iterator&,
+		  const CharContainer& escaped);
 
-  template<typename Self, typename T>
-  bool op_contains(const algebra::FreeMonoidBase<Self>& s, const T& v);
+    template<typename Self, typename T>
+    void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);
 
-  template<typename Self, typename St, typename T>
-  St& op_rout(const algebra::FreeMonoidBase<Self>& s, St& st, const T& v);
+    template<typename Self, typename T>
+    bool op_contains(const algebra::FreeMonoidBase<Self>& s, const T& v);
+
+    template<typename Self, typename St, typename T>
+    St& op_rout(const algebra::FreeMonoidBase<Self>& s, St& st, const T& v);
+
+  } // algebra
 
 } // vcsn
 

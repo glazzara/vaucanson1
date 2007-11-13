@@ -1,3 +1,67 @@
+2007-11-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	According to Andrew Pinski in GCC bug 34073
+        (http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34073)
+	name lookup for overloaded template functions works
+	as follows:
+	1. The previous definitions are looked up at the point
+	of the call at definition time (ignoring any overloaded
+	definition they may be done later).
+	2. An argument dependent lookup occurs at instantiation time
+	but only in the namespace of the argument (this one takes
+	into account overloaded definitions done after the call).
+
+	Because we have plenty of such functions that are specialized
+	after they are used, we need to rely on (2).  So this change
+	moves all op_* functions into their argument's namespace (algebra).
+	Fixing
+	test-suites/boolean_transducer/coherence_state_transition-test
+	with newer versions of GCC.  The test case of GCC bug 34073
+	is a reduced version of coherence_state_transition-test done
+	by Guillaume Leroi.
+
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	include/vaucanson/algebra/concept/alphabets_base.hxx,
+	include/vaucanson/algebra/concept/freemonoid_base.hh,
+	include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	include/vaucanson/algebra/concept/monoid_base.hh,
+	include/vaucanson/algebra/concept/monoid_base.hxx,
+	include/vaucanson/algebra/concept/semiring_base.hh,
+	include/vaucanson/algebra/concept/semiring_base.hxx,
+	include/vaucanson/algebra/concept/series_base.hh,
+	include/vaucanson/algebra/concept/series_base.hxx,
+	include/vaucanson/algebra/implementation/alphabets/alphabet_set.hh,
+	include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx,
+	include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
+	include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hxx,
+	include/vaucanson/algebra/implementation/free_monoid/str_words.hh,
+	include/vaucanson/algebra/implementation/free_monoid/str_words.hxx,
+	include/vaucanson/algebra/implementation/free_monoid/tools.hh,
+	include/vaucanson/algebra/implementation/free_monoid/tools.hxx,
+	include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx,
+	include/vaucanson/algebra/implementation/letter/int_letter.hh,
+	include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	include/vaucanson/algebra/implementation/series/generalized.hh,
+	include/vaucanson/algebra/implementation/series/generalized.hxx,
+	include/vaucanson/algebra/implementation/series/krat.hh,
+	include/vaucanson/algebra/implementation/series/krat.hxx,
+	include/vaucanson/algebra/implementation/series/polynoms.hh,
+	include/vaucanson/algebra/implementation/series/polynoms.hxx
+	(identity_value, op_add, op_assign, op_can_choose_non_starable,
+	op_choose, op_choose_from_supp, op_choose_non_starable,
+	op_contains, op_contains_e, op_convert, op_default, op_first,
+	op_in_add, op_in_mirror, op_in_mul, op_in_star, op_in_transpose,
+	op_is_finite, op_is_finite_app, op_length, op_letter_equality,
+	op_max_size, op_mul, op_parse, op_rout, op_second,
+	op_series_choose, op_series_get, op_series_set,
+	op_series_structure, op_star, op_starable, op_support, op_xeq,
+	zero_value): Move all this functions into the vcsn::algebra namespace.
+
 2007-11-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx

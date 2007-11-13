@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -206,39 +206,43 @@ namespace vcsn {
   | Ops.  |
   `------*/
 
-  template <typename S, typename T>
-  bool
-  op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t);
+  namespace algebra {
 
-  template <typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
-  op_choose_from_supp(const algebra::SeriesBase<S>& s, const T& t);
+    template <typename S, typename T>
+    bool
+    op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t);
 
-  template <class S, class T>
-  Element<S, T> 
-  op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T));
+    template <typename S, typename T>
+    typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
+    op_choose_from_supp(const algebra::SeriesBase<S>& s, const T& t);
 
-  template <typename S, typename T, typename M, typename W>
-  void
-  op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w);
+    template <class S, class T>
+    Element<S, T>
+    op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T));
 
-  template <class S, class T>
-  typename algebra::series_traits<T>::support_t
-  op_support(const algebra::SeriesBase<S>&, const T& v);
+    template <typename S, typename T, typename M, typename W>
+    void
+    op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w);
 
-  // This conversion is needed when assigning a monoid element to a series.
-  template <class S, class M>
-  S
-  op_convert(const algebra::SeriesBase<S>&,
-	     const algebra::FreeMonoidBase<M>&);
+    template <class S, class T>
+    typename algebra::series_traits<T>::support_t
+    op_support(const algebra::SeriesBase<S>&, const T& v);
 
-  template <class S, class T>
-  T
-  op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
+    // This conversion is needed when assigning a monoid element to a series.
+    template <class S, class M>
+    S
+    op_convert(const algebra::SeriesBase<S>&,
+	       const algebra::FreeMonoidBase<M>&);
 
-  template <class S, class T, class U>
-  T
-  op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
+    template <class S, class T>
+    T
+    op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
+
+    template <class S, class T, class U>
+    T
+    op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
+
+  } // algebra
 
 } // vcsn
 

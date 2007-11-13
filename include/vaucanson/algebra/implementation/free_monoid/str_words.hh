@@ -23,33 +23,37 @@
 
 namespace vcsn {
 
-  /*------------------------------------------.
-  | Implementation of words with basic_string |
-  `------------------------------------------*/
+  namespace algebra {
 
-  template <typename A>
-  void
-  op_in_mul(const algebra::FreeMonoid<A>& s,
-	    std::basic_string<typename A::letter_t>& dst,
-	    const std::basic_string<typename A::letter_t>& src);
+    /*------------------------------------------.
+    | Implementation of words with basic_string |
+    `------------------------------------------*/
 
-  template<typename A>
-  std::basic_string<typename A::letter_t>
-  op_mul(const algebra::FreeMonoid<A>& s,
-	 const std::basic_string<typename A::letter_t>& a,
-	 const std::basic_string<typename A::letter_t>& b);
+    template <typename A>
+    void
+    op_in_mul(const algebra::FreeMonoid<A>& s,
+	      std::basic_string<typename A::letter_t>& dst,
+	      const std::basic_string<typename A::letter_t>& src);
 
-  template<typename A>
-  const std::basic_string<typename A::letter_t>&
-  identity_value(SELECTOR(algebra::FreeMonoid<A>),
-		 SELECTOR(std::basic_string<typename A::letter_t>));
+    template<typename A>
+    std::basic_string<typename A::letter_t>
+    op_mul(const algebra::FreeMonoid<A>& s,
+	   const std::basic_string<typename A::letter_t>& a,
+	   const std::basic_string<typename A::letter_t>& b);
 
-  // one can create words from a single character
-  template<typename A>
-  std::basic_string<typename A::letter_t>
-  op_convert(SELECTOR(algebra::FreeMonoid<A>),
-	     SELECTOR(std::basic_string<typename A::letter_t>), const typename A::letter_t& c);
+    template<typename A>
+    const std::basic_string<typename A::letter_t>&
+    identity_value(SELECTOR(algebra::FreeMonoid<A>),
+		   SELECTOR(std::basic_string<typename A::letter_t>));
 
+    // one can create words from a single character
+    template<typename A>
+    std::basic_string<typename A::letter_t>
+    op_convert(SELECTOR(algebra::FreeMonoid<A>),
+	       SELECTOR(std::basic_string<typename A::letter_t>),
+	       const typename A::letter_t& c);
+
+  } // algebra
 
 } // vcsn
 

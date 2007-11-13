@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,87 +23,91 @@
 
 namespace vcsn {
 
-  template<typename A>
-  void
-  op_in_mul(const algebra::FreeMonoid<A>&,
-	    std::basic_string<typename A::letter_t>& dst,
-	    const std::basic_string<typename A::letter_t>& src)
-  {
-    dst += src;
-  }
+  namespace algebra {
 
-  template<typename A>
-  std::basic_string<typename A::letter_t>
-  op_mul(const algebra::FreeMonoid<A>&,
-	 const std::basic_string<typename A::letter_t>& a,
-	 const std::basic_string<typename A::letter_t>& b)
-  {
-    return a + b;
-  }
+    template<typename A>
+    void
+    op_in_mul(const algebra::FreeMonoid<A>&,
+	      std::basic_string<typename A::letter_t>& dst,
+	      const std::basic_string<typename A::letter_t>& src)
+    {
+      dst += src;
+    }
 
-  template <typename A>
-  bool
-  op_xeq(const algebra::FreeMonoid<A>& s,
-	 const std::basic_string<typename A::letter_t>& a,
-	 const std::basic_string<typename A::letter_t>& b)
-  {
-    typename std::basic_string<typename A::letter_t>::const_iterator
-      m = b.begin();
-    typename std::basic_string<typename A::letter_t>::const_iterator l;
-    for (l = a.begin(); m != b.end() && l != a.end(); ++l)
-      {
-	if (! s.alphabet().letter_equality(*l, *m))
-	  return false;
-	++m;
-      }
-    return (m == b.end() && l == a.end());
-  }
+    template<typename A>
+    std::basic_string<typename A::letter_t>
+    op_mul(const algebra::FreeMonoid<A>&,
+	   const std::basic_string<typename A::letter_t>& a,
+	   const std::basic_string<typename A::letter_t>& b)
+    {
+      return a + b;
+    }
 
-  template<typename A>
-  const std::basic_string<typename A::letter_t>&
-  identity_value(SELECTOR(algebra::FreeMonoid<A>),
-		 SELECTOR(std::basic_string<typename A::letter_t>))
-  {
-    static const std::basic_string<typename A::letter_t> instance;
-    return instance;
-  }
+    template <typename A>
+    bool
+    op_xeq(const algebra::FreeMonoid<A>& s,
+	   const std::basic_string<typename A::letter_t>& a,
+	   const std::basic_string<typename A::letter_t>& b)
+    {
+      typename std::basic_string<typename A::letter_t>::const_iterator
+	m = b.begin();
+      typename std::basic_string<typename A::letter_t>::const_iterator l;
+      for (l = a.begin(); m != b.end() && l != a.end(); ++l)
+	{
+	  if (! s.alphabet().letter_equality(*l, *m))
+	    return false;
+	  ++m;
+	}
+      return (m == b.end() && l == a.end());
+    }
 
-  template<typename A>
-  const std::basic_string<typename A::letter_t,
-			  misc::char_traits<typename A::letter_t> >&
-  identity_value(SELECTOR(algebra::FreeMonoid<A>),
-		 SELECTOR2(std::basic_string<typename A::letter_t,
-			  misc::char_traits<typename A::letter_t> >))
-  {
-    static const std::basic_string<typename A::letter_t,
-      misc::char_traits<typename A::letter_t> > instance;
-    return instance;
-  }
+    template<typename A>
+    const std::basic_string<typename A::letter_t>&
+    identity_value(SELECTOR(algebra::FreeMonoid<A>),
+		   SELECTOR(std::basic_string<typename A::letter_t>))
+    {
+      static const std::basic_string<typename A::letter_t> instance;
+      return instance;
+    }
 
-  template<typename A>
-  std::basic_string<typename A::letter_t>
-  op_convert(SELECTOR(algebra::FreeMonoid<A>),
-	     SELECTOR(std::basic_string<typename A::letter_t>),
-	     const typename A::letter_t& c)
-  {
-    std::basic_string<typename A::letter_t> str;
-    str = c;
-    return str;
-  }
+    template<typename A>
+    const std::basic_string<typename A::letter_t,
+			    misc::char_traits<typename A::letter_t> >&
+    identity_value(SELECTOR(algebra::FreeMonoid<A>),
+		   SELECTOR2(std::basic_string<typename A::letter_t,
+			    misc::char_traits<typename A::letter_t> >))
+    {
+      static const std::basic_string<typename A::letter_t,
+	misc::char_traits<typename A::letter_t> > instance;
+      return instance;
+    }
 
-  template <class A>
-  Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >
-  op_choose(const algebra::FreeMonoid<A>& s,
-	    SELECTOR(std::basic_string<typename A::letter_t>))
-  {
-    unsigned length =
-      misc::random::generate<unsigned>(0, op_choose_max_word_length);
-    std::basic_string<typename A::letter_t> r;
-    for (unsigned i = 0; i < length; ++i)
-      r = r + s.alphabet().choose();
-    return Element<algebra::FreeMonoid<A>,
-      std::basic_string<typename A::letter_t> >(s, r);
-  }
+    template<typename A>
+    std::basic_string<typename A::letter_t>
+    op_convert(SELECTOR(algebra::FreeMonoid<A>),
+	       SELECTOR(std::basic_string<typename A::letter_t>),
+	       const typename A::letter_t& c)
+    {
+      std::basic_string<typename A::letter_t> str;
+      str = c;
+      return str;
+    }
+
+    template <class A>
+    Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >
+    op_choose(const algebra::FreeMonoid<A>& s,
+	      SELECTOR(std::basic_string<typename A::letter_t>))
+    {
+      unsigned length =
+	misc::random::generate<unsigned>(0, op_choose_max_word_length);
+      std::basic_string<typename A::letter_t> r;
+      for (unsigned i = 0; i < length; ++i)
+	r = r + s.alphabet().choose();
+      return Element<algebra::FreeMonoid<A>,
+	std::basic_string<typename A::letter_t> >(s, r);
+    }
+
+  } // algebra
 
 } // vcsn
 

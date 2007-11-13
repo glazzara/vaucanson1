@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,30 +49,30 @@ namespace vcsn {
       typedef std::basic_string<std::pair<A,B> > ret;
     };
 
+    template<typename A>
+    const std::list<typename A::letter_t>&
+    identity_value(SELECTOR(algebra::FreeMonoidBase<A>),
+		   SELECTOR(std::list<typename A::letter_t>));
+
+    template<typename A>
+    std::list<typename A::letter_t>
+    op_convert(SELECTOR(algebra::FreeMonoidBase<A>),
+	       SELECTOR(std::list<typename A::letter_t>),
+	       const typename A::letter_t& c);
+
+    template <typename A>
+    void
+    op_in_mul(const algebra::FreeMonoidBase<A>& s,
+	      std::list<typename A::letter_t>& dst,
+	      const std::list<typename A::letter_t>& src);
+
+    template <typename A>
+    std::list<typename A::letter_t>
+    op_mul(const algebra::FreeMonoidBase<A>& s,
+	   const std::list<typename A::letter_t>& a,
+	   const std::list<typename A::letter_t>& b);
+
   } // algebra
-
-  template<typename A>
-  const std::list<typename A::letter_t>&
-  identity_value(SELECTOR(algebra::FreeMonoidBase<A>),
-                 SELECTOR(std::list<typename A::letter_t>));
-
-  template<typename A>
-  std::list<typename A::letter_t>
-  op_convert(SELECTOR(algebra::FreeMonoidBase<A>),
-             SELECTOR(std::list<typename A::letter_t>),
-             const typename A::letter_t& c);
-
-  template <typename A>
-  void
-  op_in_mul(const algebra::FreeMonoidBase<A>& s,
-            std::list<typename A::letter_t>& dst,
-            const std::list<typename A::letter_t>& src);
-
-  template <typename A>
-  std::list<typename A::letter_t>
-  op_mul(const algebra::FreeMonoidBase<A>& s,
-         const std::list<typename A::letter_t>& a,
-         const std::list<typename A::letter_t>& b);
 
 } // vcsn
 

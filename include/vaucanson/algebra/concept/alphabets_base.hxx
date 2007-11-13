@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -151,33 +151,37 @@ namespace vcsn {
     MetaElement<Structure<S>, T>(other)
   {}
 
-  template <typename S, typename T, typename L>
-  bool op_letter_equality(const algebra::AlphabetSetBase<S>& s,
-			  const T& a,
-			  L lhs,
-			  L rhs)
-  {
-    return lhs == rhs;
-  }
+  namespace algebra {
 
-  template<typename S, typename St, typename T>
-  St& op_rout(const algebra::AlphabetSetBase<S>& s, St& st, const T& a)
-  {
-    st << "{ ";
-    if (op_is_finite(s.self(), a))
-      for (typename op_begin_traits<S, T>::const_ret_t i = op_begin_const(s.self(), a);
-	   i != op_end_const(s.self(), a);
-	   ++i)
-	{
-	  if (i != op_begin_const(s.self(), a))
-	    st << ", ";
-	  st << *i;
-	}
-    else
-      st << "<many letters>";
-    st << " }";
-    return st;
-  }
+    template <typename S, typename T, typename L>
+    bool op_letter_equality(const algebra::AlphabetSetBase<S>& s,
+			    const T& a,
+			    L lhs,
+			    L rhs)
+    {
+      return lhs == rhs;
+    }
+
+    template<typename S, typename St, typename T>
+    St& op_rout(const algebra::AlphabetSetBase<S>& s, St& st, const T& a)
+    {
+      st << "{ ";
+      if (op_is_finite(s.self(), a))
+	for (typename op_begin_traits<S, T>::const_ret_t i = op_begin_const(s.self(), a);
+	     i != op_end_const(s.self(), a);
+	     ++i)
+	  {
+	    if (i != op_begin_const(s.self(), a))
+	      st << ", ";
+	    st << *i;
+	  }
+      else
+	st << "<many letters>";
+      st << " }";
+      return st;
+    }
+
+  } // algebra
 
 } // vcsn
 

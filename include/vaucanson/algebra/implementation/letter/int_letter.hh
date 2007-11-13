@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,13 +22,18 @@
 # include <iostream>
 
 namespace vcsn {
-  // Specialization for integers.
-  template <typename S, typename U, typename V>
-  bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		std::list<int>& v,
-		const std::string& s,
-		typename std::string::const_iterator& i,
-		const std::list<char>& escaped);
+
+  namespace algebra {
+
+    // Specialization for integers.
+    template <typename S, typename U, typename V>
+    bool op_parse(const algebra::FreeMonoidBase<S>& set,
+		  std::list<int>& v,
+		  const std::string& s,
+		  typename std::string::const_iterator& i,
+		  const std::list<char>& escaped);
+
+  } // algebra
 
 } // vcsn
 

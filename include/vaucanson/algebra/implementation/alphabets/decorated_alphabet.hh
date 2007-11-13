@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -126,25 +126,28 @@ namespace vcsn {
   /** @} */
   /** @} */
 
-  template<typename L, typename T>
-  bool op_contains(const algebra::AlphabetSet<L>& s,
-		   const algebra::AlphabetDecorator<L, T>& a);
+  namespace algebra {
 
-  template<typename L, typename T>
-  bool op_is_finite(const algebra::AlphabetSet<L>& s,
-		    const algebra::AlphabetDecorator<L, T>& a);
+    template<typename L, typename T>
+    bool op_contains(const algebra::AlphabetSet<L>& s,
+		     const algebra::AlphabetDecorator<L, T>& a);
 
-  template<typename L, typename T>
-  bool op_contains_e(const algebra::AlphabetSet<L>& s,
-		     const algebra::AlphabetDecorator<L, T>& a,
-		     const L& v);
+    template<typename L, typename T>
+    bool op_is_finite(const algebra::AlphabetSet<L>& s,
+		      const algebra::AlphabetDecorator<L, T>& a);
 
-  template <typename T, typename L>
-  bool op_letter_equality(const algebra::AlphabetSet<L>& s,
-				 const algebra::AlphabetDecorator<L, T>& a,
-				 L lhs,
-				 L rhs);
+    template<typename L, typename T>
+    bool op_contains_e(const algebra::AlphabetSet<L>& s,
+		       const algebra::AlphabetDecorator<L, T>& a,
+		       const L& v);
 
+    template <typename T, typename L>
+    bool op_letter_equality(const algebra::AlphabetSet<L>& s,
+				   const algebra::AlphabetDecorator<L, T>& a,
+				   L lhs,
+				   L rhs);
+
+  } // algebra
 
 } // vcsn
 

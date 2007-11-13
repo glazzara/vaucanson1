@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -131,38 +131,43 @@ namespace vcsn {
   /** @} */
   /** @} */
 
-  // default implementations:
+  namespace algebra {
 
-  /// Whether a non-starable @c Element can be chosen from a Semiring.
-  template <typename S, typename T>
-  bool
-  op_can_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
+    // default implementations:
 
-  /// A random starable element in the set.
-  template <typename S, typename T>
-  Element<S, T>
-  op_choose_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
+    /// Whether a non-starable @c Element can be chosen from a Semiring.
+    template <typename S, typename T>
+    bool
+    op_can_choose_non_starable(const algebra::SemiringBase<S>& set,
+			       SELECTOR(T));
 
-  /// A random non-starable element in the set.
-  template <typename S, typename T>
-  Element<S, T>
-  op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
+    /// A random starable element in the set.
+    template <typename S, typename T>
+    Element<S, T>
+    op_choose_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
+
+    /// A random non-starable element in the set.
+    template <typename S, typename T>
+    Element<S, T>
+    op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
 
-  template <typename S, typename T>
-  bool
-  op_parse(const algebra::SemiringBase<S>&, T& w,
-	const std::string&,
-	typename std::string::const_iterator&);
+    template <typename S, typename T>
+    bool
+    op_parse(const algebra::SemiringBase<S>&, T& w,
+	  const std::string&,
+	  typename std::string::const_iterator&);
 
-  template <typename Self, typename T>
-  bool op_starable(const algebra::SemiringBase<Self>& s, const T& v);
+    template <typename Self, typename T>
+    bool op_starable(const algebra::SemiringBase<Self>& s, const T& v);
 
-  template <typename Self, typename T>
-  void op_in_star(const algebra::SemiringBase<Self>& s, T& v);
+    template <typename Self, typename T>
+    void op_in_star(const algebra::SemiringBase<Self>& s, T& v);
 
-  template <typename Self, typename T>
-  T op_default(SELECTOR(algebra::SemiringBase<Self>), SELECTOR(T));
+    template <typename Self, typename T>
+    T op_default(SELECTOR(algebra::SemiringBase<Self>), SELECTOR(T));
+
+  } // algebra
 
 } // vcsn
 

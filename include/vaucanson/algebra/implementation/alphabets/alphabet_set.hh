@@ -66,18 +66,21 @@ namespace vcsn {
   /** @} */
   /** @} */
 
-  template <typename L>
-  size_t op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&);
+  namespace algebra {
 
-  template <typename L>
-  bool op_contains(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
+    template <typename L>
+    size_t op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&);
 
-  template <typename L>
-  bool op_is_finite(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
+    template <typename L>
+    bool op_contains(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
 
-  template <typename L>
-  bool op_contains_e(const algebra::AlphabetSet<L>& s, const std::set<L>& a,
-		     const L& v);
+    template <typename L>
+    bool op_is_finite(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
+
+    template <typename L>
+    bool op_contains_e(const algebra::AlphabetSet<L>& s, const std::set<L>& a,
+		       const L& v);
+  }
 
 } // vcsn
 
