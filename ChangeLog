@@ -1,3 +1,17 @@
+2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix exceptions catching in tests.
+	When an exception was catched, the number of tests to run in the test program
+	was incremented. Thus, if exceptions were continuously thrown, the tests didn't finish.
+	Debug messages raised with the exceptions were also not reported.
+	* src/tests/include/tests/automata/algos/graphs/sub_automaton_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/eps_removal_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh: here.
+
 2007-11-11  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Split graph structures related files.

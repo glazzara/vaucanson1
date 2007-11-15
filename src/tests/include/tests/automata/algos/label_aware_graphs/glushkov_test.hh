@@ -166,9 +166,10 @@ bool glushkov_test(tests::Tester& tg)
 	  ++success;
 	++nb_test_done;
       }
-      catch (...)
+      catch (std::logic_error& e)
       {
-	++test_num;
+	std::cout << e.what() << std::endl;
+	++nb_test_done;
       }
     }
     std::string rate;

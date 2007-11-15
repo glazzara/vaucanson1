@@ -106,9 +106,10 @@ unsigned sum_test(tests::Tester& tg)
       else
 	++nb_tests_sum;
     }
-    catch (std::logic_error&)
+    catch (std::logic_error& e)
     {
-      ++nb_tests_sum;
+      std::cout << e.what() << std::endl;
+      ++nb_tests_sum_done;
     }
   }
   std::string rate_sum;

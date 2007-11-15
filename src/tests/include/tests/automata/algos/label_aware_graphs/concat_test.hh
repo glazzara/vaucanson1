@@ -28,12 +28,14 @@
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/automata/implementation/generalized.hh>
 
+# include <vaucanson/tools/xml_dump.hh>
 template <class Auto>
 bool concat_test(tests::Tester& tg)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
 
+using namespace vcsn::tools;
   AUTOMATON_TYPES(Auto);
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
@@ -62,6 +64,11 @@ bool concat_test(tests::Tester& tg)
       try
 	{
 	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
+	  SAVE_AUTOMATON_XML("/tmp", "auto_lhs", auto_lhs, 0);
+	  SAVE_AUTOMATON_XML("/tmp", "auto_rhs", auto_rhs, 0);
+	  SAVE_AUTOMATON_XML("/tmp", "ret", ret, 0);
+
+	  std::cout << word_1 << " - " << word_2 << std::endl;
 	  semiring_elt_t val =
 	    eval(determinize(realtime(auto_lhs)), word_1) *
 	    eval(determinize(realtime(auto_rhs)), word_2);
@@ -81,9 +88,10 @@ bool concat_test(tests::Tester& tg)
 	    }
 	  ++nb_test_done;
 	}
-      catch (std::logic_error&)
+      catch (std::logic_error& e)
 	{
-	  ++test_num;
+	  std::cout << e.what() << std::endl;
+	  ++nb_test_done;
 	}
     }
 

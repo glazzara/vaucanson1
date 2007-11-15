@@ -61,7 +61,6 @@ bool in_concat_test(tests::Tester& tg)
       try
 	{
 	  concatenate_here(auto_lhs, auto_rhs);
-
 	  if (auto_lhs.states().size() ==
 	      lhs_states_num + auto_rhs.states().size() &&
 	      eval(realtime(auto_lhs), word) !=
@@ -78,9 +77,10 @@ bool in_concat_test(tests::Tester& tg)
 	    }
 	  ++nb_test_done;
 	}
-      catch (std::logic_error&)
+      catch (std::logic_error& e)
 	{
-	  ++test_num;
+	  std::cout << e.what() << std::endl;
+	  ++nb_test_done;
 	}
     }
 

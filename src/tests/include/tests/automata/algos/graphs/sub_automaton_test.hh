@@ -62,7 +62,7 @@ unsigned sub_automaton_test(tests::Tester& tg)
   TEST(t, "r seems consistent. ",
        r.has_state(s1) && r.has_state(s2) && !r.has_state(s3));
 
-  TEST(t, "r has a consistent max. ", r.states().max() == s2);
+  TEST(t, "r has a consistent max. ", r.states().back() == s2);
 
   TEST(t, "r has the right number of states. ", r.states().size() == 2);
 
@@ -72,19 +72,19 @@ unsigned sub_automaton_test(tests::Tester& tg)
   TEST(t, "r has the right number of final states. ", r.final().size() == 1);
 
   TEST(t, "r has consistant initial states. ",
-       r.initial().max() <= r.states().max());
+       r.initial().max() <= r.states().back());
 
   TEST(t, "r has consistant final states. ",
-       r.final().max() <= r.states().max());
+       r.final().max() <= r.states().back());
 
   for_all_states(s, r)
-    TEST(t, "r has the right states. ", *s <= r.states().max());
+    TEST(t, "r has the right states. ", *s <= r.states().back());
 
   for_all_states(s, r)
-    TEST(t, "r has the right initial states. ", *s <= r.states().max());
+    TEST(t, "r has the right initial states. ", *s <= r.states().back());
 
   for_all_states(s, r)
-    TEST(t, "r has the right final states. ", *s <= r.states().max());
+    TEST(t, "r has the right final states. ", *s <= r.states().back());
 
   return t.all_passed();
 }
