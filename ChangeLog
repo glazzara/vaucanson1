@@ -1,5 +1,21 @@
 2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Update automaton XMLs in data. 
+	I am wondering if they are useful on the SVN since they are generated.
+	However, they have changed and I do not want to this them while doing a
+	svn status!
+	* data/automata/b/a1.xml,
+	* data/automata/b/b1.xml,
+	* data/automata/b/div3base2.xml,
+	* data/automata/b/double-3-1.xml,
+	* data/automata/b/ladybird-6.xml,
+	* data/automata/tdc/t1.xml,
+	* data/automata/tdc/u1.xml,
+	* data/automata/z/b1.xml,
+	* data/automata/z/c1.xml: update xml output.
+
+2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix exceptions catching in tests.
 	When an exception was catched, the number of tests to run in the test program
 	was incremented. Thus, if exceptions were continuously thrown, the tests didn't finish.
