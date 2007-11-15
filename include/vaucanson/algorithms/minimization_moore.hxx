@@ -64,8 +64,8 @@ namespace vcsn {
 
     // Consts.
 
-    const hstate_t	NullState = -1;
-    const hstate_t	NullGroup = -1;
+    const hstate_t	NullState;
+    const hstate_t	NullGroup;
     const alphabet_t&	alphabet (input.series().monoid().alphabet());
 
     // Typedefs.

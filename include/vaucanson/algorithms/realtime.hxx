@@ -123,12 +123,12 @@ namespace vcsn {
     // perform cut-up.
     cut_up_here(res);
 
-    vector_t tmp(res.initial().size());
+    vector_t tmp;
+    tmp.reserve(res.initial().size());
     for_all_initial_states(i, res)
       tmp.push_back(*i);
     for_all(typename vector_t, i, tmp)
       do_realtime_words(res, hstate_t(), *i, res.get_initial(*i), true, false);
-
     tmp.clear();
     for_all_final_states(f, res)
       tmp.push_back(*f);

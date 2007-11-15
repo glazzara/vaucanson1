@@ -59,7 +59,7 @@ namespace vcsn
 	  std::list<unsigned> maybe_splittable_;
 	  std::vector<unsigned> count_for_;
 
-	  splitter_functor (const input_t& input, hstate_t max_state,
+	  splitter_functor (const input_t& input, unsigned max_state,
 			    class_of_t& class_of)
 	    : input_ (input), going_in_ (), class_of_(class_of),
 	      count_for_ (max_state)
@@ -153,7 +153,7 @@ namespace vcsn
 	  /// Add the transitions needed by @a representative.
 	  void execute (hstate_t representative)
 	  {
-	    src_ = class_of_ [representative];
+	    src_ = input_.get_state(class_of_ [representative]);
 	    input_.deltaf (*this, representative, delta_kind::transitions ());
 	  }
 
@@ -179,7 +179,7 @@ namespace vcsn
 
     using namespace internal::hopcroft_minimization_det;
 
-    unsigned max_state = input.states ().max () + 1;
+    unsigned max_state = input.states().back() + 1;
     partition_t partition (max_state);
     class_of_t class_of (max_state);
     to_treat_t to_treat;
@@ -259,7 +259,7 @@ namespace vcsn
     typename partition_t::iterator istates = partition.begin ();
     for (unsigned i = 0; i < n_partition; ++i, ++istates)
     {
-      int representative = *(*istates).begin();
+      hstate_t representative = *(*istates).begin();
 
       if (input.is_final (representative))
 	output.set_final (class_of[representative]);

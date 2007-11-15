@@ -72,7 +72,7 @@ namespace vcsn
     GClass::states() const
     {
       return states_t(hstate_t(0),
-                      hstate_t(states_.size()) - 1,
+                      hstate_t(states_.size() - 1),
                       removed_states_);
     }
 
@@ -81,7 +81,7 @@ namespace vcsn
     GClass::edges() const
     {
       return edges_t(hedge_t(0),
-		     hedge_t(edges_.size()) - 1,
+		     hedge_t(edges_.size() - 1),
                      removed_edges_);
     }
 
@@ -108,12 +108,12 @@ namespace vcsn
     bool
     GClass::has_state(hstate_t n) const
     {
-      bool res = ((removed_states_.find(n) == removed_states_.end())
-                      && n >= 0
-                      && n < int(states_.size()));
-      # ifndef VCSN_NDEBUG
+      bool res = (n.is_valid() &&
+		  n < unsigned(states_.size()) &&
+		  (removed_states_.find(n) == removed_states_.end()));
+     # ifndef VCSN_NDEBUG
       if (res == false)
-      for (int i = 0; i < int(edges_.size()); ++i)
+      for (unsigned i = 0; i < edges_.size(); ++i)
               if (removed_edges_.find(hedge_t(i)) == removed_edges_.end())
               postcondition(edges_[i].from != n
                               && edges_[i].to != n);
@@ -123,17 +123,25 @@ namespace vcsn
 
     TParam
     typename GClass::hstate_t
+    GClass::get_state(int n) const
+    {
+      precondition(has_state(hstate_t(n)));
+      return hstate_t(n);
+    }
+
+    TParam
+    typename GClass::hstate_t
     GClass::add_state()
     {
       if (removed_states_.size() == 0)
       {
         states_.push_back(state_value_t());
-        return states_.size() - 1;
+        return hstate_t(states_.size() - 1);
       }
 
       hstate_t n = *removed_states_.begin();
       removed_states_.erase(n);
-      assertion(n < int(states_.size()));
+      assertion(n < states_.size());
 
       states_[n].output_edges.clear();
       states_[n].input_edges.clear();
@@ -178,6 +186,7 @@ namespace vcsn
     GClass::set_initial(hstate_t n, const series_set_elt_value_t& v,
 			const series_set_elt_value_t& z)
     {
+      precondition (has_state(n));
       if (z == v)
         initial_.erase(n);
       else
@@ -188,6 +197,7 @@ namespace vcsn
     const typename GClass::series_set_elt_value_t&
     GClass::get_initial(hstate_t n, const series_set_elt_value_t& z) const
     {
+      precondition(has_state(n));
       typename initial_t::const_iterator i = initial_.find(n);
       if (i == initial_.end())
         return z;
@@ -213,6 +223,7 @@ namespace vcsn
     GClass::set_final(hstate_t n, const series_set_elt_value_t& v,
 		      const series_set_elt_value_t& z)
     {
+      precondition (has_state(n));
       if (v == z)
         final_.erase(n);
       else
@@ -223,6 +234,7 @@ namespace vcsn
     const typename GClass::series_set_elt_value_t&
     GClass::get_final(hstate_t n, const series_set_elt_value_t& z) const
     {
+      precondition (has_state(n));
       typename final_t::const_iterator i = final_.find(n);
       if (i == final_.end())
         return z;
@@ -253,10 +265,10 @@ namespace vcsn
     GClass::has_edge(hedge_t e) const
     {
       bool res = (removed_edges_.find(e) == removed_edges_.end()
-                  && (e < int(edges_.size())));
+                  && (e < edges_.size()));
       # ifndef VCSN_NDEBUG
       if (res == false)
-        for (int i = 0; i < int(states_.size()); ++i)
+        for (unsigned i = 0; i < states_.size(); ++i)
           if (removed_states_.find(hstate_t(i)) == removed_states_.end())
             postcondition(states_[i].output_edges.find(e) ==
                           states_[i].output_edges.end());
@@ -275,13 +287,13 @@ namespace vcsn
       if (removed_edges_.size() == 0)
       {
         edges_.push_back(edge_value_t(n1, n2, v));
-        e = edges_.size() - 1;
+        e = hedge_t(edges_.size() - 1);
       }
       else
       {
         e = *removed_edges_.begin();
         removed_edges_.erase(e);
-        assertion(e < int(edges_.size()));
+        assertion(e < edges_.size());
         edges_[e].from = n1;
         edges_[e].to = n2;
         edges_[e].label = v;
@@ -352,7 +364,7 @@ namespace vcsn
       label_t				l;
       WordValue				w;
 
-      for (int i = 0; i < int(edges_.size()); ++i)
+      for (unsigned i = 0; i < edges_.size(); ++i)
       {
         if (removed_edges_.find(hedge_t(i)) != removed_edges_.end())
           continue;

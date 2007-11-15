@@ -431,6 +431,10 @@ vaucanson/automata/implementation/generalized.hh			\
 vaucanson/automata/implementation/generalized.hxx			\
 vaucanson/automata/implementation/geometry.hh				\
 vaucanson/automata/implementation/geometry.hxx				\
+vaucanson/automata/implementation/legacy/legacy_handlers.hh 		\
+vaucanson/automata/implementation/legacy/legacy_handlers.hxx 		\
+vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh 	\
+vaucanson/automata/implementation/legacy/legacy_sparse_interval.hxx 	\
 vaucanson/automata/implementation/legacy_graph_impl.hh			\
 vaucanson/automata/implementation/legacy_graph_impl.hxx			\
 vaucanson/automata/implementation/kind_adapter.hh			\

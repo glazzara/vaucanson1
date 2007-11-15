@@ -26,7 +26,9 @@
 namespace vcsn {
 
   template <class T>
-  IdentityView<T>::IdentityView()
+  IdentityView<T>::IdentityView():
+    object_(0),
+    const_object_(0)
   {}
 
   template <class T>

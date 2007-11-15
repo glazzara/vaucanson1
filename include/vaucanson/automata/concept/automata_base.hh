@@ -265,27 +265,35 @@ namespace vcsn {
       /** Return true if the state is initial (ie it is in the initial
        support) . */
       bool is_initial(hstate_t state) const;
+      bool is_initial(unsigned state) const;
 
       /// Return true if the state is final (ie it is in the final support).
       bool is_final(hstate_t state) const;
+      bool is_final(unsigned state) const;
 
       /// Set the state to be initial.
       void set_initial(hstate_t state);
+      void set_initial(unsigned state);
 
       /// Set an initial multiplicity to the state.
       void set_initial(hstate_t state, const series_set_elt_t& m);
+      void set_initial(unsigned state, const series_set_elt_t& m);
 
       /// Set the state to be final.
       void set_final(hstate_t state);
+      void set_final(unsigned state);
 
       /// Set a final multiplicity to the state.
       void set_final(hstate_t state, const series_set_elt_t& m);
+      void set_final(unsigned state, const series_set_elt_t& m);
 
       /// Set the state not to be initial.
       void unset_initial(hstate_t state);
+      void unset_initial(unsigned state);
 
       /// Set the set not to be final.
       void unset_final(hstate_t state);
+      void unset_final(unsigned state);
 
       /// Make the support of the initial application to be empty.
       void clear_initial();
@@ -296,13 +304,20 @@ namespace vcsn {
       /// Return the initial multiplicity of the state.
       Element<series_set_t, series_set_elt_value_t>
       get_initial(hstate_t state) const;
+      Element<series_set_t, series_set_elt_value_t>
+      get_initial(unsigned state) const;
 
       /// Return the final multiplicity of the state.
       Element<series_set_t, series_set_elt_value_t>
-      get_final(hstate_t what) const;
+      get_final(hstate_t state) const;
+      Element<series_set_t, series_set_elt_value_t>
+      get_final(unsigned state) const;
 
       /// Add a new state to the automaton.
       hstate_t add_state();
+
+      /// Return a state descriptor for state number 'state'.
+      hstate_t get_state(unsigned state) const;
 
       /** Return a randomly chosen state. (valid only if the automaton
        is not empty) */
@@ -311,10 +326,15 @@ namespace vcsn {
       /// Add a new transition between @c src and @c dst labelled by @c label
       htransition_t add_transition(hstate_t src, hstate_t dst,
 				   const label_t& label);
+      htransition_t add_transition(unsigned src, unsigned dst,
+				   const label_t& label);
 
       /** Add a new weighted transition, specifying a semiring element
        * and a monoid element. */
       htransition_t add_weighted_transition(hstate_t src, hstate_t dst,
+					    const semiring_elt_t& w,
+					    const monoid_elt_value_t& m);
+      htransition_t add_weighted_transition(unsigned src, unsigned dst,
 					    const semiring_elt_t& w,
 					    const monoid_elt_value_t& m);
 
@@ -324,6 +344,8 @@ namespace vcsn {
        *  created. */
       htransition_t add_series_transition(hstate_t src, hstate_t dst,
 					  const series_set_elt_t& e);
+      htransition_t add_series_transition(unsigned src, unsigned dst,
+					  const series_set_elt_t& e);
 
       /// Add a spontaneous transition between @c src and @c dst.
       htransition_t add_spontaneous(hstate_t src, hstate_t dst,
@@ -331,21 +353,30 @@ namespace vcsn {
 
       htransition_t add_spontaneous(hstate_t src, hstate_t dst);
 
+      htransition_t add_spontaneous(unsigned src, unsigned dst,
+				    const semiring_elt_t& w);
+
+      htransition_t add_spontaneous(unsigned src, unsigned dst);
+
       /// Add a transition between @c src and @c dst labelled by a letter.
       htransition_t add_letter_transition(hstate_t src, hstate_t dst,
+					  const letter_t& l);
+      htransition_t add_letter_transition(unsigned src, unsigned dst,
 					  const letter_t& l);
 
       /// Update the label of a transition.
       void update(htransition_t e, const label_t& l);
 
       /// Delete the state @c s.
-      void del_state(hstate_t s);
+      void del_state(hstate_t state);
+      void del_state(unsigned state);
 
       /// Delete the transition @c e.
       void del_transition(htransition_t e);
 
       /// Check if the state @c s is in the automaton.
-      bool has_state(hstate_t s) const;
+      bool has_state(hstate_t state) const;
+      bool has_state(unsigned state) const;
 
       /// Check if the transition @c e is in the automaton.
       bool has_transition(htransition_t e) const;
@@ -393,12 +424,23 @@ namespace vcsn {
       void delta(OutputIterator res,
 		 hstate_t src,
 		 delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename Kind>
+      void delta(OutputIterator res,
+		 unsigned src,
+		 delta_kind::kind<Kind> k) const;
+
+
 
       /** Store the output transitions/states of the state @a src where
        *  @a query is true on a transition/state, using @a res.	 */
       template <typename OutputIterator, typename L, typename Kind>
       void delta(OutputIterator res,
 		 hstate_t src,
+		 const L& query,
+		 delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename L, typename Kind>
+      void delta(OutputIterator res,
+		 unsigned src,
 		 const L& query,
 		 delta_kind::kind<Kind> k) const;
 
@@ -409,12 +451,21 @@ namespace vcsn {
 			hstate_t src,
 			const L& letter,
 			delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename L, typename Kind>
+      void letter_delta(OutputIterator res,
+			unsigned src,
+			const L& letter,
+			delta_kind::kind<Kind> k) const;
 
       /** Store the output spontaneous transitions or states reached
        *  from @a src by an epsilon-transition.	 */
       template <typename OutputIterator, typename Kind>
       void spontaneous_delta(OutputIterator res,
 			     hstate_t src,
+			     delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename Kind>
+      void spontaneous_delta(OutputIterator res,
+			     unsigned src,
 			     delta_kind::kind<Kind> k) const;
 
       /*----------.
@@ -425,6 +476,8 @@ namespace vcsn {
        *  in the container @a res.  */
       template <typename Container, typename Kind>
       void deltac(Container& res, hstate_t src, delta_kind::kind<Kind> k) const;
+      template <typename Container, typename Kind>
+      void deltac(Container& res, unsigned src, delta_kind::kind<Kind> k) const;
 
       /** Store the output transitions/states of the state @a src where
        *  @a query is true on a transition/state, using the container
@@ -432,6 +485,11 @@ namespace vcsn {
       template <typename Container, typename L, typename Kind>
       void deltac(Container& res,
 		  hstate_t src,
+		  const L& query,
+		  delta_kind::kind<Kind> k) const;
+      template <typename Container, typename L, typename Kind>
+      void deltac(Container& res,
+		  unsigned src,
 		  const L& query,
 		  delta_kind::kind<Kind> k) const;
 
@@ -442,12 +500,21 @@ namespace vcsn {
 			 hstate_t src,
 			 const L& letter,
 			 delta_kind::kind<Kind> k) const;
+      template <typename Container, typename L, typename Kind>
+      void letter_deltac(Container& res,
+			 unsigned src,
+			 const L& letter,
+			 delta_kind::kind<Kind> k) const;
 
       /** Store the output spontaneous transitions or states reached
        *  from @a src by an epsilon-transition in the container @a res.	 */
       template <typename Container, typename Kind>
       void spontaneous_deltac(Container& res,
 			      hstate_t src,
+			      delta_kind::kind<Kind> k) const;
+      template <typename Container, typename Kind>
+      void spontaneous_deltac(Container& res,
+			      unsigned src,
 			      delta_kind::kind<Kind> k) const;
 
 
@@ -460,6 +527,8 @@ namespace vcsn {
        * false, the loop is stopped.  */
       template <typename Functor, typename Kind>
       void deltaf(Functor& fun, hstate_t src, delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename Kind>
+      void deltaf(Functor& fun, unsigned src, delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every output transitions/states of
        *  the state @a src where @a query is true.  If @a fun returns
@@ -467,6 +536,11 @@ namespace vcsn {
       template <typename Functor, typename L, typename Kind>
       void deltaf(Functor& fun,
 		  hstate_t src,
+		  const L& query,
+		  delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename L, typename Kind>
+      void deltaf(Functor& fun,
+		  unsigned src,
 		  const L& query,
 		  delta_kind::kind<Kind> k) const;
 
@@ -479,6 +553,11 @@ namespace vcsn {
 			 hstate_t src,
 			 const L& letter,
 			 delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename L, typename Kind>
+      void letter_deltaf(Functor& fun,
+			 unsigned src,
+			 const L& letter,
+			 delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every output spontaneous transitions
        *  or every states reached by @a src with an epsilon-transition.
@@ -487,6 +566,10 @@ namespace vcsn {
       template <typename Functor, typename Kind>
       void spontaneous_deltaf(Functor& fun,
 			      hstate_t src,
+			      delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename Kind>
+      void spontaneous_deltaf(Functor& fun,
+			      unsigned src,
 			      delta_kind::kind<Kind> k) const;
 
       /*-----------------.
@@ -499,12 +582,21 @@ namespace vcsn {
       void rdelta(OutputIterator res,
 		  hstate_t src,
 		  delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename Kind>
+      void rdelta(OutputIterator res,
+		  unsigned src,
+		  delta_kind::kind<Kind> k) const;
 
       /** Store the input transitions/states of the state @a src where
        *  @a query is true on a transition/state, using @a res.	 */
       template <typename OutputIterator, typename L, typename Kind>
       void rdelta(OutputIterator res,
 		  hstate_t src,
+		  const L& query,
+		  delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename L, typename Kind>
+      void rdelta(OutputIterator res,
+		  unsigned src,
 		  const L& query,
 		  delta_kind::kind<Kind> k) const;
 
@@ -515,12 +607,21 @@ namespace vcsn {
 			 hstate_t src,
 			 const L& letter,
 			 delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename L, typename Kind>
+      void letter_rdelta(OutputIterator res,
+			 unsigned src,
+			 const L& letter,
+			 delta_kind::kind<Kind> k) const;
 
       /** Store every input spontaneous transitions or every states that
        *  reach @a src with an epsilon-transition using @a res.	 */
       template <typename OutputIterator, typename Kind>
       void spontaneous_rdelta(OutputIterator res,
 			      hstate_t src,
+			      delta_kind::kind<Kind> k) const;
+      template <typename OutputIterator, typename Kind>
+      void spontaneous_rdelta(OutputIterator res,
+			      unsigned src,
 			      delta_kind::kind<Kind> k) const;
 
       /*------------------.
@@ -531,6 +632,8 @@ namespace vcsn {
        *  in the container @a res.  */
       template <typename Container, typename Kind>
       void rdeltac(Container& res, hstate_t src, delta_kind::kind<Kind> k) const;
+      template <typename Container, typename Kind>
+      void rdeltac(Container& res, unsigned src, delta_kind::kind<Kind> k) const;
 
       /** Store the input transitions/states of the state @a src where
        *  @a query is true on a transition/state, using the container
@@ -540,12 +643,22 @@ namespace vcsn {
 		   hstate_t src,
 		   const L& query,
 		   delta_kind::kind<Kind> k) const;
+      template <typename Container, typename L, typename Kind>
+      void rdeltac(Container& res,
+		  unsigned src,
+		  const L& query,
+		  delta_kind::kind<Kind> k) const;
 
       /** Store the input transitions/states of the state @a src where
        *  the label matches the letter @a letter.  */
       template <typename Container, typename L, typename Kind>
       void letter_rdeltac(Container& res,
 			  hstate_t src,
+			  const L& letter,
+			  delta_kind::kind<Kind> k) const;
+      template <typename Container, typename L, typename Kind>
+      void letter_rdeltac(Container& res,
+			  unsigned src,
 			  const L& letter,
 			  delta_kind::kind<Kind> k) const;
 
@@ -555,6 +668,11 @@ namespace vcsn {
       void spontaneous_rdeltac(Container& res,
 			       hstate_t src,
 			       delta_kind::kind<Kind> k) const;
+      template <typename Container, typename Kind>
+      void spontaneous_rdeltac(Container& res,
+			       unsigned src,
+			       delta_kind::kind<Kind> k) const;
+
 
       /*------------------.
       | Reverse deltafs.  |
@@ -564,12 +682,19 @@ namespace vcsn {
        *  the state @a src.  */
       template <typename Functor, typename Kind>
       void rdeltaf(Functor& fun, hstate_t src, delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename Kind>
+      void rdeltaf(Functor& fun, unsigned src, delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every input transitions/states of
        *  the state @a src where @a query is true. */
       template <typename Functor, typename L, typename Kind>
       void rdeltaf(Functor& fun,
 		   hstate_t src,
+		   const L& query,
+		   delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename L, typename Kind>
+      void rdeltaf(Functor& fun,
+		   unsigned src,
 		   const L& query,
 		   delta_kind::kind<Kind> k) const;
 
@@ -580,6 +705,11 @@ namespace vcsn {
 			  hstate_t src,
 			  const L& letter,
 			  delta_kind::kind<Kind> k) const;
+      template <typename Functor, typename L, typename Kind>
+      void letter_rdeltaf(Functor& fun,
+			  unsigned src,
+			  const L& letter,
+			  delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every input spontaneous transitions
        *  or every states that reach @a src with an epsilon-transition.	 */
@@ -587,7 +717,10 @@ namespace vcsn {
       void spontaneous_rdeltaf(Functor& fun,
 			       hstate_t src,
 			       delta_kind::kind<Kind> k) const;
-
+      template <typename Functor, typename Kind>
+      void spontaneous_rdeltaf(Functor& fun,
+			       unsigned src,
+			       delta_kind::kind<Kind> k) const;
     protected:
       MetaElement();
       MetaElement(const MetaElement& other);

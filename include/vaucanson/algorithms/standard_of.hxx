@@ -169,7 +169,7 @@ namespace vcsn {
 	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
 	  hstate_t new_i = auto_->add_state();
 	  hstate_t last = new_i;
-	  hstate_t new_f;
+	  hstate_t new_f = new_i;
 	  for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	       i != m.end(); ++i)
 	  {

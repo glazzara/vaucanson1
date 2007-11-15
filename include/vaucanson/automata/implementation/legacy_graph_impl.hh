@@ -21,19 +21,18 @@
 # include <map>
 # include <vector>
 
-# include <vaucanson/misc/sparse_interval.hh>
 # include <vaucanson/misc/support.hh>
 # include <vaucanson/misc/static.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
-# include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
-
+# include <vaucanson/automata/implementation/legacy/legacy_handlers.hh>
+# include <vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh>
 
 namespace vcsn
 {
@@ -59,9 +58,10 @@ namespace vcsn
 	/// Typedefs on automaton related graphs elements.
 	typedef typename LabelOf<K, WordValue, WeightValue, SeriesValue, Letter>
 	  ::ret						label_t;
-
-	typedef handler<state_h, int>			hstate_t;
-	typedef handler<transition_h, int>		htransition_t;
+	typedef unsigned				hstate_value_t;
+	typedef	unsigned				hedge_value_t;
+	typedef handler<state_h, hstate_value_t>	hstate_t;
+	typedef handler<transition_h, hedge_value_t>	htransition_t;
 	typedef htransition_t				hedge_t;
 
 	/// Edge decorator.
@@ -138,8 +138,8 @@ namespace vcsn
 
 	/** @name State's manipulation
 	** @{ */
+	hstate_t	    get_state(int n) const;
 	bool		    has_state(hstate_t n) const;
-
 	hstate_t	    add_state();
 
 	/// Remove state \a n.

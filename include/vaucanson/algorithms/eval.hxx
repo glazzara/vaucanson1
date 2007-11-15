@@ -47,7 +47,7 @@ namespace vcsn {
 
       template <typename A>
       eval_functor(const AutomataBase<A>&, const auto_t& aut)
-	: a(aut), max_hstate(a.states().max() + 1),
+	: a(aut), max_hstate(a.states().back() + 1),
 	  v1(max_hstate, a.series().semiring().wzero_), v2(max_hstate)
       {}
 
@@ -59,7 +59,7 @@ namespace vcsn {
 
       void execute(const input_t& word, Selt& result)
       {
-	const monoid_elt_t empty(a.series().monoid());
+	const monoid_elt_t empty = algebra::identity_as<monoid_elt_value_t>::of(a.series().monoid());
 
 	// Initialize
 	for_all_initial_states(i, a)

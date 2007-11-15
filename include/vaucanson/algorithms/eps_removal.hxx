@@ -80,7 +80,7 @@ namespace vcsn {
 
 	  m_semiring_elt[src][dst] += t.get(monoid_identity);
 	  t.assoc(monoid_identity.value(), semiring_elt_zero.value());
-	  if(t != null_series)
+	  if (t != null_series)
 	    a.add_series_transition(*s, a.dst_of(*e), t);
 	  a.del_transition(*e);
 	}
@@ -103,6 +103,7 @@ namespace vcsn {
     {
       for (int r = 0; r < size; r++)
       {
+	std::cout << !m_semiring_elt[r][r].starable() << std::endl;
 	result_not_computable_if(!m_semiring_elt[r][r].starable());
 
 	semiring_elt_t w = m_semiring_elt[r][r].star();
@@ -112,7 +113,7 @@ namespace vcsn {
 	  {
 	    semiring_elt_t z = m_semiring_elt[i][r] * w;
 	    m_semiring_elt[i][r] = z;
-	    if(z != semiring_elt_zero)
+	    if (z != semiring_elt_zero)
 	      for (int j = 0; j < size; j++)
 		if (j != r)
 		  m_semiring_elt[i][j] += z * m_semiring_elt[r][j];

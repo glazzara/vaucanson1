@@ -1,5 +1,62 @@
 2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Remove hstate_t's dependency on integer.
+	* include/Makefile.am: include new files in the tarball.
+
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/handlers.hxx:
+	This type declaration is a generic one which can be
+	specialized as needed. A handler must be convertible to an unsigned
+	and the constructor based on the contained type _must_ be explicitly
+	called.
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hxx:
+      	Introduce a new operator 'op_get_state'. The graph structure
+	is now used as a builder for hstate_t objects.
+	Since we want to refer to states both with integer and hstate_t we
+	also provide two versions of each operator handling states.
+
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx: .
+	Add new preconditions and use unsigned instead of signed integer as IDs
+	for the states.
+
+	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hh: New.
+	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hxx: New.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh: New.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hxx: New.
+	Split previous automata/concept/handlers.* and misc/sparce_interval.*
+	files and move the code related to the legacy implementation in these
+	new files.
+	SparseInterval::max() has been removed and replaced by
+	SparseInterval::back() for a better compatibility with STL containers.
+
+
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/eval.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/minimization_moore.hxx: .
+	* include/vaucanson/algorithms/realtime.hxx: .
+	* include/vaucanson/algorithms/search.hxx: .
+	* include/vaucanson/algorithms/standard_of.hxx: .
+	Various fixes to make these algorithms work with 'generic' hstate_t
+	variables. Basically, we just needed to replace calls to
+	SparseInterval::max(). 
+
+	* include/vaucanson/misc/random.hh: .
+	* include/vaucanson/misc/random.hxx: .
+	* include/vaucanson/tools/automaton_tools.hh: .
+	* include/vaucanson/tools/gen_random.hxx: .
+	Make the random function dependent on the data type of the container.
+
+	* taf-kit/src/edition_commands.hxx: make use of the get_state function.
+
+2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Update automaton XMLs in data. 
 	I am wondering if they are useful on the SVN since they are generated.
 	However, they have changed and I do not want to this them while doing a

@@ -75,8 +75,8 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
 
     // Code.
-    StatesSet		s_new (a.states().max() + 1);
-    StatesSet		s_old (a.states().max() + 1);
+    StatesSet		s_new (a.states().back() + 1);
+    StatesSet		s_old (a.states().back() + 1);
     unsigned int	i = 0;
 
     s_old.insert(a.initial().begin(), a.initial().end());
@@ -137,8 +137,8 @@ namespace vcsn {
     typedef misc::Bitset					bitset_t;
 
     // Code.
-    bitset_t	s_new (a.states().max() + 1);
-    bitset_t	s_old (a.states().max() + 1);
+    bitset_t	s_new (a.states().back() + 1);
+    bitset_t	s_old (a.states().back() + 1);
     int		pos = w.size();
     length_t	critpos = pos;
 
@@ -181,8 +181,8 @@ namespace vcsn {
     typedef misc::Bitset					bitset_t;
 
     // Code.
-    bitset_t	s_old (a.states().max() + 1);
-    bitset_t	s_new (a.states().max() + 1);
+    bitset_t	s_old (a.states().back() + 1);
+    bitset_t	s_new (a.states().back() + 1);
     iterator_t  pos = w.stream();
     iterator_t	last = pos;
 

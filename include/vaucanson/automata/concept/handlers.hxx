@@ -23,12 +23,8 @@ namespace vcsn
 {
 
   template<typename Tag, typename Type>
-  handler<Tag, Type>::handler()
+  handler<Tag, Type>::handler() : v_(Type())
   {}
-
-//  template<typename Tag, typename Type>
-//  handler<Tag, Type>::handler(Type h) : v_(h)
-//  {}
 
   template<typename Tag, typename Type>
   handler<Tag, Type>::handler(const Type& h) : v_(h)
@@ -47,62 +43,16 @@ namespace vcsn
   }
 
   template<typename Tag, typename Type>
-  handler<Tag, Type>& handler<Tag, Type>::operator=(Type h)
-  {
-    v_ = h;
-    return *this;
-  }
-
-  template<typename Tag, typename Type>
   Type handler<Tag, Type>::value() const
   {
     return v_;
   }
 
   template<typename Tag, typename Type>
-  handler<Tag, Type>::operator Type () const
+  bool
+  handler<Tag, Type>::is_valid() const
   {
-    return v_;
-  }
-
-  //Int specialization
-  template<typename Tag>
-  handler<Tag, int>::handler() : v_(0)
-  {}
-
-  template<typename Tag>
-  handler<Tag, int>::handler(const int& h) : v_(h)
-  {}
-
-  template<typename Tag>
-  handler<Tag, int>::handler(const handler<Tag, int>& h) : v_(h.v_)
-  {}
-
-  template<typename Tag>
-  handler<Tag, int>&
-  handler<Tag, int>::operator=(const handler<Tag, int>& h)
-  {
-    v_ = h.v_;
-    return *this;
-  }
-
-  template<typename Tag>
-  handler<Tag, int>& handler<Tag, int>::operator=(int h)
-  {
-    v_ = h;
-    return *this;
-  }
-
-  template<typename Tag>
-  int handler<Tag, int>::value() const
-  {
-    return v_;
-  }
-
-  template<typename Tag>
-  handler<Tag, int>::operator int () const
-  {
-    return v_;
+    return v_ != Type();
   }
 
 } // vcsn
