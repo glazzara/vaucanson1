@@ -31,7 +31,7 @@ namespace vcsn
     lhs_t dst(dst_.structure());
     typedef typename lhs_t::series_set_elt_t dst_series_set_elt_t;
 
-    std::map<typename rhs_t:: hstate_t, typename lhs_t::hstate_t> stmap;
+    std::map<typename rhs_t::hstate_t, typename lhs_t::hstate_t> stmap;
 
     for (typename rhs_t::state_iterator i = from.states().begin();
 	 i != from.states().end();

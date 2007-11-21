@@ -21,10 +21,10 @@
 # include <map>
 # include <vector>
 
-# include <vaucanson/misc/support.hh>
 # include <vaucanson/misc/static.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
+# include <vaucanson/misc/support.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
@@ -68,7 +68,7 @@ namespace vcsn
 	template<typename EdgeLabel>
 	struct edge_value
 	{
-	  inline edge_value(hstate_t h1, hstate_t h2,
+	  inline edge_value(const hstate_t& h1, const hstate_t& h2,
 	      const EdgeLabel& l = EdgeLabel())
 	    : label(l),
 	    from(h1),
@@ -139,13 +139,13 @@ namespace vcsn
 	/** @name State's manipulation
 	** @{ */
 	hstate_t	    get_state(int n) const;
-	bool		    has_state(hstate_t n) const;
+	bool		    has_state(const hstate_t& n) const;
 	hstate_t	    add_state();
 
 	/// Remove state \a n.
 	///
 	/// \pre \a n is a state of this graph.
-	void		    del_state(hstate_t n);
+	void		    del_state(const hstate_t& n);
 
 	/// Change whether a state is initial or not.
 	/// \param s  the state
@@ -162,13 +162,13 @@ namespace vcsn
 	/// because if \c some_weight is equal to \c z, then the state
 	/// is removed from the set of final states, and invalidates all
 	/// the iterators: the loop is broken.
-	void		    set_initial(hstate_t s,
+	void		    set_initial(const hstate_t& s,
 					const series_set_elt_value_t& v,
 					const series_set_elt_value_t& z);
 	const series_set_elt_value_t&
-			    get_initial(hstate_t,
+			    get_initial(const hstate_t&,
 					const series_set_elt_value_t&) const;
-	bool		    is_initial(hstate_t s,
+	bool		    is_initial(const hstate_t& s,
 				       const series_set_elt_value_t&) const;
 
 	void		    clear_initial();
@@ -179,13 +179,13 @@ namespace vcsn
 	/// \param z  the zero for the labels
 	///
 	/// \sa set_initial().
-	void		    set_final(hstate_t,
+	void		    set_final(const hstate_t&,
 				      const series_set_elt_value_t&,
 				      const series_set_elt_value_t&);
 	const series_set_elt_value_t&
-			    get_final(hstate_t,
+			    get_final(const hstate_t&,
 				      const series_set_elt_value_t&) const;
-	bool		    is_final(hstate_t s,
+	bool		    is_final(const hstate_t& s,
 				     const series_set_elt_value_t&) const;
 
 	void		    clear_final();
@@ -194,18 +194,18 @@ namespace vcsn
 
 	/** @name Edge's manipulation
 	** @{ */
-	bool		    has_edge(hedge_t n) const;
+	bool		    has_edge(const hedge_t& n) const;
 
-	hedge_t		    add_edge(hstate_t h1,
-				     hstate_t h2,
+	hedge_t		    add_edge(const hstate_t& h1,
+				     const hstate_t& h2,
 				     const label_t& v);
-	void		    del_edge(hedge_t e);
+	void		    del_edge(const hedge_t& e);
 
-	hstate_t	    src_of(hedge_t e1) const;
-	hstate_t	    dst_of(hedge_t e2) const;
+	hstate_t	    src_of(const hedge_t& e1) const;
+	hstate_t	    dst_of(const hedge_t& e2) const;
 
-	const label_t&	    label_of(hedge_t n) const;
-	void		    update(hedge_t, label_t);
+	const label_t&	    label_of(const hedge_t& n) const;
+	void		    update(const hedge_t&, label_t);
 	/** @} */
 
 	/** @name Only automaton related methods
@@ -216,7 +216,7 @@ namespace vcsn
 	/// Delta, Reverse deltas, for functor and iterator.
 # define DECLARE_DELTA_FUNCTION(DeltaName, DKind)			\
 	template <class OutputIterator, typename Query>			\
-	void DeltaName(OutputIterator res, hstate_t from,		\
+	void DeltaName(OutputIterator res, const hstate_t& from,	\
 		       const Query& q, ::vcsn::delta_kind::DKind) const
 	DECLARE_DELTA_FUNCTION (delta, states);
 	DECLARE_DELTA_FUNCTION (delta, transitions);
@@ -226,7 +226,7 @@ namespace vcsn
 
 # define DECLARE_DELTAF_BOOL_FUNCTION(DeltaName, DKind, IsBool)		\
 	template <class Functor, typename Query>			\
-	void DeltaName(Functor& fun, hstate_t from,			\
+	void DeltaName(Functor& fun, const hstate_t& from,		\
 		       const Query& q, ::vcsn::delta_kind::DKind,	\
 		       misc::IsBool ## _t) const
 	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
@@ -241,7 +241,7 @@ namespace vcsn
 
 # define DECLARE_DELTAF_FUNCTION(DeltaName)				\
 	template <class Functor, typename Query, typename DKind>	\
-	void DeltaName(Functor& fun, hstate_t from,			\
+	void DeltaName(Functor& fun, const hstate_t& from,		\
 		       const Query& q, ::vcsn::delta_kind::kind<DKind>) const
 	DECLARE_DELTAF_FUNCTION (deltaf);
 	DECLARE_DELTAF_FUNCTION (rdeltaf);

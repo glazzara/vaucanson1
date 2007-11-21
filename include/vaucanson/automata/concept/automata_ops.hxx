@@ -54,7 +54,7 @@ namespace vcsn {
 	       SELECTOR(R), const T& src)
   {
     typedef typename automaton_traits<R>::hstate_t dst_hstate_t;
-    typedef typename automaton_traits<T>::hstate_t src_hstate_t;
+    typedef const typename automaton_traits<T>::hstate_t& src_hstate_t;
     typedef typename automaton_traits<T>::transition_iterator transition_iterator;
     typedef typename automaton_traits<T>::final_iterator final_iterator;
     typedef typename automaton_traits<T>::initial_iterator initial_iterator;
@@ -173,7 +173,7 @@ namespace vcsn {
   template <class S, class T>
   void
   op_set_initial(const AutomataBase<S>& ss, T& v,
-		 typename automaton_traits<T>::hstate_t state,
+		 const typename automaton_traits<T>::hstate_t& state,
 		 const AutoType(series_set_elt_t)& s)
   {
     typedef
@@ -188,7 +188,7 @@ namespace vcsn {
   typename Element<S, T>::series_set_elt_t
   op_get_initial(const AutomataBase<S>& s,
 		 const T& v,
-		 typename automaton_traits<T>::hstate_t state)
+		 const typename automaton_traits<T>::hstate_t& state)
   {
     return typename Element<S, T>::series_set_elt_t
       (s.series(),
@@ -201,7 +201,7 @@ namespace vcsn {
   bool
   op_is_initial(const AutomataBase<S>& s,
 		 const T& v,
-		 typename automaton_traits<T>::hstate_t state)
+		 const typename automaton_traits<T>::hstate_t& state)
   {
     return v.is_initial(state, zero_value(s.series(),
 				SELECT(AutoType(series_set_elt_value_t))));
@@ -210,7 +210,7 @@ namespace vcsn {
   template <class S, class T>
   void
   op_set_final(const AutomataBase<S>& ss, T& v,
-	       typename automaton_traits<T>::hstate_t state,
+	       const typename automaton_traits<T>::hstate_t& state,
 	       const typename Element<S, T>::series_set_elt_t& s)
   {
     v.set_final(state,
@@ -259,7 +259,7 @@ namespace vcsn {
   typename Element<S, T>::series_set_elt_t
   op_get_final(const AutomataBase<S>& s,
 	       const T& v,
-	       typename automaton_traits<T>::hstate_t state)
+	       const typename automaton_traits<T>::hstate_t& state)
   {
     return typename Element<S, T>::series_set_elt_t
       (s.series(),
@@ -281,7 +281,7 @@ namespace vcsn {
   bool
   op_is_final(const AutomataBase<S>& s,
 	      const T& v,
-	      typename automaton_traits<T>::hstate_t state)
+	      const typename automaton_traits<T>::hstate_t& state)
   {
     return v.is_final(state, zero_value(s.series(),
 			      SELECT(AutoType(series_set_elt_value_t))));
@@ -335,8 +335,8 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::htransition_t
   op_add_transition(const AutomataBase<S>&, T& v,
-		    typename automaton_traits<T>::hstate_t from,
-		    typename automaton_traits<T>::hstate_t to,
+		    const typename automaton_traits<T>::hstate_t& from,
+		    const typename automaton_traits<T>::hstate_t& to,
 		    const typename Element<S, T>::label_t& label)
   {
     return v.add_edge(from, to, label);
@@ -356,8 +356,8 @@ namespace vcsn {
   template<class S, class T>
   typename automaton_traits<T>::htransition_t
   op_add_weighted_transition(const AutomataBase<S>& s, T& v,
-			     typename automaton_traits<T>::hstate_t from,
-			     typename automaton_traits<T>::hstate_t to,
+			     const typename automaton_traits<T>::hstate_t& from,
+			     const typename automaton_traits<T>::hstate_t& to,
 			     const typename Element<S, T>::semiring_elt_t& w,
 			     const typename Element<S, T>::monoid_elt_value_t& m)
   {
@@ -381,8 +381,8 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::htransition_t
   op_add_series_transition(const AutomataBase<S>& s, T& v,
-			   typename automaton_traits<T>::hstate_t from,
-			   typename automaton_traits<T>::hstate_t to,
+			   const typename automaton_traits<T>::hstate_t& from,
+			   const typename automaton_traits<T>::hstate_t& to,
 			   const typename Element<S, T>::series_set_elt_t& l)
   {
     return op_add_transition(s, v, from, to, l.value());
@@ -402,8 +402,8 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::htransition_t
   op_add_spontaneous(const AutomataBase<S>& s, T& v,
-		     typename automaton_traits<T>::hstate_t from,
-		     typename automaton_traits<T>::hstate_t to,
+		     const typename automaton_traits<T>::hstate_t& from,
+		     const typename automaton_traits<T>::hstate_t& to,
 		     const typename Element<S, T>::semiring_elt_t& w)
   {
     AutoType(series_set_elt_t) ss(s.series());
@@ -426,8 +426,8 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::htransition_t
   op_add_letter_transition(const AutomataBase<S>& s, T& v,
-			   typename automaton_traits<T>::hstate_t from,
-			   typename automaton_traits<T>::hstate_t to,
+			   const typename automaton_traits<T>::hstate_t& from,
+			   const typename automaton_traits<T>::hstate_t& to,
 			   const typename Element<S, T>::letter_t& l)
   {
     return op_add_transition(s, v, from, to, l);
@@ -447,7 +447,7 @@ namespace vcsn {
   template <class S, class T>
   void
   op_update(const AutomataBase<S>&, T& v,
-	    typename automaton_traits<T>::htransition_t  e,
+	    const typename automaton_traits<T>::htransition_t&  e,
 	    const AutoType(label_t)& l)
   {
     // FIXME: test that l != 0.
@@ -457,7 +457,7 @@ namespace vcsn {
   template <class S, class T>
   void
   op_del_state(const AutomataBase<S>&, T& v,
-	       typename automaton_traits<T>::hstate_t s)
+	       const typename automaton_traits<T>::hstate_t& s)
   {
     v.del_state(s);
   }
@@ -473,7 +473,7 @@ namespace vcsn {
   template <class S, class T>
   void
   op_del_transition(const AutomataBase<S>&, T& v,
-		    typename automaton_traits<T>::htransition_t e)
+		    const typename automaton_traits<T>::htransition_t& e)
   {
     v.del_edge(e);
   }
@@ -481,7 +481,7 @@ namespace vcsn {
   template <class S, class T>
   bool
   op_has_state(const AutomataBase<S>&, const T& v,
-	       typename automaton_traits<T>::hstate_t s)
+	       const typename automaton_traits<T>::hstate_t& s)
   {
     return v.has_state(s);
   }
@@ -497,7 +497,7 @@ namespace vcsn {
   template <class S, class T>
   bool
   op_has_transition(const AutomataBase<S>&, const T& v,
-		    typename automaton_traits<T>::htransition_t e)
+		    const typename automaton_traits<T>::htransition_t& e)
   {
     return v.has_edge(e);
   }
@@ -505,7 +505,7 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::hstate_t
   op_src_of(const AutomataBase<S>&, const T& v,
-	    typename automaton_traits<T>::htransition_t e)
+	    const typename automaton_traits<T>::htransition_t& e)
   {
     return v.src_of(e);
   }
@@ -513,7 +513,7 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::hstate_t
   op_dst_of(const AutomataBase<S>&, const T& v,
-	    typename automaton_traits<T>::htransition_t e)
+	    const typename automaton_traits<T>::htransition_t& e)
   {
     return v.dst_of(e);
   }
@@ -521,7 +521,7 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::label_t
   op_label_of(const AutomataBase<S>&, const T& v,
-	      typename automaton_traits<T>::htransition_t e)
+	      const typename automaton_traits<T>::htransition_t& e)
   {
     return v.label_of(e);
   }
@@ -529,7 +529,7 @@ namespace vcsn {
   template <class S, class T>
   const typename Element<S, T>::series_set_elt_t
   op_series_of(const AutomataBase<S>& s, const T& v,
-	       typename automaton_traits<T>::htransition_t e)
+	       const typename automaton_traits<T>::htransition_t& e)
   {
     return typename Element<S, T>::series_set_elt_t
       (s.series(),
@@ -539,7 +539,7 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::series_set_elt_value_t
   op_series_value_of(const AutomataBase<S>& s, const T& v,
-		     typename automaton_traits<T>::htransition_t e)
+		     const typename automaton_traits<T>::htransition_t& e)
   {
     return op_series_of(s, v, e).value();
   }
@@ -547,7 +547,7 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::monoid_elt_t
   op_word_of(const AutomataBase<S>& s, const T& v,
-	     typename automaton_traits<T>::htransition_t e)
+	     const typename automaton_traits<T>::htransition_t& e)
   {
     return typename Element<S, T>::monoid_elt_t
       (s.series().monoid(),
@@ -557,7 +557,7 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::semiring_elt_t
   op_weight_of(const AutomataBase<S>& s, const T& v,
-	       typename automaton_traits<T>::htransition_t e)
+	       const typename automaton_traits<T>::htransition_t& e)
   {
     return op_series_of(s, v, e).get(op_word_of(s, v, e));
   }
@@ -565,7 +565,7 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>& s, const T& v,
-		   typename automaton_traits<T>::htransition_t e)
+		   const typename automaton_traits<T>::htransition_t& e)
   {
     return op_word_of(s, v, e).value();
   }
@@ -573,7 +573,7 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::letter_t
   op_letter_of(const AutomataBase<S>&, const T& v,
-	       typename automaton_traits<T>::htransition_t e)
+	       const typename automaton_traits<T>::htransition_t& e)
   {
     return v.label_of(e);
   }
@@ -581,7 +581,7 @@ namespace vcsn {
   template <class S, class T>
   bool
   op_is_spontaneous(const AutomataBase<S>& s, const T& v,
-		    typename automaton_traits<T>::htransition_t e)
+		    const typename automaton_traits<T>::htransition_t& e)
   {
     return (op_series_of(s, v, e) ==
 	    algebra::identity_as<AutoType(series_set_elt_value_t)>::of(s.series()));
@@ -590,7 +590,7 @@ namespace vcsn {
   template<typename T>
   struct always_true
   {
-      bool operator()(typename automaton_traits<T>::htransition_t) const
+      bool operator()(const typename automaton_traits<T>::htransition_t&) const
       {
 	return true;
       }
@@ -607,7 +607,7 @@ namespace vcsn {
       {
       }
 
-      bool operator()(typename automaton_traits<T>::htransition_t e) const
+      bool operator()(const typename automaton_traits<T>::htransition_t& e) const
       {
 	return (op_series_get(s_->series(),
 			      op_series_of(*s_, *v_, e).value(),
@@ -638,7 +638,7 @@ namespace vcsn {
 	v_(v)
       {}
 
-      bool operator()(typename automaton_traits<T>::htransition_t e) const
+      bool operator()(const typename automaton_traits<T>::htransition_t& e) const
       {
 	return (op_series_of(s_, v_, e)
 		.get(algebra::identity_as<AutoType(monoid_elt_value_t)>::of
@@ -667,7 +667,7 @@ namespace vcsn {
 	    typename OutputIterator, typename Kind>
   void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res,
-		typename automaton_traits<T>::hstate_t from,
+		const typename automaton_traits<T>::hstate_t& from,
 		delta_kind::kind<Kind> k)
   {
     v.delta(res, from, always_true<T>(), k);
@@ -687,7 +687,7 @@ namespace vcsn {
 	    typename OutputIterator, typename L, typename Kind>
   void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res,
-		typename automaton_traits<T>::hstate_t from,
+		const typename automaton_traits<T>::hstate_t& from,
 		const L& query,
 		delta_kind::kind<Kind> k)
   {
@@ -709,7 +709,7 @@ namespace vcsn {
 	    typename OutputIterator, typename L, typename Kind>
   void op_letter_delta(const AutomataBase<S>& s, const T& v,
 		       OutputIterator res,
-		       typename automaton_traits<T>::hstate_t from,
+		       const typename automaton_traits<T>::hstate_t& from,
 		       const L& letter,
 		       delta_kind::kind<Kind> k)
   {
@@ -733,7 +733,7 @@ namespace vcsn {
   void op_spontaneous_delta(const AutomataBase<S>& s,
 			    const T& v,
 			    OutputIterator res,
-			    typename automaton_traits<T>::hstate_t from,
+			    const typename automaton_traits<T>::hstate_t& from,
 			    delta_kind::kind<Kind> k)
   {
     v.delta (res, from, make_spontaneous_query(s.self(), v), k);
@@ -759,7 +759,7 @@ namespace vcsn {
 	    typename Container, typename Kind>
   void op_deltac(const AutomataBase<S>&, const T& v,
 		 Container& res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -781,7 +781,7 @@ namespace vcsn {
   void op_deltac(const AutomataBase<S>&,
 		 const T& v,
 		 Container& res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::kind<Kind> k)
   {
@@ -806,7 +806,7 @@ namespace vcsn {
   void op_letter_deltac(const AutomataBase<S>& s,
 			const T& v,
 			Container& res,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::kind<Kind> k)
   {
@@ -830,7 +830,7 @@ namespace vcsn {
   void op_spontaneous_deltac(const AutomataBase<S>& s,
 			     const T& v,
 			     Container& res,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -855,7 +855,7 @@ namespace vcsn {
 	    typename Functor, typename Kind>
   void op_deltaf(const AutomataBase<S>&, const T& v,
 		 Functor& fun,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 delta_kind::kind<Kind> k)
   {
     v.deltaf(fun, from, always_true<T>(), k);
@@ -876,7 +876,7 @@ namespace vcsn {
   void op_deltaf(const AutomataBase<S>&,
 		 const T& v,
 		 Functor& fun,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::kind<Kind> k)
   {
@@ -901,7 +901,7 @@ namespace vcsn {
   void op_letter_deltaf(const AutomataBase<S>& s,
 			const T& v,
 			Functor& fun,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::kind<Kind> k)
   {
@@ -924,7 +924,7 @@ namespace vcsn {
   void op_spontaneous_deltaf(const AutomataBase<S>& s,
 			     const T& v,
 			     Functor& fun,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::kind<Kind> k)
   {
     v.deltaf(fun, from, make_spontaneous_query(s.self(), v), k);
@@ -949,7 +949,7 @@ namespace vcsn {
 	    typename OutputIterator, typename Kind>
   void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 delta_kind::kind<Kind> k)
   {
     v.rdelta (res, from, always_true<T>(), k);
@@ -969,7 +969,7 @@ namespace vcsn {
 	    typename OutputIterator, typename L, typename Kind>
   void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::kind<Kind> k)
   {
@@ -991,7 +991,7 @@ namespace vcsn {
 	    typename OutputIterator, typename L, typename Kind>
   void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
 			OutputIterator res,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::kind<Kind> k)
   {
@@ -1013,7 +1013,7 @@ namespace vcsn {
 	    typename OutputIterator, typename Kind>
   void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
 			     OutputIterator res,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::kind<Kind> k)
   {
     v.rdelta(res, from, make_spontaneous_query(s.self(), v), k);
@@ -1038,7 +1038,7 @@ namespace vcsn {
   void op_rdeltac(const AutomataBase<S>&,
 		  const T& v,
 		  Container& res,
-		  typename automaton_traits<T>::hstate_t from,
+		  const typename automaton_traits<T>::hstate_t& from,
 		  delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -1061,7 +1061,7 @@ namespace vcsn {
   void op_rdeltac(const AutomataBase<S>&,
 		  const T& v,
 		  Container& res,
-		  typename automaton_traits<T>::hstate_t from,
+		  const typename automaton_traits<T>::hstate_t& from,
 		  const L& query,
 		  delta_kind::kind<Kind> k)
   {
@@ -1086,7 +1086,7 @@ namespace vcsn {
   void op_letter_rdeltac(const AutomataBase<S>& s,
 			 const T& v,
 			 Container& res,
-			 typename automaton_traits<T>::hstate_t from,
+			 const typename automaton_traits<T>::hstate_t& from,
 			 const L& letter,
 			 delta_kind::kind<Kind> k)
   {
@@ -1110,7 +1110,7 @@ namespace vcsn {
   void op_spontaneous_rdeltac(const AutomataBase<S>& s,
 			      const T& v,
 			      Container& res,
-			      typename automaton_traits<T>::hstate_t from,
+			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -1136,7 +1136,7 @@ namespace vcsn {
   void op_rdeltaf(const AutomataBase<S>&,
 		  const T& v,
 		  Functor& fun,
-		  typename automaton_traits<T>::hstate_t from,
+		  const typename automaton_traits<T>::hstate_t& from,
 		  delta_kind::kind<Kind> k)
   {
     v.rdeltaf(fun, from, always_true<T>(), k);
@@ -1158,7 +1158,7 @@ namespace vcsn {
   void op_rdeltaf(const AutomataBase<S>&,
 		  const T& v,
 		  Functor& fun,
-		  typename automaton_traits<T>::hstate_t from,
+		  const typename automaton_traits<T>::hstate_t& from,
 		  const L& query,
 		  delta_kind::kind<Kind> k)
   {
@@ -1183,7 +1183,7 @@ namespace vcsn {
   void op_letter_rdeltaf(const AutomataBase<S>& s,
 			 const T& v,
 			 Functor& fun,
-			 typename automaton_traits<T>::hstate_t from,
+			 const typename automaton_traits<T>::hstate_t& from,
 			 const L& letter,
 			 delta_kind::kind<Kind> k)
   {
@@ -1206,7 +1206,7 @@ namespace vcsn {
   void op_spontaneous_rdeltaf(const AutomataBase<S>& s,
 			      const T& v,
 			      Functor& fun,
-			      typename automaton_traits<T>::hstate_t from,
+			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::kind<Kind> k)
   {
     v.rdeltaf(fun, from, make_spontaneous_query(s.self(), v), k);

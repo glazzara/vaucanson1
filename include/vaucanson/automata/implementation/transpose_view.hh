@@ -124,26 +124,26 @@ namespace vcsn {
   template <class S, class T>
   void
   op_set_initial(const AutomataBase<S>&, TransposeView<T>&,
-		 typename automaton_traits<T>::hstate_t state,
+		 const typename automaton_traits<T>::hstate_t& state,
 		 const AutoType(series_set_elt_t)& s);
 
   template <class S, class T>
   AutoType(series_set_elt_t)
   op_get_initial(const AutomataBase<S>&,
 		 const TransposeView<T>&,
-		 typename automaton_traits<T>::hstate_t);
+		 const typename automaton_traits<T>::hstate_t&);
 
   template <class S, class T>
   void
   op_set_final(const AutomataBase<S>&, TransposeView<T>&,
-	       typename automaton_traits<T>::hstate_t state,
+	       const typename automaton_traits<T>::hstate_t& state,
 	       const typename Element<S, T>::series_set_elt_t& s);
 
   template <class S, class T>
   typename Element<S, T>::series_set_elt_t
   op_get_final(const AutomataBase<S>&,
 	       const TransposeView<T>&,
-	       typename automaton_traits<T>::hstate_t state);
+	       const typename automaton_traits<T>::hstate_t& state);
 
   template <class S, class T>
   void
@@ -156,17 +156,17 @@ namespace vcsn {
   template <class S, class T>
   typename automaton_traits<T>::hstate_t
   op_src_of(const AutomataBase<S>&, const TransposeView<T>&,
-	    typename automaton_traits<T>::htransition_t);
+	    const typename automaton_traits<T>::htransition_t&);
 
   template <class S, class T>
   typename automaton_traits<T>::hstate_t
   op_dst_of(const AutomataBase<S>&, const TransposeView<T>&,
-	    typename automaton_traits<T>::htransition_t);
+	    const typename automaton_traits<T>::htransition_t&);
 
   /** @} */
 
   // output_return_type = OutputIterator
-  // output_type	= typename automaton_traits<T>::htransition_t
+  // output_type	= const typename automaton_traits<T>::htransition_t&
   // direction		= output
 
   /// store the output transitions of the state 'from' using 'res'.
@@ -174,7 +174,7 @@ namespace vcsn {
 	    typename OutputIterator>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
 		OutputIterator res,
-		typename automaton_traits<T>::hstate_t from,
+		const typename automaton_traits<T>::hstate_t& from,
 		delta_kind::transitions k);
 
   /**
@@ -187,7 +187,7 @@ namespace vcsn {
 	    typename OutputIterator, typename L>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
 		OutputIterator res,
-		typename automaton_traits<T>::hstate_t from,
+		const typename automaton_traits<T>::hstate_t& from,
 		const L& query,
 		delta_kind::transitions k);
 
@@ -201,7 +201,7 @@ namespace vcsn {
 	    typename OutputIterator, typename L>
   void op_letter_delta(const AutomataBase<S>&, const TransposeView<T>&,
 		       OutputIterator res,
-		       typename automaton_traits<T>::hstate_t from,
+		       const typename automaton_traits<T>::hstate_t& from,
 		       const L& letter,
 		       delta_kind::transitions k);
 
@@ -210,18 +210,18 @@ namespace vcsn {
 	    typename OutputIterator>
   void op_spontaneous_delta(const AutomataBase<S>&, const TransposeView<T>&,
 			    OutputIterator res,
-			    typename automaton_traits<T>::hstate_t from,
+			    const typename automaton_traits<T>::hstate_t& from,
 			    delta_kind::transitions k);
 
   // output_return_type = Container
-  // output_type	= typename automaton_traits<T>::htransition_t
+  // output_type	= const typename automaton_traits<T>::htransition_t&
   // direction		= output
 
   /// Store the output transitions of the state 'from' in the container 'res'.
   template <class S, class T,
 	    typename Container>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-		 Container& res, typename automaton_traits<T>::hstate_t from, delta_kind::transitions k);
+		 Container& res, const typename automaton_traits<T>::hstate_t& from, delta_kind::transitions k);
 
   /**
    * @brief Delta with a query and container output.
@@ -233,7 +233,7 @@ namespace vcsn {
 	    typename Container, typename L>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 		 Container& res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::transitions k);
 
@@ -247,7 +247,7 @@ namespace vcsn {
 	    typename Container, typename L>
   void op_letter_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 			Container& res,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::transitions k);
 
@@ -255,11 +255,11 @@ namespace vcsn {
   template <class S, class T, class Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 			     Container& res,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::transitions k);
 
   // output_return_type = OutputIterator
-  // output_type	= typename automaton_traits<T>::hstate_t
+  // output_type	= const typename automaton_traits<T>::hstate_t&
   // direction		= output
 
   /**
@@ -270,7 +270,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
 		OutputIterator res,
-		typename automaton_traits<T>::hstate_t from,
+		const typename automaton_traits<T>::hstate_t& from,
 		delta_kind::states k);
 
   /**
@@ -282,7 +282,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator, typename L>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
 		OutputIterator res,
-		typename automaton_traits<T>::hstate_t from,
+		const typename automaton_traits<T>::hstate_t& from,
 		const L& query,
 		delta_kind::states k);
 
@@ -295,7 +295,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator, typename L>
   void op_letter_delta(const AutomataBase<S>&, const TransposeView<T>&,
 		       OutputIterator res,
-		       typename automaton_traits<T>::hstate_t from,
+		       const typename automaton_traits<T>::hstate_t& from,
 		       const L& letter,
 		       delta_kind::states k);
 
@@ -303,11 +303,11 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_delta(const AutomataBase<S>&, const TransposeView<T>&,
 			    OutputIterator res,
-			    typename automaton_traits<T>::hstate_t from,
+			    const typename automaton_traits<T>::hstate_t& from,
 			    delta_kind::states k);
 
   // output_return_type = Container
-  // output_type	= typename automaton_traits<T>::hstate_t
+  // output_type	= const typename automaton_traits<T>::hstate_t&
   // direction		= output
 
   /**
@@ -318,7 +318,7 @@ namespace vcsn {
    */
   template<class S, class T, typename Container>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-		 Container& res, typename automaton_traits<T>::hstate_t from, delta_kind::states k);
+		 Container& res, const typename automaton_traits<T>::hstate_t& from, delta_kind::states k);
 
   /**
    * @brief Delta with a query, using container output.
@@ -329,7 +329,7 @@ namespace vcsn {
   template<class S, class T, typename Container, typename L>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 		 Container& res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::states k);
 
@@ -342,7 +342,7 @@ namespace vcsn {
   template<class S, class T, typename Container, typename L>
   void op_letter_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 			Container& res,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::states k);
 
@@ -350,11 +350,11 @@ namespace vcsn {
   template<class S, class T, typename Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 			     Container& res,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::states k);
 
   // output_return_type = OutputIterator
-  // output_type	= typename automaton_traits<T>::htransition_t
+  // output_type	= const typename automaton_traits<T>::htransition_t&
   // direction		= input
 
   /**
@@ -365,7 +365,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 		 OutputIterator res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 delta_kind::transitions k);
 
   /**
@@ -377,7 +377,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator, typename L>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 		 OutputIterator res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::transitions k);
 
@@ -390,7 +390,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator, typename L>
   void op_letter_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 			OutputIterator res,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::transitions k);
 
@@ -398,11 +398,11 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 			     OutputIterator res,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::transitions k);
 
   // output_return_type = Container
-  // output_type	= typename automaton_traits<T>::htransition_t
+  // output_type	= const typename automaton_traits<T>::htransition_t&
   // direction		= input
 
   /**
@@ -412,7 +412,7 @@ namespace vcsn {
    */
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-		  Container& res, typename automaton_traits<T>::hstate_t from, delta_kind::transitions k);
+		  Container& res, const typename automaton_traits<T>::hstate_t& from, delta_kind::transitions k);
 
   /**
    * @brief Reverse delta using a query, with container output.
@@ -423,7 +423,7 @@ namespace vcsn {
   template<class S, class T, typename Container, typename L>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 		  Container& res,
-		  typename automaton_traits<T>::hstate_t from,
+		  const typename automaton_traits<T>::hstate_t& from,
 		  const L& query,
 		  delta_kind::transitions k);
 
@@ -436,7 +436,7 @@ namespace vcsn {
   template<class S, class T, typename Container, typename L>
   void op_letter_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 			 Container& res,
-			 typename automaton_traits<T>::hstate_t from,
+			 const typename automaton_traits<T>::hstate_t& from,
 			 const L& letter,
 			 delta_kind::transitions k);
 
@@ -444,18 +444,18 @@ namespace vcsn {
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 			      Container& res,
-			      typename automaton_traits<T>::hstate_t from,
+			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::transitions k);
 
   // output_return_type = OutputIterator
-  // output_type	= typename automaton_traits<T>::hstate_t
+  // output_type	= const typename automaton_traits<T>::hstate_t&
   // direction		= input
 
   /// store the output states of the state 'from' using 'res'.
   template<class S, class T, typename OutputIterator>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 		 OutputIterator res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 delta_kind::states k);
 
   /**
@@ -467,7 +467,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator, typename L>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 		 OutputIterator res,
-		 typename automaton_traits<T>::hstate_t from,
+		 const typename automaton_traits<T>::hstate_t& from,
 		 const L& query,
 		 delta_kind::states k);
 
@@ -480,7 +480,7 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator, typename L>
   void op_letter_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 			OutputIterator res,
-			typename automaton_traits<T>::hstate_t from,
+			const typename automaton_traits<T>::hstate_t& from,
 			const L& letter,
 			delta_kind::states k);
 
@@ -488,11 +488,11 @@ namespace vcsn {
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
 			     OutputIterator res,
-			     typename automaton_traits<T>::hstate_t from,
+			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::states k);
 
   // output_return_type = Container
-  // output_type	= typename automaton_traits<T>::hstate_t
+  // output_type	= const typename automaton_traits<T>::hstate_t&
   // direction		= input
 
   /**
@@ -503,7 +503,7 @@ namespace vcsn {
    */
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-		  Container& res, typename automaton_traits<T>::hstate_t from, delta_kind::states k);
+		  Container& res, const typename automaton_traits<T>::hstate_t& from, delta_kind::states k);
 
   /**
    * @brief Reverse delta in a container, with a query.
@@ -514,7 +514,7 @@ namespace vcsn {
   template<class S, class T, typename Container, typename L>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 		  Container& res,
-		  typename automaton_traits<T>::hstate_t from,
+		  const typename automaton_traits<T>::hstate_t& from,
 		  const L& query,
 		  delta_kind::states k);
 
@@ -527,7 +527,7 @@ namespace vcsn {
   template<class S, class T, typename Container, typename L>
   void op_letter_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 			 Container& res,
-			 typename automaton_traits<T>::hstate_t from,
+			 const typename automaton_traits<T>::hstate_t& from,
 			 const L& letter,
 			 delta_kind::states k);
 
@@ -535,7 +535,7 @@ namespace vcsn {
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 			      Container& res,
-			      typename automaton_traits<T>::hstate_t from,
+			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::states k);
 
 } // vcsn

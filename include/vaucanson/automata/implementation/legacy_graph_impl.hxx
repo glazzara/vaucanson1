@@ -106,7 +106,7 @@ namespace vcsn
 
     TParam
     bool
-    GClass::has_state(hstate_t n) const
+    GClass::has_state(const hstate_t& n) const
     {
       bool res = (n.is_valid() &&
 		  n < unsigned(states_.size()) &&
@@ -152,7 +152,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::del_state(hstate_t n)
+    GClass::del_state(const hstate_t& n)
     {
       precondition (has_state(n));
 
@@ -183,7 +183,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::set_initial(hstate_t n, const series_set_elt_value_t& v,
+    GClass::set_initial(const hstate_t& n, const series_set_elt_value_t& v,
 			const series_set_elt_value_t& z)
     {
       precondition (has_state(n));
@@ -195,7 +195,7 @@ namespace vcsn
 
     TParam
     const typename GClass::series_set_elt_value_t&
-    GClass::get_initial(hstate_t n, const series_set_elt_value_t& z) const
+    GClass::get_initial(const hstate_t& n, const series_set_elt_value_t& z) const
     {
       precondition(has_state(n));
       typename initial_t::const_iterator i = initial_.find(n);
@@ -206,7 +206,7 @@ namespace vcsn
 
     TParam
     bool
-    GClass::is_initial(const hstate_t s, const series_set_elt_value_t& z) const
+    GClass::is_initial(const hstate_t& s, const series_set_elt_value_t& z) const
     {
       return get_initial(s, z) != z;
     }
@@ -220,7 +220,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::set_final(hstate_t n, const series_set_elt_value_t& v,
+    GClass::set_final(const hstate_t& n, const series_set_elt_value_t& v,
 		      const series_set_elt_value_t& z)
     {
       precondition (has_state(n));
@@ -232,7 +232,7 @@ namespace vcsn
 
     TParam
     const typename GClass::series_set_elt_value_t&
-    GClass::get_final(hstate_t n, const series_set_elt_value_t& z) const
+    GClass::get_final(const hstate_t& n, const series_set_elt_value_t& z) const
     {
       precondition (has_state(n));
       typename final_t::const_iterator i = final_.find(n);
@@ -243,7 +243,7 @@ namespace vcsn
 
     TParam
     bool
-    GClass::is_final(const hstate_t s, const series_set_elt_value_t& z) const
+    GClass::is_final(const hstate_t& s, const series_set_elt_value_t& z) const
     {
       return get_final(s, z) != z;
     }
@@ -262,7 +262,7 @@ namespace vcsn
 
     TParam
     bool
-    GClass::has_edge(hedge_t e) const
+    GClass::has_edge(const hedge_t& e) const
     {
       bool res = (removed_edges_.find(e) == removed_edges_.end()
                   && (e < edges_.size()));
@@ -278,7 +278,7 @@ namespace vcsn
 
     TParam
     typename GClass::hedge_t
-    GClass::add_edge(hstate_t n1, hstate_t n2,
+    GClass::add_edge(const hstate_t& n1, const hstate_t& n2,
 		     const label_t& v)
     {
       precondition(has_state(n1));
@@ -307,7 +307,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::del_edge(hedge_t e)
+    GClass::del_edge(const hedge_t& e)
     {
       precondition (has_edge(e));
 
@@ -322,7 +322,7 @@ namespace vcsn
 
     TParam
     typename GClass::hstate_t
-    GClass::src_of(hedge_t e1) const
+    GClass::src_of(const hedge_t& e1) const
     {
       precondition(has_edge(e1));
       return edges_[e1].from;
@@ -330,7 +330,7 @@ namespace vcsn
 
     TParam
     typename GClass::hstate_t
-    GClass::dst_of(hedge_t e2) const
+    GClass::dst_of(const hedge_t& e2) const
     {
       precondition(has_edge(e2));
       return edges_[e2].to;
@@ -338,7 +338,7 @@ namespace vcsn
 
     TParam
     const typename GClass::label_t&
-    GClass::label_of(hedge_t n) const
+    GClass::label_of(const hedge_t& n) const
     {
       precondition(has_edge(n));
       return edges_[n];
@@ -346,7 +346,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::update(hedge_t e, label_t l)
+    GClass::update(const hedge_t& e, label_t l)
     {
       precondition(has_edge(e));
       edges_[e].label = l;
@@ -398,7 +398,7 @@ namespace vcsn
     template <class OutputIterator, class Query>			\
     void								\
     GClass::DeltaName(OutputIterator res,				\
-                      hstate_t from,					\
+                      const hstate_t& from,				\
                       const Query& query,				\
                       ::vcsn::delta_kind::DKind) const			\
     {									\
@@ -425,7 +425,7 @@ namespace vcsn
     template <typename Functor, class Query>				\
     void								\
     GClass::DeltaName(Functor& fun,					\
-                      hstate_t from,					\
+                      const hstate_t& from,				\
                       const Query& query,				\
                       ::vcsn::delta_kind::DKind,			\
                       misc::IsBool ## _t) const				\
@@ -470,7 +470,7 @@ namespace vcsn
     template <typename Functor, class Query, typename DKind>		\
     void								\
     GClass::DeltaName(Functor& fun,					\
-                    hstate_t from,					\
+                    const hstate_t& from,				\
                     const Query& query,					\
                     delta_kind::kind<DKind> k) const			\
     {									\

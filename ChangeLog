@@ -1,5 +1,25 @@
 2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	hstate_t and htransition_t are now passed as const references. 
+	* automata/concept/automata_base.hh,
+	* automata/concept/automata_base.hxx,
+	* automata/concept/automata_ops.hh,
+	* automata/concept/automata_ops.hxx,
+	* automata/concept/copy.hxx,
+	* automata/implementation/automaton_view.hh,
+	* automata/implementation/automaton_view.hxx,
+	* automata/implementation/legacy_graph_impl.hh,
+	* automata/implementation/legacy_graph_impl.hxx,
+	* automata/implementation/light_graph_impl.hh,
+	* automata/implementation/light_graph_impl.hxx,
+	* automata/implementation/transpose_view.hh,
+	* automata/implementation/transpose_view.hxx:
+	Since handlers can now store various sort of data, we needed to avoid
+	copies of such objects. Thus, I changed the prototypes of every op_*
+	functions.
+
+2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Move implementation's specific code into its own directory. 
 	* automata/implementation/boostg/boost_functors.hxx: Remove,
 	* automata/implementation/boostg/boostg_functors.hxx: New,

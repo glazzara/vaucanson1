@@ -72,10 +72,6 @@ namespace vcsn
     typename GClass::states_t
     GClass::states() const
     {
-      std::cout << "states() " << std::endl;
-      for (unsigned i = 0; i < states_.size(); ++i)
-	std::cout << states_[i] << ", ";
-      std::cout << std::endl;
       return states_t(states_);
     }
 
@@ -83,10 +79,6 @@ namespace vcsn
     typename GClass::edges_t
     GClass::edges() const
     {
-      std::cout << "edges() " << std::endl;
-      for (unsigned i = 0; i < edges_.size(); ++i)
-	std::cout << "(" << edge_data_[i].from_ << ", " << edge_data_[i].to_ << "), ";
-      std::cout << std::endl;
       return edges_t(edges_);
     }
 
@@ -94,7 +86,6 @@ namespace vcsn
     typename GClass::initial_support_t
     GClass::initial() const
     {
-      std::cout << "initial() " << std::endl;
       return initial_support_t(initial_);
     }
 
@@ -102,7 +93,6 @@ namespace vcsn
     typename GClass::final_support_t
     GClass::final() const
     {
-      std::cout << "final() " << std::endl;
       return final_support_t(final_);
     }
 
@@ -113,32 +103,31 @@ namespace vcsn
 
     TParam
     bool
-    GClass::has_state(hstate_t n) const
+    GClass::has_state(const hstate_t& n) const
     {
-      return n >= 0 && n < int(states_.size());
+      return n < states_.size();
     }
 
     TParam
     typename GClass::hstate_t
     GClass::add_state()
     {
-        states_.push_back(states_.size());
+        states_.push_back(hstate_t(states_.size()));
         return states_.size() - 1;
     }
 
     TParam
     void
-    GClass::del_state(hstate_t n)
+    GClass::del_state(const hstate_t& n)
     {
       precondition (has_state(n));
-      std::cout << "del_state = " << n << std::endl;
 
       initial_.erase(n);
       final_.erase(n);
 
-      if (states_.size() > 1 && n != int(states_.size() - 1))
+      if (states_.size() > 1 && n != states_.size() - 1)
       {
-	int moved_state = states_.size() - 1;
+	unsigned moved_state = states_.size() - 1;
 	for (unsigned i = 0; i < edges_.size();)
 	{
 	  if (edge_data_[i].from_ == n || edge_data_[i].to_ == n)
@@ -184,7 +173,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::set_initial(hstate_t n, const series_set_elt_value_t& v,
+    GClass::set_initial(const hstate_t& n, const series_set_elt_value_t& v,
 			const series_set_elt_value_t& z)
     {
       if (z == v)
@@ -195,7 +184,7 @@ namespace vcsn
 
     TParam
     const typename GClass::series_set_elt_value_t&
-    GClass::get_initial(hstate_t n, const series_set_elt_value_t& z) const
+    GClass::get_initial(const hstate_t& n, const series_set_elt_value_t& z) const
     {
       typename initial_t::const_iterator i = initial_.find(n);
       if (i == initial_.end())
@@ -205,7 +194,7 @@ namespace vcsn
 
     TParam
     bool
-    GClass::is_initial(const hstate_t s, const series_set_elt_value_t& z) const
+    GClass::is_initial(const hstate_t& s, const series_set_elt_value_t& z) const
     {
       return get_initial(s, z) != z;
     }
@@ -219,7 +208,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::set_final(hstate_t n, const series_set_elt_value_t& v,
+    GClass::set_final(const hstate_t& n, const series_set_elt_value_t& v,
 		      const series_set_elt_value_t& z)
     {
       if (v == z)
@@ -230,7 +219,7 @@ namespace vcsn
 
     TParam
     const typename GClass::series_set_elt_value_t&
-    GClass::get_final(hstate_t n, const series_set_elt_value_t& z) const
+    GClass::get_final(const hstate_t& n, const series_set_elt_value_t& z) const
     {
       typename final_t::const_iterator i = final_.find(n);
       if (i == final_.end())
@@ -240,7 +229,7 @@ namespace vcsn
 
     TParam
     bool
-    GClass::is_final(const hstate_t s, const series_set_elt_value_t& z) const
+    GClass::is_final(const hstate_t& s, const series_set_elt_value_t& z) const
     {
       return get_final(s, z) != z;
     }
@@ -259,30 +248,28 @@ namespace vcsn
 
     TParam
     bool
-    GClass::has_edge(hedge_t e) const
+    GClass::has_edge(const hedge_t& e) const
     {
-      return e >= 0 && e < int(edges_.size());
+      return e < edges_.size();
     }
 
     TParam
     typename GClass::hedge_t
-    GClass::add_edge(hstate_t n1, hstate_t n2,
+    GClass::add_edge(const hstate_t& n1, const hstate_t& n2,
 		     const label_t& v)
     {
-				std::cout << "add_edge() " << std::endl;
       precondition(has_state(n1));
       precondition(has_state(n2));
 
       edge_data_.push_back(EdgeValue(n1, n2, v));
-			edges_.push_back(edges_.size());
+			edges_.push_back(htransition_t(edges_.size()));
       return edges_.size() - 1;
     }
 
     TParam
     void
-    GClass::del_edge(hedge_t e)
+    GClass::del_edge(const hedge_t& e)
     {
-      std::cout << "del_edge() " << std::endl;
       precondition (has_edge(e));
 
       if (edges_.size() > 1)
@@ -301,7 +288,7 @@ namespace vcsn
 
     TParam
     typename GClass::hstate_t
-    GClass::src_of(hedge_t e1) const
+    GClass::src_of(const hedge_t& e1) const
     {
       precondition(has_edge(e1));
       return edge_data_[e1].from_;
@@ -309,16 +296,15 @@ namespace vcsn
 
     TParam
     typename GClass::hstate_t
-    GClass::dst_of(hedge_t e2) const
+    GClass::dst_of(const hedge_t& e2) const
     {
-      std::cout << "dst_of " << e2 << " = " << edge_data_[e2].to_<< std::endl;
       precondition(has_edge(e2));
       return edge_data_[e2].to_;
     }
 
     TParam
     const typename GClass::label_t&
-    GClass::label_of(hedge_t n) const
+    GClass::label_of(const hedge_t& n) const
     {
       precondition(has_edge(n));
       return edge_data_[n].label_;
@@ -326,7 +312,7 @@ namespace vcsn
 
     TParam
     void
-    GClass::update(hedge_t e, label_t l)
+    GClass::update(const hedge_t& e, const label_t& l)
     {
       precondition(has_edge(e));
       edge_data_[e].label_ = l;
@@ -344,7 +330,7 @@ namespace vcsn
       label_t				l;
       WordValue				w;
 
-      for (int i = 0; i < int(edges_.size()); ++i)
+      for (unsigned i = 0; i < edges_.size(); ++i)
       {
         // Make sure that source and destination of edge are part of the
         // automaton.
@@ -376,17 +362,14 @@ namespace vcsn
     template <class OutputIterator, class Query>			\
     void								\
     GClass::DeltaName(OutputIterator res,				\
-                      hstate_t from,					\
+                      const hstate_t& from,				\
                       const Query& query,				\
                       ::vcsn::delta_kind::DKind) const			\
     {									\
       assertion(has_state(from));					\
       for_all_const_(std::vector<htransition_t>, e, edges_)		\
 	if (IO == from && query(*e))					\
-	{								\
-	  std::cout << "add this to the result: " << WhatFromE << std::endl; \
 	  *res++ = WhatFromE;						\
-	}								\
     }									\
 
     DEFINE_DELTA_FUNCTION (delta, transitions, src_of(*e), *e);
@@ -405,7 +388,7 @@ namespace vcsn
     template <typename Functor, class Query>				\
     void								\
     GClass::DeltaName(Functor& fun,					\
-                      hstate_t from,					\
+                      const hstate_t& from,				\
                       const Query& query,				\
                       ::vcsn::delta_kind::DKind,			\
                       misc::IsBool ## _t) const				\
@@ -449,7 +432,7 @@ namespace vcsn
     template <typename Functor, class Query, typename DKind>		\
     void								\
     GClass::DeltaName(Functor& fun,					\
-                    hstate_t from,					\
+                    const hstate_t& from,				\
                     const Query& query,					\
                     delta_kind::kind<DKind> k) const			\
     {									\
