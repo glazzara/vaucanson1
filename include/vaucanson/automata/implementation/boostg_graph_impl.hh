@@ -21,8 +21,9 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
+# include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
+# include <vaucanson/automata/implementation/boostg/boostg_support.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
-# include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/smart_label.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
@@ -30,8 +31,6 @@
 # include <vaucanson/misc/hash.hh>
 
 //NEW INCLUDES
-# include <vaucanson/automata/implementation/boostg/boost_support.hh>
-# include <vaucanson/automata/implementation/light/light_support.hh>
 # include <boost/multi_index_container.hpp>
 # include <boost/multi_index/member.hpp>
 # include <boost/multi_index/ordered_index.hpp>
@@ -42,8 +41,6 @@
 # include <boost/multi_index/composite_key.hpp>
 # include <boost/dynamic_bitset.hpp>
 
-// FIXME: how to handle htransition_t?
-// FIXME: do we have enough to handle it?
 
 // FIXME: remove
 using namespace vcsn::misc;
@@ -52,8 +49,6 @@ namespace vcsn
 {
   namespace boostg
   {
-    // FIXME use VCSN_BMI and remove those using
-# define VCSN_BMI(Type) ::boost::multi_index::Type
     using ::boost::multi_index_container;
     using ::boost::multi_index::hashed_non_unique;
     using ::boost::multi_index::indexed_by;
@@ -94,23 +89,29 @@ namespace vcsn
 
 	typedef typename SmartLabelContainer<label_t>::hlabel_t
 							hlabel_t;
-	typedef handler<state_h, int>			hstate_t;
-	typedef handler<state_h, unsigned*>		bgstate_t;
+
+	// State descriptor.
+	//
+	typedef handler<state_h, unsigned*>		hstate_t;
 
 	struct EdgeValue
 	{
-	  EdgeValue (bgstate_t from, bgstate_t to, hlabel_t l);
+	  EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
 
 	  hlabel_t label_;
-	  bgstate_t from_;
-	  bgstate_t to_;
+	  hstate_t from_;
+	  hstate_t to_;
 	}; // End of class EdgeValue
 
 	typedef EdgeValue				edge_data_t;
-	typedef handler<transition_h, const EdgeValue*> htransition_t;
-	typedef htransition_t				hedge_t;
 
 	// Functor used to update the label of a transition.
+	//
+	// Boost::multi_index only provides const iterators and modifying some data
+	// in such a container is a special operation which may require to reorder
+	// several sets internaly. Thus, a special method is provided, update(), which
+	// uses such functors.
+	//
 	// See implementation in automata/implementation/boostg/boost_functors.hxx.
 	struct update_label : public std::unary_function<hlabel_t, void>
 	{
@@ -133,14 +134,14 @@ namespace vcsn
 	// Composite key (source, label)
 	struct SuccessorKey : composite_key <
 	    EdgeValue,
-	    BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, from_),
+	    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
 	    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
 	> {};
 
 	// Composite key (target, label)
 	struct PredecessorKey : composite_key <
 	  EdgeValue,
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, to_),
+	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
 	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
 	> {};
 
@@ -148,7 +149,7 @@ namespace vcsn
 	typedef hashed_non_unique <
 	  tag<succ>,
 	  SuccessorKey,
-	  VCSN_BMI(composite_key_hash)<
+	  composite_key_hash<
 	    misc::hash_state_handler,
 	    misc::hash_handler<hlabel_t>
 	  >
@@ -158,7 +159,7 @@ namespace vcsn
 	typedef hashed_non_unique <
 	  tag<pred>,
 	  PredecessorKey,
-	  VCSN_BMI(composite_key_hash)<
+	  composite_key_hash<
 	    misc::hash_state_handler,
 	    misc::hash_handler<hlabel_t>
 	  >
@@ -168,7 +169,7 @@ namespace vcsn
 	// Single key (source)
 	typedef hashed_non_unique <
 	  tag<src>,
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, from_),
+	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
 	  misc::hash_state_handler
 	> Source;
 
@@ -176,7 +177,7 @@ namespace vcsn
 	// Single key (target)
 	typedef hashed_non_unique <
 	  tag<dst>,
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, bgstate_t, to_),
+	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
 	  misc::hash_state_handler
 	> Destination;
 
@@ -208,12 +209,27 @@ namespace vcsn
 	>
 	{ };
 
+	typedef GraphContainer			graph_data_t;
+	// Transition descriptor.
+	//
+	// We store a pointer to an EdgeValue to avoid a new index on transitions and
+	// get the data more quickly. Actually this is the adresse of an element
+	// inserted in the multi_index.
+	// We are allowed to do so since Boost::multi_index guaranties that the data
+	// inserted will not be reallocated.
+	//
+	// We may need to try storing an iterator instead of a pointer. We haven't tried yet
+	// since its size is higher than a simple pointer.
+	typedef typename GraphContainer::iterator	edges_iterator;
+	typedef handler<transition_h, edges_iterator>	htransition_t;
+	typedef htransition_t				hedge_t;
+
 	template <typename S>
 	struct InitialValue
 	{
-	  InitialValue(const bgstate_t& state, const S& series);
+	  InitialValue(const hstate_t& state, const S& series);
 
-	  bgstate_t first; // state
+	  hstate_t first; // state
 	  S second; // series
 	};
 
@@ -221,8 +237,9 @@ namespace vcsn
 	class VGraphContainerIterator
 	{
 	  public:
-	    VGraphContainerIterator(typename GraphContainer::iterator i);
-	    htransition_t operator*();
+	    typedef typename GraphContainer::iterator	iterator;
+	    VGraphContainerIterator(const GraphContainer& c, typename GraphContainer::iterator i);
+	    htransition_t operator*() const;
 
 	    bool operator==(const VGraphContainerIterator& v) const;
 	    bool operator!=(const VGraphContainerIterator& v) const;
@@ -230,7 +247,9 @@ namespace vcsn
 	    VGraphContainerIterator operator++(int);
 
 	  private:
-	    typename GraphContainer::iterator it_;
+	    iterator it_;
+	    iterator next_;
+	    const GraphContainer& container_;
 	};
 
 	class VGraphContainer
@@ -250,15 +269,14 @@ namespace vcsn
 	    const GraphContainer& graph_;
 	};
 
-	typedef GraphContainer			graph_data_t;
 	//The graph stores  edges only, thus we can define this type.
 	typedef VGraphContainer			edges_t;
-	typedef std::vector<bgstate_t>		states_data_t;
+	typedef std::vector<hstate_t>		states_data_t;
 	typedef misc::Support<states_data_t>	states_t;
 
 	//FIXME: find a better name than initial_container_t. The word initial
 	//is ambiguous since we use it also for final_t
-	typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, bgstate_t>
+	typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, hstate_t>
 							  initial_container_t;
 
 	typedef typename initial_container_t::Type	  initial_t;
@@ -311,43 +329,44 @@ namespace vcsn
 	final_support_t	  final () const;
 
 	// state manipulations
-	bool		  has_state (hstate_t h) const;
+	bool		  has_state (const hstate_t& h) const;
 	hstate_t	  add_state ();
-	void		  del_state (hstate_t h);
+	hstate_t	  get_state (unsigned h) const;
+	void		  del_state (const hstate_t& h);
 
-	void		  set_initial(hstate_t s,
+	void		  set_initial(const hstate_t& s,
 				      const series_set_elt_value_t& v,
 				      const series_set_elt_value_t& z);
 	const series_set_elt_value_t&
-			  get_initial(hstate_t,
+			  get_initial(const hstate_t&,
 				      const series_set_elt_value_t&) const;
-	bool		  is_initial(hstate_t s,
+	bool		  is_initial(const hstate_t& s,
 				     const series_set_elt_value_t&) const;
 	void		  clear_initial();
 
-	void		  set_final(hstate_t,
+	void		  set_final(const hstate_t&,
 				    const series_set_elt_value_t&,
 				    const series_set_elt_value_t&);
 	const series_set_elt_value_t&
-			  get_final(hstate_t,
+			  get_final(const hstate_t&,
 				    const series_set_elt_value_t&) const;
-	bool		  is_final(hstate_t s,
+	bool		  is_final(const hstate_t& s,
 				   const series_set_elt_value_t&) const;
 	void		  clear_final();
 
 
 	// edge manipulations
-	bool		  has_edge (hedge_t h) const;
-	hedge_t		  add_edge (hstate_t from,
-				    hstate_t to,
+	bool		  has_edge (const hedge_t& h) const;
+	hedge_t		  add_edge (const hstate_t& from,
+				    const hstate_t& to,
 				    const label_t& l);
-	void		  del_edge (hedge_t h);
+	void		  del_edge (const hedge_t& h);
 
-	hstate_t	  src_of (hedge_t h) const;
-	hstate_t	  dst_of (hedge_t h) const;
+	hstate_t	  src_of (const hedge_t& h) const;
+	hstate_t	  dst_of (const hedge_t& h) const;
 
-	const label_t&	  label_of (hedge_t h) const;
-	void		  update(hedge_t h, const label_t& l);
+	const label_t&	  label_of (const hedge_t& h) const;
+	void		  update(const hedge_t& h, const label_t& l);
 
 	// check the consistency of an automata
 	template <class S>
@@ -366,7 +385,7 @@ namespace vcsn
       */
 # define DECLARE_DELTA_FUNCTION(FunName, DeltaKind)			\
 	template <typename OutputIterator, typename Query>		\
-	void FunName (OutputIterator res, hstate_t from,		\
+	void FunName (OutputIterator res, const hstate_t& from,		\
 	              const Query& q, ::vcsn::delta_kind::DeltaKind) const
 	DECLARE_DELTA_FUNCTION (delta, states);
 	DECLARE_DELTA_FUNCTION (delta, transitions);
@@ -376,7 +395,7 @@ namespace vcsn
 
 # define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
 	template <typename Functor, typename Query>			\
-	void FunName (Functor& f, hstate_t from, const Query& q,	\
+	void FunName (Functor& f, const hstate_t& from, const Query& q,	\
                       ::vcsn::delta_kind::DeltaKind, misc::IsBool ## _t) const
 	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
 	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
@@ -390,7 +409,7 @@ namespace vcsn
 
 # define DECLARE_DELTAF_FUNCTION(FunName)				\
 	template <typename Functor, typename Query, typename DeltaKind>	\
-	void FunName (Functor& f, hstate_t from,			\
+	void FunName (Functor& f, const hstate_t& from,			\
 	              const Query& q, ::vcsn::delta_kind::kind<DeltaKind>) const
 	DECLARE_DELTAF_FUNCTION (deltaf);
 	DECLARE_DELTAF_FUNCTION (rdeltaf);
@@ -399,8 +418,8 @@ namespace vcsn
 
       private:
 	typename graph_data_t::const_iterator
-			  find_edge(const bgstate_t&,
-				    const bgstate_t&,
+			  find_edge(const hstate_t&,
+				    const hstate_t&,
 				    const hlabel_t&) const;
 
 	geometry_t	  geometry_;
@@ -631,14 +650,11 @@ namespace vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/automata/implementation/boostg_graph_impl.hxx>
-#  include <vaucanson/automata/implementation/boostg/boost_functors.hxx>
+#  include <vaucanson/automata/implementation/boostg/boostg_functors.hxx>
 #  include <vaucanson/automata/implementation/boostg/initial_value.hxx>
 #  include <vaucanson/automata/implementation/boostg/vgraph_container.hxx>
 #  include <vaucanson/automata/implementation/boostg/edge_value.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
-
-
-# undef VCSN_BMI
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_ //
 

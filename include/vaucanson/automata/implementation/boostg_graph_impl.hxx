@@ -72,7 +72,7 @@ namespace vcsn
         states_(initial_number_of_states)
     {
       for (unsigned i = 0; i < initial_number_of_states; ++i)
-        states_[i] = bgstate_t(new unsigned(i));
+        states_[i] = hstate_t(new unsigned(i));
     }
 
     BOOSTGRAPH_TPARAM
@@ -90,20 +90,20 @@ namespace vcsn
         delete i->value();
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
-        states_[i] = bgstate_t(new unsigned(i));
+        states_[i] = hstate_t(new unsigned(i));
       graph_.clear();
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
           ++i)
-        graph_.insert(EdgeValue(states_[*i->from_.value()],
-                                states_[*i->to_.value()],
+        graph_.insert(EdgeValue(states_[i->from_],
+                                states_[i->to_],
                                 label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
       Set.clear();										\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
           ++i)											\
-        Set.insert(InitialValue<series_set_elt_value_t> (states_[*i->first.value()], i->second));
+        Set.insert(InitialValue<series_set_elt_value_t> (states_[i->first], i->second));
       VCSN_COPY_I_T(initial_)
       VCSN_COPY_I_T(final_)
   # undef VCSN_COPY_I_T
@@ -128,11 +128,11 @@ namespace vcsn
             i != g.geometry_.transitions().end();
             ++i)
         {
-          typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_.value()],
-                                                                states_[*i->first.value()->to_.value()],
+          typename graph_data_t::const_iterator tmp = find_edge(states_[i->first.value()->from_],
+                                                                states_[i->first.value()->to_],
                                                                 label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
           if (tmp != graph_.end())
-            map_transitions[htransition_t(&*tmp)] = i->second;
+            map_transitions[htransition_t(tmp)] = i->second;
         }
       }
     }
@@ -169,20 +169,20 @@ namespace vcsn
         delete i->value();
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
-        states_[i] = bgstate_t(new unsigned(i));
+        states_[i] = hstate_t(new unsigned(i));
       graph_.clear();
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
           ++i)
-        graph_.insert(EdgeValue(states_[*i->from_.value()],
-                                states_[*i->to_.value()],
+        graph_.insert(EdgeValue(states_[i->from_],
+                                states_[i->to_],
                                 label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
       Set.clear();										\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
           ++i)											\
-        Set.insert(InitialValue<series_set_elt_value_t> (states_[*i->first.value()], i->second));
+        Set.insert(InitialValue<series_set_elt_value_t> (states_[i->first], i->second));
       VCSN_COPY_I_T(initial_)
       VCSN_COPY_I_T(final_)
   # undef VCSN_COPY_I_T
@@ -207,11 +207,11 @@ namespace vcsn
             i != g.geometry_.transitions().end();
             ++i)
         {
-          typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_.value()],
-                                                                states_[*i->first.value()->to_.value()],
+          typename graph_data_t::const_iterator tmp = find_edge(states_[i->first.value()->from_],
+                                                                states_[i->first.value()->to_],
                                                                 label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
           if (tmp != graph_.end())
-            map_transitions[htransition_t(&*tmp)] = i->second;
+            map_transitions[htransition_t(tmp)] = i->second;
         }
       }
       return *this;
@@ -256,10 +256,9 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     bool
-    BOOSTGRAPH::has_state (hstate_t s) const
+    BOOSTGRAPH::has_state (const hstate_t& s) const
     {
-      bgstate_t h(states_[s.value()]);
-      typename states_t::const_iterator i;
+      typename states_data_t::const_iterator i;
       for (i = states_.begin();
           i != states_.end() && *i != s;
           ++i)
@@ -273,58 +272,66 @@ namespace vcsn
     {
       initial_bitset_.append(false);
       final_bitset_.append(false);
-      bgstate_t h(new unsigned(number_of_state_++));
+      hstate_t h(new unsigned(number_of_state_++));
       states_.push_back(h);
-      return hstate_t(*h.value());
+      return h;
+    }
+
+    BOOSTGRAPH_TPARAM
+    typename BOOSTGRAPH::hstate_t
+    BOOSTGRAPH::get_state (unsigned s) const
+    {
+      precondition(s < states_.size());
+      return states_[s];
     }
 
     BOOSTGRAPH_TPARAM
     void
-    BOOSTGRAPH::del_state (hstate_t s)
+    BOOSTGRAPH::del_state (const hstate_t& s)
     {
       precondition (has_state(s));
-      bgstate_t h(states_[s.value()]);
-      --number_of_state_;
 
       // One removes the state h
-      graph_.get<src>().erase(h);
-      graph_.get<dst>().erase(h);
+      graph_.get<src>().erase(s);
+      graph_.get<dst>().erase(s);
 
-      if (*h.value() != number_of_state_ && number_of_state_)
+      if (s != (number_of_state_ - 1) && (number_of_state_ - 1))
       {
-        *(states_.back().value()) = *h.value();
-        states_[*h.value()] = states_.back();
-
-  # define VCSN_UPDATE(Set)					      \
-        if (Set##bitset_[number_of_state_])			      \
-        {								      \
-          if (Set##bitset_[*h.value()])				      \
-            Set.erase(h);						      \
-          else							      \
-            Set##bitset_[*h.value()] = true;			      \
-        }								      \
-        else							      \
-        {								      \
-          if (Set##bitset_[*h.value()])				      \
-          {							      \
-            Set##bitset_[*h.value()] = false;			      \
-            Set.erase(h);						      \
-          }							      \
+	hstate_t lastone = states_.back();
+        states_[s] = lastone;
+  # define VCSN_UPDATE(Set)				      \
+        if (Set##bitset_[lastone])			      \
+        {						      \
+          if (Set##bitset_[s])				      \
+            Set.erase(s);				      \
+          else						      \
+            Set##bitset_[s] = true;			      \
+        }						      \
+        else						      \
+        {						      \
+          if (Set##bitset_[s])				      \
+          {						      \
+            Set##bitset_[s] = false;			      \
+            Set.erase(s);				      \
+          }						      \
         }
 
         //Updating initial/final states information
         VCSN_UPDATE(initial_)
         VCSN_UPDATE(final_)
   # undef VCSN_UPDATE
+	*lastone.value() = *s.value();
       }
       else
       {
-        initial_.erase(h);
-        final_.erase(h);
+        initial_.erase(s);
+        final_.erase(s);
       }
 
+      --number_of_state_;
       states_.pop_back();
-      delete h.value();
+      postcondition(states_.size() == number_of_state_);
+      delete s.value();
       initial_bitset_.resize(number_of_state_);
       final_bitset_.resize(number_of_state_);
 
@@ -334,30 +341,30 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     void
-    BOOSTGRAPH::set_initial (hstate_t h,
-                            const series_set_elt_value_t& v,
-                            const series_set_elt_value_t& z)
+    BOOSTGRAPH::set_initial (const hstate_t& s,
+                             const series_set_elt_value_t& v,
+                             const series_set_elt_value_t& z)
     {
-      bgstate_t s(states_[h.value()]);
+      precondition(has_state(s));
       if (z == v)
       {
         initial_.erase (s);
-        initial_bitset_[*s.value()] = false;
+        initial_bitset_[s] = false;
       }
       else
-        if (!initial_bitset_[*s.value()])
+        if (!initial_bitset_[s])
         {
           initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
-          initial_bitset_[*s.value()] = true;
+          initial_bitset_[s] = true;
         }
     }
 
     BOOSTGRAPH_TPARAM
     const typename BOOSTGRAPH::series_set_elt_value_t&
-    BOOSTGRAPH::get_initial(hstate_t s, const series_set_elt_value_t &zero) const
+    BOOSTGRAPH::get_initial(const hstate_t& s, const series_set_elt_value_t &zero) const
     {
-      bgstate_t state(states_[s.value()]);
-      typename initial_t::const_iterator it = initial_.find(state);
+      precondition(has_state(s));
+      typename initial_t::const_iterator it = initial_.find(s);
 
       if (it == initial_.end())
         return zero;
@@ -366,9 +373,10 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     bool
-    BOOSTGRAPH::is_initial(const hstate_t s, const series_set_elt_value_t&) const
+    BOOSTGRAPH::is_initial(const hstate_t& s, const series_set_elt_value_t&) const
     {
-      return initial_bitset_[s.value()];
+      precondition(has_state(s));
+      return initial_bitset_[s];
     }
 
     BOOSTGRAPH_TPARAM
@@ -381,30 +389,30 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     void
-    BOOSTGRAPH::set_final(hstate_t h,
+    BOOSTGRAPH::set_final(const hstate_t& s,
                           const series_set_elt_value_t& v,
                           const series_set_elt_value_t& z)
     {
-      bgstate_t s(states_[h.value()]);
+      precondition(has_state(s));
       if (z == v)
       {
         final_.erase (s);
-        final_bitset_[*s.value()] = false;
+        final_bitset_[s] = false;
       }
       else
-        if (!final_bitset_[*s.value()])
+        if (!final_bitset_[s])
         {
           final_.insert (InitialValue<series_set_elt_value_t> (s, v));
-          final_bitset_[*s.value()] = true;
+          final_bitset_[s] = true;
         }
     }
 
     BOOSTGRAPH_TPARAM
     const typename BOOSTGRAPH::series_set_elt_value_t&
-    BOOSTGRAPH::get_final(hstate_t s, const series_set_elt_value_t &zero) const
+    BOOSTGRAPH::get_final(const hstate_t& s, const series_set_elt_value_t &zero) const
     {
-      bgstate_t state(states_[s.value()]);
-      typename final_t::const_iterator it = final_.find(state);
+      precondition(has_state(s));
+      typename final_t::const_iterator it = final_.find(s);
 
       if (it == final_.end())
         return zero;
@@ -413,9 +421,10 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     bool
-    BOOSTGRAPH::is_final(const hstate_t s, const series_set_elt_value_t&) const
+    BOOSTGRAPH::is_final(const hstate_t& s, const series_set_elt_value_t&) const
     {
-      return final_bitset_[s.value()];
+      precondition(has_state(s));
+      return final_bitset_[s];
     }
 
     BOOSTGRAPH_TPARAM
@@ -432,42 +441,40 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     bool
-    BOOSTGRAPH::has_edge (hedge_t h) const
+    BOOSTGRAPH::has_edge (const hedge_t& h) const
     {
-      succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
+      succ_range r = graph_.equal_range(boost::make_tuple(h.value()->from_,
                                                     h.value()->label_));
       succ_iterator it;
-      bgstate_t to = h.value()->to_;
+      hstate_t to = h.value()->to_;
       for (it = r.first; it != r.second && it->to_ != to; ++it)
         /*Nothing*/;
 
-      return it != graph_.get<succ>().end();
+      return it != r.second;
     }
 
     BOOSTGRAPH_TPARAM
     typename BOOSTGRAPH::hedge_t
-    BOOSTGRAPH::add_edge (hstate_t f, hstate_t t, const label_t& l)
+    BOOSTGRAPH::add_edge (const hstate_t& from, const hstate_t& to, const label_t& l)
     {
-      bgstate_t from(states_[f.value()]);
-      bgstate_t to(states_[t.value()]);
       hlabel_t hl = label_container_.insert (l);
-      return hedge_t (&*graph_.insert (EdgeValue (from, to, hl)).first);
+      return hedge_t (graph_.insert (EdgeValue (from, to, hl)).first);
     }
 
     BOOSTGRAPH_TPARAM
     void
-    BOOSTGRAPH::del_edge (hedge_t h)
+    BOOSTGRAPH::del_edge (const hedge_t& h)
     {
       precondition (has_edge(h));
-      succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
-                                                              h.value()->label_));
+//      succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
+//                                                              h.value()->label_));
 
-      bgstate_t to = h.value()->to_;
-      succ_iterator it = r.first;
-      for (; it != r.second && it->to_ != to; ++it)
+ //     hstate_t to = h.value()->to_;
+ //     succ_iterator it = r.first;
+ //     for (; it != r.second && it->to_ != to; ++it)
         /* NOTHING */;
       hlabel_t l = h.value()->label_;
-      graph_.get<succ>().erase(it);
+      graph_.erase(h.value());
       label_container_.erase(l);
 
       // h points to an invalid edgeValue since it is already destroyed.
@@ -477,32 +484,32 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     typename BOOSTGRAPH::hstate_t
-    BOOSTGRAPH::src_of (hedge_t h) const
+    BOOSTGRAPH::src_of (const hedge_t& h) const
     {
-      return hstate_t(*h.value()->from_.value());
+      return h.value()->from_;
     }
 
     BOOSTGRAPH_TPARAM
     typename BOOSTGRAPH::hstate_t
-    BOOSTGRAPH::dst_of (hedge_t h) const
+    BOOSTGRAPH::dst_of (const hedge_t& h) const
     {
-      return hstate_t(*h.value()->to_.value());
+      return h.value()->to_;
     }
 
     BOOSTGRAPH_TPARAM
     const typename BOOSTGRAPH::label_t&
-    BOOSTGRAPH::label_of (hedge_t h) const
+    BOOSTGRAPH::label_of (const hedge_t& h) const
     {
       return h.value()->label_.value()->value();
     }
 
     BOOSTGRAPH_TPARAM
     void
-    BOOSTGRAPH::update(hedge_t h, const label_t& l)
+    BOOSTGRAPH::update(const hedge_t& h, const label_t& l)
     {
-      iterator it = graph_.find(h);
+      //iterator it = graph_.find(h);
       label_container_.update(h->label_, l);
-      graph_.get<succ>().modify(graph_.project<succ>(it), update_label(h.value()));
+      graph_.modify(h.value(), update_label(h.value()->label_));
     }
 
     BOOSTGRAPH_TPARAM
@@ -515,16 +522,16 @@ namespace vcsn
       label_t				l;
       WordValue				w;
 
-      for (iterator i = graph_.begin(); i != graph_.end(); ++i)
+      for (typename graph_data_t::iterator i = graph_.begin(); i != graph_.end(); ++i)
       {
         // Make sure that source and destination of edge are part of the
         // automaton.
-        if (!has_state(dst_of(hedge_t(*i))) ||
-            !has_state(src_of(hedge_t(*i))))
+        if (!has_state(dst_of(hedge_t(i))) ||
+            !has_state(src_of(hedge_t(i))))
           return false;
 
         // Make sure that every letter of the edge is in the alphabet.
-        l = label_of(hedge_t(*i));
+        l = label_of(hedge_t(i));
         for (r = l.begin(); r != l.end(); ++r)
         {
           w = r->first;
@@ -602,13 +609,13 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     typename BOOSTGRAPH::graph_data_t::const_iterator
-    BOOSTGRAPH::find_edge(const bgstate_t& from, const bgstate_t& to,
+    BOOSTGRAPH::find_edge(const hstate_t& from, const hstate_t& to,
                           const hlabel_t& label) const
     {
-      succ_range r = graph_.get<succ>().equal_range(::boost::make_tuple(from, label));
+      succ_range r = graph_.equal_range(::boost::make_tuple(from, label));
       for (succ_iterator i = r.first; i != r.second; ++i)
         if (i->to_ == to)
-          return graph_.project<0>(i);
+          return i;
       return graph_.end();
     }
 
@@ -621,22 +628,21 @@ namespace vcsn
     template <typename OutputIterator, typename Query>				\
     void									\
     BOOSTGRAPH::FunName(OutputIterator res,					\
-                        typename BOOSTGRAPH::hstate_t h,			\
+                        const typename BOOSTGRAPH::hstate_t& s,			\
                         const Query& query,					\
                         ::vcsn::delta_kind::DeltaKind) const			\
     {										\
-      assertion(has_state(h));							\
-      bgstate_t s(states_[h.value()]);						\
+      assertion(has_state(s));							\
       Target##_range r = graph_.get<Target>().equal_range(s);			\
-      for (Target##_iterator e = r.first; e != r.second; e++)			\
-        if (query(hedge_t(&*e)))						\
+      for (Target##_iterator e = r.first; e != r.second; ++e)			\
+        if (query(hedge_t(graph_.project<0>(e))))				\
           *res++ = GetElt;							\
     }
 
-    DEFINE_DELTA_FUNCTION (delta, transitions, src, hedge_t(&*e));
-    DEFINE_DELTA_FUNCTION (delta, states, src, hstate_t(*e->to_.value()));
-    DEFINE_DELTA_FUNCTION (rdelta, transitions, dst, hedge_t(&*e));
-    DEFINE_DELTA_FUNCTION (rdelta, states, dst, hstate_t(*e->from_.value()));
+    DEFINE_DELTA_FUNCTION (delta, transitions, src, hedge_t(graph_.project<0>(e)));
+    DEFINE_DELTA_FUNCTION (delta, states, src, e->to_);
+    DEFINE_DELTA_FUNCTION (rdelta, transitions, dst, hedge_t(graph_.project<0>(e)));
+    DEFINE_DELTA_FUNCTION (rdelta, states, dst, e->from_);
 
   # undef DEFINE_DELTA_FUNCTION
 
@@ -645,30 +651,29 @@ namespace vcsn
     template <typename Functor, typename Query>					\
     void									\
     BOOSTGRAPH::FunName(Functor& f,						\
-                        typename BOOSTGRAPH::hstate_t h,			\
+                        const typename BOOSTGRAPH::hstate_t& s,			\
                         const Query& query,					\
                         ::vcsn::delta_kind::DeltaKind,				\
                         misc::IsBool##_t) const					\
     {										\
-      assertion(has_state(h));							\
-      bgstate_t s(states_[h.value()]);						\
+      assertion(has_state(s));							\
       Target##_range r = graph_.get<Target>().equal_range(s);			\
-      for (Target##_iterator e = r.first; e != r.second; e++)			\
-        if (query(htransition_t(&*e)))						\
+      for (Target##_iterator e = r.first; e != r.second; ++e)			\
+        if (query(htransition_t(graph_.project<0>(e))))				\
         {									\
           Action;								\
         }									\
     }
 
-    DEFINE_DELTAF_FUNCTION (deltaf, transitions, src, true, if (not f(hedge_t(&*e))) break);
-    DEFINE_DELTAF_FUNCTION (deltaf, transitions, src, false, f(hedge_t(&*e)));
-    DEFINE_DELTAF_FUNCTION (deltaf, states, src, true, if (not f(hstate_t(*e->to_.value()))) break);
-    DEFINE_DELTAF_FUNCTION (deltaf, states, src, false, f(hstate_t(*e->to_.value())));
+    DEFINE_DELTAF_FUNCTION (deltaf, transitions, src, true, if (not f(hedge_t(graph_.project<0>(e)))) break);
+    DEFINE_DELTAF_FUNCTION (deltaf, transitions, src, false, f(hedge_t(graph_.project<0>(e))));
+    DEFINE_DELTAF_FUNCTION (deltaf, states, src, true, if (not f(e->to_)) break);
+    DEFINE_DELTAF_FUNCTION (deltaf, states, src, false, f(e->to_));
 
-    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, dst, true, if (not f(hedge_t(&*e))) break);
-    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, dst, false, f(hedge_t(&*e)));
-    DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, true, if (not f(hstate_t(*e->from_.value()))) break);
-    DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, false, f(hstate_t(*e->from_.value())));
+    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, dst, true, if (not f(hedge_t(graph_.project<0>(e)))) break);
+    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, dst, false, f(hedge_t(graph_.project<0>(e))));
+    DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, true, if (not f(e->from_)) break);
+    DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, false, f(e->from_));
 
   # undef DEFINE_DELTAF_FUNCTION
 
@@ -688,7 +693,7 @@ namespace vcsn
     template <typename Functor, class Query, typename DeltaKind>		\
     void									\
     BOOSTGRAPH::FunName(Functor& f,						\
-                    typename BOOSTGRAPH::hstate_t s,				\
+                    const typename BOOSTGRAPH::hstate_t& s,			\
                     const Query& query,						\
                     ::vcsn::delta_kind::kind<DeltaKind> k) const		\
     {										\

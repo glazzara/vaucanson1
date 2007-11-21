@@ -1,5 +1,16 @@
 2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix various bugs and update the method's prototype in boostg implementation. 
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx: here.
+	The state deletion and the delta* were incorrect.
+	Add more preconditions.
+	Use iterator instead of pointers in htransition_t. It is faster and safer.
+	It may be slower in delta* since htransition_t are copied in a container.
+	However a solution is going to be applied soon :D
+
+2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix and cleanup tests. 
 	* src/tests/include/tests/automata/algos/graphs/sub_automaton_test.hh:
 	Remove the use of the method "max()" which is deprecated since patch #1797.
