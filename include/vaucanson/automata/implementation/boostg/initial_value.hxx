@@ -39,7 +39,7 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     template <typename S>
-    BOOSTGRAPH::InitialValue<S>::InitialValue(const bgstate_t& state, const S& series)
+    BOOSTGRAPH::InitialValue<S>::InitialValue(const hstate_t& state, const S& series)
       : first(state),
 	second(series)
     {

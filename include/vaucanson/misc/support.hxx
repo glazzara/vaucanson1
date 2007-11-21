@@ -26,6 +26,66 @@ namespace vcsn
   namespace misc
   {
 
+  /*----------.
+  | Support.  |
+  `----------*/
+
+    /// support<map<U, T> > is a const adapter of std::map to container.
+    template <class U, class T>
+    Support<std::map<U, T> >::Support (const Support& s)
+      : m_ (s.m_)
+    {
+    }
+
+    template <class U, class T>
+    Support<std::map<U, T> >::Support (const std::map<U, T>& m)
+      : m_ (m)
+    {
+    }
+
+    template <class U, class T>
+    unsigned
+    Support<std::map<U, T> >::size () const
+    {
+      return m_.size ();
+    }
+
+    template <class U, class T>
+    typename Support<std::map<U, T> >::iterator
+    Support<std::map<U, T> >::find (const U& k) const
+    {
+      return m_.find (k);
+    }
+
+    template <class U, class T>
+    bool
+    Support<std::map<U, T> >::empty () const
+    {
+      return m_.empty ();
+    }
+
+    template <class U, class T>
+    typename Support<std::map<U, T> >::iterator
+    Support<std::map<U, T> >::begin () const
+    {
+      return iterator (m_.begin ());
+    }
+
+    template <class U, class T>
+    typename Support<std::map<U, T> >::iterator
+    Support<std::map<U, T> >::end () const
+    {
+      return iterator (m_.end ());
+    }
+
+    template <class U, class T>
+    U
+    Support< std::map<U, T> >::back () const
+    {
+      return *max_element (begin (), end ());
+    }
+
+
   /*------------------.
   | SupportIterator.  |
   `------------------*/
@@ -69,194 +129,6 @@ namespace vcsn
     SupportIterator<C>::operator== (const SupportIterator& o) const
     {
       return ! (*this != o);
-    }
-
-    //Specialization for std::vector<handler<U, T> >
-    template <typename T, typename U>
-    SupportIterator<std::vector<handler<T, U> > >::SupportIterator (vector_iterator mp)
-      : i (mp)
-    {}
-
-    template<typename T, typename U>
-    handler<T, U>
-    SupportIterator<std::vector<handler<T, U> > >::operator* () const
-    {
-      return handler<T, U>(*i);
-    }
-
-    template<typename T, typename U>
-    SupportIterator<std::vector<handler<T, U> > >&
-    SupportIterator<std::vector<handler<T, U> > >::operator++ ()
-    {
-      ++i;
-      return *this;
-    }
-
-    template<typename T, typename U>
-    SupportIterator<std::vector<handler<T, U> > >&
-    SupportIterator<std::vector<handler<T, U> > >::operator-- ()
-    {
-      --i;
-      return *this;
-    }
-
-    template<typename T, typename U>
-    SupportIterator<std::vector<handler<T, U> > >
-    SupportIterator<std::vector<handler<T, U> > >::operator++ (int)
-    {
-      SupportIterator<std::vector<handler<T, U> > > tmp = *this;
-      ++i;
-      return tmp;
-    }
-
-    template<typename T, typename U>
-    bool
-    SupportIterator<std::vector<handler<T, U> > >::operator!= (const SupportIterator& o) const
-    {
-      return o.i != i;
-    }
-
-    template<typename T, typename U>
-    bool
-    SupportIterator<std::vector<handler<T, U> > >::operator== (const SupportIterator& o) const
-    {
-      return ! (*this != o);
-    }
-
-
-  /*----------.
-  | Support.  |
-  `----------*/
-
-    /// support<map<U, T> > is a const adapter of std::map to container.
-    template <class U, class T>
-    Support<std::map<U, T> >::Support (const Support& s)
-      : m_ (s.m_)
-    {
-    }
-
-    template <class U, class T>
-    Support<std::map<U, T> >::Support (const std::map<U, T>& m)
-      : m_ (m)
-    {
-    }
-
-    template <class U, class T>
-    unsigned
-    Support<std::map<U, T> >::size () const
-    {
-      return m_.size ();
-    }
-
-    template <class U, class T>
-    typename Support<std::map<U, T> >::iterator
-    Support<std::map<U, T> >::find (const U& k) const
-    {
-      return m_.find (k);
-    }
-
-    template <class U, class T>
-    bool
-    Support<std::map<U, T> >::empty () const
-    {
-      return m_.empty ();
-    }
-
-    template <class U, class T>
-    typename Support<std::map<U, T> >::value_type
-    Support<std::map<U, T> >::operator* () const
-    {
-      precondition (m_.size () == 1);
-      return *m_.begin ();
-    }
-
-    template <class U, class T>
-    typename Support<std::map<U, T> >::iterator
-    Support<std::map<U, T> >::begin () const
-    {
-      return iterator (m_.begin ());
-    }
-
-    template <class U, class T>
-    typename Support<std::map<U, T> >::iterator
-    Support<std::map<U, T> >::end () const
-    {
-      return iterator (m_.end ());
-    }
-
-    template <class U, class T>
-    U
-    Support< std::map<U, T> >::max () const
-    {
-      return *max_element (begin (), end ());
-    }
-
-
-
-
-
-
-    /// support<vector<U, T> > is a const adapter of std::vector to container.
-    template <class T, class U>
-    Support<std::vector<handler<T, U> > >::Support (const Support& s)
-      : m_ (s.m_)
-    {
-    }
-
-    template <class T, class U>
-    Support<std::vector<handler<T, U> > >::Support (const std::vector<handler<T, U> >& m)
-      : m_ (m)
-    {
-    }
-
-    template <class T, class U>
-    unsigned
-    Support<std::vector<handler<T, U> > >::size () const
-    {
-      return m_.size ();
-    }
-
-    template <class T, class U>
-    typename Support<std::vector<handler<T, U> > >::iterator
-    Support<std::vector<handler<T, U> > >::find (const handler<T, U>& k) const
-    {
-      return m_.find (k);
-    }
-
-    template <class T, class U>
-    bool
-    Support<std::vector<handler<T, U> > >::empty () const
-    {
-      return m_.empty ();
-    }
-
-    template <class T, class U>
-    handler<state_h, int>
-    Support<std::vector<handler<T, U> > >::operator* () const
-    {
-      precondition (m_.size () == 1);
-      return *m_.begin ();
-    }
-
-    template <class T, class U>
-    typename Support<std::vector<handler<T, U> > >::iterator
-    Support<std::vector<handler<T, U> > >::begin () const
-    {
-      return iterator (m_.begin ());
-    }
-
-    template <class T, class U>
-    typename Support<std::vector<handler<T, U> > >::iterator
-    Support<std::vector<handler<T, U> > >::end () const
-    {
-      return iterator (m_.end ());
-    }
-
-    template <class T, class U>
-    int
-    Support<std::vector<handler<T, U> > >::max () const
-    {
-      return m_.size() - 1;
     }
 
   } // misc

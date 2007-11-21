@@ -39,17 +39,29 @@ namespace vcsn
     `--------------------------*/
 
     BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::VGraphContainerIterator::VGraphContainerIterator(typename GraphContainer::iterator i)
-      : it_(i)
+    BOOSTGRAPH::VGraphContainerIterator
+      ::VGraphContainerIterator(const GraphContainer& c,
+				typename GraphContainer::iterator i)
+      : container_(c)
     {
+      if (i != c.end())
+      {
+	it_ = i++;
+	next_ = i;
+      }
+      else
+      {
+	it_ = i;
+	next_ = i;
+      }
     }
 
 
     BOOSTGRAPH_TPARAM
     typename BOOSTGRAPH::htransition_t
-    BOOSTGRAPH::VGraphContainerIterator::operator*()
+    BOOSTGRAPH::VGraphContainerIterator::operator*() const
     {
-      return htransition_t(&(*it_));
+      return htransition_t(it_);
     }
 
     BOOSTGRAPH_TPARAM
@@ -70,7 +82,10 @@ namespace vcsn
     typename BOOSTGRAPH::VGraphContainerIterator::VGraphContainerIterator&
     BOOSTGRAPH::VGraphContainerIterator::operator++()
     {
-      ++it_;
+      if (next_ != container_.end())
+	it_ = next_++;
+      else
+	it_ = next_;
       return *this;
     }
 
@@ -78,8 +93,8 @@ namespace vcsn
     typename BOOSTGRAPH::VGraphContainerIterator::VGraphContainerIterator
     BOOSTGRAPH::VGraphContainerIterator::operator++(int)
     {
-      ++it_;
-      return VGraphContainerIterator(it_);
+      it_ = next_;
+      return VGraphContainerIterator(container_, it_);
     }
 
     /*-----------------------------------------.
@@ -96,14 +111,14 @@ namespace vcsn
     typename BOOSTGRAPH::VGraphContainer::iterator
     BOOSTGRAPH::VGraphContainer::begin() const
     {
-      return VGraphContainerIterator(graph_.begin());
+      return VGraphContainerIterator(graph_, graph_.begin());
     }
 
     BOOSTGRAPH_TPARAM
     typename BOOSTGRAPH::VGraphContainer::iterator
     BOOSTGRAPH::VGraphContainer::end() const
     {
-      return VGraphContainerIterator(graph_.end());
+      return VGraphContainerIterator(graph_, graph_.end());
     }
 
     BOOSTGRAPH_TPARAM

@@ -1,3 +1,24 @@
+2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Move implementation's specific code into its own directory. 
+	* automata/implementation/boostg/boost_functors.hxx: Remove,
+	* automata/implementation/boostg/boostg_functors.hxx: New,
+	* automata/implementation/boostg/boostg_handlers.hh: New,
+	* automata/implementation/boostg/boostg_handlers.hxx: New,
+	* automata/implementation/boostg/boostg_handlers_op.hxx: New,
+	* automata/implementation/boostg/boostg_support.hh: New,
+	* automata/implementation/boostg/boostg_support.hxx: New,
+	* automata/implementation/boostg/edge_value.hxx,
+	* automata/implementation/boostg/initial_value.hxx,
+	* automata/implementation/boostg/vgraph_container.hxx,
+	* misc/support.hh,
+	* misc/support.hxx:
+	The boostg implementation need specializations of objects provided by
+	Vaucanson. In order to clearly identify which specialization is related
+	to which implementation, I decided to move the related code in a
+	directory named like the implementation.
+	This code need a serious cleanup. I'll do it next weeks. Be patient :p
+
 2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Remove hstate_t's dependency on integer.

@@ -40,7 +40,7 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     inline
-    BOOSTGRAPH::EdgeValue::EdgeValue (bgstate_t h1, bgstate_t h2, hlabel_t l)
+    BOOSTGRAPH::EdgeValue::EdgeValue (hstate_t h1, hstate_t h2, hlabel_t l)
       : label_ (l), from_ (h1), to_ (h2)
     { }
 
