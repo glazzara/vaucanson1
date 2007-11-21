@@ -72,10 +72,10 @@ unsigned sub_automaton_test(tests::Tester& tg)
   TEST(t, "r has the right number of final states. ", r.final().size() == 1);
 
   TEST(t, "r has consistant initial states. ",
-       r.initial().max() <= r.states().back());
+       r.initial().back() <= r.states().back());
 
   TEST(t, "r has consistant final states. ",
-       r.final().max() <= r.states().back());
+       r.final().back() <= r.states().back());
 
   for_all_states(s, r)
     TEST(t, "r has the right states. ", *s <= r.states().back());

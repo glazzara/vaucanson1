@@ -64,11 +64,6 @@ using namespace vcsn::tools;
       try
 	{
 	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
-	  SAVE_AUTOMATON_XML("/tmp", "auto_lhs", auto_lhs, 0);
-	  SAVE_AUTOMATON_XML("/tmp", "auto_rhs", auto_rhs, 0);
-	  SAVE_AUTOMATON_XML("/tmp", "ret", ret, 0);
-
-	  std::cout << word_1 << " - " << word_2 << std::endl;
 	  semiring_elt_t val =
 	    eval(determinize(realtime(auto_lhs)), word_1) *
 	    eval(determinize(realtime(auto_rhs)), word_2);

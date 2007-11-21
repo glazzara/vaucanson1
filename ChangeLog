@@ -1,5 +1,13 @@
 2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix and cleanup tests. 
+	* src/tests/include/tests/automata/algos/graphs/sub_automaton_test.hh:
+	Remove the use of the method "max()" which is deprecated since patch #1797.
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh:
+	Remove some debug.
+
+2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	hstate_t and htransition_t are now passed as const references. 
 	* automata/concept/automata_base.hh,
 	* automata/concept/automata_base.hxx,
