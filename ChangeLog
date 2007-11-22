@@ -1,5 +1,14 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Change the default value of boostg's hstate_t. 
+	* vaucanson/automata/implementation/boostg/boostg_handlers.hxx:
+	Since the hstate_t are used as integers but are actually a pointer
+	and the comparison between two hstate_t is based on the pointed integer,
+	we needed a default allocated integer.
+	Fix segfaults....
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Add a new functor to update initial and final state's label.
 	* vaucanson/automata/implementation/boostg/boostg_functors.hxx: here.
 

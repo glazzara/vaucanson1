@@ -26,8 +26,11 @@ namespace vcsn
 {
 
   inline
-  handler<state_h, unsigned*>::handler() : v_(0)
-  {}
+  handler<state_h, unsigned*>::handler()
+  {
+    static unsigned *uint_max = new unsigned(UINT_MAX);
+    v_ = uint_max;
+  }
 
   inline
   handler<state_h, unsigned*>::handler(unsigned *h) : v_(h)
@@ -62,7 +65,7 @@ namespace vcsn
   bool
   handler<state_h, unsigned*>::is_valid() const
   {
-    return v_ != 0;
+    return *v_ != UINT_MAX;
   }
 
 } // vcsn
