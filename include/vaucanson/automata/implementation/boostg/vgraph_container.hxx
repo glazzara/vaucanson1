@@ -93,8 +93,12 @@ namespace vcsn
     typename BOOSTGRAPH::VGraphContainerIterator::VGraphContainerIterator
     BOOSTGRAPH::VGraphContainerIterator::operator++(int)
     {
-      it_ = next_;
-      return VGraphContainerIterator(container_, it_);
+      iterator tmp = it_;
+      if (next_ != container_.end())
+	it_ = next_++;
+      else
+	it_ = next_;
+      return VGraphContainerIterator(container_, tmp);
     }
 
     /*-----------------------------------------.

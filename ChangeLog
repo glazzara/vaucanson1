@@ -1,5 +1,14 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add support for deletion while iterating over a boostg container.
+	* vaucanson/automata/implementation/boostg/boostg_support.hxx,
+	* vaucanson/automata/implementation/boostg/vgraph_container.hxx:
+	Since we usually iterate over all the states or transitions and 
+	some modifications are made in the graph, we want the containers
+	to support such operations without invalidating the current iterator.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Change the default value of boostg's hstate_t. 
 	* vaucanson/automata/implementation/boostg/boostg_handlers.hxx:
 	Since the hstate_t are used as integers but are actually a pointer

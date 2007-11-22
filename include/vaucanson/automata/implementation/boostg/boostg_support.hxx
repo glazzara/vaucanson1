@@ -63,7 +63,6 @@ namespace vcsn
 		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
     ::operator++ ()
     {
-      std::cout << "operator++ ameliore - multi_index" << std::endl;
       if (next_ != container_->end())
 	i_ = next_++;
       else
@@ -141,7 +140,10 @@ namespace vcsn
     SupportIterator<std::vector<handler<state_h, unsigned*> > >&
     SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator-- ()
     {
-      --current_;
+      if (container_->size() == container_size_)
+	--current_;
+      else
+	container_size_ = container_->size();
       return *this;
     }
 
