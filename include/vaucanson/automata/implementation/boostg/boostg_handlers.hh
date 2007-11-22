@@ -80,6 +80,25 @@ namespace vcsn
 		  const handler<transition_h,
 				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
 
+  template<>
+  bool operator==(const handler<state_h, unsigned*>& h1,
+		  const handler<state_h, unsigned*>& h2);
+  template<>
+  bool operator!=(const handler<state_h, unsigned*>& h1,
+		  const handler<state_h, unsigned*>& h2);
+  template<>
+  bool operator<(const handler<state_h, unsigned*>& h1,
+		 const handler<state_h, unsigned*>& h2);
+  template<>
+  bool operator>(const handler<state_h, unsigned*>& h1,
+		 const handler<state_h, unsigned*>& h2);
+  template<>
+  bool operator<=(const handler<state_h, unsigned*>& h1,
+		  const handler<state_h, unsigned*>& h2);
+  template<>
+  bool operator>=(const handler<state_h, unsigned*>& h1,
+		  const handler<state_h, unsigned*>& h2);
+
 
 } // vcsn
 

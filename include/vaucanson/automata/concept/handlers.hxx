@@ -78,7 +78,7 @@ namespace std {
   std::ostream&
   operator<<(std::ostream& out, const vcsn::handler<Tag, Type>& h)
   {
-    out << h.value();
+    out << int(h);
     return out;
   }
 

@@ -1,3 +1,15 @@
+2007-11-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add new operators for boostg's hstate_t 
+	* vaucanson/automata/concept/handlers.hxx,
+	* vaucanson/automata/implementation/boostg/boostg_handlers.hh,
+	* vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx:
+	We want the hstate_t to behave like real integers even though they are
+	actually pointers in the boostg implementation. Thus we needed proper
+	operators for comparison.
+	We also wanted to always display them as integer when passed to
+	std::cout.
+
 2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix various bugs and update the method's prototype in boostg implementation. 

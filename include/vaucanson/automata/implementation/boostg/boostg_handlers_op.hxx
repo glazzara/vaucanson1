@@ -43,8 +43,24 @@ namespace vcsn
   HOPERATOR(<=);
   HOPERATOR(>=);
 }
-
 #undef HOPERATOR
+
+
+#define HOPERATOR(Op)					\
+inline							\
+bool operator Op (const handler<state_h, unsigned*>& h1,\
+                  const handler<state_h, unsigned*>& h2)\
+{ return int(h1) Op int(h2); }
+
+namespace vcsn {
+HOPERATOR(==);
+HOPERATOR(!=);
+HOPERATOR(<);
+HOPERATOR(>);
+HOPERATOR(<=);
+HOPERATOR(>=);
+}
+
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_BOOSTG_HANDLERS_OP_HXX
 
