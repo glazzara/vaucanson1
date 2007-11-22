@@ -109,8 +109,8 @@ namespace vcsn {
       {
 	assertion(a.states().size() > 0);
 
-	std::set<typename Auto_::htransition_t> delta_in;
-	std::set<typename Auto_::htransition_t> delta_out;
+	std::list<typename Auto_::htransition_t> delta_in;
+	std::list<typename Auto_::htransition_t> delta_out;
 
 	typename Auto_::state_iterator s = a.states().begin();
 	unsigned int d_in = 0;
@@ -129,7 +129,7 @@ namespace vcsn {
 
 	  a.deltac(delta_out, *i, delta_kind::transitions());
 	  a.rdeltac(delta_in, *i, delta_kind::transitions());
-	  for (typename std::set<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
 	    if (*i == a.dst_of(*j))
@@ -171,8 +171,8 @@ namespace vcsn {
       {
 	assertion(a.states().size() > 0);
 
-	std::set<typename Auto_::htransition_t> delta_in;
-	std::set<typename Auto_::htransition_t> delta_out;
+	std::list<typename Auto_::htransition_t> delta_in;
+	std::list<typename Auto_::htransition_t> delta_out;
 	typename Auto_::state_iterator s = a.states().begin();
 
 	unsigned int weight_min = INT_MAX;
@@ -193,7 +193,7 @@ namespace vcsn {
 	  a.deltac(delta_out, *i, delta_kind::transitions());
 	  a.rdeltac(delta_in, *i, delta_kind::transitions());
 
-	  for (typename std::set<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
 	    if (*i == a.dst_of(*j))
@@ -203,7 +203,7 @@ namespace vcsn {
 	  out = delta_out.size() - n_loops;
 
 	  // Compute SUM(Win(k) * (Out - 1))
-	  for (typename std::set<typename Auto_::htransition_t>::iterator j = delta_in.begin();
+	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_in.begin();
 	       j != delta_in.end();
 	       ++j)
 	    if (*i != a.dst_of(*j))
@@ -212,7 +212,7 @@ namespace vcsn {
 	    }
 
 	  // Compute SUM(Wout(k) * (In - 1))
-	  for (typename std::set<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
 	    if (*i != a.dst_of(*j))
@@ -221,7 +221,7 @@ namespace vcsn {
 	    }
 
 	  // Compute Wloop * (In * Out - 1)
-	  for (typename std::set<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
 	    if (*i == a.dst_of(*j))
@@ -276,7 +276,7 @@ namespace vcsn {
     typedef typename automaton_t::series_set_t		series_set_t;
     typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
 
-    typedef typename std::set<typename Auto_::htransition_t>		htransition_set_t;
+    typedef typename std::list<typename Auto_::htransition_t>		htransition_set_t;
     typedef std::map<typename Auto_::hstate_t, series_set_elt_t>	sums_t;
 
     typename htransition_set_t::const_iterator		i, j;

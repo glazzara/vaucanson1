@@ -58,7 +58,7 @@ namespace vcsn {
       typedef Element<second_monoid_t, second_monoid_elt_value_t>
 	second_monoid_elt_t;
 
-      typedef std::set<htransition_t>			set_of_transitions_t;
+      typedef std::list<htransition_t>			set_of_transitions_t;
 
 
 
@@ -157,7 +157,7 @@ namespace vcsn {
       typedef Element<first_monoid_t, first_monoid_elt_value_t>
 	first_monoid_elt_t;
 
-      typedef std::set<htransition_t>			set_of_transitions_t;
+      typedef std::list<htransition_t>			set_of_transitions_t;
 
 
 

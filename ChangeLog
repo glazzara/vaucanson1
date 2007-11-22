@@ -1,3 +1,26 @@
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Temporarily replace set<htransition_t> by list<htransition_t>. 
+	* vaucanson/algorithms/aut_to_exp.hxx,
+	* vaucanson/algorithms/evaluation.hxx,
+	* vaucanson/algorithms/internal/outsplitting.hxx,
+	* vaucanson/algorithms/internal/skeleton.hxx,
+	* vaucanson/algorithms/is_deterministic.hxx,
+	* vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* vaucanson/algorithms/normalized.hxx,
+	* vaucanson/algorithms/normalized_composition.hxx,
+	* vaucanson/algorithms/product.hxx,
+	* vaucanson/algorithms/standard.hxx,
+	* vaucanson/algorithms/sum.hxx:
+	Since I need a working version for today, I need to fix quickly
+	some issues. currently I have an issue when I want to store boostg's
+	htransition_t which store iterators. Sometimes two iterators are
+	identical, thus transitions are missing in the set... I don't know
+	why yet. My guess is that Boost uses the same iterator when there are
+	duplicates.
+	Anyway, I will change the delta* methods soon and this bug should be
+	fixed at the same time.
+
 2007-11-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add new operators for boostg's hstate_t 

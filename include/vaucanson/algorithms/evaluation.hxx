@@ -96,7 +96,7 @@ namespace vcsn {
 			 M& state_exp_pair_set)
   {
     AUTOMATON_TYPES(Auto_t);
-    typedef typename std::set<htransition_t>		htransition_set_t;
+    typedef typename std::list<htransition_t>		htransition_set_t;
     typedef std::map<hstate_t, series_set_elt_t>	sums_t;
 
     typename htransition_set_t::const_iterator		i, j;

@@ -38,7 +38,7 @@ namespace vcsn {
     AUTOMATON_TYPES(input_t);
 
     typedef typename series_set_elt_t::support_t	support_t;
-    typedef typename std::set<htransition_t>		delta_ret_t;
+    typedef typename std::list<htransition_t>		delta_ret_t;
     delta_ret_t	delta_ret;
 
     input.deltac(delta_ret, *current_state, delta_kind::transitions());

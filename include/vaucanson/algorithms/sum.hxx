@@ -60,7 +60,7 @@ namespace vcsn {
     | Sum of transitions.  |
     `---------------------*/
 
-    typedef std::set<typename rhs_t::htransition_t> dst_t;
+    typedef std::list<typename rhs_t::htransition_t> dst_t;
     dst_t dst;
 
     for (typename rhs_t::state_iterator i = rhs.states().begin();

@@ -209,7 +209,7 @@ class Product
 
     typedef std::pair<typename lhs_t::hstate_t, typename rhs_t::hstate_t>
 						      pair_hstate_t;
-    typedef std::set<htransition_t>			delta_ret_t;
+    typedef std::list<htransition_t>			delta_ret_t;
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
     typedef typename series_set_elt_t::support_t	support_t;
 

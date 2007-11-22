@@ -41,14 +41,14 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto_);
 
     hstate_t i = a.add_state();
-    std::set<htransition_t> transition_oi;
+    std::list<htransition_t> transition_oi;
 
     for_all_initial_states(oi, a)
     {
       series_set_elt_t s = a.get_initial(*oi);
       transition_oi.clear();
       a.deltac(transition_oi, *oi, delta_kind::transitions());
-      for_all_const_(std::set<htransition_t>, oil, transition_oi)
+      for_all_const_(std::list<htransition_t>, oil, transition_oi)
       {
 	series_set_elt_t t = s * a.series_of(*oil);
 	a.add_series_transition(i, a.dst_of(*oil), t);
@@ -76,7 +76,7 @@ namespace vcsn {
 				 const rhs_t& rhs)
   {
     TIMER_SCOPED("union_of_standard");
-    typedef std::set<typename lhs_t::htransition_t> edelta_ret_t;
+    typedef std::list<typename lhs_t::htransition_t> edelta_ret_t;
 
     // The resulting initial state is that of lhs.
     typename lhs_t::hstate_t new_i = *lhs.initial().begin();
@@ -169,7 +169,7 @@ namespace vcsn {
     TIMER_SCOPED("concat_of_standard");
     AUTOMATON_TYPES(lhs_t);
     typedef std::map<hstate_t, hstate_t>	map_t;
-    typedef std::set<htransition_t>		delta_ret_t;
+    typedef std::list<htransition_t>		delta_ret_t;
 
     /*------------------.
     | Concat of states. |
@@ -261,7 +261,7 @@ namespace vcsn {
   {
     TIMER_SCOPED("star_of_standard");
     AUTOMATON_TYPES(auto_t);
-    typedef std::set<htransition_t>		edelta_ret_t;
+    typedef std::list<htransition_t>		edelta_ret_t;
 
     edelta_ret_t			dst;
     hstate_t				new_i = *a.initial().begin();

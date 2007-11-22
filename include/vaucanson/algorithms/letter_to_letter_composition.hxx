@@ -35,7 +35,7 @@ namespace vcsn {
     typedef Element<Self, T> transducer_t;
     AUTOMATON_TYPES(transducer_t);
     typedef std::map<std::pair<hstate_t, hstate_t>, hstate_t> assoc_t;
-    typedef std::set<htransition_t> delta_ret_t;
+    typedef std::list<htransition_t> delta_ret_t;
 
     semiring_t output_series(f.series().semiring().semiring(),
 			     f.series().semiring().monoid());

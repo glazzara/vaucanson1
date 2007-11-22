@@ -35,7 +35,7 @@ namespace vcsn
     AUTOMATON_TYPES(automaton_t);
 
     int i, j;
-    std::set<htransition_t> out;
+    std::list<htransition_t> out;
     std::map<series_set_elt_t, int> Lmap;
     std::map<hstate_t, int> Smap;
 

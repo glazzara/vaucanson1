@@ -180,7 +180,7 @@ namespace vcsn {
     TIMER_SCOPED("concatenate_of_normalized");
     AUTOMATON_TYPES(rhs_t);
     typedef std::map<hstate_t, hstate_t>	map_lhs_rhs_t;
-    typedef std::set<htransition_t>		delta_ret_t;
+    typedef std::list<htransition_t>		delta_ret_t;
 
     hstate_t	glue_state = *lhs.final().begin();
 

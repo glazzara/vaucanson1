@@ -50,7 +50,7 @@ namespace vcsn {
     AUTOMATON_TYPES_(rhs_t, rhs_);
 
    #define SPECIFIC_TYPES(Auto) \
-      typedef std::set<typename Auto##_t::htransition_t>      Auto##_delta_ret_t; \
+      typedef std::list<typename Auto##_t::htransition_t>      Auto##_delta_ret_t; \
 
     SPECIFIC_TYPES(lhs);
     SPECIFIC_TYPES(rhs);
@@ -62,7 +62,7 @@ namespace vcsn {
     typedef std::map<hstate_t, pair_hstate_t>		map_of_states_t;
     typedef std::queue<pair_hstate_t>			to_process_t;
 
-    typedef std::set<htransition_t>			delta_ret_t;
+    typedef std::list<htransition_t>			delta_ret_t;
     typedef typename series_set_elt_t::support_t	support_t;
     typedef typename lhs_series_set_elt_t::support_t	lhs_support_t;
     typedef typename rhs_series_set_elt_t::support_t	rhs_support_t;
