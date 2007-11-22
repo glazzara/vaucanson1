@@ -1,5 +1,16 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix various bugs in boostg implementation. 
+	* vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* vaucanson/automata/implementation/boostg_graph_impl.hxx: here.
+	Update correctly the labels when calling "set_initial" and "set_final".
+	has_state() doesn't check anymore whether the pointer contained in a
+	hstate_t is in the graph. It just checks whether the integer could refer
+	to a state.
+	Some cleanup.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Add support for deletion while iterating over a boostg container.
 	* vaucanson/automata/implementation/boostg/boostg_support.hxx,
 	* vaucanson/automata/implementation/boostg/vgraph_container.hxx:

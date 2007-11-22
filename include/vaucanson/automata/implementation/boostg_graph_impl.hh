@@ -113,9 +113,9 @@ namespace vcsn
 	// uses such functors.
 	//
 	// See implementation in automata/implementation/boostg/boost_functors.hxx.
-	struct update_label : public std::unary_function<hlabel_t, void>
+	struct update_hlabel : public std::unary_function<hlabel_t, void>
 	{
-	  update_label(hlabel_t i_);
+	  update_hlabel(const hlabel_t& i_);
 	  void operator()(hlabel_t &key);
 
 	  hlabel_t i;
@@ -233,6 +233,13 @@ namespace vcsn
 	  S second; // series
 	};
 
+	struct update_label : public std::unary_function<InitialValue<series_set_elt_value_t>, void>
+	{
+	  update_label(const series_set_elt_value_t& i_);
+	  void operator()(InitialValue<series_set_elt_value_t>& key);
+
+	  series_set_elt_value_t i;
+	};
 
 	class VGraphContainerIterator
 	{

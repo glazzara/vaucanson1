@@ -258,12 +258,7 @@ namespace vcsn
     bool
     BOOSTGRAPH::has_state (const hstate_t& s) const
     {
-      typename states_data_t::const_iterator i;
-      for (i = states_.begin();
-          i != states_.end() && *i != s;
-          ++i)
-        ;
-      return i != states_.end();
+      return s < states_.size();
     }
 
     BOOSTGRAPH_TPARAM
@@ -282,7 +277,7 @@ namespace vcsn
     BOOSTGRAPH::get_state (unsigned s) const
     {
       precondition(s < states_.size());
-      return states_[s];
+      return hstate_t(states_[s]);
     }
 
     BOOSTGRAPH_TPARAM
@@ -351,12 +346,13 @@ namespace vcsn
         initial_.erase (s);
         initial_bitset_[s] = false;
       }
+      else if (!initial_bitset_[s])
+      {
+        initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
+        initial_bitset_[s] = true;
+      }
       else
-        if (!initial_bitset_[s])
-        {
-          initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
-          initial_bitset_[s] = true;
-        }
+	initial_.modify(initial_.find(s), update_label(v));
     }
 
     BOOSTGRAPH_TPARAM
@@ -399,12 +395,13 @@ namespace vcsn
         final_.erase (s);
         final_bitset_[s] = false;
       }
+      else if (!final_bitset_[s])
+      {
+        final_.insert (InitialValue<series_set_elt_value_t> (s, v));
+        final_bitset_[s] = true;
+      }
       else
-        if (!final_bitset_[s])
-        {
-          final_.insert (InitialValue<series_set_elt_value_t> (s, v));
-          final_bitset_[s] = true;
-        }
+	final_.modify(final_.find(s), update_label(v));
     }
 
     BOOSTGRAPH_TPARAM
@@ -466,13 +463,7 @@ namespace vcsn
     BOOSTGRAPH::del_edge (const hedge_t& h)
     {
       precondition (has_edge(h));
-//      succ_range r = graph_.get<succ>().equal_range(boost::make_tuple(h.value()->from_,
-//                                                              h.value()->label_));
 
- //     hstate_t to = h.value()->to_;
- //     succ_iterator it = r.first;
- //     for (; it != r.second && it->to_ != to; ++it)
-        /* NOTHING */;
       hlabel_t l = h.value()->label_;
       graph_.erase(h.value());
       label_container_.erase(l);
@@ -507,9 +498,8 @@ namespace vcsn
     void
     BOOSTGRAPH::update(const hedge_t& h, const label_t& l)
     {
-      //iterator it = graph_.find(h);
       label_container_.update(h->label_, l);
-      graph_.modify(h.value(), update_label(h.value()->label_));
+      graph_.modify(h.value(), update_hlabel(h->label_));
     }
 
     BOOSTGRAPH_TPARAM
