@@ -1,5 +1,10 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add a new functor to update initial and final state's label.
+	* vaucanson/automata/implementation/boostg/boostg_functors.hxx: here.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Temporarily replace set<htransition_t> by list<htransition_t>. 
 	* vaucanson/algorithms/aut_to_exp.hxx,
 	* vaucanson/algorithms/evaluation.hxx,

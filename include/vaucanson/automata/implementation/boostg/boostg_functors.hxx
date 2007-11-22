@@ -39,16 +39,30 @@ namespace vcsn
     `-------------------------------------------------*/
 
     BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::update_label::update_label(hlabel_t i_)
+    BOOSTGRAPH::update_hlabel::update_hlabel(const hlabel_t& i_)
       : i(i_)
     {
     }
 
     BOOSTGRAPH_TPARAM
     void
-    BOOSTGRAPH::update_label::operator()(hlabel_t &key)
+    BOOSTGRAPH::update_hlabel::operator()(hlabel_t &key)
     {
       key = i;
+    }
+
+
+    BOOSTGRAPH_TPARAM
+    BOOSTGRAPH::update_label::update_label(const series_set_elt_value_t& i_)
+      : i(i_)
+    {
+    }
+
+    BOOSTGRAPH_TPARAM
+    void
+    BOOSTGRAPH::update_label::operator()(InitialValue<series_set_elt_value_t>& elt)
+    {
+      elt.second = i;
     }
 
   }
