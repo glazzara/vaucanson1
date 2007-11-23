@@ -7,7 +7,11 @@ stderr ()
     echo >&2 "$0: $@"
 }
 
-
+# Debian ships both 1.9.6 and 1.10 but defaults to 1.9.6...
+automake-1.10 --version >/dev/null 2>/dev/null \
+  && export AUTOMAKE=automake-1.10 \
+  && export ACLOCAL=aclocal-1.10
+  
 # run DIRECTORY COMMAND-LINE
 # --------------------------
 # "set -e" doesn't work for subshells!

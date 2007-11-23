@@ -1,5 +1,10 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Adjust the bootstrap to find the correct version of Automake. 
+	* bootstrap.sh: here.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix various bugs in boostg implementation. 
 	* vaucanson/automata/implementation/boostg_graph_impl.hh,
 	* vaucanson/automata/implementation/boostg_graph_impl.hxx: here.
