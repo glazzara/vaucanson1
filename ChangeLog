@@ -1,5 +1,10 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add new files in Makefile.am. 
+	* Makefile.am: here.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix compilation issues by using the new for_all* macros. 
 	* vaucanson/algorithms/domain.hxx,
 	* vaucanson/algorithms/image.hxx,
