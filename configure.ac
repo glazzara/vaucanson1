@@ -87,7 +87,7 @@ AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"],
 AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
 		   [Root of the XML namespace.])
 
-AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [light],
+AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [legacy],
 		   [Default graph implementation.])
 
 

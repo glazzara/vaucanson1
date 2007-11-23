@@ -1,5 +1,15 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Temporarily disable light implementation.
+	* configure.ac: define legacy as default implementation.
+	* include/vaucanson/automata/implementation/light_graph_impl.hh.bak: New.
+	* include/vaucanson/automata/implementation/light_graph_impl.hh: Remove.
+	* include/vaucanson/automata/implementation/light_graph_impl.hxx.bak: New.
+	* include/vaucanson/automata/implementation/light_graph_impl.hxx: Remove.
+	The context headers are not generated anymore for the light implementation.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Rename bootstrap.sh to  bootstrap. 
 	* bootstrap.sh: Remove.
 	* bootstrap: New.
