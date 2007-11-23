@@ -1,5 +1,11 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Rename bootstrap.sh to  bootstrap. 
+	* bootstrap.sh: Remove.
+	* bootstrap: New.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Adjust the bootstrap to find the correct version of Automake. 
 	* bootstrap.sh: here.
 
