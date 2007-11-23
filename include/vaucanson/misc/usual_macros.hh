@@ -155,6 +155,20 @@
 # define for_all_final_states(I, A)			\
   for_all_iterator (final_iterator, I, (A).final())
 
+# define for_all_letters_(Prefix, I, A)			\
+  for_all_iterator (Prefix##alphabet_iterator, I, A)
+
+# define for_all_states_(Prefix, I, A)			\
+  for_all_iterator (Prefix##state_iterator, I, (A).states())
+
+# define for_all_transitions_(Prefix, I, A)			\
+  for_all_iterator (Prefix##transition_iterator, I, (A).transitions())
+
+# define for_all_initial_states_(Prefix, I, A)			\
+  for_all_iterator (Prefix##initial_iterator, I, (A).initial())
+
+# define for_all_final_states_(Prefix, I, A)			\
+  for_all_iterator (Prefix##final_iterator, I, (A).final())
 
 
 

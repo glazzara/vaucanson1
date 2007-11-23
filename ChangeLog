@@ -1,5 +1,15 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add new for_all_* macros. 
+	* vaucanson/misc/usual_macros.hh:
+	Since we will be able to use various automata structures in a same
+	function, we need to specify which types of which automaton we are
+	currently using when iterating over a container for instance.
+	AUTOMATON_TYPES* allowed that but not the for_all_* macros.
+	It's fixed.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Remove a non-standard operator in Support. 
 	* vaucanson/misc/support.hh: Remove the operator.
 	* vaucanson/xml/tools.hxx: Fix the code using it.
