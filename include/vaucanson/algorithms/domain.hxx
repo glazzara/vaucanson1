@@ -35,7 +35,7 @@ namespace vcsn
     AUTOMATON_TYPES(dst_t);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
-    std::map<hstate_t, hstate_t>	stmap;
+    std::map<trans_hstate_t, hstate_t>	stmap;
 
     const series_set_t&		series = dst.structure().series();
     const monoid_t&		monoid = dst.structure().series().monoid();
@@ -44,7 +44,7 @@ namespace vcsn
 
     set_states(src, dst, stmap);
 
-    for_all_transitions(fmp_e, src)
+    for_all_transitions_(trans_, fmp_e, src)
     {
       const trans_series_set_elt_t	trans_series_elt =
 	src.series_of(*fmp_e);

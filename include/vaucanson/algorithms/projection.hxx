@@ -94,7 +94,7 @@ namespace vcsn {
     AUTOMATON_TYPES_(auto_t, aut_);
     AUTOMATON_TYPES(trans_t);
 
-    std::map<hstate_t, hstate_t>	stmap;
+    std::map<hstate_t, aut_hstate_t>	stmap;
     typedef typename aut_series_set_elt_t::support_t	aut_support_t;
 
     const series_set_t&		series = res.structure().series();
@@ -103,7 +103,7 @@ namespace vcsn {
 
     set_states(aut, res, stmap);
 
-    for_all_transitions(aut_e, aut)
+    for_all_transitions_(aut_, aut_e, aut)
     {
       const aut_series_set_elt_t	aut_series_elt =
 	aut.series_of(*aut_e);

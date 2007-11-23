@@ -41,7 +41,7 @@ namespace vcsn
 
     set_states(fmp_trans, res, stmap);
 
-    for_all_transitions(fmp_e, fmp_trans)
+    for_all_transitions_(trans_, fmp_e, fmp_trans)
     {
       const trans_series_set_elt_t	trans_series_elt =
 	fmp_trans.series_of(*fmp_e);

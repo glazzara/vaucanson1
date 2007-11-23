@@ -1,5 +1,13 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Fix compilation issues by using the new for_all* macros. 
+	* vaucanson/algorithms/domain.hxx,
+	* vaucanson/algorithms/image.hxx,
+	* vaucanson/algorithms/projection.hxx: the types were not correctly
+	specified in the for_all* macros.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Add new for_all_* macros. 
 	* vaucanson/misc/usual_macros.hh:
 	Since we will be able to use various automata structures in a same
