@@ -106,10 +106,6 @@ namespace vcsn
 	Support (const std::map<U, T>&);
 	Support (const Support&);
 
-	/** Return the one and only element of the support.
-	 @pre There is exactly one element in the support.  */
-	value_type operator* () const;
-
 	iterator begin () const;
 	iterator end () const;
 	unsigned size () const;

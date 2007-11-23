@@ -1,5 +1,14 @@
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Remove a non-standard operator in Support. 
+	* vaucanson/misc/support.hh: Remove the operator.
+	* vaucanson/xml/tools.hxx: Fix the code using it.
+	Support containers had operator*() which returned the first
+	element value of the container if there was only one element.
+	Since it is not STL compliant I removed it.
+
+2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Temporarily disable light implementation.
 	* configure.ac: define legacy as default implementation.
 	* include/vaucanson/automata/implementation/light_graph_impl.hh.bak: New.
