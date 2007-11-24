@@ -22,20 +22,39 @@
 `-----------------*/
 
 # ifdef GLOBAL_TIMER
-#  include <vaucanson/misc/timer.hh>
+#  ifdef VAUCANSON
+#   include <vaucanson/misc/timer.hh>
+#   define TIMER_SCOPED(Task)\
+             vcsn::misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
+#  else
+#   include "timer.hh"
+#   define TIMER_SCOPED(Task) misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
+#  endif
 #  define TIMER_START()      GLOBAL_TIMER.start ()
 #  define TIMER_PUSH(Task)   GLOBAL_TIMER.push (Task)
 #  define TIMER_POP(Task)    GLOBAL_TIMER.pop (Task)
 #  define TIMER_STOP()       GLOBAL_TIMER.stop ()
-#  define TIMER_SCOPED(Task) vcsn::misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
-#  define TIMER_PRINT(Stream) Stream << GLOBAL_TIMER << std::endl
+#  define TIMER_DUMP(Stream) GLOBAL_TIMER.dump (Stream)
+#  define TIMER_TASK(Task)   GLOBAL_TIMER.task (Task)
+#  define TIMER_PRINT(Stream)             GLOBAL_TIMER.print (Stream)
+#  define TIMER_PRINT_VD(Stream, Vd)      GLOBAL_TIMER.print (Stream, Vd)
+#  define TIMER_EXPORT_DOT(Stream)        GLOBAL_TIMER.export_dot (Stream)
+#  define TIMER_EXPORT_DOT_VD(Stream, Vd) GLOBAL_TIMER.export_dot (Stream, Vd)
+#  define TIMER_EXPORT_DOT_VD_CR(Stream, Vd, Cr)\
+            GLOBAL_TIMER.export_dot (Stream, Vd, Cr)
 # else
 #  define TIMER_START()      ((void) 0)
 #  define TIMER_PUSH(Task)   ((void) 0)
 #  define TIMER_POP(Task)    ((void) 0)
 #  define TIMER_STOP()       ((void) 0)
+#  define TIMER_DUMP(Stream) ((void) 0)
+#  define TIMER_TASK(Task)   ((int)  0)
 #  define TIMER_SCOPED(Task) ((void) 0)
-#  define TIMER_PRINT(Stream) ((void) 0)
+#  define TIMER_PRINT(Stream)                   ((void) 0)
+#  define TIMER_PRINT_VD(Stream, Vd)            ((void) 0)
+#  define TIMER_EXPORT_DOT(Stream)              ((void) 0)
+#  define TIMER_EXPORT_DOT_VD(Stream, Vd)       ((void) 0)
+#  define TIMER_EXPORT_DOT_VD_CR(Stream, Vd, Cr)((void) 0)
 # endif
 
 
@@ -44,7 +63,11 @@
 `-------------------*/
 
 # ifdef GLOBAL_BENCHER
-#  include <vaucanson/misc/bencher.hh>
+#  ifdef VAUCANSON
+#   include <vaucanson/misc/bencher.hh>
+#  else
+#   include "bencher.hh"
+#  endif
 
 #  define BENCH_DO(Iterations)						\
   for (unsigned i_ = 1;	i_ <= (Iterations);				\
@@ -58,13 +81,10 @@
 
 # define BENCH_SAVE_PLOT(Filename)					\
   do {									\
-    if (Filename != "")							\
-    {									\
-      std::ofstream o (args.plot_output_filename.c_str(),		\
-		       std::ofstream::out | std::ofstream::trunc);	\
-      BENCH_PLOT(o);							\
-      o.close();							\
-    }									\
+    std::ofstream o (Filename,						\
+	             std::ofstream::out | std::ofstream::trunc);	\
+    BENCH_PLOT(o);							\
+    o.close();								\
   } while (0)
 
 # else

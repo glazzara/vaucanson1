@@ -21,7 +21,7 @@
 
 namespace vcsn
 {
-  namespace io
+  namespace tools
   {
     struct simple
     {
@@ -31,9 +31,9 @@ namespace vcsn
       template<typename Loader>
       void operator()(std::istream& in, Loader& l) const;
     };
-  }
+  } // tools
 
-}
+} // vcsn
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB

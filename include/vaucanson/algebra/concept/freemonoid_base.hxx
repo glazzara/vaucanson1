@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -176,92 +176,96 @@ namespace vcsn {
     return from_data;
   }
 
-  /*----------.
-  | Operators |
-  `----------*/
+  namespace algebra {
 
-  // default implementation of word parsing assumes the fact that
-  // an alphabet letter can be constructed from a 'char'.
-  // specialized this function according to your alphabet if this
-  // is not the case.
-  template <typename S, typename T, typename CharContainer>
-  bool op_parse(const algebra::FreeMonoidBase<S>& set, T& v,
-		const std::string& s,
-		typename std::string::const_iterator& i,
-		const CharContainer& escaped)
-  {
-    typename std::string::const_iterator j = i;
-    typename std::string::const_iterator k;
+    /*----------.
+    | Operators |
+    `----------*/
 
-    while ((i != s.end()) &&
-           ((*i == '\\') || (set.alphabet().contains(*i) &&
-	   (std::find(escaped.begin(), escaped.end(), *i) == escaped.end()))))
-      if (*i == '\\')
-	{
-	  k = i;
-	  ++k;
-	  if (k != s.end())
-	    i = k;
-	  if (not set.alphabet().contains(*i))
-	    return (i != j);
-	  v += *i;
-	  ++i;
-	}
-      else
-	{
-	  v += *i;
-	  ++i;
-	}
-    return (i != j);
-  }
+    // default implementation of word parsing assumes the fact that
+    // an alphabet letter can be constructed from a 'char'.
+    // specialized this function according to your alphabet if this
+    // is not the case.
+    template <typename S, typename T, typename CharContainer>
+    bool op_parse(const algebra::FreeMonoidBase<S>& set, T& v,
+		  const std::string& s,
+		  typename std::string::const_iterator& i,
+		  const CharContainer& escaped)
+    {
+      typename std::string::const_iterator j = i;
+      typename std::string::const_iterator k;
 
-  template <typename Self, typename T>
-  void
-  op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v)
-  {
-    const T		new_v(v);
-    typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator  it
-      = op_begin(s.self(), v);
+      while ((i != s.end()) &&
+	     ((*i == '\\') || (set.alphabet().contains(*i) &&
+	     (std::find(escaped.begin(), escaped.end(), *i) == escaped.end()))))
+	if (*i == '\\')
+	  {
+	    k = i;
+	    ++k;
+	    if (k != s.end())
+	      i = k;
+	    if (not set.alphabet().contains(*i))
+	      return (i != j);
+	    v += *i;
+	    ++i;
+	  }
+	else
+	  {
+	    v += *i;
+	    ++i;
+	  }
+      return (i != j);
+    }
 
-    for (typename MetaElement<algebra::FreeMonoidBase<Self>, T>::
-	   const_reverse_iterator i = op_rbegin_const(s.self(), new_v);
-	 i != op_rend_const(s.self(), new_v);
-	 ++i)
-      *it++ = *i;
-  }
+    template <typename Self, typename T>
+    void
+    op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v)
+    {
+      const T		new_v(v);
+      typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator  it
+	= op_begin(s.self(), v);
 
-  template <typename Self, typename T>
-  bool
-  op_contains(const algebra::FreeMonoidBase<Self>& s, const T& v)
-  {
-    typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
+      for (typename MetaElement<algebra::FreeMonoidBase<Self>, T>::
+	     const_reverse_iterator i = op_rbegin_const(s.self(), new_v);
+	   i != op_rend_const(s.self(), new_v);
+	   ++i)
+	*it++ = *i;
+    }
 
-    for (const_iterator i = op_begin_const(s.self(), v);
-	 i != op_end_const(s.self(), v);
-	 ++i)
-      if (! s.alphabet().contains(*i))
-	return false;
-    return true;
-  }
+    template <typename Self, typename T>
+    bool
+    op_contains(const algebra::FreeMonoidBase<Self>& s, const T& v)
+    {
+      typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
-  template <typename Self, typename St, typename T>
-  St&
-  op_rout(const algebra::FreeMonoidBase<Self>& s,
-	  St& st,
-	  const T& v)
-  {
-    typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
+      for (const_iterator i = op_begin_const(s.self(), v);
+	   i != op_end_const(s.self(), v);
+	   ++i)
+	if (! s.alphabet().contains(*i))
+	  return false;
+      return true;
+    }
 
-    bool is_empty = true;
-    for (const_iterator i = op_begin_const(s.self(), v);
-	 i != op_end_const(s.self(), v);
-	 ++i, is_empty = false)
-      st << misc::make_escaper(*i);
+    template <typename Self, typename St, typename T>
+    St&
+    op_rout(const algebra::FreeMonoidBase<Self>& s,
+	    St& st,
+	    const T& v)
+    {
+      typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
-    if (is_empty)
-      st << "1";
-    return st;
-  }
+      bool is_empty = true;
+      for (const_iterator i = op_begin_const(s.self(), v);
+	   i != op_end_const(s.self(), v);
+	   ++i, is_empty = false)
+	st << misc::make_escaper(*i);
+
+      if (is_empty)
+	st << "1";
+      return st;
+    }
+
+  } // algebra
 
 } // vcsn
 

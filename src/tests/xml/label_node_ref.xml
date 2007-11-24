@@ -1,4 +1,6 @@
+
 <automaton xmlns="http://vaucanson.lrde.epita.fr">
+
   <labelType>
     <monoid generatorType="letters" type="free">
       <generator value="a"/>
@@ -8,6 +10,7 @@
     </monoid>
     <semiring operations="classical" set="Z"/>
   </labelType>
+
   <content>
     <states>
       <state name="s0"/>
@@ -15,7 +18,7 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition src="s0" dst="s0">
+      <transition dst="s0" src="s0">
         <label>
           <sum>
             <sum>
@@ -29,7 +32,7 @@
           </sum>
         </label>
       </transition>
-      <transition src="s0" dst="s1">
+      <transition dst="s1" src="s0">
         <label>
           <sum>
             <word value="a" weight="6"/>
@@ -37,7 +40,7 @@
           </sum>
         </label>
       </transition>
-      <transition src="s0" dst="s2">
+      <transition dst="s2" src="s0">
         <label>
           <sum>
             <word value="aa"/>
@@ -45,12 +48,12 @@
           </sum>
         </label>
       </transition>
-      <transition src="s1" dst="s0">
+      <transition dst="s0" src="s1">
         <label>
           <word value="ab" weight="5"/>
         </label>
       </transition>
-      <transition src="s1" dst="s1">
+      <transition dst="s1" src="s1">
         <label>
           <sum>
             <word value="a" weight="5"/>
@@ -70,4 +73,5 @@
       </final>
     </transitions>
   </content>
+
 </automaton>

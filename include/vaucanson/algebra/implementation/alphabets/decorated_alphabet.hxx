@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -165,53 +165,59 @@ namespace vcsn {
     return this->value().other();
   }
 
-  /*--------------------------------------------------.
+  namespace algebra {
+
+    /*--------------------------------------------------.
     | Definition of an alphabet implementation based on |
     | AlphabetDecorator                                 |
     `--------------------------------------------------*/
 
-  template <typename L, typename T>
-  bool op_contains(const algebra::AlphabetSet<L>& s, const algebra::AlphabetDecorator<L, T>& a)
-  {
-    return true;
-  }
-
-  template <typename L, typename T>
-  bool op_is_finite(const algebra::AlphabetSet<L>& s, const algebra::AlphabetDecorator<L, T>& a)
-  {
-    return true;
-  }
-
-  template <typename L, typename T>
-  bool op_contains_e(const algebra::AlphabetSet<L>& s,
-		     const algebra::AlphabetDecorator<L, T>& a,
-		     const L& v)
-  {
-    if (v == a.joker())
+    template <typename L, typename T>
+    bool op_contains(const algebra::AlphabetSet<L>& s,
+		     const algebra::AlphabetDecorator<L, T>& a)
+    {
       return true;
-    if (v == a.other())
-      return false;
-    return Element<algebra::AlphabetSet<L>, T>(s, a.alphabet()).contains(v);
-  }
+    }
 
-  template <typename T, typename L>
-  bool op_letter_equality(const algebra::AlphabetSet<L>& s,
-				 const algebra::AlphabetDecorator<L, T>& a,
-				 L lhs,
-				 L rhs)
-  {
-    Element<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> > e(s, a);
-    if (lhs == a.joker())
-      return e.contains(rhs);
-    if (rhs == a.joker())
-      return e.contains(lhs);
-    if (lhs == a.other())
-      return ! e.contains(rhs);
-    if (rhs == a.other())
-      return ! e.contains(lhs);
-    return lhs == rhs;
-  }
+    template <typename L, typename T>
+    bool op_is_finite(const algebra::AlphabetSet<L>& s,
+		      const algebra::AlphabetDecorator<L, T>& a)
+    {
+      return true;
+    }
 
+    template <typename L, typename T>
+    bool op_contains_e(const algebra::AlphabetSet<L>& s,
+		       const algebra::AlphabetDecorator<L, T>& a,
+		       const L& v)
+    {
+      if (v == a.joker())
+	return true;
+      if (v == a.other())
+	return false;
+      return Element<algebra::AlphabetSet<L>, T>(s, a.alphabet()).contains(v);
+    }
+
+    template <typename T, typename L>
+    bool op_letter_equality(const algebra::AlphabetSet<L>& s,
+			    const algebra::AlphabetDecorator<L, T>& a,
+			    L lhs,
+			    L rhs)
+    {
+      Element<algebra::AlphabetSet<L>,
+	      algebra::AlphabetDecorator<L, T> > e(s, a);
+      if (lhs == a.joker())
+	return e.contains(rhs);
+      if (rhs == a.joker())
+	return e.contains(lhs);
+      if (lhs == a.other())
+	return ! e.contains(rhs);
+      if (rhs == a.other())
+	return ! e.contains(lhs);
+      return lhs == rhs;
+    }
+
+  } // algebra
 
 } // vcsn
 

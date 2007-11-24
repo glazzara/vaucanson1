@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -134,220 +134,248 @@ namespace vcsn {
     bool operator>=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
 
+    template<typename W, typename M, typename Tm, typename Tw>
+    bool op_contains(const algebra::Series<W, M>& s,
+		     const algebra::polynom<Tm, Tw>& m);
+
+    template<typename Self, typename Tm, typename Tw>
+    void op_in_star(const algebra::SeriesBase<Self>& s,
+		    algebra::polynom<Tm, Tw>& m);
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    bool op_is_finite_app(const algebra::Series<W, M>& s,
+			  const algebra::polynom<Tm, Tw>& m);
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    const algebra::polynom<Tm, Tw>&
+    identity_value(SELECTOR2(algebra::Series<W, M>),
+		   SELECTOR2(algebra::polynom<Tm, Tw>));
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    const algebra::polynom<Tm, Tw>&
+    zero_value(SELECTOR2(algebra::Series<W, M>),
+	       SELECTOR2(algebra::polynom<Tm, Tw>));
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    void op_in_add(const algebra::Series<W, M>& s,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const algebra::polynom<Tm, Tw>& arg);
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
+				    const algebra::polynom<Tm, Tw>& a,
+				    const algebra::polynom<Tm, Tw>& b);
+
+    /*-------------------.
+    | Cauchy's product.  |
+    `-------------------*/
+    template<typename W, typename M, typename Tm, typename Tw>
+    algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
+				    const algebra::polynom<Tm, Tw>& a,
+				    const algebra::polynom<Tm, Tw>& b);
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    void op_in_mul(const algebra::Series<W, M>& s,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const algebra::polynom<Tm, Tw>& arg);
+
+    /*-----------------------.
+    | foreign constructors.  |
+    `-----------------------*/
+
+    template <typename Tm, typename Tw, typename W, typename M>
+    algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+					SELECTOR2(algebra::polynom<Tm, Tw>),
+					const Tm& m_value);
+
+    template<typename Tm, typename Tw, typename W, typename M, typename oTm>
+    algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+					SELECTOR2(algebra::polynom<Tm, Tw>),
+					SELECTOR(algebra::MonoidBase<M>),
+					const oTm& m_value);
+
+    template<typename Tm, typename Tw, typename W, typename M, typename oTw>
+    algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+					SELECTOR2(algebra::polynom<Tm, Tw>),
+					SELECTOR(algebra::SemiringBase<W>),
+					const oTw& w_value);
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+    void op_assign(const algebra::Series<W, M>& s,
+		   const algebra::MonoidBase<M>& monoid,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const oTm& src);
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+    void op_assign(const algebra::Series<W, M>& s,
+		   const algebra::SemiringBase<W>& semiring,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const oTw& src);
+
+    /*----------------------------------------.
+    | foreign addition with monoid elements.  |
+    `----------------------------------------*/
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+    void op_in_add(const algebra::Series<W, M>& s,
+		   const algebra::MonoidBase<M>& monoid,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const oTm& src);
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+    algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
+				    const algebra::MonoidBase<M>& monoid,
+				    const algebra::polynom<Tm, Tw>& a,
+				    const oTm& b);
+
+
   } // algebra
 
-  template<typename W, typename M, typename Tm, typename Tw>
-  bool op_contains(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
-
-  template<typename Self, typename Tm, typename Tw>
-  void op_in_star(const algebra::SeriesBase<Self>& s,
-		  algebra::polynom<Tm, Tw>& m);
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  bool op_is_finite_app(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  const algebra::polynom<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>),
-						 SELECTOR2(algebra::polynom<Tm, Tw>));
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  const algebra::polynom<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
-					     SELECTOR2(algebra::polynom<Tm, Tw>));
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  void op_in_add(const algebra::Series<W, M>& s,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const algebra::polynom<Tm, Tw>& arg);
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const algebra::polynom<Tm, Tw>& a,
-				  const algebra::polynom<Tm, Tw>& b);
-
-  /*-------------------.
-  | Cauchy's product.  |
-  `-------------------*/
-  template<typename W, typename M, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-				  const algebra::polynom<Tm, Tw>& a,
-				  const algebra::polynom<Tm, Tw>& b);
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  void op_in_mul(const algebra::Series<W, M>& s,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const algebra::polynom<Tm, Tw>& arg);
-
-  /*-----------------------.
-  | foreign constructors.  |
-  `-----------------------*/
-
-  template <typename Tm, typename Tw, typename W, typename M>
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
-				      SELECTOR2(algebra::polynom<Tm, Tw>),
-				      const Tm& m_value);
-
-  template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
-				      SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR(algebra::MonoidBase<M>),
-				      const oTm& m_value);
-
-  template<typename Tm, typename Tw, typename W, typename M, typename oTw>
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
-				      SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR(algebra::SemiringBase<W>),
-				      const oTw& w_value);
-
-  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  void op_assign(const algebra::Series<W, M>& s,
-		 const algebra::MonoidBase<M>& monoid,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const oTm& src);
-
-  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  void op_assign(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& semiring,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const oTw& src);
-
-  /*----------------------------------------.
-  | foreign addition with monoid elements.  |
-  `----------------------------------------*/
-
-  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  void op_in_add(const algebra::Series<W, M>& s,
-		 const algebra::MonoidBase<M>& monoid,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const oTm& src);
-
-  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const algebra::MonoidBase<M>& monoid,
-				  const algebra::polynom<Tm, Tw>& a,
-				  const oTm& b);
-
-
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
-  struct op_add_traits<M, algebra::Series<W, M>, oTm, algebra::polynom<Tm, Tw> >
+  struct op_add_traits<M, algebra::Series<W, M>,
+		       oTm, algebra::polynom<Tm, Tw> >
   {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
 
-  template<typename M, typename W, typename oTm, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_add(const algebra::MonoidBase<M>& monoid,
-				  const algebra::Series<W, M>& s,
-				  const oTm& a,
-				  const algebra::polynom<Tm, Tw>& b);
+  namespace algebra {
 
-  /*------------------------------------------.
-  | Foreign addition with semiring elements.  |
-  `------------------------------------------*/
+    template<typename M, typename W, typename oTm, typename Tm, typename Tw>
+    algebra::polynom<Tm, Tw> op_add(const algebra::MonoidBase<M>& monoid,
+				    const algebra::Series<W, M>& s,
+				    const oTm& a,
+				    const algebra::polynom<Tm, Tw>& b);
 
-  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  void op_in_add(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& semiring,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const oTw& src);
+    /*------------------------------------------.
+    | Foreign addition with semiring elements.  |
+    `------------------------------------------*/
 
-  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const algebra::SemiringBase<W>& semiring,
-				  const algebra::polynom<Tm, Tw>& a,
-				  const oTw& b);
+    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+    void op_in_add(const algebra::Series<W, M>& s,
+		   const algebra::SemiringBase<W>& semiring,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const oTw& src);
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+    algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
+				    const algebra::SemiringBase<W>& semiring,
+				    const algebra::polynom<Tm, Tw>& a,
+				    const oTw& b);
+
+  } // algebra
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  struct op_add_traits<W, algebra::Series<W, M>, oTw, algebra::polynom<Tm, Tw> >
+  struct op_add_traits<W, algebra::Series<W, M>,
+		       oTw, algebra::polynom<Tm, Tw> >
   {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
 
+  namespace algebra {
+
+    template<typename W, typename M, typename oTw, typename Tm, typename Tw>
+    algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& semiring,
+				    const algebra::Series<W, M>& s,
+				    const oTw& a,
+				    const algebra::polynom<Tm, Tw>& b);
+
+    /*----------------------------------------------.
+    | Foreign multiplication by semiring elements.  |
+    `----------------------------------------------*/
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+    void op_in_mul(const algebra::Series<W, M>& s,
+		   const algebra::SemiringBase<W>& semiring,
+		   algebra::polynom<Tm, Tw>& dst,
+		   const oTw& src);
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+    algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
+				    const algebra::SemiringBase<W>& semiring,
+				    const algebra::polynom<Tm, Tw>& a,
+				    const oTw& b);
+
+  } // algebra
+
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& semiring,
-				  const algebra::Series<W, M>& s,
-				  const oTw& a,
-				  const algebra::polynom<Tm, Tw>& b);
-
-  /*----------------------------------------------.
-  | Foreign multiplication by semiring elements.  |
-  `----------------------------------------------*/
-
-  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  void op_in_mul(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& semiring,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const oTw& src);
-
-  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-				  const algebra::SemiringBase<W>& semiring,
-				  const algebra::polynom<Tm, Tw>& a,
-				  const oTw& b);
-
-  template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  struct op_mul_traits<W, algebra::Series<W, M>, oTw, algebra::polynom<Tm, Tw> >
+  struct op_mul_traits<W, algebra::Series<W, M>,
+		       oTw, algebra::polynom<Tm, Tw> >
   {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
 
-  template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& semiring,
-				  const algebra::Series<W, M>& s,
-				  const oTw& a,
-				  const algebra::polynom<Tm, Tw>& b);
+  namespace algebra {
 
-  /*----------.
-  | Transpose. |
-  `----------*/
-  template <typename W, typename M, typename Tm, typename Tw>
-  void  op_in_transpose(const algebra::Series<W, M>& s, algebra::polynom<Tm, Tw>& t);
+    template<typename W, typename M, typename oTw, typename Tm, typename Tw>
+    algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& semiring,
+				    const algebra::Series<W, M>& s,
+				    const oTw& a,
+				    const algebra::polynom<Tm, Tw>& b);
 
-  /*-------------.
-  | input-output. |
-  `-------------*/
+    /*----------.
+    | Transpose. |
+    `----------*/
+    template <typename W, typename M, typename Tm, typename Tw>
+    void  op_in_transpose(const algebra::Series<W, M>& s,
+			  algebra::polynom<Tm, Tw>& t);
 
-  template<typename W, typename M, typename St, typename Tm, typename Tw>
-  St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p);
+    /*-------------.
+    | input-output. |
+    `-------------*/
+
+    template<typename W, typename M, typename St, typename Tm, typename Tw>
+    St& op_rout(const algebra::Series<W, M>& s, St& st,
+		const algebra::polynom<Tm, Tw>& p);
+
+  } // algebra
 
   /*---------------.
-    | specialization |
-    `---------------*/
+  | specialization |
+  `---------------*/
 
   template<typename W, typename M, typename Tm, typename Tw>
   struct MetaElement<algebra::Series<W, M>, algebra::polynom<Tm, Tw> >
-    : public MetaElement<algebra::SeriesBase<algebra::Series<W, M> >, algebra::polynom<Tm, Tw> >
+    : public MetaElement<algebra::SeriesBase<algebra::Series<W, M> >,
+			 algebra::polynom<Tm, Tw> >
   {
     static const bool dynamic_value = true;
   };
 
-  /*---------------------------------.
-  | design_pattern series operations |
-  `---------------------------------*/
 
-  template <class W, class M, class Tm, class Tw>
-  Tm op_choose_from_supp(const algebra::Series<W, M>& s,
-			 const algebra::polynom<Tm, Tw>& p);
+  namespace algebra {
 
-  template<typename W, typename M, typename Tm, typename Tw>
-  typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t
-  op_support(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
+    /*---------------------------------.
+    | design_pattern series operations |
+    `---------------------------------*/
 
-  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  Tw op_series_get(const algebra::Series<W, M>& s,
-		   const algebra::polynom<Tm, Tw>& p,
-		   const oTm& m);
+    template <class W, class M, class Tm, class Tw>
+    Tm op_choose_from_supp(const algebra::Series<W, M>& s,
+			   const algebra::polynom<Tm, Tw>& p);
 
-  template<typename W, typename M,
-	   typename Tm, typename Tw,
-	   typename oTm, typename oTw>
-  void op_series_set(const algebra::Series<W, M>& s,
-		     algebra::polynom<Tm, Tw>& p,
-		     const oTm& m,
-		     const oTw& w);
+    template<typename W, typename M, typename Tm, typename Tw>
+    typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t
+    op_support(const algebra::Series<W, M>& s,
+	       const algebra::polynom<Tm, Tw>& m);
 
-  template <class W, class M, class Tm, class Tw>
-  Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> >
-  op_choose(const algebra::Series<W,M>& s,
-	    SELECTOR2(algebra::polynom<Tm,Tw>));
+    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+    Tw op_series_get(const algebra::Series<W, M>& s,
+		     const algebra::polynom<Tm, Tw>& p,
+		     const oTm& m);
+
+    template<typename W, typename M,
+	     typename Tm, typename Tw,
+	     typename oTm, typename oTw>
+    void op_series_set(const algebra::Series<W, M>& s,
+		       algebra::polynom<Tm, Tw>& p,
+		       const oTm& m,
+		       const oTw& w);
+
+    template <class W, class M, class Tm, class Tw>
+    Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> >
+    op_choose(const algebra::Series<W,M>& s,
+	      SELECTOR2(algebra::polynom<Tm,Tw>));
+
+  } // algebra
 
 } // vcsn
 

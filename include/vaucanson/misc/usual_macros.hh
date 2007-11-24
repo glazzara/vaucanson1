@@ -197,6 +197,7 @@
 # define one_	identity(SELECT(typename series_set_elt_t::value_t))
 # define VCSN_EMPTY_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
+# define wone_	identity(SELECT(typename semiring_elt_t::value_t))
 
 
 # define VARIANT_INCLUDE_FILE(PATH, FILE, SUFFIX) \

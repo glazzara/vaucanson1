@@ -22,24 +22,26 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/misc/random.hh>
 
-namespace vcsn {
-
-  template <class Auto>
-  std::deque<typename Auto::hstate_t>
-  choose_n_states(const Auto& a, unsigned n)
+namespace vcsn
+{
+  namespace tools
   {
-    typedef typename Auto::hstate_t hstate_t;
+    template <class Auto>
+    std::deque<typename Auto::hstate_t>
+    choose_n_states(const Auto& a, unsigned n)
+    {
+      typedef typename Auto::hstate_t hstate_t;
 
-    std::deque<typename Auto::hstate_t> s;
-    std::insert_iterator<std::deque<hstate_t> > i(s, s.begin());
-    misc::random::sample_n(hstate_t(),
-			   a.states().begin(),
-			   a.states().end(),
-			   i,
-			   n);
-    return s;
-  }
-
+      std::deque<typename Auto::hstate_t> s;
+      std::insert_iterator<std::deque<hstate_t> > i(s, s.begin());
+      misc::random::sample_n(hstate_t(),
+			     a.states().begin(),
+			     a.states().end(),
+			     i,
+			     n);
+      return s;
+    }
+  } // tools
 } // vcsn
 
 #endif // ! VCSN_TOOLS_AUTOMATON_TOOLS_HH

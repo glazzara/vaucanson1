@@ -24,6 +24,7 @@
 # include <vaucanson/algorithms/eval.hh>
 
 using namespace vcsn;
+using namespace vcsn::tools;
 
 template <class Auto>
 bool elimination_random_test(tests::Tester& tg)

@@ -35,7 +35,7 @@ protected:
 #define TEST_STATIC_ARG1				\
 	vcsn::Element<					\
 	  vcsn::algebra::Series<			\
-	    vcsn::NumericalSemiring,			\
+	    vcsn::algebra::NumericalSemiring,		\
 	    vcsn::algebra::char_letter::Words>,		\
 	  vcsn::rat::exp<				\
 	    vcsn::algebra::char_letter::Word::value_t,	\

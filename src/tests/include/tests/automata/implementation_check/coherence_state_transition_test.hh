@@ -34,6 +34,7 @@ unsigned coherence_state_transition_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
   typedef GenRandomAutomata<Auto> gen_auto_t;

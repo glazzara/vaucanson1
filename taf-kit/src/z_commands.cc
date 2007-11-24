@@ -39,8 +39,8 @@ const command_t command_map[] =
   COMMAND_GROUP (
     "Tests and evaluation on automata:",
 
-    COMMAND_ENTRY (are_isomorphic, AutAut,
-		   "Return whether `aut1' and `aut2' are isomorphic."),
+//    COMMAND_ENTRY (are_isomorphic, AutAut,
+//		   "Return whether `aut1' and `aut2' are isomorphic."),
     COMMAND_ENTRY (eval, AutWord, "Evaluate `word' on `aut'."),
     COMMAND_ENTRY (is_ambiguous, Aut,
 		   "Return whether `aut' is ambiguous."),

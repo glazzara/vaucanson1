@@ -27,7 +27,7 @@
 
 namespace vcsn
 {
-  namespace io
+  namespace tools
   {
     inline dot::dot(const std::string& name)
     {

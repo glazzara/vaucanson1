@@ -33,7 +33,7 @@ namespace vcsn {
 		     const Auto& a,
 		     const Converter& conv)
     {
-      o << automaton_saver(a, conv, io::simple());
+      o << automaton_saver(a, conv, tools::simple());
     }
 
     template <typename Auto, typename Converter>

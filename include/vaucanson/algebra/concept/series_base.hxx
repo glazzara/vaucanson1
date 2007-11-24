@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -146,36 +146,40 @@ namespace vcsn {
   {}
 
 
-  /*------.
-  | Ops.  |
-  `------*/
+  namespace algebra {
 
-  template<typename S, typename T>
-  bool op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t)
-  {
-    return false;
-  }
+    /*------.
+    | Ops.  |
+    `------*/
 
-  template<typename S, typename T, typename M, typename W>
-  void op_series_structure(const algebra::SeriesBase<S>& s, const T& t, const W& w)
-  {
-    pure_service_call ("default implementation of op_series_structure()");
-  }
+    template<typename S, typename T>
+    bool op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t)
+    {
+      return false;
+    }
 
-  template <class S, class T>
-  Element<S, T> 
-  op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T))
-  {
-    pure_service_call ("default implementation of op_series_choose()");
-    return Element<S, T>();
-  }
+    template<typename S, typename T, typename M, typename W>
+    void op_series_structure(const algebra::SeriesBase<S>& s, const T& t, const W& w)
+    {
+      pure_service_call ("default implementation of op_series_structure()");
+    }
 
-  template <class S, class T>
-  typename algebra::series_traits<T>::support_t
-  op_support(const algebra::SeriesBase<S>&, const T& v)
-  {
-    return v;
-  }
+    template <class S, class T>
+    Element<S, T>
+    op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T))
+    {
+      pure_service_call ("default implementation of op_series_choose()");
+      return Element<S, T>();
+    }
+
+    template <class S, class T>
+    typename algebra::series_traits<T>::support_t
+    op_support(const algebra::SeriesBase<S>&, const T& v)
+    {
+      return v;
+    }
+
+  } // algebra
 
   template <class S, class T>
   Element<S, T>
@@ -204,15 +208,15 @@ namespace vcsn {
   {
     typedef typename algebra::series_traits<T2>::support_t support_t;
     typedef typename algebra::series_traits<T1>::semiring_elt_value_t
-      semiring_elt_value_t;
+	semiring_elt_value_t;
     for_all_const_(support_t, e, s2.supp())
-      s1.assoc(*e,
-	       algebra::identity_as<semiring_elt_value_t>::
-	       of(s1.structure().semiring()));
+	s1.assoc(*e,
+		 algebra::identity_as<semiring_elt_value_t>::
+		 of(s1.structure().semiring()));
   }
 
   template <class S, class T>
-  Element<S, T> 
+  Element<S, T>
   hadamard(const Element<S, T>& lhs, const Element<S, T>& rhs)
   {
     typedef Element<S, T> series_set_elt_t;
@@ -222,50 +226,54 @@ namespace vcsn {
     Element<S, T> output;
     support_t support = lhs.supp();
     for (typename support_t::iterator supp = support.begin();
-	 supp != support.end();
-	 ++supp)
+	   supp != support.end();
+	   ++supp)
     {
-      output +=	 lhs.get(*supp) *
-	rhs.get(*supp) * series_set_elt_t(lhs.structure(), monoid_elt_t(*supp));
+	output +=	 lhs.get(*supp) *
+	  rhs.get(*supp) * series_set_elt_t(lhs.structure(), monoid_elt_t(*supp));
     }
     return output;
   }
 
-  template <class S, class M>
-  S
-  op_convert(const algebra::SeriesBase<S>&,
-	     const algebra::FreeMonoidBase<M>& monoid)
-  {
-    // Ensures the monoid is compatible with the series.
-    enum { compatible = misc::static_eq<typename S::monoid_t, M>::value };
-    static_assertion_(compatible, invalid_conversion_from_monoid_to_series);
+  namespace algebra {
 
-    typename S::semiring_t semiring;
-    return S (semiring, monoid.self());
-  }
+    template <class S, class M>
+    S
+    op_convert(const algebra::SeriesBase<S>&,
+	       const algebra::FreeMonoidBase<M>& monoid)
+    {
+      // Ensures the monoid is compatible with the series.
+      enum { compatible = misc::static_eq<typename S::monoid_t, M>::value };
+      static_assertion_(compatible, invalid_conversion_from_monoid_to_series);
 
-  template <class S, class T>
-  T 
-  op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), const T& src_)
-  {
-    return src_;
-  }
+      typename S::semiring_t semiring;
+      return S (semiring, monoid.self());
+    }
 
-  template <class S, class T, class U>
-  T
-  op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const U& src_)
-  {
-    typedef typename algebra::series_traits<U>::support_t	support_t;
-    typedef typename Element<S, T>::monoid_elt_t		monoid_elt_t;
-    S ts = s.self();
-    Element<S, U> src(ts, src_);
-    Element<S, T> dst(ts);
-    support_t support = src.supp();
-    for_all_const_(support_t, ss, support)
-      dst += src.get(monoid_elt_t(s.monoid(), *ss)) *
-      Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
-    return dst.value();
-  }
+    template <class S, class T>
+    T
+    op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), const T& src_)
+    {
+      return src_;
+    }
+
+    template <class S, class T, class U>
+    T
+    op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const U& src_)
+    {
+      typedef typename algebra::series_traits<U>::support_t	support_t;
+      typedef typename Element<S, T>::monoid_elt_t		monoid_elt_t;
+      S ts = s.self();
+      Element<S, U> src(ts, src_);
+      Element<S, T> dst(ts);
+      support_t support = src.supp();
+      for_all_const_(support_t, ss, support)
+	dst += src.get(monoid_elt_t(s.monoid(), *ss)) *
+	Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
+      return dst.value();
+    }
+
+  } // algebra
 
 } // vcsn
 

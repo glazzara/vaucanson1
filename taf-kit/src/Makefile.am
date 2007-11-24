@@ -36,7 +36,15 @@ COMMON_SOURCES = commands.hh			\
 		 interface.cc			\
 		 interface.hh			\
 		 main.cc			\
-		 predefined_alphabets.hh
+		 predefined_alphabets.hh 	\
+		 pipe.hh 			\
+		 pipe.hxx 			\
+		 pipe_command_sequence.hh 	\
+		 pipe_command_sequence.hxx 	\
+		 pipe_getters.hh 		\
+		 pipe_getters.hxx 		\
+		 pipe_writers.hh 		\
+		 pipe_writers.hxx
 
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\

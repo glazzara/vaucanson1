@@ -257,7 +257,7 @@ namespace edition_commands
 	else
 	  a.set_final (n_state);
       else
-	a.unset_initial (n_state);
+	a.unset_final (n_state);
   }
 
   /// Print the automaton @c a .
@@ -392,7 +392,7 @@ namespace edition_commands
 /// Edit automaton command ; let the user edit an automaton.
 static int edit_automaton_command (const arguments_t& args)
 {
-  using namespace vcsn::io;
+  using namespace vcsn::tools;
   using namespace vcsn::xml;
 
 # ifndef WITH_TWO_ALPHABETS
@@ -425,7 +425,7 @@ static int define_automaton_command (const arguments_t& args)
 {
   using namespace CONTEXT_NAMESPACE;
   using namespace vcsn;
-  using namespace vcsn::io;
+  using namespace vcsn::tools;
   using namespace vcsn::xml;
 
   std::ofstream output (args.args[1]);

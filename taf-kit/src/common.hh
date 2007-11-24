@@ -55,11 +55,16 @@
 # include <string>
 
 // Use a global timer and bencher.
-# define GLOBAL_TIMER timer
+# define GLOBAL_TIMER global_timer
 # define GLOBAL_BENCHER bencher
 # include <vaucanson/misc/usual_macros.hh>
-extern vcsn::misc::Timer timer;
+extern vcsn::misc::Timer global_timer;
 extern vcsn::misc::Bencher bencher;
+
+// Use a global command result.
+# include "pipe.hh"
+# define GLOBAL_RESULT last_command_output
+extern command_output last_command_output;
 
 struct arguments_t
 {
@@ -73,25 +78,38 @@ struct arguments_t
 	epsilon2 (0),
 # endif /* ! WITH_TWO_ALPHABETS */
 	verbose (false),
-	report_time (false),
 	bench (false),
-	nb_iterations (1)
+	nb_iterations (1),
+	report_time (false),
+	export_time_dot (false),
+	export_time_xml (false),
+	input_type (INPUT_TYPE_XML),
+	output_type (OUTPUT_TYPE_XML)
     {}
 
     std::string	progname;
-    char*	args[3];
+    const char*	args[3];
     int		n_args;
-    char*	alphabet;
+    const char*	alphabet;
     char	epsilon;
 # ifdef WITH_TWO_ALPHABETS
-    char*	alphabet2;
+    const char*	alphabet2;
     char	epsilon2;
 # endif /* ! WITH_TWO_ALPHABETS */
     bool	verbose;
-    bool	report_time;
     bool	bench;
     unsigned	nb_iterations;
     std::string plot_output_filename;
+    bool        report_time;
+    int         report_degree;
+
+    bool        export_time_dot;
+    int         export_dot_degree;
+
+    bool        export_time_xml;
+
+    input_format_t	input_type;
+    output_format_t	output_type;
 };
 
 #endif /* !COMMON_HH */

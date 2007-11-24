@@ -22,9 +22,9 @@ completeness.test
 XFAIL_TESTS = completeness.test
 
 EXTRA_DIST = $(TESTS) 				\
-	automata/b/ambiguous.xml 		\
-	automata/b/non_ambiguous.xml		\
-	automata/b/non_ambiguous2.xml		\
+	automata/b/ambiguous1.xml 		\
+	automata/b/ambiguous2.xml		\
+	automata/b/non_ambiguous1.xml		\
 	automata/tdc/t1_compose_u1.xml		\
 	automata/tdc/t2.xml			\
 	automata/tdc/u2.xml			\

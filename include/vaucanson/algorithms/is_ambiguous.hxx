@@ -43,8 +43,8 @@ namespace vcsn {
     const std::set<hstate_t>& s = useful_states (product (aut, aut, m));
     for_all_const (typename std::set<hstate_t>, i, s)
       if (m[*i].first != m[*i].second)
-	return false;
-    return true;
+	return true;
+    return false;
   }
 
   template<typename A_, typename Auto_>

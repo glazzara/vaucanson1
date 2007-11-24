@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,47 +23,51 @@
 
 namespace vcsn {
 
-  template <typename S>
-  bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		std::list<int>& v,
-		const std::string& s,
-		typename std::string::const_iterator& i,
-		const std::list<char>& escaped)
-  {
-    typename std::string::const_iterator j = i;
-    typename std::string::const_iterator k;
-    typename std::string::const_iterator back;
+  namespace algebra {
 
-    while ((i != s.end()) &&
-	   (std::find(escaped.begin(), escaped.end(), *i) == escaped.end())) {
-      std::string out;
-      back = i;
+    template <typename S>
+    bool op_parse(const algebra::FreeMonoidBase<S>& set,
+		  std::list<int>& v,
+		  const std::string& s,
+		  typename std::string::const_iterator& i,
+		  const std::list<char>& escaped)
+    {
+      typename std::string::const_iterator j = i;
+      typename std::string::const_iterator k;
+      typename std::string::const_iterator back;
 
-      while ((i != s.end()) && (((*i >= '0') && (*i <= '9'))) || (*i == '\\'))
-	if (*i == '\\') {
-	  k = i;
-	  ++k;
-	  if (k != s.end())
-	    i = k;
-	  out += *i;
-	  ++i;
+      while ((i != s.end()) &&
+	     (std::find(escaped.begin(), escaped.end(), *i) == escaped.end())) {
+	std::string out;
+	back = i;
+
+	while ((i != s.end()) && (((*i >= '0') && (*i <= '9'))) || (*i == '\\'))
+	  if (*i == '\\') {
+	    k = i;
+	    ++k;
+	    if (k != s.end())
+	      i = k;
+	    out += *i;
+	    ++i;
+	  }
+	  else {
+	    out += *i;
+	    ++i;
+	  }
+
+	int value;
+	std::istringstream is(out);
+	is >> value;
+	if (!set.alphabet().contains(value)) {
+	  i = back;
+	  break ;
 	}
-	else {
-	  out += *i;
-	  ++i;
-	}
-
-      int value;
-      std::istringstream is(out);
-      is >> value;
-      if (!set.alphabet().contains(value)) {
-	i = back;
-	break ;
+	v.push_back(value);
       }
-      v.push_back(value);
+      return (i != j);
     }
-    return (i != j);
-  }
+
+  } // algebra
 
 } // vcsn
 

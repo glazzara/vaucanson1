@@ -20,7 +20,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <tests/check/tester.hh>
 
-
+using namespace vcsn::tools;
 /*
   Description:
 

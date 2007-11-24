@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
 namespace vcsn {
+
+  namespace algebra {
 
     /*----------------------.
     | Generalized converter |
@@ -55,6 +57,8 @@ namespace vcsn {
 	  exp += (*p).second *  kexp_t::constant((*p).first);
       return exp;
     }
+
+  } // algebra
 
 } // vcsn
 

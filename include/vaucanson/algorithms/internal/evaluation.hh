@@ -75,7 +75,7 @@ namespace vcsn {
   void
   partial_2(const Element<SA, TA>&,
 	    const Element<ST, TT>&,
-	    const typename TA::hstate_t, Exp&);
+	    const typename TT::hstate_t, Exp&);
 
   template<typename SA, typename TA,
 	   typename ST, typename TT,
@@ -83,14 +83,14 @@ namespace vcsn {
   void
   partial_3(const Element<SA, TA>&,
 	    const Element<ST, TT>&,
-	    const typename TA::hstate_t, M&);
+	    const typename TT::hstate_t, M&);
 
   /** @} */
 
 }
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-#  include<vaucanson/algorithms/evaluation.hxx>
+#  include<vaucanson/algorithms/internal/evaluation.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_EVALUATION_HH

@@ -1,4 +1,4 @@
-<automaton name="Non_ambiguous" xmlns="http://vaucanson.lrde.epita.fr">
+<automaton name="ambiguous" xmlns="http://vaucanson.lrde.epita.fr">
   <labelType>
     <monoid generatorType="letters" type="free">
       <generator value="a"/>
@@ -10,17 +10,14 @@
     <states>
       <state name="s0"/>
       <state name="s1"/>
-      <state name="s2"/>
     </states>
     <transitions>
-      <transition src="s0" dst="s0" label="a"/>
       <transition src="s0" dst="s0" label="b"/>
-      <transition src="s0" dst="s1" label="a"/>
-      <transition src="s1" dst="s2" label="b"/>
-      <transition src="s2" dst="s2" label="a"/>
-      <transition src="s2" dst="s2" label="b"/>
+      <transition src="s0" dst="s1" label="b"/>
+      <transition src="s1" dst="s1" label="a"/>
+      <transition src="s1" dst="s1" label="b"/>
       <initial state="s0"/>
-      <final state="s2"/>
+      <final state="s1"/>
     </transitions>
   </content>
 </automaton>

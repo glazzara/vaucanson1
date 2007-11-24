@@ -52,8 +52,8 @@
 
 
 namespace vcsn {
-
-  /**
+  namespace algebra {
+   /**
    * @bug
    * FIXME
    * Operators in krat.hxx are of the form:
@@ -67,8 +67,6 @@ namespace vcsn {
    *      ... op(Series<S>& series, Monoid<M>& monoid, ...)
    * </pre>
    */
-
-
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>&, const rat::exp<Tm, Tw>&)
   {
@@ -672,6 +670,7 @@ namespace vcsn {
 					    m));
     op_in_add(s, p, op_mul(s.semiring(), s, w, ret));
   }
+  }//algebra
 
   /*----------------------------------------------------------.
     | MetaElement<algebra::SeriesBase<algebra::Series<W, M> >, rat::exp<Tm, Tw> > |
@@ -692,21 +691,23 @@ namespace vcsn {
     return this->value().depth();
   }
 
-  template <class W, class M, class Tm, class Tw>
-  Element<algebra::Series<W,M>, rat::exp<Tm,Tw> >
-  op_choose(const algebra::Series<W,M>& s,
-	    SELECTOR2(rat::exp<Tm,Tw>))
-  {
-    Element<algebra::Series<W,M>, rat::exp<Tm, Tw> > e(s);
-    // FIXME : add global constants to do this !
-    unsigned nb = RAND___(10);
-    while (nb != 0)
+  namespace algebra {
+
+    template <class W, class M, class Tm, class Tw>
+    Element<algebra::Series<W,M>, rat::exp<Tm,Tw> >
+    op_choose(const algebra::Series<W,M>& s,
+	SELECTOR2(rat::exp<Tm,Tw>))
+    {
+      Element<algebra::Series<W,M>, rat::exp<Tm, Tw> > e(s);
+      // FIXME : add global constants to do this !
+      unsigned nb = RAND___(10);
+      while (nb != 0)
       {
 	--nb;
 	unsigned t = RAND___(3);
 	switch (t)
-	  {
-	    // star
+	{
+	  // star
 	  case 0 :
 	    {
 	      e = e.star();
@@ -738,11 +739,11 @@ namespace vcsn {
 		e = ep * e;
 	      continue;
 	    }
-	  }
+	}
       }
-    return Element<algebra::Series<W,M>, rat::exp<Tm,Tw> >(s, e);
-  }
-
+      return Element<algebra::Series<W,M>, rat::exp<Tm,Tw> >(s, e);
+    }
+  } //algebra
 } // vcsn
 
 #ifdef UNDEF_VCSN_GRAPH_IMPL

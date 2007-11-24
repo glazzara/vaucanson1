@@ -22,7 +22,7 @@
 
 namespace vcsn {
 
-  namespace io {
+  namespace tools {
 
     struct dot
     {
@@ -50,7 +50,7 @@ namespace vcsn {
       std::string name_;
     };
 
-  } // io
+  } // tools
 
 } // vcsn
 

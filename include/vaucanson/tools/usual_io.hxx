@@ -24,7 +24,7 @@
 
 namespace vcsn
 {
-  namespace io
+  namespace tools
   {
     template<typename ExpType>
     template<typename Auto>

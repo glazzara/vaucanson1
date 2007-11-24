@@ -80,8 +80,8 @@ namespace vcsn
     | Setting initial states. |
     `------------------------*/
 
-    for (typename Trans_t::initial_iterator St, next = trans.initial.begin();
-	 next != trans.initial.end();)
+    for (typename Trans_t::initial_iterator St, next = trans.initial().begin();
+	 next != trans.initial().end();)
     {
       //We need to store the next iterator before using the current one
       //to avoid an invalid iterator after having called set_final.
@@ -135,8 +135,8 @@ namespace vcsn
     | Setting final states. |
     `----------------------*/
 
-    for (typename Trans_t::final_iterator St, next = trans.final.begin();
-	 next != trans.final.end();)
+    for (typename Trans_t::final_iterator St, next = trans.final().begin();
+	 next != trans.final().end();)
     {
       //We need to store the next iterator before using the current one
       //to avoid an invalid iterator after having called set_final.

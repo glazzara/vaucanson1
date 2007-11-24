@@ -21,7 +21,7 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
-#include <vaucanson/algorithms/evaluation.hh>
+#include <vaucanson/algorithms/internal/evaluation.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/trim.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>

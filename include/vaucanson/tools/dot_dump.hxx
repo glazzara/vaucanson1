@@ -33,7 +33,7 @@ namespace vcsn {
 		  const Auto& a,
 		  const std::string& name)
     {
-      o << automaton_saver(a, io::string_out(), io::dot(name));
+      o << automaton_saver(a, tools::string_out(), tools::dot(name));
     }
 
     template <class S, class Auto>
@@ -42,7 +42,7 @@ namespace vcsn {
 		  const Auto& a,
 		  const std::string& name)
     {
-      o << automaton_saver(a, io::string_out(), io::transducer_dot(name));
+      o << automaton_saver(a, tools::string_out(), tools::transducer_dot(name));
     }
 
     template <typename Auto>

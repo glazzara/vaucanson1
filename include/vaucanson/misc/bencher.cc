@@ -82,8 +82,6 @@ namespace misc
   Bencher::prepare (Timer t) const
   {
     precondition (!timers_.empty());
-    t.tab_to_disp = timers_.begin()->tab_to_disp;
-    t.task_ordered = timers_.begin()->task_ordered;
     return t;
   }
 
@@ -100,8 +98,8 @@ namespace misc
     }
     o << std::endl
       << line << " SUMMARY " << line << std::endl
-      << line << " Arithmetic means" << std::endl << prepare(mean())
-      // << line << " Sum"              << std::endl << prepare(sum())
+      << line << " Arithmetic mean"  << std::endl << prepare(mean())
+      << line << " Sum"              << std::endl << prepare(sum())
       << line << " Min"              << std::endl << prepare(min())
       << line << " Max"              << std::endl << prepare(max());
     return o;
@@ -114,7 +112,7 @@ namespace misc
     std::vector< Timer >::const_iterator i;
     for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
     {
-      o << (float) i->total.elapsed.wall / i->clocks_per_sec
+      o << (*i)
 	<< std::endl;
     }
   }

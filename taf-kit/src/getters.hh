@@ -30,7 +30,10 @@
 
 # include CONTEXT_HEADER
 # include <vaucanson/xml/XML.hh>
+# include <vaucanson/tools/io.hh>
 # include <string>
+
+# include "pipe.hh"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;

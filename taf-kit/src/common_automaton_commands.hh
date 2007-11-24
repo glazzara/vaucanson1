@@ -36,7 +36,7 @@
 using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
-using namespace vcsn::io;
+using namespace vcsn::tools;
 using vcsn::xml::XML;
 
 # include <cstdlib>
@@ -110,25 +110,25 @@ DEFINE_COMMAND (NAME (power)
 		      automaton_t p (a);
 		      for (int i = 1; i < n; ++i)
 			p = product (p, a))
-		OUTPUT (automaton_saver (p, string_out (), XML ()))
+		KEEP_AUTOMATON (p)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (standardize)
 		CODE (automaton_t a = get_aut (args.args[1]);
 		      standardize (a))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		KEEP_AUTOMATON(a)
 		RETURNVALUE (0));
 
-# define DEFINE_COMMAND_OF_STANDARD(Algo)					\
-  DEFINE_COMMAND (NAME (Algo ## _of_standard)					\
-		  CODE (automaton_t a = get_aut (args.args[1]);			\
-			automaton_t b = get_aut (args.args[2]);			\
-			if (!is_standard (a))					\
-			  standardize (a);					\
-			if (!is_standard (b))					\
-			  standardize (b);					\
-			Algo ## _of_standard_here (a, b))			\
-		  OUTPUT (automaton_saver (a, string_out (), XML ()))		\
+# define DEFINE_COMMAND_OF_STANDARD(Algo)			\
+  DEFINE_COMMAND (NAME (Algo ## _of_standard)			\
+		  CODE (automaton_t a = get_aut (args.args[1]);	\
+			automaton_t b = get_aut (args.args[2]);	\
+			if (!is_standard (a))			\
+			  standardize (a);			\
+			if (!is_standard (b))			\
+			  standardize (b);			\
+			Algo ## _of_standard_here (a, b))	\
+		  KEEP_AUTOMATON (a)				\
 		  RETURNVALUE(0))
 
 DEFINE_COMMAND_OF_STANDARD(union);
@@ -142,7 +142,7 @@ DEFINE_COMMAND (NAME (star_of_standard)
 		      if (!is_standard (a))
 		        standardize (a);
 		      star_of_standard_here (a))
-		OUTPUT (automaton_saver(a, string_out (), XML ()))
+		KEEP_AUTOMATON (a)
 		RETURNVALUE(0));
 
 
@@ -153,6 +153,8 @@ DEFINE_COMMAND (NAME (star_of_standard)
     COMMAND_ENTRY (accessible, Aut,					\
 		   "Give the maximal accessible subautomaton of `aut'."), \
     COMMAND_ENTRY (eps_removal, Aut,					\
+		   "Give `aut' closed over epsilon transitions."),	\
+    COMMAND_ENTRY (eps_removal_sp, Aut,					\
 		   "Give `aut' closed over epsilon transitions."),	\
     COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,			\
 		      "Give the maximal coaccessible subautomaton of `aut'."), \

@@ -23,7 +23,7 @@
 namespace vcsn
 {
 
-  namespace io
+  namespace tools
   {
 
     /*-------.
@@ -85,18 +85,18 @@ namespace vcsn
       return check_empty_word(os.str());
     }
 
-  } // io
+  } // tools
 
   template<typename Auto, typename TransitionConverter, typename Format>
-  io::automaton_saver_<Auto, TransitionConverter, Format>
+  tools::automaton_saver_<Auto, TransitionConverter, Format>
   automaton_saver(const Auto& a,
 		  const TransitionConverter& e,
 		  const Format& f)
   {
-    return io::automaton_saver_<Auto, TransitionConverter, Format>(a, e, f);
+    return tools::automaton_saver_<Auto, TransitionConverter, Format>(a, e, f);
   }
 
-  namespace io
+  namespace tools
   {
 
     /*------.
@@ -185,16 +185,16 @@ namespace vcsn
     }
 
 
-  }
+  } // tools
 
   template<typename Auto, typename TransitionConverter, typename Format>
-  io::automaton_loader_<Auto, TransitionConverter, Format>
+  tools::automaton_loader_<Auto, TransitionConverter, Format>
   automaton_loader(Auto& a,
 		   const TransitionConverter& e,
 		   const Format& f,
 		   bool merge_states)
   {
-    return io::automaton_loader_<Auto, TransitionConverter, Format>
+    return tools::automaton_loader_<Auto, TransitionConverter, Format>
       (a, e, f, merge_states);
   }
 

@@ -26,6 +26,7 @@
 int main(int argc, char** argv)
 {
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::xml;
   using namespace vcsn::CONTEXT;
 
@@ -44,14 +45,14 @@ int main(int argc, char** argv)
     a.add_letter_transition(s0, s1, 'a');
     a.add_letter_transition(s1, s2, 'b');
 
-    std::cout << automaton_saver(a, io::string_out(), xml::XML());
+    std::cout << automaton_saver(a, string_out(), xml::XML());
   }
   else
   {
     alphabet_t alpha;
     automaton_t a = make_automaton(alpha);
 
-    std::cin >> automaton_loader(a, io::string_out(), xml::XML());
-    vcsn::tools::dot_dump(std::cout, a, "A");
+    std::cin >> automaton_loader(a, string_out(), xml::XML());
+    dot_dump(std::cout, a, "A");
   }
 }

@@ -13,7 +13,7 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = argp lib include src data taf-kit build-aux
+SUBDIRS = argp lib include src data taf-kit build-aux tools
 
 # Be sure to use files up to date.
 BUILT_SOURCES = include/vaucanson/config/pconf.hh

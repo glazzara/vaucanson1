@@ -31,6 +31,7 @@ template <class Auto>
 bool in_concat_test(tests::Tester& tg)
 {
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
   AUTOMATON_TYPES(Auto);

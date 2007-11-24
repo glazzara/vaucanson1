@@ -25,36 +25,40 @@
 namespace vcsn
 {
 
-  /*-----------------------------------------------------------.
-  | Definition of an alphabet implementation based on std::set |
-  `-----------------------------------------------------------*/
-
-  template <typename L>
-  size_t
-  op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&)
+  namespace algebra
   {
-    return algebra::letter_traits<L>::cardinal;
-  }
 
-  template<typename L>
-  bool op_contains(const algebra::AlphabetSet<L>&, const std::set<L>&)
-  {
-    return true;
-  }
+    /*-----------------------------------------------------------.
+    | Definition of an alphabet implementation based on std::set |
+    `-----------------------------------------------------------*/
 
-  template<typename L>
-  bool op_is_finite(const algebra::AlphabetSet<L>&, const std::set<L>&)
-  {
-    return true;
-  }
+    template <typename L>
+    size_t
+    op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&)
+    {
+      return algebra::letter_traits<L>::cardinal;
+    }
 
-  template<typename L>
-  bool op_contains_e(const algebra::AlphabetSet<L>&, const std::set<L>& a,
-		     const L& v)
-  {
-    return a.find(v) != a.end();
-  }
+    template<typename L>
+    bool op_contains(const algebra::AlphabetSet<L>&, const std::set<L>&)
+    {
+      return true;
+    }
 
+    template<typename L>
+    bool op_is_finite(const algebra::AlphabetSet<L>&, const std::set<L>&)
+    {
+      return true;
+    }
+
+    template<typename L>
+    bool op_contains_e(const algebra::AlphabetSet<L>&, const std::set<L>& a,
+		       const L& v)
+    {
+      return a.find(v) != a.end();
+    }
+
+  }
 
 } // vcsn
 

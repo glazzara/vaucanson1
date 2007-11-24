@@ -24,6 +24,7 @@
 # include <vaucanson/algorithms/eval.hh>
 
 using namespace vcsn;
+using namespace vcsn::tools;
 
 template <class Auto>
 bool elimination_heuristic_test(tests::Tester& tg)

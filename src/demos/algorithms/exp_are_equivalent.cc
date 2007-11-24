@@ -21,11 +21,11 @@ main(int argc, char** argv)
 {
   if (argc != 3)
     {
-      std::cerr << "Usage: " << argv[0] << " <automaton> <exp>" << std::endl;
+      std::cerr << "Usage: " << argv[0] << " <exp> <exp>" << std::endl;
       return 1;
     }
 
-  if (are_equivalent(standard_of(get_exp(argv[2])), get_aut(argv[1]) ))
+  if (are_equivalent(standard_of(get_exp(argv[2])), standard_of(get_exp(argv[1]))))
     {
       std::cout << "The expression \"" << argv[2]
 		<< "\" is equivalent to the automaton " << argv[1]

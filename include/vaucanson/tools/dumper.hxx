@@ -120,7 +120,7 @@ namespace vcsn
 	  break;
 	case fmt_simple:
 	  vcsn::tools::simple_dump (o, automaton,
-				    vcsn::io::usual_converter_poly<rat_exp_t>());
+				    vcsn::tools::usual_converter_poly<rat_exp_t>());
 	  break;
 	case fmt_fsm:
 	  vcsn::tools::fsm_dump (o, automaton);

@@ -64,12 +64,16 @@ vaucanson/misc/escaper.hxx			\
 vaucanson/misc/functors.hh			\
 vaucanson/misc/functors.hxx			\
 vaucanson/misc/global_timer.hh			\
+vaucanson/misc/hash.hh				\
+vaucanson/misc/hash.hxx				\
 vaucanson/misc/iomanip.hh			\
 vaucanson/misc/iomanip.hxx			\
 vaucanson/misc/limits.hh			\
 vaucanson/misc/misc.hh				\
 vaucanson/misc/random.hh			\
 vaucanson/misc/random.hxx			\
+vaucanson/misc/self_iterator.hh 		\
+vaucanson/misc/self_iterator.hxx 		\
 vaucanson/misc/selectors.hh			\
 vaucanson/misc/sparse_interval.hh		\
 vaucanson/misc/sparse_interval.hxx		\
@@ -80,6 +84,12 @@ vaucanson/misc/support.hxx			\
 vaucanson/misc/timer.hh				\
 vaucanson/misc/timer.hxx			\
 vaucanson/misc/timer.cc				\
+vaucanson/misc/timer_internal_gathering.hh 	\
+vaucanson/misc/timer_internal_gathering.hxx 	\
+vaucanson/misc/timer_internal_gathering.cc 	\
+vaucanson/misc/timer_internal_graph.hh 		\
+vaucanson/misc/timer_internal_graph.hxx		\
+vaucanson/misc/timer_internal_graph.cc 		\
 vaucanson/misc/bencher.hh			\
 vaucanson/misc/bencher.hxx			\
 vaucanson/misc/bencher.cc			\
@@ -105,6 +115,8 @@ vaucanson/tools/dumper.hh			\
 vaucanson/tools/dumper.hxx			\
 vaucanson/tools/fsm_dump.hh			\
 vaucanson/tools/fsm_dump.hxx			\
+vaucanson/tools/fsm_load.hh			\
+vaucanson/tools/fsm_load.hxx			\
 vaucanson/tools/gen_book.hh			\
 vaucanson/tools/gen_book.hxx			\
 vaucanson/tools/gen_random.hh			\
@@ -224,6 +236,8 @@ vaucanson/algebra/implementation/series/rat/dump_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/dump_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/exp.hh				     \
 vaucanson/algebra/implementation/series/rat/exp.hxx				     \
+vaucanson/algebra/implementation/series/rat/hash_visitor.hh 			     \
+vaucanson/algebra/implementation/series/rat/hash_visitor.hxx 			     \
 vaucanson/algebra/implementation/series/rat/length_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/length_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/nodes.hh				     \
@@ -273,10 +287,10 @@ vaucanson/algorithms/determinize.hh				\
 vaucanson/algorithms/determinize.hxx				\
 vaucanson/algorithms/eps_removal.hh				\
 vaucanson/algorithms/eps_removal.hxx				\
+vaucanson/algorithms/eps_removal_sp.hh				\
+vaucanson/algorithms/eps_removal_sp.hxx				\
 vaucanson/algorithms/eval.hh					\
 vaucanson/algorithms/eval.hxx					\
-vaucanson/algorithms/evaluation.hh				\
-vaucanson/algorithms/evaluation.hxx				\
 vaucanson/algorithms/evaluation_fmp.hh				\
 vaucanson/algorithms/evaluation_fmp.hxx				\
 vaucanson/algorithms/extension.hh				\
@@ -293,6 +307,8 @@ vaucanson/algorithms/initial_derivation.hh			\
 vaucanson/algorithms/initial_derivation.hxx			\
 vaucanson/algorithms/internal/build_pattern.hh			\
 vaucanson/algorithms/internal/build_pattern.hxx			\
+vaucanson/algorithms/internal/evaluation.hh			\
+vaucanson/algorithms/internal/evaluation.hxx			\
 vaucanson/algorithms/internal/has_neighbour.hh			\
 vaucanson/algorithms/internal/has_neighbour.hxx			\
 vaucanson/algorithms/internal/outsplitting.hh			\
@@ -395,6 +411,8 @@ vaucanson/automata/concept/history.hh					\
 vaucanson/automata/concept/history.hxx					\
 vaucanson/automata/concept/kinds.hh					\
 vaucanson/automata/concept/kinds.hxx					\
+vaucanson/automata/concept/smart_label.hh				\
+vaucanson/automata/concept/smart_label.hxx				\
 vaucanson/automata/concept/tags.hh					\
 vaucanson/automata/concept/tags.hxx					\
 vaucanson/automata/concept/transducer.hh				\
@@ -425,13 +443,18 @@ vaucanson/automata/generic_contexts/z_transducer.hh 			\
 vaucanson/automata/generic_contexts/z_transducer_structures.hh 		\
 vaucanson/automata/implementation/automaton_view.hh			\
 vaucanson/automata/implementation/automaton_view.hxx			\
+vaucanson/automata/implementation/boostg/boostg_functors.hh 		\
 vaucanson/automata/implementation/boostg/boostg_functors.hxx 		\
 vaucanson/automata/implementation/boostg/boostg_handlers.hh 		\
 vaucanson/automata/implementation/boostg/boostg_handlers.hxx 		\
 vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx		\
 vaucanson/automata/implementation/boostg/boostg_support.hh 		\
 vaucanson/automata/implementation/boostg/boostg_support.hxx 		\
+vaucanson/automata/implementation/boostg/edge_value.hh 			\
 vaucanson/automata/implementation/boostg/edge_value.hxx 		\
+vaucanson/automata/implementation/boostg/graphcontainer.hh 		\
+vaucanson/automata/implementation/boostg/initial_container.hh 		\
+vaucanson/automata/implementation/boostg/initial_value.hh 		\
 vaucanson/automata/implementation/boostg/initial_value.hxx 		\
 vaucanson/automata/implementation/boostg/vgraph_container.hxx 		\
 vaucanson/automata/implementation/boostg_graph_impl.hh 			\
@@ -453,14 +476,18 @@ vaucanson/automata/implementation/transpose_view.hxx
 
 
 nobase_include_HEADERS += 			\
-vaucanson/xml/XML.hh				\
-vaucanson/xml/XML.hxx				\
+vaucanson/xml/builders.hh			\
+vaucanson/xml/builders.hxx			\
 vaucanson/xml/error_handler.hh			\
 vaucanson/xml/error_handler.hxx			\
+vaucanson/xml/handlers.hh			\
+vaucanson/xml/handlers.hxx			\
 vaucanson/xml/ios.hh				\
 vaucanson/xml/ios.hxx				\
 vaucanson/xml/node.hh				\
 vaucanson/xml/node.hxx				\
+vaucanson/xml/parsers.hh			\
+vaucanson/xml/parsers.hxx			\
 vaucanson/xml/session.hh			\
 vaucanson/xml/session.hxx			\
 vaucanson/xml/strings.hh			\
@@ -472,6 +499,13 @@ vaucanson/xml/xerces_parser.hxx			\
 vaucanson/xml/xml_chooser.hh			\
 vaucanson/xml/xml_chooser.hxx			\
 vaucanson/xml/xml_converter.hh			\
-vaucanson/xml/xml_converter.hxx
+vaucanson/xml/xml_converter.hxx 		\
+vaucanson/xml/xml_converter.hxx 		\
+vaucanson/xml/xmleq.hh				\
+vaucanson/xml/xmleq.hxx				\
+vaucanson/xml/XML.hh				\
+vaucanson/xml/XML.hxx				\
+vaucanson/xml/xml_xerces_stream.hh 		\
+vaucanson/xml/xml_xerces_stream.hxx
 
-include generic_contexts.mk
+include $(top_srcdir)/include/generic_contexts.mk

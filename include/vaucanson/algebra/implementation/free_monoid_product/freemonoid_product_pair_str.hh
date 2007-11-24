@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,64 +24,68 @@
 
 namespace vcsn {
 
-  /*----------------------------------------------------------.
-  | Implementation of freemonoid_product with pair of strings |
-  `----------------------------------------------------------*/
+  namespace algebra {
 
-  template <class Self, typename T>
-  typename
-  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
-  op_first(const algebra::FreeMonoidProductBase<Self>& s, T& v);
+    /*----------------------------------------------------------.
+    | Implementation of freemonoid_product with pair of strings |
+    `----------------------------------------------------------*/
 
-  template <class Self, typename T>
-  typename
-  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
-  op_second(const algebra::FreeMonoidProductBase<Self>& s, T& v);
+    template <class Self, typename T>
+    typename
+    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t
+    op_first(const algebra::FreeMonoidProductBase<Self>& s, T& v);
 
-  template <class F, class S>
-  void
-  op_in_mul(const algebra::FreeMonoidProduct<F, S>& s,
+    template <class Self, typename T>
+    typename
+    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t
+    op_second(const algebra::FreeMonoidProductBase<Self>& s, T& v);
+
+    template <class F, class S>
+    void
+    op_in_mul(const algebra::FreeMonoidProduct<F, S>& s,
+	      std::pair<std::basic_string<typename F::letter_t>,
+			std::basic_string<typename S::letter_t> >& dst,
+	      const std::pair<std::basic_string<typename F::letter_t>,
+			      std::basic_string<typename S::letter_t> >& src);
+
+    template<class F, class S>
+    std::pair<std::basic_string<typename F::letter_t>,
+	      std::basic_string<typename S::letter_t> >
+    op_mul(const algebra::FreeMonoidProduct<F, S>& s,
+	   const std::pair<std::basic_string<typename F::letter_t>,
+			   std::basic_string<typename S::letter_t> >& a,
+	   const std::pair<std::basic_string<typename F::letter_t>,
+			   std::basic_string<typename S::letter_t> >& b);
+
+    template<class F, class S>
+    const std::pair<std::basic_string<typename F::letter_t>,
+		    std::basic_string<typename S::letter_t> >
+    identity_value(SELECTOR2(algebra::FreeMonoidProduct<F, S>),
+		   SELECTOR2(std::pair<std::basic_string<typename F::letter_t>,
+			           std::basic_string<typename S::letter_t> >));
+
+    template<class F, class S>
+    Element<algebra::FreeMonoidProduct<F, S>,
 	    std::pair<std::basic_string<typename F::letter_t>,
-		      std::basic_string<typename S::letter_t> >& dst,
-	    const std::pair<std::basic_string<typename F::letter_t>,
-			    std::basic_string<typename S::letter_t> >& src);
+		      std::basic_string<typename S::letter_t> > >
+    op_choose(const algebra::FreeMonoidProduct<F, S>& s,
+	      SELECTOR2(std::pair<std::basic_string<typename F::letter_t>,
+				  std::basic_string<typename S::letter_t> >));
 
-  template<class F, class S>
-  std::pair<std::basic_string<typename F::letter_t>,
-	    std::basic_string<typename S::letter_t> >
-  op_mul(const algebra::FreeMonoidProduct<F, S>& s,
-	 const std::pair<std::basic_string<typename F::letter_t>,
-			 std::basic_string<typename S::letter_t> >& a,
-	 const std::pair<std::basic_string<typename F::letter_t>,
-			 std::basic_string<typename S::letter_t> >& b);
+    template<typename Self, typename T>
+    void op_in_mirror (const algebra::FreeMonoidProductBase<Self>& s, T& v);
 
-  template<class F, class S>
-  const std::pair<std::basic_string<typename F::letter_t>,
-		  std::basic_string<typename S::letter_t> >
-  identity_value(SELECTOR2(algebra::FreeMonoidProduct<F, S>),
-		 SELECTOR2(std::pair<std::basic_string<typename F::letter_t>,
-				    std::basic_string<typename S::letter_t> >));
+    template<typename Self, typename T, typename Ftor>
+    typename Ftor::result_type
+    op_length(const algebra::FreeMonoidProductBase<Self>&, const T& v, Ftor f);
 
-  template<class F, class S>
-  Element<algebra::FreeMonoidProduct<F, S>,
-	  std::pair<std::basic_string<typename F::letter_t>,
-		    std::basic_string<typename S::letter_t> > >
-  op_choose(const algebra::FreeMonoidProduct<F, S>& s,
-	    SELECTOR2(std::pair<std::basic_string<typename F::letter_t>,
-			       std::basic_string<typename S::letter_t> >));
+    template <typename Self, typename St, typename T>
+    St&
+    op_rout(const algebra::FreeMonoidProductBase<Self>& s,
+	    St& st,
+	    const T& v);
 
-  template<typename Self, typename T>
-  void op_in_mirror (const algebra::FreeMonoidProductBase<Self>& s, T& v);
-
-  template<typename Self, typename T, typename Ftor>
-  typename Ftor::result_type
-  op_length(const algebra::FreeMonoidProductBase<Self>&, const T& v, Ftor f);
-
-  template <typename Self, typename St, typename T>
-  St&
-  op_rout(const algebra::FreeMonoidProductBase<Self>& s,
-	  St& st,
-	  const T& v);
+  } // algebra
 
 } // vcsn
 

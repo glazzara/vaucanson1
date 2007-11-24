@@ -40,6 +40,7 @@ template <class Auto>
 unsigned minimization_test(tests::Tester& tg)
 {
   using namespace vcsn;
+  using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
   typedef GenRandomAutomata<Auto>  gen_auto_t;

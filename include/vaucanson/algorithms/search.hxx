@@ -232,7 +232,7 @@ namespace vcsn {
     length_t			wl = compute_distances(a, distances);
 
     if (wl == 0)
-      warning("Search match every position in the stream, ignored.");
+      WARNING("Search match every position in the stream, ignored.");
     else
       {
 	window_t		w (begin, end, eol, wl);

@@ -26,6 +26,7 @@
 # include <vaucanson/automata/implementation/generalized.hh>
 
 using namespace vcsn;
+using namespace vcsn::tools;
 
 template <class Auto>
 bool generalized_test(tests::Tester&)

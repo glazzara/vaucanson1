@@ -106,7 +106,7 @@ namespace vcsn
 
   template <typename S, typename S2, typename T, typename T2>
   void
-  domain_dispatch(const S&, const Element<S,T>& src, Element<S2, T2>& dst)
+  domain_dispatch(const AutomataBase<S>&, const Element<S,T>& src, Element<S2, T2>& dst)
   {
     do_fmp_domain(src, dst);
   }

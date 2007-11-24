@@ -31,7 +31,7 @@
 using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
-using namespace vcsn::io;
+using namespace vcsn::tools;
 using vcsn::xml::XML;
 
 static
@@ -60,7 +60,7 @@ get_aut(std::string s)
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
   {
-    using namespace vcsn::io;
+    using namespace vcsn::tools;
     using namespace vcsn::xml;
 
     automaton_t a = make_automaton(alphabet(), alphabet());
@@ -83,7 +83,7 @@ get_bool_aut(std::string s)
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
   {
-    using namespace vcsn::io;
+    using namespace vcsn::tools;
     using namespace vcsn::xml;
 
     boolean_automaton::automaton_t a =
@@ -100,17 +100,6 @@ get_bool_aut(std::string s)
     exit(1);
   }
 }
-
-static
-void
-are_isomorphic_command(int argc, char** argv)
-{
-  if (argc != 4)
-    usage(argc, argv);
-
-  std::cout << are_isomorphic(get_aut(argv[2]), get_aut(argv[3])) << std::endl;
-}
-
 
 static
 void
@@ -242,6 +231,21 @@ eps_removal_command(int argc, char** argv)
 	    << std::endl;
 }
 
+static
+void
+domain_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  automaton_t input = get_aut(argv[2]);
+  boolean_automaton::automaton_t res =
+    boolean_automaton::make_automaton(alphabet());
+
+  domain(input, res);
+  std::cout << automaton_saver(res, string_out(), XML()) << std::endl;
+}
+
 #define ONE_ARG_COMMAND(GetArg, Algo) one_arg_command_ ## Algo ## _ ## GetArg
 
 #define DEFINE_ONE_ARG_COMMAND(GetArg, Algo)		\
@@ -257,8 +261,7 @@ eps_removal_command(int argc, char** argv)
   }
 
 DEFINE_ONE_ARG_COMMAND(get_aut, realtime)
-DEFINE_ONE_ARG_COMMAND(get_aut, input_projection)
-DEFINE_ONE_ARG_COMMAND(get_aut, output_projection)
+DEFINE_ONE_ARG_COMMAND(get_aut, image)
 DEFINE_ONE_ARG_COMMAND(get_aut, trim)
 DEFINE_ONE_ARG_COMMAND(get_aut, transpose)
 #undef DEFINE_ONE_ARG_COMMAND
@@ -271,20 +274,19 @@ const struct
 command_map[] =
 {
   { "realtime",		ONE_ARG_COMMAND(get_aut, realtime)	},
-  { "is-realtime",		is_realtime_command			},
+  { "is-realtime",		is_realtime_command		},
   { "compose",		compose_command				},
-  { "evaluation",		evaluation_command			},
-  { "evaluation_aut",		evaluation_aut_command			},
-  { "domain",			ONE_ARG_COMMAND(get_aut, input_projection)},
+  { "evaluation",		evaluation_command		},
+  { "evaluation_aut",		evaluation_aut_command		},
+  { "domain",			domain_command			},
   { "is-empty",		is_empty_command			},
-  { "are-isomorphic",		are_isomorphic_command			},
-  { "image",			ONE_ARG_COMMAND(get_aut, output_projection)},
-  { "to-tdc",			realtime_to_fmp_command			},
-  { "eps_removal",		eps_removal_command				},
-  { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
+  { "image",			ONE_ARG_COMMAND(get_aut, image) },
+  { "to-tdc",			realtime_to_fmp_command		},
+  { "eps_removal",		eps_removal_command		},
+  { "trim",			ONE_ARG_COMMAND(get_aut, trim)	},
   { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
   { "display",		display_command				},
-  { "info",			info_command				},
+  { "info",			info_command			},
   { 0,			0					}
 };
 
@@ -313,7 +315,6 @@ main(int argc, char** argv)
     std::cerr << " * eps_removal"  << std::endl;
     std::cerr << " * trim"  << std::endl;
     std::cerr << " * realtime"	<< std::endl;
-    std::cerr << " * are-isomorphic"  << std::endl;
     std::cerr << " * is-realtime"  << std::endl;
     std::cerr << " * transpose"	 << std::endl;
     std::cerr << " * is-empty"	<< std::endl;

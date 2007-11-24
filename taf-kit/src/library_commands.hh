@@ -32,7 +32,7 @@
 using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
-using namespace vcsn::io;
+using namespace vcsn::tools;
 using vcsn::xml::XML;
 
 # include <iostream>
@@ -95,7 +95,7 @@ static int dump_automaton_command (const arguments_t& args)
     std::cerr << "Error: cannot open `" << file << "'." << std::endl;
     exit (-3);
   }
-  echo_ (in.rdbuf ());
+  PRINT_RESULT (in.rdbuf ());
   return 0;
 }
 

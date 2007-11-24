@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 
 namespace vcsn {
 
+  namespace algebra {
+
     /*----------------------.
     | Generalized converter |
     `----------------------*/
@@ -32,6 +34,8 @@ namespace vcsn {
 				SELECTOR2(rat::exp<Tm, Tw>),
 				const algebra::Series<W, M>& s2,
 				const algebra::polynom<Tm, Tw>& p_value);
+
+  } // algebra
 
 } // vcsn
 

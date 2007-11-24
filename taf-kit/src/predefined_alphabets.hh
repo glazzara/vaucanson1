@@ -25,7 +25,7 @@
  */
 
 # define ALPHABET_ASCII							\
-  " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+  " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 # define ALPHABET_AZ				\
   "abcdefghijklmnopqrstuvwxyz"
 # define ALPHABET_AZAZ						\

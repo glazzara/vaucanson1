@@ -38,6 +38,8 @@ template <class Automaton>
 bool
 global_consistency_test(tests::Tester& t)
 {
+  using namespace vcsn;
+
   TEST_TYPE(alphabet_t, monoid_t::alphabet_t);
   TEST_TYPE(monoid_t, monoid_t);
   TEST_TYPE(semiring_t, semiring_t);

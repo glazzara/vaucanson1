@@ -23,36 +23,40 @@
 
 namespace vcsn
 {
-
-  bencher::bencher() : start_(0), stop_(0)
-  {}
-
-  bencher::~bencher()
-  {}
-
-  void bencher::start()
+  namespace tools
   {
-    start_ = dtime();
-  }
+
+    bencher::bencher() : start_(0), stop_(0)
+    {}
+
+    bencher::~bencher()
+    {}
+
+    void bencher::start()
+    {
+      start_ = dtime();
+    }
 
 
-  void bencher::stop()
-  {
-    stop_ = dtime();
-  }
+    void bencher::stop()
+    {
+      stop_ = dtime();
+    }
 
 
-  double bencher::get_time()
-  {
-    return stop_ - start_;
-  }
+    double bencher::get_time()
+    {
+      return stop_ - start_;
+    }
 
-  double bencher::dtime()
-  {
-    rusage rusage;
-    getrusage(RUSAGE_SELF, &rusage);
-    return ((double)(rusage.ru_utime.tv_sec)
-	    + (double)(rusage.ru_utime.tv_usec) * 1.0e-06);
+    double bencher::dtime()
+    {
+      rusage rusage;
+      getrusage(RUSAGE_SELF, &rusage);
+      return ((double)(rusage.ru_utime.tv_sec)
+	  + (double)(rusage.ru_utime.tv_usec) * 1.0e-06);
+    }
+
   }
 }
 # endif // ! VCSN_BENCH
