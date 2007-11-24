@@ -20,7 +20,6 @@
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
-# include <vaucanson/automata/implementation/boostg_graph_impl.hh>
 
 namespace vcsn
 {

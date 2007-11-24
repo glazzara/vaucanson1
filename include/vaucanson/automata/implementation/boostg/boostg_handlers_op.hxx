@@ -20,19 +20,52 @@
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 
+
 //Operator for htransition_t storing iterators
 #define HOPERATOR(Op)					\
-template<typename T, typename U, typename V>					\
-bool operator Op (const handler<transition_h,		\
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,	\
-                  const handler<transition_h,		\
-					 boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2)	\
+template<typename T, typename U, typename V>		\
+bool operator Op (const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,\
+                  const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2)\
 {							\
   if (h1.value()->from_ == h2.value()->from_)		\
     return h1.value()->to_ Op h2.value()->to_;		\
   else							\
     return h1.value()->from_ Op h2.value()->from_;	\
 }
+
+namespace vcsn
+{
+  HOPERATOR(<);
+  HOPERATOR(>);
+  HOPERATOR(<=);
+  HOPERATOR(>=);
+}
+#undef HOPERATOR
+
+#define HOPERATOR(Op)					\
+template<typename T, typename U, typename V>		\
+bool operator Op (const handler<transition_h,		\
+				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,\
+                  const handler<transition_h,		\
+				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2)\
+{							\
+  return h1.value() Op h2.value();			\
+}
+namespace vcsn
+{
+  HOPERATOR(==);
+  HOPERATOR(!=);
+}
+#undef HOPERATOR
+
+
+
+
+#define HOPERATOR(Op)					\
+inline							\
+bool operator Op (const handler<state_h, unsigned*>& h1,\
+                  const handler<state_h, unsigned*>& h2)\
+{ return int(h1) Op int(h2); }
 
 namespace vcsn
 {
@@ -44,23 +77,6 @@ namespace vcsn
   HOPERATOR(>=);
 }
 #undef HOPERATOR
-
-
-#define HOPERATOR(Op)					\
-inline							\
-bool operator Op (const handler<state_h, unsigned*>& h1,\
-                  const handler<state_h, unsigned*>& h2)\
-{ return int(h1) Op int(h2); }
-
-namespace vcsn {
-HOPERATOR(==);
-HOPERATOR(!=);
-HOPERATOR(<);
-HOPERATOR(>);
-HOPERATOR(<=);
-HOPERATOR(>=);
-}
-
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_BOOSTG_HANDLERS_OP_HXX
 

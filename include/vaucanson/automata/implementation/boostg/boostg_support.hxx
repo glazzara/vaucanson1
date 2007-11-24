@@ -23,94 +23,6 @@ namespace vcsn
 {
   namespace misc
   {
-    /*------------------.
-    | SupportIterator.  |
-    `------------------*/
-    //Specialization for std::vector<handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> > >
-    template<typename T, typename U, typename V>
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::SupportIterator (const container_t* c,
-		       vector_iterator i)
-      : container_(c)
-    {
-      if (i != c->end())
-      {
-	i_ = i++;
-	next_ = i;
-      }
-      else
-      {
-	i_ = i;
-	next_ = i;
-      }
-    }
-
-    template<typename T, typename U, typename V>
-    typename SupportIterator<std::vector<handler<transition_h,
-			    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >::data_type
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::operator* () const
-    {
-      return data_type(i_->value());
-    }
-
-    template<typename T, typename U, typename V>
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >&
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::operator++ ()
-    {
-      if (next_ != container_->end())
-	i_ = next_++;
-      else
-	i_ = next_;
-      return *this;
-    }
-
-    template<typename T, typename U, typename V>
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >&
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::operator-- ()
-    {
-      --i_;
-      return *this;
-    }
-
-    template<typename T, typename U, typename V>
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::operator++ (int)
-    {
-      SupportIterator<std::vector<handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> > > > tmp = *this;
-      ++(*this);
-      return tmp;
-    }
-
-    template<typename T, typename U, typename V>
-    bool
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::operator!= (const SupportIterator& o) const
-    {
-      return o.i_ != i_;
-    }
-
-    template<typename T, typename U, typename V>
-    bool
-    SupportIterator<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::operator== (const SupportIterator& o) const
-    {
-      return ! (*this != o);
-    }
-
     //Specialization for std::vector<handler<state_h, unsigned*> >
     inline //template <>
     SupportIterator<std::vector<handler<state_h, unsigned*> > >::SupportIterator (const container_t* c,
@@ -175,9 +87,9 @@ namespace vcsn
     | SupportIterator.  |
     `------------------*/
 
-    //Specialization for InitialContainer.
+    //Specialization for vcsn::boostg::InitialContainer.
     template <typename U, typename HState>
-    SupportIterator<InitialContainer<U, HState> >
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >
     ::SupportIterator (const container_t* c, container_iterator i)
       : container_ (c)
     {
@@ -194,15 +106,15 @@ namespace vcsn
     }
 
     template <typename U, typename HState>
-    typename SupportIterator<InitialContainer<U, HState> >::key_type
-    SupportIterator<InitialContainer<U, HState> >::operator* () const
+    typename SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::key_type
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::operator* () const
     {
       return HState(i_->first.value());
     }
 
     template <typename U, typename HState>
-    SupportIterator<InitialContainer<U, HState> >&
-    SupportIterator<InitialContainer<U, HState> >::operator++ ()
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >&
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::operator++ ()
     {
       if (next_ != container_->end())
 	i_ = next_++;
@@ -212,24 +124,24 @@ namespace vcsn
     }
 
     template <typename U, typename HState>
-    SupportIterator<InitialContainer<U, HState> >
-    SupportIterator<InitialContainer<U, HState> >::operator++ (int)
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::operator++ (int)
     {
-      SupportIterator<InitialContainer<U, HState> > tmp = *this;
+      SupportIterator<vcsn::boostg::InitialContainer<U, HState> > tmp = *this;
       ++(*this);
       return tmp;
     }
 
     template <typename U, typename HState>
     bool
-    SupportIterator<InitialContainer<U, HState> >::operator!= (const SupportIterator& o) const
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::operator!= (const SupportIterator& o) const
     {
       return o.i_ != i_;
     }
 
     template <typename U, typename HState>
     bool
-    SupportIterator<InitialContainer<U, HState> >::operator== (const SupportIterator& o) const
+    SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::operator== (const SupportIterator& o) const
     {
       return ! (*this != o);
     }
@@ -240,57 +152,57 @@ namespace vcsn
     | Support.  |
     `----------*/
 
-    /// support<InitialContainer<U, HState> is a const adapter of InitialContainer to container.
+    /// support<vcsn::boostg::InitialContainer<U, HState> is a const adapter of vcsn::boostg::InitialContainer to container.
     template <class U, class HState>
-    Support<InitialContainer<U, HState> >::Support (const Support& s)
+    Support<vcsn::boostg::InitialContainer<U, HState> >::Support (const Support& s)
       : m_ (s.m_)
     {
     }
 
     template <class U, class HState>
-    Support<InitialContainer<U, HState> >::Support (const Support::container_t& m)
+    Support<vcsn::boostg::InitialContainer<U, HState> >::Support (const Support::container_t& m)
       : m_ (m)
     {
     }
 
     template <class U, class HState>
     unsigned
-    Support<InitialContainer<U, HState> >::size () const
+    Support<vcsn::boostg::InitialContainer<U, HState> >::size () const
     {
       return m_.size ();
     }
 
     template <class U, class HState>
-    typename Support<InitialContainer<U, HState> >::iterator
-    Support<InitialContainer<U, HState> >::find (const HState& k) const
+    typename Support<vcsn::boostg::InitialContainer<U, HState> >::iterator
+    Support<vcsn::boostg::InitialContainer<U, HState> >::find (const HState& k) const
     {
       return m_.find (k);
     }
 
     template <class U, class HState>
     bool
-    Support<InitialContainer<U, HState> >::empty () const
+    Support<vcsn::boostg::InitialContainer<U, HState> >::empty () const
     {
       return m_.empty ();
     }
 
     template <class U, class HState>
-    typename Support<InitialContainer<U, HState> >::iterator
-    Support<InitialContainer<U, HState> >::begin () const
+    typename Support<vcsn::boostg::InitialContainer<U, HState> >::iterator
+    Support<vcsn::boostg::InitialContainer<U, HState> >::begin () const
     {
       return iterator (&m_, m_.begin ());
     }
 
     template <class U, class HState>
-    typename Support<InitialContainer<U, HState> >::iterator
-    Support<InitialContainer<U, HState> >::end () const
+    typename Support<vcsn::boostg::InitialContainer<U, HState> >::iterator
+    Support<vcsn::boostg::InitialContainer<U, HState> >::end () const
     {
       return iterator (&m_, m_.end ());
     }
 
     template <class U, class HState>
     HState
-    Support<InitialContainer<U, HState> >::back () const
+    Support<vcsn::boostg::InitialContainer<U, HState> >::back () const
     {
       return (*max_element (begin (), end ()));
     }
@@ -308,7 +220,7 @@ namespace vcsn
   `----------*/
 
     /// support<vector<U, T> > is a const adapter of std::vector to container.
-    template <class T, class U, class V>
+/*    template <class T, class U, class V>
     Support<std::vector<handler<transition_h,
 	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
     ::Support (const Support& s)
@@ -381,7 +293,7 @@ namespace vcsn
     {
       return m_.back();
     }
-
+*/
 
     /// support<vector<U, T> > is a const adapter of std::vector to container.
     inline

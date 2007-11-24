@@ -40,8 +40,8 @@ namespace vcsn
 
     BOOSTGRAPH_TPARAM
     BOOSTGRAPH::VGraphContainerIterator
-      ::VGraphContainerIterator(const GraphContainer& c,
-				typename GraphContainer::iterator i)
+      ::VGraphContainerIterator(const graph_data_t& c,
+				edges_iterator i)
       : container_(c)
     {
       if (i != c.end())
@@ -106,7 +106,7 @@ namespace vcsn
     `-----------------------------------------*/
 
     BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::VGraphContainer::VGraphContainer(const GraphContainer& g)
+    BOOSTGRAPH::VGraphContainer::VGraphContainer(const graph_data_t& g)
       : graph_(g)
     {
     }

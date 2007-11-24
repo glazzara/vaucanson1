@@ -49,36 +49,26 @@ namespace vcsn
       unsigned* v_;
   };
 
+  using boost::multi_index::detail::hashed_index_iterator;
+
   template<typename T, typename U, typename V>
-  bool operator==(const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
+  bool operator==(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
   template<typename T, typename U, typename V>
-  bool operator!=(const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
+  bool operator!=(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
   template<typename T, typename U, typename V>
-  bool operator<(const handler<transition_h,
-			       boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
+  bool operator<(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
+		 const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
   template<typename T, typename U, typename V>
-  bool operator>(const handler<transition_h,
-			       boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
+  bool operator>(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
+		 const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
   template<typename T, typename U, typename V>
-  bool operator<=(const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
+  bool operator<=(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
   template<typename T, typename U, typename V>
-  bool operator>=(const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h,
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2);
+  bool operator>=(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
 
   template<>
   bool operator==(const handler<state_h, unsigned*>& h1,

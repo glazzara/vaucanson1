@@ -18,49 +18,40 @@
 #ifndef VCSN_AUTOMATON_IMPLEMENTATION_BOOSTG_BOOST_FUNCTORS_HXX
 # define VCSN_AUTOMATON_IMPLEMENTATION_BOOSTG_BOOST_FUNCTORS_HXX
 
+# include <vaucanson/automata/implementation/boostg/boostg_functors.hh>
+# include <vaucanson/automata/implementation/boostg/initial_value.hh>
+
 namespace vcsn
 {
   namespace boostg
   {
 
-    /*--------------------.
-    | Convenient macros.  |
-    `--------------------*/
-
-  # define BOOSTGRAPH_TPARAM						\
-    template <class Kind, class WordValue, class WeightValue,		\
-              class SeriesValue, class Letter, class Tag, class GeometryCoords>
-
-  # define BOOSTGRAPH							\
-    Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
-
     /*-------------------------------------------------.
     | Functor used to update a label in a multi_index. |
     `-------------------------------------------------*/
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::update_hlabel::update_hlabel(const hlabel_t& i_)
+    template<typename HLabel>
+    update_hlabel<HLabel>::update_hlabel(const HLabel& i_)
       : i(i_)
-    {
-    }
+    {}
 
-    BOOSTGRAPH_TPARAM
+    template<typename HLabel>
     void
-    BOOSTGRAPH::update_hlabel::operator()(hlabel_t &key)
+    update_hlabel<HLabel>::operator()(HLabel &key)
     {
       key = i;
     }
 
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::update_label::update_label(const series_set_elt_value_t& i_)
+    template<typename HState, typename Series>
+    update_label<InitialValue<HState, Series> >::update_label(const Series& i_)
       : i(i_)
     {
     }
 
-    BOOSTGRAPH_TPARAM
+    template<typename HState, typename Series>
     void
-    BOOSTGRAPH::update_label::operator()(InitialValue<series_set_elt_value_t>& elt)
+    update_label<InitialValue<HState, Series> >::operator()(InitialValue<HState, Series>& elt)
     {
       elt.second = i;
     }
@@ -68,7 +59,5 @@ namespace vcsn
   }
 }
 
-# undef BOOSTGRAPH_TPARAM
-# undef BOOSTGRAPH
 #endif // ! VCSN_AUTOMATON_IMPLEMENTATION_BOOSTG_BOOST_FUNCTORS_HXX
 

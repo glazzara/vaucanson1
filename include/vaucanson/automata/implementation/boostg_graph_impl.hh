@@ -17,20 +17,7 @@
 
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
-# include <functional>
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/automata/concept/automata_kind.hh>
-# include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
-# include <vaucanson/automata/implementation/boostg/boostg_support.hh>
-# include <vaucanson/automata/concept/transducer_base.hh>
-# include <vaucanson/automata/concept/smart_label.hh>
-# include <vaucanson/automata/implementation/kind_adapter.hh>
-# include <vaucanson/automata/implementation/geometry.hh>
-# include <vaucanson/automata/concept/tags.hh>
-# include <vaucanson/misc/hash.hh>
-
-//NEW INCLUDES
+# include <boost/dynamic_bitset.hpp>
 # include <boost/multi_index_container.hpp>
 # include <boost/multi_index/member.hpp>
 # include <boost/multi_index/ordered_index.hpp>
@@ -39,28 +26,40 @@
 # include <boost/multi_index/sequenced_index.hpp>
 # include <boost/tuple/tuple.hpp>
 # include <boost/multi_index/composite_key.hpp>
-# include <boost/dynamic_bitset.hpp>
 
+# include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/automata_kind.hh>
+# include <vaucanson/automata/implementation/boostg/boostg_support.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
+# include <vaucanson/automata/concept/smart_label.hh>
+# include <vaucanson/automata/implementation/kind_adapter.hh>
+# include <vaucanson/automata/implementation/geometry.hh>
+# include <vaucanson/automata/concept/tags.hh>
+# include <vaucanson/misc/hash.hh>
+# include <vaucanson/automata/implementation/boostg/initial_value.hh>
+# include <vaucanson/automata/implementation/boostg/graphcontainer.hh>
+# include <vaucanson/automata/implementation/boostg/edge_value.hh>
+# include <vaucanson/automata/implementation/boostg/boostg_functors.hh>
+# include <vaucanson/automata/implementation/boostg/initial_container.hh>
 
-// FIXME: remove
-using namespace vcsn::misc;
+using ::boost::multi_index_container;
+using ::boost::multi_index::hashed_non_unique;
+using ::boost::multi_index::indexed_by;
+using ::boost::multi_index::composite_key;
+using ::boost::multi_index::hashed_non_unique;
+using ::boost::multi_index::tag;
+using ::boost::multi_index::member;
+using ::boost::multi_index::index_iterator;
+using ::boost::multi_index::get;
+using ::boost::multi_index::project;
+using ::boost::multi_index::composite_key_hash;
+using ::boost::dynamic_bitset;
 
 namespace vcsn
 {
   namespace boostg
   {
-    using ::boost::multi_index_container;
-    using ::boost::multi_index::hashed_non_unique;
-    using ::boost::multi_index::indexed_by;
-    using ::boost::multi_index::composite_key;
-    using ::boost::multi_index::hashed_non_unique;
-    using ::boost::multi_index::tag;
-    using ::boost::multi_index::member;
-    using ::boost::multi_index::index_iterator;
-    using ::boost::multi_index::get;
-    using ::boost::multi_index::project;
-    using ::boost::multi_index::composite_key_hash;
-    using ::boost::dynamic_bitset;
 
     // class Graph.
     template <typename Kind, typename WordValue, typename WeightValue,
@@ -94,122 +93,9 @@ namespace vcsn
 	//
 	typedef handler<state_h, unsigned*>		hstate_t;
 
-	struct EdgeValue
-	{
-	  EdgeValue (hstate_t from, hstate_t to, hlabel_t l);
+	typedef EdgeValue<hstate_t, hlabel_t>		edge_data_t;
 
-	  hlabel_t label_;
-	  hstate_t from_;
-	  hstate_t to_;
-	}; // End of class EdgeValue
-
-	typedef EdgeValue				edge_data_t;
-
-	// Functor used to update the label of a transition.
-	//
-	// Boost::multi_index only provides const iterators and modifying some data
-	// in such a container is a special operation which may require to reorder
-	// several sets internaly. Thus, a special method is provided, update(), which
-	// uses such functors.
-	//
-	// See implementation in automata/implementation/boostg/boost_functors.hxx.
-	struct update_hlabel : public std::unary_function<hlabel_t, void>
-	{
-	  update_hlabel(const hlabel_t& i_);
-	  void operator()(hlabel_t &key);
-
-	  hlabel_t i;
-	};
-
-	/*---------------------------------------------------------\
-	| Declaring the Boost multi_index used to store the graph. |
-	`---------------------------------------------------------*/
-
-	// Empty structure to name the different keys.
-	struct succ {};
-	struct pred {};
-	struct src {};
-	struct dst {};
-
-	// Composite key (source, label)
-	struct SuccessorKey : composite_key <
-	    EdgeValue,
-	    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-	    BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
-	> {};
-
-	// Composite key (target, label)
-	struct PredecessorKey : composite_key <
-	  EdgeValue,
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hlabel_t, label_)
-	> {};
-
-	// Use composite keys in hash tables.
-	typedef hashed_non_unique <
-	  tag<succ>,
-	  SuccessorKey,
-	  composite_key_hash<
-	    misc::hash_state_handler,
-	    misc::hash_handler<hlabel_t>
-	  >
-	> SourceAndLabel;
-
-
-	typedef hashed_non_unique <
-	  tag<pred>,
-	  PredecessorKey,
-	  composite_key_hash<
-	    misc::hash_state_handler,
-	    misc::hash_handler<hlabel_t>
-	  >
-	> DestinationAndLabel;
-
-
-	// Single key (source)
-	typedef hashed_non_unique <
-	  tag<src>,
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, from_),
-	  misc::hash_state_handler
-	> Source;
-
-
-	// Single key (target)
-	typedef hashed_non_unique <
-	  tag<dst>,
-	  BOOST_MULTI_INDEX_MEMBER(EdgeValue, hstate_t, to_),
-	  misc::hash_state_handler
-	> Destination;
-
-
-	/*!
-	** Actual graph structure.
-	**
-	** Provides constant time access to specific data
-	** according the following keys:
-	**
-	** - (src), get all transitions from a given state.
-	** - (dst), get all transitions going to a given state.
-	** - (src, label), get all transitions from a given state with a given label.
-	** - (dst, label), get all transitions going to a given state with a given label.
-	**
-	** \sa EdgeValue, update_label
-	*/
-	struct GraphContainer
-	: public multi_index_container
-	<
-	  EdgeValue,
-	  indexed_by
-	  <
-	    SourceAndLabel,
-	    DestinationAndLabel,
-	    Source,
-	    Destination
-	  >
-	>
-	{ };
-
-	typedef GraphContainer			graph_data_t;
+	typedef GraphContainer<hstate_t, hlabel_t, edge_data_t>	graph_data_t;
 	// Transition descriptor.
 	//
 	// We store a pointer to an EdgeValue to avoid a new index on transitions and
@@ -220,32 +106,16 @@ namespace vcsn
 	//
 	// We may need to try storing an iterator instead of a pointer. We haven't tried yet
 	// since its size is higher than a simple pointer.
-	typedef typename GraphContainer::iterator	edges_iterator;
+	typedef typename GraphContainer<hstate_t, hlabel_t, edge_data_t>::iterator
+							edges_iterator;
 	typedef handler<transition_h, edges_iterator>	htransition_t;
 	typedef htransition_t				hedge_t;
-
-	template <typename S>
-	struct InitialValue
-	{
-	  InitialValue(const hstate_t& state, const S& series);
-
-	  hstate_t first; // state
-	  S second; // series
-	};
-
-	struct update_label : public std::unary_function<InitialValue<series_set_elt_value_t>, void>
-	{
-	  update_label(const series_set_elt_value_t& i_);
-	  void operator()(InitialValue<series_set_elt_value_t>& key);
-
-	  series_set_elt_value_t i;
-	};
 
 	class VGraphContainerIterator
 	{
 	  public:
-	    typedef typename GraphContainer::iterator	iterator;
-	    VGraphContainerIterator(const GraphContainer& c, typename GraphContainer::iterator i);
+	    typedef edges_iterator	iterator;
+	    VGraphContainerIterator(const graph_data_t& c, edges_iterator i);
 	    htransition_t operator*() const;
 
 	    bool operator==(const VGraphContainerIterator& v) const;
@@ -256,7 +126,7 @@ namespace vcsn
 	  private:
 	    iterator it_;
 	    iterator next_;
-	    const GraphContainer& container_;
+	    const graph_data_t& container_;
 	};
 
 	class VGraphContainer
@@ -265,7 +135,7 @@ namespace vcsn
 	    typedef VGraphContainerIterator iterator;
 	    typedef iterator		    const_iterator;
 
-	    VGraphContainer(const GraphContainer& g);
+	    VGraphContainer(const graph_data_t& g);
 
 	    iterator begin() const;
 	    iterator end() const;
@@ -273,7 +143,7 @@ namespace vcsn
 	    size_t size() const;
 
 	  private:
-	    const GraphContainer& graph_;
+	    const graph_data_t& graph_;
 	};
 
 	//The graph stores  edges only, thus we can define this type.
@@ -283,7 +153,10 @@ namespace vcsn
 
 	//FIXME: find a better name than initial_container_t. The word initial
 	//is ambiguous since we use it also for final_t
-	typedef misc::InitialContainer<InitialValue<series_set_elt_value_t>, hstate_t>
+	typedef InitialValue<hstate_t, series_set_elt_value_t>
+							  initial_value_t;
+	typedef initial_value_t				  final_value_t;
+	typedef InitialContainer<initial_value_t, hstate_t>
 							  initial_container_t;
 
 	typedef typename initial_container_t::Type	  initial_t;
@@ -302,16 +175,16 @@ namespace vcsn
 	typedef typename VGraphContainer::const_iterator  const_iterator;
 	typedef iterator				  transition_iterator;
 
-	typedef typename index_iterator<GraphContainer, src>::type
+	typedef typename index_iterator<graph_data_t, src>::type
 							  src_iterator;
 	typedef src_iterator				  src_const_iterator;
-	typedef typename index_iterator<GraphContainer, dst>::type
+	typedef typename index_iterator<graph_data_t, dst>::type
 							  dst_iterator;
 	typedef dst_iterator				  dst_const_iterator;
-	typedef typename index_iterator<GraphContainer, pred>::type
+	typedef typename index_iterator<graph_data_t, pred>::type
 							  pred_iterator;
 	typedef pred_iterator				  pred_const_iterator;
-	typedef typename index_iterator<GraphContainer, succ>::type
+	typedef typename index_iterator<graph_data_t, succ>::type
 							  succ_iterator;
 	typedef succ_iterator				  succ_const_iterator;
 	typedef std::pair<src_iterator, src_iterator>	  src_range;
@@ -657,10 +530,7 @@ namespace vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/automata/implementation/boostg_graph_impl.hxx>
-#  include <vaucanson/automata/implementation/boostg/boostg_functors.hxx>
-#  include <vaucanson/automata/implementation/boostg/initial_value.hxx>
 #  include <vaucanson/automata/implementation/boostg/vgraph_container.hxx>
-#  include <vaucanson/automata/implementation/boostg/edge_value.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_ //

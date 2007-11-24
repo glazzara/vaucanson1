@@ -95,15 +95,15 @@ namespace vcsn
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
           ++i)
-        graph_.insert(EdgeValue(states_[i->from_],
-                                states_[i->to_],
-                                label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
+        graph_.insert(edge_data_t(states_[i->from_],
+				  states_[i->to_],
+				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
       Set.clear();										\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
           ++i)											\
-        Set.insert(InitialValue<series_set_elt_value_t> (states_[i->first], i->second));
+        Set.insert(initial_value_t (states_[i->first], i->second));
       VCSN_COPY_I_T(initial_)
       VCSN_COPY_I_T(final_)
   # undef VCSN_COPY_I_T
@@ -174,15 +174,15 @@ namespace vcsn
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
           ++i)
-        graph_.insert(EdgeValue(states_[i->from_],
-                                states_[i->to_],
-                                label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
+        graph_.insert(edge_data_t(states_[i->from_],
+				  states_[i->to_],
+				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
       Set.clear();										\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
           ++i)											\
-        Set.insert(InitialValue<series_set_elt_value_t> (states_[i->first], i->second));
+        Set.insert(initial_value_t (states_[i->first], i->second));
       VCSN_COPY_I_T(initial_)
       VCSN_COPY_I_T(final_)
   # undef VCSN_COPY_I_T
@@ -348,11 +348,11 @@ namespace vcsn
       }
       else if (!initial_bitset_[s])
       {
-        initial_.insert (InitialValue<series_set_elt_value_t> (s, v));
+        initial_.insert (final_value_t (s, v));
         initial_bitset_[s] = true;
       }
       else
-	initial_.modify(initial_.find(s), update_label(v));
+	initial_.modify(initial_.find(s), update_label<final_value_t>(v));
     }
 
     BOOSTGRAPH_TPARAM
@@ -397,11 +397,11 @@ namespace vcsn
       }
       else if (!final_bitset_[s])
       {
-        final_.insert (InitialValue<series_set_elt_value_t> (s, v));
+        final_.insert (initial_value_t (s, v));
         final_bitset_[s] = true;
       }
       else
-	final_.modify(final_.find(s), update_label(v));
+	final_.modify(final_.find(s), update_label<initial_value_t>(v));
     }
 
     BOOSTGRAPH_TPARAM
@@ -455,7 +455,7 @@ namespace vcsn
     BOOSTGRAPH::add_edge (const hstate_t& from, const hstate_t& to, const label_t& l)
     {
       hlabel_t hl = label_container_.insert (l);
-      return hedge_t (graph_.insert (EdgeValue (from, to, hl)).first);
+      return hedge_t (graph_.insert (edge_data_t (from, to, hl)).first);
     }
 
     BOOSTGRAPH_TPARAM
@@ -499,7 +499,7 @@ namespace vcsn
     BOOSTGRAPH::update(const hedge_t& h, const label_t& l)
     {
       label_container_.update(h->label_, l);
-      graph_.modify(h.value(), update_hlabel(h->label_));
+      graph_.modify(h.value(), update_hlabel<hlabel_t>(h->label_));
     }
 
     BOOSTGRAPH_TPARAM

@@ -1,5 +1,35 @@
 2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Split into several files and update boostg's container declarations/implementations. 
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hxx:
+	Add template keyword.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hxx:
+	cleanup some declarations.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx: .
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hxx:
+	remove useless specialization.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hh: New.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hxx: add
+	template keyword.
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh: New.
+	* include/vaucanson/automata/implementation/boostg/initial_container.hh: New.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hh: New.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hxx:
+	add template keyword.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx:
+	use typedef type in prototypes.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx:
+	remove structure declarations made in the Graph object and update the
+	typedefs.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh:
+	add a missing namespace information.
+
+2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Remove light implementation. 
 	I will get back to it later. I remove it since the sanity check failed with
 	this implementation and I don't have time to fix that right now.

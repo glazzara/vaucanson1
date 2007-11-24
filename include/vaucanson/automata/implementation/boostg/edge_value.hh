@@ -1,4 +1,4 @@
-// edge_value.hxx: this file is part of the Vaucanson project.
+// edge_value.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -15,27 +15,29 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_EDGE_VALUE_HXX
-# define VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_EDGE_VALUE_HXX
-
-# include <vaucanson/automata/implementation/boostg/edge_value.hh>
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_EDGEVALUE_HH_
+# define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_EDGEVALUE_HH_
 
 namespace vcsn
 {
   namespace boostg
   {
-    /*-----------------------------.
-    | Edge value's Implementation. |
-    `-----------------------------*/
 
     template<typename HState, typename HLabel>
-    EdgeValue<HState, HLabel>::EdgeValue (HState h1, HState h2, HLabel l)
-      : label_ (l), from_ (h1), to_ (h2)
-    { }
+    struct EdgeValue
+    {
+      EdgeValue (HState from, HState to, HLabel l);
 
-  }
-}
+      HLabel label_;
+      HState from_;
+      HState to_;
+    }; // End of class EdgeValue
 
-#endif // !VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_EDGE_VALUE_HXX
+  } // boostg
+} // vcsn
 
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
+#  include <vaucanson/automata/implementation/boostg/edge_value.hxx>
+# endif
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_EDGEVALUE_HH_
 

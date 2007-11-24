@@ -23,6 +23,7 @@
  *
  */
 
+# include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/misc/sparse_interval.hh>
 
 namespace vcsn
@@ -34,10 +35,10 @@ namespace vcsn
 
     /// SparseIterator is an iterator over range except some points.
     template <class T, class ExcludedContainer>
-    class SparseIterator<handler<T, unsigned>, ExcludedContainer>
+    class SparseIterator<vcsn::handler<T, unsigned>, ExcludedContainer>
     {
       public:
-	typedef handler<T, unsigned>	handler_t;
+	typedef vcsn::handler<T, unsigned>	handler_t;
 	typedef handler_t		integer_t;
 	typedef ExcludedContainer	excluded_container_t;
 	typedef typename excluded_container_t::const_iterator  iterator_t;
@@ -101,10 +102,10 @@ namespace vcsn
      * WARNING: always iterate over this container using the iterators.
      */
     template <class T, class ExcludedContainer>
-    class SparseInterval<handler<T, unsigned>, ExcludedContainer>
+    class SparseInterval<vcsn::handler<T, unsigned>, ExcludedContainer>
     {
       public:
-	typedef handler<T, unsigned>	handler_t;
+	typedef vcsn::handler<T, unsigned>	handler_t;
 	typedef handler_t		integer_t;
 	typedef ExcludedContainer	excluded_container_t;
 	typedef SparseIterator<integer_t, excluded_container_t> iterator;

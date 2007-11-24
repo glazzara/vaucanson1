@@ -18,39 +18,25 @@
 #ifndef VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_INITIAL_VALUE_HXX
 # define VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_INITIAL_VALUE_HXX
 
+# include <vaucanson/automata/implementation/boostg/initial_value.hh>
+
 namespace vcsn
 {
   namespace boostg
   {
 
-    /*--------------------.
-    | Convenient macros.  |
-    `--------------------*/
-
-  # define BOOSTGRAPH_TPARAM						\
-    template <class Kind, class WordValue, class WeightValue,		\
-              class SeriesValue, class Letter, class Tag, class GeometryCoords>
-  # define BOOSTGRAPH							\
-    Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
-
     /*------------------------------------------------.
     | Structure for initial/final states information. |
     `------------------------------------------------*/
 
-    BOOSTGRAPH_TPARAM
-    template <typename S>
-    BOOSTGRAPH::InitialValue<S>::InitialValue(const hstate_t& state, const S& series)
+    template <typename HState, typename Series>
+    InitialValue<HState, Series>::InitialValue(const HState& state, const Series& series)
       : first(state),
 	second(series)
-    {
-    }
+    {}
 
   }
 }
-
-# undef BOOSTGRAPH_TPARAM
-# undef BOOSTGRAPH
-
 
 #endif // ! VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_INITIAL_VALUE_HXX
 
