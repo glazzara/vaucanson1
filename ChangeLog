@@ -1,5 +1,16 @@
 2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Remove light implementation. 
+	I will get back to it later. I remove it since the sanity check failed with
+	this implementation and I don't have time to fix that right now.
+	* include/vaucanson/automata/implementation/light/light_support.hh: Remove.
+	* include/vaucanson/automata/implementation/light/light_support.hxx: Remove.
+	* include/vaucanson/automata/implementation/light: Remove.
+	* include/vaucanson/automata/implementation/light_graph_impl.hh.bak: Remove.
+	* include/vaucanson/automata/implementation/light_graph_impl.hxx.bak: Remove.
+
+2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix missing headers in tarball. 
 	* include/generate_headers.sh: the .mk file was not correctly
 	generated and the generated headers were not part of the tarball.
