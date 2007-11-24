@@ -53,35 +53,38 @@ namespace vcsn
 } // End of namespace vcsn.
 
 namespace vcsn {
-  // Specialization for pairs.
-  template <typename S, typename U, typename V>
-  bool op_parse (const algebra::FreeMonoidBase<S>& set,
-		 std::basic_string< std::pair<U, V> >& v,
-		 const std::string& s,
-		 typename std::string::const_iterator& i,
-		 const std::list<char>& escaped);
 
+  namespace algebra {
 
-  namespace misc {
+    // Specialization for pairs.
+    template <typename S, typename U, typename V, typename CharContainer>
+    bool op_parse (const algebra::FreeMonoidBase<S>& set,
+		   std::basic_string< std::pair<U, V> >& v,
+		   const std::string& s,
+		   typename std::string::const_iterator& i,
+		   const CharContainer& escaped);
+  }
+} //vcsn
 
-    /// Display a single pair.
-    ///
-    /// It assumes that each element of the pair is printable
-    /// (i.e. the operator<< is defined on it).
-    template <typename U, typename V>
-    std::ostream& operator<< (std::ostream& o, std::pair<U, V> p);
+namespace std {
 
-    /// Display a basic_string of pair.
-    template <typename U, typename V, class Traits, class Allocator>
-    std::ostream&
-    operator<< (std::ostream& o,
-		std::basic_string<std::pair<U, V>, Traits, Allocator> s);
+  /// Display a single pair.
+  ///
+  /// It assumes that each element of the pair is printable
+  /// (i.e. the operator<< is defined on it).
+  template <typename U, typename V>
+  std::ostream& operator<< (std::ostream& o, std::pair<U, V> p);
 
-    /// Read a single pair.
-    template <typename U, typename V>
-    std::istream& operator>> (std::istream& i, std::pair<U, V>& p);
+  /// Display a basic_string of pair.
+  template <typename U, typename V, class Traits, class Allocator>
+  std::ostream&
+  operator<< (std::ostream& o,
+	      std::basic_string<std::pair<U, V>, Traits, Allocator> s);
 
-  } // misc
+  /// Read a single pair.
+  template <typename U, typename V>
+  std::istream& operator>> (std::istream& i, std::pair<U, V>& p);
+
 } // vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB

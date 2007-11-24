@@ -1,3 +1,15 @@
+2007-11-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	operator<< is used in namespace misc, but also in rat and
+	algebra. There were overload resolution issues in rat and
+	algebra. Probably the same problem than the is_finite bug.
+
+	*include/vaucanson/algebra/implementation/letter/couple_letter.hh:,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:
+	Move operator<< from namespace vcsn::misc to std. Move escaped
+	characters container of op_parse to template parameters, there is no
+	reason to restrain it to a std::list.
+
 2007-11-20  The LRDE Buildbot  <tsuna@lrde.epita.fr>
 
 	Adjust the bootstrap to find the correct version of Automake.
