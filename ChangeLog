@@ -1,3 +1,9 @@
+2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix missing headers in tarball. 
+	* include/generate_headers.sh: the .mk file was not correctly
+	generated and the generated headers were not part of the tarball.
+
 2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add new files in Makefile.am. 
