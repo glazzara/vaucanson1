@@ -31,15 +31,15 @@ IMPL_NAME=""
 usage()
 {
   cat << EOF
-Usage: vcsn_add_impl.sh [--new-impl=<name> [--data-path=<path>]]
-			[[--include-dir=<path>] <path/*_graph_impl.hh>]
+Usage: vcsn_add_impl.sh [[--data-path=<path>] --new-impl=<name>]
+			[[--include-path=<path>] <path/*_graph_impl.hh>]
 			[--output-dir=<path>]
+			[--howto]
 
     Options:
-    ========
 
     --new-impl=<name>		Create a new graph implementation template
-				with name 'name'
+				with name 'name'.
 				
     --data-path=<path>		Path to the Vaucanson data directory.
 				(default = VCSN_DATA_PATH
@@ -51,42 +51,57 @@ Usage: vcsn_add_impl.sh [--new-impl=<name> [--data-path=<path>]]
     
     --output-dir=<path>		Path where the files are generated.
 
+EOF
+}
 
-
-    Decription:
-    ===========
-
-
-    How to use it?
-    ==============
+howto()
+{
+  cat << EOF
+    How to:
     
-    1) In your project directory you may have the following hierarchy:
-      
-      * include/
-	  * mine_graph_impl.hh
-      * mine_graph_impl.hxx
-  
-	
-    2) in the include directory, run:
+    I) Create a new graph structure:
 
-	vcsn_add_impl.sh mine_graph_impl.hh --vcsn-include-dir=path/to/vcsn/include
-  	
-	
-    3) Then in your project directory you have now:
-    
-      * include/
-	* mine
-	  * boolean_automaton.hh
-	  * boolean_transducer.hh
-	  * fmp_transducer.hh
-	  * ...
+      Just type the following command with the proper parameters:
+	./vcsn-graph-util --data-path=/vcsn/data/path --new-impl=mine
+
+      In your directory you have now two files:
 	* mine_graph_impl.hh
 	* mine_graph_impl.hxx
+      
+      Edit them and fill the function prototypes.
+      If you want to use your structure, you will need to generate the context
+      headers. See step II in this how to.
+
+
+    II) Generate context headers:
+
+      1) In your project directory you may have the following hierarchy:
+      
+	* include/
+	  * mine_graph_impl.hh
+	  * mine_graph_impl.hxx
+  
+	
+      2) in the include directory, run:
+
+	vcsn-graph-util mine_graph_impl.hh --vcsn-include-path=path/to/vcsn/include
+  	
+	
+      3) Then in your project directory you have now:
+    
+	* include/
+	  * mine
+	    * boolean_automaton.hh
+	    * boolean_transducer.hh
+	    * fmp_transducer.hh
+	    * ...
+	  * mine_graph_impl.hh
+	  * mine_graph_impl.hxx
 					
 								      
-	4) You just need to include the proper header to use your graph structure
-	   with Vaucanson.
-    
+      4) You just need to include the proper header to use your graph structure
+	 with Vaucanson.
+
 EOF
 }
 
@@ -140,6 +155,8 @@ parse_option()
     DATA_PATH="`echo $1 | sed -ne s/--data-path=//p`"
   elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
     usage
+  elif [ "$1" == "--howto" ]; then
+    howto
   elif ! [ -z "`echo $1 | sed -ne s/--//p`" ]; then
     echo "Bad option: $1"
     usage
@@ -166,9 +183,13 @@ write_headers()
  
 write_impl_template()
 {
+  if ! [ -f $DATA_PATH/template_graph_impl.hh ]; then
+    echo "VCSN_DATA_PATH variable is not set properly or you forgot the --data-path=<path> option"
+    exit 1
+  fi
   echo -n "Copying template files from $DATA_PATH to $OUTPUT_DIR..."
   IMPL_NAME_=`echo "$IMPL_NAME" | sed -e 's/[\.\/]/\_/g' | tr "[:lower:]" "[:upper:]"`
-  
+ 
   cat "$DATA_PATH/template_graph_impl.hh" | sed -e "s/#IMPL_NAME#/$IMPL_NAME/g" \
 	| sed -e "s/#IMPL_NAME_#/${IMPL_NAME_}/g" > "$OUTPUT_DIR/${IMPL_NAME}_graph_impl.hh"
 

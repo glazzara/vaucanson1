@@ -1,5 +1,9 @@
 2007-11-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	* tools/vcsn-graph-util: Fix help output.
+
+2007-11-27  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Remove a warning at compilation time. 
 	* include/vaucanson/xml/builders.hxx: remove an "unused parameter"
 	warning.
