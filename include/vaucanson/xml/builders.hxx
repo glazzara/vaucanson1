@@ -173,7 +173,7 @@ namespace vcsn
 
       TParm
       SemiringHandler*
-      semiringh_factory(TRANStype& aut,
+      semiringh_factory(TRANStype&,
 			const xercesc::Attributes& attrs,
 			typename TRANStype::semiring_t& semiring,
 			xercesc::DefaultHandler& root,
