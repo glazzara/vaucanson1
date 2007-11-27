@@ -1,3 +1,12 @@
+2007-11-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx 
+	(do_quotient): Handle empty automata, and automata with
+	only non-final states or only final states.
+	* taf-kit/tests/vcsn-b.test: Construct two more automata,
+	use them to check quotient as well as a few other commands
+	already tested.
+
 2007-11-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	operator<< is used in namespace misc, but also in rat and

@@ -21,7 +21,7 @@ set -e
 ## Input/output.  ##
 ## -------------- ##
 
- sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton all.xml
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton all.xml
 # Add states
 1
 # Add one state
@@ -45,10 +45,43 @@ a+b
 10
 EOF
 
+# Empty automaton (no states).
+echo 10 | vcsn-b --alphabet=ab define-automaton empty.xml
+
+# Two state, no final states (empty language).
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton 2snf.xml
+# Add states
+1
+# Add two state
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+0
+b
+# Exit.
+10
+EOF
+
+AUTOMATA='all.xml empty.xml 2snf.xml'
+
 # Cannot check display.
 
 # Check that dot accepts the output.
-vcsn-b dot-dump all.xml | dot
+for a in $AUTOMATA; do
+  vcsn-b dot-dump $a | dot
+done
 
 # Check that each builtin automaton can be dumped.
 for a in $(vcsn-b list-automata | sed -n 's/^  * - \([-a-z0-9]*\).*/\1/p')
@@ -56,9 +89,10 @@ do
   vcsn-b dump-automaton $a \| info -
 done
 
-vcsn-b identity all.xml >all2.xml
-diff -uBw all.xml all2.xml
-
+for a in $AUTOMATA; do
+  vcsn-b identity $a >tmp.xml
+  diff -uBw $a tmp.xml
+done
 
 ## --------------------------------- ##
 ## Test and evaluation on automata.  ##
@@ -112,6 +146,19 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 vcsn-b product $a1 $a1 \| identity -
 vcsn-b concatenate $a1 $a1 \| identity -
+
+vcsn-b quotient empty.xml \| is-empty -
+
+# Ideally we would like the quotient of 2snf to be non-empty: a single
+# non-final state. Right now 2snf.xml is empty because taf-kit will
+# run quotient(realtime(2snf)) and realtime() includes a
+# coaccessibility check.  Maybe realtime should not be called here,
+# but even if it isn't is-empty will call trim() before the actual check...
+vcsn-b quotient 2snf.xml \| is-empty -
+vcsn-b quotient 2snf.xml \| trim - \| is-empty -
+
+! vcsn-b quotient all.xml \| is-empty -
+
 
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly

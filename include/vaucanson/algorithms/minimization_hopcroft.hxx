@@ -443,13 +443,11 @@ namespace vcsn
     for_all_states(i, input)
       max_states = std::max(unsigned(*i), max_states);
     ++max_states;
-    // to avoid special case problem (one state initial and final ...)
-    max_states = std::max(max_states, 2u);
 
     /*--------------------------.
     | To label the subsets of Q |
     `--------------------------*/
-    unsigned max_partitions = 2;
+    unsigned max_partitions = 0;
 
     /*-----------------------------------------.
     | To manage efficiently the partition of Q |
@@ -466,23 +464,36 @@ namespace vcsn
     | Initialize the partition |
     `-------------------------*/
 
+    // In the general case, we have two sets, part[0] and part[1] One
+    // holds the final states, the other the non-final states.	In
+    // some cases we may have only one set, for instance if we have no
+    // final states, or if we have only final states.  Because we do
+    // not want to have an empty part[0], we will fill it with the
+    // first kind of state (final / non-final) we encounter.
+    unsigned final = 1;
+
     for_all_states (p, input)
     {
-      unsigned c = input.is_final(*p) ? 1 : 0;
+      if (max_partitions == 0)
+	final = 0;
+      unsigned c = input.is_final(*p) ? final : (1 - final);
       class_[*p] = c;
       part[c].insert(part[c].end(), *p);
+      max_partitions = std::max(max_partitions, c + 1);
     }
 
     /*------------------------------.
     | Initialize the list of (P, a) |
     `------------------------------*/
+    
+    if (max_partitions > 0)
+      for_all_letters (e, alphabet_)
+	to_treat.push_back(pair_t(0, *e));
 
-    for_all_letters (e, alphabet_)
-      to_treat.push_back(pair_t(0, *e));
-
-    for_all_letters (e, alphabet_)
-      to_treat.push_back(pair_t(1, *e));
-
+    if (max_partitions > 1)
+      for_all_letters (e, alphabet_)
+	to_treat.push_back(pair_t(1, *e));
+    
     /*----------.
     | Main loop |
     `----------*/
