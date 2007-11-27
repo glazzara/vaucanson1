@@ -71,9 +71,13 @@ namespace vcsn
 	**
 	** These types must be a handler object. (cf. automata/concept/handlers.h{xx,h}
 	**
-	** In theory, you should be able to change the type contained in this handler.
-	** However, currently, it is not safe to do it and many parts of Vaucanson
-	** may not compile anymore...
+	** You can use any types in handler.
+	** For hstate_t, there are one more rule you must respect.
+	**
+	** You _MUST_ provide an integer operator. It means a bijection must
+	** exist beetween a hstate_t and an integer.
+	**
+	** See also get_state();
 	*/
 	typedef handler<state_h, int>			hstate_t;
 	typedef handler<transition_h, int>		htransition_t;
@@ -90,10 +94,16 @@ namespace vcsn
 	** If you do not want to use it, then you must follow its interface.
 	** You can find support.h{h,xx} in vaucanson/misc/.
 	**
+	** The current implementation of Support does not support deletion upon
+	** iteraton. Since one usually wants to do that in Vaucanson, your
+	** container must support this feature. If it doesn't, we advise you to
+	** specialise support for your container and add the necessary.
+	**
 	** WARNING: whenever a container of one of this type is returned through an accessor,
 	**	    a copy is made. So, if you do not use the Support object, be sure to
 	**	    consider this. A copy of a Support object is free since it only
 	**	    contains a reference to the actual container.
+	**
 	*/
 	typedef misc::Support<StateContainer>		states_t;
 	typedef misc::Support<EdgeContainer>		edges_t;
@@ -107,13 +117,18 @@ namespace vcsn
 	** If you do not want to use it, then you must follow its interface.
 	** You can find support.h{h,xx} in vaucanson/misc/.
 	**
+	** The current implementation of Support does not support deletion upon
+	** iteraton. Since one usually wants to do that in Vaucanson, your
+	** container must support this feature. If it doesn't, we advise you to
+	** specialise support for your container and add the necessary.
+	**
 	** WARNING: whenever a container of one of this type is returned through an accessor,
 	**	    a copy is made. So, if you do not use the Support object, be sure to
 	**	    consider this. A copy of a Support object is free since it only
 	**	    contains a reference to the actual container.
 	*/
-	typedef misc::Support<initial_t>		initial_support_t;
-	typedef misc::Support<final_t>			final_support_t;
+	typedef misc::Support<InitialContainer>		initial_support_t;
+	typedef misc::Support<FinalContainer>		final_support_t;
 
 	//Nothing to change here.
 	typedef geometry<hstate_t, hedge_t, GeometryCoords> geometry_t;
@@ -126,13 +141,11 @@ namespace vcsn
 	Graph();
 
 	/*
-	** This constructor can pre-allocate data-structures.
+	** This constructor can pre-allocate data-structures
+	** and create a given number of states.
 	**
-	** WARNING: reserve_number_of_state != number_of_state.
-	**	    This is a pre-allocation ONLY. the graph
-	**	    does not have any states after the initialization.
 	*/
-	Graph(unsigned reserve_number_of_state,
+	Graph(unsigned initial_number_of_state,
 	      unsigned reserve_number_of_edge);
 
 	/// Return states set.
@@ -147,54 +160,49 @@ namespace vcsn
 
 	/** @name State's manipulation
 	** @{ */
-	bool		    has_state(hstate_t n) const;
+	bool		    has_state(const hstate_t& n) const;
 
 	hstate_t	    add_state();
 
 	/// Remove state \a n.
 	///
 	/// \pre \a n is a state of this graph.
-	void		    del_state(hstate_t n);
+	void		    del_state(const hstate_t& n);
 
-	/// Change whether a state is initial or not.
-	/// \param s  the state
-	/// \param v  its associated label
-	/// \param z  the zero for the labels
-	///
-	/// \note If v == z then state is removed from the set of initial
-	/// states.  Because of this, one cannot simply write
-	/// \code
-	/// typename automaton_t::series_set_elt_t some_weight = ...;
-	/// for_all_final_states(f, aut)
-	///   lhs.set_final(*f, aut.get_final(*f) * some_weight);
-	/// \endcode
-	/// because if \c some_weight is equal to \c z, then the state
-	/// is removed from the set of final states, and invalidates all
-	/// the iterators: the loop is broken.
-	void		    set_initial(hstate_t s,
+	/*
+	**  Change whether a state is initial or not.
+	** \param s  the state
+	** \param v  its associated label
+	** \param z  the zero for the labels
+	**
+	** If v == z then state is removed from the set of initial
+	** states.  Because of this, one cannot simply write
+	**
+	** The current implementation of Support does not support deletion upon
+	** iteraton. Since one usually wants to do that in Vaucanson, your
+	** container must support this feature. If it doesn't, we advise you to
+	** specialise support for your container and add the necessary.
+	*/
+	void		    set_initial(const hstate_t& s,
 					const series_set_elt_value_t& v,
 					const series_set_elt_value_t& z);
 	const series_set_elt_value_t&
-			    get_initial(hstate_t,
+			    get_initial(const hstate_t&,
 					const series_set_elt_value_t&) const;
-	bool		    is_initial(hstate_t s,
+	bool		    is_initial(const hstate_t& s,
 				       const series_set_elt_value_t&) const;
 
 	void		    clear_initial();
 
 	/// Change whether a state is final or not.
-	/// \param s  the state
-	/// \param v  its associated label
-	/// \param z  the zero for the labels
-	///
-	/// \sa set_initial().
-	void		    set_final(hstate_t,
+	// See also set_initial().
+	void		    set_final(const hstate_t&,
 				      const series_set_elt_value_t&,
 				      const series_set_elt_value_t&);
 	const series_set_elt_value_t&
-			    get_final(hstate_t,
+			    get_final(const hstate_t&,
 				      const series_set_elt_value_t&) const;
-	bool		    is_final(hstate_t s,
+	bool		    is_final(const hstate_t& s,
 				     const series_set_elt_value_t&) const;
 
 	void		    clear_final();
@@ -203,18 +211,18 @@ namespace vcsn
 
 	/** @name Edge's manipulation
 	** @{ */
-	bool		    has_edge(hedge_t n) const;
+	bool		    has_edge(const hedge_t& n) const;
 
-	hedge_t		    add_edge(hstate_t h1,
-				     hstate_t h2,
+	hedge_t		    add_edge(const hstate_t& h1,
+				     const hstate_t& h2,
 				     const label_t& v);
-	void		    del_edge(hedge_t e);
+	void		    del_edge(const hedge_t& e);
 
-	hstate_t	    src_of(hedge_t e1) const;
-	hstate_t	    dst_of(hedge_t e2) const;
+	hstate_t	    src_of(const hedge_t& e1) const;
+	hstate_t	    dst_of(const hedge_t& e2) const;
 
-	const label_t&	    label_of(hedge_t n) const;
-	void		    update(hedge_t, label_t);
+	const label_t&	    label_of(const hedge_t& n) const;
+	void		    update(const hedge_t&, label_t);
 	/** @} */
 
 	/** @name Only automaton related methods
@@ -225,39 +233,97 @@ namespace vcsn
 
 	/// Delta, Reverse deltas, for functor and iterator.
 	/// Nothing to change here.
-# define DECLARE_DELTA_FUNCTION(DeltaName, DKind)			\
-	template <class OutputIterator, typename Query>			\
-	void DeltaName(OutputIterator res, hstate_t from,		\
-		       const Query& q, ::vcsn::delta_kind::DKind) const
-	DECLARE_DELTA_FUNCTION (delta, states);
-	DECLARE_DELTA_FUNCTION (delta, transitions);
-	DECLARE_DELTA_FUNCTION (rdelta, states);
-	DECLARE_DELTA_FUNCTION (rdelta, transitions);
-# undef DECLARE_DELTA_FUNCTION
+	template <class OutputIterator, typename Query>
+	void delta(OutputIterator res,
+		   const hstate_t& from,
+		   const Query& q,
+		   ::vcsn::delta_kind::states) const;
 
-# define DECLARE_DELTAF_BOOL_FUNCTION(DeltaName, DKind, IsBool)		\
-	template <class Functor, typename Query>			\
-	void DeltaName(Functor& fun, hstate_t from,			\
-		       const Query& q, ::vcsn::delta_kind::DKind,	\
-		       misc::IsBool ## _t) const
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, false);
-# undef DECLARE_DELTAF_BOOL_FUNCTION
+	template <class OutputIterator, typename Query>
+	void delta(OutputIterator res,
+		   const hstate_t& from,
+		   const Query& q,
+		   ::vcsn::delta_kind::transitions) const;
 
-# define DECLARE_DELTAF_FUNCTION(DeltaName)				\
-	template <class Functor, typename Query, typename DKind>	\
-	void DeltaName(Functor& fun, hstate_t from,			\
-		       const Query& q, ::vcsn::delta_kind::kind<DKind>) const
-	DECLARE_DELTAF_FUNCTION (deltaf);
-	DECLARE_DELTAF_FUNCTION (rdeltaf);
+	template <class OutputIterator, typename Query>
+	void rdelta(OutputIterator res,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::states) const;
 
-# undef DECLARE_DELTAF_FUNCTION
+	template <class OutputIterator, typename Query>
+	void rdelta(OutputIterator res,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::transitions) const;
+
+	template <class Functor, typename Query>
+	void deltaf(Functor& fun,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::states,
+		    misc::true_t) const;
+
+	template <class Functor, typename Query>
+	void deltaf(Functor& fun,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::states,
+		    misc::false_t) const;
+
+	template <class Functor, typename Query>
+	void deltaf(Functor& fun,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::transitions,
+		    misc::true_t) const;
+
+	template <class Functor, typename Query>
+	void deltaf(Functor& fun,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::transitions,
+		    misc::false_t) const;
+
+	template <class Functor, typename Query>
+	void rdeltaf(Functor& fun,
+		     const hstate_t& from,
+		     const Query& q,
+		     ::vcsn::delta_kind::states,
+		     misc::true_t) const;
+
+	template <class Functor, typename Query>
+	void rdeltaf(Functor& fun,
+		     const hstate_t& from,
+		     const Query& q,
+		     ::vcsn::delta_kind::states,
+		     misc::false_t) const;
+
+	template <class Functor, typename Query>
+	void rdeltaf(Functor& fun,
+		     const hstate_t& from,
+		     const Query& q,
+		     ::vcsn::delta_kind::transitions,
+		     misc::true_t) const;
+
+	template <class Functor, typename Query>
+	void rdeltaf(Functor& fun,
+		     const hstate_t& from,
+		     const Query& q,
+		     ::vcsn::delta_kind::transitions,
+		     misc::false_t) const;
+
+	template <class Functor, typename Query, typename DKind>
+	void deltaf(Functor& fun,
+		    const hstate_t& from,
+		    const Query& q,
+		    ::vcsn::delta_kind::kind<DKind>) const;
+
+	template <class Functor, typename Query, typename DKind>
+	void rdeltaf(Functor& fun,
+		     const hstate_t& from,
+		     const Query& q,
+		     ::vcsn::delta_kind::kind<DKind>) const;
 
 	/** @}*/
 
@@ -370,7 +436,7 @@ namespace vcsn
   // This implementation can be used as an implementation of automaton.
   VCSN_MAKE_AUTOMATON_TRAITS(#IMPL_NAME#::Graph);
 
-  // This implementation can be used as a transducer one.
+  // This implementation can be used as a transducer.
   template <class Kind,
 	    class WordValue,
 	    class WeightValue,
@@ -512,6 +578,6 @@ namespace vcsn
 } // Enf of namespace vcsn
 
 
-# include <vaucanson/automata/implementation/light_graph_impl.hxx>
+# include "#IMPL_NAME#_graph_impl.hxx"
 
 #endif // ! #IMPL_NAME_#_GRAPH_IMPL_HH
