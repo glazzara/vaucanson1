@@ -1,3 +1,15 @@
+2007-11-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx 
+	(do_quotient): Thinko in previous patch.
+	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.h, 
+	src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh: 
+	Call realtime_here on RW transducers thare are going to be evaluated.
+	This fixes the failures of evaluation_fmp-test and 
+	subnormalized_composition-test.  normalized_composition-test is still
+	failing later.	
+
 2007-11-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx 

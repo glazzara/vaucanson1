@@ -474,9 +474,16 @@ namespace vcsn
 
     for_all_states (p, input)
     {
+      unsigned c;
       if (max_partitions == 0)
-	final = 0;
-      unsigned c = input.is_final(*p) ? final : (1 - final);
+	{
+	  c = 0;
+	  final = !input.is_final(*p);
+	}
+      else
+	{
+	  c = input.is_final(*p) ? final : (1 - final);
+	}
       class_[*p] = c;
       part[c].insert(part[c].end(), *p);
       max_partitions = std::max(max_partitions, c + 1);

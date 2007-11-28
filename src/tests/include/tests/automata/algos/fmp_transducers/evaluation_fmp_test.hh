@@ -92,6 +92,7 @@ evaluation_fmp_test(tests::Tester& t)
     boolean_transducer::make_automaton(first_at, second_at);
 
   fmp_to_realtime(t1, trans1);
+  realtime_here(trans1);
 
   boolean_automaton::rat_exp_t exp =
     boolean_automaton::make_rat_exp(first_at, "abbababa");

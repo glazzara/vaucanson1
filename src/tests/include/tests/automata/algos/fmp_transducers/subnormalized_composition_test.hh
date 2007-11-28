@@ -146,8 +146,11 @@ subnormalized_composition_test(tests::Tester& t)
     boolean_transducer::make_automaton(first_at, third_at);
 
   fmp_to_realtime(t1, trans1);
+  realtime_here(trans1);
   fmp_to_realtime(t2, trans2);
+  realtime_here(trans2);
   fmp_to_realtime(t3, trans3);
+  realtime_here(trans3);
 
   boolean_automaton::rat_exp_t exp =
     boolean_automaton::make_rat_exp(first_at, "abbababa");
