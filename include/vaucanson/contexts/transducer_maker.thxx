@@ -107,8 +107,12 @@ namespace vcsn
 		  const Element<TransStruct, TransImpl>& t,
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
-      AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::make_automaton(t.structure().series().monoid().alphabet());
-      AUTOMATON_CONTEXT::gen_automaton_t result (w.structure());
+      AUTOMATON_CONTEXT::automaton_t w = 
+	AUTOMATON_CONTEXT::make_automaton(t.structure().series()
+					   .monoid().alphabet());
+      typename output_projection_helper<TransStruct, TransImpl>::ret::set_t 
+	ret_set(t.structure().series().semiring());
+      AUTOMATON_CONTEXT::gen_automaton_t result (ret_set);
       standard_of(w, input);
       evaluation(quotient(w), t, result);
       return aut_to_exp(quotient(realtime(trim(result))), DMChooser());

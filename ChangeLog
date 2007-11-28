@@ -1,5 +1,14 @@
 2007-11-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/contexts/transducer_maker.thxx
+	(do_evalutation): The intermediate automaton resulting from the
+	evaluation of the RatExp on the transducer should use the output
+	alphabet, not the input alphabet.  This fixes an assertion failure
+	in normalized_composition-test, but that test is still failing 
+	later because of the way it compares RatExps...
+
+2007-11-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx 
 	(do_quotient): Thinko in previous patch.
 	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
