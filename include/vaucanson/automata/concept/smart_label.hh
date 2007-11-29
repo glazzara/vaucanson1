@@ -29,6 +29,9 @@
 
 namespace vcsn
 {
+  struct label_h
+  {};
+
   template <typename T> // T = Graph::label_t
   class SmartLabel
   {
@@ -71,8 +74,6 @@ namespace vcsn
       label_container_t data_;
 
     public:
-      struct label_h
-      {};
       typedef handler<label_h, const SmartLabel<T>*> hlabel_t;
 
       hlabel_t insert (const T&);

@@ -1,3 +1,11 @@
+2007-11-29  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix incompatibility with GCC 4.1.1. 
+	* concept/smart_label.hh: for some reasons, GCC 4.1.1 did not resolved
+	templated functions correctly when a tag, passed as template parameter,
+	was declared in a templated struct.
+	Thanks to this patch Vaucanson compiles with GCC 4.x.
+
 2007-11-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Update graph implementation templates. 
