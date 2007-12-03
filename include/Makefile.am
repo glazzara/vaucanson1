@@ -313,8 +313,6 @@ vaucanson/algorithms/is_letterized.hh				\
 vaucanson/algorithms/is_letterized.hxx				\
 vaucanson/algorithms/is_normalized.hh				\
 vaucanson/algorithms/is_normalized.hxx				\
-vaucanson/algorithms/is_realtime.hh				\
-vaucanson/algorithms/is_realtime.hxx				\
 vaucanson/algorithms/isomorph.hh				\
 vaucanson/algorithms/isomorph.hxx				\
 vaucanson/algorithms/krat_exp_cderivation.hh			\

@@ -23,7 +23,7 @@
 # include <stack>
 
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/algorithms/is_realtime.hh>
+# include <vaucanson/algorithms/realtime.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>

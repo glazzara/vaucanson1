@@ -37,7 +37,6 @@
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/is_ambiguous.hh>
 # include <vaucanson/algorithms/is_deterministic.hh>
-# include <vaucanson/algorithms/is_realtime.hh>
 # include <vaucanson/algorithms/isomorph.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
@@ -54,4 +53,3 @@
 #include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/thompson.hh>
-

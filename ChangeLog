@@ -1,27 +1,43 @@
+2007-12-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/is_realtime.hh,
+	include/vaucanson/algorithms/is_realtime.hxx: Delete them.
+	* include/Makefile.am: Drop them.
+	* include/vaucanson/contexts/automaton_functions.thh,
+	include/vaucanson/algorithms/product.hxx: Do not include
+	is_realtime.hh.
+	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh: Likewise.
+	* taf-kit/tests/vcsn-b.test: Two more tests for is-realtime.
+	* include/vaucanson/algorithms/realtime.hxx (do_is_realtime): Rewrite
+	using the definition formerly in is_realtime.hxx.  The previous code
+	looked more like a is_proper() function.
+	* lib/generate_libvcsn.rb: Do not instanciate product
+	on FMP automata.
+
 2007-11-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/contexts/transducer_maker.thxx
 	(do_evalutation): The intermediate automaton resulting from the
 	evaluation of the RatExp on the transducer should use the output
 	alphabet, not the input alphabet.  This fixes an assertion failure
-	in normalized_composition-test, but that test is still failing 
+	in normalized_composition-test, but that test is still failing
 	later because of the way it compares RatExps...
 
 2007-11-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/minimization_hopcroft.hxx 
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx
 	(do_quotient): Thinko in previous patch.
 	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
-	src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.h, 
-	src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh: 
+	src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.h,
+	src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh:
 	Call realtime_here on RW transducers thare are going to be evaluated.
-	This fixes the failures of evaluation_fmp-test and 
+	This fixes the failures of evaluation_fmp-test and
 	subnormalized_composition-test.  normalized_composition-test is still
-	failing later.	
+	failing later.
 
 2007-11-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/minimization_hopcroft.hxx 
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx
 	(do_quotient): Handle empty automata, and automata with
 	only non-final states or only final states.
 	* taf-kit/tests/vcsn-b.test: Construct two more automata,

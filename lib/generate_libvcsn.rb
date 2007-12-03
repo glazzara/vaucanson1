@@ -81,7 +81,11 @@ def create?(type, file)
       file !~ /minimization_moore.hh/ and
       file !~ /normalized_composition.hh/ and
       file !~ /realtime.hh/ and
-      file !~ /realtime_decl.hh/
+      file !~ /realtime_decl.hh/ and
+      (
+        ("vcsn-fmp-tdc" != type and "vcsn-z-fmp-tdc" != type) or
+          file !~ /product.hh/
+      )
     )
   )
 end
@@ -200,6 +204,5 @@ files.each { |file|
   }
 }
 
-# writing */lib*.mk files which are included in Makefile.am 
+# writing */lib*.mk files which are included in Makefile.am
 vcsn.each { |type, context| write_makefile(type, context) }
-
