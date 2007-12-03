@@ -47,6 +47,15 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (minimization_moore));
 
+DEFINE_COMMAND (NAME (are_equivalent)
+		CODE (bool b = are_equivalent (get_aut (args.args[1]),
+					       get_aut (args.args[2])))
+		OUTPUT_ON_VERBOSE (
+		  (b
+		   ? "Automata are equivalent\n"
+		   : "Automata are not equivalent\n"))
+		RETURNVALUE (b ? 0 : 1));
+
   /*-----------------------------.
   | Define the set of commands.	 |
   `-----------------------------*/
@@ -58,6 +67,8 @@ const command_t command_map[] =
   COMMAND_GROUP (
     "Tests and evaluation on automata:",
 
+    COMMAND_ENTRY (are_equivalent, AutAut,
+		   "Do `Aut1' and `Aut2' recognize the same language?"),
 //    COMMAND_ENTRY (are_isomorphic, AutAut,
 //		   "Return whether `aut1' and `aut2' are isomorphic."),
     COMMAND_ENTRY (eval, AutWord, "Evaluate `word' on `aut'."),

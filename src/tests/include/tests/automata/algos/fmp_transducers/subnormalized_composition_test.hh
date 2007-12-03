@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -155,11 +155,15 @@ subnormalized_composition_test(tests::Tester& t)
   boolean_automaton::rat_exp_t exp =
     boolean_automaton::make_rat_exp(first_at, "abbababa");
 
-  TEST(t, "Subnormalized composition works.",
-       (boolean_transducer::evaluation(trans3, exp) ==
-	boolean_transducer::evaluation(trans2,
-				       boolean_transducer::evaluation(trans1,
-								      exp))));
+  boolean_automaton::automaton_t res1 =
+    boolean_automaton::standard_of
+      (boolean_transducer::evaluation(trans3, exp));
+  boolean_automaton::automaton_t res2 =
+    boolean_automaton::standard_of
+      (boolean_transducer::evaluation
+        (trans2, boolean_transducer::evaluation(trans1, exp)));
+
+  TEST(t, "Subnormalized composition works.", are_equivalent(res1, res2));
 
   return t.all_passed();
 }

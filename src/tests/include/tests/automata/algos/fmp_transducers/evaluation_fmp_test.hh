@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -106,8 +106,12 @@ evaluation_fmp_test(tests::Tester& t)
     boolean_transducer::evaluation(trans1, exp);
   boolean_automaton::rat_exp_t exp_res2 = aut_to_exp(res_aut);
 
+  boolean_automaton::automaton_t res1 =
+    boolean_automaton::standard_of(exp_res1);
+  boolean_automaton::automaton_t res2 =
+    boolean_automaton::standard_of(exp_res2);
 
-  TEST(t, "Fmp evaluation works.", (exp_res1 == exp_res2));
+  TEST(t, "Fmp evaluation works.", are_equivalent(res1,res2));
 
   return t.all_passed();
 }

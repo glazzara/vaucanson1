@@ -1,5 +1,28 @@
 2007-12-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Introduce are_equivalent, and use it to fix a failure in the
+	test-suite.
+
+	* include/vaucanson/algorithms/equivalent.hh,
+	include/vaucanson/algorithms/equivalent.hxx: New files.
+	* include/Makefile.am: Distribute and install them.
+	* include/vaucanson/contexts/automaton_functions.thh: Include them.
+	* lib/generate_libvcsn.rb: Add are_equivalent.
+	* taf-kit/src/b_commands.cc: Add the are-equivalent command.
+	* taf-kit/tests/vcsn-b.test: Add a test for are-equivalent.
+	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh:
+	Compare ratexp by testing that their standard automata
+	are equivalent, not by comparing their syntax trees.  This fixes a
+	failure of normalized_composition-test.
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh:
+	Remove the kludge I introduced on 2007-11-02 and an older one.
+
+2007-12-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix is_realtime()
+
 	* include/vaucanson/algorithms/is_realtime.hh,
 	include/vaucanson/algorithms/is_realtime.hxx: Delete them.
 	* include/Makefile.am: Drop them.

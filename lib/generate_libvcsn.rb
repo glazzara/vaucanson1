@@ -58,30 +58,31 @@ def create?(type, file)
 	"vcsn-fmp-tdc" == type or "vcsn-tdc" == type or
 	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type
       ) and
+      file !~ /aci_canonical.hh/ and
+      file !~ /backward_realtime.hh/ and
       file !~ /berry_sethi.hh/ and
       file !~ /brzozowski.hh/ and
-      file !~ /derived_term_automaton.hh/ and
-      file !~ /eval.hh/ and
-      file !~ /standard.hh/ and
-      file !~ /standard_of.hh/ and
-      file !~ /aci_canonical.hh/ and
-      file !~ /krat_exp.*.hh/ and
-      file !~ /backward_realtime.hh/ and
       file !~ /complement.hh/ and
       file !~ /complete.hh/ and
       file !~ /composition_cover.hh/ and
+      file !~ /derived_term_automaton.hh/ and
       file !~ /determinize.hh/ and
+      file !~ /equivalent.hh/ and
+      file !~ /eval.hh/ and
       file !~ /extension.hh/ and
       file !~ /finite_support_conversion.hh/ and
       file !~ /forward_realtime.hh/ and
       file !~ /is_letterized.hh/ and
       file !~ /is_normalized.hh/ and
+      file !~ /krat_exp.*.hh/ and
       file !~ /letter_to_letter_composition.hh/ and
       file !~ /minimization_hopcroft.hh/ and
       file !~ /minimization_moore.hh/ and
       file !~ /normalized_composition.hh/ and
-      file !~ /realtime.hh/ and
       file !~ /realtime_decl.hh/ and
+      file !~ /realtime.hh/ and
+      file !~ /standard.hh/ and
+      file !~ /standard_of.hh/ and
       (
         ("vcsn-fmp-tdc" != type and "vcsn-z-fmp-tdc" != type) or
           file !~ /product.hh/

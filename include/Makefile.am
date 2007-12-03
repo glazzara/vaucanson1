@@ -271,6 +271,8 @@ vaucanson/algorithms/eps_removal.hh				\
 vaucanson/algorithms/eps_removal.hxx				\
 vaucanson/algorithms/eps_removal_sp.hh				\
 vaucanson/algorithms/eps_removal_sp.hxx				\
+vaucanson/algorithms/equivalent.hh				\
+vaucanson/algorithms/equivalent.hxx				\
 vaucanson/algorithms/eval.hh					\
 vaucanson/algorithms/eval.hxx					\
 vaucanson/algorithms/evaluation_fmp.hh				\
