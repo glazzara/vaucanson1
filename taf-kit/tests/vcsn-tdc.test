@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006 The Vaucanson Group.
+# Copyright (C) 2006, 2007 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -70,3 +70,5 @@ vcsn-tdc info $t1
   vcsn-tdc --alphabet1=ab --alphabet2=xy image $t1 | vcsn-b eval - $input
 
   vcsn-tdc to-rt $t1
+
+  vcsn-tdc --alphabet1=ab --alphabet2=xy eval-aut $t1 $a1 | vcsn-b eval - yx

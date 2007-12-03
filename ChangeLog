@@ -1,5 +1,11 @@
 2007-12-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/tdc_commands.cc (command_map): Fix the declaration
+	of eval-aut, it takes two args, not one.
+	* taf-kit/tests/vcsn-tdc.test: Execute eval-aut at least once.
+
+2007-12-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Introduce are_equivalent, and use it to fix a failure in the
 	test-suite.
 
