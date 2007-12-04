@@ -51,23 +51,30 @@ AC_ARG_WITH([python],
 			[set python prefix (default is PREFIX)])],
 	[ac_python_path="$withval"],[])
 
-if test "x$enable_vaucanswig" = "xyes"; then
-  AC_CHECK_SWIG13
-  if test "x$ac_cv_recent_swig" != "xyes"; then
-    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
-  else
-    AM_PATH_PYTHON([2.2])
 
-    if test "x$ac_python_path" != "x"; then
-      PYTHON_PREFIX="$ac_python_path"
-    else
-      for ac_python_path_tmp in /usr /usr/local /opt /opt/local ; do
-	if test -f "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h" && test -r "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h"; then
-	    PYTHON_PREFIX="$ac_python_path_tmp"
-	    break;
-	fi
-      done
-    fi
+# Always check for swig: it is needed by `make dist' (that will recurse
+# vaucanswig) in case the *.py files do not exist already.  E.g., after
+# a fresh checkout.
+AC_CHECK_SWIG13
+
+# We distribute the product of swig, so do not error out (just warn)
+# if swig is too old : it might not be needed.
+if test "x$ac_cv_recent_swig" != xyes; then
+  AC_MSG_WARN([You need swig >= 1.3 to compile vaucanswig from a fresh SVN checkout.])
+fi
+
+if test "x$enable_vaucanswig" = xyes; then
+  AM_PATH_PYTHON([2.2])
+
+  if test "x$ac_python_path" != x; then
+    PYTHON_PREFIX=$ac_python_path
+  else
+    for ac_python_path_tmp in /usr /usr/local /opt /opt/local ; do
+      if test -f "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h" && test -r "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h"; then
+	PYTHON_PREFIX=$ac_python_path_tmp
+	break
+      fi
+    done
   fi
 fi
 
@@ -75,8 +82,6 @@ AC_CONFIG_FILES([vaucanswig/Makefile
 		 vaucanswig/meta/Makefile
 	         vaucanswig/src/Makefile
 	         vaucanswig/python/Makefile])
-
-
 
 AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 	       [test "x$enable_vaucanswig" = "xyes"])
