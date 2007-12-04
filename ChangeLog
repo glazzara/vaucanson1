@@ -1,5 +1,13 @@
 2007-12-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Revert the change of 2007-10-22.  It breaks "make distcheck" and
+	fails to install files that are essential to taf-kit.
+
+	* Makefile.am (SUBDIRS): Add data.
+	(demos): Do not recurse into data.
+
+2007-12-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* configure.ac (AC_CHECK_SWIG13): Run it unconditionally, and do not
 	abort if it is too old.
 

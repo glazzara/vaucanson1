@@ -13,7 +13,7 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = argp lib include src taf-kit doc build-aux debian
+SUBDIRS = argp lib include src data taf-kit doc build-aux debian
 if ENABLE_VAUCANSWIG
   SUBDIRS += vaucanswig
 endif
@@ -48,7 +48,6 @@ ACLOCAL_AMFLAGS = -I build-aux
 ###
 demos:
 	cd src/demos && $(MAKE) $(AM_MAKEFLAGS) demos
-	cd data && $(MAKE) $(AM_MAKEFLAGS)
 
 ###
 ### For benchs. (. is builddir)
