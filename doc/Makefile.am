@@ -12,7 +12,6 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 include $(top_srcdir)/vaucanson.mk
-include $(srcdir)/doc.mk
 
 SUBDIRS = manual
 
@@ -57,14 +56,30 @@ uninstall-local:
 maintainer-clean-local:
 	rm -rf $(DOCDIR) $(srcdir)/$(DOCDIR)
 
-## ----------------------- ##
-## Doxygen documentation.  ##
-## ----------------------- ##
+## ------------------- ##
+## RST documentation.  ##
+## ------------------- ##
 
 dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
 MAINTAINERCLEANFILES = $(dist_pdf_DATA) $(srcdir)/stamp
 
-EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
+TEXI2DVI = $(srcdir)/share/bin/texi2dvi
+TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch
+
+TEXI2PDF = $(TEXI2DVI) --pdf
+TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
+
+SUFFIXES = .txt .tex .pdf
+
+.tex.pdf:
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
+
+.txt.tex:
+	$(RST2LATEX) --halt=warning --input-encoding=iso-8859-1 $< >$@.tmp
+	mv $@.tmp $@
+
+
+EXTRA_DIST = README.txt FAQ.txt NEWS.txt \
 	     share $(srcdir)/stamp $(srcdir)/$(DOCDIR)
 
 # Do not distribute subversion and backup files from the share/ directory.

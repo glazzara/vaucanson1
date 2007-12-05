@@ -196,13 +196,10 @@ inverted_t1=$automata_tests_dir/tdc/inverted_t1.xml
 ## ---------- ##
 
 testSubDir=$me.dir
-test -d $testSubDir ||
-  mkdir $testSubDir
-$testSubDir=$testSubDir/$me
-chmod -R a+rwx $$testSubDir > /dev/null 2>&1
-rm -rf $$testSubDir > /dev/null 2>&1
-mkdir $$testSubDir
-cd $$testSubDir
+chmod -R a+rwx $testSubDir > /dev/null 2>&1
+rm -rf $testSubDir > /dev/null 2>&1
+mkdir $testSubDir
+cd $testSubDir
 
 
 

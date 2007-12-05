@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006 The Vaucanson Group.
+## Copyright (C) 2006, 2007 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -13,9 +13,6 @@
 
 ## This file is used by the Makefile.am of generated test suites.
 include $(top_srcdir)/src/tests/check/check.mk
-
-# Automake does not automatically clean EXTRA_PROGRAMS.
-CLEANFILES = $(EXTRA_PROGRAMS)
 
 TESTS += failcomp.sh
 EXTRA_DIST = failcomp.sh
@@ -35,3 +32,5 @@ generate_test_suite = $(tests_dir)/bin/generate-test-suite.sh
 
 $(srcdir)/Makefile.am: $(generate_all) $(generate_test_suite)
 	cd $(tests_dir)/test-suites && ./generate-all.sh
+
+CLEANFILES += coherence_state_transition_test.xml

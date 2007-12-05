@@ -234,6 +234,7 @@ AC_CONFIG_FILES([
 	    data/automata/tdc/Makefile
 	    data/automata/tdc-rw/Makefile
 	    data/automata/z/Makefile
+	  data/emacs/Makefile
 	lib/Makefile
 	src/Makefile
 	  src/demos/Makefile

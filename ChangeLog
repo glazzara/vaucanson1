@@ -1,3 +1,22 @@
+2007-12-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fixes for files left in build directory after distclean.
+
+	* taf-kit/tests/defs.in: Fix the creation of working directories.
+	* data/Makefile.am (dist_lisp_LISP): Do not list emacs/* files here
+	because Automake fails to clean lisp files in subdirectories. Do it...
+	* data/emacs/Makefile.am: ... in this new file.
+	* data/Makefile.am (SUBDIRS): Recurse into emacs.
+	* configure.ac: Output data/emacs/Makefile.
+	* doc/Makefile.am: Do not include doc.mk, its intricate set of
+	circular pattern rules cause the PDF files to be rebuilt in VPATH
+	builds, breaking distcheck.
+	* src/tests/test-suites/test-suite.mk (CLEANFILES): Clean
+	coherence_state_transition_test.xml because it is output by many
+	test suite.  Move the rest of that variable ...
+	* src/tests/check/check.mk (CLEANFILES): ... here, so that
+	handwritten test-suites get cleaned too.
+
 2007-12-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Revert the change of 2007-10-22.  It breaks "make distcheck" and

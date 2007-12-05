@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -15,9 +15,9 @@
 ## generated) of libvaucanson.  It is tailored to be used for unit
 ## tests, that is to say, tests that can simply be run *once*, and
 ## whose result cannot change if the sources did not change.
-## 
+##
 ## It expects its users to define EXTRA_PROGRAMS, not check_PROGRAMS.
-## 
+##
 ## Enable unit-test supports from our build-aux/check.mk:
 LAZY_TEST_SUITE = 1
 
@@ -25,6 +25,9 @@ include $(top_srcdir)/src/tests/check/check-flags.mk
 LDADD = $(top_builddir)/src/tests/check/libcheck.a
 
 TESTS = $(EXTRA_PROGRAMS)
+# Automake does not automatically clean EXTRA_PROGRAMS.
+CLEANFILES = $(EXTRA_PROGRAMS)
+
 TEST_LOGS = $(TESTS:=.log)
 
 # Parallel replacement of Automake's check-TESTS target.
