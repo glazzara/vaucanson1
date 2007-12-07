@@ -78,8 +78,8 @@ perl -pi -e "s<\@KEY\@><$key>g;"         \
 # In the template and svn:ignore, the email address, topic, etc. are
 # already filled in for the template itself.
 svn propget svn:ignore $key >$key/ignore.svn
-perl -pi -e "s<lrde\@lrde.epita.fr@><$emails>g;"   \
-         -e "s<\"template <><$subject>g;" 	 \
+perl -pi -e "s<lrde\@lrde.epita.fr><$emails>g;"   \
+         -e "s<\"template <><\"$subject >g;" 	 \
     $key/vcs/local.rb $key/ignore.svn
 svn propset svn:ignore $key -F $key/ignore.svn
 rm $key/ignore.svn

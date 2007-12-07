@@ -11,6 +11,7 @@
 % When there is no <+-> running, \alert<.> does not work.
 \lstdefinestyle{alert}{emphstyle={\alert}}
 
+\input{ldf/asf.ldf}
 \input{ldf/asn1.ldf}
 \input{ldf/aterm.ldf}
 \input{ldf/box.ldf}

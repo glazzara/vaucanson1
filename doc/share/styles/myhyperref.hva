@@ -1,2 +1,2 @@
-\input{hyperref.hva}
+\RequirePackage{hyperref}
 \let\autoref\ref

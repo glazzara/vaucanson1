@@ -79,16 +79,23 @@ svn_to_tex =				\
  ($$var = $$1) =~ s| ||g;		\
  "\\newcommand{\\Svn$$var}{$$val}">ex'
 
+# This is a stupid nightmare:
+#
+#             echo '\noto'   echo '\\noto'   echo -e '\\noto'
+# bash 3.1      \noto           \\noto          \noto
+# bash 3.2       %oto           \noto           -e \noto
+#
+# where % denotes the eol character.
 rev.tex: $(ChangeLog)
-	if svn --version >/dev/null 2>&1; then			\
-	  LC_ALL=C svn info $< |				\
-	  (perl -pe $(svn_to_tex) &&				\
-	   echo '\newcommand{\SvnRev}{\SvnRevision}')		\
-	   >$@;							\
-	elif test -f $@; then					\
-	  touch $@;						\
-	else							\
-	  echo '\\newcommand{\\SvnRev}{}' >$@;			\
+	if svn --version >/dev/null 2>&1; then				\
+	  LC_ALL=C svn info $< |					\
+	  (perl -pe $(svn_to_tex) &&					\
+	   echo '@newcommand{@SvnRev}{@SvnRevision}' | tr '@' '\\')	\
+	   >$@;								\
+	elif test -f $@; then						\
+	  touch $@;							\
+	else								\
+	  echo '@newcommand{@SvnRev}{}' | tr '@' '\\' >$@;		\
 	fi
 
 CLEANFILES += rev.tex

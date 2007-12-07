@@ -13,44 +13,44 @@
       \renewcommand{\captionseparator}{:}
       \let\@trivlistORI\@trivlist
       \def\bbl@frenchlistspacing{%
-         \def\@trivlist{%
+	 \def\@trivlist{%
 		    \setlength{\itemsep}{0.4ex plus 0.2ex minus 0.2ex}%
-            \setlength{\parsep}{0.4ex plus 0.2ex minus 0.2ex}%
-            \setlength{\topsep}{0.8ex plus 0.4ex minus 0.4ex}%
-            \setlength{\partopsep}{0.4ex plus 0.2ex minus 0.2ex}%
-            \addtolength{\topsep}{-\parskip}%
-            \addtolength{\partopsep}{\parskip}%
-            \@trivlistORI%
-         }
+	    \setlength{\parsep}{0.4ex plus 0.2ex minus 0.2ex}%
+	    \setlength{\topsep}{0.8ex plus 0.4ex minus 0.4ex}%
+	    \setlength{\partopsep}{0.4ex plus 0.2ex minus 0.2ex}%
+	    \addtolength{\topsep}{-\parskip}%
+	    \addtolength{\partopsep}{\parskip}%
+	    \@trivlistORI%
+	 }
       }%
       \bbl@frenchlistspacing%
    }{%
       \@ifpackageloaded{babel}{%
-         \selectlanguage{french}
-         \newenvironment{texteenanglais}{\selectlanguage{english}}{%
-            \selectlanguage{french}}%
-         \newcommand{\legende}[1]{\caption{#1}}
-     	 \newcommand{\entreguill}[1]{\og{}#1\fg{}}
+	 \selectlanguage{french}
+	 \newenvironment{texteenanglais}{\selectlanguage{english}}{%
+	    \selectlanguage{french}}%
+	 \newcommand{\legende}[1]{\caption{#1}}
+	 \newcommand{\entreguill}[1]{\og{}#1\fg{}}
 
       }{%
-         \newenvironment{texteenanglais}{}{}%
-         \newcommand{\legende}[1]{\caption{#1}}
-         \def\figurename{{\scshape Fig.}}%
-         \def\tablename{{\scshape Tab.}}%
+	 \newenvironment{texteenanglais}{}{}%
+	 \newcommand{\legende}[1]{\caption{#1}}
+	 \def\figurename{{\scshape Fig.}}%
+	 \def\tablename{{\scshape Tab.}}%
 		 \newcommand{\entreguill}[1]{``#1''}
-         \let\@trivlistORI\@trivlist
-         \def\bbl@frenchlistspacing{%
-            \def\@trivlist{%
+	 \let\@trivlistORI\@trivlist
+	 \def\bbl@frenchlistspacing{%
+	    \def\@trivlist{%
 			   \setlength{\itemsep}{0.4ex plus 0.2ex minus 0.2ex}%
-               \setlength{\parsep}{0.4ex plus 0.2ex minus 0.2ex}%
-               \setlength{\topsep}{0.8ex plus 0.4ex minus 0.4ex}%
-               \setlength{\partopsep}{0.4ex plus 0.2ex minus 0.2ex}%
-               \addtolength{\topsep}{-\parskip}%
-               \addtolength{\partopsep}{\parskip}%
-               \@trivlistORI%
+	       \setlength{\parsep}{0.4ex plus 0.2ex minus 0.2ex}%
+	       \setlength{\topsep}{0.8ex plus 0.4ex minus 0.4ex}%
+	       \setlength{\partopsep}{0.4ex plus 0.2ex minus 0.2ex}%
+	       \addtolength{\topsep}{-\parskip}%
+	       \addtolength{\partopsep}{\parskip}%
+	       \@trivlistORI%
 		    }%
-         }%
-         \bbl@frenchlistspacing%
+	 }%
+	 \bbl@frenchlistspacing%
       }%
    }%
 }%
@@ -131,11 +131,11 @@
 	     \rlap{\@textsuperscript{\normalfont\@thefnmark}}%
       }%
       \long\def\@makefntext##1{%
-         \parindent 1em%
-         \noindent%
-         \hb@xt@1.8em{%
-            \hss\@textsuperscript{\normalfont\@thefnmark}%
-         }##1%
+	 \parindent 1em%
+	 \noindent%
+	 \hb@xt@1.8em{%
+	    \hss\@textsuperscript{\normalfont\@thefnmark}%
+	 }##1%
       }%
      \twocolumn[\@maketitlegretsi]%
      \thispagestyle{empty}%
@@ -160,7 +160,7 @@
      {\@author\par}%
      %\vskip 0.5cm%
 	 \begin{tabular}{c}%
-        \@adresse%
+	\@adresse%
 	 \end{tabular}
      \vskip 0.1cm%
      \texttt{\@email}%

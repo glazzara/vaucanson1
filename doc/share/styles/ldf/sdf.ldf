@@ -9,6 +9,8 @@
     reject,avoid,priorities,exports,imports,cons,right,left,assoc,bracket,%
     variables,restrictions},%
   sensitive,%
+  morecomment=[l]//,%
+  morecomment=[s]{/*}{*/},%
   morecomment=[l]{\%\%},%
   morecomment=[s]{(*}{*)},%
   morestring=[b]{"}%
@@ -18,7 +20,9 @@
   {morekeywords={pp,V,KW,H,is}}
 
 \lstdefinelanguage[AG]{SDF}[]{SDF}%
-  {morekeywords={attributes,if,then,else, true, false}}
+  {alsolanguage=Stratego,
+    morekeywords={attributes},%
+    otherkeywords={:=}}
 
 \lstnewenvironment{agsdf}
    {\lstset{language=[AG]SDF,mathescape=true}}

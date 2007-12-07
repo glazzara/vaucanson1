@@ -5,7 +5,7 @@
 % ---- Start of 'updates'  ----
 %
 % To produce Type 1 fonts in the document plus allow for 'normal LaTeX accenting' in the critical areas;
-% title, author block, section-heads, confname, etc. etc. 
+% title, author block, section-heads, confname, etc. etc.
 % i.e. the whole purpose of this version update is to NOT resort to 'inelegant accent patches'.
 % After much research, three extra .sty packages were added to the the tail (ae, aecompl, aeguill) to solve,
 % in particular, the accenting problem(s). We _could_ ask authors (via instructions/sample file) to 'include' these in
@@ -120,17 +120,17 @@
 \advance\evensidemargin by -1in % Correct for LaTeX gratuitousness
 \marginparwidth 0pt             % Margin pars are not allowed.
 \marginparsep 11pt              % Horizontal space between outer margin and
-                                % marginal note
+				% marginal note
 
-                                % Top of page:
+				% Top of page:
 \topmargin 4.5pc                % Nominal distance from top of page to top of
-                                % box containing running head.
+				% box containing running head.
 \advance\topmargin by -1in      % Correct for LaTeX gratuitousness
 \headheight 0pt                 % Height of box containing running head.
 \headsep 0pt                    % Space between running head and text.
-                                % Bottom of page:
+				% Bottom of page:
 \footskip 30pt                  % Distance from baseline of box containing foot
-                                % to baseline of last line of text.
+				% to baseline of last line of text.
 \@ifundefined{footheight}{\newdimen\footheight}{}% this is for LaTeX2e
 \footheight 12pt                % Height of box containing running foot.
 
@@ -143,52 +143,52 @@
 
 \textheight 666pt       % 9 1/4 column height
 \textwidth 42pc         % Width of text line.
-                        % For two-column mode:
+			% For two-column mode:
 \columnsep 2pc          %    Space between columns
 \columnseprule 0pt      %    Width of rule between columns.
 \hfuzz 1pt              % Allow some variation in column width, otherwise it's
-                        % too hard to typeset in narrow columns.
+			% too hard to typeset in narrow columns.
 
 \footnotesep 5.6pt      % Height of strut placed at the beginning of every
-                        % footnote =3D height of normal \footnotesize strut,
-                        % so no extra space between footnotes.
+			% footnote =3D height of normal \footnotesize strut,
+			% so no extra space between footnotes.
 
 \skip\footins 8.1pt plus 4pt minus 2pt  % Space between last line of text and
-                                        % top of first footnote.
+					% top of first footnote.
 \floatsep 11pt plus 2pt minus 2pt       % Space between adjacent floats moved
-                                        % to top or bottom of text page.
+					% to top or bottom of text page.
 \textfloatsep 18pt plus 2pt minus 4pt   % Space between main text and floats
-                                        % at top or bottom of page.
+					% at top or bottom of page.
 \intextsep 11pt plus 2pt minus 2pt      % Space between in-text figures and
-                                        % text.
+					% text.
 \@ifundefined{@maxsep}{\newdimen\@maxsep}{}% this is for LaTeX2e
 \@maxsep 18pt                           % The maximum of \floatsep,
-                                        % \textfloatsep and \intextsep (minus
-                                        % the stretch and shrink).
+					% \textfloatsep and \intextsep (minus
+					% the stretch and shrink).
 \dblfloatsep 11pt plus 2pt minus 2pt    % Same as \floatsep for double-column
-                                        % figures in two-column mode.
+					% figures in two-column mode.
 \dbltextfloatsep 18pt plus 2pt minus 4pt% \textfloatsep for double-column
-                                        % floats.
+					% floats.
 \@ifundefined{@dblmaxsep}{\newdimen\@dblmaxsep}{}% this is for LaTeX2e
 \@dblmaxsep 18pt                        % The maximum of \dblfloatsep and
-                                        % \dbltexfloatsep.
+					% \dbltexfloatsep.
 \@fptop 0pt plus 1fil    % Stretch at top of float page/column. (Must be
-                         % 0pt plus ...)
+			 % 0pt plus ...)
 \@fpsep 8pt plus 2fil    % Space between floats on float page/column.
 \@fpbot 0pt plus 1fil    % Stretch at bottom of float page/column. (Must be
-                         % 0pt plus ... )
+			 % 0pt plus ... )
 \@dblfptop 0pt plus 1fil % Stretch at top of float page. (Must be 0pt plus ...)
 \@dblfpsep 8pt plus 2fil % Space between floats on float page.
 \@dblfpbot 0pt plus 1fil % Stretch at bottom of float page. (Must be
-                         % 0pt plus ... )
+			 % 0pt plus ... )
 \marginparpush 5pt       % Minimum vertical separation between two marginal
-                         % notes.
+			 % notes.
 
 \parskip 0pt plus 1pt            % Extra vertical space between paragraphs.
 \parindent 9pt  % GM July 2000 / was 0pt - width of paragraph indentation.
 \partopsep 2pt plus 1pt minus 1pt% Extra vertical space, in addition to
-                                 % \parskip and \topsep, added when user
-                                 % leaves blank line before environment.
+				 % \parskip and \topsep, added when user
+				 % leaves blank line before environment.
 
 \@lowpenalty   51       % Produced by \nopagebreak[1] or \nolinebreak[1]
 \@medpenalty  151       % Produced by \nopagebreak[2] or \nolinebreak[2]
@@ -306,7 +306,7 @@
 \newfont{\secfnt}{ptmb8t at 12pt}
 \newfont{\secit}{ptmbi8t at 12pt}    %13 Jan 00 gkmt
 \newfont{\subsecfnt}{ptmri8t at 11pt}
-\newfont{\subsecit}{ptmbi8t at 11pt}  % 
+\newfont{\subsecit}{ptmbi8t at 11pt}  %
 \newfont{\ttlfnt}{phvb8t at 18pt}
 \newfont{\ttlit}{phvbo8t at 18pt}    % GM 2/4/2000
 \newfont{\subttlfnt}{phvr8t at 14pt}
@@ -405,7 +405,7 @@
 
 \def\verse{\let\\=\@centercr
   \list{}{\itemsep\z@ \itemindent -1.5em\listparindent \itemindent
-          \rightmargin\leftmargin\advance\leftmargin 1.5em}\item[]}
+	  \rightmargin\leftmargin\advance\leftmargin 1.5em}\item[]}
 \let\endverse\endlist
 
 \def\quotation{\list{}{\listparindent 1.5em
@@ -495,7 +495,7 @@
   \hrule width .5\columnwidth   % (was .4) updated Gerry March 20 2007
   \kern 2.6\p@}                 % The \hrule has default height of .4pt % (was .4) updated Gerry March 20 2007
 % ------
-\long\def\@makefntext#1{\noindent 
+\long\def\@makefntext#1{\noindent
 %\hbox to .5em{\hss$^{\@thefnmark}$}#1}   % original
 \hbox to .5em{\hss\textsuperscript{\@thefnmark}}#1}  % C. Clifton / GM Oct. 2nd. 2002
 % -------
@@ -504,7 +504,7 @@
 #1}
 
 \long\def\@maketitlenotetext#1#2{\noindent
-            \hbox to 1.8em{\hss$^{#1}$}#2}
+	    \hbox to 1.8em{\hss$^{#1}$}#2}
 
 \setcounter{topnumber}{2}
 \def\topfraction{.7}
@@ -714,52 +714,52 @@
 \ifnum\titlenotecount>0 % was =1
     \insert\footins{%
     \reset@font\footnotesize
-        \interlinepenalty\interfootnotelinepenalty
-        \splittopskip\footnotesep
-        \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
-        \hsize\columnwidth \@parboxrestore
-        \protected@edef\@currentlabel{%
-        }%
-        \color@begingroup
+	\interlinepenalty\interfootnotelinepenalty
+	\splittopskip\footnotesep
+	\splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+	\hsize\columnwidth \@parboxrestore
+	\protected@edef\@currentlabel{%
+	}%
+	\color@begingroup
 \ifnum\titlenotecount=1
       \@maketntext{%
-         \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\@finalstrut\strutbox}%
 \fi
 \ifnum\titlenotecount=2
       \@maketntext{%
       \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\@finalstrut\strutbox}%
 \fi
 \ifnum\titlenotecount=3
       \@maketntext{%
-         \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\@finalstrut\strutbox}%
 \fi
 \ifnum\titlenotecount=4
       \@maketntext{%
-         \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\S$}\rule\z@\footnotesep\ignorespaces\the\tntoksfour\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\S$}\rule\z@\footnotesep\ignorespaces\the\tntoksfour\@finalstrut\strutbox}%
 \fi
 \ifnum\titlenotecount=5
       \@maketntext{%
-         \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\S$}\rule\z@\footnotesep\ignorespaces\the\tntoksfour\par\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\S$}\rule\z@\footnotesep\ignorespaces\the\tntoksfour\par\@finalstrut\strutbox}%
 \@maketntext{%
-         \raisebox{4pt}{$\P$}\rule\z@\footnotesep\ignorespaces\the\tntoksfive\@finalstrut\strutbox}%
+	 \raisebox{4pt}{$\P$}\rule\z@\footnotesep\ignorespaces\the\tntoksfive\@finalstrut\strutbox}%
 \fi
    \color@endgroup} %g}
 \fi
@@ -794,15 +794,15 @@
 
 \def\@category#1#2#3[#4]{%
     \begingroup
-        \let\and\relax
-            #1 [\textbf{#2}]%
-            \if!#4!%
-                \if!#3!\else : #3\fi
-            \else
-                :\space
-                \if!#3!\else #3\kern\z@---\hskip\z@\fi
-                \textit{#4}%
-            \fi
+	\let\and\relax
+	    #1 [\textbf{#2}]%
+	    \if!#4!%
+		\if!#3!\else : #3\fi
+	    \else
+		:\space
+		\if!#3!\else #3\kern\z@---\hskip\z@\fi
+		\textit{#4}%
+	    \fi
     \endgroup
 }
 %
@@ -848,9 +848,9 @@
     \parskip 0pt % GM July 2000 (for tighter spacing)
     \trivlist
     \item[%
-        \hskip 10\p@
-        \hskip \labelsep
-        {{\sc #1}\hskip 5\p@\relax#2.}%
+	\hskip 10\p@
+	\hskip \labelsep
+	{{\sc #1}\hskip 5\p@\relax#2.}%
     ]
     \it
 }
@@ -858,14 +858,14 @@
     \parskip 0pt % GM July 2000 (for tighter spacing)
     \trivlist
     \item[%
-        \hskip 10\p@
-        \hskip \labelsep
-        {\sc #1\ #2\             % This mod by Gerry to enumerate corollaries
+	\hskip 10\p@
+	\hskip \labelsep
+	{\sc #1\ #2\             % This mod by Gerry to enumerate corollaries
    \setbox\@tempboxa\hbox{(#3)}  % and bracket the 'corollary title'
-        \ifdim \wd\@tempboxa>\z@ % and retain the correct numbering of e.g. theorems
-            \hskip 5\p@\relax    % if they occur 'around' said corollaries.
-            \box\@tempboxa       % Gerry - Nov. 1999.
-        \fi.}%
+	\ifdim \wd\@tempboxa>\z@ % and retain the correct numbering of e.g. theorems
+	    \hskip 5\p@\relax    % if they occur 'around' said corollaries.
+	    \box\@tempboxa       % Gerry - Nov. 1999.
+	\fi.}%
     ]
     \it
 }
@@ -894,9 +894,9 @@
 \def\@proof{%
     \trivlist
     \item[%
-        \hskip 10\p@
-        \hskip \labelsep
-        {\sc Proof.}%
+	\hskip 10\p@
+	\hskip \labelsep
+	{\sc Proof.}%
     ]
     \ignorespaces
 }
@@ -909,19 +909,19 @@
     \unskip
     \kern 10\p@
     \begingroup
-        \unitlength\p@
-        \linethickness{.4\p@}%
-        \framebox(6,6){}%
+	\unitlength\p@
+	\linethickness{.4\p@}%
+	\framebox(6,6){}%
     \endgroup
     \global\@qededtrue
 }
 
 \def\newdef#1#2{%
     \expandafter\@ifdefinable\csname #1\endcsname
-        {\@definecounter{#1}%
-         \expandafter\xdef\csname the#1\endcsname{\@thmcounter{#1}}%
-         \global\@namedef{#1}{\@defthm{#1}{#2}}%
-         \global\@namedef{end#1}{\@endtheorem}%
+	{\@definecounter{#1}%
+	 \expandafter\xdef\csname the#1\endcsname{\@thmcounter{#1}}%
+	 \global\@namedef{#1}{\@defthm{#1}{#2}}%
+	 \global\@namedef{end#1}{\@endtheorem}%
     }%
 }
 \def\@defthm#1#2{%
@@ -935,22 +935,22 @@
 \def\@ydefthm#1#2[#3]{%
     \trivlist
     \item[%
-        \hskip 10\p@
-        \hskip \labelsep
-        {\it #2%
-         \savebox\@tempboxa{#3}%
-         \ifdim \wd\@tempboxa>\z@
-            \ \box\@tempboxa
-         \fi.%
-        }]%
+	\hskip 10\p@
+	\hskip \labelsep
+	{\it #2%
+	 \savebox\@tempboxa{#3}%
+	 \ifdim \wd\@tempboxa>\z@
+	    \ \box\@tempboxa
+	 \fi.%
+	}]%
     \ignorespaces
 }
 \def\@begindef#1#2{%
     \trivlist
     \item[%
-        \hskip 10\p@
-        \hskip \labelsep
-        {\it #1\ \rm #2.}%
+	\hskip 10\p@
+	\hskip \labelsep
+	{\it #1\ \rm #2.}%
     ]%
 }
 \def\theequation{\arabic{equation}}
@@ -975,7 +975,7 @@
 \setcounter{secnumdepth}{3}
 \def\part{%
     \@startsection{part}{9}{\z@}{-10\p@ \@plus -4\p@ \@minus -2\p@}
-        {4\p@}{\normalsize\@ucheadtrue}%
+	{4\p@}{\normalsize\@ucheadtrue}%
 }
 \def\section{%
     \@startsection{section}{1}{\z@}{-10\p@ \@plus -4\p@ \@minus -2\p@}% GM
@@ -1005,85 +1005,85 @@
 }
 \let\@period=.
 \def\@startsection#1#2#3#4#5#6{%
-        \if@noskipsec  %gkmt, 11 aug 99
-        \global\let\@period\@empty
-        \leavevmode
-        \global\let\@period.%
+	\if@noskipsec  %gkmt, 11 aug 99
+	\global\let\@period\@empty
+	\leavevmode
+	\global\let\@period.%
     \fi
       \par %
     \@tempskipa #4\relax
     \@afterindenttrue
     \ifdim \@tempskipa <\z@
-        \@tempskipa -\@tempskipa
-        \@afterindentfalse
+	\@tempskipa -\@tempskipa
+	\@afterindentfalse
     \fi
     \if@nobreak
     \everypar{}%
     \else
-        \addpenalty\@secpenalty
-        \addvspace\@tempskipa
+	\addpenalty\@secpenalty
+	\addvspace\@tempskipa
     \fi
 \parskip=0pt % GM July 2000 (non numbered) section heads
     \@ifstar
-        {\@ssect{#3}{#4}{#5}{#6}}
-        {\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}%
+	{\@ssect{#3}{#4}{#5}{#6}}
+	{\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}%
 }
 \def\@sect#1#2#3#4#5#6[#7]#8{%
     \ifnum #2>\c@secnumdepth
-        \let\@svsec\@empty
+	\let\@svsec\@empty
     \else
-        \refstepcounter{#1}%
-        \edef\@svsec{%
-            \begingroup
-                %\ifnum#2>2 \noexpand\rm \fi % changed to next 29 July 2002 gkmt
-            \ifnum#2>2 \noexpand#6 \fi
-                \csname the#1\endcsname
-            \endgroup
-            \ifnum #2=1\relax .\fi
-            \hskip 1em
-        }%
+	\refstepcounter{#1}%
+	\edef\@svsec{%
+	    \begingroup
+		%\ifnum#2>2 \noexpand\rm \fi % changed to next 29 July 2002 gkmt
+	    \ifnum#2>2 \noexpand#6 \fi
+		\csname the#1\endcsname
+	    \endgroup
+	    \ifnum #2=1\relax .\fi
+	    \hskip 1em
+	}%
     \fi
     \@tempskipa #5\relax
     \ifdim \@tempskipa>\z@
-        \begingroup
-            #6\relax
-            \@hangfrom{\hskip #3\relax\@svsec}%
-            \begingroup
-                \interlinepenalty \@M
-                \if@uchead
-                    \uppercase{#8}%
-                \else
-                    #8%
-                \fi
-                \par
-            \endgroup
-        \endgroup
-        \csname #1mark\endcsname{#7}%
-        \vskip -12pt  %gkmt, 11 aug 99 and GM July 2000 (was -14) - numbered section head spacing
+	\begingroup
+	    #6\relax
+	    \@hangfrom{\hskip #3\relax\@svsec}%
+	    \begingroup
+		\interlinepenalty \@M
+		\if@uchead
+		    \uppercase{#8}%
+		\else
+		    #8%
+		\fi
+		\par
+	    \endgroup
+	\endgroup
+	\csname #1mark\endcsname{#7}%
+	\vskip -12pt  %gkmt, 11 aug 99 and GM July 2000 (was -14) - numbered section head spacing
 \addcontentsline{toc}{#1}{%
-            \ifnum #2>\c@secnumdepth \else
-                \protect\numberline{\csname the#1\endcsname}%
-            \fi
-            #7%
-        }%
+	    \ifnum #2>\c@secnumdepth \else
+		\protect\numberline{\csname the#1\endcsname}%
+	    \fi
+	    #7%
+	}%
     \else
-        \def\@svsechd{%
-            #6%
-            \hskip #3\relax
-            \@svsec
-            \if@uchead
-                \uppercase{#8}%
-            \else
-                #8%
-            \fi
-            \csname #1mark\endcsname{#7}%
-            \addcontentsline{toc}{#1}{%
-                \ifnum #2>\c@secnumdepth \else
-                    \protect\numberline{\csname the#1\endcsname}%
-                \fi
-                #7%
-            }%
-        }%
+	\def\@svsechd{%
+	    #6%
+	    \hskip #3\relax
+	    \@svsec
+	    \if@uchead
+		\uppercase{#8}%
+	    \else
+		#8%
+	    \fi
+	    \csname #1mark\endcsname{#7}%
+	    \addcontentsline{toc}{#1}{%
+		\ifnum #2>\c@secnumdepth \else
+		    \protect\numberline{\csname the#1\endcsname}%
+		\fi
+		#7%
+	    }%
+	}%
     \fi
     \@xsect{#5}\hskip 1pt
     \par
@@ -1091,52 +1091,52 @@
 \def\@xsect#1{%
     \@tempskipa #1\relax
     \ifdim \@tempskipa>\z@
-        \par
-        \nobreak
-        \vskip \@tempskipa
-        \@afterheading
+	\par
+	\nobreak
+	\vskip \@tempskipa
+	\@afterheading
     \else
-        \global\@nobreakfalse
-        \global\@noskipsectrue
-        \everypar{%
-            \if@noskipsec
-                \global\@noskipsecfalse
-                \clubpenalty\@M
-                \hskip -\parindent
-                \begingroup
-                    \@svsechd
-                    \@period
-                \endgroup
-                \unskip
-                \@tempskipa #1\relax
-                \hskip -\@tempskipa
-            \else
-                \clubpenalty \@clubpenalty
-                \everypar{}%
-            \fi
-        }%
+	\global\@nobreakfalse
+	\global\@noskipsectrue
+	\everypar{%
+	    \if@noskipsec
+		\global\@noskipsecfalse
+		\clubpenalty\@M
+		\hskip -\parindent
+		\begingroup
+		    \@svsechd
+		    \@period
+		\endgroup
+		\unskip
+		\@tempskipa #1\relax
+		\hskip -\@tempskipa
+	    \else
+		\clubpenalty \@clubpenalty
+		\everypar{}%
+	    \fi
+	}%
     \fi
     \ignorespaces
 }
 \def\@trivlist{%
     \@topsepadd\topsep
     \if@noskipsec
-        \global\let\@period\@empty
-        \leavevmode
-        \global\let\@period.%
+	\global\let\@period\@empty
+	\leavevmode
+	\global\let\@period.%
     \fi
     \ifvmode
-        \advance\@topsepadd\partopsep
+	\advance\@topsepadd\partopsep
     \else
-        \unskip
-        \par
+	\unskip
+	\par
     \fi
     \if@inlabel
-        \@noparitemtrue
-        \@noparlisttrue
+	\@noparitemtrue
+	\@noparlisttrue
     \else
-        \@noparlistfalse
-        \@topsep\@topsepadd
+	\@noparlistfalse
+	\@topsep\@topsepadd
     \fi
     \advance\@topsep \parskip
     \leftskip\z@skip
@@ -1169,13 +1169,13 @@
 }
 \def\start@cite#1#2{%
     \edef\citeauthoryear##1##2##3{%
-        ###1%
-        \ifnum#2=\z@ \else\ ###2\fi
+	###1%
+	\ifnum#2=\z@ \else\ ###2\fi
     }%
     \ifnum#1=\thr@@
-        \let\@@cite\@citeyear
+	\let\@@cite\@citeyear
     \else
-        \let\@@cite\@citenormal
+	\let\@@cite\@citenormal
     \fi
     \@ifstar{\@citeNB\@@cite}{\@normalcite\@@cite}%
 }
@@ -1192,85 +1192,85 @@
 \def\citeN{%
     \@citeRB
     \def\citeauthoryear##1##2##3{##1\ [##3%
-        \def\reserved@a{##1}%
-        \def\citeauthoryear####1####2####3{%
-            \def\reserved@b{####1}%
-            \ifx\reserved@a\reserved@b
-                ####3%
-            \else
-                \errmessage{Package acmart Error: author mismatch
-                         in \string\citeN^^J^^J%
-                    See the acmart package documentation for explanation}%
-            \fi
-        }%
+	\def\reserved@a{##1}%
+	\def\citeauthoryear####1####2####3{%
+	    \def\reserved@b{####1}%
+	    \ifx\reserved@a\reserved@b
+		####3%
+	    \else
+		\errmessage{Package acmart Error: author mismatch
+			 in \string\citeN^^J^^J%
+		    See the acmart package documentation for explanation}%
+	    \fi
+	}%
     }%
     \@ifstar\@citeyear\@citeyear
 }
 \def\shortciteN{%
     \@citeRB
     \def\citeauthoryear##1##2##3{##2\ [##3%
-        \def\reserved@a{##2}%
-        \def\citeauthoryear####1####2####3{%
-            \def\reserved@b{####2}%
-            \ifx\reserved@a\reserved@b
-                ####3%
-            \else
-                \errmessage{Package acmart Error: author mismatch
-                         in \string\shortciteN^^J^^J%
-                    See the acmart package documentation for explanation}%
-            \fi
-        }%
+	\def\reserved@a{##2}%
+	\def\citeauthoryear####1####2####3{%
+	    \def\reserved@b{####2}%
+	    \ifx\reserved@a\reserved@b
+		####3%
+	    \else
+		\errmessage{Package acmart Error: author mismatch
+			 in \string\shortciteN^^J^^J%
+		    See the acmart package documentation for explanation}%
+	    \fi
+	}%
     }%
     \@ifstar\@citeyear\@citeyear  % GM July 2000
 }
 \def\@citenormal{%
     \@ifnextchar [{\@tempswatrue\@citex;}
-                  {\@tempswafalse\@citex,[]}% % GM July 2000
+		  {\@tempswafalse\@citex,[]}% % GM July 2000
 }
 \def\@citeyear{%
     \@ifnextchar [{\@tempswatrue\@citex,}%
-                  {\@tempswafalse\@citex,[]}%
+		  {\@tempswafalse\@citex,[]}%
 }
 \def\@citex#1[#2]#3{%
     \let\@citea\@empty
     \@cite{%
-        \@for\@citeb:=#3\do{%
-            \@citea
-            \def\@citea{#1 }%
-            \edef\@citeb{\expandafter\@iden\@citeb}%
-            \if@filesw
-                \immediate\write\@auxout{\string\citation{\@citeb}}%
-            \fi
-            \@ifundefined{b@\@citeb}{%
-                {\bf ?}%
-                \@warning{%
-                    Citation `\@citeb' on page \thepage\space undefined%
-                }%
-            }%
-            {\csname b@\@citeb\endcsname}%
-        }%
+	\@for\@citeb:=#3\do{%
+	    \@citea
+	    \def\@citea{#1 }%
+	    \edef\@citeb{\expandafter\@iden\@citeb}%
+	    \if@filesw
+		\immediate\write\@auxout{\string\citation{\@citeb}}%
+	    \fi
+	    \@ifundefined{b@\@citeb}{%
+		{\bf ?}%
+		\@warning{%
+		    Citation `\@citeb' on page \thepage\space undefined%
+		}%
+	    }%
+	    {\csname b@\@citeb\endcsname}%
+	}%
     }{#2}%
 }
 \let\@biblabel\@gobble
 \newdimen\bibindent
 \setcounter{enumi}{1}
 \bibindent=0em
-\def\thebibliography#1{% 
+\def\thebibliography#1{%
 \ifnum\addauflag=0\addauthorsection\global\addauflag=1\fi
      \section[References]{%    <=== OPTIONAL ARGUMENT ADDED HERE
-        {References} % was uppercased but this affects pdf bookmarks (SP/GM October 2004)
-          {\vskip -9pt plus 1pt} % GM Nov. 2006 / GM July 2000 (for somewhat tighter spacing) 
-         \@mkboth{{\refname}}{{\refname}}%
+	{References} % was uppercased but this affects pdf bookmarks (SP/GM October 2004)
+	  {\vskip -9pt plus 1pt} % GM Nov. 2006 / GM July 2000 (for somewhat tighter spacing)
+	 \@mkboth{{\refname}}{{\refname}}%
      }%
      \list{[\arabic{enumi}]}{%
-         \settowidth\labelwidth{[#1]}%
-         \leftmargin\labelwidth
-         \advance\leftmargin\labelsep
-         \advance\leftmargin\bibindent
-         \parsep=0pt\itemsep=1pt % GM July 2000
-         \itemindent -\bibindent
-         \listparindent \itemindent
-         \usecounter{enumi}
+	 \settowidth\labelwidth{[#1]}%
+	 \leftmargin\labelwidth
+	 \advance\leftmargin\labelsep
+	 \advance\leftmargin\bibindent
+	 \parsep=0pt\itemsep=1pt % GM July 2000
+	 \itemindent -\bibindent
+	 \listparindent \itemindent
+	 \usecounter{enumi}
      }%
      \let\newblock\@empty
      \raggedright % GM July 2000
@@ -1302,9 +1302,9 @@
        \vskip-\@tempdima
        \vskip \skip\footins
        \color@begingroup
-         \normalcolor
-         \footnoterule
-         \unvbox \footins
+	 \normalcolor
+	 \footnoterule
+	 \unvbox \footins
        \color@endgroup
        }%
    \fi
@@ -1341,7 +1341,7 @@
 \ifnum\titlenotecount=5
 \raisebox{9pt}{$\P$}
 \fi
-         \@titlenotetext
+	 \@titlenotetext
 }}
 
 \long\def\@titlenotetext#1{\insert\footins{%
@@ -1396,11 +1396,11 @@
 % font. Conversely the letter-character font would be correct but, e.g. a 'bar' would appear superimposed on the
 % character instead of, say, an unlaut/diaresis. Sometimes the letter-character would NOT appear at all.
 % Using [T1]{fontenc} outright was not an option as this caused 99% of the authors to 'produce' a Type-3 (bitmapped)
-% PDF file - useless for production. 
+% PDF file - useless for production.
 %
-% For proper (font) accenting we NEED these packages to be part of the .cls file i.e. 'ae', 'aecompl' and 'aeguil' 
+% For proper (font) accenting we NEED these packages to be part of the .cls file i.e. 'ae', 'aecompl' and 'aeguil'
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%% This is file `ae.sty' 
+%% This is file `ae.sty'
 \def\fileversion{1.3}
 \def\filedate{2001/02/12}
 \NeedsTeXFormat{LaTeX2e}
@@ -1421,7 +1421,7 @@
     \renewcommand{\ttdefault}{aett}
 \fi
 \endinput
-%% 
+%%
 %% End of file `ae.sty'.
 %
 %
@@ -1430,7 +1430,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %\ProvidesPackage{aecompl}[\filedate\space\fileversion\space   % GM
 %T1 Complements for AE fonts (D. Roegel)]                      % GM -- keeping the log file clean(er)
- 
+
 \def\@ae@compl#1{{\fontencoding{T1}\fontfamily{cmr}\selectfont\symbol{#1}}}
 \def\guillemotleft{\@ae@compl{19}}
 \def\guillemotright{\@ae@compl{20}}
@@ -1450,18 +1450,18 @@
 \endinput
 %
 %
-%% This is file `aeguill.sty' 
+%% This is file `aeguill.sty'
 % This file gives french guillemets (and not guillemots!)
-% built with the Polish CMR fonts (default), WNCYR fonts, the LASY fonts 
-% or with the EC fonts. 
+% built with the Polish CMR fonts (default), WNCYR fonts, the LASY fonts
+% or with the EC fonts.
 % This is useful in conjunction with the ae package
 % (this package loads the ae package in case it has not been loaded)
 %  and with or without the french(le) package.
 %
 % In order to get the guillemets, it is necessary to either type
 % \guillemotleft and \guillemotright, or to use an 8 bit encoding
-% (such as ISO-Latin1) which selects these two commands, 
-% or, if you use the french package (but not the frenchle package), 
+% (such as ISO-Latin1) which selects these two commands,
+% or, if you use the french package (but not the frenchle package),
 % to type << or >>.
 %
 % By default, you get the Polish CMR guillemets; if this package is loaded
@@ -1475,7 +1475,7 @@
 % and these guillemets are very close in shape to the EC guillemets.
 % There are no free Type 1 versions of the EC fonts.
 %
-% Support for Polish CMR guillemets was kindly provided by 
+% Support for Polish CMR guillemets was kindly provided by
 % Rolf Niepraschk <niepraschk@ptb.de> in version 0.99 (2000/05/22).
 % Bernd Raichle provided extensive simplifications to the code
 % for version 1.00.
@@ -1520,7 +1520,7 @@
 
 \let\guill@verbatim@font\verbatim@font
 \def\verbatim@font{\guill@verbatim@font\ecguills{cmtt}%
-                   \let\guillemotleft\@oguills\let\guillemotright\@fguills}
+		   \let\guillemotleft\@oguills\let\guillemotright\@fguills}
 
 \begingroup \catcode`\<=13 \catcode`\>=13
 \def\x{\endgroup
@@ -1532,32 +1532,32 @@
   \def\selectguillfont{\fontencoding{T1}\fontfamily{#1}\selectfont}%
   \def\@oguills{{\selectguillfont\symbol{19}}}%
   \def\@fguills{{\selectguillfont\symbol{20}}}%
-  } 
+  }
 
 \newcommand{\aeguills}{%
   \ae@guills
   % We redefine \guillemotleft and \guillemotright
-  % in order to catch them when they are used 
+  % in order to catch them when they are used
   % with \DeclareInputText (in latin1.def for instance)
   % We use \auxWARNINGi as a safe indicator that french.sty is used.
   \gdef\guillemotleft{\ifx\auxWARNINGi\undefined
-                         \@oguills % neither french.sty nor frenchle.sty
-                      \else
-                         \ifx\aeguillfrenchdefault\frenchname
-                           \ae@lfguill  % french.sty
-                         \else
-                           \@oguills    % frenchle.sty
-                         \fi
-                      \fi}%
+			 \@oguills % neither french.sty nor frenchle.sty
+		      \else
+			 \ifx\aeguillfrenchdefault\frenchname
+			   \ae@lfguill  % french.sty
+			 \else
+			   \@oguills    % frenchle.sty
+			 \fi
+		      \fi}%
   \gdef\guillemotright{\ifx\auxWARNINGi\undefined
-                         \@fguills % neither french.sty nor frenchle.sty
-                       \else
-                         \ifx\aeguillfrenchdefault\frenchname
-                           \ae@rfguill  % french.sty
-                         \else
-                           \@fguills    % frenchle.sty
-                         \fi
-                       \fi}%
+			 \@fguills % neither french.sty nor frenchle.sty
+		       \else
+			 \ifx\aeguillfrenchdefault\frenchname
+			   \ae@rfguill  % french.sty
+			 \else
+			   \@fguills    % frenchle.sty
+			 \fi
+		       \fi}%
   }
 
 %
@@ -1569,12 +1569,12 @@
 }{% cm
   \newcommand{\ae@guills}{%
     \def\selectguillfont{\fontencoding{U}\fontfamily{lasy}%
-            \fontseries{m}\fontshape{n}\selectfont}%
+	    \fontseries{m}\fontshape{n}\selectfont}%
     \def\@oguills{\leavevmode\nobreak
-                \hbox{\selectguillfont (\kern-.20em(\kern.20em}\nobreak}%
+		\hbox{\selectguillfont (\kern-.20em(\kern.20em}\nobreak}%
     \def\@fguills{\leavevmode\nobreak
-                \hbox{\selectguillfont \kern.20em)\kern-.2em)}%
-                \ifdim\fontdimen\@ne\font>\z@\/\fi}}%
+		\hbox{\selectguillfont \kern.20em)\kern-.2em)}%
+		\ifdim\fontdimen\@ne\font>\z@\/\fi}}%
 }{% cyr
   \newcommand{\ae@guills}{%
     \def\selectguillfont{\fontencoding{OT2}\fontfamily{wncyr}\selectfont}%
@@ -1600,4 +1600,3 @@
 \endinput
 %
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-

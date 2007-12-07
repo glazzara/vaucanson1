@@ -62,7 +62,7 @@ sub learn_from_bib ($)
 	  my $older = '\Q' . join ('\E|\Q', split (/,\s*/, $1)) . '\E';
 	  $updater = $updater
 	    # Unfortunately look-behinds must be fixed width.
-	    . "s!(?<=[{, ])${older}(?=[.}])!$key!gm;\n";
+	    . "s!(?<=[{, ])(?:${older})(?=[.}])!$key!gm;\n";
 	}
     }
   print "$updater\n";

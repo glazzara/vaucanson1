@@ -10,7 +10,7 @@ dloaddir = /lrde/dload/papers
 dload_DATA = lrde.pdf bib/lrde.bib
 
 
-CLEANFILES = $(papers_DATA) $(dload_DATA) contents.html contents.txt list.bib \
+CLEANFILES = lrde.pdf lrde-private.pdf contents.html contents.txt list.bib \
 list.pdf diffs.patch contents.bib contents_bib.html
 
 all: check lrde.pdf
@@ -24,7 +24,8 @@ BIBS = lrde.bib csi.bib
 
 # We don't use the dependencies here so that all the checks are run.
 check:
-	$(MAKE) -k check-warning check-bib check-mnt-dload check-urllrde
+	$(MAKE) -k check-warning check-bib check-style \
+                   check-mnt-dload check-urllrde
 
 maintainer-check: check check-wiki
 
@@ -36,8 +37,15 @@ check-warning:
 
 check-bib:
 	$(QUIET)echo >&2 "*** Checking for invalid characters: ..."
-	$(QUIET)LC_ALL=C grep '[^[:print:][:blank:]]' bib/*.bib || exit 0
-	$(QUIET)echo >&2 "*** Checking for invalid characters: OK"
+	$(QUIET)LC_ALL=C grep '[^[:print:][:blank:]]' bib/*.bib && exit 1; \
+	echo >&2 "*** Checking for invalid characters: OK"
+
+check-style:
+	$(QUIET)echo >&2 "*** Checking for double-quotes: ..."
+	$(QUIET)for b in $(BIBS); do					\
+	  LC_ALL=C grep '=[	 ]*"' bib/$$b /dev/null && exit 1;	\
+	done;								\
+	echo >&2 "*** Checking for double-quotes: OK"
 
 check-mnt-dload:
 	$(QUIET)echo >&2 "*** Checking for BibTeX/PDF correspondance: ..."
@@ -85,6 +93,16 @@ check-wiki:
 	done; 									\
 	test -z "$$fail"
 
+
+## normalization
+
+bibneat = $(share_bin_dir)/bibneat
+.PHONY: neat
+neat:
+	for b in $(BIBS); do \
+	  $(bibneat) $(share_bib_dir)/$$b; \
+	done
+
 ## ------------------------------- ##
 ## lrde.pdf and lrde-private.pdf.  ##
 ## ------------------------------- ##
@@ -94,18 +112,24 @@ check-wiki:
 	$(QUIET)bibtex2html -q $<
 	$(QUIET)html2text -nobs $*.html | \
 	  sed -e 's/.*\[ bib .*//;/^==*$$/{s/.*//;q;}' >$@.tmp
-	mv $@.tmp $@
+	chmod a-w $@.tmp
+	mv -f $@.tmp $@
 
 # Create a LaTeX document to force the BibTeX check on lrde.bib.
 make_bib = $(share_bin_dir)/make-bib.pl
-%.tex: $(share_bib_dir)/%.bib $(make_bib)
+%.tex: $(share_bib_dir)/%.bib
 	perl $(make_bib) $(share_bib_dir)/$*.bib >$*.tmp
-	mv $*.tmp $*.tex
+	chmod a-w $*.tmp
+	mv -f $*.tmp $*.tex
 
-%-private.tex: $(share_bib_dir)/%.bib $(share_bin_dir)/make-bib.pl
+lrde.tex:  $(make_bib)
+
+%-private.tex: $(share_bib_dir)/%.bib
 	$(make_bib) --with-submitted $(share_bib_dir)/$*.bib >$*-private.tmp
-	mv $*-private.tmp $*-private.tex
+	chmod a-w $*-private.tmp
+	mv -f $*-private.tmp $*-private.tex
 
+lrde-private.tex:  $(make_bib)
 
 view: lrde.pdf
 	xpdf lrde.pdf
@@ -138,23 +162,29 @@ ci checkin: diff check
 .PHONY: update update-bib update-styles
 
 update: update-bib
-BIB_EXTERNALS = kernighan richie strategoxt
 update-bib:
-	cd bib && chmod a+w $(BIB_EXTERNALS:=.bib)
-	wget http://netlib.bell-labs.com/cm/cs/bib/bwk.bib -O bib/kernighan.bib
-	wget http://cm.bell-labs.com/cm/cs/bib/dmr.bib -O bib/richie.bib
-	wget http://www.cs.uu.nl/~visser/strategoxt/strategoxt.bib -O bib/strategoxt.bib
-# There are many missing commas in this bibtex.
-	cd bib && perl -pi -e 's/(.\})$/\1,/g' $(BIB_EXTERNALS:=.bib)
-# Avoid accidental edition.
-	cd bib && chmod a-w $(BIB_EXTERNALS:=.bib)
+	bin/update-bib
+
+# Sources.
+GASTEX_STYLES = http://www.lsv.ens-cachan.fr/~gastin/gastex
+FR_BIB_STYLES = http://www.lsv.ens-cachan.fr/~markey/BibTeX/bst
 
 update: update-styles
 update-styles:
-	wget http://www.lsv.ens-cachan.fr/~gastin/gastex/gastex.sty -O styles/gastex.sty
-	wget http://www.lsv.ens-cachan.fr/~gastin/gastex/gastex.pro -O styles/gastex.pro
+	wget $(GASTEX_STYLES)/gastex.sty -O styles/gastex.sty
+	wget $(GASTEX_STYLES)/gastex.pro -O styles/gastex.pro
 	wget http://igm.univ-mlv.fr/~lombardy/Vaucanson-G/vaucanson-g.tgz
 	tar zxvf vaucanson-g.tgz
 	rm vaucanson-g/VCManual.ps.gz
 	mv vaucanson-g/* styles/
 	rm -rf vaucanson-g vaucanson-g.tgz
+	wget $(FR_BIB_STYLES)/abbrv-fr.bst -O styles/abbrv-fr.bst
+	wget $(FR_BIB_STYLES)/abbrvnat-fr.bst -O styles/abbrvnat-fr.bst
+	wget $(FR_BIB_STYLES)/alpha-fr.bst -O styles/alpha-fr.bst
+	wget $(FR_BIB_STYLES)/apalike-fr.bst -O styles/apalike-fr.bst
+	wget $(FR_BIB_STYLES)/ieeetr-fr.bst -O styles/ieeetr-fr.bst
+	wget $(FR_BIB_STYLES)/plain-fr.bst -O styles/plain-fr.bst
+	wget $(FR_BIB_STYLES)/plainnat-fr.bst -O styles/plainnat-fr.bst
+	wget $(FR_BIB_STYLES)/siam-fr.bst -O styles/siam-fr.bst
+	wget $(FR_BIB_STYLES)/unsrt-fr.bst -O styles/unsrt-fr.bst
+	wget $(FR_BIB_STYLES)/unsrtnat-fr.bst -O styles/unsrtnat-fr.bst

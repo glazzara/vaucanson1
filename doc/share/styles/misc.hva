@@ -1,8 +1,4 @@
-\ifhevea
-  \usepackage{xspace}
-\else
-  \RequirePackage{xspace}
-\fi
+\RequirePackage{xspace}
 
 \newcommand{\lisp}{\textsc{Lisp}\xspace}
 \newcommand{\cl}{\textsc{Common} \textsc{Lisp}\xspace}

@@ -170,9 +170,11 @@ orig_pwd=`pwd`
 # http://lists.gnu.org/archive/html/automake-patches/2006-05/msg00008.html
 # We need space, tab and new line, in precisely that order.  And don't leave
 # trailing blanks.
+space=' '
+tab='	'
 newline='
 '
-IFS=" 	$newline"
+IFS="$space$tab$newline"
 
 # Systems which define $COMSPEC or $ComSpec use semicolons to separate
 # directories in TEXINPUTS -- except for Cygwin, where COMSPEC might be
@@ -264,9 +266,10 @@ absolute ()
       # Absolute paths don't need to be expanded.
       echo "$1"
       ;;
-   *) local rel="$orig_pwd/`func_dirname $1`"
+   *) local slashes=`echo "$1" | sed -n 's,.*[^/]\(/*\)$,\1,p'`
+      local rel="$orig_pwd/`func_dirname $1`"
       if test -d "$rel"; then
-	(cd "$rel" 2>/dev/null && echo `pwd`/`basename "$1"`);
+	(cd "$rel" 2>/dev/null && echo `pwd`/`basename "$1"`"$slashes");
       else
 	error 1 "not a directory: $rel"
       fi
@@ -465,7 +468,8 @@ out_lang_ext ()
 
 # Save TEXINPUTS so we can construct a new TEXINPUTS path for each file.
 # Likewise for bibtex and makeindex.
-tex_envvars="BIBINPUTS BSTINPUTS DVIPSHEADERS INDEXSTYLE TEXINPUTS"
+tex_envvars="BIBINPUTS BSTINPUTS DVIPSHEADERS INDEXSTYLE MFINPUTS MPINPUTS \
+TEXINPUTS TFMFONTS"
 for var in $tex_envvars; do
   eval ${var}_orig=\$$var
   export $var
@@ -550,13 +554,13 @@ move_to_dest ()
       # do the cmp in the first place to avoid a complaint from cp
       # if we try to copy a file onto itself.
       if test -d "$dest"; then
-        testdest="$dest/$file"
+	testdest="$dest/$file"
       else
-        testdest="$dest"
+	testdest="$dest"
       fi
       if cmp -s "$file" "$testdest"; then :; else
-        verbose "Moving $file to $dest"
-        mv "$file" "$dest"
+	verbose "Moving $file to $dest"
+	mv "$file" "$dest"
       fi
     fi
   done

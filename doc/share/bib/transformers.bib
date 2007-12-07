@@ -1,5 +1,35 @@
-
 @preamble{{\def\sortunder#1{}}}
+
+@inproceedings{bagge.03.rule,
+  author =	 {Otto Skrove Bagge and Magne Haveraaen},
+  title =	 {Domain-Specific Optimisation with User-Defined Rules
+                  in {CodeBoost}},
+  booktitle =	 {Proceedings of the 4th International Workshop on
+                  Rule-Based Programming (RULE'03)},
+  address =	 {Valencia, Spain},
+  series =	 {Electronic Notes in Theoretical Computer Science},
+  volume =	 {86/2},
+  publisher =	 {Elsevier},
+  editor =	 {Jean-Louis Giavitto and Pierre-Etienne Moreau},
+  year =	 2003,
+  lrdedoc =	 {comp/compilers/bagge.03.rule.pdf},
+}
+
+@InProceedings{bagge.03.scam,
+  author =	 {Bagge, Otto Skrove and Kalleberg, Karl Trygve and
+                  Haveraaen, Magne and Visser, Eelco},
+  title =	 {Design of the {CodeBoost} Transformation System for
+                  Domain-Specific Optimisation of {C++} Programs},
+  booktitle =	 {Third International Workshop on Source Code Analysis
+                  and Manipulation (SCAM 2003)},
+  editor =	 {Dave Binkley and Paolo Tonella},
+  year =	 2003,
+  month =	 {September},
+  address =	 {Amsterdam, The Netherlands},
+  publisher =	 {IEEE Computer Society Press},
+  pages =	 {65--75},
+  lrdedoc =	 {comp/compilers/bagge.03.scam.pdf},
+}
 
 @misc{bison,
   title =	 "Bison: {GNU} {LALR(1)} and {GLR} Parser Generator",
@@ -10,13 +40,14 @@
 }
 
 @Manual{camlp4.manual,
-  title = 	 {Camlp4 --- Reference Manual},
-  author = 	 {Daniel de Rauglaudre},
-  organization = {Institut National de Recherche en Informatique et Automatique},
-  edition = 	 {3.07},
-  month = 	 {Sept},
-  year = 	 {2003},
-  note = 	 {\url{http://pauillac.inria.fr/camlp4/manual/}},
+  title =	 {Camlp4 --- Reference Manual},
+  author =	 {Daniel de Rauglaudre},
+  organization = {Institut National de Recherche en Informatique et
+                  Automatique},
+  edition =	 {3.07},
+  month =	 {Sept},
+  year =	 2003,
+  note =	 {\url{http://pauillac.inria.fr/camlp4/manual/}},
 }
 
 @misc{cil.www,
@@ -56,6 +87,19 @@
   note =	 "\url{http://www-rocq.inria.fr/oscar/www/fnc2/}"
 }
 
+@article{heering.89.sigplan,
+  author =       {J. Heering and P. R. H. Hendriks and P. Klint and J. Rekers},
+  title =        {The Syntax Definition Formalism {SDF} - Reference Manual},
+  journal =      {SIGPLAN Notices},
+  volume =       24,
+  number =       11,
+  publisher =    {ACM Press},
+  address =      {New York, NY},
+  pages =        {43--75},
+  year =         1989,
+  url =          {citeseer.ist.psu.edu/heering92syntax.html}
+}
+
 @misc{irwin-generated,
   author =	 "Warwick Irwin and Neville Churcher",
   title =	 "A Generated Parser of {C++}",
@@ -74,23 +118,23 @@
 
 @Misc{iso.03.c++,
   author =	 {ISO/IEC},
-  title =	 {{ISO/IEC} 14882:2003 (E). Programming languages
-                  --- {C++}},
+  title =	 {{ISO/IEC} 14882:2003 (E). {Programming languages} ---
+                  {C++}},
   year =	 2003,
 }
 
 @Misc{iso.98.c++,
-  oldkeys =      {iso.98.cpp},
+  oldkeys =	 {iso.98.cpp},
   author =	 {ISO/IEC},
-  title =	 {{ISO/IEC} 14882:1998 (E). Programming languages
-                  --- {C++}},
+  title =	 {{ISO/IEC} 14882:1998 (E). {Programming languages} ---
+                  {C++}},
   year =	 1998,
 }
 
 @Misc{iso.99.c,
   author =	 {ISO/IEC},
-  title =	 {{ISO/IEC} 9899:1999 (E). Programming languages
-                  --- {C}},
+  title =	 {{ISO/IEC} 9899:1999 (E). {Programming languages} ---
+                  {C}},
   year =	 1999,
 }
 
@@ -110,13 +154,22 @@
 }
 
 @book{java,
-  title =	 "The Java$^{TM}$ Language Specification \emph{Second
-                  Edition}",
+  title =	 "The {Java}$^{TM}$ Language Specification
+                  \emph{Second Edition}",
   author =	 "James Gosling and Bill Joy and Guy Steele and Gilad
                   Bracha",
   publisher =	 "Addison-Wesley",
   note =	 "ISBN 0-201-31008-2",
   year =	 2000
+}
+
+@InJournal{knuth.65.ic,
+  author =	 "Donald E. Knuth",
+  title =	 {On the Translation of Languages from Left to Right},
+  pages =	 "607--639",
+  journal =	 {Information and Control},
+  year =	 {1965},
+  volume =       {8},
 }
 
 @article{jezequel.97.computer,
@@ -150,13 +203,22 @@
                   1978.",
 }
 
-@InJournal{knuth.65.ic,
-  author =	 "Donald E. Knuth",
-  title =	 {On the Translation of Languages from Left to Right},
-  pages =	 "607--639",
-  journal =	 {Information and Control},
-  year =	 {1965},
-  volume =       {8},
+@inproceedings{kalleberg.06.rstp,
+  oldkeys =	 {kalleberg-06f},
+  author =	 {Karl Trygve Kalleberg and Eelco Visser},
+  title =	 {Strategic Graph Rewriting: Transforming and
+                  Traversing Terms with References},
+  booktitle =	 {Proceedings of the 6th International Workshop on
+                  Reduction Strategies in Rewriting and Programming},
+  editors =	 {Sergio Antoy},
+  year =	 2006,
+  month =	 {August},
+  address =	 {Seattle, Washington},
+  urlpdf =	 {http://www.ii.uib.no/~karltk/phd/papers/wrs06.pdf},
+  urlbib =
+                  {http://www.ii.uib.no/~karltk/publications/kalleberg-06f.bib},
+  note =	 {Accepted for publication},
+  lrdedoc =	 {comp/lang/stratego/wrs06.pdf}
 }
 
 @Article{knuth.68.jmst,
@@ -184,6 +246,25 @@
   publisher =	 {Prentice-Hall, Inc.},
   address =	 {Upper Saddle River, NJ, USA},
   annote =	 {1296 pages, 9.3 x 7.0 x 1.9 inches, 4.0 pounds}
+}
+
+@article{micallef.94,
+  author =	 {Josephine Micallef and Gail E. Kaiser},
+  title =	 {Extending Attribute Grammars to Support
+                  Programming-in-the-Large},
+  journal =	 {ACM Transactions on Programming Languages and
+                  Systems},
+  volume =	 16,
+  number =	 5,
+  month =	 {September},
+  publisher =	 {ACM Press},
+  pages =	 {1572--1612},
+  year =	 1994,
+  keywords =	 {attribute evaluation, attribute grammar, include
+                  files, programming-in-the-large, separate
+                  compilation},
+  url =
+                  {http://citeseer.ist.psu.edu/micallef93extending.html}
 }
 
 @inproceedings{necula.2002.cc,
@@ -222,6 +303,27 @@
   title =	 "{P}rogram {T}ransformation.{O}rg",
   year =	 2000,
   url =		 "http://www.program-transformation.org"
+}
+
+@article{rodeh.99.jacm,
+  oldkeys =	 {rodeh99finding,rodeh.99},
+  author =	 {Michael Rodeh and Mooly Sagiv},
+  title =	 {Finding circular attributes in attribute grammars},
+  journal =	 {Journal of the ACM},
+  volume =	 46,
+  number =	 4,
+  pages =	 {556--575},
+  year =	 1999,
+  abstract =	 {The problem of finding the circular attributes in an
+                  attribute grammar is considered. Two algorithms are
+                  proposed: the first is polynomial but yields
+                  conservative results while the second is exact but
+                  is potentially exponential. It is also shown that
+                  finding the circular attributes is harder than
+                  testing circularity.},
+  keywords =	 {attribute grammar, circularity problem,
+                  computational complexity},
+  url =		 {citeseer.ist.psu.edu/sagiv99finding.html}
 }
 
 @MISC{stratego-library,
@@ -305,6 +407,25 @@
   year =	 1999
 }
 
+@inproceedings{waddington.05.ldta,
+  oldkeys =	 {WY05},
+  author =	 {D. G. Waddington and B. Yao},
+  title =	 {High Fidelity {C++} Code Transformation},
+  booktitle =	 {Proceedings of the 5th workshop on Language
+                  Descriptions, Tools and Applications (LDTA 2005)},
+  year =	 2005,
+  series =	 {Electronic Notes in Theoretical Computer Science},
+  address =	 {Edinburgh University, UK},
+  month =	 {April 3},
+  project =	 {Proteus},
+  urlldta =
+                  {http://www-i2.informatik.rwth-aachen.de/Events/LDTA2005/},
+  urlproteus =
+                  {http://www.bell-labs.com/user/dwaddington/proteus/index.htm},
+  urlbib =	 {WY05.bib},
+  lrdedoc =	 {comp/lang/stratego/waddington.05.ldta.pdf},
+}
+
 @article{werther.96.sigplan,
   oldkeys =	 {werther96modest},
   author =	 "Ben Werther and Damian Conway",
@@ -380,34 +501,4 @@
   year =	 2004,
   isbn =	 {3-540-23580-9},
   bibsource =	 {DBLP, http://dblp.uni-trier.de}
-}
-
-@inproceedings{waddington.05.ldta,
-  oldkeys         = {WY05},
-  author          = {D. G. Waddington and B. Yao},
-  title           = {High Fidelity {C++} Code Transformation},
-  booktitle       = {Proceedings of the 5th workshop on Language Descriptions, Tools and Applications (LDTA 2005)},
-  year            = {2005},
-  series          = {Electronic Notes in Theoretical Computer Science},
-  address         = {Edinburgh University, UK},
-  month           = {April 3},
-  project         = {Proteus},
-  urlldta         = {http://www-i2.informatik.rwth-aachen.de/Events/LDTA2005/},
-  urlproteus      = {http://www.bell-labs.com/user/dwaddington/proteus/index.htm},
-  urlbib          = {WY05.bib},
-  lrdedoc         = {comp/lang/stratego/waddington.05.ldta.pdf},
-}
-
-@inproceedings{kalleberg-06f,
-  author    = {Karl Trygve Kalleberg and Eelco Visser},
-  title     = {Strategic Graph Rewriting: Transforming and Traversing Terms with References},
-  booktitle = {Proceedings of the 6th International Workshop on Reduction Strategies in Rewriting and Programming},
-  editors   = {Sergio Antoy},
-  year      = 2006,
-  month     = {August},
-  address   = {Seattle, Washington},
-  urlpdf    = {http://www.ii.uib.no/~karltk/phd/papers/wrs06.pdf},
-  urlbib    = {http://www.ii.uib.no/~karltk/publications/kalleberg-06f.bib},
-  note      = {Accepted for publication},
-  lrdedoc   = {comp/lang/stratego/wrs06.pdf}
 }

@@ -16,7 +16,7 @@ foo.sty.  Je (Akim) n'ai pas encore les idées claires sur ce qui est
 le plus élégant, le plus pratique.  Je cherche, et je suis preneur
 d'opinions.
 
-Chose importante est très pénible : les fichiers hva ne sont pas
+Chose importante et très pénible : les fichiers hva ne sont pas
 protégés en double inclusion, et RequirePackage n'existe pas en
 HeVeA.  Résultat des courses, il faut faire des \usepackage, en
 faisant attention de ne pas en faire deux fois.  C'est très pénible

@@ -17,11 +17,9 @@
 %% etc. However, \email adds the "mailto:" part for you. See also the hyperref
 %% macro \href, and the url macro \url. "hyperref" requires "url".
 
-\ifhevea
-%% Don't do it now, we already used myhyperref  \usepackage{hyperref}
-\else
-  \RequirePackage{hyperref}
-\fi
+\RequirePackage{myhyperref}
+\RequirePackage{myifthen}
+\RequirePackage{myindex}
 
 \newcommand\strong[1]{\textbf{#1}}
 
@@ -49,10 +47,21 @@
   \fi}
 
 % Override HeVeA's \mailto which is not nice-looking.
-\@ifundefined{mailto}{\newcommand}{\renewcommand}
-\mailto[1]{%
-  \href{mailto:#1}{\nolinkurl{#1}}%
-}
+\ifx\mailto\undefined
+  \newcommand{\mailto}[1]{%
+    \href{mailto:#1}{\nolinkurl{#1}}%
+  }
+\else
+  % \renewcommand does not work in HeVeA (does not replace #1 etc. by
+  % actual arguments), and \newcommand is ignored.
+  %
+  \ifhevea\else
+    \renewcommand{\mailto}[1]{%
+      \href{mailto:#1}{\nolinkurl{#1}}%
+    }
+  \fi
+\fi
+
 
 \ifx\email\undefined
 \newcommand\email[2][\empty]{%
@@ -64,8 +73,42 @@
 \fi
 
 \newcommand\var[1]{\textsf{#1}}
-\newcommand\dfn[1]{\emph{#1}}
 
+% \dfn[index entry]{defined word}
+% -------------------------------
+% Introduce new terminology (for the index).
+% If not supplied [index entry] defaults to {defined word}
+%
+% The trick given at
+%     http://www.tex.ac.uk/cgi-bin/texfaq2html?label=oarglikesect
+% does not work, because the argument given of \index is sent
+% *unevaluated* into the ind file, i.e., we get \DefaultOpt in the
+% index instead of the value of \DefaultOpt.
+%
+% For the same reason, the \index cannot be factored with an
+% ifthenelse *inside*, because the \ifthenelse then appear unevaluated
+% in the *.ind file.
+\newcommand{\dfn}[2][]{%
+  \emph{#2}%
+  \ifthenelse{\equal{#1}{}}{\myindex{#2}}{\index{#1}}%
+}
+
+\newcommand{\use}[2]{%
+  #2%
+  \ifthenelse{\equal{#1}{}}{\myindex{#2}}{\index{#1}}%
+}
+
+% We can't have two "|command"s with \index, so make our own
+% composition of \hyperpage and \textbf (for definitions).
+\newcommand{\hyperpagebf}[1]{%
+  \ifthenelse{%
+    \isdefined{\hyperpage}%
+  }{%
+    \textbf{\hyperpage{#1}}%
+  }{%
+    \textbf{#1}%
+  }%
+}
 \endinput
 
 %% Local Variables:

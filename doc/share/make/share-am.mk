@@ -7,7 +7,13 @@ share_make_dir = $(share_dir)/make
 
 CLEANFILES =
 
-SVN = vcs-svn
+SVN := $(shell for i in svn-wrapper.sh vcs svn;			\
+               do						\
+		  if ($$i --version) >/dev/null 2>&1; then	\
+	             echo $$i;					\
+		     break;					\
+		  fi						\
+	       done)
 
 share-up:
 	$(share_bin_dir)/svn-externals --update=share $(share_dir)/..

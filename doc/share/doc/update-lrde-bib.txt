@@ -41,7 +41,11 @@ Pensez à inclure l'URL au LRDE de cette façon :
 si l'url est http://www.lrde.[...]/Publications/200102-Wscg
 
 ** Emacs est votre ami
-Penser à faire "sort" et "reformat".
+Pensez à faire "sort" et "reformat".  Ou exécutez "make neat".
+
+* make neat
+Reformate, normalise et trie les entrées de lrde.bib (et csi.bib) à
+l'aide de bin/bibneat.
 
 * make view
 Pour voir si tout se passe bien.  Votre papier est-il où il le faut

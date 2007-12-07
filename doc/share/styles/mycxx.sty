@@ -1,23 +1,51 @@
-\RequirePackage{xspace}
-\makeatletter
+\NeedsTeXFormat{LaTeX2e}
 
-\DeclareRobustCommand{\Cxx}
-{\texorpdfstring{%
-    \valign{\vfil\hbox{##}\vfil\cr
-      \textsf{C\kern-.1em}\cr
-      $\hbox{\fontsize{\sf@size}{0}\textbf{+\kern-0.05em+}}$\cr}%
-  }{%
-    C++%
-  }%
-  \xspace%
+\ProvidesPackage{mycxx}[2007/12/06 v1.1
+			Writing C++ nicely]
+
+\RequirePackage{xspace}
+\RequirePackage{ifthen}
+
+\DeclareOption{normal}{\def\mycxx@style{}}
+\DeclareOption{sf}    {\def\mycxx@style{\sf}}
+
+%% Versions for TeX output.
+\DeclareRobustCommand{\CxxTeX}{%
+  \valign{\vfil\hbox{##}\vfil\cr
+    {\mycxx@style C\kern-.1em}\cr
+    $\hbox{\fontsize{\sf@size}{0}\textbf{+\kern-0.05em+}}$\cr}%
 }
+
+\DeclareRobustCommand{\CTeX}{\mycxx@style C}
+
+%% Same as \texorpdfstring, but if not defined expands the
+%% TeX part only.
+\newcommand{\mycxx@texorpdfstring}[2]
+{\ifthenelse{\NOT\isundefined{\texorpdfstring}}{%
+    \texorpdfstring{#1}{#2}}{%
+    #1}%
+}
+
+%% Versions that do not require hyperref to be loaded.  For some
+%% reason, ifthenelse does not seem to work very well in \section, in
+%% which case you should use the *HR versions below.
+\DeclareRobustCommand{\Cxx}
+  {\mycxx@texorpdfstring{\CxxTeX}{C++}\xspace}
 
 \DeclareRobustCommand{\C}
-{\texorpdfstring{%
-    \textsf{C}%
-  }{%
-    C%
-  }%
-  \xspace%
-}
-\makeatother
+  {\mycxx@texorpdfstring{\CTeX}{C}\xspace}
+
+%% Versions that expect hyperref to be loaded, hence \texorpdfstring
+%% is defined.
+\DeclareRobustCommand{\CxxHR}
+  {\texorpdfstring{\CxxTeX}{C++}\xspace}
+
+\DeclareRobustCommand{\CHR}
+  {\texorpdfstring{\CTeX}{C}\xspace}
+
+\ExecuteOptions{normal}
+\ProcessOptions
+
+\endinput
+%%
+%% End of file `mycxx.sty'.

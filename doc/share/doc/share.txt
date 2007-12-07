@@ -47,7 +47,10 @@ dépendance sur share/ reste locale à votre répertoire de travail.
 ** beamer2handout
 Un script au dessus de pdfnup (disponible dans le paquet Debian
 pdfjam) pour produire des polycopiés (handouts) à partir de fichiers
-Beamer PDF. Remplace feu beamer-handout.
+Beamer PDF.  Remplace feu beamer-handout.
+
+** bibneat
+Reformate et trie un fichier *.bib.
 
 ** latin2tex
 Convertir les accents des fichiers donnés en ligne de commande de
@@ -370,6 +373,16 @@ Plus d'informations :
   These commands can be used to remove space around and within
   environments. This can be useful in situations where the
   environment resets values that over-ride those you've created.''
+
+** abbrv-fr.bst, alpha-fr.bst, plain-fr.bst, unsrt-fr.bst
+** abbrvnat-fr.bst, plainnat-fr.bst, unsrtnat-fr.bst
+** apalike-fr.bst, ieeetr-fr.bst, siam-fr.bst
+Des versions françaises des styles BibTeX du même nom. Trouvés sur
+http://www.lsv.ens-cachan.fr/~markey/bibla.php
+
+  « Styles bibliographiques francisés (disponibles sur CTAN dans
+  biblio/bibtex/contrib/bib-fr).
+  http://www.ctan.org/tex-archive/biblio/bibtex/contrib/bib-fr/ »
 
 ** beamerthemeKremlinBicetre
 Un style simple basé sur Copenhagen, qui numérote les transparents, et

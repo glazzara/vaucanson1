@@ -3,16 +3,11 @@
 \ifhevea
   % Ask for the same languages.
   \usepackage[\@pkg@opts]{babel}
-
-  % Note that to be nice looking, you must not leave a space before
-  % the \fg invocation.  \og{}This is an example\fg.
-  \newcommand{\og}{«~}
-  \newcommand{\fg}{~»\xspace}
-
-  %% Guillemets français.
-  \newcommand{\gf}[1]{\og{}#1\fg{}\xspace}
 \fi
 
+%% Guillemets français.
+%% Keep this sync' with the redefinition in myhyperref.
+\newcommand{\gf}[1]{\og{}#1\fg{}\xspace}
 
 %% Using \oe{} is really a pain: it looks ugly, and annoys the
 %% spell-checker which wants to know what "uds" is in "n\oe{}uds".
@@ -24,3 +19,26 @@
 \newcommand{\oeuvre} {\oe{}uvre\xspace}
 \newcommand{\soeurs} {s\oe{}urs\xspace}
 \newcommand{\soeur}  {s\oe{}ur\xspace}
+\newcommand{\voeu}   {v\oe{}u\xspace}
+\newcommand{\voeux}  {v\oe{}ux\xspace}
+
+%% Babel does not seem to make it possible to load a language on
+%% demand.  Try to implement that.  It might not be very portable :(
+\newcommand{\BabelRequireLanguage}[1]{
+  \expandafter\ifx\csname l@#1\endcsname\relax%
+    \input{#1.ldf}%
+  \else
+    \expandafter\PackageWarning\csname l@#1\endcsname
+  \fi%
+}
+
+%% A switch/case on languages.
+\newenvironment{switchlanguage}%
+{% \begin{switchlanguage}
+  \renewcommand{\item}[2][english]{%
+    \iflanguage{##1}{##2}{}%
+  }%
+}
+{% \end{switchlanguage}
+  %
+}

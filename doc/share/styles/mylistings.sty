@@ -8,7 +8,7 @@
   \RequirePackage{xcolor}
   \input{mylistings.hva}
 
-  \definecolor{verylightgray}{gray}{.90}
+  \definecolor{verylightgray}{rgb}{.9,.9,.9}
   \lstdefinestyle{box}
     {basicstyle=\normalsize,
       keywordstyle=[1]\bfseries,
@@ -36,6 +36,17 @@
       stringstyle={\color{darkgreen}},%
       commentstyle={\color{darkorange}},%
       emphstyle={\warn}}
+
+  \lstdefinestyle{colorbox}
+    {basicstyle=\normalsize,
+      keywordstyle=[1]{\color{blue}\bfseries},
+      keywordstyle=[2]{\color{blue}\slshape},
+      emphstyle={\color{red}\slshape},
+      commentstyle={\color{violet}\slshape},
+      stringstyle={\color{darkgreen}\sffamily},
+      backgroundcolor=\color{verylightgray}
+    }
+
 
   %% Default style.
   \lstset{style=ttcolor}

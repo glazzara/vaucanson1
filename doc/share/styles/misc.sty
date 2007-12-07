@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{ifthen}
+\RequirePackage{myifthen}
 \RequirePackage{hevea}
 
 \newcommand{\@CurVe}{%
@@ -14,7 +14,7 @@
 % \ifthenelse is inside the \newcommand, so that we don't need to load
 % hyperref first.
 \newcommand{\CurVe}{%
-  \ifthenelse{\defined{\texorpdfstring}}{%
+  \ifthenelse{\NOT\isundefined{\texorpdfstring}}{%
     \texorpdfstring{\@CurVe}{CurVe}}{%
     \@CurVe}}
 

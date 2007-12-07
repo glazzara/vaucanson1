@@ -20,7 +20,7 @@
 %% ------------------------- %%
 %% Change the link display.  %%
 %% ------------------------- %%
-\RequirePackage{ifthen}
+\RequirePackage{myifthen}
 \newboolean{myhyperref@changeLinksColors}
 \setboolean{myhyperref@changeLinksColors}{true}
 \@ifclassloaded{entcs}{\setboolean{myhyperref@changeLinksColors}{false}}
@@ -33,8 +33,8 @@
 % If using Beamer, don't change the colors.
 \@ifclassloaded{beamer}{\setboolean{myhyperref@changeLinksColors}{false}}
 
-\ifthenelse{\boolean{myhyperref@changeLinksColors}}{%
-  \hypersetup{colorlinks, citecolor=blue, linkcolor=blue, urlcolor=blue}}{}
+\ifthen{\boolean{myhyperref@changeLinksColors}}{%
+  \hypersetup{colorlinks, citecolor=blue, linkcolor=blue, urlcolor=blue}}
 
 
 

@@ -1,3 +1,516 @@
+2007-12-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* styles/mylistings.sty (verylightgray): Define as rgb, not gray.
+	Not all installations of LaTeX support the latter.
+
+2007-12-07  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Fix typo.
+	* bib/lrde.bib: Remove comma and add comma.
+
+2007-12-07  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Add demaille.08.ldta in lrde.bib.
+	* bib/lrde.bib: Add the entry for demaille.08.ldta.
+
+2007-12-07  Akim Demaille  <akim.demaille@free.fr>
+
+	Be more alsolanguage friendly.
+	* styles/ldf/asf.ldf: Use "morekeywords" rather than "keywords"
+	so that we can mix it with other languages such as sdf.
+
+2007-12-07  Akim Demaille  <akim.demaille@free.fr>
+
+	More pretty-printing.
+	* styles/ldf/stratego.ldf: More literate symbols.
+	More symbols.
+	* styles/ldf/sdf.ldf ([ag]sdf): Derive from Stratego too.
+
+2007-12-07  Akim Demaille  <akim.demaille@free.fr>
+
+	Capitalize.
+	* bib/lrde.bib: one letter.
+
+2007-12-07  Renaud Durlin  <renaud.durlin@lrde.epita.fr>
+
+	Add Bibtex entry for SDF reference manual.
+	* bib/transformers.bib: Here.
+
+2007-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Make \Cxx more robust.
+	* styles/mycxx.sty (\CxxTeX, \CTeX, \CxxHR, \CHR): New.
+
+2007-12-06  Akim Demaille  <demaille@gostai.com>
+
+	Sort acronyms.
+	* styles/myacronym.sty: Here.
+	Write nondeterministic, not non-deterministic.
+
+2007-12-05  Akim Demaille  <demaille@gostai.com>
+
+	More languages for listings.
+	Based on work by Renaud Durlin.
+	* styles/ldf/asf.ldf: New.
+	* styles/mylistings.hva: Load it.
+	* styles/ldf/sdf.ldf, styles/ldf/stratego.ldf: Complete.
+
+2007-12-05  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Fix the problem of capitalized letter of "Programming" in references.
+	* bib/transformers.bib: here.
+
+2007-12-05  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add seminar report entry.
+	* csi.bib: Add entry for December 2007 report on synchronized transducer.
+
+2007-12-04  Benoit Sigoure  <tsuna@lrde.epita.fr>
+
+	Improve a BiBTeX entry.
+	* bib/pp.bib (jonge-pp-2002): Here.  Using information from ACM
+	portal and citeseer.
+
+2007-12-04  Benoit Sigoure  <tsuna@lrde.epita.fr>
+
+	Remove a duplicate BiBTeX entry.
+	* bib/strategoxt.bib (Jon00): Remove.
+	* bib/pp.bib (jonge-pp-2002): Complete with the extra information of
+	Jon00.
+
+2007-12-04  Akim Demaille  <demaille@gostai.com>
+
+	Let texi2dvi keep the trailing //.
+	* bin/texi2dvi ($space, $tab): New.
+	($IFS): Use them to be robust to zealous white space cleanups.
+	(absolute): Preserve the trailing slashes.
+	(tex_envvars): Add MPINPUTS, MFINPUTS, and TFMFONTS.
+
+2007-12-02  Akim Demaille  <akim@lrde.epita.fr>
+
+	Do not require to load french.
+	* styles/gettext.sty (
+ewtranslation): Accept a third arg.
+	* styles/mybabel.hva (\BabelRequireLanguage): New.
+
+2007-12-02  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Update URLs for UU-AG.
+	* bib/ag2.bib: here.
+
+2007-12-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	switchlanguage.
+	* share/styles/mybabel.hva: New.
+
+2007-12-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	gettext.sty.
+	I faced a name conflict on \translate.
+	* styles/translate.sty: Rename as...
+	* styles/gettext.sty: this.
+
+2007-12-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	More todo in texi.sty.
+	* styles/texi.sty: Add more things to do here.
+
+2007-12-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	More tyla entries.
+	* bib/compilation.bib: here.
+
+2007-11-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Tidy bib.
+	* bib/transformers.bib: Use our key style.
+	Prefer braces to quotes.
+
+2007-11-29  Renaud Durlin  <renaud.durlin@lrde.epita.fr>
+
+	Fix ASF acronym.
+	* styles/myacronym.sty: Fix ASF acronym.
+
+2007-11-21  Roland Levillain  <roland@lrde.epita.fr>
+
+	* doc/svn.txt: Typo.
+
+2007-11-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	mycxx options.
+	* styles/mycxx.sty: Support options "normal", and "sf" defaulting
+	to the first one.
+	Some reviewers dislike the "sf" version, so make "normal" the
+	default.
+
+2007-11-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/share.txt: Mention bibneat.
+
+2007-11-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* Makefile (%.tex, %.txt, %-private.tex): Make the generated
+	output read-only to prevent accidental editions.
+	* bin/make-bib.pl (verbose): Fix prototype.
+
+2007-11-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* hevea.txt: Typos.
+	* svn.txt: Some rewording.
+	* update-lrde-bib.txt: Mention "make neat".
+
+2007-11-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix broken command.
+	* bib/lrde.bib: Remove a spurious space.
+
+2007-11-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	introduce bibneat and cleanup csi.bib and lrde.bib
+
+	* Makefile (neat, check-style): New targets.
+	(check): Run check-style.
+	(check-bib): Really abort on error.
+	* bib/csi.bib, bib/lrde.bib: bibneatify, and fix some uses of
+	double-quotes.
+	* bib/strategoxt.bib, bib/visser.bib: Update from master.
+	* bin/bibneat: New file.
+	* bin/update-bib (strategoxt.bib): s/Benoit/Beno{^i}t/ on the fly.
+
+2007-11-13  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Add a paper in Transformers.bib.
+	* bib/transformers.bib: The added paper explaions a bit how
+	they have handle include with AG.
+
+2007-11-08  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Fix r2426.
+	* bib/transformers.bib: Fix entry of rodeh.99.
+
+2007-11-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bash 3.2 portability.
+	* make/tex.mk: here.
+
+2007-11-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	\sectionframe.
+	* styles/beamerthemeKremlinBicetre.sty (\sectionframe)
+	(\subsectionframe): New.
+	Use them.
+
+2007-11-07  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Add Bibtex entry for "Finding circular attribute in AGs".
+	* bib/transformers.bib: Add an old printed article.
+
+2007-11-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	Put the logo on the right.
+	* styles/beamerthemeKremlinBicetre.sty (\maketitle): As sometimes
+	we want longer titles.
+	This is not enough though, the placement should be absolute, or from
+	the bottom.
+
+2007-11-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix ricou.07.adass.
+	* bib/lrde.bib: Fill the entry.
+	Use correct separator for authors.
+	Protect acronyms in the title.
+	Sort properly.
+	Add missing comma.
+
+2007-11-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't specify the bibstyle.
+	* styles/beamerthemeKremlinBicetre.sty: here.
+
+2007-11-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix.
+	* bin/instantiate-template.sh: Fix.
+
+2007-11-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	\bibliographyframe.
+	* styles/beamerthemeKremlinBicetre.sty (\bibliographyframe): New.
+
+2007-10-29  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Update LRDE URL in bib entry
+	* bib/csi.bib: here.
+
+2007-10-29  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add bib entry for "Boosting Vaucanson's genericity" techrep.
+	* bib/csi.bib: here.
+
+2007-10-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	qcm.sty.
+	* styles/qcm.sty: New.
+	Based on Didier Verna's QCM 2.1, but with several additions/changes:
+	- question renamed qcm to avoid conflicts
+	- support for beforeqcm and beforeqcmbody
+	- pass [t] to the minipage so that the question number is next to
+	  the beginning of the question.
+	- definition {correction} only if it is not defined
+
+2007-10-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	Automate the update of some more bibliographic styles.
+
+	* Makefile (GASTEX_STYLES, FR_BIB_STYLES): New.
+	(update-styles): Use them.
+	Add download actions of French bibliographic styles to this
+	rule.
+
+2007-10-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes.
+	* bib/lrde.bib: Wrap long lines.
+	Fix % uses.
+	Remove spurious spaces.
+	Add a comma to every end of field.
+
+2007-10-25  Daniela Becker  <daniela@lrde.epita.fr>
+
+	Fix entries
+	* bib/lrde.bib: Fix entries.
+
+2007-10-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix bib/compilation.clement.bib.
+
+	* bib/compilation.clement.bib: A lot of syntactic corrections,
+	thanks to Emacs' `M-x bibtex-validate'.
+
+2007-10-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	Preserve capitals in titles of BibTeX entries.
+
+	* bib/compilation.bib,
+	* bib/csi.bib,
+	* bib/gp.bib,
+	* bib/kernighan.bib,
+	* bib/lrde.bib,
+	* bib/strategoxt.bib,
+	* bib/tom.bib,
+	* bib/transformers.bib:
+	Preserve capitals of words C, C++, ConceptC++, GNU, Java, ML,
+	SCOOP, Scool, Tom and UNIX.
+
+2007-10-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix fields `booktitle' of InProceedings entries.
+
+	* bib/ag.bib, bib/gp.bib: s/In the Proceedings/Proceedings/.
+
+2007-10-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (cgal.07.www): Add a field `key' to make
+	citations look nicer (when using natbib, for instance).
+
+2007-10-19  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add French versions of frequently used BibTeX styles.
+
+	* styles/abbrv-fr.bst,
+	* styles/abbrvnat-fr.bst,
+	* styles/alpha-fr.bst,
+	* styles/apalike-fr.bst,
+	* styles/ieeetr-fr.bst,
+	* styles/plain-fr.bst,
+	* styles/plainnat-fr.bst,
+	* styles/siam-fr.bst,
+	* styles/unsrt-fr.bst,
+	* styles/unsrtnat-fr.bst: New files.
+	Imported from http://www.lsv.ens-cachan.fr/~markey/bibla.php.
+	* doc/share.txt: Mention them.
+
+2007-10-18  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix Makefile's `clean' target.
+
+	* Makefile (CLEANFILES): Don't remove bib/lrde.bib nor
+	README-lrde.bib.
+
+2007-10-18  Nicolas Pierron  <nicolas.pierron@lrde.epita.fr>
+
+	Add missing keywords in LDF for Stratego and SDF(AG).
+	* styles/ldf/sdf.ldf: Add some Stratego keywords.
+	* styles/ldf/stratego.ldf: Add missing Stratego keywords.
+
+2007-10-17  Akim Demaille  <akim@lrde.epita.fr>
+
+	myindex.hva.
+	* styles/myindex.hva: New.
+	Really too poor, but I don't know how to make this work
+	with HeVeA.
+	* styles/texi.hva: Remove debugging information.
+	* vaucanson.sty: Remove.
+	Has nothing to do there.
+
+2007-10-17  Akim Demaille  <akim@lrde.epita.fr>
+
+	myifthen.sty.
+	* styles/myifthen.sty: New.
+
+2007-10-17  Akim Demaille  <akim@lrde.epita.fr>
+
+	More HeVeA compat.
+	* styles/myhyperref.hva, styles/bilan.hva, styles/misc.hva:
+	HeVeA now (1.10) supports \RequirePackage.
+	* styles/mybabel.hva: Move portable definitions to...
+	* styles/mybabel.sty: here.
+	(\og, \fg): Now supported by HeVeA.
+	(\voeu, \voeux): New.
+	* styles/myifthen.sty: Rename as...
+	* styles/myifthen.hva: this.
+	* sytles/myifthen.sty: New.
+	* styles/texi.hva (\mailto): Fix to work properly with HeVeA.
+
+2007-10-16  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib: Add fact.www.
+
+2007-10-16  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix veldhuizen.99.tech.
+
+	* bib/gp.bib (veldhuizen.99.tech): Rename field `url' as
+	`howpublished', so that natbib-style citations can work
+	properly.
+
+2007-10-16  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib: Add myrnyy.04.cit.
+
+2007-10-15  Thierry Geraud  <thierry.geraud@lrde.epita.fr>
+
+	Fix jerome's 06 entries in lrde.bib.
+
+	* bib/lrde.bib (konukoglu.06.itip): Rename as...
+	(yoruk.06.itip): ...this.
+	(darbon.06.jmiv, darbon.06.jmivb.pdf): Fix title.
+	Add volume, number, and pages fields.
+	Remove 'note' field.
+
+2007-10-13  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib (karvonen.02.pp): Fix title.
+
+2007-10-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	colorbox.
+	* styles/mylistings.sty (colorbox): New style.
+
+2007-10-13  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/myacronym.sty (\acrodef{oop}):
+	s/Object Oriented/Object-Oriented/.
+
+2007-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	Prefer svnw, fix bib title.
+	* bib/gp.bib: Protect from lower casing.
+	* make/share-am.mk (SVN): Look for svn-wrapper first.
+
+2007-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	More about JJForester.
+	* bib/compilation.bib: Here.
+	And sort.
+
+2007-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	lrdedoc.
+	* bib/compilation.bib: For visser.01.sigplan.
+
+2007-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	tom.bib.
+	* bib/tom.bib: New.
+	* bin/update-bib: Fetch it.
+
+2007-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	update-bib.
+	* bin/update-bib: Fix.
+	* bib/strategoxt.bib: Update.
+
+2007-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	update-bib.
+	* bin/update-bib: New.
+	Based on...
+	* Makefile (update-bib): This.
+	* bib/strategoxt.bib, bib/kernighan.bib, bib/visser.bib: Update.
+
+2007-10-12  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib: Add meyers.96.morec++.
+
+2007-10-12  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/gp.bib: Add karvonen.02.pp.
+
+2007-10-12  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib: Add vanrossum.06.python.
+
+2007-10-12  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib: Add ben-kiki.05.yaml.
+
+2007-10-12  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib: Add shopyrin.06.ieeesoft.
+
+2007-10-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix update-cite.
+	* bin/update-cite: Group where needed.
+	* bib/gp.bib: Fix a key.
+
+2007-10-10  Akim Demaille  <akim@lrde.epita.fr>
+
+	bagge.03.scam.
+	* bib/transformers.bib (bagge.03.scam): New.
+
+2007-10-10  Akim Demaille  <akim@lrde.epita.fr>
+
+	bagge.03.rule.
+	* bib/transformers.bib: Add it.
+	Normalize and sort the file.
+
+2007-10-10  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes.
+	* Makefile: Fix the dependencies on make-bib.pl.
+	* bin/make-bib.pl: Up to 2008.
+	* styles/misc.sty: \defined does not exist.
+
+2007-10-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	myindex.
+	* styles/lrde-bulletin.sty, styles/misc.sty, styles/myhyperref.sty:
+	Use myifthen.
+	Reported by Michael Cadilhac.
+	* styles/myindex.sty: New.
+	* styles/texi.hva: Use it.
+
+2007-10-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	myifthen, \dfn.
+	* styles/myifthen.sty: New.
+	* styles/texi.hva (\dfn): Now also introduces the defined term
+	in the index.
+	(\hyperpagebf): New.
+	Not used yet, as we need to teach xindy that this is markup.
+
 2007-10-01  Akim Demaille  <akim@lrde.epita.fr>
 
 	\coeur.

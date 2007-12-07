@@ -29,7 +29,7 @@ if test -n "${1}"; then
 	case "${1}" in
 		*".pdf");;
 		"--help") echo "$helptext";
-		          exit 0;;
+			  exit 0;;
 		*) echo "beamer2handout: first argument must be input pdf filename.";
 		   echo "$usagetext";
 		   exit 1;;
@@ -46,7 +46,7 @@ if test -n "${2}"; then
 		"6up") nup="2x3"; orient="portrait";;
 		*) nup="2x2"; orient="landscape";
 		   echo "beamer2handout warning: ignoring invalid 2nd argument '${2}'.
-		         Defaulting to 2x2.";;
+			 Defaulting to 2x2.";;
 	esac
 else
 	nup="2x2"; orient="landscape";

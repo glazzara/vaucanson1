@@ -2,8 +2,8 @@
 
 * Qu'est-ce que Subversion) ?  Pourquoi s'en servir ?
 Subversion (svn en ligne de commande), est le descendant du bien connu
-CVS.  Son métier c'est d'assurer la coordination d'un travail
-collaboratif en maintenant un "dépôt", c'est à dire une historique des
+CVS.  Son métier est d'assurer la coordination d'un travail
+collaboratif en maintenant un "dépôt", c'est-à-dire un historique des
 changements effectués dans un ensemble de fichiers.
 
 Svn est largement utilisés dans le monde pour coordonner des équipes
@@ -20,7 +20,7 @@ voulait faire (e.g., corriger un bug, rajouter une section), il les
 enregistre dans le dépôt central.
 
 Il arrive parfois que quelqu'un d'autre ait fait des modifications
-entre-temps, dans ce cas, deux cas de figures :
+entre-temps.  Deux cas de figures se présentent alors :
 
 - pas de collision (on parle de « conflit »), et il n'y a rien à
   faire.
@@ -49,7 +49,7 @@ le Makefile, et par contre, ne pas inclure le *.pdf dans le dépôt.
 
 * Qu'est-ce qu'un ChangeLog ?
 Simplement par politesse envers ses pairs, et de façon à faciliter la
-compréhension de l'évolution du dépôt, l'on maintient un fichier nommé
+compréhension de l'évolution du dépôt, on maintient un fichier nommé
 « ChangeLog » qui décrit brièvement les changements apportés.  Pour le
 remplir, procéder par imitation des entrées précédentes.
 
@@ -72,19 +72,19 @@ Se mettre dedans, faire
 ** Éditer les documents
 Se servir d'Emacs, vi, ce que vous voulez.
 
-** Tenir à jour la liste des fichiers à enregistrer : svn add/del
-Si vous introduisez un nouveau fichier, faire
+** Tenir à jour la liste des fichiers à enregistrer : svn add/rm
+Si vous introduisez un nouveau fichier, faites
 
       svn add fichier
 
-Si vous en effacez un, faire
+Si vous en effacez un, faites
 
       svn rm fichier
 
 ** Comparer la liste de fichiers locale avec celle du dépôt
 Faire « svn status » pour regarder si tous les fichiers sont
-correctement déclarés : aucun fichier que les autres collaborateurs
-doivent obtenir ne doivent apparaître avec un « ? » devant.  NB: pas
+correctement déclarés : aucun des fichiers que les autres collaborateurs
+doivent obtenir ne doit apparaître avec un « ? » devant.  NB: pas
 la peine d'enregistrer les produits (e.g., *.o, ou *.pdf), par contre
 inclure toutes les sources (e.g., *.c, ou *.tex).
 

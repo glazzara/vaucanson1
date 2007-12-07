@@ -20,13 +20,13 @@
 			lrde-bulletin package]
 \typeout{Package: `\filename\space\fileversion \@spaces <\filedate>'}
 \typeout{English documentation as of <\docdate>}
-\RequirePackage{ifthen}
+\RequirePackage{myifthen}
 \newboolean{lrdebulletin@driver}
 \DeclareOption{driver}{\setboolean{lrdebulletin@driver}{true}}
 \DeclareOption*{\PackageWarning{\filename}{Unknown option
     `\CurrentOption'}}
 \ProcessOptions\relax
-\ifthenelse{\boolean{lrdebulletin@driver}}{}{
+\ifthen{\NOT\boolean{lrdebulletin@driver}}{
   % The marvosym package is needed for the clock symbol in \seminardate.
   \RequirePackage{multicol,graphicx,color,hyperref,array,marvosym}
 % Pretend the twoside option was passed for fancyhdr's sake.

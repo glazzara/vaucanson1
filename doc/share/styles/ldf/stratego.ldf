@@ -3,22 +3,28 @@
 %%
 %% Language definition of Stratego for listings package
 %%
+
+%% Maybe using lierate should be controlable via an option, or using
+%% two language?  Stratego and [literate]Stratego?
+
 \lstdefinelanguage{Stratego}
   {alsoletter={-},
-   otherkeywords={+,<+,+>,;},
-   morekeywords=[1]{all,constructors,end,extend,fail,id,imports,in,let,
+   otherkeywords={+,<+,+>,;,:=,>,<,?,!},
+   morekeywords=[1]{all,%
+     bagof,%
+     constructors,end,extend,fail,id,imports,in,let,
      module,not,one,overlays,override,prim,rec,rules,script,signature,
-     some,sorts,strategies,stratego,test,thread,where},
-   morekeywords=[2]{->,=>},
-   morekeywords=[3]{>,<},
+     some,sorts,strategies,stratego,test,thread,where,if,then,else,
+     switch,case,otherwise,depends,on},
    sensitive,
    morecomment=[l]{//},
    morecomment=[n]{(*}{*)},
    morecomment=[n]{/*}{*/},
    morestring=[b]",
-   literate={|[}{{\texttt{|$\!\!$[}}}1{]|}{{\texttt{]$\!\!$|}}}1
-%   alsoletter={=-'<>}%,
-%   alsoletter={<>}
+   literate={|[}{{\texttt{|$\!\!$[}}}1%
+	    {]|}{{\texttt{]$\!\!$|}}}1%
+	    {->}{$\rightarrow$ }2%
+	    {=>}{$\Rightarrow$ }2
   }[keywords,comments,strings]
 
 

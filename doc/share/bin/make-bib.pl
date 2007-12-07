@@ -65,7 +65,7 @@ Report the C<@message> on C<STDERR>.
 =cut
 
 my $verbose = 0;
-sub verbose ($)
+sub verbose (@)
 {
   print STDERR "$me: @_\n"
     if $verbose;
@@ -435,7 +435,7 @@ Getopt::Long::GetOptions
    )
   or exit 1;
 $bib = $ARGV[0];
-unshift @year, reverse (1999 .. 2007);
+unshift @year, reverse (1999 .. 2008);
 unshift @year, "soumission"
   if $with_submitted;
 output ();
