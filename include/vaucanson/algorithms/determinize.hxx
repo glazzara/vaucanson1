@@ -57,7 +57,7 @@ namespace vcsn {
     typedef typename std::map<subset_t, typename output_t::hstate_t>
 							     subset_set_t;
     typedef std::pair<subset_t, typename output_t::hstate_t> subset_set_pair_t;
-    typedef std::vector<typename input_t::hstate_t>	     delta_ret_t;
+    typedef typename input_t::const_delta_state_t	     delta_ret_t;
 
 
     /*-----------------.
@@ -89,7 +89,6 @@ namespace vcsn {
     subset_t q;
     const alphabet_t& alphabet(input.structure().series().monoid().alphabet());
     delta_ret_t dst;
-    dst.reserve(input.states().size());
     std::queue<subset_t> path;
     path.push(qi);
     while (!path.empty())

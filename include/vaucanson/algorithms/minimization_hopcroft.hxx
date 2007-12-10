@@ -305,7 +305,6 @@ namespace vcsn
       typedef std::vector<partition_t> partition_set_t;			\
       typedef typename partition_t::iterator partition_iterator;	\
       typedef std::vector<unsigned> class_of_t;				\
-      typedef std::set<hstate_t> delta_ret_t;				\
       typedef std::pair<unsigned, letter_t> pair_t;			\
       typedef std::list<pair_t> to_treat_t;
 
@@ -510,7 +509,7 @@ namespace vcsn
     for (unsigned i = 0; i < max_partitions; ++i)
       output.add_state();
 
-    delta_ret_t delta_ret;
+    const_delta_state_t delta_ret;
     std::set<unsigned> already_linked;
     for (unsigned i = 0; i < max_partitions; ++i)
     {
@@ -528,7 +527,7 @@ namespace vcsn
 	already_linked.clear();
 
 	input.letter_deltac(delta_ret, s, *e, delta_kind::states());
-	for_all_(delta_ret_t, out, delta_ret)
+	for_all_(const_delta_state_t, out, delta_ret)
 	{
 	  unsigned c = class_[*out];
 	  if (already_linked.find(c) == already_linked.end())
@@ -585,8 +584,8 @@ namespace vcsn
 
     queue<pair_class_letter_t>				the_queue;
 
-    set<unsigned>	met_classes;
-    set_transitions_t		transitions_leaving;
+    set<unsigned>	      met_classes;
+    const_delta_transition_t  transitions_leaving;
 
     unsigned	max_partition	= 0;
     //	   unsigned	max_letters	= alphabet.size();
@@ -626,11 +625,11 @@ namespace vcsn
 	  old_weight[*r] = weight_zero;
 	states_visited.clear();
 
-	set_transitions_t transitions_comming;
+	const_delta_transition_t transitions_comming;
 	input.letter_rdeltac(transitions_comming, *q, *a,
 			     delta_kind::transitions());
 
-	for_all_const_(set_transitions_t, e, transitions_comming)
+	for_all_const_(const_delta_transition_t, e, transitions_comming)
 	  {
 	    hstate_t		p = input.src_of(*e);
 	    if (states_visited.find(p) != states_visited.end())
@@ -814,7 +813,7 @@ namespace vcsn
       input.deltac(transitions_leaving, *classes[i].begin(),
 		   delta_kind::transitions());
 
-      for_all_const_(set_transitions_t, e, transitions_leaving)
+      for_all_const_(const_delta_transition_t, e, transitions_leaving)
 	{
 	  series_set_elt_t	se = input.series_of(*e);
 	  unsigned		cs = class_of_state[input.dst_of(*e)];

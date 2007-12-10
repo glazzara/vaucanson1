@@ -61,9 +61,9 @@ namespace vcsn {
     {
       hstate_t state = queue.front();
       queue.pop();
-      state_set_t delta_ret;
+      delta_state_t delta_ret;
       a.deltac(delta_ret, state, delta_kind::states());
-      for_all_const_(state_set_t, j, delta_ret)
+      for_all_const_(delta_state_t, j, delta_ret)
       {
 	state = *j;
 	if (reachable_states.find(state) == reachable_states.end())

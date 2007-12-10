@@ -1,3 +1,54 @@
+2007-12-10  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Introduce new types for delta containers.
+	In order to use the full potential of the bmi structure, I need
+	to make the delta containers dependent on the graph structure.
+	I also need to make a distinction between const and non-const
+	delta. The 4 followings types have been introduced:
+	- delta_transition_t
+	- delta_state_t
+	- const_delta_transition_t
+	- const_delta_state_t
+	This patch doesn't use these types everywhere. More patches
+	will come later.
+
+	Delta functions using an insertIterator instead of a container
+	have also been removed since we do want the graph to handle both
+	the delta containers AND the insertion way.
+
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/misc/usual_macros.hh,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/gen_random.hxx,
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh:
+	Make use of the new types.
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hh: 
+	Remove useless delta functions.
+
+	* include/vaucanson/automata/implementation/boostg/boostg_delta_state.hh:
+	New. Introduce a new container to store non-const delta results and...
+
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh:
+	...add the proper functor.
+
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh,
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx:
+	Declare the new types and update the delta functions prototype.
+	
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh: reindent.
+
 2007-11-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix incompatibility with GCC 4.1.1. 

@@ -73,7 +73,7 @@ namespace vcsn {
     typedef int					letterid_t;
     typedef int					groupid_t;
 
-    typedef set<hstate_t>			group_t;
+    typedef std::set<hstate_t>			group_t;
     typedef vector<group_t>			groupid_to_group_t;
 
     typedef vector<hstate_t>			letterid_to_state_t;
@@ -116,7 +116,7 @@ namespace vcsn {
       }
     }
 
-    group_t delta_ret;
+    const_delta_state_t delta_ret;
     for_all_states(istate, input)
     {
       for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)

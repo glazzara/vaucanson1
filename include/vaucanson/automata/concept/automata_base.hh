@@ -79,6 +79,10 @@ namespace vcsn {
       typedef undefined_type geometry_t;
       typedef undefined_type hstate_t;
       typedef undefined_type htransition_t;
+      typedef undefined_type delta_transition_t;
+      typedef undefined_type delta_state_t;
+      typedef undefined_type const_delta_transition_t;
+      typedef undefined_type const_delta_state_t;
   };
 
 # define VCSN_MAKE_AUTOMATON_TRAITS(Type)					\
@@ -114,6 +118,10 @@ namespace vcsn {
     typedef typename graph_t::final_t			final_t;		\
     typedef typename graph_t::final_support_t		final_support_t;	\
     typedef typename final_support_t::iterator		final_iterator;		\
+    typedef typename graph_t::delta_transition_t	delta_transition_t;	\
+    typedef typename graph_t::delta_state_t		delta_state_t;		\
+    typedef typename graph_t::const_delta_transition_t  const_delta_transition_t;\
+    typedef typename graph_t::const_delta_state_t	const_delta_state_t;	\
   }
 
 
@@ -231,6 +239,12 @@ namespace vcsn {
       /// Type of handlers
       typedef typename automaton_traits<T>::hstate_t hstate_t;
       typedef typename automaton_traits<T>::htransition_t htransition_t;
+
+      /// Type of delta containers
+      typedef typename automaton_traits<T>::delta_state_t delta_state_t;
+      typedef typename automaton_traits<T>::delta_transition_t delta_transition_t;
+      typedef typename automaton_traits<T>::const_delta_state_t const_delta_state_t;
+      typedef typename automaton_traits<T>::const_delta_transition_t const_delta_transition_t;
 
       /// The set of series from which is build the automaton (const version).
       const series_set_t& series() const;
@@ -414,60 +428,6 @@ namespace vcsn {
        *! raised.) */
       letter_t letter_of(const htransition_t& e) const;
 
-      /*---------.
-      | Deltas.	 |
-      `---------*/
-
-      /** Store the output transitions/states of the state @a src
-       *  using @a res.	 */
-      template <typename OutputIterator, typename Kind>
-      void delta(OutputIterator res,
-		 const hstate_t& src,
-		 delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename Kind>
-      void delta(OutputIterator res,
-		 unsigned src,
-		 delta_kind::kind<Kind> k) const;
-
-
-
-      /** Store the output transitions/states of the state @a src where
-       *  @a query is true on a transition/state, using @a res.	 */
-      template <typename OutputIterator, typename L, typename Kind>
-      void delta(OutputIterator res,
-		 const hstate_t& src,
-		 const L& query,
-		 delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename L, typename Kind>
-      void delta(OutputIterator res,
-		 unsigned src,
-		 const L& query,
-		 delta_kind::kind<Kind> k) const;
-
-      /** Store the output transitions/states of the state @a src where
-       *  the label matches the letter @a letter.  */
-      template <typename OutputIterator, typename L, typename Kind>
-      void letter_delta(OutputIterator res,
-			const hstate_t& src,
-			const L& letter,
-			delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename L, typename Kind>
-      void letter_delta(OutputIterator res,
-			unsigned src,
-			const L& letter,
-			delta_kind::kind<Kind> k) const;
-
-      /** Store the output spontaneous transitions or states reached
-       *  from @a src by an epsilon-transition.	 */
-      template <typename OutputIterator, typename Kind>
-      void spontaneous_delta(OutputIterator res,
-			     const hstate_t& src,
-			     delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename Kind>
-      void spontaneous_delta(OutputIterator res,
-			     unsigned src,
-			     delta_kind::kind<Kind> k) const;
-
       /*----------.
       | Deltacs.  |
       `----------*/
@@ -569,58 +529,6 @@ namespace vcsn {
 			      delta_kind::kind<Kind> k) const;
       template <typename Functor, typename Kind>
       void spontaneous_deltaf(Functor& fun,
-			      unsigned src,
-			      delta_kind::kind<Kind> k) const;
-
-      /*-----------------.
-      | Reverse deltas.	 |
-      `-----------------*/
-
-      /** Store the input transitions/states of the state @a src
-       *  using @a res.	 */
-      template <typename OutputIterator, typename Kind>
-      void rdelta(OutputIterator res,
-		  const hstate_t& src,
-		  delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename Kind>
-      void rdelta(OutputIterator res,
-		  unsigned src,
-		  delta_kind::kind<Kind> k) const;
-
-      /** Store the input transitions/states of the state @a src where
-       *  @a query is true on a transition/state, using @a res.	 */
-      template <typename OutputIterator, typename L, typename Kind>
-      void rdelta(OutputIterator res,
-		  const hstate_t& src,
-		  const L& query,
-		  delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename L, typename Kind>
-      void rdelta(OutputIterator res,
-		  unsigned src,
-		  const L& query,
-		  delta_kind::kind<Kind> k) const;
-
-      /** Store the input transitions/states of the state @a src where
-       *  the label matches the letter @a letter.  */
-      template <typename OutputIterator, typename L, typename Kind>
-      void letter_rdelta(OutputIterator res,
-			 const hstate_t& src,
-			 const L& letter,
-			 delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename L, typename Kind>
-      void letter_rdelta(OutputIterator res,
-			 unsigned src,
-			 const L& letter,
-			 delta_kind::kind<Kind> k) const;
-
-      /** Store every input spontaneous transitions or every states that
-       *  reach @a src with an epsilon-transition using @a res.	 */
-      template <typename OutputIterator, typename Kind>
-      void spontaneous_rdelta(OutputIterator res,
-			      const hstate_t& src,
-			      delta_kind::kind<Kind> k) const;
-      template <typename OutputIterator, typename Kind>
-      void spontaneous_rdelta(OutputIterator res,
 			      unsigned src,
 			      delta_kind::kind<Kind> k) const;
 

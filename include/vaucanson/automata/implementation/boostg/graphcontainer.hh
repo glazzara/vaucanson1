@@ -126,17 +126,16 @@ namespace vcsn
     */
     template<typename HState, typename HLabel, typename EdgeValue>
     struct GraphContainer
-      : public multi_index_container
-    <
-      EdgeValue,
-      indexed_by
-      <
-	SourceAndLabel<HState, HLabel, EdgeValue>,
-	DestinationAndLabel<HState, HLabel, EdgeValue>,
-	Source<HState, EdgeValue>,
-	Destination<HState, EdgeValue>
-      >
-    > {};
+      : public multi_index_container<
+	  EdgeValue,
+	  indexed_by
+	  <
+	    SourceAndLabel<HState, HLabel, EdgeValue>,
+	    DestinationAndLabel<HState, HLabel, EdgeValue>,
+	    Source<HState, EdgeValue>,
+	    Destination<HState, EdgeValue>
+	  >
+	> {};
 
   } // boostg
 } // vcsn

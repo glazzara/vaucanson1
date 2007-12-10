@@ -64,6 +64,11 @@ namespace vcsn
 	typedef handler<transition_h, hedge_value_t>	htransition_t;
 	typedef htransition_t				hedge_t;
 
+	typedef	std::set<htransition_t>			delta_transition_t;
+	typedef	std::set<hstate_t>			delta_state_t;
+	typedef	delta_transition_t			const_delta_transition_t;
+	typedef	delta_state_t				const_delta_state_t;
+
 	/// Edge decorator.
 	template<typename EdgeLabel>
 	struct edge_value
@@ -215,8 +220,8 @@ namespace vcsn
 
 	/// Delta, Reverse deltas, for functor and iterator.
 # define DECLARE_DELTA_FUNCTION(DeltaName, DKind)			\
-	template <class OutputIterator, typename Query>			\
-	void DeltaName(OutputIterator res, const hstate_t& from,	\
+	template <class Container, typename Query>			\
+	void DeltaName(Container& res, const hstate_t& from,		\
 		       const Query& q, ::vcsn::delta_kind::DKind) const
 	DECLARE_DELTA_FUNCTION (delta, states);
 	DECLARE_DELTA_FUNCTION (delta, transitions);
