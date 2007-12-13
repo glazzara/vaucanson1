@@ -1,5 +1,10 @@
 2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
 
+	* minimization_2n/Makefile.bench,
+	* minimization_debruijn/Makefile.bench: Time only the relevant part.
+
+2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
+
 	* include/vaucanson/tools/bencher.hh (VCSN_BENCH_START_QUIET)
 	(VCSN_BENCH_START, VCSN_BENCH_STOP_QUIET, VCSN_BENCH_STOP)
 	(VCSN_BENCH_PRINT, VCSN_BENCH_STOP_AND_PRINT): Explicit the use of the
