@@ -56,26 +56,6 @@ namespace vcsn
       HLabel i;
     };
 
-    /// Used to compare hstate_t in delta_state_t container.
-    template<typename HState>
-    struct state_less_op
-    {
-      bool operator()(unsigned* h1, const HState& h2) const
-      {
-	return h1 < h2.value();
-      }
-
-      bool operator()(const HState& h1, unsigned* h2) const
-      {
-	return h1.value() < h2;
-      }
-
-      bool operator()(unsigned* h1, unsigned* h2) const
-      {
-	return h1 < h2;
-      }
-    };
-
   } //boostg
 } //vcsn
 

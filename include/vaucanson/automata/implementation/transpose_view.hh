@@ -106,10 +106,6 @@ namespace vcsn {
 
       typedef typename automaton_traits<T>::hstate_t	hstate_t;
       typedef typename automaton_traits<T>::htransition_t	htransition_t;
-      typedef typename automaton_traits<T>::delta_state_t	delta_state_t;
-      typedef typename automaton_traits<T>::delta_transition_t	delta_transition_t;
-      typedef typename automaton_traits<T>::const_delta_state_t	const_delta_state_t;
-      typedef typename automaton_traits<T>::const_delta_transition_t	const_delta_transition_t;
   };
 
 #define AutoType(Type)				\

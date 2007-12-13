@@ -615,52 +615,27 @@ namespace vcsn
 
   # define DEFINE_DELTA_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
     BOOSTGRAPH_TPARAM								\
-    template <typename Query>							\
+    template <typename OutputIterator, typename Query>				\
     void									\
-    BOOSTGRAPH::FunName(delta_##DeltaKind##_t& c,				\
+    BOOSTGRAPH::FunName(OutputIterator res,					\
                         const typename BOOSTGRAPH::hstate_t& s,			\
                         const Query& query,					\
-                        ::vcsn::delta_kind::DeltaKind##s) const			\
+                        ::vcsn::delta_kind::DeltaKind) const			\
     {										\
       assertion(has_state(s));							\
-      std::insert_iterator<delta_##DeltaKind##_t> res(c, c.begin());		\
       Target##_range r = graph_.get<Target>().equal_range(s);			\
       for (Target##_iterator e = r.first; e != r.second; ++e)			\
         if (query(hedge_t(graph_.project<0>(e))))				\
           *res++ = GetElt;							\
     }
 
-    DEFINE_DELTA_FUNCTION (delta, transition, src, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTA_FUNCTION (delta, state, src, e->to_);
-    DEFINE_DELTA_FUNCTION (rdelta, transition, dst, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTA_FUNCTION (rdelta, state, dst, e->from_);
+    DEFINE_DELTA_FUNCTION (delta, transitions, src, hedge_t(graph_.project<0>(e)));
+    DEFINE_DELTA_FUNCTION (delta, states, src, e->to_);
+    DEFINE_DELTA_FUNCTION (rdelta, transitions, dst, hedge_t(graph_.project<0>(e)));
+    DEFINE_DELTA_FUNCTION (rdelta, states, dst, e->from_);
 
   # undef DEFINE_DELTA_FUNCTION
-/*
-  # define DEFINE_DELTA_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
-    BOOSTGRAPH_TPARAM								\
-    template <typename Query>							\
-    void									\
-    BOOSTGRAPH::FunName(const_delta_##DeltaKind##_t& c,				\
-                        const typename BOOSTGRAPH::hstate_t& s,			\
-                        const Query& query,					\
-                        ::vcsn::delta_kind::DeltaKind##s) const			\
-    {										\
-      assertion(has_state(s));							\
-      std::insert_iterator<const_delta_##DeltaKind##_t> res(c, c.begin());	\
-      Target##_range r = graph_.get<Target>().equal_range(s);			\
-      for (Target##_iterator e = r.first; e != r.second; ++e)			\
-        if (query(hedge_t(graph_.project<0>(e))))				\
-          *res++ = GetElt;							\
-    }
 
-    DEFINE_DELTA_FUNCTION (delta, transition, src, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTA_FUNCTION (delta, state, src, e->to_);
-    DEFINE_DELTA_FUNCTION (rdelta, transition, dst, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTA_FUNCTION (rdelta, state, dst, e->from_);
-
-  # undef DEFINE_DELTA_FUNCTION
-*/
   # define DEFINE_DELTAF_FUNCTION(FunName, DeltaKind, Target, IsBool, Action)	\
     BOOSTGRAPH_TPARAM								\
     template <typename Functor, typename Query>					\

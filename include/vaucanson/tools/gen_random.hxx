@@ -165,7 +165,7 @@ namespace vcsn {
 	for (; i != work.states().end(); ++i)
 	{
 	  nb_transition--;
-	  const_delta_transition_t dst;
+	  std::set<htransition_t> dst;
 	  letter_t e = set.series().monoid().alphabet().choose();
 	  work.letter_deltac(dst, *prev, e, delta_kind::transitions());
 	  if (dst.size() == 0)
@@ -175,7 +175,7 @@ namespace vcsn {
 
 	for (int i = 0; i < nb_transition; i++)
 	{
-	  const_delta_state_t dst;
+	  std::set<hstate_t> dst;
 	  letter_t e = set.series().monoid().alphabet().choose();
 	  hstate_t s = work.choose_state();
 	  hstate_t a = work.choose_state();
@@ -323,7 +323,7 @@ namespace vcsn {
 	    del_transition_circle(work, *i);
 	    for_all_letters(j, set.series().monoid().alphabet())
 	    {
-	      const_delta_state_t ret;
+	      std::set<hstate_t> ret;
 	      work.letter_deltac(ret, *i, *j, delta_kind::states());
 	      if (ret.size() == 0)
 	      {

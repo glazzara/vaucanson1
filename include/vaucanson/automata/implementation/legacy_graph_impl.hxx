@@ -395,15 +395,14 @@ namespace vcsn
 
     # define DEFINE_DELTA_FUNCTION(DeltaName, DKind, IO, WhatFromE)	\
     TParam								\
-    template <class Container, class Query>				\
+    template <class OutputIterator, class Query>			\
     void								\
-    GClass::DeltaName(Container& c,					\
+    GClass::DeltaName(OutputIterator res,				\
                       const hstate_t& from,				\
                       const Query& query,				\
                       ::vcsn::delta_kind::DKind) const			\
     {									\
       assertion(has_state(from));					\
-      std::insert_iterator<Container> res(c, c.begin());		\
       const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
       for_all_const_(std::set<hedge_t>, e, edges)			\
       if (query(*e))							\

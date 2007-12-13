@@ -1,3 +1,31 @@
+2007-12-13  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Revert patch #1836.
+	Too many functionalities were lost with patch #1836.
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/implementation/boostg/boostg_delta_state.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh,
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh,
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/misc/usual_macros.hh,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/gen_random.hxx,
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh:
+	Revert.
+
 2007-12-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Introduce new types for delta containers.

@@ -18,6 +18,14 @@
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # include <boost/dynamic_bitset.hpp>
+# include <boost/multi_index_container.hpp>
+# include <boost/multi_index/member.hpp>
+# include <boost/multi_index/ordered_index.hpp>
+# include <boost/multi_index/hashed_index.hpp>
+# include <boost/functional/hash/hash.hpp>
+# include <boost/multi_index/sequenced_index.hpp>
+# include <boost/tuple/tuple.hpp>
+# include <boost/multi_index/composite_key.hpp>
 
 # include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -30,12 +38,23 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/misc/hash.hh>
 # include <vaucanson/automata/implementation/boostg/initial_value.hh>
-# include <vaucanson/automata/implementation/boostg/boostg_delta_state.hh>
-//# include <vaucanson/automata/implementation/boostg/boostg_const_delta.hh>
 # include <vaucanson/automata/implementation/boostg/graphcontainer.hh>
 # include <vaucanson/automata/implementation/boostg/edge_value.hh>
 # include <vaucanson/automata/implementation/boostg/boostg_functors.hh>
 # include <vaucanson/automata/implementation/boostg/initial_container.hh>
+
+using ::boost::multi_index_container;
+using ::boost::multi_index::hashed_non_unique;
+using ::boost::multi_index::indexed_by;
+using ::boost::multi_index::composite_key;
+using ::boost::multi_index::hashed_non_unique;
+using ::boost::multi_index::tag;
+using ::boost::multi_index::member;
+using ::boost::multi_index::index_iterator;
+using ::boost::multi_index::get;
+using ::boost::multi_index::project;
+using ::boost::multi_index::composite_key_hash;
+using ::boost::dynamic_bitset;
 
 namespace vcsn
 {
@@ -173,12 +192,6 @@ namespace vcsn
 	typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
 	typedef std::pair<succ_iterator, succ_iterator>	  succ_range;
 
-	typedef	std::list<htransition_t>		  delta_transition_t;
-
-	typedef DeltaState<hstate_t>			  delta_state_t;
-	typedef	delta_transition_t			  const_delta_transition_t;
-	typedef	delta_state_t				  const_delta_state_t;
-
 
 	Graph ();
 	Graph (unsigned int reserve_number_of_state,
@@ -246,30 +259,20 @@ namespace vcsn
 	geometry_t&	  geometry ();
 	const geometry_t& geometry () const;
 
-
-      /// Delta, Reverse deltas, for functor and iterator.
-      /// delta* functions must
-# define DECLARE_DELTA_FUNCTION(FunName, Type, DeltaKind)		  \
-	template <typename Query>					  \
-	void FunName (delta_##Type##_t& res, const hstate_t& from,	  \
+      /*
+      ** delta...
+      ** FIXME: nice comments
+      */
+# define DECLARE_DELTA_FUNCTION(FunName, DeltaKind)			\
+	template <typename OutputIterator, typename Query>		\
+	void FunName (OutputIterator res, const hstate_t& from,		\
 	              const Query& q, ::vcsn::delta_kind::DeltaKind) const
-	DECLARE_DELTA_FUNCTION (delta, state, states);
-	DECLARE_DELTA_FUNCTION (delta, transition, transitions);
-	DECLARE_DELTA_FUNCTION (rdelta, state, states);
-	DECLARE_DELTA_FUNCTION (rdelta, transition, transitions);
+	DECLARE_DELTA_FUNCTION (delta, states);
+	DECLARE_DELTA_FUNCTION (delta, transitions);
+	DECLARE_DELTA_FUNCTION (rdelta, states);
+	DECLARE_DELTA_FUNCTION (rdelta, transitions);
 # undef DECLARE_DELTA_FUNCTION
-/*
-# define DECLARE_DELTA_FUNCTION(FunName, Type, DeltaKind)		      \
-	template <typename Query>					      \
-	void FunName (const_delta_##Type##_t& res, const hstate_t& from,      \
-	              const Query& q, ::vcsn::delta_kind::DeltaKind) const
 
-	DECLARE_DELTA_FUNCTION (delta, state, states);
-	DECLARE_DELTA_FUNCTION (delta, transition, transitions);
-	DECLARE_DELTA_FUNCTION (rdelta, state, states);
-	DECLARE_DELTA_FUNCTION (rdelta, transition, transitions);
-# undef DECLARE_DELTA_FUNCTION
-*/
 # define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
 	template <typename Functor, typename Query>			\
 	void FunName (Functor& f, const hstate_t& from, const Query& q,	\
@@ -306,8 +309,8 @@ namespace vcsn
 	initial_t	  initial_;
 
 	//NEW ATTRIBUTES
-	boost::dynamic_bitset<>  initial_bitset_;
-	boost::dynamic_bitset<>  final_bitset_;
+	dynamic_bitset<>  initial_bitset_;
+	dynamic_bitset<>  final_bitset_;
 	unsigned	  number_of_epsilon_;
 
 	// number_of_state_ == 0 => there is no state.

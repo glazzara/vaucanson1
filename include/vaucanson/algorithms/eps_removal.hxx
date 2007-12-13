@@ -69,11 +69,11 @@ namespace vcsn {
 
       for_all_states(s, a)
       {
-	delta_transition_t	transition_list;
+	std::list<htransition_t>	transition_list;
 	int src = state_to_index[*s];
 
 	a.deltac(transition_list, *s, delta_kind::transitions());
-	for_all_const_(delta_transition_t, e, transition_list)
+	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
 	  int dst = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
@@ -171,10 +171,10 @@ namespace vcsn {
       // Compute the forward_eps_removal
       for_all_states(s, a)
       {
-	delta_transition_t transition_list;
+	std::list<htransition_t> transition_list;
 	a.deltac(transition_list, *s, delta_kind::transitions());
 	int src = state_to_index[*s];
-	for_all_const_(delta_transition_t, e, transition_list)
+	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
 	  int dst = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
@@ -304,7 +304,7 @@ namespace vcsn {
     {
       // Closure.
       Finder<automaton_t> find(a);
-      const_delta_state_t st_out;
+      cstates_t st_out;
 
       while (!tr_q.empty())
       {
@@ -315,7 +315,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, mid, delta_kind::states());
-	for_all_const_(const_delta_state_t, dst, st_out)
+	for_all_const(typename cstates_t, dst, st_out)
 	{
 	  if (!find(src, l, *dst))
 	  {
@@ -337,7 +337,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, i, delta_kind::states());
-	for_all_const_(const_delta_state_t, s, st_out)
+	for_all_const(typename cstates_t, s, st_out)
 	{
 	  if (!a.is_initial(*s))
 	  {
@@ -353,7 +353,7 @@ namespace vcsn {
     {
       // Closure.
       Finder<automaton_t> find(a);
-      const_delta_state_t st_in;
+      cstates_t st_in;
 
       while (!tr_q.empty())
       {
@@ -364,7 +364,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, mid, delta_kind::states());
-	for_all_const_(const_delta_state_t, src, st_in)
+	for_all_const(typename cstates_t, src, st_in)
 	{
 	  if (!find(*src, l, dst))
 	  {
@@ -386,7 +386,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, i, delta_kind::states());
-	for_all_const_(const_delta_state_t, s, st_in)
+	for_all_const(typename cstates_t, s, st_in)
 	{
 	  if (!a.is_final(*s))
 	  {

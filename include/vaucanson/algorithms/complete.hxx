@@ -41,7 +41,7 @@ namespace vcsn {
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     hstate_t sink_state;
     bool sink_added = false;
-    const_delta_state_t dst;
+    std::list<hstate_t> dst;
 
     for_all_states(s, work)
       for_all_letters(l, work.structure().series().monoid().alphabet())
@@ -92,7 +92,7 @@ namespace vcsn {
     const alphabet_t& alpha = e.structure().series().monoid().alphabet();
     for_all_states(i, e)
     {
-      delta_state_t dst;
+      std::set<hstate_t> dst;
       for_all_letters(j, alpha)
       {
 	dst.clear();
