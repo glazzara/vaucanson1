@@ -1,5 +1,14 @@
 2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/complete.hxx (complete_here,
+	is_complete): Ensure that input is realtime.
+	* include/vaucanson/algorithms/complete.hh: Document it.
+	* lib/generate_libvcsn.rb: Hide complete.hh only for FMPs.
+	* taf-kit/tests/vcsn-b.test: Add more tests.
+	Report from Pierre-Yves Angrand <angrand@enst.fr>.
+
+2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Complete previous patch.
 
 	* include/vaucanson/algorithms/is_deterministic.hxx: Include

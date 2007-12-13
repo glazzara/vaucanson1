@@ -63,7 +63,6 @@ def create?(type, file)
       file !~ /berry_sethi.hh/ and
       file !~ /brzozowski.hh/ and
       file !~ /complement.hh/ and
-      file !~ /complete.hh/ and
       file !~ /composition_cover.hh/ and
       file !~ /derived_term_automaton.hh/ and
       file !~ /determinize.hh/ and
@@ -86,6 +85,7 @@ def create?(type, file)
       (
         ("vcsn-fmp-tdc" != type and "vcsn-z-fmp-tdc" != type) or
           (
+	   file !~ /complete.hh/ and
 	   file !~ /is_deterministic.hh/ and
            file !~ /product.hh/
           )
