@@ -128,8 +128,45 @@ b
 10
 EOF
 
+# (0)-a->(1)-b->(2)
+# (0)----ab---->(2)
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton nondet.xml
+# Add states
+1
+# Add three states
+3
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+2
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+2
+b
+# Add transition
+3
+# From, to, label
+0
+2
+ab
+# Exit.
+10
+EOF
 
-AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml'
+
+AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml nondet.xml'
 
 # Cannot check display.
 
@@ -178,6 +215,12 @@ fail1 vcsn-b is-complete $a1
 # is-deterministic
 fail1 vcsn-b is-deterministic $a1
       vcsn-b determinize $a1 \| is-deterministic -
+
+# nondet is not realtime so is-determinisitic should complain
+      vcsn-b is-deterministic nondet.xml 2>stderr && exit 1
+      grep realtime stderr
+fail1 vcsn-b realtime nondet.xml \| is-deterministic -
+      vcsn-b determinize nondet.xml \| is-deterministic -
 
 # is-empty.
 fail1 vcsn-b is-empty $a1

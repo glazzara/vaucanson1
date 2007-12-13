@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ namespace vcsn {
    * Test if an automaton is deterministic.
    *
    * @param a A Boolean automaton.
-   *
+   * @pre @a a is a realtime Boolean automaton.
    * @return true if 'a' is deterministic.
    */
   template<typename A, typename T>

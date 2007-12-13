@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -70,6 +70,8 @@ namespace vcsn {
   do_is_deterministic(const AutomataBase<A>&	,
 		      const input_t&		input)
   {
+    precondition(is_realtime(input));
+
     AUTOMATON_TYPES(input_t);
     semiring_elt_t		  zero_semiring
       = input.structure().series().semiring()

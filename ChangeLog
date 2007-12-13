@@ -1,5 +1,13 @@
 2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/is_deterministic.hxx
+	(do_is_deterministic): Ensure that input is realtime.
+	* include/vaucanson/algorithms/is_deterministic.hh: Document it.
+	* taf-kit/tests/vcsn-b.test: Test it.
+	Report from Pierre-Yves Angrand <angrand@enst.fr>.
+
+2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Taf-Kit's tests suite failed to notice several mistakes because
 	"set -e" has no effects on commands prefixed by "!"...  Besides,
 	"!" does not make any difference between an expected error code
