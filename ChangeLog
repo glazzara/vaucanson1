@@ -1,3 +1,20 @@
+2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Taf-Kit's tests suite failed to notice several mistakes because
+	"set -e" has no effects on commands prefixed by "!"...  Besides,
+	"!" does not make any difference between an expected error code
+	and a segfault.
+
+	* tests/defs.in (fail1): New function.
+	(non_ambiguous1): Really point to a non-ambiguous automaton.
+	* tests/vcsn-b.test: Use fail1 instead of !.  Fix test for
+	is-realtime.
+	* tests/vcsn-z.test: Use fail1 instead of !.  Do not test for
+	is-normalized, it does not exist, and fix the tests for
+	is-ambiguous and is-realtime.
+	* tests/vcsn-tdc.test: Use fail1 instead of !.  Really disable
+	the test for are-isomorphic.
+
 2007-12-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fixes for files left in build directory after distclean.

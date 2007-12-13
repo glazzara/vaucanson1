@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006 The Vaucanson Group.
+# Copyright (C) 2006, 2007 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -34,15 +34,14 @@ vcsn-z info $c1
 #  vcsn-z are-isomorphic $c1 $c1
 #
 test $(vcsn-z eval $c1 bababa) -eq 42
-! vcsn-z is-ambiguous $c1
-! vcsn-z is-empty $c1
-! vcsn-z is-normalized $c1
-! vcsn-z is-realtime $c1
-! vcsn-z is-standard $c1
-! vcsn-z is-standard $void_z_automaton
-  vcsn-z is-standard $standard_c1
-  vcsn-z -a ab standard '(2 a).(4 1)' > 2a_41.xml
-  vcsn-z is-standard 2a_41.xml
+      vcsn-z is-ambiguous $c1
+fail1 vcsn-z is-empty $c1
+      vcsn-z is-realtime $c1
+fail1 vcsn-z is-standard $c1
+fail1 vcsn-z is-standard $void_z_automaton
+      vcsn-z is-standard $standard_c1
+      vcsn-z -a ab standard '(2 a).(4 1)' > 2a_41.xml
+      vcsn-z is-standard 2a_41.xml
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##

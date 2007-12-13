@@ -33,8 +33,8 @@ vcsn-tdc info $t1
 # as long as this algorithm is not correctly
 # defined.
 #  vcsn-tdc are-isomorphic $t1 $t1
-  vcsn-tdc is-sub-normalized $t1
-! vcsn-tdc is-empty $t1
+      vcsn-tdc is-sub-normalized $t1
+fail1 vcsn-tdc is-empty $t1
 
 
 
@@ -52,7 +52,7 @@ vcsn-tdc info $t1
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-! vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
+# fail1 vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
 
 ## Unambiguous composition test on boolean transducers
   vcsn-tdc u_compose $t2 \

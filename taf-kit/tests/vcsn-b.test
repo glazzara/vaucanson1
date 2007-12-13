@@ -102,7 +102,7 @@ EOF
 sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton ab2.xml
 # Add states
 1
-# Add one state
+# Add two states
 2
 # Set a state to be initial.
 5
@@ -158,8 +158,8 @@ done
 # defined.
 #
 # are-isomorphic
-#  vcsn-b are-isomorphic $a1 $a1
-#! vcsn-b are-isomorphic $a1 $b1
+#      vcsn-b are-isomorphic $a1 $a1
+#fail1 vcsn-b are-isomorphic $a1 $b1
 
 # eval
 test "$(vcsn-b eval $a1 'a')" = 0
@@ -167,35 +167,35 @@ test "$(vcsn-b eval $a1 'ab')" = 1
 test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 # is-ambiguous
-  vcsn-b is-ambiguous $ambiguous1
-  vcsn-b is-ambiguous $ambiguous2
-! vcsn-b is-ambiguous $non_ambiguous1
+      vcsn-b is-ambiguous $ambiguous1
+      vcsn-b is-ambiguous $ambiguous2
+fail1 vcsn-b is-ambiguous $non_ambiguous1
 
 # is-complete
-! vcsn-b is-complete $a1
-  vcsn-b complete $a1 \| is-complete -
+fail1 vcsn-b is-complete $a1
+      vcsn-b complete $a1 \| is-complete -
 
 # is-deterministic
-! vcsn-b is-deterministic $a1
-  vcsn-b determinize $a1 \| is-deterministic -
+fail1 vcsn-b is-deterministic $a1
+      vcsn-b determinize $a1 \| is-deterministic -
 
 # is-empty.
-! vcsn-b is-empty $a1
+fail1 vcsn-b is-empty $a1
 
 # is-normalized.
-#! vcsn-b is-normalized $a1
-#  vcsn-b normalize $a1 | vcsn-b is-normalized -
+#fail1 vcsn-b is-normalized $a1
+#      vcsn-b normalize $a1 | vcsn-b is-normalized -
 
 # is-realtime.
-! vcsn-b is-realtime $a1
-! vcsn-b is-realtime ab.xml
-  vcsn-b realtime ab.xml \| is-realtime -
+      vcsn-b is-realtime $a1
+fail1 vcsn-b is-realtime ab.xml
+      vcsn-b realtime ab.xml \| is-realtime -
 
 # is-standard
-! vcsn-b is-standard $a1
-! vcsn-b is-standard $void_b_automaton
-  vcsn-b standardize $a1 \| is-standard -
-  vcsn-b standard -a ab "1" \| standardize - \| is-standard -
+fail1 vcsn-b is-standard $a1
+fail1 vcsn-b is-standard $void_b_automaton
+      vcsn-b standardize $a1 \| is-standard -
+      vcsn-b standard -a ab "1" \| standardize - \| is-standard -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
@@ -211,13 +211,13 @@ vcsn-b quotient empty.xml \| is-empty -
 # run quotient(realtime(2snf)) and realtime() includes a
 # coaccessibility check.  Maybe realtime should not be called here,
 # but even if it isn't is-empty will call trim() before the actual check...
-vcsn-b quotient 2snf.xml \| is-empty -
-vcsn-b quotient 2snf.xml \| trim - \| is-empty -
+      vcsn-b quotient 2snf.xml \| is-empty -
+      vcsn-b quotient 2snf.xml \| trim - \| is-empty -
 
-! vcsn-b quotient all.xml \| is-empty -
+fail1 vcsn-b quotient all.xml \| is-empty -
 
-  vcsn-b are-equivalent ab.xml ab2.xml
-! vcsn-b are-equivalent ab2.xml 2snf.xml
+      vcsn-b are-equivalent ab.xml ab2.xml
+fail1 vcsn-b are-equivalent ab2.xml 2snf.xml
 
 
 #FIXME: Disable are-isomorphic test
