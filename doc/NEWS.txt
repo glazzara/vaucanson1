@@ -9,9 +9,17 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
+Vaucanson 1.1.1, December 13th, 2007
+====================================
 
-Vaucanson 1.1
-=============
+- Mostly bug fixes.
+
+- Algorithms
+
+  + are_equivalent: compare the languages of two boolean automata
+
+Vaucanson 1.1, July 29th, 2007
+==============================
 
 - XML
 
@@ -25,7 +33,7 @@ Vaucanson 1.1
     Various optimizations.
 
 - TAF-Kit
-  
+
   + Timer has been improved.
   + Intern pipe can now be used:
     ./vcsn-b identity ab.xml \| product b.xml - 

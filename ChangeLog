@@ -1,5 +1,11 @@
 2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* configure.ac: Bump version to 1.1.1.
+	* doc/NEWS.txt: Update.
+	* AUTHORS: Add me.
+
+2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/complete.hxx (complete_here,
 	is_complete): Ensure that input is realtime.
 	* include/vaucanson/algorithms/complete.hh: Document it.
