@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_IS_DETERMINISTIC_HXX
 
 # include <vaucanson/algorithms/is_deterministic.hh>
+# include <vaucanson/algorithms/realtime.hh>
 # include <set>
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>

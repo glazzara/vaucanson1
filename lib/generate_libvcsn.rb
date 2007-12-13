@@ -85,7 +85,10 @@ def create?(type, file)
       file !~ /standard_of.hh/ and
       (
         ("vcsn-fmp-tdc" != type and "vcsn-z-fmp-tdc" != type) or
-          file !~ /product.hh/
+          (
+	   file !~ /is_deterministic.hh/ and
+           file !~ /product.hh/
+          )
       )
     )
   )

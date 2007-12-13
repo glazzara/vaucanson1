@@ -1,5 +1,14 @@
 2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Complete previous patch.
+
+	* include/vaucanson/algorithms/is_deterministic.hxx: Include
+	realtime.hh.
+	* lib/generate_libvcsn.rb: Do not build is_deterministic for
+	transducers.
+
+2007-12-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/is_deterministic.hxx
 	(do_is_deterministic): Ensure that input is realtime.
 	* include/vaucanson/algorithms/is_deterministic.hh: Document it.
