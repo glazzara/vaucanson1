@@ -9,7 +9,7 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
-Vaucanson 1.1.1, December 13th, 2007
+Vaucanson 1.1.1, December 14th, 2007
 ====================================
 
 - Mostly bug fixes.
@@ -36,7 +36,7 @@ Vaucanson 1.1, July 29th, 2007
 
   + Timer has been improved.
   + Intern pipe can now be used:
-    ./vcsn-b identity ab.xml \| product b.xml - 
+    ./vcsn-b identity ab.xml \| product b.xml -
     is equivalent to
     ./vcsn-b identity ab.xml | ./vcsn-b product b.xml -
 

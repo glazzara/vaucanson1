@@ -1,5 +1,9 @@
 2007-12-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/NEWS.txt: 1.1.1 is for today.
+
+2007-12-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Update the version of the manual automatically.
 
 	* doc/manual/Makefile.am (version.tex): New rule.
@@ -12,13 +16,6 @@
 
 	* minimization_2n/Makefile.bench,
 	* minimization_debruijn/Makefile.bench: Time only the relevant part.
-
-2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
-
-	* include/vaucanson/tools/bencher.hh (VCSN_BENCH_START_QUIET)
-	(VCSN_BENCH_START, VCSN_BENCH_STOP_QUIET, VCSN_BENCH_STOP)
-	(VCSN_BENCH_PRINT, VCSN_BENCH_STOP_AND_PRINT): Explicit the use of the
-	vcsn::tools namespace.
 
 2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
 
