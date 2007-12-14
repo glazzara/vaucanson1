@@ -1,5 +1,9 @@
 2007-12-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* configure.ac: Bump version to 1.1.1a.
+
+2007-12-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/NEWS.txt: 1.1.1 is for today.
 
 2007-12-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
