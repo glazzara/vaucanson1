@@ -1,3 +1,13 @@
+2007-12-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Update the version of the manual automatically.
+
+	* doc/manual/Makefile.am (version.tex): New rule.
+	(vaucanson_user_manual_sources): Distribute version.tex.
+	* doc/manual/vaucanswig.tex: Adjust for recent changes in share/.
+	* doc/manual/installation.tex, doc/manual/vaucanson-user-manual.tex:
+	Use the definitions from version.tex.
+
 2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
 
 	* minimization_2n/Makefile.bench,

@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006 The Vaucanson Group.
+## Copyright (C) 2006, 2007 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 include $(top_srcdir)/vaucanson.mk
 include $(top_srcdir)/doc/doc.mk
 
-# We ship and compiler vaucanson-user-manual.pdf, but
-# vaucanson-developer-manual.pdf must be request by hand.
+# We ship and compile vaucanson-user-manual.pdf, but
+# vaucanson-developer-manual.pdf must be requested by hand.
 manual = $(srcdir)/vaucanson-user-manual.pdf
 
 pdf: $(manual)
@@ -41,9 +41,10 @@ vaucanswig.tex					\
 library.tex					\
 developer.tex					\
 theory.tex					\
-automata.tex					\
+$(srcdir)/automata.tex				\
 xml.tex						\
-specification.tex
+specification.tex				\
+$(srcdir)/version.tex
 
 $(srcdir)/automata.tex: generate-automata.sh
 # Use the TAF-Kit wrappers.
@@ -51,6 +52,10 @@ $(srcdir)/automata.tex: generate-automata.sh
 	$(srcdir)/generate-automata.sh >$@-t
 	mv $@-t $@
 
+$(srcdir)/version.tex: $(top_srcdir)/configure.ac
+	echo '\def\VcsnVersion{$(VERSION)}' > $*.tmp
+	echo "\def\VcsnDate{`LANG=C date +%Y-%m-%d`}" >> $*.tmp
+	mv -f $*.tmp $@
 
 EXTRA_DIST = $(vaucanson_user_manual_sources) $(manual)  \
 	 generate-automata.sh extex.pl extex.mk
