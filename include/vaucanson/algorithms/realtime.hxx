@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -149,15 +149,12 @@ namespace vcsn {
   `--------------*/
   template <class A_, typename Auto_>
   bool
-  do_is_realtime(const AutomataBase<A_>&,
-		 const Auto_&		   a)
+  do_is_realtime(const AutomataBase<A_>&, const Auto_& a)
   {
-    for (typename Auto_::transition_iterator e = a.transitions().begin();
-	 e != a.transitions().end();
-	 ++e)
-      if (a.series_of(*e) ==
-	  a.structure().series().
-	  identity(SELECT(typename Auto_::series_set_elt_value_t)))
+    TIMER_SCOPED("is_realtime (automaton)");
+    AUTOMATON_TYPES(Auto_);
+    for_all_transitions(e, a)
+      if (!is_letter_support(a.series_of(*e)))
 	return false;
     return true;
   }

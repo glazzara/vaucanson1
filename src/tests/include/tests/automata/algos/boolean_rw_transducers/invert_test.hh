@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -32,38 +32,17 @@
 using namespace vcsn;
 using namespace vcsn::boolean_transducer;
 
-// FIXME: - Write more tests.
-//        - Comparison between rat_exp should be enhanced;
-//          here we use an ugly hack thanks to "id" transducer
+// FIXME: - Write more tests.x
 template <class Auto>
 static bool test_exp(const Auto& trans,
 		     const Auto& trans_inverse,
-		     const boolean_automaton::alphabet_t& alpha,
 		     const boolean_automaton::rat_exp_t& exp1)
 {
-  boolean_automaton::rat_exp_t exp2 =
-    boolean_automaton::make_rat_exp(alpha);
-  boolean_automaton::rat_exp_t exp3 =
-    boolean_automaton::make_rat_exp(alpha);
+  boolean_automaton::rat_exp_t exp2 = evaluation (trans, exp1);
+  boolean_automaton::rat_exp_t exp3 = evaluation (trans_inverse, exp2);
 
-  exp2 = evaluation (trans, exp1);
-  exp3 = evaluation (trans_inverse, exp2);
-
-  // Do not test exp1 == exp3 here, because
-  // (a.(b.(a.b))) and (a.((b.a).b))
-  // would appear as different.
-  //
-  // Since these expressions are always concatenations in this test
-  // case we can compare the output strings (where superfluous
-  // parentheses are omitted by default).
-  std::stringstream s1;
-  std::stringstream s3;
-  s1 << exp1;
-  s3 << exp3;
-  std::cout << s1.str() << std::endl;
-  std::cout << s3.str() << std::endl;
-
-  return s1.str() == s3.str();
+  return are_equivalent(boolean_automaton::standard_of(exp1),
+			boolean_automaton::standard_of(exp3));
 }
 
 
@@ -102,22 +81,6 @@ bool invert_test(tests::Tester& tg)
 
 
 
-
-  /*--------------.
-  | ID TRANSDUCER |
-  `--------------*/
-
-  automaton_t id =  make_automaton(alpha, alpha);
-
-  hstate_t id1 = id.add_state();
-  id.set_initial(id1);
-  id.set_final(id1);
-  id.add_io_transition(id1, id1, 'a', 'a');
-  id.add_io_transition(id1, id1, 'b', 'b');
-
-
-
-
   /*-----------------.
   | Evaluation tests |
   `-----------------*/
@@ -126,12 +89,12 @@ bool invert_test(tests::Tester& tg)
     boolean_automaton::make_rat_exp(alpha, "abab");
 
   test_num++;
-  if (test_exp(trans, trans_inverse, alpha, evaluation(id, exp1)))
+  if (test_exp(trans, trans_inverse, exp1))
     nb_succeed++;
 
   exp1 = boolean_automaton::make_rat_exp(alpha, "ababab");
   test_num++;
-  if (test_exp(trans, trans_inverse, alpha, evaluation(id, exp1)))
+  if (test_exp(trans, trans_inverse, exp1))
     nb_succeed++;
 
 

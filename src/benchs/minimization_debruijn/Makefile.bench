@@ -5,8 +5,8 @@ benchs: $(EXTRA_PROGRAMS)
 	echo '|Minimization bench - De Bruijn|';			\
 	echo '================================';			\
 	echo "$$FSM_PATH/fsmcompile -i../common/alpha.syms init_o_tmp.fsm |"\
-	   	"$$FSM_PATH/fsmminimize > /dev/null" > tmp.min;		\
-	for n_states in 15 20; do					\
+	     "sh -c 'time $$FSM_PATH/fsmminimize' > /dev/null" > tmp.min;\
+	for n_states in 15 16 17 18; do					\
 	    echo "----------------------For $$n_states states";		\
 	    echo "--------------VCSN (moore):";				\
 	    ./minimization_debruijn_moore-bench $$n_states;		\
@@ -16,7 +16,7 @@ benchs: $(EXTRA_PROGRAMS)
 	    ./minimization_debruijn_brzozowski-bench $$n_states;	\
 	    if [ ! -z "$$FSM_PATH" ]; then				\
 	      echo "--------------FSM:";				\
-	      time sh tmp.min;						\
+	      sh tmp.min;						\
 	    fi;								\
 	done;								\
 	rm -f tmp.min init_o_tmp.fsm

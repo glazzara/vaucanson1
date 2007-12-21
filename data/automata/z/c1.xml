@@ -16,8 +16,8 @@
     </states>
     <transitions>
       <transition dst="s1" label="b" src="s0"/>
-      <transition dst="s1" label="(2 a)+(2 b)" src="s1"/>
       <transition dst="s0" label="a+b" src="s0"/>
+      <transition dst="s1" label="(2 a)+(2 b)" src="s1"/>
       <initial label="1" state="s0"/>
       <final label="1" state="s1"/>
     </transitions>

@@ -65,6 +65,7 @@ unsigned minimization_test(tests::Tester& tg)
     }
 
     automaton_t temp = trim(determinize(transpose(work)));
+    SAVE_AUTOMATON_XML("/tmp", "temp", temp, i);
 
     automaton_t minimize = trim(determinize(transpose(temp)));
     automaton_t co_minimize = trim(transpose(minimize));

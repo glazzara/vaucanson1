@@ -165,6 +165,13 @@ check_coherence_xml()
     check_coherence `vcsn-b info $file` $*
 }
 
+fail1()
+{
+  exitcode=0
+  "$@" || exitcode=$?
+  test $exitcode = 1 || exit 1
+}
+
 ## ---------- ##
 ## Automata.  ##
 ## ---------- ##
@@ -178,7 +185,7 @@ t1=$automata_dir/tdc/t1.xml
 u1=$automata_dir/tdc/u1.xml
 ambiguous1=$automata_tests_dir/b/ambiguous1.xml
 ambiguous2=$automata_tests_dir/b/ambiguous2.xml
-non_ambiguous1=$automata_tests_dir/b/ambiguous1.xml
+non_ambiguous1=$automata_tests_dir/b/non_ambiguous1.xml
 void_b_automaton=$automata_tests_dir/b/void_b_automaton.xml
 b_to_transpose=$automata_tests_dir/b/b_to_transpose.xml
 b_transposed=$automata_tests_dir/b/b_transposed.xml
@@ -196,13 +203,10 @@ inverted_t1=$automata_tests_dir/tdc/inverted_t1.xml
 ## ---------- ##
 
 testSubDir=$me.dir
-test -d $testSubDir ||
-  mkdir $testSubDir
-$testSubDir=$testSubDir/$me
-chmod -R a+rwx $$testSubDir > /dev/null 2>&1
-rm -rf $$testSubDir > /dev/null 2>&1
-mkdir $$testSubDir
-cd $$testSubDir
+chmod -R a+rwx $testSubDir > /dev/null 2>&1
+rm -rf $testSubDir > /dev/null 2>&1
+mkdir $testSubDir
+cd $testSubDir
 
 
 

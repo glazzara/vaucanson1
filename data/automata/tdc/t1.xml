@@ -22,8 +22,8 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition dst="s1" out="y" src="s0"/>
       <transition dst="s0" in="a" src="s1"/>
+      <transition dst="s1" out="y" src="s0"/>
       <transition dst="s2" out="x" src="s1"/>
       <transition dst="s1" in="b" src="s2"/>
       <initial state="s1"/>

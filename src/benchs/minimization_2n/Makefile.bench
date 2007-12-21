@@ -5,7 +5,7 @@ benchs: $(EXTRA_PROGRAMS)
 	echo '|Minimization bench - 2^n automaton|';			\
 	echo '====================================';			\
 	echo "$$FSM_PATH/fsmcompile -i../common/alpha.syms init_o_tmp.fsm |"\
-	   	"$$FSM_PATH/fsmminimize > /dev/null" > tmp.min;		\
+	     "sh -c 'time $$FSM_PATH/fsmminimize' > /dev/null" > tmp.min;\
 	for n_states in $$(seq 11 15); do				\
 	    echo "----------------------For $$n_states states";		\
 	    echo "--------------VCSN (moore):";				\
@@ -16,7 +16,7 @@ benchs: $(EXTRA_PROGRAMS)
 	    ./minimization_2n_brzozowski-bench $$n_states;		\
 	    if [ ! -z "$$FSM_PATH" ]; then				\
 	      echo "--------------FSM:";				\
-	      time sh tmp.min;						\
+	      sh tmp.min;						\
 	    fi;								\
 	done;								\
 	rm -f tmp.min init_o_tmp.fsm

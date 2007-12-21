@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2007 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,9 +11,6 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = automata emacs
-
-# The XSD file and the graph implementation templates are installed.
-dist_pkgdata_DATA = vaucanson.xsd \
-		    template_graph_impl.hh \
-		    template_graph_impl.hxx
+# elisp-comp cannot build files in subdirectories, so do not try to
+# build these from the parent directory.
+dist_lisp_LISP = rebox.el vaucanson.el

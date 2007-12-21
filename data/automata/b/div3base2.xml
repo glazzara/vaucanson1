@@ -17,11 +17,11 @@
     </states>
     <transitions>
       <transition dst="s0" label="\0" src="s0"/>
-      <transition dst="s1" label="\1" src="s0"/>
-      <transition dst="s2" label="\0" src="s1"/>
       <transition dst="s0" label="\1" src="s1"/>
       <transition dst="s1" label="\0" src="s2"/>
+      <transition dst="s2" label="\0" src="s1"/>
       <transition dst="s2" label="\1" src="s2"/>
+      <transition dst="s1" label="\1" src="s0"/>
       <initial state="s0"/>
       <final state="s0"/>
     </transitions>

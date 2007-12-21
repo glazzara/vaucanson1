@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,66 +53,73 @@ namespace vcsn
 
     unsigned int					n_bench_indent;
     std::vector<bencher*>				v_benchers;
-    std::vector< std::pair<int, bencher*> >	v_old_benchers;
+    std::vector< std::pair<int, bencher*> >		v_old_benchers;
 
-#  define VCSN_BENCH_START_QUIET					\
-    {									\
-      v_benchers.push_back(new bencher);					\
-      v_benchers.back()->start();						\
-    }
-
-#  define VCSN_BENCH_START						\
-    {									\
-      v_benchers.push_back(new bencher);					\
-      v_benchers.back()->start();						\
-      std::cerr << std::string(n_bench_indent, ' ') <<			\
-      "Start bench in " << __FUNCTION__ << "..." << std::endl;		\
-      n_bench_indent += 3;						\
-    }
-
-#  define VCSN_BENCH_STOP_QUIET(Result)					\
-    {									\
-      v_benchers.back()->stop();						\
-      Result = v_benchers.back()->get_time();				\
-      delete v_benchers.back();						\
-      v_benchers.pop_back();						\
-    }
-
-#  define VCSN_BENCH_STOP						\
-    {									\
-      v_benchers.back()->stop();						\
-      v_old_benchers.insert(v_old_benchers.begin(),			\
-	  std::pair<int, bencher*>(n_bench_indent,	\
-	    v_benchers.back()));	\
-      n_bench_indent -= 3;						\
-      std::cerr << std::string(n_bench_indent, ' ') <<			\
-      "Stop bench in " << __FUNCTION__ << "..." << std::endl;		\
-      v_benchers.pop_back();						\
-    }
-
-#  define VCSN_BENCH_PRINT						\
-    {									\
-      std::cerr << std::string(v_old_benchers.back().first, ' ') <<	\
-      __FUNCTION__ << ": " <<						\
-      v_old_benchers.back().second->get_time() << std::endl;		\
-      delete v_old_benchers.back().second;				\
-      v_old_benchers.pop_back();						\
-    }
-
-#  define VCSN_BENCH_STOP_AND_PRINT					\
-    {									\
-      v_benchers.back()->stop();						\
-      std::cerr << std::string(n_bench_indent, ' ') <<			\
-      __FUNCTION__ << ": " <<						\
-      v_benchers.back()->get_time() << std::endl;			\
-      n_bench_indent -= 3;						\
-      std::cerr << std::string(n_bench_indent, ' ') <<			\
-      "Stop bench in " << __FUNCTION__ << "..." << std::endl;		\
-      delete v_benchers.back();						\
-      v_benchers.pop_back();						\
-    }
   } // tools
 } // vcsn
+
+#  define VCSN_BENCH_START_QUIET		\
+  {						\
+    using namespace vcsn::tools;		\
+    v_benchers.push_back(new bencher);		\
+    v_benchers.back()->start();			\
+  }
+
+#  define VCSN_BENCH_START					\
+  {								\
+    using namespace vcsn::tools;				\
+    v_benchers.push_back(new bencher);				\
+    v_benchers.back()->start();					\
+    std::cerr << std::string(n_bench_indent, ' ') <<		\
+      "Start bench in " << __FUNCTION__ << "..." << std::endl;	\
+    n_bench_indent += 3;					\
+  }
+
+#  define VCSN_BENCH_STOP_QUIET(Result)		\
+  {						\
+    using namespace vcsn::tools;		\
+    v_benchers.back()->stop();			\
+    Result = v_benchers.back()->get_time();	\
+    delete v_benchers.back();			\
+    v_benchers.pop_back();			\
+  }
+
+#  define VCSN_BENCH_STOP						\
+  {									\
+    using namespace vcsn::tools;					\
+    v_benchers.back()->stop();						\
+    v_old_benchers.insert(v_old_benchers.begin(),			\
+			  std::pair<int, bencher*>(n_bench_indent,	\
+						   v_benchers.back())); \
+    n_bench_indent -= 3;						\
+    std::cerr << std::string(n_bench_indent, ' ') <<			\
+      "Stop bench in " << __FUNCTION__ << "..." << std::endl;		\
+    v_benchers.pop_back();						\
+  }
+
+#  define VCSN_BENCH_PRINT						\
+  {									\
+    using namespace vcsn::tools;					\
+    std::cerr << std::string(v_old_benchers.back().first, ' ') <<	\
+      __FUNCTION__ << ": " <<						\
+      v_old_benchers.back().second->get_time() << std::endl;		\
+    delete v_old_benchers.back().second;				\
+    v_old_benchers.pop_back();						\
+  }
+
+#  define VCSN_BENCH_STOP_AND_PRINT				\
+  {								\
+    using namespace vcsn::tools;				\
+    v_benchers.back()->stop();					\
+    std::cerr << std::string(n_bench_indent, ' ') <<		\
+      __FUNCTION__ << ": " <<					\
+      v_benchers.back()->get_time() << std::endl;		\
+    n_bench_indent -= 3;					\
+    std::cerr << std::string(n_bench_indent, ' ') <<		\
+      "Stop bench in " << __FUNCTION__ << "..." << std::endl;	\
+    delete v_benchers.back();					\
+    v_benchers.pop_back();					\
+  }
 
 
 

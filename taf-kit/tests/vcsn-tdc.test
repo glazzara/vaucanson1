@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006 The Vaucanson Group.
+# Copyright (C) 2006, 2007 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -33,8 +33,8 @@ vcsn-tdc info $t1
 # as long as this algorithm is not correctly
 # defined.
 #  vcsn-tdc are-isomorphic $t1 $t1
-  vcsn-tdc is-sub-normalized $t1
-! vcsn-tdc is-empty $t1
+      vcsn-tdc is-sub-normalized $t1
+fail1 vcsn-tdc is-empty $t1
 
 
 
@@ -52,7 +52,7 @@ vcsn-tdc info $t1
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-! vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
+# fail1 vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
 
 ## Unambiguous composition test on boolean transducers
   vcsn-tdc u_compose $t2 \
@@ -70,3 +70,5 @@ vcsn-tdc info $t1
   vcsn-tdc --alphabet1=ab --alphabet2=xy image $t1 | vcsn-b eval - $input
 
   vcsn-tdc to-rt $t1
+
+  vcsn-tdc --alphabet1=ab --alphabet2=xy eval-aut $t1 $a1 | vcsn-b eval - yx

@@ -83,6 +83,12 @@ namespace vcsn
     return ++ref_;
   }
 
+  template <typename T>
+  SmartLabel<T>::operator const T&()
+  {
+    return value();
+  }
+
 
  /*---------------------`
   | SmartLabelContainer |

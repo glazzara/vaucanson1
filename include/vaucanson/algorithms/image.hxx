@@ -70,8 +70,8 @@ namespace vcsn
   {
     TIMER_SCOPED("image (transducer to automaton)");
     AUTOMATON_TYPES(Trans_t);
-
-    std::map<hstate_t, hstate_t> m;
+    AUTOMATON_TYPES_(Auto_t, auto_);
+    std::map<hstate_t, auto_hstate_t> m;
 
     for_all_states(p, t)
       m[*p] = ret.add_state();
@@ -87,7 +87,7 @@ namespace vcsn
     {
       if (t.get_initial(*p) != id_series)
       {
-	hstate_t tmp = ret.add_state();
+	auto_hstate_t tmp = ret.add_state();
 	ret.set_initial(tmp);
 	ret.add_series_transition(tmp, m[*p], t.get_initial(*p).get(empty));
       }
@@ -99,7 +99,7 @@ namespace vcsn
     {
       if (t.get_final(*p) != id_series)
       {
-	hstate_t tmp = ret.add_state();
+	auto_hstate_t tmp = ret.add_state();
 	ret.set_final(tmp);
 	ret.add_series_transition(m[*p], tmp, t.get_final(*p).get(empty));
       }

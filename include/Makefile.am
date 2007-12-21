@@ -289,6 +289,8 @@ vaucanson/algorithms/eps_removal.hh				\
 vaucanson/algorithms/eps_removal.hxx				\
 vaucanson/algorithms/eps_removal_sp.hh				\
 vaucanson/algorithms/eps_removal_sp.hxx				\
+vaucanson/algorithms/equivalent.hh				\
+vaucanson/algorithms/equivalent.hxx				\
 vaucanson/algorithms/eval.hh					\
 vaucanson/algorithms/eval.hxx					\
 vaucanson/algorithms/evaluation_fmp.hh				\
@@ -331,8 +333,6 @@ vaucanson/algorithms/is_letterized.hh				\
 vaucanson/algorithms/is_letterized.hxx				\
 vaucanson/algorithms/is_normalized.hh				\
 vaucanson/algorithms/is_normalized.hxx				\
-vaucanson/algorithms/is_realtime.hh				\
-vaucanson/algorithms/is_realtime.hxx				\
 vaucanson/algorithms/isomorph.hh				\
 vaucanson/algorithms/isomorph.hxx				\
 vaucanson/algorithms/krat_exp_cderivation.hh			\

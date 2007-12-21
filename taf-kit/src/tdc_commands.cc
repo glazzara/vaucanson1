@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -165,9 +165,9 @@ const command_t command_map[] =
 		   "Give the automaton that accepts all inputs accepted by `aut'."),
     COMMAND_ENTRY_CN (eval, evaluation, AutExp,
 		      "Give the evaluation of `exp' against `aut'."),
-    COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, Aut,
-		      "Evaluate the language described by the Boolean automaton\n\t"
-		      "`aut2' on the transducer `aut1'."),
+    COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
+		      "Evaluate the language described by the\n\t"
+		      "Boolean automaton `aut2' on the transducer `aut1'."),
     COMMAND_ENTRY (image, Aut,
 		   "Give an automaton that accepts all output produced by `aut'."),
     //	  COMMAND_ENTRY (transpose, Aut,

@@ -47,6 +47,8 @@ namespace vcsn
       int ref_dec ();
       int ref_inc ();
 
+      operator const T& ();
+
    private:
       ::boost::shared_ptr<T> value_;
       int ref_;

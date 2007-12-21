@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -142,17 +142,25 @@ normalized_composition_test(tests::Tester& t)
     boolean_transducer::make_automaton(first_at, third_at);
 
   fmp_to_realtime(t1, trans1);
+  realtime_here(trans1);
   fmp_to_realtime(t2, trans2);
+  realtime_here(trans2);
   fmp_to_realtime(t3, trans3);
+  realtime_here(trans3);
 
   boolean_automaton::rat_exp_t exp =
     boolean_automaton::make_rat_exp(first_at, "abbababa");
 
-  TEST(t, "Normalized composition works.",
-       (boolean_transducer::evaluation(trans3, exp) ==
-	boolean_transducer::evaluation(trans2,
-				       boolean_transducer::evaluation(trans1,
-								      exp))));
+
+  boolean_automaton::automaton_t res1 =
+    boolean_automaton::standard_of
+      (boolean_transducer::evaluation(trans3, exp));
+  boolean_automaton::automaton_t res2 =
+    boolean_automaton::standard_of
+      (boolean_transducer::evaluation
+        (trans2, boolean_transducer::evaluation(trans1, exp)));
+
+  TEST(t, "Normalized composition works.", are_equivalent(res1, res2));
 
   return t.all_passed();
 }

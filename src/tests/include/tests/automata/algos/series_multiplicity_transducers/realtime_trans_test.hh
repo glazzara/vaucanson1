@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,7 +17,6 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_SERIES_MULTIPLICITY_TRANSDUCERS_REALTIME_TRANS_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_SERIES_MULTIPLICITY_TRANSDUCERS_REALTIME_TRANS_TEST_HH
 
-# include <vaucanson/algorithms/is_realtime.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/tools/gen_random.hh>
 

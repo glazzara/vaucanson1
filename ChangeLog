@@ -1,3 +1,57 @@
+2007-12-21  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Merge latest changes from trunk to BMI.
+	* configure.ac: .
+	* data/Makefile.am: .
+	* data/automata/b/a1.xml: .
+	* data/automata/b/b1.xml: .
+	* data/automata/b/div3base2.xml: .
+	* data/automata/b/double-3-1.xml: .
+	* data/automata/b/ladybird-6.xml: .
+	* data/automata/tdc/t1.xml: .
+	* data/automata/tdc/u1.xml: .
+	* data/automata/z/b1.xml: .
+	* data/automata/z/c1.xml: .
+	* data/emacs/Makefile.am: New.
+	* include/Makefile.am: .
+	* include/generate_headers.sh: .
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh: .
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx: .
+	* include/vaucanson/algorithms/complete.hh: .
+	* include/vaucanson/algorithms/complete.hxx: .
+	* include/vaucanson/algorithms/equivalent.hh: New.
+	* include/vaucanson/algorithms/equivalent.hxx: New.
+	* include/vaucanson/algorithms/image.hxx: .
+	* include/vaucanson/algorithms/is_deterministic.hh: .
+	* include/vaucanson/algorithms/is_deterministic.hxx: .
+	* include/vaucanson/algorithms/is_realtime.hh: Remove.
+	* include/vaucanson/algorithms/is_realtime.hxx: Remove.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/product.hxx: .
+	* include/vaucanson/algorithms/realtime.hxx: .
+	* include/vaucanson/automata/concept/smart_label.hh: .
+	* include/vaucanson/automata/concept/smart_label.hxx: .
+	* include/vaucanson/contexts/automaton_functions.thh: .
+	* include/vaucanson/contexts/transducer_maker.thxx: .
+	* include/vaucanson/tools/bencher.hh: .
+	* lib/generate_libvcsn.rb: .
+	* src/benchs/minimization_2n/Makefile.bench: .
+	* src/benchs/minimization_debruijn/Makefile.bench: .
+	* src/tests/check/check.mk: .
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh: .
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh: .
+	* src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh: .
+	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh: .
+	* src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh: .
+	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh: .
+	* src/tests/test-suites/test-suite.mk: .
+	* taf-kit/src/b_commands.cc: .
+	* taf-kit/src/tdc_commands.cc: .
+	* taf-kit/tests/defs.in: .
+	* taf-kit/tests/vcsn-b.test: .
+	* taf-kit/tests/vcsn-tdc.test: .
+	* taf-kit/tests/vcsn-z.test: .
+
 2007-12-13  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Revert patch #1836.

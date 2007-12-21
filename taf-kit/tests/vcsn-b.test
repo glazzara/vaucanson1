@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006 The Vaucanson Group.
+# Copyright (C) 2006, 2007 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@ set -e
 ## Input/output.  ##
 ## -------------- ##
 
- sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton all.xml
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton all.xml
 # Add states
 1
 # Add one state
@@ -45,10 +45,173 @@ a+b
 10
 EOF
 
+# Empty automaton (no states).
+echo 10 | vcsn-b --alphabet=ab define-automaton empty.xml
+
+# Two states, no final states (empty language).
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton 2snf.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+0
+b
+# Exit.
+10
+EOF
+
+# (ab)* using one transition
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton ab.xml
+# Add states
+1
+# Add one state
+1
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+0
+# Add transition
+3
+# From, to, label
+0
+0
+ab
+# Exit.
+10
+EOF
+
+# (ab)* using two transitions
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton ab2.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+0
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+0
+b
+# Exit.
+10
+EOF
+
+# (0)-a->(1)-b->(2)
+# (0)----ab---->(2)
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton nondet.xml
+# Add states
+1
+# Add three states
+3
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+2
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+2
+b
+# Add transition
+3
+# From, to, label
+0
+2
+ab
+# Exit.
+10
+EOF
+
+# (0)-aa->(1)
+# (0)-ab->(1)
+# (0)-b-->(1)
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton comp.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+1
+# Add transition
+3
+# From, to, label
+0
+1
+aa
+# Add transition
+3
+# From, to, label
+0
+1
+ab
+# Add transition
+3
+# From, to, label
+0
+1
+b
+# Exit.
+10
+EOF
+
+
+AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml nondet.xml comp.xml'
+
 # Cannot check display.
 
 # Check that dot accepts the output.
-vcsn-b dot-dump all.xml | dot
+for a in $AUTOMATA; do
+  vcsn-b dot-dump $a | dot
+done
 
 # Check that each builtin automaton can be dumped.
 for a in $(vcsn-b list-automata | sed -n 's/^  * - \([-a-z0-9]*\).*/\1/p')
@@ -56,9 +219,10 @@ do
   vcsn-b dump-automaton $a \| info -
 done
 
-vcsn-b identity all.xml >all2.xml
-diff -uBw all.xml all2.xml
-
+for a in $AUTOMATA; do
+  vcsn-b identity $a >tmp.xml
+  diff -uBw $a tmp.xml
+done
 
 ## --------------------------------- ##
 ## Test and evaluation on automata.  ##
@@ -69,8 +233,8 @@ diff -uBw all.xml all2.xml
 # defined.
 #
 # are-isomorphic
-#  vcsn-b are-isomorphic $a1 $a1
-#! vcsn-b are-isomorphic $a1 $b1
+#      vcsn-b are-isomorphic $a1 $a1
+#fail1 vcsn-b are-isomorphic $a1 $b1
 
 # eval
 test "$(vcsn-b eval $a1 'a')" = 0
@@ -78,33 +242,48 @@ test "$(vcsn-b eval $a1 'ab')" = 1
 test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 # is-ambiguous
-  vcsn-b is-ambiguous $ambiguous1
-  vcsn-b is-ambiguous $ambiguous2
-! vcsn-b is-ambiguous $non_ambiguous1
+      vcsn-b is-ambiguous $ambiguous1
+      vcsn-b is-ambiguous $ambiguous2
+fail1 vcsn-b is-ambiguous $non_ambiguous1
 
 # is-complete
-! vcsn-b is-complete $a1
-  vcsn-b complete $a1 \| is-complete -
+fail1 vcsn-b is-complete $a1
+      vcsn-b complete $a1 \| is-complete -
+
+# comp is not realtime so is-complete should complain
+      vcsn-b is-complete comp.xml 2>stderr && exit 1
+      grep realtime stderr
+fail1 vcsn-b realtime comp.xml \| is-complete -
+      vcsn-b complete comp.xml 2>stderr  && exit 1
+      grep realtime stderr
 
 # is-deterministic
-! vcsn-b is-deterministic $a1
-  vcsn-b determinize $a1 \| is-deterministic -
+fail1 vcsn-b is-deterministic $a1
+      vcsn-b determinize $a1 \| is-deterministic -
+
+# nondet is not realtime so is-determinisitic should complain
+      vcsn-b is-deterministic nondet.xml 2>stderr && exit 1
+      grep realtime stderr
+fail1 vcsn-b realtime nondet.xml \| is-deterministic -
+      vcsn-b determinize nondet.xml \| is-deterministic -
 
 # is-empty.
-! vcsn-b is-empty $a1
+fail1 vcsn-b is-empty $a1
 
 # is-normalized.
-#! vcsn-b is-normalized $a1
-#  vcsn-b normalize $a1 | vcsn-b is-normalized -
+#fail1 vcsn-b is-normalized $a1
+#      vcsn-b normalize $a1 | vcsn-b is-normalized -
 
 # is-realtime.
-! vcsn-b is-realtime $a1
+      vcsn-b is-realtime $a1
+fail1 vcsn-b is-realtime ab.xml
+      vcsn-b realtime ab.xml \| is-realtime -
 
 # is-standard
-! vcsn-b is-standard $a1
-! vcsn-b is-standard $void_b_automaton
-  vcsn-b standardize $a1 \| is-standard -
-  vcsn-b standard -a ab "1" \| standardize - \| is-standard -
+fail1 vcsn-b is-standard $a1
+fail1 vcsn-b is-standard $void_b_automaton
+      vcsn-b standardize $a1 \| is-standard -
+      vcsn-b standard -a ab "1" \| standardize - \| is-standard -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
@@ -112,6 +291,22 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 vcsn-b product $a1 $a1 \| identity -
 vcsn-b concatenate $a1 $a1 \| identity -
+
+vcsn-b quotient empty.xml \| is-empty -
+
+# Ideally we would like the quotient of 2snf to be non-empty: a single
+# non-final state. Right now 2snf.xml is empty because taf-kit will
+# run quotient(realtime(2snf)) and realtime() includes a
+# coaccessibility check.  Maybe realtime should not be called here,
+# but even if it isn't is-empty will call trim() before the actual check...
+      vcsn-b quotient 2snf.xml \| is-empty -
+      vcsn-b quotient 2snf.xml \| trim - \| is-empty -
+
+fail1 vcsn-b quotient all.xml \| is-empty -
+
+      vcsn-b are-equivalent ab.xml ab2.xml
+fail1 vcsn-b are-equivalent ab2.xml 2snf.xml
+
 
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
