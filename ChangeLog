@@ -1,3 +1,12 @@
+2007-12-31  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	[bmi] Various small fixes.
+	* ../../../../include/vaucanson/algorithms/internal/evaluation.hxx:
+	Use the VCSN_EMPTY macro.
+	* ../../../../include/vaucanson/automata/implementation/boostg_graph_impl.hxx:
+	Fix a wrong parameter passed to a method.
+	* ../../../../tools/vcsn-graph-util: Update script name in help output.
+
 2007-12-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Merge latest changes from trunk to BMI.

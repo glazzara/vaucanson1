@@ -491,7 +491,7 @@ namespace vcsn
     const typename BOOSTGRAPH::label_t&
     BOOSTGRAPH::label_of (const hedge_t& h) const
     {
-      return h.value()->label_.value()->value();
+      return label_container_.get_label(h.value()->label_);
     }
 
     BOOSTGRAPH_TPARAM

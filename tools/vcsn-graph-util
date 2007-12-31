@@ -31,7 +31,7 @@ IMPL_NAME=""
 usage()
 {
   cat << EOF
-Usage: vcsn_add_impl.sh [[--data-path=<path>] --new-impl=<name>]
+Usage: vcsn-graph-util  [[--data-path=<path>] --new-impl=<name>]
 			[[--include-path=<path>] <path/*_graph_impl.hh>]
 			[--output-dir=<path>]
 			[--howto]
