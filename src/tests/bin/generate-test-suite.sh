@@ -123,8 +123,8 @@ all_failcomp=$(find_tests failcomp $test_dirs)
 #
 generate_CCs()
 {
-  local tests=$1
-  local suffix=$2
+  local tests="$1"
+  local suffix="$2"
 
   # Generate corresponding .cc
   for name in $tests

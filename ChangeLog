@@ -1,3 +1,9 @@
+2008-01-02  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix shell scripts.
+	* include/generate_headers.sh: Use a valid = operator.
+	* src/tests/bin/generate-test-suite.sh: Add missing double quotes.
+
 2007-12-31  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	[bmi] Various small fixes.

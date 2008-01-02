@@ -41,13 +41,13 @@ EOF
 
 insert_specific_alias()
 {
-  if [ "$2" == "boolean_transducer" ]; then
+  if [ "$2" = "boolean_transducer" ]; then
     write_namespace_alias $1 "boolean_automaton" $3
-  elif [ "$2" == "fmp_transducer" ]; then
+  elif [ "$2" = "fmp_transducer" ]; then
     write_namespace_alias $1 "boolean_automaton" $3
-  elif [ "$2" == "z_fmp_transducer" ]; then
+  elif [ "$2" = "z_fmp_transducer" ]; then
     write_namespace_alias $1 "z_automaton" $3
-  elif [ "$2" == "z_transducer" ]; then
+  elif [ "$2" = "z_transducer" ]; then
     write_namespace_alias $1 "z_automaton" $3
   fi
 }
