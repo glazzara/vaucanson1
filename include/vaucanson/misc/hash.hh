@@ -85,7 +85,13 @@ namespace vcsn
       {
 	return ::boost::hash_value (reinterpret_cast<unsigned int>(h.value()));
       }
+
+      inline std::size_t operator() (const unsigned* h) const
+      {
+	return ::boost::hash_value (reinterpret_cast<unsigned int>(h));
+      }
     };
+
   }
 } // End of namespace vcsn
 

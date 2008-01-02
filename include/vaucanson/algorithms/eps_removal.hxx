@@ -103,7 +103,6 @@ namespace vcsn {
     {
       for (int r = 0; r < size; r++)
       {
-	std::cout << !m_semiring_elt[r][r].starable() << std::endl;
 	result_not_computable_if(!m_semiring_elt[r][r].starable());
 
 	semiring_elt_t w = m_semiring_elt[r][r].star();

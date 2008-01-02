@@ -1,3 +1,23 @@
+2008-01-03  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix a critical issue in BMI graph structure..
+	* include/vaucanson/algorithms/eps_removal.hxx: remove useless debug.
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hxx,
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* include/vaucanson/misc/hash.hh:
+	The graph container stored hstate_t objects for the states in each
+	transition.
+	However, the equal operator defined on hstate_t compared the actual
+	index of the state and not the pointer. When a state is deleted,
+	another state is renumbered. Meanwhile, since the graph container is
+	not notified of this change, its "ordered" property is completely
+	broken. The solution is to store pointers to the actual index instead
+	of hstate_t object.
+	This patch fix many, many, many issues :D
+
 2008-01-02  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix shell scripts.

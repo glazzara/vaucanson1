@@ -89,13 +89,14 @@ namespace vcsn
 	typedef typename SmartLabelContainer<label_t>::hlabel_t
 							hlabel_t;
 
+	typedef unsigned * 				state_t;
 	// State descriptor.
 	//
-	typedef handler<state_h, unsigned*>		hstate_t;
+	typedef handler<state_h, state_t>		hstate_t;
 
-	typedef EdgeValue<hstate_t, hlabel_t>		edge_data_t;
+	typedef EdgeValue<state_t, hlabel_t>		edge_data_t;
 
-	typedef GraphContainer<hstate_t, hlabel_t, edge_data_t>	graph_data_t;
+	typedef GraphContainer<state_t, hlabel_t, edge_data_t>	graph_data_t;
 	// Transition descriptor.
 	//
 	// We store a pointer to an EdgeValue to avoid a new index on transitions and
@@ -106,7 +107,7 @@ namespace vcsn
 	//
 	// We may need to try storing an iterator instead of a pointer. We haven't tried yet
 	// since its size is higher than a simple pointer.
-	typedef typename GraphContainer<hstate_t, hlabel_t, edge_data_t>::iterator
+	typedef typename graph_data_t::iterator
 							edges_iterator;
 	typedef handler<transition_h, edges_iterator>	htransition_t;
 	typedef htransition_t				hedge_t;
@@ -148,15 +149,15 @@ namespace vcsn
 
 	//The graph stores  edges only, thus we can define this type.
 	typedef VGraphContainer			edges_t;
-	typedef std::vector<hstate_t>		states_data_t;
+	typedef std::vector<state_t>		states_data_t;
 	typedef misc::Support<states_data_t>	states_t;
 
 	//FIXME: find a better name than initial_container_t. The word initial
 	//is ambiguous since we use it also for final_t
-	typedef InitialValue<hstate_t, series_set_elt_value_t>
+	typedef InitialValue<state_t, series_set_elt_value_t>
 							  initial_value_t;
 	typedef initial_value_t				  final_value_t;
-	typedef InitialContainer<initial_value_t, hstate_t>
+	typedef InitialContainer<initial_value_t, state_t>
 							  initial_container_t;
 
 	typedef typename initial_container_t::Type	  initial_t;
@@ -298,8 +299,8 @@ namespace vcsn
 
       private:
 	typename graph_data_t::const_iterator
-			  find_edge(const hstate_t&,
-				    const hstate_t&,
+			  find_edge(const state_t&,
+				    const state_t&,
 				    const hlabel_t&) const;
 
 	geometry_t	  geometry_;

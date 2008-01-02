@@ -23,23 +23,23 @@ namespace vcsn
 {
   namespace misc
   {
-    //Specialization for std::vector<handler<state_h, unsigned*> >
-    inline //template <>
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::SupportIterator (const container_t* c,
+    //Specialization for std::vector<unsigned*>
+    inline
+    SupportIterator<std::vector<unsigned*> >::SupportIterator (const container_t* c,
 										  int i)
       : current_(i), container_size_(c->size()), container_(c)
     {}
 
-    inline //template <>
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::data_type
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator* () const
+    inline
+    SupportIterator<std::vector<unsigned*> >::handler_t
+    SupportIterator<std::vector<unsigned*> >::operator* () const
     {
-      return data_type((*container_)[current_]);
+      return handler_t((*container_)[current_]);
     }
 
-    inline //template <>
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >&
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator++ ()
+    inline
+    SupportIterator<std::vector<unsigned*> >&
+    SupportIterator<std::vector<unsigned*> >::operator++ ()
     {
       if (container_->size() == container_size_)
 	++current_;
@@ -48,9 +48,9 @@ namespace vcsn
       return *this;
     }
 
-    inline //template <>
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >&
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator-- ()
+    inline
+    SupportIterator<std::vector<unsigned*> >&
+    SupportIterator<std::vector<unsigned*> >::operator-- ()
     {
       if (container_->size() == container_size_)
 	--current_;
@@ -59,25 +59,25 @@ namespace vcsn
       return *this;
     }
 
-    inline //template <>
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator++ (int)
+    inline
+    SupportIterator<std::vector<unsigned*> >
+    SupportIterator<std::vector<unsigned*> >::operator++ (int)
     {
-      SupportIterator<std::vector<handler<state_h, unsigned*> > > tmp = *this;
+      SupportIterator<std::vector<unsigned*> > tmp = *this;
       ++(*this);
       return tmp;
     }
 
-    inline //template <>
+    inline
     bool
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator!= (const SupportIterator& o) const
+    SupportIterator<std::vector<unsigned*> >::operator!= (const SupportIterator& o) const
     {
       return o.current_ != current_;
     }
 
-    inline //template <>
+    inline
     bool
-    SupportIterator<std::vector<handler<state_h, unsigned*> > >::operator== (const SupportIterator& o) const
+    SupportIterator<std::vector<unsigned*> >::operator== (const SupportIterator& o) const
     {
       return ! (*this != o);
     }
@@ -106,10 +106,10 @@ namespace vcsn
     }
 
     template <typename U, typename HState>
-    typename SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::key_type
+    typename SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::handler_t
     SupportIterator<vcsn::boostg::InitialContainer<U, HState> >::operator* () const
     {
-      return HState(i_->first.value());
+      return handler_t(i_->first);
     }
 
     template <typename U, typename HState>
@@ -176,7 +176,7 @@ namespace vcsn
     typename Support<vcsn::boostg::InitialContainer<U, HState> >::iterator
     Support<vcsn::boostg::InitialContainer<U, HState> >::find (const HState& k) const
     {
-      return m_.find (k);
+      return m_.find (k.value());
     }
 
     template <class U, class HState>
@@ -201,10 +201,10 @@ namespace vcsn
     }
 
     template <class U, class HState>
-    HState
+    typename Support<vcsn::boostg::InitialContainer<U, HState> >::handler_t
     Support<vcsn::boostg::InitialContainer<U, HState> >::back () const
     {
-      return (*max_element (begin (), end ()));
+      return handler_t(*max_element (begin (), end ()));
     }
 
   }
@@ -220,100 +220,24 @@ namespace vcsn
   `----------*/
 
     /// support<vector<U, T> > is a const adapter of std::vector to container.
-/*    template <class T, class U, class V>
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::Support (const Support& s)
-      : m_ (s.m_)
-    {
-    }
-
-    template <class T, class U, class V>
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::Support (const std::vector<handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> > >& m)
-      : m_ (m)
-    {
-    }
-
-    template <class T, class U, class V>
-    unsigned
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::size () const
-    {
-      return m_.size ();
-    }
-
-    template <class T, class U, class V>
-    typename Support<std::vector<handler<transition_h,
-		    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >::iterator
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::find (const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> >& k) const
-    {
-      return m_.find (k);
-    }
-
-    template <class T, class U, class V>
-    bool
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::empty () const
-    {
-      return m_.empty ();
-    }
-
-    template <class T, class U, class V>
-    typename Support<std::vector<handler<transition_h,
-		     boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >::iterator
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::begin () const
-    {
-      return iterator (&m_, m_.begin ());
-    }
-
-    template <class T, class U, class V>
-    typename Support<std::vector<handler<transition_h,
-		     boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >::iterator
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::end () const
-    {
-      return iterator (&m_, m_.end ());
-    }
-
-    template <class T, class U, class V>
-    typename Support<std::vector<handler<transition_h,
-		     boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >::handler_t
-    Support<std::vector<handler<transition_h,
-	    boost::multi_index::detail::hashed_index_iterator<T, U, V> > > >
-    ::back () const
-    {
-      return m_.back();
-    }
-*/
-
-    /// support<vector<U, T> > is a const adapter of std::vector to container.
     inline
-    Support<std::vector<handler<state_h, unsigned* > > >
-    ::Support (const std::vector<handler<state_h, unsigned* > >& m)
+    Support<std::vector<unsigned*> >
+    ::Support (const std::vector<unsigned*>& m)
       : m_ (m)
     {
     }
 
     inline
     unsigned
-    Support<std::vector<handler<state_h, unsigned* > > >
+    Support<std::vector<unsigned*> >
     ::size () const
     {
       return m_.size ();
     }
 
     inline
-    Support<std::vector<handler<state_h, unsigned* > > >::iterator
-    Support<std::vector<handler<state_h, unsigned* > > >
+    Support<std::vector<unsigned*> >::iterator
+    Support<std::vector<unsigned*> >
     ::find (const handler<state_h, unsigned* >& k) const
     {
       if (k < m_.size())
@@ -324,34 +248,34 @@ namespace vcsn
 
     inline
     bool
-    Support<std::vector<handler<state_h, unsigned* > > >
+    Support<std::vector<unsigned*> >
     ::empty () const
     {
       return m_.empty ();
     }
 
     inline
-    Support<std::vector<handler<state_h, unsigned* > > >::const_iterator
-    Support<std::vector<handler<state_h, unsigned* > > >
+    Support<std::vector<unsigned*> >::const_iterator
+    Support<std::vector<unsigned*> >
     ::begin () const
     {
       return iterator (&m_, 0);
     }
 
     inline
-    Support<std::vector<handler<state_h, unsigned* > > >::const_iterator
-    Support<std::vector<handler<state_h, unsigned* > > >
+    Support<std::vector<unsigned*> >::const_iterator
+    Support<std::vector<unsigned*> >
     ::end () const
     {
       return iterator (&m_, m_.size());
     }
 
     inline
-    Support<std::vector<handler<state_h, unsigned* > > >::handler_t
-    Support<std::vector<handler<state_h, unsigned* > > >
+    Support<std::vector<unsigned*> >::handler_t
+    Support<std::vector<unsigned*> >
     ::back () const
     {
-      return m_.back();
+      return handler_t(m_.back());
     }
 
   }

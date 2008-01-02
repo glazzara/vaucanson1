@@ -56,36 +56,36 @@ namespace vcsn
     struct dst {};
 
     // Composite key (source, label)
-    template<typename HState, typename HLabel, typename EdgeValue>
+    template<typename State, typename HLabel, typename EdgeValue>
     struct SuccessorKey : composite_key <
       EdgeValue,
-      BOOST_MULTI_INDEX_MEMBER(EdgeValue, HState, from_),
+      BOOST_MULTI_INDEX_MEMBER(EdgeValue, State, from_),
       BOOST_MULTI_INDEX_MEMBER(EdgeValue, HLabel, label_)
     > {};
 
     // Composite key (target, label)
-    template<typename HState, typename HLabel, typename EdgeValue>
+    template<typename State, typename HLabel, typename EdgeValue>
     struct PredecessorKey : composite_key <
       EdgeValue,
-      BOOST_MULTI_INDEX_MEMBER(EdgeValue, HState, to_),
+      BOOST_MULTI_INDEX_MEMBER(EdgeValue, State, to_),
       BOOST_MULTI_INDEX_MEMBER(EdgeValue, HLabel, label_)
     > {};
 
     // Use composite keys in hash tables.
-    template<typename HState, typename HLabel, typename EdgeValue>
+    template<typename State, typename HLabel, typename EdgeValue>
     struct SourceAndLabel : public hashed_non_unique <
       tag<succ>,
-      SuccessorKey<HState, HLabel, EdgeValue>,
+      SuccessorKey<State, HLabel, EdgeValue>,
       composite_key_hash<
 	vcsn::misc::hash_state_handler,
 	vcsn::misc::hash_handler<HLabel>
       >
     > {};
 
-    template<typename HState, typename HLabel, typename EdgeValue>
+    template<typename State, typename HLabel, typename EdgeValue>
     struct DestinationAndLabel : public hashed_non_unique <
       tag<pred>,
-      PredecessorKey<HState, HLabel, EdgeValue>,
+      PredecessorKey<State, HLabel, EdgeValue>,
       composite_key_hash<
 	vcsn::misc::hash_state_handler,
 	vcsn::misc::hash_handler<HLabel>
@@ -94,19 +94,19 @@ namespace vcsn
 
 
     // Single key (source)
-    template<typename HState, typename EdgeValue>
+    template<typename State, typename EdgeValue>
     struct Source : public hashed_non_unique <
       tag<src>,
-      BOOST_MULTI_INDEX_MEMBER(EdgeValue, HState, from_),
+      BOOST_MULTI_INDEX_MEMBER(EdgeValue, State, from_),
       vcsn::misc::hash_state_handler
     > {};
 
 
     // Single key (target)
-    template<typename HState, typename EdgeValue>
+    template<typename State, typename EdgeValue>
     struct Destination : public hashed_non_unique <
       tag<dst>,
-      BOOST_MULTI_INDEX_MEMBER(EdgeValue, HState, to_),
+      BOOST_MULTI_INDEX_MEMBER(EdgeValue, State, to_),
       vcsn::misc::hash_state_handler
     > {};
 
@@ -124,17 +124,17 @@ namespace vcsn
     **
     ** \sa EdgeValue, update_label
     */
-    template<typename HState, typename HLabel, typename EdgeValue>
+    template<typename State, typename HLabel, typename EdgeValue>
     struct GraphContainer
       : public multi_index_container
     <
       EdgeValue,
       indexed_by
       <
-	SourceAndLabel<HState, HLabel, EdgeValue>,
-	DestinationAndLabel<HState, HLabel, EdgeValue>,
-	Source<HState, EdgeValue>,
-	Destination<HState, EdgeValue>
+	SourceAndLabel<State, HLabel, EdgeValue>,
+	DestinationAndLabel<State, HLabel, EdgeValue>,
+	Source<State, EdgeValue>,
+	Destination<State, EdgeValue>
       >
     > {};
 

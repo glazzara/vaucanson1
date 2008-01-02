@@ -26,10 +26,11 @@ namespace vcsn
   {
 
     template <>
-    class SupportIterator<std::vector<handler<state_h, unsigned int*> > >
+    class SupportIterator<std::vector<unsigned int*> >
     {
       public:
-	typedef handler<state_h, unsigned int*>		    data_type;
+	typedef unsigned int*		    		    data_type;
+	typedef vcsn::handler<state_h, data_type>	    handler_t;
 	typedef std::vector<data_type>			    container_t;
 	typedef container_t::const_iterator		    vector_iterator;
 	typedef SupportIterator<container_t>		    self_t;
@@ -43,7 +44,7 @@ namespace vcsn
 	SupportIterator () {}
 	SupportIterator (const container_t* c, int i);
 
-	data_type operator* () const;
+	handler_t operator* () const;
 	self_t&	 operator++ ();
 	self_t&	 operator-- ();
 	self_t	 operator++ (int);
@@ -58,16 +59,16 @@ namespace vcsn
 
     /// Support<vector<T> > is a const adapter of std::vector to container.
     template <>
-    class Support<std::vector<handler<state_h, unsigned*> > >
+    class Support<std::vector<unsigned*> >
     {
       public:
-	typedef handler<state_h, unsigned*>		 handler_t;
-	typedef SupportIterator<std::vector<handler_t> > iterator;
+	typedef unsigned*				 value_type;
+	typedef vcsn::handler<state_h, value_type> 	 handler_t;
+	typedef SupportIterator<std::vector<value_type> > iterator;
 	typedef iterator				 const_iterator;
 	/// The type of the values.
-	typedef std::vector<handler_t>::value_type	 value_type;
 
-	Support (const std::vector<handler_t>&);
+	Support (const std::vector<value_type>&);
 
 	const_iterator begin () const;
 	const_iterator end () const;
@@ -81,7 +82,7 @@ namespace vcsn
 
 	handler_t back () const;
       private:
-	const std::vector<handler_t>&	m_;
+	const std::vector<value_type>&	m_;
     };
 
   }
@@ -91,7 +92,7 @@ namespace vcsn
 namespace std
 {
   template <>
-    struct iterator_traits<vcsn::misc::SupportIterator<std::vector<vcsn::handler<vcsn::state_h, unsigned int*> > > >
+    struct iterator_traits<vcsn::misc::SupportIterator<std::vector<unsigned*> > >
     {
       typedef input_iterator_tag  iterator_category;
       typedef unsigned int*	  value_type;
@@ -114,7 +115,7 @@ namespace vcsn
 	typedef typename container_t::key_type			key_type;
 	typedef typename container_t::const_iterator		container_iterator;
 	typedef SupportIterator<vcsn::boostg::InitialContainer<U, HState> >	self_t;
-
+	typedef vcsn::handler<state_h, HState> 	 		handler_t;
 	typedef typename container_iterator::iterator_category	iterator_category;
 	typedef typename container_iterator::difference_type	difference_type;
 	typedef key_type					value_type;
@@ -124,7 +125,7 @@ namespace vcsn
 	SupportIterator () {}
 	SupportIterator (const container_t* c, container_iterator);
 
-	key_type  operator* () const;
+	handler_t  operator* () const;
 	self_t&	 operator++ ();
 	self_t&	 operator-- ();
 	self_t	 operator++ (int);
@@ -147,6 +148,7 @@ namespace vcsn
 	typedef typename vcsn::boostg::InitialContainer<U, HState>::Type container_t;
 	typedef SupportIterator<vcsn::boostg::InitialContainer<U, HState> > iterator;
 	typedef SupportIterator<vcsn::boostg::InitialContainer<U, HState> > const_iterator;
+	typedef vcsn::handler<state_h, HState> 	 			handler_t;
 
 	Support (const container_t&);
 	Support (const Support&);
@@ -161,7 +163,7 @@ namespace vcsn
 	/// Whether it's empty.
 	bool empty () const;
 
-	HState back () const;
+	handler_t back () const;
       private:
 	const container_t&	m_;
     };
