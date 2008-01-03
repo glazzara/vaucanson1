@@ -1,5 +1,10 @@
 2008-01-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx:
+	remove useless debug.
+
+2008-01-03  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Fix a critical issue in BMI graph structure..
 	* include/vaucanson/algorithms/eps_removal.hxx: remove useless debug.
 	* include/vaucanson/automata/implementation/boostg/boostg_support.hh,

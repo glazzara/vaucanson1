@@ -462,7 +462,6 @@ namespace vcsn
     void
     BOOSTGRAPH::del_edge (const hedge_t& h)
     {
-      std::cout << "del_Edge" << std::endl;
       precondition (has_edge(h));
 
       hlabel_t l = h.value()->label_;
