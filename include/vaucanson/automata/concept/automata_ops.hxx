@@ -54,13 +54,12 @@ namespace vcsn {
 	       SELECTOR(R), const T& src)
   {
     typedef typename automaton_traits<R>::hstate_t dst_hstate_t;
-    typedef const typename automaton_traits<T>::hstate_t& src_hstate_t;
+    typedef typename automaton_traits<T>::hstate_t src_hstate_t;
     typedef typename automaton_traits<T>::transition_iterator transition_iterator;
     typedef typename automaton_traits<T>::final_iterator final_iterator;
     typedef typename automaton_traits<T>::initial_iterator initial_iterator;
     typedef typename automaton_traits<T>::state_iterator state_iterator;
 
-    //R dst(0, op_transitions(concept, src).size());
     R dst;
     std::map<src_hstate_t, dst_hstate_t> states_map;
 
@@ -72,7 +71,7 @@ namespace vcsn {
     //Adding all transitions
     for (transition_iterator t = op_transitions(concept, src).begin(),
 	  t_end = op_transitions(concept, src).end(); t != t_end; ++t)
-      op_add_transition(concept,
+      op_add_series_transition(concept,
 			dst,
 			states_map[op_src_of(concept, src, *t)],
 			states_map[op_dst_of(concept, src, *t)],
@@ -603,7 +602,8 @@ namespace vcsn {
       letter_query(const S* s, const T* v, const Letter& l) :
 	s_ (s),
 	v_ (v),
-	w_ (s->series().monoid(), l)
+	w_ (s->series().monoid(), l),
+	l_ (l)
       {
       }
 
@@ -616,10 +616,16 @@ namespace vcsn {
 		::of(s_->series().semiring()));
       }
 
+      Letter letter() const
+      {
+	return l_;
+      }
+
     private:
       const S*			s_;
       const T*			v_;
       AutoType(monoid_elt_t)	w_;
+      const Letter		l_;
   };
 
   template <class S, class T, class Letter>

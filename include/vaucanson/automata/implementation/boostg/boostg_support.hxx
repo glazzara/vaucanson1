@@ -82,6 +82,63 @@ namespace vcsn
       return ! (*this != o);
     }
 
+    //Specialization for std::vector<unsigned*>
+    inline
+    SupportIterator<std::set<unsigned*> >::SupportIterator (const container_t* c, set_iterator it)
+      : current_(it), container_size_(c->size()), container_(c)
+    {}
+
+    inline
+    SupportIterator<std::set<unsigned*> >::handler_t
+    SupportIterator<std::set<unsigned*> >::operator* () const
+    {
+      return handler_t(*current_);
+    }
+
+    inline
+    SupportIterator<std::set<unsigned*> >&
+    SupportIterator<std::set<unsigned*> >::operator++ ()
+    {
+      if (container_->size() == container_size_)
+	++current_;
+      else
+	container_size_ = container_->size();
+      return *this;
+    }
+
+    inline
+    SupportIterator<std::set<unsigned*> >&
+    SupportIterator<std::set<unsigned*> >::operator-- ()
+    {
+      if (container_->size() == container_size_)
+	--current_;
+      else
+	container_size_ = container_->size();
+      return *this;
+    }
+
+    inline
+    SupportIterator<std::set<unsigned*> >
+    SupportIterator<std::set<unsigned*> >::operator++ (int)
+    {
+      SupportIterator<std::set<unsigned*> > tmp = *this;
+      ++(*this);
+      return tmp;
+    }
+
+    inline
+    bool
+    SupportIterator<std::set<unsigned*> >::operator!= (const SupportIterator& o) const
+    {
+      return o.current_ != current_;
+    }
+
+    inline
+    bool
+    SupportIterator<std::set<unsigned*> >::operator== (const SupportIterator& o) const
+    {
+      return ! (*this != o);
+    }
 
     /*------------------.
     | SupportIterator.  |
@@ -277,6 +334,64 @@ namespace vcsn
     {
       return handler_t(m_.back());
     }
+
+    /// support<vector<U, T> > is a const adapter of std::set to container.
+    inline
+    Support<std::set<unsigned*> >
+    ::Support (const std::set<unsigned*>& m)
+      : m_ (m)
+    {
+    }
+
+    inline
+    unsigned
+    Support<std::set<unsigned*> >
+    ::size () const
+    {
+      return m_.size ();
+    }
+
+    inline
+    Support<std::set<unsigned*> >::iterator
+    Support<std::set<unsigned*> >
+    ::find (const handler<state_h, unsigned* >& k) const
+    {
+	return iterator(&m_, m_.find(k.value()));
+    }
+
+    inline
+    bool
+    Support<std::set<unsigned*> >
+    ::empty () const
+    {
+      return m_.empty ();
+    }
+
+    inline
+    Support<std::set<unsigned*> >::const_iterator
+    Support<std::set<unsigned*> >
+    ::begin () const
+    {
+      return iterator (&m_, m_.begin());
+    }
+
+    inline
+    Support<std::set<unsigned*> >::const_iterator
+    Support<std::set<unsigned*> >
+    ::end () const
+    {
+      return iterator (&m_, m_.end());
+    }
+
+    inline
+    Support<std::set<unsigned*> >::handler_t
+    Support<std::set<unsigned*> >
+    ::back () const
+    {
+      //FIXME Maybe wrong! Compare pointers instead of id.
+      return handler_t(*max_element (begin (), end ()));
+    }
+
 
   }
 }

@@ -89,10 +89,10 @@ namespace vcsn {
 	    typename Letter,							\
 	    typename Tag,							\
 	    typename GeometryCoords>						\
-  struct automaton_traits<Type<Kind, WeightValue, WordValue, SeriesValue,	\
+  struct automaton_traits<Type<Kind, WordValue, WeightValue, SeriesValue,       \
 			  Letter, Tag, GeometryCoords> >			\
   {										\
-    typedef Type<Kind, WeightValue, WordValue, SeriesValue,			\
+    typedef Type<Kind, WordValue, WeightValue, SeriesValue,		        \
 		 Letter, Tag, GeometryCoords>		graph_t;		\
     typedef typename graph_t::semiring_elt_value_t	semiring_elt_value_t;	\
     typedef typename graph_t::monoid_elt_value_t	monoid_elt_value_t;	\

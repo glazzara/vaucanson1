@@ -26,6 +26,13 @@ namespace vcsn
 {
   namespace misc
   {
+
+    inline
+    std::size_t hash_label<char>::operator()(const char c) const
+    {
+      return c;
+    };
+
     template <typename Word, typename Weight>
     std::size_t
     hash_label<algebra::polynom<Word, Weight> >::operator() (const algebra::polynom<Word, Weight>& l) const
@@ -143,6 +150,14 @@ namespace vcsn
     {
       return ::boost::hash_value (h.value());
     }
+
+    inline
+    std::size_t
+    hash_handler<char>::operator() (const char c) const
+    {
+      return ::boost::hash_value (c);
+    }
+
   }
 }
 

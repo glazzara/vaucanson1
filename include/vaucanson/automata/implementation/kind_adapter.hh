@@ -25,11 +25,11 @@ namespace vcsn {
   /// automaton simpler.
 
 #define ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(T...)		\
-  typename automaton_traits<T>::htransition_t								\
+  typename automaton_traits<T>::htransition_t				\
   op_add_letter_transition(const AutomataBase<S>& s,			\
 			   T& v,					\
-			   typename automaton_traits<T>::hstate_t from,				\
-			   typename automaton_traits<T>::hstate_t to,					\
+			   const typename automaton_traits<T>::hstate_t& from,\
+			   const typename automaton_traits<T>::hstate_t& to,\
 			   const typename Element<S, T >::letter_t & l)	\
   {									\
     typedef typename S::series_set_t		series_set_t;		\
@@ -55,7 +55,7 @@ namespace vcsn {
   typename Element<AutomataBase<S>, T >::letter_t			\
   op_letter_of(const AutomataBase<S>& s,				\
 	       const T& v,						\
-	       typename automaton_traits<T>::htransition_t e)						\
+	       const typename automaton_traits<T>::htransition_t& e)	\
   {									\
     typedef typename S::series_set_t series_set_t;			\
     typedef typename series_set_t::monoid_t monoid_t;			\
@@ -75,7 +75,7 @@ namespace vcsn {
   typename Element<AutomataBase<S>, T >::monoid_elt_t			\
   op_word_of(const AutomataBase<S>& s,					\
 	     const T& v,						\
-	     typename automaton_traits<T>::htransition_t e)						\
+	     const typename automaton_traits<T>::htransition_t& e)	\
   {									\
     typedef typename S::series_set_t series_set_t;			\
     typedef typename series_set_t::monoid_t monoid_t;			\
@@ -90,40 +90,49 @@ namespace vcsn {
     return w;								\
   }
 
-#define ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(T...)		\
-  typename automaton_traits<T>::htransition_t								\
-  op_add_series_transition(const AutomataBase<S>& a_set,		\
-			   T& v,					\
-			   typename automaton_traits<T>::hstate_t from,				\
-			   typename automaton_traits<T>::hstate_t to,					\
-			   const typename Element<S,T >::series_set_elt_t& s) \
-  {									\
-    assertion(s.supp().size() == 1);					\
-    return op_add_letter_transition(a_set, v, from, to, *s.supp().begin()); \
+///FIXME
+///WARNING: This function returns only the last transition added.
+#define ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(T...)		      \
+  typename automaton_traits<T>::htransition_t				      \
+  op_add_series_transition(const AutomataBase<S>& a_set,		      \
+			   T& v,					      \
+			   const typename automaton_traits<T>::hstate_t& from,\
+			   const typename automaton_traits<T>::hstate_t& to,  \
+			   const typename Element<S,T>::series_set_elt_t& s)  \
+  {									      \
+    assertion(s.supp().size() == 1);					      \
+    typedef typename Element<S, T>::series_set_elt_t::value_t::monoid_elt_value_t\
+						    monoid_elt_value_t;	      \
+    typename automaton_traits<T>::htransition_t res;			      \
+    monoid_elt_value_t supp = *s.supp().begin();			      \
+    for (typename monoid_elt_value_t::const_iterator it = supp.begin();	      \
+	 it != supp.end(); ++it)					      \
+       res = op_add_letter_transition(a_set, v, from, to, *it);		      \
+    return res;								      \
   }
 
-#define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			\
-  typename Element<AutomataBase<S>, T >::monoid_elt_t		\
-  op_word_of(const AutomataBase<S>& a_set,			\
-	     const T& v,					\
-	     typename automaton_traits<T>::htransition_t e)					\
-  {								\
-    typedef T value_t;						\
-    typedef typename S::series_set_t series_set_t;		\
-    typedef typename series_set_t::monoid_t monoid_t;		\
-    typedef typename Element<S, value_t>::monoid_elt_value_t	\
-      word_value_t;						\
-    Element<monoid_t, word_value_t>				\
-      w(a_set.series().monoid());				\
-    w += op_letter_of(a_set, v, e);				\
-    return w;							\
+#define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			  \
+  typename Element<AutomataBase<S>, T >::monoid_elt_t		  \
+  op_word_of(const AutomataBase<S>& a_set,			  \
+	     const T& v,					  \
+	     const typename automaton_traits<T>::htransition_t& e)\
+  {								  \
+    typedef T value_t;						  \
+    typedef typename S::series_set_t series_set_t;		  \
+    typedef typename series_set_t::monoid_t monoid_t;		  \
+    typedef typename Element<S, value_t>::monoid_elt_value_t	  \
+      word_value_t;						  \
+    Element<monoid_t, word_value_t>				  \
+      w(a_set.series().monoid());				  \
+    w += op_letter_of(a_set, v, e);				  \
+    return w;							  \
   }
 
 #define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)				\
   typename Element<AutomataBase<S>, T >::series_set_elt_t		\
   op_series_of(const AutomataBase<S>& a_set,				\
 	       const T& v,						\
-	       typename automaton_traits<T>::htransition_t e)						\
+	       const typename automaton_traits<T>::htransition_t& e)	\
   {									\
     typedef T value_t;							\
 									\

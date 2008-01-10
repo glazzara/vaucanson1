@@ -1,5 +1,46 @@
 2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add boostg specialization for letter labels. 
+	* include/vaucanson/automata/concept/automata_base.hh:
+	Swap two template parameters incorrectly used.
+
+	* include/vaucanson/automata/concept/automata_ops.hxx:
+	Provide a direct access to the letter in the letter_query object.
+
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hxx:
+	Add a new specialization for set<handler<unsigned*> >.
+
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh:
+	Include the letter specialization.
+
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hxx: New.
+	Add the boostg letter specialization.
+
+	* include/vaucanson/automata/implementation/kind_adapter.hh:
+	Pass function parameters as const references. Fix op_add_series_transition.
+
+	* include/vaucanson/contexts/automaton.thh:
+	Introduce automaton_letter_t.
+
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx:
+	Introduce make_automaton_letter()
+  .
+	* include/vaucanson/contexts/generic_automaton_impl.thh:
+	Introduce automaton_letter_impl_t.
+
+	* include/vaucanson/misc/hash.hh,
+	* include/vaucanson/misc/hash.hxx: Provide new specializations for
+	hash_handler and hash_label.
+
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/support.hxx: Provide new specializations for
+	set<handler<unsigned *> >..
+
+2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	More cleanup in boostg. 
 	* include/vaucanson/automata/implementation/boostg/vgraph_container.hh: New.
 	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx:

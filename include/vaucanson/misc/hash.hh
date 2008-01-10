@@ -31,6 +31,12 @@ namespace vcsn
     template <typename T>
     struct hash_label;
 
+    template <>
+    struct hash_label<char>
+    {
+      std::size_t operator() (const char) const;
+    };
+
     template <typename Word, typename Weight>
     struct hash_label<algebra::polynom<Word, Weight> >
     {
@@ -77,6 +83,12 @@ namespace vcsn
     struct hash_handler<handler<Kind, Type> >
     {
       std::size_t operator() (const handler<Kind, Type>& h) const;
+    };
+
+    template<>
+    struct hash_handler<char>
+    {
+      std::size_t operator() (const char h) const;
     };
 
     struct hash_state_handler

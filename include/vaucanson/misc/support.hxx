@@ -85,6 +85,60 @@ namespace vcsn
       return *max_element (begin (), end ());
     }
 
+    /// support<set<U, T> > is a const adapter of std::map to container.
+    template <class U>
+    Support<std::set<U> >::Support (const Support& s)
+      : m_ (s.m_)
+    {
+    }
+
+    template <class U>
+    Support<std::set<U> >::Support (const std::set<U>& m)
+      : m_ (m)
+    {
+    }
+
+    template <class U>
+    unsigned
+    Support<std::set<U> >::size () const
+    {
+      return m_.size ();
+    }
+
+    template <class U>
+    typename Support<std::set<U> >::iterator
+    Support<std::set<U> >::find (const U& k) const
+    {
+      return m_.find (k);
+    }
+
+    template <class U>
+    bool
+    Support<std::set<U> >::empty () const
+    {
+      return m_.empty ();
+    }
+
+    template <class U>
+    typename Support<std::set<U> >::iterator
+    Support<std::set<U> >::begin () const
+    {
+      return iterator (m_.begin ());
+    }
+
+    template <class U>
+    typename Support<std::set<U> >::iterator
+    Support<std::set<U> >::end () const
+    {
+      return iterator (m_.end ());
+    }
+
+    template <class U>
+    U
+    Support< std::set<U> >::back () const
+    {
+      return *max_element (begin (), end ());
+    }
 
   /*------------------.
   | SupportIterator.  |
@@ -127,6 +181,53 @@ namespace vcsn
     template <class C>
     bool
     SupportIterator<C>::operator== (const SupportIterator& o) const
+    {
+      return ! (*this != o);
+    }
+
+  /*------------------.
+  | SupportIterator.  |
+  `------------------*/
+
+    template <class U>
+    SupportIterator<std::set<U> >::SupportIterator (iterator mp)
+      : i (mp)
+    {}
+
+    template <class U>
+    typename SupportIterator<std::set<U> >::value_t
+    SupportIterator<std::set<U> >::operator* () const
+    {
+      return *i;
+    }
+
+    template <class U>
+    SupportIterator<std::set<U> >&
+    SupportIterator<std::set<U> >::operator++ ()
+    {
+      ++i;
+      return *this;
+    }
+
+    template <class U>
+    SupportIterator<std::set<U> >
+    SupportIterator<std::set<U> >::operator++ (int)
+    {
+      SupportIterator<std::set<U> > tmp = *this;
+      ++i;
+      return tmp;
+    }
+
+    template <class U>
+    bool
+    SupportIterator<std::set<U> >::operator!= (const SupportIterator& o) const
+    {
+      return o.i != i;
+    }
+
+    template <class U>
+    bool
+    SupportIterator<std::set<U> >::operator== (const SupportIterator& o) const
     {
       return ! (*this != o);
     }

@@ -67,6 +67,21 @@ namespace vcsn
       }
 
       template <class InputIterator>
+      automaton_letter_t 
+      make_automaton_letter(InputIterator begin,
+			    InputIterator end)
+      {
+        return automaton_letter_t (make_automata_set(begin, end));
+      }
+
+      template <class T>
+      automaton_letter_t 
+      make_automaton_letter(const T& alphabet)
+      {
+        return make_automaton_letter(alphabet.begin(), alphabet.end());
+      }
+
+      template <class InputIterator>
       gen_automaton_t 
       make_gen_automaton(InputIterator begin,
 		         InputIterator end)

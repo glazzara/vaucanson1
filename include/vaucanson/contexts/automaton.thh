@@ -35,6 +35,9 @@ namespace vcsn
       typedef vcsn::Element<automata_set_t, automaton_impl_t>    automaton_t;
       typedef vcsn::generalized_traits<automaton_t>::automaton_t gen_automaton_t;
 
+      typedef vcsn::Element<automata_set_t, automaton_letter_impl_t>    automaton_letter_t;
+      typedef automaton_letter_impl_t gen_automaton_letter_t;
+
       AUTOMATON_TYPES_EXACT(automaton_t);
 
     } // End of VCSN_CONTEXT_NAMESPACE.

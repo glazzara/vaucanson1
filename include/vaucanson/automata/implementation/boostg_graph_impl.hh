@@ -479,7 +479,7 @@ namespace vcsn
 #  include <vaucanson/automata/implementation/boostg_graph_impl.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
-//# include <vaucanson/automata/implementation/boostg_graph_letters_spec.hh>
+# include <vaucanson/automata/implementation/boostg_graph_letters_spec.hh>
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_ //
 
