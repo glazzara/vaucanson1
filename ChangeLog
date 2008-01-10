@@ -1,3 +1,8 @@
+2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/determinize.hxx:
+	Replace deltac by deltaf.
+
 2008-01-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx:
