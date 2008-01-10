@@ -18,15 +18,8 @@
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # include <boost/dynamic_bitset.hpp>
-# include <boost/multi_index_container.hpp>
-# include <boost/multi_index/member.hpp>
-# include <boost/multi_index/ordered_index.hpp>
-# include <boost/multi_index/hashed_index.hpp>
-# include <boost/functional/hash/hash.hpp>
-# include <boost/multi_index/sequenced_index.hpp>
-# include <boost/tuple/tuple.hpp>
-# include <boost/multi_index/composite_key.hpp>
 
+# include <vaucanson/automata/implementation/boostg/vgraph_container.hh>
 # include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
@@ -42,19 +35,6 @@
 # include <vaucanson/automata/implementation/boostg/edge_value.hh>
 # include <vaucanson/automata/implementation/boostg/boostg_functors.hh>
 # include <vaucanson/automata/implementation/boostg/initial_container.hh>
-
-using ::boost::multi_index_container;
-using ::boost::multi_index::hashed_non_unique;
-using ::boost::multi_index::indexed_by;
-using ::boost::multi_index::composite_key;
-using ::boost::multi_index::hashed_non_unique;
-using ::boost::multi_index::tag;
-using ::boost::multi_index::member;
-using ::boost::multi_index::index_iterator;
-using ::boost::multi_index::get;
-using ::boost::multi_index::project;
-using ::boost::multi_index::composite_key_hash;
-using ::boost::dynamic_bitset;
 
 namespace vcsn
 {
@@ -89,7 +69,7 @@ namespace vcsn
 	typedef typename SmartLabelContainer<label_t>::hlabel_t
 							hlabel_t;
 
-	typedef unsigned * 				state_t;
+	typedef unsigned *				state_t;
 	// State descriptor.
 	//
 	typedef handler<state_h, state_t>		hstate_t;
@@ -112,43 +92,8 @@ namespace vcsn
 	typedef handler<transition_h, edges_iterator>	htransition_t;
 	typedef htransition_t				hedge_t;
 
-	class VGraphContainerIterator
-	{
-	  public:
-	    typedef edges_iterator	iterator;
-	    VGraphContainerIterator(const graph_data_t& c, edges_iterator i);
-	    htransition_t operator*() const;
-
-	    bool operator==(const VGraphContainerIterator& v) const;
-	    bool operator!=(const VGraphContainerIterator& v) const;
-	    VGraphContainerIterator& operator++();
-	    VGraphContainerIterator operator++(int);
-
-	  private:
-	    iterator it_;
-	    iterator next_;
-	    const graph_data_t& container_;
-	};
-
-	class VGraphContainer
-	{
-	  public:
-	    typedef VGraphContainerIterator iterator;
-	    typedef iterator		    const_iterator;
-
-	    VGraphContainer(const graph_data_t& g);
-
-	    iterator begin() const;
-	    iterator end() const;
-
-	    size_t size() const;
-
-	  private:
-	    const graph_data_t& graph_;
-	};
-
 	//The graph stores  edges only, thus we can define this type.
-	typedef VGraphContainer			edges_t;
+        typedef VGraphContainer<edges_iterator, graph_data_t, htransition_t> edges_t;
 	typedef std::vector<state_t>		states_data_t;
 	typedef misc::Support<states_data_t>	states_t;
 
@@ -172,8 +117,8 @@ namespace vcsn
 							  geometry_t;
 
 	//Definition of various iterator types for the graph structure.
-	typedef typename VGraphContainer::iterator	  iterator;
-	typedef typename VGraphContainer::const_iterator  const_iterator;
+        typedef typename graph_data_t::iterator	          iterator;
+	typedef typename graph_data_t::const_iterator     const_iterator;
 	typedef iterator				  transition_iterator;
 
 	typedef typename index_iterator<graph_data_t, src>::type
@@ -182,15 +127,15 @@ namespace vcsn
 	typedef typename index_iterator<graph_data_t, dst>::type
 							  dst_iterator;
 	typedef dst_iterator				  dst_const_iterator;
-	typedef typename index_iterator<graph_data_t, pred>::type
+	/*typedef typename index_iterator<graph_data_t, pred>::type
 							  pred_iterator;
-	typedef pred_iterator				  pred_const_iterator;
+	typedef pred_iterator				  pred_const_iterator;*/
 	typedef typename index_iterator<graph_data_t, succ>::type
 							  succ_iterator;
 	typedef succ_iterator				  succ_const_iterator;
 	typedef std::pair<src_iterator, src_iterator>	  src_range;
 	typedef std::pair<dst_iterator, dst_iterator>	  dst_range;
-	typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
+//	typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
 	typedef std::pair<succ_iterator, succ_iterator>	  succ_range;
 
 
@@ -310,8 +255,8 @@ namespace vcsn
 	initial_t	  initial_;
 
 	//NEW ATTRIBUTES
-	dynamic_bitset<>  initial_bitset_;
-	dynamic_bitset<>  final_bitset_;
+	boost::dynamic_bitset<>  initial_bitset_;
+	boost::dynamic_bitset<>  final_bitset_;
 	unsigned	  number_of_epsilon_;
 
 	// number_of_state_ == 0 => there is no state.
@@ -343,9 +288,9 @@ namespace vcsn
     ADAPT_WORD_OF_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
 
 # undef BOOSTGRAPH_SERIES
-# define BOOSTGRAPH_LETTERS					  \
-    Graph<labels_are_letters, WordValue, WeightValue, SeriesValue,\
-	  Letter, Tag, GeometryCoords>
+# define BOOSTGRAPH_LETTERS                                       \
+  Graph<labels_are_letters, WordValue, WeightValue, SeriesValue,\
+        Letter, Tag, GeometryCoords>
 
     BOOSTGRAPH_TPARAM
     ADAPT_WORD_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
@@ -356,7 +301,8 @@ namespace vcsn
     BOOSTGRAPH_TPARAM
     ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
 
-# undef BOOSTGRAPH
+# undef BOOSTGRAPH_LETTERS
+
 # define BOOSTGRAPH						\
     Graph<Kind, WordValue, WeightValue, SerieValue, \
 	  Letter, Tag, GeometryCoords>
@@ -531,8 +477,9 @@ namespace vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/automata/implementation/boostg_graph_impl.hxx>
-#  include <vaucanson/automata/implementation/boostg/vgraph_container.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
+
+//# include <vaucanson/automata/implementation/boostg_graph_letters_spec.hh>
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_ //
 

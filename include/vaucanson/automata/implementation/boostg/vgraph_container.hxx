@@ -18,6 +18,8 @@
 #ifndef VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_VGRAPH_CONTAINER_HXX
 # define VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_VGRAPH_CONTAINER_HXX
 
+# include <vaucanson/automata/implementation/boostg/vgraph_container.hh>
+
 namespace vcsn
 {
   namespace boostg
@@ -27,21 +29,19 @@ namespace vcsn
     | Convenient macros.  |
     `--------------------*/
 
-  # define BOOSTGRAPH_TPARAM						\
-    template <class Kind, class WordValue, class WeightValue,		\
-              class SeriesValue, class Letter, class Tag, class GeometryCoords>
-
-  # define BOOSTGRAPH							\
-    Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
+# define TPARAM						\
+    template<typename EdgesIterator, typename GraphData, typename HTransition>
 
     /*--------------------------.
     | VGraphContainer iterator. |
     `--------------------------*/
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::VGraphContainerIterator
-      ::VGraphContainerIterator(const graph_data_t& c,
-				edges_iterator i)
+# define ITERATOR						\
+    VGraphContainerIterator<EdgesIterator, GraphData, HTransition>
+
+    TPARAM
+    ITERATOR::VGraphContainerIterator(const GraphData& c,
+				      EdgesIterator i)
       : container_(c)
     {
       if (i != c.end())
@@ -57,30 +57,30 @@ namespace vcsn
     }
 
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::htransition_t
-    BOOSTGRAPH::VGraphContainerIterator::operator*() const
+    TPARAM
+    HTransition
+    ITERATOR::operator*() const
     {
-      return htransition_t(it_);
+      return HTransition(it_);
     }
 
-    BOOSTGRAPH_TPARAM
+    TPARAM
     bool
-    BOOSTGRAPH::VGraphContainerIterator::operator==(const VGraphContainerIterator& v) const
+    ITERATOR::operator==(const VGraphContainerIterator& v) const
     {
       return v.it_ == it_;
     }
 
-    BOOSTGRAPH_TPARAM
+    TPARAM
     bool
-    BOOSTGRAPH::VGraphContainerIterator::operator!=(const VGraphContainerIterator& v) const
+    ITERATOR::operator!=(const VGraphContainerIterator& v) const
     {
       return v.it_ != it_;
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::VGraphContainerIterator::VGraphContainerIterator&
-    BOOSTGRAPH::VGraphContainerIterator::operator++()
+    TPARAM
+    typename ITERATOR::VGraphContainerIterator&
+    ITERATOR::operator++()
     {
       if (next_ != container_.end())
 	it_ = next_++;
@@ -89,45 +89,48 @@ namespace vcsn
       return *this;
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::VGraphContainerIterator::VGraphContainerIterator
-    BOOSTGRAPH::VGraphContainerIterator::operator++(int)
+    TPARAM
+    typename ITERATOR::VGraphContainerIterator
+    ITERATOR::operator++(int)
     {
       iterator tmp = it_;
       if (next_ != container_.end())
 	it_ = next_++;
       else
 	it_ = next_;
-      return VGraphContainerIterator(container_, tmp);
+      return ITERATOR(container_, tmp);
     }
 
     /*-----------------------------------------.
     | Container wrapper for Boost multi_index. |
     `-----------------------------------------*/
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::VGraphContainer::VGraphContainer(const graph_data_t& g)
+# define CONTAINER						\
+    VGraphContainer<EdgesIterator, GraphData, HTransition> 
+
+    TPARAM
+    CONTAINER::VGraphContainer(const GraphData& g)
       : graph_(g)
     {
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::VGraphContainer::iterator
-    BOOSTGRAPH::VGraphContainer::begin() const
+    TPARAM
+    typename CONTAINER::iterator
+    CONTAINER::begin() const
     {
-      return VGraphContainerIterator(graph_, graph_.begin());
+      return ITERATOR(graph_, graph_.begin());
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::VGraphContainer::iterator
-    BOOSTGRAPH::VGraphContainer::end() const
+    TPARAM
+    typename CONTAINER::iterator
+    CONTAINER::end() const
     {
-      return VGraphContainerIterator(graph_, graph_.end());
+      return ITERATOR(graph_, graph_.end());
     }
 
-    BOOSTGRAPH_TPARAM
+    TPARAM
     size_t
-    BOOSTGRAPH::VGraphContainer::size() const
+    CONTAINER::size() const
     {
       return graph_.size();
     }
@@ -135,7 +138,8 @@ namespace vcsn
   }
 }
 
-# undef BOOSTGRAPH_TPARAM
+# undef ITERATOR
+# undef CONTAINER
 # undef BOOSTGRAPH
 #endif // !VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_VGRAPH_CONTAINER_HXX
 

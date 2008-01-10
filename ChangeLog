@@ -1,5 +1,18 @@
 2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	More cleanup in boostg. 
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hh: New.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx:
+	Move the VGraphContainer declaration from the Graph structure to a separate
+	file.
+
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx:
+	Remove useless 'using namespace'.
+	Fix invalid reads which can occur after several graph copies.
+
+2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/determinize.hxx:
 	Replace deltac by deltaf.
 

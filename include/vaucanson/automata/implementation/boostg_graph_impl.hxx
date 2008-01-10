@@ -51,7 +51,8 @@ namespace vcsn
         final_bitset_(0),
         number_of_epsilon_(0),
         number_of_state_(0)
-    { }
+    {
+    }
 
     /*!
     **  Constructor provided for convenience.
@@ -84,6 +85,8 @@ namespace vcsn
       number_of_epsilon_ = g.number_of_epsilon_;
       number_of_state_ = g.number_of_state_;
       label_container_ = g.label_container_;
+      initial_.clear();
+      final_.clear();
       for (states_data_t::iterator i = states_.begin();
           i != states_.end();
           ++i)
@@ -99,7 +102,6 @@ namespace vcsn
 				  states_[*i->to_],
 				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
-      Set.clear();										\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
           ++i)											\
@@ -163,6 +165,8 @@ namespace vcsn
       number_of_epsilon_ = g.number_of_epsilon_;
       number_of_state_ = g.number_of_state_;
       label_container_ = g.label_container_;
+      initial_.clear();
+      final_.clear();
       for (states_data_t::iterator i = states_.begin();
           i != states_.end();
           ++i)
@@ -178,7 +182,6 @@ namespace vcsn
 				  states_[*i->to_],
 				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
-      Set.clear();										\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
           ++i)											\
@@ -232,7 +235,7 @@ namespace vcsn
     typename BOOSTGRAPH::edges_t
     BOOSTGRAPH::edges() const
     {
-      return VGraphContainer(graph_);
+      return edges_t(graph_);
     }
 
     BOOSTGRAPH_TPARAM
