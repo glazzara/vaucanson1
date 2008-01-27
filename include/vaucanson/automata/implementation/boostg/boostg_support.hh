@@ -19,6 +19,7 @@
 
 # include <vaucanson/misc/support.hh>
 # include <vaucanson/automata/implementation/boostg/initial_container.hh>
+# include <boost/shared_ptr.hpp>
 
 namespace vcsn
 {
@@ -26,10 +27,10 @@ namespace vcsn
   {
 
     template <>
-    class SupportIterator<std::vector<unsigned int*> >
+    class SupportIterator<std::vector<boost::shared_ptr<unsigned> > >
     {
       public:
-	typedef unsigned int*		    		    data_type;
+	typedef boost::shared_ptr<unsigned>		    data_type;
 	typedef vcsn::handler<state_h, data_type>	    handler_t;
 	typedef std::vector<data_type>			    container_t;
 	typedef container_t::const_iterator		    vector_iterator;
@@ -59,11 +60,11 @@ namespace vcsn
 
     /// Support<vector<T> > is a const adapter of std::vector to container.
     template <>
-    class Support<std::vector<unsigned*> >
+    class Support<std::vector<boost::shared_ptr<unsigned> > >
     {
       public:
-	typedef unsigned*				 value_type;
-	typedef vcsn::handler<state_h, value_type> 	 handler_t;
+	typedef boost::shared_ptr<unsigned>		 value_type;
+	typedef vcsn::handler<state_h, value_type>	 handler_t;
 	typedef SupportIterator<std::vector<value_type> > iterator;
 	typedef iterator				 const_iterator;
 	/// The type of the values.
@@ -92,10 +93,10 @@ namespace vcsn
 namespace std
 {
   template <>
-    struct iterator_traits<vcsn::misc::SupportIterator<std::vector<unsigned*> > >
+    struct iterator_traits<vcsn::misc::SupportIterator<std::vector<boost::shared_ptr<unsigned> > > >
     {
       typedef input_iterator_tag  iterator_category;
-      typedef unsigned int*	  value_type;
+      typedef boost::shared_ptr<unsigned> 	  value_type;
       typedef int		  difference_type;
       typedef int*		  pointer;
       typedef int&		  reference;
@@ -108,10 +109,10 @@ namespace vcsn
   {
 
     template <>
-    class SupportIterator<std::set<unsigned int*> >
+    class SupportIterator<std::set<boost::shared_ptr<unsigned> > >
     {
       public:
-	typedef unsigned int*				    data_type;
+	typedef boost::shared_ptr<unsigned> 				    data_type;
 	typedef vcsn::handler<state_h, data_type>	    handler_t;
 	typedef std::set<data_type>			    container_t;
 	typedef container_t::const_iterator		    set_iterator;
@@ -141,10 +142,10 @@ namespace vcsn
 
     /// Support<vector<T> > is a const adapter of std::set to container.
     template <>
-    class Support<std::set<unsigned*> >
+    class Support<std::set<boost::shared_ptr<unsigned> > >
     {
       public:
-	typedef unsigned*				 value_type;
+	typedef boost::shared_ptr<unsigned> 				 value_type;
 	typedef vcsn::handler<state_h, value_type> 	 handler_t;
 	typedef SupportIterator<std::set<value_type> > iterator;
 	typedef iterator				 const_iterator;
@@ -174,10 +175,10 @@ namespace vcsn
 namespace std
 {
   template <>
-    struct iterator_traits<vcsn::misc::SupportIterator<std::set<unsigned*> > >
+    struct iterator_traits<vcsn::misc::SupportIterator<std::set<boost::shared_ptr<unsigned> > > >
     {
       typedef input_iterator_tag  iterator_category;
-      typedef unsigned int*	  value_type;
+      typedef boost::shared_ptr<unsigned> 	  value_type;
       typedef int		  difference_type;
       typedef int*		  pointer;
       typedef int&		  reference;

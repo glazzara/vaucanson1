@@ -295,7 +295,7 @@ namespace vcsn
         if (Set##bitset_[*lastone])			      \
         {						      \
           if (Set##bitset_[s])				      \
-            Set.erase(s);				      \
+            Set.erase(s.value());			      \
           else						      \
             Set##bitset_[s] = true;			      \
         }						      \
@@ -304,7 +304,7 @@ namespace vcsn
           if (Set##bitset_[s])				      \
           {						      \
             Set##bitset_[s] = false;			      \
-            Set.erase(s);				      \
+            Set.erase(s.value());			      \
           }						      \
         }
 
@@ -316,8 +316,8 @@ namespace vcsn
       }
       else
       {
-        initial_.erase(s);
-        final_.erase(s);
+        initial_.erase(s.value());
+        final_.erase(s.value());
       }
 
       --number_of_state_;

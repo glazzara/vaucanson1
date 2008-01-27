@@ -16,12 +16,14 @@ set -ex
 
 me=$(basename "$0" _tester.test)
 prog="./${me}_tester"
+DIFF=${srcdir}/../common/xmldiff.sh
+out=0
 
 # Run the program, compare the result with the expected output.
 $prog output > ${me}_result.tmp
 ## Testing XML dump.
 echo "XML: Testing saver for type $me"
-diff_result=$(diff ${me}_result.tmp ${srcdir}/${me}_ref.xml)
+diff_result=$(${DIFF} ${me}_result.tmp ${srcdir}/${me}_ref.xml)
 if ! test -z "$diff_result"; then
     echo >&2 "FAIL: ${me} output has difference with XML reference"
     echo >&2 "$diff_result"
@@ -31,11 +33,11 @@ fi
 ## Testing XML parse.
 $prog < ${srcdir}/${me}_ref.xml > ${me}_result.dot.tmp
 echo "XML: Testing loader for type ${me}"
-diff_result=$(diff ${me}_result.dot.tmp ${srcdir}/${me}_ref.dot)
+diff_result=$(${DIFF} ${me}_result.dot.tmp ${srcdir}/${me}_ref.dot)
 if ! test -z "$diff_result"; then
     echo >&2 "FAIL: ${me} output has difference with DOT reference"
     echo >&2 "$diff_result"
     out=1
 fi
-
+echo >&2 "plop"
 exit $out

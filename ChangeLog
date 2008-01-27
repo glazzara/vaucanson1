@@ -1,3 +1,44 @@
+2008-01-27  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Various fix + Fix invalid hstate_t 
+	* data/automata/b/div3base2.xml,
+	* data/automata/b/double-3-1.xml: xml dumped differently because of boostg.
+
+	* include/vaucanson/algorithms/is_ambiguous.hxx: use the proper for_all macro.
+
+	* include/vaucanson/algorithms/product.hxx: fix indentation.
+
+	* include/vaucanson/automata/implementation/boostg/boostg_delta_state.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hxx,
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx,
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hh,
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hxx,
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hxx,
+	* include/vaucanson/misc/hash.hh,
+	* include/vaucanson/misc/support.hh:
+	hstate_t are allocated and destroyed in the graph structure. Reading a hstate_t
+	after having destroyed the associated graph was then invalid. hstate_t are now stored
+	as boost::shared_ptr in order to void this issue.
+
+	* lib/generate_libvcsn.rb: do not instantiate algorithms for specific concepts.
+	 
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh:
+	If the test automaton has transitions with unstarable labels we start the test
+	again.
+
+	* src/tests/xml/tester.sh: new script to diff the xml files.
+
+	* taf-kit/tests/vcsn-b.test: use the new diff xml tool.
+
 2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Add boostg specialization for letter labels. 

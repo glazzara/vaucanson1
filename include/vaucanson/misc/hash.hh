@@ -23,6 +23,7 @@
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <boost/functional/hash/hash.hpp>
+# include <boost/shared_ptr.hpp>
 
 namespace vcsn
 {
@@ -96,6 +97,11 @@ namespace vcsn
       inline std::size_t operator() (const handler<state_h, unsigned*>& h) const
       {
 	return ::boost::hash_value (reinterpret_cast<unsigned int>(h.value()));
+      }
+
+      inline std::size_t operator() (const boost::shared_ptr<unsigned>& h) const
+      {
+	return ::boost::hash_value (reinterpret_cast<unsigned int>(h.get()));
       }
 
       inline std::size_t operator() (const unsigned* h) const

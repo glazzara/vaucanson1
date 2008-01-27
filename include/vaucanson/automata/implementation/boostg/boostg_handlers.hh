@@ -20,33 +20,34 @@
 # include <vaucanson/automata/concept/handlers.hh>
 # include <boost/multi_index_container.hpp>
 # include <boost/multi_index/hashed_index.hpp>
+# include <boost/shared_ptr.hpp>
 
 namespace vcsn
 {
 
   template <>
-  class handler<state_h, unsigned*>
+  class handler<state_h, boost::shared_ptr<unsigned> >
   {
     public:
       typedef state_h kind;
-      typedef handler<state_h, unsigned*> self_t;
+      typedef handler<state_h, boost::shared_ptr<unsigned> > self_t;
 
       handler();
 
-      explicit handler(unsigned *h);
+      explicit handler(boost::shared_ptr<unsigned> h);
 
       handler(const self_t& h);
 
       self_t& operator=(const self_t& h);
 
-      unsigned* value() const;
+      boost::shared_ptr<unsigned>  value() const;
 
       operator unsigned() const;
 
       bool is_valid() const;
 
     protected:
-      unsigned* v_;
+      boost::shared_ptr<unsigned>  v_;
   };
 
   using boost::multi_index::detail::hashed_index_iterator;
@@ -71,23 +72,23 @@ namespace vcsn
 		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
 
   template<>
-  bool operator==(const handler<state_h, unsigned*>& h1,
-		  const handler<state_h, unsigned*>& h2);
+  bool operator==(const handler<state_h, boost::shared_ptr<unsigned> >& h1,
+		  const handler<state_h, boost::shared_ptr<unsigned> >& h2);
   template<>
-  bool operator!=(const handler<state_h, unsigned*>& h1,
-		  const handler<state_h, unsigned*>& h2);
+  bool operator!=(const handler<state_h, boost::shared_ptr<unsigned> >& h1,
+		  const handler<state_h, boost::shared_ptr<unsigned> >& h2);
   template<>
-  bool operator<(const handler<state_h, unsigned*>& h1,
-		 const handler<state_h, unsigned*>& h2);
+  bool operator<(const handler<state_h, boost::shared_ptr<unsigned> >& h1,
+		 const handler<state_h, boost::shared_ptr<unsigned> >& h2);
   template<>
-  bool operator>(const handler<state_h, unsigned*>& h1,
-		 const handler<state_h, unsigned*>& h2);
+  bool operator>(const handler<state_h, boost::shared_ptr<unsigned> >& h1,
+		 const handler<state_h, boost::shared_ptr<unsigned> >& h2);
   template<>
-  bool operator<=(const handler<state_h, unsigned*>& h1,
-		  const handler<state_h, unsigned*>& h2);
+  bool operator<=(const handler<state_h, boost::shared_ptr<unsigned> >& h1,
+		  const handler<state_h, boost::shared_ptr<unsigned> >& h2);
   template<>
-  bool operator>=(const handler<state_h, unsigned*>& h1,
-		  const handler<state_h, unsigned*>& h2);
+  bool operator>=(const handler<state_h, boost::shared_ptr<unsigned> >& h1,
+		  const handler<state_h, boost::shared_ptr<unsigned> >& h2);
 
 
 } // vcsn

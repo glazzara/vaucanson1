@@ -63,38 +63,44 @@ using namespace vcsn::tools;
       monoid_elt_t word = word_1 * word_2;
 
       try
+      {
+	automaton_t ret = concatenate(auto_lhs, auto_rhs);
+	semiring_elt_t val =
+	  eval(determinize(realtime(auto_lhs)), word_1) *
+	  eval(determinize(realtime(auto_rhs)), word_2);
+	if (ret.states().size() ==
+	    auto_lhs.states().size() + auto_rhs.states().size() &&
+	    eval(determinize(realtime(ret)), word) == val)
+	  ++size;
+	else
 	{
-	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
-	  semiring_elt_t val =
-	    eval(determinize(realtime(auto_lhs)), word_1) *
-	    eval(determinize(realtime(auto_rhs)), word_2);
-	  if (ret.states().size() ==
-	      auto_lhs.states().size() + auto_rhs.states().size() &&
-	      eval(determinize(realtime(ret)), word) == val)
-	    ++size;
-	  else
-	    {
-	      TEST_FAIL_SAVE("concat",
-			     i,
-			     "concatenation of automata corresponding"
-			     << "to following expressions failed."
-			     << std::endl
-			     << exp_lhs << " and " << exp_rhs
-			     << std::endl);
-	    }
-	  ++nb_test_done;
+	  TEST_FAIL_SAVE("concat",
+	      i,
+	      "concatenation of automata corresponding"
+	      << "to following expressions failed."
+	      << std::endl
+	      << exp_lhs << " and " << exp_rhs
+	      << std::endl);
 	}
+	++nb_test_done;
+      }
       catch (std::logic_error& e)
-	{
-	  std::cout << e.what() << std::endl;
-	  ++nb_test_done;
-	}
+      {
+	std::cout << e.what() << std::endl;
+	std::cout << "Trying again..." << std::endl;
+	++test_num;
+      }
+      catch (...)
+      {
+	std::cout << "Unexpected exception!" << std::endl;
+	++nb_test_done;
+      }
     }
 
   std::string size_rate;
   SUCCESS_RATE(size_rate, size, nb_test_done);
   TEST(t, "Concatenation of two automata." + size_rate,
-       size == nb_test_done);
+      size == nb_test_done);
   // FIXME: add tests based on samples from the languages.
   return t.all_passed();
 }

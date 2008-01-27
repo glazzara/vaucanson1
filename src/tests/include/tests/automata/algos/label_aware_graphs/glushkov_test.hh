@@ -169,6 +169,12 @@ bool glushkov_test(tests::Tester& tg)
       catch (std::logic_error& e)
       {
 	std::cout << e.what() << std::endl;
+	std::cout << "Trying again..." << std::endl;
+	++test_num;
+      }
+      catch (...)
+      {
+	std::cout << "Unexpected exception!" << std::endl;
 	++nb_test_done;
       }
     }

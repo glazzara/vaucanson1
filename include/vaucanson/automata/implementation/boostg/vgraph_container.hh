@@ -18,10 +18,12 @@
 #ifndef VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_VGRAPH_CONTAINER_HH
 # define VAUCANSON_AUTOMATA_IMPLEMENTATION_BOOSTG_VGRAPH_CONTAINER_HH
 
+#include <iterator>
+
 namespace vcsn
 {
   namespace boostg
-  {    
+  {
     template<typename EdgesIterator, typename GraphData, typename HTransition>
     class VGraphContainerIterator
     {

@@ -79,10 +79,16 @@ bool in_concat_test(tests::Tester& tg)
 	  ++nb_test_done;
 	}
       catch (std::logic_error& e)
-	{
-	  std::cout << e.what() << std::endl;
-	  ++nb_test_done;
-	}
+      {
+	std::cout << e.what() << std::endl;
+	std::cout << "Trying again..." << std::endl;
+	++test_num;
+      }
+      catch (...)
+      {
+	std::cout << "Unexpected exception!" << std::endl;
+	++nb_test_done;
+      }
     }
 
   std::string size_rate;

@@ -18,6 +18,7 @@
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
 # include <boost/dynamic_bitset.hpp>
+# include <boost/shared_ptr.hpp>
 
 # include <vaucanson/automata/implementation/boostg/vgraph_container.hh>
 # include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
@@ -69,7 +70,7 @@ namespace vcsn
 	typedef typename SmartLabelContainer<label_t>::hlabel_t
 							hlabel_t;
 
-	typedef unsigned *				state_t;
+	typedef boost::shared_ptr<unsigned>		state_t;
 	// State descriptor.
 	//
 	typedef handler<state_h, state_t>		hstate_t;

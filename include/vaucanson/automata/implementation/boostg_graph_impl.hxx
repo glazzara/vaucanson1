@@ -45,7 +45,6 @@ namespace vcsn
     `---------------*/
 
     BOOSTGRAPH_TPARAM
-    inline
     BOOSTGRAPH::Graph ()
       : initial_bitset_(0),
         final_bitset_(0),
@@ -73,7 +72,10 @@ namespace vcsn
         states_(initial_number_of_states)
     {
       for (unsigned i = 0; i < initial_number_of_states; ++i)
-        states_[i] = new unsigned(i);
+      {
+	boost::shared_ptr<unsigned> p(new unsigned(i));
+        states_[i] = p;
+      }
     }
 
     BOOSTGRAPH_TPARAM
@@ -87,13 +89,16 @@ namespace vcsn
       label_container_ = g.label_container_;
       initial_.clear();
       final_.clear();
-      for (states_data_t::iterator i = states_.begin();
+      /*for (states_data_t::iterator i = states_.begin();
           i != states_.end();
           ++i)
-        delete *i;
+        delete *i;*/
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
-        states_[i] = new unsigned(i);
+      {
+	boost::shared_ptr<unsigned> p(new unsigned(i));
+        states_[i] = p;
+      }
       graph_.clear();
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
@@ -144,13 +149,12 @@ namespace vcsn
     `--------------*/
 
     BOOSTGRAPH_TPARAM
-    inline
     BOOSTGRAPH::~Graph ()
     {
-      for (states_data_t::iterator i = states_.begin();
+      /*for (states_data_t::iterator i = states_.begin();
           i != states_.end();
           ++i)
-        delete *i;
+        delete *i;*/
     }
 
     BOOSTGRAPH_TPARAM
@@ -167,13 +171,16 @@ namespace vcsn
       label_container_ = g.label_container_;
       initial_.clear();
       final_.clear();
-      for (states_data_t::iterator i = states_.begin();
+      /*for (states_data_t::iterator i = states_.begin();
           i != states_.end();
           ++i)
-        delete *i;
+        delete *i;*/
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
-        states_[i] = new unsigned(i);
+      {
+	boost::shared_ptr<unsigned> p(new unsigned(i));
+        states_[i] = p;
+      }
       graph_.clear();
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
@@ -270,7 +277,8 @@ namespace vcsn
     {
       initial_bitset_.append(false);
       final_bitset_.append(false);
-      state_t h(new unsigned(number_of_state_++));
+      boost::shared_ptr<unsigned> p(new unsigned(number_of_state_++));
+      state_t h(p);
       states_.push_back(h);
       return hstate_t(h);
     }
@@ -329,7 +337,7 @@ namespace vcsn
       --number_of_state_;
       states_.pop_back();
       postcondition(states_.size() == number_of_state_);
-      delete s.value();
+      //delete s.value();
       initial_bitset_.resize(number_of_state_);
       final_bitset_.resize(number_of_state_);
 

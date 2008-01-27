@@ -313,7 +313,7 @@ template<typename A, typename T, typename U>
 Element<A, T>
 product (const Element<A, T>& lhs, const Element<A, U>& rhs,
 	 std::map<typename T::hstate_t,
-	  std::pair<typename T::hstate_t, typename U::hstate_t> >& m,
+	 std::pair<typename T::hstate_t, typename U::hstate_t> >& m,
 	 const bool use_geometry)
 {
   Element<A, T> ret(rhs.structure());
