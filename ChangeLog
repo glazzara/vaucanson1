@@ -1,3 +1,18 @@
+2008-02-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix boostg compilation issues on 64bit.
+	* vaucanson/automata/implementation/boostg/boostg_handlers.hh,
+	* vaucanson/automata/implementation/boostg/boostg_handlers.hxx,
+	* vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx,
+	* vaucanson/automata/implementation/boostg/boostg_support.hh,
+	* vaucanson/automata/implementation/boostg/boostg_support.hxx,
+	* vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* vaucanson/automata/implementation/boostg_graph_letters_spec.hh,
+	* vaucanson/misc/hash.hh:
+	Use size_t instead of unsigned in the hstate_t to avoid errors due
+	to the pointer to unsigned conversions for the hash.
+
 2008-01-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Various fix + Fix invalid hstate_t 

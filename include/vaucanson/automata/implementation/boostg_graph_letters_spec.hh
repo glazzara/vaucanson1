@@ -52,7 +52,7 @@ namespace vcsn
 	typedef typename LabelOf<labels_are_letters, WordValue, bool,
 		SeriesValue, Letter>::ret		label_t;
 
-	typedef boost::shared_ptr<unsigned>		state_t;
+	typedef boost::shared_ptr<std::size_t>		state_t;
 	// State descriptor.
 	//
 	typedef handler<state_h, state_t>		hstate_t;

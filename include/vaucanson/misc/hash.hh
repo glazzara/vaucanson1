@@ -94,19 +94,19 @@ namespace vcsn
 
     struct hash_state_handler
     {
-      inline std::size_t operator() (const handler<state_h, unsigned*>& h) const
+      inline std::size_t operator() (const handler<state_h, std::size_t*>& h) const
       {
-	return ::boost::hash_value (reinterpret_cast<unsigned int>(h.value()));
+	return ::boost::hash_value (reinterpret_cast<std::size_t>(h.value()));
       }
 
-      inline std::size_t operator() (const boost::shared_ptr<unsigned>& h) const
+      inline std::size_t operator() (const boost::shared_ptr<std::size_t>& h) const
       {
-	return ::boost::hash_value (reinterpret_cast<unsigned int>(h.get()));
+	return ::boost::hash_value (reinterpret_cast<std::size_t>(h.get()));
       }
 
-      inline std::size_t operator() (const unsigned* h) const
+      inline std::size_t operator() (const std::size_t* h) const
       {
-	return ::boost::hash_value (reinterpret_cast<unsigned int>(h));
+	return ::boost::hash_value (reinterpret_cast<std::size_t>(h));
       }
     };
 

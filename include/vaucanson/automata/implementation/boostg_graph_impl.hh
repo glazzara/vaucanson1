@@ -70,7 +70,7 @@ namespace vcsn
 	typedef typename SmartLabelContainer<label_t>::hlabel_t
 							hlabel_t;
 
-	typedef boost::shared_ptr<unsigned>		state_t;
+	typedef boost::shared_ptr<std::size_t>		state_t;
 	// State descriptor.
 	//
 	typedef handler<state_h, state_t>		hstate_t;

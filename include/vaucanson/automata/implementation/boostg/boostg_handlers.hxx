@@ -25,44 +25,44 @@ namespace vcsn
 {
 
   inline
-  handler<state_h, boost::shared_ptr<unsigned> >::handler()
+  handler<state_h, boost::shared_ptr<std::size_t> >::handler()
   {
-    static boost::shared_ptr<unsigned> uint_max(new unsigned(UINT_MAX));
+    static boost::shared_ptr<std::size_t> uint_max(new std::size_t(UINT_MAX));
     v_ = uint_max;
   }
 
   inline
-  handler<state_h, boost::shared_ptr<unsigned> >::handler(boost::shared_ptr<unsigned> h) : v_(h)
+  handler<state_h, boost::shared_ptr<std::size_t> >::handler(boost::shared_ptr<std::size_t> h) : v_(h)
   {}
 
   inline
-  handler<state_h, boost::shared_ptr<unsigned> >::handler(const handler<state_h, boost::shared_ptr<unsigned> >& h) : v_(h.v_)
+  handler<state_h, boost::shared_ptr<std::size_t> >::handler(const handler<state_h, boost::shared_ptr<std::size_t> >& h) : v_(h.v_)
   {}
 
   inline
-  handler<state_h, boost::shared_ptr<unsigned> >&
-  handler<state_h, boost::shared_ptr<unsigned> >::operator=(const handler<state_h, boost::shared_ptr<unsigned> >& h)
+  handler<state_h, boost::shared_ptr<std::size_t> >&
+  handler<state_h, boost::shared_ptr<std::size_t> >::operator=(const handler<state_h, boost::shared_ptr<std::size_t> >& h)
   {
     v_ = h.v_;
     return *this;
   }
 
   inline
-  boost::shared_ptr<unsigned>
-  handler<state_h, boost::shared_ptr<unsigned> >::value() const
+  boost::shared_ptr<std::size_t>
+  handler<state_h, boost::shared_ptr<std::size_t> >::value() const
   {
     return v_;
   }
 
   inline
-  handler<state_h, boost::shared_ptr<unsigned> >::operator unsigned() const
+  handler<state_h, boost::shared_ptr<std::size_t> >::operator unsigned() const
   {
     return *v_;
   }
 
   inline
   bool
-  handler<state_h, boost::shared_ptr<unsigned> >::is_valid() const
+  handler<state_h, boost::shared_ptr<std::size_t> >::is_valid() const
   {
     return *v_ != UINT_MAX;
   }

@@ -73,7 +73,7 @@ namespace vcsn
     {
       for (unsigned i = 0; i < initial_number_of_states; ++i)
       {
-	boost::shared_ptr<unsigned> p(new unsigned(i));
+	boost::shared_ptr<std::size_t> p(new std::size_t(i));
         states_[i] = p;
       }
     }
@@ -96,7 +96,7 @@ namespace vcsn
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
       {
-	boost::shared_ptr<unsigned> p(new unsigned(i));
+	boost::shared_ptr<std::size_t> p(new std::size_t(i));
         states_[i] = p;
       }
       graph_.clear();
@@ -178,7 +178,7 @@ namespace vcsn
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
       {
-	boost::shared_ptr<unsigned> p(new unsigned(i));
+	boost::shared_ptr<std::size_t> p(new std::size_t(i));
         states_[i] = p;
       }
       graph_.clear();
@@ -277,7 +277,7 @@ namespace vcsn
     {
       initial_bitset_.append(false);
       final_bitset_.append(false);
-      boost::shared_ptr<unsigned> p(new unsigned(number_of_state_++));
+      boost::shared_ptr<std::size_t> p(new std::size_t(number_of_state_++));
       state_t h(p);
       states_.push_back(h);
       return hstate_t(h);

@@ -23,23 +23,23 @@ namespace vcsn
 {
   namespace misc
   {
-    //Specialization for std::vector<boost::shared_ptr<unsigned> >
+    //Specialization for std::vector<boost::shared_ptr<std::size_t> >
     inline
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::SupportIterator (const container_t* c,
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::SupportIterator (const container_t* c,
 										  int i)
       : current_(i), container_size_(c->size()), container_(c)
     {}
 
     inline
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::handler_t
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::operator* () const
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::handler_t
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::operator* () const
     {
       return handler_t((*container_)[current_]);
     }
 
     inline
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >&
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::operator++ ()
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >&
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::operator++ ()
     {
       if (container_->size() == container_size_)
 	++current_;
@@ -49,8 +49,8 @@ namespace vcsn
     }
 
     inline
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >&
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::operator-- ()
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >&
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::operator-- ()
     {
       if (container_->size() == container_size_)
 	--current_;
@@ -60,44 +60,44 @@ namespace vcsn
     }
 
     inline
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::operator++ (int)
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::operator++ (int)
     {
-      SupportIterator<std::vector<boost::shared_ptr<unsigned> > > tmp = *this;
+      SupportIterator<std::vector<boost::shared_ptr<std::size_t> > > tmp = *this;
       ++(*this);
       return tmp;
     }
 
     inline
     bool
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::operator!= (const SupportIterator& o) const
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::operator!= (const SupportIterator& o) const
     {
       return o.current_ != current_;
     }
 
     inline
     bool
-    SupportIterator<std::vector<boost::shared_ptr<unsigned> > >::operator== (const SupportIterator& o) const
+    SupportIterator<std::vector<boost::shared_ptr<std::size_t> > >::operator== (const SupportIterator& o) const
     {
       return ! (*this != o);
     }
 
-    //Specialization for std::vector<boost::shared_ptr<unsigned> >
+    //Specialization for std::vector<boost::shared_ptr<std::size_t> >
     inline
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::SupportIterator (const container_t* c, set_iterator it)
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::SupportIterator (const container_t* c, set_iterator it)
       : current_(it), container_size_(c->size()), container_(c)
     {}
 
     inline
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::handler_t
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::operator* () const
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::handler_t
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::operator* () const
     {
       return handler_t(*current_);
     }
 
     inline
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >&
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::operator++ ()
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >&
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::operator++ ()
     {
       if (container_->size() == container_size_)
 	++current_;
@@ -107,8 +107,8 @@ namespace vcsn
     }
 
     inline
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >&
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::operator-- ()
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >&
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::operator-- ()
     {
       if (container_->size() == container_size_)
 	--current_;
@@ -118,24 +118,24 @@ namespace vcsn
     }
 
     inline
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::operator++ (int)
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::operator++ (int)
     {
-      SupportIterator<std::set<boost::shared_ptr<unsigned> > > tmp = *this;
+      SupportIterator<std::set<boost::shared_ptr<std::size_t> > > tmp = *this;
       ++(*this);
       return tmp;
     }
 
     inline
     bool
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::operator!= (const SupportIterator& o) const
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::operator!= (const SupportIterator& o) const
     {
       return o.current_ != current_;
     }
 
     inline
     bool
-    SupportIterator<std::set<boost::shared_ptr<unsigned> > >::operator== (const SupportIterator& o) const
+    SupportIterator<std::set<boost::shared_ptr<std::size_t> > >::operator== (const SupportIterator& o) const
     {
       return ! (*this != o);
     }
@@ -278,24 +278,24 @@ namespace vcsn
 
     /// support<vector<U, T> > is a const adapter of std::vector to container.
     inline
-    Support<std::vector<boost::shared_ptr<unsigned> > >
-    ::Support (const std::vector<boost::shared_ptr<unsigned> >& m)
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
+    ::Support (const std::vector<boost::shared_ptr<std::size_t> >& m)
       : m_ (m)
     {
     }
 
     inline
     unsigned
-    Support<std::vector<boost::shared_ptr<unsigned> > >
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
     ::size () const
     {
       return m_.size ();
     }
 
     inline
-    Support<std::vector<boost::shared_ptr<unsigned> > >::iterator
-    Support<std::vector<boost::shared_ptr<unsigned> > >
-    ::find (const handler<state_h, boost::shared_ptr<unsigned>  >& k) const
+    Support<std::vector<boost::shared_ptr<std::size_t> > >::iterator
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
+    ::find (const handler<state_h, boost::shared_ptr<std::size_t>  >& k) const
     {
       if (k < m_.size())
 	return iterator(&m_, k);
@@ -305,31 +305,31 @@ namespace vcsn
 
     inline
     bool
-    Support<std::vector<boost::shared_ptr<unsigned> > >
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
     ::empty () const
     {
       return m_.empty ();
     }
 
     inline
-    Support<std::vector<boost::shared_ptr<unsigned> > >::const_iterator
-    Support<std::vector<boost::shared_ptr<unsigned> > >
+    Support<std::vector<boost::shared_ptr<std::size_t> > >::const_iterator
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
     ::begin () const
     {
       return iterator (&m_, 0);
     }
 
     inline
-    Support<std::vector<boost::shared_ptr<unsigned> > >::const_iterator
-    Support<std::vector<boost::shared_ptr<unsigned> > >
+    Support<std::vector<boost::shared_ptr<std::size_t> > >::const_iterator
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
     ::end () const
     {
       return iterator (&m_, m_.size());
     }
 
     inline
-    Support<std::vector<boost::shared_ptr<unsigned> > >::handler_t
-    Support<std::vector<boost::shared_ptr<unsigned> > >
+    Support<std::vector<boost::shared_ptr<std::size_t> > >::handler_t
+    Support<std::vector<boost::shared_ptr<std::size_t> > >
     ::back () const
     {
       return handler_t(m_.back());
@@ -337,55 +337,55 @@ namespace vcsn
 
     /// support<vector<U, T> > is a const adapter of std::set to container.
     inline
-    Support<std::set<boost::shared_ptr<unsigned> > >
-    ::Support (const std::set<boost::shared_ptr<unsigned> >& m)
+    Support<std::set<boost::shared_ptr<std::size_t> > >
+    ::Support (const std::set<boost::shared_ptr<std::size_t> >& m)
       : m_ (m)
     {
     }
 
     inline
     unsigned
-    Support<std::set<boost::shared_ptr<unsigned> > >
+    Support<std::set<boost::shared_ptr<std::size_t> > >
     ::size () const
     {
       return m_.size ();
     }
 
     inline
-    Support<std::set<boost::shared_ptr<unsigned> > >::iterator
-    Support<std::set<boost::shared_ptr<unsigned> > >
-    ::find (const handler<state_h, boost::shared_ptr<unsigned>  >& k) const
+    Support<std::set<boost::shared_ptr<std::size_t> > >::iterator
+    Support<std::set<boost::shared_ptr<std::size_t> > >
+    ::find (const handler<state_h, boost::shared_ptr<std::size_t>  >& k) const
     {
 	return iterator(&m_, m_.find(k.value()));
     }
 
     inline
     bool
-    Support<std::set<boost::shared_ptr<unsigned> > >
+    Support<std::set<boost::shared_ptr<std::size_t> > >
     ::empty () const
     {
       return m_.empty ();
     }
 
     inline
-    Support<std::set<boost::shared_ptr<unsigned> > >::const_iterator
-    Support<std::set<boost::shared_ptr<unsigned> > >
+    Support<std::set<boost::shared_ptr<std::size_t> > >::const_iterator
+    Support<std::set<boost::shared_ptr<std::size_t> > >
     ::begin () const
     {
       return iterator (&m_, m_.begin());
     }
 
     inline
-    Support<std::set<boost::shared_ptr<unsigned> > >::const_iterator
-    Support<std::set<boost::shared_ptr<unsigned> > >
+    Support<std::set<boost::shared_ptr<std::size_t> > >::const_iterator
+    Support<std::set<boost::shared_ptr<std::size_t> > >
     ::end () const
     {
       return iterator (&m_, m_.end());
     }
 
     inline
-    Support<std::set<boost::shared_ptr<unsigned> > >::handler_t
-    Support<std::set<boost::shared_ptr<unsigned> > >
+    Support<std::set<boost::shared_ptr<std::size_t> > >::handler_t
+    Support<std::set<boost::shared_ptr<std::size_t> > >
     ::back () const
     {
       //FIXME Maybe wrong! Compare pointers instead of id.

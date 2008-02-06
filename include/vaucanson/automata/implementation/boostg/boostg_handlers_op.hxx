@@ -63,8 +63,8 @@ namespace vcsn
 
 #define HOPERATOR(Op)					\
 inline							\
-bool operator Op (const handler<state_h, boost::shared_ptr<unsigned> >& h1,\
-                  const handler<state_h, boost::shared_ptr<unsigned> >& h2)\
+bool operator Op (const handler<state_h, boost::shared_ptr<std::size_t> >& h1,\
+                  const handler<state_h, boost::shared_ptr<std::size_t> >& h2)\
 { return int(h1) Op int(h2); }
 
 namespace vcsn
