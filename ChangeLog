@@ -1,3 +1,9 @@
+2008-02-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix compilation warning.
+	* include/vaucanson/xml/builders.hxx:
+	Use size_t instead of unsigned in comparison with std::string::npos.
+
 2008-02-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix boostg compilation issues on 64bit.

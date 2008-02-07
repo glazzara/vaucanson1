@@ -290,7 +290,7 @@ namespace vcsn
 	if ((it = attrs.find("label")) != attrs.end())
 	{
 	  std::string label = it->second;
-	  unsigned int pos = label.find("|");
+	  std::size_t pos = label.find("|");
 	  if (pos != std::string::npos)
 	  {
 	    in = label.substr(0, pos);
