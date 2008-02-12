@@ -20,8 +20,6 @@
 # include <vaucanson/algorithms/extension.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
-using namespace std;
-
 namespace vcsn {
 
   template <typename S, typename T, typename Auto_t>
@@ -48,7 +46,7 @@ namespace vcsn {
     monoid_elt_t	t_neutre = t_ret.series().monoid().
       identity(SELECT(typename t_monoid_elt_t::value_t));
 
-    vector<hstate_t>	conv(a.states().size());
+    std::vector<hstate_t>	conv(a.states().size());
 
     for_all_states (s, a)
       conv[t_ret.add_state()] = *s;
@@ -135,7 +133,7 @@ namespace vcsn {
     typedef typename Trans_t::semiring_elt_t	t_weight_t;
 
     Trans_t		      tt(t.structure());
-    map<hstate_t, hstate_t>   conv;
+    std::map<hstate_t, hstate_t>   conv;
 
     a_monoid_elt_t a_neutre =
       a.series().monoid().identity(SELECT(typename a_monoid_elt_t::value_t));

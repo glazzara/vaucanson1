@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     e = a.add_letter_transition(s0, s1, 'a');
     a.add_letter_transition(s1, s2, 'b');
 
-    a.geometry().states()[s2] = make_pair(12, 14);
+    a.geometry().states()[s2] = std::make_pair(12, 14);
 
     std::cout << automaton_saver(a, string_out(), xml::XML());
   }
