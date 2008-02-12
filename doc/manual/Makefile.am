@@ -41,10 +41,10 @@ vaucanswig.tex					\
 library.tex					\
 developer.tex					\
 theory.tex					\
-$(srcdir)/automata.tex				\
+automata.tex					\
 xml.tex						\
 specification.tex				\
-$(srcdir)/version.tex
+version.tex
 
 $(srcdir)/automata.tex: generate-automata.sh
 # Use the TAF-Kit wrappers.

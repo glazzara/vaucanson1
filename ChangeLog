@@ -1,3 +1,8 @@
+2008-02-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix compilation bug 
+	* doc/manual/Makefile.am: .
+
 2008-02-12  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Remove ugly 'using namespace std'.
