@@ -29,6 +29,7 @@
 # include <boost/functional/hash/hash.hpp>
 # include <boost/tuple/tuple.hpp>
 # include <vector>
+# include <list>
 # include <queue>
 # include <map>
 # include <utility>
@@ -211,27 +212,50 @@ namespace vcsn {
 		squeue.insert(a.dst_of(*e));
 	      }
 	  }
-	 //it = shortest_hash.find(boost::make_tuple(*s, *s));
-	 //result_not_computable_if(!it->rel.starable());
 	}
       }
     }
 
     void backward_remove()
     {
+      std::list<std::pair<htransition_t, semiring_elt_t> > tr_l;
+      std::list<std::pair<hstate_t, semiring_elt_t> > fin_l;
       std::stack<tr_t> tr_st;
       std::stack<std::pair<hstate_t, series_set_elt_t> > fin_st;
 
       std::list<htransition_t> transition_list;
       for_all_(s_shortest_hash, it, shortest_hash)
+	if (it->src != it->dst)
+	{
+	  transition_list.clear();
+	  a.deltac(transition_list, it->dst, delta_kind::transitions());
+	  for_all_const_(std::list<htransition_t>, e, transition_list)
+	    tr_st.push(tr_t(it->src, a.dst_of(*e), it->dist * a.series_of(*e)));
+	  if (a.is_final(it->dst))
+	    fin_st.push(make_pair(it->src, it->dist * a.get_final(it->dst)));
+	}
+	else
+	{
+	  transition_list.clear();
+	  a.deltac(transition_list, it->dst, delta_kind::transitions());
+	  for_all_const_(std::list<htransition_t>, e, transition_list)
+	    tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
+	  if (a.is_final(it->dst))
+	    fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->src, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	}
+
+      for (typename std::list<std::pair<htransition_t, semiring_elt_t> >::iterator it = tr_l.begin();
+	   it != tr_l.end(); ++it)
       {
-	transition_list.clear();
-	a.deltac(transition_list, it->dst, delta_kind::transitions());
-	for_all_const_(std::list<htransition_t>, e, transition_list)
-	  tr_st.push(tr_t(it->src, a.dst_of(*e), it->dist * a.series_of(*e)));
-	if (a.is_final(it->dst))
-	  fin_st.push(make_pair(it->src, it->dist * a.get_final(it->dst)));
+	series_set_elt_t s = a.series_of(it->first) * it->second;
+	if (s != null_series)
+	  a.add_series_transition(a.src_of(it->first), a.dst_of(it->first), s);
+	a.del_transition(it->first);
       }
+
+      for (typename std::list<std::pair<hstate_t, semiring_elt_t> >::iterator it = fin_l.begin();
+	   it != fin_l.end(); ++it)
+	a.set_final(it->first, it->second * a.get_final(it->first));
 
       while (!tr_st.empty())
       {
@@ -249,19 +273,44 @@ namespace vcsn {
 
     void forward_remove()
     {
+      std::list<std::pair<htransition_t, semiring_elt_t> > tr_l;
+      std::list<std::pair<hstate_t, semiring_elt_t> > fin_l;
       std::stack<tr_t> tr_st;
       std::stack<std::pair<hstate_t, series_set_elt_t> > init_st;
 
       std::list<htransition_t> transition_list;
       for_all_(s_shortest_hash, it, shortest_hash)
-      {
+	if (it->src != it->dst)
+	{
 	transition_list.clear();
 	a.rdeltac(transition_list, it->src, delta_kind::transitions());
 	for_all_const_(std::list<htransition_t>, e, transition_list)
 	  tr_st.push(tr_t(a.src_of(*e), it->dst, a.series_of(*e) * it->dist));
 	if (a.is_initial(it->src))
 	  init_st.push(make_pair(it->dst, a.get_initial(it->src) * it->dist));
+	}
+	else
+	{
+	  transition_list.clear();
+	  a.rdeltac(transition_list, it->dst, delta_kind::transitions());
+	  for_all_const_(std::list<htransition_t>, e, transition_list)
+	    tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
+	  if (a.is_initial(it->src))
+	    fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->dst, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	}
+
+      for (typename std::list<std::pair<htransition_t, semiring_elt_t> >::iterator it = tr_l.begin();
+	   it != tr_l.end(); ++it)
+      {
+	series_set_elt_t s = a.series_of(it->first) * it->second;
+	if (s != null_series)
+	  a.add_series_transition(a.src_of(it->first), a.dst_of(it->first), s);
+	a.del_transition(it->first);
       }
+
+      for (typename std::list<std::pair<hstate_t, semiring_elt_t> >::iterator it = fin_l.begin();
+	   it != fin_l.end(); ++it)
+	a.set_initial(it->first, it->second * a.get_initial(it->first));
 
       while (!tr_st.empty())
       {

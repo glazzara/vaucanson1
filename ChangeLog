@@ -1,3 +1,10 @@
+2008-02-14  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix bug in eps_removal_sp
+	eps_removal_sp still doesn't produce the expected output but now
+	the output is not false.
+	* include/vaucanson/algorithms/eps_removal_sp.hxx: .
+
 2008-02-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix compilation bug 
