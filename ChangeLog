@@ -1,3 +1,9 @@
+2008-02-18  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix ldflags order.
+	* build-aux/vcsn-boost.m4: .
+	* build-aux/vcsn-xml.m4: .
+
 2008-02-14  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix bug in eps_removal_sp
