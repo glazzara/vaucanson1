@@ -73,7 +73,10 @@ namespace vcsn
         states_(initial_number_of_states)
     {
       for (unsigned i = 0; i < initial_number_of_states; ++i)
-        states_[i] = new unsigned(i);
+      {
+	boost::shared_ptr<unsigned> p(new unsigned(i));
+        states_[i] = p;
+      }
     }
 
     BOOSTGRAPH_TPARAM
@@ -91,14 +94,12 @@ namespace vcsn
       typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
       map_transitions.clear();
 
-
-      for (states_data_t::iterator i = states_.begin();
-          i != states_.end();
-          ++i)
-        delete *i;
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
-        states_[i] = new unsigned(i);
+      {
+	boost::shared_ptr<unsigned> p(new unsigned(i));
+        states_[i] = p;
+      }
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
           ++i)
@@ -145,10 +146,6 @@ namespace vcsn
     inline
     BOOSTGRAPH::~Graph ()
     {
-      for (states_data_t::iterator i = states_.begin();
-          i != states_.end();
-          ++i)
-        delete *i;
     }
 
     BOOSTGRAPH_TPARAM
@@ -169,14 +166,12 @@ namespace vcsn
       typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
       map_transitions.clear();
 
-
-      for (states_data_t::iterator i = states_.begin();
-          i != states_.end();
-          ++i)
-        delete *i;
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
-        states_[i] = new unsigned(i);
+      {
+	boost::shared_ptr<unsigned> p(new unsigned(i));
+        states_[i] = p;
+      }
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
           i != g.graph_.end();
           ++i)
@@ -264,7 +259,8 @@ namespace vcsn
     {
       initial_bitset_.append(false);
       final_bitset_.append(false);
-      state_t h(new unsigned(number_of_state_++));
+      boost::shared_ptr<unsigned> p(new unsigned(number_of_state_++));
+      state_t h(p);
       states_.push_back(h);
       return hstate_t(h);
     }
@@ -323,7 +319,6 @@ namespace vcsn
       --number_of_state_;
       states_.pop_back();
       postcondition(states_.size() == number_of_state_);
-      delete s.value();
       initial_bitset_.resize(number_of_state_);
       final_bitset_.resize(number_of_state_);
 

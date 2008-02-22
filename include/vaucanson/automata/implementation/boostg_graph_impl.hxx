@@ -89,10 +89,6 @@ namespace vcsn
       label_container_ = g.label_container_;
       initial_.clear();
       final_.clear();
-      /*for (states_data_t::iterator i = states_.begin();
-          i != states_.end();
-          ++i)
-        delete *i;*/
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
       {
@@ -151,10 +147,6 @@ namespace vcsn
     BOOSTGRAPH_TPARAM
     BOOSTGRAPH::~Graph ()
     {
-      /*for (states_data_t::iterator i = states_.begin();
-          i != states_.end();
-          ++i)
-        delete *i;*/
     }
 
     BOOSTGRAPH_TPARAM
@@ -171,10 +163,6 @@ namespace vcsn
       label_container_ = g.label_container_;
       initial_.clear();
       final_.clear();
-      /*for (states_data_t::iterator i = states_.begin();
-          i != states_.end();
-          ++i)
-        delete *i;*/
       states_.resize(g.number_of_state_);
       for (unsigned i = 0; i < g.number_of_state_; ++i)
       {
@@ -363,7 +351,7 @@ namespace vcsn
         initial_bitset_[s] = true;
       }
       else
-	initial_.modify(initial_.find(s.value()), update_label<final_value_t>(v));
+	initial_.modify(initial_.find(s.value()), update_label<initial_value_t>(v));
     }
 
     BOOSTGRAPH_TPARAM
@@ -412,7 +400,7 @@ namespace vcsn
         final_bitset_[s] = true;
       }
       else
-	final_.modify(final_.find(s.value()), update_label<initial_value_t>(v));
+	final_.modify(final_.find(s.value()), update_label<final_value_t>(v));
     }
 
     BOOSTGRAPH_TPARAM

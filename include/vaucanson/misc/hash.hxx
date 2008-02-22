@@ -98,25 +98,6 @@ namespace vcsn
       return seed;
     }
 
-/*    template <typename Word, typename LetterT, typename WeightT>
-    std::size_t
-    hash_label<algebra::polynom<Word, rat::exp<std::string, rat::exp<LetterT, WeightT > > > >::operator() (
-	  const algebra::polynom<Word, rat::exp<std::string, rat::exp<LetterT, WeightT> > >& l) const
-    {
-      std::size_t seed (0);
-
-      for (typename algebra::polynom<Word, rat::exp<std::string,
-	    rat::exp<LetterT, WeightT> > >::const_iterator i = l.begin ();
-	   i != l.end ();
-	   ++i)
-      {
-	::boost::hash_combine (seed, i->first);
-	::boost::hash_combine (seed, hash_label(i->second));
-      }
-      return seed;
-    }
-*/
-
     template <typename Weight, typename T, typename U>
     std::size_t
     hash_label<algebra::polynom<std::pair<T, U>, Weight> >::operator() (

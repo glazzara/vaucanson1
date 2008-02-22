@@ -1,3 +1,13 @@
+2008-02-21  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix compilation issues with labels_are_letter specialization.
+	* vaucanson/automata/implementation/boostg_graph_letters_spec.hxx: Use
+	smart pointers in hstate_t..
+	
+	* vaucanson/automata/implementation/boostg_graph_impl.hxx,
+	* vaucanson/algorithms/determinize.hxx,
+	* vaucanson/misc/hash.hxx: Cleanup useless comments.
+
 2008-02-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix compilation warning.

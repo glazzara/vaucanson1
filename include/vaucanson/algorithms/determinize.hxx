@@ -125,16 +125,7 @@ namespace vcsn {
 	bool is_final = false;
 	delta_functor<input_t> func(q, input, is_final);
 	for_all_const_ (subset_t, j, s)
-	//{
 	  input.letter_deltaf(func, *j, *e, delta_kind::states());
-	  /*dst.clear();
-	  input.letter_deltac(dst, *j, *e, delta_kind::states());
-	  for_all_const_(delta_ret_t, k, dst)
-	  {
-	    q.insert(*k);
-	    is_final |= input.is_final(*k);
-	  }*/
-	//}
 	typename subset_set_t::const_iterator current = subset_set.find(q);
 	if (current == subset_set.end())
 	{
