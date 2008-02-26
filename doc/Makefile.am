@@ -29,6 +29,7 @@ WGETL = $(WGET) https://svn.lrde.epita.fr/svn/lrde-publis/trunk/
 SHAREFILES = \
   share/bib/vaucanson.bib \
   share/bin/texi2dvi \
+  share/styles/hevea.sty \
   share/styles/ldf/stl.ldf \
   share/styles/ldf/vaucanson.ldf \
   share/styles/misc.hva \
