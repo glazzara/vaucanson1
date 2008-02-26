@@ -1,5 +1,3 @@
-include $(srcdir)/../share/make/tex.mk
-include $(srcdir)/../share/make/pdf-figs.mk
 
 %.tex: %.cmd
 ## Eval the cmd to preserve embedded redirections.

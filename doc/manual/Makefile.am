@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,8 +11,42 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+all: pdf
+
 include $(top_srcdir)/vaucanson.mk
-include $(top_srcdir)/doc/doc.mk
+
+share_dir = $(top_srcdir)/doc/share
+share_bin_dir = $(share_dir)/bin
+share_style_dir = $(share_dir)/styles
+share_bib_dir = $(share_dir)/bib
+
+TEXI2DVI = $(share_bin_dir)/texi2dvi
+TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I $(share_style_dir) -I $(share_bib_dir)
+
+TEXI2PDF = $(TEXI2DVI) --pdf
+TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
+
+share_tex_dependencies = \
+$(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
+
+## ----- ##
+## *.tex ##
+## ----- ##
+
+%.pdf: %.tex $(share_tex_dependencies)
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
+
+%.dvi: %.tex $(share_tex_dependencies)
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) -o $@ $<
+
+.PHONY: tex-mostlyclean
+tex-mostlyclean:
+	rm -rf tmp.t2d
+
+# mostlyclean-local is an Automake special target.
+.PHONY: mostlyclean-local
+mostlyclean-local: tex-mostlyclean
+
 
 # We ship and compile vaucanson-user-manual.pdf, but
 # vaucanson-developer-manual.pdf must be requested by hand.

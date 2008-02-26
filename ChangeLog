@@ -1,3 +1,41 @@
+2008-02-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+        Replace the doc/share svn:external by the actual files.
+	These files can still be updated by running
+ 	"cd doc; make share-up; svn commit".
+	Simplify doc/'s Makefiles a bit by inlining some includes
+	and removing useless rules.
+
+	* doc/Makefile.am (share-up): New rule.
+	(dist-hook): Remove, it's not needed anymore.
+	* doc/doc.mk: Remove.
+	* doc/manual/Makefile.am: Define only the .pdf and .dvi
+	rules instead of including doc/doc.mk which in turn
+	pulled many unnecessary rules from the share/ Makefile fragments,
+	and created cyclic dependencies.
+	* doc/manual/extex.mk: Don't include share/make/tex.mk
+	and share/make/pdf-figs.mk, it works without them.
+	* doc/manual/vaucanson-user-manual.tex: Use listings.sty
+	instead of mylistings.sty, and only include definitions
+	for the two languages we need: stl.ldf and vaucanson.ldf.
+	* doc/share/README: New file.
+	* doc/share/bib/vaucanson.bib, doc/share/bin/texi2dvi,
+	doc/share/styles/VCpatch-pstricks-1-10.tex,
+	doc/share/styles/Vaucanson-G.tex,
+	doc/share/styles/ldf/stl.ldf,
+	doc/share/styles/ldf/vaucanson.ldf, doc/share/styles/ldf,
+	doc/share/styles/misc.hva, doc/share/styles/misc.sty,
+	doc/share/styles/myacronym.hva,
+	doc/share/styles/myacronym.sty, doc/share/styles/mybabel.hva,
+	doc/share/styles/mybabel.sty, doc/share/styles/mycxx.sty,
+	doc/share/styles/myhyperref.hva,
+	doc/share/styles/myhyperref.sty,
+	doc/share/styles/myifthen.hva, doc/share/styles/myifthen.sty,
+	doc/share/styles/myindex.hva, doc/share/styles/myindex.sty,
+	doc/share/styles/texi.hva, doc/share/styles/texi.sty,
+	doc/share/styles/vaucanson-g.sty: New files, copied
+	from https://svn.lrde.epita.fr/svn/lrde-publis/trunk/share/.
+
 2008-02-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Remove useless includes in xml/.

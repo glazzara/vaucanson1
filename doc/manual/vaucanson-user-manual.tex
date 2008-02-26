@@ -52,7 +52,7 @@
 % Bibliography.
 \usepackage{natbib}
 
-\usepackage{mylistings}
+\usepackage{listings}
 \lstset{%
   numbers=left,
   numberstyle=\tiny,
@@ -63,6 +63,8 @@
   frame=single,
   language=C++,
   float}
+\input ldf/stl.ldf
+\input ldf/vaucanson.ldf
 
 %% Whether the developer's documentation is included.
 \newboolean{developer}

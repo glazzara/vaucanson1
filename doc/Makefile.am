@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -22,6 +22,38 @@ all-local: $(srcdir)/stamp
 doc:
 	-rm -f $(srcdir)/stamp
 	$(MAKE) $(srcdir)/stamp
+
+# Run "make share-up" to update the files from the share/ directory.
+WGET = wget --no-check-certificate
+WGETL = $(WGET) https://svn.lrde.epita.fr/svn/lrde-publis/trunk/
+SHAREFILES = \
+  share/bib/vaucanson.bib \
+  share/bin/texi2dvi \
+  share/styles/ldf/stl.ldf \
+  share/styles/ldf/vaucanson.ldf \
+  share/styles/misc.hva \
+  share/styles/misc.sty \
+  share/styles/myacronym.sty \
+  share/styles/mybabel.hva \
+  share/styles/mybabel.sty \
+  share/styles/mycxx.sty \
+  share/styles/myhyperref.hva \
+  share/styles/myhyperref.sty \
+  share/styles/myifthen.hva \
+  share/styles/myifthen.sty \
+  share/styles/myindex.hva \
+  share/styles/myindex.sty \
+  share/styles/texi.hva \
+  share/styles/texi.sty \
+  share/styles/vaucanson-g.sty \
+  share/styles/Vaucanson-G.tex \
+  share/styles/VCpatch-pstricks-1-10.tex
+
+.PHONY: share-up
+share-up:
+	for f in $(SHAREFILES); do \
+	  $(WGETL)$$f -O $$f || exit 1; \
+	done
 
 ## ----------------------- ##
 ## Doxygen documentation.  ##
@@ -80,12 +112,7 @@ SUFFIXES = .txt .tex .pdf
 
 
 EXTRA_DIST = README.txt FAQ.txt NEWS.txt \
-	     share $(srcdir)/stamp $(srcdir)/$(DOCDIR)
-
-# Do not distribute subversion and backup files from the share/ directory.
-DIST_IGNORE = -name '*~' -o -name '.svn' -o -name '+committed'
-dist-hook:
-	rm -rf `find $(distdir)/share \( $(DIST_IGNORE) \) -print`
+	     $(SHAREFILES) share/README $(srcdir)/stamp $(srcdir)/$(DOCDIR)
 
 ## ------------------ ##
 ## Unit compilation.  ##
