@@ -41,7 +41,7 @@ namespace vcsn {
 
     hstate_t h = a.add_state();
 
-    for_all_initial_states(i, a)
+    for_all_const_initial_states(i, a)
       a.add_series_transition(h, *i, a.get_initial(*i));
 
     a.clear_initial();
@@ -49,7 +49,7 @@ namespace vcsn {
 
     h = a.add_state();
 
-    for_all_final_states(i, a)
+    for_all_const_final_states(i, a)
       a.add_series_transition(*i, h, a.get_final(*i));
 
     a.clear_final();
@@ -91,27 +91,14 @@ namespace vcsn {
 
     sum_here(lhs, rhs);
 
-    for_all_initial_states(i, lhs)
+    for_all_const_initial_states(i, lhs)
       lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(monoid_identity));
-    typename lhs_t::initial_iterator i;
-    for (typename lhs_t::initial_iterator next = lhs.initial().begin();
-	 next != lhs.initial().end();)
-    {
-      i = next;
-      ++next;
-      lhs.unset_initial(*i);
-    }
+    lhs.clear_initial();
 
-    for_all_final_states(f, lhs)
+    for_all_const_final_states(f, lhs)
       lhs.add_spontaneous(*f, new_f, lhs.get_final(*f).get(monoid_identity));
-    typename lhs_t::final_iterator f;
-    for (typename lhs_t::final_iterator next = lhs.final().begin();
-	 next != lhs.final().end();)
-    {
-      f = next;
-      ++next;
-      lhs.unset_final(*f);
-    }
+    lhs.clear_final();
+
     lhs.set_final(new_f);
     lhs.set_initial(new_i);
   }
@@ -197,7 +184,7 @@ namespace vcsn {
        rhs.get_initial(*rhs.initial().begin()).value() ==
        rhs.series().identity(SELECT(series_set_elt_value_t)));
 
-    for_all_states(s, rhs)
+    for_all_const_states(s, rhs)
     {
       hstate_t new_state;
 
@@ -217,7 +204,7 @@ namespace vcsn {
     /*------------------------.
     | Concat of transitions.  |
     `------------------------*/
-    for_all_transitions(t, rhs)
+    for_all_const_transitions(t, rhs)
       lhs.add_transition(map_h[rhs.src_of(*t)],
 			 map_h[rhs.dst_of(*t)],
 			 rhs.label_of(*t));

@@ -172,7 +172,7 @@ namespace vcsn {
   private:
     void shortest_eps_distance()
     {
-      for_all_states(s, a)
+      for_all_const_states(s, a)
       {
 	typename s_shortest_hash::iterator it;
 	shortest_hash.insert(s_shortest(*s, *s, semiring_elt_one, semiring_elt_one));

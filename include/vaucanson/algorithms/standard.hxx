@@ -45,7 +45,7 @@ namespace vcsn {
     series_set_elt_t final_series =
       algebra::zero_as<series_set_elt_value_t>::of(a.series());
 
-    for_all_initial_states(oi, a)
+    for_all_const_initial_states(oi, a)
     {
       series_set_elt_t s = a.get_initial(*oi);
 
@@ -231,7 +231,7 @@ namespace vcsn {
     hstate_t rhs_i = *rhs.initial().begin();
     dst.clear();
     rhs.deltac(dst, rhs_i, delta_kind::transitions());
-    for_all_final_states(f, lhs)
+    for_all_const_final_states(f, lhs)
     {
       typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
       for_all_const_(delta_ret_t, d, dst)

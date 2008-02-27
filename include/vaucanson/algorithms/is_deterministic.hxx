@@ -85,7 +85,7 @@ namespace vcsn {
     if (input.initial().size() != 1)
       return false;
 
-    for_all_states(i, input)
+    for_all_const_states(i, input)
       if (not is_state_deterministic (input, i, zero_semiring))
 	return false;
     return true;

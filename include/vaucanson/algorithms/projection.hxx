@@ -37,7 +37,7 @@ namespace vcsn {
     const series_set_t&		series = res.structure().series();
     const monoid_t&		monoid = res.structure().series().monoid();
 
-    for_all_states(fmp_s, fmp_trans)
+    for_all_const_states(fmp_s, fmp_trans)
     {
       hstate_t s = res.add_state();
       stmap[*fmp_s] = s;
@@ -103,7 +103,7 @@ namespace vcsn {
 
     set_states(aut, res, stmap);
 
-    for_all_transitions_(aut_, aut_e, aut)
+    for_all_const_transitions_(aut_, aut_e, aut)
     {
       const aut_series_set_elt_t	aut_series_elt =
 	aut.series_of(*aut_e);

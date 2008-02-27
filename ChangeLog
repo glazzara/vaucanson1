@@ -1,5 +1,39 @@
 2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	[bmi] Update the algorithms with the new for_all macros.
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/cut_up.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/domain.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/eps_removal_sp.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/image.hxx,
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/is_deterministic.hxx,
+	* include/vaucanson/algorithms/is_letterized.hxx,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/sum.hxx:
+	Use the for_all_const_* macros when possible.
+
+2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	[bmi] Fix the errors in the make check related to the xml output.
 	* src/tests/common/xmldiff.sh: New.
 	* src/tests/common: New.

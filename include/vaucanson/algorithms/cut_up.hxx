@@ -40,7 +40,7 @@ namespace vcsn {
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    for_all_transitions(e, a)
+    for_all_const_transitions(e, a)
       if (! a.series_of(*e).is_finite_app() ||
 	  a.series_of(*e).supp().size() > 1)
 	return false;

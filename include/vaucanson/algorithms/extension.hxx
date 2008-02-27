@@ -50,10 +50,10 @@ namespace vcsn {
 
     vector<hstate_t>	conv(a.states().size());
 
-    for_all_states (s, a)
+    for_all_const_states (s, a)
       conv[t_ret.add_state()] = *s;
 
-    for_all_transitions (e, a)
+    for_all_const_transitions (e, a)
     {
       series_set_elt_t t = a.series_of(*e);
       series_set_elt_t s(t);

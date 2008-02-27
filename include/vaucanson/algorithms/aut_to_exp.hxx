@@ -342,7 +342,7 @@ namespace vcsn {
       a.del_state(q);
     }
     series_set_elt_t final(a_set.series());
-    for_all_transitions(i, a)
+    for_all_const_transitions(i, a)
       final += a.label_of(*i);
     return final;
   }

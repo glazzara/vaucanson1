@@ -62,7 +62,7 @@ namespace vcsn {
 	const monoid_elt_t empty = algebra::identity_as<monoid_elt_value_t>::of(a.series().monoid());
 
 	// Initialize
-	for_all_initial_states(i, a)
+	for_all_const_initial_states(i, a)
 	  v1[*i] = a.get_initial(*i).get(empty);
 
 	const semiring_elt_t zero = a.series().semiring().wzero_;

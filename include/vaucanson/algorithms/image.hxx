@@ -41,7 +41,7 @@ namespace vcsn
 
     set_states(fmp_trans, res, stmap);
 
-    for_all_transitions_(trans_, fmp_e, fmp_trans)
+    for_all_const_transitions_(trans_, fmp_e, fmp_trans)
     {
       const trans_series_set_elt_t	trans_series_elt =
 	fmp_trans.series_of(*fmp_e);
@@ -73,7 +73,7 @@ namespace vcsn
     AUTOMATON_TYPES_(Auto_t, auto_);
     std::map<hstate_t, auto_hstate_t> m;
 
-    for_all_states(p, t)
+    for_all_const_states(p, t)
       m[*p] = ret.add_state();
 
     monoid_elt_t empty =
@@ -83,7 +83,7 @@ namespace vcsn
       identity_as<typename Trans_t::series_set_elt_value_t>::
       of(t.structure().series());
 
-    for_all_initial_states(p, t)
+    for_all_const_initial_states(p, t)
     {
       if (t.get_initial(*p) != id_series)
       {
@@ -95,7 +95,7 @@ namespace vcsn
 	ret.set_initial(m[*p], t.get_initial(*p).get(empty));
     }
 
-    for_all_final_states(p, t)
+    for_all_const_final_states(p, t)
     {
       if (t.get_final(*p) != id_series)
       {
@@ -107,7 +107,7 @@ namespace vcsn
 	ret.set_final(m[*p], t.get_final(*p).get(empty));
     }
 
-    for_all_transitions(e, t)
+    for_all_const_transitions(e, t)
     {
       ret.add_series_transition(m[t.src_of(*e)],
 				m[t.dst_of(*e)],
@@ -130,19 +130,19 @@ namespace vcsn
     monoid_elt_t empty = t.series().monoid().VCSN_EMPTY_;
     std::map<hstate_t, hstate_t> m;
 
-    for_all_states(p, t)
+    for_all_const_states(p, t)
     {
       m[*p] = ret.add_state();
       m_[m[*p]] = *p;
     }
 
-    for_all_initial_states(p, t)
+    for_all_const_initial_states(p, t)
       ret.set_initial(m[*p], t.get_initial(*p).get(empty));
 
-    for_all_final_states(p, t)
+    for_all_const_final_states(p, t)
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
-    for_all_transitions(e, t)
+    for_all_const_transitions(e, t)
       ret.add_series_transition(m[t.src_of(*e)], m[t.dst_of(*e)],
 				t.output_of(*e));
 

@@ -159,14 +159,14 @@ class Product
 	  std::map<hstate_t,bool> visited;
 	  std::stack<hstate_t> stack;
 
-	  for_all_states(i, a)
+	  for_all_const_states(i, a)
 	    {
 	      visited[*i] = false;
 	      // ensure inaccessible states will be visited
 	      stack.push(*i);
 	    }
 
-	  for_all_initial_states(i, a)
+	  for_all_const_initial_states(i, a)
 	    stack.push(*i);
 
 	  int x = 0;
@@ -254,8 +254,8 @@ misc::static_eq<Type1, Type2>::value
 		      const rhs_t& rhs,
 		      pair_map_t& m)
     {
-      for_all_initial_states(lhs_s, lhs)
-	for_all_initial_states(rhs_s, rhs)
+      for_all_const_initial_states(lhs_s, lhs)
+	for_all_const_initial_states(rhs_s, rhs)
 	{
 	  const pair_hstate_t	new_pair(*lhs_s, *rhs_s);
 	  const hstate_t	new_state = output.add_state();

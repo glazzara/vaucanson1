@@ -88,7 +88,7 @@ namespace vcsn {
     typename output_t::hstate_t qi_hstate = output.add_state();
     subset_t qi;
     bool is_final = false;
-    for_all_initial_states(i, input)
+    for_all_const_initial_states(i, input)
     {
       qi.insert(*i);
       is_final |= input.is_final(*i);
@@ -119,7 +119,7 @@ namespace vcsn {
       typename input_t::hstate_t s_hstate = subset_set[s];
       path.pop();
 
-      for_all_letters(e, alphabet)
+      for_all_const_letters(e, alphabet)
       {
 	q.clear ();
 	bool is_final = false;

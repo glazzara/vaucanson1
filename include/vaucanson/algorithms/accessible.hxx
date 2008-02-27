@@ -48,7 +48,7 @@ namespace vcsn {
     /*---------------.
     | Initialization |
     `---------------*/
-    for_all_initial_states(i, a)
+    for_all_const_initial_states(i, a)
     {
       queue.push(*i);
       reachable_states.insert(*i);

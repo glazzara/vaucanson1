@@ -36,21 +36,21 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto);
     std::map<hstate_t, hstate_t>	trans;
 
-    for_all_states(s, rhs)
+    for_all_const_states(s, rhs)
     {
       hstate_t ns = lhs.add_state();
       trans[*s] = ns;
       if (rhs.is_initial(*s))
-	for_all_final_states(f, lhs)
+	for_all_const_final_states(f, lhs)
 	  lhs.add_series_transition(*f, ns,
 				    lhs.get_final(*f) * rhs.get_initial(*s));
     }
-    for_all_transitions(e, rhs)
+    for_all_const_transitions(e, rhs)
       lhs.add_transition(trans[rhs.src_of(*e)],
 			 trans[rhs.dst_of(*e)],
 			 rhs.label_of(*e));
     lhs.clear_final();
-    for_all_final_states(f, rhs)
+    for_all_const_final_states(f, rhs)
       lhs.set_final(trans[*f], rhs.get_final(*f));
   }
 

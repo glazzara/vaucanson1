@@ -30,7 +30,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(A);
     bool is_normalized = false;
-    for_all_transitions(e, trans)
+    for_all_const_transitions(e, trans)
     {
       is_normalized ^= is_letter_support(trans.series_of(*e));
       for_all_const_(series_set_elt_t::support_t,

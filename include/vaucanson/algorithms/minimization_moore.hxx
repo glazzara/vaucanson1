@@ -96,11 +96,11 @@ namespace vcsn {
 
     letter_to_letterid_t letter_to_letterid;
     int	letter_count = 0;
-    for_all_letters(iletter, alphabet)
+    for_all_const_letters(iletter, alphabet)
       letter_to_letterid[*iletter] = letter_count++;
 
     state_to_letterid_to_state_t aut_view;
-    for_all_states(istate, input)
+    for_all_const_states(istate, input)
     {
       aut_view[*istate] = letterid_to_state_t(letter_count, NullState);
       if ((not Transposed and input.is_final(*istate)) or
@@ -117,7 +117,7 @@ namespace vcsn {
     }
 
     group_t delta_ret;
-    for_all_states(istate, input)
+    for_all_const_states(istate, input)
     {
       for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)
       {

@@ -305,8 +305,8 @@ namespace vcsn {
       /*----------------------------------.
       | Get initial states of the product |
       `----------------------------------*/
-      for_all_initial_states(lhs_s, lhs)
-	for_all_initial_states(rhs_s, rhs)
+      for_all_const_initial_states(lhs_s, lhs)
+	for_all_const_initial_states(rhs_s, rhs)
 	{
 	  if (lhs_black_states.find(*lhs_s) == lhs_black_states.end() or
 	      rhs_black_states.find(*rhs_s) == rhs_black_states.end())

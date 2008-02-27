@@ -125,12 +125,12 @@ namespace vcsn {
 
     vector_t tmp;
     tmp.reserve(res.initial().size());
-    for_all_initial_states(i, res)
+    for_all_const_initial_states(i, res)
       tmp.push_back(*i);
     for_all(typename vector_t, i, tmp)
       do_realtime_words(res, hstate_t(), *i, res.get_initial(*i), true, false);
     tmp.clear();
-    for_all_final_states(f, res)
+    for_all_const_final_states(f, res)
       tmp.push_back(*f);
     for_all(typename vector_t, f, tmp)
       do_realtime_words(res, *f, hstate_t(), res.get_final(*f), false, true);
@@ -153,7 +153,7 @@ namespace vcsn {
   {
     TIMER_SCOPED("is_realtime (automaton)");
     AUTOMATON_TYPES(Auto_);
-    for_all_transitions(e, a)
+    for_all_const_transitions(e, a)
       if (!is_letter_support(a.series_of(*e)))
 	return false;
     return true;

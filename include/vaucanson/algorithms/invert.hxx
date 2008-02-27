@@ -49,7 +49,7 @@ namespace vcsn
     normalize_here(t);
 
     std::map<hstate_t, hstate_t> map_t_u;
-    for_all_states (p, t)
+    for_all_const_states (p, t)
       map_t_u[*p] = u.add_state ();
 
     initial_iterator i_it;
@@ -78,7 +78,7 @@ namespace vcsn
       u.set_final (map_t_u[*f_it]);
     }
 
-    for_all_transitions (e, t)
+    for_all_const_transitions (e, t)
     {
       semiring_elt_t exp = t.output_of(*e);
 
@@ -94,7 +94,7 @@ namespace vcsn
 
       std::map<hstate_t, hstate_t> map_auto_u;
 
-      for_all_states (p, auto_tmp)
+      for_all_const_states (p, auto_tmp)
 	if (auto_tmp.is_initial (*p))
 	  map_auto_u[*p] = map_t_u[t.src_of(*e)];
 	else
@@ -181,18 +181,18 @@ namespace vcsn
     AUTOMATON_TYPES_(res_t, res_);
 
     std::map<hstate_t, hstate_t> map_t_u;
-    for_all_states (p, t)
+    for_all_const_states (p, t)
       map_t_u[*p] = u.add_state ();
 
     // Proceed initial and final states
-    for_all_initial_states (p, t)
+    for_all_const_initial_states (p, t)
       {
 	res_series_set_elt_t s (u.structure().series());
 	invert_label(t.get_initial(*p), s);
 	u.set_initial (map_t_u[*p], s);
       }
 
-    for_all_final_states (p, t)
+    for_all_const_final_states (p, t)
       {
 	res_series_set_elt_t s (u.structure().series());
 	invert_label(t.get_final(*p), s);
@@ -200,7 +200,7 @@ namespace vcsn
       }
 
 
-    for_all_transitions (e, t)
+    for_all_const_transitions (e, t)
       {
 	res_series_set_elt_t s (u.structure().series());
 	res_monoid_elt_t a (u.structure().series().monoid());
