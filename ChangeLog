@@ -1,5 +1,16 @@
 2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	[bmi] Merge latest changes from trunk to BMI.
+	* build-aux/vcsn-xml.m4,
+	* include/vaucanson/algorithms/eps_removal_sp.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/xml_chooser.hh,
+	* src/tests/xml/xml_geometry_tester.cc: Merge changes from trunk.
+	* lrde-upload.sh: New.
+
+2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	[bmi] Update the algorithms with the new for_all macros.
 	* include/vaucanson/algorithms/accessible.hxx,
 	* include/vaucanson/algorithms/aut_to_exp.hxx,

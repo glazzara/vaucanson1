@@ -33,13 +33,6 @@
 # include <xercesc/dom/DOM.hpp>
 
 # include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/boolean_automaton_structures.hh>
-# include <vaucanson/z_automaton_structures.hh>
-# include <vaucanson/z_max_plus_automaton_structures.hh>
-# include <vaucanson/z_min_plus_automaton_structures.hh>
-# include <vaucanson/r_automaton_structures.hh>
-# include <vaucanson/fmp_transducer_structures.hh>
-# include <vaucanson/boolean_transducer_structures.hh>
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/xml/tools.hh>
 

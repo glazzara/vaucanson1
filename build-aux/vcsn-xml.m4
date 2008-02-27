@@ -35,7 +35,7 @@ AC_DEFUN([_VCSN_CHECK_XML],
    if test x$vcsn_cv_xerces = xunknown; then
         vcsn_cv_xerces=no
         vcsn_save_CPPFLAGS=$CPPFLAGS
-        CPPFLAGS="$CPPFLAGS $XERCES_EXTRA_CPPFLAGS"
+        CPPFLAGS="$XERCES_EXTRA_CPPFLAGS $CPPFLAGS"
         AC_CHECK_HEADER([xercesc/util/XercesVersion.hpp],
                         [AC_COMPILE_IFELSE([AC_LANG_SOURCE([
 #include <xercesc/util/XercesVersion.hpp>
@@ -60,8 +60,8 @@ AC_DEFUN([_VCSN_CHECK_XML],
                    vcsn_save_CPPFLAGS=$CPPFLAGS
                    vcsn_save_LDFLAGS=$LDFLAGS
                    vcsn_save_LIBS=$LIBS
-                   CPPFLAGS="$CPPFLAGS $XERCES_EXTRA_CPPFLAGS"
-                   LDFLAGS="$LDFLAGS $XERCES_EXTRA_LDFLAGS"
+                   CPPFLAGS="$XERCES_EXTRA_CPPFLAGS $CPPFLAGS"
+                   LDFLAGS="$XERCES_EXTRA_LDFLAGS $LDFLAGS"
                    LIBS="$LIBS -lxerces-c"
                    AC_LINK_IFELSE([AC_LANG_SOURCE([
 #include <xercesc/util/XMLUniDefs.hpp>
@@ -133,8 +133,8 @@ namespace vcsn
       AC_ERROR([cannot link with Xerces-C++ library])
    fi
 
-   CPPFLAGS="$CPPFLAGS $XERCES_EXTRA_CPPFLAGS"
-   LDFLAGS="$LDFLAGS $XERCES_EXTRA_LDFLAGS"
+   CPPFLAGS="$XERCES_EXTRA_CPPFLAGS $CPPFLAGS"
+   LDFLAGS="$XERCES_EXTRA_LDFLAGS $LDFLAGS"
    LIBS="$LIBS -lxerces-c"
 
    AC_LANG_POP([C++])
