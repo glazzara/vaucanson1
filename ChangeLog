@@ -1,5 +1,10 @@
 2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	[bmi] Fix thompson.
+	* include/vaucanson/algorithms/thompson.hxx: Correct the weight handling.
+
+2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	[bmi] Add new for_all macros
 	* include/vaucanson/misc/usual_macros.hh: Add new macros.
 
