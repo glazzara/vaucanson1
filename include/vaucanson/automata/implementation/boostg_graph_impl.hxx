@@ -101,7 +101,8 @@ namespace vcsn
           ++i)
         graph_.insert(edge_data_t(states_[*i->from_],
 				  states_[*i->to_],
-				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
+				  i->label_));
+//				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
@@ -133,7 +134,8 @@ namespace vcsn
         {
           typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_],
                                                                 states_[*i->first.value()->to_],
-                                                                label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
+								i->first.value()->label_);
+                                                                //label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
           if (tmp != graph_.end())
             map_transitions[htransition_t(tmp)] = i->second;
         }
@@ -175,7 +177,8 @@ namespace vcsn
           ++i)
         graph_.insert(edge_data_t(states_[*i->from_],
 				  states_[*i->to_],
-				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
+				  i->label_));
+//				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
   # define VCSN_COPY_I_T(Set)									\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
           i != g.Set.end();									\
@@ -207,7 +210,8 @@ namespace vcsn
         {
           typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_],
                                                                 states_[*i->first.value()->to_],
-                                                                label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
+								i->first.value()->label_);
+                                                                //label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
           if (tmp != graph_.end())
             map_transitions[htransition_t(tmp)] = i->second;
         }
@@ -453,8 +457,8 @@ namespace vcsn
     typename BOOSTGRAPH::hedge_t
     BOOSTGRAPH::add_edge (const hstate_t& from, const hstate_t& to, const label_t& l)
     {
-      hlabel_t hl = label_container_.insert (l);
-      return hedge_t (graph_.insert (edge_data_t (from.value(), to.value(), hl)).first);
+      //hlabel_t hl = label_container_.insert (l);
+      return hedge_t (graph_.insert (edge_data_t (from.value(), to.value(), l)).first);
     }
 
     BOOSTGRAPH_TPARAM
@@ -465,7 +469,7 @@ namespace vcsn
 
       hlabel_t l = h.value()->label_;
       graph_.erase(h.value());
-      label_container_.erase(l);
+      //label_container_.erase(l);
 
       // h points to an invalid edgeValue since it is already destroyed.
       // We can't check this postcondition anymore!
@@ -490,7 +494,8 @@ namespace vcsn
     const typename BOOSTGRAPH::label_t&
     BOOSTGRAPH::label_of (const hedge_t& h) const
     {
-      return label_container_.get_label(h.value()->label_);
+      return h.value()->label_;
+//      return label_container_.get_label(h.value()->label_);
     }
 
     BOOSTGRAPH_TPARAM

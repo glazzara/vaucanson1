@@ -1,3 +1,11 @@
+2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	[bmi] Disable smart label.
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx:
+	  Disable smart label.
+
 2008-02-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix compilation issues with labels_are_letter specialization.

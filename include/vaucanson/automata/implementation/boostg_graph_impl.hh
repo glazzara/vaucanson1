@@ -67,7 +67,8 @@ namespace vcsn
 	typedef typename LabelOf<Kind, WordValue, WeightValue,
 		SeriesValue, Letter>::ret		label_t;
 
-	typedef typename SmartLabelContainer<label_t>::hlabel_t
+	//typedef typename SmartLabelContainer<label_t>::hlabel_t
+	typedef label_t
 							hlabel_t;
 
 	typedef boost::shared_ptr<std::size_t>		state_t;
@@ -75,9 +76,12 @@ namespace vcsn
 	//
 	typedef handler<state_h, state_t>		hstate_t;
 
-	typedef EdgeValue<state_t, hlabel_t>		edge_data_t;
+	typedef EdgeValue<state_t, label_t>		edge_data_t;
+	//typedef EdgeValue<state_t, hlabel_t>		edge_data_t;
 
-	typedef GraphContainer<state_t, hlabel_t, edge_data_t>	graph_data_t;
+	typedef GraphContainer<state_t, label_t, edge_data_t>	graph_data_t;
+	//typedef GraphContainer<state_t, hlabel_t, edge_data_t>	graph_data_t;
+
 	// Transition descriptor.
 	//
 	// We store a pointer to an EdgeValue to avoid a new index on transitions and

@@ -78,7 +78,8 @@ namespace vcsn
       SuccessorKey<State, HLabel, EdgeValue>,
       composite_key_hash<
 	vcsn::misc::hash_state_handler,
-	vcsn::misc::hash_handler<HLabel>
+	vcsn::misc::hash_label<HLabel>
+	//vcsn::misc::hash_handler<HLabel>
       >
     > {};
 
@@ -88,7 +89,8 @@ namespace vcsn
       PredecessorKey<State, HLabel, EdgeValue>,
       composite_key_hash<
 	vcsn::misc::hash_state_handler,
-	vcsn::misc::hash_handler<HLabel>
+	vcsn::misc::hash_label<HLabel>
+	//vcsn::misc::hash_handler<HLabel>
       >
     > {};
 
