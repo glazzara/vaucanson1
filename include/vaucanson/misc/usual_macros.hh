@@ -115,10 +115,12 @@
 /*------------.
 | Iterating.  |
 `------------*/
+# define for_all_iterator(ConstIteratorType, I, C)		\
+  for (ConstIteratorType I = (C).begin(); I != (C).end(); ++I)
 
 /// Iteration given an iterator type, iterator name, and container.
-# define for_all_iterator(IteratorType, I, C)		\
-  for (IteratorType I = (C).begin(), I ## _end = (C).end(); I != I ## _end; ++I)
+# define for_all_const_iterator(IteratorType, I, C)		\
+  for (IteratorType I = (C).begin(), I##_end = (C).end(); I##_end != I; ++I)
 
 
 /// Iteration given a non-template container type.
@@ -131,7 +133,7 @@
 
 /// Iteration given a template container type.
 # define for_all_const_(T, I, C)			\
-  for_all_iterator(typename T::const_iterator, I, C)
+  for_all_const_iterator(typename T::const_iterator, I, C)
 
 # define for_all_(T, I, C)				\
   for_all_iterator(typename T::iterator, I, C)
@@ -169,6 +171,39 @@
 
 # define for_all_final_states_(Prefix, I, A)			\
   for_all_iterator (Prefix##final_iterator, I, (A).final())
+
+
+//Const versions of the previous macros.
+//You should always use these macros unless you need to erase over iteration.
+# define for_all_const_letters(I, A)			\
+  for_all_const_iterator (alphabet_iterator, I, A)
+
+# define for_all_const_states(I, A)			\
+  for_all_const_iterator (state_iterator, I, (A).states())
+
+# define for_all_const_transitions(I, A)			\
+  for_all_const_iterator (transition_iterator, I, (A).transitions())
+
+# define for_all_const_initial_states(I, A)			\
+  for_all_const_iterator (initial_iterator, I, (A).initial())
+
+# define for_all_const_final_states(I, A)			\
+  for_all_const_iterator (final_iterator, I, (A).final())
+
+# define for_all_const_letters_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##alphabet_iterator, I, A)
+
+# define for_all_const_states_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##state_iterator, I, (A).states())
+
+# define for_all_const_transitions_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##transition_iterator, I, (A).transitions())
+
+# define for_all_const_initial_states_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##initial_iterator, I, (A).initial())
+
+# define for_all_const_final_states_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##final_iterator, I, (A).final())
 
 
 

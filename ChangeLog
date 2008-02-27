@@ -1,5 +1,10 @@
 2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	[bmi] Add new for_all macros
+	* include/vaucanson/misc/usual_macros.hh: Add new macros.
+
+2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	[bmi] Disable smart label.
 	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh,
 	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
