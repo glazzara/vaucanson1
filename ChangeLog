@@ -1,5 +1,11 @@
 2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	[bmi] Fix the errors in the make check related to the xml output.
+	* src/tests/common/xmldiff.sh: New.
+	* src/tests/common: New.
+
+2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	[bmi] Fix thompson.
 	* include/vaucanson/algorithms/thompson.hxx: Correct the weight handling.
 
