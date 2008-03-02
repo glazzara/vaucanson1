@@ -23,44 +23,45 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    template <class T1, class T2>
-    automaton_t make_automaton(const T1& first_alphabet,
-			       const T2& second_alphabet);
+      template <class T1, class T2>
+      automaton_t make_automaton(const T1& first_alphabet,
+	    const T2& second_alphabet);
 
-    template <class FirstInputIterator, class SecondInputIterator>
-    automaton_t make_automaton(const FirstInputIterator first_begin,
-			       const FirstInputIterator first_end,
-			       const SecondInputIterator second_begin,
-			       const SecondInputIterator second_end);
+      template <class FirstInputIterator, class SecondInputIterator>
+      automaton_t make_automaton(const FirstInputIterator first_begin,
+	    const FirstInputIterator first_end,
+	    const SecondInputIterator second_begin,
+	    const SecondInputIterator second_end);
 
-    template <class T1, class T2>
-    monoid_elt_t make_couple(const T1& first_alphabet,
-			     const T2& second_alphabet,
-			     const std::string& first_exp = "",
-			     const std::string& second_exp = "");
+      template <class T1, class T2>
+      monoid_elt_t make_couple(const T1& first_alphabet,
+	    const T2& second_alphabet,
+	    const std::string& first_exp = "",
+	    const std::string& second_exp = "");
 
-    template <class FirstIterator, class SecondIterator>
-    monoid_elt_t make_couple(const FirstIterator first_begin,
-			     const FirstIterator first_end,
-			     const SecondIterator second_begin,
-			     const SecondIterator second_end,
-			     const std::string& first_exp,
-			     const std::string& second_exp);
+      template <class FirstIterator, class SecondIterator>
+      monoid_elt_t make_couple(const FirstIterator first_begin,
+	    const FirstIterator first_end,
+	    const SecondIterator second_begin,
+	    const SecondIterator second_end,
+	    const std::string& first_exp,
+	    const std::string& second_exp);
 
-    template <typename TransStruct,
-	      typename TransImpl,
-	      typename ArgStruct,
-	      typename ArgImpl>
-    AUTOMATON_CONTEXT::rat_exp_t
-    evaluation(const Element<TransStruct, TransImpl>& t,
-	       const Element<ArgStruct, ArgImpl>& input);
+      template <typename TransStruct,
+	        typename TransImpl,
+	        typename ArgStruct,
+	        typename ArgImpl>
+      AUTOMATON_CONTEXT::rat_exp_t
+      evaluation(const Element<TransStruct, TransImpl>& t,
+		 const Element<ArgStruct, ArgImpl>& input);
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.
 
 # include <vaucanson/contexts/fmp_transducer_maker.thxx>

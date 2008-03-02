@@ -119,8 +119,9 @@ namespace vcsn {
 
   /// Assignement operator between two implementations of a Structure<S>.
   template<typename S, typename T, typename U>
-  void op_assign(const Structure<S>& s,
-		 T& dst, const U& src);
+  void
+  op_assign(const Structure<S>& s,
+	    T& dst, const U& src);
 
   /**
    * @brief Assignement operator between two implementations of two

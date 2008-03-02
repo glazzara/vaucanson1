@@ -28,149 +28,165 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
-
-    /*-----------------.
-    | make_automaton() |
-    `-----------------*/
-
-    template <class InputIterator>
-    automata_set_t 
-    make_automata_set(InputIterator begin,
-		      InputIterator end)
+    VCSN_CONTEXT_NAMESPACE
     {
-      alphabet_t		alpha;
-      for (InputIterator e = begin; e != end; ++e)
-	alpha.insert(*e);
-      semiring_t		semiring;
-      monoid_t		freemonoid (alpha);
-      series_set_t		series (semiring, freemonoid);
-      return automata_set_t (series);
-    }
 
-    template <class InputIterator>
-    automaton_t 
-    make_automaton(InputIterator begin,
-		   InputIterator end)
-    {
-      return automaton_t (make_automata_set(begin, end));
-    }
+      /*-----------------.
+      | make_automaton() |
+      `-----------------*/
 
-    template <class T>
-    automaton_t 
-    make_automaton(const T& alphabet)
-    {
-      return make_automaton(alphabet.begin(), alphabet.end());
-    }
+      template <class InputIterator>
+      automata_set_t 
+      make_automata_set(InputIterator begin,
+		        InputIterator end)
+      {
+        alphabet_t		alpha;
+        for (InputIterator e = begin; e != end; ++e)
+	  alpha.insert(*e);
+        semiring_t		semiring;
+        monoid_t		freemonoid (alpha);
+        series_set_t		series (semiring, freemonoid);
+        return automata_set_t (series);
+      }
 
-    template <class InputIterator>
-    gen_automaton_t 
-    make_gen_automaton(InputIterator begin,
-		       InputIterator end)
-    {
-      return gen_automaton_t (make_automata_set(begin, end));
-    }
+      template <class InputIterator>
+      automaton_t 
+      make_automaton(InputIterator begin,
+		     InputIterator end)
+      {
+        return automaton_t (make_automata_set(begin, end));
+      }
 
-    template <class T>
-    gen_automaton_t 
-    make_gen_automaton(const T& alphabet)
-    {
-      return make_gen_automaton(alphabet.begin(), alphabet.end());
-    }
+      template <class T>
+      automaton_t 
+      make_automaton(const T& alphabet)
+      {
+        return make_automaton(alphabet.begin(), alphabet.end());
+      }
+
+      template <class InputIterator>
+      automaton_letter_t 
+      make_automaton_letter(InputIterator begin,
+			    InputIterator end)
+      {
+        return automaton_letter_t (make_automata_set(begin, end));
+      }
+
+      template <class T>
+      automaton_letter_t 
+      make_automaton_letter(const T& alphabet)
+      {
+        return make_automaton_letter(alphabet.begin(), alphabet.end());
+      }
+
+      template <class InputIterator>
+      gen_automaton_t 
+      make_gen_automaton(InputIterator begin,
+		         InputIterator end)
+      {
+        return gen_automaton_t (make_automata_set(begin, end));
+      }
+
+      template <class T>
+      gen_automaton_t 
+      make_gen_automaton(const T& alphabet)
+      {
+        return make_gen_automaton(alphabet.begin(), alphabet.end());
+      }
 
 
-    /*---------------.
-    | make_rat_exp() |
-    `---------------*/
+      /*---------------.
+      | make_rat_exp() |
+      `---------------*/
 
-    template <class Iterator>
-    rat_exp_t 
-    make_rat_exp(const Iterator& begin,
-	         const Iterator& end,
-	         const std::string& exp)
-    {
-      alphabet_t	alphabet;
-      for (Iterator i = begin; i != end; ++i)
-	alphabet.insert(*i);
-      monoid_t		monoid (alphabet);
-      semiring_t	semiring;
-      series_set_t	series (semiring, monoid);
+      template <class Iterator>
+      rat_exp_t 
+      make_rat_exp(const Iterator& begin,
+		   const Iterator& end,
+		   const std::string& exp)
+      {
+	alphabet_t	alphabet;
+        for (Iterator i = begin; i != end; ++i)
+          alphabet.insert(*i);
+        monoid_t		monoid (alphabet);
+        semiring_t	semiring;
+        series_set_t	series (semiring, monoid);
 
-      rat_exp_t	r (series);
-      std::pair<bool, std::string> p = parse(exp, r);
+        rat_exp_t	r (series);
+        std::pair<bool, std::string> p = parse(exp, r);
 
-      postcondition_ (not p.first, p.second);
+        postcondition_ (not p.first, p.second);
 
-      return r;
-    }
+        return r;
+      }
 
-    template <class T>
-    rat_exp_t 
-    make_rat_exp(const T& alphabet, const std::string& exp)
-    {
-      return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
-    }
+      template <class T>
+      rat_exp_t 
+      make_rat_exp(const T& alphabet, const std::string& exp)
+      {
+        return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
+      }
 
-    /*--------------.
-    | standard_of() |
-    `--------------*/
+      /*--------------.
+      | standard_of() |
+      `--------------*/
 
-    template <class SeriesImpl>
-    automaton_t
-    do_standard_of(const series_set_t& structure, const SeriesImpl& impl)
-    {
-      automaton_t r = make_automaton(structure.monoid().alphabet());
-      standard_of(r, impl);
-      return r;
-    }
+      template <class SeriesImpl>
+      automaton_t
+      do_standard_of(const series_set_t& structure, const SeriesImpl& impl)
+      {
+        automaton_t r = make_automaton(structure.monoid().alphabet());
+        standard_of(r, impl);
+        return r;
+      }
 
-    template <class SeriesSet, class SeriesImpl>
-    automaton_t
-    standard_of(const Element<SeriesSet, SeriesImpl>& e)
-    {
-      return do_standard_of(e.structure(), e.value());
-    }
+      template <class SeriesSet, class SeriesImpl>
+      automaton_t
+      standard_of(const Element<SeriesSet, SeriesImpl>& e)
+      {
+	return do_standard_of(e.structure(), e.value());
+      }
 
-    /*--------------.
-    | thompson_of() |
-    `--------------*/
+      /*--------------.
+      | thompson_of() |
+      `--------------*/
 
-    template <class SeriesImpl>
-    automaton_t
-    do_thompson_of(const series_set_t& structure, const SeriesImpl& impl)
-    {
-      automaton_t r = make_automaton(structure.monoid().alphabet());
-      thompson_of(r, impl);
-      return r;
-    }
+      template <class SeriesImpl>
+      automaton_t
+      do_thompson_of(const series_set_t& structure, const SeriesImpl& impl)
+      {
+	automaton_t r = make_automaton(structure.monoid().alphabet());
+        thompson_of(r, impl);
+        return r;
+      }
 
-    template <class SeriesSet, class SeriesImpl>
-    automaton_t
-    thompson_of(const Element<SeriesSet, SeriesImpl>& e)
-    {
-      return do_thompson_of(e.structure(), e.value());
-    }
+      template <class SeriesSet, class SeriesImpl>
+      automaton_t
+      thompson_of(const Element<SeriesSet, SeriesImpl>& e)
+      {
+        return do_thompson_of(e.structure(), e.value());
+      }
 
-    /*-------------.
-    | aut_to_exp() |
-    `-------------*/
+      /*-------------.
+      | aut_to_exp() |
+      `-------------*/
 
-    inline
-    rat_exp_t
-    aut_to_exp(const automaton_t& a)
-    {
-      return aut_to_exp(generalized(a));
-    }
+      inline
+      rat_exp_t
+      aut_to_exp(const automaton_t& a)
+      {
+        return aut_to_exp(generalized(a));
+      }
 
-    template <class Chooser>
-    rat_exp_t
-    aut_to_exp(const automaton_t& a, const Chooser& c)
-    {
-      return aut_to_exp(generalized(a), c);
-    }
+      template <class Chooser>
+      rat_exp_t
+      aut_to_exp(const automaton_t& a, const Chooser& c)
+      {
+        return aut_to_exp(generalized(a), c);
+      }
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

@@ -23,12 +23,13 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    typedef char	letter_t;
+      typedef char	letter_t;
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

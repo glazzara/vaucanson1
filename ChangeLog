@@ -1,3 +1,255 @@
+2008-03-02  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Merge changes from BMI into the trunk.
+	* data/template_graph_impl.hh: New.
+	* data/template_graph_impl.hxx: New.
+	* include/generate_headers.sh: New.
+	* include/generic_contexts.mk: New.
+	* include/vaucanson/algebra/implementation/series/rat/hash_visitor.hh: New.
+	* include/vaucanson/algebra/implementation/series/rat/hash_visitor.hxx: New.
+	* include/vaucanson/automata/concept/smart_label.hh: New.
+	* include/vaucanson/automata/concept/smart_label.hxx: New.
+	* include/vaucanson/automata/generic_contexts/boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/r_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/r_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/z_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hh: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hh: New.
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hh: New.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh: New.
+	* include/vaucanson/automata/implementation/boostg/initial_container.hh: New.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hh: New.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hxx: New.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hh: New.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx: New.
+	* include/vaucanson/automata/implementation/boostg: New.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx: New.
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hh: New.
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hxx: New.
+	* include/vaucanson/automata/implementation/graph.hh: Remove.
+	* include/vaucanson/automata/implementation/graph.hxx: Remove.
+	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hh: New.
+	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hxx: New.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh: New.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hxx: New.
+	* include/vaucanson/automata/implementation/legacy: New.
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx: New.
+	* include/vaucanson/boolean_automaton.hh: Remove.
+	* include/vaucanson/boolean_automaton_structures.hh: Remove.
+	* include/vaucanson/boolean_transducer.hh: Remove.
+	* include/vaucanson/boolean_transducer_structures.hh: Remove.
+	* include/vaucanson/fmp_transducer.hh: Remove.
+	* include/vaucanson/fmp_transducer_structures.hh: Remove.
+	* include/vaucanson/misc/hash.hh: New.
+	* include/vaucanson/misc/hash.hxx: New.
+	* include/vaucanson/r_automaton.hh: Remove.
+	* include/vaucanson/r_automaton_structures.hh: Remove.
+	* include/vaucanson/z_automaton.hh: Remove.
+	* include/vaucanson/z_automaton_structures.hh: Remove.
+	* include/vaucanson/z_fmp_transducer.hh: Remove.
+	* include/vaucanson/z_fmp_transducer_structures.hh: Remove.
+	* include/vaucanson/z_max_plus_automaton.hh: Remove.
+	* include/vaucanson/z_max_plus_automaton_structures.hh: Remove.
+	* include/vaucanson/z_min_plus_automaton.hh: Remove.
+	* include/vaucanson/z_min_plus_automaton_structures.hh: Remove.
+	* include/vaucanson/z_transducer.hh: Remove.
+	* include/vaucanson/z_transducer_structures.hh: Remove.
+	* tools/Makefile.am: New.
+	* tools/vcsn-graph-util: New.
+	* tools: New.
+	* Makefile.am,
+	* bootstrap,
+	* configure.ac,
+	* data/Makefile.am,
+	* data/automata/b/a1.xml,
+	* data/automata/b/b1.xml,
+	* data/automata/b/div3base2.xml,
+	* data/automata/b/double-3-1.xml,
+	* data/automata/b/ladybird-6.xml,
+	* data/automata/b/ladybird.cc,
+	* data/automata/tdc/t1.xml,
+	* data/automata/tdc/u1.xml,
+	* data/automata/z/b1.xml,
+	* data/automata/z/c1.xml,
+	* include/Makefile.am,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algorithms/accessible.hh,
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/cut_up.hxx,
+	* include/vaucanson/algorithms/determinize.hh,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/domain.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/eps_removal_sp.hxx,
+	* include/vaucanson/algorithms/equivalent.hh,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx,
+	* include/vaucanson/algorithms/image.hh,
+	* include/vaucanson/algorithms/image.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hxx,
+	* include/vaucanson/algorithms/internal/evaluation.hh,
+	* include/vaucanson/algorithms/internal/evaluation.hxx,
+	* include/vaucanson/algorithms/internal/has_neighbour.hh,
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx,
+	* include/vaucanson/algorithms/internal/outsplitting.hh,
+	* include/vaucanson/algorithms/internal/outsplitting.hxx,
+	* include/vaucanson/algorithms/internal/skeleton.hh,
+	* include/vaucanson/algorithms/internal/skeleton.hxx,
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/is_ambiguous.hxx,
+	* include/vaucanson/algorithms/is_deterministic.hxx,
+	* include/vaucanson/algorithms/is_letterized.hxx,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* include/vaucanson/algorithms/product.hh,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/projection.hh,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/sum.hxx,
+	* include/vaucanson/algorithms/thompson.hxx,
+	* include/vaucanson/algorithms/trim.hh,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/copy.hxx,
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/handlers.hxx,
+	* include/vaucanson/automata/concept/history.hh,
+	* include/vaucanson/automata/concept/history.hxx,
+	* include/vaucanson/automata/concept/kinds.hh,
+	* include/vaucanson/automata/concept/kinds.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx,
+	* include/vaucanson/automata/concept/translate.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/implementation/geometry.hh,
+	* include/vaucanson/automata/implementation/geometry.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hxx,
+	* include/vaucanson/config/pconf.hh.in,
+	* include/vaucanson/contexts/automaton.thh,
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx,
+	* include/vaucanson/contexts/boolean_semiring.thh,
+	* include/vaucanson/contexts/char_letter.thh,
+	* include/vaucanson/contexts/dynamic_alphabet.thh,
+	* include/vaucanson/contexts/fmp_transducer_maker.thh,
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx,
+	* include/vaucanson/contexts/free_monoid.thh,
+	* include/vaucanson/contexts/free_monoid_product.thh,
+	* include/vaucanson/contexts/generic_automaton_impl.thh,
+	* include/vaucanson/contexts/generic_series.thh,
+	* include/vaucanson/contexts/polynom_series.thh,
+	* include/vaucanson/contexts/r_semiring.thh,
+	* include/vaucanson/contexts/ratseries_semiring.thh,
+	* include/vaucanson/contexts/transducer.thh,
+	* include/vaucanson/contexts/transducer_maker.thh,
+	* include/vaucanson/contexts/transducer_maker.thxx,
+	* include/vaucanson/contexts/z_max_plus_semiring.thh,
+	* include/vaucanson/contexts/z_min_plus_semiring.thh,
+	* include/vaucanson/contexts/z_semiring.thh,
+	* include/vaucanson/design_pattern/default_ops.hh,
+	* include/vaucanson/design_pattern/default_ops.hxx,
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx,
+	* include/vaucanson/misc/sparse_interval.hh,
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/support.hxx,
+	* include/vaucanson/misc/usual_macros.hh,
+	* include/vaucanson/tools/automaton_tools.hh,
+	* include/vaucanson/tools/dot_format.hxx,
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/io.hh,
+	* include/vaucanson/tools/io.hxx,
+	* include/vaucanson/xml/builders.hxx,
+	* include/vaucanson/xml/handlers.hh,
+	* include/vaucanson/xml/handlers.hxx,
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx,
+	* include/vaucanson/xml/tools.hxx,
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/xml_converter.hh,
+	* lib/generate_libvcsn.rb,
+	* src/tests/Makefile.am,
+	* src/tests/bin/generate-test-suite.sh,
+	* src/tests/common/xmldiff.sh: New.
+	* src/tests/common: New.
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/sub_automaton_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/cut_up_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/eps_removal_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh,
+	* src/tests/include/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/include/tests/automata/implementation_check/add_transition_test.hh,
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/sanity/generate_files.sh,
+	* src/tests/xml/tester.sh,
+	* taf-kit/src/Makefile.am,
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/tests/vcsn-b.test,
+	* taf-kit/tests/vcsn-tdc.test,
+	* vaucanswig/expand.sh,
+	* vaucanswig/meta/Makefile.am,
+	* vaucanswig/meta/automaton.hh:
+	Merge changes from BMI.
+
 2008-02-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/Makefile.am (SHAREFILES): Add share/styles/hevea.sty.

@@ -45,8 +45,8 @@ namespace vcsn {
     bool sink_added = false;
     std::list<hstate_t> dst;
 
-    for_all_states(s, work)
-      for_all_letters(l, work.structure().series().monoid().alphabet())
+    for_all_const_states(s, work)
+      for_all_const_letters(l, work.structure().series().monoid().alphabet())
       {
 	dst.clear();
 	work.letter_deltac(dst, *s, *l, delta_kind::states());
@@ -62,7 +62,7 @@ namespace vcsn {
       }
 
     if (sink_added)
-      for_all_letters(l, work.structure().series().monoid().alphabet())
+      for_all_const_letters(l, work.structure().series().monoid().alphabet())
 	work.add_letter_transition(sink_state, sink_state, *l);
   }
 
@@ -93,10 +93,10 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     const alphabet_t& alpha = e.structure().series().monoid().alphabet();
-    for_all_states(i, e)
+    for_all_const_states(i, e)
     {
       std::set<hstate_t> dst;
-      for_all_letters(j, alpha)
+      for_all_const_letters(j, alpha)
       {
 	dst.clear();
 	e.letter_deltac(dst, *i, *j, delta_kind::states());

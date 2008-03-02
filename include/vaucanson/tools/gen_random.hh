@@ -51,6 +51,7 @@ namespace vcsn {
       {
 	public:
 	  typedef typename TAutomata::set_t	automata_set_t;
+      typedef typename TAutomata::hstate_t hstate_t;
 
 	public:
 	  GenRandomAutomata();

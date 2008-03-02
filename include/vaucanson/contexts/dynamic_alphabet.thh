@@ -25,14 +25,15 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    typedef vcsn::algebra::AlphabetSet<letter_t>	   alphabet_set_t;
-    typedef std::set<letter_t>				   alphabet_impl_t;
-    typedef vcsn::Element<alphabet_set_t, alphabet_impl_t> alphabet_t;
+      typedef vcsn::algebra::AlphabetSet<letter_t>	   alphabet_set_t;
+      typedef std::set<letter_t>				   alphabet_impl_t;
+      typedef vcsn::Element<alphabet_set_t, alphabet_impl_t> alphabet_t;
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

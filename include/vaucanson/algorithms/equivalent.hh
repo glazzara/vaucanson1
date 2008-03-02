@@ -40,8 +40,8 @@ namespace vcsn
   bool
   are_equivalent(const Element<S, A>& a, const Element<S, B>& b);
 
-// INTERFACE: bool are_equivalent(const Automaton& a1, const Automaton& a2) { return vcsn::are_equivalent(a1, a2); }
-// INTERFACE: bool are_equivalent(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::are_equivalent(a1, a2); }
+// INTERFACE: bool are_equivalent(const Automaton& a1, const Automaton& a2) { return vcsn::are_equivalent(*a1, *a2); }
+// INTERFACE: bool are_equivalent(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::are_equivalent(*a1, *a2); }
 
   /** @} */
 

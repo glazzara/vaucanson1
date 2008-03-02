@@ -40,7 +40,7 @@ namespace vcsn {
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    for_all_transitions(e, a)
+    for_all_const_transitions(e, a)
       if (! a.series_of(*e).is_finite_app() ||
 	  a.series_of(*e).supp().size() > 1)
 	return false;
@@ -59,16 +59,17 @@ namespace vcsn {
 		 const Auto& a,
 		 Ret& res)
   {
-    AUTOMATON_TYPES(Ret);
+    AUTOMATON_TYPES_(Ret, ret_);
     typedef typename generalized_traits<Ret>::automaton_t gen_automaton_t;
+    AUTOMATON_TYPES(gen_automaton_t);
 
     auto_copy(res, a);
 
-    std::map<hstate_t, hstate_t> statemap;
+    std::map<hstate_t, ret_hstate_t> statemap;
 
-    transitions_t		transitions = res.transitions();
+    ret_transitions_t		transitions = res.transitions();
 
-    for_all_(transitions_t, e, transitions)
+    for_all_(ret_transitions_t, e, transitions)
     {
       if (! res.series_of(*e).is_finite_app() ||
 	  res.series_of(*e).supp().size() > 1)

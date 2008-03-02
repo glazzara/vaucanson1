@@ -26,6 +26,27 @@
 
 namespace vcsn {
 
+  //Functor used in do_subset_construction for deltaf query.
+  template <typename input_t>
+  struct delta_functor
+  {
+    typedef typename std::set<typename input_t::hstate_t>    subset_t;
+
+    delta_functor(subset_t& q_, const input_t& input_, bool& is_final_)
+      : q(q_), input(input_), is_final(is_final_)
+    {}
+
+    void operator()(typename input_t::hstate_t s)
+    {
+      q.insert(s);
+      is_final |= input.is_final(s);
+    }
+
+    subset_t&	    q;
+    const input_t&  input;
+    bool&	    is_final;
+  };
+
   /*--------------------.
   | subset_construction |
   `--------------------*/
@@ -41,8 +62,10 @@ namespace vcsn {
   do_subset_construction(const AutomataBase<A>&	,
 			 output_t&		output,
 			 const input_t&		input,
-			 std::map<hstate_t, std::set<hstate_t> >& m =
-			 std::map<hstate_t, std::set<hstate_t> >())
+			 std::map<typename output_t::hstate_t,
+			  std::set<typename input_t::hstate_t> >& m =
+			 std::map<typename output_t::hstate_t,
+			  std::set<typename input_t::hstate_t> >())
   {
 
     /*--------.
@@ -51,20 +74,21 @@ namespace vcsn {
 
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
-    typedef typename std::set<hstate_t>			    subset_t;
-    typedef typename std::map<subset_t, hstate_t>	    subset_set_t;
-    typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
-    typedef std::vector<hstate_t>			    delta_ret_t;
+    typedef typename std::set<typename input_t::hstate_t>    subset_t;
+    typedef typename std::map<subset_t, typename output_t::hstate_t>
+							     subset_set_t;
+    typedef std::pair<subset_t, typename output_t::hstate_t> subset_set_pair_t;
+    typedef std::vector<typename input_t::hstate_t>	     delta_ret_t;
 
 
     /*-----------------.
     | Initialization.  |
     `-----------------*/
 
-    hstate_t qi_hstate = output.add_state();
+    typename output_t::hstate_t qi_hstate = output.add_state();
     subset_t qi;
     bool is_final = false;
-    for_all_initial_states(i, input)
+    for_all_const_initial_states(i, input)
     {
       qi.insert(*i);
       is_final |= input.is_final(*i);
@@ -92,27 +116,20 @@ namespace vcsn {
     while (!path.empty())
     {
       subset_t s = path.front();
-      hstate_t s_hstate = subset_set[s];
+      typename input_t::hstate_t s_hstate = subset_set[s];
       path.pop();
 
-      for_all_letters(e, alphabet)
+      for_all_const_letters(e, alphabet)
       {
 	q.clear ();
 	bool is_final = false;
+	delta_functor<input_t> func(q, input, is_final);
 	for_all_const_ (subset_t, j, s)
-	{
-	  dst.clear();
-	  input.letter_deltac(dst, *j, *e, delta_kind::states());
-	  for_all_const_(delta_ret_t, k, dst)
-	  {
-	    q.insert(*k);
-	    is_final |= input.is_final(*k);
-	  }
-	}
+	  input.letter_deltaf(func, *j, *e, delta_kind::states());
 	typename subset_set_t::const_iterator current = subset_set.find(q);
 	if (current == subset_set.end())
 	{
-	  hstate_t qs = output.add_state();
+	  typename output_t::hstate_t qs = output.add_state();
 	  current = (subset_set.insert(subset_set_pair_t(q, qs))).first;
 	  m[qs] = q;
 
@@ -142,7 +159,8 @@ namespace vcsn {
   do_determinize(const AutomataBase<A>&	a_set,
 		 output_t&		output,
 		 const input_t&		input,
-		 std::map<hstate_t, std::set<hstate_t> >& m)
+		 std::map<typename output_t::hstate_t,
+		  std::set<typename input_t::hstate_t> >& m)
   {
     TIMER_SCOPED ("determinize");
     do_subset_construction(a_set, output, input, m);
@@ -151,7 +169,8 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a,
-	      std::map<hstate_t, std::set<hstate_t> >& m)
+	      std::map<typename T::hstate_t,
+		std::set<typename T::hstate_t> >& m)
   {
     Element<A, T> ret(a.structure());
     do_determinize(ret.structure(), ret, a, m);
@@ -162,7 +181,7 @@ namespace vcsn {
   Element<A, T>
   determinize(const Element<A, T>& a)
   {
-    std::map<hstate_t, std::set<hstate_t> > m;
+    std::map<typename T::hstate_t, std::set<typename T::hstate_t> > m;
     return determinize(a, m);
   }
 

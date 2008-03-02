@@ -60,7 +60,7 @@ namespace vcsn
 	std::list<unsigned> maybe_splittable_;
 	std::vector<unsigned> count_for_;
 
-	splitter_functor (const input_t& input, hstate_t max_state,
+	splitter_functor (const input_t& input, unsigned int max_state,
 			  class_of_t& class_of)
 	  : input_ (input), going_in_ (), class_of_(class_of),
 	    count_for_ (max_state)
@@ -71,7 +71,7 @@ namespace vcsn
 	{
 	  going_in_.clear ();
 	  maybe_splittable_.clear ();
-	  for_all_const (hstates_t, i, ss)
+	  for_all_const_ (hstates_t, i, ss)
 	    input_.letter_rdeltaf (*this, *i, l, delta_kind::states ());
 	  return not going_in_.empty ();
 	}
@@ -125,7 +125,7 @@ namespace vcsn
 	    }
 	    else
 	      states.swap (states_inter_going_in);
-	    for_all (hstates_t, istate, states_minus_going_in)
+	    for_all_const_ (hstates_t, istate, states_minus_going_in)
 	      class_of_[*istate] = n_partition;
 	    to_treat.push (std::make_pair (&states_minus_going_in,
 					   n_partition++));
@@ -144,7 +144,7 @@ namespace vcsn
 	output_t& output_;
 	const class_of_t& class_of_;
 
-	hstate_t src_;
+	unsigned src_;
 
 	transition_adder_functor (const input_t& input, output_t& output,
 				  const class_of_t& class_of)
@@ -180,7 +180,7 @@ namespace vcsn
 
     using namespace internal::hopcroft_minimization_det;
 
-    unsigned max_state = input.states ().max () + 1;
+    unsigned max_state = input.states ().back () + 1;
     partition_t partition (max_state);
     class_of_t class_of (max_state);
     to_treat_t to_treat;
@@ -206,7 +206,7 @@ namespace vcsn
 	class_of[*state] = n_ ## Name;		\
       } while (0)
 
-      for_all_states (state, input)
+      for_all_const_states (state, input)
 	if (input.is_final (*state))
 	  add_to_class (finals);
 	else
@@ -238,7 +238,7 @@ namespace vcsn
 	to_treat.pop ();
 
 	// For each letter l in Alphabet,
-	for_all_letters (letter, alphabet)
+	for_all_const_letters (letter, alphabet)
 	  {
 	    if (not splitter.compute_states_going_in (states, *letter))
 	      continue;
@@ -257,17 +257,17 @@ namespace vcsn
     transition_adder_functor<input_t, output_t>
       transition_adder (input, output, class_of);
 
-    partition_t::iterator istates = partition.begin ();
+    typename partition_t::iterator istates = partition.begin ();
     for (unsigned i = 0; i < n_partition; ++i, ++istates)
     {
-      int representative = *(*istates).begin();
+      hstate_t representative = *(*istates).begin();
 
       if (input.is_final (representative))
 	output.set_final (class_of[representative]);
       transition_adder.execute (representative);
     }
 
-    for_all_initial_states (state, input)
+    for_all_const_initial_states (state, input)
       output.set_initial (class_of[*state]);
   }
 
@@ -366,8 +366,8 @@ namespace vcsn
 	      twin_[*klass] = max_partitions++;
 	    unsigned new_klass = twin_[*klass];
 
-	    partition_t::iterator q;
-	    for (partition_t::iterator next = parts[*klass].begin();
+	    typename partition_t::iterator q;
+	    for (typename partition_t::iterator next = parts[*klass].begin();
 		 next != parts[*klass].end();)
 	    {
 	      q = next;
@@ -389,7 +389,7 @@ namespace vcsn
 	  {
 	    if (twin_[*klass] != 0)
 	    {
-	      for_all_letters(e, alphabet_)
+	      for_all_const_letters(e, alphabet_)
 	      {
 		if (find(to_treat.begin(), to_treat.end(), pair_t(*klass, *e)) !=
 		    to_treat.end())
@@ -440,7 +440,7 @@ namespace vcsn
     const alphabet_t& alphabet_(input.series().monoid().alphabet());
     unsigned max_states = 0;
 
-    for_all_states(i, input)
+    for_all_const_states(i, input)
       max_states = std::max(unsigned(*i), max_states);
     ++max_states;
 
@@ -472,7 +472,7 @@ namespace vcsn
     // first kind of state (final / non-final) we encounter.
     unsigned final = 1;
 
-    for_all_states (p, input)
+    for_all_const_states (p, input)
     {
       unsigned c;
       if (max_partitions == 0)
@@ -494,11 +494,11 @@ namespace vcsn
     `------------------------------*/
     
     if (max_partitions > 0)
-      for_all_letters (e, alphabet_)
+      for_all_const_letters (e, alphabet_)
 	to_treat.push_back(pair_t(0, *e));
 
     if (max_partitions > 1)
-      for_all_letters (e, alphabet_)
+      for_all_const_letters (e, alphabet_)
 	to_treat.push_back(pair_t(1, *e));
     
     /*----------.
@@ -540,7 +540,7 @@ namespace vcsn
 	output.set_final(i);
 
       // Create the transitions
-      for_all_letters (e, alphabet_)
+      for_all_const_letters (e, alphabet_)
       {
 	delta_ret.clear();
 	already_linked.clear();
@@ -559,7 +559,7 @@ namespace vcsn
     }
 
     // Set initial states.
-    for_all_initial_states(i, input)
+    for_all_const_initial_states(i, input)
       output.set_initial(class_[*i]);
   }
 
@@ -598,7 +598,7 @@ namespace vcsn
 
     series_set_elt_t	null_series	= input.series().zero_;
     semiring_elt_t	weight_zero	= input.series().semiring().wzero_;
-    monoid_elt_t	monoid_identity	= input.series().monoid().vcsn_empty;
+    monoid_elt_t	monoid_identity	= input.series().monoid().VCSN_EMPTY_;
     const alphabet_t&	alphabet (input.series().monoid().alphabet());
 
     queue<pair_class_letter_t>				the_queue;
@@ -610,7 +610,7 @@ namespace vcsn
     //	   unsigned	max_letters	= alphabet.size();
     unsigned	max_states	= 0;
 
-    for_all_states(q, input)
+    for_all_const_states(q, input)
       max_states = std::max(unsigned (*q), max_states);
     ++max_states;
     // Avoid special case problem (one initial and final state...)
@@ -622,7 +622,7 @@ namespace vcsn
     {
       unsigned pos (0);
 
-      for_all_letters(a, alphabet)
+      for_all_const_letters(a, alphabet)
 	pos_of_letter[*a] = pos++;
     }
 
@@ -633,11 +633,11 @@ namespace vcsn
     vector_semiring_elt_t	old_weight (max_states);
     map_semiring_elt_t		class_of_weight;
 
-    for(unsigned i = 0; i < max_states; ++i)
+    for (unsigned i = 0; i < max_states; ++i)
       inverse[i].resize(max_states);
 
-    for_all_states(q, input)
-      for_all_letters(a, alphabet)
+    for_all_const_states(q, input)
+      for_all_const_letters(a, alphabet)
       {
 
 	for_all_const_(set_states_t, r, states_visited)
@@ -673,7 +673,7 @@ namespace vcsn
     bool	 empty = true;
     unsigned	 class_non_final (0);
 
-    for_all_states(q, input)
+    for_all_const_states(q, input)
       {
 	if (not input.is_final(*q))
 	{
@@ -710,7 +710,7 @@ namespace vcsn
     `-----------------------------------------------------*/
 
     for (unsigned i = 0; i < max_partition; i++)
-      for_all_letters(a, alphabet)
+      for_all_const_letters(a, alphabet)
 	the_queue.push(pair_class_letter_t (i, *a));
 
     /*----------------.
@@ -727,7 +727,7 @@ namespace vcsn
       met_classes.clear();
       vector_semiring_elt_t val (max_states);
 
-      for_all_states(q, input)
+      for_all_const_states(q, input)
 	val[*q] = 0;
 
       // First, calculcate val[state] and note met_classes.
@@ -787,7 +787,7 @@ namespace vcsn
 
 	// Push pairs <new_class_id, letter> into the queue.
 	for (unsigned i = old_max_partition; i < max_partition; i++)
-	  for_all_letters(b, alphabet)
+	  for_all_const_letters(b, alphabet)
 	    the_queue.push(pair_class_letter_t(i, *b));
 	old_max_partition = max_partition;
       }

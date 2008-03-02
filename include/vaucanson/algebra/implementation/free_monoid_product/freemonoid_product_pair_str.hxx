@@ -25,7 +25,7 @@ namespace vcsn {
 
     template <class Self, typename T>
     typename
-    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
+    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t
     op_first(const algebra::FreeMonoidProductBase<Self>& s, T& v)
     {
       return Element<typename virtual_types<Self>::first_monoid_t,
@@ -34,7 +34,7 @@ namespace vcsn {
 
     template <class Self, typename T>
     typename
-    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t&
+    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t
     op_second(const algebra::FreeMonoidProductBase<Self>& s, T& v)
     {
       return Element<typename virtual_types<Self>::second_monoid_t,

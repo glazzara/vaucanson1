@@ -67,11 +67,13 @@ unsigned add_transition_test(tests::Tester& tg)
   }
   EQTEST(t, "Number of transition after three transition additions = 3.",
 	 automaton.transitions().size(), 3);
-  for (std::set<htransition_t>::const_iterator i = sc.begin();
+  for (typename std::set<htransition_t>::const_iterator i = sc.begin();
        i != sc.end(); ++i)
     automaton.del_transition(*i);
   EQTEST(t, "Number of transition after total deletion in growing order = 0.",
 	 automaton.transitions().size(), 0);
+
+  s.clear();
 
   for (unsigned i = 0; i < 3; ++i)
   {
@@ -80,9 +82,10 @@ unsigned add_transition_test(tests::Tester& tg)
     s.insert(automaton.add_series_transition(p1, p2,
 					     series_set_elt_t(automaton.structure().series())));
   }
+
   EQTEST(t, "Number of transition after three transition additions = 3.",
 	 automaton.transitions().size(), 3);
-  for (std::set<htransition_t>::const_reverse_iterator i = sc.rbegin();
+  for (typename std::set<htransition_t>::const_reverse_iterator i = sc.rbegin();
        i != sc.rend(); ++i)
     automaton.del_transition(*i);
   EQTEST(t, "Number of transition after total deletion in decreasing order = 0.",
@@ -99,7 +102,7 @@ unsigned add_transition_test(tests::Tester& tg)
   std::random_shuffle(vs.begin(), vs.end());
   EQTEST(t, "Number of transition after 100 transition additions = 100.",
 	 automaton.transitions().size(), 100);
-  for (std::vector<htransition_t>::const_iterator i = vs.begin();
+  for (typename std::vector<htransition_t>::const_iterator i = vs.begin();
        i != vs.end(); ++i)
     automaton.del_transition(*i);
   EQTEST(t, "Number of transition after total deletion in random order = 0.",

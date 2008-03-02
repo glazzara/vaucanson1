@@ -11,7 +11,12 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-nobase_include_HEADERS =			\
+nobase_include_HEADERS = 			\
+vaucanson/standard_algorithms.hh		\
+vaucanson/vaucanson.hh
+
+
+nobase_include_HEADERS +=			\
 vaucanson/config/system.hh			\
 vaucanson/config/math.hh			\
 vaucanson/config/pconf.hh
@@ -31,7 +36,16 @@ vaucanson/contexts/ratseries_semiring.thh	\
 vaucanson/contexts/transducer.thh		\
 vaucanson/contexts/z_max_plus_semiring.thh	\
 vaucanson/contexts/z_min_plus_semiring.thh	\
-vaucanson/contexts/z_semiring.thh
+vaucanson/contexts/z_semiring.thh 		\
+vaucanson/contexts/automaton_functions.thh	\
+vaucanson/contexts/automaton_maker.thh    	\
+vaucanson/contexts/automaton_maker.thxx        	\
+vaucanson/contexts/fmp_transducer_functions.thh \
+vaucanson/contexts/fmp_transducer_maker.thh    	\
+vaucanson/contexts/fmp_transducer_maker.thxx   	\
+vaucanson/contexts/transducer_functions.thh	\
+vaucanson/contexts/transducer_maker.thh        	\
+vaucanson/contexts/transducer_maker.thxx	
 
 nobase_include_HEADERS +=			\
 vaucanson/misc/bitset.hh			\
@@ -50,6 +64,8 @@ vaucanson/misc/escaper.hxx			\
 vaucanson/misc/functors.hh			\
 vaucanson/misc/functors.hxx			\
 vaucanson/misc/global_timer.hh			\
+vaucanson/misc/hash.hh				\
+vaucanson/misc/hash.hxx				\
 vaucanson/misc/iomanip.hh			\
 vaucanson/misc/iomanip.hxx			\
 vaucanson/misc/limits.hh			\
@@ -220,6 +236,8 @@ vaucanson/algebra/implementation/series/rat/dump_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/dump_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/exp.hh				     \
 vaucanson/algebra/implementation/series/rat/exp.hxx				     \
+vaucanson/algebra/implementation/series/rat/hash_visitor.hh 			     \
+vaucanson/algebra/implementation/series/rat/hash_visitor.hxx 			     \
 vaucanson/algebra/implementation/series/rat/length_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/length_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/nodes.hh				     \
@@ -376,76 +394,89 @@ vaucanson/algorithms/transpose.hxx				\
 vaucanson/algorithms/trim.hh					\
 vaucanson/algorithms/trim.hxx
 
-nobase_include_HEADERS +=					\
-vaucanson/automata/concept/automata.hh				\
-vaucanson/automata/concept/automata.hxx				\
-vaucanson/automata/concept/automata_base.hh			\
-vaucanson/automata/concept/automata_base.hxx			\
-vaucanson/automata/concept/automata_kind.hh			\
-vaucanson/automata/concept/automata_ops.hh			\
-vaucanson/automata/concept/automata_ops.hxx			\
-vaucanson/automata/concept/copy.hh				\
-vaucanson/automata/concept/copy.hxx				\
-vaucanson/automata/concept/delta_kind.hh			\
-vaucanson/automata/concept/handlers.hh				\
-vaucanson/automata/concept/handlers.hxx				\
-vaucanson/automata/concept/history.hh				\
-vaucanson/automata/concept/history.hxx				\
-vaucanson/automata/concept/kinds.hh				\
-vaucanson/automata/concept/kinds.hxx				\
-vaucanson/automata/concept/tags.hh				\
-vaucanson/automata/concept/tags.hxx				\
-vaucanson/automata/concept/transducer.hh			\
-vaucanson/automata/concept/transducer.hxx			\
-vaucanson/automata/concept/transducer_base.hh			\
-vaucanson/automata/concept/transducer_base.hxx			\
-vaucanson/automata/concept/transducer_ops.hh			\
-vaucanson/automata/concept/transducer_ops.hxx			\
-vaucanson/automata/concept/translate.hh				\
-vaucanson/automata/concept/translate.hxx			\
-vaucanson/automata/implementation/automaton_view.hh		\
-vaucanson/automata/implementation/automaton_view.hxx		\
-vaucanson/automata/implementation/generalized.hh		\
-vaucanson/automata/implementation/generalized.hxx		\
-vaucanson/automata/implementation/geometry.hh			\
-vaucanson/automata/implementation/geometry.hxx			\
-vaucanson/automata/implementation/graph.hh			\
-vaucanson/automata/implementation/graph.hxx			\
-vaucanson/automata/implementation/kind_adapter.hh		\
-vaucanson/automata/implementation/kind_adapter.hxx		\
-vaucanson/automata/implementation/transpose_view.hh		\
+nobase_include_HEADERS +=						\
+vaucanson/automata/concept/automata.hh					\
+vaucanson/automata/concept/automata.hxx					\
+vaucanson/automata/concept/automata_base.hh				\
+vaucanson/automata/concept/automata_base.hxx				\
+vaucanson/automata/concept/automata_kind.hh				\
+vaucanson/automata/concept/automata_ops.hh				\
+vaucanson/automata/concept/automata_ops.hxx				\
+vaucanson/automata/concept/copy.hh					\
+vaucanson/automata/concept/copy.hxx					\
+vaucanson/automata/concept/delta_kind.hh				\
+vaucanson/automata/concept/handlers.hh					\
+vaucanson/automata/concept/handlers.hxx					\
+vaucanson/automata/concept/history.hh					\
+vaucanson/automata/concept/history.hxx					\
+vaucanson/automata/concept/kinds.hh					\
+vaucanson/automata/concept/kinds.hxx					\
+vaucanson/automata/concept/smart_label.hh				\
+vaucanson/automata/concept/smart_label.hxx				\
+vaucanson/automata/concept/tags.hh					\
+vaucanson/automata/concept/tags.hxx					\
+vaucanson/automata/concept/transducer.hh				\
+vaucanson/automata/concept/transducer.hxx				\
+vaucanson/automata/concept/transducer_base.hh				\
+vaucanson/automata/concept/transducer_base.hxx				\
+vaucanson/automata/concept/transducer_ops.hh				\
+vaucanson/automata/concept/transducer_ops.hxx				\
+vaucanson/automata/concept/translate.hh					\
+vaucanson/automata/concept/translate.hxx				\
+vaucanson/automata/generic_contexts/boolean_automaton.hh		\
+vaucanson/automata/generic_contexts/boolean_automaton_structures.hh     \
+vaucanson/automata/generic_contexts/boolean_transducer.hh		\
+vaucanson/automata/generic_contexts/boolean_transducer_structures.hh    \
+vaucanson/automata/generic_contexts/fmp_transducer.hh			\
+vaucanson/automata/generic_contexts/fmp_transducer_structures.hh        \
+vaucanson/automata/generic_contexts/r_automaton.hh			\
+vaucanson/automata/generic_contexts/r_automaton_structures.hh           \
+vaucanson/automata/generic_contexts/z_automaton.hh			\
+vaucanson/automata/generic_contexts/z_automaton_structures.hh           \
+vaucanson/automata/generic_contexts/z_fmp_transducer.hh			\
+vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh      \
+vaucanson/automata/generic_contexts/z_max_plus_automaton.hh		\
+vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh  \
+vaucanson/automata/generic_contexts/z_min_plus_automaton.hh		\
+vaucanson/automata/generic_contexts/z_min_plus_automaton_structures.hh  \
+vaucanson/automata/generic_contexts/z_transducer.hh 			\
+vaucanson/automata/generic_contexts/z_transducer_structures.hh 		\
+vaucanson/automata/implementation/automaton_view.hh			\
+vaucanson/automata/implementation/automaton_view.hxx			\
+vaucanson/automata/implementation/boostg/boostg_functors.hh 		\
+vaucanson/automata/implementation/boostg/boostg_functors.hxx 		\
+vaucanson/automata/implementation/boostg/boostg_handlers.hh 		\
+vaucanson/automata/implementation/boostg/boostg_handlers.hxx 		\
+vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx		\
+vaucanson/automata/implementation/boostg/boostg_support.hh 		\
+vaucanson/automata/implementation/boostg/boostg_support.hxx 		\
+vaucanson/automata/implementation/boostg/edge_value.hh 			\
+vaucanson/automata/implementation/boostg/edge_value.hxx 		\
+vaucanson/automata/implementation/boostg/graphcontainer.hh 		\
+vaucanson/automata/implementation/boostg/initial_container.hh 		\
+vaucanson/automata/implementation/boostg/initial_value.hh 		\
+vaucanson/automata/implementation/boostg/initial_value.hxx 		\
+vaucanson/automata/implementation/boostg/vgraph_container.hh 		\
+vaucanson/automata/implementation/boostg/vgraph_container.hxx 		\
+vaucanson/automata/implementation/boostg_graph_impl.hh 			\
+vaucanson/automata/implementation/boostg_graph_impl.hxx			\
+vaucanson/automata/implementation/boostg_graph_letters_spec.hh		\
+vaucanson/automata/implementation/boostg_graph_letters_spec.hxx		\
+vaucanson/automata/implementation/generalized.hh			\
+vaucanson/automata/implementation/generalized.hxx			\
+vaucanson/automata/implementation/geometry.hh				\
+vaucanson/automata/implementation/geometry.hxx				\
+vaucanson/automata/implementation/legacy/legacy_handlers.hh 		\
+vaucanson/automata/implementation/legacy/legacy_handlers.hxx 		\
+vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh 	\
+vaucanson/automata/implementation/legacy/legacy_sparse_interval.hxx 	\
+vaucanson/automata/implementation/legacy_graph_impl.hh			\
+vaucanson/automata/implementation/legacy_graph_impl.hxx			\
+vaucanson/automata/implementation/kind_adapter.hh			\
+vaucanson/automata/implementation/kind_adapter.hxx			\
+vaucanson/automata/implementation/transpose_view.hh			\
 vaucanson/automata/implementation/transpose_view.hxx
 
-nobase_include_HEADERS +=				\
-vaucanson/boolean_automaton.hh				\
-vaucanson/boolean_automaton_structures.hh               \
-vaucanson/boolean_transducer.hh				\
-vaucanson/boolean_transducer_structures.hh              \
-vaucanson/contexts/automaton_functions.thh		\
-vaucanson/contexts/automaton_maker.thh                  \
-vaucanson/contexts/automaton_maker.thxx                 \
-vaucanson/contexts/fmp_transducer_functions.thh		\
-vaucanson/contexts/fmp_transducer_maker.thh             \
-vaucanson/contexts/fmp_transducer_maker.thxx            \
-vaucanson/contexts/transducer_functions.thh		\
-vaucanson/contexts/transducer_maker.thh                 \
-vaucanson/contexts/transducer_maker.thxx		\
-vaucanson/fmp_transducer.hh				\
-vaucanson/fmp_transducer_structures.hh                  \
-vaucanson/r_automaton.hh				\
-vaucanson/r_automaton_structures.hh                     \
-vaucanson/standard_algorithms.hh			\
-vaucanson/vaucanson.hh					\
-vaucanson/z_automaton.hh				\
-vaucanson/z_automaton_structures.hh                     \
-vaucanson/z_fmp_transducer.hh				\
-vaucanson/z_fmp_transducer_structures.hh                \
-vaucanson/z_max_plus_automaton.hh			\
-vaucanson/z_max_plus_automaton_structures.hh            \
-vaucanson/z_min_plus_automaton.hh			\
-vaucanson/z_min_plus_automaton_structures.hh            \
-vaucanson/z_transducer.hh \
-vaucanson/z_transducer_structures.hh
 
 nobase_include_HEADERS += 			\
 vaucanson/xml/builders.hh			\
@@ -472,9 +503,12 @@ vaucanson/xml/xml_chooser.hh			\
 vaucanson/xml/xml_chooser.hxx			\
 vaucanson/xml/xml_converter.hh			\
 vaucanson/xml/xml_converter.hxx 		\
+vaucanson/xml/xml_converter.hxx 		\
 vaucanson/xml/xmleq.hh				\
 vaucanson/xml/xmleq.hxx				\
 vaucanson/xml/XML.hh				\
 vaucanson/xml/XML.hxx				\
 vaucanson/xml/xml_xerces_stream.hh 		\
 vaucanson/xml/xml_xerces_stream.hxx
+
+include $(top_srcdir)/include/generic_contexts.mk

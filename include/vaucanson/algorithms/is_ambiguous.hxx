@@ -34,12 +34,14 @@ namespace vcsn {
   template <typename A_, typename Auto_>
   bool
   do_is_ambiguous(const AutomataBase<A_>&,
-		  const Auto_&		aut)
+		  const Auto_&	aut)
   {
+    typedef typename Auto_::hstate_t hstate_t;
+
     // This map is used to know which state is created by which two ones.
     std::map<hstate_t, std::pair<hstate_t, hstate_t> >  m;
     const std::set<hstate_t>& s = useful_states (product (aut, aut, m));
-    for_all_const (std::set<hstate_t>, i, s)
+    for_all_const_ (std::set<hstate_t>, i, s)
       if (m[*i].first != m[*i].second)
 	return true;
     return false;

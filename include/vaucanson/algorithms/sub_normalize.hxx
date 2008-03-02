@@ -40,7 +40,7 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto);
     typedef typename series_set_elt_t::support_t support_t;
 
-    for_all_initial_states(i, a)
+    for_all_const_initial_states(i, a)
     {
       series_set_elt_t label = a.get_initial(*i);
       for (typename support_t::const_iterator it = label.supp().begin();
@@ -49,7 +49,7 @@ namespace vcsn {
 	  return false;
     }
 
-    for_all_final_states(f, a)
+    for_all_const_final_states(f, a)
     {
       series_set_elt_t label = a.get_initial(*f);
       for (typename support_t::const_iterator it = label.supp().begin();
@@ -58,7 +58,7 @@ namespace vcsn {
 	  return false;
     }
 
-    for_all_transitions(e, a)
+    for_all_const_transitions(e, a)
     {
       series_set_elt_t label = a.series_of(*e);
       for (typename support_t::const_iterator it = label.supp().begin();
@@ -77,7 +77,8 @@ namespace vcsn {
 
   template <class Auto, class Label>
   int do_sub_normalize_transition(Auto& a,
-				  hstate_t start, hstate_t stop,
+				  typename Auto::hstate_t start,
+				  typename Auto::hstate_t stop,
 				  const Label& label, bool initial, bool final)
   {
     TIMER_SCOPED("sub_normalize_transition");
@@ -190,9 +191,9 @@ namespace vcsn {
     vector_t i_states; i_states.reserve(res.initial().size());
     vector_t f_states; f_states.reserve(res.final().size());
 
-    for_all_initial_states(f, res)
+    for_all_const_initial_states(f, res)
       i_states.push_back(*f);
-    for_all_final_states(i, res)
+    for_all_const_final_states(i, res)
       f_states.push_back(*i);
 
     for_all_(vector_t, i, i_states)

@@ -25,7 +25,20 @@
 # include <vaucanson/algebra/implementation/series/generalized.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/automata/implementation/graph.hh>
+# include <vaucanson/misc/usual_macros.hh>
+# ifdef VCSN_GRAPH_IMPL
+#
+#  include GRAPH_IMPL_HEADER
+#
+# else
+#
+#  include <vaucanson/config/pconf.hh>
+#  include GRAPH_DEFAULT_IMPL_HEADER
+#
+#  define VCSN_GRAPH_IMPL VCSN_DEFAULT_GRAPH_IMPL
+#  define UNDEF_VCSN_GRAPH_IMPL
+#
+# endif
 
 
 namespace vcsn {
@@ -48,14 +61,17 @@ namespace vcsn {
 
     typedef vcsn::Element
     <vcsn::Automata<series_set_t>,
-     Graph<labels_are_series,
+     VCSN_GRAPH_IMPL::Graph<labels_are_series,
 	   monoid_elt_value_t,
 	   semiring_elt_value_t,
 	   rat::exp<monoid_elt_value_t, semiring_elt_value_t>,
 	   typename monoid_t::letter_t,
 	   NoTag,
-	   geometry_t>
+	   typename geometry_t::coords_t>
     > automaton_t;
+
+    typedef typename automaton_t::hstate_t		hstate_t;
+    typedef typename automaton_t::htransition_t		htransition_t;
   };
 
 
@@ -69,6 +85,11 @@ namespace vcsn {
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/automata/implementation/generalized.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
+
+#ifdef UNDEF_VCSN_GRAPH_IMPL
+# undef VCSN_GRAPH_IMPL
+# undef UNDEF_VCSN_GRAPH_IMPL
+#endif
 
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GENERALIZED_HH

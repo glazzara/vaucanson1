@@ -94,9 +94,9 @@ bool eps_removal_test(tests::Tester& tg)
 	}
       }
     }
-    catch (std::logic_error&)
+    catch (std::logic_error& e)
     {
-      ++test_num;
+      std::cout << e.what() << std::endl;
     }
   }
 

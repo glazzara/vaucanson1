@@ -40,11 +40,11 @@ namespace vcsn {
 
     template <typename S, typename T>
     Element<S, T>
-    outsplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
+    outsplitting(const Element<S, T>& aut, std::set<typename T::hstate_t>& m);
 
     template <typename S, typename T>
     Element<S, T>
-    insplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
+    insplitting(const Element<S, T>& aut, std::set<typename T::hstate_t>& m);
 
     template <typename S, typename T>
     Element<S, T>

@@ -41,11 +41,11 @@ int main(int argc, char** argv)
   // Automaton.
   automaton_t an = make_automaton (alpha);
 
-  vcsn::hstate_t p = an.add_state ();
-  vcsn::hstate_t x = p;
+  hstate_t p = an.add_state ();
+  hstate_t x = p;
   for(unsigned i = 1; i < n; ++i)
   {
-    vcsn::hstate_t y = an.add_state();
+    hstate_t y = an.add_state();
     an.add_letter_transition(x, y, 'a');an.add_letter_transition(y, y, 'b');
     an.add_letter_transition(y, y, 'c');an.add_letter_transition(y, p, 'c');
     x = y;

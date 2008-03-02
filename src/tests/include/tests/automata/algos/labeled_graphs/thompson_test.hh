@@ -101,6 +101,7 @@ bool thompson_test(tests::Tester& tg)
   while (at.contains(lb))
     lb = at.random_letter();
   at.insert(lb);
+
   monoid_t		md (at);
   semiring_t		sg;
   series_set_t		ss (sg, md);
@@ -145,6 +146,9 @@ bool thompson_test(tests::Tester& tg)
       try
       {
 	thompson_of(au, exp.value());
+	if (t.verbose(tests::Tester::high))
+	  SAVE_AUTOMATON_XML("/tmp", "thompson-non-realtime", au, nb);
+
 	realtime_here(au);
 
 	if (t.verbose(tests::Tester::high))
@@ -167,9 +171,16 @@ bool thompson_test(tests::Tester& tg)
 	  ++success;
 	++nb_test_done;
       }
-      catch (std::logic_error&)
+      catch (std::logic_error& e)
       {
+	std::cout << e.what() << std::endl;
+	std::cout << "Trying again..." << std::endl;
 	++test_num;
+      }
+      catch (...)
+      {
+	std::cout << "Unexpected exception!" << std::endl;
+	++nb_test_done;
       }
     }
     std::string rate;

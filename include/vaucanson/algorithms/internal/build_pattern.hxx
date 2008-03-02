@@ -104,7 +104,7 @@ namespace vcsn
       const Etiq& etiq, const letter_t& l
       )
     {
-      hstate_t	s;
+      typename T_auto::hstate_t	s;
       iterator	i = states_map.find(etiq);
 
       if (i == states_map.end())
@@ -121,7 +121,7 @@ namespace vcsn
       const Etiq& etiq, const series_set_elt_t& el
       )
     {
-      hstate_t	s;
+      typename T_auto::hstate_t	s;
       iterator	i = states_map.find(etiq);
 
       if (i == states_map.end())
@@ -133,11 +133,11 @@ namespace vcsn
 
     // A tool to add a state in the set and the automaton
     template <typename Self, typename T_auto, typename Etiq>
-    hstate_t
+    typename T_auto::hstate_t
     IncAutomataConstructor<Self, T_auto, Etiq>::add_state(const Etiq& etiq)
     {
-      hstate_t	res = auto_p->add_state();
-      states_map[etiq] = std::pair<hstate_t, bool>(res, false);
+      typename T_auto::hstate_t	res = auto_p->add_state();
+      states_map[etiq] = std::pair<typename T_auto::hstate_t, bool>(res, false);
       unvisited += 1;
       return res;
     }
@@ -260,7 +260,7 @@ namespace vcsn
     void
     MathAutomataConstructor<Self, T_auto, Etiq>::link_to
     (
-      const hstate_t& state, const letter_t& letter, const Container container
+      const typename T_auto::hstate_t& state, const letter_t& letter, const Container container
       )
     {
       typedef typename Container::iterator	c_iterator;

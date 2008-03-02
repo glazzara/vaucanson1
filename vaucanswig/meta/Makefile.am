@@ -28,3 +28,4 @@ EXTRA_DIST =					\
 lib_LTLIBRARIES = libvv.la
 
 libvv_la_SOURCES = vcontext.cc vauto.cc
+libvv_la_CPPFLAGS = -DVCSN_DEFAULT_GRAPH_IMPL=legacy

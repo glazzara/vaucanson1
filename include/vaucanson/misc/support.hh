@@ -25,7 +25,11 @@
 
 # include <iterator>
 # include <map>
+# include <set>
 # include <string>
+# include <vector>
+# include <vaucanson/automata/concept/handlers.hh>
+
 
 namespace vcsn
 {
@@ -34,7 +38,7 @@ namespace vcsn
 
     /** @addtogroup misc *//** @{ */
 
-    template <class T>
+    template <typename T>
     class Support;
 
     /// Iterator over the Support generic class.
@@ -54,16 +58,16 @@ namespace vcsn
 	typedef key_type&				 reference;
 
 	/*
-	 * This is a default constructor. 
+	 * This is a default constructor.
 	 * WARNING: this constructor instantiates an invalid iterator.
-	 * 	    To use an iterator instantiated by this constructor,
-	 * 	    you need to initialize it thanks to the '=' operator.
+	 *	    To use an iterator instantiated by this constructor,
+	 *	    you need to initialize it thanks to the '=' operator.
 	 *
 	 * This constructor is useful whenever you want to use an iterator as
 	 * a temporary variable in a loop. For instance:
 	 *
-	 * for (SupportIterator tmp, it = aut.final().begin(); 
-	 * 	it != aut.final().end();)
+	 * for (SupportIterator tmp, it = aut.final().begin();
+	 *	it != aut.final().end();)
 	 * {
 	 *	tmp = it++;
 	 *	if (something)
@@ -90,6 +94,58 @@ namespace vcsn
 	map_iterator	i;
     };
 
+    template <class U>
+    class SupportIterator<std::set<U> >
+    {
+      public:
+        typedef std::set<U>                             container_t;
+        typedef U                                       value_t;
+	typedef typename container_t::const_iterator	iterator;
+        typedef SupportIterator<std::set<U> >	        self_t;
+
+	typedef typename iterator::iterator_category    iterator_category;
+	typedef typename iterator::difference_type	difference_type;
+	typedef value_t				        value_type;
+	typedef value_t*				pointer;
+        typedef value_t&				reference;
+
+	/*
+	 * This is a default constructor.
+	 * WARNING: this constructor instantiates an invalid iterator.
+	 *	    To use an iterator instantiated by this constructor,
+	 *	    you need to initialize it thanks to the '=' operator.
+	 *
+	 * This constructor is useful whenever you want to use an iterator as
+	 * a temporary variable in a loop. For instance:
+	 *
+	 * for (SupportIterator tmp, it = aut.final().begin();
+	 *	it != aut.final().end();)
+	 * {
+	 *	tmp = it++;
+	 *	if (something)
+	 *		del_state(*tmp);
+	 * }
+	 *
+	 * In this example, we delete an object in a set we are already iterating on.
+	 * So we need to save a copy of the next element before deleting the current one.
+	 * Since declaring a temporary variable inside a loop can slow down performances,
+	 * it is declared inside the 'for loop' declaration and, in that case, we are really
+	 * interested in such a constructor.
+	 *
+	 */
+	SupportIterator () {}
+	SupportIterator (iterator);
+
+	value_t operator* () const;
+	self_t&	 operator++ ();
+	self_t	 operator++ (int);
+	bool	 operator!= (const SupportIterator&) const;
+	bool	 operator== (const SupportIterator&) const;
+
+      private:
+	iterator	i;
+    };
+
     /// Support<map<U, T> > is a const adapter of std::map to container.
     template <class U, class T>
     class Support<std::map<U, T> >
@@ -103,9 +159,33 @@ namespace vcsn
 	Support (const std::map<U, T>&);
 	Support (const Support&);
 
-	/** Return the one and only element of the support.
-	 @pre There is exactly one element in the support.  */
-	value_type operator* () const;
+	iterator begin () const;
+	iterator end () const;
+	unsigned size () const;
+
+	// Find the element associated to \a k.
+	iterator find (const U& k) const;
+
+	/// Whether it's empty.
+	bool empty () const;
+
+	U back () const;
+      private:
+	const std::map<U, T>&	m_;
+    };
+
+    /// Support<set<U, T> > is a const adapter of std::map to container.
+    template <class U>
+    class Support<std::set<U> >
+    {
+      public:
+	typedef SupportIterator<std::set<U> > iterator;
+	typedef SupportIterator<std::set<U> > const_iterator;
+	/// The type of the values.
+	typedef typename std::set<U>::value_type value_type;
+
+	Support (const std::set<U>&);
+	Support (const Support&);
 
 	iterator begin () const;
 	iterator end () const;
@@ -117,15 +197,15 @@ namespace vcsn
 	/// Whether it's empty.
 	bool empty () const;
 
-	U max () const;
+	U back () const;
       private:
-	const std::map<U, T>&	m_;
+	const std::set<U>&	m_;
     };
-
     /** @} */
 
   } // misc
 } // vcsn
+
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/misc/support.hxx>

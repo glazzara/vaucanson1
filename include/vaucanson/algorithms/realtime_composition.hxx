@@ -62,9 +62,9 @@ namespace vcsn {
     state_pair_queue_t	     sp_queue;
 
     exp_t	  null_exp = lhs.series().zero_;
-    monoid_elt_t  empty	   = lhs.series().monoid().vcsn_empty;
+    monoid_elt_t  empty	   = lhs.series().monoid().VCSN_EMPTY_;
 
-    for_all_initial_states(p, lhs)
+    for_all_const_initial_states(p, lhs)
     {
       exp_t exp = lhs.get_initial(*p);
       partial_evaluation(exp, rhs, sep_set);

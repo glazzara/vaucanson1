@@ -32,12 +32,12 @@
 
 // Iterator on a list of groups.
 # define for_all_groups(I, P)						\
-  for (groupid_to_group_t::iterator I = ((P).begin()); I != (P).end(); ++I)
+  for (typename groupid_to_group_t::iterator I = ((P).begin()); I != (P).end(); ++I)
 
 // Iterator on state in a group. We don't iterate on the first not
 // processed state.
 # define for_all_state_in_groups(I, P)					\
-  for (group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
+  for (typename group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
 
 namespace vcsn {
 
@@ -64,8 +64,8 @@ namespace vcsn {
 
     // Consts.
 
-    const hstate_t	NullState = -1;
-    const hstate_t	NullGroup = -1;
+    const hstate_t	NullState;
+    const hstate_t	NullGroup;
     const alphabet_t&	alphabet (input.series().monoid().alphabet());
 
     // Typedefs.
@@ -96,11 +96,11 @@ namespace vcsn {
 
     letter_to_letterid_t letter_to_letterid;
     int	letter_count = 0;
-    for_all_letters(iletter, alphabet)
+    for_all_const_letters(iletter, alphabet)
       letter_to_letterid[*iletter] = letter_count++;
 
     state_to_letterid_to_state_t aut_view;
-    for_all_states(istate, input)
+    for_all_const_states(istate, input)
     {
       aut_view[*istate] = letterid_to_state_t(letter_count, NullState);
       if ((not Transposed and input.is_final(*istate)) or
@@ -117,7 +117,7 @@ namespace vcsn {
     }
 
     group_t delta_ret;
-    for_all_states(istate, input)
+    for_all_const_states(istate, input)
     {
       for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)
       {
@@ -159,7 +159,7 @@ namespace vcsn {
 	      break;
 	  if (i != letter_count)
 	  {
-	    group_t::iterator istate_save = istate;
+	    typename group_t::iterator istate_save = istate;
 
 	    istate_save--;
 	    if (group_created == false)

@@ -46,30 +46,30 @@ unsigned rdelta_test(tests::Tester& tg)
   automaton_t		automaton(automata);
 
   // States.
-  vcsn::hstate_t s1 = automaton.add_state();
-  vcsn::hstate_t s2 = automaton.add_state();
+  hstate_t s1 = automaton.add_state();
+  hstate_t s2 = automaton.add_state();
 
   // Transitions.
   automaton.add_letter_transition(s1, s2, a);
   automaton.add_letter_transition(s2, s1, b);
 
   // Show me the bug!
-  std::list<int> r;
-  automaton.rdelta(inserter(r, r.begin()), s2, vcsn::delta_kind::transitions());
+  std::list<htransition_t> tr;
+  std::list<hstate_t> r;
+  automaton.rdelta(inserter(tr, tr.begin()), s2, vcsn::delta_kind::transitions());
   TEST(t, "rdelta returns consistent results (1/4). ",
-       !r.empty() && (automaton.src_of(r.front()) == s1));
+       !tr.empty() && (automaton.src_of(tr.front()) == s1));
 
-  r.clear();
+  tr.clear();
   automaton.rdelta(inserter(r, r.begin()), s2, vcsn::delta_kind::states());
   TEST(t, "rdelta returns consistent results (2/4). ",
        !r.empty() && r.front() == s1);
 
   r.clear();
-  automaton.rdelta(inserter(r, r.begin()), s1, vcsn::delta_kind::transitions());
+  automaton.rdelta(inserter(tr, tr.begin()), s1, vcsn::delta_kind::transitions());
   TEST(t, "rdelta returns consistent results (3/4). ",
-       !r.empty() && (automaton.src_of(r.front()) == s2));
+       !tr.empty() && (automaton.src_of(tr.front()) == s2));
 
-  r.clear();
   automaton.rdelta(inserter(r, r.begin()), s1, vcsn::delta_kind::states());
   TEST(t, "rdelta returns consistent results (4/4). ",
        !r.empty() && r.front() == s2);

@@ -51,6 +51,9 @@ namespace vcsn
     template <class S, class T>
     struct xml_chooser_base
     {
+	typedef typename T::hstate_t hstate_t;
+	typedef typename T::htransition_t htransition_t;
+
 	void create_type_tag(const Element<S, T>& aut,
 			     xercesc::DOMDocument* doc,
 			     xercesc::DOMElement* root);

@@ -91,7 +91,7 @@ namespace vcsn {
   struct DefaultChooser
   {
       template <class Auto_>
-      hstate_t
+      typename Auto_::hstate_t
       operator()(const Auto_& a) const;
   };
 
@@ -104,7 +104,7 @@ namespace vcsn {
   struct RandomChooser
   {
       template <class Auto_>
-      hstate_t
+      typename Auto_::hstate_t
       operator()(const Auto_& a) const;
   };
 
@@ -112,36 +112,36 @@ namespace vcsn {
   struct HChooser
   {
       template <class Auto_>
-      hstate_t
+      typename Auto_::hstate_t
       operator()(const Auto_& a) const;
   };
 
   struct DMChooser
   {
       template <class Auto_>
-      hstate_t
+      typename Auto_::hstate_t
       operator()(const Auto_& a) const;
   };
 
   /**
    * Chooser for aut_to_exp().
    *
-   * This chooser  is built  using a std::list<hstate_t>.   It returns
+   * This chooser  is built  using a std::list<typename Auto_::hstate_t>.   It returns
    * the states of the automaton with the same order as in the list.
    *
    * @see aut_to_exp().
    */
+  template <typename Auto_>
   class ListChooser
   {
     public :
-      ListChooser(const std::list<hstate_t>& l);
+      ListChooser(const std::list<typename Auto_::hstate_t>& l);
 
-      template <class Auto_>
-      hstate_t operator() (const Auto_&);
+      typename Auto_::hstate_t operator() (const Auto_&);
 
     private :
-      std::list<hstate_t>	list_;
-      std::list<hstate_t>::const_iterator pos_;
+      std::list<typename Auto_::hstate_t>	list_;
+      typename std::list<typename Auto_::hstate_t>::const_iterator pos_;
   };
 
 } // vcsn

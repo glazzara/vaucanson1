@@ -13,5 +13,7 @@
 
 SUBDIRS = automata emacs
 
-# The XSD file is installed.
-dist_pkgdata_DATA = vaucanson.xsd
+# The XSD file and the graph implementation templates are installed.
+dist_pkgdata_DATA = vaucanson.xsd \
+		    template_graph_impl.hh \
+		    template_graph_impl.hxx

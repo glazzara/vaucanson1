@@ -64,10 +64,13 @@ namespace vcsn
     struct Node
     {
       typedef Factory<Node<T>, std::string> factory_t;
+      typedef typename T::hstate_t hstate_t;
+      typedef typename T::htransition_t htransition_t;
       typedef std::map<std::string, hstate_t> map_t;
-      typedef reference_pair<std::map<hstate_t, std::pair<double, double> >,
+      typedef reference_pair<std::map<hstate_t, typename T::geometry_t::coords_t>,
 			     hstate_t> map_state_pair_t;
-      typedef reference_pair<std::map<htransition_t, std::pair<double, double> >,
+      typedef reference_pair<std::map<htransition_t,
+			     typename T::geometry_t::coords_t>,
 			     htransition_t> map_transition_pair_t;
       virtual void process(xercesc::DOMElement* node, T& aut, 
 			   map_t& m, factory_t& f) = 0;

@@ -39,7 +39,7 @@ namespace vcsn {
     AUTOMATON_TYPES(input_t);
 
     typedef typename series_set_elt_t::support_t	support_t;
-    typedef typename std::set<htransition_t>		delta_ret_t;
+    typedef typename std::list<htransition_t>		delta_ret_t;
     delta_ret_t	delta_ret;
 
     input.deltac(delta_ret, *current_state, delta_kind::transitions());
@@ -85,7 +85,7 @@ namespace vcsn {
     if (input.initial().size() != 1)
       return false;
 
-    for_all_states(i, input)
+    for_all_const_states(i, input)
       if (not is_state_deterministic (input, i, zero_semiring))
 	return false;
     return true;

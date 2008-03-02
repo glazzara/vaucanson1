@@ -42,16 +42,16 @@ namespace vcsn {
 			 a.structure().series().monoid()));
     ret_t	   t_ret(ts);
 
-    monoid_elt_t   neutre   = a.series().monoid().vcsn_empty;
+    monoid_elt_t   neutre   = a.series().monoid().VCSN_EMPTY_;
     monoid_elt_t	t_neutre = t_ret.series().monoid().
       identity(SELECT(typename t_monoid_elt_t::value_t));
 
     std::vector<hstate_t>	conv(a.states().size());
 
-    for_all_states (s, a)
+    for_all_const_states (s, a)
       conv[t_ret.add_state()] = *s;
 
-    for_all_transitions (e, a)
+    for_all_const_transitions (e, a)
     {
       series_set_elt_t t = a.series_of(*e);
       series_set_elt_t s(t);
@@ -128,6 +128,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_t, a_);
+    typedef typename Auto_t::hstate_t hstate_t;
     typedef typename Trans_t::series_set_elt_t	t_output_series_set_elt_t;
     typedef typename Auto_t::series_set_elt_t::support_t a_support_t;
     typedef typename Trans_t::semiring_elt_t	t_weight_t;

@@ -245,8 +245,8 @@ namespace vcsn
 	}
 	else
 	{
-	  std::string in_word = get_label((*series.supp()).first);
-	  std::string out_word = get_label((*series.supp()).second);
+	  std::string in_word = get_label((*series.supp().begin()).first);
+	  std::string out_word = get_label((*series.supp().begin()).second);
 	  std::string mult = get_label(series.get(*series.supp().begin()));
 
 	  if (in_word.size() && in_word != "1")

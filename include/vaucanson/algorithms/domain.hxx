@@ -35,7 +35,7 @@ namespace vcsn
     AUTOMATON_TYPES(dst_t);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
-    std::map<hstate_t, hstate_t>	stmap;
+    std::map<trans_hstate_t, hstate_t>	stmap;
 
     const series_set_t&		series = dst.structure().series();
     const monoid_t&		monoid = dst.structure().series().monoid();
@@ -44,7 +44,7 @@ namespace vcsn
 
     set_states(src, dst, stmap);
 
-    for_all_transitions(fmp_e, src)
+    for_all_const_transitions_(trans_, fmp_e, src)
     {
       const trans_series_set_elt_t	trans_series_elt =
 	src.series_of(*fmp_e);
@@ -75,21 +75,21 @@ namespace vcsn
   do_rw_domain(const src_t& src, dst_t& dst)
   {
     TIMER_SCOPED("rw_domain");
-    std::map<hstate_t, hstate_t> m;
+    std::map<typename src_t::hstate_t, typename dst_t::hstate_t> m;
     AUTOMATON_TYPES(src_t);
 
-    for_all_states(p, src)
+    for_all_const_states(p, src)
     {
       m[*p] = dst.add_state();
     }
 
-    for_all_initial_states(p, src)
+    for_all_const_initial_states(p, src)
       dst.set_initial(m[*p]);
 
-    for_all_final_states(p, src)
+    for_all_const_final_states(p, src)
       dst.set_final(m[*p]);
 
-    for_all_transitions(e, src)
+    for_all_const_transitions(e, src)
     {
       dst.add_series_transition(m[src.src_of(*e)],
 				m[src.dst_of(*e)],

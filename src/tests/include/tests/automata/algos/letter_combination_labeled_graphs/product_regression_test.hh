@@ -29,7 +29,6 @@ product_regression_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
-  using vcsn::hstate_t;
 
   tests::Tester t(tg);
 

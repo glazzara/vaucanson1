@@ -38,8 +38,9 @@ namespace vcsn {
   {
     public :
       typedef Auto_					automaton_t;
-      typedef typename automaton_t::set_t			automata_set_t;
-      typedef typename automaton_t::series_set_t		series_set_t;
+      typedef typename automaton_t::hstate_t		hstate_t;
+      typedef typename automaton_t::set_t		automata_set_t;
+      typedef typename automaton_t::series_set_t	series_set_t;
       typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
       typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
       typedef Monoid_					monoid_elt_value_t;
@@ -88,10 +89,27 @@ namespace vcsn {
       {
 	node->accept(*this);
 
-	for (typename automaton_t::initial_iterator i = auto_->initial().begin();
-	     i != auto_->initial().end();
-	     ++i)
-	  auto_->set_initial(*i, semiring_elt_t(w) * auto_->get_initial(*i));
+	typedef typename automaton_t::hstate_t	hstate_t;
+	typedef typename automaton_t::initial_iterator initial_iterator;
+	typedef typename automaton_t::final_iterator final_iterator;
+
+	hstate_t new_i = auto_->add_state();
+	hstate_t new_f = auto_->add_state();
+
+	for_all_const_initial_states(i, *auto_)
+	{
+	  series_set_elt_t t = auto_->series().zero_;
+	  t.assoc(auto_->series().monoid().identity(SELECT(monoid_elt_value_t)), w);
+	  auto_->add_series_transition(new_i, *i, t);
+	}
+	for_all_const_final_states(f, *auto_)
+	  auto_->add_spontaneous(*f, new_f);
+
+	auto_->clear_initial();
+	auto_->clear_final();
+
+	auto_->set_initial(new_i);
+	auto_->set_final(new_f);
       }
 
       virtual void
@@ -99,10 +117,27 @@ namespace vcsn {
       {
 	node->accept(*this);
 
-	for (typename automaton_t::initial_iterator i = auto_->initial().begin();
-	     i != auto_->initial().end();
-	     ++i)
-	  auto_->set_initial(*i, auto_->get_initial(*i) * semiring_elt_t(w));
+	typedef typename automaton_t::hstate_t	hstate_t;
+	typedef typename automaton_t::initial_iterator initial_iterator;
+	typedef typename automaton_t::final_iterator final_iterator;
+
+	hstate_t new_i = auto_->add_state();
+	hstate_t new_f = auto_->add_state();
+
+	for_all_const_initial_states(i, *auto_)
+	  auto_->add_spontaneous(new_i, *i);
+	for_all_const_final_states(f, *auto_)
+	{
+	  series_set_elt_t t = auto_->series().zero_;
+	  t.assoc(auto_->series().monoid().identity(SELECT(monoid_elt_value_t)), w);
+	  auto_->add_series_transition(*f, new_f, t);
+	}
+
+	auto_->clear_initial();
+	auto_->clear_final();
+
+	auto_->set_initial(new_i);
+	auto_->set_final(new_f);
       }
 
       virtual void

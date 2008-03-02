@@ -37,7 +37,7 @@
     throw std::runtime_error("no such state")
 
 #define CHECK_TRANSITION(Self, Transition)		\
-  if (!(Self)->auto_->has_transition(Transition))	\
+  if (!(Self)->auto_->has_transition(htransition_t(Transition)))	\
     throw std::runtime_error("no such transition")
 
 #define CHECK_LETTER(Self, L)					\
@@ -101,7 +101,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_set_elt_t series_of(int e) const
     {
       CHECK_TRANSITION(this, e);
-      return (*auto_).series_of(e);
+      return (*auto_).series_of(htransition_t(e));
     }
 
     int add_series_transition(int from, int to, const series_set_elt_t& s)
@@ -139,7 +139,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     { return *ctx_; }
 
     virtual bool has_state(int s) const { return (*auto_).has_state(s); }
-    virtual bool has_transition(int e) const { return (*auto_).has_transition(e); }
+    virtual bool has_transition(int e) const { return (*auto_).has_transition(htransition_t(e)); }
 
     virtual void del_state(int s)
     {
@@ -150,7 +150,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     virtual void del_transition(int e)
     {
       CHECK_TRANSITION(this, e);
-      return (*auto_).del_transition(e);
+      return (*auto_).del_transition(htransition_t(e));
     }
 
     virtual std::list<int> states() const
@@ -225,20 +225,20 @@ struct vcsn_automaton : vcsn::virtual_automaton
     {
       CHECK_TRANSITION(this, transition);
       std::ostringstream s;
-      s << (*auto_).series_of(transition);
+      s << (*auto_).series_of(htransition_t(transition));
       return s.str();
     }
 
     virtual int src_of(int transition) const
     {
       CHECK_TRANSITION(this, transition);
-      return (*auto_).src_of(transition);
+      return (*auto_).src_of(htransition_t(transition));
     }
 
     virtual int dst_of(int transition) const
     {
       CHECK_TRANSITION(this, transition);
-      return (*auto_).dst_of(transition);
+      return (*auto_).dst_of(htransition_t(transition));
     }
 
 #define DefInitialFinalMembers(InitialFinal)				\

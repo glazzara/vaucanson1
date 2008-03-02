@@ -121,7 +121,7 @@ namespace edition_commands
   /// Get a state of @c a from the user.
   static hstate_t get_state (const automaton_t& a)
   {
-    hstate_t n_state = get_int ();
+    unsigned n_state = get_int ();
 
     if (not a.has_state (n_state))
     {
@@ -129,7 +129,7 @@ namespace edition_commands
       os << "no state " << n_state << " in automaton.";
       throw std::logic_error (os.str ());
     }
-    return n_state;
+    return a.get_state(n_state);
   }
 
   // Get a transition of @c a from the user.

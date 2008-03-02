@@ -41,8 +41,9 @@ namespace vcsn {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    precondition(is_complete(e) && is_deterministic(e));
-    for_all_states(i, e)
+    precondition(is_complete(e));
+    precondition(is_deterministic(e));
+    for_all_const_states(i, e)
       if (e.is_final(*i))
 	e.unset_final(*i);
       else

@@ -25,17 +25,18 @@
 
 namespace vcsn
 {
-
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
+    VCSN_CONTEXT_NAMESPACE
+    {
 
-    typedef vcsn::algebra::NumericalSemiring	semiring_t;
-    typedef float				semiring_elt_value_t;
+      typedef vcsn::algebra::NumericalSemiring	semiring_t;
+      typedef float				semiring_elt_value_t;
 
-    typedef
-    vcsn::Element<semiring_t, semiring_elt_value_t>
-    semiring_elt_t;
+      typedef
+	vcsn::Element<semiring_t, semiring_elt_value_t>
+	semiring_elt_t;
 
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

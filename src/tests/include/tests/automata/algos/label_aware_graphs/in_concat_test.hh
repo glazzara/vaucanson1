@@ -62,7 +62,6 @@ bool in_concat_test(tests::Tester& tg)
       try
 	{
 	  concatenate_here(auto_lhs, auto_rhs);
-
 	  if (auto_lhs.states().size() ==
 	      lhs_states_num + auto_rhs.states().size() &&
 	      eval(realtime(auto_lhs), word) !=
@@ -79,10 +78,17 @@ bool in_concat_test(tests::Tester& tg)
 	    }
 	  ++nb_test_done;
 	}
-      catch (std::logic_error&)
-	{
-	  ++test_num;
-	}
+      catch (std::logic_error& e)
+      {
+	std::cout << e.what() << std::endl;
+	std::cout << "Trying again..." << std::endl;
+	++test_num;
+      }
+      catch (...)
+      {
+	std::cout << "Unexpected exception!" << std::endl;
+	++nb_test_done;
+      }
     }
 
   std::string size_rate;

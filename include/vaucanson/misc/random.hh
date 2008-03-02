@@ -96,8 +96,8 @@ namespace vcsn {
       double generate<double> (double min, double max);
 
       /// Generate of n sample from a range to an output iterator.
-      template <class InputIterator, class OutputIterator>
-      void sample_n (InputIterator first, InputIterator end,
+      template <class IteratorValueType, class InputIterator, class OutputIterator>
+      void sample_n (const IteratorValueType&, InputIterator first, InputIterator end,
 		     OutputIterator out, unsigned n);
 
       /// Generate a random rational number.

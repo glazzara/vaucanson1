@@ -48,10 +48,10 @@ namespace vcsn
 
       // Vector of states. Each states can be also represented by its
       // index.
-      std::vector<hstate_t> states;
+      std::vector<typename T::hstate_t> states;
       // Vector of transitions. Each transition can be also
       // represented by its index.
-      std::vector<htransition_t> transitions;
+      std::vector<typename T::htransition_t> transitions;
       std::vector<int> src_transitions;
       std::vector<int> dst_transitions;
 

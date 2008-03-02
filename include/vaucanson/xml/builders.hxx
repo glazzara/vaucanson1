@@ -173,7 +173,7 @@ namespace vcsn
 
       TParm
       SemiringHandler*
-      semiringh_factory(TRANStype& aut,
+      semiringh_factory(TRANStype&,
 			const xercesc::Attributes& attrs,
 			typename TRANStype::semiring_t& semiring,
 			xercesc::DefaultHandler& root,
@@ -290,7 +290,7 @@ namespace vcsn
 	if ((it = attrs.find("label")) != attrs.end())
 	{
 	  std::string label = it->second;
-	  unsigned int pos = label.find("|");
+	  std::size_t pos = label.find("|");
 	  if (pos != std::string::npos)
 	  {
 	    in = label.substr(0, pos);

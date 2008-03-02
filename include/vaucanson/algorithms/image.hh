@@ -48,7 +48,7 @@ namespace vcsn
   template <class S, class T>
   typename output_projection_helper<S, T>::ret
   image(const Element<S, T>&,
-	std::map<hstate_t, hstate_t>& m);
+	std::map<typename T::hstate_t, typename T::hstate_t>& m);
 
 
   /// @todo FIXME: Write a version for transducers.

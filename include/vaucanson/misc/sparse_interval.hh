@@ -101,6 +101,7 @@ namespace vcsn
 	typedef Integer		integer_t;
 	typedef ExcludedContainer	excluded_container_t;
 	typedef SparseIterator<integer_t, excluded_container_t> iterator;
+	typedef SparseIterator<integer_t, excluded_container_t> const_iterator;
 
 	SparseInterval (integer_t, integer_t, const excluded_container_t&);
 	SparseInterval (const SparseInterval&);

@@ -43,6 +43,8 @@ namespace vcsn
 			 const Conv& conv) const
     {
       typedef typename Saver::automaton_t auto_t;
+      typedef typename auto_t::hstate_t hstate_t;
+
       const auto_t& a = s.automaton();
       unsigned count = 0;
       std::map<hstate_t, unsigned> state_map;

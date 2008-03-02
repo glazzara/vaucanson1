@@ -35,11 +35,13 @@ namespace vcsn {
   //
   //
   template <class A_, typename Auto_>
-  std::set<hstate_t>
+  std::set<typename Auto_::hstate_t>
   do_useful_states(const AutomataBase<A_>&,
 		   const Auto_&		   a)
   {
     TIMER_SCOPED("useful_states");
+    typedef typename Auto_::hstate_t hstate_t;
+
     std::set<hstate_t> start = accessible_states(a);
     std::set<hstate_t> final = coaccessible_states(a);
     std::set<hstate_t> result;
@@ -50,7 +52,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  std::set<hstate_t>
+  std::set<typename T::hstate_t>
   useful_states(const Element<A, T>& a)
   {
     return do_useful_states(a.structure(), a);

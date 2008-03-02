@@ -30,70 +30,72 @@
 namespace vcsn
 {
 
-  VCSN_CONTEXT_NAMESPACE
+  namespace VCSN_GRAPH_IMPL
   {
 
-    /*-----------------.
-    | make_automaton() |
-    `-----------------*/
-
-    template <class InputIterator>
-    automaton_t
-    make_automaton(InputIterator input_alphabet_begin,
-		   InputIterator input_alphabet_end,
-		   InputIterator output_alphabet_begin,
-		   InputIterator output_alphabet_end)
+    VCSN_CONTEXT_NAMESPACE
     {
-      alphabet_t		input_alpha;
-      alphabet_t		output_alpha;
 
-      for (InputIterator e = input_alphabet_begin;
-	   e != input_alphabet_end; ++e)
-	input_alpha.insert(*e);
+      /*-----------------.
+      | make_automaton() |
+      `-----------------*/
 
-      for (InputIterator e = output_alphabet_begin;
-	   e != output_alphabet_end; ++e)
-	output_alpha.insert(*e);
+      template <class InputIterator>
+      automaton_t
+      make_automaton(InputIterator input_alphabet_begin,
+		     InputIterator input_alphabet_end,
+		     InputIterator output_alphabet_begin,
+		     InputIterator output_alphabet_end)
+      {
+	alphabet_t		input_alpha;
+	alphabet_t		output_alpha;
 
-      monoid_t			output_freemonoid (output_alpha);
-      typename output_series_set_t::semiring_t	semiring;
-      output_series_set_t	output_series (semiring, output_freemonoid);
-      monoid_t			freemonoid (input_alpha);
-      series_set_t		series (output_series, freemonoid);
-      automata_set_t		automata_set (series);
+	for (InputIterator e = input_alphabet_begin;
+	    e != input_alphabet_end; ++e)
+	  input_alpha.insert(*e);
 
-      return automaton_t (automata_set);
-    }
+	for (InputIterator e = output_alphabet_begin;
+	    e != output_alphabet_end; ++e)
+	  output_alpha.insert(*e);
 
+	monoid_t		output_freemonoid (output_alpha);
+	typename output_series_set_t::semiring_t	semiring;
+	output_series_set_t	output_series (semiring, output_freemonoid);
+	monoid_t		freemonoid (input_alpha);
+	series_set_t		series (output_series, freemonoid);
+	automata_set_t		automata_set (series);
 
-    template <class T>
-    automaton_t make_automaton(const T& input_alphabet,
-			       const T& output_alphabet)
-    {
-      return make_automaton(input_alphabet.begin(),
-			    input_alphabet.end(),
-			    output_alphabet.begin(),
-			    output_alphabet.end());
-    }
-
-
-    template <typename TransStruct,
-	      typename TransImpl,
-	      typename MonoidStruct,
-	      typename MonoidImpl>
-    output_series_set_elt_t
-    do_evaluation(const vcsn::TransducerBase<TransStruct>&,
-		  const TransImpl&,
-		  const vcsn::algebra::FreeMonoidBase<MonoidStruct>&,
-		  const MonoidImpl& input,
-		  const Element<TransStruct, TransImpl>& t,
-		  const Element<MonoidStruct, MonoidImpl>&)
-    {
-      return eval(t, input);
-    }
+	return automaton_t (automata_set);
+      }
 
 
-    template <typename TransStruct,
+      template <class T>
+      automaton_t make_automaton(const T& input_alphabet,
+				 const T& output_alphabet)
+      {
+	return make_automaton(input_alphabet.begin(),
+			      input_alphabet.end(),
+			      output_alphabet.begin(),
+			      output_alphabet.end());
+      }
+
+
+      template <typename TransStruct,
+		typename TransImpl,
+		typename MonoidStruct,
+		typename MonoidImpl>
+      output_series_set_elt_t
+      do_evaluation(const vcsn::TransducerBase<TransStruct>&,
+		    const TransImpl&,
+		    const vcsn::algebra::FreeMonoidBase<MonoidStruct>&,
+		    const MonoidImpl& input,
+		    const Element<TransStruct, TransImpl>& t,
+		    const Element<MonoidStruct, MonoidImpl>&)
+      {
+	return eval(t, input);
+      }
+    
+      template <typename TransStruct,
 	      typename TransImpl,
 	      typename SeriesStruct,
 	      typename SeriesImpl,
@@ -118,21 +120,20 @@ namespace vcsn
       return aut_to_exp(quotient(realtime(trim(result))), DMChooser());
     }
 
+      template <typename TransStruct,
+		typename TransImpl,
+		typename ArgStruct,
+		typename ArgImpl>
+      output_series_set_elt_t
+      evaluation(const Element<TransStruct, TransImpl>& t,
+		 const Element<ArgStruct, ArgImpl>& input)
+      {
+	return do_evaluation(t.structure(), t.value(),
+			     input.structure(), input.value(),
+			     t, input);
+      }
 
-    template <typename TransStruct,
-	      typename TransImpl,
-	      typename ArgStruct,
-	      typename ArgImpl>
-    output_series_set_elt_t
-    evaluation(const Element<TransStruct, TransImpl>& t,
-	       const Element<ArgStruct, ArgImpl>& input)
-    {
-      return do_evaluation(t.structure(), t.value(),
-			   input.structure(), input.value(),
-			   t, input);
-    }
-
-  } // End of VCSN_CONTEXT_NAMESPACE.
-
+    } // End of VCSN_CONTEXT_NAMESPACE.
+  }// End of VCSN_GRAPH_IMPL.
 } // End of namespace vcsn.
 

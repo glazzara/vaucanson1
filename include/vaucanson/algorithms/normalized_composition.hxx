@@ -45,20 +45,24 @@ namespace vcsn {
 	    typename rhs_t, typename res_t>
   struct composer
   {
-    /// Pair of states.
-    typedef std::pair<hstate_t, hstate_t>	pair_hstate_t;
-    /// Map from pair of states to state.
-    typedef std::map<pair_hstate_t, hstate_t>	visited_t;
-    /// Map from state to pair of states.
-    typedef std::map<hstate_t, pair_hstate_t >  map_of_states_t;
-    /// Queue of pair of states.
-    typedef std::queue<pair_hstate_t> 		to_process_t;
-
     AUTOMATON_TYPES(res_t);
     AUTOMATON_TYPES_(lhs_t, lhs_);
     AUTOMATON_TYPES_(rhs_t, rhs_);
 
-    typedef std::set<htransition_t>			delta_ret_t;
+   #define SPECIFIC_TYPES(Auto) \
+      typedef std::list<typename Auto##_t::htransition_t>      Auto##_delta_ret_t; \
+
+    SPECIFIC_TYPES(lhs);
+    SPECIFIC_TYPES(rhs);
+    SPECIFIC_TYPES(res);
+
+    #undef SPECIFIC_TYPES
+    typedef std::pair<lhs_hstate_t, rhs_hstate_t>	pair_hstate_t;
+    typedef std::map<pair_hstate_t, hstate_t>		visited_t;
+    typedef std::map<hstate_t, pair_hstate_t>		map_of_states_t;
+    typedef std::queue<pair_hstate_t>			to_process_t;
+
+    typedef std::list<htransition_t>			delta_ret_t;
     typedef typename series_set_elt_t::support_t	support_t;
     typedef typename lhs_series_set_elt_t::support_t	lhs_support_t;
     typedef typename rhs_series_set_elt_t::support_t	rhs_support_t;
@@ -98,8 +102,8 @@ namespace vcsn {
     const lhs_t&                 lhs;
     const rhs_t&                 rhs;
     res_t&                       output;
-    std::set<hstate_t>&          lhs_black_states;
-    std::set<hstate_t>&          rhs_black_states;
+    std::set<typename lhs_t::hstate_t>& lhs_black_states;
+    std::set<typename rhs_t::hstate_t>& rhs_black_states;
 
     const series_set_t&	series;
     const monoid_t&	monoid;
@@ -117,11 +121,11 @@ namespace vcsn {
 
     composer (const AutomataBase<S>&,
 	      const algebra::FreeMonoidProduct<M1, M2>&,
-	      const lhs_t&                 aLhs,
-	      const rhs_t&                 aRhs,
-	      res_t&                       aOutput,
-	      std::set<hstate_t>&          aLhs_states,
-	      std::set<hstate_t>&          aRhs_states)
+	      const lhs_t&			  aLhs,
+	      const rhs_t&			  aRhs,
+	      res_t&				  aOutput,
+	      std::set<typename lhs_t::hstate_t>& aLhs_states,
+	      std::set<typename rhs_t::hstate_t>& aRhs_states)
       : lhs (aLhs),
 	rhs (aRhs),
 	output (aOutput),
@@ -206,7 +210,8 @@ namespace vcsn {
     }
 
     void process_one_pair (const hstate_t current_state,
-			   const hstate_t lhs_s, const hstate_t rhs_s)
+			   const typename lhs_t::hstate_t
+			   lhs_s, const hstate_t rhs_s)
     {
 
       if (lhs.is_initial(lhs_s) and rhs.is_initial(rhs_s))
@@ -300,14 +305,14 @@ namespace vcsn {
       /*----------------------------------.
       | Get initial states of the product |
       `----------------------------------*/
-      for_all_initial_states(lhs_s, lhs)
-	for_all_initial_states(rhs_s, rhs)
+      for_all_const_initial_states(lhs_s, lhs)
+	for_all_const_initial_states(rhs_s, rhs)
 	{
 	  if (lhs_black_states.find(*lhs_s) == lhs_black_states.end() or
 	      rhs_black_states.find(*rhs_s) == rhs_black_states.end())
 	    {
-	      const hstate_t	new_state = output.add_state();
-	      const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
+	      const hstate_t	  new_state = output.add_state();
+	      const pair_hstate_t new_pair (*lhs_s, *rhs_s);
 
 	      m[new_state] = new_pair;
 	      visited[new_pair] = new_state;
@@ -342,9 +347,8 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(res_t);
 
-    typedef std::set<hstate_t>			set_of_states_t;
-    set_of_states_t lhs_states;
-    set_of_states_t rhs_states;
+    std::set<typename lhs_t::hstate_t> lhs_states;
+    std::set<typename rhs_t::hstate_t> rhs_states;
 
     composer<S, M1, M2, lhs_t, rhs_t, res_t>
       compose (ret.structure(), ret.structure().series().monoid(),
@@ -365,9 +369,8 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(res_t);
 
-    typedef std::set<hstate_t>			set_of_states_t;
-    set_of_states_t lhs_states;
-    set_of_states_t rhs_states;
+    std::set<typename lhs_t::hstate_t> lhs_states;
+    std::set<typename rhs_t::hstate_t> rhs_states;
 
     lhs_t lhs_cov = splitting::outsplitting(lhs, lhs_states);
     rhs_t rhs_cov = splitting::insplitting(rhs, rhs_states);

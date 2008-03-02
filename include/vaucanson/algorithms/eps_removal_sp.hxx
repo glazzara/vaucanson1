@@ -144,7 +144,7 @@ namespace vcsn {
 	null_series(aut.series().zero_),
 	semiring_elt_zero(aut.series().semiring().wzero_),
 	semiring_elt_one(aut.series().semiring().wone_),
-	monoid_identity(aut.series().monoid().vcsn_empty)
+	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
     {
       shortest_eps_distance();
     }
@@ -173,7 +173,7 @@ namespace vcsn {
   private:
     void shortest_eps_distance()
     {
-      for_all_states(s, a)
+      for_all_const_states(s, a)
       {
 	typename s_shortest_hash::iterator it;
 	shortest_hash.insert(s_shortest(*s, *s, semiring_elt_one, semiring_elt_one));

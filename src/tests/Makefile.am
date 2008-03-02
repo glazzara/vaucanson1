@@ -20,4 +20,4 @@ SUBDIRS =					\
 	test-suites				\
 	xml
 
-EXTRA_DIST = bin/generate-test-suite.sh
+EXTRA_DIST = bin/generate-test-suite.sh common/xmldiff.sh

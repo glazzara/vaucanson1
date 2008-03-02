@@ -70,7 +70,7 @@ namespace vcsn {
     Auto_t tmp_auto(auto_structure);
 
     AUTOMATON_TYPES(Auto_t);
-    monoid_elt_t empty = tmp_auto.series().monoid().vcsn_empty;
+    monoid_elt_t empty = tmp_auto.series().monoid().VCSN_EMPTY_;
     standard_of(tmp_auto, exp.get(empty).value());
     partial_1(tmp_auto, t, state_exp_pair_set);
   }
@@ -97,6 +97,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto_t);
     typedef typename std::set<htransition_t>		htransition_set_t;
+    typedef typename Auto_t::hstate_t			hstate_t;
     typedef std::map<hstate_t, series_set_elt_t>	sums_t;
 
     typename htransition_set_t::const_iterator		i, j;
@@ -224,10 +225,10 @@ namespace vcsn {
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_ret_t, ret_);
 
-    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
+    typedef std::map<t_hstate_t, std::pair<t_hstate_t, t_hstate_t> >
       state_pair_map_t;
-    typedef std::map<hstate_t, hstate_t> state_state_map_t;
-    typedef std::pair<hstate_t, ret_series_set_elt_t> se_pair_t;
+    typedef std::map<t_hstate_t, ret_hstate_t> state_state_map_t;
+    typedef std::pair<t_hstate_t, ret_series_set_elt_t> se_pair_t;
 
     Trans_t tmp_trans(t.structure());
     tmp_trans = extension(a, t);
@@ -236,7 +237,7 @@ namespace vcsn {
     state_pair_map_t sp_m;
     pro = product(tmp_trans, t, sp_m);
     Auto_ret_t auto_p(auto_structure);
-    std::map<hstate_t, hstate_t> proj_m;
+    std::map<t_hstate_t, ret_hstate_t> proj_m;
     auto_p = image(pro, proj_m);
 
     /* unset final all the final states of auto_p */
@@ -244,21 +245,21 @@ namespace vcsn {
 
     /* for each state u of t, add one final state to 'auto_p' */
     state_state_map_t final_of, is_final_of;
-    for(t_state_iterator u = t.states().begin(); u != t.states().end(); ++u)
+    for (t_state_iterator u = t.states().begin(); u != t.states().end(); ++u)
     {
-      hstate_t new_state = auto_p.add_state();
+      ret_hstate_t new_state = auto_p.add_state();
       final_of[*u] = new_state;
       is_final_of[new_state] = *u;
       auto_p.set_final(new_state);
     }
 
-    for(a_state_iterator u = auto_p.states().begin();
-	u != auto_p.states().end(); ++u)
+    for (a_state_iterator u = auto_p.states().begin();
+	 u != auto_p.states().end(); ++u)
     {
       if (!auto_p.is_final(*u))
       {
-	hstate_t p = sp_m[proj_m[*u]].first;
-	hstate_t q = sp_m[proj_m[*u]].second;
+	t_hstate_t p = sp_m[proj_m[*u]].first;
+	t_hstate_t q = sp_m[proj_m[*u]].second;
 
 	if (tmp_trans.is_final(p))
 	  auto_p.add_spontaneous(*u, final_of[q]);
@@ -298,7 +299,7 @@ namespace vcsn {
 	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
-	       const hstate_t p,
+	       const typename Trans_t::hstate_t p,
 	       Exp& exp)
   {
     typedef typename Trans_t::value_t T;
@@ -329,7 +330,7 @@ namespace vcsn {
   void
   partial_2(const Element<SA, TA>& a,
 	    const Element<ST, TT>& t,
-	    const hstate_t p, Exp& exp)
+	    const typename TT::hstate_t p, Exp& exp)
   {
     do_partial_2(a.structure(), t.structure(), a, t, p, exp);
   }
@@ -344,7 +345,7 @@ namespace vcsn {
 	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
-	       const hstate_t p,
+	       const typename Trans_t::hstate_t p,
 	       M& state_exp_pair_set)
   {
     Trans_t tt = t;
@@ -360,7 +361,7 @@ namespace vcsn {
   void
   partial_3(const Element<SA, TA>& a,
 	    const Element<ST, TT>& t,
-	    const hstate_t p,
+	    const typename TT::hstate_t p,
 	    M& state_exp_pair_set)
   {
     do_partial_3(a.structure(), t.structure(), a, t, p, state_exp_pair_set);

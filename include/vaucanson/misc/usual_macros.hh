@@ -19,6 +19,7 @@
 
 # include <fstream>
 # include <vaucanson/config/system.hh>
+# include <boost/preprocessor/cat.hpp>
 
 /// Import the Type from From qualified with Qual, with a Typename prepended.
 # define IMPORT_TYPEDEF_TYPENAME(From, Qual, Type, Typename) \
@@ -64,7 +65,9 @@
   typedef Typename Prefix##series_set_elt_t::semiring_elt_t	Prefix##semiring_elt_t;	\
   typedef Typename Prefix##semiring_elt_t::value_t		Prefix##semiring_elt_value_t; \
   typedef Typename AutoType::label_t				Prefix##label_t; \
-  typedef Typename AutoType::tag_t				Prefix##tag_t;
+  typedef Typename AutoType::tag_t				Prefix##tag_t; \
+  typedef Typename AutoType::hstate_t				Prefix##hstate_t; \
+  typedef Typename AutoType::htransition_t			Prefix##htransition_t;
 
 # define AUTOMATON_TYPES_(AutoType,Prefix)			\
   AUTOMATON_TYPES_MAYBE_TYPENAME(AutoType, Prefix, typename)
@@ -112,10 +115,12 @@
 /*------------.
 | Iterating.  |
 `------------*/
+# define for_all_iterator(ConstIteratorType, I, C)		\
+  for (ConstIteratorType I = (C).begin(); I != (C).end(); ++I)
 
 /// Iteration given an iterator type, iterator name, and container.
-# define for_all_iterator(IteratorType, I, C)		\
-  for (IteratorType I = (C).begin(), I ## _end = (C).end(); I != I ## _end; ++I)
+# define for_all_const_iterator(IteratorType, I, C)		\
+  for (IteratorType I = (C).begin(), I##_end = (C).end(); I##_end != I; ++I)
 
 
 /// Iteration given a non-template container type.
@@ -128,7 +133,7 @@
 
 /// Iteration given a template container type.
 # define for_all_const_(T, I, C)			\
-  for_all_iterator(typename T::const_iterator, I, C)
+  for_all_const_iterator(typename T::const_iterator, I, C)
 
 # define for_all_(T, I, C)				\
   for_all_iterator(typename T::iterator, I, C)
@@ -152,6 +157,53 @@
 # define for_all_final_states(I, A)			\
   for_all_iterator (final_iterator, I, (A).final())
 
+# define for_all_letters_(Prefix, I, A)			\
+  for_all_iterator (Prefix##alphabet_iterator, I, A)
+
+# define for_all_states_(Prefix, I, A)			\
+  for_all_iterator (Prefix##state_iterator, I, (A).states())
+
+# define for_all_transitions_(Prefix, I, A)			\
+  for_all_iterator (Prefix##transition_iterator, I, (A).transitions())
+
+# define for_all_initial_states_(Prefix, I, A)			\
+  for_all_iterator (Prefix##initial_iterator, I, (A).initial())
+
+# define for_all_final_states_(Prefix, I, A)			\
+  for_all_iterator (Prefix##final_iterator, I, (A).final())
+
+
+//Const versions of the previous macros.
+//You should always use these macros unless you need to erase over iteration.
+# define for_all_const_letters(I, A)			\
+  for_all_const_iterator (alphabet_iterator, I, A)
+
+# define for_all_const_states(I, A)			\
+  for_all_const_iterator (state_iterator, I, (A).states())
+
+# define for_all_const_transitions(I, A)			\
+  for_all_const_iterator (transition_iterator, I, (A).transitions())
+
+# define for_all_const_initial_states(I, A)			\
+  for_all_const_iterator (initial_iterator, I, (A).initial())
+
+# define for_all_const_final_states(I, A)			\
+  for_all_const_iterator (final_iterator, I, (A).final())
+
+# define for_all_const_letters_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##alphabet_iterator, I, A)
+
+# define for_all_const_states_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##state_iterator, I, (A).states())
+
+# define for_all_const_transitions_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##transition_iterator, I, (A).transitions())
+
+# define for_all_const_initial_states_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##initial_iterator, I, (A).initial())
+
+# define for_all_const_final_states_(Prefix, I, A)			\
+  for_all_const_iterator (Prefix##final_iterator, I, (A).final())
 
 
 
@@ -178,9 +230,25 @@
 // !! * must be well documented * !!
 # define zero_	zero(SELECT(typename series_set_elt_t::value_t))
 # define one_	identity(SELECT(typename series_set_elt_t::value_t))
-# define vcsn_empty	identity(SELECT(typename monoid_elt_t::value_t))
+# define VCSN_EMPTY_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
 # define wone_	identity(SELECT(typename semiring_elt_t::value_t))
+
+
+# define VARIANT_INCLUDE_FILE(PATH, FILE, SUFFIX) \
+    <PATH/BOOST_PP_CAT(FILE, SUFFIX)>
+
+# define GRAPH_IMPL_HEADER \
+    VARIANT_INCLUDE_FILE(VCSN_GRAPH_IMPL_INCLUDE_PATH,VCSN_GRAPH_IMPL,_graph_impl.hh)
+
+# define GRAPH_DEFAULT_IMPL_HEADER \
+    VARIANT_INCLUDE_FILE(VCSN_GRAPH_IMPL_INCLUDE_PATH,VCSN_DEFAULT_GRAPH_IMPL,_graph_impl.hh)
+
+# define GRAPH_CONTEXT_HEADER(Impl, Context) \
+    VARIANT_INCLUDE_FILE(VCSN_CONTEXT_INCLUDE_PATH,Impl,/Context)
+
+# define GRAPH_CONTEXT_HEADER_(Context) \
+    <VCSN_CONTEXT_INCLUDE_PATH/VCSN_GRAPH_IMPL/Context>
 
 # include <vaucanson/misc/global_timer.hh>
 

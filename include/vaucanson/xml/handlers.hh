@@ -250,6 +250,7 @@ namespace vcsn
 	MonoidHandler*			monoidh_;
     };
 
+
     /*
      * SemiringHandler class, dedicated to parse <semiring> tag.
      */
@@ -260,6 +261,8 @@ namespace vcsn
 			 xercesc::SAX2XMLReader* parser,
 			 XMLEq& eq);
     };
+
+
     template <typename T>
     class SeriesSemiringHandler : public SemiringHandler
     {
@@ -282,6 +285,8 @@ namespace vcsn
 	SemiringHandler*	semiringh_;
 	MonoidHandler*		monoidh_;
     };
+
+
     template <typename T>
     class NumSemiringHandler : public SemiringHandler
     {
@@ -302,6 +307,7 @@ namespace vcsn
       private:
 	T&	semiring_;
     };
+
 
     /*
      * TypeHandler class, dedicated to parse <labelType> tag.
@@ -337,6 +343,7 @@ namespace vcsn
 	MonoidHandler*			monoidh_;
     };
 
+
     /*
      * ContHandler class, dedicated to parse <content> tag.
      */
@@ -358,6 +365,7 @@ namespace vcsn
 			 const XMLCh* const qname);
 
       private:
+	typedef typename T::hstate_t		hstate_t;
 	typedef std::map<std::string, hstate_t> map_t;
 
 	T&				aut_;
@@ -367,12 +375,15 @@ namespace vcsn
 	map_t				map_;
     };
 
+
     /*
      * StateHandler class, dedicated to parse <state> tag.
      */
+    template <typename HState>
     class StateHandler : public Handler
     {
       public:
+	typedef HState				hstate_t;
 	typedef std::map<std::string, hstate_t> map_t;
 
 	StateHandler (xercesc::DefaultHandler& father,
@@ -389,9 +400,9 @@ namespace vcsn
 			 const XMLCh* const qname);
 	void reset (hstate_t* state);
       private:
-	map_t&				map_;
+	map_t&		map_;
 
-	hstate_t*			state_;
+	hstate_t*	state_;
 	UnsupHandler	unsuph_;
     };
 
@@ -402,6 +413,7 @@ namespace vcsn
     class StatesHandler : public Handler
     {
       public:
+	typedef typename T::hstate_t		hstate_t;
 	typedef std::map<std::string, hstate_t> map_t;
 
 	StatesHandler (xercesc::DefaultHandler& father,
@@ -422,7 +434,7 @@ namespace vcsn
 	map_t&				map_;
 
 	T&				aut_;
-	StateHandler			stateh_;
+	StateHandler<hstate_t>		stateh_;
     };
 
     /*
@@ -481,6 +493,8 @@ namespace vcsn
 	RegExpHandler<T>*	lefth_;
 	RegExpHandler<T>*	righth_;
     };
+
+
     template <typename T>
     class ProdHandler : public RegExpHandler<T>
     {
@@ -503,6 +517,8 @@ namespace vcsn
 	RegExpHandler<T>*	lefth_;
 	RegExpHandler<T>*	righth_;
     };
+
+
     template <typename T>
     class StarHandler : public RegExpHandler<T>
     {
@@ -523,6 +539,8 @@ namespace vcsn
       protected:
 	RegExpHandler<T>*	sonh_;
     };
+
+
     template <typename T>
     class WordHandler : public RegExpHandler<T>
     {
@@ -578,8 +596,9 @@ namespace vcsn
     class TransitionHandler : public Handler
     {
       public:
-	typedef std::map<std::string, hstate_t> map_t;
-	typedef std::map<std::string, std::string> curattrs_t;
+	typedef typename T::hstate_t		    hstate_t;
+	typedef std::map<std::string, hstate_t>	    map_t;
+	typedef std::map<std::string, std::string>  curattrs_t;
 
 	TransitionHandler (xercesc::DefaultHandler& father,
 			   T& aut,
@@ -614,6 +633,7 @@ namespace vcsn
     class TransitionsHandler : public Handler
     {
       public:
+	typedef typename T::hstate_t		hstate_t;
 	typedef std::map<std::string, hstate_t> map_t;
 
 	TransitionsHandler (xercesc::DefaultHandler& father,

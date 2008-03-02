@@ -48,14 +48,14 @@ namespace vcsn {
 	size(aut.states().size()),
 	null_series(aut.series().zero_),
 	semiring_elt_zero(aut.series().semiring().wzero_),
-	monoid_identity(aut.series().monoid().vcsn_empty)
+	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
     {
 
       /// @bug FIXME: This converters should be removed
       // Initialize converters between matrix index and states.
       index_to_state.resize(size);
       int i = 0;
-      for_all_states(s, a)
+      for_all_const_states(s, a)
       {
 	index_to_state[i] = *s;
 	state_to_index[*s] = i++;
@@ -67,7 +67,7 @@ namespace vcsn {
       for (int i = 0; i < size; i++)
 	m_semiring_elt[i].resize(size, semiring_elt_zero);
 
-      for_all_states(s, a)
+      for_all_const_states(s, a)
       {
 	std::list<htransition_t>	transition_list;
 	int src = state_to_index[*s];
@@ -80,7 +80,7 @@ namespace vcsn {
 
 	  m_semiring_elt[src][dst] += t.get(monoid_identity);
 	  t.assoc(monoid_identity.value(), semiring_elt_zero.value());
-	  if(t != null_series)
+	  if (t != null_series)
 	    a.add_series_transition(*s, a.dst_of(*e), t);
 	  a.del_transition(*e);
 	}
@@ -112,7 +112,7 @@ namespace vcsn {
 	  {
 	    semiring_elt_t z = m_semiring_elt[i][r] * w;
 	    m_semiring_elt[i][r] = z;
-	    if(z != semiring_elt_zero)
+	    if (z != semiring_elt_zero)
 	      for (int j = 0; j < size; j++)
 		if (j != r)
 		  m_semiring_elt[i][j] += z * m_semiring_elt[r][j];
@@ -128,12 +128,12 @@ namespace vcsn {
       // Backward_eps_removal
       // Initialize the m_wfinal
       vector_series_t	m_wfinal (size, null_series);
-      for_all_final_states(p, a)
+      for_all_const_final_states(p, a)
 	m_wfinal[state_to_index[*p]] = a.get_final(*p);
       a.clear_final();
 
       // Compute the backward_eps_removal
-      for_all_states(s, a)
+      for_all_const_states(s, a)
       {
 	std::list<htransition_t> transition_list;
 	a.rdeltac(transition_list, *s, delta_kind::transitions());
@@ -163,12 +163,12 @@ namespace vcsn {
       // Forward eps_removal
       // Initialize the m_wfinal
       vector_series_t	m_winitial (size, null_series);
-      for_all_initial_states(p, a)
+      for_all_const_initial_states(p, a)
 	m_winitial[state_to_index[*p]] = a.get_initial(*p);
       a.clear_initial();
 
       // Compute the forward_eps_removal
-      for_all_states(s, a)
+      for_all_const_states(s, a)
       {
 	std::list<htransition_t> transition_list;
 	a.deltac(transition_list, *s, delta_kind::transitions());
@@ -226,7 +226,7 @@ namespace vcsn {
     Finder (const automaton_t& aut)
       : a_(aut)
     {
-      for_all_transitions(t, a_)
+      for_all_const_transitions(t, a_)
 	map_[make_pair(a_.src_of(*t), make_pair(a_.label_of(*t),
 						a_.dst_of(*t)))] = true;
     }
@@ -269,9 +269,9 @@ namespace vcsn {
       : a(aut),
 	null_series(aut.series().zero_),
 	semiring_elt_zero(aut.series().semiring().wzero_),
-	monoid_identity(aut.series().monoid().vcsn_empty)
+	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
     {
-      for_all_transitions(t, a)
+      for_all_const_transitions(t, a)
 	tr_q.push(*t);
     }
 
@@ -314,7 +314,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, mid, delta_kind::states());
-	for_all_const(cstates_t, dst, st_out)
+	for_all_const(typename cstates_t, dst, st_out)
 	{
 	  if (!find(src, l, *dst))
 	  {
@@ -328,7 +328,7 @@ namespace vcsn {
       // Set initial state.
       state_queue_t sq;
 
-      for_all_initial_states(s, a)
+      for_all_const_initial_states(s, a)
 	sq.push(*s);
       while (!sq.empty())
       {
@@ -336,7 +336,7 @@ namespace vcsn {
 
 	st_out.clear();
 	a.spontaneous_deltac(st_out, i, delta_kind::states());
-	for_all_const(cstates_t, s, st_out)
+	for_all_const(typename cstates_t, s, st_out)
 	{
 	  if (!a.is_initial(*s))
 	  {
@@ -363,7 +363,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, mid, delta_kind::states());
-	for_all_const(cstates_t, src, st_in)
+	for_all_const(typename cstates_t, src, st_in)
 	{
 	  if (!find(*src, l, dst))
 	  {
@@ -377,7 +377,7 @@ namespace vcsn {
       // Set final state.
       state_queue_t sq;
 
-      for_all_final_states(s, a)
+      for_all_const_final_states(s, a)
 	sq.push(*s);
       while (!sq.empty())
       {
@@ -385,7 +385,7 @@ namespace vcsn {
 
 	st_in.clear();
 	a.spontaneous_rdeltac(st_in, i, delta_kind::states());
-	for_all_const(cstates_t, s, st_in)
+	for_all_const(typename cstates_t, s, st_in)
 	{
 	  if (!a.is_final(*s))
 	  {

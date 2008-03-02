@@ -35,7 +35,7 @@ namespace vcsn {
     typedef Element<Self, T> transducer_t;
     AUTOMATON_TYPES(transducer_t);
     typedef std::map<std::pair<hstate_t, hstate_t>, hstate_t> assoc_t;
-    typedef std::set<htransition_t> delta_ret_t;
+    typedef std::list<htransition_t> delta_ret_t;
 
     semiring_t output_series(f.series().semiring().semiring(),
 			     f.series().semiring().monoid());
@@ -47,8 +47,8 @@ namespace vcsn {
     series_set_elt_t zero =
       algebra::zero_as<series_set_elt_value_t>::of(output.series());
 
-    for_all_states(s, f)
-      for_all_states(t, g)
+    for_all_const_states(s, f)
+      for_all_const_states(t, g)
     {
       hstate_t ns = output.add_state();
       conv[std::make_pair(*s, *t)] = ns;
@@ -59,8 +59,8 @@ namespace vcsn {
 
     }
 
-    for_all_states(s, f)
-      for_all_states(t, g)
+    for_all_const_states(s, f)
+      for_all_const_states(t, g)
     {
       f_delta_ret.clear();
       g_delta_ret.clear();

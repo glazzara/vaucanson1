@@ -28,6 +28,7 @@
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/automata/implementation/generalized.hh>
 
+# include <vaucanson/tools/xml_dump.hh>
 template <class Auto>
 bool concat_test(tests::Tester& tg)
 {
@@ -35,6 +36,7 @@ bool concat_test(tests::Tester& tg)
   using namespace vcsn::tools;
   using namespace vcsn::algebra;
 
+using namespace vcsn::tools;
   AUTOMATON_TYPES(Auto);
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
@@ -61,37 +63,44 @@ bool concat_test(tests::Tester& tg)
       monoid_elt_t word = word_1 * word_2;
 
       try
+      {
+	automaton_t ret = concatenate(auto_lhs, auto_rhs);
+	semiring_elt_t val =
+	  eval(determinize(realtime(auto_lhs)), word_1) *
+	  eval(determinize(realtime(auto_rhs)), word_2);
+	if (ret.states().size() ==
+	    auto_lhs.states().size() + auto_rhs.states().size() &&
+	    eval(determinize(realtime(ret)), word) == val)
+	  ++size;
+	else
 	{
-	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
-	  semiring_elt_t val =
-	    eval(determinize(realtime(auto_lhs)), word_1) *
-	    eval(determinize(realtime(auto_rhs)), word_2);
-	  if (ret.states().size() ==
-	      auto_lhs.states().size() + auto_rhs.states().size() &&
-	      eval(determinize(realtime(ret)), word) == val)
-	    ++size;
-	  else
-	    {
-	      TEST_FAIL_SAVE("concat",
-			     i,
-			     "concatenation of automata corresponding"
-			     << "to following expressions failed."
-			     << std::endl
-			     << exp_lhs << " and " << exp_rhs
-			     << std::endl);
-	    }
-	  ++nb_test_done;
+	  TEST_FAIL_SAVE("concat",
+	      i,
+	      "concatenation of automata corresponding"
+	      << "to following expressions failed."
+	      << std::endl
+	      << exp_lhs << " and " << exp_rhs
+	      << std::endl);
 	}
-      catch (std::logic_error&)
-	{
-	  ++test_num;
-	}
+	++nb_test_done;
+      }
+      catch (std::logic_error& e)
+      {
+	std::cout << e.what() << std::endl;
+	std::cout << "Trying again..." << std::endl;
+	++test_num;
+      }
+      catch (...)
+      {
+	std::cout << "Unexpected exception!" << std::endl;
+	++nb_test_done;
+      }
     }
 
   std::string size_rate;
   SUCCESS_RATE(size_rate, size, nb_test_done);
   TEST(t, "Concatenation of two automata." + size_rate,
-       size == nb_test_done);
+      size == nb_test_done);
   // FIXME: add tests based on samples from the languages.
   return t.all_passed();
 }

@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef   	VCSN_ALGORITHMS_IMAGE_HXX
-# define   	VCSN_ALGORITHMS_IMAGE_HXX
+#ifndef VCSN_ALGORITHMS_IMAGE_HXX
+# define VCSN_ALGORITHMS_IMAGE_HXX
 
 # include <vaucanson/algorithms/image.hh>
 # include <vaucanson/algorithms/projection.hh>
@@ -32,7 +32,7 @@ namespace vcsn
     AUTOMATON_TYPES(auto_t);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
-    std::map<hstate_t, hstate_t>	stmap;
+    std::map<trans_hstate_t, hstate_t>	stmap;
 
     const series_set_t&		series = res.structure().series();
     const monoid_t&		monoid = res.structure().series().monoid();
@@ -41,7 +41,7 @@ namespace vcsn
 
     set_states(fmp_trans, res, stmap);
 
-    for_all_transitions(fmp_e, fmp_trans)
+    for_all_const_transitions_(trans_, fmp_e, fmp_trans)
     {
       const trans_series_set_elt_t	trans_series_elt =
 	fmp_trans.series_of(*fmp_e);
@@ -70,10 +70,10 @@ namespace vcsn
   {
     TIMER_SCOPED("image (transducer to automaton)");
     AUTOMATON_TYPES(Trans_t);
+    AUTOMATON_TYPES_(Auto_t, auto_);
+    std::map<hstate_t, auto_hstate_t> m;
 
-    std::map<hstate_t, hstate_t> m;
-
-    for_all_states(p, t)
+    for_all_const_states(p, t)
       m[*p] = ret.add_state();
 
     monoid_elt_t empty =
@@ -83,11 +83,11 @@ namespace vcsn
       identity_as<typename Trans_t::series_set_elt_value_t>::
       of(t.structure().series());
 
-    for_all_initial_states(p, t)
+    for_all_const_initial_states(p, t)
     {
       if (t.get_initial(*p) != id_series)
       {
-	hstate_t tmp = ret.add_state();
+	auto_hstate_t tmp = ret.add_state();
 	ret.set_initial(tmp);
 	ret.add_series_transition(tmp, m[*p], t.get_initial(*p).get(empty));
       }
@@ -95,11 +95,11 @@ namespace vcsn
 	ret.set_initial(m[*p], t.get_initial(*p).get(empty));
     }
 
-    for_all_final_states(p, t)
+    for_all_const_final_states(p, t)
     {
       if (t.get_final(*p) != id_series)
       {
-	hstate_t tmp = ret.add_state();
+	auto_hstate_t tmp = ret.add_state();
 	ret.set_final(tmp);
 	ret.add_series_transition(m[*p], tmp, t.get_final(*p).get(empty));
       }
@@ -107,7 +107,7 @@ namespace vcsn
 	ret.set_final(m[*p], t.get_final(*p).get(empty));
     }
 
-    for_all_transitions(e, t)
+    for_all_const_transitions(e, t)
     {
       ret.add_series_transition(m[t.src_of(*e)],
 				m[t.dst_of(*e)],
@@ -121,28 +121,28 @@ namespace vcsn
   typename output_projection_helper<S, T>::ret
   do_rw_image(const Element<S, T>& t,
 	      Auto_t& ret,
-	      std::map<hstate_t, hstate_t>& m_)
+	      std::map<typename Auto_t::hstate_t, typename T::hstate_t>& m_)
   {
     TIMER_SCOPED("image (transducer to automaton)");
     typedef Element<S, T>  Trans_t;
     AUTOMATON_TYPES(Trans_t);
 
-    monoid_elt_t empty = t.series().monoid().vcsn_empty;
+    monoid_elt_t empty = t.series().monoid().VCSN_EMPTY_;
     std::map<hstate_t, hstate_t> m;
 
-    for_all_states(p, t)
+    for_all_const_states(p, t)
     {
       m[*p] = ret.add_state();
       m_[m[*p]] = *p;
     }
 
-    for_all_initial_states(p, t)
+    for_all_const_initial_states(p, t)
       ret.set_initial(m[*p], t.get_initial(*p).get(empty));
 
-    for_all_final_states(p, t)
+    for_all_const_final_states(p, t)
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
-    for_all_transitions(e, t)
+    for_all_const_transitions(e, t)
       ret.add_series_transition(m[t.src_of(*e)], m[t.dst_of(*e)],
 				t.output_of(*e));
 
@@ -176,7 +176,7 @@ namespace vcsn
 		 const TransducerBase<ST>&,
 		 const algebra::FreeMonoidBase<M1>&,
 		 Element<S2, T2>& dst,
-		 std::map<hstate_t, hstate_t>& m)
+		 std::map<typename T::hstate_t, typename T2::hstate_t>& m)
   {
     do_rw_image(src, dst, m);
   }
@@ -198,7 +198,7 @@ namespace vcsn
   typename output_projection_helper<S, T>::ret
   image_dispatch2(const Element<S,T>& src,
 		  const TransducerBase<ST>&,
-		  std::map<hstate_t, hstate_t>& m)
+		  std::map<typename T::hstate_t, typename T::hstate_t>& m)
   {
     MAKE_RET_AUTOMATON();
 
@@ -261,7 +261,7 @@ namespace vcsn
   template <typename S, typename T>
   typename output_projection_helper<S, T>::ret
   image(const Element<S, T>& src,
-	std::map<hstate_t, hstate_t>& m)
+	std::map<typename T::hstate_t, typename T::hstate_t>& m)
   {
     return image_dispatch2(src, src.structure(), m);
   }

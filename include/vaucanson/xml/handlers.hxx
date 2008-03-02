@@ -502,37 +502,41 @@ namespace vcsn
     /*
      * StateHandler
      */
-    StateHandler::StateHandler (xercesc::DefaultHandler& root,
-				map_t& map,
-				xercesc::SAX2XMLReader* parser,
-				XMLEq& eq)
+    template <typename T>
+    StateHandler<T>::StateHandler (xercesc::DefaultHandler& root,
+				   map_t& map,
+				   xercesc::SAX2XMLReader* parser,
+				   XMLEq& eq)
       : Handler(parser, eq, root),
 	map_(map),
 	unsuph_(*this, parser)
     {
     }
 
+    template <typename T>
     void
-    StateHandler::startElement (const XMLCh* const,
-				const XMLCh* const,
-				const XMLCh* const,
-				const xercesc::Attributes&)
+    StateHandler<T>::startElement (const XMLCh* const,
+				   const XMLCh* const,
+				   const XMLCh* const,
+				   const xercesc::Attributes&)
     {
       // geometry / drawing
       parser_->setContentHandler(&unsuph_);
     }
 
+    template <typename T>
     void
-    StateHandler::endElement (const XMLCh* const,
-			      const XMLCh* const localname,
-			      const XMLCh* const)
+    StateHandler<T>::endElement (const XMLCh* const,
+				 const XMLCh* const localname,
+				 const XMLCh* const)
     {
       if (xercesc::XMLString::equals(eq_.state, localname))
 	parser_->setContentHandler(&root_);
     }
 
+    template <typename T>
     void
-    StateHandler::reset (hstate_t* state)
+    StateHandler<T>::reset (hstate_t* state)
     {
       state_ = state;
     }
@@ -854,7 +858,7 @@ namespace vcsn
 	// no checks are made because the xsd ensure the existence of these keys
 	hstate_t src = map_[attrs_["src"]];
 	hstate_t dst = map_[attrs_["dst"]];
-	htransition_t e = aut_.add_series_transition(src, dst, s);
+	typename T::htransition_t e = aut_.add_series_transition(src, dst, s);
       }
       else // tag == "initial" || tag == "final"
       {

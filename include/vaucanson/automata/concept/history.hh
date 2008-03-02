@@ -82,6 +82,8 @@ namespace vcsn {
     class AutomatonHistory
     {
       public :
+	typedef typename AutoType_::hstate_t		     hstate_t;
+	typedef typename AutoType_::htransition_t	     htransition_t;
 	typedef std::list<Event<AutoType_> >		     auto_events_t;
 	typedef std::list<Event<hstate_t> >		     state_events_t;
 	typedef std::list<Event<htransition_t> >	     transition_events_t;

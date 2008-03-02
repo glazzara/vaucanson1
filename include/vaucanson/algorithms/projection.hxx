@@ -26,7 +26,8 @@ namespace vcsn {
   template <typename auto_t, typename trans_t>
   void
   set_states(const trans_t& fmp_trans, auto_t& res,
-	     std::map<hstate_t, hstate_t>& stmap)
+	     std::map<typename trans_t::hstate_t, typename auto_t::hstate_t>&
+	      stmap)
   {
     AUTOMATON_TYPES_(trans_t, trans_);
     AUTOMATON_TYPES(auto_t);
@@ -36,7 +37,7 @@ namespace vcsn {
     const series_set_t&		series = res.structure().series();
     const monoid_t&		monoid = res.structure().series().monoid();
 
-    for_all_states(fmp_s, fmp_trans)
+    for_all_const_states(fmp_s, fmp_trans)
     {
       hstate_t s = res.add_state();
       stmap[*fmp_s] = s;
@@ -93,7 +94,7 @@ namespace vcsn {
     AUTOMATON_TYPES_(auto_t, aut_);
     AUTOMATON_TYPES(trans_t);
 
-    std::map<hstate_t, hstate_t>	stmap;
+    std::map<hstate_t, aut_hstate_t>	stmap;
     typedef typename aut_series_set_elt_t::support_t	aut_support_t;
 
     const series_set_t&		series = res.structure().series();
@@ -102,7 +103,7 @@ namespace vcsn {
 
     set_states(aut, res, stmap);
 
-    for_all_transitions(aut_e, aut)
+    for_all_const_transitions_(aut_, aut_e, aut)
     {
       const aut_series_set_elt_t	aut_series_elt =
 	aut.series_of(*aut_e);

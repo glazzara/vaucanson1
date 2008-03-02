@@ -38,16 +38,16 @@ namespace vcsn {
 	      lhs_t& lhs,
 	      const rhs_t& rhs)
   {
+    typedef typename rhs_t::state_iterator state_iterator;
+
     /*--------------.
     | Sum of states |
     `--------------*/
-    std::map<hstate_t, hstate_t> states_map;
+    std::map<typename rhs_t::hstate_t, typename lhs_t::hstate_t> states_map;
 
-    for (typename rhs_t::state_iterator i = rhs.states().begin();
-	 i != rhs.states().end();
-	 ++i)
+    for_all_const_states(i, rhs)
     {
-      hstate_t new_state = lhs.add_state();
+      typename lhs_t::hstate_t new_state = lhs.add_state();
       states_map[*i] = new_state;
 
       //  lhs.history().set_state_event_about(INSUM_EVENT, new_state, *i);
@@ -60,12 +60,10 @@ namespace vcsn {
     | Sum of transitions.  |
     `---------------------*/
 
-    typedef std::set<htransition_t> dst_t;
+    typedef std::list<typename rhs_t::htransition_t> dst_t;
     dst_t dst;
 
-    for (typename rhs_t::state_iterator i = rhs.states().begin();
-	 i != rhs.states().end();
-	 ++i)
+    for_all_const_states(i, rhs)
     {
       dst.clear();
       rhs.deltac(dst, *i, delta_kind::transitions());

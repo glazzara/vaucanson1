@@ -18,6 +18,7 @@
 # define VCSN_AUTOMATA_CONCEPT_HANDLERS_HH
 
 # include <iostream>
+# include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn {
 
@@ -27,64 +28,63 @@ namespace vcsn {
   struct transition_h
   {};
 
-  template<typename Tag>
+  template<typename Tag, typename Type>
   class handler
   {
     public:
       typedef Tag kind;
+      typedef handler<Tag, Type> self_t;
 
       handler();
 
-      handler(int h);
+      explicit handler(const Type& h);
 
-      handler(const handler& h);
+      handler(const self_t& h);
 
-      handler& operator=(const handler& h);
+      self_t& operator=(const self_t& h);
 
-      handler& operator=(int h);
+      Type value() const;
 
-      int value() const;
+      operator unsigned() const;
 
-      operator int () const;
+      bool is_valid() const;
 
     protected:
-      int v_;
+      Type v_;
   };
 
-  typedef handler<state_h> hstate_t;
-  typedef handler<transition_h> htransition_t;
 
-  template<typename kind>
-  bool operator==(const handler<kind>& h1,
-		  const handler<kind>& h2);
+  template<typename Tag, typename Type>
+  bool operator==(const handler<Tag, Type>& h1,
+		  const handler<Tag, Type>& h2);
 
-  template<typename kind>
-  bool operator!=(const handler<kind>& h1,
-		  const handler<kind>& h2);
+  template<typename Tag, typename Type>
+  bool operator!=(const handler<Tag, Type>& h1,
+		  const handler<Tag, Type>& h2);
 
-  template<typename kind>
-  bool operator<(const handler<kind>& h1,
-		 const handler<kind>& h2);
+  template<typename Tag, typename Type>
+  bool operator<(const handler<Tag, Type>& h1,
+		 const handler<Tag, Type>& h2);
 
-  template<typename kind>
-  bool operator>(const handler<kind>& h1,
-		 const handler<kind>& h2);
+  template<typename Tag, typename Type>
+  bool operator>(const handler<Tag, Type>& h1,
+		 const handler<Tag, Type>& h2);
 
-  template<typename kind>
-  bool operator<=(const handler<kind>& h1,
-		  const handler<kind>& h2);
+  template<typename Tag, typename Type>
+  bool operator<=(const handler<Tag, Type>& h1,
+		  const handler<Tag, Type>& h2);
 
-  template<typename kind>
-  bool operator>=(const handler<kind>& h1,
-		  const handler<kind>& h2);
+  template<typename Tag, typename Type>
+  bool operator>=(const handler<Tag, Type>& h1,
+		  const handler<Tag, Type>& h2);
 
 } // vcsn
 
 namespace std {
 
-  template <typename kind>
+  template <typename Tag, typename Type>
   std::ostream&
-  operator<<(std::ostream& out, const vcsn::handler<kind>& h);
+  operator<<(std::ostream& out, const vcsn::handler<Tag, Type>& h);
 
 } // std
 

@@ -400,12 +400,12 @@ namespace vcsn {
 	hstate_t tmp;
 
 	for (unsigned i = 0; i < density; i++)
-	  if (tmp = work.choose_state() != init)
+	  if ((tmp = work.choose_state()) != init)
 	    work.add_letter_transition(init, tmp,
-		alpha.choose());
+				       alpha.choose());
 
 	for (unsigned i =0; i < density; i++)
-	  if (tmp = work.choose_state() != final)
+	  if ((tmp = work.choose_state()) != final)
 	    work.add_letter_transition(tmp, final,
 		alpha.choose());
 

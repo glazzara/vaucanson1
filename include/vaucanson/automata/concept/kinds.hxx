@@ -111,7 +111,7 @@ namespace vcsn {
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   template<typename S>
-  htransition_t
+  typename Self::htransition_t
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
   add_series_transition(hstate_t from, hstate_t to,
 			const S& e)
@@ -120,7 +120,7 @@ namespace vcsn {
   }
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
-  htransition_t
+  typename Self::htransition_t
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
   add_spontaneous(hstate_t from, hstate_t to)
   {
@@ -131,7 +131,7 @@ namespace vcsn {
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   template<typename L>
-  htransition_t
+  typename Self::htransition_t
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
   add_letter_transition(hstate_t from, hstate_t to,
 			const L& l)
@@ -285,7 +285,7 @@ namespace vcsn {
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   template<typename S>
-  htransition_t
+  typename Self::htransition_t
   AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
   add_series_transition(hstate_t from, hstate_t to,
 			const S& e)
@@ -304,7 +304,7 @@ namespace vcsn {
   }
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
-  htransition_t
+  typename Self::htransition_t
   AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
   add_spontaneous(hstate_t from, hstate_t to)
   {
@@ -320,7 +320,7 @@ namespace vcsn {
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   template<typename L>
-  htransition_t
+  typename Self::htransition_t
   AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
   add_letter_transition(hstate_t from,
 			hstate_t to,

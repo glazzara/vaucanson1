@@ -127,11 +127,11 @@ namespace vcsn {
 	return min + generate_one * range;
       }
 
-      template <class Iterator, class OutputIterator>
-      void sample_n (Iterator first, Iterator end,
+      template <class IteratorValueType, class Iterator, class OutputIterator>
+      void sample_n (const IteratorValueType&, Iterator first, Iterator end,
 		     OutputIterator out, unsigned n)
       {
-	std::vector<int> from;
+	std::vector<IteratorValueType> from;
 	for (Iterator i = first; i != end; ++i)
 	  from.push_back (*i);
 

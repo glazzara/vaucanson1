@@ -88,11 +88,13 @@ namespace vcsn {
   class AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>
   {
     protected:
-      typedef Element<Series, SeriesT>			series_set_elt_t;
-      typedef typename Series::monoid_t			monoid_t;
-      typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
-      typedef typename Series::semiring_t			semiring_t;
-      typedef typename series_set_elt_t::semiring_elt_t		semiring_elt_t;
+      typedef typename Self::hstate_t			      hstate_t;
+      typedef typename Self::htransition_t		      htransition_t;
+      typedef Element<Series, SeriesT>			      series_set_elt_t;
+      typedef typename Series::monoid_t			      monoid_t;
+      typedef typename series_set_elt_t::monoid_elt_t	      monoid_elt_t;
+      typedef typename Series::semiring_t		      semiring_t;
+      typedef typename series_set_elt_t::semiring_elt_t	      semiring_elt_t;
 
     public:
 
@@ -193,11 +195,13 @@ namespace vcsn {
   class AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>
   {
     protected:
+      typedef typename Self::hstate_t			hstate_t;
+      typedef typename Self::htransition_t		htransition_t;
       typedef Element<Series, SeriesT>			series_set_elt_t;
       typedef typename Series::monoid_t			monoid_t;
-      typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
-      typedef typename Series::semiring_t			semiring_t;
-      typedef typename series_set_elt_t::semiring_elt_t		semiring_elt_t;
+      typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;
+      typedef typename Series::semiring_t		semiring_t;
+      typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
 
     public:
 
