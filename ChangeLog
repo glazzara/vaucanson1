@@ -1,3 +1,8 @@
+2008-03-03  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Optimisation of eps_removal_sp.
+	* include/vaucanson/algorithms/eps_removal_sp.hxx: .
+
 2008-03-03  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add missing svn:ignore and svn:executable properties.

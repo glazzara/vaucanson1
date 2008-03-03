@@ -236,12 +236,15 @@ namespace vcsn {
 	}
 	else
 	{
-	  transition_list.clear();
-	  a.deltac(transition_list, it->dst, delta_kind::transitions());
-	  for_all_const_(std::list<htransition_t>, e, transition_list)
-	    tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
-	  if (a.is_final(it->dst))
-	    fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->src, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	  if (it->dist != semiring_elt_one)
+	  {
+	    transition_list.clear();
+	    a.deltac(transition_list, it->dst, delta_kind::transitions());
+	    for_all_const_(std::list<htransition_t>, e, transition_list)
+	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
+	    if (a.is_final(it->dst))
+	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->src, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	  }
 	}
 
       for (typename std::list<std::pair<htransition_t, semiring_elt_t> >::iterator it = tr_l.begin();
@@ -291,12 +294,15 @@ namespace vcsn {
 	}
 	else
 	{
-	  transition_list.clear();
-	  a.rdeltac(transition_list, it->dst, delta_kind::transitions());
-	  for_all_const_(std::list<htransition_t>, e, transition_list)
-	    tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
-	  if (a.is_initial(it->src))
-	    fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->dst, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	  if (it->dist != semiring_elt_one)
+	  {
+	    transition_list.clear();
+	    a.rdeltac(transition_list, it->dst, delta_kind::transitions());
+	    for_all_const_(std::list<htransition_t>, e, transition_list)
+	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
+	    if (a.is_initial(it->src))
+	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->dst, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	  }
 	}
 
       for (typename std::list<std::pair<htransition_t, semiring_elt_t> >::iterator it = tr_l.begin();
