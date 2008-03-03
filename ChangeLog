@@ -1,3 +1,7 @@
+2008-03-03  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add missing svn:ignore and svn:executable properties.
+
 2008-03-02  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Merge changes from BMI into the trunk.
