@@ -1,5 +1,10 @@
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/complement.hh: Use @pre to
+	document preconditions.
+
+2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/misc/contract.hh: Reword the documentation a bit.
 
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
