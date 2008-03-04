@@ -38,7 +38,7 @@ check_PROGRAMS= \\
 EOF
 
 sed 's/[.\/]/_/g;
-s/.*/\t&-test/;
+s/.*/	&-test/;
 $!s/.*/& \\/'  files.tmp >> $tmp
 
 echo >> $tmp

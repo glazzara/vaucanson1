@@ -1,3 +1,13 @@
+2008-03-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fixe script incompatibilities with Mac.
+	* include/generate_headers.sh: Remove use of -printf with find,
+	    since this option doesn't exist on BSD find.
+	    Use -exec combined with basename instead.
+	* src/tests/sanity/generate_files.sh: Remove use of 	 in sed,
+	    since the conversion doesn't work on BSD sed.
+	    Use a real tabulation instead.
+
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Make sure preconditions in code match Doxygen documentation.
