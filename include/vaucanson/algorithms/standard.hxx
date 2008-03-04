@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,8 +35,7 @@ namespace vcsn {
   `---------*/
   template <class A_, typename Auto_>
   void
-  do_in_standardize(const AutomataBase<A_>& ,
-		    Auto_&		    a)
+  do_in_standardize(const AutomataBase<A_>&, Auto_& a)
   {
     TIMER_SCOPED("standardize");
     AUTOMATON_TYPES(Auto_);
@@ -90,9 +90,10 @@ namespace vcsn {
   `-----------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_union_of_standard_here(const AutomataBase<A>&,
-				 lhs_t& lhs,
-				 const rhs_t& rhs)
+  void
+  do_union_of_standard_here(const AutomataBase<A>&,
+			    lhs_t& lhs,
+			    const rhs_t& rhs)
   {
     precondition(is_standard(lhs));
     precondition(is_standard(rhs));
@@ -130,8 +131,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void union_of_standard_here(Element<A, T>& lhs,
-			      const Element<A, U>& rhs)
+  void
+  union_of_standard_here(Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assertion(lhs.structure() == rhs.structure())
     do_union_of_standard_here(lhs.structure(), lhs, rhs);
@@ -139,8 +140,7 @@ namespace vcsn {
 
   template<typename A, typename T, typename U>
   Element<A, T>
-  union_of_standard(const Element<A, T>& lhs,
-		    const Element<A, U>& rhs)
+  union_of_standard(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
@@ -153,8 +153,7 @@ namespace vcsn {
   `--------------*/
   template <typename A, typename auto_t>
   bool
-  do_is_standard(const AutomataBase<A>& ,
-		 const auto_t& a)
+  do_is_standard(const AutomataBase<A>&, const auto_t& a)
   {
     TIMER_SCOPED("is_standard");
     typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
@@ -184,9 +183,10 @@ namespace vcsn {
   | concat_of_standard.  |
   `---------------------*/
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_concat_of_standard_here(const AutomataBase<A>& ,
-				  lhs_t& lhs,
-				  const rhs_t& rhs)
+  void
+  do_concat_of_standard_here(const AutomataBase<A>&,
+			     lhs_t& lhs,
+			     const rhs_t& rhs)
   {
     precondition(is_standard(lhs));
     precondition(is_standard(rhs));
@@ -259,8 +259,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void concat_of_standard_here(Element<A, T>& lhs,
-			       const Element<A, U>& rhs)
+  void
+  concat_of_standard_here(Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assertion(lhs.structure() == rhs.structure())
     do_concat_of_standard_here(lhs.structure(), lhs, rhs);
@@ -281,8 +281,8 @@ namespace vcsn {
   | standard_star.  |
   `----------------*/
   template <typename A, typename auto_t>
-  void do_star_of_standard_here(const AutomataBase<A>& ,
-				auto_t& a)
+  void
+  do_star_of_standard_here(const AutomataBase<A>&, auto_t& a)
   {
     precondition(is_standard(a));
 
@@ -310,7 +310,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  void star_of_standard_here(Element<A, T>& a)
+  void
+  star_of_standard_here(Element<A, T>& a)
   {
     do_star_of_standard_here(a.structure(), a);
   }

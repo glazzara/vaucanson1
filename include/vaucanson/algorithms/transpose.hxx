@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +25,8 @@
 namespace vcsn
 {
   template<typename lhs_t, typename rhs_t>
-  void transpose(lhs_t& dst_, const rhs_t& from)
+  void
+  transpose(lhs_t& dst_, const rhs_t& from)
   {
     TIMER_SCOPED("transpose");
     AUTOMATON_TYPES(lhs_t);
@@ -36,7 +38,8 @@ namespace vcsn
   }
 
   template<typename auto_t>
-  auto_t transpose(const auto_t& from)
+  auto_t
+  transpose(const auto_t& from)
   {
     auto_t dst(from.structure());
     transpose(dst, from);

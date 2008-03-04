@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,7 +27,8 @@ namespace vcsn
 {
 
   template<typename S, typename T, typename Ss, typename Ts>
-  void finite_support_convert(Element<S, T>& dst, const Element<Ss, Ts>& org)
+  void
+  finite_support_convert(Element<S, T>& dst, const Element<Ss, Ts>& org)
   {
     TIMER_SCOPED("finite_support_convert");
     precondition(org.is_finite_app());

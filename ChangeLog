@@ -1,5 +1,15 @@
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/finite_support_conversion.hxx,
+	include/vaucanson/algorithms/normalized.hxx,
+	include/vaucanson/algorithms/standard.hxx,
+	include/vaucanson/algorithms/sub_automaton.hxx,
+	include/vaucanson/algorithms/sum.hxx,
+	include/vaucanson/algorithms/transpose.hxx: Reindent the functions
+	so they can be easily grepped.
+
+2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/invert.hxx: Fix the name of the guard.
 
 2008-03-03  Vivien Delmon  <vivien.delmon@lrde.epita.fr>

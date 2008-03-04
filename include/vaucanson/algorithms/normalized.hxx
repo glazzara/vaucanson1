@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -78,9 +79,10 @@ namespace vcsn {
   `--------------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_union_of_normalized_here(const AutomataBase<A>&,
-				   lhs_t& lhs,
-				   const rhs_t& rhs)
+  void
+  do_union_of_normalized_here(const AutomataBase<A>&,
+			      lhs_t& lhs,
+			      const rhs_t& rhs)
   {
     TIMER_SCOPED("union_of_normalized");
     AUTOMATON_TYPES(lhs_t);
@@ -104,8 +106,9 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void union_of_normalized_here(Element<A, T>& lhs,
-				const Element<A, U>& rhs)
+  void
+  union_of_normalized_here(Element<A, T>& lhs,
+			   const Element<A, U>& rhs)
   {
     // assertion(lhs.structure() == rhs.structure())
     do_union_of_normalized_here(lhs.structure(), lhs, rhs);
@@ -160,9 +163,10 @@ namespace vcsn {
   | concatenate_of_normalized |
   `--------------------------*/
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_concatenate_of_normalized_here(const AutomataBase<A>&,
-					 lhs_t& lhs,
-					 const rhs_t& rhs)
+  void
+  do_concatenate_of_normalized_here(const AutomataBase<A>&,
+				    lhs_t& lhs,
+				    const rhs_t& rhs)
   {
     TIMER_SCOPED("concatenate_of_normalized");
     AUTOMATON_TYPES(rhs_t);
@@ -228,8 +232,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void concatenate_of_normalized_here(Element<A, T>& lhs,
-				      const Element<A, U>& rhs)
+  void
+  concatenate_of_normalized_here(Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assertion(lhs.structure() == rhs.structure())
     do_concatenate_of_normalized_here(lhs.structure(), lhs, rhs);
@@ -237,8 +241,7 @@ namespace vcsn {
 
   template<typename A, typename T, typename U>
   Element<A, T>
-  concatenate_of_normalized(const Element<A, T>& lhs,
-			    const Element<A, U>& rhs)
+  concatenate_of_normalized(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
@@ -250,8 +253,8 @@ namespace vcsn {
   | star_of_normalized |
   `-------------------*/
   template <typename A, typename auto_t>
-  void do_star_of_normalized_here(const AutomataBase<A>&,
-				  auto_t& a)
+  void
+  do_star_of_normalized_here(const AutomataBase<A>&, auto_t& a)
   {
     TIMER_SCOPED("star_of_normalized");
     AUTOMATON_TYPES(auto_t);
@@ -273,7 +276,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  void star_of_normalized_here(Element<A, T>& a)
+  void
+  star_of_normalized_here(Element<A, T>& a)
   {
     do_star_of_normalized_here(a.structure(), a);
   }
