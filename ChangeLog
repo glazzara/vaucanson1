@@ -1,5 +1,11 @@
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/aut_to_exp.hxx (do_in_aut_to_exp):
+	Do not use "precondition()" to check something done inside the
+	function.
+
+2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/finite_support_conversion.hxx,
 	include/vaucanson/algorithms/normalized.hxx,
 	include/vaucanson/algorithms/standard.hxx,
