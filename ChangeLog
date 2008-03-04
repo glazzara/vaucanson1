@@ -1,5 +1,10 @@
 2008-03-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Remove generated file of the svn..
+	* include/generic_contexts.mk: Remove, since generated.
+
+2008-03-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fixe script incompatibilities with Mac.
 	* include/generate_headers.sh: Remove use of -printf with find,
 	    since this option doesn't exist on BSD find.
