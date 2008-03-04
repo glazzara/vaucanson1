@@ -1,5 +1,13 @@
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make sure preconditions in code match Doxygen documentation.
+
+	* src/tests/sanity/hhck.pl: New file.
+	* src/tests/sanity/Makefile.am (EXTRA_DIST): Distribute it.
+	(hhck, check-local): New rules.
+
+2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/krat_exp_expand.hh: Add missing
 	@file comment.
 	* include/vaucanson/algorithms/isomorph.hh: Make sure Doxygen

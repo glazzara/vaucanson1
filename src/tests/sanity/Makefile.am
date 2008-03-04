@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-EXTRA_DIST = generate_files.sh
+EXTRA_DIST = generate_files.sh hhck.pl
 
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include \
 	      -DVCSN_SANITY_CHECK
@@ -23,3 +23,11 @@ include check-programs.mk
 
 # We don't run the resulting tests, there is no point in doing so, as
 # they just check that the syntax is ok.
+
+
+
+.PHONY: hhck
+hhck:
+	$(srcdir)/hhck.pl $(top_srcdir)/include/vaucanson/algorithms/*.hh
+
+check-local: hhck
