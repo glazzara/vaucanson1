@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -216,19 +216,10 @@ namespace vcsn
     }
 
 
-    /**
-       * @brief Load automaton from stream.
-       *
-       * This method uses the Factory Method design pattern. The factory has to
-       * be registered with the macro register_all_factory(f, Auto) (where f is
-       * the factory, and Auto the template parameter.
-       *
-       * @arg \c Auto	  Type of the automaton.
-       * @arg \c IStream  Type of the input stream.
-       *
-       * @param a	Automaton to save.
-       * @param in	Input stream.
-       */
+    // Load an automaton.  This method uses the Factory Method design
+    // pattern. The factory has to be registered with the macro
+    // register_all_factory(f, Auto) (where f is the factory, and Auto
+    // the template parameter.
     template <class Auto>
     template <class IStream>
     void

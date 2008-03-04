@@ -1,5 +1,18 @@
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/krat_exp_expand.hh: Add missing
+	@file comment.
+	* include/vaucanson/algorithms/isomorph.hh: Make sure Doxygen
+	sees the brief comment.
+	* include/vaucanson/algorithms/berry_sethi.hh: Typo in Doxygen
+	comment.
+	* include/vaucanson/algorithms/brzozowski.hh: Likewise.
+	* include/vaucanson/xml/xml_converter.hxx
+	(xml_converter<Auto>::load): Suppress redundant Doxygen
+	documentation.
+
+2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* src/tests/sanity/generate_files.sh: Simplify the script,
 	and output the "#include" twice to detect missing inclusion guards.
 

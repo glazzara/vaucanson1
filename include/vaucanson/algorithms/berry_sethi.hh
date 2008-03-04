@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 #ifndef VCSN_ALGORITHMS_BERRY_SETHI_HH
 # define VCSN_ALGORITHMS_BERRY_SETHI_HH
 
-/** @addtogroups algorithms *//** @{ */
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file berry_sethi.hh
  *

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,6 +18,14 @@
 # define VCSN_ALGORITHMS_KRAT_EXP_EXPAND_HH
 
 # include <vaucanson/design_pattern/design_pattern.hh>
+
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file algorithms/krat_exp_expand.hh
+ *
+ * Expand a k-rational-expression.
+ */
+/** @} */
 
 namespace vcsn {
 
