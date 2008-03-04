@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ namespace vcsn {
        *
        * <h1>Assertions</h1>
        *
-       * Assertions are a weak kind of contract, which states that a
+       * Assertions are a weak kind of contract that states that a
        * specified property must hold.
        *
        * A failed assertion should always mean that an internal
@@ -66,10 +66,10 @@ namespace vcsn {
        *
        * <h1>Postconditions</h1>
        *
-       * Postconditions ensure that the result of a computation exhibit the
+       * Postconditions ensure that the result of a computation exhibits the
        * specified properties.
        *
-       * Breach of a precondition should show that an algorithm is false.
+       * Breach of a postcondition should show that an algorithm is bogus.
        *
        * <h1>Call to pure abstract services</h1>
        *
@@ -85,13 +85,13 @@ namespace vcsn {
        *
        * <h2> Recommendations </h2>
        *
-       * Recommendations are  a kind of assertions which  does not cause
-       * the  program to  stop.	 So  a failed  recommendation  will only
-       * display  a warning  onto the  error output.  It means	that not
-       * respecting  the  condition  might  be dangerous  under	 certain
+       * Recommendations are a kind of assertions that do not cause
+       * the program to stop.  A failed recommendation will only
+       * output a warning onto the error stream.  It means that not
+       * respecting the condition might be dangerous under certain
        * circumstances, but may work if you know what you are doing.
        *
-       * Breach	 of  a	recommendation	means you  are	doing  something
+       * Breach of a recommendation means you are doing something
        * potentially dangerous.
        *
        * <h2>Deprecated features</h2>
