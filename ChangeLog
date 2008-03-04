@@ -1,5 +1,11 @@
 2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/minimization_moore.hxx
+	(minimization_moore_here, minimization_moore): Make sure that the
+	input is deterministic.
+
+2008-03-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/complement.hh: Use @pre to
 	document preconditions.
 

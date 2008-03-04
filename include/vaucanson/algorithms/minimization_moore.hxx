@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
 
 # include <vaucanson/algorithms/minimization_moore.hh>
+# include <vaucanson/algorithms/is_deterministic.hh>
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/delta_kind.hh>
@@ -44,12 +45,8 @@ namespace vcsn {
   /*-------------------.
   | minimization_moore |
   `-------------------*/
-  // preconditions :
-  // - the input automaton is deterministic or co-deterministic
-  //   according to Transposed;
-  // - the output automaton is well initialized with good sets ;
-  //
-
+  // precondition : the input automaton is deterministic or
+  // co-deterministic according to Transposed
   template<typename A, typename T, bool Transposed>
   void
   do_minimization_moore(const Element<A, T>& input, Element<A, T>& output)
@@ -230,6 +227,7 @@ namespace vcsn {
   void
   minimization_moore_here(Element<A, T>& a)
   {
+    precondition(is_deterministic(a));
     Element<A, T> output(a.structure());
     do_minimization_moore<A, T, false>(a, output);
     a = output;
@@ -240,6 +238,7 @@ namespace vcsn {
   Element<A, T>
   minimization_moore(const Element<A, T>& a)
   {
+    precondition(is_deterministic(a));
     Element<A, T> output(a.structure());
     do_minimization_moore<A, T, false>(a, output);
     return output;
