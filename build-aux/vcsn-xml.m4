@@ -25,13 +25,6 @@ AC_DEFUN([_VCSN_CHECK_XML],
    else
       XERCES_EXTRA_CPPFLAGS=''
       XERCES_EXTRA_LDFLAGS=''
-      for ac_xerces_path_tmp in /usr /usr/local /opt /opt/local ; do
-	if test -d "$ac_xerces_path_tmp/include/xercesc" && test -r "$ac_xerces_path_tmp/include/xercesc"; then
-	  XERCES_EXTRA_LDFLAGS="-L$ac_xerces_path_tmp/lib"
-	  XERCES_EXTRA_CPPFLAGS="-I$ac_xerces_path_tmp/include"
-	  break;
-	fi
-      done
     fi
 
    AC_LANG_PUSH([C++])
@@ -42,7 +35,7 @@ AC_DEFUN([_VCSN_CHECK_XML],
    if test x$vcsn_cv_xerces = xunknown; then
         vcsn_cv_xerces=no
         vcsn_save_CPPFLAGS=$CPPFLAGS
-        CPPFLAGS="$XERCES_EXTRA_CPPFLAGS $CPPFLAGS"
+        CPPFLAGS="$CPPFLAGS $XERCES_EXTRA_CPPFLAGS"
         AC_CHECK_HEADER([xercesc/util/XercesVersion.hpp],
                         [AC_COMPILE_IFELSE([AC_LANG_SOURCE([
 #include <xercesc/util/XercesVersion.hpp>
@@ -67,8 +60,8 @@ AC_DEFUN([_VCSN_CHECK_XML],
                    vcsn_save_CPPFLAGS=$CPPFLAGS
                    vcsn_save_LDFLAGS=$LDFLAGS
                    vcsn_save_LIBS=$LIBS
-                   CPPFLAGS="$XERCES_EXTRA_CPPFLAGS $CPPFLAGS"
-                   LDFLAGS="$XERCES_EXTRA_LDFLAGS $LDFLAGS"
+                   CPPFLAGS="$CPPFLAGS $XERCES_EXTRA_CPPFLAGS"
+                   LDFLAGS="$LDFLAGS $XERCES_EXTRA_LDFLAGS"
                    LIBS="$LIBS -lxerces-c"
                    AC_LINK_IFELSE([AC_LANG_SOURCE([
 #include <xercesc/util/XMLUniDefs.hpp>
@@ -140,8 +133,8 @@ namespace vcsn
       AC_ERROR([cannot link with Xerces-C++ library])
    fi
 
-   CPPFLAGS="$XERCES_EXTRA_CPPFLAGS $CPPFLAGS"
-   LDFLAGS="$XERCES_EXTRA_LDFLAGS $LDFLAGS"
+   CPPFLAGS="$CPPFLAGS $XERCES_EXTRA_CPPFLAGS"
+   LDFLAGS="$LDFLAGS $XERCES_EXTRA_LDFLAGS"
    LIBS="$LIBS -lxerces-c"
 
    AC_LANG_POP([C++])

@@ -1,3 +1,10 @@
+2008-03-05  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Revert of patch 1866 and fix xerces cppflags.
+	* build-aux/vcsn-boost.m4: .
+	* build-aux/vcsn-xml.m4: include of /usr /usr/local /opt /opt/local
+	  already done by gcc.
+
 2008-03-05  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix Ticket #118.
