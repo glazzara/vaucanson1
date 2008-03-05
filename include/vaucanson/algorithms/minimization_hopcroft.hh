@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@ namespace vcsn {
    * This algorithms works with both Boolean and weighted automata.
    *
    * @param a The automaton to minimize.
+   * @pre is Realtime.
    *
    * @return A fresh automaton that is the quotient of 'a'.
    */

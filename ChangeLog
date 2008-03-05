@@ -1,3 +1,12 @@
+2008-03-05  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix Ticket #118.
+	quotient now checks its argument is Realtime.
+	* include/vaucanson/algorithms/minimization_hopcroft.hh:
+	  Documented here.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx:
+	  Checked here.
+
 2008-03-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Remove generated file of the svn..
