@@ -1,3 +1,10 @@
+2008-03-06  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix previous patch r1893.
+	Replace "Realtime" with "realtime", so that hhck.pl can match
+	the precondition.
+	* include/vaucanson/algorithms/minimization_hopcroft.hh: Here.
+
 2008-03-05  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Revert of patch 1866 and fix xerces cppflags.

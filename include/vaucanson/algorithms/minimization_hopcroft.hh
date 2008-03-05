@@ -55,7 +55,7 @@ namespace vcsn {
    * This algorithms works with both Boolean and weighted automata.
    *
    * @param a The automaton to minimize.
-   * @pre is Realtime.
+   * @pre is realtime.
    *
    * @return A fresh automaton that is the quotient of 'a'.
    */
