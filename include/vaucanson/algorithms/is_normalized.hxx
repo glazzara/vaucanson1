@@ -32,12 +32,12 @@ namespace vcsn {
     bool is_normalized = false;
     for_all_const_transitions(e, trans)
     {
-      is_normalized ^= is_letter_support(trans.series_of(*e));
+      is_normalized ^= is_support_in_alphabet(trans.series_of(*e));
       for_all_const_(series_set_elt_t::support_t,
 		     i,
 		     trans.series_of(*e).supp())
       {
-	is_normalized ^= is_letter_support(trans.series_of(*e).get(*i));
+	is_normalized ^= is_support_in_alphabet(trans.series_of(*e).get(*i));
 	if (!is_normalized)
 	  return false;
       }

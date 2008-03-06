@@ -1,5 +1,14 @@
 2008-03-06  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Rename is_letter_support as is_support_in_alphabet #116.
+	* include/vaucanson/algebra/concept/series_base.hh: .
+	* include/vaucanson/algebra/concept/series_base.hxx: .
+	* include/vaucanson/algorithms/is_letterized.hxx: .
+	* include/vaucanson/algorithms/is_normalized.hxx: .
+	* include/vaucanson/algorithms/realtime.hxx: .
+
+2008-03-06  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Rename sum as union in taf-kit.
 	* taf-kit/src/common_automaton_commands.hh: .
 

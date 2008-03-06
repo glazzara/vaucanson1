@@ -192,7 +192,7 @@ namespace vcsn {
 
   template <class S, class T>
   bool
-  is_letter_support(const Element<S, T>& s)
+  is_support_in_alphabet(const Element<S, T>& s)
   {
     typedef typename algebra::series_traits<T>::support_t support_t;
     support_t supp = s.supp();

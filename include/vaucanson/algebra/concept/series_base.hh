@@ -186,7 +186,7 @@ namespace vcsn {
   /// Returns true if the support of the series is only composed of letters.
   template <typename S, typename T>
   bool
-  is_letter_support(const Element<S, T>& s);
+  is_support_in_alphabet(const Element<S, T>& s);
 
   /// Make the first series be the support of the second.
   template <typename S1, typename S2, typename T1, typename T2>

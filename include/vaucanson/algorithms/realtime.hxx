@@ -154,7 +154,7 @@ namespace vcsn {
     TIMER_SCOPED("is_realtime (automaton)");
     AUTOMATON_TYPES(Auto_);
     for_all_const_transitions(e, a)
-      if (!is_letter_support(a.series_of(*e)))
+      if (!is_support_in_alphabet(a.series_of(*e)))
 	return false;
     return true;
   }
