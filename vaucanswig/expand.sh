@@ -198,7 +198,7 @@ cat <<EOF
 
 INCLUDES = -I\$(PYTHON_PREFIX)/include/python\$(PYTHON_VERSION) -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
-AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS -DVCSN_DEFAULT_GRAPH_IMPL=legacy
+AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS -DVCSN_DEFAULT_GRAPH_IMPL=listg
 AM_CXXFLAGS = \$(CXXFLAGS_DEBUG)
 AM_LDFLAGS = -avoid-version
 

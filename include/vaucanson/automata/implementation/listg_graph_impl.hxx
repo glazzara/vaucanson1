@@ -1,8 +1,8 @@
-// legacy_graph_impl.hxx: this file is part of the Vaucanson project.
+// listg_graph_impl.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HXX
-# define VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HXX
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LISTG_GRAPH_IMPL_HXX
+# define VCSN_AUTOMATA_IMPLEMENTATION_LISTG_GRAPH_IMPL_HXX
 
 # include <fstream>
 # include <sstream>
@@ -23,13 +23,13 @@
 # include <algorithm>
 # include <utility>
 
-# include <vaucanson/automata/implementation/legacy_graph_impl.hh>
+# include <vaucanson/automata/implementation/listg_graph_impl.hh>
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/static.hh>
 
 namespace vcsn
 {
-  namespace legacy
+  namespace listg
   {
 
     /*--------------------.
@@ -566,4 +566,4 @@ namespace vcsn
   }
 }
 
-#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HXX
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LISTG_GRAPH_IMPL_HXX

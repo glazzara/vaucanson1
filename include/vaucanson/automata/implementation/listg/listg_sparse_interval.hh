@@ -1,8 +1,8 @@
-// legacy_sparse_interval.hh: this file is part of the Vaucanson project.
+// listg_sparse_interval.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,11 +14,11 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_LEGACY_SPARSE_INTERVAL_HH
-# define VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_LEGACY_SPARSE_INTERVAL_HH
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_SPARSE_INTERVAL_HH
+# define VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_SPARSE_INTERVAL_HH
 
 /**
- * @file   automata/implementation/legacy/legacy_sparse_interval.hh
+ * @file   automata/implementation/listg/listg_sparse_interval.hh
  * @brief  Sparse interval and iterators specializations.
  *
  */
@@ -136,8 +136,8 @@ namespace vcsn
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/implementation/legacy/legacy_sparse_interval.hxx>
+#  include <vaucanson/automata/implementation/listg/listg_sparse_interval.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 
-#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_LEGACY_SPARSE_INTERVAL_HH
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_SPARSE_INTERVAL_HH

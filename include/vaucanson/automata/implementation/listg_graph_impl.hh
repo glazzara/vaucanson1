@@ -1,8 +1,8 @@
-// legacy_graph_impl.hh: this file is part of the Vaucanson project.
+// listg_graph_impl.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HH
-# define VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HH
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LISTG_GRAPH_IMPL_HH
+# define VCSN_AUTOMATA_IMPLEMENTATION_LISTG_GRAPH_IMPL_HH
 
 # include <set>
 # include <map>
@@ -31,12 +31,12 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
-# include <vaucanson/automata/implementation/legacy/legacy_handlers.hh>
-# include <vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh>
+# include <vaucanson/automata/implementation/listg/listg_handlers.hh>
+# include <vaucanson/automata/implementation/listg/listg_sparse_interval.hh>
 
 namespace vcsn
 {
-  namespace legacy
+  namespace listg
   {
     /// Graph
     template <class K, class WordValue, class WeightValue,
@@ -356,11 +356,11 @@ namespace vcsn
 # undef TParam
 # undef GRAPH
 
-  } // End of namespace legacy
+  } // End of namespace listg
 
 
   // This implementation can be used as an implementation of automaton.
-  VCSN_MAKE_AUTOMATON_TRAITS(legacy::Graph);
+  VCSN_MAKE_AUTOMATON_TRAITS(listg::Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,
@@ -370,7 +370,7 @@ namespace vcsn
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct transducer_traits<legacy::Graph<Kind,
+  struct transducer_traits<listg::Graph<Kind,
 					 WordValue,
 					 WeightValue,
 					 SeriesValue,
@@ -394,7 +394,7 @@ namespace vcsn
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct projection_traits<S, legacy::Graph<Kind,
+  struct projection_traits<S, listg::Graph<Kind,
 					    WordValue,
 					    WeightValue,
 					    SeriesValue,
@@ -402,7 +402,7 @@ namespace vcsn
 					    Tag,
 					    GeometryCoords> >
   {
-    typedef legacy::Graph<Kind, WordValue, WeightValue, SeriesValue,
+    typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
 			  Letter, Tag, GeometryCoords>
 			      self_t;
     typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
@@ -415,7 +415,7 @@ namespace vcsn
 			      series_set_elt_value_t;
 
     typedef
-    legacy::Graph<Kind,
+    listg::Graph<Kind,
 		  monoid_elt_value_t,
 		  semiring_elt_value_t,
 		  series_set_elt_value_t,
@@ -432,14 +432,14 @@ namespace vcsn
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct output_projection_traits<legacy::Graph<Kind,
+  struct output_projection_traits<listg::Graph<Kind,
 						WordValue,
 						WeightValue,
 						SeriesValue,
 						Letter,
 						Tag, GeometryCoords> >
   {
-    typedef legacy::Graph<Kind, WordValue, WeightValue, SeriesValue,
+    typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
 			  Letter, Tag, GeometryCoords>
 			      self_t;
 
@@ -455,7 +455,7 @@ namespace vcsn
 			      semiring_elt_value_t;
 
     typedef
-    legacy::Graph<Kind,
+    listg::Graph<Kind,
 		  monoid_elt_value_t,
 		  semiring_elt_value_t,
 		  series_set_elt_value_t,
@@ -473,7 +473,7 @@ namespace vcsn
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct extension_traits<legacy::Graph<Kind,
+  struct extension_traits<listg::Graph<Kind,
 					WordValue,
 					WeightValue,
 					SeriesValue,
@@ -481,7 +481,7 @@ namespace vcsn
 					Tag,
 					GeometryCoords> >
   {
-    typedef legacy::Graph<Kind, WordValue, WeightValue,
+    typedef listg::Graph<Kind, WordValue, WeightValue,
 			  SeriesValue, Letter, Tag, GeometryCoords>
 			      self_t;
     typedef typename automaton_traits<self_t>::monoid_elt_value_t
@@ -492,7 +492,7 @@ namespace vcsn
 			      series_set_elt_value_t;
 
     typedef
-    legacy::Graph<Kind,
+    listg::Graph<Kind,
 		  monoid_elt_value_t,
 		  SeriesValue,
 		  series_set_elt_value_t,
@@ -505,7 +505,7 @@ namespace vcsn
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/implementation/legacy_graph_impl.hxx>
+#  include <vaucanson/automata/implementation/listg_graph_impl.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_GRAPH_IMPL_HH
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_LISTG_GRAPH_IMPL_HH

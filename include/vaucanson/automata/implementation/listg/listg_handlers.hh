@@ -1,8 +1,8 @@
-// legacy_handlers.hh: this file is part of the Vaucanson project.
+// listg_handlers.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_LEGACY_HANDLERS_HH
-# define VCSN_AUTOMATA_IMPLEMENTATION_LEGACY_LEGACY_HANDLERS_HH
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_HANDLERS_HH
+# define VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_HANDLERS_HH
 
 # include <vaucanson/automata/concept/handlers.hh>
 
@@ -50,7 +50,7 @@ namespace vcsn
 } // vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-# include <vaucanson/automata/implementation/legacy/legacy_handlers.hxx>
+# include <vaucanson/automata/implementation/listg/listg_handlers.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 #endif

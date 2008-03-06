@@ -1,5 +1,30 @@
 2008-03-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Rename legacy to listg.
+	* include/Makefile.am: .
+	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hh: Remove.
+	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hxx: Remove.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hh: Remove.
+	* include/vaucanson/automata/implementation/legacy/legacy_sparse_interval.hxx: Remove.
+	* include/vaucanson/automata/implementation/legacy: Remove.
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hh: Remove.
+	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx: Remove.
+	* include/vaucanson/automata/implementation/listg/legacy_handlers.hh: Remove.
+	* include/vaucanson/automata/implementation/listg/legacy_handlers.hxx: Remove.
+	* include/vaucanson/automata/implementation/listg/legacy_sparse_interval.hh: Remove.
+	* include/vaucanson/automata/implementation/listg/legacy_sparse_interval.hxx: Remove.
+	* include/vaucanson/automata/implementation/listg/listg_handlers.hh: New.
+	* include/vaucanson/automata/implementation/listg/listg_handlers.hxx: New.
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hh: New.
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx: New.
+	* include/vaucanson/automata/implementation/listg: New.
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: New.
+	* vaucanswig/expand.sh: .
+	* vaucanswig/meta/Makefile.am: .
+
+2008-03-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add ChangeLog entries from the BMI branch.
   2008-02-27  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
