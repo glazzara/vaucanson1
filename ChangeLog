@@ -1,5 +1,10 @@
 2008-03-06  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Rename sum as union in taf-kit.
+	* taf-kit/src/common_automaton_commands.hh: .
+
+2008-03-06  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Fix edit-automaton in taf-kit #131.
 	* taf-kit/src/edition_commands.hxx: Now it's possible to delete the
 	  last transition and the error message is correct.

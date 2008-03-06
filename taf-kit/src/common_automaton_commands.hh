@@ -88,8 +88,12 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (quotient)
 				  ARG_KIND (aut)
 				  ALGOS (quotient, realtime));
 
-DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
-			 ALGO (sum));
+DEFINE_COMMAND (NAME (union)
+		CODE (/* Empty */)
+		KEEP_AUTOMATON (
+		  sum (get_aut (args.args[1]),
+		       get_aut (args.args[2])))
+		RETURNVALUE (0));
 
 DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 			 ALGO (product));
@@ -173,7 +177,7 @@ DEFINE_COMMAND (NAME (star_of_standard)
 		   "Give the concatenation of standard automata."),	\
     COMMAND_ENTRY (star_of_standard, Aut,				\
 		   "Give the star of automaton `aut'."),	\
-    COMMAND_ENTRY (sum, AutAut, "Give the sum of `aut1' and `aut2'."),	\
+    COMMAND_ENTRY (union, AutAut, "Give the union of `aut1' and `aut2'."),	\
     COMMAND_ENTRY (transpose, Aut, "Transpose the automaton `aut'."),	\
     COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")		\
 									\
