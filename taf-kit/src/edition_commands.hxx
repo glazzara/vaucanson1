@@ -136,6 +136,7 @@ namespace edition_commands
   static htransition_t get_transition (automaton_t& a)
   {
     int n_trans = get_int ();
+    int cpt = n_trans;
     htransition_t trans;
 
     for_all_states (s, a)
@@ -144,13 +145,9 @@ namespace edition_commands
       a.deltac(succ, *s, delta_kind::transitions());
       for (std::set<htransition_t>::const_iterator h = succ.begin ();
 	   h != succ.end (); ++h)
-	if (--n_trans == 0)
-	  trans = *h;
-      if (n_trans == -1)
-	break;
+	if (--cpt == 0)
+	  return *h;
     }
-    if (n_trans < 0)
-      return trans;
     std::ostringstream os;
     os << "Error: no transition " << n_trans << ".";
     throw std::logic_error (os.str ());

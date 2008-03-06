@@ -1,3 +1,9 @@
+2008-03-06  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix edit-automaton in taf-kit #131.
+	* taf-kit/src/edition_commands.hxx: Now it's possible to delete the
+	  last transition and the error message is correct.
+
 2008-03-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix htransition_t operators in boostg.
