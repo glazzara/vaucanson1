@@ -1,5 +1,12 @@
 2008-03-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix htransition_t operators in boostg.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx:
+	Fix operators <, <=, >, >=:
+	  If they have the same source and destination, compare the labels.
+
+2008-03-06  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Rename legacy to listg.
 	* include/Makefile.am: .
 	* include/vaucanson/automata/implementation/legacy/legacy_handlers.hh: Remove.

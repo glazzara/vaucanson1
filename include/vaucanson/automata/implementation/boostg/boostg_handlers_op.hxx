@@ -28,7 +28,10 @@ bool operator Op (const handler<transition_h, boost::multi_index::detail::hashed
                   const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2)\
 {							\
   if (h1.value()->from_ == h2.value()->from_)		\
-    return h1.value()->to_ Op h2.value()->to_;		\
+    if (h1.value()->to_ == h2.value()->to_)		\
+      return h1.value()->label_ Op h2.value()->label_;	\
+    else						\
+      return h1.value()->to_ Op h2.value()->to_;	\
   else							\
     return h1.value()->from_ Op h2.value()->from_;	\
 }
