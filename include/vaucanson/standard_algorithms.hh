@@ -22,6 +22,8 @@
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/trim.hh>
+# include <vaucanson/algorithms/is_empty.hh>
+# include <vaucanson/algorithms/has_succ_comp.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/realtime.hh>

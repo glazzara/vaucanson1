@@ -1,3 +1,31 @@
+2008-03-07  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Add algorithms is_empty and has_succ_comp
+	* include/vaucanson/algorithms/has_succ_comp.hh,
+	* include/vaucanson/algorithms/has_succ_comp.hxx:
+	New. Add has_succ_comp.
+	* include/vaucanson/algorithms/is_empty.hh,
+	* include/vaucanson/algorithms/is_empty.hxx:
+	New. Add is_empty.
+	* include/vaucanson/standard_algorithms.hh:
+	Add #include for the new algorithms
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/z_commands.cc:
+	Remove previous is_empty, add is_empty and has_succ_comp
+	to the list displayed with -l.
+	* taf-kit/src/common_commands.hh:
+	Add #include for the new algorithms.  This may be
+	unnecessary.
+
+	This fixes tickets #37 and #119.
+	is_empty <aut> returns true if aut has no state,
+	false otherwise.
+	has_succ_comp <aut> returns true if aut has at least one
+	state that is both accessible and co-accessible.
+
+	Note that is_empty behaves differently from the version
+	that was previously available in taf-kit.
+
 2008-03-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add test to test suite on a bug related to std::set.

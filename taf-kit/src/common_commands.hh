@@ -31,6 +31,8 @@
 # include <vaucanson/tools/dot_display.hh>
 # include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/algorithms/isomorph.hh>
+# include <vaucanson/algorithms/is_empty.hh>
+# include <vaucanson/algorithms/has_succ_comp.hh>
 
 using namespace CONTEXT_NAMESPACE;
 
@@ -75,10 +77,17 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
 */
 DEFINE_COMMAND (NAME (is_empty)
 		CODE (
-		  int states = trim (get_aut (args.args[1])).states ().size ())
+		      bool empty = is_empty (get_aut (args.args[1])))
 		OUTPUT_ON_VERBOSE (
-		  (states ? "Entry is not empty\n" : "Entry is empty\n"))
-		RETURNVALUE (states == 0 ? 0 : 1));
+		  (empty ? "Entry is empty\n" : "Entry is not empty\n"))
+		RETURNVALUE (empty ? 0: 1));
+
+DEFINE_COMMAND (NAME (has_succ_comp)
+		CODE (
+                      bool succ_comp = has_succ_comp (get_aut (args.args[1])))
+		OUTPUT_ON_VERBOSE (
+		  (succ_comp ? "Entry has successful computation\n" : "Entry has no successful computation\n"))
+		RETURNVALUE (succ_comp ? 0: 1));
 
 DEFINE_COMMAND (NAME (info)
 		CODE (automaton_t a = get_aut (args.args[1]))
