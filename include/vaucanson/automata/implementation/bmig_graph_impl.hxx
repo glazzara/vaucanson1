@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,25 +15,25 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HXX_
-# define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HXX_
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HXX_
+# define VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HXX_
 
-# include <vaucanson/automata/implementation/boostg_graph_impl.hh>
+# include <vaucanson/automata/implementation/bmig_graph_impl.hh>
 
 namespace vcsn
 {
-  namespace boostg
+  namespace bmig
   {
 
     /*--------------------.
     | Convenient macros.  |
     `--------------------*/
 
-  # define BOOSTGRAPH_TPARAM						\
+  # define BMIGRAPH_TPARAM						\
     template <class Kind, class WordValue, class WeightValue,		\
               class SeriesValue, class Letter, class Tag, class GeometryCoords>
 
-  # define BOOSTGRAPH							\
+  # define BMIGRAPH							\
     Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
 
     /*-------------------------.
@@ -44,8 +44,8 @@ namespace vcsn
     | Constructors.  |
     `---------------*/
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::Graph ()
+    BMIGRAPH_TPARAM
+    BMIGRAPH::Graph ()
       : initial_bitset_(0),
         final_bitset_(0),
         number_of_epsilon_(0),
@@ -62,8 +62,8 @@ namespace vcsn
     **  However, the 'initial_number_of_state' parameter is used and implies
     **  the creation of this number of states.
     */
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::Graph (unsigned initial_number_of_states,
+    BMIGRAPH_TPARAM
+    BMIGRAPH::Graph (unsigned initial_number_of_states,
                       unsigned)
       : initial_bitset_(initial_number_of_states),
         final_bitset_(initial_number_of_states),
@@ -78,8 +78,8 @@ namespace vcsn
       }
     }
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::Graph (const self_t& g)
+    BMIGRAPH_TPARAM
+    BMIGRAPH::Graph (const self_t& g)
     {
       tag_ = g.tag_;
       initial_bitset_ = g.initial_bitset_;
@@ -146,14 +146,14 @@ namespace vcsn
     | Destructors.  |
     `--------------*/
 
-    BOOSTGRAPH_TPARAM
-    BOOSTGRAPH::~Graph ()
+    BMIGRAPH_TPARAM
+    BMIGRAPH::~Graph ()
     {
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::self_t&
-    BOOSTGRAPH::operator= (const self_t& g)
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::self_t&
+    BMIGRAPH::operator= (const self_t& g)
     {
       if (this == &g)
         return *this;
@@ -223,30 +223,30 @@ namespace vcsn
     | Basic accessors.  |
     `------------------*/
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::states_t
-    BOOSTGRAPH::states() const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::states_t
+    BMIGRAPH::states() const
     {
       return misc::Support<states_data_t>(states_);
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::edges_t
-    BOOSTGRAPH::edges() const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::edges_t
+    BMIGRAPH::edges() const
     {
       return edges_t(graph_);
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::initial_support_t
-    BOOSTGRAPH::initial () const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::initial_support_t
+    BMIGRAPH::initial () const
     {
       return initial_support_t(initial_);
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::final_support_t
-    BOOSTGRAPH::final () const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::final_support_t
+    BMIGRAPH::final () const
     {
       return final_support_t(final_);
     }
@@ -256,16 +256,16 @@ namespace vcsn
     | State manipulations.  |
     `----------------------*/
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     bool
-    BOOSTGRAPH::has_state (const hstate_t& s) const
+    BMIGRAPH::has_state (const hstate_t& s) const
     {
       return s < states_.size();
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::hstate_t
-    BOOSTGRAPH::add_state ()
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::hstate_t
+    BMIGRAPH::add_state ()
     {
       initial_bitset_.append(false);
       final_bitset_.append(false);
@@ -275,17 +275,17 @@ namespace vcsn
       return hstate_t(h);
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::hstate_t
-    BOOSTGRAPH::get_state (unsigned s) const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::hstate_t
+    BMIGRAPH::get_state (unsigned s) const
     {
       precondition(s < states_.size());
       return hstate_t(states_[s]);
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::del_state (const hstate_t& s)
+    BMIGRAPH::del_state (const hstate_t& s)
     {
       precondition (has_state(s));
 
@@ -337,9 +337,9 @@ namespace vcsn
       //postcondition(!has_state(h));
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::set_initial (const hstate_t& s,
+    BMIGRAPH::set_initial (const hstate_t& s,
                              const series_set_elt_value_t& v,
                              const series_set_elt_value_t& z)
     {
@@ -358,9 +358,9 @@ namespace vcsn
 	initial_.modify(initial_.find(s.value()), update_label<initial_value_t>(v));
     }
 
-    BOOSTGRAPH_TPARAM
-    const typename BOOSTGRAPH::series_set_elt_value_t&
-    BOOSTGRAPH::get_initial(const hstate_t& s, const series_set_elt_value_t &zero) const
+    BMIGRAPH_TPARAM
+    const typename BMIGRAPH::series_set_elt_value_t&
+    BMIGRAPH::get_initial(const hstate_t& s, const series_set_elt_value_t &zero) const
     {
       precondition(has_state(s));
       typename initial_t::const_iterator it = initial_.find(s.value());
@@ -370,25 +370,25 @@ namespace vcsn
       return it->second;
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     bool
-    BOOSTGRAPH::is_initial(const hstate_t& s, const series_set_elt_value_t&) const
+    BMIGRAPH::is_initial(const hstate_t& s, const series_set_elt_value_t&) const
     {
       precondition(has_state(s));
       return initial_bitset_[s];
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::clear_initial()
+    BMIGRAPH::clear_initial()
     {
       initial_.clear();
       initial_bitset_.reset();
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::set_final(const hstate_t& s,
+    BMIGRAPH::set_final(const hstate_t& s,
                           const series_set_elt_value_t& v,
                           const series_set_elt_value_t& z)
     {
@@ -407,9 +407,9 @@ namespace vcsn
 	final_.modify(final_.find(s.value()), update_label<final_value_t>(v));
     }
 
-    BOOSTGRAPH_TPARAM
-    const typename BOOSTGRAPH::series_set_elt_value_t&
-    BOOSTGRAPH::get_final(const hstate_t& s, const series_set_elt_value_t &zero) const
+    BMIGRAPH_TPARAM
+    const typename BMIGRAPH::series_set_elt_value_t&
+    BMIGRAPH::get_final(const hstate_t& s, const series_set_elt_value_t &zero) const
     {
       precondition(has_state(s));
       typename final_t::const_iterator it = final_.find(s.value());
@@ -419,17 +419,17 @@ namespace vcsn
       return it->second;
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     bool
-    BOOSTGRAPH::is_final(const hstate_t& s, const series_set_elt_value_t&) const
+    BMIGRAPH::is_final(const hstate_t& s, const series_set_elt_value_t&) const
     {
       precondition(has_state(s));
       return final_bitset_[s];
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::clear_final()
+    BMIGRAPH::clear_final()
     {
       final_.clear();
       final_bitset_.reset();
@@ -439,9 +439,9 @@ namespace vcsn
     | Edge manipulations.  |
     `---------------------*/
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     bool
-    BOOSTGRAPH::has_edge (const hedge_t& h) const
+    BMIGRAPH::has_edge (const hedge_t& h) const
     {
       succ_range r = graph_.equal_range(boost::make_tuple(h.value()->from_,
                                                     h.value()->label_));
@@ -453,17 +453,17 @@ namespace vcsn
       return it != r.second;
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::hedge_t
-    BOOSTGRAPH::add_edge (const hstate_t& from, const hstate_t& to, const label_t& l)
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::hedge_t
+    BMIGRAPH::add_edge (const hstate_t& from, const hstate_t& to, const label_t& l)
     {
       //hlabel_t hl = label_container_.insert (l);
       return hedge_t (graph_.insert (edge_data_t (from.value(), to.value(), l)).first);
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::del_edge (const hedge_t& h)
+    BMIGRAPH::del_edge (const hedge_t& h)
     {
       precondition (has_edge(h));
 
@@ -476,40 +476,40 @@ namespace vcsn
       //postcondition(!has_edge(h));
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::hstate_t
-    BOOSTGRAPH::src_of (const hedge_t& h) const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::hstate_t
+    BMIGRAPH::src_of (const hedge_t& h) const
     {
       return hstate_t(h.value()->from_);
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::hstate_t
-    BOOSTGRAPH::dst_of (const hedge_t& h) const
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::hstate_t
+    BMIGRAPH::dst_of (const hedge_t& h) const
     {
       return hstate_t(h.value()->to_);
     }
 
-    BOOSTGRAPH_TPARAM
-    const typename BOOSTGRAPH::label_t&
-    BOOSTGRAPH::label_of (const hedge_t& h) const
+    BMIGRAPH_TPARAM
+    const typename BMIGRAPH::label_t&
+    BMIGRAPH::label_of (const hedge_t& h) const
     {
       return h.value()->label_;
 //      return label_container_.get_label(h.value()->label_);
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     void
-    BOOSTGRAPH::update(const hedge_t& h, const label_t& l)
+    BMIGRAPH::update(const hedge_t& h, const label_t& l)
     {
       label_container_.update(h->label_, l);
       graph_.modify(h.value(), update_hlabel<hlabel_t>(h->label_));
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     template <class S>
     bool
-    BOOSTGRAPH::exists (const AutomataBase<S>& s) const
+    BMIGRAPH::exists (const AutomataBase<S>& s) const
     {
       typename WordValue::iterator	it;
       typename label_t::const_iterator	r;
@@ -537,34 +537,34 @@ namespace vcsn
       return true;
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     inline
-    typename BOOSTGRAPH::tag_t&
-    BOOSTGRAPH::tag ()
+    typename BMIGRAPH::tag_t&
+    BMIGRAPH::tag ()
     {
       return tag_;
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     inline
-    const typename BOOSTGRAPH::tag_t&
-    BOOSTGRAPH::tag () const
+    const typename BMIGRAPH::tag_t&
+    BMIGRAPH::tag () const
     {
       return tag_;
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     inline
-    typename BOOSTGRAPH::geometry_t&
-    BOOSTGRAPH::geometry ()
+    typename BMIGRAPH::geometry_t&
+    BMIGRAPH::geometry ()
     {
       return geometry_;
     }
 
-    BOOSTGRAPH_TPARAM
+    BMIGRAPH_TPARAM
     inline
-    const typename BOOSTGRAPH::geometry_t&
-    BOOSTGRAPH::geometry () const
+    const typename BMIGRAPH::geometry_t&
+    BMIGRAPH::geometry () const
     {
       return geometry_;
     }
@@ -572,7 +572,7 @@ namespace vcsn
     template <class Kind, class WordValue, class WeightValue, class SeriesValue,
               class Letter, class Tag, class GeometryCoords, class I>
     Tag&
-    op_tag(const AutomataBase<I>&, BOOSTGRAPH &g)
+    op_tag(const AutomataBase<I>&, BMIGRAPH &g)
     {
       return g.tag();
     }
@@ -580,30 +580,30 @@ namespace vcsn
     template <class Kind, class WordValue, class WeightValue, class SeriesValue,
               class Letter, class Tag, class GeometryCoords, class I>
     const Tag&
-    op_tag(const AutomataBase<I>&, BOOSTGRAPH &g)
+    op_tag(const AutomataBase<I>&, BMIGRAPH &g)
     {
       return g.tag();
     }
 
     template <class Kind, class WordValue, class WeightValue, class SeriesValue,
               class Letter, class Tag, class GeometryCoords, class I>
-    typename BOOSTGRAPH::geometry_t&
-    op_geometry(const AutomataBase<I>&, BOOSTGRAPH &g)
+    typename BMIGRAPH::geometry_t&
+    op_geometry(const AutomataBase<I>&, BMIGRAPH &g)
     {
       return g.geometry();
     }
 
     template <class Kind, class WordValue, class WeightValue, class SeriesValue,
               class Letter, class Tag, class GeometryCoords, class I>
-    const typename BOOSTGRAPH::geometry_t&
-    op_geometry(const AutomataBase<I>&, const BOOSTGRAPH &g)
+    const typename BMIGRAPH::geometry_t&
+    op_geometry(const AutomataBase<I>&, const BMIGRAPH &g)
     {
       return g.geometry();
     }
 
-    BOOSTGRAPH_TPARAM
-    typename BOOSTGRAPH::graph_data_t::const_iterator
-    BOOSTGRAPH::find_edge(const state_t& from, const state_t& to,
+    BMIGRAPH_TPARAM
+    typename BMIGRAPH::graph_data_t::const_iterator
+    BMIGRAPH::find_edge(const state_t& from, const state_t& to,
                           const hlabel_t& label) const
     {
       succ_range r = graph_.equal_range(::boost::make_tuple(from, label));
@@ -618,11 +618,11 @@ namespace vcsn
     `------------------*/
 
   # define DEFINE_DELTA_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
-    BOOSTGRAPH_TPARAM								\
+    BMIGRAPH_TPARAM								\
     template <typename OutputIterator, typename Query>				\
     void									\
-    BOOSTGRAPH::FunName(OutputIterator res,					\
-                        const typename BOOSTGRAPH::hstate_t& s,			\
+    BMIGRAPH::FunName(OutputIterator res,					\
+                        const typename BMIGRAPH::hstate_t& s,			\
                         const Query& query,					\
                         ::vcsn::delta_kind::DeltaKind) const			\
     {										\
@@ -641,11 +641,11 @@ namespace vcsn
   # undef DEFINE_DELTA_FUNCTION
 
   # define DEFINE_DELTAF_FUNCTION(FunName, DeltaKind, Target, IsBool, Action)	\
-    BOOSTGRAPH_TPARAM								\
+    BMIGRAPH_TPARAM								\
     template <typename Functor, typename Query>					\
     void									\
-    BOOSTGRAPH::FunName(Functor& f,						\
-                        const typename BOOSTGRAPH::hstate_t& s,			\
+    BMIGRAPH::FunName(Functor& f,						\
+                        const typename BMIGRAPH::hstate_t& s,			\
                         const Query& query,					\
                         ::vcsn::delta_kind::DeltaKind,				\
                         misc::IsBool##_t) const					\
@@ -683,11 +683,11 @@ namespace vcsn
     }
 
   # define DEFINE_DELTAF_HELPER(FunName)					\
-    BOOSTGRAPH_TPARAM								\
+    BMIGRAPH_TPARAM								\
     template <typename Functor, class Query, typename DeltaKind>		\
     void									\
-    BOOSTGRAPH::FunName(Functor& f,						\
-                    const typename BOOSTGRAPH::hstate_t& s,			\
+    BMIGRAPH::FunName(Functor& f,						\
+                    const typename BMIGRAPH::hstate_t& s,			\
                     const Query& query,						\
                     ::vcsn::delta_kind::kind<DeltaKind> k) const		\
     {										\
@@ -703,9 +703,9 @@ namespace vcsn
 
 
     // End of syntactic sugar
-# undef BOOSTGRAPH_TPARAM
-# undef BOOSTGRAPH
+# undef BMIGRAPH_TPARAM
+# undef BMIGRAPH
   } // End of namespace boost
 } // End of namespace vcsn
 
-#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HXX_ //
+#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HXX_ //

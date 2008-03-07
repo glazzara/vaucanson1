@@ -1,8 +1,8 @@
-// boostg_graph_letters_spec.hh: this file is part of the Vaucanson project.
+// bmig_graph_letters_spec.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,15 +15,15 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_LETTERS_SPEC_HH_
-# define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_LETTERS_SPEC_HH_
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_LETTERS_SPEC_HH_
+# define VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_LETTERS_SPEC_HH_
 
 # include <set>
-# include <vaucanson/automata/implementation/boostg_graph_impl.hh>
+# include <vaucanson/automata/implementation/bmig_graph_impl.hh>
 
 namespace vcsn
 {
-  namespace boostg
+  namespace bmig
   {
 
     // class Graph.
@@ -265,49 +265,49 @@ namespace vcsn
     }; // End of class Graph
 
 
-# define BOOSTGRAPH_TPARAM				    \
+# define BMIGRAPH_TPARAM				    \
     template <class S, class WordValue, class SeriesValue,  \
 	      class Letter, class Tag, class GeometryCoords>
 
-# define BOOSTGRAPH_LETTERS					   \
+# define BMIGRAPH_LETTERS					   \
     Graph<labels_are_letters, WordValue, bool, SeriesValue,	   \
     	  Letter, Tag, GeometryCoords>
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_WORD_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+    BMIGRAPH_TPARAM
+    ADAPT_WORD_OF_TO_LETTERS_LABEL(BMIGRAPH_LETTERS);
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_SERIE_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+    BMIGRAPH_TPARAM
+    ADAPT_SERIE_OF_TO_LETTERS_LABEL(BMIGRAPH_LETTERS);
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+    BMIGRAPH_TPARAM
+    ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(BMIGRAPH_LETTERS);
 
-# define BOOSTGRAPH						  \
+# define BMIGRAPH						  \
     Graph<labels_are_letters, WordValue, bool, SerieValue,	  \
 	  Letter, Tag, GeometryCoords>
 
     template <class WordValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    Tag& op_tag(const AutomataBase<I>&, BOOSTGRAPH&);
+    Tag& op_tag(const AutomataBase<I>&, BMIGRAPH&);
 
     template <class WordValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    const Tag& op_tag(const AutomataBase<I>&, BOOSTGRAPH&);
+    const Tag& op_tag(const AutomataBase<I>&, BMIGRAPH&);
 
     template <class WordValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    typename BOOSTGRAPH::geometry_t&
-    op_geometry(const AutomataBase<I>&, BOOSTGRAPH&);
+    typename BMIGRAPH::geometry_t&
+    op_geometry(const AutomataBase<I>&, BMIGRAPH&);
 
     template <class WordValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    const typename BOOSTGRAPH::geometry_t&
-    op_geometry(const AutomataBase<I>&, const BOOSTGRAPH&);
+    const typename BMIGRAPH::geometry_t&
+    op_geometry(const AutomataBase<I>&, const BMIGRAPH&);
 
-# undef BOOSTGRAPH
-# undef BOOSTGRAPH_TPARAM
+# undef BMIGRAPH
+# undef BMIGRAPH_TPARAM
 
-  } // End of namespace boostg
+  } // End of namespace bmig
 
   // This implementation can be used as an implementation of automaton.
   template <typename WordValue,
@@ -315,10 +315,10 @@ namespace vcsn
 	    typename Letter,
 	    typename Tag,
 	    typename GeometryCoords>
-  struct automaton_traits<boostg::Graph<labels_are_letters, WordValue, bool, SeriesValue,
+  struct automaton_traits<bmig::Graph<labels_are_letters, WordValue, bool, SeriesValue,
 			  Letter, Tag, GeometryCoords> >
   {
-    typedef boostg::Graph<labels_are_letters, WordValue, bool, SeriesValue,
+    typedef bmig::Graph<labels_are_letters, WordValue, bool, SeriesValue,
 		 Letter, Tag, GeometryCoords>		graph_t;
     typedef typename graph_t::semiring_elt_value_t	semiring_elt_value_t;
     typedef typename graph_t::monoid_elt_value_t	monoid_elt_value_t;
@@ -345,8 +345,8 @@ namespace vcsn
  } // End of namespace vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/implementation/boostg_graph_letters_spec.hxx>
+#  include <vaucanson/automata/implementation/bmig_graph_letters_spec.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
-#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_LETTERS_SPEC_HH_ //
+#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_LETTERS_SPEC_HH_ //
 

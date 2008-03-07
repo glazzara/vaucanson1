@@ -1,3 +1,44 @@
+2008-03-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Rename boostg to bmig.
+	* configure.ac: .
+	* data/automata/b/double-3-1.xml: .
+	* data/automata/tdc/t1.xml: .
+	* data/automata/tdc/u1.xml: .
+	* data/automata/z/c1.xml: .
+	* include/Makefile.am: .
+	* include/vaucanson/automata/implementation/bmig/bmig_functors.hh: New.
+	* include/vaucanson/automata/implementation/bmig/bmig_functors.hxx: New.
+	* include/vaucanson/automata/implementation/bmig/bmig_handlers.hh: New.
+	* include/vaucanson/automata/implementation/bmig/bmig_handlers.hxx: New.
+	* include/vaucanson/automata/implementation/bmig/bmig_handlers_op.hxx: New.
+	* include/vaucanson/automata/implementation/bmig/bmig_support.hh: New.
+	* include/vaucanson/automata/implementation/bmig/bmig_support.hxx: New.
+	* include/vaucanson/automata/implementation/bmig/boostg_functors.hh: Remove.
+	* include/vaucanson/automata/implementation/bmig/boostg_functors.hxx: Remove.
+	* include/vaucanson/automata/implementation/bmig/boostg_handlers.hh: Remove.
+	* include/vaucanson/automata/implementation/bmig/boostg_handlers.hxx: Remove.
+	* include/vaucanson/automata/implementation/bmig/boostg_handlers_op.hxx: Remove.
+	* include/vaucanson/automata/implementation/bmig/boostg_support.hh: Remove.
+	* include/vaucanson/automata/implementation/bmig/boostg_support.hxx: Remove.
+	* include/vaucanson/automata/implementation/bmig/edge_value.hh: .
+	* include/vaucanson/automata/implementation/bmig/edge_value.hxx: .
+	* include/vaucanson/automata/implementation/bmig/graphcontainer.hh: .
+	* include/vaucanson/automata/implementation/bmig/initial_container.hh: .
+	* include/vaucanson/automata/implementation/bmig/initial_value.hh: .
+	* include/vaucanson/automata/implementation/bmig/initial_value.hxx: .
+	* include/vaucanson/automata/implementation/bmig/vgraph_container.hh: .
+	* include/vaucanson/automata/implementation/bmig/vgraph_container.hxx: .
+	* include/vaucanson/automata/implementation/bmig: New.
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hxx: New.
+	* include/vaucanson/automata/implementation/bmig_graph_letters_spec.hh: New.
+	* include/vaucanson/automata/implementation/bmig_graph_letters_spec.hxx: New.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg_graph_letters_spec.hxx: Remove.
+
 2008-03-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hh

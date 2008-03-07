@@ -1,8 +1,8 @@
-// boostg_graph_impl.hh: this file is part of the Vaucanson project.
+// bmig_graph_impl.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,31 +15,31 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
-# define VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HH_
+# define VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HH_
 # include <boost/dynamic_bitset.hpp>
 # include <boost/shared_ptr.hpp>
 
-# include <vaucanson/automata/implementation/boostg/vgraph_container.hh>
-# include <vaucanson/automata/implementation/boostg/boostg_handlers.hh>
+# include <vaucanson/automata/implementation/bmig/vgraph_container.hh>
+# include <vaucanson/automata/implementation/bmig/bmig_handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
-# include <vaucanson/automata/implementation/boostg/boostg_support.hh>
+# include <vaucanson/automata/implementation/bmig/bmig_support.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/smart_label.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/misc/hash.hh>
-# include <vaucanson/automata/implementation/boostg/initial_value.hh>
-# include <vaucanson/automata/implementation/boostg/graphcontainer.hh>
-# include <vaucanson/automata/implementation/boostg/edge_value.hh>
-# include <vaucanson/automata/implementation/boostg/boostg_functors.hh>
-# include <vaucanson/automata/implementation/boostg/initial_container.hh>
+# include <vaucanson/automata/implementation/bmig/initial_value.hh>
+# include <vaucanson/automata/implementation/bmig/graphcontainer.hh>
+# include <vaucanson/automata/implementation/bmig/edge_value.hh>
+# include <vaucanson/automata/implementation/bmig/bmig_functors.hh>
+# include <vaucanson/automata/implementation/bmig/initial_container.hh>
 
 namespace vcsn
 {
-  namespace boostg
+  namespace bmig
   {
 
     // class Graph.
@@ -275,68 +275,68 @@ namespace vcsn
 
     // FIXME: add some nice comments
 
-# define BOOSTGRAPH_TPARAM						      \
+# define BMIGRAPH_TPARAM						      \
     template <class S, class WordValue, class WeightValue, class SeriesValue, \
 	      class Letter, class Tag, class GeometryCoords>
 
-# define BOOSTGRAPH_SERIES					  \
+# define BMIGRAPH_SERIES					  \
     Graph<labels_are_series, WordValue, WeightValue, SeriesValue, \
 	  Letter, Tag, GeometryCoords>
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
+    BMIGRAPH_TPARAM
+    ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(BMIGRAPH_SERIES);
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_LETTER_OF_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
+    BMIGRAPH_TPARAM
+    ADAPT_LETTER_OF_TO_SERIES_LABEL(BMIGRAPH_SERIES);
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_WORD_OF_TO_SERIES_LABEL(BOOSTGRAPH_SERIES);
+    BMIGRAPH_TPARAM
+    ADAPT_WORD_OF_TO_SERIES_LABEL(BMIGRAPH_SERIES);
 
-# undef BOOSTGRAPH_SERIES
-# define BOOSTGRAPH_LETTERS                                       \
+# undef BMIGRAPH_SERIES
+# define BMIGRAPH_LETTERS                                       \
   Graph<labels_are_letters, WordValue, WeightValue, SeriesValue,\
         Letter, Tag, GeometryCoords>
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_WORD_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+    BMIGRAPH_TPARAM
+    ADAPT_WORD_OF_TO_LETTERS_LABEL(BMIGRAPH_LETTERS);
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_SERIE_OF_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+    BMIGRAPH_TPARAM
+    ADAPT_SERIE_OF_TO_LETTERS_LABEL(BMIGRAPH_LETTERS);
 
-    BOOSTGRAPH_TPARAM
-    ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(BOOSTGRAPH_LETTERS);
+    BMIGRAPH_TPARAM
+    ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(BMIGRAPH_LETTERS);
 
-# undef BOOSTGRAPH_LETTERS
+# undef BMIGRAPH_LETTERS
 
-# define BOOSTGRAPH						\
+# define BMIGRAPH						\
     Graph<Kind, WordValue, WeightValue, SerieValue, \
 	  Letter, Tag, GeometryCoords>
 
     template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    Tag& op_tag(const AutomataBase<I>&, BOOSTGRAPH&);
+    Tag& op_tag(const AutomataBase<I>&, BMIGRAPH&);
 
     template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    const Tag& op_tag(const AutomataBase<I>&, BOOSTGRAPH&);
+    const Tag& op_tag(const AutomataBase<I>&, BMIGRAPH&);
 
     template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    typename BOOSTGRAPH::geometry_t&
-    op_geometry(const AutomataBase<I>&, BOOSTGRAPH&);
+    typename BMIGRAPH::geometry_t&
+    op_geometry(const AutomataBase<I>&, BMIGRAPH&);
 
     template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	      class Letter, class Tag, class GeometryCoords, class I>
-    const typename BOOSTGRAPH::geometry_t&
-    op_geometry(const AutomataBase<I>&, const BOOSTGRAPH&);
+    const typename BMIGRAPH::geometry_t&
+    op_geometry(const AutomataBase<I>&, const BMIGRAPH&);
 
-# undef BOOSTGRAPH
-# undef BOOSTGRAPH_TPARAM
+# undef BMIGRAPH
+# undef BMIGRAPH_TPARAM
 
-  } // End of namespace boostg
+  } // End of namespace bmig
 
   // This implementation can be used as an implementation of automaton.
-  VCSN_MAKE_AUTOMATON_TRAITS(boostg::Graph);
+  VCSN_MAKE_AUTOMATON_TRAITS(bmig::Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,
@@ -346,7 +346,7 @@ namespace vcsn
             class Letter,
             class Tag,
             class GeometryCoords>
-  struct transducer_traits<boostg::Graph<Kind,
+  struct transducer_traits<bmig::Graph<Kind,
                                   WordValue,
                                   WeightValue,
                                   SeriesValue,
@@ -370,7 +370,7 @@ namespace vcsn
             class Letter,
             class Tag,
             class GeometryCoords>
-  struct projection_traits<S, boostg::Graph<Kind,
+  struct projection_traits<S, bmig::Graph<Kind,
                                     WordValue,
                                     WeightValue,
                                     SeriesValue,
@@ -378,7 +378,7 @@ namespace vcsn
                                     Tag,
                                     GeometryCoords> >
   {
-    typedef boostg::Graph<Kind, WordValue, WeightValue, SeriesValue,
+    typedef bmig::Graph<Kind, WordValue, WeightValue, SeriesValue,
                          Letter, Tag, GeometryCoords>
                                   self_t;
     typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
@@ -391,7 +391,7 @@ namespace vcsn
                                   series_set_elt_value_t;
 
     typedef
-    boostg::Graph<Kind,
+    bmig::Graph<Kind,
           monoid_elt_value_t,
           semiring_elt_value_t,
           series_set_elt_value_t,
@@ -408,7 +408,7 @@ namespace vcsn
             class Letter,
             class Tag,
             class GeometryCoords>
-  struct output_projection_traits<boostg::Graph<Kind,
+  struct output_projection_traits<bmig::Graph<Kind,
                                         WordValue,
                                         WeightValue,
                                         SeriesValue,
@@ -416,7 +416,7 @@ namespace vcsn
                                         Tag,
                                         GeometryCoords> >
   {
-    typedef boostg::Graph<Kind, WordValue, WeightValue, SeriesValue,
+    typedef bmig::Graph<Kind, WordValue, WeightValue, SeriesValue,
                          Letter, Tag, GeometryCoords>
                                   self_t;
 
@@ -432,7 +432,7 @@ namespace vcsn
                                   semiring_elt_value_t;
 
     typedef
-    boostg::Graph<Kind,
+    bmig::Graph<Kind,
           monoid_elt_value_t,
           semiring_elt_value_t,
           series_set_elt_value_t,
@@ -450,7 +450,7 @@ namespace vcsn
             class Letter,
             class Tag,
             class GeometryCoords>
-  struct extension_traits<boostg::Graph<Kind,
+  struct extension_traits<bmig::Graph<Kind,
                                 WordValue,
                                 WeightValue,
                                 SeriesValue,
@@ -458,7 +458,7 @@ namespace vcsn
                                 Tag,
                                 GeometryCoords> >
   {
-    typedef boostg::Graph<Kind, WordValue, WeightValue,
+    typedef bmig::Graph<Kind, WordValue, WeightValue,
                          SeriesValue, Letter, Tag, GeometryCoords>
                                   self_t;
     typedef typename automaton_traits<self_t>::monoid_elt_value_t
@@ -469,7 +469,7 @@ namespace vcsn
                                   series_set_elt_value_t;
 
     typedef
-    boostg::Graph<Kind,
+    bmig::Graph<Kind,
           monoid_elt_value_t,
           SeriesValue,
           series_set_elt_value_t,
@@ -481,10 +481,10 @@ namespace vcsn
 } // End of namespace vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/automata/implementation/boostg_graph_impl.hxx>
+#  include <vaucanson/automata/implementation/bmig_graph_impl.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
-# include <vaucanson/automata/implementation/boostg_graph_letters_spec.hh>
+# include <vaucanson/automata/implementation/bmig_graph_letters_spec.hh>
 
-#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BOOSTG_GRAPH_IMPL_HH_ //
+#endif // !VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HH_ //
 

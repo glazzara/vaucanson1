@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -443,25 +443,25 @@ vaucanson/automata/generic_contexts/z_transducer.hh 			\
 vaucanson/automata/generic_contexts/z_transducer_structures.hh 		\
 vaucanson/automata/implementation/automaton_view.hh			\
 vaucanson/automata/implementation/automaton_view.hxx			\
-vaucanson/automata/implementation/boostg/boostg_functors.hh 		\
-vaucanson/automata/implementation/boostg/boostg_functors.hxx 		\
-vaucanson/automata/implementation/boostg/boostg_handlers.hh 		\
-vaucanson/automata/implementation/boostg/boostg_handlers.hxx 		\
-vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx		\
-vaucanson/automata/implementation/boostg/boostg_support.hh 		\
-vaucanson/automata/implementation/boostg/boostg_support.hxx 		\
-vaucanson/automata/implementation/boostg/edge_value.hh 			\
-vaucanson/automata/implementation/boostg/edge_value.hxx 		\
-vaucanson/automata/implementation/boostg/graphcontainer.hh 		\
-vaucanson/automata/implementation/boostg/initial_container.hh 		\
-vaucanson/automata/implementation/boostg/initial_value.hh 		\
-vaucanson/automata/implementation/boostg/initial_value.hxx 		\
-vaucanson/automata/implementation/boostg/vgraph_container.hh 		\
-vaucanson/automata/implementation/boostg/vgraph_container.hxx 		\
-vaucanson/automata/implementation/boostg_graph_impl.hh 			\
-vaucanson/automata/implementation/boostg_graph_impl.hxx			\
-vaucanson/automata/implementation/boostg_graph_letters_spec.hh		\
-vaucanson/automata/implementation/boostg_graph_letters_spec.hxx		\
+vaucanson/automata/implementation/bmig/bmig_functors.hh 		\
+vaucanson/automata/implementation/bmig/bmig_functors.hxx 		\
+vaucanson/automata/implementation/bmig/bmig_handlers.hh 		\
+vaucanson/automata/implementation/bmig/bmig_handlers.hxx 		\
+vaucanson/automata/implementation/bmig/bmig_handlers_op.hxx		\
+vaucanson/automata/implementation/bmig/bmig_support.hh 		\
+vaucanson/automata/implementation/bmig/bmig_support.hxx 		\
+vaucanson/automata/implementation/bmig/edge_value.hh 			\
+vaucanson/automata/implementation/bmig/edge_value.hxx 		\
+vaucanson/automata/implementation/bmig/graphcontainer.hh 		\
+vaucanson/automata/implementation/bmig/initial_container.hh 		\
+vaucanson/automata/implementation/bmig/initial_value.hh 		\
+vaucanson/automata/implementation/bmig/initial_value.hxx 		\
+vaucanson/automata/implementation/bmig/vgraph_container.hh 		\
+vaucanson/automata/implementation/bmig/vgraph_container.hxx 		\
+vaucanson/automata/implementation/bmig_graph_impl.hh 			\
+vaucanson/automata/implementation/bmig_graph_impl.hxx			\
+vaucanson/automata/implementation/bmig_graph_letters_spec.hh		\
+vaucanson/automata/implementation/bmig_graph_letters_spec.hxx		\
 vaucanson/automata/implementation/generalized.hh			\
 vaucanson/automata/implementation/generalized.hxx			\
 vaucanson/automata/implementation/geometry.hh				\
