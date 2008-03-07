@@ -1,3 +1,13 @@
+2008-03-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hh
+	(quotient): Rewrite the @pre comment using a sentence.
+	* include/vaucanson/algorithms/determinize.hh (determinize): Likewise.
+	* include/vaucanson/algorithms/minimization_moore.hh
+	(minimization_moore, co_minimization_moore,
+	minimization_moore_here, co_minimization_moore_hre): Likewise.
+	* include/vaucanson/algorithms/product.hh (product): Likewise.
+
 2008-03-06  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Rename is_letter_support as is_support_in_alphabet #116.
@@ -127,7 +137,7 @@
 	Fix compilation issues with labels_are_letter specialization.
 	* vaucanson/automata/implementation/boostg_graph_letters_spec.hxx: Use
 	smart pointers in hstate_t..
-	
+
 	* vaucanson/automata/implementation/boostg_graph_impl.hxx,
 	* vaucanson/algorithms/determinize.hxx,
 	* vaucanson/misc/hash.hxx: Cleanup useless comments.
@@ -155,7 +165,7 @@
 
   2008-01-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Various fix + Fix invalid hstate_t 
+	Various fix + Fix invalid hstate_t
 	* data/automata/b/div3base2.xml,
 	* data/automata/b/double-3-1.xml: xml dumped differently because of boostg.
 
@@ -181,7 +191,7 @@
 	as boost::shared_ptr in order to void this issue.
 
 	* lib/generate_libvcsn.rb: do not instantiate algorithms for specific concepts.
-	 
+
 	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
 	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
 	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
@@ -196,7 +206,7 @@
 
   2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Add boostg specialization for letter labels. 
+	Add boostg specialization for letter labels.
 	* include/vaucanson/automata/concept/automata_base.hh:
 	Swap two template parameters incorrectly used.
 
@@ -237,7 +247,7 @@
 
   2008-01-10  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	More cleanup in boostg. 
+	More cleanup in boostg.
 	* include/vaucanson/automata/implementation/boostg/vgraph_container.hh: New.
 	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx:
 	Move the VGraphContainer declaration from the Graph structure to a separate
@@ -409,7 +419,7 @@
 	* include/vaucanson/automata/concept/automata_base.hxx,
 	* include/vaucanson/automata/concept/automata_ops.hh,
 	* include/vaucanson/automata/concept/automata_ops.hxx,
-	* include/vaucanson/automata/implementation/transpose_view.hh: 
+	* include/vaucanson/automata/implementation/transpose_view.hh:
 	Remove useless delta functions.
 
 	* include/vaucanson/automata/implementation/boostg/boostg_delta_state.hh:
@@ -423,12 +433,12 @@
 	* include/vaucanson/automata/implementation/legacy_graph_impl.hh,
 	* include/vaucanson/automata/implementation/legacy_graph_impl.hxx:
 	Declare the new types and update the delta functions prototype.
-	
+
 	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh: reindent.
 
   2007-11-29  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix incompatibility with GCC 4.1.1. 
+	Fix incompatibility with GCC 4.1.1.
 	* concept/smart_label.hh: for some reasons, GCC 4.1.1 did not resolved
 	templated functions correctly when a tag, passed as template parameter,
 	was declared in a templated struct.
@@ -436,7 +446,7 @@
 
   2007-11-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Update graph implementation templates. 
+	Update graph implementation templates.
 	* data/template_graph_impl.hh,
 	* data/template_graph_impl.hxx:
 	The latest patches changed the API and these modifications had not been
@@ -448,7 +458,7 @@
 
   2007-11-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Remove a warning at compilation time. 
+	Remove a warning at compilation time.
 	* include/vaucanson/xml/builders.hxx: remove an "unused parameter"
 	warning.
 
@@ -677,7 +687,7 @@
 
   2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Split into several files and update boostg's container declarations/implementations. 
+	Split into several files and update boostg's container declarations/implementations.
 	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh: New.
 	* include/vaucanson/automata/implementation/boostg/boostg_functors.hxx:
 	Add template keyword.
@@ -707,7 +717,7 @@
 
   2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Remove light implementation. 
+	Remove light implementation.
 	I will get back to it later. I remove it since the sanity check failed with
 	this implementation and I don't have time to fix that right now.
 	* include/vaucanson/automata/implementation/light/light_support.hh: Remove.
@@ -718,18 +728,18 @@
 
   2007-11-24  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix missing headers in tarball. 
+	Fix missing headers in tarball.
 	* include/generate_headers.sh: the .mk file was not correctly
 	generated and the generated headers were not part of the tarball.
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Add new files in Makefile.am. 
+	Add new files in Makefile.am.
 	* Makefile.am: here.
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix compilation issues by using the new for_all* macros. 
+	Fix compilation issues by using the new for_all* macros.
 	* vaucanson/algorithms/domain.hxx,
 	* vaucanson/algorithms/image.hxx,
 	* vaucanson/algorithms/projection.hxx: the types were not correctly
@@ -737,7 +747,7 @@
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Add new for_all_* macros. 
+	Add new for_all_* macros.
 	* vaucanson/misc/usual_macros.hh:
 	Since we will be able to use various automata structures in a same
 	function, we need to specify which types of which automaton we are
@@ -747,7 +757,7 @@
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Remove a non-standard operator in Support. 
+	Remove a non-standard operator in Support.
 	* vaucanson/misc/support.hh: Remove the operator.
 	* vaucanson/xml/tools.hxx: Fix the code using it.
 	Support containers had operator*() which returned the first
@@ -766,18 +776,18 @@
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Rename bootstrap.sh to  bootstrap. 
+	Rename bootstrap.sh to  bootstrap.
 	* bootstrap.sh: Remove.
 	* bootstrap: New.
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Adjust the bootstrap to find the correct version of Automake. 
+	Adjust the bootstrap to find the correct version of Automake.
 	* bootstrap.sh: here.
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix various bugs in boostg implementation. 
+	Fix various bugs in boostg implementation.
 	* vaucanson/automata/implementation/boostg_graph_impl.hh,
 	* vaucanson/automata/implementation/boostg_graph_impl.hxx: here.
 	Update correctly the labels when calling "set_initial" and "set_final".
@@ -791,13 +801,13 @@
 	Add support for deletion while iterating over a boostg container.
 	* vaucanson/automata/implementation/boostg/boostg_support.hxx,
 	* vaucanson/automata/implementation/boostg/vgraph_container.hxx:
-	Since we usually iterate over all the states or transitions and 
+	Since we usually iterate over all the states or transitions and
 	some modifications are made in the graph, we want the containers
 	to support such operations without invalidating the current iterator.
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Change the default value of boostg's hstate_t. 
+	Change the default value of boostg's hstate_t.
 	* vaucanson/automata/implementation/boostg/boostg_handlers.hxx:
 	Since the hstate_t are used as integers but are actually a pointer
 	and the comparison between two hstate_t is based on the pointed integer,
@@ -811,7 +821,7 @@
 
   2007-11-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Temporarily replace set<htransition_t> by list<htransition_t>. 
+	Temporarily replace set<htransition_t> by list<htransition_t>.
 	* vaucanson/algorithms/aut_to_exp.hxx,
 	* vaucanson/algorithms/evaluation.hxx,
 	* vaucanson/algorithms/internal/outsplitting.hxx,
@@ -834,7 +844,7 @@
 
   2007-11-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Add new operators for boostg's hstate_t 
+	Add new operators for boostg's hstate_t
 	* vaucanson/automata/concept/handlers.hxx,
 	* vaucanson/automata/implementation/boostg/boostg_handlers.hh,
 	* vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx:
@@ -846,7 +856,7 @@
 
   2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix various bugs and update the method's prototype in boostg implementation. 
+	Fix various bugs and update the method's prototype in boostg implementation.
 	* include/vaucanson/automata/implementation/boostg_graph_impl.hh,
 	* include/vaucanson/automata/implementation/boostg_graph_impl.hxx: here.
 	The state deletion and the delta* were incorrect.
@@ -857,7 +867,7 @@
 
   2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix and cleanup tests. 
+	Fix and cleanup tests.
 	* src/tests/include/tests/automata/algos/graphs/sub_automaton_test.hh:
 	Remove the use of the method "max()" which is deprecated since patch #1797.
 	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh:
@@ -865,7 +875,7 @@
 
   2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	hstate_t and htransition_t are now passed as const references. 
+	hstate_t and htransition_t are now passed as const references.
 	* automata/concept/automata_base.hh,
 	* automata/concept/automata_base.hxx,
 	* automata/concept/automata_ops.hh,
@@ -885,7 +895,7 @@
 
   2007-11-21  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Move implementation's specific code into its own directory. 
+	Move implementation's specific code into its own directory.
 	* automata/implementation/boostg/boost_functors.hxx: Remove,
 	* automata/implementation/boostg/boostg_functors.hxx: New,
 	* automata/implementation/boostg/boostg_handlers.hh: New,
@@ -951,7 +961,7 @@
 	* include/vaucanson/algorithms/standard_of.hxx: .
 	Various fixes to make these algorithms work with 'generic' hstate_t
 	variables. Basically, we just needed to replace calls to
-	SparseInterval::max(). 
+	SparseInterval::max().
 
 	* include/vaucanson/misc/random.hh: .
 	* include/vaucanson/misc/random.hxx: .
@@ -963,7 +973,7 @@
 
   2007-11-15  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Update automaton XMLs in data. 
+	Update automaton XMLs in data.
 	I am wondering if they are useful on the SVN since they are generated.
 	However, they have changed and I do not want to this them while doing a
 	svn status!
@@ -1043,7 +1053,7 @@
 
   2007-10-28  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix various header includes 
+	Fix various header includes
 	* include/generate_headers.sh: Improve the way the namespace aliases are made.
 	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh:
 	Add a missing include.
@@ -1071,18 +1081,18 @@
 
   2007-10-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Fix compilation issues 
+	Fix compilation issues
 	Since krat.hxx can be included without any automata structure
 	headers included, we need to provide default values to specific
 	macros.
 	Also, when I moved the op_assign function, I removed the default
 	implementation which was used for the series. So I restored
 	the default implementation.
-	The op_assign function in automata_ops.hh was not specialized 
+	The op_assign function in automata_ops.hh was not specialized
 	for AutomataBase.
-  
+
 	* include/vaucanson/algebra/implementation/series/krat.hxx:
-	Set default values to VCSN_GRAPH_IMPL_INCLUDE_PATH and 
+	Set default values to VCSN_GRAPH_IMPL_INCLUDE_PATH and
 	VCSN_CONTEXT_INCLUDE_PATH macros.
 	* include/vaucanson/automata/concept/automata_ops.hh: Update
 	op_assign function declaration.
@@ -1092,7 +1102,7 @@
 
   2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Provide namespace aliases for external graph structures . 
+	Provide namespace aliases for external graph structures .
 	In case the developer would like to use only his own structure,
 	we want to provide the namespace alias if he sets that
 	structure as the default one.
@@ -1106,12 +1116,12 @@
 	their projects. Then they can run the script over their graph
 	implementation headers and it will generate all the context headers
 	they would need to use their structure with Vaucanson.
-	
+
 	Example:
 	========
-	
+
 	Project directory:
-	
+
 	    * include/
 	      * mine_graph_impl.hh
 	      * mine_graph_impl.hxx
@@ -1119,7 +1129,7 @@
 	in the include directory, run:
 
 	  vcsn_add_impl.sh mine_graph_impl.hh --vcsn-include-dir=path/to/vcsn/include
-	
+
 	Then in your project directory you have now:
 	    * include/
 	      * mine
@@ -1129,16 +1139,16 @@
 		* ...
 	      * mine_graph_impl.hh
 	      * mine_graph_impl.hxx
-	
+
 	You just need to include the proper header to use your graph structure
 	with Vaucanson.
-	
+
 	* tools/vcsn_add_impl.sh: New.
 	* tools: New.
 
   2007-10-19  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	Introduce two news macros. 
+	Introduce two news macros.
 	I needed to introduce VCSN_GRAPH_IMPL_INCLUDE_PATH and
 	VCSN_CONTEXT_INCLUDE_PATH in order to make easier the possibility
 	of adding new structures by the user.
@@ -1157,7 +1167,7 @@
 
   2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	update svn:ignore property 
+	update svn:ignore property
 
   2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
@@ -1185,7 +1195,7 @@
 	The script failed with errors.
 	gfind must be used on MacOs.
 	Double quotes had to be replaced by simple quotes.
-	* include/generate_headers.sh: here. 
+	* include/generate_headers.sh: here.
 
   2007-10-13  Guillaume Lazzara  <z@lrde.epita.fr>
 
@@ -1464,7 +1474,7 @@
 
   2007-05-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
-	New state handling. 
+	New state handling.
 	* ../../include/vaucanson/automata/implementation/boost_graph.hh: .
 	* ../../include/vaucanson/automata/implementation/boost_graph.hxx: .
 	* ../../include/vaucanson/misc/hash.hh: .
@@ -1492,7 +1502,7 @@
 	* ../../include/vaucanson/misc/support.hh: .
 	* ../../src/tests/include/tests/context_headers/automata/global_consistency_test.hh: .
 
-	Working graph structure. Edges and states deletion is unsafe. hlabel_t and 
+	Working graph structure. Edges and states deletion is unsafe. hlabel_t and
 	htransition_t are invalidated upon deletion.
 
   2007-05-11  Jimmy Ma  <jimmy.ma@lrde.epita.fr>

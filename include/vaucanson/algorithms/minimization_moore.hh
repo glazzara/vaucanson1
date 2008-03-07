@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,9 +43,7 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is Boolean automaton and is deterministic.
-   *
-   * @bug Put the precondition.
+   * @pre @a a must be a deterministic Boolean automaton.
    */
   template<typename A, typename T>
   Element<A, T>
@@ -62,9 +60,9 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is Boolean automaton and is co-deterministic.
+   * @pre @a a must be a co-deterministic Boolean automaton.
    *
-   * @bug Put the precondition.
+   * @bug The precondition is not checked.
    */
   template<typename A, typename T>
   Element<A, T>
@@ -81,8 +79,7 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is Boolean automaton and is deterministic.
-   *
+   * @pre @a a must be a deterministic Boolean automaton.
    */
   template<typename A, typename T>
   void
@@ -99,8 +96,9 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is Boolean automaton and is co-deterministic.
+   * @pre @a a must be a co-deterministic Boolean automaton.
    *
+   * @bug The precondition is not checked.
    */
   template<typename A, typename T>
   void

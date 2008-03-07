@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ namespace vcsn {
    *
    * @see ETA p114-117
    *
-   * @pre is Boolean automaton.
+   * @pre @a a must be a Boolean automaton.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
@@ -69,7 +69,7 @@ namespace vcsn {
    *
    * @see ETA p114-117
    *
-   * @pre is Boolean automaton.
+   * @pre @a a must be a Boolean automaton.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
