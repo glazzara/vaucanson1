@@ -52,6 +52,7 @@ namespace vcsn {
    * @see ETA p114-117
    *
    * @pre @a a must be a Boolean automaton.
+   * @pre @a a must be a realtime automaton.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
@@ -70,6 +71,7 @@ namespace vcsn {
    * @see ETA p114-117
    *
    * @pre @a a must be a Boolean automaton.
+   * @pre @a a must be a realtime automaton.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */

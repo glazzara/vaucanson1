@@ -1,3 +1,19 @@
+2008-03-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Dealing with the empty automaton #114, #132.
+	Fix #132
+	Partially Fix #114
+	* include/vaucanson/algorithms/complete.hxx:
+	  Fix returned automaton when entry was empty.
+	* include/vaucanson/algorithms/determinize.hh:
+	  Add precondition.
+	* include/vaucanson/algorithms/determinize.hxx:
+	  Add precondition. Fix return value.
+	* include/vaucanson/algorithms/is_deterministic.hxx:
+	  Fix return value. Empty automaton is deterministic.
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh:
+	  Add a test for determinization of empty automaton.
+
 2008-03-07  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Add algorithms is_empty and has_succ_comp

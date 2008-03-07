@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/accessible.hh>
+# include <vaucanson/algorithms/realtime.hh>
 
 namespace vcsn {
 
@@ -92,8 +93,8 @@ namespace vcsn {
     {
       qi.insert(*i);
       is_final |= input.is_final(*i);
-      output.set_initial(qi_hstate);
     }
+    output.set_initial(qi_hstate);
 
     if (is_final)
       output.set_final(qi_hstate);
@@ -163,6 +164,7 @@ namespace vcsn {
 		  std::set<typename input_t::hstate_t> >& m)
   {
     TIMER_SCOPED ("determinize");
+    precondition(is_realtime(input));
     do_subset_construction(a_set, output, input, m);
   }
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@ unsigned deterministic_test(tests::Tester& tg)
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
   typedef Auto automaton_t;
+  typedef typename Auto::set_t automata_set_t;
 
 
   tests::Tester t(tg);
@@ -57,13 +58,19 @@ unsigned deterministic_test(tests::Tester& tg)
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      automaton_t automata = gen.generate(4, 8);
-      automaton_t dfa      = determinize(automata);
+      automaton_t automaton = gen.generate(4, 8);
+      automaton_t dfa      = determinize(automaton);
       if (is_deterministic(dfa))
 	++success;
     }
   SUCCESS_RATE(rate, success, nb_tests);
   TEST(t, "determinize on randomly generated automaton " + rate, success == nb_tests);
+
+  automata_set_t automaton_set = GenRandomAutomataSet::generate(SELECT(automata_set_t), 2);
+  automaton_t automaton(automaton_set);
+  automaton_t dfa = determinize(automaton);
+  TEST(t, "is_deterministic on an empty automaton ", is_deterministic(automaton));
+  TEST(t, "is_deterministic on an empty automaton determinized", is_deterministic(dfa));
 
   return t.all_passed();
 }
