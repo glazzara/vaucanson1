@@ -1,5 +1,14 @@
 2008-03-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Add test to test suite on a bug related to std::set.
+	* src/tests/include/Makefile.am: .
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/transition_container_test.hh: New.
+	Miswritten operators were the source of this bug.
+	This test contains basic tests on operator<, and basic insertions
+	on std::list, multiset and set.
+
+2008-03-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Remove the directory boostg from implementation.
 	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh: Remove.
 	* include/vaucanson/automata/implementation/boostg/boostg_functors.hxx: Remove.

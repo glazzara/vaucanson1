@@ -99,6 +99,7 @@ tests/automata/algos/letter_combination_labeled_graphs/derived_term_automaton_te
 tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh	      \
 tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh     \
 tests/automata/algos/letter_combination_labeled_graphs/product_test.hh		      \
+tests/automata/algos/letter_combination_labeled_graphs/transition_container_test.hh   \
 tests/automata/algos/README							      \
 tests/automata/algos/series_multiplicity_transducers/extension_test.hh		      \
 tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh	      \
