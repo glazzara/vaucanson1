@@ -1,3 +1,23 @@
+2008-03-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Remove the directory boostg from implementation.
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_functors.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_handlers_op.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/boostg_support.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/edge_value.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg/graphcontainer.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/initial_container.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/initial_value.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hh: Remove.
+	* include/vaucanson/automata/implementation/boostg/vgraph_container.hxx: Remove.
+	* include/vaucanson/automata/implementation/boostg: Remove.
+
 2008-03-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Revert r1893 and r1895 for bmi release.
