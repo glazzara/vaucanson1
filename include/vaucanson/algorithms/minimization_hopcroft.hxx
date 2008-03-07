@@ -858,7 +858,6 @@ namespace vcsn
   quotient(const Element<A, T>& a)
   {
     TIMER_SCOPED ("quotient");
-    precondition(is_realtime(a));
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     Element<A, T> output(a.structure());

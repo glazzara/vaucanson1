@@ -1,3 +1,10 @@
+2008-03-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Revert r1893 and r1895 for bmi release.
+	Reopening of ticket #118.
+	* include/vaucanson/algorithms/minimization_hopcroft.hh: Here.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Here.
+
 2008-03-07  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Rename boostg to bmig.
