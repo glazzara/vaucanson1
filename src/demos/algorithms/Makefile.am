@@ -1,5 +1,5 @@
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -13,12 +13,11 @@
 
 include ../demo.mk
 
-EXTRA_DIST = equivalent_functions.hh
-
 AM_CPPFLAGS += $(XSD_CPPFLAGS)
 
-TESTERS = universal aut_are_equivalent	\
-	exp_are_equivalent
+EXTRA_DIST = equivalent_functions.hh
+
+noinst_PROGRAMS = universal aut_are_equivalent exp_are_equivalent
 
 universal_SOURCES = universal.cc
 
@@ -31,4 +30,3 @@ exp_are_equivalent_SOURCES = exp_are_equivalent.cc equivalent_functions.cc
 exp_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-

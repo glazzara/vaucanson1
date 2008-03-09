@@ -1,5 +1,6 @@
 Vaucanson, a generic library for finite state machines.
-Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+Vaucanson Group.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -72,11 +73,11 @@ Between ``make`` and ``make install``, you may also want to run::
 	make sanity-check
 	make check
 
-``make demos`` will build example binaries.  ``make sanity-check``
-will make sure that Vaucanson's header files can be included and
-compiled.  ``make check`` will run the test suite to check the whole
-library.  Running the test suite may require up to 1.5GB of free space
-and several hours.
+``make demos`` will build example binaries in ``src/demos/``.  ``make
+sanity-check`` will make sure that Vaucanson's header files can be
+included and compiled.  ``make check`` will run the test suite to
+check the whole library.  Running the test suite may require up to
+1.5GB of free space and several hours.
 
 
 Additional features

@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,19 +11,16 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/vaucanson.mk
+include ../demo.mk
 
 AM_CPPFLAGS += $(CXXFLAGS_STRICT)
-AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
 
-EXTRA_PROGRAMS = 				\
+noinst_PROGRAMS = 				\
 	r					\
 	z_max_plus				\
 	z_min_plus				\
 	tdc					\
 	rt_tdc
-
-demos: $(EXTRA_PROGRAMS)
 
 r_SOURCES = algorithms.cc
 r_CPPFLAGS = $(AM_CPPFLAGS)				\

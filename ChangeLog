@@ -1,5 +1,25 @@
 2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Build demos during "make distcheck".
+
+	* configure.ac: Define the --enable-demos flags (already used
+	by DISTCHECK_CONFIGURE_FLAGS) and the ENABLE_DEMOS conditional.
+	* doc/README.txt: Mention the src/demos/ directory.
+	* src/demos/algorithms/Makefile.am,
+	src/demos/function_library/Makefile.am,
+	src/demos/one_rule_rewriting/Makefile.am,
+	src/demos/vgrep/Makefile.am: Rewrite to build all demos during
+	"make all" as noinst_PROGRAMS.
+	* src/demos/demo.mk (EXTRA_PROGRAMS, demos): Remove, no longuer
+	needed.
+	* src/demos/Makefile.am (demos): Remove.
+	* src/Makefile.am (SUBDIRS): Recurse into demos only if
+	ENABLE_DEMOS.
+	(demos): Simply run "make all" in src/demos
+	* Makefile.am (demos): Likewise.
+
+2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* src/demos/function_library/rt_tdc_algorithms.cc (command_map):
 	Declare the name as const to kill a warning.
 	* src/demos/function_library/tdc_algorithms.cc (command_map):
