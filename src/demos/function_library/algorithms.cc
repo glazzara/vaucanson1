@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -109,14 +109,14 @@ aut_to_exp_command(int argc, char** argv)
       exit(2);
     }
 
-    std::list<hstate_t>	l;
+    std::list<unsigned int>	l;
     for (int i = 3; i < argc; ++i)
     {
       std::istringstream	is (argv[i]);
       int			s;
 
       is >> s;
-      if (s < 0 or unsigned (s) >= a.states().size())
+      if (s < 0 or static_cast<unsigned>(s) >= a.states().size())
       {
 	std::cerr << "ERROR: " << s << " is not a valid state."
 		  << std::endl;
@@ -125,7 +125,7 @@ aut_to_exp_command(int argc, char** argv)
       l.push_back(s);
     }
 
-    std::cout << aut_to_exp(a, ListChooser (l)) << std::endl;
+    std::cout << aut_to_exp(a, ListChooser(l)) << std::endl;
   }
 }
 
@@ -357,7 +357,7 @@ DEFINE_ONE_ARG_COMMAND(get_aut, normalize)
 
 const struct
 {
-    char*	name;
+    const char*	name;
     void	(*command)(int, char**);
 }
 command_map[] =
@@ -435,4 +435,3 @@ main(int argc, char** argv)
     exit(1);
   }
 }
-

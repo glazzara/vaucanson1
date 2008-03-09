@@ -1,3 +1,12 @@
+2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	include/vaucanson/algorithms/aut_to_exp.hxx(ListChooser):
+	Rewrite using a list of unsigned int because that is what
+	algorithms.cc below expects and I couldn't find a way
+	to make it work with hstate_t.
+	* src/demos/function_library/algorithms.cc: Adjust.
+
 2008-03-09  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix the warnings from krat_exp_*_test.hh.

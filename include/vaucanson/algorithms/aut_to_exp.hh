@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -126,22 +126,23 @@ namespace vcsn {
   /**
    * Chooser for aut_to_exp().
    *
-   * This chooser  is built  using a std::list<typename Auto_::hstate_t>.   It returns
-   * the states of the automaton with the same order as in the list.
+   * This chooser is built using a std::list<unsigned int>.  It returns
+   * the states of the automaton in the same order as in the list.
    *
    * @see aut_to_exp().
    */
-  template <typename Auto_>
   class ListChooser
   {
-    public :
-      ListChooser(const std::list<typename Auto_::hstate_t>& l);
+    typedef std::list<unsigned int> list_t;
+  public :
+    ListChooser(const list_t& l);
 
-      typename Auto_::hstate_t operator() (const Auto_&);
+    template <class Auto_>
+    typename Auto_::hstate_t operator() (const Auto_& a);
 
-    private :
-      std::list<typename Auto_::hstate_t>	list_;
-      typename std::list<typename Auto_::hstate_t>::const_iterator pos_;
+  private :
+    list_t list_;
+    list_t::const_iterator pos_;
   };
 
 } // vcsn

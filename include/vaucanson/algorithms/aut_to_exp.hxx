@@ -244,8 +244,7 @@ namespace vcsn {
   /*------------.
     | ListChooser |
     `------------*/
-  template <typename Auto_>
-  inline ListChooser<Auto_>::ListChooser(const std::list<typename Auto_::hstate_t>& l) :
+  inline ListChooser::ListChooser(const std::list<unsigned int>& l) :
     list_(l),
     pos_(l.begin())
   {
@@ -253,10 +252,10 @@ namespace vcsn {
 
   template <class Auto_>
   typename Auto_::hstate_t
-  ListChooser<Auto_>::operator() (const Auto_&)
+  ListChooser::operator() (const Auto_& a)
   {
     assertion(pos_ != list_.end());
-    return *pos_++;
+    return a.get_state(*pos_++);
   }
 
 
