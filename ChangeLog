@@ -1,5 +1,10 @@
 2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/Makefile.am (nobase_include_HEADERS): Distribute the
+	files added by Florent on 2008-03-07.
+
+2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Build demos during "make distcheck".
 
 	* configure.ac: Define the --enable-demos flags (already used
@@ -10,7 +15,7 @@
 	src/demos/one_rule_rewriting/Makefile.am,
 	src/demos/vgrep/Makefile.am: Rewrite to build all demos during
 	"make all" as noinst_PROGRAMS.
-	* src/demos/demo.mk (EXTRA_PROGRAMS, demos): Remove, no longuer
+	* src/demos/demo.mk (EXTRA_PROGRAMS, demos): Remove, no longer
 	needed.
 	* src/demos/Makefile.am (demos): Remove.
 	* src/Makefile.am (SUBDIRS): Recurse into demos only if

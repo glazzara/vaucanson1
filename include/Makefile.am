@@ -303,6 +303,8 @@ vaucanson/algorithms/fmp_to_realtime.hh				\
 vaucanson/algorithms/fmp_to_realtime.hxx			\
 vaucanson/algorithms/forward_realtime.hh			\
 vaucanson/algorithms/forward_realtime.hxx			\
+vaucanson/algorithms/has_succ_comp.hh				\
+vaucanson/algorithms/has_succ_comp.hxx				\
 vaucanson/algorithms/image.hh					\
 vaucanson/algorithms/image.hxx					\
 vaucanson/algorithms/initial_derivation.hh			\
@@ -329,6 +331,8 @@ vaucanson/algorithms/is_ambiguous.hh				\
 vaucanson/algorithms/is_ambiguous.hxx				\
 vaucanson/algorithms/is_deterministic.hh			\
 vaucanson/algorithms/is_deterministic.hxx			\
+vaucanson/algorithms/is_empty.hh				\
+vaucanson/algorithms/is_empty.hxx				\
 vaucanson/algorithms/is_letterized.hh				\
 vaucanson/algorithms/is_letterized.hxx				\
 vaucanson/algorithms/is_normalized.hh				\
