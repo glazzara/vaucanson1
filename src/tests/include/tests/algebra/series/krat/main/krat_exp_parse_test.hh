@@ -122,7 +122,7 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-struct sample_t { char* exp; char* out; };
+struct sample_t { const char* exp; const char* out; };
 
 static sample_t bool_samples[] =
   {

@@ -1,3 +1,9 @@
+2008-03-09  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix the warnings from krat_exp_*_test.hh.
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_parse_test.hh: .
+
 2008-03-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Dealing with the empty automaton #114, #132.

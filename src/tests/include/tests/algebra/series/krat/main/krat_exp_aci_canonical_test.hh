@@ -23,7 +23,7 @@
 
 # include <sstream>
 
-static struct { char* fst; char* snd; } samples[] =
+static struct { const char* fst; const char* snd; } samples[] =
 {
   { "0", "0" },
   { "1", "1" },
