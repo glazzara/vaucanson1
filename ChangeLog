@@ -1,5 +1,12 @@
 2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* src/demos/function_library/rt_tdc_algorithms.cc (command_map):
+	Declare the name as const to kill a warning.
+	* src/demos/function_library/tdc_algorithms.cc (command_map):
+	Likewise.
+
+2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/aut_to_exp.hh,
 	include/vaucanson/algorithms/aut_to_exp.hxx(ListChooser):
 	Rewrite using a list of unsigned int because that is what
