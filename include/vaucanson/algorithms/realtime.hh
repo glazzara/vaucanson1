@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,8 +23,9 @@
  *
  * General algorithms concerning realtime aspect of automata.
  *
- * Algorithms concerning realtime aspect of automata, i.e.
- * presence or absence of epsilon transitions in the automaton.
+ * An automaton over a free monoid @f$A^\star@f$ is realtime
+ * if all its transitons are labeled by single letters of
+ * @f$A@f$.  (Weights do not matter.)
  *
  * @see is_realtime(), realtime_here(), realtime()
  */
@@ -42,10 +43,9 @@ namespace vcsn {
   /**
    * In place modification of the automaton to make it realtime.
    *
-   * This  algorithm   makes  an  automaton  realtime.   It  calls  @c
-   * forward_realtime or @c backward_realtime according to type given.
-   * The type may not be precised, it is the @c forward_realtime which
-   * is used by default.
+   * This algorithm makes an automaton realtime.  It calls @c
+   * forward_realtime or @c backward_realtime according @a type.
+   * If @a type is omitted, @c forward_realtime is used by default.
    *
    * @param a The automaton to make realtime.
    * @param type The type of algorithm used.

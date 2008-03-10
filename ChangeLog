@@ -1,5 +1,10 @@
 2008-03-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/realtime.hh: Define realtime
+	automata.
+
+2008-03-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/tests/vcsn-tdc.test: Adjust for previous change.
 
 2008-03-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
