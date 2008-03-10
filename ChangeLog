@@ -1,5 +1,9 @@
 2008-03-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/tests/vcsn-tdc.test: Adjust for previous change.
+
+2008-03-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename fmp_to_realtime(), realtime_to_fmp(), and
 	realtime_composition(), as fmp_to_rw(), rw_to_fmp(), and
 	rw_composition().
