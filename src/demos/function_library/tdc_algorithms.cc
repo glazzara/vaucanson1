@@ -254,7 +254,7 @@ identity_command(int argc, char** argv)
 
 static
 void
-fmp_to_realtime_command(int argc, char** argv)
+fmp_to_rw_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
@@ -262,7 +262,7 @@ fmp_to_realtime_command(int argc, char** argv)
   boolean_transducer::automaton_t a =
     boolean_transducer::make_automaton(first_alphabet(), second_alphabet());
 
-  fmp_to_realtime(get_aut(argv[2]), a);
+  fmp_to_rw(get_aut(argv[2]), a);
   std::cout << automaton_saver(a, string_out (), XML ());
 }
 
@@ -355,7 +355,7 @@ command_map[] =
   { "are-isomorphic",		are_isomorphic_command			},
   { "is-empty",		is_empty_command			},
   { "intersection",		identity_command			},
-  { "to-rt-tdc",		fmp_to_realtime_command			},
+  { "to-rw-tdc",		fmp_to_rw_command			},
   { "eps_removal",		eps_removal_command				},
   { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
   { "b-compose",		b_compose_command			},

@@ -1,3 +1,51 @@
+2008-03-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rename fmp_to_realtime(), realtime_to_fmp(), and
+	realtime_composition(), as fmp_to_rw(), rw_to_fmp(), and
+	rw_composition().
+
+	* include/vaucanson/algorithms/fmp_to_realtime.hh,
+	include/vaucanson/algorithms/fmp_to_realtime.hxx,
+	include/vaucanson/algorithms/realtime_composition.hh,
+	include/vaucanson/algorithms/realtime_composition.hxx,
+	include/vaucanson/algorithms/realtime_to_fmp.hh,
+	include/vaucanson/algorithms/realtime_to_fmp.hxx: Rename as...
+	* include/vaucanson/algorithms/fmp_to_rw.hh,
+	include/vaucanson/algorithms/fmp_to_rw.hxx,
+	include/vaucanson/algorithms/rw_composition.hh,
+	include/vaucanson/algorithms/rw_composition.hxx,
+	include/vaucanson/algorithms/rw_to_fmp.hh,
+	include/vaucanson/algorithms/rw_to_fmp.hxx: ... these, and rename
+	the functions inside.
+	* include/Makefile.am: Adjust filenames.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	include/vaucanson/contexts/transducer_functions.thh: Adjust
+	includes.
+
+	* src/benchs/composition/realtime_composition_bench.hh,
+	src/demos/function_library/rt_tdc_algorithms.cc,
+	src/demos/one_rule_rewriting/ORR_rt_gen.cc,
+	src/demos/one_rule_rewriting/fibonacci_rt_gen.cc: Rename as ...
+	* src/benchs/composition/rw_composition_bench.hh,
+	src/demos/function_library/rw_tdc_algorithms.cc,
+	src/demos/one_rule_rewriting/ORR_rw_gen.cc,
+	src/demos/one_rule_rewriting/fibonacci_rw_gen.cc: ... these, and
+	adjust function calls inside.
+	* src/demos/function_library/Makefile.am,
+	src/demos/one_rule_rewriting/Makefile.am,
+	src/benchs/composition/Makefile.bench: Adjust filenames.
+
+	* src/benchs/composition/normalized_composition_bench.hh,
+	src/demos/function_library/tdc_algorithms.cc,
+	src/demos/one_rule_rewriting/ORR_demo.cc,
+	src/demos/one_rule_rewriting/ORR_tdc_gen.cc,
+	src/demos/one_rule_rewriting/fibonacci_demo.cc,
+	src/demos/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh,
+	taf-kit/src/tdc_commands.cc: Adjust function calls.
+
 2008-03-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/Makefile.am (nobase_include_HEADERS): Distribute the

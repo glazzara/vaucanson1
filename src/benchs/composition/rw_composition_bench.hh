@@ -1,8 +1,8 @@
-// realtime_composition_bench.hh: this file is part of the Vaucanson project.
+// rw_composition_bench.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
 
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/boolean_transducer.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
+#include <vaucanson/algorithms/rw_composition.hh>
 #include <vaucanson/algorithms/transpose.hh>
 
 using namespace vcsn;
@@ -108,7 +108,7 @@ replace_right(const std::string& from,	const std::string& to,
   return transpose(left);
 }
 
-void realtime_composition_bench(int n_value)
+void rw_composition_bench(int n_value)
 {
   alphabet_t	A;
   A.insert('a');
@@ -143,10 +143,9 @@ void realtime_composition_bench(int n_value)
   std::cout << "right nb transitions: " << right_auto.transitions().size()
 	    << std::endl;
   automaton_t	res_auto = make_automaton(A, C);
-  realtime_composition(left_auto, right_auto, res_auto);
+  rw_composition(left_auto, right_auto, res_auto);
   std::cout << "nb states: " << res_auto.states().size() << std::endl;
   std::cout << "nb transitions: " << res_auto.transitions().size() << std::endl;
 
   VCSN_BENCH_STOP_AND_PRINT;
 }
-

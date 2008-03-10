@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,9 +17,8 @@
 #include <vaucanson/tools/bencher.hh>
 
 #include <vaucanson/algorithms/normalized_composition.hh>
-#include <vaucanson/algorithms/fmp_to_realtime.hh>
 #include <vaucanson/algorithms/sub_normalize.hh>
-#include <vaucanson/algorithms/realtime_to_fmp.hh>
+#include <vaucanson/algorithms/rw_to_fmp.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/fmp_transducer.hh>
 #include <vaucanson/boolean_transducer.hh>
@@ -148,7 +147,7 @@ void normalized_composition_bench(int n_value)
 
   std::cerr << "Left sub-normalisation" << std::endl;
   VCSN_BENCH_START;
-  realtime_to_fmp(left_auto, fmp_left_auto);
+  rw_to_fmp(left_auto, fmp_left_auto);
   sub_normalize(fmp_left_auto, sub_left_auto);
   std::cout << "nb states: " << sub_left_auto.states().size() << std::endl;
   std::cout << "nb transitions: " << sub_left_auto.transitions().size() << std::endl;
@@ -163,7 +162,7 @@ void normalized_composition_bench(int n_value)
 
   std::cerr << "Right sub-normalisation" << std::endl;
   VCSN_BENCH_START;
-  realtime_to_fmp(right_auto, fmp_right_auto);
+  rw_to_fmp(right_auto, fmp_right_auto);
   sub_normalize(fmp_right_auto, sub_right_auto);
   std::cout << "nb states: " << sub_right_auto.states().size() << std::endl;
   std::cout << "nb transitions: " << sub_right_auto.transitions().size()
@@ -184,4 +183,3 @@ void normalized_composition_bench(int n_value)
   VCSN_BENCH_STOP_AND_PRINT;
   VCSN_BENCH_STOP_AND_PRINT;
 }
-

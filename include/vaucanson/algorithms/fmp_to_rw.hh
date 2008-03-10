@@ -1,8 +1,8 @@
-// fmp_to_realtime.hh: this file is part of the Vaucanson project.
+// fmp_to_rw.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,22 +14,22 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_FMP_TO_REALTIME_HH
-# define VCSN_ALGORITHMS_FMP_TO_REALTIME_HH
+#ifndef VCSN_ALGORITHMS_FMP_TO_RW_HH
+# define VCSN_ALGORITHMS_FMP_TO_RW_HH
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file   fmp_to_realtime.hh
+ * @file   fmp_to_rw.hh
  *
  * This file provides a transformation function that computes
- * the equivalent transducer of a FMP automaton.
+ * the Rational Weight transducer of a FMP automaton.
  *
  * @author Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
  * @date   Mon Mar 16 16:15:15 2005
  *
- * @see fmp_to_realtime()
+ * @see fmp_to_rw()
  */
 /** @} */
 
@@ -37,10 +37,10 @@ namespace vcsn
 {
   /** @addtogroup algorithms *//** @{ */
 
-  /// @name FMP automaton to realtime transducer algorithm.
+  /// @name FMP automaton to rational weight transducer algorithm.
   ///@{
-  /// Compute the equivalent transducer of a FMP automaton.
-  /// Please note that for the moment this function works
+  /// Compute the equivalent Rational Weight transducer of a FMP
+  /// automaton.  Please note that for the moment this function works
   /// only if the support of each transition is finite.
   ///
   /// Algorithm :
@@ -53,13 +53,12 @@ namespace vcsn
   template<typename S, typename T,
 	   typename SS, typename TT>
   Element<SS, TT>&
-  fmp_to_realtime(const Element<S, T>& fmp,
-		  Element<SS, TT>& res);
+  fmp_to_rw(const Element<S, T>& fmp, Element<SS, TT>& res);
   ///@}
 
   /** @} */
 }
 
-# include <vaucanson/algorithms/fmp_to_realtime.hxx>
+# include <vaucanson/algorithms/fmp_to_rw.hxx>
 
-#endif // ! VCSN_ALGORITHMS_FMP_TO_REALTIME_HH
+#endif // ! VCSN_ALGORITHMS_FMP_TO_RW_HH

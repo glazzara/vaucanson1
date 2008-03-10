@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 #include <vaucanson/algorithms/normalized_composition.hh>
 #include <vaucanson/algorithms/sub_normalize.hh>
-#include <vaucanson/algorithms/realtime_to_fmp.hh>
+#include <vaucanson/algorithms/rw_to_fmp.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
@@ -172,7 +172,7 @@ int main(int argc, char** argv)
   fmp_transducer::automaton_t sub_left =
     fmp_transducer::make_automaton(A, A);
 
-  realtime_to_fmp(left_auto, fmp_left);
+  rw_to_fmp(left_auto, fmp_left);
 
   sub_normalize(fmp_left, sub_left);
 
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
   fmp_transducer::automaton_t sub_right =
     fmp_transducer::make_automaton(A, A);
 
-  realtime_to_fmp(right_auto, fmp_right);
+  rw_to_fmp(right_auto, fmp_right);
 
   sub_normalize(fmp_right, sub_right);
 
@@ -223,4 +223,3 @@ int main(int argc, char** argv)
 	    << right_left_name
 	    << std::endl;
 }
-

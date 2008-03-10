@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -204,7 +204,7 @@ main()
   `-------------------*/
 
   automaton_t	res_auto = make_automaton(A, A);
-  realtime_composition(left_auto, right_auto, res_auto);
+  rw_composition(left_auto, right_auto, res_auto);
 
   /*----------------.
   | Dump and eval.  |
@@ -213,4 +213,3 @@ main()
   tools::dot_display(res_auto, "GD", true);
   eval_an_expression(res_auto);
 }
-

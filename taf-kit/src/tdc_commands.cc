@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -101,14 +101,14 @@ DEFINE_COMMAND (NAME (image)
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
-DEFINE_COMMAND (NAME (to_rt)
+DEFINE_COMMAND (NAME (to_rw)
 		CODE (
 		  automaton_t fmp = get_aut(args.args[1]);
 		  automaton_t::monoid_t m = fmp.structure().series().monoid();
 		  boolean_transducer::automaton_t a =
 		  boolean_transducer::make_automaton(m.first_monoid().alphabet(),
 						     m.second_monoid().alphabet());
-		  fmp_to_realtime(fmp, a))
+		  fmp_to_rw(fmp, a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
@@ -189,8 +189,8 @@ const command_t command_map[] =
     COMMAND_ENTRY (u_compose, AutAut,
 		   "Compose `aut1' and `aut2', two Boolean transducers,\n\t"
 		   "preserve the number of path."),
-    COMMAND_ENTRY (to_rt, Aut,
-		   "Give the equivalent realtime transducer of `aut'."),
+    COMMAND_ENTRY (to_rw, Aut,
+		   "Give the equivalent rational weight transducer of `aut'."),
     COMMAND_ENTRY (invert, Aut, "Give the inverse of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
 		   "Transform a Boolean automaton in a fmp transducer by\n\t"

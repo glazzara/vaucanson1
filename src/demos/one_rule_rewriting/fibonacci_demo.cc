@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
 #include <vaucanson/boolean_transducer.hh>
 
 #include <vaucanson/algorithms/krat_exp_expand.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
+#include <vaucanson/algorithms/rw_composition.hh>
 
 #include <vaucanson/tools/dot_display.hh>
 
@@ -133,7 +133,7 @@ int main()
   `----------*/
 
   automaton_t	fiblr = make_automaton(A, A);
-  realtime_composition(fibleft, fibright, fiblr);
+  rw_composition(fibleft, fibright, fiblr);
 
   /*----------------.
   | Dump and eval.  |
@@ -143,4 +143,3 @@ int main()
   eval_an_expression(fiblr);
 
 }
-

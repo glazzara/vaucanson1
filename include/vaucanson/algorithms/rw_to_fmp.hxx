@@ -1,8 +1,8 @@
-// realtime_to_fmp.hxx: this file is part of the Vaucanson project.
+// rw_to_fmp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_REALTIME_TO_FMP_HXX
-# define VCSN_ALGORITHMS_REALTIME_TO_FMP_HXX
+#ifndef VCSN_ALGORITHMS_RW_TO_FMP_HXX
+# define VCSN_ALGORITHMS_RW_TO_FMP_HXX
 
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/automata/concept/transducer.hh>
@@ -28,11 +28,11 @@ namespace vcsn
 	   typename SS, typename TT,
 	   typename Self>
   void
-  do_realtime_to_fmp(const vcsn::TransducerBase<S>&,
-		     const vcsn::AutomataBase<SS>&,
-		     const vcsn::algebra::FreeMonoidProductBase<Self>&,
-		     const vcsn::Element<S, T>& trans,
-		     vcsn::Element<SS, TT>& res)
+  do_rw_to_fmp(const vcsn::TransducerBase<S>&,
+	       const vcsn::AutomataBase<SS>&,
+	       const vcsn::algebra::FreeMonoidProductBase<Self>&,
+	       const vcsn::Element<S, T>& trans,
+	       vcsn::Element<SS, TT>& res)
   {
     typedef typename T::hstate_t hstate_t;
     //Map source states with result states
@@ -244,14 +244,13 @@ namespace vcsn
   template<typename S, typename T,
 	   typename SS, typename TT>
   vcsn::Element<SS, TT>&
-  realtime_to_fmp(const vcsn::Element<S, T>& trans,
-		  vcsn::Element<SS, TT>& res)
+  rw_to_fmp(const vcsn::Element<S, T>& trans, vcsn::Element<SS, TT>& res)
   {
-    do_realtime_to_fmp(trans.structure(), res.structure(),
-		       res.structure().series().monoid(),
-		       trans, res);
+    do_rw_to_fmp(trans.structure(), res.structure(),
+		 res.structure().series().monoid(),
+		 trans, res);
     return res;
   }
 }
 
-#endif // ! VCSN_ALGORITHMS_REALTIME_TO_FMP_HXX
+#endif // ! VCSN_ALGORITHMS_RW_TO_FMP_HXX

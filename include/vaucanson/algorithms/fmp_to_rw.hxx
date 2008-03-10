@@ -1,8 +1,8 @@
-// fmp_to_realtime.hxx: this file is part of the Vaucanson project.
+// fmp_to_rw.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_FMP_TO_REALTIME_HXX
-# define VCSN_ALGORITHMS_FMP_TO_REALTIME_HXX
+#ifndef VCSN_ALGORITHMS_FMP_TO_RW_HXX
+# define VCSN_ALGORITHMS_FMP_TO_RW_HXX
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/transducer.hh>
@@ -30,11 +30,11 @@ namespace vcsn
 	   typename SS, typename TT,
 	   typename Self>
   void
-  do_fmp_to_realtime(const vcsn::AutomataBase<S>&,
-		     const vcsn::TransducerBase<SS>&,
-		     const vcsn::algebra::FreeMonoidProductBase<Self>&,
-		     const vcsn::Element<S, T>& fmp,
-		     vcsn::Element<SS, TT>& res)
+  do_fmp_to_rw(const vcsn::AutomataBase<S>&,
+	       const vcsn::TransducerBase<SS>&,
+	       const vcsn::algebra::FreeMonoidProductBase<Self>&,
+	       const vcsn::Element<S, T>& fmp,
+	       vcsn::Element<SS, TT>& res)
   {
     typedef typename T::hstate_t hstate_t;
     // Map source automaton's states with result's states
@@ -203,14 +203,14 @@ namespace vcsn
   template<typename S, typename T,
 	   typename SS, typename TT>
   vcsn::Element<SS, TT>&
-  fmp_to_realtime(const vcsn::Element<S, T>& fmp,
-		  vcsn::Element<SS, TT>& res)
+  fmp_to_rw(const vcsn::Element<S, T>& fmp,
+	    vcsn::Element<SS, TT>& res)
   {
-    TIMER_SCOPED("fmp_to_realtime");
-    do_fmp_to_realtime(fmp.structure(), res.structure(),
-		       fmp.structure().series().monoid(),
-		       fmp, res);
+    TIMER_SCOPED("fmp_to_rw");
+    do_fmp_to_rw(fmp.structure(), res.structure(),
+		 fmp.structure().series().monoid(),
+		 fmp, res);
     return res;
   }
 }
-#endif // ! VCSN_ALGORITHMS_FMP_TO_REALTIME_HXX
+#endif // ! VCSN_ALGORITHMS_FMP_TO_RW_HXX

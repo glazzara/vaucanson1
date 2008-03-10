@@ -45,7 +45,7 @@ vaucanson/contexts/fmp_transducer_maker.thh    	\
 vaucanson/contexts/fmp_transducer_maker.thxx   	\
 vaucanson/contexts/transducer_functions.thh	\
 vaucanson/contexts/transducer_maker.thh        	\
-vaucanson/contexts/transducer_maker.thxx	
+vaucanson/contexts/transducer_maker.thxx
 
 nobase_include_HEADERS +=			\
 vaucanson/misc/bitset.hh			\
@@ -299,8 +299,8 @@ vaucanson/algorithms/extension.hh				\
 vaucanson/algorithms/extension.hxx				\
 vaucanson/algorithms/finite_support_conversion.hh		\
 vaucanson/algorithms/finite_support_conversion.hxx		\
-vaucanson/algorithms/fmp_to_realtime.hh				\
-vaucanson/algorithms/fmp_to_realtime.hxx			\
+vaucanson/algorithms/fmp_to_rw.hh				\
+vaucanson/algorithms/fmp_to_rw.hxx				\
 vaucanson/algorithms/forward_realtime.hh			\
 vaucanson/algorithms/forward_realtime.hxx			\
 vaucanson/algorithms/has_succ_comp.hh				\
@@ -373,12 +373,12 @@ vaucanson/algorithms/domain.hh					\
 vaucanson/algorithms/domain.hxx					\
 vaucanson/algorithms/realtime.hh				\
 vaucanson/algorithms/realtime.hxx				\
-vaucanson/algorithms/realtime_composition.hh			\
-vaucanson/algorithms/realtime_composition.hxx			\
 vaucanson/algorithms/realtime_decl.hh				\
 vaucanson/algorithms/realtime_decl.hxx				\
-vaucanson/algorithms/realtime_to_fmp.hh				\
-vaucanson/algorithms/realtime_to_fmp.hxx			\
+vaucanson/algorithms/rw_composition.hh				\
+vaucanson/algorithms/rw_composition.hxx				\
+vaucanson/algorithms/rw_to_fmp.hh				\
+vaucanson/algorithms/rw_to_fmp.hxx				\
 vaucanson/algorithms/search.hh					\
 vaucanson/algorithms/search.hxx					\
 vaucanson/algorithms/standard.hh				\

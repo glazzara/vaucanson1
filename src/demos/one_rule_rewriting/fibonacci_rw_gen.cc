@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_transducer.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
+#include <vaucanson/algorithms/rw_composition.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
 
@@ -88,10 +88,10 @@ int main()
   `----------*/
 
   automaton_t	fiblr = make_automaton(A, A);
-  realtime_composition(fibleft, fibright, fiblr);
+  rw_composition(fibleft, fibright, fiblr);
 
   automaton_t	fibrl = make_automaton(A, A);
-  realtime_composition(fibright, fibleft, fibrl);
+  rw_composition(fibright, fibleft, fibrl);
 
   std::ofstream left_fibo("fibo_left.xml");
   std::ofstream right_fibo("fibo_right.xml");
@@ -114,4 +114,3 @@ int main()
 	    << "fibo_right_left.xml"
 	    << std::endl;
 }
-

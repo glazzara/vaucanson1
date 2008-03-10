@@ -20,7 +20,7 @@ noinst_PROGRAMS = 				\
 	z_max_plus				\
 	z_min_plus				\
 	tdc					\
-	rt_tdc
+	rw_tdc
 
 r_SOURCES = algorithms.cc
 r_CPPFLAGS = $(AM_CPPFLAGS)				\
@@ -42,7 +42,7 @@ tdc_CPPFLAGS = $(AM_CPPFLAGS)					\
 	-DCONTEXT_HEADER="<vaucanson/fmp_transducer.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::fmp_transducer"
 
-rt_tdc_SOURCES = rt_tdc_algorithms.cc
-rt_tdc_CPPFLAGS = $(AM_CPPFLAGS)				\
+rw_tdc_SOURCES = rw_tdc_algorithms.cc
+rw_tdc_CPPFLAGS = $(AM_CPPFLAGS)				\
 	-DCONTEXT_HEADER="<vaucanson/boolean_transducer.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_transducer"

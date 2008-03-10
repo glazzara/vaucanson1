@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,7 +16,7 @@
 //
 #include <vaucanson/boolean_transducer.hh>
 #include <vaucanson/fmp_transducer.hh>
-#include <vaucanson/algorithms/realtime_to_fmp.hh>
+#include <vaucanson/algorithms/rw_to_fmp.hh>
 #include <vaucanson/algorithms/normalized_composition.hh>
 #include <vaucanson/algorithms/sub_normalize.hh>
 #include <vaucanson/tools/xml_dump.hh>
@@ -67,7 +67,7 @@ int main()
   fmp_transducer::automaton_t sub_fibleft =
     fmp_transducer::make_automaton(A, A);
 
-  realtime_to_fmp(fibleft, fmp_fibleft);
+  rw_to_fmp(fibleft, fmp_fibleft);
 
   sub_normalize(fmp_fibleft, sub_fibleft);
 
@@ -102,7 +102,7 @@ int main()
   fmp_transducer::automaton_t sub_fibright =
     fmp_transducer::make_automaton(A, A);
 
-  realtime_to_fmp(fibright, fmp_fibright);
+  rw_to_fmp(fibright, fmp_fibright);
 
   sub_normalize(fmp_fibright, sub_fibright);
 
@@ -138,4 +138,3 @@ int main()
 	    << "fibo_fmp_right_left.xml"
 	    << std::endl;
 }
-

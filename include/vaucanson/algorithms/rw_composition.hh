@@ -1,8 +1,8 @@
-// realtime_composition.hh: this file is part of the Vaucanson project.
+// rw_composition.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,17 +14,16 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH
-# define VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH
+#ifndef VCSN_ALGORITHMS_RW_COMPOSITION_HH
+# define VCSN_ALGORITHMS_RW_COMPOSITION_HH
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file realtime_composition.hh
+ * @file rw_composition.hh
  *
- * Undocumented stuff.
+ * Composition of two Rational-Weight transducers.
  *
- * @see realtime_composition()
- * @bug FIXME: Document!
+ * @see rw_composition()
  */
 /** @} */
 
@@ -34,25 +33,22 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  /// Composition for realtime transducers.
+  /// Composition for Rational-Weight transducers.
   template< typename S, typename T>
   void
-  realtime_composition(const Element<S, T>&,
-		       const Element<S, T>&,
-		       Element<S, T>&);
+  rw_composition(const Element<S, T>&, const Element<S, T>&, Element<S, T>&);
 
-  /// Composition for realtime transducers.
+  /// Composition for Rational-Weight transducers.
   template< typename S, typename T>
   Element<S, T>
-  realtime_composition(const Element<S, T>&,
-		       const Element<S, T>&);
+  rw_composition(const Element<S, T>&, const Element<S, T>&);
 
   /** @} */
 
 }
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-#  include <vaucanson/algorithms/realtime_composition.hxx>
+#  include <vaucanson/algorithms/rw_composition.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH
+#endif // ! VCSN_ALGORITHMS_RW_COMPOSITION_HH

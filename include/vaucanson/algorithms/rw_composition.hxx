@@ -1,8 +1,8 @@
-// realtime_composition.hxx: this file is part of the Vaucanson project.
+// rw_composition.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,10 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX
-# define VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX
+#ifndef VCSN_ALGORITHMS_RW_COMPOSITION_HXX
+# define VCSN_ALGORITHMS_RW_COMPOSITION_HXX
 
-# include <vaucanson/algorithms/realtime_composition.hh>
+# include <vaucanson/algorithms/rw_composition.hh>
 
 # include <vaucanson/automata/concept/transducer.hh>
 
@@ -25,14 +25,14 @@
 
 namespace vcsn {
 
-  /* Composition for realtime transducers. */
+  /* Composition for rw transducers. */
   template< typename S,
 	    typename Trans_t>
   void
-  do_realtime_composition(const TransducerBase<S>&,
-			  const Trans_t& lhs,
-			  const Trans_t& rhs,
-			  Trans_t& ret)
+  do_rw_composition(const TransducerBase<S>&,
+		    const Trans_t& lhs,
+		    const Trans_t& rhs,
+		    Trans_t& ret)
   {
     AUTOMATON_TYPES(Trans_t);
 
@@ -154,27 +154,26 @@ namespace vcsn {
 
   template< typename S, typename T>
   void
-  realtime_composition(const Element<S, T>& lhs,
-		       const Element<S, T>& rhs,
-		       Element<S, T>& ret)
+  rw_composition(const Element<S, T>& lhs,
+		 const Element<S, T>& rhs,
+		 Element<S, T>& ret)
   {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     for_all_states (s, ret)
       ret.del_state (*s);
-    do_realtime_composition(lhs.structure(), lhs, rhs, ret);
+    do_rw_composition(lhs.structure(), lhs, rhs, ret);
   }
 
 
   template< typename S, typename T>
   Element<S, T>
-  realtime_composition(const Element<S, T>& lhs,
-		       const Element<S, T>& rhs)
+  rw_composition(const Element<S, T>& lhs, const Element<S, T>& rhs)
   {
     Element<S, T> ret (lhs.structure());
-    do_realtime_composition(lhs.structure(), lhs, rhs, ret);
+    do_rw_composition(lhs.structure(), lhs, rhs, ret);
     return ret;
   }
 }
 
-#endif // ! VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX
+#endif // ! VCSN_ALGORITHMS_RW_COMPOSITION_HXX

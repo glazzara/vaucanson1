@@ -7,7 +7,7 @@ benchs: $(EXTRA_PROGRAMS)
 	for n_value in $$(seq 20 40); do			\
 	   echo "----------------------For $$n_value:";		\
 	   echo "--------------VCSN (Realtime):";		\
-	   ./realtime_composition-bench $$n_value;		\
+	   ./rw_composition-bench $$n_value;		\
 	   echo "--------------VCSN (Normalized):";		\
 	   ./normalized_composition-bench $$n_value;		\
 	done

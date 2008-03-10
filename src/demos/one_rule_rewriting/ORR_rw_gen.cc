@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_transducer.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
+#include <vaucanson/algorithms/rw_composition.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
@@ -167,8 +167,8 @@ int main(int argc, char** argv)
   automaton_t	left_right_auto = make_automaton(A, A);
   automaton_t	right_left_auto = make_automaton(A, A);
 
-  realtime_composition(left_auto, right_auto, left_right_auto);
-  realtime_composition(right_auto, left_auto, right_left_auto);
+  rw_composition(left_auto, right_auto, left_right_auto);
+  rw_composition(right_auto, left_auto, right_left_auto);
 
   std::string	left_name = name + "_left.xml";
   std::string	right_name = name + "_right.xml";
@@ -197,4 +197,3 @@ int main(int argc, char** argv)
 	    << right_left_name
 	    << std::endl;
 }
-

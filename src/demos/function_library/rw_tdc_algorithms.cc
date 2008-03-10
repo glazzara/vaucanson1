@@ -117,7 +117,7 @@ compose_command(int argc, char** argv)
   if (!is_realtime(b))
     b = realtime(b);
 
-  std::cout << automaton_saver(realtime_composition(a,b),
+  std::cout << automaton_saver(rw_composition(a,b),
 			       string_out (),
 			       XML ());
 }
@@ -182,7 +182,7 @@ is_realtime_command(int argc, char** argv)
 
 static
 void
-realtime_to_fmp_command(int argc, char** argv)
+rw_to_fmp_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
@@ -190,7 +190,7 @@ realtime_to_fmp_command(int argc, char** argv)
   fmp_transducer::automaton_t fmp_a =
     fmp_transducer::make_automaton(alphabet(), alphabet());
 
-  realtime_to_fmp(get_aut(argv[2]), fmp_a);
+  rw_to_fmp(get_aut(argv[2]), fmp_a);
 
   std::cout << automaton_saver(fmp_a, string_out (), XML ());
 }
@@ -281,7 +281,7 @@ command_map[] =
   { "domain",			domain_command			},
   { "is-empty",		is_empty_command			},
   { "image",			ONE_ARG_COMMAND(get_aut, image) },
-  { "to-tdc",			realtime_to_fmp_command		},
+  { "to-tdc",			rw_to_fmp_command		},
   { "eps_removal",		eps_removal_command		},
   { "trim",			ONE_ARG_COMMAND(get_aut, trim)	},
   { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_EVALUATION_FMP_TEST_HH
 
 # include <vaucanson/algorithms/evaluation_fmp.hh>
-# include <vaucanson/algorithms/fmp_to_realtime.hh>
+# include <vaucanson/algorithms/fmp_to_rw.hh>
 # include <vaucanson/algorithms/internal/evaluation.hh>
 # include <vaucanson/boolean_transducer.hh>
 # include <vaucanson/boolean_automaton.hh>
@@ -91,7 +91,7 @@ evaluation_fmp_test(tests::Tester& t)
   boolean_transducer::automaton_t trans1 =
     boolean_transducer::make_automaton(first_at, second_at);
 
-  fmp_to_realtime(t1, trans1);
+  fmp_to_rw(t1, trans1);
   realtime_here(trans1);
 
   boolean_automaton::rat_exp_t exp =

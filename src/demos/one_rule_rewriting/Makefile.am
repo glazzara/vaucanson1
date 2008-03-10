@@ -15,20 +15,20 @@ include ../demo.mk
 
 noinst_PROGRAMS = \
   fibonacci_demo \
-  fibonacci_rt \
+  fibonacci_rw \
   fibonacci_tdc \
   ORR_demo \
-  ORR_rt \
+  ORR_rw \
   ORR_tdc
 
 fibonacci_demo_SOURCES = fibonacci_demo.cc
 
-fibonacci_rt_SOURCES = fibonacci_rt_gen.cc
+fibonacci_rw_SOURCES = fibonacci_rw_gen.cc
 
 fibonacci_tdc_SOURCES = fibonacci_tdc_gen.cc
 
 ORR_demo_SOURCES = ORR_demo.cc
 
-ORR_rt_SOURCES = ORR_rt_gen.cc
+ORR_rw_SOURCES = ORR_rw_gen.cc
 
 ORR_tdc_SOURCES = ORR_tdc_gen.cc

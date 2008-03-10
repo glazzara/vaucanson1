@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,11 +28,10 @@
 # include <vaucanson/algorithms/eps_removal.hh>
 # include <vaucanson/algorithms/eps_removal_sp.hh>
 # include <vaucanson/algorithms/evaluation_fmp.hh>
-# include <vaucanson/algorithms/fmp_to_realtime.hh>
+# include <vaucanson/algorithms/fmp_to_rw.hh>
 # include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/internal/outsplitting.hh>
 # include <vaucanson/algorithms/normalized_composition.hh>
 # include <vaucanson/algorithms/sub_normalize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/invert.hh>
-
