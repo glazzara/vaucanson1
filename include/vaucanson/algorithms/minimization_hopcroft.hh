@@ -57,6 +57,9 @@ namespace vcsn {
    * @param a The automaton to minimize.
    *
    * @return A fresh automaton that is the quotient of 'a'.
+   *
+   * @see CIAA 2005, "Inside Vaucanson" (in which the algorithm is
+   * described by Sylvain Lombardy)
    */
   template<typename A, typename T>
   Element<A, T>
