@@ -187,6 +187,8 @@ main()
 
   automaton_t	left_auto = replace_left(from, to, A, A);
 
+  realtime_here(left_auto);
+
   tools::dot_display(left_auto, "G", true);
   eval_an_expression(left_auto);
 
