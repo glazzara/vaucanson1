@@ -1,5 +1,10 @@
 2008-03-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add missing tag INTERFACE.
+	* include/vaucanson/algorithms/minimization_hopcroft.hh: Here.
+
+2008-03-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add references for quotient algorithm, #133.
 	Fix ticket #133.
 	* include/vaucanson/algorithms/minimization_hopcroft.hh: Here.

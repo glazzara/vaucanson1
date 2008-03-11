@@ -31,6 +31,7 @@
 /** @} */
 
 // INTERFACE: Automaton minimization_hopcroft(const Automaton& a) { return vcsn::minimization_hopcroft(*a); }
+// INTERFACE: Automaton quotient(const Automaton& a) { return vcsn::quotient(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
