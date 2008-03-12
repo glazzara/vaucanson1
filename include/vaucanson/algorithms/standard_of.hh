@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,18 +51,6 @@ namespace vcsn {
   template <typename A, typename T, typename Exp>
   void
   standard_of(Element<A, T>& a, const Exp& e);
-
-  /**
-   * Convert a rational expression into a standard automaton.
-   *
-   * @param  e The expression to convert.
-   * @return A standard automaton.
-   *
-   * @note The automaton is defined using the series of the expression.
-   */
-  template <typename A, typename T, typename Exp>
-  Element<A, T>
-  standard_of(const Exp& e);
 
   /** @} */
 

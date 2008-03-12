@@ -1,7 +1,11 @@
-2008-03-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+2008-03-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	Add missing tag INTERFACE.
-	* include/vaucanson/algorithms/minimization_hopcroft.hh: Here.
+	Ticket #69.
+
+	* include/vaucanson/algorithms/standard_of.hh,
+	include/vaucanson/algorithms/standard_of.hxx (standard_of): Remove
+	the definition that has the output automaton as a return type, it
+	cannot be instantiated implicitly.
 
 2008-03-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
