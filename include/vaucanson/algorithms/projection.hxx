@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -129,33 +129,6 @@ namespace vcsn {
   {
     do_identity(aut.structure(), aut.structure().series().monoid(),
 		res.structure(), res.structure().series().monoid(), aut, res);
-  }
-
-  template <typename S, typename S2, typename T, typename T2>
-  Element<S2, T2>
-  identity(const Element<S,T>& aut)
-  {
-    typedef Element<S, T> auto_t;
-
-    typedef algebra::FreeMonoidProduct<
-      typename auto_t::series_set_t::monoid_t,
-      typename auto_t::series_set_t::monoid_t> monoid_t;
-
-    typedef algebra::Series<typename auto_t::series_set_t::semiring_t,
-      monoid_t>
-      series_set_t;
-
-    monoid_t		monoid (aut.structure().series().monoid(),
-				aut.structure().series().monoid());
-
-    series_set_t			series
-      (aut.structure().series().semiring(), monoid);
-    Automata<series_set_t>		aut_set(series);
-    Element< Automata<series_set_t>, T>	res(aut_set);
-
-    do_identity(aut.structure(), aut.structure().series().monoid(),
-		res.structure(), res.structure().series().monoid(), aut, res);
-    return res;
   }
 
 }

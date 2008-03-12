@@ -1,5 +1,14 @@
 2008-03-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Ticket #67.
+
+	* include/vaucanson/algorithms/projection.hh,
+	include/vaucanson/algorithms/projection.hxx (identity): Remove
+	the definition that has the output automaton as a return type, it
+	cannot be instantiated implicitly.
+
+2008-03-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Ticket #69.
 
 	* include/vaucanson/algorithms/standard_of.hh,
