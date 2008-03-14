@@ -1,3 +1,9 @@
+2008-03-14  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add template before templated method.
+	* include/vaucanson/automata/implementation/bmig/vgraph_container.hxx: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hxx: .
+
 2008-03-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Ticket #67.

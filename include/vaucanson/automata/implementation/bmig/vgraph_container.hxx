@@ -79,7 +79,7 @@ namespace vcsn
     }
 
     TPARAM
-    typename ITERATOR::VGraphContainerIterator&
+    ITERATOR&
     ITERATOR::operator++()
     {
       if (next_ != container_.end())
@@ -90,7 +90,7 @@ namespace vcsn
     }
 
     TPARAM
-    typename ITERATOR::VGraphContainerIterator
+    ITERATOR
     ITERATOR::operator++(int)
     {
       iterator tmp = it_;
@@ -106,7 +106,7 @@ namespace vcsn
     `-----------------------------------------*/
 
 # define CONTAINER						\
-    VGraphContainer<EdgesIterator, GraphData, HTransition> 
+    VGraphContainer<EdgesIterator, GraphData, HTransition>
 
     TPARAM
     CONTAINER::VGraphContainer(const GraphData& g)

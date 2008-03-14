@@ -290,8 +290,8 @@ namespace vcsn
       precondition (has_state(s));
 
       // One removes the state h
-      graph_.get<src>().erase(s.value());
-      graph_.get<dst>().erase(s.value());
+      graph_.template get<src>().erase(s.value());
+      graph_.template get<dst>().erase(s.value());
 
       if (s != (number_of_state_ - 1) && (number_of_state_ - 1))
       {
@@ -627,7 +627,7 @@ namespace vcsn
                         ::vcsn::delta_kind::DeltaKind) const			\
     {										\
       assertion(has_state(s));							\
-      Target##_range r = graph_.get<Target>().equal_range(s.value());		\
+      Target##_range r = graph_.template get<Target>().equal_range(s.value());		\
       for (Target##_iterator e = r.first; e != r.second; ++e)			\
         if (query(hedge_t(graph_.project<0>(e))))				\
           *res++ = GetElt;							\
@@ -651,7 +651,7 @@ namespace vcsn
                         misc::IsBool##_t) const					\
     {										\
       assertion(has_state(s));							\
-      Target##_range r = graph_.get<Target>().equal_range(s.value());		\
+      Target##_range r = graph_.template get<Target>().equal_range(s.value());		\
       for (Target##_iterator e = r.first; e != r.second; ++e)			\
         if (query(htransition_t(graph_.project<0>(e))))				\
         {									\
