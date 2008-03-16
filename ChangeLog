@@ -1,5 +1,28 @@
 2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix includes in the test-suites.
+	* boolean_automaton.defs,
+	* boolean_transducer.defs,
+	* context_headers_boolean.defs,
+	* context_headers_boolean_transducer.defs,
+	* context_headers_fmp_transducer.defs,
+	* context_headers_r.defs,
+	* context_headers_z.defs,
+	* context_headers_z_fmp_transducer.defs,
+	* context_headers_z_max_plus.defs,
+	* context_headers_z_min_plus.defs,
+	* context_headers_z_transducer.defs,
+	* fmp_transducer.defs,
+	* z_automaton.defs,
+	* z_fmp_transducer.defs,
+	* z_max_plus_automaton.defs,
+	* z_min_plus_automaton.defs,
+	* z_transducer.defs:
+	  Include the _structures.hh since they do not include all the
+	  algorithms.
+
+2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix algorithm sub_automaton().
 	* sub_automaton.hxx:
 	  Fix errors related to automata copy.

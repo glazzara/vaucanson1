@@ -1,4 +1,4 @@
-#include <vaucanson/boolean_transducer.hh>
+#include <vaucanson/boolean_transducer_structures.hh>
 
 using namespace vcsn::boolean_transducer;
 

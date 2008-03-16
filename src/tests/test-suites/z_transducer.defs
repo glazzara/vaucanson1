@@ -1,4 +1,4 @@
-#include <vaucanson/z_transducer.hh>
+#include <vaucanson/z_transducer_structures.hh>
 
 #define TEST_STATIC_ARGS \
    vcsn::z_transducer::automaton_t

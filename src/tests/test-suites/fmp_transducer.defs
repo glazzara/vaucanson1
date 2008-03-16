@@ -1,4 +1,4 @@
-#include <vaucanson/fmp_transducer.hh>
+#include <vaucanson/fmp_transducer_structures.hh>
 
 #define TEST_STATIC_ARGS \
    vcsn::fmp_transducer::automaton_t

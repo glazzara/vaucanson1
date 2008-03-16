@@ -1,4 +1,4 @@
-#include <vaucanson/r_automaton.hh>
+#include <vaucanson/r_automaton_structures.hh>
 
 using namespace vcsn::r_automaton;
 

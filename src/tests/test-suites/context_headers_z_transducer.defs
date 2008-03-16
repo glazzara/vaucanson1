@@ -1,4 +1,4 @@
-#include <vaucanson/z_transducer.hh>
+#include <vaucanson/z_transducer_structures.hh>
 
 using namespace vcsn::z_transducer;
 

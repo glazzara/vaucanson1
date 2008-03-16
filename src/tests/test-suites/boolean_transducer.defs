@@ -1,4 +1,4 @@
-#include <vaucanson/boolean_transducer.hh>
+#include <vaucanson/boolean_transducer_structures.hh>
 
 #define TEST_STATIC_ARGS \
    vcsn::boolean_transducer::automaton_t

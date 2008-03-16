@@ -1,4 +1,4 @@
-#include <vaucanson/boolean_automaton.hh>
+#include <vaucanson/boolean_automaton_structures.hh>
 
 using namespace vcsn::boolean_automaton;
 

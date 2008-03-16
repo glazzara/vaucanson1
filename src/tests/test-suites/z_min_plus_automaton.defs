@@ -1,4 +1,4 @@
-#include <vaucanson/z_min_plus_automaton.hh>
+#include <vaucanson/z_min_plus_automaton_structures.hh>
 
 #define TEST_STATIC_ARGS \
    vcsn::z_min_plus_automaton::automaton_t

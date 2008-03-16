@@ -1,4 +1,4 @@
-#include <vaucanson/fmp_transducer.hh>
+#include <vaucanson/fmp_transducer_structures.hh>
 
 using namespace vcsn::fmp_transducer;
 
