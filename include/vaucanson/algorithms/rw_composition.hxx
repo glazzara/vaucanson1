@@ -36,15 +36,13 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Trans_t);
 
-    using namespace std;
-
     typedef series_set_elt_t exp_t;
-    typedef typename series_set_elt_t::semiring_elt_t  output_exp_t;
-    typedef set<std::pair<hstate_t, output_exp_t> >    state_exp_pair_set_t;
-    typedef pair<hstate_t, hstate_t>		       state_pair_t;
-    typedef map<state_pair_t, hstate_t>		       state_pair_map_t;
-    typedef queue<state_pair_t>			       state_pair_queue_t;
-    typedef set<htransition_t>			       set_of_transitions_t;
+    typedef typename series_set_elt_t::semiring_elt_t     output_exp_t;
+    typedef std::set<std::pair<hstate_t, output_exp_t> >  state_exp_pair_set_t;
+    typedef std::pair<hstate_t, hstate_t>		  state_pair_t;
+    typedef std::map<state_pair_t, hstate_t>		  state_pair_map_t;
+    typedef std::queue<state_pair_t>			  state_pair_queue_t;
+    typedef std::set<htransition_t>			  set_of_transitions_t;
 
     typedef typename Trans_t::value_t			  T;
     typedef typename output_projection_helper<S, T>::ret  Auto_t;
@@ -67,6 +65,7 @@ namespace vcsn {
     for_all_const_initial_states(p, lhs)
     {
       exp_t exp = lhs.get_initial(*p);
+      sep_set.clear();
       partial_evaluation(exp, rhs, sep_set);
 
       for_all_const_(state_exp_pair_set_t, mypair, sep_set)
@@ -86,7 +85,7 @@ namespace vcsn {
       }
 
     }
-    while(!sp_queue.empty())
+    while (!sp_queue.empty())
     {
       state_pair_t sp = sp_queue.front();
       sp_queue.pop();
@@ -145,7 +144,7 @@ namespace vcsn {
 
 	  exp_t s (lhs.structure().series());
 	  s.assoc(word, (*mypair).second);
-	  ret.add_series_transition( sp_map[sp], sp_map[sp1], s);
+	  ret.add_series_transition(sp_map[sp], sp_map[sp1], s);
 	}
       }
     }

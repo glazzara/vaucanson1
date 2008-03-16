@@ -105,9 +105,20 @@ namespace vcsn {
     htransition_set_t					transitions;
 
     Auto_t b = a;
-    standardize(b);
 
-    int num = b.final().size() + 1; // all final states and the initial state.
+    // Save a map linking hstates between automata a and b.
+    // This is needed to be able to fill state_exp_pair_set with correct hstates.
+    std::map<hstate_t, hstate_t>			states_map;
+    for (state_iterator i = a.states().begin(), j = b.states().begin(),
+	 end_ = a.states().end();
+	 i != end_;
+	 ++i, ++j)
+      states_map.insert(std::make_pair(*j, *i));
+
+//    standardize(b);
+
+    // all final states and the initial state.
+    int num = b.final().size() + b.initial().size();
 
     while (int(b.states().size()) != num)
     {
@@ -151,10 +162,10 @@ namespace vcsn {
       loop_sum.star();
       for_all_const_(sums_t, in, in_sums)
 	for_all_const_(sums_t, out, out_sums)
-      {
-	series_set_elt_t res = in->second * loop_sum * out->second;
-	b.add_series_transition(in->first, out->first, res);
-      }
+	{
+	  series_set_elt_t res = in->second * loop_sum * out->second;
+	  b.add_series_transition(in->first, out->first, res);
+	}
       b.del_state(q);
     }
 
@@ -180,7 +191,7 @@ namespace vcsn {
     {
       typename se_map_t::iterator i = se_m.find(*p);
       if (i != se_m.end())
-	state_exp_pair_set.insert(std::make_pair(*p, i->second));
+	state_exp_pair_set.insert(std::make_pair(states_map[*p], i->second));
     }
   }
 
@@ -236,9 +247,17 @@ namespace vcsn {
     Trans_t pro(t.structure());
     state_pair_map_t sp_m;
     pro = product(tmp_trans, t, sp_m);
+    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>	states_map_for_sp_m;
+    for_all_iterator (typename state_pair_map_t::iterator, i, sp_m)
+      states_map_for_sp_m.insert(std::make_pair(pro.get_state(size_t(i->first)), i->first));
+
     Auto_ret_t auto_p(auto_structure);
-    std::map<t_hstate_t, ret_hstate_t> proj_m;
+    state_state_map_t proj_m;
     auto_p = image(pro, proj_m);
+
+    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>	states_map_for_proj_m;
+    for_all_iterator (typename state_state_map_t::iterator, i, proj_m)
+      states_map_for_proj_m.insert(std::make_pair(auto_p.get_state(size_t(i->first)), i->first));
 
     /* unset final all the final states of auto_p */
     auto_p.clear_final();
@@ -258,8 +277,8 @@ namespace vcsn {
     {
       if (!auto_p.is_final(*u))
       {
-	t_hstate_t p = sp_m[proj_m[*u]].first;
-	t_hstate_t q = sp_m[proj_m[*u]].second;
+	t_hstate_t p = sp_m[states_map_for_sp_m[proj_m[states_map_for_proj_m[*u]]]].first;
+	t_hstate_t q = sp_m[states_map_for_sp_m[proj_m[states_map_for_proj_m[*u]]]].second;
 
 	if (tmp_trans.is_final(p))
 	  auto_p.add_spontaneous(*u, final_of[q]);
@@ -269,7 +288,6 @@ namespace vcsn {
     M se;
     partial_elimination(auto_p, se);
 
-    state_exp_pair_set.clear();
     for_all_(M, p, se)
     {
       se_pair_t my_pair = std::make_pair(is_final_of[(*p).first],
@@ -311,7 +329,10 @@ namespace vcsn {
 
     Trans_t tt = t;
     tt.clear_initial();
-    tt.set_initial(p);
+
+    // Here, we convert a hstate_t of t to a hstate_t of tt
+    // using the conversion to unsigned and get_state from an unsigned.
+    tt.set_initial(tt.get_state(size_t(p)));
 
     Trans_t tmp_trans(tt.structure());
     tmp_trans = extension(a, tt);
@@ -350,9 +371,27 @@ namespace vcsn {
   {
     Trans_t tt = t;
     tt.clear_initial();
-    tt.set_initial(p);
+
+    // Save a map linking hstates between automata t and tt.
+    // This is needed to be able to fill state_exp_pair_set with correct hstates.
+    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>	states_map;
+    for (typename Trans_t::state_iterator i = t.states().begin(), j = tt.states().begin(),
+	 end_ = t.states().end();
+	 i != end_;
+	 ++i, ++j)
+      states_map.insert(std::make_pair(*j, *i));
+
+    // Here, we convert a hstate_t of t to a hstate_t of tt
+    // using the conversion to unsigned and get_state from an unsigned.
+    tt.set_initial(tt.get_state(size_t(p)));
+
     trim_here(tt);
-    partial_1(a, tt, state_exp_pair_set);
+
+    M	temp_state_exp_pair_set;
+    partial_1(a, tt, temp_state_exp_pair_set);
+
+    for_all_iterator(typename M::iterator, i, temp_state_exp_pair_set)
+      state_exp_pair_set.insert(std::make_pair(states_map[i->first], i->second));
   }
 
   template<typename SA, typename TA,

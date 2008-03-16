@@ -1,5 +1,16 @@
 2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix rw_composition.
+	* internal/evaluation.hxx,
+	* rw_composition.hxx:
+	  Correct errors related to state renumbering and automata copy.
+	  hstates_t are linked to an automaton and should not be used on
+	  an other one. To do this, we must either convert them back to
+	  integer when possible and ask for the corresponding state, or
+	  use a map to link states from one automaton to the other.
+
+2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix hstate_t related bugs: operators and has_state().
 	* bmig/bmig_handlers_op.hxx:
 	  Fix hstate_t operators: we now compare the address of the int
