@@ -29,11 +29,11 @@ namespace vcsn
     | Convenient macros.  |
     `--------------------*/
 
-  # define BMIGRAPH_TPARAM						\
+# define BMIGRAPH_TPARAM						\
     template <class Kind, class WordValue, class WeightValue,		\
               class SeriesValue, class Letter, class Tag, class GeometryCoords>
 
-  # define BMIGRAPH							\
+# define BMIGRAPH							\
     Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, GeometryCoords>
 
     /*-------------------------.
@@ -115,30 +115,30 @@ namespace vcsn
   # define VCSN_COPY_GEOMETRY(Type)									\
       {													\
         typename geometry_t::Type##_geometry_map_t& map_##Type = geometry_.Type();			\
-        map_##Type.clear();										\
-        for (typename geometry_t::Type##_geometry_map_t::const_iterator i = g.geometry_.Type().begin();	\
-            i != g.geometry_.Type().end();								\
-            ++i)												\
-          map_##Type[i->first] = i->second;								\
+	map_##Type.clear();										\
+	for (typename geometry_t::Type##_geometry_map_t::const_iterator i = g.geometry_.Type().begin();	\
+	    i != g.geometry_.Type().end();								\
+	    ++i)												\
+	map_##Type[i->first] = i->second;								\
       }
       VCSN_COPY_GEOMETRY(states)
       VCSN_COPY_GEOMETRY(initials)
       VCSN_COPY_GEOMETRY(finals)
-  # undef VCSN_COPY_GEOMETRY
+# undef VCSN_COPY_GEOMETRY
       {
-        typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
-        map_transitions.clear();
-        for (typename geometry_t::transitions_geometry_map_t::const_iterator i = g.geometry_.transitions().begin();
-            i != g.geometry_.transitions().end();
-            ++i)
-        {
-          typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_],
-                                                                states_[*i->first.value()->to_],
-								i->first.value()->label_);
-                                                                //label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
-          if (tmp != graph_.end())
-            map_transitions[htransition_t(tmp)] = i->second;
-        }
+	typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
+	map_transitions.clear();
+	for (typename geometry_t::transitions_geometry_map_t::const_iterator i = g.geometry_.transitions().begin();
+	    i != g.geometry_.transitions().end();
+	    ++i)
+	{
+	  typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_],
+	      states_[*i->first.value()->to_],
+	      i->first.value()->label_);
+	  //label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
+	  if (tmp != graph_.end())
+	    map_transitions[htransition_t(tmp)] = i->second;
+	}
       }
     }
 
@@ -156,7 +156,7 @@ namespace vcsn
     BMIGRAPH::operator= (const self_t& g)
     {
       if (this == &g)
-        return *this;
+	return *this;
       tag_ = g.tag_;
       initial_bitset_ = g.initial_bitset_;
       final_bitset_ = g.final_bitset_;
@@ -169,52 +169,51 @@ namespace vcsn
       for (unsigned i = 0; i < g.number_of_state_; ++i)
       {
 	boost::shared_ptr<std::size_t> p(new std::size_t(i));
-        states_[i] = p;
+	states_[i] = p;
       }
       graph_.clear();
       for (typename graph_data_t::const_iterator i = g.graph_.begin();
-          i != g.graph_.end();
-          ++i)
-        graph_.insert(edge_data_t(states_[*i->from_],
-				  states_[*i->to_],
-				  i->label_));
-//				  label_container_.get_hlabel(g.label_container_.get_label(i->label_))));
-  # define VCSN_COPY_I_T(Set)									\
+	  i != g.graph_.end();
+	  ++i)
+	graph_.insert(edge_data_t(states_[*i->from_],
+	      states_[*i->to_],
+	      i->label_));
+# define VCSN_COPY_I_T(Set)									\
       for (typename Set##t::const_iterator i = g.Set.begin();					\
-          i != g.Set.end();									\
-          ++i)											\
-        Set.insert(initial_value_t (states_[*i->first], i->second));
+	  i != g.Set.end();									\
+	  ++i)											\
+      Set.insert(initial_value_t (states_[*i->first], i->second));
       VCSN_COPY_I_T(initial_)
       VCSN_COPY_I_T(final_)
-  # undef VCSN_COPY_I_T
+# undef VCSN_COPY_I_T
 
-  # define VCSN_COPY_GEOMETRY(Type)									\
+# define VCSN_COPY_GEOMETRY(Type)									\
       {													\
-        typename geometry_t::Type##_geometry_map_t& map_##Type = geometry_.Type();			\
-        map_##Type.clear();										\
-        for (typename geometry_t::Type##_geometry_map_t::const_iterator i = g.geometry_.Type().begin();	\
-            i != g.geometry_.Type().end();								\
-            ++i)												\
-          map_##Type[i->first] = i->second;								\
+	typename geometry_t::Type##_geometry_map_t& map_##Type = geometry_.Type();			\
+	map_##Type.clear();										\
+	for (typename geometry_t::Type##_geometry_map_t::const_iterator i = g.geometry_.Type().begin();	\
+	    i != g.geometry_.Type().end();								\
+	    ++i)												\
+	map_##Type[i->first] = i->second;								\
       }
       VCSN_COPY_GEOMETRY(states)
       VCSN_COPY_GEOMETRY(initials)
       VCSN_COPY_GEOMETRY(finals)
-  # undef VCSN_COPY_GEOMETRY
+# undef VCSN_COPY_GEOMETRY
       {
-        typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
-        map_transitions.clear();
-        for (typename geometry_t::transitions_geometry_map_t::const_iterator i = g.geometry_.transitions().begin();
-            i != g.geometry_.transitions().end();
-            ++i)
-        {
-          typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_],
-                                                                states_[*i->first.value()->to_],
-								i->first.value()->label_);
-                                                                //label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
-          if (tmp != graph_.end())
-            map_transitions[htransition_t(tmp)] = i->second;
-        }
+	typename geometry_t::transitions_geometry_map_t& map_transitions = geometry_.transitions();
+	map_transitions.clear();
+	for (typename geometry_t::transitions_geometry_map_t::const_iterator i = g.geometry_.transitions().begin();
+	    i != g.geometry_.transitions().end();
+	    ++i)
+	{
+	  typename graph_data_t::const_iterator tmp = find_edge(states_[*i->first.value()->from_],
+	      states_[*i->first.value()->to_],
+	      i->first.value()->label_);
+	  //label_container_.get_hlabel(g.label_container_.get_label(i->first.value()->label_)));
+	  if (tmp != graph_.end())
+	    map_transitions[htransition_t(tmp)] = i->second;
+	}
       }
       return *this;
     }
@@ -260,7 +259,13 @@ namespace vcsn
     bool
     BMIGRAPH::has_state (const hstate_t& s) const
     {
-      return s < states_.size();
+      // May be we should add a set or a hashtable to have
+      // a searching time better than linear
+      bool b = false;
+      for_all_iterator(states_data_t::const_iterator, i, states_)
+	if (*i == s.value())
+	  b = true;
+      return b;
     }
 
     BMIGRAPH_TPARAM
@@ -340,8 +345,8 @@ namespace vcsn
     BMIGRAPH_TPARAM
     void
     BMIGRAPH::set_initial (const hstate_t& s,
-                             const series_set_elt_value_t& v,
-                             const series_set_elt_value_t& z)
+                           const series_set_elt_value_t& v,
+                           const series_set_elt_value_t& z)
     {
       precondition(has_state(s));
       if (z == v)
@@ -351,7 +356,7 @@ namespace vcsn
       }
       else if (!initial_bitset_[s])
       {
-        initial_.insert (final_value_t (s.value(), v));
+        initial_.insert (initial_value_t (s.value(), v));
         initial_bitset_[s] = true;
       }
       else

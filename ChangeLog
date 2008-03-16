@@ -1,3 +1,14 @@
+2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix hstate_t related bugs: operators and has_state().
+	* bmig/bmig_handlers_op.hxx:
+	  Fix hstate_t operators: we now compare the address of the int
+	  instead of its value. It allows correct use of sets or maps
+	  in combination with state renumbering.
+
+	* bmig_graph_impl.hxx:
+	  Correction of the has_state method.
+
 2008-03-14  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add template before templated method.

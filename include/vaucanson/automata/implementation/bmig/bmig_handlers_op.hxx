@@ -64,20 +64,40 @@ namespace vcsn
 
 
 
-#define HOPERATOR(Op)					\
-inline							\
-bool operator Op (const handler<state_h, boost::shared_ptr<std::size_t> >& h1,\
-                  const handler<state_h, boost::shared_ptr<std::size_t> >& h2)\
-{ return int(h1) Op int(h2); }
+#define HOPERATOR(Op)								\
+inline										\
+bool operator Op (const handler<state_h, boost::shared_ptr<std::size_t> >& h1,	\
+                  const handler<state_h, boost::shared_ptr<std::size_t> >& h2)	\
+{										\
+  return h1.value() Op h2.value();						\
+}
 
 namespace vcsn
 {
   HOPERATOR(==);
   HOPERATOR(!=);
   HOPERATOR(<);
-  HOPERATOR(>);
-  HOPERATOR(<=);
-  HOPERATOR(>=);
+
+  inline
+  bool operator> (const handler<state_h, boost::shared_ptr<std::size_t> >& h1,
+		  const handler<state_h, boost::shared_ptr<std::size_t> >& h2)
+  {
+    return h2 > h1;
+  }
+
+  inline
+  bool operator<= (const handler<state_h, boost::shared_ptr<std::size_t> >& h1,
+		   const handler<state_h, boost::shared_ptr<std::size_t> >& h2)
+  {
+    return h1 < h2 || h1 == h2;
+  }
+
+  inline
+  bool operator>= (const handler<state_h, boost::shared_ptr<std::size_t> >& h1,
+		   const handler<state_h, boost::shared_ptr<std::size_t> >& h2)
+  {
+    return !(h1 < h2);
+  }
 }
 #undef HOPERATOR
 
