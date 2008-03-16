@@ -1,5 +1,13 @@
 2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix algorithm sub_automaton().
+	* sub_automaton.hxx:
+	  Fix errors related to automata copy.
+	  Create a new hstate_t set containing the hstates corresponding
+	  to the new automaton.
+
+2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix rw_composition.
 	* internal/evaluation.hxx,
 	* rw_composition.hxx:

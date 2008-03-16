@@ -58,7 +58,11 @@ namespace vcsn {
   sub_automaton(const Element<A, T>& a, const StatesSet& s, bool check_states)
   {
     Element<A, T> ret(a);
-    do_sub_automaton_here(ret.structure(), ret, s, check_states);
+    std::set<typename Element<A, T>::hstate_t> ret_s;
+
+    for_all_iterator(typename StatesSet::iterator, i, s)
+      ret_s.insert(ret.get_state(size_t(*i)));
+    do_sub_automaton_here(ret.structure(), ret, ret_s, check_states);
     return ret;
   }
 
