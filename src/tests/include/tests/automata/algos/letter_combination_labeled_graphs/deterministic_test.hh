@@ -25,6 +25,7 @@
 # include <tests/check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
+# include <vaucanson/algorithms/is_deterministic.hh>
 # include <vaucanson/tools/xml_dump.hh>
 
 template <class Auto>

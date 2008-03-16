@@ -1,5 +1,13 @@
 2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix tests in test-suite.
+	* boolean_automata/complete_test.hh: .
+	* graphs/accessible_test.hh: .
+	* graphs/sub_automaton_test.hh: .
+	* letter_combination_labeled_graphs/deterministic_test.hh: .
+
+2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix includes in the test-suites.
 	* boolean_automaton.defs,
 	* boolean_transducer.defs,

@@ -17,11 +17,20 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_GRAPHS_ACCESSIBLE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_GRAPHS_ACCESSIBLE_TEST_HH
 
-# include <algorithm>
 # include <tests/check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/algorithms/accessible.hh>
+
+template <typename Iterator1, typename Auto>
+bool
+test_has_states(Iterator1 i, Iterator1 end, const Auto& a)
+{
+  for (; i != end; ++i)
+    if (!a.has_state(*i))
+      return false;
+  return true;
+}
 
 // FIXME: This is minimal tests.
 template <class Auto>
@@ -45,8 +54,9 @@ bool accessible_test(tests::Tester& tg)
     accessible_here(ac_auto);
     std::set<hstate_t>	ac_states = accessible_states(ac_auto);
     std::set<hstate_t>	coac_states = coaccessible_states(coac_auto);
-    if (equal(ac_states.begin(), ac_states.end(), ac_auto.states().begin()) &&
-	equal(coac_states.begin(), coac_states.end(), coac_auto.states().begin()))
+
+    if (test_has_states(ac_states.begin(), ac_states.end(), ac_auto) &&
+        test_has_states(coac_states.begin(), coac_states.end(), coac_auto))
       success++;
     else
       TEST_MSG("TEST: Accessible algorithm do not give expected states.");

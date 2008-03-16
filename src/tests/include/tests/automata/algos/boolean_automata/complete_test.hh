@@ -23,8 +23,7 @@
 # include <tests/check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/complete.hh>
-# include <vaucanson/algorithms/trim.hh>
-# include <vaucanson/algorithms/determinize.hh>
+# include <vaucanson/algorithms/is_deterministic.hh>
 # include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
