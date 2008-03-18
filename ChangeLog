@@ -1,3 +1,8 @@
+2008-03-19  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix error introduced in patch 1932.
+	* lib/generate_libvcsn.rb: move 3 lines.
+
 2008-03-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
 
 	Add missing command entries in tdc_commands.cc
