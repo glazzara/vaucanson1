@@ -93,7 +93,7 @@ maintainer-clean-local:
 ## RST documentation.  ##
 ## ------------------- ##
 
-dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
+dist_pdf_DATA = README.pdf FAQ.pdf HACKING.pdf NEWS.pdf
 MAINTAINERCLEANFILES = $(dist_pdf_DATA) $(srcdir)/stamp
 
 TEXI2DVI = $(srcdir)/share/bin/texi2dvi
@@ -112,7 +112,7 @@ SUFFIXES = .txt .tex .pdf
 	mv $@.tmp $@
 
 
-EXTRA_DIST = README.txt FAQ.txt NEWS.txt \
+EXTRA_DIST = README.txt FAQ.txt HACKING.txt NEWS.txt \
 	     $(SHAREFILES) share/README $(srcdir)/stamp $(srcdir)/$(DOCDIR)
 
 ## ------------------ ##

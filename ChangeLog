@@ -1,3 +1,8 @@
+2008-03-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/HACKING.txt: New file.
+	* doc/Makefile.am (EXTRA_DIST, dist_pdf_DATA): Adjust.
+
 2008-03-18  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix bad include.

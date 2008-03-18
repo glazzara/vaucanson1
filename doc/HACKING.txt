@@ -1,0 +1,41 @@
+Making a release
+================
+
+Don't do these steps from memory.
+
+  - Make sure the last run of the autobuilder was successful.
+  - Check track to make sure there are no important pending tickets.
+
+  - Make sure ``doc/NEWS.txt`` is up-to-date.
+    (Mention important known bugs!)
+  - Make sure ``doc/README.txt`` is up-to-date.
+  - Make sure ``doc/FAQ.txt`` is up-to-date.
+
+  - Make sure AUTHORS is up-to-date.
+
+Make sure your system has up-to-date tools (Autotools, Swig, Doxygen,
+...)  before continuing.
+
+  - Bump the version number in ``configure.ac``.
+  - Run ``bootstrap``.
+  - Write the ``ChangeLog`` entry for all the above changes
+    (But don't commit it before ``distcheck``.)
+
+  - Run ``make distcheck``.
+  - Commit all changes on success.  Commit suicide otherwise.
+  - Tag the repository for the release.
+
+  - Append a ``a`` to the version number in ``configure.ac`` and commit
+    this new change so that the next run of the autobuilder won't
+    create a release.
+
+  - Copy the files created by ``distcheck`` to ``/lrde/dload/vaucanson/``
+  - Create the release page on the LRDE wiki
+  - Update the Vaucanson page to point to it
+
+  - Send an announcement to vaucanson@lrde.epita.fr
+
+  - Install the new version on ``vcsn.enst.fr``.
+
+  - Complete and detail this list with what was missing (whatever will
+    help the next guy doing the release).
