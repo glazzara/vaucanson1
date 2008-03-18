@@ -1,3 +1,11 @@
+2008-03-18  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Add missing command entries in tdc_commands.cc
+	* taf-kit/src/tdc_commands.cc: There.
+
+	For is_empty() and has_succ_comp().
+	Tickets #37 and #119 are now closed.
+
 2008-03-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/HACKING.txt: New file.
