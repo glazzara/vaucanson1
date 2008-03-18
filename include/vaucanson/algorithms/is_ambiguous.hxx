@@ -40,9 +40,15 @@ namespace vcsn {
 
     // This map is used to know which state is created by which two ones.
     std::map<hstate_t, std::pair<hstate_t, hstate_t> >  m;
-    const std::set<hstate_t>& s = useful_states (product (aut, aut, m));
+    std::map<hstate_t, std::pair<hstate_t, hstate_t> >  aut_p_m;
+    Auto_ aut_p = product (aut, aut, m);
+    for (typename std::map<hstate_t, std::pair<hstate_t, hstate_t> >::iterator i = m.begin();
+	 i != m.end(); ++i)
+      aut_p_m.insert(std::make_pair(aut_p.get_state(size_t(i->first)), i->second));
+
+    const std::set<hstate_t>& s = useful_states (aut_p);
     for_all_const_ (std::set<hstate_t>, i, s)
-      if (m[*i].first != m[*i].second)
+      if (aut_p_m[*i].first != aut_p_m[*i].second)
 	return true;
     return false;
   }

@@ -1,3 +1,11 @@
+2008-03-18  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix is_ambiguous.
+	* include/vaucanson/algorithms/is_ambiguous.hxx:
+	  We need to create a map of correspondance to work with the set
+	  filled by product. This is related to the copy of the automaton
+	  and the fact that hstates are dependant of the automaton.
+
 2008-03-16  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix tests in test-suite.
