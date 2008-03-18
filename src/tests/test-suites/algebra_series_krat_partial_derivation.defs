@@ -1,6 +1,7 @@
 // FIXME: This file is almost a duplicate from
 // algebra_series_krat_derivation.defs.
 
+#include <tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh>
 #include <tests/algebra/series/krat/derivations/derivations_common.hh>
 
 #include <vaucanson/algebra/implementation/free_monoid/predefs.hh>

@@ -1,6 +1,6 @@
 #!/bin/sh
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2004, 2005, 2006 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2004, 2005, 2006, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ set -e
 # Check args
 if [ $# -le 2 ]; then
   echo 'usage: '
-  echo '$0 destination_directory description_file tests_dirs'
+  echo "$0 destination_directory description_file tests_dirs"
   exit 1
 fi
 

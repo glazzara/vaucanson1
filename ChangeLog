@@ -1,3 +1,18 @@
+2008-03-18  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix bad include.
+	* lib/generate_libvcsn.rb: Add particular treatment for eval INTERFACE balise.
+	* src/tests/bin/generate-test-suite.sh: Fix quote.
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh: .
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh: .
+	* src/tests/test-suites/algebra_series_krat_partial_derivation.defs:
+	  Change include position.
+
 2008-03-18  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Disable xml-diffs in the tests on taf-kit.

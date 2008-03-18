@@ -2,7 +2,7 @@
 # generate_libvcsn.rb: this file is part of the Vaucanson project.
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2007 The Vaucanson Group.
+# Copyright (C) 2007, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -191,6 +191,9 @@ files.each { |file|
 	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_impl_t')
 	  tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
 	  tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
+          if file =~ /eval\.hh/
+            tmp = tmp.gsub(/int/, 'Automaton::semiring_elt_t')
+          end
 	  output.push("  template", tmp)
 	end
       end
