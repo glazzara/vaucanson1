@@ -1,5 +1,12 @@
 2008-03-18  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Disable xml-diffs in the tests on taf-kit.
+	* taf-kit/tests/vcsn-b.test:
+	  Disable the xml diffs because the cannot be accurate because
+	  of the state renumbering done with bmig.
+
+2008-03-18  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix is_ambiguous.
 	* include/vaucanson/algorithms/is_ambiguous.hxx:
 	  We need to create a map of correspondance to work with the set

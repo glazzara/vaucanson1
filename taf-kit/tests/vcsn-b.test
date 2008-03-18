@@ -223,7 +223,7 @@ done
 
 for a in $AUTOMATA; do
   vcsn-b identity $a >tmp.xml
-  $DIFF $a tmp.xml
+#  $DIFF $a tmp.xml
 done
 
 ## --------------------------------- ##
