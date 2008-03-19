@@ -115,6 +115,7 @@ Year 2008 students
   - Bug fixes.
 
 * Guillaume Lazzara			guillaume.lazzara@lrde.epita.fr
+  - BMIG Graph data structures,
   - Performances in Vaucanson,
   - Lib VCSN,
   - Bug fixes.
@@ -140,6 +141,19 @@ Year 2009 students
   - Bug fixes.
 
 * Jimmy Ma				jimmy.ma@lrde.epita.fr
+  - BMIG Graph data structures,
   - Performances in Vaucanson,
   - Lib VCSN,
   - Bug fixes.
+
+
+==================
+Year 2010 students
+==================
+
+* Florent D'Halluin			florent.dhalluin@lrde.epita.fr
+  - Internal pipes in TAF-Kit,
+  - Bug fixes.
+
+* Jerome Galtier			jerome.galtier@lrde.epita.fr
+

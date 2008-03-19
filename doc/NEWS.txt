@@ -9,6 +9,32 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
+Vaucanson 1.2, March 19th, 2008
+===============================
+
+- The Vaucanson library
+
+  + New graph data structure based on boost multi index: bmig.
+  + It is now possible to choose between bmig and the old implementation
+    which is now called listg.
+
+- Algorithms
+
+  + Rename fmp_to_realtime() as fmt_to_rw().
+  + Rename realtime_to_fmp() as rw_to_fmp().
+  + Rename realtime_composition() as rw_composition().
+
+- TAF-Kit
+
+  + Rename sum as union.
+  + is_empty is now is_void.
+  + New is_empty.
+
+- Dependencies
+
+  + GNU C++ Compiler (GCC) version 4 or higher.
+  + Boost C++ version 1.34 or higher.
+
 Vaucanson 1.1.1, December 14th, 2007
 ====================================
 
