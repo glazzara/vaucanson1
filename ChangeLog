@@ -1,5 +1,10 @@
 2008-03-20  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	1.2a.
+	* configure.ac: Bump version to 1.2a.
+
+2008-03-20  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Get ready for 1.2
 	* configure.ac: Bump version to 1.2.
 
