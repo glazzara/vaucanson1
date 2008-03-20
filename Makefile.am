@@ -20,7 +20,7 @@ endif
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-vaucanswig
+DISTCHECK_CONFIGURE_FLAGS = ${DISTCHECK_CONFIGURE_FLAGS} --enable-demos --enable-vaucanswig
 
 # Prevent accidental edition of generated files.
 $(srcdir)/README: $(srcdir)/doc/README.txt

@@ -1,3 +1,9 @@
+2008-03-20  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix macro in Makefile.
+	* Makefile.am: Now the buildfarm will compil vaucanswig even if
+	  DISTCHECK_CONFIGURE_FLAGS is redefined.
+
 2008-03-20  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	1.2a.
