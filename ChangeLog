@@ -1,3 +1,14 @@
+2008-03-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Use any --with-python, --with-boost, and --with-xerces
+	flags passed to configure during distcheck.
+
+	* configure.ac (MORE_DISTCHECK_CONFIGURE_FLAGS): Populate this
+	variable with the --with-python, --with-boost, and --with-xerces
+	flags that were passed to configure.
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Use
+	MORE_DISTCHECK_CONFIGURE_FLAGS.
+
 2008-03-20  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	1.2a.

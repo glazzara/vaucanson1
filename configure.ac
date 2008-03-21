@@ -57,6 +57,11 @@ AC_ARG_WITH([python],
 	[ac_python_path="$withval"],[])
 
 
+AC_SUBST([MORE_DISTCHECK_CONFIGURE_FLAGS])
+if test "${with_python+set}" = set; then
+  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-python=$with_python"
+fi
+w
 # Always check for swig: it is needed by `make dist' (that will recurse
 # vaucanswig) in case the *.py files do not exist already.  E.g., after
 # a fresh checkout.
@@ -95,6 +100,11 @@ AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 #Boost
 AX_BOOST_BASE([1.34])
 
+if test "${with_boost+set}" = set; then
+  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-boost=$with_boost"
+fi
+
+
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -111,6 +121,11 @@ AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 # AC_CHECK_HEADERS([stl_config.h])
 
 VCSN_XML
+
+if test "${with_xerces+set}" = set; then
+  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-xerces=$with_xerces"
+fi
+
 VCSN_TAF_KIT
 
 ##
