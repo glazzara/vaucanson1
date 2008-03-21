@@ -13,10 +13,15 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = argp lib include src data taf-kit tools doc build-aux debian
-if ENABLE_VAUCANSWIG
-  SUBDIRS += vaucanswig
+if ENABLE_TAF_KIT
+  MAYBE_TAF_KIT = taf-kit
 endif
+if ENABLE_VAUCANSWIG
+  MAYBE_VAUCANSWIG = vaucanswig
+endif
+
+SUBDIRS = argp lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
+	  tools doc build-aux debian
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 

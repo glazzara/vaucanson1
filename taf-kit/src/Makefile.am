@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -16,13 +16,7 @@ include $(top_srcdir)/vaucanson.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
-Progs = vcsn-b vcsn-z vcsn-tdc
-
-if VCSN_TAF_KIT
-  bin_PROGRAMS = $(Progs)
-else
-  EXTRA_PROGRAMS = $(Progs)
-endif
+bin_PROGRAMS = vcsn-b vcsn-z vcsn-tdc
 
 COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\

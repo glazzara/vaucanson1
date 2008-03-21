@@ -1,6 +1,6 @@
 #                                                           -*- Autoconf -*-
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006 The Vaucanson Group.
+# Copyright (C) 2006, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -56,6 +56,5 @@ AC_DEFUN([VCSN_TAF_KIT],
   else
     enable_taf_kit=no
   fi
-  m4_pattern_allow([^VCSN_TAF_KIT$])
-  AM_CONDITIONAL([VCSN_TAF_KIT], [test x$enable_taf_kit = xyes])
+  AM_CONDITIONAL([ENABLE_TAF_KIT], [test x$enable_taf_kit = xyes])
 ])

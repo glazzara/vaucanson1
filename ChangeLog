@@ -1,5 +1,17 @@
 2008-03-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	We should not run "make check" in taf-kit if the taf-kit binaries
+	have been disabled.
+
+	* Makefile.am (SUBDIRS): Rewrite using the MAYBE_ idiom.  Recurse
+	into taf-kit conditionally.
+	* taf-kit/src/Makefile.am (bin_PROGRAMS): Build all programs
+	unconditionally.
+	* build-aux/vcsn-taf-kit.m4 (VCSN_TAF_KIT): Rename as ...
+	(ENABLE_TAF_KIT): ... for consistency.
+
+2008-03-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Use any --with-python, --with-boost, and --with-xerces
 	flags passed to configure during distcheck.
 
