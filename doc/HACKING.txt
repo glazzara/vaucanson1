@@ -4,7 +4,9 @@ Making a release
 Don't do these steps from memory.
 
   - Make sure the last run of the autobuilder was successful.
-  - Check track to make sure there are no important pending tickets.
+  - Check trac to make sure there are no important pending tickets.
+
+  - Update ``doc/share/`` with ``cd doc; make share-up``.
 
   - Make sure ``doc/NEWS.txt`` is up-to-date.
     (Mention important known bugs!)

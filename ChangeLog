@@ -1,3 +1,9 @@
+2008-03-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/share/bin/texi2dvi, doc/share/styles/mycxx.sty: Update
+	from master.
+	* doc/HACKING.txt: We should run "make share-up" before releases.
+
 2008-03-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	We should not run "make check" in taf-kit if the taf-kit binaries

@@ -26,6 +26,9 @@
 %   SIGN # (U+0023)") and pronounced "C Sharp".
 \DeclareRobustCommand{\CsTeX}{\mycxx@style C\#}
 
+\DeclareRobustCommand{\DTeX}{\mycxx@style D}
+
+
 %% Same as \texorpdfstring, but if not defined expands the
 %% TeX part only.
 \newcommand{\mycxx@texorpdfstring}[2]
@@ -46,6 +49,9 @@
 \DeclareRobustCommand{\Cs}
   {\mycxx@texorpdfstring{\CsTeX}{C\#}\xspace}
 
+\DeclareRobustCommand{\D}
+  {\mycxx@texorpdfstring{\DTeX}{D}\xspace}
+
 %% Versions that expect hyperref to be loaded, hence \texorpdfstring
 %% is defined.
 \DeclareRobustCommand{\CHR}
@@ -56,6 +62,9 @@
 
 \DeclareRobustCommand{\CsHR}
   {\texorpdfstring{\CsTeX}{C\#}\xspace}
+
+\DeclareRobustCommand{\DHR}
+  {\texorpdfstring{\DTeX}{D}\xspace}
 
 \ExecuteOptions{normal}
 \ProcessOptions

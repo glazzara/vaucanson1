@@ -1,9 +1,9 @@
 #! /bin/sh
 # texi2dvi --- produce DVI (or PDF) files from Texinfo (or (La)TeX) sources.
-# $Id: texi2dvi,v 1.104 2007/09/10 00:36:30 karl Exp $
+# $Id: texi2dvi,v 1.118 2008/03/23 15:21:40 karl Exp $
 #
 # Copyright (C) 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2001,
-# 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+# 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,12 +33,12 @@ unset RUNNING_KSH
 set -e
 
 # This string is expanded by rcs automatically when this file is checked out.
-rcs_revision='$Revision: 1.104 $'
+rcs_revision='$Revision: 1.118 $'
 rcs_version=`set - $rcs_revision; echo $2`
 program=`echo $0 | sed -e 's!.*/!!'`
 version="texi2dvi (GNU Texinfo 4.11) $rcs_version
 
-Copyright (C) 2007 Free Software Foundation, Inc.
+Copyright (C) 2008 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -105,25 +105,25 @@ can also be set using the environment variable TEXI2DVI_BUILD_MODE.
 
 Valid MODEs are:
   \`local'      compile in the current directory, leaving all the auxiliary
-		 files around.  This is the traditional TeX use.
+	       files around.  This is the traditional TeX use.
   \`tidy'       compile in a local *.t2d directory, where the auxiliary files
-		 are left.  Output files are copied back to the original file.
+	       are left.  Output files are copied back to the original file.
   \`clean'      same as \`tidy', but remove the auxiliary directory afterwards.
-		 Every compilation therefore requires the full cycle.
+	       Every compilation therefore requires the full cycle.
 
 Using the \`tidy' mode brings several advantages:
-  - the current directory is not cluttered with plethora of temporary files.
-  - clutter can be even reduced using --build-dir=dir: all the *.t2d
-    directories are stored there.
-  - clutter can be reduced to zero using --build-dir=/tmp/\$USER.t2d or
-    --build-dir=$HOME/.t2d.
-  - the output file is updated after every succesful TeX run, for
-    sake of concurrent visualization of the output.  In a \`local' build
-    the viewer stops during the whole TeX run.
-  - if the compilation fails, the previous state of the output file
-    is preserved.
-  - PDF and DVI compilation are kept in separate subdirectories
-    preventing any possibility of auxiliary file incompatibility.
+  -   the current directory is not cluttered with plethora of temporary files.
+  -   clutter can be even reduced using --build-dir=dir: all the *.t2d
+      directories are stored there.
+  -   clutter can be reduced to zero using, e.g., --build-dir=/tmp/\$USER.t2d
+      or --build-dir=\$HOME/.t2d.
+  -   the output file is updated after every succesful TeX run, for
+      sake of concurrent visualization of the output.  In a \`local' build
+      the viewer stops during the whole TeX run.
+  -   if the compilation fails, the previous state of the output file
+      is preserved.
+  -   PDF and DVI compilation are kept in separate subdirectories
+      preventing any possibility of auxiliary file incompatibility.
 
 On the other hand, because \`tidy' compilation takes place in another
 directory, occasionally TeX won't be able to find some files (e.g., when
@@ -176,10 +176,14 @@ newline='
 '
 IFS="$space$tab$newline"
 
+# In case someone pedantic insists on using grep -E.
+: ${EGREP=egrep}
+
 # Systems which define $COMSPEC or $ComSpec use semicolons to separate
-# directories in TEXINPUTS -- except for Cygwin, where COMSPEC might be
-# inherited, but : is used.
-if test -n "$COMSPEC$ComSpec" && uname | grep -iv cygwin >/dev/null; then
+# directories in TEXINPUTS -- except for Cygwin et al., where COMSPEC
+# might be inherited, but : is used.
+if test -n "$COMSPEC$ComSpec" \
+   && uname | $EGREP -iv 'cygwin|mingw|djgpp' >/dev/null; then
   path_sep=";"
 else
   path_sep=":"
@@ -188,14 +192,13 @@ fi
 # Pacify verbose cds.
 CDPATH=${ZSH_VERSION+.}$path_sep
 
-# In case someone crazy insists on using grep -E.
-: ${EGREP=egrep}
+# If $TEX is set to a directory, don't use it.
+test -d "$TEX" && unset TEX
 
-
+# 
 ## --------------------- ##
 ## Auxiliary functions.  ##
 ## --------------------- ##
-
 
 # In case `local' is not supported by the shell, provide a function
 # that simulates it by simply performing the assignments.  This means
@@ -266,10 +269,15 @@ absolute ()
       # Absolute paths don't need to be expanded.
       echo "$1"
       ;;
-   *) local slashes=`echo "$1" | sed -n 's,.*[^/]\(/*\)$,\1,p'`
-      local rel="$orig_pwd/`func_dirname $1`"
+   *) local slashes
+      slashes=`echo "$1" | sed -n 's,.*[^/]\(/*\)$,\1,p'`
+      local rel
+      rel=$orig_pwd/`func_dirname "$1"`
       if test -d "$rel"; then
-	(cd "$rel" 2>/dev/null && echo `pwd`/`basename "$1"`"$slashes");
+	(cd "$rel" 2>/dev/null &&
+	 local n
+	 n=`pwd`/`basename "$1"`"$slashes"
+	 echo "$n")
       else
 	error 1 "not a directory: $rel"
       fi
@@ -515,7 +523,7 @@ absolute_filenames ()
 
 # output_base_name FILE
 # ---------------------
-# The name of the FILE possibly renamed to satisfy --output.
+# The name of FILE, possibly renamed to satisfy --output.
 output_base_name ()
 {
   case $oname in
@@ -532,35 +540,59 @@ output_base_name ()
 
 # move_to_dest FILE...
 # --------------------
-# Move the FILE to the place where the user expects it.  FILE can be
-# the principal output (in which case -o directly apply), or an auxiliary
-# file with the same base name.
+# Move FILE to the place where the user expects it.  Truly move it, that
+# is, it must not remain in its build location unless that is also the
+# output location.  (Otherwise it might appear as an extra file in make
+# distcheck.)
+#
+# FILE can be the principal output (in which case -o directly applies), or
+# an auxiliary file with the same base name.
 move_to_dest ()
 {
   local dest
+  local destfile
+  local destdir
+  local destbase
+  local sourcedir
+  local sourcebase
 
   for file
   do
     case $tidy:$oname in
       true:)  dest=$orig_pwd;;
       false:) dest=;;
-      *:*)    dest=$(output_base_name "$file");;
+      *:*)    dest=`output_base_name "$file"`;;
     esac
     if test ! -f "$file"; then
       error 1 "no such file or directory: $file"
     fi
     if test -n "$dest"; then
-      # avoid complaint from cmp if given a directory.
-      # do the cmp in the first place to avoid a complaint from cp
-      # if we try to copy a file onto itself.
+      # We need to know whether $dest is a directory.
       if test -d "$dest"; then
-	testdest="$dest/$file"
+        destdir=$dest
+        destfile=$dest/$file
       else
-	testdest="$dest"
+        destdir="`dirname $dest`"
+        destfile=$dest
       fi
-      if cmp -s "$file" "$testdest"; then :; else
-	verbose "Moving $file to $dest"
-	mv "$file" "$dest"
+      # We want to compare the source location and the output location,
+      # and if they are different, do the move.  But if they are the
+      # same, we must preserve the source.  Since we can't assume
+      # stat(1) or test -ef is available, resort to comparing the
+      # directory names, canonicalized with pwd.  We can't use cmp -s
+      # since the output file might not actually change from run to run;
+      # e.g., TeX DVI output is timestamped to only the nearest minute.
+      destdir=`cd $destdir && pwd`
+      destbase=`basename $destfile`
+      #
+      sourcedir=`dirname $file`
+      sourcedir=`cd $sourcedir && pwd`
+      sourcebase=`basename $file`
+      #
+      if test "$sourcedir/$sourcebase" != "$destdir/$destbase"; then
+        verbose "Moving $file to $destfile"
+        rm -f "$destfile"
+        mv "$file" "$destfile"
       fi
     fi
   done
@@ -655,13 +687,13 @@ generated_files_get ()
   while read file; do
     echo $file
     case $in_lang in
-      (texinfo)
+      texinfo)
 	# texindex: texinfo.cp -> texinfo.cps
        if index_file_p $file; then
 	 echo ${file}s
        fi
        ;;
-      (latex)
+      latex)
        # bibtex: *.aux -> *.bbl and *.blg.
 	if aux_file_p $file; then
 	  echo $file | sed 's/^\(.*\)\.aux$/\1.bbl/'
@@ -752,7 +784,7 @@ xref_files_changed ()
 # Run TeX as "$tex $in_input", taking care of errors and logs.
 run_tex ()
 {
-  case $in_lang:$(out_lang_tex) in
+  case $in_lang:`out_lang_tex` in
     latex:dvi)   tex=${LATEX:-latex};;
     latex:pdf)   tex=${PDFLATEX:-pdflatex};;
     texinfo:dvi)
@@ -833,7 +865,7 @@ run_tex ()
       ;;
   esac
 
-  echo "$0: Running $cmd ..."
+  verbose "$0: Running $cmd ..."
   if eval "$cmd" >&5; then
     case $out_lang in
       dvi | pdf ) move_to_dest "$in_noext.$out_lang";;
@@ -879,7 +911,7 @@ run_bibtex ()
 	      && grep '^\\bibdata' "$in_noext.aux") \
 	>&6 2>&1; \
   then
-    for f in $(generated_files_get "$in_noext" bibaux_file_p)
+    for f in `generated_files_get "$in_noext" bibaux_file_p`
     do
       run $bibtex "$f"
     done
@@ -909,7 +941,7 @@ run_index ()
 # ---------------
 run_thumbpdf ()
 {
-  if test $(out_lang_tex) = pdf \
+  if test `out_lang_tex` = pdf \
      && test -r "$in_noext.log" \
      && grep 'thumbpdf\.sty'  "$in_noext.log" >&6 2>&1; \
   then
@@ -943,7 +975,7 @@ run_dvipdf ()
   # 'input -o output'.  They all seem to accept 'input' only,
   # outputting using the expected file name.
   run $dvipdf "$1"
-  if test ! -f $(echo "$1" | sed -e 's/\.dvi$/.pdf/'); then
+  if test ! -f `echo "$1" | sed -e 's/\.dvi$/.pdf/'`; then
     error 1 "$0: cannot find output file"
   fi
 }
@@ -986,12 +1018,12 @@ run_tex_suite ()
   # dvipdf or ps).
   case $out_lang in
     dvipdf)
-      run_dvipdf "$in_noext.$(out_lang_tex)"
-      move_to_dest "$in_noext.$(out_lang_ext)"
+      run_dvipdf "$in_noext.`out_lang_tex`"
+      move_to_dest "$in_noext.`out_lang_ext`"
       ;;
     ps)
-      dvips -o "$in_noext.$(out_lang_ext)" "$in_noext.$(out_lang_tex)"
-      move_to_dest "$in_noext.$(out_lang_ext)"
+      dvips -o "$in_noext.`out_lang_ext`" "$in_noext.`out_lang_tex`"
+      move_to_dest "$in_noext.`out_lang_ext`"
       ;;
   esac
 
@@ -1069,11 +1101,11 @@ run_makeinfo ()
        $TEX txiversion.tex </dev/null >txiversion.out 2>txiversion.err
     )
     if test $? != 0; then
-      cat $version_test_dir/txiversion.out
-      cat $version_test_dir/txiversion.err >&2
+      cat "$version_test_dir/txiversion.out"
+      cat "$version_test_dir/txiversion.err" >&2
       error 1 "texinfo.tex appears to be broken, quitting."
     fi
-    eval `sed -n 's/^.*\[\(.*\)version \(....\)-\(..\)-\(..\).*$/txiformat=\1 txiversion="\2\3\4"/p' $version_test_dir/txiversion.out`
+    eval `sed -n 's/^.*\[\(.*\)version \(....\)-\(..\)-\(..\).*$/txiformat=\1 txiversion="\2\3\4"/p' "$version_test_dir/txiversion.out"`
     verbose "texinfo.tex preloaded as \`$txiformat', version is \`$txiversion' ..."
     if test "$txiprereq" -le "$txiversion" >&6 2>&1; then
       makeinfo=
@@ -1254,7 +1286,7 @@ run_hevea ()
 # Run the TeX (or HeVeA).
 run_core_conversion ()
 {
-  case $in_lang:$(out_lang_tex) in
+  case $in_lang:`out_lang_tex` in
     *:dvi|*:pdf)
 	run_tex;;
     latex:html|latex:text|latex:info)
@@ -1287,8 +1319,8 @@ compile ()
     # detection).
     val=`absolute_filenames "$val"`
     eval $var="\"$val\""
-    eval export $var
-    eval verbose "$var=\'\$${var}\'"
+    export $var
+    eval verbose \"$var=\'\$${var}\'\"
   done
 
   # --expand
@@ -1320,12 +1352,14 @@ remove ()
 mostly_clean ()
 {
   cd_orig
-  local to_remove="$t2ddir"
+  set X "$t2ddir"
+  shift
   $tidy || {
     local log="$work_build/$in_noext.log"
-    to_remove=$to_remove" $log "$(generated_files_get "$work_build/$in_noext")
+    set X ${1+"$@"} "$log" `generated_files_get "$work_build/$in_noext"`
+    shift
   }
-  remove $to_remove
+  remove ${1+"$@"}
 }
 
 
@@ -1588,7 +1622,7 @@ input_file_name_decode ()
   if test x"$oname" != x; then
     out_name=$oname
   else
-    out_name=$in_noext.$(out_lang_ext)
+    out_name=$in_noext.`out_lang_ext`
   fi
   out_dir=`func_dirname "$out_name"`
   out_dir_abs=`absolute "$out_dir"`
@@ -1601,13 +1635,14 @@ input_file_name_decode ()
 ## TeXify files.  ##
 ## -------------- ##
 
-for command_line_filename in ${1+"$@"}; do
+for command_line_filename
+do
   verbose "Processing $command_line_filename ..."
 
   input_file_name_decode
 
   # `texinfo' or `latex'?
-  in_lang=`compute_language $command_line_filename`
+  in_lang=`compute_language "$command_line_filename"`
 
   # An auxiliary directory used for all the auxiliary tasks involved
   # in compiling this document.
@@ -1630,7 +1665,7 @@ for command_line_filename in ${1+"$@"}; do
   # Sometimes there are incompatibilities between auxiliary files for
   # DVI and PDF.  The contents can also change whether we work on PDF
   # and/or DVI.  So keep separate spaces for each.
-  workdir=$t2ddir/$(out_lang_tex)
+  workdir=$t2ddir/`out_lang_tex`
   ensure_dir "$workdir"
 
   # _build.  In a tidy build, where the auxiliary files are output.
