@@ -271,6 +271,14 @@ fail1 vcsn-b realtime nondet.xml \| is-deterministic -
 
 # is-empty.
 fail1 vcsn-b is-empty $a1
+      vcsn-b is_empty empty.xml
+fail1 vcsn-b is_empty all.xml
+fail1 vcsn-b is-empty 2snf.xml
+
+# has-succ-comp.
+fail1 vcsn-b has-succ-comp empty.xml
+fail1 vcsn-b has-succ-comp 2snf.xml
+      vcsn-b has-succ-comp all.xml
 
 # is-normalized.
 #fail1 vcsn-b is-normalized $a1

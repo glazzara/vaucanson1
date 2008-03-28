@@ -1,3 +1,12 @@
+2008-03-28  Florent DHalluin  <d-halluin@lrde.epita.fr>
+
+	Add missing tests for is-empty and has-succ-comp
+	* taf-kit/tests/vcsn-b.test: There.
+
+	Similarly to the current structure, the tests were
+	added to vcsn-b.test only, even if the algorithms
+	also apply to other automaton types.
+
 2008-03-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/share/bin/texi2dvi, doc/share/styles/mycxx.sty: Update
