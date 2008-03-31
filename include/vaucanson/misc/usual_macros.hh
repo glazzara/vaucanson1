@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -115,12 +116,13 @@
 /*------------.
 | Iterating.  |
 `------------*/
-# define for_all_iterator(ConstIteratorType, I, C)		\
-  for (ConstIteratorType I = (C).begin(); I != (C).end(); ++I)
 
 /// Iteration given an iterator type, iterator name, and container.
 # define for_all_const_iterator(IteratorType, I, C)		\
   for (IteratorType I = (C).begin(), I##_end = (C).end(); I##_end != I; ++I)
+
+# define for_all_iterator(ConstIteratorType, I, C)		\
+  for (ConstIteratorType I = (C).begin(); I != (C).end(); ++I)
 
 
 /// Iteration given a non-template container type.
