@@ -61,7 +61,7 @@ AC_SUBST([MORE_DISTCHECK_CONFIGURE_FLAGS])
 if test "${with_python+set}" = set; then
   MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-python=$with_python"
 fi
-w
+
 # Always check for swig: it is needed by `make dist' (that will recurse
 # vaucanswig) in case the *.py files do not exist already.  E.g., after
 # a fresh checkout.
