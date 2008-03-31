@@ -1,5 +1,6 @@
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+# Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -97,7 +98,7 @@ AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 	       [test "x$enable_vaucanswig" = "xyes"])
 
 
-#Boost
+# Boost
 AX_BOOST_BASE([1.34])
 
 if test "${with_boost+set}" = set; then
@@ -109,16 +110,11 @@ fi
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
-# Where the install Emacs files.
+# Where to install Emacs files.
 AM_PATH_LISPDIR
 
 # Attempt to use strict language conformance checking.
 AC_CXX_FLAGS
-
-# Some reflexivity wanted.
-AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
-
-# AC_CHECK_HEADERS([stl_config.h])
 
 VCSN_XML
 
