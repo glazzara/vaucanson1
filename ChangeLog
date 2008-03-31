@@ -1,5 +1,10 @@
 2008-03-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/sub_automaton.hxx (sub_automaton):
+	Use a const_iterator.  This fixes a compile error in Vaucanswig.
+
+2008-03-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/misc/usual_macros.hh: Cosmetic reordering.
 
 2008-03-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
