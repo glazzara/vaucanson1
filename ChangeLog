@@ -1,5 +1,15 @@
 2008-03-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Ask Python where its include/ directory is, do not try to guess.
+	(Ticket #117)
+
+	* build-aux/vcsn-python.m4: New file.
+	* configure.ac: Simplify using VCSN_CHECK_PYTHON.
+	* vaucanswig/expand.sh: Use PYTHON_INCLUDEDIR, defined by
+	VCSN_CHECK_PYTHON, instead of PYTHON_PREFIX, no longer defined.
+
+2008-03-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* configure.ac: Do not AC_DEFINE CXX, it is not used anywhere.
 
 2008-03-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>

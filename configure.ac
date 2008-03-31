@@ -75,18 +75,7 @@ if test "x$ac_cv_recent_swig" != xyes; then
 fi
 
 if test "x$enable_vaucanswig" = xyes; then
-  AM_PATH_PYTHON([2.2])
-
-  if test "x$ac_python_path" != x; then
-    PYTHON_PREFIX=$ac_python_path
-  else
-    for ac_python_path_tmp in /usr /usr/local /opt /opt/local ; do
-      if test -f "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h" && test -r "$ac_python_path_tmp/include/python$PYTHON_VERSION/Python.h"; then
-	PYTHON_PREFIX=$ac_python_path_tmp
-	break
-      fi
-    done
-  fi
+  VCSN_CHECK_PYTHON
 fi
 
 AC_CONFIG_FILES([vaucanswig/Makefile
