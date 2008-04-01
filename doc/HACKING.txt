@@ -41,3 +41,22 @@ Make sure your system has up-to-date tools (Autotools, Swig, Doxygen,
 
   - Complete and detail this list with what was missing (whatever will
     help the next guy doing the release).
+
+
+Template arguments naming convention
+====================================
+
+Template arguments:
+  - A  : Automaton structure.
+  - AI : Automaton implementation.
+  - E  : RatExp structure.
+  - EI : RatExp implementation.
+
+In the case where multiple possibility could be use, suffix the argument
+with the appropriate numbering. For example, to enable the use of two
+different automata implementations for each argument of an algorithm:
+
+  template <typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  algorithm(const Element<A, AI1>& a1, const Element<A, AI2>& a2>);
+
