@@ -47,14 +47,16 @@ Template arguments naming convention
 ====================================
 
 Template arguments:
+
   - A  : Automaton structure.
   - AI : Automaton implementation.
-  - E  : RatExp structure.
-  - EI : RatExp implementation.
+  - S  : Series.
+  - SI : Series implementation.
 
-In the case where multiple possibility could be use, suffix the argument
-with the appropriate numbering. For example, to enable the use of two
-different automata implementations for each argument of an algorithm:
+In the case where multiple possibilities could be used, suffix the
+template argument with the appropriate numbering. For example, to
+enable the use of two different automaton implementations for each
+argument of an algorithm::
 
   template <typename A, typename AI1, typename AI2>
   Element<A, AI1>

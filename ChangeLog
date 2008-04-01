@@ -1,5 +1,10 @@
 2008-04-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Update HACKING.txt.
+	* doc/HACKING.txt: Correct the template naming convention.
+
+2008-04-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix the linkage of vcsn-(b|z) with libvcsn-(b|z).
 	* include/vaucanson/algorithms/aut_to_exp.hh,
 	  include/vaucanson/algorithms/internal/has_neighbour.hh,
