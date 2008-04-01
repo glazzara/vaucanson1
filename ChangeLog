@@ -1,5 +1,27 @@
 2008-04-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix the linkage of vcsn-(b|z) with libvcsn-(b|z).
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	  include/vaucanson/algorithms/internal/has_neighbour.hh,
+	  include/vaucanson/algorithms/is_ambiguous.hh,
+	  include/vaucanson/algorithms/krat_exp_expand.hh,
+	  include/vaucanson/algorithms/normalized.hh,
+	  include/vaucanson/algorithms/realtime.hh,
+	  include/vaucanson/algorithms/realtime_decl.hh,
+	  include/vaucanson/algorithms/thompson.hh:
+	  Disable the VCSN_USE_LIB tag because of undefined reference
+	  during the linking process. The instanciations in the libvcsn
+	  are uncomplete. This is a temporary fix for the linkage bug.
+
+	* lib/generate_libvcsn.rb: Remove ignore on is_ambigous.
+
+	* taf-kit/src/Makefile.am:
+	  Enable link of vcsn-(b|z) against the libvcsn-(b|z).
+
+	* include/vaucanson/algorithms/image.hxx: Fix filename in header.
+
+2008-04-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add template arguments naming convention.
 	* doc/HACKING.txt: Here.
 

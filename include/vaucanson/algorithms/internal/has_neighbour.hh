@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -46,7 +46,13 @@ namespace vcsn
 			 const typename automaton_traits<T>::hstate_t		s);
 }
 
-# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+// FIXME: libvcsn and taf-kit undefined reference related bug
+//        This should be the correct one, should be fixed with:
+//	    - the correct INTERFACE tag
+//	    - a generation script that do not use INTERFACE tag
+//        There may also be some problems related to GenAutomaton and libvcsn
+//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+# if !defined VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/internal/has_neighbour.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

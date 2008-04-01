@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -97,7 +97,9 @@ namespace vcsn {
 
 } // vcsn
 
-# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+// FIXME: libvcsn and taf-kit undefined reference related bug
+//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+# if !defined VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/realtime_decl.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

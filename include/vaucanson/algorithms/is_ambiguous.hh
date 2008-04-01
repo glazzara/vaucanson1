@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,6 +29,8 @@
  * @see is_ambiguous()
  */
 /** @} */
+
+// INTERFACE: bool is_ambiguous(const Automaton& a) { return vcsn::is_ambiguous(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

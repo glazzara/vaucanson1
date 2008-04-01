@@ -71,6 +71,7 @@ def create?(type, file)
       file !~ /extension.hh/ and
       file !~ /finite_support_conversion.hh/ and
       file !~ /forward_realtime.hh/ and
+      file !~ /is_ambiguous.hh/ and
       file !~ /is_letterized.hh/ and
       file !~ /is_normalized.hh/ and
       file !~ /krat_exp.*.hh/ and

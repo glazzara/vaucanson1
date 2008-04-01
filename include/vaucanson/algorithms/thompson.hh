@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,8 +30,8 @@
  */
 /** @} */
 
-// INTERFACE: void thompson_of(Automaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
-// INTERFACE: void thompson_of(GenAutomaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
+// INTERFACE: void thompson_of(Automaton& a, const Exp& e) { vcsn::thompson_of(*a, e.value()); }
+// INTERFACE: void thompson_of(GenAutomaton& a, const Exp& e) { vcsn::thompson_of(*a, e.value()); }
 
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -71,7 +71,12 @@ namespace vcsn {
 
 } // vcsn
 
-# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+// FIXME The interface tags are used for swig and libvcsn but here the
+// definitions differs.
+// This should be resolved when the generation of libvcsn do not depends
+// on these interface tag.
+//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+# if !defined VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/thompson.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

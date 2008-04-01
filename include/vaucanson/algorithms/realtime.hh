@@ -75,7 +75,11 @@ namespace vcsn {
 
 } // vcsn
 
-# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+// FIXME: this should be the correct one, should be fixed with:
+//	    - the correct INTERFACE tag
+//	    - a generation script that do not use INTERFACE tag
+//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+# if !defined VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 /*
