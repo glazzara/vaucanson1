@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -55,9 +55,9 @@ namespace vcsn {
    *
    * @return A fresh automaton that is the concatenation of lhs and rhs.
    */
-  template <class A, class T>
-  Element<A, T>
-  concatenate(const Element<A, T>& lhs, const Element<A, T>& rhs);
+  template <typename A, typename AI>
+  Element<A, AI>
+  concatenate(const Element<A, AI>& lhs, const Element<A, AI>& rhs);
 
   /**
    * In place concatenation of two automata.
@@ -75,9 +75,9 @@ namespace vcsn {
    * @author Yann Regis-Gianas.
    *
    */
-  template <class A, class T>
+  template <typename A, typename AI>
   void
-  concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs);
+  concatenate_here(Element<A, AI>& lhs, const Element<A, AI>& rhs);
 
   /** @} */
 

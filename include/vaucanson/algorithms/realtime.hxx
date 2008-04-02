@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -147,12 +147,13 @@ namespace vcsn {
   /*--------------.
   | is_realtime.  |
   `--------------*/
-  template <class A_, typename Auto_>
+  template <class A, typename AI>
   bool
-  do_is_realtime(const AutomataBase<A_>&, const Auto_& a)
+  do_is_realtime(const AutomataBase<A>&, const Element<A, AI>& a)
   {
     TIMER_SCOPED("is_realtime (automaton)");
-    AUTOMATON_TYPES(Auto_);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     for_all_const_transitions(e, a)
       if (!is_support_in_alphabet(a.series_of(*e)))
 	return false;
@@ -164,9 +165,10 @@ namespace vcsn {
   | realtime_here. |
   `--------------*/
 
-  template<typename Auto_, typename A_>
+  template<typename A, typename AI>
   void
-  do_realtime_here(const AutomataBase<A_>&, Auto_& a,
+  do_realtime_here(const AutomataBase<A>&,
+                   Element<A, AI>& a,
 		   misc::direction_type type = misc::forward)
   {
     realtime_words_here(a);
@@ -180,9 +182,9 @@ namespace vcsn {
   }
 
 
-  template<typename S, typename T>
+  template<typename A, typename AI>
   void
-  realtime_here(Element<S, T>& a, misc::direction_type type)
+  realtime_here(Element<A, AI>& a, misc::direction_type type)
   {
     do_realtime_here(a.structure(), a, type);
   }
@@ -192,20 +194,20 @@ namespace vcsn {
   | realtime.  |
   `-----------*/
 
-  template<typename Auto_, typename A_>
-  Auto_
-  do_realtime(const AutomataBase<A_>&b,
-	      const Auto_& a,
+  template<typename A, typename AI>
+  Element<A, AI>
+  do_realtime(const AutomataBase<A>& b,
+	      const Element<A, AI>&  a,
 	      misc::direction_type type = misc::forward)
   {
-    Auto_ ret(a);
+    Element<A, AI> ret(a);
     do_realtime_here(b, ret, type);
     return ret;
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  realtime(const Element<A, T>& a, misc::direction_type type)
+  template<typename A, typename AI>
+  Element<A, AI>
+  realtime(const Element<A, AI>& a, misc::direction_type type)
   {
     return do_realtime(a.structure(), a, type);
   }

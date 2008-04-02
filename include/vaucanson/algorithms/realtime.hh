@@ -52,9 +52,9 @@ namespace vcsn {
    *
    * @see realtime(), forward_realtime_here(), backward_realtime_here()
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  realtime_here(Element<A, T>& a, misc::direction_type type);
+  realtime_here(Element<A, AI>& a, misc::direction_type type);
 
   /**
    * Returns a fresh realtime automaton.
@@ -67,9 +67,9 @@ namespace vcsn {
    *
    * @see realtime_here(), forward_realtime(), backward_realtime()
    */
-  template<typename A, typename T>
-  Element<A, T>
-  realtime(const Element<A, T>& a, misc::direction_type type);
+  template<typename A, typename AI>
+  Element<A, AI>
+  realtime(const Element<A, AI>& a, misc::direction_type type);
 
   /** @} */
 

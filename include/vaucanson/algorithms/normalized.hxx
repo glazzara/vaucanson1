@@ -32,13 +32,14 @@ namespace vcsn {
   /*-----------.
   | normalized |
   `-----------*/
-  template <class A_, typename Auto_>
+  template <typename A, typename AI>
   void
-  do_normalize_here(const AutomataBase<A_>&,
-		    Auto_& a)
+  do_normalize_here(const AutomataBase<A>&,
+		    Element<A, AI>& a)
   {
     TIMER_SCOPED("normalize");
-    AUTOMATON_TYPES(Auto_);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
     hstate_t h = a.add_state();
 
@@ -57,18 +58,18 @@ namespace vcsn {
     a.set_final(h);
   }
 
-  template <typename A, typename T>
-  Element<A, T>
-  normalize(const Element<A, T>& a)
+  template <typename A, typename AI>
+  Element<A, AI>
+  normalize(const Element<A, AI>& a)
   {
-    Element<A, T> result(a);
+    Element<A, AI> result(a);
     do_normalize_here(result.structure(), result);
     return result;
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  normalize_here(Element<A, T>& a)
+  normalize_here(Element<A, AI>& a)
   {
     do_normalize_here(a.structure(), a);
   }
@@ -78,13 +79,15 @@ namespace vcsn {
   | union_of_normalized |
   `--------------------*/
 
-  template <typename A, typename lhs_t, typename rhs_t>
+  template <typename A, typename AI1, typename AI2>
   void
   do_union_of_normalized_here(const AutomataBase<A>&,
-			      lhs_t& lhs,
-			      const rhs_t& rhs)
+			      Element<A, AI1>& lhs,
+			      const Element<A, AI2>& rhs)
   {
     TIMER_SCOPED("union_of_normalized");
+    typedef Element<A, AI1> lhs_t;
+    typedef Element<A, AI2> rhs_t;
     AUTOMATON_TYPES(lhs_t);
     monoid_elt_t monoid_identity =
       lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
@@ -105,22 +108,20 @@ namespace vcsn {
     lhs.set_initial(new_i);
   }
 
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  union_of_normalized_here(Element<A, T>& lhs,
-			   const Element<A, U>& rhs)
+  union_of_normalized_here(Element<A, AI1>& lhs,
+			   const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
     do_union_of_normalized_here(lhs.structure(), lhs, rhs);
   }
 
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  union_of_normalized(const Element<A, T>& lhs,
-		      const Element<A, U>& rhs)
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  union_of_normalized(const Element<A, AI1>& lhs,
+		      const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(lhs);
+    Element<A, AI1> ret(lhs);
     do_union_of_normalized_here(ret.structure(), ret, rhs);
     return ret;
   }
@@ -128,14 +129,15 @@ namespace vcsn {
   /*--------------.
   | is_normalized |
   `--------------*/
-  template <typename A, typename auto_t>
+  template <typename A, typename AI>
   bool
   do_is_normalized(const AutomataBase<A>&,
-		   const auto_t& a)
+		   const Element<A, AI>& a)
   {
     TIMER_SCOPED("is_normalized");
-    typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
-    typedef typename auto_t::series_set_elt_t		series_set_elt_t;
+    typedef Element<A, AI> automaton_t;
+    typedef typename automaton_t::series_set_elt_value_t	series_set_elt_value_t;
+    typedef typename automaton_t::series_set_elt_t		series_set_elt_t;
 
     series_set_elt_t series_identity =
       a.series().identity(SELECT(series_set_elt_value_t));
@@ -152,9 +154,9 @@ namespace vcsn {
       && !has_predecessors(a, *a.initial().begin());
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   bool
-  is_normalized(const Element<A, T>& a)
+  is_normalized(const Element<A, AI>& a)
   {
     return do_is_normalized(a.structure(), a);
   }
@@ -162,13 +164,15 @@ namespace vcsn {
   /*--------------------------.
   | concatenate_of_normalized |
   `--------------------------*/
-  template <typename A, typename lhs_t, typename rhs_t>
+  template <typename A, typename AI1, typename AI2>
   void
   do_concatenate_of_normalized_here(const AutomataBase<A>&,
-				    lhs_t& lhs,
-				    const rhs_t& rhs)
+				    Element<A, AI1>& lhs,
+				    const Element<A, AI2>& rhs)
   {
     TIMER_SCOPED("concatenate_of_normalized");
+    typedef Element<A, AI1> lhs_t;
+    typedef Element<A, AI2> rhs_t;
     AUTOMATON_TYPES(rhs_t);
     typedef std::map<hstate_t, hstate_t>	map_lhs_rhs_t;
     typedef std::list<htransition_t>		delta_ret_t;
@@ -231,20 +235,18 @@ namespace vcsn {
     }
   }
 
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  concatenate_of_normalized_here(Element<A, T>& lhs, const Element<A, U>& rhs)
+  concatenate_of_normalized_here(Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
     do_concatenate_of_normalized_here(lhs.structure(), lhs, rhs);
   }
 
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  concatenate_of_normalized(const Element<A, T>& lhs, const Element<A, U>& rhs)
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  concatenate_of_normalized(const Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(lhs);
+    Element<A, AI1> ret(lhs);
     do_concatenate_of_normalized_here(ret.structure(), ret, rhs);
     return ret;
   }
@@ -252,12 +254,13 @@ namespace vcsn {
   /*-------------------.
   | star_of_normalized |
   `-------------------*/
-  template <typename A, typename auto_t>
+  template <typename A, typename AI>
   void
-  do_star_of_normalized_here(const AutomataBase<A>&, auto_t& a)
+  do_star_of_normalized_here(const AutomataBase<A>&, Element<A, AI>& a)
   {
     TIMER_SCOPED("star_of_normalized");
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     monoid_elt_t monoid_identity =
       a.series().monoid().identity(SELECT(monoid_elt_value_t));
     hstate_t old_i = *a.initial().begin();
@@ -275,19 +278,18 @@ namespace vcsn {
     a.unset_initial(old_i);
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  star_of_normalized_here(Element<A, T>& a)
+  star_of_normalized_here(Element<A, AI>& a)
   {
     do_star_of_normalized_here(a.structure(), a);
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  star_of_normalized(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  star_of_normalized(const Element<A, AI>& a)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(a);
+    Element<A, AI> ret(a);
     do_star_of_normalized_here(ret.structure(), ret);
     return ret;
   }

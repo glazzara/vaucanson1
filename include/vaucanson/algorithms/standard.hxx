@@ -33,12 +33,13 @@ namespace vcsn {
   /*---------.
   | standard |
   `---------*/
-  template <class A_, typename Auto_>
+  template <class A, typename AI>
   void
-  do_in_standardize(const AutomataBase<A_>&, Auto_& a)
+  do_in_standardize(const AutomataBase<A>&, Element<A, AI>& a)
   {
     TIMER_SCOPED("standardize");
-    AUTOMATON_TYPES(Auto_);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
     hstate_t i = a.add_state();
     std::list<htransition_t> transition_oi;
@@ -78,9 +79,9 @@ namespace vcsn {
     a.set_final(i, final_series);
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  standardize(Element<A, T>& a)
+  standardize(Element<A, AI>& a)
   {
     do_in_standardize(a.structure(), a);
   }
@@ -89,16 +90,18 @@ namespace vcsn {
   | standard_union.  |
   `-----------------*/
 
-  template <typename A, typename lhs_t, typename rhs_t>
+  template <typename A, typename AI1, typename AI2>
   void
   do_union_of_standard_here(const AutomataBase<A>&,
-			    lhs_t& lhs,
-			    const rhs_t& rhs)
+			    Element<A, AI1>& lhs,
+			    const Element<A, AI2>& rhs)
   {
     precondition(is_standard(lhs));
     precondition(is_standard(rhs));
 
     TIMER_SCOPED("union_of_standard");
+    typedef Element<A, AI1> lhs_t;
+    typedef Element<A, AI2> rhs_t;
     typedef std::list<typename lhs_t::htransition_t> edelta_ret_t;
 
     // The resulting initial state is that of lhs.
@@ -130,20 +133,18 @@ namespace vcsn {
     lhs.del_state(old_i);
   }
 
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  union_of_standard_here(Element<A, T>& lhs, const Element<A, U>& rhs)
+  union_of_standard_here(Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
     do_union_of_standard_here(lhs.structure(), lhs, rhs);
   }
 
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  union_of_standard(const Element<A, T>& lhs, const Element<A, U>& rhs)
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  union_of_standard(const Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(lhs);
+    Element<A, AI1> ret(lhs);
     union_of_standard_here(ret, rhs);
     return ret;
   }
@@ -151,19 +152,20 @@ namespace vcsn {
   /*--------------.
   | is_standard.  |
   `--------------*/
-  template <typename A, typename auto_t>
+  template <typename A, typename AI>
   bool
-  do_is_standard(const AutomataBase<A>&, const auto_t& a)
+  do_is_standard(const AutomataBase<A>&, const Element<A, AI>& a)
   {
     TIMER_SCOPED("is_standard");
-    typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
+    typedef Element<A, AI> automaton_t;
+    typedef typename automaton_t::series_set_elt_value_t	series_set_elt_value_t;
 
     // Check there is only one initial state.
     if (a.initial().size() != 1)
       return false;
 
     // Check the multiplicity of the initial state.
-    typename auto_t::hstate_t s = *a.initial().begin();
+    typename automaton_t::hstate_t s = *a.initial().begin();
     if (a.get_initial(s)
 	!= a.series().identity(SELECT(series_set_elt_value_t)))
       return false;
@@ -172,9 +174,9 @@ namespace vcsn {
     return !has_predecessors(a, s);
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   bool
-  is_standard(const Element<A, T>& a)
+  is_standard(const Element<A, AI>& a)
   {
     return do_is_standard(a.structure(), a);
   }
@@ -182,16 +184,18 @@ namespace vcsn {
   /*---------------------.
   | concat_of_standard.  |
   `---------------------*/
-  template <typename A, typename lhs_t, typename rhs_t>
+  template <typename A, typename AI1, typename AI2>
   void
   do_concat_of_standard_here(const AutomataBase<A>&,
-			     lhs_t& lhs,
-			     const rhs_t& rhs)
+			     Element<A, AI1>& lhs,
+			     const Element<A, AI2>& rhs)
   {
     precondition(is_standard(lhs));
     precondition(is_standard(rhs));
 
     TIMER_SCOPED("concat_of_standard");
+    typedef Element<A, AI1> lhs_t;
+    typedef Element<A, AI2> rhs_t;
     AUTOMATON_TYPES(lhs_t);
     typedef std::map<hstate_t, hstate_t>	map_t;
     typedef std::list<htransition_t>		delta_ret_t;
@@ -258,21 +262,19 @@ namespace vcsn {
 	lhs.set_final(nf->second, rhs.get_final(nf->first));
   }
 
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  concat_of_standard_here(Element<A, T>& lhs, const Element<A, U>& rhs)
+  concat_of_standard_here(Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
     do_concat_of_standard_here(lhs.structure(), lhs, rhs);
   }
 
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  concat_of_standard(const Element<A, T>& lhs,
-		     const Element<A, U>& rhs)
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  concat_of_standard(const Element<A, AI1>& lhs,
+		     const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(lhs);
+    Element<A, AI1> ret(lhs);
     do_concat_of_standard_here(ret.structure(), ret, rhs);
     return ret;
   }
@@ -280,14 +282,15 @@ namespace vcsn {
   /*----------------.
   | standard_star.  |
   `----------------*/
-  template <typename A, typename auto_t>
+  template <typename A, typename AI>
   void
-  do_star_of_standard_here(const AutomataBase<A>&, auto_t& a)
+  do_star_of_standard_here(const AutomataBase<A>&, Element<A, AI>& a)
   {
     precondition(is_standard(a));
 
     TIMER_SCOPED("star_of_standard");
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     typedef std::list<htransition_t>		edelta_ret_t;
 
     edelta_ret_t			dst;
@@ -309,19 +312,18 @@ namespace vcsn {
     a.set_final(new_i, out_mult);
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  star_of_standard_here(Element<A, T>& a)
+  star_of_standard_here(Element<A, AI>& a)
   {
     do_star_of_standard_here(a.structure(), a);
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  star_of_standard(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  star_of_standard(const Element<A, AI>& a)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(a);
+    Element<A, AI> ret(a);
     do_star_of_standard_here(ret.structure(), ret);
     return ret;
   }

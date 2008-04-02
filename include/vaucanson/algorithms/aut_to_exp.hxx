@@ -264,24 +264,24 @@ namespace vcsn {
     | aut_to_exp |
     `-----------*/
 
-  template <class A_, typename Auto_, typename Chooser_>
-  typename Auto_::series_set_elt_t
-  do_in_aut_to_exp(const AutomataBase<A_>&  a_set,
-		   Auto_&		    a,
-		   Chooser_		    chooser)
+  template <class A, typename AI, typename Chooser>
+  typename Element<A, AI>::series_set_elt_t
+  do_in_aut_to_exp(const AutomataBase<A>&  a_set,
+		   Element<A, AI>&	   a,
+		   Chooser		   chooser)
   {
-    AUTOMATON_TYPES(Auto_);
-    typedef Auto_					automaton_t;
+    typedef Element<A, AI>				automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     typedef typename automaton_t::series_set_t		series_set_t;
     typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
 
-    typedef typename std::list<typename Auto_::htransition_t>		htransition_set_t;
-    typedef std::map<typename Auto_::hstate_t, series_set_elt_t>	sums_t;
+    typedef typename std::list<htransition_t>		htransition_set_t;
+    typedef std::map<hstate_t, series_set_elt_t>	sums_t;
 
     typename htransition_set_t::const_iterator		i, j;
-    typename Auto_::hstate_t						q;
+    hstate_t						q;
     htransition_set_t					transitions;
-    std::list<typename Auto_::htransition_t> transitions_to_remove;
+    std::list<htransition_t>				transitions_to_remove;
     normalize_here(a);
     assertion(is_normalized(a));
 
@@ -350,18 +350,18 @@ namespace vcsn {
     | aut_to_exp |
     `-----------*/
 
-  template<typename A, typename T, typename Chooser_>
-  typename Element<A, T>::series_set_elt_t
-  aut_to_exp(const Element<A, T>& a, const Chooser_& c)
+  template<typename A, typename AI, typename Chooser>
+  typename Element<A, AI>::series_set_elt_t
+  aut_to_exp(const Element<A, AI>& a, const Chooser& c)
   {
     TIMER_SCOPED("aut_to_exp");
-    Element<A, T> ret(a);
+    Element<A, AI> ret(a);
     return do_in_aut_to_exp(ret.structure(), ret, c);
   }
 
-  template<typename A, typename T>
-  typename Element<A, T>::series_set_elt_t
-  aut_to_exp(const Element<A, T>& a)
+  template<typename A, typename AI>
+  typename Element<A, AI>::series_set_elt_t
+  aut_to_exp(const Element<A, AI>& a)
   {
     return aut_to_exp(a, DefaultChooser());
   }

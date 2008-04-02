@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,10 +35,16 @@ namespace vcsn {
 
   /** @addtogroup algorithms */  /** @{ */
 
-  /// Transform a krat expression into its canonical form, following aci-rules.
-  template <class Series, class T>
-  Element<Series, T>
-  canonical(const Element<Series, T>& exp);
+   /**
+   * @brief Transform a krat expression into its canonical form, following aci-rules.
+   *
+   * @param exp The input krat expression.
+   *
+   * @bug FIXME write doc.
+   */
+  template <typename S, typename SI>
+  Element<S, SI>
+  canonical(const Element<S, SI>& exp);
 
   /** @} */
 

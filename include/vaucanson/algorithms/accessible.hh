@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -68,9 +68,9 @@ namespace vcsn {
    *
    * @see accessible(), coaccessible(), coaccessible_states()
    */
-  template<typename A, typename T>
-  std::set<typename automaton_traits<T>::hstate_t>
-  accessible_states(const Element<A, T>& a);
+  template<typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  accessible_states(const Element<A, AI>& a);
 
   /**
    * Extract the sub-automaton composed of accessible states.
@@ -83,9 +83,9 @@ namespace vcsn {
    * @see accessible_here(), accessible_states(), coaccessible(),
    *      coaccessible_states()
    */
-  template<typename A, typename T>
-  Element<A, T>
-  accessible(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  accessible(const Element<A, AI>& a);
 
   /**
    * In-place extract the sub-automaton of accessible states.
@@ -99,9 +99,9 @@ namespace vcsn {
    * @see accessible(), accessible_states(), coaccessible(),
    *      coaccessible_states()
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  accessible_here(Element<A, T>& a);
+  accessible_here(Element<A, AI>& a);
 
   /**
    * Return co-accessible states.
@@ -113,9 +113,9 @@ namespace vcsn {
    *
    * @see coaccessible(), accessible(), accessible_states()
    */
-  template<typename A, typename T>
-  std::set<typename automaton_traits<T>::hstate_t>
-  coaccessible_states(const Element<A, T>& a);
+  template<typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  coaccessible_states(const Element<A, AI>& a);
 
   /**
    * Extract the sub-automaton composed of co-accessible states.
@@ -129,9 +129,9 @@ namespace vcsn {
    * @see coaccessible_here(), coaccessible_states(), accessible(),
    *      accessible_states()
    */
-  template<typename A, typename T>
-  Element<A, T>
-  coaccessible(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  coaccessible(const Element<A, AI>& a);
 
   /**
    * In-place extract the sub-automaton of co-accessible states.
@@ -145,9 +145,9 @@ namespace vcsn {
    * @see coaccessible(), coaccessible_states(), accessible(),
    *      accessible_states()
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  coaccessible_here(Element<A, T>& a);
+  coaccessible_here(Element<A, AI>& a);
 
   /** @} */
 

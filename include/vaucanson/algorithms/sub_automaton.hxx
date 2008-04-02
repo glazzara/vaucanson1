@@ -31,21 +31,22 @@ namespace vcsn {
   | SubAutomaton defined by a set of states |
   `----------------------------------------*/
 
-  template<typename A, typename auto_t, typename list_t>
+  template<typename A, typename AI, typename HStatesSet>
   void
   do_sub_automaton_here(const AutomataBase<A>&,
-			auto_t& a,
-			const list_t& selected,
+			Element<A, AI>& a,
+			const HStatesSet& selected,
 			bool check_states)
   {
     TIMER_SCOPED("sub_automaton");
-    std::list<typename auto_t::hstate_t> to_be_removed;
-    for (typename auto_t::state_iterator i = a.states().begin();
+    typedef Element<A, AI> automaton_t;
+    std::list<typename automaton_t::hstate_t> to_be_removed;
+    for (typename automaton_t::state_iterator i = a.states().begin();
 	 i != a.states().end(); ++i)
       if (std::find(selected.begin(), selected.end(), *i) == selected.end())
 	to_be_removed.push_back(*i);
 
-    for_all_const_(std::list<typename auto_t::hstate_t>, i, to_be_removed)
+    for_all_const_(std::list<typename automaton_t::hstate_t>, i, to_be_removed)
       if (!check_states
 	  || a.has_state(*i))
 	a.del_state(*i);
@@ -53,22 +54,22 @@ namespace vcsn {
 
 
   // wrapper:
-  template<typename A, typename T, typename StatesSet>
-  Element<A, T>
-  sub_automaton(const Element<A, T>& a, const StatesSet& s, bool check_states)
+  template<typename A, typename AI, typename HStatesSet>
+  Element<A, AI>
+  sub_automaton(const Element<A, AI>& a, const HStatesSet& s, bool check_states)
   {
-    Element<A, T> ret(a);
-    std::set<typename Element<A, T>::hstate_t> ret_s;
+    Element<A, AI> ret(a);
+    std::set<typename Element<A, AI>::hstate_t> ret_s;
 
-    for_all_iterator(typename StatesSet::const_iterator, i, s)
+    for_all_iterator(typename HStatesSet::const_iterator, i, s)
       ret_s.insert(ret.get_state(size_t(*i)));
     do_sub_automaton_here(ret.structure(), ret, ret_s, check_states);
     return ret;
   }
 
-  template<typename A, typename T, typename StatesSet>
+  template<typename A, typename AI, typename HStatesSet>
   void
-  sub_automaton_here(Element<A, T>& a, const StatesSet& s, bool check_states)
+  sub_automaton_here(Element<A, AI>& a, const HStatesSet& s, bool check_states)
   {
     do_sub_automaton_here(a.structure(), a, s, check_states);
   }

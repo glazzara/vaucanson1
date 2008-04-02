@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -70,9 +70,9 @@ namespace vcsn {
    * backward_eps_removal(), backward_eps_removal_here()
    * @author Sylvain Lombardy
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  eps_removal_here(Element<A, T>& a, misc::direction_type dir = misc::backward);
+  eps_removal_here(Element<A, AI>& a, misc::direction_type dir = misc::backward);
 
 
   /**
@@ -90,9 +90,9 @@ namespace vcsn {
    * backward_eps_removal(), backward_eps_removal_here()
    * @author Sylvain Lombardy
    */
-  template<typename A, typename T>
-  Element<A, T>
-  eps_removal(const Element<A, T>& a, misc::direction_type dir = misc::backward);
+  template<typename A, typename AI>
+  Element<A, AI>
+  eps_removal(const Element<A, AI>& a, misc::direction_type dir = misc::backward);
 
 
   /**
@@ -109,9 +109,9 @@ namespace vcsn {
    * forward_eps_removal_here(), forward_eps_removal()
    * @author Sylvain Lombardy
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  backward_eps_removal_here(Element<A, T>& a);
+  backward_eps_removal_here(Element<A, AI>& a);
 
 
   /**
@@ -128,9 +128,9 @@ namespace vcsn {
    * forward_eps_removal(), forward_eps_removal_here()
    * @author Sylvain Lombardy
    */
-  template<typename A, typename T>
-  Element<A, T>
-  backward_eps_removal(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  backward_eps_removal(const Element<A, AI>& a);
 
 
   /**
@@ -147,9 +147,9 @@ namespace vcsn {
    * backward_eps_removal_here(), backward_eps_removal()
    * @author Sylvain Lombardy
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  forward_eps_removal_here(Element<A, T>& a);
+  forward_eps_removal_here(Element<A, AI>& a);
 
 
   /**
@@ -166,12 +166,12 @@ namespace vcsn {
    * backward_eps_removal(), backward_eps_removal_here()
    * @author Sylvain Lombardy
    */
-  template<typename A, typename T>
-  Element<A, T>
-  forward_eps_removal(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  forward_eps_removal(const Element<A, AI>& a);
 
   /// @}
-  
+
 } // vcsn
 
 

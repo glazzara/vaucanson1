@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,32 +33,32 @@ namespace vcsn {
   | complement_here.  |
   `------------------*/
 
-  template <typename A, typename T>
+  template <typename A, typename AI>
   void
-  complement_here(Element<A, T>& e)
+  complement_here(Element<A, AI>& a)
   {
     TIMER_SCOPED("complement");
-    typedef Element<A, T> automaton_t;
+    typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    precondition(is_complete(e));
-    precondition(is_deterministic(e));
-    for_all_const_states(i, e)
-      if (e.is_final(*i))
-	e.unset_final(*i);
+    precondition(is_complete(a));
+    precondition(is_deterministic(a));
+    for_all_const_states(i, a)
+      if (a.is_final(*i))
+	a.unset_final(*i);
       else
-	e.set_final(*i);
+	a.set_final(*i);
   }
 
   /*-------------.
   | complement.  |
   `-------------*/
 
-  template <typename A, typename T>
-  Element<A, T>
-  complement(const Element<A, T>& e)
+  template <typename A, typename AI>
+  Element<A, AI>
+  complement(const Element<A, AI>& a)
   {
-    Element<A, T> res(e);
+    Element<A, AI> res(a);
     complement_here(res);
     return res;
   }

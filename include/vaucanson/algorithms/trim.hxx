@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,13 +34,13 @@ namespace vcsn {
   // preconditions :
   //
   //
-  template <class A_, typename Auto_>
-  std::set<typename Auto_::hstate_t>
-  do_useful_states(const AutomataBase<A_>&,
-		   const Auto_&		   a)
+  template <typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  do_useful_states(const AutomataBase<A>&,
+		   const Element<A, AI>&   a)
   {
     TIMER_SCOPED("useful_states");
-    typedef typename Auto_::hstate_t hstate_t;
+    typedef typename Element<A, AI>::hstate_t hstate_t;
 
     std::set<hstate_t> start = accessible_states(a);
     std::set<hstate_t> final = coaccessible_states(a);
@@ -51,23 +51,23 @@ namespace vcsn {
     return result;
   }
 
-  template<typename A, typename T>
-  std::set<typename T::hstate_t>
-  useful_states(const Element<A, T>& a)
+  template<typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  useful_states(const Element<A, AI>& a)
   {
     return do_useful_states(a.structure(), a);
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  trim(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  trim(const Element<A, AI>& a)
   {
     return sub_automaton(a, useful_states(a));
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  trim_here(Element<A, T>& a)
+  trim_here(Element<A, AI>& a)
   {
     sub_automaton_here(a, useful_states(a));
   }

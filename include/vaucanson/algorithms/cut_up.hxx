@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,11 +33,11 @@ namespace vcsn {
   | Check if an automaton is cut up.  |
   `----------------------------------*/
 
-  template <class S, class T>
-  bool is_cut_up(const Element<S, T>& a)
+  template <typename A, typename AI>
+  bool is_cut_up(const Element<A, AI>& a)
   {
     TIMER_SCOPED("is_cut_up");
-    typedef Element<S, T> automaton_t;
+    typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
     for_all_const_transitions(e, a)
@@ -53,7 +53,7 @@ namespace vcsn {
   | Specialization for label with rational series.  |
   `------------------------------------------------*/
 
-  template <class S, class T, class TT, class Auto, class Ret>
+  template <typename S, typename T, typename TT, typename Auto, typename Ret>
   void do_cut_up(const AutomataBase<S>&,
 		 const rat::exp<T, TT>&,
 		 const Auto& a,
@@ -104,7 +104,7 @@ namespace vcsn {
   | Specialization for label with polynomial series.  |
   `--------------------------------------------------*/
 
-  template <class S, class T, class TT, class Auto, class Ret>
+  template <typename S, typename T, typename TT, typename Auto, typename Ret>
   void do_cut_up(const S&,
 		 const algebra::polynom<T, TT>&,
 		 const Auto& a,
@@ -145,29 +145,29 @@ namespace vcsn {
   | Wrappers |
   `---------*/
 
-  template <class S, class T>
+  template <typename A, typename AI>
   void
-  cut_up(const Element<S, T>& a, Element<S, T>& res)
+  cut_up(const Element<A, AI>& a, Element<A, AI>& res)
   {
     TIMER_SCOPED("cut_up");
-    typedef typename Element<S, T>::series_set_elt_t::value_t series_impl_t;
+    typedef typename Element<A, AI>::series_set_elt_t::value_t series_impl_t;
     do_cut_up(a.structure(), SELECT(series_impl_t), a, res);
   }
 
 
-  template <class S, class T>
-  Element<S, T>
-  cut_up(const Element<S, T>& a)
+  template <typename A, typename AI>
+  Element<A, AI>
+  cut_up(const Element<A, AI>& a)
   {
-    Element<S, T> res(a.structure());
+    Element<A, AI> res(a.structure());
     cut_up(a, res);
     return res;
   }
 
 
-  template <class S, class T>
+  template <typename A, typename AI>
   void
-  cut_up_here(Element<S, T>& a)
+  cut_up_here(Element<A, AI>& a)
   {
     a = cut_up(a);
   }

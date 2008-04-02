@@ -53,9 +53,9 @@ namespace vcsn {
    * @return A rational series that describes the language of the automaton.
    * @see generalized()
    */
-  template<typename A, typename T>
-  typename Element<A, T>::series_set_elt_t
-  aut_to_exp(const Element<A, T>& a);
+  template<typename A, typename AI>
+  typename Element<A, AI>::series_set_elt_t
+  aut_to_exp(const Element<A, AI>& a);
 
   /**
    * Returns a series which describes the language of the automaton.
@@ -74,9 +74,9 @@ namespace vcsn {
    * @return A rational series that describes the language of the automaton.
    * @see generalized()
    */
-  template<typename A, typename T, typename Chooser_>
-  typename Element<A, T>::series_set_elt_t
-  aut_to_exp(const Element<A, T>& a, const Chooser_& c);
+  template<typename A, typename AI, typename Chooser>
+  typename Element<A, AI>::series_set_elt_t
+  aut_to_exp(const Element<A, AI>& a, const Chooser& c);
 
   /** @} */
 

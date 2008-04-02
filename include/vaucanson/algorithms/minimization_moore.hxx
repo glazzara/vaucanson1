@@ -47,14 +47,14 @@ namespace vcsn {
   `-------------------*/
   // precondition : the input automaton is deterministic or
   // co-deterministic according to Transposed
-  template<typename A, typename T, bool Transposed>
+  template<typename A, typename AI, bool Transposed>
   void
-  do_minimization_moore(const Element<A, T>& input, Element<A, T>& output)
+  do_minimization_moore(const Element<A, AI>& input, Element<A, AI>& output)
   {
     TIMER_SCOPED("minimization_moore");
-    typedef Element<A, T> automata_type;
-    AUTOMATON_TYPES(automata_type);
-    AUTOMATON_FREEMONOID_TYPES(automata_type);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+    AUTOMATON_FREEMONOID_TYPES(automaton_t);
     using std::map;
     using std::vector;
     using std::set;
@@ -223,43 +223,43 @@ namespace vcsn {
   }
 
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  minimization_moore_here(Element<A, T>& a)
+  minimization_moore_here(Element<A, AI>& a)
   {
     precondition(is_deterministic(a));
-    Element<A, T> output(a.structure());
-    do_minimization_moore<A, T, false>(a, output);
+    Element<A, AI> output(a.structure());
+    do_minimization_moore<A, AI, false>(a, output);
     a = output;
   }
 
 
-  template<typename A, typename T>
-  Element<A, T>
-  minimization_moore(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  minimization_moore(const Element<A, AI>& a)
   {
     precondition(is_deterministic(a));
-    Element<A, T> output(a.structure());
-    do_minimization_moore<A, T, false>(a, output);
+    Element<A, AI> output(a.structure());
+    do_minimization_moore<A, AI, false>(a, output);
     return output;
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  co_minimization_moore_here(Element<A, T>& a)
+  co_minimization_moore_here(Element<A, AI>& a)
   {
-    Element<A, T> output(a.structure());
-    do_minimization_moore<A, T, true>(a, output);
+    Element<A, AI> output(a.structure());
+    do_minimization_moore<A, AI, true>(a, output);
     a = output;
   }
 
 
-  template<typename A, typename T>
-  Element<A, T>
-  co_minimization_moore(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  co_minimization_moore(const Element<A, AI>& a)
   {
-    Element<A, T> output(a.structure());
-    do_minimization_moore<A, T, true>(a, output);
+    Element<A, AI> output(a.structure());
+    do_minimization_moore<A, AI, true>(a, output);
     return output;
   }
 

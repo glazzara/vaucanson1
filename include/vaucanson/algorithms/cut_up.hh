@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -41,8 +41,8 @@ namespace vcsn
    * @return	is cut-up.
    *
    */
-  template <class S, class T>
-  bool is_cut_up(const Element<S, T>& a);
+  template <typename A, typename AI>
+  bool is_cut_up(const Element<A, AI>& a);
 
 
   /**
@@ -58,9 +58,9 @@ namespace vcsn
    * @return	Output automaton.
    *
    */
-  template <class S, class T>
-  Element<S, T>
-  cut_up(const Element<S, T>& a);
+  template <typename A, typename AI>
+  Element<A, AI>
+  cut_up(const Element<A, AI>& a);
 
 
   /**
@@ -76,9 +76,9 @@ namespace vcsn
    * @arg res	Output automaton.
    *
    */
-  template <class S, class T>
+  template <typename A, typename AI>
   void
-  cut_up(const Element<S, T>& a, Element<S, T>& res);
+  cut_up(const Element<A, AI>& a, Element<A, AI>& res);
 
 
   /**
@@ -93,9 +93,9 @@ namespace vcsn
    * @arg a	Input automaton.
    *
    */
-  template <class S, class T>
+  template <typename A, typename AI>
   void
-  cut_up_here(Element<S, T>& a);
+  cut_up_here(Element<A, AI>& a);
 
 
 } // ! vcsn

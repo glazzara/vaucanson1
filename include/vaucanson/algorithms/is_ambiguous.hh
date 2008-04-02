@@ -46,9 +46,9 @@ namespace vcsn {
    *
    * @return true if the automaton is ambiguous.
    */
-  template<typename S, typename A>
+  template<typename A, typename AI>
   bool
-  is_ambiguous(const Element<S, A>& aut);
+  is_ambiguous(const Element<A, AI>& aut);
 
   /** @} */
 

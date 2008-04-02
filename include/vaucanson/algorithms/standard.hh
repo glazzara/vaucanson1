@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,9 +72,9 @@ namespace vcsn {
    *
    * @see is_standard()
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  standardize(Element<A, T>& a);
+  standardize(Element<A, AI>& a);
 
   /**
    * Returns true if the input automaton is standard.
@@ -83,9 +83,9 @@ namespace vcsn {
    *
    * @see standardize()
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   bool
-  is_standard(const Element<A, T>& a);
+  is_standard(const Element<A, AI>& a);
 
   /**
    * In-place union of two standard automata.
@@ -98,10 +98,10 @@ namespace vcsn {
    *
    * @see standardize(), is_standard(), union_of_standard()
    */
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  union_of_standard_here(Element<A, T>& lhs,
-			 const Element<A, U>& rhs);
+  union_of_standard_here(Element<A, AI1>& lhs,
+			 const Element<A, AI2>& rhs);
 
   /**
    * Return a fresh union of two standard automata.
@@ -114,10 +114,10 @@ namespace vcsn {
    *
    * @see standardize(), is_standard(), union_of_standard_here()
    */
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  union_of_standard(const Element<A, T>& lhs,
-		    const Element<A, U>& rhs);
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  union_of_standard(const Element<A, AI1>& lhs,
+		    const Element<A, AI2>& rhs);
 
   /**
    * In-place concatenation of two standard automata.
@@ -130,10 +130,10 @@ namespace vcsn {
    *
    * @see standardize(), is_standard(), concat_of_standard()
    */
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  concat_of_standard_here(Element<A, T>& lhs,
-			  const Element<A, U>& rhs);
+  concat_of_standard_here(Element<A, AI1>& lhs,
+			  const Element<A, AI2>& rhs);
 
   /**
    * Return a fresh concatenation of two standard automata.
@@ -146,10 +146,10 @@ namespace vcsn {
    *
    * @see standardize(), is_standard(), concat_of_standard_here()
    */
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  concat_of_standard(const Element<A, T>& lhs,
-		     const Element<A, U>& rhs);
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  concat_of_standard(const Element<A, AI1>& lhs,
+		     const Element<A, AI2>& rhs);
 
   /**
    * In-place star transformation of a standard automata.
@@ -161,9 +161,9 @@ namespace vcsn {
    *
    * @see standardize(), is_standard(), star_of_standard()
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  star_of_standard_here(Element<A, T>& a);
+  star_of_standard_here(Element<A, AI>& a);
 
   /**
    * Return the fresh star transformation of a standard automata.
@@ -175,9 +175,9 @@ namespace vcsn {
    *
    * @see standardize(), is_standard(), star_of_standard_here()
    */
-  template<typename A, typename T>
-  Element<A, T>
-  star_of_standard(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  star_of_standard(const Element<A, AI>& a);
 
   /** @} */
 

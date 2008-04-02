@@ -143,11 +143,11 @@ namespace vcsn {
     }
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  subset_construction(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  subset_construction(const Element<A, AI>& a)
   {
-    Element<A, T> res(a.structure());
+    Element<A, AI> res(a.structure());
     do_subset_construction(res.structure(), res, a);
     return res;
   }
@@ -155,35 +155,36 @@ namespace vcsn {
   /*--------------.
   | determinize.  |
   `--------------*/
-  template <typename A, typename input_t, typename output_t>
+  template <typename A, typename AI>
   void
   do_determinize(const AutomataBase<A>&	a_set,
-		 output_t&		output,
-		 const input_t&		input,
-		 std::map<typename output_t::hstate_t,
-		  std::set<typename input_t::hstate_t> >& m)
+		 Element<A, AI>&	output,
+		 const Element<A, AI>&	input,
+		 std::map<typename Element<A, AI>::hstate_t,
+		          std::set<typename Element<A, AI>::hstate_t> >& m)
   {
     TIMER_SCOPED ("determinize");
     precondition(is_realtime(input));
     do_subset_construction(a_set, output, input, m);
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a,
-	      std::map<typename T::hstate_t,
-		std::set<typename T::hstate_t> >& m)
+  template<typename A, typename AI>
+  Element<A, AI>
+  determinize(const Element<A, AI>& a,
+	      std::map<typename Element<A, AI>::hstate_t,
+		std::set<typename Element<A, AI>::hstate_t> >& m)
   {
-    Element<A, T> ret(a.structure());
+    Element<A, AI> ret(a.structure());
     do_determinize(ret.structure(), ret, a, m);
     return ret;
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  determinize(const Element<A, AI>& a)
   {
-    std::map<typename T::hstate_t, std::set<typename T::hstate_t> > m;
+    std::map<typename Element<A, AI>::hstate_t,
+             std::set<typename Element<A, AI>::hstate_t> > m;
     return determinize(a, m);
   }
 

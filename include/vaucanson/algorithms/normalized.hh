@@ -75,9 +75,9 @@ namespace vcsn {
    * @see normalize_here(), is_normalized(), union_of_normalized(),
    *      concatenate_of_normalized(), star_of_normalized().
    */
-  template <typename A, typename T>
-  Element<A, T>
-  normalize(const Element<A, T>& a);
+  template <typename A, typename AI>
+  Element<A, AI>
+  normalize(const Element<A, AI>& a);
 
   /**
    * In-place normalize to the thompson form.
@@ -90,9 +90,9 @@ namespace vcsn {
    * @see normalize, is_normalized(), union_of_normalized(),
    *      concatenate_of_normalized(), star_of_normalized().
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  normalize_here(Element<A, T>& a);
+  normalize_here(Element<A, AI>& a);
 
   /**
    * Return true if the input automaton is thompson-normalized.
@@ -105,9 +105,9 @@ namespace vcsn {
    * @see normalize(), union_of_normalized(), concatenate_of_normalized(),
    *      star_of_normalized().
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   bool
-  is_normalized(const Element<A, T>& a);
+  is_normalized(const Element<A, AI>& a);
 
   /**
    * Do the in-place union of two thompson-normalized automata.
@@ -122,10 +122,10 @@ namespace vcsn {
    * @see union_of_normalized(), concatenate_of_normalized(),
    *      star_of_normalized(), normalize(), is_normalized().
    */
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  union_of_normalized_here(Element<A, T>& lhs,
-			   const Element<A, U>& rhs);
+  union_of_normalized_here(Element<A, AI1>& lhs,
+			   const Element<A, AI2>& rhs);
 
   /**
    * Return the fresh union of two thompson-normalized automata.
@@ -139,10 +139,10 @@ namespace vcsn {
    * @see union_of_normalized_here(), concatenate_of_normalized(),
    *      star_of_normalized(), normalize(), is_normalized().
    */
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  union_of_normalized(const Element<A, T>& lhs,
-		      const Element<A, U>& rhs);
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  union_of_normalized(const Element<A, AI1>& lhs,
+		      const Element<A, AI2>& rhs);
 
   /**
    * Do the in-place concatenation of two thompson-normalized automata.
@@ -157,10 +157,10 @@ namespace vcsn {
    * @see concatenate_of_normalized(), union_of_normalized(),
    *      star_of_normalized(), normalize(), is_normalized().
    */
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  concatenate_of_normalized_here(Element<A, T>& lhs,
-				 const Element<A, U>& rhs);
+  concatenate_of_normalized_here(Element<A, AI1>& lhs,
+				 const Element<A, AI2>& rhs);
 
   /**
    * Return the fresh concatenation of two thompson-normalized automata.
@@ -174,10 +174,10 @@ namespace vcsn {
    * @see concatenate_of_normalized_here(), union_of_normalized(),
    *      star_of_normalized(), normalize, is_normalized().
    */
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  concatenate_of_normalized(const Element<A, T>& lhs,
-			    const Element<A, U>& rhs);
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  concatenate_of_normalized(const Element<A, AI1>& lhs,
+			    const Element<A, AI2>& rhs);
 
   /**
    * Do in-place star transformation on the thompson-normalized input.
@@ -191,9 +191,9 @@ namespace vcsn {
    * @see star_of_normalized(), concatenate_of_normalized(),
    *      union_of_normalized(), normalize(), is_normalized().
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  star_of_normalized_here(Element<A, T>& a);
+  star_of_normalized_here(Element<A, AI>& a);
 
   /**
    * Return the fresh star transformation of its normalized input.
@@ -207,9 +207,9 @@ namespace vcsn {
    * @see star_of_normalized_here(), concatenate_of_normalized(),
    *      union_of_normalized(), normalize(), is_normalized().
    */
-  template<typename A, typename T>
-  Element<A, T>
-  star_of_normalized(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  star_of_normalized(const Element<A, AI>& a);
 
   /** @} */
 

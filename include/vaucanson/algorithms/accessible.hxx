@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,12 +34,13 @@ namespace vcsn {
   | do_accessible_states.  |
   `-----------------------*/
 
-  template <class A_, typename Auto_>
-  std::set<typename Auto_::hstate_t>
-  do_accessible_states(const AutomataBase<A_>&,
-		       const Auto_&		   a)
+  template <class A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  do_accessible_states(const AutomataBase<A>&,
+		       const Element<A, AI>&   a)
   {
-    AUTOMATON_TYPES(Auto_);
+    typedef Element<A, AI> auto_t;
+    AUTOMATON_TYPES(auto_t);
     typedef std::set<hstate_t> state_set_t;
 
     std::queue<hstate_t>      queue;
@@ -76,24 +77,24 @@ namespace vcsn {
     return reachable_states;
   }
 
-  template<typename A, typename T>
-  std::set<typename automaton_traits<T>::hstate_t>
-  accessible_states(const Element<A, T>& a)
+  template<typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  accessible_states(const Element<A, AI>& a)
   {
     TIMER_SCOPED ("accessible_states");
     return do_accessible_states(a.structure(), a);
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  accessible_here(Element<A, T>& a)
+  accessible_here(Element<A, AI>& a)
   {
     sub_automaton_here(a, accessible_states(a));
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  accessible(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  accessible(const Element<A, AI>& a)
   {
     return sub_automaton(a, accessible_states(a));
   }
@@ -102,31 +103,31 @@ namespace vcsn {
   | do_coaccessible_states |
   `-----------------------*/
 
-  template <class A_, typename Auto_>
-  std::set<typename Auto_::hstate_t>
-  do_coaccessible_states(const AutomataBase<A_>&,
-			 const Auto_&	       a)
+  template <class A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  do_coaccessible_states(const AutomataBase<A>&,
+			 const Element<A, AI>&  a)
   {
     return accessible_states(transpose_view(a));
   }
 
-  template<typename A, typename T>
-  std::set<typename automaton_traits<T>::hstate_t>
-  coaccessible_states(const Element<A, T>& a)
+  template<typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  coaccessible_states(const Element<A, AI>& a)
   {
     return do_coaccessible_states(a.structure(), a);
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  coaccessible(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  coaccessible(const Element<A, AI>& a)
   {
     return sub_automaton(a, coaccessible_states(a));
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  coaccessible_here(Element<A, T>& a)
+  coaccessible_here(Element<A, AI>& a)
   {
     sub_automaton_here(a, coaccessible_states(a));
   }

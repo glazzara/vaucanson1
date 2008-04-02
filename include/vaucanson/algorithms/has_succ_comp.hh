@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,12 +39,19 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  /// Return true if the automaton has successful computation
-  /// (has at least one state that is both accessible and
-  /// co-accessible), false otherwise.
-  template<typename A, typename T>
+  /**
+   * @brief Return true if the automaton has successful computation.
+   *
+   * Return true if the automaton has successful computation,
+   * false otherwise.
+   * Having a successful complete means to have at least one state
+   * that is both accessible and co-accessible.
+   *
+   * @param a The input automaton.
+   */
+  template<typename A, typename AI>
   bool
-  has_succ_comp(const Element<A, T>& a);
+  has_succ_comp(const Element<A, AI>& a);
 
   /** @} */
 

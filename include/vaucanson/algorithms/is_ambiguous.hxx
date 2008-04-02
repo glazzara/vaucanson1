@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,17 +31,17 @@ namespace vcsn {
   /*-------------.
   | is_ambiguous |
   `-------------*/
-  template <typename A_, typename Auto_>
+  template <typename A, typename AI>
   bool
-  do_is_ambiguous(const AutomataBase<A_>&,
-		  const Auto_&	aut)
+  do_is_ambiguous(const AutomataBase<A>&,
+		  const Element<A, AI>&	aut)
   {
-    typedef typename Auto_::hstate_t hstate_t;
+    typedef typename Element<A, AI>::hstate_t hstate_t;
 
     // This map is used to know which state is created by which two ones.
     std::map<hstate_t, std::pair<hstate_t, hstate_t> >  m;
     std::map<hstate_t, std::pair<hstate_t, hstate_t> >  aut_p_m;
-    Auto_ aut_p = product (aut, aut, m);
+    Element<A, AI> aut_p = product (aut, aut, m);
     for (typename std::map<hstate_t, std::pair<hstate_t, hstate_t> >::iterator i = m.begin();
 	 i != m.end(); ++i)
       aut_p_m.insert(std::make_pair(aut_p.get_state(size_t(i->first)), i->second));
@@ -53,9 +53,9 @@ namespace vcsn {
     return false;
   }
 
-  template<typename A_, typename Auto_>
+  template<typename A, typename AI>
   bool
-  is_ambiguous(const Element<A_, Auto_>& aut)
+  is_ambiguous(const Element<A, AI>& aut)
   {
     TIMER_SCOPED("is_ambiguous");
     return do_is_ambiguous(aut.structure(), aut);

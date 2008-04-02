@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -100,15 +100,15 @@ namespace vcsn {
   /*----------.
   | Wrapper.  |
   `----------*/
-  template<typename A, typename T, typename W>
-  typename Element<A, T>::semiring_elt_t
-  eval(const Element<A, T>& a, const W& word)
+  template<typename A, typename AI, typename W>
+  typename Element<A, AI>::semiring_elt_t
+  eval(const Element<A, AI>& a, const W& word)
   {
     TIMER_SCOPED("eval");
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     semiring_elt_t ret(a.structure().series().semiring());
-    eval_functor<auto_t, W, semiring_elt_t> evalf(a.structure(), a);
+    eval_functor<automaton_t, W, semiring_elt_t> evalf(a.structure(), a);
 
     evalf.execute(word, ret);
     return ret;

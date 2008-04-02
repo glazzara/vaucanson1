@@ -43,11 +43,12 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be a deterministic Boolean automaton.
+   * @pre @a a must be deterministic.
+   * @pre @a a must be a Boolean automaton.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  minimization_moore(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  minimization_moore(const Element<A, AI>& a);
 
   /**
    * Returns the co-minimal co-deterministic automaton associated to
@@ -60,13 +61,12 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be a co-deterministic Boolean automaton.
-   *
-   * @bug The precondition is not checked.
+   * @pre @a a must be co-deterministic.
+   * @pre @a a must be a Boolean automaton.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  co_minimization_moore(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  co_minimization_moore(const Element<A, AI>& a);
 
 
   /**
@@ -79,11 +79,12 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be a deterministic Boolean automaton.
+   * @pre @a a must be deterministic.
+   * @pre @a a must be a Boolean automaton.
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  minimization_moore_here(Element<A, T>& a);
+  minimization_moore_here(Element<A, AI>& a);
 
 
   /**
@@ -96,13 +97,12 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be a co-deterministic Boolean automaton.
-   *
-   * @bug The precondition is not checked.
+   * @pre @a a must be co-deterministic.
+   * @pre @a a must be a Boolean automaton.
    */
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  co_minimization_moore_here(Element<A, T>& a);
+  co_minimization_moore_here(Element<A, AI>& a);
 
   /** @} */
 

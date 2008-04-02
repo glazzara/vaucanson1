@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,20 +42,35 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  /// Returns a useful states of the automaton (start reachable and final co-).
-  template<typename A, typename T>
-  std::set<typename T::hstate_t>
-  useful_states(const Element<A, T>& a);
+  /**
+   * @brief Returns a useful states of the automaton.
+   *
+   * This functions returns the states that are reachable and co-reachable.
+   *
+   * @param a The input automaton.
+   */
+  template<typename A, typename AI>
+  std::set<typename Element<A, AI>::hstate_t>
+  useful_states(const Element<A, AI>& a);
 
-  /// Return a fresh automaton in which non useful states are removed.
-  template<typename A, typename T>
-  Element<A, T>
-  trim(const Element<A, T>& a);
+  /**
+   * @brief Return a fresh automaton in which non useful states are removed.
+   *
+   * @param a The input automaton.
+   */
+  template<typename A, typename AI>
+  Element<A, AI>
+  trim(const Element<A, AI>& a);
 
   /// Trim \a a.
-  template<typename A, typename T>
+  /**
+   * @brief Remove non useful states from the automaton.
+   *
+   * @param a The input automaton.
+   */
+  template<typename A, typename AI>
   void
-  trim_here(Element<A, T>& a);
+  trim_here(Element<A, AI>& a);
 
   /** @} */
 

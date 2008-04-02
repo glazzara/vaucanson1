@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
  */
 /** @} */
 
+# include <vaucanson/automata/concept/automata.hh>
+
 // INTERFACE: void transpose(Automaton& dst, const Automaton& src) { vcsn::transpose(*dst, *src); }
 // INTERFACE: void transpose(GenAutomaton& dst, const GenAutomaton& src) { vcsn::transpose(*dst, *src); }
 
@@ -42,12 +44,12 @@ namespace vcsn {
    *
    * This function copy in @c dst the transposition of the automaton @c from.
    *
-   * @param from Automaton to transpose
    * @param dst Destination
+   * @param from Automaton to transpose
    */
-  template<typename lhs_t, typename rhs_t>
+  template<typename A, typename AI1, typename AI2>
   void
-  transpose(lhs_t& dst, const rhs_t& from);
+  transpose(Element<A, AI1>& dst, const Element<A, AI2>& from);
 
   /**
    * Return a fresh transposed automaton.
@@ -56,9 +58,9 @@ namespace vcsn {
    *
    * @param from Automaton to transpose.
    */
-  template<typename auto_t>
-  auto_t
-  transpose(const auto_t& from);
+  template<typename A, typename AI>
+  Element<A, AI>
+  transpose(const Element<A, AI>& from);
 
   /** @} */
 

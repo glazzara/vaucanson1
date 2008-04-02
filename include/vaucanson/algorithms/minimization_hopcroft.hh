@@ -45,11 +45,14 @@ namespace vcsn {
    *
    * @param a The deterministic Boolean automaton to minimize.
    *
+   * @pre @a a must be deterministic.
+   * @pre @a a must be a boolean automaton.
+   *
    * @return A fresh automaton that is the canonical minimal automaton of 'a'.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  minimization_hopcroft(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  minimization_hopcroft(const Element<A, AI>& a);
 
   /**
    * Return the quotient of a non-deterministic acceptor.
@@ -62,9 +65,9 @@ namespace vcsn {
    * @see CIAA 2005, "Inside Vaucanson" (in which the algorithm is
    * described by Sylvain Lombardy)
    */
-  template<typename A, typename T>
-  Element<A, T>
-  quotient(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  quotient(const Element<A, AI>& a);
 
   /** @} */
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -48,13 +48,13 @@ namespace vcsn {
    * @note This algorithm works in place.
    *
    * @param a the deterministic and Boolean automaton to complete.
-   * @pre @a a must be a realtime automaton
+   * @pre @a a must be a realtime automaton.
    * @see complete(), is_complete()
    * @author Yann Régis-Gianas
    */
-  template <typename A, typename T>
+  template <typename A, typename AI>
   void
-  complete_here(Element<A, T>& a);
+  complete_here(Element<A, AI>& a);
 
   /**
    * Make the transition function of an automaton total w.r.t alphabet.
@@ -62,13 +62,13 @@ namespace vcsn {
    * @note This algorithm returns a fresh automaton.
    *
    * @param a the deterministic and Boolean automaton to complete.
-   * @pre @a a must be a realtime automaton
+   * @pre @a a must be a realtime automaton.
    * @see complete_here(), is_complete()
    * @author Yann Régis-Gianas
    */
-  template <typename A, typename T>
-  Element<A, T>
-  complete(const Element<A, T>& a);
+  template <typename A, typename AI>
+  Element<A, AI>
+  complete(const Element<A, AI>& a);
 
   /**
    * Test if the transition function is complete for each state.
@@ -76,13 +76,13 @@ namespace vcsn {
    * @param a The Boolean automaton to test.
    *
    * @return true if the transition function of e is complete w.r.t alphabet.
-   * @pre @a a must be a realtime automaton
+   * @pre @a a must be a realtime automaton.
    * @see complete(), complete_here()
    * @author Yann Régis-Gianas
    */
-  template <class A, class T>
+  template <typename A, typename AI>
   bool
-  is_complete(const Element<A, T>& a);
+  is_complete(const Element<A, AI>& a);
 
   /** @} */
 

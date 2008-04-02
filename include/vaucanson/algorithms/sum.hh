@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,9 +52,9 @@ namespace vcsn {
    *
    * @see sum()
    */
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  sum_here(Element<A, T>& lhs, const Element<A, U>& rhs);
+  sum_here(Element<A, AI1>& lhs, const Element<A, AI2>& rhs);
 
   /**
    * Summing of two automata.
@@ -68,9 +68,9 @@ namespace vcsn {
    *
    * @see sum_here()
    */
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  sum(const Element<A, T>& lhs, const Element<A, U>& rhs);
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  sum(const Element<A, AI1>& lhs, const Element<A, AI2>& rhs);
 
   /** @} */
 

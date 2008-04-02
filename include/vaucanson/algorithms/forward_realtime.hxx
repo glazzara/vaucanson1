@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,16 +26,16 @@ namespace vcsn {
   | forward_realtime_here.  |
   `------------------------*/
 
-  template <class A_, typename Auto_>
+  template <class A, typename AI>
   void
-  do_forward_realtime_here(const AutomataBase<A_>&b, Auto_& a)
+  do_forward_realtime_here(const AutomataBase<A>& b, Element<A, AI>& a)
   {
     do_realtime_here (b, a, misc::forward);
   }
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   void
-  forward_realtime_here(Element<A, T>& a)
+  forward_realtime_here(Element<A, AI>& a)
   {
     do_forward_realtime_here(a.structure(), a);
   }
@@ -44,17 +44,17 @@ namespace vcsn {
   | forward_realtime.  |
   `-------------------*/
 
-  template<typename A_, typename Auto_>
-  Auto_
-  do_forward_realtime(const AutomataBase<A_>&b, const Auto_& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  do_forward_realtime(const AutomataBase<A>& b, const Element<A, AI>& a)
   {
     return do_realtime (b, a, misc::forward);
   }
 
 
-  template<typename A, typename T>
-  Element<A, T>
-  forward_realtime(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  forward_realtime(const Element<A, AI>& a)
   {
     return do_forward_realtime(a.structure(), a);
   }

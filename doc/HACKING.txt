@@ -52,6 +52,7 @@ Template arguments:
   - AI : Automaton implementation.
   - S  : Series.
   - SI : Series implementation.
+  - W  : a Word.
 
 In the case where multiple possibilities could be used, suffix the
 template argument with the appropriate numbering. For example, to

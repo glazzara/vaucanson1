@@ -56,9 +56,9 @@ namespace vcsn {
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a);
+  template<typename A, typename AI>
+  Element<A, AI>
+  determinize(const Element<A, AI>& a);
 
   /**
    * Returns the determinized of a Boolean automaton.
@@ -75,10 +75,11 @@ namespace vcsn {
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a,
-	      std::map<typename T::hstate_t, std::set<typename T::hstate_t> >&m);
+  template<typename A, typename AI>
+  Element<A, AI>
+  determinize(const Element<A, AI>& a,
+	      std::map<typename Element<A, AI>::hstate_t,
+	               std::set<typename Element<A, AI>::hstate_t> >&m);
   //@}
 
   /** @} */

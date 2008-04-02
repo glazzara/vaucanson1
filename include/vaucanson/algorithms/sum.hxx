@@ -33,10 +33,12 @@ namespace vcsn {
   |  sum  |
   `------*/
 
-  template <typename A, typename lhs_t, typename rhs_t>
+  template <typename A, typename AI1, typename AI2>
   void
-  do_sum(const AutomataBase<A>&, lhs_t& lhs, const rhs_t& rhs)
+  do_sum(const AutomataBase<A>&, Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
+    typedef Element<A, AI1> lhs_t;
+    typedef Element<A, AI2> rhs_t;
     typedef typename rhs_t::state_iterator state_iterator;
 
     /*--------------.
@@ -81,20 +83,18 @@ namespace vcsn {
   }
 
   // wrappers
-  template<typename A, typename T, typename U>
+  template<typename A, typename AI1, typename AI2>
   void
-  sum_here(Element<A, T>& lhs, const Element<A, U>& rhs)
+  sum_here(Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
     do_sum(lhs.structure(), lhs, rhs);
   }
 
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  sum(const Element<A, T>& lhs, const Element<A, U>& rhs)
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  sum(const Element<A, AI1>& lhs, const Element<A, AI2>& rhs)
   {
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(lhs);
+    Element<A, AI1> ret(lhs);
     //	  ret.history().set_auto_event_about(INSUM_EVENT, lhs, rhs);
     do_sum(ret.structure(), ret, rhs);
     return ret;

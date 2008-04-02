@@ -44,28 +44,30 @@ namespace vcsn {
    *
    * @param a The deterministic Boolean automaton to complement.
    *
-   * @pre The input automaton must be complete and deterministic.
+   * @pre @a a must be complete.
+   * @pre @a a must be deterministic.
    *
    * @see complement()
    * @author Yann Régis-Gianas
    */
-  template <typename A, typename T>
+  template <typename A, typename AI>
   void
-  complement_here(Element<A, T>& a);
+  complement_here(Element<A, AI>& a);
 
   /**
    * Complement the set of final states.
    *
    * @param a the deterministic Boolean automaton to complement.
    *
-   * @pre the input automaton must be complete and deterministic.
+   * @pre @a a must be complete.
+   * @pre @a a must be deterministic.
    *
    * @see complement_here()
    * @author Yann Régis-Gianas
    */
-  template <typename A, typename T>
-  Element<A, T>
-  complement(const Element<A, T>& a);
+  template <typename A, typename AI>
+  Element<A, AI>
+  complement(const Element<A, AI>& a);
 
   /** @} */
 

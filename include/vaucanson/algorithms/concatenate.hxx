@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,14 +26,15 @@
 
 namespace vcsn {
 
-  template <class Self, class Auto>
+  template <typename A, typename AI>
   void
-  do_auto_in_concat(const AutomataBase<Self>&	,
-		    Auto&			lhs,
-		    const Auto&			rhs)
+  do_auto_in_concat(const AutomataBase<A>&	,
+		    Element<A, AI>&		lhs,
+		    const Element<A, AI>&	rhs)
   {
     TIMER_SCOPED("concatentate");
-    AUTOMATON_TYPES(Auto);
+    typedef Element<A, AI>		automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     std::map<hstate_t, hstate_t>	trans;
 
     for_all_const_states(s, rhs)
@@ -55,18 +56,18 @@ namespace vcsn {
   }
 
 
-  template <class A, class T>
-  Element<A, T>
-  concatenate(const Element<A, T>& lhs, const Element<A, T>& rhs)
+  template <typename A, typename AI>
+  Element<A, AI>
+  concatenate(const Element<A, AI>& lhs, const Element<A, AI>& rhs)
   {
-    Element<A, T> ret(lhs);
+    Element<A, AI> ret(lhs);
     do_auto_in_concat(ret.structure(), ret, rhs);
     return ret;
   }
 
-  template <class A, class T>
+  template <typename A, typename AI>
   void
-  concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs)
+  concatenate_here(Element<A, AI>& lhs, const Element<A, AI>& rhs)
   {
     do_auto_in_concat(lhs.structure(), lhs, rhs);
   }

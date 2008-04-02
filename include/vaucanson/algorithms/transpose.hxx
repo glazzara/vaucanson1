@@ -24,24 +24,25 @@
 
 namespace vcsn
 {
-  template<typename lhs_t, typename rhs_t>
+  template<typename A, typename AI1, typename AI2>
   void
-  transpose(lhs_t& dst_, const rhs_t& from)
+  transpose(Element<A, AI1>& dst, const Element<A, AI2>& from)
   {
     TIMER_SCOPED("transpose");
-    AUTOMATON_TYPES(lhs_t);
-    auto_copy(dst_, transpose_view(from));
+    typedef Element<A, AI1> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+    auto_copy(dst, transpose_view(from));
     // transpose_view is still a quick transposition without label transpose.
     // transpose now inverts all transitions of the dst_ automaton.
-    for_all_transitions(e, dst_)
-      dst_.series_of(*e).transpose();
+    for_all_transitions(e, dst)
+      dst.series_of(*e).transpose();
   }
 
-  template<typename auto_t>
-  auto_t
-  transpose(const auto_t& from)
+  template<typename A, typename AI>
+  Element<A, AI>
+  transpose(const Element<A, AI>& from)
   {
-    auto_t dst(from.structure());
+    Element<A, AI> dst(from.structure());
     transpose(dst, from);
     return dst;
   }

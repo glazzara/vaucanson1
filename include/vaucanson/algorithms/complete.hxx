@@ -32,13 +32,13 @@ namespace vcsn {
   | complete_here |
   `--------------*/
 
-  template <typename A, typename T>
+  template <typename A, typename AI>
   void
-  complete_here(Element<A, T>& work)
+  complete_here(Element<A, AI>& work)
   {
     precondition(is_realtime(work));
     TIMER_SCOPED("complete");
-    typedef Element<A, T> automaton_t;
+    typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     hstate_t sink_state;
@@ -77,11 +77,11 @@ namespace vcsn {
   | complete |
   `---------*/
 
-  template <typename A, typename T>
-  Element<A, T>
-  complete(const Element<A, T>& e)
+  template <typename A, typename AI>
+  Element<A, AI>
+  complete(const Element<A, AI>& e)
   {
-    Element<A, T> res(e);
+    Element<A, AI> res(e);
     complete_here(res);
     return res;
   }
@@ -90,15 +90,15 @@ namespace vcsn {
   | is_complete |
   `------------*/
 
-  template <class A, class T>
+  template <typename A, typename AI>
   bool
-  is_complete(const Element<A, T>& e)
+  is_complete(const Element<A, AI>& e)
   {
     precondition(is_realtime(e));
     TIMER_SCOPED("is_complete");
     if (e.states().size() ==  0)
       return false;
-    typedef Element<A, T> automaton_t;
+    typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     const alphabet_t& alpha = e.structure().series().monoid().alphabet();

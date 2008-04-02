@@ -66,14 +66,15 @@ namespace vcsn {
   /*-------------------.
   | is_deterministic.  |
   `-------------------*/
-  template <typename A, typename input_t>
+  template <typename A, typename AI>
   bool
-  do_is_deterministic(const AutomataBase<A>&	,
-		      const input_t&		input)
+  do_is_deterministic(const AutomataBase<A>&,
+		      const Element<A, AI>&  input)
   {
     precondition(is_realtime(input));
 
-    AUTOMATON_TYPES(input_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     semiring_elt_t		  zero_semiring
       = input.structure().series().semiring()
       .zero(SELECT(typename semiring_elt_t::value_t));
@@ -89,9 +90,9 @@ namespace vcsn {
   }
 
 
-  template<typename A, typename T>
+  template<typename A, typename AI>
   bool
-  is_deterministic(const Element<A, T>& a)
+  is_deterministic(const Element<A, AI>& a)
   {
     TIMER_SCOPED("is_deterministic");
     return do_is_deterministic(a.structure(), a);

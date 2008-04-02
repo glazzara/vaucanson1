@@ -29,6 +29,10 @@
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/bitset.hh>
 
+# ifndef NDEBUG
+#  include <vaucanson/algorithms/is_deterministic.hh>
+# endif
+
 namespace vcsn
 {
 
@@ -168,17 +172,21 @@ namespace vcsn
   }
 
 
-  template <typename A, typename input_t, typename output_t>
+  template <typename A, typename AI1, typename AI2>
   void
-  do_hopcroft_minimization_det(const AutomataBase<A>&	,
-			       output_t&		output,
-			       const input_t&		input)
+  do_hopcroft_minimization_det(const AutomataBase<A>&,
+			       Element<A, AI2>&		output,
+			       const Element<A, AI1>&	input)
   {
+    typedef Element<A, AI1> input_t;
+    typedef Element<A, AI2> output_t;
     AUTOMATON_TYPES (input_t);
     AUTOMATON_FREEMONOID_TYPES (input_t);
     HOPCROFT_TYPES ();
 
     using namespace internal::hopcroft_minimization_det;
+
+    precondition(is_deterministic(input));
 
     unsigned max_state = input.states ().back () + 1;
     partition_t partition (max_state);
@@ -277,16 +285,16 @@ namespace vcsn
    * Minimize @a a with Hopcroft algorithm.
    *
    * @param a The automaton.
-   * @pre @a a Should be deterministic.
+   * @pre @a a must be deterministic.
    *
    * @return
    */
-  template<typename A, typename T>
-  Element<A, T>
-  minimization_hopcroft(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  minimization_hopcroft(const Element<A, AI>& a)
   {
     TIMER_SCOPED ("minimization_hopcroft");
-    Element<A, T> output(a.structure());
+    Element<A, AI> output(a.structure());
     do_hopcroft_minimization_det(a.structure(), output, a);
     return output;
   }
@@ -423,14 +431,16 @@ namespace vcsn
     }
   }
 
-  template <typename A, typename input_t, typename output_t>
+  template <typename A, typename AI1, typename AI2>
   void
   do_quotient(const AutomataBase<A>&,
 	      const algebra::NumericalSemiring&,
 	      SELECTOR(bool),
-	      output_t&			output,
-	      const input_t&		input)
+	      Element<A, AI2>&		output,
+	      const Element<A, AI1>&	input)
   {
+    typedef Element<A, AI1> input_t;
+    typedef Element<A, AI2> output_t;
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
     QUOTIENT_TYPES();
@@ -853,14 +863,14 @@ namespace vcsn
     }
   }
 
-  template<typename A, typename T>
-  Element<A, T>
-  quotient(const Element<A, T>& a)
+  template<typename A, typename AI>
+  Element<A, AI>
+  quotient(const Element<A, AI>& a)
   {
     TIMER_SCOPED ("quotient");
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
-    Element<A, T> output(a.structure());
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+    automaton_t output(a.structure());
     do_quotient(a.structure(), a.structure().series().semiring(),
 		SELECT(semiring_elt_value_t), output, a);
     return output;

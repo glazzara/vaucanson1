@@ -1,3 +1,62 @@
+2008-04-02  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Renaming of templates.
+	* doc/HACKING.txt: Update the template convention.
+
+	* include/vaucanson/algorithms/accessible.hh,
+	  include/vaucanson/algorithms/accessible.hxx,
+	  include/vaucanson/algorithms/aci_canonical.hh,
+	  include/vaucanson/algorithms/aci_canonical.hxx,
+	  include/vaucanson/algorithms/aut_to_exp.hh,
+	  include/vaucanson/algorithms/aut_to_exp.hxx,
+	  include/vaucanson/algorithms/backward_realtime.hh,
+	  include/vaucanson/algorithms/backward_realtime.hxx,
+	  include/vaucanson/algorithms/complement.hh,
+	  include/vaucanson/algorithms/complement.hxx,
+	  include/vaucanson/algorithms/complete.hh,
+	  include/vaucanson/algorithms/complete.hxx,
+	  include/vaucanson/algorithms/concatenate.hh,
+	  include/vaucanson/algorithms/concatenate.hxx,
+	  include/vaucanson/algorithms/cut_up.hh,
+	  include/vaucanson/algorithms/cut_up.hxx,
+	  include/vaucanson/algorithms/determinize.hh,
+	  include/vaucanson/algorithms/determinize.hxx,
+	  include/vaucanson/algorithms/eps_removal.hh,
+	  include/vaucanson/algorithms/eps_removal.hxx,
+	  include/vaucanson/algorithms/eps_removal_sp.hh,
+	  include/vaucanson/algorithms/eps_removal_sp.hxx,
+	  include/vaucanson/algorithms/eval.hh,
+	  include/vaucanson/algorithms/eval.hxx,
+	  include/vaucanson/algorithms/forward_realtime.hh,
+	  include/vaucanson/algorithms/forward_realtime.hxx,
+	  include/vaucanson/algorithms/has_succ_comp.hh,
+	  include/vaucanson/algorithms/has_succ_comp.hxx,
+	  include/vaucanson/algorithms/is_ambiguous.hh,
+	  include/vaucanson/algorithms/is_ambiguous.hxx,
+	  include/vaucanson/algorithms/is_deterministic.hh,
+	  include/vaucanson/algorithms/is_deterministic.hxx,
+	  include/vaucanson/algorithms/is_empty.hh,
+	  include/vaucanson/algorithms/is_empty.hxx,
+	  include/vaucanson/algorithms/minimization_hopcroft.hh,
+	  include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	  include/vaucanson/algorithms/minimization_moore.hh,
+	  include/vaucanson/algorithms/minimization_moore.hxx,
+	  include/vaucanson/algorithms/normalized.hh,
+	  include/vaucanson/algorithms/normalized.hxx,
+	  include/vaucanson/algorithms/realtime.hh,
+	  include/vaucanson/algorithms/realtime.hxx,
+	  include/vaucanson/algorithms/standard.hh,
+	  include/vaucanson/algorithms/standard.hxx,
+	  include/vaucanson/algorithms/sub_automaton.hh,
+	  include/vaucanson/algorithms/sub_automaton.hxx,
+	  include/vaucanson/algorithms/sum.hh,
+	  include/vaucanson/algorithms/sum.hxx,
+	  include/vaucanson/algorithms/transpose.hh,
+	  include/vaucanson/algorithms/transpose.hxx,
+	  include/vaucanson/algorithms/trim.hh,
+	  include/vaucanson/algorithms/trim.hxx:
+	  Conform to the template naming convention defined in HACKING.txt.
+
 2008-04-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Update HACKING.txt.

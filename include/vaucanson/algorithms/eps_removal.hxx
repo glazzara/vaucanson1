@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -427,78 +427,78 @@ namespace vcsn {
     algo(dir);
   }
 
-  template<typename  A, typename  T>
+  template<typename  A, typename  AI>
   void
-  eps_removal_here(Element<A, T>& a, misc::direction_type dir)
+  eps_removal_here(Element<A, AI>& a, misc::direction_type dir)
   {
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
     do_eps_removal_here(a.structure(),
 			SELECT(semiring_elt_value_t),
 			a, dir);
   }
 
-  template<typename  A, typename  T>
-  Element<A, T>
-  eps_removal(const Element<A, T>& a, misc::direction_type dir)
+  template<typename  A, typename  AI>
+  Element<A, AI>
+  eps_removal(const Element<A, AI>& a, misc::direction_type dir)
   {
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
-    Element<A, T> ret(a);
+    automaton_t ret(a);
     do_eps_removal_here(ret.structure(),
 			SELECT(semiring_elt_value_t),
 			ret, dir);
     return ret;
   }
 
-  template<typename  A, typename  T>
+  template<typename  A, typename  AI>
   void
-  backward_eps_removal_here(Element<A, T>& a)
+  backward_eps_removal_here(Element<A, AI>& a)
   {
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
     do_eps_removal_here(a.structure(),
 			SELECT(semiring_elt_value_t),
 			a, misc::backward);
   }
 
-  template<typename  A, typename  T>
-  Element<A, T>
-  backward_eps_removal(const Element<A, T>& a)
+  template<typename  A, typename  AI>
+  Element<A, AI>
+  backward_eps_removal(const Element<A, AI>& a)
   {
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
-    Element<A, T> ret(a);
+    automaton_t ret(a);
     do_eps_removal_here(ret.structure(),
 			SELECT(semiring_elt_value_t),
 			ret, misc::backward);
     return ret;
   }
 
-  template<typename  A, typename  T>
+  template<typename  A, typename  AI>
   void
-  forward_eps_removal_here(Element<A, T>& a)
+  forward_eps_removal_here(Element<A, AI>& a)
   {
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
     do_eps_removal_here(a.structure(),
 			SELECT(semiring_elt_value_t),
 			a, misc::forward);
   }
 
-  template<typename  A, typename  T>
-  Element<A, T>
-  forward_eps_removal(const Element<A, T>& a)
+  template<typename  A, typename  AI>
+  Element<A, AI>
+  forward_eps_removal(const Element<A, AI>& a)
   {
-    typedef Element<A, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
 
-    Element<A, T> ret(a);
+    automaton_t ret(a);
     do_eps_removal_here(ret.structure(),
 			SELECT(semiring_elt_value_t),
 			ret, misc::forward);

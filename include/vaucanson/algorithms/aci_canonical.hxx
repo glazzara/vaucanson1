@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -168,20 +168,17 @@ namespace vcsn
     Element<Series, T>	exp_;
   };
 
-  template <class Series_, class Exp_>
-  Exp_
-  do_canonical(const algebra::SeriesBase<Series_>&, const Exp_& exp)
+  template <typename S, typename SI>
+  Element<S, SI>
+  do_canonical(const algebra::SeriesBase<S>&, const Element<S, SI>& exp)
   {
-    typedef Series_			S;
-    typedef typename Exp_::value_t	T;
-
-    KRatExpAciCanonical< S, T, algebra::DispatchFunction<T> >	matcher(exp);
+    KRatExpAciCanonical<S, SI, algebra::DispatchFunction<SI> >	matcher(exp);
     return matcher.set2exp(matcher.match(exp.value()));
   }
 
-  template <class Series, class T>
-  Element<Series, T>
-  canonical(const Element<Series, T>& exp)
+  template <typename S, typename SI>
+  Element<S, SI>
+  canonical(const Element<S, SI>& exp)
   {
     TIMER_SCOPED ("canonical");
     return do_canonical(exp.structure(), exp);
