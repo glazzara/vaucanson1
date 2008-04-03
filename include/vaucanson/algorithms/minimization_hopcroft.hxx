@@ -29,9 +29,9 @@
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/bitset.hh>
 
-# ifndef NDEBUG
+# ifndef VCSN_NDEBUG
 #  include <vaucanson/algorithms/is_deterministic.hh>
-# endif
+# endif // ! VCSN_NDEBUG
 
 namespace vcsn
 {

@@ -18,7 +18,10 @@
 # define VCSN_ALGORITHMS_COMPLETE_HXX
 
 # include <vaucanson/algorithms/complete.hh>
-# include <vaucanson/algorithms/realtime.hh>
+
+# ifndef VCSN_NDEBUG
+#  include <vaucanson/algorithms/realtime.hh>
+# endif // ! VCSN_NDEBUG
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>

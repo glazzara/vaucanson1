@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,12 +19,12 @@
 
 # include <vaucanson/algorithms/equivalent.hh>
 # include <vaucanson/algorithms/determinize.hh>
+# include <vaucanson/algorithms/is_deterministic.hh>
 # include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/product.hh>
 
-# include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/misc/usual_macros.hh>
 

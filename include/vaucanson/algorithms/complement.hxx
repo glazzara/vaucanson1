@@ -19,10 +19,10 @@
 
 # include <vaucanson/algorithms/complement.hh>
 
-# ifndef NDEBUG
+# ifndef VCSN_NDEBUG
 #  include <vaucanson/algorithms/complete.hh>
 #  include <vaucanson/algorithms/is_deterministic.hh>
-# endif // NDEBUG
+# endif // ! VCSN_NDEBUG
 
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>

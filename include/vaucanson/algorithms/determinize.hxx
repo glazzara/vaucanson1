@@ -22,8 +22,10 @@
 # include <queue>
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/accessible.hh>
-# include <vaucanson/algorithms/realtime.hh>
+
+# ifndef VCSN_NDEBUG
+#  include <vaucanson/algorithms/realtime.hh>
+# endif // ! VCSN_NDEBUG
 
 namespace vcsn {
 

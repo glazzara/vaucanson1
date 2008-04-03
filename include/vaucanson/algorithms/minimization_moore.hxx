@@ -18,7 +18,10 @@
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
 
 # include <vaucanson/algorithms/minimization_moore.hh>
-# include <vaucanson/algorithms/is_deterministic.hh>
+
+# ifndef VCSN_NDEBUG
+#  include <vaucanson/algorithms/is_deterministic.hh>
+# endif // ! VCSN_NDEBUG
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/delta_kind.hh>
