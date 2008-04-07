@@ -1,5 +1,11 @@
 2008-04-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Fix documentation.
+	Standard does not return a deterministic automaton.
+	* doc/manual/taf-kit.tex: Update a test, here.
+
+2008-04-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Update DMChooser. to allow negative weights.
 	Add documentation about it.
 	* include/vaucanson/algorithms/aut_to_exp.hh: Add doc Here.

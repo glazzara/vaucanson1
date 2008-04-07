@@ -359,7 +359,7 @@ using \Index{\taffn{aut-to-exp}}:
 recognizes a given language.  The following sequence computes the
 minimal automaton of \samp{(a+b)*ab(a+b)*}.
 
-\execcaption{l1}{vcsn-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-b minimize - >l1.xml}
+\execcaption{l1}{vcsn-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-b quotient - >l1.xml}
 \execcaption{l1.dot}{vcsn-b dot-dump l1.xml >l1.dot}
 \begin{center}
   \includegenerateddot{l1}
