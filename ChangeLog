@@ -1,3 +1,10 @@
+2008-04-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update DMChooser. to allow negative weights.
+	Add documentation about it.
+	* include/vaucanson/algorithms/aut_to_exp.hh: Add doc Here.
+	* include/vaucanson/algorithms/aut_to_exp.hxx: Update Here.
+
 2008-04-03  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Correct some header includes.

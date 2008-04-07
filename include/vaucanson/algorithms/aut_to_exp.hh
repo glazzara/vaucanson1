@@ -97,12 +97,14 @@ namespace vcsn {
 
   /**
    * Choose randomly a state between all currently choosable
-   * @pre There must be at least one state in the automaton.
    * @see aut_to_exp()
    */
 
   struct RandomChooser
   {
+      /**
+       * @pre @a a must not be the empty automaton.
+       */
       template <class Auto_>
       typename Auto_::hstate_t
       operator()(const Auto_& a) const;
@@ -116,8 +118,17 @@ namespace vcsn {
       operator()(const Auto_& a) const;
   };
 
+  /**
+   * Choose a state accordingly to an heuristic.
+   *
+   * @see CIAA 2004, "Approximation to the Samllest Regular Expression for a Given Regular Language"
+   * by M. Delago et J. Morais
+   */
   struct DMChooser
   {
+      /**
+       * @pre @a a must not be the empty automaton.
+       */
       template <class Auto_>
       typename Auto_::hstate_t
       operator()(const Auto_& a) const;

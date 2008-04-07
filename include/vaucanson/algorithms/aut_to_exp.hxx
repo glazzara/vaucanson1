@@ -115,7 +115,7 @@ namespace vcsn {
 	typename Auto_::state_iterator s = a.states().begin();
 	unsigned int d_in = 0;
 	unsigned int d_out = 0;
-	unsigned int max = INT_MAX;
+	unsigned int max = UINT_MAX;
 	bool has_loop = false;
 	bool has_loop_old = false;
 
@@ -175,7 +175,7 @@ namespace vcsn {
 	std::list<typename Auto_::htransition_t> delta_out;
 	typename Auto_::state_iterator s = a.states().begin();
 
-	unsigned int weight_min = INT_MAX;
+	int weight_min = INT_MAX;
 	for (typename Auto_::state_iterator i = a.states().begin();
 	     i != a.states().end();
 	     ++i)
@@ -186,7 +186,7 @@ namespace vcsn {
 	  unsigned int in = 0;
 	  unsigned int out = 0;
 
-	  unsigned int weight = 0;
+	  int weight = 0;
 
 	  delta_in.clear();
 	  delta_out.clear();
@@ -283,7 +283,7 @@ namespace vcsn {
     htransition_set_t					transitions;
     std::list<htransition_t>				transitions_to_remove;
     normalize_here(a);
-    assertion(is_normalized(a));
+    // assertion(is_normalized(a)); // FIXME To remove
 
     while (a.states().size() != 2)
     {
