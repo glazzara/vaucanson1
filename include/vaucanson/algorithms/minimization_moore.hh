@@ -43,8 +43,9 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be deterministic.
    * @pre @a a must be a Boolean automaton.
+   * @pre @a a must be deterministic.
+   * @pre @a a must be complete.
    */
   template<typename A, typename AI>
   Element<A, AI>
@@ -61,8 +62,11 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be co-deterministic.
    * @pre @a a must be a Boolean automaton.
+   * @pre @a a must be co- deterministic.
+   * @pre @a a must be co- complete.
+   *
+   * @bug The precondition is not checked.
    */
   template<typename A, typename AI>
   Element<A, AI>
@@ -79,8 +83,9 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be deterministic.
    * @pre @a a must be a Boolean automaton.
+   * @pre @a a must be deterministic.
+   * @pre @a a must be complete.
    */
   template<typename A, typename AI>
   void
@@ -97,8 +102,9 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre @a a must be co-deterministic.
    * @pre @a a must be a Boolean automaton.
+   * @pre @a a must be co- deterministic.
+   * @pre @a a must be co- complete.
    */
   template<typename A, typename AI>
   void

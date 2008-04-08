@@ -18,6 +18,8 @@
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
 
 # include <vaucanson/algorithms/minimization_moore.hh>
+# include <vaucanson/algorithms/complete.hh>
+# include <vaucanson/algorithms/transpose.hh>
 
 # ifndef VCSN_NDEBUG
 #  include <vaucanson/algorithms/is_deterministic.hh>
@@ -231,6 +233,7 @@ namespace vcsn {
   minimization_moore_here(Element<A, AI>& a)
   {
     precondition(is_deterministic(a));
+    precondition(is_complete(a));
     Element<A, AI> output(a.structure());
     do_minimization_moore<A, AI, false>(a, output);
     a = output;
@@ -242,6 +245,7 @@ namespace vcsn {
   minimization_moore(const Element<A, AI>& a)
   {
     precondition(is_deterministic(a));
+    precondition(is_complete(a));
     Element<A, AI> output(a.structure());
     do_minimization_moore<A, AI, false>(a, output);
     return output;
@@ -251,6 +255,8 @@ namespace vcsn {
   void
   co_minimization_moore_here(Element<A, AI>& a)
   {
+    precondition(is_deterministic(transpose(a)));
+    precondition(is_complete(transpose(a)));
     Element<A, AI> output(a.structure());
     do_minimization_moore<A, AI, true>(a, output);
     a = output;
@@ -261,6 +267,8 @@ namespace vcsn {
   Element<A, AI>
   co_minimization_moore(const Element<A, AI>& a)
   {
+    precondition(is_deterministic(transpose(a)));
+    precondition(is_complete(transpose(a)));
     Element<A, AI> output(a.structure());
     do_minimization_moore<A, AI, true>(a, output);
     return output;

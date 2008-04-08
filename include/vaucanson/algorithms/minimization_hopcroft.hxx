@@ -25,6 +25,8 @@
 
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
+# include <vaucanson/algorithms/is_deterministic.hh>
+# include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/bitset.hh>
@@ -285,7 +287,8 @@ namespace vcsn
    * Minimize @a a with Hopcroft algorithm.
    *
    * @param a The automaton.
-   * @pre @a a must be deterministic.
+   * @pre @a a must be a deterministic Boolean automaton.
+   * @pre @a a must be a complete automaton.
    *
    * @return
    */
@@ -294,6 +297,8 @@ namespace vcsn
   minimization_hopcroft(const Element<A, AI>& a)
   {
     TIMER_SCOPED ("minimization_hopcroft");
+    precondition(is_deterministic(a));
+    precondition(is_complete(a));
     Element<A, AI> output(a.structure());
     do_hopcroft_minimization_det(a.structure(), output, a);
     return output;
@@ -868,6 +873,7 @@ namespace vcsn
   quotient(const Element<A, AI>& a)
   {
     TIMER_SCOPED ("quotient");
+    // precondition(is_realtime(a)); // FIXME Uncomment
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     automaton_t output(a.structure());

@@ -45,8 +45,9 @@ namespace vcsn {
    *
    * @param a The deterministic Boolean automaton to minimize.
    *
+   * @pre @a a must be a Boolean automaton.
    * @pre @a a must be deterministic.
-   * @pre @a a must be a boolean automaton.
+   * @pre @a a must be complete.
    *
    * @return A fresh automaton that is the canonical minimal automaton of 'a'.
    */
@@ -59,6 +60,8 @@ namespace vcsn {
    * This algorithms works with both Boolean and weighted automata.
    *
    * @param a The automaton to minimize.
+   *
+   * @pre @a a must be realtime.
    *
    * @return A fresh automaton that is the quotient of 'a'.
    *

@@ -1,5 +1,16 @@
 2008-04-08  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add preconditions to minimiz*, #114.
+	Add is_determinstic and is_complete preconditions.
+	Close #114 (merge with #118)
+	* include/vaucanson/algorithms/minimization_hopcroft.hh: Here.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Here.
+	Prepare #118 with commented precondition.
+	* include/vaucanson/algorithms/minimization_moore.hh: Here.
+	* include/vaucanson/algorithms/minimization_moore.hxx: Here.
+
+2008-04-08  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Update realtime. to fit the following formula:
 	standard(E) = realtime(thompson(E))
 	* include/vaucanson/algorithms/realtime.hxx: Here.
