@@ -169,7 +169,7 @@ namespace vcsn {
   void
   do_realtime_here(const AutomataBase<A>&,
                    Element<A, AI>& a,
-		   misc::direction_type type = misc::forward)
+		   misc::direction_type type = misc::backward)
   {
     realtime_words_here(a);
 
@@ -198,7 +198,7 @@ namespace vcsn {
   Element<A, AI>
   do_realtime(const AutomataBase<A>& b,
 	      const Element<A, AI>&  a,
-	      misc::direction_type type = misc::forward)
+	      misc::direction_type type = misc::backward)
   {
     Element<A, AI> ret(a);
     do_realtime_here(b, ret, type);

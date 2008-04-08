@@ -304,12 +304,7 @@ vcsn-b concatenate $a1 $a1 \| identity -
 
 vcsn-b quotient empty.xml \| is-empty -
 
-# Ideally we would like the quotient of 2snf to be non-empty: a single
-# non-final state. Right now 2snf.xml is empty because taf-kit will
-# run quotient(realtime(2snf)) and realtime() includes a
-# coaccessibility check.  Maybe realtime should not be called here,
-# but even if it isn't is-empty will call trim() before the actual check...
-      vcsn-b quotient 2snf.xml \| is-empty -
+fail1 vcsn-b quotient 2snf.xml \| is-empty -
       vcsn-b quotient 2snf.xml \| trim - \| is-empty -
 
 fail1 vcsn-b quotient all.xml \| is-empty -
@@ -344,5 +339,12 @@ vcsn-b -a ab standard '(a+b)*' \| is-standard -
 vcsn-b -a ab standard 'a.b' \| is-standard -
 vcsn-b -a ab standard '(a.b)*' \| is-standard -
 vcsn-b -a ab standard '(a*.b*)*' \| is-standard -
+
+vcsn-b -a ab standard 'a+b' > aut3.xml
+vcsn-b -a ab thompson 'a+b' \| realtime - > aut4.xml
+#FIXME: as soon as an xmldiff tools exists. Use it here.
+vcsn-b info aut3.xml > aut3.info
+vcsn-b info aut4.xml > aut4.info
+diff aut3.info aut4.info
 
 exit 0

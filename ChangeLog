@@ -1,3 +1,10 @@
+2008-04-08  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update realtime. to fit the following formula:
+	standard(E) = realtime(thompson(E))
+	* include/vaucanson/algorithms/realtime.hxx: Here.
+	* taf-kit/tests/vcsn-b.test: Update test accordingly.
+
 2008-04-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix documentation.
