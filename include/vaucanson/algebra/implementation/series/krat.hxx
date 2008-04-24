@@ -18,6 +18,8 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_HXX
 
 # include <utility>
+# include <list>
+
 # include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/algebra/implementation/series/rat/random_visitor.hh>
@@ -664,11 +666,39 @@ namespace vcsn {
 	return ;
       }
 
-    rat::exp<Tm, Tw> ret =
-      rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
-					    SELECT(Tm),
-					    m));
-    op_in_add(s, p, op_mul(s.semiring(), s, w, ret));
+    typedef Element<algebra::Series<W, M>, rat::exp<Tm, Tw> >	series_set_elt_t;
+    typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
+    typedef typename monoid_elt_t::value_t			monoid_elt_value_t;
+    typedef std::list<monoid_elt_value_t>			support_t;
+
+    rat::exp<Tm, Tw> pp = p;
+    p = algebra::zero_as<rat::exp<Tm, Tw> >::of(s).value();
+
+    // FIXME Should not rebuild the serie from stratch
+    // Should use some kind of visitor and update the tree
+    support_t supp = op_support(s, pp);
+    oTw sw;
+    bool exist = false;
+    for_all_const_(support_t, e, supp)
+    {
+      rat::exp<Tm, Tw> ret =
+	rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
+					      SELECT(Tm),
+					      *e));
+      if (*e == m)
+      {
+	exist = true;
+	sw = w;
+      }
+      else
+	sw = op_series_get(s, pp, *e);
+      op_in_add(s, p, op_mul(s.semiring(), s, sw, ret));
+    }
+    if (!exist)
+      op_in_add(s, p, op_mul(s.semiring(), s, w,
+		rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
+						      SELECT(Tm),
+						      m))));
   }
   }//algebra
 

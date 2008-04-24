@@ -1,5 +1,12 @@
 2008-04-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Partially fix assoc() for krat implementation, #148.
+	The result is now correct however, but the way used seems wrong,
+	the series is rebuild from skratch by retrieving the support.
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Here.
+
+2008-04-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add precondition is_realtime to quotient, #118.
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Here.
 
