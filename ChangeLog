@@ -1,3 +1,8 @@
+2008-04-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add precondition is_realtime to quotient, #118.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Here.
+
 2008-04-08  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add preconditions to minimiz*, #114.

@@ -873,7 +873,7 @@ namespace vcsn
   quotient(const Element<A, AI>& a)
   {
     TIMER_SCOPED ("quotient");
-    // precondition(is_realtime(a)); // FIXME Uncomment
+    precondition(is_realtime(a));
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     automaton_t output(a.structure());
