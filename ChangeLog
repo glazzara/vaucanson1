@@ -1,5 +1,11 @@
 2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix type definitions for delta iterators.
+	* automata/concept/automata_base.hh,
+	  misc/usual_macros.hh: Add the delta iterator types.
+
+2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix the hashing function used on polynomials.
 	* misc/hash.hxx: Only hash the words and not the weights.
 

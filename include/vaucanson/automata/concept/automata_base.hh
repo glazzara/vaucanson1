@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -79,6 +79,10 @@ namespace vcsn {
       typedef undefined_type geometry_t;
       typedef undefined_type hstate_t;
       typedef undefined_type htransition_t;
+      typedef undefined_type delta_state_iterator;
+      typedef undefined_type delta_transition_iterator;
+      typedef undefined_type rdelta_state_iterator;
+      typedef undefined_type rdelta_transition_iterator;
   };
 
 # define VCSN_MAKE_AUTOMATON_TRAITS(Type)					\
@@ -114,6 +118,10 @@ namespace vcsn {
     typedef typename graph_t::final_t			final_t;		\
     typedef typename graph_t::final_support_t		final_support_t;	\
     typedef typename final_support_t::iterator		final_iterator;		\
+    typedef typename graph_t::delta_state_iterator	delta_state_iterator;	\
+    typedef typename graph_t::delta_transition_iterator	delta_transition_iterator; \
+    typedef typename graph_t::rdelta_state_iterator	rdelta_state_iterator;	\
+    typedef typename graph_t::rdelta_transition_iterator	rdelta_transition_iterator; \
   }
 
 
@@ -231,6 +239,12 @@ namespace vcsn {
       /// Type of handlers
       typedef typename automaton_traits<T>::hstate_t hstate_t;
       typedef typename automaton_traits<T>::htransition_t htransition_t;
+
+      /// Type of delta iterators
+      typedef typename automaton_traits<T>::delta_state_iterator delta_state_iterator;
+      typedef typename automaton_traits<T>::delta_transition_iterator delta_transition_iterator;
+      typedef typename automaton_traits<T>::rdelta_state_iterator rdelta_state_iterator;
+      typedef typename automaton_traits<T>::rdelta_transition_iterator rdelta_transition_iterator;
 
       /// The set of series from which is build the automaton (const version).
       const series_set_t& series() const;
@@ -571,6 +585,7 @@ namespace vcsn {
       void spontaneous_deltaf(Functor& fun,
 			      unsigned src,
 			      delta_kind::kind<Kind> k) const;
+
 
       /*-----------------.
       | Reverse deltas.	 |

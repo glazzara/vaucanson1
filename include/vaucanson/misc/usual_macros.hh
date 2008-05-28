@@ -68,7 +68,11 @@
   typedef Typename AutoType::label_t				Prefix##label_t; \
   typedef Typename AutoType::tag_t				Prefix##tag_t; \
   typedef Typename AutoType::hstate_t				Prefix##hstate_t; \
-  typedef Typename AutoType::htransition_t			Prefix##htransition_t;
+  typedef Typename AutoType::htransition_t			Prefix##htransition_t; \
+  typedef Typename AutoType::delta_state_iterator		Prefix##delta_state_iterator; \
+  typedef Typename AutoType::delta_transition_iterator		Prefix##delta_transition_iterator; \
+  typedef Typename AutoType::rdelta_state_iterator		Prefix##rdelta_state_iterator; \
+  typedef Typename AutoType::rdelta_transition_iterator		Prefix##rdelta_transition_iterator;
 
 # define AUTOMATON_TYPES_(AutoType,Prefix)			\
   AUTOMATON_TYPES_MAYBE_TYPENAME(AutoType, Prefix, typename)
