@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -106,6 +106,11 @@ namespace vcsn {
 
       typedef typename automaton_traits<T>::hstate_t	hstate_t;
       typedef typename automaton_traits<T>::htransition_t	htransition_t;
+
+      typedef typename automaton_traits<T>::delta_state_iterator	delta_state_iterator;
+      typedef typename automaton_traits<T>::delta_transition_iterator	delta_transition_iterator;
+      typedef typename automaton_traits<T>::rdelta_state_iterator	rdelta_state_iterator;
+      typedef typename automaton_traits<T>::rdelta_transition_iterator	rdelta_transition_iterator;
   };
 
 #define AutoType(Type)				\

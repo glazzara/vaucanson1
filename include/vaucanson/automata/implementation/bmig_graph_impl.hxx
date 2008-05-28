@@ -706,6 +706,27 @@ namespace vcsn
   # undef DEFINE_DELTAF_HELPER
   # undef is_returning_bool
 
+  # define DEFINE_DELTAI_FUNCTION(DeltaKind)					\
+    BMIGRAPH_TPARAM								\
+    std::pair<typename BMIGRAPH::DeltaKind##_iterator,				\
+	      typename BMIGRAPH::DeltaKind##_iterator>				\
+    BMIGRAPH::deltai(const hstate_t& s, DeltaKind##_iterator) const		\
+    {										\
+      assertion(has_state(s));							\
+      return graph_.template get<DeltaKind>().equal_range(s.value());		\
+    }
+
+    DEFINE_DELTAI_FUNCTION(src);
+    DEFINE_DELTAI_FUNCTION(dst);
+  # undef DEFINE_DELTAI_FUNCTION
+
+    BMIGRAPH_TPARAM
+    template <typename I>
+    typename BMIGRAPH::htransition_t
+    BMIGRAPH::get_htransition(const I& i) const
+    {
+      return htransition_t(graph_.project<0>(i));
+    }
 
     // End of syntactic sugar
 # undef BMIGRAPH_TPARAM

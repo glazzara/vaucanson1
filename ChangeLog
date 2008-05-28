@@ -1,3 +1,28 @@
+2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add new delta iterators.
+	They provide new iterating features that does not imply the
+	copying of data.
+
+	* bmig/iterator.hh,
+	  bmig/iterator.hxx: The implementation of deltai on bmig.
+
+	* bmig_graph_impl.hh,
+	  bmig_graph_impl.hxx:
+	  Add the types that will be used by the users.
+	  Add helpers for the implementation of delta iterators:
+	    - deltai give a range of iterators on a subindex of the hash
+	      table.
+	    - get_htransition give a htransition_t corresponding to an
+	      iterator on a subindex of the hash table.
+
+	* listg/iterator.hh,
+	  listg/iterator.hxx: The implementation of deltai on listg.
+
+	* listg_graph_impl.hh: Add the types that will be used by the users.
+
+	* transpose_view.hh: Add the missing types to the automaton_trait.
+
 2008-04-24  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Partially fix assoc() for krat implementation, #148.

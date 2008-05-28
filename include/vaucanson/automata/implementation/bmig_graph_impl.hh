@@ -22,6 +22,7 @@
 
 # include <vaucanson/automata/implementation/bmig/vgraph_container.hh>
 # include <vaucanson/automata/implementation/bmig/bmig_handlers.hh>
+# include <vaucanson/automata/implementation/bmig/iterator.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/implementation/bmig/bmig_support.hh>
@@ -132,17 +133,27 @@ namespace vcsn
 	typedef typename index_iterator<graph_data_t, dst>::type
 							  dst_iterator;
 	typedef dst_iterator				  dst_const_iterator;
-	/*typedef typename index_iterator<graph_data_t, pred>::type
-							  pred_iterator;
-	typedef pred_iterator				  pred_const_iterator;*/
+	typedef std::pair<src_iterator, src_iterator>	  src_range;
+	typedef std::pair<dst_iterator, dst_iterator>	  dst_range;
+
+// FIXME: is it useful?
+//	typedef typename index_iterator<graph_data_t, pred>::type
+//							  pred_iterator;
+//	typedef pred_iterator				  pred_const_iterator;
+//	typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
 	typedef typename index_iterator<graph_data_t, succ>::type
 							  succ_iterator;
 	typedef succ_iterator				  succ_const_iterator;
-	typedef std::pair<src_iterator, src_iterator>	  src_range;
-	typedef std::pair<dst_iterator, dst_iterator>	  dst_range;
-//	typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
 	typedef std::pair<succ_iterator, succ_iterator>	  succ_range;
 
+	typedef ::vcsn::bmig::DeltaConstIterator<self_t, hstate_t, src_iterator>
+							  delta_state_iterator;
+	typedef ::vcsn::bmig::DeltaConstIterator<self_t, htransition_t, src_iterator>
+							  delta_transition_iterator;
+	typedef ::vcsn::bmig::DeltaConstIterator<self_t, hstate_t, dst_iterator>
+							  rdelta_state_iterator;
+	typedef ::vcsn::bmig::DeltaConstIterator<self_t, htransition_t, dst_iterator>
+							  rdelta_transition_iterator;
 
 	Graph ();
 	Graph (unsigned int reserve_number_of_state,
@@ -210,6 +221,13 @@ namespace vcsn
 	geometry_t&	  geometry ();
 	const geometry_t& geometry () const;
 
+	// Helper used in deltai.
+	// Gives the htransition held by a boost iterator.
+	// Avoid the burden of carrying a reference to the main hash table
+	// when we are working on a sub-hash. (this is related to the projection).
+	template <typename I>
+	htransition_t	  get_htransition(const I& i) const;
+
       /*
       ** delta...
       ** FIXME: nice comments
@@ -246,6 +264,14 @@ namespace vcsn
 	DECLARE_DELTAF_FUNCTION (rdeltaf);
 # undef DECLARE_DELTAF_FUNCTION
 
+	// Retrieve the (src|dst)_range from a given state
+	// Used by the delta iterators
+# define DECLARE_DELTAI_FUNCTION(DeltaKind)					\
+	std::pair<DeltaKind##_iterator, DeltaKind##_iterator>			\
+	deltai(const hstate_t& s, DeltaKind##_iterator) const
+	DECLARE_DELTAI_FUNCTION(src);
+	DECLARE_DELTAI_FUNCTION(dst);
+# undef DECLARE_DELTAI_FUNCTION
 
       private:
 	typename graph_data_t::const_iterator
@@ -484,7 +510,8 @@ namespace vcsn
 #  include <vaucanson/automata/implementation/bmig_graph_impl.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
-# include <vaucanson/automata/implementation/bmig_graph_letters_spec.hh>
+// FIXME __ITERATOR__  put back again later
+//# include <vaucanson/automata/implementation/bmig_graph_letters_spec.hh>
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HH_ //
 

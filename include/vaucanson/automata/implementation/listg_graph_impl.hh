@@ -31,6 +31,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
+# include <vaucanson/automata/implementation/listg/iterator.hh>
 # include <vaucanson/automata/implementation/listg/listg_handlers.hh>
 # include <vaucanson/automata/implementation/listg/listg_sparse_interval.hh>
 
@@ -120,6 +121,15 @@ namespace vcsn
 	typedef misc::Support<initial_t>		initial_support_t;
 	typedef misc::Support<final_t>			final_support_t;
 
+	typedef ::vcsn::listg::DeltaConstIterator<self_t, hstate_t, ::vcsn::listg::forward_iterator>
+							  delta_state_iterator;
+	typedef ::vcsn::listg::DeltaConstIterator<self_t, htransition_t, ::vcsn::listg::forward_iterator>
+							  delta_transition_iterator;
+
+	typedef ::vcsn::listg::DeltaConstIterator<self_t, hstate_t, ::vcsn::listg::backward_iterator>
+							  rdelta_state_iterator;
+	typedef ::vcsn::listg::DeltaConstIterator<self_t, htransition_t, ::vcsn::listg::backward_iterator>
+							  rdelta_transition_iterator;
 	// we guarantee that the handlers of state are indexed from 0 to
 	// initial_number_of_state - 1 when using this constructor.
 	Graph();
