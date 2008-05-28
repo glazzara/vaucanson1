@@ -1,5 +1,10 @@
 2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix the hashing function used on polynomials.
+	* misc/hash.hxx: Only hash the words and not the weights.
+
+2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add new delta iterators.
 	They provide new iterating features that does not imply the
 	copying of data.
