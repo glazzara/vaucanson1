@@ -1,7 +1,7 @@
 # src/benchs/Makefile.am                       -*- Makefile -*-
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,11 +17,13 @@
 
 SUBDIRS = common determinization 				\
 	  minimization_debruijn	minimization_2n derived_terms	\
-	  quotient composition eps_removal
+	  quotient composition eps_removal			\
+	  iterators
 
 BENCHDIRS = determinization minimization_debruijn 		\
 	    derived_terms minimization_2n quotient		\
-	    composition eps_removal
+	    composition eps_removal				\
+	    iterators
 
 benchs:
 	for f in $(BENCHDIRS); do				\

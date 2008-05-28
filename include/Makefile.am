@@ -452,14 +452,16 @@ vaucanson/automata/implementation/bmig/bmig_functors.hxx 		\
 vaucanson/automata/implementation/bmig/bmig_handlers.hh 		\
 vaucanson/automata/implementation/bmig/bmig_handlers.hxx 		\
 vaucanson/automata/implementation/bmig/bmig_handlers_op.hxx		\
-vaucanson/automata/implementation/bmig/bmig_support.hh 		\
+vaucanson/automata/implementation/bmig/bmig_support.hh 			\
 vaucanson/automata/implementation/bmig/bmig_support.hxx 		\
 vaucanson/automata/implementation/bmig/edge_value.hh 			\
-vaucanson/automata/implementation/bmig/edge_value.hxx 		\
+vaucanson/automata/implementation/bmig/edge_value.hxx 			\
 vaucanson/automata/implementation/bmig/graphcontainer.hh 		\
 vaucanson/automata/implementation/bmig/initial_container.hh 		\
 vaucanson/automata/implementation/bmig/initial_value.hh 		\
 vaucanson/automata/implementation/bmig/initial_value.hxx 		\
+vaucanson/automata/implementation/bmig/iterator.hh 			\
+vaucanson/automata/implementation/bmig/iterator.hxx 			\
 vaucanson/automata/implementation/bmig/vgraph_container.hh 		\
 vaucanson/automata/implementation/bmig/vgraph_container.hxx 		\
 vaucanson/automata/implementation/bmig_graph_impl.hh 			\
@@ -470,6 +472,8 @@ vaucanson/automata/implementation/generalized.hh			\
 vaucanson/automata/implementation/generalized.hxx			\
 vaucanson/automata/implementation/geometry.hh				\
 vaucanson/automata/implementation/geometry.hxx				\
+vaucanson/automata/implementation/listg/iterator.hh 			\
+vaucanson/automata/implementation/listg/iterator.hxx 			\
 vaucanson/automata/implementation/listg/listg_handlers.hh 		\
 vaucanson/automata/implementation/listg/listg_handlers.hxx 		\
 vaucanson/automata/implementation/listg/listg_sparse_interval.hh 	\

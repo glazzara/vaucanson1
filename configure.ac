@@ -256,6 +256,7 @@ AC_CONFIG_FILES([
 	    src/benchs/derived_terms/Makefile
 	    src/benchs/determinization/Makefile
 	    src/benchs/eps_removal/Makefile
+	    src/benchs/iterators/Makefile
 	    src/benchs/minimization_2n/Makefile
 	    src/benchs/minimization_debruijn/Makefile
 	    src/benchs/quotient/Makefile

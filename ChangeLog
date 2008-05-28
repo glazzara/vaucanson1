@@ -1,5 +1,20 @@
 2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Add benchs and tests on the delta iterators.
+	* configure.ac: Add Makefile to src/benchs/iterators
+
+	* include/Makefile.am: Add missing iterator files to
+	  nobase_include_HEADERS.
+
+	* src/benchs/Makefile.am,
+	  src/benchs/iterators/iterator_bench.hh,
+	  src/benchs/iterators: Add benchmarks on the delta iterators.
+
+	* src/tests/include/tests/automata/implementation_check/iterator_test.hh:
+	  Add tests on the delta iterators to the test-suite.
+
+2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix type definitions for delta iterators.
 	* automata/concept/automata_base.hh,
 	  misc/usual_macros.hh: Add the delta iterator types.
