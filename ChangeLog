@@ -1,3 +1,31 @@
+2008-05-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add krat_exp_parser and adapt test-suite.
+	* bootstrap: Add bison generation of krat_exp_bison.
+	* data/automata/b/Makefile.am: Modify CPPFLAGS and LDADD to link with libkrat_exp.
+	* data/automata/tdc/Makefile.am: Modify CPPFLAGS and LDADD to link with libkrat_exp.
+	* data/automata/z/Makefile.am: Modify CPPFLAGS and LDADD to link with libkrat_exp.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh: New.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: New.
+	* include/vaucanson/algebra/implementation/series/krat_exp_proxy.hh: New proxy for krat_exp_parser.
+	* include/vaucanson/algebra/implementation/series/krat_exp_proxy.hxx: New proxy for krat_exp_parser.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Add "{" and "}" around weight.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx: Add "{" and "}" around weight.
+	* lib/Makefile.am: Add include of libkrat_exp.mk.
+	* lib/generate_libvcsn.rb: Modify CXXFLAGS to link with libkrat_exp.
+	* lib/krat_exp/krat_exp_bison.yy: New bison grammar file.
+	* lib/krat_exp/libkrat_exp.mk: New.
+	* lib/krat_exp: New.
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_expand_test.hh: Patch test with the new format.
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Patch test with the new format.
+	* src/tests/sanity/Makefile.am: Modify CXXFLAGS to link with libkrat_exp.
+	* src/tests/test-suites/test-suite.mk: Modify CXXFLAGS, CPPFLAGS and LDADD to link with libkrat_exp.
+	* src/tests/xml/Makefile.am: Modify CPPFLAGS and LDADD to link with libkrat_exp.
+	* src/tests/xml/label_node_ref.dot: Add "{" and "}" around weight.
+	* src/tests/xml/xml_label_node_tester.cc: Add "{" and "}" around weight.
+	* taf-kit/src/Makefile.am: Modify CPPFLAGS and LDADD to link with libkrat_exp.
+	* taf-kit/tests/vcsn-z.test: Add "{" and "}" around weight.
+
 2008-05-28  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add benchs and tests on the delta iterators.

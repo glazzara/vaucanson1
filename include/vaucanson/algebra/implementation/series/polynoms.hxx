@@ -629,9 +629,9 @@ namespace vcsn {
 
 	  if (i->second != identity_value(SELECT(W), SELECT(Tw)))
 	  {
-	    st << "(";
+	    st << "({";
 	    op_rout(s.semiring(), st, i->second);
-	    st << " ";
+	    st << "} ";
 	  }
 
 	  if (i->first != identity_value(SELECT(M), SELECT(Tm)))
@@ -766,7 +766,7 @@ namespace std {
       {
 	if (i != p.begin())
 	  out << "+";
-	out << "(" << i->second << " "
+	out << "({" << i->second << "} "
 	    << vcsn::misc::make_escaper(i->first) << ")";
 	++i;
       }

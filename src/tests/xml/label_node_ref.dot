@@ -8,9 +8,9 @@ node [shape=circle];
 "A2" -> "A3" [label="1"];
 "A2" [label="1"];
 "A4" [label="2"];
-"A0" -> "A0" [label="(6 a)+(6 b)+(15 c)+(15 d)"];
-"A0" -> "A2" [label="(6 a)+(5 b)"];
-"A0" -> "A4" [label="aa+(3 b)"];
-"A2" -> "A0" [label="(5 ab)"];
-"A2" -> "A2" [label="(5 a)+(5 b)"];
+"A0" -> "A0" [label="({6} a)+({6} b)+({15} c)+({15} d)"];
+"A0" -> "A2" [label="({6} a)+({5} b)"];
+"A0" -> "A4" [label="aa+({3} b)"];
+"A2" -> "A0" [label="({5} ab)"];
+"A2" -> "A2" [label="({5} a)+({5} b)"];
 }

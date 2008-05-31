@@ -17,11 +17,12 @@ include $(top_srcdir)/src/tests/check/check.mk
 TESTS += failcomp.sh
 EXTRA_DIST = failcomp.sh
 
-AM_CPPFLAGS += -DEXCEPTION_TRAPS
-AM_CPPFLAGS += -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
+AM_CPPFLAGS += -DEXCEPTION_TRAPS -DVCSN_SRC_DIR=\"'$(top_srcdir)'\" \
+	       -I$(top_srcdir)/lib/krat_exp
+LDADD += $(top_builddir)/lib/libkrat_exp.la 
 
-TESTS_ENVIRONMENT = CXX="$(CXX)" CXXFLAGS="$(AM_CPPFLAGS) $(CPPFLAGS)"
-
+TESTS_ENVIRONMENT = CXX="$(CXX)" \
+		    CXXFLAGS="$(AM_CPPFLAGS) $(CPPFLAGS)"
 ## ------------------------ ##
 ## Makefile.am generation.  ##
 ## ------------------------ ##

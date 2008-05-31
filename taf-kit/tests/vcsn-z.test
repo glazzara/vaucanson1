@@ -40,7 +40,7 @@ fail1 vcsn-z is-empty $c1
 fail1 vcsn-z is-standard $c1
 fail1 vcsn-z is-standard $void_z_automaton
       vcsn-z is-standard $standard_c1
-      vcsn-z -a ab standard '(2 a).(4 1)' > 2a_41.xml
+      vcsn-z -a ab standard '({2} a).({4} 1)' > 2a_41.xml
       vcsn-z is-standard 2a_41.xml
 
 ## --------------------------------- ##

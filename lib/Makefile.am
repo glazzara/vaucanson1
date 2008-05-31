@@ -18,6 +18,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 lib_LTLIBRARIES =
 MAINTAINERCLEANFILES =
 
+include krat_exp/libkrat_exp.mk
 include vcsn-b/libvcsn-b.mk
 include vcsn-r/libvcsn-r.mk
 include vcsn-z/libvcsn-z.mk

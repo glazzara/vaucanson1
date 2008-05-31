@@ -219,7 +219,7 @@ namespace vcsn {
 	if (enclose_all)
 	  ostr_ << "(";
 
-	ostr_ << w << " ";
+	ostr_ << "{" << w << "} ";
 	enclose_if(verbose, node);
 
 	if (enclose_all)
@@ -253,7 +253,7 @@ namespace vcsn {
 	  ostr_ << "(";
 
 	enclose_if(verbose, node);
-	ostr_ << " " << w;
+	ostr_ << " {" << w << "}";
 
 	if (enclose_all)
 	  ostr_ << ")";

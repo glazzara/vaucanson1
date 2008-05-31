@@ -14,7 +14,8 @@
 include $(top_srcdir)/vaucanson.mk
 include $(top_srcdir)/build-aux/check.mk
 
-AM_CPPFLAGS += $(XSD_CPPFLAGS)
+AM_CPPFLAGS += $(XSD_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp
+LDADD = $(top_builddir)/lib/libkrat_exp.la 
 
 TESTS_ENVIRONMENT = srcdir=$(srcdir)
 

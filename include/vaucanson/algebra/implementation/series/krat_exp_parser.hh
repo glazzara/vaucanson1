@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,6 +14,7 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HH
 
@@ -26,14 +27,13 @@
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
  *         Thomas Claveirole <thomas@lrde.epita.fr>
+ *	   Vivien Delmon <vivien@lrde.epita.fr>
  * @see parse()
  */
 /** @} */
 /** @} */
 
 # include <vaucanson/design_pattern/design_pattern.hh>
-# include <utility>
-# include <string>
 
 namespace vcsn {
 
@@ -45,35 +45,31 @@ namespace vcsn {
     /**
      * Parse a rational expression.
      *
-     * This functions parses any numerical rational expression.
-     * The grammar is:
+     * This fonction parses any kind of rational expression using the bison
+     * generated parser.
+     *
+     * The grammar is :
      *
      @verbatim
-     exp ::= '(' exp ')'
-         |   exp '+' exp
-         |   exp '.' exp
-         |   exp exp
-         |   exp '*'
-         |   weight ' ' exp
-         |   exp ' ' weight
-         |   0
-         |   1
-         |   word
+     %start rexp
+
+     rexp ::= OPAR exp CPAR
+         |   rexp PLUS rexp
+         |   rexp TIMES rexp
+         |   rexp rexp
+         |   rexp STAR
+         |   WEIGHT rexp
+         |   rexp WEIGHT
+         |   ONE
+         |   ZERO
+         |   WORD
      @endverbatim
      *
-     * Priority for operators is, from the most important to the least
-     * important:
-     *
-     *  - * (star), to star a series.
-     *  - ' ' (space), to weight a series either on the right or on the left.
-     *  - . (dot), to concatenate two series.
-     *  - + (plus), to do the union of two series.
+     * @todo The token representation must be contain in the automaton.
      *
      * This function returns  a pair which first element  is a Boolean
      * indicating whether an error  occured or not. The second element
      * is an error message when a parse error have been ecountered.
-     *
-     * Note that this function requires exception support from the compiler.
      *
      * @param from The rational expression, as a string.
      * @param exp The element to store the result in. Be sure its set
@@ -83,7 +79,10 @@ namespace vcsn {
      *
      * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
      *         Thomas Claveirole <thomas@lrde.epita.fr>
+     *	       Vivien Delmon <vivien@lrde.epita.fr>
      */
+
+
     template <class S, class T>
     std::pair<bool, std::string>
     parse(const std::string& from,
