@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -100,7 +100,7 @@ case $1:$# in
     --all:1)
 	BENCH_DIRS="determinization 				\
 	 minimization_debruijn derived_terms minimization_2n	\
-         quotient composition eps_removal"
+         quotient composition eps_removal iterators"
 	;;
     --all:* | *:0)
 	echo >&2 "invalid arguments: $@"

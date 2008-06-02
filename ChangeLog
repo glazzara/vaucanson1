@@ -1,3 +1,8 @@
+2008-06-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* src/benchs/generate_benchs.sh (EXTRA_DIST): Generate
+	iterators/Makefile.am.
+
 2008-05-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add krat_exp_parser and adapt test-suite.
