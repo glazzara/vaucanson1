@@ -1,3 +1,27 @@
+2008-06-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix some errors introduced in patch 1976.
+	* lib/krat_exp/krat_exp_bison.yy:
+	    Adapt structure using PIMPL pattern.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: 
+	    Remove bad include and replaced it by a forward declaration.
+	* data/automata/b/Makefile.am:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* data/automata/tdc/Makefile.am:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* data/automata/z/Makefile.am:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* lib/generate_libvcsn.rb:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* src/tests/sanity/Makefile.am:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* src/tests/test-suites/test-suite.mk:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* src/tests/xml/Makefile.am:
+	    Fix CPPFLAGS error introduced in patch 1976.
+	* taf-kit/src/Makefile.am:
+	    Fix CPPFLAGS error introduced in patch 1976.
+
 2008-06-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* src/benchs/generate_benchs.sh (EXTRA_DIST): Generate

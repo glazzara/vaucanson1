@@ -25,7 +25,7 @@ dist_b_automata_DATA =				\
 EXTRA_DIST = $(XML_SAMPLES)
 MAINTAINERCLEANFILES = $(dist_b_automata_DATA)
 
-a1_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp
+a1_CPPFLAGS = $(AM_CPPFLAGS)
 a1_LDADD = $(top_builddir)/lib/libkrat_exp.la
 a1_SOURCES = a1.cc
 
@@ -36,7 +36,7 @@ $(srcdir)/a1.xml: a1.cc $(top_srcdir)/configure.ac
 
 # Accepts words with a `b'.
 # See ETA Fig. III.2.3, p. 434.
-b1_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp
+b1_CPPFLAGS = $(AM_CPPFLAGS)
 b1_LDADD = $(top_builddir)/lib/libkrat_exp.la
 b1_SOURCES = b1.cc
 $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
@@ -44,7 +44,7 @@ $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
 	./b1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
-divkbaseb_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp
+divkbaseb_CPPFLAGS = $(AM_CPPFLAGS)
 divkbaseb_LDADD = $(top_builddir)/lib/libkrat_exp.la
 divkbaseb_SOURCES = divkbaseb.cc
 $(srcdir)/div3base2.xml: divkbaseb.cc $(top_srcdir)/configure.ac
@@ -52,7 +52,7 @@ $(srcdir)/div3base2.xml: divkbaseb.cc $(top_srcdir)/configure.ac
 	./divkbaseb$(EXEEXT) 3 2 xml >$@.tmp
 	mv $@.tmp $@
 
-ladybird_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp
+ladybird_CPPFLAGS = $(AM_CPPFLAGS)
 ladybird_LDADD = $(top_builddir)/lib/libkrat_exp.la
 ladybird_SOURCES = ladybird.cc
 $(srcdir)/ladybird-6.xml: ladybird.cc $(top_srcdir)/configure.ac
@@ -60,7 +60,7 @@ $(srcdir)/ladybird-6.xml: ladybird.cc $(top_srcdir)/configure.ac
 	./ladybird$(EXEEXT) 6 xml >$@.tmp
 	mv $@.tmp $@
 
-double_ring_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp
+double_ring_CPPFLAGS = $(AM_CPPFLAGS)
 double_ring_LDADD = $(top_builddir)/lib/libkrat_exp.la
 double_ring_SOURCES = double_ring.cc
 $(srcdir)/double-3-1.xml: double_ring.cc $(top_srcdir)/configure.ac

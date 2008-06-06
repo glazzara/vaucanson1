@@ -21,20 +21,34 @@
 # include <vector>
 # include <map>
 # include <queue>
-# include <set>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <krat_exp_bison.tab.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/misc/usual_escaped_characters.hh>
+
+// Declaration to link with libkrat_exp
+namespace yy
+{
+  struct token_queue;
+  struct krat_exp_parser
+  {
+    krat_exp_parser();
+    void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
+    void insert_weight(vcsn::algebra::semiring_virtual* sem);
+    void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
+    void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
+    void insert_token(int i, std::string* str);
+    int parse(vcsn::algebra::krat_exp_virtual& rexp);
+
+    // Attributs
+    token_queue* tok_q_;
+   }; // krat_exp_parser
+} // yy
 
 namespace vcsn
 {
   namespace algebra
   {
-    using namespace yy; // bison doesn't allow me to put my parser in vcsn::algebra
-
-    typedef std::queue<std::pair<krat_exp_parser::token_type, krat_exp_parser::semantic_type> > tok_queue_t;
-
     template <class S, class T>
     struct Lexer
     {
@@ -42,11 +56,11 @@ namespace vcsn
       typedef typename Element<S, T>::semiring_elt_t semiring_elt_t;
       Lexer(const std::string& from,
 	    Element<S, T>& e,
-	    tok_queue_t& tok_q,
+	    yy::krat_exp_parser& parser,
 	    bool lex_trace) :
 	from_(from),
 	e_(e),
-	tok_q_(tok_q),
+	parser_(parser),
 	lex_trace_(lex_trace),
 	end_weight_("}"),
 	token_tab_(9)
@@ -105,10 +119,9 @@ namespace vcsn
 	std::string::const_iterator sit = s.begin();
 	if (parse_word(w, s, sit, escaped))
 	{
-	  krat_exp_parser::semantic_type rexp;
 	  Element<S, T> ww = Element<S, T>(e_.structure(), w.value());
-	  rexp.rexp = new krat_exp_proxy<S, T>(ww);
-	  tok_q_.push(std::make_pair(krat_exp_parser::token::WORD, rexp));
+	  krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(ww);
+	  parser_.insert_word(rexp);
 	}
 	else
 	{
@@ -131,9 +144,8 @@ namespace vcsn
 	    std::string::const_iterator sit = s.begin();
 	    if (parse_weight(w, s, sit))
 	    {
-	      krat_exp_parser::semantic_type rexp;
-	      rexp.sem = new semiring_proxy<S, T>(w);
-	      tok_q_.push(std::make_pair(krat_exp_parser::token::WEIGHT, rexp));
+	      semiring_proxy<S, T>* sem = new semiring_proxy<S, T>(w);
+	      parser_.insert_weight(sem);
 	    }
 	    else
 	    {
@@ -147,46 +159,29 @@ namespace vcsn
       void
       insert_token(int i)
       {
-	krat_exp_parser::token_type tmp;
-	if (i < 4)
-	  if (i < 2)
-	    if (i == 0)
-	      tmp = krat_exp_parser::token::OPAR;
-	    else
-	      tmp = krat_exp_parser::token::CPAR;
-	  else
-	    if (i == 2)
-	      tmp = krat_exp_parser::token::PLUS;
-	    else
-	      tmp = krat_exp_parser::token::TIMES;
-	else
-	  if (i < 6)
-	    if (i == 4)
-	      tmp = krat_exp_parser::token::STAR;
-	    else
-	      tmp = krat_exp_parser::token::ONE;
-	  else
-	    tmp = krat_exp_parser::token::ZERO;
-	krat_exp_parser::semantic_type rexp;
 	if (i == 5)
 	{
 	  Element<S, T> w = identity_as<T>::of(e_.structure());
-	  rexp.rexp = new krat_exp_proxy<S, T>(w);
+	  krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(w);
+	  parser_.insert_one(rexp);
 	}
 	else
 	  if (i == 6)
 	  {
 	    Element<S, T> w = zero_as<T>::of(e_.structure());
-	    rexp.rexp = new krat_exp_proxy<S, T>(w);
+	    krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(w);
+	    parser_.insert_zero(rexp);
 	  }
 	  else
-	    rexp.str = new std::string(token_tab_[i]);
-	tok_q_.push(std::make_pair(tmp, rexp));
+	  {
+	    std::string* str = new std::string(token_tab_[i]);
+	    parser_.insert_token(i, str);
+	  }
       }
 
       const std::string& from_;
       Element<S, T>& e_;
-      tok_queue_t& tok_q_;
+      yy::krat_exp_parser& parser_;
       bool lex_trace_;
       std::string end_weight_;
       std::vector<std::string> token_tab_;
@@ -201,12 +196,11 @@ namespace vcsn
     {
       parse_trace = parse_trace;
       int res;
-      tok_queue_t tok_q;
-      Lexer<S, T> lex(from, exp, tok_q, lex_trace);
+      yy::krat_exp_parser parser;
+      Lexer<S, T> lex(from, exp, parser, lex_trace);
       lex.lex();
       krat_exp_proxy<S, T> rexp(exp);
-      yy::krat_exp_parser parser(tok_q, rexp);
-      res = parser.parse();
+      res = parser.parse(rexp);
       exp = rexp.self;
       return std::make_pair(res, "");
     }

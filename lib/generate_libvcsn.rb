@@ -115,7 +115,7 @@ def write_makefile(type, context)
 	     "##",
 	     "",
 	     "lib_LTLIBRARIES\t+= lib" + type + ".la",
-	     "lib" + type.gsub(/-/, "_") + "_la_CXXFLAGS\t= $(CXXFLAGS) -I$(top_srcdir)/lib/krat_exp/ -DVCSN_CONTEXT=" + context,
+	     "lib" + type.gsub(/-/, "_") + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
 	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
     out.print "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
     files = Dir.glob(type + "/*cc").sort!

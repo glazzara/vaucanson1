@@ -43,25 +43,28 @@ COMMON_SOURCES = commands.hh			\
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh common_automaton_commands.hh b_commands.cc
-vcsn_b_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp \
+vcsn_b_CPPFLAGS = $(AM_CPPFLAGS) \
 		  -DCONTEXT=boolean_automaton -DVCSN_USE_LIB
-vcsn_b_LDADD 	= $(top_builddir)/lib/libvcsn-b.la \
+vcsn_b_LDADD 	= $(LDADD) \
+		  $(top_builddir)/lib/libvcsn-b.la \
 		  $(top_builddir)/lib/libkrat_exp.la
 
 vcsn_z_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh common_automaton_commands.hh z_commands.cc
-vcsn_z_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp \
+vcsn_z_CPPFLAGS = $(AM_CPPFLAGS) \
 		  -DCONTEXT=z_automaton -DVCSN_USE_LIB
-vcsn_z_LDADD 	= $(top_builddir)/lib/libvcsn-z.la \
+vcsn_z_LDADD 	= $(LDADD) \
+		  $(top_builddir)/lib/libvcsn-z.la \
 		  $(top_builddir)/lib/libkrat_exp.la
 
 vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
 		   tdc_commands.cc
 #vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=fmp_transducer 	\
 #		    -DWITH_TWO_ALPHABETS -DVCSN_USE_LIB
-vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/lib/krat_exp \
+vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS) \
 		    -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS 
-vcsn_tdc_LDADD 	= $(top_builddir)/lib/libvcsn-tdc.la \
+vcsn_tdc_LDADD 	= $(LDADD) \
+		  $(top_builddir)/lib/libvcsn-tdc.la \
 		  $(top_builddir)/lib/libkrat_exp.la
 
 
