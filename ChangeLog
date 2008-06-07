@@ -1,5 +1,10 @@
 2008-06-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Fix missing EXTRA_DIST.
+	* lib/krat_exp/libkrat_exp.mk: Fix.
+
+2008-06-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Fix some errors introduced in patch 1976.
 	* lib/krat_exp/krat_exp_bison.yy:
 	    Adapt structure using PIMPL pattern.
