@@ -1,5 +1,10 @@
 2008-06-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Fix missing header.
+	* include/Makefile.am: Fix.
+
+2008-06-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Fix missing EXTRA_DIST.
 	* lib/krat_exp/libkrat_exp.mk: Fix.
 

@@ -220,6 +220,8 @@ vaucanson/algebra/implementation/series/krat_coefficient.hxx			     \
 vaucanson/algebra/implementation/series/krat_conversion.hh			     \
 vaucanson/algebra/implementation/series/krat_conversion.hxx			     \
 vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx		     \
+vaucanson/algebra/implementation/series/krat_exp_proxy.hh			     \
+vaucanson/algebra/implementation/series/krat_exp_proxy.hxx			     \
 vaucanson/algebra/implementation/series/krat_exp_parser.hh			     \
 vaucanson/algebra/implementation/series/krat_exp_parser.hxx			     \
 vaucanson/algebra/implementation/series/krat_exp_pattern.hh			     \
