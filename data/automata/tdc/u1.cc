@@ -16,6 +16,8 @@
 //
 
 #include <vaucanson/fmp_transducer.hh>
+
+#include <vaucanson/xml/contexts/fmp.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
 using namespace vcsn;

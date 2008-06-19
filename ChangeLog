@@ -1,5 +1,13 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Update XML data.
+	* tdc-rw/add1-rw.xml: Update file.
+	* tdc-rw/quot-3-rw.xml: Update file.
+	* tdc/t1.cc: Add contexts.
+	* tdc/u1.cc: Add contexts.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, new XSD file.
 	* data/vaucanson.xsd: Here.
 
