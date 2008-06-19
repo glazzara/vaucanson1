@@ -15,7 +15,6 @@ include $(top_srcdir)/vaucanson.mk
 include $(top_srcdir)/build-aux/check.mk
 
 AM_CPPFLAGS += $(XSD_CPPFLAGS)
-LDADD = $(top_builddir)/lib/libkrat_exp.la 
 
 TESTS_ENVIRONMENT = srcdir=$(srcdir)
 
@@ -60,7 +59,7 @@ trans_tester_SOURCES = xml_trans_tester.cc
 geometry_tester_SOURCES = xml_geometry_tester.cc
 
 label_node_tester_SOURCES = xml_label_node_tester.cc
-
+label_node_tester_LDADD = $(top_builddir)/lib/libkrat_exp.la
 
 ## ------------------------ ##
 ## Running the test suite.  ##

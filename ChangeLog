@@ -1,5 +1,14 @@
 2008-06-19  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Remove useless LDADD.
+	* data/automata/b/Makefile.am: .
+	* data/automata/tdc/Makefile.am: .
+	* data/automata/z/Makefile.am: .
+	* src/tests/xml/Makefile.am: .
+	* lib/krat_exp/libkrat_exp.mk: .
+
+2008-06-19  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Add LDADD in demo.
 	* demos/function_library/Makefile.am: Add LDADD.
 	* demos/one_rule_rewriting/Makefile.am: .

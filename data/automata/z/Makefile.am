@@ -28,7 +28,6 @@ $(srcdir)/b1.xml: $(top_srcdir)/data/automata/b/b1.xml
 	mv $@.tmp $@
 
 c1_CPPFLAGS = $(AM_CPPFLAGS)
-c1_LDADD = $(top_builddir)/lib/libkrat_exp.la
 c1_SOURCES = c1.cc
 $(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)

@@ -23,7 +23,6 @@ EXTRA_DIST = $(XML_SAMPLES)
 MAINTAINERCLEANFILES = $(dist_tdc_automata_DATA)
 
 t1_CPPFLAGS = $(AM_CPPFLAGS)
-t1_LDADD = $(top_builddir)/lib/libkrat_exp.la
 t1_SOURCES = t1.cc
 
 $(srcdir)/t1.xml: t1.cc $(top_srcdir)/configure.ac
@@ -32,7 +31,6 @@ $(srcdir)/t1.xml: t1.cc $(top_srcdir)/configure.ac
 	mv $@.tmp $@
 
 u1_CPPFLAGS = $(AM_CPPFLAGS)
-u1_LDADD = $(top_builddir)/lib/libkrat_exp.la
 u1_SOURCES = u1.cc
 
 $(srcdir)/u1.xml: u1.cc $(top_srcdir)/configure.ac
