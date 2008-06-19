@@ -17,8 +17,6 @@
 #ifndef VCSN_XML_STRINGS_HXX
 # define VCSN_XML_STRINGS_HXX
 
-# include <vaucanson/xml/strings.hh>
-
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn
@@ -49,7 +47,7 @@ namespace vcsn
 
     inline
     std::string
-    xml2str(const XMLCh* xmlstr)
+    xmlstr(const XMLCh* xmlstr)
     {
       assertion(xmlstr != 0);
 

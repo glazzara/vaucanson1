@@ -17,8 +17,6 @@
 #ifndef VCSN_XML_IOS_HXX
 # define VCSN_XML_IOS_HXX
 
-# include <vaucanson/xml/ios.hh>
-
 namespace vcsn
 {
     namespace xml

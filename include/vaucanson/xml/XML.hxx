@@ -18,28 +18,15 @@
 #ifndef VCSN_XML_XML_HXX
 # define VCSN_XML_XML_HXX
 
-/**
- * @file XML.hxx
- *
- * XML main file. Contains the base functor to load / save XML.
- *
- * @see io::automaton_loader, io::automaton_saver
- *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
- */
-
-# include <xercesc/sax/SAXException.hpp>
-
-# include <vaucanson/misc/usual_macros.hh>
-# include <vaucanson/xml/xml_converter.hh>
 # include <vaucanson/xml/parsers.hh>
+# include <vaucanson/xml/printers.hh>
 
 namespace vcsn
 {
   namespace xml
   {
-    XML::XML(const std::string& name, bool use_label_node)
-      :	name_(name), use_label_node_(use_label_node), check_(true)
+    XML::XML(const std::string& name)
+      :	name_(name)
     {
       XML::inst_ += 1;
       if (XML::inst_ == 1)
@@ -54,40 +41,32 @@ namespace vcsn
     }
 
     XML::XML(const XML& old)
-      :	name_(old.name_),
-	use_label_node_(old.use_label_node_),
-	check_(old.check_)
+      :	name_(old.name_)
     {
       XML::inst_ += 1;
     }
 
-    void
-    XML::check(bool check)
-    {
-      check_ = check;
-    }
-
     template<typename Saver, typename Conv>
-    void XML::operator()(std::ostream& out, const Saver& s,
+    void XML::operator()(std::ostream& out,
+			 const Saver& s,
 			 const Conv&) const
     {
       typedef typename Saver::automaton_t automaton_t;
-
-      xml_converter<automaton_t> xc(use_label_node_);
-      xc.save(s.automaton(), out, name_);
+      AutPrinter<automaton_t>* printer = new AutPrinter<automaton_t>(s.automaton(), name_);
+      printer->print(out);
+      delete printer;
     }
 
     template <typename Loader>
     void
-    XML::operator()(std::istream& in, Loader& l)
+    XML::operator()(std::istream& in,
+		    Loader& l,
+		    bool check)
     {
-
       typedef typename Loader::automaton_t	automaton_t;
-      AutParser<automaton_t>* parser = new AutParser<automaton_t>(l.automaton(), check_);
+      AutParser<automaton_t>* parser = new AutParser<automaton_t>(l.automaton(), check);
       parser->parse(in);
-      // FIXME The use of xercesc::XMLPlatformUtils::Terminate()
-      // does not seems to appreciate the parser to be deleted.
-      // delete parser;
+      delete parser;
     }
 
     int XML::inst_ = 0;

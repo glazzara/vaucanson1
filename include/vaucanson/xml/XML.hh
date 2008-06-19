@@ -18,49 +18,53 @@
 #ifndef VCSN_XML_XML_HH
 # define VCSN_XML_XML_HH
 
-# include <string>
-# include <iostream>
-
 /**
  * @file XML.hh
  *
- * XML main file. Contains the base functor to load / save XML.
+ * XML Format functor to load and save an automaton.
  *
  * @see io::automaton_loader, io::automaton_saver
  *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+ * @author Florian Lesaint <florian.lesaint@lrde.epita.fr>
  */
+
+# include <string>
+# include <iostream>
 
 namespace vcsn
 {
   namespace xml
   {
+    class Handler;
+
     class XML
     {
       public:
-	XML(const std::string& name = "", bool use_label_node = false);
+	XML(const std::string& name = "");
 	XML(const XML& old);
 	~XML();
 
-	void
-	check(bool check);
-
-	/// Write an automaton to @a out.
+	/**
+	 * Write the automaton in the saver @a s to @a out.
+	 */
 	template <typename Saver, typename Conv>
 	void operator()(std::ostream& out,
 			const Saver& s,
 			const Conv& conv) const;
 
-
-	/// Load an automaton from @a in.
+        /**
+	 * Load an automaton from @a in into the loader @a l.
+	 */
 	template <typename Loader>
-	void operator()(std::istream& in, Loader& l);
+	void operator()(std::istream& in, Loader& l, bool = true); // FIXME set to false
 
+	/**
+	 * Counter of instances of XML
+	 * Required to intialize and clean xercesc only once.
+	 */
 	static int inst_;
       protected:
 	const	std::string name_;
-	bool	use_label_node_;
-	bool	check_;
     };
   } // !xml
 } // !vcsn

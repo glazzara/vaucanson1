@@ -29,17 +29,17 @@ namespace vcsn
   namespace xml
   {
 
-    /// Transcode \a cpp to XML.
+    /// Transcode @a cpp to XML.
     inline
     XMLCh* transcode (const char* ccp);
 
-    /// Transcode \a s to XML.
+    /// Transcode @a s to XML.
     inline
     XMLCh* transcode (const std::string& s);
 
     /// Convert back to a C++ string.
     inline
-    std::string xml2str(const XMLCh*);
+    std::string xmlstr(const XMLCh*);
 
   } // End of namespace xml.
 

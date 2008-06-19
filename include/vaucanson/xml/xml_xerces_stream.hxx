@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef XML_XERCES_STREAM_HXX
-# define XML_XERCES_STREAM_HXX
+#ifndef VCSN_XML_XML_XERCES_STREAM_HXX
+# define VCSN_XML_XML_XERCES_STREAM_HXX
 
 /**
  * @file xml_xerces_stream.hxx
@@ -41,4 +41,4 @@ XMLXercesStream<Ostream>::writeChars (const XMLByte* const toWrite,
 
 XERCES_CPP_NAMESPACE_END
 
-#endif // !XML_XERCES_STREAM_HXX
+#endif // !VCSN_XML_XML_XERCES_STREAM_HXX

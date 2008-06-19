@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_XML_XERCES_STREAM_HH
-# define VCSN_XML_XERCES_STREAM_HH
+#ifndef VCSN_XML_XML_XERCES_STREAM_HH
+# define VCSN_XML_XML_XERCES_STREAM_HH
 
 /**
  * @file xml_xerces_stream.hh
@@ -67,4 +67,4 @@ XERCES_CPP_NAMESPACE_END
 #  include <vaucanson/xml/xml_xerces_stream.hxx>
 # endif // !VCSN_USE_INTERFACE_ONLY || VCSN_USE_LIB
 
-#endif // ! VCSN_XML_XERCES_STREAM_HH
+#endif // ! VCSN_XML_XML_XERCES_STREAM_HH

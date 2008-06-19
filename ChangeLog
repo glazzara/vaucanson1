@@ -1,5 +1,61 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Update XML I/O Systemm #33, #89, #96, #103.
+	Overhaul of the XML I/O System (#89).
+	Avoid useless dependencies (#33).
+	Avoid use of r_automaton (#96).
+	Avoid use of attributes for labels (#103).
+	Support FSMXML.
+	* xml/XML.hh: .
+	* xml/XML.hxx: .
+	* xml/builders.hh: .
+	* xml/builders.hxx: .
+	* xml/contexts/fmp.hh: New.
+	* xml/contexts/fmp.hxx: New.
+	* xml/contexts/max_plus.hh: New.
+	* xml/contexts/max_plus.hxx: New.
+	* xml/contexts/min_plus.hh: New.
+	* xml/contexts/min_plus.hxx: New.
+	* xml/contexts/rw.hh: New.
+	* xml/contexts/rw.hxx: New.
+	* xml/contexts: New.
+	* xml/error_handler.hh: Remove.
+	* xml/error_handler.hxx: Remove.
+	* xml/handlers.hh: .
+	* xml/handlers.hxx: .
+	* xml/handlers_base.hh: New.
+	* xml/handlers_base.hxx: New.
+	* xml/ios.hh: .
+	* xml/ios.hxx: .
+	* xml/node.hh: Remove.
+	* xml/node.hxx: Remove.
+	* xml/parsers.hh: .
+	* xml/parsers.hxx: .
+	* xml/printers.hh: New.
+	* xml/printers.hxx: New.
+	* xml/regexp.hh: New.
+	* xml/regexp.hxx: New.
+	* xml/session.hh: Remove.
+	* xml/session.hxx: Remove.
+	* xml/strings.hh: .
+	* xml/strings.hxx: .
+	* xml/tools.hh: .
+	* xml/tools.hxx: .
+	* xml/xerces_parser.hh: Remove.
+	* xml/xerces_parser.hxx: Remove.
+	* xml/xml_chooser.hh: Remove.
+	* xml/xml_chooser.hxx: Remove.
+	* xml/xml_converter.hh: Remove.
+	* xml/xml_converter.hxx: Remove.
+	* xml/xml_exp_visitor.hh: New.
+	* xml/xml_exp_visitor.hxx: New.
+	* xml/xml_xerces_stream.hh: .
+	* xml/xml_xerces_stream.hxx: .
+	* xml/xmleq.hh: .
+	* xml/xmleq.hxx: .
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Remove rat exp dependence on xml_exp_visitor.
 	* implementation/series/rat/exp.hh: Here.
 	* implementation/series/rat/exp.hxx: Here.

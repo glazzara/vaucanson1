@@ -28,8 +28,6 @@
  * @author Florian Lesaint <florian.lesaint@lrde.epita.fr>
  */
 
-# include <string>
-
 # include <xercesc/util/XMLUniDefs.hpp>
 # include <xercesc/util/XMLString.hpp>
 
@@ -37,19 +35,30 @@ namespace vcsn
 {
   namespace xml
   {
-    /// Help to improve performances on comparaison
+    /**
+     * Help to improve performances on comparaison
+     * Since transcode(string) is more expensive than transcode(XMLCh)
+     * We transcode and store all the tokens we might need to compare
+     * while parsing a document.
+     */
     class XMLEq
     {
       public:
 	XMLCh* fsmxml;
-	XMLCh* automaton;
+
+	XMLCh* valueType;
+	XMLCh* semiring;
+	XMLCh* monoid;
+	XMLCh* genSort;
+	XMLCh* genCompSort;
+	XMLCh* genComp;
+	XMLCh* monGen;
+
 	XMLCh* drawing;
 	XMLCh* geometry;
-	XMLCh* type;
-	XMLCh* monoid;
-	XMLCh* generator;
-	XMLCh* semiring;
-	XMLCh* nsemiring;
+	XMLCh* data;
+
+	XMLCh* automaton;
 	XMLCh* content;
 	XMLCh* states;
 	XMLCh* state;
@@ -58,17 +67,26 @@ namespace vcsn
 	XMLCh* initial;
 	XMLCh* final;
 
+	XMLCh* regExp;
+	XMLCh* typedRegExp;
+
 	XMLCh* label;
 	XMLCh* sum;
 	XMLCh* product;
 	XMLCh* star;
-	XMLCh* word;
+	XMLCh* leftExtMul;
+	XMLCh* rightExtMul;
+	XMLCh* one;
 	XMLCh* zero;
-	XMLCh* identity;
+	XMLCh* monElmt;
+	XMLCh* weight;
+
+	XMLCh* writingData;
 
 	XMLEq ();
 	~XMLEq ();
     };
+
   } // End of namespace xml.
 
 } // End of namespace vcsn.

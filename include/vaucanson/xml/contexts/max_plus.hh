@@ -1,4 +1,4 @@
-// tools.hh: this file is part of the Vaucanson project.
+// max_plus.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -15,11 +15,11 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_XML_TOOLS_HH
-# define VCSN_XML_TOOLS_HH
+#ifndef VCSN_XML_CONTEXTS_MAX_PLUS_HH
+# define VCSN_XML_CONTEXTS_MAX_PLUS_HH
 
 /**
- * @file tools.hh
+ * @file max_plus.hh
  *
  * Tools to help loading automata.
  *
@@ -32,45 +32,32 @@
 
 # include <xercesc/sax2/Attributes.hpp>
 # include <xercesc/util/XMLString.hpp>
-# include <xercesc/dom/DOM.hpp>
+
+# include <vaucanson/xml/handlers_base.hh>
+# include <vaucanson/xml/builders.hh>
+# include <vaucanson/xml/regexp.hh>
+
+# include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
 
 namespace vcsn
 {
   namespace xml
   {
-    namespace tools
+    /**
+     * Consistency
+     */
+    namespace builders
     {
-      /**
-       * Getters
-       */
-      bool
-      has_attribute (const xercesc::Attributes& attrs,
-		     const char* key,
-		     const XMLCh* const uri = 0);
-
-      const XMLCh*
-      get_attribute (const xercesc::Attributes& attrs,
-		     const char* key,
-		     const XMLCh* uri = 0);
-
-      /**
-       * Setters
-       */
-      void
-      set_attribute (xercesc::DOMElement* e,
-		     const std::string& k, const std::string& v);
-      /**
-       * XML Dom builders
-       */
-      xercesc::DOMElement*
-      create_element(xercesc::DOMDocument* doc,
-		     const std::string& e);
-    } // !tools
+      template <>
+      const char* get_semiring_operations<
+	vcsn::algebra::TropicalSemiring<vcsn::algebra::TropicalMax>
+      >(const vcsn::algebra::TropicalSemiring<vcsn::algebra::TropicalMax>&);
+    } // !builders
   } // !xml
 } // !vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/xml/tools.hxx>
+#  include <vaucanson/xml/contexts/max_plus.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY || !VCSN_USE_LIB
 
-#endif // !VCSN_XML_TOOLS_HH
+#endif // !VCSN_XML_CONTEXTS_MAX_PLUS_HH

@@ -18,18 +18,6 @@
 #ifndef VCSN_XML_XMLEQ_HXX
 # define VCSN_XML_XMLEQ_HXX
 
-/**
- * @file xmleq.hxx
- *
- * XML String conversion class.
- *
- * @see vcsn::xml::*Handler
- *
- * @author Florian Lesaint <florian.lesaint@lrde.epita.fr>
- */
-
-# include <vaucanson/misc/contract.hh>
-
 namespace vcsn
 {
   namespace xml
@@ -37,15 +25,21 @@ namespace vcsn
     XMLEq::XMLEq ()
     {
       fsmxml = xercesc::XMLString::transcode("fsmxml");
-      automaton = xercesc::XMLString::transcode("automaton");
-      geometry = xercesc::XMLString::transcode("geometry");
-      drawing = xercesc::XMLString::transcode("drawing");
-      type = xercesc::XMLString::transcode("labelType");
-      monoid = xercesc::XMLString::transcode("monoid");
-      generator = xercesc::XMLString::transcode("generator");
+
+      valueType = xercesc::XMLString::transcode("valueType");
       semiring = xercesc::XMLString::transcode("semiring");
-      nsemiring = xercesc::XMLString::transcode("numericalSemiring");
-      content = xercesc::XMLString::transcode("content");
+      monoid = xercesc::XMLString::transcode("monoid");
+      genSort = xercesc::XMLString::transcode("genSort");
+      genCompSort = xercesc::XMLString::transcode("genCompSort");
+      genComp = xercesc::XMLString::transcode("genComp");
+      monGen = xercesc::XMLString::transcode("monGen");
+
+      drawing = xercesc::XMLString::transcode("drawingData");
+      geometry = xercesc::XMLString::transcode("geometricData");
+      data = xercesc::XMLString::transcode("data");
+
+      automaton = xercesc::XMLString::transcode("automaton");
+      content = xercesc::XMLString::transcode("automatonStruct");
       states = xercesc::XMLString::transcode("states");
       state = xercesc::XMLString::transcode("state");
       transitions = xercesc::XMLString::transcode("transitions");
@@ -53,26 +47,40 @@ namespace vcsn
       initial = xercesc::XMLString::transcode("initial");
       final = xercesc::XMLString::transcode("final");
 
+      regExp = xercesc::XMLString::transcode("regExp");
+      typedRegExp = xercesc::XMLString::transcode("typedRegExp");
+
       label = xercesc::XMLString::transcode("label");
       sum = xercesc::XMLString::transcode("sum");
       product = xercesc::XMLString::transcode("product");
       star = xercesc::XMLString::transcode("star");
-      word = xercesc::XMLString::transcode("word");
+      leftExtMul = xercesc::XMLString::transcode("leftExtMul");
+      rightExtMul = xercesc::XMLString::transcode("rightExtMul");
+      one = xercesc::XMLString::transcode("one");
       zero = xercesc::XMLString::transcode("zero");
-      identity = xercesc::XMLString::transcode("identity");
+      monElmt = xercesc::XMLString::transcode("monElmt");
+      weight = xercesc::XMLString::transcode("weight");
+
+      writingData = xercesc::XMLString::transcode("writingData");
     }
 
     XMLEq::~XMLEq ()
     {
       xercesc::XMLString::release(&fsmxml);
-      xercesc::XMLString::release(&automaton);
-      xercesc::XMLString::release(&geometry);
-      xercesc::XMLString::release(&drawing);
-      xercesc::XMLString::release(&type);
-      xercesc::XMLString::release(&monoid);
-      xercesc::XMLString::release(&generator);
+
+      xercesc::XMLString::release(&valueType);
       xercesc::XMLString::release(&semiring);
-      xercesc::XMLString::release(&nsemiring);
+      xercesc::XMLString::release(&monoid);
+      xercesc::XMLString::release(&genSort);
+      xercesc::XMLString::release(&genCompSort);
+      xercesc::XMLString::release(&genComp);
+      xercesc::XMLString::release(&monGen);
+
+      xercesc::XMLString::release(&drawing);
+      xercesc::XMLString::release(&geometry);
+      xercesc::XMLString::release(&data);
+
+      xercesc::XMLString::release(&automaton);
       xercesc::XMLString::release(&content);
       xercesc::XMLString::release(&states);
       xercesc::XMLString::release(&state);
@@ -80,16 +88,24 @@ namespace vcsn
       xercesc::XMLString::release(&transition);
       xercesc::XMLString::release(&initial);
       xercesc::XMLString::release(&final);
+
+      xercesc::XMLString::release(&regExp);
+      xercesc::XMLString::release(&typedRegExp);
+
       xercesc::XMLString::release(&label);
       xercesc::XMLString::release(&sum);
       xercesc::XMLString::release(&product);
       xercesc::XMLString::release(&star);
-      xercesc::XMLString::release(&word);
+      xercesc::XMLString::release(&leftExtMul);
+      xercesc::XMLString::release(&rightExtMul);
+      xercesc::XMLString::release(&one);
       xercesc::XMLString::release(&zero);
-      xercesc::XMLString::release(&identity);
+      xercesc::XMLString::release(&monElmt);
+      xercesc::XMLString::release(&weight);
+
+      xercesc::XMLString::release(&writingData);
     }
   } // End of namespace xml.
-
 } // End of namespace vcsn.
 
 #endif // ! VCSN_XML_XMLEQ_HXX

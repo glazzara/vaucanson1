@@ -73,30 +73,11 @@ namespace vcsn
 	parse (std::istream& in);
 
       protected:
-	AutHandler<Auto>*	doc_handler_;
+	DocHandler<Auto>*	doc_handler_;
 	Auto&			a_;
     };
 
-    /*
-     * Parser class dedicated to the parse of list of automata.
-     */
-    class SessParser : public Parser
-    {
-      public:
-	SessParser (bool check = true);
-	virtual ~SessParser();
-
-	void
-	init (std::istream& in);
-
-	template <typename Auto>
-	bool
-	operator() (Auto& a);
-
-      private:
-	bool			      got_more_;
-	xercesc::XMLPScanToken	      token_;
-    };
+    // TODO RegExp Parser
   } // !xml
 } // !vcsn
 

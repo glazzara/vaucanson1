@@ -18,6 +18,14 @@
 #ifndef VCSN_XML_IOS_HH
 # define VCSN_XML_IOS_HH
 
+/**
+ * @file ios.hh
+ *
+ * Functions required by the Xerces-C parser to manage streams.
+ *
+ * @see xml::Parser
+ */
+
 # include <xercesc/util/BinInputStream.hpp>
 # include <xercesc/sax/InputSource.hpp>
 # include <iostream>

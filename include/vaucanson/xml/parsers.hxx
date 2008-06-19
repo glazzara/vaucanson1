@@ -18,21 +18,10 @@
 #ifndef VCSN_XML_PARSERS_HXX
 # define VCSN_XML_PARSERS_HXX
 
-/**
- * @file parser.hxx
- *
- * Parsers classes for the FSMXML document.
- *
- * @see vcsn::xml
- *
- * @author Florian Lesaint <florian.lesaint@lrde.epita.fr>
- */
-
 # include <fstream>
 # include <xercesc/sax2/XMLReaderFactory.hpp>
 
 # include <vaucanson/xml/ios.hh>
-# include <vaucanson/xml/strings.hh>
 
 namespace vcsn
 {
@@ -65,19 +54,18 @@ namespace vcsn
       using namespace xercesc;
       parser_ = XMLReaderFactory::createXMLReader();
 
-      if (check)
+      if (check || true)
       {
 	parser_->setFeature(XMLUni::fgSAX2CoreNameSpaces, true);
 	parser_->setFeature(XMLUni::fgSAX2CoreValidation, true);
 	parser_->setFeature(XMLUni::fgXercesSchema, true);
-	//parser->setFeature(XMLUni::fgXercesSchemaFullChecking, true);
+	 parser_->setFeature(XMLUni::fgXercesSchemaFullChecking, true);
 	parser_->setFeature(XMLUni::fgXercesValidationErrorAsFatal, true);
 	parser_->setFeature(XMLUni::fgXercesUseCachedGrammarInParse, true);
 	parser_->setFeature(XMLUni::fgXercesCacheGrammarFromParse, true);
-	XMLCh* xsd = transcode(VCSN_XMLNS " " + get_xsd_path());
-	parser_->setProperty(XMLUni::fgXercesSchemaExternalSchemaLocation,
-			     xsd);
-	XMLString::release(&xsd);
+	 XMLCh* xsd = transcode(VCSN_XMLNS " " + get_xsd_path());
+	 parser_->setProperty(XMLUni::fgXercesSchemaExternalSchemaLocation, xsd);
+	 XMLString::release(&xsd);
       }
 
       err_handler_ = new ErrHandler();
@@ -97,7 +85,7 @@ namespace vcsn
     AutParser<Auto>::AutParser (Auto& a, bool check)
       : Parser(check), a_(a)
     {
-      doc_handler_ = new AutHandler<Auto>(a_, this->parser_, eq_);
+      doc_handler_ = new DocHandler<Auto>(this->parser_, *err_handler_, a_, eq_);
       this->parser_->setContentHandler(doc_handler_);
     }
 
@@ -114,40 +102,7 @@ namespace vcsn
       CxxInputSource is(&in);
       this->parser_->parse(is);
     }
-
-    /*
-     * SessParser class.
-     */
-    SessParser::SessParser (bool check)
-      : Parser(check), got_more_(true)
-    {
-    }
-
-    SessParser::~SessParser()
-    {
-      this->parser_->parseReset(token_);
-    }
-
-    void
-    SessParser::init (std::istream& in)
-    {
-      CxxInputSource is(&in);
-      this->parser_->parseFirst(is, token_);
-    }
-
-    template <typename Auto>
-    bool
-    SessParser::operator()(Auto& a)
-    {
-      AutHandler<Auto> doc_h(a, this->parser_);
-      this->parser_->setContentHandler(&doc_h);
-
-      while (got_more_ && !this->parser_->getErrorCount() && !doc_h.end())
-	got_more_ = this->parser_->parseNext(token_);
-      return got_more_;
-    }
-
   } // !xml
 } // !vcsn
 
-#endif // !VCSN_XML_PARSER_HXX
+#endif // !VCSN_XML_PARSERS_HXX
