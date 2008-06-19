@@ -22,6 +22,7 @@ noinst_PROGRAMS = \
   ORR_tdc
 
 fibonacci_demo_SOURCES = fibonacci_demo.cc
+fibonacci_demo_LDADD = $(top_builddir)/lib/libkrat_exp.la
 
 fibonacci_rw_SOURCES = fibonacci_rw_gen.cc
 

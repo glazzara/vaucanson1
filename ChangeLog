@@ -1,3 +1,10 @@
+2008-06-19  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add LDADD in demo.
+	* demos/function_library/Makefile.am: Add LDADD.
+	* demos/one_rule_rewriting/Makefile.am: .
+	* demos/vgrep/Makefile.am: .
+
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	FSMXML, Update demos.
