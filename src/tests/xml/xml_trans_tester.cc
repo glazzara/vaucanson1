@@ -18,6 +18,7 @@
 #include <string.h>
 #include <vaucanson/boolean_transducer.hh>
 #include <vaucanson/tools/dot_dump.hh>
+#include <vaucanson/xml/contexts/rw.hh>
 #include <vaucanson/xml/XML.hh>
 
 

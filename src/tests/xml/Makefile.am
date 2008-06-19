@@ -29,11 +29,12 @@ fmp_tester					\
 geometry_tester					\
 label_node_tester				\
 r_tester					\
-session_tester					\
 trans_tester					\
 z_max_plus_tester				\
 z_min_plus_tester				\
 z_tester
+
+##session_tester					
 
 b_tester_SOURCES = xml_automaton_tester.cc
 b_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="boolean_automaton"
@@ -45,16 +46,16 @@ r_tester_SOURCES = xml_automaton_tester.cc
 r_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="r_automaton"
 
 z_max_plus_tester_SOURCES = xml_automaton_tester.cc
-z_max_plus_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="z_max_plus_automaton"
+z_max_plus_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="z_max_plus_automaton" -DMAX_PLUS
 
 z_min_plus_tester_SOURCES = xml_automaton_tester.cc
-z_min_plus_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="z_min_plus_automaton"
+z_min_plus_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="z_min_plus_automaton" -DMIN_PLUS
 
 fmp_tester_SOURCES = xml_fmp_tester.cc
 
 trans_tester_SOURCES = xml_trans_tester.cc
 
-session_tester_SOURCES = xml_session_tester.cc
+##session_tester_SOURCES = xml_session_tester.cc
 
 geometry_tester_SOURCES = xml_geometry_tester.cc
 

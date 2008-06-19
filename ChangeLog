@@ -1,3 +1,21 @@
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	FSMXML, Update XML test-suite.
+	* Makefile.am: Remove tests.
+	* b_ref.xml: Update file.
+	* fmp_ref.xml: Update file.
+	* geometry_ref.xml: Update file.
+	* label_node_ref.xml: Update file.
+	* r_ref.xml: Update file.
+	* trans_ref.xml: Update file.
+	* xml_automaton_tester.cc: Add contexts.
+	* xml_fmp_tester.cc: Add contexts.
+	* xml_label_node_tester.cc: Update file.
+	* xml_trans_tester.cc: Add contexts.
+	* z_max_plus_ref.xml: Update file.
+	* z_min_plus_ref.xml: Update file.
+	* z_ref.xml: Update file.
+
 2008-06-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix missing header.

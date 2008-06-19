@@ -52,7 +52,7 @@ int main(int argc, char** argv)
     a.add_series_transition(s1, s0, make_rat_exp(alpha, "{5} (a.b)"));
     a.add_series_transition(s1, s1, make_rat_exp(alpha, "{5} (a+b)"));
 
-    std::cout << automaton_saver(a, string_out(), xml::XML("", true));
+    std::cout << automaton_saver(a, string_out(), xml::XML());
   }
   else
   {

@@ -19,6 +19,12 @@
 #include <iostream>
 #define CONTEXT_HEADER <vaucanson/CONTEXT.hh>
 #include CONTEXT_HEADER
+#ifdef MAX_PLUS
+# include <vaucanson/xml/contexts/max_plus.hh>
+#endif
+#ifdef MIN_PLUS
+# include <vaucanson/xml/contexts/min_plus.hh>
+#endif
 #include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/xml/XML.hh>
 
