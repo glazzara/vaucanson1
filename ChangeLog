@@ -1,5 +1,11 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Remove rat exp dependence on xml_exp_visitor.
+	* implementation/series/rat/exp.hh: Here.
+	* implementation/series/rat/exp.hxx: Here.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Update sanity ignore.
 
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>

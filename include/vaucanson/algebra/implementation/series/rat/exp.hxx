@@ -22,7 +22,6 @@
 # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/star_height_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/length_visitor.hh>
-# include <vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh>
 
 namespace vcsn {
 
@@ -124,15 +123,6 @@ namespace vcsn {
     size_t exp<LetterT, WeightT>::length() const
     {
       LengthVisitor<monoid_elt_value_t, semiring_elt_value_t> v;
-      accept(v);
-      return v.get();
-    }
-
-    template<typename LetterT, typename WeightT>
-    xercesc::DOMElement* exp<LetterT, WeightT>::xml_tree(
-      xercesc::DOMDocument* doc, const char* node_name) const
-    {
-      XmlExpVisitor<monoid_elt_value_t, semiring_elt_value_t> v(doc, node_name);
       accept(v);
       return v.get();
     }
