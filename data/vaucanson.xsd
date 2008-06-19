@@ -5,122 +5,13 @@ xmlns="http://vaucanson.lrde.epita.fr"
 elementFormDefault="qualified">
 
 <!--
-vaucanson.xsd version 0.4
+vaucanson.xsd version 0.5
 -->
-
-<!--
- The following tags are used for the <expressionLabel> tag.
--->
-
-<!--
- Attribute group used for node expressions.
--->
- <xs:attributeGroup name="nodeAttributes">
-   <xs:attribute name="leftWeight" type="xs:string"/>
-   <xs:attribute name="rightWeight" type="xs:string"/>
- </xs:attributeGroup>
-
-<!--
- Attribute group used for the terminal tags of the expression grammar.
--->
- <xs:attributeGroup name="atomAttributes">
-   <xs:attribute name="weight" type="xs:string"/>
- </xs:attributeGroup>
-
-<!--
- Terminal tags of the expression grammar.
--->
-<xs:complexType name="atom">
-   <xs:attribute name="value" type="xs:string" use="required"/>
-   <xs:attributeGroup ref="atomAttributes"/>
- </xs:complexType>
-
-<xs:complexType name="zeroVal">
-</xs:complexType>
-
-<xs:complexType name="identityVal">
-   <xs:attributeGroup ref="atomAttributes"/>
-</xs:complexType>
-
-<!--
- <star> tag properties. Used to add a star in the regular expression.
- The members of a star can be any tag out of the <product>, <sum>, <star>,
- <zero>, <identity> and <word> ones, defined in the <ExpressionLabelGroup>
- group.
--->
-<xs:complexType name="star">
-  <xs:group ref="expressionLabelGroup"/>
-  <xs:attributeGroup ref="nodeAttributes"/>
-</xs:complexType>
-
-<!--
- <sum> tag properties. Used to represent a sum in the regular expression.
- The members of a sum can be any tag out of those defined in the
- <ExpressionLabelGroup> group.
--->
-<xs:complexType name="sum">
-   <xs:sequence minOccurs="2" maxOccurs="2">
-     <xs:group ref="expressionLabelGroup"/>
-   </xs:sequence>
-   <xs:attributeGroup ref="nodeAttributes"/>
-</xs:complexType>
-
-<!--
- <product> tag properties. Used to represent a product in the regular expression.
- The members of a product can be any tag out of those defined in the
- <ExpressionLabelGroup> group.
--->
-<xs:complexType name="product">
-   <xs:sequence minOccurs="2" maxOccurs="2">
-     <xs:group ref="expressionLabelGroup"/>
-   </xs:sequence>
-   <xs:attributeGroup ref="nodeAttributes"/>
-</xs:complexType>
-
-<!--
- <expressionLabel> tag properties. Used to clearly define the content of a
-label by using <product>, <sum>, <zero>, <identity> and <word> tags.
--->
-<xs:group name="expressionLabelGroup">
-  <xs:choice>
-    <xs:element name="star" type="star"/>
-    <xs:element name="word" type="atom"/>
-    <xs:element name="sum" type="sum"/>
-    <xs:element name="product" type="product"/>
-    <xs:element name="zero" type="zeroVal"/>
-    <xs:element name="identity" type="identityVal"/>
-  </xs:choice>
-</xs:group>
-
-<xs:complexType name="expressionLabel">
-  <xs:group ref="expressionLabelGroup"/>
-
-</xs:complexType>
 
 
 <!--
 <geometry> tag properties. Used to set the geometry properties of each
 element.
-- Appened to <state> node : x, y set position.
-- Appened to <transition> node :
-  * transitionType sets the type of the transition (line, arcL, arcR, curve,
-  loop).
-  * loopDirection sets the direction of the loop if it is selected.
-  * labelPosition sets the position of the label on the position. Values are
-  between 0 (near the origin state) and 100 (near the destination state).
-- Appened to <initial> or <final> node :
-  * typeshowing sets the vizualisation type of the initial/final state: circled
-  or with a transition.
-  * transitionAngle sets the direction of the transition if typeShowing is set
-  to `arrow'.
-  * labelPosition sets the position of the label on the position. Values are
-  between 0 (near the origin state) and 100 (near the destination state).
-- Appended to <automaton> node : x, y set the global offset.
--->
-
-<!--
-This type is divided in four parts, since different attributes must be used
-at different places of the automaton description.
 -->
 <xs:complexType name="geometryState">
   <xs:attribute name="x" type="xs:decimal"/>
@@ -131,11 +22,11 @@ at different places of the automaton description.
   <xs:attribute name="transitionType">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="line|arcL|arcR|curve|loop"/>
+	<xs:pattern value="EdgeL|EdgeR|ArcL|ArcR|Loop"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="loopDirection">
+  <xs:attribute name="loopDir">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
 	<xs:minInclusive value="0"/>
@@ -143,7 +34,7 @@ at different places of the automaton description.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="labelPosition">
+  <xs:attribute name="labelPos">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
 	<xs:minInclusive value="0"/>
@@ -151,17 +42,11 @@ at different places of the automaton description.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
+  <xs:attribute name="labelDist" type="xs:decimal"/>
 </xs:complexType>
 
-<xs:complexType name="geometryInitFinal">
-  <xs:attribute name="typeShowing">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="circle|arrow"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
-  <xs:attribute name="transitionAngle">
+<xs:complexType name="geometryInitial">
+  <xs:attribute name="initialDir">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
 	<xs:minInclusive value="0"/>
@@ -169,7 +54,7 @@ at different places of the automaton description.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="labelPosition">
+  <xs:attribute name="labelPos">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
 	<xs:minInclusive value="0"/>
@@ -177,9 +62,30 @@ at different places of the automaton description.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
+  <xs:attribute name="labelDist" type="xs:decimal"/>
 </xs:complexType>
 
-<xs:complexType name="geometryGlobal">
+<xs:complexType name="geometryFinal">
+  <xs:attribute name="initialDir">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+	<xs:minInclusive value="0"/>
+	<xs:maxExclusive value="360"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="labelPos">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+	<xs:minInclusive value="0"/>
+	<xs:maxInclusive value="100"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="labelDist" type="xs:decimal"/>
+</xs:complexType>
+
+<xs:complexType name="geometryAut">
   <xs:attribute name="x" type="xs:decimal"/>
   <xs:attribute name="y" type="xs:decimal"/>
   <xs:attribute name="orientation" type="xs:decimal"/>
@@ -209,23 +115,127 @@ An optional "any" attribute is used, to let the user use personal attributes.
   <xs:anyAttribute/>
 </xs:complexType>
 
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  valueType
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
 <!--
-<semiring> tag properties. Used to define the semiring of the
-automaton. This tag can be used to define a set, and operations on
-it.
+<monCompGen> describes an item of a "tuple" generator in a "simple" monoid
+-->
+<xs:complexType name="monCompGen">
+  <xs:attribute name="value" type="xs:string"/>
+</xs:complexType>
 
-The default semiring is Boolean.
+<!--
+<monGen> describes a generator of a "simple" monoid
+-->
+<xs:complexType name="monGen">
+  <xs:sequence>
+    <!-- maxOccurs=minOccurs=genDim if genKind="tuple" -->
+    <xs:element name="monCompGen" type="monCompGen" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+  <xs:attribute name="value" type="xs:string"/> <!-- use="required" if genKind="simple" -->
+</xs:complexType>
+
+<xs:simpleType name="genSortValue">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="letters|digits|alphanums|integers"/>
+  </xs:restriction>
+</xs:simpleType>
+<!--
+<genCompSort> describes the sort of one item of a <monGen> tuple.
+-->
+<xs:complexType name="genCompSort">
+  <xs:attribute name="value" type="genSortValue" use="required"/>
+</xs:complexType>
+<!--
+<genSort> describes the sort of each item of a <monGen> tuple.
+-->
+<xs:complexType name="genSort">
+  <xs:sequence>
+    <xs:element name="genCompSort" type="genCompSort" minOccurs="2" maxOccurs="unbounded"/> <!-- minOccurs=maxOccurs=genDim -->
+  </xs:sequence>
+</xs:complexType>
+<!--
+<monoid> describes a monoid.
+Can be a "unit", a "free" or a "product" monoid.
+-->
+<xs:complexType name="monoid">
+  <xs:sequence>
+    <xs:element name="writingData" minOccurs="0">
+      <xs:complexType>
+	<xs:attribute name="identitySymbol" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="genSort" type="genSort" minOccurs="0"/>
+      <!-- should be used only if type="free" and genKind="tuple" -->
+    <xs:element name="monGen" type="monGen" minOccurs="0" maxOccurs="unbounded"/>
+      <!-- should be used only if type="product" -->
+    <xs:element name="monoid" type="monoid" minOccurs="0" maxOccurs="unbounded"/> <!-- minOccurs=maxOccurs=prodDim -->
+  </xs:sequence>
+  <xs:attribute name="type" use="required">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="unit|free|product"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="genKind">
+    <!-- should be used only if type="free". -->
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="simple|tuple"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="genDescrip">
+    <!-- should be used only if "type" is set to "free". -->
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="enum|range|set"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="genSort" type="genSortValue"/>
+    <!-- should be used only if type="free", gen Descrip="enum" and genKind="simple" -->
+  <xs:attribute name="prodDim" type="xs:integer"/> <!-- should be used only if type="product" -->
+  <xs:attribute name="genDim" type="xs:integer"/> <!-- should be used only if type="free" and genKind="tuple" -->
+</xs:complexType>
+<!--
+<semiring> describes a semiring.
+Can be either a "numerical" or "series" semiring.
+Writing data can be added.
 -->
 <xs:complexType name="semiring">
-  <xs:attribute name="set" default="B">
+  <xs:sequence>
+    <xs:element name="writingData" minOccurs="0">
+      <xs:complexType>
+	<xs:attribute name="identitySymbol" use="required"/>
+	<xs:attribute name="zeroSymbol" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="semiring" type="semiring" minOccurs="0"/>
+      <!-- if type="series" then minOccurs="1" else "0" -->
+    <xs:element name="monoid" type="monoid" minOccurs="0"/>
+      <!-- if type="series" then minOccurs="1" else "0" -->
+  </xs:sequence>
+  <xs:attribute name="type" use="required">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="numerical|series"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="set">
+    <!-- if type="numerical" then use="required" else shouldn't be use -->
     <xs:simpleType>
       <xs:restriction base="xs:string">
 	<xs:pattern value="B|N|Z|Q|R"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="operations" default="classical">
+  <xs:attribute name="operations">
+    <!-- if type="numerical" then use="required" else shouldn't be use -->
     <xs:simpleType>
       <xs:restriction base="xs:string">
 	<xs:pattern value="classical|minPlus|maxPlus|minMax"/>
@@ -233,224 +243,211 @@ The default semiring is Boolean.
     </xs:simpleType>
   </xs:attribute>
 </xs:complexType>
-
 <!--
-numericalSemiring is used to enable recursive construction of complex structures
-with monoids and semirings.
+<valueType> describes the algebraic structure of an automaton or a regular expression.
 -->
-<xs:complexType name="numericalSemiring">
+<xs:complexType name="valueType">
   <xs:sequence>
-    <xs:element name="monoid" type="monoid" minOccurs="0"/>
-    <xs:choice>
-      <xs:element name="semiring" type="semiring" minOccurs="0"/>
-      <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
-    </xs:choice>
+    <xs:element name="semiring" type="semiring"/>
+    <xs:element name="monoid" type="monoid"/>
   </xs:sequence>
 </xs:complexType>
 
 
-<!--
-<monoid> tag properties. Used to define all the monoid(s) properties
-of the automaton.
-A monoid expects <generator> tags to define its generators, when available.
-The <monoid> tag can be recursively constructed to build n-product of monoid.
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  RegExp
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-Default is free monoid, with the alphabet letters.
-FIXME: generator should be broken into two elements so as to allow a default
-value.
+<!--
+  <weight>
 -->
-<xs:complexType name="generator">
+
+<xs:complexType name="weight">
+  <xs:sequence>
+    <xs:group ref="typedRegExpGroup" minOccurs="0"/>
+  </xs:sequence>
   <xs:attribute name="value" type="xs:string"/>
 </xs:complexType>
 
-<xs:complexType name="monoid">
-  <xs:choice>
-    <xs:element name="monoid" type="monoid" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="generator" type="generator" minOccurs="0" maxOccurs="unbounded"/>
-  </xs:choice>
-  <xs:attribute name="type" default="free">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="unit|free|product"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
-  <xs:attribute name="generatorType" default="letters">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="letters|digits|pair|indexed"/>
-      </xs:restriction>
-      </xs:simpleType>
-  </xs:attribute>
-  <xs:attribute name="identitySymbol" type="xs:string"/>
-</xs:complexType>
-
 <!--
-<labelType> tag properties. This tag encapsulates semiring and monoid
-definitions to entirely define the algebraic structure the automaton
-is working on. This tag is optionnal if you want to use
-default values. You can specify only one of the monoid / semiring tag,
-if necessary.
+ Terminal tags of the expression grammar.
 -->
-<xs:complexType name="typeAutomaton">
-  <xs:sequence>
-    <xs:element name="monoid" type="monoid"/>
+<xs:complexType name="monElmt">
+  <xs:sequence minOccurs="0" maxOccurs="unbounded">
     <xs:choice>
-      <xs:element name="semiring" type="semiring"/>
-      <xs:element name="numericalSemiring" type="numericalSemiring"/>
+      <!-- if monoid type="product" , minOccurs=maxOccurs=prodDim -->
+      <xs:element name="monElmt" type="monElmt"/>
+      <xs:element name="one" type="one"/>
+      <!-- else monoid type="free" -->
+      <xs:element name="monGen" type="monGen"/>
     </xs:choice>
   </xs:sequence>
+ </xs:complexType>
+<xs:complexType name="zero">
 </xs:complexType>
-
+<xs:complexType name="one">
+</xs:complexType>
 <!--
-<session> tag properties. This tag is used to encapsulate many
-automata in a single XML file.
-The session can be named using the "name" attribute. Global offset can
-be set using the <geometry> tag, and global drawing properties can be
-set using the <drawing> tag.
+ <star> tag properties. Used to add a star in the regular expression.
+ The expression of a star can be any tag out of those defined in the
+ typedRegExp group.
 -->
-<xs:element name="session">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="automaton" type="automaton" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
-      <xs:element name="drawing" type="drawing" minOccurs="0"/>
-    </xs:sequence>
-  <xs:attribute name="name" type="xs:string"/>
-  </xs:complexType>
-</xs:element>
-
-
+<xs:complexType name="star">
+  <xs:group ref="typedRegExpGroup"/>
+</xs:complexType>
 <!--
-<state> tag properties. Used to define a state in the automaton.
-This tag must be a child of <states> tag.
-The "name" attribute is required, the other are optional. Use the
-"number" attribute to set an order on states.
-State position can be set using the <geometry> tag, and drawing
-properties can be set with the <drawing> tag.
+ <sum> tag properties. Used to represent a sum in the regular expression.
+ The members of a product can be any tag out of those defined in the
+ typedRegExp group.
 -->
-<xs:complexType name="state">
+<xs:complexType name="sum">
+   <xs:sequence minOccurs="2" maxOccurs="2">
+     <xs:group ref="typedRegExpGroup"/>
+   </xs:sequence>
+</xs:complexType>
+<!--
+ <product> tag properties. Used to represent a product in the regular expression.
+ The members of a product can be any tag out of those defined in the
+ typedRegExp group.
+-->
+<xs:complexType name="product">
+   <xs:sequence minOccurs="2" maxOccurs="2">
+     <xs:group ref="typedRegExpGroup"/>
+   </xs:sequence>
+</xs:complexType>
+<!--
+ <xxxExtMul> tag properties. Used to represent a product in the regular expression.
+ The second member of a product can be any tag out of those defined in the
+ typedRegExp group.
+-->
+<xs:complexType name="ExtMul">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryState" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
+    <xs:element name="weight" type="weight"/>
+    <xs:group ref="typedRegExpGroup"/>
   </xs:sequence>
-  <xs:attribute name="name" type="xs:string" use="required"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="number" type="xs:integer"/>
 </xs:complexType>
-
-
 <!--
-<transition> tag properties. Used to define a transition between two
-states . This tag must be a child of <transitions> tag.
-The optional "weight" attribute can be used on weighted automata.
-For transducers, use the "in" and "out" attributes to define input and
-output for the transition.
-Transition type can be defined using the <geometry> tag, and drawing properties can
-be set with the <drawing> tag.
-
-When unspecified, the unlabeled transition should be considered
-labeled with the identity on the monoid.
+ <typedRegExp> or <label> describes a regular expression.
 -->
-<xs:complexType name="transition">
-  <xs:sequence>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="in" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="out" type="expressionLabel" minOccurs="0"/>
-  </xs:sequence>
-  <xs:attribute name="src" type="xs:string" use="required"/>
-  <xs:attribute name="dst" type="xs:string" use="required"/>
-  <xs:attribute name="name" type="xs:string"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-  <xs:attribute name="in" type="xs:string"/>
-  <xs:attribute name="out" type="xs:string"/>
+<xs:group name="typedRegExpGroup">
+  <xs:choice>
+    <xs:element name="star" type="star"/>
+    <xs:element name="sum" type="sum"/>
+    <xs:element name="product" type="product"/>
+    <xs:element name="zero" type="zero"/>
+    <xs:element name="one" type="one"/>
+    <xs:element name="leftExtMul" type="ExtMul"/>
+    <xs:element name="rightExtMul" type="ExtMul"/>
+    <xs:element name="monElmt" type="monElmt"/>
+  </xs:choice>
+</xs:group>
+
+<xs:complexType name="typedRegExp">
+  <xs:group ref="typedRegExpGroup"/>
 </xs:complexType>
 
+<!--
+  genSortValue gives the Sort of (an item of) a generator
+-->
 
 <!--
-<states> tag properties. Used to enumerate states in the automaton.
-Global geometry and drawing properties can be set for all states.
+<regExp> describes a regular expression.
+It takes its type (semiring, monoid) and its content (operations and atoms)
+-->
+<xs:complexType name="regExp">
+  <xs:sequence>
+    <xs:element name="valueType" type="valueType"/>
+    <xs:element name="typedRegExp" type="typedRegExp"/>
+  </xs:sequence>
+  <xs:attribute name="name" type="xs:string"/>
+</xs:complexType>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Automaton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+<!--
+<states> lists states in the automaton.
 -->
 <xs:complexType name="states">
   <xs:sequence>
     <xs:element name="state" type="state" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometryState" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
+</xs:complexType>
+<!--
+<state> describes a state in the automaton.
+It takes a id.
+It can take a name (more explicit than an id)
+It can take a key (to list in which orders the states can be processed in some algorithms)
+Geometry and drawing data can be added.
+-->
+<xs:complexType name="state">
+  <xs:sequence>
+    <xs:element name="geometricData" type="geometryState" minOccurs="0"/>
+    <xs:element name="drawingData" type="drawing" minOccurs="0"/>
+  </xs:sequence>
+  <xs:attribute name="id" type="xs:string" use="required"/>
+  <xs:attribute name="name" type="xs:string"/>
+  <xs:attribute name="key" type="xs:integer"/>
 </xs:complexType>
 
 
 <!--
-<transitions> tag properties. Used to enumerate transitions in the
-automaton, including initials and finals.
-Global geometry and drawing properties can be set for all transitions.
+<transitions> lists transitions and final/initial states.
 -->
 <xs:complexType name="transitions">
-  <xs:sequence>
-    <xs:element name="transition" type="transition" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="initial" type="initial" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="final" type="final" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
+  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+    <xs:choice>
+      <xs:element name="transition" type="transition"/>
+      <xs:element name="initial" type="initial"/>
+      <xs:element name="final" type="final"/>
+    </xs:choice>
   </xs:sequence>
 </xs:complexType>
-
-
 <!--
-<initial> tag properties. Used to set a state as initial state. This
-tag must be a child of <initials> tag.
-Geometry can be defined (the orientation of the initial transition),
-and drawing properties.
+<transition> describes a transition between two states.
+Geometry and drawing data can be added.
+-->
+<xs:complexType name="transition">
+  <xs:sequence>
+    <xs:element name="geometricData" type="geometryTrans" minOccurs="0"/>
+    <xs:element name="drawingData" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="typedRegExp"/>
+  </xs:sequence>
+  <xs:attribute name="src" type="xs:string" use="required"/>
+  <xs:attribute name="target" type="xs:string" use="required"/>
+</xs:complexType>
+<!--
+<initial> describes the initial properties of a state.
+Geometry and drawing data can be added.
 -->
 <xs:complexType name="initial">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="in" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="out" type="expressionLabel" minOccurs="0"/>
+    <xs:element name="geometricData" type="geometryInitial" minOccurs="0"/>
+    <xs:element name="drawingData" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="typedRegExp" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-  <xs:attribute name="in" type="xs:string"/>
-  <xs:attribute name="out" type="xs:string"/>
 </xs:complexType>
-
-
 <!--
-<final> tag properties. Same as below, on final states.
+<final> describes the final properties of a state.
+Geometry and drawing data can be added.
 -->
 <xs:complexType name="final">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="in" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="out" type="expressionLabel" minOccurs="0"/>
+    <xs:element name="geometricData" type="geometryFinal" minOccurs="0"/>
+    <xs:element name="drawingData" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="typedRegExp" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-  <xs:attribute name="in" type="xs:string"/>
-  <xs:attribute name="out" type="xs:string"/>
 </xs:complexType>
 
 
 <!--
-<content> tag properties. This tag is used to define the structure of
-the automaton. It's a combination of <states>, <transitions>,
-<initials> and <finals> tags. None of them are optional, and the order
-is constrained.
+<automatonStruct> describes an automaton content (states, transitions).
 -->
-<xs:complexType name="contentAutomaton">
+<xs:complexType name="automatonStruct">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="states" type="states"/>
     <xs:element name="transitions" type="transitions"/>
   </xs:sequence>
@@ -458,20 +455,46 @@ is constrained.
 
 
 <!--
-<automaton> tag properties. It can be the root of the document, or a
-child of the <session> tag. Global geometry and drawing properties can
-be set.
+<automaton> describes an automaton.
+It takes its type (semiring, monoid) and its content (states, transitions).
+It can takes geometry and drawing data.
 -->
 <xs:complexType name="automaton">
   <xs:sequence>
-    <xs:element name="labelType" type="typeAutomaton"/>
-    <xs:element name="content" type="contentAutomaton"/>
-    <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="geometricData" type="geometryAut" minOccurs="0"/>
+    <xs:element name="drawingData" type="drawing" minOccurs="0"/>
+    <xs:element name="valueType" type="valueType"/>
+    <xs:element name="automatonStruct" type="automatonStruct"/>
   </xs:sequence>
   <xs:attribute name="name" type="xs:string"/>
+  <xs:attribute name="readingDir">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="left|right"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
 </xs:complexType>
 
-<xs:element name="automaton" type="automaton"/>
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  FSMXML
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+<!--
+<fsmxml> is the document root.
+It contains global informations about the format.
+And list a set of automata and regular expressions.
+-->
+<xs:complexType name="fsmxml">
+  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+    <xs:choice>
+      <xs:element name="regExp" type="regExp"/>
+      <xs:element name="automaton" type="automaton"/>
+    </xs:choice>
+  </xs:sequence>
+  <xs:attribute name="version" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:element name="fsmxml" type="fsmxml"/>
 
 </xs:schema>

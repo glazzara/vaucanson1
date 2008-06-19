@@ -1,5 +1,10 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, new XSD file.
+	* data/vaucanson.xsd: Here.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Update XML test-suite.
 	* Makefile.am: Remove tests.
 	* b_ref.xml: Update file.
