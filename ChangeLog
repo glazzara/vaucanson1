@@ -1,5 +1,9 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Update sanity ignore.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Update TAF-Kit.
 	* src/common_automaton_commands.hh: Add contexts.
 	* src/common_commands.hh: Add contexts.
