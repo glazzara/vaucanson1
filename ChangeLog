@@ -1,5 +1,10 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Fix include/Makefile.am.
+	* include/Makefile.am: Update headers listing.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Update XML I/O Systemm #33, #89, #96, #103.
 	Overhaul of the XML I/O System (#89).
 	Avoid useless dependencies (#33).

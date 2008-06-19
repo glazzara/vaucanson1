@@ -250,8 +250,6 @@ vaucanson/algebra/implementation/series/rat/reverse_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/star_height_visitor.hh		     \
 vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx		     \
-vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh			     \
-vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx			     \
 vaucanson/algebra/implementation/series/series.hh				     \
 vaucanson/algebra/implementation/series/series.hxx				     \
 vaucanson/algebra/implementation/series/transpose.hh				     \
@@ -491,34 +489,37 @@ vaucanson/automata/implementation/transpose_view.hxx
 nobase_include_HEADERS += 			\
 vaucanson/xml/builders.hh			\
 vaucanson/xml/builders.hxx			\
-vaucanson/xml/error_handler.hh			\
-vaucanson/xml/error_handler.hxx			\
+vaucanson/xml/contexts/fmp.hh			\
+vaucanson/xml/contexts/fmp.hxx			\
+vaucanson/xml/contexts/max_plus.hh		\
+vaucanson/xml/contexts/max_plus.hxx		\
+vaucanson/xml/contexts/min_plus.hh		\
+vaucanson/xml/contexts/min_plus.hxx		\
+vaucanson/xml/contexts/rw.hh			\
+vaucanson/xml/contexts/rw.hxx			\
 vaucanson/xml/handlers.hh			\
 vaucanson/xml/handlers.hxx			\
+vaucanson/xml/handlers_base.hh			\
+vaucanson/xml/handlers_base.hxx			\
 vaucanson/xml/ios.hh				\
 vaucanson/xml/ios.hxx				\
-vaucanson/xml/node.hh				\
-vaucanson/xml/node.hxx				\
 vaucanson/xml/parsers.hh			\
 vaucanson/xml/parsers.hxx			\
-vaucanson/xml/session.hh			\
-vaucanson/xml/session.hxx			\
+vaucanson/xml/printers.hh			\
+vaucanson/xml/printers.hxx			\
+vaucanson/xml/regexp.hh				\
+vaucanson/xml/regexp.hxx			\
 vaucanson/xml/strings.hh			\
 vaucanson/xml/strings.hxx			\
 vaucanson/xml/tools.hh				\
 vaucanson/xml/tools.hxx				\
-vaucanson/xml/xerces_parser.hh			\
-vaucanson/xml/xerces_parser.hxx			\
-vaucanson/xml/xml_chooser.hh			\
-vaucanson/xml/xml_chooser.hxx			\
-vaucanson/xml/xml_converter.hh			\
-vaucanson/xml/xml_converter.hxx 		\
-vaucanson/xml/xml_converter.hxx 		\
+vaucanson/xml/xml_xerces_stream.hh 		\
+vaucanson/xml/xml_xerces_stream.hxx		\
+vaucanson/xml/xml_exp_visitor.hh		\
+vaucanson/xml/xml_exp_visitor.hxx		\
 vaucanson/xml/xmleq.hh				\
 vaucanson/xml/xmleq.hxx				\
 vaucanson/xml/XML.hh				\
-vaucanson/xml/XML.hxx				\
-vaucanson/xml/xml_xerces_stream.hh 		\
-vaucanson/xml/xml_xerces_stream.hxx
+vaucanson/xml/XML.hxx
 
 include $(top_srcdir)/include/generic_contexts.mk
