@@ -21,6 +21,8 @@
 #include <vaucanson/algorithms/sub_normalize.hh>
 #include <vaucanson/algorithms/rw_to_fmp.hh>
 #include <vaucanson/algorithms/transpose.hh>
+#include <vaucanson/xml/contexts/rw.hh>
+#include <vaucanson/xml/contexts/fmp.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
 using namespace vcsn;

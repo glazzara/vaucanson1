@@ -20,6 +20,8 @@
 #include <list>
 
 #include CONTEXT_HEADER
+#include <vaucanson/xml/contexts/rw.hh>
+#include <vaucanson/xml/contexts/fmp.hh>
 #include <vaucanson/xml/XML.hh>
 #include <vaucanson/tools/io.hh>
 #include <vaucanson/tools/dot_dump.hh>

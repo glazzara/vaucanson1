@@ -30,19 +30,23 @@ r_CPPFLAGS = $(AM_CPPFLAGS)				\
 z_max_plus_SOURCES = algorithms.cc
 z_max_plus_CPPFLAGS = $(AM_CPPFLAGS)				\
 	-DCONTEXT_HEADER="<vaucanson/z_max_plus_automaton.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::z_max_plus_automaton"
+	-DCONTEXT_NAMESPACE="vcsn::z_max_plus_automaton"	\
+	-DMIN_PLUS
 
 z_min_plus_SOURCES = algorithms.cc
 z_min_plus_CPPFLAGS = $(AM_CPPFLAGS)				\
 	-DCONTEXT_HEADER="<vaucanson/z_min_plus_automaton.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::z_min_plus_automaton"
+	-DCONTEXT_NAMESPACE="vcsn::z_min_plus_automaton"	\
+	-DMIN_PLUS
 
 tdc_SOURCES = tdc_algorithms.cc
 tdc_CPPFLAGS = $(AM_CPPFLAGS)					\
 	-DCONTEXT_HEADER="<vaucanson/fmp_transducer.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::fmp_transducer"
+	-DCONTEXT_NAMESPACE="vcsn::fmp_transducer"		\
+	-DTDC
 
 rw_tdc_SOURCES = rw_tdc_algorithms.cc
 rw_tdc_CPPFLAGS = $(AM_CPPFLAGS)				\
 	-DCONTEXT_HEADER="<vaucanson/boolean_transducer.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::boolean_transducer"
+	-DCONTEXT_NAMESPACE="vcsn::boolean_transducer"		\
+	-DRW_TDC

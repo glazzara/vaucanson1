@@ -1,5 +1,18 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Update demos.
+	Add contexts
+	* function_library/Makefile.am: Add macros.
+	* function_library/algorithms.cc: Here.
+	* function_library/rw_tdc_algorithms.cc: Here.
+	* function_library/tdc_algorithms.cc: Here.
+	* one_rule_rewriting/ORR_rw_gen.cc: Here.
+	* one_rule_rewriting/ORR_tdc_gen.cc: Here.
+	* one_rule_rewriting/fibonacci_rw_gen.cc: Here.
+	* one_rule_rewriting/fibonacci_tdc_gen.cc: Here.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Fix include/Makefile.am.
 	* include/Makefile.am: Update headers listing.
 

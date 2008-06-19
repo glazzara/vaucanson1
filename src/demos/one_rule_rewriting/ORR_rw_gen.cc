@@ -17,6 +17,7 @@
 #include <vaucanson/boolean_transducer.hh>
 #include <vaucanson/algorithms/rw_composition.hh>
 #include <vaucanson/algorithms/transpose.hh>
+#include <vaucanson/xml/contexts/rw.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
 using namespace vcsn;

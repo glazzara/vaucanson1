@@ -20,8 +20,21 @@
 #include <list>
 
 #include CONTEXT_HEADER
+#ifdef MIN_PLUS
+# include <vaucanson/xml/contexts/min_plus.hh>
+#endif
+#ifdef MAX_PLUS
+# include <vaucanson/xml/contexts/max_plus.hh>
+#endif
+#ifdef TDC
+# include <vaucanson/xml/contexts/fmp.hh>
+#endif
+#ifdef RW_TDC
+# include <vaucanson/xml/contexts/rw.hh>
+#endif
 #include <vaucanson/xml/XML.hh>
 #include <vaucanson/tools/dot_display.hh>
+
 
 using namespace CONTEXT_NAMESPACE;
 
