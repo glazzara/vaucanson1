@@ -1,5 +1,29 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Update TAF-Kit.
+	* src/common_automaton_commands.hh: Add contexts.
+	* src/common_commands.hh: Add contexts.
+	* src/edition_commands.hxx: Add contexts.
+	* src/getters.hh: Add contexts.
+	* src/getters.hxx: Add contexts.
+	* src/library_commands.hh: Add contexts.
+	* src/ratexp_commands.hh: Add contexts.
+	* tests/automata/b/ambiguous1.xml: Update file.
+	* tests/automata/b/ambiguous2.xml: Update file.
+	* tests/automata/b/b_to_transpose.xml: Update file.
+	* tests/automata/b/b_transposed.xml: Update file.
+	* tests/automata/b/non_ambiguous1.xml: Update file.
+	* tests/automata/b/void_b_automaton.xml: Update file.
+	* tests/automata/tdc/inverted_t1.xml: Update file.
+	* tests/automata/tdc/t1_compose_u1.xml: Update file.
+	* tests/automata/tdc/t2.xml: Update file.
+	* tests/automata/tdc/t2_u-compose_u2.xml: Update file.
+	* tests/automata/tdc/u2.xml: Update file.
+	* tests/automata/z/standard_c1.xml: Update file.
+	* tests/automata/z/void_z_automaton.xml: Update file.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Update manual.
 	* doc/manual/xml.tex: Here.
 

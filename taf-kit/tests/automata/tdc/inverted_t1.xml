@@ -1,31 +1,71 @@
-<automaton xmlns="http://vaucanson.lrde.epita.fr">
-  <labelType>
-    <monoid generatorType="letters" type="product">
-      <monoid generatorType="letters" type="free">
-        <generator value="x"/>
-        <generator value="y"/>
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+  <automaton>
+    <valueType>
+      <semiring operations="classical" set="B" type="numerical"/>
+      <monoid prodDim="2" type="product">
+        <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+          <monGen value="x"/>
+          <monGen value="y"/>
+        </monoid>
+        <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+          <monGen value="a"/>
+          <monGen value="b"/>
+        </monoid>
       </monoid>
-      <monoid generatorType="letters" type="free">
-        <generator value="a"/>
-        <generator value="b"/>
-      </monoid>
-    </monoid>
-    <semiring operations="classical" set="B"/>
-  </labelType>
-  <content>
-    <states>
-      <state name="s0"/>
-      <state name="s1"/>
-      <state name="s2"/>
-    </states>
-    <transitions>
-      <transition src="s0" dst="s1" in="y"/>
-      <transition src="s1" dst="s0" out="a"/>
-      <transition src="s1" dst="s2" in="x"/>
-      <transition src="s2" dst="s1" out="b"/>
-      <initial state="s1"/>
-      <final state="s0"/>
-      <final state="s1"/>
-    </transitions>
-  </content>
-</automaton>
+    </valueType>
+    <automatonStruct>
+      <states>
+        <state id="s0"/>
+        <state id="s1"/>
+        <state id="s2"/>
+      </states>
+      <transitions>
+        <transition src="s0" target="s1">
+          <label>
+            <monElmt>
+              <monElmt>
+                <monGen value="y"/>
+              </monElmt>
+              <one/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s1" target="s0">
+          <label>
+            <monElmt>
+              <one/>
+              <monElmt>
+                <monGen value="a"/>
+              </monElmt>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s1" target="s2">
+          <label>
+            <monElmt>
+              <monElmt>
+                <monGen value="x"/>
+              </monElmt>
+              <one/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s2" target="s1">
+          <label>
+            <monElmt>
+              <one/>
+              <monElmt>
+                <monGen value="b"/>
+              </monElmt>
+            </monElmt>
+          </label>
+        </transition>
+        <initial state="s1"/>
+        <final state="s0"/>
+        <final state="s1"/>
+      </transitions>
+    </automatonStruct>
+  </automaton>
+
+</fsmxml>

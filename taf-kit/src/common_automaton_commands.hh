@@ -29,6 +29,9 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
+# ifdef WITH_TWO_ALPHABETS
+#  include <vaucanson/xml/contexts/fmp.hh>
+# endif
 # include <vaucanson/xml/XML.hh>
 # include <vaucanson/tools/dot_display.hh>
 # include <vaucanson/tools/dot_dump.hh>

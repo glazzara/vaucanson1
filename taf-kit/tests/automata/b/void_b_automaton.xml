@@ -1,14 +1,18 @@
-<automaton xmlns="http://vaucanson.lrde.epita.fr">
-  <labelType>
-    <monoid generatorType="letters" type="free">
-      <generator value="a"/>
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+<automaton>
+  <valueType>
+    <semiring operations="classical" set="B" type="numerical"/>
+      <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+      <monGen value="a"/>
     </monoid>
-    <semiring operations="classical" set="B"/>
-  </labelType>
-  <content>
+  </valueType>
+  <automatonStruct>
     <states>
     </states>
     <transitions>
     </transitions>
-  </content>
+  </automatonStruct>
 </automaton>
+
+</fsmxml>

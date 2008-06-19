@@ -1,24 +1,57 @@
-<automaton xmlns="http://vaucanson.lrde.epita.fr">
-  <labelType>
-    <monoid generatorType="letters" type="free">
-      <generator value="a"/>
-      <generator value="b"/>
-      <generator value="c"/>
-      <generator value="d"/>
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+<automaton>
+  <valueType>
+    <semiring operations="classical" set="B" type="numerical"/>
+    <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+      <monGen value="a"/>
+      <monGen value="b"/>
+      <monGen value="c"/>
+      <monGen value="d"/>
     </monoid>
-    <semiring operations="classical" set="B"/>
-  </labelType>
-  <content>
+  </valueType>
+  <automatonStruct>
     <states>
-      <state name="s0"/>
-      <state name="s1"/>
-      <state name="s2"/>
+      <state id="s0"/>
+      <state id="s1"/>
+      <state id="s2"/>
     </states>
     <transitions>
-      <transition src="s1" dst="s0" label="dcba"/>
+      <transition src="s1" target="s0">
+	<label>
+	  <monElmt>
+	    <monGen value="d"/>
+	    <monGen value="c"/>
+	    <monGen value="b"/>
+	    <monGen value="a"/>
+	  </monElmt>
+	</label>
+      </transition>
       <transition src="s2" dst="s1" label="abcd+ba"/>
+      <transition src="s2" dst="s1">
+	<label>
+	  <sum>
+	    <product>
+	      <monElmt>
+		<monGen value="a"/>
+		<monGen value="b"/>
+	      </monElmt>
+	      <monElmt>
+		<monGen value="c"/>
+		<monGen value="d"/>
+	      </monElmt>
+	    </product>
+	    <monElmt>
+	      <monGen value="b"/>
+	      <monGen value="a"/>
+	    </monElmt>
+	  </sum>
+	</label>
+      </transition>
       <initial state="s1"/>
       <final state="s0"/>
     </transitions>
-  </content>
+  </automatonStruct>
 </automaton>
+
+</fsmxml>
