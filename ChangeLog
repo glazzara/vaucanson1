@@ -1,5 +1,10 @@
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	FSMXML, Update manual.
+	* doc/manual/xml.tex: Here.
+
+2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	FSMXML, Update XML data.
 	* tdc-rw/add1-rw.xml: Update file.
 	* tdc-rw/quot-3-rw.xml: Update file.

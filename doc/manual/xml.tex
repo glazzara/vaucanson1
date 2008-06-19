@@ -7,25 +7,71 @@ description at the following URL.  We just present here few examples
 of files, that should give an idea on how these files are built.
 
 \begin{lstlisting}
-<automaton name="a1" xmlns="http://vaucanson.lrde.epita.fr">
-   <content>
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+  <automaton>
+    <valueType>
+      <semiring operations="classical" set="B" type="numerical"/>
+      <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+        <monGen value="a"/>
+        <monGen value="b"/>
+      </monoid>
+    </valueType>
+    <automatonStruct>
       <states>
-         <state name="s0"/>
-         <state name="s1"/>
-         <state name="s2"/>
+        <state id="s0"/>
+        <state id="s1"/>
+        <state id="s2"/>
       </states>
       <transitions>
-         <transition src="s0" dst="s0" label="a"/>
-         <transition src="s0" dst="s0" label="b"/>
-         <transition src="s0" dst="s1" label="a"/>
-         <transition src="s1" dst="s2" label="b"/>
-         <transition src="s2" dst="s2" label="a"/>
-         <transition src="s2" dst="s2" label="b"/>
-         <initial state="s0"/>
-         <final state="s2"/>
+        <transition src="s1" target="s2">
+          <label>
+            <monElmt>
+              <monGen value="b"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s0" target="s0">
+          <label>
+            <monElmt>
+              <monGen value="b"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s0" target="s1">
+          <label>
+            <monElmt>
+              <monGen value="a"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s0" target="s0">
+          <label>
+            <monElmt>
+              <monGen value="a"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s2" target="s2">
+          <label>
+            <monElmt>
+              <monGen value="b"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition src="s2" target="s2">
+          <label>
+            <monElmt>
+              <monGen value="a"/>
+            </monElmt>
+          </label>
+        </transition>
+        <initial state="s0"/>
+        <final state="s2"/>
       </transitions>
-   </content>
-</automaton>
+    </automatonStruct>
+  </automaton>
+
 \end{lstlisting}
 
 %%% Local Variables:
