@@ -29,6 +29,7 @@ fibonacci_rw_SOURCES = fibonacci_rw_gen.cc
 fibonacci_tdc_SOURCES = fibonacci_tdc_gen.cc
 
 ORR_demo_SOURCES = ORR_demo.cc
+ORR_demo_LDADD = $(top_builddir)/lib/libkrat_exp.la
 
 ORR_rw_SOURCES = ORR_rw_gen.cc
 

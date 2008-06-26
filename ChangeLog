@@ -1,3 +1,9 @@
+2008-06-26  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add missing LDADD in demo.
+	* src/demos/algorithms/Makefile.am: .
+	* src/demos/one_rule_rewriting/Makefile.am: .
+
 2008-06-19  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Remove useless LDADD.
