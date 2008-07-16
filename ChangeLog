@@ -1,3 +1,8 @@
+2008-07-16  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix distcheck.
+	* include/generate_headers.sh: Force includes inclusion order.
+
 2008-06-26  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add missing LDADD in demo.
