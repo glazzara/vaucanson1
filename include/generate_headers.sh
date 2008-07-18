@@ -2,7 +2,7 @@
 # generate_headers.sh: this file is part of the Vaucanson project.
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2007 The Vaucanson Group.
+# Copyright (C) 2007, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -123,7 +123,7 @@ write_gpl_header()
 {
   cat > $MK_FILE <<-EOF
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2007 The Vaucanson Group.
+## Copyright (C) 2007, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -135,7 +135,7 @@ write_gpl_header()
 ##
 ## The Vaucanson Group consists of people listed in the \`AUTHORS' file.
 ##
-## NOTE: this file was generated automatically with generate_libvcsn.rb
+## NOTE: this file was generated automatically with generate_headers.sh
 
 EOF
 }

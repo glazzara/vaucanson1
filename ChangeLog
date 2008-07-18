@@ -1,3 +1,9 @@
+2008-07-18  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix some typos and copyright notices.
+	* include/generate_headers.sh,
+	* include/vaucanson/algorithms/equivalent.hh: Here.
+
 2008-07-16  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix distcheck.
