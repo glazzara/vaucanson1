@@ -250,6 +250,8 @@ vaucanson/algebra/implementation/series/rat/reverse_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/star_height_visitor.hh		     \
 vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx		     \
+vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh			     \
+vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx			     \
 vaucanson/algebra/implementation/series/series.hh				     \
 vaucanson/algebra/implementation/series/series.hxx				     \
 vaucanson/algebra/implementation/series/transpose.hh				     \

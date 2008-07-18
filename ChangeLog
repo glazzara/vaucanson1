@@ -1,5 +1,11 @@
 2008-07-18  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing files in the distribution.
+	* include/Makefile.am,
+	* src/tests/include/Makefile.am: Here.
+
+2008-07-18  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix some typos and copyright notices.
 	* include/generate_headers.sh,
 	* include/vaucanson/algorithms/equivalent.hh: Here.
