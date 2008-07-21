@@ -54,7 +54,7 @@ namespace vcsn
       using namespace xercesc;
       parser_ = XMLReaderFactory::createXMLReader();
 
-      if (check || true)
+      if (check)
       {
 	parser_->setFeature(XMLUni::fgSAX2CoreNameSpaces, true);
 	parser_->setFeature(XMLUni::fgSAX2CoreValidation, true);

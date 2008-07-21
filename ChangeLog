@@ -1,5 +1,20 @@
 2008-07-21  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Fix ErrorHandler in xml.
+	From Xerces documentation:
+	it is up to the application whether to throw an exception
+	for different types of errors and warnings. Note, however,
+	that there is no requirement that the parser continue to
+	provide useful information after a call to fatalError (in
+	other words, a SAX driver class could catch an exception
+	and report a fatalError).
+	We weren't throwing exception before.
+	* xml/XML.hh: Improve interface.
+	* xml/handlers_base.hxx: Update ErrorHandler.
+	* xml/parsers.hxx: Remove stupid hack.
+
+2008-07-21  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fix xml test-suite.
 	Fix typo closing tag <fsmxml>
 	* b_ref.xml: here.

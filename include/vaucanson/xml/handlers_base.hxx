@@ -51,6 +51,7 @@ namespace vcsn
       char* msg = xercesc::XMLString::transcode(exc.getMessage());
       std::cerr << "Fatal error: " << msg << std::endl;
       xercesc::XMLString::release(&msg);
+      throw exc;
     }
 
     namespace error

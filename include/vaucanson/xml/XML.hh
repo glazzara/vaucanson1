@@ -56,7 +56,7 @@ namespace vcsn
 	 * Load an automaton from @a in into the loader @a l.
 	 */
 	template <typename Loader>
-	void operator()(std::istream& in, Loader& l, bool = true); // FIXME set to false
+	void operator()(std::istream& in, Loader& l, bool check = true); // FIXME set to false
 
 	/**
 	 * Counter of instances of XML
