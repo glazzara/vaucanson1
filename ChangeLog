@@ -1,3 +1,13 @@
+2008-07-21  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix xml test-suite.
+	Fix typo closing tag <fsmxml>
+	* b_ref.xml: here.
+	* geometry_ref.xml: here.
+	* z_max_plus_ref.xml: here.
+	* z_min_plus_ref.xml: here.
+	* z_ref.xml: here.
+
 2008-07-18  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add missing files in the distribution.
