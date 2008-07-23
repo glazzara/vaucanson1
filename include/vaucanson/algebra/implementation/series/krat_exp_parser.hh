@@ -34,13 +34,28 @@
 /** @} */
 
 # include <vaucanson/design_pattern/design_pattern.hh>
+# include <vector>
+# include <string>
 
 namespace vcsn {
 
   namespace algebra {
-
     /** @addtogroup algebra *//** @{ */
     /** @addtogroup series *//** @{ */
+
+    struct token_representation
+    {
+      std::string		open_par;
+      std::string		close_par;
+      std::string		plus;
+      std::string		times;
+      std::string		star;
+      std::string		one;
+      std::string		zero;
+      std::string		open_weight;
+      std::string		close_weight;
+      std::vector<std::string>	spaces;
+    };
 
     /**
      * Parse a rational expression.
@@ -87,6 +102,7 @@ namespace vcsn {
     std::pair<bool, std::string>
     parse(const std::string& from,
 	  Element<S, T>& exp,
+	  token_representation tok_rep = token_representation(),
 	  bool lex_trace = false,
 	  bool parse_trace = false);
 

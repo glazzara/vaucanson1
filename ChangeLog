@@ -1,3 +1,11 @@
+2008-07-23  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add an interface to change the token representation.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh: .
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: .
+	* include/vaucanson/contexts/automaton_maker.thh: .
+	* include/vaucanson/contexts/automaton_maker.thxx: .
+
 2008-07-21  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix ErrorHandler in xml.

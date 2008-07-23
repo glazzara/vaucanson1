@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ namespace vcsn
       `-----------------*/
 
       template <class InputIterator>
-      automata_set_t 
+      automata_set_t
       make_automata_set(InputIterator begin,
 		        InputIterator end)
       {
@@ -52,7 +52,7 @@ namespace vcsn
       }
 
       template <class InputIterator>
-      automaton_t 
+      automaton_t
       make_automaton(InputIterator begin,
 		     InputIterator end)
       {
@@ -60,14 +60,14 @@ namespace vcsn
       }
 
       template <class T>
-      automaton_t 
+      automaton_t
       make_automaton(const T& alphabet)
       {
         return make_automaton(alphabet.begin(), alphabet.end());
       }
 
       template <class InputIterator>
-      automaton_letter_t 
+      automaton_letter_t
       make_automaton_letter(InputIterator begin,
 			    InputIterator end)
       {
@@ -75,14 +75,14 @@ namespace vcsn
       }
 
       template <class T>
-      automaton_letter_t 
+      automaton_letter_t
       make_automaton_letter(const T& alphabet)
       {
         return make_automaton_letter(alphabet.begin(), alphabet.end());
       }
 
       template <class InputIterator>
-      gen_automaton_t 
+      gen_automaton_t
       make_gen_automaton(InputIterator begin,
 		         InputIterator end)
       {
@@ -90,7 +90,7 @@ namespace vcsn
       }
 
       template <class T>
-      gen_automaton_t 
+      gen_automaton_t
       make_gen_automaton(const T& alphabet)
       {
         return make_gen_automaton(alphabet.begin(), alphabet.end());
@@ -102,10 +102,11 @@ namespace vcsn
       `---------------*/
 
       template <class Iterator>
-      rat_exp_t 
+      rat_exp_t
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
-		   const std::string& exp)
+		   const std::string& exp,
+		   const vcsn::algebra::token_representation tok_rep = vcsn::algebra::token_representation())
       {
 	alphabet_t	alphabet;
         for (Iterator i = begin; i != end; ++i)
@@ -115,7 +116,7 @@ namespace vcsn
         series_set_t	series (semiring, monoid);
 
         rat_exp_t	r (series);
-        std::pair<bool, std::string> p = parse(exp, r);
+        std::pair<bool, std::string> p = parse(exp, r, tok_rep);
 
         postcondition_ (not p.first, p.second);
 
@@ -123,8 +124,10 @@ namespace vcsn
       }
 
       template <class T>
-      rat_exp_t 
-      make_rat_exp(const T& alphabet, const std::string& exp)
+      rat_exp_t
+      make_rat_exp(const T& alphabet,
+		   const std::string& exp,
+		   const vcsn::algebra::token_representation tok_rep = vcsn::algebra::token_representation())
       {
         return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
       }

@@ -17,8 +17,6 @@
 
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HXX
-# include <string>
-# include <vector>
 # include <map>
 # include <queue>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
@@ -57,24 +55,59 @@ namespace vcsn
       Lexer(const std::string& from,
 	    Element<S, T>& e,
 	    yy::krat_exp_parser& parser,
-	    bool lex_trace) :
+	    bool lex_trace,
+	    const token_representation tok_rep) :
 	from_(from),
 	e_(e),
 	parser_(parser),
 	lex_trace_(lex_trace),
-	end_weight_("}"),
+	close_weight_("}"),
 	token_tab_(9)
       {
 	// default token representation
-	token_tab_[0] = "(";
-	token_tab_[1] = ")";
-	token_tab_[2] = "+";
-	token_tab_[3] = ".";
-	token_tab_[4] = "*";
-	token_tab_[5] = "1";
-	token_tab_[6] = "0";
-	token_tab_[7] = "{";
-	token_tab_[8] = " ";
+	if (tok_rep.open_par.empty())
+	  token_tab_[0] = "(";
+	else
+	  token_tab_[0] = tok_rep.open_par;
+	if (tok_rep.close_par.empty())
+	  token_tab_[1] = ")";
+	else
+	  token_tab_[1] = tok_rep.close_par;
+	if (tok_rep.plus.empty())
+	  token_tab_[2] = "+";
+	else
+	  token_tab_[2] = tok_rep.plus;
+	if (tok_rep.times.empty())
+	  token_tab_[3] = ".";
+	else
+	  token_tab_[3] = tok_rep.times;
+	if (tok_rep.star.empty())
+	  token_tab_[4] = "*";
+	else
+	  token_tab_[4] = tok_rep.star;
+	if (tok_rep.one.empty())
+	  token_tab_[5] = "1";
+	else
+	  token_tab_[5] = tok_rep.one;
+	if (tok_rep.zero.empty())
+	  token_tab_[6] = "0";
+	else
+	  token_tab_[6] = tok_rep.zero;
+	if (tok_rep.open_weight.empty())
+	  token_tab_[7] = "{";
+	else
+	  token_tab_[7] = tok_rep.open_weight;
+	if (tok_rep.close_weight.empty())
+	  close_weight_ = "}";
+	else
+	  close_weight_ = tok_rep.close_weight;
+	if (tok_rep.spaces.empty())
+	  token_tab_[8] = " ";
+	else
+	  for (int i = 0; i < tok_rep.spaces.size(); i++)
+	  {
+	    token_tab_[8 + i] = tok_rep.spaces[i];
+	  }
       }
 
       void
@@ -137,7 +170,7 @@ namespace vcsn
 	size_t bg = ++it;
 	size_t size = from_.size();
 	for (; it < size; it++)
-	  if (!from_.compare(it, end_weight_.size(), end_weight_))
+	  if (!from_.compare(it, close_weight_.size(), close_weight_))
 	  {
 	    semiring_elt_t w(e_.structure().semiring());
 	    std::string s = from_.substr(bg, it - bg);
@@ -183,7 +216,7 @@ namespace vcsn
       Element<S, T>& e_;
       yy::krat_exp_parser& parser_;
       bool lex_trace_;
-      std::string end_weight_;
+      std::string close_weight_;
       std::vector<std::string> token_tab_;
     }; // Lexer
 
@@ -191,13 +224,14 @@ namespace vcsn
     std::pair<bool, std::string>
     parse(const std::string& from,
 	Element<S, T>& exp,
+	const token_representation tok_rep = token_representation(),
 	bool lex_trace = false,
 	bool parse_trace = false)
     {
       parse_trace = parse_trace;
       int res;
       yy::krat_exp_parser parser;
-      Lexer<S, T> lex(from, exp, parser, lex_trace);
+      Lexer<S, T> lex(from, exp, parser, lex_trace, tok_rep);
       lex.lex();
       krat_exp_proxy<S, T> rexp(exp);
       res = parser.parse(rexp);
