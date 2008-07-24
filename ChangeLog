@@ -1,5 +1,21 @@
 2008-07-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Adapt taf-kit to change the token representation.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
+	  Add missing const.
+	* taf-kit/src/common.hh: .
+	* taf-kit/src/edition_commands.hxx: .
+	* taf-kit/src/getters.hh: .
+	* taf-kit/src/getters.hxx: .
+	* taf-kit/src/main.cc: .
+	* taf-kit/src/parser_options.hh: .
+	* taf-kit/src/parser_options.hxx: .
+	* taf-kit/src/pipe_getters.hh: .
+	* taf-kit/src/pipe_getters.hxx: .
+	* taf-kit/src/tdc_commands.cc: .
+
+2008-07-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Remove warning and rename token_representation.
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh: .
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: .

@@ -92,6 +92,7 @@ struct arguments_t
     const char*	args[3];
     int		n_args;
     std::vector<std::string>	alphabet;
+    vcsn::algebra::token_representation_t tok_rep;
     char	epsilon;
     std::string parser;
 # ifdef WITH_TWO_ALPHABETS

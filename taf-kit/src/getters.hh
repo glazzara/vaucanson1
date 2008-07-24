@@ -51,9 +51,9 @@ static second_alphabet_t get_second_alphabet (const std::vector<std::string>&);
 # ifndef WITH_TWO_ALPHABETS
 static rat_exp_t get_exp_complete (const std::string& exp,
 				   const std::vector<std::string>& alphabet,
-				   char /* @bug epsilon */);
+				   const vcsn::algebra::token_representation_t& tok_rep);
 
-#  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.epsilon))
+#  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.tok_rep))
 # endif // !WITH_TWO_ALPHABETS
 
 static automaton_t get_aut (const std::string& s);

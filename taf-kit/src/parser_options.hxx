@@ -20,15 +20,16 @@
 
 # include "parser_options.hh"
 
-parser_options::options_grammar::options_grammar(parser_options::alphabet_t& arg_al)
-: al(arg_al)
+parser_options::options_grammar::options_grammar(parser_options::alphabet_t& arg_al,
+						 parser_options::token_representation_t& arg_tok_rep)
+: al(arg_al), tok_rep(arg_tok_rep)
 {
 }
 
 parser_options::parser_options(const std::string& str)
 {
   using namespace boost::spirit;
-  options_grammar grammar(letters_);
+  options_grammar grammar(letters_, tok_rep_);
 
   BOOST_SPIRIT_DEBUG_NODE(grammar);
 
@@ -40,10 +41,12 @@ parser_options::parser_options(const std::string& str)
 
 const std::vector<std::string>&
 parser_options::get_letters() { return letters_; }
+const vcsn::algebra::token_representation_t&
+parser_options::get_tok_rep() { return tok_rep_; }
 
 template <typename ScannerT>
 parser_options::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)
-: ref(g.al)
+: al_ref(g.al), tok_rep_ref(g.tok_rep)
 {
   using namespace boost;
   using namespace boost::spirit;
@@ -96,19 +99,33 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   chset<> special_set = space_c | equal | obrack |
                         comma | cbrack | backs | colon;
 
-  push_letter_cb = bind(&self_t::push_letter, this, _1, _2);
+  push_letter_cb  = bind(&self_t::push_letter	 , this, _1, _2);
+  open_par_cb	  = bind(&self_t::open_par	 , this, _1, _2);
+  close_par_cb	  = bind(&self_t::close_par	 , this, _1, _2);
+  plus_cb	  = bind(&self_t::plus		 , this, _1, _2);
+  times_cb	  = bind(&self_t::times		 , this, _1, _2);
+  star_cb	  = bind(&self_t::star		 , this, _1, _2);
+  open_weight_cb  = bind(&self_t::open_weight    , this, _1, _2);
+  close_weight_cb = bind(&self_t::close_weight   , this, _1, _2);
+  push_space_cb	  = bind(&self_t::push_space     , this, _1, _2);
 
   parser_properties = !list_p(propertie, space_c);
   propertie = ( alphabet     >> equal >> alphabet_definition ) |
               ( one          >> equal >> word ) |
               ( zero         >> equal >> word ) |
-              ( special_name >> equal >> character );
+              ( opar >> equal >> character[open_par_cb] ) |
+              ( cpar >> equal >> character[close_par_cb] ) |
+              ( plus >> equal >> character[plus_cb] ) |
+              ( times >> equal >> character[times_cb] ) |
+              ( star >> equal >> character[star_cb] ) |
+              ( oweight >> equal >> character[open_weight_cb] ) |
+              ( cweight >> equal >> character[close_weight_cb] ) |
+	      ( space >> equal >> character[push_space_cb] );
   // warning: be carefull about spirit short-circuiting:
   alphabet_definition = ( head_w >> colon >> !words ) |
                         ( !(head_l >> colon) >> !letters );
   letters = *(letter[push_letter_cb]);
   words = !list_p(word[push_letter_cb], comma);
-  special_name = opar | cpar | plus | times | star | oweight | cweight | space;
   word_pair = obrack >> word >> comma >> word >> cbrack;
   word = *letter;
   character = escaped_character | unescaped_character;
@@ -116,7 +133,7 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   escaped_character = backs >> special_character;
   unescaped_character = ~special_set;
   special_character = special_set;
-}   
+}
 
 template <typename ScannerT>
 const boost::spirit::rule<ScannerT>&
@@ -128,9 +145,73 @@ parser_options::options_grammar::definition<ScannerT>::start() const
 template <typename ScannerT>
 void
 parser_options::options_grammar::definition<ScannerT>::push_letter(const char* from,
-				    const char* to)
+								   const char* to)
 {
-  ref.push_back(std::string(from, to));
+  al_ref.push_back(std::string(from, to));
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::open_par(const char* from,
+								const char* to)
+{
+  tok_rep_ref.open_par = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::close_par(const char* from,
+								 const char* to)
+{
+  tok_rep_ref.close_par = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::plus(const char* from,
+							    const char* to)
+{
+  tok_rep_ref.plus = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::times(const char* from,
+							     const char* to)
+{
+  tok_rep_ref.times = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::star(const char* from,
+							    const char* to)
+{
+  tok_rep_ref.star = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::open_weight(const char* from,
+								   const char* to)
+{
+  tok_rep_ref.open_weight = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::close_weight(const char* from,
+								    const char* to)
+{
+  tok_rep_ref.close_weight = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::push_space(const char* from,
+								  const char* to)
+{
+  tok_rep_ref.spaces.push_back(std::string(from, to));
 }
 
 #endif // ! PARSER_OPTIONS_HXX

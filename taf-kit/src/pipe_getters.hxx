@@ -33,13 +33,13 @@ automaton_getter::automaton_getter (std::string& cmd, input_format_t fmt)
 {
 }
 
-automaton_t 
+automaton_t
 automaton_getter::operator() (automaton_t& a) const
 {
   return a;
 }
 
-automaton_t 
+automaton_t
 automaton_getter::operator() (std::string& str) const
 {
   std::istringstream is (str);
@@ -67,7 +67,7 @@ automaton_getter::operator() (std::string& str) const
   return a;
 }
 
-automaton_t 
+automaton_t
 automaton_getter::operator() (command_output_status& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
@@ -109,7 +109,7 @@ automaton_getter::operator() (command_output_status& i) const
 }
 
 template<typename T>
-automaton_t 
+automaton_t
 automaton_getter::operator()(T&) const
 {
   std::cerr << command
@@ -120,16 +120,18 @@ automaton_getter::operator()(T&) const
 
 
 # ifndef WITH_TWO_ALPHABETS
-rat_exp_getter::rat_exp_getter (alphabet_t a, std::string& cmd)
+rat_exp_getter::rat_exp_getter (alphabet_t a, std::string& cmd,
+				const vcsn::algebra::token_representation_t& tok_rep)
   : alphabet (a),
-    command  (cmd)
+    command  (cmd),
+    tok_rep_ (tok_rep)
 {
 }
 
 rat_exp_t
 rat_exp_getter::operator() (std::string& str) const
 {
-  return make_rat_exp (alphabet, str);
+  return make_rat_exp (alphabet, str, tok_rep_);
 }
 
 rat_exp_t
@@ -153,7 +155,7 @@ rat_exp_getter::operator() (command_output_status& i) const
     }
 
   std::cin >> str;
-  return make_rat_exp (alphabet, str);
+  return make_rat_exp (alphabet, str, tok_rep_);
 }
 
 rat_exp_t

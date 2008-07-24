@@ -308,6 +308,7 @@ int main (int argc, char* argv[])
       parser_options p_opts(li->args.parser);
 
       li->args.alphabet = p_opts.get_letters();
+      li->args.tok_rep = p_opts.get_tok_rep();
 
       if (li->args.bench)
 	{

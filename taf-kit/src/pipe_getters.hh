@@ -53,7 +53,8 @@ class rat_exp_getter
   : public boost::static_visitor<rat_exp_t>
 {
 public:
-  rat_exp_getter (alphabet_t, std::string& command);
+  rat_exp_getter (alphabet_t, std::string& command,
+		  const vcsn::algebra::token_representation_t& tok_rep);
 
   rat_exp_t operator() (std::string& str) const;
   rat_exp_t operator() (command_output_status& i) const;
@@ -64,6 +65,7 @@ public:
 
   alphabet_t alphabet;
   std::string command;
+  const vcsn::algebra::token_representation_t& tok_rep_;
 };
 # endif // !WITH_TWO_ALPHABETS
 

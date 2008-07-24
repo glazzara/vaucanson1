@@ -102,7 +102,7 @@ namespace vcsn {
     std::pair<bool, std::string>
     parse(const std::string& from,
 	  Element<S, T>& exp,
-	  token_representation_t tok_rep = token_representation_t(),
+	  const token_representation_t tok_rep = token_representation_t(),
 	  bool lex_trace = false,
 	  bool parse_trace = false);
 

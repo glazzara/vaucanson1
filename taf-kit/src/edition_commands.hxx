@@ -176,7 +176,7 @@ namespace edition_commands
   }
 
   /// Add a transition between states of @c a .
-  static void add_transition (automaton_t& a)
+  static void add_transition (automaton_t& a, const arguments_t& args)
   {
     echo_ ("  Add a transition from state: ");
     hstate_t n_from = get_state (a);
@@ -193,7 +193,7 @@ namespace edition_commands
       throw cancel ();
     a.add_series_transition (n_from, n_to,
 			     make_rat_exp (a.structure ().series ().monoid ().alphabet (),
-					   std::string (ratexp)));
+					   std::string (ratexp), args.tok_rep));
 # else
     echo_ (" First componenent labeled by the word: ");
     char first_label[1024];
@@ -322,7 +322,7 @@ namespace edition_commands
   }
 
   /// Interact with the user to let her choose an action.
-  static bool ask_and_treat_choice (automaton_t& a)
+  static bool ask_and_treat_choice (automaton_t& a, const arguments_t& args)
   {
     echo ("Please choose your action:" << std::endl
 	  << "  1. Add states." << std::endl
@@ -349,7 +349,7 @@ namespace edition_commands
 	CHOICE_COMMAND (1, add_state (a));
 	CHOICE_COMMAND (2, del_state (a));
 
-	CHOICE_COMMAND (3, add_transition (a));
+	CHOICE_COMMAND (3, add_transition (a, args));
 	CHOICE_COMMAND (4, del_transition (a));
 
 	CHOICE_COMMAND (5, set_unset_initial_final (a, set_to_be, initial));
@@ -372,7 +372,7 @@ namespace edition_commands
   }
 
   /// Main loop for edit_automaton.
-  static void main_loop (automaton_t& a)
+  static void main_loop (automaton_t& a, const arguments_t& args)
   {
     char* term = getenv ("TERM");
     char* cl = 0;
@@ -384,7 +384,7 @@ namespace edition_commands
       if (cl)
 	tputs (cl, 1, putchar);
       print_automaton (a);
-    } while (not ask_and_treat_choice (a));
+    } while (not ask_and_treat_choice (a, args));
   }
 
 }
@@ -411,7 +411,7 @@ static int edit_automaton_command (const arguments_t& args)
   input >> automaton_loader (a, string_out (), XML ());
   input.close ();
 
-  edition_commands::main_loop (a);
+  edition_commands::main_loop (a, args);
 
   std::ofstream output (args.args[1]);
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
@@ -443,7 +443,7 @@ static int define_automaton_command (const arguments_t& args)
 				  get_second_alphabet (args.alphabet2));
 # endif // !WITH_TWO_ALPHABETS
 
-  edition_commands::main_loop (a);
+  edition_commands::main_loop (a, args);
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
   output.close ();
 

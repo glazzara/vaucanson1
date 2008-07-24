@@ -70,16 +70,19 @@ public:
 
   const std::vector<std::string>&
   get_letters();
+  const vcsn::algebra::token_representation_t&
+  get_tok_rep();
 
 private:
 
   // type helpers
   typedef std::vector<std::string> alphabet_t;
+  typedef vcsn::algebra::token_representation_t token_representation_t;
 
-  typedef struct options_grammar : public boost::spirit::grammar<options_grammar>
+  struct options_grammar : public boost::spirit::grammar<options_grammar>
   {
     // CTOR
-    options_grammar(alphabet_t& al);
+    options_grammar(alphabet_t& al, token_representation_t& tok_rep);
 
     template <typename ScannerT>
     struct definition
@@ -100,9 +103,18 @@ private:
 
       // callbacks
       boost::function<void(const char*, const char*)> push_letter_cb;
+      boost::function<void(const char*, const char*)> open_par_cb;
+      boost::function<void(const char*, const char*)> close_par_cb;
+      boost::function<void(const char*, const char*)> plus_cb;
+      boost::function<void(const char*, const char*)> times_cb;
+      boost::function<void(const char*, const char*)> star_cb;
+      boost::function<void(const char*, const char*)> open_weight_cb;
+      boost::function<void(const char*, const char*)> close_weight_cb;
+      boost::function<void(const char*, const char*)> push_space_cb;
 
       // reference to parser_options creator
-      parser_options::alphabet_t& ref;
+      parser_options::alphabet_t& al_ref;
+      parser_options::token_representation_t& tok_rep_ref;
 
       /**
        * Callback function called to push a new letter into
@@ -114,12 +126,103 @@ private:
       void
       push_letter(const char* from,
 		  const char* to);
+
+      /**
+       * Callback function called to set open_par token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      open_par(const char* from,
+	       const char* to);
+
+      /**
+       * Callback function called to set close_par token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      close_par(const char* from,
+	        const char* to);
+
+      /**
+       * Callback function called to set plus token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      plus(const char* from,
+	   const char* to);
+
+      /**
+       * Callback function called to set times token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      times(const char* from,
+	    const char* to);
+
+      /**
+       * Callback function called to set star token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      star(const char* from,
+	   const char* to);
+
+      /**
+       * Callback function called to set open_weight token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      open_weight(const char* from,
+		  const char* to);
+
+      /**
+       * Callback function called to set close_weight token representation
+       * into the token_representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      close_weight(const char* from,
+		   const char* to);
+
+      /**
+       * Callback function called to push a new space token representation
+       * into the token representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      push_space(const char* from,
+		 const char* to);
+
     };
 
     parser_options::alphabet_t& al;
+    parser_options::token_representation_t& tok_rep;
   };
 
   alphabet_t letters_;
+  token_representation_t tok_rep_;
 
 };
 

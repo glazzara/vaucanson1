@@ -73,7 +73,7 @@ DEFINE_COMMAND (NAME (evaluation)
 		  evaluation (get_aut(args.args[1]),
 			      boolean_automaton::make_rat_exp(
 				get_first_alphabet (args.alphabet),
-				args.args[2])) << std::endl)
+				args.args[2], args.tok_rep)) << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation_fmp)
