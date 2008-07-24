@@ -1,3 +1,15 @@
+2008-07-24  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add a new option --parser to taf-kit.
+	* taf-kit/src/common.hh: Add attributes to args.
+	* taf-kit/src/getters.hh,
+	* taf-kit/src/getters.hxx: Improve get_alphabet.
+	* taf-kit/src/main.cc: Add new options, adapt existing ones.
+	* taf-kit/src/parser_options.hh,
+	* taf-kit/src/parser_options.hxx: New.
+	* taf-kit/src/predefined_alphabets.hh: Reintroduce ascii and
+	digits alphabets.
+
 2008-07-23  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add an interface to change the token representation.

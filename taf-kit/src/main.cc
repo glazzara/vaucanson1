@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 /**
  * @file main.cc
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
+ *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
  * Main file, common to all TAF-Kit binaries.
  */
@@ -33,6 +34,7 @@
 #include "predefined_alphabets.hh"
 #include "commands.hh"
 #include "interface.hh"
+#include "parser_options.hh"
 
 /**
  * Base info for the program.
@@ -94,19 +96,34 @@ namespace
       "Set the first alphabet for rational expressions", 0 },
     { "alphabet2",	'A', "ALPHABET", 0,
       "Set the second alphabet for rational expressions", 0 },
+    { "parser1",	'p', "OPTIONS", 0,
+      "Set the first parser options for rational expressions", 0 },
+    { "parser2",	'P', "OPTIONS", 0,
+      "Set the second parser options for rational expressions", 0 },
+    { "epsilon1",	'e', "EPS", 0,
+      "Set the first parser epsilon representation for rational expressions", 0 },
+    { "epsilon2",	'E', "EPS", 0,
+      "Set the second parser epsilon representation for rational expressions", 0 },
+    { "null1",		'n', "NULL", 0,
+      "Set the first parser zero representation for rational expressions", 0 },
+    { "null2",		'N', "NULL", 0,
+      "Set the second parser zero representation for rational expressions", 0 },
 #else /* ! WITH_TWO_ALPHABETS */
     { "alphabet",		'a', "ALPHABET", 0,
       "Set the working alphabet for rational expressions", 0 },
+    { "parser",			'p', "OPTIONS", 0,
+      "Set the working parser options for rational expressions", 0 },
+    { "epsilon",		'e', "EPS", 0,
+      "Set the working parser epsilon representation for rational expressions", 0 },
+    { "null",			'n', "NULL", 0,
+      "Set the working parser zero representation for rational expressions", 0 },
 #endif /* ! WITH_TWO_ALPHABETS */
-
-#if 0 /* @bug Epsilon is written in hard in VCSN */
-    { "epsilon",		'e', "EPSILON", 0,
-      "Set the letter which represents the empty word", 0 },
-#endif /* 0 */
 
     { 0, 0, 0, 0, "The following alphabets are predefined:\n"
       "	 `letters': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `alpha': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
+      "	 `digits': Use [0-9] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
+      "	 `ascii': Use ascii characters as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `ab': Use `ab' as the alphabet, " DEFAULT_EPSILON " as epsilon. Never use the \" character.", 0 },
 
     { 0, 0, 0, 0, 0, 0 }
@@ -116,51 +133,74 @@ namespace
   {
     const char*	name;
     const char*	alphabet;
-    char	epsilon;
-  } predefined_alphabets[] = { { "letters", ALPHABET_AZ, DEFAULT_EPSILON[0] },
-			       { "alpha", ALPHABET_AZAZ, DEFAULT_EPSILON[0] },
-			       { "ab", ALPHABET_AB, DEFAULT_EPSILON[0] },
+    const char*	epsilon;
+  } predefined_alphabets[] = { { "letters", ALPHABET_AZ, DEFAULT_EPSILON },
+			       { "alpha", ALPHABET_AZAZ, DEFAULT_EPSILON },
+			       { "ab", ALPHABET_AB, DEFAULT_EPSILON },
+			       { "digits", ALPHABET_DIGITS, DEFAULT_EPSILON },
+			       { "ascii", ALPHABET_ASCII, DEFAULT_EPSILON },
 			       { 0, 0, 0 } };
 
   error_t parse_opt (int key, char* arg, argp_state* state)
   {
+    bool found = false;
     arguments_t& args = *(static_cast <arguments_t*> (state->input));
 
     switch (key)
     {
       case 'a':
       case 'A':
-	if (key == 'a')
-	  args.alphabet = arg;
-#ifdef WITH_TWO_ALPHABETS
-	else
-	  args.alphabet2 = arg;
-#endif
+	found = false;
 	for (const alphabet* alpha = predefined_alphabets; alpha->name; ++alpha)
+	{
 	  if (std::string (alpha->name) == arg)
 	  {
 	    if (key == 'a')
 	    {
-	      args.alphabet = alpha->alphabet;
-	      args.epsilon = alpha->epsilon;
+	      args.add_parser_option("ALPHABET", alpha->alphabet);
+	      args.add_parser_option("ONE", alpha->epsilon);
 	    }
 #ifdef WITH_TWO_ALPHABETS
 	    else
 	    {
-	      args.alphabet2 = alpha->alphabet;
-	      args.epsilon2 = alpha->epsilon;
+	      args.add_parser2_option("ALPHABET", alpha->alphabet);
+	      args.add_parser2_option("ONE", alpha->epsilon);
 	    }
 #endif /* ! WITH_TWO_ALPHABETS */
+	    found = true;
 	    break;
 	  }
+	}
+	if (!found)
+	{
+	  if (key == 'a')
+	    args.add_parser_option("ALPHABET", arg);
+#ifdef WITH_TWO_ALPHABETS
+	  else
+	    args.add_parser2_option("ALPHABET", arg);
+#endif /* ! WITH_TWO_ALPHABETS */
+	}
 	break;
-#if 0 /* @bug Not implemented */
+      case 'p':
+	args.add_parser_option(NULL, arg);
+	break;
       case 'e':
-	if (arg[0] and arg[1])
-	  argp_usage (state);
-	args.epsilon = arg[0];
+	args.add_parser_option("ONE", arg);
 	break;
-#endif /* 0 */
+      case 'n':
+	args.add_parser_option("ZERO", arg);
+	break;
+#ifdef WITH_TWO_ALPHABETS
+      case 'P':
+	args.add_parser2_option(NULL, arg);
+	break;
+      case 'E':
+	args.add_parser2_option("ONE", arg);
+	break;
+      case 'N':
+	args.add_parser_option("ZERO", arg);
+	break;
+#endif /* ! WITH_TWO_ALPHABETS */
       case 'l':
 	list_commands ();
 	exit (0);
@@ -265,6 +305,9 @@ int main (int argc, char* argv[])
        li != command_list.end (); ++li)
     {
       argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
+      parser_options p_opts(li->args.parser);
+
+      li->args.alphabet = p_opts.get_letters();
 
       if (li->args.bench)
 	{

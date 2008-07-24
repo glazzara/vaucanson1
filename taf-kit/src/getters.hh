@@ -42,15 +42,15 @@ using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 
 # ifndef WITH_TWO_ALPHABETS
-static alphabet_t get_alphabet (const char* alphabet);
+static alphabet_t get_alphabet (const std::vector<std::string>&);
 # else
-static first_alphabet_t get_first_alphabet (const char* alphabet);
-static second_alphabet_t get_second_alphabet (const char* alphabet);
+static first_alphabet_t get_first_alphabet (const std::vector<std::string>&);
+static second_alphabet_t get_second_alphabet (const std::vector<std::string>&);
 # endif // !WITH_TWO_ALPHABETS
 
 # ifndef WITH_TWO_ALPHABETS
 static rat_exp_t get_exp_complete (const std::string& exp,
-				   const char* alphabet,
+				   const std::vector<std::string>& alphabet,
 				   char /* @bug epsilon */);
 
 #  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.epsilon))

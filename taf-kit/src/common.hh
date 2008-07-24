@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 /**
  * @file common.hh
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
+ *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
  * This file contains common declarations for all files.
  */
@@ -90,11 +91,13 @@ struct arguments_t
     std::string	progname;
     const char*	args[3];
     int		n_args;
-    const char*	alphabet;
+    std::vector<std::string>	alphabet;
     char	epsilon;
+    std::string parser;
 # ifdef WITH_TWO_ALPHABETS
-    const char*	alphabet2;
+    std::vector<std::string>	alphabet2;
     char	epsilon2;
+    std::string parser2;
 # endif /* ! WITH_TWO_ALPHABETS */
     bool	verbose;
     bool	bench;
@@ -110,6 +113,23 @@ struct arguments_t
 
     input_format_t	input_type;
     output_format_t	output_type;
+
+# define ADD_OPTION(x) \
+    void add_##x##_option(const char* type, const char* str) \
+    { \
+      if (x != "") \
+        x += " "; \
+      if (type) \
+        x += std::string(type) + "="; \
+      x += str; \
+    }
+
+    ADD_OPTION(parser)
+# ifdef WITH_TWO_ALPHABETS
+    ADD_OPTION(parser2)
+# endif /* ! WITH_TWO_ALPHABETS */
+
+# undef ADD_OPTION
 };
 
 #endif /* !COMMON_HH */

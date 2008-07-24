@@ -1,8 +1,8 @@
-// predefined_alphabets.hh: this file is part of Vaucanson.
+// predefined_alphabets.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,23 +14,27 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #ifndef PREDEFINED_ALPHABETS_HH
 # define PREDEFINED_ALPHABETS_HH
 
 /**
  * @file predefined_alphabets.hh
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
+ *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
  * Predefined alphabets as macros.
  */
 
+// FIXME: " and \0 (\\0)
 # define ALPHABET_ASCII							\
-  " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+  "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 # define ALPHABET_AZ				\
   "abcdefghijklmnopqrstuvwxyz"
 # define ALPHABET_AZAZ						\
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ALPHABET_AB "ab"
+# define ALPHABET_DIGITS "0123456789"
 
 # define DEFAULT_EPSILON "1"
 

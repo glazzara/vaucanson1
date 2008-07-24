@@ -21,6 +21,7 @@
 /**
  * @file getters.hxx
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
+ *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
  * This file contains the implementation of the getters.
  * @note Should not be put in a .cc file, as CONTEXT_* macros
@@ -52,16 +53,16 @@ using namespace vcsn::tools;
   | Getters for alphabet, RatExp and automaton.  |
   `---------------------------------------------*/
 # define DEFINE_GET_ALPHABET(Name, Type)			\
-static Type Name (const char* alphabet)				\
+static Type Name (const std::vector<std::string>& al)		\
 {								\
   Type a;							\
-  if (not (alphabet and alphabet[0]))				\
+  if (al.empty())					\
   {								\
     warn ("Error: alphabet should be explicitly defined.");	\
     exit (-2);							\
   }								\
-  for (int i = 0; alphabet[i]; ++i)				\
-    a.insert (alphabet[i]);					\
+  for (std::vector<std::string>::const_iterator i = al.begin(); i != al.end(); ++i) \
+    a.insert ((*i).c_str()[0]);					\
   return a;							\
 }
 
@@ -81,7 +82,7 @@ DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t);
 # ifndef WITH_TWO_ALPHABETS
 /// Getter for RatExp.
 static rat_exp_t get_exp_complete (const std::string& exp,
-				   const char* alphabet,
+				   const std::vector<std::string>& alphabet,
 				   char /* @bug epsilon */)
 {
 # ifdef GLOBAL_RESULT
