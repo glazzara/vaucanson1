@@ -1,3 +1,11 @@
+2008-07-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Remove warning and rename token_representation.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh: .
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: .
+	* include/vaucanson/contexts/automaton_maker.thh: .
+	* include/vaucanson/contexts/automaton_maker.thxx: .
+
 2008-07-24  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add a new option --parser to taf-kit.

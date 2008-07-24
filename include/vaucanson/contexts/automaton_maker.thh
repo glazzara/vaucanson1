@@ -53,12 +53,12 @@ namespace vcsn
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
 		   const std::string& exp = "0",
-		   const vcsn::algebra::token_representation tok_rep = vcsn::algebra::token_representation());
+		   const vcsn::algebra::token_representation_t tok_rep = vcsn::algebra::token_representation_t());
 
       template <class T>
       rat_exp_t
       make_rat_exp(const T& alphabet, const std::string& exp = "0",
-		   const vcsn::algebra::token_representation tok_rep = vcsn::algebra::token_representation());
+		   const vcsn::algebra::token_representation_t tok_rep = vcsn::algebra::token_representation_t());
 
       template <class SeriesSet, class SeriesImpl>
       automaton_t

@@ -56,7 +56,7 @@ namespace vcsn
 	    Element<S, T>& e,
 	    yy::krat_exp_parser& parser,
 	    bool lex_trace,
-	    const token_representation tok_rep) :
+	    const token_representation_t tok_rep) :
 	from_(from),
 	e_(e),
 	parser_(parser),
@@ -104,7 +104,7 @@ namespace vcsn
 	if (tok_rep.spaces.empty())
 	  token_tab_[8] = " ";
 	else
-	  for (int i = 0; i < tok_rep.spaces.size(); i++)
+	  for (unsigned i = 0; i < tok_rep.spaces.size(); i++)
 	  {
 	    token_tab_[8 + i] = tok_rep.spaces[i];
 	  }
@@ -224,7 +224,7 @@ namespace vcsn
     std::pair<bool, std::string>
     parse(const std::string& from,
 	Element<S, T>& exp,
-	const token_representation tok_rep = token_representation(),
+	const token_representation_t tok_rep = token_representation_t(),
 	bool lex_trace = false,
 	bool parse_trace = false)
     {

@@ -43,7 +43,7 @@ namespace vcsn {
     /** @addtogroup algebra *//** @{ */
     /** @addtogroup series *//** @{ */
 
-    struct token_representation
+    struct token_representation_t
     {
       std::string		open_par;
       std::string		close_par;
@@ -102,7 +102,7 @@ namespace vcsn {
     std::pair<bool, std::string>
     parse(const std::string& from,
 	  Element<S, T>& exp,
-	  token_representation tok_rep = token_representation(),
+	  token_representation_t tok_rep = token_representation_t(),
 	  bool lex_trace = false,
 	  bool parse_trace = false);
 
