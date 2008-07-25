@@ -38,7 +38,9 @@ COMMON_SOURCES = commands.hh			\
 		 pipe_getters.hh 		\
 		 pipe_getters.hxx 		\
 		 pipe_writers.hh 		\
-		 pipe_writers.hxx
+		 pipe_writers.hxx		\
+		 parser_options.hh		\
+		 parser_options.hxx
 
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\

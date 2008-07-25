@@ -310,6 +310,12 @@ int main (int argc, char* argv[])
       li->args.alphabet = p_opts.get_letters();
       li->args.tok_rep = p_opts.get_tok_rep();
 
+#ifdef WITH_TWO_ALPHABETS
+      parser_options p_opts2(li->args.parser2);
+
+      li->args.alphabet2 = p_opts2.get_letters();
+#endif
+
       if (li->args.bench)
 	{
 	  args.bench = li->args.bench;

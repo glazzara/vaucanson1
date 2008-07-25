@@ -1,3 +1,9 @@
+2008-07-25  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix transducers handling by taf-kit.
+	* taf-kit/src/Makefile.am: Add two files to the distribution.
+	* taf-kit/src/main.cc: Parse --parser2 options.
+
 2008-07-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Adapt taf-kit to change the token representation.
