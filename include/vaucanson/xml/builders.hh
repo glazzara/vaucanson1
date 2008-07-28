@@ -41,6 +41,32 @@ namespace vcsn
   namespace xml
   {
     /**
+     * monGenHandler
+     */
+    template <typename T>
+    class monGenHandler : public Handler
+    {
+      public:
+	monGenHandler (xercesc::SAX2XMLReader* parser,
+		     Handler& root,
+		     T& monoid,
+		     const XMLCh* value = 0);
+
+	void
+	start (const XMLCh* const uri,
+		      const XMLCh* const localname,
+		      const XMLCh* const qname,
+		      const xercesc::Attributes& attrs);
+	void
+	end (const XMLCh* const uri,
+		    const XMLCh* const localname,
+		    const XMLCh* const qname);
+      private:
+	T&		monoid_;
+	const XMLCh*	value_;
+    };
+
+    /**
      * FreeMonoidHandler
      */
     template <typename T>
@@ -63,6 +89,7 @@ namespace vcsn
       private:
 	T&		monoid_;
 
+	Handler*	mongenh_;
 	UnsupHandler	unsuph_;
     };
 

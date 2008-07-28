@@ -1,3 +1,9 @@
+2008-07-28  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Prepare XML input system to support pair context.
+	* builders.hh: Add monGenHandler.
+	* builders.hxx: Add monGenHandler.
+
 2008-07-25  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix transducers handling by taf-kit.

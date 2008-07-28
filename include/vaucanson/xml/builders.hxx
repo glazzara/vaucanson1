@@ -28,6 +28,53 @@ namespace vcsn
   namespace xml
   {
     /**
+     * monGenHandler
+     */
+    template <typename T>
+    monGenHandler<T>::monGenHandler (xercesc::SAX2XMLReader* parser,
+				 Handler& root,
+				 T& monoid,
+				 const XMLCh* value)
+      : Handler(parser, root),
+	monoid_(monoid),
+	value_(value)
+    {
+    }
+
+    template <typename T>
+    void
+    monGenHandler<T>::start (const XMLCh* const,
+				 const XMLCh* const localname,
+				 const XMLCh* const,
+				 const xercesc::Attributes&)
+    {
+      error::token(localname);
+    }
+
+    template <typename T>
+    void
+    monGenHandler<T>::end (const XMLCh* const,
+			       const XMLCh* const localname,
+			       const XMLCh* const)
+    {
+      if (xercesc::XMLString::equals(eq_.monGen, localname))
+      {
+	if (value_)
+	{
+	  std::string letter = xmlstr(value_);
+	  builders::insert_generator(monoid_.alphabet(), letter);
+	  parser_->setContentHandler(&root_);
+	}
+	else
+	{
+	  error::missattrs(localname, "value");
+	}
+      }
+      else
+	error::token(localname);
+    }
+
+    /**
      * FreeMonoidHandler
      */
     template <typename T>
@@ -36,6 +83,7 @@ namespace vcsn
 				 T& monoid)
       : Handler(parser, root),
 	monoid_(monoid),
+	mongenh_(0),
 	unsuph_(parser, *this)
     {
     }
@@ -50,8 +98,10 @@ namespace vcsn
       if (xercesc::XMLString::equals(eq_.monGen, localname))
       {
 	const XMLCh* value = tools::get_attribute(attrs, "value");
-	std::string letter = xmlstr(value);
-	builders::insert_generator(monoid_.alphabet(), letter);
+	if (mongenh_)
+	  delete mongenh_;
+	mongenh_ = new monGenHandler<T>(parser_, *this, monoid_, value);
+	parser_->setContentHandler(mongenh_);
       }
       else if (xercesc::XMLString::equals(eq_.writingData, localname))
 	parser_->setContentHandler(&unsuph_);
@@ -66,7 +116,11 @@ namespace vcsn
 			       const XMLCh* const)
     {
       if (xercesc::XMLString::equals(eq_.monoid, localname))
+      {
+	if (mongenh_)
+	  delete mongenh_;
 	parser_->setContentHandler(&root_);
+      }
       else if (!xercesc::XMLString::equals(eq_.monGen, localname))
 	error::token(localname);
     }
