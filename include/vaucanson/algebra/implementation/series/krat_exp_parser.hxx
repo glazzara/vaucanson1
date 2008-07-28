@@ -19,10 +19,10 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HXX
 # include <map>
 # include <queue>
+# include <set>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
-# include <vaucanson/misc/usual_escaped_characters.hh>
 
 // Declaration to link with libkrat_exp
 namespace yy
@@ -108,6 +108,28 @@ namespace vcsn
 	  {
 	    token_tab_[8 + i] = tok_rep.spaces[i];
 	  }
+
+# ifndef VCSN_NDEBUG
+	std::string::const_iterator sit;
+	semiring_elt_t ww(e_.structure().semiring());
+	sit = close_weight_.begin();
+	if (parse_weight(ww, close_weight_, sit))
+	  std::cerr << "Warning : the token '" << close_weight_
+		    << "' is already defined as a weight." << std::endl;
+	sit = token_tab_[7].begin();
+	if (parse_weight(ww, token_tab_[7], sit))
+	  std::cerr << "Warning : the token '" << token_tab_[7]
+		    << "' is already defined as a weight." << std::endl;
+	for (unsigned i = 0; i < token_tab_.size(); i++)
+	{
+	  sit = token_tab_[i].begin();
+	  monoid_elt_t w(e_.structure().monoid());
+	  if (parse_word(w, token_tab_[i], sit, std::set<char>()))
+	    std::cerr << "Warning : the token '" << token_tab_[i]
+		      << "' is already defined as a word." << std::endl;
+	}
+# endif // !VCSN_NDEBUG
+
       }
 
       void
@@ -146,11 +168,10 @@ namespace vcsn
       void
       insert_word(size_t curr, size_t it)
       {
-	std::set<char> escaped = misc::usual_escaped_characters();
 	monoid_elt_t w(e_.structure().monoid());
 	std::string s = from_.substr(curr, it - curr);
 	std::string::const_iterator sit = s.begin();
-	if (parse_word(w, s, sit, escaped))
+	if (parse_word(w, s, sit, std::set<char>()))
 	{
 	  Element<S, T> ww = Element<S, T>(e_.structure(), w.value());
 	  krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(ww);
@@ -166,7 +187,6 @@ namespace vcsn
       void
       insert_weight(size_t& it)
       {
-	std::set<char> escaped = misc::usual_escaped_characters();
 	size_t bg = ++it;
 	size_t size = from_.size();
 	for (; it < size; it++)

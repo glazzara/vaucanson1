@@ -1,3 +1,8 @@
+2008-07-28  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add some warnings to taf-kit.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: .
+
 2008-07-28  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Prepare XML input system to support pair context.
