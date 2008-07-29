@@ -33,7 +33,6 @@
   "abcdefghijklmnopqrstuvwxyz"
 # define ALPHABET_AZAZ						\
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define ALPHABET_AB "ab"
 # define ALPHABET_DIGITS "0123456789"
 
 # define DEFAULT_EPSILON "1"

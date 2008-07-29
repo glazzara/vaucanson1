@@ -100,31 +100,18 @@ namespace
       "Set the first parser options for rational expressions", 0 },
     { "parser2",	'P', "OPTIONS", 0,
       "Set the second parser options for rational expressions", 0 },
-    { "epsilon1",	'e', "EPS", 0,
-      "Set the first parser epsilon representation for rational expressions", 0 },
-    { "epsilon2",	'E', "EPS", 0,
-      "Set the second parser epsilon representation for rational expressions", 0 },
-    { "null1",		'n', "NULL", 0,
-      "Set the first parser zero representation for rational expressions", 0 },
-    { "null2",		'N', "NULL", 0,
-      "Set the second parser zero representation for rational expressions", 0 },
 #else /* ! WITH_TWO_ALPHABETS */
     { "alphabet",		'a', "ALPHABET", 0,
       "Set the working alphabet for rational expressions", 0 },
     { "parser",			'p', "OPTIONS", 0,
       "Set the working parser options for rational expressions", 0 },
-    { "epsilon",		'e', "EPS", 0,
-      "Set the working parser epsilon representation for rational expressions", 0 },
-    { "null",			'n', "NULL", 0,
-      "Set the working parser zero representation for rational expressions", 0 },
 #endif /* ! WITH_TWO_ALPHABETS */
 
     { 0, 0, 0, 0, "The following alphabets are predefined:\n"
       "	 `letters': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `alpha': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `digits': Use [0-9] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `ascii': Use ascii characters as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `ab': Use `ab' as the alphabet, " DEFAULT_EPSILON " as epsilon. Never use the \" character.", 0 },
+      "	 `ascii': Use ascii characters as the alphabet, " DEFAULT_EPSILON " as epsilon\n", 0},
 
     { 0, 0, 0, 0, 0, 0 }
   };
@@ -136,7 +123,6 @@ namespace
     const char*	epsilon;
   } predefined_alphabets[] = { { "letters", ALPHABET_AZ, DEFAULT_EPSILON },
 			       { "alpha", ALPHABET_AZAZ, DEFAULT_EPSILON },
-			       { "ab", ALPHABET_AB, DEFAULT_EPSILON },
 			       { "digits", ALPHABET_DIGITS, DEFAULT_EPSILON },
 			       { "ascii", ALPHABET_ASCII, DEFAULT_EPSILON },
 			       { 0, 0, 0 } };
@@ -184,21 +170,9 @@ namespace
       case 'p':
 	args.add_parser_option(NULL, arg);
 	break;
-      case 'e':
-	args.add_parser_option("ONE", arg);
-	break;
-      case 'n':
-	args.add_parser_option("ZERO", arg);
-	break;
 #ifdef WITH_TWO_ALPHABETS
       case 'P':
 	args.add_parser2_option(NULL, arg);
-	break;
-      case 'E':
-	args.add_parser2_option("ONE", arg);
-	break;
-      case 'N':
-	args.add_parser_option("ZERO", arg);
 	break;
 #endif /* ! WITH_TWO_ALPHABETS */
       case 'l':
