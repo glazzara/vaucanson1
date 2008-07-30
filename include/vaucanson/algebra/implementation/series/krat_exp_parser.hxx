@@ -36,7 +36,7 @@ namespace yy
     void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_token(int i, std::string* str);
-    int parse(vcsn::algebra::krat_exp_virtual& rexp);
+    int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
 
     // Attributs
     token_queue* tok_q_;
@@ -56,13 +56,15 @@ namespace vcsn
 	    Element<S, T>& e,
 	    yy::krat_exp_parser& parser,
 	    bool lex_trace,
-	    const token_representation_t tok_rep) :
+	    const token_representation_t tok_rep,
+	    std::string& error) :
 	from_(from),
 	e_(e),
 	parser_(parser),
 	lex_trace_(lex_trace),
 	close_weight_("}"),
-	token_tab_(9)
+	token_tab_(9),
+	error_(error)
       {
 	// default token representation
 	if (tok_rep.open_par.empty())
@@ -109,30 +111,28 @@ namespace vcsn
 	    token_tab_[8 + i] = tok_rep.spaces[i];
 	  }
 
-# ifndef VCSN_NDEBUG
 	std::string::const_iterator sit;
 	semiring_elt_t ww(e_.structure().semiring());
 	sit = close_weight_.begin();
 	if (parse_weight(ww, close_weight_, sit))
-	  std::cerr << "Warning : the token '" << close_weight_
-		    << "' is already defined as a weight." << std::endl;
+	  error_ += "Warning : the token '" + close_weight_ +
+		    + "' is already defined as a weight.\n";
 	sit = token_tab_[7].begin();
 	if (parse_weight(ww, token_tab_[7], sit))
-	  std::cerr << "Warning : the token '" << token_tab_[7]
-		    << "' is already defined as a weight." << std::endl;
+	  error_ += "Warning : the token '" + token_tab_[7]
+		    + "' is already defined as a weight.\n";
 	for (unsigned i = 0; i < token_tab_.size(); i++)
 	{
 	  sit = token_tab_[i].begin();
 	  monoid_elt_t w(e_.structure().monoid());
 	  if (parse_word(w, token_tab_[i], sit, std::set<char>()))
-	    std::cerr << "Warning : the token '" << token_tab_[i]
-		      << "' is already defined as a word." << std::endl;
+	    error_ +=  "Warning : the token '" + token_tab_[i]
+		       + "' is already defined as a word.\n";
 	}
-# endif // !VCSN_NDEBUG
 
       }
 
-      void
+      std::pair<bool, std::string>
       lex()
       {
 	size_t curr = 0;
@@ -145,9 +145,13 @@ namespace vcsn
 	    if (!from_.compare(it, token_tab_[i].size(), token_tab_[i]))
 	    {
 	      if (curr != it)
-		insert_word(curr, it);
+		if (!insert_word(curr, it))
+		  return (std::pair<bool, std::string>(false, error_));
 	      if (i == 7)
-		insert_weight(it);
+	      {
+		if (!insert_weight(it))
+		  return (std::pair<bool, std::string>(false, error_));
+	      }
 	      else
 	      {
 		if (i < 7)
@@ -161,11 +165,13 @@ namespace vcsn
 	  it++;
 	}
 	if (curr != it)
-	  insert_word(curr, it);
+	  if (!insert_word(curr, it))
+	    return (std::pair<bool, std::string>(false, error_));
+	return (std::pair<bool, std::string>(true, error_));
       }
 
       private:
-      void
+      bool
       insert_word(size_t curr, size_t it)
       {
 	monoid_elt_t w(e_.structure().monoid());
@@ -179,34 +185,52 @@ namespace vcsn
 	}
 	else
 	{
-	  std::cerr << "Lexer error : " << s
-		    << " some characters are not part of the alphabet" << std::endl;
+	  error_ += "Lexer error : " + s
+		    + " some characters are not part of the alphabet\n";
+	  return false;
 	}
+	return true;
       }
 
-      void
+      bool
       insert_weight(size_t& it)
       {
-	size_t bg = ++it;
+	it += token_tab_[7].size();
+	size_t bg = it;
 	size_t size = from_.size();
+	unsigned cpt = 1;
 	for (; it < size; it++)
-	  if (!from_.compare(it, close_weight_.size(), close_weight_))
-	  {
-	    semiring_elt_t w(e_.structure().semiring());
-	    std::string s = from_.substr(bg, it - bg);
-	    std::string::const_iterator sit = s.begin();
-	    if (parse_weight(w, s, sit))
+	{
+	  if (!from_.compare(it, token_tab_[7].size(), token_tab_[7]))
+	    cpt++;
+	  else
+	    if (!from_.compare(it, close_weight_.size(), close_weight_))
 	    {
-	      semiring_proxy<S, T>* sem = new semiring_proxy<S, T>(w);
-	      parser_.insert_weight(sem);
+	      if (cpt == 1)
+	      {
+		semiring_elt_t w(e_.structure().semiring());
+		std::string s = from_.substr(bg, it - bg);
+		std::string::const_iterator sit = s.begin();
+		if (parse_weight(w, s, sit))
+		{
+		  semiring_proxy<S, T>* sem = new semiring_proxy<S, T>(w);
+		  parser_.insert_weight(sem);
+		}
+		else
+		{
+		  error_ += "Lexer error : " + s + " is not a weight\n";
+		  return false;
+		}
+		it += close_weight_.size();
+		return true;
+	      }
+	      else
+		cpt--;
 	    }
-	    else
-	    {
-	      std::cerr << "Lexer error : " << s << " is not a weight" << std::endl;
-	    }
-	    it++;
-	    return;
-	  }
+	}
+	error_ += "Lexer error : Expected " + close_weight_
+		  + "instead of END\n";
+	return false;
       }
 
       void
@@ -238,6 +262,7 @@ namespace vcsn
       bool lex_trace_;
       std::string close_weight_;
       std::vector<std::string> token_tab_;
+      std::string& error_;
     }; // Lexer
 
     template <class S, class T>
@@ -250,13 +275,14 @@ namespace vcsn
     {
       parse_trace = parse_trace;
       int res;
+      std::string error;
       yy::krat_exp_parser parser;
-      Lexer<S, T> lex(from, exp, parser, lex_trace, tok_rep);
+      Lexer<S, T> lex(from, exp, parser, lex_trace, tok_rep, error);
       lex.lex();
       krat_exp_proxy<S, T> rexp(exp);
-      res = parser.parse(rexp);
+      res = parser.parse(rexp, error);
       exp = rexp.self;
-      return std::make_pair(res, "");
+      return std::make_pair(res, error);
     }
 
   } // algebra

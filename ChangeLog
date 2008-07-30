@@ -1,3 +1,12 @@
+2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add error handling in krat_exp_parser.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	    Instead of being dump on stderr Lexer and Parser errors are
+	    concatenated in a string that is returned by the parse function.
+	* lib/krat_exp/krat_exp_bison.yy: 
+	    Add parameter to the Bison generated parser to handle errors.
+
 2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Add tests and documentation for is-complete and friends.  #147.

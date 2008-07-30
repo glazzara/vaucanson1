@@ -7,12 +7,14 @@
 # include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
 # include <map>
 # include <queue>
+# include <string>
 //_DEBUG_
 # include <iostream>
 %}
 
 %parse-param { std::queue<std::pair<krat_exp_bison::token_type, krat_exp_bison::semantic_type> >& tok_q }
 %parse-param { vcsn::algebra::krat_exp_virtual& exp }
+%parse-param { std::string& error_ }
 %lex-param { std::queue<std::pair<krat_exp_bison::token_type, krat_exp_bison::semantic_type> >& tok_q }
 
 %union
@@ -95,7 +97,7 @@ namespace yy
     void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_token(int i, std::string* str);
-    int parse(vcsn::algebra::krat_exp_virtual& rexp);
+    int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
 
     // Attributs
     token_queue* tok_q_;
@@ -168,9 +170,9 @@ yy::krat_exp_parser::insert_token(int i, std::string* str)
 }
 
 int
-yy::krat_exp_parser::parse(vcsn::algebra::krat_exp_virtual& rexp_)
+yy::krat_exp_parser::parse(vcsn::algebra::krat_exp_virtual& rexp_, std::string& error_)
 {
-  yy::krat_exp_bison parser(tok_q_->self , rexp_);
+  yy::krat_exp_bison parser(tok_q_->self , rexp_, error_);
   return parser.parse();
 }
 
@@ -193,5 +195,5 @@ yylex(yy::krat_exp_bison::semantic_type* yylval,
 void
 yy::krat_exp_bison::error(const yy::krat_exp_bison::location_type& loc, const std::string& s)
 {
-  std::cout << s << std::endl;
+  error_ += s + '\n';
 }
