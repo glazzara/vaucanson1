@@ -1,5 +1,10 @@
 2008-07-30  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Enhance trick to avoid a warning in vcsn-tdc compilation.
+	* edition_commands.hxx: Here.
+
+2008-07-30  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Remove a warning when compiling vcsn-tdc.
 	The trick used to avoid the warning is really not nice,
 	but the code is not nice neither.

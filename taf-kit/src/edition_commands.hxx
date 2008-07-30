@@ -180,11 +180,7 @@ namespace edition_commands
   // - args.tok_rep is used only with a single alphabet
   // - that components are taken separatly (quid of rational expressions ?)
   /// Add a transition between states of @c a .
-# ifndef WITH_TWO_ALPHABETS
   static void add_transition (automaton_t& a, const arguments_t& args)
-# else
-  static void add_transition (automaton_t& a, const arguments_t&)
-#endif
   {
     echo_ ("  Add a transition from state: ");
     hstate_t n_from = get_state (a);
@@ -203,6 +199,8 @@ namespace edition_commands
 			     make_rat_exp (a.structure ().series ().monoid ().alphabet (),
 					   std::string (ratexp), args.tok_rep));
 # else
+    // hack
+    (void) args;
     echo_ (" First component labeled by the word: ");
     char first_label[1024];
     std::cin.getline (first_label, 1024);
