@@ -1,5 +1,14 @@
 2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Distribute the yy source of the krat_exp parser and run bison from
+	make if needed.
+
+	* lib/krat_exp/libkrat_exp.mk: Rewrite using the same pattern
+	used to build parsers in Spot.
+	* boostrap: Do not run bison here.
+
+2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Remove backward_realtime() and forward_realtime().
 
 	* include/vaucanson/algorithms/backward_realtime.hh,
