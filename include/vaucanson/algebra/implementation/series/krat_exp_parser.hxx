@@ -66,50 +66,19 @@ namespace vcsn
 	token_tab_(9),
 	error_(error)
       {
-	// default token representation
-	if (tok_rep.open_par.empty())
-	  token_tab_[0] = "(";
-	else
-	  token_tab_[0] = tok_rep.open_par;
-	if (tok_rep.close_par.empty())
-	  token_tab_[1] = ")";
-	else
-	  token_tab_[1] = tok_rep.close_par;
-	if (tok_rep.plus.empty())
-	  token_tab_[2] = "+";
-	else
-	  token_tab_[2] = tok_rep.plus;
-	if (tok_rep.times.empty())
-	  token_tab_[3] = ".";
-	else
-	  token_tab_[3] = tok_rep.times;
-	if (tok_rep.star.empty())
-	  token_tab_[4] = "*";
-	else
-	  token_tab_[4] = tok_rep.star;
-	if (tok_rep.one.empty())
-	  token_tab_[5] = "1";
-	else
-	  token_tab_[5] = tok_rep.one;
-	if (tok_rep.zero.empty())
-	  token_tab_[6] = "0";
-	else
-	  token_tab_[6] = tok_rep.zero;
-	if (tok_rep.open_weight.empty())
-	  token_tab_[7] = "{";
-	else
-	  token_tab_[7] = tok_rep.open_weight;
-	if (tok_rep.close_weight.empty())
-	  close_weight_ = "}";
-	else
-	  close_weight_ = tok_rep.close_weight;
-	if (tok_rep.spaces.empty())
-	  token_tab_[8] = " ";
-	else
-	  for (unsigned i = 0; i < tok_rep.spaces.size(); i++)
-	  {
-	    token_tab_[8 + i] = tok_rep.spaces[i];
-	  }
+	token_tab_[0] = tok_rep.open_par;
+	token_tab_[1] = tok_rep.close_par;
+	token_tab_[2] = tok_rep.plus;
+	token_tab_[3] = tok_rep.times;
+	token_tab_[4] = tok_rep.star;
+	token_tab_[5] = tok_rep.one;
+	token_tab_[6] = tok_rep.zero;
+	token_tab_[7] = tok_rep.open_weight;
+	close_weight_ = tok_rep.close_weight;
+	for (unsigned i = 0; i < tok_rep.spaces.size(); i++)
+	{
+	  token_tab_[8 + i] = tok_rep.spaces[i];
+	}
 
 	std::string::const_iterator sit;
 	semiring_elt_t ww(e_.structure().semiring());
@@ -132,7 +101,7 @@ namespace vcsn
 
       }
 
-      std::pair<bool, std::string>
+      bool
       lex()
       {
 	size_t curr = 0;
@@ -146,11 +115,11 @@ namespace vcsn
 	    {
 	      if (curr != it)
 		if (!insert_word(curr, it))
-		  return (std::pair<bool, std::string>(false, error_));
+		  return false;
 	      if (i == 7)
 	      {
 		if (!insert_weight(it))
-		  return (std::pair<bool, std::string>(false, error_));
+		  return false;
 	      }
 	      else
 	      {
@@ -166,8 +135,8 @@ namespace vcsn
 	}
 	if (curr != it)
 	  if (!insert_word(curr, it))
-	    return (std::pair<bool, std::string>(false, error_));
-	return (std::pair<bool, std::string>(true, error_));
+	    return false;
+	return true;
       }
 
       private:
@@ -274,15 +243,16 @@ namespace vcsn
 	bool parse_trace = false)
     {
       parse_trace = parse_trace;
-      int res;
       std::string error;
       yy::krat_exp_parser parser;
       Lexer<S, T> lex(from, exp, parser, lex_trace, tok_rep, error);
-      lex.lex();
+      if (!lex.lex())
+	return std::make_pair(true, error);
       krat_exp_proxy<S, T> rexp(exp);
-      res = parser.parse(rexp, error);
+      if (parser.parse(rexp, error))
+	return std::make_pair(true, error);
       exp = rexp.self;
-      return std::make_pair(res, error);
+      return std::make_pair(false, error);
     }
 
   } // algebra

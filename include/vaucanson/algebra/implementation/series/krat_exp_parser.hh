@@ -55,6 +55,21 @@ namespace vcsn {
       std::string		open_weight;
       std::string		close_weight;
       std::vector<std::string>	spaces;
+
+      // Default constructor
+      token_representation_t() :
+	open_par("("),
+	close_par(")"),
+	plus("+"),
+	times("."),
+	star("*"),
+	one("1"),
+	zero("0"),
+	open_weight("{"),
+	close_weight("}")
+	{
+	  spaces.push_back(" ");
+	}
     };
 
     /**

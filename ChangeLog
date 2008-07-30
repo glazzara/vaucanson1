@@ -1,5 +1,14 @@
 2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Improve error handling and simplify token_representation loading.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
+	    Add default constructor to token_representation_t that
+	    initialise with default token representations.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: 
+	    Simplify token_representation loading and error handling.
+
+2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Fix tapping mistake in krat_exp_expand_test.
 	* src/tests/include/tests/algebra/series/krat/main/krat_exp_expand_test.hh:
 	    Remove ')'.
