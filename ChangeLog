@@ -1,3 +1,8 @@
+2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/is_deterministic.hh,
+	include/vaucanson/algorithms/determinize.hh: Add more documentation.
+
 2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Improve error handling and simplify token_representation loading.
@@ -35,7 +40,7 @@
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
 	    Instead of being dump on stderr Lexer and Parser errors are
 	    concatenated in a string that is returned by the parse function.
-	* lib/krat_exp/krat_exp_bison.yy: 
+	* lib/krat_exp/krat_exp_bison.yy:
 	    Add parameter to the Bison generated parser to handle errors.
 
 2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>

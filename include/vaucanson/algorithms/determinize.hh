@@ -45,35 +45,46 @@ namespace vcsn {
   /// @name Determinization algorithms
   //@{
   /**
-   * Returns the determinized of a Boolean automaton.
+   * Build a deterministic automaton from a Boolean automaton.
+   *
+   * This function build a complete and deterministic automaton
+   * using the so called "subset construction".
+   *
+   * @see is_deterministic() for the definition of a deterministic automaton.
    *
    * @param a The Boolean automaton to determinize.
-   *
-   * @see ETA p114-117
    *
    * @pre @a a must be a Boolean automaton.
    * @pre @a a must be a realtime automaton.
    *
-   * @return A fresh Boolean automaton that is the determinization of 'a'.
+   * @return A new Boolean automaton that is an accessible, complete and
+   * deterministic automaton recognizing the same language as @a a.
    */
   template<typename A, typename AI>
   Element<A, AI>
   determinize(const Element<A, AI>& a);
 
   /**
-   * Returns the determinized of a Boolean automaton.
+   * @brief Build a deterministic automaton from a Boolean automaton, keeping
+   * trace of state-to-states correspondences.
+   *
+   * This function build a complete and deterministic automaton using
+   * the so called "subset construction" but also returns the map
+   * associating each state of the new automaton to the corresponding
+   * subset of states from the original automaton.
+   *
+   * @see is_deterministic() for the definition of a deterministic automaton.
    *
    * @param a The Boolean automaton to determinize.
    * @param m A map which will be augmented with the correspondance
-   *          from one state of the resulting automaton to the set
+   *          from one state of the resulting automaton to a subset
    *          of states of the input automaton.
-   *
-   * @see ETA p114-117
    *
    * @pre @a a must be a Boolean automaton.
    * @pre @a a must be a realtime automaton.
    *
-   * @return A fresh Boolean automaton that is the determinization of 'a'.
+   * @return A new Boolean automaton that is an accessible, complete and
+   * deterministic automaton recognizing the same language as @a a.
    */
   template<typename A, typename AI>
   Element<A, AI>

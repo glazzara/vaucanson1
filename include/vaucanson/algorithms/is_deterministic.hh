@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -41,9 +42,18 @@ namespace vcsn {
   /**
    * Test if an automaton is deterministic.
    *
-   * @param a A Boolean automaton.
+   * A realtime boolean automaton is deterministic if for each state
+   * @c s and each letter @c l, there is <i>at most</i> one
+   * outgoing transition labeled by @c s, and if there is <i>at most</i>
+   * one initial state.
+   *
+   * @note Being realtime implies that the automaton is defined over a free
+   *       monoid.
+   * @note The empty automaton is deterministic (but not complete).
+   * @param a the automaton to check.
    * @pre @a a is a realtime Boolean automaton.
-   * @return true if 'a' is deterministic.
+   * @return true if @a a is deterministic.
+   * @see is_complete(), determinize().
    */
   template<typename A, typename AI>
   bool
