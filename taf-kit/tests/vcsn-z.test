@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006, 2007 The Vaucanson Group.
+# Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -42,6 +42,10 @@ fail1 vcsn-z is-standard $void_z_automaton
       vcsn-z is-standard $standard_c1
       vcsn-z -a ab standard '({2} a).({4} 1)' > 2a_41.xml
       vcsn-z is-standard 2a_41.xml
+
+      vcsn-z is-complete $c1
+fail1 vcsn-z is-complete $void_z_automaton
+      vcsn-z complete $void_z_automaton \| is-complete -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##

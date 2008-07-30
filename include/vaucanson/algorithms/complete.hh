@@ -21,7 +21,8 @@
 /**
  * @file   complete.hh
  *
- * Completion algorithm for deterministic and Boolean automaton.
+ * Testing and building complete automata.
+ * See is_complete() for the definition of a complete automaton.
  *
  * @see complete(), complete_here(), is_complete()
  */
@@ -43,12 +44,14 @@ namespace vcsn {
   /** @addtogroup algorithms */  /** @{ */
 
   /**
-   * Make the transition function of an automaton total w.r.t alphabet.
+   * Make the transition function of an automaton total w.r.t. the alphabet.
+   *
+   * See is_complete() for the definition of a complete automaton.
    *
    * @note This algorithm works in place.
    *
-   * @param a the deterministic and Boolean automaton to complete.
-   * @pre @a a must be a realtime automaton.
+   * @param a the automaton to complete.
+   * @pre @a a must be a realtime automaton over a free-monoid.
    * @see complete(), is_complete()
    * @author Yann Régis-Gianas
    */
@@ -57,12 +60,14 @@ namespace vcsn {
   complete_here(Element<A, AI>& a);
 
   /**
-   * Make the transition function of an automaton total w.r.t alphabet.
+   * Make the transition function of an automaton total w.r.t. the alphabet.
    *
-   * @note This algorithm returns a fresh automaton.
+   * See is_complete() for the definition of a complete automaton.
    *
-   * @param a the deterministic and Boolean automaton to complete.
-   * @pre @a a must be a realtime automaton.
+   * @note This algorithm returns a new automaton.
+   *
+   * @param a the automaton to complete.
+   * @pre @a a must be a realtime automaton over a free-monoid.
    * @see complete_here(), is_complete()
    * @author Yann Régis-Gianas
    */
@@ -71,13 +76,22 @@ namespace vcsn {
   complete(const Element<A, AI>& a);
 
   /**
-   * Test if the transition function is complete for each state.
+   * Test whether an automaton is complete.
    *
-   * @param a The Boolean automaton to test.
+   * An automaton over a free-monoid is complete if each letter of the
+   * alphabet can be read from any of its state (i.e., for each state
+   * @c s and each letter @c l, there is <i>at least</i> one
+   * outgoing transition labeled by @c s), and if there is <i>at least</i>
+   * one initial state.
    *
-   * @return true if the transition function of e is complete w.r.t alphabet.
-   * @pre @a a must be a realtime automaton.
-   * @see complete(), complete_here()
+   * @note Complete automata are not necessarily deterministic.
+   * @note The above definition will also work with non-boolean automata.
+   *
+   * @param a automaton to test.
+   *
+   * @return true if the automaton @a a is complete.
+   * @pre @a a must be a realtime automaton over a free-monoid.
+   * @see complete(), complete_here(), is_deterministic()
    * @author Yann Régis-Gianas
    */
   template <typename A, typename AI>

@@ -1,3 +1,9 @@
+2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Add tests and documentation for is-complete and friends.  #147.
+	* include/vaucanson/algorithms/complete.hh: Update documentation.
+	* taf-kit/tests/vcsn-b.test, taf-kit/tests/vcsn-z.test: Add more tests.
+
 2008-07-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Remove obsolete code from taf-kit.
@@ -288,7 +294,7 @@
 	Fix some errors introduced in patch 1976.
 	* lib/krat_exp/krat_exp_bison.yy:
 	    Adapt structure using PIMPL pattern.
-	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: 
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
 	    Remove bad include and replaced it by a forward declaration.
 	* data/automata/b/Makefile.am:
 	    Fix CPPFLAGS error introduced in patch 1976.

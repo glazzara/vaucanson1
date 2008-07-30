@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006, 2007 The Vaucanson Group.
+# Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -205,8 +205,79 @@ b
 10
 EOF
 
+# Complete, but non-deterministic automaton.
+# (0)-a->(1)-a->(2)
+# (0)<-b-(1)-b->(2)
+# (0)-----a---->(2)
+# (0)-----b---->(2)
+# (0)<----a-----(2)
+#        (1)<-b-(2)
+sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton cnd.xml
+# Add states
+1
+# Add three states
+3
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+2
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+2
+a
+# Add transition
+3
+# From, to, label
+1
+0
+b
+# Add transition
+3
+# From, to, label
+1
+2
+b
+# Add transition
+3
+# From, to, label
+0
+2
+a
+# Add transition
+3
+# From, to, label
+0
+2
+b
+# Add transition
+3
+# From, to, label
+2
+0
+a
+# Add transition
+3
+# From, to, label
+2
+1
+b
+# Exit.
+10
+EOF
 
-AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml nondet.xml comp.xml'
+AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml nondet.xml comp.xml cnd.xml'
 
 # Cannot check display.
 
@@ -258,10 +329,13 @@ fail1 vcsn-b is-complete $a1
 fail1 vcsn-b realtime comp.xml \| is-complete -
       vcsn-b complete comp.xml 2>stderr  && exit 1
       grep realtime stderr
+      vcsn-b realtime comp.xml \| complete - \| is-complete -
+      vcsn-b is-complete cnd.xml
 
 # is-deterministic
 fail1 vcsn-b is-deterministic $a1
       vcsn-b determinize $a1 \| is-deterministic -
+fail1 vcsn-b is-deterministic cnd.xml
 
 # nondet is not realtime so is-determinisitic should complain
       vcsn-b is-deterministic nondet.xml 2>stderr && exit 1
