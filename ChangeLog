@@ -1,3 +1,9 @@
+2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix tapping mistake in krat_exp_expand_test.
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_expand_test.hh:
+	    Remove ')'.
+
 2008-07-30  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Enhance trick to avoid a warning in vcsn-tdc compilation.
