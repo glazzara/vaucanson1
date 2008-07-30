@@ -1,5 +1,20 @@
 2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Remove backward_realtime() and forward_realtime().
+
+	* include/vaucanson/algorithms/backward_realtime.hh,
+	include/vaucanson/algorithms/backward_realtime.hxx,
+	include/vaucanson/algorithms/forward_realtime.hh,
+	include/vaucanson/algorithms/forward_realtime.hxx: Delete these
+	obsolete files.  They used to hold the implementation of the two
+	variants of the realtime() algorithm, but these have been
+	factored in realtime.hh on 2006-08-02.
+	* include/Makefile.am (nobase_include_HEADERS): Adjust.
+	* include/vaucanson/algorithms/realtime.hh: Adjust documentation.
+	* lib/generate_libvcsn.rb: Do not mention these files.
+
+2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/realtime.hh: Add more documentation.
 	* include/vaucanson/algorithms/realtime.hxx: Rename type as dir.
 	(do_realtime_here): Mention #121.

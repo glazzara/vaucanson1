@@ -44,7 +44,6 @@ def create?(type, file)
     (
       ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type ) and
-      file !~ /backward_realtime.hh/ and
       file !~ /realtime_decl.hh/ and
       file !~ /composition_cover.hh/ and	# transducer
       file !~ /extension.hh/ and		# transducer
@@ -59,7 +58,6 @@ def create?(type, file)
 	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type
       ) and
       file !~ /aci_canonical.hh/ and
-      file !~ /backward_realtime.hh/ and
       file !~ /berry_sethi.hh/ and
       file !~ /brzozowski.hh/ and
       file !~ /complement.hh/ and
@@ -70,7 +68,6 @@ def create?(type, file)
       file !~ /eval.hh/ and
       file !~ /extension.hh/ and
       file !~ /finite_support_conversion.hh/ and
-      file !~ /forward_realtime.hh/ and
       file !~ /is_ambiguous.hh/ and
       file !~ /is_letterized.hh/ and
       file !~ /is_normalized.hh/ and

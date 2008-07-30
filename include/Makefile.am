@@ -267,8 +267,6 @@ vaucanson/algorithms/aci_canonical.hh				\
 vaucanson/algorithms/aci_canonical.hxx				\
 vaucanson/algorithms/aut_to_exp.hh				\
 vaucanson/algorithms/aut_to_exp.hxx				\
-vaucanson/algorithms/backward_realtime.hh			\
-vaucanson/algorithms/backward_realtime.hxx			\
 vaucanson/algorithms/berry_sethi.hh				\
 vaucanson/algorithms/berry_sethi.hxx				\
 vaucanson/algorithms/brzozowski.hh				\
@@ -303,8 +301,6 @@ vaucanson/algorithms/finite_support_conversion.hh		\
 vaucanson/algorithms/finite_support_conversion.hxx		\
 vaucanson/algorithms/fmp_to_rw.hh				\
 vaucanson/algorithms/fmp_to_rw.hxx				\
-vaucanson/algorithms/forward_realtime.hh			\
-vaucanson/algorithms/forward_realtime.hxx			\
 vaucanson/algorithms/has_succ_comp.hh				\
 vaucanson/algorithms/has_succ_comp.hxx				\
 vaucanson/algorithms/image.hh					\

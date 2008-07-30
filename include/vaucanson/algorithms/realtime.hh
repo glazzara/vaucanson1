@@ -62,7 +62,7 @@ namespace vcsn {
    * @param dir The direction of the epsilon removal algorithm.
    * @pre @a must be defined over a free monoid.
    *
-   * @see realtime(), forward_realtime_here(), backward_realtime_here()
+   * @see realtime()
    */
   template<typename A, typename AI>
   void
@@ -77,7 +77,7 @@ namespace vcsn {
    * @param a The automaton to make realtime.
    * @param dir The direction of the epsilon removal algorithm.
    *
-   * @see realtime_here(), forward_realtime(), backward_realtime()
+   * @see realtime_here()
    */
   template<typename A, typename AI>
   Element<A, AI>
