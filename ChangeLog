@@ -1,5 +1,13 @@
 2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/realtime.hh: Add more documentation.
+	* include/vaucanson/algorithms/realtime.hxx: Rename type as dir.
+	(do_realtime_here): Mention #121.
+	* include/vaucanson/algorithms/realtime_decl.hh: Add more
+	documentation.
+
+2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/is_deterministic.hh,
 	include/vaucanson/algorithms/determinize.hh: Add more documentation.
 

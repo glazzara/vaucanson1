@@ -23,13 +23,13 @@
  *
  * Declaration of the realtime() function.
  *
- * Actually,  the  realtime()  function  may appear  in  two  headers:
- * realtime.hh  and krat_exp_realtime.hh. In  both header  files, this
+ * Actually, the realtime() function may appear in two headers:
+ * realtime.hh  and krat_exp_realtime.hh.  In both header files, this
  * function has the same prototype, but different meanings, and expect
  * to be called with different types.
  *
  * This is the unique declaration of realtime(), which will
- * then do  the dispatch onto  the right do_realtime() in  function of
+ * then do the dispatch onto the right do_realtime() in function of
  * its parameter.
  *
  * *Please note that you should not include this file directly. Use
@@ -46,18 +46,18 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * Calls the do_realtime function for rational expression or automata.
+   * Compute the realtime version of a rational expression or an automata.
    *
-   * This function  is a wrapper  which select a realtime  either from
-   * realtime.hh or from krat_exp_realtime.hh.
+   * This function is a wrapper which selects the realtime function
+   * either from realtime.hh or from krat_exp_realtime.hh.
    *
-   * When called  upon an automaton, this function  uses the functions
+   * When called upon an automaton, this function uses the functions
    * declared in realtime.hh to make this automaton realtime using the
-   * forward_realtime() algorithm.
+   * forward epsilon removal.
    *
-   * When  called   with  a  rational  expression,   a  function  from
-   * krat_exp_realtime.hh   is  selected  to   expand  words   in  the
-   * expression as a product of a letter.
+   * When called with a rational expression, a function from
+   * krat_exp_realtime.hh is selected to expand words in the
+   * expression as a product of a letters.
    *
    * @see krat_exp_realtime.hh, realtime.hh
    */
@@ -66,10 +66,10 @@ namespace vcsn {
   realtime(const Element<S, T>& e);
 
   /**
-   * Calls the do_realtime_here function for rational expression or automata.
+   * Modify a rational expression or automata in place to make it realtime.
    *
-   * This function  is a wrapper  which select a realtime  either from
-   * realtime.hh or from krat_exp_realtime.hh.
+   * This function is a wrapper thest selects the realtime() function
+   * from either realtime.hh or from krat_exp_realtime.hh.
    *
    * It behaves exactly as realtime(), but do the operation in place.
    *
@@ -81,11 +81,19 @@ namespace vcsn {
 
 
   /**
-   * Test whether an automaton or a regular expression is realtime.
+   * Test whether an automaton or a rational expression is realtime.
    *
    * This function returns true if the input is realtime.
    *
-   * @param e The automaton or regular expression to test.
+   * An automaton over a free monoid @f$A^\star@f$ is realtime
+   * if all its transitions are labeled by single letters of
+   * @f$A@f$.  (Weights do not matter.)
+   *
+   * A rational expression is realtime if its litterals are
+   * only single letters of @f$A@f$.  E.g. "ab.ab*" is not
+   * rational while "a.b.(a.b)*" is.
+   *
+   * @param e The automaton or rational expression to test.
    *
    * @see realtime()
    */

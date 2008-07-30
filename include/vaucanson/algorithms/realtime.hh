@@ -24,7 +24,7 @@
  * General algorithms concerning realtime aspect of automata.
  *
  * An automaton over a free monoid @f$A^\star@f$ is realtime
- * if all its transitons are labeled by single letters of
+ * if all its transitions are labeled by single letters of
  * @f$A@f$.  (Weights do not matter.)
  *
  * @see is_realtime(), realtime_here(), realtime()
@@ -41,35 +41,47 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * In place modification of the automaton to make it realtime.
+   * Modify an automaton in place to make it realtime.
    *
-   * This algorithm makes an automaton realtime.  It calls @c
-   * forward_realtime or @c backward_realtime according @a type.
-   * If @a type is omitted, @c forward_realtime is used by default.
+   * An automaton over a free monoid @f$A^\star@f$ is realtime
+   * if all its transitions are labeled by single letters of
+   * @f$A@f$.  (Weights do not matter.)
+   *
+   * This algorithm works in two steps: first transitions labeled by
+   * words are split into transitions labeled by singled letters
+   * separated by newly created states (if there is a weight
+   * associated to the word, it will be associated to the first letter
+   * and the other letter will be associated to the identity of the
+   * semiring); second the epsilon transitions are removed.
+   *
+   * Removing epsilon transitions can be done in two ways: forward or
+   * backward.  The @a dir argument can be used to control the direction
+   * and default to forward.
    *
    * @param a The automaton to make realtime.
-   * @param type The type of algorithm used.
+   * @param dir The direction of the epsilon removal algorithm.
+   * @pre @a must be defined over a free monoid.
    *
    * @see realtime(), forward_realtime_here(), backward_realtime_here()
    */
   template<typename A, typename AI>
   void
-  realtime_here(Element<A, AI>& a, misc::direction_type type);
+  realtime_here(Element<A, AI>& a, misc::direction_type dir);
 
   /**
-   * Returns a fresh realtime automaton.
+   * Create a realtime automaton from another one.
    *
-   * As  @c  realtime_here, it  build  a  realtime  automaton, but  it
-   * returns a new one instead of changing the given one.
+   * As @c realtime_here, this algorithm builds a realtime automaton,
+   * but it returns a new one instead of changing the given one.
    *
    * @param a The automaton to make realtime.
-   * @param type The type of algorithm used.
+   * @param dir The direction of the epsilon removal algorithm.
    *
    * @see realtime_here(), forward_realtime(), backward_realtime()
    */
   template<typename A, typename AI>
   Element<A, AI>
-  realtime(const Element<A, AI>& a, misc::direction_type type);
+  realtime(const Element<A, AI>& a, misc::direction_type dir);
 
   /** @} */
 

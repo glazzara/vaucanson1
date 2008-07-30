@@ -169,13 +169,14 @@ namespace vcsn {
   void
   do_realtime_here(const AutomataBase<A>&,
                    Element<A, AI>& a,
-		   misc::direction_type type = misc::backward)
+		   misc::direction_type dir = misc::backward)
   {
     realtime_words_here(a);
 
-    eps_removal_here(a, type);
+    eps_removal_here(a, dir);
 
-    if (type == misc::forward)
+    // FIXME: This is not wanted.  See #121.
+    if (dir == misc::forward)
       coaccessible_here(a);
     else
       accessible_here(a);
@@ -184,9 +185,9 @@ namespace vcsn {
 
   template<typename A, typename AI>
   void
-  realtime_here(Element<A, AI>& a, misc::direction_type type)
+  realtime_here(Element<A, AI>& a, misc::direction_type dir)
   {
-    do_realtime_here(a.structure(), a, type);
+    do_realtime_here(a.structure(), a, dir);
   }
 
 
@@ -198,18 +199,18 @@ namespace vcsn {
   Element<A, AI>
   do_realtime(const AutomataBase<A>& b,
 	      const Element<A, AI>&  a,
-	      misc::direction_type type = misc::backward)
+	      misc::direction_type dir = misc::backward)
   {
     Element<A, AI> ret(a);
-    do_realtime_here(b, ret, type);
+    do_realtime_here(b, ret, dir);
     return ret;
   }
 
   template<typename A, typename AI>
   Element<A, AI>
-  realtime(const Element<A, AI>& a, misc::direction_type type)
+  realtime(const Element<A, AI>& a, misc::direction_type dir)
   {
-    return do_realtime(a.structure(), a, type);
+    return do_realtime(a.structure(), a, dir);
   }
 
 
