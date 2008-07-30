@@ -1,3 +1,14 @@
+2008-07-30  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Remove a warning when compiling vcsn-tdc.
+	The trick used to avoid the warning is really not nice,
+	but the code is not nice neither.
+
+	This code doesn't seems right: ticket opened.
+
+	Fix typo.
+	* edition_commands.hxx: Here.
+
 2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add error handling in krat_exp_parser.
