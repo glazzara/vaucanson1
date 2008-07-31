@@ -34,7 +34,7 @@ namespace vcsn
 	vcsn::algebra::FreeMonoidProduct<first_monoid_t, second_monoid_t>
 	monoid_t;
 
-      typedef std::pair<std::string, std::string>		monoid_elt_value_t;
+      typedef std::pair<std::basic_string<first_monoid_t::letter_t>, std::basic_string<second_monoid_t::letter_t> >		monoid_elt_value_t;
       typedef vcsn::Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
 
     } // End of VCSN_CONTEXT_NAMESPACE.

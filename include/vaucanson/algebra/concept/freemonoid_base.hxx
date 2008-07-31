@@ -225,20 +225,23 @@ namespace vcsn {
 
     template <typename Self, typename St, typename T>
     St&
-    op_rout(const algebra::FreeMonoidBase<Self>& s,
+    op_rout(const algebra::FreeMonoidBase<Self>&,
 	    St& st,
 	    const T& v)
     {
       typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
+#if 0
       bool is_empty = true;
       for (const_iterator i = op_begin_const(s.self(), v);
 	   i != op_end_const(s.self(), v);
 	   ++i, is_empty = false)
-	st << misc::make_escaper(*i);
+	st << *i;
 
       if (is_empty)
 	st << "1";
+#endif
+      st << v;
       return st;
     }
 

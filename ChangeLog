@@ -1,3 +1,24 @@
+2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add context of int based fmp transducers.
+	Add context of int based fmp transducers.
+	
+	Remove useless escaper in op_rout which lead to escape integers when dealing with 1 and 0.
+
+	Fix fmp type for allowing generic letters.
+
+	Add xml tests on the new context.
+
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Remove useless escaper.
+	* include/vaucanson/automata/generic_contexts/int_fmp_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_fmp_transducer_structures.hh: New.
+	* include/vaucanson/contexts/free_monoid_product.thh: Fix fmp type.
+	* include/vaucanson/xml/contexts/fmp.hxx: Add function for integers.
+	* src/tests/xml/Makefile.am: Add test.
+	* src/tests/xml/int_fmp_ref.dot: New.
+	* src/tests/xml/int_fmp_ref.xml: New.
+	* src/tests/xml/xml_int_fmp_tester.cc: New.
+
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* lib/krat_exp/libkrat_exp.mk ($(FROM_KRAT_EXP_BISON_YY_MAIN)):

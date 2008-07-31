@@ -283,9 +283,24 @@ namespace vcsn
 	}
       }
 
+      /* FIXME there should not be 2 but one function here... however,
+      ** when we add a template T instead of int the function is not called
+      ** anymore... there is a probleme in the dispatch */
       template <>
       void
       create_monElmt_node(const std::pair<std::string, std::string>& m,
+			 xercesc::DOMDocument* doc,
+			   xercesc::DOMElement* root)
+      {
+	xercesc::DOMElement* node = tools::create_element(doc, "monElmt");
+	create_monElmt_node(m.first, doc, node);
+	create_monElmt_node(m.second, doc, node);
+	root->appendChild(node);
+      }
+
+      template <>
+      void
+      create_monElmt_node(const std::pair<std::basic_string<int>, std::basic_string<int> >& m,
 			 xercesc::DOMDocument* doc,
 			   xercesc::DOMElement* root)
       {
