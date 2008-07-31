@@ -1,4 +1,4 @@
-// fibonacci_tdc_gen.cc: this file is part of the Vaucanson project.
+// fibonacci_fmp_gen.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,18 +14,25 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+#include "one_rule_rewriting.hh"
+
 #include <vaucanson/boolean_transducer.hh>
 #include <vaucanson/fmp_transducer.hh>
+
 #include <vaucanson/algorithms/rw_to_fmp.hh>
 #include <vaucanson/algorithms/normalized_composition.hh>
 #include <vaucanson/algorithms/sub_normalize.hh>
+
 #include <vaucanson/xml/contexts/rw.hh>
 #include <vaucanson/xml/contexts/fmp.hh>
 #include <vaucanson/tools/xml_dump.hh>
 
+#define FIBONACCI_FROM "abb"
+#define FIBONACCI_TO "baa"
 
 int main()
 {
+  using namespace ORR;
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::boolean_transducer;
@@ -35,33 +42,16 @@ int main()
   `-------------------------------*/
 
   alphabet_t	A;
+
   A.insert('a');
   A.insert('b');
-
 
   /*----------------------.
   | Creation of fibleft.  |
   `----------------------*/
 
   automaton_t		fibleft = make_automaton(A, A);
-
-  hstate_t p = fibleft.add_state();
-  hstate_t q = fibleft.add_state();
-  hstate_t r = fibleft.add_state();
-
-  fibleft.add_io_transition(p, p, "b", "b");
-  fibleft.add_io_transition(p, q, "a", "");
-  fibleft.add_io_transition(q, q, "a", "a");
-  fibleft.add_io_transition(q, r, "b", "");
-  fibleft.add_io_transition(r, q, "a", "ab");
-  fibleft.add_io_transition(r, q, "b", "ba");
-
-  fibleft.set_o_final(q, "a");
-
-  fibleft.set_o_final(r, "ab");
-
-  fibleft.set_final(p);
-  fibleft.set_initial(p);
+  fibleft = replace_left(FIBONACCI_FROM, FIBONACCI_TO, A, A);
 
   fmp_transducer::automaton_t fmp_fibleft =
     fmp_transducer::make_automaton(A, A);
@@ -78,25 +68,7 @@ int main()
   `-----------------------*/
 
   automaton_t fibright = make_automaton(A, A);
-
-  hstate_t s = fibright.add_state();
-  hstate_t t = fibright.add_state();
-  hstate_t u = fibright.add_state();
-
-  fibright.add_io_transition(s, s, "b", "b");
-  fibright.add_io_transition(s, t, "b", "");
-  fibright.add_io_transition(t, s, "a", "aa");
-  fibright.add_io_transition(t, u, "b", "");
-  fibright.add_io_transition(u, t, "a", "ab");
-  fibright.add_io_transition(u, u, "a", "a");
-
-  fibright.set_o_initial(s, "bb");
-
-  fibright.set_o_initial(t, "b");
-
-  fibright.set_initial(u);
-  fibright.set_final(u);
-
+  fibright = replace_right(FIBONACCI_FROM, FIBONACCI_TO, A, A);
 
   fmp_transducer::automaton_t fmp_fibright =
     fmp_transducer::make_automaton(A, A);
@@ -139,4 +111,6 @@ int main()
 	    << "Right transducer composed by left transducer: "
 	    << "fibo_fmp_right_left.xml"
 	    << std::endl;
+
+  return 0;
 }

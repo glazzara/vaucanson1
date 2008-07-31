@@ -1,8 +1,8 @@
-// fibonacci_rt_gen.cc: this file is part of the Vaucanson project.
+// fibonacci_rw_composition.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,9 +18,6 @@
 
 #include <vaucanson/boolean_transducer.hh>
 #include <vaucanson/algorithms/rw_composition.hh>
-
-#include <vaucanson/xml/contexts/rw.hh>
-#include <vaucanson/tools/xml_dump.hh>
 
 #define FIBONACCI_FROM "abb"
 #define FIBONACCI_TO "baa"
@@ -45,7 +42,7 @@ int main()
   | Creation of fibleft.  |
   `----------------------*/
 
-  automaton_t		fibleft = make_automaton(A, A);
+  automaton_t fibleft = make_automaton(A, A);
   fibleft = replace_left(FIBONACCI_FROM, FIBONACCI_TO, A, A);
 
   /*-----------------------.
@@ -62,29 +59,40 @@ int main()
   automaton_t	fiblr = make_automaton(A, A);
   rw_composition(fibleft, fibright, fiblr);
 
-  automaton_t	fibrl = make_automaton(A, A);
-  rw_composition(fibright, fibleft, fibrl);
+  /*--------------.
+  | Run the demo. |
+  `--------------*/
 
-  std::ofstream left_fibo("fibo_left.xml");
-  std::ofstream right_fibo("fibo_right.xml");
-  std::ofstream left_right_fibo("fibo_left_right.xml");
-  std::ofstream right_left_fibo("fibo_right_left.xml");
+  std::string orig = "abababababababb";
+  std::string str = orig;
+  std::string res = "baaaaaaaaaaaaaa";
+  std::string tmp;
 
-  tools::xml_dump(left_fibo, fibleft, "left_fibo");
-  tools::xml_dump(right_fibo, fibright, "right_fibo");
-  tools::xml_dump(left_right_fibo, fiblr, "left_right_fibo");
-  tools::xml_dump(right_left_fibo, fibrl, "right_left_fibo");
+  int i = 1;
+  while (i < 42)
+  {
+    if ((tmp = eval_an_expression(fibleft, "fibleft", false, str)) == res)
+      break;
+    str = tmp;
+    i++;
+  }
 
-  std::cout << "Cautious left sequential transducer: fibo_left.xml"
-	    << std::endl
-	    << "Cautious right sequential transducer: fibo_right.xml"
-	    << std::endl
-	    << "Left transducer composed by right transducer: "
-	    << "fibo_left_right.xml"
-	    << std::endl
-	    << "Right transducer composed by left transducer: "
-	    << "fibo_right_left.xml"
-	    << std::endl;
+  std::cout << "It took " << i
+  << " iteration of fibleft to normalize " << orig << std::endl;
+
+  str = orig;
+
+  i = 1;
+  while (i < 42)
+  {
+    if ((tmp = eval_an_expression(fiblr, "fiblr", false, str)) == res)
+      break;
+    str = tmp;
+    i++;
+  }
+
+  std::cout << "It took " << i
+  << " iteration of fibleft composed with fibright to normalize " << orig << std::endl;
 
   return 0;
 }

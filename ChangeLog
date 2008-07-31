@@ -1,3 +1,20 @@
+2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Overhaul the one rule rewriting demo.
+	* src/demos/one_rule_rewriting/Makefile.am: Update build system.
+	* src/demos/one_rule_rewriting/ORR_demo.cc: Factorize code.
+	* src/demos/one_rule_rewriting/ORR_fmp_gen.cc: New.
+	* src/demos/one_rule_rewriting/ORR_rw_gen.cc: Factorize code.
+	* src/demos/one_rule_rewriting/ORR_tdc_gen.cc: Remove.
+	* src/demos/one_rule_rewriting/check_rw_composition.cc: New.
+	* src/demos/one_rule_rewriting/fibonacci_demo.cc: Factorize code.
+	* src/demos/one_rule_rewriting/fibonacci_fmp_gen.cc: New.
+	* src/demos/one_rule_rewriting/fibonacci_rw_composition.cc: New.
+	* src/demos/one_rule_rewriting/fibonacci_rw_gen.cc: Factorize code.
+	* src/demos/one_rule_rewriting/fibonacci_tdc_gen.cc: Remove.
+	* src/demos/one_rule_rewriting/one_rule_rewriting.hh: New.
+	* src/demos/one_rule_rewriting/one_rule_rewriting.hxx: New.
+
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/Makefile.am (TESTS): Typo, reported by Jerome
