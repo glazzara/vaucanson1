@@ -56,19 +56,20 @@ namespace vcsn
       std::size_t operator() (const algebra::polynom<std::pair<T, U>, Weight>& l) const;
     };
 
-    template <typename Word, typename WeightT>
-    struct hash_label<algebra::polynom<Word, rat::exp<std::string, WeightT> > >
+    template <typename Word, typename Word2, typename WeightT>
+    struct hash_label<algebra::polynom<Word, rat::exp<Word2, WeightT> > >
     {
-      std::size_t operator() (const algebra::polynom<Word, rat::exp<std::string, WeightT> >& l) const;
-      std::size_t operator() (const rat::exp<std::string, WeightT>& l) const;
-
+      std::size_t operator() (const algebra::polynom<Word, rat::exp<Word2, WeightT> >& l) const;
+      std::size_t operator() (const rat::exp<Word2, WeightT>& l) const;
     };
 
+#if 0
     template <typename Word, typename LetterT, typename WeightT>
     struct hash_label<algebra::polynom<Word, rat::exp<LetterT, WeightT> > >
     {
       std::size_t operator() (const algebra::polynom<Word, rat::exp<LetterT, WeightT> >& l) const;
     };
+#endif
 
 
 /*    template <typename Word, typename LetterT, typename WeightT>

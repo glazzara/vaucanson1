@@ -56,6 +56,7 @@ namespace vcsn
       return seed;
     }
 
+# if 0
     template <typename Word, typename LetterT, typename WeightT>
     std::size_t
     hash_label<algebra::polynom<Word, rat::exp<LetterT, WeightT> > >::operator() (
@@ -74,27 +75,27 @@ namespace vcsn
       }
       return seed;
     }
-
-    template <typename Word, typename WeightT>
+#endif
+    template <typename Word, typename Word2, typename WeightT>
     std::size_t
-    hash_label<algebra::polynom<Word, rat::exp<std::string, WeightT> > >::operator() (
-	const rat::exp<std::string, WeightT>& l) const
+    hash_label<algebra::polynom<Word, rat::exp<Word2, WeightT> > >::operator() (
+	const rat::exp<Word2, WeightT>& l) const
     {
-      rat::HashVisitor<std::string, WeightT> visitor;
+      rat::HashVisitor<Word2, WeightT> visitor;
       l.accept(visitor);
       return visitor.hash_value();
     }
 
 
-    template <typename Word, typename WeightT>
+    template <typename Word, typename Word2, typename WeightT>
     std::size_t
-    hash_label<algebra::polynom<Word, rat::exp<std::string, WeightT> > >::operator() (
-	  const algebra::polynom<Word, rat::exp<std::string, WeightT> >& l) const
+    hash_label<algebra::polynom<Word, rat::exp<Word2, WeightT> > >::operator() (
+	  const algebra::polynom<Word, rat::exp<Word2, WeightT> >& l) const
     {
       std::size_t seed (0);
       hash_label hash;
 
-      for (typename algebra::polynom<Word, rat::exp<std::string,
+      for (typename algebra::polynom<Word, rat::exp<Word2,
 	    WeightT> >::const_iterator i = l.begin ();
 	   i != l.end ();
 	   ++i)

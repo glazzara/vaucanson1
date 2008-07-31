@@ -1,5 +1,13 @@
 2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Fix hash functions to support rw transducers on integers.
+	Get rid of std::string and use a template instead so
+	that std::basic_string<int> can be supported.
+	* include/vaucanson/misc/hash.hh: Here.
+	* include/vaucanson/misc/hash.hxx: Here.
+
+2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fix Makefile.am to support new int based contexts.
 	* include/Makefile.am: Add contexts files.
 
