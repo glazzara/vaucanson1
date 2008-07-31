@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -14,34 +14,34 @@
 include $(top_srcdir)/build-aux/check.mk
 
 TESTS =						\
-vcsn-b.test					\
-vcsn-z.test					\
-vcsn-tdc.test					\
-completeness.test
+  vcsn-char-b.test				\
+  vcsn-char-z.test				\
+  vcsn-char-fmp.test				\
+  completeness.test
 
 XFAIL_TESTS = completeness.test
 
-EXTRA_DIST = $(TESTS) 				\
-	automata/b/ambiguous1.xml 		\
-	automata/b/ambiguous2.xml		\
-	automata/b/non_ambiguous1.xml		\
-	automata/tdc/t1_compose_u1.xml		\
-	automata/tdc/t2.xml			\
-	automata/tdc/u2.xml			\
-	automata/tdc/t2_u-compose_u2.xml	\
-	automata/tdc/inverted_t1.xml		\
-	automata/b/b_transposed.xml		\
-	automata/b/b_to_transpose.xml		\
-	automata/b/void_b_automaton.xml		\
-	automata/z/void_z_automaton.xml		\
-	automata/z/standard_c1.xml
+EXTRA_DIST = $(TESTS)				\
+  automata/char-b/ambiguous1.xml		\
+  automata/char-b/ambiguous2.xml		\
+  automata/char-b/b_to_transpose.xml		\
+  automata/char-b/b_transposed.xml		\
+  automata/char-b/non_ambiguous1.xml		\
+  automata/char-b/void_b_automaton.xml		\
+  automata/char-fmp/inverted_t1.xml		\
+  automata/char-fmp/t1_compose_u1.xml		\
+  automata/char-fmp/t2_u-compose_u2.xml		\
+  automata/char-fmp/t2.xml			\
+  automata/char-fmp/u2.xml			\
+  automata/char-z/standard_c1.xml		\
+  automata/char-z/void_z_automaton.xml
 
 # Each test case depends on defs.
 check_SCRIPTS =					\
-defs						\
-vcsn-b						\
-vcsn-tdc					\
-vcsn-z
+  defs						\
+  vcsn-char-b					\
+  vcsn-char-fmp					\
+  vcsn-char-z
 
 distclean-local:
 	-rm -rf $(TESTS:.test=.dir)

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -95,7 +95,7 @@ public:
 
 // Looks like boolean_tranducer::automaton_t is never loaded from file.
 // Make sure that it is not converted from something else (it would
-// case trouble with the pipe).  Most likely in vcsn-tdc, automaton_t
+// case trouble with the pipe).  Most likely in vcsn-fmp, automaton_t
 // and boolean_transducer::automaton_t are the same (hence the
 // absence of declaration of the namespace)
 #  if (false)

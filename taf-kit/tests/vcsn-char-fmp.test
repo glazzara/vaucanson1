@@ -17,12 +17,14 @@
 
 set -e
 
+VCSN=vcsn-char-fmp
+
 ## ------------------------------------ ##
 ## Input/output work with transducers.  ##
 ## ------------------------------------ ##
 
-vcsn-tdc dot-dump $t1
-vcsn-tdc info $t1
+$VCSN dot-dump $t1
+$VCSN info $t1
 
 
 ## ------------------------------------- ##
@@ -32,9 +34,9 @@ vcsn-tdc info $t1
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-#  vcsn-tdc are-isomorphic $t1 $t1
-      vcsn-tdc is-sub-normalized $t1
-fail1 vcsn-tdc is-empty $t1
+#  $VCSN are-isomorphic $t1 $t1
+      $VCSN is-sub-normalized $t1
+fail1 $VCSN is-empty $t1
 
 
 
@@ -44,19 +46,19 @@ fail1 vcsn-tdc is-empty $t1
 
 
 ## Composition test on boolean transducers
-  vcsn-tdc compose $t1 $u1 > tmp1.xml
+  $VCSN compose $t1 $u1 > tmp1.xml
 #FIXME: Disable xml diff
 #  diff tmp1.xml $t1_compose_u1
 
-  vcsn-tdc u_compose $t1 $u1 > tmp2.xml
+  $VCSN u_compose $t1 $u1 > tmp2.xml
 
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-# fail1 vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
+# fail1 $VCSN are-isomorphic tmp1.xml tmp2.xml
 
 ## Unambiguous composition test on boolean transducers
-  vcsn-tdc u_compose $t2 \
+  $VCSN u_compose $t2 \
                      $u2 > tmp.xml
 
 #FIXME: Disable xml diff
@@ -66,12 +68,12 @@ fail1 vcsn-tdc is-empty $t1
 # as long as this algorithm is not correctly
 # defined.
 ## Inversion of t1
-#  vcsn-tdc invert $t1 \| are-isomorphic $inverted_t1 -
+#  $VCSN invert $t1 \| are-isomorphic $inverted_t1 -
 
-  input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
-  vcsn-tdc --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-b eval - abba
-  vcsn-tdc --alphabet1=ab --alphabet2=xy image $t1 | vcsn-b eval - $input
+  input=`$VCSN --alphabet1=ab --alphabet2=xy eval $t1 abba`
+  $VCSN --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-char-b eval - abba
+  $VCSN --alphabet1=ab --alphabet2=xy image $t1 | vcsn-char-b eval - $input
 
-  vcsn-tdc to-rw $t1
+  $VCSN to-rw $t1
 
-  vcsn-tdc --alphabet1=ab --alphabet2=xy eval-aut $t1 $a1 | vcsn-b eval - yx
+  $VCSN --alphabet1=ab --alphabet2=xy eval-aut $t1 $a1 | vcsn-char-b eval - yx

@@ -207,9 +207,9 @@ m4_define([VCSN_CONFIG_WRAPPER],
 [AC_CONFIG_FILES([taf-kit/tests/$1:taf-kit/tests/wrapper.in],
 		 [chmod a+x taf-kit/tests/$1])
 ])
-VCSN_CONFIG_WRAPPER([vcsn-b])
-VCSN_CONFIG_WRAPPER([vcsn-tdc])
-VCSN_CONFIG_WRAPPER([vcsn-z])
+VCSN_CONFIG_WRAPPER([vcsn-char-b])
+VCSN_CONFIG_WRAPPER([vcsn-char-fmp])
+VCSN_CONFIG_WRAPPER([vcsn-char-z])
 
 
 

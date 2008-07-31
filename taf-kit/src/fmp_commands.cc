@@ -1,4 +1,4 @@
-// tdc_commands.cc: this file is part of the Vaucanson project.
+// fmp_commands.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -16,7 +16,7 @@
 //
 
 /**
- * @file   tdc_commands.cc
+ * @file   fmp_commands.cc
  * @author Guillaume Leroi
  * @date   Thu Jul 20 17:24:46 2006
  *

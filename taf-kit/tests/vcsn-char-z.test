@@ -17,12 +17,14 @@
 
 set -e
 
+VCSN=vcsn-char-z
+
 ## --------------------------------- ##
 ## Input/output work with automata.  ##
 ## --------------------------------- ##
 
-vcsn-z dot-dump $c1
-vcsn-z info $c1
+$VCSN dot-dump $c1
+$VCSN info $c1
 
 ## ---------------------------------- ##
 ## Tests and evaluation on automata.  ##
@@ -31,40 +33,40 @@ vcsn-z info $c1
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-#  vcsn-z are-isomorphic $c1 $c1
+#  $VCSN are-isomorphic $c1 $c1
 #
-test $(vcsn-z eval $c1 bababa) -eq 42
-      vcsn-z is-ambiguous $c1
-fail1 vcsn-z is-empty $c1
-      vcsn-z is-realtime $c1
-fail1 vcsn-z is-standard $c1
-fail1 vcsn-z is-standard $void_z_automaton
-      vcsn-z is-standard $standard_c1
-      vcsn-z -a ab standard '({2} a).({4} 1)' > 2a_41.xml
-      vcsn-z is-standard 2a_41.xml
+test $($VCSN eval $c1 bababa) -eq 42
+      $VCSN is-ambiguous $c1
+fail1 $VCSN is-empty $c1
+      $VCSN is-realtime $c1
+fail1 $VCSN is-standard $c1
+fail1 $VCSN is-standard $void_z_automaton
+      $VCSN is-standard $standard_c1
+      $VCSN -a ab standard '({2} a).({4} 1)' > 2a_41.xml
+      $VCSN is-standard 2a_41.xml
 
-      vcsn-z is-complete $c1
-fail1 vcsn-z is-complete $void_z_automaton
-      vcsn-z complete $void_z_automaton \| is-complete -
+      $VCSN is-complete $c1
+fail1 $VCSN is-complete $void_z_automaton
+      $VCSN complete $void_z_automaton \| is-complete -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
 
 # star-of-standard
-vcsn-z star-of-standard $standard_c1 \| is-standard -
+$VCSN star-of-standard $standard_c1 \| is-standard -
 
 # construct ((2 a).(4 1))*
-vcsn-z star-of-standard 2a_41.xml > star_2a_41.xml
+$VCSN star-of-standard 2a_41.xml > star_2a_41.xml
 
-vcsn-z is-standard star_2a_41.xml
-test $(vcsn-z eval star_2a_41.xml a) -eq 8
-test $(vcsn-z eval star_2a_41.xml aa) -eq 64
-test $(vcsn-z eval star_2a_41.xml aaa) -eq 512
+$VCSN is-standard star_2a_41.xml
+test $($VCSN eval star_2a_41.xml a) -eq 8
+test $($VCSN eval star_2a_41.xml aa) -eq 64
+test $($VCSN eval star_2a_41.xml aaa) -eq 512
 
 # union-of-standard
-vcsn-z union-of-standard $standard_c1 $standard_c1 \| is-standard -
-vcsn-z concat-of-standard $standard_c1 $standard_c1 \| is-standard -
+$VCSN union-of-standard $standard_c1 $standard_c1 \| is-standard -
+$VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -
 
 # concat-of-standard
 
