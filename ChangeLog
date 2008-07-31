@@ -1,5 +1,10 @@
 2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing test reference.
+	* src/tests/xml/int_b_ref.dot: New.
+
+2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Overhaul letters to ease adding automaton contexts (#150,#151,#152)(merge).
 	Changesets: 2016,2018,2019,2020,2021,2022,2024,
 	2027,2028,2029,2032,2036,2037,2040,2045
