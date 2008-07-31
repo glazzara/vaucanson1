@@ -1,3 +1,13 @@
+2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Update share.
+	* doc/share/bin/texi2dvi: .
+	* doc/share/styles/ldf/stl.ldf: Remove.
+	* doc/share/styles/ldf/stl.sty: New.
+	* doc/share/styles/ldf/vaucanson.ldf: Remove.
+	* doc/share/styles/ldf/vaucanson.sty: New.
+	* doc/share/styles/myacronym.sty: .
+
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/common_automaton_commands.hh (eval): Add newline,
