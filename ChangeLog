@@ -1,3 +1,8 @@
+2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add missing files to the distribution.
+	* src/demos/one_rule_rewriting/Makefile.am: Here.
+
 2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Rename tdc in fmp.
