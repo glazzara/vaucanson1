@@ -1,5 +1,14 @@
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Do not show predefined alphabets in vcsn-int-b's output.
+
+	* taf-kit/src/main.cc [NO_PREDEF_ALPHABETS]: Do
+	not handle and show predefined alphabet.
+	(parse_opt): Do not assign `found' twice.
+	* Makefile.am (vcsn_int_b_CPPFLAGS): Add -DNO_PREDEF_ALPHABETS.
+
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Create vcsn-int-b.  (It is not functional yet.)
 
 	* taf-kit/src/Makefile.am: Create vcsn-int-b (without using
@@ -19,7 +28,7 @@
 
 	Add context of int based fmp transducers.
 	Add context of int based fmp transducers.
-	
+
 	Remove useless escaper in op_rout which lead to escape integers when dealing with 1 and 0.
 
 	Fix fmp type for allowing generic letters.

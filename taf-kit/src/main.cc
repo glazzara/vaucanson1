@@ -107,15 +107,18 @@ namespace
       "Set the working parser options for rational expressions", 0 },
 #endif /* ! WITH_TWO_ALPHABETS */
 
+#ifndef NO_PREDEF_ALPHABETS
     { 0, 0, 0, 0, "The following alphabets are predefined:\n"
       "	 `letters': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `alpha': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `digits': Use [0-9] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
       "	 `ascii': Use ascii characters as the alphabet, " DEFAULT_EPSILON " as epsilon\n", 0},
+#endif
 
     { 0, 0, 0, 0, 0, 0 }
   };
 
+#ifndef NO_PREDEF_ALPHABETS
   const struct alphabet
   {
     const char*	name;
@@ -126,6 +129,7 @@ namespace
 			       { "digits", ALPHABET_DIGITS, DEFAULT_EPSILON },
 			       { "ascii", ALPHABET_ASCII, DEFAULT_EPSILON },
 			       { 0, 0, 0 } };
+#endif
 
   error_t parse_opt (int key, char* arg, argp_state* state)
   {
@@ -136,7 +140,7 @@ namespace
     {
       case 'a':
       case 'A':
-	found = false;
+#ifndef NO_PREDEF_ALPHABETS
 	for (const alphabet* alpha = predefined_alphabets; alpha->name; ++alpha)
 	{
 	  if (std::string (alpha->name) == arg)
@@ -157,6 +161,7 @@ namespace
 	    break;
 	  }
 	}
+#endif
 	if (!found)
 	{
 	  if (key == 'a')

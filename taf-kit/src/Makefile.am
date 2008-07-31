@@ -75,7 +75,8 @@ vcsn_int_b_SOURCES = $(COMMON_SOURCES)			\
 		      ratexp_commands.hh		\
 	              common_automaton_commands.hh	\
                       b_commands.cc
-vcsn_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_boolean_automaton
+vcsn_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_boolean_automaton \
+                      -DNO_PREDEF_ALPHABETS
 vcsn_int_b_LDADD = $(LDADD)				\
 		    $(top_builddir)/lib/libkrat_exp.la
 
