@@ -1,4 +1,4 @@
-// int_based_boolean_automaton.hh: this file is part of the Vaucanson project.
+// int_z_max_plus_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -20,9 +20,9 @@
  * VCSN_GRAPH_IMPL could be changed.
  */
 
-# include GRAPH_CONTEXT_HEADER_(int_based_boolean_automaton_structures.hh)
+# include GRAPH_CONTEXT_HEADER_(int_z_max_plus_automaton_structures.hh)
 
-# define VCSN_CONTEXT_NAMESPACE namespace int_based_boolean_automaton
+# define VCSN_CONTEXT_NAMESPACE namespace int_z_max_plus_automaton
 
 # include <vaucanson/contexts/automaton_functions.thh>
 

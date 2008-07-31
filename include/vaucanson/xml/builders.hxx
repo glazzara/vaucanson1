@@ -104,6 +104,11 @@ namespace vcsn
 	mongenh_ = new monGenHandler<T>(parser_, *this, monoid_, value);
 	parser_->setContentHandler(mongenh_);
       }
+      else if (xercesc::XMLString::equals(eq_.genSort, localname))
+      {
+	/* FIXME should store informations of genSort to ensure monoid consistency */
+	parser_->setContentHandler(&unsuph_);
+      }
       else if (xercesc::XMLString::equals(eq_.writingData, localname))
 	parser_->setContentHandler(&unsuph_);
       else

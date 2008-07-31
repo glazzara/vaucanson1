@@ -1,3 +1,42 @@
+2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add some contexts based on int letter.
+	Some contexts (transducers) need to be added.
+
+	Add contexts of automata based on int letters.
+	Add xml tests based on these contexts.
+
+	Fix headers of previous contexts files.
+
+	Rename int_based_boolean_automaton context to int_boolean_automaton
+
+	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/int_based_boolean_automaton.hh: Remove.
+	* include/vaucanson/automata/generic_contexts/int_based_boolean_automaton_structures.hh: Remove.
+	* include/vaucanson/automata/generic_contexts/int_boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_boolean_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_max_plus_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_max_plus_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_min_plus_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_min_plus_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/r_automaton_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/z_automaton_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/z_max_plus_automaton_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/z_min_plus_automaton_structures.hh: Fix header.
+	* include/vaucanson/automata/generic_contexts/z_transducer_structures.hh: Fix header.
+	* include/vaucanson/xml/builders.hxx: Prepare to support pairs.
+	* src/tests/xml/Makefile.am: Add tests.
+	* src/tests/xml/int_z_max_plus_ref.dot: New.
+	* src/tests/xml/int_z_max_plus_ref.xml: New.
+	* src/tests/xml/int_z_min_plus_ref.dot: New.
+	* src/tests/xml/int_z_min_plus_ref.xml: New.
+	* src/tests/xml/int_z_ref.dot: New.
+	* src/tests/xml/int_z_ref.xml: New.
+
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* lib/krat_exp/libkrat_exp.mk (KRAT_EXP_DIR): Remove this variable

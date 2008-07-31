@@ -1,4 +1,4 @@
-// vcsn_tdc.hh: this file is part of the Vaucanson project.
+// boolean_transducer_structures.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //

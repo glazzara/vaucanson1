@@ -1,8 +1,8 @@
-// z_automaton_structures.hh: this file is part of the Vaucanson project.
+// int_z_automaton_structures.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
  * VCSN_GRAPH_IMPL could be changed.
  */
 
-# define VCSN_CONTEXT_NAMESPACE namespace z_automaton
+# define VCSN_CONTEXT_NAMESPACE namespace int_z_automaton
 
-# include <vaucanson/contexts/char_letter.thh>
+# include <vaucanson/contexts/int_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>
 # include <vaucanson/contexts/free_monoid.thh>
 # include <vaucanson/contexts/z_semiring.thh>

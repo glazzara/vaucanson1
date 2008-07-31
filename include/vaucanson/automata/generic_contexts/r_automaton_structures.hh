@@ -1,4 +1,4 @@
-// vcsn_r.hh: this file is part of the Vaucanson project.
+// r_automaton_structures.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
