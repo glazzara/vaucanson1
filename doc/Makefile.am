@@ -30,8 +30,8 @@ SHAREFILES = \
   share/bib/vaucanson.bib \
   share/bin/texi2dvi \
   share/styles/hevea.sty \
-  share/styles/ldf/stl.ldf \
-  share/styles/ldf/vaucanson.ldf \
+  share/styles/ldf/stl.sty \
+  share/styles/ldf/vaucanson.sty \
   share/styles/misc.hva \
   share/styles/misc.sty \
   share/styles/myacronym.sty \
@@ -53,7 +53,7 @@ SHAREFILES = \
 .PHONY: share-up
 share-up:
 	for f in $(SHAREFILES); do \
-	  $(WGETL)$$f -O $$f || exit 1; \
+	  $(WGETL)$$f -O $(top_srcdir)/doc/$$f || exit 1; \
 	done
 
 ## ----------------------- ##

@@ -1,5 +1,12 @@
 2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Rename vcsn-b/-z/-fmp in vcsn-char-b/-z/-fmp in the doc.
+	* doc/Makefile.am,
+	* doc/manual/automata.tex,
+	* doc/manual/taf-kit.tex: Rename.
+
+2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Update share.
 	* doc/share/bin/texi2dvi: .
 	* doc/share/styles/ldf/stl.ldf: Remove.
