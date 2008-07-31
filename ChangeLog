@@ -1,5 +1,47 @@
 2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Overhaul letters to ease adding automaton contexts (#150,#151,#152)(merge).
+	Changesets: 2016,2018,2019,2020,2021,2022,2024,
+	2027,2028,2029,2032,2036,2037,2040,2045
+	Ignored: 2017
+	* include/Makefile.am: Add file to distribution.
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	* include/vaucanson/algebra/concept/letter.hh: Improve use of core
+	* vaucanson genericity.
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hxx:
+	* Change layout.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hh:
+	* Make in line with other letter types.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx: New.
+	* include/vaucanson/algebra/implementation/letter/int_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	* Make int based automaton a reallity.
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hxx: Take new
+	* letter types into account for interface.
+	* include/vaucanson/automata/generic_contexts/int_based_boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_based_boolean_automaton_structures.hh: New.
+	* include/vaucanson/contexts/char_letter.thh: Update the char letter
+	* context.
+	* include/vaucanson/contexts/int_letter.thh: New.
+	* include/vaucanson/misc/hash.hh,
+	* include/vaucanson/misc/hash.hxx: Add a new hash specialization.
+	* include/vaucanson/tools/dot_format.hh,
+	* include/vaucanson/tools/dot_format.hxx: Update to reflect core
+	* changes.
+	* include/vaucanson/xml/builders.hxx: Overhaul the builder (see
+	* merge source changelog).
+	* src/tests/xml/Makefile.am: Add a new test.
+	* src/tests/xml/int_b_ref.xml: New.
+
+2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix composition of rw transducers (#153)(merge).
 	Changesets: 2008,2010
 	Ignored: 2004,2005,2006

@@ -31,7 +31,13 @@ namespace vcsn
     std::size_t hash_label<char>::operator()(const char c) const
     {
       return c;
-    };
+    }
+
+    inline
+    std::size_t hash_label<int>::operator()(const int c) const
+    {
+      return c;
+    }
 
     template <typename Word, typename Weight>
     std::size_t

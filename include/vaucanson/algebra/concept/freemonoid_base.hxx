@@ -169,7 +169,8 @@ namespace vcsn {
 	 it != from_data.end();
 	 ++it)
       precondition_ (s.alphabet().contains(*it),
-		     "The letter " + *it + " is not in the given alphabet");
+		     "The letter " + vcsn::algebra::letter_traits<T>::letter_to_literal(*it) +
+		     " is not in the given alphabet");
 # else // ! VCSN_NDEBUG
     (void) s;
 # endif // ! VCSN_NDEBUG
@@ -178,43 +179,19 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*----------.
-    | Operators |
-    `----------*/
+    /*------------------.
+    | Default Operators |
+    `------------------*/
 
-    // default implementation of word parsing assumes the fact that
-    // an alphabet letter can be constructed from a 'char'.
-    // specialized this function according to your alphabet if this
-    // is not the case.
     template <typename S, typename T, typename CharContainer>
-    bool op_parse(const algebra::FreeMonoidBase<S>& set, T& v,
+    bool op_parse(const algebra::FreeMonoidBase<S>&,
+		  T& v,
 		  const std::string& s,
 		  typename std::string::const_iterator& i,
 		  const CharContainer& escaped)
     {
-      typename std::string::const_iterator j = i;
-      typename std::string::const_iterator k;
-
-      while ((i != s.end()) &&
-	     ((*i == '\\') || (set.alphabet().contains(*i) &&
-	     (std::find(escaped.begin(), escaped.end(), *i) == escaped.end()))))
-	if (*i == '\\')
-	  {
-	    k = i;
-	    ++k;
-	    if (k != s.end())
-	      i = k;
-	    if (not set.alphabet().contains(*i))
-	      return (i != j);
-	    v += *i;
-	    ++i;
-	  }
-	else
-	  {
-	    v += *i;
-	    ++i;
-	  }
-      return (i != j);
+      static_error(no_op_parse_operator_available);
+      return false;
     }
 
     template <typename Self, typename T>

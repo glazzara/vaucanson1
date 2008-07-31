@@ -31,12 +31,16 @@ r_tester					\
 trans_tester					\
 z_max_plus_tester				\
 z_min_plus_tester				\
-z_tester
+z_tester					\
+int_b_tester						
 
 ##session_tester					
 
 b_tester_SOURCES = xml_automaton_tester.cc
 b_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="boolean_automaton"
+
+int_b_tester_SOURCES = xml_automaton_tester.cc
+int_b_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="int_based_boolean_automaton"
 
 z_tester_SOURCES = xml_automaton_tester.cc
 z_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="z_automaton"

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,30 +17,34 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_CHAR_LETTER_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_CHAR_LETTER_HH
 
+# include <string>
+# include <iostream>
+
+# include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/concept/letter.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 namespace vcsn {
 
   namespace algebra {
 
+    // Specialization for char type.
     template <>
-    struct letter_traits<char>
-    {
-      enum
-	{
-	  // Here we use 255  and not 256 since random::generate<char>
-	  // does not generates 0 to avoid conflicts with 0 terminated
-	  // C strings. Therefore char  alphabets will never hold more
-	  // than 255 different letters.
-	  cardinal = 255
-	};
+    struct letter_traits<char>;
 
-      static const char default_joker() { return '?'; }
-      static const char default_other() { return '#'; }
-    };
+    // Specialization for char type.
+    template <typename S, typename CharContainer>
+    bool op_parse(const algebra::FreeMonoidBase<S>& set,
+		  std::basic_string<char>& v,
+		  const std::string& s,
+		  typename std::string::const_iterator& i,
+		  const CharContainer& escaped);
+  } // ! algebra
 
-  } // algebra
+} // ! vcsn
 
-} // vcsn
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
+#  include <vaucanson/algebra/implementation/letter/char_letter.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_CHAR_LETTER_HH

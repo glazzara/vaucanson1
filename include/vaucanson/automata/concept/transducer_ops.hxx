@@ -52,28 +52,6 @@ namespace vcsn {
 		       T& v,
 		       typename automaton_traits<T>::hstate_t from,
 		       typename automaton_traits<T>::hstate_t to,
-		       AutoType(input_letter_t) i,
-		       AutoType(output_letter_t) o,
-		       AutoType(output_semiring_elt_t) w)
-  {
-    AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
-    AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
-    AutoType(output_series_set_elt_t) os(s.series().semiring());
-    os.assoc(output_w, w);
-    AutoType(series_set_elt_t) is(s.series());
-    is.assoc(input_w, os);
-    std::cout << "add io transition :" << o << " "
-	      << output_w << " " << w << " "
-	      << os << std::endl;
-    return op_add_series_transition(s, v, from, to, is);
-  }
-
-  template <class S, class T>
-  typename automaton_traits<T>::htransition_t
-  op_add_io_transition(const TransducerBase<S>& s,
-		       T& v,
-		       typename automaton_traits<T>::hstate_t from,
-		       typename automaton_traits<T>::hstate_t to,
 		       AutoType(input_monoid_elt_t) input_w,
 		       AutoType(output_monoid_elt_t) output_w,
 		       AutoType(output_semiring_elt_t) w)

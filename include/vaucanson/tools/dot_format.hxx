@@ -20,7 +20,6 @@
 # include <sstream>
 # include <map>
 
-# include <vaucanson/misc/escaper.hh>
 # include <vaucanson/tools/dot_format.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/misc/usual_macros.hh>
@@ -29,12 +28,21 @@ namespace vcsn
 {
   namespace tools
   {
+    void
+    name_escaper(std::ostream& out, const std::string& name)
+    {
+      for (std::string::const_iterator i = name.begin(); i != name.end(); ++i)
+      {
+	if (*i == '"')
+	  out << "\\";
+	out << *i;
+      }
+    }
+
     inline dot::dot(const std::string& name)
     {
       std::ostringstream os;
-      std::set<char> to_escape;
-      to_escape.insert('"');
-      (misc::setesc(to_escape))(os) << misc::escaper<std::string>(name);
+      name_escaper(os, name);
       name_ = std::string("\"") + os.str();
     }
 
@@ -96,9 +104,7 @@ namespace vcsn
     inline transducer_dot::transducer_dot(const std::string& name)
     {
       std::ostringstream os;
-      std::set<char> to_escape;
-      to_escape.insert('"');
-      (misc::setesc(to_escape))(os) << misc::escaper<std::string>(name);
+      name_escaper(os, name);
       name_ = std::string("\"") + os.str();
     }
 

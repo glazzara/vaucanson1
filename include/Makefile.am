@@ -198,6 +198,7 @@ vaucanson/algebra/implementation/free_monoid/words.hxx				     \
 vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh  \
 vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx \
 vaucanson/algebra/implementation/letter/char_letter.hh				     \
+vaucanson/algebra/implementation/letter/char_letter.hxx				     \
 vaucanson/algebra/implementation/letter/couple_letter.hh			     \
 vaucanson/algebra/implementation/letter/couple_letter.hxx			     \
 vaucanson/algebra/implementation/letter/int_letter.hh				     \

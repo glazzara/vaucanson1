@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -107,6 +108,13 @@ namespace vcsn {
   MetaElement<algebra::AlphabetSetBase<S>, T>::insert(const letter_t& l)
   {
     op_insert(this->structure(), this->value(), l);
+  }
+
+  template<typename S, typename T>
+  void
+  MetaElement<algebra::AlphabetSetBase<S>, T>::insert(const std::string& lit)
+  {
+    op_insert(this->structure(), this->value(), algebra::letter_traits<letter_t>::literal_to_letter(lit));
   }
 
   template<typename S, typename T>

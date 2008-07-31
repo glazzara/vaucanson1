@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,6 +25,7 @@
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/container_ops.hh>
+# include <vaucanson/algebra/concept/letter.hh>
 
 namespace vcsn {
 
@@ -135,6 +137,9 @@ namespace vcsn {
 
     /// Add a letter to the alphabet.
     void insert(const letter_t& l);
+
+    /// Add a letter to the alphabet from a literal representation.
+    void insert(const std::string& lit);
 
     /// Randomly choose a letter in the alphabet.
     letter_t choose() const;

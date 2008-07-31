@@ -1,9 +1,8 @@
-//                                                             -*- C++ -*-
-// char_letter.thh: this file is part of the Vaucanson project.
+// int_based_boolean_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,20 +17,14 @@
 
 /*
  * CPP guard should not be inserted here as
- * VCSN_CONTEXT_NAMESPACE could be changed.
+ * VCSN_GRAPH_IMPL could be changed.
  */
 
-# include <vaucanson/algebra/implementation/letter/char_letter.hh>
+# include GRAPH_CONTEXT_HEADER_(int_based_boolean_automaton_structures.hh)
 
-namespace vcsn
-{
-  namespace VCSN_GRAPH_IMPL
-  {
-    VCSN_CONTEXT_NAMESPACE
-    {
+# define VCSN_CONTEXT_NAMESPACE namespace int_based_boolean_automaton
 
-      typedef char	letter_t;
+# include <vaucanson/contexts/automaton_functions.thh>
 
-    } // End of VCSN_CONTEXT_NAMESPACE.
-  } // End of VCSN_GRAPH_IMPL
-} // End of namespace vcsn.
+# undef VCSN_CONTEXT_NAMESPACE
+

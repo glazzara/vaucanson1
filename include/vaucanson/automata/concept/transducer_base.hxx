@@ -55,12 +55,13 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
+  template <typename U, typename V>
   typename automaton_traits<T>::htransition_t
   MetaElement<TransducerBase<Self>, T>::
   add_io_transition(typename automaton_traits<T>::hstate_t from,
 		    typename automaton_traits<T>::hstate_t to,
-		    input_monoid_elt_value_t i,
-		    output_monoid_elt_value_t o,
+		    const U& i,
+		    const V& o,
 		    output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
@@ -74,68 +75,64 @@ namespace vcsn {
 				from, to, i_elt, o_elt, w);
   }
 
-
   template <typename Self, typename T>
+  template <typename U>
   typename automaton_traits<T>::htransition_t
-  MetaElement<TransducerBase<Self>, T>::add_io_transition(typename automaton_traits<T>::hstate_t from,
-							  typename automaton_traits<T>::hstate_t to,
-							  input_letter_t i,
-							  output_letter_t o,
-							  output_semiring_elt_t w)
+  MetaElement<TransducerBase<Self>, T>::
+  add_o_transition(typename automaton_traits<T>::hstate_t from,
+		   typename automaton_traits<T>::hstate_t to,
+		   const U& o,
+		   output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
-    return op_add_io_transition(this->structure(), this->value(),
-				from, to, i, o, w);
-  }
-
-  template <typename Self, typename T>
-  typename automaton_traits<T>::htransition_t
-  MetaElement<TransducerBase<Self>, T>::add_o_transition(typename automaton_traits<T>::hstate_t from,
-							 typename automaton_traits<T>::hstate_t to,
-							 output_letter_t o,
-							 output_semiring_elt_t w)
-  {
-    if (w == output_semiring_elt_t())
-      w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(this->series().semiring().semiring());
-
+    Element<output_monoid_t, output_monoid_elt_value_t>
+      o_elt (this->structure().series().semiring().monoid(), o);
     return op_add_o_transition(this->structure(), this->value(),
-			       from, to, o, w);
+			       from, to, o_elt, w);
   }
 
   template <typename Self, typename T>
+  template <typename U>
   typename automaton_traits<T>::htransition_t
-  MetaElement<TransducerBase<Self>, T>::add_i_transition(typename automaton_traits<T>::hstate_t from,
-							 typename automaton_traits<T>::hstate_t to,
-							 input_letter_t i,
-							 output_semiring_elt_t w)
+  MetaElement<TransducerBase<Self>, T>::
+  add_i_transition(typename automaton_traits<T>::hstate_t from,
+		   typename automaton_traits<T>::hstate_t to,
+		   const U& i,
+		   output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
-
+    Element<input_monoid_t, input_monoid_elt_value_t>
+      i_elt (this->structure().series().monoid(), i);
     return op_add_i_transition(this->structure(), this->value(),
-			       from, to, i, w);
+			       from, to, i_elt, w);
   }
 
   template <typename Self, typename T>
+  template <typename U>
   void
   MetaElement<TransducerBase<Self>, T>::
   set_o_final(typename automaton_traits<T>::hstate_t final,
-	      output_monoid_elt_value_t o)
+	      const U& o)
   {
-    op_set_o_final(this->structure(), this->value(), final, o);
+    Element<output_monoid_t, output_monoid_elt_value_t>
+      o_elt (this->structure().series().semiring().monoid(), o);
+    op_set_o_final(this->structure(), this->value(), final, o_elt.value());
   }
 
   template <typename Self, typename T>
+  template <typename U>
   void
   MetaElement<TransducerBase<Self>, T>::
   set_o_initial(typename automaton_traits<T>::hstate_t initial,
-		output_monoid_elt_value_t o)
+		const U& o)
   {
-    op_set_o_initial(this->structure(), this->value(), initial, o);
+    Element<output_monoid_t, output_monoid_elt_value_t>
+      o_elt (this->structure().series().semiring().monoid(), o);
+    op_set_o_initial(this->structure(), this->value(), initial, o_elt.value());
   }
 
 } // vcsn

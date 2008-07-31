@@ -18,6 +18,7 @@
 #ifndef VCSN_XML_BUILDERS_HXX
 # define VCSN_XML_BUILDERS_HXX
 
+# include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/xml/xml_exp_visitor.hh>
@@ -157,7 +158,7 @@ namespace vcsn
       insert_generator(T& monoid,
 		       const std::string& str)
       {
-	monoid.insert(str[0]);
+	monoid.insert(str);
       }
     } // !builders
     /**
@@ -316,6 +317,17 @@ namespace vcsn
 	if (builders::get_semiring_operations(param.structure()) != op)
 	  error::attrs(localname, "operations", op);
       };
+
+      template <class T>
+      const char* get_monoid_gen_sort(const T&)
+      { return "undefined"; }
+# define GET_MONOID_GEN_SORT(T, Value) \
+      const char* get_monoid_gen_sort(const T&) \
+      { return Value; }
+
+      GET_MONOID_GEN_SORT(char, "letters")
+      GET_MONOID_GEN_SORT(int, "integers")
+# undef GET_MONOID_GEN_SORT
     } // !builders
 
     namespace builders
@@ -344,7 +356,6 @@ namespace vcsn
 	tools::set_attribute(node, "type", "free");
 	tools::set_attribute(node, "genDescrip", "enum");
 	tools::set_attribute(node, "genKind", "simple"); // FIXME get it
-	tools::set_attribute(node, "genSort", "letters"); // FIXME get it
 	root->appendChild(node);
 	typedef typename T::monoid_t::alphabet_t::const_iterator alphabet_iterator;
 	for_all_letters(l, aut.structure().series().monoid().alphabet())
@@ -355,6 +366,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  node->appendChild(gen);
 	}
+	tools::set_attribute(node, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin())));
       }
 
       template <typename T>
@@ -375,24 +387,25 @@ namespace vcsn
 	root->appendChild(v.get());
       }
 
-      template <>
+      template <typename U>
       void
-      create_monElmt_node(const std::string& m,
+      create_monElmt_node(const U& word,
 			  xercesc::DOMDocument* doc,
 			  xercesc::DOMElement* root)
       {
 	xercesc::DOMElement* node;
 	// FIXME we shouldn't have to do that... and loop on the alphabet.
-	if (m.empty())
+	if (word.empty())
 	  node = tools::create_element(doc, "one");
 	else
 	{
 	  node = tools::create_element(doc, "monElmt");
-	  for (std::string::const_iterator i = m.begin(); i != m.end(); i++)
+	  for (typename U::const_iterator i = word.begin(); i != word.end(); ++i)
 	  {
 	    xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
-	    const std::string g(1, *i);
-	    tools::set_attribute(gen, "value", g);
+	    tools::set_attribute(gen, "value",
+				 algebra::letter_traits<typename U::value_type>::
+				 letter_to_literal(*i));
 	    node->appendChild(gen);
 	  }
 	}

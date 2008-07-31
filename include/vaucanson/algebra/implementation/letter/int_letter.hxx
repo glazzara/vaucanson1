@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2007 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 
 # include <sstream>
+# include <limits.h>
 
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
@@ -25,30 +26,57 @@ namespace vcsn {
 
   namespace algebra {
 
-    template <typename S>
+    template <>
+    struct letter_traits<int>
+    {
+      enum
+      {
+	// Here we use UINT_MAX and not UINT_MAX + 1 because an enum cannot
+	// hold UINT_MAX + 1.
+	cardinal = UINT_MAX
+      };
+
+      static
+      int
+      literal_to_letter(const std::string& str)
+      {
+	std::stringstream sstr(str);
+	int ret;
+	sstr >> ret;
+	return ret;
+      }
+
+      static
+      std::string
+      letter_to_literal(const int& c)
+      {
+	std::stringstream sstr;
+	sstr << c;
+	std::string str;
+	sstr >> str;
+	return str;
+      }
+    };
+
+    template <typename S, typename CharContainer>
     bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		  std::list<int>& v,
+		  std::basic_string<int>& v,
 		  const std::string& s,
 		  typename std::string::const_iterator& i,
-		  const std::list<char>& escaped)
+		  const CharContainer&)
     {
       typename std::string::const_iterator j = i;
       typename std::string::const_iterator k;
       typename std::string::const_iterator back;
 
-      while ((i != s.end()) &&
-	     (std::find(escaped.begin(), escaped.end(), *i) == escaped.end())) {
+      while (i != s.end()) {
 	std::string out;
 	back = i;
 
-	while ((i != s.end()) && (((*i >= '0') && (*i <= '9'))) || (*i == '\\'))
-	  if (*i == '\\') {
-	    k = i;
-	    ++k;
-	    if (k != s.end())
-	      i = k;
-	    out += *i;
+	while ((i != s.end()) && (((*i >= '0') && (*i <= '9'))) || (*i == '#'))
+	  if (*i == '#') {
 	    ++i;
+	    break;
 	  }
 	  else {
 	    out += *i;
@@ -67,27 +95,27 @@ namespace vcsn {
       return (i != j);
     }
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
+} // ! vcsn
 
 namespace std {
 
-  ostream& operator<<(ostream& o, list<int> s)
+  ostream& operator<<(ostream& o, basic_string<int> s)
   {
-    list<int>::const_iterator i;
-    list<int>::const_iterator j;
+    basic_string<int>::const_iterator i;
+    basic_string<int>::const_iterator j;
 
     for (i = s.begin(); i != s.end(); ) {
       o << *i;
       i++;
       if (i != s.end())
-	o << ",";
+	o << "#";
     }
 
     return o;
   }
 
-} // std
+} // ! std
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX

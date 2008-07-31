@@ -378,6 +378,13 @@ namespace vcsn {
       htransition_t add_letter_transition(unsigned src, unsigned dst,
 					  const letter_t& l);
 
+      /** Add a transition between @c src and @c dst labelled by a letter from
+       * its literal representation */
+      htransition_t add_letter_transition(const hstate_t& src, const hstate_t& dst,
+					  const std::string& l);
+      htransition_t add_letter_transition(unsigned src, unsigned dst,
+					  const std::string& l);
+
       /// Update the label of a transition.
       void update(const htransition_t& e, const label_t& l);
 

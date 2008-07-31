@@ -38,6 +38,12 @@ namespace vcsn
       std::size_t operator() (const char) const;
     };
 
+    template <>
+    struct hash_label<int>
+    {
+      std::size_t operator() (const int) const;
+    };
+
     template <typename Word, typename Weight>
     struct hash_label<algebra::polynom<Word, Weight> >
     {

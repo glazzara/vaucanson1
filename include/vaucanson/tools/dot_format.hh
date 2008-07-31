@@ -24,6 +24,10 @@ namespace vcsn {
 
   namespace tools {
 
+    /// Escape automaton names.
+    void
+    name_escaper(std::ostream&, const std::string&);
+
     struct dot
     {
       inline dot(const std::string& auto_name = "automaton");

@@ -490,6 +490,30 @@ namespace vcsn {
 				    src, dst, l);
   }
 
+  /** Add a transition between @c src and @c dst labelled by a letter from
+   * its literal representation. */
+  template <typename Self, typename T>
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_letter_transition(const typename automaton_traits<T>::hstate_t& src,
+							    const typename automaton_traits<T>::hstate_t& dst,
+							    const std::string& l)
+  {
+    return op_add_letter_transition(this->structure(), this->value(),
+				    src, dst, algebra::letter_traits<letter_t>::
+				    literal_to_letter(l));
+  }
+
+  template <typename Self, typename T>
+  typename automaton_traits<T>::htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_letter_transition(unsigned src,
+							    unsigned dst,
+							    const std::string& l)
+  {
+    return op_add_letter_transition(this->structure(), this->value(),
+				    src, dst, algebra::letter_traits<letter_t>::
+				    literal_to_letter(l));
+  }
+
   /** Update the label of a transition. */
   template <typename Self, typename T>
   void
