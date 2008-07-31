@@ -1,5 +1,10 @@
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/common_automaton_commands.hh (eval): Add newline,
+	removed by mistake earlier today.
+
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/getters.hxx (DEFINE_GET_ALPHABET): Do not split
 	words of the alphabet.
 	* taf-kit/tests/vcsn-int-b.test: More test.

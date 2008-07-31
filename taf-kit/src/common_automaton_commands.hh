@@ -109,7 +109,7 @@ DEFINE_COMMAND (NAME (eval)
 		      automaton_t a = realtime (get_aut (args.args[1]));
 		      semiring_elt_t b = eval (a, get_word (a, args.args[2])).value();
 		     )
-		OUTPUT (b)
+		OUTPUT (b << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (power)
