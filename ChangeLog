@@ -1,3 +1,15 @@
+2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix composition of rw transducers (#153)(merge).
+	Changesets: 2008,2010
+	Ignored: 2004,2005,2006
+	* include/vaucanson/algorithms/internal/evaluation.hh,
+	* include/vaucanson/algorithms/internal/evaluation.hxx: Remove
+	* useless functions.
+	* include/vaucanson/algorithms/rw_composition.hh,
+	* include/vaucanson/algorithms/rw_composition.hxx: Update the
+	* rw_composition algorithm.
+
 2008-07-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Distribute the yy source of the krat_exp parser and run bison from

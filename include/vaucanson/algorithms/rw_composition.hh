@@ -34,12 +34,12 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /// Composition for Rational-Weight transducers.
-  template< typename S, typename T>
+  template<typename S, typename T>
   void
   rw_composition(const Element<S, T>&, const Element<S, T>&, Element<S, T>&);
 
   /// Composition for Rational-Weight transducers.
-  template< typename S, typename T>
+  template<typename S, typename T>
   Element<S, T>
   rw_composition(const Element<S, T>&, const Element<S, T>&);
 

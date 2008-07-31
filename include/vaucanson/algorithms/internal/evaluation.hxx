@@ -55,37 +55,156 @@ namespace vcsn {
     do_evaluation(a.structure(), t.structure(), ret.structure(), a, t, ret);
   }
 
-  template<typename E, typename S, typename Trans_t, typename M>
+  template<typename U, typename V,
+           typename Trans_t, typename M>
   void
-  do_partial_evaluation(const E& exp,
-			const TransducerBase<S>&,
-			const Trans_t& t,
-			M& state_exp_pair_set)
+  do_partial_evaluation(const U& E,
+			const TransducerBase<V>&,
+			const Trans_t& S,
+			const typename Trans_t::hstate_t& p,
+			M& res)
   {
-    typedef typename Trans_t::value_t T;
-    typedef typename output_projection_helper<S, T>::ret Auto_t;
-    typedef typename Auto_t::set_t::series_set_t      Auto_series_set_t;
-    typename Auto_t::set_t
-      auto_structure(Auto_series_set_t(t.structure().series().semiring()));
-    Auto_t tmp_auto(auto_structure);
-
+    // type helpers
+    typedef typename Trans_t::value_t W;
+    typedef typename output_projection_helper<V, W>::ret Auto_t;
     AUTOMATON_TYPES(Auto_t);
-    monoid_elt_t empty = tmp_auto.series().monoid().VCSN_EMPTY_;
-    standard_of(tmp_auto, exp.get(empty).value());
-    partial_1(tmp_auto, t, state_exp_pair_set);
+    AUTOMATON_TYPES_(Trans_t, t_);
+    typedef typename Auto_t::set_t Auto_set_t;
+    typedef typename Auto_set_t::series_set_t Auto_series_set_t;
+    typedef series_set_elt_t exp_t;
+    typedef t_series_set_elt_t t_exp_t;
+    typedef std::map<t_hstate_t, std::pair<t_hstate_t, t_hstate_t> >
+    state_pair_map_t;
+    typedef std::map<t_hstate_t, hstate_t> state_state_map_t;
+    typedef std::pair<t_hstate_t, exp_t> se_pair_t;
+    Auto_set_t auto_structure(Auto_series_set_t(S.structure().series().semiring()));
+
+    //
+    // Part 1.
+    // Construct A = standard_of(E).
+    //
+
+    // Hold standard_of(E).
+    Auto_t A(auto_structure);
+    // The expression must come from a realtime automaton.
+    assertion(E.supp().size() == 1);
+    monoid_elt_t word(E.structure().monoid(), *E.supp().begin());
+    standard_of(A, E.get(word).value());
+
+    //
+    // Part 2.
+    // Sp construction.
+    //
+
+    // Does a copy of S,
+    Trans_t Sp = S;
+    state_state_map_t Sp_to_S;
+    for_all_const_initial_states_(t_, q, Sp)
+    {
+      if (*q == Sp.get_state(size_t(p)))
+	Sp.set_initial(*q);
+      else
+	Sp.unset_initial(*q);
+    }
+    // FIXME: initial or all states?
+    for_all_const_states_(t_, q, Sp)
+    Sp_to_S[*q] = S.get_state(size_t(*q));
+
+    //
+    // evaluation(A, Sp)
+    // Evaluation: we keep some information for later.
+    //
+
+    // extension
+    Trans_t tmp_trans(Sp.structure());
+    tmp_trans = extension(A, Sp);
+
+    // product
+    Trans_t pro(Sp.structure());
+    state_pair_map_t sp_m;
+    pro = product(tmp_trans, Sp, sp_m);
+
+    // build map we will reuse later
+    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>    states_map_for_sp_m;
+    for_all_iterator (typename state_pair_map_t::iterator, i, sp_m)
+    states_map_for_sp_m.insert(std::make_pair(pro.get_state(size_t(i->first)), i->first));
+
+    // image
+    Auto_t G(auto_structure);
+    state_state_map_t proj_m;
+    G = image(pro, proj_m);
+
+    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>    states_map_for_proj_m;
+    for_all_iterator (typename state_state_map_t::iterator, i, proj_m)
+    states_map_for_proj_m.insert(std::make_pair(G.get_state(size_t(i->first)), i->first));
+
+    // add i state
+    const hstate_t i = G.add_state();
+    for_all_const_initial_states(r, G)
+    {
+      exp_t old_label = G.get_initial(*r);
+      G.add_series_transition(i, *r, old_label);
+      G.unset_initial(*r);
+    }
+    G.set_initial(i);
+
+    //
+    // Part 3.
+    // Initialize map.
+    //
+
+    G.clear_final();
+    state_state_map_t state_of, is_state_of;
+    for_all_const_states_(t_, u, Sp)
+    {
+      hstate_t new_state = G.add_state();
+      state_of[*u] = new_state;
+      is_state_of[new_state] = *u;
+      G.set_final(new_state);
+    }
+
+    //
+    // Part 4.
+    // Create spontaneous transitions.
+    //
+
+    for_all_const_states(ig, G)
+    {
+      if (*ig != i && !G.is_final(*ig))
+      {
+	t_hstate_t t = sp_m[states_map_for_sp_m[proj_m[states_map_for_proj_m[*ig]]]].first;
+	t_hstate_t u = sp_m[states_map_for_sp_m[proj_m[states_map_for_proj_m[*ig]]]].second;
+
+	if (tmp_trans.is_final(t))
+	  G.add_spontaneous(*ig, state_of[u]);
+      }
+    }
+
+    //
+    // Part 5.
+    // Construct the output map.
+    //
+
+    M se;
+    partial_elimination(G, se);
+
+    for_all_(M, p, se)
+    {
+      se_pair_t my_pair = std::make_pair(Sp_to_S[is_state_of[(*p).first]], p->second);
+      res.insert(my_pair);
+    }
   }
 
-  /* Input : an expression, a transducer.
-     Output : a set of pair (hstate_t, expression)*/
-  template<typename S1, typename T1,
-	   typename S2, typename T2,
-	   typename M>
+  template<typename S1, typename T1, 
+  typename S2, typename T2, 
+  typename M>
   void
-  partial_evaluation(const Element<S1, T1>& exp,
-		     const Element<S2, T2>& trans,
-		     M& state_exp_pair_set)
+  partial_evaluation(const Element<S1, T1>& E,
+		     const Element<S2, T2>& S,
+		     const typename Element<S2, T2>::hstate_t& p,
+		     M& res)
   {
-    do_partial_evaluation(exp, trans.structure(), trans, state_exp_pair_set);
+    do_partial_evaluation(E, S.structure(), S, p, res);
   }
 
   template<typename S, typename Auto_t, typename M, typename Chooser_t>
@@ -115,6 +234,7 @@ namespace vcsn {
 	 ++i, ++j)
       states_map.insert(std::make_pair(*j, *i));
 
+    // FIXME: check dead code
 //    standardize(b);
 
     // all final states and the initial state.
@@ -198,11 +318,10 @@ namespace vcsn {
   /*------------.
   | elimination |
   `------------*/
+  // FIXME: add the generalized automaton precondition
   // preconditions :
   //   - hope that automaton's labels are sufficient to support "star"
   //	 => in fact, generalized automaton are generally expected here.
-  //
-
   template<typename A, typename T, typename M>
   void
   partial_elimination(const Element<A, T>& a,
@@ -214,198 +333,6 @@ namespace vcsn {
 			   state_exp_pair_set);
   }
 
-  ////////////////////////////////////////////////////////////
-  /* partial_1 */
-  template<typename SA, typename ST,
-	   typename Auto_t, typename Trans_t,
-	   typename M>
-  void
-  do_partial_1(const AutomataBase<SA>&,
-	       const TransducerBase<ST>&,
-	       const Auto_t& a,
-	       const Trans_t& t,
-	       M& state_exp_pair_set)
-  {
-    typedef typename Trans_t::value_t T;
-    typedef typename output_projection_helper<ST, T>::ret Auto_ret_t;
-    typedef typename Auto_ret_t::set_t::series_set_t	  Auto_ret_series_set_t;
-    typename Auto_ret_t::set_t
-      auto_structure(Auto_ret_series_set_t(t.structure().series().semiring()));
-
-    AUTOMATON_TYPES_(Auto_t, a_);
-    AUTOMATON_TYPES_(Trans_t, t_);
-    AUTOMATON_TYPES_(Auto_ret_t, ret_);
-
-    typedef std::map<t_hstate_t, std::pair<t_hstate_t, t_hstate_t> >
-      state_pair_map_t;
-    typedef std::map<t_hstate_t, ret_hstate_t> state_state_map_t;
-    typedef std::pair<t_hstate_t, ret_series_set_elt_t> se_pair_t;
-
-    Trans_t tmp_trans(t.structure());
-    tmp_trans = extension(a, t);
-
-    Trans_t pro(t.structure());
-    state_pair_map_t sp_m;
-    pro = product(tmp_trans, t, sp_m);
-    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>	states_map_for_sp_m;
-    for_all_iterator (typename state_pair_map_t::iterator, i, sp_m)
-      states_map_for_sp_m.insert(std::make_pair(pro.get_state(size_t(i->first)), i->first));
-
-    Auto_ret_t auto_p(auto_structure);
-    state_state_map_t proj_m;
-    auto_p = image(pro, proj_m);
-
-    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>	states_map_for_proj_m;
-    for_all_iterator (typename state_state_map_t::iterator, i, proj_m)
-      states_map_for_proj_m.insert(std::make_pair(auto_p.get_state(size_t(i->first)), i->first));
-
-    /* unset final all the final states of auto_p */
-    auto_p.clear_final();
-
-    /* for each state u of t, add one final state to 'auto_p' */
-    state_state_map_t final_of, is_final_of;
-    for (t_state_iterator u = t.states().begin(); u != t.states().end(); ++u)
-    {
-      ret_hstate_t new_state = auto_p.add_state();
-      final_of[*u] = new_state;
-      is_final_of[new_state] = *u;
-      auto_p.set_final(new_state);
-    }
-
-    for (a_state_iterator u = auto_p.states().begin();
-	 u != auto_p.states().end(); ++u)
-    {
-      if (!auto_p.is_final(*u))
-      {
-	t_hstate_t p = sp_m[states_map_for_sp_m[proj_m[states_map_for_proj_m[*u]]]].first;
-	t_hstate_t q = sp_m[states_map_for_sp_m[proj_m[states_map_for_proj_m[*u]]]].second;
-
-	if (tmp_trans.is_final(p))
-	  auto_p.add_spontaneous(*u, final_of[q]);
-      }
-    }
-
-    M se;
-    partial_elimination(auto_p, se);
-
-    for_all_(M, p, se)
-    {
-      se_pair_t my_pair = std::make_pair(is_final_of[(*p).first],
-					 p->second); // checking type compatibility
-      state_exp_pair_set.insert(my_pair);
-    }
-  }
-
-  template<typename SA, typename TA,
-	   typename ST, typename TT,
-	   typename M>
-  void
-  partial_1(const Element<SA, TA>& a,
-	    const Element<ST, TT>& t,
-	    M& state_exp_pair_set)
-  {
-    do_partial_1(a.structure(), t.structure(), a, t, state_exp_pair_set);
-  }
-
-  ////////////////////////////////////////////////////////////
-  /* partial_2 */
-  template<typename SA, typename ST,
-	   typename Auto_t, typename Trans_t,
-	   typename Exp>
-  void
-  do_partial_2(const AutomataBase<SA>&,
-	       const TransducerBase<ST>&,
-	       const Auto_t& a,
-	       const Trans_t& t,
-	       const typename Trans_t::hstate_t p,
-	       Exp& exp)
-  {
-    typedef typename Trans_t::value_t T;
-    typedef typename output_projection_helper<ST, T>::ret    Auto_ret_t;
-    typedef typename Auto_ret_t::set_t::series_set_t	  Auto_ret_series_set_t;
-
-    typename Auto_ret_t::set_t
-      auto_structure(Auto_ret_series_set_t(t.structure().series().semiring()));
-
-    Trans_t tt = t;
-    tt.clear_initial();
-
-    // Here, we convert a hstate_t of t to a hstate_t of tt
-    // using the conversion to unsigned and get_state from an unsigned.
-    tt.set_initial(tt.get_state(size_t(p)));
-
-    Trans_t tmp_trans(tt.structure());
-    tmp_trans = extension(a, tt);
-
-    Trans_t pro(t.structure());
-    pro = trim(product(tmp_trans, tt));
-    Auto_ret_t auto_p(auto_structure);
-    auto_p = image(pro);
-
-    exp = aut_to_exp(auto_p);
-  }
-
-  template<typename SA, typename TA,
-	   typename ST, typename TT,
-	   typename Exp>
-  void
-  partial_2(const Element<SA, TA>& a,
-	    const Element<ST, TT>& t,
-	    const typename TT::hstate_t p, Exp& exp)
-  {
-    do_partial_2(a.structure(), t.structure(), a, t, p, exp);
-  }
-
-  ////////////////////////////////////////////////////////////
-
-  template<typename SA, typename ST,
-	   typename Auto_t, typename Trans_t,
-	   typename M>
-  void
-  do_partial_3(const AutomataBase<SA>&,
-	       const TransducerBase<ST>&,
-	       const Auto_t& a,
-	       const Trans_t& t,
-	       const typename Trans_t::hstate_t p,
-	       M& state_exp_pair_set)
-  {
-    Trans_t tt = t;
-    tt.clear_initial();
-
-    // Save a map linking hstates between automata t and tt.
-    // This is needed to be able to fill state_exp_pair_set with correct hstates.
-    std::map<typename Trans_t::hstate_t, typename Trans_t::hstate_t>	states_map;
-    for (typename Trans_t::state_iterator i = t.states().begin(), j = tt.states().begin(),
-	 end_ = t.states().end();
-	 i != end_;
-	 ++i, ++j)
-      states_map.insert(std::make_pair(*j, *i));
-
-    // Here, we convert a hstate_t of t to a hstate_t of tt
-    // using the conversion to unsigned and get_state from an unsigned.
-    tt.set_initial(tt.get_state(size_t(p)));
-
-    trim_here(tt);
-
-    M	temp_state_exp_pair_set;
-    partial_1(a, tt, temp_state_exp_pair_set);
-
-    for_all_iterator(typename M::iterator, i, temp_state_exp_pair_set)
-      state_exp_pair_set.insert(std::make_pair(states_map[i->first], i->second));
-  }
-
-  template<typename SA, typename TA,
-	   typename ST, typename TT,
-	   typename M>
-  void
-  partial_3(const Element<SA, TA>& a,
-	    const Element<ST, TT>& t,
-	    const typename TT::hstate_t p,
-	    M& state_exp_pair_set)
-  {
-    do_partial_3(a.structure(), t.structure(), a, t, p, state_exp_pair_set);
-  }
-
-}
+} // ! vcsn
 
 #endif // ! VCSN_ALGORITHMS_EVALUATION_HXX
