@@ -32,7 +32,7 @@ $(FROM_KRAT_EXP_BISON_YY_MAIN): $(srcdir)/krat_exp/$(KRAT_EXP_BISON_YY)
 ## bison to read $(srcdir)/krat_exp/$(KRAT_EXP_BISON_YY), it
 ## will also use the value of $(srcdir)/krat_exp/ in the
 ## generated include statements.
-	cd $(srcdir)/$(KRAT_EXP_DIR) && bison $(KRAT_EXP_BISON_YY)
+	cd $(srcdir)/krat_exp && bison $(KRAT_EXP_BISON_YY)
 $(FROM_KRAT_EXP_BISON_YY_OTHERS): $(FROM_KRAT_EXP_BISON_YY_MAIN)
 	@test -f $@ || $(MAKE) $(AM_MAKEFLAGS) $(FROM_KRAT_EXP_BISON_YY_MAIN)
 
