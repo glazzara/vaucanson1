@@ -196,6 +196,7 @@ t2=$automata_tests_dir/char-fmp/t2.xml
 u2=$automata_tests_dir/char-fmp/u2.xml
 t2_ucompose_u2=$automata_tests_dir/char-fmp/t2_u-compose_u2.xml
 inverted_t1=$automata_tests_dir/char-fmp/inverted_t1.xml
+int_b=$automata_tests_dir/int-b/int-b.xml
 
 
 ## ---------- ##

@@ -1,5 +1,15 @@
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	First tests for vcsn-int-b.
+
+	* taf-kit/tests/vcsn-int-b.test: New file.
+	* taf-kit/tests/automata/int-b/int-b.xml: New file, from Florian
+	Lesaint.
+	* taf-kit/tests/Makefile.am: Distribute them.
+	* taf-kit/tests/defs.in (int_b): New variable.
+
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Do not show predefined alphabets in vcsn-int-b's output.
 
 	* taf-kit/src/main.cc [NO_PREDEF_ALPHABETS]: Do
