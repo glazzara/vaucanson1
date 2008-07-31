@@ -136,7 +136,6 @@ namespace vcsn
 	tools::set_attribute(monoid, "type", "free");
 	tools::set_attribute(monoid, "genDescrip", "enum");
 	tools::set_attribute(monoid, "genKind", "simple"); // FIXME get it
-	tools::set_attribute(monoid, "genSort", "letters"); // FIXME get it
 	typedef typename TRANStype::semiring_t::monoid_t::alphabet_t::const_iterator alphabet_iterator;
 	for_all_letters(l, aut.structure().series().semiring().monoid().alphabet())
 	{
@@ -146,6 +145,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  monoid->appendChild(gen);
 	}
+	tools::set_attribute(monoid, "genSort", get_monoid_gen_sort(*(aut.structure().series().semiring().monoid().alphabet().begin())));
 	node->appendChild(semiringn);
 	node->appendChild(monoid);
 	root->appendChild(node);

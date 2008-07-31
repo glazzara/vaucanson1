@@ -1,5 +1,11 @@
 2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Update xml system to support genSort attribute.
+	* include/vaucanson/xml/contexts/fmp.hxx: Here.
+	* include/vaucanson/xml/contexts/rw.hxx: Here.
+
+2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fix hash functions to support rw transducers on integers.
 	Get rid of std::string and use a template instead so
 	that std::basic_string<int> can be supported.

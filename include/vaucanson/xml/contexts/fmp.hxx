@@ -266,6 +266,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  first->appendChild(gen);
 	}
+	tools::set_attribute(first, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().first_monoid().alphabet().begin())));
 	xercesc::DOMElement* second = tools::create_element(doc, "monoid");
 	tools::set_attribute(second, "type", "free");
 	tools::set_attribute(second, "genDescrip", "enum");
@@ -281,6 +282,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  second->appendChild(gen);
 	}
+	tools::set_attribute(second, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().second_monoid().alphabet().begin())));
       }
 
       /* FIXME there should not be 2 but one function here... however,
