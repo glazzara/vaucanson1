@@ -1,3 +1,8 @@
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/tests/Makefile.am (TESTS): Typo, reported by Jerome
+	Galtier.
+
 2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Rename vcsn-b/-z/-fmp in vcsn-char-b/-z/-fmp in the doc.

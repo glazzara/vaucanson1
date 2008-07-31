@@ -18,7 +18,7 @@ TESTS =						\
   vcsn-char-z.test				\
   vcsn-char-fmp.test				\
   completeness.test				\
-  vcsn-int-z.test
+  vcsn-int-b.test
 
 XFAIL_TESTS = completeness.test
 
