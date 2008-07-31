@@ -62,7 +62,7 @@ static Type Name (const std::vector<std::string>& al)		\
     exit (-2);							\
   }								\
   for (std::vector<std::string>::const_iterator i = al.begin(); i != al.end(); ++i) \
-    a.insert ((*i).c_str()[0]);					\
+    a.insert (*i);					        \
   return a;							\
 }
 

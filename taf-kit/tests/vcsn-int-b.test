@@ -32,3 +32,40 @@ test `$VCSN eval $int_b "11"` = 1
 
 $VCSN eval $int_b "1" 2> stderr && exit 1
 grep 'Cannot parse' stderr
+
+sed '/^#/d' <<EOF | $VCSN --alphabet words:32,33,34 define-automaton 33.xml
+# Add states
+1
+# Add one state
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+1
+# Add transition
+3
+# From and to
+0
+1
+# Label
+32
+# Add transition
+3
+# From and to
+1
+0
+# Label
+33
+# Exit.
+10
+EOF
+
+$VCSN is-deterministic 33.xml
+fail1 $VCSN is-complete 33.xml
+$VCSN is-deterministic 33.xml
+$VCSN complete 33.xml \| is-complete -
+$VCSN determinize 33.xml \| is-deterministic -
