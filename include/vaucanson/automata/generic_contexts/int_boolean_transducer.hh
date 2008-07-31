@@ -1,4 +1,4 @@
-// int_fmp_transducer.hh: this file is part of the Vaucanson project.
+// int_boolean_transducer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -20,13 +20,13 @@
  * VCSN_GRAPH_IMPL could be changed.
  */
 
-# include GRAPH_CONTEXT_HEADER_(int_fmp_transducer_structures.hh)
+# include GRAPH_CONTEXT_HEADER_(int_boolean_transducer_structures.hh)
 
-# define VCSN_CONTEXT_NAMESPACE namespace int_fmp_transducer
+# define VCSN_CONTEXT_NAMESPACE namespace int_boolean_transducer
 # define AUTOMATON_CONTEXT int_boolean_automaton
 
-# include <vaucanson/contexts/fmp_transducer_functions.thh>
+# include <vaucanson/contexts/transducer_functions.thh>
 
-# undef VCSN_CONTEXT_NAMESPACE
 # undef AUTOMATON_CONTEXT
+# undef VCSN_CONTEXT_NAMESPACE
 

@@ -1,5 +1,16 @@
 2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add int based boolean transducer context.
+	* include/vaucanson/automata/generic_contexts/int_boolean_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_boolean_transducer_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_fmp_transducer.hh: Fix typo.
+	* src/tests/xml/Makefile.am: Add test.
+	* src/tests/xml/int_trans_ref.dot: New.
+	* src/tests/xml/int_trans_ref.xml: New.
+	* src/tests/xml/xml_int_trans_tester.cc: New.
+
+2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Update xml system to support genSort attribute.
 	* include/vaucanson/xml/contexts/fmp.hxx: Here.
 	* include/vaucanson/xml/contexts/rw.hxx: Here.
