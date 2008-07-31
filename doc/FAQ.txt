@@ -54,7 +54,7 @@ How can I choose a specific graph implementation?
 
 The flag ``VCSN_DEFAULT_GRAPH_IMPL`` can be set to the chosen
 implementation. To use this flag with the script ``configure``, call
-it with:
+it with::
 
     configure CPPFLAGS='-DVCSN_DEFAULT_GRAPH_IMPL=bmig'
 
