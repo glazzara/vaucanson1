@@ -1,3 +1,9 @@
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* lib/krat_exp/libkrat_exp.mk (KRAT_EXP_DIR): Remove this variable
+	and its use.  Automake's dependency tracking cannot cope with
+	variables in filenames.
+
 2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add missing test reference.
@@ -100,7 +106,7 @@
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
 	    Add default constructor to token_representation_t that
 	    initialise with default token representations.
-	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx: 
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
 	    Simplify token_representation loading and error handling.
 
 2008-07-30  Vivien Delmon  <vivien.delmon@lrde.epita.fr>

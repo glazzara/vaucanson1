@@ -11,16 +11,15 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-KRAT_EXP_DIR = krat_exp
 KRAT_EXP_BISON_YY = krat_exp_bison.yy
 
 FROM_KRAT_EXP_BISON_YY_MAIN = \
-  $(KRAT_EXP_DIR)/krat_exp_bison.tab.cc
+  krat_exp/krat_exp_bison.tab.cc
 FROM_KRAT_EXP_BISON_YY_OTHERS = \
-  $(KRAT_EXP_DIR)/stack.hh \
-  $(KRAT_EXP_DIR)/position.hh \
-  $(KRAT_EXP_DIR)/location.hh \
-  $(KRAT_EXP_DIR)/krat_exp_bison.tab.hh
+  krat_exp/stack.hh \
+  krat_exp/position.hh \
+  krat_exp/location.hh \
+  krat_exp/krat_exp_bison.tab.hh
 FROM_KRAT_EXP_BISON_YY = \
   $(FROM_KRAT_EXP_BISON_YY_MAIN) \
   $(FROM_KRAT_EXP_BISON_YY_OTHERS)
@@ -28,17 +27,16 @@ FROM_KRAT_EXP_BISON_YY = \
 BUILT_SOURCES = $(FROM_KRAT_EXP_BISON_YY)
 MAINTAINERCLEANFILES += $(FROM_KRAT_EXP_BISON_YY)
 
-$(FROM_KRAT_EXP_BISON_YY_MAIN): $(srcdir)/$(KRAT_EXP_DIR)/$(KRAT_EXP_BISON_YY)
-
-## We must cd into $(srcdir)/$(KRAT_EXP_DIR)/ first because if we tell
-## bison to read $(srcdir)/$(KRAT_EXP_DIR)/$(KRAT_EXP_BISON_YY), it
-## will also use the value of $(srcdir)/$(KRAT_EXP_DIR)/ in the
+$(FROM_KRAT_EXP_BISON_YY_MAIN): $(srcdir)/krat_exp/$(KRAT_EXP_BISON_YY)
+## We must cd into $(srcdir)/krat_exp/ first because if we tell
+## bison to read $(srcdir)/krat_exp/$(KRAT_EXP_BISON_YY), it
+## will also use the value of $(srcdir)/krat_exp/ in the
 ## generated include statements.
 	cd $(srcdir)/$(KRAT_EXP_DIR) && bison $(KRAT_EXP_BISON_YY)
 $(FROM_KRAT_EXP_BISON_YY_OTHERS): $(FROM_KRAT_EXP_BISON_YY_MAIN)
 	@test -f $@ || $(MAKE) $(AM_MAKEFLAGS) $(FROM_KRAT_EXP_BISON_YY_MAIN)
 
-EXTRA_DIST = $(KRAT_EXP_DIR)/$(KRAT_EXP_BISON_YY)
+EXTRA_DIST = krat_exp/$(KRAT_EXP_BISON_YY)
 
 lib_LTLIBRARIES	+= libkrat_exp.la
 libkrat_exp_la_CXXFLAGS	= $(CXXFLAGS) -I$(top_srcdir)/lib/krat_exp
