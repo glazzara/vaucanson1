@@ -101,6 +101,7 @@ namespace vcsn {
 
 namespace std {
 
+  inline
   ostream& operator<<(ostream& o, basic_string<int> s)
   {
     basic_string<int>::const_iterator i;

@@ -1,3 +1,9 @@
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx
+	(operator<<): Declare as inline to avoid "multiple definitions"
+	errors when linking several object files.
+
 2008-07-31  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add context of int based fmp transducers.
