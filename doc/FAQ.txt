@@ -49,18 +49,6 @@ The   flag   ``HAVE_DECL_GETOPT``    must   be   set.   Compile   with
 Usage issues
 ============
 
-The expression parser behave incorrectly on some expressions
-------------------------------------------------------------
-
-For example, expressions  with weights such as ``a  2*`` (meaning "the
-star of ``a`` with weight 2) are not parsed correctly.
-
-Solution: write ``(a 2)*`` instead. This  problem is due to the use of
-LL  parsing,   which  cannot  handle  expressions   like  the  example
-above. This  is a known  misfeature, that cannot be  corrected without
-making  the code  bigger and  slower.  Since a  very readable,  simple
-workaround exists, use it instead.
-
 How can I choose a specific graph implementation?
 -------------------------------------------------
 

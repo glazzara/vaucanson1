@@ -133,6 +133,7 @@ Year 2009 students
 
 * Vivien Delmon				vivien.delmon@lrde.epita.fr
   - eps_removal algorithm,
+  - Rational expression parser,
   - Bug fixes.
 
 * Florian Lesaint			florian.lesaint@lrde.epita.fr
@@ -144,6 +145,7 @@ Year 2009 students
   - BMIG Graph data structures,
   - Performances in Vaucanson,
   - Lib VCSN,
+  - Delta iterator,
   - Bug fixes.
 
 
@@ -156,4 +158,6 @@ Year 2010 students
   - Bug fixes.
 
 * Jerome Galtier			jerome.galtier@lrde.epita.fr
-
+  - rw_composition,
+  - one rule rewriting,
+  - Bug fixes.
