@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -58,6 +58,9 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 
 static automaton_t get_aut (const std::string& s);
 
+template <class S, class T>
+static std::basic_string<letter_t>
+get_word(Element<S, T>& aut, const std::string& s);
 
 # include "getters.hxx"
 

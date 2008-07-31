@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -205,5 +205,21 @@ static boolean_automaton::automaton_t get_boolean_aut(std::string s)
   }
 }
 #endif // !WITH_TWO_ALPHABETS
+
+template <class S, class T>
+static std::basic_string<letter_t>
+get_word(Element<S, T>& aut, const std::string& s)
+{
+  Element<monoid_t, std::basic_string<letter_t> > w(aut.structure().series().monoid());
+
+  std::string::const_iterator i = s.begin();
+  if (!parse_word(w, s, i, std::set<char>()))
+    {
+      std::cerr << "FATAL: Cannot parse " << s << std::endl;
+      exit(1);
+    }
+  return w.value();
+}
+
 
 #endif // ! GETTERS_HXX

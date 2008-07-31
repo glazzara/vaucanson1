@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -105,10 +105,11 @@ DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 			 ALGO (concatenate));
 
 DEFINE_COMMAND (NAME (eval)
-		CODE (/* Empty */)
-		OUTPUT (
-		  eval (realtime (get_aut (args.args[1])),
-			std::string (args.args[2])) << std::endl)
+		CODE (
+		      automaton_t a = realtime (get_aut (args.args[1]));
+		      bool b = eval (a, get_word (a, args.args[2])).value();
+		     )
+		OUTPUT (b)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (power)

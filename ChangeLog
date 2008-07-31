@@ -1,5 +1,16 @@
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Create vcsn-int-b.  (It is not functional yet.)
+
+	* taf-kit/src/Makefile.am: Create vcsn-int-b (without using
+	libvcsn-int-b since it does not exist yet).
+	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx (get_word): New
+	function.
+	* taf-kit/src/common_automaton_commands.hh (eval): Use it.
+	* configure.ac: Output taf-kit/tests/.
+
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/letter/int_letter.hxx
 	(operator<<): Declare as inline to avoid "multiple definitions"
 	errors when linking several object files.
