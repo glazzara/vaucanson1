@@ -107,7 +107,7 @@ DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 DEFINE_COMMAND (NAME (eval)
 		CODE (
 		      automaton_t a = realtime (get_aut (args.args[1]));
-		      bool b = eval (a, get_word (a, args.args[2])).value();
+		      semiring_elt_t b = eval (a, get_word (a, args.args[2])).value();
 		     )
 		OUTPUT (b)
 		RETURNVALUE (0));

@@ -1,3 +1,8 @@
+2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/common_automaton_commands.hh (eval): Be generic
+	w.r.t. the semiring, fixing a error introduced earlier today.
+
 2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Prepare the 1.3 release.
