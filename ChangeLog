@@ -1,3 +1,16 @@
+2008-07-31  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Rename tdc in fmp.
+	* configure.ac: .
+	* data/automata/Makefile.am: .
+	* data/automata/fmp: New.
+	* data/automata/tdc/Makefile.am: Remove.
+	* data/automata/tdc/t1.cc: Remove.
+	* data/automata/tdc/u1.cc: Remove.
+	* data/automata/tdc: Remove.
+	* doc/manual/vaucanson-user-manual.tex: .
+	* taf-kit/tests/defs.in: .
+
 2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Overhaul the one rule rewriting demo.

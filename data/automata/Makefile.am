@@ -13,6 +13,6 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = b z tdc tdc-rw
+SUBDIRS = b z fmp tdc-rw
 
 automata_DATA = README

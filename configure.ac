@@ -240,7 +240,7 @@ AC_CONFIG_FILES([
 	data/Makefile
 	  data/automata/Makefile
 	    data/automata/b/Makefile
-	    data/automata/tdc/Makefile
+	    data/automata/fmp/Makefile
 	    data/automata/tdc-rw/Makefile
 	    data/automata/z/Makefile
 	  data/emacs/Makefile
