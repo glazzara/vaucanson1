@@ -17,6 +17,10 @@
 
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/Makefile.am: Do not distribute
+	generic_contexts/int_z_transducer.hh, Florian did not commit it
+	yet.
+
 	* taf-kit/src/common_automaton_commands.hh (eval): Add newline,
 	removed by mistake earlier today.
 

@@ -456,8 +456,6 @@ vaucanson/automata/generic_contexts/int_z_max_plus_automaton.hh		\
 vaucanson/automata/generic_contexts/int_z_max_plus_automaton_structures.hh  \
 vaucanson/automata/generic_contexts/int_z_min_plus_automaton.hh		\
 vaucanson/automata/generic_contexts/int_z_min_plus_automaton_structures.hh  \
-vaucanson/automata/generic_contexts/int_z_transducer.hh 		\
-vaucanson/automata/generic_contexts/int_z_transducer_structures.hh 	\
 vaucanson/automata/implementation/automaton_view.hh			\
 vaucanson/automata/implementation/automaton_view.hxx			\
 vaucanson/automata/implementation/bmig/bmig_functors.hh 		\
