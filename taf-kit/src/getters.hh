@@ -54,13 +54,13 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 				   const vcsn::algebra::token_representation_t& tok_rep);
 
 #  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.tok_rep))
-# endif // !WITH_TWO_ALPHABETS
-
-static automaton_t get_aut (const std::string& s);
 
 template <class S, class T>
 static std::basic_string<letter_t>
 get_word(Element<S, T>& aut, const std::string& s);
+# endif // !WITH_TWO_ALPHABETS
+
+static automaton_t get_aut (const std::string& s);
 
 # include "getters.hxx"
 

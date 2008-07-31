@@ -97,6 +97,23 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 
   return make_rat_exp (get_alphabet (alphabet), exp, tok_rep);
 }
+
+
+template <class S, class T>
+static std::basic_string<letter_t>
+get_word(Element<S, T>& aut, const std::string& s)
+{
+  Element<monoid_t, std::basic_string<letter_t> > w(aut.structure().series().monoid());
+
+  std::string::const_iterator i = s.begin();
+  if (!parse_word(w, s, i, std::set<char>()))
+    {
+      std::cerr << "FATAL: Cannot parse " << s << std::endl;
+      exit(1);
+    }
+  return w.value();
+}
+
 # endif // !WITH_TWO_ALPHABETS
 
 /// Getter for automaton.
@@ -205,21 +222,6 @@ static boolean_automaton::automaton_t get_boolean_aut(std::string s)
   }
 }
 #endif // !WITH_TWO_ALPHABETS
-
-template <class S, class T>
-static std::basic_string<letter_t>
-get_word(Element<S, T>& aut, const std::string& s)
-{
-  Element<monoid_t, std::basic_string<letter_t> > w(aut.structure().series().monoid());
-
-  std::string::const_iterator i = s.begin();
-  if (!parse_word(w, s, i, std::set<char>()))
-    {
-      std::cerr << "FATAL: Cannot parse " << s << std::endl;
-      exit(1);
-    }
-  return w.value();
-}
 
 
 #endif // ! GETTERS_HXX
