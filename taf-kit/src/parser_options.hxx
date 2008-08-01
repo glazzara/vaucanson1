@@ -123,16 +123,16 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
               ( cweight >> equal >> character[close_weight_cb] ) |
 	      ( space >> equal >> character[push_space_cb] );
   // big fat warning: be carefull about spirit short-circuiting:
-  // FIXME: its ugly, we should add an other letter trait.
+  // FIXME: it's ugly, we should add another letter trait.
   if (default_epsilon() == "1")
   {
-    // it should ne a char alphabet
+    // it should be a char alphabet
     alphabet_definition = ( head_w >> colon >> !words ) |
                           ( !(head_l >> colon) >> !letters );
   }
   else
   {
-    // it should ne a word alphabet
+    // it should be a word alphabet
     alphabet_definition = ( head_l >> colon >> !letters ) |
                           ( !(head_w >> colon) >> !words );
   }
