@@ -17,6 +17,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DUMP_VISITOR_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DUMP_VISITOR_HXX
 
+# include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/algebra/implementation/series/rat/dump_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 

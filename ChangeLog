@@ -1,3 +1,11 @@
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix two make check blockers.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
+	  Add default_epsilon().
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	  Add missing include.
+
 2008-08-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-int-b.test: Test that the default

@@ -47,6 +47,11 @@ namespace vcsn
 	   */
 	  cardinal = INT_MAX
 	};
+
+	static char default_epsilon()
+	{
+	  return '1';
+	}
     };
 
   } // End of namespace algebra.
