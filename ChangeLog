@@ -1,5 +1,13 @@
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update xml tests according changes in epsilon representation.
+	* src/tests/xml/int_b_ref.dot,
+	* src/tests/xml/int_z_max_plus_ref.dot,
+	* src/tests/xml/int_z_min_plus_ref.dot,
+	* src/tests/xml/int_z_ref.dot: Here.
+
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix two make check blockers.
 	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
 	  Add default_epsilon().
