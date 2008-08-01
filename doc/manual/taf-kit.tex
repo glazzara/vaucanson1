@@ -10,18 +10,22 @@ automaton.
 Many users of automata consider only automata whose transitions are
 labeled by letters taken in an alphabet, which we call, roughly
 speaking, \emph{classical} automata or \emph{Boolean} automata.  The
-first program of the \tafkit, \command{vcsn-char-b}, allows to compute with
-classical automata and is described in \autoref{sec:vcsn-char-b}.
+first program of the \tafkit, \command{vcsn-char-b}, allows to compute
+with classical automata and is described in \autoref{sec:vcsn-char-b}.
+A variant of this program called \command{vcsn-int-b} handles Boolean
+automata whose letters are integers.
 
 \autoref{sec:vcsn-char-fmp} describes the program \command{vcsn-char-fmp} which
 allows to compute with transducers, that is, automata whose
 transitions are labeled by pair of words, which are elements of a
 \emph{product of free monoids}, hence the name.
 
-In \autoref{sec:vcsn-char-z} we consider the programs of the \tafkit that
-compute with automata over a free monoid and with multiplicity, or
-\emph{weight} taken in the set of integers equipped with the usual
+In \autoref{sec:vcsn-char-z} we consider the programs of the \tafkit
+that compute with automata over a free monoid and with multiplicity,
+or \emph{weight} taken in the set of integers equipped with the usual
 operations of addition and multiplication, that is, the semiring $\Z$.
+A variant of this program called \command{vcsn-int-z} is specialized
+to handle $\Z$-automata whose letters are integers.
 
 % ,
 % or with the operations of $\min$ and addition, or the operations of
@@ -275,7 +279,7 @@ Please choose your action:
 
   10. Exit.
 
-Your choice [1-10]:  
+Your choice [1-10]:
 \end{shell}
 
 \noindent
@@ -311,8 +315,8 @@ Automaton description:
   Initial states: 0
   Final states: 0
 
-  Transitions: 
-    1: From 0 to 0 labeled by (1 a)+(1 b)  
+  Transitions:
+    1: From 0 to 0 labeled by (1 a)+(1 b)
 \end{shell}
 
 \noindent

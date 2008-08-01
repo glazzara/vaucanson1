@@ -1,5 +1,11 @@
 2008-08-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/manual/taf-kit.tex (chapter{The \Vauc toolkit}): Mention
+	vcsn-int-b and vcsn-int-z.
+	* doc/NEWS.txt: Mention vcsn-int-z.
+
+2008-08-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Create vcsn-int-z.
 
 	* configure.ac: Output taf-kit/tests/vcsn-int-z.

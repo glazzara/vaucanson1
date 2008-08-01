@@ -12,7 +12,7 @@ Vaucanson 1.3, July 31st, 2008
 ===============================
 
 - The Vaucanson library
-  
+
   + New delta functions to iterate over states and transitions.
   + New rational expression parser.
   + New XML input/output system based on a new XSD.
@@ -33,7 +33,7 @@ Vaucanson 1.3, July 31st, 2008
 
   + New option --parser to change token representation on rational expression.
   + Rename vcsn-b/-z/-tdc to vcsn-char-b/-z/-fmp.
-  + Add vcsn-int-b.
+  + Add vcsn-int-b and vcsn-int-z.
 
 Vaucanson 1.2, March 19th, 2008
 ===============================
