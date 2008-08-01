@@ -1,5 +1,12 @@
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Make words: token optional for words alphabets.
+	* taf-kit/src/parser_options.hxx: Here.
+	* taf-kit/tests/vcsn-int-b.test,
+	* taf-kit/tests/vcsn-int-z.test: Update tests accordingly.
+
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Overhaul vaucanson handling of epsilon representation.
 	* include/vaucanson/algebra/concept/letter.hh: Add a new trait.
 	* include/vaucanson/algebra/implementation/letter/char_letter.hxx,

@@ -33,7 +33,7 @@ test `$VCSN eval $int_b "11"` = 1
 $VCSN eval $int_b "1" 2> stderr && exit 1
 grep 'Cannot parse' stderr
 
-sed '/^#/d' <<EOF | $VCSN --alphabet words:32,33,34 define-automaton 33.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 define-automaton 33.xml
 # Add states
 1
 # Add one state
@@ -70,8 +70,8 @@ $VCSN is-deterministic 33.xml
 $VCSN complete 33.xml \| is-complete -
 $VCSN determinize 33.xml \| is-deterministic -
 
-$VCSN --alphabet=words:33,34,35 thompson '(33* + 35).34' \| quotient -
-$VCSN --alphabet=words:33,34,35 standard '(33* + 35).34' > m.xml
+$VCSN --alphabet=33,34,35 thompson '(33* + 35).34' \| quotient -
+$VCSN --alphabet=33,34,35 standard '(33* + 35).34' > m.xml
 
 $VCSN transpose m.xml > mt.xml
 $VCSN is-deterministic mt.xml && exit 0
@@ -84,13 +84,13 @@ $VCSN are-equivalent mt.xml mtdt.xml
 
 mtdt=`$VCSN aut-to-exp mtdt.xml`
 mt=`$VCSN aut-to-exp mt.xml`
-$VCSN --alphabet=words:33,34,35 standard "$mt" > mte.xml
-$VCSN --alphabet=words:33,34,35 standard "$mtdt" > mtdte.xml
+$VCSN --alphabet=33,34,35 standard "$mt" > mte.xml
+$VCSN --alphabet=33,34,35 standard "$mtdt" > mtdte.xml
 $VCSN are-equivalent mt.xml mte.xml
 $VCSN are-equivalent mtdt.xml mtdte.xml
 $VCSN are-equivalent mte.xml mtdte.xml
 
-$VCSN --alphabet=words:33,34,35 standard '(33* + 35).34+(33*+35)' > p.xml
+$VCSN --alphabet=33,34,35 standard '(33* + 35).34+(33*+35)' > p.xml
 $VCSN determinize p.xml \| minimize - > pdm.xml
 $VCSN quotient p.xml > pq.xml
 $VCSN are-equivalent p.xml pdm.xml

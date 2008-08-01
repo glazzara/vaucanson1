@@ -122,9 +122,20 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
               ( oweight >> equal >> character[open_weight_cb] ) |
               ( cweight >> equal >> character[close_weight_cb] ) |
 	      ( space >> equal >> character[push_space_cb] );
-  // warning: be carefull about spirit short-circuiting:
-  alphabet_definition = ( head_w >> colon >> !words ) |
-                        ( !(head_l >> colon) >> !letters );
+  // big fat warning: be carefull about spirit short-circuiting:
+  // FIXME: its ugly, we should add an other letter trait.
+  if (default_epsilon() == "1")
+  {
+    // it should ne a char alphabet
+    alphabet_definition = ( head_w >> colon >> !words ) |
+                          ( !(head_l >> colon) >> !letters );
+  }
+  else
+  {
+    // it should ne a word alphabet
+    alphabet_definition = ( head_l >> colon >> !letters ) |
+                          ( !(head_w >> colon) >> !words );
+  }
   letters = *(letter[push_letter_cb]);
   words = !list_p(word[push_letter_cb], comma);
   word_pair = obrack >> word >> comma >> word >> cbrack;
