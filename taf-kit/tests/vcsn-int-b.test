@@ -69,3 +69,32 @@ fail1 $VCSN is-complete 33.xml
 $VCSN is-deterministic 33.xml
 $VCSN complete 33.xml \| is-complete -
 $VCSN determinize 33.xml \| is-deterministic -
+
+$VCSN --alphabet=words:33,34,35 thompson '(33* + 35).34' \| quotient -
+$VCSN --alphabet=words:33,34,35 standard '(33* + 35).34' > m.xml
+
+$VCSN transpose m.xml > mt.xml
+$VCSN is-deterministic mt.xml && exit 0
+$VCSN determinize mt.xml > mtd.xml
+$VCSN is-deterministic mtd.xml
+$VCSN are-equivalent mt.xml mtd.xml
+$VCSN are-equivalent m.xml mtd.xml && exit 0
+$VCSN trim mtd.xml > mtdt.xml
+$VCSN are-equivalent mt.xml mtdt.xml
+
+mtdt=`$VCSN aut-to-exp mtdt.xml`
+mt=`$VCSN aut-to-exp mt.xml`
+$VCSN --alphabet=words:33,34,35 standard "$mt" > mte.xml
+$VCSN --alphabet=words:33,34,35 standard "$mtdt" > mtdte.xml
+$VCSN are-equivalent mt.xml mte.xml
+$VCSN are-equivalent mtdt.xml mtdte.xml
+$VCSN are-equivalent mte.xml mtdte.xml
+
+$VCSN --alphabet=words:33,34,35 standard '(33* + 35).34+(33*+35)' > p.xml
+$VCSN determinize p.xml \| minimize - > pdm.xml
+$VCSN quotient p.xml > pq.xml
+$VCSN are-equivalent p.xml pdm.xml
+$VCSN are-equivalent p.xml pq.xml
+$VCSN are-equivalent pdm.xml pq.xml
+
+exit 0

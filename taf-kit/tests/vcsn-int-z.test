@@ -66,3 +66,17 @@ EOF
 
 fail1 $VCSN is-complete 33.xml
 $VCSN complete 33.xml \| is-complete -
+
+$VCSN --alphabet=words:33,34,35 thompson '(33 {2}* + 35).34' \| quotient -
+
+$VCSN --alphabet=words:33,34,35 standard '(33 {2}* + 35).34' > m.xml
+
+$VCSN complete m.xml \| transpose - > mt.xml
+$VCSN trim mt.xml > mtt.xml
+
+mtt=`$VCSN aut-to-exp mtt.xml`
+mt=`$VCSN aut-to-exp mt.xml`
+$VCSN --alphabet=words:33,34,35 standard "$mt"
+$VCSN --alphabet=words:33,34,35 standard "$mtt"
+
+$VCSN --alphabet=words:33,34,35 standard  '(33* + 35).34+(33*+35)' \| quotient -
