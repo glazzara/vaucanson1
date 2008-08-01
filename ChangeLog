@@ -1,5 +1,10 @@
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update ignores on sanity tests.
+	* src/tests/sanity: Add new contexts generated files to ignore list.
+
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix missing file in the distribution.
 	* include/Makefile.am: Here.
 
