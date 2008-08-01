@@ -42,7 +42,7 @@
 const char* argp_program_version =
 "VCSN TAF-Kit (" PACKAGE_STRING ")\n"
 "\n"
-"Copyright (C) 2006, 2007 The Vaucanson Group.\n"
+"Copyright (C) 2006, 2007, 2008 The Vaucanson Group.\n"
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE,\n"
 "to the extent permitted by law.";
@@ -283,6 +283,12 @@ int main (int argc, char* argv[])
   for (std::list<pipe_command>::iterator li = command_list.begin ();
        li != command_list.end (); ++li)
     {
+      // default epsilon value
+      li->args.add_parser_option("ONE", default_epsilon().c_str());
+#ifdef WITH_TWO_ALPHABETS
+      li->args.add_parser2_option("ONE", default_epsilon2().c_str());
+#endif
+
       argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
       parser_options p_opts(li->args.parser);
 

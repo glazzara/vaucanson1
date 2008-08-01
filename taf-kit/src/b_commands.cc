@@ -110,3 +110,10 @@ const command_t command_map[] =
 
   {0, 0, 0, 0, 0}
 };
+
+// retrieve the epsilon from the corresponding letter trait
+std::string
+default_epsilon()
+{
+  GET_EPSILON_FROM_TRAITS(letter_t)
+}

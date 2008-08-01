@@ -81,7 +81,11 @@ namespace vcsn {
 	  ostr_ << setzero ("0");
 
 	if (not ostr_.pword(rat::id()))
-	  ostr_ << setid ("1");
+	{
+	  std::string eps = "";
+	  eps += algebra::letter_traits<typename Word::value_type>::default_epsilon();
+	  ostr_ << setid(eps);
+	}
       }
 
       virtual

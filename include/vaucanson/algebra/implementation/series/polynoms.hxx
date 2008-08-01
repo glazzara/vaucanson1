@@ -637,7 +637,7 @@ namespace vcsn {
 	  if (i->first != identity_value(SELECT(M), SELECT(Tm)))
 	    op_rout(s.monoid(), st, i->first);
 	  else
-	    st << "1";
+	    st << algebra::letter_traits<typename algebra::Series<W, M>::monoid_t::letter_t>::default_epsilon();
 
 	  if (i->second != identity_value(SELECT(W), SELECT(Tw)))
 	    st << ")";

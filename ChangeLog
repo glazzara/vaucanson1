@@ -1,3 +1,25 @@
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Overhaul vaucanson handling of epsilon representation.
+	* include/vaucanson/algebra/concept/letter.hh: Add a new trait.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	* Specialization of default_epsilon.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	* Be generic.
+	* src/demos/one_rule_rewriting/check_rw_composition.cc: Add missing
+	* header and refactorize some code.
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/commands_macros.hh,
+	* taf-kit/src/common.hh,
+	* taf-kit/src/fmp_commands.cc,
+	* taf-kit/src/main.cc,
+	* taf-kit/src/parser_options.hh,
+	* taf-kit/src/parser_options.hxx,
+	* taf-kit/src/z_commands.cc: Use the new letter trait
+	* (default_epsilon) to handle epsilon more generically.
+
 2008-08-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-int-b.test: More tests for

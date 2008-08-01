@@ -37,8 +37,9 @@ namespace vcsn {
 	cardinal = 255
       };
 
-      static const char default_joker() { return '?'; }
-      static const char default_other() { return '#'; }
+      static const char default_epsilon() { return '1'; }
+      static const char default_joker()   { return '?'; }
+      static const char default_other()   { return '#'; }
 
       static
       char

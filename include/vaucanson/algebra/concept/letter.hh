@@ -45,10 +45,16 @@ namespace vcsn {
 	return 0;
       }
 
-      /// Provide a way to representate a letter.
+      /// Provide a way to represent a letter.
       static std::string letter_to_literal(const L&)
       {
 	return 0;
+      }
+
+      /// Provide a way to represent an epsilon.
+      static char default_epsilon()
+      {
+	return '1';
       }
     };
 

@@ -36,6 +36,8 @@ namespace vcsn {
 	cardinal = UINT_MAX
       };
 
+      static const char default_epsilon() { return 'e'; }
+
       static
       int
       literal_to_letter(const std::string& str)

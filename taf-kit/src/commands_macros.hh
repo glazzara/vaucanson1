@@ -134,4 +134,10 @@
 # define File "file", 1
 # define Nil "", 0
 
+# define GET_EPSILON_FROM_TRAITS(letter_type) \
+  char epsilon = vcsn::algebra::letter_traits<letter_type>::default_epsilon(); \
+  std::string ret = ""; \
+  ret += epsilon; \
+  return ret;
+
 #endif /* !COMMANDS_MACROS_HH */

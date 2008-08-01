@@ -133,4 +133,12 @@ struct arguments_t
 # undef ADD_OPTION
 };
 
+// return the default epsilon from automaton traits
+std::string
+default_epsilon();
+# ifdef WITH_TWO_ALPHABETS
+std::string
+default_epsilon2();
+# endif /* ! WITH_TWO_ALPHABETS */
+
 #endif /* !COMMON_HH */
