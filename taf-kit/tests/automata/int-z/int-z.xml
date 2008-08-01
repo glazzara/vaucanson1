@@ -1,0 +1,47 @@
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+  <automaton name="integer_based_boolean_automaton">
+    <valueType>
+      <semiring operations="classical" set="Z" type="numerical"/>
+      <monoid genDescrip="enum" genKind="simple" genSort="integers" type="free">
+        <monGen value="10"/>
+        <monGen value="11"/>
+      </monoid>
+    </valueType>
+    <automatonStruct>
+      <states>
+        <state id="s0"/>
+        <state id="s1"/>
+        <state id="s2"/>
+      </states>
+      <transitions>
+        <transition src="s0" target="s1">
+          <label>
+	    <sum>
+	      <leftExtMul>
+		<weight value="2"/>
+		<one/>
+	      </leftExtMul>
+	      <monElmt>
+		<monGen value="10"/>
+	      </monElmt>
+	    </sum>
+          </label>
+        </transition>
+        <transition src="s1" target="s2">
+          <label>
+	    <leftExtMul>
+	      <weight value="3"/>
+              <monElmt>
+                <monGen value="11"/>
+              </monElmt>
+            </leftExtMul>
+          </label>
+        </transition>
+        <initial state="s0"/>
+        <final state="s2"/>
+      </transitions>
+    </automatonStruct>
+  </automaton>
+
+</fsmxml>

@@ -17,7 +17,7 @@ AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
 bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-fmp \
-               vcsn-int-b
+               vcsn-int-b vcsn-int-z
 
 COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\
@@ -78,6 +78,15 @@ vcsn_int_b_SOURCES = $(COMMON_SOURCES)			\
 vcsn_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_boolean_automaton \
                       -DNO_PREDEF_ALPHABETS
 vcsn_int_b_LDADD = $(LDADD)				\
+		    $(top_builddir)/lib/libkrat_exp.la
+
+vcsn_int_z_SOURCES = $(COMMON_SOURCES)			\
+		      ratexp_commands.hh		\
+	              common_automaton_commands.hh	\
+                      z_commands.cc
+vcsn_int_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_automaton \
+                      -DNO_PREDEF_ALPHABETS
+vcsn_int_z_LDADD = $(LDADD)				\
 		    $(top_builddir)/lib/libkrat_exp.la
 
 

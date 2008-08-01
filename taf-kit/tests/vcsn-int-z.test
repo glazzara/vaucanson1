@@ -1,0 +1,68 @@
+#! /bin/sh
+
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2008 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+
+. ./defs || exit 1
+
+set -e
+
+VCSN=vcsn-int-z
+
+$VCSN identity $int_z
+
+# Make sure dot understands the output.
+$VCSN dot-dump $int_z | dot
+
+test `$VCSN eval $int_z "10#11"` = 3
+
+test `$VCSN eval $int_z "10#12"` = 0
+
+test `$VCSN eval $int_z "11"` = 6
+
+$VCSN eval $int_z "1" 2> stderr && exit 1
+grep 'Cannot parse' stderr
+
+sed '/^#/d' <<EOF | $VCSN --alphabet words:32,33,34 define-automaton 33.xml
+# Add states
+1
+# Add one state
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+1
+# Add transition
+3
+# From and to
+0
+1
+# Label
+{5} 32
+# Add transition
+3
+# From and to
+1
+0
+# Label
+33 {7}
+# Exit.
+10
+EOF
+
+fail1 $VCSN is-complete 33.xml
+$VCSN complete 33.xml \| is-complete -

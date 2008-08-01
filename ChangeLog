@@ -1,3 +1,14 @@
+2008-08-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Create vcsn-int-z.
+
+	* configure.ac: Output taf-kit/tests/vcsn-int-z.
+	* taf-kit/src/Makefile.am: Build vcsn-int-z.
+	* taf-kit/tests/vcsn-int-z.test,
+	taf-kit/tests/automata/int-z/int-z.xml: New files.
+	* taf-kit/tests/Makefile.am: Adjust.
+	* taf-kit/tests/defs.in (int_z): New variable.
+
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Update ignores on sanity tests.
@@ -159,7 +170,7 @@
 	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx (get_word): New
 	function.
 	* taf-kit/src/common_automaton_commands.hh (eval): Use it.
-	* configure.ac: Output taf-kit/tests/.
+	* configure.ac: Output taf-kit/tests/vcsn-int-b.
 
 2008-07-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
