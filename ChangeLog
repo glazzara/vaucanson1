@@ -1,5 +1,11 @@
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Bump to version 1.2.90.
+	* configure.ac: Bump version number.
+	* doc/NEWS.txt: Fix typos.
+
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update xml tests according changes in epsilon representation.
 	* src/tests/xml/int_b_ref.dot,
 	* src/tests/xml/int_z_max_plus_ref.dot,

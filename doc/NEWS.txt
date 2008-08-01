@@ -8,32 +8,32 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
-Vaucanson 1.3, July 31st, 2008
-===============================
+Vaucanson 1.2.90, August 1st, 2008
+==================================
 
 - The Vaucanson library
 
   + New delta functions to iterate over states and transitions.
   + New rational expression parser.
-  + New XML input/output system based on a new XSD.
+  + New XML input/output system based on the new FSMXML version.
   + Overhaul letters to ease adding automaton contexts.
-  + Add contexts based on int letter.
+  + New automaton contexts based on int letters.
 
 - Algorithms
 
-  + Remove backward_realtime() and forward_realtime() functions factored in
+  + Remove backward_realtime() and forward_realtime() functions factorized in
     realtime() function.
   + Fix rw_composition().
 
 - Demos
 
-  + Improve one rule rewriting
+  + Improve One Rule Rewriting.
 
 - TAF-Kit
 
   + New option --parser to change token representation on rational expression.
   + Rename vcsn-b/-z/-tdc to vcsn-char-b/-z/-fmp.
-  + Add vcsn-int-b and vcsn-int-z.
+  + New vcsn-int-b and vcsn-int-z.
 
 Vaucanson 1.2, March 19th, 2008
 ===============================
