@@ -1,3 +1,8 @@
+2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix missing file in the distribution.
+	* include/Makefile.am: Here.
+
 2008-07-31  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add missing files to the distribution.

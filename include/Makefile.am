@@ -25,6 +25,7 @@ nobase_include_HEADERS +=			\
 vaucanson/contexts/automaton.thh		\
 vaucanson/contexts/boolean_semiring.thh		\
 vaucanson/contexts/char_letter.thh		\
+vaucanson/contexts/int_letter.thh		\
 vaucanson/contexts/dynamic_alphabet.thh		\
 vaucanson/contexts/free_monoid.thh		\
 vaucanson/contexts/free_monoid_product.thh	\
