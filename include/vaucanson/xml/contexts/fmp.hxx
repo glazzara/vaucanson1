@@ -294,9 +294,15 @@ namespace vcsn
 			 xercesc::DOMDocument* doc,
 			   xercesc::DOMElement* root)
       {
-	xercesc::DOMElement* node = tools::create_element(doc, "monElmt");
-	create_monElmt_node(m.first, doc, node);
-	create_monElmt_node(m.second, doc, node);
+	xercesc::DOMElement* node;
+	if (m.first.empty() && m.second.empty())
+	  node = tools::create_element(doc, "one");
+	else
+	{
+	  node = tools::create_element(doc, "monElmt");
+	  create_monElmt_node(m.first, doc, node);
+	  create_monElmt_node(m.second, doc, node);
+	}
 	root->appendChild(node);
       }
 
@@ -306,9 +312,15 @@ namespace vcsn
 			 xercesc::DOMDocument* doc,
 			   xercesc::DOMElement* root)
       {
-	xercesc::DOMElement* node = tools::create_element(doc, "monElmt");
-	create_monElmt_node(m.first, doc, node);
-	create_monElmt_node(m.second, doc, node);
+	xercesc::DOMElement* node;
+	if (m.first.empty() && m.second.empty())
+	  node = tools::create_element(doc, "one");
+	else
+	{
+	  node = tools::create_element(doc, "monElmt");
+	  create_monElmt_node(m.first, doc, node);
+	  create_monElmt_node(m.second, doc, node);
+	}
 	root->appendChild(node);
       }
     } // !builders

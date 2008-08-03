@@ -1,3 +1,10 @@
+2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix xml system w.r.t fmp monoid identity.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Clean code.
+	* include/vaucanson/xml/builders.hxx: Clean code.
+	* include/vaucanson/xml/contexts/fmp.hxx: Here.
+
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Bump to version 1.2.90.

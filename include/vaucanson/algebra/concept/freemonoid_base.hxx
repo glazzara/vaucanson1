@@ -231,16 +231,6 @@ namespace vcsn {
     {
       typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
-#if 0
-      bool is_empty = true;
-      for (const_iterator i = op_begin_const(s.self(), v);
-	   i != op_end_const(s.self(), v);
-	   ++i, is_empty = false)
-	st << *i;
-
-      if (is_empty)
-	st << "1";
-#endif
       st << v;
       return st;
     }

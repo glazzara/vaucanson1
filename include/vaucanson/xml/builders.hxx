@@ -399,7 +399,6 @@ namespace vcsn
 			  xercesc::DOMElement* root)
       {
 	xercesc::DOMElement* node;
-	// FIXME we shouldn't have to do that... and loop on the alphabet.
 	if (word.empty())
 	  node = tools::create_element(doc, "one");
 	else
