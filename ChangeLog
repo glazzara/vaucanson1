@@ -1,5 +1,15 @@
 2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add integer based z_fmp_transducers context.
+
+	Update ignore properties on include/vaucanson
+
+	* include/Makefile.am: Add files to the sources.
+	* include/vaucanson/automata/generic_contexts/int_z_fmp_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh: New.
+
+2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fix xml system w.r.t fmp monoid identity.
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Clean code.
 	* include/vaucanson/xml/builders.hxx: Clean code.
