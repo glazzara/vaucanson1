@@ -25,6 +25,7 @@ TESTS_ENVIRONMENT = srcdir=$(srcdir)
 check_PROGRAMS =				\
 b_tester					\
 fmp_tester					\
+z_fmp_tester					\
 geometry_tester					\
 label_node_tester				\
 r_tester					\
@@ -37,6 +38,7 @@ int_z_tester					\
 int_z_max_plus_tester				\
 int_z_min_plus_tester				\
 int_fmp_tester					\
+int_z_fmp_tester				\
 int_trans_tester
 
 ##session_tester					
@@ -69,6 +71,10 @@ int_z_min_plus_tester_SOURCES = xml_automaton_tester.cc
 int_z_min_plus_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="int_z_min_plus_automaton" -DMIN_PLUS
 
 fmp_tester_SOURCES = xml_fmp_tester.cc
+
+z_fmp_tester_SOURCES = xml_z_fmp_tester.cc
+
+int_z_fmp_tester_SOURCES = xml_int_z_fmp_tester.cc
 
 int_fmp_tester_SOURCES = xml_int_fmp_tester.cc
 

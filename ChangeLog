@@ -1,5 +1,17 @@
 2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add xml tests for z_fmp and int_z_fmp contexts.
+	* src/tests/xml/Makefile.am: Add tests.
+	* src/tests/xml/int_trans_ref.dot: Fix error.
+	* src/tests/xml/int_z_fmp_ref.dot: New.
+	* src/tests/xml/int_z_fmp_ref.xml: New.
+	* src/tests/xml/xml_int_z_fmp_tester.cc: New.
+	* src/tests/xml/xml_z_fmp_tester.cc: New.
+	* src/tests/xml/z_fmp_ref.dot: New.
+	* src/tests/xml/z_fmp_ref.xml: New.
+
+2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add integer based z_fmp_transducers context.
 
 	Update ignore properties on include/vaucanson
