@@ -1,3 +1,11 @@
+2008-08-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add int_z_transducer context.
+	Update svn ignore
+
+	* include/vaucanson/automata/generic_contexts/int_z_transducer.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_z_transducer_structures.hh: New.
+
 2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add xml tests for z_fmp and int_z_fmp contexts.
