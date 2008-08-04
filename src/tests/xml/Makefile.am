@@ -30,6 +30,7 @@ geometry_tester					\
 label_node_tester				\
 r_tester					\
 trans_tester					\
+z_trans_tester					\
 z_max_plus_tester				\
 z_min_plus_tester				\
 z_tester					\
@@ -39,7 +40,8 @@ int_z_max_plus_tester				\
 int_z_min_plus_tester				\
 int_fmp_tester					\
 int_z_fmp_tester				\
-int_trans_tester
+int_trans_tester				\
+int_z_trans_tester
 
 ##session_tester					
 
@@ -80,7 +82,11 @@ int_fmp_tester_SOURCES = xml_int_fmp_tester.cc
 
 trans_tester_SOURCES = xml_trans_tester.cc
 
+z_trans_tester_SOURCES = xml_z_trans_tester.cc
+
 int_trans_tester_SOURCES = xml_int_trans_tester.cc
+
+int_z_trans_tester_SOURCES = xml_int_z_trans_tester.cc
 
 ##session_tester_SOURCES = xml_session_tester.cc
 

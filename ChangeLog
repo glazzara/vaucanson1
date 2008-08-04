@@ -1,5 +1,17 @@
 2008-08-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add xml tests for z_transducer and int_z_transducer.
+	* src/tests/xml/Makefile.am: Add tests.
+	* src/tests/xml/int_trans_ref.dot: Fix typo.
+	* src/tests/xml/int_z_trans_ref.dot: New.
+	* src/tests/xml/int_z_trans_ref.xml: New.
+	* src/tests/xml/xml_int_z_trans_tester.cc: New.
+	* src/tests/xml/xml_z_trans_tester.cc: New.
+	* src/tests/xml/z_trans_ref.dot: New.
+	* src/tests/xml/z_trans_ref.xml: New.
+
+2008-08-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Add int_z_transducer context.
 	Update svn ignore
 
