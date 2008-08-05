@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -175,11 +175,13 @@ namespace edition_commands
     a.del_state (n_state);
   }
 
-  // FIXME this code should be definitely cleaned
-  // It's strange that:
-  // - args.tok_rep is used only with a single alphabet
-  // - that components are taken separatly (quid of rational expressions ?)
-  /// Add a transition between states of @c a .
+  // For classical automata (single alphabet) transitions are
+  // labeled by rational expressions and we use ARGS to parse these
+  // expressions.  In transducers (two alphabets) transitions are
+  // labeled by pair of words and we only use parse_word().
+  //
+  // FIXME: It would be nice to output clean error messages when
+  // parsing fails.
   static void add_transition (automaton_t& a, const arguments_t& args)
   {
     echo_ ("  Add a transition from state: ");
@@ -199,20 +201,30 @@ namespace edition_commands
 			     make_rat_exp (a.structure ().series ().monoid ().alphabet (),
 					   std::string (ratexp), args.tok_rep));
 # else
-    // hack
+    // We don't parse ratexps, so we don't use these.
     (void) args;
-    echo_ (" First component labeled by the word: ");
-    char first_label[1024];
-    std::cin.getline (first_label, 1024);
-    echo_ (" Second component labeled by the word: ");
-    char second_label[1024];
-    std::cin.getline (second_label, 1024);
 
-    // Construct a serie from the two components.
+    echo_ (" First component labeled by the word: ");
+    std::string str1;
+    std::getline(std::cin, str1);
+    Element<first_monoid_t, std::basic_string<first_monoid_t::letter_t> >
+      word1(a.structure().series().monoid().first_monoid());
+    std::string::const_iterator i1 = str1.begin();
+    parse_word(word1, str1, i1, std::set<char>());
+
+    echo_ (" Second component labeled by the word: ");
+    std::string str2;
+    std::getline(std::cin, str2);
+    Element<second_monoid_t, std::basic_string<second_monoid_t::letter_t> >
+      word2(a.structure().series().monoid().second_monoid());
+    std::string::const_iterator i2 = str2.begin();
+    parse_word(word2, str2, i2, std::set<char>());
+
+    // Construct a series from the two components.
     semiring_elt_t weight (a.structure().series().semiring());
     monoid_elt_t label (a.structure().series().monoid());
     weight = true;
-    label = monoid_elt_value_t(first_label, second_label);
+    label = monoid_elt_value_t(word1.value(), word2.value());
     series_set_elt_t s (a.structure().series());
     s.assoc (label, weight);
     a.add_series_transition (n_from, n_to, s);

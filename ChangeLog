@@ -1,5 +1,11 @@
 2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/edition_commands.hxx
+	(add_transition) [WITH_TWO_ALPHABETS]: Take letter_t into account,
+	don't assume char letters.
+
+2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/parser_options.hh, taf-kit/src/parser_options.hxx:
 	Add the missing callback function for ZERO.
 	* taf-kit/tests/vcsn-char-z.test: Test --parser's ZERO option.
