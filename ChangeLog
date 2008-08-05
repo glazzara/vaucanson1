@@ -1,3 +1,9 @@
+2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/parser_options.hh, taf-kit/src/parser_options.hxx:
+	Add the missing callback function for ZERO.
+	* taf-kit/tests/vcsn-char-z.test: Test --parser's ZERO option.
+
 2008-08-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add xml tests for z_transducer and int_z_transducer.

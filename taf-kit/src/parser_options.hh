@@ -112,6 +112,7 @@ private:
       boost::function<void(const char*, const char*)> close_weight_cb;
       boost::function<void(const char*, const char*)> push_space_cb;
       boost::function<void(const char*, const char*)> one_cb;
+      boost::function<void(const char*, const char*)> zero_cb;
 
       // reference to parser_options creator
       parser_options::alphabet_t& al_ref;
@@ -226,6 +227,17 @@ private:
       void
       push_one(const char* from,
 	       const char* to);
+
+      /**
+       * Callback function called to push the token representation of zero
+       * into the token representation structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      push_zero(const char* from,
+		const char* to);
     };
 
     parser_options::alphabet_t& al;

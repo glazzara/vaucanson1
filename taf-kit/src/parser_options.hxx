@@ -109,11 +109,12 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   close_weight_cb = bind(&self_t::close_weight   , this, _1, _2);
   push_space_cb	  = bind(&self_t::push_space     , this, _1, _2);
   one_cb	  = bind(&self_t::push_one       , this, _1, _2);
+  zero_cb	  = bind(&self_t::push_zero      , this, _1, _2);
 
   parser_properties = !list_p(propertie, space_c);
   propertie = ( alphabet     >> equal >> alphabet_definition ) |
               ( one          >> equal >> word[one_cb] ) |
-              ( zero         >> equal >> word ) |
+              ( zero         >> equal >> word[zero_cb] ) |
               ( opar >> equal >> character[open_par_cb] ) |
               ( cpar >> equal >> character[close_par_cb] ) |
               ( plus >> equal >> character[plus_cb] ) |
@@ -232,6 +233,14 @@ parser_options::options_grammar::definition<ScannerT>::push_one(const char* from
 						      		const char* to)
 {
   tok_rep_ref.one = std::string(from, to);
+}
+
+template <typename ScannerT>
+void
+parser_options::options_grammar::definition<ScannerT>::push_zero(const char* from,
+						      		const char* to)
+{
+  tok_rep_ref.zero = std::string(from, to);
 }
 
 #endif // ! PARSER_OPTIONS_HXX

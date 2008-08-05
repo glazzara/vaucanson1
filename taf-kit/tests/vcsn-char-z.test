@@ -66,9 +66,55 @@ test $($VCSN eval star_2a_41.xml aaa) -eq 512
 
 # union-of-standard
 $VCSN union-of-standard $standard_c1 $standard_c1 \| is-standard -
-$VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -
 
 # concat-of-standard
+$VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -
 
+
+# BEWARE: we are mixing the letters O/I with the digits 0/1 below.
+sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' define-automaton oi.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+1
+# Set a state to be final.
+7
+# Which state
+1
+1
+# Add transition
+3
+# From and to
+0
+0
+# Label
+{2} 0
+# Add transition
+3
+# From and to
+1
+1
+# Label
+{3} 1
+# Add transition
+3
+# From and to
+0
+1
+# Label
+I
+# Exit.
+10
+EOF
+
+$VCSN --parser='ONE=I ZERO=O ALPHABET=01' eval oi.xml '00011' > out
+test `cat out` = 72
+
+$VCSN --parser='ONE=I ZERO=O ALPHABET=01' standard '(I+O).1.(I+0)+O'
 
 exit 0
