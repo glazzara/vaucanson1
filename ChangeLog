@@ -1,5 +1,16 @@
 2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Create vcsn-int-fmp.
+
+	* taf-kit/src/Makefile.am: Build vcsn-int-fmp.
+	* configure.ac: Output taf-kit/tests/vcsn-int-fmp.
+	* doc/manual/taf-kit.tex (chapter{The \Vauc toolkit}): Mention
+	vcsn-int-fmp.
+	* taf-kit/tests/vcsn-int-fmp.test: New file.
+	* taf-kit/tests/Makefile.am: Adjust.
+
+2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/Makefile.am (vcsn_char_fmp_CPPFLAGS): Define
 	IOAUT_CONTEXT and RW_CONTEXT.
 	* taf-kit/src/fmp_commands.cc, taf-kit/src/getters.hxx,

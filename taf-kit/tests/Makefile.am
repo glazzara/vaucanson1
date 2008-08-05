@@ -19,6 +19,7 @@ TESTS =						\
   vcsn-char-fmp.test				\
   vcsn-int-b.test				\
   vcsn-int-z.test				\
+  vcsn-int-fmp.test				\
   completeness.test
 
 XFAIL_TESTS = completeness.test
@@ -47,6 +48,7 @@ check_SCRIPTS =					\
   vcsn-char-fmp					\
   vcsn-char-z					\
   vcsn-int-b					\
+  vcsn-int-fmp					\
   vcsn-int-z
 
 distclean-local:
