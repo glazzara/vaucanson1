@@ -71,21 +71,21 @@ public:
 
 # ifdef WITH_TWO_ALPHABETS
 class boolean_automaton_getter
-  : public boost::static_visitor<boolean_automaton::automaton_t>
+  : public boost::static_visitor<IOAUT_CONTEXT::automaton_t>
 {
 public:
   boolean_automaton_getter (std::string& command, input_format_t);
 
-  boolean_automaton::automaton_t
-  operator() (boolean_automaton::automaton_t& a) const;
+  IOAUT_CONTEXT::automaton_t
+  operator() (IOAUT_CONTEXT::automaton_t& a) const;
 
-  boolean_automaton::automaton_t
+  IOAUT_CONTEXT::automaton_t
   operator() (std::string& str) const;
 
-  boolean_automaton::automaton_t operator() (command_output_status& i) const;
+  IOAUT_CONTEXT::automaton_t operator() (command_output_status& i) const;
 
   template<typename T>
-  boolean_automaton::automaton_t operator() (T&) const;
+  IOAUT_CONTEXT::automaton_t operator() (T&) const;
 
   std::string command;
   input_format_t f;

@@ -71,53 +71,54 @@ DEFINE_COMMAND (NAME (evaluation)
 		CODE (/* empty */)
 		OUTPUT (
 		  evaluation (get_aut(args.args[1]),
-			      boolean_automaton::make_rat_exp(
+			      IOAUT_CONTEXT::make_rat_exp(
 				get_first_alphabet (args.alphabet),
 				args.args[2], args.tok_rep)) << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation_fmp)
 		CODE (
-		  boolean_automaton::automaton_t a = get_boolean_aut(args.args[2]);
-		  boolean_automaton::automaton_t res =
-		  boolean_automaton::make_automaton(get_second_alphabet(args.alphabet2));
+		  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args.args[2]);
+		  IOAUT_CONTEXT::automaton_t res =
+		  IOAUT_CONTEXT::make_automaton(get_second_alphabet(args.alphabet2));
 		  evaluation_fmp(get_aut(args.args[1]), a, res))
 		KEEP_AUTOMATON (res)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (domain)
 		CODE (
-		  boolean_automaton::automaton_t a =
-		  boolean_automaton::make_automaton(get_first_alphabet(args.alphabet));
+		  IOAUT_CONTEXT::automaton_t a =
+		  IOAUT_CONTEXT::make_automaton(get_first_alphabet(args.alphabet));
 		  domain(get_aut(args.args[1]), a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (image)
 		CODE (
-		  boolean_automaton::automaton_t a =
-		  boolean_automaton::make_automaton(get_second_alphabet(args.alphabet2));
+		  IOAUT_CONTEXT::automaton_t a =
+		  IOAUT_CONTEXT::make_automaton(get_second_alphabet(args.alphabet2));
 		  image(get_aut(args.args[1]), a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
+#ifdef RW_CONTEXT
 DEFINE_COMMAND (NAME (to_rw)
 		CODE (
 		  automaton_t fmp = get_aut(args.args[1]);
 		  automaton_t::monoid_t m = fmp.structure().series().monoid();
-		  boolean_transducer::automaton_t a =
-		  boolean_transducer::make_automaton(m.first_monoid().alphabet(),
-						     m.second_monoid().alphabet());
+		  RW_CONTEXT::automaton_t a =
+		  RW_CONTEXT::make_automaton(m.first_monoid().alphabet(),
+					     m.second_monoid().alphabet());
 		  fmp_to_rw(fmp, a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
-
+#endif
 
 DEFINE_COMMAND (NAME (intersection)
 		CODE (
-		  boolean_automaton::automaton_t a =
+		  IOAUT_CONTEXT::automaton_t a =
 		  get_boolean_aut(args.args[1]);
-		  boolean_automaton::alphabet_t A =
+		  IOAUT_CONTEXT::alphabet_t A =
 		  a.structure().series().monoid().alphabet();
 		  automaton_t fmp = make_automaton(A,A);
 		  identity(a, fmp))
@@ -192,8 +193,10 @@ const command_t command_map[] =
     COMMAND_ENTRY (u_compose, AutAut,
 		   "Compose `aut1' and `aut2', two Boolean transducers,\n\t"
 		   "preserve the number of path."),
+#ifdef RW_CONTEXT
     COMMAND_ENTRY (to_rw, Aut,
 		   "Give the equivalent rational weight transducer of `aut'."),
+#endif
     COMMAND_ENTRY (invert, Aut, "Give the inverse of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
 		   "Transform a Boolean automaton in a fmp transducer by\n\t"

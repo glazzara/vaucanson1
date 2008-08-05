@@ -1,5 +1,16 @@
 2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_CPPFLAGS): Define
+	IOAUT_CONTEXT and RW_CONTEXT.
+	* taf-kit/src/fmp_commands.cc, taf-kit/src/getters.hxx,
+	taf-kit/src/pipe.hh, taf-kit/src/pipe_getters.hh,
+	taf-kit/src/pipe_getters.hxx, taf-kit/src/pipe_writers.hh,
+	taf-kit/src/pipe_writers.hxx: Use IOAUT_CONTEXT and RW_CONTEXT
+	instead of assuming boolean_automaton and boolean_transucer.  Also
+	disable the command "to_rw" if RW_CONTEXT is undefined.
+
+2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/edition_commands.hxx
 	(add_transition) [WITH_TWO_ALPHABETS]: Take letter_t into account,
 	don't assume char letters.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,12 +43,14 @@
 
 # include <boost/variant.hpp>
 
-# ifdef WITH_TWO_ALPHABETS
-// For boolean_transducer namespace.
-// Make sure this is not supposed to be included from somewhere else
-// (e.g. CONTEXT_HEADER).
-#  include <vaucanson/boolean_transducer.hh>
-# endif // !WITH_TWO_ALPHABETS
+# ifdef IOAUT_CONTEXT
+#  define IOAUT_CONTEXT_HEADER <vaucanson/IOAUT_CONTEXT.hh>
+#  include IOAUT_CONTEXT_HEADER
+# endif
+# ifdef RW_CONTEXT
+#  define RW_CONTEXT_HEADER <vaucanson/RW_CONTEXT.hh>
+#  include RW_CONTEXT_HEADER
+# endif
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
@@ -64,11 +66,13 @@ typedef boost::variant<command_output_status,
 		       automaton_t,
 # ifndef WITH_TWO_ALPHABETS
 		       rat_exp_t,
-# endif // !WITH_TWO_ALPHABETS
-# ifdef WITH_TWO_ALPHABETS
-		       boolean_automaton::automaton_t,
-		       boolean_transducer::automaton_t,
-# endif // !WITH_TWO_ALPHABETS
+# endif
+# ifdef IOAUT_CONTEXT
+		       IOAUT_CONTEXT::automaton_t,
+# endif
+# ifdef RW_CONTEXT
+		       RW_CONTEXT::automaton_t,
+# endif
 		       std::string> command_output_variant;
 
 // i/o types for automaton_loader and automaton_saver.

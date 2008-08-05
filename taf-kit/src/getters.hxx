@@ -172,12 +172,12 @@ static automaton_t get_aut (const std::string& s)
 }
 
 #ifdef WITH_TWO_ALPHABETS
-static boolean_automaton::automaton_t get_boolean_aut(std::string s)
+static IOAUT_CONTEXT::automaton_t get_boolean_aut(std::string s)
 {
 # ifdef GLOBAL_RESULT
   if (s == "-")
   {
-    boolean_automaton::automaton_t a =
+    IOAUT_CONTEXT::automaton_t a =
       boost::apply_visitor(boolean_automaton_getter
 			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_type),
 			   GLOBAL_RESULT.output);
@@ -191,8 +191,8 @@ static boolean_automaton::automaton_t get_boolean_aut(std::string s)
     using namespace vcsn::tools;
     using namespace vcsn::xml;
 
-    boolean_automaton::automaton_t a =
-      boolean_automaton::make_automaton(first_alphabet_t());
+    IOAUT_CONTEXT::automaton_t a =
+      IOAUT_CONTEXT::make_automaton(first_alphabet_t());
 
 # ifdef GLOBAL_RESULT
     switch (GLOBAL_RESULT.input_type)

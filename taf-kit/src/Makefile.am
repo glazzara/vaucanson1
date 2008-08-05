@@ -66,7 +66,9 @@ vcsn_char_fmp_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
 #vcsn_char_fmp_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=fmp_transducer 	\
 #		    -DWITH_TWO_ALPHABETS -DVCSN_USE_LIB
 vcsn_char_fmp_CPPFLAGS = $(AM_CPPFLAGS) \
-		         -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS
+		         -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS \
+			 -DIOAUT_CONTEXT=boolean_automaton	       \
+			 -DRW_CONTEXT=boolean_transducer
 vcsn_char_fmp_LDADD = $(LDADD) \
 		      $(top_builddir)/lib/libvcsn-fmp-tdc.la \
 		      $(top_builddir)/lib/libkrat_exp.la

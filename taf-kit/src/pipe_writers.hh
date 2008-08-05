@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -54,10 +54,12 @@ public:
   void operator() (rat_exp_t& a) const;
 # endif // !WITH_TWO_ALPHABETS
 
-# ifdef WITH_TWO_ALPHABETS
-  void operator() (boolean_transducer::automaton_t& a) const;
-  void operator() (boolean_automaton::automaton_t& a) const;
-# endif // !WITH_TWO_ALPHABETS
+# ifdef IOAUT_CONTEXT
+  void operator() (IOAUT_CONTEXT::automaton_t& a) const;
+# endif
+# ifdef RW_CONTEXT
+  void operator() (RW_CONTEXT::automaton_t& a) const;
+# endif
 
   template<typename T>
   void operator() (T&) const;

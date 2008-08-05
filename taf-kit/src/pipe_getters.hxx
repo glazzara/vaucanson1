@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -184,20 +184,19 @@ boolean_automaton_getter::boolean_automaton_getter (std::string& cmd,
 {
 }
 
-boolean_automaton::automaton_t
-boolean_automaton_getter::operator()
-  (boolean_automaton::automaton_t& a) const
+IOAUT_CONTEXT::automaton_t
+boolean_automaton_getter::operator() (IOAUT_CONTEXT::automaton_t& a) const
 {
   return a;
 }
 
-boolean_automaton::automaton_t
+IOAUT_CONTEXT::automaton_t
 boolean_automaton_getter::operator() (std::string& str) const
 {
   std::istringstream is (str);
 
-  boolean_automaton::automaton_t a =
-    boolean_automaton::make_automaton (first_alphabet_t());
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton (first_alphabet_t());
 
   switch (f)
     {
@@ -214,7 +213,7 @@ boolean_automaton_getter::operator() (std::string& str) const
   return a;
 }
 
-boolean_automaton::automaton_t
+IOAUT_CONTEXT::automaton_t
 boolean_automaton_getter::operator() (command_output_status& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
@@ -225,8 +224,8 @@ boolean_automaton_getter::operator() (command_output_status& i) const
       exit (1);
     }
 
-  boolean_automaton::automaton_t a =
-    boolean_automaton::make_automaton (first_alphabet_t ());
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton (first_alphabet_t ());
 
   switch (f)
     {
@@ -244,7 +243,7 @@ boolean_automaton_getter::operator() (command_output_status& i) const
 }
 
 template<typename T>
-boolean_automaton::automaton_t
+IOAUT_CONTEXT::automaton_t
 boolean_automaton_getter::operator() (T&) const
 {
   std::cerr << command
