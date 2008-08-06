@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,15 +18,23 @@
 #ifndef VCSN_TOOLS_GEN_RANDOM_HH
 # define VCSN_TOOLS_GEN_RANDOM_HH
 
-#include <vaucanson/misc/selectors.hh>
-#include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/misc/selectors.hh>
+# include <vaucanson/automata/concept/transducer.hh>
+
+// We can have letter types with very large cardinal
+// (say int letters). So we clip the max size to
+// ALPHABET_MAX_SIZE to ensure the test-suite will
+// be able to generate random automata with max-sized
+// alphabets.
+# define ALPHABET_MAX_SIZE 1024
 
 namespace vcsn {
+
   namespace tools {
 
     /*---------------------.
-      | GenRandomAutomataSet |
-      `---------------------*/
+    | GenRandomAutomataSet |
+    `---------------------*/
 
     class GenRandomAutomataSet
     {
@@ -43,8 +52,8 @@ namespace vcsn {
 
 
     /*------------------.
-      | GenRandomAutomata |
-      `------------------*/
+    | GenRandomAutomata |
+    `------------------*/
 
     template <class TAutomata, class AutomataSetGenerator = GenRandomAutomataSet>
       class GenRandomAutomata
@@ -95,9 +104,9 @@ namespace vcsn {
 
     static unsigned alea(unsigned max);
 
-  } // tools
-} // vcsn
+  } // ! tools
 
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/tools/gen_random.hxx>

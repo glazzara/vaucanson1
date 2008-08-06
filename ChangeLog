@@ -1,5 +1,12 @@
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Clip size of randomly generated alphabets.
+	* include/vaucanson/tools/gen_random.hh: New absolute maximum size.
+	* include/vaucanson/tools/gen_random.hxx: Add clipping logic.
+	* include/vaucanson/tools/io.hxx: Update notice.
+
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add int_boolean_automaton to the test-suite.
 	* src/tests/include/Makefile.am: Add a new test.
 	* src/tests/include/tests/automata/implementation_check/epsilon_label_representation_test.hh: New.

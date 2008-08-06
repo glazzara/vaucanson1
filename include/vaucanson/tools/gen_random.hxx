@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,13 +24,14 @@
 # include <cstdlib>
 
 namespace vcsn {
+
   namespace tools {
 
     using namespace algebra;
 
     /*---------------------.
-      | GenRandomAutomataSet |
-      `---------------------*/
+    | GenRandomAutomataSet |
+    `---------------------*/
 
     template <class AutoSet>
       AutoSet
@@ -40,8 +42,10 @@ namespace vcsn {
 	AUTOMATA_SET_TYPES(AutoSet);
 
 	alphabet_t		alpha;
-	unsigned		nb = alea(nb_letter ? nb_letter :
-	    alpha.max_size());
+	unsigned		max = (alpha.max_size() > ALPHABET_MAX_SIZE ?
+				       ALPHABET_MAX_SIZE :
+				       alpha.max_size());
+	unsigned		nb = alea(nb_letter ? nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
 	  alpha.insert(alpha.random_letter());
 
@@ -60,16 +64,20 @@ namespace vcsn {
       {
 	AUTOMATA_SET_TYPES(AutoSet);
 
-	alphabet_t			input_alpha;
-	alphabet_t			output_alpha;
+	alphabet_t	input_alpha;
+	alphabet_t	output_alpha;
 
-	unsigned			nb = alea(input_nb_letter ? input_nb_letter :
-	    input_alpha.max_size());
+	unsigned	max = (input_alpha.max_size() > ALPHABET_MAX_SIZE ?
+			       ALPHABET_MAX_SIZE :
+			       input_alpha.max_size());
+	unsigned	nb = alea(input_nb_letter ? input_nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
 	  input_alpha.insert(input_alpha.random_letter());
 
-	nb = alea(output_nb_letter ? output_nb_letter :
-	    output_alpha.max_size());
+	max = (output_alpha.max_size() > ALPHABET_MAX_SIZE ?
+	       ALPHABET_MAX_SIZE :
+	       output_alpha.max_size());
+	nb = alea(output_nb_letter ? output_nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
 	  output_alpha.insert(output_alpha.random_letter());
 
@@ -91,8 +99,8 @@ namespace vcsn {
     }
 
     /*------------------.
-      | GenRandomAutomata |
-      `------------------*/
+    | GenRandomAutomata |
+    `------------------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       GenRandomAutomata<TAutomata, AutomataSetGenerator>::GenRandomAutomata()
@@ -100,8 +108,8 @@ namespace vcsn {
 
 
     /*------.
-      | empty |
-      `------*/
+    | empty |
+    `------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -122,8 +130,8 @@ namespace vcsn {
       }
 
     /*---------.
-      | generate |
-      `---------*/
+    | generate |
+    `---------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -208,8 +216,8 @@ namespace vcsn {
       }
 
     /*---------------.
-      | useful methods |
-      `---------------*/
+    | useful methods |
+    `---------------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       unsigned GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -243,8 +251,8 @@ namespace vcsn {
 
 
     /*----------------------.
-      | generate with epsilon |
-      `----------------------*/
+    | generate with epsilon |
+    `----------------------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -284,8 +292,8 @@ namespace vcsn {
 
 
     /*-------------.
-      | generate dfa |
-      `-------------*/
+    | generate dfa |
+    `-------------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -351,8 +359,8 @@ namespace vcsn {
 
 
     /*--------------------.
-      | generate normalized |
-      `--------------------*/
+    | generate normalized |
+    `--------------------*/
 
     template <class TAutomata, class AutomataSetGenerator>
       TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -412,7 +420,8 @@ namespace vcsn {
 	return work;
       }
 
-  } // tools
-} // vcsn
+  } // ! tools
+
+} // ! vcsn
 
 #endif // ! VCSN_TOOLS_GEN_RANDOM_HXX
