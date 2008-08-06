@@ -169,6 +169,7 @@ vaucanson/algebra/concept/freemonoid_product.hxx	\
 vaucanson/algebra/concept/freemonoid_product_base.hh	\
 vaucanson/algebra/concept/freemonoid_product_base.hxx	\
 vaucanson/algebra/concept/letter.hh			\
+vaucanson/algebra/concept/letter.hxx			\
 vaucanson/algebra/concept/monoid_base.hh		\
 vaucanson/algebra/concept/monoid_base.hxx		\
 vaucanson/algebra/concept/numerical_semiring.hh		\

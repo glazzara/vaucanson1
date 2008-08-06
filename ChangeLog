@@ -1,5 +1,12 @@
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Make make_rat_exp accept a more generic token_representation.
+	* include/Makefile.am: Add file to the distribution.
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx: Here.
+
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Be more generic w.r.t token representations.
 	* include/vaucanson/algebra/concept/freemonoid_base.hh,
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Fix a bad
