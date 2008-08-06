@@ -318,7 +318,7 @@ Automaton description:
   Final states: 0
 
   Transitions:
-    1: From 0 to 0 labeled by (1 a)+(1 b)
+    1: From 0 to 0 labeled by (\{1\} a)+(\{1\} b)
 \end{shell}
 
 \noindent
@@ -328,7 +328,6 @@ only \code{1} is valid for Boolean automata.
 
 Finally, hit \kbd{10} to save the resulting automaton in the file
 \file{all.xml}.
-
 
 \subsection{Rational expressions and Boolean automata}
 
@@ -341,6 +340,75 @@ automata:
 \begin{center}
   \includegenerateddot{all}
 \end{center}
+
+\subsection{Token representations}
+
+When dealing with rational expressions in \tafkit, one may be willing to
+, for example, change the representation of the epsilon. More generally,
+the rational expressions parser understand $10$ such tokens. They are:
+
+\begin{itemize}
+\item \verb-OPAR-: the opening association parenthesis.
+\item \verb-CPAR-: the closing association parenthesis.
+\item \verb-PLUS-: the semi-ring additive law.
+\item \verb-TIMES-: the monoid concatenation law.
+\item \verb-STAR-: the Kleene star.
+\item \verb-ONE-: the identity of the monoid.
+\item \verb-ZERO-: the zero of the semi-ring.
+\item \verb-OWEIGHT-: the opening weight brace.
+\item \verb-CWEIGHT-: the closing weight brace.
+\item \verb-SPACE-: a whitespace character.
+\end{itemize}
+
+\noindent
+Each token must be a non-empty string, with arbitrary length. Some checks
+will be done by \tafkit, to ensure tokens do not collide. You can also
+use the \verb-ALPHABET- token an arbitrary number of time, to append letters
+to the current alphabet. The following commands:
+
+%% FIXME: include ({1} a) in the example
+\execcaption{parser.xml}{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
+\execcaption{parser.dot}{vcsn-char-b dot-dump parser.xml >parser.dot}
+\begin{center}
+  \includegenerateddot{parser}
+\end{center}
+
+\noindent
+, will give the same results as:
+%% FIXME: include ({1} a) in the example
+\execcaption{parser2.xml}{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
+\execcaption{parser2.dot}{vcsn-char-b dot-dump parser2.xml >parser2.dot}
+\begin{center}
+  \includegenerateddot{parser2}
+\end{center}
+
+\noindent
+With the \verb-ALPHABET- token, you can specify two types of letters:
+
+\begin{itemize}
+\item letters: one character is used to represent a letter.
+\item words: many characters are used to represent a letter.
+\end{itemize}
+
+For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
+(\verb-a-, \verb-b- and \verb-c-), while \verb-ALPHABET=words:abc- defines the
+alphabet with only one letter \verb-abc-. Letters are separated by commas, and
+each \tafkit context defaults to either letters (vcsn-char-b eg) or words
+(vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
+\verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
+
+Everywhere you want to use special characters used by the \verb|--parser|
+option, prepending a backslash character will escape it. So you can write:
+\verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
+and \verb-=-.
+
+Finally whenever you may put a single character you may write a pair a words.
+The following construction is then valid: \verb|ALPHABET=(\,,\))|, and defines
+the alphabet with only one letter: the pair whose first component is \verb-,-
+and the second one is \verb-)-.
+
+For more details, the grammar of the \verb|--parser| option is included in the
+source code in EBNF notations.
 
 \subsubsection{Minimizing}
 

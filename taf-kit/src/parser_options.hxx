@@ -119,14 +119,14 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   propertie = ( alphabet     >> equal >> alphabet_definition ) |
               ( one          >> equal >> word[one_cb] ) |
               ( zero         >> equal >> word[zero_cb] ) |
-              ( opar >> equal >> character[open_par_cb] ) |
-              ( cpar >> equal >> character[close_par_cb] ) |
-              ( plus >> equal >> character[plus_cb] ) |
-              ( times >> equal >> character[times_cb] ) |
-              ( star >> equal >> character[star_cb] ) |
-              ( oweight >> equal >> character[open_weight_cb] ) |
-              ( cweight >> equal >> character[close_weight_cb] ) |
-	      ( space >> equal >> character[push_space_cb] );
+              ( opar >> equal >> word[open_par_cb] ) |
+              ( cpar >> equal >> word[close_par_cb] ) |
+              ( plus >> equal >> word[plus_cb] ) |
+              ( times >> equal >> word[times_cb] ) |
+              ( star >> equal >> word[star_cb] ) |
+              ( oweight >> equal >> word[open_weight_cb] ) |
+              ( cweight >> equal >> word[close_weight_cb] ) |
+	      ( space >> equal >> word[push_space_cb] );
 
   letters = *(letter[push_letter_cb]);
   words = !list_p(word[push_letter_cb], comma);

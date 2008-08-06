@@ -1,5 +1,11 @@
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Document the --parser option.
+	* doc/manual/taf-kit.tex: Here.
+	* taf-kit/src/parser_options.hxx: Use words in place of characters.
+
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update svn:ignore on lib.
 
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
