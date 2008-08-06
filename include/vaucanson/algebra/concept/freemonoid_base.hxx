@@ -231,7 +231,11 @@ namespace vcsn {
     {
       typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
-      st << v;
+      if (v.empty())
+	st << vcsn::algebra::letter_traits<typename Self::letter_t>::default_epsilon();
+      else
+	st << v;
+
       return st;
     }
 

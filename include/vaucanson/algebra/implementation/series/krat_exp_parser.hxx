@@ -47,6 +47,7 @@ namespace vcsn
 {
   namespace algebra
   {
+
     template <class S, class T>
     struct Lexer
     {
@@ -56,7 +57,7 @@ namespace vcsn
 	    Element<S, T>& e,
 	    yy::krat_exp_parser& parser,
 	    bool lex_trace,
-	    const token_representation_t tok_rep,
+	    const token_representation<typename S::monoid_t::letter_t> tok_rep,
 	    std::string& error) :
 	from_(from),
 	e_(e),
@@ -66,6 +67,16 @@ namespace vcsn
 	token_tab_(9),
 	error_(error)
       {
+	precondition(!tok_rep.open_par.empty() &&
+		     !tok_rep.close_par.empty() &&
+		     !tok_rep.plus.empty() &&
+		     !tok_rep.times.empty() &&
+		     !tok_rep.star.empty() &&
+		     !tok_rep.one.empty() &&
+		     !tok_rep.zero.empty() &&
+		     !tok_rep.open_weight.empty() &&
+		     !tok_rep.close_weight.empty());
+
 	token_tab_[0] = tok_rep.open_par;
 	token_tab_[1] = tok_rep.close_par;
 	token_tab_[2] = tok_rep.plus;
@@ -77,6 +88,7 @@ namespace vcsn
 	close_weight_ = tok_rep.close_weight;
 	for (unsigned i = 0; i < tok_rep.spaces.size(); i++)
 	{
+	  assertion(!tok_rep.spaces[i].empty());
 	  token_tab_[8 + i] = tok_rep.spaces[i];
 	}
 
@@ -238,7 +250,8 @@ namespace vcsn
     std::pair<bool, std::string>
     parse(const std::string& from,
 	Element<S, T>& exp,
-	const token_representation_t tok_rep = token_representation_t(),
+	const token_representation<typename S::monoid_t::letter_t> tok_rep
+	= token_representation<typename S::monoid_t::letter_t>(),
 	bool lex_trace = false,
 	bool parse_trace = false)
     {

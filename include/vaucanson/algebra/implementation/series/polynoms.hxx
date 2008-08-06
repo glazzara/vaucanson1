@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -634,10 +635,7 @@ namespace vcsn {
 	    st << "} ";
 	  }
 
-	  if (i->first != identity_value(SELECT(M), SELECT(Tm)))
-	    op_rout(s.monoid(), st, i->first);
-	  else
-	    st << algebra::letter_traits<typename algebra::Series<W, M>::monoid_t::letter_t>::default_epsilon();
+	  op_rout(s.monoid(), st, i->first);
 
 	  if (i->second != identity_value(SELECT(W), SELECT(Tw)))
 	    st << ")";
@@ -755,7 +753,7 @@ namespace vcsn {
 
 namespace std {
 
-  // FIXME: Must this operator exist ?
+  // FIXME: We should use a dump visitor (see ratexp DumpVisitor)
   template <class Tm, class Tw>
   std::ostream& operator<<(std::ostream& out,
 			   const vcsn::algebra::polynom<Tm, Tw>& p)
@@ -766,13 +764,18 @@ namespace std {
       {
 	if (i != p.begin())
 	  out << "+";
-	out << "({" << i->second << "} "
-	    << vcsn::misc::make_escaper(i->first) << ")";
+	out << "({" << i->second << "} ";
+	if (i->first.empty())
+	  out << vcsn::algebra::letter_traits<typename Tm::value_type>::default_epsilon();
+	else
+	  out << i->first;
+	out << ")";
 	++i;
       }
 
-    if (i == p.begin()) /* case zero */
-      out << "0";
+    // zero case
+    if (i == p.begin())
+      out << vcsn::algebra::letter_traits<typename Tm::value_type>::default_zero();
 
     return out;
   }

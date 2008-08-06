@@ -28,6 +28,9 @@ namespace vcsn {
     template <>
     struct letter_traits<char>
     {
+      // This letter type needs one char to be displayed.
+      typedef misc::true_t is_char_letter;
+
       enum
       {
 	// Here we use 255 and not 256 because random::generate<char>
@@ -37,9 +40,20 @@ namespace vcsn {
 	cardinal = 255
       };
 
-      static const char default_epsilon() { return '1'; }
+      // FIXME: use LETTER_DEFAULT
       static const char default_joker()   { return '?'; }
       static const char default_other()   { return '#'; }
+
+      LETTER_DEFAULT(open_par, "(")
+      LETTER_DEFAULT(close_par, ")")
+      LETTER_DEFAULT(plus, "+")
+      LETTER_DEFAULT(times, ".")
+      LETTER_DEFAULT(star, "*")
+      LETTER_DEFAULT(epsilon, "1")
+      LETTER_DEFAULT(zero, "0")
+      LETTER_DEFAULT(open_weight, "{")
+      LETTER_DEFAULT(close_weight, "}")
+      LETTER_DEFAULT(space, " ")
 
       static
       char

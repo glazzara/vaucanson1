@@ -29,6 +29,9 @@ namespace vcsn {
     template <>
     struct letter_traits<int>
     {
+      // This letter type needs more than one char to be displayed.
+      typedef misc::false_t is_char_letter;
+
       enum
       {
 	// Here we use UINT_MAX and not UINT_MAX + 1 because an enum cannot
@@ -36,7 +39,16 @@ namespace vcsn {
 	cardinal = UINT_MAX
       };
 
-      static const char default_epsilon() { return 'e'; }
+      LETTER_DEFAULT(open_par, "(")
+      LETTER_DEFAULT(close_par, ")")
+      LETTER_DEFAULT(plus, "+")
+      LETTER_DEFAULT(times, ".")
+      LETTER_DEFAULT(star, "*")
+      LETTER_DEFAULT(epsilon, "e")
+      LETTER_DEFAULT(zero, "z")
+      LETTER_DEFAULT(open_weight, "{")
+      LETTER_DEFAULT(close_weight, "}")
+      LETTER_DEFAULT(space, " ")
 
       static
       int

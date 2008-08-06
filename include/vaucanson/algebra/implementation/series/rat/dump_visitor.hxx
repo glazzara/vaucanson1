@@ -79,14 +79,10 @@ namespace vcsn {
 	: ostr_ (ostr)
       {
 	if (not ostr_.pword(rat::zero()))
-	  ostr_ << setzero ("0");
+	  ostr_ << setzero(algebra::letter_traits<typename Word::value_type>::default_zero());
 
 	if (not ostr_.pword(rat::id()))
-	{
-	  std::string eps = "";
-	  eps += algebra::letter_traits<typename Word::value_type>::default_epsilon();
-	  ostr_ << setid(eps);
-	}
+	  ostr_ << setid(algebra::letter_traits<typename Word::value_type>::default_epsilon());
       }
 
       virtual
@@ -268,7 +264,7 @@ namespace vcsn {
       void
       constant(const monoid_elt_value_t& m)
       {
-	ostr_ << misc::make_escaper(m);
+	ostr_ << m;
       }
 
       virtual

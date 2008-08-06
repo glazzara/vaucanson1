@@ -33,44 +33,18 @@
 /** @} */
 /** @} */
 
-# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vector>
 # include <string>
+
+# include <vaucanson/misc/contract.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/algebra/concept/letter.hh>
 
 namespace vcsn {
 
   namespace algebra {
     /** @addtogroup algebra *//** @{ */
     /** @addtogroup series *//** @{ */
-
-    struct token_representation_t
-    {
-      std::string		open_par;
-      std::string		close_par;
-      std::string		plus;
-      std::string		times;
-      std::string		star;
-      std::string		one;
-      std::string		zero;
-      std::string		open_weight;
-      std::string		close_weight;
-      std::vector<std::string>	spaces;
-
-      // Default constructor
-      token_representation_t() :
-	open_par("("),
-	close_par(")"),
-	plus("+"),
-	times("."),
-	star("*"),
-	one("1"),
-	zero("0"),
-	open_weight("{"),
-	close_weight("}")
-	{
-	  spaces.push_back(" ");
-	}
-    };
 
     /**
      * Parse a rational expression.
@@ -117,7 +91,8 @@ namespace vcsn {
     std::pair<bool, std::string>
     parse(const std::string& from,
 	  Element<S, T>& exp,
-	  const token_representation_t tok_rep = token_representation_t(),
+	  const token_representation<typename S::monoid_t::letter_t> tok_rep
+	  = token_representation<typename S::monoid_t::letter_t>(),
 	  bool lex_trace = false,
 	  bool parse_trace = false);
 

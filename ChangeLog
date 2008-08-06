@@ -1,5 +1,25 @@
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Be more generic w.r.t token representations.
+	* include/vaucanson/algebra/concept/freemonoid_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Fix a bad
+	  practice when printing monoid elements.
+	* include/vaucanson/algebra/concept/letter.hh: Extend the letter
+	  concept with more traits.
+	* include/vaucanson/algebra/concept/letter.hxx: New.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	  Add required traits.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	  templatize token_representation
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Fix
+	  a bad practice when printing polynoms.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	  Use letter traits.
+
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Clip size of randomly generated alphabets.
 	* include/vaucanson/tools/gen_random.hh: New absolute maximum size.
 	* include/vaucanson/tools/gen_random.hxx: Add clipping logic.

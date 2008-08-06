@@ -19,6 +19,7 @@
 # define VCSN_ALGEBRA_CONCEPT_LETTER_HH
 
 # include <string>
+# include <vector>
 
 # include <vaucanson/misc/static.hh>
 
@@ -29,6 +30,9 @@ namespace vcsn {
     template <class L>
     struct letter_traits
     {
+      // When we do not know the type we assume false.
+      typedef misc::false_t is_char_letter;
+
       // Default value
       enum
 	{
@@ -40,26 +44,83 @@ namespace vcsn {
 
       /// Provide a way to create a letter from its literal
       /// representation:
-      static L literal_to_letter(const std::string&)
-      {
-	return 0;
-      }
+      static L literal_to_letter(const std::string&);
 
       /// Provide a way to represent a letter.
-      static std::string letter_to_literal(const L&)
-      {
-	return 0;
-      }
+      static std::string letter_to_literal(const L&);
 
-      /// Provide a way to represent an epsilon.
-      static char default_epsilon()
-      {
-	return '1';
-      }
+# define DECLARE_DEFAULT(name) \
+      static const std::string default_##name ();
+
+      /// Provide a way to represent an "open parenthesis".
+      DECLARE_DEFAULT(open_par)
+
+      /// Provide a way to represent a "close parenthesis".
+      DECLARE_DEFAULT(close_par)
+
+      /// Provide a way to represent a "plus".
+      DECLARE_DEFAULT(plus)
+
+      /// Provide a way to represent a "times".
+      DECLARE_DEFAULT(times)
+
+      /// Provide a way to represent a "star".
+      DECLARE_DEFAULT(star)
+
+      /// Provide a way to represent an "epsilon".
+      DECLARE_DEFAULT(epsilon)
+
+      /// Provide a way to represent a "zero".
+      DECLARE_DEFAULT(zero)
+
+      /// Provide a way to represent an "open weight".
+      DECLARE_DEFAULT(open_weight)
+
+      /// Provide a way to represent a "close weight".
+      DECLARE_DEFAULT(close_weight)
+
+      /// Provide a way to represent a "space".
+      DECLARE_DEFAULT(space)
+
+# undef DECLARE_DEFAULT
+
     };
+
+    template <typename L>
+    struct token_representation
+    {
+      std::string		open_par;
+      std::string		close_par;
+      std::string		plus;
+      std::string		times;
+      std::string		star;
+      std::string		one;
+      std::string		zero;
+      std::string		open_weight;
+      std::string		close_weight;
+      std::vector<std::string>	spaces;
+
+      // Default CTOR.
+      token_representation();
+
+      // Convertion CTOR.
+      template <typename U>
+      token_representation(const token_representation<U>& arg);
+
+    };
+
+    // generic interface to overwrite static defaults
+    typedef token_representation<misc::true_t> token_representation_t;
+
+# define LETTER_DEFAULT(name, value) \
+    static const std::string default_##name () { return value; }
 
   } // ! algebra
 
 } // ! vcsn
+
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
+#  include <vaucanson/algebra/concept/letter.hxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_LETTER_HH
