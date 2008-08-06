@@ -20,8 +20,10 @@ MAINTAINERCLEANFILES =
 
 include krat_exp/libkrat_exp.mk
 include vcsn-b/libvcsn-b.mk
+include vcsn-int-b/libvcsn-int-b.mk
 include vcsn-r/libvcsn-r.mk
 include vcsn-z/libvcsn-z.mk
+include vcsn-int-z/libvcsn-int-z.mk
 include vcsn-z-max/libvcsn-z-max.mk
 include vcsn-z-min/libvcsn-z-min.mk
 include vcsn-fmp-tdc/libvcsn-fmp-tdc.mk
@@ -31,8 +33,10 @@ include vcsn-z-tdc/libvcsn-z-tdc.mk
 
 maintainer-clean-local:
 	rm -rf $(top_builddir)/lib/vcsn-b		\
+	       $(top_builddir)/lib/vcsn-int-b		\
 	       $(top_builddir)/lib/vcsn-r		\
 	       $(top_builddir)/lib/vcsn-z		\
+	       $(top_builddir)/lib/vcsn-int-z		\
 	       $(top_builddir)/lib/vcsn-z-min		\
 	       $(top_builddir)/lib/vcsn-z-max		\
 	       $(top_builddir)/lib/vcsn-z-fmp-tdc	\
@@ -40,8 +44,10 @@ maintainer-clean-local:
 	       $(top_builddir)/lib/vcsn-fmp-tdc		\
 	       $(top_builddir)/lib/vcsn-tdc
 	rm -rf $(top_srcdir)/lib/vcsn-b			\
+	       $(top_srcdir)/lib/vcsn-int-b		\
 	       $(top_srcdir)/lib/vcsn-r			\
 	       $(top_srcdir)/lib/vcsn-z			\
+	       $(top_srcdir)/lib/vcsn-int-z		\
 	       $(top_srcdir)/lib/vcsn-z-min		\
 	       $(top_srcdir)/lib/vcsn-z-max		\
 	       $(top_srcdir)/lib/vcsn-z-fmp-tdc		\

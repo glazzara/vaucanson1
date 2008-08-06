@@ -78,18 +78,20 @@ vcsn_int_b_SOURCES = $(COMMON_SOURCES)			\
 	              common_automaton_commands.hh	\
                       b_commands.cc
 vcsn_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_boolean_automaton \
-                      -DNO_PREDEF_ALPHABETS
+                      -DNO_PREDEF_ALPHABETS -DVCSN_USE_LIB
 vcsn_int_b_LDADD = $(LDADD)				\
-		    $(top_builddir)/lib/libkrat_exp.la
+		    $(top_builddir)/lib/libkrat_exp.la  \
+		    $(top_builddir)/lib/libvcsn-int-b.la
 
 vcsn_int_z_SOURCES = $(COMMON_SOURCES)			\
 		      ratexp_commands.hh		\
 	              common_automaton_commands.hh	\
                       z_commands.cc
 vcsn_int_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_automaton \
-                      -DNO_PREDEF_ALPHABETS
+                      -DNO_PREDEF_ALPHABETS -DVCSN_USE_LIB
 vcsn_int_z_LDADD = $(LDADD)				\
-		    $(top_builddir)/lib/libkrat_exp.la
+		    $(top_builddir)/lib/libkrat_exp.la  \
+		    $(top_builddir)/lib/libvcsn-int-z.la
 
 vcsn_int_fmp_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
 vcsn_int_fmp_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \

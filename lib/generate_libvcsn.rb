@@ -17,8 +17,10 @@
 # Hash table filled with the supported types of automaton
 vcsn = Hash[
   "vcsn-b" => "boolean_automaton",
+  "vcsn-int-b" => "int_boolean_automaton",
   "vcsn-r" => "r_automaton",
   "vcsn-z" => "z_automaton",
+  "vcsn-int-z" => "int_z_automaton",
   "vcsn-z-max" => "z_max_plus_automaton",
   "vcsn-z-min" => "z_min_plus_automaton",
   "vcsn-fmp-tdc" => "fmp_transducer",
@@ -43,6 +45,7 @@ def create?(type, file)
     # FIXME: more comments with the some specs on the algorithms must be added to do so
     (
       ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
+        "vcsn-int-b" == type or "vcsn-int-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type ) and
       file !~ /realtime_decl.hh/ and
       file !~ /composition_cover.hh/ and	# transducer

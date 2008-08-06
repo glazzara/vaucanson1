@@ -1,5 +1,15 @@
 2008-08-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Instantiate libvcsn for int-b and int-z and use it in TAF-Kit.
+
+	* lib/generate_libvcsn.rb: Instantiate libvcsn for int-b and int-z.
+	* lib/Makefile.am: Include vcsn-int-b/libvcsn-int-b.mk
+	and vcsn-int-z/libvcsn-int-z.mk.
+	* taf-kit/src/Makefile.am (vcsn-int-b, vcsn-int-z): Use
+	libvcsn-int-b.la and libvcsn-int-z.la.
+
+2008-08-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Do not assume that eval() takes a string of characters.
 	* lib/generate_libvcsn.rb: Support the Word keyword in interface
 	definitions.
