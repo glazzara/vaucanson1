@@ -1,3 +1,14 @@
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add int_boolean_automaton to the test-suite.
+	* src/tests/include/Makefile.am: Add a new test.
+	* src/tests/include/tests/automata/implementation_check/epsilon_label_representation_test.hh: New.
+	* src/tests/test-suites/context_headers_int_boolean.defs: New.
+	* src/tests/test-suites/generate-all.sh: Generate
+	  int_boolean_automaton tests.
+	* src/tests/test-suites/int_boolean_automaton.defs: New.
+	* src/tests/test-suites/subdirs.mk: Update according to the new tests.
+
 2008-08-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Instantiate libvcsn for int-b and int-z and use it in TAF-Kit.

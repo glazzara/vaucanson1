@@ -101,7 +101,7 @@ done
 ## Automaton.  ##
 ## ----------- ##
 
-for kind in boolean r z z_max_plus z_min_plus
+for kind in boolean int_boolean r z z_max_plus z_min_plus
 do
   generate \
       context_headers_${kind} \

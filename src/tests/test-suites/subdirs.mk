@@ -34,6 +34,7 @@ boolean_transducer \
 context_headers_boolean \
 context_headers_boolean_transducer \
 context_headers_fmp_transducer \
+context_headers_int_boolean \
 context_headers_r \
 context_headers_z \
 context_headers_z_fmp_transducer \
@@ -41,6 +42,7 @@ context_headers_z_max_plus \
 context_headers_z_min_plus \
 context_headers_z_transducer \
 fmp_transducer \
+int_boolean_automaton \
 r_automaton \
 z_automaton \
 z_fmp_transducer \

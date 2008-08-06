@@ -105,6 +105,7 @@ tests/automata/algos/series_multiplicity_transducers/extension_test.hh		      \
 tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh	      \
 tests/automata/implementation_check/add_state_test.hh				      \
 tests/automata/implementation_check/add_transition_test.hh			      \
+tests/automata/implementation_check/epsilon_label_representation_test.hh	      \
 tests/automata/implementation_check/coherence_state_transition_test.hh		      \
 tests/automata/implementation_check/geometry_equal_operator_test.hh		      \
 tests/automata/implementation_check/global_consistency_test.hh			      \
