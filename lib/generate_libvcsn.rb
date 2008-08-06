@@ -192,6 +192,7 @@ files.each { |file|
 	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_impl_t')
 	  tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
 	  tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
+	  tmp = tmp.gsub(/Word/, 'std::basic_string<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::letter_t>')
 	  output.push("  template", tmp)
 	end
       end

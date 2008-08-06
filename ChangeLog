@@ -1,3 +1,10 @@
+2008-08-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Do not assume that eval() takes a string of characters.
+	* lib/generate_libvcsn.rb: Support the Word keyword in interface
+	definitions.
+	* include/vaucanson/algorithms/eval.hh: Use Word in interfaces.
+
 2008-08-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Create vcsn-int-fmp.

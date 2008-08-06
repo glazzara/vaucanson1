@@ -29,8 +29,8 @@
  */
 /** @} */
 
-// INTERFACE: int eval(const Automaton& a, const std::string& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
-// INTERFACE: int eval(const GenAutomaton& a, const std::string& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
+// INTERFACE: int eval(const Automaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
+// INTERFACE: int eval(const GenAutomaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
