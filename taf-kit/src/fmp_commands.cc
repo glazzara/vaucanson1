@@ -206,16 +206,4 @@ const command_t command_map[] =
   {0, 0 ,0 ,0, 0}
 };
 
-// retrieve the epsilon from the first monoid letter trait
-std::string
-default_epsilon()
-{
-  GET_EPSILON_FROM_TRAITS(first_monoid_t::letter_t)
-}
-
-// retrieve the epsilon from the second monoid letter trait
-std::string
-default_epsilon2()
-{
-  GET_EPSILON_FROM_TRAITS(second_monoid_t::letter_t)
-}
+LETTER_CONTEXT(automaton_t::monoid_t::first_monoid_t::letter_t)

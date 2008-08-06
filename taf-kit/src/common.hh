@@ -73,11 +73,9 @@ struct arguments_t
       : progname (name),
 	n_args (0),
 	alphabet (0),
-	epsilon (0),
 # ifdef WITH_TWO_ALPHABETS
 	alphabet2 (0),
-	epsilon2 (0),
-# endif /* ! WITH_TWO_ALPHABETS */
+# endif // ! WITH_TWO_ALPHABETS
 	verbose (false),
 	bench (false),
 	nb_iterations (1),
@@ -91,15 +89,16 @@ struct arguments_t
     std::string	progname;
     const char*	args[3];
     int		n_args;
-    std::vector<std::string>	alphabet;
+
     vcsn::algebra::token_representation_t tok_rep;
-    char	epsilon;
+    std::vector<std::string> alphabet;
     std::string parser;
 # ifdef WITH_TWO_ALPHABETS
-    std::vector<std::string>	alphabet2;
-    char	epsilon2;
+    vcsn::algebra::token_representation_t tok_rep2;
+    std::vector<std::string> alphabet2;
     std::string parser2;
-# endif /* ! WITH_TWO_ALPHABETS */
+# endif // ! WITH_TWO_ALPHABETS
+
     bool	verbose;
     bool	bench;
     unsigned	nb_iterations;
@@ -116,29 +115,27 @@ struct arguments_t
     output_format_t	output_type;
 
 # define ADD_OPTION(x) \
-    void add_##x##_option(const char* type, const char* str) \
-    { \
       if (x != "") \
         x += " "; \
       if (type) \
         x += std::string(type) + "="; \
-      x += str; \
-    }
+      x += str;
 
-    ADD_OPTION(parser)
+    void add_parser_option(const char* type, const char* str)
+    {
+      ADD_OPTION(parser)
+    }
 # ifdef WITH_TWO_ALPHABETS
-    ADD_OPTION(parser2)
-# endif /* ! WITH_TWO_ALPHABETS */
+    void add_parser2_option(const char* type, const char* str)
+    {
+      ADD_OPTION(parser2)
+    }
+# endif // ! WITH_TWO_ALPHABETS
 
 # undef ADD_OPTION
 };
 
-// return the default epsilon from automaton traits
-std::string
-default_epsilon();
-# ifdef WITH_TWO_ALPHABETS
-std::string
-default_epsilon2();
-# endif /* ! WITH_TWO_ALPHABETS */
+// reset a token representation to its defaults
+void set_default(vcsn::algebra::token_representation_t&);
 
-#endif /* !COMMON_HH */
+#endif // ! COMMON_HH

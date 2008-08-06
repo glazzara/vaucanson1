@@ -1,5 +1,18 @@
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update taf-kit to use new letter_traits.
+	* taf-kit/src/b_commands.cc: Add letter context.
+	* taf-kit/src/commands_macros.hh: Add macro to import letter context.
+	* taf-kit/src/common.hh: Declare new structures.
+	* taf-kit/src/fmp_commands.cc: Add letter context.
+	* taf-kit/src/main.cc: Remove useless code.
+	* taf-kit/src/parser_options.hh,
+	* taf-kit/src/parser_options.hxx: Use new templatized
+	  token_representation. Add static code resolution.
+	* taf-kit/src/z_commands.cc: Add letter context.
+
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Make make_rat_exp accept a more generic token_representation.
 	* include/Makefile.am: Add file to the distribution.
 	* include/vaucanson/contexts/automaton_maker.thh,

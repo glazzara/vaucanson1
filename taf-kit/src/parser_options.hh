@@ -28,10 +28,11 @@
 
 # include <boost/bind.hpp>
 # include <boost/function.hpp>
-# include <boost/ref.hpp>
 # include <boost/spirit/core.hpp>
 # include <boost/spirit/utility/lists.hpp>
 # include <boost/spirit/utility/chset.hpp>
+
+# include <vaucanson/misc/static.hh>
 
 /**
  * @file parser_options.hh
@@ -93,7 +94,7 @@ private:
       boost::spirit::rule<ScannerT> parser_properties, propertie,
       alphabet_definition, letters, words, special_name, word_pair,
       word, character, letter, escaped_character, unescaped_character,
-      special_character;
+      special_character, true_is_char_letter, false_is_char_letter;
 
       // CTOR
       definition(const options_grammar& g);
@@ -238,16 +239,25 @@ private:
       void
       push_zero(const char* from,
 		const char* to);
-    };
+
+    }; // ! definition
 
     parser_options::alphabet_t& al;
     parser_options::token_representation_t& tok_rep;
-  };
+
+  }; // ! options_grammar
 
   alphabet_t letters_;
   token_representation_t tok_rep_;
 
-};
+}; // ! parser_options
+
+// Assign case_true to out if the letter trait is_char_letter
+// is true. Otherwise, it assigns case_false to out.
+void
+if_is_char_letter(boost::spirit::rule<boost::spirit::scanner<const char*> >& out,
+		  const boost::spirit::rule<boost::spirit::scanner<const char*> >& case_true,
+		  const boost::spirit::rule<boost::spirit::scanner<const char*> >& case_false);
 
 # include "parser_options.hxx"
 

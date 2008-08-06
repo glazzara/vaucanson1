@@ -31,10 +31,14 @@ parser_options::parser_options(const std::string& str)
   using namespace boost::spirit;
   options_grammar grammar(letters_, tok_rep_);
 
+  // set the correct type dependant defaults
+  set_default(tok_rep_);
+
   BOOST_SPIRIT_DEBUG_NODE(grammar);
 
   parse_info<const char*> info = parse(str.c_str(), grammar);
 
+  // FIXME: add error handling
   if (!info.full)
     throw;
 }
@@ -65,7 +69,7 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   BOOST_SPIRIT_DEBUG_RULE(unescaped_character);
   BOOST_SPIRIT_DEBUG_RULE(special_character);
 
-#define NEW_TERMINAL_SYMBOL_STR(n, str) strlit<const char*> n(str)
+# define NEW_TERMINAL_SYMBOL_STR(n, str) strlit<const char*> n(str)
 
   NEW_TERMINAL_SYMBOL_STR(head_l  , "letters");
   NEW_TERMINAL_SYMBOL_STR(head_w  , "words");
@@ -81,9 +85,9 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   NEW_TERMINAL_SYMBOL_STR(cweight , "CWEIGHT");
   NEW_TERMINAL_SYMBOL_STR(space   , "SPACE");
 
-#undef NEW_TERMINAL_SYMBOL_STR
+# undef NEW_TERMINAL_SYMBOL_STR
 
-#define NEW_TERMINAL_SYMBOL_SET(n, str) chset<> n(str)
+# define NEW_TERMINAL_SYMBOL_SET(n, str) chset<> n(str)
 
   NEW_TERMINAL_SYMBOL_SET(space_c, " ");
   NEW_TERMINAL_SYMBOL_SET(equal  , "=");
@@ -93,7 +97,7 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   NEW_TERMINAL_SYMBOL_SET(backs  , "\\");
   NEW_TERMINAL_SYMBOL_SET(colon  , ":");
 
-#undef NEW_TERMINAL_SYMBOL_SET
+# undef NEW_TERMINAL_SYMBOL_SET
 
   // special characters set
   chset<> special_set = space_c | equal | obrack |
@@ -123,20 +127,7 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
               ( oweight >> equal >> character[open_weight_cb] ) |
               ( cweight >> equal >> character[close_weight_cb] ) |
 	      ( space >> equal >> character[push_space_cb] );
-  // big fat warning: be carefull about spirit short-circuiting:
-  // FIXME: it's ugly, we should add another letter trait.
-  if (default_epsilon() == "1")
-  {
-    // it should be a char alphabet
-    alphabet_definition = ( head_w >> colon >> !words ) |
-                          ( !(head_l >> colon) >> !letters );
-  }
-  else
-  {
-    // it should be a word alphabet
-    alphabet_definition = ( head_l >> colon >> !letters ) |
-                          ( !(head_w >> colon) >> !words );
-  }
+
   letters = *(letter[push_letter_cb]);
   words = !list_p(word[push_letter_cb], comma);
   word_pair = obrack >> word >> comma >> word >> cbrack;
@@ -146,6 +137,21 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   escaped_character = backs >> special_character;
   unescaped_character = ~special_set;
   special_character = special_set;
+
+  // be carefull about spirit short-circuiting
+  true_is_char_letter =	( head_w >> colon >> !words ) |
+			( !(head_l >> colon) >> !letters );
+  false_is_char_letter = ( head_l >> colon >> !letters ) |
+			 ( !(head_w >> colon) >> !words );
+
+  if_is_char_letter(
+		    // assignee
+		    alphabet_definition,
+		    // true case
+		    true_is_char_letter,
+		    // false case
+		    false_is_char_letter
+		   );
 }
 
 template <typename ScannerT>
