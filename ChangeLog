@@ -1,5 +1,9 @@
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update svn:ignore on lib.
+
+2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update taf-kit to use new letter_traits.
 	* taf-kit/src/b_commands.cc: Add letter context.
 	* taf-kit/src/commands_macros.hh: Add macro to import letter context.
