@@ -51,8 +51,8 @@ namespace vcsn {
       dot_dump(a.structure(), o, a, name);
     }
 
-  } // tools
+  } // ! tools
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_TOOLS_DOT_DUMP_HXX

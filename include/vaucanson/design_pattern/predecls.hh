@@ -35,6 +35,9 @@ namespace vcsn {
   template<typename S>
   struct dynamic_traits;
 
+  template<typename S>
+  struct representation_traits;
+
   template<typename S, typename T>
   struct SyntacticDecorator;
 

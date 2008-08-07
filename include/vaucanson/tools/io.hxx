@@ -62,14 +62,6 @@ namespace vcsn
       return o;
     }
 
-    inline
-    std::string string_out::check_empty_word(const std::string& str) const
-    {
-      if (str.empty())
-	return std::string("1");
-      return str;
-    }
-
     template<typename S, typename T>
     std::string string_out::operator()(const AutomataBase<S>&, const T& t) const
     {
@@ -83,10 +75,10 @@ namespace vcsn
     {
       std::ostringstream os;
       os << t;
-      return check_empty_word(os.str());
+      return os.str();
     }
 
-  } // tools
+  } // ! tools
 
   template<typename Auto, typename TransitionConverter, typename Format>
   tools::automaton_saver_<Auto, TransitionConverter, Format>
@@ -103,7 +95,6 @@ namespace vcsn
     /*------.
     | Input |
     `------*/
-
 
     template<typename Auto, typename TransitionConverter, typename Format>
     Auto& automaton_loader_<Auto, TransitionConverter, Format>::automaton()
@@ -185,8 +176,7 @@ namespace vcsn
       return in;
     }
 
-
-  } // tools
+  } // ! tools
 
   template<typename Auto, typename TransitionConverter, typename Format>
   tools::automaton_loader_<Auto, TransitionConverter, Format>
@@ -199,7 +189,6 @@ namespace vcsn
       (a, e, f, merge_states);
   }
 
-} // vcsn
-
+} // ! vcsn
 
 #endif // ! VCSN_TOOLS_IO_HXX

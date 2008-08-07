@@ -1,5 +1,18 @@
 2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update the free monoid product concept.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Add
+	  new traits.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx:
+	  Improve implementation of op_rout.
+	* include/vaucanson/design_pattern/predecls.hh: New type of trait.
+	* include/vaucanson/tools/dot_dump.hxx: Typo.
+	* include/vaucanson/tools/io.hxx: Be more generic w.r.t the monoid type.
+
+2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Be more generic in context headers tests.
 	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
 	  Be more generic w.r.t the letter type.

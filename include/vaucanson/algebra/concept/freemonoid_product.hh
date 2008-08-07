@@ -87,6 +87,15 @@ namespace vcsn {
     ret = dynamic_traits<F>::ret or dynamic_traits<S>::ret;
   };
 
+  /*------------------------------------------------.
+  | representation_traits<FreeMonoidProduct<F, S> > |
+  `------------------------------------------------*/
+  /// Meta information about FreeMonoidProduct.
+  template<class F, class S>
+  struct representation_traits<algebra::FreeMonoidProduct<F, S> >
+    : representation_traits<algebra::FreeMonoidProductBase<algebra::FreeMonoidProduct<F, S> > >
+  { };
+
   /*----------------------------------------.
   | MetaElement<FreeMonoidProduct<F, S>, T> |
   `----------------------------------------*/

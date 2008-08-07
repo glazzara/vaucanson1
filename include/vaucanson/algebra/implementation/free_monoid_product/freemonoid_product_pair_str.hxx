@@ -119,11 +119,16 @@ namespace vcsn {
 	    St& st,
 	    const T& v)
     {
-      st << "(";
-      op_rout(s.first_monoid(), st, v.first);
-      st << ",";
-      op_rout(s.second_monoid(), st, v.second);
-      st << ")";
+      if (v.first.empty() && v.second.empty())
+	st << representation_traits<Self>::default_eps_eps();
+      else
+      {
+	st << "(";
+	op_rout(s.first_monoid(), st, v.first);
+	st << ",";
+	op_rout(s.second_monoid(), st, v.second);
+	st << ")";
+      }
       return st;
     }
 

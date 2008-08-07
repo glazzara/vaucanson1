@@ -92,6 +92,20 @@ namespace vcsn {
     : dynamic_traits<algebra::MonoidBase<Self> >
   { };
 
+  /*--------------------------------------------------.
+  | representation_traits<FreeMonoidProductBase<Self> |
+  `--------------------------------------------------*/
+
+  template<class Self>
+  struct representation_traits<algebra::FreeMonoidProductBase<Self> >
+  {
+    static const std::string default_eps_eps();
+  };
+
+  /*------------------------------------------.
+  | virtual_types<FreeMonoidProductBase<Self> |
+  `------------------------------------------*/
+
   template<typename S>
   struct virtual_types<algebra::FreeMonoidProductBase<S> >
     : virtual_types<algebra::MonoidBase<S> >

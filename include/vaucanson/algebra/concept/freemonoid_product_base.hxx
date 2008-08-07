@@ -65,7 +65,19 @@ namespace vcsn {
       MonoidBase<Self>(m)
     {}
 
-  } // algebra
+  } // ! algebra
+
+  /*--------------------------------------------------.
+  | representation_traits<FreeMonoidProductBase<Self> |
+  `--------------------------------------------------*/
+
+  template<class Self>
+  const std::string
+  representation_traits<algebra::FreeMonoidProductBase<Self> >::
+  default_eps_eps()
+  {
+    return "1";
+  };
 
   /*--------------------------------------------.
   | MetaElement<FreeMonoidProductBase<Self>, T> |
