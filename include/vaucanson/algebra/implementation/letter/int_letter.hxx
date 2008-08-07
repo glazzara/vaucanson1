@@ -66,9 +66,7 @@ namespace vcsn {
       {
 	std::stringstream sstr;
 	sstr << c;
-	std::string str;
-	sstr >> str;
-	return str;
+	return sstr.str();
       }
     };
 

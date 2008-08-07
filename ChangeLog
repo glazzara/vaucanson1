@@ -1,5 +1,13 @@
 2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Improve some letter implementations.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
+	  Add missing traits.
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	  Remove useless code.
+
+2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add missing function declarations.
 	* taf-kit/src/commands_macros.hh: Typo.
 	* taf-kit/src/common.hh: Here, reported by Alexandre Duret-Lutz.

@@ -35,27 +35,47 @@ namespace vcsn
     template <typename U, typename V>
     struct letter_traits< std::pair<U, V> >
     {
-	enum
-	{
-	  /*
-	   * Theoretically   cardinal	should	 be   the   product   of
-	   * letter_traits<U>::cardinal and letter_traits<V>::cardinal.
-	   * But to  avoid overflows and for
-	   * practical reasons, it is better to consider it infinite.
-	   *
-	   * FIXME: Maybe doing this is not a good idea?
-	   */
-	  cardinal = INT_MAX
-	};
+      // we only consider letters of the form (u, v)
+      typedef misc::true_t is_char_letter;
 
-	static char default_epsilon()
-	{
-	  return '1';
-	}
+      enum
+      {
+	/*
+	 * Theoretically   cardinal	should	 be   the   product   of
+	 * letter_traits<U>::cardinal and letter_traits<V>::cardinal.
+	 * But to  avoid overflows and for
+	 * practical reasons, it is better to consider it infinite.
+	 *
+	 * FIXME: Maybe doing this is not a good idea?
+	 */
+	cardinal = INT_MAX
+      };
+
+      LETTER_DEFAULT(open_par, "(")
+      LETTER_DEFAULT(close_par, ")")
+      LETTER_DEFAULT(plus, "+")
+      LETTER_DEFAULT(times, ".")
+      LETTER_DEFAULT(star, "*")
+      LETTER_DEFAULT(epsilon, "1")
+      LETTER_DEFAULT(zero, "0")
+      LETTER_DEFAULT(open_weight, "{")
+      LETTER_DEFAULT(close_weight, "}")
+      LETTER_DEFAULT(space, " ")
+
+      static
+      std::string
+      letter_to_literal(const std::pair<U, V>& c)
+      {
+	std::stringstream sstr;
+	sstr << c;
+	return sstr.str();
+      }
+
     };
 
-  } // End of namespace algebra.
-} // End of namespace vcsn.
+  } // ! algebra
+
+} // ! vcsn
 
 namespace vcsn {
 
@@ -69,7 +89,7 @@ namespace vcsn {
 		   typename std::string::const_iterator& i,
 		   const CharContainer& escaped);
   }
-} //vcsn
+} // ! vcsn
 
 namespace std {
 
@@ -90,10 +110,10 @@ namespace std {
   template <typename U, typename V>
   std::istream& operator>> (std::istream& i, std::pair<U, V>& p);
 
-} // vcsn
+} // ! std
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/implementation/letter/couple_letter.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HH
