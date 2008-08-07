@@ -136,6 +136,22 @@ struct arguments_t
 };
 
 // reset a token representation to its defaults
-void set_default(vcsn::algebra::token_representation_t&);
+extern void set_default(vcsn::algebra::token_representation_t&);
+
+# define IMPORT_DEFAULT(name) \
+extern const std::string default_##name ();
+
+IMPORT_DEFAULT(open_par)
+IMPORT_DEFAULT(close_par)
+IMPORT_DEFAULT(plus)
+IMPORT_DEFAULT(times)
+IMPORT_DEFAULT(star)
+IMPORT_DEFAULT(epsilon)
+IMPORT_DEFAULT(zero)
+IMPORT_DEFAULT(open_weight)
+IMPORT_DEFAULT(close_weight)
+IMPORT_DEFAULT(space)
+
+# undef IMPORT_DEFAULT
 
 #endif // ! COMMON_HH

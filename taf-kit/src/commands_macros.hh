@@ -148,7 +148,8 @@ default_##name () \
 }
 
 # define SET_DEFAULT(letter_type) \
-void set_default(vcsn::algebra::token_representation_t& arg) \
+void \
+set_default(vcsn::algebra::token_representation_t& arg) \
 { \
   typedef vcsn::algebra::letter_traits<letter_type> traits_t; \
   arg.open_par = traits_t::default_open_par(); \
