@@ -1,5 +1,11 @@
 2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Be more generic in context headers tests.
+	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
+	  Be more generic w.r.t the letter type.
+
+2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Improve some letter implementations.
 	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
 	  Add missing traits.

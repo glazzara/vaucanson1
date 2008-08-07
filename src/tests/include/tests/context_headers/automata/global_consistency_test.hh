@@ -48,9 +48,16 @@ global_consistency_test(tests::Tester& t)
 
   bool			test_done = false;
 
+  // FIXME: each context should have its own test
   alphabet_t		at;
   at.insert('a');
   at.insert('b');
+
+  std::string rat_exp_str = misc::static_if<
+  misc::static_eq<alphabet_t::letter_t, int>::value,
+  std::string,
+  std::string>::choose("97+98",
+		       "a+b");
 
   alphabet_t		other_at;
   at.insert('c');
@@ -63,14 +70,17 @@ global_consistency_test(tests::Tester& t)
 
   rat_exp_t		e (ss);
   rat_exp_t		f = make_rat_exp(at);
-  rat_exp_t		g = make_rat_exp(at, "a+b");
+  rat_exp_t		g = make_rat_exp(at, rat_exp_str);
   TEST(t, "make_rat_exp works. [1/3]", e == f);
   TEST(t, "make_rat_exp works. [2/3]", g != f);
 
   rat_exp_t::support_t			s = g.supp();
   rat_exp_t::support_t::const_iterator	i = s.begin();
+  std::basic_string<letter_t> refa, refb;
+  refa += 'a';
+  refb += 'b';
   TEST(t, "make_rat_exp works. [3/3]",
-       s.size() == 2 and *i == "a" and *(++i) == "b");
+       s.size() == 2 and *i == refa and *(++i) == refb);
 
   while (not test_done)
     try
