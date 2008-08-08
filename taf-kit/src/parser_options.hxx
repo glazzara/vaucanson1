@@ -38,9 +38,8 @@ parser_options::parser_options(const std::string& str)
 
   parse_info<const char*> info = parse(str.c_str(), grammar);
 
-  // FIXME: add error handling
   if (!info.full)
-    throw;
+    throw std::logic_error(std::string("unexpected token: ") + info.stop);
 }
 
 const std::vector<std::string>&

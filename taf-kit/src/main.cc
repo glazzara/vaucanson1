@@ -57,10 +57,10 @@ vcsn::misc::Bencher bencher;
 
 // A global command output;
 command_output last_command_output;
-# include "pipe_command_sequence.hh"
+#include "pipe_command_sequence.hh"
 
 // Writer for final output
-# include "pipe_writers.hh"
+#include "pipe_writers.hh"
 
 /**
  * Documentation of the program, of the arguments we accept and the
@@ -284,16 +284,24 @@ int main (int argc, char* argv[])
        li != command_list.end (); ++li)
     {
       argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
-      parser_options p_opts(li->args.parser);
 
-      li->args.alphabet = p_opts.get_letters();
-      li->args.tok_rep = p_opts.get_tok_rep();
+      try
+      {
+	parser_options p_opts(li->args.parser);
+
+	li->args.alphabet = p_opts.get_letters();
+	li->args.tok_rep = p_opts.get_tok_rep();
 
 #ifdef WITH_TWO_ALPHABETS
-      parser_options p_opts2(li->args.parser2);
+	parser_options p_opts2(li->args.parser2);
 
-      li->args.alphabet2 = p_opts2.get_letters();
+	li->args.alphabet2 = p_opts2.get_letters();
 #endif
+      }
+      catch (const std::logic_error& err)
+      {
+	warn (argv[0] << ": " << err.what ());
+      }
 
       if (li->args.bench)
 	{
