@@ -87,6 +87,7 @@ tests/automata/algos/label_aware_graphs/in_concat_test.hh			      \
 tests/automata/algos/label_aware_graphs/standard_of_regression_test.hh		      \
 tests/automata/algos/label_aware_graphs/sum_test.hh				      \
 tests/automata/algos/label_aware_graphs/transpose_test.hh			      \
+tests/automata/algos/label_aware_graphs/empty_test.hh				      \
 tests/automata/algos/labeled_graphs/are_isomorphic_test.hh			      \
 tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh		      \
 tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh		      \

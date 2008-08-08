@@ -33,6 +33,7 @@
 // INTERFACE: int eval(const GenAutomaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/algorithms/is_empty.hh>
 
 namespace vcsn {
 
@@ -52,10 +53,10 @@ namespace vcsn {
 
   /** @} */
 
-} // vcsn
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/eval.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_EVAL_HH

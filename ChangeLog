@@ -1,3 +1,13 @@
+2008-08-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix the eval algorithm on empty automata (#163).
+	* include/vaucanson/algorithms/eval.hh: Include is_empty header.
+	* include/vaucanson/algorithms/eval.hxx: Fix the bug.
+	* src/tests/include/Makefile.am: Add file to the distribution.
+	* src/tests/include/tests/automata/algos/label_aware_graphs/empty_test.hh:
+	  New regression test.
+	* taf-kit/tests/vcsn-char-z.test: Add a taf-kit test.
+
 2008-08-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Update the free monoid product concept.

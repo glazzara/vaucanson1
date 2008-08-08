@@ -29,6 +29,7 @@ namespace vcsn {
   /*-----.
   | Eval |
   `-----*/
+
   // precondition : the automaton is realtime
   template <typename auto_t, typename input_t, typename Selt>
   struct eval_functor
@@ -100,6 +101,7 @@ namespace vcsn {
   /*----------.
   | Wrapper.  |
   `----------*/
+
   template<typename A, typename AI, typename W>
   typename Element<A, AI>::semiring_elt_t
   eval(const Element<A, AI>& a, const W& word)
@@ -108,12 +110,17 @@ namespace vcsn {
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     semiring_elt_t ret(a.structure().series().semiring());
-    eval_functor<automaton_t, W, semiring_elt_t> evalf(a.structure(), a);
 
-    evalf.execute(word, ret);
+    // Check if the automaton is empty.
+    if (!is_empty(a))
+    {
+      eval_functor<automaton_t, W, semiring_elt_t> evalf(a.structure(), a);
+      evalf.execute(word, ret);
+    }
+
     return ret;
   }
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_ALGORITHMS_EVAL_HXX
