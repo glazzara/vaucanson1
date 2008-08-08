@@ -1,5 +1,10 @@
 2008-08-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Typos in taf-kit manual.
+	* doc/manual/taf-kit.tex: Here.
+
+2008-08-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix bootstrap.
 	* bootstrap: Sanity's generate_files.sh must be run after all other
 	  files (most notably headers) have been generated.

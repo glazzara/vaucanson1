@@ -343,8 +343,8 @@ automata:
 
 \subsection{Token representations}
 
-When dealing with rational expressions in \tafkit, one may be willing to
-, for example, change the representation of the epsilon. More generally,
+When dealing with rational expressions in \tafkit, one may be willing to,
+for example, change the representation of the epsilon. More generally,
 the rational expressions parser understand $10$ such tokens. They are:
 
 \begin{itemize}
@@ -363,7 +363,7 @@ the rational expressions parser understand $10$ such tokens. They are:
 \noindent
 Each token must be a non-empty string, with arbitrary length. Some checks
 will be done by \tafkit, to ensure tokens do not collide. You can also
-use the \verb-ALPHABET- token an arbitrary number of time, to append letters
+use the \verb-ALPHABET- token an arbitrary number of times, to append letters
 to the current alphabet. The following commands:
 
 %% FIXME: include ({1} a) in the example
@@ -391,14 +391,14 @@ With the \verb-ALPHABET- token, you can specify two types of letters:
 \end{itemize}
 
 For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
-(\verb-a-, \verb-b- and \verb-c-), while \verb-ALPHABET=words:abc- defines the
-alphabet with only one letter \verb-abc-. Letters are separated by commas, and
+$\{\verb-a-, \verb-b-, \verb-c-\}$, while \verb-ALPHABET=words:abc- defines the
+alphabet with only one letter $\{\verb-abc-\}$. Letters are separated by commas, and
 each \tafkit context defaults to either letters (vcsn-char-b eg) or words
 (vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
 \verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
 
 Everywhere you want to use special characters used by the \verb|--parser|
-option, prepending a backslash character will escape it. So you can write:
+option, prepending a backslash character will escape it. So, you can write:
 \verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
 and \verb-=-.
 
