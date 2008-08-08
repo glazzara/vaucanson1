@@ -1,5 +1,11 @@
 2008-08-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix bootstrap.
+	* bootstrap: Sanity's generate_files.sh must be run after all other
+	  files (most notably headers) have been generated.
+
+2008-08-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add diagnostic message when --parser fails (#164).
 	* taf-kit/src/main.cc: Add try-catch block.
 	* taf-kit/src/parser_options.hxx: Throw an exception with position
