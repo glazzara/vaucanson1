@@ -14,7 +14,7 @@ mkdir -p "$VAUCANSWIG/python"
 MODULES="core $MODULES"
 ALGS=""
 
-#### ALGORITHM DATABASE RETRIEVAL ####
+#### ALGORITHM DATABASE RETRIEVAL ####
 
 ALGDB=$VAUCANSWIG/src/vaucanswig_algorithms.i
 dbapp() {
@@ -65,7 +65,7 @@ start_family() {
 do_family_interface_impl() {
   AF=$1
   AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
-  afapp "$AF" "%define alg_${AF}_interface_impl(Automaton, GenAutomaton, Series, Exp, HList)"
+  afapp "$AF" "%define alg_${AF}_interface_impl(Automaton, GenAutomaton, Series, Exp, HList, Word)"
   cat "$VAUC/vaucanson/algorithms/$AF.hh" \
      | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE:,static ,g;p;}' \
      | sed -e 's/ExpImpl/Exp/' \
@@ -76,7 +76,7 @@ do_family_interface_impl() {
 do_family_interface() {
   AF=$1
   AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
-  afapp "$AF" "%define alg_${AF}_interface(Automaton, GenAutomaton, Series, Exp, HList)"
+  afapp "$AF" "%define alg_${AF}_interface(Automaton, GenAutomaton, Series, Exp, HList, Word)"
   cat "$VAUC/vaucanson/algorithms/$AF.hh" \
      | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE: \([^{]*\).*$,static \1;,g;p;}' \
      | sed -e 's/ExpImpl/Exp/' \
@@ -95,33 +95,39 @@ output ()
   do_family_interface "$family_name"
   do_family_interface_impl "$family_name"
 
-  afapp "$family_name"							  \
-    "%define alg_interface_${family_name}(Kind)"			  \
-    "%{"								  \
-    "struct Kind ##_alg_${family_name} {"				  \
-    "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"	  \
-    "                     Kind ##_types::gen_## Kind ##_auto_t, \\"	  \
-    "                     Kind ##_types::Kind ##_series_set_elt_t, \\"	  \
-    "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"  \
-    "};"								  \
-    "%}"								  \
-    "%enddef"								  \
-    "%define decl_alg_${family_name}(Kind)"				  \
-    "algo_common_decls(Kind)"						  \
-    "%{"								  \
-    "struct Kind ##_alg_${family_name} {"				  \
-    "alg_${family_name}_interface_impl(Kind ##_types::Kind ##_auto_t, \\" \
-    "                     Kind ##_types::gen_## Kind ##_auto_t, \\"	  \
-    "                     Kind ##_types::Kind ##_series_set_elt_t, \\"	  \
-    "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"  \
-    "};"								  \
-    "%}"								  \
-    "struct Kind ##_alg_${family_name} {"				  \
-    "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"	  \
-    "                     Kind ##_types::gen_## Kind ##_auto_t, \\"	  \
-    "                     Kind ##_types::Kind ##_series_set_elt_t, \\"	  \
-    "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"  \
-    "};"								  \
+  afapp "$family_name"							     \
+    "%define alg_interface_${family_name}(Kind)"			     \
+    "%{"								     \
+    "struct Kind ##_alg_${family_name} {"				     \
+    "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"	     \
+    "			Kind ##_types::gen_## Kind ##_auto_t, \\"	     \
+    "			Kind ##_types::Kind ##_series_set_elt_t, \\"	     \
+    "			Kind ##_types::Kind ##_exp_t, \\"		     \
+    "			std::list<int>, \\"				     \
+    "			std::basic_string<Kind ##_types::Kind ##_letter_t>)" \
+    "};"								     \
+    "%}"								     \
+    "%enddef"								     \
+    "%define decl_alg_${family_name}(Kind)"				     \
+    "algo_common_decls(Kind)"						     \
+    "%{"								     \
+    "struct Kind ##_alg_${family_name} {"				     \
+    "alg_${family_name}_interface_impl(Kind ##_types::Kind ##_auto_t, \\"    \
+    "			Kind ##_types::gen_## Kind ##_auto_t, \\"	     \
+    "			Kind ##_types::Kind ##_series_set_elt_t, \\"	     \
+    "			Kind ##_types::Kind ##_exp_t, \\"		     \
+    "			std::list<int>, \\"				     \
+    "			std::basic_string<Kind ##_types::Kind ##_letter_t>)" \
+    "};"								     \
+    "%}"								     \
+    "struct Kind ##_alg_${family_name} {"				     \
+    "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"	     \
+    "			Kind ##_types::gen_## Kind ##_auto_t, \\"	     \
+    "			Kind ##_types::Kind ##_series_set_elt_t, \\"	     \
+    "			Kind ##_types::Kind ##_exp_t,"			     \
+    "			std::list<int>,"				     \
+    "			std::basic_string<Kind ##_types::Kind ##_letter_t>)" \
+    "};"								     \
     "%enddef"
 
   # Mention the sub-database in the general database

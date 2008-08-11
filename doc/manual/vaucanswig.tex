@@ -360,6 +360,7 @@ taken into consideration:
   \item[\code{HList}] A list of state or transition handlers
     (integers). This type is \code{std::list<int>} in \Cxx and a
     standard sequence of numbers in the target language.
+  \item[\code{Word}] The word type for the category.
   \end{description}
 
 \item When accessing automata, a special behavior stands. Instead of
@@ -847,7 +848,8 @@ context \code{K}:
      Series	& the type of series in K \\
      Exp	& the type of expressions in K \\
      HList	& a type for lists of unsigned integer
-                  (to be used as automaton handlers where required)\\
+                  (to be used as automaton handlers where required) \\
+     Word	& the type of the monoid elements \\
   \hline
 \end{tabular}
 

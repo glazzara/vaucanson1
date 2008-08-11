@@ -1,3 +1,10 @@
+2008-08-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add a new type to vaucanswig.
+	* doc/manual/vaucanswig.tex: Document "Word".
+	* vaucanswig/expand.sh: Add required macro argument (continuation
+	  from [2100]).
+
 2008-08-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Typos in taf-kit manual.
