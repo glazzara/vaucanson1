@@ -329,8 +329,7 @@ namespace edition_commands
 	       << a.dst_of (*h) << " labeled by " << a.series_value_of (*h));
 # else
 	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
-	       << " labeled by (" << a.word_of (*h).value().first
-	       << " | " << a.word_of (*h).value().second << ")");
+	       << " labeled by " << a.word_of (*h));
 # endif
       }
     }

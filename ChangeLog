@@ -1,5 +1,11 @@
 2008-08-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Remove duplicate code in taf-kit.
+	* taf-kit/src/edition_commands.hxx: Vaucanson should handle
+	  the display of elements.
+
+2008-08-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add a new type to vaucanswig.
 	* doc/manual/vaucanswig.tex: Document "Word".
 	* vaucanswig/expand.sh: Add required macro argument (continuation
