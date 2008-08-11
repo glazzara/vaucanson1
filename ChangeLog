@@ -1,5 +1,10 @@
 2008-08-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing files to the distribution.
+	* include/Makefile.am: Here.
+
+2008-08-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Remove duplicate code in taf-kit.
 	* taf-kit/src/edition_commands.hxx: Vaucanson should handle
 	  the display of elements.

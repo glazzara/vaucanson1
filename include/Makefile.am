@@ -446,6 +446,8 @@ vaucanson/automata/generic_contexts/z_min_plus_automaton.hh		\
 vaucanson/automata/generic_contexts/z_min_plus_automaton_structures.hh  \
 vaucanson/automata/generic_contexts/z_transducer.hh 			\
 vaucanson/automata/generic_contexts/z_transducer_structures.hh 		\
+vaucanson/automata/generic_contexts/int_z_transducer.hh 		\
+vaucanson/automata/generic_contexts/int_z_transducer_structures.hh 	\
 vaucanson/automata/generic_contexts/int_boolean_automaton.hh		\
 vaucanson/automata/generic_contexts/int_boolean_automaton_structures.hh \
 vaucanson/automata/generic_contexts/int_boolean_transducer.hh		\
