@@ -16,10 +16,12 @@ include $(top_srcdir)/build-aux/check.mk
 TESTS =						\
   vcsn-char-b.test				\
   vcsn-char-z.test				\
-  vcsn-char-fmp.test				\
+  vcsn-char-fmp-b.test				\
+  vcsn-char-fmp-z.test				\
   vcsn-int-b.test				\
   vcsn-int-z.test				\
-  vcsn-int-fmp.test				\
+  vcsn-int-fmp-b.test				\
+  vcsn-int-fmp-z.test				\
   completeness.test
 
 XFAIL_TESTS = completeness.test
@@ -45,10 +47,12 @@ EXTRA_DIST = $(TESTS)				\
 check_SCRIPTS =					\
   defs						\
   vcsn-char-b					\
-  vcsn-char-fmp					\
+  vcsn-char-fmp-b				\
+  vcsn-char-fmp-z				\
   vcsn-char-z					\
   vcsn-int-b					\
-  vcsn-int-fmp					\
+  vcsn-int-fmp-b				\
+  vcsn-int-fmp-z				\
   vcsn-int-z
 
 distclean-local:

@@ -16,8 +16,9 @@ include $(top_srcdir)/vaucanson.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
-bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-fmp \
-               vcsn-int-b vcsn-int-z vcsn-int-fmp
+bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-fmp-b \
+               vcsn-int-b vcsn-int-z vcsn-int-fmp-b \
+	       vcsn-int-fmp-z vcsn-char-fmp-z
 
 COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\
@@ -57,21 +58,30 @@ vcsn_char_z_SOURCES = $(COMMON_SOURCES)			\
 		      ratexp_commands.hh		\
                       common_automaton_commands.hh 	\
                       z_commands.cc
-vcsn_char_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton -DVCSN_USE_LIB
+vcsn_char_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton -DVCSN_USE_LIB \
+			-DWITH_WEIGHTS
 vcsn_char_z_LDADD = $(LDADD)				\
 		  $(top_builddir)/lib/libvcsn-z.la	\
 		  $(top_builddir)/lib/libkrat_exp.la
 
-vcsn_char_fmp_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
-#vcsn_char_fmp_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=fmp_transducer 	\
-#		    -DWITH_TWO_ALPHABETS -DVCSN_USE_LIB
-vcsn_char_fmp_CPPFLAGS = $(AM_CPPFLAGS) \
-		         -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS \
-			 -DIOAUT_CONTEXT=boolean_automaton	       \
-			 -DRW_CONTEXT=boolean_transducer
-vcsn_char_fmp_LDADD = $(LDADD) \
-		      $(top_builddir)/lib/libvcsn-fmp-tdc.la \
-		      $(top_builddir)/lib/libkrat_exp.la
+vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
+vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \
+			    -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS \
+			    -DIOAUT_CONTEXT=boolean_automaton	       \
+			    -DRW_CONTEXT=boolean_transducer
+vcsn_char_fmp_b_LDADD = $(LDADD) \
+			 $(top_builddir)/lib/libvcsn-fmp-tdc.la \
+			 $(top_builddir)/lib/libkrat_exp.la
+
+vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
+vcsn_char_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) \
+			    -DCONTEXT=z_fmp_transducer -DWITH_TWO_ALPHABETS \
+			    -DIOAUT_CONTEXT=z_automaton	       \
+			    -DRW_CONTEXT=z_transducer \
+			    -DWITH_WEIGHTS
+vcsn_char_fmp_z_LDADD = $(LDADD) \
+			 $(top_builddir)/lib/libvcsn-fmp-tdc.la \
+			 $(top_builddir)/lib/libkrat_exp.la
 
 vcsn_int_b_SOURCES = $(COMMON_SOURCES)			\
 		      ratexp_commands.hh		\
@@ -88,18 +98,28 @@ vcsn_int_z_SOURCES = $(COMMON_SOURCES)			\
 	              common_automaton_commands.hh	\
                       z_commands.cc
 vcsn_int_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_automaton \
-                      -DNO_PREDEF_ALPHABETS -DVCSN_USE_LIB
+                      -DNO_PREDEF_ALPHABETS -DVCSN_USE_LIB \
+		      -DWITH_WEIGHTS
 vcsn_int_z_LDADD = $(LDADD)				\
 		    $(top_builddir)/lib/libkrat_exp.la  \
 		    $(top_builddir)/lib/libvcsn-int-z.la
 
-vcsn_int_fmp_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
-vcsn_int_fmp_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \
-		      -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
-		      -DIOAUT_CONTEXT=int_boolean_automaton
-vcsn_int_fmp_LDADD = $(LDADD) \
-		      $(top_builddir)/lib/libkrat_exp.la
+vcsn_int_fmp_b_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
+vcsn_int_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \
+			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
+			   -DIOAUT_CONTEXT=int_boolean_automaton
+vcsn_int_fmp_b_LDADD = $(LDADD) \
+			$(top_builddir)/lib/libkrat_exp.la \
+			$(top_builddir)/lib/libvcsn-int-fmp-tdc.la
 
+vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES) fmp_commands.cc
+vcsn_int_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_fmp_transducer \
+			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
+			   -DIOAUT_CONTEXT=int_z_automaton \
+			   -DWITH_WEIGHTS
+vcsn_int_fmp_z_LDADD = $(LDADD) \
+			$(top_builddir)/lib/libkrat_exp.la \
+			$(top_builddir)/lib/libvcsn-int-z-fmp-tdc.la
 
 ## ------ ##
 ## argp.  ##

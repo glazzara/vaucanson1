@@ -30,6 +30,8 @@ include vcsn-fmp-tdc/libvcsn-fmp-tdc.mk
 include vcsn-tdc/libvcsn-tdc.mk
 include vcsn-z-fmp-tdc/libvcsn-z-fmp-tdc.mk
 include vcsn-z-tdc/libvcsn-z-tdc.mk
+include vcsn-int-fmp-tdc/libvcsn-int-fmp-tdc.mk
+include vcsn-int-z-fmp-tdc/libvcsn-int-z-fmp-tdc.mk
 
 maintainer-clean-local:
 	rm -rf $(top_builddir)/lib/vcsn-b		\
@@ -40,8 +42,10 @@ maintainer-clean-local:
 	       $(top_builddir)/lib/vcsn-z-min		\
 	       $(top_builddir)/lib/vcsn-z-max		\
 	       $(top_builddir)/lib/vcsn-z-fmp-tdc	\
+	       $(top_builddir)/lib/vcsn-int-z-fmp-tdc	\
 	       $(top_builddir)/lib/vcsn-z-tdc		\
 	       $(top_builddir)/lib/vcsn-fmp-tdc		\
+	       $(top_builddir)/lib/vcsn-int-fmp-tdc	\
 	       $(top_builddir)/lib/vcsn-tdc
 	rm -rf $(top_srcdir)/lib/vcsn-b			\
 	       $(top_srcdir)/lib/vcsn-int-b		\
@@ -51,7 +55,9 @@ maintainer-clean-local:
 	       $(top_srcdir)/lib/vcsn-z-min		\
 	       $(top_srcdir)/lib/vcsn-z-max		\
 	       $(top_srcdir)/lib/vcsn-z-fmp-tdc		\
+	       $(top_srcdir)/lib/vcsn-int-z-fmp-tdc	\
 	       $(top_srcdir)/lib/vcsn-z-tdc		\
 	       $(top_srcdir)/lib/vcsn-fmp-tdc		\
+	       $(top_srcdir)/lib/vcsn-int-fmp-tdc	\
 	       $(top_srcdir)/lib/vcsn-tdc
 

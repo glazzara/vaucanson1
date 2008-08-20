@@ -1,3 +1,21 @@
+2008-08-20  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Improve taf-kit support of fmp transducers.
+	* configure.ac: New taf-kit instances.
+	* lib/Makefile.am: Add libvcsn-int-fmp-z.
+	* lib/generate_libvcsn.rb: New filters.
+	* taf-kit/src/Makefile.am: Rename vcsn-*-fmp to vcsn-*-fmp-b,
+	  and add vcsn-*-fmp-z, build with livcsn-int-fmp-z.
+	* taf-kit/src/edition_commands.hxx: Use a new macro and improve
+	  weight input.
+	* taf-kit/tests/Makefile.am: Add new tests.
+	* taf-kit/tests/vcsn-char-fmp-b.test: New.
+	* taf-kit/tests/vcsn-char-fmp-z.test: New.
+	* taf-kit/tests/vcsn-char-fmp.test: Remove.
+	* taf-kit/tests/vcsn-int-fmp-b.test: New.
+	* taf-kit/tests/vcsn-int-fmp-z.test: New.
+	* taf-kit/tests/vcsn-int-fmp.test: Remove.
+
 2008-08-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/manual/taf-kit.tex (subsection{First Contacts}): Typo.

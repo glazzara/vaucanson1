@@ -78,8 +78,11 @@ namespace edition_commands
   /// Exception for cancelling.
   struct cancel {};
 
+# ifdef WITH_WEIGHTS
   static semiring_elt_value_t get_semiring_elt_value ()
   {
+    echo_ (" With weight: ");
+
     semiring_elt_value_t v;
     char first_char = std::cin.get ();
     std::cin.unget ();
@@ -98,6 +101,7 @@ namespace edition_commands
     discard_inputs ();
     return v;
   }
+# endif
 
   /// Get an integer from the user.
   static int get_int ()
@@ -199,7 +203,7 @@ namespace edition_commands
       throw cancel ();
     a.add_series_transition (n_from, n_to,
 			     make_rat_exp (a.structure ().series ().monoid ().alphabet (),
-					   std::string (ratexp), args.tok_rep));
+					   ratexp, args.tok_rep));
 # else
     // We don't parse ratexps, so we don't use these.
     (void) args;
@@ -222,8 +226,13 @@ namespace edition_commands
 
     // Construct a series from the two components.
     semiring_elt_t weight (a.structure().series().semiring());
-    monoid_elt_t label (a.structure().series().monoid());
+#  ifdef WITH_WEIGHTS
+    weight = get_semiring_elt_value();
+#  else
     weight = true;
+#  endif
+
+    monoid_elt_t label (a.structure().series().monoid());
     label = monoid_elt_value_t(word1.value(), word2.value());
     series_set_elt_t s (a.structure().series());
     s.assoc (label, weight);
@@ -251,15 +260,17 @@ namespace edition_commands
     echo_ ("  For state: ");
     hstate_t n_state = get_state (a);
     series_set_elt_t *weight = 0;
-    if (not type_equal (semiring_elt_value_t, bool) and want_set)
-    {
-      echo_ ("  With weight: ");
 
+# ifdef WITH_WEIGHTS
+    if (want_set)
+    {
       semiring_elt_value_t v = get_semiring_elt_value ();
       weight = new series_set_elt_t (a.structure ().series ());
       weight->assoc (identity_value (SELECT (monoid_t),
 				     SELECT (monoid_elt_value_t)), v);
     }
+# endif
+
     if (initial)
       if (want_set)
 	if (weight)
@@ -325,11 +336,17 @@ namespace edition_commands
       {
 	++n_trans;
 # ifndef WITH_TWO_ALPHABETS
-	echo_ ("\n    " << n_trans << ": From " << *s << " to "
-	       << a.dst_of (*h) << " labeled by " << a.series_value_of (*h));
+	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
+	       << " labeled by " << a.series_value_of (*h));
 # else
+#  ifndef WITH_WEIGHTS
 	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
 	       << " labeled by " << a.word_of (*h));
+#  else
+	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
+	       << " labeled by " << a.word_of (*h)
+	       << " W: " << a.weight_of (*h));
+#  endif
 # endif
       }
     }
@@ -379,6 +396,7 @@ namespace edition_commands
 	case 10: return true;
       }
     } catch (const std::logic_error& err) {
+      // FIXME: this message will never be displayed
       warn ("Error: " << err.what ());
       std::cin.get ();
       std::cin.unget ();

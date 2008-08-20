@@ -17,7 +17,7 @@
 
 set -e
 
-VCSN=vcsn-char-fmp
+VCSN=vcsn-char-fmp-b
 
 ## ------------------------------------ ##
 ## Input/output work with transducers.  ##

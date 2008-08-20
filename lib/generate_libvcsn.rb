@@ -24,8 +24,10 @@ vcsn = Hash[
   "vcsn-z-max" => "z_max_plus_automaton",
   "vcsn-z-min" => "z_min_plus_automaton",
   "vcsn-fmp-tdc" => "fmp_transducer",
+  "vcsn-int-fmp-tdc" => "int_fmp_transducer",
   "vcsn-tdc" => "boolean_transducer",
   "vcsn-z-fmp-tdc" => "z_fmp_transducer",
+  "vcsn-int-z-fmp-tdc" => "int_z_fmp_transducer",
   "vcsn-z-tdc" => "z_transducer"
 ]
 
@@ -58,7 +60,8 @@ def create?(type, file)
     (
       (
 	"vcsn-fmp-tdc" == type or "vcsn-tdc" == type or
-	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type
+	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type or
+	"vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type
       ) and
       file !~ /aci_canonical.hh/ and
       file !~ /berry_sethi.hh/ and
@@ -84,12 +87,13 @@ def create?(type, file)
       file !~ /standard.hh/ and
       file !~ /standard_of.hh/ and
       (
-        ("vcsn-fmp-tdc" == type and "vcsn-z-fmp-tdc" == type) or
-          (
-	   file !~ /complete.hh/ and
-	   file !~ /is_deterministic.hh/ and
-           file !~ /product.hh/
-          )
+        ( "vcsn-fmp-tdc" == type or "vcsn-z-fmp-tdc" == type or
+	  "vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type ) and
+        (
+	  file !~ /complete.hh/ and
+	  file !~ /is_deterministic.hh/ and
+          file !~ /product.hh/
+        )
       )
     )
   )

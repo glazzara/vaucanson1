@@ -17,9 +17,4 @@
 
 set -e
 
-VCSN=vcsn-int-fmp
-
-# FIXME: For some reason the output of intersection is bogus.  The
-# second line will have to be adjusted.
-$VCSN intersection $int_b > int-b-b.xml
-$VCSN eval --parser1='ONE=e ZERO=O' --alphabet1='10,11' int-b-b.xml 11
+VCSN=vcsn-char-fmp-z

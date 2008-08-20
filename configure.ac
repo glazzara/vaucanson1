@@ -208,10 +208,12 @@ m4_define([VCSN_CONFIG_WRAPPER],
 		 [chmod a+x taf-kit/tests/$1])
 ])
 VCSN_CONFIG_WRAPPER([vcsn-char-b])
-VCSN_CONFIG_WRAPPER([vcsn-char-fmp])
+VCSN_CONFIG_WRAPPER([vcsn-char-fmp-b])
+VCSN_CONFIG_WRAPPER([vcsn-char-fmp-z])
 VCSN_CONFIG_WRAPPER([vcsn-char-z])
 VCSN_CONFIG_WRAPPER([vcsn-int-b])
-VCSN_CONFIG_WRAPPER([vcsn-int-fmp])
+VCSN_CONFIG_WRAPPER([vcsn-int-fmp-b])
+VCSN_CONFIG_WRAPPER([vcsn-int-fmp-z])
 VCSN_CONFIG_WRAPPER([vcsn-int-z])
 
 
