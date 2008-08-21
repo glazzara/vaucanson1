@@ -15,11 +15,11 @@ with classical automata and is described in \autoref{sec:vcsn-char-b}.
 A variant of this program called \command{vcsn-int-b} handles Boolean
 automata whose letters are integers.
 
-\autoref{sec:vcsn-char-fmp} describes the program
-\command{vcsn-char-fmp} which allows to compute with transducers, that
+\autoref{sec:vcsn-char-fmp-b} describes the program
+\command{vcsn-char-fmp-b} which allows to compute with transducers, that
 is, automata whose transitions are labeled by pair of words, which are
 elements of a \emph{product of free monoids}, hence the name.  A
-variant of this program called \command{vcsn-int-fmp} handles
+variant of this program called \command{vcsn-int-fmp-b} handles
 transducers whose letters are integers.
 
 In \autoref{sec:vcsn-char-z} we consider the programs of the \tafkit
@@ -104,7 +104,7 @@ and should be understood, or analyzed, as follows.
   and outputs the result on the standard output.
 
 \item \file{a1.xml} is the description of an automaton --- of the
-  automaton of \autoref{b:a1} indeed --- in an XML format that is
+  automaton of \autoref{char-b:a1} indeed --- in an XML format that is
   understood\footnote{%
     This format is not exactly part of the \Vauc platform.  It has
     been developed for providing a means of communication between
@@ -144,7 +144,7 @@ Please, note the typographic conventions: user input is represented
 and finally, if different from 0, the exit status is represented
 \texttt{=> like this}.  For instance:
 
-\execcaption{bz-mismatch}{vcsn-char-b dump-automaton a1 | vcsn-char-z info -}
+\execcaption{bz-mismatch}{vcsn-char-b dump-automaton a1 | vcsn-char-b info -}
 
 \smallskip
 
@@ -318,7 +318,7 @@ Automaton description:
   Final states: 0
 
   Transitions:
-    1: From 0 to 0 labeled by (\{1\} a)+(\{1\} b)
+    1: From 0 to 0 labeled by (\withweighttt{1}{a})+(\withweighttt{1}{b})
 \end{shell}
 
 \noindent
@@ -549,13 +549,13 @@ The whole list of supported commands is available via
 
 \newpage
 \section{Transducers}
-\label{sec:vcsn-char-fmp}
+\label{sec:vcsn-char-fmp-b}
 
 While the \Vauc library supports two views of transducers, currently
 \tafkit only provides one view:
 
 \begin{description}
-\item[vcsn-char-fmp] considering a transducer as a weighted automaton of a
+\item[vcsn-char-fmp-b] considering a transducer as a weighted automaton of a
   product of free monoid,
 \end{description}
 
@@ -615,19 +615,19 @@ view to the other one.
 
 To experiment with transducers, we will use \index{T1@$\Tc_1$}$\Tc_1$,
 described in \autoref{fig:t1}, and part of the automaton library
-(\autoref{tdc:t1}).
+(\autoref{char-fmp-b:t1}).
 
 %% \subsubsection{Evaluation}
 %%
 %% Currently \tafkit requires the user to specify the alphabets to use
 %% using \option{--alphabet1} and \option{--alphabet2}.
 %%
-%% \execcaption{t1.110}{vcsn-char-fmp --alphabet1=ab eval t1.xml 'bba'}
+%% \execcaption{t1.110}{vcsn-char-fmp-b --alphabet1=ab eval t1.xml 'bba'}
 
 \subsubsection{Domain}
 The transducer $T$ only accepts binary numbers divisible by 3.
 
-\execcaption{t1.dom}{vcsn-char-fmp dump-automaton t1 | vcsn-char-fmp --alphabet1=ab domain - >div-by-3.xml}
+\execcaption{t1.dom}{vcsn-char-fmp-b dump-automaton t1 | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml}
 
 Now the file \file{divisible-by-3.xml} contains the description of a
 Boolean automaton that accepts only the numbers divisible by 3:
@@ -641,20 +641,20 @@ Boolean automaton that accepts only the numbers divisible by 3:
 %% thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
 %% \begin{shell}
 %% # vcsn-char-rw to-tdc quot_3_rw.xml > quot_3.xml
-%% # vcsn-char-fmp to-rw-tdc add1.xml > add1_rw.xml
+%% # vcsn-char-fmp-b to-rw-tdc add1.xml > add1_rw.xml
 %% \end{shell}
 %%
 %% \subsubsection{Composing}
 %% \begin{shell}
-%% # vcsn-char-fmp compose quot_3.xml add1.xml
+%% # vcsn-char-fmp-b compose quot_3.xml add1.xml
 %% \end{shell}
 
 \subsection{Available functions}
 The following functions are available for both \command{vcsn-char-rw}
-and \command{vcsn-char-fmp} programs.  To invoke them, run
+and \command{vcsn-char-fmp-b} programs.  To invoke them, run
 \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
 
-\execcaption{vcsn-char-fmp-commands}{vcsn-char-fmp --list-commands}
+\execcaption{vcsn-char-fmp-b-commands}{vcsn-char-fmp-b --list-commands}
 
 %% In the following:
 %%
@@ -743,7 +743,7 @@ all comments should also stand for the programs
 \command{vcsn-char-z-min-plus} and \command{vcsn-char-z-max-plus}.
 
 Again, we will toy with some of the automata provided by
-\command{vcsn-char-z}, see \autoref{sec:auto:z}.
+\command{vcsn-char-z}, see \autoref{sec:auto:char-z}.
 
 \subsection{Counting \samp{b}s}
 

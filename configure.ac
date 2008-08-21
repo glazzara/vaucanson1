@@ -243,10 +243,10 @@ AC_CONFIG_FILES([
 	build-aux/Makefile
 	data/Makefile
 	  data/automata/Makefile
-	    data/automata/b/Makefile
-	    data/automata/fmp/Makefile
-	    data/automata/tdc-rw/Makefile
-	    data/automata/z/Makefile
+	    data/automata/char-b/Makefile
+	    data/automata/char-fmp-b/Makefile
+	    data/automata/char-rw-b/Makefile
+	    data/automata/char-z/Makefile
 	  data/emacs/Makefile
 	lib/Makefile
 	src/Makefile

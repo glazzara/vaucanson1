@@ -1,3 +1,43 @@
+2008-08-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update data and documentation.
+	* configure.ac,
+	* data/automata/Makefile.am,
+	* data/automata/README: Rename automaton types.
+	* data/automata/b/Makefile.am: Remove.
+	* data/automata/b/a1.cc: Remove.
+	* data/automata/b/b1.cc: Remove.
+	* data/automata/b/divkbaseb.cc: Remove.
+	* data/automata/b/double_ring.cc: Remove.
+	* data/automata/b/ladybird.cc: Remove.
+	* data/automata/b: Remove.
+	* data/automata/char-b/Makefile.am: Update variable name.
+	* data/automata/char-b: New.
+	* data/automata/char-fmp-b/Makefile.am: Update variable name.
+	* data/automata/char-fmp-b: New.
+	* data/automata/char-rw-b/Makefile.am: Update variable name.
+	* data/automata/char-rw-b: New.
+	* data/automata/char-z/Makefile.am: Update variable name.
+	* data/automata/char-z: New.
+	* data/automata/fmp/Makefile.am: Remove.
+	* data/automata/fmp/t1.cc: Remove.
+	* data/automata/fmp/u1.cc: Remove.
+	* data/automata/fmp: Remove.
+	* data/automata/tdc-rw/Makefile.am: Remove.
+	* data/automata/tdc-rw/add1-rw.xml: Remove.
+	* data/automata/tdc-rw/quot-3-rw.xml: Remove.
+	* data/automata/tdc-rw: Remove.
+	* data/automata/z/Makefile.am: Remove.
+	* data/automata/z/c1.cc: Remove.
+	* data/automata/z: Remove.
+	* doc/manual/automata.tex: Remove.
+	* doc/manual/generate-automata.sh: Fix generation of automata.tex.
+	* doc/manual/taf-kit.tex: Update references.
+	* doc/manual/vaucanson-user-manual.tex: New macro.
+	* taf-kit/src/library_commands.hh: Better detection of automaton
+	  types in taf-kit instances.
+	* vaucanson.mk: Rename automaton types.
+
 2008-08-20  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Improve taf-kit support of fmp transducers.

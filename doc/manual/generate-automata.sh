@@ -12,6 +12,7 @@ generate_one_section ()
 
 EOF
 
+  ! which $vcsn > /dev/null 2>&1 && exit 1
   $vcsn list-automata |
     sed -n 's/ *- *//p' |
     while read a
@@ -36,6 +37,6 @@ present each one of these automata.
 
 
 EOF
-generate_one_section 'Boolean Automata'  b
-generate_one_section '\Z-Automata'       z
-generate_one_section 'Transducers'       tdc
+generate_one_section 'Boolean Automata' char-b
+generate_one_section '\Z-Automata' char-z
+generate_one_section 'Boolean FMP Transducers' char-fmp-b

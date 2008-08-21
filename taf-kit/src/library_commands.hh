@@ -57,7 +57,7 @@ static std::string get_automata_path (const arguments_t& args)
   const char* lib_dir = "automata";
   if (base_path == 0)
     base_path = VCSN_DATA_PATH;
-  const std::string type = args.progname.substr (args.progname.rfind ('-') + 1);
+  const std::string type = args.progname.substr (args.progname.rfind ("vcsn-") + 5);
   std::string path = std::string (base_path) + "/" + lib_dir + "/" + type;
 
   DIR* directory = opendir (path.c_str ());

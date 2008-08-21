@@ -1,5 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+## Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -16,14 +17,14 @@ include $(top_srcdir)/vaucanson.mk
 # Z automata.
 EXTRA_PROGRAMS = c1
 
-dist_z_automata_DATA =                          \
+dist_char_z_automata_DATA =                          \
   $(srcdir)/b1.xml				\
   $(srcdir)/c1.xml
 
-MAINTAINERCLEANFILES = $(dist_z_automata_DATA)
+MAINTAINERCLEANFILES = $(dist_char_z_automata_DATA)
 
 # This automaton counts the number of bs.
-$(srcdir)/b1.xml: $(top_srcdir)/data/automata/b/b1.xml
+$(srcdir)/b1.xml: $(top_srcdir)/data/automata/char-b/b1.xml
 	sed -e 's/set="B"/set="Z"/g' $< >$@.tmp
 	mv $@.tmp $@
 

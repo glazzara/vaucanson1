@@ -1,5 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+## Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -15,7 +16,7 @@ include $(top_srcdir)/vaucanson.mk
 
 EXTRA_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 
-dist_b_automata_DATA =				\
+dist_char_b_automata_DATA =			\
   $(srcdir)/a1.xml				\
   $(srcdir)/b1.xml				\
   $(srcdir)/div3base2.xml			\
@@ -23,7 +24,7 @@ dist_b_automata_DATA =				\
   $(srcdir)/double-3-1.xml
 
 EXTRA_DIST = $(XML_SAMPLES)
-MAINTAINERCLEANFILES = $(dist_b_automata_DATA)
+MAINTAINERCLEANFILES = $(dist_char_b_automata_DATA)
 
 a1_CPPFLAGS = $(AM_CPPFLAGS)
 a1_SOURCES = a1.cc
