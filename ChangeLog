@@ -1,5 +1,10 @@
 2008-08-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Typo in dist rule.
+	* taf-kit/tests/Makefile.am: char-fmp -> char-fmp-b.
+
+2008-08-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update taf-kit tests.
 	* taf-kit/tests/automata/b: Remove.
 	* taf-kit/tests/automata/char-fmp-b: New.

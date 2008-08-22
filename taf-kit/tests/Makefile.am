@@ -33,11 +33,11 @@ EXTRA_DIST = $(TESTS)				\
   automata/char-b/b_transposed.xml		\
   automata/char-b/non_ambiguous1.xml		\
   automata/char-b/void_b_automaton.xml		\
-  automata/char-fmp/inverted_t1.xml		\
-  automata/char-fmp/t1_compose_u1.xml		\
-  automata/char-fmp/t2_u-compose_u2.xml		\
-  automata/char-fmp/t2.xml			\
-  automata/char-fmp/u2.xml			\
+  automata/char-fmp-b/inverted_t1.xml		\
+  automata/char-fmp-b/t1_compose_u1.xml		\
+  automata/char-fmp-b/t2_u-compose_u2.xml	\
+  automata/char-fmp-b/t2.xml			\
+  automata/char-fmp-b/u2.xml			\
   automata/char-z/standard_c1.xml		\
   automata/char-z/void_z_automaton.xml		\
   automata/int-b/int-b.xml			\
