@@ -1,3 +1,19 @@
+2008-08-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update taf-kit tests.
+	* taf-kit/tests/automata/b: Remove.
+	* taf-kit/tests/automata/char-fmp-b: New.
+	* taf-kit/tests/automata/char-fmp/inverted_t1.xml: Remove.
+	* taf-kit/tests/automata/char-fmp/t1_compose_u1.xml: Remove.
+	* taf-kit/tests/automata/char-fmp/t2.xml: Remove.
+	* taf-kit/tests/automata/char-fmp/t2_u-compose_u2.xml: Remove.
+	* taf-kit/tests/automata/char-fmp/u2.xml: Remove.
+	* taf-kit/tests/automata/char-fmp: Remove.
+	* taf-kit/tests/automata/tdc-rw: Remove.
+	* taf-kit/tests/automata/tdc: Remove.
+	* taf-kit/tests/automata/z: Remove.
+	* taf-kit/tests/defs.in: Rename automaton types.
+
 2008-08-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Update data and documentation.

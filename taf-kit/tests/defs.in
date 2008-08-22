@@ -178,11 +178,11 @@ fail1()
 
 automata_dir=$top_srcdir/data/automata
 automata_tests_dir=$top_srcdir/taf-kit/tests/automata
-a1=$automata_dir/b/a1.xml
-b1=$automata_dir/b/b1.xml
-c1=$automata_dir/z/c1.xml
-t1=$automata_dir/fmp/t1.xml
-u1=$automata_dir/fmp/u1.xml
+a1=$automata_dir/char-b/a1.xml
+b1=$automata_dir/char-b/b1.xml
+c1=$automata_dir/char-z/c1.xml
+t1=$automata_dir/char-fmp-b/t1.xml
+u1=$automata_dir/char-fmp-b/u1.xml
 ambiguous1=$automata_tests_dir/char-b/ambiguous1.xml
 ambiguous2=$automata_tests_dir/char-b/ambiguous2.xml
 non_ambiguous1=$automata_tests_dir/char-b/non_ambiguous1.xml
@@ -191,11 +191,11 @@ b_to_transpose=$automata_tests_dir/char-b/b_to_transpose.xml
 b_transposed=$automata_tests_dir/char-b/b_transposed.xml
 void_z_automaton=$automata_tests_dir/char-z/void_z_automaton.xml
 standard_c1=$automata_tests_dir/char-z/standard_c1.xml
-t1_compose_u1=$automata_tests_dir/char-fmp/t1_compose_u1.xml
-t2=$automata_tests_dir/char-fmp/t2.xml
-u2=$automata_tests_dir/char-fmp/u2.xml
-t2_ucompose_u2=$automata_tests_dir/char-fmp/t2_u-compose_u2.xml
-inverted_t1=$automata_tests_dir/char-fmp/inverted_t1.xml
+t1_compose_u1=$automata_tests_dir/char-fmp-b/t1_compose_u1.xml
+t2=$automata_tests_dir/char-fmp-b/t2.xml
+u2=$automata_tests_dir/char-fmp-b/u2.xml
+t2_ucompose_u2=$automata_tests_dir/char-fmp-b/t2_u-compose_u2.xml
+inverted_t1=$automata_tests_dir/char-fmp-b/inverted_t1.xml
 int_b=$automata_tests_dir/int-b/int-b.xml
 int_z=$automata_tests_dir/int-z/int-z.xml
 
