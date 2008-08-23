@@ -1,3 +1,9 @@
+2008-08-23  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Bump to version 1.2.91.
+	* configure.ac: Bump version number.
+	* doc/NEWS.txt: Update.
+
 2008-08-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Typo in dist rule.
