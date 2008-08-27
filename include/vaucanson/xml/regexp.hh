@@ -96,6 +96,12 @@ namespace vcsn
     template <typename T>
     class WeightHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+
       public:
 	WeightHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,
@@ -117,6 +123,16 @@ namespace vcsn
     template <typename T>
     class ExtMulHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+      using RegexpHandler<T>::param_;
+      using RegexpHandler<T>::lefth_;
+      using RegexpHandler<T>::create_weight;
+      using RegexpHandler<T>::create;
+
       public:
 	ExtMulHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,
@@ -143,6 +159,15 @@ namespace vcsn
     template <typename T>
     class StarHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+      using RegexpHandler<T>::param_;
+      using RegexpHandler<T>::lefth_;
+      using RegexpHandler<T>::create;
+
       public:
 	StarHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,
@@ -166,6 +191,15 @@ namespace vcsn
     template <typename T>
     class ProductHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+      using RegexpHandler<T>::param_;
+      using RegexpHandler<T>::lefth_;
+      using RegexpHandler<T>::create;
+
       public:
 	ProductHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,
@@ -191,6 +225,15 @@ namespace vcsn
     template <typename T>
     class SumHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+      using RegexpHandler<T>::param_;
+      using RegexpHandler<T>::lefth_;
+      using RegexpHandler<T>::create;
+
       public:
 	SumHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,
@@ -216,6 +259,13 @@ namespace vcsn
     template <typename T>
     class MonElmtHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+      using RegexpHandler<T>::param_;
+
       public:
 	MonElmtHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,
@@ -230,6 +280,8 @@ namespace vcsn
 	end (const XMLCh* const uri,
 		    const XMLCh* const localname,
 		    const XMLCh* const qname);
+      private:
+	Handler* mongenh_;
     };
     /**
      * AtomHandler class (one or zero)
@@ -237,6 +289,11 @@ namespace vcsn
     template <typename T>
     class AtomHandler : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::root_;
+      using RegexpHandler<T>::end_;
+
       public:
 	AtomHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,

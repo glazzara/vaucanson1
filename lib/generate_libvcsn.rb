@@ -28,7 +28,11 @@ vcsn = Hash[
   "vcsn-tdc" => "boolean_transducer",
   "vcsn-z-fmp-tdc" => "z_fmp_transducer",
   "vcsn-int-z-fmp-tdc" => "int_z_fmp_transducer",
-  "vcsn-z-tdc" => "z_transducer"
+  "vcsn-z-tdc" => "z_transducer",
+  "vcsn-char-char-b" => "char_char_boolean_automaton",
+  "vcsn-char-int-b" => "char_int_boolean_automaton",
+  "vcsn-int-int-b" => "int_int_boolean_automaton",
+  "vcsn-int-char-b" => "int_char_boolean_automaton"
 ]
 
 # Creating directories in lib/
@@ -45,19 +49,33 @@ def create?(type, file)
   (
     # FIXME: The following tests shall be removed
     # FIXME: more comments with the some specs on the algorithms must be added to do so
-    (
+    ( # Automata filters.
       ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
         "vcsn-int-b" == type or "vcsn-int-z" == type or
-	"vcsn-z-max" == type or "vcsn-z-min" == type ) and
+	"vcsn-z-max" == type or "vcsn-z-min" == type or
+	"vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
+	"vcsn-int-int-b" == type or "vcsn-int-char-b" == type
+      ) and
       file !~ /realtime_decl.hh/ and
-      file !~ /composition_cover.hh/ and	# transducer
       file !~ /extension.hh/ and		# transducer
       file !~ /invert.hh/ and			# transducer
       file !~ /is_letterized.hh/ and		# transducer
       file !~ /is_normalized.hh/ and		# transducer
-      file !~ /normalized_composition.hh/	# transducer
+      file !~ /normalized_composition.hh/ and	# transducer
+      file !~ /domain.hh/ and			# transducer
+      file !~ /evaluation_fmp.hh/ and		# FMP transducer
+      file !~ /sub_normalize.hh/ and		# FMP transducer
+      file !~ /composition_cover.hh/ and	# FMP transducer
+      ( # Pair letters only filters.
+	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
+	      "vcsn-int-int-b" == type or "vcsn-int-char-b" == type
+	    ) or
+	    (
+	      file !~ /berry_sethi.hh/		# algorithm not generic with letter_t
+	    )
+      )
     ) or
-    (
+    ( # Transducers only filters.
       (
 	"vcsn-fmp-tdc" == type or "vcsn-tdc" == type or
 	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type or
@@ -67,7 +85,6 @@ def create?(type, file)
       file !~ /berry_sethi.hh/ and
       file !~ /brzozowski.hh/ and
       file !~ /complement.hh/ and
-      file !~ /composition_cover.hh/ and
       file !~ /derived_term_automaton.hh/ and
       file !~ /determinize.hh/ and
       file !~ /equivalent.hh/ and
@@ -81,19 +98,29 @@ def create?(type, file)
       file !~ /letter_to_letter_composition.hh/ and
       file !~ /minimization_hopcroft.hh/ and
       file !~ /minimization_moore.hh/ and
-      file !~ /normalized_composition.hh/ and
       file !~ /realtime_decl.hh/ and
       file !~ /realtime.hh/ and
       file !~ /standard.hh/ and
       file !~ /standard_of.hh/ and
-      (
-        ( "vcsn-fmp-tdc" == type or "vcsn-z-fmp-tdc" == type or
-	  "vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type ) and
-        (
-	  file !~ /complete.hh/ and
-	  file !~ /is_deterministic.hh/ and
-          file !~ /product.hh/
-        )
+      ( # FMP transducers only filters.
+        not ( "vcsn-fmp-tdc" == type or "vcsn-z-fmp-tdc" == type or
+	      "vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type
+	    ) or
+	    (
+	      file !~ /complete.hh/ and
+	      file !~ /is_deterministic.hh/ and
+	      file !~ /product.hh/
+	    )
+      ) and
+      ( # RW transducers only filters.
+        not ( "vcsn-tdc" == type or "vcsn-z-tdc" == type
+	    ) or
+	    (
+	      file !~ /normalized_composition.hh/ and	# FMP transducer
+	      file !~ /evaluation_fmp.hh/ and		# FMP transducer
+	      file !~ /sub_normalize.hh/ and		# FMP transducer
+	      file !~ /composition_cover.hh/		# FMP transducer
+	    )
       )
     )
   )
@@ -200,6 +227,8 @@ files.each { |file|
 	  tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
 	  tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
 	  tmp = tmp.gsub(/Word/, 'std::basic_string<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::letter_t>')
+	  tmp = tmp.gsub(/InputProjection/, 'input_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
+	  tmp = tmp.gsub(/OutputProjection/, 'output_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
 	  output.push("  template", tmp)
 	end
       end

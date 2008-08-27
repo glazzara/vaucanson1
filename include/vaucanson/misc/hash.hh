@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,6 +42,12 @@ namespace vcsn
     struct hash_label<int>
     {
       std::size_t operator() (const int) const;
+    };
+
+    template <typename U, typename V>
+    struct hash_label<std::pair<U, V> >
+    {
+      std::size_t operator() (const std::pair<U, V>&) const;
     };
 
     template <typename Word, typename Weight>

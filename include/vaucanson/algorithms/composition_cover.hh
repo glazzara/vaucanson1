@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,6 +31,11 @@
  * @see composition_co_cover()
  */
 /** @} */
+
+// INTERFACE: Automaton composition_cover(const Automaton& a1) { return vcsn::composition_cover(*a1); }
+// INTERFACE: GenAutomaton composition_cover(const GenAutomaton& a1) { return vcsn::composition_cover(*a1); }
+// INTERFACE: Automaton composition_co_cover(const Automaton& a1) { return vcsn::composition_co_cover(*a1); }
+// INTERFACE: GenAutomaton composition_co_cover(const GenAutomaton& a1) { return vcsn::composition_co_cover(*a1); }
 
 namespace vcsn {
 

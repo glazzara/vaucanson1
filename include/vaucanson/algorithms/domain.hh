@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,6 +26,8 @@
  * @author Florent Terrones <florent.terrones@lrde.epita.fr>
  */
 /** @} */
+
+// INTERFACE: void domain(const Automaton& a1, InputProjection& a2) { return vcsn::domain(*a1, *a2); }
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/algebra/implementation/free_monoid/words.hh>

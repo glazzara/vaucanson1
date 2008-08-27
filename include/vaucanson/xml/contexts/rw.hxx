@@ -163,7 +163,7 @@ namespace vcsn
       : RegexpHandler<TRANSseries >(parser, root, param),
 	weighth_(0)
     {
-      this->end_ = this->eq_.weight;
+      end_ = eq_.weight;
     }
 
     SParamTRANS
@@ -173,12 +173,12 @@ namespace vcsn
 				 const XMLCh* const,
 				 const xercesc::Attributes&)
     {
-      //RegexpHandler<series_set_elt_t>* tmp = new RegexpHandler<series_set_elt_t>(this->parser_, *this,
-//	  algebra::identity_as<typename series_set_elt_t::value_t>::of(this->param_.structure().semiring()));
-      if (!(this->weighth_ = this->create_weighth(localname)))
+      //RegexpHandler<series_set_elt_t>* tmp = new RegexpHandler<series_set_elt_t>(parser_, *this,
+//	  algebra::identity_as<typename series_set_elt_t::value_t>::of(param_.structure().semiring()));
+      if (!(weighth_ = create_weighth(localname)))
 	error::token(localname);
       else
-	this->parser_->setContentHandler(this->weighth_);
+	parser_->setContentHandler(weighth_);
     }
 
     SParamTRANS
@@ -189,13 +189,13 @@ namespace vcsn
     {
 
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
+      if (XMLString::equals(end_, localname))
       {
-	TRANSseries s = algebra::identity_as<typename TRANSseries::value_t>::of(this->param_.structure());
-	typename TRANSseries::semiring_elt_t w(this->weighth_->series());
-	this->param_ = this->param_ * w;
+	TRANSseries s = algebra::identity_as<typename TRANSseries::value_t>::of(param_.structure());
+	typename TRANSseries::semiring_elt_t w(weighth_->series());
+	param_ = param_ * w;
 
-	this->parser_->setContentHandler(&this->root_);
+	parser_->setContentHandler(&root_);
 	delete weighth_;
       }
       else
@@ -207,24 +207,24 @@ namespace vcsn
     WeightHandler<TRANSseries >::create_weighth (const XMLCh* const localname)
     {
       using namespace xercesc;
-      series_set_elt_t elt(this->param_.structure().semiring());
+      series_set_elt_t elt(param_.structure().semiring());
 
-      if (XMLString::equals(this->eq_.monElmt, localname))
-	return builders::create_monElmth(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
-      else if (XMLString::equals(this->eq_.star, localname))
-	return new StarHandler<series_set_elt_t>(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
-      else if (XMLString::equals(this->eq_.leftExtMul, localname))
-	return new ExtMulHandler<series_set_elt_t>(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()), true);
-      else if (XMLString::equals(this->eq_.rightExtMul, localname))
-	return new ExtMulHandler<series_set_elt_t>(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()), false);
-      else if (XMLString::equals(this->eq_.sum, localname))
-	return new SumHandler<series_set_elt_t>(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
-      else if (XMLString::equals(this->eq_.product, localname))
-	return new ProductHandler<series_set_elt_t>(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
-      else if (XMLString::equals(this->eq_.one, localname))
-	return new AtomHandler<series_set_elt_t>(this->parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()), this->eq_.one);
-      else if (XMLString::equals(this->eq_.zero, localname))
-	return new AtomHandler<series_set_elt_t>(this->parser_, *this, algebra::zero_as<typename series_set_elt_t::value_t>::of(elt.structure()), this->eq_.zero);
+      if (XMLString::equals(eq_.monElmt, localname))
+	return builders::create_monElmth(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
+      else if (XMLString::equals(eq_.star, localname))
+	return new StarHandler<series_set_elt_t>(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
+      else if (XMLString::equals(eq_.leftExtMul, localname))
+	return new ExtMulHandler<series_set_elt_t>(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()), true);
+      else if (XMLString::equals(eq_.rightExtMul, localname))
+	return new ExtMulHandler<series_set_elt_t>(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()), false);
+      else if (XMLString::equals(eq_.sum, localname))
+	return new SumHandler<series_set_elt_t>(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
+      else if (XMLString::equals(eq_.product, localname))
+	return new ProductHandler<series_set_elt_t>(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()));
+      else if (XMLString::equals(eq_.one, localname))
+	return new AtomHandler<series_set_elt_t>(parser_, *this, algebra::identity_as<typename series_set_elt_t::value_t>::of(elt.structure()), eq_.one);
+      else if (XMLString::equals(eq_.zero, localname))
+	return new AtomHandler<series_set_elt_t>(parser_, *this, algebra::zero_as<typename series_set_elt_t::value_t>::of(elt.structure()), eq_.zero);
       else
 	return 0;
     }

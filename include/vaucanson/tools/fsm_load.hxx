@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 # include <vaucanson/tools/fsm_load.hh>
 # include <map>
 # include <set>
+# include <string>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -39,11 +40,11 @@ namespace vcsn {
 
     struct line_data
     {
-	data_e	     type;
-	unsigned int from;
-	unsigned int to;
-	char	     letter;
-	float	     weight;
+	data_e		type;
+	unsigned int	from;
+	unsigned int	to;
+	std::string	letter;
+	float		weight;
     };
 
     std::pair<std::string, std::string>
@@ -149,13 +150,13 @@ namespace vcsn {
 	  if (i == stock.begin())
 	    automaton.set_initial(to_h[i->from]);
 	  // FIXME: please be generic w.r.t spontaneous transition.
-	  if (i->letter == '1')
+	  if (i->letter == "1")
 	    automaton.add_spontaneous(to_h[i->from],
 				      to_h[i->to]);
 	  else
 	    automaton.add_letter_transition(to_h[i->from],
 					    to_h[i->to],
-					    letter_t(i->letter));
+					    vcsn::algebra::letter_traits<letter_t>::literal_to_letter(i->letter));
 	}
 	else if (i->type == final)
 	{

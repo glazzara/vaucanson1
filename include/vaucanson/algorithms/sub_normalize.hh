@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,6 +31,10 @@
  *
  */
 /** @} */
+
+// INTERFACE: Automaton sub_normalize(const Automaton& a1) { return vcsn::sub_normalize(*a1); }
+// INTERFACE: void sub_normalize_here(Automaton& a1) { return vcsn::sub_normalize_here(*a1); }
+// INTERFACE: bool is_sub_normalized(const Automaton& a1) { return vcsn::is_sub_normalized(*a1); }
 
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/automata/concept/copy.hh>

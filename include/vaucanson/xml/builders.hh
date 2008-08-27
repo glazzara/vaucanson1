@@ -30,6 +30,13 @@
 
 # include <string>
 
+// These includes are here to satisfy sanity checks, but we need a way
+// to force the inclusion of the XML related headers after the automaton
+// type is fully constructed (no undefined_type), and improve sanity
+// checks.
+# include <vaucanson/algebra/implementation/free_monoid/words.hh>
+# include <vaucanson/algebra/implementation/series/series.hh>
+
 # include <xercesc/sax2/Attributes.hpp>
 # include <xercesc/util/XMLString.hpp>
 # include <xercesc/dom/DOM.hpp>
@@ -41,15 +48,55 @@ namespace vcsn
   namespace xml
   {
     /**
-     * monGenHandler
+     * monGenAction
      */
     template <typename T>
+    class monGenAction
+    {
+    public:
+      monGenAction(const T&);
+    };
+
+    // An action on a free monoid (insert monGen inside its alphabet)
+    template <typename T>
+    class monGenAction<vcsn::algebra::FreeMonoid<T> >
+    {
+    public:
+      typedef vcsn::algebra::FreeMonoid<T> self_t;
+      typedef typename self_t::alphabet_t alphabet_t;
+
+      monGenAction(self_t&);
+      void operator () (const std::string&);
+    private:
+      alphabet_t& alphabet_;
+    };
+
+    // An action on a series element (multiply it by monGen)
+    template <typename T, typename U, typename V>
+    class monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >
+    {
+    public:
+      typedef vcsn::Element<vcsn::algebra::Series<T, U>, V> self_t;
+
+      monGenAction(self_t&);
+      void operator () (const std::string&);
+    private:
+      self_t& s_;
+    };
+
+    /**
+     * monGenHandler
+     * 
+     * @arg T the type of the monoid
+     * @arg U the type of the object we will act on
+     */
+    template <typename T, typename U>
     class monGenHandler : public Handler
     {
       public:
 	monGenHandler (xercesc::SAX2XMLReader* parser,
 		     Handler& root,
-		     T& monoid,
+		     const monGenAction<U>& action,
 		     const XMLCh* value = 0);
 
 	void
@@ -62,8 +109,42 @@ namespace vcsn
 		    const XMLCh* const localname,
 		    const XMLCh* const qname);
       private:
-	T&		monoid_;
 	const XMLCh*	value_;
+
+	// What to do with value_.
+	monGenAction<U>	action_;
+    };
+
+    /**
+     * monGenTupleHandler
+     * 
+     * @arg T the type of the monoid
+     * @arg U the type of the object we will act on
+     */
+    template <typename T, typename U>
+    class monGenTupleHandler : public Handler
+    {
+      public:
+	monGenTupleHandler (xercesc::SAX2XMLReader* parser,
+		     Handler& root,
+		     const monGenAction<U>& action);
+
+	void
+	start (const XMLCh* const uri,
+		      const XMLCh* const localname,
+		      const XMLCh* const qname,
+		      const xercesc::Attributes& attrs);
+	void
+	end (const XMLCh* const uri,
+		    const XMLCh* const localname,
+		    const XMLCh* const qname);
+      private:
+	std::string	value_;
+	bool		wait_begin_;
+	int		count_;
+
+	// What to do with value_.
+	monGenAction<U>	action_;
     };
 
     /**
@@ -107,11 +188,6 @@ namespace vcsn
 		      const xercesc::Attributes& attrs,
 		      xercesc::SAX2XMLReader* parser,
 		      Handler& root);
-
-      template <typename T>
-      void
-      insert_generator(T& monoid,
-		       const std::string& str);
 
     } // !builders
 
@@ -228,9 +304,16 @@ namespace vcsn
 			  xercesc::DOMDocument* doc,
 			  xercesc::DOMElement* root);
 
-    } // !builders
-  } // !xml
-} // !vcsn
+      // Functor to allow partial specialization.
+      template <typename T>
+      struct
+      create_monGen_node;
+
+    } // ! builders
+
+  } // ! xml
+
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/xml/builders.hxx>

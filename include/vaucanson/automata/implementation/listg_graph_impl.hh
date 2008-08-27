@@ -396,21 +396,20 @@ namespace vcsn
   };
 
   // Explain how to project type of transducer into input automaton type.
-  template <class S,
-	    class Kind,
+  template <class Kind,
 	    class WordValue,
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct projection_traits<S, listg::Graph<Kind,
-					    WordValue,
-					    WeightValue,
-					    SeriesValue,
-					    Letter,
-					    Tag,
-					    GeometryCoords> >
+  struct projection_traits<listg::Graph<Kind,
+			   WordValue,
+			   WeightValue,
+			   SeriesValue,
+			   Letter,
+			   Tag,
+			   GeometryCoords> >
   {
     typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
 			  Letter, Tag, GeometryCoords>
@@ -433,6 +432,48 @@ namespace vcsn
 		  Tag,
 		  GeometryCoords>
 			      ret;
+  };
+
+  // Input projection for FMP transducers.
+  template <class Kind,
+            class WordValue,
+            class WeightValue,
+            class SeriesValue,
+            class Letter,
+            class Tag,
+            class GeometryCoords>
+  struct fmp_projection_traits<listg::Graph<Kind,
+                           WordValue,
+                           WeightValue,
+                           SeriesValue,
+                           Letter,
+                           Tag,
+                           GeometryCoords> >
+  {
+    typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
+                         Letter, Tag, GeometryCoords>
+                                  self_t;
+
+    typedef typename automaton_traits<self_t>::semiring_elt_value_t
+                                  semiring_elt_value_t;
+
+    typedef typename WordValue::first_type monoid_elt_value_t;
+    typedef typename monoid_elt_value_t::value_type letter_t;
+
+    typedef typename algebra::mute_series_impl<SeriesValue,
+                                               semiring_elt_value_t,
+					       monoid_elt_value_t>::ret
+				  series_set_elt_value_t;
+
+    typedef
+    listg::Graph<Kind,
+          monoid_elt_value_t,
+          semiring_elt_value_t,
+          series_set_elt_value_t,
+          letter_t,
+          Tag,
+          GeometryCoords>
+                                  ret;
   };
 
   template <class Kind,
@@ -473,6 +514,47 @@ namespace vcsn
 		  Tag,
 		  GeometryCoords>
 			      ret;
+  };
+
+  // Output projection for FMP transducers.
+  template <class Kind,
+            class WordValue,
+            class WeightValue,
+            class SeriesValue,
+            class Letter,
+            class Tag,
+            class GeometryCoords>
+  struct fmp_output_projection_traits<listg::Graph<Kind,
+                                        WordValue,
+                                        WeightValue,
+                                        SeriesValue,
+                                        Letter,
+                                        Tag,
+                                        GeometryCoords> >
+  {
+    typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
+                         Letter, Tag, GeometryCoords>
+                                  self_t;
+
+    typedef typename WordValue::second_type monoid_elt_value_t;
+    typedef typename monoid_elt_value_t::value_type letter_t;
+
+    typedef typename automaton_traits<self_t>::semiring_elt_value_t
+                                  semiring_elt_value_t;
+
+    typedef typename algebra::mute_series_impl<SeriesValue,
+	    semiring_elt_value_t,
+	    monoid_elt_value_t>::ret series_set_elt_value_t;
+
+    typedef
+    listg::Graph<Kind,
+          monoid_elt_value_t,
+          semiring_elt_value_t,
+          series_set_elt_value_t,
+          letter_t,
+          Tag,
+          GeometryCoords>
+                                  ret;
   };
 
   // Explain how to extend an input automaton into a transducer.

@@ -12,7 +12,7 @@ generate_one_section ()
 
 EOF
 
-  ! which $vcsn > /dev/null 2>&1 && exit 1
+  ($vcsn --version > /dev/null) || exit 1
   $vcsn list-automata |
     sed -n 's/ *- *//p' |
     while read a

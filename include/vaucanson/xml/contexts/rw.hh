@@ -87,6 +87,13 @@ namespace vcsn
     SParamTRANS
     class WeightHandler<TRANSseries > : public RegexpHandler<TRANSseries >
     {
+      // Access to base class protected members.
+      using RegexpHandler<TRANSseries >::eq_;
+      using RegexpHandler<TRANSseries >::parser_;
+      using RegexpHandler<TRANSseries >::param_;
+      using RegexpHandler<TRANSseries >::root_;
+      using RegexpHandler<TRANSseries >::end_;
+
       public:
 	WeightHandler (xercesc::SAX2XMLReader* parser,
 		       Handler& root,

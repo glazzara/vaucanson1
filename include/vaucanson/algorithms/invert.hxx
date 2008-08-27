@@ -146,9 +146,9 @@ namespace vcsn
   }
 
 
-  /*----------------------------------.
-  | Specialization for  transducers.  |
-  `----------------------------------*/
+  /*-------------------------------------.
+  | Specialization for FMP transducers.  |
+  `-------------------------------------*/
 
 
   // Invert `label' and store the result in `res'.
@@ -221,9 +221,9 @@ namespace vcsn
 
 
 
-  /*---------------------------.
-  | Dispatch for  tranducers.  |
-  `---------------------------*/
+  /*------------------------------.
+  | Dispatch for FMP tranducers.  |
+  `------------------------------*/
 
   template<typename S, typename T,
 	   typename M1, typename M2>

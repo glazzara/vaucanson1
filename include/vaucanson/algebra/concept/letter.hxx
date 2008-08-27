@@ -29,6 +29,22 @@ namespace vcsn {
 
     // Dummy implementation.
     template <typename L>
+    std::string
+    letter_traits<L>::kind()
+    {
+      return 0;
+    }
+
+    // Dummy implementation.
+    template <typename L>
+    int
+    letter_traits<L>::dim()
+    {
+      return 0;
+    }
+
+    // Dummy implementation.
+    template <typename L>
     L
     letter_traits<L>::literal_to_letter(const std::string&)
     {

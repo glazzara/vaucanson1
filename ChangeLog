@@ -1,3 +1,116 @@
+2008-08-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+=== New letter traits ===
+
+Add the kind() and dim() letter traits, to supplement the lack of useful monoid traits.
+
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concept/letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx: New traits.
+
+=== Improve input_projection_helper and output_projection_helper traits ===
+
+Add new fmp_*_projection_traits to correctly construct the projection types. Fix
+non-working input_projection_helper.
+
+	* include/vaucanson/automata/concept/transducer.hh: Improve traits.
+	* include/vaucanson/automata/concept/transducer_base.hh: New traits.
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh,
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: New trait,
+	update existing one.
+
+=== Add support for letters of type std::pair<U, V> ===
+
+Create instances for U and V in {char, int}. It closes ticket #152. Create four
+new vcsn contexts.
+
+	* configure.ac: Add new taf-kit instances.
+	* include/Makefile.am: Add new context to the distribution.
+	* include/vaucanson/automata/generic_contexts/char_char_boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/char_char_boolean_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_char_boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_char_boolean_automaton_structures.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_int_boolean_automaton.hh: New.
+	* include/vaucanson/automata/generic_contexts/int_int_boolean_automaton_structures.hh: New.
+	* include/vaucanson/contexts/char_char_letter.thh: New.
+	* include/vaucanson/contexts/char_int_letter.thh: New.
+	* include/vaucanson/contexts/int_char_letter.thh: New.
+	* include/vaucanson/contexts/int_int_letter.thh: New.
+	* include/vaucanson/misc/hash.hh,
+	* include/vaucanson/misc/hash.hxx: Add new hash for pair letters.
+	* taf-kit/src/Makefile.am: Add four new instances.
+	* taf-kit/tests/Makefile.am: New tests.
+	* taf-kit/tests/vcsn-char-char-b.test: New.
+	* taf-kit/tests/vcsn-char-int-b.test: New.
+	* taf-kit/tests/vcsn-int-char-b.test: New.
+	* taf-kit/tests/vcsn-int-int-b.test: New.
+
+=== XML support for letters of type std::pair<U, V> ===
+
+	* include/vaucanson/xml/xmleq.hh,
+	* include/vaucanson/xml/xmleq.hxx,
+	* include/vaucanson/xml/regexp.hh,
+	* include/vaucanson/xml/regexp.hxx,
+	* include/vaucanson/xml/builders.hh,
+	* include/vaucanson/xml/builders.hxx: Add support for monCompGen
+	markup.
+
+=== XML cleanup (this pointer removal) ===
+
+Use '''using''' syntax to better show handler dependencies, cleanup the code,
+and normalize syntax.
+
+	* include/vaucanson/xml/contexts/fmp.hh,
+	* include/vaucanson/xml/contexts/fmp.hxx,
+	* include/vaucanson/xml/contexts/rw.hh,
+	* include/vaucanson/xml/contexts/rw.hxx,
+	* include/vaucanson/xml/handlers_base.hxx,
+	* include/vaucanson/xml/parsers.hxx,
+	* include/vaucanson/xml/printers.hxx,
+	* include/vaucanson/xml/regexp.hh,
+	* include/vaucanson/xml/regexp.hxx,
+	* include/vaucanson/xml/xml_exp_visitor.hxx: Here.
+
+=== Link Taf-Kit instances to their respective libraries ===
+
+Add missing algorithms to some vcsn libraries and '''really''' link all taf-kit
+instances to them.
+
+	* include/vaucanson/algorithms/composition_cover.hh,
+	* include/vaucanson/algorithms/domain.hh,
+	* include/vaucanson/algorithms/evaluation_fmp.hh,
+	* include/vaucanson/algorithms/invert.hh,
+	* include/vaucanson/algorithms/normalized_composition.hh,
+	* include/vaucanson/algorithms/sub_normalize.hh: Add missing INTERFACE.
+	* lib/Makefile.am: Add four new library.
+	* lib/generate_libvcsn.rb: Add two new type. Fix filtering and update it.
+	* taf-kit/src/Makefile.am: Use correct flags and libraries.
+
+=== Miscellaneous ===
+
+	* doc/manual/generate-automata.sh: Be more portable to check
+	existence of executable in PATH (ala autotools).
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh: Add missing
+	literal_to_letter, change defaults for OPAR, CPAR, epsilon and zero.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx: Improve
+	op_parse.
+	* include/vaucanson/algorithms/evaluation_fmp.hxx,
+	* include/vaucanson/algorithms/evaluation_fmp.hh: Reorder template arguments.
+	* taf-kit/src/edition_commands.hxx,
+	* include/vaucanson/algorithms/invert.hxx: Typo.
+	* vaucanswig/expand.sh: Add some filtering, now that FMP only algorithms
+	got INTERFACE.
+	* include/vaucanson/tools/fsm_load.hxx: Be more generic w.r.t. letter type.
+	* src/demos/algorithms/equivalent_functions.cc: Reorder headers inclusion.
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh:
+	Fix a bug now that more letter types are supported.
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/z_commands.cc: Update copyright notice.
+
 2008-08-23  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Bump to version 1.2.91.

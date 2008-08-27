@@ -97,7 +97,7 @@ namespace vcsn
     T&
     RegexpHandler<T>::series()
     {
-      return this->param_;
+      return param_;
     }
 
     /*
@@ -109,7 +109,7 @@ namespace vcsn
 			       T param)
       : RegexpHandler<T>(parser, root, param)
     {
-      this->end_ = this->eq_.star;
+      end_ = eq_.star;
     }
 
     template <typename T>
@@ -121,8 +121,8 @@ namespace vcsn
     {
       using namespace xercesc;
       in_++;
-      if (in_ == 1 && (this->lefth_ = this->create(localname)))
-	this->parser_->setContentHandler(this->lefth_);
+      if (in_ == 1 && (lefth_ = create(localname)))
+	parser_->setContentHandler(lefth_);
       else
 	error::token(localname);
     }
@@ -134,10 +134,10 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
+      if (XMLString::equals(end_, localname))
       {
-	this->param_ = this->lefth_->series().star();
-	this->parser_->setContentHandler(&this->root_);
+	param_ = lefth_->series().star();
+	parser_->setContentHandler(&root_);
       }
       else
 	error::token(localname);
@@ -172,8 +172,8 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
-	this->parser_->setContentHandler(&this->root_);
+      if (XMLString::equals(end_, localname))
+	parser_->setContentHandler(&root_);
       else
 	error::token(localname);
     }
@@ -187,7 +187,7 @@ namespace vcsn
 			       T param)
       : RegexpHandler<T>(parser, root, param)
     {
-      this->end_ = this->eq_.weight;
+      end_ = eq_.weight;
     }
 
     template <typename T>
@@ -207,8 +207,8 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
-	this->parser_->setContentHandler(&this->root_);
+      if (XMLString::equals(end_, localname))
+	parser_->setContentHandler(&root_);
       else
 	error::token(localname);
     }
@@ -226,9 +226,9 @@ namespace vcsn
 	righth_(0)
     {
       if (left)
-	this->end_ = this->eq_.leftExtMul;
+	end_ = eq_.leftExtMul;
       else
-	this->end_ = this->eq_.rightExtMul;
+	end_ = eq_.rightExtMul;
     }
 
     template <typename T>
@@ -245,11 +245,11 @@ namespace vcsn
 				 const xercesc::Attributes& attrs)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->eq_.weight, localname) &&
-	  (this->lefth_ = this->create_weight(attrs)))
-	this->parser_->setContentHandler(this->lefth_);
-      else if ((this->righth_ = this->create(localname)))
-	this->parser_->setContentHandler(this->righth_);
+      if (XMLString::equals(eq_.weight, localname) &&
+	  (lefth_ = create_weight(attrs)))
+	parser_->setContentHandler(lefth_);
+      else if ((righth_ = create(localname)))
+	parser_->setContentHandler(righth_);
       else
 	error::token(localname);
     }
@@ -261,13 +261,13 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
+      if (XMLString::equals(end_, localname))
       {
 	if (left_)
-	  this->param_ = this->lefth_->series() * this->righth_->series();
+	  param_ = lefth_->series() * righth_->series();
 	else
-	  this->param_ = this->righth_->series() * this->lefth_->series();
-	this->parser_->setContentHandler(&this->root_);
+	  param_ = righth_->series() * lefth_->series();
+	parser_->setContentHandler(&root_);
       }
       else
 	error::token(localname);
@@ -285,7 +285,7 @@ namespace vcsn
 	in_(1),
 	righth_(0)
     {
-      this->end_ = this->eq_.product;
+      end_ = eq_.product;
     }
 
     template <typename T>
@@ -302,10 +302,10 @@ namespace vcsn
 				 const xercesc::Attributes&)
     {
       using namespace xercesc;
-      if (in_ == 1 && (this->lefth_ = this->create(localname)))
-	this->parser_->setContentHandler(this->lefth_);
-      else if (in_ == 2 && (this->righth_ = this->create(localname)))
-	this->parser_->setContentHandler(this->righth_);
+      if (in_ == 1 && (lefth_ = create(localname)))
+	parser_->setContentHandler(lefth_);
+      else if (in_ == 2 && (righth_ = create(localname)))
+	parser_->setContentHandler(righth_);
       else
 	error::token(localname);
       in_++;
@@ -318,12 +318,12 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
+      if (XMLString::equals(end_, localname))
       {
-	this->param_ = this->lefth_->series() * this->righth_->series();
-	this->parser_->setContentHandler(&this->root_);
+	param_ = lefth_->series() * righth_->series();
+	parser_->setContentHandler(&root_);
       }
-      else if (!XMLString::equals(this->eq_.monGen, localname))
+      else if (!XMLString::equals(eq_.monGen, localname))
 	error::token(localname);
     }
     /*
@@ -337,7 +337,7 @@ namespace vcsn
 	in_(1),
 	righth_(0)
     {
-      this->end_ = this->eq_.sum;
+      end_ = eq_.sum;
     }
 
     template <typename T>
@@ -354,12 +354,14 @@ namespace vcsn
 				 const xercesc::Attributes&)
     {
       using namespace xercesc;
-      if (in_ == 1 && (this->lefth_ = this->create(localname)))
-	this->parser_->setContentHandler(this->lefth_);
-      else if (in_ == 2 && (this->righth_ = this->create(localname)))
-	this->parser_->setContentHandler(this->righth_);
+
+      if (in_ == 1 && (lefth_ = create(localname)))
+	parser_->setContentHandler(lefth_);
+      else if (in_ == 2 && (righth_ = create(localname)))
+	parser_->setContentHandler(righth_);
       else
 	error::token(localname);
+
       in_++;
     }
 
@@ -370,12 +372,13 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
+
+      if (XMLString::equals(end_, localname))
       {
-	this->param_ = this->lefth_->series() + this->righth_->series();
-	this->parser_->setContentHandler(&this->root_);
+	param_ = lefth_->series() + righth_->series();
+	parser_->setContentHandler(&root_);
       }
-      else if (!XMLString::equals(this->eq_.monGen, localname))
+      else if (!XMLString::equals(eq_.monGen, localname))
 	error::token(localname);
     }
 
@@ -386,9 +389,10 @@ namespace vcsn
     MonElmtHandler<T>::MonElmtHandler (xercesc::SAX2XMLReader* parser,
 			       Handler& root,
 			       T param)
-      : RegexpHandler<T>(parser, root, param)
+      : RegexpHandler<T>(parser, root, param),
+        mongenh_(0)
     {
-      this->end_ = this->eq_.monElmt;
+      end_ = eq_.monElmt;
     }
 
     template <typename T>
@@ -398,17 +402,35 @@ namespace vcsn
 				 const XMLCh* const,
 				 const xercesc::Attributes& attrs)
     {
+      // FIXME: This code is very similar to the one used by
+      // FreeMonoidHandler::start. Ultimately we should provide a way to
+      // parse "sequences of" (to promote reusability, and ease transcription
+      // from the XSD to parser code).
       using namespace xercesc;
-      if (XMLString::equals(this->eq_.monGen, localname))
+
+      if (XMLString::equals(eq_.monGen, localname))
       {
-	typename T::monoid_elt_t m(this->param_.structure().monoid());
-	const std::string val(xmlstr(tools::get_attribute(attrs, "value")));
-	std::set<char> escaped;
-	std::string::const_iterator i = val.begin();
-	if (!parse_word(m, val, i, escaped))
-	  error::attrs(localname, "value", val);
-	T tmp(this->param_.structure(), m);
-	this->param_ = this->param_ * tmp;
+	typedef typename T::set_t::monoid_t monoid_t;
+	typedef T actee_t;
+
+	// When we have a monGen, we will concatenate param_ with it.
+	monGenAction<actee_t> action(param_);
+
+	// Delete the old handler.
+	if (mongenh_)
+	  delete mongenh_;
+
+	// Choose statically the kind of generator.
+	if (algebra::letter_traits<typename monoid_t::alphabet_t::letter_t>::kind() == "simple")
+	{
+	  const XMLCh* value = tools::get_attribute(attrs, "value");
+	  mongenh_ = new monGenHandler<monoid_t, actee_t>(parser_, *this, action, value);
+	}
+	else
+	  mongenh_ = new monGenTupleHandler<monoid_t, actee_t>(parser_, *this, action);
+
+	// Setup the new handler.
+	parser_->setContentHandler(mongenh_);
       }
       else
 	error::token(localname);
@@ -421,9 +443,17 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
-	this->parser_->setContentHandler(&this->root_);
-      else if (!XMLString::equals(this->eq_.monGen, localname))
+
+      if (XMLString::equals(end_, localname))
+      {
+	// We are done with the "parent", so delete remaining data.
+	if (mongenh_)
+	  delete mongenh_;
+
+	// Go up one level.
+	parser_->setContentHandler(&root_);
+      }
+      else if (!XMLString::equals(eq_.monGen, localname))
 	error::token(localname);
     }
 

@@ -39,6 +39,19 @@ namespace vcsn
       return c;
     }
 
+    template <typename U, typename V>
+    inline
+    std::size_t hash_label<std::pair<U, V> >::operator()(const std::pair<U, V>& p) const
+    {
+      std::size_t seed (0);
+
+      // FIXME: boost should have hash for pairs OOB
+      ::boost::hash_combine(seed, p.first);
+      ::boost::hash_combine(seed, p.second);
+
+      return seed;
+    }
+
     template <typename Word, typename Weight>
     std::size_t
     hash_label<algebra::polynom<Word, Weight> >::operator() (const algebra::polynom<Word, Weight>& l) const

@@ -14,9 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-
 #ifndef VCSN_XML_BUILDERS_HXX
 # define VCSN_XML_BUILDERS_HXX
+
+# include <sstream>
 
 # include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
@@ -29,22 +30,66 @@ namespace vcsn
   namespace xml
   {
     /**
-     * monGenHandler
+     * monGenAction
      */
     template <typename T>
-    monGenHandler<T>::monGenHandler (xercesc::SAX2XMLReader* parser,
-				 Handler& root,
-				 T& monoid,
-				 const XMLCh* value)
-      : Handler(parser, root),
-	monoid_(monoid),
-	value_(value)
+    monGenAction<T>::monGenAction(const T&)
     {
+      static_error(need_to_specialize_monGenAction_for_T)
     }
 
     template <typename T>
+    monGenAction<vcsn::algebra::FreeMonoid<T> >::
+    monGenAction(self_t& monoid)
+    : alphabet_(monoid.alphabet())
+    {
+    }
+
+    template <typename T, typename U, typename V>
+    monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >::
+    monGenAction(self_t& s)
+    : s_(s)
+    {
+    }
+
+    // Real work done here (insertion).
+    template <typename T>
     void
-    monGenHandler<T>::start (const XMLCh* const,
+    monGenAction<vcsn::algebra::FreeMonoid<T> >::
+    operator () (const std::string& str)
+    {
+      alphabet_.insert(str);
+    }
+
+    // Real work done here (concatanation).
+    template <typename T, typename U, typename V>
+    void
+    monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >::
+    operator () (const std::string& str)
+    {
+      typename self_t::monoid_elt_t m(s_.structure().monoid(), str);
+      self_t tmp(s_.structure(), m);
+
+      s_ = s_ * tmp;
+    }
+
+    /**
+     * monGenHandler
+     */
+    template <typename T, typename U>
+    monGenHandler<T, U>::monGenHandler (xercesc::SAX2XMLReader* parser,
+				 Handler& root,
+				 const monGenAction<U>& action,
+				 const XMLCh* value)
+      : Handler(parser, root),
+	value_(value),
+	action_(action)
+    {
+    }
+
+    template <typename T, typename U>
+    void
+    monGenHandler<T, U>::start (const XMLCh* const,
 				 const XMLCh* const localname,
 				 const XMLCh* const,
 				 const xercesc::Attributes&)
@@ -52,9 +97,9 @@ namespace vcsn
       error::token(localname);
     }
 
-    template <typename T>
+    template <typename T, typename U>
     void
-    monGenHandler<T>::end (const XMLCh* const,
+    monGenHandler<T, U>::end (const XMLCh* const,
 			       const XMLCh* const localname,
 			       const XMLCh* const)
     {
@@ -63,13 +108,75 @@ namespace vcsn
 	if (value_)
 	{
 	  std::string letter = xmlstr(value_);
-	  builders::insert_generator(monoid_.alphabet(), letter);
+	  action_(letter);
 	  parser_->setContentHandler(&root_);
 	}
 	else
 	{
 	  error::missattrs(localname, "value");
 	}
+      }
+      else
+	error::token(localname);
+    }
+
+    /**
+     * monGenTupleHandler
+     */
+    template <typename T, typename U>
+    monGenTupleHandler<T, U>::monGenTupleHandler (xercesc::SAX2XMLReader* parser,
+				 Handler& root,
+				 const monGenAction<U>& action)
+      : Handler(parser, root),
+	value_("("),
+	wait_begin_(true),
+	count_(0),
+	action_(action)
+    {
+    }
+
+    template <typename T, typename U>
+    void
+    monGenTupleHandler<T, U>::start (const XMLCh* const,
+				 const XMLCh* const localname,
+				 const XMLCh* const,
+				 const xercesc::Attributes& attrs)
+    {
+      if (xercesc::XMLString::equals(eq_.monCompGen, localname) && wait_begin_)
+      {
+	wait_begin_ = false;
+	const XMLCh* attr = tools::get_attribute(attrs, "value");
+	if (!attr)
+	  error::missattrs(localname, "value");
+	value_ += xmlstr(attr);
+	if (count_ == algebra::letter_traits<typename T::alphabet_t::letter_t>::dim() - 2)
+	  value_ += ",";
+      }
+      else
+	error::token(localname);
+    }
+
+    template <typename T, typename U>
+    void
+    monGenTupleHandler<T, U>::end (const XMLCh* const,
+			       const XMLCh* const localname,
+			       const XMLCh* const)
+    {
+      int dim = algebra::letter_traits<typename T::alphabet_t::letter_t>::
+      dim();
+
+      if (xercesc::XMLString::equals(eq_.monGen, localname)
+	  && count_ == dim)
+      {
+	value_ += ")";
+	action_(value_);
+	parser_->setContentHandler(&root_);
+      }
+      else if (xercesc::XMLString::equals(eq_.monCompGen, localname)
+	       && !wait_begin_ && count_ < dim)
+      {
+	wait_begin_ = true;
+	count_++;
       }
       else
 	error::token(localname);
@@ -96,20 +203,35 @@ namespace vcsn
 				 const XMLCh* const,
 				 const xercesc::Attributes& attrs)
     {
-      if (xercesc::XMLString::equals(eq_.monGen, localname))
+      using namespace xercesc;
+
+      if (XMLString::equals(eq_.monGen, localname))
       {
-	const XMLCh* value = tools::get_attribute(attrs, "value");
+	// When we have a monGen, we will insert it in the monoid alphabet.
+	monGenAction<T> action(monoid_);
+
+	// Delete the old handler.
 	if (mongenh_)
 	  delete mongenh_;
-	mongenh_ = new monGenHandler<T>(parser_, *this, monoid_, value);
+
+	// Choose statically the kind of generator.
+	if (algebra::letter_traits<typename T::alphabet_t::letter_t>::kind() == "simple")
+	{
+	  const XMLCh* value = tools::get_attribute(attrs, "value");
+	  mongenh_ = new monGenHandler<T, T>(parser_, *this, action, value);
+	}
+	else
+	  mongenh_ = new monGenTupleHandler<T, T>(parser_, *this, action);
+
+	// Setup the new handler.
 	parser_->setContentHandler(mongenh_);
       }
-      else if (xercesc::XMLString::equals(eq_.genSort, localname))
+      else if (XMLString::equals(eq_.genSort, localname))
       {
-	/* FIXME should store informations of genSort to ensure monoid consistency */
+	// FIXME: we should store the informations of genSort to ensure monoid consistency.
 	parser_->setContentHandler(&unsuph_);
       }
-      else if (xercesc::XMLString::equals(eq_.writingData, localname))
+      else if (XMLString::equals(eq_.writingData, localname))
 	parser_->setContentHandler(&unsuph_);
       else
 	error::token(localname);
@@ -121,13 +243,18 @@ namespace vcsn
 			       const XMLCh* const localname,
 			       const XMLCh* const)
     {
-      if (xercesc::XMLString::equals(eq_.monoid, localname))
+      using namespace xercesc;
+
+      if (XMLString::equals(eq_.monoid, localname))
       {
+	// We are done with the monoid, so delete remaining data.
 	if (mongenh_)
 	  delete mongenh_;
+
+	// Go up one level.
 	parser_->setContentHandler(&root_);
       }
-      else if (!xercesc::XMLString::equals(eq_.monGen, localname))
+      else if (!XMLString::equals(eq_.monGen, localname))
 	error::token(localname);
     }
 
@@ -157,14 +284,6 @@ namespace vcsn
 	return new vcsn::xml::FreeMonoidHandler<T>(parser, root, monoid);
       }
 
-      // FIXME should specialize type T (char ? int?)
-      template <typename T>
-      void
-      insert_generator(T& monoid,
-		       const std::string& str)
-      {
-	monoid.insert(str);
-      }
     } // !builders
     /**
      * NumSemiringHandler
@@ -354,24 +473,30 @@ namespace vcsn
       template <typename T>
       void
       create_monoid_node(const T& aut,
-			   xercesc::DOMDocument* doc,
-			   xercesc::DOMElement* root)
+			 xercesc::DOMDocument* doc,
+		       	 xercesc::DOMElement* root)
       {
+	std::string letter_kind = algebra::letter_traits<typename T::monoid_t::alphabet_t::letter_t>::kind();
 	xercesc::DOMElement* node = tools::create_element(doc, "monoid");
 	tools::set_attribute(node, "type", "free");
 	tools::set_attribute(node, "genDescrip", "enum");
-	tools::set_attribute(node, "genKind", "simple"); // FIXME get it
+	tools::set_attribute(node, "genKind", letter_kind);
 	root->appendChild(node);
+
 	typedef typename T::monoid_t::alphabet_t::const_iterator alphabet_iterator;
+
+	create_monGen_node<typename T::monoid_t::alphabet_t::letter_t> monGen_maker;
 	for_all_letters(l, aut.structure().series().monoid().alphabet())
+	monGen_maker(*l, doc, node);
+
+	if (letter_kind == "simple")
+	  tools::set_attribute(node, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin())));
+	else
 	{
-	  std::ostringstream letter;
-	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
-	  letter << *l;
-	  tools::set_attribute(gen, "value", letter.str());
-	  node->appendChild(gen);
+	  std::stringstream genDim;
+	  genDim << algebra::letter_traits<typename T::monoid_t::alphabet_t::letter_t>::dim();
+	  tools::set_attribute(node, "genDim", genDim.str());
 	}
-	tools::set_attribute(node, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin())));
       }
 
       template <typename T>
@@ -399,24 +524,72 @@ namespace vcsn
 			  xercesc::DOMElement* root)
       {
 	xercesc::DOMElement* node;
+
 	if (word.empty())
 	  node = tools::create_element(doc, "one");
 	else
 	{
 	  node = tools::create_element(doc, "monElmt");
+	  create_monGen_node<typename U::value_type> monGen_maker;
 	  for (typename U::const_iterator i = word.begin(); i != word.end(); ++i)
-	  {
-	    xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
-	    tools::set_attribute(gen, "value",
-				 algebra::letter_traits<typename U::value_type>::
-				 letter_to_literal(*i));
-	    node->appendChild(gen);
-	  }
+	    monGen_maker(*i, doc, node);
 	}
+
 	root->appendChild(node);
       }
-    } // !builders
-  } // !xml
-} // !vcsn
 
-#endif // !VCSN_XML_BUILDERS_HXX
+      // FIXME: We should be able to specialize for all type U,
+      // whose letter_traits::kind() is "simple".
+      template <typename U>
+      struct create_monGen_node
+      {
+	void
+	operator()(const U& letter,
+		   xercesc::DOMDocument* doc,
+		   xercesc::DOMElement* root)
+	{
+	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
+
+	  tools::set_attribute(gen, "value",
+			       algebra::letter_traits<U>::
+			       letter_to_literal(letter));
+
+	  root->appendChild(gen);
+	}
+      };
+
+      // FIXME: We should be able to specialize for all type U,
+      // whose kind() is "tuple" and dim() is 2 and has_first is
+      // true and has_second is true.
+      template <typename U, typename V>
+      struct create_monGen_node<std::pair<U, V> >
+      {
+	void
+	operator()(const std::pair<U, V>& letter,
+		   xercesc::DOMDocument* doc,
+		   xercesc::DOMElement* root)
+	{
+	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
+
+	  std::stringstream sstr_first;
+	  std::stringstream sstr_second;
+	  xercesc::DOMElement* first = tools::create_element(doc, "monCompGen");
+	  xercesc::DOMElement* second = tools::create_element(doc, "monCompGen");
+	  sstr_first << letter.first;
+	  sstr_second << letter.second;
+	  tools::set_attribute(first, "value", sstr_first.str());
+	  tools::set_attribute(second, "value", sstr_second.str());
+	  gen->appendChild(first);
+	  gen->appendChild(second);
+
+	  root->appendChild(gen);
+	}
+      };
+
+    } // ! builders
+
+  } // ! xml
+
+} // ! vcsn
+
+#endif // ! VCSN_XML_BUILDERS_HXX

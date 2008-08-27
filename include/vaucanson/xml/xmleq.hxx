@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,6 +33,7 @@ namespace vcsn
       genCompSort = xercesc::XMLString::transcode("genCompSort");
       genComp = xercesc::XMLString::transcode("genComp");
       monGen = xercesc::XMLString::transcode("monGen");
+      monCompGen = xercesc::XMLString::transcode("monCompGen");
 
       drawing = xercesc::XMLString::transcode("drawingData");
       geometry = xercesc::XMLString::transcode("geometricData");
@@ -75,6 +76,7 @@ namespace vcsn
       xercesc::XMLString::release(&genCompSort);
       xercesc::XMLString::release(&genComp);
       xercesc::XMLString::release(&monGen);
+      xercesc::XMLString::release(&monCompGen);
 
       xercesc::XMLString::release(&drawing);
       xercesc::XMLString::release(&geometry);

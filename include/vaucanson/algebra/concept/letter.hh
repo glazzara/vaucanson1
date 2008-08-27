@@ -42,6 +42,11 @@ namespace vcsn {
       /// A class modeling the letter concept must have the
       /// following traits:
 
+      /// A tag to describe the kind of letter (simple or tuple + dim)
+      // FIXME: we must add traits to monoids to handle this better
+      static std::string kind();
+      static int dim();
+
       /// Provide a way to create a letter from its literal
       /// representation:
       static L literal_to_letter(const std::string&);

@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -67,16 +68,31 @@ namespace vcsn {
       typedef undefined_type ret;
   };
 
-  template <class S, class T>
+  template <class T>
   struct projection_traits
   {
       typedef undefined_type	ret;
   };
 
   template <class T>
-  struct output_projection_traits
+  struct fmp_projection_traits
   {
       typedef undefined_type	ret;
+  };
+
+  // FIXME: the semantic should be defined more precisely.
+  // What is the output "on a graph" (it is well defined with
+  // transducers)
+  template <class T>
+  struct output_projection_traits
+  {
+    typedef undefined_type	ret;
+  };
+
+  template <class T>
+  struct fmp_output_projection_traits
+  {
+    typedef undefined_type	ret;
   };
 
   /*-----------------------------------.

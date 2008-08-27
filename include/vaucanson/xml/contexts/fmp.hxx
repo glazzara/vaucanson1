@@ -123,7 +123,7 @@ namespace vcsn
 	m1_(param.structure().monoid().first_monoid()),
 	m2_(param.structure().monoid().second_monoid())
     {
-      this->end_ = this->eq_.monElmt;
+      end_ = eq_.monElmt;
     }
 
     template <typename T>
@@ -134,27 +134,27 @@ namespace vcsn
 				 const xercesc::Attributes& attrs)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->eq_.monElmt, localname))
+      if (XMLString::equals(eq_.monElmt, localname))
       {
 	in_++;
 	count_++;
 	if (in_ > 2)
 	  error::token(localname);
       }
-      else if (XMLString::equals(this->eq_.one, localname) && (in_ == 1))
+      else if (XMLString::equals(eq_.one, localname) && (in_ == 1))
       {
 	in_++;
 	count_++;
 	if (count_ == 2)
 	  m1_ = algebra::identity_as<typename T::monoid_elt_t::first_monoid_elt_value_t>
-	    ::of(this->param_.structure().monoid().first_monoid());
+	    ::of(param_.structure().monoid().first_monoid());
 	else if (count_ == 3)
 	  m2_ = algebra::identity_as<typename T::monoid_elt_t::second_monoid_elt_value_t>
-	    ::of(this->param_.structure().monoid().second_monoid());
+	    ::of(param_.structure().monoid().second_monoid());
 	else
 	  error::token(localname);
       }
-      else if (XMLString::equals(this->eq_.monGen, localname))
+      else if (XMLString::equals(eq_.monGen, localname))
       {
 	const std::string val(xmlstr(tools::get_attribute(attrs, "value")));
 	std::set<char> escaped;
@@ -183,22 +183,22 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      if (XMLString::equals(this->end_, localname))
+      if (XMLString::equals(end_, localname))
       {
 	if (in_ == 1 && count_ == 3)
 	{
 	  // FIXME awful... but didn't find an easier way.
 	  typename T::monoid_elt_value_t m(m1_.value(), m2_.value());
 	  typename T::semiring_elt_value_t w =
-	    algebra::identity_as<typename T::semiring_elt_value_t>::of(this->param_.structure().semiring()).value();
-	  this->param_.assoc(m, w);
-	  this->parser_->setContentHandler(&this->root_);
+	    algebra::identity_as<typename T::semiring_elt_value_t>::of(param_.structure().semiring()).value();
+	  param_.assoc(m, w);
+	  parser_->setContentHandler(&root_);
 	}
 	in_--;
       }
-      else if (XMLString::equals(this->eq_.one, localname))
+      else if (XMLString::equals(eq_.one, localname))
 	in_--;
-      else if (!XMLString::equals(this->eq_.monGen, localname))
+      else if (!XMLString::equals(eq_.monGen, localname))
 	error::token(localname);
     }
 

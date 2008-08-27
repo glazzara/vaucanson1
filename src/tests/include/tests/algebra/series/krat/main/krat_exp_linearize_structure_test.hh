@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ namespace vcsn
       typename
 	std::basic_string<std::pair<U, int>, Traits, Allocator>::const_iterator i;
       for (i = s.begin(); i != s.end(); ++i)
-	o << i->first;
+	o << *i;
       return o;
     }
 
@@ -101,7 +101,11 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
     std::stringstream	lin_str;
 
     exp_str << exp;
-    lin_str << lin;
+    // We need to overwrite the zero and id representation set by
+    // the dumper (as it assumes that the letters are pairs).
+    lin_str <<	vcsn::rat::setzero(vcsn::algebra::letter_traits<letter_t>::default_zero()) << 
+    		vcsn::rat::setid(vcsn::algebra::letter_traits<letter_t>::default_epsilon()) <<
+		lin;
 
     if (exp_str.str() != lin_str.str())
     {

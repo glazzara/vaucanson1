@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson
+// Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +18,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HXX
 
+# include <stdexcept>
 # include <sstream>
 
 # include <vaucanson/algebra/implementation/letter/couple_letter.hh>
@@ -26,33 +28,53 @@ namespace vcsn {
   namespace algebra {
 
     // Specialization for pairs.
+    // FIXME: we should share the taf-kit parser with letters op_parse.
+    // FIXME: this parser is very weak.
     template <typename S, typename U, typename V, typename CharContainer>
-    bool op_parse (const algebra::FreeMonoidBase<S>& set,
-		   std::basic_string< std::pair<U, V> >& v,
-		   const std::string& s,
-		   typename std::string::const_iterator& i,
-		   const CharContainer&)
+    bool op_parse(const algebra::FreeMonoidBase<S>& set,
+		  std::basic_string< std::pair<U, V> >& v,
+	       	  const std::string& s,
+       		  typename std::string::const_iterator& i,
+		  const CharContainer&)
     {
-      typename std::string::const_iterator j = i;
-
-      while (i != s.end ()) {
+      while (i != s.end())
+      {
 	if (*i != '(')
 	  break ;
-	std::string sub (i, s.end ());
-	std::istringstream is (sub);
+
+	std::string sub(i, s.end());
+	std::stringstream is(sub);
+
 	std::pair<U,V> p;
 	is >> p;
-	if (!set.alphabet ().contains (p))
-	  break ;
-	int inc = sub.size () - is.str ().size ();
-	for (int k = 0; k < inc; k++, i++) ;
+	int pos = is.tellg();
+
+	// We didn't parse anything.
+	if (pos == 0)
+	  break;
+
+	// Unknown letter.
+	if (!set.alphabet().contains(p))
+	{
+	  std::stringstream sstr;
+	  sstr << p;
+	  throw std::logic_error(std::string("Letter not in the alphabet: ") + sstr.str());
+	}
+
+	// Advance the iterator.
+	for (int k = 0; k < pos; ++k)
+	  ++i;
+
+	// Concatenate the letter.
 	v += p;
       }
-      return (i != j);
+
+      return (i == s.end());
     }
 
-  } // algebra
-} // vcsn
+  } // ! algebra
+
+} // ! vcsn
 
 namespace std
 {
@@ -91,7 +113,6 @@ namespace std
     return i;
   }
 
-} // std
-
+} // ! std
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HXX

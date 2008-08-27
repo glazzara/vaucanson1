@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
 
 #ifndef VCSN_ALGORITHMS_INVERT_HH
 # define VCSN_ALGORITHMS_INVERT_HH
+
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 /**
  * @file invert.hh
@@ -33,7 +35,10 @@
  * @see invert()
  */
 
-# include <vaucanson/design_pattern/design_pattern.hh>
+// FIXME: the return type must be InvertAutomaton (but alas there is no invert_traits_helper
+// as for now)
+// FIXME: the algorithm shouldn't return a reference
+// INTERFACE: Automaton& invert(const Automaton& a1) { return vcsn::invert(*a1); }
 
 namespace vcsn {
 

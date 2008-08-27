@@ -108,6 +108,13 @@ namespace vcsn
     class ProdMonElmtHandler
       : public RegexpHandler<T>
     {
+      // Access to base class protected members.
+      using RegexpHandler<T>::eq_;
+      using RegexpHandler<T>::parser_;
+      using RegexpHandler<T>::end_;
+      using RegexpHandler<T>::param_;
+      using RegexpHandler<T>::root_;
+
       public:
 	ProdMonElmtHandler (xercesc::SAX2XMLReader* parser,
 			Handler& root,

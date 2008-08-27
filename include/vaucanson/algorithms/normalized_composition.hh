@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -32,6 +32,11 @@
  * @see u_compose()
  */
 /** @} */
+
+// FIXME: The return type must be ComposedAutomaton (but we need a trait, composed_traits_automaton,
+// wich will check if the two type are composable)
+// Do a1 and a2 need to be the same type?
+// INTERFACE: Automaton u_compose(const Automaton& a1, const Automaton& a2) { return vcsn::u_compose(*a1, *a2); }
 
 namespace vcsn {
 

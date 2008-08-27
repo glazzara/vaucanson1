@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -85,8 +85,8 @@ namespace vcsn
     AutParser<Auto>::AutParser (Auto& a, bool check)
       : Parser(check), a_(a)
     {
-      doc_handler_ = new DocHandler<Auto>(this->parser_, *err_handler_, a_, eq_);
-      this->parser_->setContentHandler(doc_handler_);
+      doc_handler_ = new DocHandler<Auto>(parser_, *err_handler_, a_, eq_);
+      parser_->setContentHandler(doc_handler_);
     }
 
     template <typename Auto>
@@ -100,7 +100,7 @@ namespace vcsn
     AutParser<Auto>::parse (std::istream& in)
     {
       CxxInputSource is(&in);
-      this->parser_->parse(is);
+      parser_->parse(is);
     }
   } // !xml
 } // !vcsn

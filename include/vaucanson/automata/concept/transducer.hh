@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -65,18 +65,21 @@ namespace vcsn {
   };
 
 
-  /*-------------------------.
+  /*------------------------.
   | INPUT PROJECTION TRAITS |
-  `-------------------------*/
+  `------------------------*/
 
   template <class S, class T>
   struct input_projection_helper
+  { };
+
+  template <class S, class T>
+  struct input_projection_helper<Transducer<S>, T>
   {
-    typedef typename S::series_set_t::semiring_t
+    typedef typename Transducer<S>::series_set_t::semiring_t
     typeof_auto_series_set_t;
 
-    /// @todo FIXME: check this typedef
-    typedef typename S::series_set_t::monoid_t auto_monoid_t;
+    typedef typename Transducer<S>::series_set_t::monoid_t auto_monoid_t;
 
     typedef typename typeof_auto_series_set_t::semiring_t auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
@@ -88,6 +91,26 @@ namespace vcsn {
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
+  template <class S, class T>
+  struct input_projection_helper<Automata<S>, T>
+  {
+    typedef Automata<S> structure_t;
+
+    typedef typename structure_t::series_set_t typeof_auto_series_set_t;
+
+    typedef typename structure_t::series_set_t::semiring_t auto_semiring_t;
+
+    typedef typename structure_t::series_set_t::monoid_t::first_monoid_t
+    auto_monoid_t;
+
+    typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
+						 auto_semiring_t,
+						 auto_monoid_t>::ret
+    auto_series_set_t;
+
+    typedef typename fmp_projection_traits<T>::ret auto_impl_t;
+    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+  };
 
   /*-------------------------.
   | OUTPUT PROJECTION TRAITS |
@@ -119,7 +142,10 @@ namespace vcsn {
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
-  // Transducers
+  // FMP Transducers
+  // FIXME: it should be automata over a free monoid product 
+  // FIXME: we cannot use output_projection_traits, because
+  // it construct the type by assuming that the automaton is RW
   template <class S, class T>
   struct output_projection_helper<Automata<S>, T>
   {
@@ -137,10 +163,10 @@ namespace vcsn {
 						 auto_monoid_t>::ret
     auto_series_set_t;
 
-    typedef typename output_projection_traits<T>::ret auto_impl_t;
+    typedef typename fmp_output_projection_traits<T>::ret auto_impl_t;
+
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
-
 
   /*----------------.
   | IDENTITY TRAITS |
@@ -162,12 +188,11 @@ namespace vcsn {
   typename identity_transducer_helper<S, T>::ret
   partial_identity(const Element<S, T>&);
 
-
   template <class Series>
   bool
   operator==(const Transducer<Series>&, const Transducer<Series>&);
 
-} // vcsn
+} // ! vcsn
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB

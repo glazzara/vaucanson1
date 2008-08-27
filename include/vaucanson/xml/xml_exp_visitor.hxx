@@ -166,8 +166,8 @@ namespace vcsn {
     xercesc::DOMDocument*
     XmlExpVisitor<M_, W_>::set(xercesc::DOMDocument* v)
     {
-      this->doc_ = v;
-      return this->doc_;
+      doc_ = v;
+      return doc_;
     }
 
 

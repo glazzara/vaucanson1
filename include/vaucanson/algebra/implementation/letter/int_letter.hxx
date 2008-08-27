@@ -68,6 +68,11 @@ namespace vcsn {
 	sstr << c;
 	return sstr.str();
       }
+
+      // An int is "simple" with dimension 1.
+      static std::string kind() { return "simple"; }
+      static int dim() { return 1; }
+
     };
 
     template <typename S, typename CharContainer>

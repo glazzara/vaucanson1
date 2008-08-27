@@ -140,16 +140,29 @@ start_algorithms
 
 if [ "$3" != "noalg" ]; then
 # Loop over all algorithm families
-for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
+for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort`; do
 
    # Test whether the file declares some interfaces
    if grep "^ *// INTERFACE:" <"$VAUC/$family_header" >/dev/null 2>&1; then
+     candidate_family=$(basename "$family_header" .hh)
+     echo "Got interface for $candidate_family"
+     # As for now, the bindings can only be generated for automata
+     # (not transducers), so we prevent building transducers only
+     # algorithms with a well defined interface metadata.
+     if	[ "$candidate_family" == "invert" ] || \
+	[ "$candidate_family" == "domain" ] || \
+	[ "$candidate_family" == "evaluation_fmp" ] || \
+	[ "$candidate_family" == "normalized_composition" ] || \
+	[ "$candidate_family" == "sub_normalize" ] || \
+	[ "$candidate_family" == "composition_cover" ]; then
+       echo "Ignoring $candidate_family"
+     else
+       # Yes, retrieve the algorithm family name.
+       output $candidate_family
 
-      # Yes, retrieve the algorithm family name.
-      output $(basename "$family_header" .hh)
-
-     # Add the sub-database to the algorithm category
-     ALGS="$ALGS alg_${family_name}"
+       # Add the sub-database to the algorithm category
+       ALGS="$ALGS alg_${family_name}"
+     fi
    fi
 done
 fi

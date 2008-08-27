@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson
+// Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,16 +52,26 @@ namespace vcsn
 	cardinal = INT_MAX
       };
 
-      LETTER_DEFAULT(open_par, "(")
-      LETTER_DEFAULT(close_par, ")")
+      LETTER_DEFAULT(open_par, "[")
+      LETTER_DEFAULT(close_par, "]")
       LETTER_DEFAULT(plus, "+")
       LETTER_DEFAULT(times, ".")
       LETTER_DEFAULT(star, "*")
-      LETTER_DEFAULT(epsilon, "1")
-      LETTER_DEFAULT(zero, "0")
+      LETTER_DEFAULT(epsilon, "eps")
+      LETTER_DEFAULT(zero, "zero")
       LETTER_DEFAULT(open_weight, "{")
       LETTER_DEFAULT(close_weight, "}")
       LETTER_DEFAULT(space, " ")
+
+      static
+      std::pair<U, V>
+      literal_to_letter(const std::string& str)
+      {
+	std::stringstream sstr(str);
+	std::pair<U, V> ret;
+	sstr >> ret;
+	return ret;
+      }
 
       static
       std::string
@@ -70,6 +81,10 @@ namespace vcsn
 	sstr << c;
 	return sstr.str();
       }
+
+      // A pair is a "tuple" with dimension 2.
+      static std::string kind() { return "tuple"; }
+      static int dim() { return 2; }
 
     };
 

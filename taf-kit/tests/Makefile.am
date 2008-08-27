@@ -22,6 +22,10 @@ TESTS =						\
   vcsn-int-z.test				\
   vcsn-int-fmp-b.test				\
   vcsn-int-fmp-z.test				\
+  vcsn-char-char-b.test				\
+  vcsn-char-int-b.test				\
+  vcsn-int-int-b.test				\
+  vcsn-int-char-b.test				\
   completeness.test
 
 XFAIL_TESTS = completeness.test
@@ -53,7 +57,11 @@ check_SCRIPTS =					\
   vcsn-int-b					\
   vcsn-int-fmp-b				\
   vcsn-int-fmp-z				\
-  vcsn-int-z
+  vcsn-int-z					\
+  vcsn-char-char-b				\
+  vcsn-char-int-b				\
+  vcsn-int-int-b				\
+  vcsn-int-char-b
 
 distclean-local:
 	-rm -rf $(TESTS:.test=.dir)

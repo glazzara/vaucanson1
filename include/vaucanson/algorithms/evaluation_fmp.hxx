@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,9 +42,9 @@ namespace vcsn
     image(res_composition, res);
   }
 
-
-  template<typename SA, typename TA,
-	   typename ST, typename TT,
+  // FIXME: we should empty res.
+  template<typename ST, typename TT,
+	   typename SA, typename TA,
 	   typename SARES, typename TARES>
   void
   evaluation_fmp(const Element<ST, TT>& trans,

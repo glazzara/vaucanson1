@@ -108,7 +108,7 @@ namespace vcsn
       indent_++;
       std::cout << std::string(2 * indent_, ' ') << "<" << xmlstr(localname) << ">" << std::endl;
 # endif
-      this->start(uri, localname, qname, attrs);
+      start(uri, localname, qname, attrs);
     }
 
     void
@@ -116,7 +116,7 @@ namespace vcsn
 			      const XMLCh* const localname,
 			      const XMLCh* const qname)
     {
-      this->end(uri, localname, qname);
+      end(uri, localname, qname);
 # ifdef DEBUG
       std::cout << std::string(2 * indent_, ' ') << "</" << xmlstr(localname) << ">" << std::endl;
       indent_--;
