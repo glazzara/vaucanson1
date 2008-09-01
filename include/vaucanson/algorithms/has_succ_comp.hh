@@ -28,7 +28,6 @@
 /** @} */
 
 // INTERFACE: bool has_succ_comp(const Automaton& a) { return vcsn::has_succ_comp(*a); }
-// INTERFACE: bool has_succ_comp(const GenAutomaton& a) { return vcsn::has_succ_comp(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>

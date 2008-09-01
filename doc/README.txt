@@ -160,12 +160,12 @@ vaucanswig
 Requirements
 ============
 
-Vaucanson was tested with the `GNU C++ Compiler (GCC)`_ version 4.1.x
-and 4.2.x,  and should work  with ICC_ 9.   The code is  fully compliant
+Vaucanson was tested with the `GNU Compiler Collection (GCC)`_ version 4.1.x
+and 4.2.x, and with ICC_ version 9 and 10.1.   The code is  fully compliant
 with  the  ISO  C++  standard  (ISO-IEC  14882)  to  permit  a  higher
 portability in the future.
 
-.. _GNU C++ Compiler (GCC): http://gcc.gnu.org/
+.. _GNU Compiler Collection (GCC): http://gcc.gnu.org/
 .. _ICC: http://www.intel.com/software/products/compilers/
 
 High verbose  mode of the testing  suites uses the AT&T  dot format to

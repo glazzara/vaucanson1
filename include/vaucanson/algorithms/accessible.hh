@@ -32,26 +32,19 @@
 /** @} */
 
 // INTERFACE: HList accessible_states(const Automaton& a) { return list_of_set(vcsn::accessible_states(*a)); }
-// INTERFACE: HList accessible_states(const GenAutomaton& a) { return list_of_set(vcsn::accessible_states(*a)); }
 
 // INTERFACE: Automaton accessible(const Automaton& a) { return vcsn::accessible(*a); }
-// INTERFACE: GenAutomaton accessible(const GenAutomaton& a) { return vcsn::accessible(*a); }
 
 // INTERFACE: void accessible_here(Automaton& a) { return vcsn::accessible_here(*a); }
-// INTERFACE: void accessible_here(GenAutomaton& a) { return vcsn::accessible_here(*a); }
 
 // INTERFACE: HList coaccessible_states(const Automaton& a) { return list_of_set(vcsn::coaccessible_states(*a)); }
-// INTERFACE: HList coaccessible_states(const GenAutomaton& a) { return list_of_set(vcsn::coaccessible_states(*a)); }
 
 // INTERFACE: Automaton coaccessible(const Automaton& a) { return vcsn::coaccessible(*a); }
-// INTERFACE: GenAutomaton coaccessible(const GenAutomaton& a) { return vcsn::coaccessible(*a); }
 
 // INTERFACE: void coaccessible_here(Automaton& a) { return vcsn::coaccessible_here(*a); }
-// INTERFACE: void coaccessible_here(GenAutomaton& a) { return vcsn::coaccessible_here(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata.hh>
-//# include <vaucanson/automata/concept/handlers.hh>
 
 # include <set>
 

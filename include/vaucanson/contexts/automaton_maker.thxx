@@ -21,7 +21,6 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
-#include <vaucanson/algorithms/krat_exp_expand.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/thompson.hh>

@@ -30,10 +30,8 @@
 /** @} */
 
 // INTERFACE: void sum_here(Automaton& a1, const Automaton& a2) { return vcsn::sum_here(*a1, *a2); }
-// INTERFACE: void sum_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum_here(*a1, *a2); }
 
 // INTERFACE: Automaton sum(const Automaton& a1, const Automaton& a2) { return vcsn::sum(*a1, *a2); }
-// INTERFACE: GenAutomaton sum(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum(*a1, *a2); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

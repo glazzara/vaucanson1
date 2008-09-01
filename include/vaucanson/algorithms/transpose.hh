@@ -30,10 +30,8 @@
 # include <vaucanson/automata/concept/automata.hh>
 
 // INTERFACE: void transpose(Automaton& dst, const Automaton& src) { vcsn::transpose(*dst, *src); }
-// INTERFACE: void transpose(GenAutomaton& dst, const GenAutomaton& src) { vcsn::transpose(*dst, *src); }
 
 // INTERFACE: Automaton transpose(const Automaton& a) { return vcsn::transpose(*a); }
-// INTERFACE: GenAutomaton transpose(const GenAutomaton& a) { return vcsn::transpose(*a); }
 
 namespace vcsn {
 

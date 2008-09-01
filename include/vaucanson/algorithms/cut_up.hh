@@ -26,10 +26,9 @@
  */
 
 # include <vaucanson/automata/concept/copy.hh>
-# include <vaucanson/automata/implementation/generalized.hh>
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
+# include <vaucanson/algebra/implementation/series/generalized.hh>
 # include <vaucanson/algorithms/standard_of.hh>
-
 
 namespace vcsn
 {

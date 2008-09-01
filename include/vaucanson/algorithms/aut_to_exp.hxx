@@ -36,9 +36,9 @@
 
 namespace vcsn {
 
-    /*---------------.
-    | DefaultChooser |
-    `---------------*/
+  /*---------------.
+  | DefaultChooser |
+  `---------------*/
 
   template <class Auto_>
   typename Auto_::hstate_t
@@ -53,7 +53,6 @@ namespace vcsn {
     s = k;
     return *s;
   }
-
 
   /*--------------.
   | RandomChooser |
@@ -97,156 +96,151 @@ namespace vcsn {
     return *k;
   }
 
+  /*----------------------------.
+  |    Heuristic chooser:	  |
+  | Transition Number Heuristic |
+  `----------------------------*/
 
-    /*----------------------------.
-    |    Heuristic chooser:	  |
-    | Transition Number Heuristic |
-    `----------------------------*/
+  template <class Auto_>
+  typename Auto_::hstate_t
+  HChooser::operator()(const Auto_& a) const
+  {
+    assertion(a.states().size() > 0);
 
-      template <class Auto_>
-      typename Auto_::hstate_t
-      HChooser::operator()(const Auto_& a) const
+    std::list<typename Auto_::htransition_t> delta_in;
+    std::list<typename Auto_::htransition_t> delta_out;
+
+    typename Auto_::state_iterator s = a.states().begin();
+    unsigned int d_in = 0;
+    unsigned int d_out = 0;
+    unsigned int max = UINT_MAX;
+    bool has_loop = false;
+    bool has_loop_old = false;
+
+    for (typename Auto_::state_iterator i = a.states().begin();
+	 i != a.states().end();
+	 ++i)
+    {
+      if (a.is_final(*i) || a.is_initial(*i))
+	continue;
+      has_loop = false;
+
+      a.deltac(delta_out, *i, delta_kind::transitions());
+      a.rdeltac(delta_in, *i, delta_kind::transitions());
+      for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	   j != delta_out.end();
+	   ++j)
+	if (*i == a.dst_of(*j))
+	  has_loop = true;
+
+      //FIXME : If the state has several loops
+      if (has_loop)
+	d_in = delta_in.size() - 1;
+      else
+	d_in = delta_in.size();
+      d_out = delta_out.size();
+
+      //We prefer to delete a state that has no loop transition
+      if (d_in * d_out < max ||
+	  (d_in * d_out == max &&
+	   has_loop_old && not has_loop))
       {
-	assertion(a.states().size() > 0);
-
-	std::list<typename Auto_::htransition_t> delta_in;
-	std::list<typename Auto_::htransition_t> delta_out;
-
-	typename Auto_::state_iterator s = a.states().begin();
-	unsigned int d_in = 0;
-	unsigned int d_out = 0;
-	unsigned int max = UINT_MAX;
-	bool has_loop = false;
-	bool has_loop_old = false;
-
-	for (typename Auto_::state_iterator i = a.states().begin();
-	     i != a.states().end();
-	     ++i)
-	{
-	  if (a.is_final(*i) || a.is_initial(*i))
-	    continue;
-	  has_loop = false;
-
-	  a.deltac(delta_out, *i, delta_kind::transitions());
-	  a.rdeltac(delta_in, *i, delta_kind::transitions());
-	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
-	       j != delta_out.end();
-	       ++j)
-	    if (*i == a.dst_of(*j))
-	      has_loop = true;
-
-	  //FIXME : If the state has several loops
-	  if (has_loop)
-	    d_in = delta_in.size() - 1;
-	  else
-	    d_in = delta_in.size();
-	  d_out = delta_out.size();
-
-	  //We prefer to delete a state that has no loop transition
-	  if (d_in * d_out < max ||
-	      (d_in * d_out == max &&
-	       has_loop_old && not has_loop))
-	  {
-	    s = i;
-	    max = d_in * d_out;
-	    has_loop_old = has_loop;
-	  }
-	  delta_out.clear();
-	  delta_in.clear();
-	}
-	return *s;
+	s = i;
+	max = d_in * d_out;
+	has_loop_old = has_loop;
       }
-
-
+      delta_out.clear();
+      delta_in.clear();
+    }
+    return *s;
+  }
 
   /*-------------------------.
-    | Heuristic chooser:	     |
-    | from Delgado & Morais    |
-    | (Proposed in CIAA 2004)  |
-    `-------------------------*/
+  | Heuristic chooser:	     |
+  | from Delgado & Morais    |
+  | (Proposed in CIAA 2004)  |
+  `-------------------------*/
 
-      template <class Auto_>
-      typename Auto_::hstate_t
-      DMChooser::operator()(const Auto_& a) const
-      {
-	assertion(a.states().size() > 0);
+  template <class Auto_>
+  typename Auto_::hstate_t
+  DMChooser::operator()(const Auto_& a) const
+  {
+    assertion(a.states().size() > 0);
 
-	std::list<typename Auto_::htransition_t> delta_in;
-	std::list<typename Auto_::htransition_t> delta_out;
-	typename Auto_::state_iterator s = a.states().begin();
+    std::list<typename Auto_::htransition_t> delta_in;
+    std::list<typename Auto_::htransition_t> delta_out;
+    typename Auto_::state_iterator s = a.states().begin();
 
-	int weight_min = INT_MAX;
-	for (typename Auto_::state_iterator i = a.states().begin();
-	     i != a.states().end();
-	     ++i)
+    int weight_min = INT_MAX;
+    for (typename Auto_::state_iterator i = a.states().begin();
+	 i != a.states().end();
+	 ++i)
+    {
+      if (a.is_final(*i) || a.is_initial(*i))
+	continue;
+      unsigned int n_loops = 0;
+      unsigned int in = 0;
+      unsigned int out = 0;
+
+      int weight = 0;
+
+      delta_in.clear();
+      delta_out.clear();
+      a.deltac(delta_out, *i, delta_kind::transitions());
+      a.rdeltac(delta_in, *i, delta_kind::transitions());
+
+      for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	   j != delta_out.end();
+	   ++j)
+	if (*i == a.dst_of(*j))
+	  ++n_loops;
+
+      in = delta_in.size() - n_loops;
+      out = delta_out.size() - n_loops;
+
+      // Compute SUM(Win(k) * (Out - 1))
+      for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_in.begin();
+	   j != delta_in.end();
+	   ++j)
+	if (*i != a.dst_of(*j))
 	{
-	  if (a.is_final(*i) || a.is_initial(*i))
-	    continue;
-	  unsigned int n_loops = 0;
-	  unsigned int in = 0;
-	  unsigned int out = 0;
-
-	  int weight = 0;
-
-	  delta_in.clear();
-	  delta_out.clear();
-	  a.deltac(delta_out, *i, delta_kind::transitions());
-	  a.rdeltac(delta_in, *i, delta_kind::transitions());
-
-	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
-	       j != delta_out.end();
-	       ++j)
-	    if (*i == a.dst_of(*j))
-	      ++n_loops;
-
-	  in = delta_in.size() - n_loops;
-	  out = delta_out.size() - n_loops;
-
-	  // Compute SUM(Win(k) * (Out - 1))
-	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_in.begin();
-	       j != delta_in.end();
-	       ++j)
-	    if (*i != a.dst_of(*j))
-	    {
-	      weight += a.series_value_of(*j).length() * (out - 1);
-	    }
-
-	  // Compute SUM(Wout(k) * (In - 1))
-	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
-	       j != delta_out.end();
-	       ++j)
-	    if (*i != a.dst_of(*j))
-	    {
-	      weight += a.series_value_of(*j).length() * (in - 1);
-	    }
-
-	  // Compute Wloop * (In * Out - 1)
-	  for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
-	       j != delta_out.end();
-	       ++j)
-	    if (*i == a.dst_of(*j))
-	    {
-	      weight += a.series_value_of(*j).length() * (in  * out - 1);
-	    }
-
-	  if (weight < weight_min)
-	  {
-	    s = i;
-	    weight_min = weight;
-	  }
+	  weight += a.series_value_of(*j).length() * (out - 1);
 	}
-	return *s;
+
+      // Compute SUM(Wout(k) * (In - 1))
+      for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	   j != delta_out.end();
+	   ++j)
+	if (*i != a.dst_of(*j))
+	{
+	  weight += a.series_value_of(*j).length() * (in - 1);
+	}
+
+      // Compute Wloop * (In * Out - 1)
+      for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
+	   j != delta_out.end();
+	   ++j)
+	if (*i == a.dst_of(*j))
+	{
+	  weight += a.series_value_of(*j).length() * (in  * out - 1);
+	}
+
+      if (weight < weight_min)
+      {
+	s = i;
+	weight_min = weight;
       }
-
-
-
+    }
+    return *s;
+  }
 
   /*------------.
-    | ListChooser |
-    `------------*/
+  | ListChooser |
+  `------------*/
+
   inline ListChooser::ListChooser(const std::list<unsigned int>& l) :
-    list_(l),
-    pos_(l.begin())
+      list_(l),
+      pos_(l.begin())
   {
   }
 
@@ -258,11 +252,9 @@ namespace vcsn {
     return a.get_state(*pos_++);
   }
 
-
-
   /*-----------.
-    | aut_to_exp |
-    `-----------*/
+  | aut_to_exp |
+  `-----------*/
 
   template <class A, typename AI, typename Chooser>
   typename Element<A, AI>::series_set_elt_t
@@ -347,8 +339,8 @@ namespace vcsn {
   }
 
   /*-----------.
-    | aut_to_exp |
-    `-----------*/
+  | aut_to_exp |
+  `-----------*/
 
   template<typename A, typename AI, typename Chooser>
   typename Element<A, AI>::series_set_elt_t

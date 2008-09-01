@@ -1,5 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson
+## Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -497,8 +498,6 @@ vaucanson/automata/implementation/bmig_graph_impl.hh 			\
 vaucanson/automata/implementation/bmig_graph_impl.hxx			\
 vaucanson/automata/implementation/bmig_graph_letters_spec.hh		\
 vaucanson/automata/implementation/bmig_graph_letters_spec.hxx		\
-vaucanson/automata/implementation/generalized.hh			\
-vaucanson/automata/implementation/generalized.hxx			\
 vaucanson/automata/implementation/geometry.hh				\
 vaucanson/automata/implementation/geometry.hxx				\
 vaucanson/automata/implementation/listg/iterator.hh 			\

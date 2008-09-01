@@ -34,6 +34,10 @@
 // INTERFACE: bool is_realtime(const Automaton& a) { return vcsn::is_realtime(*a); }
 // INTERFACE: bool is_realtime(const GenAutomaton& a) { return vcsn::is_realtime(*a); }
 
+// See realtime_decl.hh
+// INTERFACE: Automaton realtime(const Automaton& a) { return vcsn::realtime(*a); }
+// INTERFACE: GenAutomaton realtime(const GenAutomaton& a) { return vcsn::realtime(*a); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/direction.hh>
 namespace vcsn {
@@ -87,11 +91,7 @@ namespace vcsn {
 
 } // vcsn
 
-// FIXME: this should be the correct one, should be fixed with:
-//	    - the correct INTERFACE tag
-//	    - a generation script that do not use INTERFACE tag
-//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-# if !defined VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 /*

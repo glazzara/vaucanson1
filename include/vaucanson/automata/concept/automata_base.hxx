@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HXX
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HXX
 
+# include <vaucanson/automata/concept/copy.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata_ops.hh>
 
@@ -1196,7 +1197,19 @@ namespace vcsn {
     return st;
   }
 
+  /*----------------------------------------------.
+  | automaton to generalized automaton convertion |
+  `----------------------------------------------*/
 
-} // vcsn
+  template <typename Auto_>
+  typename generalized_traits<Auto_>::automaton_t
+  generalized(const Auto_& from)
+  {
+    typename generalized_traits<Auto_>::automaton_t to(from.structure());
+    auto_copy(to, from);
+    return to;
+  }
+
+} // ! vcsn
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HXX

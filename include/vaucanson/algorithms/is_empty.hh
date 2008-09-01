@@ -28,7 +28,6 @@
 /** @} */
 
 // INTERFACE: bool is_empty(const Automaton& a) { return vcsn::is_empty(*a); }
-// INTERFACE: bool is_empty(const GenAutomaton& a) { return vcsn::is_empty(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>

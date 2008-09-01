@@ -29,7 +29,6 @@
 /** @} */
 
 // INTERFACE: bool are_isomorphic(const Automaton& a1, const Automaton& a2) { return vcsn::are_isomorphic(*a1, *a2); }
-// INTERFACE: bool are_isomorphic(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::are_isomorphic(*a1, *a2); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

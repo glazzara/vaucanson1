@@ -14,7 +14,6 @@
 #include <vaucanson/z_max_plus_automaton_structures.hh>
 #include <vaucanson/z_min_plus_automaton_structures.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-#include <vaucanson/automata/implementation/generalized.hh>
 #include <stdexcept>
 #include <sstream>
 #include <fstream>

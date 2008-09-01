@@ -31,10 +31,8 @@
 /** @} */
 
 // INTERFACE: Automaton concatenate(const Automaton& a1, const Automaton& a2) { return vcsn::concatenate(*a1, *a2); }
-// INTERFACE: GenAutomaton concatenate(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate(*a1, *a2); }
 
 // INTERFACE: void concatenate_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
-// INTERFACE: void concatenate_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

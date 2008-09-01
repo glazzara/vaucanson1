@@ -28,10 +28,8 @@
 /** @} */
 
 // INTERFACE: HList useful_states(const Automaton& a) { return list_of_set(vcsn::useful_states(*a)); }
-// INTERFACE: HList useful_states(const GenAutomaton& a) { return list_of_set(vcsn::useful_states(*a)); }
 
 // INTERFACE: Automaton trim(const Automaton& a) { return vcsn::trim(*a); }
-// INTERFACE: GenAutomaton trim(const GenAutomaton& a) { return vcsn::trim(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>

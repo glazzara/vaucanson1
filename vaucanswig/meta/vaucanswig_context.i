@@ -73,7 +73,6 @@
 #include <vaucanson/z_max_plus_automaton.hh>
 #include <vaucanson/z_min_plus_automaton.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-#include <vaucanson/automata/implementation/generalized.hh>
 #include <vaucanson/algorithms/finite_support_conversion.hh>
 #include <vaucanson/algorithms/aci_canonical.hh>
 #include <stdexcept>

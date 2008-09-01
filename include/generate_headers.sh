@@ -36,6 +36,19 @@ namespace vcsn
 EOF
 }
 
+write_common_traits()
+{
+  cat >> $1 <<-EOF
+# if !defined(COMMON_TRAITS)
+#  define COMMON_TRAITS
+namespace vcsn
+{
+  VCSN_MAKE_STANDARD_OF_TRAITS(vcsn::VCSN_DEFAULT_GRAPH_IMPL::Graph);
+}
+# endif
+EOF
+}
+
 insert_specific_alias()
 {
   if [ "$2" = "boolean_transducer" ]; then
@@ -69,6 +82,7 @@ EOF
 
   write_namespace_alias $fullname $context false
   insert_specific_alias $fullname $context false
+  write_common_traits $fullname
 
   cat >> $fullname <<-EOF
 #endif // !$UpperName

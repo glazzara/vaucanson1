@@ -20,10 +20,12 @@
 # include <boost/dynamic_bitset.hpp>
 # include <boost/shared_ptr.hpp>
 
+# include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/implementation/bmig/vgraph_container.hh>
 # include <vaucanson/automata/implementation/bmig/bmig_handlers.hh>
 # include <vaucanson/automata/implementation/bmig/iterator.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/implementation/bmig/bmig_support.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
@@ -363,6 +365,7 @@ namespace vcsn
 
   // This implementation can be used as an implementation of automaton.
   VCSN_MAKE_AUTOMATON_TRAITS(bmig::Graph);
+  VCSN_MAKE_GENERALIZED_AUTOMATON_TRAITS(bmig::Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,

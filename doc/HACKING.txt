@@ -63,3 +63,15 @@ argument of an algorithm::
   Element<A, AI1>
   algorithm(const Element<A, AI1>& a1, const Element<A, AI2>& a2>);
 
+Macros to handle with care
+==========================
+
+The VCSN_GRAPH_IMPL macro must only appear in three locations:
+
+  - include/vaucanson/context
+  - include/vaucanson/automata/generic_contexts
+  - include/vaucanson/misc/usual_macros.hh (be careful when
+    defining new macros using it)
+
+Any other use is irrelevant and may be very harmful. Moreover this
+macro must never be used in a file with guards.

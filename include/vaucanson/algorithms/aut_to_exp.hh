@@ -30,6 +30,7 @@
 /** @} */
 
 // INTERFACE: Exp aut_to_exp(const GenAutomaton& a) { return vcsn::aut_to_exp(*a); }
+// INTERFACE: Exp aut_to_exp(const GenAutomaton& a, const vcsn::DMChooser& b) { return vcsn::aut_to_exp(*a, b); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -158,12 +159,7 @@ namespace vcsn {
 
 } // vcsn
 
-// FIXME: libvcsn and taf-kit undefined reference related bug
-//        this should be the correct one, should be fixed with:
-//	    - the correct INTERFACE tag
-//	    - a generation script that do not use INTERFACE tag
-//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-# if !defined VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/aut_to_exp.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

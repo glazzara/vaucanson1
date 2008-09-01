@@ -31,22 +31,16 @@
 
 
 // INTERFACE: void forward_eps_removal_here_sp(Automaton& a) { return vcsn::forward_eps_removal_here(*a); }
-// INTERFACE: void forward_eps_removal_here_sp(GenAutomaton& a) { return vcsn::forward_eps_removal_here(*a); }
 
 // INTERFACE: Automaton forward_eps_removal_sp(const Automaton& a) { return vcsn::forward_eps_removal(*a); }
-// INTERFACE: GenAutomaton forward_eps_removal_sp(const GenAutomaton& a) { return vcsn::forward_eps_removal(*a); }
 
 // INTERFACE: void backward_eps_removal_here_sp(Automaton& a) { return vcsn::backward_eps_removal_here(*a); }
-// INTERFACE: void backward_eps_removal_here_sp(GenAutomaton& a) { return vcsn::backward_eps_removal_here(*a); }
 
 // INTERFACE: Automaton backward_eps_removal_sp(const Automaton& a) { return vcsn::backward_eps_removal(*a); }
-// INTERFACE: GenAutomaton backward_eps_removal_sp(const GenAutomaton& a) { return vcsn::backward_eps_removal(*a); }
 
 // INTERFACE: void eps_removal_here_sp(Automaton& a, vcsn::misc::direction_type dir) { return vcsn::eps_removal_here(*a); }
-// INTERFACE: void eps_removal_here_sp(GenAutomaton& a) { return vcsn::eps_removal_here(*a); }
 
 // INTERFACE: Automaton eps_removal_sp(const Automaton& a, vcsn::misc::direction_type dir) { return vcsn::eps_removal(*a); }
-// INTERFACE: GenAutomaton eps_removal_sp(const GenAutomaton& a) { return vcsn::eps_removal(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/direction.hh>

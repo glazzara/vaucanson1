@@ -41,7 +41,6 @@ vcsn.each_key { |type| system("mkdir -p " + type) }
 # testing if a source file needs to be created
 def create?(type, file)
   file !~ /krat_exp_cderivation.hh/ and
-  file !~ /thompson.hh/ and
   (
     ! File.exist?(type + "/" + File.basename(file, ".hh") + ".cc") or
     File.new(file, "r").stat > File.new(type + "/" + File.basename(file, ".hh") + ".cc").stat
@@ -82,6 +81,7 @@ def create?(type, file)
 	"vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type
       ) and
       file !~ /aci_canonical.hh/ and
+      file !~ /aut_to_exp.hh/ and
       file !~ /berry_sethi.hh/ and
       file !~ /brzozowski.hh/ and
       file !~ /complement.hh/ and
@@ -93,7 +93,6 @@ def create?(type, file)
       file !~ /finite_support_conversion.hh/ and
       file !~ /is_ambiguous.hh/ and
       file !~ /is_letterized.hh/ and
-      file !~ /is_normalized.hh/ and
       file !~ /krat_exp.*.hh/ and
       file !~ /letter_to_letter_composition.hh/ and
       file !~ /minimization_hopcroft.hh/ and
@@ -102,6 +101,7 @@ def create?(type, file)
       file !~ /realtime.hh/ and
       file !~ /standard.hh/ and
       file !~ /standard_of.hh/ and
+      file !~ /thompson.hh/ and
       ( # FMP transducers only filters.
         not ( "vcsn-fmp-tdc" == type or "vcsn-z-fmp-tdc" == type or
 	      "vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type
@@ -215,22 +215,17 @@ files.each { |file|
       # process the file declaration
       if contents[i] =~ /\/\/\s*INTERFACE/
 	empty = false
-	# GenAutomaton is ignored to avoid multiple definitions
-	if contents[i] !~ /GenAutomaton/
-	  tmp = contents[i].gsub(/^\s*\/\/\s*INTERFACE:\s*(.*)\s+\{.*/, '  \1;')
-          if file =~ /eval\.hh/
-            tmp = tmp.gsub(/int/, 'Automaton::semiring_elt_t')
-          end
-	  tmp = tmp.gsub(/Automaton/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t')
-	  tmp = tmp.gsub(/HList/, 'std::set<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::hstate_t>')
-	  tmp = tmp.gsub(/ExpImpl/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_impl_t')
-	  tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
-	  tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
-	  tmp = tmp.gsub(/Word/, 'std::basic_string<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::letter_t>')
-	  tmp = tmp.gsub(/InputProjection/, 'input_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
-	  tmp = tmp.gsub(/OutputProjection/, 'output_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
-	  output.push("  template", tmp)
-	end
+	tmp = contents[i].gsub(/^\s*\/\/\s*INTERFACE:\s*(.*)\s+\{.*/, '  \1;')
+	tmp = tmp.gsub(/GenAutomaton/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::gen_automaton_t')
+	tmp = tmp.gsub(/Automaton/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t')
+	tmp = tmp.gsub(/HList/, 'std::set<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::hstate_t>')
+	tmp = tmp.gsub(/ExpImpl/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_impl_t')
+	tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
+	tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
+	tmp = tmp.gsub(/Word/, 'std::basic_string<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::letter_t>')
+	tmp = tmp.gsub(/InputProjection/, 'input_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
+	tmp = tmp.gsub(/OutputProjection/, 'output_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
+	output.push("  template", tmp)
       end
       i = i.next
     end

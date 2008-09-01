@@ -29,13 +29,10 @@
 /** @} */
 
 // INTERFACE: void complete_here(Automaton& a) { return vcsn::complete_here(*a); }
-// INTERFACE: void complete_here(GenAutomaton& a) { return vcsn::complete_here(*a); }
 
 // INTERFACE: Automaton complete(const Automaton& a) { return vcsn::complete(*a); }
-// INTERFACE: GenAutomaton complete(const GenAutomaton& a) { return vcsn::complete(*a); }
 
 // INTERFACE: bool is_complete(const Automaton& a) { return vcsn::is_complete(*a); }
-// INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,11 +21,8 @@
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
-# include <vaucanson/automata/implementation/generalized.hh>
-
-# include <vaucanson/misc/usual_macros.hh>
-
 # include <vaucanson/algorithms/accessible.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/concatenate.hh>
@@ -39,18 +36,15 @@
 # include <vaucanson/algorithms/is_ambiguous.hh>
 # include <vaucanson/algorithms/is_deterministic.hh>
 # include <vaucanson/algorithms/isomorph.hh>
+# include <vaucanson/algorithms/krat_exp_expand.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/standard.hh>
+# include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/sum.hh>
+# include <vaucanson/algorithms/thompson.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/trim.hh>
-
-# include <vaucanson/algorithms/krat_exp_expand.hh>
-
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/algorithms/thompson.hh>

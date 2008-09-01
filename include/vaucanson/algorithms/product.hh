@@ -29,7 +29,6 @@
 /** @} */
 
 // INTERFACE: Automaton product(const Automaton& a1, const Automaton& a2, const bool use_geometry) { return vcsn::product(*a1, *a2); }
-// INTERFACE: GenAutomaton product(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::product(*a1, *a2); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>

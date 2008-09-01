@@ -1,3 +1,95 @@
+2008-09-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+=== Update Documentation ===
+
+	* doc/HACKING.txt: Add guidelines.
+	* doc/README.txt: Update requirements.
+
+=== Sanitize VCSN_GRAPH_IMPL uses ===
+
+As suggested by the documentation, the VCSN_GRAPH_IMPL macro has
+been removed from sensitive locations. As a side effect, it fixes
+vaucanson compilation with ICC. The two blockers were the
+generalized traits, and the need by some rational expression
+functions to construct an automaton type from scratch (hence the
+new standard_of_traits).
+
+	* include/Makefile.am: Remove files from the distribution.
+	* lib/generate_libvcsn.rb: Update filters, and remove GenAutomaton
+	  restrictions.
+	* include/generate_headers.sh: New facility to declare common
+	  traits.
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Improve
+	  code indentation and use the new standard_of_traits.
+	* include/vaucanson/automata/concept/automata_base.hh: Add two new
+	  traits makers.
+	* include/vaucanson/automata/concept/automata_base.hxx: Move
+	  generalized() here.
+	* src/tests/test-suites/algebra_series_krat_bool_string.defs,
+	* src/tests/test-suites/algebra_series_krat_double_string.defs,
+	* src/tests/test-suites/algebra_series_krat_int_string.defs: Add code
+	  to include standard_of_traits, as ratexp do not have context headers.
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh,
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: Use
+	  updated generalized traits.
+
+Remove obsolete headers.
+
+	* include/vaucanson/automata/implementation/generalized.hh: Remove.
+	* include/vaucanson/automata/implementation/generalized.hxx: Remove.
+	* vaucanswig/meta/vaucanswig_algo_common.i,
+	* vaucanswig/meta/vaucanswig_automaton.i,
+	* vaucanswig/meta/vaucanswig_context.i,
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/cut_up_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_random_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh,
+	* include/vaucanson/contexts/automaton.thh,
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx: Here.
+
+=== Update INTERFACE for some algorithms ===
+
+Remove known not to be implemented interfaces.
+
+	* include/vaucanson/algorithms/accessible.hh,
+	* include/vaucanson/algorithms/complete.hh,
+	* include/vaucanson/algorithms/concatenate.hh,
+	* include/vaucanson/algorithms/cut_up.hh,
+	* include/vaucanson/algorithms/eps_removal.hh,
+	* include/vaucanson/algorithms/eps_removal_sp.hh,
+	* include/vaucanson/algorithms/eval.hh,
+	* include/vaucanson/algorithms/has_succ_comp.hh,
+	* include/vaucanson/algorithms/is_empty.hh,
+	* include/vaucanson/algorithms/isomorph.hh,
+	* include/vaucanson/algorithms/product.hh,
+	* include/vaucanson/algorithms/sub_automaton.hh,
+	* include/vaucanson/algorithms/sum.hh,
+	* include/vaucanson/algorithms/transpose.hh,
+	* include/vaucanson/algorithms/trim.hh: Here.
+
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	* include/vaucanson/algorithms/internal/has_neighbour.hh,
+	* include/vaucanson/algorithms/krat_exp_expand.hh,
+	* include/vaucanson/algorithms/normalized.hh,
+	* include/vaucanson/algorithms/realtime.hh,
+	* include/vaucanson/algorithms/realtime_decl.hh,
+	* include/vaucanson/algorithms/thompson.hh: Update interface and
+	  remove comment on VCSN_USE_LIB.
+
+=== Miscellaneous ===
+
+	* include/vaucanson/algorithms/aut_to_exp.hxx: Improve code
+	  indentation.
+	* include/vaucanson/algorithms/krat_exp_expand.hxx: Move do_expand
+	  and expand to the vcsn namespace.
+
 2008-08-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 === New letter traits ===

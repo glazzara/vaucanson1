@@ -12,3 +12,10 @@
 	  vcsn::rat::exp<				\
 	    vcsn::algebra::char_letter::Word::value_t,	\
 	    double> >
+
+#define VCSN_GRAPH_IMPL_INCLUDE_PATH vaucanson/automata/implementation
+#include GRAPH_DEFAULT_IMPL_HEADER
+namespace vcsn
+{
+  VCSN_MAKE_STANDARD_OF_TRAITS(vcsn::VCSN_DEFAULT_GRAPH_IMPL::Graph);
+}

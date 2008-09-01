@@ -32,31 +32,22 @@
 /** @} */
 
 // INTERFACE: Automaton normalize(const Automaton& a) { return vcsn::normalize(*a); }
-// INTERFACE: GenAutomaton normalize(const GenAutomaton& a) { return vcsn::normalize(*a); }
 
 // INTERFACE: void normalize_here(Automaton& a) { return vcsn::normalize_here(*a); }
-// INTERFACE: void normalize_here(GenAutomaton& a) { return vcsn::normalize_here(*a); }
 
 // INTERFACE: bool is_normalized(const Automaton& a) { return vcsn::is_normalized(*a); }
-// INTERFACE: bool is_normalized(const GenAutomaton& a) { return vcsn::is_normalized(*a); }
 
 // INTERFACE: void union_of_normalized_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_normalized_here(*a1, *a2); }
-// INTERFACE: void union_of_normalized_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_normalized_here(*a1, *a2); }
 
 // INTERFACE: Automaton union_of_normalized(const Automaton& a1, const Automaton& a2) { return vcsn::union_of_normalized(*a1, *a2); }
-// INTERFACE: GenAutomaton union_of_normalized(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_normalized(*a1, *a2); }
 
 // INTERFACE: void concatenate_of_normalized_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_of_normalized_here(*a1, *a2); }
-// INTERFACE: void concatenate_of_normalized_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_of_normalized_here(*a1, *a2); }
 
 // INTERFACE: Automaton concatenate_of_normalized(const Automaton& a1, const Automaton& a2) { return vcsn::concatenate_of_normalized(*a1, *a2); }
-// INTERFACE: GenAutomaton concatenate_of_normalized(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_of_normalized(*a1, *a2); }
 
 // INTERFACE: void star_of_normalized_here(Automaton& a) { return vcsn::star_of_normalized_here(*a); }
-// INTERFACE: void star_of_normalized_here(GenAutomaton& a) { return vcsn::star_of_normalized_here(*a); }
 
 // INTERFACE: Automaton star_of_normalized(const Automaton& a) { return vcsn::star_of_normalized(*a); }
-// INTERFACE: GenAutomaton star_of_normalized(const GenAutomaton& a) { return vcsn::star_of_normalized(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
@@ -215,13 +206,7 @@ namespace vcsn {
 
 } // vcsn
 
-// FIXME: libvcsn and taf-kit undefined reference related bug
-//        This should be the correct one, should be fixed with:
-//	    - the correct INTERFACE tag
-//	    - a generation script that do not use INTERFACE tag
-//        There may also be some problems related to GenAutomaton and libvcsn
-//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-# if !defined VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/normalized.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

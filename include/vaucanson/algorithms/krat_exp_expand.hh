@@ -27,23 +27,17 @@
  */
 /** @} */
 
+// INTERFACE: Exp expand(const Exp& e) { return vcsn::expand(e); }
+
 namespace vcsn {
 
-  namespace algebra {
+  template <class Series, class T>
+  Element<Series, T>
+  expand(const Element<Series, T>& exp);
 
-    template <class Series, class T>
-    Element<Series, T>
-    expand(const Element<Series, T>& exp);
+} // ! vcsn
 
-  } // algebra
-
-} // vcsn
-
-// FIXME: this should be the correct one, should be fixed with:
-//	    - the correct INTERFACE tag
-//	    - a generation script that do not use INTERFACE tag
-//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-# if !defined VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/krat_exp_expand.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

@@ -124,12 +124,81 @@ namespace vcsn {
     typedef typename graph_t::rdelta_transition_iterator	rdelta_transition_iterator; \
   }
 
+  // traits for generalized automaton implementation.
+  template <typename Auto>
+  struct generalized_traits
+  {
+    typedef undefined_type automaton_t;
+  };
 
+# define VCSN_MAKE_GENERALIZED_AUTOMATON_TRAITS(Type)				\
+  template <typename Struct,							\
+	    typename Kind,							\
+	    typename WordValue,							\
+	    typename WeightValue,						\
+	    typename SeriesValue,						\
+	    typename Letter,							\
+	    typename Tag,							\
+	    typename GeometryCoords>						\
+  struct generalized_traits<Element<Struct, Type<Kind, WordValue,		\
+			    WeightValue, SeriesValue, Letter,			\
+			    Tag, GeometryCoords> > >				\
+  {										\
+    typedef Element<Struct, Type<Kind, WordValue, WeightValue, SeriesValue,	\
+		    Letter, Tag, GeometryCoords> > Auto_;			\
+    typedef typename Auto_::series_set_t		series_set_t;		\
+    typedef typename series_set_t::monoid_t		monoid_t;		\
+    typedef typename Auto_::series_set_elt_t		series_set_elt_t;	\
+    typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;		\
+    typedef typename monoid_elt_t::value_t		monoid_elt_value_t;	\
+    typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;		\
+    typedef typename semiring_elt_t::value_t		semiring_elt_value_t;	\
+    typedef typename Auto_::value_t::geometry_t		geometry_t;		\
+    typedef vcsn::Element<vcsn::Automata<series_set_t>,				\
+			  Type<labels_are_series,				\
+			  monoid_elt_value_t,					\
+			  semiring_elt_value_t,					\
+			  rat::exp<monoid_elt_value_t, semiring_elt_value_t>,	\
+			  typename monoid_t::letter_t,				\
+			  NoTag,						\
+			  typename geometry_t::coords_t>			\
+			  > automaton_t;					\
+    typedef typename automaton_t::hstate_t hstate_t;				\
+    typedef typename automaton_t::htransition_t	htransition_t;			\
+  }
 
+  // traits to construct an automaton type from a rational expression type,
+  // with a given structural type.
+  // (the automaton type must be able to hold the value returned by
+  // standard_of)
+  // FIXME: there is no rat exp concept, so we put the code here. (maybe it
+  // should be put here anyway)
+  template <typename Struct, typename Ratexp>
+  struct standard_of_traits
+  {
+    typedef undefined_type automaton_t;
+  };
+
+# define VCSN_MAKE_STANDARD_OF_TRAITS(Type)					\
+  template <typename W,								\
+	    typename M,								\
+	    typename Tm,							\
+	    typename Tw>							\
+  struct standard_of_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >		\
+  {										\
+    typedef typename algebra::Series<W, M>		series_set_t;		\
+    typedef typename algebra::polynom<Tm, Tw>		series_set_elt_value_t;	\
+    typedef typename Type<labels_are_series, Tm, Tw,				\
+			  series_set_elt_value_t, Tm,				\
+			  NoTag, NoTag>			automaton_impl_t;	\
+    typedef Element<Automata<series_set_t>,					\
+		    automaton_impl_t>			automaton_t;		\
+  }
 
   /*-----------------------------------.
   | virtual_types<AutomataBase<Self> > |
   `-----------------------------------*/
+
   template <class S>
   struct virtual_types<AutomataBase<S> >
     : virtual_types<Structure<S> >
@@ -754,6 +823,9 @@ namespace vcsn {
   template <typename S, typename St, typename T>
   St& op_rout(const AutomataBase<S>& s, St& st, const T& r);
 
+  template <typename Auto_>
+  typename generalized_traits<Auto_>::automaton_t
+  generalized(const Auto_& from);
 } // vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB

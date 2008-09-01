@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -235,24 +235,24 @@ namespace vcsn
 	Element<Series, T>	exp_;
     };
 
-    template <class S, class E>
-    E do_expand(const algebra::SeriesBase<S>&, const E& exp)
-    {
-      typedef typename E::value_t	T;
+  } // ! algebra
 
-      KRatExpExpander< S, T, algebra::DispatchFunction<T> >	matcher(exp);
-      return matcher.get();
-    }
+  template <class S, class E>
+  E do_expand(const algebra::SeriesBase<S>&, const E& exp)
+  {
+    typedef typename E::value_t	T;
 
-    template <class Series, class T>
-    Element<Series, T>
-    expand(const Element<Series, T>& exp)
-    {
-      return do_expand(exp.structure(), exp);
-    }
+    algebra::KRatExpExpander< S, T, algebra::DispatchFunction<T> >	matcher(exp);
+    return matcher.get();
+  }
 
-  } // algebra
+  template <class Series, class T>
+  Element<Series, T>
+  expand(const Element<Series, T>& exp)
+  {
+    return do_expand(exp.structure(), exp);
+  }
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_ALGORITHMS_KRAT_EXP_EXPAND_HXX

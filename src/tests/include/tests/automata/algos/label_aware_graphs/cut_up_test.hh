@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,6 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_CUT_UP_TEST_HH
 
 # include <vaucanson/algorithms/cut_up.hh>
-# include <vaucanson/automata/implementation/generalized.hh>
 
 template <class Auto>
 bool cut_up_test(tests::Tester& tg)

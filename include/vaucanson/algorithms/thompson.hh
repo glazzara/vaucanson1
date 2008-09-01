@@ -30,8 +30,7 @@
  */
 /** @} */
 
-// INTERFACE: void thompson_of(Automaton& a, const Exp& e) { vcsn::thompson_of(*a, e.value()); }
-// INTERFACE: void thompson_of(GenAutomaton& a, const Exp& e) { vcsn::thompson_of(*a, e.value()); }
+// INTERFACE: void thompson_of(Automaton& a, const ExpImpl& e) { vcsn::thompson_of(*a, e.value()); }
 
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -71,12 +70,7 @@ namespace vcsn {
 
 } // vcsn
 
-// FIXME The interface tags are used for swig and libvcsn but here the
-// definitions differs.
-// This should be resolved when the generation of libvcsn do not depends
-// on these interface tag.
-//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-# if !defined VCSN_USE_INTERFACE_ONLY
+# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/thompson.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 

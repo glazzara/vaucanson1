@@ -25,7 +25,9 @@
 # include <vaucanson/misc/usual_macros.hh>
 
 # include <vaucanson/misc/support.hh>
+# include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/concept/tags.hh>
@@ -371,6 +373,7 @@ namespace vcsn
 
   // This implementation can be used as an implementation of automaton.
   VCSN_MAKE_AUTOMATON_TRAITS(listg::Graph);
+  VCSN_MAKE_GENERALIZED_AUTOMATON_TRAITS(listg::Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,
