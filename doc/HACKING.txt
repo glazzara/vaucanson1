@@ -35,9 +35,17 @@ Make sure your system has up-to-date tools (Autotools, Swig, Doxygen,
   - Create the release page on the LRDE wiki
   - Update the Vaucanson page to point to it
 
-  - Send an announcement to vaucanson@lrde.epita.fr
+  - Send an announcement to vaucanson@lrde.epita.fr.  The text of the
+    announcement should explain what Vaucanson is (so we can forward
+    the mail to another mailing list) and should include the list of
+    major improvements since the last version (i.e., the top of
+    ``NEWS``).  Do not assume that people will follow links to get
+    details.
 
-  - Install the new version on ``vcsn.enst.fr``.
+  - If the release is a beta release, or an intermediate release before
+    a major release, make it clear in the announcement and on the wiki.
+
+  - Install any new major release on ``vcsn.enst.fr``.
 
   - Complete and detail this list with what was missing (whatever will
     help the next guy doing the release).
@@ -62,6 +70,7 @@ argument of an algorithm::
   template <typename A, typename AI1, typename AI2>
   Element<A, AI1>
   algorithm(const Element<A, AI1>& a1, const Element<A, AI2>& a2>);
+
 
 Macros to handle with care
 ==========================
