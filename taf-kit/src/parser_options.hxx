@@ -46,6 +46,70 @@ const std::vector<std::string>&
 parser_options::get_letters() { return letters_; }
 const vcsn::algebra::token_representation_t&
 parser_options::get_tok_rep() { return tok_rep_; }
+bool
+parser_options::rec_check_collision(const std::string& str, std::string::const_iterator it_str_curr)
+{
+  std::string::const_iterator it_str;
+  for_all(std::vector<std::string>, it_vect, letters_)
+  {
+    std::string::const_iterator it_let = it_vect->begin();
+    it_str = it_str_curr;
+    while (it_str != str.end() &&
+	   it_let != it_vect->end() &&
+	   *it_let == *it_str)
+    {
+      it_str++;
+      it_let++;
+    }
+    // if we reach the end of str by adding or not some other letter return true
+    if (it_str == str.end() || (it_let == it_vect->end() && rec_check_collision(str, it_str)))
+      return true;
+  }
+  return false;
+}
+bool
+parser_options::check_collision(const std::string& str)
+{
+  std::string::const_iterator it_str;
+  for_all(std::vector<std::string>, it_vect, letters_)
+  {
+    std::string::const_iterator it_let = it_vect->begin();
+    it_str = str.begin();
+    while (it_let != it_vect->end() &&
+	   *it_let != *it_str)
+      it_let++;
+    while (it_str != str.end() &&
+	   it_let != it_vect->end() &&
+	   *it_let == *it_str)
+    {
+      it_str++;
+      it_let++;
+    }
+    // if we reach the end of str by adding or not some other letter return true
+    if (it_str == str.end() || (it_let == it_vect->end() && rec_check_collision(str, it_str)))
+      return true;
+  }
+  return false;
+}
+void
+parser_options::check_collision()
+{
+#define CHECK_COLISION(TOKEN, NAME)						\
+  if (check_collision(TOKEN))							\
+    std::cerr << "Warning: The token " << NAME <<				\
+		 " could also be a part of a word in your alphabet." << std::endl;
+  CHECK_COLISION(tok_rep_.open_par, "OPAR")
+  CHECK_COLISION(tok_rep_.close_par, "CPAR")
+  CHECK_COLISION(tok_rep_.plus, "PLUS")
+  CHECK_COLISION(tok_rep_.times, "TIMES")
+  CHECK_COLISION(tok_rep_.star, "STAR")
+  CHECK_COLISION(tok_rep_.open_weight, "OWEIGHT")
+  CHECK_COLISION(tok_rep_.one, "ONE")
+  CHECK_COLISION(tok_rep_.zero, "ZERO")
+  for_all(std::vector<std::string>, it, tok_rep_.spaces)
+    CHECK_COLISION(*it, "SPACE")
+#undef CHECK_COLISION
+}
 
 template <typename ScannerT>
 parser_options::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)

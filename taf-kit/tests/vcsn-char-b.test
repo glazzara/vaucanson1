@@ -422,4 +422,14 @@ $VCSN info aut3.xml > aut3.info
 $VCSN info aut4.xml > aut4.info
 diff aut3.info aut4.info
 
+# Test some function of the parser
+
+$VCSN -a01 thompson "1 + 0" 2>stderr
+echo "Warning: The token ONE could also be a part of a word in your alphabet.
+Warning: The token ZERO could also be a part of a word in your alphabet." >stderr.ref
+diff stderr stderr.ref
+echo -n "" >stderr.ref
+$VCSN --parser="PLUS=toto" -aab thompson "a toto b" 2>stderr
+diff stderr stderr.ref
+
 exit 0

@@ -1,3 +1,13 @@
+2008-09-04  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add warning in taf-kit for parser option.
+	* taf-kit/src/main.cc: Add a call to check_collision.
+	* taf-kit/src/parser_options.hh: ,
+	* taf-kit/src/parser_options.hxx: Add check_collision function to
+	  check if a token representation intersect the alphabet.
+	* taf-kit/tests/vcsn-char-b.test: Add some tests for the previous
+	  function.
+
 2008-09-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/HACKING.txt: Supplement the instructions for making
