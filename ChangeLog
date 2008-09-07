@@ -1,5 +1,11 @@
 2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Revert some parts of [1998].
+	* include/generate_headers.sh: Build a list of graph
+	  implementations, and sort it to be bootstrap system independant.
+
+2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update evaluation_fmp and image prototypes.
 	* include/vaucanson/algorithms/evaluation_fmp.hh (evaluation_fmp),
 	* include/vaucanson/algorithms/evaluation_fmp.hxx (evaluation_fmp):

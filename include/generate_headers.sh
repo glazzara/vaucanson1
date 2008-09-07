@@ -17,6 +17,7 @@
 
 MK_FILE=generic_contexts.mk
 FIND="find"
+IMPL_SET=`$FIND vaucanson/automata/implementation -name '*_graph_impl.hh' -exec basename {} \; 2>/dev/null | sed -e 's/_graph_impl.hh//g' | sort`
 
 write_namespace_alias()
 {
@@ -76,7 +77,7 @@ write_default_context()
 # include <vaucanson/misc/usual_macros.hh>
 EOF
 
-  for impl in listg bmig; do 
+  for impl in $IMPL_SET; do
     printf "# include <vaucanson/contexts/$impl/$1>\n" >> $fullname
   done
 
@@ -161,14 +162,14 @@ main()
   printf 'GENERIC_CONTEXTS = ' >> $MK_FILE
 
 #Creating directories
-  for impl in listg bmig; do 
+  for impl in $IMPL_SET; do
       mkdir -p vaucanson/contexts/$impl
   done
 
   for header in `$FIND vaucanson/automata/generic_contexts/ -name '*.hh' -exec basename {} \; 2>/dev/null | sort`; do
     printf "\\\\\n" >> $MK_FILE
     write_default_context $header
-    for impl in listg bmig; do 
+    for impl in $IMPL_SET; do
 	printf "\\\\\n" >> $MK_FILE
 	write_context vaucanson/contexts/$impl/$header $impl $header
     done
