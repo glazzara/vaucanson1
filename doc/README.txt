@@ -77,7 +77,7 @@ Between ``make`` and ``make install``, you may also want to run::
 sanity-check`` will make sure that Vaucanson's header files can be
 included and compiled.  ``make check`` will run the test suite to
 check the whole library.  Running the test suite may require up to
-1.5GB of free space and several hours.
+10GB of free space and several hours.
 
 
 Additional features

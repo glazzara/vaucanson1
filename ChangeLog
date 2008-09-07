@@ -1,3 +1,9 @@
+2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update documentation.
+	* doc/FAQ.txt: Update build size requirements.
+	* doc/README.txt: Update GCC link.
+
 2008-09-04  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add warning in taf-kit for parser option.

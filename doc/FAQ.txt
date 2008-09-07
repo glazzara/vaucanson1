@@ -33,9 +33,9 @@ I have a "NAN undeclared" error. What can I do?
 Your C++ compiler does not  support the C99 standard library.  This is
 a  known bug  (``NAN`` should  not be  used without  checking  for its
 existence  before)  and will  be  corrected.   Meanwhile, use  another
-compiler, such as the `GNU C++ Compiler`_ version 3.3 or above.
+compiler, such as the `GNU Compiler Collection`_ version 3.3 or above.
 
-.. _GNU C++ Compiler: http://gcc.gnu.org
+.. _GNU Compiler Collection: http://gcc.gnu.org
 
 I have a conflit declaration for ``int getopt()``.
 --------------------------------------------------
