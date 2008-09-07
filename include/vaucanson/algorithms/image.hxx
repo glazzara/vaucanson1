@@ -242,9 +242,9 @@ namespace vcsn
   | IMAGE FACADES. |
   `---------------*/
 
-  template <typename S, typename S2, typename T, typename T2>
+  template <typename S, typename T>
   void
-  image(const Element<S,T>& src, Element<S2, T2>& dst)
+  image(const Element<S, T>& src, typename output_projection_helper<S, T>::ret& dst)
   {
     image_dispatch(src, src.structure(),
 		   src.structure().series().monoid(),

@@ -42,10 +42,9 @@
 namespace vcsn
 {
 
-  template <typename S, typename S2, typename T, typename T2>
+  template <typename S, typename T>
   void
-  image(const Element<S,T>& aut, Element<S2, T2>& res);
-
+  image(const Element<S, T>& aut, typename output_projection_helper<S, T>::ret& res);
 
   template <class S, class T>
   typename output_projection_helper<S, T>::ret

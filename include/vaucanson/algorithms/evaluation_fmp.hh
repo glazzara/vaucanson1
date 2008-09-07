@@ -17,7 +17,7 @@
 #ifndef VCSN_ALGORITHMS_EVALUATION_FMP_HH
 # define VCSN_ALGORITHMS_EVALUATION_FMP_HH
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/transducer.hh>
 
 /** @addtogroup algorithms *//** @{ */
 /**
@@ -43,13 +43,11 @@ namespace vcsn {
    * as automata over a free monoid product.
    */
 
-  template<typename ST, typename TT,
-	   typename SA, typename TA,
-	   typename SARES, typename TARES>
+  template<typename ST, typename TT>
   void
   evaluation_fmp(const Element<ST, TT>&,
-		 const Element<SA, TA>&,
-		 Element<SARES, TARES>&);
+		 const typename input_projection_helper<ST, TT>::ret&,
+		 typename output_projection_helper<ST, TT>::ret&);
 
   /// @}
 

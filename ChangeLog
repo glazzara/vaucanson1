@@ -1,5 +1,16 @@
 2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update evaluation_fmp and image prototypes.
+	* include/vaucanson/algorithms/evaluation_fmp.hh (evaluation_fmp),
+	* include/vaucanson/algorithms/evaluation_fmp.hxx (evaluation_fmp):
+	  Use input_projection_helper and output_projection where
+	  appropriate. Fix header inclusion.
+	* include/vaucanson/algorithms/image.hh (image),
+	* include/vaucanson/algorithms/image.hxx (image): Use
+	  output_projection_helper where appropriate.
+
+2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add missing INTERFACE to the image algorithm.
 	* include/vaucanson/algorithms/image.hh: Add interface.
 	* lib/generate_libvcsn.rb,

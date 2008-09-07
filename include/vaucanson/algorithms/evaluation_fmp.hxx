@@ -43,13 +43,11 @@ namespace vcsn
   }
 
   // FIXME: we should empty res.
-  template<typename ST, typename TT,
-	   typename SA, typename TA,
-	   typename SARES, typename TARES>
+  template <typename ST, typename TT>
   void
   evaluation_fmp(const Element<ST, TT>& trans,
-		 const Element<SA, TA>& aut,
-		 Element<SARES, TARES>& res)
+		 const typename input_projection_helper<ST, TT>::ret& aut,
+		 typename output_projection_helper<ST, TT>::ret& res)
   {
     TIMER_SCOPED("evaluation_fmp");
     do_evaluation_fmp(trans.structure(), trans.structure().series().monoid(),
