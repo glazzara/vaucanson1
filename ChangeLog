@@ -1,5 +1,12 @@
 2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing INTERFACE to the image algorithm.
+	* include/vaucanson/algorithms/image.hh: Add interface.
+	* lib/generate_libvcsn.rb,
+	* vaucanswig/expand.sh: Update filters.
+
+2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Make fmp_transducers tests more generic w.r.t. semiring.
 	* src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh
 	  (evaluation_fmp_test),

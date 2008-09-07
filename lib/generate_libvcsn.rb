@@ -62,6 +62,7 @@ def create?(type, file)
       file !~ /is_normalized.hh/ and		# transducer
       file !~ /normalized_composition.hh/ and	# transducer
       file !~ /domain.hh/ and			# transducer
+      file !~ /image.hh/ and			# transducer
       file !~ /evaluation_fmp.hh/ and		# FMP transducer
       file !~ /sub_normalize.hh/ and		# FMP transducer
       file !~ /composition_cover.hh/ and	# FMP transducer

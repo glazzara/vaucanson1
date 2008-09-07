@@ -28,6 +28,8 @@
  */
 /** @} */
 
+// INTERFACE: void image(const Automaton& a, OutputProjection& b) { return vcsn::image(*a, *b); }
+
 # include <map>
 
 # include <vaucanson/automata/concept/transducer.hh>

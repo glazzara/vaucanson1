@@ -151,6 +151,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
      # algorithms with a well defined interface metadata.
      if	[ "$candidate_family" == "invert" ] || \
 	[ "$candidate_family" == "domain" ] || \
+	[ "$candidate_family" == "image" ] || \
 	[ "$candidate_family" == "evaluation_fmp" ] || \
 	[ "$candidate_family" == "normalized_composition" ] || \
 	[ "$candidate_family" == "sub_normalize" ] || \
