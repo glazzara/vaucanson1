@@ -1,4 +1,14 @@
+#include <vaucanson/boolean_automaton_structures.hh>
+#include <vaucanson/boolean_transducer_structures.hh>
 #include <vaucanson/fmp_transducer_structures.hh>
 
 #define TEST_STATIC_ARGS \
    vcsn::fmp_transducer::automaton_t
+
+namespace rw_transducer = vcsn::boolean_transducer;
+namespace fmp_transducer = vcsn::fmp_transducer;
+namespace automaton = vcsn::boolean_automaton;
+
+#include <vaucanson/algorithms/fmp_to_rw.hh>
+#include <vaucanson/algorithms/equivalent.hh>
+#include <vaucanson/algorithms/internal/evaluation.hh>

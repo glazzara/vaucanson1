@@ -1,5 +1,19 @@
 2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Make fmp_transducers tests more generic w.r.t. semiring.
+	* src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh
+	  (evaluation_fmp_test),
+	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh
+	  (normalized_composition_test),
+	* src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh
+	  (subnormalized_composition_test): Use semiring agnostic
+	  namespaces. Remove wrong headers.
+	* src/tests/test-suites/fmp_transducer.defs,
+	* src/tests/test-suites/z_fmp_transducer.defs: Add correct headers
+	  and new namespaces.
+
+2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add more preconditions.
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
 	  (Lexer): Split the precondition. Reported by Jimmy Ma.

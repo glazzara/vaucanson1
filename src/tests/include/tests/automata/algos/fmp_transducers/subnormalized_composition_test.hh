@@ -19,10 +19,6 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_SUBNORMALIZED_COMPOSITION_TEST_HH
 
 # include <vaucanson/algorithms/normalized_composition.hh>
-# include <vaucanson/algorithms/fmp_to_rw.hh>
-# include <vaucanson/algorithms/internal/evaluation.hh>
-# include <vaucanson/boolean_transducer.hh>
-# include <vaucanson/boolean_automaton.hh>
 
 template <class Automaton>
 bool
@@ -137,14 +133,14 @@ subnormalized_composition_test(tests::Tester& t)
 
   t3 = u_compose(t1, t2);
 
-  boolean_transducer::automaton_t trans1 =
-    boolean_transducer::make_automaton(first_at, second_at);
+  rw_transducer::automaton_t trans1 =
+    rw_transducer::make_automaton(first_at, second_at);
 
-  boolean_transducer::automaton_t trans2 =
-    boolean_transducer::make_automaton(second_at, third_at);
+  rw_transducer::automaton_t trans2 =
+    rw_transducer::make_automaton(second_at, third_at);
 
-  boolean_transducer::automaton_t trans3 =
-    boolean_transducer::make_automaton(first_at, third_at);
+  rw_transducer::automaton_t trans3 =
+    rw_transducer::make_automaton(first_at, third_at);
 
   fmp_to_rw(t1, trans1);
   realtime_here(trans1);
@@ -153,16 +149,16 @@ subnormalized_composition_test(tests::Tester& t)
   fmp_to_rw(t3, trans3);
   realtime_here(trans3);
 
-  boolean_automaton::rat_exp_t exp =
-    boolean_automaton::make_rat_exp(first_at, "abbababa");
+  automaton::rat_exp_t exp =
+    automaton::make_rat_exp(first_at, "abbababa");
 
-  boolean_automaton::automaton_t res1 =
-    boolean_automaton::standard_of
-      (boolean_transducer::evaluation(trans3, exp));
-  boolean_automaton::automaton_t res2 =
-    boolean_automaton::standard_of
-      (boolean_transducer::evaluation
-        (trans2, boolean_transducer::evaluation(trans1, exp)));
+  automaton::automaton_t res1 =
+    automaton::standard_of
+      (rw_transducer::evaluation(trans3, exp));
+  automaton::automaton_t res2 =
+    automaton::standard_of
+      (rw_transducer::evaluation
+        (trans2, rw_transducer::evaluation(trans1, exp)));
 
   TEST(t, "Subnormalized composition works.", are_equivalent(res1, res2));
 

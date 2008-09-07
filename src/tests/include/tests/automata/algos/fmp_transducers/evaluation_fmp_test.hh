@@ -18,11 +18,6 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_EVALUATION_FMP_TEST_HH
 
 # include <vaucanson/algorithms/evaluation_fmp.hh>
-# include <vaucanson/algorithms/fmp_to_rw.hh>
-# include <vaucanson/algorithms/internal/evaluation.hh>
-# include <vaucanson/boolean_transducer.hh>
-# include <vaucanson/boolean_automaton.hh>
-
 
 template <class Automaton>
 bool
@@ -87,31 +82,27 @@ evaluation_fmp_test(tests::Tester& t)
   htransition_t	h3 = t1.add_series_transition(st1, st2, series_elt3);
   htransition_t	h4 = t1.add_series_transition(st1, st3, series_elt4);
 
-
-  boolean_transducer::automaton_t trans1 =
-    boolean_transducer::make_automaton(first_at, second_at);
+  rw_transducer::automaton_t trans1 =
+    rw_transducer::make_automaton(first_at, second_at);
 
   fmp_to_rw(t1, trans1);
   realtime_here(trans1);
 
-  boolean_automaton::rat_exp_t exp =
-    boolean_automaton::make_rat_exp(first_at, "abbababa");
+  automaton::rat_exp_t exp =
+    automaton::make_rat_exp(first_at, "abbababa");
 
-  boolean_automaton::automaton_t res_aut =
-    boolean_automaton::make_automaton(second_at);
+  automaton::automaton_t res_aut =
+    automaton::make_automaton(second_at);
 
-  evaluation_fmp(t1, boolean_automaton::standard_of(exp), res_aut);
+  evaluation_fmp(t1, automaton::standard_of(exp), res_aut);
 
-  boolean_automaton::rat_exp_t exp_res1 =
-    boolean_transducer::evaluation(trans1, exp);
-  boolean_automaton::rat_exp_t exp_res2 = aut_to_exp(res_aut);
+  automaton::rat_exp_t exp_res1 = rw_transducer::evaluation(trans1, exp);
+  automaton::rat_exp_t exp_res2 = aut_to_exp(res_aut);
 
-  boolean_automaton::automaton_t res1 =
-    boolean_automaton::standard_of(exp_res1);
-  boolean_automaton::automaton_t res2 =
-    boolean_automaton::standard_of(exp_res2);
+  automaton::automaton_t res1 = automaton::standard_of(exp_res1);
+  automaton::automaton_t res2 = automaton::standard_of(exp_res2);
 
-  TEST(t, "Fmp evaluation works.", are_equivalent(res1,res2));
+  TEST(t, "Fmp evaluation works.", are_equivalent(res1, res2));
 
   return t.all_passed();
 }
