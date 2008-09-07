@@ -1,5 +1,11 @@
 2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add more preconditions.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+	  (Lexer): Split the precondition. Reported by Jimmy Ma.
+
+2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update documentation.
 	* doc/FAQ.txt: Update build size requirements.
 	* doc/README.txt: Update GCC link.

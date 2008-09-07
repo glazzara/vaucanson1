@@ -67,15 +67,15 @@ namespace vcsn
 	token_tab_(9),
 	error_(error)
       {
-	precondition(!tok_rep.open_par.empty() &&
-		     !tok_rep.close_par.empty() &&
-		     !tok_rep.plus.empty() &&
-		     !tok_rep.times.empty() &&
-		     !tok_rep.star.empty() &&
-		     !tok_rep.one.empty() &&
-		     !tok_rep.zero.empty() &&
-		     !tok_rep.open_weight.empty() &&
-		     !tok_rep.close_weight.empty());
+	precondition(!tok_rep.open_par.empty());
+	precondition(!tok_rep.close_par.empty());
+	precondition(!tok_rep.plus.empty());
+	precondition(!tok_rep.times.empty());
+	precondition(!tok_rep.star.empty());
+	precondition(!tok_rep.one.empty());
+	precondition(!tok_rep.zero.empty());
+	precondition(!tok_rep.open_weight.empty());
+	precondition(!tok_rep.close_weight.empty());
 
 	token_tab_[0] = tok_rep.open_par;
 	token_tab_[1] = tok_rep.close_par;
