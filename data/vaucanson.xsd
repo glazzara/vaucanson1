@@ -66,11 +66,18 @@ element.
 </xs:complexType>
 
 <xs:complexType name="geometryFinal">
-  <xs:attribute name="initialDir">
+  <xs:attribute name="finalDir">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
 	<xs:minInclusive value="0"/>
 	<xs:maxExclusive value="360"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="finalMod">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="circle|arrow"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
@@ -88,31 +95,15 @@ element.
 <xs:complexType name="geometryAut">
   <xs:attribute name="x" type="xs:decimal"/>
   <xs:attribute name="y" type="xs:decimal"/>
-  <xs:attribute name="orientation" type="xs:decimal"/>
 </xs:complexType>
 
 
 
 <!--
-<drawing> tag properties. Used to define useful properties that can be
-used for XML to latex translation. The entire list of possible attributes is
-very long, the following ones are given as examples.
-
-An optional "any" attribute is used, to let the user use personal attributes.
+<drawing> tag properties.
+This tag has not been specified yet.
 -->
 <xs:complexType name="drawing" mixed="true">
-  <xs:attribute name="stateFillColor" type="xs:string"/>
-  <xs:attribute name="stateLabelColor" type="xs:string"/>
-  <xs:attribute name="stateLineWidth" type="xs:string"/>
-  <xs:attribute name="stateLineStyle">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="solid|dashed|dotted|none"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
-  <xs:attribute name="arcAngle" type="xs:decimal"/>
-  <xs:anyAttribute/>
 </xs:complexType>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
