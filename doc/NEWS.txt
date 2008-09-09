@@ -8,8 +8,27 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
+Vaucanson 1.2.92, September 10th, 2008
+======================================
+
+- TAF-Kit
+
+  + New instances that handles letters that are pairs (of char or int):
+    ``vcsn-char-char-b``, ``vcsn-int-int-b``, ``vcsn-char-int-b``, and
+    ``vcsn-int-char-b``
+
+
 Vaucanson 1.2.91, August 23rd, 2008
 ===================================
+
+- TAF-Kit
+
+  + Rename ``vcsn-tdc`` to ``vcsn-char-fmp-b``.
+  + New instances: ``vcsn-char-fmp-z``, ``vcsn-int-fmp-b``,
+    and ``vcsn-int-fmp-z``.
+
+Vaucanson 1.2.90, August 1st, 2008
+==================================
 
 - The Vaucanson library
 
@@ -21,9 +40,9 @@ Vaucanson 1.2.91, August 23rd, 2008
 
 - Algorithms
 
-  + Remove backward_realtime() and forward_realtime() functions factorized in
-    realtime() function.
-  + Fix rw_composition().
+  + Remove ``backward_realtime()`` and ``forward_realtime()``
+    functions factorized in ``realtime()`` function.
+  + Fix ``rw_composition()``.
 
 - Demos
 
@@ -31,10 +50,10 @@ Vaucanson 1.2.91, August 23rd, 2008
 
 - TAF-Kit
 
-  + New option --parser to change token representation on rational expression.
-  + Rename vcsn-b/-z/-tdc to vcsn-char-b/-z/-fmp-b.
-  + New vcsn-int-b and vcsn-int-z.
-  + New vcsn-char-fmp-z, vcsn-int-fmp-b and vcsn-int-fmp-z.
+  + New option ``--parser`` to change token representation on rational
+    expression.
+  + Rename ``vcsn-b``/``-z``/``-tdc`` to ``vcsn-char-b``/``-z``/``-fmp-b``.
+  + New instances: ``vcsn-int-b`` and ``vcsn-int-z``.
 
 Vaucanson 1.2, March 19th, 2008
 ===============================
@@ -47,15 +66,15 @@ Vaucanson 1.2, March 19th, 2008
 
 - Algorithms
 
-  + Rename fmp_to_realtime() as fmt_to_rw().
-  + Rename realtime_to_fmp() as rw_to_fmp().
-  + Rename realtime_composition() as rw_composition().
+  + Rename ``fmp_to_realtime()`` as ``fmt_to_rw()``.
+  + Rename ``realtime_to_fmp()`` as ``rw_to_fmp()``.
+  + Rename ``realtime_composition()`` as ``rw_composition()``.
 
 - TAF-Kit
 
-  + Rename sum as union.
-  + is_empty is now is_void.
-  + New is_empty.
+  + Rename ``sum`` as ``union``.
+  + ``is_empty`` is now ``is_void``.
+  + New ``is_empty``.
 
 - Dependencies
 
@@ -69,7 +88,7 @@ Vaucanson 1.1.1, December 14th, 2007
 
 - Algorithms
 
-  + are_equivalent: compare the languages of two boolean automata
+  + ``are_equivalent``: compare the languages of two boolean automata
 
 Vaucanson 1.1, July 29th, 2007
 ==============================
@@ -82,16 +101,16 @@ Vaucanson 1.1, July 29th, 2007
 
 - Algorithms
 
-  + eps_removal_sp(a);
+  + ``eps_removal_sp(a);``
     Various optimizations.
 
 - TAF-Kit
 
   + Timer has been improved.
   + Intern pipe can now be used:
-    ./vcsn-b identity ab.xml \| product b.xml -
+    ``./vcsn-b identity ab.xml \| product b.xml -``
     is equivalent to
-    ./vcsn-b identity ab.xml | ./vcsn-b product b.xml -
+    ``./vcsn-b identity ab.xml | ./vcsn-b product b.xml -``
 
 Vaucanson 1.0a, June 13th, 2007
 ===============================
@@ -103,18 +122,18 @@ Vaucanson 1.0a, June 13th, 2007
 
 - Algorithms
 
-  + eps_removal_sp(a);
+  + ``eps_removal_sp(a);``
     New generic epsilon_removal algorithm based on shortest_path.
 
-  + minimize(a);
+  + ``minimize(a);``
     Various optimizations.
 
-  + transpose(a);
+  + ``transpose(a);``
     Transition labels are now transposed too.
 
-  + image(a, b) and domain(a, b);
-    they replace output_projection and input_projection. These algorithms work
-    for both FMP transducers and RW transducers.
+  + ``image(a, b)`` and ``domain(a, b);``
+    they replace ``output_projection`` and ``input_projection``. These
+    algorithms work for both FMP transducers and RW transducers.
 
 - XML
 
@@ -130,7 +149,7 @@ Vaucanson 1.0a, June 13th, 2007
 
 - TAF-Kit
 
-  + The option --bench relies on iterations of --report-time to
+  + The option ``--bench`` relies on iterations of ``--report-time`` to
     benchmark the algorithms.
 
 Vaucanson 1.0, July 28th, 2006
@@ -141,71 +160,71 @@ Vaucanson 1.0, July 28th, 2006
   + Many bug fixes, for instance, the alphabet is no longer filled
     with the default range if it is said to be empty.
 
-  + Nodes like `<label_type>` are renamed to `<labelType>`, so as to
+  + Nodes like ``<label_type>`` are renamed to ``<labelType>``, so as to
     conform to XSD coding style.
 
-  + `VCSN_XSD_PATH` is no longer used.
-     The environment variable `VCSN_DATA_PATH` should point to the
+  + ``VCSN_XSD_PATH`` is no longer used.
+     The environment variable ``VCSN_DATA_PATH`` should point to the
      Vaucanson data directory, containing, among others, the
-     `vaucanson.xsd` file.
+     ``vaucanson.xsd`` file.
 
-  + `vaucanson.xsd` is no longer looked for in the current directory.
+  + ``vaucanson.xsd`` is no longer looked for in the current directory.
 
   + transcode (s);
     Overloaded function. Convert a std::string (respectively a char) into XML.
 
 - TAF-kit.
 
-  + The new binaries `vcsn-z` and `vcsn-tdc` are toolkit to work with
+  + The new binaries ``vcsn-z`` and ``vcsn-tdc`` are toolkit to work with
     Z automata and FMP transducers.
 
-  + Many commands (algorithms) have been added in `vcsn-b`.
+  + Many commands (algorithms) have been added in ``vcsn-b``.
 
 - Algorithms.
 
-  + is_ambiguous(a);
+  + ``is_ambiguous(a);``
     Test if `a` is ambiguous.
 
-  + trim_here(a);
+  + ``trim_here(a);``
     Trim the automaton `a`.
 
-  + sub_normalize_here(a);
+  + ``sub_normalize_here(a);``
     Sub-normalized the automaton `a`.
 
-  + invert(t);
+  + ``invert(t);``
     Return the inverse of the RW transducer `t`, i.e. the
     transducer that performs the invert rational relation.
 
-  + u_compose(a):
+  + ``u_compose(a):``
     Composition for boolean transducers that keeps the same number of paths.
 
 - Renaming and minor additions.
 
-  + Support::operator* simplifies the writing for one-letter
-    supports.  Instead of `*e.supp().begin()`, write `*e.supp()`.
+  + ``Support::operator*`` simplifies the writing for one-letter
+    supports.  Instead of ``*e.supp().begin()``, write ``*e.supp()``.
 
-  + The `closure` functions were renamed as `eps_removal`, since
+  + The ``closure`` functions were renamed as ``eps_removal``, since
     that's what they actually do.
 
-  + The macros `for_each` are now called `for_all`.
+  + The macros ``for_each`` are now called ``for_all``.
 
-  + `normalized_composition` functions are now called `compose`.
+  + ``normalized_composition`` functions are now called ``compose``.
 
-  + The automaton library is installed with `make install`.
+  + The automaton library is installed with ``make install``.
 
 - Layout.
 
   The layout of the sources was changed to match the layout of
   Vaucanson when installed.
 
-  + `vaucanson.xsd` is now is the data/ directory.
+  + ``vaucanson.xsd`` is now is the data/ directory.
 
-  + The automaton library is now split by type. See `data/b` and
-    `data/z`. The generators used there are nice demo programs.
+  + The automaton library is now split by type. See ``data/b`` and
+    ``data/z``. The generators used there are nice demo programs.
 
   + VaucanSWIG is at the top level.
 
-  + demos/utilities/* has been moved into demos/.
+  + ``demos/utilities/*`` has been moved into ``demos/``.
 
 - This release was made and coordinated by:
 
@@ -247,25 +266,25 @@ Vaucanson 0.8 May 15, 2006
 
   The XSD file path can now be set by either the environment variable
   or the CPP macro VCSN_XSD_PATH. It is also automatically checked in
-  the `share` directory where this file would be installed on `make
-  install`.
+  the ``share`` directory where this file would be installed on ``make
+  install``.
 
 - Renaming.
 
   The following renaming have been made:
 
-  + `edge` is now `transition`,
-  + `new_*` functions are now `make_*`,
-  + `origin_of` and `src_of` are now `aim_of` and `dst_of`,
-  + `for_each` loops have been changed to `for_all`, for consistency
-     with STL `for_each` that uses functor.
+  + ``edge`` is now ``transition``,
+  + ``new_*`` functions are now ``make_*``,
+  + ``origin_of`` and ``src_of`` are now ``aim_of`` and ``dst_of``,
+  + ``for_each`` loops have been changed to ``for_all``, for consistency
+     with STL ``for_each`` that uses functor.
 
 - Delta functions.
 
   Delta functions,  used to extract  the successor states or  edges of
-  a  state, can  now  take functor  with  the `deltaf`  methods of  an
-  automaton. If the operator() of  the functor returns Booleans and an
-  application  of  the functor  returns  `false`,  the  loop over  all
+  a  state, can  now  take functor  with  the ``deltaf``  methods of  an
+  automaton. If the ``operator()`` of  the functor returns Booleans and an
+  application  of  the functor  returns  ``false``,  the  loop over  all
   successors is stopped.
 
 - Benchmarks.

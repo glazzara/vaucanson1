@@ -1,3 +1,8 @@
+2008-09-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/NEWS.txt: Update for 1.2.92 and mark functions name and
+	other shell constructs as ``texttt`` in all entries since 0.8.
+
 2008-09-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Revert some parts of [1998].
