@@ -1,5 +1,10 @@
 2008-09-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Add a step to the making release help..
+	* doc/HACKING.txt: update making release help.
+
+2008-09-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Append a 'a' to the version number.
 	* configure.ac: Change version to 1.2.92a.
 

@@ -34,6 +34,7 @@ Make sure your system has up-to-date tools (Autotools, Swig, Doxygen,
   - Copy the files created by ``distcheck`` to ``/lrde/dload/vaucanson/``
   - Create the release page on the LRDE wiki
   - Update the Vaucanson page to point to it
+  - Update the Vaucanson download page to point to it
 
   - Send an announcement to vaucanson@lrde.epita.fr.  The text of the
     announcement should explain what Vaucanson is (so we can forward
