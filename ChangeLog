@@ -1,5 +1,10 @@
 2008-09-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Append a 'a' to the version number.
+	* configure.ac: Change version to 1.2.92a.
+
+2008-09-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Bump to version 1.2.92.
 	* configure.ac: Bump version number.
 
