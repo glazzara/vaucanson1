@@ -31,10 +31,12 @@ Make sure your system has up-to-date tools (Autotools, Swig, Doxygen,
     this new change so that the next run of the autobuilder won't
     create a release.
 
-  - Copy the files created by ``distcheck`` to ``/lrde/dload/vaucanson/``
-  - Create the release page on the LRDE wiki
-  - Update the Vaucanson page to point to it
-  - Update the Vaucanson download page to point to it
+  - Copy the files created by ``distcheck`` to ``/lrde/dload/vaucanson/`` don't
+    forget to chmod corectly your files (644) and folders (755) and update the
+    'latest' link. 
+  - Create the release page on the LRDE wiki.
+  - Update the Vaucanson page to point to it.
+  - Update the Vaucanson download page to point to the release.
 
   - Send an announcement to vaucanson@lrde.epita.fr.  The text of the
     announcement should explain what Vaucanson is (so we can forward

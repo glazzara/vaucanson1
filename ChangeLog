@@ -1,3 +1,8 @@
+2008-09-11  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add another step to the making release help..
+	* doc/HACKING.txt: up.
+
 2008-09-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add a step to the making release help..
