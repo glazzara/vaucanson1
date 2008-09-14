@@ -452,6 +452,16 @@ namespace vcsn
       GET_MONOID_GEN_SORT(char, "letters")
       GET_MONOID_GEN_SORT(int, "integers")
 # undef GET_MONOID_GEN_SORT
+
+      template <class T>
+      const char* get_monoid_gen_sort(const T&, int i)
+      { return "undefined"; }
+
+      template <class U, class V>
+      const char* get_monoid_gen_sort(const std::pair<U,V>& a, int i)
+      {
+	return i ? get_monoid_gen_sort(a.second) : get_monoid_gen_sort(a.first);
+      }
     } // !builders
 
     namespace builders
@@ -473,8 +483,8 @@ namespace vcsn
       template <typename T>
       void
       create_monoid_node(const T& aut,
-			 xercesc::DOMDocument* doc,
-		       	 xercesc::DOMElement* root)
+                         xercesc::DOMDocument* doc,
+                         xercesc::DOMElement* root)
       {
 	std::string letter_kind = algebra::letter_traits<typename T::monoid_t::alphabet_t::letter_t>::kind();
 	xercesc::DOMElement* node = tools::create_element(doc, "monoid");
@@ -485,18 +495,29 @@ namespace vcsn
 
 	typedef typename T::monoid_t::alphabet_t::const_iterator alphabet_iterator;
 
-	create_monGen_node<typename T::monoid_t::alphabet_t::letter_t> monGen_maker;
-	for_all_letters(l, aut.structure().series().monoid().alphabet())
-	monGen_maker(*l, doc, node);
-
 	if (letter_kind == "simple")
 	  tools::set_attribute(node, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin())));
 	else
 	{
 	  std::stringstream genDim;
-	  genDim << algebra::letter_traits<typename T::monoid_t::alphabet_t::letter_t>::dim();
+	  int dim = algebra::letter_traits<typename T::monoid_t::alphabet_t::letter_t>::dim();
+	  genDim << dim;
 	  tools::set_attribute(node, "genDim", genDim.str());
+	  xercesc::DOMElement* genSort = tools::create_element(doc, "genSort");
+	  node->appendChild(genSort);
+	  xercesc::DOMElement* genCompSort;
+	  for (int i = 0; i != dim; i++)
+	  {
+	    genCompSort = tools::create_element(doc, "genCompSort");
+	    tools::set_attribute(genCompSort, "value", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin()), i));
+	    genSort->appendChild(genCompSort);
+	  }
 	}
+
+	create_monGen_node<typename T::monoid_t::alphabet_t::letter_t> monGen_maker;
+	for_all_letters(l, aut.structure().series().monoid().alphabet())
+	  monGen_maker(*l, doc, node);
+
       }
 
       template <typename T>

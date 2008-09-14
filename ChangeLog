@@ -1,3 +1,9 @@
+2008-09-14  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update XML Output for pairs.
+	* xml/builders.hxx: Had support of <genSort> tokens.
+	* xml/contexts/fmp.hxx: Remove useless comments.
+
 2008-09-11  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add another step to the making release help..
