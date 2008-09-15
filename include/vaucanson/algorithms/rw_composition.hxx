@@ -61,8 +61,7 @@ namespace vcsn {
     // with the corresponding hstate_t, to speedup lookups.
     state_pair_map_t Tstates;
 
-    // These variables are maint to help us create the new
-    // state geometry.
+    // These variables help us create the new state geometry.
     double xgeom;
     double ygeom;
     geom_iter_t iter;
@@ -142,7 +141,6 @@ namespace vcsn {
     // Main loop (runs until the queue is exhausted).
     //
 
-    // Runs until the queue is empty.
     while (not queue.empty())
     {
       // Pop one state from the queue.
@@ -233,9 +231,6 @@ namespace vcsn {
   }
 
   // Wrapper around do_rw_composition.
-  // We need to be sure ret is empty before passing
-  // it. You must be sure ret is different from
-  // lhs and rhs.
   template< typename S, typename T>
   void
   rw_composition(const Element<S, T>& lhs,
@@ -244,13 +239,18 @@ namespace vcsn {
   {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
+    // We need to make sure RET is empty before passing it
+    // to do_rw_composition(), therefore it won't work if
+    // RET refers to the same automaton as LHS or RHS.
+    precondition(&res != &lhs);
+    precondition(&res != &rhs);
     for_all_states (s, ret)
       ret.del_state (*s);
     do_rw_composition(lhs.structure(), lhs, rhs, ret);
   }
 
   // This wrapper creates a new automaton. No
-  // special care need be taken.
+  // special care needs be taken.
   template< typename S, typename T>
   Element<S, T>
   rw_composition(const Element<S, T>& lhs, const Element<S, T>& rhs)
