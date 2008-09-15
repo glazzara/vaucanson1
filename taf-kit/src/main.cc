@@ -93,18 +93,18 @@ namespace
 
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,
-      "Set the first alphabet for rational expressions", 0 },
+      "Set the first alphabet for rational expressions or automata", 0 },
     { "alphabet2",	'A', "ALPHABET", 0,
-      "Set the second alphabet for rational expressions", 0 },
+      "Set the second alphabet for rational expressions or automata", 0 },
     { "parser1",	'p', "OPTIONS", 0,
-      "Set the first parser options for rational expressions", 0 },
+      "Set the first parsing options for rational expressions", 0 },
     { "parser2",	'P', "OPTIONS", 0,
-      "Set the second parser options for rational expressions", 0 },
+      "Set the second parsing options for rational expressions", 0 },
 #else /* ! WITH_TWO_ALPHABETS */
     { "alphabet",		'a', "ALPHABET", 0,
-      "Set the working alphabet for rational expressions", 0 },
+      "Set the alphabet for rational expressions or automata", 0 },
     { "parser",			'p', "OPTIONS", 0,
-      "Set the working parser options for rational expressions", 0 },
+      "Set the parsing options for rational expressions", 0 },
 #endif /* ! WITH_TWO_ALPHABETS */
 
 #ifndef NO_PREDEF_ALPHABETS
