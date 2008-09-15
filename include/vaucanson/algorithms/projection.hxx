@@ -105,21 +105,24 @@ namespace vcsn {
 
     for_all_const_transitions_(aut_, aut_e, aut)
     {
-      const aut_series_set_elt_t	aut_series_elt =
-	aut.series_of(*aut_e);
-      aut_support_t			aut_supp = aut_series_elt.supp();
-      const aut_monoid_elt_t	aut_monoid_elt
-	(aut_monoid, *(aut_supp.begin()));
-      const monoid_elt_value_t	word(aut_monoid_elt.value(),
-				     aut_monoid_elt.value());
+      const aut_series_set_elt_t aut_series_elt = aut.series_of(*aut_e);
 
-      series_set_elt_t		series_elt(series);
+      // If the transition is labeled by a+bc, we want to output
+      // two transitions labeled by (a,a) and (bc,bc).
+      aut_support_t aut_supp = aut_series_elt.supp();
+      for_all_const_(aut_support_t, label, aut_supp)
+	{
+	  const aut_monoid_elt_t aut_monoid_elt(aut_monoid, *label);
+	  const monoid_elt_value_t word(aut_monoid_elt.value(),
+					aut_monoid_elt.value());
 
-      series_elt.assoc(monoid_elt_t(monoid, word),
-		       aut_series_elt.get(aut_monoid_elt));
+	  series_set_elt_t series_elt(series);
+	  series_elt.assoc(monoid_elt_t(monoid, word),
+			   aut_series_elt.get(aut_monoid_elt));
 
-      res.add_series_transition(stmap[aut.src_of(*aut_e)],
-				stmap[aut.dst_of(*aut_e)], series_elt);
+	  res.add_series_transition(stmap[aut.src_of(*aut_e)],
+				    stmap[aut.dst_of(*aut_e)], series_elt);
+	}
     }
   }
 

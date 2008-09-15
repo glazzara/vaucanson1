@@ -18,3 +18,44 @@
 set -e
 
 VCSN=vcsn-char-fmp-z
+
+sed '/^#/d' <<EOF | vcsn-char-z --alphabet=ab define-automaton cb.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+1
+# Set a state to be final.
+7
+# Which state
+1
+1
+# Add transition
+3
+# From and to
+0
+1
+# Label
+a+ab+{2}bb
+# Add transition
+3
+# From and to
+1
+1
+# Label
+b
+# Exit.
+10
+EOF
+
+$VCSN intersection cb.xml > tcz.xml
+res=`$VCSN eval tcz.xml abbb`
+test "x$res" = "x{2} a.b.b.b"
+res=`$VCSN eval tcz.xml aa`
+test "x$res" = "x0"
+res=`$VCSN eval tcz.xml bbb`
+test "x$res" = "x{2} b.b.b"

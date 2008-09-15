@@ -1,5 +1,13 @@
 2008-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/projection.hxx (do_identity): When
+	a transition is labelled by a+b, output (a,a) and (b,b), not
+	just (a,a).
+	* taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-int-fmp-b.test: Extend to test above change.
+
+2008-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/fmp_commands.cc (evaluation, evaluation_fmp,
 	domain, image): Read the alphabets from the input automaton,
 	do not ask the user to enter them again.
