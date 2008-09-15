@@ -1,3 +1,19 @@
+2008-09-15  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix some gcc-4.3 compilation bugs.
+	* ../../src/tests/check/tester.cc,
+	  algorithms/eps_removal_sp.hxx,
+	  automata/implementation/bmig_graph_impl.hh,
+	  automata/implementation/geometry.hh,
+	  automata/implementation/listg/listg_handlers.hxx,
+	  automata/implementation/listg_graph_impl.hh,
+	  misc/deferrer.hxx,
+	  misc/timer_internal_gathering.hh,
+	  misc/timer_internal_graph.hh:
+	  Fix some gcc-4.3 compiliton bugs.
+	    - add missing includes.
+	    - correct some incorrect declarations.
+
 2008-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/HACKING.txt: Mention chmod a+rX.

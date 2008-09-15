@@ -17,6 +17,7 @@
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_HANDLERS_HXX
 # define VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_HANDLERS_HXX
 
+# include <limits.h>
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/implementation/listg/listg_handlers.hh>
 

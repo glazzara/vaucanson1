@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -58,43 +58,43 @@ namespace vcsn
       geometry();
       explicit geometry(const geometry& obj);
       ~geometry();
-      inline geometry& operator=(const geometry& obj);
-      inline geometry& copy_from(const geometry& obj);
+      geometry& operator=(const geometry& obj);
+      geometry& copy_from(const geometry& obj);
 
       /**
        * @brief Retrieve the map of state coordinates.
        *
        **/
-      inline states_geometry_map_t& states();
-      inline const states_geometry_map_t& states() const;
+      states_geometry_map_t& states();
+      const states_geometry_map_t& states() const;
 
       /**
        * @brief Retrieve the map of label coordinates for transitions.
        *
        **/
-      inline transitions_geometry_map_t& transitions();
-      inline const transitions_geometry_map_t& transitions() const;
+      transitions_geometry_map_t& transitions();
+      const transitions_geometry_map_t& transitions() const;
 
       /**
        * @brief Retrieve the map of label coordinates for initial transitions.
        *
        **/
-      inline initials_geometry_map_t& initials();
-      inline const initials_geometry_map_t& initials() const;
+      initials_geometry_map_t& initials();
+      const initials_geometry_map_t& initials() const;
 
       /**
        * @brief Retrieve the map of label coordinates for final transitions.
        *
        **/
-      inline finals_geometry_map_t& finals();
-      inline const finals_geometry_map_t& finals() const;
+      finals_geometry_map_t& finals();
+      const finals_geometry_map_t& finals() const;
 
       /**
        * @brief Retrieve the name of the automaton.
        *
        **/
-      inline std::string& name();
-      inline const std::string& name() const;
+      std::string& name();
+      const std::string& name() const;
 
 
     private:

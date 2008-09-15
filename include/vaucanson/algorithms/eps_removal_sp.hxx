@@ -201,6 +201,7 @@ namespace vcsn {
 	    semiring_elt_t we = a.series_of(*e).get(monoid_identity);
 	    we = R * we;
 	    if (dist != dist +  we)
+	    {
 	      if (it != shortest_hash.end())
 	      {
 		shortest_hash.modify(it, add_dr(we, we));
@@ -211,6 +212,7 @@ namespace vcsn {
 		shortest_hash.insert(s_shortest(*s, a.dst_of(*e), we, we));
 		squeue.insert(a.dst_of(*e));
 	      }
+	    }
 	  }
 	}
       }

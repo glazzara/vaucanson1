@@ -273,13 +273,12 @@ namespace vcsn
 
 	/** @name Geometry access
 	** @{ */
-	typedef geometry<hstate_t, hedge_t, GeometryCoords>
+	typedef vcsn::geometry<hstate_t, hedge_t, GeometryCoords>
 			    geometry_t;
 	geometry_t&	    geometry();
 	const geometry_t&   geometry() const;
 	/** @}*/
 
-      private:
 	geometry_t	    geometry_;
 
       public:

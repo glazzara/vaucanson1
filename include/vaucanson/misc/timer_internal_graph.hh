@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ namespace misc
     class TimeStamp;
 
     /// Enumerate the different verbose degrees for dot format graph export.
-    typedef enum verbose_degree
+    enum verbose_degree
       {
         VERBOSE_NONE,
         VERBOSE_MINIMAL,
