@@ -1,5 +1,9 @@
 2008-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/HACKING.txt: Mention chmod a+rX.
+
+2008-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Make sure the help text of TAF-Kit does not mention
 	Boolean automata when Z automata are expected.
 
