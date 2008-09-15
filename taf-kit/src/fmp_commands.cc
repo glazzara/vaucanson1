@@ -173,7 +173,7 @@ const command_t command_map[] =
 		      "Give the evaluation of `exp' against `aut'."),
     COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
 		      "Evaluate the language described by the\n\t"
-		      "Boolean automaton `aut2' on the transducer `aut1'."),
+		      IOAUT_NAME " automaton `aut2' on the transducer `aut1'."),
     COMMAND_ENTRY (image, Aut,
 		   "Give an automaton that accepts all output produced by `aut'."),
     //	  COMMAND_ENTRY (transpose, Aut,
@@ -193,16 +193,17 @@ const command_t command_map[] =
     COMMAND_ENTRY (compose, AutAut,
 		   "Compose `aut1' and `aut2', two (sub-)normalized\n\ttransducers."),
     COMMAND_ENTRY (u_compose, AutAut,
-		   "Compose `aut1' and `aut2', two Boolean transducers,\n\t"
-		   "preserve the number of path."),
+		   "Compose `aut1' and `aut2', two transducers,\n\t"
+		   "preserve the number of paths."),
 #ifdef RW_CONTEXT
     COMMAND_ENTRY (to_rw, Aut,
 		   "Give the equivalent rational weight transducer of `aut'."),
 #endif
     COMMAND_ENTRY (invert, Aut, "Give the inverse of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
-		   "Transform a Boolean automaton in a fmp transducer by\n\t"
-		   "creating, for each word, a pair containing twice this word.")
+		   "Transform a " IOAUT_NAME " automaton in a fmp "
+		   "transducer by\n\tcreating, for each word, "
+		   "a pair containing twice this word.")
     ),
 
   {0, 0 ,0 ,0, 0}

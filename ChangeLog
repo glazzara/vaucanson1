@@ -1,3 +1,15 @@
+2008-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make sure the help text of TAF-Kit does not mention
+	Boolean automata when Z automata are expected.
+
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_b_CPPFLAGS,
+	vcsn_char_fmp_z_CPPFLAGS, vcsn_int_fmp_b_CPPFLAGS,
+	vcsn_int_fmp_z_CPPFLAGS): Specify IOAUT_NAME.
+	* taf-kit/src/fmp_commands.cc (command_map): Use IOAUT_NAME
+	in the help text for eval-aut and intersection.  Simplify
+	the description of u_compose.
+
 2008-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/projection.hxx (do_identity): When

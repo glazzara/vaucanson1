@@ -71,6 +71,7 @@ vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) \
 vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS \
 			    -DIOAUT_CONTEXT=boolean_automaton \
+                            -DIOAUT_NAME='"Boolean"' \
 			    -DRW_CONTEXT=boolean_transducer -DVCSN_USE_LIB
 vcsn_char_fmp_b_LDADD = $(LDADD) \
 			 $(top_builddir)/lib/libvcsn-fmp-tdc.la \
@@ -82,6 +83,7 @@ vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES) \
 vcsn_char_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DCONTEXT=z_fmp_transducer -DWITH_TWO_ALPHABETS \
 			    -DIOAUT_CONTEXT=z_automaton \
+                            -DIOAUT_NAME='"Z"' \
 			    -DRW_CONTEXT=z_transducer -DVCSN_USE_LIB \
 			    -DWITH_WEIGHTS
 vcsn_char_fmp_z_LDADD = $(LDADD) \
@@ -115,6 +117,7 @@ vcsn_int_fmp_b_SOURCES = $(COMMON_SOURCES) \
 vcsn_int_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \
 			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
 			   -DIOAUT_CONTEXT=int_boolean_automaton \
+                           -DIOAUT_NAME='"Boolean"' \
 			   -DRW_CONTEXT=int_boolean_transducer -DVCSN_USE_LIB
 vcsn_int_fmp_b_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libkrat_exp.la \
@@ -126,6 +129,7 @@ vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES) \
 vcsn_int_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_fmp_transducer \
 			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
 			   -DIOAUT_CONTEXT=int_z_automaton \
+                           -DIOAUT_NAME='"Z"' \
 			   -DRW_CONTEXT=int_z_transducer -DWITH_WEIGHTS \
 			   -DVCSN_USE_LIB
 vcsn_int_fmp_z_LDADD = $(LDADD) \
