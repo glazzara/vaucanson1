@@ -87,3 +87,42 @@ The VCSN_GRAPH_IMPL macro must only appear in three locations:
 
 Any other use is irrelevant and may be very harmful. Moreover this
 macro must never be used in a file with guards.
+
+
+Using ``gdb`` or ``valgrind`` on TAF-Kit
+========================================
+
+The executables that are built in ``taf-kit/src/`` are ``libtool``
+scripts that call the true executables (usually hidden under
+``taf-kit/src/.libs/``).  You cannot run ``gdb`` directly on these
+scripts, you should always ask ``libtool`` to do it for you::
+
+  % cd taf-kit/src
+  % export VCSN_DATA_PATH=$PWD/../../data
+  % libtool --mode=execute gdb ./vcsn-int-b
+  (gdb) run determinize x.xml
+  ...
+
+It's often more convenient to run the scripts from taf-kit/tests
+because they export ``VCSN_DATA_PATH`` and run the corresponding
+executable from ``taf-kit/src`` for you.  In that case you have to use
+the ``PREVCSN`` environment variable to specify these ``libtool``
+options::
+
+  % cd taf-kit/tests
+  % PREVCSN='libtool --mode=execute gdb' ./vcsn-int-b
+  (gdb) run determinize x.xml
+  ...
+
+The same commands can of course be used to run other tools like
+Valgrind.  Here is how to run TAF-Kit under Valgrind and attach a
+debugger on the first error::
+
+  % cd taf-kit/tests
+  % PREVCSN='libtool --mode=execute valgrind --db-attach' ./vcsn-int-b
+
+A note for Darwin users: because your system comes with another tool
+called ``libtool``, GNU ``libtool`` is usually installed as
+``glibtool``.  Alternatively, you may want to use the copy of
+``libtool`` output by ``configure`` at the root of Vaucanson's build
+tree.
