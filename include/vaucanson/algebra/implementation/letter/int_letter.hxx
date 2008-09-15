@@ -18,7 +18,7 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 
 # include <sstream>
-# include <limits.h>
+# include <climits>
 
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 

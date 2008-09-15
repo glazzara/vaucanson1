@@ -15,7 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <iomanip>
-#include <limits.h>
+#include <climits>
 #include <string>
 #include <cassert>
 #include <cstdlib>  // getenv()

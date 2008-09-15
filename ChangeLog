@@ -1,5 +1,12 @@
 2008-09-15  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix some include tags.
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	  include/vaucanson/automata/implementation/listg/listg_handlers.hxx,
+	  src/tests/check/tester.cc: Use climits instead of limits.h.
+
+2008-09-15  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add a new test: coherence check on the transitions.
 	* automata/implementation_check/transition_coherence_test.hh: New.
 	
