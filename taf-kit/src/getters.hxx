@@ -52,30 +52,31 @@ using namespace vcsn::tools;
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |
   `---------------------------------------------*/
-# define DEFINE_GET_ALPHABET(Name, Type)			\
-static Type Name (const std::vector<std::string>& al)		\
-{								\
-  Type a;							\
-  if (al.empty())					\
-  {								\
-    warn ("Error: alphabet should be explicitly defined.");	\
-    exit (-2);							\
-  }								\
-  for (std::vector<std::string>::const_iterator i = al.begin(); i != al.end(); ++i) \
-    a.insert (*i);					        \
-  return a;							\
+# define DEFINE_GET_ALPHABET(Name, Type, Opt)				\
+static Type Name (const std::vector<std::string>& al)			\
+{									\
+  Type a;								\
+  if (al.empty())							\
+  {									\
+    warn ("Error: alphabet should be explicitly defined using --" Opt);	\
+    exit (-2);								\
+  }									\
+  for (std::vector<std::string>::const_iterator i = al.begin();		\
+       i != al.end(); ++i)						\
+    a.insert (*i);							\
+  return a;								\
 }
 
 
 /// Getter for alphabet.
 # ifndef WITH_TWO_ALPHABETS
 
-DEFINE_GET_ALPHABET(get_alphabet,alphabet_t);
+DEFINE_GET_ALPHABET(get_alphabet, alphabet_t, "alphabet");
 
 # else
 
-DEFINE_GET_ALPHABET (get_first_alphabet, first_alphabet_t);
-DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t);
+DEFINE_GET_ALPHABET (get_first_alphabet, first_alphabet_t, "alphabet1");
+DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t, "alphabet2");
 
 # endif
 

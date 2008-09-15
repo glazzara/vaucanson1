@@ -103,4 +103,9 @@ $VCSN are-equivalent p.xml pdm.xml
 $VCSN are-equivalent p.xml pq.xml
 $VCSN are-equivalent pdm.xml pq.xml
 
+# --alphabet is required for defined-automaton; make sure
+# the error message points the user to that option.
+$VCSN define-automaton x.xml 2>stderr && exit 1
+fgrep ' --alphabet' stderr
+
 exit 0

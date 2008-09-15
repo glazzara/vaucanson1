@@ -1,5 +1,12 @@
 2008-09-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/getters.hxx (DEFINE_GET_ALPHABET): Direct users to
+	--alphabet, --alphabet1, or --alphabet2 when they should define an
+	alphabet.
+	* taf-kit/tests/vcsn-int-b.test: Test it.
+
+2008-09-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx
 	(do_quotient): Correctly allocate the memory for inverse[]
 	elements.
