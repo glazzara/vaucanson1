@@ -1,5 +1,13 @@
 2008-09-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx
+	(do_quotient): Correctly allocate the memory for inverse[]
+	elements.
+	* taf-kit/tests/vcsn-int-fmp-z.test: Add some test.  The first
+	two evals used to trigger a segfault before the above change.
+
+2008-09-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/letter/int_letter.hxx
 	(op_parse): Fix bogus parenthesis and handling of empty words.
 	Because op_parse() was called on all tokens used in the regex

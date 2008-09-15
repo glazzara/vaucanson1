@@ -36,7 +36,7 @@ grep 'Cannot parse' stderr
 sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 define-automaton 33.xml
 # Add states
 1
-# Add one state
+# Add two states
 2
 # Set a state to be initial.
 5

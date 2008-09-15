@@ -507,7 +507,7 @@ namespace vcsn
     /*------------------------------.
     | Initialize the list of (P, a) |
     `------------------------------*/
-    
+
     if (max_partitions > 0)
       for_all_const_letters (e, alphabet_)
 	to_treat.push_back(pair_t(0, *e));
@@ -515,7 +515,7 @@ namespace vcsn
     if (max_partitions > 1)
       for_all_const_letters (e, alphabet_)
 	to_treat.push_back(pair_t(1, *e));
-    
+
     /*----------.
     | Main loop |
     `----------*/
@@ -634,12 +634,11 @@ namespace vcsn
     vector< vector<set_pair_state_semiring_elt_t> > inverse (max_states);
 
     map<letter_t, unsigned> pos_of_letter;
-    {
-      unsigned pos (0);
 
-      for_all_const_letters(a, alphabet)
-	pos_of_letter[*a] = pos++;
-    }
+    unsigned max_pos = 0;
+
+    for_all_const_letters(a, alphabet)
+      pos_of_letter[*a] = max_pos++;
 
     set_states_t		states_visited;
     set_semiring_elt_t		semiring_had_class;
@@ -649,7 +648,7 @@ namespace vcsn
     map_semiring_elt_t		class_of_weight;
 
     for (unsigned i = 0; i < max_states; ++i)
-      inverse[i].resize(max_states);
+      inverse[i].resize(max_pos);
 
     for_all_const_states(q, input)
       for_all_const_letters(a, alphabet)
@@ -738,14 +737,14 @@ namespace vcsn
     {
       pair_class_letter_t pair = the_queue.front();
       the_queue.pop();
-      //val.clear(); // FIXME: Is this line necessary?
       met_classes.clear();
       vector_semiring_elt_t val (max_states);
 
+      // FIXME: Isn't there an easier way to do this?
       for_all_const_states(q, input)
 	val[*q] = 0;
 
-      // First, calculcate val[state] and note met_classes.
+      // First, calculate val[state] and not met_classes.
       for_all_const_(set_states_t, q, classes[pair.first])
 	for_all_const_(set_pair_state_semiring_elt_t, pair_,
 		       inverse[*q][pos_of_letter[pair.second]])
