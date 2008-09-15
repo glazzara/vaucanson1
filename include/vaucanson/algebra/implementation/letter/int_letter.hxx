@@ -83,14 +83,13 @@ namespace vcsn {
 		  const CharContainer&)
     {
       typename std::string::const_iterator j = i;
-      typename std::string::const_iterator k;
       typename std::string::const_iterator back;
 
       while (i != s.end()) {
 	std::string out;
 	back = i;
 
-	while ((i != s.end()) && (((*i >= '0') && (*i <= '9'))) || (*i == '#'))
+	while ((i != s.end()) && (((*i >= '0') && (*i <= '9')) || (*i == '#')))
 	  if (*i == '#') {
 	    ++i;
 	    break;
@@ -100,9 +99,13 @@ namespace vcsn {
 	    ++i;
 	  }
 
+	if (out.empty())
+	  break;
+
 	int value;
 	std::istringstream is(out);
 	is >> value;
+
 	if (!set.alphabet().contains(value)) {
 	  i = back;
 	  break ;

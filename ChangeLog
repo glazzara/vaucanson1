@@ -1,3 +1,11 @@
+2008-09-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx
+	(op_parse): Fix bogus parenthesis and handling of empty words.
+	Because op_parse() was called on all tokens used in the regex
+	parser, it was outputting uninitialized integers when trying to
+	parse strings like "(".
+
 2008-09-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/parser_options.hh, taf-kit/src/parser_options.hxx:
