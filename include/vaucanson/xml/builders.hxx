@@ -454,7 +454,7 @@ namespace vcsn
 # undef GET_MONOID_GEN_SORT
 
       template <class T>
-      const char* get_monoid_gen_sort(const T&, int i)
+      const char* get_monoid_gen_sort(const T&, int)
       { return "undefined"; }
 
       template <class U, class V>

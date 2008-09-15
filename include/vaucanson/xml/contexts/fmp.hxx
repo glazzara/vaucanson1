@@ -254,7 +254,7 @@ namespace vcsn
 	xercesc::DOMElement* first = tools::create_element(doc, "monoid");
 	tools::set_attribute(first, "type", "free");
 	tools::set_attribute(first, "genDescrip", "enum");
-	tools::set_attribute(first, "genKind", "simple"); // FIXME get it
+	tools::set_attribute(first, "genKind", algebra::letter_traits<typename FMPtype::monoid_t::first_monoid_t::alphabet_t::letter_t>::kind());
 	node->appendChild(first);
 	typedef typename FMPtype::monoid_t::first_monoid_t::alphabet_t::const_iterator first_alphabet_iterator;
 	for_all_letters_(first_, l, aut.structure().series().monoid().first_monoid().alphabet())
@@ -269,7 +269,7 @@ namespace vcsn
 	xercesc::DOMElement* second = tools::create_element(doc, "monoid");
 	tools::set_attribute(second, "type", "free");
 	tools::set_attribute(second, "genDescrip", "enum");
-	tools::set_attribute(second, "genKind", "simple"); // FIXME get it
+	tools::set_attribute(second, "genKind", algebra::letter_traits<typename FMPtype::monoid_t::second_monoid_t::alphabet_t::letter_t>::kind());
 	node->appendChild(second);
 	typedef typename FMPtype::monoid_t::second_monoid_t::alphabet_t::const_iterator second_alphabet_iterator;
 	for_all_letters_(second_, l, aut.structure().series().monoid().second_monoid().alphabet())

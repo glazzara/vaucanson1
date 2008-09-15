@@ -1,3 +1,9 @@
+2008-09-15  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update XML support, make it more generic.
+	* builders.hxx: Fix a warning.
+	* contexts/fmp.hxx: Use letter_traits instead of a const string.
+
 2008-09-14  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Update XML Output for pairs.
