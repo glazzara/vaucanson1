@@ -135,7 +135,7 @@ namespace vcsn
 
 	tools::set_attribute(monoid, "type", "free");
 	tools::set_attribute(monoid, "genDescrip", "enum");
-	tools::set_attribute(monoid, "genKind", "simple"); // FIXME get it
+	tools::set_attribute(monoid, "genKind", algebra::letter_traits<typename TRANStype::semiring_t::monoid_t::alphabet_t::letter_t>::kind());
 	typedef typename TRANStype::semiring_t::monoid_t::alphabet_t::const_iterator alphabet_iterator;
 	for_all_letters(l, aut.structure().series().semiring().monoid().alphabet())
 	{
