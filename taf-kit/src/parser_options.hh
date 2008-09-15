@@ -42,11 +42,11 @@
  * (EBNF notations)
  *
  * @verbatim
- * parser-properties ::= [ propertie { ' ' propertie } ];
- * propertie ::= ( "ALPHABET"   '=' alphabet-definition ) |
- *               ( "ONE"        '=' word ) |
- *               ( "ZERO"       '=' word ) |
- *               ( special-name '=' character );
+ * parser-properties ::= [ property { ' ' property } ];
+ * property ::= ( "ALPHABET"   '=' alphabet-definition ) |
+ *              ( "ONE"        '=' word ) |
+ *              ( "ZERO"       '=' word ) |
+ *              ( special-name '=' character );
  * alphabet-definition ::= ( "words" ':' [ words ] ) |
  *                         ( [ "letters" ':' ] [ letters ] );
  * letters ::= letter*;
@@ -97,7 +97,7 @@ private:
       // type helpers
       typedef typename parser_options::options_grammar::definition<ScannerT> self_t;
 
-      boost::spirit::rule<ScannerT> parser_properties, propertie,
+      boost::spirit::rule<ScannerT> parser_properties, property,
       alphabet_definition, letters, words, special_name, word_pair,
       word, character, letter, escaped_character, unescaped_character,
       special_character, true_is_char_letter, false_is_char_letter;

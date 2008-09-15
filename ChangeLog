@@ -1,5 +1,10 @@
 2008-09-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/parser_options.hh, taf-kit/src/parser_options.hxx:
+	Typo.
+
+2008-09-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/main.cc (options): Reword --alphabet and --parser
 	descriptions.
 

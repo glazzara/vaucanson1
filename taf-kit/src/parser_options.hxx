@@ -119,7 +119,7 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   using namespace boost::spirit;
 
   BOOST_SPIRIT_DEBUG_RULE(parser_properties);
-  BOOST_SPIRIT_DEBUG_RULE(propertie);
+  BOOST_SPIRIT_DEBUG_RULE(property);
   BOOST_SPIRIT_DEBUG_RULE(alphabet_definition);
   BOOST_SPIRIT_DEBUG_RULE(letters);
   BOOST_SPIRIT_DEBUG_RULE(words);
@@ -178,18 +178,18 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   one_cb	  = bind(&self_t::push_one       , this, _1, _2);
   zero_cb	  = bind(&self_t::push_zero      , this, _1, _2);
 
-  parser_properties = !list_p(propertie, space_c);
-  propertie = ( alphabet     >> equal >> alphabet_definition ) |
-              ( one          >> equal >> word[one_cb] ) |
-              ( zero         >> equal >> word[zero_cb] ) |
-              ( opar >> equal >> word[open_par_cb] ) |
-              ( cpar >> equal >> word[close_par_cb] ) |
-              ( plus >> equal >> word[plus_cb] ) |
-              ( times >> equal >> word[times_cb] ) |
-              ( star >> equal >> word[star_cb] ) |
-              ( oweight >> equal >> word[open_weight_cb] ) |
-              ( cweight >> equal >> word[close_weight_cb] ) |
-	      ( space >> equal >> word[push_space_cb] );
+  parser_properties = !list_p(property, space_c);
+  property = ( alphabet     >> equal >> alphabet_definition ) |
+             ( one          >> equal >> word[one_cb] ) |
+             ( zero         >> equal >> word[zero_cb] ) |
+             ( opar >> equal >> word[open_par_cb] ) |
+             ( cpar >> equal >> word[close_par_cb] ) |
+             ( plus >> equal >> word[plus_cb] ) |
+             ( times >> equal >> word[times_cb] ) |
+             ( star >> equal >> word[star_cb] ) |
+             ( oweight >> equal >> word[open_weight_cb] ) |
+             ( cweight >> equal >> word[close_weight_cb] ) |
+	     ( space >> equal >> word[push_space_cb] );
 
   letters = *(letter[push_letter_cb]);
   words = !list_p(word[push_letter_cb], comma);
