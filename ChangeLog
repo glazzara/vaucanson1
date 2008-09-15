@@ -1,5 +1,13 @@
 2008-09-15  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Add a new test: coherence check on the transitions.
+	* automata/implementation_check/transition_coherence_test.hh: New.
+	
+	Check if the transitions are coherent, merge part of the label when
+	possible: a + a becomes (1 + 1) a.
+
+2008-09-15  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Add a new bench.
 	* iterators/accessible_bench.hh: New.
 	  Run benchmarks on accessible in order to evaluate the
