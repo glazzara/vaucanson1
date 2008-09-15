@@ -70,10 +70,10 @@ fail1 $VCSN is-empty $t1
 ## Inversion of t1
 #  $VCSN invert $t1 \| are-isomorphic $inverted_t1 -
 
-  input=`$VCSN --alphabet1=ab --alphabet2=xy eval $t1 abba`
-  $VCSN --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-char-b eval - abba
-  $VCSN --alphabet1=ab --alphabet2=xy image $t1 | vcsn-char-b eval - $input
+  input=`$VCSN eval $t1 abba`
+  $VCSN domain $t1 | vcsn-char-b eval - abba
+  $VCSN image $t1 | vcsn-char-b eval - $input
 
   $VCSN to-rw $t1
 
-  $VCSN --alphabet1=ab --alphabet2=xy eval-aut $t1 $a1 | vcsn-char-b eval - yx
+  $VCSN eval-aut $t1 $a1 | vcsn-char-b eval - yx

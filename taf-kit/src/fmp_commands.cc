@@ -68,36 +68,38 @@ DEFINE_COMMAND (NAME (invert)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation)
-		CODE (/* empty */)
+		CODE (automaton_t src = get_aut(args.args[1]))
 		OUTPUT (
-		  evaluation (get_aut(args.args[1]),
-			      IOAUT_CONTEXT::make_rat_exp(
-				get_first_alphabet (args.alphabet),
+		  evaluation (src,
+			      IOAUT_CONTEXT::make_rat_exp(src.structure().series().monoid().first_monoid().alphabet(),
 				args.args[2], args.tok_rep)) << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation_fmp)
 		CODE (
+		      automaton_t src = get_aut(args.args[1]);
 		  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args.args[2]);
 		  IOAUT_CONTEXT::automaton_t res =
-		  IOAUT_CONTEXT::make_automaton(get_second_alphabet(args.alphabet2));
-		  evaluation_fmp(get_aut(args.args[1]), a, res))
+		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().second_monoid().alphabet());
+		  evaluation_fmp(src, a, res))
 		KEEP_AUTOMATON (res)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (domain)
 		CODE (
+		  automaton_t src = get_aut(args.args[1]);
 		  IOAUT_CONTEXT::automaton_t a =
-		  IOAUT_CONTEXT::make_automaton(get_first_alphabet(args.alphabet));
-		  domain(get_aut(args.args[1]), a))
+		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().first_monoid().alphabet());
+		  domain(src, a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (image)
 		CODE (
+		  automaton_t src = get_aut(args.args[1]);
 		  IOAUT_CONTEXT::automaton_t a =
-		  IOAUT_CONTEXT::make_automaton(get_second_alphabet(args.alphabet2));
-		  image(get_aut(args.args[1]), a))
+		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().second_monoid().alphabet());
+		  image(src, a))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
