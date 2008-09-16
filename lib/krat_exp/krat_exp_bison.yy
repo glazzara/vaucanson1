@@ -89,9 +89,13 @@ namespace yy
     > self;
   };
 
+  // WARNING: this struct declaration is also in
+  //   include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+  // until someone factors these, you have to update both.
   struct krat_exp_parser
   {
     krat_exp_parser();
+    ~krat_exp_parser();
     void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_weight(vcsn::algebra::semiring_virtual* sem);
     void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
@@ -107,6 +111,11 @@ namespace yy
 yy::krat_exp_parser::krat_exp_parser()
 {
   tok_q_ = new token_queue;
+}
+
+yy::krat_exp_parser::~krat_exp_parser()
+{
+  delete tok_q_;
 }
 
 void

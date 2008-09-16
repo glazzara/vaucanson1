@@ -1,3 +1,13 @@
+2008-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix the memory leak of the krat_exp_parser structure.
+
+	* lib/krat_exp/krat_exp_bison.yy
+	(yy::krat_exp_parser::~krat_exp_parser): New method, to free
+	the token queue.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+	(yy::krat_exp_parser::~krat_exp_parser): Declare it here too.
+
 2008-09-15  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix some include tags.
@@ -9,7 +19,7 @@
 
 	Add a new test: coherence check on the transitions.
 	* automata/implementation_check/transition_coherence_test.hh: New.
-	
+
 	Check if the transitions are coherent, merge part of the label when
 	possible: a + a becomes (1 + 1) a.
 

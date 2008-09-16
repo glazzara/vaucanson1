@@ -28,9 +28,14 @@
 namespace yy
 {
   struct token_queue;
+
+  // WARNING: this struct declaration is also in
+  //   lib/krat_exp/krat_exp_bison.yy
+  // until someone factors these, you have to update both.
   struct krat_exp_parser
   {
     krat_exp_parser();
+    ~krat_exp_parser();
     void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_weight(vcsn::algebra::semiring_virtual* sem);
     void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
