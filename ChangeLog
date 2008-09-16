@@ -1,5 +1,12 @@
 2008-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Yet another memory leak.
+
+	* include/vaucanson/algorithms/standard_of.hxx (do_standard_of):
+	Free the result of the kratexp matcher.
+
+2008-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix the memory leak of the topmost krat_exp_proxy instance.
 
 	* lib/krat_exp/krat_exp_bison.yy (exp): Delete the krat_exp_proxy

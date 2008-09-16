@@ -218,7 +218,9 @@ namespace vcsn {
   {
     algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> >
       m(output.structure().series());
-    output = *m.match(kexp);
+    Output* res = m.match(kexp);
+    output = *res;
+    delete res;
   }
 
   template<typename A,
