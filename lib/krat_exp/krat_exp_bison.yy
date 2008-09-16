@@ -57,7 +57,7 @@ yylex(yy::krat_exp_bison::semantic_type* yylval,
 %start exp;
 
 exp :
-  rexp {exp = *$1}
+  rexp {exp = *$1; delete $1}
   ;
 
 rexp :

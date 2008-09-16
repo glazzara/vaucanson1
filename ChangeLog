@@ -1,5 +1,12 @@
 2008-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix the memory leak of the topmost krat_exp_proxy instance.
+
+	* lib/krat_exp/krat_exp_bison.yy (exp): Delete the krat_exp_proxy
+	instance after it has been assigned to exp.
+
+2008-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix the memory leak of the krat_exp_parser structure.
 
 	* lib/krat_exp/krat_exp_bison.yy
