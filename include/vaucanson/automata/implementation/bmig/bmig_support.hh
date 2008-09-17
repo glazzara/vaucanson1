@@ -256,20 +256,6 @@ namespace vcsn
 /// Declaring the traits for SupportIterator, according to the STL.
 namespace std
 {
-  template <class U, class HState>
-  struct iterator_traits<vcsn::misc::SupportIterator<typename vcsn::bmig::InitialContainer<U, HState>::Type > >
-  {
-    typedef input_iterator_tag  iterator_category;
-    typedef HState		value_type;
-    typedef int			difference_type;
-    typedef int*		pointer;
-    typedef int&		reference;
-  };
-} // std
-
-/// Declaring the traits for SupportIterator, according to the STL.
-namespace std
-{
   template <class T, class U>
   struct iterator_traits<vcsn::misc::SupportIterator<std::vector<vcsn::handler<T, U> > > >
   {

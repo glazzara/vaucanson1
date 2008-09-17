@@ -1,3 +1,8 @@
+2008-09-17  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Remove wrong incorrect iterator_traits..
+	* bmig/bmig_support.hh: here.
+
 2008-09-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a typo causing "make check" to fail.
