@@ -1,3 +1,9 @@
+2008-09-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a typo causing "make check" to fail.
+	* include/vaucanson/algorithms/rw_composition.hxx (rw_composition):
+	  res -> ret.
+
 2008-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-int-fmp-z.test: Process the ratexp produced

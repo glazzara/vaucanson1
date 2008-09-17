@@ -24,6 +24,8 @@
 
 # include <vaucanson/algorithms/rw_composition.hh>
 # include <vaucanson/automata/concept/transducer.hh>
+// FIXME: The code for geometry computation must be enabled statically.
+// (see product.hxx for some hints)
 # include <vaucanson/automata/implementation/geometry.hh>
 
 namespace vcsn {
@@ -242,8 +244,8 @@ namespace vcsn {
     // We need to make sure RET is empty before passing it
     // to do_rw_composition(), therefore it won't work if
     // RET refers to the same automaton as LHS or RHS.
-    precondition(&res != &lhs);
-    precondition(&res != &rhs);
+    precondition(&ret != &lhs);
+    precondition(&ret != &rhs);
     for_all_states (s, ret)
       ret.del_state (*s);
     do_rw_composition(lhs.structure(), lhs, rhs, ret);
