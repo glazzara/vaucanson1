@@ -1,5 +1,10 @@
 2008-09-17  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix typo from r2161.
+	* transition_coherence_test.hh: here.
+
+2008-09-17  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Remove wrong incorrect iterator_traits..
 	* bmig/bmig_support.hh: here.
 
