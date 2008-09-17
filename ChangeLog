@@ -1,3 +1,7 @@
+2008-09-17  Reuben Thomas  <rrt@sc3d.org>
+        * doc/manual/extex.mk: use printf instead of echo to print
+          backslashes.
+
 2008-09-17  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix typo from r2161.
