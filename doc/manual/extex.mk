@@ -1,4 +1,3 @@
-
 %.tex: %.cmd
 ## Eval the cmd to preserve embedded redirections.
 ## Use the taf-kit wrappers.
@@ -6,8 +5,8 @@
 	eval $$(cat $<) >$*.out 2>$*.err;		\
 	echo $$? >$*.sta
 	rm -f $@
-	echo '\begin{shell}'            >> $@
-	echo "# \kbd{$$(cat $<)}" >> $@
+	printf '\\begin{shell}\n# \kbd' >> $@
+	echo "{$$(cat $<)}" >> $@
 	if test -s $*.err; then				\
 	  sed -n -e 's/\([{|\\}]\)/\\\1/g'		\
 		 -e '/./s/.*/error: &/p' $*.err >> $@;	\
@@ -25,7 +24,7 @@
 	   || test $$(cat $*.sta) -ne 0; then	\
 	  sed 's/.*/=> &/' $*.sta >> $@;	\
 	fi
-	echo '\end{shell}' >> $@
+	printf '\\end{shell}\n' >> $@
 
 %.eps: %.dot
 	dot -Tps2 $< -o $@.tmp
