@@ -1,3 +1,8 @@
+2008-09-19  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Fix buildsystem.
+	* Makefile.am: Add missing file to noinst_HEADERS.
+
 2008-09-19  Reuben Thomas  <rrt@sc3d.org>
 
 	Update and improve BOOST tests.

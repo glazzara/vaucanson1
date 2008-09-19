@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006 The Vaucanson Group.
+## Copyright (C) 2006, 2008 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -112,6 +112,7 @@ tests/automata/implementation_check/geometry_equal_operator_test.hh		      \
 tests/automata/implementation_check/global_consistency_test.hh			      \
 tests/automata/implementation_check/init_final_test.hh				      \
 tests/automata/implementation_check/iterator_test.hh				      \
+tests/automata/implementation_check/transititon_coherence_test.hh		      \
 tests/automata/implementation_check/rdelta_test.hh
 
 
