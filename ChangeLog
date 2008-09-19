@@ -1,5 +1,19 @@
 2008-09-19  Reuben Thomas  <rrt@sc3d.org>
 
+	Update and improve BOOST tests.
+	* build-aux/Makefile.am: Add new boost .m4 files.
+	* build-aux/ax_boost_base.m4: New. This replaces vcsn-boost.m4 with
+	  a more up-to-date version of the same file, with its upstream name.
+	* build-aux/ax_boost_wserialization.m4: New. Used to detect the
+	  BOOST serialization library.
+	* build-aux/vcsn-boost.m4: Remove. See above.
+	* configure.ac: Detect the serialization library explicitly. Add a
+	  comment saying that we need to do the same thing for the graph
+	  library, but there's currently no macro for that. I've asked
+	  upstream for help.
+
+2008-09-19  Reuben Thomas  <rrt@sc3d.org>
+
 	Fix ChangeLog for my previous commits.
 	* ChangeLog: Fix my previous entries.
 

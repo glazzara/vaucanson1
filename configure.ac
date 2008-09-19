@@ -80,8 +80,8 @@ fi
 
 AC_CONFIG_FILES([vaucanswig/Makefile
 		 vaucanswig/meta/Makefile
-	         vaucanswig/src/Makefile
-	         vaucanswig/python/Makefile])
+		 vaucanswig/src/Makefile
+		 vaucanswig/python/Makefile])
 
 AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 	       [test "x$enable_vaucanswig" = "xyes"])
@@ -89,6 +89,13 @@ AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 
 # Boost
 AX_BOOST_BASE([1.34])
+AX_BOOST_WSERIALIZATION
+# AX_BOOST_GRAPH (this test does not yet exist, but is needed e.g. for Debian,
+# where the graph library is separately distributed)
+
+if test "x$ax_cv_boost_wserialization" != "xyes"; then
+  AC_MSG_ERROR([You need libboost-serialization to build Vaucanson.])
+fi
 
 if test "${with_boost+set}" = set; then
   MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-boost=$with_boost"
