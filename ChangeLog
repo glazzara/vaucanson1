@@ -1,3 +1,8 @@
+2008-09-19  Reuben Thomas  <rrt@sc3d.org>
+
+	Fix ChangeLog for my previous commits.
+	* ChangeLog: Fix my previous entries.
+
 2008-09-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	To enable the use of standalone rational expressions described in xml
@@ -16,10 +21,12 @@
 	messages.
 	  
 2008-09-17  Reuben Thomas  <rrt@sc3d.org>
+        Fix for POSIX sh compliance.
 
         * vaucanswig/expand.sh: use = instead of == for POSIX compliance.
 
 2008-09-17  Reuben Thomas  <rrt@sc3d.org>
+        Fix for POSIX compliance.
 
         * doc/manual/extex.mk: use printf instead of echo to print
           backslashes.
