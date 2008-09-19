@@ -219,11 +219,20 @@ namespace
 
       case 'o':
 	if (std::string (arg).compare ("XML") == 0)
-	  args.output_type = OUTPUT_TYPE_XML;
+	{
+	  args.output_aut_type = OUTPUT_TYPE_XML;
+	  args.output_exp_type = OUTPUT_TYPE_XML;
+	}
 	else if (std::string (arg).compare ("FSM") == 0)
-	  args.output_type = OUTPUT_TYPE_FSM;
+	{
+	  args.output_aut_type = OUTPUT_TYPE_FSM;
+	  args.output_exp_type = OUTPUT_TYPE_FSM;
+	}
 	else if (std::string (arg).compare ("DOT") == 0)
-	  args.output_type = OUTPUT_TYPE_DOT;
+	{
+	  args.output_aut_type = OUTPUT_TYPE_DOT;
+	  args.output_exp_type = OUTPUT_TYPE_DOT;
+	}
 	else
 	{
 	  std::cerr << "Unknown output type: " << arg << std::endl;
@@ -342,7 +351,8 @@ int main (int argc, char* argv[])
 	    {
 	      GLOBAL_RESULT.clear ();
 	      GLOBAL_RESULT.set_name (args.args[0]);
-	      GLOBAL_RESULT.output_type = args.output_type;
+	      GLOBAL_RESULT.output_aut_type = args.output_aut_type;
+	      GLOBAL_RESULT.output_exp_type = args.output_exp_type;
 	      GLOBAL_RESULT.input_type = args.input_type;
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
@@ -362,7 +372,8 @@ int main (int argc, char* argv[])
 
       if (!GLOBAL_RESULT.empty)
 	boost::apply_visitor (pipe_stream_writer (std::cout,
-						  GLOBAL_RESULT.output_type),
+						  GLOBAL_RESULT.output_aut_type,
+						  GLOBAL_RESULT.output_exp_type),
 			      GLOBAL_RESULT.output);
 
       TIMER_STOP ();

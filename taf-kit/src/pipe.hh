@@ -79,14 +79,16 @@ typedef boost::variant<command_output_status,
 enum input_format_t
 {
   INPUT_TYPE_FSM,
-  INPUT_TYPE_XML
+  INPUT_TYPE_XML,
+  INPUT_TYPE_EXP
 };
 
 enum output_format_t
 {
   OUTPUT_TYPE_FSM,
   OUTPUT_TYPE_XML,
-  OUTPUT_TYPE_DOT
+  OUTPUT_TYPE_DOT,
+  OUTPUT_TYPE_EXP
 };
 
 class command_output
@@ -114,7 +116,8 @@ public:
   std::string		 name;
   bool			 empty;
   input_format_t	 input_type;
-  output_format_t	 output_type;
+  output_format_t	 output_aut_type;
+  output_format_t	 output_exp_type;
 };
 
 #endif /* !PIPE_HH */

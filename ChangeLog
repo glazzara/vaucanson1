@@ -1,3 +1,20 @@
+2008-09-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	To enable the use of standalone rational expressions described in xml
+	files, add the OUTPUT_TYPE_EXP and INPUT_TYPE_EXP possibilities.
+	Split output_type in output_aut_type and output_exp_type to have
+	different default output for automata (xml) and rational
+	expressions (exp).
+	* include/generate_headers.sh: split output_type.
+	* taf-kit/src/common.hh: split output_type.
+	* taf-kit/src/main.cc: split output_type.
+	* taf-kit/src/pipe.hh: Add *_TYPE_EXP.
+	* taf-kit/src/pipe.hxx: split output_type.
+	* taf-kit/src/pipe_writers.hh: split output_type.
+	* taf-kit/src/pipe_writers.hxx: split output_type. Prepare to support
+	xml standalone rational expressions' files. Improve the error
+	messages.
+	  
 2008-09-17  Reuben Thomas  <rrt@sc3d.org>
 
         * vaucanswig/expand.sh: use = instead of == for POSIX compliance.

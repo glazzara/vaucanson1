@@ -35,9 +35,10 @@ using namespace vcsn;
 using namespace vcsn::tools;
 using namespace vcsn::tools;
 
-pipe_stream_writer::pipe_stream_writer (std::ostream& os, output_format_t fmt)
+pipe_stream_writer::pipe_stream_writer (std::ostream& os, output_format_t aut_format, output_format_t exp_format)
   : o (os),
-    f (fmt)
+    aut_f (aut_format),
+    exp_f (exp_format)
 {
 }
 
@@ -55,7 +56,7 @@ pipe_stream_writer::operator() (std::string& str) const
 void
 pipe_stream_writer::operator() (automaton_t& a) const
 {
-  switch (f)
+  switch (aut_f)
     {
     case OUTPUT_TYPE_XML:
       o << automaton_saver (a, string_out (), XML ());
@@ -67,7 +68,7 @@ pipe_stream_writer::operator() (automaton_t& a) const
       dot_dump (o, a, "");
       break;
     default:
-      std::cerr << "Could not save automaton." << std::endl;
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
     }
 }
 
@@ -75,7 +76,17 @@ pipe_stream_writer::operator() (automaton_t& a) const
 void
 pipe_stream_writer::operator() (rat_exp_t& a) const
 {
-  o << a << std::endl;
+  switch (exp_f)
+    {
+    case OUTPUT_TYPE_XML:
+      // FIXME when implemented add support for xml output
+      break;
+    case OUTPUT_TYPE_EXP:
+      o << a << std::endl;
+      break;
+    default:
+      std::cerr << "Could not save rationnal expression: unkown output type." << std::endl;
+    }
 }
 # endif // !WITH_TWO_ALPHABETS
 
@@ -84,7 +95,7 @@ void
 pipe_stream_writer::operator()
   (RW_CONTEXT::automaton_t& a) const
 {
-  switch (f)
+  switch (aut_f)
     {
     case OUTPUT_TYPE_XML:
       o << automaton_saver (a, string_out (), XML ());
@@ -96,7 +107,7 @@ pipe_stream_writer::operator()
       dot_dump (o, a, "");
       break;
     default:
-      std::cerr << "Could not save automaton." << std::endl;
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
     }
 }
 # endif // RW_CONTEXT
@@ -106,7 +117,7 @@ void
 pipe_stream_writer::operator()
   (IOAUT_CONTEXT::automaton_t& a) const
 {
-  switch (f)
+  switch (aut_f)
     {
     case OUTPUT_TYPE_XML:
       o << automaton_saver (a, string_out (), XML ());
@@ -118,7 +129,7 @@ pipe_stream_writer::operator()
       dot_dump (o, a, "");
       break;
     default:
-      std::cerr << "Could not save automaton." << std::endl;
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
     }
 }
 # endif // IOAUT_CONTEXT
