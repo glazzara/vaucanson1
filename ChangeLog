@@ -1,3 +1,14 @@
+2008-09-20  Reuben Thomas  <rrt@sc3d.org>
+
+	Fix boost tests not to export variables.
+	Don't export CPPFLAGS or LDFLAGS, as this breaks configure -C.
+	This bug was previously corrected in the old vcsn-boost.m4,
+	which was just a copy of an older ax_boost_base.m4, in r1788.
+	This time I've reported it upstream in an attempt to make sure this
+	problem doesn't arise again.
+	* build-aux/ax_boost_base.m4
+	* build-aux/ax_boost_wserialization.m4
+
 2008-09-19  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix buildsystem.

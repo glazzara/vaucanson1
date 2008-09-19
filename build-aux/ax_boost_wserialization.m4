@@ -56,11 +56,9 @@ AC_DEFUN([AX_BOOST_WSERIALIZATION],
         AC_REQUIRE([AC_PROG_CC])
 		CPPFLAGS_SAVED="$CPPFLAGS"
 		CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
-		export CPPFLAGS
 
 		LDFLAGS_SAVED="$LDFLAGS"
 		LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
-		export LDFLAGS
 
         AC_CACHE_CHECK(whether the Boost::WSerialization library is available,
 					   ax_cv_boost_wserialization,
