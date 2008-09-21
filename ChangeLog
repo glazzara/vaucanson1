@@ -1,3 +1,9 @@
+2008-09-21  Reuben Thomas  <rrt@sc3d.org>
+
+	Fix typo in header name.
+	* src/tests/include/Makefile.am: transition_coherence_test.hh
+	  was incorrectly spelt; fix spelling.
+
 2008-09-20  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix boost tests not to export variables.
