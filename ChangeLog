@@ -1,3 +1,9 @@
+2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Update the test for the ascii alphabet to make it more portable.
+
+	* taf-kit/tests/vcsn-char-b.test: Here.
+	  
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
 	Add HACKING.pdf to svn:ignore.

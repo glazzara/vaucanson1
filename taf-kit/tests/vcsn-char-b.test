@@ -437,17 +437,20 @@ diff stderr stderr.ref
 # ascii
 # FIXME:  still have a problem with the ' ' (space) character.
 
-START=33
-END=127
 
+(
 parser="OPAR=op CPAR=cp PLUS=++ TIMES=.. STAR=** OWEIGHT=ow CWEIGHT=cw ZERO=00 ONE=11" 
-for ((i=START; i<END; i++))
+end=126 # '~'
+i=33 # '!'
+while [ $i -le $end ];
 do
   val=`printf "%2x" $i`
-  hex=`echo -e "\x$val"`
+  hex=`printf "\x$val"`
   exp="a ++ $hex"
   out=`$VCSN --alphabet=ascii --parser="$parser" thompson "$exp" \| aut-to-exp -`
   test $out = "a+$hex"
+  i= $i + 1
 done
+)
 
 exit 0
