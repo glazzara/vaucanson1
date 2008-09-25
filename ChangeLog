@@ -1,5 +1,9 @@
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
+	Add Makefile to svn:ignore.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
 	Add more svn:ignore names.
 
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
