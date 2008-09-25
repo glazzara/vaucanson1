@@ -449,7 +449,7 @@ do
   exp="a ++ $hex"
   out=`$VCSN --alphabet=ascii --parser="$parser" thompson "$exp" \| aut-to-exp -`
   test $out = "a+$hex"
-  i= $i + 1
+  i=`expr $i + 1`
 done
 )
 

@@ -1,5 +1,13 @@
 2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Fix ascii test and enable support of the space character.
+
+	* taf-kit/src/parser_options.hxx: Remove the default ' ' character
+	from the list of spaces when specified via --parser="SPACE=...
+	* taf-kit/tests/vcsn-char-b.test: Fix loop.
+	  
+2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Update the test for the ascii alphabet to make it more portable.
 
 	* taf-kit/tests/vcsn-char-b.test: Here.

@@ -308,7 +308,11 @@ void
 parser_options::options_grammar::definition<ScannerT>::push_space(const char* from,
 								  const char* to)
 {
+  static bool first = true;
+  if (first)
+    tok_rep_ref.spaces.clear();
   tok_rep_ref.spaces.push_back(escape(from, to));
+  first = false;
 }
 
 template <typename ScannerT>
