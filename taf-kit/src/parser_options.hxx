@@ -197,9 +197,8 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
   word = *letter;
   character = escaped_character | unescaped_character;
   letter = character | word_pair;
-  escaped_character = backs >> special_character;
+  escaped_character = backs >> anychar_p;
   unescaped_character = ~special_set;
-  special_character = special_set;
 
   // be carefull about spirit short-circuiting
   true_is_char_letter =	( head_w >> colon >> !words ) |
@@ -218,6 +217,22 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
 }
 
 template <typename ScannerT>
+std::string
+parser_options::options_grammar::definition<ScannerT>::escape(const char* from,
+							      const char* to)
+{
+  std::string res;
+  while (from != to)
+  {
+    if (*from == '\\')
+      from++;
+    res += *from;
+    from++;
+  }
+  return res;
+}
+
+template <typename ScannerT>
 const boost::spirit::rule<ScannerT>&
 parser_options::options_grammar::definition<ScannerT>::start() const
 {
@@ -229,7 +244,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::push_letter(const char* from,
 								   const char* to)
 {
-  al_ref.push_back(std::string(from, to));
+  al_ref.push_back(escape(from, to));
 }
 
 template <typename ScannerT>
@@ -237,7 +252,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::open_par(const char* from,
 								const char* to)
 {
-  tok_rep_ref.open_par = std::string(from, to);
+  tok_rep_ref.open_par = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -245,7 +260,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::close_par(const char* from,
 								 const char* to)
 {
-  tok_rep_ref.close_par = std::string(from, to);
+  tok_rep_ref.close_par = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -253,7 +268,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::plus(const char* from,
 							    const char* to)
 {
-  tok_rep_ref.plus = std::string(from, to);
+  tok_rep_ref.plus = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -261,7 +276,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::times(const char* from,
 							     const char* to)
 {
-  tok_rep_ref.times = std::string(from, to);
+  tok_rep_ref.times = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -269,7 +284,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::star(const char* from,
 							    const char* to)
 {
-  tok_rep_ref.star = std::string(from, to);
+  tok_rep_ref.star = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -277,7 +292,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::open_weight(const char* from,
 								   const char* to)
 {
-  tok_rep_ref.open_weight = std::string(from, to);
+  tok_rep_ref.open_weight = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -285,7 +300,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::close_weight(const char* from,
 								    const char* to)
 {
-  tok_rep_ref.close_weight = std::string(from, to);
+  tok_rep_ref.close_weight = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -293,7 +308,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::push_space(const char* from,
 								  const char* to)
 {
-  tok_rep_ref.spaces.push_back(std::string(from, to));
+  tok_rep_ref.spaces.push_back(escape(from, to));
 }
 
 template <typename ScannerT>
@@ -301,7 +316,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::push_one(const char* from,
 						      		const char* to)
 {
-  tok_rep_ref.one = std::string(from, to);
+  tok_rep_ref.one = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -309,7 +324,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::push_zero(const char* from,
 						      		const char* to)
 {
-  tok_rep_ref.zero = std::string(from, to);
+  tok_rep_ref.zero = escape(from, to);
 }
 
 #endif // ! PARSER_OPTIONS_HXX

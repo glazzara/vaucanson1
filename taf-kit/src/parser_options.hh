@@ -126,6 +126,20 @@ private:
       parser_options::token_representation_t& tok_rep_ref;
 
       /**
+       * function called to remove the '\' in front of the
+       * escaped characters.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       *
+       * @return a string without the '\' used to escape characters
+       */
+
+      inline std::string
+      escape(const char* from,
+	     const char* to);
+
+      /**
        * Callback function called to push a new letter into
        * the alphabet vector.
        *

@@ -1,3 +1,18 @@
+2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	- Update TAFKit parser grammar to support escaped characters.
+	Any character can be escaped.
+	Any special character that is escaped is seen as a basic letter.
+	Everything is based on a simple "escape" function.
+	It is currently not possible to have *(lex_escape_ch_p)[&fun]
+	return an escaped sequence, it only works on a single char.
+	- Solve ticket #171.
+	- This fix does not enable the support of escaped characters in the
+	rational expression parser.
+	* taf-kit/src/parser_options.hxx: Add escape function.
+	* taf-kit/src/parser_options.hh: Add escape function.
+	* taf-kit/tests/vcsn-char-b.test: Add a test on the ascii alphabet.
+	  
 2008-09-21  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix typo in header name.

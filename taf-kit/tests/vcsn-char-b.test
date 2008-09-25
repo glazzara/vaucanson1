@@ -432,4 +432,22 @@ echo -n "" >stderr.ref
 $VCSN --parser="PLUS=toto" -aab thompson "a toto b" 2>stderr
 diff stderr stderr.ref
 
+# Test for Alphabets
+
+# ascii
+# FIXME:  still have a problem with the ' ' (space) character.
+
+START=33
+END=127
+
+parser="OPAR=op CPAR=cp PLUS=++ TIMES=.. STAR=** OWEIGHT=ow CWEIGHT=cw ZERO=00 ONE=11" 
+for ((i=START; i<END; i++))
+do
+  val=`printf "%2x" $i`
+  hex=`echo -e "\x$val"`
+  exp="a ++ $hex"
+  out=`$VCSN --alphabet=ascii --parser="$parser" thompson "$exp" \| aut-to-exp -`
+  test $out = "a+$hex"
+done
+
 exit 0
