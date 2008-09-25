@@ -1,5 +1,9 @@
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
+	Add more names to svn:ignore.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
 	Add rw_tdc to svn:ignore, remove functions_library.
 
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
