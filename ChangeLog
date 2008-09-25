@@ -1,5 +1,9 @@
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
+	Add some names to svn:ignore property.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
 	Add vaucanson_config_pconf_hh.cc to svn:ignore.
 
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
