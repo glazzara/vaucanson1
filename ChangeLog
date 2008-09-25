@@ -1,5 +1,9 @@
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
+	Add some ignore properties.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
 	Write ChangeLog for r2182.
 	* ChangeLog: Write what should have gone in r2182.
 
