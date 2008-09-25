@@ -1,5 +1,9 @@
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
+	Add function_library to svn:ignore.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
 	Add some patterns to svn:ignore.
 
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
