@@ -1,5 +1,23 @@
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
+	Write ChangeLog for r2182.
+	* ChangeLog: Write what should have gone in r2182.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
+	Build each library in lib/ as one source file.
+	* generate_libvcsn.rb: Change Makefile rules to generate a
+	  single intermediate all.cc file and compile that. Tests show
+	  it builds about 70% faster than building the files separately.
+	  As per vaucanson-private discussion today & yesterday, use
+	  this method rather than just generating a single source file
+	  in generate_libvcsn.rb directly, so that later we can have
+	  a few (but not many) .cc files for tightly-coupled algorithms,
+	  so that we don't have to rebuild entire libraries when only
+	  changing one algorithm.
+
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
 	Add some ignore patterns to svn:ignore.
 
 2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
