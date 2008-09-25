@@ -148,13 +148,16 @@ def write_makefile(type, context)
 	     "",
 	     "lib_LTLIBRARIES\t+= lib" + type + ".la",
 	     "lib" + type.gsub(/-/, "_") + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
-	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
-    out.print "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
+	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)",
+             "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= " + type + "/all.cc",
+             type + "/all.cc\t: $(lib" + type.gsub(/-/, "_") + "_la_REALSOURCES)",
+             "\tcat $(lib" + type.gsub(/-/, "_") + "_la_REALSOURCES) > $@")
+    out.print "lib" + type.gsub(/-/, "_") + "_la_REALSOURCES\t= "
     files = Dir.glob(type + "/*cc").sort!
     files.each { |filename|
       if File.exist?("../include/vaucanson/algorithms/" + File.basename(filename, ".cc") + ".hh")
 	out.print "\\\n\t\t\t", filename, "\t"
-      else
+      elsif filename != type + "/all.cc"
 	File.unlink(filename)
 	puts "Removing " + filename
       end

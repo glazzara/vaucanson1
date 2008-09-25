@@ -1,3 +1,7 @@
+2008-09-25  Reuben Thomas  <rrt@sc3d.org>
+
+	Add some ignore patterns to svn:ignore.
+
 2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	- Update TAFKit parser grammar to support escaped characters.
