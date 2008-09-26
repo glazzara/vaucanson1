@@ -1,5 +1,13 @@
 2008-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/letter.hh (LETTER_DEFAULT):
+	Do not use const when an object is returned by copy; this
+	removes a g++-4.3 warning.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx
+	(default_joker, default_other): Likewise.
+
+2008-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/isomorph.hxx
 	(test_correspondence): Add braces to kill a g++-4.3 warning.
 

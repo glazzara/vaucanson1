@@ -118,7 +118,7 @@ namespace vcsn {
     typedef token_representation<misc::true_t> token_representation_t;
 
 # define LETTER_DEFAULT(name, value) \
-    static const std::string default_##name () { return value; }
+    static std::string default_##name () { return value; }
 
   } // ! algebra
 

@@ -41,8 +41,8 @@ namespace vcsn {
       };
 
       // FIXME: use LETTER_DEFAULT
-      static const char default_joker()   { return '?'; }
-      static const char default_other()   { return '#'; }
+      static char default_joker()   { return '?'; }
+      static char default_other()   { return '#'; }
 
       LETTER_DEFAULT(open_par, "(")
       LETTER_DEFAULT(close_par, ")")
