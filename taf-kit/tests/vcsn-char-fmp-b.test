@@ -77,3 +77,187 @@ fail1 $VCSN is-empty $t1
   $VCSN to-rw $t1
 
   $VCSN eval-aut $t1 $a1 | vcsn-char-b eval - yx
+
+
+
+# money.xml is a vending machine that can accept three kinds of coins:
+#   d - ten cents
+#   v - twenty cents
+#   c - fifty cents
+# The machine should eat 50 cents and give change if too much has
+# been given.
+
+sed '/^#/d' <<EOF | $VCSN --alphabet1=dvc --alphabet2=dvc define-automaton money.xml
+# Add states
+1
+# Add 7 states
+7
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+5
+# Add transition
+3
+# From, to, in, out
+0
+1
+d
+1
+# Add transition
+3
+# From, to, in, out
+1
+2
+d
+1
+# Add transition
+3
+# From, to, in, out
+2
+3
+d
+1
+# Add transition
+3
+# From, to, in, out
+3
+4
+d
+1
+# Add transition
+3
+# From, to, in, out
+4
+5
+d
+1
+# Add transition
+3
+# From, to, in, out
+0
+2
+v
+1
+# Add transition
+3
+# From, to, in, out
+1
+3
+v
+1
+# Add transition
+3
+# From, to, in, out
+2
+4
+v
+1
+# Add transition
+3
+# From, to, in, out
+3
+5
+v
+1
+# Add transition
+3
+# From, to, in, out
+4
+5
+v
+d
+# Add transition
+3
+# From, to, in, out
+5
+5
+d
+d
+# Add transition
+3
+# From, to, in, out
+5
+5
+v
+v
+# Add transition
+3
+# From, to, in, out
+5
+5
+c
+c
+# Add transition
+3
+# From, to, in, out
+0
+5
+c
+1
+# Add transition
+3
+# From, to, in, out
+1
+5
+c
+d
+# Add transition
+3
+# From, to, in, out
+2
+5
+c
+v
+# Add transition
+3
+# From, to, in, out
+3
+6
+c
+d
+# Add transition
+3
+# From, to, in, out
+4
+6
+c
+v
+# Add transition
+3
+# From, to, in, out
+6
+5
+1
+v
+# Exit.
+10
+EOF
+
+# Test a few coin sequences
+for i in vddv:d c:1 vdd:0 vdv:1 dvc:dv vdc:dv vvcc:vvc; do
+  in=${i%%:*}
+  out=${i##*:}
+  res=`$VCSN eval money.xml $in`
+  res=`vcsn-char-b expand --alphabet=vdc $res`
+  test "x$res" = x$out
+done
+
+# compute all the coin sequences that can return "c".
+res=`$VCSN invert money.xml \| eval - c`
+res=`vcsn-char-b expand --alphabet=vdc $res`
+echo $res | tr + '\n' | sort >out
+cat <<EOF | cmp - out
+cc
+dddddc
+dddvc
+ddvdc
+dvddc
+dvvc
+vdddc
+vdvc
+vvdc
+EOF

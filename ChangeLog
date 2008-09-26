@@ -1,3 +1,8 @@
+2008-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/tests/vcsn-char-fmp-b.test: Test "invert", "eval", and
+	"define-automaton" using a vending machine example.
+
 2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix ascii test and enable support of the space character.
@@ -5,13 +10,13 @@
 	* taf-kit/src/parser_options.hxx: Remove the default ' ' character
 	from the list of spaces when specified via --parser="SPACE=...
 	* taf-kit/tests/vcsn-char-b.test: Fix loop.
-	  
+
 2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Update the test for the ascii alphabet to make it more portable.
 
 	* taf-kit/tests/vcsn-char-b.test: Here.
-	  
+
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
 	Add HACKING.pdf to svn:ignore.
@@ -108,7 +113,7 @@
 	* taf-kit/src/parser_options.hxx: Add escape function.
 	* taf-kit/src/parser_options.hh: Add escape function.
 	* taf-kit/tests/vcsn-char-b.test: Add a test on the ascii alphabet.
-	  
+
 2008-09-21  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix typo in header name.
@@ -166,7 +171,7 @@
 	* taf-kit/src/pipe_writers.hxx: split output_type. Prepare to support
 	xml standalone rational expressions' files. Improve the error
 	messages.
-	  
+
 2008-09-17  Reuben Thomas  <rrt@sc3d.org>
         Fix for POSIX sh compliance.
 
