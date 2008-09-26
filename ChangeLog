@@ -1,5 +1,22 @@
 2008-09-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix the new rules emitted in lib's makefile fragments to
+	distribute source files and support VPATH builds.
+
+	* lib/generate_libvcsn.rb (write_makefile): Compute
+	type.gsub(/-/, "_") only once.  Output the list of source files in
+	EXTRA_target_SOURCES, not in target_REALSOURCES, so that Automake
+	distributes them and emit build rules for them (this way we can
+	build a single object if we want).  Add all these files to
+	MAINTAINERCLEANFILES.  Don't use tabulations while declaring
+	variables, this is known to confuse automake.  Call write_all_cc.
+	(write_all_cc): New function to generate all.cc files that
+	include all the individual files.  The previous approach using
+	cat did not cope with VPATH builds, and this way we do not have
+	to fiddle with $(srcdir) and friends.
+
+2008-09-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/Makefile.am (install-data-local): Fix the permissions
 	of the installed documentation.  Reported by Reuben Thomas.
 

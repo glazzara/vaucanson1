@@ -127,8 +127,38 @@ def create?(type, file)
   )
 end
 
+
+# write a all.cc, including all other *.cc files.
+def write_all_cc(type,files)
+  puts "Generating " + type + "/all.cc"
+  l=type.length
+  File.open(type + "/all.cc", "w") { |out|
+    out.puts("// " + type + "/all.cc: this file is part of the Vaucanson project.",
+	     "//",
+	     "// Vaucanson, a generic library for finite state machines.",
+	     "//",
+	     "// Copyright (C) " + Time.now.strftime("%Y") + " The Vaucanson Group.",
+	     "//",
+	     "// This program is free software; you can redistribute it and/or",
+	     "// modify it under the terms of the GNU General Public License",
+	     "// as published by the Free Software Foundation; either version 2",
+	     "// of the License, or (at your option) any later version.",
+	     "//",
+	     "// The complete GNU General Public Licence Notice can be found as the",
+	     "// `COPYING' file in the root directory.",
+	     "//",
+	     "// The Vaucanson Group consists of people listed in the `AUTHORS' file.",
+	     "//",
+	     "// NOTE: this file was generated automatically with generate_libvcsn.rb",
+	     "")
+    files.each { |file| out.puts('#include "' + file[l+1..-1] + '"') }
+  }
+end
+
+
 # write a *.mk for `type`
 def write_makefile(type, context)
+  type_ = type.gsub(/-/, "_")
   File.open(type + "/lib" + type + ".mk", "w") { |out|
     out.puts("## Vaucanson, a generic library for finite state machines.",
 	     "## Copyright (C) " + Time.now.strftime("%Y") + " The Vaucanson Group.",
@@ -147,24 +177,28 @@ def write_makefile(type, context)
 	     "##",
 	     "",
 	     "lib_LTLIBRARIES\t+= lib" + type + ".la",
-	     "lib" + type.gsub(/-/, "_") + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
-	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)",
-             "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= " + type + "/all.cc",
-             type + "/all.cc\t: $(lib" + type.gsub(/-/, "_") + "_la_REALSOURCES)",
-             "\tcat $(lib" + type.gsub(/-/, "_") + "_la_REALSOURCES) > $@")
-    out.print "lib" + type.gsub(/-/, "_") + "_la_REALSOURCES\t= "
-    files = Dir.glob(type + "/*cc").sort!
+	     "lib" + type_ + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
+	     "lib" + type_ + "_la_LIBADD\t= $(LIBOBJS)",
+             "lib" + type_ + "_la_SOURCES\t= " + type + "/all.cc",
+	     "## all.cc includes all the source files below.  We declare them",
+	     "## as EXTRA_*_SOURCES so they are distributed and so we can",
+	     "## build a single object file on demand.")
+    out.print "EXTRA_lib" + type_ + "_la_SOURCES = "
+    files = Dir.glob(type + "/*.cc").sort!
+    files.reject! { |filename| filename == type + "/all.cc" }
     files.each { |filename|
       if File.exist?("../include/vaucanson/algorithms/" + File.basename(filename, ".cc") + ".hh")
-	out.print "\\\n\t\t\t", filename, "\t"
-      elsif filename != type + "/all.cc"
+	out.print "\\\n  ", filename, "\t"
+      else
 	File.unlink(filename)
 	puts "Removing " + filename
       end
     }
     out.print "\n\n"
-    out.puts("MAINTAINERCLEANFILES += $(lib" + type.gsub(/-/, "_") + "_la_SOURCES) " +
-	      type + "/lib" + type + ".mk")
+    out.puts("MAINTAINERCLEANFILES += $(lib" + type_ + "_la_SOURCES) " +
+             "$(EXTRA_lib" + type_ + "_la_SOURCES) " +
+	     type + "/lib" + type + ".mk")
+    write_all_cc(type, files)
   }
   puts("Generating " + type + "/lib" + type + ".mk")
 end
