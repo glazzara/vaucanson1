@@ -22,8 +22,7 @@ VCSN=vcsn-char-b
 if test x$1 = x--test; then
   set -e
 
-  # Be verbose unless we are running from "make check".
-  test -z "$srcdir" || set -x
+  test -z "$VERBOSE" || set -x
 
   for i in 'a:b*.a.b*' 'ab+ba:b.b*.a.a*+a.a*.b.b*'
   do
@@ -92,11 +91,12 @@ $VCSN concatenate Ep.xml l.xml \|\
 $VCSN concatenate l.xml E.xml \|\
       realtime - > lE.xml
 
-$VCSN product EplE.xml lE.xml > EplExlE.xml
+$VCSN product EplE.xml lE.xml \| quotient - > EplExlE.xml
 
 $VCSN concatenate l.xml Ep.xml \|\
       realtime - \|\
-      product - l.xml > lEpxl.xml
+      product - l.xml \|\
+      quotient - > lEpxl.xml
 
 $VCSN union EplExlE.xml lEpxl.xml \|\
       concatenate E.xml - \|\

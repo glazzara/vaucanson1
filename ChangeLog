@@ -1,5 +1,11 @@
 2008-09-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/demos/hulden/run.in: Run quotient after products, as
+	suggested by Sylvain Lombardy.  Allow the test to be run in
+	verbose mode if $VERBOSE is set.
+
+2008-09-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix the new rules emitted in lib's makefile fragments to
 	distribute source files and support VPATH builds.
 
