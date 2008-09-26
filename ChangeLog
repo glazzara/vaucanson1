@@ -1,5 +1,10 @@
 2008-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/isomorph.hxx
+	(test_correspondence): Add braces to kill a g++-4.3 warning.
+
+2008-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/demos/Makefile.am, taf-kit/demos/hulden/Makefile.am,
 	taf-kit/demos/hulden/README, taf-kit/demos/hulden/run.in: New files.
 	* taf-kit/Makefile.am (SUBDIRS): Add demos.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -697,13 +697,16 @@ namespace vcsn
 	  for (; (k > 0); it_B++, k--)
 	    // Has the source of current transition already been visited?
 	    if (b_.perm[transitions_B[*it_B]] >= 0)
+	      {
 	      // Trying to decrement a position with 0 means that the
 	      // corresponding state in A is not correct.
-	      if (correspondence_transitions[b_.perm[transitions_B[*it_B]]] == 0)
-		// The association of C_A[i] and C_B[j] is impossible
-		return false;
-	      else
-		correspondence_transitions[b_.perm[transitions_B[*it_B]]]--;
+		if (correspondence_transitions[b_.perm[transitions_B[*it_B]]]
+		    == 0)
+		  // The association of C_A[i] and C_B[j] is impossible
+		  return false;
+		else
+		  correspondence_transitions[b_.perm[transitions_B[*it_B]]]--;
+	      }
 
 	  // Verifies correspondence_transitions. The correspondence for
 	  // current label is correct iff correspondence_transitions[l] = 0
