@@ -1,5 +1,10 @@
 2008-09-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/Makefile.am (install-data-local): Fix the permissions
+	of the installed documentation.  Reported by Reuben Thomas.
+
+2008-09-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Honor BOOST_CPPFLAGS and BOOST_LDFLAGS, set by AX_BOOST_BASE.
 
 	* vaucanson.mk (AM_LDFLAGS): Define as $(BOOST_LDFLAGS).

@@ -81,6 +81,11 @@ install-data-local:
 	rm -rf $(DESTDIR)$(htmldir)/$(DOCDIR)
 	$(mkdir_p) $(DESTDIR)$(htmldir)
 	cp -r $(srcdir)/$(DOCDIR) $(DESTDIR)$(htmldir)
+## Try GNU chmod's X mode before resorting to something slower but
+## more standard.
+	chmod -R a+rX $(DESTDIR)$(htmldir) || \
+	find $(DESTDIR)$(htmldir) \( -type d -a -exec chmod a+rx {} \; \) \
+             -o -exec chmod a+r {} \;
 
 uninstall-local:
 	chmod -R 700 $(DESTDIR)$(htmldir)/$(DOCDIR)
