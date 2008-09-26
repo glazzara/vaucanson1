@@ -14,7 +14,7 @@
 include $(top_srcdir)/vaucanson.mk
 
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
-AM_LDFLAGS = $(TERMLIBS)
+AM_LDFLAGS += $(TERMLIBS)
 
 bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-fmp-b \
                vcsn-int-b vcsn-int-z vcsn-int-fmp-b \
