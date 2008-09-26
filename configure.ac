@@ -203,7 +203,10 @@ AC_CONFIG_FILES([
 	taf-kit/Makefile
 	  taf-kit/src/Makefile
 	  taf-kit/tests/Makefile
+	  taf-kit/demos/Makefile
+	  taf-kit/demos/hulden/Makefile
 ])
+
 # Prevent accidental edition of generated files.
 AC_CONFIG_FILES([taf-kit/tests/defs], [chmod a-w taf-kit/tests/defs])
 

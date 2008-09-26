@@ -1,0 +1,25 @@
+At FSMNLP'08, Mans Hulden mentionned a small language problem a gave a
+possible solution using a complex composition of rational languages.
+
+The problem:
+
+  Given an arbitrary regular language L over an alphabet \Sigma,
+  construct the language L' whose words contain only one factor
+  (a.k.a. substring) in L.
+
+Example:
+
+  If the alphabet is \Sigma={a,b} and the language L={ab,ba}, then the
+  language L' should contain the words "abbb", "aaaabb", "ba", ...
+  but it should not contains the words "a" (no factor in L), "abbbaa"
+  (two factors in L), or even "aba" (two factors in L).
+
+A solution, assuming \Sigma is the alphabet:
+
+  L' = (\Sigma^\star L\Sigma^\star) \setminus
+       (\Sigma^\star(((\Sigma^+L\Sigma^\star)\cap(L\Sigma^\star))\cup
+                    ((L\Sigma^+)\cap L))\Sigma^\star)
+
+The script called "run" contains a series of commands that construct
+an automaton realising L', following the above definition, and finally
+turns this automaton into a rational expression.

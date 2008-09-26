@@ -1,0 +1,111 @@
+#! /bin/sh
+
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2008 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+
+
+PATH=@builddir@/../../tests/:$PATH
+export PATH
+VCSN=vcsn-char-b
+
+# Self tests
+if test x$1 = x--test; then
+  set -e
+
+  # Be verbose unless we are running from "make check".
+  test -z "$srcdir" || set -x
+
+  for i in 'a:b*.a.b*' 'ab+ba:b.b*.a.a*+a.a*.b.b*'
+  do
+    in=${i%%:*}
+    out=${i##*:}
+    res=`$0 ab $in`
+    res=`$VCSN expand --alphabet ab "$res"`
+    echo $out | tr + '\n' | sort >out-ref
+    echo $res | tr + '\n' | sort >out-res
+    cmp out-ref out-res
+    rm out-ref out-res
+  done
+  exit
+fi
+
+
+if test $# -ne 2; then
+  cat <<EOF
+Usage: $0 ALPHABET LANGUAGE
+
+  Compute the langage of all words that contain exactly one factor
+  in the supplied language.
+
+  ALPHABET should be given as a string of unique letters and
+  LANGUAGE should be given as a rational expression over the alphabet.
+
+  For instance:
+
+    % $0 "ab" "ab+ba"
+    a.a*.b.b*+b.b*.a.a*
+EOF
+  exit 1
+fi
+
+alpha=$1
+L=$2
+
+# If alpha is "ab", E will be "a+b".
+E=`echo "$alpha" | sed 's/./&+/g;s/+$//;'`
+
+
+# Construct an automaton for
+#
+#  L' = (\Sigma^\star L\Sigma^\star) \setminus
+#       (\Sigma^\star(((\Sigma^+L\Sigma^\star)\cap(L\Sigma^\star))\cup
+#                    ((L\Sigma^+)\cap L))\Sigma^\star)
+#
+# L                  ... is represented by ...      l.xml
+# \Sigma^\star                                      E.xml
+# \Sigma^+                                          Ep.xml
+# \Sigma^\star L\Sigma^\star                        ElE.xml
+# \Sigma^+L\Sigma^\star                             EplE.xml
+# L\Sigma^\star                                     lE.xml
+# ((\Sigma^+L\Sigma^\star)\cap(L\Sigma^\star))      EplExlE.xml
+# ((L\Sigma^+)\cap L))\Sigma^\star                  lEpxl.xml
+
+$VCSN --alphabet=$alpha standard "$L" \| quotient - > l.xml
+$VCSN --alphabet=$alpha standard "($E)*" \| quotient - > E.xml
+$VCSN --alphabet=$alpha standard "($E).($E)*" \| quotient - > Ep.xml
+$VCSN concatenate E.xml l.xml \|\
+      concatenate - E.xml \|\
+      realtime - > ElE.xml
+$VCSN concatenate Ep.xml l.xml \|\
+      concatenate - E.xml \|\
+      realtime - > EplE.xml
+$VCSN concatenate l.xml E.xml \|\
+      realtime - > lE.xml
+
+$VCSN product EplE.xml lE.xml > EplExlE.xml
+
+$VCSN concatenate l.xml Ep.xml \|\
+      realtime - \|\
+      product - l.xml > lEpxl.xml
+
+$VCSN union EplExlE.xml lEpxl.xml \|\
+      concatenate E.xml - \|\
+      concatenate - E.xml \|\
+      determinize - \|\
+      complement - \|\
+      product - ElE.xml \|\
+      determinize - \|\
+      minimize - \|\
+      aut-to-exp -
+
+rm E.xml ElE.xml Ep.xml EplE.xml EplExlE.xml l.xml lE.xml lEpxl.xml
