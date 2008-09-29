@@ -27,14 +27,69 @@ namespace vcsn {
 
   namespace algebra {
 
+    template <typename U, typename V>
+    struct letter_traits< std::pair<U, V> >
+    {
+      // we only consider letters of the form (u, v)
+      typedef misc::true_t is_char_letter;
+
+      enum
+      {
+	/*
+	 * Theoretically   cardinal	should	 be   the   product   of
+	 * letter_traits<U>::cardinal and letter_traits<V>::cardinal.
+	 * But to  avoid overflows and for
+	 * practical reasons, it is better to consider it infinite.
+	 *
+	 * FIXME: Maybe doing this is not a good idea?
+	 */
+	cardinal = INT_MAX
+      };
+
+      LETTER_DEFAULT(open_par, "[")
+      LETTER_DEFAULT(close_par, "]")
+      LETTER_DEFAULT(plus, "+")
+      LETTER_DEFAULT(times, ".")
+      LETTER_DEFAULT(star, "*")
+      LETTER_DEFAULT(epsilon, "eps")
+      LETTER_DEFAULT(zero, "zero")
+      LETTER_DEFAULT(open_weight, "{")
+      LETTER_DEFAULT(close_weight, "}")
+      LETTER_DEFAULT(space, " ")
+
+      static
+      std::pair<U, V>
+      literal_to_letter(const std::string& str)
+      {
+	std::stringstream sstr(str);
+	std::pair<U, V> ret;
+	sstr >> ret;
+	return ret;
+      }
+
+      static
+      std::string
+      letter_to_literal(const std::pair<U, V>& c)
+      {
+	std::stringstream sstr;
+	sstr << c;
+	return sstr.str();
+      }
+
+      // A pair is a "tuple" with dimension 2.
+      static std::string kind() { return "tuple"; }
+      static int dim() { return 2; }
+
+    };
+
     // Specialization for pairs.
     // FIXME: we should share the taf-kit parser with letters op_parse.
     // FIXME: this parser is very weak.
     template <typename S, typename U, typename V, typename CharContainer>
     bool op_parse(const algebra::FreeMonoidBase<S>& set,
 		  std::basic_string< std::pair<U, V> >& v,
-	       	  const std::string& s,
-       		  typename std::string::const_iterator& i,
+		  const std::string& s,
+		  typename std::string::const_iterator& i,
 		  const CharContainer&)
     {
       while (i != s.end())
