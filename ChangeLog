@@ -1,3 +1,7 @@
+2008-09-30  Reuben Thomas  <rrt@sc3d.org>
+
+	Add .libs to svn:ignore.
+
 2008-09-30    <rrt@sc3d.org>
 
 	Add some svn:ignore patterns.
