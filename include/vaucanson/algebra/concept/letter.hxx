@@ -65,7 +65,7 @@ namespace vcsn {
     const std::string \
     letter_traits<L>::default_##name () \
     { \
-      static_error(need_default_##name) \
+      static_error(need_default_##name); \
       return 0; \
     } \
     template <> \

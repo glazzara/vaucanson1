@@ -1,3 +1,8 @@
+2008-10-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add missing semi-column.
+	* algebra/concept/letter.hxx: here.
+
 2008-09-30  Reuben Thomas  <rrt@sc3d.org>
 
 	Add .libs to svn:ignore.
