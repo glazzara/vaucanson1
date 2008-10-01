@@ -1,3 +1,13 @@
+2008-10-01  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix cache-id in vcsn-xml.m4
+	
+	Bad cache-id were used in AC_CACHE_CHECK.	
+	Modified w.r.t the autoconf manual (7.4.1 Cache Variable Names), which
+	removes configuration warnings on some platforms.
+
+	* build-aux/vcsn-xml.m4: Fix cache-id.
+
 2008-10-01  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Fix compilation warning using gcc-4.3.

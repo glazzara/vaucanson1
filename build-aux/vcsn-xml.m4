@@ -19,12 +19,14 @@ AC_PREREQ([2.60])
 AC_DEFUN([_VCSN_CHECK_XML],
 [dnl
    # User-specified directory overrides any other definition
-   if test "x$with_xerces" != x; then
-      XERCES_EXTRA_CPPFLAGS="-I$with_xerces/include"
-      XERCES_EXTRA_LDFLAGS="-L$with_xerces/lib"
+   if test "x$with_cv_xerces_dir" != x; then
+      XERCES_EXTRA_CPPFLAGS="-I$with_cv_xerces_dir/include"
+      XERCES_EXTRA_LDFLAGS="-L$with_cv_xerces_dir/lib"
+      echo "XERCES_EXTRA_CPPFLAGS=" $XERCES_EXTRA_CPPFLAGS
    else
       XERCES_EXTRA_CPPFLAGS=''
       XERCES_EXTRA_LDFLAGS=''
+      echo "XERCES_EXTRA_CPPFLAGS=" $XERCES_EXTRA_CPPFLAGS
     fi
 
    AC_LANG_PUSH([C++])
@@ -147,10 +149,12 @@ namespace vcsn
 AC_DEFUN([VCSN_XML],
 [dnl
   AC_CACHE_CHECK([for Xerces-C++ in user-specified directory],
-                 [with_xerces],
-                 [AC_ARG_WITH([xerces],
-                              [AC_HELP_STRING([--with-xerces=DIR],
-  		                         [base directory where Xerces-C++ is installed])])])
-
+                 [with_cv_xerces_dir],
+		 [])
+  AC_ARG_WITH([xerces],
+              [AC_HELP_STRING([--with-xerces=DIR],
+  		              [base directory where Xerces-C++ is installed])],
+	      [with_cv_xerces_dir="$withval"],
+	      [])
   _VCSN_CHECK_XML
 ])
