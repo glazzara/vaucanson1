@@ -336,7 +336,7 @@ namespace vcsn {
 	      if (ret.size() == 0)
 	      {
 		hstate_t s;
-		while ((s = work.choose_state()) == *i);
+		while ((s = work.choose_state()) == *i) ;
 		work.add_letter_transition(*i, s, *j);
 	      }
 	    }
