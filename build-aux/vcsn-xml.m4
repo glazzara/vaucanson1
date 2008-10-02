@@ -22,11 +22,9 @@ AC_DEFUN([_VCSN_CHECK_XML],
    if test "x$with_cv_xerces_dir" != x; then
       XERCES_EXTRA_CPPFLAGS="-I$with_cv_xerces_dir/include"
       XERCES_EXTRA_LDFLAGS="-L$with_cv_xerces_dir/lib"
-      echo "XERCES_EXTRA_CPPFLAGS=" $XERCES_EXTRA_CPPFLAGS
    else
       XERCES_EXTRA_CPPFLAGS=''
       XERCES_EXTRA_LDFLAGS=''
-      echo "XERCES_EXTRA_CPPFLAGS=" $XERCES_EXTRA_CPPFLAGS
     fi
 
    AC_LANG_PUSH([C++])
