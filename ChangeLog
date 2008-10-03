@@ -1,5 +1,13 @@
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
+	Cosmetic (English and ordering) fixes.
+	* include/vaucanson/automata/concept/transducer.hh: Fix an
+          English typo, and reorder output_projection_helper for Transducer
+          to be more like that for Automaton.
+	* include/vaucanson/design_pattern/slots.hh: Fix an English typo.
+
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove unused macro AC_CXX_EXCEPTIONS.
 	* vcsn.m4: Remove unused macro AC_CXX_EXCEPTIONS.
 

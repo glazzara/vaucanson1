@@ -178,7 +178,7 @@ namespace vcsn {
    * dynamic_traits\<S\>::ret, which chooses which version of @c
    * SetSlotAttribute to inherit from.
    *
-   * Additionnally, the class can be meta-tagged when multiple
+   * Additionally, the class can be meta-tagged when multiple
    * inheritance for the same structural element @c S is needed.
    * This meta-tag (second template argument) makes the type
    * unique w.r.t. the tag type.
