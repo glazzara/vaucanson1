@@ -1,5 +1,14 @@
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
+	Don't install m4 macros only needed internally.
+	* build-aux/Makefile.am: Add vcsn-internal.m4 (but don't install).
+	* build-aux/vcsn-internal.m4: New home for AC_CHECK_SWIG13,
+          VCSN_DETECT_SVN_REVISION and VCSN_PRE_RELEASE, which are only
+          used to build vcsn, and not by users.
+	* build-aux/vcsn.m4: Remove the above macros from this file.
+
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
 	Cosmetic (English and ordering) fixes.
 	* include/vaucanson/automata/concept/transducer.hh: Fix an
           English typo, and reorder output_projection_helper for Transducer
