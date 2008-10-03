@@ -1,7 +1,7 @@
 # vcsn.m4                                     -*- Autoconf -*-
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -180,32 +180,6 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
        ;;
   esac
 
-])
-
-## The following macro (AC_CXX_EXCEPTIONS) is courtesy
-## Luc Maisonobe, extracted from the Autoconf Macro Repository
-
-# AC_CXX_EXCEPTIONS
-# -----------------
-# Checks whether the current C++ compiler configuration supports
-# exceptions. It can be used to e.g. abort configure if exceptions
-# are disabled (-fdisable-exceptions in CXXFLAGS or the like),
-# instead of waiting for compilation errors.
-AC_DEFUN([AC_CXX_EXCEPTIONS],
-[dnl
-  AC_CACHE_CHECK([whether the compiler supports exceptions],
-		 [cxx_cv_cxx_exceptions],
-		 [AC_REQUIRE([AC_PROG_CXX])
-		  AC_LANG_PUSH([C++])
-		  AC_COMPILE_IFELSE([try { throw 1; }
-				     catch (int i) { return i; }],
-				    [cxx_cv_cxx_exceptions=yes],
-				    [cxx_cv_cxx_exceptions=no])
-		  AC_LANG_POP([C++])])
-  if test "$cxx_cv_cxx_exceptions" = yes; then
-     AC_DEFINE([HAVE_EXCEPTIONS], 1,
-	       [define if the compiler supports exceptions])
-  fi
 ])
 
 

@@ -1,5 +1,10 @@
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove unused macro AC_CXX_EXCEPTIONS.
+	* vcsn.m4: Remove unused macro AC_CXX_EXCEPTIONS.
+
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove traces of AX_BOOST_WSERIALIZATION.
 	* build-aux/Makefile.am: Remove ax_boost_serialization.m4.
 	* configure.ac: Don't check if libboost_serialization test
