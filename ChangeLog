@@ -1,5 +1,10 @@
 2008-10-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/transpose.hh: Fix typos, and use
+	"src,dst" rather than "from,dst".
+
+2008-10-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Revive TAF-Kit's "transpose" command for transducers.  It was
 	disabled on 2006-07-28 because the function was reported not to
 	work on transducers.  The function appears to work fine now, and I

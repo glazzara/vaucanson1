@@ -21,7 +21,7 @@
 /**
  * @file algorithms/transpose.hh
  *
- * This file contain the function which transpose an automaton.
+ * This file contains the function which transposes an automaton.
  *
  * @see transpose()
  */
@@ -40,25 +40,25 @@ namespace vcsn {
   /**
    * Transposition of an automaton.
    *
-   * This function copy in @c dst the transposition of the automaton @c from.
+   * This function copies in @c dst the transposition of the automaton @c src.
    *
    * @param dst Destination
-   * @param from Automaton to transpose
+   * @param src Automaton to transpose
    */
   template<typename A, typename AI1, typename AI2>
   void
-  transpose(Element<A, AI1>& dst, const Element<A, AI2>& from);
+  transpose(Element<A, AI1>& dst, const Element<A, AI2>& src);
 
   /**
    * Return a fresh transposed automaton.
    *
    * This function returns the transposition of an automaton.
    *
-   * @param from Automaton to transpose.
+   * @param src Automaton to transpose.
    */
   template<typename A, typename AI>
   Element<A, AI>
-  transpose(const Element<A, AI>& from);
+  transpose(const Element<A, AI>& src);
 
   /** @} */
 
