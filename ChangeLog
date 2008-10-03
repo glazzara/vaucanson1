@@ -1,5 +1,15 @@
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove use of AX_BOOST_WSERIALIZATION.
+	* build-aux/ax_boost_wserialization.m4: Remove.
+	* configure.ac: Don't use AX_BOOST_WSERIALIZATION, as it
+	  doesn't really do what we want: it detects the binary
+	  library as well as the headers, but we don't need that,
+	  as we only use the headers. There's no macro that does
+	  what we want, so just note the fact in configure.ac.
+
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
 	Fix some English.
 	* taf-kit/src/fmp_commands.cc: "transform into" not
 	  "transform in", and "an fmp", not "a fmp".

@@ -89,9 +89,10 @@ AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 
 # Boost
 AX_BOOST_BASE([1.34])
-AX_BOOST_WSERIALIZATION
-# AX_BOOST_GRAPH (this test does not yet exist, but is needed e.g. for Debian,
-# where the graph library is separately distributed)
+# FIXME: The following tests do not yet exist, but are needed e.g. for Debian,
+# where even header-only libraries are separately distributed.
+# AX_BOOST_WSERIALIZATION_HEADERS (AX_BOOST_WSERIALIZATION is wrong, we don't need the binary library)
+# AX_BOOST_GRAPH
 
 if test "x$ax_cv_boost_wserialization" != "xyes"; then
   AC_MSG_ERROR([You need libboost-serialization to build Vaucanson.])
