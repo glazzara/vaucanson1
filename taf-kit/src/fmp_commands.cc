@@ -176,8 +176,8 @@ const command_t command_map[] =
 		      IOAUT_NAME " automaton `aut2' on the transducer `aut1'."),
     COMMAND_ENTRY (image, Aut,
 		   "Give an automaton that accepts all output produced by `aut'."),
-    //	  COMMAND_ENTRY (transpose, Aut,
-    //		   "Give the transposed of the transducer `aut'."),
+    COMMAND_ENTRY (transpose, Aut,
+    		   "Give the transposed of the transducer `aut'."),
     COMMAND_ENTRY (trim, Aut, "Trim transducer `aut'.")
 
     ),

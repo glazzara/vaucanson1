@@ -67,11 +67,6 @@ DEFINE_IS_PROPERTY_COMMAND (realtime);
 
 DEFINE_IS_PROPERTY_COMMAND (standard);
 
-// FIXME: This one should go back to common_commands.hh once fixed for
-// TDCs.
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (transpose));
-
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (complete));
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -60,6 +60,9 @@ using vcsn::xml::XML;
 
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (trim));
+
+DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
+			ALGO (transpose));
 
 DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal)
 				  ARG_KIND (aut)
