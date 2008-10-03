@@ -1,5 +1,9 @@
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
+	Add config.h.in to svn:ignore properties.
+
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove use of AX_BOOST_WSERIALIZATION.
 	* build-aux/ax_boost_wserialization.m4: Remove.
 	* configure.ac: Don't use AX_BOOST_WSERIALIZATION, as it
