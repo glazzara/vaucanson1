@@ -1,3 +1,9 @@
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
+	Fix some English.
+	* taf-kit/src/fmp_commands.cc: "transform into" not
+	  "transform in", and "an fmp", not "a fmp".
+
 2008-10-02  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Clean patch r2214.

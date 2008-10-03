@@ -201,7 +201,7 @@ const command_t command_map[] =
 #endif
     COMMAND_ENTRY (invert, Aut, "Give the inverse of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
-		   "Transform a " IOAUT_NAME " automaton in a fmp "
+		   "Transform a " IOAUT_NAME " automaton into an fmp "
 		   "transducer by\n\tcreating, for each word, "
 		   "a pair containing twice this word.")
     ),
