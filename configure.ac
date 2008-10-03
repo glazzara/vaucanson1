@@ -94,10 +94,6 @@ AX_BOOST_BASE([1.34])
 # AX_BOOST_WSERIALIZATION_HEADERS (AX_BOOST_WSERIALIZATION is wrong, we don't need the binary library)
 # AX_BOOST_GRAPH
 
-if test "x$ax_cv_boost_wserialization" != "xyes"; then
-  AC_MSG_ERROR([You need libboost-serialization to build Vaucanson.])
-fi
-
 if test "${with_boost+set}" = set; then
   MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-boost=$with_boost"
 fi

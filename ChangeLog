@@ -1,5 +1,12 @@
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove traces of AX_BOOST_WSERIALIZATION.
+	* build-aux/Makefile.am: Remove ax_boost_serialization.m4.
+	* configure.ac: Don't check if libboost_serialization test
+	  succeeded.
+
+2008-10-03  Reuben Thomas  <rrt@sc3d.org>
+
 	Add config.h.in to svn:ignore properties.
 
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
