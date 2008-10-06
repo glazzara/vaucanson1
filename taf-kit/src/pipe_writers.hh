@@ -56,6 +56,8 @@ public:
 
 # ifdef IOAUT_CONTEXT
   void operator() (IOAUT_CONTEXT::automaton_t& a) const;
+  void operator() (mute_ltl_to_pair<automaton_t::set_t,
+		   automaton_t::value_t>::ret& a) const;
 # endif
 # ifdef RW_CONTEXT
   void operator() (RW_CONTEXT::automaton_t& a) const;

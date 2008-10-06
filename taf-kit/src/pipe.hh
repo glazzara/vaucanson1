@@ -79,6 +79,8 @@ typedef boost::variant<command_output_status,
 # endif
 # ifdef IOAUT_CONTEXT
 		       IOAUT_CONTEXT::automaton_t,
+		       mute_ltl_to_pair<automaton_t::set_t,
+					automaton_t::value_t>::ret,
 # endif
 # ifdef RW_CONTEXT
 		       RW_CONTEXT::automaton_t,

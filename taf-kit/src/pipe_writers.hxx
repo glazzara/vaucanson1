@@ -132,7 +132,28 @@ pipe_stream_writer::operator()
       std::cerr << "Could not save automaton: unkown output type." << std::endl;
     }
 }
-# endif // IOAUT_CONTEXT
+
+void
+pipe_stream_writer::operator()
+  (mute_ltl_to_pair<automaton_t::set_t,
+   automaton_t::value_t>::ret& a) const
+{
+  switch (aut_f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
+    }
+}
+# endif // ! IOAUT_CONTEXT
 
 # ifdef FIRST_PROJECTION_CONTEXT
 void

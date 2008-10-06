@@ -1,5 +1,14 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add the ltl-to-pair algorithm to Taf-Kit.
+	* taf-kit/src/fmp_commands.cc: New ltl-to-pair command.
+	* taf-kit/src/pipe.hh,
+	* taf-kit/src/pipe_writers.hh,
+	* taf-kit/src/pipe_writers.hxx: Update to support a new type of
+	  automaton with FMP ones.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add a new algorithm to convert an ltl to a pair automaton.
 	* include/Makefile.am: Add new files to the distribution.
 	* include/vaucanson/algorithms/ltl_to_pair.hh: New.

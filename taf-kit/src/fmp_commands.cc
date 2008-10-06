@@ -67,6 +67,20 @@ DEFINE_COMMAND (NAME (invert)
 		KEEP_AUTOMATON (fmp)
 		RETURNVALUE (0));
 
+// FIXME: this is a workaround against comma in template argument lists
+// breaking the CODE macro.
+namespace vcsn
+{
+typedef mute_ltl_to_pair<automaton_t::set_t,
+	automaton_t::value_t> mute_ltl_to_pair_t;
+}
+DEFINE_COMMAND (NAME (ltl_to_pair)
+		CODE (
+		  automaton_t src = get_aut(args.args[1]);
+		  vcsn::mute_ltl_to_pair_t::ret dst = ltl_to_pair(src))
+		KEEP_AUTOMATON (dst)
+		RETURNVALUE (0));
+
 DEFINE_COMMAND (NAME (evaluation)
 		CODE (automaton_t src = get_aut(args.args[1]))
 		OUTPUT (
@@ -174,6 +188,8 @@ const command_t command_map[] =
     COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
 		      "Evaluate the language described by the\n\t"
 		      IOAUT_NAME " automaton `aut2' on the transducer `aut1'."),
+    COMMAND_ENTRY (ltl_to_pair, Aut,
+		   "Give an automaton defined over a pair letter alphabet same as `aut'."),
     COMMAND_ENTRY (image, Aut,
 		   "Give an automaton that accepts all output produced by `aut'."),
     COMMAND_ENTRY (transpose, Aut,
