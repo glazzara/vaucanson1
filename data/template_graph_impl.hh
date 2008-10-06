@@ -468,7 +468,7 @@ namespace vcsn
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct projection_traits<S, #IMPL_NAME#::Graph<Kind,
+  struct input_projection_traits<S, #IMPL_NAME#::Graph<Kind,
 					    WordValue,
 					    WeightValue,
 					    SeriesValue,

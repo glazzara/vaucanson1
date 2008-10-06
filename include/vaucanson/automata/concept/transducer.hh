@@ -76,10 +76,12 @@ namespace vcsn {
   template <class S, class T>
   struct input_projection_helper<Transducer<S>, T>
   {
-    typedef typename Transducer<S>::series_set_t::semiring_t
+    typedef Transducer<S> structure_t;
+
+    typedef typename structure_t::series_set_t::semiring_t
     typeof_auto_series_set_t;
 
-    typedef typename Transducer<S>::series_set_t::monoid_t auto_monoid_t;
+    typedef typename structure_t::series_set_t::monoid_t auto_monoid_t;
 
     typedef typename typeof_auto_series_set_t::semiring_t auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
@@ -87,7 +89,7 @@ namespace vcsn {
 						 auto_monoid_t>::ret
     auto_series_set_t;
 
-    typedef typename projection_traits<T>::ret auto_impl_t;
+    typedef typename input_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
@@ -108,7 +110,7 @@ namespace vcsn {
 						 auto_monoid_t>::ret
     auto_series_set_t;
 
-    typedef typename fmp_projection_traits<T>::ret auto_impl_t;
+    typedef typename fmp_input_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
@@ -143,7 +145,7 @@ namespace vcsn {
   };
 
   // FMP Transducers
-  // FIXME: it should be automata over a free monoid product 
+  // FIXME: it should be automata over a free monoid product
   // FIXME: we cannot use output_projection_traits, because
   // it constructs the type by assuming that the automaton is RW
   template <class S, class T>

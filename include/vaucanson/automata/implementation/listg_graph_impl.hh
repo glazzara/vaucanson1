@@ -405,13 +405,13 @@ namespace vcsn
 	    class Letter,
 	    class Tag,
 	    class GeometryCoords>
-  struct projection_traits<listg::Graph<Kind,
-			   WordValue,
-			   WeightValue,
-			   SeriesValue,
-			   Letter,
-			   Tag,
-			   GeometryCoords> >
+  struct input_projection_traits<listg::Graph<Kind,
+					      WordValue,
+					      WeightValue,
+					      SeriesValue,
+					      Letter,
+					      Tag,
+					      GeometryCoords> >
   {
     typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
 			  Letter, Tag, GeometryCoords>
@@ -444,13 +444,13 @@ namespace vcsn
             class Letter,
             class Tag,
             class GeometryCoords>
-  struct fmp_projection_traits<listg::Graph<Kind,
-                           WordValue,
-                           WeightValue,
-                           SeriesValue,
-                           Letter,
-                           Tag,
-                           GeometryCoords> >
+  struct fmp_input_projection_traits<listg::Graph<Kind,
+						  WordValue,
+						  WeightValue,
+						  SeriesValue,
+						  Letter,
+						  Tag,
+						  GeometryCoords> >
   {
     typedef listg::Graph<Kind, WordValue, WeightValue, SeriesValue,
                          Letter, Tag, GeometryCoords>

@@ -1,5 +1,15 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Rename projection_traits to input_projection_traits.
+	* data/template_graph_impl.hh,
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh,
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh:
+	  Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a bug when calculating the input_projection type.
 	* include/vaucanson/automata/concept/transducer.hh
 	  (input_projection_helper<Transducer<S> >): Rename

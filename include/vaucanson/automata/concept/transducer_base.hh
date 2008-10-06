@@ -69,13 +69,13 @@ namespace vcsn {
   };
 
   template <class T>
-  struct projection_traits
+  struct input_projection_traits
   {
       typedef undefined_type	ret;
   };
 
   template <class T>
-  struct fmp_projection_traits
+  struct fmp_input_projection_traits
   {
       typedef undefined_type	ret;
   };
