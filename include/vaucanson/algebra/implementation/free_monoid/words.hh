@@ -20,6 +20,7 @@
 # include <string>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/misc/unique.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn
 {

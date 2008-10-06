@@ -25,6 +25,8 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/transducer.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
+# include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
+# include <vaucanson/algebra/implementation/free_monoid/words.hh>
 
 // Needed for the operator<< on pairs
 # include <vaucanson/algebra/implementation/letter/couple_letter.hh>

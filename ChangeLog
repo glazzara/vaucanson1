@@ -1,3 +1,11 @@
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix sanity checks.
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/words.hh,
+	* include/vaucanson/algorithms/ltl_to_pair.hh: Include missing
+	  headers.
+
 2008-10-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/ratexp_commands.hh (identity-exp): New command.

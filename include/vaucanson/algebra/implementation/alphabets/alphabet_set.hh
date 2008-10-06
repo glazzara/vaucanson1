@@ -18,6 +18,7 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HH
 
 # include <vaucanson/algebra/implementation/alphabets/alphabets.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 
