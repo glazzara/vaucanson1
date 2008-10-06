@@ -1,5 +1,12 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing automaton makers related to RW transducers.
+	* include/vaucanson/contexts/transducer_maker.thh,
+	* include/vaucanson/contexts/transducer_maker.thxx: Here (reported
+	  by Reuben Thomas).
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add two new typedef for RW transducers.
 	* include/vaucanson/contexts/transducer.thh: Here.
 

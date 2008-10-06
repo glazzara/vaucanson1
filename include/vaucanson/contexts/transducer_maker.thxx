@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -79,6 +79,29 @@ namespace vcsn
 			      output_alphabet.end());
       }
 
+      template <typename S, typename T>
+      input_projection_automaton_t
+      make_input_projection_automaton(const Element<S, T>& transducer)
+      {
+	typedef input_projection_automaton_t::set_t set_t;
+	typedef set_t::series_set_t series_set_t;
+	set_t
+	auto_set(series_set_t(transducer.structure().series().
+			      semiring().semiring(), transducer.structure().
+			      series().monoid()));
+	return input_projection_automaton_t(auto_set);
+      }
+
+      template <typename S, typename T>
+      output_projection_automaton_t
+      make_output_projection_automaton(const Element<S, T>& transducer)
+      {
+	typedef output_projection_automaton_t::set_t set_t;
+	typedef set_t::series_set_t series_set_t;
+	set_t
+	auto_set(series_set_t(transducer.structure().series().semiring()));
+	return output_projection_automaton_t(auto_set);
+      }
 
       template <typename TransStruct,
 		typename TransImpl,
@@ -94,7 +117,7 @@ namespace vcsn
       {
 	return eval(t, input);
       }
-    
+
       template <typename TransStruct,
 	      typename TransImpl,
 	      typename SeriesStruct,
@@ -109,10 +132,10 @@ namespace vcsn
 		  const Element<TransStruct, TransImpl>& t,
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
-      AUTOMATON_CONTEXT::automaton_t w = 
+      AUTOMATON_CONTEXT::automaton_t w =
 	AUTOMATON_CONTEXT::make_automaton(t.structure().series()
 					   .monoid().alphabet());
-      typename output_projection_helper<TransStruct, TransImpl>::ret::set_t 
+      typename output_projection_helper<TransStruct, TransImpl>::ret::set_t
 	ret_set(t.structure().series().semiring());
       AUTOMATON_CONTEXT::gen_automaton_t result (ret_set);
       standard_of(w, input);
