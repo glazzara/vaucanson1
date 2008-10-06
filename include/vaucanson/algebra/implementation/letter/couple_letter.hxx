@@ -46,6 +46,10 @@ namespace vcsn {
 	cardinal = INT_MAX
       };
 
+      // A pair letter has two projections available: U and V.
+      typedef U first_projection_t;
+      typedef V second_projection_t;
+
       LETTER_DEFAULT(open_par, "[")
       LETTER_DEFAULT(close_par, "]")
       LETTER_DEFAULT(plus, "+")

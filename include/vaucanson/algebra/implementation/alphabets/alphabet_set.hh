@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,11 +31,36 @@ namespace vcsn {
     `--------------------------------------------*/
 
     /// Meta information about the mixing of AlphabetSet with std::set.
-    template<typename L>
+    template <typename L>
     struct alphabet_traits<AlphabetSet<L>, std::set<L> >
     {
-	/// The type of letters held by the alphabet.
-	typedef L			letter_t;
+      /// The type of the alphabet.
+      typedef Element<AlphabetSet<L>, std::set<L> > alphabet_t;
+
+      /// The type of letters held by the alphabet.
+      typedef L letter_t;
+
+      /// The type of letters held by the first projection.
+      typedef typename letter_traits<letter_t>::first_projection_t
+      first_projection_letter_t;
+
+      /// The type of letters held by the second projection.
+      typedef typename letter_traits<letter_t>::second_projection_t
+      second_projection_letter_t;
+
+      /// The type of the first projection alphabet.
+      typedef Element<AlphabetSet<first_projection_letter_t>,
+	      std::set<first_projection_letter_t> > first_projection_t;
+
+      /// The type of the second projection alphabet.
+      typedef Element<AlphabetSet<second_projection_letter_t>,
+	      std::set<second_projection_letter_t> > second_projection_t;
+
+      /// The first projection alphabet maker.
+      static first_projection_t first_projection(const alphabet_t&);
+
+      /// The second projection alphabet maker.
+      static second_projection_t second_projection(const alphabet_t&);
     };
 
     /** @} */

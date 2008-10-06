@@ -1,5 +1,24 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add new projection traits for letters and alphabets.
+	* include/vaucanson/algebra/concept/alphabets_base.hh
+	  (alphabet_traits): Add new traits.
+	* include/vaucanson/algebra/concept/letter.hh (letter_traits): Add
+	  new traits. Include new needed header.
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hh:
+	  Cleanup and improve alphabet_traits.
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx:
+	  Add the implementation for alphabet projection makers.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	  Specify projection traits.
+	* include/vaucanson/automata/generic_contexts/char_char_boolean_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_int_boolean_automaton_structures.hh:
+	  Add new typedefs to export alphabet projections.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Typo in static error message.
 	* include/vaucanson/misc/contract.hh: Here.
 

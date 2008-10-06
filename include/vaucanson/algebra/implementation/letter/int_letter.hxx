@@ -39,6 +39,10 @@ namespace vcsn {
 	cardinal = UINT_MAX
       };
 
+      // We can not "project" an int letter.
+      typedef undefined_type first_projection_t;
+      typedef undefined_type second_projection_t;
+
       LETTER_DEFAULT(open_par, "(")
       LETTER_DEFAULT(close_par, ")")
       LETTER_DEFAULT(plus, "+")

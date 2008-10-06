@@ -79,6 +79,12 @@ namespace vcsn {
       /// The type of letters in any alphabet.
       typedef undefined_type	letter_t;
 
+      /// Whether the alphabet has a first projection computable.
+      typedef undefined_type	first_projection_t;
+
+      /// Whether the alphabet has a second projection computable.
+      typedef undefined_type	second_projection_t;
+
       /// Whether an alphabet contains dynamic data.
       static const bool dynamic_data = false;
     };

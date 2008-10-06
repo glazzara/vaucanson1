@@ -40,6 +40,10 @@ namespace vcsn {
 	cardinal = 255
       };
 
+      // We can not "project" a char letter.
+      typedef undefined_type first_projection_t;
+      typedef undefined_type second_projection_t;
+
       // FIXME: use LETTER_DEFAULT
       static char default_joker()   { return '?'; }
       static char default_other()   { return '#'; }

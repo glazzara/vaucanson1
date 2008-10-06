@@ -21,6 +21,7 @@
 # include <string>
 # include <vector>
 
+# include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/misc/static.hh>
 
 namespace vcsn {
@@ -46,6 +47,12 @@ namespace vcsn {
       // FIXME: we must add traits to monoids to handle this better
       static std::string kind();
       static int dim();
+
+      /// Whether the letter has a first projection computable.
+      typedef undefined_type first_projection_t;
+
+      /// Whether the letter has a second projection computable.
+      typedef undefined_type second_projection_t;
 
       /// Provide a way to create a letter from its literal
       /// representation:

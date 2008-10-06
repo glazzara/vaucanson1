@@ -38,6 +38,13 @@ namespace vcsn
     VCSN_CONTEXT_NAMESPACE
     {
       AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+
+      typedef algebra::alphabet_traits<alphabet_t::set_t,
+	      alphabet_t::value_t>::first_projection_t
+	      first_projection_alphabet_t;
+      typedef algebra::alphabet_traits<alphabet_t::set_t,
+	      alphabet_t::value_t>::second_projection_t
+	      second_projection_alphabet_t;
     }
   }
 }
