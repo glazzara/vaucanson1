@@ -261,3 +261,74 @@ vdddc
 vdvc
 vvdc
 EOF
+
+# ltl.xml
+# a simple random sub-normalized automaton
+
+sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xyz define-automaton ltl.xml
+# Add states
+1
+# Add 3 states
+3
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+2
+# Add transition
+3
+# From, to, in, out
+0
+1
+a
+x
+# Add transition
+3
+# From, to, in, out
+0
+2
+a
+y
+# Add transition
+3
+# From, to, in, out
+1
+2
+a
+z
+# Add transition
+3
+# From, to, in, out
+2
+1
+b
+x
+# Exit.
+10
+EOF
+$VCSN is-sub-normalized ltl.xml
+$VCSN ltl-to-pair ltl.xml > ltl-pair.xml
+
+# Now we will check with first_projection and second_projection
+# on one side (pair), and image and domain on the other side (FMP).
+$VCSN domain ltl.xml > ltl-domain.xml
+$VCSN image ltl.xml > ltl-image.xml
+vcsn-char-char-b first-projection ltl-pair.xml > ltl-first-projection.xml
+vcsn-char-char-b second-projection ltl-pair.xml > ltl-second-projection.xml
+
+# Now ltl-domain must be isomorph to ltl-first-projection and
+# ltl-image must be isomorph to ltl-second-projection.
+# FIXME: are-isomorphic disabled
+vcsn-char-b are-equivalent ltl-domain.xml ltl-first-projection.xml
+vcsn-char-b are-equivalent ltl-image.xml ltl-second-projection.xml
+fail255 vcsn-char-b are-equivalent ltl-domain.xml ltl-second-projection.xml
+fail255 vcsn-char-b are-equivalent ltl-image.xml ltl-first-projection.xml
+sort ltl-domain.xml > ltl-domain-sorted.xml
+sort ltl-first-projection.xml > ltl-first-projection-sorted.xml
+diff ltl-domain-sorted.xml ltl-first-projection-sorted.xml
+sort ltl-image.xml > ltl-image-sorted.xml
+sort ltl-second-projection.xml > ltl-second-projection-sorted.xml
+diff ltl-image-sorted.xml ltl-second-projection-sorted.xml
