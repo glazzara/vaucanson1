@@ -181,16 +181,6 @@ namespace vcsn
     do_rw_image(src, dst, m);
   }
 
-# define MAKE_RET_AUTOMATON()							\
-    typedef Element<S, T>  Trans_t;						\
-  AUTOMATON_TYPES(Trans_t);							\
-  typedef typename output_projection_helper<S, T>::ret	 Auto_t;		\
-  typedef typename Auto_t::set_t			 Auto_set_t;		\
-  typedef typename Auto_set_t::series_set_t		 Auto_series_set_t;	\
-  Auto_set_t	 auto_set							\
-      (Auto_series_set_t(src.structure().series().semiring()));			\
-    Auto_t	 dst(auto_set)
-
   // Dispatch and build returned object for RW transducers. A map between states
   // of the resulting automaton and the tranducer is filled.
   template <typename S, typename T, typename ST>
@@ -200,7 +190,7 @@ namespace vcsn
 		  const TransducerBase<ST>&,
 		  std::map<typename T::hstate_t, typename T::hstate_t>& m)
   {
-    MAKE_RET_AUTOMATON();
+    typename output_projection_helper<S, T>::ret dst = make_output_projection_automaton(src);
 
     image_dispatch(src, src.structure(),
 		   src.structure().series().monoid(), dst, m);
@@ -214,14 +204,12 @@ namespace vcsn
   image_dispatch2(const Element<S,T>& src,
 		  const TransducerBase<ST>&)
   {
-    MAKE_RET_AUTOMATON();
+    typename output_projection_helper<S, T>::ret dst = make_output_projection_automaton(src);
 
     image_dispatch(src, src.structure(),
 		   src.structure().series().monoid(), dst);
     return dst;
   }
-
-# undef MAKE_RET_AUTOMATON
 
   // Dispatcher for transducers
   template <typename S, typename S2,

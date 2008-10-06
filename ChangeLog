@@ -1,5 +1,10 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Remove the MAKE_RET_AUTOMATON macro.
+	* include/vaucanson/algorithms/image.hxx: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add missing automaton makers related to RW transducers.
 	* include/vaucanson/contexts/transducer_maker.thh,
 	* include/vaucanson/contexts/transducer_maker.thxx: Here (reported
