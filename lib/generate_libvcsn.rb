@@ -30,9 +30,7 @@ vcsn = Hash[
   "vcsn-int-z-fmp-tdc" => "int_z_fmp_transducer",
   "vcsn-z-tdc" => "z_transducer",
   "vcsn-char-char-b" => "char_char_boolean_automaton",
-  "vcsn-char-int-b" => "char_int_boolean_automaton",
   "vcsn-int-int-b" => "int_int_boolean_automaton",
-  "vcsn-int-char-b" => "int_char_boolean_automaton"
 ]
 
 # Creating directories in lib/

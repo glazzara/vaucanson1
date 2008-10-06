@@ -19,8 +19,7 @@ AM_LDFLAGS += $(TERMLIBS)
 bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-fmp-b \
                vcsn-int-b vcsn-int-z vcsn-int-fmp-b \
 	       vcsn-int-fmp-z vcsn-char-fmp-z \
-	       vcsn-char-char-b vcsn-char-int-b \
-	       vcsn-int-int-b vcsn-int-char-b
+	       vcsn-char-char-b vcsn-int-int-b
 
 COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\
@@ -147,16 +146,6 @@ vcsn_char_char_b_LDADD = $(LDADD) \
 			  $(top_builddir)/lib/libkrat_exp.la \
 			  $(top_builddir)/lib/libvcsn-char-char-b.la
 
-vcsn_char_int_b_SOURCES = $(COMMON_SOURCES) \
-			    ratexp_commands.hh \
-			    common_automaton_commands.hh \
-			    b_commands.cc
-vcsn_char_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_int_boolean_automaton \
-			     -DVCSN_USE_LIB
-vcsn_char_int_b_LDADD = $(LDADD) \
-			  $(top_builddir)/lib/libkrat_exp.la \
-			  $(top_builddir)/lib/libvcsn-char-int-b.la
-
 vcsn_int_int_b_SOURCES = $(COMMON_SOURCES) \
 			    ratexp_commands.hh \
 			    common_automaton_commands.hh \
@@ -166,16 +155,6 @@ vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 vcsn_int_int_b_LDADD = $(LDADD) \
 			  $(top_builddir)/lib/libkrat_exp.la \
 			  $(top_builddir)/lib/libvcsn-int-int-b.la
-
-vcsn_int_char_b_SOURCES = $(COMMON_SOURCES) \
-			    ratexp_commands.hh \
-			    common_automaton_commands.hh \
-			    b_commands.cc
-vcsn_int_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_char_boolean_automaton \
-			     -DVCSN_USE_LIB
-vcsn_int_char_b_LDADD = $(LDADD) \
-			  $(top_builddir)/lib/libkrat_exp.la \
-			  $(top_builddir)/lib/libvcsn-int-char-b.la
 
 ## ------ ##
 ## argp.  ##

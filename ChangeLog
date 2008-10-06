@@ -1,5 +1,19 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Remove int_char and char_int letter types.
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton.hh: Remove.
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh: Remove.
+	* include/vaucanson/automata/generic_contexts/int_char_boolean_automaton.hh: Remove.
+	* include/vaucanson/automata/generic_contexts/int_char_boolean_automaton_structures.hh: Remove.
+	* include/vaucanson/contexts/char_int_letter.thh: Remove.
+	* include/vaucanson/contexts/int_char_letter.thh: Remove.
+	* include/Makefile.am,
+	* lib/Makefile.am,
+	* lib/generate_libvcsn.rb,
+	* taf-kit/src/Makefile.am: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add missing automaton makers related to FMP transducers.
 	* include/vaucanson/contexts/fmp_transducer_maker.thh,
 	* include/vaucanson/contexts/fmp_transducer_maker.thxx: Here
