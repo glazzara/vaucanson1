@@ -1,5 +1,17 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Make FMP transducers headers more in line with RW transducers.
+	* include/Makefile.am: Add new file to the distribution.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh:
+	  Include the new header (transducer.thh).
+	* include/vaucanson/contexts/fmp_transducer.thh: Copy from
+	  include/vaucanson/contexts/transducer.thh. Remove useless code.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add missing alphabet typedefs for RW transducers.
 	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh,
 	* include/vaucanson/automata/generic_contexts/int_boolean_transducer_structures.hh,

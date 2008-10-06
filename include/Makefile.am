@@ -40,6 +40,7 @@ vaucanson/contexts/polynom_series.thh		\
 vaucanson/contexts/r_semiring.thh		\
 vaucanson/contexts/ratseries_semiring.thh	\
 vaucanson/contexts/transducer.thh		\
+vaucanson/contexts/fmp_transducer.thh		\
 vaucanson/contexts/z_max_plus_semiring.thh	\
 vaucanson/contexts/z_min_plus_semiring.thh	\
 vaucanson/contexts/z_semiring.thh 		\
