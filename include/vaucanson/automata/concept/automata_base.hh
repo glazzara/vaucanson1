@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson
+// Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,6 +57,7 @@ namespace vcsn {
       const series_set_t& series() const;
   };
 
+  // FIXME: it must be renamed to automaton_impl_traits
   // traits for automaton implementation.
   template <typename T>
   struct automaton_traits
@@ -187,12 +189,77 @@ namespace vcsn {
   struct standard_of_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >		\
   {										\
     typedef typename algebra::Series<W, M>		series_set_t;		\
-    typedef typename algebra::polynom<Tm, Tw>		series_set_elt_value_t;	\
+    typedef typename algebra::polynom<Tm, Tw>		series_set_elt_value_t; \
     typedef typename Type<labels_are_series, Tm, Tw,				\
 			  series_set_elt_value_t, Tm,				\
 			  NoTag, NoTag>			automaton_impl_t;	\
     typedef Element<Automata<series_set_t>,					\
 		    automaton_impl_t>			automaton_t;		\
+  }
+
+  // Traits to construct misc projections from a structural type and
+  // an implementation.
+  template <typename S, typename T>
+  struct projection_traits
+  {
+    /// Whether the automaton has a first projection computable.
+    typedef undefined_type first_projection_t;
+
+    /// Whether the automaton has a second projection computable.
+    typedef undefined_type second_projection_t;
+  };
+
+  // Traits to mute an existing graph implementation into a projection
+  // implementation with TT.
+  template <typename T, typename TT>
+  struct mute_graph_impl_traits
+  {
+    /// Whether the implementation has a first projection computable.
+    typedef undefined_type first_projection_t;
+
+    /// Whether the implementation has a second projection computable.
+    typedef undefined_type second_projection_t;
+  };
+
+# define VCSN_MAKE_MUTE_GRAPH_IMPL_TRAITS(Type)					\
+  template <typename Kind,							\
+	    typename WordValue,							\
+	    typename WeightValue,						\
+	    typename SeriesValue,						\
+	    typename Letter,							\
+	    typename Tag,							\
+	    typename GeometryCoords,						\
+	    typename TT>							\
+  struct mute_graph_impl_traits<Type<Kind,					\
+				     WordValue,					\
+				     WeightValue,				\
+				     SeriesValue,				\
+				     Letter,					\
+				     Tag,					\
+				     GeometryCoords>, TT>			\
+  {										\
+    typedef Type<Kind, WordValue, WeightValue, SeriesValue,			\
+		 Letter, Tag, GeometryCoords> graph_t;				\
+    typedef typename algebra::letter_traits<Letter>::				\
+			first_projection_t first_letter_t;			\
+    typedef typename algebra::letter_traits<Letter>::				\
+			second_projection_t second_letter_t;			\
+    typedef typename TT::first_projection_t::value_t				\
+			first_monoid_elt_value_t;				\
+    typedef typename TT::second_projection_t::value_t				\
+			second_monoid_elt_value_t;				\
+    typedef typename algebra::mute_series_impl<SeriesValue, WeightValue,	\
+					       first_monoid_elt_value_t>::ret	\
+					       first_series_impl_t;		\
+    typedef typename algebra::mute_series_impl<SeriesValue, WeightValue,	\
+					       second_monoid_elt_value_t>::ret	\
+					       second_series_impl_t;		\
+    typedef Type<Kind, first_monoid_elt_value_t,				\
+		 WeightValue, first_series_impl_t,				\
+		 first_letter_t, Tag, GeometryCoords> first_projection_t;	\
+    typedef Type<Kind, second_monoid_elt_value_t,				\
+		 WeightValue, second_series_impl_t,				\
+		 second_letter_t, Tag, GeometryCoords> second_projection_t;	\
   }
 
   /*-----------------------------------.

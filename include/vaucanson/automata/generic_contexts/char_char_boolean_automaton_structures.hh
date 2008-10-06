@@ -38,25 +38,7 @@ namespace vcsn
     VCSN_CONTEXT_NAMESPACE
     {
       AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
-
-      typedef algebra::alphabet_traits<alphabet_t::set_t,
-	      alphabet_t::value_t>::first_projection_t
-	      first_projection_alphabet_t;
-      typedef algebra::alphabet_traits<alphabet_t::set_t,
-	      alphabet_t::value_t>::second_projection_t
-	      second_projection_alphabet_t;
-
-      typedef algebra::word_traits<monoid_elt_t::set_t,
-	      monoid_elt_t::value_t>::first_monoid_t first_monoid_t;
-      typedef algebra::word_traits<monoid_elt_t::set_t,
-	      monoid_elt_t::value_t>::second_monoid_t second_monoid_t;
-
-      typedef algebra::word_traits<monoid_elt_t::set_t,
-	      monoid_elt_t::value_t>::first_projection_t
-	      first_projection_word_t;
-      typedef algebra::word_traits<monoid_elt_t::set_t,
-	      monoid_elt_t::value_t>::second_projection_t
-	      second_projection_word_t;
+      AUTOMATON_PROJECTION_TYPES();
     }
   }
 }
