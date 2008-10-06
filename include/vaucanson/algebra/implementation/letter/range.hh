@@ -62,6 +62,10 @@ namespace vcsn {
 	{
 	  cardinal = Interval::to_value - Interval::from_value + 1
 	};
+
+      // We can not "project" a static_ranged letter.
+      typedef undefined_type first_projection_t;
+      typedef undefined_type second_projection_t;
     };
 
     // FIXME: op_leq may be more adapted.

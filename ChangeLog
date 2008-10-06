@@ -1,5 +1,10 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix missing typedefs in the "range" letter type.
+	* include/vaucanson/algebra/implementation/letter/range.hh: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Move transducer projection "makers" from vcsn::CONTEXT to traits.
 	* include/vaucanson/algorithms/image.hxx (image_dispatch2): Update
 	  to use output_projection_helpers trait.
