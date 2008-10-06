@@ -60,6 +60,9 @@ namespace vcsn
     {
       AUTOMATON_TYPES_EXACT(automaton_t);
       AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+
+      typedef automaton_t::input_monoid_t::alphabet_t first_alphabet_t;
+      typedef automaton_t::output_monoid_t::alphabet_t second_alphabet_t;
     } // End of namespace VCSN_CONTEXT_NAMESPACE
   } // End of namespace VCSN_GRAPH_IMPL
 } // End of namespace vcsn

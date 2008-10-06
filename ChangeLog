@@ -1,5 +1,14 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing alphabet typedefs for RW transducers.
+	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_boolean_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_transducer_structures.hh:
+	  Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Remove the MAKE_RET_AUTOMATON macro.
 	* include/vaucanson/algorithms/image.hxx: Here.
 
