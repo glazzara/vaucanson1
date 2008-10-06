@@ -1,5 +1,11 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Restore some traits to realistic values for pairs.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:
+	  Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Remove int_char and char_int letter types.
 	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton.hh: Remove.
 	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh: Remove.
