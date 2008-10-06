@@ -1,5 +1,10 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add two new typedef for RW transducers.
+	* include/vaucanson/contexts/transducer.thh: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Rename projection_traits to input_projection_traits.
 	* data/template_graph_impl.hh,
 	* include/vaucanson/automata/concept/transducer.hh,
