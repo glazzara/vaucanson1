@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -211,6 +211,12 @@ namespace vcsn {
 	  case NODE_SUM:
 	    verbose = not (mode & MODE_ADD);
 	    break;
+	  case NODE_LWEIGHT:
+	    verbose = not (mode & MODE_LWEIGHT);
+	    break;
+	  case NODE_RWEIGHT:
+	    verbose = not (mode & MODE_RWEIGHT);
+	    break;
 	  default:
 	    verbose = false;
 	    enclose_all = mode & MODE_LWEIGHT;
@@ -244,9 +250,15 @@ namespace vcsn {
 	  case NODE_SUM:
 	    verbose = not (mode & MODE_ADD);
 	    break;
+	  case NODE_LWEIGHT:
+	    verbose = not (mode & MODE_LWEIGHT);
+	    break;
+	  case NODE_RWEIGHT:
+	    verbose = not (mode & MODE_RWEIGHT);
+	    break;
 	  default:
 	    verbose = false;
-	    enclose_all = mode & MODE_LWEIGHT;
+	    enclose_all = mode & MODE_RWEIGHT;
 	    break;
 	  }
 
