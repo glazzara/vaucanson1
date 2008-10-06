@@ -1,5 +1,16 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add a new algorithm to convert an ltl to a pair automaton.
+	* include/Makefile.am: Add new files to the distribution.
+	* include/vaucanson/algorithms/ltl_to_pair.hh: New.
+	* include/vaucanson/algorithms/ltl_to_pair.hxx: New.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Reference
+	  to the new algorithm.
+	* lib/generate_libvcsn.rb: Update to support the new algorithm.
+	* vaucanswig/expand.sh: Update to ignore the new algorithm.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add an helper to mute a graph implementation.
 	* include/vaucanson/automata/concept/automata_base.hh: New
 	  mute_graph_impl_monoid_traits.

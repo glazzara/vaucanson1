@@ -64,6 +64,7 @@ def create?(type, file)
       file !~ /evaluation_fmp.hh/ and		# FMP transducer
       file !~ /sub_normalize.hh/ and		# FMP transducer
       file !~ /composition_cover.hh/ and	# FMP transducer
+      file !~ /ltl_to_pair.hh/ and		# FMP transducer
       ( # Pair letters only filters.
 	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
 	      "vcsn-int-int-b" == type or "vcsn-int-char-b" == type
@@ -128,6 +129,7 @@ def create?(type, file)
 	      file !~ /normalized_composition.hh/ and	# FMP transducer
 	      file !~ /evaluation_fmp.hh/ and		# FMP transducer
 	      file !~ /sub_normalize.hh/ and		# FMP transducer
+	      file !~ /ltl_to_pair.hh/ and		# FMP transducer
 	      file !~ /composition_cover.hh/		# FMP transducer
 	    )
       )
@@ -273,6 +275,7 @@ files.each { |file|
 	tmp = tmp.gsub(/OutputProjection/, 'output_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
 	tmp = tmp.gsub(/FirstProjection/, 'projection_traits<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::first_projection_t')
 	tmp = tmp.gsub(/SecondProjection/, 'projection_traits<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::second_projection_t')
+	tmp = tmp.gsub(/LtlToPair/, 'mute_ltl_to_pair<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
 	output.push("  template", tmp)
       end
       i = i.next

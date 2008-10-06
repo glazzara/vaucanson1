@@ -154,6 +154,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
      if	[ "$candidate_family" = "invert" ] || \
 	[ "$candidate_family" = "domain" ] || \
 	[ "$candidate_family" = "image" ] || \
+	[ "$candidate_family" = "ltl_to_pair" ] || \
 	[ "$candidate_family" = "aut_projection" ] || \
 	[ "$candidate_family" = "evaluation_fmp" ] || \
 	[ "$candidate_family" = "normalized_composition" ] || \
