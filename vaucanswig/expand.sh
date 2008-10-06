@@ -149,9 +149,12 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
      # As for now, the bindings can only be generated for automata
      # (not transducers), so we prevent building transducers only
      # algorithms with a well defined interface metadata.
+     # Moreover, the only bindings generated are for simple letters,
+     # so we disable aut_projection.
      if	[ "$candidate_family" = "invert" ] || \
 	[ "$candidate_family" = "domain" ] || \
 	[ "$candidate_family" = "image" ] || \
+	[ "$candidate_family" = "aut_projection" ] || \
 	[ "$candidate_family" = "evaluation_fmp" ] || \
 	[ "$candidate_family" = "normalized_composition" ] || \
 	[ "$candidate_family" = "sub_normalize" ] || \

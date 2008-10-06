@@ -274,6 +274,8 @@ vaucanson/algorithms/aci_canonical.hh				\
 vaucanson/algorithms/aci_canonical.hxx				\
 vaucanson/algorithms/aut_to_exp.hh				\
 vaucanson/algorithms/aut_to_exp.hxx				\
+vaucanson/algorithms/aut_projection.hh				\
+vaucanson/algorithms/aut_projection.hxx				\
 vaucanson/algorithms/berry_sethi.hh				\
 vaucanson/algorithms/berry_sethi.hxx				\
 vaucanson/algorithms/brzozowski.hh				\

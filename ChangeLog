@@ -1,5 +1,15 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add new automaton projection algorithms (close #172).
+	* include/vaucanson/algorithms/aut_projection.hh: New.
+	* include/vaucanson/algorithms/aut_projection.hxx: New.
+	* include/vaucanson/contexts/automaton_functions.thh: Reference to
+	  the new algorithms.
+	* lib/generate_libvcsn.rb: Update to support the new algorithm.
+	* vaucanswig/expand.sh: Update to ignore the new algorithm.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add new projection traits for automata.
 	* include/vaucanson/automata/concept/automata.hh: New
 	  projection_traits.

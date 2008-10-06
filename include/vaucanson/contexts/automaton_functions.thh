@@ -23,6 +23,7 @@
 
 # include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/algorithms/aut_projection.hh>
 # include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/concatenate.hh>
