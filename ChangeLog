@@ -1,5 +1,12 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add missing automaton makers related to FMP transducers.
+	* include/vaucanson/contexts/fmp_transducer_maker.thh,
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx: Here
+	  (reported by Reuben Thomas).
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Make FMP transducers headers more in line with RW transducers.
 	* include/Makefile.am: Add new file to the distribution.
 	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh,

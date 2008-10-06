@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -71,6 +71,32 @@ namespace vcsn
       {
 	return make_automaton(first_alphabet.begin(), first_alphabet.end(),
 			      second_alphabet.begin(), second_alphabet.end());
+      }
+
+      template <typename S, typename T>
+      input_projection_automaton_t
+      make_input_projection_automaton(const Element<S, T>& transducer)
+      {
+	typedef input_projection_automaton_t::set_t set_t;
+	typedef set_t::series_set_t series_set_t;
+	set_t
+	auto_set(series_set_t(transducer.structure().series().
+			      semiring(), transducer.structure().series().
+			      monoid().first_monoid()));
+	return input_projection_automaton_t(auto_set);
+      }
+
+      template <typename S, typename T>
+      output_projection_automaton_t
+      make_output_projection_automaton(const Element<S, T>& transducer)
+      {
+	typedef output_projection_automaton_t::set_t set_t;
+	typedef set_t::series_set_t series_set_t;
+	set_t
+	auto_set(series_set_t(transducer.structure().series().
+			      semiring(), transducer.structure().series().
+			      monoid().second_monoid()));
+	return output_projection_automaton_t(auto_set);
       }
 
       template <class FirstIterator, class SecondIterator>
