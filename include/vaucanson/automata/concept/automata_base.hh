@@ -211,6 +211,7 @@ namespace vcsn {
 
   // Traits to mute an existing graph implementation into a projection
   // implementation with TT.
+  // FIXME: rename to mute_graph_impl_projection_traits
   template <typename T, typename TT>
   struct mute_graph_impl_traits
   {
@@ -260,6 +261,44 @@ namespace vcsn {
     typedef Type<Kind, second_monoid_elt_value_t,				\
 		 WeightValue, second_series_impl_t,				\
 		 second_letter_t, Tag, GeometryCoords> second_projection_t;	\
+  }
+
+  // Traits to mute an existing graph implementation into another
+  // graph implementation with a different monoid type.
+  template <typename T, typename L>
+  struct mute_graph_impl_monoid_traits
+  {
+    /// The computed new implementation.
+    typedef undefined_type ret;
+  };
+
+# define VCSN_MAKE_MUTE_GRAPH_IMPL_MONOID_TRAITS(Type)				\
+  template <typename Kind,							\
+	    typename WordValue,							\
+	    typename WeightValue,						\
+	    typename SeriesValue,						\
+	    typename Letter,							\
+	    typename Tag,							\
+	    typename GeometryCoords,						\
+	    typename M>								\
+  struct mute_graph_impl_monoid_traits<Type<Kind,				\
+					    WordValue,				\
+					    WeightValue,			\
+					    SeriesValue,			\
+					    Letter,				\
+					    Tag,				\
+					    GeometryCoords>, M>			\
+  {										\
+    typedef Type<Kind, WordValue, WeightValue, SeriesValue,			\
+		 Letter, Tag, GeometryCoords> graph_t;				\
+    typedef typename M::value_t monoid_elt_value_t;				\
+    typedef typename M::set_t::alphabet_t::letter_t letter_t;			\
+    typedef typename algebra::mute_series_impl<SeriesValue, WeightValue,	\
+					       monoid_elt_value_t>::ret		\
+					       series_impl_t;			\
+    typedef Type<Kind, monoid_elt_value_t,					\
+		 WeightValue, series_impl_t,					\
+		 letter_t, Tag, GeometryCoords> ret;				\
   }
 
   /*-----------------------------------.

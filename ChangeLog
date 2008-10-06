@@ -1,5 +1,14 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add an helper to mute a graph implementation.
+	* include/vaucanson/automata/concept/automata_base.hh: New
+	  mute_graph_impl_monoid_traits.
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh,
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh:
+	  Use the new macro.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add automata projection algorithms to Taf-Kit.
 	* taf-kit/src/Makefile.am: Use new macros.
 	* taf-kit/src/common_automaton_commands.hh: Define the new

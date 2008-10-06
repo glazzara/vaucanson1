@@ -367,6 +367,7 @@ namespace vcsn
   VCSN_MAKE_AUTOMATON_TRAITS(bmig::Graph);
   VCSN_MAKE_GENERALIZED_AUTOMATON_TRAITS(bmig::Graph);
   VCSN_MAKE_MUTE_GRAPH_IMPL_TRAITS(bmig::Graph);
+  VCSN_MAKE_MUTE_GRAPH_IMPL_MONOID_TRAITS(bmig::Graph);
 
   // This implementation can be used as a transducer one.
   template <class Kind,
