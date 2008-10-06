@@ -519,6 +519,7 @@ namespace vcsn
       }
 
       // case (k' E) * k -> general case
+      */
 
       // case (E k') * k -> E [k' k]
       if (this_type == node_t::rweight)
@@ -528,7 +529,6 @@ namespace vcsn
 		  ->weight_, op_convert(SELECT(W), SELECT(Tw), w));
 	return;
       }
-      */
 
       // general case
       ret.base() =
@@ -585,8 +585,6 @@ namespace vcsn
       if (w == identity_value(SELECT(W), SELECT(oTw)))
 	return ret;
 
-      /// @bug FIXME: Add the following transformation in a separated function.
-      /*
       // case k * (k' E) -> [k k'] E
       if (this_type == node_t::lweight)
       {
@@ -596,6 +594,8 @@ namespace vcsn
 	return ret;
       }
 
+      /// @bug FIXME: Add the following transformation in a separated function.
+      /*
       // case k * (E k') -> (k E) k'
       if (this_type == node_t::rweight)
       {

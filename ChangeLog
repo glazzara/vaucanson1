@@ -1,5 +1,12 @@
 2008-10-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Rewrite "{w} ({k} l)" as "{w*k} l" and "(l {k}) {w}" as "l {w*k}".
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx
+	(op_in_mul, op_mul): Uncomment these trivial simplifications.
+
+2008-10-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Print "{w} (l {k})" or "({w} l) {k}" rather than "{w} l {k}".
 
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
