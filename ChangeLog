@@ -1,5 +1,10 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix compilation issue.
+	* taf-kit/src/pipe.hh: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix sanity checks.
 	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hh,
 	* include/vaucanson/algebra/implementation/free_monoid/words.hh,
