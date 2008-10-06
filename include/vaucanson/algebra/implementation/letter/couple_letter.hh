@@ -25,6 +25,10 @@
 # include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 
+// Needed to get defaults for projections.
+# include <vaucanson/algebra/implementation/letter/char_letter.hh>
+# include <vaucanson/algebra/implementation/letter/int_letter.hh>
+
 // Here are functions to manipulate pairs.
 
 namespace vcsn

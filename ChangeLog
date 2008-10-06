@@ -1,5 +1,19 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add new projection traits for words.
+	* include/vaucanson/algebra/concept/monoid_base.hh: New word_traits.
+	* include/vaucanson/algebra/implementation/free_monoid/words.hh
+	  (word_traits): Add specialization for free monoids.
+	* include/vaucanson/algebra/implementation/free_monoid/words.hxx:
+	  Add implementation for projection of words.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
+	  Update headers.
+	* include/vaucanson/automata/generic_contexts/char_char_boolean_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_int_boolean_automaton_structures.hh:
+	  Add new supporting typedefs.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Typo in FMP words implementation.
 	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh:
 	  Wrong return type.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,10 +19,10 @@
 
 # include <vaucanson/algebra/implementation/free_monoid/words.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     /*---------.
     | Words<A> |
     `---------*/
@@ -56,9 +56,80 @@ namespace vcsn {
       return a.alphabet() == b.alphabet();
     }
 
-  } // algebra
+# define WORD_TRAITS \
+    word_traits<FreeMonoid<A>, std::basic_string<typename A::letter_t> >
 
-} // vcsn
+    template <typename A>
+    inline typename WORD_TRAITS::first_projection_value_t
+    WORD_TRAITS::first_projection(const WORD_TRAITS::word_value_t& str)
+    {
+      // We can not project if the type does not support it.
+      static_assertion_(not (misc::static_eq<first_projection_t,
+			     undefined_type>::value), need_first_projection)
+
+      first_projection_value_t R;
+
+      // We assume we can access the first projection with "first".
+      for_all_const_(word_value_t, i, str)
+	R += (*i).first;
+
+      return R;
+    }
+
+    template <typename A>
+    inline typename WORD_TRAITS::first_projection_t
+    WORD_TRAITS::first_projection(const WORD_TRAITS::first_monoid_t& mon,
+				  const WORD_TRAITS::word_t& word)
+    {
+      // We can not project if the type does not support it.
+      static_assertion_(not (misc::static_eq<first_projection_t,
+			     undefined_type>::value), need_first_projection)
+
+      first_projection_t R(mon);
+
+      R.value() = first_projection(word.value());
+
+      return R;
+    }
+
+    template <typename A>
+    inline typename WORD_TRAITS::second_projection_value_t
+    WORD_TRAITS::second_projection(const WORD_TRAITS::word_value_t& str)
+    {
+      // We can not project if the type does not support it.
+      static_assertion_(not (misc::static_eq<second_projection_t,
+			     undefined_type>::value), need_second_projection)
+
+      second_projection_value_t R;
+
+      // We assume we can access the second projection with "second".
+      for_all_const_(word_value_t, i, str)
+	R += (*i).second;
+
+      return R;
+    }
+
+    template <typename A>
+    inline typename WORD_TRAITS::second_projection_t
+    WORD_TRAITS::second_projection(const WORD_TRAITS::second_monoid_t& mon,
+				   const WORD_TRAITS::word_t& word)
+    {
+      // We can not project if the type does not support it.
+      static_assertion_(not (misc::static_eq<second_projection_t,
+			     undefined_type>::value), need_second_projection)
+
+      second_projection_t R(mon);
+
+      R.value() = second_projection(word.value());
+
+      return R;
+    }
+
+# undef WORD_TRAITS
+
+  } // ! algebra
+
+} // ! vcsn
 
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_WORDS_HXX

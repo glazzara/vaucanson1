@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson
+// Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -69,6 +70,37 @@ namespace vcsn {
       template <class S>
       static
       Element<S, T> of(const S& s);
+    };
+
+    /*------------.
+    | word_traits |
+    `------------*/
+
+    /**
+     * Trait for virtual types of structural elements for words.
+     *
+     * It should be specialized for all derived structures.
+     */
+    template <typename S, typename T>
+    struct word_traits
+    {
+      /// The type of the alphabet.
+      typedef undefined_type alphabet_t;
+
+      /// The type of the word.
+      typedef undefined_type word_t;
+
+      /// The type of the first projection monoid.
+      typedef undefined_type first_monoid_t;
+
+      /// The type of the second projection monoid.
+      typedef undefined_type second_monoid_t;
+
+      /// Whether the word has a first projection computable.
+      typedef undefined_type first_projection_t;
+
+      /// Whether the word has a second projection computable.
+      typedef undefined_type second_projection_t;
     };
 
     /** @} */
