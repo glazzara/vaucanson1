@@ -263,7 +263,6 @@ AC_CONFIG_FILES([
 	src/Makefile
 	  src/demos/Makefile
 	    src/demos/algorithms/Makefile
-	    src/demos/function_library/Makefile
 	    src/demos/one_rule_rewriting/Makefile
 	    src/demos/vgrep/Makefile
 	  src/benchs/Makefile

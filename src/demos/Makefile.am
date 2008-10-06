@@ -13,6 +13,5 @@
 
 SUBDIRS =					\
 	algorithms				\
-	function_library			\
 	one_rule_rewriting			\
 	vgrep

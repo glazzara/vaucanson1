@@ -1,3 +1,14 @@
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Remove the function_library demo.
+	* configure.ac: Remove from distribution.
+	* doc/NEWS.txt: Add a hint for future releases.
+	* src/demos/Makefile.am: Remove function_library demo.
+	* src/demos/function_library/Makefile.am: Remove.
+	* src/demos/function_library/algorithms.cc: Remove.
+	* src/demos/function_library/rw_tdc_algorithms.cc: Remove.
+	* src/demos/function_library/tdc_algorithms.cc: Remove.
+
 2008-10-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/transpose.hh: Fix typos, and use

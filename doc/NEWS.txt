@@ -8,6 +8,13 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
+Vaucanson 1.x, October 6th, 2008
+================================
+
+- Demos
+
+  + Remove function_library.
+
 Vaucanson 1.2.92, September 10th, 2008
 ======================================
 
