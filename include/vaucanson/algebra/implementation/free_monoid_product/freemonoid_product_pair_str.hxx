@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2007 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HXX
 
-# include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx>
+# include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
 
 namespace vcsn {
 

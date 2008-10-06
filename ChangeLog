@@ -1,5 +1,13 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Typo in FMP words implementation.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh:
+	  Wrong return type.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx:
+	  Wrong file inclusion.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add new projection traits for letters and alphabets.
 	* include/vaucanson/algebra/concept/alphabets_base.hh
 	  (alphabet_traits): Add new traits.
