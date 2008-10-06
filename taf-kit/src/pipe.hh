@@ -51,6 +51,16 @@
 #  define RW_CONTEXT_HEADER <vaucanson/RW_CONTEXT.hh>
 #  include RW_CONTEXT_HEADER
 # endif
+# ifdef FIRST_PROJECTION_CONTEXT
+#  define FIRST_PROJECTION_CONTEXT_HEADER <vaucanson/ \
+					   FIRST_PROJECTION_CONTEXT.hh>
+#  include FIRST_PROJECTION_CONTEXT_HEADER
+# endif
+# ifdef SECOND_PROJECTION_CONTEXT
+#  define SECOND_PROJECTION_CONTEXT_HEADER <vaucanson/ \
+					    SECOND_PROJECTION_CONTEXT.hh>
+#  include SECOND_PROJECTION_CONTEXT_HEADER
+# endif
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
@@ -72,6 +82,12 @@ typedef boost::variant<command_output_status,
 # endif
 # ifdef RW_CONTEXT
 		       RW_CONTEXT::automaton_t,
+# endif
+# ifdef FIRST_PROJECTION_CONTEXT
+		       FIRST_PROJECTION_CONTEXT::automaton_t,
+# endif
+# ifdef SECOND_PROJECTION_CONTEXT
+		       SECOND_PROJECTION_CONTEXT::automaton_t,
 # endif
 		       std::string> command_output_variant;
 

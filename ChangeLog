@@ -1,5 +1,16 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add automata projection algorithms to Taf-Kit.
+	* taf-kit/src/Makefile.am: Use new macros.
+	* taf-kit/src/common_automaton_commands.hh: Define the new
+	  first_projection and second_projection commands.
+	* taf-kit/src/pipe.hh,
+	* taf-kit/src/pipe_writers.hh,
+	* taf-kit/src/pipe_writers.hxx: Update to support auxiliary
+	  automaton types.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add new automaton projection algorithms (close #172).
 	* include/vaucanson/algorithms/aut_projection.hh: New.
 	* include/vaucanson/algorithms/aut_projection.hxx: New.

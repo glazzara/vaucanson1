@@ -134,6 +134,50 @@ pipe_stream_writer::operator()
 }
 # endif // IOAUT_CONTEXT
 
+# ifdef FIRST_PROJECTION_CONTEXT
+void
+pipe_stream_writer::operator()
+  (FIRST_PROJECTION_CONTEXT::automaton_t& a) const
+{
+  switch (aut_f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
+    }
+}
+# endif // ! FIRST_PROJECTION_CONTEXT
+
+# if defined SECOND_PROJECTION_CONTEXT and SECOND_PROJECTION_CONTEXT != FIRST_PROJECTION_CONTEXT
+void
+pipe_stream_writer::operator()
+  (SECOND_PROJECTION_CONTEXT::automaton_t& a) const
+{
+  switch (aut_f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
+    }
+}
+# endif // ! SECOND_PROJECTION_CONTEXT
+
 template<typename T>
 void
 pipe_stream_writer::operator() (T&) const

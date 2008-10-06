@@ -122,6 +122,28 @@ DEFINE_COMMAND (NAME (standardize)
 		KEEP_AUTOMATON(a)
 		RETURNVALUE (0));
 
+# ifdef FIRST_PROJECTION_CONTEXT
+DEFINE_COMMAND (NAME (first_projection)
+		CODE (
+		  automaton_t src = get_aut(args.args[1]);
+		  vcsn::CONTEXT::projection_traits_t::first_projection_t a =
+		  vcsn::CONTEXT::projection_traits_t::first_projection(src);
+		  first_projection(src, a))
+		KEEP_AUTOMATON (a)
+		RETURNVALUE (0));
+# endif
+
+# ifdef SECOND_PROJECTION_CONTEXT
+DEFINE_COMMAND (NAME (second_projection)
+		CODE (
+		  automaton_t src = get_aut(args.args[1]);
+		  vcsn::CONTEXT::projection_traits_t::second_projection_t a =
+		  vcsn::CONTEXT::projection_traits_t::second_projection(src);
+		  second_projection(src, a))
+		KEEP_AUTOMATON (a)
+		RETURNVALUE (0));
+# endif
+
 # define DEFINE_COMMAND_OF_STANDARD(Algo)			\
   DEFINE_COMMAND (NAME (Algo ## _of_standard)			\
 		  CODE (automaton_t a = get_aut (args.args[1]);	\
@@ -148,6 +170,21 @@ DEFINE_COMMAND (NAME (star_of_standard)
 		KEEP_AUTOMATON (a)
 		RETURNVALUE(0));
 
+# ifdef FIRST_PROJECTION_CONTEXT
+#  define FIRST_PROJECTION_COMMAND_ENTRY \
+COMMAND_ENTRY (first_projection, Aut, \
+	       "Give the first projection of `aut'."),
+# else
+#  define FIRST_PROJECTION_COMMAND_ENTRY
+# endif
+
+# ifdef SECOND_PROJECTION_CONTEXT
+#  define SECOND_PROJECTION_COMMAND_ENTRY \
+COMMAND_ENTRY (second_projection, Aut, \
+	       "Give the second projection of `aut'."),
+# else
+#  define SECOND_PROJECTION_COMMAND_ENTRY
+# endif
 
 # define USE_GENERIC_AUTOMATON_COMMAND_GROUP()				\
   COMMAND_GROUP (							\
@@ -155,6 +192,8 @@ DEFINE_COMMAND (NAME (star_of_standard)
 									\
     COMMAND_ENTRY (accessible, Aut,					\
 		   "Give the maximal accessible subautomaton of `aut'."), \
+    FIRST_PROJECTION_COMMAND_ENTRY					\
+    SECOND_PROJECTION_COMMAND_ENTRY					\
     COMMAND_ENTRY (eps_removal, Aut,					\
 		   "Give `aut' closed over epsilon transitions."),	\
     COMMAND_ENTRY (eps_removal_sp, Aut,					\

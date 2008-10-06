@@ -61,6 +61,13 @@ public:
   void operator() (RW_CONTEXT::automaton_t& a) const;
 # endif
 
+# ifdef FIRST_PROJECTION_CONTEXT
+  void operator() (FIRST_PROJECTION_CONTEXT::automaton_t& a) const;
+# endif
+# if defined SECOND_PROJECTION_CONTEXT and SECOND_PROJECTION_CONTEXT != FIRST_PROJECTION_CONTEXT
+  void operator() (SECOND_PROJECTION_CONTEXT::automaton_t& a) const;
+# endif
+
   template<typename T>
   void operator() (T&) const;
 
