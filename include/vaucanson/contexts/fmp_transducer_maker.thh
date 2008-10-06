@@ -38,14 +38,6 @@ namespace vcsn
 	    const SecondInputIterator second_begin,
 	    const SecondInputIterator second_end);
 
-      template <typename S, typename T>
-      input_projection_automaton_t
-      make_input_projection_automaton(const Element<S, T>& t);
-
-      template <typename S, typename T>
-      output_projection_automaton_t
-      make_output_projection_automaton(const Element<S, T>& t);
-
       template <class T1, class T2>
       monoid_elt_t make_couple(const T1& first_alphabet,
 	    const T2& second_alphabet,

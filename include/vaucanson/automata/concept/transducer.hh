@@ -78,6 +78,8 @@ namespace vcsn {
   {
     typedef Transducer<S> structure_t;
 
+    typedef Element<structure_t, T> automaton_t;
+
     typedef typename structure_t::series_set_t::semiring_t
     typeof_auto_series_set_t;
 
@@ -91,12 +93,16 @@ namespace vcsn {
 
     typedef typename input_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+
+    static ret make_input_projection_automaton(const automaton_t& t);
   };
 
   template <class S, class T>
   struct input_projection_helper<Automata<S>, T>
   {
     typedef Automata<S> structure_t;
+
+    typedef Element<structure_t, T> automaton_t;
 
     typedef typename structure_t::series_set_t typeof_auto_series_set_t;
 
@@ -112,6 +118,8 @@ namespace vcsn {
 
     typedef typename fmp_input_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+
+    static ret make_input_projection_automaton(const automaton_t& t);
   };
 
   /*-------------------------.
@@ -128,6 +136,8 @@ namespace vcsn {
   {
     typedef Transducer<S> structure_t;
 
+    typedef Element<structure_t, T> automaton_t;
+
     typedef typename structure_t::series_set_t::semiring_t
     typeof_auto_series_set_t;
 
@@ -142,6 +152,8 @@ namespace vcsn {
 
     typedef typename output_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+
+    static ret make_output_projection_automaton(const automaton_t& t);
   };
 
   // FMP Transducers
@@ -152,6 +164,8 @@ namespace vcsn {
   struct output_projection_helper<Automata<S>, T>
   {
     typedef Automata<S> structure_t;
+
+    typedef Element<structure_t, T> automaton_t;
 
     typedef typename structure_t::series_set_t typeof_auto_series_set_t;
 
@@ -166,6 +180,8 @@ namespace vcsn {
 
     typedef typename fmp_output_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+
+    static ret make_output_projection_automaton(const automaton_t& t);
   };
 
   /*----------------.

@@ -181,8 +181,8 @@ namespace vcsn
     do_rw_image(src, dst, m);
   }
 
-  // Dispatch and build returned object for RW transducers. A map between states
-  // of the resulting automaton and the tranducer is filled.
+  // Dispatch and build returned object for RW transducers. A map between
+  // states of the resulting automaton and the tranducer is filled.
   template <typename S, typename T, typename ST>
   static
   typename output_projection_helper<S, T>::ret
@@ -190,7 +190,8 @@ namespace vcsn
 		  const TransducerBase<ST>&,
 		  std::map<typename T::hstate_t, typename T::hstate_t>& m)
   {
-    typename output_projection_helper<S, T>::ret dst = make_output_projection_automaton(src);
+    typename output_projection_helper<S, T>::ret dst =
+	output_projection_helper<S, T>::make_output_projection_automaton(src);
 
     image_dispatch(src, src.structure(),
 		   src.structure().series().monoid(), dst, m);
@@ -204,7 +205,8 @@ namespace vcsn
   image_dispatch2(const Element<S,T>& src,
 		  const TransducerBase<ST>&)
   {
-    typename output_projection_helper<S, T>::ret dst = make_output_projection_automaton(src);
+    typename output_projection_helper<S, T>::ret dst =
+	output_projection_helper<S, T>::make_output_projection_automaton(src);
 
     image_dispatch(src, src.structure(),
 		   src.structure().series().monoid(), dst);

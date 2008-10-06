@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,6 +39,80 @@ namespace vcsn {
 	     const Transducer<Series>& rhs)
   {
     return & lhs.series() == & rhs.series();
+  }
+
+  //
+  // Projections for RW transducers
+  //
+
+  template <typename S, typename T>
+  inline typename input_projection_helper<Transducer<S>, T>::ret
+  input_projection_helper<Transducer<S>, T>::
+  make_input_projection_automaton(const Element<Transducer<S>, T>& t)
+  {
+    // Type helpers.
+    typedef typename ret::set_t set_t;
+    typedef typename set_t::series_set_t series_set_t;
+
+    set_t
+    auto_set(series_set_t(t.structure().series().
+			  semiring().semiring(), t.structure().
+			  series().monoid()));
+
+    return ret(auto_set);
+  }
+
+  template <typename S, typename T>
+  inline typename output_projection_helper<Transducer<S>, T>::ret
+  output_projection_helper<Transducer<S>, T>::
+  make_output_projection_automaton(const Element<Transducer<S>, T>& t)
+  {
+    // Type helpers.
+    typedef typename ret::set_t set_t;
+    typedef typename set_t::series_set_t series_set_t;
+
+    set_t
+    auto_set(series_set_t(t.structure().series().semiring()));
+
+    return ret(auto_set);
+  }
+
+  //
+  // Projections for FMP transducers
+  //
+
+  template <typename S, typename T>
+  inline typename input_projection_helper<Automata<S>, T>::ret
+  input_projection_helper<Automata<S>, T>::
+  make_input_projection_automaton(const Element<Automata<S>, T>& t)
+  {
+    // Type helpers.
+    typedef typename ret::set_t set_t;
+    typedef typename set_t::series_set_t series_set_t;
+
+    set_t
+    auto_set(series_set_t(t.structure().series().
+			  semiring(), t.structure().series().
+			  monoid().first_monoid()));
+
+    return ret(auto_set);
+  }
+
+  template <typename S, typename T>
+  inline typename output_projection_helper<Automata<S>, T>::ret
+  output_projection_helper<Automata<S>, T>::
+  make_output_projection_automaton(const Element<Automata<S>, T>& t)
+  {
+    // Type helpers.
+    typedef typename ret::set_t set_t;
+    typedef typename set_t::series_set_t series_set_t;
+
+    set_t
+    auto_set(series_set_t(t.structure().series().
+			  semiring(), t.structure().series().
+			  monoid().second_monoid()));
+
+    return ret(auto_set);
   }
 
   template <class S, class T>

@@ -42,14 +42,6 @@ namespace vcsn
 				 InputIterator output_alphabet_begin,
 				 InputIterator output_alphabet_end);
 
-      template <typename S, typename T>
-      input_projection_automaton_t
-      make_input_projection_automaton(const Element<S, T>& t);
-
-      template <typename S, typename T>
-      output_projection_automaton_t
-      make_output_projection_automaton(const Element<S, T>& t);
-
       template <typename TransStruct,
 		typename TransImpl,
 		typename ArgStruct,

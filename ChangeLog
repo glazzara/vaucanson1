@@ -1,5 +1,18 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Move transducer projection "makers" from vcsn::CONTEXT to traits.
+	* include/vaucanson/algorithms/image.hxx (image_dispatch2): Update
+	  to use output_projection_helpers trait.
+	* include/vaucanson/contexts/fmp_transducer_maker.thh,
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx,
+	* include/vaucanson/contexts/transducer_maker.thh,
+	* include/vaucanson/contexts/transducer_maker.thxx: Move projections
+	  declarations and implementations from here to ...
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/transducer.hxx: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix compilation issue.
 	* taf-kit/src/pipe.hh: Here.
 
