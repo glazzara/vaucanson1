@@ -1,5 +1,10 @@
 2008-10-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/ratexp_commands.hh (identity-exp): New command.
+	* taf-kit/tests/vcsn-char-z.test: Test some trivial rewritings.
+
+2008-10-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rewrite "{w} ({k} l)" as "{w*k} l" and "(l {k}) {w}" as "l {w*k}".
 
 	* include/vaucanson/algebra/implementation/series/krat.hxx

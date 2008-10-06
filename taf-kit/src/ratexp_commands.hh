@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -71,6 +71,11 @@ DEFINE_COMMAND (NAME (aut_to_exp)
 		KEEP (aut_to_exp (get_aut (args.args[1]), DMChooser ()))
 		RETURNVALUE (0));
 
+DEFINE_COMMAND (NAME (identity_exp)
+		CODE (/* Empty */)
+		KEEP (get_exp (args.args[1]))
+		RETURNVALUE (0));
+
 DEFINE_COMMAND (NAME (expand)
 		CODE (/* Empty */)
 		KEEP (expand (get_exp (args.args[1])))
@@ -87,6 +92,8 @@ DEFINE_COMMAND (NAME (expand)
     COMMAND_ENTRY_CN (exp-to-aut, standard_of, Exp,			\
 		      "Alias of `standard'."),				\
     COMMAND_ENTRY (expand, Exp, "Expand `exp'."),			\
+    COMMAND_ENTRY (identity_exp, Exp,					\
+                   "Output `exp' after trivial simplifications."),	\
     COMMAND_ENTRY_CN (standard, standard_of, Exp,			\
 		      "Give the standard automaton of `exp'."),		\
     COMMAND_ENTRY_CN (thompson, thompson_of, Exp,			\

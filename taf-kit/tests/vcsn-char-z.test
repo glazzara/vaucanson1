@@ -121,4 +121,21 @@ echo 10 | $VCSN --alphabet=ab define-automaton empty.xml
 $VCSN eval empty.xml "ab" > out
 test `cat out` = 0
 
+
+# ------------------ #
+# Trivial rewritings #
+# ------------------ #
+
+while read before after; do
+  test "x`$VCSN -aab identity-exp $before`" = "x$after"
+done <<EOF
+{0}a 0
+a{0} 0
+{1}a a
+a{1} a
+{2}({3}a) {6} a
+(a{4}){5} a {20}
+{3}0 0
+0{3} 0
+EOF
 exit 0
