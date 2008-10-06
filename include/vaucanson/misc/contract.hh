@@ -168,7 +168,7 @@ namespace vcsn {
 #  define result_not_computable_if(Cond) static_cast<void> ((Cond) ? vcsn_trap_ ("Result is not computable", Cond) : static_cast<void> (0))
 #  define result_not_computable(Message) vcsn_trap_2 ("Result is not computable", Message)
 
-#  define pure_service_call(Service) vcsn_trap_ ("Pure absract service called", Service)
+#  define pure_service_call(Service) vcsn_trap_ ("Pure abstract service called", Service)
 
 #  define static_assertion(Cond, Message)				\
   { vcsn::misc::static_if<Cond, int, vcsn::misc::contract::fail<void> >::t Message; Message = 0; }

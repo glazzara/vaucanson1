@@ -1,5 +1,10 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Typo in static error message.
+	* include/vaucanson/misc/contract.hh: Here.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Restore some traits to realistic values for pairs.
 	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:
 	  Here.
