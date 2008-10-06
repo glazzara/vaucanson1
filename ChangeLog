@@ -1,5 +1,12 @@
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a bug when calculating the input_projection type.
+	* include/vaucanson/automata/concept/transducer.hh
+	  (input_projection_helper<Transducer<S> >): Rename
+	  output_projection_traits to projection_traits.
+
+2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Remove the function_library demo.
 	* configure.ac: Remove from distribution.
 	* doc/NEWS.txt: Add a hint for future releases.

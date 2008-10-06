@@ -87,7 +87,7 @@ namespace vcsn {
 						 auto_monoid_t>::ret
     auto_series_set_t;
 
-    typedef typename output_projection_traits<T>::ret auto_impl_t;
+    typedef typename projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
