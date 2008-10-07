@@ -27,6 +27,9 @@
  */
 /** @} */
 
+// INTERFACE: Automaton rw_composition(const Automaton& a, const Automaton& b) { return vcsn::rw_composition(*a, *b); }
+// INTERFACE: void rw_composition(const Automaton& a, const Automaton& b, Automaton& c) { vcsn::rw_composition(*a, *b, *c); }
+
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {

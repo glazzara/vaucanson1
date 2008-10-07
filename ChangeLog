@@ -1,3 +1,10 @@
+2008-10-07  Reuben Thomas  <rrt@sc3d.org>
+
+	Add rw_composition to libraries.
+	* include/vaucanson/algorithms/rw_composition.hh: Add an interface
+	  for rw_composition.
+	* lib/generate_libvcsn.rb: Add rw_composition for transducer types.
+
 2008-10-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix missing typedefs in the "range" letter type.

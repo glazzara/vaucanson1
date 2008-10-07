@@ -59,6 +59,7 @@ def create?(type, file)
       file !~ /is_letterized.hh/ and		# transducer
       file !~ /is_normalized.hh/ and		# transducer
       file !~ /normalized_composition.hh/ and	# transducer
+      file !~ /rw_composition.hh/ and           # transducer
       file !~ /domain.hh/ and			# transducer
       file !~ /image.hh/ and			# transducer
       file !~ /evaluation_fmp.hh/ and		# FMP transducer
@@ -119,6 +120,7 @@ def create?(type, file)
 	    (
 	      file !~ /complete.hh/ and
 	      file !~ /is_deterministic.hh/ and
+              file !~ /rw_composition.hh/ and
 	      file !~ /product.hh/
 	    )
       ) and
