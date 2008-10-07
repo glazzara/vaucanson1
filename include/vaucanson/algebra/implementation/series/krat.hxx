@@ -518,19 +518,27 @@ namespace vcsn
 	  }
       }
 
-      // case (k' E) * k -> general case
       */
 
       // case (E k') * k -> E [k' k]
       if (this_type == node_t::rweight)
       {
 	op_in_mul(s.semiring(),
-		  dynamic_cast<n_rweight_t* >(ret.base())
-		  ->weight_, op_convert(SELECT(W), SELECT(Tw), w));
+		  dynamic_cast<n_rweight_t* >(ret.base())->weight_,
+		  op_convert(SELECT(W), SELECT(Tw), w));
 	return;
       }
 
-      // general case
+      // case (k' E) * k -> k' * (E k)
+      if (this_type == node_t::lweight)
+      {
+	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
+	p->child_ = new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w),
+				    p->child_);
+	return;
+      }
+
+      // case (k' E) * k -> general case
       ret.base() =
       new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w), ret.base());
       return;
