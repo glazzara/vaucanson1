@@ -502,6 +502,18 @@ namespace vcsn
 	return;
       }
 
+      // c * k -> k * c  (where c is a letter, not a word)
+      if (this_type == node_t::constant)
+      {
+	n_const_t* c = dynamic_cast<n_const_t*>(ret.base());
+	if (c->value_.size() == 1)
+	  {
+	    ret.base() = new n_lweight_t
+	      (op_convert(SELECT(W), SELECT(Tw), w), ret.base());
+	    return;
+	  }
+      }
+
       /// @bug FIXME: Add the following transformation in a separated function.
       /*
       // case (k' 1) * k -> [k' k] 1
@@ -529,12 +541,25 @@ namespace vcsn
 	return;
       }
 
-      // case (k' E) * k -> k' * (E k)
+      // [1] case (k' E) * k -> k' * (E k)
+      // [2] case (k' c) * k -> [k' k] * c  if c is a letter
+      // (Note: case [2] is like if you add applied case [1]
+      // followed by the c * k -> k * c, and then
+      // k' * (E  k) -> [k' k] E rewritings.)
       if (this_type == node_t::lweight)
       {
 	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
-	p->child_ = new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w),
-				    p->child_);
+        if (p->child_->what() == node_t::constant
+	    && dynamic_cast<n_const_t*>(p->child_)->value_.size() == 1)
+	  {
+	    p->weight_ = op_mul (s.semiring(), p->weight_,
+				 op_convert(SELECT(W), SELECT(Tw), w));
+	  }
+	else
+	  {
+	    p->child_ = new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w),
+					p->child_);
+	  }
 	return;
       }
 

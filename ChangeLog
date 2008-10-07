@@ -1,6 +1,12 @@
 2008-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat.hxx
+	(op_in_mul): Rewrite "m {k}" as "{k} m" for all letters m.
+	* taf-kit/tests/vcsn-char-z.test: Complete and adjust tests.
+
+2008-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx
 	(op_in_mul): Rewrite "({w} l) {k}" as "{w} (l {k})".
 	* taf-kit/tests/vcsn-char-z.test: Add more tests.
 
