@@ -1,3 +1,9 @@
+2008-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx
+	(op_in_star): Document the rewriting from 0* to 1.
+	(op_star): Call op_in_star, instead of duplicating its
+
 2008-10-07  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix patch r2257

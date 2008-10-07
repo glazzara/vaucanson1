@@ -330,6 +330,7 @@ namespace vcsn
     void op_in_star(const algebra::Series<W, M>&,
 	  	    rat::exp<Tm, Tw>& dst)
     {
+      // rewrite 0* as 1
       if (dst.base()->what() == rat::Node<Tm, Tw>::zero)
 	dst = rat::exp<Tm, Tw>::one();
       else
@@ -338,13 +339,11 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     rat::exp<Tm, Tw>
-    op_star(const algebra::Series<W, M>&,
+    op_star(const algebra::Series<W, M>& s,
 	    const rat::exp<Tm, Tw>& src)
     {
-      if (src.base()->what() == rat::Node<Tm, Tw>::zero)
-	return rat::exp<Tm, Tw>::one();
       rat::exp<Tm, Tw> ret(src);
-      ret.base() = new rat::Star<Tm, Tw>(ret.base());
+      op_in_star(s, ret);
       return ret;
     }
 
