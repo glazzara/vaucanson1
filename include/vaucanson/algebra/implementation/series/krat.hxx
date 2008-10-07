@@ -580,6 +580,7 @@ namespace vcsn
 	p->weight_ = op_mul
 	  (s.semiring(), op_convert(SELECT(W), SELECT(Tw), w), p->weight_);
 	return ret;
+      }
 
       // general case {k} E
       ret.base() = new n_lweight_t(w, ret.base());
