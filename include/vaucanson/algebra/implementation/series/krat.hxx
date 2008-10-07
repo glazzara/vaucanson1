@@ -133,11 +133,11 @@ namespace vcsn
   		   rat::exp<Tm, Tw>& dst,
   		   const rat::exp<Tm, Tw>& arg)
     {
-      // case any + 0
+      // case E + 0
       if (arg.base()->what() == rat::Node<Tm, Tw>::zero)
 	return ;
 
-      // case 0 + any
+      // case 0 + E
       if (dst.base()->what() == rat::Node<Tm, Tw>::zero)
       {
 	delete dst.base();
@@ -177,11 +177,11 @@ namespace vcsn
       type this_type = dst.base()->what();
       type arg_type  = arg.base()->what();
 
-      // case 0 * E -> 0
+      // case 0 . E -> 0
       if (this_type == node_t::zero)
       	return;
 
-      // case E * 0 -> 0
+      // case E . 0 -> 0
       if (arg_type == node_t::zero)
       {
 	delete dst.base();
@@ -189,7 +189,7 @@ namespace vcsn
 	return;
       }
 
-      // case 1 * E -> E
+      // case 1 . E -> E
       if (this_type == node_t::one)
       {
 	delete dst.base();
@@ -197,13 +197,13 @@ namespace vcsn
 	return;
       }
 
-      // case E * 1 -> E
+      // case E . 1 -> E
       if (arg_type == node_t::one)
       {
 	return;
       }
 
-      // case E * (k' 1) -> E k'
+      // case E . {k'} 1 -> E {k'}
       if (arg_type == node_t::lweight)
       {
 	n_lweight_t *p = dynamic_cast<n_lweight_t*>(arg.base());
@@ -214,33 +214,7 @@ namespace vcsn
 	}
       }
 
-      /// @bug FIXME: Add the following transformation in a separated function.
-      /*
-      // case (k E) * E' -> k (E * E')
-      // it manages case (k 1) * E' -> k E'
-      if (this_type == node_t::lweight)
-      {
-	n_lweight_t *p = dynamic_cast<n_lweight_t*>(dst.base());
-	if (p->child_->what() == node_t::one)
-	// case (k 1) * E' -> k E'
-	dst = op_mul(s.semiring(), s, p->weight_, arg);
-	else
-	// case (k E) * E' -> k (E * E')
-	p->child_ = new n_prod_t(p->child_, arg.base()->clone());
-	return;
-      }
-
-      // case E * (E' k') -> (E * E') k'
-      if (arg_type == node_t::rweight)
-      {
-	n_rweight_t *p = dynamic_cast<n_rweight_t*>(arg.base());
-	dst.base() = new n_rweight_t(p->weight_,
-	new n_prod_t(dst.base(), p->child_->clone()));
-	return;
-      }
-      */
-
-      // case (k 1) * E' -> k E'
+      // case {k} 1 . E -> {k} E
       if (this_type == node_t::lweight)
       {
 	n_lweight_t *p = dynamic_cast<n_lweight_t*>(dst.base());
@@ -251,7 +225,7 @@ namespace vcsn
 	}
       }
 
-      // general case
+      // general case : {k} E . E'
       dst.base() = new n_prod_t(dst.base(), arg.base()->clone());
       return;
     }
@@ -325,7 +299,6 @@ namespace vcsn
 	  	   const oTm& src)
     {
       // FIXME: this is completely broken also.
-
       if (src == identity_value(SELECT(M), SELECT(oTm)))
     	dst = rat::exp<Tm, Tw>::one();
       else
@@ -478,15 +451,15 @@ namespace vcsn
 
       type this_type = ret.base()->what();
 
-      // case 0 * k -> 0
+      // case 0 {k} -> 0
       if (this_type == node_t::zero)
 	return;
 
-      // case E * 1 -> E
+      // case E {1} -> E
       if (w == identity_value(SELECT(W), SELECT(oTw)))
 	return;
 
-      // case E * 0 -> 0
+      // case E {0} -> 0
       if (w == zero_value(SELECT(W), SELECT(oTw)))
       {
 	delete ret.base();
@@ -494,7 +467,7 @@ namespace vcsn
 	return;
       }
 
-      // case 1 * k -> k * 1
+      // case 1 {k} -> {k} 1
       if (this_type == node_t::one)
       {
 	ret.base() = new n_lweight_t
@@ -502,7 +475,7 @@ namespace vcsn
 	return;
       }
 
-      // c * k -> k * c  (where c is a letter, not a word)
+      // case c {k} -> {k} c  (where c is a letter, not a word)
       if (this_type == node_t::constant)
       {
 	n_const_t* c = dynamic_cast<n_const_t*>(ret.base());
@@ -514,25 +487,7 @@ namespace vcsn
 	  }
       }
 
-      /// @bug FIXME: Add the following transformation in a separated function.
-      /*
-      // case (k' 1) * k -> [k' k] 1
-      if (this_type == node_t::lweight)
-      {
-	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
-	type child_type = p->child_->what();
-
-	if (child_type == node_t::one)
-	  {
-	    op_in_mul
-	      (s.semiring(), p->weight_, op_convert(SELECT(W), SELECT(Tw), w));
-	    return;
-	  }
-      }
-
-      */
-
-      // case (E k') * k -> E [k' k]
+      // case (E {k'}) {k} -> E {k'k}
       if (this_type == node_t::rweight)
       {
 	op_in_mul(s.semiring(),
@@ -541,11 +496,11 @@ namespace vcsn
 	return;
       }
 
-      // [1] case (k' E) * k -> k' * (E k)
-      // [2] case (k' c) * k -> [k' k] * c  if c is a letter
-      // (Note: case [2] is like if you add applied case [1]
-      // followed by the c * k -> k * c, and then
-      // k' * (E  k) -> [k' k] E rewritings.)
+      // [1] case ({k'} E) {k} -> {k'} (E {k})
+      // [2] case ({k'} c) {k} -> {k'k} c  if c is a letter
+      // (Note: case [2] is like if you had applied case [1]
+      // followed by the c {k} -> {k} c, and then the
+      // {k'} (E  {k}) -> {k'k} E rewritings.)
       if (this_type == node_t::lweight)
       {
 	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
@@ -563,7 +518,7 @@ namespace vcsn
 	return;
       }
 
-      // case (k' E) * k -> general case
+      // case ({k'} E) {k} -> general case
       ret.base() =
       new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w), ret.base());
       return;
@@ -604,42 +559,29 @@ namespace vcsn
 
       type this_type = ret.base()->what();
 
-      // case k * 0 -> 0
+      // case {k} 0 -> 0
       if (this_type == node_t::zero)
 	return ret;
 
-      // case k * 1 -> general case
+      // case {k} 1 -> general case
 
-      // case 0 * E -> 0
+      // case {0} E -> 0
       if (w == zero_value(SELECT(W), SELECT(oTw)))
       { return rat::exp<Tm, Tw>::zero(); }
 
-      // case 1 * E -> E
+      // case {1} E -> E
       if (w == identity_value(SELECT(W), SELECT(oTw)))
 	return ret;
 
-      // case k * (k' E) -> [k k'] E
+      // case {k} ({k'} E) -> {k k'} E
       if (this_type == node_t::lweight)
       {
 	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
 	p->weight_ = op_mul
 	  (s.semiring(), op_convert(SELECT(W), SELECT(Tw), w), p->weight_);
 	return ret;
-      }
 
-      /// @bug FIXME: Add the following transformation in a separated function.
-      /*
-      // case k * (E k') -> (k E) k'
-      if (this_type == node_t::rweight)
-      {
-	n_rweight_t* p = dynamic_cast<n_rweight_t*>(ret.base());
-	p->child_ =
-	  new n_lweight_t(op_convert(SELECT(W), SELECT(Tw), w), p->child_);
-	return ret;
-      }
-      */
-
-      // general case
+      // general case {k} E
       ret.base() = new n_lweight_t(w, ret.base());
       return ret;
     }
