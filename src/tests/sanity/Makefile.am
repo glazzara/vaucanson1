@@ -14,7 +14,7 @@
 EXTRA_DIST = generate_files.sh hhck.pl
 
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include \
-	      -DVCSN_SANITY_CHECK
+	      $(BOOST_CPPFLAGS) -DVCSN_SANITY_CHECK
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 
 # Currently files are generated in srcdir, they should be in builddir,

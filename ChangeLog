@@ -1,3 +1,10 @@
+2008-10-08  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix compilation problems when boost is not installed in the default
+	include location.
+
+	* src/tests/sanity/Makefile.am: Add missing BOOST_CPPFLAGS.
+
 2008-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-z.test: Test simplifications
