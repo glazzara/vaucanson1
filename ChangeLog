@@ -1,3 +1,9 @@
+2008-10-08  Reuben Thomas  <rrt@sc3d.org>
+
+	Improve Debian package descriptions.
+	* control: Debian package descriptions shouldn't be
+	  justified. Improve the English.
+
 2008-10-08  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Fix compilation problems when boost is not installed in the default

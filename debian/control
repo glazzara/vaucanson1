@@ -9,15 +9,15 @@ Package: vaucanson
 Architecture: all
 Depends: ${shlibs:Depends}
 Description:  C++ generic library for weighted finite state machine
- The goal of this library is  to enable the development of C++ programs
- in  an abstract  and  general way  with,  at the  same  time, a  large
- specialization power. Indeed, on the one hand, we can write algorithms
- working on  every automaton with  weights over any semirings  and with
- words  from any  free monoids.  And on  the other  hand,  a particular
- algorithm  can   be  specialized  for  a   particular  data  structure
- implementing only a pseudo behaviour.
+ The goal of this library is to enable the development of C++ programs
+ in an abstract and general way with, at the same time, a large
+ specialization power. Indeed, on the one hand, we can write
+ algorithms working on every automaton with weights over any semirings
+ and with words from any free monoids. And on the other hand, a
+ particular algorithm can be specialized for a particular data
+ structure implementing only a pseudo behaviour.
  .
- Yet, Vaucanson is an ongoing development project. Therefore
+ At present, Vaucanson is still under development. Therefore
  algorithms, data structures and the general architecture are not
  totally stable and well tested.
  .
@@ -27,5 +27,5 @@ Package: vaucanson-doc
 Architecture: all
 Section: doc
 Depends: ${shlibs:Depends}, vaucanson (= ${Source-Version})
-Description: Vaucanson documentation and samples
- documentation and samples for Vaucanson.
+Description: Vaucanson documentation and code samples
+ Documentation and code samples for Vaucanson.
