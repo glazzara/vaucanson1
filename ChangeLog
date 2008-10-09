@@ -1,5 +1,14 @@
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix contexts handling w.r.t. pipe_writers.hh.
+	* taf-kit/src/Makefile.am: Define macro NO_SECOND_OPERATOR for
+	  char-char and int-int instances to prevent `operator()'
+	  redefinition in pipe_writers.
+	* taf-kit/src/pipe_writers.hh,
+	* taf-kit/src/pipe_writers.hxx: Add conditional function definition.
+
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup the identity algorithm.
 	* include/vaucanson/algorithms/internal/evaluation.hxx: Replace
 	  incorrect header `projection.hh' by `image.hh' to be more

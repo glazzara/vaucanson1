@@ -177,7 +177,8 @@ pipe_stream_writer::operator()
 }
 # endif // ! FIRST_PROJECTION_CONTEXT
 
-# if defined SECOND_PROJECTION_CONTEXT and SECOND_PROJECTION_CONTEXT != FIRST_PROJECTION_CONTEXT
+# ifdef SECOND_PROJECTION_CONTEXT
+#  ifndef NO_SECOND_OPERATOR
 void
 pipe_stream_writer::operator()
   (SECOND_PROJECTION_CONTEXT::automaton_t& a) const
@@ -197,6 +198,7 @@ pipe_stream_writer::operator()
       std::cerr << "Could not save automaton: unkown output type." << std::endl;
     }
 }
+#  endif // ! NO_SECOND_OPERATOR
 # endif // ! SECOND_PROJECTION_CONTEXT
 
 template<typename T>

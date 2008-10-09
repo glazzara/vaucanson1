@@ -144,7 +144,8 @@ vcsn_char_char_b_SOURCES = $(COMMON_SOURCES) \
 vcsn_char_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_char_boolean_automaton \
 			      -DVCSN_USE_LIB \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
-			      -DSECOND_PROJECTION_CONTEXT=boolean_automaton
+			      -DSECOND_PROJECTION_CONTEXT=boolean_automaton \
+			      -DNO_SECOND_OPERATOR
 vcsn_char_char_b_LDADD = $(LDADD) \
 			  $(top_builddir)/lib/libkrat_exp.la \
 			  $(top_builddir)/lib/libvcsn-char-char-b.la
@@ -168,7 +169,8 @@ vcsn_int_int_b_SOURCES = $(COMMON_SOURCES) \
 vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 			    -DVCSN_USE_LIB \
 			    -DFIRST_PROJECTION_CONTEXT=int_boolean_automaton \
-			    -DSECOND_PROJECTION_CONTEXT=int_boolean_automaton
+			    -DSECOND_PROJECTION_CONTEXT=int_boolean_automaton \
+			    -DNO_SECOND_OPERATOR
 vcsn_int_int_b_LDADD = $(LDADD) \
 			  $(top_builddir)/lib/libkrat_exp.la \
 			  $(top_builddir)/lib/libvcsn-int-int-b.la

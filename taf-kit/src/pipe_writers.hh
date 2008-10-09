@@ -66,8 +66,10 @@ public:
 # ifdef FIRST_PROJECTION_CONTEXT
   void operator() (FIRST_PROJECTION_CONTEXT::automaton_t& a) const;
 # endif
-# if defined SECOND_PROJECTION_CONTEXT and SECOND_PROJECTION_CONTEXT != FIRST_PROJECTION_CONTEXT
-  void operator() (SECOND_PROJECTION_CONTEXT::automaton_t& a) const;
+# ifdef SECOND_PROJECTION_CONTEXT
+#  ifndef NO_SECOND_OPERATOR
+   void operator() (SECOND_PROJECTION_CONTEXT::automaton_t& a) const;
+#  endif
 # endif
 
   template<typename T>
