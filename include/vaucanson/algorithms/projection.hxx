@@ -17,12 +17,12 @@
 #ifndef VCSN_ALGORITHMS_PROJECTION_HXX
 # define VCSN_ALGORITHMS_PROJECTION_HXX
 
-# include <vaucanson/algorithms/projection.hh>
-
 # include <map>
 
-namespace vcsn {
+# include <vaucanson/algorithms/projection.hh>
 
+namespace vcsn
+{
   template <typename auto_t, typename trans_t>
   void
   set_states(const trans_t& fmp_trans, auto_t& res,
@@ -75,7 +75,6 @@ namespace vcsn {
       }
     }
   }
-
 
   /*---------.
   | Identity |
@@ -134,6 +133,6 @@ namespace vcsn {
 		res.structure(), res.structure().series().monoid(), aut, res);
   }
 
-}
+} // ! vcsn
 
 #endif // ! VCSN_ALGORITHMS_PROJECTION_HXX

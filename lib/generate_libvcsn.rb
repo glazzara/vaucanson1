@@ -66,6 +66,7 @@ def create?(type, file)
       file !~ /evaluation_fmp.hh/ and		# FMP transducer
       file !~ /sub_normalize.hh/ and		# FMP transducer
       file !~ /composition_cover.hh/ and	# FMP transducer
+      file !~ /\/projection.hh/ and		# FMP transducer (identity)
       file !~ /ltl_to_pair.hh/ and		# FMP transducer
       ( # Pair letters only filters.
 	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
@@ -133,6 +134,7 @@ def create?(type, file)
 	      file !~ /evaluation_fmp.hh/ and		# FMP transducer
 	      file !~ /sub_normalize.hh/ and		# FMP transducer
 	      file !~ /ltl_to_pair.hh/ and		# FMP transducer
+	      file !~ /\/projection.hh/ and		# FMP transducer (identity)
 	      file !~ /composition_cover.hh/		# FMP transducer
 	    )
       )

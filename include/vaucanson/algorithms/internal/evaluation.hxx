@@ -27,7 +27,7 @@
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/extension.hh>
-# include <vaucanson/algorithms/projection.hh>
+# include <vaucanson/algorithms/image.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/misc/usual_macros.hh>
 

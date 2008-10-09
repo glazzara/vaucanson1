@@ -24,15 +24,17 @@
 #include <vaucanson/algebra/concept/alphabets_base.hh>
 #include <vaucanson/misc/usual_macros.hh>
 
-# include <vaucanson/algorithms/composition_cover.hh>
-# include <vaucanson/algorithms/eps_removal.hh>
-# include <vaucanson/algorithms/eps_removal_sp.hh>
-# include <vaucanson/algorithms/evaluation_fmp.hh>
-# include <vaucanson/algorithms/fmp_to_rw.hh>
-# include <vaucanson/algorithms/ltl_to_pair.hh>
-# include <vaucanson/algorithms/projection.hh>
-# include <vaucanson/algorithms/internal/outsplitting.hh>
-# include <vaucanson/algorithms/normalized_composition.hh>
-# include <vaucanson/algorithms/sub_normalize.hh>
-# include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/invert.hh>
+#include <vaucanson/algorithms/composition_cover.hh>
+#include <vaucanson/algorithms/eps_removal.hh>
+#include <vaucanson/algorithms/eps_removal_sp.hh>
+#include <vaucanson/algorithms/evaluation_fmp.hh>
+#include <vaucanson/algorithms/fmp_to_rw.hh>
+#include <vaucanson/algorithms/ltl_to_pair.hh>
+#include <vaucanson/algorithms/projection.hh>
+#include <vaucanson/algorithms/domain.hh>
+#include <vaucanson/algorithms/image.hh>
+#include <vaucanson/algorithms/internal/outsplitting.hh>
+#include <vaucanson/algorithms/normalized_composition.hh>
+#include <vaucanson/algorithms/sub_normalize.hh>
+#include <vaucanson/algorithms/transpose.hh>
+#include <vaucanson/algorithms/invert.hh>

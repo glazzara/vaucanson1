@@ -21,12 +21,15 @@
 /**
  * @file projection.hh
  *
- * Undocumented stuff.
+ * @brief Build an FMP transducer that realizes the identity relation.
+ * x -> (x,x)
  *
- * @bug FIXME: Document!
  */
 /** @} */
 
+// INTERFACE: void identity(const InputProjection& a, Automaton& b) { return vcsn::identity(*a, *b); }
+
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
@@ -42,20 +45,16 @@ namespace vcsn {
   | Identity |
   `---------*/
 
-  // Build an automaton that realizes identity relation
-  // x -> (x,x)
   template <typename S, typename S2, typename T, typename T2>
   void
   identity(const Element<S,T>& aut, Element<S2, T2>& res);
 
   /** @} */
-}
 
-# include <vaucanson/algorithms/image.hh>
-# include <vaucanson/algorithms/domain.hh>
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/projection.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_PROJECTION_HH

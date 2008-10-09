@@ -1,5 +1,25 @@
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup the identity algorithm.
+	* include/vaucanson/algorithms/internal/evaluation.hxx: Replace
+	  incorrect header `projection.hh' by `image.hh' to be more
+	  conservative on header inclusions.
+	* include/vaucanson/algorithms/projection.hh: Document the identity
+	  function purpose by moving comments to right location. Add an
+	  INTERFACE for the identity algorithm needed to prevent linkage
+	  errors when building Vaucanson with "-O3". Remove out-of-context
+	  header inclusions.
+	* include/vaucanson/algorithms/projection.hxx: Cosmetic changes.
+	  Reorder headers.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Cosmetic
+	  changes (Cleanup from patch [1575]). Add the domain and image
+	  headers.
+	* lib/generate_libvcsn.rb,
+	* vaucanswig/expand.sh: Add condition filters for the
+	  `projection.hh' file.
+
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix wrong constructed type by standard_of_traits.
 	* include/vaucanson/automata/concept/automata_base.hh
 	(VCSN_MAKE_STANDARD_OF_TRAITS): Change the implementation of the
