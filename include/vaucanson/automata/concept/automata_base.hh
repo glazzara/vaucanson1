@@ -181,20 +181,23 @@ namespace vcsn {
     typedef undefined_type automaton_t;
   };
 
-# define VCSN_MAKE_STANDARD_OF_TRAITS(Type)					\
-  template <typename W,								\
-	    typename M,								\
-	    typename Tm,							\
-	    typename Tw>							\
-  struct standard_of_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >		\
-  {										\
-    typedef typename algebra::Series<W, M>		series_set_t;		\
-    typedef typename algebra::polynom<Tm, Tw>		series_set_elt_value_t; \
-    typedef typename Type<labels_are_series, Tm, Tw,				\
-			  series_set_elt_value_t, Tm,				\
-			  NoTag, NoTag>			automaton_impl_t;	\
-    typedef Element<Automata<series_set_t>,					\
-		    automaton_impl_t>			automaton_t;		\
+# define VCSN_MAKE_STANDARD_OF_TRAITS(Type)				\
+  template <typename W,							\
+	    typename M,							\
+	    typename Tm,						\
+	    typename Tw>						\
+  struct standard_of_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >	\
+  {									\
+    typedef typename algebra::Series<W, M>		series_set_t;	\
+    typedef typename algebra::polynom<Tm, Tw>				\
+	series_set_elt_value_t;						\
+    typedef typename M::letter_t			letter_t;	\
+    typedef typename Type<labels_are_series, Tm, Tw,			\
+			  series_set_elt_value_t, letter_t,		\
+			  NoTag, std::pair<double, double> >		\
+	automaton_impl_t;						\
+    typedef Element<Automata<series_set_t>, automaton_impl_t>		\
+	automaton_t;							\
   }
 
   // Traits to construct misc projections from a structural type and

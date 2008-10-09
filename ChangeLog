@@ -1,5 +1,19 @@
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix wrong constructed type by standard_of_traits.
+	* include/vaucanson/automata/concept/automata_base.hh
+	(VCSN_MAKE_STANDARD_OF_TRAITS): Change the implementation of the
+	automaton type constructed from a ratexp type, by changing the fifth
+	template argument from `Tm' to `letter_t', where `letter_t' is now
+	calculated from the monoid type (M), and by changing the last
+	template argument from `NoTag' to `std::pair<double, double>'.
+	This now construct an automaton type implementation corresponding
+	to the one defined in generic_automaton_impl.thh, and thus makes true
+	the predicate that "standard_of_traits must construct an automaton
+	type that can receive an automaton constructed by standard_of".
+
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Improve libraries resilience to optimizations.
 	* include/vaucanson/misc/contract.hh: Remove the `static' qualifier
 	  from the function `trap'. It has the net effect of making
