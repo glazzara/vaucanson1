@@ -17,7 +17,7 @@ include $(top_srcdir)/src/tests/check/check.mk
 TESTS += failcomp.sh
 EXTRA_DIST = failcomp.sh
 
-AM_CPPFLAGS += -DEXCEPTION_TRAPS -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
+AM_CPPFLAGS += $(BOOST_CPPFLAGS) -DEXCEPTION_TRAPS -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
 
 LDADD += $(top_builddir)/lib/libkrat_exp.la 
 

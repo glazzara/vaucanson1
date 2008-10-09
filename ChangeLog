@@ -1,5 +1,10 @@
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix compilation problems for non standard boost install paths.
+	* src/tests/test-suites/test-suite.mk: Add missing BOOST_CPPFLAGS.
+
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Revive the char-int context. Cleanup int-char.
 	* configure.ac: Remove int-char wrapper.
 	* doc/NEWS.txt: Update to reflect the current status of Vaucanson.
