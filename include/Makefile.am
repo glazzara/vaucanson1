@@ -28,6 +28,7 @@ vaucanson/contexts/boolean_semiring.thh		\
 vaucanson/contexts/char_letter.thh		\
 vaucanson/contexts/int_letter.thh		\
 vaucanson/contexts/char_char_letter.thh		\
+vaucanson/contexts/char_int_letter.thh		\
 vaucanson/contexts/int_int_letter.thh		\
 vaucanson/contexts/dynamic_alphabet.thh		\
 vaucanson/contexts/free_monoid.thh		\
@@ -471,8 +472,10 @@ vaucanson/automata/generic_contexts/int_z_min_plus_automaton_structures.hh \
 vaucanson/automata/generic_contexts/int_z_fmp_transducer.hh		\
 vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh	\
 vaucanson/automata/generic_contexts/char_char_boolean_automaton.hh	\
+vaucanson/automata/generic_contexts/char_int_boolean_automaton.hh	\
 vaucanson/automata/generic_contexts/int_int_boolean_automaton.hh	\
 vaucanson/automata/generic_contexts/char_char_boolean_automaton_structures.hh \
+vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh \
 vaucanson/automata/generic_contexts/int_int_boolean_automaton_structures.hh \
 vaucanson/automata/implementation/automaton_view.hh			\
 vaucanson/automata/implementation/automaton_view.hxx			\

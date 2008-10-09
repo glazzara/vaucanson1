@@ -33,6 +33,7 @@ include vcsn-z-tdc/libvcsn-z-tdc.mk
 include vcsn-int-fmp-tdc/libvcsn-int-fmp-tdc.mk
 include vcsn-int-z-fmp-tdc/libvcsn-int-z-fmp-tdc.mk
 include vcsn-char-char-b/libvcsn-char-char-b.mk
+include vcsn-char-int-b/libvcsn-char-int-b.mk
 include vcsn-int-int-b/libvcsn-int-int-b.mk
 
 maintainer-clean-local:
@@ -50,6 +51,7 @@ maintainer-clean-local:
 	       $(top_builddir)/lib/vcsn-int-fmp-tdc	\
 	       $(top_builddir)/lib/vcsn-tdc		\
 	       $(top_builddir)/lib/vcsn-char-char-b	\
+	       $(top_builddir)/lib/vcsn-char-int-b	\
 	       $(top_builddir)/lib/vcsn-int-int-b	\
 	       $(top_builddir)/lib/krat_exp
 	rm -rf $(top_srcdir)/lib/vcsn-b			\
@@ -66,6 +68,7 @@ maintainer-clean-local:
 	       $(top_srcdir)/lib/vcsn-int-fmp-tdc	\
 	       $(top_srcdir)/lib/vcsn-tdc		\
 	       $(top_srcdir)/lib/vcsn-char-char-b	\
+	       $(top_srcdir)/lib/vcsn-char-int-b	\
 	       $(top_srcdir)/lib/vcsn-int-int-b		\
 	       $(top_srcdir)/lib/krat_exp
 

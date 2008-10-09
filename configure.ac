@@ -225,7 +225,6 @@ VCSN_CONFIG_WRAPPER([vcsn-int-z])
 VCSN_CONFIG_WRAPPER([vcsn-char-char-b])
 VCSN_CONFIG_WRAPPER([vcsn-char-int-b])
 VCSN_CONFIG_WRAPPER([vcsn-int-int-b])
-VCSN_CONFIG_WRAPPER([vcsn-int-char-b])
 
 
 

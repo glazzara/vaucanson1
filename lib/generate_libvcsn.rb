@@ -30,6 +30,7 @@ vcsn = Hash[
   "vcsn-int-z-fmp-tdc" => "int_z_fmp_transducer",
   "vcsn-z-tdc" => "z_transducer",
   "vcsn-char-char-b" => "char_char_boolean_automaton",
+  "vcsn-char-int-b" => "char_int_boolean_automaton",
   "vcsn-int-int-b" => "int_int_boolean_automaton",
 ]
 
@@ -51,7 +52,7 @@ def create?(type, file)
         "vcsn-int-b" == type or "vcsn-int-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type or
 	"vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
-	"vcsn-int-int-b" == type or "vcsn-int-char-b" == type
+	"vcsn-int-int-b" == type
       ) and
       file !~ /realtime_decl.hh/ and
       file !~ /extension.hh/ and		# transducer
@@ -68,7 +69,7 @@ def create?(type, file)
       file !~ /ltl_to_pair.hh/ and		# FMP transducer
       ( # Pair letters only filters.
 	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
-	      "vcsn-int-int-b" == type or "vcsn-int-char-b" == type
+	      "vcsn-int-int-b" == type
 	    ) or
 	    (
 	      file !~ /berry_sethi.hh/		# algorithm not generic with letter_t

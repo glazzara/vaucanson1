@@ -8,12 +8,16 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
-Vaucanson 1.x, October 6th, 2008
+Vaucanson 1.x, October 9th, 2008
 ================================
 
 - Demos
 
   + Remove function_library.
+
+- TAF-Kit
+
+  + Remove the ``vcsn-int-char-b`` instance.
 
 Vaucanson 1.2.92, September 10th, 2008
 ======================================

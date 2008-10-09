@@ -1,3 +1,22 @@
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Revive the char-int context. Cleanup int-char.
+	* configure.ac: Remove int-char wrapper.
+	* doc/NEWS.txt: Update to reflect the current status of Vaucanson.
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton.hh,
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh,
+	* include/vaucanson/contexts/char_int_letter.thh: Restore removed
+	  files from patch [2234]. Update them to support projections.
+	* include/Makefile.am,
+	* lib/Makefile.am,
+	* lib/generate_libvcsn.rb,
+	* taf-kit/src/Makefile.am,
+	* taf-kit/tests/Makefile.am: Revive the char-int context. Cleanup
+	  any remainings of int-char.
+	* taf-kit/tests/vcsn-char-int-b.test: Add a test to check for the
+	  executable "vcsn-char-int-b" presence.
+	* taf-kit/tests/vcsn-int-char-b.test: Remove.
+
 2008-10-08  Reuben Thomas  <rrt@sc3d.org>
 
 	Improve Debian package descriptions.
