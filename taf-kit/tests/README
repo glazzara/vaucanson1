@@ -10,6 +10,7 @@
 * b_transposed.xml : Result of the transpose of the automaton above.
 * void_b_automaton.xml : Empty automaton, use to test is-standard. It should
 			return false.
+* realtime_test.xml : Used to test realtime.
 
 
 *** Z automata

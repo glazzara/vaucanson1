@@ -1,5 +1,14 @@
 2008-10-09  Reuben Thomas  <rrt@sc3d.org>
 
+	Add test for recent realtime bug.
+	* tests/Makefile.am: Add realtime_test.xml.
+	* tests/README: Mention realtime_test.xml.
+	* tests/automata/char-b/realtime_test.xml: New.
+	* tests/defs.in: Add realtime_test.
+	* tests/vcsn-char-b.test: Add test for realtime.
+
+2008-10-09  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove AC_CXX_FLAGS, CXXFLAGS_{OPTIMIZE,DEBUG} (closes #183).
 	* build-aux/vcsn.m4: Remove AC_CXX_FLAGS and VCSN_WARN_CXXFLAGS.
 	* configure.ac: Don't call AC_CXX_FLAGS.

@@ -35,6 +35,7 @@ EXTRA_DIST = $(TESTS)				\
   automata/char-b/b_to_transpose.xml		\
   automata/char-b/b_transposed.xml		\
   automata/char-b/non_ambiguous1.xml		\
+  automata/char-b/realtime_test.xml		\
   automata/char-b/void_b_automaton.xml		\
   automata/char-fmp-b/inverted_t1.xml		\
   automata/char-fmp-b/t1_compose_u1.xml		\
