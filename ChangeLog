@@ -1,5 +1,10 @@
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Make vaucanswig ignore the rw_composition algorithm.
+	* vaucanswig/expand.sh: Add new filter condition.
+
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix compilation problems for non standard boost install paths.
 	* src/tests/test-suites/test-suite.mk: Add missing BOOST_CPPFLAGS.
 

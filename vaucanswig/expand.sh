@@ -158,6 +158,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
 	[ "$candidate_family" = "aut_projection" ] || \
 	[ "$candidate_family" = "evaluation_fmp" ] || \
 	[ "$candidate_family" = "normalized_composition" ] || \
+	[ "$candidate_family" = "rw_composition" ] || \
 	[ "$candidate_family" = "sub_normalize" ] || \
 	[ "$candidate_family" = "composition_cover" ]; then
        echo "Ignoring $candidate_family"
