@@ -35,81 +35,68 @@ namespace vcsn {
   | do_realtime_words.  |
   `--------------------*/
 
-  template <class Auto, class Label>
-  int do_realtime_words(Auto& a,
-			typename Auto::hstate_t start,
-			typename Auto::hstate_t stop,
-			const Label& label, bool initial, bool final)
+  template <class Auto>
+  void do_realtime_words(Auto& a)
   {
     AUTOMATON_TYPES(Auto);
     hstate_t			s1;
     semiring_elt_t		s_ident = algebra::identity_as<semiring_elt_value_t>
       ::of(a.structure().series().semiring());
 
-
-    if (label.supp().begin() == label.supp().end())
-      return 0;
-
-    monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
-    monoid_elt_value_t w1 = m1.value();
-
-    unsigned int size = m1.length();
-
-    if (size > 1)
+    typedef std::vector<htransition_t> transition_vector_t;
+    transitions_t transitions = a.transitions();
+    transition_vector_t tmp_trans;
+    for_all_(transitions_t, e, transitions)
+      tmp_trans.push_back(*e);
+    
+    for_all(typename transition_vector_t, e, tmp_trans)
     {
-      monoid_elt_t m(a.structure().series().monoid());
+      hstate_t start = a.src_of(*e);
+      hstate_t stop = a.dst_of(*e);
+      series_set_elt_t label = a.series_of(*e);
 
-      semiring_elt_t s = label.get(m1);
-      series_set_elt_t in_series(a.structure().series());
-      typename monoid_elt_t::iterator l = m1.begin();
-
-      m = *l;
-
-      in_series.assoc(m, s);
-
-      if (initial)
+      assert(label.supp().begin() != label.supp().end());
+      
+      monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
+      monoid_elt_value_t w1 = m1.value();
+      unsigned int size = m1.length();
+      
+      if (size > 1)
       {
-	hstate_t s0 = a.add_state();
-	a.set_initial(s0, in_series);
-	a.unset_initial(stop);
-	s1 = s0;
+        monoid_elt_t m(a.structure().series().monoid());
+        
+        semiring_elt_t s = label.get(m1);
+        series_set_elt_t in_series(a.structure().series());
+        typename monoid_elt_t::iterator l = m1.begin();
+        
+        m = *l;
+        
+        in_series.assoc(m, s);
+        
+        s1 = a.add_state();
+        a.add_series_transition(start, s1, in_series);
+        
+        l++;
+        for (typename monoid_elt_t::iterator end = m1.begin() + (size - 1);
+             l != end; ++l)
+        {
+          m = *l;
+          hstate_t s0 = s1;
+          s1 = a.add_state();
+          series_set_elt_t series(a.structure().series());
+          series.assoc(m, s_ident);
+          a.add_series_transition(s0, s1, series);
+        }
+        
+        m = *l;
+        
+        series_set_elt_t out_series(a.structure().series());
+        out_series.assoc(m, s_ident);
+        
+        a.add_series_transition(s1, stop, out_series);
+        a.del_transition(*e);
       }
-      else
-      {
-	hstate_t s0 = start;
-	s1 = a.add_state();
-	a.add_series_transition(s0, s1, in_series);
-      }
-
-      l++;
-      for (typename monoid_elt_t::iterator end = m1.begin() + (size - 1);
-	   l != end; ++l)
-      {
-	m = *l;
-	hstate_t s0 = s1;
-	s1 = a.add_state();
-	series_set_elt_t series(a.structure().series());
-	series.assoc(m, s_ident);
-	a.add_series_transition(s0, s1, series);
-      }
-
-      m = *l;
-
-      series_set_elt_t out_series(a.structure().series());
-      out_series.assoc(m, s_ident);
-
-      if (final)
-      {
-	a.unset_final(start);
-	a.set_final(s1, out_series);
-      }
-      else
-	a.add_series_transition(s1, stop, out_series);
-
-      return 1;
     }
-
-    return 0;
   }
 
 
@@ -118,28 +105,53 @@ namespace vcsn {
   {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
-    typedef std::vector<hstate_t> vector_t;
+    typedef std::vector<hstate_t> state_vector_t;
+    typedef std::vector<htransition_t> transition_vector_t;
+    state_vector_t tmp;
 
     // perform cut-up.
     cut_up_here(res);
 
-    vector_t tmp;
+    // Remove any labels from initial arrows.
     tmp.reserve(res.initial().size());
     for_all_const_initial_states(i, res)
       tmp.push_back(*i);
-    for_all(typename vector_t, i, tmp)
-      do_realtime_words(res, hstate_t(), *i, res.get_initial(*i), true, false);
+    for_all(typename state_vector_t, i, tmp)
+    {
+      series_set_elt_t l = res.get_initial(*i);
+      assert(l.supp().begin() != l.supp().end());
+      monoid_elt_t m(res.structure().series().monoid(), *l.supp().begin());
+      if (m.length() > 0)
+      {
+        hstate_t s = res.add_state();
+        res.add_series_transition(*i, s, l);
+        res.set_initial(s);
+        res.unset_initial(*i);
+      }
+    }
     tmp.clear();
+
+    // Remove any labels from final arrows.
+    tmp.reserve(res.final().size());
     for_all_const_final_states(f, res)
       tmp.push_back(*f);
-    for_all(typename vector_t, f, tmp)
-      do_realtime_words(res, *f, hstate_t(), res.get_final(*f), false, true);
-
-    transitions_t transitions = res.transitions();
-    for_all_(transitions_t, e, transitions)
-      if (do_realtime_words(res, res.src_of(*e), res.dst_of(*e),
-			    res.series_of(*e), false, false))
-	res.del_transition(*e);
+    for_all(typename state_vector_t, f, tmp)
+    {
+      series_set_elt_t l = res.get_final(*f);
+      assert(l.supp().begin() != l.supp().end());
+      monoid_elt_t m(res.structure().series().monoid(), *l.supp().begin());
+      if (m.length() > 0)
+      {
+	hstate_t s = res.add_state();
+	res.add_series_transition(s, *f, l);
+	res.set_final(s);
+	res.unset_final(*f);
+      }
+    }
+    
+    // Make the transitions realtime (now includes any former initial
+    // or final labels).
+    do_realtime_words(res);
   }
 
 

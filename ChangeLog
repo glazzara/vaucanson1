@@ -1,3 +1,22 @@
+2008-10-09  Reuben Thomas  <rrt@sc3d.org>
+
+	Fix realtime good and proper.
+	* include/vaucanson/algorithms/realtime.hxx: realtime was
+	  suffering from two bugs: first, it randomly failed, because
+	  the iteration over the transitions was confused by the fact
+	  that transitions were being deleted while it ran; secondly,
+	  it did not deal properly with initial and final labels,
+	  which for a realtime automaton should not have even one
+	  letter. Finally, the structure of the code in do_realtime_words
+	  tried to compensate for the fact that initial and final labels
+	  are not transitions with some fairly hairy logic (and wrong, in
+	  that it caused the second bug). This has been fixed: the cases
+	  for initial and final states have been lifted out into
+	  realtime_words_here, and do_realtime_words only deals with
+	  transitions, in a cleaner way, and avoids the iterator problem
+	  by copying the transitions into a vector and iterating over
+	  that.
+
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix contexts handling w.r.t. pipe_writers.hh.
