@@ -117,7 +117,7 @@ namespace vcsn {
       /** @} */
 
       /// Internal function to report errors in failed contract macros.
-      static inline
+      inline
       void trap (const char *file, int line,
 		 const char *location,
 		 const std::string& message)

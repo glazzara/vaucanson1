@@ -1,5 +1,17 @@
 2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Improve libraries resilience to optimizations.
+	* include/vaucanson/misc/contract.hh: Remove the `static' qualifier
+	  from the function `trap'. It has the net effect of making
+	  vcsn::misc::contract::trap a weak symbol, allowing user code to
+	  overwrite it. This is what Taf-Kit does by setting the
+	  EXCEPTION_TRAPS macro. Depending on compiler optimizations, having
+	  the function as `static inline' could produce linkage errors.
+	  Building Taf-Kit now, does not depend anymore on aggressive symbol
+	  removals in libvcsn.
+
+2008-10-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Make vaucanswig ignore the rw_composition algorithm.
 	* vaucanswig/expand.sh: Add new filter condition.
 
