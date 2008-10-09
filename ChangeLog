@@ -1,5 +1,12 @@
 2008-10-09  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove AC_CXX_FLAGS, CXXFLAGS_{OPTIMIZE,DEBUG} (closes #183).
+	* build-aux/vcsn.m4: Remove AC_CXX_FLAGS and VCSN_WARN_CXXFLAGS.
+	* configure.ac: Don't call AC_CXX_FLAGS.
+	* doc/README.txt: Remove documentation for CXXFLAGS_{OPTIMIZE,DEBUG}.
+
+2008-10-09  Reuben Thomas  <rrt@sc3d.org>
+
 	Fix realtime good and proper.
 	* include/vaucanson/algorithms/realtime.hxx: realtime was
 	  suffering from two bugs: first, it randomly failed, because

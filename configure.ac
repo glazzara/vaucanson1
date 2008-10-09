@@ -106,9 +106,6 @@ AC_PROG_LIBTOOL
 # Where to install Emacs files.
 AM_PATH_LISPDIR
 
-# Attempt to use strict language conformance checking.
-AC_CXX_FLAGS
-
 VCSN_XML
 
 if test "${with_xerces+set}" = set; then

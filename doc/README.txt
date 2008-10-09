@@ -102,20 +102,6 @@ For further configure options, type::
 	./configure --help
 
 
-Tweaking compilation options
-----------------------------
-
-Use  ``CXXFLAGS_DEBUG``  or  ``CXXFLAGS_OPTIMIZE``  to pass  debug  or
-optimization flags, not ``CXXFLAGS``.  For example::
-
-	./configure CXXFLAGS_DEBUG='-fstack-check -fbounds-check -ggdb'
-
-This is because  Vaucanson tries to use some  particular default flags
-with some specific  compilers such as GCC or  ICC.  Using ``CXXFLAGS``
-conflicts   with   those   specific  flags;   ``CXXFLAGS_DEBUG``   and
-``CXXFLAGS_OPTIMIZE`` override these default flags.
-
-
 Layout of the tarball
 ---------------------
 
