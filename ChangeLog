@@ -1,3 +1,11 @@
+2008-10-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Release 1.2.93.
+	* configure.ac: change version number to 1.2.93.
+	* doc/NEWS.txt: Add changes since 1.2.92.
+	* doc/share/bib/vaucanson.bib: make share-up.
+	* doc/share/styles/texi.hva: make share-up.
+
 2008-10-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add BOOST_CPPFLAGS to python

@@ -73,7 +73,7 @@
 \fi
 
 % Variable.
-\newcommand\var[1]{\textsf{#1}}
+\newcommand\var[1]{{\ttfamily\itshape #1}}
 % Emphasized definition.  To be used to highlight a defined term
 % without indexing it.
 \newcommand\emphdfn[1]{\emph{#1}}

@@ -8,16 +8,25 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
-Vaucanson 1.x, October 9th, 2008
-================================
+Vaucanson 1.2.93, October 10th, 2008
+====================================
+
+- Mostly bug fixes.
+
+- The Vaucanson library
+
+  + Support for ascii alphabet in XML.
 
 - Demos
 
   + Remove function_library.
+  + Add hulden demo.
 
 - TAF-Kit
 
   + Remove the ``vcsn-int-char-b`` instance.
+  + Add ltl-to-pair and identity-exp.
+  + Revive transpose on transducers. 
 
 Vaucanson 1.2.92, September 10th, 2008
 ======================================
