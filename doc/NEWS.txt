@@ -8,6 +8,13 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
+Vaucanson 1.x, October 13th, 2008
+=================================
+
+- TAF-Kit
+
+  + Add is-ltl.
+
 Vaucanson 1.2.93, October 10th, 2008
 ====================================
 

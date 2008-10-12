@@ -32,6 +32,7 @@
 `-------------------*/
 
 DEFINE_IS_PROPERTY_COMMAND (sub_normalized);
+DEFINE_IS_PROPERTY_COMMAND (ltl);
 
 DEFINE_COMMAND (NAME (compose)
 		CODE (
@@ -171,7 +172,8 @@ const command_t command_map[] =
     COMMAND_ENTRY (has_succ_comp, Aut,
 		   "Return whether `aut' has successful computations"
 		   " (trimmed `aut` is not empty)."),
-    COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized.")
+    COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized."),
+    COMMAND_ENTRY (is_ltl, Aut, "Test if `aut' is letter-to-letter.")
 
     ),
 

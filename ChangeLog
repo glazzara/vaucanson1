@@ -1,5 +1,16 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add the is_ltl algorithm to Taf-Kit.
+	* include/vaucanson/algorithms/is_ltl.hh: Add INTERFACE for `is_ltl'
+	  algorithm.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Add
+	  is_ltl.hh header. Sort headers.
+	* taf-kit/src/fmp_commands.cc: Define new `is_ltl_command'.
+	* vaucanswig/expand.sh: Make vaucanswig ignore the `is_ltl' algorithm.
+	* doc/NEWS.txt: Mention the new algorithm.
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add test for the is_ltl algorithm.
 	* src/tests/include/Makefile.am: Add new file to the distribution.
 	* src/tests/include/tests/automata/algos/fmp_transducers/is_ltl_test.hh:

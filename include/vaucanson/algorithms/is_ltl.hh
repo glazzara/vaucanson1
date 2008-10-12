@@ -38,6 +38,8 @@
  */
 /** @} */
 
+// INTERFACE: bool is_ltl(const Automaton& a) { return vcsn::is_ltl(*a); }
+
 // The algorithm take any Element as argument. Static checks
 // (static_assertion_) will be done at compile time to ensure the Element has
 // proper interface.
