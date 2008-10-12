@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,38 +21,51 @@
 /**
  * @file   is_letterized.hh
  *
- * Letter-to-letter feature testing.
+ * @brief Letter-to-letter feature testing.
+ *
+ * @details An FMP transducer t over the free monoid product A*xB*,
+ * where A and B are both alphabets, is of type ltl if and only if every
+ * transitions of t is in E, where E is defined by:
+ * E = {(a, b) | a \in A, b \in B}
+ *
+ * @remarks Synonyms: letter-to-letter, lettre-à-lettre, synchronous,
+ * synchrone.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:42:52 2003
  *
- * @see is_letterized_transducer()
+ * @see is_letterized_transducer(), is_sub_normalized(), is_normalized()
  */
 /** @} */
 
+// The algorithm take any Element as argument. Static checks
+// (static_assertion_) will be done at compile time to ensure the Element has
+// proper interface.
 # include <vaucanson/design_pattern/design_pattern.hh>
 
-namespace vcsn {
-
+namespace vcsn
+{
   /** @addtogroup algorithms *//** @{ */
-
   /**
-   * Test the letter to letter features.
+   * @fn is_letterized_transducer
    *
-   * @param t The transducer to test.
+   * @brief Test the ltl property of an FMP transducer.
    *
-   * @return true if the transducer is letter to letter.
+   * @pre t must be an FMP transducer.
+   *
+   * @param t The FMP transducer to test.
+   *
+   * @return true if the FMP transducer is letter-to-letter.
    */
   template<typename S, typename A>
   bool
   is_letterized_transducer(const Element<S, A>& t);
-
   /** @} */
 
-} // vcsn
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/is_letterized.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_IS_LETTERIZED_HH

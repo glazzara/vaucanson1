@@ -1,5 +1,21 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Overhaul the is_letterized_transducer algorithm.
+	* include/vaucanson/algorithms/is_letterized.hh: Improve
+	  the documentation. Update the copyright notice. Cosmetic changes.
+	* include/vaucanson/algorithms/is_letterized.hxx: Add the required
+	  `freemonoid_product.hh' header. Reorder headers.
+	  (do_is_letterized_transducer): Add one argument to check for the
+	  monoid type. Add corresponding templates arguments `A' and `B'. Rename
+	  template argument `A' to `T'. Rewrite the algorithm
+	  implementation: it made wrong assumptions about the properties of
+	  an FMP transducer. Cosmetic changes.
+	  (is_letterized_transducer): Move TIMER_SCOPED macro to
+	  `do_is_letterized_transducer'. Use `monoid()' to extract type
+	  information of the automaton argument.
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix FMP transducer test-suites definition file.
 	* src/tests/test-suites/z_fmp_transducer.defs,
 	* src/tests/test-suites/fmp_transducer.defs: Rename incorrect

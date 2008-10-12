@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,40 +18,70 @@
 # define VCSN_ALGORITHMS_IS_LETTERIZED_HXX
 
 # include <vaucanson/algorithms/is_letterized.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
+
 # include <vaucanson/misc/usual_macros.hh>
 
-namespace vcsn {
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
 
-  template<typename S, typename A>
+namespace vcsn
+{
+  template<typename S, typename A, typename B, typename T>
   bool
-  do_is_letterized_transducer(const AutomataBase<S>& trans_set,
-			      const A& trans)
+  do_is_letterized_transducer(// t must be an automaton ...
+			      const AutomataBase<S>&,
+			      // ... over a free monoid product.
+			      const algebra::FreeMonoidProduct<A, B>&,
+			      const T& t)
   {
-    AUTOMATON_TYPES(A);
-    bool is_letterized = true;
-    for_all_const_transitions(e, trans)
-    {
-      is_letterized &= is_support_in_alphabet(trans.series_of(*e));
-      for_all_const_(series_set_elt_t::support_t,
-		     i,
-		     trans.series_of(*e).supp())
-      {
-	is_letterized &= is_support_in_alphabet(trans.series_of(*e).get(*i));
-	if (!is_letterized)
-	  return false;
-      }
+    TIMER_SCOPED("is_letterized_transducer");
+
+    // Type helper.
+    AUTOMATON_TYPES(T);
+
+# define CHECK_LTL_CONDITION \
+    for_all_const_(series_set_elt_t::support_t, it, label.supp()) \
+    { \
+      if (!(((*it).first.size() == ((*it).second.size())) && \
+	    ((*it).second.size() <= 1))) \
+      return false; \
     }
+
+    for_all_const_initial_states(i, t)
+    {
+      series_set_elt_t label = t.get_initial(*i);
+      CHECK_LTL_CONDITION
+    }
+
+    for_all_const_transitions(e, t)
+    {
+      series_set_elt_t label = t.series_of(*e);
+      CHECK_LTL_CONDITION
+    }
+
+    for_all_const_final_states(f, t)
+    {
+      series_set_elt_t label = t.get_final(*f);
+      CHECK_LTL_CONDITION
+    }
+
+# undef CHECK_CONDITION
+
     return true;
   }
 
-  template<typename S, typename A>
+  /*----------------------.
+  | is_letterized facades |
+  `----------------------*/
+
+  template <typename S, typename A>
   bool
-  is_letterized_transducer(const Element<S, A>& a)
+  is_letterized_transducer(const Element<S, A>& t)
   {
-    TIMER_SCOPED("is_letterized_transducer");
-    return do_is_letterized_transducer(a.structure(), a);
+    return do_is_letterized_transducer(t.structure(),
+				       t.structure().series().monoid(), t);
   }
-}
+
+} // ! vcsn
 
 #endif // ! VCSN_ALGORITHMS_IS_LETTERIZED_HXX
