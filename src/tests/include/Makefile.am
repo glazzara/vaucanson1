@@ -68,6 +68,7 @@ tests/automata/algos/boolean_automata/complete_test.hh				      \
 tests/automata/algos/boolean_automata/minimization_test.hh			      \
 tests/automata/algos/boolean_rw_transducers/invert_test.hh			      \
 tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh			      \
+tests/automata/algos/fmp_transducers/is_ltl_test.hh				      \
 tests/automata/algos/fmp_transducers/normalized_composition_test.hh		      \
 tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh		      \
 tests/automata/algos/fmp_transducers/sub_normalize_test.hh			      \

@@ -1,5 +1,12 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add test for the is_ltl algorithm.
+	* src/tests/include/Makefile.am: Add new file to the distribution.
+	* src/tests/include/tests/automata/algos/fmp_transducers/is_ltl_test.hh:
+	  Here.
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a bug in the is_sub_normalized algorithm.
 	* include/vaucanson/algorithms/sub_normalize.hxx
 	  (so_is_sub_normalized): When iterating over the final transitions,
