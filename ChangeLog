@@ -1,5 +1,14 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix wrong precondition on ltl_to_pair.
+	* include/vaucanson/algorithms/ltl_to_pair.hxx: Add required header
+	  for the `is_ltl' algorithm.
+	  (do_ltl_to_pair): Change precondition from `is_sub_normalized' to
+	  `is_ltl'.
+	* taf-kit/tests/vcsn-char-fmp-b.test: Add regression test.
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add the is_ltl algorithm to Taf-Kit.
 	* include/vaucanson/algorithms/is_ltl.hh: Add INTERFACE for `is_ltl'
 	  algorithm.

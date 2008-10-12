@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_LTL_TO_PAIR_HXX
 
 # include <vaucanson/algorithms/ltl_to_pair.hh>
+# include <vaucanson/algorithms/is_ltl.hh>
 
 namespace vcsn
 {
@@ -77,7 +78,7 @@ namespace vcsn
   {
     typename ret::series_set_elt_t R(series);
 
-    // We assume that the src automaton is sub-normalized.
+    // We assume that the src automaton is an ltl.
     std::basic_string<ret_letter_t> m;
     if (!(*(ss.supp().begin())).first.empty())
       m += std::make_pair(((*(ss.supp().begin())).first)[0],
@@ -94,9 +95,8 @@ namespace vcsn
   {
     TIMER_SCOPED("ltl_to_pair");
 
-    // The input FMP automaton must be sub-normalized.
-    // FIXME: is_ltl ?
-    precondition(is_sub_normalized(src));
+    // The input FMP transducer must be `letter-to-letter'.
+    precondition(is_ltl(src));
 
     // Type helpers.
     typedef typename MUTE_TRAITS::automaton_t automaton_t;

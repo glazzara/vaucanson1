@@ -309,7 +309,7 @@ x
 # Exit.
 10
 EOF
-$VCSN is-sub-normalized ltl.xml
+$VCSN is-ltl ltl.xml
 $VCSN ltl-to-pair ltl.xml > ltl-pair.xml
 
 # Now we will check with first_projection and second_projection
@@ -332,3 +332,33 @@ diff ltl-domain-sorted.xml ltl-first-projection-sorted.xml
 sort ltl-image.xml > ltl-image-sorted.xml
 sort ltl-second-projection.xml > ltl-second-projection-sorted.xml
 diff ltl-image-sorted.xml ltl-second-projection-sorted.xml
+
+# regression test: check that ltl-to-pair fails when given a subnormalized
+# automaton which is not ltl.
+
+sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xy define-automaton norm.xml
+# Add states
+1
+# Add 2 states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+1
+# Add transition
+3
+# From, to, in, out
+0
+1
+a
+1
+# Exit.
+10
+EOF
+
+# This test must throw an exception (ltl-to-pair precondition).
+fail255 $VCSN ltl-to-pair norm.xml > /dev/null
