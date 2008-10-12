@@ -1,3 +1,9 @@
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add tests for the existence of some Taf-Kit binaries.
+	* taf-kit/tests/vcsn-char-char-b.test,
+	* taf-kit/tests/vcsn-int-int-b.test: Here.
+
 2008-10-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Release 1.2.93.

@@ -18,3 +18,6 @@
 set -e
 
 VCSN=vcsn-int-int-b
+
+# Check for the executable existence.
+$VCSN --usage
