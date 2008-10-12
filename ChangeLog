@@ -1,5 +1,15 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a bug in the is_sub_normalized algorithm.
+	* include/vaucanson/algorithms/sub_normalize.hxx
+	  (so_is_sub_normalized): When iterating over the final transitions,
+	  use `get_final' instead of `get_initial' to retrieve the label.
+	* src/tests/include/Makefile.am: Add new file to the distribution.
+	* src/tests/include/tests/automata/algos/fmp_transducers/is_subnormalized_test.hh:
+	  New regression test.
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Refactor is_letterized_transducer to is_ltl.
 	* include/Makefile.am: Include new files to the distribution.
 	* include/vaucanson/algorithms/is_ltl.hh: Rename from

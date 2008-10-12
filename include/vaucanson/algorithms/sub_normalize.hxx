@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ namespace vcsn {
 
     for_all_const_final_states(f, a)
     {
-      series_set_elt_t label = a.get_initial(*f);
+      series_set_elt_t label = a.get_final(*f);
       for (typename support_t::const_iterator it = label.supp().begin();
 	   it != label.supp().end(); ++it)
 	if ((*it).first.size() > 1 || (*it).second.size() > 1)

@@ -71,6 +71,7 @@ tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh			      \
 tests/automata/algos/fmp_transducers/normalized_composition_test.hh		      \
 tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh		      \
 tests/automata/algos/fmp_transducers/sub_normalize_test.hh			      \
+tests/automata/algos/fmp_transducers/is_subnormalized_test.hh			      \
 tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh		      \
 tests/automata/algos/freemonoid_labeled_graphs/krat_exp_realtime_conflict_test.hh     \
 tests/automata/algos/freemonoid_labeled_graphs/realtime_test.hh			      \
