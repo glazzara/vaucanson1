@@ -1,5 +1,12 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix FMP transducer test-suites definition file.
+	* src/tests/test-suites/z_fmp_transducer.defs,
+	* src/tests/test-suites/fmp_transducer.defs: Rename incorrect
+	  namespace alias (it could lead to ambiguities).
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add tests for the existence of some Taf-Kit binaries.
 	* taf-kit/tests/vcsn-char-char-b.test,
 	* taf-kit/tests/vcsn-int-int-b.test: Here.

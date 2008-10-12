@@ -6,7 +6,7 @@
    vcsn::z_fmp_transducer::automaton_t
 
 namespace rw_transducer = vcsn::z_transducer;
-namespace fmp_transducer = vcsn::z_fmp_transducer;
+namespace fmp = vcsn::z_fmp_transducer;
 namespace automaton = vcsn::z_automaton;
 
 #include <vaucanson/algorithms/fmp_to_rw.hh>
