@@ -343,8 +343,8 @@ vaucanson/algorithms/is_deterministic.hh			\
 vaucanson/algorithms/is_deterministic.hxx			\
 vaucanson/algorithms/is_empty.hh				\
 vaucanson/algorithms/is_empty.hxx				\
-vaucanson/algorithms/is_letterized.hh				\
-vaucanson/algorithms/is_letterized.hxx				\
+vaucanson/algorithms/is_ltl.hh					\
+vaucanson/algorithms/is_ltl.hxx					\
 vaucanson/algorithms/is_normalized.hh				\
 vaucanson/algorithms/is_normalized.hxx				\
 vaucanson/algorithms/isomorph.hh				\

@@ -51,9 +51,9 @@ namespace vcsn
 {
   /** @addtogroup algorithms *//** @{ */
 
-  /// @name Letterized FMP automaton to pair letter automaton algorithm.
+  /// @name Letter-to-letter FMP automaton to pair letter automaton algorithm.
   ///@{
-  /// Compute the pair letter automaton associated to a letterized FMP
+  /// Compute the pair letter automaton associated to an ltl FMP
   /// automaton.
 
   // Helper to mute an FMP into its corresponding pair automaton.

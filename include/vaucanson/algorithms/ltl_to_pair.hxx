@@ -95,7 +95,7 @@ namespace vcsn
     TIMER_SCOPED("ltl_to_pair");
 
     // The input FMP automaton must be sub-normalized.
-    // FIXME: is_letterized_transducer ?
+    // FIXME: is_ltl ?
     precondition(is_sub_normalized(src));
 
     // Type helpers.

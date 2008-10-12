@@ -1,4 +1,4 @@
-// is_letterized.hxx: this file is part of the Vaucanson project.
+// is_ltl.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,10 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_IS_LETTERIZED_HXX
-# define VCSN_ALGORITHMS_IS_LETTERIZED_HXX
+#ifndef VCSN_ALGORITHMS_IS_LTL_HXX
+# define VCSN_ALGORITHMS_IS_LTL_HXX
 
-# include <vaucanson/algorithms/is_letterized.hh>
+# include <vaucanson/algorithms/is_ltl.hh>
 
 # include <vaucanson/misc/usual_macros.hh>
 
@@ -28,13 +28,13 @@ namespace vcsn
 {
   template<typename S, typename A, typename B, typename T>
   bool
-  do_is_letterized_transducer(// t must be an automaton ...
-			      const AutomataBase<S>&,
-			      // ... over a free monoid product.
-			      const algebra::FreeMonoidProduct<A, B>&,
-			      const T& t)
+  do_is_ltl(// t must be an automaton ...
+	    const AutomataBase<S>&,
+	    // ... over a free monoid product.
+	    const algebra::FreeMonoidProduct<A, B>&,
+	    const T& t)
   {
-    TIMER_SCOPED("is_letterized_transducer");
+    TIMER_SCOPED("is_ltl");
 
     // Type helper.
     AUTOMATON_TYPES(T);
@@ -70,18 +70,18 @@ namespace vcsn
     return true;
   }
 
-  /*----------------------.
-  | is_letterized facades |
-  `----------------------*/
+  /*---------------.
+  | is_ltl facades |
+  `---------------*/
 
   template <typename S, typename A>
   bool
-  is_letterized_transducer(const Element<S, A>& t)
+  is_ltl(const Element<S, A>& t)
   {
-    return do_is_letterized_transducer(t.structure(),
-				       t.structure().series().monoid(), t);
+    return do_is_ltl(t.structure(),
+		     t.structure().series().monoid(), t);
   }
 
 } // ! vcsn
 
-#endif // ! VCSN_ALGORITHMS_IS_LETTERIZED_HXX
+#endif // ! VCSN_ALGORITHMS_IS_LTL_HXX

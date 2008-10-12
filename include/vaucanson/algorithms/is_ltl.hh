@@ -1,4 +1,4 @@
-// is_letterized.hh: this file is part of the Vaucanson project.
+// is_ltl.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,12 +14,12 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_IS_LETTERIZED_HH
-# define VCSN_ALGORITHMS_IS_LETTERIZED_HH
+#ifndef VCSN_ALGORITHMS_IS_LTL_HH
+# define VCSN_ALGORITHMS_IS_LTL_HH
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file   is_letterized.hh
+ * @file   is_ltl.hh
  *
  * @brief Letter-to-letter feature testing.
  *
@@ -34,7 +34,7 @@
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:42:52 2003
  *
- * @see is_letterized_transducer(), is_sub_normalized(), is_normalized()
+ * @see is_ltl(), is_sub_normalized(), is_normalized()
  */
 /** @} */
 
@@ -47,7 +47,7 @@ namespace vcsn
 {
   /** @addtogroup algorithms *//** @{ */
   /**
-   * @fn is_letterized_transducer
+   * @fn is_ltl
    *
    * @brief Test the ltl property of an FMP transducer.
    *
@@ -59,13 +59,13 @@ namespace vcsn
    */
   template<typename S, typename A>
   bool
-  is_letterized_transducer(const Element<S, A>& t);
+  is_ltl(const Element<S, A>& t);
   /** @} */
 
 } // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-#  include <vaucanson/algorithms/is_letterized.hxx>
+#  include <vaucanson/algorithms/is_ltl.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGORITHMS_IS_LETTERIZED_HH
+#endif // ! VCSN_ALGORITHMS_IS_LTL_HH

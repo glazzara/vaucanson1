@@ -57,7 +57,6 @@ def create?(type, file)
       file !~ /realtime_decl.hh/ and
       file !~ /extension.hh/ and		# transducer
       file !~ /invert.hh/ and			# transducer
-      file !~ /is_letterized.hh/ and		# transducer
       file !~ /is_normalized.hh/ and		# transducer
       file !~ /normalized_composition.hh/ and	# transducer
       file !~ /rw_composition.hh/ and           # transducer
@@ -68,6 +67,7 @@ def create?(type, file)
       file !~ /composition_cover.hh/ and	# FMP transducer
       file !~ /\/projection.hh/ and		# FMP transducer (identity)
       file !~ /ltl_to_pair.hh/ and		# FMP transducer
+      file !~ /is_ltl.hh/ and			# FMP transducer
       ( # Pair letters only filters.
 	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
 	      "vcsn-int-int-b" == type
@@ -105,7 +105,6 @@ def create?(type, file)
       file !~ /extension.hh/ and
       file !~ /finite_support_conversion.hh/ and
       file !~ /is_ambiguous.hh/ and
-      file !~ /is_letterized.hh/ and
       file !~ /krat_exp.*.hh/ and
       file !~ /letter_to_letter_composition.hh/ and
       file !~ /minimization_hopcroft.hh/ and
@@ -134,6 +133,7 @@ def create?(type, file)
 	      file !~ /evaluation_fmp.hh/ and		# FMP transducer
 	      file !~ /sub_normalize.hh/ and		# FMP transducer
 	      file !~ /ltl_to_pair.hh/ and		# FMP transducer
+	      file !~ /is_ltl.hh/ and			# FMP transducer
 	      file !~ /\/projection.hh/ and		# FMP transducer (identity)
 	      file !~ /composition_cover.hh/		# FMP transducer
 	    )

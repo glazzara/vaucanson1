@@ -1,5 +1,18 @@
 2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Refactor is_letterized_transducer to is_ltl.
+	* include/Makefile.am: Include new files to the distribution.
+	* include/vaucanson/algorithms/is_ltl.hh: Rename from
+	  include/vaucanson/algorithms/is_letterized.hh.
+	* include/vaucanson/algorithms/is_ltl.hxx: Rename from
+	  include/vaucanson/algorithms/is_letterized.hxx.
+	* include/vaucanson/algorithms/ltl_to_pair.hh,
+	* include/vaucanson/algorithms/ltl_to_pair.hxx,
+	* lib/generate_libvcsn.rb: Here. Move transducers only filter
+	  `is_ltl' to RW transducers only filters.
+
+2008-10-13  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Overhaul the is_letterized_transducer algorithm.
 	* include/vaucanson/algorithms/is_letterized.hh: Improve
 	  the documentation. Update the copyright notice. Cosmetic changes.
