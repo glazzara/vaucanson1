@@ -201,9 +201,11 @@ def write_makefile(type, context)
     out.print "EXTRA_lib" + type_ + "_la_SOURCES = "
     files = Dir.glob(type + "/*.cc").sort!
     files.reject! { |filename| filename == type + "/all.cc" }
+    real_files = Array.new
     files.each { |filename|
       if File.exist?("../include/vaucanson/algorithms/" + File.basename(filename, ".cc") + ".hh")
 	out.print "\\\n  ", filename, "\t"
+	real_files.push(filename)
       else
 	File.unlink(filename)
 	puts "Removing " + filename
@@ -213,7 +215,7 @@ def write_makefile(type, context)
     out.puts("MAINTAINERCLEANFILES += $(lib" + type_ + "_la_SOURCES) " +
              "$(EXTRA_lib" + type_ + "_la_SOURCES) " +
 	     type + "/lib" + type + ".mk")
-    write_all_cc(type, files)
+    write_all_cc(type, real_files)
   }
   puts("Generating " + type + "/lib" + type + ".mk")
 end
