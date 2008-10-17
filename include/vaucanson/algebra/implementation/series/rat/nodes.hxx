@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -80,24 +80,10 @@ namespace vcsn {
     template<typename M_, typename W_>
     Node<M_,W_>::~Node()
     {
-      delete constant_term_;
-    }
-
-    template<typename M_, typename W_>
-    W_* &		Node<M_,W_>::c()
-    {
-      return constant_term_;
-    }
-
-    template<typename M_, typename W_>  W_ const * &
-    Node<M_,W_>::c() const
-    {
-      return constant_term_;
     }
 
     template<typename M_, typename W_>
     Node<M_,W_>::Node()
-      : constant_term_(0)
     {}
 
     /*-----.
@@ -119,8 +105,6 @@ namespace vcsn {
     Zero<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Zero<M_, W_>;
-      if (this->constant_term_)
-	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -170,8 +154,6 @@ namespace vcsn {
     One<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new One<M_, W_>;
-      if (this->constant_term_)
-	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -221,8 +203,6 @@ namespace vcsn {
     Constant<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Constant<M_, W_>(value_);
-      if (this->constant_term_)
-	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -292,8 +272,6 @@ namespace vcsn {
     LeftWeighted<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new LeftWeighted<M_, W_>(weight_, *child_);
-      if (this->constant_term_)
-	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -370,8 +348,6 @@ namespace vcsn {
     RightWeighted<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new RightWeighted<M_, W_>(weight_, *child_);
-      if (this->constant_term_)
-	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 
@@ -442,8 +418,6 @@ namespace vcsn {
     Star<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Star<M_, W_>(*child_);
-      if (this->constant_term_)
-	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 
@@ -510,8 +484,6 @@ namespace vcsn {
     Product<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Product<M_, W_>(*left_, *right_);
-      if (this->constant_term_)
-	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 
@@ -590,8 +562,6 @@ namespace vcsn {
     Sum<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Sum<M_, W_>(*left_, *right_);
-      if (this->constant_term_)
-	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 

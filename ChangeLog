@@ -1,5 +1,12 @@
 2008-10-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hh,
+	include/vaucanson/algebra/implementation/series/rat/nodes.hxx:
+	Remove all occurrences of constant_term_, it does not appear
+	to serve any purpose and is not used anywhere. (ticket #183)
+
+2008-10-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/pipe_getters.hh, taf-kit/src/pipe_getters.hxx:
 	Remove dead code.
 
