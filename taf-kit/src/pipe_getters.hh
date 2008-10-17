@@ -92,29 +92,4 @@ public:
 };
 # endif // !WITH_TWO_ALPHABETS
 
-
-// Looks like boolean_tranducer::automaton_t is never loaded from file.
-// Make sure that it is not converted from something else (it would
-// case trouble with the pipe).  Most likely in vcsn-fmp, automaton_t
-// and boolean_transducer::automaton_t are the same (hence the
-// absence of declaration of the namespace)
-#  if (false)
-class boolean_transducer_getter
-  : public boost::static_visitor<boolean_transducer::automaton_t>
-{
-public:
-  boolean_transducer::automaton_t
-  operator() (boolean_transducer::automaton_t& a) const;
-
-  boolean_transducer::automaton_t
-  operator() (std::string& str) const;
-
-  boolean_transducer::automaton_t operator() (command_output_status& i) const;
-
-  template<typename T>
-  boolean_transducer::automaton_t operator() (T&) const;
-};
-#  endif // false
-
-
 #endif /* !PIPE_GETTERS_HH */
