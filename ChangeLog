@@ -1,5 +1,20 @@
 2008-10-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Merge the two manuals.
+	* Makefile.am: Generate just vaucanson-manual.pdf.
+	* taf-kit.tex: Remove developer mode tests; always include
+	  the text.
+	* vaucanson-developer-manual.tex: Remove.
+	* vaucanson-manual.tex: Renamed to vaucanson-user-manual.tex,
+	  and removed all the developer mode tests. Other than removing
+	  "Developer's" from the title, the unified manual is the same
+	  as the previous developer's manual, which makes it simpler to
+	  find and ensures it is distributed. Yes, the manual needs a
+	  rewrite, but at least this removes some unnecessary complexity.
+	* vaucanson-user-manual.tex: Rename to above.
+
+2008-10-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Small English fix.
 	* developer.tex: Indefinites are often plural in (modern)
 	  English.

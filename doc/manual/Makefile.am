@@ -48,9 +48,8 @@ tex-mostlyclean:
 mostlyclean-local: tex-mostlyclean
 
 
-# We ship and compile vaucanson-user-manual.pdf, but
-# vaucanson-developer-manual.pdf must be requested by hand.
-manual = $(srcdir)/vaucanson-user-manual.pdf
+# We compile and ship vaucanson-manual.pdf.
+manual = $(srcdir)/vaucanson-manual.pdf
 
 pdf: $(manual)
 
@@ -59,15 +58,14 @@ TEXI2PDF_FLAGS += --dvipdf -I manual.ext
 
 dist_pdf_DATA = $(manual)
 
-$(manual): $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
+$(manual): $(vaucanson_manual_sources) $(srcdir)/extex.pl
 	$(MAKE) $(AM_MAKEFLAGS) manual.ext
 	cd manual.ext && $(MAKE) $(AM_MAKEFLAGS) dvi
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
-$(srcdir)/vaucanson-developer-manual.pdf: manual.ext $(vaucanson_user_manual_sources)
-vaucanson_user_manual_sources =			\
-vaucanson-user-manual.tex			\
-vaucanson-developer-manual.tex			\
+$(srcdir)/vaucanson-manual.pdf: manual.ext $(vaucanson_manual_sources)
+vaucanson_manual_sources =			\
+vaucanson-manual.tex				\
 introduction.tex				\
 installation.tex				\
 taf-kit.tex					\
@@ -91,11 +89,11 @@ $(srcdir)/version.tex: $(top_srcdir)/configure.ac
 	echo "\def\VcsnDate{`LANG=C date +%Y-%m-%d`}" >> $*.tmp
 	mv -f $*.tmp $@
 
-EXTRA_DIST = $(vaucanson_user_manual_sources) $(manual)  \
+EXTRA_DIST = $(vaucanson_manual_sources) $(manual)  \
 	 generate-automata.sh extex.pl extex.mk
 
 # Extract commands that must be run to produce figures.
-manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
+manual.ext: $(vaucanson_manual_sources) $(srcdir)/extex.pl
 	perl -I$(top_srcdir)/build-aux -w	\
 	  $(srcdir)/extex.pl			\
 	  --output-dir=$@			\
@@ -103,7 +101,7 @@ manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
 	  --top_srcdir=$(top_srcdir)		\
 	  --builddir=.				\
 	  --top_builddir=$(top_builddir)	\
-          $(vaucanson_user_manual_sources)
+          $(vaucanson_manual_sources)
 	touch $@
 
 MAINTAINERCLEANFILES = $(vcsndldir_data) automata.tex
@@ -115,8 +113,7 @@ maintainer-clean-local:
 ## ---------------------------- ##
 
 vcsndldir_data =				\
-$(dist_pdf_DATA)				\
-$(srcdir)/vaucanson-developer-manual.pdf
+$(dist_pdf_DATA)
 
 install-epita: $(vcsndldir_data)
 	$(INSTALL_DATA) $(vcsndldir_data) $(vcsndldir)
@@ -142,7 +139,7 @@ deep-clean: clean maintainer-clean-local
 # ship share/ too, but it's one level higher currently.
 
 EXTRA_MINIDIST = $(EXTRA_DIST)
-MINIDISTDIR = vaucanson-user-manual
+MINIDISTDIR = vaucanson-manual
 # Files to remove from the tarball.
 MINIDIST_IGNORE = \
   -name '*~' -o -name '.svn' -o -name '+committed'

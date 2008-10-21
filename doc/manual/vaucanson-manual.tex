@@ -70,14 +70,6 @@
 \input ldf/stl.sty
 \input ldf/vaucanson.sty
 
-%% Whether the developer's documentation is included.
-\newboolean{developer}
-\ifx\withDeveloperSection\undefined
-  \setboolean{developer}{false}
-\else
-  \setboolean{developer}{true}
-\fi
-
 % Document a figure.
 \newenvironment{legend}{%
   \begin{quote}%
@@ -170,11 +162,7 @@
 %
 \newcommand{\execdisplay}[3]{\includegenerated{#1}}
 
-\ifthenelse{\boolean{developer}}{
-  \title{The \Vauc \TFKv \\ Developer's Manual}
-}{
-  \title{The \Vauc \TFKv \\ User's Manual}
-}
+\title{The \Vauc \TFKv Manual}
 \author{The \Vauc \textsc{Group}}
 \date{\VcsnDate}
 
@@ -191,26 +179,21 @@
 \input{introduction}
 \input{installation}
 \input{taf-kit}
-\ifthenelse{\boolean{developer}}{
-  \input{vaucanswig}
-  \input{library}
-  \input{developer}
-}{}
+\input{vaucanswig}
+\input{library}
+\input{developer}
 
-\ifthenelse{\boolean{developer}}{\appendix}{}
+\appendix
 
 \input{automata}
+\input{theory}
+\input{xml}
+\input{specification}
 
-\ifthenelse{\boolean{developer}}{
-  \input{theory}
-  \input{xml}
-  \input{specification}
+\printindex
 
-  \printindex
-
-  \bibliographystyle{apalike}
-  \bibliography{vaucanson.bib}
-}{}
+\bibliographystyle{apalike}
+\bibliography{vaucanson.bib}
 
 \end{document}
 
