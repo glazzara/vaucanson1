@@ -1,5 +1,11 @@
 2008-10-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Small English fix.
+	* developer.tex: Indefinites are often plural in (modern)
+	  English.
+
+2008-10-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove Licence and Contact sections from vaucanswig.tex.
 	* vaucanswig.tex: Remove sections which duplicate content from
 	  elsewhere (they used to be needed when the document was a
