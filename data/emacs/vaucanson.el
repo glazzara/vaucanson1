@@ -1,6 +1,6 @@
 ;;; vaucanson.el --- Miscellaneous functions for Vaucanson development.
 ;;
-;; Copyright (C) 2006 The Vaucanson Group
+;; Copyright (C) 2006, 2008 The Vaucanson Group
 
 ;; Author: Michael Cadilhac <michael.cadilhac@lrde.org>
 ;; Keywords: Vaucanson, indentation.
@@ -24,7 +24,9 @@
 
 ;; If you want to use Vaucanson indentation, add the following to your
 ;; .emacs (init.el):
-;; (setq c-default-style "Vaucanson")
+;; (setq c-default-style "vaucanson")
+;; or M-x customize-variable RET c-default-style RET and choose
+;; "vaucanson" for C++ mode.
 
 ;; To use M-x vaucansonize-buffer RET, just add (require 'vaucanson).
 
@@ -53,10 +55,10 @@
   "Prefix for CPP guard, e.g. `VCSN_'.")
 
 ;; Add indentation style
-(unless (assoc "Vaucanson" c-style-alist)
+(unless (assoc "vaucanson" c-style-alist)
   (add-to-list
    'c-style-alist
-   '("Vaucanson"
+   '("vaucanson"
      (c-basic-offset	       . 2)
      (c-comment-only-line-offset . 0)
      (c-hanging-braces-alist     . ((substatement-open before after)))
@@ -200,7 +202,7 @@ Actually, test if `vaucanson.mk' is in a subdir of path."
     (setq buffer (current-buffer)))
   (with-current-buffer buffer
     (let (c-indentation-style)
-      (c-set-style "Vaucanson")
+      (c-set-style "vaucanson")
       (barf-if-buffer-read-only)
       (cpp-indent-macros (point-min) (point-max))
       (indent-region (point-min) (point-max) nil)

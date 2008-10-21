@@ -1,3 +1,9 @@
+2008-10-21  Reuben Thomas  <rrt@sc3d.org>
+
+	Lower-case c-style name to avoid surprises.
+	* vaucanson.el: Change "Vaucanson" to "vaucanson" for
+	  consistency with other (built-in) style names.
+
 2008-10-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/rat/nodes.hh,
