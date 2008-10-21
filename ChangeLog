@@ -1,5 +1,12 @@
 2008-10-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Improve typesetting of Vaucanswig chapter.
+	* vaucanson-user-manual.tex: Add some necessary macros.
+	* vaucanswig.tex: Add lots of mark-up, and fix some small English
+	  problems.
+
+2008-10-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Lower-case c-style name to avoid surprises.
 	* vaucanson.el: Change "Vaucanson" to "vaucanson" for
 	  consistency with other (built-in) style names.
