@@ -1,15 +1,15 @@
 \chapter{Developer Guide}
 
-The chapter is work in progress.  It is not meant for user of the
-\Vauc library, but to developer and contributor who wish to include
-code in \Vauc.
+The chapter is a work in progress.  It is not meant for users of the
+\Vauc library, but for developers and those who wish to contribute
+code to \Vauc.
 
 \section{Tools}
 
 \subsection{Maintainer Tools}
 
-We use a number of tools during the development, so called
-\Index{\dfn{maintainer tools}} because they are not required by the
+We use a number of tools during development which we call
+\Index{\dfn{maintainer tools}}, because they are not required by the
 end user.
 \begin{description}
 \item[Autoconf] Generates \command{configure} which probes the user
@@ -112,7 +112,7 @@ The \Vauc package is organized as follows:
   \dir{doc/css}{CSS style for Doxygen.}
   \dir{doc/makefiles}{Sample Makefile to reduce compilation time in
     \Vauc.}
-  \dir{doc/manual}{User's (and developer's) manual.}
+  \dir{doc/manual}{Manual.}
   \dir{doc/share}{LRDE share repository.}
   \dir{doc/xml}{XML proposal.}
   \dir{include/vaucanson}{Library start point: defines classical entry
@@ -662,15 +662,16 @@ Advantages over XML:
 \item simple and efficient (designed to be read and written to streams
   with very low memory footprint and minimum complexity),
 
-\item less bytes in file,
+\item more compact,
 
-\item not strongely typed (can be dumped from one automaton type and
+\item not strongly typed (can be dumped from one automaton type and
   loaded to another).
 \end{itemize}
 
-Drawbacks from XML:
+Drawbacks relative to XML:
+
 \begin{itemize}
-\item not strongely typed (one cannot know what automaton type to
+\item not strongly typed (one cannot know what automaton type to
   build by only looking at the raw data).
 
 \item currently does not (probably) support transducers.

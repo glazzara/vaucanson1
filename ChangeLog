@@ -1,5 +1,11 @@
 2008-10-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Fix some English and an out-of-date reference.
+	* developer.tex: Remove reference to the two flavours of the
+	  manual, and fix some English.
+
+2008-10-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Merge the two manuals.
 	* Makefile.am: Generate just vaucanson-manual.pdf.
 	* taf-kit.tex: Remove developer mode tests; always include
