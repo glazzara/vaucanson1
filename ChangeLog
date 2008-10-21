@@ -1,5 +1,12 @@
 2008-10-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove Licence and Contact sections from vaucanswig.tex.
+	* vaucanswig.tex: Remove sections which duplicate content from
+	  elsewhere (they used to be needed when the document was a
+	  standalone manual).
+
+2008-10-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Improve typesetting of Vaucanswig chapter.
 	* vaucanson-user-manual.tex: Add some necessary macros.
 	* vaucanswig.tex: Add lots of mark-up, and fix some small English
