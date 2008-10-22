@@ -1,3 +1,12 @@
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Keep the series representation in the structure.
+	* include/vaucanson/algebra/implementation/series/series.hh,
+	* include/vaucanson/algebra/implementation/series/series.hxx: Add an
+	  attribut to keep the series representation, fix the existing
+	  constructor to work with the default representation and add a new
+	  constructor to specify a representation.
+
 2008-10-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Update test suite to cope with [2300].

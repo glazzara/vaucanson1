@@ -17,8 +17,9 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_HH
 
-#include <vaucanson/algebra/concept/series_base.hh>
-#include <vaucanson/design_pattern/slots.hh>
+# include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/algebra/implementation/series/series_rep.hh>
+# include <vaucanson/design_pattern/slots.hh>
 
 
 namespace vcsn {
@@ -40,18 +41,20 @@ namespace vcsn {
 	private SetSlot<Monoid, monoid_slot_tag>
     {
       Series(const Semiring& w, const Monoid& m);
+      Series(const Semiring& w, const Monoid& m, const series_rep<Semiring, Monoid>& sr);
       Series(const Series& other);
 
       const Semiring&	semiring() const;
 
       const Monoid&	monoid() const;
 
+      const boost::shared_ptr<series_rep<Semiring, Monoid> > representation() const;
+
+      bool operator==(const Series<Semiring, Monoid>&) const;
+
+      protected:
+      const boost::shared_ptr<series_rep<Semiring, Monoid> > rep_;
     };
-
-    template<typename W, typename M>
-    bool operator==(const Series<W, M>&,
-		    const Series<W, M>&);
-
 
     template <class W, class M, class NewW, class NewM>
     struct mute_series_traits<Series<W, M>, NewW, NewM >

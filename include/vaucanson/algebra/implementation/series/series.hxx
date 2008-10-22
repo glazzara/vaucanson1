@@ -31,14 +31,27 @@ namespace vcsn {
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m)
       : SetSlot<Semiring,semiring_slot_tag>(w),
-	SetSlot<Monoid,monoid_slot_tag>(m)
-    {}
+	SetSlot<Monoid,monoid_slot_tag>(m),
+      rep_(series_rep_default<Semiring, Monoid>::get_instance())
+    {
+    }
+
+    template<typename Semiring, typename Monoid>
+    Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m,
+				     const series_rep<Semiring, Monoid>& sr)
+      : SetSlot<Semiring,semiring_slot_tag>(w),
+	SetSlot<Monoid,monoid_slot_tag>(m),
+      rep_(boost::shared_ptr<series_rep<Semiring, Monoid> >(new series_rep<Semiring, Monoid>(sr)))
+    {
+    }
+
 
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Series& other) :
       SeriesBase<Series<Semiring,Monoid> >(other),
       SetSlot<Semiring,semiring_slot_tag>(other),
-      SetSlot<Monoid,monoid_slot_tag>(other)
+      SetSlot<Monoid,monoid_slot_tag>(other),
+      rep_(other.rep_)
     {}
 
     template<typename Semiring, typename Monoid>
@@ -53,12 +66,19 @@ namespace vcsn {
       return static_cast<const SetSlot<Monoid,monoid_slot_tag>* >(this)->_structure_get();
     }
 
-    template<typename W, typename M>
-    bool operator==(const Series<W, M>& s1,
-		    const Series<W, M>& s2)
+    template<typename Semiring, typename Monoid>
+    const boost::shared_ptr<series_rep<Semiring, Monoid> >
+    Series<Semiring, Monoid>::representation() const
     {
-      return & s1.monoid() == & s2.monoid() &&
-	& s1.semiring() == & s2.semiring();
+      return rep_;
+    }
+
+    template<typename Semiring, typename Monoid>
+    bool Series<Semiring, Monoid>::operator==(const Series<Semiring, Monoid>& s2) const
+    {
+      return & monoid() == & s2.monoid() &&
+	& semiring() == & s2.semiring() &&
+	rep_ == s2.rep_;
     }
 
     template <class W, class M, class NewW, class NewM>
