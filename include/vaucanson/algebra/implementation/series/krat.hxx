@@ -64,7 +64,7 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     bool op_is_finite_app(const algebra::Series<W, M>&,
-	  		  const rat::exp<Tm, Tw>& m)
+			  const rat::exp<Tm, Tw>& m)
     {
       vcsn::IsFiniteAppMatcher<
 	algebra::Series<W, M>,
@@ -88,7 +88,7 @@ namespace vcsn
 
     template <typename W, typename M, typename Tm, typename Tw>
     Tm op_choose_from_supp(const algebra::Series<W, M>&,
-	  		   const rat::exp<Tm, Tw>& m)
+			   const rat::exp<Tm, Tw>& m)
     {
       rat::RandomVisitor<Tm, Tw> v;
       m.accept(v);
@@ -97,7 +97,7 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     const rat::exp<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>),
-	  				   SELECTOR2(rat::exp<Tm, Tw>))
+					   SELECTOR2(rat::exp<Tm, Tw>))
     {
       static const rat::exp<Tm, Tw> instance = rat::exp<Tm, Tw>::one();
       return instance;
@@ -105,7 +105,7 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     const rat::exp<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
-	  			       SELECTOR2(rat::exp<Tm, Tw>))
+				       SELECTOR2(rat::exp<Tm, Tw>))
     {
       static const rat::exp<Tm, Tw> instance = rat::exp<Tm, Tw>::zero();
       return instance;
@@ -130,8 +130,8 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     void op_in_add(const algebra::Series<W, M>&,
-  		   rat::exp<Tm, Tw>& dst,
-  		   const rat::exp<Tm, Tw>& arg)
+		   rat::exp<Tm, Tw>& dst,
+		   const rat::exp<Tm, Tw>& arg)
     {
       // case E + 0
       if (arg.base()->what() == rat::Node<Tm, Tw>::zero)
@@ -150,8 +150,8 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-	  		    const rat::exp<Tm, Tw>& a,
-	  		    const rat::exp<Tm, Tw>& b)
+			    const rat::exp<Tm, Tw>& a,
+			    const rat::exp<Tm, Tw>& b)
     {
       rat::exp<Tm, Tw> ret(a);
       op_in_add(s, ret, b);
@@ -160,8 +160,8 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     void op_in_mul(const algebra::Series<W, M>& s,
-	  	   rat::exp<Tm, Tw>& dst,
-	  	   const rat::exp<Tm, Tw>& arg)
+		   rat::exp<Tm, Tw>& dst,
+		   const rat::exp<Tm, Tw>& arg)
     {
       typedef rat::Node<Tm, Tw>			node_t;
       typedef typename  rat::Node<Tm, Tw>::type	type;
@@ -179,7 +179,7 @@ namespace vcsn
 
       // case 0 . E -> 0
       if (this_type == node_t::zero)
-      	return;
+	return;
 
       // case E . 0 -> 0
       if (arg_type == node_t::zero)
@@ -232,12 +232,23 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-	  		    const rat::exp<Tm, Tw>& a,
-	  		    const rat::exp<Tm, Tw>& b)
+			    const rat::exp<Tm, Tw>& a,
+			    const rat::exp<Tm, Tw>& b)
     {
       rat::exp<Tm, Tw> ret(a);
       op_in_mul(s, ret, b);
       return ret;
+    }
+
+    template <typename W, typename M, typename Tm, typename Tw, typename St>
+    St&
+    op_rout(const algebra::Series<W, M>& s,
+	    St& st,
+	    const rat::exp<Tm, Tw>& e)
+    {
+      rat::DumpVisitor<Tm, Tw, W, M> v (st, s.rep_);
+      e.accept(v);
+      return st;
     }
 
     /*---------------------.
@@ -246,16 +257,16 @@ namespace vcsn
 
     template<typename Tm, typename Tw, typename M, typename W>
     rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
-  				SELECTOR2(rat::exp<Tm, Tw>),
-  				const Tm& m_value)
+				SELECTOR2(rat::exp<Tm, Tw>),
+				const Tm& m_value)
     {
       return new rat::Constant<Tm, Tw>(m_value);
     }
 
     template<typename Tm, typename Tw, typename M, typename W>
     rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
-	  			SELECTOR2(rat::exp<Tm, Tw>),
-	  			char m_value)
+				SELECTOR2(rat::exp<Tm, Tw>),
+				char m_value)
     {
       const char str[] = {m_value, '\0'};
       return new rat::Constant<Tm, Tw>(str);
@@ -263,23 +274,23 @@ namespace vcsn
 
     template<typename Tm, typename Tw, typename W, typename M, typename oTm>
     rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>) s,
-	  			SELECTOR2(rat::exp<Tm, Tw>),
-	  			SELECTOR(M),
-	  			const oTm& m_value)
+				SELECTOR2(rat::exp<Tm, Tw>),
+				SELECTOR(M),
+				const oTm& m_value)
     {
       // FIXME: this is completely broken. It should break up m_value
       // into letters.
       if (m_value == identity_value(SELECT(M), SELECT(oTm)))
 	return rat::exp<Tm, Tw>::one();
       return rat::exp<Tm, Tw>::constant(op_convert(s.monoid(), SELECT(Tm),
-	  					   m_value));
+						   m_value));
     }
 
     template<typename Tm, typename Tw, typename W, typename M, typename oTw>
     rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
-	  			SELECTOR2(rat::exp<Tm, Tw>),
-	  			SELECTOR(W),
-	  			const oTw& w_value)
+				SELECTOR2(rat::exp<Tm, Tw>),
+				SELECTOR(W),
+				const oTw& w_value)
     {
       if (w_value == identity_value(SELECT(W), SELECT(oTw)))
 	return rat::exp<Tm, Tw>::one();
@@ -294,22 +305,22 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     void op_assign(const algebra::Series<W, M>&,
-	  	   const M&,
-	  	   rat::exp<Tm, Tw>& dst,
-	  	   const oTm& src)
+		   const M&,
+		   rat::exp<Tm, Tw>& dst,
+		   const oTm& src)
     {
       // FIXME: this is completely broken also.
       if (src == identity_value(SELECT(M), SELECT(oTm)))
-    	dst = rat::exp<Tm, Tw>::one();
+	dst = rat::exp<Tm, Tw>::one();
       else
 	dst = rat::exp<Tm, Tw>::constant(src);
     }
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
     void op_assign(const algebra::Series<W, M>&,
-	  	   const W& semiring,
-	  	   rat::exp<Tm, Tw>& dst,
-	  	   const oTw& src)
+		   const W& semiring,
+		   rat::exp<Tm, Tw>& dst,
+		   const oTw& src)
     {
       dst = op_convert
       (SELECT2(algebra::Series<W, M>), SELECT2(rat::exp<Tm, Tw>), SELECT(W), src);
@@ -321,14 +332,14 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw>
     bool op_starable(const algebra::Series<W, M>&,
-	 	     const rat::exp<Tm, Tw>&)
+		     const rat::exp<Tm, Tw>&)
     {
       return true;
     }
 
     template<typename W, typename M, typename Tm, typename Tw>
     void op_in_star(const algebra::Series<W, M>&,
-	  	    rat::exp<Tm, Tw>& dst)
+		    rat::exp<Tm, Tw>& dst)
     {
       // rewrite 0* as 1
       if (dst.base()->what() == rat::Node<Tm, Tw>::zero)
@@ -353,21 +364,21 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     void op_in_add(const algebra::Series<W, M>& s,
-  		   const M& monoid,
-  		   rat::exp<Tm, Tw>& dst,
-  		   const oTm& src)
+		   const M& monoid,
+		   rat::exp<Tm, Tw>& dst,
+		   const oTm& src)
     {
       op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
-  				   SELECT2(rat::exp<Tm, Tw>),
-  				   SELECT(M),
-  				   src));
+				   SELECT2(rat::exp<Tm, Tw>),
+				   SELECT(M),
+				   src));
     }
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-	  		    const M& monoid,
-	  		    const rat::exp<Tm, Tw>& a,
-	  		    const oTm& b)
+			    const M& monoid,
+			    const rat::exp<Tm, Tw>& a,
+			    const oTm& b)
     {
       rat::exp<Tm, Tw> ret(a);
       op_in_add(s, monoid, ret, b);
@@ -376,9 +387,9 @@ namespace vcsn
 
     template<typename M, typename W, typename oTm, typename Tm, typename Tw>
     rat::exp<Tm, Tw> op_add(const M& monoid,
-	  		    const algebra::Series<W, M>& s,
-	  		    const oTm& a,
-	  		    const rat::exp<Tm, Tw>& b)
+			    const algebra::Series<W, M>& s,
+			    const oTm& a,
+			    const rat::exp<Tm, Tw>& b)
     {
       rat::exp<Tm, Tw> ret(b);
       op_in_add(s, monoid, ret, a);
@@ -397,16 +408,16 @@ namespace vcsn
     {
       precondition(& s.semiring() == & semiring);
       op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
-	  			   SELECT2(rat::exp<Tm, Tw>),
-	  			   SELECT(W),
-	  			   src));
+				   SELECT2(rat::exp<Tm, Tw>),
+				   SELECT(W),
+				   src));
     }
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
     rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-	  		    const W& semiring,
-	  		    const rat::exp<Tm, Tw>& a,
-	  		    const oTw& b)
+			    const W& semiring,
+			    const rat::exp<Tm, Tw>& a,
+			    const oTw& b)
     {
       rat::exp<Tm, Tw> ret(a);
       op_in_add(s, semiring, ret, b);
@@ -415,9 +426,9 @@ namespace vcsn
 
     template<typename W, typename M, typename oTw, typename Tm, typename Tw>
     rat::exp<Tm, Tw> op_add(const W& semiring,
-	  		    const algebra::Series<W, M>& s,
-	  		    const oTw& a,
-	  		    const rat::exp<Tm, Tw>& b)
+			    const algebra::Series<W, M>& s,
+			    const oTw& a,
+			    const rat::exp<Tm, Tw>& b)
     {
       rat::exp<Tm, Tw> ret(b);
       op_in_add(s, semiring, ret, a);
@@ -430,9 +441,9 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
     void op_in_mul(const algebra::Series<W, M>& s,
-	  	   const W& semiring,
-	  	   rat::exp<Tm, Tw>& ret,
-	  	   const oTw& w)
+		   const W& semiring,
+		   rat::exp<Tm, Tw>& ret,
+		   const oTw& w)
     {
       precondition(& s.semiring() == & semiring);
       (void) s; (void) semiring;
@@ -525,9 +536,9 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
     rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-	  		    const W& semiring,
-	  		    const rat::exp<Tm, Tw>& a,
-	  		    const oTw& w)
+			    const W& semiring,
+			    const rat::exp<Tm, Tw>& a,
+			    const oTw& w)
     {
       rat::exp<Tm, Tw> ret(a);
       op_in_mul(s, semiring, ret, w);
@@ -536,9 +547,9 @@ namespace vcsn
 
     template<typename W, typename M, typename oTw, typename Tm, typename Tw>
     rat::exp<Tm, Tw> op_mul(const W& semiring,
-	  		    const algebra::Series<W, M>& s,
-	  		    const oTw& w,
-	  		    const rat::exp<Tm, Tw>& b)
+			    const algebra::Series<W, M>& s,
+			    const oTw& w,
+			    const rat::exp<Tm, Tw>& b)
     {
       precondition(& s.semiring() == & semiring);
       (void) s; (void) semiring;
@@ -588,8 +599,8 @@ namespace vcsn
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     Tw op_series_get(const algebra::Series<W, M>& s,
-	  	     const rat::exp<Tm, Tw>& p,
-	  	     const oTm& m)
+		     const rat::exp<Tm, Tw>& p,
+		     const oTm& m)
     {
       typedef typename standard_of_traits<algebra::Series<W, M>,
 					  rat::exp<Tm, Tw> >::
@@ -604,13 +615,13 @@ namespace vcsn
     template<typename W, typename M, typename Tm, typename Tw,
     typename oTm, typename oTw>
     void op_series_set(const algebra::Series<W, M>& s,
-  		       rat::exp<Tm, Tw>& p,
-  		       const oTm& m,
-  		       const oTw& w)
+		       rat::exp<Tm, Tw>& p,
+		       const oTm& m,
+		       const oTw& w)
     {
       if ((m == algebra::identity_as<oTm>::of(s.monoid())) &&
-  	  (w == algebra::identity_as<oTw>::of(s.semiring())) &&
-  	  (p == algebra::zero_as<rat::exp<Tm, Tw> >::of(s)))
+	  (w == algebra::identity_as<oTw>::of(s.semiring())) &&
+	  (p == algebra::zero_as<rat::exp<Tm, Tw> >::of(s)))
       {
 	p = algebra::identity_as<rat::exp<Tm, Tw> >::of(s).value();
 	return ;
@@ -646,9 +657,9 @@ namespace vcsn
       }
       if (!exist)
 	op_in_add(s, p, op_mul(s.semiring(), s, w,
-		       	       rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
-			       					     SELECT(Tm),
-				       				     m))));
+			       rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
+								     SELECT(Tm),
+								     m))));
     }
 
   } // ! algebra
@@ -677,7 +688,7 @@ namespace vcsn
     template <class W, class M, class Tm, class Tw>
     Element<algebra::Series<W,M>, rat::exp<Tm,Tw> >
     op_choose(const algebra::Series<W,M>& s,
-      	      SELECTOR2(rat::exp<Tm,Tw>))
+	      SELECTOR2(rat::exp<Tm,Tw>))
     {
       Element<algebra::Series<W,M>, rat::exp<Tm, Tw> > e(s);
       // FIXME : add global constants to do this !

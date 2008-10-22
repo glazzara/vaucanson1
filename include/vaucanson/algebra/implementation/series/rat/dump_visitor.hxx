@@ -64,7 +64,7 @@ namespace vcsn {
     | DumpVisitor |
     `------------*/
 
-    template <class Word, class Weight>
+    template <class Word, class Weight, typename Semiring, typename Monoid>
     class DumpVisitor : public ConstNodeVisitor<Word, Weight>
     {
     public:
@@ -75,12 +75,19 @@ namespace vcsn {
 
     public:
 
+      DumpVisitor(std::ostream& ostr,
+		  boost::shared_ptr<vcsn::algebra::series_rep<Semiring, Monoid> > sr)
+	: ostr_ (ostr),
+	  series_rep_ (sr)
+      {
+      }
+
       DumpVisitor(std::ostream& ostr = std::cout)
 	: ostr_ (ostr)
       {
-	if (not ostr_.pword(rat::zero()))
-	  ostr_ << setzero(algebra::letter_traits<typename Word::value_type>::default_zero());
+	series_rep_ = vcsn::algebra::series_rep_default<Semiring, Monoid>::get_instance();
 
+	/* Should be removed soon */
 	if (not ostr_.pword(rat::id()))
 	  ostr_ << setid(algebra::letter_traits<typename Word::value_type>::default_epsilon());
       }
@@ -98,9 +105,9 @@ namespace vcsn {
       {
 	if (cond)
 	  {
-	    ostr_ << "(";
+	    ostr_ << series_rep_->open_par;
 	    node->accept(*this);
-	    ostr_ << ")";
+	    ostr_ << series_rep_->close_par;
 	  }
 	else
 	  node->accept(*this);
@@ -117,7 +124,7 @@ namespace vcsn {
       void
       product_print_child(const node_t* child)
       {
-	switch(child->what())
+	switch (child->what())
 	  {
 	  case NODE_SUM:
 	    // If MODE_SUM is already set, there is no need to enclose the
@@ -139,14 +146,14 @@ namespace vcsn {
 	const long verbose = ostr_.iword(print_mode()) & MODE_MUL;
 
 	if (verbose)
-	  ostr_ << "(";
+	  ostr_ << series_rep_->open_par;
 
 	product_print_child(lhs);
-	ostr_ << ".";
+	ostr_ << series_rep_->times;
 	product_print_child(rhs);
 
 	if (verbose)
-	  ostr_ << ")";
+	  ostr_ << series_rep_->close_par;
       }
 
       virtual
@@ -156,14 +163,14 @@ namespace vcsn {
 	const long verbose = ostr_.iword(print_mode()) & MODE_ADD;
 
 	if (verbose)
-	  ostr_ << "(";
+	  ostr_ << series_rep_->open_par;
 
 	lhs->accept(*this);
-	ostr_ << "+";
+	ostr_ << series_rep_->plus;
 	rhs->accept(*this);
 
 	if (verbose)
-	  ostr_ << ")";
+	  ostr_ << series_rep_->close_par;
       }
 
       virtual
@@ -191,7 +198,7 @@ namespace vcsn {
 	    enclose_if(mode & MODE_STAR, node);
 	    break;
 	  }
-	ostr_ << "*";
+	ostr_ << series_rep_->times;
       }
 
       virtual
@@ -224,13 +231,14 @@ namespace vcsn {
 	  }
 
 	if (enclose_all)
-	  ostr_ << "(";
+	  ostr_ << series_rep_->open_par;
 
-	ostr_ << "{" << w << "} ";
+	ostr_ << series_rep_->open_weight << w
+	      << series_rep_->close_weight << series_rep_->spaces.front();
 	enclose_if(verbose, node);
 
 	if (enclose_all)
-	  ostr_ << ")";
+	  ostr_ << series_rep_->close_par;
       }
 
       virtual
@@ -263,13 +271,14 @@ namespace vcsn {
 	  }
 
 	if (enclose_all)
-	  ostr_ << "(";
+	  ostr_ << series_rep_->open_par;
 
 	enclose_if(verbose, node);
-	ostr_ << " {" << w << "}";
+	ostr_ << series_rep_->spaces.front() << series_rep_->open_weight
+	      << w << series_rep_->close_weight;
 
 	if (enclose_all)
-	  ostr_ << ")";
+	  ostr_ << series_rep_->close_par;
       }
 
       virtual
@@ -283,7 +292,7 @@ namespace vcsn {
       void
       zero()
       {
-	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::zero()));
+	ostr_ << series_rep_->zero;
       }
 
       virtual
@@ -295,20 +304,21 @@ namespace vcsn {
 
     protected:
       std::ostream&	ostr_;
+      boost::shared_ptr<vcsn::algebra::series_rep<Semiring, Monoid> > series_rep_;
     };
 
     /*------------.
     | operator << |
     `------------*/
 
-    template <class Word, class Weight>
-    std::ostream&
-    operator << (std::ostream& ostr, const exp<Word, Weight>& e)
-    {
-      DumpVisitor<Word, Weight> v (ostr);
-      e.accept(v);
-      return ostr;
-    }
+//    template <class Word, class Weight>
+//    std::ostream&
+//    operator << (std::ostream& ostr, const exp<Word, Weight>& e)
+//    {
+//      DumpVisitor<Word, Weight, true, true> v (ostr);
+//      e.accept(v);
+//      return ostr;
+//    }
 
     /*------.
     | setpm |

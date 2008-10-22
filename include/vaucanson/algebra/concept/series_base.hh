@@ -242,6 +242,10 @@ namespace vcsn {
     T
     op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
 
+    /// Implementation of generic stream output operator for series.
+    template<typename S, typename St, typename T>
+    St& op_rout(const algebra::SeriesBase<S>& s, St& st, const T& se);
+
   } // algebra
 
 } // vcsn

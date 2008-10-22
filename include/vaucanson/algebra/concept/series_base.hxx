@@ -273,6 +273,12 @@ namespace vcsn {
       return dst.value();
     }
 
+    /// Implementation of generic stream output operator for series.
+    template<typename S, typename St, typename T>
+    St& op_rout(const algebra::SeriesBase<S>& s, St& st, const T& se)
+    {
+      return op_rout(s.self, st, se);
+    }
   } // algebra
 
 } // vcsn

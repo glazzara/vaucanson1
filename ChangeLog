@@ -1,5 +1,19 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Add op_rout function in concept and implementation of series.
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx: Add op_rout
+	  dispatch.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	  Add specialization of op_rout function on polynoms.
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	  Add specialization of op_rout function on krat.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Remove the old token representation system.
 	* include/vaucanson/algebra/concept/letter.hh,
 	* include/vaucanson/algebra/concept/letter.hxx,

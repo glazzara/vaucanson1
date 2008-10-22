@@ -20,8 +20,10 @@
 # include <ostream>
 # include <string>
 # include <set>
+# include <boost/shared_ptr.hpp>
 
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
+# include <vaucanson/algebra/implementation/series/series_rep.hh>
 # include <vaucanson/misc/iomanip.hh>
 
 namespace vcsn
@@ -44,9 +46,9 @@ namespace vcsn
       };
 
     /// Printing of a rational expression.
-    template <class Word, class Weight>
-    std::ostream&
-    operator << (std::ostream& ostr, const exp<Word, Weight>& e);
+//    template <class Word, class Weight>
+//    std::ostream&
+//    operator << (std::ostream& ostr, const exp<Word, Weight>& e);
 
     /// Manipulator to set the print mode of a rational expression.
     struct setpm : public misc::iomanip<setpm>

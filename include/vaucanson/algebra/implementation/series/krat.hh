@@ -277,6 +277,12 @@ namespace vcsn {
     op_choose(const algebra::Series<W,M>& s,
 	      SELECTOR2(rat::exp<Tm,Tw>));
 
+    template <typename W, typename M, typename Tm, typename Tw, typename St>
+    St&
+    op_rout(const algebra::Series<W, M>,
+	    St& st,
+	    const rat::exp<Tm, Tw>);
+
     /*----------.
     | Transpose |
     `----------*/
