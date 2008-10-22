@@ -29,26 +29,25 @@ For  any  SWIG-supported   language,  using  Vaucanswig  requires  the
 following steps:
 
 \begin{enumerate}
-\item generation of the language interface from SWIG input sources
+\item Generate the language interface from SWIG input sources
   (\code{.i} files) provided by Vaucanswig,
 
-\item compilation of the interface into extensions to the language
-  library (e.g.  dynamically loadable shared package module for
-  Python).
+\item Compile the interface into extensions to the language library
+  (e.g. dynamically-loadable shared package modules for Python).
 
-\item loading the extension into the target language.
+\item Load the extensions into the target language environment.
 \end{enumerate}
 
-Vaucanswig does not help with these two steps,
-except for the Python language target (see below).  Refer to the SWIG
-documentation for information about generating language extensions
-from SWIG input files for other languages.
+Vaucanswig does not help with the latter two steps, except for the
+Python language target (see below). Refer to the SWIG documentation
+for information about generating language extensions from SWIG input
+files for other languages.
 
 \subsection{What is provided?}
 
 \subsubsection{Glossary}
 
-In the next sections, the name ``category'' will refer to the set of
+In the following sections, the term ``category'' refers to the set of
 features related to a particular algebraic configuration in \Vauc.
 
 The following categories are predefined in Vaucanswig:
@@ -56,10 +55,10 @@ The following categories are predefined in Vaucanswig:
 \begin{center}
 \begin{tabular}{*{6}{|c}|}
 \hline
-Category            & Semiring values  & Monoid values  & Series          &Series values  & Expression values\\
+Category             & Semiring values & Monoid values  & Series          &Series values  & Expression values\\
 \hline
-\code{usual}        & \code{bool}      &  \code{string} & \SerSAnMon{\B}{\Ae} & \code{polynom}&   \code{exp}\\
-\code{numerical}    & \code{int}       &  \code{string} & \SerSAnMon{\Z}{\Ae} & \code{polynom}&   \code{exp}\\
+\code{usual}         & \code{bool}     &  \code{string} & \SerSAnMon{\B}{\Ae} & \code{polynom}&   \code{exp}\\
+\code{numerical}     & \code{int}      &  \code{string} & \SerSAnMon{\Z}{\Ae} & \code{polynom}&   \code{exp}\\
 \code{tropical\_min} & \code{int}      &  \code{string} & \SerSAnMon{\Z(\min,+)}{\Ae}& \code{polynom}&   \code{exp}\\
 \code{tropical\_max} & \code{int}      &  \code{string} & \SerSAnMon{\Z(\max,+)}{\Ae}& \code{polynom}&   \code{exp}\\
 \hline
@@ -187,8 +186,7 @@ contains the following \textbf{function}:
 \item[make\_context] D\_alphabet\_t $\to$ D\_context
 \end{description}
   
-Algebra usage
-\code{}\code{}\code{}`
+\subsubsection{Algebra usage}
 
 All classes are equipped with a \code{describe} method for
 textual representation of values. Example use (Python):
