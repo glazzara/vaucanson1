@@ -204,6 +204,8 @@ vaucanson/algebra/implementation/free_monoid/words.hh				     \
 vaucanson/algebra/implementation/free_monoid/words.hxx				     \
 vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh  \
 vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx \
+vaucanson/algebra/implementation/monoid/monoid_rep.hh				     \
+vaucanson/algebra/implementation/monoid/monoid_rep.hxx				     \
 vaucanson/algebra/implementation/letter/char_letter.hh				     \
 vaucanson/algebra/implementation/letter/char_letter.hxx				     \
 vaucanson/algebra/implementation/letter/couple_letter.hh			     \
@@ -262,6 +264,8 @@ vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx			     \
 vaucanson/algebra/implementation/series/series.hh				     \
 vaucanson/algebra/implementation/series/series.hxx				     \
+vaucanson/algebra/implementation/series/series_rep.hh				     \
+vaucanson/algebra/implementation/series/series_rep.hxx				     \
 vaucanson/algebra/implementation/series/transpose.hh				     \
 vaucanson/algebra/implementation/series/transpose.hxx
 

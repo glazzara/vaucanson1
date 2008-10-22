@@ -1,4 +1,4 @@
-// series_rep_default.hh: this file is part of the Vaucanson project.
+// series_rep.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_DEFAULT_HH_
-# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_DEFAULT_HH_
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH_
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH_
 # include <boost/shared_ptr.hpp>
 # include <vector>
 
@@ -58,7 +58,7 @@ namespace vcsn {
 } // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/algebra/implementation/series/series_rep_default.hxx>
+#  include <vaucanson/algebra/implementation/series/series_rep.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // !VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_DEFAULT_HH_ //
+#endif // !VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH_ //

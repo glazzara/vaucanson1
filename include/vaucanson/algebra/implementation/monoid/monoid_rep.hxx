@@ -1,4 +1,4 @@
-// freemonoid_rep_default.hxx: this file is part of the Vaucanson project.
+// monoid_rep.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -15,14 +15,14 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_DEFAULT_HXX_
-# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_DEFAULT_HXX_
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HXX_
+# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HXX_
 
 namespace vcsn {
 
   namespace algebra {
 
-    template <Alphabet>
+    template <typename Monoid>
     monoid_rep<Monoid>::monoid_rep() :
       empty(0)
     {
@@ -32,4 +32,4 @@ namespace vcsn {
 
 } // ! vcsn
 
-#endif // !VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_DEFAULT_HXX_ //
+#endif // !VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HXX_ //
