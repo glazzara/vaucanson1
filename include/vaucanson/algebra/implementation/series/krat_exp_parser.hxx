@@ -38,7 +38,6 @@ namespace yy
     ~krat_exp_parser();
     void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_weight(vcsn::algebra::semiring_virtual* sem);
-    void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_token(int i, std::string* str);
     int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
@@ -58,43 +57,31 @@ namespace vcsn
     {
       typedef typename Element<S, T>::monoid_elt_t monoid_elt_t;
       typedef typename Element<S, T>::semiring_elt_t semiring_elt_t;
+      typedef typename Element<S, T>::series_rep_t series_rep_t;
       Lexer(const std::string& from,
 	    Element<S, T>& e,
 	    yy::krat_exp_parser& parser,
 	    bool lex_trace,
-	    const token_representation<typename S::monoid_t::letter_t> tok_rep,
 	    std::string& error) :
 	from_(from),
 	e_(e),
 	parser_(parser),
 	lex_trace_(lex_trace),
 	close_weight_("}"),
-	token_tab_(9),
+	token_tab_(8),
 	error_(error)
       {
-	precondition(!tok_rep.open_par.empty());
-	precondition(!tok_rep.close_par.empty());
-	precondition(!tok_rep.plus.empty());
-	precondition(!tok_rep.times.empty());
-	precondition(!tok_rep.star.empty());
-	precondition(!tok_rep.one.empty());
-	precondition(!tok_rep.zero.empty());
-	precondition(!tok_rep.open_weight.empty());
-	precondition(!tok_rep.close_weight.empty());
-
-	token_tab_[0] = tok_rep.open_par;
-	token_tab_[1] = tok_rep.close_par;
-	token_tab_[2] = tok_rep.plus;
-	token_tab_[3] = tok_rep.times;
-	token_tab_[4] = tok_rep.star;
-	token_tab_[5] = tok_rep.one;
-	token_tab_[6] = tok_rep.zero;
-	token_tab_[7] = tok_rep.open_weight;
-	close_weight_ = tok_rep.close_weight;
-	for (unsigned i = 0; i < tok_rep.spaces.size(); i++)
+	token_tab_[0] = e.representation()->open_par;
+	token_tab_[1] = e.representation()->close_par;
+	token_tab_[2] = e.representation()->plus;
+	token_tab_[3] = e.representation()->times;
+	token_tab_[4] = e.representation()->star;
+	token_tab_[5] = e.representation()->zero;
+	token_tab_[6] = e.representation()->open_weight;
+	close_weight_ = e.representation()->close_weight;
+	for (unsigned i = 0; i < e.representation()->spaces.size(); i++)
 	{
-	  assertion(!tok_rep.spaces[i].empty());
-	  token_tab_[8 + i] = tok_rep.spaces[i];
+	  token_tab_[7 + i] = e.representation()->spaces[i];
 	}
 
 	std::string::const_iterator sit;
@@ -133,14 +120,14 @@ namespace vcsn
 	      if (curr != it)
 		if (!insert_word(curr, it))
 		  return false;
-	      if (i == 7)
+	      if (i == 6)
 	      {
 		if (!insert_weight(it))
 		  return false;
 	      }
 	      else
 	      {
-		if (i < 7)
+		if (i < 6)
 		  insert_token(i);
 		it += token_tab_[i].size();
 	      }
@@ -224,22 +211,15 @@ namespace vcsn
       {
 	if (i == 5)
 	{
-	  Element<S, T> w = identity_as<T>::of(e_.structure());
+	  Element<S, T> w = zero_as<T>::of(e_.structure());
 	  krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(w);
-	  parser_.insert_one(rexp);
+	  parser_.insert_zero(rexp);
 	}
 	else
-	  if (i == 6)
-	  {
-	    Element<S, T> w = zero_as<T>::of(e_.structure());
-	    krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(w);
-	    parser_.insert_zero(rexp);
-	  }
-	  else
-	  {
-	    std::string* str = new std::string(token_tab_[i]);
-	    parser_.insert_token(i, str);
-	  }
+	{
+	  std::string* str = new std::string(token_tab_[i]);
+	  parser_.insert_token(i, str);
+	}
       }
 
       const std::string& from_;
@@ -255,15 +235,13 @@ namespace vcsn
     std::pair<bool, std::string>
     parse(const std::string& from,
 	Element<S, T>& exp,
-	const token_representation<typename S::monoid_t::letter_t> tok_rep
-	= token_representation<typename S::monoid_t::letter_t>(),
 	bool lex_trace = false,
 	bool parse_trace = false)
     {
       parse_trace = parse_trace;
       std::string error;
       yy::krat_exp_parser parser;
-      Lexer<S, T> lex(from, exp, parser, lex_trace, tok_rep, error);
+      Lexer<S, T> lex(from, exp, parser, lex_trace, error);
       if (!lex.lex())
 	return std::make_pair(true, error);
       krat_exp_proxy<S, T> rexp(exp);

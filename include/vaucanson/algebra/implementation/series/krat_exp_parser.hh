@@ -91,8 +91,6 @@ namespace vcsn {
     std::pair<bool, std::string>
     parse(const std::string& from,
 	  Element<S, T>& exp,
-	  const token_representation<typename S::monoid_t::letter_t> tok_rep
-	  = token_representation<typename S::monoid_t::letter_t>(),
 	  bool lex_trace = false,
 	  bool parse_trace = false);
 

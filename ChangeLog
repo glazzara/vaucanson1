@@ -1,5 +1,15 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Adapt the rational expression parser to the new representation system.
+	* lib/krat_exp/krat_exp_bison.yy: Remove the token ONE from the
+	  grammar.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	  Remove everything related with the ONE token and use the new
+	  representation system.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Add op_rout function in concept and implementation of series.
 	* include/vaucanson/algebra/concept/series_base.hh,
 	* include/vaucanson/algebra/concept/series_base.hxx: Add op_rout

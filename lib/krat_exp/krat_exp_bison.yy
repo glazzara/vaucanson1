@@ -36,7 +36,6 @@ yylex(yy::krat_exp_bison::semantic_type* yylval,
 %token	<str> TIMES
 %token	<str> STAR
 %token	<sem> WEIGHT
-%token	<rexp> ONE
 %token	<rexp> ZERO
 %token	<rexp> WORD
 %token  LPROD
@@ -49,7 +48,6 @@ yylex(yy::krat_exp_bison::semantic_type* yylval,
 %left WEIGHT;
 %left LPROD;
 %left STAR;
-%nonassoc ONE;
 %nonassoc ZERO;
 %nonassoc WORD;
 
@@ -68,7 +66,6 @@ rexp :
   | rexp   STAR	  {$1->star(); $$ = $1; delete $2}
   | WEIGHT rexp	  %prec LPROD {$2->left_weight($1); delete $1; $$ = $2}
   | rexp   WEIGHT {$1->right_weight($2); delete $2;$$ = $1}
-  | ONE		  {$$ = $1}
   | ZERO	  {$$ = $1}
   | WORD	  {$$ = $1}
   ;
@@ -98,7 +95,6 @@ namespace yy
     ~krat_exp_parser();
     void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_weight(vcsn::algebra::semiring_virtual* sem);
-    void insert_one(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
     void insert_token(int i, std::string* str);
     int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
@@ -132,14 +128,6 @@ yy::krat_exp_parser::insert_weight(vcsn::algebra::semiring_virtual* sem)
   krat_exp_bison::semantic_type tmp;
   tmp.sem = sem;
   tok_q_->self.push(std::make_pair(krat_exp_bison::token::WEIGHT, tmp));
-}
-
-void
-yy::krat_exp_parser::insert_one(vcsn::algebra::krat_exp_virtual* rexp)
-{
-  krat_exp_bison::semantic_type tmp;
-  tmp.rexp = rexp;
-  tok_q_->self.push(std::make_pair(krat_exp_bison::token::ONE, tmp));
 }
 
 void
