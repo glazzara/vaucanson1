@@ -52,13 +52,14 @@ namespace vcsn
       rat_exp_t
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
-		   const std::string& exp = vcsn::algebra::letter_traits<typename Iterator::value_type>::default_zero(),
-		   const vcsn::algebra::token_representation<typename Iterator::value_type> tok_rep = vcsn::algebra::token_representation<typename Iterator::value_type>());
+		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero()
+		   /* FIXME : representation*/);
 
       template <class T>
       rat_exp_t
-      make_rat_exp(const T& alphabet, const std::string& exp = vcsn::algebra::letter_traits<typename T::letter_t>::default_zero(),
-		   const vcsn::algebra::token_representation<typename T::letter_t> tok_rep = vcsn::algebra::token_representation<typename T::letter_t>());
+      make_rat_exp(const T& alphabet,
+		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero()
+		   /* FIXME : representation*/);
 
       template <class SeriesSet, class SeriesImpl>
       automaton_t

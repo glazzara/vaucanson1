@@ -1,5 +1,12 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Remove the old token representation system from automaton_maker.
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx: 
+	  Remove the old token representation system from automaton_maker.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Add op_rout function in concept and implementation of freemonoid.
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: 
 	  Add op_rout dispatch.

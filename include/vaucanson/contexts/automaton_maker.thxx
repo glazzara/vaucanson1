@@ -104,18 +104,17 @@ namespace vcsn
       rat_exp_t
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
-		   const std::string& exp,
-		   const vcsn::algebra::token_representation<typename Iterator::value_type> tok_rep = vcsn::algebra::token_representation<typename Iterator::value_type>())
+		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero())
       {
 	alphabet_t	alphabet;
         for (Iterator i = begin; i != end; ++i)
           alphabet.insert(*i);
-        monoid_t		monoid (alphabet);
+        monoid_t	monoid (alphabet);
         semiring_t	semiring;
         series_set_t	series (semiring, monoid);
 
         rat_exp_t	r (series);
-        std::pair<bool, std::string> p = parse(exp, r, tok_rep);
+        std::pair<bool, std::string> p = parse(exp, r);
 
         postcondition_ (not p.first, p.second);
 
@@ -125,10 +124,9 @@ namespace vcsn
       template <class T>
       rat_exp_t
       make_rat_exp(const T& alphabet,
-		   const std::string& exp,
-		   const vcsn::algebra::token_representation<typename T::letter_t> tok_rep = vcsn::algebra::token_representation<typename T::letter_t>())
+		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero())
       {
-        return make_rat_exp(alphabet.begin(), alphabet.end(), exp, tok_rep);
+        return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
       }
 
       /*--------------.
