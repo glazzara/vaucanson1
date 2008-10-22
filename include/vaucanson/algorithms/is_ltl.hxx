@@ -65,7 +65,7 @@ namespace vcsn
       CHECK_LTL_CONDITION
     }
 
-# undef CHECK_CONDITION
+# undef CHECK_LTL_CONDITION
 
     return true;
   }

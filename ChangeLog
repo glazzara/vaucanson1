@@ -1,3 +1,9 @@
+2008-10-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a typo in the is_ltl algorithm.
+	* include/vaucanson/algorithms/is_ltl.hxx (do_is_ltl): Rename
+	  `CHECK_CONDITION' to `CHECK_LTL_CONDITION'.
+
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	New structure to handle representation of monoid.
