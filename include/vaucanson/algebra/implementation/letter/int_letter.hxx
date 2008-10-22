@@ -43,17 +43,6 @@ namespace vcsn {
       typedef undefined_type first_projection_t;
       typedef undefined_type second_projection_t;
 
-      LETTER_DEFAULT(open_par, "(")
-      LETTER_DEFAULT(close_par, ")")
-      LETTER_DEFAULT(plus, "+")
-      LETTER_DEFAULT(times, ".")
-      LETTER_DEFAULT(star, "*")
-      LETTER_DEFAULT(epsilon, "e")
-      LETTER_DEFAULT(zero, "z")
-      LETTER_DEFAULT(open_weight, "{")
-      LETTER_DEFAULT(close_weight, "}")
-      LETTER_DEFAULT(space, " ")
-
       static
       int
       literal_to_letter(const std::string& str)

@@ -59,69 +59,6 @@ namespace vcsn {
       return 0;
     }
 
-    // Concept defaults.
-# define STATIC_DEFAULT(name) \
-    template <typename L> \
-    const std::string \
-    letter_traits<L>::default_##name () \
-    { \
-      static_error(need_default_##name); \
-      return 0; \
-    } \
-    template <> \
-    inline const std::string \
-    letter_traits<misc::true_t>::default_##name () \
-    { \
-      return ""; \
-    }
-
-    STATIC_DEFAULT(open_par)
-    STATIC_DEFAULT(close_par)
-    STATIC_DEFAULT(plus)
-    STATIC_DEFAULT(times)
-    STATIC_DEFAULT(star)
-    STATIC_DEFAULT(epsilon)
-    STATIC_DEFAULT(zero)
-    STATIC_DEFAULT(open_weight)
-    STATIC_DEFAULT(close_weight)
-    STATIC_DEFAULT(space)
-
-# undef STATIC_DEFAULT
-
-    // Default CTOR.
-    template <typename L>
-    token_representation<L>::token_representation() :
-	open_par(letter_traits<L>::default_open_par()),
-	close_par(letter_traits<L>::default_close_par()),
-	plus(letter_traits<L>::default_plus()),
-	times(letter_traits<L>::default_times()),
-	star(letter_traits<L>::default_star()),
-	one(letter_traits<L>::default_epsilon()),
-	zero(letter_traits<L>::default_zero()),
-	open_weight(letter_traits<L>::default_open_weight()),
-	close_weight(letter_traits<L>::default_close_weight())
-    {
-      spaces.push_back(letter_traits<L>::default_space());
-    }
-
-    // Convertion CTOR.
-    template <typename L>
-    template <typename U>
-    token_representation<L>::
-    token_representation(const token_representation<U>& arg) :
-      	open_par(arg.open_par),
-	close_par(arg.close_par),
-	plus(arg.plus),
-	times(arg.times),
-	star(arg.star),
-	one(arg.one),
-	zero(arg.zero),
-	open_weight(arg.open_weight),
-	close_weight(arg.close_weight),
-	spaces(arg.spaces)
-    {
-    }
-
   } // ! algebra
 
 } // ! vcsn

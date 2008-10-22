@@ -60,72 +60,7 @@ namespace vcsn {
 
       /// Provide a way to represent a letter.
       static std::string letter_to_literal(const L&);
-
-# define DECLARE_DEFAULT(name) \
-      static const std::string default_##name ();
-
-      /// Provide a way to represent an "open parenthesis".
-      DECLARE_DEFAULT(open_par)
-
-      /// Provide a way to represent a "close parenthesis".
-      DECLARE_DEFAULT(close_par)
-
-      /// Provide a way to represent a "plus".
-      DECLARE_DEFAULT(plus)
-
-      /// Provide a way to represent a "times".
-      DECLARE_DEFAULT(times)
-
-      /// Provide a way to represent a "star".
-      DECLARE_DEFAULT(star)
-
-      /// Provide a way to represent an "epsilon".
-      DECLARE_DEFAULT(epsilon)
-
-      /// Provide a way to represent a "zero".
-      DECLARE_DEFAULT(zero)
-
-      /// Provide a way to represent an "open weight".
-      DECLARE_DEFAULT(open_weight)
-
-      /// Provide a way to represent a "close weight".
-      DECLARE_DEFAULT(close_weight)
-
-      /// Provide a way to represent a "space".
-      DECLARE_DEFAULT(space)
-
-# undef DECLARE_DEFAULT
-
     };
-
-    template <typename L>
-    struct token_representation
-    {
-      std::string		open_par;
-      std::string		close_par;
-      std::string		plus;
-      std::string		times;
-      std::string		star;
-      std::string		one;
-      std::string		zero;
-      std::string		open_weight;
-      std::string		close_weight;
-      std::vector<std::string>	spaces;
-
-      // Default CTOR.
-      token_representation();
-
-      // Convertion CTOR.
-      template <typename U>
-      token_representation(const token_representation<U>& arg);
-
-    };
-
-    // generic interface to overwrite static defaults
-    typedef token_representation<misc::true_t> token_representation_t;
-
-# define LETTER_DEFAULT(name, value) \
-    static std::string default_##name () { return value; }
 
   } // ! algebra
 

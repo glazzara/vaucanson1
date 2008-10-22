@@ -1,5 +1,16 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Remove the old token representation system.
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concept/letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	  Remove LETTER_DEFAULT and COUPLE_LETTER_DEFAULT macros and the
+	  token_representation structure.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Keep the series representation in the structure.
 	* include/vaucanson/algebra/implementation/series/series.hh,
 	* include/vaucanson/algebra/implementation/series/series.hxx: Add an

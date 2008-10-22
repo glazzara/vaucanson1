@@ -50,17 +50,6 @@ namespace vcsn {
       typedef U first_projection_t;
       typedef V second_projection_t;
 
-      LETTER_DEFAULT(open_par, "[")
-      LETTER_DEFAULT(close_par, "]")
-      LETTER_DEFAULT(plus, "+")
-      LETTER_DEFAULT(times, ".")
-      LETTER_DEFAULT(star, "*")
-      LETTER_DEFAULT(epsilon, "_e")
-      LETTER_DEFAULT(zero, "_z")
-      LETTER_DEFAULT(open_weight, "{")
-      LETTER_DEFAULT(close_weight, "}")
-      LETTER_DEFAULT(space, " ")
-
       static
       std::pair<U, V>
       literal_to_letter(const std::string& str)
@@ -85,19 +74,6 @@ namespace vcsn {
       static int dim() { return 2; }
 
     };
-
-# define COUPLE_LETTER_DEFAULT(name, val, type1, type2) \
-    template <> \
-    inline std::string \
-    letter_traits<std::pair<type1, type2> >::default_##name () { return val; }
-
-    COUPLE_LETTER_DEFAULT(epsilon, "1", char, char)
-    COUPLE_LETTER_DEFAULT(zero, "0", char, char)
-
-    COUPLE_LETTER_DEFAULT(epsilon, "e", int, int)
-    COUPLE_LETTER_DEFAULT(zero, "z", int, int)
-
-# undef COUPLE_LETTER_DEFAULT
 
     // Specialization for pairs.
     // FIXME: we should share the taf-kit parser with letters op_parse.

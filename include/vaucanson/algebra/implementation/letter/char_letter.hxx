@@ -48,17 +48,6 @@ namespace vcsn {
       static char default_joker()   { return '?'; }
       static char default_other()   { return '#'; }
 
-      LETTER_DEFAULT(open_par, "(")
-      LETTER_DEFAULT(close_par, ")")
-      LETTER_DEFAULT(plus, "+")
-      LETTER_DEFAULT(times, ".")
-      LETTER_DEFAULT(star, "*")
-      LETTER_DEFAULT(epsilon, "1")
-      LETTER_DEFAULT(zero, "0")
-      LETTER_DEFAULT(open_weight, "{")
-      LETTER_DEFAULT(close_weight, "}")
-      LETTER_DEFAULT(space, " ")
-
       static
       char
       literal_to_letter(const std::string& str)
