@@ -63,7 +63,6 @@ $(manual): $(vaucanson_manual_sources) $(srcdir)/extex.pl
 	cd manual.ext && $(MAKE) $(AM_MAKEFLAGS) dvi
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
-$(srcdir)/vaucanson-manual.pdf: manual.ext $(vaucanson_manual_sources)
 vaucanson_manual_sources =			\
 vaucanson-manual.tex				\
 introduction.tex				\

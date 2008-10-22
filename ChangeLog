@@ -1,5 +1,13 @@
 2008-10-22  Reuben Thomas  <rrt@sc3d.org>
 
+	Fix build problems for new single user guide.
+	* doc/manual/Makefile.am: Remove unnecessary old dependency
+	  (thanks Alexandre).
+	* lrde-upload.sh: Fix mentions of user guide (thanks
+	  Alexandre).
+
+2008-10-22  Reuben Thomas  <rrt@sc3d.org>
+
 	Small improvements to vaucanswig.tex.
 	* trunk/doc/manual/vaucanswig.tex: Fix some small English
 	  errors and make one or two cosmetic improvements to the

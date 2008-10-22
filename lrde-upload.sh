@@ -7,14 +7,14 @@ set -e
 set -x
 
 cd doc/manual
-make vaucanson-developer-manual.pdf vaucanson-user-manual.pdf
+make vaucanson-manual.pdf
 cd ../..
 
 rm -rf /lrde/dload/vaucanson/snapshot/ref.tmp
 cp -pR doc/ref /lrde/dload/vaucanson/snapshot/ref.tmp
 chmod -R a+rX /lrde/dload/vaucanson/snapshot/ref.tmp
 
-cp doc/manual/vaucanson-developer-manual.pdf doc/manual/vaucanson-user-manual.pdf /lrde/dload/vaucanson/snapshot/
+cp doc/manual/vaucanson-manual.pdf /lrde/dload/vaucanson/snapshot/
 
 cp -f vaucanson-*.tar.gz /lrde/dload/vaucanson/snapshot/vaucanson-snapshot.tar.gz
 chmod a+rX /lrde/dload/vaucanson/snapshot/vaucanson-snapshot.tar.gz
