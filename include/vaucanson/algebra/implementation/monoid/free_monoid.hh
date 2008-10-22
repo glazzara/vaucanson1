@@ -18,6 +18,7 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_FREE_MONOID_HH
 
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/misc/unique.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
@@ -42,8 +43,14 @@ namespace vcsn
       /// Constructor based on an alphabet.
       FreeMonoid(const A& a);
 
+      /// Constructor based on an alphabet.
+      FreeMonoid(const A& a, monoid_rep<FreeMonoid<A> > mr);
+
       /// Copy constructor.
       FreeMonoid(const FreeMonoid& w);
+
+      /// Representation's accessor.
+      const boost::shared_ptr<monoid_rep<FreeMonoid<A> > > representation();
 
       /// Alphabet's accessor.
       /// @bug FIXME: this interface should not exist (s.e. are const once
@@ -52,6 +59,7 @@ namespace vcsn
 
       /// Alphabet's accessor
       const A&	alphabet() const;
+      const boost::shared_ptr<monoid_rep<FreeMonoid<A> > > rep_;
 
     protected:
       A alph_;

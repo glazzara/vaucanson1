@@ -1,5 +1,16 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Keep the monoid representation in the structure.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh,
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  Add an attribut to keep the monoid representation, fix the
+	  existing constructor to work with the default representation and
+	  add a new constructor to specify the representation.
+	* include/vaucanson/algebra/implementation/free_monoid: Remove.
+	* include/vaucanson/algebra/implementation/free_monoid_product: Remove.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Fix the singleton used in the representation system.
 	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh:,
 	* include/vaucanson/algebra/implementation/series/series_rep.hh: The
