@@ -1,3 +1,12 @@
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	New structure to handle representation of series.
+	* series/series_rep_default.hh: New
+	  Add a singleton (series_rep_default) that handles a boost_shared pointer to
+	  handle the series representation (series_rep).
+	* series/series_rep_default.hxx: New
+	  Add the default representation of a series.
+
 2008-10-21  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix some English and an out-of-date reference.
