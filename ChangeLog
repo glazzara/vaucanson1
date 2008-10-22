@@ -1,3 +1,12 @@
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix patch 2293 to be coherent with patch 2294.
+	Renaming to be coherent with the monoid representation.
+	* include/vaucanson/algebra/implementation/series/series_rep.hh: New.
+	* include/vaucanson/algebra/implementation/series/series_rep.hxx: New.
+	* include/vaucanson/algebra/implementation/series/series_rep_default.hh: Remove.
+	* include/vaucanson/algebra/implementation/series/series_rep_default.hxx: Remove.
+
 2008-10-22  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix build problems for new single user guide.
