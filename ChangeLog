@@ -1,5 +1,15 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	New structure to handle representation of monoid.
+	* monoid: New directory to restructure monoid.
+	* monoid/monoid_rep.hh: New
+	  Add a singleton (monoid_rep_default) that handles a boost_shared
+	  pointer which handles the monoid representation (monoid_rep).
+	* monoid/monoid_rep.hxx: New
+	  Add the default representation of a monoid.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	New structure to handle representation of series.
 	* series/series_rep_default.hh: New
 	  Add a singleton (series_rep_default) that handles a boost_shared pointer to
