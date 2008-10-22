@@ -1,5 +1,14 @@
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Add op_rout function in concept and implementation of freemonoid.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: 
+	  Add op_rout dispatch.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx:
+	  Add specialization of op_rout function on str_words.
+
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Adapt the rational expression parser to the new representation system.
 	* lib/krat_exp/krat_exp_bison.yy: Remove the token ONE from the
 	  grammar.

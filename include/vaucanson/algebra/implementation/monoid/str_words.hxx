@@ -44,6 +44,20 @@ namespace vcsn {
       return a + b;
     }
 
+    template<typename A, typename St>
+    St&
+    op_rout(const FreeMonoid<A>& s,
+	    St& st,
+	    std::basic_string<typename A::letter_t>& v)
+    {
+      if (v.empty())
+	st << s.representation()->empty();
+      else
+	st << v;
+
+      return st;
+    }
+
     template <typename A>
     bool
     op_xeq(const algebra::FreeMonoid<A>& s,

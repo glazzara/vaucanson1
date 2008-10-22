@@ -43,6 +43,12 @@ namespace vcsn {
 	   const std::basic_string<typename A::letter_t>& a,
 	   const std::basic_string<typename A::letter_t>& b);
 
+    template<typename A, typename St>
+    St&
+    op_rout(const FreeMonoid<A>& s,
+	    St& st,
+	    std::basic_string<typename A::letter_t>& v);
+
     template<typename A>
     const std::basic_string<typename A::letter_t>&
     identity_value(SELECTOR(algebra::FreeMonoid<A>),

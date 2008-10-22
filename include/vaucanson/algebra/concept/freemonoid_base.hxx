@@ -225,18 +225,11 @@ namespace vcsn {
 
     template <typename Self, typename St, typename T>
     St&
-    op_rout(const algebra::FreeMonoidBase<Self>&,
+    op_rout(const algebra::FreeMonoidBase<Self>& s,
 	    St& st,
 	    const T& v)
     {
-      typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
-
-      if (v.empty())
-	st << vcsn::algebra::letter_traits<typename Self::letter_t>::default_epsilon();
-      else
-	st << v;
-
-      return st;
+      return op_rout(s.self, st, v);
     }
 
   } // algebra
