@@ -1,4 +1,4 @@
-// freemonoid_product_pair_str.hxx: this file is part of the Vaucanson project.
+// pair_str_words.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,10 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HXX
-# define VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_PAIR_STR_WORDS_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_PAIR_STR_WORDS_HXX
 
-# include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
+# include <vaucanson/algebra/implementation/monoid/pair_str_words.hh>
 
 namespace vcsn {
 
@@ -132,8 +132,8 @@ namespace vcsn {
       return st;
     }
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
+} // ! vcsn
 
-#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_MONOID_PAIR_STR_WORDS_HXX

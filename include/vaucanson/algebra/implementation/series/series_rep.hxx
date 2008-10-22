@@ -14,9 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX_
-# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX_
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX
 
 namespace vcsn {
 
@@ -39,4 +38,5 @@ namespace vcsn {
   } // ! algebra
 
 } // ! vcsn
-#endif // !VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX_ //
+
+#endif // !VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX

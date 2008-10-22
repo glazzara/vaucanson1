@@ -1,4 +1,4 @@
-// words.hh: this file is part of the Vaucanson project.
+// free_monoid.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,10 +14,9 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_WORDS_HH
-# define VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_WORDS_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_FREE_MONOID_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_FREE_MONOID_HH
 
-# include <string>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/misc/unique.hh>
 # include <vaucanson/misc/usual_macros.hh>
@@ -47,7 +46,8 @@ namespace vcsn
       FreeMonoid(const FreeMonoid& w);
 
       /// Alphabet's accessor.
-      /// @bug FIXME: this interface should not exist (s.e. are const once instantiated)
+      /// @bug FIXME: this interface should not exist (s.e. are const once
+      /// instantiated)
       A&	alphabet();
 
       /// Alphabet's accessor
@@ -60,71 +60,6 @@ namespace vcsn
     template<typename A>
     bool operator==(const FreeMonoid<A>& a,
 		    const FreeMonoid<A>& b);
-
-    /*---------------------------------------------------------------------.
-    | word_traits<FreeMonoid<A>, std::basic_string<typename A::letter_t> > |
-    `---------------------------------------------------------------------*/
-
-    /**
-     * Meta information about the mixing of FreeMonoid with
-     * std::basic_string.
-     */
-    template <typename A>
-    struct word_traits<FreeMonoid<A>,
-		       std::basic_string<typename A::letter_t> >
-    {
-      /// The type of the alphabet.
-      typedef A alphabet_t;
-
-      /// The type of the word.
-      typedef Element<FreeMonoid<A>,
-	      std::basic_string<typename alphabet_t::letter_t> > word_t;
-
-      /// The value type of word.
-      typedef typename word_t::value_t word_value_t;
-
-      /// The type of the first projection alphabet.
-      typedef typename alphabet_traits<typename alphabet_t::set_t,
-				       typename alphabet_t::value_t>::
-	first_projection_t first_projection_alphabet_t;
-
-      /// The type of the second projection alphabet.
-      typedef typename alphabet_traits<typename alphabet_t::set_t,
-				       typename alphabet_t::value_t>::
-	second_projection_t second_projection_alphabet_t;
-
-      /// The type of the first projection monoid.
-      typedef FreeMonoid<first_projection_alphabet_t> first_monoid_t;
-
-      /// The type of the second projection monoid.
-      typedef FreeMonoid<second_projection_alphabet_t> second_monoid_t;
-
-      /// The type of the first projection word.
-      typedef Element<first_monoid_t,
-	      std::basic_string<typename first_projection_alphabet_t::
-				letter_t> > first_projection_t;
-
-      /// The value type of the first projection word.
-      typedef typename first_projection_t::value_t first_projection_value_t;
-
-      /// The type of the second projection word.
-      typedef Element<second_monoid_t,
-	      std::basic_string<typename second_projection_alphabet_t::
-				letter_t> > second_projection_t;
-
-      /// The value type of the second projection word.
-      typedef typename second_projection_t::value_t second_projection_value_t;
-
-      /// The first projection word maker.
-      static first_projection_t first_projection(const first_monoid_t&,
-						 const word_t&);
-      static first_projection_value_t first_projection(const word_value_t&);
-
-      /// The second projection word maker.
-      static second_projection_t second_projection(const second_monoid_t&,
-						   const word_t&);
-      static second_projection_value_t second_projection(const word_value_t&);
-    };
 
     /** @} */
     /** @} */
@@ -180,7 +115,7 @@ namespace vcsn
 } // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/algebra/implementation/free_monoid/words.hxx>
+#  include <vaucanson/algebra/implementation/monoid/free_monoid.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_WORDS_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_MONOID_FREE_MONOID_HH

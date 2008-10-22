@@ -14,11 +14,13 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH
 
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH_
-# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH_
-# include <boost/shared_ptr.hpp>
+# include <string>
 # include <vector>
+
+# include <boost/shared_ptr.hpp>
 
 namespace vcsn {
 
@@ -61,4 +63,4 @@ namespace vcsn {
 #  include <vaucanson/algebra/implementation/series/series_rep.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // !VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH_ //
+#endif // !VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH

@@ -1,4 +1,4 @@
-// freemonoid_product_pair_str.hh: this file is part of the Vaucanson project.
+// pair_str_words.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,21 +14,23 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HH
-# define VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_PAIR_STR_WORDS_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_PAIR_STR_WORDS_HH
+
+// We will use std::pair<std::basic_string, std::basic_string> as a `word'
+// implementation.
+# include <string>
+# include <utility>
 
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
-
-# include <utility>
-# include <string>
 
 namespace vcsn {
 
   namespace algebra {
 
-    /*----------------------------------------------------------.
-    | Implementation of freemonoid_product with pair of strings |
-    `----------------------------------------------------------*/
+    /*-------------------------------------------------------------.
+    | Implementation of words with std::pair and std::basic_string |
+    `-------------------------------------------------------------*/
 
     template <class Self, typename T>
     typename
@@ -85,12 +87,12 @@ namespace vcsn {
 	    St& st,
 	    const T& v);
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
-#  include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/implementation/monoid/pair_str_words.hxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_MONOID_PAIR_STR_WORDS_HH

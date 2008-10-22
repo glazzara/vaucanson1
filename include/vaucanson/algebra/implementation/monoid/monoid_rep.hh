@@ -14,9 +14,11 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH
 
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH_
-# define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH_
+# include <string>
+
 # include <boost/shared_ptr.hpp>
 
 namespace vcsn {
@@ -52,4 +54,4 @@ namespace vcsn {
 #  include <vaucanson/algebra/implementation/monoid/monoid_rep.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // !VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH_ //
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH

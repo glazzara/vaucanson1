@@ -30,8 +30,9 @@
 // INTERFACE: void domain(const Automaton& a1, InputProjection& a2) { return vcsn::domain(*a1, *a2); }
 
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/algebra/implementation/free_monoid/words.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
+
+# include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
 
 

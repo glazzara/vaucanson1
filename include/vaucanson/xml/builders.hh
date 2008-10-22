@@ -34,7 +34,7 @@
 // to force the inclusion of the XML related headers after the automaton
 // type is fully constructed (no undefined_type), and improve sanity
 // checks.
-# include <vaucanson/algebra/implementation/free_monoid/words.hh>
+# include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
 
 # include <xercesc/sax2/Attributes.hpp>

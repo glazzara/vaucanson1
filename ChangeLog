@@ -1,3 +1,31 @@
+2008-10-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Cleanup algebra implementation.
+	* include/Makefile.am: Update distributed files.
+	* include/vaucanson/algebra/implementation/alphabets/predefs.hh: Remove.
+	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh: Remove.
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hh: Remove.
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hxx: Remove.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh: Rename from include/vaucanson/algebra/implementation/free_monoid/words.hh.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx: Rename from include/vaucanson/algebra/implementation/free_monoid/words.hxx.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh,
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
+	  Cosmetic changes.
+	* include/vaucanson/algebra/implementation/monoid/pair_str_words.hh: Rename from include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh.
+	* include/vaucanson/algebra/implementation/monoid/pair_str_words.hxx: Rename from include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hh: Rename from include/vaucanson/algebra/implementation/free_monoid/str_words.hh.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx: Rename from include/vaucanson/algebra/implementation/free_monoid/str_words.hxx.
+	* include/vaucanson/algebra/implementation/predefs.hh: Remove.
+	* include/vaucanson/algebra/implementation/series/series_rep.hh,
+	* include/vaucanson/algebra/implementation/series/series_rep.hxx: Cosmetic changes.
+	* include/vaucanson/algorithms/domain.hh,
+	* include/vaucanson/algorithms/image.hh,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/vaucanson/algorithms/ltl_to_pair.hh,
+	* include/vaucanson/contexts/free_monoid.thh,
+	* include/vaucanson/contexts/free_monoid_product.thh,
+	* include/vaucanson/xml/builders.hh: Rename `words.hh' to `free_monoid.hh'.
+
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Fix forgotten renaming and Makefile adding.
