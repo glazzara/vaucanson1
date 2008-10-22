@@ -48,9 +48,7 @@ namespace vcsn {
     {
       static boost::shared_ptr<series_rep<Semiring, Monoid> > get_instance()
       {
-	static boost::shared_ptr<series_rep<Semiring, Monoid> > p;
-	if (p == 0)
-	  p = new series_rep<Semiring, Monoid>;
+	static boost::shared_ptr<series_rep<Semiring, Monoid> > p(new series_rep<Semiring, Monoid>);
 	return p;
       }
     };

@@ -1,3 +1,10 @@
+2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Fix the singleton used in the representation system.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh:,
+	* include/vaucanson/algebra/implementation/series/series_rep.hh: The
+	  previous implementation was not working with boost::shared_ptr.
+
 2008-10-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Cleanup algebra implementation.

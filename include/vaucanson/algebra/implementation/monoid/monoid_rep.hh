@@ -39,9 +39,7 @@ namespace vcsn {
     {
       static boost::shared_ptr<monoid_rep<Monoid> > get_instance()
       {
-	static boost::shared_ptr<monoid_rep<Monoid> > p;
-	if (p == 0)
-	  p = new monoid_rep<Monoid>;
+	static boost::shared_ptr<monoid_rep<Monoid> > p(new monoid_rep<Monoid>);
 	return p;
       }
     };
