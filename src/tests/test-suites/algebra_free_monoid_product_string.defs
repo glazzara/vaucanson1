@@ -1,7 +1,13 @@
-#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
-#include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
+#include <vaucanson/algebra/implementation/letter/char_letter.hh>
+#include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
+#include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
+#include <vaucanson/algebra/implementation/monoid/str_words.hh>
+#include <vaucanson/algebra/implementation/monoid/pair_str_words.hh>
 
-#define TEST_STATIC_ARGS						    \
-	vcsn::algebra::FreeMonoidProduct<vcsn::algebra::char_letter::Words, \
-			  vcsn::algebra::char_letter::Words>,		    \
+typedef char letter_t;
+typedef vcsn::Element<vcsn::algebra::AlphabetSet<letter_t>, std::set<letter_t> > alphabet_t;
+typedef vcsn::algebra::FreeMonoid<alphabet_t> words_t;
+
+#define TEST_STATIC_ARGS					\
+	vcsn::algebra::FreeMonoidProduct<words_t, words_t>,	\
 	std::pair<std::string, std::string>

@@ -1,16 +1,23 @@
-#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/letter/char_letter.hh>
+#include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
+#include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
+#include <vaucanson/algebra/implementation/monoid/str_words.hh>
 #include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 #include <vaucanson/algebra/implementation/series/series.hh>
 #include <vaucanson/algebra/implementation/series/krat.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
+typedef char letter_t;
+typedef vcsn::Element<vcsn::algebra::AlphabetSet<letter_t>, std::set<letter_t> > alphabet_t;
+typedef vcsn::algebra::FreeMonoid<alphabet_t> words_t;
+
 #define TEST_STATIC_ARGS				\
 	vcsn::Element<					\
 	  vcsn::algebra::Series<			\
 	    vcsn::algebra::NumericalSemiring,		\
-	    vcsn::algebra::char_letter::Words>,		\
+	    words_t>,					\
 	  vcsn::rat::exp<				\
-	    vcsn::algebra::char_letter::Word::value_t,	\
+	    std::string,				\
 	    int> >
 
 #define VCSN_GRAPH_IMPL_INCLUDE_PATH vaucanson/automata/implementation

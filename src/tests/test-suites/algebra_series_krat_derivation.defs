@@ -3,10 +3,17 @@
 
 #include <tests/algebra/series/krat/derivations/derivations_common.hh>
 
-#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/letter/char_letter.hh>
+#include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
+#include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
+#include <vaucanson/algebra/implementation/monoid/str_words.hh>
 #include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 #include <vaucanson/algebra/implementation/series/series.hh>
 #include <vaucanson/algebra/implementation/series/krat.hh>
+
+typedef char letter_t;
+typedef vcsn::Element<vcsn::algebra::AlphabetSet<letter_t>, std::set<letter_t> > alphabet_t;
+typedef vcsn::algebra::FreeMonoid<alphabet_t> words_t;
 
 template <class Expr>
 class Derivation
@@ -40,9 +47,9 @@ protected:
 	vcsn::Element<					\
 	  vcsn::algebra::Series<			\
 	    vcsn::algebra::NumericalSemiring,		\
-	    vcsn::algebra::char_letter::Words>,		\
+	    words_t>,					\
 	  vcsn::rat::exp<				\
-	    vcsn::algebra::char_letter::Word::value_t,	\
+	    std::string,				\
 	    bool> >
 
 #define TEST_STATIC_ARG2				\

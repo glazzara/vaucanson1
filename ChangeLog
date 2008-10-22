@@ -1,3 +1,22 @@
+2008-10-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update test suite to cope with [2300].
+	* src/tests/test-suites/algebra_alphabet_set_alpha.defs,
+	* src/tests/test-suites/algebra_alphabet_set_char.defs,
+	* src/tests/test-suites/algebra_alphabet_set_int.defs,
+	* src/tests/test-suites/algebra_free_monoid_product_string.defs,
+	* src/tests/test-suites/algebra_free_monoid_string.defs,
+	* src/tests/test-suites/algebra_series_krat_bool_string.defs,
+	* src/tests/test-suites/algebra_series_krat_cderivation.defs,
+	* src/tests/test-suites/algebra_series_krat_derivation.defs,
+	* src/tests/test-suites/algebra_series_krat_double_string.defs,
+	* src/tests/test-suites/algebra_series_krat_int_string.defs,
+	* src/tests/test-suites/algebra_series_krat_partial_derivation.defs,
+	* src/tests/test-suites/algebra_series_polynom_bool_string.defs,
+	* src/tests/test-suites/algebra_series_polynom_double_string.defs,
+	* src/tests/test-suites/algebra_series_polynom_int_string.defs:
+	  Remove inclusion of `predefs'. Add some type helpers.
+
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Keep the monoid representation in the structure.

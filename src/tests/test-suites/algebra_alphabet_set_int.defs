@@ -1,5 +1,7 @@
-#include <vaucanson/algebra/implementation/alphabets/predefs.hh>
+#include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
+#include <vaucanson/algebra/implementation/letter/int_letter.hh>
+
+typedef int letter_t;
 
 #define TEST_STATIC_ARGS \
-   vcsn::algebra::int_letter::Alphabets, \
-   std::set<vcsn::algebra::int_letter::Letter>
+   algebra::AlphabetSet<letter_t>, std::set<letter_t>

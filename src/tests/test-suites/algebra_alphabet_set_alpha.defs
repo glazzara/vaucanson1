@@ -1,5 +1,7 @@
-#include <vaucanson/algebra/implementation/alphabets/predefs.hh>
+#include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
+#include <vaucanson/algebra/implementation/letter/range.hh>
+
+typedef vcsn::algebra::static_ranged<char, vcsn::algebra::static_char_interval<'a','z'> > letter_t;
 
 #define TEST_STATIC_ARGS \
-   vcsn::algebra::small_alpha_letter::Alphabets, \
-   std::set<vcsn::algebra::small_alpha_letter::Letter>
+   algebra::AlphabetSet<letter_t>, std::set<letter_t>
