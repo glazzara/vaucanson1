@@ -52,15 +52,15 @@ namespace vcsn {
    * @f$A@f$.  (Weights do not matter.)
    *
    * This algorithm works in two steps: first transitions labeled by
-   * words are split into transitions labeled by singled letters
+   * words are split into transitions labeled by single letters
    * separated by newly created states (if there is a weight
    * associated to the word, it will be associated to the first letter
    * and the other letter will be associated to the identity of the
    * semiring); second the epsilon transitions are removed.
    *
    * Removing epsilon transitions can be done in two ways: forward or
-   * backward.  The @a dir argument can be used to control the direction
-   * and default to forward.
+   * backward.  The @a dir argument can be used to control the direction,
+   * and defaults to forward.
    *
    * @param a The automaton to make realtime.
    * @param dir The direction of the epsilon removal algorithm.
