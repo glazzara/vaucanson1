@@ -277,7 +277,7 @@ namespace vcsn {
     template<typename S, typename St, typename T>
     St& op_rout(const algebra::SeriesBase<S>& s, St& st, const T& se)
     {
-      return op_rout(s.self, st, se);
+      return op_rout(s.self(), st, se);
     }
   } // algebra
 

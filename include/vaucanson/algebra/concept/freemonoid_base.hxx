@@ -229,7 +229,7 @@ namespace vcsn {
 	    St& st,
 	    const T& v)
     {
-      return op_rout(s.self, st, v);
+      return op_rout(s.self(), st, v);
     }
 
   } // algebra

@@ -1,3 +1,18 @@
+2008-10-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Bug fixes.
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: add missing
+	  braces.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
+	  add missing double quote.
+	* include/vaucanson/algebra/implementation/series/krat.hh: add
+	  missing references.
+	* include/vaucanson/algebra/implementation/series/krat.hxx: use the
+	  accessor to the representation.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	  remove braces.
+
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Remove the old token representation system from automaton_maker.

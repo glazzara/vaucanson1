@@ -246,7 +246,7 @@ namespace vcsn
 	    St& st,
 	    const rat::exp<Tm, Tw>& e)
     {
-      rat::DumpVisitor<Tm, Tw, W, M> v (st, s.rep_);
+      rat::DumpVisitor<Tm, Tw, W, M> v (st, s.representation());
       e.accept(v);
       return st;
     }
