@@ -1,5 +1,9 @@
 2008-10-24  Reuben Thomas  <rrt@sc3d.org>
 
+	Add some missing tests to svn:ignore list.
+
+2008-10-24  Reuben Thomas  <rrt@sc3d.org>
+
 	Fix English.
 	* data/template_graph_impl.hh: Fix some English.
 
