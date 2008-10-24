@@ -1,5 +1,13 @@
 2008-10-24  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove labels_are_couples.
+	This labels kind is defunct, and used nowhere, and not part of
+	the new scheme of things.
+	* include/vaucanson/automata/concept/kinds.hh.
+	* include/vaucanson/automata/concept/kinds.hxx.
+
+2008-10-24  Reuben Thomas  <rrt@sc3d.org>
+
 	Fix English.
 	* include/vaucanson/algorithms/realtime.hh: Fix English.
 
