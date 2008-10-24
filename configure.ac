@@ -89,10 +89,10 @@ AM_CONDITIONAL([ENABLE_VAUCANSWIG],
 
 # Boost
 AX_BOOST_BASE([1.34])
-# FIXME: The following tests do not yet exist, but are needed e.g. for Debian,
-# where even header-only libraries are separately distributed.
-# AX_BOOST_WSERIALIZATION_HEADERS (AX_BOOST_WSERIALIZATION is wrong, we don't need the binary library)
-# AX_BOOST_GRAPH
+# Do not require boost::serialization headers.
+BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_MULTI_INDEX_DISABLE_SERIALIZATION"
+# FIXME: It would be nice to check that the Boost package we require
+# (boost::graph, boost::multi_index...)
 
 if test "${with_boost+set}" = set; then
   MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-boost=$with_boost"

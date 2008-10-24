@@ -1,3 +1,11 @@
+2008-10-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* configure.ac: Add -DBOOST_MULTI_INDEX_DISABLE_SERIALIZATION to
+	BOOST_CPPFLAGS, so that boost::multi_index does not include
+	boost::serialize.  We do not need serialize, it works around
+	problems when people do not have the package installed, and it
+	is less work for the preprocessor.  (This fixes ticket #184)
+
 2008-10-24  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Bug fixes.
