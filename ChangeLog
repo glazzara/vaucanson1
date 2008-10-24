@@ -1,5 +1,10 @@
 2008-10-24  Reuben Thomas  <rrt@sc3d.org>
 
+	Fix English.
+	* data/template_graph_impl.hh: Fix some English.
+
+2008-10-24  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove labels_are_couples.
 	This labels kind is defunct, and used nowhere, and not part of
 	the new scheme of things.

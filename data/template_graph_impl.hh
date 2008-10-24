@@ -9,9 +9,9 @@
 ** Don't forget to run the add-vcsn-impl.sh tool when you are finished.
 ** This tool will generate the proper headers to use your structure with Vaucanson.
 **
-** Many object and tools can be found in vaucanson/misc/ and vaucanson/tools/
+** Many objects and tools can be found in vaucanson/misc/ and vaucanson/tools/
 ** For instance, vaucanson/misc/contract.hh and vaucanson/misc/static.hh can
-** be useful to do static testing and set post and pre conditions.
+** be useful for static testing and to set pre- and post-conditions.
 */
 
 #ifndef #IMPL_NAME_#_GRAPH_IMPL_HH
