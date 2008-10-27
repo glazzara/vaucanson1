@@ -1,5 +1,11 @@
 2008-10-27  Reuben Thomas  <rrt@sc3d.org>
 
+	Fix English typo.
+	* /home/rrt/vaucanson/trunk/include/vaucanson/design_pattern/element.hh:
+	  theorical -> theoretical.
+
+2008-10-27  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove the ancient and unused semigroup_kind type.
 	The type semigroup_kind is defined for each semiring, but
 	never used. The code is old, so if it hasn't been used for

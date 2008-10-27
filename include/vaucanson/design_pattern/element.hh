@@ -44,7 +44,7 @@ namespace vcsn {
    * to have an orthogonal construction of object from two different
    * viewpoints:
    *
-   * - Algebraic/Theorical one, from a hierarchy of structures,
+   * - Algebraic/Theoretical one, from a hierarchy of structures,
    * - Implementation and computations.
    *
    * @c  Element proposes  a lot  of different  constructors so  as to
