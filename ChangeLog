@@ -1,3 +1,9 @@
+2008-10-27  Reuben Thomas  <rrt@sc3d.org>
+
+	Use English for automaton names.
+	* src/demos/one_rule_rewriting/ORR_demo.cc: Use "L" and "R"
+	  rather than "G" and "D" in name labels.
+
 2008-10-24  Reuben Thomas  <rrt@sc3d.org>
 
 	Add some missing tests to svn:ignore list.

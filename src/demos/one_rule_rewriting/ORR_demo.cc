@@ -49,7 +49,7 @@ main()
   // we need the left automaton to be realtime
   realtime_here(left_auto);
 
-  eval_an_expression(left_auto, "G");
+  eval_an_expression(left_auto, "L");
 
   /*------------------.
   | Right automaton.  |
@@ -57,7 +57,7 @@ main()
 
   automaton_t right_auto = replace_right(from, to, A, A);
 
-  eval_an_expression(right_auto, "D");
+  eval_an_expression(right_auto, "R");
 
   /*-------------------.
   | Result automaton.  |
@@ -71,7 +71,7 @@ main()
   | Dump and eval.  |
   `----------------*/
 
-  eval_an_expression(res_auto, "GD");
+  eval_an_expression(res_auto, "LR");
 
   return 0;
 }
