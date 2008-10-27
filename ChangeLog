@@ -1,5 +1,21 @@
 2008-10-27  Reuben Thomas  <rrt@sc3d.org>
 
+	Add "latteux" as ORR_iterate.
+	Latteux is an iterative ORR program that obviously shares
+	a history with the rest of the code in this directory.
+	It should be more integrated, and it's not at all obvious
+	that it works properly, but for the moment, I have just
+	added it to the directory and made sure that it compiles,
+	and at least runs. In future it should be tested thoroughly,
+	debugged, and merged in with the rest of the code (at the
+	moment there's a lot of code in ORR_iterate.cc that appears
+	in other files in this directory).
+	* src/demos/one_rule_rewriting/Makefile.am: Add ORR_iterate.
+	* src/demos/one_rule_rewriting/ORR_iterate.cc: New.
+	* src/demos/one_rule_rewriting/shortest.hh: New.
+
+2008-10-27  Reuben Thomas  <rrt@sc3d.org>
+
 	Use English for automaton names.
 	* src/demos/one_rule_rewriting/ORR_demo.cc: Use "L" and "R"
 	  rather than "G" and "D" in name labels.

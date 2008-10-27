@@ -21,33 +21,22 @@ noinst_PROGRAMS = \
   fibonacci_rw_comp \
   fibonacci_fmp \
   ORR_demo \
+  ORR_iterate \
   ORR_rw \
   ORR_fmp \
   check_rw
 
+LDADD = $(top_builddir)/lib/libkrat_exp.la
+
 fibonacci_demo_SOURCES = fibonacci_demo.cc
-fibonacci_demo_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
 fibonacci_rw_comp_SOURCES = fibonacci_rw_composition.cc
-fibonacci_rw_comp_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
 fibonacci_rw_SOURCES = fibonacci_rw_gen.cc
-fibonacci_rw_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
 fibonacci_fmp_SOURCES = fibonacci_fmp_gen.cc
-fibonacci_fmp_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
 check_rw_SOURCES = check_rw_composition.cc
-check_rw_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
 ORR_demo_SOURCES = ORR_demo.cc
-ORR_demo_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
+ORR_iterate_SOURCES = ORR_iterate.cc
 ORR_rw_SOURCES = ORR_rw_gen.cc
-ORR_rw_LDADD = $(top_builddir)/lib/libkrat_exp.la
-
 ORR_fmp_SOURCES = ORR_fmp_gen.cc
-ORR_fmp_LDADD = $(top_builddir)/lib/libkrat_exp.la
 
 check-local: check_rw
 	./check_rw
