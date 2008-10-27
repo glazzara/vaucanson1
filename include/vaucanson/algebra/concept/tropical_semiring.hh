@@ -46,12 +46,6 @@ namespace vcsn {
   struct virtual_types<algebra::TropicalSemiring<TropicalKind> >
     : virtual_types<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> > >
   {
-    /**
-     * We can see a NumericalSemiring as a semigroup with +.
-     *
-     * It is an arbitrary decision, it could be mul_kind too.
-     */
-    typedef algebra::add_kind	semigroup_kind;
   };
 
 

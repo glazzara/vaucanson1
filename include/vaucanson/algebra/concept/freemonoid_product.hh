@@ -117,9 +117,6 @@ namespace vcsn {
   struct virtual_types<algebra::FreeMonoidProduct<F, S> >
     : virtual_types<algebra::FreeMonoidProductBase<algebra::FreeMonoidProduct<F, S> > >
   {
-    /// Commonly a free monoid use the multiplication symbol as operation.
-    typedef algebra::mul_kind semigroup_kind;
-
     typedef F		first_monoid_t;
     typedef S		second_monoid_t;
   };

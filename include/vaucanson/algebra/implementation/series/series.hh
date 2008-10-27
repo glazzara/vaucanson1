@@ -101,8 +101,6 @@ namespace vcsn {
   struct virtual_types<algebra::Series<W, M> >
     : virtual_types<algebra::SeriesBase<algebra::Series<W, M> > >
   {
-    typedef algebra::mul_kind semigroup_kind;
-
     typedef W semiring_t;
     typedef M monoid_t;
   };

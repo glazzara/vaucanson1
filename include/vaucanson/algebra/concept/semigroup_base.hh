@@ -38,8 +38,6 @@ namespace vcsn {
 
     /**
      * @brief Base class of all structures that are semigroups.
-     *
-     * All derived classes must define type virtual_types<S>::semigroup_kind.
      */
     template<class Self>
     struct SemigroupBase : Structure<Self>
@@ -72,9 +70,7 @@ namespace vcsn {
   template<typename S>
   struct virtual_types<algebra::SemigroupBase<S> >
     : virtual_types<Structure<S> >
-  {
-    typedef undefined_type semigroup_kind;
-  };
+  { };
 
 
   /*-----------------------------------.

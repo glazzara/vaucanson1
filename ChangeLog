@@ -1,5 +1,19 @@
 2008-10-27  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove the ancient and unused semigroup_kind type.
+	The type semigroup_kind is defined for each semiring, but
+	never used. The code is old, so if it hasn't been used for
+	so long, it might as well be removed. (It's just another
+	trap for the unwary, otherwise.)
+	* include/vaucanson/algebra/concept/freemonoid_product.hh.
+	* include/vaucanson/algebra/concept/numerical_semiring.hh.
+	* include/vaucanson/algebra/concept/semigroup_base.hh.
+	* include/vaucanson/algebra/concept/tropical_semiring.hh.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh.
+	* include/vaucanson/algebra/implementation/series/series.hh.
+
+2008-10-27  Reuben Thomas  <rrt@sc3d.org>
+
 	Add "latteux" as ORR_iterate.
 	Latteux is an iterative ORR program that obviously shares
 	a history with the rest of the code in this directory.

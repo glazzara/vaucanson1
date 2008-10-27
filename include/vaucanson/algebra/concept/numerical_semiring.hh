@@ -58,12 +58,6 @@ namespace vcsn {
   struct virtual_types<algebra::NumericalSemiring>
     : virtual_types<algebra::SemiringBase<algebra::NumericalSemiring> >
   {
-    /**
-     * It is possible to consider a NumericalSemiring as a semigroup with +.
-     *
-     * It is an arbitrary decision, it could be mul_kind too.
-     */
-    typedef           algebra::add_kind    semigroup_kind;
   };
 
   /// Services of @c Element for numerical semirings.
