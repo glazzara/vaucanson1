@@ -1,3 +1,8 @@
+2008-10-28  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Simplify svn ignore of sanity.
+	Replace the list of exhaustive files by vaucanson_*_hh.cc
+
 2008-10-27  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix English typo.
