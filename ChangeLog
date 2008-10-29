@@ -1,3 +1,9 @@
+2008-10-29  Reuben Thomas  <rrt@sc3d.org>
+
+	Correct typo.
+	* /include/vaucanson/automata/conceptautomata_base.hh: "states"
+	  should be "transitions".
+
 2008-10-28  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Simplify svn ignore of sanity.

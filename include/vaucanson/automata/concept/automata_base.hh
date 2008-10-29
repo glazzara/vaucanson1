@@ -445,7 +445,7 @@ namespace vcsn {
       /// Accessor to the set of states. (const version)
       states_t states() const;
 
-      /// Accessor to the set of states. (const version)
+      /// Accessor to the set of transitions. (const version)
       transitions_t transitions() const;
 
       /// Accessor to the initial application.
