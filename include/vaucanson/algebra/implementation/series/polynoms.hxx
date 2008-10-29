@@ -612,9 +612,9 @@ namespace vcsn {
       return ret;
     }
 
-      /*-------------.
-      | input-output |
-      `-------------*/
+    /*-------------.
+    | input-output |
+    `-------------*/
 
     template<typename W, typename M, typename St, typename Tm, typename Tw>
     St& op_rout(const algebra::Series<W, M>& s,
@@ -624,27 +624,30 @@ namespace vcsn {
       typename algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
 
       while (i != p.end())
+      {
+	if (i != p.begin())
+	  st << s.representation()->plus;
+
+	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
 	{
-	  if (i != p.begin())
-	    st << s.representation()->plus;
-
-	  if (i->second != identity_value(SELECT(W), SELECT(Tw)))
-	  {
-	    st << s.representation()->open_par << s.representation()->open_weight;
-	    op_rout(s.semiring(), st, i->second);
-	    st << s.representation()->close_weight
-	       << s.representation()->spaces.front();
-	  }
-
-	  op_rout(s.monoid(), st, i->first);
-
-	  if (i->second != identity_value(SELECT(W), SELECT(Tw)))
-	    st << s.representation()->close_par;
-
-	  ++i;
+	  st << s.representation()->open_par
+	     << s.representation()->open_weight;
+	  op_rout(s.semiring(), st, i->second);
+	  st << s.representation()->close_weight
+	     << s.representation()->spaces.front();
 	}
+
+	op_rout(s.monoid(), st, i->first);
+
+	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
+	  st << s.representation()->close_par;
+
+	++i;
+      }
+
       if (i == p.begin()) /* case zero */
 	op_rout(s.semiring(), st, zero_value(SELECT(W), SELECT(Tw)));
+
       return st;
     }
 

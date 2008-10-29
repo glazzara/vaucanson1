@@ -1,3 +1,9 @@
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Cosmetic changes.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Here.
+
 2008-10-29  Reuben Thomas  <rrt@sc3d.org>
 
 	Improve some FIXMEs.
