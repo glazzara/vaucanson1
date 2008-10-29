@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -118,9 +118,17 @@ namespace vcsn {
       (const vcsn::algebra::RationalNumber min,
        const vcsn::algebra::RationalNumber max);
 
-      /// Generate a random std::pair<char, int>.
-      template <>
-      std::pair<char, int> generate<std::pair<char, int> > ();
+      /// Generate a random std::pair<S, T>.
+# define DECLARE_PAIR_SPECIALIZATION(TYPE1, TYPE2) \
+      template <> \
+      std::pair<TYPE1, TYPE2> generate<std::pair<TYPE1, TYPE2> >()
+
+      DECLARE_PAIR_SPECIALIZATION(char, char);
+      DECLARE_PAIR_SPECIALIZATION(char, int);
+      DECLARE_PAIR_SPECIALIZATION(int,  int);
+      DECLARE_PAIR_SPECIALIZATION(int,  char);
+
+# undef DECLARE_PAIR_SPECIALIZATION
 
       /// @name Small alphabetic letters random generation tools.
       /** @{ */

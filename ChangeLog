@@ -1,5 +1,17 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add more specialization for the letter random generator.
+	* include/vaucanson/misc/random.hh (generate): New macro
+	  `DECLARE_PAIR_SPECIALIZATION' to declare three more specialization
+	  for std::pair (std::pair<char,char>, std::pair<int,int> and
+	  std::pair<int,char>).
+	* include/vaucanson/misc/random.hxx (generate): New macro
+	  `MAKE_PAIR_SPECIALIZATION' to make three more specialization for
+	  std::pair (std::pair<char,char>, std::pair<int,int> and
+	  std::pair<int,char>).
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add the pair_to_fmp algorithm (close #173).
 	* include/Makefile.am: Add new files to the distribution.
 	* include/vaucanson/algorithms/pair_to_fmp.hh: New.

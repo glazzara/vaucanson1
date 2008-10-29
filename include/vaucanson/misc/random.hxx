@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -173,12 +173,20 @@ namespace vcsn {
 					 denom * ratio);
       }
 
-      template <>
-      inline
-      std::pair<char, int> generate<std::pair<char, int> > ()
-      {
-	return std::make_pair (generate<char> (), generate<int> ());
+# define MAKE_PAIR_SPECIALIZATION(TYPE1, TYPE2) \
+      template <> \
+      inline \
+      std::pair<TYPE1, TYPE2> generate<std::pair<TYPE1, TYPE2> >() \
+      { \
+	return std::make_pair(generate<TYPE1> (), generate<TYPE2> ()); \
       }
+
+      MAKE_PAIR_SPECIALIZATION(char, char)
+      MAKE_PAIR_SPECIALIZATION(char, int)
+      MAKE_PAIR_SPECIALIZATION(int,  int)
+      MAKE_PAIR_SPECIALIZATION(int,  char)
+
+# undef MAKE_PAIR_SPECIALIZATION
 
       template <>
       inline
