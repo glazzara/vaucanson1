@@ -1,5 +1,15 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Rework a trait used to mute graph implementations.
+	* include/vaucanson/automata/concept/automata_base.hh
+	  (mute_graph_impl_monoid_traits): Rename the `M' template argument
+	  to `W'. Add the `L' template argument. Remove calculation of the
+	  letter type, as it must now be provided by the user. Replace
+	  `monoid_elt_value_t' by `W'. Replace `letter_t' by `L'. The trait
+	  now only deals with implementation details.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix handling of the rep_ attribute in free_monoid.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
 	  (representation): Add `const' qualifier.

@@ -267,8 +267,9 @@ namespace vcsn {
   }
 
   // Traits to mute an existing graph implementation into another
-  // graph implementation with a different monoid type.
-  template <typename T, typename L>
+  // graph implementation with a different word implementation and letter
+  // implementation.
+  template <typename G, typename W, typename L>
   struct mute_graph_impl_monoid_traits
   {
     /// The computed new implementation.
@@ -283,25 +284,24 @@ namespace vcsn {
 	    typename Letter,							\
 	    typename Tag,							\
 	    typename GeometryCoords,						\
-	    typename M>								\
+	    typename W,								\
+	    typename L>								\
   struct mute_graph_impl_monoid_traits<Type<Kind,				\
 					    WordValue,				\
 					    WeightValue,			\
 					    SeriesValue,			\
 					    Letter,				\
 					    Tag,				\
-					    GeometryCoords>, M>			\
+					    GeometryCoords>, W, L>		\
   {										\
     typedef Type<Kind, WordValue, WeightValue, SeriesValue,			\
 		 Letter, Tag, GeometryCoords> graph_t;				\
-    typedef typename M::value_t monoid_elt_value_t;				\
-    typedef typename M::set_t::alphabet_t::letter_t letter_t;			\
     typedef typename algebra::mute_series_impl<SeriesValue, WeightValue,	\
-					       monoid_elt_value_t>::ret		\
+					       W>::ret				\
 					       series_impl_t;			\
-    typedef Type<Kind, monoid_elt_value_t,					\
+    typedef Type<Kind, W,							\
 		 WeightValue, series_impl_t,					\
-		 letter_t, Tag, GeometryCoords> ret;				\
+		 L, Tag, GeometryCoords> ret;					\
   }
 
   /*-----------------------------------.
