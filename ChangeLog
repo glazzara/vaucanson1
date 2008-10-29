@@ -1,5 +1,14 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix handling of the rep_ attribute in free_monoid.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
+	  (representation): Add `const' qualifier.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  (CTORS): Reorder attributes initialization list.
+	  (representation): Add `const' qualifier.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cosmetic changes.
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
 	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Here.

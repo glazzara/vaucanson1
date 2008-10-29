@@ -50,7 +50,7 @@ namespace vcsn
       FreeMonoid(const FreeMonoid& w);
 
       /// Representation's accessor.
-      const boost::shared_ptr<monoid_rep<FreeMonoid<A> > > representation();
+      const boost::shared_ptr<monoid_rep<FreeMonoid<A> > > representation() const;
 
       /// Alphabet's accessor.
       /// @bug FIXME: this interface should not exist (s.e. are const once

@@ -29,30 +29,31 @@ namespace vcsn
 
     template <class A>
     FreeMonoid<A>::FreeMonoid(const A& a) :
-      alph_(a),
-      rep_(monoid_rep_default<FreeMonoid<A> >::get_instance())
+      rep_(monoid_rep_default<FreeMonoid<A> >::get_instance()),
+      alph_(a)
     {
     }
 
     template <class A>
     FreeMonoid<A>::FreeMonoid(const A& a,
 			      monoid_rep<FreeMonoid<A> > mr) :
-      alph_(a),
-      rep_(boost::shared_ptr<monoid_rep<FreeMonoid<A> > >(new monoid_rep<FreeMonoid<A> > (mr)))
+      rep_(boost::shared_ptr<monoid_rep<FreeMonoid<A> > >(
+	new monoid_rep<FreeMonoid<A> > (mr))),
+      alph_(a)
     {
     }
 
     template <class A>
     FreeMonoid<A>::FreeMonoid(const FreeMonoid& w) :
       FreeMonoidBase<FreeMonoid<A> >(w),
-      alph_(w.alph_),
-      rep_(w.rep_)
+      rep_(w.rep_),
+      alph_(w.alph_)
     {
     }
 
     template <class A>
     const boost::shared_ptr<monoid_rep<FreeMonoid<A> > >
-    FreeMonoid<A>::representation()
+    FreeMonoid<A>::representation() const
     {
       return rep_;
     }
