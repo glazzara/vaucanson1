@@ -424,7 +424,7 @@ namespace vcsn {
       typedef typename automaton_traits<T>::rdelta_state_iterator rdelta_state_iterator;
       typedef typename automaton_traits<T>::rdelta_transition_iterator rdelta_transition_iterator;
 
-      /// The set of series from which is build the automaton (const version).
+      /// The set of series from which is build the automaton.
       const series_set_t& series() const;
 
       /// The optional information aggregated to the automaton.
@@ -442,10 +442,13 @@ namespace vcsn {
       /// Return true if the automaton is consistent.
       bool exists() const;
 
-      /// Accessor to the set of states.
+      /// FIXME: These next two methods should really be replaced with
+      /// (single, i.e. not begin and end) iterators. (See Trac #191.)
+      
+      /// Accessor to the set of states. (treat as const)
       states_t states() const;
 
-      /// Accessor to the set of transitions.
+      /// Accessor to the set of transitions. (treat as const)
       transitions_t transitions() const;
 
       /// Accessor to the initial application.
@@ -454,12 +457,11 @@ namespace vcsn {
       /// Accessor to the final application.
       final_support_t final() const;
 
-      /** Return true if the state is initial (ie it is in the initial
-       support) . */
+      /// Return true if the state is initial (i.e. is in the initial support).
       bool is_initial(const hstate_t& state) const;
       bool is_initial(unsigned state) const;
 
-      /// Return true if the state is final (ie it is in the final support).
+      /// Return true if the state is final (i.e. is in the final support).
       bool is_final(const hstate_t& state) const;
       bool is_final(unsigned state) const;
 

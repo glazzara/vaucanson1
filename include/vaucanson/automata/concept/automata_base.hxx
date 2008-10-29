@@ -91,7 +91,7 @@ namespace vcsn {
     return op_exists(this->structure(), this->value());
   }
 
-  /** Accessor to the set of states. (const version) */
+  /** Accessor to the set of states. (treat as const) */
   template <typename Self, typename T>
   typename automaton_traits<T>::states_t
   MetaElement<AutomataBase<Self>, T>::states() const
@@ -99,7 +99,7 @@ namespace vcsn {
     return op_states(this->structure(), this->value());
   }
 
-  /** Accessor to the set of states. (const version) */
+  /** Accessor to the set of transitions. (treat as const) */
   template <typename Self, typename T>
   typename automaton_traits<T>::transitions_t
   MetaElement<AutomataBase<Self>, T>::transitions() const

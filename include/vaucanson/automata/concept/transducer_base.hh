@@ -80,7 +80,7 @@ namespace vcsn {
       typedef undefined_type	ret;
   };
 
-  // FIXME: the semantic should be defined more precisely.
+  // FIXME: the semantics should be defined more precisely.
   // What is the output "on a graph" (it is well defined with
   // transducers)
   template <class T>

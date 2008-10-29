@@ -181,6 +181,7 @@
 
 //Const versions of the previous macros.
 //You should always use these macros unless you need to erase over iteration.
+// FIXME: Currently, these do not ensure const-ness. See Trac #190.
 # define for_all_const_letters(I, A)			\
   for_all_const_iterator (alphabet_iterator, I, A)
 
