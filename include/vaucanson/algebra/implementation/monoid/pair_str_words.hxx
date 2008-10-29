@@ -72,7 +72,7 @@ namespace vcsn {
 		    std::basic_string<typename S::letter_t> >
     identity_value(SELECTOR2(algebra::FreeMonoidProduct<F, S>),
 		   SELECTOR2(std::pair<std::basic_string<typename F::letter_t>,
-			    std::basic_string<typename S::letter_t> >))
+			     std::basic_string<typename S::letter_t> >))
     {
       static const std::pair<std::basic_string<typename F::letter_t>,
 			     std::basic_string<typename S::letter_t> >
@@ -113,22 +113,24 @@ namespace vcsn {
       return f(v.first.length(), v.second.length());
     }
 
-    template <typename Self, typename St, typename T>
+    template <typename F, typename S, typename St>
     St&
-    op_rout(const algebra::FreeMonoidProductBase<Self>& s,
+    op_rout(const FreeMonoidProduct<F, S>& s,
 	    St& st,
-	    const T& v)
+	    const std::pair<std::basic_string<typename F::letter_t>,
+			    std::basic_string<typename S::letter_t> >& v)
     {
       if (v.first.empty() && v.second.empty())
-	st << representation_traits<Self>::default_eps_eps();
+	st << s.representation()->empty;
       else
       {
-	st << "(";
+	st << s.representation()->open_par;
 	op_rout(s.first_monoid(), st, v.first);
-	st << ",";
+	st << s.representation()->sep;
 	op_rout(s.second_monoid(), st, v.second);
-	st << ")";
+	st << s.representation()->close_par;
       }
+
       return st;
     }
 

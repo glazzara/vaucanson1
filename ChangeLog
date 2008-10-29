@@ -1,5 +1,20 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Use monoid representation for FMP words implementation.
+	* include/vaucanson/algebra/implementation/monoid/pair_str_words.hh
+	  (op_first, op_second, op_in_mirror, op_length): Remove `algebra'
+	  namespace qualifier.
+	  (op_rout): Rename the first template argument from `Self' to `F',
+	  add the template argument `S' and remove the template argument
+	  `T'. Remove `algebra' namespace qualifier. Use `FreeMonoidProduct'
+	  and explicit word type. Cosmetic changes.
+	* include/vaucanson/algebra/implementation/monoid/pair_str_words.hxx:
+	  Cosmetic changes.
+	  (op_rout): Update signature according to the header file. Use
+	  monoid representation tokens (open_par, sep, close_par).
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add support for monoid representation in fmp.
 	* include/vaucanson/algebra/concept/freemonoid_product.hh: Add
 	  predeclaration of `FreeMonoidProduct'. Add specialization of

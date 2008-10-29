@@ -32,15 +32,23 @@ namespace vcsn {
     | Implementation of words with std::pair and std::basic_string |
     `-------------------------------------------------------------*/
 
-    template <class Self, typename T>
-    typename
-    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t
-    op_first(const algebra::FreeMonoidProductBase<Self>& s, T& v);
+    // FIXME: the four following functions should not use
+    // FreeMonoidProductBase. See op_rout for hints.
+    template <typename Self, typename T>
+    typename MetaElement<FreeMonoidProductBase<Self>, T>::first_monoid_elt_t
+    op_first(const FreeMonoidProductBase<Self>& s, T& v);
 
-    template <class Self, typename T>
-    typename
-    MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t
-    op_second(const algebra::FreeMonoidProductBase<Self>& s, T& v);
+    template <typename Self, typename T>
+    typename MetaElement<FreeMonoidProductBase<Self>, T>::second_monoid_elt_t
+    op_second(const FreeMonoidProductBase<Self>& s, T& v);
+
+    template <typename Self, typename T>
+    void
+    op_in_mirror(const FreeMonoidProductBase<Self>& s, T& v);
+
+    template <typename Self, typename T, typename Ftor>
+    typename Ftor::result_type
+    op_length(const FreeMonoidProductBase<Self>&, const T& v, Ftor f);
 
     template <class F, class S>
     void
@@ -74,18 +82,12 @@ namespace vcsn {
 	      SELECTOR2(std::pair<std::basic_string<typename F::letter_t>,
 				  std::basic_string<typename S::letter_t> >));
 
-    template<typename Self, typename T>
-    void op_in_mirror (const algebra::FreeMonoidProductBase<Self>& s, T& v);
-
-    template<typename Self, typename T, typename Ftor>
-    typename Ftor::result_type
-    op_length(const algebra::FreeMonoidProductBase<Self>&, const T& v, Ftor f);
-
-    template <typename Self, typename St, typename T>
+    template <typename F, typename S, typename St>
     St&
-    op_rout(const algebra::FreeMonoidProductBase<Self>& s,
+    op_rout(const FreeMonoidProduct<F, S>& s,
 	    St& st,
-	    const T& v);
+	    const std::pair<std::basic_string<typename F::letter_t>,
+			    std::basic_string<typename S::letter_t> >& v);
 
   } // ! algebra
 
