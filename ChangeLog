@@ -1,5 +1,21 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add pair automaton to the test-suite and add pair_to_fmp test.
+	* src/tests/include/Makefile.am: Add new file to the distribution.
+	* src/tests/include/tests/automata/algos/README: Add a short
+	  description of the new pair_automata folder.
+	* src/tests/include/tests/automata/algos/pair_automata/pair_to_fmp_test.hh: New.
+	* src/tests/test-suites/char_char_boolean_automaton.defs: New.
+	* src/tests/test-suites/context_headers_char_char_boolean.defs: New.
+	* src/tests/test-suites/context_headers_int_int_boolean.defs: New.
+	* src/tests/test-suites/generate-all.sh: Generate tests for
+	  `char_char_boolean_automaton' and `int_int_boolean_automaton'.
+	* src/tests/test-suites/int_int_boolean_automaton.defs: New.
+	* src/tests/test-suites/subdirs.mk: Update according to the new
+	  tests.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add more specialization for the letter random generator.
 	* include/vaucanson/misc/random.hh (generate): New macro
 	  `DECLARE_PAIR_SPECIALIZATION' to declare three more specialization

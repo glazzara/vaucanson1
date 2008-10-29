@@ -31,10 +31,13 @@ algebra_tropical_semiring_min_int \
 algebra_tropical_semiring_min_rational \
 boolean_automaton \
 boolean_transducer \
+char_char_boolean_automaton \
 context_headers_boolean \
 context_headers_boolean_transducer \
+context_headers_char_char_boolean \
 context_headers_fmp_transducer \
 context_headers_int_boolean \
+context_headers_int_int_boolean \
 context_headers_r \
 context_headers_z \
 context_headers_z_fmp_transducer \
@@ -43,6 +46,7 @@ context_headers_z_min_plus \
 context_headers_z_transducer \
 fmp_transducer \
 int_boolean_automaton \
+int_int_boolean_automaton \
 r_automaton \
 z_automaton \
 z_fmp_transducer \

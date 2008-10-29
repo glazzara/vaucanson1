@@ -9,3 +9,4 @@ linear combination of letters
 - boolean_automata: Boolean automata
 - series_multiplicity_transducers: Transducers over P(B*)
 - fmp_transducers: Free monoid product transducers
+- pair_automata: Automata over monoids with `pair' letter type.

@@ -1,0 +1,5 @@
+#include <vaucanson/int_int_boolean_automaton_structures.hh>
+
+using namespace vcsn::int_int_boolean_automaton;
+
+#define TEST_STATIC_ARGS automaton_t

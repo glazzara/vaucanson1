@@ -101,7 +101,7 @@ done
 ## Automaton.  ##
 ## ----------- ##
 
-for kind in boolean int_boolean r z z_max_plus z_min_plus
+for kind in boolean int_boolean r z z_max_plus z_min_plus char_char_boolean int_int_boolean
 do
   generate \
       context_headers_${kind} \
@@ -118,6 +118,11 @@ do
   if [ $kind = "boolean" ]; then
     TEST="$TEST automata/algos/boolean_automata"
   fi
+
+  if [ $kind = "char_char_boolean" ] || [ $kind = "int_int_boolean" ]; then
+    TEST="$TEST automata/algos/pair_automata"
+  fi
+
   generate \
       ${kind}_automaton \
       ${TEST}

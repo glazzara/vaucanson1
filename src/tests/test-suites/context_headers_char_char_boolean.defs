@@ -1,0 +1,5 @@
+#include <vaucanson/char_char_boolean_automaton_structures.hh>
+
+using namespace vcsn::char_char_boolean_automaton;
+
+#define TEST_STATIC_ARGS automaton_t

@@ -66,6 +66,7 @@ tests/automata/algos/boolean_automata/berry_sethi_test.hh			      \
 tests/automata/algos/boolean_automata/brzozowski_test.hh			      \
 tests/automata/algos/boolean_automata/complete_test.hh				      \
 tests/automata/algos/boolean_automata/minimization_test.hh			      \
+tests/automata/algos/pair_automata/pair_to_fmp_test.hh				      \
 tests/automata/algos/boolean_rw_transducers/invert_test.hh			      \
 tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh			      \
 tests/automata/algos/fmp_transducers/is_ltl_test.hh				      \
