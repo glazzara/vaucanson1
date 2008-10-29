@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,20 +23,37 @@ namespace vcsn {
 
   namespace algebra {
 
+    template <typename F, typename S>
+    monoid_rep<FreeMonoidProduct<F, S> >::monoid_rep() :
+    monoid_rep<F>(),
+    open_par("("),
+    sep(","),
+    close_par(")")
+    {}
+
     /*------------------------.
     | FreeMonoidProduct<F, S> |
     `------------------------*/
 
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const F& a, const S& b) :
-      first_monoid_ (a), second_monoid_ (b)
+      first_monoid_ (a), second_monoid_ (b),
+      rep_(monoid_rep_default<FreeMonoidProduct<F, S> >::get_instance())
+    {}
+
+    template <class F, class S>
+    FreeMonoidProduct<F, S>::FreeMonoidProduct(const F& a, const S& b,
+					       monoid_rep<FreeMonoidProduct<F, S> > mr) :
+      first_monoid_ (a), second_monoid_ (b),
+      rep_(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >(new monoid_rep<FreeMonoidProduct<F, S> >(mr)))
     {}
 
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const FreeMonoidProduct& w) :
       FreeMonoidProductBase<FreeMonoidProduct<F, S> >(w),
       first_monoid_(w.first_monoid_),
-      second_monoid_(w.second_monoid_)
+      second_monoid_(w.second_monoid_),
+      rep_(w.rep_)
     {}
 
     template <class F, class S>
@@ -65,6 +82,13 @@ namespace vcsn {
     FreeMonoidProduct<F, S>::second_monoid() const
     {
       return second_monoid_;
+    }
+
+    template <typename F, typename S>
+    const boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >
+    FreeMonoidProduct<F, S>::representation() const
+    {
+      return rep_;
     }
 
     template<class F, class S>

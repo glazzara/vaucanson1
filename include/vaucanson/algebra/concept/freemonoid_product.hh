@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,16 +17,45 @@
 #ifndef VCSN_ALGEBRA_CONCEPT_FREEMONOID_PRODUCT_HH
 # define VCSN_ALGEBRA_CONCEPT_FREEMONOID_PRODUCT_HH
 
-# include <string>
 # include <vaucanson/algebra/concept/freemonoid_product_base.hh>
+# include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
   namespace algebra {
 
-    /** @addtogroup algebra    */ /** @{ */
+    /** @addtogroup algebra */ /** @{ */
     /** @addtogroup fmp */ /** @{ */
+
+    /*---------------.
+    | Predeclaration |
+    `---------------*/
+
+    template <class F, class S>
+    struct FreeMonoidProduct;
+
+    /*-------------------------------------------------------------.
+    | Specialization of the monoid_rep structure for this concept. |
+    `-------------------------------------------------------------*/
+
+    template <typename F, typename S>
+    struct monoid_rep<FreeMonoidProduct<F, S> > : monoid_rep<F>
+    {
+      /// The representation of the empty word.
+      using monoid_rep<F>::empty;
+
+      /// The representation of the opening parenthesis.
+      std::string open_par;
+
+      /// The representation of the separator.
+      std::string sep;
+
+      /// The representation of the closing parenthesis.
+      std::string close_par;
+
+      monoid_rep();
+    };
 
     /*------------------------.
     | FreeMonoidProduct<F, S> |
@@ -43,6 +72,10 @@ namespace vcsn {
       /// Constructor based on two free monoids.
       FreeMonoidProduct(const F& a, const S& b);
 
+      /// Constructor with explicit representation.
+      FreeMonoidProduct(const F& a, const S& b,
+			monoid_rep<FreeMonoidProduct<F, S> > mr);
+
       /// Copy constructor.
       FreeMonoidProduct(const FreeMonoidProduct& w);
 
@@ -57,9 +90,15 @@ namespace vcsn {
 
       const second_monoid_t&	second_monoid() const;
 
+      /// Representation's accessor.
+      const boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >
+	representation() const;
+
     protected:
-      first_monoid_t	first_monoid_;
-      second_monoid_t	second_monoid_;
+      first_monoid_t		first_monoid_;
+      second_monoid_t		second_monoid_;
+      const boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >
+				rep_;
     };
 
     template<class F, class S>
@@ -69,7 +108,7 @@ namespace vcsn {
     /** @} */
     /** @} */
 
-  } // algebra
+  } // ! algebra
 
   /** @addtogroup algebra    */ /** @{ */
   /** @addtogroup fmp */ /** @{ */

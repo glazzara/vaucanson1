@@ -1,5 +1,17 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add support for monoid representation in fmp.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh: Add
+	  predeclaration of `FreeMonoidProduct'. Add specialization of
+	  `monoid_rep' for the `FreeMonoidProduct' concept. Add constructor
+	  to explicitly give the monoid representation. Add new attribute
+	  and accessor `rep_'. Cosmetic changes.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Add
+	  initialization of the `rep_' attribute to all constructors. Add
+	  implementation of the new constructor. Cosmetic changes.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add the missing op_rout for FMP_base.
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx:
