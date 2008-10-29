@@ -1,5 +1,15 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix free monoid words implementation.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hh
+	  (op_rout): Change signature by adding the `const' qualifier to the
+	  thirs argument.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx
+	  (op_rout): Update third argument. Remove parenthesis after the
+	  `empty' attribute.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add pair automaton to the test-suite and add pair_to_fmp test.
 	* src/tests/include/Makefile.am: Add new file to the distribution.
 	* src/tests/include/tests/automata/algos/README: Add a short

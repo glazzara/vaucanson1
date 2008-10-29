@@ -48,10 +48,10 @@ namespace vcsn {
     St&
     op_rout(const FreeMonoid<A>& s,
 	    St& st,
-	    std::basic_string<typename A::letter_t>& v)
+	    const std::basic_string<typename A::letter_t>& v)
     {
       if (v.empty())
-	st << s.representation()->empty();
+	st << s.representation()->empty;
       else
 	st << v;
 
