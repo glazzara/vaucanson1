@@ -312,6 +312,8 @@ vaucanson/algorithms/fmp_to_rw.hh				\
 vaucanson/algorithms/fmp_to_rw.hxx				\
 vaucanson/algorithms/ltl_to_pair.hh				\
 vaucanson/algorithms/ltl_to_pair.hxx				\
+vaucanson/algorithms/pair_to_fmp.hh				\
+vaucanson/algorithms/pair_to_fmp.hxx				\
 vaucanson/algorithms/has_succ_comp.hh				\
 vaucanson/algorithms/has_succ_comp.hxx				\
 vaucanson/algorithms/image.hh					\

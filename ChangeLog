@@ -1,5 +1,13 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add the pair_to_fmp algorithm (close #173).
+	* include/Makefile.am: Add new files to the distribution.
+	* include/vaucanson/algorithms/pair_to_fmp.hh: New.
+	* include/vaucanson/algorithms/pair_to_fmp.hxx: New.
+	* doc/NEWS.txt: Update.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Minor updates to ltl_to_pair.
 	* include/vaucanson/algorithms/ltl_to_pair.hh (mute_ltl_to_pair):
 	  When calculating the `ret_impl_t', now explicitly specify the

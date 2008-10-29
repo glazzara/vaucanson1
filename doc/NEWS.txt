@@ -8,8 +8,12 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
-Vaucanson 1.x, October 13th, 2008
+Vaucanson 1.x, October 29th, 2008
 =================================
+
+- The Vaucanson library
+
+  + Add pair_to_fmp algorithm.
 
 - TAF-Kit
 
