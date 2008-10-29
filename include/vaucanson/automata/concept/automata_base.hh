@@ -442,10 +442,10 @@ namespace vcsn {
       /// Return true if the automaton is consistent.
       bool exists() const;
 
-      /// Accessor to the set of states. (const version)
+      /// Accessor to the set of states.
       states_t states() const;
 
-      /// Accessor to the set of transitions. (const version)
+      /// Accessor to the set of transitions.
       transitions_t transitions() const;
 
       /// Accessor to the initial application.

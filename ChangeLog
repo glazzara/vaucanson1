@@ -1,5 +1,13 @@
 2008-10-29  Reuben Thomas  <rrt@sc3d.org>
 
+	Correct comment: these are not "const versions" of methods.
+	* /include/vaucanson/automata/conceptautomata_base.hh: The
+	  methods states and transitions were marked as "const
+	  versions" but they don't return a const type. Remove this
+	  note on each method.
+
+2008-10-29  Reuben Thomas  <rrt@sc3d.org>
+
 	Correct typo.
 	* /include/vaucanson/automata/conceptautomata_base.hh: "states"
 	  should be "transitions".
