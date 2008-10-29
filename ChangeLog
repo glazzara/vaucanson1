@@ -1,5 +1,12 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add the missing op_rout for FMP_base.
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx:
+	  Here.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix free monoid words implementation.
 	* include/vaucanson/algebra/implementation/monoid/str_words.hh
 	  (op_rout): Change signature by adding the `const' qualifier to the

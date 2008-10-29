@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -142,6 +142,19 @@ namespace vcsn {
     return op_length(this->structure(), this->value(), f);
   }
 
-} // vcsn
+  namespace algebra
+  {
+    template <typename Self, typename St, typename T>
+    St&
+    op_rout(const FreeMonoidProductBase<Self>& s,
+	    St& st,
+	    const T& v)
+    {
+      return op_rout(s.self(), st, v);
+    }
+
+  } // ! algebra
+
+} // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_FREEMONOID_PRODUCT_BASE_HXX
