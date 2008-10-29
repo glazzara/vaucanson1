@@ -24,7 +24,7 @@ namespace vcsn
 {
 
   template <class Series>
-  // FIXME: Rename to AutomataSet (see Trac #3)
+  // FIXME: Rename to AutomatonSet (see Trac #3)
   struct Automata;
 
   /// Dynamic traits for automata.

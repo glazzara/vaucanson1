@@ -1,5 +1,11 @@
 2008-10-29  Reuben Thomas  <rrt@sc3d.org>
 
+	Fix typo in previous commit: AutomataSet should be AutomatonSet.
+	* include/vaucanson/automata/concept/automata.hh: AutomataSet ->
+	  AutomatonSet.
+
+2008-10-29  Reuben Thomas  <rrt@sc3d.org>
+
 	Add some FIXMEs for Trac #3.
 	* include/vaucanson/algebra/implementation/series/series.hh: .
 	* include/vaucanson/automata/concept/automata.hh: .
