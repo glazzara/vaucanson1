@@ -1,5 +1,13 @@
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Minor updates to ltl_to_pair.
+	* include/vaucanson/algorithms/ltl_to_pair.hh (mute_ltl_to_pair):
+	  When calculating the `ret_impl_t', now explicitly specify the
+	  implementation details required by `mute_graph_impl_monoid_traits'.
+	* include/vaucanson/algorithms/ltl_to_pair.hxx: Cosmetic change.
+
+2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Rework a trait used to mute graph implementations.
 	* include/vaucanson/automata/concept/automata_base.hh
 	  (mute_graph_impl_monoid_traits): Rename the `M' template argument

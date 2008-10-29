@@ -111,7 +111,6 @@ namespace vcsn
     for_all_const_states(p, src)
       m[*p] = res.add_state();
 
-
     // Setup initial transitions.
     for_all_const_initial_states(i, src)
     {

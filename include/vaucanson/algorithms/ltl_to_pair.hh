@@ -121,7 +121,8 @@ namespace vcsn
 
     // 2 - implementation
     typedef typename mute_graph_impl_monoid_traits<typename automaton_t::
-	value_t, ret_monoid_elt_t>::ret ret_impl_t;
+	value_t, typename ret_monoid_elt_t::value_t, ret_letter_t>::ret
+	ret_impl_t;
 
     // 3 - element
     typedef Element<ret_set_t, ret_impl_t> ret;
