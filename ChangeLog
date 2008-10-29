@@ -1,5 +1,12 @@
 2008-10-29  Reuben Thomas  <rrt@sc3d.org>
 
+	Add some FIXMEs for Trac #3.
+	* include/vaucanson/algebra/implementation/series/series.hh: .
+	* include/vaucanson/automata/concept/automata.hh: .
+	* include/vaucanson/automata/concept/transducer.hh: .
+
+2008-10-29  Reuben Thomas  <rrt@sc3d.org>
+
 	Correct comment: these are not "const versions" of methods.
 	* /include/vaucanson/automata/conceptautomata_base.hh: The
 	  methods states and transitions were marked as "const

@@ -25,6 +25,7 @@
 namespace vcsn {
 
   template <class Series>
+  // FIXME: Rename to TransducerSet (see Trac #3)
   struct Transducer;
 
   /// Dynamic traits for transducers.

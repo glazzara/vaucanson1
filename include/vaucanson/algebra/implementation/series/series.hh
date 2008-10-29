@@ -34,6 +34,7 @@ namespace vcsn {
     struct monoid_slot_tag {};
 
     /// This is the final class for series.
+    /// FIXME: Rename to SeriesSet (see Trac #3).
     template<typename Semiring, typename Monoid>
     struct Series
       : SeriesBase<Series<Semiring, Monoid> >,
