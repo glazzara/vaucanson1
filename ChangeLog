@@ -1,3 +1,10 @@
+2008-10-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add more filters to generate_libvcsn.rb and expand.sh.
+	* lib/generate_libvcsn.rb: Make `pair_to_fmp' a pair automaton only
+	  algorithm.
+	* vaucanswig/expand.sh: Ignore `pair_to_fmp'.
+
 2008-10-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Use monoid representation for FMP words implementation.

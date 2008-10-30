@@ -82,7 +82,8 @@ def create?(type, file)
 	      "vcsn-z-max" == type or "vcsn-z-min" == type
 	    ) or
 	    (
-	      file !~ /aut_projection.hh/		# Pair letters only
+	      file !~ /aut_projection.hh/ and		# Pair letters only
+	      file !~ /pair_to_fmp.hh/			# Pair letters only
 	    )
       )
     ) or
@@ -95,6 +96,7 @@ def create?(type, file)
       file !~ /aci_canonical.hh/ and
       file !~ /aut_to_exp.hh/ and
       file !~ /aut_projection.hh/ and
+      file !~ /pair_to_fmp.hh/ and
       file !~ /berry_sethi.hh/ and
       file !~ /brzozowski.hh/ and
       file !~ /complement.hh/ and
@@ -283,6 +285,7 @@ files.each { |file|
 	tmp = tmp.gsub(/FirstProjection/, 'projection_traits<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::first_projection_t')
 	tmp = tmp.gsub(/SecondProjection/, 'projection_traits<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::second_projection_t')
 	tmp = tmp.gsub(/LtlToPair/, 'mute_ltl_to_pair<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
+	tmp = tmp.gsub(/PairToFMP/, 'mute_pair_to_fmp<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
 	output.push("  template", tmp)
       end
       i = i.next

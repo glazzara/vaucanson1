@@ -150,7 +150,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
      # (not transducers), so we prevent building transducers only
      # algorithms with a well defined interface metadata.
      # Moreover, the only bindings generated are for simple letters,
-     # so we disable aut_projection.
+     # so we disable aut_projection and pair_to_fmp.
      if	[ "$candidate_family" = "invert" ] || \
 	[ "$candidate_family" = "domain" ] || \
 	[ "$candidate_family" = "image" ] || \
@@ -158,6 +158,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
 	[ "$candidate_family" = "is_ltl" ] || \
 	[ "$candidate_family" = "projection" ] || \
 	[ "$candidate_family" = "aut_projection" ] || \
+	[ "$candidate_family" = "pair_to_fmp" ] || \
 	[ "$candidate_family" = "evaluation_fmp" ] || \
 	[ "$candidate_family" = "normalized_composition" ] || \
 	[ "$candidate_family" = "rw_composition" ] || \
