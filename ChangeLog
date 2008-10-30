@@ -1,5 +1,11 @@
 2008-10-30  Reuben Thomas  <rrt@sc3d.org>
 
+	Fix English typo.
+	* include/vaucanson/algorithms/internal/build_pattern.hxx:
+	  "an other" -> "another".
+
+2008-10-30  Reuben Thomas  <rrt@sc3d.org>
+
 	Add new test suites to svn:ignore property.
 
 2008-10-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>

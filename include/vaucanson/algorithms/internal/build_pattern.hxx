@@ -96,7 +96,7 @@ namespace vcsn
       }
     }
 
-    // Link current state to an other, which can be created
+    // Link current state to another, which can be created
     template <typename Self, typename T_auto, typename Etiq>
     void
     IncAutomataConstructor<Self, T_auto, Etiq>::link_to
