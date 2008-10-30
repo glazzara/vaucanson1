@@ -1,3 +1,7 @@
+2008-10-30  Reuben Thomas  <rrt@sc3d.org>
+
+	Add new test suites to svn:ignore property.
+
 2008-10-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add more filters to generate_libvcsn.rb and expand.sh.
