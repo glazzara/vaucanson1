@@ -1,5 +1,12 @@
 2008-10-31  Reuben Thomas  <rrt@sc3d.org>
 
+	English fixes.
+	Improve spelling and grammar in some comments.
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: .
+
+2008-10-31  Reuben Thomas  <rrt@sc3d.org>
+
 	Get argp from gnulib.
 	Get rid of externals annoyances by getting argp from gnulib, the way
 	it should be done. It may be useful to use gnulib for other things

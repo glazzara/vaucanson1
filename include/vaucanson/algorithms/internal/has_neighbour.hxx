@@ -20,7 +20,7 @@
 # include <vaucanson/algorithms/internal/has_neighbour.hh>
 
 namespace vcsn {
-  // Determine wether there is at least a successor of a state.
+  // Determine whether there is at least a successor of a state.
   namespace internal {
     template <typename T>
     struct has_neighbour_helper

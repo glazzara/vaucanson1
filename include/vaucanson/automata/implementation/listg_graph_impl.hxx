@@ -418,9 +418,9 @@ namespace vcsn
     # undef DEFINE_DELTAC_FUNCTION
 
     // Delta with functor.  Much more than the previous one, because
-    // functor is statically checked for return type of its operator(),
-    // and behave differently if it is bool: loop breaks if false is
-    // returned.
+    // functor is statically checked for return type of its
+    // operator(), and behaves differently if its return type is bool:
+    // the loop ends if false is returned.
     # define DEFINE_DELTAF_FUNCTION(DeltaName, DKind, IO, IsBool, Action)\
     TParam								\
     template <typename Functor, class Query>				\
