@@ -665,96 +665,6 @@ namespace vcsn {
     return spontaneous_query<S, T>(s.self(), t);
   }
 
-    /*---------.
-    | Deltas.  |
-    `---------*/
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_delta(const AutomataBase<S>&, const T& v,
-		OutputIterator res,
-		const typename automaton_traits<T>::hstate_t& from,
-		delta_kind::kind<Kind> k)
-  {
-    v.delta(res, from, always_true<T>(), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_delta(const AutomataBase<S>&s, const T& v,
-		OutputIterator res,
-		int from,
-		delta_kind::kind<Kind> k)
-  {
-    op_delta(s, v, res, op_get_state(s, v, from), always_true<T>(), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_delta(const AutomataBase<S>&, const T& v,
-		OutputIterator res,
-		const typename automaton_traits<T>::hstate_t& from,
-		const L& query,
-		delta_kind::kind<Kind> k)
-  {
-    v.delta(res, from, query, k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_delta(const AutomataBase<S>&s, const T& v,
-		OutputIterator res,
-		int from,
-		const L& query,
-		delta_kind::kind<Kind> k)
-  {
-    op_delta(s, v, res, op_get_state(s, v, from), query, k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_letter_delta(const AutomataBase<S>& s, const T& v,
-		       OutputIterator res,
-		       const typename automaton_traits<T>::hstate_t& from,
-		       const L& letter,
-		       delta_kind::kind<Kind> k)
-  {
-    v.delta(res, from, make_letter_query(s.self(), v, letter), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_letter_delta(const AutomataBase<S>& s, const T& v,
-		       OutputIterator res,
-		       int from,
-		       const L& letter,
-		       delta_kind::kind<Kind> k)
-  {
-    op_letter_delta(s, v, res, op_get_state(s, v, from), letter, k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_spontaneous_delta(const AutomataBase<S>& s,
-			    const T& v,
-			    OutputIterator res,
-			    const typename automaton_traits<T>::hstate_t& from,
-			    delta_kind::kind<Kind> k)
-  {
-    v.delta (res, from, make_spontaneous_query(s.self(), v), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_spontaneous_delta(const AutomataBase<S>& s,
-			    const T& v,
-			    OutputIterator res,
-			    int from,
-			    delta_kind::kind<Kind> k)
-  {
-    op_spontaneous_delta (s, v, res, op_get_state(s, v, from), k);
-  }
-
     /*----------.
     | Deltacs.  |
     `----------*/
@@ -766,8 +676,7 @@ namespace vcsn {
 		 const typename automaton_traits<T>::hstate_t& from,
 		 delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.delta(i, from, always_true<T>(), k);
+    v.deltac(res, from, always_true<T>(), k);
   }
 
   template <class S, class T,
@@ -789,8 +698,7 @@ namespace vcsn {
 		 const L& query,
 		 delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.delta(i, from, query, k);
+    v.deltac(res, from, query, k);
   }
 
   template <class S, class T,
@@ -814,8 +722,7 @@ namespace vcsn {
 			const L& letter,
 			delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.delta(i, from, make_letter_query(s.self(), v, letter), k);
+    v.deltac(res, from, make_letter_query(s.self(), v, letter), k);
   }
 
   template <class S, class T,
@@ -837,8 +744,7 @@ namespace vcsn {
 			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.delta (i, from, make_spontaneous_query(s.self(), v), k);
+    v.deltac(res, from, make_spontaneous_query(s.self(), v), k);
   }
 
   template <class S, class T, class Container, typename Kind>
@@ -945,94 +851,6 @@ namespace vcsn {
   }
 
 
-    /*-----------------.
-    | Reverse deltas.  |
-    `-----------------*/
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_rdelta(const AutomataBase<S>&, const T& v,
-		 OutputIterator res,
-		 const typename automaton_traits<T>::hstate_t& from,
-		 delta_kind::kind<Kind> k)
-  {
-    v.rdelta (res, from, always_true<T>(), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_rdelta(const AutomataBase<S>& s, const T& v,
-		 OutputIterator res,
-		 int from,
-		 delta_kind::kind<Kind> k)
-  {
-    op_rdelta(s, v, res, op_get_state(s, v, from), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_rdelta(const AutomataBase<S>&, const T& v,
-		 OutputIterator res,
-		 const typename automaton_traits<T>::hstate_t& from,
-		 const L& query,
-		 delta_kind::kind<Kind> k)
-  {
-    v.rdelta(res, from, query, k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_rdelta(const AutomataBase<S>& s, const T& v,
-		 OutputIterator res,
-		 int from,
-		 const L& query,
-		 delta_kind::kind<Kind> k)
-  {
-    op_rdelta(s, v, res, op_get_state(s, v, from), query, k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
-			OutputIterator res,
-			const typename automaton_traits<T>::hstate_t& from,
-			const L& letter,
-			delta_kind::kind<Kind> k)
-  {
-    v.rdelta(res, from, make_letter_query(s.self(), v, letter), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L, typename Kind>
-  void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
-			OutputIterator res,
-			int from,
-			const L& letter,
-			delta_kind::kind<Kind> k)
-  {
-    op_letter_rdelta(s, v, res, op_get_state(s, v, from), letter, k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
-			     OutputIterator res,
-			     const typename automaton_traits<T>::hstate_t& from,
-			     delta_kind::kind<Kind> k)
-  {
-    v.rdelta(res, from, make_spontaneous_query(s.self(), v), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename Kind>
-  void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
-			     OutputIterator res,
-			     int from,
-			     delta_kind::kind<Kind> k)
-  {
-    op_spontaneous_rdelta(s, v, res, op_get_state(s, v, from), k);
-  }
-
     /*------------------.
     | Reverse deltacs.  |
     `------------------*/
@@ -1045,8 +863,7 @@ namespace vcsn {
 		  const typename automaton_traits<T>::hstate_t& from,
 		  delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.rdelta(i, from, always_true<T>(), k);
+    v.rdeltac(res, from, always_true<T>(), k);
   }
 
   template <class S, class T,
@@ -1069,8 +886,7 @@ namespace vcsn {
 		  const L& query,
 		  delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.rdelta(i, from, query, k);
+    v.rdeltac(res, from, query, k);
   }
 
   template <class S, class T,
@@ -1094,8 +910,7 @@ namespace vcsn {
 			 const L& letter,
 			 delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.rdelta (i, from, make_letter_query(s.self(), v, letter), k);
+    v.rdeltac(res, from, make_letter_query(s.self(), v, letter), k);
   }
 
   template <class S, class T,
@@ -1117,8 +932,7 @@ namespace vcsn {
 			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    v.rdelta (i, from, make_spontaneous_query(s.self(), v), k);
+    v.rdeltac(res, from, make_spontaneous_query(s.self(), v), k);
   }
 
   template <class S, class T, class  Container, typename Kind>

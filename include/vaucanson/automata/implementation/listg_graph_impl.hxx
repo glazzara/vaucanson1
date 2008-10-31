@@ -391,30 +391,31 @@ namespace vcsn
     | Delta functions.  |
     `------------------*/
 
-    // Classical ones.
+    // Container delta functions.
 
-    # define DEFINE_DELTA_FUNCTION(DeltaName, DKind, IO, WhatFromE)	\
+    # define DEFINE_DELTAC_FUNCTION(DeltaName, DKind, IO, WhatFromE)	\
     TParam								\
-    template <class OutputIterator, class Query>			\
+    template <typename Container, typename Query>			\
     void								\
-    GClass::DeltaName(OutputIterator res,				\
+    GClass::DeltaName(Container& res,					\
                       const hstate_t& from,				\
                       const Query& query,				\
                       ::vcsn::delta_kind::DKind) const			\
     {									\
       assertion(has_state(from));					\
       const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
+      std::insert_iterator<Container> i(res, res.begin());		\
       for_all_const_(std::set<hedge_t>, e, edges)			\
-      if (query(*e))							\
-              *res++ = WhatFromE;					\
+        if (query(*e))							\
+          *i++ = WhatFromE;						\
     }									\
 
-    DEFINE_DELTA_FUNCTION (delta, transitions, output, *e);
-    DEFINE_DELTA_FUNCTION (delta, states, output, edges_[*e].to);
-    DEFINE_DELTA_FUNCTION (rdelta, transitions, input, *e);
-    DEFINE_DELTA_FUNCTION (rdelta, states, input, edges_[*e].from);
+    DEFINE_DELTAC_FUNCTION (deltac, transitions, output, *e);
+    DEFINE_DELTAC_FUNCTION (deltac, states, output, edges_[*e].to);
+    DEFINE_DELTAC_FUNCTION (rdeltac, transitions, input, *e);
+    DEFINE_DELTAC_FUNCTION (rdeltac, states, input, edges_[*e].from);
 
-    # undef DEFINE_DELTA_FUNCTION
+    # undef DEFINE_DELTAC_FUNCTION
 
     // Delta with functor.  Much more than the previous one, because
     // functor is statically checked for return type of its operator(),

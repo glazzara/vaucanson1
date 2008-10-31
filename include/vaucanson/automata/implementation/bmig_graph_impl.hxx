@@ -622,28 +622,29 @@ namespace vcsn
     | Delta functions.  |
     `------------------*/
 
-  # define DEFINE_DELTA_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
+  # define DEFINE_DELTAC_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
     BMIGRAPH_TPARAM								\
-    template <typename OutputIterator, typename Query>				\
+    template <typename Container, typename Query>				\
     void									\
-    BMIGRAPH::FunName(OutputIterator res,					\
+    BMIGRAPH::FunName(Container &res,						\
                         const typename BMIGRAPH::hstate_t& s,			\
                         const Query& query,					\
                         ::vcsn::delta_kind::DeltaKind) const			\
     {										\
       assertion(has_state(s));							\
-      Target##_range r = graph_.template get<Target>().equal_range(s.value());		\
+      Target##_range r = graph_.template get<Target>().equal_range(s.value());	\
+      std::insert_iterator<Container> i(res, res.begin());			\
       for (Target##_iterator e = r.first; e != r.second; ++e)			\
         if (query(hedge_t(graph_.project<0>(e))))				\
-          *res++ = GetElt;							\
+          *i++ = GetElt;							\
     }
 
-    DEFINE_DELTA_FUNCTION (delta, transitions, src, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTA_FUNCTION (delta, states, src, hstate_t(e->to_));
-    DEFINE_DELTA_FUNCTION (rdelta, transitions, dst, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTA_FUNCTION (rdelta, states, dst, hstate_t(e->from_));
+    DEFINE_DELTAC_FUNCTION (deltac, transitions, src, hedge_t(graph_.project<0>(e)));
+    DEFINE_DELTAC_FUNCTION (deltac, states, src, hstate_t(e->to_));
+    DEFINE_DELTAC_FUNCTION (rdeltac, transitions, dst, hedge_t(graph_.project<0>(e)));
+    DEFINE_DELTAC_FUNCTION (rdeltac, states, dst, hstate_t(e->from_));
 
-  # undef DEFINE_DELTA_FUNCTION
+  # undef DEFINE_DELTAC_FUNCTION
 
   # define DEFINE_DELTAF_FUNCTION(FunName, DeltaKind, Target, IsBool, Action)	\
     BMIGRAPH_TPARAM								\

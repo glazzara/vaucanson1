@@ -226,46 +226,6 @@ namespace vcsn {
   op_is_spontaneous(const AutomataBase<S>&, const IdentityView<T>&,
 		    const typename automaton_traits<T>::htransition_t&);
 
-  // output_return_type = OutputIterator
-  // output_type	= const typename automaton_traits<T>::htransition_t&
-  // direction		= output
-
-  /** store the output transitions of the state 'from' using 'res'. */
-  template <class S, class T,
-	    typename OutputIterator>
-  void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
-		OutputIterator res,
-		const typename automaton_traits<T>::hstate_t& from,
-		delta_kind::transitions k);
-
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true using 'res'. */
-  template <class S, class T,
-	    typename OutputIterator, typename L>
-  void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
-		OutputIterator res,
-		const typename automaton_traits<T>::hstate_t& from,
-		const L& query,
-		delta_kind::transitions k);
-
-  /** store the output transitions of the state 'from' where
-   the label matches the letter. */
-  template <class S, class T,
-	    typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>&, const IdentityView<T>&,
-		       OutputIterator res,
-		       const typename automaton_traits<T>::hstate_t& from,
-		       const L& letter,
-		       delta_kind::transitions k);
-
-  /** store the output spontaneous transitions. */
-  template <class S, class T,
-	    typename OutputIterator>
-  void op_spontaneous_delta(const AutomataBase<S>&, const IdentityView<T>&,
-			    OutputIterator res,
-			    const typename automaton_traits<T>::hstate_t& from,
-			    delta_kind::transitions k);
-
   // output_return_type = Container
   // output_type	= const typename automaton_traits<T>::htransition_t&
   // direction		= output
@@ -304,42 +264,6 @@ namespace vcsn {
 			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::transitions k);
 
-  // output_return_type = OutputIterator
-  // output_type	= const typename automaton_traits<T>::hstate_t&
-  // direction	  = output
-
-  /** store the output states of the state 'from' using 'res'. */
-  template<class S, class T, typename OutputIterator>
-  void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
-		OutputIterator res,
-		const typename automaton_traits<T>::hstate_t& from,
-		delta_kind::states k);
-
-  /** store the output states of the state 'from' where
-   query(label(e)) = true using 'res'. */
-  template<class S, class T, typename OutputIterator, typename L>
-  void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
-		OutputIterator res,
-		const typename automaton_traits<T>::hstate_t& from,
-		const L& query,
-		delta_kind::states k);
-
-  /** store the output states of the state 'from' where
-   the label matches the letter. */
-  template<class S, class T, typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>&, const IdentityView<T>&,
-		       OutputIterator res,
-		       const typename automaton_traits<T>::hstate_t& from,
-		       const L& letter,
-		       delta_kind::states k);
-
-  /** store the output op_spontaneous transitions. */
-  template<class S, class T, typename OutputIterator>
-  void op_spontaneous_delta(const AutomataBase<S>&, const IdentityView<T>&,
-			    OutputIterator res,
-			    const typename automaton_traits<T>::hstate_t& from,
-			    delta_kind::states k);
-
   // output_return_type = Container
   // output_type	= const typename automaton_traits<T>::hstate_t&
   // direction	  = output
@@ -375,42 +299,6 @@ namespace vcsn {
 			     const typename automaton_traits<T>::hstate_t& from,
 			     delta_kind::states k);
 
-  // output_return_type = OutputIterator
-  // output_type	= const typename automaton_traits<T>::htransition_t&
-  // direction	  = input
-
-  /** store the output transitions of the state 'from' using 'res'. */
-  template<class S, class T, typename OutputIterator>
-  void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-		 OutputIterator res,
-		 const typename automaton_traits<T>::hstate_t& from,
-		 delta_kind::transitions k);
-
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true using 'res'. */
-  template<class S, class T, typename OutputIterator, typename L>
-  void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-		 OutputIterator res,
-		 const typename automaton_traits<T>::hstate_t& from,
-		 const L& query,
-		 delta_kind::transitions k);
-
-  /** store the output transitions of the state 'from' where
-   the label matches the letter. */
-  template<class S, class T, typename OutputIterator, typename L>
-  void op_letter_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-			OutputIterator res,
-			const typename automaton_traits<T>::hstate_t& from,
-			const L& letter,
-			delta_kind::transitions k);
-
-  /** store the output op_spontaneous transitions. */
-  template<class S, class T, typename OutputIterator>
-  void op_spontaneous_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-			     OutputIterator res,
-			     const typename automaton_traits<T>::hstate_t& from,
-			     delta_kind::transitions k);
-
   // output_return_type = Container
   // output_type	= const typename automaton_traits<T>::htransition_t&
   // direction	  = input
@@ -445,42 +333,6 @@ namespace vcsn {
 			      Container& res,
 			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::transitions k);
-
-  // output_return_type = OutputIterator
-  // output_type	= const typename automaton_traits<T>::hstate_t&
-  // direction	  = input
-
-  /** store the output states of the state 'from' using 'res'. */
-  template<class S, class T, typename OutputIterator>
-  void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-		 OutputIterator res,
-		 const typename automaton_traits<T>::hstate_t& from,
-		 delta_kind::states k);
-
-  /** store the output states of the state 'from' where
-   query(label(e)) = true using 'res'. */
-  template<class S, class T, typename OutputIterator, typename L>
-  void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-		 OutputIterator res,
-		 const typename automaton_traits<T>::hstate_t& from,
-		 const L& query,
-		 delta_kind::states k);
-
-  /** store the output states of the state 'from' where
-   the label matches the letter. */
-  template<class S, class T, typename OutputIterator, typename L>
-  void op_letter_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-			OutputIterator res,
-			const typename automaton_traits<T>::hstate_t& from,
-			const L& letter,
-			delta_kind::states k);
-
-  /** store the output op_spontaneous transitions. */
-  template<class S, class T, typename OutputIterator>
-  void op_spontaneous_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
-			     OutputIterator res,
-			     const typename automaton_traits<T>::hstate_t& from,
-			     delta_kind::states k);
 
   // output_return_type = Container
   // output_type	= const typename automaton_traits<T>::hstate_t&

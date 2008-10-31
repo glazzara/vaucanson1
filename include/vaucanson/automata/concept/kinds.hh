@@ -121,22 +121,10 @@ namespace vcsn {
       htransition_t add_letter_transition(hstate_t from, hstate_t to,
 					  const L& l);
 
-      template <typename OutputIterator, typename L>
-      void letter_delta(OutputIterator	res,
-			hstate_t		from,
-			const L&		l,
-			delta_kind::transitions k = delta_kind::transitions()) const;
-
       template <typename Container, typename L>
       void letter_deltac(Container&	 dst,
 			 hstate_t		 from,
 			 const L&		 l,
-			 delta_kind::transitions k = delta_kind::transitions()) const;
-
-      template <typename OutputIterator, typename L>
-      void letter_rdelta(OutputIterator	res,
-			 hstate_t		from,
-			 const L&		l,
 			 delta_kind::transitions k = delta_kind::transitions()) const;
 
       template <typename Container, typename L>
@@ -145,20 +133,8 @@ namespace vcsn {
 			  const L&		 l,
 			  delta_kind::transitions k = delta_kind::transitions()) const;
 
-      template <typename OutputIterator, typename L>
-      void letter_delta(OutputIterator	 res,
-			hstate_t		 from,
-			const L&		 l,
-			delta_kind::states k) const;
-
       template <typename Container, typename L>
       void letter_deltac(Container&	  dst,
-			 hstate_t		  from,
-			 const L&		  l,
-			 delta_kind::states k) const;
-
-      template <typename OutputIterator, typename L>
-      void letter_rdelta(OutputIterator	  res,
 			 hstate_t		  from,
 			 const L&		  l,
 			 delta_kind::states k) const;
@@ -174,6 +150,7 @@ namespace vcsn {
       const Self& auto_self() const;
   };
 
+}
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/automata/concept/kinds.hxx>

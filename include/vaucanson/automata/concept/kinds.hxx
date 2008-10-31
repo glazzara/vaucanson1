@@ -145,17 +145,6 @@ namespace vcsn {
   }
 
 #define DELTA_IMPL(Name, Type, Kind_type)				\
-  template<typename Self, typename Series, typename SeriesT, typename LabelT> \
-  template<typename OutputIterator, typename L>				\
-  void									\
-  AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::		\
-  letter_ ## Name (OutputIterator res, hstate_t from, const L& l, Kind_type) const \
-  {									\
-    return auto_self().value()-> Name ## _ ## Type			\
-      (res, from,							\
-       ls_delta_letter_query<Series, monoid_elt_t, semiring_elt_t, L>	\
-       (auto_self().series(), l));					\
-  }									\
     template<typename Self, typename Series, typename SeriesT, typename LabelT>	\
     template<typename Container, typename L>				\
     void								\
@@ -188,5 +177,6 @@ namespace vcsn {
   auto_self() const
   { return static_cast<const Self&>(*this); }
 
+}
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_KINDS_HXX

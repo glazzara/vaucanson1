@@ -1,3 +1,27 @@
+2008-10-31  Reuben Thomas  <rrt@sc3d.org>
+
+	Remove (classic) delta iterators.
+	The classic delta iterators are used nowhere, so remove them.
+	(Only deltac and deltaf are used.)
+	Rejoice as nearly 1,400 lines of code disappears!
+	* include/vaucanson/automata/concept/automata_base.hh: .
+	* include/vaucanson/automata/concept/automata_base.hxx: .
+	* include/vaucanson/automata/concept/automata_ops.hh: .
+	* include/vaucanson/automata/concept/automata_ops.hxx: .
+	* include/vaucanson/automata/concept/kinds.hh: Also add back missing brace
+	  removed in r2313.
+	* include/vaucanson/automata/concept/kinds.hxx: Also add back missing brace
+	  removed in r2313.
+	* include/vaucanson/automata/implementation/automaton_view.hh: .
+	* include/vaucanson/automata/implementation/automaton_view.hxx: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hxx: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: .
+	* include/vaucanson/automata/implementation/transpose_view.hh: .
+	* include/vaucanson/automata/implementation/transpose_view.hxx: .
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh: .
+
 2008-10-30  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix English typo.

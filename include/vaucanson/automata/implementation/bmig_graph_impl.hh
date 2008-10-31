@@ -234,15 +234,15 @@ namespace vcsn
       ** delta...
       ** FIXME: nice comments
       */
-# define DECLARE_DELTA_FUNCTION(FunName, DeltaKind)			\
-	template <typename OutputIterator, typename Query>		\
-	void FunName (OutputIterator res, const hstate_t& from,		\
+# define DECLARE_DELTAC_FUNCTION(FunName, DeltaKind)			\
+	template <typename Container, typename Query>			\
+	void FunName (Container& res, const hstate_t& from,		\
 	              const Query& q, ::vcsn::delta_kind::DeltaKind) const
-	DECLARE_DELTA_FUNCTION (delta, states);
-	DECLARE_DELTA_FUNCTION (delta, transitions);
-	DECLARE_DELTA_FUNCTION (rdelta, states);
-	DECLARE_DELTA_FUNCTION (rdelta, transitions);
-# undef DECLARE_DELTA_FUNCTION
+	DECLARE_DELTAC_FUNCTION (deltac, states);
+	DECLARE_DELTAC_FUNCTION (deltac, transitions);
+	DECLARE_DELTAC_FUNCTION (rdeltac, states);
+	DECLARE_DELTAC_FUNCTION (rdeltac, transitions);
+# undef DECLARE_DELTAC_FUNCTION
 
 # define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
 	template <typename Functor, typename Query>			\
