@@ -24,11 +24,12 @@
  */
 
 #include <stdlib.h>
-#include <argp.h>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+
+#include "argp.h"
 
 #include "common.hh"
 #include "predefined_alphabets.hh"

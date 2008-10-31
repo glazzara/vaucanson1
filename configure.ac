@@ -20,7 +20,7 @@ AC_PREREQ([2.61])
 
 AC_INIT([vaucanson], [1.2.93a], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([1.10 tar-ustar no-define foreign dist-bzip2 nostdinc])
+AM_INIT_AUTOMAKE([1.10 tar-ustar no-define foreign dist-bzip2])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 VCSN_PRE_RELEASE
@@ -28,6 +28,8 @@ VCSN_PRE_RELEASE
 # Some C and C++ code used.
 AC_PROG_CXX
 AC_PROG_CC
+gl_EARLY
+gl_INIT
 
 # Use included Vaucanson version.
 VCSN_PATH_LOCAL([.])
@@ -151,14 +153,6 @@ AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [bmig],
 		   [Default graph implementation.])
 
 
-## ------------ ##
-## Components.  ##
-## ------------ ##
-
-AC_CONFIG_SUBDIRS([argp])
-
-
-
 ## --------------- ##
 ## Documentation.  ##
 ## --------------- ##
@@ -255,6 +249,7 @@ AC_CONFIG_FILES([
 	    data/automata/char-rw-b/Makefile
 	    data/automata/char-z/Makefile
 	  data/emacs/Makefile
+        gnulib/Makefile
 	lib/Makefile
 	src/Makefile
 	  src/demos/Makefile

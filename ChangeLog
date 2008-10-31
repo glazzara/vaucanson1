@@ -1,5 +1,151 @@
 2008-10-31  Reuben Thomas  <rrt@sc3d.org>
 
+	Get argp from gnulib.
+	Get rid of externals annoyances by getting argp from gnulib, the way
+	it should be done. It may be useful to use gnulib for other things
+	too; in particular, current gnulib has just introduced complexity
+	metrics and coverage checks.
+
+	N.B. Only developers who wish to change the gnulib setup need to
+	install gnulib; all the necessary files for compilation are in
+	Subversion.
+
+	Care is required when deciding what files should be checked in and
+	which ignored, as gnulib does not (yet) support Subversion. Git users
+	will be happy, as they are automatically catered for. I used a simple
+	technique: before updating the gnulib settings, I removed the gnulib
+	and m4 directories, and then I added to Subversion all the files that
+	gnulib created.
+
+	Also, note that because we already use lib/ for the Vaucanson libraries,
+	gnulib-tool needs to be invoked with --source-base=gnulib, which is
+	where it stores its source files.
+	* Makefile.am: .
+	* build-aux/link-warning.h: New.
+	* configure.ac: .
+	* gnulib/Makefile.am: New.
+	* gnulib/alloca.c: New.
+	* gnulib/alloca.in.h: New.
+	* gnulib/argp-ba.c: New.
+	* gnulib/argp-eexst.c: New.
+	* gnulib/argp-fmtstream.c: New.
+	* gnulib/argp-fmtstream.h: New.
+	* gnulib/argp-fs-xinl.c: New.
+	* gnulib/argp-help.c: New.
+	* gnulib/argp-namefrob.h: New.
+	* gnulib/argp-parse.c: New.
+	* gnulib/argp-pin.c: New.
+	* gnulib/argp-pv.c: New.
+	* gnulib/argp-pvh.c: New.
+	* gnulib/argp-xinl.c: New.
+	* gnulib/argp.h: New.
+	* gnulib/asnprintf.c: New.
+	* gnulib/basename.c: New.
+	* gnulib/dirname.c: New.
+	* gnulib/dirname.h: New.
+	* gnulib/error.c: New.
+	* gnulib/error.h: New.
+	* gnulib/exitfail.c: New.
+	* gnulib/exitfail.h: New.
+	* gnulib/float+.h: New.
+	* gnulib/float.in.h: New.
+	* gnulib/getopt.c: New.
+	* gnulib/getopt.in.h: New.
+	* gnulib/getopt1.c: New.
+	* gnulib/getopt_int.h: New.
+	* gnulib/gettext.h: New.
+	* gnulib/intprops.h: New.
+	* gnulib/malloc.c: New.
+	* gnulib/mempcpy.c: New.
+	* gnulib/printf-args.c: New.
+	* gnulib/printf-args.h: New.
+	* gnulib/printf-parse.c: New.
+	* gnulib/printf-parse.h: New.
+	* gnulib/rawmemchr.c: New.
+	* gnulib/rawmemchr.valgrind: New.
+	* gnulib/size_max.h: New.
+	* gnulib/sleep.c: New.
+	* gnulib/stdbool.in.h: New.
+	* gnulib/stdint.in.h: New.
+	* gnulib/stdio.in.h: New.
+	* gnulib/stdlib.in.h: New.
+	* gnulib/strcasecmp.c: New.
+	* gnulib/strchrnul.c: New.
+	* gnulib/strchrnul.valgrind: New.
+	* gnulib/strerror.c: New.
+	* gnulib/string.in.h: New.
+	* gnulib/strings.in.h: New.
+	* gnulib/stripslash.c: New.
+	* gnulib/strncasecmp.c: New.
+	* gnulib/strndup.c: New.
+	* gnulib/strnlen.c: New.
+	* gnulib/sysexits.in.h: New.
+	* gnulib/unistd.in.h: New.
+	* gnulib/vasnprintf.c: New.
+	* gnulib/vasnprintf.h: New.
+	* gnulib/vsnprintf.c: New.
+	* gnulib/wchar.in.h: New.
+	* gnulib/xalloc-die.c: New.
+	* gnulib/xalloc.h: New.
+	* gnulib/xmalloc.c: New.
+	* gnulib/xsize.h: New.
+	* gnulib/xstrndup.c: New.
+	* gnulib/xstrndup.h: New.
+	* gnulib: New.
+	* m4/alloca.m4: New.
+	* m4/argp.m4: New.
+	* m4/dirname.m4: New.
+	* m4/dos.m4: New.
+	* m4/double-slash-root.m4: New.
+	* m4/eoverflow.m4: New.
+	* m4/error.m4: New.
+	* m4/exitfail.m4: New.
+	* m4/extensions.m4: New.
+	* m4/float_h.m4: New.
+	* m4/getopt.m4: New.
+	* m4/gnulib-cache.m4: New.
+	* m4/gnulib-common.m4: New.
+	* m4/gnulib-comp.m4: New.
+	* m4/gnulib-tool.m4: New.
+	* m4/include_next.m4: New.
+	* m4/inline.m4: New.
+	* m4/intmax_t.m4: New.
+	* m4/inttypes_h.m4: New.
+	* m4/longlong.m4: New.
+	* m4/malloc.m4: New.
+	* m4/mempcpy.m4: New.
+	* m4/printf.m4: New.
+	* m4/rawmemchr.m4: New.
+	* m4/size_max.m4: New.
+	* m4/sleep.m4: New.
+	* m4/stdbool.m4: New.
+	* m4/stdint.m4: New.
+	* m4/stdint_h.m4: New.
+	* m4/stdio_h.m4: New.
+	* m4/stdlib_h.m4: New.
+	* m4/strcase.m4: New.
+	* m4/strchrnul.m4: New.
+	* m4/strerror.m4: New.
+	* m4/string_h.m4: New.
+	* m4/strings_h.m4: New.
+	* m4/strndup.m4: New.
+	* m4/strnlen.m4: New.
+	* m4/sysexits.m4: New.
+	* m4/unistd_h.m4: New.
+	* m4/vasnprintf.m4: New.
+	* m4/vsnprintf.m4: New.
+	* m4/wchar.m4: New.
+	* m4/wchar_t.m4: New.
+	* m4/wint_t.m4: New.
+	* m4/xalloc.m4: New.
+	* m4/xsize.m4: New.
+	* m4/xstrndup.m4: New.
+	* m4: New.
+	* taf-kit/src/Makefile.am: .
+	* taf-kit/src/main.cc: .
+
+2008-10-31  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove (classic) delta iterators.
 	The classic delta iterators are used nowhere, so remove them.
 	(Only deltac and deltaf are used.)
