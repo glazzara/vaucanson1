@@ -28,7 +28,7 @@ namespace vcsn {
       plus("+"),
       times("."),
       star("*"),
-      zero("null"),
+      zero("0"),
       open_weight("{"),
       close_weight("}")
     {

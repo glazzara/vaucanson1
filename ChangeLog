@@ -1,5 +1,12 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Change default null series representation.
+	* include/vaucanson/algebra/implementation/series/series_rep.hxx:
+	  Initialize the `zero' attribute with the string "0" instead of
+	  "null".
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup polynoms implementation.
 	* include/vaucanson/algebra/implementation/series/polynoms.hh:
 	  Cosmetic changes. Remove useless (duplicated code with `op_rout')
