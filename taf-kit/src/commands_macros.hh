@@ -140,31 +140,6 @@
 | Letter type macro helpers.  |
 `----------------------------*/
 
-# define DEFAULT_FROM_TRAITS(name, letter_type) \
-const std::string \
-default_##name () \
-{ \
-  return vcsn::algebra::letter_traits<letter_type>::default_##name (); \
-}
-
-# define SET_DEFAULT(letter_type) \
-void \
-set_default(vcsn::algebra::token_representation_t& arg) \
-{ \
-  typedef vcsn::algebra::letter_traits<letter_type> traits_t; \
-  arg.open_par = traits_t::default_open_par(); \
-  arg.close_par = traits_t::default_close_par(); \
-  arg.plus = traits_t::default_plus(); \
-  arg.times = traits_t::default_times(); \
-  arg.star = traits_t::default_star(); \
-  arg.one = traits_t::default_epsilon(); \
-  arg.zero = traits_t::default_zero(); \
-  arg.open_weight = traits_t::default_open_weight(); \
-  arg.close_weight = traits_t::default_close_weight(); \
-  arg.spaces.clear(); \
-  arg.spaces.push_back(traits_t::default_space()); \
-}
-
 // We can not pass rules by value (hence the references).
 # define ALPHABET_DEFINITION(letter_type) \
 void \
@@ -181,17 +156,6 @@ if_is_char_letter(boost::spirit::rule<boost::spirit::scanner<const char*> >& def
 
 // Setup letter context.
 # define LETTER_CONTEXT(letter_type) \
-SET_DEFAULT(letter_type) \
-DEFAULT_FROM_TRAITS(open_par, letter_type) \
-DEFAULT_FROM_TRAITS(close_par, letter_type) \
-DEFAULT_FROM_TRAITS(plus, letter_type) \
-DEFAULT_FROM_TRAITS(times, letter_type) \
-DEFAULT_FROM_TRAITS(star, letter_type) \
-DEFAULT_FROM_TRAITS(epsilon, letter_type) \
-DEFAULT_FROM_TRAITS(zero, letter_type) \
-DEFAULT_FROM_TRAITS(open_weight, letter_type) \
-DEFAULT_FROM_TRAITS(close_weight, letter_type) \
-DEFAULT_FROM_TRAITS(space, letter_type) \
 ALPHABET_DEFINITION(letter_type)
 
 #endif // ! COMMANDS_MACROS_HH

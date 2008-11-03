@@ -1,5 +1,12 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Remove useless code in some macros.
+	* taf-kit/src/commands_macros.hh (LETTER_CONTEXT): Remove use of the
+	  `SET_DEFAULT' macro and `DEFAULT_FROM_TRAITS'. Remove the
+	  `SET_DEFAULT' and `DEFAULT_FROM_TRAITS' macro definitions.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix rat::exp dumper.
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
 	  (one, zero): Restore use of stream flags.
