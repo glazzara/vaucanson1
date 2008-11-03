@@ -1,5 +1,12 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Change empty word representation to match char letters defaults.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
+	  Initialize the `empty' attribute with the string "1" instead of
+	  the string "0".
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add more type helpers for FreeMonoid and Series.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh
 	  (FreeMonoid): Add `monoid_rep_t' and `shared_monoid_rep_t'

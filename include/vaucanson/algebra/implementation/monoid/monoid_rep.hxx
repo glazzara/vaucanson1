@@ -24,7 +24,7 @@ namespace vcsn {
 
     template <typename Monoid>
     monoid_rep<Monoid>::monoid_rep() :
-      empty("0")
+      empty("1")
     {
     }
 
