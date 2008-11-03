@@ -72,7 +72,9 @@
   typedef Typename AutoType::delta_state_iterator		Prefix##delta_state_iterator; \
   typedef Typename AutoType::delta_transition_iterator		Prefix##delta_transition_iterator; \
   typedef Typename AutoType::rdelta_state_iterator		Prefix##rdelta_state_iterator; \
-  typedef Typename AutoType::rdelta_transition_iterator		Prefix##rdelta_transition_iterator;
+  typedef Typename AutoType::rdelta_transition_iterator		Prefix##rdelta_transition_iterator; \
+  typedef Typename AutoType::series_set_t::series_rep_t		Prefix##series_rep_t; \
+  typedef Typename AutoType::monoid_t::monoid_rep_t		Prefix##monoid_rep_t;
 
 # define AUTOMATON_TYPES_(AutoType,Prefix)			\
   AUTOMATON_TYPES_MAYBE_TYPENAME(AutoType, Prefix, typename)

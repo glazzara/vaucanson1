@@ -1,3 +1,11 @@
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add representation typedefs in usual macros.
+	* include/vaucanson/misc/usual_macros.hh
+	  (AUTOMATON_TYPES_MAYBE_TYPENAME): Add typedefs `series_rep_t' and
+	  `monoid_rep_t' to support series representations and monoid
+	  representations respectively.
+
 2008-10-31  Reuben Thomas  <rrt@sc3d.org>
 
 	English fixes.
