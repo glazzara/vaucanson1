@@ -91,11 +91,11 @@ struct arguments_t
     const char*	args[3];
     int		n_args;
 
-    vcsn::algebra::token_representation_t tok_rep;
+    series_rep_t srep;
     std::vector<std::string> alphabet;
     std::string parser;
 # ifdef WITH_TWO_ALPHABETS
-    vcsn::algebra::token_representation_t tok_rep2;
+    series_rep_t srep2;
     std::vector<std::string> alphabet2;
     std::string parser2;
 # endif // ! WITH_TWO_ALPHABETS
@@ -136,9 +136,6 @@ struct arguments_t
 
 # undef ADD_OPTION
 };
-
-// reset a token representation to its defaults
-extern void set_default(vcsn::algebra::token_representation_t&);
 
 # define IMPORT_DEFAULT(name) \
 extern const std::string default_##name ();

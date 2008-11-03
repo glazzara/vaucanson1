@@ -301,7 +301,7 @@ int main (int argc, char* argv[])
 
 	p_opts.check_collision();
 	li->args.alphabet = p_opts.get_letters();
-	li->args.tok_rep = p_opts.get_tok_rep();
+	li->args.srep = p_opts.get_srep();
 
 #ifdef WITH_TWO_ALPHABETS
 	parser_options p_opts2(li->args.parser2);

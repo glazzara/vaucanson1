@@ -1,5 +1,18 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Refactor token_representation_t.
+	* taf-kit/src/common.hh,
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/fmp_commands.cc,
+	* taf-kit/src/getters.hh,
+	* taf-kit/src/getters.hxx,
+	* taf-kit/src/main.cc,
+	* taf-kit/src/pipe_getters.hh,
+	* taf-kit/src/pipe_getters.hxx: Rename `token_representation_t' to
+	  `series_rep_t' and `tok_rep' to `srep'.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Remove useless code in some macros.
 	* taf-kit/src/commands_macros.hh (LETTER_CONTEXT): Remove use of the
 	  `SET_DEFAULT' macro and `DEFAULT_FROM_TRAITS'. Remove the

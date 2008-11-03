@@ -202,8 +202,9 @@ namespace edition_commands
     if (not ratexp[0])
       throw cancel ();
     a.add_series_transition(n_from, n_to,
-			    make_rat_exp(a.structure().series().monoid().alphabet(),
-					 ratexp, args.tok_rep));
+			    make_rat_exp(a.structure().series().monoid().
+					 alphabet(), ratexp,
+					 args.srep));
 # else
     // We don't parse ratexps, so we don't use these.
     (void) args;

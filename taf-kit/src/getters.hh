@@ -51,9 +51,9 @@ static second_alphabet_t get_second_alphabet (const std::vector<std::string>&);
 # ifndef WITH_TWO_ALPHABETS
 static rat_exp_t get_exp_complete (const std::string& exp,
 				   const std::vector<std::string>& alphabet,
-				   const vcsn::algebra::token_representation_t& tok_rep);
+				   const series_rep_t& srep);
 
-#  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.tok_rep))
+#  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.srep))
 
 template <class S, class T>
 static std::basic_string<letter_t>

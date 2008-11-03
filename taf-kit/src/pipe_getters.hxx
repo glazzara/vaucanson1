@@ -121,17 +121,17 @@ automaton_getter::operator()(T&) const
 
 # ifndef WITH_TWO_ALPHABETS
 rat_exp_getter::rat_exp_getter (alphabet_t a, std::string& cmd,
-				const vcsn::algebra::token_representation_t& tok_rep)
+				const series_rep_t& srep)
   : alphabet (a),
     command  (cmd),
-    tok_rep_ (tok_rep)
+    srep_ (srep)
 {
 }
 
 rat_exp_t
 rat_exp_getter::operator() (std::string& str) const
 {
-  return make_rat_exp (alphabet, str, tok_rep_);
+  return make_rat_exp (alphabet, str, srep_);
 }
 
 rat_exp_t
@@ -155,7 +155,7 @@ rat_exp_getter::operator() (command_output_status& i) const
     }
 
   std::cin >> str;
-  return make_rat_exp (alphabet, str, tok_rep_);
+  return make_rat_exp (alphabet, str, srep_);
 }
 
 rat_exp_t
