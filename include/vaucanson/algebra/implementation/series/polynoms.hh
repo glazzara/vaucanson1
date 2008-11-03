@@ -25,10 +25,10 @@
 # include <map>
 # include <utility>
 
-namespace vcsn {
-
-  namespace algebra  {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     /*----------------.
     | polynom<Tm, Tw> |
     `----------------*/
@@ -133,7 +133,6 @@ namespace vcsn {
     template <class Tm, class Tw>
     bool operator>=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
-
     template<typename W, typename M, typename Tm, typename Tw>
     bool op_contains(const algebra::Series<W, M>& s,
 		     const algebra::polynom<Tm, Tw>& m);
@@ -169,6 +168,7 @@ namespace vcsn {
     /*-------------------.
     | Cauchy's product.  |
     `-------------------*/
+
     template<typename W, typename M, typename Tm, typename Tw>
     algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 				    const algebra::polynom<Tm, Tw>& a,
@@ -229,7 +229,7 @@ namespace vcsn {
 				    const oTm& b);
 
 
-  } // algebra
+  } // ! algebra
 
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
   struct op_add_traits<M, algebra::Series<W, M>,
@@ -238,8 +238,8 @@ namespace vcsn {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
 
-  namespace algebra {
-
+  namespace algebra
+  {
     template<typename M, typename W, typename oTm, typename Tm, typename Tw>
     algebra::polynom<Tm, Tw> op_add(const algebra::MonoidBase<M>& monoid,
 				    const algebra::Series<W, M>& s,
@@ -262,7 +262,7 @@ namespace vcsn {
 				    const algebra::polynom<Tm, Tw>& a,
 				    const oTw& b);
 
-  } // algebra
+  } // ! algebra
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   struct op_add_traits<W, algebra::Series<W, M>,
@@ -271,8 +271,8 @@ namespace vcsn {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
 
-  namespace algebra {
-
+  namespace algebra
+  {
     template<typename W, typename M, typename oTw, typename Tm, typename Tw>
     algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& semiring,
 				    const algebra::Series<W, M>& s,
@@ -295,7 +295,7 @@ namespace vcsn {
 				    const algebra::polynom<Tm, Tw>& a,
 				    const oTw& b);
 
-  } // algebra
+  } // ! algebra
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   struct op_mul_traits<W, algebra::Series<W, M>,
@@ -304,30 +304,31 @@ namespace vcsn {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
 
-  namespace algebra {
-
+  namespace algebra
+  {
     template<typename W, typename M, typename oTw, typename Tm, typename Tw>
     algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& semiring,
 				    const algebra::Series<W, M>& s,
 				    const oTw& a,
 				    const algebra::polynom<Tm, Tw>& b);
 
-    /*----------.
+    /*-----------.
     | Transpose. |
-    `----------*/
+    `-----------*/
+
     template <typename W, typename M, typename Tm, typename Tw>
     void  op_in_transpose(const algebra::Series<W, M>& s,
 			  algebra::polynom<Tm, Tw>& t);
 
-    /*-------------.
+    /*--------------.
     | input-output. |
-    `-------------*/
+    `--------------*/
 
     template<typename W, typename M, typename St, typename Tm, typename Tw>
     St& op_rout(const algebra::Series<W, M>& s, St& st,
 		const algebra::polynom<Tm, Tw>& p);
 
-  } // algebra
+  } // ! algebra
 
   /*---------------.
   | specialization |
@@ -341,9 +342,8 @@ namespace vcsn {
     static const bool dynamic_value = true;
   };
 
-
-  namespace algebra {
-
+  namespace algebra
+  {
     /*---------------------------------.
     | design_pattern series operations |
     `---------------------------------*/
@@ -375,23 +375,12 @@ namespace vcsn {
     op_choose(const algebra::Series<W,M>& s,
 	      SELECTOR2(algebra::polynom<Tm,Tw>));
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
-
-namespace std {
-
-  template <class Tm, class Tw>
-  std::ostream& operator<<(std::ostream& out,
-			   const vcsn::algebra::polynom<Tm, Tw>& p);
-
-} // std
-
-
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/algebra/implementation/series/polynoms.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HH

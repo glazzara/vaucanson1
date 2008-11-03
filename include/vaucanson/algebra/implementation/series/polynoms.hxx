@@ -18,18 +18,16 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX
 
-# include <sstream>
-
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/escaper.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     /*----------------.
     | polynom<Tm, Tw> |
     `----------------*/
@@ -194,11 +192,11 @@ namespace vcsn {
       polynom<Tm, Tw> p;
 
       for (const_iterator i = t.begin(); i != t.end(); ++i)
-	{
-	  monoid_elt_t m (s.monoid(), i->first);
-	  m.mirror();
-	  p[m.value()] = transpose(s.semiring(), i->second);
-	}
+      {
+	monoid_elt_t m (s.monoid(), i->first);
+	m.mirror();
+	p[m.value()] = transpose(s.semiring(), i->second);
+      }
       return p;
     }
 
@@ -222,7 +220,6 @@ namespace vcsn {
       return t;
     }
 
-
     template <class Tm, class Tw>
     bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
     {
@@ -234,7 +231,6 @@ namespace vcsn {
     {
       return !(lhs == rhs);
     }
-
 
     template <class Tm, class Tw>
     bool operator<(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
@@ -260,8 +256,6 @@ namespace vcsn {
       return lhs.as_map() >= rhs.as_map();
     }
 
-
-
     /*-------------------.
     | External functions |
     `-------------------*/
@@ -284,25 +278,25 @@ namespace vcsn {
 		    algebra::polynom<Tm, Tw>& m)
     {
       if (m.size() == 0)
-	{
-	  Tw val (zero_value(SELECT(typename Self::semiring_t), SELECT(Tw)));
-	  op_in_star(SELECT(typename Self::semiring_t), val);
-	  m.insert(identity_value(SELECT(typename Self::monoid_t), SELECT(Tm)),
-		   val);
-	}
+      {
+	Tw val (zero_value(SELECT(typename Self::semiring_t), SELECT(Tw)));
+	op_in_star(SELECT(typename Self::semiring_t), val);
+	m.insert(identity_value(SELECT(typename Self::monoid_t), SELECT(Tm)),
+		 val);
+      }
       else
-	{
-	  typename std::pair<Tm, Tw> elt = *m.as_map().begin();
-	  assertion_ (!(m.size() > 1 ||
+      {
+	typename std::pair<Tm, Tw> elt = *m.as_map().begin();
+	assertion_ (!(m.size() > 1 ||
 		      elt.first != identity_value(SELECT(typename
 							 Self::monoid_t),
 						  SELECT(Tm))),
-		      "Support is not empty, star cannot be computed.");
+		    "Support is not empty, star cannot be computed.");
 
-	  op_in_star(SELECT(typename Self::semiring_t), elt.second);
-	  m.clear();
-	  m.insert(elt.first, elt.second);
-	}
+	op_in_star(SELECT(typename Self::semiring_t), elt.second);
+	m.clear();
+	m.insert(elt.first, elt.second);
+      }
     }
 
     template<typename W, typename M, typename Tm, typename Tw>
@@ -314,10 +308,11 @@ namespace vcsn {
 
     template<typename W, typename M, typename Tm, typename Tw>
     typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t
-    op_support(const algebra::Series<W, M>&, const algebra::polynom<Tm, Tw>& m)
+    op_support(const algebra::Series<W, M>&,
+	       const algebra::polynom<Tm, Tw>& m)
     {
-      return typename algebra::series_traits<algebra::polynom<Tm, Tw> >
-	::support_t(m.as_map());
+      return typename algebra::series_traits<algebra::polynom<Tm, Tw> >::
+      support_t(m.as_map());
     }
 
     template<typename W, typename M, typename Tm, typename Tw>
@@ -352,20 +347,20 @@ namespace vcsn {
 	   i != arg.end();
 	   ++i)
 	if (i->second != zero)
+	{
+	  p = dst.find(i->first);
+	  if (p != dst.end())
 	  {
-	    p = dst.find(i->first);
-	    if (p != dst.end())
-	      {
-		w = i->second;
-		op_in_add(s.semiring(), w, p->second);
-		if (w == zero_value(SELECT(W), SELECT(Tw)))
-		  dst.erase(p);
-		else
-		  p->second = w;
-	      }
+	    w = i->second;
+	    op_in_add(s.semiring(), w, p->second);
+	    if (w == zero_value(SELECT(W), SELECT(Tw)))
+	      dst.erase(p);
 	    else
-	      dst.insert(i->first, i->second);
+	      p->second = w;
 	  }
+	  else
+	    dst.insert(i->first, i->second);
+	}
     }
 
     template<typename W, typename M, typename Tm, typename Tw>
@@ -381,6 +376,7 @@ namespace vcsn {
     /*-----------------.
     | cauchy's product |
     `-----------------*/
+
     template<typename W, typename M, typename Tm, typename Tw>
     algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 				    const algebra::polynom<Tm, Tw>& a,
@@ -393,13 +389,13 @@ namespace vcsn {
 	for (typename algebra::polynom<Tm, Tw>::const_iterator j = b.begin();
 	     j != b.end();
 	     ++j)
-	  {
-	    Tw w = op_mul(s.semiring(), i->second, j->second);
-	    if (w != zero_value(SELECT(W), SELECT(Tw)))
-	      ret.add(s.semiring(),
-		      op_mul(s.monoid(), i->first, j->first),
-		      w);
-	  }
+	{
+	  Tw w = op_mul(s.semiring(), i->second, j->second);
+	  if (w != zero_value(SELECT(W), SELECT(Tw)))
+	    ret.add(s.semiring(),
+		    op_mul(s.monoid(), i->first, j->first),
+		    w);
+	}
       return ret;
     }
 
@@ -569,13 +565,13 @@ namespace vcsn {
       typename algebra::polynom<Tm, Tw>::iterator p;
       for (typename algebra::polynom<Tm, Tw>::iterator i = dst.begin();
 	   i != dst.end();
-	   )
-	{
-	  p = i++;
-	  op_in_mul(s.semiring(), p->second, src);
-	  if (p->second == zero_value(SELECT(W), SELECT(Tw)))
-	    dst.erase(p);
-	}
+	  )
+      {
+	p = i++;
+	op_in_mul(s.semiring(), p->second, src);
+	if (p->second == zero_value(SELECT(W), SELECT(Tw)))
+	  dst.erase(p);
+      }
     }
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
@@ -603,12 +599,12 @@ namespace vcsn {
       typename algebra::polynom<Tm, Tw>::iterator p;
       for (typename algebra::polynom<Tm, Tw>::iterator i = ret.begin();
 	   i != ret.end();)
-	{
-	  p = i++;
-	  p->second = op_mul(s.semiring(), a, p->second);
-	  if (p->second == zero_value(SELECT(W), SELECT(Tw)))
-	    ret.erase(p);
-	}
+      {
+	p = i++;
+	p->second = op_mul(s.semiring(), a, p->second);
+	if (p->second == zero_value(SELECT(W), SELECT(Tw)))
+	  ret.erase(p);
+      }
       return ret;
     }
 
@@ -651,14 +647,9 @@ namespace vcsn {
       return st;
     }
 
-    /*---------------.
-    | specialization |
-    `---------------*/
-
     /*---------------------------------.
     | design_pattern series operations |
     `---------------------------------*/
-
 
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     Tw op_series_get(const algebra::Series<W, M>& s,
@@ -688,16 +679,15 @@ namespace vcsn {
 
       typename algebra::polynom<Tm, Tw>::iterator i = p.find(new_m);
       if (new_w == zero_value(semiring, new_w))
-	{
-	  if (i != p.end())
-	    p.erase(i);
-	}
+      {
+	if (i != p.end())
+	  p.erase(i);
+      }
       else if (i == p.end())
 	p.insert(new_m, new_w);
       else
 	i->second = new_w;
     }
-
 
     template <class W, class M, class Tm, class Tw>
     Tm op_choose_from_supp(const algebra::Series<W, M>&,
@@ -725,7 +715,6 @@ namespace vcsn {
       return i->first;
     }
 
-
     template <class W, class M, class Tm, class Tw>
     Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> >
     op_choose(const algebra::Series<W,M>& s,
@@ -742,6 +731,7 @@ namespace vcsn {
     /*----------.
     | transpose |
     `----------*/
+
     template <typename W, typename M, typename Tm, typename Tw>
     void  op_in_transpose(const algebra::Series<W, M>& s,
 			  algebra::polynom<Tm, Tw>& t)
@@ -751,39 +741,8 @@ namespace vcsn {
       t = f(s, t);
     }
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
-
-namespace std {
-
-  // FIXME: We should use a dump visitor (see ratexp DumpVisitor)
-  template <class Tm, class Tw>
-  std::ostream& operator<<(std::ostream& out,
-			   const vcsn::algebra::polynom<Tm, Tw>& p)
-  {
-    typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-
-    while (i != p.end())
-      {
-	if (i != p.begin())
-	  out << "+";
-	out << "({" << i->second << "} ";
-	if (i->first.empty())
-	  out << vcsn::algebra::letter_traits<typename Tm::value_type>::default_epsilon();
-	else
-	  out << i->first;
-	out << ")";
-	++i;
-      }
-
-    // zero case
-    if (i == p.begin())
-      out << vcsn::algebra::letter_traits<typename Tm::value_type>::default_zero();
-
-    return out;
-  }
-
-} // std
+} // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX

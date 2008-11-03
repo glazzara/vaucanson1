@@ -1,5 +1,14 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup polynoms implementation.
+	* include/vaucanson/algebra/implementation/series/polynoms.hh:
+	  Cosmetic changes. Remove useless (duplicated code with `op_rout')
+	  `operator<<' declaration.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	  Cosmetic changes. Remove useless `operator<<' declaration.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Change empty word representation to match char letters defaults.
 	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
 	  Initialize the `empty' attribute with the string "1" instead of
