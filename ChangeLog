@@ -1,5 +1,18 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix op_parse for char letters.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hh:
+	  Cosmetic changes. (op_parse): Use `FreeMonoid' specialization
+	  instead of `FreeMonoidBase'. Rename `s' argument to `in', and
+	  `set' to `s' to be more coherent with other parsers and dumpers.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx:
+	  Cosmetic changes. Update prototypes based on the previous header
+	  file. (op_parse): Remove useless `typename' keyword. Add support
+	  for parsing empty word representations. It was handled by
+	  krat_exp_parser before [2307]. Add more comments.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add support for series representation to make_rat_exp.
 	* include/vaucanson/contexts/automaton_maker.thh (make_rat_exp):
 	  Cosmetic changes. Remove useless parenthesis. Add a new argument

@@ -22,23 +22,24 @@
 
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/concept/letter.hh>
-# include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     // Specialization for char type.
     template <>
     struct letter_traits<char>;
 
     // Specialization for char type.
     template <typename S, typename CharContainer>
-    bool op_parse(const algebra::FreeMonoidBase<S>& set,
+    bool op_parse(const FreeMonoid<S>& s,
 		  std::basic_string<char>& v,
-		  const std::string& s,
+		  const std::string& in,
 		  typename std::string::const_iterator& i,
 		  const CharContainer& escaped);
+
   } // ! algebra
 
 } // ! vcsn

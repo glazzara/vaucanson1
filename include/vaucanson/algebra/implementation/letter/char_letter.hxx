@@ -21,10 +21,10 @@
 
 # include <vaucanson/algebra/implementation/letter/char_letter.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     template <>
     struct letter_traits<char>
     {
@@ -72,16 +72,21 @@ namespace vcsn {
     };
 
     template <typename S, typename CharContainer>
-    bool op_parse(const algebra::FreeMonoidBase<S>& set,
+    bool op_parse(const FreeMonoid<S>& s,
 		  std::basic_string<char>& v,
-		  const std::string& s,
+		  const std::string& in,
 		  typename std::string::const_iterator& i,
 		  const CharContainer&)
     {
-      typename std::string::const_iterator j = i;
-      typename std::string::const_iterator k;
+      std::string::const_iterator j = i;
+      std::string::const_iterator k;
 
-      while ((i != s.end()) && (set.alphabet().contains(*i)))
+      // Check if we are given the empty word representation.
+      if (in == s.representation()->empty)
+	return true;
+
+      // Check is every letter is in the alphabet.
+      while ((i != in.end()) && (s.alphabet().contains(*i)))
       {
 	v += *i;
 	++i;
