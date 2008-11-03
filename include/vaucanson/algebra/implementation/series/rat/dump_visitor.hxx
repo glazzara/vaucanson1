@@ -85,11 +85,14 @@ namespace vcsn {
       DumpVisitor(std::ostream& ostr = std::cout)
 	: ostr_ (ostr)
       {
-	series_rep_ = vcsn::algebra::series_rep_default<Semiring, Monoid>::get_instance();
+	series_rep_ = vcsn::algebra::series_rep_default<Semiring, Monoid>::
+	get_instance();
 
-	/* Should be removed soon */
+	if (not ostr_.pword(rat::zero()))
+	  ostr_ << setzero(series_rep_->zero);
+
 	if (not ostr_.pword(rat::id()))
-	  ostr_ << setid(algebra::letter_traits<typename Word::value_type>::default_epsilon());
+	  ostr_ << setid(series_rep_->one);
       }
 
       virtual
@@ -198,7 +201,7 @@ namespace vcsn {
 	    enclose_if(mode & MODE_STAR, node);
 	    break;
 	  }
-	ostr_ << series_rep_->times;
+	ostr_ << series_rep_->star;
       }
 
       virtual
@@ -292,14 +295,14 @@ namespace vcsn {
       void
       zero()
       {
-	ostr_ << series_rep_->zero;
+	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::zero()));
       }
 
       virtual
       void
       one()
       {
-	ostr_ << *static_cast<const std::string*> (ostr_.pword(id()));
+	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::id()));
       }
 
     protected:
