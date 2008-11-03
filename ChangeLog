@@ -1,5 +1,13 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix krat_exp_parser to handle one again.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	  Use type helpers to factor some codes. (Lexer): When parsing a
+	  word and it returns the empty word, create the correct rat::exp
+	  node.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Change default null series representation.
 	* include/vaucanson/algebra/implementation/series/series_rep.hxx:
 	  Initialize the `zero' attribute with the string "0" instead of

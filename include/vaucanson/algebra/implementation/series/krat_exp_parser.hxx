@@ -55,9 +55,12 @@ namespace vcsn
     template <class S, class T>
     struct Lexer
     {
+      // Type helpers.
       typedef typename Element<S, T>::monoid_elt_t monoid_elt_t;
       typedef typename Element<S, T>::semiring_elt_t semiring_elt_t;
-      typedef typename Element<S, T>::series_rep_t series_rep_t;
+      typedef typename Element<S, T>::set_t::shared_series_rep_t
+	shared_series_rep_t;
+
       Lexer(const std::string& from,
 	    Element<S, T>& e,
 	    yy::krat_exp_parser& parser,
@@ -71,17 +74,20 @@ namespace vcsn
 	token_tab_(8),
 	error_(error)
       {
-	token_tab_[0] = e.representation()->open_par;
-	token_tab_[1] = e.representation()->close_par;
-	token_tab_[2] = e.representation()->plus;
-	token_tab_[3] = e.representation()->times;
-	token_tab_[4] = e.representation()->star;
-	token_tab_[5] = e.representation()->zero;
-	token_tab_[6] = e.representation()->open_weight;
-	close_weight_ = e.representation()->close_weight;
-	for (unsigned i = 0; i < e.representation()->spaces.size(); i++)
+	// Get the series representation.
+	const shared_series_rep_t& rep = e.structure().representation();
+
+	token_tab_[0] = rep->open_par;
+	token_tab_[1] = rep->close_par;
+	token_tab_[2] = rep->plus;
+	token_tab_[3] = rep->times;
+	token_tab_[4] = rep->star;
+	token_tab_[5] = rep->zero;
+	token_tab_[6] = rep->open_weight;
+	close_weight_ = rep->close_weight;
+	for (unsigned i = 0; i < rep->spaces.size(); i++)
 	{
-	  token_tab_[7 + i] = e.representation()->spaces[i];
+	  token_tab_[7 + i] = rep->spaces[i];
 	}
 
 	std::string::const_iterator sit;
@@ -152,7 +158,10 @@ namespace vcsn
 	std::string::const_iterator sit = s.begin();
 	if (parse_word(w, s, sit, std::set<char>()))
 	{
-	  Element<S, T> ww = Element<S, T>(e_.structure(), w.value());
+	  Element<S, T> ww = (w.value().empty() ?
+			      identity_as<T>::of(e_.structure()) :
+			      Element<S, T>(e_.structure(), w.value()));
+
 	  krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(ww);
 	  parser_.insert_word(rexp);
 	}
