@@ -38,19 +38,22 @@ namespace vcsn
     struct FreeMonoid
       : FreeMonoidBase<FreeMonoid<A> >
     {
+      // Type helpers.
       typedef A alphabets_elt_t;
+      typedef monoid_rep<FreeMonoid<A> > monoid_rep_t;
+      typedef boost::shared_ptr<monoid_rep_t> shared_monoid_rep_t;
 
       /// Constructor based on an alphabet.
       FreeMonoid(const A& a);
 
       /// Constructor based on an alphabet.
-      FreeMonoid(const A& a, monoid_rep<FreeMonoid<A> > mr);
+      FreeMonoid(const A& a, monoid_rep_t mr);
 
       /// Copy constructor.
       FreeMonoid(const FreeMonoid& w);
 
       /// Representation's accessor.
-      const boost::shared_ptr<monoid_rep<FreeMonoid<A> > > representation() const;
+      const shared_monoid_rep_t representation() const;
 
       /// Alphabet's accessor.
       /// @bug FIXME: this interface should not exist (s.e. are const once
@@ -59,7 +62,7 @@ namespace vcsn
 
       /// Alphabet's accessor
       const A&	alphabet() const;
-      const boost::shared_ptr<monoid_rep<FreeMonoid<A> > > rep_;
+      const shared_monoid_rep_t rep_;
 
     protected:
       A alph_;

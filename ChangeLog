@@ -1,5 +1,17 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add more type helpers for FreeMonoid and Series.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh
+	  (FreeMonoid): Add `monoid_rep_t' and `shared_monoid_rep_t'
+	  typedefs. Use new types in the `representation()' prototype and
+	  attributes declarations.
+	* include/vaucanson/algebra/implementation/series/series.hh
+	  (Series): Add `series_rep_t' and `shared_series_rep_t' typedefs.
+	  Use new types in the `representation()' prototype and attributes
+	  declarations.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix op_parse for char letters.
 	* include/vaucanson/algebra/implementation/letter/char_letter.hh:
 	  Cosmetic changes. (op_parse): Use `FreeMonoid' specialization

@@ -41,20 +41,23 @@ namespace vcsn {
 	private SetSlot<Semiring, semiring_slot_tag>,
 	private SetSlot<Monoid, monoid_slot_tag>
     {
+      typedef series_rep<Semiring, Monoid> series_rep_t;
+      typedef boost::shared_ptr<series_rep_t> shared_series_rep_t;
+
       Series(const Semiring& w, const Monoid& m);
-      Series(const Semiring& w, const Monoid& m, const series_rep<Semiring, Monoid>& sr);
+      Series(const Semiring& w, const Monoid& m, const series_rep_t& sr);
       Series(const Series& other);
 
       const Semiring&	semiring() const;
 
       const Monoid&	monoid() const;
 
-      const boost::shared_ptr<series_rep<Semiring, Monoid> > representation() const;
+      const shared_series_rep_t representation() const;
 
       bool operator==(const Series<Semiring, Monoid>&) const;
 
       protected:
-      const boost::shared_ptr<series_rep<Semiring, Monoid> > rep_;
+      const shared_series_rep_t rep_;
     };
 
     template <class W, class M, class NewW, class NewM>
