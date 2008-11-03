@@ -20,19 +20,18 @@
 
 # include "parser_options.hh"
 
-parser_options::options_grammar::options_grammar(parser_options::alphabet_t& arg_al,
-						 parser_options::token_representation_t& arg_tok_rep)
-: al(arg_al), tok_rep(arg_tok_rep)
+parser_options::options_grammar::options_grammar(parser_options::alphabet_t&
+						 arg_al,
+						 series_rep_t& arg_srep,
+						 monoid_rep_t& arg_mrep)
+: al(arg_al), srep(arg_srep), mrep(arg_mrep)
 {
 }
 
 parser_options::parser_options(const std::string& str)
 {
   using namespace boost::spirit;
-  options_grammar grammar(letters_, tok_rep_);
-
-  // set the correct type dependant defaults
-  set_default(tok_rep_);
+  options_grammar grammar(letters_, srep_, mrep_);
 
   BOOST_SPIRIT_DEBUG_NODE(grammar);
 
@@ -43,9 +42,23 @@ parser_options::parser_options(const std::string& str)
 }
 
 const std::vector<std::string>&
-parser_options::get_letters() { return letters_; }
-const vcsn::algebra::token_representation_t&
-parser_options::get_tok_rep() { return tok_rep_; }
+parser_options::get_letters()
+{
+  return letters_;
+}
+
+const series_rep_t&
+parser_options::get_srep()
+{
+  return srep_;
+}
+
+const monoid_rep_t&
+parser_options::get_mrep()
+{
+  return mrep_;
+}
+
 bool
 parser_options::rec_check_collision(const std::string& str, std::string::const_iterator it_str_curr)
 {
@@ -98,22 +111,22 @@ parser_options::check_collision()
   if (check_collision(TOKEN))							\
     std::cerr << "Warning: The token " << NAME <<				\
 		 " could also be a part of a word in your alphabet." << std::endl;
-  CHECK_COLISION(tok_rep_.open_par, "OPAR")
-  CHECK_COLISION(tok_rep_.close_par, "CPAR")
-  CHECK_COLISION(tok_rep_.plus, "PLUS")
-  CHECK_COLISION(tok_rep_.times, "TIMES")
-  CHECK_COLISION(tok_rep_.star, "STAR")
-  CHECK_COLISION(tok_rep_.open_weight, "OWEIGHT")
-  CHECK_COLISION(tok_rep_.one, "ONE")
-  CHECK_COLISION(tok_rep_.zero, "ZERO")
-  for_all(std::vector<std::string>, it, tok_rep_.spaces)
+  CHECK_COLISION(srep_.open_par, "OPAR")
+  CHECK_COLISION(srep_.close_par, "CPAR")
+  CHECK_COLISION(srep_.plus, "PLUS")
+  CHECK_COLISION(srep_.times, "TIMES")
+  CHECK_COLISION(srep_.star, "STAR")
+  CHECK_COLISION(srep_.open_weight, "OWEIGHT")
+  CHECK_COLISION(mrep_.empty, "ONE")
+  CHECK_COLISION(srep_.zero, "ZERO")
+  for_all(std::vector<std::string>, it, srep_.spaces)
     CHECK_COLISION(*it, "SPACE")
 #undef CHECK_COLISION
 }
 
 template <typename ScannerT>
 parser_options::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)
-: al_ref(g.al), tok_rep_ref(g.tok_rep)
+: al_ref(g.al), srep_ref(g.srep), mrep_ref(g.mrep)
 {
   using namespace boost;
   using namespace boost::spirit;
@@ -252,7 +265,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::open_par(const char* from,
 								const char* to)
 {
-  tok_rep_ref.open_par = escape(from, to);
+  srep_ref.open_par = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -260,7 +273,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::close_par(const char* from,
 								 const char* to)
 {
-  tok_rep_ref.close_par = escape(from, to);
+  srep_ref.close_par = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -268,7 +281,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::plus(const char* from,
 							    const char* to)
 {
-  tok_rep_ref.plus = escape(from, to);
+  srep_ref.plus = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -276,7 +289,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::times(const char* from,
 							     const char* to)
 {
-  tok_rep_ref.times = escape(from, to);
+  srep_ref.times = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -284,7 +297,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::star(const char* from,
 							    const char* to)
 {
-  tok_rep_ref.star = escape(from, to);
+  srep_ref.star = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -292,7 +305,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::open_weight(const char* from,
 								   const char* to)
 {
-  tok_rep_ref.open_weight = escape(from, to);
+  srep_ref.open_weight = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -300,7 +313,7 @@ void
 parser_options::options_grammar::definition<ScannerT>::close_weight(const char* from,
 								    const char* to)
 {
-  tok_rep_ref.close_weight = escape(from, to);
+  srep_ref.close_weight = escape(from, to);
 }
 
 template <typename ScannerT>
@@ -310,25 +323,25 @@ parser_options::options_grammar::definition<ScannerT>::push_space(const char* fr
 {
   static bool first = true;
   if (first)
-    tok_rep_ref.spaces.clear();
-  tok_rep_ref.spaces.push_back(escape(from, to));
+    srep_ref.spaces.clear();
+  srep_ref.spaces.push_back(escape(from, to));
   first = false;
 }
 
 template <typename ScannerT>
 void
 parser_options::options_grammar::definition<ScannerT>::push_one(const char* from,
-						      		const char* to)
+								const char* to)
 {
-  tok_rep_ref.one = escape(from, to);
+  mrep_ref.empty = escape(from, to);
 }
 
 template <typename ScannerT>
 void
 parser_options::options_grammar::definition<ScannerT>::push_zero(const char* from,
-						      		const char* to)
+								 const char* to)
 {
-  tok_rep_ref.zero = escape(from, to);
+  srep_ref.zero = escape(from, to);
 }
 
 #endif // ! PARSER_OPTIONS_HXX

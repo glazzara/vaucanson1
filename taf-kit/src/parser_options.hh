@@ -69,27 +69,23 @@ public:
 
   parser_options(const std::string&);
 
-  const std::vector<std::string>&
-  get_letters();
-  const vcsn::algebra::token_representation_t&
-  get_tok_rep();
-  void
-  check_collision();
+  const std::vector<std::string>& get_letters();
+  const series_rep_t& get_srep();
+  const monoid_rep_t& get_mrep();
+  void check_collision();
 
 private:
-  bool
-  rec_check_collision(const std::string& str, std::string::const_iterator it_str_curr);
-  bool
-  check_collision(const std::string& str);
+  bool rec_check_collision(const std::string& str,
+			   std::string::const_iterator it_str_curr);
+  bool check_collision(const std::string& str);
 
   // type helpers
   typedef std::vector<std::string> alphabet_t;
-  typedef vcsn::algebra::token_representation_t token_representation_t;
 
   struct options_grammar : public boost::spirit::grammar<options_grammar>
   {
     // CTOR
-    options_grammar(alphabet_t& al, token_representation_t& tok_rep);
+    options_grammar(alphabet_t& al, series_rep_t& srep, monoid_rep_t& mrep);
 
     template <typename ScannerT>
     struct definition
@@ -123,7 +119,8 @@ private:
 
       // reference to parser_options creator
       parser_options::alphabet_t& al_ref;
-      parser_options::token_representation_t& tok_rep_ref;
+      series_rep_t& srep_ref;
+      monoid_rep_t& mrep_ref;
 
       /**
        * function called to remove the '\' in front of the
@@ -152,7 +149,7 @@ private:
 
       /**
        * Callback function called to set open_par token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -163,7 +160,7 @@ private:
 
       /**
        * Callback function called to set close_par token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -174,7 +171,7 @@ private:
 
       /**
        * Callback function called to set plus token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -185,7 +182,7 @@ private:
 
       /**
        * Callback function called to set times token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -196,7 +193,7 @@ private:
 
       /**
        * Callback function called to set star token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -207,7 +204,7 @@ private:
 
       /**
        * Callback function called to set open_weight token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -218,7 +215,7 @@ private:
 
       /**
        * Callback function called to set close_weight token representation
-       * into the token_representation structure.
+       * into the series_rep_t structure.
        *
        * @param from Begin iterator.
        * @param to   End iterator.
@@ -263,12 +260,14 @@ private:
     }; // ! definition
 
     parser_options::alphabet_t& al;
-    parser_options::token_representation_t& tok_rep;
+    series_rep_t& srep;
+    monoid_rep_t& mrep;
 
   }; // ! options_grammar
 
   alphabet_t letters_;
-  token_representation_t tok_rep_;
+  series_rep_t srep_;
+  monoid_rep_t mrep_;
 
 }; // ! parser_options
 

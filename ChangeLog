@@ -1,5 +1,15 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add support for the new representation system to parser_options.
+	* taf-kit/src/parser_options.hh (options_grammar): Refactor
+	  `tok_rep' to `srep', add new `mrep' to support monoid
+	  representations. Update comments.
+	* taf-kit/src/parser_options.hxx: New functions `get_mrep' and
+	  rename `get_tok_rep' to `get_srep'. (rec_check_collision): Update
+	  collision check for `ONE'. Update the `push_one' function.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a bug in Taf-Kit's print_automaton.
 	* taf-kit/src/edition_commands.hxx (print_automaton): Use
 	  `series_of' instead of `series_value_of'.
