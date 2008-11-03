@@ -1,5 +1,11 @@
 2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a bug in Taf-Kit's print_automaton.
+	* taf-kit/src/edition_commands.hxx (print_automaton): Use
+	  `series_of' instead of `series_value_of'.
+
+2008-11-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Refactor token_representation_t.
 	* taf-kit/src/common.hh,
 	* taf-kit/src/edition_commands.hxx,

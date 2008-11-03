@@ -338,7 +338,7 @@ namespace edition_commands
 	++n_trans;
 # ifndef WITH_TWO_ALPHABETS
 	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
-	       << " labeled by " << a.series_value_of (*h));
+	       << " labeled by " << a.series_of (*h));
 # else
 #  ifndef WITH_WEIGHTS
 	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
