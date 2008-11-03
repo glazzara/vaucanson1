@@ -52,14 +52,22 @@ namespace vcsn
       rat_exp_t
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
-		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero()
-		   /* FIXME : representation*/);
+		   const std::string& exp = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance()->zero,
+		   const series_rep_t& srep = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance());
 
       template <class T>
       rat_exp_t
       make_rat_exp(const T& alphabet,
-		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero()
-		   /* FIXME : representation*/);
+		   const std::string& exp = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance()->zero,
+		   const series_rep_t& srep = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance());
 
       template <class SeriesSet, class SeriesImpl>
       automaton_t

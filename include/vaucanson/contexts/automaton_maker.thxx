@@ -31,7 +31,6 @@ namespace vcsn
   {
     VCSN_CONTEXT_NAMESPACE
     {
-
       /*-----------------.
       | make_automaton() |
       `-----------------*/
@@ -95,7 +94,6 @@ namespace vcsn
         return make_gen_automaton(alphabet.begin(), alphabet.end());
       }
 
-
       /*---------------.
       | make_rat_exp() |
       `---------------*/
@@ -104,14 +102,19 @@ namespace vcsn
       rat_exp_t
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
-		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero())
+		   const std::string& exp = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance()->zero,
+		   const series_rep_t& srep = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance())
       {
 	alphabet_t	alphabet;
         for (Iterator i = begin; i != end; ++i)
           alphabet.insert(*i);
         monoid_t	monoid (alphabet);
         semiring_t	semiring;
-        series_set_t	series (semiring, monoid);
+        series_set_t	series (semiring, monoid, srep);
 
         rat_exp_t	r (series);
         std::pair<bool, std::string> p = parse(exp, r);
@@ -124,9 +127,14 @@ namespace vcsn
       template <class T>
       rat_exp_t
       make_rat_exp(const T& alphabet,
-		   const std::string& exp = vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()->zero())
+		   const std::string& exp = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance()->zero(),
+		   const series_rep_t& srep = vcsn::algebra::
+		   series_rep_default<semiring_t, monoid_t>::
+		   get_instance())
       {
-        return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
+        return make_rat_exp(alphabet.begin(), alphabet.end(), exp, srep);
       }
 
       /*--------------.
