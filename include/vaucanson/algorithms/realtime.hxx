@@ -48,7 +48,7 @@ namespace vcsn {
     transition_vector_t tmp_trans;
     for_all_(transitions_t, e, transitions)
       tmp_trans.push_back(*e);
-    
+
     for_all(typename transition_vector_t, e, tmp_trans)
     {
       hstate_t start = a.src_of(*e);
@@ -56,26 +56,26 @@ namespace vcsn {
       series_set_elt_t label = a.series_of(*e);
 
       assert(label.supp().begin() != label.supp().end());
-      
+
       monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
       monoid_elt_value_t w1 = m1.value();
       unsigned int size = m1.length();
-      
+
       if (size > 1)
       {
         monoid_elt_t m(a.structure().series().monoid());
-        
+
         semiring_elt_t s = label.get(m1);
         series_set_elt_t in_series(a.structure().series());
         typename monoid_elt_t::iterator l = m1.begin();
-        
+
         m = *l;
-        
+
         in_series.assoc(m, s);
-        
+
         s1 = a.add_state();
         a.add_series_transition(start, s1, in_series);
-        
+
         l++;
         for (typename monoid_elt_t::iterator end = m1.begin() + (size - 1);
              l != end; ++l)
@@ -87,12 +87,12 @@ namespace vcsn {
           series.assoc(m, s_ident);
           a.add_series_transition(s0, s1, series);
         }
-        
+
         m = *l;
-        
+
         series_set_elt_t out_series(a.structure().series());
         out_series.assoc(m, s_ident);
-        
+
         a.add_series_transition(s1, stop, out_series);
         a.del_transition(*e);
       }
@@ -124,7 +124,7 @@ namespace vcsn {
       if (m.length() > 0)
       {
         hstate_t s = res.add_state();
-        res.add_series_transition(*i, s, l);
+        res.add_series_transition(s, *i, l);
         res.set_initial(s);
         res.unset_initial(*i);
       }
@@ -143,12 +143,12 @@ namespace vcsn {
       if (m.length() > 0)
       {
 	hstate_t s = res.add_state();
-	res.add_series_transition(s, *f, l);
+	res.add_series_transition(*f, s, l);
 	res.set_final(s);
 	res.unset_final(*f);
       }
     }
-    
+
     // Make the transitions realtime (now includes any former initial
     // or final labels).
     do_realtime_words(res);

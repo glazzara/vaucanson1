@@ -1,3 +1,14 @@
+2008-11-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime.hxx (realtime_words_here):
+	Fix handling of initial and final arrows introduced on 2008-10-09.
+	* taf-kit/tests/automata/char-b/initialword.xml,
+	taf-kit/tests/automata/char-b/finalword.xml: New files.
+	* taf-kit/tests/Makefile.am (EXTRA_DIST): Distribute them.
+	* taf-kit/tests/defs.in (initialword, finalword): New variables.
+	* taf-kit/tests/vcsn-char-b.test: Add more tests using these
+	new automata.
+
 2008-11-04  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix FMP series representations in Taf-Kit.

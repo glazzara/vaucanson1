@@ -367,6 +367,22 @@ fail1 $VCSN has-succ-comp 2snf.xml
 fail1 $VCSN is-realtime ab.xml
       $VCSN realtime ab.xml \| is-realtime -
 
+      test "`$VCSN eval $initialword aba`" = 1
+      test "`$VCSN eval $initialword ab`" = 0
+      $VCSN realtime $initialword > initialreal.xml
+      $VCSN is-realtime initialreal.xml
+      test "`$VCSN eval initialreal.xml aba`" = 1
+      test "`$VCSN eval initialreal.xml ab`" = 0
+
+      test "`$VCSN eval $finalword aba`" = 1
+      test "`$VCSN eval $finalword ab`" = 0
+      $VCSN realtime $finalword > finalreal.xml
+      $VCSN is-realtime finalreal.xml
+      test "`$VCSN eval finalreal.xml aba`" = 1
+      test "`$VCSN eval finalreal.xml ab`" = 0
+
+      $VCSN are-equivalent initialreal.xml finalreal.xml
+
 # is-standard
 fail1 $VCSN is-standard $a1
 fail1 $VCSN is-standard $void_b_automaton
@@ -442,7 +458,7 @@ diff stderr stderr.ref
 
 
 (
-parser="OPAR=op CPAR=cp PLUS=++ TIMES=.. STAR=** OWEIGHT=ow CWEIGHT=cw ZERO=00 ONE=11" 
+parser="OPAR=op CPAR=cp PLUS=++ TIMES=.. STAR=** OWEIGHT=ow CWEIGHT=cw ZERO=00 ONE=11"
 end=126 # '~'
 i=33 # '!'
 while [ $i -le $end ];
