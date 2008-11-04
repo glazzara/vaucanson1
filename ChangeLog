@@ -1,3 +1,9 @@
+2008-11-04  Reuben Thomas  <rrt@sc3d.org>
+
+	Fix English.
+	* include/vaucanson/algebra/concept/semiring_base.hh:
+	   "therefor" -> "therefore"; "choosen" -> "chosen".
+
 2008-11-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/realtime.hxx (realtime_words_here):
@@ -509,6 +515,54 @@
 	Fix English typo.
 	* /home/rrt/vaucanson/trunk/include/vaucanson/design_pattern/element.hh:
 	  theorical -> theoretical.
+
+2008-10-27  Reuben Thomas  <rrt@sc3d.org>
+
+	Add Kind template parameter to Automata/Transducer types.
+	Add Kind template parameter to Automata/Transducer types, and kind_t type to the classes.
+	This is the first step on the way to the new label kinds regime.
+	(Of course, this and future commits are being made on the label_kinds branch for
+	the moment.)
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/extension.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/extension.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/invert.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/ltl_to_pair.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/ltl_to_pair.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/normalized_composition.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/search.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/search.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/thompson.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/thompson.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/automata.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/automata.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/automata_base.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/automata_kind.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/transducer.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/transducer.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/transducer_base.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/contexts/automaton.thh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/contexts/transducer.thh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/misc/usual_macros.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/xml/contexts/fmp.hh: .
+
+2008-10-27  Reuben Thomas  <rrt@sc3d.org>
+
+	Merge wanted changes from trunk.
+	* /home/rrt/vaucanson/branches/label_kinds/.: New.
+	* /home/rrt/vaucanson/branches/label_kinds/ChangeLog: .
+	* /home/rrt/vaucanson/branches/label_kinds/data/template_graph_impl.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algebra/concept/freemonoid_product.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algebra/concept/numerical_semiring.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algebra/concept/semigroup_base.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algebra/concept/tropical_semiring.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algebra/implementation/series/series.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/algorithms/realtime.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/kinds.hh: .
+	* /home/rrt/vaucanson/branches/label_kinds/include/vaucanson/automata/concept/kinds.hxx: .
+	* /home/rrt/vaucanson/branches/label_kinds/src/demos/one_rule_rewriting/Makefile.am: .
+	* /home/rrt/vaucanson/branches/label_kinds/src/demos/one_rule_rewriting/ORR_demo.cc: .
+	* /home/rrt/vaucanson/branches/label_kinds/src/demos/one_rule_rewriting/ORR_iterate.cc: New.
+	* /home/rrt/vaucanson/branches/label_kinds/src/demos/one_rule_rewriting/shortest.hh: New.
 
 2008-10-27  Reuben Thomas  <rrt@sc3d.org>
 

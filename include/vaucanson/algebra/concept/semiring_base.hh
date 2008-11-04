@@ -41,7 +41,7 @@ namespace vcsn {
        * Whether it is possible to call choose_non_starable.
        *
        * There's no need for can_choose_starable, since Zero is always
-       * starable and therefor can be choosen.
+       * starable and therefore can be chosen.
        */
       template <class T>
       bool can_choose_non_starable(SELECTOR(T)) const;
