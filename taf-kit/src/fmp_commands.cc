@@ -86,8 +86,9 @@ DEFINE_COMMAND (NAME (evaluation)
 		CODE (automaton_t src = get_aut(args.args[1]))
 		OUTPUT (
 		  evaluation (src,
-			      IOAUT_CONTEXT::make_rat_exp(src.structure().series().monoid().first_monoid().alphabet(),
-				args.args[2], args.srep)) << std::endl)
+			      IOAUT_CONTEXT::make_rat_exp(src.structure().
+				series().monoid().first_monoid().alphabet(),
+				args.args[2], args.srep1)) << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation_fmp)

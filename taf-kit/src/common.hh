@@ -91,11 +91,15 @@ struct arguments_t
     const char*	args[3];
     int		n_args;
 
+    // Representation of Series<Semiring, Monoid>
     series_rep_t srep;
     std::vector<std::string> alphabet;
     std::string parser;
 # ifdef WITH_TWO_ALPHABETS
-    series_rep_t srep2;
+    // Representation of Series<Semiring, FirstMonoid>
+    IOAUT_CONTEXT::series_rep_t srep1;
+    // Representation of Series<Semiring, SecondMonoid>
+    IOAUT_CONTEXT::series_rep_t srep2;
     std::vector<std::string> alphabet2;
     std::string parser2;
 # endif // ! WITH_TWO_ALPHABETS
