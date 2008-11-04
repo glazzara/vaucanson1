@@ -66,15 +66,17 @@ namespace vcsn {
     struct FreeMonoidProduct
       : FreeMonoidProductBase< FreeMonoidProduct<F, S> >
     {
-      typedef F			first_monoid_t;
-      typedef S			second_monoid_t;
+      // Type helpers.
+      typedef F first_monoid_t;
+      typedef S second_monoid_t;
+      typedef monoid_rep<FreeMonoidProduct<F, S> > monoid_rep_t;
+      typedef boost::shared_ptr<monoid_rep_t> shared_monoid_rep_t;
 
       /// Constructor based on two free monoids.
       FreeMonoidProduct(const F& a, const S& b);
 
       /// Constructor with explicit representation.
-      FreeMonoidProduct(const F& a, const S& b,
-			monoid_rep<FreeMonoidProduct<F, S> > mr);
+      FreeMonoidProduct(const F& a, const S& b, monoid_rep_t mr);
 
       /// Copy constructor.
       FreeMonoidProduct(const FreeMonoidProduct& w);
@@ -91,14 +93,12 @@ namespace vcsn {
       const second_monoid_t&	second_monoid() const;
 
       /// Representation's accessor.
-      const boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >
-	representation() const;
+      const shared_monoid_rep_t representation() const;
 
     protected:
       first_monoid_t		first_monoid_;
       second_monoid_t		second_monoid_;
-      const boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >
-				rep_;
+      const shared_monoid_rep_t	rep_;
     };
 
     template<class F, class S>
