@@ -62,10 +62,10 @@ namespace vcsn
 
       /// Alphabet's accessor
       const A&	alphabet() const;
-      const shared_monoid_rep_t rep_;
 
     protected:
       A alph_;
+      const shared_monoid_rep_t rep_;
     };
 
     template<typename A>
