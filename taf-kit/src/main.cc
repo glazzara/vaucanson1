@@ -273,6 +273,8 @@ using namespace vcsn::misc;
 int main (int argc, char* argv[])
 {
   set_program_name(argv[0]);
+  // Simplify the program name, because argp() uses it to report errors.
+  argv[0] = const_cast<char*>(program_name);
 
   std::list<pipe_command> command_list;
 
@@ -283,6 +285,11 @@ int main (int argc, char* argv[])
     {
       if (std::string ("|").compare(argv[i]) == 0)
 	{
+	  // Pretend that each pipe is the start of a vcsn-x-x call.
+	  // This is because argp() will use that value to report errors
+	  // and we do not want errors to be reported by "|".
+	  argv[i] = const_cast<char*>(program_name);
+
 	  command_list.push_back (pipe_command (argv, j, i));
 	  j = i;
 	}
@@ -291,7 +298,7 @@ int main (int argc, char* argv[])
 
   GLOBAL_RESULT.set_state (PIPE_GET_FROM_STDIN);
 
-  arguments_t args ("");
+  arguments_t args(program_name);
 
   // Parse each command
   for (std::list<pipe_command>::iterator li = command_list.begin ();
@@ -316,7 +323,7 @@ int main (int argc, char* argv[])
       }
       catch (const std::logic_error& err)
       {
-	warn (argv[0] << ": " << err.what ());
+	warn (program_name << ": " << err.what ());
       }
 
       if (li->args.bench)
@@ -366,7 +373,7 @@ int main (int argc, char* argv[])
 	      status = execute_command (args);
 	    }
 	  catch (const std::logic_error& err) {
-	    warn (argv[0] << ": " << err.what ());
+	    warn (program_name << ": " << err.what ());
 	    status = -1;
 	  }
 

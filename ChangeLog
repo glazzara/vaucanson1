@@ -1,3 +1,10 @@
+2008-11-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/main.cc (main): Make sure program_name, as computed
+	by set_program_name(), is used to report errors.
+	* taf-kit/src/library_commands.hh (get_automata_path): Use
+	program_name to simplify the computation of the directory name.
+
 2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add support for monoid_rep in the DumpVisitor.
