@@ -29,26 +29,6 @@ using namespace vcsn::CONTEXT;
 
 # include <common/bench_constructs.hh>
 
-# define RUN_THROUGH_DELTA(Type)						\
-  static void run_through_using_delta_on_##Type##s(const automaton_t& a)	\
-  {										\
-    AUTOMATON_TYPES_EXACT(automaton_t);						\
-    std::vector<h##Type##_t> delta_container;					\
-    for_all_states(s, a)							\
-    {										\
-      std::insert_iterator<std::vector<h##Type##_t> >i(delta_container,		\
-						       delta_container.begin());\
-      a.delta(i, *s, delta_kind::Type##s());					\
-      for (std::vector<h##Type##_t>::iterator i = delta_container.begin();	\
-	   i != delta_container.end(); ++i);					\
-      delta_container.clear();							\
-    }										\
-  }
-  RUN_THROUGH_DELTA(state);
-  RUN_THROUGH_DELTA(transition);
-# undef RUN_THROUGH_DELTAC
-
-
 # define RUN_THROUGH_DELTAC(Type)						\
   static void run_through_using_deltac_on_##Type##s(const automaton_t& a)	\
   {										\
@@ -125,11 +105,9 @@ void iterator_bench(int n_states)
     run_through_using_##FunName(a);					\
     VCSN_BENCH_STOP_AND_PRINT;						\
   }
-  RUN_BENCH(delta_on_states);
   RUN_BENCH(deltac_on_states);
   RUN_BENCH(deltaf_on_states);
   RUN_BENCH(deltai_on_states);
-  RUN_BENCH(delta_on_transitions);
   RUN_BENCH(deltac_on_transitions);
   RUN_BENCH(deltaf_on_transitions);
   RUN_BENCH(deltai_on_transitions);
