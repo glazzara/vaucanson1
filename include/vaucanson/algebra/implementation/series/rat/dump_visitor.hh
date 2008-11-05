@@ -23,6 +23,7 @@
 # include <boost/shared_ptr.hpp>
 
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
+# include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/algebra/implementation/series/series_rep.hh>
 # include <vaucanson/misc/iomanip.hh>
 

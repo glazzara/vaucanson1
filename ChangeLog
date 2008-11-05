@@ -1,5 +1,17 @@
 2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add support for monoid_rep in the DumpVisitor.
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Update
+	  call to DumpVisitor CTOR.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh:
+	  Remove duplicate CTOR. (DumpVisitor): Add new `monoid_rep_'
+	  attribute. Include `monoid_rep.hh'.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
+	  (DumpVisitor): Cosmetic changes. Cleanup constructors. Fix `setid'
+	  for the empty word representation.
+
+2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix default arguments for make_rat_exp.
 	* include/vaucanson/contexts/automaton_maker.thh,
 	* include/vaucanson/contexts/automaton_maker.thxx (make_rat_exp):

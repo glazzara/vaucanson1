@@ -69,30 +69,32 @@ namespace vcsn {
     {
     public:
 
-      typedef Word			monoid_elt_value_t;
-      typedef Weight			semiring_elt_value_t;
-      typedef Node<Word, Weight>	node_t;
+      // Type helpers.
+      typedef Word					monoid_elt_value_t;
+      typedef Weight					semiring_elt_value_t;
+      typedef Node<Word, Weight>			node_t;
+      typedef algebra::monoid_rep<Monoid>		monoid_rep_t;
+      typedef boost::shared_ptr<monoid_rep_t>		shared_monoid_rep_t;
+      typedef algebra::series_rep<Semiring, Monoid>	series_rep_t;
+      typedef boost::shared_ptr<series_rep_t>		shared_series_rep_t;
+      typedef algebra::monoid_rep_default<Monoid>	default_monoid_rep_t;
+      typedef algebra::series_rep_default<Semiring, Monoid>
+	default_series_rep_t;
 
-    public:
-
-      DumpVisitor(std::ostream& ostr,
-		  boost::shared_ptr<vcsn::algebra::series_rep<Semiring, Monoid> > sr)
-	: ostr_ (ostr),
-	  series_rep_ (sr)
+      DumpVisitor(std::ostream& ostr = std::cout,
+		  shared_monoid_rep_t mr = default_monoid_rep_t::
+		  get_instance(),
+		  shared_series_rep_t sr = default_series_rep_t::
+		  get_instance())
+	: ostr_(ostr),
+	  monoid_rep_(mr),
+	  series_rep_(sr)
       {
-      }
-
-      DumpVisitor(std::ostream& ostr = std::cout)
-	: ostr_ (ostr)
-      {
-	series_rep_ = vcsn::algebra::series_rep_default<Semiring, Monoid>::
-	get_instance();
-
 	if (not ostr_.pword(rat::zero()))
 	  ostr_ << setzero(series_rep_->zero);
 
 	if (not ostr_.pword(rat::id()))
-	  ostr_ << setid(series_rep_->one);
+	  ostr_ << setid(monoid_rep_->empty);
       }
 
       virtual
@@ -307,7 +309,8 @@ namespace vcsn {
 
     protected:
       std::ostream&	ostr_;
-      boost::shared_ptr<vcsn::algebra::series_rep<Semiring, Monoid> > series_rep_;
+      shared_monoid_rep_t monoid_rep_;
+      shared_series_rep_t series_rep_;
     };
 
     /*------------.
