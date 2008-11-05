@@ -1,5 +1,24 @@
 2008-11-05  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove deltaf iterators.
+	* include/vaucanson/algorithms/determinize.hxx: .
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/eval.hxx: .
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/automata/concept/automata_base.hh: .
+	* include/vaucanson/automata/concept/automata_base.hxx: .
+	* include/vaucanson/automata/concept/automata_ops.hxx: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hxx: .
+	* include/vaucanson/automata/implementation/bmig_graph_letters_spec.hh: .
+	* include/vaucanson/automata/implementation/bmig_graph_letters_spec.hxx: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: .
+	* src/benchs/iterators/iterator_bench.hh: .
+
+2008-11-05  Reuben Thomas  <rrt@sc3d.org>
+
 	Add label Kind type parameter to Automata and Transducer templates.
 
 	Where before we had Automata<Series> we now have

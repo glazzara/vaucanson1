@@ -52,12 +52,6 @@ namespace vcsn {
 	  v1(max_hstate, a.series().semiring().wzero_), v2(max_hstate)
       {}
 
-      void operator() (htransition_t t)
-      {
-	v2[a.dst_of(t)] += *w *
-	  a.series_of(t).get(monoid_elt_t(a.structure().series().monoid(), *l));
-      }
-
       void execute(const input_t& word, Selt& result)
       {
 	const monoid_elt_t empty = algebra::identity_as<monoid_elt_value_t>::of(a.series().monoid());
@@ -80,7 +74,15 @@ namespace vcsn {
 	       w != v1_end; ++w)
 	  {
 	    if (*w != zero)
-	      a.letter_deltaf(*this, i, *l, delta_kind::transitions());
+            {
+              std::list<htransition_t> tr;
+              a.letter_deltac(tr, i, *l, delta_kind::transitions());
+              for (typename std::list<htransition_t>::const_iterator t = tr.begin(); t != tr.end(); ++t)
+              {
+                v2[a.dst_of(*t)] += *w *
+                  a.series_of(*t).get(monoid_elt_t(a.structure().series().monoid(), *l));
+              }
+            }
 	    ++i;
 	  }
 	  std::swap(v1, v2);

@@ -29,27 +29,6 @@
 
 namespace vcsn {
 
-  //Functor used in do_subset_construction for deltaf query.
-  template <typename input_t>
-  struct delta_functor
-  {
-    typedef typename std::set<typename input_t::hstate_t>    subset_t;
-
-    delta_functor(subset_t& q_, const input_t& input_, bool& is_final_)
-      : q(q_), input(input_), is_final(is_final_)
-    {}
-
-    void operator()(typename input_t::hstate_t s)
-    {
-      q.insert(s);
-      is_final |= input.is_final(s);
-    }
-
-    subset_t&	    q;
-    const input_t&  input;
-    bool&	    is_final;
-  };
-
   /*--------------------.
   | subset_construction |
   `--------------------*/
@@ -126,9 +105,16 @@ namespace vcsn {
       {
 	q.clear ();
 	bool is_final = false;
-	delta_functor<input_t> func(q, input, is_final);
 	for_all_const_ (subset_t, j, s)
-	  input.letter_deltaf(func, *j, *e, delta_kind::states());
+        {
+          std::list<hstate_t> st;
+	  input.letter_deltac(st, *j, *e, delta_kind::states());
+          for (typename std::list<hstate_t>::const_iterator s = st.begin(); s != st.end(); ++s)
+          {
+            q.insert(*s);
+            is_final |= input.is_final(*s);
+          }
+        }
 	typename subset_set_t::const_iterator current = subset_set.find(q);
 	if (current == subset_set.end())
 	{

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,40 +20,28 @@
 # include <vaucanson/algorithms/internal/has_neighbour.hh>
 
 namespace vcsn {
-  // Determine whether there is at least a successor of a state.
-  namespace internal {
-    template <typename T>
-    struct has_neighbour_helper
-    {
-      has_neighbour_helper () : has_neighbour_ (false) {}
-      bool operator() (typename automaton_traits<T>::htransition_t)
-      {
-	this->has_neighbour_ = true;
-	// Stop the loop over successors by returning false.
-	return false;
-      }
-      bool has_neighbour_;
-    };
-  }
+  // Determine whether there is at least one neighbour of a state.
 
   template<typename A, typename T>
-  bool	has_successors(const Element<A, T>& a,
-		       const typename automaton_traits<T>::hstate_t s)
+  bool has_successors(const Element<A, T>& a,
+                      const typename automaton_traits<T>::hstate_t s)
   {
+    typedef Element<A, T> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     precondition (a.has_state (s));
-    internal::has_neighbour_helper<T> functor;
-    a.deltaf (functor, s, delta_kind::transitions());
-    return functor.has_neighbour_;
+    typename automaton_t::delta_state_iterator i(a.value(), s);
+    return ! i.done();
   }
-
+  
   template<typename A, typename T>
-  bool	has_predecessors(const Element<A, T>& a,
-			 const typename automaton_traits<T>::hstate_t s)
+  bool has_predecessors(const Element<A, T>& a,
+                        const typename automaton_traits<T>::hstate_t s)
   {
+    typedef Element<A, T> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
     precondition (a.has_state (s));
-    internal::has_neighbour_helper<T> functor;
-    a.rdeltaf (functor, s, delta_kind::transitions());
-    return functor.has_neighbour_;
+    typename automaton_t::rdelta_state_iterator i(a.value(), s);
+    return ! i.done();
   }
 } // vcsn
 

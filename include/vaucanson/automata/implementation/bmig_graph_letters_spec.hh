@@ -190,56 +190,6 @@ namespace vcsn
 	DECLARE_DELTA_FUNCTION (rdelta, transitions);
 # undef DECLARE_DELTA_FUNCTION
 
-# define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
-	template <typename Functor, typename Query>			\
-	void FunName (Functor& f, const hstate_t& from, const Query& q,	\
-                      ::vcsn::delta_kind::DeltaKind, misc::IsBool ## _t) const
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, false);
-# undef DECLARE_DELTAF_BOOL_FUNCTION
-# define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
-        template <typename Functor, typename S, typename T>		\
-	void FunName (Functor& f, const hstate_t& from,                 \
-                      const letter_query<S, T, label_t>& q,   		\
-                      ::vcsn::delta_kind::DeltaKind, misc::IsBool ## _t) const
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, false);
-# undef DECLARE_DELTAF_BOOL_FUNCTION
-# define DECLARE_DELTAF_BOOL_FUNCTION(FunName, DeltaKind, IsBool)	\
-        template <typename Functor, typename S, typename T>		\
-	void FunName (Functor& f, const hstate_t& from,			\
-                      const spontaneous_query<S, T>& q,			\
-                      ::vcsn::delta_kind::DeltaKind, misc::IsBool ## _t) const
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (deltaf, transitions, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, false);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, true);
-	DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, transitions, false);
-# undef DECLARE_DELTAF_BOOL_FUNCTION
-
-# define DECLARE_DELTAF_FUNCTION(FunName)				\
-	template <typename Functor, typename Query, typename DeltaKind>	\
-	void FunName (Functor& f, const hstate_t& from,			\
-	              const Query& q, ::vcsn::delta_kind::kind<DeltaKind>) const
-	DECLARE_DELTAF_FUNCTION (deltaf);
-	DECLARE_DELTAF_FUNCTION (rdeltaf);
-# undef DECLARE_DELTAF_FUNCTION
-
 
       private:
 	typename graph_data_t::const_iterator

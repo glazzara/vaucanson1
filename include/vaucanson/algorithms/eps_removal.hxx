@@ -213,9 +213,9 @@ namespace vcsn {
   };
 
 
-  /*----------------------------------------------------.
-  | Find a transition (src, label, dst), using deltaf.  |
-  `----------------------------------------------------*/
+  /*--------------------------------------.
+  | Find a transition (src, label, dst).  |
+  `---------------------------------------*/
 
   template <typename Auto>
   class Finder

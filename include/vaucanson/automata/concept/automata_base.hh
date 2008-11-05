@@ -776,53 +776,6 @@ namespace vcsn {
 			       delta_kind::kind<Kind> k) const;
 
 
-      /*------------------.
-      | Reverse deltafs.  |
-      `------------------*/
-
-      /** Call the functor @a fun on every input transitions/states of
-       *  the state @a src.  */
-      template <typename Functor, typename Kind>
-      void rdeltaf(Functor& fun, const hstate_t& src, delta_kind::kind<Kind> k) const;
-      template <typename Functor, typename Kind>
-      void rdeltaf(Functor& fun, unsigned src, delta_kind::kind<Kind> k) const;
-
-      /** Call the functor @a fun on every input transitions/states of
-       *  the state @a src where @a query is true. */
-      template <typename Functor, typename L, typename Kind>
-      void rdeltaf(Functor& fun,
-		   const hstate_t& src,
-		   const L& query,
-		   delta_kind::kind<Kind> k) const;
-      template <typename Functor, typename L, typename Kind>
-      void rdeltaf(Functor& fun,
-		   unsigned src,
-		   const L& query,
-		   delta_kind::kind<Kind> k) const;
-
-      /** Call the functor @a fun on every input transitions/states of
-       *  the state @a src where the label matches the letter @a letter.  */
-      template <typename Functor, typename L, typename Kind>
-      void letter_rdeltaf(Functor& fun,
-			  const hstate_t& src,
-			  const L& letter,
-			  delta_kind::kind<Kind> k) const;
-      template <typename Functor, typename L, typename Kind>
-      void letter_rdeltaf(Functor& fun,
-			  unsigned src,
-			  const L& letter,
-			  delta_kind::kind<Kind> k) const;
-
-      /** Call the functor @a fun on every input spontaneous transitions
-       *  or every states that reach @a src with an epsilon-transition.	 */
-      template <typename Functor, typename Kind>
-      void spontaneous_rdeltaf(Functor& fun,
-			       const hstate_t& src,
-			       delta_kind::kind<Kind> k) const;
-      template <typename Functor, typename Kind>
-      void spontaneous_rdeltaf(Functor& fun,
-			       unsigned src,
-			       delta_kind::kind<Kind> k) const;
     protected:
       MetaElement();
       MetaElement(const MetaElement& other);

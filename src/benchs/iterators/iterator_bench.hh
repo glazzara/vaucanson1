@@ -51,17 +51,6 @@ using namespace vcsn::CONTEXT;
   {
     void operator()(Handler) { }
   };
-# define RUN_THROUGH_DELTAF(Type)						\
-  static void run_through_using_deltaf_on_##Type##s(const automaton_t& a)	\
-  {										\
-    AUTOMATON_TYPES_EXACT(automaton_t);						\
-    Functor<h##Type##_t> f;							\
-    for_all_states(s, a)							\
-      a.deltaf(f, *s, delta_kind::Type##s());					\
-  }
-  RUN_THROUGH_DELTAF(state);
-  RUN_THROUGH_DELTAF(transition);
-# undef RUN_THROUGH_DELTAF
 
 # define RUN_THROUGH_DELTAI(Type)						\
   static void run_through_using_deltai_on_##Type##s(const automaton_t& a)	\

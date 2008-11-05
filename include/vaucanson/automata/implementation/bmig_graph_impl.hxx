@@ -646,67 +646,6 @@ namespace vcsn
 
   # undef DEFINE_DELTAC_FUNCTION
 
-  # define DEFINE_DELTAF_FUNCTION(FunName, DeltaKind, Target, IsBool, Action)	\
-    BMIGRAPH_TPARAM								\
-    template <typename Functor, typename Query>					\
-    void									\
-    BMIGRAPH::FunName(Functor& f,						\
-                        const typename BMIGRAPH::hstate_t& s,			\
-                        const Query& query,					\
-                        ::vcsn::delta_kind::DeltaKind,				\
-                        misc::IsBool##_t) const					\
-    {										\
-      assertion(has_state(s));							\
-      Target##_range r = graph_.template get<Target>().equal_range(s.value());		\
-      for (Target##_iterator e = r.first; e != r.second; ++e)			\
-        if (query(htransition_t(graph_.project<0>(e))))				\
-        {									\
-          Action;								\
-        }									\
-    }
-
-    DEFINE_DELTAF_FUNCTION (deltaf, transitions, src, true, if (not f(hedge_t(graph_.project<0>(e)))) break);
-    DEFINE_DELTAF_FUNCTION (deltaf, transitions, src, false, f(hedge_t(graph_.project<0>(e))));
-    DEFINE_DELTAF_FUNCTION (deltaf, states, src, true, if (not f(hstate_t(e->to_))) break);
-    DEFINE_DELTAF_FUNCTION (deltaf, states, src, false, f(hstate_t(e->to_)));
-
-    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, dst, true, if (not f(hedge_t(graph_.project<0>(e)))) break);
-    DEFINE_DELTAF_FUNCTION (rdeltaf, transitions, dst, false, f(hedge_t(graph_.project<0>(e))));
-    DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, true, if (not f(hstate_t(e->from_))) break);
-    DEFINE_DELTAF_FUNCTION (rdeltaf, states, dst, false, f(hstate_t(e->from_)));
-
-  # undef DEFINE_DELTAF_FUNCTION
-
-    namespace deltaf_helper {
-      template <typename T, typename R, typename Arg>
-      char is_returning_bool_helper (R (T::*) (Arg));
-
-      template <typename T, typename Arg>
-      int is_returning_bool_helper (bool (T::*) (Arg));
-
-  # define is_returning_bool(T)							\
-      (sizeof (deltaf_helper::is_returning_bool_helper (T)) == sizeof (int))
-    }
-
-  # define DEFINE_DELTAF_HELPER(FunName)					\
-    BMIGRAPH_TPARAM								\
-    template <typename Functor, class Query, typename DeltaKind>		\
-    void									\
-    BMIGRAPH::FunName(Functor& f,						\
-                    const typename BMIGRAPH::hstate_t& s,			\
-                    const Query& query,						\
-                    ::vcsn::delta_kind::kind<DeltaKind> k) const		\
-    {										\
-      FunName (f, s, query, k,							\
-              BOOL_TO_TYPE (is_returning_bool (&Functor::operator ())) ());	\
-    }
-
-    DEFINE_DELTAF_HELPER (deltaf);
-    DEFINE_DELTAF_HELPER (rdeltaf);
-
-  # undef DEFINE_DELTAF_HELPER
-  # undef is_returning_bool
-
   # define DEFINE_DELTAI_FUNCTION(DeltaKind)					\
     BMIGRAPH_TPARAM								\
     std::pair<typename BMIGRAPH::DeltaKind##_iterator,				\

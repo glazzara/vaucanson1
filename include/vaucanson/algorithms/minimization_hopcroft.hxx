@@ -51,7 +51,6 @@ namespace vcsn
 
       /**
        * Splitter for classical hopcroft minimization.
-       * Functor for letter_rdeltaf.
        */
       template <typename input_t>
       struct splitter_functor
@@ -78,19 +77,20 @@ namespace vcsn
 	  going_in_.clear ();
 	  maybe_splittable_.clear ();
 	  for_all_const_ (hstates_t, i, ss)
-	    input_.letter_rdeltaf (*this, *i, l, delta_kind::states ());
+          {
+            std::list<hstate_t> st;
+	    input_.letter_rdeltac (st, *i, l, delta_kind::states ());
+            for (typename std::list<hstate_t>::const_iterator s = st.begin(); s != st.end(); ++s)
+            { /// For each state, store its class (partition) and count.
+              unsigned class_of_state = class_of_[*s];
+
+              if (count_for_[class_of_state] == 0)
+                maybe_splittable_.push_back (class_of_state);
+              count_for_[class_of_state]++;
+              going_in_.insert (*s);
+            }
+          }
 	  return not going_in_.empty ();
-	}
-
-	/// For each state, store its class (partition) and count.
-	void operator () (hstate_t state)
-	{
-	  unsigned class_of_state = class_of_[state];
-
-	  if (count_for_[class_of_state] == 0)
-	    maybe_splittable_.push_back (class_of_state);
-	  count_for_[class_of_state]++;
-	  going_in_.insert (state);
 	}
 
 	/// Split @a partition if needed.
@@ -139,7 +139,7 @@ namespace vcsn
 	}
       };
 
-      /// Functor (self functor for deltaf) that constructs the transitions.
+      /// Functor that constructs the transitions.
       template <typename input_t, typename output_t>
       struct transition_adder_functor
       {
@@ -161,13 +161,13 @@ namespace vcsn
 	void execute (hstate_t representative)
 	{
 	  src_ = class_of_[representative];
-	  input_.deltaf (*this, representative, delta_kind::transitions ());
-	}
-
-	void operator () (htransition_t t)
-	{
-	  output_.add_series_transition (src_, class_of_[input_.dst_of (t)],
-					 input_.series_of (t));
+          std::list<htransition_t> tr;
+	  input_.deltac (tr, representative, delta_kind::transitions ());
+          for (typename std::list<htransition_t>::const_iterator t = tr.begin(); t != tr.end(); ++t)
+          {
+            output_.add_series_transition (src_, class_of_[input_.dst_of (*t)],
+                                           input_.series_of (*t));
+          }
 	}
       };
     }
@@ -349,21 +349,23 @@ namespace vcsn
 	    *s = false;
 
 	  for_all_(partition_t, s, p)
-	    input_.letter_rdeltaf(*this, *s, a, delta_kind::states());
+          {
+            std::list<hstate_t> st;
+            input_.letter_rdeltac(st, *s, a, delta_kind::states());
+            for (typename std::list<hstate_t>::const_iterator s = st.begin(); s != st.end(); ++s)
+            {
+              if (!going_in_[*s])
+              {
+                /// For each state, store its class (partition) and count.
+                going_in_[*s] = true;
+                const unsigned i = class_[*s];
+                if (count_for_[i] == 0)
+                  met_class_.push_back(i);
+                count_for_[i]++;
+              }
+            }
+          }
 	  return !met_class_.empty();
-	}
-
-	/// For each state, store its class (partition) and count.
-	void operator() (hstate_t s)
-	{
-	  if (!going_in_[s])
-	  {
-	    going_in_[s] = true;
-	    const unsigned i = class_[s];
-	    if (count_for_[i] == 0)
-	      met_class_.push_back(i);
-	    count_for_[i]++;
-	  }
 	}
 
 	/// Split partition @a b if needed.
