@@ -91,15 +91,27 @@ struct arguments_t
     const char*	args[3];
     int		n_args;
 
-    // Representation of Series<Semiring, Monoid>
-    series_rep_t srep;
-    std::vector<std::string> alphabet;
+    // String to parse to retrieve representations informations.
     std::string parser;
+
+    // Alphabet.
+    std::vector<std::string> alphabet;
+
+    // Representation of Monoid<Alphabet>.
+    monoid_rep_t mrep;
+    // Representation of Series<Semiring, Monoid>.
+    series_rep_t srep;
+
 # ifdef WITH_TWO_ALPHABETS
     // Representation of Series<Semiring, FirstMonoid>
     IOAUT_CONTEXT::series_rep_t srep1;
     // Representation of Series<Semiring, SecondMonoid>
     IOAUT_CONTEXT::series_rep_t srep2;
+    // Representation of FirstMonoid.
+    monoid_rep_t mrep1;
+    // Representation of SecondMonoid.
+    monoid_rep_t mrep2;
+
     std::vector<std::string> alphabet2;
     std::string parser2;
 # endif // ! WITH_TWO_ALPHABETS

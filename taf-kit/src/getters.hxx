@@ -84,6 +84,7 @@ DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t, "alphabet2");
 /// Getter for RatExp.
 static rat_exp_t get_exp_complete (const std::string& exp,
 				   const std::vector<std::string>& alphabet,
+				   const monoid_rep_t& mrep,
 				   const series_rep_t& srep)
 {
 # ifdef GLOBAL_RESULT
@@ -91,12 +92,12 @@ static rat_exp_t get_exp_complete (const std::string& exp,
     {
       return boost::apply_visitor (rat_exp_getter (get_alphabet (alphabet),
 						   GLOBAL_RESULT.name,
-						   srep),
+						   mrep, srep),
 				   GLOBAL_RESULT.output);
     }
 # endif // !GLOBAL_RESULT
 
-  return make_rat_exp (get_alphabet (alphabet), exp, srep);
+  return make_rat_exp (get_alphabet (alphabet), exp, mrep, srep);
 }
 
 

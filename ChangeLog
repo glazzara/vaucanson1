@@ -1,5 +1,21 @@
 2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add support for monoid_rep in Taf-Kit.
+	* taf-kit/src/common.hh (arguments_t): Cosmetic changes. Add more
+	  comments. Reorder some attributes. Add new attribute `mrep'.
+	  [WITH_TWO_ALPHABETS] (arguments_t): Add new attributes `mrep1' and
+	  `mrep2'.
+	* taf-kit/src/getters.hh [!WITH_TWO_ALPHABETS] (get_exp_complete):
+	  Add a new argument. Update the `get_exp' macro accordingly.
+	* taf-kit/src/getters.hxx,
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/fmp_commands.cc,
+	* taf-kit/src/main.cc,
+	* taf-kit/src/pipe_getters.hh,
+	* taf-kit/src/pipe_getters.hxx: Update calls to `make_rat_exp'.
+
+2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update make_rat_exp to use monoid_rep.
 	* include/vaucanson/contexts/automaton_maker.thh (make_rat_exp): Add
 	  new argument `mrep' to allow monoid representation overriding.

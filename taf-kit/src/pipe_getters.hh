@@ -54,6 +54,7 @@ class rat_exp_getter
 {
 public:
   rat_exp_getter (alphabet_t, std::string& command,
+		  const monoid_rep_t& mrep,
 		  const series_rep_t& srep);
 
   rat_exp_t operator() (std::string& str) const;
@@ -65,6 +66,7 @@ public:
 
   alphabet_t alphabet;
   std::string command;
+  const monoid_rep_t& mrep_;
   const series_rep_t& srep_;
 };
 # endif // !WITH_TWO_ALPHABETS

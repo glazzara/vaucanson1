@@ -88,7 +88,8 @@ DEFINE_COMMAND (NAME (evaluation)
 		  evaluation (src,
 			      IOAUT_CONTEXT::make_rat_exp(src.structure().
 				series().monoid().first_monoid().alphabet(),
-				args.args[2], args.srep1)) << std::endl)
+				args.args[2], args.mrep1, args.srep1)) <<
+				std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation_fmp)
