@@ -64,8 +64,8 @@ namespace vcsn
       const A&	alphabet() const;
 
     protected:
-      A alph_;
       const shared_monoid_rep_t rep_;
+      A alph_;
     };
 
     template<typename A>

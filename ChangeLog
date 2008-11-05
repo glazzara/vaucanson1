@@ -1,3 +1,9 @@
+2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix attributes ordering in FreeMonoid.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh
+	  (FreeMonoid): Move `alph_' declaration after `rep_' one.
+
 2008-11-04  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix English.
