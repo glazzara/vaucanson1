@@ -41,7 +41,6 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([gl_LIBSOURCES_DIR], [])
   gl_COMMON
   gl_source_base='gnulib'
-  gl_EOVERFLOW
 changequote(,)dnl
 LTALLOCA=`echo "$ALLOCA" | sed 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
 changequote([, ])dnl
@@ -53,6 +52,7 @@ AC_SUBST([LTALLOCA])
      AM_XGETTEXT_OPTION([--flag=argp_failure:4:c-format])])
   gl_DIRNAME
   gl_DOUBLE_SLASH_ROOT
+  gl_HEADER_ERRNO_H
   gl_ERROR
   m4_ifdef([AM_XGETTEXT_OPTION],
     [AM_XGETTEXT_OPTION([--flag=error:3:c-format])
@@ -99,10 +99,10 @@ AC_SUBST([LTALLOCA])
   gl_XSIZE
   gl_XSTRNDUP
   m4_ifval(gl_LIBSOURCES_LIST, [
-    m4_syscmd([test ! -d ]gl_LIBSOURCES_DIR[ ||
+    m4_syscmd([test ! -d ]m4_defn([gl_LIBSOURCES_DIR])[ ||
       for gl_file in ]gl_LIBSOURCES_LIST[ ; do
-        if test ! -r ]gl_LIBSOURCES_DIR[/$gl_file ; then
-          echo "missing file ]gl_LIBSOURCES_DIR[/$gl_file" >&2
+        if test ! -r ]m4_defn([gl_LIBSOURCES_DIR])[/$gl_file ; then
+          echo "missing file ]m4_defn([gl_LIBSOURCES_DIR])[/$gl_file" >&2
           exit 1
         fi
       done])dnl
@@ -138,10 +138,10 @@ AC_SUBST([LTALLOCA])
   gl_COMMON
   gl_source_base='tests'
   m4_ifval(gltests_LIBSOURCES_LIST, [
-    m4_syscmd([test ! -d ]gltests_LIBSOURCES_DIR[ ||
+    m4_syscmd([test ! -d ]m4_defn([gltests_LIBSOURCES_DIR])[ ||
       for gl_file in ]gltests_LIBSOURCES_LIST[ ; do
-        if test ! -r ]gltests_LIBSOURCES_DIR[/$gl_file ; then
-          echo "missing file ]gltests_LIBSOURCES_DIR[/$gl_file" >&2
+        if test ! -r ]m4_defn([gltests_LIBSOURCES_DIR])[/$gl_file ; then
+          echo "missing file ]m4_defn([gltests_LIBSOURCES_DIR])[/$gl_file" >&2
           exit 1
         fi
       done])dnl
@@ -246,6 +246,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/basename.c
   lib/dirname.c
   lib/dirname.h
+  lib/errno.in.h
   lib/error.c
   lib/error.h
   lib/exitfail.c
@@ -264,12 +265,15 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/printf-args.h
   lib/printf-parse.c
   lib/printf-parse.h
+  lib/progname.c
+  lib/progname.h
   lib/rawmemchr.c
   lib/rawmemchr.valgrind
   lib/size_max.h
   lib/sleep.c
   lib/stdbool.in.h
   lib/stdint.in.h
+  lib/stdio-write.c
   lib/stdio.in.h
   lib/stdlib.in.h
   lib/strcasecmp.c
@@ -299,7 +303,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/dirname.m4
   m4/dos.m4
   m4/double-slash-root.m4
-  m4/eoverflow.m4
+  m4/errno_h.m4
   m4/error.m4
   m4/exitfail.m4
   m4/extensions.m4

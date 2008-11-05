@@ -1,3 +1,20 @@
+2008-11-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Update gnulib and include module "progname".
+
+	* m4/eoverflow.m4: Delete.
+	* gnulib/float.in.h, gnulib/Makefile.am, gnulib/stdint.in.h,
+	gnulib/stdio.in.h, gnulib/stdlib.in.h, gnulib/strerror.c,
+	gnulib/string.in.h, gnulib/strings.in.h, gnulib/sysexits.in.h,
+	gnulib/unistd.in.h, gnulib/vasnprintf.c, gnulib/wchar.in.h,
+	m4/gnulib-cache.m4, m4/gnulib-common.m4, m4/gnulib-comp.m4,
+	m4/include_next.m4, m4/sleep.m4, m4/stdio_h.m4, m4/stdlib_h.m4,
+	m4/strerror.m4, m4/string_h.m4, m4/unistd_h.m4, m4/wchar.m4:
+	Upgrade from gnulib.
+	* gnulib/errno.in.h, gnulib/progname.c, gnulib/progname.h,
+	gnulib/stdio-write.c, gnulib/.gitignore: New files.
+
+
 2008-11-05  Reuben Thomas  <rrt@sc3d.org>
 
 	Remove deltaf iterators.
@@ -777,13 +794,13 @@
 
 	Remove the old token representation system from automaton_maker.
 	* include/vaucanson/contexts/automaton_maker.thh,
-	* include/vaucanson/contexts/automaton_maker.thxx: 
+	* include/vaucanson/contexts/automaton_maker.thxx:
 	  Remove the old token representation system from automaton_maker.
 
 2008-10-22  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add op_rout function in concept and implementation of freemonoid.
-	* include/vaucanson/algebra/concept/freemonoid_base.hxx: 
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
 	  Add op_rout dispatch.
 	* include/vaucanson/algebra/implementation/monoid/str_words.hh,
 	* include/vaucanson/algebra/implementation/monoid/str_words.hxx:

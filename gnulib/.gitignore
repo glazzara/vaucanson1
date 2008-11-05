@@ -1,0 +1,13 @@
+alloca.h
+errno.h
+float.h
+getopt.h
+stdbool.h
+stdint.h
+stdio.h
+stdlib.h
+string.h
+strings.h
+sysexits.h
+unistd.h
+war.h
