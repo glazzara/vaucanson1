@@ -1,5 +1,13 @@
 2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update make_rat_exp to use monoid_rep.
+	* include/vaucanson/contexts/automaton_maker.thh (make_rat_exp): Add
+	  new argument `mrep' to allow monoid representation overriding.
+	* include/vaucanson/contexts/automaton_maker.thxx (make_rat_exp):
+	  Update declaration according to the header file.
+
+2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup series.
 	* include/vaucanson/algebra/implementation/series/series.hh: Update
 	  copyright notices. Cosmetic changes.

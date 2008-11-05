@@ -105,6 +105,9 @@ namespace vcsn
 		   const std::string& exp = vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
 		   get_instance()->zero,
+		   const monoid_rep_t& mrep = vcsn::algebra::
+		   monoid_rep_default<monoid_t>::
+		   get_instance(),
 		   const series_rep_t& srep = vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
 		   get_instance())
@@ -112,7 +115,7 @@ namespace vcsn
 	alphabet_t	alphabet;
         for (Iterator i = begin; i != end; ++i)
           alphabet.insert(*i);
-        monoid_t	monoid (alphabet);
+        monoid_t	monoid (alphabet, mrep);
         semiring_t	semiring;
         series_set_t	series (semiring, monoid, srep);
 
@@ -129,12 +132,16 @@ namespace vcsn
       make_rat_exp(const T& alphabet,
 		   const std::string& exp = vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance()->zero(),
+		   get_instance()->zero,
+		   const monoid_rep_t& mrep = vcsn::algebra::
+		   monoid_rep_default<monoid_t>::
+		   get_instance(),
 		   const series_rep_t& srep = vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
 		   get_instance())
       {
-        return make_rat_exp(alphabet.begin(), alphabet.end(), exp, srep);
+        return make_rat_exp(alphabet.begin(), alphabet.end(),
+			    exp, mrep, srep);
       }
 
       /*--------------.
