@@ -52,8 +52,10 @@ unsigned epsilon_label_representation_test(tests::Tester& tg)
   std::stringstream ref;
   std::stringstream sstr;
 
-  ref << "({" << semiring.identity(SELECT(semiring_elt_value_t)) << "} ";
-  ref << algebra::letter_traits<typename automaton_t::letter_t>::default_epsilon() << ")";
+  ref << "({" << semiring.identity(SELECT(semiring_elt_value_t))
+      << "} " << automaton.structure().series().monoid().
+		 representation()->empty
+      << ")";
 
   sstr << automaton.series_value_of(h1);
 

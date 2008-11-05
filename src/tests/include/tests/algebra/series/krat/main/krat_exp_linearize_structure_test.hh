@@ -103,9 +103,9 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
     exp_str << exp;
     // We need to overwrite the zero and id representation set by
     // the dumper (as it assumes that the letters are pairs).
-    lin_str <<	vcsn::rat::setzero(vcsn::algebra::letter_traits<letter_t>::default_zero()) << 
-    		vcsn::rat::setid(vcsn::algebra::letter_traits<letter_t>::default_epsilon()) <<
-		lin;
+    lin_str << vcsn::rat::setzero(s.representation()->zero)
+	    << vcsn::rat::setid(s.monoid().representation()->empty)
+	    << lin;
 
     if (exp_str.str() != lin_str.str())
     {
