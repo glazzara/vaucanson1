@@ -1,5 +1,47 @@
 2008-11-05  Reuben Thomas  <rrt@sc3d.org>
 
+	Add label Kind type parameter to Automata and Transducer templates.
+
+	Where before we had Automata<Series> we now have
+	Automata<Series, Kind>, where Kind is a label kind.
+	The same applies to Transducer.
+
+	For now, labels_are_series remains the default, but
+	there is a new list of (mostly unimplemented) kinds:
+	labels_are_letters, labels_are_atoms, labels_are_words,
+	labels_are_series. This means that labels_are_couples
+	is now defunct.
+
+	The kind is given by kind_t in virtual_types of Automata and
+	Transducer.
+	* include/vaucanson/algorithms/extension.hh: .
+	* include/vaucanson/algorithms/extension.hxx: .
+	* include/vaucanson/algorithms/invert.hxx: .
+	* include/vaucanson/algorithms/ltl_to_pair.hh: .
+	* include/vaucanson/algorithms/ltl_to_pair.hxx: .
+	* include/vaucanson/algorithms/normalized_composition.hxx: .
+	* include/vaucanson/algorithms/pair_to_fmp.hh: .
+	* include/vaucanson/algorithms/pair_to_fmp.hxx: .
+	* include/vaucanson/algorithms/search.hh: .
+	* include/vaucanson/algorithms/search.hxx: .
+	* include/vaucanson/algorithms/thompson.hh: .
+	* include/vaucanson/algorithms/thompson.hxx: .
+	* include/vaucanson/automata/concept/automata.hh: .
+	* include/vaucanson/automata/concept/automata.hxx: .
+	* include/vaucanson/automata/concept/automata_base.hh: .
+	* include/vaucanson/automata/concept/automata_kind.hh: .
+	* include/vaucanson/automata/concept/transducer.hh: .
+	* include/vaucanson/automata/concept/transducer.hxx: .
+	* include/vaucanson/automata/concept/transducer_base.hh: .
+	* include/vaucanson/contexts/automaton.thh: .
+	* include/vaucanson/contexts/transducer.thh: .
+	* include/vaucanson/misc/usual_macros.hh: .
+	* include/vaucanson/xml/contexts/fmp.hh: .
+	* include/vaucanson/xml/contexts/rw.hh: .
+	* include/vaucanson/xml/contexts/rw.hxx: .
+
+2008-11-05  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove test of delta's.
 	* src/benchs/iterators/iterator_bench.hh: Remove
 	  plain "delta" tests, which no longer compile, as

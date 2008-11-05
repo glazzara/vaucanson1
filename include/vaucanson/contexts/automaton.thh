@@ -30,11 +30,17 @@ namespace vcsn
     VCSN_CONTEXT_NAMESPACE
     {
 
-      typedef vcsn::Automata<series_set_elt_t::set_t>	       automata_set_t;
-      typedef vcsn::Element<automata_set_t, automaton_impl_t>    automaton_t;
+      // META-FIXME: FIXMEs in this file apply to transducer.thh too.
+    
+      // FIXME: Next line should be labels_are_words
+      typedef vcsn::Automata<series_set_elt_t::set_t, labels_are_series> automata_set_t;
+      typedef vcsn::Element<automata_set_t, automaton_impl_t> automaton_t;
       typedef vcsn::generalized_traits<automaton_t>::automaton_t gen_automaton_t;
 
-      typedef vcsn::Element<automata_set_t, automaton_letter_impl_t>    automaton_letter_t;
+      //typedef vcsn::Automata<series_set_elt_t::set_t, labels_are_letters> automata_letter_set_t;
+      //typedef vcsn::Element<automata_letter_set_t, automaton_letter_impl_t> automaton_letter_t;
+      // FIXME: Previous two lines to replace next one?
+      typedef vcsn::Element<automata_set_t, automaton_letter_impl_t> automaton_letter_t;
       typedef automaton_letter_impl_t gen_automaton_letter_t;
 
       AUTOMATON_TYPES_EXACT(automaton_t);

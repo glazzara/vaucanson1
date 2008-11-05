@@ -22,30 +22,30 @@
 
 namespace vcsn {
 
-  template <class Series>
-  Automata<Series>::Automata(const series_set_t& s):
+  template <typename Series, typename Kind>
+  Automata<Series, Kind>::Automata(const series_set_t& s):
     SetSlot<Series>(s)
   {}
 
-  template <class Series>
+  template <typename Series, typename Kind>
   const Series&
-  Automata<Series>::series() const
+  Automata<Series, Kind>::series() const
   {
     return this->_structure_get();
   }
 
-  template <class Series>
+  template <typename Series, typename Kind>
   bool
-  operator==(const Automata<Series>& lhs,
-	     const Automata<Series>& rhs)
+  operator==(const Automata<Series, Kind>& lhs,
+	     const Automata<Series, Kind>& rhs)
   {
     return & lhs.series() == & rhs.series();
   }
 
 # define PROJECTION_TRAITS \
-    projection_traits<Automata<S>, T>
+    projection_traits<Automata<S, K>, T>
 
-  template <typename S, typename T>
+  template <typename S, typename K, typename T>
   inline typename PROJECTION_TRAITS::first_projection_t
   PROJECTION_TRAITS::
   first_projection(const PROJECTION_TRAITS::automaton_t& aut)
@@ -73,7 +73,7 @@ namespace vcsn {
     return first_projection_t(set_t);
   }
 
-  template <typename S, typename T>
+  template <typename S, typename K, typename T>
   inline typename PROJECTION_TRAITS::second_projection_t
   PROJECTION_TRAITS::
   second_projection(const PROJECTION_TRAITS::automaton_t& aut)
@@ -101,7 +101,7 @@ namespace vcsn {
     return second_projection_t(set_t);
   }
 
-  template <typename S, typename T>
+  template <typename S, typename K, typename T>
   inline typename PROJECTION_TRAITS::series_first_projection_t
   PROJECTION_TRAITS::
   series_first_projection(const PROJECTION_TRAITS::first_series_t& series,
@@ -120,7 +120,7 @@ namespace vcsn {
     return ret;
   }
 
-  template <typename S, typename T>
+  template <typename S, typename K, typename T>
   inline typename PROJECTION_TRAITS::series_second_projection_t
   PROJECTION_TRAITS::
   series_second_projection(const PROJECTION_TRAITS::second_series_t& series,

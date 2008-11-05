@@ -250,9 +250,9 @@ namespace vcsn
 
     res_series_set_t series(t.structure().series().semiring(), monoid);
 
-    Automata<series_set_t> trans_set(series);
+    Automata<series_set_t, kind_t> trans_set(series);
 
-    typedef Element< Automata<series_set_t>, T> res_trans_t;
+    typedef Element< Automata<series_set_t, kind_t>, T> res_trans_t;
     res_trans_t* res = new res_trans_t(trans_set);
 
     return do_invert_tdc(t, *res);

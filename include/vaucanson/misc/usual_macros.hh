@@ -65,6 +65,7 @@
   typedef Typename AutoType::series_set_elt_t			Prefix##series_set_elt_t; \
   typedef Typename Prefix##series_set_elt_t::semiring_elt_t	Prefix##semiring_elt_t;	\
   typedef Typename Prefix##semiring_elt_t::value_t		Prefix##semiring_elt_value_t; \
+  typedef Typename AutoType::kind_t				Prefix##kind_t; \
   typedef Typename AutoType::label_t				Prefix##label_t; \
   typedef Typename AutoType::tag_t				Prefix##tag_t; \
   typedef Typename AutoType::hstate_t				Prefix##hstate_t; \

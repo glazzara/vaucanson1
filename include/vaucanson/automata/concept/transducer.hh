@@ -24,40 +24,42 @@
 
 namespace vcsn {
 
-  template <class Series>
+  template <typename Series, typename Kind>
   // FIXME: Rename to TransducerSet (see Trac #3)
   struct Transducer;
 
   /// Dynamic traits for transducers.
-  template <class Series>
-  struct dynamic_traits<Transducer<Series> >
+  template <typename Series, typename Kind>
+  struct dynamic_traits<Transducer<Series, Kind> >
     : dynamic_traits<TransducerBase<Series> >
   {
     static const bool ret = dynamic_traits<Series>::ret;
   };
 
   /// Specialization of MetaElement for transducers.
-  template <class Series, typename T>
-  struct MetaElement<Transducer<Series>, T>
-    : MetaElement<TransducerBase<Transducer<Series> >, T>
+  template <typename Series, typename Kind, typename T>
+  struct MetaElement<Transducer<Series, Kind>, T>
+    : MetaElement<TransducerBase<Transducer<Series, Kind> >, T>
   {};
 
   /// Virtual types for transducers.
-  template <class Series>
-  struct virtual_types<Transducer<Series> >
+  template <typename Series, typename Kind>
+  struct virtual_types<Transducer<Series, Kind> >
   {
     typedef Series		series_set_t;
+    typedef Kind		kind_t;
   };
 
   /// Final class for the set of transducers.
-  template <class Series>
+  template <typename Series, typename Kind>
   class Transducer
-    : public TransducerBase<Transducer<Series> >,
+    : public TransducerBase<Transducer<Series, Kind> >,
       private SetSlot<Series>
   {
   public:
-    typedef Transducer<Series>				     self_t;
+    typedef Transducer<Series, Kind>			     self_t;
     typedef typename virtual_types<self_t>::series_set_t     series_set_t;
+    typedef typename virtual_types<self_t>::kind_t           kind_t;
 
     Transducer(const series_set_t&);
 
@@ -70,14 +72,14 @@ namespace vcsn {
   | INPUT PROJECTION TRAITS |
   `------------------------*/
 
-  template <class S, class T>
+  template <typename S, typename T>
   struct input_projection_helper
   { };
 
-  template <class S, class T>
-  struct input_projection_helper<Transducer<S>, T>
+  template <typename S, typename K, typename T>
+  struct input_projection_helper<Transducer<S, K>, T>
   {
-    typedef Transducer<S> structure_t;
+    typedef Transducer<S, K> structure_t;
 
     typedef Element<structure_t, T> automaton_t;
 
@@ -93,15 +95,15 @@ namespace vcsn {
     auto_series_set_t;
 
     typedef typename input_projection_traits<T>::ret auto_impl_t;
-    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+    typedef Element<Automata<auto_series_set_t, K>, auto_impl_t> ret;
 
     static ret make_input_projection_automaton(const automaton_t& t);
   };
 
-  template <class S, class T>
-  struct input_projection_helper<Automata<S>, T>
+  template <typename S, typename K, typename T>
+  struct input_projection_helper<Automata<S, K>, T>
   {
-    typedef Automata<S> structure_t;
+    typedef Automata<S, K> structure_t;
 
     typedef Element<structure_t, T> automaton_t;
 
@@ -118,7 +120,7 @@ namespace vcsn {
     auto_series_set_t;
 
     typedef typename fmp_input_projection_traits<T>::ret auto_impl_t;
-    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+    typedef Element<Automata<auto_series_set_t, K>, auto_impl_t> ret;
 
     static ret make_input_projection_automaton(const automaton_t& t);
   };
@@ -127,15 +129,15 @@ namespace vcsn {
   | OUTPUT PROJECTION TRAITS |
   `-------------------------*/
 
-  template <class S, class T>
+  template <typename S, typename T>
   struct output_projection_helper
   { };
 
   // RW transducers
-  template <class S, class T>
-  struct output_projection_helper<Transducer<S>, T>
+  template <typename S, typename K, typename T>
+  struct output_projection_helper<Transducer<S, K>, T>
   {
-    typedef Transducer<S> structure_t;
+    typedef Transducer<S, K> structure_t;
 
     typedef Element<structure_t, T> automaton_t;
 
@@ -152,7 +154,7 @@ namespace vcsn {
     auto_series_set_t;
 
     typedef typename output_projection_traits<T>::ret auto_impl_t;
-    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+    typedef Element<Automata<auto_series_set_t, K>, auto_impl_t> ret;
 
     static ret make_output_projection_automaton(const automaton_t& t);
   };
@@ -161,10 +163,10 @@ namespace vcsn {
   // FIXME: it should be automata over a free monoid product
   // FIXME: we cannot use output_projection_traits, because
   // it constructs the type by assuming that the automaton is RW
-  template <class S, class T>
-  struct output_projection_helper<Automata<S>, T>
+  template <typename S, typename K, typename T>
+  struct output_projection_helper<Automata<S, K>, T>
   {
-    typedef Automata<S> structure_t;
+    typedef Automata<S, K> structure_t;
 
     typedef Element<structure_t, T> automaton_t;
 
@@ -180,7 +182,7 @@ namespace vcsn {
     auto_series_set_t;
 
     typedef typename fmp_output_projection_traits<T>::ret auto_impl_t;
-    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+    typedef Element<Automata<auto_series_set_t, K>, auto_impl_t> ret;
 
     static ret make_output_projection_automaton(const automaton_t& t);
   };
@@ -189,7 +191,7 @@ namespace vcsn {
   | IDENTITY TRAITS |
   `----------------*/
 
-  template <class S, class T>
+  template <typename S, typename K, typename T>
   struct identity_transducer_helper
   {
     typedef typename S::series_set_t	 series_set_t;
@@ -198,16 +200,16 @@ namespace vcsn {
     typedef typename algebra::mute_series_traits<series_set_t, series_set_t, monoid_t>
     ::ret    tseries_set_t;
     typedef typename extension_traits<T>::ret impl_t;
-    typedef Element<Transducer<tseries_set_t>, impl_t> ret;
+    typedef Element<Transducer<tseries_set_t, K>, impl_t> ret;
   };
 
-  template <class S, class T>
-  typename identity_transducer_helper<S, T>::ret
+  template <typename S, typename K, typename T>
+  typename identity_transducer_helper<S, K, T>::ret
   partial_identity(const Element<S, T>&);
 
-  template <class Series>
+  template <typename Series, typename Kind>
   bool
-  operator==(const Transducer<Series>&, const Transducer<Series>&);
+  operator==(const Transducer<Series, Kind>&, const Transducer<Series, Kind>&);
 
 } // ! vcsn
 

@@ -62,8 +62,8 @@ namespace vcsn {
    *
    * @param exp The rational expression
    */
-  template <class AutoType, class S, class T>
-  Element<Automata<S>, AutoType>
+  template <typename AutoType, typename S, typename K, class T>
+  Element<Automata<S, K>, AutoType>
   thompson_of(const Element<S, T>& exp);
 
   /** @} */

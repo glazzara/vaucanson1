@@ -212,12 +212,12 @@ namespace vcsn {
     do_thompson_of(out.structure(), out, kexp);
   }
 
-  template <class AutoType, class S, class T>
-  Element<Automata<S>, AutoType>
+  template <typename AutoType, typename S, typename K, typename T>
+  Element<Automata<S, K>, AutoType>
   thompson_of(const Element<S, T>& exp)
   {
-    Automata<S>				automata_set(exp.structure());
-    Element<Automata<S>, AutoType>	automata(automata_set);
+    Automata<S, K>			automata_set(exp.structure());
+    Element<Automata<S, K>, AutoType>	automata(automata_set);
 
     thompson_of(automata, exp.value());
     return automata;

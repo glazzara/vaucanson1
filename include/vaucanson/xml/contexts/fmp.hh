@@ -38,13 +38,15 @@
 # include <vaucanson/xml/regexp.hh>
 
 # include <vaucanson/automata/concept/automata.hh>
+# include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 
 # define FMPtype							\
     Element<								\
       Automata<								\
-	vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
+        vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> >, \
+        labels_are_series \
 	>,								\
       T>
 # define TParamFMP template <class S, class T, class M1, class M2>

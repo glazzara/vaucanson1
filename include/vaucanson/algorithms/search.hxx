@@ -26,24 +26,24 @@
 
 namespace vcsn {
 
-  template <class InputIterator, class FoundFunctor, class Series, class T>
+  template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
   void
-  search(const Element<Automata<Series>, T>& a,
+  search(const Element<Automata<Series, Kind>, T>& a,
 	 const InputIterator& begin,
 	 const InputIterator& end,
-	 typename Element<Automata<Series>, T>::letter_t eol,
+	 typename Element<Automata<Series, Kind>, T>::letter_t eol,
 	 FoundFunctor& f)
   {
     TIMER_SCOPED("search");
     FindBestSearch::search(a, begin, end, eol, f);
   }
 
-  template <class InputIterator, class FoundFunctor, class Series, class T>
+  template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
   void
-  FindBestSearch::search(const Element<Automata<Series>, T>& a,
+  FindBestSearch::search(const Element<Automata<Series, Kind>, T>& a,
 			 const InputIterator& begin,
 			 const InputIterator& end,
-			 typename Element<Automata<Series>, T>::
+			 typename Element<Automata<Series, Kind>, T>::
 			 letter_t eol,
 			 FoundFunctor& f)
   {
@@ -60,10 +60,10 @@ namespace vcsn {
    * distances[i].  This algorithm stops when it first encounter a
    * final state.  The last i value is returned.
    */
-  template <class Series, class T, class StatesSet>
+  template <typename Series, typename Kind, typename T, typename StatesSet>
   static
   unsigned int
-  compute_distances(const Element<Automata<Series>, T>& a,
+  compute_distances(const Element<Automata<Series, Kind>, T>& a,
 		    std::vector<StatesSet>& distances)
   {
     precondition(a.initial().size() > 0);
@@ -71,7 +71,7 @@ namespace vcsn {
     precondition(distances.size() == 0);
 
     // Typedefs.
-    typedef typename vcsn::Element<Automata<Series>, T>	automaton_t;
+    typedef typename vcsn::Element<Automata<Series, Kind>, T>	automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
     // Code.
@@ -118,18 +118,18 @@ namespace vcsn {
    *
    * @see search(), build_reverse_factor_automaton(), compute_distances()
    */
-  template <class InputIterator, class Series, class T, class StatesSet>
+  template <typename InputIterator, typename Series, typename Kind, typename T, typename StatesSet>
   static
   std::pair<bool, unsigned int>
   window_backsearch(const misc::Window<InputIterator,
-		    typename Element<Automata<Series>, T>::letter_t>& w,
-		    const Element<Automata<Series>, T>& a,
+		    typename Element<Automata<Series, Kind>, T>::letter_t>& w,
+		    const Element<Automata<Series, Kind>, T>& a,
 		    const std::vector<StatesSet>& distances)
   {
     precondition(w.size() > 0);
 
     // Typedefs.
-    typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
+    typedef typename vcsn::Element<Automata<Series, Kind>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     typedef typename misc::Window<InputIterator, letter_t>	window_t;
@@ -163,16 +163,16 @@ namespace vcsn {
   }
 
   /// Finds the longest match of a starting from w, and report it to the functor.
-  template <class InputIterator, class FoundFunctor, class Series, class T>
+  template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
   static
   InputIterator
   confirm_and_report_match(const misc::Window<InputIterator,
-			   typename Element<Automata<Series>, T>::letter_t>& w,
-			   const Element<Automata<Series>, T>& a,
+			   typename Element<Automata<Series, Kind>, T>::letter_t>& w,
+			   const Element<Automata<Series, Kind>, T>& a,
 			   FoundFunctor& f)
   {
     // Typedefs.
-    typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
+    typedef typename vcsn::Element<Automata<Series, Kind>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     typedef typename misc::Window<InputIterator, letter_t>	window_t;
@@ -210,17 +210,17 @@ namespace vcsn {
 
   /** @} */
 
-  template <class InputIterator, class FoundFunctor, class Series, class T>
+  template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
   void
-  WindowedBackSearch::search(const Element<Automata<Series>, T>& a,
+  WindowedBackSearch::search(const Element<Automata<Series, Kind>, T>& a,
 			     const InputIterator& begin,
 			     const InputIterator& end,
-			     typename Element<Automata<Series>, T>::
+			     typename Element<Automata<Series, Kind>, T>::
 			     letter_t eol,
 			     FoundFunctor& f)
   {
     // Typedefs.
-    typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
+    typedef typename vcsn::Element<Automata<Series, Kind>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     typedef typename misc::Window<InputIterator, letter_t>	window_t;

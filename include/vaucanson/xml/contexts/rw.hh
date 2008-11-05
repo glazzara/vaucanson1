@@ -42,7 +42,7 @@
 # include <vaucanson/algebra/implementation/series/series.hh>
 
 # define TRANStype				\
-    Element<Transducer<S>, T>
+    Element<Transducer<S, K>, T>
 
 # define TRANSseries				\
     Element<vcsn::algebra::Series<vcsn::algebra::Series<R, S>, T>, U>
@@ -122,7 +122,7 @@ namespace vcsn
 
     namespace builders
     {
-      template <typename S, typename T>
+      template <typename S, typename K, typename T>
       typename TRANStype::semiring_t*
       create_semiring (TRANStype&,
 		       const XMLCh* const localname,
@@ -157,7 +157,7 @@ namespace vcsn
 
     namespace builders
     {
-      template <typename S, typename T>
+      template <typename S, typename K, typename T>
       void
       create_semiring_node(const TRANStype&,
 			   xercesc::DOMDocument* doc,

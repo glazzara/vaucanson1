@@ -60,12 +60,12 @@ namespace vcsn {
    *      is no such mechanism since only one implementation of search is
    *      provided.
    */
-  template <class InputIterator, class FoundFunctor, class Series, class T>
+  template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
   void
-  search(const Element<Automata<Series>, T>& a,
+  search(const Element<Automata<Series, Kind>, T>& a,
 	 const InputIterator& begin,
 	 const InputIterator& end,
-	 typename Element<Automata<Series>, T>::letter_t eol,
+	 typename Element<Automata<Series, Kind>, T>::letter_t eol,
 	 FoundFunctor& f);
 
   /**
@@ -81,13 +81,13 @@ namespace vcsn {
    */
   struct FindBestSearch
   {
-    template <class InputIterator, class FoundFunctor, class Series, class T>
+      template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
     static
     void
-    search(const Element<Automata<Series>, T>& a,
+    search(const Element<Automata<Series, Kind>, T>& a,
 	   const InputIterator& begin,
 	   const InputIterator& end,
-	   typename Element<Automata<Series>, T>::letter_t eol,
+	   typename Element<Automata<Series, Kind>, T>::letter_t eol,
 	   FoundFunctor& f);
   };
 
@@ -107,13 +107,13 @@ namespace vcsn {
    */
   struct WindowedBackSearch
   {
-    template <class InputIterator, class FoundFunctor, class Series, class T>
+    template <typename InputIterator, typename FoundFunctor, typename Series, typename Kind, typename T>
     static
     void
-    search(const Element<Automata<Series>, T>& a,
+    search(const Element<Automata<Series, Kind>, T>& a,
 	   const InputIterator& begin,
 	   const InputIterator& end,
-	   typename Element<Automata<Series>, T>::letter_t eol,
+	   typename Element<Automata<Series, Kind>, T>::letter_t eol,
 	   FoundFunctor& f);
   };
 

@@ -53,7 +53,7 @@ namespace vcsn
     ret_monoid_t freemonoid(A);
     typename ret::series_set_t series(semiring, freemonoid);
 
-    return ret(Automata<typename ret::series_set_t>(series));
+    return ret(Automata<typename ret::series_set_t, typename ret::kind_t>(series));
   }
 
   template <typename S, typename T>

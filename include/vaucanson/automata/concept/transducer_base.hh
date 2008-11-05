@@ -45,6 +45,7 @@ namespace vcsn {
     public:
       /// The type of the series set associated with the automaton.
       typedef typename virtual_types<Self>::series_set_t  series_set_t;
+      typedef typename virtual_types<Self>::kind_t kind_t;
 
     protected:
       /// The default constructor is protected since it is an abstract class.

@@ -44,6 +44,8 @@ namespace vcsn {
     public:
       /// The type of the series set associated with the automaton.
       typedef typename virtual_types<Self>::series_set_t  series_set_t;
+      /// The type of the label kind associated with the automaton.
+      typedef typename virtual_types<Self>::kind_t kind_t;
 
     protected:
       /// The default constructor is protected since it is an abstract class.
@@ -149,6 +151,7 @@ namespace vcsn {
     typedef Element<Struct, Type<Kind, WordValue, WeightValue, SeriesValue,	\
 		    Letter, Tag, GeometryCoords> > Auto_;			\
     typedef typename Auto_::series_set_t		series_set_t;		\
+    typedef typename Auto_::kind_t			kind_t;			\
     typedef typename series_set_t::monoid_t		monoid_t;		\
     typedef typename Auto_::series_set_elt_t		series_set_elt_t;	\
     typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;		\
@@ -156,7 +159,7 @@ namespace vcsn {
     typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;		\
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;	\
     typedef typename Auto_::value_t::geometry_t		geometry_t;		\
-    typedef vcsn::Element<vcsn::Automata<series_set_t>,				\
+    typedef vcsn::Element<vcsn::Automata<series_set_t, Kind>,			\
 			  Type<labels_are_series,				\
 			  monoid_elt_value_t,					\
 			  semiring_elt_value_t,					\
@@ -181,23 +184,23 @@ namespace vcsn {
     typedef undefined_type automaton_t;
   };
 
-# define VCSN_MAKE_STANDARD_OF_TRAITS(Type)				\
-  template <typename W,							\
-	    typename M,							\
-	    typename Tm,						\
-	    typename Tw>						\
-  struct standard_of_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >	\
-  {									\
-    typedef typename algebra::Series<W, M>		series_set_t;	\
-    typedef typename algebra::polynom<Tm, Tw>				\
-	series_set_elt_value_t;						\
-    typedef typename M::letter_t			letter_t;	\
-    typedef typename Type<labels_are_series, Tm, Tw,			\
-			  series_set_elt_value_t, letter_t,		\
-			  NoTag, std::pair<double, double> >		\
-	automaton_impl_t;						\
-    typedef Element<Automata<series_set_t>, automaton_impl_t>		\
-	automaton_t;							\
+# define VCSN_MAKE_STANDARD_OF_TRAITS(Type)						\
+  template <typename W,									\
+	    typename M,									\
+	    typename Tm,								\
+	    typename Tw>								\
+  struct standard_of_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >			\
+  {											\
+    typedef typename algebra::Series<W, M>		series_set_t;			\
+    typedef typename algebra::polynom<Tm, Tw>						\
+	series_set_elt_value_t;								\
+    typedef typename M::letter_t			letter_t;			\
+    typedef typename Type<labels_are_series, Tm, Tw,					\
+			  series_set_elt_value_t, letter_t,				\
+			  NoTag, std::pair<double, double> >				\
+	automaton_impl_t;								\
+    typedef Element<Automata<series_set_t, labels_are_series>, automaton_impl_t>	\
+	automaton_t;									\
   }
 
   // Traits to construct misc projections from a structural type and
@@ -346,8 +349,11 @@ namespace vcsn {
       /// Type of the interface of an automaton.
       typedef MetaElement<AutomataBase<Self>, T>	self_t;
 
-      /// Type the series set from which is build the automaton.
+      /// Type the series set from which is the automaton is built.
       typedef typename AutomataBase<Self>::series_set_t	series_set_t;
+
+      /// Type the label kind with which is the automaton is built.
+      typedef typename AutomataBase<Self>::kind_t	kind_t;
 
       /// Type of the implementation of series that holds the automaton.
       typedef typename automaton_traits<T>::series_set_elt_value_t

@@ -21,22 +21,22 @@
 
 namespace vcsn {
 
-  template <class Series>
-  Transducer<Series>::Transducer(const series_set_t& s):
+  template <typename Series, typename Kind>
+  Transducer<Series, Kind>::Transducer(const series_set_t& s):
     SetSlot<Series>(s)
   {}
 
-  template <class Series>
-  const typename Transducer<Series>::series_set_t&
-  Transducer<Series>::series() const
+  template <typename Series, typename Kind>
+  const typename Transducer<Series, Kind>::series_set_t&
+  Transducer<Series, Kind>::series() const
   {
     return this->_structure_get();
   }
 
-  template <class Series>
+  template <typename Series, typename Kind>
   bool
-  operator==(const Transducer<Series>& lhs,
-	     const Transducer<Series>& rhs)
+  operator==(const Transducer<Series, Kind>& lhs,
+	     const Transducer<Series, Kind>& rhs)
   {
     return & lhs.series() == & rhs.series();
   }
@@ -45,10 +45,10 @@ namespace vcsn {
   // Projections for RW transducers
   //
 
-  template <typename S, typename T>
-  inline typename input_projection_helper<Transducer<S>, T>::ret
-  input_projection_helper<Transducer<S>, T>::
-  make_input_projection_automaton(const Element<Transducer<S>, T>& t)
+  template <typename S, typename K, typename T>
+  inline typename input_projection_helper<Transducer<S, K>, T>::ret
+  input_projection_helper<Transducer<S, K>, T>::
+  make_input_projection_automaton(const Element<Transducer<S, K>, T>& t)
   {
     // Type helpers.
     typedef typename ret::set_t set_t;
@@ -62,10 +62,10 @@ namespace vcsn {
     return ret(auto_set);
   }
 
-  template <typename S, typename T>
-  inline typename output_projection_helper<Transducer<S>, T>::ret
-  output_projection_helper<Transducer<S>, T>::
-  make_output_projection_automaton(const Element<Transducer<S>, T>& t)
+  template <typename S, typename K, typename T>
+  inline typename output_projection_helper<Transducer<S, K>, T>::ret
+  output_projection_helper<Transducer<S, K>, T>::
+  make_output_projection_automaton(const Element<Transducer<S, K>, T>& t)
   {
     // Type helpers.
     typedef typename ret::set_t set_t;
@@ -81,10 +81,10 @@ namespace vcsn {
   // Projections for FMP transducers
   //
 
-  template <typename S, typename T>
-  inline typename input_projection_helper<Automata<S>, T>::ret
-  input_projection_helper<Automata<S>, T>::
-  make_input_projection_automaton(const Element<Automata<S>, T>& t)
+  template <typename S, typename K, typename T>
+  inline typename input_projection_helper<Automata<S, K>, T>::ret
+  input_projection_helper<Automata<S, K>, T>::
+  make_input_projection_automaton(const Element<Automata<S, K>, T>& t)
   {
     // Type helpers.
     typedef typename ret::set_t set_t;
@@ -98,10 +98,10 @@ namespace vcsn {
     return ret(auto_set);
   }
 
-  template <typename S, typename T>
-  inline typename output_projection_helper<Automata<S>, T>::ret
-  output_projection_helper<Automata<S>, T>::
-  make_output_projection_automaton(const Element<Automata<S>, T>& t)
+  template <typename S, typename K, typename T>
+  inline typename output_projection_helper<Automata<S, K>, T>::ret
+  output_projection_helper<Automata<S, K>, T>::
+  make_output_projection_automaton(const Element<Automata<S, K>, T>& t)
   {
     // Type helpers.
     typedef typename ret::set_t set_t;
@@ -115,13 +115,13 @@ namespace vcsn {
     return ret(auto_set);
   }
 
-  template <class S, class T>
-  typename identity_transducer_helper<S, T>::ret
+  template <typename S, typename K, typename T>
+  typename identity_transducer_helper<S, K, T>::ret
   partial_identity(const Element<S, T>& a)
   {
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
-    typedef typename identity_transducer_helper<S, T>::ret  ret_t;
+    typedef typename identity_transducer_helper<S, K, T>::ret  ret_t;
     typedef typename ret_t::series_set_elt_t output_series_set_elt_t;
     typedef typename series_set_elt_t::support_t support_t;
     typedef typename ret_t::set_t set_t;

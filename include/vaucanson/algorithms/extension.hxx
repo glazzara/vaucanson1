@@ -22,14 +22,14 @@
 
 namespace vcsn {
 
-  template <typename S, typename T, typename Auto_t>
-  typename identity_transducer_helper<S, T>::ret
+  template <typename S, typename K, typename T, typename Auto_t>
+  typename identity_transducer_helper<S, K, T>::ret
   do_extension(const AutomataBase<S>& s,
 	       const Auto_t& a)
   {
     AUTOMATON_TYPES(Auto_t);
     // ret_t is the type of the transducer returned.
-    typedef typename identity_transducer_helper<S, T>::ret    ret_t;
+    typedef typename identity_transducer_helper<S, K, T>::ret    ret_t;
 
     AUTOMATON_TYPES_(ret_t, t_);
     typedef typename ret_t::set_t		 set_t;
@@ -106,8 +106,8 @@ namespace vcsn {
     return t_ret;
   }
 
-  template<typename S, typename T>
-  typename identity_transducer_helper<S, T>::ret
+  template<typename S, typename K, typename T>
+  typename identity_transducer_helper<S, K, T>::ret
   extension(const Element<S, T>& a)
   {
     TIMER_SCOPED("extension/1");

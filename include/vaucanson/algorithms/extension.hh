@@ -39,8 +39,8 @@ namespace vcsn {
    * Extend  an automaton to  a transducer  whose multiplicity  is the
    * series of the automaton.
    */
-  template <typename S, typename T>
-  typename identity_transducer_helper<S, T>::ret
+  template <typename S, typename K, typename T>
+  typename identity_transducer_helper<S, K, T>::ret
   extension(const Element<S, T>&);
 
 

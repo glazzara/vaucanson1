@@ -23,52 +23,54 @@
 namespace vcsn
 {
 
-  template <class Series>
+  template <typename Series, typename Kind>
   // FIXME: Rename to AutomatonSet (see Trac #3)
   struct Automata;
 
   /// Dynamic traits for automata.
-  template <class Series>
-  struct dynamic_traits<Automata<Series> >
-    : dynamic_traits<AutomataBase<Automata<Series> > >
+  template <typename Series, typename Kind>
+  struct dynamic_traits<Automata<Series, Kind> >
+    : dynamic_traits<AutomataBase<Automata<Series, Kind> > >
   {
       static const bool ret = dynamic_traits<Series>::ret;
   };
 
   /// MetaElement specialization for automata.
-  template <class Series, typename T>
-  struct MetaElement<Automata<Series>, T>
-    : MetaElement<AutomataBase<Automata<Series> >, T>
+  template <typename Series, typename Kind, typename T>
+  struct MetaElement<Automata<Series, Kind>, T>
+    : MetaElement<AutomataBase<Automata<Series, Kind> >, T>
   {};
 
   /// Virtual types for automata.
-  template <class Series>
-  struct virtual_types<Automata<Series> >
-    : virtual_types<AutomataBase<Automata<Series> > >
+  template <typename Series, typename Kind>
+  struct virtual_types<Automata<Series, Kind> >
+    : virtual_types<AutomataBase<Automata<Series, Kind> > >
   {
       typedef Series series_set_t;
+      typedef Kind kind_t;
   };
 
 
   /// Final class for the set of automata.
-  template <class Series>
+  template <typename Series, typename Kind>
   class Automata
-    : public AutomataBase<Automata<Series> >,
+    : public AutomataBase<Automata<Series, Kind> >,
       private SetSlot<Series>
   {
     public:
-      typedef Automata<Series> self_t;
+      typedef Automata<Series, Kind> self_t;
       typedef Series series_set_t;
+      typedef Kind kind_t;
 
       Automata(const series_set_t&);
 
       const series_set_t&	series() const;
   };
 
-  template <typename S, typename T>
-  struct projection_traits<Automata<S>, T>
+  template <typename S, typename K, typename T>
+  struct projection_traits<Automata<S, K>, T>
   {
-    typedef Automata<S> structure_t;
+    typedef Automata<S, K> structure_t;
     typedef T impl_t;
 
     typedef Element<structure_t, impl_t> automaton_t;
@@ -112,10 +114,10 @@ namespace vcsn
     typedef typename mute_graph_impl_traits<impl_t, word_traits_t>::
 	second_projection_t second_impl_t;
 
-    typedef Element<Automata<first_series_t>, first_impl_t>
+    typedef Element<Automata<first_series_t, K>, first_impl_t>
 	first_projection_t;
 
-    typedef Element<Automata<second_series_t>, second_impl_t>
+    typedef Element<Automata<second_series_t, K>, second_impl_t>
 	second_projection_t;
 
     // These are only "makers". Ie they will not contruct the projection.
@@ -168,9 +170,9 @@ namespace vcsn
       typedef projection_traits_t::second_projection_t				\
 	      second_projection_automaton_t
 
-  template <class Series>
+  template <typename Series, typename Kind>
   bool
-  operator==(const Automata<Series>&, const Automata<Series>&);
+  operator==(const Automata<Series, Kind>&, const Automata<Series, Kind>&);
 
 } // ! vcsn
 

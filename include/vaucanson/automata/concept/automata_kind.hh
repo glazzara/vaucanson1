@@ -21,10 +21,11 @@
 
 namespace vcsn {
 
-  struct labels_are_letters {};
-  struct labels_are_words   {};
-  struct labels_are_series  {};
-  struct labels_are_couples {};
+  // These names are approximate; the comments below give the details.
+  struct labels_are_letters {};  // really generators of the monoid
+  struct labels_are_atoms   {};  // "letter" or monoid unit
+  struct labels_are_words   {};  // really element of the monoid
+  struct labels_are_series  {};  // really!
 
   template <class Kind,
 	    class WordValue,
@@ -47,20 +48,20 @@ namespace vcsn {
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter>
-  struct LabelOf<labels_are_series, WordValue, WeightValue,
+  struct LabelOf<labels_are_atoms, WordValue, WeightValue,
 		 SeriesValue, Letter>
   {
-    typedef SeriesValue	ret;
+    typedef std::pair<WeightValue, WordValue>	ret;
   };
 
   template <class WordValue,
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter>
-  struct LabelOf<labels_are_couples, WordValue, WeightValue,
+  struct LabelOf<labels_are_series, WordValue, WeightValue,
 		 SeriesValue, Letter>
   {
-    typedef std::pair<WeightValue, WordValue>	ret;
+    typedef SeriesValue	ret;
   };
 
   template <class WordValue,

@@ -462,9 +462,9 @@ namespace vcsn {
 
     res_series_set_t series(lhs.structure().series().semiring(), monoid);
 
-    Automata<series_set_t> aut_set(series);
+    Automata<series_set_t, kind_t> aut_set(series);
 
-    Element< Automata<series_set_t>, T> ret(aut_set);
+    Element< Automata<series_set_t, kind_t>, T> ret(aut_set);
     do_compose_dispatcher(ret.structure(),
 			  ret.structure().series().monoid(),
 			  SELECT(semiring_elt_value_t),
@@ -513,9 +513,9 @@ namespace vcsn {
 
     res_series_set_t series(lhs.structure().series().semiring(), monoid);
 
-    Automata<series_set_t> aut_set(series);
+    Automata<series_set_t, kind_t> aut_set(series);
 
-    Element< Automata<series_set_t>, T> ret(aut_set);
+    Element< Automata<series_set_t, kind_t>, T> ret(aut_set);
     do_u_compose(ret.structure(),
 		 ret.structure().series().monoid(),
 		 lhs, rhs, ret);

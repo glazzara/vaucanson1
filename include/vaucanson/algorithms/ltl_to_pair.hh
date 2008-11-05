@@ -117,7 +117,7 @@ namespace vcsn
 			   typename automaton_t::semiring_t,
 			   algebra::FreeMonoid<ret_alphabet_t> >::ret
 	ret_series_set_t;
-    typedef Automata<ret_series_set_t> ret_set_t;
+    typedef Automata<ret_series_set_t, typename automaton_t::kind_t> ret_set_t;
 
     // 2 - implementation
     typedef typename mute_graph_impl_monoid_traits<typename automaton_t::
