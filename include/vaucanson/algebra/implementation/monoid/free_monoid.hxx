@@ -74,7 +74,8 @@ namespace vcsn
     bool operator==(const FreeMonoid<A>& a,
 		    const FreeMonoid<A>& b)
     {
-      return a.alphabet() == b.alphabet();
+      return (a.alphabet() == b.alphabet()) &&
+	     (a.representation() == b.representation());
     }
 
   } // ! algebra

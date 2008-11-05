@@ -28,6 +28,14 @@ namespace vcsn {
     {
     }
 
+    template <typename M>
+    bool
+    operator==(boost::shared_ptr<monoid_rep<M> > lhs,
+	       boost::shared_ptr<monoid_rep<M> > rhs )
+    {
+      return (lhs->empty == rhs->empty);
+    }
+
   } // ! algebra
 
 } // ! vcsn

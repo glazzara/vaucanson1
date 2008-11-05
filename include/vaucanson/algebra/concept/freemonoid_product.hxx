@@ -31,6 +31,18 @@ namespace vcsn {
     close_par(")")
     {}
 
+    template <typename F, typename S>
+    bool
+    operator==(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > > lhs,
+	       boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > > rhs)
+    {
+      return (lhs->open_par == rhs->open_par) &&
+	     (lhs->sep == rhs->sep) &&
+	     (lhs->close_par == rhs->close_par) &&
+	     (static_cast<monoid_rep<F> >(lhs).representation() ==
+	      static_cast<monoid_rep<F> >(rhs).representation());
+    }
+
     /*------------------------.
     | FreeMonoidProduct<F, S> |
     `------------------------*/

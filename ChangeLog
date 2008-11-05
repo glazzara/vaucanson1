@@ -1,5 +1,20 @@
 2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add operator== for monoid representation.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh: New
+	  `operator=='.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Add
+	  implementation of `operator==' for FMP monoid_rep.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  Update implementation of `operator==' to use the monoid
+	  representation.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh: New
+	  `oprator=='.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
+	  Add implementation of `operator==' for monoid_rep.
+
+2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix attributes ordering in FreeMonoid.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh
 	  (FreeMonoid): Move `alph_' declaration after `rep_' one.

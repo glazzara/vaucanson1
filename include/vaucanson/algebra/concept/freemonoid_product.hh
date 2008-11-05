@@ -57,6 +57,10 @@ namespace vcsn {
       monoid_rep();
     };
 
+    template <typename F, typename S>
+    bool operator==(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >,
+		    boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >);
+
     /*------------------------.
     | FreeMonoidProduct<F, S> |
     `------------------------*/

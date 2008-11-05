@@ -32,7 +32,12 @@ namespace vcsn {
 
       // Default CTOR
       monoid_rep();
+
     };
+
+    template <typename M>
+    bool operator==(boost::shared_ptr<monoid_rep<M> >,
+		    boost::shared_ptr<monoid_rep<M> >);
 
     template <typename Monoid>
     struct monoid_rep_default
