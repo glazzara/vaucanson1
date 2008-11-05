@@ -30,12 +30,14 @@
 #include <stdexcept>
 
 #include "argp.h"
+#include "progname.h"
 
 #include "common.hh"
 #include "predefined_alphabets.hh"
 #include "commands.hh"
 #include "interface.hh"
 #include "parser_options.hh"
+
 
 /**
  * Base info for the program.
@@ -270,6 +272,8 @@ using namespace vcsn::misc;
 
 int main (int argc, char* argv[])
 {
+  set_program_name(argv[0]);
+
   std::list<pipe_command> command_list;
 
   // Cut the command line

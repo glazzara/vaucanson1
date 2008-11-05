@@ -174,3 +174,7 @@ vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 vcsn_int_int_b_LDADD = $(LDADD) \
 			  $(top_builddir)/lib/libkrat_exp.la \
 			  $(top_builddir)/lib/libvcsn-int-int-b.la
+
+
+LDADD = $(top_builddir)/gnulib/libgnu.la
+AM_CPPFLAGS += -I$(top_srcdir)/gnulib
