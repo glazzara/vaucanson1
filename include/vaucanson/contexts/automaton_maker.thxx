@@ -105,12 +105,12 @@ namespace vcsn
 		   const std::string& exp = vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
 		   get_instance()->zero,
-		   const monoid_rep_t& mrep = vcsn::algebra::
+		   const monoid_rep_t& mrep = *(vcsn::algebra::
 		   monoid_rep_default<monoid_t>::
-		   get_instance(),
-		   const series_rep_t& srep = vcsn::algebra::
+		   get_instance()),
+		   const series_rep_t& srep = *(vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance())
+		   get_instance()))
       {
 	alphabet_t	alphabet;
         for (Iterator i = begin; i != end; ++i)
@@ -133,12 +133,12 @@ namespace vcsn
 		   const std::string& exp = vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
 		   get_instance()->zero,
-		   const monoid_rep_t& mrep = vcsn::algebra::
+		   const monoid_rep_t& mrep = *(vcsn::algebra::
 		   monoid_rep_default<monoid_t>::
-		   get_instance(),
-		   const series_rep_t& srep = vcsn::algebra::
+		   get_instance()),
+		   const series_rep_t& srep = *(vcsn::algebra::
 		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance())
+		   get_instance()))
       {
         return make_rat_exp(alphabet.begin(), alphabet.end(),
 			    exp, mrep, srep);
