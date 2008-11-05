@@ -1,5 +1,13 @@
 2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup series.
+	* include/vaucanson/algebra/implementation/series/series.hh: Update
+	  copyright notices. Cosmetic changes.
+	* include/vaucanson/algebra/implementation/series/series.hxx: Update
+	  copyright notices.
+
+2008-11-05  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update the test-suite to use the new representation system.
 	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh,
 	* src/tests/include/tests/automata/implementation_check/epsilon_label_representation_test.hh:
