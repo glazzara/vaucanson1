@@ -284,7 +284,7 @@ int main (int argc, char* argv[])
   int j = 0;
   for (; i < argc; ++i)
     {
-      if (std::string ("|").compare(argv[i]) == 0)
+      if (strcmp("|", argv[i]) == 0)
 	{
 	  // Pretend that each pipe is the start of a vcsn-x-x call.
 	  // This is because argp() will use that value to report errors

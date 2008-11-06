@@ -1,3 +1,8 @@
+2008-11-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/main.cc (main): Use strcmp() to compare two char*,
+	not std::string::compare().
+
 2008-11-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/main.cc (parse_opt) [-o, -i]: Ignore the case
