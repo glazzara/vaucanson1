@@ -17,8 +17,11 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_FREE_MONOID_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_FREE_MONOID_HH
 
+# include <set>
+
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
+# include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
 # include <vaucanson/misc/unique.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
@@ -28,6 +31,32 @@ namespace vcsn
   {
     /** @addtogroup algebra    */ /** @{ */
     /** @addtogroup freemonoid */ /** @{ */
+
+    /*---------------.
+    | Predeclaration |
+    `---------------*/
+
+    template <typename A>
+    struct FreeMonoid;
+
+    /*-------------------------------------------------------------.
+    | Specialization of the monoid_rep structure for int letter    |
+    | based free monoids.                                          |
+    `-------------------------------------------------------------*/
+
+    template <>
+    struct monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >
+    : monoid_rep<FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >
+    {
+      // Type helpers.
+      typedef monoid_rep<FreeMonoid<Element<AlphabetSet<char>,
+	      std::set<char> > > > parent_t;
+
+      /// The representation of the empty word.
+      using parent_t::empty;
+
+      monoid_rep();
+    };
 
     /*--------------.
     | FreeMonoid<A> |

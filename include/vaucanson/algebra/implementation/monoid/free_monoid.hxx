@@ -23,6 +23,12 @@ namespace vcsn
 {
   namespace algebra
   {
+    monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::monoid_rep() :
+    monoid_rep<FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >()
+    {
+      empty = "e";
+    }
+
     /*--------------.
     | FreeMonoid<A> |
     `--------------*/

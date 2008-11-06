@@ -1,3 +1,13 @@
+2008-11-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add specialization of monoid_rep for int letters.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
+	  Inlude `alphabet_set.hh'. Add predeclaration of `FreeMonoid'. Add
+	  specialization of monoid_rep for int based free monoids.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  Add the implementation of the monoid_rep constructor for int based
+	  free monoids.
+
 2008-11-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix is_empty() to take care of initial and final transitions.
