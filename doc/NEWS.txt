@@ -17,7 +17,18 @@ Vaucanson 1.x, October 29th, 2008
 
 - TAF-Kit
 
-  + Add is-ltl.
+  + Add command ``is-ltl``.
+  + Options ``-o`` and ``-i`` no longer request uppercase arguments.
+  + Command ``define-automaton`` has been merged into ``edit-automaton``.
+  + Command ``dot-dump`` has been removed: any command can produce DOT
+    output using the ``-o dot`` option.  The effect of ``dot-dump`` can
+    be achieved using ``identity -o dot``.
+  + Command ``dump`` has been removed.  Instead, any command will
+    search the file corresponding to their automata arguments into the
+    current directory first, then into the directory specified by
+    ``$VCSN_DATA_PATH``.  The effect of ``dump a1.xml`` can therefore
+    be achieved using ``identity a1.xml`` provided no ``a1.xml`` exist
+    in the current directory.
 
 Vaucanson 1.2.93, October 10th, 2008
 ====================================
@@ -37,7 +48,7 @@ Vaucanson 1.2.93, October 10th, 2008
 
   + Remove the ``vcsn-int-char-b`` instance.
   + Add ltl-to-pair and identity-exp.
-  + Revive transpose on transducers. 
+  + Revive transpose on transducers.
 
 Vaucanson 1.2.92, September 10th, 2008
 ======================================
