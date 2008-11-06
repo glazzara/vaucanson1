@@ -287,10 +287,10 @@ for a in $AUTOMATA; do
   $VCSN dot-dump $a | dot
 done
 
-# Check that each builtin automaton can be dumped.
+# Check that each builtin automaton can be read.
 for a in $($VCSN list-automata | sed -n 's/^  * - \([-a-z0-9.]*\).*/\1/p')
 do
-  $VCSN dump-automaton $a \| info -
+  $VCSN info $a
 done
 
 for a in $AUTOMATA; do

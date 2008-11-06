@@ -89,18 +89,4 @@ static int list_automata_command (const arguments_t& args)
   return 0;
 }
 
-static int dump_automaton_command (const arguments_t& args)
-{
-  std::string file = get_automata_path (args) + "/" + args.args[1];
-  std::ifstream in (file.c_str ());
-
-  if (in.fail ())
-  {
-    std::cerr << "Error: cannot open `" << file << "'." << std::endl;
-    exit (-3);
-  }
-  PRINT_RESULT (in.rdbuf ());
-  return 0;
-}
-
 #endif /* !AUTOMATON_LIBRARY_COMMANDS_HH */

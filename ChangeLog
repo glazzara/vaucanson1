@@ -1,5 +1,15 @@
 2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Get rid of dump-automaton. The command "dump-automaton file.xml"
+	can now be replaced by "identity file.xml" if there is no
+	"file.xml" in the current directory.
+
+	* taf-kit/src/library_commands.hh (dump_automaton_command): Remove.
+	* taf-kit/src/common_commands.hh (USE_IO_COMMAND_GROUP): Remove dump.
+	* taf-kit/tests/vcsn-char-b.test: Adjust.
+
+2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/getters.hxx (get_aut): Try to load the file
 	from VCSN_DATA_PATH if it is not in the current directory.
 
