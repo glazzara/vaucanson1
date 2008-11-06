@@ -1,5 +1,20 @@
 2008-11-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix is_empty() to take care of initial and final transitions.
+
+	* include/vaucanson/algorithms/realtime.hxx (do_is_realtime):
+	Ensure that the initial and final transition are labeled by a
+	scalar.
+	* include/vaucanson/algorithms/realtime.hh: Document that initial
+	and final arrows of realtime automata should be labeled by the
+	empty word (and maybe a weight).
+	* taf-kit/tests/automata/char-b/initseries.xml: New file.
+	* taf-kit/tests/Makefile.am (EXTRA_DIST): Distribute it.
+	* taf-kit/tests/defs.in (initialseries): New variable.
+	* taf-kit/tests/vcsn-char-b.test: Add more tests.
+
+2008-11-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/main.cc (main): Make sure program_name, as computed
 	by set_program_name(), is used to report errors.
 	* taf-kit/src/library_commands.hh (get_automata_path): Use

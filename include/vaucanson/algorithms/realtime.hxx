@@ -166,6 +166,30 @@ namespace vcsn {
     TIMER_SCOPED("is_realtime (automaton)");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
+    for_all_const_initial_states(e, a)
+      {
+	series_set_elt_t l = a.get_initial(*e);
+	if (l.supp().size() > 1)
+	  return false;
+	// We assume that an initial transition cannot be labeled by
+	// the empty series.  In other words, l.size() >= 1.
+	assertion(l.supp().size() == 1);
+	monoid_elt_t m(a.structure().series().monoid(), *l.supp().begin());
+	if (m.length() > 0)
+	  return false;
+      }
+    for_all_const_final_states(e, a)
+      {
+	series_set_elt_t l = a.get_final(*e);
+	if (l.supp().size() > 1)
+	  return false;
+	// We assume that a final transition cannot be labeled by
+	// the empty series.  In other words, l.size() >= 1.
+	assertion(l.supp().size() == 1);
+	monoid_elt_t m(a.structure().series().monoid(), *l.supp().begin());
+	if (m.length() > 0)
+	  return false;
+      }
     for_all_const_transitions(e, a)
       if (!is_support_in_alphabet(a.series_of(*e)))
 	return false;

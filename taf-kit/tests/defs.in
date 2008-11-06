@@ -195,6 +195,7 @@ ambiguous2=$automata_tests_dir/char-b/ambiguous2.xml
 b_to_transpose=$automata_tests_dir/char-b/b_to_transpose.xml
 b_transposed=$automata_tests_dir/char-b/b_transposed.xml
 finalword=$automata_tests_dir/char-b/finalword.xml
+initialseries=$automata_tests_dir/char-b/initialseries.xml
 initialword=$automata_tests_dir/char-b/initialword.xml
 non_ambiguous1=$automata_tests_dir/char-b/non_ambiguous1.xml
 realtime_test=$automata_tests_dir/char-b/realtime_test.xml

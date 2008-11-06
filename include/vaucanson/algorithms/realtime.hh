@@ -49,7 +49,8 @@ namespace vcsn {
    *
    * An automaton over a free monoid @f$A^\star@f$ is realtime
    * if all its transitions are labeled by single letters of
-   * @f$A@f$.  (Weights do not matter.)
+   * @f$A@f$, and all its initial and final arrows are labeled
+   * by empty words. (Weights do not matter.)
    *
    * This algorithm works in two steps: first transitions labeled by
    * words are split into transitions labeled by single letters

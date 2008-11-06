@@ -359,14 +359,15 @@ fail1 $VCSN has-succ-comp 2snf.xml
 #fail1 $VCSN is-normalized $a1
 #      $VCSN normalize $a1 | $VCSN is-normalized -
 
-# realtime.
-      $VCSN realtime $realtime_test \| is-realtime -
+# realtime and is-realtime
 
-# is-realtime.
       $VCSN is-realtime $a1
 fail1 $VCSN is-realtime ab.xml
       $VCSN realtime ab.xml \| is-realtime -
 
+      $VCSN realtime $realtime_test \| is-realtime -
+
+fail1 $VCSN is-realtime $initialword
       test "`$VCSN eval $initialword aba`" = 1
       test "`$VCSN eval $initialword ab`" = 0
       $VCSN realtime $initialword > initialreal.xml
@@ -374,6 +375,7 @@ fail1 $VCSN is-realtime ab.xml
       test "`$VCSN eval initialreal.xml aba`" = 1
       test "`$VCSN eval initialreal.xml ab`" = 0
 
+fail1 $VCSN is-realtime $finalword
       test "`$VCSN eval $finalword aba`" = 1
       test "`$VCSN eval $finalword ab`" = 0
       $VCSN realtime $finalword > finalreal.xml
@@ -382,6 +384,9 @@ fail1 $VCSN is-realtime ab.xml
       test "`$VCSN eval finalreal.xml ab`" = 0
 
       $VCSN are-equivalent initialreal.xml finalreal.xml
+
+fail1 test "`$VCSN is-realtime $initialseries`" = 1
+      # $VCSN realtime $initialseries   is bogus currently.
 
 # is-standard
 fail1 $VCSN is-standard $a1
