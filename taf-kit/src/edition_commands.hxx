@@ -439,17 +439,32 @@ static int edit_automaton_command (const arguments_t& args)
 
   std::fstream input (args.args[1]);
 
-  if (not input.is_open ())
-  {
-    warn ("Error opening `" << args.args[1] << "'.");
-    return -1;
-  }
-  input >> automaton_loader (a, string_out (), XML ());
-  input.close ();
+  if (input.is_open ())
+    {
+      input >> automaton_loader (a, string_out (), XML ());
+      input.close ();
+    }
+  else
+    {
+      // We define the automaton from scratch: the user should have
+      // specified the alphabet to use.
+# ifndef WITH_TWO_ALPHABETS
+      a = make_automaton (get_alphabet (args.alphabet));
+# else
+      a = make_automaton (get_first_alphabet (args.alphabet),
+			  get_second_alphabet (args.alphabet2));
+# endif // !WITH_TWO_ALPHABETS
+    }
+
 
   edition_commands::main_loop (a, args);
 
   std::ofstream output (args.args[1]);
+  if (not output.good ())
+  {
+    warn ("Error opening `" << args.args[1] << "'.");
+    return -1;
+  }
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
   output.close ();
 

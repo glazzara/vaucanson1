@@ -1,5 +1,11 @@
 2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/edition_commands.hxx (edit_automaton_command):
+	Start from an empty automaton if the file does not exist.
+	Also complain if the file cannot be open for output.
+
+2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/tests/defs.in (automata_dir, a1, b1, c1, t1, u1):
 	Remove these variables, we don't need these explicit paths anymore.
 	* taf-kit/tests/vcsn-char-b.test, taf-kit/tests/vcsn-char-z.test,
