@@ -1,3 +1,22 @@
+2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Change get_aut() and get_exp() to take arguments_t as first
+	argument.  For get_exp() this is a simplification, for
+	get_aut() this prepares the following patch.
+
+	* taf-kit/src/getters.hh (get_exp): Remove.
+	(get_exp_complete): Rename as get_exp() and use two arguments.
+	(get_aut): Use two arguments.
+	* taf-kit/src/getters.hxx (get_exp, get_aut): Adjust.
+	* taf-kit/src/commands_macros.hh (DEFINE_ONE_ARG_COMMAND_,
+	DEFINE_ONE_ARG_COMMAND_TWO_ALGOS_, DEFINE_TWO_ARGS_COMMAND_,
+	DEFINE_IS_PROPERTY_COMMAND): Adjust to call get_aut() and
+	get_exp() using two arguments.
+	* taf-kit/src/common_automaton_commands.hh,
+	taf-kit/src/common_commands.hh, taf-kit/src/fmp_commands.cc,
+	taf-kit/src/ratexp_commands.hh, taf-kit/src/b_commands.cc:
+	Adjust all calls to get_aut() or get_exp().
+
 2008-10-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Use the .xml suffix with list-automata and dump-automaton.

@@ -82,11 +82,13 @@ DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t, "alphabet2");
 
 # ifndef WITH_TWO_ALPHABETS
 /// Getter for RatExp.
-static rat_exp_t get_exp_complete (const std::string& exp,
-				   const std::vector<std::string>& alphabet,
-				   const monoid_rep_t& mrep,
-				   const series_rep_t& srep)
+static rat_exp_t get_exp(const arguments_t& args, const int& n)
 {
+  const std::string& exp = args.args[n];
+  const std::vector<std::string>& alphabet = args.alphabet;
+  const monoid_rep_t& mrep = args.mrep;
+  const series_rep_t& srep = args.srep;
+
 # ifdef GLOBAL_RESULT
   if (exp == "-")
     {
@@ -119,8 +121,10 @@ get_word(Element<S, T>& aut, const std::string& s)
 # endif // !WITH_TWO_ALPHABETS
 
 /// Getter for automaton.
-static automaton_t get_aut (const std::string& s)
+static automaton_t get_aut (const arguments_t& args, int n)
 {
+  const std::string& s = args.args[n];
+
 # ifdef GLOBAL_RESULT
   if (s == "-")
     {

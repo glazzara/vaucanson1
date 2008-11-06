@@ -60,7 +60,7 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (exp)
 
 DEFINE_COMMAND (NAME (derived_term_automaton)
 		CODE (
-		  rat_exp_t   e = get_exp (args.args[1]);
+		  rat_exp_t   e = get_exp (args, 1);
 		  automaton_t a = make_automaton (get_alphabet (args.alphabet));
 		  derived_term_automaton (a, e))
 		KEEP_AUTOMATON (a)
@@ -68,17 +68,17 @@ DEFINE_COMMAND (NAME (derived_term_automaton)
 
 DEFINE_COMMAND (NAME (aut_to_exp)
 		CODE (/* Empty */)
-		KEEP (aut_to_exp (get_aut (args.args[1]), DMChooser ()))
+		KEEP (aut_to_exp (get_aut(args, 1), DMChooser ()))
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (identity_exp)
 		CODE (/* Empty */)
-		KEEP (get_exp (args.args[1]))
+		KEEP (get_exp (args, 1))
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (expand)
 		CODE (/* Empty */)
-		KEEP (expand (get_exp (args.args[1])))
+		KEEP (expand (get_exp (args, 1)))
 		RETURNVALUE (0));
 
 # define USE_RATEXP_COMMAND_GROUP()					\

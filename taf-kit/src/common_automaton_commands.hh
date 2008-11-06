@@ -89,8 +89,8 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (quotient)
 DEFINE_COMMAND (NAME (union)
 		CODE (/* Empty */)
 		KEEP_AUTOMATON (
-		  sum (get_aut (args.args[1]),
-		       get_aut (args.args[2])))
+		  sum (get_aut (args, 1),
+		       get_aut (args, 2)))
 		RETURNVALUE (0));
 
 DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
@@ -101,7 +101,7 @@ DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 
 DEFINE_COMMAND (NAME (eval)
 		CODE (
-		      automaton_t a = realtime (get_aut (args.args[1]));
+		      automaton_t a = realtime(get_aut (args, 1));
 		      semiring_elt_t b = eval (a, get_word (a, args.args[2])).value();
 		     )
 		OUTPUT (b << std::endl)
@@ -109,7 +109,7 @@ DEFINE_COMMAND (NAME (eval)
 
 DEFINE_COMMAND (NAME (power)
 		CODE (int n = atoi (args.args[2]);
-		      automaton_t a = get_aut (args.args[1]);
+		      automaton_t a = get_aut(args, 1);
 		      automaton_t p (a);
 		      for (int i = 1; i < n; ++i)
 			p = product (p, a))
@@ -117,7 +117,7 @@ DEFINE_COMMAND (NAME (power)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (standardize)
-		CODE (automaton_t a = get_aut (args.args[1]);
+		CODE (automaton_t a = get_aut(args, 1);
 		      standardize (a))
 		KEEP_AUTOMATON(a)
 		RETURNVALUE (0));
@@ -125,7 +125,7 @@ DEFINE_COMMAND (NAME (standardize)
 # ifdef FIRST_PROJECTION_CONTEXT
 DEFINE_COMMAND (NAME (first_projection)
 		CODE (
-		  automaton_t src = get_aut(args.args[1]);
+		  automaton_t src = get_aut(args, 1);
 		  vcsn::CONTEXT::projection_traits_t::first_projection_t a =
 		  vcsn::CONTEXT::projection_traits_t::first_projection(src);
 		  first_projection(src, a))
@@ -136,7 +136,7 @@ DEFINE_COMMAND (NAME (first_projection)
 # ifdef SECOND_PROJECTION_CONTEXT
 DEFINE_COMMAND (NAME (second_projection)
 		CODE (
-		  automaton_t src = get_aut(args.args[1]);
+		      automaton_t src = get_aut(args, 1);
 		  vcsn::CONTEXT::projection_traits_t::second_projection_t a =
 		  vcsn::CONTEXT::projection_traits_t::second_projection(src);
 		  second_projection(src, a))
@@ -146,8 +146,8 @@ DEFINE_COMMAND (NAME (second_projection)
 
 # define DEFINE_COMMAND_OF_STANDARD(Algo)			\
   DEFINE_COMMAND (NAME (Algo ## _of_standard)			\
-		  CODE (automaton_t a = get_aut (args.args[1]);	\
-			automaton_t b = get_aut (args.args[2]);	\
+		  CODE (automaton_t a = get_aut(args, 1);	\
+			automaton_t b = get_aut(args, 2);	\
 			if (!is_standard (a))			\
 			  standardize (a);			\
 			if (!is_standard (b))			\
@@ -163,7 +163,7 @@ DEFINE_COMMAND_OF_STANDARD(concat);
 #undef DEFINE_COMMAND_OF_STANDARD
 
 DEFINE_COMMAND (NAME (star_of_standard)
-		CODE (automaton_t a = get_aut (args.args[1]);
+		CODE (automaton_t a = get_aut(args, 1);
 		      if (!is_standard (a))
 		        standardize (a);
 		      star_of_standard_here (a))

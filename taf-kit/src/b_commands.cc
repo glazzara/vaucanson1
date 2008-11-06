@@ -48,8 +48,8 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (minimization_moore));
 
 DEFINE_COMMAND (NAME (are_equivalent)
-		CODE (bool b = are_equivalent (get_aut (args.args[1]),
-					       get_aut (args.args[2])))
+		CODE (bool b = are_equivalent (get_aut (args, 1),
+					       get_aut (args, 2)))
 		OUTPUT_ON_VERBOSE (
 		  (b
 		   ? "Automata are equivalent\n"

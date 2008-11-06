@@ -49,21 +49,14 @@ static second_alphabet_t get_second_alphabet (const std::vector<std::string>&);
 # endif // !WITH_TWO_ALPHABETS
 
 # ifndef WITH_TWO_ALPHABETS
-static rat_exp_t get_exp_complete (const std::string& exp,
-				   const std::vector<std::string>& alphabet,
-				   const monoid_rep_t& mrep,
-				   const series_rep_t& srep);
-
-#  define get_exp(S) (get_exp_complete ((S), args.alphabet,	\
-					args.mrep,		\
-					args.srep))
+static rat_exp_t get_exp(const arguments_t& args, const int& n);
 
 template <class S, class T>
 static std::basic_string<letter_t>
 get_word(Element<S, T>& aut, const std::string& s);
 # endif // !WITH_TWO_ALPHABETS
 
-static automaton_t get_aut (const std::string& s);
+static automaton_t get_aut (const arguments_t& args, int n);
 
 # include "getters.hxx"
 

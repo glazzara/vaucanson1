@@ -74,31 +74,29 @@
 # define DEFINE_COMMAND(BlockArgs) DEFINE_COMMAND_ (BlockArgs)
 
 // Command associated to Algo named Algo_command that takes one argument.
-# define DEFINE_ONE_ARG_COMMAND_(GetArg, Algo)		\
-  DEFINE_COMMAND (NAME (Algo)				\
-		  CODE (/* Empty */)			\
-		  KEEP_AUTOMATON (			\
-		    Algo (GetArg (args.args[1])))	\
+# define DEFINE_ONE_ARG_COMMAND_(GetArg, Algo)			\
+  DEFINE_COMMAND (NAME (Algo)					\
+		  CODE (/* Empty */)				\
+		  KEEP_AUTOMATON (Algo (GetArg (args, 1)))	\
 		  RETURNVALUE (0))
 # define DEFINE_ONE_ARG_COMMAND(BlockArgs) DEFINE_ONE_ARG_COMMAND_ (BlockArgs)
 
 // Command named CodeName_command that takes one arg and uses two algos.
 # define DEFINE_ONE_ARG_COMMAND_TWO_ALGOS_(CodeName, GetArg, Algo1, Algo2) \
-  DEFINE_COMMAND (NAME (CodeName)					   \
-		  CODE (/* Empty */)					   \
-		  KEEP_AUTOMATON (					   \
-		    Algo1(Algo2(get_aut (args.args[1]))))		   \
+  DEFINE_COMMAND (NAME (CodeName)					\
+		  CODE (/* Empty */)					\
+		  KEEP_AUTOMATON (Algo1(Algo2(get_aut (args, 1))))	\
 		  RETURNVALUE (0))
 # define DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(BlockArgs)	\
   DEFINE_ONE_ARG_COMMAND_TWO_ALGOS_ (BlockArgs)
 
 // Command named Algo_command that takes two args and uses @c Algo .
-# define DEFINE_TWO_ARGS_COMMAND_(GetArg, Algo)		\
-  DEFINE_COMMAND (NAME (Algo)				\
-		  CODE (/* Empty */)			\
-		  KEEP_AUTOMATON (			\
-		    Algo (GetArg (args.args[1]),	\
-			  GetArg (args.args[2])))	\
+# define DEFINE_TWO_ARGS_COMMAND_(GetArg, Algo)	\
+  DEFINE_COMMAND (NAME (Algo)			\
+		  CODE (/* Empty */)		\
+		  KEEP_AUTOMATON (		\
+		    Algo (GetArg (args, 1),	\
+			  GetArg (args, 2)))	\
 		  RETURNVALUE (0))
 # define DEFINE_TWO_ARGS_COMMAND(BlockArgs)	\
   DEFINE_TWO_ARGS_COMMAND_ (BlockArgs)
@@ -107,7 +105,7 @@
 # define DEFINE_IS_PROPERTY_COMMAND(Property)				\
   DEFINE_COMMAND (NAME (is_ ## Property)				\
 		  CODE (						\
-		    bool b = is_ ## Property (get_aut (args.args[1])))	\
+		    bool b = is_ ## Property (get_aut (args, 1)))	\
 		  OUTPUT_ON_VERBOSE (					\
 		    (b ? "Input is " # Property "\n":			\
 		     "Input is not " # Property "\n"))			\

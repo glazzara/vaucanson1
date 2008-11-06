@@ -73,8 +73,8 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
 				  ALGOS (accessible, eps_removal_sp));
 
 /*DEFINE_COMMAND (NAME (are_isomorphic)
-		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
-					       get_aut (args.args[2])))
+		CODE (bool b = are_isomorphic(get_aut(args, 1),
+					      get_aut(args, 2)))
 		OUTPUT_ON_VERBOSE (
 		  (b
 		   ? "Automata are isomorphic\n"
@@ -86,13 +86,13 @@ DEFINE_IS_PROPERTY_COMMAND(empty);
 
 DEFINE_COMMAND (NAME (has_succ_comp)
 		CODE (
-                      bool succ_comp = has_succ_comp (get_aut (args.args[1])))
+                      bool succ_comp = has_succ_comp(get_aut(args, 1)))
 		OUTPUT_ON_VERBOSE (
 		  (succ_comp ? "Input has successful computation\n" : "Input has no successful computation\n"))
 		RETURNVALUE (succ_comp ? 0: 1));
 
 DEFINE_COMMAND (NAME (info)
-		CODE (automaton_t a = get_aut (args.args[1]))
+		CODE (automaton_t a = get_aut(args, 1))
 		OUTPUT (
 		  "States: " << a.states ().size () << std::endl
 		  << "Transitions: " << a.transitions ().size () << std::endl
@@ -101,22 +101,21 @@ DEFINE_COMMAND (NAME (info)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (identity)
-		CODE (automaton_t a = get_aut (args.args[1]))
+		CODE (automaton_t a = get_aut(args, 1))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (display)
-		CODE (
-		  bool b = vcsn::tools::dot_display (get_aut(args.args[1]),
-						     "A", true))
+		CODE (bool b = vcsn::tools::dot_display(get_aut(args, 1),
+							"A", true))
 		OUTPUT ("")
 		RETURNVALUE ((b ? 0 : 1)));
 
 DEFINE_COMMAND (NAME (dot_dump)
 		CODE (
-		  vcsn::tools::dot_dump (std::cout,
-					 get_aut(args.args[1]),
-					 "A"))
+		  vcsn::tools::dot_dump(std::cout,
+					get_aut(args, 1),
+					"A"))
 		OUTPUT ("")
 		RETURNVALUE (0));
 

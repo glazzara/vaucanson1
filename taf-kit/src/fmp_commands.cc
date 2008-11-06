@@ -36,8 +36,8 @@ DEFINE_IS_PROPERTY_COMMAND (ltl);
 
 DEFINE_COMMAND (NAME (compose)
 		CODE (
-		  automaton_t a = get_aut(args.args[1]);
-		  automaton_t b = get_aut(args.args[2]);
+		  automaton_t a = get_aut(args, 1);
+		  automaton_t b = get_aut(args, 2);
 
 		  if (!is_sub_normalized(a))
 		    sub_normalize_here(a);
@@ -50,8 +50,8 @@ DEFINE_COMMAND (NAME (compose)
 
 DEFINE_COMMAND (NAME (u_compose)
 		CODE (
-		  automaton_t a = get_aut(args.args[1]);
-		  automaton_t b = get_aut(args.args[2]);
+		  automaton_t a = get_aut(args, 1);
+		  automaton_t b = get_aut(args, 2);
 
 		  if (!is_sub_normalized(a))
 		    sub_normalize_here(a);
@@ -63,7 +63,7 @@ DEFINE_COMMAND (NAME (u_compose)
 
 DEFINE_COMMAND (NAME (invert)
 		CODE (
-		  automaton_t a = get_aut(args.args[1]);
+		  automaton_t a = get_aut(args, 1);
 		  automaton_t fmp = invert(a))
 		KEEP_AUTOMATON (fmp)
 		RETURNVALUE (0));
@@ -77,13 +77,13 @@ typedef mute_ltl_to_pair<automaton_t::set_t,
 }
 DEFINE_COMMAND (NAME (ltl_to_pair)
 		CODE (
-		  automaton_t src = get_aut(args.args[1]);
+		  automaton_t src = get_aut(args, 1);
 		  vcsn::mute_ltl_to_pair_t::ret dst = ltl_to_pair(src))
 		KEEP_AUTOMATON (dst)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation)
-		CODE (automaton_t src = get_aut(args.args[1]))
+		CODE (automaton_t src = get_aut(args, 1))
 		OUTPUT (
 		  evaluation (src,
 			      IOAUT_CONTEXT::make_rat_exp(src.structure().
@@ -94,7 +94,7 @@ DEFINE_COMMAND (NAME (evaluation)
 
 DEFINE_COMMAND (NAME (evaluation_fmp)
 		CODE (
-		      automaton_t src = get_aut(args.args[1]);
+		      automaton_t src = get_aut(args, 1);
 		  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args.args[2]);
 		  IOAUT_CONTEXT::automaton_t res =
 		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().second_monoid().alphabet());
@@ -104,7 +104,7 @@ DEFINE_COMMAND (NAME (evaluation_fmp)
 
 DEFINE_COMMAND (NAME (domain)
 		CODE (
-		  automaton_t src = get_aut(args.args[1]);
+		  automaton_t src = get_aut(args, 1);
 		  IOAUT_CONTEXT::automaton_t a =
 		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().first_monoid().alphabet());
 		  domain(src, a))
@@ -113,7 +113,7 @@ DEFINE_COMMAND (NAME (domain)
 
 DEFINE_COMMAND (NAME (image)
 		CODE (
-		  automaton_t src = get_aut(args.args[1]);
+		  automaton_t src = get_aut(args, 1);
 		  IOAUT_CONTEXT::automaton_t a =
 		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().second_monoid().alphabet());
 		  image(src, a))
@@ -123,7 +123,7 @@ DEFINE_COMMAND (NAME (image)
 #ifdef RW_CONTEXT
 DEFINE_COMMAND (NAME (to_rw)
 		CODE (
-		  automaton_t fmp = get_aut(args.args[1]);
+		  automaton_t fmp = get_aut(args, 1);
 		  automaton_t::monoid_t m = fmp.structure().series().monoid();
 		  RW_CONTEXT::automaton_t a =
 		  RW_CONTEXT::make_automaton(m.first_monoid().alphabet(),
