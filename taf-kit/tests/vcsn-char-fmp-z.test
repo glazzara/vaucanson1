@@ -19,7 +19,7 @@ set -e
 
 VCSN=vcsn-char-fmp-z
 
-sed '/^#/d' <<EOF | vcsn-char-z --alphabet=ab define-automaton cb.xml
+sed '/^#/d' <<EOF | vcsn-char-z --alphabet=ab edit-automaton cb.xml
 # Add states
 1
 # Add two states
@@ -61,7 +61,7 @@ res=`$VCSN eval tcz.xml bbb`
 test "x$res" = "x{2} b.b.b"
 
 
-sed '/^#/d' <<EOF | $VCSN -aletters -Aascii define-automaton foo.xml
+sed '/^#/d' <<EOF | $VCSN -aletters -Aascii edit-automaton foo.xml
 # Add states
 1
 # Add 3 states

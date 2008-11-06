@@ -471,35 +471,5 @@ static int edit_automaton_command (const arguments_t& args)
   return 0;
 }
 
-/// Define Automaton command ; let the user define an automaton from scratch.
-static int define_automaton_command (const arguments_t& args)
-{
-  using namespace CONTEXT_NAMESPACE;
-  using namespace vcsn;
-  using namespace vcsn::tools;
-  using namespace vcsn::xml;
-
-  std::ofstream output (args.args[1]);
-
-  if (not output.good ())
-  {
-    warn ("Error opening `" << args.args[1] << "'.");
-    return -1;
-  }
-
-# ifndef WITH_TWO_ALPHABETS
-  automaton_t a = make_automaton (get_alphabet (args.alphabet));
-# else
-  automaton_t a = make_automaton (get_first_alphabet (args.alphabet),
-				  get_second_alphabet (args.alphabet2));
-# endif // !WITH_TWO_ALPHABETS
-
-  edition_commands::main_loop (a, args);
-  output << automaton_saver (a, string_out (), XML ()) << std::endl;
-  output.close ();
-
-  return 0;
-}
-
 
 #endif // ! EDITION_COMMANDS_HXX

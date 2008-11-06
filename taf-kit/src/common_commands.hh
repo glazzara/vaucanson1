@@ -123,13 +123,11 @@ DEFINE_COMMAND (NAME (dot_dump)
   COMMAND_GROUP (							\
     "Input/output work:",						\
 									\
-    COMMAND_ENTRY (define_automaton, File,				\
-		   "Define an automaton from scratch."),		\
     COMMAND_ENTRY (display, Aut, "Display `aut'."),			\
     COMMAND_ENTRY (dot_dump, Aut,					\
 		   "Dump dot output of `aut'."),			\
     COMMAND_ENTRY (edit_automaton, File,				\
-		   "Edit an existing automaton."),			\
+		   "Edit an automaton."),				\
     COMMAND_ENTRY (identity, Aut, "Return `aut'."),			\
     COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'."),	\
     COMMAND_ENTRY (list_automata, Nil, "List predefined automata.")	\

@@ -33,7 +33,7 @@ test `$VCSN eval $int_b "11"` = 1
 $VCSN eval $int_b "1" 2> stderr && exit 1
 grep 'Cannot parse' stderr
 
-sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 define-automaton 33.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 edit-automaton 33.xml
 # Add states
 1
 # Add two states
@@ -105,7 +105,7 @@ $VCSN are-equivalent pdm.xml pq.xml
 
 # --alphabet is required for defined-automaton; make sure
 # the error message points the user to that option.
-$VCSN define-automaton x.xml 2>stderr && exit 1
+$VCSN edit-automaton x.xml 2>stderr && exit 1
 fgrep ' --alphabet' stderr
 
 exit 0

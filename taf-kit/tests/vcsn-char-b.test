@@ -24,7 +24,7 @@ VCSN=vcsn-char-b
 ## Input/output.  ##
 ## -------------- ##
 
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton all.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton all.xml
 # Add states
 1
 # Add one state
@@ -49,10 +49,10 @@ a+b
 EOF
 
 # Empty automaton (no states).
-echo 10 | $VCSN --alphabet=ab define-automaton empty.xml
+echo 10 | $VCSN --alphabet=ab edit-automaton empty.xml
 
 # Two states, no final states (empty language).
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton 2snf.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton 2snf.xml
 # Add states
 1
 # Add two states
@@ -78,7 +78,7 @@ b
 EOF
 
 # (ab)* using one transition
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton ab.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton ab.xml
 # Add states
 1
 # Add one state
@@ -102,7 +102,7 @@ ab
 EOF
 
 # (ab)* using two transitions
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton ab2.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton ab2.xml
 # Add states
 1
 # Add two states
@@ -133,7 +133,7 @@ EOF
 
 # (0)-a->(1)-b->(2)
 # (0)----ab---->(2)
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton nondet.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton nondet.xml
 # Add states
 1
 # Add three states
@@ -171,7 +171,7 @@ EOF
 # (0)-aa->(1)
 # (0)-ab->(1)
 # (0)-b-->(1)
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton comp.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton comp.xml
 # Add states
 1
 # Add two states
@@ -213,7 +213,7 @@ EOF
 # (0)-----b---->(2)
 # (0)<----a-----(2)
 #        (1)<-b-(2)
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab define-automaton cnd.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton cnd.xml
 # Add states
 1
 # Add three states

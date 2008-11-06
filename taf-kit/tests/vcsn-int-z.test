@@ -33,7 +33,7 @@ test `$VCSN eval $int_z "11"` = 6
 $VCSN eval $int_z "1" 2> stderr && exit 1
 grep 'Cannot parse' stderr
 
-sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 define-automaton 33.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 edit-automaton 33.xml
 # Add states
 1
 # Add one state

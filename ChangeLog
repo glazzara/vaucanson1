@@ -1,5 +1,19 @@
 2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/common_commands.hh (define_automaton): Remove.
+	(edit_automaton): Adjust description.
+	* taf-kit/src/edition_commands.hh,
+	taf-kit/src/edition_commands.hxx (define_automaton): Remove.
+	* taf-kit/tests/vcsn-char-b.test,
+	taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-char-z.test,
+	taf-kit/tests/vcsn-int-b.test, taf-kit/tests/vcsn-int-fmp-z.test
+	taf-kit/tests/vcsn-int-z.test: Use edit-automaton instead
+	of define-automaton.
+
+2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/edition_commands.hxx (edit_automaton_command):
 	Start from an empty automaton if the file does not exist.
 	Also complain if the file cannot be open for output.

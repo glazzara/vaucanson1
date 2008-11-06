@@ -72,7 +72,7 @@ $VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -
 
 
 # BEWARE: we are mixing the letters O/I with the digits 0/1 below.
-sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' define-automaton oi.xml
+sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit-automaton oi.xml
 # Add states
 1
 # Add two states
@@ -117,7 +117,7 @@ test `cat out` = 72
 
 $VCSN --parser='ONE=I ZERO=O ALPHABET=01' standard '(I+O).1.(I+0)+O'
 
-echo 10 | $VCSN --alphabet=ab define-automaton empty.xml
+echo 10 | $VCSN --alphabet=ab edit-automaton empty.xml
 $VCSN eval empty.xml "ab" > out
 test `cat out` = 0
 

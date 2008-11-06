@@ -19,7 +19,7 @@ set -e
 
 VCSN=vcsn-int-fmp-z
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 define-automaton x.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit-automaton x.xml
 # Add states
 1
 # Add two states

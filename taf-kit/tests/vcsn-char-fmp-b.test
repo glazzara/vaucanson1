@@ -87,7 +87,7 @@ fail1 $VCSN is-empty t1.xml
 # The machine should eat 50 cents and give change if too much has
 # been given.
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=dvc --alphabet2=dvc define-automaton money.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=dvc --alphabet2=dvc edit-automaton money.xml
 # Add states
 1
 # Add 7 states
@@ -265,7 +265,7 @@ EOF
 # ltl.xml
 # a simple random sub-normalized automaton
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xyz define-automaton ltl.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xyz edit-automaton ltl.xml
 # Add states
 1
 # Add 3 states
@@ -336,7 +336,7 @@ diff ltl-image-sorted.xml ltl-second-projection-sorted.xml
 # regression test: check that ltl-to-pair fails when given a subnormalized
 # automaton which is not ltl.
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xy define-automaton norm.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xy edit-automaton norm.xml
 # Add states
 1
 # Add 2 states
