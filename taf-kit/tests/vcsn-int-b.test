@@ -22,7 +22,8 @@ VCSN=vcsn-int-b
 $VCSN identity $int_b
 
 # Make sure dot understands the output.
-$VCSN identity -o DOT $int_b | dot
+# Also make sure the case is ignored in the argument of -o.
+$VCSN identity -o dOt $int_b | dot
 
 test `$VCSN eval $int_b "10#11"` = 1
 

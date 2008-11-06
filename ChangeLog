@@ -1,5 +1,12 @@
 2008-11-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/main.cc (parse_opt) [-o, -i]: Ignore the case
+	of the argument.
+	* taf-kit/tests/vcsn-int-b.test: Use "-o dOt" instead of "-o DOT"
+	as a test.
+
+2008-11-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/common_commands.hh (dot-dump): Remove.
 	* taf-kit/tests/vcsn-char-b.test,
 	taf-kit/tests/vcsn-char-fmp-b.test, taf-kit/tests/vcsn-int-b.test,

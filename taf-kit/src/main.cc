@@ -28,6 +28,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <cstring>
 
 #include "argp.h"
 #include "progname.h"
@@ -209,9 +210,9 @@ namespace
 	break;
 
       case 'i':
-	if (std::string (arg).compare ("XML") == 0)
+	if (strcasecmp(arg, "XML") == 0)
 	  args.input_type = INPUT_TYPE_XML;
-	else if (std::string (arg).compare ("FSM") == 0)
+	else if (strcasecmp(arg, "FSM") == 0)
 	  args.input_type = INPUT_TYPE_FSM;
 	else
 	{
@@ -221,17 +222,17 @@ namespace
 	break;
 
       case 'o':
-	if (std::string (arg).compare ("XML") == 0)
+	if (strcasecmp(arg, "XML") == 0)
 	{
 	  args.output_aut_type = OUTPUT_TYPE_XML;
 	  args.output_exp_type = OUTPUT_TYPE_XML;
 	}
-	else if (std::string (arg).compare ("FSM") == 0)
+	else if (strcasecmp(arg, "FSM") == 0)
 	{
 	  args.output_aut_type = OUTPUT_TYPE_FSM;
 	  args.output_exp_type = OUTPUT_TYPE_FSM;
 	}
-	else if (std::string (arg).compare ("DOT") == 0)
+	else if (strcasecmp(arg, "DOT") == 0)
 	{
 	  args.output_aut_type = OUTPUT_TYPE_DOT;
 	  args.output_exp_type = OUTPUT_TYPE_DOT;
