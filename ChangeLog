@@ -1,5 +1,13 @@
 2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/tests/defs.in (automata_dir, a1, b1, c1, t1, u1):
+	Remove these variables, we don't need these explicit paths anymore.
+	* taf-kit/tests/vcsn-char-b.test, taf-kit/tests/vcsn-char-z.test,
+	taf-kit/tests/vcsn-char-fmp-b.test: Adjust these test to
+	refer to a1.xml, b1.xml, etc. directly.
+
+2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Get rid of dump-automaton. The command "dump-automaton file.xml"
 	can now be replaced by "identity file.xml" if there is no
 	"file.xml" in the current directory.

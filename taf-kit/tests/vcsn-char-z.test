@@ -23,8 +23,8 @@ VCSN=vcsn-char-z
 ## Input/output work with automata.  ##
 ## --------------------------------- ##
 
-$VCSN dot-dump $c1
-$VCSN info $c1
+$VCSN dot-dump c1.xml
+$VCSN info c1.xml
 
 ## ---------------------------------- ##
 ## Tests and evaluation on automata.  ##
@@ -33,19 +33,19 @@ $VCSN info $c1
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-#  $VCSN are-isomorphic $c1 $c1
+#  $VCSN are-isomorphic c1.xml c1.xml
 #
-test $($VCSN eval $c1 bababa) -eq 42
-      $VCSN is-ambiguous $c1
-fail1 $VCSN is-empty $c1
-      $VCSN is-realtime $c1
-fail1 $VCSN is-standard $c1
+test $($VCSN eval c1.xml bababa) -eq 42
+      $VCSN is-ambiguous c1.xml
+fail1 $VCSN is-empty c1.xml
+      $VCSN is-realtime c1.xml
+fail1 $VCSN is-standard c1.xml
 fail1 $VCSN is-standard $void_z_automaton
       $VCSN is-standard $standard_c1
       $VCSN -a ab standard '({2} a).({4} 1)' > 2a_41.xml
       $VCSN is-standard 2a_41.xml
 
-      $VCSN is-complete $c1
+      $VCSN is-complete c1.xml
 fail1 $VCSN is-complete $void_z_automaton
       $VCSN complete $void_z_automaton \| is-complete -
 

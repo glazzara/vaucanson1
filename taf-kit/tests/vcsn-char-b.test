@@ -307,13 +307,13 @@ done
 # defined.
 #
 # are-isomorphic
-#      $VCSN are-isomorphic $a1 $a1
-#fail1 $VCSN are-isomorphic $a1 $b1
+#      $VCSN are-isomorphic a1.xml a1.xml
+#fail1 $VCSN are-isomorphic a1.xml b1.xml
 
 # eval
-test "$($VCSN eval $a1 'a')" = 0
-test "$($VCSN eval $a1 'ab')" = 1
-test "$($VCSN eval $a1 'aaaabbb')" = 1
+test "$($VCSN eval a1.xml 'a')" = 0
+test "$($VCSN eval a1.xml 'ab')" = 1
+test "$($VCSN eval a1.xml 'aaaabbb')" = 1
 
 # is-ambiguous
       $VCSN is-ambiguous $ambiguous1
@@ -321,8 +321,8 @@ test "$($VCSN eval $a1 'aaaabbb')" = 1
 fail1 $VCSN is-ambiguous $non_ambiguous1
 
 # is-complete
-fail1 $VCSN is-complete $a1
-      $VCSN complete $a1 \| is-complete -
+fail1 $VCSN is-complete a1.xml
+      $VCSN complete a1.xml \| is-complete -
 
 # comp is not realtime so is-complete should complain
       $VCSN is-complete comp.xml 2>stderr && exit 1
@@ -334,8 +334,8 @@ fail1 $VCSN realtime comp.xml \| is-complete -
       $VCSN is-complete cnd.xml
 
 # is-deterministic
-fail1 $VCSN is-deterministic $a1
-      $VCSN determinize $a1 \| is-deterministic -
+fail1 $VCSN is-deterministic a1.xml
+      $VCSN determinize a1.xml \| is-deterministic -
 fail1 $VCSN is-deterministic cnd.xml
 
 # nondet is not realtime so is-determinisitic should complain
@@ -345,7 +345,7 @@ fail1 $VCSN realtime nondet.xml \| is-deterministic -
       $VCSN determinize nondet.xml \| is-deterministic -
 
 # is-empty.
-fail1 $VCSN is-empty $a1
+fail1 $VCSN is-empty a1.xml
       $VCSN is_empty empty.xml
 fail1 $VCSN is_empty all.xml
 fail1 $VCSN is-empty 2snf.xml
@@ -356,12 +356,12 @@ fail1 $VCSN has-succ-comp 2snf.xml
       $VCSN has-succ-comp all.xml
 
 # is-normalized.
-#fail1 $VCSN is-normalized $a1
-#      $VCSN normalize $a1 | $VCSN is-normalized -
+#fail1 $VCSN is-normalized a1.xml
+#      $VCSN normalize a1.xml | $VCSN is-normalized -
 
 # realtime and is-realtime
 
-      $VCSN is-realtime $a1
+      $VCSN is-realtime a1.xml
 fail1 $VCSN is-realtime ab.xml
       $VCSN realtime ab.xml \| is-realtime -
 
@@ -389,17 +389,17 @@ fail1 test "`$VCSN is-realtime $initialseries`" = 1
       # $VCSN realtime $initialseries   is bogus currently.
 
 # is-standard
-fail1 $VCSN is-standard $a1
+fail1 $VCSN is-standard a1.xml
 fail1 $VCSN is-standard $void_b_automaton
-      $VCSN standardize $a1 \| is-standard -
+      $VCSN standardize a1.xml \| is-standard -
       $VCSN standard -a ab "1" \| standardize - \| is-standard -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
 
-$VCSN product $a1 $a1 \| identity -
-$VCSN concatenate $a1 $a1 \| identity -
+$VCSN product a1.xml a1.xml \| identity -
+$VCSN concatenate a1.xml a1.xml \| identity -
 
 $VCSN quotient empty.xml \| is-empty -
 

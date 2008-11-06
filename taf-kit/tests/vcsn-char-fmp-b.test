@@ -23,8 +23,8 @@ VCSN=vcsn-char-fmp-b
 ## Input/output work with transducers.  ##
 ## ------------------------------------ ##
 
-$VCSN dot-dump $t1
-$VCSN info $t1
+$VCSN dot-dump t1.xml
+$VCSN info t1.xml
 
 
 ## ------------------------------------- ##
@@ -34,9 +34,9 @@ $VCSN info $t1
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
 # defined.
-#  $VCSN are-isomorphic $t1 $t1
-      $VCSN is-sub-normalized $t1
-fail1 $VCSN is-empty $t1
+#  $VCSN are-isomorphic t1.xml t1.xml
+      $VCSN is-sub-normalized t1.xml
+fail1 $VCSN is-empty t1.xml
 
 
 
@@ -46,11 +46,11 @@ fail1 $VCSN is-empty $t1
 
 
 ## Composition test on boolean transducers
-  $VCSN compose $t1 $u1 > tmp1.xml
+  $VCSN compose t1.xml u1.xml > tmp1.xml
 #FIXME: Disable xml diff
-#  diff tmp1.xml $t1_compose_u1
+#  diff tmp1.xml t1.xml_compose_u1
 
-  $VCSN u_compose $t1 $u1 > tmp2.xml
+  $VCSN u_compose t1.xml u1.xml > tmp2.xml
 
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
@@ -68,15 +68,15 @@ fail1 $VCSN is-empty $t1
 # as long as this algorithm is not correctly
 # defined.
 ## Inversion of t1
-#  $VCSN invert $t1 \| are-isomorphic $inverted_t1 -
+#  $VCSN invert t1.xml \| are-isomorphic $inverted_t1 -
 
-  input=`$VCSN eval $t1 abba`
-  $VCSN domain $t1 | vcsn-char-b eval - abba
-  $VCSN image $t1 | vcsn-char-b eval - $input
+  input=`$VCSN eval t1.xml abba`
+  $VCSN domain t1.xml | vcsn-char-b eval - abba
+  $VCSN image t1.xml | vcsn-char-b eval - $input
 
-  $VCSN to-rw $t1
+  $VCSN to-rw t1.xml
 
-  $VCSN eval-aut $t1 $a1 | vcsn-char-b eval - yx
+  vcsn-char-b identity a1.xml | $VCSN eval-aut t1.xml - | vcsn-char-b eval - yx
 
 
 
