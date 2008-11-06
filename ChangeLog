@@ -1,5 +1,11 @@
 2008-11-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Change default empty word representation for FMP.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx
+	  (monoid_rep): Affect the "1" string to the `empty' attribute.
+
+2008-11-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add specialization of monoid_rep for int letters.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
 	  Inlude `alphabet_set.hh'. Add predeclaration of `FreeMonoid'. Add

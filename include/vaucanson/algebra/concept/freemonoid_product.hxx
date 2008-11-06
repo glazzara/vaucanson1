@@ -29,7 +29,9 @@ namespace vcsn {
     open_par("("),
     sep(","),
     close_par(")")
-    {}
+    {
+      empty = "1";
+    }
 
     template <typename F, typename S>
     bool
