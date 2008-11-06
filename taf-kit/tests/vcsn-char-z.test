@@ -23,7 +23,7 @@ VCSN=vcsn-char-z
 ## Input/output work with automata.  ##
 ## --------------------------------- ##
 
-$VCSN dot-dump c1.xml
+$VCSN identity -o DOT c1.xml | dot
 $VCSN info c1.xml
 
 ## ---------------------------------- ##

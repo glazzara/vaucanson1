@@ -22,7 +22,7 @@ VCSN=vcsn-int-z
 $VCSN identity $int_z
 
 # Make sure dot understands the output.
-$VCSN dot-dump $int_z | dot
+$VCSN identity $int_z -o DOT | dot
 
 test `$VCSN eval $int_z "10#11"` = 3
 

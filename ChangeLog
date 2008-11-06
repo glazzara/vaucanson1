@@ -1,3 +1,10 @@
+2008-11-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/common_commands.hh (dot-dump): Remove.
+	* taf-kit/tests/vcsn-char-b.test,
+	taf-kit/tests/vcsn-char-fmp-b.test, taf-kit/tests/vcsn-int-b.test,
+	taf-kit/tests/vcsn-int-z.test: Use identity -o DOT instead.
+
 2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/main.cc (options): Typo in the description of -o.

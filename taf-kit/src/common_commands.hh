@@ -32,7 +32,6 @@
 # endif
 # include <vaucanson/xml/XML.hh>
 # include <vaucanson/tools/dot_display.hh>
-# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/algorithms/isomorph.hh>
 # include <vaucanson/algorithms/is_empty.hh>
 # include <vaucanson/algorithms/has_succ_comp.hh>
@@ -111,21 +110,11 @@ DEFINE_COMMAND (NAME (display)
 		OUTPUT ("")
 		RETURNVALUE ((b ? 0 : 1)));
 
-DEFINE_COMMAND (NAME (dot_dump)
-		CODE (
-		  vcsn::tools::dot_dump(std::cout,
-					get_aut(args, 1),
-					"A"))
-		OUTPUT ("")
-		RETURNVALUE (0));
-
 # define USE_IO_COMMAND_GROUP()						\
   COMMAND_GROUP (							\
     "Input/output work:",						\
 									\
     COMMAND_ENTRY (display, Aut, "Display `aut'."),			\
-    COMMAND_ENTRY (dot_dump, Aut,					\
-		   "Dump dot output of `aut'."),			\
     COMMAND_ENTRY (edit_automaton, File,				\
 		   "Edit an automaton."),				\
     COMMAND_ENTRY (identity, Aut, "Return `aut'."),			\

@@ -23,7 +23,7 @@ VCSN=vcsn-char-fmp-b
 ## Input/output work with transducers.  ##
 ## ------------------------------------ ##
 
-$VCSN dot-dump t1.xml
+$VCSN identity -o DOT t1.xml | dot
 $VCSN info t1.xml
 
 

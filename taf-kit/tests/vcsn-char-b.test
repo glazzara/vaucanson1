@@ -284,7 +284,7 @@ AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml nondet.xml comp.xml cnd.xml'
 
 # Check that dot accepts the output.
 for a in $AUTOMATA; do
-  $VCSN dot-dump $a | dot
+  $VCSN identity $a -o DOT | dot
 done
 
 # Check that each builtin automaton can be read.
