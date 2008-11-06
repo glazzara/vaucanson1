@@ -85,13 +85,13 @@ static int list_automata_command (const arguments_t& args)
   closedir (directory);
   echo ("The following automata are predefined:");
   for_all (std::set<std::string>, ifile, files)
-    echo ("  - " << ifile->substr (0, ifile->size () - 4));
+    echo ("  - " << *ifile);
   return 0;
 }
 
 static int dump_automaton_command (const arguments_t& args)
 {
-  std::string file = get_automata_path (args) + "/" + args.args[1] + ".xml";
+  std::string file = get_automata_path (args) + "/" + args.args[1];
   std::ifstream in (file.c_str ());
 
   if (in.fail ())

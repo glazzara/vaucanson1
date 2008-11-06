@@ -1,5 +1,15 @@
 2008-10-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Use the .xml suffix with list-automata and dump-automaton.
+
+	* taf-kit/src/library_commands.hh (list_automata_command):
+	Do not strip the ".xml" suffix from the display.
+	(dump_automaton_command): Do not append the ".xml" suffix
+	the the user's input.
+	* taf-kit/tests/vcsn-char-b.test: Adjust.
+
+2008-10-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/commands_macros.hh (DEFINE_IS_PROPERTY_COMMAND):
 	s/Entry/Input/.
 	* taf-kit/src/common_commands.hh (has_succ_comp): Likewise.
