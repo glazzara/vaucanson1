@@ -92,7 +92,7 @@ namespace
     { "input-type", 'i', "INPUT_TYPE", 0,
       "Automaton input type (FSM or XML)", 0 },
     { "output-type", 'o', "OUTPUT_TYPE", 0,
-      "Automaton input type (FSM, XML or DOT)", 0 },
+      "Automaton output type (FSM, XML or DOT)", 0 },
 
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,

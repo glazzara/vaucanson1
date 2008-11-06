@@ -1,5 +1,9 @@
 2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/main.cc (options): Typo in the description of -o.
+
+2008-11-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/common_commands.hh (define_automaton): Remove.
 	(edit_automaton): Adjust description.
 	* taf-kit/src/edition_commands.hh,
