@@ -1,3 +1,10 @@
+2008-10-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/commands_macros.hh (DEFINE_IS_PROPERTY_COMMAND):
+	s/Entry/Input/.
+	* taf-kit/src/common_commands.hh (has_succ_comp): Likewise.
+	(empty): Use DEFINE_IS_PROPERTY_COMMAND.
+
 2008-11-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix Taf-Kit build.

@@ -81,18 +81,14 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
 		   : "Automata are not isomorphic\n"))
 		RETURNVALUE (b ? 0 : 1));
 */
-DEFINE_COMMAND (NAME (is_empty)
-		CODE (
-		      bool empty = is_empty (get_aut (args.args[1])))
-		OUTPUT_ON_VERBOSE (
-		  (empty ? "Entry is empty\n" : "Entry is not empty\n"))
-		RETURNVALUE (empty ? 0: 1));
+
+DEFINE_IS_PROPERTY_COMMAND(empty);
 
 DEFINE_COMMAND (NAME (has_succ_comp)
 		CODE (
                       bool succ_comp = has_succ_comp (get_aut (args.args[1])))
 		OUTPUT_ON_VERBOSE (
-		  (succ_comp ? "Entry has successful computation\n" : "Entry has no successful computation\n"))
+		  (succ_comp ? "Input has successful computation\n" : "Input has no successful computation\n"))
 		RETURNVALUE (succ_comp ? 0: 1));
 
 DEFINE_COMMAND (NAME (info)

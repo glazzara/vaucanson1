@@ -109,8 +109,8 @@
 		  CODE (						\
 		    bool b = is_ ## Property (get_aut (args.args[1])))	\
 		  OUTPUT_ON_VERBOSE (					\
-		    (b ? "Entry is " # Property "\n":			\
-		     "Entry is not " # Property "\n"))			\
+		    (b ? "Input is " # Property "\n":			\
+		     "Input is not " # Property "\n"))			\
 		  RETURNVALUE (b ? 0 : 1))
 
 /*-----------------------------------------------.
