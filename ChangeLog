@@ -1,3 +1,16 @@
+2008-11-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add op_parse operator for AlphabetSet.
+	* include/vaucanson/algebra/concept/alphabets_base.hh: Cosmetic
+	  changes. Add `op_parse' for `AlphabetSetBase'.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Cosmetic
+	  changes. Add implementation of `op_parse'.
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hh,
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx:
+	  Add a greedy letter parser for `AlphabetSet'.
+	* include/vaucanson/algebra/implementation/alphabets/alphabets.hh:
+	  Cosmetic changes. Include `utility'.
+
 2008-11-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/NEWS.txt: Summarize recent TAF-Kit changes.

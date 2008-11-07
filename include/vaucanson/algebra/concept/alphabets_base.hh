@@ -188,19 +188,25 @@ namespace vcsn {
     //@}
   };
 
-  namespace algebra {
+  namespace algebra
+  {
+    /// Implementation of a parser to return a letter.
+    template <typename S, typename L>
+    L op_parse(const AlphabetSetBase<S>& s,
+	       const std::string&,
+	       size_t&);
 
     /// Implementation of generic stream output operator for alphabets.
-    template<typename S, typename St, typename T>
-    St& op_rout(const algebra::AlphabetSetBase<S>& s, St& st, const T& a);
+    template <typename S, typename St, typename T>
+    St& op_rout(const AlphabetSetBase<S>& s, St& st, const T& a);
 
     /// Implementation of generic letter equality modulo meta-characters.
     template <typename S, typename T, typename L>
-    bool op_letter_equality(const algebra::AlphabetSetBase<S>& s,
+    bool op_letter_equality(const AlphabetSetBase<S>& s,
 			    const T& a,
 			    L lhs,
 			    L rhs);
-  } // algebra
+  } // ! algebra
 
   /** @} */
   /** @} */

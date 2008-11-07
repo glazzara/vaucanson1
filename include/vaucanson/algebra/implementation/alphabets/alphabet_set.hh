@@ -95,6 +95,12 @@ namespace vcsn {
   namespace algebra {
 
     template <typename L>
+    std::pair<bool, L> op_parse(const AlphabetSet<L>&,
+				const std::set<L>&,
+				const std::string&,
+				size_t&);
+
+    template <typename L>
     size_t op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&);
 
     template <typename L>

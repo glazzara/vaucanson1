@@ -17,17 +17,15 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HXX
 
+# include <limits>
+
 # include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/algebra/implementation/alphabets/alphabet_set.hh>
 
-# include <limits>
-
 namespace vcsn
 {
-
   namespace algebra
   {
-
     /*----------------------------------------.
     | Projections for types that support them |
     `----------------------------------------*/
@@ -105,8 +103,47 @@ namespace vcsn
       return a.find(v) != a.end();
     }
 
+    template <typename L>
+    std::pair<bool, L>
+    op_parse(const AlphabetSet<L>& s,
+	     const std::set<L>& v,
+	     const std::string& in,
+	     size_t& pos)
+    {
+      // Type helpers.
+      typedef std::string::const_iterator iter_t;
+
+      // Return values.
+      bool ret = false;
+      L ret_letter;
+      size_t ret_pos = pos;
+
+      // Temporaries.
+      size_t current_pos = pos;
+      std::string current_letter_rep = "";
+      L current_letter;
+
+      for (iter_t i = in.begin(); i != in.end(); ++i)
+      {
+	current_letter_rep += *i;
+	++current_pos;
+	current_letter = letter_traits<L>::
+	literal_to_letter(current_letter_rep);
+
+	if (op_contains_e(s, v, current_letter))
+	{
+	  ret = true;
+	  ret_letter = current_letter;
+	  ret_pos = current_pos;
+	}
+      }
+
+      pos = ret_pos;
+      return std::make_pair(ret, ret_letter);
+    }
+
   }
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABET_SET_HXX

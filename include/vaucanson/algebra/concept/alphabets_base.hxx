@@ -159,7 +159,17 @@ namespace vcsn {
     MetaElement<Structure<S>, T>(other)
   {}
 
-  namespace algebra {
+  namespace algebra
+  {
+
+    template <typename S, typename L>
+    L op_parse(const AlphabetSetBase<S>&,
+	       const std::string&,
+	       size_t&)
+    {
+      static_error(no_op_parse_operator_available);
+      return 0;
+    }
 
     template <typename S, typename T, typename L>
     bool op_letter_equality(const algebra::AlphabetSetBase<S>& s,

@@ -17,13 +17,15 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABETS_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABETS_HH
 
-# include <vaucanson/algebra/concept/alphabets_base.hh>
 # include <set>
+# include <utility>
 
-namespace vcsn {
+# include <vaucanson/algebra/concept/alphabets_base.hh>
 
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     /** @addtogroup algebra *//** @{ */
     /** @addtogroup alphabet *//** @{ */
 
@@ -32,7 +34,7 @@ namespace vcsn {
     `---------------*/
 
     /// Static implementation of alphabet structural element.
-    template<typename L>
+    template <typename L>
     struct AlphabetSet
       : AlphabetSetBase<AlphabetSet<L> >
     {
@@ -61,6 +63,6 @@ namespace vcsn {
   /** @} */
   /** @} */
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_ALPHABETS_HH
