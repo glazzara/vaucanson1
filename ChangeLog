@@ -1,3 +1,10 @@
+2008-11-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a typo in str_words.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx
+	  (op_rout): Remove parenthesis to the `concat' attribute to fix
+	  compilation.
+
 2008-11-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Redesign op_parse system for monoid.

@@ -92,7 +92,7 @@ namespace vcsn {
 	st << *i;
 	while (i != v.end())
 	{
-	  st << s.representation()->concat() << *i;
+	  st << s.representation()->concat << *i;
 	  i++;
 	}
       }
