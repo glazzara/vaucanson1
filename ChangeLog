@@ -1,3 +1,41 @@
+2008-11-07  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Redesign op_parse system for monoid.
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/getters.hxx,
+	* include/vaucanson/tools/fsm_load.hxx,
+	* include/vaucanson/xml/contexts/fmp.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Remove two
+	  function parameters in parse_word.
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx,
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concept/letter.hxx: Make
+	  literal_to_letter return a std::pair<bool, letter_t> to handle
+	  parsing errors and fix functions that use it.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	  Make literal_to_letter return a std::pair<bool, letter_t> to
+	  handle parsing errors, fix functions that use it and remove
+	  old implementation of op_parse.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh,
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx,
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh,
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  Add concat to monoid_rep.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx: Add
+	* the new implementation of op_parse.
+	* src/tests/include/tests/automata/implementation_check/epsilon_label_representation_test.hh:
+	  Fix test.
+
 2008-11-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add op_parse operator for AlphabetSet.

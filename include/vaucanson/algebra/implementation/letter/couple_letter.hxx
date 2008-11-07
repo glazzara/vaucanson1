@@ -20,6 +20,7 @@
 
 # include <stdexcept>
 # include <sstream>
+# include <utility>
 
 # include <vaucanson/algebra/implementation/letter/couple_letter.hh>
 
@@ -51,13 +52,16 @@ namespace vcsn {
       typedef V second_projection_t;
 
       static
-      std::pair<U, V>
+      std::pair<bool, std::pair<U, V> >
       literal_to_letter(const std::string& str)
       {
 	std::stringstream sstr(str);
 	std::pair<U, V> ret;
 	sstr >> ret;
-	return ret;
+	if (sstr.eof())
+	  return std::make_pair(true, ret);
+	else
+	  return std::make_pair(false, std::make_pair(0,0));
       }
 
       static
@@ -74,51 +78,6 @@ namespace vcsn {
       static int dim() { return 2; }
 
     };
-
-    // Specialization for pairs.
-    // FIXME: we should share the taf-kit parser with letters op_parse.
-    // FIXME: this parser is very weak.
-    template <typename S, typename U, typename V, typename CharContainer>
-    bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		  std::basic_string< std::pair<U, V> >& v,
-		  const std::string& s,
-		  typename std::string::const_iterator& i,
-		  const CharContainer&)
-    {
-      while (i != s.end())
-      {
-	if (*i != '(')
-	  break ;
-
-	std::string sub(i, s.end());
-	std::stringstream is(sub);
-
-	std::pair<U,V> p;
-	is >> p;
-	int pos = is.tellg();
-
-	// We didn't parse anything.
-	if (pos == 0)
-	  break;
-
-	// Unknown letter.
-	if (!set.alphabet().contains(p))
-	{
-	  std::stringstream sstr;
-	  sstr << p;
-	  throw std::logic_error(std::string("Letter not in the alphabet: ") + sstr.str());
-	}
-
-	// Advance the iterator.
-	for (int k = 0; k < pos; ++k)
-	  ++i;
-
-	// Concatenate the letter.
-	v += p;
-      }
-
-      return (i == s.end());
-    }
 
   } // ! algebra
 

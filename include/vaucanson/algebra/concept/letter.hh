@@ -20,6 +20,7 @@
 
 # include <string>
 # include <vector>
+# include <utility>
 
 # include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/misc/static.hh>
@@ -56,7 +57,7 @@ namespace vcsn {
 
       /// Provide a way to create a letter from its literal
       /// representation:
-      static L literal_to_letter(const std::string&);
+      static std::pair<bool, L> literal_to_letter(const std::string&);
 
       /// Provide a way to represent a letter.
       static std::string letter_to_literal(const L&);

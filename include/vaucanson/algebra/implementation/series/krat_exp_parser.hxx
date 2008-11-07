@@ -102,9 +102,8 @@ namespace vcsn
 		    + "' is already defined as a weight.\n";
 	for (unsigned i = 0; i < token_tab_.size(); i++)
 	{
-	  sit = token_tab_[i].begin();
 	  monoid_elt_t w(e_.structure().monoid());
-	  if (parse_word(w, token_tab_[i], sit, std::set<char>()))
+	  if (parse_word(w, token_tab_[i]))
 	    error_ +=  "Warning : the token '" + token_tab_[i]
 		       + "' is already defined as a word.\n";
 	}
@@ -155,8 +154,7 @@ namespace vcsn
       {
 	monoid_elt_t w(e_.structure().monoid());
 	std::string s = from_.substr(curr, it - curr);
-	std::string::const_iterator sit = s.begin();
-	if (parse_word(w, s, sit, std::set<char>()))
+	if (parse_word(w, s))
 	{
 	  Element<S, T> ww = (w.value().empty() ?
 			      identity_as<T>::of(e_.structure()) :

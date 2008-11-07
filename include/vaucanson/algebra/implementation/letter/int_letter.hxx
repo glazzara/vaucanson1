@@ -19,6 +19,7 @@
 
 # include <sstream>
 # include <climits>
+# include <utility>
 
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
@@ -44,13 +45,16 @@ namespace vcsn {
       typedef undefined_type second_projection_t;
 
       static
-      int
+      std::pair<bool, int>
       literal_to_letter(const std::string& str)
       {
 	std::stringstream sstr(str);
-	int ret;
+	int ret = 0;
 	sstr >> ret;
-	return ret;
+	if (sstr.eof())
+	  return std::make_pair(true, ret);
+	else
+	  return std::make_pair(false, 0);
       }
 
       static
@@ -67,46 +71,6 @@ namespace vcsn {
       static int dim() { return 1; }
 
     };
-
-    template <typename S, typename CharContainer>
-    bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		  std::basic_string<int>& v,
-		  const std::string& s,
-		  typename std::string::const_iterator& i,
-		  const CharContainer&)
-    {
-      typename std::string::const_iterator j = i;
-      typename std::string::const_iterator back;
-
-      while (i != s.end()) {
-	std::string out;
-	back = i;
-
-	while ((i != s.end()) && (((*i >= '0') && (*i <= '9')) || (*i == '#')))
-	  if (*i == '#') {
-	    ++i;
-	    break;
-	  }
-	  else {
-	    out += *i;
-	    ++i;
-	  }
-
-	if (out.empty())
-	  break;
-
-	int value;
-	std::istringstream is(out);
-	is >> value;
-
-	if (!set.alphabet().contains(value)) {
-	  i = back;
-	  break ;
-	}
-	v.push_back(value);
-      }
-      return (i != j);
-    }
 
   } // ! algebra
 

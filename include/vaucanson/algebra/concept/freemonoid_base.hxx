@@ -151,14 +151,12 @@ namespace vcsn {
     return ret;
   }
 
-  template <typename S, typename T, typename CharContainer>
+  template <typename S, typename T>
   bool
   parse_word(Element<S, T>& dest,
-	     const std::string& s,
-	     typename std::string::const_iterator& i,
-	     const CharContainer& escaped)
+	     const std::string& s)
   {
-    return op_parse(dest.structure(), dest.value(), s, i, escaped);
+    return op_parse(dest.structure(), dest.value(), s);
   }
 
   template<typename S, typename T>
@@ -186,12 +184,10 @@ namespace vcsn {
     | Default Operators |
     `------------------*/
 
-    template <typename S, typename T, typename CharContainer>
+    template <typename S, typename T>
     bool op_parse(const algebra::FreeMonoidBase<S>&,
 		  T& v,
-		  const std::string& s,
-		  typename std::string::const_iterator& i,
-		  const CharContainer& escaped)
+		  const std::string& s)
     {
       static_error(no_op_parse_operator_available);
       return false;

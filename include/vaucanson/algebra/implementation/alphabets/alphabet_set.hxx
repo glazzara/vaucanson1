@@ -121,19 +121,17 @@ namespace vcsn
       // Temporaries.
       size_t current_pos = pos;
       std::string current_letter_rep = "";
-      L current_letter;
 
-      for (iter_t i = in.begin(); i != in.end(); ++i)
+      for (iter_t i = in.begin() + pos; i != in.end(); ++i)
       {
+	std::pair<bool, L> tmp;
 	current_letter_rep += *i;
 	++current_pos;
-	current_letter = letter_traits<L>::
-	literal_to_letter(current_letter_rep);
-
-	if (op_contains_e(s, v, current_letter))
+	tmp = letter_traits<L>::literal_to_letter(current_letter_rep);
+	if (tmp.first && op_contains_e(s, v, tmp.second))
 	{
 	  ret = true;
-	  ret_letter = current_letter;
+	  ret_letter = tmp.second;
 	  ret_pos = current_pos;
 	}
       }

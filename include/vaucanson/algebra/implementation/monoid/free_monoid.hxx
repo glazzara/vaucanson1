@@ -28,6 +28,7 @@ namespace vcsn
     monoid_rep<FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >()
     {
       empty = "e";
+      concat = "#";
     }
 
     /*--------------.

@@ -32,14 +32,6 @@ namespace vcsn
     template <>
     struct letter_traits<char>;
 
-    // Specialization for char type.
-    template <typename S, typename CharContainer>
-    bool op_parse(const FreeMonoid<S>& s,
-		  std::basic_string<char>& v,
-		  const std::string& in,
-		  typename std::string::const_iterator& i,
-		  const CharContainer& escaped);
-
   } // ! algebra
 
 } // ! vcsn

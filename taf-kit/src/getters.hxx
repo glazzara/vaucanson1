@@ -110,8 +110,7 @@ get_word(Element<S, T>& aut, const std::string& s)
 {
   Element<monoid_t, std::basic_string<letter_t> > w(aut.structure().series().monoid());
 
-  std::string::const_iterator i = s.begin();
-  if (!parse_word(w, s, i, std::set<char>()))
+  if (!parse_word(w, s))
     {
       std::cerr << "FATAL: Cannot parse " << s << std::endl;
       exit(1);

@@ -26,6 +26,40 @@ namespace vcsn {
 
   namespace algebra {
 
+    template <typename A>
+    bool
+    op_parse(const FreeMonoid<A>& s,
+	     std::basic_string<typename A::letter_t>& v,
+	     const std::string& in)
+    {
+      int last_op = 0;
+
+      for (size_t i = 0; i < in.size();)
+	if (!in.compare(i, s.representation()->empty.size(), s.representation()->empty))
+	{
+	  last_op = 1;
+	  i += s.representation()->empty.size();
+	}
+	else
+	  if (!s.representation()->concat.empty() &&
+	      !in.compare(i, s.representation()->concat.size(), s.representation()->concat))
+	  {
+	    if (last_op == 0 || last_op == 2)
+	      return false;
+	    last_op = 2;
+	    i += s.representation()->concat.size();
+	  }
+	  else
+	  {
+	    last_op = 3;
+	    std::pair<bool, typename A::letter_t> letter = op_parse(s.alphabet().structure(), s.alphabet().value(), in, i);
+	    if (!letter.first)
+	      return (letter.first);
+	    v.push_back(letter.second);
+	  }
+      return (last_op != 2);
+    }
+
     template<typename A>
     void
     op_in_mul(const algebra::FreeMonoid<A>&,
@@ -53,7 +87,15 @@ namespace vcsn {
       if (v.empty())
 	st << s.representation()->empty;
       else
-	st << v;
+      {
+	typename std::basic_string<typename A::letter_t>::const_iterator i = v.begin();
+	st << *i;
+	while (i != v.end())
+	{
+	  st << s.representation()->concat() << *i;
+	  i++;
+	}
+      }
 
       return st;
     }
@@ -116,8 +158,7 @@ namespace vcsn {
     {
       Element<algebra::FreeMonoid<A>,
 	      std::basic_string<typename A::letter_t> > x(mon);
-      std::string::const_iterator i = str.begin();
-      parse_word(x, str, i, std::set<char>());
+      parse_word(x, str);
       return x.value();
     }
 

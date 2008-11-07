@@ -19,6 +19,7 @@
 
 # include <string>
 # include <vector>
+# include <utility>
 
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/concept/letter.hh>
@@ -45,10 +46,10 @@ namespace vcsn {
 
     // Dummy implementation.
     template <typename L>
-    L
+    std::pair<bool, L>
     letter_traits<L>::literal_to_letter(const std::string&)
     {
-      return 0;
+      return std::make_pair(false, 0);
     }
 
     // Dummy implementation.

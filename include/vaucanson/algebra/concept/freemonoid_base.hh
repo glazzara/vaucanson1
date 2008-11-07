@@ -157,23 +157,19 @@ namespace vcsn {
   mirror(const Element<S, T>& e);
 
   /// Parse the beginning of the string looking for a word.
-  template <typename S, typename T, typename CharContainer>
+  template <typename S, typename T>
   bool
   parse_word(Element<S, T>& dest,
-	     const std::string& s,
-	     typename std::string::const_iterator& i,
-	     const CharContainer& escaped = CharContainer ());
+	     const std::string& s);
 
   /** @} */
   /** @} */
 
   namespace algebra {
 
-    template <typename S, typename T, typename CharContainer>
+    template <typename S, typename T>
     bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v,
-		  const std::string&,
-		  typename std::string::const_iterator&,
-		  const CharContainer& escaped);
+		  const std::string&);
 
     template<typename Self, typename T>
     void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);

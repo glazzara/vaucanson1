@@ -214,16 +214,14 @@ namespace edition_commands
     std::getline(std::cin, str1);
     Element<first_monoid_t, std::basic_string<first_monoid_t::letter_t> >
       word1(a.structure().series().monoid().first_monoid());
-    std::string::const_iterator i1 = str1.begin();
-    parse_word(word1, str1, i1, std::set<char>());
+    parse_word(word1, str1);
 
     echo_ (" Second component labeled by the word: ");
     std::string str2;
     std::getline(std::cin, str2);
     Element<second_monoid_t, std::basic_string<second_monoid_t::letter_t> >
       word2(a.structure().series().monoid().second_monoid());
-    std::string::const_iterator i2 = str2.begin();
-    parse_word(word2, str2, i2, std::set<char>());
+    parse_word(word2, str2);
 
     // Construct a series from the two components.
     semiring_elt_t weight (a.structure().series().semiring());

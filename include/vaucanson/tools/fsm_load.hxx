@@ -156,7 +156,7 @@ namespace vcsn {
 	  else
 	    automaton.add_letter_transition(to_h[i->from],
 					    to_h[i->to],
-					    vcsn::algebra::letter_traits<letter_t>::literal_to_letter(i->letter));
+					    vcsn::algebra::letter_traits<letter_t>::literal_to_letter(i->letter).second);
 	}
 	else if (i->type == final)
 	{

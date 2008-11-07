@@ -114,7 +114,7 @@ namespace vcsn {
   void
   MetaElement<algebra::AlphabetSetBase<S>, T>::insert(const std::string& lit)
   {
-    op_insert(this->structure(), this->value(), algebra::letter_traits<letter_t>::literal_to_letter(lit));
+    op_insert(this->structure(), this->value(), algebra::letter_traits<letter_t>::literal_to_letter(lit).second);
   }
 
   template<typename S, typename T>

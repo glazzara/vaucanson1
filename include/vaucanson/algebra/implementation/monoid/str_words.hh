@@ -33,6 +33,12 @@ namespace vcsn {
     `-----------------------------------------------*/
 
     template <typename A>
+    bool
+    op_parse(const FreeMonoid<A>& s,
+	     std::basic_string<typename A::letter_t>& v,
+	     const std::string& in);
+
+    template <typename A>
     void
     op_in_mul(const algebra::FreeMonoid<A>& s,
 	      std::basic_string<typename A::letter_t>& dst,

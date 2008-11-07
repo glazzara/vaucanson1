@@ -18,6 +18,7 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_CHAR_LETTER_HXX
 
 # include <string>
+# include <utility>
 
 # include <vaucanson/algebra/implementation/letter/char_letter.hh>
 
@@ -49,11 +50,13 @@ namespace vcsn
       static char default_other()   { return '#'; }
 
       static
-      char
+      std::pair<bool, char>
       literal_to_letter(const std::string& str)
       {
-	precondition(str.size() == 1);
-	return str[0];
+	if (str.size() == 1)
+	  return std::make_pair(true, str[0]);
+	else
+	  return std::make_pair(false, 0);
       }
 
       static
@@ -70,29 +73,6 @@ namespace vcsn
       static int dim() { return 1; }
 
     };
-
-    template <typename S, typename CharContainer>
-    bool op_parse(const FreeMonoid<S>& s,
-		  std::basic_string<char>& v,
-		  const std::string& in,
-		  typename std::string::const_iterator& i,
-		  const CharContainer&)
-    {
-      std::string::const_iterator j = i;
-      std::string::const_iterator k;
-
-      // Check if we are given the empty word representation.
-      if (in == s.representation()->empty)
-	return true;
-
-      // Check is every letter is in the alphabet.
-      while ((i != in.end()) && (s.alphabet().contains(*i)))
-      {
-	v += *i;
-	++i;
-      }
-      return (i != j);
-    }
 
   } // ! algebra
 

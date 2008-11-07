@@ -29,6 +29,7 @@ namespace vcsn {
     struct monoid_rep
     {
       std::string	empty;
+      std::string	concat;
 
       // Default CTOR
       monoid_rep();

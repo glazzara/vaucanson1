@@ -24,7 +24,8 @@ namespace vcsn {
 
     template <typename Monoid>
     monoid_rep<Monoid>::monoid_rep() :
-      empty("1")
+      empty("1"),
+      concat("")
     {
     }
 
@@ -33,7 +34,8 @@ namespace vcsn {
     operator==(boost::shared_ptr<monoid_rep<M> > lhs,
 	       boost::shared_ptr<monoid_rep<M> > rhs )
     {
-      return (lhs->empty == rhs->empty);
+      return (lhs->empty == rhs->empty &&
+	      lhs->concat == rhs->concat);
     }
 
   } // ! algebra

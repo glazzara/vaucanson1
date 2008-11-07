@@ -54,6 +54,7 @@ namespace vcsn
 
       /// The representation of the empty word.
       using parent_t::empty;
+      using parent_t::concat;
 
       monoid_rep();
     };

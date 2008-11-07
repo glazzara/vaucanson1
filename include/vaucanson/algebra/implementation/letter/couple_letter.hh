@@ -41,13 +41,6 @@ namespace vcsn
     template <typename U, typename V>
     struct letter_traits<std::pair<U, V> >;
 
-    // Specialization for pairs.
-    template <typename S, typename U, typename V, typename CharContainer>
-    bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		  std::basic_string<std::pair<U, V> >& v,
-		  const std::string& s,
-		  typename std::string::const_iterator& i,
-		  const CharContainer& escaped);
   } // ! algebra
 
 } // ! vcsn

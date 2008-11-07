@@ -157,16 +157,14 @@ namespace vcsn
       else if (XMLString::equals(eq_.monGen, localname))
       {
 	const std::string val(xmlstr(tools::get_attribute(attrs, "value")));
-	std::set<char> escaped;
-	std::string::const_iterator i = val.begin();
 	if (in_ == 2 && count_ == 2)
 	{
-	  if (!parse_word(m1_, val, i, escaped))
+	  if (!parse_word(m1_, val))
 	    error::attrs(localname, "value", val);
 	}
 	else if (in_ == 2 && count_ == 3)
 	{
-	  if (!parse_word(m2_, val, i, escaped))
+	  if (!parse_word(m2_, val))
 	    error::attrs(localname, "value", val);
 	}
 	else

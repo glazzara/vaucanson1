@@ -501,7 +501,7 @@ namespace vcsn {
   {
     return op_add_letter_transition(this->structure(), this->value(),
 				    src, dst, algebra::letter_traits<letter_t>::
-				    literal_to_letter(l));
+				    literal_to_letter(l).second);
   }
 
   template <typename Self, typename T>
@@ -512,7 +512,7 @@ namespace vcsn {
   {
     return op_add_letter_transition(this->structure(), this->value(),
 				    src, dst, algebra::letter_traits<letter_t>::
-				    literal_to_letter(l));
+				    literal_to_letter(l).second);
   }
 
   /** Update the label of a transition. */
