@@ -1,5 +1,14 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup char letter implementation.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hh:
+	  Remove useless includes.
+	* include/vaucanson/algebra/implementation/letter/char_letter.hxx
+	  (literal_to_letter): Rewrite the test to be more alike other
+	  parser implementations.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix the pair_to_fmp test.
 	* src/tests/include/tests/automata/algos/pair_automata/pair_to_fmp_test.hh:
 	  Update according to changes to `is_realtime' and `is_ltl' in previous

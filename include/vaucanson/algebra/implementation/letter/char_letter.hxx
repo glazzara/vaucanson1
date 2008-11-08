@@ -53,10 +53,11 @@ namespace vcsn
       std::pair<bool, char>
       literal_to_letter(const std::string& str)
       {
-	if (str.size() == 1)
-	  return std::make_pair(true, str[0]);
-	else
+	// Check for the size of the input (a char is a one sized string).
+	if (str.size() != 1)
 	  return std::make_pair(false, 0);
+
+	return std::make_pair(true, str[0]);
       }
 
       static

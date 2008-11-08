@@ -17,12 +17,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_CHAR_LETTER_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_CHAR_LETTER_HH
 
-# include <string>
-# include <iostream>
-
-# include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/concept/letter.hh>
-# include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
 
 namespace vcsn
 {
