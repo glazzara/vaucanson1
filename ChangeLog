@@ -1,5 +1,13 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a bug when printing words.
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx
+	  (op_rout): Cosmetic changes. Cleanup. Do not print the first
+	  letter twice (this bug is already catched by most tests dealing
+	  with dot files).
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup alphabet related files.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx: Cosmetic
 	  changes. (op_rout): Use internal `letter_to_literal' instead of

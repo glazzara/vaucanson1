@@ -88,12 +88,23 @@ namespace vcsn {
 	st << s.representation()->empty;
       else
       {
-	typename std::basic_string<typename A::letter_t>::const_iterator i = v.begin();
-	st << *i;
+	// Type helpers.
+	typedef typename A::letter_t letter_t;
+	typedef algebra::letter_traits<letter_t> letter_traits_t;
+	typedef typename std::basic_string<letter_t>::const_iterator iter_t;
+
+	iter_t i = v.begin();
+
+	// Print the first letter.
+	st << letter_traits_t::letter_to_literal(*i);
+	++i;
+
+	// Print the following letters using the concat string.
 	while (i != v.end())
 	{
-	  st << s.representation()->concat << *i;
-	  i++;
+	  st << s.representation()->concat
+	     << letter_traits_t::letter_to_literal(*i);
+	  ++i;
 	}
       }
 
