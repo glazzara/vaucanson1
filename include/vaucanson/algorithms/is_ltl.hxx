@@ -39,33 +39,42 @@ namespace vcsn
     // Type helper.
     AUTOMATON_TYPES(T);
 
-# define CHECK_LTL_CONDITION \
-    for_all_const_(series_set_elt_t::support_t, it, label.supp()) \
-    { \
-      if (!(((*it).first.size() == ((*it).second.size())) && \
-	    ((*it).second.size() <= 1))) \
-      return false; \
-    }
-
     for_all_const_initial_states(i, t)
     {
-      series_set_elt_t label = t.get_initial(*i);
-      CHECK_LTL_CONDITION
+      series_set_elt_t l = t.get_initial(*i);
+      if (l.supp().size() > 1)
+	return false;
+      // We assume that an initial transition cannot be labeled by
+      // the empty series.  In other words, l.size() >= 1.
+      assertion(l.supp().size() == 1);
+      monoid_elt_value_t m = *l.supp().begin();
+      if (m.first.size() > 0 || m.second.size() > 0)
+	return false;
     }
 
     for_all_const_transitions(e, t)
     {
       series_set_elt_t label = t.series_of(*e);
-      CHECK_LTL_CONDITION
+      for_all_const_(series_set_elt_t::support_t, it, label.supp())
+      {
+	if (!(((*it).first.size() == ((*it).second.size())) &&
+	      ((*it).second.size() == 1)))
+	  return false;
+      }
     }
 
     for_all_const_final_states(f, t)
     {
-      series_set_elt_t label = t.get_final(*f);
-      CHECK_LTL_CONDITION
+      series_set_elt_t l = t.get_final(*f);
+      if (l.supp().size() > 1)
+	return false;
+      // We assume that an initial transition cannot be labeled by
+      // the empty series.  In other words, l.size() >= 1.
+      assertion(l.supp().size() == 1);
+      monoid_elt_value_t m = *l.supp().begin();
+      if (m.first.size() > 0 || m.second.size() > 0)
+	return false;
     }
-
-# undef CHECK_LTL_CONDITION
 
     return true;
   }

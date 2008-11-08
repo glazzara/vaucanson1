@@ -1,5 +1,14 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix the is_ltl algorithm.
+	* include/vaucanson/algorithms/is_ltl.hxx (do_is_ltl): Remove the
+	  `CHECK_LTL_CONDITION' macro. Change the check performed on initial
+	  and final transitions.
+	* src/tests/include/tests/automata/algos/fmp_transducers/is_ltl_test.hh:
+	  Update the test to correspond to the fixed ltl semantic.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix compilation of extension_test.
 	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/extension_test.hh:
 	  Add missing argument `kind_t'.

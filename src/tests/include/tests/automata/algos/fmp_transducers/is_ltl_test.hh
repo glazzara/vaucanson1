@@ -84,40 +84,40 @@ is_ltl_test(tests::Tester& t)
 
   // We have to be carefull that final, initial, first and second are really
   // handled separately.
-  // is_ltl must be true iff `00' or `11'.
+  // is_ltl must be true iff `11'.
 
   // Test initial transitions.
-  CHECK_CASE(00, 11, 11, true);
-  CHECK_CASE(01, 11, 11, false);
-  CHECK_CASE(02, 11, 11, false);
-  CHECK_CASE(10, 11, 11, false);
-  CHECK_CASE(11, 11, 11, true);
-  CHECK_CASE(12, 11, 11, false);
-  CHECK_CASE(20, 11, 11, false);
-  CHECK_CASE(21, 11, 11, false);
-  CHECK_CASE(22, 11, 11, false);
+  CHECK_CASE(00, 11, 00, true);
+  CHECK_CASE(01, 11, 00, false);
+  CHECK_CASE(02, 11, 00, false);
+  CHECK_CASE(10, 11, 00, false);
+  CHECK_CASE(11, 11, 00, false);
+  CHECK_CASE(12, 11, 00, false);
+  CHECK_CASE(20, 11, 00, false);
+  CHECK_CASE(21, 11, 00, false);
+  CHECK_CASE(22, 11, 00, false);
 
   // Test normal transitions.
-  CHECK_CASE(11, 00, 11, true);
-  CHECK_CASE(11, 01, 11, false);
-  CHECK_CASE(11, 02, 11, false);
-  CHECK_CASE(11, 10, 11, false);
-  CHECK_CASE(11, 11, 11, true);
-  CHECK_CASE(11, 12, 11, false);
-  CHECK_CASE(11, 20, 11, false);
-  CHECK_CASE(11, 21, 11, false);
-  CHECK_CASE(11, 22, 11, false);
+  CHECK_CASE(00, 00, 00, false);
+  CHECK_CASE(00, 01, 00, false);
+  CHECK_CASE(00, 02, 00, false);
+  CHECK_CASE(00, 10, 00, false);
+  CHECK_CASE(00, 11, 00, true);
+  CHECK_CASE(00, 12, 00, false);
+  CHECK_CASE(00, 20, 00, false);
+  CHECK_CASE(00, 21, 00, false);
+  CHECK_CASE(00, 22, 00, false);
 
   // Test final transitions.
-  CHECK_CASE(11, 11, 00, true);
-  CHECK_CASE(11, 11, 01, false);
-  CHECK_CASE(11, 11, 02, false);
-  CHECK_CASE(11, 11, 10, false);
-  CHECK_CASE(11, 11, 11, true);
-  CHECK_CASE(11, 11, 12, false);
-  CHECK_CASE(11, 11, 20, false);
-  CHECK_CASE(11, 11, 21, false);
-  CHECK_CASE(11, 11, 22, false);
+  CHECK_CASE(00, 11, 00, true);
+  CHECK_CASE(00, 11, 01, false);
+  CHECK_CASE(00, 11, 02, false);
+  CHECK_CASE(00, 11, 10, false);
+  CHECK_CASE(00, 11, 11, false);
+  CHECK_CASE(00, 11, 12, false);
+  CHECK_CASE(00, 11, 20, false);
+  CHECK_CASE(00, 11, 21, false);
+  CHECK_CASE(00, 11, 22, false);
 
 # undef UPDATE_TRANSITION
 
