@@ -68,29 +68,27 @@ pair_to_fmp_test(tests::Tester& t)
   aut.set_initial(p, s##i); \
   h = aut.add_series_transition(p, q, s##e); \
   aut.set_final(q, s##f); \
-  EQTEST(t, "is_realtime(" #i "," #e "," #f ")", \
-  is_realtime(aut), res1) \
-  EQTEST(t, "is_ltl(pair_to_fmp(" #i "," #e "," #f "))", \
-  is_ltl(pair_to_fmp(aut)), res2)
+  ret1 = is_realtime(aut); \
+  EQTEST(t, "is_realtime(" #i "," #e "," #f ")", ret1, res1); \
+  ret2 =is_ltl(pair_to_fmp(aut)); \
+  EQTEST(t, "is_ltl(pair_to_fmp(" #i "," #e "," #f "))", ret2, res2)
+
+  bool ret1, ret2;
 
   // Test initial transitions.
-  CHECK_CASE(0, 1, 1, true,  true);
-  CHECK_CASE(1, 1, 1, true,  true);
-  // FIXME: is_realtime ignores initial transitions
-  //CHECK_CASE(2, 1, 1, false, false);
+  CHECK_CASE(0, 1, 0, true,  true);
+  CHECK_CASE(1, 1, 0, false, false);
+  CHECK_CASE(2, 1, 0, false, false);
 
   // Test normal transitions.
-  // FIXME: this case induces that is_realtime is not equivalent to is_ltl
-  // (epsilon transitions...)
-  CHECK_CASE(1, 0, 1, false,  true);
-  CHECK_CASE(1, 1, 1, true,  true);
-  CHECK_CASE(1, 2, 1, false, false);
+  CHECK_CASE(0, 0, 0, false, false);
+  CHECK_CASE(0, 1, 0, true,  true);
+  CHECK_CASE(0, 2, 0, false, false);
 
   // Test final transitions.
-  CHECK_CASE(1, 1, 0, true,  true);
-  CHECK_CASE(1, 1, 1, true,  true);
-  // FIXME: is_realtime ignores final transitions
-  //CHECK_CASE(1, 1, 2, false, false);
+  CHECK_CASE(0, 1, 0, true,  true);
+  CHECK_CASE(0, 1, 1, false, false);
+  CHECK_CASE(0, 1, 2, false, false);
 
 # undef UPDATE_TRANSITION
 
