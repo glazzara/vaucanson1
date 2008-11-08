@@ -19,6 +19,7 @@
 # define VCSN_TOOLS_GEN_RANDOM_HH
 
 # include <vaucanson/misc/selectors.hh>
+# include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/automata/concept/transducer.hh>
 
 // We can have letter types with very large cardinal

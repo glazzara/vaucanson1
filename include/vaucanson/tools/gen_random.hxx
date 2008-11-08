@@ -76,14 +76,22 @@ namespace vcsn {
 			       input_alpha.max_size());
 	unsigned	nb = alea(input_nb_letter ? input_nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
-	  input_alpha.insert(input_alpha.random_letter());
+	{
+	  letter_t letter = input_alpha.random_letter();
+	  if (algebra::letter_traits<letter_t>::letter_to_literal(letter) != monoid_rep_default<monoid_t>::get_instance()->empty)
+	    input_alpha.insert(letter);
+	}
 
 	max = (output_alpha.max_size() > ALPHABET_MAX_SIZE ?
 	       ALPHABET_MAX_SIZE :
 	       output_alpha.max_size());
 	nb = alea(output_nb_letter ? output_nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
-	  output_alpha.insert(output_alpha.random_letter());
+	{
+	  letter_t letter = output_alpha.random_letter();
+	  if (algebra::letter_traits<letter_t>::letter_to_literal(letter) != monoid_rep_default<monoid_t>::get_instance()->empty)
+	    output_alpha.insert(letter);
+	}
 
 	monoid_t			input_monoid(input_alpha);
 	monoid_t			output_monoid(output_alpha);
