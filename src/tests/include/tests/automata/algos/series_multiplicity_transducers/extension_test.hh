@@ -34,7 +34,8 @@ bool extension_test(tests::Tester& tg)
   typedef typename automaton_t::value_t			automaton_value_t;
   typedef
   typename identity_transducer_helper<automata_set_t,
-				      automaton_value_t>::ret transducer_t;
+				      automaton_value_t,
+				      kind_t>::ret transducer_t;
 
   tests::Tester t(tg);
   GenRandomAutomata<Auto> gen;

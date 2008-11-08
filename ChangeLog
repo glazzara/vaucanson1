@@ -1,5 +1,11 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix compilation of extension_test.
+	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/extension_test.hh:
+	  Add missing argument `kind_t'.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix random alphabets generation for transducers.
 	* include/vaucanson/tools/gen_random.hh: Include missing
 	  `monoid_rep.hh' (reported by Reuben Thomas).
