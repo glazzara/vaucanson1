@@ -26,36 +26,18 @@
  *
  * Checks the structure of a linearized expression.
  *
- * This test  redefines the <<  operator in the utility  namespace, in
+ * This test  redefines the <<  operator in the std  namespace, in
  * order to print linearized expressions without their numeration.  So
  * linearized and original expressions should be printed the same way.
  */
 
-namespace vcsn
+namespace std
 {
-  namespace misc
+  template <typename U>
+  std::ostream&
+  operator<<(std::ostream& o, const std::pair<U, int>& p)
   {
-
-    template <typename U>
-    std::ostream&
-    operator << (std::ostream& o, const std::pair<U, int>& p)
-    {
-      return o << p.first;
-    }
-
-    template <typename U, class Traits, class Allocator>
-    std::ostream& operator<<(std::ostream& o,
-			     const std::basic_string<std::pair<U, int>,
-			     Traits,
-			     Allocator>& s)
-    {
-      typename
-	std::basic_string<std::pair<U, int>, Traits, Allocator>::const_iterator i;
-      for (i = s.begin(); i != s.end(); ++i)
-	o << *i;
-      return o;
-    }
-
+    return o << p.first;
   }
 }
 
