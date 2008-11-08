@@ -1,5 +1,11 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Overhaul dot dumper.
+	* include/vaucanson/tools/dot_format.hxx (operator()): Be more
+	  generic w.r.t. series implementation type.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a bug when printing words.
 	* include/vaucanson/algebra/implementation/monoid/str_words.hxx
 	  (op_rout): Cosmetic changes. Cleanup. Do not print the first
