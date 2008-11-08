@@ -1,5 +1,14 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup alphabet related files.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Cosmetic
+	  changes. (op_rout): Use internal `letter_to_literal' instead of
+	  public `operator<<'.
+	* include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx:
+	  Cosmetic changes.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup dump_visitor.hxx.
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
 	  (constant): Only use letter printer. Add more FIXMEs.

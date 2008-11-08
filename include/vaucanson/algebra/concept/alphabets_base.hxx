@@ -23,10 +23,10 @@
 # include <vaucanson/misc/contract.hh>
 # include <cstddef>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     /*-------------------.
     | AlphabetSetBase<S> |
     `-------------------*/
@@ -184,6 +184,7 @@ namespace vcsn {
     St& op_rout(const algebra::AlphabetSetBase<S>& s, St& st, const T& a)
     {
       st << "{ ";
+
       if (op_is_finite(s.self(), a))
 	for (typename op_begin_traits<S, T>::const_ret_t i = op_begin_const(s.self(), a);
 	     i != op_end_const(s.self(), a);
@@ -191,16 +192,18 @@ namespace vcsn {
 	  {
 	    if (i != op_begin_const(s.self(), a))
 	      st << ", ";
-	    st << *i;
+	    st << algebra::letter_traits<typename S::letter_t>::letter_to_literal(*i);
 	  }
       else
 	st << "<many letters>";
+
       st << " }";
+
       return st;
     }
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_ALPHABETS_BASE_HXX

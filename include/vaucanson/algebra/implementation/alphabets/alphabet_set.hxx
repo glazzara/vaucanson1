@@ -140,7 +140,7 @@ namespace vcsn
       return std::make_pair(ret, ret_letter);
     }
 
-  }
+  } // ! algebra
 
 } // ! vcsn
 
