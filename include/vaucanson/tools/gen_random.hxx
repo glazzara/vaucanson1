@@ -176,7 +176,8 @@ namespace vcsn {
 	  std::set<htransition_t> dst;
 	  letter_t e = set.series().monoid().alphabet().choose();
 	  work.letter_deltac(dst, *prev, e, delta_kind::transitions());
-	  if (dst.size() == 0)
+	  if (dst.size() == 0 &&
+	      algebra::letter_traits<letter_t>::letter_to_literal(e) != work.structure().series().monoid().representation()->empty)
 	    work.add_letter_transition(*prev, *i, e);
 	  prev = i;
 	}
@@ -188,7 +189,8 @@ namespace vcsn {
 	  hstate_t s = work.choose_state();
 	  hstate_t a = work.choose_state();
 	  work.letter_deltac(dst, s, e, delta_kind::states());
-	  if (dst.find(a) == dst.end())
+	  if (dst.find(a) == dst.end() &&
+	      algebra::letter_traits<letter_t>::letter_to_literal(e) != work.structure().series().monoid().representation()->empty)
 	    work.add_letter_transition(s, a, e);
 	}
 

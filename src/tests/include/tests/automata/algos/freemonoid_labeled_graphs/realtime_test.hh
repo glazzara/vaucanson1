@@ -37,7 +37,7 @@ unsigned realtime_test(tests::Tester& tg)
 
   for (unsigned i = 0; i < nb_ok_tests; i++)
     {
-      automaton_t a = gen.generate(50, 60);;
+      automaton_t a = gen.generate(50, 60);
       if (is_realtime(a))
 	++success;
     }

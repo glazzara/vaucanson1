@@ -1,3 +1,10 @@
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Make sure that tools::generate generates a realtime automaton.
+	* include/vaucanson/tools/gen_random.hxx (realtime_test): Fix a typo.
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/realtime_test.hh:
+	  Fix a bug when generating random automata.
+
 2008-11-07  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a typo in str_words.
