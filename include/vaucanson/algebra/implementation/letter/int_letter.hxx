@@ -17,16 +17,17 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 
+# include <string>
 # include <sstream>
-# include <climits>
 # include <utility>
+# include <climits>
 
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     template <>
     struct letter_traits<int>
     {
@@ -51,10 +52,12 @@ namespace vcsn {
 	std::stringstream sstr(str);
 	int ret = 0;
 	sstr >> ret;
-	if (sstr.eof())
-	  return std::make_pair(true, ret);
-	else
+
+	// Check if something is left in the stream.
+	if (!sstr.eof())
 	  return std::make_pair(false, 0);
+
+	return std::make_pair(true, ret);
       }
 
       static
@@ -75,25 +78,5 @@ namespace vcsn {
   } // ! algebra
 
 } // ! vcsn
-
-namespace std {
-
-  inline
-  ostream& operator<<(ostream& o, basic_string<int> s)
-  {
-    basic_string<int>::const_iterator i;
-    basic_string<int>::const_iterator j;
-
-    for (i = s.begin(); i != s.end(); ) {
-      o << *i;
-      i++;
-      if (i != s.end())
-	o << "#";
-    }
-
-    return o;
-  }
-
-} // ! std
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX

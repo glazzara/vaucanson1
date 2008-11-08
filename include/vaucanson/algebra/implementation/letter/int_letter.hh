@@ -17,30 +17,19 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HH
 
-# include <string>
-# include <iostream>
-
-# include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/concept/letter.hh>
-# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
-    // Specialization for int type.
+namespace vcsn
+{
+  namespace algebra
+  {
+    // Specialization for the `int' type.
     template <>
     struct letter_traits<int>;
 
   } // ! algebra
 
 } // ! vcsn
-
-namespace std {
-
-  ostream& operator<<(ostream&, basic_string<int>);
-
-} // ! std
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 # include <vaucanson/algebra/implementation/letter/int_letter.hxx>

@@ -1,5 +1,16 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup int letter implementation.
+	* include/vaucanson/algebra/implementation/letter/int_letter.hh:
+	  Cosmetic changes. Remove useless includes. Remove the `operator<<'
+	  definition.
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx:
+	  Cosmetic changes. Include `string' and `climits'.
+	  (literal_to_letter): Rewrite the test to be more alile other
+	  parser implementations. Remove the `operator<<' implementation.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup char letter implementation.
 	* include/vaucanson/algebra/implementation/letter/char_letter.hh:
 	  Remove useless includes.
