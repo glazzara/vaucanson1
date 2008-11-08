@@ -1,5 +1,11 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup dump_visitor.hxx.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
+	  (constant): Only use letter printer. Add more FIXMEs.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup the krat_exp_linearize_structure test.
 	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh:
 	  Remove the `operator<<' for printing words. Change `operator<<'

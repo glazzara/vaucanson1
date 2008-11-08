@@ -290,13 +290,16 @@ namespace vcsn {
       void
       constant(const monoid_elt_value_t& m)
       {
-	ostr_ << m;
+	// FIXME: we should use monoid_elt_t to get the concat attribute.
+	for_all_const_(monoid_elt_value_t, i, m)
+	  ostr_ << *i;
       }
 
       virtual
       void
       zero()
       {
+	// FIXME: see constant.
 	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::zero()));
       }
 
@@ -304,6 +307,7 @@ namespace vcsn {
       void
       one()
       {
+	// FIXME: see constant.
 	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::id()));
       }
 
