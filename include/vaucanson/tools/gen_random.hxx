@@ -47,7 +47,11 @@ namespace vcsn {
 				       alpha.max_size());
 	unsigned		nb = alea(nb_letter ? nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
-	  alpha.insert(alpha.random_letter());
+	{
+	  letter_t letter = alpha.random_letter();
+	  if (algebra::letter_traits<letter_t>::letter_to_literal(letter) != monoid_rep_default<monoid_t>::get_instance()->empty)
+	    alpha.insert(letter);
+	}
 
 	monoid_t		monoid(alpha);
 	semiring_t		semi;
