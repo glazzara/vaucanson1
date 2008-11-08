@@ -1,5 +1,20 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Overhaul the couple letter implementation.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
+	  Cosmetic changes. Remove useless includes. Remove the `operator<<'
+	  definitions for printing couple words, and the weak `operator>>'
+	  parser.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:
+	  Cosmetic changes. Include `string', `climits' and `vector'.
+	  Overhaul the couple letter parser `literal_to_letter'.
+	  (letter_to_literal): does the former job of `operator<<'. Remove
+	  the implementations of `operator>>' and `operator<<' for letters
+	  and words respectively. Rewrite the public `operator<<' to print
+	  letters by using `letter_to_literal'.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup int letter implementation.
 	* include/vaucanson/algebra/implementation/letter/int_letter.hh:
 	  Cosmetic changes. Remove useless includes. Remove the `operator<<'

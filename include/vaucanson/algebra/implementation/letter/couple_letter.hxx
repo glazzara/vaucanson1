@@ -18,16 +18,18 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HXX
 
-# include <stdexcept>
+# include <string>
 # include <sstream>
 # include <utility>
+# include <climits>
+# include <vector>
 
 # include <vaucanson/algebra/implementation/letter/couple_letter.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     template <typename U, typename V>
     struct letter_traits< std::pair<U, V> >
     {
@@ -55,13 +57,40 @@ namespace vcsn {
       std::pair<bool, std::pair<U, V> >
       literal_to_letter(const std::string& str)
       {
-	std::stringstream sstr(str);
-	std::pair<U, V> ret;
-	sstr >> ret;
-	if (sstr.eof())
-	  return std::make_pair(true, ret);
-	else
-	  return std::make_pair(false, std::make_pair(0,0));
+	// Check for a basic well formed pair: (x,y).
+	if (str.size() < 5 || str[0] != '(' || *(str.end() - 1) != ')')
+	  return std::make_pair(false, std::make_pair(0, 0));
+
+	// Split the string on commas.
+	typedef std::vector<std::string> tokens_t;
+	typedef tokens_t::const_iterator tokens_iter_t;
+	std::string delim = ",";
+	std::string buff(str.begin() + 1, str.end() - 1);
+
+	std::string::size_type last_pos = buff.find_first_not_of(delim, 0);
+	std::string::size_type pos = buff.find_first_of(delim, last_pos);
+
+	tokens_t tokens;
+
+	while (std::string::npos != pos || std::string::npos != last_pos)
+	{
+	  // Push new token.
+	  tokens.push_back(buff.substr(last_pos, pos - last_pos));
+	  // Update positions.
+	  last_pos = buff.find_first_not_of(delim, pos);
+	  pos = buff.find_first_of(delim, last_pos);
+	}
+
+	if (tokens.size() != 2)
+	  return std::make_pair(false, std::make_pair(0, 0));
+
+	std::pair<bool, U> fc = algebra::letter_traits<U>::literal_to_letter(tokens[0]);
+	std::pair<bool, V> sc = algebra::letter_traits<V>::literal_to_letter(tokens[1]);
+
+	if (!(fc.first && sc.first))
+	  return std::make_pair(false, std::make_pair(0, 0));
+
+	return std::make_pair(true, std::make_pair(fc.second, sc.second));
       }
 
       static
@@ -69,7 +98,7 @@ namespace vcsn {
       letter_to_literal(const std::pair<U, V>& c)
       {
 	std::stringstream sstr;
-	sstr << c;
+	sstr << '(' << c.first << ',' << c.second << ')';
 	return sstr.str();
       }
 
@@ -85,39 +114,11 @@ namespace vcsn {
 
 namespace std
 {
-
   template <typename U, typename V>
-  std::ostream& operator<< (std::ostream& o, std::pair<U, V> p)
+  std::ostream& operator<<(std::ostream& s, const std::pair<U, V>& letter)
   {
-    return o << "(" << p.first << "," << p.second << ")";
-  }
-
-  template <typename U, typename V, class Traits, class Allocator>
-  std::ostream& operator<< (std::ostream& o,
-			    std::basic_string<std::pair<U, V>, Traits, Allocator> s)
-  {
-    typename
-      std::basic_string<std::pair<U, V>, Traits, Allocator>::const_iterator i;
-    for (i = s.begin (); i != s.end (); ++i)
-      o << "(" << i->first << "," << i->second << ")";
-    return o;
-  }
-
-  template <typename U, typename V>
-  std::istream& operator>> (std::istream& i, std::pair<U, V>& p)
-  {
-    char c = i.get ();
-    if (c != '(')
-      i.unget ();
-    i >> p.first;
-    c = i.get ();
-    if (c != ',')
-      i.unget ();
-    i >> p.second;
-    c = i.get ();
-    if (c != ')')
-      i.unget ();
-    return i;
+    s << vcsn::algebra::letter_traits<std::pair<U, V> >::letter_to_literal(letter);
+    return s;
   }
 
 } // ! std

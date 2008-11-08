@@ -18,12 +18,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HH
 
-# include <climits>
-# include <string>
-# include <iostream>
-
 # include <vaucanson/algebra/concept/letter.hh>
-# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 // Needed to get defaults for projections.
 # include <vaucanson/algebra/implementation/letter/char_letter.hh>
@@ -33,10 +28,8 @@
 
 namespace vcsn
 {
-
   namespace algebra
   {
-
     // Specialization for pairs.
     template <typename U, typename V>
     struct letter_traits<std::pair<U, V> >;
@@ -45,24 +38,10 @@ namespace vcsn
 
 } // ! vcsn
 
-namespace std {
-
-  /// Display a single pair.
-  ///
-  /// It assumes that each element of the pair is printable
-  /// (i.e. the operator<< is defined on it).
+namespace std
+{
   template <typename U, typename V>
-  std::ostream& operator<< (std::ostream& o, std::pair<U, V> p);
-
-  /// Display a basic_string of pair.
-  template <typename U, typename V, class Traits, class Allocator>
-  std::ostream&
-  operator<< (std::ostream& o,
-	      std::basic_string<std::pair<U, V>, Traits, Allocator> s);
-
-  /// Read a single pair.
-  template <typename U, typename V>
-  std::istream& operator>> (std::istream& i, std::pair<U, V>& p);
+  std::ostream& operator<<(std::ostream&, const std::pair<U, V>&);
 
 } // ! std
 
