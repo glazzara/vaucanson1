@@ -34,10 +34,8 @@ boolean_transducer \
 char_char_boolean_automaton \
 context_headers_boolean \
 context_headers_boolean_transducer \
-context_headers_char_char_boolean \
 context_headers_fmp_transducer \
 context_headers_int_boolean \
-context_headers_int_int_boolean \
 context_headers_r \
 context_headers_z \
 context_headers_z_fmp_transducer \

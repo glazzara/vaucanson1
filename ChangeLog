@@ -1,5 +1,13 @@
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Disable consistency check for pair automaton.
+	* src/tests/test-suites/generate-all.sh: Split the loop to handle
+	  context_header separately. Remove `char_char_boolean' and
+	  `int_int_boolean' from the context header loop.
+	* src/tests/test-suites/subdirs.mk: Remove test subdirs.
+
+2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a bug when generating random alphabets.
 	* include/vaucanson/tools/gen_random.hxx (GenRandomAutomataSet): Do
 	  not insert a letter whose representation is the same as the

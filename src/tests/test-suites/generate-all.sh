@@ -101,12 +101,19 @@ done
 ## Automaton.  ##
 ## ----------- ##
 
-for kind in boolean int_boolean r z z_max_plus z_min_plus char_char_boolean int_int_boolean
+# Context headers tests.
+# FIXME: the consitency check is not generic w.r.t. the automaton type.
+# (it does not work for char_char_boolean and int_int_boolean)
+for kind in boolean int_boolean r z z_max_plus z_min_plus
 do
   generate \
       context_headers_${kind} \
       context_headers/automata
+done
 
+# In-depth tests.
+for kind in boolean int_boolean r z z_max_plus z_min_plus char_char_boolean int_int_boolean
+do
   # Create directories test list.
   TEST="automata/implementation_check"
   DIR="automata/algos/"
