@@ -93,6 +93,11 @@ namespace vcsn
       /// Alphabet's accessor
       const A&	alphabet() const;
 
+    private:
+      /// This function is here for xml that doesn't know the
+      /// representation when constructing the monoid
+      void set_representation(monoid_rep_t mr);
+
     protected:
       const shared_monoid_rep_t rep_;
       A alph_;

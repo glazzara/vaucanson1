@@ -67,6 +67,13 @@ namespace vcsn
     }
 
     template <class A>
+    void
+    FreeMonoid<A>::set_representation(monoid_rep<FreeMonoid<A> > mr)
+    {
+      rep_ = boost::shared_ptr<monoid_rep<FreeMonoid<A> > >(new monoid_rep<FreeMonoid<A> > (mr));
+    }
+
+    template <class A>
     A& FreeMonoid<A>::alphabet()
     {
       return alph_;
