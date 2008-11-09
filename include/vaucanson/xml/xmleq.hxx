@@ -78,7 +78,7 @@ namespace vcsn
 
       value = xercesc::XMLString::transcode("value");
       id = xercesc::XMLString::transcode("id");
-      source = xercesc::XMLString::transcode("src");
+      source = xercesc::XMLString::transcode("source");
       target = xercesc::XMLString::transcode("target");
       x = xercesc::XMLString::transcode("x");
       y = xercesc::XMLString::transcode("y");

@@ -22,7 +22,7 @@
         <state id="s3"/>
       </states>
       <transitions>
-        <transition src="s0" target="s1">
+        <transition source="s0" target="s1">
           <label>
             <monElmt>
               <monElmt>
@@ -32,7 +32,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s1" target="s0">
+        <transition source="s1" target="s0">
           <label>
             <monElmt>
               <one/>
@@ -42,7 +42,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s1" target="s3">
+        <transition source="s1" target="s3">
           <label>
             <monElmt>
               <monElmt>
@@ -52,7 +52,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s2" target="s3">
+        <transition source="s2" target="s3">
           <label>
             <monElmt>
               <monElmt>
@@ -62,7 +62,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s3" target="s2">
+        <transition source="s3" target="s2">
           <label>
             <monElmt>
               <one/>
@@ -72,7 +72,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s2" target="s0">
+        <transition source="s2" target="s0">
           <label>
             <monElmt>
               <one/>

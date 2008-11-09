@@ -405,7 +405,7 @@ Geometry and drawing data can be added.
     <xs:element name="drawingData" type="drawing" minOccurs="0"/>
     <xs:element name="label" type="typedRegExp"/>
   </xs:sequence>
-  <xs:attribute name="src" type="xs:string" use="required"/>
+  <xs:attribute name="source" type="xs:string" use="required"/>
   <xs:attribute name="target" type="xs:string" use="required"/>
 </xs:complexType>
 <!--

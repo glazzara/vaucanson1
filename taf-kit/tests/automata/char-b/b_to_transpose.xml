@@ -17,7 +17,7 @@
       <state id="s2"/>
     </states>
     <transitions>
-      <transition src="s0" target="s1">
+      <transition source="s0" target="s1">
 	<label>
 	  <monElmt>
 	    <monGen value="a"/>
@@ -27,7 +27,7 @@
 	  </monElmt>
 	</label>
       </transition>
-      <transition src="s1" dst="s2">
+      <transition source="s1" dst="s2">
 	<label>
 	  <sum>
 	    <monElmt>

@@ -21,7 +21,7 @@
         <state id="s2"/>
       </states>
       <transitions>
-        <transition src="s0" target="s1">
+        <transition source="s0" target="s1">
           <label>
             <monElmt>
               <monElmt>
@@ -31,7 +31,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s1" target="s0">
+        <transition source="s1" target="s0">
           <label>
             <monElmt>
               <one/>
@@ -41,7 +41,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s1" target="s2">
+        <transition source="s1" target="s2">
           <label>
             <monElmt>
               <monElmt>
@@ -51,7 +51,7 @@
             </monElmt>
           </label>
         </transition>
-        <transition src="s2" target="s1">
+        <transition source="s2" target="s1">
           <label>
             <monElmt>
               <one/>

@@ -1,13 +1,13 @@
-      <transition dst="s0" out="v" src="s1"/>
-      <transition dst="s4" in="a" src="s2"/>
-      <transition dst="s10" out="u" src="s8"/>
-      <transition dst="s0" out="v" src="s9"/>
-      <transition dst="s1" in="b" src="s0"/>
-      <transition dst="s2" in="b" src="s0"/>
-      <transition dst="s8" in="a" src="s4"/>
-      <transition dst="s8" in="a" src="s10"/>
-      <transition dst="s9" out="u" src="s4"/>
-      <transition dst="s9" out="u" src="s10"/>
+      <transition dst="s0" out="v" source="s1"/>
+      <transition dst="s4" in="a" source="s2"/>
+      <transition dst="s10" out="u" source="s8"/>
+      <transition dst="s0" out="v" source="s9"/>
+      <transition dst="s1" in="b" source="s0"/>
+      <transition dst="s2" in="b" source="s0"/>
+      <transition dst="s8" in="a" source="s4"/>
+      <transition dst="s8" in="a" source="s10"/>
+      <transition dst="s9" out="u" source="s4"/>
+      <transition dst="s9" out="u" source="s10"/>
       <initial state="s0"/>
       <initial state="s1"/>
       <initial state="s2"/>
@@ -43,7 +43,7 @@
 	<state id="s10"/>
       </states>
       <transitions>
-	<transition src="s1" target="s0">
+	<transition source="s1" target="s0">
           <label>
             <monElmt>
               <one/>
@@ -53,7 +53,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s2" target="s4">
+	<transition source="s2" target="s4">
           <label>
             <monElmt>
               <monElmt>
@@ -63,7 +63,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s8" target="s10">
+	<transition source="s8" target="s10">
           <label>
             <monElmt>
               <one/>
@@ -73,7 +73,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s9" target="s0">
+	<transition source="s9" target="s0">
           <label>
             <monElmt>
               <one/>
@@ -83,7 +83,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s0" target="s1">
+	<transition source="s0" target="s1">
           <label>
             <monElmt>
               <monElmt>
@@ -93,7 +93,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s0" target="s2">
+	<transition source="s0" target="s2">
           <label>
             <monElmt>
               <monElmt>
@@ -103,7 +103,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s4" target="s8">
+	<transition source="s4" target="s8">
           <label>
             <monElmt>
               <monElmt>
@@ -113,7 +113,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s10" target="s8">
+	<transition source="s10" target="s8">
           <label>
             <monElmt>
               <monElmt>
@@ -123,7 +123,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s4" target="s9">
+	<transition source="s4" target="s9">
           <label>
             <monElmt>
               <one/>
@@ -133,7 +133,7 @@
             </monElmt>
           </label>
         </transition>
-	<transition src="s10" target="s9">
+	<transition source="s10" target="s9">
           <label>
             <monElmt>
               <one/>

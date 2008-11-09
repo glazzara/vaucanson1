@@ -1,5 +1,58 @@
 2008-11-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Replace "src" by "source" in XML, #189.
+	W.r.t the specifications, we should use "source" and not "src"
+	in the transitions. (Ticket #189)
+	
+	* data/automata/char-rw-b/add1-rw.xml: .
+	* data/automata/char-rw-b/quot-3-rw.xml: .
+	* data/vaucanson.xsd: .
+	* doc/manual/xml.tex: .
+	* include/vaucanson/xml/printers.hxx: .
+	* include/vaucanson/xml/xmleq.hxx: .
+	* src/tests/xml/Makefile.am: Remove useless session test.
+	* src/tests/xml/b_ref.xml: .
+	* src/tests/xml/fmp_ref.xml: .
+	* src/tests/xml/geometry_ref.xml: .
+	* src/tests/xml/int_b_ref.xml: .
+	* src/tests/xml/int_fmp_ref.xml: .
+	* src/tests/xml/int_trans_ref.xml: .
+	* src/tests/xml/int_z_fmp_ref.xml: .
+	* src/tests/xml/int_z_max_plus_ref.xml: .
+	* src/tests/xml/int_z_min_plus_ref.xml: .
+	* src/tests/xml/int_z_ref.xml: .
+	* src/tests/xml/int_z_trans_ref.xml: .
+	* src/tests/xml/label_node_ref.xml: .
+	* src/tests/xml/r_ref.xml: .
+	* src/tests/xml/session_ref.dot: Remove. Not used anymore.
+	* src/tests/xml/session_ref.xml: Remove. Not used anymore.
+	* src/tests/xml/trans_ref.xml: .
+	* src/tests/xml/xml_session_tester.cc: Remove. Not used anymore.
+	* src/tests/xml/z_fmp_ref.xml: .
+	* src/tests/xml/z_max_plus_ref.xml: .
+	* src/tests/xml/z_min_plus_ref.xml: .
+	* src/tests/xml/z_ref.xml: .
+	* src/tests/xml/z_trans_ref.xml: .
+	* taf-kit/tests/automata/char-b/ambiguous1.xml: .
+	* taf-kit/tests/automata/char-b/ambiguous2.xml: .
+	* taf-kit/tests/automata/char-b/b_to_transpose.xml: .
+	* taf-kit/tests/automata/char-b/b_transposed.xml: .
+	* taf-kit/tests/automata/char-b/finalword.xml: .
+	* taf-kit/tests/automata/char-b/initialword.xml: .
+	* taf-kit/tests/automata/char-b/initseries.xml: .
+	* taf-kit/tests/automata/char-b/non_ambiguous1.xml: .
+	* taf-kit/tests/automata/char-b/realtime_test.xml: .
+	* taf-kit/tests/automata/char-fmp-b/inverted_t1.xml: .
+	* taf-kit/tests/automata/char-fmp-b/t1_compose_u1.xml: .
+	* taf-kit/tests/automata/char-fmp-b/t2.xml: .
+	* taf-kit/tests/automata/char-fmp-b/t2_u-compose_u2.xml: .
+	* taf-kit/tests/automata/char-fmp-b/u2.xml: .
+	* taf-kit/tests/automata/char-z/standard_c1.xml: .
+	* taf-kit/tests/automata/int-b/int-b.xml: .
+	* taf-kit/tests/automata/int-z/int-z.xml: .
+
+2008-11-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Enable the use of xmleq (structure that avoid costly conversion
 	of commonly used token from XMLCh* to std::string) for attributes.
 

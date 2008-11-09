@@ -162,7 +162,7 @@ namespace vcsn
     {
       xercesc::DOMElement* node = tools::create_element(doc_, "transition");
       root->appendChild(node);
-      tools::set_attribute(node, "src", state2str_[aut_.src_of(e)]);
+      tools::set_attribute(node, "source", state2str_[aut_.src_of(e)]);
       tools::set_attribute(node, "target", state2str_[aut_.dst_of(e)]);
       builders::create_regexp_node(aut_.series_of(e), doc_, node);
     }

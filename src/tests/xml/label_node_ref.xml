@@ -1,4 +1,4 @@
-<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="0.1">
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
 
 <automaton>
   <valueType>
@@ -17,7 +17,7 @@
       <state id="s2"/>
     </states>
     <transitions>
-      <transition src="s1" target="s1">
+      <transition source="s1" target="s1">
         <label>
           <sum>
 	    <leftExtMul>
@@ -35,7 +35,7 @@
           </sum>
         </label>
       </transition>
-      <transition src="s1" target="s0">
+      <transition source="s1" target="s0">
         <label>
 	  <leftExtMul>
 	    <weight value="5"/>
@@ -46,7 +46,7 @@
 	  </leftExtMul>
         </label>
       </transition>
-      <transition src="s0" target="s0">
+      <transition source="s0" target="s0">
         <label>
           <sum>
             <sum>
@@ -80,7 +80,7 @@
           </sum>
         </label>
       </transition>
-      <transition src="s0" target="s2">
+      <transition source="s0" target="s2">
         <label>
           <sum>
 	    <monElmt>
@@ -96,7 +96,7 @@
           </sum>
         </label>
       </transition>
-      <transition src="s0" target="s1">
+      <transition source="s0" target="s1">
         <label>
           <sum>
 	    <leftExtMul>

@@ -15,7 +15,7 @@
         <state id="s1"/>
       </states>
       <transitions>
-        <transition src="s0" target="s1">
+        <transition source="s0" target="s1">
           <label>
             <monElmt>
               <monGen value="a"/>

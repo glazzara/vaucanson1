@@ -15,14 +15,14 @@
       <state id="s2"/>
     </states>
     <transitions>
-      <transition src="s0" target="s1">
+      <transition source="s0" target="s1">
 	<label>
 	  <monElmt>
 	    <monGen value="b"/>
 	  </monElmt>
 	</label>
       </transition>
-      <transition src="s1" target="s1">
+      <transition source="s1" target="s1">
 	<label>
 	  <sum>
 	    <leftExtMul>
@@ -40,7 +40,7 @@
 	  </sum>
 	</label>
       </transition>
-      <transition src="s0" target="s0">
+      <transition source="s0" target="s0">
 	<label>
 	  <sum>
 	    <monElmt>
@@ -52,14 +52,14 @@
 	  </sum>
 	</label>
       </transition>
-      <transition src="s2" target="s1">
+      <transition source="s2" target="s1">
 	<label>
 	  <monElmt>
 	    <monGen value="b"/>
 	  </monElmt>
 	</label>
       </transition>
-      <transition src="s2" target="s0">
+      <transition source="s2" target="s0">
 	<label>
 	  <sum>
 	    <monElmt>

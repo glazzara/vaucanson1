@@ -43,7 +43,6 @@ int_z_fmp_tester				\
 int_trans_tester				\
 int_z_trans_tester
 
-##session_tester					
 
 b_tester_SOURCES = xml_automaton_tester.cc
 b_tester_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT="boolean_automaton"
@@ -87,8 +86,6 @@ z_trans_tester_SOURCES = xml_z_trans_tester.cc
 int_trans_tester_SOURCES = xml_int_trans_tester.cc
 
 int_z_trans_tester_SOURCES = xml_int_z_trans_tester.cc
-
-##session_tester_SOURCES = xml_session_tester.cc
 
 geometry_tester_SOURCES = xml_geometry_tester.cc
 

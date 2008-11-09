@@ -21,7 +21,7 @@
         <state id="s2"/>
       </states>
       <transitions>
-        <transition src="s0" target="s1">
+        <transition source="s0" target="s1">
           <label>
             <leftExtMul>
               <weight value="10"/>
@@ -36,12 +36,12 @@
             </leftExtMul>
           </label>
         </transition>
-        <transition src="s0" target="s2">
+        <transition source="s0" target="s2">
           <label>
             <zero/>
           </label>
         </transition>
-        <transition src="s0" target="s1">
+        <transition source="s0" target="s1">
           <label>
             <leftExtMul>
               <weight value="10"/>
