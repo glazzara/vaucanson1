@@ -145,7 +145,7 @@ namespace vcsn
       if (xercesc::XMLString::equals(eq_.monCompGen, localname) && wait_begin_)
       {
 	wait_begin_ = false;
-	const XMLCh* attr = tools::get_attribute(attrs, "value");
+	const XMLCh* attr = tools::get_attribute(attrs, eq_.value);
 	if (!attr)
 	  error::missattrs(localname, "value");
 	value_ += xmlstr(attr);
@@ -217,7 +217,7 @@ namespace vcsn
 	// Choose statically the kind of generator.
 	if (algebra::letter_traits<typename T::alphabet_t::letter_t>::kind() == "simple")
 	{
-	  const XMLCh* value = tools::get_attribute(attrs, "value");
+	  const XMLCh* value = tools::get_attribute(attrs, eq_.value);
 	  mongenh_ = new monGenHandler<T, T>(parser_, *this, action, value);
 	}
 	else
@@ -383,7 +383,7 @@ namespace vcsn
       {
 	typename T::monoid_elt_value_t m =
 	  vcsn::algebra::identity_as<typename T::monoid_elt_value_t>::of(param.structure().monoid()).value();
-	const std::string val(xmlstr(tools::get_attribute(attrs, "value")));
+	const std::string val(xmlstr(tools::get_attribute(attrs, root.eq().value)));
 	std::string::const_iterator i = val.begin();
 	typename T::semiring_elt_t w(param.structure().semiring());
 	if (!parse_weight(w, val, i))

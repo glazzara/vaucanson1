@@ -24,6 +24,8 @@ namespace vcsn
   {
     XMLEq::XMLEq ()
     {
+      /* tokens */
+
       fsmxml = xercesc::XMLString::transcode("fsmxml");
 
       valueType = xercesc::XMLString::transcode("valueType");
@@ -63,6 +65,23 @@ namespace vcsn
       weight = xercesc::XMLString::transcode("weight");
 
       writingData = xercesc::XMLString::transcode("writingData");
+
+      /* attributes */
+
+      openPar = xercesc::XMLString::transcode("openPar");
+      closePar = xercesc::XMLString::transcode("closePar");
+      plus = xercesc::XMLString::transcode("plus");
+      times = xercesc::XMLString::transcode("times");
+      openWeight = xercesc::XMLString::transcode("openWeight");
+      closeWeight = xercesc::XMLString::transcode("closeWeight");
+      spaces = xercesc::XMLString::transcode("spaces");
+
+      value = xercesc::XMLString::transcode("value");
+      id = xercesc::XMLString::transcode("id");
+      source = xercesc::XMLString::transcode("src");
+      target = xercesc::XMLString::transcode("target");
+      x = xercesc::XMLString::transcode("x");
+      y = xercesc::XMLString::transcode("y");
     }
 
     XMLEq::~XMLEq ()
@@ -105,7 +124,19 @@ namespace vcsn
       xercesc::XMLString::release(&monElmt);
       xercesc::XMLString::release(&weight);
 
-      xercesc::XMLString::release(&writingData);
+      xercesc::XMLString::release(&openPar);
+      xercesc::XMLString::release(&closePar);
+      xercesc::XMLString::release(&plus);
+      xercesc::XMLString::release(&times);
+      xercesc::XMLString::release(&openWeight);
+      xercesc::XMLString::release(&closeWeight);
+      xercesc::XMLString::release(&spaces);
+
+      xercesc::XMLString::release(&value);
+      xercesc::XMLString::release(&source);
+      xercesc::XMLString::release(&target);
+      xercesc::XMLString::release(&x);
+      xercesc::XMLString::release(&y);
     }
   } // End of namespace xml.
 } // End of namespace vcsn.

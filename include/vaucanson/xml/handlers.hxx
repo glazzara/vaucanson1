@@ -242,7 +242,7 @@ namespace vcsn
       if (XMLString::equals(eq_.state, localname))
       {
 	hstate_t state = aut_.add_state();
-	map_[xmlstr(tools::get_attribute(attrs, "id"))] = state;
+	map_[xmlstr(tools::get_attribute(attrs, eq_.id))] = state;
 	if (stateh_)
 	  delete stateh_;
 	stateh_ = new StateHandler<T>(parser_, *this, aut_, state);
@@ -299,14 +299,14 @@ namespace vcsn
 
 	double y = 0;
 	double x = 0;
-	if (tools::has_attribute(attrs, "x"))
+	if (tools::has_attribute(attrs, eq_.x))
 	{
-	  std::istringstream xstr(xmlstr(tools::get_attribute(attrs, "x")));
+	  std::istringstream xstr(xmlstr(tools::get_attribute(attrs, eq_.x)));
 	  xstr >> x;
 	}
-	if (tools::has_attribute(attrs, "y"))
+	if (tools::has_attribute(attrs, eq_.y))
 	{
-	  std::istringstream ystr(xmlstr(tools::get_attribute(attrs, "y")));
+	  std::istringstream ystr(xmlstr(tools::get_attribute(attrs, eq_.y)));
 	  ystr >> y;
 	}
 	gmap_t& map = aut_.geometry().states();
@@ -355,8 +355,8 @@ namespace vcsn
       using namespace xercesc;
       if (XMLString::equals(eq_.transition, localname))
       {
-	hstate_t src = map_[xmlstr(tools::get_attribute(attrs, "src"))];
-	hstate_t dst = map_[xmlstr(tools::get_attribute(attrs, "target"))];
+	hstate_t src = map_[xmlstr(tools::get_attribute(attrs, eq_.source))];
+	hstate_t dst = map_[xmlstr(tools::get_attribute(attrs, eq_.target))];
 	if (transitionh_)
 	  delete transitionh_;
 	transitionh_ = new TransitionHandler<T>(parser_, *this, aut_, src, dst);
@@ -364,7 +364,7 @@ namespace vcsn
       }
       else if (XMLString::equals(eq_.final, localname))
       {
-	hstate_t state = map_[xmlstr(tools::get_attribute(attrs, "state"))];
+	hstate_t state = map_[xmlstr(tools::get_attribute(attrs, eq_.state))];
 	if (transitionh_)
 	  delete transitionh_;
 	transitionh_ = new InitFinalHandler<T>(parser_, *this, aut_, state, false);
@@ -372,7 +372,7 @@ namespace vcsn
       }
       else if (XMLString::equals(eq_.initial, localname))
       {
-	hstate_t state = map_[xmlstr(tools::get_attribute(attrs, "state"))];
+	hstate_t state = map_[xmlstr(tools::get_attribute(attrs, eq_.state))];
 	if (transitionh_)
 	  delete transitionh_;
 	transitionh_ = new InitFinalHandler<T>(parser_, *this, aut_, state, true);

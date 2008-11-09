@@ -84,6 +84,21 @@ namespace vcsn
 
 	XMLCh* writingData;
 
+	XMLCh* openPar;
+	XMLCh* closePar;
+	XMLCh* plus;
+	XMLCh* times;
+	XMLCh* openWeight;
+	XMLCh* closeWeight;
+	XMLCh* spaces;
+
+	XMLCh* id;
+	XMLCh* value;
+	XMLCh* source;
+	XMLCh* target;
+	XMLCh* x;
+	XMLCh* y;
+
 	XMLEq ();
 	~XMLEq ();
     };

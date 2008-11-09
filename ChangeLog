@@ -1,3 +1,15 @@
+2008-11-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Enable the use of xmleq (structure that avoid costly conversion
+	of commonly used token from XMLCh* to std::string) for attributes.
+
+	* include/vaucanson/xml/builders.hxx: here.
+	* include/vaucanson/xml/handlers.hxx: here.
+	* include/vaucanson/xml/tools.hh: here.
+	* include/vaucanson/xml/tools.hxx: here.
+	* include/vaucanson/xml/xmleq.hh: Add new tokens.
+	* include/vaucanson/xml/xmleq.hxx: Add new tokens.
+
 2008-11-09  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add a set_representation function to the monoid.

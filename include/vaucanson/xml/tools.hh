@@ -48,9 +48,19 @@ namespace vcsn
 		     const char* key,
 		     const XMLCh* const uri = 0);
 
+      bool
+      has_attribute (const xercesc::Attributes& attrs,
+		     const XMLCh* xkey,
+		     const XMLCh* const uri = 0);
+
       const XMLCh*
       get_attribute (const xercesc::Attributes& attrs,
 		     const char* key,
+		     const XMLCh* uri = 0);
+
+      const XMLCh*
+      get_attribute (const xercesc::Attributes& attrs,
+		     const XMLCh* xkey,
 		     const XMLCh* uri = 0);
 
       /**

@@ -40,6 +40,15 @@ namespace vcsn
       }
 
       inline
+      bool
+      has_attribute (const xercesc::Attributes& attrs,
+		     const XMLCh* xkey,
+		     const XMLCh* const uri)
+      {
+	return (get_attribute(attrs, xkey, uri) != 0);
+      }
+
+      inline
       const XMLCh*
       get_attribute (const xercesc::Attributes& attrs,
 		     const char* key,
@@ -48,6 +57,16 @@ namespace vcsn
 	XMLCh* xkey = transcode(key);
 	const XMLCh* tmp = attrs.getValue(uri, xkey);
 	xercesc::XMLString::release(&xkey);
+	return tmp;
+      }
+
+      inline
+      const XMLCh*
+      get_attribute (const xercesc::Attributes& attrs,
+		     const XMLCh* xkey,
+		     const XMLCh* const uri)
+      {
+	const XMLCh* tmp = attrs.getValue(uri, xkey);
 	return tmp;
       }
 
