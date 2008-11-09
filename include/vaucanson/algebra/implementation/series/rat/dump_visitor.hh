@@ -17,7 +17,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DUMP_VISITOR_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DUMP_VISITOR_HH
 
-# include <ostream>
+# include <iostream>
 # include <string>
 # include <set>
 # include <boost/shared_ptr.hpp>
@@ -26,6 +26,7 @@
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/algebra/implementation/series/series_rep.hh>
 # include <vaucanson/misc/iomanip.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn
 {

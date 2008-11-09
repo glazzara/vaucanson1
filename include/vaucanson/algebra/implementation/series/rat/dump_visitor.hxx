@@ -22,7 +22,6 @@
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 
 # include <vaucanson/misc/escaper.hh>
-# include <iostream>
 
 namespace vcsn {
 
