@@ -2,6 +2,7 @@
 ## Eval the cmd to preserve embedded redirections.
 ## Use the taf-kit wrappers.
 	PATH=$(top_builddir)/taf-kit/tests:$$PATH	\
+	VCSN_DATA_PATH=$(top_srcdir)/data		\
 	eval $$(cat $<) >$*.out 2>$*.err;		\
 	echo $$? >$*.sta
 	rm -f $@

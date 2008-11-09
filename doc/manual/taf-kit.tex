@@ -130,7 +130,7 @@ and should be understood, or analyzed, as follows.
 
 As a more elaborate example, consider the following command
 
-\execcaption{a1dmi}{vcsn-char-b dump-automaton a1 | vcsn-char-b determinize - | vcsn-char-b minimize - | vcsn-char-b info -}
+\execcaption{a1dmi}{vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - | vcsn-char-b minimize - | vcsn-char-b info -}
 
 \noindent
 It fetches the automaton \code{a1} from the automaton library,
@@ -143,7 +143,7 @@ Please, note the typographic conventions: user input is represented
 and finally, if different from 0, the exit status is represented
 \texttt{=> like this}.  For instance:
 
-\execcaption{bz-mismatch}{vcsn-char-b dump-automaton a1 | vcsn-char-b info -}
+\execcaption{bz-mismatch}{vcsn-char-b identity-nodep a1.xml | vcsn-char-b info -}
 
 \smallskip
 
@@ -192,22 +192,22 @@ The whole list of supported commands is available via
 
 Let's consider the Boolean automaton $\Ac_1$ (\autoref{fig:a1}), part
 of the standard library.  It can be dumped using
-\Index{\taffn{dump-automaton}}:
+\Index{\taffn{identity}}:
 
-\execcaption{a1-dump}{vcsn-char-b dump-automaton a1}
+\execcaption{a1-dump}{vcsn-char-b identity-nodep a1.xml}
 
 Usual shell indirections (\samp{|}, \samp{>}, and \samp{<}) can be
 used to combine \tafkit commands.  For instance, this is an easy means
 to bring a local copy of this file:
 
-\execcaption{a1-xml}{vcsn-char-b dump-automaton a1 >a1.xml}
+\execcaption{a1-xml}{vcsn-char-b identity-nodep \$VCSN\_DATA\_PATH/automata/char-b/a1.xml >a1.xml}
 
 \tafkit uses XML to exchange automata, to get graphical rendering of
-the automaton, you may either invoke \Index{\taffn{dot-dump}} and then
+the automaton, you may either invoke \Index{\taffn{-o dot identity}} and then
 use a Dot compliant program, or use \Index{\taffn{display}} that does
 both.
 
-\execcaption{a1-dot}{vcsn-char-b dot-dump a1.xml >a1.dot}
+\execcaption{a1-dot}{vcsn-char-b --output-type=dot identity-nodep a1.xml >a1.dot}
 \begin{center}
   \includegenerateddot{a1}
 \end{center}
@@ -217,13 +217,13 @@ both.
 To determinize a Boolean automaton, call the
 \Index{\taffn{determinize}} function:
 
-\execcaption{a1det}{vcsn-char-b dump-automaton a1 | vcsn-char-b determinize - >a1det.xml}
+\execcaption{a1det}{vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - >a1det.xml}
 
 To get information about an automaton, call the \Index{\taffn{info}} function:
 \execcaption{a1det-info}{vcsn-char-b info a1det.xml}
 
 Or use dotty to visualize it:
-\execcaption{a1det.dot}{vcsn-char-b dot-dump a1det.xml >a1det.dot}
+\execcaption{a1det.dot}{vcsn-char-b --output-type=dot identity a1det.xml >a1det.dot}
 \begin{center}
   \includegenerateddot{a1det}
 \end{center}
@@ -331,7 +331,7 @@ to Boolean automata.  This provides an alternative means to create
 automata:
 
 \execcaption{all.xml}{vcsn-char-b --alphabet=ab exp-to-aut '(a+b)*' >all.xml}
-\execcaption{all.dot}{vcsn-char-b dot-dump all.xml >all.dot}
+\execcaption{all.dot}{vcsn-char-b --output-type=dot identity all.xml >all.dot}
 \begin{center}
   \includegenerateddot{all}
 \end{center}
@@ -363,7 +363,7 @@ to the current alphabet. The following commands:
 
 %% FIXME: include ({1} a) in the example
 \execcaption{parser.xml}{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
-\execcaption{parser.dot}{vcsn-char-b dot-dump parser.xml >parser.dot}
+\execcaption{parser.dot}{vcsn-char-b --output-type=dot identity parser.xml >parser.dot}
 \begin{center}
   \includegenerateddot{parser}
 \end{center}
@@ -372,7 +372,7 @@ to the current alphabet. The following commands:
 , will give the same results as:
 %% FIXME: include ({1} a) in the example
 \execcaption{parser2.xml}{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
-\execcaption{parser2.dot}{vcsn-char-b dot-dump parser2.xml >parser2.dot}
+\execcaption{parser2.dot}{vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot}
 \begin{center}
   \includegenerateddot{parser2}
 \end{center}
@@ -411,7 +411,7 @@ This automaton, constructed following the Thompson algorithm, is not
 the simplest one: it can be \index{minimize@\taffn{minimize}}minimized:
 
 \execcaption{allmin.xml}{vcsn-char-b minimize all.xml >allmin.xml}
-\execcaption{allmin.dot}{vcsn-char-b dot-dump allmin.xml >allmin.dot}
+\execcaption{allmin.dot}{vcsn-char-b --output-type=dot identity allmin.xml >allmin.dot}
 \begin{center}
   \includegenerateddot{allmin}
 \end{center}
@@ -429,7 +429,7 @@ recognizes a given language.  The following sequence computes the
 minimal automaton of \samp{(a+b)*ab(a+b)*}.
 
 \execcaption{l1}{vcsn-char-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-char-b quotient - >l1.xml}
-\execcaption{l1.dot}{vcsn-char-b dot-dump l1.xml >l1.dot}
+\execcaption{l1.dot}{vcsn-char-b --output-type=dot identity l1.xml >l1.dot}
 \begin{center}
   \includegenerateddot{l1}
 \end{center}
@@ -622,12 +622,12 @@ described in \autoref{fig:t1}, and part of the automaton library
 \subsubsection{Domain}
 The transducer $T$ only accepts binary numbers divisible by 3.
 
-\execcaption{t1.dom}{vcsn-char-fmp-b dump-automaton t1 | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml}
+\execcaption{t1.dom}{vcsn-char-fmp-b identity-nodep t1.xml | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml}
 
 Now the file \file{divisible-by-3.xml} contains the description of a
 Boolean automaton that accepts only the numbers divisible by 3:
 
-\execcaption{div-by-3.dot}{vcsn-char-b dot-dump div-by-3.xml >div-by-3.dot}
+\execcaption{div-by-3.dot}{vcsn-char-b --output-type=dot identity div-by-3.xml >div-by-3.dot}
 \includegenerateddot{div-by-3}
 
 
@@ -773,8 +773,8 @@ $\Bc_1$ will produce a number, rather than simply accept or
 reject \var{w}.  For instance let's evaluate \samp{abab} and
 \samp{bbab}:
 
-\execcaption{b1.abbb}{vcsn-char-z dump-automaton b1 | vcsn-char-z eval - 'abbb'}
-\execcaption{b1.abab}{vcsn-char-z dump-automaton b1 | vcsn-char-z eval - 'abab'}
+\execcaption{b1.abbb}{vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abbb'}
+\execcaption{b1.abab}{vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abab'}
 
 \noindent
 Indeed, $\Bc_1$ counts the number of \samp{b}s.
@@ -789,7 +789,7 @@ Now let's consider the $\Bc_1^n$, where
 \noindent
 This is implemented by the \Index{\taffn{power}} function:
 
-\execcaption{b4}{vcsn-char-z dump-automaton b1 | vcsn-char-z power - 4 >b4.xml}
+\execcaption{b4}{vcsn-char-z identity-nodep b1.xml | vcsn-char-z power - 4 >b4.xml}
 \begin{shell}
 # vcsn-char-z power b1.xml 4 > b4.xml
 \end{shell}
@@ -807,7 +807,7 @@ $\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
 Successive products of an automaton create a lot of new states and
 transitions.
 
-\execcaption{b1.info}{vcsn-char-z dump-automaton b1 | vcsn-char-z info -}
+\execcaption{b1.info}{vcsn-char-z identity-nodep b1.xml | vcsn-char-z info -}
 \execcaption{b4.info}{vcsn-char-z info b4.xml}
 
 One way of reducing the size of our automaton is to use the

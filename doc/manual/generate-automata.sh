@@ -14,13 +14,13 @@ EOF
 
   ($vcsn --version > /dev/null) || exit 1
   $vcsn list-automata |
-    sed -n 's/ *- *//p' |
+    sed -n 's/ *- *//;s/.xml//p' |
     while read a
     do
       cat <<EOF
 \\subsection{$a}
 \\label{$short:$a}
-\\execdisplay{al-$short-$a}{$vcsn dump-automaton $a | $vcsn}{-}
+\\execdisplay{al-$short-$a}{$vcsn identity-nodep $a.xml | $vcsn}{-}
 
 EOF
     done

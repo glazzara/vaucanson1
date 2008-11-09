@@ -1,3 +1,18 @@
+2008-11-09  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix documentation manual building.
+	* doc/manual/extex.mk: Add definition of `VCSN_DATA_PATH'.
+	* doc/manual/extex.pl: Update `wrapping'. Use `identity-nodep' as a
+	  filter keyword to prevent makefile dependencies generation. Add
+	  filters on `command' (dependencies and path shadowing prevention).
+	  Add the generation of the `VCSN_DATA_PATH' environment variable.
+	* doc/manual/generate-automata.sh: Rename `dump-automaton' to
+	  `identity-nodep'. Update the sed expression to strip the `.xml'
+	  suffix before generating the latex code.
+	* doc/manual/taf-kit.tex: Refactor `dot-dump' to `--output-type=dot
+	  identity', `dump-automaton' to `identity'. Use `identity-nodep'
+	  when dependency generation is not welcomed.
+
 2008-11-08  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Overhaul dot dumper.
