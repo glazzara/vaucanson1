@@ -1,5 +1,15 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add the specialization for int based monoid representations.
+	* include/vaucanson/algebra/implementation/series/series.hh: Include
+	  `free_monoid.hh'. Add a predeclaration of the `Series' structure.
+	  Add a specialization of `series_rep' for int based monoids.
+	* include/vaucanson/algebra/implementation/series/series.hxx:
+	  Cosmetic changes. Add the implementation of the default
+	  constructor for int based series representations.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add new FMP related representation specializations.
 	* include/vaucanson/algebra/concept/freemonoid_product.hh: Include
 	  `series_rep.hh'. (monoid_rep): Add new methods `first_projection'

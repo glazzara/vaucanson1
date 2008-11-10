@@ -20,9 +20,16 @@
 # include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/misc/unique.hh>
 
-namespace vcsn {
-
-  namespace algebra {
+namespace vcsn
+{
+  namespace algebra
+  {
+    template <typename Semiring>
+    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::series_rep() :
+    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >()
+    {
+      zero = "z";
+    }
 
     /*------------------------.
     | Series<Semiring, Monoid> |
