@@ -1,5 +1,11 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Add missing attributes initialization.
+	* taf-kit/src/main.cc: Affect the `mrep1', `mrep2', `srep1' and
+	  `srep2' attributes with values taken from the command line.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Preserve representation structures on initialization.
 
 	For backward compatibility and minimum necessary support of the new

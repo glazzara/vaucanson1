@@ -320,6 +320,10 @@ int main (int argc, char* argv[])
 	parser_options p_opts2(li->args.parser2);
 
 	li->args.alphabet2 = p_opts2.get_letters();
+	li->args.srep1 = p_opts.get_srep().first_projection();
+	li->args.mrep1 = p_opts.get_mrep().first_projection();
+	li->args.srep2 = p_opts.get_srep().second_projection();
+	li->args.mrep2 = p_opts.get_mrep().second_projection();
 #endif
       }
       catch (const std::logic_error& err)
