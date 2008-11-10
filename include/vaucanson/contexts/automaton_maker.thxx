@@ -38,30 +38,48 @@ namespace vcsn
       template <class InputIterator>
       automata_set_t
       make_automata_set(InputIterator begin,
-		        InputIterator end)
+			InputIterator end,
+			const monoid_rep_t& mrep = *(vcsn::algebra::
+						     monoid_rep_default<monoid_t>::
+						     get_instance()),
+			const series_rep_t& srep = *(vcsn::algebra::
+						     series_rep_default<semiring_t, monoid_t>::
+						     get_instance()))
       {
         alphabet_t		alpha;
         for (InputIterator e = begin; e != end; ++e)
 	  alpha.insert(*e);
         semiring_t		semiring;
-        monoid_t		freemonoid (alpha);
-        series_set_t		series (semiring, freemonoid);
+        monoid_t		freemonoid (alpha, mrep);
+        series_set_t		series (semiring, freemonoid, srep);
         return automata_set_t (series);
       }
 
       template <class InputIterator>
       automaton_t
       make_automaton(InputIterator begin,
-		     InputIterator end)
+		     InputIterator end,
+		     const monoid_rep_t& mrep = *(vcsn::algebra::
+						  monoid_rep_default<monoid_t>::
+						  get_instance()),
+		     const series_rep_t& srep = *(vcsn::algebra::
+						  series_rep_default<semiring_t, monoid_t>::
+						  get_instance()))
       {
-        return automaton_t (make_automata_set(begin, end));
+        return automaton_t (make_automata_set(begin, end, mrep, srep));
       }
 
       template <class T>
       automaton_t
-      make_automaton(const T& alphabet)
+      make_automaton(const T& alphabet,
+		     const monoid_rep_t& mrep = *(vcsn::algebra::
+						  monoid_rep_default<monoid_t>::
+						  get_instance()),
+		     const series_rep_t& srep = *(vcsn::algebra::
+						  series_rep_default<semiring_t, monoid_t>::
+						  get_instance()))
       {
-        return make_automaton(alphabet.begin(), alphabet.end());
+        return make_automaton(alphabet.begin(), alphabet.end(), mrep, srep);
       }
 
       template <class InputIterator>
@@ -102,15 +120,15 @@ namespace vcsn
       rat_exp_t
       make_rat_exp(const Iterator& begin,
 		   const Iterator& end,
-		   const std::string& exp = vcsn::algebra::
-		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance()->zero,
+		   const std::string& exp = (vcsn::algebra::
+					     series_rep_default<semiring_t, monoid_t>::
+					     get_instance()->zero),
 		   const monoid_rep_t& mrep = *(vcsn::algebra::
-		   monoid_rep_default<monoid_t>::
-		   get_instance()),
+						monoid_rep_default<monoid_t>::
+						get_instance()),
 		   const series_rep_t& srep = *(vcsn::algebra::
-		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance()))
+						series_rep_default<semiring_t, monoid_t>::
+						get_instance()))
       {
 	alphabet_t	alphabet;
         for (Iterator i = begin; i != end; ++i)
@@ -130,15 +148,15 @@ namespace vcsn
       template <class T>
       rat_exp_t
       make_rat_exp(const T& alphabet,
-		   const std::string& exp = vcsn::algebra::
-		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance()->zero,
+		   const std::string& exp = (vcsn::algebra::
+					     series_rep_default<semiring_t, monoid_t>::
+					     get_instance()->zero),
 		   const monoid_rep_t& mrep = *(vcsn::algebra::
-		   monoid_rep_default<monoid_t>::
-		   get_instance()),
+						monoid_rep_default<monoid_t>::
+						get_instance()),
 		   const series_rep_t& srep = *(vcsn::algebra::
-		   series_rep_default<semiring_t, monoid_t>::
-		   get_instance()))
+						series_rep_default<semiring_t, monoid_t>::
+						get_instance()))
       {
         return make_rat_exp(alphabet.begin(), alphabet.end(),
 			    exp, mrep, srep);

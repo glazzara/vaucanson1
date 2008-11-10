@@ -27,16 +27,39 @@ namespace vcsn
   {
     VCSN_CONTEXT_NAMESPACE
     {
-
       template <class T1, class T2>
       automaton_t make_automaton(const T1& first_alphabet,
-	    const T2& second_alphabet);
+	const T2& second_alphabet,
+	const monoid_rep_t& mrep =
+	*(vcsn::algebra::monoid_rep_default<monoid_t>::get_instance()),
+	const first_monoid_rep_t& mrep1 =
+	*(vcsn::algebra::monoid_rep_default<first_monoid_t>::get_instance()),
+	const second_monoid_rep_t& mrep2 =
+	*(vcsn::algebra::monoid_rep_default<second_monoid_t>::get_instance()),
+	const series_rep_t& srep =
+	*(vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()),
+	const first_series_rep_t& srep1 =
+	*(vcsn::algebra::series_rep_default<semiring_t, first_monoid_t>::get_instance()),
+	const second_series_rep_t& srep2 =
+	*(vcsn::algebra::series_rep_default<semiring_t, second_monoid_t>::get_instance()));
 
       template <class FirstInputIterator, class SecondInputIterator>
       automaton_t make_automaton(const FirstInputIterator first_begin,
-	    const FirstInputIterator first_end,
-	    const SecondInputIterator second_begin,
-	    const SecondInputIterator second_end);
+	const FirstInputIterator first_end,
+	const SecondInputIterator second_begin,
+	const SecondInputIterator second_end,
+	const monoid_rep_t& mrep =
+	*(vcsn::algebra::monoid_rep_default<monoid_t>::get_instance()),
+	const first_monoid_rep_t& mrep1 =
+	*(vcsn::algebra::monoid_rep_default<first_monoid_t>::get_instance()),
+	const second_monoid_rep_t& mrep2 =
+	*(vcsn::algebra::monoid_rep_default<second_monoid_t>::get_instance()),
+	const series_rep_t& srep =
+	*(vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()),
+	const first_series_rep_t& srep1 =
+	*(vcsn::algebra::series_rep_default<semiring_t, first_monoid_t>::get_instance()),
+	const second_series_rep_t& srep2 =
+	*(vcsn::algebra::series_rep_default<semiring_t, second_monoid_t>::get_instance()));
 
       template <class T1, class T2>
       monoid_elt_t make_couple(const T1& first_alphabet,
