@@ -1,5 +1,11 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Fix wrong type when declaring some attributes.
+	* taf-kit/src/common.hh: Change type of `mrep1' from `monoid_rep_t'
+	  to `first_monoid_rep_t'. Same with `mrep2' to `second_monoid_rep_t'
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Add missing attributes initialization.
 	* taf-kit/src/main.cc: Affect the `mrep1', `mrep2', `srep1' and
 	  `srep2' attributes with values taken from the command line.

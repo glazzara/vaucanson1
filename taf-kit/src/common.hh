@@ -108,9 +108,9 @@ struct arguments_t
     // Representation of Series<Semiring, SecondMonoid>
     IOAUT_CONTEXT::series_rep_t srep2;
     // Representation of FirstMonoid.
-    monoid_rep_t mrep1;
+    first_monoid_rep_t mrep1;
     // Representation of SecondMonoid.
-    monoid_rep_t mrep2;
+    second_monoid_rep_t mrep2;
 
     std::vector<std::string> alphabet2;
     std::string parser2;
