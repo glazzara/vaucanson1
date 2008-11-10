@@ -61,7 +61,7 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (exp)
 DEFINE_COMMAND (NAME (derived_term_automaton)
 		CODE (
 		  rat_exp_t   e = get_exp (args, 1);
-		  automaton_t a = make_automaton (get_alphabet (args.alphabet));
+		  automaton_t a = make_automaton (get_alphabet (args.alphabet), args.mrep, args.srep);
 		  derived_term_automaton (a, e))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));

@@ -44,6 +44,7 @@ automaton_getter::operator() (std::string& str) const
 {
   std::istringstream is (str);
 
+  // Representations will be build by the automaton loader.
 # ifndef WITH_TWO_ALPHABETS
   automaton_t a = make_automaton (alphabet_t ());
 # else
@@ -85,6 +86,7 @@ automaton_getter::operator() (command_output_status& i) const
       exit (1);
     }
 
+  // Representations will be build by the automaton loader.
 # ifndef WITH_TWO_ALPHABETS
   automaton_t a = make_automaton (alphabet_t ());
 # else
@@ -197,6 +199,7 @@ boolean_automaton_getter::operator() (std::string& str) const
 {
   std::istringstream is (str);
 
+  // Representations will be build by the automaton loader.
   IOAUT_CONTEXT::automaton_t a =
     IOAUT_CONTEXT::make_automaton (first_alphabet_t());
 
@@ -226,6 +229,7 @@ boolean_automaton_getter::operator() (command_output_status& i) const
       exit (1);
     }
 
+  // Representations will be build by the automaton loader.
   IOAUT_CONTEXT::automaton_t a =
     IOAUT_CONTEXT::make_automaton (first_alphabet_t ());
 

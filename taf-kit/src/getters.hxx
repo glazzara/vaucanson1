@@ -152,9 +152,9 @@ static automaton_t get_aut (const arguments_t& args, int n)
     using namespace vcsn::xml;
 
 # ifndef WITH_TWO_ALPHABETS
-    automaton_t a = make_automaton (alphabet_t ());
+    automaton_t a = make_automaton (alphabet_t (), args.mrep, args.srep);
 # else
-    automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
+    automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t (), args.mrep, args.mrep1, args.mrep2, args.srep, args.srep1, args.srep2);
 # endif // !WITH_TWO_ALPHABETS
 
 # ifdef GLOBAL_RESULT
@@ -208,7 +208,7 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(std::string s)
     using namespace vcsn::xml;
 
     IOAUT_CONTEXT::automaton_t a =
-      IOAUT_CONTEXT::make_automaton(first_alphabet_t());
+      IOAUT_CONTEXT::make_automaton(first_alphabet_t(), args.mrep1, args.srep1);
 
 # ifdef GLOBAL_RESULT
     switch (GLOBAL_RESULT.input_type)

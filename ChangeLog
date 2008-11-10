@@ -1,5 +1,16 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Add support for representations structures at various places.
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/fmp_commands.cc,
+	* taf-kit/src/getters.hxx,
+	* taf-kit/src/ratexp_commands.hh: Add whenever necessary arguments
+	  when callings the `make_automaton' function to allow the user
+	  changing default with command line arguments.
+	* taf-kit/src/pipe_getters.hxx: Add comments.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Fix wrong type when declaring some attributes.
 	* taf-kit/src/common.hh: Change type of `mrep1' from `monoid_rep_t'
 	  to `first_monoid_rep_t'. Same with `mrep2' to `second_monoid_rep_t'

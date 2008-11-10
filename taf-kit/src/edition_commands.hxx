@@ -430,9 +430,11 @@ static int edit_automaton_command (const arguments_t& args)
   using namespace vcsn::xml;
 
 # ifndef WITH_TWO_ALPHABETS
-  automaton_t a = make_automaton (alphabet_t ());
+  automaton_t a = make_automaton (alphabet_t (), args.mrep, args.srep);
 # else
-  automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
+  automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t (),
+				  args.mrep, args.mrep1, args.mrep2,
+				  args.srep, args.srep1, args.srep2);
 # endif // !WITH_TWO_ALPHABETS
 
   std::fstream input (args.args[1]);
@@ -447,10 +449,12 @@ static int edit_automaton_command (const arguments_t& args)
       // We define the automaton from scratch: the user should have
       // specified the alphabet to use.
 # ifndef WITH_TWO_ALPHABETS
-      a = make_automaton (get_alphabet (args.alphabet));
+      a = make_automaton (get_alphabet (args.alphabet), args.mrep, args.srep);
 # else
       a = make_automaton (get_first_alphabet (args.alphabet),
-			  get_second_alphabet (args.alphabet2));
+			  get_second_alphabet (args.alphabet2),
+			  args.mrep, args.mrep1, args.mrep2,
+			  args.srep, args.srep1, args.srep2);
 # endif // !WITH_TWO_ALPHABETS
     }
 
