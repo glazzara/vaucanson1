@@ -1,5 +1,12 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Use the concat representation in the DumpVisitor.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
+	  (constant): Mimic `op_rout' for monoid elements. (one, zero):
+	  update comments.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add more type helpers for FMP generic contexts.
 	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh,
 	* include/vaucanson/automata/generic_contexts/int_fmp_transducer_structures.hh,

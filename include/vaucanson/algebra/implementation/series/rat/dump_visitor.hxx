@@ -289,16 +289,25 @@ namespace vcsn {
       void
       constant(const monoid_elt_value_t& m)
       {
-	// FIXME: we should use monoid_elt_t to get the concat attribute.
-	for_all_const_(monoid_elt_value_t, i, m)
-	  ostr_ << *i;
+	typename monoid_elt_value_t::const_iterator i = m.begin();
+
+	// Print the first letter.
+	ostr_ << *i;
+	++i;
+
+	// Print subsequent letters using the concat representation.
+	while (i != m.end())
+	{
+	  ostr_ << monoid_rep_->concat << *i;
+	  ++i;
+	}
       }
 
       virtual
       void
       zero()
       {
-	// FIXME: see constant.
+	// FIXME: factor with constant.
 	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::zero()));
       }
 
@@ -306,7 +315,7 @@ namespace vcsn {
       void
       one()
       {
-	// FIXME: see constant.
+	// FIXME: factor with constant.
 	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::id()));
       }
 
