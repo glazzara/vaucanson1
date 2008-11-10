@@ -27,7 +27,7 @@ $VCSN identity -o dOt $int_b | dot
 
 test `$VCSN eval $int_b "10#11"` = 1
 
-test `$VCSN eval $int_b "10#12"` = 0
+fail1 $VCSN eval $int_b "10#12"
 
 test `$VCSN eval $int_b "11"` = 1
 

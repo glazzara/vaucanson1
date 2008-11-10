@@ -26,7 +26,7 @@ $VCSN identity $int_z -o DOT | dot
 
 test `$VCSN eval $int_z "10#11"` = 3
 
-test `$VCSN eval $int_z "10#12"` = 0
+fail1 $VCSN eval $int_z "10#12"
 
 test `$VCSN eval $int_z "11"` = 6
 

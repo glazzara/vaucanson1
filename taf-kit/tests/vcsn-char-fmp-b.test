@@ -72,7 +72,19 @@ fail1 $VCSN is-empty t1.xml
 
   input=`$VCSN eval t1.xml abba`
   $VCSN domain t1.xml | vcsn-char-b eval - abba
-  $VCSN image t1.xml | vcsn-char-b eval - $input
+  $VCSN image t1.xml > t1image.xml
+# The following test must fail because input is a series and not a word...
+fail1 vcsn-char-b eval t1image.xml $input
+# ... so we expand it ...
+  expanded_input=`vcsn-char-b -a"xy" expand $input`
+# ... split it at the + (it should be yxx+yxxy) ...
+  first_input=`echo "$expanded_input" | sed 's/^.*+//'`
+  second_input=`echo "$expanded_input" | sed 's/+.*$//'`
+# ... check the two parts are not the same ...
+  test x"$first_input" != x"$second_input"
+# ... and eval the image of t1.xml on both of them.
+  vcsn-char-b eval t1image.xml $first_input
+  vcsn-char-b eval t1image.xml $second_input
 
   $VCSN to-rw t1.xml
 
