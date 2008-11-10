@@ -301,6 +301,8 @@ namespace vcsn
 	monoid_t*			monoid_;
 	semiring_t*			semiring_;
 
+	// FIXME: maybe we should rename this attribute to aut_,
+	// as with all the other handlers.
 	T&		param_;
 	Handler*	monoidh_;
 	Handler*	semiringh_;

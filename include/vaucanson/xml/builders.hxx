@@ -269,7 +269,7 @@ namespace vcsn
 	typename T::monoid_t::alphabet_t	at;
 	typedef typename T::monoid_t		monoid_t;
 
-	monoid_t*	monoid = new monoid_t(at);
+	monoid_t*	monoid = new monoid_t(at, *(param.structure().series().monoid().representation()));
 	builders::check_monoid_consistency(param, localname, attrs);
 	return monoid;
       }

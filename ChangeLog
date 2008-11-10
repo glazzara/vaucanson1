@@ -1,5 +1,18 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Preserve representation structures on initialization.
+
+	For backward compatibility and minimum necessary support of the new
+	`monoid_rep' and `series_rep', preserve the value passed to the
+	automaton loader. These value may be overwritten if the parser
+	decides so.
+	* include/vaucanson/xml/contexts/fmp.hxx,
+	* include/vaucanson/xml/builders.hxx (create_monoid): Use the
+	  required structures when constructing the monoid.
+	* include/vaucanson/xml/handlers.hh: Add a comment.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Improve support representation in automaton makers.
 	* include/vaucanson/contexts/automaton_maker.thh,
 	* include/vaucanson/contexts/automaton_maker.thxx,
