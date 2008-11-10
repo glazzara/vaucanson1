@@ -188,8 +188,10 @@ static automaton_t get_aut (const arguments_t& args, int n)
 }
 
 #ifdef WITH_TWO_ALPHABETS
-static IOAUT_CONTEXT::automaton_t get_boolean_aut(std::string s)
+static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n)
 {
+  const std::string& s = args.args[n];
+
 # ifdef GLOBAL_RESULT
   if (s == "-")
   {

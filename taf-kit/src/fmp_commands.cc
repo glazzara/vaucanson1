@@ -95,7 +95,7 @@ DEFINE_COMMAND (NAME (evaluation)
 DEFINE_COMMAND (NAME (evaluation_fmp)
 		CODE (
 		      automaton_t src = get_aut(args, 1);
-		  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args.args[2]);
+		  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 2);
 		  IOAUT_CONTEXT::automaton_t res =
 		  IOAUT_CONTEXT::make_automaton(src.structure().series().monoid().second_monoid().alphabet(), *(src.structure().series().monoid().second_monoid().representation()), args.srep2);
 		  evaluation_fmp(src, a, res))
@@ -136,7 +136,7 @@ DEFINE_COMMAND (NAME (to_rw)
 DEFINE_COMMAND (NAME (intersection)
 		CODE (
 		  IOAUT_CONTEXT::automaton_t a =
-		  get_boolean_aut(args.args[1]);
+		  get_boolean_aut(args, 1);
 		  IOAUT_CONTEXT::alphabet_t A =
 		  a.structure().series().monoid().alphabet();
 		  automaton_t fmp = make_automaton(A, A, args.mrep, *(a.structure().series().monoid().representation()), *(a.structure().series().monoid().representation()), args.srep, *(a.structure().series().representation()), *(a.structure().series().representation()));

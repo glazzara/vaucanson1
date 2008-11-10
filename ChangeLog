@@ -1,5 +1,14 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Change get_boolean_aut() to take arguments_t as first argument.
+	* taf-kit/src/fmp_commands.cc (evaluation_fmp, intersection): Use
+	  two arguments.
+	* taf-kit/src/getters.hxx (get_boolean_aut): Change type of the first
+	  argument from `std::string' to `arguments_t'. Add a second argument
+	  of type `int'.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Add support for representations structures at various places.
 	* taf-kit/src/edition_commands.hxx,
 	* taf-kit/src/fmp_commands.cc,
