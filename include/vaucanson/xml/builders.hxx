@@ -24,6 +24,7 @@
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/xml/xml_exp_visitor.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
+# include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 
 namespace vcsn
 {
@@ -232,7 +233,15 @@ namespace vcsn
 	parser_->setContentHandler(&unsuph_);
       }
       else if (XMLString::equals(eq_.writingData, localname))
+      {
+	algebra::monoid_rep<T> rep;
+	if (tools::has_attribute(attrs, eq_.identitySymbol))
+	  rep.empty = xmlstr(tools::get_attribute(attrs, eq_.identitySymbol));
+	if (tools::has_attribute(attrs, eq_.concat))
+	  rep.concat = xmlstr(tools::get_attribute(attrs, eq_.concat));
+	monoid_.set_representation(rep);
 	parser_->setContentHandler(&unsuph_);
+      }
       else
 	error::token(localname);
     }
@@ -493,6 +502,11 @@ namespace vcsn
 	tools::set_attribute(node, "genKind", letter_kind);
 	root->appendChild(node);
 
+	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData, "identitySym", aut.series().monoid().representation()->empty);
+	tools::set_attribute(writingData, "timesSym", aut.series().monoid().representation()->concat);
+	node->appendChild(writingData);
+
 	typedef typename T::monoid_t::alphabet_t::const_iterator alphabet_iterator;
 
 	if (letter_kind == "simple")
@@ -555,8 +569,26 @@ namespace vcsn
 	  for (typename U::const_iterator i = word.begin(); i != word.end(); ++i)
 	    monGen_maker(*i, doc, node);
 	}
-
 	root->appendChild(node);
+      }
+
+      template <typename T>
+      void
+      create_type_writingData_node(const T& aut,
+				   xercesc::DOMDocument* doc,
+				   xercesc::DOMElement* root)
+      {
+	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData, "plusSym", aut.series().representation()->plus);
+	tools::set_attribute(writingData, "timesSym", aut.series().representation()->times);
+	tools::set_attribute(writingData, "starSym", aut.series().representation()->star);
+	tools::set_attribute(writingData, "zeroSym", aut.series().representation()->zero);
+	tools::set_attribute(writingData, "weightOpening", aut.series().representation()->open_weight);
+	tools::set_attribute(writingData, "weightClosing", aut.series().representation()->close_weight);
+	tools::set_attribute(writingData, "openPar", aut.series().representation()->open_par);
+	tools::set_attribute(writingData, "closePar", aut.series().representation()->close_par);
+	tools::set_attribute(writingData, "spacesSym", aut.series().representation()->spaces.front());
+	root->appendChild(writingData);
       }
 
       // FIXME: We should be able to specialize for all type U,

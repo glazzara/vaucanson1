@@ -127,7 +127,8 @@ namespace vcsn
 				 Handler& root,
 				 T& param)
       : Handler(parser, root),
-	param_(param)
+	param_(param),
+	unsuph_(parser, *this)
     {
     }
 
@@ -151,6 +152,31 @@ namespace vcsn
 	monoidh_ = builders::create_monoidh(*monoid_, attrs, parser_, *this);
 	parser_->setContentHandler(monoidh_);
       }
+      else if (XMLString::equals(eq_.writingData, localname))
+      {
+	if (tools::has_attribute(attrs, eq_.openPar))
+	  rep_.open_par = xmlstr(tools::get_attribute(attrs, eq_.openPar));
+	if (tools::has_attribute(attrs, eq_.closePar))
+	  rep_.close_par = xmlstr(tools::get_attribute(attrs, eq_.closePar));
+	if (tools::has_attribute(attrs, eq_.plus))
+	  rep_.plus = xmlstr(tools::get_attribute(attrs, eq_.plus));
+	if (tools::has_attribute(attrs, eq_.times))
+	  rep_.times = xmlstr(tools::get_attribute(attrs, eq_.times));
+	if (tools::has_attribute(attrs, eq_.star))
+	  rep_.star = xmlstr(tools::get_attribute(attrs, eq_.star));
+	if (tools::has_attribute(attrs, eq_.zero))
+	  rep_.zero = xmlstr(tools::get_attribute(attrs, eq_.zero));
+	if (tools::has_attribute(attrs, eq_.openWeight))
+	  rep_.open_weight = xmlstr(tools::get_attribute(attrs, eq_.openWeight));
+	if (tools::has_attribute(attrs, eq_.closeWeight))
+	  rep_.close_weight = xmlstr(tools::get_attribute(attrs, eq_.closeWeight));
+	if (tools::has_attribute(attrs, eq_.plus))
+	{
+	  rep_.spaces.clear();
+	  rep_.spaces.push_back(xmlstr(tools::get_attribute(attrs, eq_.plus)));
+	}
+	parser_->setContentHandler(&unsuph_);
+      }
       else
 	error::token(localname);
     }
@@ -162,7 +188,7 @@ namespace vcsn
 			       const XMLCh* const)
     {
       using namespace xercesc;
-      typename T::series_set_t series(*semiring_, *monoid_);
+      typename T::series_set_t series(*semiring_, *monoid_, rep_);
       param_.attach(series);
 
       if (XMLString::equals(eq_.valueType, localname))

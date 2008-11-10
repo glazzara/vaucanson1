@@ -1,3 +1,23 @@
+2008-11-10  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Add support of writingData for typeValue and monoid:
+	- plusSym
+	- timesSym
+	- ...
+
+	* data/vaucanson.xsd: Here.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
+	Since we need to create the monoid before parsing its content, we need
+	to update the representation after its creation. So set_representation
+	should be public (or friendly)
+	* include/vaucanson/xml/builders.hh: Here.
+	* include/vaucanson/xml/builders.hxx: Here.
+	* include/vaucanson/xml/handlers.hh: Here.
+	* include/vaucanson/xml/handlers.hxx: Here.
+	* include/vaucanson/xml/printers.hxx: Here.
+	* include/vaucanson/xml/xmleq.hh: Here.
+	* include/vaucanson/xml/xmleq.hxx: Here.
+
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add an operator== for series_rep (uniqueness constraints).

@@ -304,6 +304,12 @@ namespace vcsn
 			  xercesc::DOMDocument* doc,
 			  xercesc::DOMElement* root);
 
+      template <typename T>
+      void
+      create_type_writingData_node(const T&,
+				   xercesc::DOMDocument* doc,
+				   xercesc::DOMElement* root);
+
       // Functor to allow partial specialization.
       template <typename T>
       struct

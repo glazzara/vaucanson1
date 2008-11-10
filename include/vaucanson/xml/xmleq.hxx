@@ -67,14 +67,17 @@ namespace vcsn
       writingData = xercesc::XMLString::transcode("writingData");
 
       /* attributes */
+      identitySymbol = xercesc::XMLString::transcode("identitySym");
+      zeroSymbol = xercesc::XMLString::transcode("zeroSym");
+      concat = xercesc::XMLString::transcode("concatSym");
 
       openPar = xercesc::XMLString::transcode("openPar");
       closePar = xercesc::XMLString::transcode("closePar");
-      plus = xercesc::XMLString::transcode("plus");
-      times = xercesc::XMLString::transcode("times");
+      plus = xercesc::XMLString::transcode("plusSym");
+      times = xercesc::XMLString::transcode("timesSym");
       openWeight = xercesc::XMLString::transcode("openWeight");
       closeWeight = xercesc::XMLString::transcode("closeWeight");
-      spaces = xercesc::XMLString::transcode("spaces");
+      spaces = xercesc::XMLString::transcode("spacesSym");
 
       value = xercesc::XMLString::transcode("value");
       id = xercesc::XMLString::transcode("id");
@@ -123,6 +126,12 @@ namespace vcsn
       xercesc::XMLString::release(&zero);
       xercesc::XMLString::release(&monElmt);
       xercesc::XMLString::release(&weight);
+
+      xercesc::XMLString::release(&writingData);
+
+      xercesc::XMLString::release(&identitySymbol);
+      xercesc::XMLString::release(&zeroSymbol);
+      xercesc::XMLString::release(&concat);
 
       xercesc::XMLString::release(&openPar);
       xercesc::XMLString::release(&closePar);

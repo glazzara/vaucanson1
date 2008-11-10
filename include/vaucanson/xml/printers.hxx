@@ -81,6 +81,7 @@ namespace vcsn
 
       DOMElement* valueType = tools::create_element(doc_, "valueType");
       automaton->appendChild(valueType);
+      builders::create_type_writingData_node(aut_, doc_, valueType);
       builders::create_semiring_node(aut_, doc_, valueType);
       builders::create_monoid_node(aut_, doc_, valueType);
 

@@ -84,6 +84,10 @@ namespace vcsn
 
 	XMLCh* writingData;
 
+	XMLCh* identitySymbol;
+	XMLCh* zeroSymbol;
+	XMLCh* concat;
+
 	XMLCh* openPar;
 	XMLCh* closePar;
 	XMLCh* plus;

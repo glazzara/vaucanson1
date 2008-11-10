@@ -45,6 +45,8 @@
 # include <vaucanson/xml/builders.hh>
 # include <vaucanson/xml/regexp.hh>
 
+# include <vaucanson/algebra/implementation/series/series_rep.hh>
+
 namespace vcsn
 {
   namespace xml
@@ -300,12 +302,14 @@ namespace vcsn
 
 	monoid_t*			monoid_;
 	semiring_t*			semiring_;
+	algebra::series_rep<semiring_t, monoid_t>		rep_;
 
 	// FIXME: maybe we should rename this attribute to aut_,
 	// as with all the other handlers.
 	T&		param_;
 	Handler*	monoidh_;
 	Handler*	semiringh_;
+	UnsupHandler		unsuph_;
     };
 
     /**

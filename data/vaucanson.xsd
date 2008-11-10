@@ -155,7 +155,8 @@ Can be a "unit", a "free" or a "product" monoid.
   <xs:sequence>
     <xs:element name="writingData" minOccurs="0">
       <xs:complexType>
-	<xs:attribute name="identitySymbol" use="required"/>
+	<xs:attribute name="identitySym"/>
+	<xs:attribute name="timesSym"/>
       </xs:complexType>
     </xs:element>
     <xs:element name="genSort" type="genSort" minOccurs="0"/>
@@ -201,8 +202,8 @@ Writing data can be added.
   <xs:sequence>
     <xs:element name="writingData" minOccurs="0">
       <xs:complexType>
-	<xs:attribute name="identitySymbol" use="required"/>
-	<xs:attribute name="zeroSymbol" use="required"/>
+	<xs:attribute name="identitySym"/>
+	<xs:attribute name="zeroSym"/>
       </xs:complexType>
     </xs:element>
     <xs:element name="semiring" type="semiring" minOccurs="0"/>
@@ -239,6 +240,19 @@ Writing data can be added.
 -->
 <xs:complexType name="valueType">
   <xs:sequence>
+    <xs:element name="writingData" minOccurs="0">
+      <xs:complexType>
+	<xs:attribute name="plusSym"/>
+	<xs:attribute name="timesSym"/>
+	<xs:attribute name="starSym"/>
+	<xs:attribute name="zeroSym"/>
+	<xs:attribute name="spacesSym"/>
+	<xs:attribute name="weightOpening"/>
+	<xs:attribute name="weightClosing"/>
+	<xs:attribute name="openPar"/>
+	<xs:attribute name="closePar"/>
+      </xs:complexType>
+    </xs:element>
     <xs:element name="semiring" type="semiring"/>
     <xs:element name="monoid" type="monoid"/>
   </xs:sequence>
