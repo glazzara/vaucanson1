@@ -19,6 +19,7 @@
 
 # include <vaucanson/algebra/concept/freemonoid_product_base.hh>
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
+# include <vaucanson/algebra/implementation/series/series_rep.hh>
 # include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
@@ -55,6 +56,38 @@ namespace vcsn {
       std::string close_par;
 
       monoid_rep();
+
+      /// Project an FMP monoid representation.
+      monoid_rep<F> first_projection() const;
+      monoid_rep<S> second_projection() const;
+    };
+
+    /*-------------------------------------------------------------.
+    | Specialization of the series_rep structure for this concept. |
+    `-------------------------------------------------------------*/
+
+    template <typename Semiring, typename F, typename S>
+    struct series_rep<Semiring, FreeMonoidProduct<F, S> > : series_rep<Semiring, F>
+    {
+      // Type helpers.
+      typedef series_rep<Semiring, F> parent_t;
+
+      using parent_t::open_par;
+      using parent_t::close_par;
+      using parent_t::plus;
+      using parent_t::times;
+      using parent_t::star;
+      using parent_t::zero;
+      using parent_t::open_weight;
+      using parent_t::close_weight;
+      using parent_t::spaces;
+
+      /// Default CTOR.
+      series_rep();
+
+      /// Project an FMP series representation.
+      series_rep<Semiring, F> first_projection() const;
+      series_rep<Semiring, S> second_projection() const;
     };
 
     template <typename F, typename S>

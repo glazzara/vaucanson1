@@ -1,5 +1,17 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add new FMP related representation specializations.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh: Include
+	  `series_rep.hh'. (monoid_rep): Add new methods `first_projection'
+	  and `second_projection'. Add `series_rep' specialization for FMP
+	  monoids.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Cosmetic
+	  changes. Do not set empty to the "1" string. Add implementations
+	  of the two previously mentioned methods. Add implementation of the
+	  `series_rep' representation.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Use the concat representation in the DumpVisitor.
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
 	  (constant): Mimic `op_rout' for monoid elements. (one, zero):

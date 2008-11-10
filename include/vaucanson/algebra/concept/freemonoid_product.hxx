@@ -19,18 +19,78 @@
 
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
+namespace vcsn
+{
+  namespace algebra
+  {
     template <typename F, typename S>
     monoid_rep<FreeMonoidProduct<F, S> >::monoid_rep() :
     monoid_rep<F>(),
     open_par("("),
     sep(","),
     close_par(")")
+    {}
+
+    template <typename F, typename S>
+    monoid_rep<F>
+    monoid_rep<FreeMonoidProduct<F, S> >::first_projection() const
     {
-      empty = "1";
+      monoid_rep<F> ret;
+      ret.empty = empty;
+      return ret;
+    }
+
+    template <typename F, typename S>
+    monoid_rep<S>
+    monoid_rep<FreeMonoidProduct<F, S> >::second_projection() const
+    {
+      monoid_rep<S> ret;
+      ret.empty = empty;
+      return ret;
+    }
+
+    template <typename Semiring, typename F, typename S>
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::series_rep() :
+    series_rep<Semiring, F>()
+    {
+    }
+
+    template <typename Semiring, typename F, typename S>
+    series_rep<Semiring, F>
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::first_projection() const
+    {
+      series_rep<Semiring, F> ret;
+
+      ret.open_par = open_par;
+      ret.close_par = close_par;
+      ret.plus = plus;
+      ret.times = times;
+      ret.star = star;
+      ret.zero = zero;
+      ret.open_weight = open_weight;
+      ret.close_weight = close_weight;
+      ret.spaces = spaces;
+
+      return ret;
+    }
+
+    template <typename Semiring, typename F, typename S>
+    series_rep<Semiring, S>
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_projection() const
+    {
+      series_rep<Semiring, S> ret;
+
+      ret.open_par = open_par;
+      ret.close_par = close_par;
+      ret.plus = plus;
+      ret.times = times;
+      ret.star = star;
+      ret.zero = zero;
+      ret.open_weight = open_weight;
+      ret.close_weight = close_weight;
+      ret.spaces = spaces;
+
+      return ret;
     }
 
     template <typename F, typename S>
@@ -113,8 +173,8 @@ namespace vcsn {
 	     (a.second_monoid() == b.second_monoid());
     }
 
-  } // algebra
+  } // ! algebra
 
-} // vcsn
+} // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_FREEMONOID_PRODUCT_HXX
