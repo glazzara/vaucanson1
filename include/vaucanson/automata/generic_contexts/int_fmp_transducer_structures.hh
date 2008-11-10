@@ -36,11 +36,15 @@ namespace vcsn
       typedef first_monoid_elt_t::set_t		first_monoid_t;
       typedef first_monoid_elt_t::value_t	first_monoid_elt_value_t;
       typedef first_monoid_t::alphabet_t	first_alphabet_t;
+      typedef first_monoid_t::monoid_rep_t	first_monoid_rep_t;
+      typedef AUTOMATON_CONTEXT::series_rep_t	first_series_rep_t;
 
       typedef AUTOMATON_CONTEXT::monoid_elt_t	second_monoid_elt_t;
       typedef second_monoid_elt_t::set_t	second_monoid_t;
       typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
       typedef second_monoid_t::alphabet_t	second_alphabet_t;
+      typedef second_monoid_t::monoid_rep_t	second_monoid_rep_t;
+      typedef AUTOMATON_CONTEXT::series_rep_t	second_series_rep_t;
 
     } // End of namespace VCSN_CONTEXT_NAMESPACE.
   } // End of namespace VCSN_GRAPH_IMPL

@@ -1,3 +1,13 @@
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add more type helpers for FMP generic contexts.
+	* include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh:
+	  New `first_monoid_rep_t', `second_monoid_rep_t',
+	  `first_series_rep_t' and `second_series_rep_t' types.
+
 2008-11-09  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Replace "src" by "source" in XML, #189.
