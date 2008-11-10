@@ -1,5 +1,13 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add an operator== for series_rep (uniqueness constraints).
+	* include/vaucanson/algebra/implementation/series/series_rep.hh:
+	  Declare a new `operator==' for comparing two series_rep.
+	* include/vaucanson/algebra/implementation/series/series_rep.hxx:
+	  Add the implementation of the previously mentioned function.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Update two test to match new defaults.
 	* src/tests/xml/int_fmp_ref.dot,
 	* src/tests/xml/int_z_fmp_ref.dot: Change `1' to `e' the new empty

@@ -35,6 +35,22 @@ namespace vcsn {
       spaces.push_back(" ");
     }
 
+    template <typename S, typename M>
+    bool
+    operator==(boost::shared_ptr<series_rep<S, M> > lhs,
+	       boost::shared_ptr<series_rep<S, M> > rhs)
+    {
+      return (lhs->open_par == rhs->open_par &&
+	      lhs->close_par == rhs->close_par &&
+	      lhs->plus == rhs->plus &&
+	      lhs->times == rhs->times &&
+	      lhs->star == rhs->star &&
+	      lhs->zero == rhs->zero &&
+	      lhs->open_weight == rhs->open_weight &&
+	      lhs->close_weight == rhs->close_weight &&
+	      lhs->spaces == rhs->spaces);
+    }
+
   } // ! algebra
 
 } // ! vcsn

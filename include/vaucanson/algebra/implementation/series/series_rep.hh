@@ -43,6 +43,10 @@ namespace vcsn {
       series_rep();
     };
 
+    template <typename S, typename M>
+    bool operator==(boost::shared_ptr<series_rep<S, M> >,
+		    boost::shared_ptr<series_rep<S, M> >);
+
     template <typename Semiring, typename Monoid>
     struct series_rep_default
     {
