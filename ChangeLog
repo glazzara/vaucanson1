@@ -1,5 +1,12 @@
 2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Update two test to match new defaults.
+	* src/tests/xml/int_fmp_ref.dot,
+	* src/tests/xml/int_z_fmp_ref.dot: Change `1' to `e' the new empty
+	  word representation for int based FMP.
+
+2008-11-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Fix tests which should have failed in the past.
 	* taf-kit/tests/vcsn-char-fmp-b.test: Fix test and test more
 	  thoroughly.
