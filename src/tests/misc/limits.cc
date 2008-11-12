@@ -16,6 +16,7 @@
 //
 #include <vaucanson/misc/limits.hh>
 #include <tests/check/tester.hh>
+#include <typeinfo>
 
 template <typename T>
 void print_attr(T attr)

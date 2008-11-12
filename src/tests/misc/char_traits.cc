@@ -20,6 +20,7 @@
 #include <string>
 #include <utility>
 #include <cassert>
+#include <typeinfo>
 
 template <class Letter>
 void

@@ -1,4 +1,9 @@
-2008-11-12  Alexandre Duret-Lutz  <adl@hush.va-et-vient.net>
+2008-11-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* src/tests/misc/char_traits.cc, src/tests/misc/limits.cc: Include
+	<typeinfo> to kill a G++-4.3 warning.
+
+2008-11-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/aut_to_exp.hxx (DMChooser::operator()): 
 	Use misc::limits<int>::max() instead of INT_MAX.
