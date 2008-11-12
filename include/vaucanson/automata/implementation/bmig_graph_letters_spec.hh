@@ -87,7 +87,7 @@ namespace vcsn
 
 	typedef GeometryCoords				  geometry_coords_t;
 
-	typedef geometry<hstate_t, htransition_t, GeometryCoords>
+	typedef vcsn::geometry<hstate_t, htransition_t, GeometryCoords>
 							  geometry_t;
 
 	//Definition of various iterator types for the graph structure.
