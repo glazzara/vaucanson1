@@ -13,7 +13,7 @@
 
 include ../demo.mk
 
-EXTRA_DIST = one_rule_rewriting.hh one_rule_rewriting.hxx
+EXTRA_DIST = one_rule_rewriting.hh one_rule_rewriting.hxx shortest.hh
 
 noinst_PROGRAMS = \
   fibonacci_demo \
