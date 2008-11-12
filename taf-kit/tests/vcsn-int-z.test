@@ -36,15 +36,19 @@ grep 'Cannot parse' stderr
 sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 edit-automaton 33.xml
 # Add states
 1
-# Add one state
+# Add two states
 2
 # Set a state to be initial.
 5
 # Which state
 0
+# With weight
+1
 # Set a state to be final.
 7
 # Which state
+1
+# With weight
 1
 # Add transition
 3
@@ -63,6 +67,8 @@ sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 edit-automaton 33.xml
 # Exit.
 10
 EOF
+
+test `$VCSN eval 33.xml '32#33#32'` = 175
 
 fail1 $VCSN is-complete 33.xml
 $VCSN complete 33.xml \| is-complete -

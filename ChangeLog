@@ -1,5 +1,11 @@
 2008-11-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Fix a test for vcsn-int-z.
+	* taf-kit/tests/vcsn-int-z.test: Add missing weight input. Add a
+	  regression test.
+
+2008-11-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Fix a bug with the spaces representation.
 	* include/vaucanson/xml/handlers.hxx (TypeHandler<T>::start): Fix
 	  typo by changing `plus' to `spaces'.
