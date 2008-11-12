@@ -1,5 +1,10 @@
 2008-11-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix include dependencies.
+	* algorithms/minimization_hopcroft.hxx: cleanup unused include.
+
+2008-11-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix compilation failure with bison.
 	* krat_exp_bison.yy: Add missing semicolon.
 

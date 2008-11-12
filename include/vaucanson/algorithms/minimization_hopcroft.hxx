@@ -29,7 +29,6 @@
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>
-# include <vaucanson/misc/bitset.hh>
 
 # ifndef VCSN_NDEBUG
 #  include <vaucanson/algorithms/is_deterministic.hh>
