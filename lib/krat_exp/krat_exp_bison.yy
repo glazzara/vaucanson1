@@ -55,19 +55,19 @@ yylex(yy::krat_exp_bison::semantic_type* yylval,
 %start exp;
 
 exp :
-  rexp {exp = *$1; delete $1}
+  rexp {exp = *$1; delete $1;}
   ;
 
 rexp :
-    OPAR   rexp   CPAR {$$ = $2 ; delete $1; delete $3}
-  | rexp   PLUS   rexp {$$ = *$1 + $3; delete $1; delete $2; delete $3}
-  | rexp   TIMES  rexp {$$ = *$1 * $3; delete $1; delete $2; delete $3}
-  | rexp   rexp	  %prec TIMES2{$$ = *$1 * $2; delete $1; delete $2}
-  | rexp   STAR	  {$1->star(); $$ = $1; delete $2}
-  | WEIGHT rexp	  %prec LPROD {$2->left_weight($1); delete $1; $$ = $2}
-  | rexp   WEIGHT {$1->right_weight($2); delete $2;$$ = $1}
-  | ZERO	  {$$ = $1}
-  | WORD	  {$$ = $1}
+    OPAR   rexp   CPAR {$$ = $2 ; delete $1; delete $3;}
+  | rexp   PLUS   rexp {$$ = *$1 + $3; delete $1; delete $2; delete $3;}
+  | rexp   TIMES  rexp {$$ = *$1 * $3; delete $1; delete $2; delete $3;}
+  | rexp   rexp	  %prec TIMES2{$$ = *$1 * $2; delete $1; delete $2;}
+  | rexp   STAR	  {$1->star(); $$ = $1; delete $2;}
+  | WEIGHT rexp	  %prec LPROD {$2->left_weight($1); delete $1; $$ = $2;}
+  | rexp   WEIGHT {$1->right_weight($2); delete $2;$$ = $1;}
+  | ZERO	  {$$ = $1;}
+  | WORD	  {$$ = $1;}
   ;
 
 %%
