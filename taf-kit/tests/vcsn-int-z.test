@@ -71,6 +71,8 @@ $VCSN --alphabet=33,34,35 thompson '(33 {2}* + 35).34' \| quotient -
 
 $VCSN --alphabet=33,34,35 standard '(33 {2}* + 35).34' > m.xml
 
+$VCSN identity m.xml | grep 'spacesSym=" "' > /dev/null
+
 $VCSN complete m.xml \| transpose - > mt.xml
 $VCSN trim mt.xml > mtt.xml
 

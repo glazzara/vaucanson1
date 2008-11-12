@@ -170,10 +170,10 @@ namespace vcsn
 	  rep_.open_weight = xmlstr(tools::get_attribute(attrs, eq_.openWeight));
 	if (tools::has_attribute(attrs, eq_.closeWeight))
 	  rep_.close_weight = xmlstr(tools::get_attribute(attrs, eq_.closeWeight));
-	if (tools::has_attribute(attrs, eq_.plus))
+	if (tools::has_attribute(attrs, eq_.spaces))
 	{
 	  rep_.spaces.clear();
-	  rep_.spaces.push_back(xmlstr(tools::get_attribute(attrs, eq_.plus)));
+	  rep_.spaces.push_back(xmlstr(tools::get_attribute(attrs, eq_.spaces)));
 	}
 	parser_->setContentHandler(&unsuph_);
       }
