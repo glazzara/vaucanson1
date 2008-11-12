@@ -113,7 +113,7 @@ namespace vcsn {
     typename Auto_::state_iterator s = a.states().begin();
     unsigned int d_in = 0;
     unsigned int d_out = 0;
-    unsigned int max = UINT_MAX;
+    unsigned int max = misc::limits<unsigned int>::max();
     bool has_loop = false;
     bool has_loop_old = false;
 
@@ -171,7 +171,7 @@ namespace vcsn {
     std::list<typename Auto_::htransition_t> delta_out;
     typename Auto_::state_iterator s = a.states().begin();
 
-    int weight_min = INT_MAX;
+    int weight_min = misc::limits<int>::max();
     for (typename Auto_::state_iterator i = a.states().begin();
 	 i != a.states().end();
 	 ++i)
