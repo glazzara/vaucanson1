@@ -1,5 +1,12 @@
 2008-11-12  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup delta and rdelta from vaucanswig.
+	* vaucanswig/meta/automaton.hh,
+	* vaucanswig/meta/vaucanswig_automaton.i,
+	* vaucanswig/meta/vauto.hh: Here.
+
+2008-11-12  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Rename a test automaton.
 	* taf-kit/tests/automata/char-b/initialseries.xml: Rename from
 	  taf-kit/tests/automata/char-b/initseries.xml.

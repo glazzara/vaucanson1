@@ -108,14 +108,6 @@ namespace Kind ##_types
       virtual void set_final_lrw(int, int, int);
       virtual std::string final_label(int);
 
-      virtual std::list<int> delta(int, bool states_only = true) const;
-      virtual std::list<int> letter_delta(int, char, bool states_only = true) const;
-      virtual std::list<int> spontaneous_delta(int, bool states_only = true) const;
-
-      virtual std::list<int> rdelta(int, bool states_only = true) const;
-      virtual std::list<int> letter_rdelta(int, char, bool states_only = true) const;
-      virtual std::list<int> spontaneous_rdelta(int, bool states_only = true) const;
-
       virtual std::string describe(bool cpptype = false) const;
 
       virtual void load(std::istream&, const std::string&);
@@ -219,14 +211,6 @@ namespace Kind ##_types
       virtual void set_final_lrw(int, int, char, int);
       virtual void set_final_lrw(int, int, int);
       virtual std::string final_label(int);
-
-      virtual std::list<int> delta(int, bool states_only = true) const;
-      virtual std::list<int> letter_delta(int, char, bool states_only = true) const;
-      virtual std::list<int> spontaneous_delta(int, bool states_only = true) const;
-
-      virtual std::list<int> rdelta(int, bool states_only = true) const;
-      virtual std::list<int> letter_rdelta(int, char, bool states_only = true) const;
-      virtual std::list<int> spontaneous_rdelta(int, bool states_only = true) const;
 
       virtual std::string describe(bool cpptype = false) const;
 

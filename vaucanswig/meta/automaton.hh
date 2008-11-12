@@ -362,59 +362,6 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
 #undef DefInitialFinalMembers
 
-#define DefDeltaMembers(Direction)					\
-									\
-    virtual std::list<int> Direction(int from, bool states_only = true) const \
-    {									\
-      CHECK_STATE(this, from);						\
-									\
-      std::list<int> ret;						\
-      std::insert_iterator<std::list<int> > i(ret, ret.begin());	\
-									\
-      if (states_only)							\
-	(*auto_).Direction(i, from, vcsn::delta_kind::states());	\
-      else								\
-	(*auto_).Direction(i, from, vcsn::delta_kind::transitions());	\
-									\
-      return ret;							\
-    }									\
-									\
-	std::list<int> letter_## Direction(int from, char l,		\
-					   bool states_only = true) const \
-    {									\
-      CHECK_STATE(this, from);						\
-      CHECK_LETTER(this, l);						\
-									\
-      std::list<int> ret;						\
-      std::insert_iterator<std::list<int> > i(ret, ret.begin());	\
-									\
-      if (states_only)							\
-	(*auto_).letter_## Direction(i, from, l, vcsn::delta_kind::states()); \
-      else								\
-	(*auto_).letter_## Direction(i, from, l, vcsn::delta_kind::transitions()); \
-									\
-      return ret;							\
-    }									\
-									\
-	std::list<int> spontaneous_## Direction(int from,		\
-						bool states_only = true) const \
-    {									\
-      CHECK_STATE(this, from);						\
-									\
-      std::list<int> ret;						\
-      std::insert_iterator<std::list<int> > i(ret, ret.begin());	\
-									\
-      if (states_only)							\
-	(*auto_).spontaneous_## Direction(i, from, vcsn::delta_kind::states());	\
-      else								\
-	(*auto_).spontaneous_## Direction(i, from, vcsn::delta_kind::transitions()); \
-									\
-      return ret;							\
-    }
-
-    DefDeltaMembers(delta)
-    DefDeltaMembers(rdelta)
-
     virtual std::string describe(bool cpptype = false) const
     {
       std::ostringstream s;

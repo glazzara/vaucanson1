@@ -78,14 +78,6 @@ namespace vcsn
       virtual void set_final_lrw(int, int, int) = 0;
       virtual std::string final_label(int) = 0;
 
-      virtual std::list<int> delta(int, bool states_only = true) const = 0;
-      virtual std::list<int> letter_delta(int, char, bool states_only = true) const = 0;
-      virtual std::list<int> spontaneous_delta(int, bool states_only = true) const = 0;
-
-      virtual std::list<int> rdelta(int, bool states_only = true) const = 0;
-      virtual std::list<int> letter_rdelta(int, char, bool states_only = true) const = 0;
-      virtual std::list<int> spontaneous_rdelta(int, bool states_only = true) const = 0;
-
       virtual std::string describe(bool cpptype = false) const = 0;
 
       virtual void load(std::istream&, const std::string& format) = 0;
