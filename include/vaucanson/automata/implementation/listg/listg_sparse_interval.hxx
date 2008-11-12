@@ -131,6 +131,7 @@ namespace vcsn
     {
       precondition (from_ <= to_ + 1);
       precondition (excluded_.find (handler_t(to_ + 1)) == excluded_.end ());
+      precondition (to_ - from_ + 1 > excluded_.size());
     }
 
     template <class T, class ExcludedContainer>
@@ -146,7 +147,7 @@ namespace vcsn
     unsigned
     SparseInterval<handler<T, unsigned>, ExcludedContainer>::size () const
     {
-      return to_ == UINT_MAX ? 0 : to_ - from_ + 1 - excluded_.size ();
+      return to_ - from_ + 1 - excluded_.size ();
     }
 
     template <class T, class ExcludedContainer>
