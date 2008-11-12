@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 # include <vaucanson/misc/bitset.hh>
 # include <vaucanson/misc/contract.hh>
 
-# include <cstdlib>
+# include <cstring>
 
 namespace vcsn
 {
@@ -47,7 +47,7 @@ namespace vcsn
 				     end_	 (bit_iterator (get_index (max_size_),
 								get_bitnum (max_size_)))
     {
-      bzero (data_, data_size_ * sizeof (data_type));
+      memset (data_, 0, data_size_ * sizeof (data_type));
     }
 
     inline

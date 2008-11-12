@@ -1,5 +1,12 @@
 2008-11-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
+	Fix compilation errors with g++-4.3.
+	* misc/bitset.hxx:
+	  Include <cstring> instead of <cstdlib> for memcpy.
+	  Use memset instead of bzero which is now deprecated.
+
+2008-11-12  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
 	Fix include dependencies.
 	* algorithms/minimization_hopcroft.hxx: cleanup unused include.
 
