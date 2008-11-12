@@ -1,5 +1,10 @@
 2008-11-12  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add a regression test for #179.
+	* taf-kit/tests/vcsn-char-b.test: Here.
+
+2008-11-12  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup delta and rdelta from vaucanswig.
 	* vaucanswig/meta/automaton.hh,
 	* vaucanswig/meta/vaucanswig_automaton.i,

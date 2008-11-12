@@ -441,6 +441,11 @@ $VCSN -a ab standard '(a*.b*)*' \| is-standard -
 
 $VCSN -a ab standard 'a+b' > aut3.xml
 $VCSN -a ab thompson 'a+b' \| realtime - > aut4.xml
+
+# check that the krat_exp_parser fail on some tests
+fail255 $VCSN -a"abc" thompson 'a+ bd'
+fail255 $VCSN -a"abc" thompson 'a+ bdc'
+
 #FIXME: as soon as an xmldiff tools exists. Use it here.
 $VCSN info aut3.xml > aut3.info
 $VCSN info aut4.xml > aut4.info
