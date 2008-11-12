@@ -1,3 +1,9 @@
+2008-11-12  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	TAF-Kit: Rename a test automaton.
+	* taf-kit/tests/automata/char-b/initialseries.xml: Rename from
+	  taf-kit/tests/automata/char-b/initseries.xml.
+
 2008-11-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	TAF-Kit: Fix a test for vcsn-int-z.
