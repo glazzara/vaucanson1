@@ -355,6 +355,14 @@ namespace vcsn {
 			      const typename automaton_traits<T>::hstate_t& from,
 			      delta_kind::states k);
 
+  template <class S, class T>
+  const typename automaton_traits<T>::geometry_t&
+  op_geometry(const AutomataBase<S>& s, const TransposeView<T>& v);
+
+  template <class S, class T>
+  typename automaton_traits<T>::geometry_t&
+  op_geometry(const AutomataBase<S>& s, TransposeView<T>& v);
+
 } // vcsn
 
 # undef AutoType

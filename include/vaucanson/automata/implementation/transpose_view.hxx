@@ -75,16 +75,16 @@ namespace vcsn {
 
   template <class S, class T>
   const typename automaton_traits<T>::geometry_t&
-  op_get_geometry(const AutomataBase<S>& s, const TransposeView<T>& v)
+  op_geometry(const AutomataBase<S>& s, const TransposeView<T>& v)
   {
-    return op_get_geometry(s, v.object());
+    return op_geometry(s, v.object());
   }
 
   template <class S, class T>
   typename automaton_traits<T>::geometry_t&
-  op_get_geometry(const AutomataBase<S>& s, TransposeView<T>& v)
+  op_geometry(const AutomataBase<S>& s, TransposeView<T>& v)
   {
-    return op_get_geometry(s, v.object());
+    return op_geometry(s, v.object());
   }
 
   template <class S, class T>
