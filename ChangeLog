@@ -1,5 +1,14 @@
 2008-11-14  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a bug in TransposeView.
+	* include/vaucanson/automata/implementation/transpose_view.hh
+	  (automaton_traits): Reverse the direction of iterators on the
+	  transposed automaton.
+	* src/tests/include/tests/automata/implementation_check/iterator_test.hh:
+	  Improve the test by adding a regression check for this bug.
+
+2008-11-14  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup op_geometry for transpose_view.
 	* include/vaucanson/automata/implementation/transpose_view.hh: Add
 	  missing `op_geometry' declarations.

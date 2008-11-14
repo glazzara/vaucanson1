@@ -29,16 +29,13 @@ unsigned iterator_test(tests::Tester& tg)
 
   AUTOMATON_TYPES(Auto);
 
-
   using namespace vcsn;
   using namespace vcsn::tools;
-//  using namespace vcsn::algebra;
 
   typedef Auto automaton_t;
   typedef std::vector<hstate_t> state_list_t;
   typedef std::vector<htransition_t> transition_list_t;
   typedef std::map<hstate_t, transition_list_t> transition_map_t;
-
 
   GenRandomAutomata<Auto> gen;
 
@@ -60,8 +57,38 @@ unsigned iterator_test(tests::Tester& tg)
   }
   std::cout << std::endl;
 
+  //
+  // Construct the transposed view and the identity view.
+  //
+
+  // Type helpers
+  typedef Element<typename automaton_t::set_t,
+		  TransposeView<typename automaton_t::value_t> >
+	tr_automaton_t;
+  typedef typename tr_automaton_t::delta_state_iterator transpose_delta_state_iterator;
+  typedef typename tr_automaton_t::delta_transition_iterator transpose_delta_transition_iterator;
+  typedef typename tr_automaton_t::rdelta_state_iterator transpose_rdelta_state_iterator;
+  typedef typename tr_automaton_t::rdelta_transition_iterator transpose_rdelta_transition_iterator;
+  typedef Element<typename automaton_t::set_t,
+		  IdentityView<typename automaton_t::value_t> >
+	id_automaton_t;
+  typedef typename id_automaton_t::delta_state_iterator identity_delta_state_iterator;
+  typedef typename id_automaton_t::delta_transition_iterator identity_delta_transition_iterator;
+  typedef typename id_automaton_t::rdelta_state_iterator identity_rdelta_state_iterator;
+  typedef typename id_automaton_t::rdelta_transition_iterator identity_rdelta_transition_iterator;
+
+  const tr_automaton_t& transpose_aut = tr_automaton_t(automaton.structure(), TransposeView<typename automaton_t::value_t>(automaton.value()));
+  const id_automaton_t& identity_aut = id_automaton_t(automaton.structure(), IdentityView<typename automaton_t::value_t>(automaton.value()));
+
+  /*-----------------.
+  | delta_*_iterator |
+  `-----------------*/
+
+  //
   // Simple iterations over each states
-  //  Checking if the accessed states are correct
+  //
+
+  // Checking if the accessed states are correct
   std::cout << "Testing deltai over states" << std::endl;
   for (int i = 0; i < 10; ++i)
   {
@@ -76,8 +103,39 @@ unsigned iterator_test(tests::Tester& tg)
   }
   std::cout << std::endl;
 
+# define CHECK_VIEW_ITERATOR(view, src, dst, tt, kind)				\
+  std::cout << "Testing " #src "deltai over " #kind "s (" #view "_view)"	\
+  << std::endl;									\
+  for (int i = 0; i < 10; ++i)							\
+  {										\
+    int count = 0;								\
+    view##_##src##delta_##kind##_iterator a(view##_aut.value(),			\
+					    state_list[i]);			\
+    dst##delta_##kind##_iterator b(automaton.value(), state_list[i]);		\
+    while (!a.done())								\
+    {										\
+      if (*a != *b)								\
+	break;									\
+      a.next();									\
+      b.next();									\
+      if (a.done() != b.done())							\
+	break;									\
+      ++count;									\
+    }										\
+    EQTEST(t, "Basic iterations over " #kind "s (" #view "_view)", count, tt);	\
+  }										\
+  std::cout << std::endl
+
+  // Checking if the deltai type for transpose_view on states is correct
+  CHECK_VIEW_ITERATOR(transpose, , r, 9 - i, state);
+  // Checking if the deltai type for identity_view on states is correct
+  CHECK_VIEW_ITERATOR(identity, , , i, state);
+
+  //
   // Simple iterations over each transitions
-  //  Checking if the accessed transitions are correct
+  //
+
+  // Checking if the accessed transitions are correct
   std::cout << "Testing deltai over transitions" << std::endl;
   for (int i = 0; i < 10; ++i)
   {
@@ -93,8 +151,20 @@ unsigned iterator_test(tests::Tester& tg)
   }
   std::cout << std::endl;
 
+  // Checking if the deltai type for transpose_view on transitions is correct
+  CHECK_VIEW_ITERATOR(transpose, , r, 9 - i, transition);
+  // Checking if the deltai type for identity_view on transitions is correct
+  CHECK_VIEW_ITERATOR(identity, , , i, transition);
+
+  /*------------------.
+  | rdelta_*_iterator |
+  `------------------*/
+
+  //
   // Simple iterations over each states
-  //  Checking if the accessed states are correct
+  //
+
+  // Checking if the accessed states are correct
   std::cout << "Testing rdeltai over states" << std::endl;
   for (int i = 0; i < 10; ++i)
   {
@@ -109,8 +179,16 @@ unsigned iterator_test(tests::Tester& tg)
   }
   std::cout << std::endl;
 
+  // Checking if the deltai type for transpose_view on states is correct
+  CHECK_VIEW_ITERATOR(transpose, r, , i, state);
+  // Checking if the deltai type for identity_view on states is correct
+  CHECK_VIEW_ITERATOR(identity, r, r, 9 - i, state);
+
+  //
   // Simple iterations over each transitions
-  //  Checking if the accessed transitions are correct
+  //
+
+  // Checking if the accessed transitions are correct
   std::cout << "Testing rdeltai over transitions" << std::endl;
   for (int i = 0; i < 10; ++i)
   {
@@ -126,7 +204,12 @@ unsigned iterator_test(tests::Tester& tg)
   }
   std::cout << std::endl;
 
+  // Checking if the deltai type for transpose_view on transitions is correct
+  CHECK_VIEW_ITERATOR(transpose, r, , i, transition);
+  // Checking if the deltai type for identity_view on transitions is correct
+  CHECK_VIEW_ITERATOR(identity, r, r, 9 - i, transition);
 
+# undef CHECK_VIEW_ITERATOR
 
 #if 0
   // Simple iterations over each states
