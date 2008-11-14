@@ -1,3 +1,9 @@
+2008-11-14  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Cleanup minimization-test.
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh:
+	  Remove useless std::ends to be more coherent with other tests.
+
 2008-11-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* src/tests/misc/char_traits.cc, src/tests/misc/limits.cc: Include

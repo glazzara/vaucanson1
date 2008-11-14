@@ -93,7 +93,7 @@ unsigned minimization_test(tests::Tester& tg)
     else if (t.verbose(tests::Tester::high))
     {
       std::ostringstream s;
-      s << "Hopcroft failed on " << i << std::ends;
+      s << "Hopcroft failed on " << i;
       TEST_MSG(s.str());
     }
 
@@ -103,7 +103,7 @@ unsigned minimization_test(tests::Tester& tg)
     else if (t.verbose(tests::Tester::high))
     {
       std::ostringstream s;
-      s << "Moore failed on " << i << std::ends;
+      s << "Moore failed on " << i;
       TEST_MSG(s.str());
     }
 
@@ -113,7 +113,7 @@ unsigned minimization_test(tests::Tester& tg)
     else if (t.verbose(tests::Tester::high))
     {
       std::ostringstream s;
-      s << "Co-Moore failed on " << i << std::ends;
+      s << "Co-Moore failed on " << i;
       TEST_MSG(s.str());
     }
 
