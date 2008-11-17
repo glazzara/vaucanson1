@@ -1,3 +1,10 @@
+2008-11-17  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Release 1.2.94.
+	* configure.ac: Change version number.
+	* doc/NEWS.txt: Update for release.
+	* doc/share/styles/myacronym.sty: make share-up.
+
 2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	TAF-Kit: Overhaul monoid representations and alphabets support.
