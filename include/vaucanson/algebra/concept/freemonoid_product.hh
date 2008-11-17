@@ -132,10 +132,14 @@ namespace vcsn {
       /// Representation's accessor.
       const shared_monoid_rep_t representation() const;
 
+    public:
+      /// Change the monoid representation to the new one provided.
+      void set_representation(monoid_rep_t mr);
+
     protected:
       first_monoid_t		first_monoid_;
       second_monoid_t		second_monoid_;
-      const shared_monoid_rep_t	rep_;
+      shared_monoid_rep_t	rep_;
     };
 
     template<class F, class S>

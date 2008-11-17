@@ -165,6 +165,13 @@ namespace vcsn
       return rep_;
     }
 
+    template <typename F, typename S>
+    void
+    FreeMonoidProduct<F, S>::set_representation(monoid_rep<FreeMonoidProduct<F, S> > mr)
+    {
+      rep_ = boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >(new monoid_rep<FreeMonoidProduct<F, S> > (mr));
+    }
+
     template<class F, class S>
     bool operator==(const FreeMonoidProduct<F, S>& a,
 		    const FreeMonoidProduct<F, S>& b)

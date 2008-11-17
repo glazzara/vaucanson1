@@ -1,3 +1,11 @@
+2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Add set_representation for free monoid products.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh
+	  (FreeMonoidProduct): Add a public method `set_representation'.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Add the
+	  implementation of the aforementioned function.
+
 2008-11-14  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a bug in TransposeView.
