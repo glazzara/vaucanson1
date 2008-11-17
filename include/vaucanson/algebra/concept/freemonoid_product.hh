@@ -45,6 +45,8 @@ namespace vcsn {
     {
       /// The representation of the empty word.
       using monoid_rep<F>::empty;
+      using monoid_rep<F>::concat;
+      using monoid_rep<F>::maybe_epsilon;
 
       /// The representation of the opening parenthesis.
       std::string open_par;

@@ -55,6 +55,7 @@ namespace vcsn
       /// The representation of the empty word.
       using parent_t::empty;
       using parent_t::concat;
+      using parent_t::maybe_epsilon;
 
       monoid_rep();
     };
@@ -73,13 +74,15 @@ namespace vcsn
       typedef monoid_rep<FreeMonoid<A> > monoid_rep_t;
       typedef boost::shared_ptr<monoid_rep_t> shared_monoid_rep_t;
 
-      /// Constructor based on an alphabet.
+      /// Constructor based on an alphabet, with an adaptative
+      /// monoid representation.
       FreeMonoid(const A& a);
 
-      /// Constructor based on an alphabet.
+      /// Constructor based on an alphabet, with a constraint
+      /// monoid representation.
       FreeMonoid(const A& a, monoid_rep_t mr);
 
-      /// Copy constructor.
+      /// Copy constructor (preserve the monoid representation).
       FreeMonoid(const FreeMonoid& w);
 
       /// Representation's accessor.

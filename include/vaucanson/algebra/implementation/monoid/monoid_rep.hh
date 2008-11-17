@@ -17,6 +17,7 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH
 
+# include <vector>
 # include <string>
 
 # include <boost/shared_ptr.hpp>
@@ -30,6 +31,7 @@ namespace vcsn {
     {
       std::string	empty;
       std::string	concat;
+      std::vector<std::string>	maybe_epsilon;
 
       // Default CTOR
       monoid_rep();

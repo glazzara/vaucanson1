@@ -27,7 +27,17 @@ namespace vcsn
     monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::monoid_rep() :
     monoid_rep<FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >()
     {
-      empty = "e";
+      maybe_epsilon.clear();
+
+      // Sane defaults.
+      maybe_epsilon.push_back("e");
+      maybe_epsilon.push_back("1");
+
+      // Trying with more than one char.
+      maybe_epsilon.push_back("_e");
+      maybe_epsilon.push_back("eps");
+
+      empty = *(maybe_epsilon.begin());
       concat = "#";
     }
 
@@ -40,6 +50,37 @@ namespace vcsn
       rep_(monoid_rep_default<FreeMonoid<A> >::get_instance()),
       alph_(a)
     {
+      // Type helpers.
+      typedef typename A::letter_t letter_t;
+      typedef std::vector<std::string>::const_iterator iterator_t;
+      typedef monoid_rep<FreeMonoid<A> > monoid_rep_t;
+
+      monoid_rep_t rep;
+
+      for (iterator_t empty_it = rep.maybe_epsilon.begin();
+	   empty_it != rep.maybe_epsilon.end();
+	   ++empty_it)
+      {
+	bool found = true;
+
+	for_all_const_(A, i, a)
+	{
+	  if (letter_traits<letter_t>::letter_to_literal(*i) == *empty_it)
+	  {
+	    found = false;
+	    break;
+	  }
+	}
+
+	// Best match.
+	if (found)
+	{
+	  rep.empty = *empty_it;
+	  break;
+	}
+      }
+
+      set_representation(rep);
     }
 
     template <class A>

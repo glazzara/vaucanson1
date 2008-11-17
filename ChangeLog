@@ -1,5 +1,24 @@
 2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add a simple monoid heuristic when not given a representation.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh
+	  (monoid_rep): Add missing `using' declarations.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx
+	  (monoid_rep::monoid_rep): Build a list of realistic epsilon values.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh
+	  (monoid_rep): Add missing `using' declaration. Update comments on
+	  constructors to reflect the new mechanism.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx
+	  (FreeMonoid): Add a simple heuristic to choose an epsilon wisely,
+	  when not given a user representation.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh:
+	  Include `vector'. (monoid_rep): Add a new attribute.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
+	  Include missing `monoid_rep.hh'. Build a default epsilon list.
+
+2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add set_representation for free monoid products.
 	* include/vaucanson/algebra/concept/freemonoid_product.hh
 	  (FreeMonoidProduct): Add a public method `set_representation'.
