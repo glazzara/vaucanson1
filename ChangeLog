@@ -1,5 +1,11 @@
 2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Revert [2439].
+	* src/tests/xml/int_fmp_ref.dot,
+	* src/tests/xml/int_z_fmp_ref.dot: Revert the new default to `1'.
+
+2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Extend support of writingData to FMP.
 	* include/vaucanson/xml/contexts/fmp.hxx: Here.
 	* include/vaucanson/xml/xmleq.hxx (XMLEq): Rename `concatSym' to
