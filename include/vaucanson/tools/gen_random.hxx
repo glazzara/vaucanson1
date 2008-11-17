@@ -47,11 +47,7 @@ namespace vcsn {
 				       alpha.max_size());
 	unsigned		nb = alea(nb_letter ? nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
-	{
-	  letter_t letter = alpha.random_letter();
-	  if (algebra::letter_traits<letter_t>::letter_to_literal(letter) != monoid_rep_default<monoid_t>::get_instance()->empty)
-	    alpha.insert(letter);
-	}
+	  alpha.insert(alpha.random_letter());
 
 	monoid_t		monoid(alpha);
 	semiring_t		semi;
@@ -76,22 +72,14 @@ namespace vcsn {
 			       input_alpha.max_size());
 	unsigned	nb = alea(input_nb_letter ? input_nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
-	{
-	  letter_t letter = input_alpha.random_letter();
-	  if (algebra::letter_traits<letter_t>::letter_to_literal(letter) != monoid_rep_default<monoid_t>::get_instance()->empty)
-	    input_alpha.insert(letter);
-	}
+	  input_alpha.insert(input_alpha.random_letter());
 
 	max = (output_alpha.max_size() > ALPHABET_MAX_SIZE ?
 	       ALPHABET_MAX_SIZE :
 	       output_alpha.max_size());
 	nb = alea(output_nb_letter ? output_nb_letter : max);
 	for (unsigned i = 0; i < nb; ++i)
-	{
-	  letter_t letter = output_alpha.random_letter();
-	  if (algebra::letter_traits<letter_t>::letter_to_literal(letter) != monoid_rep_default<monoid_t>::get_instance()->empty)
-	    output_alpha.insert(letter);
-	}
+	  output_alpha.insert(output_alpha.random_letter());
 
 	monoid_t			input_monoid(input_alpha);
 	monoid_t			output_monoid(output_alpha);
@@ -188,8 +176,7 @@ namespace vcsn {
 	  std::set<htransition_t> dst;
 	  letter_t e = set.series().monoid().alphabet().choose();
 	  work.letter_deltac(dst, *prev, e, delta_kind::transitions());
-	  if (dst.size() == 0 &&
-	      algebra::letter_traits<letter_t>::letter_to_literal(e) != work.structure().series().monoid().representation()->empty)
+	  if (dst.size() == 0)
 	    work.add_letter_transition(*prev, *i, e);
 	  prev = i;
 	}
@@ -201,8 +188,7 @@ namespace vcsn {
 	  hstate_t s = work.choose_state();
 	  hstate_t a = work.choose_state();
 	  work.letter_deltac(dst, s, e, delta_kind::states());
-	  if (dst.find(a) == dst.end() &&
-	      algebra::letter_traits<letter_t>::letter_to_literal(e) != work.structure().series().monoid().representation()->empty)
+	  if (dst.find(a) == dst.end())
 	    work.add_letter_transition(s, a, e);
 	}
 

@@ -1,5 +1,11 @@
 2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Update gen_random according to previous changes.
+	* include/vaucanson/tools/gen_random.hxx: Do not test against
+	  epsilon representation anymore.
+
+2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add a simple monoid heuristic when not given a representation.
 	* include/vaucanson/algebra/concept/freemonoid_product.hh
 	  (monoid_rep): Add missing `using' declarations.
