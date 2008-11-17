@@ -1,5 +1,21 @@
 2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Overhaul monoid representations and alphabets support.
+	* taf-kit/src/common.hh [WITH_TWO_ALPHABETS] (arguments_t): Add a
+	  new attribute `alphabet1'. New `add_parser1_option'.
+	* taf-kit/src/edition_commands.hxx [WITH_TWO_ALPHABETS]
+	  (edit_automaton_command): Use the new `alphabet1' instead of
+	  `alphabet'.
+	* taf-kit/src/main.cc [WITH_TWO_ALPHABETS] (parse_opts): Use
+	  `alphabet1' and `parser1' instead of `alphabet' and `parser'.
+	  [WITH_TWO_ALPHABETS] (main): Cleanup parser declarations.
+	* taf-kit/src/parser_options.hh,
+	* taf-kit/src/parser_options.hxx: Make `parser_options' a
+	  parametrized type by templating it with the monoid representation
+	  and the series representation types.
+
+2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Revert [2439].
 	* src/tests/xml/int_fmp_ref.dot,
 	* src/tests/xml/int_z_fmp_ref.dot: Revert the new default to `1'.

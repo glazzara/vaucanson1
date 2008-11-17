@@ -451,7 +451,7 @@ static int edit_automaton_command (const arguments_t& args)
 # ifndef WITH_TWO_ALPHABETS
       a = make_automaton (get_alphabet (args.alphabet), args.mrep, args.srep);
 # else
-      a = make_automaton (get_first_alphabet (args.alphabet),
+      a = make_automaton (get_first_alphabet (args.alphabet1),
 			  get_second_alphabet (args.alphabet2),
 			  args.mrep, args.mrep1, args.mrep2,
 			  args.srep, args.srep1, args.srep2);

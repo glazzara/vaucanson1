@@ -151,8 +151,13 @@ namespace
 	  {
 	    if (key == 'a')
 	    {
+#ifdef WITH_TWO_ALPHABETS
+	      args.add_parser1_option("ALPHABET", alpha->alphabet);
+	      args.add_parser1_option("ONE", alpha->epsilon);
+#else
 	      args.add_parser_option("ALPHABET", alpha->alphabet);
 	      args.add_parser_option("ONE", alpha->epsilon);
+#endif /* ! WITH_TWO_ALPHABETS */
 	    }
 #ifdef WITH_TWO_ALPHABETS
 	    else
@@ -169,10 +174,12 @@ namespace
 	if (!found)
 	{
 	  if (key == 'a')
-	    args.add_parser_option("ALPHABET", arg);
 #ifdef WITH_TWO_ALPHABETS
+	    args.add_parser1_option("ALPHABET", arg);
 	  else
 	    args.add_parser2_option("ALPHABET", arg);
+#else
+	    args.add_parser_option("ALPHABET", arg);
 #endif /* ! WITH_TWO_ALPHABETS */
 	}
 	break;
@@ -309,7 +316,7 @@ int main (int argc, char* argv[])
 
       try
       {
-	parser_options p_opts(li->args.parser);
+	parser_options<monoid_rep_t, series_rep_t> p_opts(li->args.parser);
 
 	p_opts.check_collision();
 	li->args.alphabet = p_opts.get_letters();
@@ -317,13 +324,15 @@ int main (int argc, char* argv[])
 	li->args.mrep = p_opts.get_mrep();
 
 #ifdef WITH_TWO_ALPHABETS
-	parser_options p_opts2(li->args.parser2);
+	parser_options<first_monoid_rep_t, first_series_rep_t> p_opts1(li->args.parser1);
+	parser_options<second_monoid_rep_t, second_series_rep_t> p_opts2(li->args.parser2);
 
+	li->args.alphabet1 = p_opts1.get_letters();
 	li->args.alphabet2 = p_opts2.get_letters();
 	li->args.srep1 = p_opts.get_srep().first_projection();
-	li->args.mrep1 = p_opts.get_mrep().first_projection();
+	li->args.mrep1 = p_opts1.get_mrep();
 	li->args.srep2 = p_opts.get_srep().second_projection();
-	li->args.mrep2 = p_opts.get_mrep().second_projection();
+	li->args.mrep2 = p_opts2.get_mrep();
 #endif
       }
       catch (const std::logic_error& err)

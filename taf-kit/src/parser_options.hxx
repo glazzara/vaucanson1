@@ -20,18 +20,20 @@
 
 # include "parser_options.hh"
 
-parser_options::options_grammar::options_grammar(parser_options::alphabet_t&
-						 arg_al,
-						 series_rep_t& arg_srep,
-						 monoid_rep_t& arg_mrep)
-: al(arg_al), srep(arg_srep), mrep(arg_mrep)
+template <typename M, typename S>
+parser_options<M, S>::options_grammar::options_grammar(typename parser_options<M, S>::alphabet_t&
+						       arg_al,
+						       M& arg_mrep,
+						       S& arg_srep)
+: al(arg_al), mrep(arg_mrep), srep(arg_srep)
 {
 }
 
-parser_options::parser_options(const std::string& str)
+template <typename M, typename S>
+parser_options<M, S>::parser_options(const std::string& str)
 {
   using namespace boost::spirit;
-  options_grammar grammar(letters_, srep_, mrep_);
+  options_grammar grammar(letters_, mrep_, srep_);
 
   BOOST_SPIRIT_DEBUG_NODE(grammar);
 
@@ -41,26 +43,30 @@ parser_options::parser_options(const std::string& str)
     throw std::logic_error(std::string("unexpected token: ") + info.stop);
 }
 
+template <typename M, typename S>
 const std::vector<std::string>&
-parser_options::get_letters()
+parser_options<M, S>::get_letters()
 {
   return letters_;
 }
 
-const series_rep_t&
-parser_options::get_srep()
-{
-  return srep_;
-}
-
-const monoid_rep_t&
-parser_options::get_mrep()
+template <typename M, typename S>
+const M&
+parser_options<M, S>::get_mrep()
 {
   return mrep_;
 }
 
+template <typename M, typename S>
+const S&
+parser_options<M, S>::get_srep()
+{
+  return srep_;
+}
+
+template <typename M, typename S>
 bool
-parser_options::rec_check_collision(const std::string& str, std::string::const_iterator it_str_curr)
+parser_options<M, S>::rec_check_collision(const std::string& str, std::string::const_iterator it_str_curr)
 {
   std::string::const_iterator it_str;
   for_all(std::vector<std::string>, it_vect, letters_)
@@ -80,8 +86,10 @@ parser_options::rec_check_collision(const std::string& str, std::string::const_i
   }
   return false;
 }
+
+template <typename M, typename S>
 bool
-parser_options::check_collision(const std::string& str)
+parser_options<M, S>::check_collision(const std::string& str)
 {
   std::string::const_iterator it_str;
   for_all(std::vector<std::string>, it_vect, letters_)
@@ -104,8 +112,10 @@ parser_options::check_collision(const std::string& str)
   }
   return false;
 }
+
+template <typename M, typename S>
 void
-parser_options::check_collision()
+parser_options<M, S>::check_collision()
 {
 #define CHECK_COLISION(TOKEN, NAME)						\
   if (check_collision(TOKEN))							\
@@ -124,9 +134,10 @@ parser_options::check_collision()
 #undef CHECK_COLISION
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
-parser_options::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)
-: al_ref(g.al), srep_ref(g.srep), mrep_ref(g.mrep)
+parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)
+: al_ref(g.al), mrep_ref(g.mrep), srep_ref(g.srep)
 {
   using namespace boost;
   using namespace boost::spirit;
@@ -229,10 +240,11 @@ parser_options::options_grammar::definition<ScannerT>::definition(const parser_o
 		   );
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 std::string
-parser_options::options_grammar::definition<ScannerT>::escape(const char* from,
-							      const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::escape(const char* from,
+								    const char* to)
 {
   std::string res;
   while (from != to)
@@ -245,81 +257,91 @@ parser_options::options_grammar::definition<ScannerT>::escape(const char* from,
   return res;
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 const boost::spirit::rule<ScannerT>&
-parser_options::options_grammar::definition<ScannerT>::start() const
+parser_options<M, S>::options_grammar::definition<ScannerT>::start() const
 {
   return parser_properties;
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::push_letter(const char* from,
-								   const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::push_letter(const char* from,
+									 const char* to)
 {
   al_ref.push_back(escape(from, to));
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::open_par(const char* from,
-								const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::open_par(const char* from,
+								      const char* to)
 {
   srep_ref.open_par = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::close_par(const char* from,
-								 const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::close_par(const char* from,
+								       const char* to)
 {
   srep_ref.close_par = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::plus(const char* from,
-							    const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::plus(const char* from,
+								  const char* to)
 {
   srep_ref.plus = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::times(const char* from,
-							     const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::times(const char* from,
+								   const char* to)
 {
   srep_ref.times = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::star(const char* from,
-							    const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::star(const char* from,
+								  const char* to)
 {
   srep_ref.star = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::open_weight(const char* from,
-								   const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::open_weight(const char* from,
+									 const char* to)
 {
   srep_ref.open_weight = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::close_weight(const char* from,
-								    const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::close_weight(const char* from,
+									  const char* to)
 {
   srep_ref.close_weight = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::push_space(const char* from,
-								  const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::push_space(const char* from,
+									const char* to)
 {
   static bool first = true;
   if (first)
@@ -328,18 +350,20 @@ parser_options::options_grammar::definition<ScannerT>::push_space(const char* fr
   first = false;
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::push_one(const char* from,
-								const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::push_one(const char* from,
+								      const char* to)
 {
   mrep_ref.empty = escape(from, to);
 }
 
+template <typename M, typename S>
 template <typename ScannerT>
 void
-parser_options::options_grammar::definition<ScannerT>::push_zero(const char* from,
-								 const char* to)
+parser_options<M, S>::options_grammar::definition<ScannerT>::push_zero(const char* from,
+								       const char* to)
 {
   srep_ref.zero = escape(from, to);
 }

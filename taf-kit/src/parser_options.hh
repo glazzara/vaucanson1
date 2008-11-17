@@ -63,6 +63,7 @@
  * @endverbatim
  */
 
+template <typename M, typename S>
 class parser_options
 {
 public:
@@ -70,8 +71,8 @@ public:
   parser_options(const std::string&);
 
   const std::vector<std::string>& get_letters();
-  const series_rep_t& get_srep();
-  const monoid_rep_t& get_mrep();
+  const M& get_mrep();
+  const S& get_srep();
   void check_collision();
 
 private:
@@ -85,13 +86,15 @@ private:
   struct options_grammar : public boost::spirit::grammar<options_grammar>
   {
     // CTOR
-    options_grammar(alphabet_t& al, series_rep_t& srep, monoid_rep_t& mrep);
+    options_grammar(alphabet_t& al, M& mrep, S& srep);
 
     template <typename ScannerT>
     struct definition
     {
       // type helpers
-      typedef typename parser_options::options_grammar::definition<ScannerT> self_t;
+      typedef parser_options<M, S> parser_options_t;
+      typedef typename parser_options_t::options_grammar options_grammar_t;
+      typedef typename options_grammar_t::template definition<ScannerT> self_t;
 
       boost::spirit::rule<ScannerT> parser_properties, property,
       alphabet_definition, letters, words, special_name, word_pair,
@@ -118,9 +121,9 @@ private:
       boost::function<void(const char*, const char*)> zero_cb;
 
       // reference to parser_options creator
-      parser_options::alphabet_t& al_ref;
-      series_rep_t& srep_ref;
-      monoid_rep_t& mrep_ref;
+      typename parser_options<M, S>::alphabet_t& al_ref;
+      M& mrep_ref;
+      S& srep_ref;
 
       /**
        * function called to remove the '\' in front of the
@@ -259,15 +262,15 @@ private:
 
     }; // ! definition
 
-    parser_options::alphabet_t& al;
-    series_rep_t& srep;
-    monoid_rep_t& mrep;
+    typename parser_options<M, S>::alphabet_t& al;
+    M& mrep;
+    S& srep;
 
   }; // ! options_grammar
 
   alphabet_t letters_;
-  series_rep_t srep_;
-  monoid_rep_t mrep_;
+  M mrep_;
+  S srep_;
 
 }; // ! parser_options
 

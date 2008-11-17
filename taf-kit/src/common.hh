@@ -74,6 +74,7 @@ struct arguments_t
 	n_args (0),
 	alphabet (0),
 # ifdef WITH_TWO_ALPHABETS
+	alphabet1 (0),
 	alphabet2 (0),
 # endif // ! WITH_TWO_ALPHABETS
 	verbose (false),
@@ -112,7 +113,9 @@ struct arguments_t
     // Representation of SecondMonoid.
     second_monoid_rep_t mrep2;
 
+    std::vector<std::string> alphabet1;
     std::vector<std::string> alphabet2;
+    std::string parser1;
     std::string parser2;
 # endif // ! WITH_TWO_ALPHABETS
 
@@ -144,6 +147,10 @@ struct arguments_t
       ADD_OPTION(parser)
     }
 # ifdef WITH_TWO_ALPHABETS
+    void add_parser1_option(const char* type, const char* str)
+    {
+      ADD_OPTION(parser1)
+    }
     void add_parser2_option(const char* type, const char* str)
     {
       ADD_OPTION(parser2)
