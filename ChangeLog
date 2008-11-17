@@ -1,5 +1,12 @@
 2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Extend support of writingData to FMP.
+	* include/vaucanson/xml/contexts/fmp.hxx: Here.
+	* include/vaucanson/xml/xmleq.hxx (XMLEq): Rename `concatSym' to
+	  `timesSym'.
+
+2008-11-17  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update gen_random according to previous changes.
 	* include/vaucanson/tools/gen_random.hxx: Do not test against
 	  epsilon representation anymore.

@@ -69,7 +69,7 @@ namespace vcsn
       /* attributes */
       identitySymbol = xercesc::XMLString::transcode("identitySym");
       zeroSymbol = xercesc::XMLString::transcode("zeroSym");
-      concat = xercesc::XMLString::transcode("concatSym");
+      concat = xercesc::XMLString::transcode("timesSym");
 
       openPar = xercesc::XMLString::transcode("openPar");
       closePar = xercesc::XMLString::transcode("closePar");

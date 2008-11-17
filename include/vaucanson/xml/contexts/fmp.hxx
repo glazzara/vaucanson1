@@ -60,7 +60,15 @@ namespace vcsn
 	parser_->setContentHandler(monoidh_);
       }
       else if (xercesc::XMLString::equals(eq_.writingData, localname))
+      {
+	algebra::monoid_rep<T> rep;
+	if (tools::has_attribute(attrs, eq_.identitySymbol))
+	  rep.empty = xmlstr(tools::get_attribute(attrs, eq_.identitySymbol));
+	if (tools::has_attribute(attrs, eq_.concat))
+	  rep.empty = xmlstr(tools::get_attribute(attrs, eq_.concat));
+	monoid_.set_representation(rep);
 	parser_->setContentHandler(&unsuph_);
+      }
       else
 	error::token(localname);
     }
@@ -249,11 +257,23 @@ namespace vcsn
 	tools::set_attribute(node, "type", "product");
 	tools::set_attribute(node, "prodDim", "2");
 	root->appendChild(node);
+
+	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData, "identitySym", aut.series().monoid().representation()->empty);
+	tools::set_attribute(writingData, "timesSym", aut.series().monoid().representation()->concat);
+	node->appendChild(writingData);
+
 	xercesc::DOMElement* first = tools::create_element(doc, "monoid");
 	tools::set_attribute(first, "type", "free");
 	tools::set_attribute(first, "genDescrip", "enum");
 	tools::set_attribute(first, "genKind", algebra::letter_traits<typename FMPtype::monoid_t::first_monoid_t::alphabet_t::letter_t>::kind());
 	node->appendChild(first);
+
+	xercesc::DOMElement* writingData1 = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData1, "identitySym", aut.series().monoid().first_monoid().representation()->empty);
+	tools::set_attribute(writingData1, "timesSym", aut.series().monoid().first_monoid().representation()->concat);
+	first->appendChild(writingData1);
+
 	typedef typename FMPtype::monoid_t::first_monoid_t::alphabet_t::const_iterator first_alphabet_iterator;
 	for_all_letters_(first_, l, aut.structure().series().monoid().first_monoid().alphabet())
 	{
@@ -269,6 +289,12 @@ namespace vcsn
 	tools::set_attribute(second, "genDescrip", "enum");
 	tools::set_attribute(second, "genKind", algebra::letter_traits<typename FMPtype::monoid_t::second_monoid_t::alphabet_t::letter_t>::kind());
 	node->appendChild(second);
+
+	xercesc::DOMElement* writingData2 = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData2, "identitySym", aut.series().monoid().second_monoid().representation()->empty);
+	tools::set_attribute(writingData2, "timesSym", aut.series().monoid().second_monoid().representation()->concat);
+	second->appendChild(writingData2);
+
 	typedef typename FMPtype::monoid_t::second_monoid_t::alphabet_t::const_iterator second_alphabet_iterator;
 	for_all_letters_(second_, l, aut.structure().series().monoid().second_monoid().alphabet())
 	{
