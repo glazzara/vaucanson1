@@ -261,12 +261,12 @@ typedef unsigned long int gl_uintptr_t;
 
 #undef intmax_t
 #if @HAVE_LONG_LONG_INT@ && LONG_MAX >> 30 == 1
-typdedef long long int gl_intmax_t;
+typedef long long int gl_intmax_t;
 # define intmax_t gl_intmax_t
 #elif defined GL_INT64_T
 # define intmax_t int64_t
 #else
-typdedef long int gl_intmax_t;
+typedef long int gl_intmax_t;
 # define intmax_t gl_intmax_t
 #endif
 
