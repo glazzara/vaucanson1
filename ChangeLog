@@ -1,3 +1,10 @@
+2008-11-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* gnulib/stdint.in.h: Make sure all types defined with a macro are
+	mapped to a typedef, not to a compiler type.  This fixes a
+	compilation failure were boost/cstdint.hpp would use "::int8_t"
+	and the compiler will see "::signed char".
+
 2008-11-17  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Release 1.2.94.
@@ -97,14 +104,14 @@
 
 2008-11-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/aut_to_exp.hxx (DMChooser::operator()): 
+	* include/vaucanson/algorithms/aut_to_exp.hxx (DMChooser::operator()):
 	Use misc::limits<int>::max() instead of INT_MAX.
-	(HChooser::operator()): Use misc::limits<unsigned int>::max() instead 
+	(HChooser::operator()): Use misc::limits<unsigned int>::max() instead
 	of UINT_MAX.
 
 2008-11-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx 
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx
 	(SparseInterval::SparseInterval): Ensure that the size is positive.
 	(SparseInterval::size): Do not use UINT_MAX.
 
@@ -311,7 +318,7 @@
 	Replace "src" by "source" in XML, #189.
 	W.r.t the specifications, we should use "source" and not "src"
 	in the transitions. (Ticket #189)
-	
+
 	* data/automata/char-rw-b/add1-rw.xml: .
 	* data/automata/char-rw-b/quot-3-rw.xml: .
 	* data/vaucanson.xsd: .
