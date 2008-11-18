@@ -59,7 +59,8 @@
   (add-to-list
    'c-style-alist
    '("vaucanson"
-     (c-basic-offset	       . 2)
+     (indent-tabs-mode		 . t)
+     (c-basic-offset	         . 2)
      (c-comment-only-line-offset . 0)
      (c-hanging-braces-alist     . ((substatement-open before after)))
      (c-offsets-alist

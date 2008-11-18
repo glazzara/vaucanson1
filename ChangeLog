@@ -1,3 +1,10 @@
+2008-11-18  Reuben Thomas  <rrt@sc3d.org>
+
+	Set indent-tabs-mode in vaucanson c-style.
+	* data/emacs/vaucanson.el: Vaucanson requires tabs (at least,
+	  looking at vaucansonize-buffer), so make the c-style also
+	  enforce this.
+
 2008-11-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* gnulib/stdint.in.h: Typo in previous patch.  This one was only
