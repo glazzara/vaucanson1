@@ -23,6 +23,11 @@
  * Main file, common to all TAF-Kit binaries.
  */
 
+// Include common.hh first, because it includes config.h which might
+// define macros (such as restrict) that are used in gnulib's
+// replacements for standard header files.
+#include "common.hh"
+
 #include <stdlib.h>
 #include <string>
 #include <iostream>
@@ -33,7 +38,6 @@
 #include "argp.h"
 #include "progname.h"
 
-#include "common.hh"
 #include "predefined_alphabets.hh"
 #include "commands.hh"
 #include "interface.hh"
