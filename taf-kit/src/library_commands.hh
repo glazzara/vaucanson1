@@ -26,6 +26,9 @@
 
 # include "common.hh"
 
+# include <sys/stat.h>
+# include <unistd.h>
+
 # include CONTEXT_HEADER
 # ifdef WITH_TWO_ALPHABETS
 #  include <vaucanson/xml/contexts/fmp.hh>
@@ -52,40 +55,94 @@ using vcsn::xml::XML;
   | Command definitions for Automaton Library.  |
   `--------------------------------------------*/
 
-static std::string get_automata_path (const arguments_t& args)
+static const std::list<std::string>&
+get_automata_path(const arguments_t& args)
 {
-  const char* base_path = getenv ("VCSN_DATA_PATH");
-  const char* lib_dir = "automata";
-  if (base_path == 0)
-    base_path = VCSN_DATA_PATH;
-  const std::string type = program_name + 5; // Strip "vcsn-".
-  std::string path = std::string (base_path) + "/" + lib_dir + "/" + type;
+  static std::list<std::string> path_list;
 
-  DIR* directory = opendir (path.c_str ());
-  if (not directory)
-    FAIL (std::string ("Error: Cannot open ") + path + ".\n"
-	  "Please set VCSN_DATA_PATH to the Vaucanson data directory,\n"
-	  "containing `" + lib_dir + "'.");
-  closedir (directory);
-  return path;
+  if (path_list.empty())
+    {
+      const char* base_path = getenv("VCSN_DATA_PATH");
+      if (base_path == 0)
+	base_path = VCSN_DATA_PATH;
+
+      // Strip "vcsn-" from the program name.
+      const std::string lib_dir =
+	std::string("/automata/") + (program_name + 5);
+
+      std::string path;
+
+      while (*base_path)
+	{
+	  const char* sep = strchr(base_path, ':');
+
+	  if (sep == base_path)
+	    {
+	      // Ignore an empty path.
+	      ++ base_path;
+	      continue;
+	    }
+
+	  // Did we find a colon?
+	  if (sep > 0)
+	    path = std::string(base_path, sep - base_path) + lib_dir;
+	  else
+	    path = std::string(base_path) + lib_dir;
+
+	  base_path = sep + 1;
+
+	  struct stat s;
+
+	  if ((stat(path.c_str(), &s) == 0) && (S_ISDIR(s.st_mode)))
+	    {
+	      path_list.push_back(path);
+	    }
+
+	  // No colon found, do not loop.
+	  if (sep == 0)
+	    break;
+	}
+
+      if (path_list.empty())
+	FAIL(std::string ("Error: Cannot open ") + path + ".\n"
+	     "Please set VCSN_DATA_PATH to the Vaucanson data directory,\n"
+	     "containing `" + lib_dir + "'.");
+    }
+  return path_list;
 }
 
-static int list_automata_command (const arguments_t& args)
+static int
+list_automata_command(const arguments_t& args)
 {
-  DIR* directory = opendir (get_automata_path (args).c_str ());
-  dirent* file;
+  const std::list<std::string>& path_list = get_automata_path(args);
+
   std::set<std::string> files;
 
-  while ((file = readdir (directory)))
-  {
-    std::string filename = file->d_name;
-    if (filename.rfind (".xml") == filename.size() - 4)
-      files.insert (filename);
-  }
-  closedir (directory);
-  echo ("The following automata are predefined:");
-  for_all (std::set<std::string>, ifile, files)
-    echo ("  - " << *ifile);
+  for (std::list<std::string>::const_iterator i = path_list.begin();
+       i != path_list.end(); ++i)
+    {
+      DIR* directory = opendir(i->c_str());
+      dirent* file;
+
+      while ((file = readdir(directory)))
+	{
+	  std::string filename = file->d_name;
+	  if (filename.rfind(".xml") == filename.size() - 4)
+	    files.insert(filename);
+	}
+      closedir(directory);
+    }
+
+  if (files.empty())
+    {
+      echo("No automata are predefined for this type.");
+    }
+  else
+    {
+      echo("The following automata are predefined:");
+      for_all(std::set<std::string>, ifile, files)
+	echo("  - " << *ifile);
+    }
   return 0;
 }
 

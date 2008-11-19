@@ -137,13 +137,20 @@ static automaton_t get_aut (const arguments_t& args, int n)
 
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str ()));
 
-  // If we failed to open S, try to open the file in our search
-  // directory.
+  // If we failed to open S, try to open the file in our search path.
   if (is->fail () && s != "-")
   {
-    delete is;
-    std::string file = get_automata_path (args) + "/" + s;
-    is = new std::ifstream (file.c_str ());
+    const std::list<std::string>& path = get_automata_path(args);
+
+    std::list<std::string>::const_iterator i;
+    for (i = path.begin(); i != path.end(); ++i)
+      {
+	delete is;
+	std::string file = *i + "/" + s;
+	is = new std::ifstream (file.c_str ());
+	if (not is->fail())
+	  break;
+      }
   }
 
   if (not is->fail ())

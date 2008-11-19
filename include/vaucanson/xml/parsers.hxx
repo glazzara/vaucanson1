@@ -19,6 +19,7 @@
 # define VCSN_XML_PARSERS_HXX
 
 # include <fstream>
+# include <cstring>
 # include <xercesc/sax2/XMLReaderFactory.hpp>
 
 # include <vaucanson/xml/ios.hh>
@@ -30,22 +31,54 @@ namespace vcsn
     /*
      * Parser class.
      */
-    std::string
+    const std::string&
     Parser::get_xsd_path ()
     {
-      const char*	path = getenv("VCSN_DATA_PATH");
-      const char*	xsd = "vaucanson.xsd";
+      static std::string path;
+      static const char xsd[] = "vaucanson.xsd";
 
-      if (path == 0)
-	path = VCSN_DATA_PATH;
-      std::string file = std::string (path) + "/" + xsd;
+      // Do not probe the XSD path twice.
+      if (not path.empty())
+	return path;
 
-      if (std::ifstream (file.c_str()).good())
-	return file;
-      FAIL (std::string ("Error: cannot open `") + path + "/" + xsd + "'.\n"
+      const char* base_path = getenv("VCSN_DATA_PATH");
+
+      if (base_path == 0)
+	base_path = VCSN_DATA_PATH;
+
+      while (*base_path)
+	{
+	  const char* sep = strchr(base_path, ':');
+
+	  if (sep == base_path)
+	    {
+	      // Ignore an empty path.
+	      ++ base_path;
+	      continue;
+	    }
+
+	  // Did we find a colon?
+	  if (sep > 0)
+	    path = std::string(base_path, sep - base_path);
+	  else
+	    path = std::string(base_path);
+	  path = path + "/" + xsd;
+	  base_path = sep + 1;
+
+	  // Is that the right directory?
+	  if (std::ifstream(path.c_str()).good())
+	    return path;
+
+	  // No colon found, do not loop.
+	  if (sep == 0)
+	    break;
+	}
+
+      // Complain with the last directory used.
+      FAIL (std::string("Error: cannot open `") + path + "'.\n"
 	    "Please set VCSN_DATA_PATH to the Vaucanson data directory,\n"
 	    "containing `" + xsd + "'.");
-      return "";
+      return path;
     }
 
     Parser::Parser (bool check)

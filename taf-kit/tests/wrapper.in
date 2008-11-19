@@ -3,8 +3,8 @@
 # Wrapper around a non installed TAF-Kit component to make it work as
 # an installed one.
 
-# Use the shipped files, not those installed.
-VCSN_DATA_PATH='@abs_top_srcdir@/data'
+# Use the built and shipped files, not those installed.
+VCSN_DATA_PATH='@abs_top_builddir@:@abs_top_srcdir@/data'
 export VCSN_DATA_PATH
 
 # PREVCSN can be set to tools such as Valgrind.

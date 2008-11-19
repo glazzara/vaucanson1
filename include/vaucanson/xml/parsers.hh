@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ namespace vcsn
 	virtual ~Parser ();
 
       protected:
-	std::string
+	const std::string&
 	get_xsd_path ();
 
 	ErrHandler*			err_handler_;
