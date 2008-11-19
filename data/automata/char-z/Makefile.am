@@ -18,19 +18,18 @@ include $(top_srcdir)/vaucanson.mk
 EXTRA_PROGRAMS = c1
 
 nodist_char_z_automata_DATA =                          \
-  $(srcdir)/b1.xml				\
-  $(srcdir)/c1.xml
+  b1.xml				\
+  c1.xml
 
-MAINTAINERCLEANFILES = $(nodist_char_z_automata_DATA)
+CLEANFILES += $(nodist_char_z_automata_DATA)
 
 # This automaton counts the number of bs.
-$(srcdir)/b1.xml: $(top_srcdir)/data/automata/char-b/b1.xml
+b1.xml: ../char-b/b1.xml
 	sed -e 's/set="B"/set="Z"/g' $< >$@.tmp
 	mv $@.tmp $@
 
 c1_CPPFLAGS = $(AM_CPPFLAGS)
 c1_SOURCES = c1.cc
-$(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
+c1.xml: c1$(EXEEXT)
 	./c1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@

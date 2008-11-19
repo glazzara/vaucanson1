@@ -17,23 +17,21 @@ include $(top_srcdir)/vaucanson.mk
 EXTRA_PROGRAMS = t1 u1
 
 nodist_char_fmp_b_automata_DATA =			\
-	$(srcdir)/t1.xml			\
-	$(srcdir)/u1.xml
+	t1.xml			\
+	u1.xml
 
-MAINTAINERCLEANFILES = $(nodist_char_fmp_b_automata_DATA)
+CLEANFILES += $(nodist_char_fmp_b_automata_DATA)
 
 t1_CPPFLAGS = $(AM_CPPFLAGS)
 t1_SOURCES = t1.cc
 
-$(srcdir)/t1.xml: t1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) t1$(EXEEXT)
+t1.xml: t1$(EXEEXT)
 	./t1$(EXEEXT) >$@.tmp
 	mv $@.tmp $@
 
 u1_CPPFLAGS = $(AM_CPPFLAGS)
 u1_SOURCES = u1.cc
 
-$(srcdir)/u1.xml: u1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) u1$(EXEEXT)
+u1.xml: u1$(EXEEXT)
 	./u1$(EXEEXT) >$@.tmp
 	mv $@.tmp $@

@@ -17,19 +17,18 @@ include $(top_srcdir)/vaucanson.mk
 EXTRA_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 
 nodist_char_b_automata_DATA =			\
-  $(srcdir)/a1.xml				\
-  $(srcdir)/b1.xml				\
-  $(srcdir)/div3base2.xml			\
-  $(srcdir)/ladybird-6.xml			\
-  $(srcdir)/double-3-1.xml
+  a1.xml					\
+  b1.xml					\
+  div3base2.xml					\
+  ladybird-6.xml				\
+  double-3-1.xml
 
-MAINTAINERCLEANFILES = $(nodist_char_b_automata_DATA)
+CLEANFILES += $(nodist_char_b_automata_DATA)
 
 a1_CPPFLAGS = $(AM_CPPFLAGS)
 a1_SOURCES = a1.cc
 
-$(srcdir)/a1.xml: a1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) a1$(EXEEXT)
+a1.xml: a1$(EXEEXT)
 	./a1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
@@ -37,28 +36,24 @@ $(srcdir)/a1.xml: a1.cc $(top_srcdir)/configure.ac
 # See ETA Fig. III.2.3, p. 434.
 b1_CPPFLAGS = $(AM_CPPFLAGS)
 b1_SOURCES = b1.cc
-$(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) b1$(EXEEXT)
+b1.xml: b1$(EXEEXT)
 	./b1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
 divkbaseb_CPPFLAGS = $(AM_CPPFLAGS)
 divkbaseb_SOURCES = divkbaseb.cc
-$(srcdir)/div3base2.xml: divkbaseb.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) divkbaseb$(EXEEXT)
+div3base2.xml: divkbaseb$(EXEEXT)
 	./divkbaseb$(EXEEXT) 3 2 xml >$@.tmp
 	mv $@.tmp $@
 
 ladybird_CPPFLAGS = $(AM_CPPFLAGS)
 ladybird_SOURCES = ladybird.cc
-$(srcdir)/ladybird-6.xml: ladybird.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) ladybird$(EXEEXT)
+ladybird-6.xml: ladybird$(EXEEXT)
 	./ladybird$(EXEEXT) 6 xml >$@.tmp
 	mv $@.tmp $@
 
 double_ring_CPPFLAGS = $(AM_CPPFLAGS)
 double_ring_SOURCES = double_ring.cc
-$(srcdir)/double-3-1.xml: double_ring.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) double_ring$(EXEEXT)
+double-3-1.xml: double_ring$(EXEEXT)
 	./double_ring$(EXEEXT) 3 1 xml >$@.tmp
 	mv $@.tmp $@

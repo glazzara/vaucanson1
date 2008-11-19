@@ -1,5 +1,14 @@
 2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* data/automata/char-b/Makefile.am,
+	data/automata/char-z/Makefile.am,
+	data/automata/char-fmp-b/Makefile.am: Rename MAINTAINERCLEANFILES
+	as CLEANFILES now that these XML files are no longer distributed.
+	Adjust all rules to build XML files in the build directory and to
+	depend on the binary generating them.
+
+2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/library_commands.hh (get_automata_path): Support
 	colons in VCSN_DATA_PATH, return a list of directories.
 	(list_automata_command): List all directories of the path.
