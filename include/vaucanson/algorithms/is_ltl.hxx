@@ -45,7 +45,7 @@ namespace vcsn
       if (l.supp().size() > 1)
 	return false;
       // We assume that an initial transition cannot be labeled by
-      // the empty series.  In other words, l.size() >= 1.
+      // the empty series.  In other words, l.supp().size() >= 1.
       assertion(l.supp().size() == 1);
       monoid_elt_value_t m = *l.supp().begin();
       if (m.first.size() > 0 || m.second.size() > 0)
@@ -69,7 +69,7 @@ namespace vcsn
       if (l.supp().size() > 1)
 	return false;
       // We assume that an initial transition cannot be labeled by
-      // the empty series.  In other words, l.size() >= 1.
+      // the empty series.  In other words, l.supp().size() >= 1.
       assertion(l.supp().size() == 1);
       monoid_elt_value_t m = *l.supp().begin();
       if (m.first.size() > 0 || m.second.size() > 0)
