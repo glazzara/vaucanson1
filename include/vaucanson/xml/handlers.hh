@@ -342,7 +342,8 @@ namespace vcsn
 
     /**
      * DocHandler class, root class
-     * Read <fsmxml>
+     *
+     * Reads \c<fsmxml>
      */
     template <typename T>
     class DocHandler : public Handler
