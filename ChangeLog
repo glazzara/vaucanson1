@@ -1,3 +1,8 @@
+2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/tests/wrapper.in (VCSN_DATA_PATH): Add missing directory
+	component, fixing today's earlier change.
+
 2008-11-19  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix English.
