@@ -1,5 +1,15 @@
 2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* data/automata/char-z/Makefile.am,
+	data/automata/char-b/Makefile.am,
+	data/automata/fmp-char-b/Makefile.am (EXTRA_PROGRAMS): Rename as
+	noinst_PROGRAMS so that these programs get built directly and
+	especially cleaned.  Not cleaning these files caused distcheck
+	errors now that they are rebuilt as a side effect of rebuilding
+	the XML files...
+
+2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/manual/taf-kit.tex: Do not output and read a1.xml at
 	the same time, use eval-nodep when reading a1.xml.
 	* doc/manual/extex.mk (%.tex: %.cmd): Remove superfluous

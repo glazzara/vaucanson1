@@ -14,7 +14,7 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-EXTRA_PROGRAMS = t1 u1
+noinst_PROGRAMS = t1 u1
 
 nodist_char_fmp_b_automata_DATA =			\
 	t1.xml			\

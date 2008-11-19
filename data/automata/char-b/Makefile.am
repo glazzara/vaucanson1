@@ -14,7 +14,7 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-EXTRA_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
+noinst_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 
 nodist_char_b_automata_DATA =			\
   a1.xml					\

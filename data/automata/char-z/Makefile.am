@@ -15,7 +15,7 @@
 include $(top_srcdir)/vaucanson.mk
 
 # Z automata.
-EXTRA_PROGRAMS = c1
+noinst_PROGRAMS = c1
 
 nodist_char_z_automata_DATA =                          \
   b1.xml				\
