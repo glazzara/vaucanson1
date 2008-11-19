@@ -36,79 +36,106 @@ namespace vcsn
 
       template <class FirstInputIterator, class SecondInputIterator>
       automata_set_t make_automata_set(const FirstInputIterator first_begin,
-	const FirstInputIterator first_end,
-	const SecondInputIterator second_begin,
-	const SecondInputIterator second_end,
-	const monoid_rep_t& mrep =
-	*(vcsn::algebra::monoid_rep_default<monoid_t>::get_instance()),
-	const first_monoid_rep_t& mrep1 =
-	*(vcsn::algebra::monoid_rep_default<first_monoid_t>::get_instance()),
-	const second_monoid_rep_t& mrep2 =
-	*(vcsn::algebra::monoid_rep_default<second_monoid_t>::get_instance()),
-	const series_rep_t& srep =
-	*(vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()),
-	const first_series_rep_t& srep1 =
-	*(vcsn::algebra::series_rep_default<semiring_t, first_monoid_t>::get_instance()),
-	const second_series_rep_t& srep2 =
-	*(vcsn::algebra::series_rep_default<semiring_t, second_monoid_t>::get_instance()))
+				       const FirstInputIterator first_end,
+				       const SecondInputIterator second_begin,
+				       const SecondInputIterator second_end)
       {
-	first_alphabet_t	first_alpha;
+	first_alphabet_t first_alpha;
+
 	for (FirstInputIterator e = first_begin; e != first_end; ++e)
 	  first_alpha.insert(*e);
 
-	second_alphabet_t	second_alpha;
+	second_alphabet_t second_alpha;
+
 	for (SecondInputIterator e = second_begin; e != second_end; ++e)
 	  second_alpha.insert(*e);
 
-	semiring_t		semiring;
-	first_monoid_t		mA(first_alpha, mrep1);
-	second_monoid_t		mB(second_alpha, mrep2);
-	monoid_t		freemonoidproduct(mA, mB, mrep);
-	// FIXME: srep1 and srep2 cannot be used.
-	series_set_t		series(semiring, freemonoidproduct, srep);
+	semiring_t	semiring;
+	first_monoid_t	mA(first_alpha);
+	second_monoid_t	mB(second_alpha);
+	monoid_t	freemonoidproduct(mA, mB);
+	series_set_t	series(semiring, freemonoidproduct);
 
 	return automata_set_t(series);
       }
 
+      template <class FirstInputIterator, class SecondInputIterator>
+      automata_set_t make_automata_set(const FirstInputIterator first_begin,
+				       const FirstInputIterator first_end,
+				       const SecondInputIterator second_begin,
+				       const SecondInputIterator second_end,
+				       const monoid_rep_t& mrep,
+				       const first_monoid_rep_t& mrep1,
+				       const second_monoid_rep_t& mrep2,
+				       const series_rep_t& srep,
+				       const first_series_rep_t& srep1,
+				       const second_series_rep_t& srep2)
+      {
+	first_alphabet_t first_alpha;
+
+	for (FirstInputIterator e = first_begin; e != first_end; ++e)
+	  first_alpha.insert(*e);
+
+	second_alphabet_t second_alpha;
+
+	for (SecondInputIterator e = second_begin; e != second_end; ++e)
+	  second_alpha.insert(*e);
+
+	semiring_t	semiring;
+	first_monoid_t	mA(first_alpha, mrep1);
+	second_monoid_t	mB(second_alpha, mrep2);
+	monoid_t	freemonoidproduct(mA, mB, mrep);
+	// FIXME: srep1 and srep2 cannot be used.
+	series_set_t	series(semiring, freemonoidproduct, srep);
+
+	return automata_set_t(series);
+      }
 
       template <class FirstInputIterator, class SecondInputIterator>
       automaton_t make_automaton(const FirstInputIterator first_begin,
-	const FirstInputIterator first_end,
-	const SecondInputIterator second_begin,
-	const SecondInputIterator second_end,
-	const monoid_rep_t& mrep =
-	*(vcsn::algebra::monoid_rep_default<monoid_t>::get_instance()),
-	const first_monoid_rep_t& mrep1 =
-	*(vcsn::algebra::monoid_rep_default<first_monoid_t>::get_instance()),
-	const second_monoid_rep_t& mrep2 =
-	*(vcsn::algebra::monoid_rep_default<second_monoid_t>::get_instance()),
-	const series_rep_t& srep =
-	*(vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()),
-	const first_series_rep_t& srep1 =
-	*(vcsn::algebra::series_rep_default<semiring_t, first_monoid_t>::get_instance()),
-	const second_series_rep_t& srep2 =
-	*(vcsn::algebra::series_rep_default<semiring_t, second_monoid_t>::get_instance()))
+				 const FirstInputIterator first_end,
+				 const SecondInputIterator second_begin,
+				 const SecondInputIterator second_end)
       {
-	return automaton_t (make_automata_set(first_begin, first_end,
-			    second_begin, second_end,
-			    mrep, mrep1, mrep2, srep, srep1, srep2));
+	return automaton_t(make_automata_set(first_begin, first_end,
+					     second_begin, second_end));
+      }
+
+      template <class FirstInputIterator, class SecondInputIterator>
+      automaton_t make_automaton(const FirstInputIterator first_begin,
+				 const FirstInputIterator first_end,
+				 const SecondInputIterator second_begin,
+				 const SecondInputIterator second_end,
+				 const monoid_rep_t& mrep,
+				 const first_monoid_rep_t& mrep1,
+				 const second_monoid_rep_t& mrep2,
+				 const series_rep_t& srep,
+				 const first_series_rep_t& srep1,
+				 const second_series_rep_t& srep2)
+      {
+	return automaton_t(make_automata_set(first_begin, first_end,
+					     second_begin, second_end,
+					     mrep, mrep1, mrep2,
+					     srep, srep1, srep2));
       }
 
       template <class T1, class T2>
       automaton_t make_automaton(const T1& first_alphabet,
-	const T2& second_alphabet,
-	const monoid_rep_t& mrep =
-	*(vcsn::algebra::monoid_rep_default<monoid_t>::get_instance()),
-	const first_monoid_rep_t& mrep1 =
-	*(vcsn::algebra::monoid_rep_default<first_monoid_t>::get_instance()),
-	const second_monoid_rep_t& mrep2 =
-	*(vcsn::algebra::monoid_rep_default<second_monoid_t>::get_instance()),
-	const series_rep_t& srep =
-	*(vcsn::algebra::series_rep_default<semiring_t, monoid_t>::get_instance()),
-	const first_series_rep_t& srep1 =
-	*(vcsn::algebra::series_rep_default<semiring_t, first_monoid_t>::get_instance()),
-	const second_series_rep_t& srep2 =
-	*(vcsn::algebra::series_rep_default<semiring_t, second_monoid_t>::get_instance()))
+				 const T2& second_alphabet)
+      {
+	return make_automaton(first_alphabet.begin(), first_alphabet.end(),
+			      second_alphabet.begin(), second_alphabet.end());
+      }
+
+      template <class T1, class T2>
+      automaton_t make_automaton(const T1& first_alphabet,
+				 const T2& second_alphabet,
+				 const monoid_rep_t& mrep,
+				 const first_monoid_rep_t& mrep1,
+				 const second_monoid_rep_t& mrep2,
+				 const series_rep_t& srep,
+				 const first_series_rep_t& srep1,
+				 const second_series_rep_t& srep2)
       {
 	return make_automaton(first_alphabet.begin(), first_alphabet.end(),
 			      second_alphabet.begin(), second_alphabet.end(),

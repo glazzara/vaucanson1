@@ -28,23 +28,22 @@ namespace vcsn
     VCSN_CONTEXT_NAMESPACE
     {
       template <class T>
+      automaton_t make_automaton(const T& alphabet);
+
+      template <class T>
       automaton_t make_automaton(const T& alphabet,
-				 const monoid_rep_t& mrep = *(vcsn::algebra::
-							      monoid_rep_default<monoid_t>::
-							      get_instance()),
-				 const series_rep_t& srep = *(vcsn::algebra::
-							      series_rep_default<semiring_t, monoid_t>::
-							      get_instance()));
+				 const monoid_rep_t& mrep,
+				 const series_rep_t& srep);
+
+      template <class InputIterator>
+      automaton_t make_automaton(InputIterator begin,
+				 InputIterator end);
 
       template <class InputIterator>
       automaton_t make_automaton(InputIterator begin,
 				 InputIterator end,
-				 const monoid_rep_t& mrep = *(vcsn::algebra::
-							      monoid_rep_default<monoid_t>::
-							      get_instance()),
-				 const series_rep_t& srep = *(vcsn::algebra::
-							      series_rep_default<semiring_t, monoid_t>::
-							      get_instance()));
+				 const monoid_rep_t& mrep,
+				 const series_rep_t& srep);
 
       template <class T>
       automaton_letter_t make_automaton_letter(const T& alphabet);

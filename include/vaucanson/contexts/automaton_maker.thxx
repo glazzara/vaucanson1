@@ -38,46 +38,68 @@ namespace vcsn
       template <class InputIterator>
       automata_set_t
       make_automata_set(InputIterator begin,
-			InputIterator end,
-			const monoid_rep_t& mrep = *(vcsn::algebra::
-						     monoid_rep_default<monoid_t>::
-						     get_instance()),
-			const series_rep_t& srep = *(vcsn::algebra::
-						     series_rep_default<semiring_t, monoid_t>::
-						     get_instance()))
+			InputIterator end)
       {
-        alphabet_t		alpha;
+        alphabet_t alpha;
+
         for (InputIterator e = begin; e != end; ++e)
 	  alpha.insert(*e);
-        semiring_t		semiring;
-        monoid_t		freemonoid (alpha, mrep);
-        series_set_t		series (semiring, freemonoid, srep);
-        return automata_set_t (series);
+
+        semiring_t	semiring;
+        monoid_t	freemonoid(alpha);
+        series_set_t	series(semiring, freemonoid);
+
+        return automata_set_t(series);
+      }
+
+      template <class InputIterator>
+      automata_set_t
+      make_automata_set(InputIterator begin,
+			InputIterator end,
+			const monoid_rep_t& mrep,
+			const series_rep_t& srep)
+      {
+        alphabet_t alpha;
+
+        for (InputIterator e = begin; e != end; ++e)
+	  alpha.insert(*e);
+
+        semiring_t	semiring;
+        monoid_t	freemonoid(alpha, mrep);
+        series_set_t	series(semiring, freemonoid, srep);
+        return automata_set_t(series);
+      }
+
+      template <class InputIterator>
+      automaton_t
+      make_automaton(InputIterator begin,
+		     InputIterator end)
+      {
+        return automaton_t(make_automata_set(begin, end));
       }
 
       template <class InputIterator>
       automaton_t
       make_automaton(InputIterator begin,
 		     InputIterator end,
-		     const monoid_rep_t& mrep = *(vcsn::algebra::
-						  monoid_rep_default<monoid_t>::
-						  get_instance()),
-		     const series_rep_t& srep = *(vcsn::algebra::
-						  series_rep_default<semiring_t, monoid_t>::
-						  get_instance()))
+		     const monoid_rep_t& mrep,
+		     const series_rep_t& srep)
       {
-        return automaton_t (make_automata_set(begin, end, mrep, srep));
+        return automaton_t(make_automata_set(begin, end, mrep, srep));
+      }
+
+      template <class T>
+      automaton_t
+      make_automaton(const T& alphabet)
+      {
+        return make_automaton(alphabet.begin(), alphabet.end());
       }
 
       template <class T>
       automaton_t
       make_automaton(const T& alphabet,
-		     const monoid_rep_t& mrep = *(vcsn::algebra::
-						  monoid_rep_default<monoid_t>::
-						  get_instance()),
-		     const series_rep_t& srep = *(vcsn::algebra::
-						  series_rep_default<semiring_t, monoid_t>::
-						  get_instance()))
+		     const monoid_rep_t& mrep,
+		     const series_rep_t& srep)
       {
         return make_automaton(alphabet.begin(), alphabet.end(), mrep, srep);
       }

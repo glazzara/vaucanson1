@@ -1,5 +1,15 @@
 2008-11-19  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Rework automaton maker interfaces.
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx,
+	* include/vaucanson/contexts/fmp_transducer_maker.thh,
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx: Remove
+	  default arguments. Add a function that do not need
+	  representations.
+
+2008-11-19  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Do not distribute build xml files in data.
 	* data/automata/char-fmp-b/Makefile.am,
 	* data/automata/char-b/Makefile.am,
