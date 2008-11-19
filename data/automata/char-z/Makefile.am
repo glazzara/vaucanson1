@@ -17,11 +17,11 @@ include $(top_srcdir)/vaucanson.mk
 # Z automata.
 EXTRA_PROGRAMS = c1
 
-dist_char_z_automata_DATA =                          \
+nodist_char_z_automata_DATA =                          \
   $(srcdir)/b1.xml				\
   $(srcdir)/c1.xml
 
-MAINTAINERCLEANFILES = $(dist_char_z_automata_DATA)
+MAINTAINERCLEANFILES = $(nodist_char_z_automata_DATA)
 
 # This automaton counts the number of bs.
 $(srcdir)/b1.xml: $(top_srcdir)/data/automata/char-b/b1.xml

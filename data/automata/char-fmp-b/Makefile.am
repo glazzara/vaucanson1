@@ -16,12 +16,11 @@ include $(top_srcdir)/vaucanson.mk
 
 EXTRA_PROGRAMS = t1 u1
 
-dist_char_fmp_b_automata_DATA =			\
+nodist_char_fmp_b_automata_DATA =			\
 	$(srcdir)/t1.xml			\
 	$(srcdir)/u1.xml
 
-EXTRA_DIST = $(XML_SAMPLES)
-MAINTAINERCLEANFILES = $(dist_char_fmp_b_automata_DATA)
+MAINTAINERCLEANFILES = $(nodist_char_fmp_b_automata_DATA)
 
 t1_CPPFLAGS = $(AM_CPPFLAGS)
 t1_SOURCES = t1.cc

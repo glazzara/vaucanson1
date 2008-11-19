@@ -16,15 +16,14 @@ include $(top_srcdir)/vaucanson.mk
 
 EXTRA_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 
-dist_char_b_automata_DATA =			\
+nodist_char_b_automata_DATA =			\
   $(srcdir)/a1.xml				\
   $(srcdir)/b1.xml				\
   $(srcdir)/div3base2.xml			\
   $(srcdir)/ladybird-6.xml			\
   $(srcdir)/double-3-1.xml
 
-EXTRA_DIST = $(XML_SAMPLES)
-MAINTAINERCLEANFILES = $(dist_char_b_automata_DATA)
+MAINTAINERCLEANFILES = $(nodist_char_b_automata_DATA)
 
 a1_CPPFLAGS = $(AM_CPPFLAGS)
 a1_SOURCES = a1.cc
