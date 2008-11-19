@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
+// Copyright (C) 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,20 +19,16 @@
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file   is_ltl.hh
+ * @file is_ltl.hh
  *
  * @brief Letter-to-letter feature testing.
  *
- * @details An FMP transducer t over the free monoid product A*xB*,
- * where A and B are both alphabets, is of type ltl if and only if every
- * transitions of t is in E, where E is defined by:
- * E = {(a, b) | a \in A, b \in B}
+ * @details An FMP transducer T over the free monoid product
+ * @f$A^\star\times B^\star@f$ is letter-to-letter (LTL) if and only
+ * if (1) the support of the of every of its transitions is in
+ * @f$A^\times B@f$, and (2) its initial and final weights are scalar.
  *
- * @remarks Synonyms: letter-to-letter, lettre-à-lettre, synchronous,
- * synchrone.
- *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
- * @date   Fri Jul  4 13:42:52 2003
+ * @remarks Synonyms: ltl, letter-to-letter, lettre-à-lettre
  *
  * @see is_ltl(), is_sub_normalized(), is_normalized()
  */
@@ -49,9 +45,7 @@ namespace vcsn
 {
   /** @addtogroup algorithms *//** @{ */
   /**
-   * @fn is_ltl
-   *
-   * @brief Test the ltl property of an FMP transducer.
+   * @brief Test whether an FMP transducer is letter-to-letter.
    *
    * @pre t must be an FMP transducer.
    *
