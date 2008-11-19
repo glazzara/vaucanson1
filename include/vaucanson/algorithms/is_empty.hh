@@ -38,8 +38,6 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  /// Return true if the automaton is empty (has no state),
-  /// false otherwise.
   /**
    * @brief Evaluate if an automaton is empty.
    *
