@@ -88,7 +88,7 @@ produce a result on the standard output, and if an \var{automaton} is
 
 A typical line of commands from the \tafkit reads as follows:
 \begin{shell}
-# \kbd{vcsn-char-b determinize a1.xml > a1det.xml}
+# \kbd{vcsn-char-b determinize-nodep a1.xml > a1det.xml}
 \end{shell}
 and should be understood, or analyzed, as follows.
 \begin{enumerate}
@@ -200,7 +200,7 @@ Usual shell indirections (\samp{|}, \samp{>}, and \samp{<}) can be
 used to combine \tafkit commands.  For instance, this is an easy means
 to bring a local copy of this file:
 
-\execcaption{a1-xml}{vcsn-char-b identity-nodep \$VCSN\_DATA\_PATH/automata/char-b/a1.xml >a1.xml}
+\execcaption{a1-xml}{vcsn-char-b identity-nodep a1.xml >my-a1.xml}
 
 \tafkit uses XML to exchange automata, to get graphical rendering of
 the automaton, you may either invoke \Index{\taffn{-o dot identity}} and then
@@ -232,8 +232,8 @@ Or use dotty to visualize it:
 
 To \index{\taffn{eval}}evaluate whether a word is accepted:
 
-\execcaption{a1.abab}{vcsn-char-b eval a1.xml 'abab'}
-\execcaption{a1.bbba}{vcsn-char-b eval a1.xml 'bbba'}
+\execcaption{a1.abab}{vcsn-char-b eval-nodep a1.xml 'abab'}
+\execcaption{a1.bbba}{vcsn-char-b eval-nodep a1.xml 'bbba'}
 
 \noindent
 where 1 (resp. 0) means that the word is accepted (resp. not accepted)

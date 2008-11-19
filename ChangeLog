@@ -1,5 +1,14 @@
 2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/manual/taf-kit.tex: Do not output and read a1.xml at
+	the same time, use eval-nodep when reading a1.xml.
+	* doc/manual/extex.mk (%.tex: %.cmd): Remove superfluous
+	definition of VCSN_DATA_PATH.
+	* doc/manual/extex.pl: Remove useless definition of
+	VCSN_DATA_PATH, introduce eval-nodep.
+
+2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/tests/wrapper.in (VCSN_DATA_PATH): Add missing directory
 	component, fixing today's earlier change.
 
