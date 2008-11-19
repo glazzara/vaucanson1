@@ -1,3 +1,5 @@
+.. contents::
+
 Faster builds
 =============
 
@@ -8,14 +10,16 @@ dramatically with a few simple measures.
 Fast machine, plenty of memory
 ------------------------------
 
-Use a fast machine with plenty of memory. 2Gb seems to be a minimum for
+Use a fast machine with plenty of memory. 2GB seems to be a minimum for
 an optimised build; any less causes severe swapping.
 
 
 Non-optimised build
 -------------------
 
-./configure ... CCFLAGS="-g -ggdb -Wall" CXXFLAGS="-g -ggdb -Wall"
+Use::
+
+  ./configure ... CCFLAGS="-g -ggdb -Wall" CXXFLAGS="-g -ggdb -Wall"
 
 N.B. The variables go at the end of the line.
 
@@ -23,13 +27,13 @@ N.B. The variables go at the end of the line.
 Parallel make
 -------------
 
-Use:
+Use::
 
-export MAKEFLAGS="-j `grep ^processor /proc/cpuinfo | wc -l`"
+  export MAKEFLAGS="-j `grep ^processor /proc/cpuinfo | wc -l`"
 
 This allows make to run up to one process per CPU core.
 
-FIXME: It would be polite to use "-l" to stop make from starting new
+FIXME: It would be polite to use ``-l`` to stop make from starting new
 processes if the machine load goes above a certain level, e.g. 2.0 *
 no_of_CPUs.
 
@@ -37,27 +41,53 @@ no_of_CPUs.
 ccache
 ------
 
-Use ccache with a cache size of at least 4Gb (at the time of writing on
-a 32-bit Debian system vaucanson uses about 3.5Gb):
+Use ``ccache`` with a cache size of at least 4Gb (at the time of
+writing on a 32-bit Debian system vaucanson uses about 3.5Gb)::
 
-ccache -M 4G
+  ccache -M 4G
 
 
 distcc
 ------
 
-FIXME: Someone please write this section.
+The following instructions are for LRDE users, but may be adapted to
+other places.
 
+1. Wake up as much machines as you want with ``lrde-wakeonlan``.
+   Use ``lrde-wakeonlan .`` to wake up all hosts.
 
-FIXME: Improve the build system
---------------------------------
+2. Configure with::
 
-[Remove this section once the build system can't easily be improved
-further!]
+     ./configure CC=gcc-4.2 CXX=g++-4.2
+
+   You need to specify the GCC version number to make sure all
+   machines use the same compiler.
+
+3. Update the ``.distcc/hosts`` files with the list of build
+   hosts available.  It should look something like::
+
+     berville-en-caux.lrde.epita.fr/2,lzo
+     marvejols.lrde.epita.fr/2,lzo
+     whiteagonycreek.lrde.epita.fr/2,lzo
+     --randomize
+
+   The script ``~adl/usr/bin/update-distcc-hosts`` can create
+   this file automatically for you.
+
+4. Run ``make -jN CC='distcc gcc-4.2' CXX='distcc g++-4.2'`` where
+   ``N`` is the number of available hosts.  Beware that preprocessing
+   and linking are still done locally, so you may not want to use more
+   than ``-j8`` on a single core CPU.
+
+Improve the build system
+------------------------
+
+FIXME: Remove this section once the build system can't easily be
+improved further!
 
 The build system has recently (at the time of writing) been improved to
 build the libraries much faster, but there's further room for speed-ups.
-For example: make the tests use -DVCSN_USE_LIB.
+For example: make the tests use ``-DVCSN_USE_LIB``.
 
 
 Making a release
@@ -122,11 +152,11 @@ Template arguments naming convention
 
 Template arguments:
 
-  - A  : Automaton structure.
-  - AI : Automaton implementation.
-  - S  : Series.
-  - SI : Series implementation.
-  - W  : a Word.
+  - ``A``  : Automaton structure.
+  - ``AI`` : Automaton implementation.
+  - ``S``  : Series.
+  - ``SI`` : Series implementation.
+  - ``W``  : a Word.
 
 In the case where multiple possibilities could be used, suffix the
 template argument with the appropriate numbering. For example, to
@@ -189,3 +219,7 @@ called ``libtool``, GNU ``libtool`` is usually installed as
 ``glibtool``.  Alternatively, you may want to use the copy of
 ``libtool`` output by ``configure`` at the root of Vaucanson's build
 tree.
+
+.. Local Variables:
+.. mode: rst
+.. End:
