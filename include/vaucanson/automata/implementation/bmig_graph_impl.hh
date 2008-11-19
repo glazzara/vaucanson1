@@ -88,9 +88,9 @@ namespace vcsn
 	// Transition descriptor.
 	//
 	// We store a pointer to an EdgeValue to avoid a new index on transitions and
-	// get the data more quickly. Actually this is the adresse of an element
+	// get the data more quickly. Actually this is the address of an element
 	// inserted in the multi_index.
-	// We are allowed to do so since Boost::multi_index guaranties that the data
+	// We are allowed to do so since Boost::multi_index guarantees that the data
 	// inserted will not be reallocated.
 	//
 	// We may need to try storing an iterator instead of a pointer. We haven't tried yet
