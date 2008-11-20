@@ -61,16 +61,11 @@ namespace vcsn {
     | Sum of transitions.  |
     `---------------------*/
 
-    typedef std::list<typename rhs_t::htransition_t> dst_t;
-    dst_t dst;
-
     for_all_const_states(i, rhs)
     {
-      dst.clear();
-      rhs.deltac(dst, *i, delta_kind::transitions());
-      for (typename dst_t::const_iterator d = dst.begin();
-	   d != dst.end();
-	   ++d)
+      for (typename rhs_t::delta_transition_iterator d(rhs.value(), *i);
+           ! d.done();
+           d.next())
       {
 	lhs.add_transition(states_map[rhs.src_of(*d)],
 			   states_map[rhs.dst_of(*d)],

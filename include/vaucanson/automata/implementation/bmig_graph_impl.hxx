@@ -622,30 +622,6 @@ namespace vcsn
     | Delta functions.  |
     `------------------*/
 
-  # define DEFINE_DELTAC_FUNCTION(FunName, DeltaKind, Target, GetElt)		\
-    BMIGRAPH_TPARAM								\
-    template <typename Container, typename Query>				\
-    void									\
-    BMIGRAPH::FunName(Container &res,						\
-                        const typename BMIGRAPH::hstate_t& s,			\
-                        const Query& query,					\
-                        ::vcsn::delta_kind::DeltaKind) const			\
-    {										\
-      assertion(has_state(s));							\
-      Target##_range r = graph_.template get<Target>().equal_range(s.value());	\
-      std::insert_iterator<Container> i(res, res.begin());			\
-      for (Target##_iterator e = r.first; e != r.second; ++e)			\
-        if (query(hedge_t(graph_.project<0>(e))))				\
-          *i++ = GetElt;							\
-    }
-
-    DEFINE_DELTAC_FUNCTION (deltac, transitions, src, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTAC_FUNCTION (deltac, states, src, hstate_t(e->to_));
-    DEFINE_DELTAC_FUNCTION (rdeltac, transitions, dst, hedge_t(graph_.project<0>(e)));
-    DEFINE_DELTAC_FUNCTION (rdeltac, states, dst, hstate_t(e->from_));
-
-  # undef DEFINE_DELTAC_FUNCTION
-
   # define DEFINE_DELTAI_FUNCTION(DeltaKind)					\
     BMIGRAPH_TPARAM								\
     std::pair<typename BMIGRAPH::DeltaKind##_iterator,				\

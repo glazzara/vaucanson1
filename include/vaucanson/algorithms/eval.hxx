@@ -75,12 +75,14 @@ namespace vcsn {
 	  {
 	    if (*w != zero)
             {
-              std::list<htransition_t> tr;
-              a.letter_deltac(tr, i, *l, delta_kind::transitions());
-              for (typename std::list<htransition_t>::const_iterator t = tr.begin(); t != tr.end(); ++t)
+              for (typename automaton_t::delta_transition_iterator t(a.value(), a.get_state(i)); ! t.done(); t.next())
               {
-                v2[a.dst_of(*t)] += *w *
-                  a.series_of(*t).get(monoid_elt_t(a.structure().series().monoid(), *l));
+                monoid_elt_t l_w(a.series_of(*t).structure().monoid(), *l);
+                if (a.series_of(*t).get(l_w) != a.series().semiring().wzero_)
+                {
+                  v2[a.dst_of(*t)] += *w *
+                    a.series_of(*t).get(monoid_elt_t(a.structure().series().monoid(), *l));
+                }
               }
             }
 	    ++i;

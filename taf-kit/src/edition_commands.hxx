@@ -148,10 +148,8 @@ namespace edition_commands
 
     for_all_states (s, a)
     {
-      std::set<htransition_t> succ;
-      a.deltac(succ, *s, delta_kind::transitions());
-      for (std::set<htransition_t>::const_iterator h = succ.begin ();
-	   h != succ.end (); ++h)
+      for (automaton_t::delta_transition_iterator h(a.value(), *s);
+           ! h.done(); h.next())
 	if (--cpt == 0)
 	  return *h;
     }
@@ -328,10 +326,8 @@ namespace edition_commands
     unsigned n_trans = 0;
     for_all_states (s, a)
     {
-      std::set<htransition_t> succ;
-      a.deltac(succ, *s, delta_kind::transitions());
-      for (std::set<htransition_t>::const_iterator h = succ.begin ();
-	   h != succ.end (); ++h)
+      for (automaton_t::delta_transition_iterator h(a.value(), *s);
+           ! h.done(); h.next())
       {
 	++n_trans;
 # ifndef WITH_TWO_ALPHABETS

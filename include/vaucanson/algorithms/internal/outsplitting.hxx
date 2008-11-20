@@ -82,7 +82,8 @@ namespace vcsn {
 	  // Test whether there are different types of outgoing transitions.
 
 	  set_of_transitions_t transitions;
-	  res.deltac(transitions, *s, delta_kind::transitions());
+          for (typename automaton_t::delta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+            transitions.push_back(*e);
 	  for_all_const_(set_of_transitions_t, e, transitions)
 	    {
 	      const series_set_elt_t	series	= res.series_of(*e);
@@ -111,7 +112,8 @@ namespace vcsn {
 		res.set_initial(s2, res.get_initial(*s));
 
 	      set_of_transitions_t in_transitions;
-	      res.rdeltac(in_transitions, *s, delta_kind::transitions());
+              for (typename automaton_t::rdelta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+                in_transitions.push_back(*e);
 
 	      for_all_(set_of_transitions_t, e, in_transitions)
 		res.add_series_transition(res.src_of(*e), s2, res.series_of(*e));
@@ -181,7 +183,8 @@ namespace vcsn {
 	  // Test whether there are different types of incoming transitions.
 
 	  set_of_transitions_t transitions;
-	  res.rdeltac(transitions, *s, delta_kind::transitions());
+          for (typename automaton_t::rdelta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+            transitions.push_back(*e);
 	  for_all_const_(set_of_transitions_t, e, transitions)
 	    {
 	      const series_set_elt_t	series	= res.series_of(*e);
@@ -210,7 +213,8 @@ namespace vcsn {
 		res.set_final(s2, res.get_final(*s));
 
 	      set_of_transitions_t out_transitions;
-	      res.deltac(out_transitions, *s, delta_kind::transitions());
+              for (typename automaton_t::delta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+                out_transitions.push_back(*e);
 
 	      for_all_(set_of_transitions_t, e, out_transitions)
 		res.add_series_transition(s2, res.dst_of(*e), res.series_of(*e));

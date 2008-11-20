@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,8 +56,8 @@ namespace vcsn {
    * @brief Compute distances from initial states to final states.
    *
    * For each i, compute the set of states reachable in i steps or
-   * less. the result is stored into a vector of set of states
-   * distances[i].  This algorithm stops when it first encounter a
+   * fewer. the result is stored into a vector of sets of states
+   * distances[i].  The algorithm stops when it encounters a
    * final state.  The last i value is returned.
    */
   template <typename Series, typename Kind, typename T, typename StatesSet>
@@ -77,31 +77,31 @@ namespace vcsn {
     // Code.
     StatesSet		s_new (a.states().back() + 1);
     StatesSet		s_old (a.states().back() + 1);
-    unsigned int	i = 0;
 
     s_old.insert(a.initial().begin(), a.initial().end());
-    for (bool get_out = false; !get_out; ++i)
+    for (unsigned int i = 0; true; ++i)
+    {
+      s_new.clear();
+      distances.push_back(s_old);
+      if (i > 0)
+        distances[i].insert(distances[i - 1].begin(),
+                            distances[i - 1].end());
+      for (typename StatesSet::const_iterator s = s_old.begin();
+           s != s_old.end();
+           ++s)
       {
-	s_new.clear();
-	distances.push_back(s_old);
-	if (i > 0)
-	  distances[i].insert(distances[i - 1].begin(),
-			      distances[i - 1].end());
-	for (typename StatesSet::const_iterator s = s_old.begin();
-	     s != s_old.end();
-	     ++s)
-	  {
-	    if (a.is_final(*s))
-	      // FIXME: Could be optimized with a return i, but code
-	      // is easier to read this way.
-	      get_out = true;
-	    a.deltac(s_new, *s, delta_kind::states());
-	  }
-	std::swap(s_new, s_old);
+        if (a.is_final(*s))
+        {
+          postcondition(i == distances.size());
+          return i;
+        }
+        for (typename automaton_t::delta_state_iterator i(a.value(), *s);
+             ! i.done();
+             i.next())
+          s_new.insert(*i);
+        s_old = s_new;
       }
-
-    postcondition(i == distances.size());
-    return i - 1;
+    }
   }
 
   /**
@@ -151,7 +151,13 @@ namespace vcsn {
 	    {
 	      if (a.is_initial(*s))
 		critpos = pos + 1;
-	      a.letter_rdeltac(s_new, *s, w[pos], delta_kind::states());
+              std::insert_iterator<bitset_t> i(s_new, s_new.begin());
+              for (typename automaton_t::delta_transition_iterator t(a.value(), *s); ! t.done(); t.next())
+              {
+                monoid_elt_t w(a.series_of(*t).structure().monoid(), w[pos]);
+                if (a.series_of(*t).get(w) != a.series().semiring().wzero_)
+                  *i++ = a.src_of(*t);
+              }
 	    }
 	std::swap(s_new, s_old);
       }
@@ -194,7 +200,13 @@ namespace vcsn {
 	  {
 	    if (a.is_final(*s))
 	      last = pos - 1;
-	    a.letter_deltac(s_new, *s, *pos, delta_kind::states());
+            std::insert_iterator<bitset_t> i(s_new, s_new.begin());
+            for (typename automaton_t::delta_transition_iterator t(a.value(), *s); ! t.done(); t.next())
+            {
+              monoid_elt_t w(a.series_of(*t).structure().monoid(), *pos);
+              if (a.series_of(*t).get(w) != a.series().semiring().wzero_)
+                *i++ = a.dst_of(*t);
+            }
 	  }
 	std::swap(s_old, s_new);
 	++pos;

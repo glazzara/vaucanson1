@@ -173,10 +173,22 @@ namespace vcsn {
 	for (; i != work.states().end(); ++i)
 	{
 	  nb_transition--;
-	  std::set<htransition_t> dst;
 	  letter_t e = set.series().monoid().alphabet().choose();
-	  work.letter_deltac(dst, *prev, e, delta_kind::transitions());
-	  if (dst.size() == 0)
+          bool empty = true;
+          for (typename automaton_t::delta_transition_iterator t(work.value(), *prev);
+               ! t.done() && empty;
+               t.next())
+          {
+            monoid_elt_t w(work.series_of(*t).structure().monoid(), e);
+            if (work.series_of(*t).get(w) != work.series().semiring().wzero_)
+            {
+              empty = false;
+              break;
+            }
+          }
+
+          if (empty &&
+	      algebra::letter_traits<letter_t>::letter_to_literal(e) != work.structure().series().monoid().representation()->empty)
 	    work.add_letter_transition(*prev, *i, e);
 	  prev = i;
 	}
@@ -187,8 +199,16 @@ namespace vcsn {
 	  letter_t e = set.series().monoid().alphabet().choose();
 	  hstate_t s = work.choose_state();
 	  hstate_t a = work.choose_state();
-	  work.letter_deltac(dst, s, e, delta_kind::states());
-	  if (dst.find(a) == dst.end())
+          for (typename automaton_t::delta_transition_iterator t(work.value(), s);
+               ! t.done();
+               t.next())
+          {
+            monoid_elt_t w(work.series_of(*t).structure().monoid(), e);
+            if (work.series_of(*t).get(w) != work.series().semiring().wzero_)
+              dst.insert(work.dst_of(*t));
+          }
+	  if (dst.find(a) == dst.end() &&
+	      algebra::letter_traits<letter_t>::letter_to_literal(e) != work.structure().series().monoid().representation()->empty)
 	    work.add_letter_transition(s, a, e);
 	}
 
@@ -331,9 +351,19 @@ namespace vcsn {
 	    del_transition_circle(work, *i);
 	    for_all_letters(j, set.series().monoid().alphabet())
 	    {
-	      std::set<hstate_t> ret;
-	      work.letter_deltac(ret, *i, *j, delta_kind::states());
-	      if (ret.size() == 0)
+              bool empty = true;
+              for (typename automaton_t::delta_transition_iterator t(work.value(), *i);
+                   ! t.done() && empty;
+                   t.next())
+              {
+                monoid_elt_t w(work.series_of(*t).structure().monoid(), *j);
+                if (work.series_of(*t).get(w) != work.series().semiring().wzero_)
+                {
+                  empty = false;
+                  break;
+                }
+              }
+	      if (empty)
 	      {
 		hstate_t s;
 		while ((s = work.choose_state()) == *i) ;

@@ -118,20 +118,44 @@ namespace vcsn {
       }
     }
 
-    group_t delta_ret;
     for_all_const_states(istate, input)
     {
       for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)
       {
-	delta_ret.clear ();
+	bool empty = true;
+        hstate_t first;
 	if (not Transposed)
-	  input.letter_deltac(delta_ret, *istate, iletter->first,
-			      delta_kind::states());
+        {
+          for (typename automaton_t::delta_transition_iterator t(input.value(), *istate);
+               ! t.done() && empty;
+               t.next())
+          {
+            monoid_elt_t w(input.series_of(*t).structure().monoid(), iletter->first);
+            if (input.series_of(*t).get(w) != input.series().semiring().wzero_)
+            {
+              empty = false;
+              first = input.dst_of(*t);
+              break;
+            }
+          }
+        }
 	else
-	  input.letter_rdeltac(delta_ret, *istate, iletter->first,
-			       delta_kind::states());
-	if (not delta_ret.empty())
-	  aut_view[*istate][iletter->second] = *delta_ret.begin();
+        {
+          for (typename automaton_t::rdelta_transition_iterator t(input.value(), *istate);
+               ! t.done() && empty;
+               t.next())
+          {
+            monoid_elt_t w(input.series_of(*t).structure().monoid(), iletter->first);
+            if (input.series_of(*t).get(w) != input.series().semiring().wzero_)
+            {
+              empty = false;
+              first = input.src_of(*t);
+              break;
+            }
+          }
+        }
+	if (not empty)
+	  aut_view[*istate][iletter->second] = first;
       }
     }
 

@@ -29,29 +29,6 @@ using namespace vcsn::CONTEXT;
 
 # include <common/bench_constructs.hh>
 
-# define RUN_THROUGH_DELTAC(Type)						\
-  static void run_through_using_deltac_on_##Type##s(const automaton_t& a)	\
-  {										\
-    AUTOMATON_TYPES_EXACT(automaton_t);						\
-    std::vector<h##Type##_t> delta_container;					\
-    for_all_states(s, a)							\
-    {										\
-      a.deltac(delta_container, *s, delta_kind::Type##s());			\
-      for (std::vector<h##Type##_t>::iterator i = delta_container.begin();	\
-	   i != delta_container.end(); ++i);					\
-      delta_container.clear();							\
-    }										\
-  }
-  RUN_THROUGH_DELTAC(state);
-  RUN_THROUGH_DELTAC(transition);
-# undef RUN_THROUGH_DELTAC
-
-  template <typename Handler>
-  struct Functor
-  {
-    void operator()(Handler) { }
-  };
-
 # define RUN_THROUGH_DELTAI(Type)						\
   static void run_through_using_deltai_on_##Type##s(const automaton_t& a)	\
   {										\

@@ -138,9 +138,16 @@ automaton_t universal(const automaton_t& automaton)
     std::set<hstate_t> delta_ret;
     for_all_const(state_set_t, s, subset_label[*x])
     {
-      state_set_t delta_tmp;
-      automaton.letter_deltac(delta_tmp, *s, *a, delta_kind::states());
-      if (delta_tmp.size() == 0)
+      bool empty = true;
+      for (typename automaton_t::delta_transition_iterator dst(automaton.value(), *s);
+           ! dst.done() && empty;
+           dst.next())
+      {
+        monoid_elt_t w(automaton.series_of(*dst).structure().monoid(), *a);
+        if (automaton.series_of(*dst).get(w) != automaton.series().semiring().wzero_)
+          empty = false;
+      }
+      if (empty)
       {
 	cont = true;
 	break;

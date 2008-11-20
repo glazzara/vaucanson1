@@ -125,8 +125,14 @@ namespace vcsn {
 	continue;
       has_loop = false;
 
-      a.deltac(delta_out, *i, delta_kind::transitions());
-      a.rdeltac(delta_in, *i, delta_kind::transitions());
+      for (typename Auto_::delta_transition_iterator j(a.value(), *i);
+           ! j.done();
+           j.next())
+        delta_out.push_back(*j);
+      for (typename Auto_::rdelta_transition_iterator j(a.value(), *i);
+           ! j.done();
+           j.next())
+        delta_in.push_back(*j);
       for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
 	   j != delta_out.end();
 	   ++j)
@@ -186,8 +192,14 @@ namespace vcsn {
 
       delta_in.clear();
       delta_out.clear();
-      a.deltac(delta_out, *i, delta_kind::transitions());
-      a.rdeltac(delta_in, *i, delta_kind::transitions());
+      for (typename Auto_::delta_transition_iterator j(a.value(), *i);
+           ! j.done();
+           j.next())
+        delta_out.push_back(*j);
+      for (typename Auto_::rdelta_transition_iterator j(a.value(), *i);
+           ! j.done();
+           j.next())
+        delta_in.push_back(*j);
 
       for (typename std::list<typename Auto_::htransition_t>::iterator j = delta_out.begin();
 	   j != delta_out.end();
@@ -287,8 +299,8 @@ namespace vcsn {
 	continue;
 
       transitions.clear();
-      // FIXME: use a new version of delta!
-      a.deltac(transitions, q, delta_kind::transitions());
+      for (typename automaton_t::delta_transition_iterator e(a.value(), q); ! e.done(); e.next())
+        transitions.push_back(*e);
       for (i = transitions.begin(); i != transitions.end(); i = j)
       {
 	j = i; ++j;
@@ -307,8 +319,8 @@ namespace vcsn {
 	a.del_transition(*i);
       }
       transitions.clear();
-      // FIXME: use a new version of delta!
-      a.rdeltac(transitions, q, delta_kind::transitions());
+      for (typename automaton_t::rdelta_transition_iterator e(a.value(), q); ! e.done(); e.next())
+        transitions.push_back(*e);
       for (i = transitions.begin(); i != transitions.end(); i = j)
       {
 	j = i; ++j;

@@ -107,12 +107,15 @@ namespace vcsn {
 	bool is_final = false;
 	for_all_const_ (subset_t, j, s)
         {
-          std::list<hstate_t> st;
-	  input.letter_deltac(st, *j, *e, delta_kind::states());
-          for (typename std::list<hstate_t>::const_iterator s = st.begin(); s != st.end(); ++s)
+          for (typename automaton_t::delta_transition_iterator t(input.value(), *j); ! t.done(); t.next())
           {
-            q.insert(*s);
-            is_final |= input.is_final(*s);
+            monoid_elt_t w(input.series_of(*t).structure().monoid(), *e);
+            if (input.series_of(*t).get(w) != input.series().semiring().wzero_)
+            {
+              hstate_t s = input.dst_of(*t);
+              q.insert(s);
+              is_final |= input.is_final(s);
+            }
           }
         }
 	typename subset_set_t::const_iterator current = subset_set.find(q);

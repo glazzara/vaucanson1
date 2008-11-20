@@ -52,7 +52,10 @@ namespace vcsn {
 
       // Handle each transitions.
       transition_oi.clear();
-      a.deltac(transition_oi, *oi, delta_kind::transitions());
+      for (typename automaton_t::delta_transition_iterator oil(a.value(), *oi);
+           ! oil.done();
+           oil.next())
+        transition_oi.push_back(*oil);
       for_all_const_(std::list<htransition_t>, oil, transition_oi)
       {
 	series_set_elt_t t = s * a.series_of(*oil);
@@ -122,7 +125,10 @@ namespace vcsn {
 
     // Add output transitions of old_i to new_i.
     edelta_ret_t dst;
-    lhs.deltac(dst, old_i, delta_kind::transitions());
+    for (typename lhs_t::delta_transition_iterator d(lhs.value(), old_i);
+         ! d.done();
+         d.next())
+      dst.push_back(*d);
     for_all_const_(edelta_ret_t, d, dst)
     {
       lhs.add_transition(new_i,
@@ -223,9 +229,9 @@ namespace vcsn {
 	 ++i)
       if (!rhs.is_initial(*i))
       {
-	dst.clear();
-	rhs.deltac(dst, *i, delta_kind::transitions());
-	for_all_const_(delta_ret_t, d, dst)
+        for (typename rhs_t::delta_transition_iterator d(rhs.value(), *i);
+             ! d.done();
+             d.next())
 	  lhs.add_transition(map_h[*i],
 			     map_h[rhs.dst_of(*d)],
 			     rhs.label_of(*d));
@@ -234,7 +240,10 @@ namespace vcsn {
     // Concat final states of lhs to the initial state of rhs.
     hstate_t rhs_i = *rhs.initial().begin();
     dst.clear();
-    rhs.deltac(dst, rhs_i, delta_kind::transitions());
+    for (typename rhs_t::delta_transition_iterator i(rhs.value(), rhs_i);
+         ! i.done();
+         i.next())
+      dst.push_back(*i);
     for_all_const_final_states(f, lhs)
     {
       typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
@@ -298,7 +307,10 @@ namespace vcsn {
     series_set_elt_t			out_mult = a.get_final(new_i);
 
     out_mult.star();
-    a.deltac(dst, new_i, delta_kind::transitions());
+    for (typename automaton_t::delta_transition_iterator i(a.value(), new_i);
+         ! i.done();
+         i.next())
+      dst.push_back(*i);
     for_all_final_states(f, a)
     {
       if (*f != new_i)

@@ -42,7 +42,6 @@ namespace vcsn {
     series_set_t series(output_series, g.series().monoid());
     automata_set_t structure(series);
     transducer_t output(s);
-    delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
     series_set_elt_t zero =
       algebra::zero_as<series_set_elt_value_t>::of(output.series());
@@ -62,16 +61,10 @@ namespace vcsn {
     for_all_const_states(s, f)
       for_all_const_states(t, g)
     {
-      f_delta_ret.clear();
-      g_delta_ret.clear();
-
-      f.deltac(f_delta_ret, *s, delta_kind::transitions());
-      g.deltac(g_delta_ret, *t, delta_kind::transitions());
-
-      for_all_const_(delta_ret_t, lhs_e, f_delta_ret)
+      for (typename transducer_t::delta_transition_iterator lhs_e(f.value(), *s); ! lhs_e.done(); lhs_e.next())
       {
 	series_set_elt_t l = f.series_of(*lhs_e);
-	for_all_const_(delta_ret_t, rhs_e, g_delta_ret)
+	for (typename transducer_t::delta_transition_iterator rhs_e(g.value(), *s); ! rhs_e.done(); rhs_e.next())
 	{
 	  series_set_elt_t l_ = g.series_of(*rhs_e);
 	  series_set_elt_t l__(series);

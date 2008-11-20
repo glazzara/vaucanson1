@@ -190,30 +190,29 @@ namespace vcsn {
 	    shortest_hash.modify(it, change_rel(semiring_elt_zero));
 	  }
 
-	  std::list<htransition_t> transition_list;
-	  a.spontaneous_deltac(transition_list, curr, delta_kind::transitions());
-	  for_all_const_(std::list<htransition_t>, e, transition_list)
-	  {
-	    semiring_elt_t dist = semiring_elt_zero;
-	    it = shortest_hash.find(boost::make_tuple(*s, a.dst_of(*e)));
-	    if (it != shortest_hash.end())
-	      dist = it->dist;
-	    semiring_elt_t we = a.series_of(*e).get(monoid_identity);
-	    we = R * we;
-	    if (dist != dist +  we)
-	    {
-	      if (it != shortest_hash.end())
-	      {
-		shortest_hash.modify(it, add_dr(we, we));
-		squeue.insert(a.dst_of(*e));
-	      }
-	      else
-	      {
-		shortest_hash.insert(s_shortest(*s, a.dst_of(*e), we, we));
-		squeue.insert(a.dst_of(*e));
-	      }
-	    }
-	  }
+          for (typename automaton_t::delta_transition_iterator e(a.value(), curr); ! e.done(); e.next())
+            if (a.is_spontaneous(*e))
+            {
+              semiring_elt_t dist = semiring_elt_zero;
+              it = shortest_hash.find(boost::make_tuple(*s, a.dst_of(*e)));
+              if (it != shortest_hash.end())
+                dist = it->dist;
+              semiring_elt_t we = a.series_of(*e).get(monoid_identity);
+              we = R * we;
+              if (dist != dist +  we)
+              {
+                if (it != shortest_hash.end())
+                {
+                  shortest_hash.modify(it, add_dr(we, we));
+                  squeue.insert(a.dst_of(*e));
+                }
+                else
+                {
+                  shortest_hash.insert(s_shortest(*s, a.dst_of(*e), we, we));
+                  squeue.insert(a.dst_of(*e));
+                }
+              }
+            }
 	}
       }
     }
@@ -225,13 +224,10 @@ namespace vcsn {
       std::stack<tr_t> tr_st;
       std::stack<std::pair<hstate_t, series_set_elt_t> > fin_st;
 
-      std::list<htransition_t> transition_list;
       for_all_(s_shortest_hash, it, shortest_hash)
 	if (it->src != it->dst)
 	{
-	  transition_list.clear();
-	  a.deltac(transition_list, it->dst, delta_kind::transitions());
-	  for_all_const_(std::list<htransition_t>, e, transition_list)
+          for (typename automaton_t::delta_transition_iterator e(a.value(), it->dst); ! e.done(); e.next())
 	    tr_st.push(tr_t(it->src, a.dst_of(*e), it->dist * a.series_of(*e)));
 	  if (a.is_final(it->dst))
 	    fin_st.push(make_pair(it->src, it->dist * a.get_final(it->dst)));
@@ -240,12 +236,10 @@ namespace vcsn {
 	{
 	  if (it->dist != semiring_elt_one)
 	  {
-	    transition_list.clear();
-	    a.deltac(transition_list, it->dst, delta_kind::transitions());
-	    for_all_const_(std::list<htransition_t>, e, transition_list)
-	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
+            for (typename automaton_t::delta_transition_iterator e(a.value(), it->dst); ! e.done(); e.next())
+	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // associate each e with it->dist
 	    if (a.is_final(it->dst))
-	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->src, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->src, it->dist));// store what we need to multiply w(final(it->src)) by it->dist
 	  }
 	}
 
@@ -283,27 +277,22 @@ namespace vcsn {
       std::stack<tr_t> tr_st;
       std::stack<std::pair<hstate_t, series_set_elt_t> > init_st;
 
-      std::list<htransition_t> transition_list;
       for_all_(s_shortest_hash, it, shortest_hash)
 	if (it->src != it->dst)
 	{
-	transition_list.clear();
-	a.rdeltac(transition_list, it->src, delta_kind::transitions());
-	for_all_const_(std::list<htransition_t>, e, transition_list)
-	  tr_st.push(tr_t(a.src_of(*e), it->dst, a.series_of(*e) * it->dist));
-	if (a.is_initial(it->src))
-	  init_st.push(make_pair(it->dst, a.get_initial(it->src) * it->dist));
+          for (typename automaton_t::rdelta_transition_iterator e(a.value(), it->dst); ! e.done(); e.next())
+            tr_st.push(tr_t(a.src_of(*e), it->dst, a.series_of(*e) * it->dist));
+          if (a.is_initial(it->src))
+            init_st.push(make_pair(it->dst, a.get_initial(it->src) * it->dist));
 	}
 	else
 	{
 	  if (it->dist != semiring_elt_one)
 	  {
-	    transition_list.clear();
-	    a.rdeltac(transition_list, it->dst, delta_kind::transitions());
-	    for_all_const_(std::list<htransition_t>, e, transition_list)
-	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // stocker de quoi assoc w(e) * it->dist
+            for (typename automaton_t::rdelta_transition_iterator e(a.value(), it->dst); ! e.done(); e.next())
+	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // associate each e with it->dist
 	    if (a.is_initial(it->src))
-	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->dst, it->dist));// stocker de quoi changer etat final w(f) * it->dist
+	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->dst, it->dist));// store what we need to multiply w(final(it->src)) by it->dist
 	  }
 	}
 

@@ -75,8 +75,6 @@ class Product
 
       this->initialize_queue(output, lhs, rhs, m);
 
-      delta_ret_t transition_lhs;
-      delta_ret_t transition_rhs;
       while (not to_process_.empty())
       {
 	const pair_hstate_t current_pair = to_process_.front();
@@ -91,13 +89,12 @@ class Product
 	output.set_final(current_state,
 			 lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
 
-	transition_lhs.clear();
-	transition_rhs.clear();
-	lhs.deltac(transition_lhs, lhs_s, delta_kind::transitions());
-	rhs.deltac(transition_rhs, rhs_s, delta_kind::transitions());
-
-	for_all_const_(delta_ret_t, l, transition_lhs)
-	  for_all_const_(delta_ret_t, r, transition_rhs)
+        for (typename lhs_t::delta_transition_iterator l(lhs.value(), lhs_s);
+             ! l.done();
+             l.next())
+          for (typename rhs_t::delta_transition_iterator r(rhs.value(), rhs_s);
+               ! r.done();
+               r.next())
 	  {
 	    series_set_elt_t	prod_series(series_);
 
@@ -185,9 +182,9 @@ class Product
 	      a.geometry()[i] = std::make_pair(x, x);
 	      x++;
 
-	      std::vector<htransition_t> dst;
-	      a.deltac(dst, i, delta_kind::transitions());
-	      for_all_const_(std::vector<htransition_t>, j, dst)
+              for (typename automaton_t::delta_transition_iterator j(a.value(), i);
+                   ! j.done();
+                   j.next())
 		stack.push(a.dst_of(*j));
 	    }
 	  }
@@ -270,8 +267,8 @@ misc::static_eq<Type1, Type2>::value
     inline bool
     is_product_not_null (const lhs_t& lhs,
 			 const rhs_t& rhs,
-			 const typename delta_ret_t::const_iterator& l,
-			 const typename delta_ret_t::const_iterator& r,
+			 const typename lhs_t::delta_transition_iterator& l,
+			 const typename rhs_t::delta_transition_iterator& r,
 			 series_set_elt_t&  prod_series) const
     {
       const series_set_elt_t	left_series  = lhs.series_of(*l);

@@ -387,36 +387,6 @@ namespace vcsn
       return true;
     }
 
-    /*------------------.
-    | Delta functions.  |
-    `------------------*/
-
-    // Container delta functions.
-
-    # define DEFINE_DELTAC_FUNCTION(DeltaName, DKind, IO, WhatFromE)	\
-    TParam								\
-    template <typename Container, typename Query>			\
-    void								\
-    GClass::DeltaName(Container& res,					\
-                      const hstate_t& from,				\
-                      const Query& query,				\
-                      ::vcsn::delta_kind::DKind) const			\
-    {									\
-      assertion(has_state(from));					\
-      const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
-      std::insert_iterator<Container> i(res, res.begin());		\
-      for_all_const_(std::set<hedge_t>, e, edges)			\
-        if (query(*e))							\
-          *i++ = WhatFromE;						\
-    }									\
-
-    DEFINE_DELTAC_FUNCTION (deltac, transitions, output, *e);
-    DEFINE_DELTAC_FUNCTION (deltac, states, output, edges_[*e].to);
-    DEFINE_DELTAC_FUNCTION (rdeltac, transitions, input, *e);
-    DEFINE_DELTAC_FUNCTION (rdeltac, states, input, edges_[*e].from);
-
-    # undef DEFINE_DELTAC_FUNCTION
-
     /*------.
     | Tag.  |
     `------*/

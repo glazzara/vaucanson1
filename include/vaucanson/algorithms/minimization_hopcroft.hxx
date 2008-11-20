@@ -49,7 +49,7 @@ namespace vcsn
       typedef std::queue<std::pair<hstates_t*, unsigned> > to_treat_t;
 
       /**
-       * Splitter for classical hopcroft minimization.
+       * Splitter for classical Hopcroft minimization.
        */
       template <typename input_t>
       struct splitter_functor
@@ -70,23 +70,26 @@ namespace vcsn
 	    count_for_ (max_state)
 	{}
 
-	/// True if there's states going in states with letter \a l.
+	/// True if there's a transition arriving in one of the states ss with letter \a l.
 	bool compute_states_going_in (const hstates_t& ss, letter_t l)
 	{
 	  going_in_.clear ();
 	  maybe_splittable_.clear ();
 	  for_all_const_ (hstates_t, i, ss)
           {
-            std::list<hstate_t> st;
-	    input_.letter_rdeltac (st, *i, l, delta_kind::states ());
-            for (typename std::list<hstate_t>::const_iterator s = st.begin(); s != st.end(); ++s)
-            { /// For each state, store its class (partition) and count.
-              unsigned class_of_state = class_of_[*s];
+	    for (typename input_t::rdelta_transition_iterator t(input_.value(), *i); ! t.done(); t.next())
+	    {
+	      monoid_elt_t w(input_.series_of(*t).structure().monoid(), l);
+	      if (input_.series_of(*t).get(w) != input_.series().semiring().wzero_)
+	      { /// For each state, store its class (partition) and count.
+	        hstate_t s = input_.src_of(*t);
+		unsigned class_of_state = class_of_[s];
 
-              if (count_for_[class_of_state] == 0)
-                maybe_splittable_.push_back (class_of_state);
-              count_for_[class_of_state]++;
-              going_in_.insert (*s);
+		if (count_for_[class_of_state] == 0)
+		  maybe_splittable_.push_back (class_of_state);
+		count_for_[class_of_state]++;
+		going_in_.insert (s);
+	      }
             }
           }
 	  return not going_in_.empty ();
@@ -160,9 +163,7 @@ namespace vcsn
 	void execute (hstate_t representative)
 	{
 	  src_ = class_of_[representative];
-          std::list<htransition_t> tr;
-	  input_.deltac (tr, representative, delta_kind::transitions ());
-          for (typename std::list<htransition_t>::const_iterator t = tr.begin(); t != tr.end(); ++t)
+          for (typename automaton_t::delta_transition_iterator t(input_.value(), representative); ! t.done(); t.next())
           {
             output_.add_series_transition (src_, class_of_[input_.dst_of (*t)],
                                            input_.series_of (*t));
@@ -317,7 +318,6 @@ namespace vcsn
       typedef std::vector<partition_t> partition_set_t;			\
       typedef typename partition_t::iterator partition_iterator;	\
       typedef std::vector<unsigned> class_of_t;				\
-      typedef std::set<hstate_t> delta_ret_t;				\
       typedef std::pair<unsigned, letter_t> pair_t;			\
       typedef std::list<pair_t> to_treat_t;
 
@@ -341,7 +341,7 @@ namespace vcsn
 	    going_in_(max_states, false)
 	{ }
 
-	/// True if there's states going in states of \a p with letter \a a.
+	/// True if there's a transition arriving in state \a p with letter \a a.
 	bool compute_going_in_states (partition_t& p, letter_t a)
 	{
 	  for_all_(going_in_t, s, going_in_)
@@ -349,18 +349,21 @@ namespace vcsn
 
 	  for_all_(partition_t, s, p)
           {
-            std::list<hstate_t> st;
-            input_.letter_rdeltac(st, *s, a, delta_kind::states());
-            for (typename std::list<hstate_t>::const_iterator s = st.begin(); s != st.end(); ++s)
-            {
-              if (!going_in_[*s])
-              {
-                /// For each state, store its class (partition) and count.
-                going_in_[*s] = true;
-                const unsigned i = class_[*s];
-                if (count_for_[i] == 0)
-                  met_class_.push_back(i);
-                count_for_[i]++;
+            for (typename input_t::rdelta_transition_iterator t(input_.value(), *s); ! t.done(); t.next())
+	    {
+              monoid_elt_t w(input_.series_of(*t).structure().monoid(), a);
+              if (input_.series_of(*t).get(w) != input_.series().semiring().wzero_)
+	      {
+                hstate_t s = input_.src_of(*t);
+                if (!going_in_[s])
+                {
+                  /// For each state, store its class (partition) and count.
+                  going_in_[s] = true;
+                  const unsigned i = class_[s];
+                  if (count_for_[i] == 0)
+                    met_class_.push_back(i);
+                  count_for_[i]++;
+                }
               }
             }
           }
@@ -544,7 +547,6 @@ namespace vcsn
     for (unsigned i = 0; i < max_partitions; ++i)
       output.add_state();
 
-    delta_ret_t delta_ret;
     std::set<unsigned> already_linked;
     for (unsigned i = 0; i < max_partitions; ++i)
     {
@@ -558,18 +560,21 @@ namespace vcsn
       // Create the transitions
       for_all_const_letters (e, alphabet_)
       {
-	delta_ret.clear();
 	already_linked.clear();
 
-	input.letter_deltac(delta_ret, s, *e, delta_kind::states());
-	for_all_(delta_ret_t, out, delta_ret)
+        for (typename input_t::delta_transition_iterator t(input.value(), s); ! t.done(); t.next())
 	{
-	  unsigned c = class_[*out];
-	  if (already_linked.find(c) == already_linked.end())
-	  {
-	    already_linked.insert(c);
-	    output.add_letter_transition(i, c, *e);
-	  }
+          monoid_elt_t w(input.series_of(*t).structure().monoid(), *e);
+          if (input.series_of(*t).get(w) != input.series().semiring().wzero_)
+          {
+	    hstate_t out = input.dst_of(*t);
+            unsigned c = class_[out];
+            if (already_linked.find(c) == already_linked.end())
+            {
+              already_linked.insert(c);
+              output.add_letter_transition(i, c, *e);
+            }
+          }
 	}
       }
     }
@@ -603,7 +608,7 @@ namespace vcsn
     | Declare data structures and variables.  |
     `----------------------------------------*/
 
-    typedef set<htransition_t>			     set_transitions_t;
+    typedef set<htransition_t>		       set_transitions_t;
     typedef set<hstate_t>		       set_states_t;
     typedef set<semiring_elt_t>		       set_semiring_elt_t;
     typedef vector<semiring_elt_t>	       vector_semiring_elt_t;
@@ -620,10 +625,8 @@ namespace vcsn
     queue<pair_class_letter_t>				the_queue;
 
     set<unsigned>	met_classes;
-    set_transitions_t		transitions_leaving;
 
     unsigned	max_partition	= 0;
-    //	   unsigned	max_letters	= alphabet.size();
     unsigned	max_states	= 0;
 
     for_all_const_states(q, input)
@@ -659,11 +662,10 @@ namespace vcsn
 	  old_weight[*r] = weight_zero;
 	states_visited.clear();
 
-	set_transitions_t transitions_comming;
-	input.letter_rdeltac(transitions_comming, *q, *a,
-			     delta_kind::transitions());
-
-	for_all_const_(set_transitions_t, e, transitions_comming)
+        for (typename input_t::rdelta_transition_iterator e(input.value(), *q); ! e.done(); e.next())
+        {
+          monoid_elt_t w(input.series_of(*e).structure().monoid(), *a);
+          if (input.series_of(*e).get(w) != input.series().semiring().wzero_)
 	  {
 	    hstate_t		p = input.src_of(*e);
 	    if (states_visited.find(p) != states_visited.end())
@@ -678,6 +680,7 @@ namespace vcsn
 	    inverse[*q][pos_of_letter[*a]].
 	      insert(pair_state_semiring_elt_t (p, old_weight[p]));
 	  }
+        }
       }
 
     /*-----------------------------------------------------------.
@@ -816,9 +819,6 @@ namespace vcsn
 
     std::vector<hstate_t>	out_states (max_partition);
 
-    // typedef map<unsigned, series_set_elt_t> map_class_series_elt_t;
-    // map_class_series_elt_t	seriesof;
-
     // Add states.
     for(unsigned i = 0; i < max_partition; i++)
     {
@@ -843,11 +843,7 @@ namespace vcsn
     {
       met_classes.clear();
 
-      transitions_leaving.clear();
-      input.deltac(transitions_leaving, *classes[i].begin(),
-		   delta_kind::transitions());
-
-      for_all_const_(set_transitions_t, e, transitions_leaving)
+      for (typename automaton_t::delta_transition_iterator e(input.value(), *classes[i].begin()); ! e.done(); e.next())
 	{
 	  series_set_elt_t	se = input.series_of(*e);
 	  unsigned		cs = class_of_state[input.dst_of(*e)];

@@ -1,3 +1,53 @@
+2008-11-20  Reuben Thomas  <rrt@sc3d.org>
+
+	Remove deltac iterators.
+	The delta_transition_iterator's and delta_state_iterator's are used
+	instead.
+	* include/vaucanson/algorithms/accessible.hxx: .
+	* include/vaucanson/algorithms/aut_to_exp.hxx: .
+	* include/vaucanson/algorithms/complete.hxx: .
+	* include/vaucanson/algorithms/determinize.hxx: .
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/eps_removal_sp.hxx: .
+	* include/vaucanson/algorithms/eval.hxx: .
+	* include/vaucanson/algorithms/internal/evaluation.hxx: .
+	* include/vaucanson/algorithms/internal/outsplitting.hxx: .
+	* include/vaucanson/algorithms/is_deterministic.hxx: .
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/minimization_moore.hxx: .
+	* include/vaucanson/algorithms/normalized_composition.hxx: .
+	* include/vaucanson/algorithms/product.hxx: .
+	* include/vaucanson/algorithms/rw_composition.hxx: .
+	* include/vaucanson/algorithms/search.hxx: .
+	* include/vaucanson/algorithms/standard.hxx: .
+	* include/vaucanson/algorithms/standard_of.hxx: .
+	* include/vaucanson/algorithms/sum.hxx: .
+	* include/vaucanson/automata/concept/automata_base.hh: .
+	* include/vaucanson/automata/concept/automata_base.hxx: .
+	* include/vaucanson/automata/concept/automata_ops.hh: .
+	* include/vaucanson/automata/concept/automata_ops.hxx: .
+	* include/vaucanson/automata/concept/kinds.hh: .
+	* include/vaucanson/automata/concept/kinds.hxx: .
+	* include/vaucanson/automata/implementation/automaton_view.hh: .
+	* include/vaucanson/automata/implementation/automaton_view.hxx: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hxx: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: .
+	* include/vaucanson/automata/implementation/transpose_view.hh: .
+	* include/vaucanson/automata/implementation/transpose_view.hxx: .
+	* include/vaucanson/tools/fsm_dump.hxx: .
+	* include/vaucanson/tools/gen_random.hxx: .
+	* src/benchs/iterators/iterator_bench.hh: .
+	* src/demos/algorithms/universal.cc: .
+	* src/demos/one_rule_rewriting/shortest.hh: .
+	* src/tests/include/Makefile.am: .
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh: .
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/transition_container_test.hh: .
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh: Remove.
+	* taf-kit/src/edition_commands.hxx: .
+
 2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* data/automata/char-z/Makefile.am,

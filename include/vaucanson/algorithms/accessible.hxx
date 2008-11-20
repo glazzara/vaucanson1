@@ -63,7 +63,8 @@ namespace vcsn {
       hstate_t state = queue.front();
       queue.pop();
       state_set_t delta_ret;
-      a.deltac(delta_ret, state, delta_kind::states());
+      for (typename automaton_t::delta_state_iterator j(a.value(), state); ! j.done(); j.next())
+       delta_ret.insert(*j);
       for_all_const_(state_set_t, j, delta_ret)
       {
 	state = *j;

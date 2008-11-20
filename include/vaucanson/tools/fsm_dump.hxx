@@ -56,19 +56,15 @@ namespace vcsn {
 	return;
 
       typename auto_t::initial_iterator initial = a.initial().begin();
-      std::set<htransition_t> succ;
 
-      a.deltac(succ, *initial, delta_kind::transitions());
-      for_all_const_(std::set<htransition_t>, e, succ)
+      for (typename automaton_t::delta_transition_iterator e(a.value(), *initial); ! e.done(); e.next())
 	out << *initial << "\t" << a.dst_of(*e) << "\t"
 	    << a.series_of(*e) << "\t 0"
 	    << std::endl;
       for_all_states(s, a)
 	if (!a.is_initial(*s))
 	{
-	  succ.clear();
-	  a.deltac(succ, *s, delta_kind::transitions());
-	  for_all_const_(std::set<htransition_t>, e, succ)
+          for (typename automaton_t::delta_transition_iterator e(a.value(), *s); ! e.done(); e.next())
 	    out << *s << "\t" << a.dst_of(*e) << "\t"
 		<< a.series_of(*e) << "\t 0"
 		<< std::endl;

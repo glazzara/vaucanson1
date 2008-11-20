@@ -121,30 +121,6 @@ namespace vcsn {
       htransition_t add_letter_transition(hstate_t from, hstate_t to,
 					  const L& l);
 
-      template <typename Container, typename L>
-      void letter_deltac(Container&	 dst,
-			 hstate_t		 from,
-			 const L&		 l,
-			 delta_kind::transitions k = delta_kind::transitions()) const;
-
-      template <typename Container, typename L>
-      void letter_rdeltac(Container&	 dst,
-			  hstate_t		 from,
-			  const L&		 l,
-			  delta_kind::transitions k = delta_kind::transitions()) const;
-
-      template <typename Container, typename L>
-      void letter_deltac(Container&	  dst,
-			 hstate_t		  from,
-			 const L&		  l,
-			 delta_kind::states k) const;
-
-      template <typename Container, typename L>
-      void letter_rdeltac(Container&	   dst,
-			  hstate_t	   from,
-			  const L&	   l,
-			  delta_kind::states k) const;
-
     protected:
       Self&	  auto_self();
       const Self& auto_self() const;

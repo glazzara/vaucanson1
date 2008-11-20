@@ -250,8 +250,8 @@ namespace vcsn {
 	continue;
 
       transitions.clear();
-      // FIXME: use a new version of delta !
-      b.deltac(transitions, q, delta_kind::transitions());
+      for (typename automaton_t::delta_transition_iterator e(b.value(), q); ! e.done(); e.next())
+        transitions.insert(*e);
       for (i = transitions.begin(); i != transitions.end(); i = j)
       {
 	j = i; ++j;
@@ -266,8 +266,8 @@ namespace vcsn {
 	b.del_transition(*i);
       }
       transitions.clear();
-      // FIXME: use a new version of delta !
-      b.rdeltac(transitions, q, delta_kind::transitions());
+      for (typename automaton_t::rdelta_transition_iterator e(b.value(), q); ! e.done(); e.next())
+        transitions.insert(*e);
       for (i = transitions.begin(); i != transitions.end(); i = j)
       {
 	j = i; ++j;

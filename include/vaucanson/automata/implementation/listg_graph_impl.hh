@@ -225,17 +225,6 @@ namespace vcsn
 	template <class S>
 	bool		    exists(const AutomataBase<S>& s) const;
 
-	/// Delta, Reverse deltas, for functor and iterator.
-# define DECLARE_DELTAC_FUNCTION(DeltaName, DKind)			\
-	template <typename Container, typename Query>			\
-	void DeltaName(Container& res, const hstate_t& from,		\
-		       const Query& q, ::vcsn::delta_kind::DKind) const
-	DECLARE_DELTAC_FUNCTION (deltac, states);
-	DECLARE_DELTAC_FUNCTION (deltac, transitions);
-	DECLARE_DELTAC_FUNCTION (rdeltac, states);
-	DECLARE_DELTAC_FUNCTION (rdeltac, transitions);
-# undef DECLARE_DELTAC_FUNCTION
-
 	/** @}*/
 
 	/// FIXME: Not implemented.

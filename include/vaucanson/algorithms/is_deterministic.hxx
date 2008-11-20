@@ -42,8 +42,11 @@ namespace vcsn {
     typedef typename std::list<htransition_t>		delta_ret_t;
     delta_ret_t	delta_ret;
 
-    input.deltac(delta_ret, *current_state, delta_kind::transitions());
     // FIXME : O(n^2) => O(nlog(n)) There is maybe an algorithm in O(nlog(n))
+    for (typename input_t::delta_transition_iterator j(input.value(), *current_state);
+         ! j.done();
+         j.next())
+      delta_ret.push_back(*j);
     for_all_const_(delta_ret_t, j, delta_ret)
     {
       series_set_elt_t s = input.series_of(*j);

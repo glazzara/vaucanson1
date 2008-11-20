@@ -210,8 +210,8 @@ namespace vcsn {
     }
 
     void process_one_pair (const hstate_t current_state,
-			   const typename lhs_t::hstate_t
-			   lhs_s, const hstate_t rhs_s)
+			   const typename lhs_t::hstate_t lhs_s,
+                           const hstate_t rhs_s)
     {
 
       if (lhs.is_initial(lhs_s) and rhs.is_initial(rhs_s))
@@ -224,12 +224,7 @@ namespace vcsn {
 			 state_series (lhs.get_final(lhs_s),
 				       rhs.get_final(rhs_s)));
 
-      delta_ret_t transition_lhs;
-      delta_ret_t transition_rhs;
-      lhs.deltac(transition_lhs, lhs_s, delta_kind::transitions());
-      rhs.deltac(transition_rhs, rhs_s, delta_kind::transitions());
-
-      for_all_const_(delta_ret_t, l, transition_lhs)
+      for (typename automaton_t::delta_transition_iterator l(lhs.value(), lhs_s); ! l.done(); l.next())
 	{
 	  const lhs_series_set_elt_t left_series = lhs.series_of(*l);
 	  const lhs_monoid_elt_t left_supp_elt (lhs_monoid,
@@ -249,7 +244,7 @@ namespace vcsn {
 	  // (iii')
 	  else
 	    {
-	      for_all_const_(delta_ret_t, r, transition_rhs)
+              for (typename automaton_t::delta_transition_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
 		{
 		  const rhs_series_set_elt_t right_series =
 		    rhs.series_of(*r);
@@ -278,7 +273,7 @@ namespace vcsn {
 	    }
 	}
 
-      for_all_const_(delta_ret_t, r, transition_rhs)
+      for (typename automaton_t::delta_transition_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
 	{
 	  const rhs_series_set_elt_t right_series = rhs.series_of(*r);
 	  const rhs_monoid_elt_t right_supp_elt (rhs_monoid,

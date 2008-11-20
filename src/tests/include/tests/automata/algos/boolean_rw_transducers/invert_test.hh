@@ -91,12 +91,15 @@ bool invert_test(tests::Tester& tg)
   test_num++;
   if (test_exp(trans, trans_inverse, exp1))
     nb_succeed++;
+  else
+    std::cerr << "Failed at first evaluation test" << std::endl;
 
   exp1 = boolean_automaton::make_rat_exp(alpha, "ababab");
   test_num++;
   if (test_exp(trans, trans_inverse, exp1))
     nb_succeed++;
-
+  else
+    std::cerr << "Failed at second evaluation test" << std::endl;
 
 
 

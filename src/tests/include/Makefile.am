@@ -115,8 +115,7 @@ tests/automata/implementation_check/geometry_equal_operator_test.hh		      \
 tests/automata/implementation_check/global_consistency_test.hh			      \
 tests/automata/implementation_check/init_final_test.hh				      \
 tests/automata/implementation_check/iterator_test.hh				      \
-tests/automata/implementation_check/transition_coherence_test.hh		      \
-tests/automata/implementation_check/rdelta_test.hh
+tests/automata/implementation_check/transition_coherence_test.hh
 
 
 noinst_HEADERS +=				\

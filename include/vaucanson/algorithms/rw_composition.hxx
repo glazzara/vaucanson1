@@ -152,12 +152,9 @@ namespace vcsn {
       const hstate_t p = sp.first;
       const hstate_t q = sp.second;
 
-      // Fill a transition set appropriately.
-      // FIXME: we should better use the transitions iterators.
-      set_of_transitions_t transitions;
-      R.deltac(transitions, p, delta_kind::transitions());
-
-      for_all_const_(set_of_transitions_t, e, transitions)
+      for (typename Trans_t::delta_transition_iterator e(R.value(), p);
+           ! e.done();
+           e.next())
       {
 	// set s
 	hstate_t s = R.dst_of(*e);

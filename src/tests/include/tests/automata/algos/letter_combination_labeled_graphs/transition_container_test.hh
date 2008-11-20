@@ -81,15 +81,6 @@ unsigned transition_container_test(tests::Tester& tg)
   EQTEST(t, "Number of transition added to the set using manual insertion = 2.", set.size(), 2);
   set.clear();
 
-  aut.deltac(list, s1, delta_kind::transitions());
-  EQTEST(t, "Number of transition added to the list using deltac = 2.", list.size(), 2);
-
-  aut.deltac(multiset, s1, delta_kind::transitions());
-  EQTEST(t, "Number of transition added to the multiset using deltac = 2.", multiset.size(), 2);
-
-  aut.deltac(set, s1, delta_kind::transitions());
-  EQTEST(t, "Number of transition added to the set using deltac = 2.", set.size(), 2);
-
   return t.all_passed();
 }
 

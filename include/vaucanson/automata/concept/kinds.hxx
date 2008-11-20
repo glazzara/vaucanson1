@@ -144,27 +144,6 @@ namespace vcsn {
       );
   }
 
-#define DELTA_IMPL(Name, Type, Kind_type)				\
-    template<typename Self, typename Series, typename SeriesT, typename LabelT>	\
-    template<typename Container, typename L>				\
-    void								\
-    AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::	\
-    letter_ ## Name ## c (Container &dst, hstate_t from, const L& l, Kind_type) const \
-    {									\
-      std::insert_iterator<Container> i(dst, dst.begin());		\
-      return auto_self().value()-> Name ## _ ## Type			\
-	(i, from,							\
-	 ls_delta_letter_query<Series, monoid_elt_t, semiring_elt_t, L>	\
-	 (auto_self().series(), l));					\
-    }
-
-  DELTA_IMPL(delta, transitions, delta_kind::transitions);
-  DELTA_IMPL(rdelta, transitions, delta_kind::transitions);
-
-  DELTA_IMPL(delta, states, delta_kind::states);
-  DELTA_IMPL(rdelta, states, delta_kind::states);
-#undef DELTA_IMPL
-
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   Self&
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::

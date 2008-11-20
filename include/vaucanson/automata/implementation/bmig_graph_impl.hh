@@ -88,9 +88,9 @@ namespace vcsn
 	// Transition descriptor.
 	//
 	// We store a pointer to an EdgeValue to avoid a new index on transitions and
-	// get the data more quickly. Actually this is the address of an element
+	// get the data more quickly. Actually this is the adresse of an element
 	// inserted in the multi_index.
-	// We are allowed to do so since Boost::multi_index guarantees that the data
+	// We are allowed to do so since Boost::multi_index guaranties that the data
 	// inserted will not be reallocated.
 	//
 	// We may need to try storing an iterator instead of a pointer. We haven't tried yet
@@ -229,20 +229,6 @@ namespace vcsn
 	// when we are working on a sub-hash. (this is related to the projection).
 	template <typename I>
 	htransition_t	  get_htransition(const I& i) const;
-
-      /*
-      ** delta...
-      ** FIXME: nice comments
-      */
-# define DECLARE_DELTAC_FUNCTION(FunName, DeltaKind)			\
-	template <typename Container, typename Query>			\
-	void FunName (Container& res, const hstate_t& from,		\
-	              const Query& q, ::vcsn::delta_kind::DeltaKind) const
-	DECLARE_DELTAC_FUNCTION (deltac, states);
-	DECLARE_DELTAC_FUNCTION (deltac, transitions);
-	DECLARE_DELTAC_FUNCTION (rdeltac, states);
-	DECLARE_DELTAC_FUNCTION (rdeltac, transitions);
-# undef DECLARE_DELTAC_FUNCTION
 
 	// Retrieve the (src|dst)_range from a given state
 	// Used by the delta iterators

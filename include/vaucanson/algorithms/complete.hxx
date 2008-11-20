@@ -46,21 +46,28 @@ namespace vcsn {
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     hstate_t sink_state;
     bool sink_added = false;
-    std::list<hstate_t> dst;
 
     for_all_const_states(s, work)
       for_all_const_letters(l, work.structure().series().monoid().alphabet())
       {
-	dst.clear();
-	work.letter_deltac(dst, *s, *l, delta_kind::states());
-	if (dst.size() == 0)
-	{
-	  if (not sink_added)
-	  {
-	    sink_state = work.add_state();
-	    sink_added = true;
-	  }
-	  work.add_letter_transition(*s, sink_state, *l);
+        bool empty = true;
+        for (typename automaton_t::delta_transition_iterator t(work.value(), *s); ! t.done(); t.next())
+        {
+          monoid_elt_t w(work.series_of(*t).structure().monoid(), *l);
+          if (work.series_of(*t).get(w) != work.series().semiring().wzero_)
+          {
+            empty = false;
+            break;
+          }
+        }
+        if (empty)
+        {
+          if (not sink_added)
+          {
+            sink_state = work.add_state();
+            sink_added = true;
+          }
+          work.add_letter_transition(*s, sink_state, *l);
 	}
       }
 
@@ -107,13 +114,22 @@ namespace vcsn {
     const alphabet_t& alpha = e.structure().series().monoid().alphabet();
     for_all_const_states(i, e)
     {
-      std::set<hstate_t> dst;
       for_all_const_letters(j, alpha)
       {
-	dst.clear();
-	e.letter_deltac(dst, *i, *j, delta_kind::states());
+	bool empty = true;
+        for (typename automaton_t::delta_transition_iterator t(e.value(), *i);
+             ! t.done() && empty;
+             t.next())
+        {
+          monoid_elt_t w(e.series_of(*t).structure().monoid(), *j);
+          if (e.series_of(*t).get(w) != e.series().semiring().wzero_)
+          {
+            empty = false;
+            break;
+          }
+        }
 
-	if (dst.size() == 0)
+	if (empty)
 	  return false;
       }
     }

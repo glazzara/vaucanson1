@@ -112,19 +112,22 @@ namespace vcsn {
 	       i != auto_->initial().end();
 	       ++i)
 	  {
-	    std::list<htransition_t>	e;
-	    auto_->deltac(e, *i, delta_kind::transitions());
-	    for (typename std::list<htransition_t>::const_iterator j = e.begin();
-		 j != e.end();
-		 ++j)
+            std::list<htransition_t>	e;
+            for (typename automaton_t::delta_transition_iterator j(auto_->value(), *i);
+                 ! j.done();
+                 j.next())
+              e.push_back(*j);
+            for (typename std::list<htransition_t>::const_iterator j = e.begin();
+                 j != e.end();
+                 ++j)
 	    {
 	      // FIXME: The following code is only correct when labels are
 	      // FIXME: series. We should add meta code to make the code
 	      // FIXME: fail at runtime when this function is called
 	      // FIXME: with label as letters. However, we cannot afford
-	      // FIXME: doing an error at compile time, because the rest
-	      // FIXME: of this matcher is valid on Boolean automata with
-	      // FIXME: label as letter.
+	      // FIXME: an error at compile time, because the rest
+	      // FIXME: of this matcher is valid for Boolean automata when
+	      // FIXME: labels are letter.
 	      typedef typename automaton_t::label_t	label_t;
 	      typedef Element<series_set_t, label_t>	label_elt_t;
 
