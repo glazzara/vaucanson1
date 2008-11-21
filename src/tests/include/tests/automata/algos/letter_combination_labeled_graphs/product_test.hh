@@ -137,7 +137,7 @@ unsigned product_test(tests::Tester& tg)
 
   for (unsigned i = 0 ; i < t.test_num(); i++)
   {
-    automaton_t a = gen.generate(10, 20);
+    automaton_t a = gen.generate(2, 4);
 
     complete_here(a);
     a = determinize(a);
