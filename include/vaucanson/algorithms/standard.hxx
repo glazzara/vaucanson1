@@ -52,7 +52,7 @@ namespace vcsn {
 
       // Handle each transitions.
       transition_oi.clear();
-      for (typename automaton_t::delta_transition_iterator oil(a.value(), *oi);
+      for (typename automaton_t::delta_iterator oil(a.value(), *oi);
            ! oil.done();
            oil.next())
         transition_oi.push_back(*oil);
@@ -125,7 +125,7 @@ namespace vcsn {
 
     // Add output transitions of old_i to new_i.
     edelta_ret_t dst;
-    for (typename lhs_t::delta_transition_iterator d(lhs.value(), old_i);
+    for (typename lhs_t::delta_iterator d(lhs.value(), old_i);
          ! d.done();
          d.next())
       dst.push_back(*d);
@@ -229,7 +229,7 @@ namespace vcsn {
 	 ++i)
       if (!rhs.is_initial(*i))
       {
-        for (typename rhs_t::delta_transition_iterator d(rhs.value(), *i);
+        for (typename rhs_t::delta_iterator d(rhs.value(), *i);
              ! d.done();
              d.next())
 	  lhs.add_transition(map_h[*i],
@@ -240,7 +240,7 @@ namespace vcsn {
     // Concat final states of lhs to the initial state of rhs.
     hstate_t rhs_i = *rhs.initial().begin();
     dst.clear();
-    for (typename rhs_t::delta_transition_iterator i(rhs.value(), rhs_i);
+    for (typename rhs_t::delta_iterator i(rhs.value(), rhs_i);
          ! i.done();
          i.next())
       dst.push_back(*i);
@@ -307,7 +307,7 @@ namespace vcsn {
     series_set_elt_t			out_mult = a.get_final(new_i);
 
     out_mult.star();
-    for (typename automaton_t::delta_transition_iterator i(a.value(), new_i);
+    for (typename automaton_t::delta_iterator i(a.value(), new_i);
          ! i.done();
          i.next())
       dst.push_back(*i);

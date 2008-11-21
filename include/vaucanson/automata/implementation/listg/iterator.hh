@@ -28,27 +28,24 @@ namespace vcsn
 
     /**
     ** Iterators use to iterate over subsets of successor/predecessor
-    ** states or transitions.
+    ** transitions.
     **
     ** Graph is the type of automata implementation.
-    ** Handler is the type of handlers it shall return.
     ** Direction indicates if we want successors or predecessors.
     */
-    template <typename Graph, typename Handler, typename Direction>
+    template <typename Graph, typename Direction>
     class DeltaConstIterator
     {
       public:
 	/// The type of automata implementation
 	typedef Graph						graph_type;
-	/// The type of handlers it shall return
-	typedef Handler						data_type;
 	/// The type of the container it wraps
 	typedef std::set<typename graph_type::htransition_t>	container_type;
 	/// The type of iterator used on container_type
 	typedef typename container_type::iterator		iterator_type;
 	/// Indicates if we want successors or predecessors.
 	typedef Direction					direction;
-	typedef DeltaConstIterator<Graph, Handler, Direction>	self_t;
+	typedef DeltaConstIterator<Graph, Direction>		self_t;
 
 	/**
 	** Initialize the iterator.
@@ -71,7 +68,7 @@ namespace vcsn
 	/**
 	** Access the current item.
 	*/
-	data_type	operator*() const;
+	typename graph_type::htransition_t	operator*() const;
 
       private:
 	const graph_type&		graph_;

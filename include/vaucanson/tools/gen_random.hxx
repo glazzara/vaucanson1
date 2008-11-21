@@ -175,7 +175,7 @@ namespace vcsn {
 	  nb_transition--;
 	  letter_t e = set.series().monoid().alphabet().choose();
           bool empty = true;
-          for (typename automaton_t::delta_transition_iterator t(work.value(), *prev);
+          for (typename automaton_t::delta_iterator t(work.value(), *prev);
                ! t.done() && empty;
                t.next())
           {
@@ -199,7 +199,7 @@ namespace vcsn {
 	  letter_t e = set.series().monoid().alphabet().choose();
 	  hstate_t s = work.choose_state();
 	  hstate_t a = work.choose_state();
-          for (typename automaton_t::delta_transition_iterator t(work.value(), s);
+          for (typename automaton_t::delta_iterator t(work.value(), s);
                ! t.done();
                t.next())
           {
@@ -352,7 +352,7 @@ namespace vcsn {
 	    for_all_letters(j, set.series().monoid().alphabet())
 	    {
               bool empty = true;
-              for (typename automaton_t::delta_transition_iterator t(work.value(), *i);
+              for (typename automaton_t::delta_iterator t(work.value(), *i);
                    ! t.done() && empty;
                    t.next())
               {

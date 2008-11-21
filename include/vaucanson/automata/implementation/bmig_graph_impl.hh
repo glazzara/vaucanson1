@@ -148,14 +148,10 @@ namespace vcsn
 	typedef succ_iterator				  succ_const_iterator;
 	typedef std::pair<succ_iterator, succ_iterator>	  succ_range;
 
-	typedef ::vcsn::bmig::DeltaConstIterator<self_t, hstate_t, src_iterator>
-							  delta_state_iterator;
-	typedef ::vcsn::bmig::DeltaConstIterator<self_t, htransition_t, src_iterator>
-							  delta_transition_iterator;
-	typedef ::vcsn::bmig::DeltaConstIterator<self_t, hstate_t, dst_iterator>
-							  rdelta_state_iterator;
-	typedef ::vcsn::bmig::DeltaConstIterator<self_t, htransition_t, dst_iterator>
-							  rdelta_transition_iterator;
+	typedef ::vcsn::bmig::DeltaConstIterator<self_t, src_iterator>
+							  delta_iterator;
+	typedef ::vcsn::bmig::DeltaConstIterator<self_t, dst_iterator>
+							  rdelta_iterator;
 
 	Graph ();
 	Graph (unsigned int reserve_number_of_state,

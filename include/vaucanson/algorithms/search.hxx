@@ -95,10 +95,10 @@ namespace vcsn {
           postcondition(i == distances.size());
           return i;
         }
-        for (typename automaton_t::delta_state_iterator i(a.value(), *s);
+        for (typename automaton_t::delta_iterator i(a.value(), *s);
              ! i.done();
              i.next())
-          s_new.insert(*i);
+          s_new.insert(a.dst_of(*i));
         s_old = s_new;
       }
     }
@@ -152,7 +152,7 @@ namespace vcsn {
 	      if (a.is_initial(*s))
 		critpos = pos + 1;
               std::insert_iterator<bitset_t> i(s_new, s_new.begin());
-              for (typename automaton_t::delta_transition_iterator t(a.value(), *s); ! t.done(); t.next())
+              for (typename automaton_t::delta_iterator t(a.value(), *s); ! t.done(); t.next())
               {
                 monoid_elt_t w(a.series_of(*t).structure().monoid(), w[pos]);
                 if (a.series_of(*t).get(w) != a.series().semiring().wzero_)
@@ -201,7 +201,7 @@ namespace vcsn {
 	    if (a.is_final(*s))
 	      last = pos - 1;
             std::insert_iterator<bitset_t> i(s_new, s_new.begin());
-            for (typename automaton_t::delta_transition_iterator t(a.value(), *s); ! t.done(); t.next())
+            for (typename automaton_t::delta_iterator t(a.value(), *s); ! t.done(); t.next())
             {
               monoid_elt_t w(a.series_of(*t).structure().monoid(), *pos);
               if (a.series_of(*t).get(w) != a.series().semiring().wzero_)

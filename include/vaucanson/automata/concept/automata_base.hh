@@ -83,10 +83,8 @@ namespace vcsn {
       typedef undefined_type geometry_t;
       typedef undefined_type hstate_t;
       typedef undefined_type htransition_t;
-      typedef undefined_type delta_state_iterator;
-      typedef undefined_type delta_transition_iterator;
-      typedef undefined_type rdelta_state_iterator;
-      typedef undefined_type rdelta_transition_iterator;
+      typedef undefined_type delta_iterator;
+      typedef undefined_type rdelta_iterator;
   };
 
 # define VCSN_MAKE_AUTOMATON_TRAITS(Type)					\
@@ -122,10 +120,8 @@ namespace vcsn {
     typedef typename graph_t::final_t			final_t;		\
     typedef typename graph_t::final_support_t		final_support_t;	\
     typedef typename final_support_t::iterator		final_iterator;		\
-    typedef typename graph_t::delta_state_iterator	delta_state_iterator;	\
-    typedef typename graph_t::delta_transition_iterator	delta_transition_iterator; \
-    typedef typename graph_t::rdelta_state_iterator	rdelta_state_iterator;	\
-    typedef typename graph_t::rdelta_transition_iterator	rdelta_transition_iterator; \
+    typedef typename graph_t::delta_iterator	delta_iterator; \
+    typedef typename graph_t::rdelta_iterator	rdelta_iterator; \
   }
 
   // traits for generalized automaton implementation.
@@ -425,10 +421,8 @@ namespace vcsn {
       typedef typename automaton_traits<T>::htransition_t htransition_t;
 
       /// Type of delta iterators
-      typedef typename automaton_traits<T>::delta_state_iterator delta_state_iterator;
-      typedef typename automaton_traits<T>::delta_transition_iterator delta_transition_iterator;
-      typedef typename automaton_traits<T>::rdelta_state_iterator rdelta_state_iterator;
-      typedef typename automaton_traits<T>::rdelta_transition_iterator rdelta_transition_iterator;
+      typedef typename automaton_traits<T>::delta_iterator delta_iterator;
+      typedef typename automaton_traits<T>::rdelta_iterator rdelta_iterator;
 
       /// The set of series from which is build the automaton.
       const series_set_t& series() const;

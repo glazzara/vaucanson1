@@ -89,10 +89,10 @@ class Product
 	output.set_final(current_state,
 			 lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
 
-        for (typename lhs_t::delta_transition_iterator l(lhs.value(), lhs_s);
+        for (typename lhs_t::delta_iterator l(lhs.value(), lhs_s);
              ! l.done();
              l.next())
-          for (typename rhs_t::delta_transition_iterator r(rhs.value(), rhs_s);
+          for (typename rhs_t::delta_iterator r(rhs.value(), rhs_s);
                ! r.done();
                r.next())
 	  {
@@ -182,7 +182,7 @@ class Product
 	      a.geometry()[i] = std::make_pair(x, x);
 	      x++;
 
-              for (typename automaton_t::delta_transition_iterator j(a.value(), i);
+              for (typename automaton_t::delta_iterator j(a.value(), i);
                    ! j.done();
                    j.next())
 		stack.push(a.dst_of(*j));
@@ -267,8 +267,8 @@ misc::static_eq<Type1, Type2>::value
     inline bool
     is_product_not_null (const lhs_t& lhs,
 			 const rhs_t& rhs,
-			 const typename lhs_t::delta_transition_iterator& l,
-			 const typename rhs_t::delta_transition_iterator& r,
+			 const typename lhs_t::delta_iterator& l,
+			 const typename rhs_t::delta_iterator& r,
 			 series_set_elt_t&  prod_series) const
     {
       const series_set_elt_t	left_series  = lhs.series_of(*l);

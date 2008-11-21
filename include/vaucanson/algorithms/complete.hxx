@@ -51,7 +51,7 @@ namespace vcsn {
       for_all_const_letters(l, work.structure().series().monoid().alphabet())
       {
         bool empty = true;
-        for (typename automaton_t::delta_transition_iterator t(work.value(), *s); ! t.done(); t.next())
+        for (typename automaton_t::delta_iterator t(work.value(), *s); ! t.done(); t.next())
         {
           monoid_elt_t w(work.series_of(*t).structure().monoid(), *l);
           if (work.series_of(*t).get(w) != work.series().semiring().wzero_)
@@ -117,7 +117,7 @@ namespace vcsn {
       for_all_const_letters(j, alpha)
       {
 	bool empty = true;
-        for (typename automaton_t::delta_transition_iterator t(e.value(), *i);
+        for (typename automaton_t::delta_iterator t(e.value(), *i);
              ! t.done() && empty;
              t.next())
         {

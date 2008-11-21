@@ -25,25 +25,22 @@ namespace vcsn
   {
     /**
     ** Iterators use to iterate over subsets of successor/predecessor
-    ** states or transitions.
+    ** transitions.
     **
     ** Graph is the type of automata implementation.
-    ** Handler is the type of handlers it shall return.
     ** I is the type of iterators used on the subset.
     */
-    template <typename Graph, typename Handler, typename I>
+    template <typename Graph, typename I>
     class DeltaConstIterator
     {
       public:
 	/// The type of automata implementation
 	typedef Graph					graph_type;
-	/// The type of handlers it shall return
-	typedef Handler					data_type;
 	/// The type of iterators used on the subset
 	typedef I					iterator_type;
 	/// Type of the pair used to define the couple begin/end
 	typedef std::pair<I, I>				range_type;
-	typedef DeltaConstIterator<Graph, Handler, I>	self_t;
+	typedef DeltaConstIterator<Graph, I>		self_t;
 
 	/**
 	** Initialize the iterator.
@@ -66,7 +63,7 @@ namespace vcsn
 	/**
 	** Access the current item.
 	*/
-	data_type	operator*() const;
+	typename graph_type::htransition_t	operator*() const;
 
       private:
 	const graph_type&	graph_;

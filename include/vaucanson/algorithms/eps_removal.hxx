@@ -72,7 +72,7 @@ namespace vcsn {
 	std::list<htransition_t>	transition_list;
 	int src = state_to_index[*s];
 
-        for (typename automaton_t::delta_transition_iterator e(a.value(), *s); ! e.done(); e.next())
+        for (typename automaton_t::delta_iterator e(a.value(), *s); ! e.done(); e.next())
           transition_list.push_back(*e);
 	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
@@ -137,7 +137,7 @@ namespace vcsn {
       for_all_const_states(s, a)
       {
 	std::list<htransition_t> transition_list;
-        for (typename automaton_t::rdelta_transition_iterator e(a.value(), *s); ! e.done(); e.next())
+        for (typename automaton_t::rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
           transition_list.push_back(*e);
 	int dst = state_to_index[*s];
 	for_all_const_(std::list<htransition_t>, e, transition_list)
@@ -173,7 +173,7 @@ namespace vcsn {
       for_all_const_states(s, a)
       {
 	std::list<htransition_t> transition_list;
-        for (typename automaton_t::delta_transition_iterator e(a.value(), *s); ! e.done(); e.next())
+        for (typename automaton_t::delta_iterator e(a.value(), *s); ! e.done(); e.next())
           transition_list.push_back(*e);
 	int src = state_to_index[*s];
 	for_all_const_(std::list<htransition_t>, e, transition_list)        
@@ -316,7 +316,7 @@ namespace vcsn {
 	label_t l = a.label_of(t);
 
 	st_out.clear();
-        for (typename automaton_t::delta_transition_iterator t(a.value(), mid); ! t.done(); t.next())
+        for (typename automaton_t::delta_iterator t(a.value(), mid); ! t.done(); t.next())
           if (a.is_spontaneous(*t))
             st_out.push_back(a.dst_of(*t));
 	for_all_const(typename cstates_t, dst, st_out)
@@ -340,7 +340,7 @@ namespace vcsn {
 	hstate_t i = sq.front();
 
 	st_out.clear();
-        for (typename automaton_t::delta_transition_iterator t(a.value(), i); ! t.done(); t.next())
+        for (typename automaton_t::delta_iterator t(a.value(), i); ! t.done(); t.next())
           if (a.is_spontaneous(*t))
             st_out.push_back(a.dst_of(*t));
 	for_all_const(typename cstates_t, s, st_out)
@@ -369,7 +369,7 @@ namespace vcsn {
 	label_t l = a.label_of(t);
 
 	st_in.clear();
-        for (typename automaton_t::rdelta_transition_iterator t(a.value(), mid); ! t.done(); t.next())
+        for (typename automaton_t::rdelta_iterator t(a.value(), mid); ! t.done(); t.next())
           if (a.is_spontaneous(*t))
             st_in.push_back(a.src_of(*t));
 	for_all_const(typename cstates_t, src, st_in)
@@ -393,7 +393,7 @@ namespace vcsn {
 	hstate_t i = sq.front();
 
         st_in.clear();
-        for (typename automaton_t::rdelta_transition_iterator t(a.value(), i); ! t.done(); t.next())
+        for (typename automaton_t::rdelta_iterator t(a.value(), i); ! t.done(); t.next())
           if (a.is_spontaneous(*t))
             st_in.push_back(a.src_of(*t));
         for_all_const(typename cstates_t, s, st_in)

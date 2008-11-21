@@ -113,7 +113,7 @@ namespace vcsn {
 	       ++i)
 	  {
             std::list<htransition_t>	e;
-            for (typename automaton_t::delta_transition_iterator j(auto_->value(), *i);
+            for (typename automaton_t::delta_iterator j(auto_->value(), *i);
                  ! j.done();
                  j.next())
               e.push_back(*j);

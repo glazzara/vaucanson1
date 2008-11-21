@@ -647,7 +647,7 @@ namespace vcsn
     // End of syntactic sugar
 # undef BMIGRAPH_TPARAM
 # undef BMIGRAPH
-  } // End of namespace boost
+  } // End of namespace bmig
 } // End of namespace vcsn
 
 #endif // !VCSN_AUTOMATA_IMPLEMENTATION_BMIG_GRAPH_IMPL_HXX_ //

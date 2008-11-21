@@ -107,10 +107,8 @@ namespace vcsn {
       typedef typename automaton_traits<T>::hstate_t	hstate_t;
       typedef typename automaton_traits<T>::htransition_t	htransition_t;
 
-      typedef typename automaton_traits<T>::rdelta_state_iterator	delta_state_iterator;
-      typedef typename automaton_traits<T>::rdelta_transition_iterator	delta_transition_iterator;
-      typedef typename automaton_traits<T>::delta_state_iterator	rdelta_state_iterator;
-      typedef typename automaton_traits<T>::delta_transition_iterator	rdelta_transition_iterator;
+      typedef typename automaton_traits<T>::rdelta_iterator	delta_iterator;
+      typedef typename automaton_traits<T>::delta_iterator	rdelta_iterator;
   };
 
 #define AutoType(Type)				\

@@ -26,8 +26,8 @@ namespace vcsn
   {
 
     // Syntactic sugar
-# define BMIG_ITERATOR_TPARAM template <typename Graph, typename Handler, typename I>
-# define BMIG_ITERATOR DeltaConstIterator<Graph, Handler, I>
+# define BMIG_ITERATOR_TPARAM template <typename Graph, typename I>
+# define BMIG_ITERATOR DeltaConstIterator<Graph, I>
 
     BMIG_ITERATOR_TPARAM
     BMIG_ITERATOR::DeltaConstIterator(const graph_type& g,
@@ -57,57 +57,11 @@ namespace vcsn
       return i_ == end_;
     }
 
-    /*
-    ** Helper for the operator*
-    ** Used to retrieve the underlying data based on the iterator type
-    ** without having to specialize the DeltaConstIterator for each type.
-    */
-    template <typename IteratorType>
-    typename IteratorType::data_type
-    op_get_delta_iterator_value(const IteratorType&,
-				const typename IteratorType::iterator_type& i);
-
-# define BMIG_DCI(Handler, Kind)			\
-    DeltaConstIterator<Graph,				\
-		       typename Graph::Handler,		\
-		       typename Graph::Kind##_iterator>
-    template <typename Graph>
-    typename BMIG_DCI(hstate_t, src)::data_type
-    op_get_delta_iterator_value(const BMIG_DCI(hstate_t, src)&,
-				const Graph&,
-				const typename BMIG_DCI(hstate_t, src)::iterator_type& i)
-    {
-      return typename BMIG_DCI(hstate_t, src)::data_type(i->to_);
-    }
-    template <typename Graph>
-    typename BMIG_DCI(hstate_t, dst)::data_type
-    op_get_delta_iterator_value(const BMIG_DCI(hstate_t, dst)&,
-				const Graph&,
-				const typename BMIG_DCI(hstate_t, dst)::iterator_type& i)
-    {
-      return typename BMIG_DCI(hstate_t, dst)::data_type(i->from_);
-    }
-# undef BMIG_DCI
-# define BMIG_DCI(Handler, Kind)			\
-    DeltaConstIterator<Graph,				\
-		       typename Graph::Handler,		\
-		       T>
-    template <typename Graph, typename T>
-    typename BMIG_DCI(htransition_t, T)::data_type
-    op_get_delta_iterator_value(const BMIG_DCI(htransition_t, T)&,
-				const Graph& g,
-				const typename BMIG_DCI(htransition_t, T)::iterator_type& i)
-    {
-      return g.get_htransition(i);
-    }
-# undef BMIG_DCI
-
-
     BMIG_ITERATOR_TPARAM
-    typename BMIG_ITERATOR::data_type
+    typename BMIG_ITERATOR::graph_type::htransition_t
     BMIG_ITERATOR::operator*() const
     {
-      return op_get_delta_iterator_value(*this, graph_, i_);
+      return graph_.get_htransition(i_);
     }
 
 # undef BMIG_ITERATOR_TPARAM

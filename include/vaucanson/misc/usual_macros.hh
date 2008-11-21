@@ -70,10 +70,8 @@
   typedef Typename AutoType::tag_t				Prefix##tag_t; \
   typedef Typename AutoType::hstate_t				Prefix##hstate_t; \
   typedef Typename AutoType::htransition_t			Prefix##htransition_t; \
-  typedef Typename AutoType::delta_state_iterator		Prefix##delta_state_iterator; \
-  typedef Typename AutoType::delta_transition_iterator		Prefix##delta_transition_iterator; \
-  typedef Typename AutoType::rdelta_state_iterator		Prefix##rdelta_state_iterator; \
-  typedef Typename AutoType::rdelta_transition_iterator		Prefix##rdelta_transition_iterator; \
+  typedef Typename AutoType::delta_iterator		Prefix##delta_iterator; \
+  typedef Typename AutoType::rdelta_iterator		Prefix##rdelta_iterator; \
   typedef Typename AutoType::series_set_t::series_rep_t		Prefix##series_rep_t; \
   typedef Typename AutoType::monoid_t::monoid_rep_t		Prefix##monoid_rep_t;
 

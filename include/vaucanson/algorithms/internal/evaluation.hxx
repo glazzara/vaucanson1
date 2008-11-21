@@ -250,7 +250,7 @@ namespace vcsn {
 	continue;
 
       transitions.clear();
-      for (typename automaton_t::delta_transition_iterator e(b.value(), q); ! e.done(); e.next())
+      for (typename automaton_t::delta_iterator e(b.value(), q); ! e.done(); e.next())
         transitions.insert(*e);
       for (i = transitions.begin(); i != transitions.end(); i = j)
       {
@@ -266,7 +266,7 @@ namespace vcsn {
 	b.del_transition(*i);
       }
       transitions.clear();
-      for (typename automaton_t::rdelta_transition_iterator e(b.value(), q); ! e.done(); e.next())
+      for (typename automaton_t::rdelta_iterator e(b.value(), q); ! e.done(); e.next())
         transitions.insert(*e);
       for (i = transitions.begin(); i != transitions.end(); i = j)
       {

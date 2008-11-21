@@ -82,7 +82,7 @@ namespace vcsn {
 	  // Test whether there are different types of outgoing transitions.
 
 	  set_of_transitions_t transitions;
-          for (typename automaton_t::delta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+          for (typename automaton_t::delta_iterator e(res.value(), *s); ! e.done(); e.next())
             transitions.push_back(*e);
 	  for_all_const_(set_of_transitions_t, e, transitions)
 	    {
@@ -112,7 +112,7 @@ namespace vcsn {
 		res.set_initial(s2, res.get_initial(*s));
 
 	      set_of_transitions_t in_transitions;
-              for (typename automaton_t::rdelta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+              for (typename automaton_t::rdelta_iterator e(res.value(), *s); ! e.done(); e.next())
                 in_transitions.push_back(*e);
 
 	      for_all_(set_of_transitions_t, e, in_transitions)
@@ -183,7 +183,7 @@ namespace vcsn {
 	  // Test whether there are different types of incoming transitions.
 
 	  set_of_transitions_t transitions;
-          for (typename automaton_t::rdelta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+          for (typename automaton_t::rdelta_iterator e(res.value(), *s); ! e.done(); e.next())
             transitions.push_back(*e);
 	  for_all_const_(set_of_transitions_t, e, transitions)
 	    {
@@ -213,7 +213,7 @@ namespace vcsn {
 		res.set_final(s2, res.get_final(*s));
 
 	      set_of_transitions_t out_transitions;
-              for (typename automaton_t::delta_transition_iterator e(res.value(), *s); ! e.done(); e.next())
+              for (typename automaton_t::delta_iterator e(res.value(), *s); ! e.done(); e.next())
                 out_transitions.push_back(*e);
 
 	      for_all_(set_of_transitions_t, e, out_transitions)

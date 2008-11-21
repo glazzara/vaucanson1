@@ -1,5 +1,51 @@
 2008-11-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove [r]delta_state_iterator.
+	[r]delta_state_iterator was poorly designed (the name was
+	used to express a type), and not needed	(it was only used
+	twice, and dst_of and src_of are convenient
+	to use instead).
+
+	Since that only leaves one flavour, [r]delta_transition_iterator,
+	it is now called [r]delta_iterator.
+	* include/vaucanson/algorithms/accessible.hxx: .
+	* include/vaucanson/algorithms/aut_to_exp.hxx: .
+	* include/vaucanson/algorithms/complete.hxx: .
+	* include/vaucanson/algorithms/determinize.hxx: .
+	* include/vaucanson/algorithms/eps_removal.hxx: .
+	* include/vaucanson/algorithms/eps_removal_sp.hxx: .
+	* include/vaucanson/algorithms/eval.hxx: .
+	* include/vaucanson/algorithms/internal/evaluation.hxx: .
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx: .
+	* include/vaucanson/algorithms/internal/outsplitting.hxx: .
+	* include/vaucanson/algorithms/is_deterministic.hxx: .
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx: .
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: .
+	* include/vaucanson/algorithms/minimization_moore.hxx: .
+	* include/vaucanson/algorithms/normalized_composition.hxx: .
+	* include/vaucanson/algorithms/product.hxx: .
+	* include/vaucanson/algorithms/rw_composition.hxx: .
+	* include/vaucanson/algorithms/search.hxx: .
+	* include/vaucanson/algorithms/standard.hxx: .
+	* include/vaucanson/algorithms/standard_of.hxx: .
+	* include/vaucanson/algorithms/sum.hxx: .
+	* include/vaucanson/automata/concept/automata_base.hh: .
+	* include/vaucanson/automata/implementation/bmig/iterator.hh: .
+	* include/vaucanson/automata/implementation/bmig/iterator.hxx: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hxx: .
+	* include/vaucanson/automata/implementation/listg/iterator.hh: .
+	* include/vaucanson/automata/implementation/listg/iterator.hxx: .
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: .
+	* include/vaucanson/automata/implementation/transpose_view.hh: .
+	* include/vaucanson/misc/usual_macros.hh: .
+	* include/vaucanson/tools/fsm_dump.hxx: .
+	* include/vaucanson/tools/gen_random.hxx: .
+	* src/tests/include/tests/automata/implementation_check/iterator_test.hh: .
+	* taf-kit/src/edition_commands.hxx: .
+
+2008-11-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Speed up product test by reducing size of automata.
 	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:
 	  This test was taking far too long. Reduce size drastically from (10, 20) to (2, 4).

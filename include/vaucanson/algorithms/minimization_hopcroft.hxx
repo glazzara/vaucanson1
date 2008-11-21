@@ -77,7 +77,7 @@ namespace vcsn
 	  maybe_splittable_.clear ();
 	  for_all_const_ (hstates_t, i, ss)
           {
-	    for (typename input_t::rdelta_transition_iterator t(input_.value(), *i); ! t.done(); t.next())
+	    for (typename input_t::rdelta_iterator t(input_.value(), *i); ! t.done(); t.next())
 	    {
 	      monoid_elt_t w(input_.series_of(*t).structure().monoid(), l);
 	      if (input_.series_of(*t).get(w) != input_.series().semiring().wzero_)
@@ -163,7 +163,7 @@ namespace vcsn
 	void execute (hstate_t representative)
 	{
 	  src_ = class_of_[representative];
-          for (typename automaton_t::delta_transition_iterator t(input_.value(), representative); ! t.done(); t.next())
+          for (typename automaton_t::delta_iterator t(input_.value(), representative); ! t.done(); t.next())
           {
             output_.add_series_transition (src_, class_of_[input_.dst_of (*t)],
                                            input_.series_of (*t));
@@ -349,7 +349,7 @@ namespace vcsn
 
 	  for_all_(partition_t, s, p)
           {
-            for (typename input_t::rdelta_transition_iterator t(input_.value(), *s); ! t.done(); t.next())
+            for (typename input_t::rdelta_iterator t(input_.value(), *s); ! t.done(); t.next())
 	    {
               monoid_elt_t w(input_.series_of(*t).structure().monoid(), a);
               if (input_.series_of(*t).get(w) != input_.series().semiring().wzero_)
@@ -562,7 +562,7 @@ namespace vcsn
       {
 	already_linked.clear();
 
-        for (typename input_t::delta_transition_iterator t(input.value(), s); ! t.done(); t.next())
+        for (typename input_t::delta_iterator t(input.value(), s); ! t.done(); t.next())
 	{
           monoid_elt_t w(input.series_of(*t).structure().monoid(), *e);
           if (input.series_of(*t).get(w) != input.series().semiring().wzero_)
@@ -662,7 +662,7 @@ namespace vcsn
 	  old_weight[*r] = weight_zero;
 	states_visited.clear();
 
-        for (typename input_t::rdelta_transition_iterator e(input.value(), *q); ! e.done(); e.next())
+        for (typename input_t::rdelta_iterator e(input.value(), *q); ! e.done(); e.next())
         {
           monoid_elt_t w(input.series_of(*e).structure().monoid(), *a);
           if (input.series_of(*e).get(w) != input.series().semiring().wzero_)
@@ -843,7 +843,7 @@ namespace vcsn
     {
       met_classes.clear();
 
-      for (typename automaton_t::delta_transition_iterator e(input.value(), *classes[i].begin()); ! e.done(); e.next())
+      for (typename automaton_t::delta_iterator e(input.value(), *classes[i].begin()); ! e.done(); e.next())
 	{
 	  series_set_elt_t	se = input.series_of(*e);
 	  unsigned		cs = class_of_state[input.dst_of(*e)];
