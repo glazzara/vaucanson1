@@ -1,5 +1,20 @@
 2008-11-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Reinstate listg (too hasty!).
+	Reinstate over-hasty removal of listg (r2489).
+	* include/Makefile.am: .
+	* include/vaucanson/automata/implementation/listg/iterator.hh: New.
+	* include/vaucanson/automata/implementation/listg/iterator.hxx: New.
+	* include/vaucanson/automata/implementation/listg/listg_handlers.hh: New.
+	* include/vaucanson/automata/implementation/listg/listg_handlers.hxx: New.
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hh: New.
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx: New.
+	* include/vaucanson/automata/implementation/listg: New.
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: New.
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: New.
+
+2008-11-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Disable vaucanswig in make distcheck.
 	Vaucanswig won't compile any more owing to the lack of listg. Since it
 	is broken anyway, it seems a small extra benefit to compile it during
