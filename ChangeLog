@@ -1,5 +1,11 @@
 2008-11-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove FIXME about proposed additional iterator.
+	Entia non sunt multiplicanda praeter necessitatem.
+	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: .
+
+2008-11-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove the listg graph implementation.
 	To simplify ongoing work, remove the listg graph implementation.
 	The framework for multiple implementations is retained for ease of

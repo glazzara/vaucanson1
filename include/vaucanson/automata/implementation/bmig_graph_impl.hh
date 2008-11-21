@@ -138,11 +138,6 @@ namespace vcsn
 	typedef std::pair<src_iterator, src_iterator>	  src_range;
 	typedef std::pair<dst_iterator, dst_iterator>	  dst_range;
 
-// FIXME: is it useful?
-//	typedef typename index_iterator<graph_data_t, pred>::type
-//							  pred_iterator;
-//	typedef pred_iterator				  pred_const_iterator;
-//	typedef std::pair<pred_iterator, pred_iterator>	  pred_range;
 	typedef typename index_iterator<graph_data_t, succ>::type
 							  succ_iterator;
 	typedef succ_iterator				  succ_const_iterator;
