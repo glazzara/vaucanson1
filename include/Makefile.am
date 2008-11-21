@@ -503,14 +503,6 @@ vaucanson/automata/implementation/bmig_graph_letters_spec.hh		\
 vaucanson/automata/implementation/bmig_graph_letters_spec.hxx		\
 vaucanson/automata/implementation/geometry.hh				\
 vaucanson/automata/implementation/geometry.hxx				\
-vaucanson/automata/implementation/listg/iterator.hh 			\
-vaucanson/automata/implementation/listg/iterator.hxx 			\
-vaucanson/automata/implementation/listg/listg_handlers.hh 		\
-vaucanson/automata/implementation/listg/listg_handlers.hxx 		\
-vaucanson/automata/implementation/listg/listg_sparse_interval.hh 	\
-vaucanson/automata/implementation/listg/listg_sparse_interval.hxx 	\
-vaucanson/automata/implementation/listg_graph_impl.hh			\
-vaucanson/automata/implementation/listg_graph_impl.hxx			\
 vaucanson/automata/implementation/kind_adapter.hh			\
 vaucanson/automata/implementation/kind_adapter.hxx			\
 vaucanson/automata/implementation/transpose_view.hh			\

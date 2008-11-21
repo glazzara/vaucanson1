@@ -1,5 +1,22 @@
 2008-11-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Remove the listg graph implementation.
+	To simplify ongoing work, remove the listg graph implementation.
+	The framework for multiple implementations is retained for ease of
+	adding or changing the graph implementation in future.
+	* include/Makefile.am: .
+	* include/vaucanson/automata/implementation/listg/iterator.hh: Remove.
+	* include/vaucanson/automata/implementation/listg/iterator.hxx: Remove.
+	* include/vaucanson/automata/implementation/listg/listg_handlers.hh: Remove.
+	* include/vaucanson/automata/implementation/listg/listg_handlers.hxx: Remove.
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hh: Remove.
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx: Remove.
+	* include/vaucanson/automata/implementation/listg: Remove.
+	* include/vaucanson/automata/implementation/listg_graph_impl.hh: Remove.
+	* include/vaucanson/automata/implementation/listg_graph_impl.hxx: Remove.
+
+2008-11-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Add a FIXME tag to a fixme.
 	* src/tests/sanity/Makefile.am: .
 
