@@ -17,7 +17,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include \
 	      $(BOOST_CPPFLAGS) -DVCSN_SANITY_CHECK
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 
-# Currently files are generated in srcdir, they should be in builddir,
+# FIXME: Currently files are generated in srcdir, they should be in builddir,
 # and generated from the Makefile.am.
 include check-programs.mk
 

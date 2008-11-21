@@ -1,5 +1,10 @@
 2008-11-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Add a FIXME tag to a fixme.
+	* src/tests/sanity/Makefile.am: .
+
+2008-11-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove [r]delta_state_iterator.
 	[r]delta_state_iterator was poorly designed (the name was
 	used to express a type), and not needed	(it was only used
