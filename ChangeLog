@@ -1,5 +1,13 @@
 2008-11-21  Reuben Thomas  <rrt@sc3d.org>
 
+	Disable vaucanswig in make distcheck.
+	Vaucanswig won't compile any more owing to the lack of listg. Since it
+	is broken anyway, it seems a small extra benefit to compile it during
+	make distcheck.
+	* Makefile.am: .
+
+2008-11-21  Reuben Thomas  <rrt@sc3d.org>
+
 	Remove FIXME about proposed additional iterator.
 	Entia non sunt multiplicanda praeter necessitatem.
 	* include/vaucanson/automata/implementation/bmig_graph_impl.hh: .
