@@ -17,6 +17,8 @@
 #ifndef BENCHS_ITERATORS_ITERATOR_BENCH_HH
 # define BENCHS_ITERATORS_ITERATOR_BENCH_HH
 
+# define CONTEXT boolean_automaton
+
 # define CONTEXT_HEADER <vaucanson/CONTEXT.hh>
 
 # include CONTEXT_HEADER
@@ -29,18 +31,12 @@ using namespace vcsn::CONTEXT;
 
 # include <common/bench_constructs.hh>
 
-# define RUN_THROUGH_DELTAI(Type)						\
-  static void run_through_using_deltai_on_##Type##s(const automaton_t& a)	\
-  {										\
-    AUTOMATON_TYPES_EXACT(automaton_t);						\
-    for_all_states(s, a)							\
-      for (delta_##Type##_iterator i(a.value(), *s); ! i.done(); i.next());	\
-  }
-  RUN_THROUGH_DELTAI(state);
-  RUN_THROUGH_DELTAI(transition);
-# undef RUN_THROUGH_DELTAI
-
-
+static void run_through_using_deltai(const automaton_t& a)
+{									
+  AUTOMATON_TYPES_EXACT(automaton_t);					
+  for_all_states(s, a)							
+    for (delta_iterator i(a.value(), *s); ! i.done(); i.next());	
+}
 
 void iterator_bench(int n_states)
 {
@@ -64,21 +60,10 @@ void iterator_bench(int n_states)
       a.add_spontaneous(*i, *j);
   VCSN_BENCH_STOP_AND_PRINT;
 
-# define RUN_BENCH(FunName)						\
-  {									\
-    std::cerr << std::endl << "Benching " << #FunName << std::endl;	\
-    VCSN_BENCH_START;							\
-    run_through_using_##FunName(a);					\
-    VCSN_BENCH_STOP_AND_PRINT;						\
-  }
-  RUN_BENCH(deltac_on_states);
-  RUN_BENCH(deltaf_on_states);
-  RUN_BENCH(deltai_on_states);
-  RUN_BENCH(deltac_on_transitions);
-  RUN_BENCH(deltaf_on_transitions);
-  RUN_BENCH(deltai_on_transitions);
-# undef RUN_BENCH
-
+  std::cerr << std::endl << "Benching deltai" << std::endl;
+  VCSN_BENCH_START;						
+  run_through_using_deltai(a);					
+  VCSN_BENCH_STOP_AND_PRINT;					
 }
 
 #endif // ! BENCHS_ITERATORS_ITERATOR_BENCH_HH

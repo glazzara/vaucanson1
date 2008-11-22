@@ -1,5 +1,14 @@
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Add missing bits so that "make benchs" works in iterators/.
+
+	* src/benchs/iterators/Makefile.bench: New file.
+	* src/benchs/iterators/accessible_bench.hh: Add a context.
+	* src/benchs/iterators/iterator_bench.hh: Add a context and remove
+	any reference to deltaf, deltac, and state iterators.
+
+2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Add missing bits so that "make benchs" works in eps_removal/.
 	
 	* src/benchs/eps_removal/Makefile.bench: New file.

@@ -17,6 +17,8 @@
 #ifndef BENCHS_ITERATORS_ACCESSIBLE_BENCH_HH
 # define BENCHS_ITERATORS_ACCESSIBLE_BENCH_HH
 
+# define CONTEXT boolean_automaton
+
 # define CONTEXT_HEADER <vaucanson/CONTEXT.hh>
 
 # include CONTEXT_HEADER

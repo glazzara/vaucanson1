@@ -1,0 +1,13 @@
+# composition/Makefile.bench				* -*- Makefile -*-
+
+benchs: $(EXTRA_PROGRAMS)
+	@echo '================';				\
+	echo '|iterator bench|';				\
+	echo '================';				\
+	for n_value in 1000 2000 3000 4000 5000; do		\
+	   echo "----------------------For $$n_value:";		\
+	   echo "-------------- accessible:";			\
+	   ./accessible-bench $$n_value;			\
+	   echo "-------------- iterator:";			\
+	   ./iterator-bench $$n_value;				\
+	done
