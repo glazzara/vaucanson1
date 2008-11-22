@@ -25,7 +25,7 @@ SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS m4/gnulib-cache.m4
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-benchs --enable-vaucanswig \
+DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-bench --enable-vaucanswig \
   $(MORE_DISTCHECK_CONFIGURE_FLAGS)
 
 # Prevent accidental edition of generated files.
@@ -56,10 +56,10 @@ demos:
 	cd src/demos && $(MAKE) $(AM_MAKEFLAGS) all
 
 ###
-### For benchs. (. is builddir)
+### For benchmarks. (. is builddir)
 ###
-benchs:
-	cd src/benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
+bench:
+	cd src/bench && $(MAKE) $(AM_MAKEFLAGS) bench
 
 ###
 ### Sanity check.

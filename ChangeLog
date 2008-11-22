@@ -1,5 +1,75 @@
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Change all occurences of benchs and benches to either bench (in
+	filenames and targets) or benchmarks (in text).
+	
+	* Makefile.am, bootstrap, configure.ac, doc/manual/developer.tex,
+	src/Makefile.am: Adjust to the following renamings.
+	* src/benchs/Makefile.am: Rename to src/bench/Makefile.am
+	* src/benchs/common/Makefile.am: Rename to src/bench/common/Makefile.am
+	* src/benchs/common/alpha.syms: Rename to src/bench/common/alpha.syms
+	* src/benchs/common/bench.mk: Rename to src/bench/common/bench.mk
+	* src/benchs/common/bench_automaton.hh: Rename to 
+	src/bench/common/bench_automaton.hh
+	* src/benchs/common/bench_constructs.hh: Rename to 
+	src/bench/common/bench_constructs.hh
+	* src/benchs/composition/Makefile.bench: Rename to 
+	src/bench/composition/Makefile.bench
+	* src/benchs/composition/normalized_composition_bench.hh: Rename to
+	src/bench/composition/normalized_composition_bench.hh
+	* src/benchs/composition/rw_composition_bench.hh: Rename to
+	src/bench/composition/rw_composition_bench.hh
+	* src/benchs/derived_terms/Makefile.bench: Rename to
+	src/bench/derived_terms/Makefile.bench
+	* src/benchs/derived_terms/derived_terms_bench.hh: Rename to
+	src/bench/derived_terms/derived_terms_bench.hh
+	* src/benchs/determinization/Makefile.bench: Rename to
+	src/bench/determinization/Makefile.bench
+	* src/benchs/determinization/determinization_bench.hh: Rename to
+	src/bench/determinization/determinization_bench.hh
+	* src/benchs/determinization/determinization_bench_fsm.cc: Rename to
+	src/bench/determinization/determinization_bench_fsm.cc
+	* src/benchs/eps_removal/Makefile.bench: Rename to
+	src/bench/eps_removal/Makefile.bench
+	* src/benchs/eps_removal/eps_removal_bench.hh: Rename to
+	src/bench/eps_removal/eps_removal_bench.hh
+	* src/benchs/generate_benchs.sh: Rename to src/bench/generate_bench.sh
+	Also to not EXTRA_DIST Makefile.bench files, Automake will already
+	distribute them since they are included by a Makefile.am
+	* src/benchs/iterators/Makefile.bench: Rename to
+	src/bench/iterators/Makefile.bench
+	* src/benchs/iterators/accessible_bench.hh: Rename to
+	src/bench/iterators/accessible_bench.hh
+	* src/benchs/iterators/iterator_bench.hh: Rename to
+	src/bench/iterators/iterator_bench.hh
+	* src/benchs/minimization_2n/Makefile.bench: Rename to
+	src/bench/minimization_2n/Makefile.bench
+	* src/benchs/minimization_2n/minimization_2n_brzozowski_bench.hh: 
+	Rename to src/bench/minimization_2n/minimization_2n_brzozowski_bench.hh
+	* src/benchs/minimization_2n/minimization_2n_hopcroft_bench.hh: Rename 
+	to src/bench/minimization_2n/minimization_2n_hopcroft_bench.hh
+	* src/benchs/minimization_2n/minimization_2n_moore_bench.hh: Rename to
+	src/bench/minimization_2n/minimization_2n_moore_bench.hh
+	* src/benchs/minimization_debruijn/Makefile.bench: Rename to
+	src/bench/minimization_debruijn/Makefile.bench
+	* src/benchs/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh: 
+	Rename to
+	src/bench/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh
+	* src/benchs/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh: 
+	Rename to
+	src/bench/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh
+	* src/benchs/minimization_debruijn/minimization_debruijn_moore_bench.hh: 
+	Rename to
+	src/bench/minimization_debruijn/minimization_debruijn_moore_bench.hh
+	* src/benchs/quotient/Makefile.bench: Rename to
+	src/bench/quotient/Makefile.bench
+	* src/benchs/quotient/quotient_bool_bench.hh: Rename to
+	src/bench/quotient/quotient_bool_bench.hh
+	* src/benchs/quotient/quotient_z_bench.hh: Rename to
+	src/bench/quotient/quotient_z_bench.hh
+
+2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Only build benchmarks during distcheck, in the same way we do for
 	demos.  (#138)
 	

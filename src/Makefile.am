@@ -16,14 +16,14 @@ SUBDIRS = tests
 if ENABLE_DEMOS
   SUBDIRS += demos
 endif 
-if ENABLE_BENCHS
-  SUBDIRS += benchs
+if ENABLE_BENCH
+  SUBDIRS += bench
 endif 
 
-.PHONY: demos benchs
+.PHONY: demos bench
 
 demos:
 	cd demos && $(MAKE) $(AM_MAKEFLAGS) all
 
-benchs:
-	cd benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
+bench:
+	cd bench && $(MAKE) $(AM_MAKEFLAGS) bench

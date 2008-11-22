@@ -1,6 +1,6 @@
 # composition/Makefile.bench				* -*- Makefile -*-
 
-benchs: $(noinst_PROGRAMS)
+bench: $(noinst_PROGRAMS)
 	@echo '================';				\
 	echo '|iterator bench|';				\
 	echo '================';				\

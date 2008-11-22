@@ -43,10 +43,10 @@ AC_PROG_AWK
 AC_ARG_ENABLE([demos],
 	[AC_HELP_STRING([--enable-demos], [build demos during "make all"])])
 AM_CONDITIONAL([ENABLE_DEMOS], [test "x$enable_demos" = "xyes"])
-AC_ARG_ENABLE([benchs],
-	[AC_HELP_STRING([--enable-benchs], 
+AC_ARG_ENABLE([bench],
+	[AC_HELP_STRING([--enable-bench], 
 	                [build benchmarks during "make all"])])
-AM_CONDITIONAL([ENABLE_BENCHS], [test "x$enable_benchs" = "xyes"])
+AM_CONDITIONAL([ENABLE_BENCH], [test "x$enable_bench" = "xyes"])
 
 
 ## ------------ ##
@@ -260,16 +260,16 @@ AC_CONFIG_FILES([
 	    src/demos/algorithms/Makefile
 	    src/demos/one_rule_rewriting/Makefile
 	    src/demos/vgrep/Makefile
-	  src/benchs/Makefile
-	    src/benchs/common/Makefile
-	    src/benchs/composition/Makefile
-	    src/benchs/derived_terms/Makefile
-	    src/benchs/determinization/Makefile
-	    src/benchs/eps_removal/Makefile
-	    src/benchs/iterators/Makefile
-	    src/benchs/minimization_2n/Makefile
-	    src/benchs/minimization_debruijn/Makefile
-	    src/benchs/quotient/Makefile
+	  src/bench/Makefile
+	    src/bench/common/Makefile
+	    src/bench/composition/Makefile
+	    src/bench/derived_terms/Makefile
+	    src/bench/determinization/Makefile
+	    src/bench/eps_removal/Makefile
+	    src/bench/iterators/Makefile
+	    src/bench/minimization_2n/Makefile
+	    src/bench/minimization_debruijn/Makefile
+	    src/bench/quotient/Makefile
 	tools/Makefile
 	include/Makefile
 	debian/Makefile])

@@ -1,6 +1,6 @@
 # minimization_debruijn/Makefile.bench				* -*- Makefile -*-
 
-benchs: $(noinst_PROGRAMS)
+bench: $(noinst_PROGRAMS)
 	@echo '================================';			\
 	echo '|Minimization bench - De Bruijn|';			\
 	echo '================================';			\
