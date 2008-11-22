@@ -11,11 +11,13 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = tests	\
-	  benchs
+SUBDIRS = tests
 
 if ENABLE_DEMOS
   SUBDIRS += demos
+endif 
+if ENABLE_BENCHS
+  SUBDIRS += benchs
 endif 
 
 .PHONY: demos benchs

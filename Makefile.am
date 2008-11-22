@@ -25,7 +25,7 @@ SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS m4/gnulib-cache.m4
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-vaucanswig \
+DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-benchs --enable-vaucanswig \
   $(MORE_DISTCHECK_CONFIGURE_FLAGS)
 
 # Prevent accidental edition of generated files.

@@ -43,6 +43,10 @@ AC_PROG_AWK
 AC_ARG_ENABLE([demos],
 	[AC_HELP_STRING([--enable-demos], [build demos during "make all"])])
 AM_CONDITIONAL([ENABLE_DEMOS], [test "x$enable_demos" = "xyes"])
+AC_ARG_ENABLE([benchs],
+	[AC_HELP_STRING([--enable-benchs], 
+	                [build benchmarks during "make all"])])
+AM_CONDITIONAL([ENABLE_BENCHS], [test "x$enable_benchs" = "xyes"])
 
 
 ## ------------ ##

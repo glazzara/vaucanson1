@@ -1,9 +1,20 @@
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Only build benchmarks during distcheck, in the same way we do for
+	demos.  (#138)
+	
+	* configure.ac: Recognize --enable-benchs and define the
+	ENABLE_BENCHS conditional.	
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Use --enable-benchs during
+	distcheck.
+	* src/Makefile.am (SUBDIRS): Recurse in benchs/ conditionally.
+
+2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* src/benchs/generate_benchs.sh: Declare benchmarks
 	noinst_PROGRAMS, not EXTRA_PROGRAMS.  This way they will be
 	compiled even when they are not run and we can ensure they are
-	updated if the interface of the library changes.	
+	updated if the interface of the library changes.
 	* src/benchs/composition/Makefile.bench,
 	src/benchs/derived_terms/Makefile.bench,
 	src/benchs/determinization/Makefile.bench,
