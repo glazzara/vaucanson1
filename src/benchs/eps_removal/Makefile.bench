@@ -1,6 +1,6 @@
 # eps_removal/Makefile.bench				* -*- Makefile -*-
 
-benchs: $(EXTRA_PROGRAMS)
+benchs: $(noinst_PROGRAMS)
 	@echo '===================';				\
 	echo '|eps_removal bench|';				\
 	echo '===================';				\

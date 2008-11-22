@@ -1,6 +1,6 @@
 # composition/Makefile.bench				* -*- Makefile -*-
 
-benchs: $(EXTRA_PROGRAMS)
+benchs: $(noinst_PROGRAMS)
 	@echo '===================';				\
 	echo '|Composition bench|';				\
 	echo '===================';				\

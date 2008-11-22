@@ -1,6 +1,6 @@
 # minimization_2n/Makefile.bench				* -*- Makefile -*-
 
-benchs: $(EXTRA_PROGRAMS)
+benchs: $(noinst_PROGRAMS)
 	@echo '====================================';			\
 	echo '|Minimization bench - 2^n automaton|';			\
 	echo '====================================';			\

@@ -1,6 +1,6 @@
 # derived_terms/Makefile.bench				* -*- Makefile -*-
 
-benchs: $(EXTRA_PROGRAMS)
+benchs: $(noinst_PROGRAMS)
 	@echo '=====================';				\
 	echo '|Derived Terms bench|';				\
 	echo '=====================';				\

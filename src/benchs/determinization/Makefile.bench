@@ -1,9 +1,9 @@
 # determinization/Makefile.bench			* -*- Makefile -*-
 
-EXTRA_PROGRAMS += determinization_bench_fsm
+noinst_PROGRAMS += determinization_bench_fsm
 determinization_bench_fsm_SOURCES = determinization_bench_fsm.cc
 
-benchs: $(EXTRA_PROGRAMS)
+benchs: $(noinst_PROGRAMS)
 	@echo '=======================';				\
 	echo '|Determinization bench|';					\
 	echo '=======================';					\
