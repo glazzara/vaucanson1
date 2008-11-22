@@ -1,0 +1,11 @@
+# eps_removal/Makefile.bench				* -*- Makefile -*-
+
+benchs: $(EXTRA_PROGRAMS)
+	@echo '===================';				\
+	echo '|eps_removal bench|';				\
+	echo '===================';				\
+	for n_value in $$(seq 1 10); do				\
+	   n_value=$${n_value}0					\
+	   echo "----------------------For $${n_value}0:";	\
+	   ./eps_removal-bench $${n_value};			\
+	done

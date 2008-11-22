@@ -1,5 +1,15 @@
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Add missing bits so that "make benchs" works in eps_removal/.
+	
+	* src/benchs/eps_removal/Makefile.bench: New file.
+	* src/benchs/eps_removal/eps_removal_bench.hh: Define a CONTEXT.
+	* src/benchs/eps_removal/Makefile.am,
+	src/benchs/eps_removal/eps_removal-bench.cc: Remove from the
+	repository, they are automatically generated.
+
+2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Re-enable Vaucanswig
 	during distcheck.  Because we use bmig by default, compiling
 	vaucanswig (which uses listg) is a way to ensure that listg still

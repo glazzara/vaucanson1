@@ -15,6 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
+#define CONTEXT boolean_automaton
 
 #define CONTEXT_HEADER <vaucanson/CONTEXT.hh>
 
