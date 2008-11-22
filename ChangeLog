@@ -158,6 +158,14 @@
 	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh: Remove.
 	* taf-kit/src/edition_commands.hxx: .
 
+2008-11-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata.hxx,
+	include/vaucanson/algebra/implementation/alphabets/alphabet_set.hxx,
+	include/vaucanson/algebra/implementation/monoid/str_words.hxx: Add
+	missing semicolons after static assertions.  There absence
+	prevented the compilation of src/benchs/minimization_2n/.
+	
 2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* data/automata/char-z/Makefile.am,

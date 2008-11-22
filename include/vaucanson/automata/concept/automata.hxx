@@ -52,7 +52,7 @@ namespace vcsn {
   {
     // We can not project if the type does not support it.
     static_assertion_(not (misc::static_eq<first_projection_t,
-			   undefined_type>::value), need_first_projection)
+			   undefined_type>::value), need_first_projection);
 
     semiring_t semiring = aut.series().semiring();
     alphabet_t A = aut.series().monoid().alphabet();
@@ -80,7 +80,7 @@ namespace vcsn {
   {
     // We can not project if the type does not support it.
     static_assertion_(not (misc::static_eq<second_projection_t,
-			   undefined_type>::value), need_second_projection)
+			   undefined_type>::value), need_second_projection);
 
     semiring_t semiring = aut.series().semiring();
     alphabet_t A = aut.series().monoid().alphabet();
@@ -109,7 +109,7 @@ namespace vcsn {
   {
     // We can not project if the type does not support it.
     static_assertion_(not (misc::static_eq<first_projection_t,
-			   undefined_type>::value), need_first_projection)
+			   undefined_type>::value), need_first_projection);
 
     series_first_projection_t ret(series);
 
@@ -128,7 +128,7 @@ namespace vcsn {
   {
     // We can not project if the type does not support it.
     static_assertion_(not (misc::static_eq<second_projection_t,
-			   undefined_type>::value), need_second_projection)
+			   undefined_type>::value), need_second_projection);
 
     series_second_projection_t ret(series);
 
