@@ -31,12 +31,13 @@ namespace vcsn {
       hstate_t i = thequeue.front();
       thequeue.pop();
       for_all_letters(a, themonoid.alphabet()){
-        for (typename vcsn::boolean_automaton::automaton_t::delta_transition_iterator t(autom.value(), i);
+        for (vcsn::boolean_automaton::automaton_t::delta_iterator t(autom.value(), i);
              ! t.done();
              t.next())
         { // iterate over successors of i by *a
-          monoid_elt_t w(autom.series_of(*dst).structure().monoid(), *a);
-          if (autom.series_of(*dst).get(w) != autom.series().semiring().wzero_)
+          monoid_elt_t w(autom.series_of(*t).structure().monoid(), *a);
+          if (autom.series_of(*t).get(w) 
+	      != autom.series().semiring().zero(SELECT(semiring_elt_t::value_t)))
           {
             hstate_t j = autom.dst_of(*t);
             if (theword.find(j) == theword.end()){

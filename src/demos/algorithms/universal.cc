@@ -70,17 +70,6 @@ pstate_t image(const map_t& m)
   return ret;
 }
 
-// Return the union of set1 and set2.
-state_set_t union_structure(const state_set_t& set1, const state_set_t& set2)
-{
-  state_set_t tmp;
-  std::insert_iterator<state_set_t> i(tmp, tmp.begin());
-  std::set_union(set1.begin(), set1.end(),
-		 set2.begin(), set2.end(),
-		 i);
-  return tmp;
-}
-
 // Return true if a set1 \subset set2.
 template <class Container1, class Container2>
 bool includes(const Container1& set1, const Container2& set2)
@@ -139,20 +128,24 @@ automaton_t universal(const automaton_t& automaton)
     for_all_const(state_set_t, s, subset_label[*x])
     {
       bool empty = true;
-      for (typename automaton_t::delta_transition_iterator dst(automaton.value(), *s);
-           ! dst.done() && empty;
-           dst.next())
+      // FIXME: bmig complains "Assertion failed: has_state(s)" for
+      // the line below.
+      for (automaton_t::delta_iterator dst(automaton.value(), *s);
+           ! dst.done(); dst.next())
       {
         monoid_elt_t w(automaton.series_of(*dst).structure().monoid(), *a);
-        if (automaton.series_of(*dst).get(w) != automaton.series().semiring().wzero_)
-          empty = false;
+        if (automaton.series_of(*dst).get(w) 
+	    != automaton.series().semiring().zero(SELECT(semiring_elt_t::value_t)))
+	  {
+	    empty = false;
+	    delta_ret.insert(automaton.dst_of(*dst));
+	  }
       }
       if (empty)
       {
 	cont = true;
 	break;
       }
-      delta_ret = union_structure(delta_ret, delta_tmp);
     }
     // case 1: \exists p \in X, p.a = {}
     if (cont)

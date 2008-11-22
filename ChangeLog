@@ -1,5 +1,19 @@
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Try to fix things after r2485, but I'm not sure what I'm doing.
+	
+	* src/demos/algorithms/universal.cc (universal): Correct the code
+	from the removal of delta_tmp by inserting into delta_ret
+	directly, remove illegal typenames, use delta_iterator instead of
+	delta_transition_iterator.  Now the program compiles fine but it
+	makes an assertion failure.	
+	(union_structure): Remove, it is not used anymore.
+	* src/demos/one_rule_rewriting/shortest.hh (shortest): Remove
+	illegal typenames, fix some typos in variable names, use
+	delta_iterator instead of delta_transition_iterator
+
+2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Change all occurences of benchs and benches to either bench (in
 	filenames and targets) or benchmarks (in text).
 	
