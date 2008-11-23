@@ -50,8 +50,8 @@ namespace vcsn
 	SparseIterator& operator-- ();
 	SparseIterator	operator-- (int);
 	integer_t	operator* ();
-	bool		operator!= (const SparseIterator&);
-	bool		operator== (const SparseIterator&);
+	bool		operator!= (const SparseIterator&) const;
+	bool		operator== (const SparseIterator&) const;
 	SparseIterator& operator= (const SparseIterator&);
 
       private:

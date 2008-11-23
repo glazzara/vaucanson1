@@ -1,17 +1,25 @@
 2008-11-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hh,
+	include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx,
+	include/vaucanson/misc/sparse_interval.hh,
+	include/vaucanson/misc/sparse_interval.hxx (operator==, operator!=):
+	Declare as const methods.
+
+2008-11-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* src/bench/common/bench.mk: Include $(top_srcdir)/vaucanson.mk so
 	that we get Boost's flags.
 
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Try to fix things after r2485, but I'm not sure what I'm doing.
-	
+
 	* src/demos/algorithms/universal.cc (universal): Correct the code
 	from the removal of delta_tmp by inserting into delta_ret
 	directly, remove illegal typenames, use delta_iterator instead of
 	delta_transition_iterator.  Now the program compiles fine but it
-	makes an assertion failure.	
+	makes an assertion failure.
 	(union_structure): Remove, it is not used anymore.
 	* src/demos/one_rule_rewriting/shortest.hh (shortest): Remove
 	illegal typenames, fix some typos in variable names, use
@@ -21,18 +29,18 @@
 
 	Change all occurences of benchs and benches to either bench (in
 	filenames and targets) or benchmarks (in text).
-	
+
 	* Makefile.am, bootstrap, configure.ac, doc/manual/developer.tex,
 	src/Makefile.am: Adjust to the following renamings.
 	* src/benchs/Makefile.am: Rename to src/bench/Makefile.am
 	* src/benchs/common/Makefile.am: Rename to src/bench/common/Makefile.am
 	* src/benchs/common/alpha.syms: Rename to src/bench/common/alpha.syms
 	* src/benchs/common/bench.mk: Rename to src/bench/common/bench.mk
-	* src/benchs/common/bench_automaton.hh: Rename to 
+	* src/benchs/common/bench_automaton.hh: Rename to
 	src/bench/common/bench_automaton.hh
-	* src/benchs/common/bench_constructs.hh: Rename to 
+	* src/benchs/common/bench_constructs.hh: Rename to
 	src/bench/common/bench_constructs.hh
-	* src/benchs/composition/Makefile.bench: Rename to 
+	* src/benchs/composition/Makefile.bench: Rename to
 	src/bench/composition/Makefile.bench
 	* src/benchs/composition/normalized_composition_bench.hh: Rename to
 	src/bench/composition/normalized_composition_bench.hh
@@ -63,21 +71,21 @@
 	src/bench/iterators/iterator_bench.hh
 	* src/benchs/minimization_2n/Makefile.bench: Rename to
 	src/bench/minimization_2n/Makefile.bench
-	* src/benchs/minimization_2n/minimization_2n_brzozowski_bench.hh: 
+	* src/benchs/minimization_2n/minimization_2n_brzozowski_bench.hh:
 	Rename to src/bench/minimization_2n/minimization_2n_brzozowski_bench.hh
-	* src/benchs/minimization_2n/minimization_2n_hopcroft_bench.hh: Rename 
+	* src/benchs/minimization_2n/minimization_2n_hopcroft_bench.hh: Rename
 	to src/bench/minimization_2n/minimization_2n_hopcroft_bench.hh
 	* src/benchs/minimization_2n/minimization_2n_moore_bench.hh: Rename to
 	src/bench/minimization_2n/minimization_2n_moore_bench.hh
 	* src/benchs/minimization_debruijn/Makefile.bench: Rename to
 	src/bench/minimization_debruijn/Makefile.bench
-	* src/benchs/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh: 
+	* src/benchs/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh:
 	Rename to
 	src/bench/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh
-	* src/benchs/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh: 
+	* src/benchs/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh:
 	Rename to
 	src/bench/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh
-	* src/benchs/minimization_debruijn/minimization_debruijn_moore_bench.hh: 
+	* src/benchs/minimization_debruijn/minimization_debruijn_moore_bench.hh:
 	Rename to
 	src/bench/minimization_debruijn/minimization_debruijn_moore_bench.hh
 	* src/benchs/quotient/Makefile.bench: Rename to
@@ -91,9 +99,9 @@
 
 	Only build benchmarks during distcheck, in the same way we do for
 	demos.  (#138)
-	
+
 	* configure.ac: Recognize --enable-benchs and define the
-	ENABLE_BENCHS conditional.	
+	ENABLE_BENCHS conditional.
 	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Use --enable-benchs during
 	distcheck.
 	* src/Makefile.am (SUBDIRS): Recurse in benchs/ conditionally.
@@ -125,7 +133,7 @@
 2008-11-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Add missing bits so that "make benchs" works in eps_removal/.
-	
+
 	* src/benchs/eps_removal/Makefile.bench: New file.
 	* src/benchs/eps_removal/eps_removal_bench.hh: Define a CONTEXT.
 	* src/benchs/eps_removal/Makefile.am,
@@ -299,7 +307,7 @@
 	include/vaucanson/algebra/implementation/monoid/str_words.hxx: Add
 	missing semicolons after static assertions.  There absence
 	prevented the compilation of src/benchs/minimization_2n/.
-	
+
 2008-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* data/automata/char-z/Makefile.am,

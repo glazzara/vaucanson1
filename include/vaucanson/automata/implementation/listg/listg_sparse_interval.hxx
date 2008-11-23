@@ -88,7 +88,7 @@ namespace vcsn
     template <class T, class ExcludedContainer>
     bool
     SparseIterator<handler<T, unsigned>, ExcludedContainer>
-    ::operator!= (const SparseIterator& i)
+    ::operator!= (const SparseIterator& i) const
     {
       return i.integer_ != integer_;
     }
@@ -96,7 +96,7 @@ namespace vcsn
     template <class T, class ExcludedContainer>
     bool
     SparseIterator<handler<T, unsigned>, ExcludedContainer>
-    ::operator== (const SparseIterator& i)
+    ::operator== (const SparseIterator& i) const
     {
       return i.integer_ == integer_;
     }
