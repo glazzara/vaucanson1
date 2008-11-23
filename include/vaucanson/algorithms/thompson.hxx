@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 
@@ -89,9 +90,7 @@ namespace vcsn {
       {
 	node->accept(*this);
 
-	typedef typename automaton_t::hstate_t	hstate_t;
-	typedef typename automaton_t::initial_iterator initial_iterator;
-	typedef typename automaton_t::final_iterator final_iterator;
+	AUTOMATON_TYPES(automaton_t);
 
 	hstate_t new_i = auto_->add_state();
 	hstate_t new_f = auto_->add_state();
@@ -117,9 +116,7 @@ namespace vcsn {
       {
 	node->accept(*this);
 
-	typedef typename automaton_t::hstate_t	hstate_t;
-	typedef typename automaton_t::initial_iterator initial_iterator;
-	typedef typename automaton_t::final_iterator final_iterator;
+	AUTOMATON_TYPES(automaton_t);
 
 	hstate_t new_i = auto_->add_state();
 	hstate_t new_f = auto_->add_state();

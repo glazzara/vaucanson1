@@ -39,7 +39,7 @@ namespace vcsn {
   {
     typedef Element<A, AI1> lhs_t;
     typedef Element<A, AI2> rhs_t;
-    typedef typename rhs_t::state_iterator state_iterator;
+    AUTOMATON_TYPES(rhs_t);
 
     /*--------------.
     | Sum of states |

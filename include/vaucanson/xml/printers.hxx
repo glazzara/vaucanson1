@@ -59,10 +59,7 @@ namespace vcsn
     void
     AutPrinter<Auto>::print (std::ostream& out)
     {
-      typedef typename Auto::state_iterator state_iterator;
-      typedef typename Auto::transition_iterator transition_iterator;
-      typedef typename Auto::initial_iterator initial_iterator;
-      typedef typename Auto::final_iterator final_iterator;
+      AUTOMATON_TYPES(Auto);
       using namespace xercesc;
 
       state2str_.clear();

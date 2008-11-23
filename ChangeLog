@@ -1,5 +1,14 @@
 2008-11-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/sum.hxx,
+	include/vaucanson/algorithms/thompson.hxx,
+	include/vaucanson/xml/printers.hxx: Call AUTOMATON_TYPES before
+	calling for_all_const_states, for_all_const_initial_states,
+	for_all_const_final_states, for_all_states, for_all_transitions,
+	for_all_initial_states, or for_all_final_states.
+
+2008-11-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hh,
 	include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx,
 	include/vaucanson/misc/sparse_interval.hh,
