@@ -102,9 +102,7 @@ done
 ## ----------- ##
 
 # Context headers tests.
-# FIXME: the consitency check is not generic w.r.t. the automaton type.
-# (it does not work for char_char_boolean and int_int_boolean)
-for kind in boolean int_boolean r z z_max_plus z_min_plus
+for kind in boolean int_boolean r z z_max_plus z_min_plus char_char_boolean int_int_boolean
 do
   generate \
       context_headers_${kind} \
