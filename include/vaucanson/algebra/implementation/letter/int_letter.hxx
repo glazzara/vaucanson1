@@ -50,6 +50,12 @@ namespace vcsn
       literal_to_letter(const std::string& str)
       {
 	std::stringstream sstr(str);
+
+	// Disallow a leading '+' because it would be too confusing:
+	// would '2+4' mean '2#+4' or '(2)+(4)'?
+	if (str[0] == '+')
+	  return std::make_pair(false, 0);
+
 	int ret = 0;
 	sstr >> ret;
 
