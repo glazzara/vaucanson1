@@ -113,18 +113,31 @@ namespace vcsn
       bool
       lex()
       {
-	size_t curr = 0;
 	size_t size = from_.size();
-	size_t it = curr;
+	size_t it = 0;
 	while (it < size)
 	{
-	  for (size_t i = 0; i < token_tab_.size(); i++)
+	  // Try to recognize a word.
+	  monoid_elt_t w(e_.structure().monoid());
+	  std::pair<bool, int> res = parse_word(w, from_.substr(it));
+	  if (res.second > 0)
+	    {
+	      insert_word(w);
+	      // If the entire input was a word there is nothing else to lex.
+	      if (res.first)
+		{
+		  assertion(it + res.second == size);
+		  break;
+		}
+	      it += res.second;
+	    }
+
+	  // Try to recognize a regex token.
+	  size_t i;
+	  for (i = 0; i < token_tab_.size(); i++)
 	  {
 	    if (!from_.compare(it, token_tab_[i].size(), token_tab_[i]))
 	    {
-	      if (curr != it)
-		if (!insert_word(curr, it))
-		  return false;
 	      if (i == 6)
 	      {
 		if (!insert_weight(it))
@@ -136,40 +149,29 @@ namespace vcsn
 		  insert_token(i);
 		it += token_tab_[i].size();
 	      }
-	      curr = it--;
 	      break;
 	    }
 	  }
-	  it++;
+	  if (i >= token_tab_.size())
+	    {
+	      error_ += "Lexer error, unrecognized characters: "
+		+ from_.substr(it) + "\n";
+	      return false;
+	    }
 	}
-	if (curr != it)
-	  if (!insert_word(curr, it))
-	    return false;
 	return true;
       }
 
       private:
-      bool
-      insert_word(size_t curr, size_t it)
+      void
+      insert_word(monoid_elt_t& w)
       {
-	monoid_elt_t w(e_.structure().monoid());
-	std::string s = from_.substr(curr, it - curr);
-	if (parse_word(w, s).first)
-	{
-	  Element<S, T> ww = (w.value().empty() ?
-			      identity_as<T>::of(e_.structure()) :
-			      Element<S, T>(e_.structure(), w.value()));
+	Element<S, T> ww = (w.value().empty() ?
+			    identity_as<T>::of(e_.structure()) :
+			    Element<S, T>(e_.structure(), w.value()));
 
-	  krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(ww);
-	  parser_.insert_word(rexp);
-	}
-	else
-	{
-	  error_ += "Lexer error : " + s
-		    + " some characters are not part of the alphabet\n";
-	  return false;
-	}
-	return true;
+	krat_exp_proxy<S, T>* rexp = new krat_exp_proxy<S, T>(ww);
+	parser_.insert_word(rexp);
       }
 
       bool

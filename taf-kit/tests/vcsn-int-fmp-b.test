@@ -23,7 +23,8 @@ $VCSN intersection $int_b > int-b-b.xml
 res=`$VCSN eval --parser1='ONE=e ZERO=O' int-b-b.xml 11`
 test "x$res" = x11
 
-fail255 $VCSN eval --parser1='ONE=e ZERO=0' int-b-b.xml '10#11'
+res=`$VCSN eval --parser1='ONE=e ZERO=0' int-b-b.xml '10#11'`
+test "x$res" = x10.11
 
 res=`$VCSN eval --parser1='ONE=e ZERO=O' int-b-b.xml 10#11`
 test "x$res" = x10.11

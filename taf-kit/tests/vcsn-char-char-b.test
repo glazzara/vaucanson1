@@ -19,5 +19,7 @@ set -e
 
 VCSN=vcsn-char-char-b
 
-# Check for the executable existence.
-$VCSN --usage
+        $VCSN --alphabet='(a,b)(a,c)(b,c)' thompson '(a,b)+(b,c)(a,c)*'
+fail255 $VCSN --alphabet='(a,b)(a,c)(b,c)' thompson '(a,b)+(b,c)(c,c)*'
+res=`$VCSN --alphabet='(a,b)(a,c)(b,c)' identity-exp '((a,b)+(b,c)1)*1(a,c)'`
+test $res = '((a,b)+(b,c))*.(a,c)'

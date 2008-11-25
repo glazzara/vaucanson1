@@ -1,5 +1,17 @@
 2008-11-24  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+	(lex, insert_word): Rewrite to first recognize the largest word
+	possible, and then match other token.  This is the reverse of was
+	was done before, and it was a hindrance: 21#34 would not be
+	parsed if 1 was the empty word, '(a,b)' would not be recognized as
+	a letter in an alphabet of pairs because the parser would first
+	strip the parenthesis and then try to parse 'a,b' as a word.
+	* taf-kit/tests/vcsn-int-b.test: Adjust a test.
+	* taf-kit/tests/vcsn-char-char-b.test: Add some tests.
+
+2008-11-24  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/monoid/str_words.hxx
 	(op_parse): Rewrite and comment.
 	* taf-kit/tests/vcsn-int-b.test: Add some tests.
