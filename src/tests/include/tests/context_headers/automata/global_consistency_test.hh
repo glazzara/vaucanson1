@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -48,20 +48,19 @@ global_consistency_test(tests::Tester& t)
 
   bool			test_done = false;
 
-  // FIXME: each context should have its own test
   alphabet_t		at;
-  at.insert('a');
-  at.insert('b');
+  letter_t l1 = at.random_letter();
+  letter_t l2 = at.random_letter();
+  while (l1 == l2) l2 = at.random_letter();
+  at.insert(l1);
+  at.insert(l2);
 
-  std::string rat_exp_str = misc::static_if<
-  misc::static_eq<alphabet_t::letter_t, int>::value,
-  std::string,
-  std::string>::choose("97+98",
-		       "a+b");
+  std::ostringstream ostr;
+  ostr << l1 << "+" << l2;
 
   alphabet_t		other_at;
-  at.insert('c');
-  at.insert('d');
+  at.insert(at.random_letter());
+  at.insert(at.random_letter());
 
   monoid_t		md (at);
   semiring_t		sg;
@@ -70,17 +69,20 @@ global_consistency_test(tests::Tester& t)
 
   rat_exp_t		e (ss);
   rat_exp_t		f = make_rat_exp(at);
-  rat_exp_t		g = make_rat_exp(at, rat_exp_str);
+  rat_exp_t		g = make_rat_exp(at, ostr.str());
   TEST(t, "make_rat_exp works. [1/3]", e == f);
   TEST(t, "make_rat_exp works. [2/3]", g != f);
 
   rat_exp_t::support_t			s = g.supp();
   rat_exp_t::support_t::const_iterator	i = s.begin();
-  std::basic_string<letter_t> refa, refb;
-  refa += 'a';
-  refb += 'b';
+  std::basic_string<letter_t> refa, refb, resa, resb;
+  refa += l1;
+  refb += l2;
+  resa = *i;
+  resb = *++i;
   TEST(t, "make_rat_exp works. [3/3]",
-       s.size() == 2 and *i == refa and *(++i) == refb);
+       s.size() == 2 and ((resa == refa and resb == refb) or
+			  (resa == refb and resb == refa)));
 
   while (not test_done)
     try
