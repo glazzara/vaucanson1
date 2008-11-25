@@ -1,5 +1,12 @@
 2008-11-24  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/automata/implementation/listg/listg_sparse_interval.hxx:
+	Fix handling of empty containers.  The change I made on 2008-11-12
+	was wrong and caused many failures with "make check" was run on
+	the listg implementation.
+
+2008-11-24  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Introduce --with-default-graph-impl=... to replace
 	CPPFLAGS=-DWITH_DEFAULT_GRAPH_IMPL=... that do not work anymore
 	bcause TAF-Kit includes config.h which hardcodes

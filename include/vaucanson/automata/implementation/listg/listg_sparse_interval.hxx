@@ -17,6 +17,8 @@
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_SPARSE_INTERVAL_HXX
 # define VCSN_AUTOMATA_IMPLEMENTATION_LISTG_LISTG_SPARSE_INTERVAL_HXX
 
+#include <vaucanson/misc/limits.hh>
+
 namespace vcsn
 {
   namespace misc
@@ -120,7 +122,7 @@ namespace vcsn
 
 
     /// SparseInterval is a const adapter of a 3-uple :
-    /// (from, begin, excluded).
+    /// (from, to, excluded).
     /// SparseInterval verifies the container concept.
     template <class T, class ExcludedContainer>
     SparseInterval<handler<T, unsigned>, ExcludedContainer>
@@ -131,7 +133,8 @@ namespace vcsn
     {
       precondition (from_ <= to_ + 1);
       precondition (excluded_.find (handler_t(to_ + 1)) == excluded_.end ());
-      precondition (to_ - from_ + 1 > excluded_.size());
+      precondition ((to_ == limits<unsigned int>::max())
+		    || (to_ + 1 - from_ >= excluded_.size()));
     }
 
     template <class T, class ExcludedContainer>
@@ -147,7 +150,10 @@ namespace vcsn
     unsigned
     SparseInterval<handler<T, unsigned>, ExcludedContainer>::size () const
     {
-      return to_ - from_ + 1 - excluded_.size ();
+      // to_ is equal to limits<unsigned int>::max() if the container
+      // is empty.  See for instance GClass::states() or GClass::edges().
+      return to_ == limits<unsigned int>::max() ? 0
+	: to_ - from_ + 1 - excluded_.size ();
     }
 
     template <class T, class ExcludedContainer>
