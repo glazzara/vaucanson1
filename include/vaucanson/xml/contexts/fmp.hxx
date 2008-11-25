@@ -167,12 +167,12 @@ namespace vcsn
 	const std::string val(xmlstr(tools::get_attribute(attrs, "value")));
 	if (in_ == 2 && count_ == 2)
 	{
-	  if (!parse_word(m1_, val))
+	  if (!parse_word(m1_, val).first)
 	    error::attrs(localname, "value", val);
 	}
 	else if (in_ == 2 && count_ == 3)
 	{
-	  if (!parse_word(m2_, val))
+	  if (!parse_word(m2_, val).first)
 	    error::attrs(localname, "value", val);
 	}
 	else

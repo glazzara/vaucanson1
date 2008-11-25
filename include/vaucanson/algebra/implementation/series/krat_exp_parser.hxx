@@ -103,7 +103,7 @@ namespace vcsn
 	for (unsigned i = 0; i < token_tab_.size(); i++)
 	{
 	  monoid_elt_t w(e_.structure().monoid());
-	  if (parse_word(w, token_tab_[i]))
+	  if (parse_word(w, token_tab_[i]).first)
 	    error_ +=  "Warning : the token '" + token_tab_[i]
 		       + "' is already defined as a word.\n";
 	}
@@ -154,7 +154,7 @@ namespace vcsn
       {
 	monoid_elt_t w(e_.structure().monoid());
 	std::string s = from_.substr(curr, it - curr);
-	if (parse_word(w, s))
+	if (parse_word(w, s).first)
 	{
 	  Element<S, T> ww = (w.value().empty() ?
 			      identity_as<T>::of(e_.structure()) :

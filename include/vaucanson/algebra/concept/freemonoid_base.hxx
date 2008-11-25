@@ -152,7 +152,7 @@ namespace vcsn {
   }
 
   template <typename S, typename T>
-  bool
+  std::pair<bool, int>
   parse_word(Element<S, T>& dest,
 	     const std::string& s)
   {
@@ -185,12 +185,13 @@ namespace vcsn {
     `------------------*/
 
     template <typename S, typename T>
-    bool op_parse(const algebra::FreeMonoidBase<S>&,
-		  T& v,
-		  const std::string& s)
+    std::pair<bool, int>
+    op_parse(const algebra::FreeMonoidBase<S>&,
+	     T& v,
+	     const std::string& s)
     {
       static_error(no_op_parse_operator_available);
-      return false;
+      return std::make_pair(false, 0);
     }
 
     template <typename Self, typename T>

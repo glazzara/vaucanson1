@@ -33,7 +33,7 @@ namespace vcsn {
     `-----------------------------------------------*/
 
     template <typename A>
-    bool
+    std::pair<bool, int>
     op_parse(const FreeMonoid<A>& s,
 	     std::basic_string<typename A::letter_t>& v,
 	     const std::string& in);

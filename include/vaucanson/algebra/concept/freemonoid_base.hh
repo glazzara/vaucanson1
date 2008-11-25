@@ -156,9 +156,13 @@ namespace vcsn {
   Element<S, T>
   mirror(const Element<S, T>& e);
 
-  /// Parse the beginning of the string looking for a word.
+  /** @brief Parse the beginning of the string looking for a word.
+   *
+   *  Return a pair indicating whether the source string was fully
+   *  parsed and how much characters were read.
+   */
   template <typename S, typename T>
-  bool
+  std::pair<bool, int>
   parse_word(Element<S, T>& dest,
 	     const std::string& s);
 
@@ -168,8 +172,9 @@ namespace vcsn {
   namespace algebra {
 
     template <typename S, typename T>
-    bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v,
-		  const std::string&);
+    std::pair<bool, int>
+    op_parse(const algebra::FreeMonoidBase<S>& s, T& v,
+	     const std::string&);
 
     template<typename Self, typename T>
     void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);

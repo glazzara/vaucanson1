@@ -27,14 +27,14 @@ namespace vcsn {
   namespace algebra {
 
     template <typename A>
-    bool
+    std::pair<bool, int>
     op_parse(const FreeMonoid<A>& s,
 	     std::basic_string<typename A::letter_t>& v,
 	     const std::string& in)
     {
       int last_op = 0;
-
-      for (size_t i = 0; i < in.size();)
+      size_t i;
+      for (i = 0; i < in.size();)
 	if (!in.compare(i, s.representation()->empty.size(), s.representation()->empty))
 	{
 	  last_op = 1;
@@ -45,7 +45,7 @@ namespace vcsn {
 	      !in.compare(i, s.representation()->concat.size(), s.representation()->concat))
 	  {
 	    if (last_op == 0 || last_op == 2)
-	      return false;
+	      return std::make_pair(false, i);
 	    last_op = 2;
 	    i += s.representation()->concat.size();
 	  }
@@ -54,10 +54,10 @@ namespace vcsn {
 	    last_op = 3;
 	    std::pair<bool, typename A::letter_t> letter = op_parse(s.alphabet().structure(), s.alphabet().value(), in, i);
 	    if (!letter.first)
-	      return (letter.first);
+	      return std::make_pair(false, i);
 	    v.push_back(letter.second);
 	  }
-      return (last_op != 2);
+      return std::make_pair(last_op != 2, i);
     }
 
     template<typename A>
