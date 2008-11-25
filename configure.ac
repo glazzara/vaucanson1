@@ -25,6 +25,22 @@ AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 VCSN_PRE_RELEASE
 
+# Check the default graph implementation near the top, this way we can
+# quickly react to incorrect values.
+ac_default_graph_impl=bmig
+AC_ARG_WITH([default-graph-impl],
+  [AC_HELP_STRING([--with-default-graph-impl@<:@=IMPL@:>@],
+     [choose default graph implementation: bmig (default) or listg])],
+     [ac_default_graph_impl="$withval"],[])
+
+AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [$ac_default_graph_impl],
+		   [Default graph implementation.])
+
+case $ac_default_graph_impl in
+  listg|bmig);;
+  *) AC_ERROR([Unknown graph implementation: $ac_default_graph_impl]);;
+esac
+
 # Some C and C++ code used.
 AC_PROG_CXX
 AC_PROG_CC
@@ -44,7 +60,7 @@ AC_ARG_ENABLE([demos],
 	[AC_HELP_STRING([--enable-demos], [build demos during "make all"])])
 AM_CONDITIONAL([ENABLE_DEMOS], [test "x$enable_demos" = "xyes"])
 AC_ARG_ENABLE([bench],
-	[AC_HELP_STRING([--enable-bench], 
+	[AC_HELP_STRING([--enable-bench],
 	                [build benchmarks during "make all"])])
 AM_CONDITIONAL([ENABLE_BENCH], [test "x$enable_bench" = "xyes"])
 
@@ -152,9 +168,6 @@ AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"],
 # XML namespace.
 AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
 		   [Root of the XML namespace.])
-
-AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [bmig],
-		   [Default graph implementation.])
 
 
 ## --------------- ##

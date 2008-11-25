@@ -52,11 +52,21 @@ Usage issues
 How can I choose a specific graph implementation?
 -------------------------------------------------
 
-The flag ``VCSN_DEFAULT_GRAPH_IMPL`` can be set to the chosen
-implementation. To use this flag with the script ``configure``, call
-it with::
+Use ``configure``'s ``--with-default-graph-impl`` option to control
+the default graph implementation of the library.  The default is
+``bmig`` (a graph represented using Boost Multi Indexes), the other
+choice is ``listg`` (a graph represented using adjacency lists).  For
+instance if you want to compile Vaucanson using ``listg`` by default,
+use::
 
-    configure CPPFLAGS='-DVCSN_DEFAULT_GRAPH_IMPL=bmig'
+  ./configure --with-default-graph-impl=listg
+
+The Vaucanson libraries will be compiled with this default
+implementation, but if you do not use these libraries you can switch
+the default graph implementation at any time using the
+``VCSN_DEFAULT_GRAPH_IMPL`` preprocessor macro, for instance::
+
+  make CPPFLAGS=-DVCSN_DEFAULT_GRAPH_IMPL=listg myprogram
 
 .. Local Variables:
 .. mode: rst
