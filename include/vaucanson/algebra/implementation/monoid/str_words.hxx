@@ -32,32 +32,51 @@ namespace vcsn {
 	     std::basic_string<typename A::letter_t>& v,
 	     const std::string& in)
     {
-      int last_op = 0;
+      if (in.empty())
+	return std::make_pair(true, 0);
+
+      std::string& empty = s.representation()->empty;
+      int empty_size = empty.size();
+      std::string& concat = s.representation()->concat;
+      int concat_size = concat.size();
+      bool last_token_is_letter = false;
+
       size_t i;
       for (i = 0; i < in.size();)
-	if (!in.compare(i, s.representation()->empty.size(), s.representation()->empty))
 	{
-	  last_op = 1;
-	  i += s.representation()->empty.size();
+	  // Is this a concatenation symbol?
+	  if ((concat_size > 0) && !in.compare(i, concat_size, concat))
+	    {
+	      if (!last_token_is_letter)
+		return std::make_pair(false, i);
+	      i += concat_size;
+	      last_token_is_letter = false;
+	      continue;
+	    }
+
+	  //// We could make the use of the concatenation symbol
+	  //// mandatory with the following two lines.
+	  // if (last_token_is_letter && concat_size > 0)
+	  //   return std::make_pair(false, i);
+
+	  // Is this the empty word?
+	  if (!in.compare(i, empty_size, empty))
+	    {
+	      i += empty_size;
+	      last_token_is_letter = true;
+	      continue;
+	    }
+
+	  // Finally try to read a real letter.
+	  // Note that op_parse will update i.
+	  std::pair<bool, typename A::letter_t> letter =
+	    op_parse(s.alphabet().structure(), s.alphabet().value(), in, i);
+	  if (!letter.first)
+	    return std::make_pair(false, i);
+	  v.push_back(letter.second);
+	  last_token_is_letter = true;
 	}
-	else
-	  if (!s.representation()->concat.empty() &&
-	      !in.compare(i, s.representation()->concat.size(), s.representation()->concat))
-	  {
-	    if (last_op == 0 || last_op == 2)
-	      return std::make_pair(false, i);
-	    last_op = 2;
-	    i += s.representation()->concat.size();
-	  }
-	  else
-	  {
-	    last_op = 3;
-	    std::pair<bool, typename A::letter_t> letter = op_parse(s.alphabet().structure(), s.alphabet().value(), in, i);
-	    if (!letter.first)
-	      return std::make_pair(false, i);
-	    v.push_back(letter.second);
-	  }
-      return std::make_pair(last_op != 2, i);
+      return std::make_pair(last_token_is_letter, i);
     }
 
     template<typename A>

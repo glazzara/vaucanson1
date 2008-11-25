@@ -104,6 +104,21 @@ $VCSN are-equivalent p.xml pdm.xml
 $VCSN are-equivalent p.xml pq.xml
 $VCSN are-equivalent pdm.xml pq.xml
 
+# These weird tests show some features of the parser.
+# (1) Integers may have leading zeros (010 is the same as 10)
+#     but not trailing zeros (100 is tokenized as 10.0=0 if there is only
+#     10 in the alphabet)
+# (2) Integers may be negatives.
+# (3) Words are preferred over other tokens.
+#     For instance 010010 would be tokenized as 10#10 or 100#10, but not
+#     10.0.10 even though 0 is a valid token.
+# (4) The parser for words is greedy, and the # operator can be used
+#     to disambiguate.
+r=`$VCSN --alphabet=10,-5 --parser=ZERO=0 identity-exp '10e010010#010+100-5'`
+test "$r" = '10#10#10#10'
+r=`$VCSN --alphabet=10,100,-5 --parser=ZERO=0 identity-exp '10e010010#010+100-5'`
+test "$r" = '10#100#10#10+100#-5'
+
 # --alphabet is required for defined-automaton; make sure
 # the error message points the user to that option.
 $VCSN edit-automaton x.xml 2>stderr && exit 1
