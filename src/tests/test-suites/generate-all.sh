@@ -133,7 +133,7 @@ done
 ## Boolean RW_Transducer.  ##
 ## ----------------------- ##
 
-for kind in boolean
+for kind in boolean int_boolean
 do
   generate \
       context_headers_${kind}_transducer \
@@ -150,7 +150,7 @@ done
 ## Z Transducer.  ##
 ## -------------- ##
 
-for kind in z
+for kind in z int_z
 do
   generate \
       context_headers_${kind}_transducer \
@@ -168,7 +168,7 @@ done
 
 
 # How come there is no explicit name here?
-for kind in "" "z_"
+for kind in "" z_ int_ int_z_
 do
   generate \
       context_headers_${kind}fmp_transducer \

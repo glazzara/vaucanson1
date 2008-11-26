@@ -1,0 +1,14 @@
+#include <vaucanson/int_z_transducer.hh>
+#include <vaucanson/int_z_automaton.hh>
+
+#define TEST_STATIC_ARGS \
+   vcsn::int_z_transducer::automaton_t
+
+namespace rw_transducer = vcsn::int_z_transducer;
+namespace automaton = vcsn::int_z_automaton;
+
+#ifdef CREATE_SEMIRING
+# undef CREATE_SEMIRING
+# define CREATE_SEMIRING(m) \
+   automaton::semiring_t(), m
+#endif

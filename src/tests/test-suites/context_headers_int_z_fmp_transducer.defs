@@ -1,0 +1,5 @@
+#include <vaucanson/int_z_fmp_transducer_structures.hh>
+
+using namespace vcsn::int_z_fmp_transducer;
+
+#define TEST_STATIC_ARGS automaton_t

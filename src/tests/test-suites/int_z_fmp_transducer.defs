@@ -1,0 +1,14 @@
+#include <vaucanson/int_z_automaton_structures.hh>
+#include <vaucanson/int_z_transducer_structures.hh>
+#include <vaucanson/int_z_fmp_transducer_structures.hh>
+
+#define TEST_STATIC_ARGS \
+   vcsn::int_z_fmp_transducer::automaton_t
+
+namespace rw_transducer = vcsn::int_z_transducer;
+namespace fmp = vcsn::int_z_fmp_transducer;
+namespace automaton = vcsn::int_z_automaton;
+
+#include <vaucanson/algorithms/fmp_to_rw.hh>
+#include <vaucanson/algorithms/equivalent.hh>
+#include <vaucanson/algorithms/internal/evaluation.hh>

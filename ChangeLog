@@ -1,3 +1,18 @@
+2008-11-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* src/tests/test-suites/context_headers_int_boolean_transducer.defs,
+	src/tests/test-suites/context_headers_int_fmp_transducer.defs,
+	src/tests/test-suites/context_headers_int_z_fmp_transducer.defs,
+	src/tests/test-suites/context_headers_int_z_transducer.defs,
+	src/tests/test-suites/int_boolean_transducer.defs,
+	src/tests/test-suites/int_fmp_transducer.defs,
+	src/tests/test-suites/int_z_fmp_transducer.defs,
+	src/tests/test-suites/int_z_transducer.defs: New files.
+	* src/tests/test-suites/generate-all.sh: Adjust to generate test
+	suites for all the above.
+	* src/tests/test-suites/boolean_transducer.defs: Equip with
+	automaton and rw_transducer namespaces.
+
 2008-11-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Rewrite some tests so they can be used with int letters.
