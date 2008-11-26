@@ -112,15 +112,13 @@ all_test=$(find_tests test $test_dirs)
 all_failcomp=$(find_tests failcomp $test_dirs)
 
 # For each header file in $1, this function generates a corresponding .cc
-# file which includes a license, the .def definitions, a inclusion to the
-# header file and a main() function.
+# file which includes a license, the .defs definitions, the test
+# header file, and a main() function.
 #
-# All the header files in $1 must be ended with a common suffix given to this
-# function in $2.
+# All the header files in $1 must end with a common suffix given as $2.
 #
-# As another output, this function prints a space separated list with the names
-# of the generated .cc files, without the extension.
-#
+# This function also prints a space separated list of all the
+# generated .cc files, without the extension.
 generate_CCs()
 {
   local tests="$1"
@@ -148,14 +146,12 @@ generate_CCs()
 #include <cassert>
 #include <vaucanson/design_pattern/design_pattern.hh>
 #define CREATE_SEMIRING(m)
-EOF
 
-    # Include headers inclusion.
-    cat $description_file >> "$tmp_cc"
+EOF
 
     # Include "main".
     cat >> "$tmp_cc" <<EOF
-
+#include <$description_file>
 #include <tests/check/tester.hh>
 #include <$name_test_file>
 

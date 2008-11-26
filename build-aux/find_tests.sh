@@ -11,24 +11,25 @@ tests ()
 
 subdirs ()
 {
-  echo >>$subdirs_mk.tmp "$@"
+  echo -n >>$subdirs_mk.tmp "$@"
 }
 
 
 rm -f $tests_m4.tmp $subdirs_mk.tmp
 
-tests "# Vaucanson test suite.                    -*- Autoconf -*-"
-subdirs "## Vaucanson test suite."
+tests "# Vaucanson test suite.                    -*- Autoconf -*-
+AC_CONFIG_FILES(["
+subdirs "## Vaucanson test suite.
+TEST_SUBDIRS = "
 
-tests "AC_CONFIG_FILES(["
-subdirs "SUBDIRS = \\"
 # We are interested in directories that have a .defs file.
 for i in src/tests/test-suites/*
 do
   if test -f $i.defs; then
       if test -d $i; then
 	  tests   "  $i/Makefile"
-	  subdirs "$(basename $i) \\"
+	  subdirs " \\
+  $(basename $i)"
       else
 	  echo >&2 "$0: warning: defs without a directory: $i"
 	  pass=false
@@ -36,7 +37,10 @@ do
   fi
 done
 tests "])"
-subdirs "  ."
+subdirs '
+SUBDIRS = $(TEST_SUBDIRS) .
+EXTRA_DIST = $(SUBDIRS:=.defs)
+'
 
 if $pass; then
   build-aux/move-if-change $tests_m4.tmp $tests_m4

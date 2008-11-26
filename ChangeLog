@@ -1,3 +1,14 @@
+2008-11-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* src/tests/check/check-flags.mk (AM_CPPFLAGS): Search $(srcdir)/..
+	* src/tests/bin/generate-test-suite.sh (all_failcomp): Do not
+	"cat" the defs file, include it. This way we get dependency
+	tracking on this file for free an we can change a defs files
+	without having to regenerate the whole test suite.
+	* build-aux/find_tests.sh: EXTRA_DIST the defs files.
+	* src/tests/test-suites/Makefile.am (EXTRA_DIST): Append to this
+	variable which is now defined in subdirs.mk.
+
 2008-11-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* src/tests/test-suites/generate-all.sh: Factor the two loops,
