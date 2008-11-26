@@ -39,7 +39,7 @@ done
 tests "])"
 subdirs '
 SUBDIRS = $(TEST_SUBDIRS) .
-EXTRA_DIST = $(SUBDIRS:=.defs)
+EXTRA_DIST = $(TEST_SUBDIRS:=.defs)
 '
 
 if $pass; then
