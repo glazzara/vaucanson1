@@ -32,20 +32,39 @@ is_subnormalized_test(tests::Tester& t)
   typedef typename first_monoid_t::alphabet_t	first_alphabet_t;
   typedef typename second_monoid_t::alphabet_t	second_alphabet_t;
 
-  // First alphabet.
-  first_alphabet_t A;
+  typedef typename first_alphabet_t::set_t::letter_t	first_letter_t;
+  typedef typename second_alphabet_t::set_t::letter_t	second_letter_t;
 
-  A.insert('a');
-  A.insert('b');
+  first_alphabet_t		first_at;
+  first_letter_t a = first_at.random_letter();
+  first_letter_t b = first_at.random_letter();
+  while (a == b) b = first_at.random_letter();
+  first_at.insert(a);
+  first_at.insert(b);
 
-  // Second alphabet.
-  second_alphabet_t B;
+  second_alphabet_t		second_at;
+  second_letter_t x = second_at.random_letter();
+  second_letter_t y = second_at.random_letter();
+  while (x == y) y = second_at.random_letter();
+  second_at.insert(x);
+  second_at.insert(y);
 
-  B.insert('x');
-  B.insert('y');
+  typedef std::basic_string<first_letter_t> first_word_t;
+  typedef std::basic_string<second_letter_t> second_word_t;
+
+  first_word_t word1_a;
+  word1_a += a;
+  first_word_t word1_ab(word1_a);
+  word1_ab += b;
+  first_word_t word1_empty;
+  second_word_t word2_x;
+  word2_x += x;
+  second_word_t word2_xy(word2_x);
+  word2_xy += y;
+  second_word_t word2_empty;
 
   // Construct our test automaton.
-  fmp::automaton_t aut = fmp::make_automaton(A, B);
+  fmp::automaton_t aut = fmp::make_automaton(first_at, second_at);
 
   hstate_t p = aut.add_state();
   hstate_t q = aut.add_state();
@@ -59,15 +78,15 @@ is_subnormalized_test(tests::Tester& t)
   series_set_elt_t s##str (aut.structure().series()); \
   s##str .assoc( x##str , true)
 
-  MAKE_SERIES(00, "", "");
-  MAKE_SERIES(01, "", "x");
-  MAKE_SERIES(02, "", "xy");
-  MAKE_SERIES(10, "a", "");
-  MAKE_SERIES(11, "a", "x");
-  MAKE_SERIES(12, "a", "xy");
-  MAKE_SERIES(20, "ab", "");
-  MAKE_SERIES(21, "ab", "x");
-  MAKE_SERIES(22, "ab", "xy");
+  MAKE_SERIES(00, word1_empty, word2_empty);
+  MAKE_SERIES(01, word1_empty, word2_x);
+  MAKE_SERIES(02, word1_empty, word2_xy);
+  MAKE_SERIES(10, word1_a, word2_empty);
+  MAKE_SERIES(11, word1_a, word2_x);
+  MAKE_SERIES(12, word1_a, word2_xy);
+  MAKE_SERIES(20, word1_ab, word2_empty);
+  MAKE_SERIES(21, word1_ab, word2_x);
+  MAKE_SERIES(22, word1_ab, word2_xy);
 
 # undef MAKE_SERIES
 

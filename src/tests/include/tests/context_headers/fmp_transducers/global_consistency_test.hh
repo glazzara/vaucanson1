@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -46,23 +46,44 @@ global_consistency_test(tests::Tester& t)
   TEST_TYPE(series_set_t, series_set_t);
   TEST_TYPE(automata_set_t, set_t);
 
+  AUTOMATON_TYPES(Automaton);
+  typedef typename monoid_t::first_monoid_t	first_monoid_t;
+  typedef typename monoid_t::second_monoid_t	second_monoid_t;
+  typedef typename first_monoid_t::alphabet_t	first_alphabet_t;
+  typedef typename second_monoid_t::alphabet_t	second_alphabet_t;
+
   bool			test_done = false;
 
-  first_alphabet_t	first_at;
-  first_at.insert('a');
-  first_at.insert('b');
+  typedef typename first_alphabet_t::set_t::letter_t	first_letter_t;
+  typedef typename second_alphabet_t::set_t::letter_t	second_letter_t;
 
-  second_alphabet_t	second_at;
-  second_at.insert('x');
-  second_at.insert('y');
+  first_alphabet_t		first_at;
+  first_letter_t a = first_at.random_letter();
+  first_letter_t b = first_at.random_letter();
+  while (a == b) b = first_at.random_letter();
+  first_at.insert(a);
+  first_at.insert(b);
+
+  second_alphabet_t		second_at;
+  second_letter_t x = second_at.random_letter();
+  second_letter_t y = second_at.random_letter();
+  while (x == y) y = second_at.random_letter();
+  second_at.insert(x);
+  second_at.insert(y);
 
   first_alphabet_t	other_first_at;
-  first_at.insert('c');
-  first_at.insert('d');
+  first_letter_t c = other_first_at.random_letter();
+  first_letter_t d = other_first_at.random_letter();
+  while (c == d) c = other_first_at.random_letter();
+  other_first_at.insert(c);
+  other_first_at.insert(d);
 
-  second_alphabet_t	other_second_at;
-  second_at.insert('z');
-  second_at.insert('t');
+  second_alphabet_t		other_second_at;
+  second_letter_t z = other_second_at.random_letter();
+  second_letter_t tt = other_second_at.random_letter();
+  while (z == tt) tt = other_second_at.random_letter();
+  other_second_at.insert(z);
+  other_second_at.insert(tt);
 
   first_monoid_t	first_md (first_at);
   second_monoid_t	second_md (second_at);
@@ -73,10 +94,20 @@ global_consistency_test(tests::Tester& t)
   series_set_t		ss (sg, fmp);
   automata_set_t	aa (ss);
 
+  typedef std::basic_string<first_letter_t> first_word_t;
+  typedef std::basic_string<second_letter_t> second_word_t;
 
-  monoid_elt_value_t	fmp_elt ("aa", "yx");
+  first_word_t waa;
+  waa += a;
+  waa += a;
 
-  monoid_elt_t	couple = make_couple(first_at, second_at, "aa", "yx");
+  second_word_t wyx;
+  wyx += y;
+  wyx += x;
+
+  monoid_elt_value_t	fmp_elt (waa, wyx);
+
+  monoid_elt_t	couple = make_couple(first_at, second_at, waa, wyx);
 
   TEST(t, "make_couple works.", fmp_elt == couple.value());
 

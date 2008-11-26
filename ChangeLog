@@ -1,5 +1,20 @@
 2008-11-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Rewrite some tests so they can be used with int letters.
+
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/is_ltl_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/is_subnormalized_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/sub_normalize_test.hh,
+	src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh,
+	src/tests/include/tests/context_headers/fmp_transducers/global_consistency_test.hh:
+	Rewrite without hardcoding the use of characters as letters.
+
+2008-11-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+
 	Fix make_automaton() to support int letters.
 
 	* include/vaucanson/contexts/fmp_transducer_maker.thh,

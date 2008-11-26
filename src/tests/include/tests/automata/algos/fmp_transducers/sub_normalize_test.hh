@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,16 +34,60 @@ sub_normalize_test(tests::Tester& t)
   typedef typename first_monoid_t::alphabet_t	first_alphabet_t;
   typedef typename second_monoid_t::alphabet_t	second_alphabet_t;
 
-  first_alphabet_t	alpha1;
-  alpha1.insert('a');
-  alpha1.insert('b');
+  typedef typename first_alphabet_t::set_t::letter_t	first_letter_t;
+  typedef typename second_alphabet_t::set_t::letter_t	second_letter_t;
 
-  second_alphabet_t	alpha2;
-  alpha2.insert('x');
-  alpha2.insert('y');
+  first_alphabet_t		first_at;
+  first_letter_t a = first_at.random_letter();
+  first_letter_t b = first_at.random_letter();
+  while (a == b) b = first_at.random_letter();
+  first_at.insert(a);
+  first_at.insert(b);
 
-  first_monoid_t	first_md(alpha1);
-  second_monoid_t	second_md(alpha2);
+  second_alphabet_t		second_at;
+  second_letter_t x = second_at.random_letter();
+  second_letter_t y = second_at.random_letter();
+  while (x == y) y = second_at.random_letter();
+  second_at.insert(x);
+  second_at.insert(y);
+
+  typedef std::basic_string<first_letter_t> first_word_t;
+  typedef std::basic_string<second_letter_t> second_word_t;
+
+  first_word_t word1_empty;
+  first_word_t word1_aba;
+  word1_aba += a;
+  word1_aba += b;
+  word1_aba += a;
+  first_word_t word1_baba;
+  word1_baba += b;
+  word1_baba += word1_aba;
+  first_word_t word1_bab;
+  word1_bab += b;
+  word1_bab += a;
+  word1_bab += b;
+  first_word_t word1_aa;
+  word1_aa += a;
+  word1_aa += a;
+
+  second_word_t word2_empty;
+  second_word_t word2_xx;
+  word2_xx += x;
+  word2_xx += x;
+  second_word_t word2_xy;
+  word2_xy += x;
+  word2_xy += y;
+  second_word_t word2_xyxy;
+  word2_xyxy += word2_xy;
+  word2_xyxy += word2_xy;
+  second_word_t word2_yxxy;
+  word2_yxxy += y;
+  word2_yxxy += x;
+  word2_yxxy += word2_xy;
+
+
+  first_monoid_t	first_md(first_at);
+  second_monoid_t	second_md(second_at);
 
   monoid_t		fmp(first_md, second_md);
   semiring_t		sg;
@@ -61,11 +105,11 @@ sub_normalize_test(tests::Tester& t)
   series_set_elt_t	series_elt4(ss);
   series_set_elt_t	series_elt5(ss);
 
-  monoid_elt_value_t	fmp_elt1("aba", "");
-  monoid_elt_value_t	fmp_elt2("baba", "xyxy");
-  monoid_elt_value_t	fmp_elt3("bab", "yxxy");
-  monoid_elt_value_t	fmp_elt4("", "xy");
-  monoid_elt_value_t	fmp_elt5("aa", "xx");
+  monoid_elt_value_t	fmp_elt1(word1_aba, word2_empty);
+  monoid_elt_value_t	fmp_elt2(word1_baba, word2_xyxy);
+  monoid_elt_value_t	fmp_elt3(word1_bab, word2_yxxy);
+  monoid_elt_value_t	fmp_elt4(word1_empty, word2_xy);
+  monoid_elt_value_t	fmp_elt5(word1_aa, word2_xx);
 
   semiring_elt_value_t	semi_elt =
     algebra::identity_as<semiring_elt_value_t>::of(sg).value();

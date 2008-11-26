@@ -32,17 +32,47 @@ normalized_composition_test(tests::Tester& t)
   typedef typename first_monoid_t::alphabet_t	first_alphabet_t;
   typedef typename second_monoid_t::alphabet_t	second_alphabet_t;
 
-  first_alphabet_t first_at;
-  first_at.insert('a');
-  first_at.insert('b');
+  typedef typename first_alphabet_t::set_t::letter_t	first_letter_t;
+  typedef typename second_alphabet_t::set_t::letter_t	second_letter_t;
 
-  second_alphabet_t second_at;
-  second_at.insert('x');
-  second_at.insert('y');
+  first_alphabet_t		first_at;
+  first_letter_t a = first_at.random_letter();
+  first_letter_t b = first_at.random_letter();
+  while (a == b) b = first_at.random_letter();
+  first_at.insert(a);
+  first_at.insert(b);
 
-  second_alphabet_t third_at;
-  third_at.insert('u');
-  third_at.insert('v');
+  second_alphabet_t		second_at;
+  second_letter_t x = second_at.random_letter();
+  second_letter_t y = second_at.random_letter();
+  while (x == y) y = second_at.random_letter();
+  second_at.insert(x);
+  second_at.insert(y);
+
+  second_alphabet_t		third_at;
+  second_letter_t u = third_at.random_letter();
+  second_letter_t v = third_at.random_letter();
+  while (u == v) y = third_at.random_letter();
+  third_at.insert(u);
+  third_at.insert(v);
+
+  typedef std::basic_string<first_letter_t> first_word_t;
+  typedef std::basic_string<second_letter_t> second_word_t;
+
+  first_word_t word1_a;
+  word1_a += a;
+  first_word_t word1_b;
+  word1_b += b;
+  first_word_t word1_empty;
+  second_word_t word2_x;
+  word2_x += x;
+  second_word_t word2_y;
+  word2_y += y;
+  second_word_t word2_u;
+  word2_u += u;
+  second_word_t word2_v;
+  word2_v += v;
+  second_word_t word2_empty;
 
   first_monoid_t  first_md (first_at);
   second_monoid_t second_md (second_at);
@@ -76,15 +106,15 @@ normalized_composition_test(tests::Tester& t)
   series_set_elt_t series_elt23(ss);
   series_set_elt_t series_elt24(ss);
 
-  monoid_elt_value_t fmp_elt1 ("a", "");
-  monoid_elt_value_t fmp_elt2 ("b", "");
-  monoid_elt_value_t fmp_elt3 ("", "y");
-  monoid_elt_value_t fmp_elt4 ("", "x");
+  monoid_elt_value_t fmp_elt1 (word1_a, word2_empty);
+  monoid_elt_value_t fmp_elt2 (word1_b, word2_empty);
+  monoid_elt_value_t fmp_elt3 (word1_empty, word2_y);
+  monoid_elt_value_t fmp_elt4 (word1_empty, word2_x);
 
-  monoid_elt_value_t fmp_elt21 ("", "u");
-  monoid_elt_value_t fmp_elt22 ("x", "");
-  monoid_elt_value_t fmp_elt23 ("y", "");
-  monoid_elt_value_t fmp_elt24 ("", "v");
+  monoid_elt_value_t fmp_elt21 (word2_empty, word2_u);
+  monoid_elt_value_t fmp_elt22 (word2_x, word2_empty);
+  monoid_elt_value_t fmp_elt23 (word2_y, word2_empty);
+  monoid_elt_value_t fmp_elt24 (word2_empty, word2_v);
 
   semiring_elt_value_t	semi_elt =
     algebra::identity_as<semiring_elt_value_t>::of(sg).value();
@@ -144,9 +174,13 @@ normalized_composition_test(tests::Tester& t)
   fmp_to_rw(t3, trans3);
   realtime_here(trans3);
 
-  automaton::rat_exp_t exp =
-    automaton::make_rat_exp(first_at, "abbababa");
+  std::ostringstream rat;
+  rat << a << "." << b << "." << b << "."
+      << a << "." << b << "." << a << "."
+      << b << "." << a;
 
+  automaton::rat_exp_t exp =
+    automaton::make_rat_exp(first_at, rat.str());
 
   automaton::automaton_t res1 =
     automaton::standard_of
