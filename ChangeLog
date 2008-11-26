@@ -1,5 +1,10 @@
 2008-11-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* src/tests/test-suites/generate-all.sh: Factor the two loops,
+	effectively reverting r2410.
+
+2008-11-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* src/tests/test-suites/generate-all.sh: Enable context headers
 	tests for char_char_boolean and int_int_boolean automata.
 
