@@ -147,8 +147,8 @@ namespace vcsn
 			       const FirstIterator first_end,
 			       const SecondIterator second_begin,
 			       const SecondIterator second_end,
-			       const std::string& first_exp,
-			       const std::string& second_exp)
+			       const first_monoid_elt_value_t& first_exp,
+			       const second_monoid_elt_value_t& second_exp)
       {
 	first_alphabet_t	first_alpha;
 	for (FirstIterator e = first_begin; e != first_end; ++e)
@@ -167,8 +167,8 @@ namespace vcsn
       template <class T1, class T2>
       monoid_elt_t make_couple(const T1& first_alphabet,
 			       const T2& second_alphabet,
-			       const std::string& first_exp,
-			       const std::string& second_exp)
+			       const first_monoid_elt_value_t& first_exp,
+			       const second_monoid_elt_value_t& second_exp)
       {
 	return make_couple(first_alphabet.begin(), first_alphabet.end(),
 			   second_alphabet.begin(), second_alphabet.end(),
@@ -219,4 +219,3 @@ namespace vcsn
     } // End of VCSN_CONTEXT_NAMESPACE.
   } // End of VCSN_GRAPH_IMPL.
 } // End of namespace vcsn.
-

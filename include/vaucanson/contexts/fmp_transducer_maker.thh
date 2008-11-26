@@ -61,17 +61,17 @@ namespace vcsn
 
       template <class T1, class T2>
       monoid_elt_t make_couple(const T1& first_alphabet,
-	    const T2& second_alphabet,
-	    const std::string& first_exp = "",
-	    const std::string& second_exp = "");
+			       const T2& second_alphabet,
+			       const first_monoid_elt_value_t& first_exp,
+			       const second_monoid_elt_value_t& second_exp);
 
       template <class FirstIterator, class SecondIterator>
       monoid_elt_t make_couple(const FirstIterator first_begin,
-	    const FirstIterator first_end,
-	    const SecondIterator second_begin,
-	    const SecondIterator second_end,
-	    const std::string& first_exp,
-	    const std::string& second_exp);
+			       const FirstIterator first_end,
+			       const SecondIterator second_begin,
+			       const SecondIterator second_end,
+			       const first_monoid_elt_value_t& first_exp,
+			       const second_monoid_elt_value_t& second_exp);
 
       template <typename TransStruct,
 	        typename TransImpl,
@@ -86,4 +86,3 @@ namespace vcsn
 } // End of namespace vcsn.
 
 # include <vaucanson/contexts/fmp_transducer_maker.thxx>
-
