@@ -117,22 +117,24 @@ template <typename M, typename S>
 void
 parser_options<M, S>::check_collision()
 {
-#define CHECK_COLISION(TOKEN, NAME)						\
+#define CHECK_COLLISION(TOKEN, NAME)						\
   if (check_collision(TOKEN))							\
     std::cerr << "Warning: The token " << NAME <<				\
 		 " could also be a part of a word in your alphabet." << std::endl;
-  CHECK_COLISION(srep_.open_par, "OPAR")
-  CHECK_COLISION(srep_.close_par, "CPAR")
-  CHECK_COLISION(srep_.plus, "PLUS")
-  CHECK_COLISION(srep_.times, "TIMES")
-  CHECK_COLISION(srep_.star, "STAR")
-  CHECK_COLISION(srep_.open_weight, "OWEIGHT")
-  CHECK_COLISION(mrep_.empty, "ONE")
-  CHECK_COLISION(mrep_.concat, "CONCAT")
-  CHECK_COLISION(srep_.zero, "ZERO")
+  CHECK_COLLISION(srep_.open_par, "OPAR")
+  CHECK_COLLISION(srep_.close_par, "CPAR")
+  CHECK_COLLISION(srep_.plus, "PLUS")
+  CHECK_COLLISION(srep_.times, "TIMES")
+  CHECK_COLLISION(srep_.star, "STAR")
+  CHECK_COLLISION(srep_.open_weight, "OWEIGHT")
+  CHECK_COLLISION(mrep_.empty, "ONE")
+  // Only check CONCAT if not empty because it is optional.
+  if (mrep_.concat.size() > 0)
+    CHECK_COLLISION(mrep_.concat, "CONCAT")
+  CHECK_COLLISION(srep_.zero, "ZERO")
   for_all(std::vector<std::string>, it, srep_.spaces)
-    CHECK_COLISION(*it, "SPACE")
-#undef CHECK_COLISION
+    CHECK_COLLISION(*it, "SPACE")
+#undef CHECK_COLLISION
 }
 
 template <typename M, typename S>

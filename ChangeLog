@@ -1,5 +1,12 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Tweak collision checks.
+	* taf-kit/src/parser_options.hxx: Fix a typo by renaming the macro
+	  `CHECK_COLISION' to `CHECK_COLLISION'. Do not check if `CONCAT'
+	  has collisions with letters if it is the empty string.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Overhaul representation handling.
 	* include/vaucanson/xml/builders.hh (monGenAction): New attribute
 	  `user_rep'. Add more type helpers. (Series flavor)
