@@ -26,9 +26,16 @@ namespace vcsn
   {
     template <typename Semiring>
     series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::series_rep() :
-    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >()
+      open_par("("),
+      close_par(")"),
+      plus("+"),
+      times("."),
+      star("*"),
+      zero("z"),
+      open_weight("{"),
+      close_weight("}")
     {
-      zero = "z";
+      spaces.push_back(" ");
     }
 
     /*------------------------.

@@ -1,5 +1,13 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Simplify specialization for int based Series representation.
+	* include/vaucanson/algebra/implementation/series/series.hh: Remove
+	  inheritance. Update the structure according to this change.
+	* include/vaucanson/algebra/implementation/series/series.hxx
+	  (series_rep): Do not call parent CTOR.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Simplify specialization for int based FreeMonoid representations.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
 	  Remove inheritance. Update the structure according to this change.
