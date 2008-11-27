@@ -1,5 +1,12 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Revert parts of [2433].
+	* include/vaucanson/xml/builders.hxx,
+	* include/vaucanson/xml/contexts/fmp.hxx: Ignore representation as
+	  the XML representation is not dependent on them when parsing.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Fix a bug when there is no series representation.
 	* include/vaucanson/xml/handlers.hxx: Here.
 

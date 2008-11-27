@@ -153,11 +153,11 @@ namespace vcsn
       {
 	typename FMPtype::monoid_t::first_monoid_t::alphabet_t	at1;
 	typename FMPtype::monoid_t::second_monoid_t::alphabet_t	at2;
-	typename FMPtype::monoid_t::first_monoid_t	md1(at1, *(param.structure().series().monoid().first_monoid().representation()));
-	typename FMPtype::monoid_t::second_monoid_t	md2(at2, *(param.structure().series().monoid().second_monoid().representation()));
+	typename FMPtype::monoid_t::first_monoid_t	md1(at1);
+	typename FMPtype::monoid_t::second_monoid_t	md2(at2);
 	typedef typename FMPtype::monoid_t		monoid_t;
 
-	monoid_t* monoid = new monoid_t(md1, md2, *(param.structure().series().monoid().representation()));
+	monoid_t* monoid = new monoid_t(md1, md2);
 	builders::check_monoid_consistency(param, localname, attrs, eq);
 	return monoid;
       }
