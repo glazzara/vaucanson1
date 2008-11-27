@@ -174,13 +174,40 @@ namespace vcsn
 	UnsupHandler	unsuph_;
     };
 
+    /**
+     * SeriesRepresentationHandler
+     */
+    template <typename T>
+    class SeriesRepresentationHandler : public Handler
+    {
+      public:
+	SeriesRepresentationHandler(xercesc::SAX2XMLReader* parser,
+				    Handler& root,
+				    T& srep);
+
+	void start(const XMLCh* const uri,
+		   const XMLCh* const localname,
+		   const XMLCh* const qname,
+		   const xercesc::Attributes& attrs);
+
+	void end(const XMLCh* const uri,
+		 const XMLCh* const localname,
+		 const XMLCh* const qname);
+
+      private:
+	T&		rep_;
+
+	UnsupHandler	unsuph_;
+    };
+
     namespace builders
     {
       template <typename T>
       typename T::monoid_t*
       create_monoid (T&,
 		     const XMLCh* const localname,
-		     const xercesc::Attributes& attrs);
+		     const xercesc::Attributes& attrs,
+		     XMLEq&);
 
       template <typename T>
       Handler*
@@ -189,7 +216,22 @@ namespace vcsn
 		      xercesc::SAX2XMLReader* parser,
 		      Handler& root);
 
-    } // !builders
+      template <typename T>
+      typename T::series_set_t::series_rep_t*
+      create_series_representation(T&,
+				   const XMLCh* const localname,
+				   const xercesc::Attributes& attrs,
+				   XMLEq&);
+
+      template <typename T>
+      Handler*
+      create_series_representationh(T& srep,
+				    const xercesc::Attributes& attrs,
+				    xercesc::SAX2XMLReader* parser,
+				    Handler& root,
+				    XMLEq&);
+
+    } // ! builders
 
     /**
      * NumSemiringHandler
@@ -266,7 +308,8 @@ namespace vcsn
       void
       check_monoid_consistency (T& param,
 				const XMLCh* const localname,
-			        const xercesc::Attributes& attrs);
+			        const xercesc::Attributes& attrs,
+				XMLEq&);
 
       template <typename T>
       void

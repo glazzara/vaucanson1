@@ -134,12 +134,13 @@ namespace vcsn
 
     template <typename T>
     void
-    TypeHandler<T>::start (const XMLCh* const,
-				 const XMLCh* const localname,
-				 const XMLCh* const,
-				 const xercesc::Attributes& attrs)
+    TypeHandler<T>::start(const XMLCh* const,
+			  const XMLCh* const localname,
+			  const XMLCh* const,
+			  const xercesc::Attributes& attrs)
     {
       using namespace xercesc;
+
       if (XMLString::equals(eq_.semiring, localname))
       {
 	semiring_ = builders::create_semiring(param_, localname, attrs);
@@ -148,34 +149,15 @@ namespace vcsn
       }
       else if (XMLString::equals(eq_.monoid, localname))
       {
-	monoid_ = builders::create_monoid(param_, localname, attrs);
+	monoid_ = builders::create_monoid(param_, localname, attrs, eq_);
 	monoidh_ = builders::create_monoidh(*monoid_, attrs, parser_, *this);
 	parser_->setContentHandler(monoidh_);
       }
       else if (XMLString::equals(eq_.writingData, localname))
       {
-	if (tools::has_attribute(attrs, eq_.openPar))
-	  rep_.open_par = xmlstr(tools::get_attribute(attrs, eq_.openPar));
-	if (tools::has_attribute(attrs, eq_.closePar))
-	  rep_.close_par = xmlstr(tools::get_attribute(attrs, eq_.closePar));
-	if (tools::has_attribute(attrs, eq_.plus))
-	  rep_.plus = xmlstr(tools::get_attribute(attrs, eq_.plus));
-	if (tools::has_attribute(attrs, eq_.times))
-	  rep_.times = xmlstr(tools::get_attribute(attrs, eq_.times));
-	if (tools::has_attribute(attrs, eq_.star))
-	  rep_.star = xmlstr(tools::get_attribute(attrs, eq_.star));
-	if (tools::has_attribute(attrs, eq_.zero))
-	  rep_.zero = xmlstr(tools::get_attribute(attrs, eq_.zero));
-	if (tools::has_attribute(attrs, eq_.openWeight))
-	  rep_.open_weight = xmlstr(tools::get_attribute(attrs, eq_.openWeight));
-	if (tools::has_attribute(attrs, eq_.closeWeight))
-	  rep_.close_weight = xmlstr(tools::get_attribute(attrs, eq_.closeWeight));
-	if (tools::has_attribute(attrs, eq_.spaces))
-	{
-	  rep_.spaces.clear();
-	  rep_.spaces.push_back(xmlstr(tools::get_attribute(attrs, eq_.spaces)));
-	}
-	parser_->setContentHandler(&unsuph_);
+	rep_ = builders::create_series_representation(param_, localname, attrs, eq_);
+	reph_ = builders::create_series_representationh(*rep_, attrs, parser_, *this, eq_);
+	parser_->setContentHandler(reph_);
       }
       else
 	error::token(localname);
@@ -183,18 +165,22 @@ namespace vcsn
 
     template <typename T>
     void
-    TypeHandler<T>::end (const XMLCh* const,
-			       const XMLCh* const localname,
-			       const XMLCh* const)
+    TypeHandler<T>::end(const XMLCh* const,
+			const XMLCh* const localname,
+			const XMLCh* const)
     {
       using namespace xercesc;
-      typename T::series_set_t series(*semiring_, *monoid_, rep_);
+
+      typename T::series_set_t series(*semiring_, *monoid_, *rep_);
       param_.attach(series);
 
       if (XMLString::equals(eq_.valueType, localname))
 	parser_->setContentHandler(&root_);
+
       delete monoid_;
       delete monoidh_;
+      delete rep_;
+      delete reph_;
       delete semiring_;
       delete semiringh_;
     }

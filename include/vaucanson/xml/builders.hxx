@@ -267,19 +267,62 @@ namespace vcsn
 	error::token(localname);
     }
 
+    /**
+     * SeriesRepresentationHandler
+     */
+    template <typename T>
+    SeriesRepresentationHandler<T>::SeriesRepresentationHandler(xercesc::SAX2XMLReader* parser,
+								Handler& root,
+								T& srep)
+      : Handler(parser, root),
+	rep_(srep),
+	unsuph_(parser, *this)
+    {
+    }
+
+    template <typename T>
+    void
+    SeriesRepresentationHandler<T>::start(const XMLCh* const,
+					  const XMLCh* const localname,
+					  const XMLCh* const,
+					  const xercesc::Attributes& attrs)
+    {
+      error::token(localname);
+    }
+
+    template <typename T>
+    void
+    SeriesRepresentationHandler<T>::end(const XMLCh* const,
+					const XMLCh* const localname,
+					const XMLCh* const)
+    {
+      using namespace xercesc;
+
+      if (XMLString::equals(eq_.writingData, localname))
+      {
+	// Go up one level.
+	parser_->setContentHandler(&root_);
+      }
+      else
+	error::token(localname);
+    }
+
     namespace builders
     {
       template <typename T>
       typename T::monoid_t*
-      create_monoid (T& param,
-		     const XMLCh* const localname,
-		     const xercesc::Attributes& attrs)
+      create_monoid(T& param,
+		    const XMLCh* const localname,
+		    const xercesc::Attributes& attrs,
+		    XMLEq& eq)
       {
+	// Type helpers.
 	typename T::monoid_t::alphabet_t	at;
 	typedef typename T::monoid_t		monoid_t;
 
 	monoid_t*	monoid = new monoid_t(at, *(param.structure().series().monoid().representation()));
-	builders::check_monoid_consistency(param, localname, attrs);
+	builders::check_monoid_consistency(param, localname, attrs, eq);
+
 	return monoid;
       }
 
@@ -293,7 +336,54 @@ namespace vcsn
 	return new vcsn::xml::FreeMonoidHandler<T>(parser, root, monoid);
       }
 
-    } // !builders
+      template <typename T>
+      typename T::series_set_t::series_rep_t*
+      create_series_representation(T& param,
+				   const XMLCh* const localname,
+				   const xercesc::Attributes& attrs,
+				   XMLEq& eq)
+      {
+	// Type helpers.
+	typedef typename T::series_set_t::series_rep_t series_rep_t;
+
+	return new series_rep_t();
+      }
+
+      template <typename T>
+      Handler*
+      create_series_representationh(T& srep,
+				    const xercesc::Attributes& attrs,
+				    xercesc::SAX2XMLReader* parser,
+				    Handler& root,
+				    XMLEq& eq)
+      {
+	if (tools::has_attribute(attrs, eq.openPar))
+	  srep.open_par = xmlstr(tools::get_attribute(attrs, eq.openPar));
+	if (tools::has_attribute(attrs, eq.closePar))
+	  srep.close_par = xmlstr(tools::get_attribute(attrs, eq.closePar));
+	if (tools::has_attribute(attrs, eq.plusSym))
+	  srep.plus = xmlstr(tools::get_attribute(attrs, eq.plusSym));
+	if (tools::has_attribute(attrs, eq.timesSym))
+	  srep.times = xmlstr(tools::get_attribute(attrs, eq.timesSym));
+	if (tools::has_attribute(attrs, eq.starSym))
+	  srep.star = xmlstr(tools::get_attribute(attrs, eq.starSym));
+	if (tools::has_attribute(attrs, eq.zeroSym))
+	  srep.zero = xmlstr(tools::get_attribute(attrs, eq.zeroSym));
+	if (tools::has_attribute(attrs, eq.openWeight))
+	  srep.open_weight = xmlstr(tools::get_attribute(attrs, eq.openWeight));
+	if (tools::has_attribute(attrs, eq.closeWeight))
+	  srep.close_weight = xmlstr(tools::get_attribute(attrs, eq.closeWeight));
+	if (tools::has_attribute(attrs, eq.spacesSym))
+	{
+	  srep.spaces.clear();
+	  srep.spaces.push_back(xmlstr(tools::get_attribute(attrs, eq.spacesSym)));
+	}
+
+	return new SeriesRepresentationHandler<T>(parser, root, srep);
+      }
+
+    } // ! builders
+
     /**
      * NumSemiringHandler
      */
@@ -428,13 +518,14 @@ namespace vcsn
 
       template <typename T>
       void
-      check_monoid_consistency (T&,
-				const XMLCh* const localname,
-			        const xercesc::Attributes& attrs)
+      check_monoid_consistency(T&,
+			       const XMLCh* const localname,
+			       const xercesc::Attributes& attrs,
+			       XMLEq& eq)
       {
-	std::string val(xmlstr(tools::get_attribute(attrs, "type")));
-	if (val != "free")
-	  error::attrs(localname, "type", val);
+	const XMLCh* val = tools::get_attribute(attrs, eq.type);
+	if (!xercesc::XMLString::equals(val, eq.free))
+	  error::attrs(localname, xmlstr(eq.type), xmlstr(val));
       };
 
       template <typename T>
@@ -579,15 +670,18 @@ namespace vcsn
 				   xercesc::DOMElement* root)
       {
 	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
+
+	// FIXME: we should use XMLEq
 	tools::set_attribute(writingData, "plusSym", aut.series().representation()->plus);
 	tools::set_attribute(writingData, "timesSym", aut.series().representation()->times);
 	tools::set_attribute(writingData, "starSym", aut.series().representation()->star);
 	tools::set_attribute(writingData, "zeroSym", aut.series().representation()->zero);
-	tools::set_attribute(writingData, "weightOpening", aut.series().representation()->open_weight);
-	tools::set_attribute(writingData, "weightClosing", aut.series().representation()->close_weight);
+	tools::set_attribute(writingData, "openWeight", aut.series().representation()->open_weight);
+	tools::set_attribute(writingData, "closeWeight", aut.series().representation()->close_weight);
 	tools::set_attribute(writingData, "openPar", aut.series().representation()->open_par);
 	tools::set_attribute(writingData, "closePar", aut.series().representation()->close_par);
 	tools::set_attribute(writingData, "spacesSym", aut.series().representation()->spaces.front());
+
 	root->appendChild(writingData);
       }
 

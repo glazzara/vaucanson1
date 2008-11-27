@@ -296,20 +296,23 @@ namespace vcsn
 		    const XMLCh* const localname,
 		    const XMLCh* const qname);
       private:
-	typedef typename T::monoid_t		monoid_t;
-	typedef typename T::semiring_t		semiring_t;
-	typedef typename T::series_set_t	series_set_t;
+	// Type helpers.
+	typedef typename T::monoid_t			monoid_t;
+	typedef typename T::semiring_t			semiring_t;
+	typedef typename T::series_set_t		series_set_t;
+	typedef typename T::series_set_t::series_rep_t	series_rep_t;
 
-	monoid_t*			monoid_;
-	semiring_t*			semiring_;
-	algebra::series_rep<semiring_t, monoid_t>		rep_;
+	monoid_t*	monoid_;
+	semiring_t*	semiring_;
+	series_rep_t*	rep_;
 
 	// FIXME: maybe we should rename this attribute to aut_,
 	// as with all the other handlers.
 	T&		param_;
 	Handler*	monoidh_;
+	Handler*	reph_;
 	Handler*	semiringh_;
-	UnsupHandler		unsuph_;
+	UnsupHandler	unsuph_;
     };
 
     /**

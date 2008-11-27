@@ -1,5 +1,43 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Overhaul support for series representations.
+	* data/vaucanson.xsd: New complexType `seriesWritingData'. Rework
+	  the `writingData' element in `valueType'.
+	* include/vaucanson/xml/builders.hh: New
+	  `SeriesRepresentationHandler'. New `create_series_representation'
+	  and `create_series_representationh'. Add an argument to
+	  `create_monoid' and `check_monoid_consistency'.
+	* include/vaucanson/xml/builders.hxx: Add the implementation of
+	  `SeriesRepresentationHandler', mostly of based on
+	  `FreeMonoidHandler'. (create_monoid): Update implementation to
+	  reflect the new prototype. Add the implementation of
+	  `create_series_representation' and
+	  `create_series_representationh'. (check_monoid_consistency):
+	  Update implementation to reflect the new prototype with some
+	  overhauls. (create_type_writingData_node): Rename `weightOpening'
+	  to `openWeight' and `weightClosing' to `closeWeight'.
+	* include/vaucanson/xml/contexts/fmp.hh: New macro `FMPsreptype' to
+	  make code tighter. Add a specialization for
+	  `SeriesRepresentationHandler' for FMP. Add one argument to
+	  `create_monoid' and `check_monoid_consistency'. New
+	  `create_type_writingData_node' specialization to better support
+	  series representations for FMP.
+	* include/vaucanson/xml/contexts/fmp.hxx: Add the implementation of
+	  the new specialization mostly based on the `FreeMonoidProduct'
+	  one. Add the implementation of `create_type_writingData_node'.
+	* include/vaucanson/xml/handlers.hh (TypeHandler): Cosmetic changes.
+	  New `reph_' and `rep_' attributes.
+	* include/vaucanson/xml/handlers.hxx: Use the new
+	  `create_series_representation' to mimic the handling of monoid.
+	* include/vaucanson/xml/xmleq.hh: Cosmetic changes. Does the
+	  following renaming: `plus' -> `plusSym', `times' -> `timesSym',
+	  `spaces' -> `spacesSym'. New `starSym', `type' and `free'
+	  attributes.
+	* include/vaucanson/xml/xmleq.hxx: Update the implementation
+	  according to the previous changes.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Move int based FreeMonoid related specialization.
 	* include/Makefile.am: Add new files to the distribution.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:

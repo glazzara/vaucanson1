@@ -236,21 +236,34 @@ Writing data can be added.
   </xs:attribute>
 </xs:complexType>
 <!--
+<seriesWritingData> describes the representation attributes for series.
+-->
+<xs:complexType name="seriesWritingData">
+  <xs:attribute name="plusSym"/>
+  <xs:attribute name="timesSym"/>
+  <xs:attribute name="starSym"/>
+  <xs:attribute name="zeroSym"/>
+  <xs:attribute name="spacesSym"/>
+  <xs:attribute name="openWeight"/>
+  <xs:attribute name="closeWeight"/>
+  <xs:attribute name="openPar"/>
+  <xs:attribute name="closePar"/>
+</xs:complexType>
+<!--
 <valueType> describes the algebraic structure of an automaton or a regular expression.
 -->
 <xs:complexType name="valueType">
   <xs:sequence>
     <xs:element name="writingData" minOccurs="0">
       <xs:complexType>
-	<xs:attribute name="plusSym"/>
-	<xs:attribute name="timesSym"/>
-	<xs:attribute name="starSym"/>
-	<xs:attribute name="zeroSym"/>
-	<xs:attribute name="spacesSym"/>
-	<xs:attribute name="weightOpening"/>
-	<xs:attribute name="weightClosing"/>
-	<xs:attribute name="openPar"/>
-	<xs:attribute name="closePar"/>
+	<xs:complexContent>
+	  <xs:extension base="seriesWritingData">
+	    <xs:sequence minOccurs="0">
+	      <xs:element name="writingData" type="seriesWritingData"/>
+	      <xs:element name="writingData" type="seriesWritingData"/>
+	    </xs:sequence>
+	  </xs:extension>
+	</xs:complexContent>
       </xs:complexType>
     </xs:element>
     <xs:element name="semiring" type="semiring"/>

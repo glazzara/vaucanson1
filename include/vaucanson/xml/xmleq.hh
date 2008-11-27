@@ -85,16 +85,17 @@ namespace vcsn
 	XMLCh* writingData;
 
 	XMLCh* identitySymbol;
-	XMLCh* zeroSymbol;
 	XMLCh* concat;
 
 	XMLCh* openPar;
 	XMLCh* closePar;
-	XMLCh* plus;
-	XMLCh* times;
+	XMLCh* plusSym;
+	XMLCh* timesSym;
 	XMLCh* openWeight;
 	XMLCh* closeWeight;
-	XMLCh* spaces;
+	XMLCh* spacesSym;
+	XMLCh* zeroSym;
+	XMLCh* starSym;
 
 	XMLCh* id;
 	XMLCh* value;
@@ -102,6 +103,9 @@ namespace vcsn
 	XMLCh* target;
 	XMLCh* x;
 	XMLCh* y;
+
+	XMLCh* type;
+	XMLCh* free;
 
 	XMLEq ();
 	~XMLEq ();

@@ -86,6 +86,61 @@ namespace vcsn
 	error::token(localname);
     }
 
+    /**
+     * SeriesRepresentationHandler specialization for FMP
+     */
+    template <typename S, typename M1, typename M2>
+    SeriesRepresentationHandler<FMPsreptype>::
+    SeriesRepresentationHandler(xercesc::SAX2XMLReader* parser,
+				Handler& root,
+				FMPsreptype& srep)
+      : Handler(parser, root),
+	rep_(srep),
+	reph_(0),
+	unsuph_(parser, *this),
+	first_(true)
+    {
+    }
+
+    template <typename S, typename M1, typename M2>
+    void
+    SeriesRepresentationHandler<FMPsreptype>::start(const XMLCh* const,
+						    const XMLCh* const localname,
+						    const XMLCh* const,
+						    const xercesc::Attributes& attrs)
+    {
+      if (xercesc::XMLString::equals(eq_.writingData, localname))
+      {
+	if (first_)
+	{
+	  reph_ = builders::create_series_representationh(rep_.first_representation(), attrs, parser_, *this, eq_);
+	  first_ = false;
+	}
+	else
+	{
+	  delete reph_;
+	  reph_ = builders::create_series_representationh(rep_.second_representation(), attrs, parser_, *this, eq_);
+	}
+	parser_->setContentHandler(reph_);
+      }
+      else
+	error::token(localname);
+    }
+
+    template <typename S, typename M1, typename M2>
+    void
+    SeriesRepresentationHandler<FMPsreptype>::end(const XMLCh* const,
+						  const XMLCh* const localname,
+						  const XMLCh* const)
+    {
+      using namespace xercesc;
+
+      delete reph_;
+      if (XMLString::equals(eq_.writingData, localname))
+	parser_->setContentHandler(&root_);
+      else
+	error::token(localname);
+    }
 
     namespace builders
     {
@@ -93,7 +148,8 @@ namespace vcsn
       typename FMPtype::monoid_t*
       create_monoid (FMPtype& param,
 		     const XMLCh* const localname,
-		     const xercesc::Attributes& attrs)
+		     const xercesc::Attributes& attrs,
+		     XMLEq& eq)
       {
 	typename FMPtype::monoid_t::first_monoid_t::alphabet_t	at1;
 	typename FMPtype::monoid_t::second_monoid_t::alphabet_t	at2;
@@ -102,7 +158,7 @@ namespace vcsn
 	typedef typename FMPtype::monoid_t		monoid_t;
 
 	monoid_t* monoid = new monoid_t(md1, md2, *(param.structure().series().monoid().representation()));
-	builders::check_monoid_consistency(param, localname, attrs);
+	builders::check_monoid_consistency(param, localname, attrs, eq);
 	return monoid;
       }
 
@@ -231,7 +287,8 @@ namespace vcsn
       void
       check_monoid_consistency (FMPtype&,
 				const XMLCh* const localname,
-			        const xercesc::Attributes& attrs)
+			        const xercesc::Attributes& attrs,
+				XMLEq&)
       {
 	std::string val(xmlstr(tools::get_attribute(attrs, "type")));
 	if (val != "product")
@@ -249,9 +306,71 @@ namespace vcsn
     {
       TParamFMP
       void
+      create_type_writingData_node(const FMPtype& aut,
+				   xercesc::DOMDocument* doc,
+				   xercesc::DOMElement* root)
+      {
+	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData, "plusSym", aut.series().representation()->plus);
+	tools::set_attribute(writingData, "timesSym", aut.series().representation()->times);
+	tools::set_attribute(writingData, "starSym", aut.series().representation()->star);
+	tools::set_attribute(writingData, "zeroSym", aut.series().representation()->zero);
+	tools::set_attribute(writingData, "openWeight", aut.series().representation()->open_weight);
+	tools::set_attribute(writingData, "closeWeight", aut.series().representation()->close_weight);
+	tools::set_attribute(writingData, "openPar", aut.series().representation()->open_par);
+	tools::set_attribute(writingData, "closePar", aut.series().representation()->close_par);
+	tools::set_attribute(writingData, "spacesSym", aut.series().representation()->spaces.front());
+
+	xercesc::DOMElement* firstWritingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(firstWritingData, "plusSym",
+			     aut.series().representation()->first_representation().plus);
+	tools::set_attribute(firstWritingData, "timesSym",
+			     aut.series().representation()->first_representation().times);
+	tools::set_attribute(firstWritingData, "starSym",
+			     aut.series().representation()->first_representation().star);
+	tools::set_attribute(firstWritingData, "zeroSym",
+			     aut.series().representation()->first_representation().zero);
+	tools::set_attribute(firstWritingData, "openWeight",
+			     aut.series().representation()->first_representation().open_weight);
+	tools::set_attribute(firstWritingData, "closeWeight",
+			     aut.series().representation()->first_representation().close_weight);
+	tools::set_attribute(firstWritingData, "openPar",
+			     aut.series().representation()->first_representation().open_par);
+	tools::set_attribute(firstWritingData, "closePar",
+			     aut.series().representation()->first_representation().close_par);
+	tools::set_attribute(firstWritingData, "spacesSym",
+			     aut.series().representation()->first_representation().spaces.front());
+	writingData->appendChild(firstWritingData);
+
+	xercesc::DOMElement* secondWritingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(secondWritingData, "plusSym",
+			     aut.series().representation()->second_representation().plus);
+	tools::set_attribute(secondWritingData, "timesSym",
+			     aut.series().representation()->second_representation().times);
+	tools::set_attribute(secondWritingData, "starSym",
+			     aut.series().representation()->second_representation().star);
+	tools::set_attribute(secondWritingData, "zeroSym",
+			     aut.series().representation()->second_representation().zero);
+	tools::set_attribute(secondWritingData, "openWeight",
+			     aut.series().representation()->second_representation().open_weight);
+	tools::set_attribute(secondWritingData, "closeWeight",
+			     aut.series().representation()->second_representation().close_weight);
+	tools::set_attribute(secondWritingData, "openPar",
+			     aut.series().representation()->second_representation().open_par);
+	tools::set_attribute(secondWritingData, "closePar",
+			     aut.series().representation()->second_representation().close_par);
+	tools::set_attribute(secondWritingData, "spacesSym",
+			     aut.series().representation()->second_representation().spaces.front());
+	writingData->appendChild(secondWritingData);
+
+	root->appendChild(writingData);
+      }
+
+      TParamFMP
+      void
       create_monoid_node(const FMPtype& aut,
 			 xercesc::DOMDocument* doc,
-			   xercesc::DOMElement* root)
+			 xercesc::DOMElement* root)
       {
 	xercesc::DOMElement* node = tools::create_element(doc, "monoid");
 	tools::set_attribute(node, "type", "product");

@@ -50,6 +50,7 @@
 	>,								\
       T>
 # define TParamFMP template <class S, class T, class M1, class M2>
+# define FMPsreptype algebra::series_rep<S, algebra::FreeMonoidProduct<M1, M2> >
 
 # define FMPseries Element<vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> >, T>
 # define SParamFMP template <class S, class T, class M1, class M2>
@@ -60,7 +61,7 @@ namespace vcsn
   namespace xml
   {
     /**
-     * FreeMonoidHandler
+     * FreeMonoidProductHandler
      */
     template <typename T>
     class FreeMonoidProductHandler : public Handler
@@ -87,13 +88,45 @@ namespace vcsn
 	bool		first_;
     };
 
+    /**
+     * SeriesRepresentationHandler specialization for FMP
+     */
+    template <typename S, typename M1, typename M2>
+    class SeriesRepresentationHandler<FMPsreptype> : public Handler
+    {
+      public:
+	// Type helpers.
+	typedef FMPsreptype self_t;
+
+	SeriesRepresentationHandler(xercesc::SAX2XMLReader* parser,
+				    Handler& root,
+				    self_t& srep);
+
+	void start(const XMLCh* const uri,
+		   const XMLCh* const localname,
+		   const XMLCh* const qname,
+		   const xercesc::Attributes& attrs);
+
+	void end(const XMLCh* const uri,
+		 const XMLCh* const localname,
+		 const XMLCh* const qname);
+
+      private:
+	self_t&		rep_;
+
+	Handler*	reph_;
+	UnsupHandler	unsuph_;
+	bool		first_;
+    };
+
     namespace builders
     {
       TParamFMP
       typename FMPtype::monoid_t*
       create_monoid (FMPtype& aut,
 		     const XMLCh* const localname,
-		     const xercesc::Attributes& attrs);
+		     const xercesc::Attributes& attrs,
+		     XMLEq&);
 
       template <typename M1, typename M2>
       Handler*
@@ -162,7 +195,8 @@ namespace vcsn
       void
       check_monoid_consistency (FMPtype&,
 				const XMLCh* const localname,
-			        const xercesc::Attributes& attrs);
+			        const xercesc::Attributes& attrs,
+				XMLEq&);
     } // !builders
 
     /**
@@ -170,6 +204,12 @@ namespace vcsn
      */
     namespace builders
     {
+      TParamFMP
+      void
+      create_type_writingData_node(const FMPtype& aut,
+				   xercesc::DOMDocument* doc,
+				   xercesc::DOMElement* root);
+
       TParamFMP
       void
       create_monoid_node(const FMPtype& aut,

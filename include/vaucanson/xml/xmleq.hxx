@@ -68,16 +68,17 @@ namespace vcsn
 
       /* attributes */
       identitySymbol = xercesc::XMLString::transcode("identitySym");
-      zeroSymbol = xercesc::XMLString::transcode("zeroSym");
       concat = xercesc::XMLString::transcode("timesSym");
 
       openPar = xercesc::XMLString::transcode("openPar");
       closePar = xercesc::XMLString::transcode("closePar");
-      plus = xercesc::XMLString::transcode("plusSym");
-      times = xercesc::XMLString::transcode("timesSym");
+      plusSym = xercesc::XMLString::transcode("plusSym");
+      timesSym = xercesc::XMLString::transcode("timesSym");
       openWeight = xercesc::XMLString::transcode("openWeight");
       closeWeight = xercesc::XMLString::transcode("closeWeight");
-      spaces = xercesc::XMLString::transcode("spacesSym");
+      spacesSym = xercesc::XMLString::transcode("spacesSym");
+      zeroSym = xercesc::XMLString::transcode("zeroSym");
+      starSym = xercesc::XMLString::transcode("starSym");
 
       value = xercesc::XMLString::transcode("value");
       id = xercesc::XMLString::transcode("id");
@@ -85,6 +86,9 @@ namespace vcsn
       target = xercesc::XMLString::transcode("target");
       x = xercesc::XMLString::transcode("x");
       y = xercesc::XMLString::transcode("y");
+
+      type = xercesc::XMLString::transcode("type");
+      free = xercesc::XMLString::transcode("free");
     }
 
     XMLEq::~XMLEq ()
@@ -130,22 +134,26 @@ namespace vcsn
       xercesc::XMLString::release(&writingData);
 
       xercesc::XMLString::release(&identitySymbol);
-      xercesc::XMLString::release(&zeroSymbol);
       xercesc::XMLString::release(&concat);
 
       xercesc::XMLString::release(&openPar);
       xercesc::XMLString::release(&closePar);
-      xercesc::XMLString::release(&plus);
-      xercesc::XMLString::release(&times);
+      xercesc::XMLString::release(&plusSym);
+      xercesc::XMLString::release(&timesSym);
       xercesc::XMLString::release(&openWeight);
       xercesc::XMLString::release(&closeWeight);
-      xercesc::XMLString::release(&spaces);
+      xercesc::XMLString::release(&spacesSym);
+      xercesc::XMLString::release(&zeroSym);
+      xercesc::XMLString::release(&starSym);
 
       xercesc::XMLString::release(&value);
       xercesc::XMLString::release(&source);
       xercesc::XMLString::release(&target);
       xercesc::XMLString::release(&x);
       xercesc::XMLString::release(&y);
+
+      xercesc::XMLString::release(&type);
+      xercesc::XMLString::release(&free);
     }
   } // End of namespace xml.
 } // End of namespace vcsn.
