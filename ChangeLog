@@ -1,5 +1,10 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Add tests for quot3base2.xml.
+	* taf-kit/tests/vcsn-char-fmp-b.test: Here.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Improve support for SeriesRep.
 	* taf-kit/src/edition_commands.hxx,
 	* taf-kit/src/fmp_commands.cc: Use the correct series representation

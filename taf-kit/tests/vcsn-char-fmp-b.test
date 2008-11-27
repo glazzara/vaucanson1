@@ -374,3 +374,16 @@ EOF
 
 # This test must throw an exception (ltl-to-pair precondition).
 fail255 $VCSN ltl-to-pair norm.xml > /dev/null
+
+# Some tests on quot3base2.xml
+# 1010111 is 87 (3 * 29)
+# 0011101 is 29
+res=`$VCSN eval quot3base2.xml 1010111 | vcsn-char-b -p'ONE=e ZERO=z ALPHABET=01' expand -`
+test x"$res" = x"0011101"
+# domain(quot3base2.xml) must be div3base2.xml
+# FIXME: we should use are-isomorphic
+$VCSN domain quot3base2.xml > quot3base2-domain.xml
+vcsn-char-b identity div3base2.xml > div3base2-identity.xml
+sort quot3base2-domain.xml > quot3base2-domain.sort.xml
+sort div3base2-identity.xml > div3base2-identity.sort.xml
+diff quot3base2-domain.sort.xml div3base2-identity.sort.xml
