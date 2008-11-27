@@ -202,7 +202,8 @@ namespace edition_commands
     a.add_series_transition(n_from, n_to,
 			    make_rat_exp(a.structure().series().monoid().
 					 alphabet(), ratexp,
-					 args.mrep, args.srep));
+					 *(a.structure().series().monoid().representation()),
+					 *(a.structure().series().representation())));
 # else
     // We don't parse ratexps, so we don't use these.
     (void) args;

@@ -1,5 +1,12 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Improve support for SeriesRep.
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/fmp_commands.cc: Use the correct series representation
+	  in `make_automaton' and `make_rat_exp' function calls.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add operator== for MonoidRep.
 	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh,
 	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
