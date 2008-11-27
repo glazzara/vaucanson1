@@ -23,9 +23,13 @@ namespace vcsn
 {
   namespace algebra
   {
+
+# define EXACT_TYPE FreeMonoid<Element<AlphabetSet<int>, std::set<int> > >
+
     inline
-    monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::monoid_rep()
+    MonoidRep<EXACT_TYPE>::MonoidRep()
     {
+      // Discard any initialization by the parent class.
       maybe_epsilon.clear();
 
       // Sane defaults.
@@ -41,7 +45,8 @@ namespace vcsn
     }
 
     template <typename Semiring>
-    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::series_rep() :
+    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::
+    series_rep() :
       open_par("("),
       close_par(")"),
       plus("+"),
@@ -53,6 +58,8 @@ namespace vcsn
     {
       spaces.push_back(" ");
     }
+
+# undef EXACT_TYPE
 
   } // ! algebra
 

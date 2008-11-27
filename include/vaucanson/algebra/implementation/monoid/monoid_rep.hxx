@@ -20,35 +20,10 @@
 
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 
-namespace vcsn {
-
-  namespace algebra {
-
-    template <typename Monoid>
-    monoid_rep<Monoid>::monoid_rep()
-    {
-      maybe_epsilon.clear();
-
-      // Sane defaults.
-      maybe_epsilon.push_back("1");
-      maybe_epsilon.push_back("e");
-
-      // Trying with more than one char.
-      maybe_epsilon.push_back("_e");
-      maybe_epsilon.push_back("eps");
-
-      empty = *(maybe_epsilon.begin());
-      concat = "";
-    }
-
-    template <typename M>
-    bool
-    operator==(boost::shared_ptr<monoid_rep<M> > lhs,
-	       boost::shared_ptr<monoid_rep<M> > rhs )
-    {
-      return (lhs->empty == rhs->empty &&
-	      lhs->concat == rhs->concat);
-    }
+namespace vcsn
+{
+  namespace algebra
+  {
 
   } // ! algebra
 

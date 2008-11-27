@@ -36,18 +36,14 @@ namespace vcsn {
     template <class F, class S>
     struct FreeMonoidProduct;
 
-    /*-------------------------------------------------------------.
-    | Specialization of the monoid_rep structure for this concept. |
-    `-------------------------------------------------------------*/
+    /*------------------------------------------------------------.
+    | Specialization of the MonoidRep structure for this concept. |
+    `------------------------------------------------------------*/
 
     template <typename F, typename S>
-    struct monoid_rep<FreeMonoidProduct<F, S> >
+    struct MonoidRep<FreeMonoidProduct<F, S> > :
+	   MonoidRepBase<MonoidRep, FreeMonoidProduct<F, S> >
     {
-      /// The representation of the empty word.
-      std::string empty;
-      std::string concat;
-      std::vector<std::string> maybe_epsilon;
-
       /// The representation of the opening parenthesis.
       std::string open_par;
 
@@ -57,7 +53,7 @@ namespace vcsn {
       /// The representation of the closing parenthesis.
       std::string close_par;
 
-      monoid_rep();
+      MonoidRep();
     };
 
     /*-------------------------------------------------------------.
@@ -98,8 +94,8 @@ namespace vcsn {
     };
 
     template <typename F, typename S>
-    bool operator==(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >,
-		    boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >);
+    bool operator==(boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >,
+		    boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >);
 
     template <typename Semiring, typename F, typename S>
     bool operator==(boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > >,
@@ -117,7 +113,7 @@ namespace vcsn {
       // Type helpers.
       typedef F first_monoid_t;
       typedef S second_monoid_t;
-      typedef monoid_rep<FreeMonoidProduct<F, S> > monoid_rep_t;
+      typedef MonoidRep<FreeMonoidProduct<F, S> > monoid_rep_t;
       typedef boost::shared_ptr<monoid_rep_t> shared_monoid_rep_t;
 
       /// Constructor based on two free monoids.

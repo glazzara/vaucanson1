@@ -72,11 +72,11 @@ namespace vcsn {
       typedef Word					monoid_elt_value_t;
       typedef Weight					semiring_elt_value_t;
       typedef Node<Word, Weight>			node_t;
-      typedef algebra::monoid_rep<Monoid>		monoid_rep_t;
+      typedef algebra::MonoidRep<Monoid>		monoid_rep_t;
       typedef boost::shared_ptr<monoid_rep_t>		shared_monoid_rep_t;
       typedef algebra::series_rep<Semiring, Monoid>	series_rep_t;
       typedef boost::shared_ptr<series_rep_t>		shared_series_rep_t;
-      typedef algebra::monoid_rep_default<Monoid>	default_monoid_rep_t;
+      typedef algebra::MonoidRepDefault<Monoid>		default_monoid_rep_t;
       typedef algebra::series_rep_default<Semiring, Monoid>
 	default_series_rep_t;
 

@@ -17,37 +17,30 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_MONOID_MONOID_REP_HH
 
-# include <vector>
-# include <string>
-
 # include <boost/shared_ptr.hpp>
 
-namespace vcsn {
+# include <vaucanson/algebra/implementation/monoid/monoid_rep_base.hh>
 
-  namespace algebra {
-
-    template <typename Monoid>
-    struct monoid_rep
+namespace vcsn
+{
+  namespace algebra
+  {
+    template <typename M>
+    struct MonoidRep : MonoidRepBase<MonoidRep, M>
     {
-      std::string	empty;
-      std::string	concat;
-      std::vector<std::string>	maybe_epsilon;
-
-      // Default CTOR
-      monoid_rep();
-
     };
 
     template <typename M>
-    bool operator==(boost::shared_ptr<monoid_rep<M> >,
-		    boost::shared_ptr<monoid_rep<M> >);
-
-    template <typename Monoid>
-    struct monoid_rep_default
+    struct MonoidRepDefault
     {
-      static boost::shared_ptr<monoid_rep<Monoid> > get_instance()
+      // Type helpers.
+      typedef MonoidRep<M>			monoid_rep_t;
+      typedef boost::shared_ptr<monoid_rep_t>	pointer_t;
+
+      // Singleton instance getter.
+      static pointer_t get_instance()
       {
-	static boost::shared_ptr<monoid_rep<Monoid> > p(new monoid_rep<Monoid>);
+	static pointer_t p(new monoid_rep_t());
 	return p;
       }
     };

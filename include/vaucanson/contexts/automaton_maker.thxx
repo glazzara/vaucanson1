@@ -146,7 +146,7 @@ namespace vcsn
 					     series_rep_default<semiring_t, monoid_t>::
 					     get_instance()->zero),
 		   const monoid_rep_t& mrep = *(vcsn::algebra::
-						monoid_rep_default<monoid_t>::
+						MonoidRepDefault<monoid_t>::
 						get_instance()),
 		   const series_rep_t& srep = *(vcsn::algebra::
 						series_rep_default<semiring_t, monoid_t>::
@@ -174,7 +174,7 @@ namespace vcsn
 					     series_rep_default<semiring_t, monoid_t>::
 					     get_instance()->zero),
 		   const monoid_rep_t& mrep = *(vcsn::algebra::
-						monoid_rep_default<monoid_t>::
+						MonoidRepDefault<monoid_t>::
 						get_instance()),
 		   const series_rep_t& srep = *(vcsn::algebra::
 						series_rep_default<semiring_t, monoid_t>::

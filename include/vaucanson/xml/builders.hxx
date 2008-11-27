@@ -234,7 +234,7 @@ namespace vcsn
       }
       else if (XMLString::equals(eq_.writingData, localname))
       {
-	algebra::monoid_rep<T> rep;
+	algebra::MonoidRep<T> rep;
 	if (tools::has_attribute(attrs, eq_.identitySymbol))
 	  rep.empty = xmlstr(tools::get_attribute(attrs, eq_.identitySymbol));
 	if (tools::has_attribute(attrs, eq_.concat))

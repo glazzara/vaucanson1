@@ -29,48 +29,16 @@ namespace vcsn
 
     template <class A>
     FreeMonoid<A>::FreeMonoid(const A& a) :
-      rep_(monoid_rep_default<FreeMonoid<A> >::get_instance()),
-      alph_(a)
+	rep_(MonoidRepDefault<FreeMonoid<A> >::get_instance()),
+	alph_(a)
     {
-      // Type helpers.
-      typedef typename A::letter_t letter_t;
-      typedef std::vector<std::string>::const_iterator iterator_t;
-      typedef monoid_rep<FreeMonoid<A> > monoid_rep_t;
-
-      monoid_rep_t rep;
-
-      for (iterator_t empty_it = rep.maybe_epsilon.begin();
-	   empty_it != rep.maybe_epsilon.end();
-	   ++empty_it)
-      {
-	bool found = true;
-
-	for_all_const_(A, i, a)
-	{
-	  if (letter_traits<letter_t>::letter_to_literal(*i) == *empty_it)
-	  {
-	    found = false;
-	    break;
-	  }
-	}
-
-	// Best match.
-	if (found)
-	{
-	  rep.empty = *empty_it;
-	  break;
-	}
-      }
-
-      set_representation(rep);
+      rep_->disambiguate(*this, rep_);
     }
 
     template <class A>
-    FreeMonoid<A>::FreeMonoid(const A& a,
-			      monoid_rep<FreeMonoid<A> > mr) :
-      rep_(boost::shared_ptr<monoid_rep<FreeMonoid<A> > >(
-	new monoid_rep<FreeMonoid<A> > (mr))),
-      alph_(a)
+    FreeMonoid<A>::FreeMonoid(const A& a, MonoidRep<FreeMonoid<A> > mr) :
+	rep_(boost::shared_ptr<MonoidRep<FreeMonoid<A> > >(new MonoidRep<FreeMonoid<A> > (mr))),
+	alph_(a)
     {
     }
 
@@ -83,7 +51,7 @@ namespace vcsn
     }
 
     template <class A>
-    const boost::shared_ptr<monoid_rep<FreeMonoid<A> > >
+    const boost::shared_ptr<MonoidRep<FreeMonoid<A> > >
     FreeMonoid<A>::representation() const
     {
       return rep_;
@@ -91,9 +59,9 @@ namespace vcsn
 
     template <class A>
     void
-    FreeMonoid<A>::set_representation(monoid_rep<FreeMonoid<A> > mr)
+    FreeMonoid<A>::set_representation(MonoidRep<FreeMonoid<A> > mr)
     {
-      rep_ = boost::shared_ptr<monoid_rep<FreeMonoid<A> > >(new monoid_rep<FreeMonoid<A> > (mr));
+      rep_ = boost::shared_ptr<MonoidRep<FreeMonoid<A> > >(new MonoidRep<FreeMonoid<A> > (mr));
     }
 
     template <class A>
@@ -108,12 +76,13 @@ namespace vcsn
       return alph_;
     }
 
-    template<typename A>
-    bool operator==(const FreeMonoid<A>& a,
-		    const FreeMonoid<A>& b)
+    template <typename A>
+    bool
+    operator==(const FreeMonoid<A>& lhs,
+	       const FreeMonoid<A>& rhs)
     {
-      return (a.alphabet() == b.alphabet()) &&
-	     (a.representation() == b.representation());
+      return (lhs.alphabet() == rhs.alphabet() &&
+	      lhs.representation() == rhs.representation());
     }
 
   } // ! algebra

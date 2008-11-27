@@ -26,23 +26,18 @@ namespace vcsn
 {
   namespace algebra
   {
-    /*-------------------------------------------------------------.
-    | Specialization of the monoid_rep structure for int letter    |
-    | based free monoids.                                          |
-    `-------------------------------------------------------------*/
+
+# define EXACT_TYPE FreeMonoid<Element<AlphabetSet<int>, std::set<int> > >
+
+    /*---------------------------------------------------------.
+    | Specialization of the MonoidRep structure for int letter |
+    | based free monoids.                                      |
+    `---------------------------------------------------------*/
 
     template <>
-    struct monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >
+    struct MonoidRep<EXACT_TYPE> : MonoidRepBase<MonoidRep, EXACT_TYPE>
     {
-      /// The representation of the empty word.
-      std::string empty;
-
-      /// The representation of the concatenation operation.
-      std::string concat;
-
-      std::vector<std::string> maybe_epsilon;
-
-      monoid_rep();
+      MonoidRep();
     };
 
     /*-------------------------------------------------------------.
@@ -66,6 +61,8 @@ namespace vcsn
 
       series_rep();
     };
+
+# undef EXACT_TYPE
 
   } // ! algebra
 

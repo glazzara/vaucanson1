@@ -1,5 +1,41 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Static polymorphism for MonoidRep via CRTP.
+	Rename `monoid_rep' to `MonoidRep' to be more consistent with the
+	other Vaucanson structures. Introduce `MonoidRepBase' to factor more
+	code. Rename `monoid_rep_default' to `MonoidRepDefault'.
+	* include/Makefile.am: Add new files to the distribution.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh
+	  (MonoidRep): Remove useless attributes `empty', `concat' and
+	  maybe_epsilon.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx:
+	  Streamline the default constructor. Use static polymorphism for
+	  `operator=='. Compare the monoid representation when comparing two
+	  FMP via `operator=='.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  Remove the logic to handle smart epsilon representation selection.
+	  Use `disambiguate' instead.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hh:
+	  Introduce the `EXACT_TYPE' macro. (MonoidRep): Remove useless
+	  attributes according to the previous changes.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hxx:
+	  Add more comments. Cosmetic changes.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hh: Use
+	  CRTP idiom.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep.hxx:
+	  Remove factored implementation.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep_base.hh: New.
+	* include/vaucanson/algebra/implementation/monoid/monoid_rep_base.hxx: New.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx,
+	* include/vaucanson/xml/builders.hxx,
+	* include/vaucanson/xml/contexts/fmp.hxx,
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
+	  Only refactoring.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Overhaul support for series representations.
 	* data/vaucanson.xsd: New complexType `seriesWritingData'. Rework
 	  the `writingData' element in `valueType'.

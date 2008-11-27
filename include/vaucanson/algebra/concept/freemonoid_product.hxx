@@ -24,24 +24,11 @@ namespace vcsn
   namespace algebra
   {
     template <typename F, typename S>
-    monoid_rep<FreeMonoidProduct<F, S> >::monoid_rep() :
-    open_par("("),
-    sep(","),
-    close_par(")")
-    {
-      maybe_epsilon.clear();
-
-      // Sane defaults.
-      maybe_epsilon.push_back("1");
-      maybe_epsilon.push_back("e");
-
-      // Trying with more than one char.
-      maybe_epsilon.push_back("_e");
-      maybe_epsilon.push_back("eps");
-
-      empty = *(maybe_epsilon.begin());
-      concat = "";
-    }
+    MonoidRep<FreeMonoidProduct<F, S> >::MonoidRep() :
+	open_par("("),
+	sep(","),
+	close_par(")")
+    {}
 
     template <typename Semiring, typename F, typename S>
     series_rep<Semiring, FreeMonoidProduct<F, S> >::series_rep() :
@@ -87,15 +74,18 @@ namespace vcsn
 
     template <typename F, typename S>
     bool
-    operator==(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > > lhs,
-	       boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > > rhs)
+    operator==(boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > > lhs,
+	       boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > > rhs)
     {
+      // Type helpers.
+      typedef MonoidRepBase<MonoidRep, FreeMonoidProduct<F, S> >
+	monoid_rep_base_t;
+      typedef boost::shared_ptr<monoid_rep_base_t>	p_t;
+
       return (lhs->open_par == rhs->open_par &&
 	      lhs->sep == rhs->sep &&
 	      lhs->close_par == rhs->close_par &&
-	      lhs->empty == rhs->empty &&
-	      lhs->concat == rhs->concat &&
-	      lhs->maybe_epsilon == rhs->maybe_epsilon);
+	      static_cast<p_t>(lhs) == static_cast<p_t>(rhs));
     }
 
     template <typename Semiring, typename F, typename S>
@@ -137,15 +127,15 @@ namespace vcsn
 
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const F& a, const S& b) :
-      first_monoid_ (a), second_monoid_ (b),
-      rep_(monoid_rep_default<FreeMonoidProduct<F, S> >::get_instance())
+	first_monoid_(a), second_monoid_(b),
+	rep_(MonoidRepDefault<FreeMonoidProduct<F, S> >::get_instance())
     {}
 
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const F& a, const S& b,
-					       monoid_rep<FreeMonoidProduct<F, S> > mr) :
-      first_monoid_ (a), second_monoid_ (b),
-      rep_(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >(new monoid_rep<FreeMonoidProduct<F, S> >(mr)))
+					       MonoidRep<FreeMonoidProduct<F, S> > mr) :
+	first_monoid_(a), second_monoid_(b),
+	rep_(boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >(new MonoidRep<FreeMonoidProduct<F, S> >(mr)))
     {}
 
     template <class F, class S>
@@ -185,7 +175,7 @@ namespace vcsn
     }
 
     template <typename F, typename S>
-    const boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >
+    const boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >
     FreeMonoidProduct<F, S>::representation() const
     {
       return rep_;
@@ -193,17 +183,19 @@ namespace vcsn
 
     template <typename F, typename S>
     void
-    FreeMonoidProduct<F, S>::set_representation(monoid_rep<FreeMonoidProduct<F, S> > mr)
+    FreeMonoidProduct<F, S>::set_representation(MonoidRep<FreeMonoidProduct<F, S> > mr)
     {
-      rep_ = boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >(new monoid_rep<FreeMonoidProduct<F, S> > (mr));
+      rep_ = boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >(new MonoidRep<FreeMonoidProduct<F, S> > (mr));
     }
 
-    template<class F, class S>
-    bool operator==(const FreeMonoidProduct<F, S>& a,
-		    const FreeMonoidProduct<F, S>& b)
+    template <typename F, typename S>
+    bool
+    operator==(const FreeMonoidProduct<F, S>& lhs,
+	       const FreeMonoidProduct<F, S>& rhs)
     {
-      return (a.first_monoid() == b.first_monoid()) and
-	     (a.second_monoid() == b.second_monoid());
+      return (lhs.first_monoid() == rhs.first_monoid() &&
+	      lhs.second_monoid() == rhs.second_monoid() &&
+	      lhs.representation() == rhs.representation());
     }
 
   } // ! algebra

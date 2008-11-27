@@ -42,7 +42,7 @@ namespace vcsn
     {
       // Type helpers.
       typedef A alphabets_elt_t;
-      typedef monoid_rep<FreeMonoid<A> > monoid_rep_t;
+      typedef MonoidRep<FreeMonoid<A> > monoid_rep_t;
       typedef boost::shared_ptr<monoid_rep_t> shared_monoid_rep_t;
 
       /// Constructor based on an alphabet, with an adaptative
