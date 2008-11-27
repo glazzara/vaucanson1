@@ -62,10 +62,10 @@ namespace vcsn
     class monGenAction<vcsn::algebra::FreeMonoid<T> >
     {
     public:
-      typedef vcsn::algebra::FreeMonoid<T> self_t;
-      typedef typename self_t::alphabet_t alphabet_t;
+      typedef vcsn::algebra::FreeMonoid<T> monoid_t;
+      typedef typename monoid_t::alphabet_t alphabet_t;
 
-      monGenAction(self_t&);
+      monGenAction(monoid_t&);
       void operator () (const std::string&);
     private:
       alphabet_t& alphabet_;
@@ -76,12 +76,12 @@ namespace vcsn
     class monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >
     {
     public:
-      typedef vcsn::Element<vcsn::algebra::Series<T, U>, V> self_t;
+      typedef vcsn::Element<vcsn::algebra::Series<T, U>, V> series_t;
 
-      monGenAction(self_t&);
+      monGenAction(series_t&);
       void operator () (const std::string&);
     private:
-      self_t& s_;
+      series_t& s_;
     };
 
     /**

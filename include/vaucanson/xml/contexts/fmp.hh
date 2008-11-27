@@ -96,11 +96,11 @@ namespace vcsn
     {
       public:
 	// Type helpers.
-	typedef FMPsreptype self_t;
+	typedef FMPsreptype srep_t;
 
 	SeriesRepresentationHandler(xercesc::SAX2XMLReader* parser,
 				    Handler& root,
-				    self_t& srep);
+				    srep_t& srep);
 
 	void start(const XMLCh* const uri,
 		   const XMLCh* const localname,
@@ -112,7 +112,7 @@ namespace vcsn
 		 const XMLCh* const qname);
 
       private:
-	self_t&		rep_;
+	srep_t&		rep_;
 
 	Handler*	reph_;
 	UnsupHandler	unsuph_;

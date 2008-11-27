@@ -41,14 +41,14 @@ namespace vcsn
 
     template <typename T>
     monGenAction<vcsn::algebra::FreeMonoid<T> >::
-    monGenAction(self_t& monoid)
+    monGenAction(monoid_t& monoid)
     : alphabet_(monoid.alphabet())
     {
     }
 
     template <typename T, typename U, typename V>
     monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >::
-    monGenAction(self_t& s)
+    monGenAction(series_t& s)
     : s_(s)
     {
     }
@@ -68,8 +68,8 @@ namespace vcsn
     monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >::
     operator () (const std::string& str)
     {
-      typename self_t::monoid_elt_t m(s_.structure().monoid(), str);
-      self_t tmp(s_.structure(), m);
+      typename series_t::monoid_elt_t m(s_.structure().monoid(), str);
+      series_t tmp(s_.structure(), m);
 
       s_ = s_ * tmp;
     }
