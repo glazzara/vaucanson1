@@ -41,12 +41,12 @@ namespace vcsn {
     `-------------------------------------------------------------*/
 
     template <typename F, typename S>
-    struct monoid_rep<FreeMonoidProduct<F, S> > : monoid_rep<F>
+    struct monoid_rep<FreeMonoidProduct<F, S> >
     {
       /// The representation of the empty word.
-      using monoid_rep<F>::empty;
-      using monoid_rep<F>::concat;
-      using monoid_rep<F>::maybe_epsilon;
+      std::string empty;
+      std::string concat;
+      std::vector<std::string> maybe_epsilon;
 
       /// The representation of the opening parenthesis.
       std::string open_par;
@@ -65,22 +65,21 @@ namespace vcsn {
     `-------------------------------------------------------------*/
 
     template <typename Semiring, typename F, typename S>
-    struct series_rep<Semiring, FreeMonoidProduct<F, S> > : series_rep<Semiring, F>
+    struct series_rep<Semiring, FreeMonoidProduct<F, S> >
     {
       // Type helpers.
-      typedef series_rep<Semiring, F> parent_t;
       typedef series_rep<Semiring, F> first_rep_t;
       typedef series_rep<Semiring, S> second_rep_t;
 
-      using parent_t::open_par;
-      using parent_t::close_par;
-      using parent_t::plus;
-      using parent_t::times;
-      using parent_t::star;
-      using parent_t::zero;
-      using parent_t::open_weight;
-      using parent_t::close_weight;
-      using parent_t::spaces;
+      std::string		open_par;
+      std::string		close_par;
+      std::string		plus;
+      std::string		times;
+      std::string		star;
+      std::string		zero;
+      std::string		open_weight;
+      std::string		close_weight;
+      std::vector<std::string>	spaces;
 
       /// Default CTOR.
       series_rep();
@@ -101,6 +100,10 @@ namespace vcsn {
     template <typename F, typename S>
     bool operator==(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >,
 		    boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > >);
+
+    template <typename Semiring, typename F, typename S>
+    bool operator==(boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > >,
+		    boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > >);
 
     /*------------------------.
     | FreeMonoidProduct<F, S> |

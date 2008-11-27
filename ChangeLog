@@ -1,5 +1,14 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Simplify specialization of monoid and series representation for FMP.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh: Remove
+	  inheritance, and update accordingly. New `operator==' for series
+	  representations (FMP flavor).
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Update
+	  the implementation according to the previous change.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Simplify specialization for int based Series representation.
 	* include/vaucanson/algebra/implementation/series/series.hh: Remove
 	  inheritance. Update the structure according to this change.

@@ -25,7 +25,6 @@ namespace vcsn
   {
     template <typename F, typename S>
     monoid_rep<FreeMonoidProduct<F, S> >::monoid_rep() :
-    monoid_rep<F>(),
     open_par("("),
     sep(","),
     close_par(")")
@@ -46,8 +45,16 @@ namespace vcsn
 
     template <typename Semiring, typename F, typename S>
     series_rep<Semiring, FreeMonoidProduct<F, S> >::series_rep() :
-    series_rep<Semiring, F>()
+	open_par("("),
+	close_par(")"),
+	plus("+"),
+	times("."),
+	star("*"),
+	zero("0"),
+	open_weight("{"),
+	close_weight("}")
     {
+      spaces.push_back(" ");
     }
 
     template <typename Semiring, typename F, typename S>
@@ -65,15 +72,15 @@ namespace vcsn
     }
 
     template <typename Semiring, typename F, typename S>
-    const series_rep<Semiring, S>&
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation() const
+    series_rep<Semiring, S>&
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation()
     {
       return second_representation_;
     }
 
     template <typename Semiring, typename F, typename S>
-    series_rep<Semiring, S>&
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation()
+    const series_rep<Semiring, S>&
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation() const
     {
       return second_representation_;
     }
@@ -83,11 +90,45 @@ namespace vcsn
     operator==(boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > > lhs,
 	       boost::shared_ptr<monoid_rep<FreeMonoidProduct<F, S> > > rhs)
     {
-      return (lhs->open_par == rhs->open_par) &&
-	     (lhs->sep == rhs->sep) &&
-	     (lhs->close_par == rhs->close_par) &&
-	     (static_cast<monoid_rep<F> >(lhs).representation() ==
-	      static_cast<monoid_rep<F> >(rhs).representation());
+      return (lhs->open_par == rhs->open_par &&
+	      lhs->sep == rhs->sep &&
+	      lhs->close_par == rhs->close_par &&
+	      lhs->empty == rhs->empty &&
+	      lhs->concat == rhs->concat &&
+	      lhs->maybe_epsilon == rhs->maybe_epsilon);
+    }
+
+    template <typename Semiring, typename F, typename S>
+    bool
+    operator==(boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > > lhs,
+	       boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > > rhs)
+    {
+      // Type helpers.
+      typedef series_rep<Semiring, F> first_rep_t;
+      typedef series_rep<Semiring, S> second_rep_t;
+
+      // FIXME: we should provide operator== for the pointed to types.
+      boost::shared_ptr<first_rep_t> lhs_first(new first_rep_t());
+      boost::shared_ptr<second_rep_t> lhs_second(new second_rep_t());
+      boost::shared_ptr<first_rep_t> rhs_first(new first_rep_t());
+      boost::shared_ptr<second_rep_t> rhs_second(new second_rep_t());
+
+      *lhs_first = lhs->first_representation();
+      *lhs_second = lhs->second_representation();
+      *rhs_first = rhs->first_representation();
+      *rhs_second = rhs->second_representation();
+
+      return (lhs_first == rhs_first &&
+	      lhs_second == rhs_second &&
+	      lhs->open_par == rhs->open_par &&
+	      lhs->close_par == rhs->close_par &&
+	      lhs->plus == rhs->plus &&
+	      lhs->times == rhs->times &&
+	      lhs->star == rhs->star &&
+	      lhs->zero == rhs->zero &&
+	      lhs->open_weight == rhs->open_weight &&
+	      lhs->close_weight == rhs->close_weight &&
+	      lhs->spaces == rhs->spaces);
     }
 
     /*------------------------.
