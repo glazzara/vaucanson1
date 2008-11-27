@@ -1,5 +1,10 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Fix an outdated test.
+	* taf-kit/tests/vcsn-char-b.test: Here.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Overhaul representation handling w.r.t. alphabets.
 	* taf-kit/src/fmp_commands.cc: More comments.
 	* taf-kit/src/getters.hh: New `set_monoid_writing_data_',
