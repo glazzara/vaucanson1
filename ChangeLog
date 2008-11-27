@@ -11,12 +11,6 @@
 
 2008-11-27  Reuben Thomas  <rrt@sc3d.org>
 
-	Fix automake error.
-	* src/tests/test-suites/Makefile.am: Set (=) rather than
-	  append to (+=) EXTRA_DIST.
-
-2008-11-27  Reuben Thomas  <rrt@sc3d.org>
-
 	Flag a problem with FIXME.
 	* src/tests/bin/generate-test-suite.sh: .
 
