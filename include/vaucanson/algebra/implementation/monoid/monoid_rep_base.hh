@@ -22,6 +22,7 @@
 
 # include <boost/shared_ptr.hpp>
 
+# include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn
