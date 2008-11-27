@@ -1,5 +1,10 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Fix uninitialized attributes in TypeHandler.
+	* include/vaucanson/xml/handlers.hxx: Here.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Static polymorphism for SeriesRep via CRTP.
 	Rename `series_rep' to `SeriesRep' to be more consistent with the
 	other Vaucanson structures. Introduce `SeriesRepBase' to factor more

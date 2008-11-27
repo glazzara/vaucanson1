@@ -127,7 +127,13 @@ namespace vcsn
 				 Handler& root,
 				 T& param)
       : Handler(parser, root),
+        monoid_(0),
+	semiring_(0),
+	rep_(0),
 	param_(param),
+	monoidh_(0),
+	reph_(0),
+	semiringh_(0),
 	unsuph_(parser, *this)
     {
     }
