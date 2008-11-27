@@ -24,6 +24,17 @@ namespace vcsn
 {
   namespace algebra
   {
+    template <typename M>
+    bool
+    operator==(boost::shared_ptr<MonoidRep<M> > lhs,
+	       boost::shared_ptr<MonoidRep<M> > rhs)
+    {
+      // Type helpers.
+      typedef MonoidRepBase<MonoidRep, M>		monoid_rep_base_t;
+      typedef boost::shared_ptr<monoid_rep_base_t>	p_t;
+
+      return (static_cast<p_t>(lhs) == static_cast<p_t>(rhs));
+    }
 
   } // ! algebra
 

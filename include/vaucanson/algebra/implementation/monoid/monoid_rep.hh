@@ -31,6 +31,10 @@ namespace vcsn
     };
 
     template <typename M>
+    bool operator==(boost::shared_ptr<MonoidRep<M> >,
+		    boost::shared_ptr<MonoidRep<M> >);
+
+    template <typename M>
     struct MonoidRepDefault
     {
       // Type helpers.
