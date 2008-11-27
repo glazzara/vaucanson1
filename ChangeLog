@@ -1,5 +1,20 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Overhaul divkbaseb, new quotkbaseb.
+	* data/automata/char-b/divkbaseb.cc: Include <vector>. Add more
+	  comments. Use an `std::vector' to map integers to letters. Use
+	  closed form of `d' in the loop.
+	* data/automata/char-fmp-b/Makefile.am: Build new executable
+	  `quotkbaseb'. New automaton `quot3base2.xml'.
+	* data/automata/char-fmp-b/quotkbaseb.cc: New.
+	* data/automata/char-z/Makefile.am: Build new executable
+	  `divkbaseb'. New automaton `div3base2.xml'
+	* data/automata/char-z/divkbaseb.cc: New.
+	* taf-kit/tests/vcsn-char-z.test: New test for the `Z' flavor of
+	  `div3base2.xml'.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Add a test for div3base2.
 	* taf-kit/tests/vcsn-char-b.test: Here.
 

@@ -15,17 +15,24 @@
 include $(top_srcdir)/vaucanson.mk
 
 # Z automata.
-noinst_PROGRAMS = c1
+noinst_PROGRAMS = c1 divkbaseb
 
-nodist_char_z_automata_DATA =                          \
+nodist_char_z_automata_DATA =		\
   b1.xml				\
-  c1.xml
+  c1.xml				\
+  div3base10.xml
 
 CLEANFILES += $(nodist_char_z_automata_DATA)
 
 # This automaton counts the number of bs.
 b1.xml: ../char-b/b1.xml
 	sed -e 's/set="B"/set="Z"/g' $< >$@.tmp
+	mv $@.tmp $@
+
+divkbaseb_CPPFLAGS = $(AM_CPPFLAGS)
+divkbaseb_SOURCES = divkbaseb.cc
+div3base10.xml: divkbaseb$(EXEEXT)
+	./divkbaseb$(EXEEXT) 3 10 xml >$@.tmp
 	mv $@.tmp $@
 
 c1_CPPFLAGS = $(AM_CPPFLAGS)

@@ -190,4 +190,18 @@ done <<EOF
 [Nothing]      ({4}a+b){5}       ({4} a+b) {5}
 [Nothing]      ({4}a.b){5}       ({4} a.b) {5}
 EOF
+
+## -------------------- ##
+## Test div3base10.xml. ##
+## -------------------- ##
+
+i=0
+end=100
+while [ $i -le $end ];
+do
+  out=`$VCSN eval div3base10.xml "$i"`
+  test $out = `expr $i % 3`
+  i=`expr $i + 1`
+done
+
 exit 0

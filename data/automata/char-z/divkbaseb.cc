@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,12 +17,12 @@
 #include <sstream>
 #include <vector>
 
-#include <vaucanson/boolean_automaton.hh>
-using namespace vcsn::boolean_automaton;
+#include <vaucanson/z_automaton.hh>
+using namespace vcsn::z_automaton;
 #include <vaucanson/tools/dumper.hh>
 
-// Build the boolean automaton which accepts a word n representing a
-// number in base b if and only if k|n.
+// See divkbaseb in char-b. This file is basically the same, but using a
+// Z-automaton to get the remainder.
 int
 main(int argc, char** argv)
 {
@@ -33,12 +33,9 @@ main(int argc, char** argv)
     return 1;
   }
 
-  // The divisor `k'.
   int divisor = vcsn::tools::string_to_int(std::string(argv[1]));
-  // The base `b'.
   int base = vcsn::tools::string_to_int(std::string(argv[2]));
 
-  // Build the alphabet (from letter 0 to base - 1).
   alphabet_t alpha;
   std::vector<letter_t> int_to_letter;
 
@@ -48,18 +45,20 @@ main(int argc, char** argv)
     alpha.insert(int_to_letter.back());
   }
 
-  // Build the automaton.
   automaton_t a = make_automaton(alpha);
 
-  // Add one state for each possible remainder. The last state encountered
-  // during the evaluation will be n % k. If the last state is the state 0,
-  // it means that the residue is 0, ie the word will be accepted, ie the
-  // number is a multiple of k.
+  // Each state is given a unique weight, so that if the word evaluates to u,
+  // the remainder in the division of n by k is u.
   for (int i = 0; i < divisor; ++i)
-    a.add_state();
+  {
+    semiring_elt_value_t v = i;
+    series_set_elt_t weight(a.structure().series());
+    weight.assoc(identity_value(SELECT(monoid_t),
+				SELECT(monoid_elt_value_t)), v);
+    a.set_final(a.add_state(), weight);
+  }
 
   a.set_initial(0);
-  a.set_final(0);
 
   for (int i = 0; i < divisor; ++i)
   {
@@ -71,7 +70,6 @@ main(int argc, char** argv)
     }
   }
 
-  // Dump the automaton.
   std::stringstream name;
   name << "div" << divisor << "base" << base;
   vcsn::tools::dumper(argc, argv, 3)(std::cout, a, name.str());

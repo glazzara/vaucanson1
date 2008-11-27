@@ -14,11 +14,12 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-noinst_PROGRAMS = t1 u1
+noinst_PROGRAMS = t1 u1 quotkbaseb
 
-nodist_char_fmp_b_automata_DATA =			\
-	t1.xml			\
-	u1.xml
+nodist_char_fmp_b_automata_DATA =	\
+	t1.xml				\
+	u1.xml				\
+	quot3base2.xml
 
 CLEANFILES += $(nodist_char_fmp_b_automata_DATA)
 
@@ -34,4 +35,11 @@ u1_SOURCES = u1.cc
 
 u1.xml: u1$(EXEEXT)
 	./u1$(EXEEXT) >$@.tmp
+	mv $@.tmp $@
+
+quotkbaseb_CPPFLAGS = $(AM_CPPFLAGS)
+quotkbaseb_SOURCES = quotkbaseb.cc
+
+quot3base2.xml: quotkbaseb$(EXEEXT)
+	./quotkbaseb$(EXEEXT) 3 2 >$@.tmp
 	mv $@.tmp $@
