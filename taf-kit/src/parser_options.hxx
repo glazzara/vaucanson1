@@ -128,6 +128,7 @@ parser_options<M, S>::check_collision()
   CHECK_COLISION(srep_.star, "STAR")
   CHECK_COLISION(srep_.open_weight, "OWEIGHT")
   CHECK_COLISION(mrep_.empty, "ONE")
+  CHECK_COLISION(mrep_.concat, "CONCAT")
   CHECK_COLISION(srep_.zero, "ZERO")
   for_all(std::vector<std::string>, it, srep_.spaces)
     CHECK_COLISION(*it, "SPACE")
@@ -171,6 +172,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const pa
   NEW_TERMINAL_SYMBOL_STR(oweight , "OWEIGHT");
   NEW_TERMINAL_SYMBOL_STR(cweight , "CWEIGHT");
   NEW_TERMINAL_SYMBOL_STR(space   , "SPACE");
+  NEW_TERMINAL_SYMBOL_STR(concat  , "CONCAT");
 
 # undef NEW_TERMINAL_SYMBOL_STR
 
@@ -201,6 +203,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const pa
   push_space_cb	  = bind(&self_t::push_space     , this, _1, _2);
   one_cb	  = bind(&self_t::push_one       , this, _1, _2);
   zero_cb	  = bind(&self_t::push_zero      , this, _1, _2);
+  concat_cb	  = bind(&self_t::push_concat	 , this, _1, _2);
 
   parser_properties = !list_p(property, space_c);
   property = ( alphabet     >> equal >> alphabet_definition ) |
@@ -213,6 +216,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const pa
              ( star >> equal >> word[star_cb] ) |
              ( oweight >> equal >> word[open_weight_cb] ) |
              ( cweight >> equal >> word[close_weight_cb] ) |
+             ( concat >> equal >> word[concat_cb] ) |
 	     ( space >> equal >> word[push_space_cb] );
 
   letters = *(letter[push_letter_cb]);
@@ -357,6 +361,15 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::push_one(const char
 								      const char* to)
 {
   mrep_ref.empty = escape(from, to);
+}
+
+template <typename M, typename S>
+template <typename ScannerT>
+void
+parser_options<M, S>::options_grammar::definition<ScannerT>::push_concat(const char* from,
+									 const char* to)
+{
+  mrep_ref.concat = escape(from, to);
 }
 
 template <typename M, typename S>

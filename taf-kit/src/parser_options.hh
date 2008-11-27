@@ -52,7 +52,7 @@
  * letters ::= letter*;
  * words ::= [ word { ',' word } ];
  * special-name ::= "OPAR" | "CPAR" | "PLUS" | "TIMES" |
- *                  "STAR" | "OWEIGHT" | "CWEIGHT" | "SPACE";
+ *                  "STAR" | "OWEIGHT" | "CWEIGHT" | "SPACE" | "CONCAT";
  * word-pair ::= '(' word ',' word ')';
  * word ::= letter*;
  * character ::= escaped-character | unescaped-character;
@@ -119,6 +119,7 @@ private:
       boost::function<void(const char*, const char*)> push_space_cb;
       boost::function<void(const char*, const char*)> one_cb;
       boost::function<void(const char*, const char*)> zero_cb;
+      boost::function<void(const char*, const char*)> concat_cb;
 
       // reference to parser_options creator
       typename parser_options<M, S>::alphabet_t& al_ref;
@@ -259,6 +260,17 @@ private:
       void
       push_zero(const char* from,
 		const char* to);
+
+      /**
+       * Callback function called to set concat token representation
+       * into the monoid_rep_t structure.
+       *
+       * @param from Begin iterator.
+       * @param to   End iterator.
+       */
+      void
+      push_concat(const char* from,
+		  const char* to);
 
     }; // ! definition
 
