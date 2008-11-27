@@ -1,5 +1,11 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a bug for int based series representations.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hxx:
+	  Clear the `spaces' vector, same as `maybe_zero'.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Tweak collision checks.
 	* taf-kit/src/parser_options.hxx: Fix a typo by renaming the macro
 	  `CHECK_COLISION' to `CHECK_COLLISION'. Do not check if `CONCAT'

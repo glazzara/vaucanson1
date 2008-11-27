@@ -49,6 +49,7 @@ namespace vcsn
     {
       // Discard any initialization by the parent class.
       this->maybe_zero.clear();
+      this->spaces.clear();
 
       // Sane defaults.
       this->maybe_zero.push_back("z");
