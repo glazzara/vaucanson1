@@ -58,6 +58,18 @@ get_word(Element<S, T>& aut, const std::string& s);
 
 static automaton_t get_aut (const arguments_t& args, int n);
 
+template <typename T>
+void set_monoid_writing_data_(T& dst, const T& src, const cmd_flags_t& flags);
+
+template <typename T>
+void set_series_writing_data_(T& dst, const T& src, const cmd_flags_t& flags);
+
+void set_writing_data(automaton_t&, const arguments_t&);
+# ifdef WITH_TWO_ALPHABETS
+void set_boolean_writing_data(IOAUT_CONTEXT::automaton_t&,
+			      const arguments_t&);
+# endif // ! WITH_TWO_ALPHABETS
+
 # include "getters.hxx"
 
 #endif /* !GETTERS_HH */

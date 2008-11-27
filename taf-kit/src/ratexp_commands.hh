@@ -52,17 +52,30 @@ using vcsn::xml::XML;
   | Command definition of RatExp specific algorithms.  |
   `---------------------------------------------------*/
 
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (exp)
-			ALGO (standard_of));
+DEFINE_COMMAND (NAME (standard_of)
+		CODE (
+		      rat_exp_t e = get_exp(args, 1);
+		      automaton_t a = make_automaton(get_alphabet(args.alphabet));
+		      a = standard_of(e);
+		      set_writing_data(a, args))
+		KEEP_AUTOMATON (a)
+		RETURNVALUE (0));
 
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (exp)
-			ALGO (thompson_of));
+DEFINE_COMMAND (NAME (thompson_of)
+		CODE (
+		      rat_exp_t e = get_exp(args, 1);
+		      automaton_t a = make_automaton(get_alphabet(args.alphabet));
+		      a = thompson_of(e);
+		      set_writing_data(a, args))
+		KEEP_AUTOMATON (a)
+		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (derived_term_automaton)
 		CODE (
-		  rat_exp_t   e = get_exp (args, 1);
-		  automaton_t a = make_automaton (get_alphabet (args.alphabet), args.mrep, args.srep);
-		  derived_term_automaton (a, e))
+		      rat_exp_t e = get_exp(args, 1);
+		      automaton_t a = make_automaton(get_alphabet(args.alphabet));
+		      derived_term_automaton(a, e);
+		      set_writing_data(a, args))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
 

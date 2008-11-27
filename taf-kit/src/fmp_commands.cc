@@ -128,6 +128,8 @@ DEFINE_COMMAND (NAME (to_rw)
 		  automaton_t fmp = get_aut(args, 1);
 		  automaton_t::monoid_t m = fmp.structure().series().monoid();
 		  RW_CONTEXT::automaton_t a =
+		  // FIXME: we should use representations from the fmp
+		  // automaton.
 		  RW_CONTEXT::make_automaton(m.first_monoid().alphabet(),
 					     m.second_monoid().alphabet());
 		  fmp_to_rw(fmp, a))

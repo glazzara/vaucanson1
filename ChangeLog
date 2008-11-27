@@ -1,5 +1,19 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Overhaul representation handling w.r.t. alphabets.
+	* taf-kit/src/fmp_commands.cc: More comments.
+	* taf-kit/src/getters.hh: New `set_monoid_writing_data_',
+	  `set_series_writing_data_', `set_writing_data'.
+	  [WITH_TWO_ALPHABETS]: New `set_boolean_writing_data'.
+	* taf-kit/src/getters.hxx: Update getters implementation to have the
+	  desired behavior.
+	* taf-kit/src/main.cc: Disable collision check thanks to the
+	  adaptative behavior.
+	* taf-kit/src/ratexp_commands.hh: Rework some commands
+	  implementation to correctly handle user provided tokens.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: New structure to overwrite writing data.
 	* taf-kit/src/common.hh: New `cmd_flags_t'. (arguments_t): New
 	  attributes `cf'. [WITH_TWO_ALPHABETS] (arguments_t): New

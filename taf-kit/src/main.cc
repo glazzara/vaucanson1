@@ -325,7 +325,6 @@ int main (int argc, char* argv[])
       {
 	parser_options<monoid_rep_t, series_rep_t> p_opts(li->args.parser);
 
-	p_opts.check_collision();
 	li->args.alphabet = p_opts.get_letters();
 	li->args.srep = p_opts.get_srep();
 	li->args.mrep = p_opts.get_mrep();

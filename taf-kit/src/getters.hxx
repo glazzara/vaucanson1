@@ -87,20 +87,30 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
 {
   const std::string& exp = args.args[n];
   const std::vector<std::string>& alphabet = args.alphabet;
-  const monoid_rep_t& mrep = args.mrep;
-  const series_rep_t& srep = args.srep;
+
+  // Build a monoid and a series with smart token representations.
+  monoid_t M(get_alphabet(alphabet));
+  semiring_t S;
+  series_set_t series(S, M);
+
+  set_monoid_writing_data_(*(M.representation()), args.mrep, args.cf);
+  set_series_writing_data_(*(series.representation()), args.srep, args.cf);
 
 # ifdef GLOBAL_RESULT
   if (exp == "-")
-    {
-      return boost::apply_visitor (rat_exp_getter (get_alphabet (alphabet),
-						   GLOBAL_RESULT.name,
-						   mrep, srep),
-				   GLOBAL_RESULT.output);
-    }
+  {
+    return boost::apply_visitor(rat_exp_getter(M.alphabet(),
+					       GLOBAL_RESULT.name,
+					       *(M.representation()),
+					       *(series.representation())),
+				GLOBAL_RESULT.output);
+  }
 # endif // !GLOBAL_RESULT
 
-  return make_rat_exp (get_alphabet (alphabet), exp, mrep, srep);
+  return make_rat_exp(M.alphabet(),
+		      exp,
+		      *(M.representation()),
+		      *(series.representation()));
 }
 
 
@@ -131,6 +141,10 @@ static automaton_t get_aut (const arguments_t& args, int n)
       automaton_t a = boost::apply_visitor
 	(automaton_getter (GLOBAL_RESULT.name,
 			   GLOBAL_RESULT.input_type), GLOBAL_RESULT.output);
+
+      // Set the writing data before return.
+      set_writing_data(a, args);
+
       return a;
     }
 # endif // !GLOBAL_RESULT
@@ -159,9 +173,9 @@ static automaton_t get_aut (const arguments_t& args, int n)
     using namespace vcsn::xml;
 
 # ifndef WITH_TWO_ALPHABETS
-    automaton_t a = make_automaton (alphabet_t (), args.mrep, args.srep);
+    automaton_t a = make_automaton(alphabet_t());
 # else
-    automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t (), args.mrep, args.mrep1, args.mrep2, args.srep);
+    automaton_t a = make_automaton(first_alphabet_t(), second_alphabet_t());
 # endif // !WITH_TWO_ALPHABETS
 
 # ifdef GLOBAL_RESULT
@@ -185,6 +199,10 @@ static automaton_t get_aut (const arguments_t& args, int n)
 
     if (s != "-")
       delete is;
+
+    // Set the writing data before return.
+    set_writing_data(a, args);
+
     return a;
   }
   else
@@ -206,6 +224,10 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
       boost::apply_visitor(boolean_automaton_getter
 			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_type),
 			   GLOBAL_RESULT.output);
+
+    // Set the writing data before return.
+    set_boolean_writing_data(a, args);
+
     return a;
   }
 # endif // !GLOBAL_RESULT
@@ -217,8 +239,7 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
     using namespace vcsn::xml;
 
     IOAUT_CONTEXT::automaton_t a =
-      IOAUT_CONTEXT::make_automaton(first_alphabet_t(), args.mrep1,
-				    args.srep.first_representation());
+      IOAUT_CONTEXT::make_automaton(first_alphabet_t());
 
 # ifdef GLOBAL_RESULT
     switch (GLOBAL_RESULT.input_type)
@@ -239,6 +260,10 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
 
     if (s != "-")
       delete is;
+
+    // Set the writing data before return.
+    set_boolean_writing_data(a, args);
+
     return a;
   }
   else
@@ -250,70 +275,65 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
 #endif // !WITH_TWO_ALPHABETS
 
 // Set the representations provided on the command line.
-# define SET_TOKEN(exp, name, rep) \
-if (args.cf. name) \
-a.structure().series() exp name = args. rep . name
+# define SET_TOKEN(name) if (flags. name) { dst . name = src . name; }
+
+template <typename T>
+void set_monoid_writing_data_(T& dst, const T& src, const cmd_flags_t& flags)
+{
+  SET_TOKEN(empty)
+  SET_TOKEN(concat)
+}
+
+template <typename T>
+void set_series_writing_data_(T& dst, const T& src, const cmd_flags_t& flags)
+{
+  SET_TOKEN(open_par)
+  SET_TOKEN(close_par)
+  SET_TOKEN(plus)
+  SET_TOKEN(times)
+  SET_TOKEN(star)
+  SET_TOKEN(open_weight)
+  SET_TOKEN(close_weight)
+  SET_TOKEN(spaces)
+  SET_TOKEN(zero)
+}
+
+# undef SET_TOKEN
 
 # ifdef WITH_TWO_ALPHABETS
+void set_boolean_writing_data(IOAUT_CONTEXT::automaton_t& a,
+			      const arguments_t& args)
+{
+  set_series_writing_data_(*(a.structure().series().representation()),
+			   args.srep.first_representation(), args.cf1);
+  set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
+			   args.mrep1, args.cf1);
+}
 void set_writing_data(automaton_t& a, const arguments_t& args)
 {
-  SET_TOKEN(.representation()->, open_par, srep);
-  SET_TOKEN(.representation()->, close_par, srep);
-  SET_TOKEN(.representation()->, plus, srep);
-  SET_TOKEN(.representation()->, times, srep);
-  SET_TOKEN(.representation()->, star, srep);
-  SET_TOKEN(.representation()->, open_weight, srep);
-  SET_TOKEN(.representation()->, close_weight, srep);
-  SET_TOKEN(.representation()->, spaces, srep);
-  SET_TOKEN(.representation()->, zero, srep);
+  set_series_writing_data_(*(a.structure().series().representation()),
+			   args.srep, args.cf);
+  set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
+			   args.mrep, args.cf);
 
-  SET_TOKEN(.monoid().representation()->, empty, mrep);
-  SET_TOKEN(.monoid().representation()->, concat, mrep);
+  set_series_writing_data_(a.structure().series().representation()->first_representation(),
+			   args.srep.first_representation(), args.cf1);
+  set_monoid_writing_data_(*(a.structure().series().monoid().first_monoid().representation()),
+			   args.mrep1, args.cf1);
 
-  SET_TOKEN(.representation()->first_representation()., open_par, srep);
-  SET_TOKEN(.representation()->first_representation()., close_par, srep);
-  SET_TOKEN(.representation()->first_representation()., plus, srep);
-  SET_TOKEN(.representation()->first_representation()., times, srep);
-  SET_TOKEN(.representation()->first_representation()., star, srep);
-  SET_TOKEN(.representation()->first_representation()., open_weight, srep);
-  SET_TOKEN(.representation()->first_representation()., close_weight, srep);
-  SET_TOKEN(.representation()->first_representation()., spaces, srep);
-  SET_TOKEN(.representation()->first_representation()., zero, srep);
-
-  SET_TOKEN(.monoid().first_monoid().representation()->, empty, mrep1);
-  SET_TOKEN(.monoid().second_monoid().representation()->, concat, mrep1);
-
-  SET_TOKEN(.representation()->first_representation()., open_par, srep);
-  SET_TOKEN(.representation()->first_representation()., close_par, srep);
-  SET_TOKEN(.representation()->first_representation()., plus, srep);
-  SET_TOKEN(.representation()->first_representation()., times, srep);
-  SET_TOKEN(.representation()->first_representation()., star, srep);
-  SET_TOKEN(.representation()->first_representation()., open_weight, srep);
-  SET_TOKEN(.representation()->first_representation()., close_weight, srep);
-  SET_TOKEN(.representation()->first_representation()., spaces, srep);
-  SET_TOKEN(.representation()->first_representation()., zero, srep);
-
-  SET_TOKEN(.monoid().first_monoid().representation()->, empty, mrep2);
-  SET_TOKEN(.monoid().second_monoid().representation()->, concat, mrep2);
+  set_series_writing_data_(a.structure().series().representation()->second_representation(),
+			   args.srep.second_representation(), args.cf2);
+  set_monoid_writing_data_(*(a.structure().series().monoid().second_monoid().representation()),
+			   args.mrep2, args.cf2);
 }
 # else
 void set_writing_data(automaton_t& a, const arguments_t& args)
 {
-  SET_TOKEN(.representation()->, open_par, srep);
-  SET_TOKEN(.representation()->, close_par, srep);
-  SET_TOKEN(.representation()->, plus, srep);
-  SET_TOKEN(.representation()->, times, srep);
-  SET_TOKEN(.representation()->, star, srep);
-  SET_TOKEN(.representation()->, open_weight, srep);
-  SET_TOKEN(.representation()->, close_weight, srep);
-  SET_TOKEN(.representation()->, spaces, srep);
-  SET_TOKEN(.representation()->, zero, srep);
-
-  SET_TOKEN(.monoid().representation()->, empty, mrep);
-  SET_TOKEN(.monoid().representation()->, concat, mrep);
+  set_series_writing_data_(*(a.structure().series().representation()),
+			   args.srep, args.cf);
+  set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
+			   args.mrep, args.cf);
 }
 # endif // ! WITH_TWO_ALPHABETS
-
-# undef SET_TOKEN
 
 #endif // ! GETTERS_HXX
