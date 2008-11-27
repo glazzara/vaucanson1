@@ -76,7 +76,10 @@ namespace vcsn
     class monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >
     {
     public:
-      typedef vcsn::Element<vcsn::algebra::Series<T, U>, V> series_t;
+      typedef vcsn::Element<vcsn::algebra::Series<T, U>, V>	series_t;
+      typedef typename series_t::set_t::monoid_t		monoid_t;
+      typedef typename monoid_t::alphabet_t			alphabet_t;
+      typedef typename alphabet_t::letter_t			letter_t;
 
       monGenAction(series_t&);
       void operator () (const std::string&);
@@ -169,6 +172,7 @@ namespace vcsn
 		    const XMLCh* const qname);
       private:
 	T&		monoid_;
+	bool		user_rep_;
 
 	Handler*	mongenh_;
 	UnsupHandler	unsuph_;

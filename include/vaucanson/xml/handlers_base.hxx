@@ -75,6 +75,13 @@ namespace vcsn
 	std::cerr << "Missing attribute `" << name << " in token: " << xmlstr(localname) << std::endl;
 	assertion(false);
       }
+
+      void notletter(const std::string& str)
+      {
+	std::cerr << str << " is not a letter" << std::endl;
+	assertion(false);
+      }
+
     } // !error
     /*
      * Handler

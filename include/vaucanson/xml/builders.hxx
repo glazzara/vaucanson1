@@ -68,10 +68,18 @@ namespace vcsn
     monGenAction<vcsn::Element<vcsn::algebra::Series<T, U>, V> >::
     operator () (const std::string& str)
     {
-      typename series_t::monoid_elt_t m(s_.structure().monoid(), str);
-      series_t tmp(s_.structure(), m);
+      std::pair<bool, letter_t> res =
+	parse_letter(s_.structure().monoid().alphabet(), str);
 
-      s_ = s_ * tmp;
+      if (res.first)
+      {
+	typename series_t::monoid_elt_t m(s_.structure().monoid(),
+					  res.second);
+	series_t tmp(s_.structure(), m);
+	s_ = s_ * tmp;
+      }
+      else
+	error::notletter(str);
     }
 
     /**
@@ -192,6 +200,7 @@ namespace vcsn
 				 T& monoid)
       : Handler(parser, root),
 	monoid_(monoid),
+	user_rep_(false),
 	mongenh_(0),
 	unsuph_(parser, *this)
     {
@@ -240,6 +249,7 @@ namespace vcsn
 	if (tools::has_attribute(attrs, eq_.concat))
 	  rep.concat = xmlstr(tools::get_attribute(attrs, eq_.concat));
 	monoid_.set_representation(rep);
+	user_rep_ = true;
 	parser_->setContentHandler(&unsuph_);
       }
       else
@@ -259,6 +269,15 @@ namespace vcsn
 	// We are done with the monoid, so delete remaining data.
 	if (mongenh_)
 	  delete mongenh_;
+
+	// Build a new monoid with disambiguated symbols.
+	T new_monoid(monoid_.alphabet());
+
+	// Overwrite with any user provided representation.
+	if (user_rep_)
+	  new_monoid.set_representation(*(monoid_.representation()));
+
+	monoid_ = new_monoid;
 
 	// Go up one level.
 	parser_->setContentHandler(&root_);

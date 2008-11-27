@@ -177,19 +177,26 @@ namespace vcsn
     {
       using namespace xercesc;
 
-      // The series representation is optional.
-      if (!rep_)
-	rep_ = new series_rep_t();
 
-      typename T::series_set_t series(*semiring_, *monoid_, *rep_);
-      param_.attach(series);
+      // The series representation is optional.
+      if (rep_)
+      {
+	typename T::series_set_t series(*semiring_, *monoid_, *rep_);
+	param_.attach(series);
+      }
+      else
+      {
+	typename T::series_set_t series(*semiring_, *monoid_);
+	param_.attach(series);
+      }
 
       if (XMLString::equals(eq_.valueType, localname))
 	parser_->setContentHandler(&root_);
 
       delete monoid_;
       delete monoidh_;
-      delete rep_;
+      if (rep_)
+	delete rep_;
       delete reph_;
       delete semiring_;
       delete semiringh_;

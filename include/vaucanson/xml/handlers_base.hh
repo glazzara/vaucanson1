@@ -76,6 +76,7 @@ namespace vcsn
 		 const std::string& value);
       void missattrs(const XMLCh* const localname,
 		     const std::string& name);
+      void notletter(const std::string&);
     } // !error
     /*
      * Handler class

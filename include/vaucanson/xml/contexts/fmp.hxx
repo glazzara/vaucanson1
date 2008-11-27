@@ -192,12 +192,21 @@ namespace vcsn
 
     template <typename T>
     void
-    ProdMonElmtHandler<T>::start (const XMLCh* const,
+    ProdMonElmtHandler<T>::start(const XMLCh* const,
 				 const XMLCh* const localname,
 				 const XMLCh* const,
 				 const xercesc::Attributes& attrs)
     {
       using namespace xercesc;
+
+      typedef typename T::set_t::monoid_t		monoid_t;
+      typedef typename monoid_t::first_monoid_t		first_monoid_t;
+      typedef typename monoid_t::second_monoid_t	second_monoid_t;
+      typedef typename first_monoid_t::alphabet_t	first_alphabet_t;
+      typedef typename second_monoid_t::alphabet_t	second_alphabet_t;
+      typedef typename first_alphabet_t::letter_t	first_letter_t;
+      typedef typename second_alphabet_t::letter_t	second_letter_t;
+
       if (XMLString::equals(eq_.monElmt, localname))
       {
 	in_++;
@@ -223,12 +232,20 @@ namespace vcsn
 	const std::string val(xmlstr(tools::get_attribute(attrs, "value")));
 	if (in_ == 2 && count_ == 2)
 	{
-	  if (!parse_word(m1_, val).first)
+	  std::pair<bool, first_letter_t> tmp =
+		parse_letter(m1_.structure().alphabet(), val);
+	  if (tmp.first)
+	    m1_ *= tmp.second;
+	  else
 	    error::attrs(localname, "value", val);
 	}
 	else if (in_ == 2 && count_ == 3)
 	{
-	  if (!parse_word(m2_, val).first)
+	  std::pair<bool, second_letter_t> tmp =
+		parse_letter(m2_.structure().alphabet(), val);
+	  if (tmp.first)
+	    m2_ *= tmp.second;
+	  else
 	    error::attrs(localname, "value", val);
 	}
 	else

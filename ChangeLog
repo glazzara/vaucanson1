@@ -1,5 +1,22 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Overhaul representation handling.
+	* include/vaucanson/xml/builders.hh (monGenAction): New attribute
+	  `user_rep'. Add more type helpers. (Series flavor)
+	* include/vaucanson/xml/builders.hxx (monGenAction::operator()):
+	  Rework implementation to use `parse_letter' instead of `parse_word'.
+	  (FreeMonoidHandler::end()): Update the implementation according to
+	  the previous changes.
+	* include/vaucanson/xml/handlers.hxx: Do not use the CTOR with
+	  user specified representation if none is provided by the user.
+	* include/vaucanson/xml/handlers_base.hh,
+	* include/vaucanson/xml/handlers_base.hxx (error): New error
+	  reporting function `notletter'.
+	* include/vaucanson/xml/contexts/fmp.hxx (ProdMonElmtHandler::start):
+	  Use `parse_letter' instead of `parse_word'.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Add a public parse_letter.
 	* include/vaucanson/algebra/concept/alphabets_base.hh: New public
 	  interface `parse_letter' to parse a literal as a letter_t.
