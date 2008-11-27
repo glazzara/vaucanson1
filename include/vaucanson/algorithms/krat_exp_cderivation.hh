@@ -27,6 +27,8 @@
  */
 /** @} */
 
+// FIXME: Why is this not built into the libs?
+
 // INTERFACE: Exp cderivate(const Exp& e, char l) { return vcsn::cderivate(e, l); }
 
 // INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Series::monoid_elt_t(e.structure().monoid(), w)); }
@@ -53,8 +55,9 @@ namespace vcsn {
 
 } // vcsn
 
-# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
+// FIXME: Needs to be activated when built into libs.
+//# if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/krat_exp_cderivation.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+//# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_KRAT_EXP_CDERIVATION_HH
