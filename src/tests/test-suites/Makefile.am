@@ -13,4 +13,4 @@
 
 include subdirs.mk
 
-EXTRA_DIST += generate-all.sh test-suite.mk
+EXTRA_DIST = generate-all.sh test-suite.mk
