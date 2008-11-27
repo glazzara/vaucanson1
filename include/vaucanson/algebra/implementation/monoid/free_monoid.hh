@@ -46,16 +46,14 @@ namespace vcsn
 
     template <>
     struct monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >
-    : monoid_rep<FreeMonoid<Element<AlphabetSet<char>, std::set<char> > > >
     {
-      // Type helpers.
-      typedef monoid_rep<FreeMonoid<Element<AlphabetSet<char>,
-	      std::set<char> > > > parent_t;
-
       /// The representation of the empty word.
-      using parent_t::empty;
-      using parent_t::concat;
-      using parent_t::maybe_epsilon;
+      std::string empty;
+
+      /// The representation of the concatenation operation.
+      std::string concat;
+
+      std::vector<std::string> maybe_epsilon;
 
       monoid_rep();
     };
