@@ -1,5 +1,10 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Fix a bug when there is no series representation.
+	* include/vaucanson/xml/handlers.hxx: Here.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a typo when reading concat.
 	* include/vaucanson/xml/contexts/fmp.hxx: Here.
 

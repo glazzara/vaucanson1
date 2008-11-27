@@ -177,6 +177,10 @@ namespace vcsn
     {
       using namespace xercesc;
 
+      // The series representation is optional.
+      if (!rep_)
+	rep_ = new series_rep_t();
+
       typename T::series_set_t series(*semiring_, *monoid_, *rep_);
       param_.attach(series);
 
