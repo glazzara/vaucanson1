@@ -65,7 +65,7 @@ namespace vcsn
 	if (tools::has_attribute(attrs, eq_.identitySymbol))
 	  rep.empty = xmlstr(tools::get_attribute(attrs, eq_.identitySymbol));
 	if (tools::has_attribute(attrs, eq_.concat))
-	  rep.empty = xmlstr(tools::get_attribute(attrs, eq_.concat));
+	  rep.concat = xmlstr(tools::get_attribute(attrs, eq_.concat));
 	monoid_.set_representation(rep);
 	parser_->setContentHandler(&unsuph_);
       }

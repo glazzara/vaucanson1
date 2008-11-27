@@ -1,5 +1,10 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a typo when reading concat.
+	* include/vaucanson/xml/contexts/fmp.hxx: Here.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Add CONCAT to change the concatenation operator.
 	* taf-kit/src/parser_options.hh: Update the grammar definition.
 	  (definition): New `concat_cb' attribute. New `push_concat' method.
