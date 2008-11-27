@@ -17,7 +17,7 @@ test_include_root=../include
 top_srcdir=../../..
 build_auxdir=$top_srcdir/build-aux
 
-# For the time being disable the use of move-if-change because it
+# FIXME: For the time being disable the use of move-if-change because it
 # leads to quadratic behavior...
 #
 # The generated Makefiles now include regeneration rules, but they are

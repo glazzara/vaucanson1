@@ -1,3 +1,8 @@
+2008-11-27  Reuben Thomas  <rrt@sc3d.org>
+
+	Flag a problem with FIXME.
+	* src/tests/bin/generate-test-suite.sh: .
+
 2008-11-26  Reuben Thomas  <rrt@sc3d.org>
 
 	Add some more ignores.
