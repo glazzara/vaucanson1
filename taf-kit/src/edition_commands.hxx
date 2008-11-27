@@ -430,7 +430,7 @@ static int edit_automaton_command (const arguments_t& args)
 # else
   automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t (),
 				  args.mrep, args.mrep1, args.mrep2,
-				  args.srep, args.srep1, args.srep2);
+				  args.srep);
 # endif // !WITH_TWO_ALPHABETS
 
   std::fstream input (args.args[1]);
@@ -450,7 +450,7 @@ static int edit_automaton_command (const arguments_t& args)
       a = make_automaton (get_first_alphabet (args.alphabet1),
 			  get_second_alphabet (args.alphabet2),
 			  args.mrep, args.mrep1, args.mrep2,
-			  args.srep, args.srep1, args.srep2);
+			  args.srep);
 # endif // !WITH_TWO_ALPHABETS
     }
 

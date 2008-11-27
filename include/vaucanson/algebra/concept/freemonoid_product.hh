@@ -58,10 +58,6 @@ namespace vcsn {
       std::string close_par;
 
       monoid_rep();
-
-      /// Project an FMP monoid representation.
-      monoid_rep<F> first_projection() const;
-      monoid_rep<S> second_projection() const;
     };
 
     /*-------------------------------------------------------------.
@@ -73,6 +69,8 @@ namespace vcsn {
     {
       // Type helpers.
       typedef series_rep<Semiring, F> parent_t;
+      typedef series_rep<Semiring, F> first_rep_t;
+      typedef series_rep<Semiring, S> second_rep_t;
 
       using parent_t::open_par;
       using parent_t::close_par;
@@ -87,9 +85,17 @@ namespace vcsn {
       /// Default CTOR.
       series_rep();
 
-      /// Project an FMP series representation.
-      series_rep<Semiring, F> first_projection() const;
-      series_rep<Semiring, S> second_projection() const;
+      /// Accessors.
+      first_rep_t& first_representation();
+      second_rep_t& second_representation();
+      const first_rep_t& first_representation() const;
+      const second_rep_t& second_representation() const;
+
+    private:
+
+      /// Representation derived when constructing K<<F>>
+      first_rep_t first_representation_;
+      second_rep_t second_representation_;
     };
 
     template <typename F, typename S>

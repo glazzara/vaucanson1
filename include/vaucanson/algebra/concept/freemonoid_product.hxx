@@ -44,24 +44,6 @@ namespace vcsn
       concat = "";
     }
 
-    template <typename F, typename S>
-    monoid_rep<F>
-    monoid_rep<FreeMonoidProduct<F, S> >::first_projection() const
-    {
-      monoid_rep<F> ret;
-      ret.empty = empty;
-      return ret;
-    }
-
-    template <typename F, typename S>
-    monoid_rep<S>
-    monoid_rep<FreeMonoidProduct<F, S> >::second_projection() const
-    {
-      monoid_rep<S> ret;
-      ret.empty = empty;
-      return ret;
-    }
-
     template <typename Semiring, typename F, typename S>
     series_rep<Semiring, FreeMonoidProduct<F, S> >::series_rep() :
     series_rep<Semiring, F>()
@@ -69,41 +51,31 @@ namespace vcsn
     }
 
     template <typename Semiring, typename F, typename S>
-    series_rep<Semiring, F>
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::first_projection() const
+    series_rep<Semiring, F>&
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::first_representation()
     {
-      series_rep<Semiring, F> ret;
-
-      ret.open_par = open_par;
-      ret.close_par = close_par;
-      ret.plus = plus;
-      ret.times = times;
-      ret.star = star;
-      ret.zero = zero;
-      ret.open_weight = open_weight;
-      ret.close_weight = close_weight;
-      ret.spaces = spaces;
-
-      return ret;
+      return first_representation_;
     }
 
     template <typename Semiring, typename F, typename S>
-    series_rep<Semiring, S>
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_projection() const
+    const series_rep<Semiring, F>&
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::first_representation() const
     {
-      series_rep<Semiring, S> ret;
+      return first_representation_;
+    }
 
-      ret.open_par = open_par;
-      ret.close_par = close_par;
-      ret.plus = plus;
-      ret.times = times;
-      ret.star = star;
-      ret.zero = zero;
-      ret.open_weight = open_weight;
-      ret.close_weight = close_weight;
-      ret.spaces = spaces;
+    template <typename Semiring, typename F, typename S>
+    const series_rep<Semiring, S>&
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation() const
+    {
+      return second_representation_;
+    }
 
-      return ret;
+    template <typename Semiring, typename F, typename S>
+    series_rep<Semiring, S>&
+    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation()
+    {
+      return second_representation_;
     }
 
     template <typename F, typename S>

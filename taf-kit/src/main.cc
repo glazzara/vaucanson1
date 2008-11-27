@@ -104,16 +104,16 @@ namespace
       "Set the first alphabet for rational expressions or automata", 0 },
     { "alphabet2",	'A', "ALPHABET", 0,
       "Set the second alphabet for rational expressions or automata", 0 },
-    { "parser1",	'p', "OPTIONS", 0,
+    { "parser1",	'P', "OPTIONS", 0,
       "Set the first parsing options for rational expressions", 0 },
-    { "parser2",	'P', "OPTIONS", 0,
+    { "parser2",	'Q', "OPTIONS", 0,
       "Set the second parsing options for rational expressions", 0 },
 #else /* ! WITH_TWO_ALPHABETS */
     { "alphabet",		'a', "ALPHABET", 0,
       "Set the alphabet for rational expressions or automata", 0 },
+#endif /* ! WITH_TWO_ALPHABETS */
     { "parser",			'p', "OPTIONS", 0,
       "Set the parsing options for rational expressions", 0 },
-#endif /* ! WITH_TWO_ALPHABETS */
 
 #ifndef NO_PREDEF_ALPHABETS
     { 0, 0, 0, 0, "The following alphabets are predefined:\n"
@@ -192,6 +192,9 @@ namespace
 	break;
 #ifdef WITH_TWO_ALPHABETS
       case 'P':
+	args.add_parser1_option(NULL, arg);
+	break;
+      case 'Q':
 	args.add_parser2_option(NULL, arg);
 	break;
 #endif /* ! WITH_TWO_ALPHABETS */
@@ -333,9 +336,9 @@ int main (int argc, char* argv[])
 
 	li->args.alphabet1 = p_opts1.get_letters();
 	li->args.alphabet2 = p_opts2.get_letters();
-	li->args.srep1 = p_opts.get_srep().first_projection();
+	li->args.srep.first_representation() = p_opts1.get_srep();
 	li->args.mrep1 = p_opts1.get_mrep();
-	li->args.srep2 = p_opts.get_srep().second_projection();
+	li->args.srep.second_representation() = p_opts2.get_srep();
 	li->args.mrep2 = p_opts2.get_mrep();
 #endif
       }

@@ -37,9 +37,7 @@ namespace vcsn
 				 const monoid_rep_t& mrep,
 				 const first_monoid_rep_t& mrep1,
 				 const second_monoid_rep_t& mrep2,
-				 const series_rep_t& srep,
-				 const first_series_rep_t& srep1,
-				 const second_series_rep_t& srep2);
+				 const series_rep_t& srep);
 
       template <class FirstInputIterator, class SecondInputIterator>
       automaton_t make_automaton(const FirstInputIterator first_begin,
@@ -55,9 +53,7 @@ namespace vcsn
 				 const monoid_rep_t& mrep,
 				 const first_monoid_rep_t& mrep1,
 				 const second_monoid_rep_t& mrep2,
-				 const series_rep_t& srep,
-				 const first_series_rep_t& srep1,
-				 const second_series_rep_t& srep2);
+				 const series_rep_t& srep);
 
       template <class T1, class T2>
       monoid_elt_t make_couple(const T1& first_alphabet,

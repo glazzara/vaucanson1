@@ -104,10 +104,6 @@ struct arguments_t
     series_rep_t srep;
 
 # ifdef WITH_TWO_ALPHABETS
-    // Representation of Series<Semiring, FirstMonoid>
-    IOAUT_CONTEXT::series_rep_t srep1;
-    // Representation of Series<Semiring, SecondMonoid>
-    IOAUT_CONTEXT::series_rep_t srep2;
     // Representation of FirstMonoid.
     first_monoid_rep_t mrep1;
     // Representation of SecondMonoid.

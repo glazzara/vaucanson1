@@ -67,9 +67,7 @@ namespace vcsn
 				       const monoid_rep_t& mrep,
 				       const first_monoid_rep_t& mrep1,
 				       const second_monoid_rep_t& mrep2,
-				       const series_rep_t& srep,
-				       const first_series_rep_t& srep1,
-				       const second_series_rep_t& srep2)
+				       const series_rep_t& srep)
       {
 	first_alphabet_t first_alpha;
 
@@ -85,7 +83,6 @@ namespace vcsn
 	first_monoid_t	mA(first_alpha, mrep1);
 	second_monoid_t	mB(second_alpha, mrep2);
 	monoid_t	freemonoidproduct(mA, mB, mrep);
-	// FIXME: srep1 and srep2 cannot be used.
 	series_set_t	series(semiring, freemonoidproduct, srep);
 
 	return automata_set_t(series);
@@ -109,14 +106,12 @@ namespace vcsn
 				 const monoid_rep_t& mrep,
 				 const first_monoid_rep_t& mrep1,
 				 const second_monoid_rep_t& mrep2,
-				 const series_rep_t& srep,
-				 const first_series_rep_t& srep1,
-				 const second_series_rep_t& srep2)
+				 const series_rep_t& srep)
       {
 	return automaton_t(make_automata_set(first_begin, first_end,
 					     second_begin, second_end,
 					     mrep, mrep1, mrep2,
-					     srep, srep1, srep2));
+					     srep));
       }
 
       template <class T1, class T2>
@@ -133,13 +128,11 @@ namespace vcsn
 				 const monoid_rep_t& mrep,
 				 const first_monoid_rep_t& mrep1,
 				 const second_monoid_rep_t& mrep2,
-				 const series_rep_t& srep,
-				 const first_series_rep_t& srep1,
-				 const second_series_rep_t& srep2)
+				 const series_rep_t& srep)
       {
 	return make_automaton(first_alphabet.begin(), first_alphabet.end(),
 			      second_alphabet.begin(), second_alphabet.end(),
-			      mrep, mrep1, mrep2, srep, srep1, srep2);
+			      mrep, mrep1, mrep2, srep);
       }
 
       template <class FirstIterator, class SecondIterator>

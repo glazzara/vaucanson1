@@ -1,5 +1,32 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Rework monoid and series representations for FMP.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh
+	  (monoid_rep): Remove method declarations of `first_projection' and
+	  `second_projection'. (series_rep): Add new type helpers. Rename
+	  `first_projection' to `first_representation' and
+	  `second_projection' to `second_representation'. Remove the `const'
+	  qualifier from `first_representation' and `second_representation'.
+	  Change return types to references. Add const versions.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Remove
+	  implementations of `first_projection' and `second_projection' for
+	  `monoid_rep'. Rework implementation of `first_representation' and
+	  `second_representation'.
+	* include/vaucanson/contexts/fmp_transducer_maker.thh
+	  (make_automaton): Remove the last two arguments.
+	* include/vaucanson/contexts/fmp_transducer_maker.thxx
+	  (make_automaton): Remove a `FIXME'. Update implementation
+	  according to the modified prototypes.
+	* taf-kit/src/common.hh (arguments_t): Remove the two attributes
+	  `srep1' and `srep2'.
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/fmp_commands.cc,
+	* taf-kit/src/getters.hxx: Update calls to `make_automaton'.
+	* taf-kit/src/main.cc: Use `p_opts1' and `p_opts2' to setup the
+	  first and second series representation respectively.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Typo in comments.
 	* include/vaucanson/algorithms/is_ltl.hh: Here.
 
