@@ -1,5 +1,36 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Static polymorphism for SeriesRep via CRTP.
+	Rename `series_rep' to `SeriesRep' to be more consistent with the
+	other Vaucanson structures. Introduce `SeriesRepBase' to factor more
+	code. Rename `series_rep_default' to `SeriesRepDefault'.
+	* include/Makefile.am: Add new files to the distribution.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh
+	  (SeriesRep): Remove useless attributes. New method `disambiguate'.
+	  Cosmetic changes.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Add the
+	  implementation of the new `disambiguate' for series
+	  representations. Simplify `operator=='.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hh,
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hxx:
+	  Improve specialization for int based free monoid.
+	* include/vaucanson/algebra/implementation/series/series.hh
+	  (Series): Remove the const qualifier of `rep_'.
+	* include/vaucanson/algebra/implementation/series/series.hxx
+	  (Series): Use `disambiguate' when building a series without user
+	  provided series representation.
+	* include/vaucanson/algebra/implementation/series/series_rep.hh,
+	* include/vaucanson/algebra/implementation/series/series_rep.hxx:
+	  Streamline `SeriesRep'.
+	* include/vaucanson/algebra/implementation/series/series_rep_base.hh: New.
+	* include/vaucanson/algebra/implementation/series/series_rep_base.hxx: New.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
+	* include/vaucanson/contexts/automaton_maker.thh,
+	* include/vaucanson/contexts/automaton_maker.thxx,
+	* include/vaucanson/xml/contexts/fmp.hh: Only refactoring.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Rename inappropriate type names.
 	* include/vaucanson/xml/builders.hh,
 	* include/vaucanson/xml/builders.hxx: Rename `self_t' to `monoid_t'

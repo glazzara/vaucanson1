@@ -32,16 +32,17 @@ namespace vcsn
     Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m)
       : SetSlot<Semiring,semiring_slot_tag>(w),
 	SetSlot<Monoid,monoid_slot_tag>(m),
-      rep_(series_rep_default<Semiring, Monoid>::get_instance())
+      rep_(SeriesRepDefault<Semiring, Monoid>::get_instance())
     {
+      rep_->disambiguate((*this).monoid(), rep_);
     }
 
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m,
-				     const series_rep<Semiring, Monoid>& sr)
+				     const SeriesRep<Semiring, Monoid>& sr)
       : SetSlot<Semiring,semiring_slot_tag>(w),
 	SetSlot<Monoid,monoid_slot_tag>(m),
-      rep_(boost::shared_ptr<series_rep<Semiring, Monoid> >(new series_rep<Semiring, Monoid>(sr)))
+      rep_(boost::shared_ptr<SeriesRep<Semiring, Monoid> >(new SeriesRep<Semiring, Monoid>(sr)))
     {
     }
 
@@ -67,7 +68,7 @@ namespace vcsn
     }
 
     template<typename Semiring, typename Monoid>
-    const boost::shared_ptr<series_rep<Semiring, Monoid> >
+    const boost::shared_ptr<SeriesRep<Semiring, Monoid> >
     Series<Semiring, Monoid>::representation() const
     {
       return rep_;

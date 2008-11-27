@@ -17,38 +17,22 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HXX
 
-namespace vcsn {
+# include <vaucanson/algebra/implementation/series/series_rep.hh>
 
-  namespace algebra {
-
-    template <typename Semiring, typename Monoid>
-    series_rep<Semiring, Monoid>::series_rep() :
-      open_par("("),
-      close_par(")"),
-      plus("+"),
-      times("."),
-      star("*"),
-      zero("0"),
-      open_weight("{"),
-      close_weight("}")
-    {
-      spaces.push_back(" ");
-    }
-
+namespace vcsn
+{
+  namespace algebra
+  {
     template <typename S, typename M>
     bool
-    operator==(boost::shared_ptr<series_rep<S, M> > lhs,
-	       boost::shared_ptr<series_rep<S, M> > rhs)
+    operator==(boost::shared_ptr<SeriesRep<S, M> > lhs,
+	       boost::shared_ptr<SeriesRep<S, M> > rhs)
     {
-      return (lhs->open_par == rhs->open_par &&
-	      lhs->close_par == rhs->close_par &&
-	      lhs->plus == rhs->plus &&
-	      lhs->times == rhs->times &&
-	      lhs->star == rhs->star &&
-	      lhs->zero == rhs->zero &&
-	      lhs->open_weight == rhs->open_weight &&
-	      lhs->close_weight == rhs->close_weight &&
-	      lhs->spaces == rhs->spaces);
+      // Type helpers.
+      typedef SeriesRepBase<SeriesRep, S, M>		series_rep_base_t;
+      typedef boost::shared_ptr<series_rep_base_t>	p_t;
+
+      return (static_cast<p_t>(lhs) == static_cast<p_t>(rhs));
     }
 
   } // ! algebra

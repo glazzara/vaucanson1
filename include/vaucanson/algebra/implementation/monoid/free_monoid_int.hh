@@ -40,26 +40,18 @@ namespace vcsn
       MonoidRep();
     };
 
-    /*-------------------------------------------------------------.
-    | Specialization of the series_rep structure for int letter    |
-    | based free monoids.                                          |
-    `-------------------------------------------------------------*/
+    /*------------------------------------------------------------.
+    | Specialization of the SeriesRep structure for int letter    |
+    | based free monoids.                                         |
+    `------------------------------------------------------------*/
 
+    // FIXME: This partial specialization may be wrong. We should
+    // try to remove all the `this' pointers in the CTOR.
     template <typename Semiring>
-    struct series_rep<Semiring,
-		      FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >
+    struct SeriesRep<Semiring, EXACT_TYPE> :
+	   SeriesRepBase<SeriesRep, Semiring, EXACT_TYPE>
     {
-      std::string open_par;
-      std::string close_par;
-      std::string plus;
-      std::string times;
-      std::string star;
-      std::string zero;
-      std::string open_weight;
-      std::string close_weight;
-      std::vector<std::string> spaces;
-
-      series_rep();
+      SeriesRep();
     };
 
 # undef EXACT_TYPE

@@ -265,6 +265,8 @@ vaucanson/algebra/implementation/series/series.hh				     \
 vaucanson/algebra/implementation/series/series.hxx				     \
 vaucanson/algebra/implementation/series/series_rep.hh				     \
 vaucanson/algebra/implementation/series/series_rep.hxx				     \
+vaucanson/algebra/implementation/series/series_rep_base.hh			     \
+vaucanson/algebra/implementation/series/series_rep_base.hxx			     \
 vaucanson/algebra/implementation/series/transpose.hh				     \
 vaucanson/algebra/implementation/series/transpose.hxx
 

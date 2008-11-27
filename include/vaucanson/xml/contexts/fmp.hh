@@ -50,7 +50,7 @@
 	>,								\
       T>
 # define TParamFMP template <class S, class T, class M1, class M2>
-# define FMPsreptype algebra::series_rep<S, algebra::FreeMonoidProduct<M1, M2> >
+# define FMPsreptype algebra::SeriesRep<S, algebra::FreeMonoidProduct<M1, M2> >
 
 # define FMPseries Element<vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> >, T>
 # define SParamFMP template <class S, class T, class M1, class M2>

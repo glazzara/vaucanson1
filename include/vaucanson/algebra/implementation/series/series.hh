@@ -41,7 +41,7 @@ namespace vcsn
 	private SetSlot<Semiring, semiring_slot_tag>,
 	private SetSlot<Monoid, monoid_slot_tag>
     {
-      typedef series_rep<Semiring, Monoid> series_rep_t;
+      typedef SeriesRep<Semiring, Monoid> series_rep_t;
       typedef boost::shared_ptr<series_rep_t> shared_series_rep_t;
 
       Series(const Semiring& w, const Monoid& m);
@@ -57,7 +57,7 @@ namespace vcsn
       bool operator==(const Series<Semiring, Monoid>&) const;
 
     protected:
-      const shared_series_rep_t rep_;
+      shared_series_rep_t rep_;
     };
 
     template <class W, class M, class NewW, class NewM>

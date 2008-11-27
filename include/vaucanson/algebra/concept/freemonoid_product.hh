@@ -56,29 +56,29 @@ namespace vcsn {
       MonoidRep();
     };
 
-    /*-------------------------------------------------------------.
-    | Specialization of the series_rep structure for this concept. |
-    `-------------------------------------------------------------*/
+    /*------------------------------------------------------------.
+    | Specialization of the SeriesRep structure for this concept. |
+    `------------------------------------------------------------*/
 
     template <typename Semiring, typename F, typename S>
-    struct series_rep<Semiring, FreeMonoidProduct<F, S> >
+    struct SeriesRep<Semiring, FreeMonoidProduct<F, S> > :
+	   SeriesRepBase<SeriesRep, Semiring, FreeMonoidProduct<F, S> >
     {
+      // The type of the semiring.
+      typedef Semiring				semiring_t;
+
+      // The type of the monoid.
+      typedef FreeMonoidProduct<F, S>		monoid_t;
+
+      // The most derived type in the hierarchy.
+      typedef SeriesRep<semiring_t, monoid_t>	self_t;
+
+      // Pointer types.
+      typedef boost::shared_ptr<self_t>		pointer_t;
+
       // Type helpers.
-      typedef series_rep<Semiring, F> first_rep_t;
-      typedef series_rep<Semiring, S> second_rep_t;
-
-      std::string		open_par;
-      std::string		close_par;
-      std::string		plus;
-      std::string		times;
-      std::string		star;
-      std::string		zero;
-      std::string		open_weight;
-      std::string		close_weight;
-      std::vector<std::string>	spaces;
-
-      /// Default CTOR.
-      series_rep();
+      typedef SeriesRep<Semiring, F> first_rep_t;
+      typedef SeriesRep<Semiring, S> second_rep_t;
 
       /// Accessors.
       first_rep_t& first_representation();
@@ -86,10 +86,14 @@ namespace vcsn {
       const first_rep_t& first_representation() const;
       const second_rep_t& second_representation() const;
 
+      void disambiguate(const monoid_t&, pointer_t&);
+
     private:
 
       /// Representation derived when constructing K<<F>>
       first_rep_t first_representation_;
+
+      /// Representation derived when constructing K<<S>>
       second_rep_t second_representation_;
     };
 
@@ -98,8 +102,10 @@ namespace vcsn {
 		    boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >);
 
     template <typename Semiring, typename F, typename S>
-    bool operator==(boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > >,
-		    boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > >);
+    bool operator==(boost::shared_ptr<SeriesRep<Semiring,
+						FreeMonoidProduct<F, S> > >,
+		    boost::shared_ptr<SeriesRep<Semiring,
+						FreeMonoidProduct<F, S> > >);
 
     /*------------------------.
     | FreeMonoidProduct<F, S> |

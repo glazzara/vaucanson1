@@ -17,42 +17,34 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_REP_HH
 
-# include <string>
-# include <vector>
-
 # include <boost/shared_ptr.hpp>
 
-namespace vcsn {
+# include <vaucanson/algebra/implementation/series/series_rep_base.hh>
 
-  namespace algebra {
-
-    template <typename Semiring, typename Monoid>
-    struct series_rep
+namespace vcsn
+{
+  namespace algebra
+  {
+    template <typename S, typename M>
+    struct SeriesRep : SeriesRepBase<SeriesRep, S, M>
     {
-      std::string		open_par;
-      std::string		close_par;
-      std::string		plus;
-      std::string		times;
-      std::string		star;
-      std::string		zero;
-      std::string		open_weight;
-      std::string		close_weight;
-      std::vector<std::string>	spaces;
-
-      // Default CTOR
-      series_rep();
     };
 
     template <typename S, typename M>
-    bool operator==(boost::shared_ptr<series_rep<S, M> >,
-		    boost::shared_ptr<series_rep<S, M> >);
+    bool operator==(boost::shared_ptr<SeriesRep<S, M> >,
+		    boost::shared_ptr<SeriesRep<S, M> >);
 
-    template <typename Semiring, typename Monoid>
-    struct series_rep_default
+    template <typename S, typename M>
+    struct SeriesRepDefault
     {
-      static boost::shared_ptr<series_rep<Semiring, Monoid> > get_instance()
+      // Type helpers.
+      typedef SeriesRep<S, M>			series_rep_t;
+      typedef boost::shared_ptr<series_rep_t>	pointer_t;
+
+      // Singleton instance getter.
+      static pointer_t get_instance()
       {
-	static boost::shared_ptr<series_rep<Semiring, Monoid> > p(new series_rep<Semiring, Monoid>);
+	static pointer_t p(new series_rep_t());
 	return p;
       }
     };

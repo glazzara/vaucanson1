@@ -31,43 +31,59 @@ namespace vcsn
     {}
 
     template <typename Semiring, typename F, typename S>
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::series_rep() :
-	open_par("("),
-	close_par(")"),
-	plus("+"),
-	times("."),
-	star("*"),
-	zero("0"),
-	open_weight("{"),
-	close_weight("}")
+    void
+    SeriesRep<Semiring, FreeMonoidProduct<F, S> >::
+    disambiguate(const monoid_t& monoid, pointer_t& p)
     {
-      spaces.push_back(" ");
+      // Pointer types.
+      typedef boost::shared_ptr<first_rep_t>		first_p_t;
+      typedef boost::shared_ptr<second_rep_t>		second_p_t;
+
+      first_p_t first_rep(new first_rep_t(p->first_representation()));
+      second_p_t second_rep(new second_rep_t(p->second_representation()));
+
+      // Backup old pointers.
+      first_p_t first_rep_orig = first_rep;
+      second_p_t second_rep_orig = second_rep;
+
+      // Real work done here.
+      first_rep->disambiguate(monoid.first_monoid(), first_rep);
+      second_rep->disambiguate(monoid.second_monoid(), second_rep);
+
+      // Copy on write.
+      if (first_rep_orig != first_rep || second_rep_orig != second_rep)
+      {
+	self_t new_rep(*p);
+	new_rep.first_representation() = *first_rep;
+	new_rep.second_representation() = *second_rep;
+	p = pointer_t(new self_t(new_rep));
+      }
     }
 
     template <typename Semiring, typename F, typename S>
-    series_rep<Semiring, F>&
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::first_representation()
+    SeriesRep<Semiring, F>&
+    SeriesRep<Semiring, FreeMonoidProduct<F, S> >::first_representation()
     {
       return first_representation_;
     }
 
     template <typename Semiring, typename F, typename S>
-    const series_rep<Semiring, F>&
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::first_representation() const
+    const SeriesRep<Semiring, F>&
+    SeriesRep<Semiring, FreeMonoidProduct<F, S> >::first_representation() const
     {
       return first_representation_;
     }
 
     template <typename Semiring, typename F, typename S>
-    series_rep<Semiring, S>&
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation()
+    SeriesRep<Semiring, S>&
+    SeriesRep<Semiring, FreeMonoidProduct<F, S> >::second_representation()
     {
       return second_representation_;
     }
 
     template <typename Semiring, typename F, typename S>
-    const series_rep<Semiring, S>&
-    series_rep<Semiring, FreeMonoidProduct<F, S> >::second_representation() const
+    const SeriesRep<Semiring, S>&
+    SeriesRep<Semiring, FreeMonoidProduct<F, S> >::second_representation() const
     {
       return second_representation_;
     }
@@ -90,18 +106,25 @@ namespace vcsn
 
     template <typename Semiring, typename F, typename S>
     bool
-    operator==(boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > > lhs,
-	       boost::shared_ptr<series_rep<Semiring, FreeMonoidProduct<F, S> > > rhs)
+    operator==(boost::shared_ptr<SeriesRep<Semiring, FreeMonoidProduct<F, S> > > lhs,
+	       boost::shared_ptr<SeriesRep<Semiring, FreeMonoidProduct<F, S> > > rhs)
     {
       // Type helpers.
-      typedef series_rep<Semiring, F> first_rep_t;
-      typedef series_rep<Semiring, S> second_rep_t;
+      typedef SeriesRep<Semiring, F> first_rep_t;
+      typedef SeriesRep<Semiring, S> second_rep_t;
+      typedef SeriesRepBase<SeriesRep, Semiring, FreeMonoidProduct<F, S> >
+	series_rep_base_t;
+
+      // Pointer types.
+      typedef boost::shared_ptr<first_rep_t>		first_p_t;
+      typedef boost::shared_ptr<second_rep_t>		second_p_t;
+      typedef boost::shared_ptr<series_rep_base_t>	p_t;
 
       // FIXME: we should provide operator== for the pointed to types.
-      boost::shared_ptr<first_rep_t> lhs_first(new first_rep_t());
-      boost::shared_ptr<second_rep_t> lhs_second(new second_rep_t());
-      boost::shared_ptr<first_rep_t> rhs_first(new first_rep_t());
-      boost::shared_ptr<second_rep_t> rhs_second(new second_rep_t());
+      first_p_t lhs_first(new first_rep_t());
+      second_p_t lhs_second(new second_rep_t());
+      first_p_t rhs_first(new first_rep_t());
+      second_p_t rhs_second(new second_rep_t());
 
       *lhs_first = lhs->first_representation();
       *lhs_second = lhs->second_representation();
@@ -110,15 +133,7 @@ namespace vcsn
 
       return (lhs_first == rhs_first &&
 	      lhs_second == rhs_second &&
-	      lhs->open_par == rhs->open_par &&
-	      lhs->close_par == rhs->close_par &&
-	      lhs->plus == rhs->plus &&
-	      lhs->times == rhs->times &&
-	      lhs->star == rhs->star &&
-	      lhs->zero == rhs->zero &&
-	      lhs->open_weight == rhs->open_weight &&
-	      lhs->close_weight == rhs->close_weight &&
-	      lhs->spaces == rhs->spaces);
+	      static_cast<p_t>(lhs) == static_cast<p_t>(rhs));
     }
 
     /*------------------------.

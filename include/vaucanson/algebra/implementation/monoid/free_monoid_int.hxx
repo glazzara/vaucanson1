@@ -45,18 +45,28 @@ namespace vcsn
     }
 
     template <typename Semiring>
-    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::
-    series_rep() :
-      open_par("("),
-      close_par(")"),
-      plus("+"),
-      times("."),
-      star("*"),
-      zero("z"),
-      open_weight("{"),
-      close_weight("}")
+    SeriesRep<Semiring, EXACT_TYPE>::SeriesRep()
     {
-      spaces.push_back(" ");
+      // Discard any initialization by the parent class.
+      this->maybe_zero.clear();
+
+      // Sane defaults.
+      this->maybe_zero.push_back("z");
+      this->maybe_zero.push_back("0");
+
+      // Trying with more than one char.
+      this->maybe_zero.push_back("_z");
+      this->maybe_zero.push_back("zero");
+
+      this->zero = *(this->maybe_zero.begin());
+      this->open_par = "(";
+      this->close_par = ")";
+      this->plus = "+";
+      this->times = ".";
+      this->star = "*";
+      this->open_weight = "{";
+      this->close_weight = "}";
+      this->spaces.push_back(" ");
     }
 
 # undef EXACT_TYPE
