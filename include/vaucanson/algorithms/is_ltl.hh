@@ -25,7 +25,7 @@
  *
  * @details An FMP transducer T over the free monoid product
  * @f$A^\star\times B^\star@f$ is letter-to-letter (LTL) if and only
- * if (1) the support of the of every of its transitions is in
+ * if (1) the support of every of its transitions is in
  * @f$A^\times B@f$, and (2) its initial and final weights are scalar.
  *
  * @remarks Synonyms: ltl, letter-to-letter, lettre-à-lettre
