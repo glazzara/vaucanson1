@@ -24,23 +24,9 @@ namespace vcsn
 {
   namespace algebra
   {
-    template <typename Semiring>
-    series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::series_rep() :
-      open_par("("),
-      close_par(")"),
-      plus("+"),
-      times("."),
-      star("*"),
-      zero("z"),
-      open_weight("{"),
-      close_weight("}")
-    {
-      spaces.push_back(" ");
-    }
-
-    /*------------------------.
+    /*-------------------------.
     | Series<Semiring, Monoid> |
-    `------------------------*/
+    `-------------------------*/
 
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m)

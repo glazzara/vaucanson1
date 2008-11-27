@@ -18,7 +18,6 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_HH
 
 # include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/algebra/implementation/monoid/free_monoid.hh>
 # include <vaucanson/algebra/implementation/series/series_rep.hh>
 # include <vaucanson/design_pattern/slots.hh>
 
@@ -27,34 +26,6 @@ namespace vcsn
 {
   namespace algebra
   {
-    /*---------------.
-    | Predeclaration |
-    `---------------*/
-
-    template <typename Semiring, typename Monoid>
-    struct Series;
-
-    /*-------------------------------------------------------------.
-    | Specialization of the series_rep structure for int letter    |
-    | based free monoids.                                          |
-    `-------------------------------------------------------------*/
-
-    template <typename Semiring>
-    struct series_rep<Semiring, FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >
-    {
-      std::string open_par;
-      std::string close_par;
-      std::string plus;
-      std::string times;
-      std::string star;
-      std::string zero;
-      std::string open_weight;
-      std::string close_weight;
-      std::vector<std::string> spaces;
-
-      series_rep();
-    };
-
     /*-------------------------.
     | Series<Semiring, Monoid> |
     `-------------------------*/

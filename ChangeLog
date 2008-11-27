@@ -1,5 +1,34 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Move int based FreeMonoid related specialization.
+	* include/Makefile.am: Add new files to the distribution.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hh:
+	  Remove include of `alphabet_set.hh'. Remove `monoid_rep'
+	  specialization for int based alphabet_set based FreeMonoid.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid.hxx:
+	  Remove implementation according to the previous change.
+	* include/vaucanson/algebra/implementation/series/series.hh: Remove
+	  include of `free_monoid.hh'. Remove `series_rep' specialization for
+	  int based alphabet_set based FreeMonoid.
+	* include/vaucanson/algebra/implementation/series/series.hxx: Remove
+	  implementation according to the previous change.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hh: New.
+	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hxx:
+	  New.
+	* include/vaucanson/automata/generic_contexts/int_boolean_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_boolean_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_max_plus_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_min_plus_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_int_boolean_automaton_structures.hh,
+	* include/vaucanson/automata/generic_contexts/int_z_transducer_structures.hh:
+	  Include required specializations.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Simplify specialization of monoid and series representation for FMP.
 	* include/vaucanson/algebra/concept/freemonoid_product.hh: Remove
 	  inheritance, and update accordingly. New `operator==' for series

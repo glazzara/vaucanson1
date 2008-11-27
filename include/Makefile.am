@@ -198,6 +198,8 @@ vaucanson/algebra/implementation/monoid/str_words.hh				     \
 vaucanson/algebra/implementation/monoid/str_words.hxx				     \
 vaucanson/algebra/implementation/monoid/free_monoid.hh				     \
 vaucanson/algebra/implementation/monoid/free_monoid.hxx				     \
+vaucanson/algebra/implementation/monoid/free_monoid_int.hh			     \
+vaucanson/algebra/implementation/monoid/free_monoid_int.hxx			     \
 vaucanson/algebra/implementation/monoid/pair_str_words.hh			     \
 vaucanson/algebra/implementation/monoid/pair_str_words.hxx			     \
 vaucanson/algebra/implementation/monoid/monoid_rep.hh				     \

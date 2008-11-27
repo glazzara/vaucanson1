@@ -57,6 +57,9 @@ namespace vcsn
 # include <vaucanson/contexts/automaton.thh>
 # include <vaucanson/contexts/fmp_transducer.thh>
 
+/* Specializations */
+# include <vaucanson/algebra/implementation/monoid/free_monoid_int.hh>
+
 # include <vaucanson/contexts/fmp_transducer_maker.thh>
 
 # undef AUTOMATON_CONTEXT

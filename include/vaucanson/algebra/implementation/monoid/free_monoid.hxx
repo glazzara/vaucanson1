@@ -23,23 +23,6 @@ namespace vcsn
 {
   namespace algebra
   {
-    inline
-    monoid_rep<FreeMonoid<Element<AlphabetSet<int>, std::set<int> > > >::monoid_rep()
-    {
-      maybe_epsilon.clear();
-
-      // Sane defaults.
-      maybe_epsilon.push_back("e");
-      maybe_epsilon.push_back("1");
-
-      // Trying with more than one char.
-      maybe_epsilon.push_back("_e");
-      maybe_epsilon.push_back("eps");
-
-      empty = *(maybe_epsilon.begin());
-      concat = "#";
-    }
-
     /*--------------.
     | FreeMonoid<A> |
     `--------------*/

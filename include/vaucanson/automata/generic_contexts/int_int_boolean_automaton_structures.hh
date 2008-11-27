@@ -31,6 +31,9 @@
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
 
+/* Specializations */
+# include <vaucanson/algebra/implementation/monoid/free_monoid_int.hh>
+
 namespace vcsn
 {
   namespace VCSN_GRAPH_IMPL
