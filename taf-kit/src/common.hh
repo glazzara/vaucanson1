@@ -67,6 +67,38 @@ extern vcsn::misc::Bencher bencher;
 # define GLOBAL_RESULT last_command_output
 extern command_output last_command_output;
 
+struct cmd_flags_t
+{
+  // Default CTOR.
+  cmd_flags_t() :
+      open_par(false),
+      close_par(false),
+      plus(false),
+      times(false),
+      star(false),
+      open_weight(false),
+      close_weight(false),
+      spaces(false),
+      empty(false),
+      concat(false),
+      zero(false)
+  {}
+
+  // Each flags is set to true iff the user specified the corresponding token
+  // on the command line.
+  bool open_par;
+  bool close_par;
+  bool plus;
+  bool times;
+  bool star;
+  bool open_weight;
+  bool close_weight;
+  bool spaces;
+  bool empty;
+  bool concat;
+  bool zero;
+};
+
 struct arguments_t
 {
     arguments_t (const std::string& name)
@@ -102,12 +134,18 @@ struct arguments_t
     monoid_rep_t mrep;
     // Representation of Series<Semiring, Monoid>.
     series_rep_t srep;
+    // Command line flags for the monoid representation.
+    cmd_flags_t cf;
 
 # ifdef WITH_TWO_ALPHABETS
     // Representation of FirstMonoid.
     first_monoid_rep_t mrep1;
     // Representation of SecondMonoid.
     second_monoid_rep_t mrep2;
+    // Command line flags for the first monoid representation.
+    cmd_flags_t cf1;
+    // Command line flags for the second monoid representation.
+    cmd_flags_t cf2;
 
     std::vector<std::string> alphabet1;
     std::vector<std::string> alphabet2;

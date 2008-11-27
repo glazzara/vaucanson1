@@ -24,8 +24,9 @@ template <typename M, typename S>
 parser_options<M, S>::options_grammar::options_grammar(typename parser_options<M, S>::alphabet_t&
 						       arg_al,
 						       M& arg_mrep,
-						       S& arg_srep)
-: al(arg_al), mrep(arg_mrep), srep(arg_srep)
+						       S& arg_srep,
+						       cmd_flags_t& arg_cf)
+: al(arg_al), mrep(arg_mrep), srep(arg_srep), cf(arg_cf)
 {
 }
 
@@ -33,7 +34,7 @@ template <typename M, typename S>
 parser_options<M, S>::parser_options(const std::string& str)
 {
   using namespace boost::spirit;
-  options_grammar grammar(letters_, mrep_, srep_);
+  options_grammar grammar(letters_, mrep_, srep_, cf_);
 
   BOOST_SPIRIT_DEBUG_NODE(grammar);
 
@@ -62,6 +63,13 @@ const S&
 parser_options<M, S>::get_srep()
 {
   return srep_;
+}
+
+template <typename M, typename S>
+const cmd_flags_t&
+parser_options<M, S>::get_cmd_flags()
+{
+  return cf_;
 }
 
 template <typename M, typename S>
@@ -140,7 +148,7 @@ parser_options<M, S>::check_collision()
 template <typename M, typename S>
 template <typename ScannerT>
 parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)
-: al_ref(g.al), mrep_ref(g.mrep), srep_ref(g.srep)
+: al_ref(g.al), mrep_ref(g.mrep), srep_ref(g.srep), cf_ref(g.cf)
 {
   using namespace boost;
   using namespace boost::spirit;
@@ -287,6 +295,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::open_par(const char
 								      const char* to)
 {
   srep_ref.open_par = escape(from, to);
+  cf_ref.open_par = true;
 }
 
 template <typename M, typename S>
@@ -296,6 +305,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::close_par(const cha
 								       const char* to)
 {
   srep_ref.close_par = escape(from, to);
+  cf_ref.close_par = true;
 }
 
 template <typename M, typename S>
@@ -305,6 +315,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::plus(const char* fr
 								  const char* to)
 {
   srep_ref.plus = escape(from, to);
+  cf_ref.plus = true;
 }
 
 template <typename M, typename S>
@@ -314,6 +325,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::times(const char* f
 								   const char* to)
 {
   srep_ref.times = escape(from, to);
+  cf_ref.times = true;
 }
 
 template <typename M, typename S>
@@ -323,6 +335,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::star(const char* fr
 								  const char* to)
 {
   srep_ref.star = escape(from, to);
+  cf_ref.star = true;
 }
 
 template <typename M, typename S>
@@ -332,6 +345,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::open_weight(const c
 									 const char* to)
 {
   srep_ref.open_weight = escape(from, to);
+  cf_ref.open_weight = true;
 }
 
 template <typename M, typename S>
@@ -341,6 +355,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::close_weight(const 
 									  const char* to)
 {
   srep_ref.close_weight = escape(from, to);
+  cf_ref.close_weight = true;
 }
 
 template <typename M, typename S>
@@ -354,6 +369,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::push_space(const ch
     srep_ref.spaces.clear();
   srep_ref.spaces.push_back(escape(from, to));
   first = false;
+  cf_ref.spaces = true;
 }
 
 template <typename M, typename S>
@@ -363,6 +379,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::push_one(const char
 								      const char* to)
 {
   mrep_ref.empty = escape(from, to);
+  cf_ref.empty = true;
 }
 
 template <typename M, typename S>
@@ -372,6 +389,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::push_concat(const c
 									 const char* to)
 {
   mrep_ref.concat = escape(from, to);
+  cf_ref.concat = true;
 }
 
 template <typename M, typename S>
@@ -381,6 +399,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::push_zero(const cha
 								       const char* to)
 {
   srep_ref.zero = escape(from, to);
+  cf_ref.zero = true;
 }
 
 #endif // ! PARSER_OPTIONS_HXX

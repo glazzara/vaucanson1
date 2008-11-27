@@ -73,6 +73,7 @@ public:
   const std::vector<std::string>& get_letters();
   const M& get_mrep();
   const S& get_srep();
+  const cmd_flags_t& get_cmd_flags();
   void check_collision();
 
 private:
@@ -86,7 +87,7 @@ private:
   struct options_grammar : public boost::spirit::grammar<options_grammar>
   {
     // CTOR
-    options_grammar(alphabet_t& al, M& mrep, S& srep);
+    options_grammar(alphabet_t& al, M& mrep, S& srep, cmd_flags_t& cf);
 
     template <typename ScannerT>
     struct definition
@@ -125,6 +126,7 @@ private:
       typename parser_options<M, S>::alphabet_t& al_ref;
       M& mrep_ref;
       S& srep_ref;
+      cmd_flags_t& cf_ref;
 
       /**
        * function called to remove the '\' in front of the
@@ -277,12 +279,14 @@ private:
     typename parser_options<M, S>::alphabet_t& al;
     M& mrep;
     S& srep;
+    cmd_flags_t& cf;
 
   }; // ! options_grammar
 
   alphabet_t letters_;
   M mrep_;
   S srep_;
+  cmd_flags_t cf_;
 
 }; // ! parser_options
 

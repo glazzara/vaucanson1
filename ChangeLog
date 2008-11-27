@@ -1,5 +1,20 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: New structure to overwrite writing data.
+	* taf-kit/src/common.hh: New `cmd_flags_t'. (arguments_t): New
+	  attributes `cf'. [WITH_TWO_ALPHABETS] (arguments_t): New
+	  attributes `cf1' and `cf2'.
+	* taf-kit/src/edition_commands.hxx: More comments. Use
+	  `set_writing_data' to set the writing data.
+	* taf-kit/src/getters.hxx: New function `set_writing_data'.
+	* taf-kit/src/main.cc: Update the implementation according to the
+	  previous changes.
+	* taf-kit/src/parser_options.hh: New method `get_cmd_flags'.
+	* taf-kit/src/parser_options.hxx: Update implementation according to
+	  the previous changes. Set flags to true when pushing data.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a bug for int based series representations.
 	* include/vaucanson/algebra/implementation/monoid/free_monoid_int.hxx:
 	  Clear the `spaces' vector, same as `maybe_zero'.

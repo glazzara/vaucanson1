@@ -329,6 +329,7 @@ int main (int argc, char* argv[])
 	li->args.alphabet = p_opts.get_letters();
 	li->args.srep = p_opts.get_srep();
 	li->args.mrep = p_opts.get_mrep();
+	li->args.cf = p_opts.get_cmd_flags();
 
 #ifdef WITH_TWO_ALPHABETS
 	parser_options<first_monoid_rep_t, first_series_rep_t> p_opts1(li->args.parser1);
@@ -338,8 +339,10 @@ int main (int argc, char* argv[])
 	li->args.alphabet2 = p_opts2.get_letters();
 	li->args.srep.first_representation() = p_opts1.get_srep();
 	li->args.mrep1 = p_opts1.get_mrep();
+	li->args.cf1 = p_opts1.get_cmd_flags();
 	li->args.srep.second_representation() = p_opts2.get_srep();
 	li->args.mrep2 = p_opts2.get_mrep();
+	li->args.cf2 = p_opts2.get_cmd_flags();
 #endif
       }
       catch (const std::logic_error& err)

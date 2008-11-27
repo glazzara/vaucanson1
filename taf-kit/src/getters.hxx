@@ -249,5 +249,71 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
 }
 #endif // !WITH_TWO_ALPHABETS
 
+// Set the representations provided on the command line.
+# define SET_TOKEN(exp, name, rep) \
+if (args.cf. name) \
+a.structure().series() exp name = args. rep . name
+
+# ifdef WITH_TWO_ALPHABETS
+void set_writing_data(automaton_t& a, const arguments_t& args)
+{
+  SET_TOKEN(.representation()->, open_par, srep);
+  SET_TOKEN(.representation()->, close_par, srep);
+  SET_TOKEN(.representation()->, plus, srep);
+  SET_TOKEN(.representation()->, times, srep);
+  SET_TOKEN(.representation()->, star, srep);
+  SET_TOKEN(.representation()->, open_weight, srep);
+  SET_TOKEN(.representation()->, close_weight, srep);
+  SET_TOKEN(.representation()->, spaces, srep);
+  SET_TOKEN(.representation()->, zero, srep);
+
+  SET_TOKEN(.monoid().representation()->, empty, mrep);
+  SET_TOKEN(.monoid().representation()->, concat, mrep);
+
+  SET_TOKEN(.representation()->first_representation()., open_par, srep);
+  SET_TOKEN(.representation()->first_representation()., close_par, srep);
+  SET_TOKEN(.representation()->first_representation()., plus, srep);
+  SET_TOKEN(.representation()->first_representation()., times, srep);
+  SET_TOKEN(.representation()->first_representation()., star, srep);
+  SET_TOKEN(.representation()->first_representation()., open_weight, srep);
+  SET_TOKEN(.representation()->first_representation()., close_weight, srep);
+  SET_TOKEN(.representation()->first_representation()., spaces, srep);
+  SET_TOKEN(.representation()->first_representation()., zero, srep);
+
+  SET_TOKEN(.monoid().first_monoid().representation()->, empty, mrep1);
+  SET_TOKEN(.monoid().second_monoid().representation()->, concat, mrep1);
+
+  SET_TOKEN(.representation()->first_representation()., open_par, srep);
+  SET_TOKEN(.representation()->first_representation()., close_par, srep);
+  SET_TOKEN(.representation()->first_representation()., plus, srep);
+  SET_TOKEN(.representation()->first_representation()., times, srep);
+  SET_TOKEN(.representation()->first_representation()., star, srep);
+  SET_TOKEN(.representation()->first_representation()., open_weight, srep);
+  SET_TOKEN(.representation()->first_representation()., close_weight, srep);
+  SET_TOKEN(.representation()->first_representation()., spaces, srep);
+  SET_TOKEN(.representation()->first_representation()., zero, srep);
+
+  SET_TOKEN(.monoid().first_monoid().representation()->, empty, mrep2);
+  SET_TOKEN(.monoid().second_monoid().representation()->, concat, mrep2);
+}
+# else
+void set_writing_data(automaton_t& a, const arguments_t& args)
+{
+  SET_TOKEN(.representation()->, open_par, srep);
+  SET_TOKEN(.representation()->, close_par, srep);
+  SET_TOKEN(.representation()->, plus, srep);
+  SET_TOKEN(.representation()->, times, srep);
+  SET_TOKEN(.representation()->, star, srep);
+  SET_TOKEN(.representation()->, open_weight, srep);
+  SET_TOKEN(.representation()->, close_weight, srep);
+  SET_TOKEN(.representation()->, spaces, srep);
+  SET_TOKEN(.representation()->, zero, srep);
+
+  SET_TOKEN(.monoid().representation()->, empty, mrep);
+  SET_TOKEN(.monoid().representation()->, concat, mrep);
+}
+# endif // ! WITH_TWO_ALPHABETS
+
+# undef SET_TOKEN
 
 #endif // ! GETTERS_HXX

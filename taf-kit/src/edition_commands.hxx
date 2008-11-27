@@ -199,6 +199,9 @@ namespace edition_commands
 
     if (not ratexp[0])
       throw cancel ();
+
+    // The representations used to build the rat_exp are the same as the ones
+    // specified in the automaton.
     a.add_series_transition(n_from, n_to,
 			    make_rat_exp(a.structure().series().monoid().
 					 alphabet(), ratexp,
@@ -427,11 +430,9 @@ static int edit_automaton_command (const arguments_t& args)
   using namespace vcsn::xml;
 
 # ifndef WITH_TWO_ALPHABETS
-  automaton_t a = make_automaton (alphabet_t (), args.mrep, args.srep);
+  automaton_t a = make_automaton(alphabet_t());
 # else
-  automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t (),
-				  args.mrep, args.mrep1, args.mrep2,
-				  args.srep);
+  automaton_t a = make_automaton(first_alphabet_t(), second_alphabet_t());
 # endif // !WITH_TWO_ALPHABETS
 
   std::fstream input (args.args[1]);
@@ -444,17 +445,21 @@ static int edit_automaton_command (const arguments_t& args)
   else
     {
       // We define the automaton from scratch: the user should have
-      // specified the alphabet to use.
+      // specified the alphabet to use. The make_automaton function
+      // will then choose wisely a good representation for all the
+      // writing data.
 # ifndef WITH_TWO_ALPHABETS
-      a = make_automaton (get_alphabet (args.alphabet), args.mrep, args.srep);
+      a = make_automaton(get_alphabet(args.alphabet));
 # else
-      a = make_automaton (get_first_alphabet (args.alphabet1),
-			  get_second_alphabet (args.alphabet2),
-			  args.mrep, args.mrep1, args.mrep2,
-			  args.srep);
+      a = make_automaton(get_first_alphabet(args.alphabet1),
+			 get_second_alphabet(args.alphabet2));
 # endif // !WITH_TWO_ALPHABETS
     }
 
+  // We can now overwrite any writing data by the new ones
+  // provided on the command line (if any), before entering
+  // the main loop.
+  set_writing_data(a, args);
 
   edition_commands::main_loop (a, args);
 
