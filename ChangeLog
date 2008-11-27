@@ -1,5 +1,13 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add a public parse_letter.
+	* include/vaucanson/algebra/concept/alphabets_base.hh: New public
+	  interface `parse_letter' to parse a literal as a letter_t.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Add the
+	  implementation of the previous mentioned function.
+
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Revert parts of [2433].
 	* include/vaucanson/xml/builders.hxx,
 	* include/vaucanson/xml/contexts/fmp.hxx: Ignore representation as

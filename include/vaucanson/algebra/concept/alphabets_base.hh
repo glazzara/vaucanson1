@@ -208,6 +208,12 @@ namespace vcsn {
 			    L rhs);
   } // ! algebra
 
+  /// Public interface to the letter parser.
+  template <typename S, typename T>
+  std::pair<bool, typename Element<S, T>::letter_t>
+  parse_letter(const Element<S, T>& alphabet,
+	       const std::string& s);
+
   /** @} */
   /** @} */
 

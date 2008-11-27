@@ -204,6 +204,23 @@ namespace vcsn
 
   } // ! algebra
 
+  template <typename S, typename T>
+  std::pair<bool, typename Element<S, T>::letter_t>
+  parse_letter(const Element<S, T>& alphabet,
+	       const std::string& s)
+  {
+    typedef typename Element<S, T>::letter_t letter_t;
+
+    size_t tmp = 0;
+    std::pair<bool, letter_t> res =
+	op_parse(alphabet.structure(), alphabet.value(), s, tmp);
+
+    if (tmp != s.size())
+      res.first = false;
+
+    return res;
+  }
+
 } // ! vcsn
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_ALPHABETS_BASE_HXX
