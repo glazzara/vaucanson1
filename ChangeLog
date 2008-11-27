@@ -1,3 +1,8 @@
+2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	TAF-Kit: Add a test for div3base2.
+	* taf-kit/tests/vcsn-char-b.test: Here.
+
 2008-11-27  Reuben Thomas  <rrt@sc3d.org>
 
 	Add some ignores.

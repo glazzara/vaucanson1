@@ -482,4 +482,21 @@ do
 done
 )
 
+## ------------------- ##
+## Test div3base2.xml. ##
+## ------------------- ##
+
+i=0
+for val in 0 1 10 11 100 101 110 111 1000 1001 1010 1011 1100 1101 1110 1111 10000;
+do
+  out=`$VCSN eval div3base2.xml "$val"`
+  if [ `expr $i % 3` = 0 ];
+  then
+    test $out = 1
+  else
+    test $out = 0
+  fi
+  i=`expr $i + 1`
+done
+
 exit 0
