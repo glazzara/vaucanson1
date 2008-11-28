@@ -11,6 +11,9 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include subdirs.mk
+include $(srcdir)/subdirs.mk
+
+$(srcdir)/subdirs.mk: $(top_srcdir)/build-aux/find_tests.sh
+	cd $(top_srcdir) && build-aux/find_tests.sh && $(MAKE) am--refresh
 
 EXTRA_DIST += generate-all.sh test-suite.mk

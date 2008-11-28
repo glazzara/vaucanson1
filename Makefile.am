@@ -49,6 +49,9 @@ BUILT_SOURCES = include/vaucanson/config/pconf.hh
 ###
 ACLOCAL_AMFLAGS = -I build-aux -I m4
 
+$(top_srcdir)/build-aux/tests.m4: $(top_srcdir)/build-aux/find_tests.sh
+	cd $(top_srcdir) && build-aux/find_tests.sh
+
 ###
 ### Making the demos. (. is builddir)
 ###
