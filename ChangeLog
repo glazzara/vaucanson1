@@ -1,3 +1,12 @@
+2008-11-28  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Use "weightOpening" instead of "openWeight".
+	Since we never "open" a weight, we just use a symbol to say where is
+	the weight: it's a "weight opening symbol".
+	Same for weightClosing.
+	* data/vaucanson.xsd: Here.
+	* include/vaucanson/xml/xmleq.hxx: Here.
+
 2008-11-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-b.test: Use ':' instead of 'echo -n ""'.
@@ -22,7 +31,6 @@
 	Likewise.
 	* build-aux/find_tests.sh: Mention that these files are
 	automatically generated.
-
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix sanity check.

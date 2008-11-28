@@ -74,8 +74,8 @@ namespace vcsn
       closePar = xercesc::XMLString::transcode("closePar");
       plusSym = xercesc::XMLString::transcode("plusSym");
       timesSym = xercesc::XMLString::transcode("timesSym");
-      openWeight = xercesc::XMLString::transcode("openWeight");
-      closeWeight = xercesc::XMLString::transcode("closeWeight");
+      openWeight = xercesc::XMLString::transcode("weightOpening");
+      closeWeight = xercesc::XMLString::transcode("weightClosing");
       spacesSym = xercesc::XMLString::transcode("spacesSym");
       zeroSym = xercesc::XMLString::transcode("zeroSym");
       starSym = xercesc::XMLString::transcode("starSym");

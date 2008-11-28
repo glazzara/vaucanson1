@@ -244,8 +244,8 @@ Writing data can be added.
   <xs:attribute name="starSym"/>
   <xs:attribute name="zeroSym"/>
   <xs:attribute name="spacesSym"/>
-  <xs:attribute name="openWeight"/>
-  <xs:attribute name="closeWeight"/>
+  <xs:attribute name="weightOpening"/>
+  <xs:attribute name="weightClosing"/>
   <xs:attribute name="openPar"/>
   <xs:attribute name="closePar"/>
 </xs:complexType>
