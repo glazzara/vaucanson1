@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,6 +52,14 @@ unsigned complete_test(tests::Tester& tg)
       std::cerr << "Test " << i << " / " << t.test_num() << std::endl;
 
     automaton_t a = gen.generate_dfa(30);
+
+    // Remove one state.  This is a regression test for a bug in
+    // complete().  With the listg implementation, the new state
+    // created by complete() would be created in the hole left by
+    // del_state(), and the iteration over the states of the automate
+    // would mistakenly iterate over this one.
+    a.del_state(5);
+
     automaton_t b = complete(a);
     alphabet_t alphabet = a.structure().series().monoid().alphabet();
     result_test = true;

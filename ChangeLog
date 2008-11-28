@@ -1,5 +1,14 @@
 2008-11-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/complete.hxx: Do not add the
+	state in the for_all_const_states loop, it is wrong when using
+	listg and an automata in which a state was removed.
+	*
+	src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh:
+	Test this.
+
+2008-11-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	State the dependences on find_tests.sh explicitly.
 	Suggested by Reuben Thomas.
 

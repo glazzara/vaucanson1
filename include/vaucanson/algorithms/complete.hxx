@@ -39,13 +39,27 @@ namespace vcsn {
   void
   complete_here(Element<A, AI>& work)
   {
+    // Note that this algorithm may be used on non-deterministic
+    // automata.
     precondition(is_realtime(work));
     TIMER_SCOPED("complete");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
-    hstate_t sink_state;
-    bool sink_added = false;
+
+    hstate_t sink_state = work.add_state();
+    bool sink_needed = false;
+
+    // If the sink states is the only state of the automaton, we want
+    // to keep it as an initial state.  This is meant!  The empty
+    // automaton is deterministic, but a complete deterministic
+    // automata has at least one state (it is then easier to
+    // complement it).
+    if (work.states().size() ==  1)
+    {
+      sink_needed = true;
+      work.set_initial(sink_state);
+    }
 
     for_all_const_states(s, work)
       for_all_const_letters(l, work.structure().series().monoid().alphabet())
@@ -62,25 +76,13 @@ namespace vcsn {
         }
         if (empty)
         {
-          if (not sink_added)
-          {
-            sink_state = work.add_state();
-            sink_added = true;
-          }
+	  sink_needed = true;
           work.add_letter_transition(*s, sink_state, *l);
 	}
       }
 
-    if (work.states().size() ==  0)
-    {
-      sink_state = work.add_state();
-      sink_added = true;
-      work.set_initial(sink_state);
-    }
-
-    if (sink_added)
-      for_all_const_letters(l, work.structure().series().monoid().alphabet())
-	work.add_letter_transition(sink_state, sink_state, *l);
+    if (!sink_needed)
+      work.del_state(sink_state);
   }
 
   /*---------.
