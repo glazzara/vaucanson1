@@ -453,10 +453,9 @@ diff aut3.info aut4.info
 
 # Test some function of the parser
 
+: >stderr.ref
 $VCSN -a01 thompson "1 + 0" 2>stderr
-echo -n "" >stderr.ref
 diff stderr stderr.ref
-echo -n "" >stderr.ref
 $VCSN --parser="PLUS=toto" -aab thompson "a toto b" 2>stderr
 diff stderr stderr.ref
 
