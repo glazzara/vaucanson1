@@ -1,5 +1,18 @@
 2008-11-28  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Simplify the code in XML system.
+	Replace all code similar to:
+	  if (ptr)
+	    delete ptr;
+	By:
+	  delete ptr;
+	Since delete of null pointer is correct.
+	* include/vaucanson/xml/builders.hxx: Here.
+	* include/vaucanson/xml/handlers.hxx: Here.
+	* include/vaucanson/xml/regexp.hxx: Here.
+
+2008-11-28  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Use "weightOpening" instead of "openWeight".
 	Since we never "open" a weight, we just use a symbol to say where is
 	the weight: it's a "weight opening symbol".

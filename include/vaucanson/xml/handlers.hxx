@@ -195,8 +195,7 @@ namespace vcsn
 
       delete monoid_;
       delete monoidh_;
-      if (rep_)
-	delete rep_;
+      delete rep_;
       delete reph_;
       delete semiring_;
       delete semiringh_;
@@ -272,8 +271,7 @@ namespace vcsn
       {
 	hstate_t state = aut_.add_state();
 	map_[xmlstr(tools::get_attribute(attrs, eq_.id))] = state;
-	if (stateh_)
-	  delete stateh_;
+	delete stateh_;
 	stateh_ = new StateHandler<T>(parser_, *this, aut_, state);
 	parser_->setContentHandler(stateh_);
       }
@@ -292,8 +290,7 @@ namespace vcsn
 	parser_->setContentHandler(&root_);
       else
 	error::token(localname);
-      if (stateh_)
-	delete stateh_;
+      delete stateh_;
     }
 
     /**
@@ -386,24 +383,21 @@ namespace vcsn
       {
 	hstate_t src = map_[xmlstr(tools::get_attribute(attrs, eq_.source))];
 	hstate_t dst = map_[xmlstr(tools::get_attribute(attrs, eq_.target))];
-	if (transitionh_)
-	  delete transitionh_;
+	delete transitionh_;
 	transitionh_ = new TransitionHandler<T>(parser_, *this, aut_, src, dst);
 	parser_->setContentHandler(transitionh_);
       }
       else if (XMLString::equals(eq_.final, localname))
       {
 	hstate_t state = map_[xmlstr(tools::get_attribute(attrs, eq_.state))];
-	if (transitionh_)
-	  delete transitionh_;
+	delete transitionh_;
 	transitionh_ = new InitFinalHandler<T>(parser_, *this, aut_, state, false);
 	parser_->setContentHandler(transitionh_);
       }
       else if (XMLString::equals(eq_.initial, localname))
       {
 	hstate_t state = map_[xmlstr(tools::get_attribute(attrs, eq_.state))];
-	if (transitionh_)
-	  delete transitionh_;
+	delete transitionh_;
 	transitionh_ = new InitFinalHandler<T>(parser_, *this, aut_, state, true);
 	parser_->setContentHandler(transitionh_);
       }
@@ -422,8 +416,7 @@ namespace vcsn
 	parser_->setContentHandler(&root_);
       else
 	error::token(localname);
-      if (transitionh_)
-	delete transitionh_;
+      delete transitionh_;
     }
 
     /**

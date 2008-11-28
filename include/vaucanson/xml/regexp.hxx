@@ -60,8 +60,7 @@ namespace vcsn
     template <typename T>
     RegexpHandler<T>::~RegexpHandler()
     {
-      if (lefth_)
-	delete lefth_;
+      delete lefth_;
     }
 
     template <typename T>
@@ -417,8 +416,7 @@ namespace vcsn
 	monGenAction<actee_t> action(param_);
 
 	// Delete the old handler.
-	if (mongenh_)
-	  delete mongenh_;
+	delete mongenh_;
 
 	// Choose statically the kind of generator.
 	if (algebra::letter_traits<typename monoid_t::alphabet_t::letter_t>::kind() == "simple")
@@ -447,8 +445,7 @@ namespace vcsn
       if (XMLString::equals(end_, localname))
       {
 	// We are done with the "parent", so delete remaining data.
-	if (mongenh_)
-	  delete mongenh_;
+	delete mongenh_;
 
 	// Go up one level.
 	parser_->setContentHandler(&root_);

@@ -221,8 +221,7 @@ namespace vcsn
 	monGenAction<T> action(monoid_);
 
 	// Delete the old handler.
-	if (mongenh_)
-	  delete mongenh_;
+	delete mongenh_;
 
 	// Choose statically the kind of generator.
 	if (algebra::letter_traits<typename T::alphabet_t::letter_t>::kind() == "simple")
@@ -267,8 +266,7 @@ namespace vcsn
       if (XMLString::equals(eq_.monoid, localname))
       {
 	// We are done with the monoid, so delete remaining data.
-	if (mongenh_)
-	  delete mongenh_;
+	delete mongenh_;
 
 	// Build a new monoid with disambiguated symbols.
 	T new_monoid(monoid_.alphabet());
