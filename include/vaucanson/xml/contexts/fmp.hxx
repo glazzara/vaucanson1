@@ -332,8 +332,8 @@ namespace vcsn
 	tools::set_attribute(writingData, "timesSym", aut.series().representation()->times);
 	tools::set_attribute(writingData, "starSym", aut.series().representation()->star);
 	tools::set_attribute(writingData, "zeroSym", aut.series().representation()->zero);
-	tools::set_attribute(writingData, "openWeight", aut.series().representation()->open_weight);
-	tools::set_attribute(writingData, "closeWeight", aut.series().representation()->close_weight);
+	tools::set_attribute(writingData, "weightOpening", aut.series().representation()->open_weight);
+	tools::set_attribute(writingData, "weightClosing", aut.series().representation()->close_weight);
 	tools::set_attribute(writingData, "openPar", aut.series().representation()->open_par);
 	tools::set_attribute(writingData, "closePar", aut.series().representation()->close_par);
 	tools::set_attribute(writingData, "spacesSym", aut.series().representation()->spaces.front());
@@ -347,9 +347,9 @@ namespace vcsn
 			     aut.series().representation()->first_representation().star);
 	tools::set_attribute(firstWritingData, "zeroSym",
 			     aut.series().representation()->first_representation().zero);
-	tools::set_attribute(firstWritingData, "openWeight",
+	tools::set_attribute(firstWritingData, "weightOpening",
 			     aut.series().representation()->first_representation().open_weight);
-	tools::set_attribute(firstWritingData, "closeWeight",
+	tools::set_attribute(firstWritingData, "weightClosing",
 			     aut.series().representation()->first_representation().close_weight);
 	tools::set_attribute(firstWritingData, "openPar",
 			     aut.series().representation()->first_representation().open_par);
@@ -368,9 +368,9 @@ namespace vcsn
 			     aut.series().representation()->second_representation().star);
 	tools::set_attribute(secondWritingData, "zeroSym",
 			     aut.series().representation()->second_representation().zero);
-	tools::set_attribute(secondWritingData, "openWeight",
+	tools::set_attribute(secondWritingData, "weightOpening",
 			     aut.series().representation()->second_representation().open_weight);
-	tools::set_attribute(secondWritingData, "closeWeight",
+	tools::set_attribute(secondWritingData, "weightClosing",
 			     aut.series().representation()->second_representation().close_weight);
 	tools::set_attribute(secondWritingData, "openPar",
 			     aut.series().representation()->second_representation().open_par);

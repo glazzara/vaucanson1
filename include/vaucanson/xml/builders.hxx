@@ -693,8 +693,8 @@ namespace vcsn
 	tools::set_attribute(writingData, "timesSym", aut.series().representation()->times);
 	tools::set_attribute(writingData, "starSym", aut.series().representation()->star);
 	tools::set_attribute(writingData, "zeroSym", aut.series().representation()->zero);
-	tools::set_attribute(writingData, "openWeight", aut.series().representation()->open_weight);
-	tools::set_attribute(writingData, "closeWeight", aut.series().representation()->close_weight);
+	tools::set_attribute(writingData, "weightOpening", aut.series().representation()->open_weight);
+	tools::set_attribute(writingData, "weightClosing", aut.series().representation()->close_weight);
 	tools::set_attribute(writingData, "openPar", aut.series().representation()->open_par);
 	tools::set_attribute(writingData, "closePar", aut.series().representation()->close_par);
 	tools::set_attribute(writingData, "spacesSym", aut.series().representation()->spaces.front());

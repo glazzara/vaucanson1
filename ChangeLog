@@ -1,3 +1,12 @@
+2008-12-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Finish Florian's change.
+
+	* include/vaucanson/xml/builders.hxx (create_type_writingData_node):
+	Use weightOpening and weightClosing.
+	* include/vaucanson/xml/contexts/fmp.hxx
+	(create_type_writingData_node): Likewise.
+
 2008-11-28  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Simplify the code in XML system.
@@ -29,8 +38,7 @@
 	* include/vaucanson/algorithms/complete.hxx: Do not add the
 	state in the for_all_const_states loop, it is wrong when using
 	listg and an automata in which a state was removed.
-	*
-	src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh:
+	* src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh:
 	Test this.
 
 2008-11-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
