@@ -1,5 +1,10 @@
 2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix ChangeLog for [2543].
+	* ChangeLog: Be more precise about what has been done.
+
+2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Update a test about quot3base2.xml.
 	* taf-kit/tests/vcsn-char-fmp-b.test: Check that `div3base2.xml' and
 	  the domain of `quot3base2.xml' are equivalent (suggested by
@@ -168,11 +173,11 @@
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Cleanup default_eps_eps and representation_traits.
-	Remove them, as they are no more necessary.
 	* include/vaucanson/algebra/concept/freemonoid_product.hh,
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx,
-	* include/vaucanson/design_pattern/predecls.hh: Here.
+	* include/vaucanson/design_pattern/predecls.hh: Remove the structure
+	  `representation_traits'.
 
 2008-11-27  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
