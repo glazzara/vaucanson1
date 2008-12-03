@@ -469,7 +469,7 @@ static int edit_automaton_command (const arguments_t& args)
     warn ("Error opening `" << args.args[1] << "'.");
     return -1;
   }
-  output << automaton_saver (a, string_out (), XML ()) << std::endl;
+  output << automaton_saver(a, string_out(), XML());
   output.close ();
 
   return 0;

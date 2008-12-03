@@ -1,5 +1,12 @@
 2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Homogenize XML output.
+	* taf-kit/src/edition_commands.hxx: Do not append an `std::endl'
+	  after calling `automaton_saver'.
+	* taf-kit/tests/vcsn-char-b.test: Regression test.
+
+2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix ChangeLog for [2543].
 	* ChangeLog: Be more precise about what has been done.
 

@@ -497,4 +497,17 @@ do
   i=`expr $i + 1`
 done
 
+## --------------------------------------------------- ##
+## Check trailing newline after XML in edit-automaton. ##
+## --------------------------------------------------- ##
+
+# When we build an empty automaton with edit-automaton, the output must be the
+# same as using the identity command on the automaton previously defined.
+sed '/^#/d' <<EOF | $VCSN -a"ab" edit-automaton tn-empty.xml
+# Exit.
+10
+EOF
+$VCSN identity tn-empty.xml > tn-identity.xml
+diff tn-empty.xml tn-identity.xml
+
 exit 0
