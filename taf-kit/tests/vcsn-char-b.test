@@ -50,6 +50,11 @@ EOF
 
 # Empty automaton (no states).
 echo 10 | $VCSN --alphabet=ab edit-automaton empty.xml
+# edit-automaton used to add a trailing newline at the end of the XML
+# file; and identity would remove it.  Make sure the two outputs are
+# now identical.
+$VCSN identity empty.xml > empty2.xml
+diff empty.xml empty2.xml
 
 # Two states, no final states (empty language).
 sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton 2snf.xml
@@ -496,19 +501,6 @@ do
   fi
   i=`expr $i + 1`
 done
-
-## --------------------------------------------------- ##
-## Check trailing newline after XML in edit-automaton. ##
-## --------------------------------------------------- ##
-
-# When we build an empty automaton with edit-automaton, the output must be the
-# same as using the identity command on the automaton previously defined.
-sed '/^#/d' <<EOF | $VCSN -a"ab" edit-automaton tn-empty.xml
-# Exit.
-10
-EOF
-$VCSN identity tn-empty.xml > tn-identity.xml
-diff tn-empty.xml tn-identity.xml
 
 ## --------------------------- ##
 ## Test writing data handling. ##
