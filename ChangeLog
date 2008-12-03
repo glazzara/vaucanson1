@@ -1,3 +1,10 @@
+2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	TAF-Kit: Update a test about quot3base2.xml.
+	* taf-kit/tests/vcsn-char-fmp-b.test: Check that `div3base2.xml' and
+	  the domain of `quot3base2.xml' are equivalent (suggested by
+	  Alexandre Duret-Lutz).
+
 2008-12-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Finish Florian's change.

@@ -384,6 +384,7 @@ test x"$res" = x"0011101"
 # FIXME: we should use are-isomorphic
 $VCSN domain quot3base2.xml > quot3base2-domain.xml
 vcsn-char-b identity div3base2.xml > div3base2-identity.xml
+vcsn-char-b are-equivalent div3base2-identity.xml quot3base2-domain.xml
 sort quot3base2-domain.xml > quot3base2-domain.sort.xml
 sort div3base2-identity.xml > div3base2-identity.sort.xml
 diff quot3base2-domain.sort.xml div3base2-identity.sort.xml
