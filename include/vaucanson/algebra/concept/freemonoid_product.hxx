@@ -149,17 +149,17 @@ namespace vcsn
     // representations can't be changed. And, because we originally planned to
     // use singleton (see get_instance()) and other clever tricks, an FMP<F, S>
     // with F == S will use the SAME representation for both the monoid.
-    // (simply putted, changing the epsilon representation for the first monoid
-    // will pass on to the second one). A lot of works needs to be done to
-    // solve this problem elegantly but AFAIK it all revolve around improving
-    // the MonoidRepBase to be more like an alphabet (with dynamic data stored
-    // in some chosen implementation). As for now the implemented solution has
-    // the least impact on Vaucanson. It could have been done more compact but
-    // the choice was made to choose the code that most visibly explains why it
-    // is done.  We ensure _when creating the FMP_ that if the two
-    // representations match, we create a new one for the second monoid, while
-    // preserving adaptive behavior. WARNING: it obviously defeat the purpose
-    // of the shared_ptr.
+    // (simply put, changing the epsilon representation for the first monoid
+    // will pass on to the second one). A lot of work needs to be done to solve
+    // this problem elegantly but AFAIK it all revolves around improving the
+    // MonoidRepBase to be more like an alphabet (with dynamic data stored in
+    // some chosen implementation). As for now the implemented solution has the
+    // least impact on Vaucanson. It could have been done more compact but the
+    // choice was made to choose the code that most visibly explains why it is
+    // done.  We ensure _when creating the FMP_ that if the two representations
+    // match, we create a new one for the second monoid (the calculated
+    // representation build by the disambiguate function is used to initialize
+    // it). WARNING: it obviously defeat the purpose of the shared_ptr.
     template <typename F, typename S>
     void
     split_monoid_(F&, S&)

@@ -1,3 +1,10 @@
+2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix typo.
+	* ChangeLog: Fix ChangeLog entry of r2565.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Fix
+	  English typo. Rephrase the sentence about `adaptive behavior'.
+
 2008-12-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-b.test: Do not build two
@@ -34,7 +41,7 @@
 	* taf-kit/tests/vcsn-int-fmp-b.test,
 	* taf-kit/tests/vcsn-int-fmp-z.test,
 	* taf-kit/tests/vcsn-int-int-b.test,
-	* taf-kit/tests/vcsn-int-z.test: Here.
+	* taf-kit/tests/vcsn-int-z.test: Test handling of writing data.
 	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Fix
 	  a bug: New `split_monoid_()', update FMP constructors. Add
 	  more comments.
