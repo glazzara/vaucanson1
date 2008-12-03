@@ -127,6 +127,7 @@ private:
       M& mrep_ref;
       S& srep_ref;
       cmd_flags_t& cf_ref;
+      bool first_space_;
 
       /**
        * function called to remove the '\' in front of the

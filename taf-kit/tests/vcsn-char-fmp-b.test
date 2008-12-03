@@ -400,6 +400,7 @@ sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" -p"$writing_data" -P"$writing_data1" -Q"
 # Exit.
 10
 EOF
+diff $wd_full wd-ref.xml
 sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit-automaton wd-empty.xml
 # Exit.
 10

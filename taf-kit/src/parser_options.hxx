@@ -148,7 +148,7 @@ parser_options<M, S>::check_collision()
 template <typename M, typename S>
 template <typename ScannerT>
 parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const parser_options::options_grammar& g)
-: al_ref(g.al), mrep_ref(g.mrep), srep_ref(g.srep), cf_ref(g.cf)
+: al_ref(g.al), mrep_ref(g.mrep), srep_ref(g.srep), cf_ref(g.cf), first_space_(true)
 {
   using namespace boost;
   using namespace boost::spirit;
@@ -364,11 +364,10 @@ void
 parser_options<M, S>::options_grammar::definition<ScannerT>::push_space(const char* from,
 									const char* to)
 {
-  static bool first = true;
-  if (first)
+  if (first_space_)
     srep_ref.spaces.clear();
   srep_ref.spaces.push_back(escape(from, to));
-  first = false;
+  first_space_ = false;
   cf_ref.spaces = true;
 }
 

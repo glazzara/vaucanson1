@@ -1,0 +1,31 @@
+
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+  <automaton>
+    <valueType>
+      <writingData closePar="_A_" openPar="_B_" plusSym="_C_" spacesSym="_D_" starSym="_E_" timesSym="_F_" weightClosing="_G_" weightOpening="_H_" zeroSym="_I_">
+        <writingData closePar="#A#" openPar="#B#" plusSym="#C#" spacesSym="#D#" starSym="#E#" timesSym="#F#" weightClosing="#G#" weightOpening="#H#" zeroSym="#I#"/>
+        <writingData closePar="@A@" openPar="@B@" plusSym="@C@" spacesSym="@D@" starSym="@E@" timesSym="@F@" weightClosing="@G@" weightOpening="@H@" zeroSym="@I@"/>
+      </writingData>
+      <semiring operations="classical" set="B" type="numerical"/>
+      <monoid prodDim="2" type="product">
+        <writingData identitySym="_J_" timesSym="_K_"/>
+        <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+          <writingData identitySym="#J#" timesSym="#K#"/>
+          <monGen value="a"/>
+          <monGen value="b"/>
+        </monoid>
+        <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+          <writingData identitySym="@J@" timesSym="@K@"/>
+          <monGen value="x"/>
+          <monGen value="y"/>
+        </monoid>
+      </monoid>
+    </valueType>
+    <automatonStruct>
+      <states/>
+      <transitions/>
+    </automatonStruct>
+  </automaton>
+
+</fsmxml>
