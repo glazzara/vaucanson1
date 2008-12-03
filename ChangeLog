@@ -1,5 +1,11 @@
 2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Add comments about r2553.
+	* taf-kit/src/ratexp_commands.hh: Here.
+	* taf-kit/tests/vcsn-char-b.test: New regression test.
+
+2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Fix a bug.
 	* taf-kit/src/parser_options.hh (definition): New attribute
 	  `first_space_'.

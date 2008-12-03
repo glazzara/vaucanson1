@@ -526,4 +526,16 @@ EOF
 $VCSN -p"$writing_data" identity wd-empty.xml > wd-new.xml
 diff wd-new.xml wd-ref.xml
 
+# Check that ratexp commands correctly handle the representations.
+# (with the previous test, it is sufficient to only check for
+# one (MonoidRep) and zero (SeriesRep))
+ret=`$VCSN -a"ab" -p"ONE=x" standard x \| aut-to-exp -`
+test x"$ret" = x"x"
+ret=`$VCSN -a"ab" -p"ONE=x" thompson x \| aut-to-exp -`
+test x"$ret" = x"x"
+ret=`$VCSN -a"ab" -p"ZERO=x" standard x \| aut-to-exp -`
+test x"$ret" = x"x"
+ret=`$VCSN -a"ab" -p"ZERO=x" thompson x \| aut-to-exp -`
+test x"$ret" = x"x"
+
 exit 0
