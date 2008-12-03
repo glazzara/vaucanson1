@@ -1,5 +1,23 @@
 2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Add tests for writing data and fix a bug.
+	* taf-kit/tests/vcsn-char-b.test,
+	* taf-kit/tests/vcsn-char-char-b.test,
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	* taf-kit/tests/vcsn-char-fmp-z.test,
+	* taf-kit/tests/vcsn-char-int-b.test,
+	* taf-kit/tests/vcsn-char-z.test,
+	* taf-kit/tests/vcsn-int-b.test,
+	* taf-kit/tests/vcsn-int-fmp-b.test,
+	* taf-kit/tests/vcsn-int-fmp-z.test,
+	* taf-kit/tests/vcsn-int-int-b.test,
+	* taf-kit/tests/vcsn-int-z.test: Here.
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: Fix
+	  a bug: New `split_monoid_()', update FMP constructors. Add
+	  more comments.
+
+2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Homogenize XML output.
 	* taf-kit/src/edition_commands.hxx: Do not append an `std::endl'
 	  after calling `automaton_saver'.

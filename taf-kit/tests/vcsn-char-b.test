@@ -510,4 +510,20 @@ EOF
 $VCSN identity tn-empty.xml > tn-identity.xml
 diff tn-empty.xml tn-identity.xml
 
+## --------------------------- ##
+## Test writing data handling. ##
+## --------------------------- ##
+
+writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
+sed '/^#/d' <<EOF | $VCSN -a"xy" -p"$writing_data" edit-automaton wd-ref.xml
+# Exit.
+10
+EOF
+sed '/^#/d' <<EOF | $VCSN -a"xy" edit-automaton wd-empty.xml
+# Exit.
+10
+EOF
+$VCSN -p"$writing_data" identity wd-empty.xml > wd-new.xml
+diff wd-new.xml wd-ref.xml
+
 exit 0

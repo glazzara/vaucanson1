@@ -388,3 +388,21 @@ vcsn-char-b are-equivalent div3base2-identity.xml quot3base2-domain.xml
 sort quot3base2-domain.xml > quot3base2-domain.sort.xml
 sort div3base2-identity.xml > div3base2-identity.sort.xml
 diff quot3base2-domain.sort.xml div3base2-identity.sort.xml
+
+## --------------------------- ##
+## Test writing data handling. ##
+## --------------------------- ##
+
+writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
+writing_data1="CPAR=#A# OPAR=#B# PLUS=#C# SPACE=#D# STAR=#E# TIMES=#F# CWEIGHT=#G# OWEIGHT=#H# ZERO=#I# ONE=#J# CONCAT=#K#"
+writing_data2="CPAR=@A@ OPAR=@B@ PLUS=@C@ SPACE=@D@ STAR=@E@ TIMES=@F@ CWEIGHT=@G@ OWEIGHT=@H@ ZERO=@I@ ONE=@J@ CONCAT=@K@"
+sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit-automaton wd-ref.xml
+# Exit.
+10
+EOF
+sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit-automaton wd-empty.xml
+# Exit.
+10
+EOF
+$VCSN -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" identity wd-empty.xml > wd-new.xml
+diff wd-new.xml wd-ref.xml

@@ -140,18 +140,58 @@ namespace vcsn
     | FreeMonoidProduct<F, S> |
     `------------------------*/
 
+    // FIXME: This facility is a HACK. Explanations: when a high level
+    // structural element (a structure inheriting from Structure) is
+    // instantiated (say a series_set_t), the underlying monoid is only
+    // accessible via const methods.  Unfortunately it means that when a
+    // FreeMonoidProduct is instantiated (not as a non-const object) the
+    // shared_ptr holding the pointers to the first and second monoid
+    // representations can't be changed. And, because we originally planned to
+    // use singleton (see get_instance()) and other clever tricks, an FMP<F, S>
+    // with F == S will use the SAME representation for both the monoid.
+    // (simply putted, changing the epsilon representation for the first monoid
+    // will pass on to the second one). A lot of works needs to be done to
+    // solve this problem elegantly but AFAIK it all revolve around improving
+    // the MonoidRepBase to be more like an alphabet (with dynamic data stored
+    // in some chosen implementation). As for now the implemented solution has
+    // the least impact on Vaucanson. It could have been done more compact but
+    // the choice was made to choose the code that most visibly explains why it
+    // is done.  We ensure _when creating the FMP_ that if the two
+    // representations match, we create a new one for the second monoid, while
+    // preserving adaptive behavior. WARNING: it obviously defeat the purpose
+    // of the shared_ptr.
+    template <typename F, typename S>
+    void
+    split_monoid_(F&, S&)
+    {}
+
+    template <typename F>
+    void
+    split_monoid_(F& first_monoid, F& second_monoid)
+    {
+      if (first_monoid.representation().get() == second_monoid.representation().get())
+      {
+	typename F::monoid_rep_t second = *(second_monoid.representation());
+	second_monoid.set_representation(second);
+      }
+    }
+
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const F& a, const S& b) :
 	first_monoid_(a), second_monoid_(b),
 	rep_(MonoidRepDefault<FreeMonoidProduct<F, S> >::get_instance())
-    {}
+    {
+      split_monoid_(first_monoid_, second_monoid_);
+    }
 
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const F& a, const S& b,
 					       MonoidRep<FreeMonoidProduct<F, S> > mr) :
 	first_monoid_(a), second_monoid_(b),
 	rep_(boost::shared_ptr<MonoidRep<FreeMonoidProduct<F, S> > >(new MonoidRep<FreeMonoidProduct<F, S> >(mr)))
-    {}
+    {
+      split_monoid_(first_monoid_, second_monoid_);
+    }
 
     template <class F, class S>
     FreeMonoidProduct<F, S>::FreeMonoidProduct(const FreeMonoidProduct& w) :
@@ -159,7 +199,9 @@ namespace vcsn
       first_monoid_(w.first_monoid_),
       second_monoid_(w.second_monoid_),
       rep_(w.rep_)
-    {}
+    {
+      split_monoid_(first_monoid_, second_monoid_);
+    }
 
     template <class F, class S>
     typename FreeMonoidProduct<F, S>::first_monoid_t&
