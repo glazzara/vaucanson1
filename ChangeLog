@@ -1,5 +1,11 @@
 2008-12-08  Reuben Thomas  <rrt@sc3d.org>
 
+	Whitespace correction.
+	* include/vaucanson/misc/usual_macros.hh: Make new iterator
+	  types line up with everything else.
+
+2008-12-08  Reuben Thomas  <rrt@sc3d.org>
+
 	Add some ignores for new tests.
 
 2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
