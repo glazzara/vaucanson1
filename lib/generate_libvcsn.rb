@@ -39,7 +39,7 @@ vcsn.each_key { |type| system("mkdir -p " + type) }
 
 # testing if a source file needs to be created
 def create?(type, file)
-  file !~ /krat_exp_cderivation.hh/ and
+  file !~ /krat_exp_cderivation.hh/ and # FIXME: Why is this file omitted?
   (
     ! File.exist?(type + "/" + File.basename(file, ".hh") + ".cc") or
     File.new(file, "r").stat > File.new(type + "/" + File.basename(file, ".hh") + ".cc").stat
@@ -277,8 +277,10 @@ files.each { |file|
 	tmp = tmp.gsub(/Automaton/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t')
 	tmp = tmp.gsub(/HList/, 'std::set<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::hstate_t>')
 	tmp = tmp.gsub(/ExpImpl/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_impl_t')
+	tmp = tmp.gsub(/LinExp/, 'linearize_element<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t::value_t>::element_t')
 	tmp = tmp.gsub(/Exp/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::rat_exp_t')
 	tmp = tmp.gsub(/Series/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::series_set_elt_t')
+	tmp = tmp.gsub(/Letter/, 'VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::letter_t')
 	tmp = tmp.gsub(/Word/, 'std::basic_string<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::letter_t>')
 	tmp = tmp.gsub(/InputProjection/, 'input_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
 	tmp = tmp.gsub(/OutputProjection/, 'output_projection_helper<VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::set_t, VCSN_DEFAULT_GRAPH_IMPL::VCSN_CONTEXT::automaton_t::value_t>::ret')
@@ -294,7 +296,7 @@ files.each { |file|
 
     vcsn.each { |type, context|
       if create?(type, file) and ! empty
-	# file has template to instanciate, write it down!
+	# file has template to instantiate, write it down!
 	# checking if there was any declaration kept from the current header
 	write_src(type, context, File.basename(file, ".hh") + ".cc", output)
       end

@@ -1,5 +1,24 @@
 2008-12-08  Reuben Thomas  <rrt@sc3d.org>
 
+	Add INTERFACEs and some new pseudo-types.
+	The uses of the new pseudo-types are disabled, as they would
+	presumably not work with vaucanswig.
+	* include/vaucanson/algorithms/cut_up.hh: Add interfaces.
+	* include/vaucanson/algorithms/eval.hh: Add disabled interfaces.
+	* include/vaucanson/algorithms/extension.hh: Add interfaces.
+	* include/vaucanson/algorithms/krat_exp_constant_term.hh: Add
+	  interfaces.
+	* include/vaucanson/algorithms/krat_exp_derivation.hh: Add an
+	  interface and a disabled interface.
+	* include/vaucanson/algorithms/krat_exp_flatten.hh: Add interface.
+	* include/vaucanson/algorithms/krat_exp_linearize.hh: Add a disabled
+	  interface.
+	* include/vaucanson/algorithms/krat_exp_realtime.hh: Add an interface.
+	* lib/generate_libvcsn.rb: Add the LinExp and Word pseudo-types. Their
+	  uses are currently disabled.
+
+2008-12-08  Reuben Thomas  <rrt@sc3d.org>
+
 	Whitespace correction.
 	* include/vaucanson/misc/usual_macros.hh: Make new iterator
 	  types line up with everything else.

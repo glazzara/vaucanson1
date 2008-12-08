@@ -40,7 +40,10 @@
 
 namespace vcsn {
 
-  /** @addtogroup algorithms *//** @{ */
+/** @addtogroup algorithms *//** @{ */
+
+// The following line is a potential INTERFACE lines which has been disabled because of the LinExp pseudo-type.
+// Interface: LinExp linearize(const Exp& e) { return vcsn::linearize(*e); }
 
   /// The types of a linearized expression
   template <typename S, typename T>
@@ -52,7 +55,7 @@ namespace vcsn {
     typedef typename S::monoid_t		orig_monoid_t;
     typedef typename orig_monoid_t::letter_t	orig_letter_t;
 
-    // Build it !
+    // Build it!
     typedef int					index_t;
     typedef std::pair<orig_letter_t, index_t>	letter_t;
     // FIXME: Here, we want X<letter_t> where X is the type of the alphabet

@@ -27,6 +27,8 @@
  */
 /** @} */
 
+// INTERFACE: std::pair<Exp::semiring_elt_t, bool> constant_term(const Exp& e) { return vcsn::constant_term(*e); }
+
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <utility>
 

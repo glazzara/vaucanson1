@@ -25,6 +25,11 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 
+// INTERFACE: bool is_cut_up(const Automaton& a) { return vcsn::is_cut_up(*a); }
+
+// INTERFACE: Automaton cut_up(const Automaton& a) { return vcsn::cut_up(*a); }
+// INTERFACE: void cut_up(const Automaton& a, Automaton& res) { vcsn::cut_up(*a, *res); }
+
 # include <vaucanson/automata/concept/copy.hh>
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 # include <vaucanson/algebra/implementation/series/generalized.hh>

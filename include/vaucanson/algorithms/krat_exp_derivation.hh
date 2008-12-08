@@ -27,6 +27,10 @@
  */
 /** @} */
 
+// INTERFACE: std::pair<Exp, bool> derivate(const Exp& e, Letter l) { return vcsn::derivate(*e, l); }
+// The following line is a potential INTERFACE lines which has been disabled because of the Word pseudo-type.
+// Interface: std::pair<Exp, bool> word_derivate(const Exp& e, Word a) { return vcsn::word_derivate(*e, a); }
+
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 # include <utility>

@@ -27,6 +27,9 @@
  */
 /** @} */
 
+// INTERFACE: Transducer extension(const Automaton& a) { return vcsn::extension(*a); }
+// INTERFACE: void extension(const Automaton& a, Transducer& res) { vcsn::extension(*a, *t); }
+
 # include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {

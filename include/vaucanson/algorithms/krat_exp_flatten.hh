@@ -32,6 +32,8 @@
  */
 /** @} */
 
+// INTERFACE: std::list<Exp::set_t::monoid_t::alphabet_t::letter_t> flatten(const Exp& e) { return vcsn::flatten(*e); }
+
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 # include <list>
