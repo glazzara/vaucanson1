@@ -61,10 +61,10 @@ namespace vcsn {
     for_all_const_states(s, f)
       for_all_const_states(t, g)
     {
-      for (typename transducer_t::delta_iterator lhs_e(f.value(), *s); ! lhs_e.done(); lhs_e.next())
+      for (delta_iterator lhs_e(f.value(), *s); ! lhs_e.done(); lhs_e.next())
       {
 	series_set_elt_t l = f.series_of(*lhs_e);
-	for (typename transducer_t::delta_iterator rhs_e(g.value(), *s); ! rhs_e.done(); rhs_e.next())
+	for (delta_iterator rhs_e(g.value(), *s); ! rhs_e.done(); rhs_e.next())
 	{
 	  series_set_elt_t l_ = g.series_of(*rhs_e);
 	  series_set_elt_t l__(series);

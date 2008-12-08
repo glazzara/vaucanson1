@@ -107,7 +107,7 @@ namespace vcsn {
 	bool is_final = false;
 	for_all_const_ (subset_t, j, s)
         {
-          for (typename automaton_t::delta_iterator t(input.value(), *j); ! t.done(); t.next())
+          for (delta_iterator t(input.value(), *j); ! t.done(); t.next())
           {
             monoid_elt_t w(input.series_of(*t).structure().monoid(), *e);
             if (input.series_of(*t).get(w) != input.series().semiring().wzero_)

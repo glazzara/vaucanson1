@@ -43,7 +43,7 @@ namespace vcsn {
     delta_ret_t	delta_ret;
 
     // FIXME : O(n^2) => O(nlog(n)) There is maybe an algorithm in O(nlog(n))
-    for (typename input_t::delta_iterator j(input.value(), *current_state);
+    for (delta_iterator j(input.value(), *current_state);
          ! j.done();
          j.next())
       delta_ret.push_back(*j);

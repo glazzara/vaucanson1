@@ -63,7 +63,7 @@ namespace vcsn {
 
     for_all_const_states(i, rhs)
     {
-      for (typename rhs_t::delta_iterator d(rhs.value(), *i);
+      for (delta_iterator d(rhs.value(), *i);
            ! d.done();
            d.next())
       {

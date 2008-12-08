@@ -126,7 +126,7 @@ namespace vcsn {
         hstate_t first;
 	if (not Transposed)
         {
-          for (typename automaton_t::delta_iterator t(input.value(), *istate);
+          for (delta_iterator t(input.value(), *istate);
                ! t.done() && empty;
                t.next())
           {
@@ -141,7 +141,7 @@ namespace vcsn {
         }
 	else
         {
-          for (typename automaton_t::rdelta_iterator t(input.value(), *istate);
+          for (rdelta_iterator t(input.value(), *istate);
                ! t.done() && empty;
                t.next())
           {

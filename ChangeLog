@@ -1,5 +1,34 @@
 2008-12-08  Reuben Thomas  <rrt@sc3d.org>
 
+	Use type abbreviations for delta_iterators.
+	AUTOMATION_TYPES defines types for delta_iterator
+	and rdelta_iterator, so use them.
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/eps_removal_sp.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/internal/evaluation.hxx,
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx,
+	* include/vaucanson/algorithms/internal/outsplitting.hxx,
+	* include/vaucanson/algorithms/is_deterministic.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/rw_composition.hxx,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/sum.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/gen_random.hxx: Here.
+
+2008-12-08  Reuben Thomas  <rrt@sc3d.org>
+
 	Add INTERFACEs and some new pseudo-types.
 	The uses of the new pseudo-types are disabled, as they would
 	presumably not work with vaucanswig.

@@ -120,8 +120,8 @@ namespace vcsn {
     typedef typename graph_t::final_t			final_t;		\
     typedef typename graph_t::final_support_t		final_support_t;	\
     typedef typename final_support_t::iterator		final_iterator;		\
-    typedef typename graph_t::delta_iterator	delta_iterator; \
-    typedef typename graph_t::rdelta_iterator	rdelta_iterator; \
+    typedef typename graph_t::delta_iterator		delta_iterator; 	\
+    typedef typename graph_t::rdelta_iterator		rdelta_iterator; 	\
   }
 
   // traits for generalized automaton implementation.

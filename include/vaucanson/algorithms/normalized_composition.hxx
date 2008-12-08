@@ -224,7 +224,7 @@ namespace vcsn {
 			 state_series (lhs.get_final(lhs_s),
 				       rhs.get_final(rhs_s)));
 
-      for (typename automaton_t::delta_iterator l(lhs.value(), lhs_s); ! l.done(); l.next())
+      for (delta_iterator l(lhs.value(), lhs_s); ! l.done(); l.next())
 	{
 	  const lhs_series_set_elt_t left_series = lhs.series_of(*l);
 	  const lhs_monoid_elt_t left_supp_elt (lhs_monoid,
@@ -244,7 +244,7 @@ namespace vcsn {
 	  // (iii')
 	  else
 	    {
-              for (typename automaton_t::delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
+              for (delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
 		{
 		  const rhs_series_set_elt_t right_series =
 		    rhs.series_of(*r);
@@ -273,7 +273,7 @@ namespace vcsn {
 	    }
 	}
 
-      for (typename automaton_t::delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
+      for (delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
 	{
 	  const rhs_series_set_elt_t right_series = rhs.series_of(*r);
 	  const rhs_monoid_elt_t right_supp_elt (rhs_monoid,

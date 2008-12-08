@@ -29,7 +29,7 @@ namespace vcsn {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     precondition (a.has_state (s));
-    typename automaton_t::delta_iterator i(a.value(), s);
+    delta_iterator i(a.value(), s);
     return ! i.done();
   }
   
@@ -40,7 +40,7 @@ namespace vcsn {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     precondition (a.has_state (s));
-    typename automaton_t::rdelta_iterator i(a.value(), s);
+    rdelta_iterator i(a.value(), s);
     return ! i.done();
   }
 } // vcsn

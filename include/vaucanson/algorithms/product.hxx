@@ -182,7 +182,7 @@ class Product
 	      a.geometry()[i] = std::make_pair(x, x);
 	      x++;
 
-              for (typename automaton_t::delta_iterator j(a.value(), i);
+              for (delta_iterator j(a.value(), i);
                    ! j.done();
                    j.next())
 		stack.push(a.dst_of(*j));

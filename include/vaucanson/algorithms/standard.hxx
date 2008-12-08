@@ -52,7 +52,7 @@ namespace vcsn {
 
       // Handle each transitions.
       transition_oi.clear();
-      for (typename automaton_t::delta_iterator oil(a.value(), *oi);
+      for (delta_iterator oil(a.value(), *oi);
            ! oil.done();
            oil.next())
         transition_oi.push_back(*oil);
@@ -307,7 +307,7 @@ namespace vcsn {
     series_set_elt_t			out_mult = a.get_final(new_i);
 
     out_mult.star();
-    for (typename automaton_t::delta_iterator i(a.value(), new_i);
+    for (delta_iterator i(a.value(), new_i);
          ! i.done();
          i.next())
       dst.push_back(*i);

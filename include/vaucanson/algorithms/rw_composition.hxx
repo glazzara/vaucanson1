@@ -152,7 +152,7 @@ namespace vcsn {
       const hstate_t p = sp.first;
       const hstate_t q = sp.second;
 
-      for (typename Trans_t::delta_iterator e(R.value(), p);
+      for (delta_iterator e(R.value(), p);
            ! e.done();
            e.next())
       {

@@ -190,7 +190,7 @@ namespace vcsn {
 	    shortest_hash.modify(it, change_rel(semiring_elt_zero));
 	  }
 
-          for (typename automaton_t::delta_iterator e(a.value(), curr); ! e.done(); e.next())
+          for (delta_iterator e(a.value(), curr); ! e.done(); e.next())
             if (a.is_spontaneous(*e))
             {
               semiring_elt_t dist = semiring_elt_zero;
@@ -227,7 +227,7 @@ namespace vcsn {
       for_all_(s_shortest_hash, it, shortest_hash)
 	if (it->src != it->dst)
 	{
-          for (typename automaton_t::delta_iterator e(a.value(), it->dst); ! e.done(); e.next())
+          for (delta_iterator e(a.value(), it->dst); ! e.done(); e.next())
 	    tr_st.push(tr_t(it->src, a.dst_of(*e), it->dist * a.series_of(*e)));
 	  if (a.is_final(it->dst))
 	    fin_st.push(make_pair(it->src, it->dist * a.get_final(it->dst)));
@@ -236,7 +236,7 @@ namespace vcsn {
 	{
 	  if (it->dist != semiring_elt_one)
 	  {
-            for (typename automaton_t::delta_iterator e(a.value(), it->dst); ! e.done(); e.next())
+            for (delta_iterator e(a.value(), it->dst); ! e.done(); e.next())
 	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // associate each e with it->dist
 	    if (a.is_final(it->dst))
 	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->src, it->dist));// store what we need to multiply w(final(it->src)) by it->dist
@@ -280,7 +280,7 @@ namespace vcsn {
       for_all_(s_shortest_hash, it, shortest_hash)
 	if (it->src != it->dst)
 	{
-          for (typename automaton_t::rdelta_iterator e(a.value(), it->dst); ! e.done(); e.next())
+          for (rdelta_iterator e(a.value(), it->dst); ! e.done(); e.next())
             tr_st.push(tr_t(a.src_of(*e), it->dst, a.series_of(*e) * it->dist));
           if (a.is_initial(it->src))
             init_st.push(make_pair(it->dst, a.get_initial(it->src) * it->dist));
@@ -289,7 +289,7 @@ namespace vcsn {
 	{
 	  if (it->dist != semiring_elt_one)
 	  {
-            for (typename automaton_t::rdelta_iterator e(a.value(), it->dst); ! e.done(); e.next())
+            for (rdelta_iterator e(a.value(), it->dst); ! e.done(); e.next())
 	      tr_l.push_front(std::pair<htransition_t, semiring_elt_t>(*e, it->dist)); // associate each e with it->dist
 	    if (a.is_initial(it->src))
 	      fin_l.push_front(std::pair<hstate_t, semiring_elt_t>(it->dst, it->dist));// store what we need to multiply w(final(it->src)) by it->dist
