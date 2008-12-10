@@ -1,5 +1,11 @@
 2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix global_consistency test.
+	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
+	  Be more generic with respect to series representations.
+
+2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix op_convert for string based monoid (Close #198).
 	* include/vaucanson/algebra/implementation/monoid/str_words.hh,
 	* include/vaucanson/algebra/implementation/monoid/str_words.hxx:

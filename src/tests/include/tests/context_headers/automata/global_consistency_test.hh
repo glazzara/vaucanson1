@@ -17,6 +17,7 @@
 #ifndef VCSN_TESTS_CONTEXT_HEADERS_AUTOMATA_GLOBAL_CONSISTENCY_TEST_HH
 # define VCSN_TESTS_CONTEXT_HEADERS_AUTOMATA_GLOBAL_CONSISTENCY_TEST_HH
 
+# include <utility>
 # include <vaucanson/misc/static.hh>
 
 bool
@@ -34,6 +35,28 @@ operator == (const automaton_t& a, const automaton_t& b)
 # define TEST_TYPE(T1, T2)				\
   TEST(t, #T1 " is consistent.", TYPE_OK(T1, T2))
 
+template <typename letter_t>
+bool
+is_valid(letter_t l)
+{
+  typedef vcsn::algebra::letter_traits<letter_t> traits_t;
+
+  // + will be used as the series plus representation.
+  return (traits_t::letter_to_literal(l) != "+");
+}
+
+template <typename U, typename V>
+bool
+is_valid(std::pair<U, V> l)
+{
+  typedef vcsn::algebra::letter_traits<U> first_traits_t;
+  typedef vcsn::algebra::letter_traits<V> second_traits_t;
+
+  // , is invalid for the pair components.
+  return (first_traits_t::letter_to_literal(l.first) != "," &&
+	  second_traits_t::letter_to_literal(l.second) != ",");
+}
+
 template <class Automaton>
 bool
 global_consistency_test(tests::Tester& t)
@@ -50,8 +73,9 @@ global_consistency_test(tests::Tester& t)
 
   alphabet_t		at;
   letter_t l1 = at.random_letter();
+  while (!is_valid(l1)) l1 = at.random_letter();
   letter_t l2 = at.random_letter();
-  while (l1 == l2) l2 = at.random_letter();
+  while (!is_valid(l2) or l1 == l2) l2 = at.random_letter();
   at.insert(l1);
   at.insert(l2);
 
@@ -59,8 +83,12 @@ global_consistency_test(tests::Tester& t)
   ostr << l1 << "+" << l2;
 
   alphabet_t		other_at;
-  at.insert(at.random_letter());
-  at.insert(at.random_letter());
+  letter_t l3 = at.random_letter();
+  while (!is_valid(l3)) l3 = at.random_letter();
+  letter_t l4 = at.random_letter();
+  while (!is_valid(l4)) l4 = at.random_letter();
+  at.insert(l3);
+  at.insert(l4);
 
   monoid_t		md (at);
   semiring_t		sg;
@@ -68,8 +96,12 @@ global_consistency_test(tests::Tester& t)
   automata_set_t	aa (ss);
 
   rat_exp_t		e (ss);
-  rat_exp_t		f = make_rat_exp(at);
-  rat_exp_t		g = make_rat_exp(at, ostr.str());
+  rat_exp_t		f = make_rat_exp(at, ss.representation()->zero,
+					 *(ss.monoid().representation()),
+					 *(ss.representation()));
+  rat_exp_t		g = make_rat_exp(at, ostr.str(),
+					 *(ss.monoid().representation()),
+					 *(ss.representation()));
   TEST(t, "make_rat_exp works. [1/3]", e == f);
   TEST(t, "make_rat_exp works. [2/3]", g != f);
 
