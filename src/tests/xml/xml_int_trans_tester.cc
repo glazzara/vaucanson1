@@ -41,13 +41,23 @@ int main(int argc, char** argv)
     hstate_t s1 = a.add_state();
     hstate_t s2 = a.add_state();
 
+    // Predeclarations.
+    monoid_elt_t input_word(a.structure().series().monoid());
+    monoid_elt_t output_word(a.structure().series().semiring().monoid());
+
     a.set_initial(s0);
-    a.set_o_final(s1, "2");
+    output_word = monoid_elt_t(a.structure().series().semiring().monoid());
+    parse_word(output_word, "2");
+    a.set_o_final(s1, output_word);
 
     series_set_elt_t ss4(a.structure().series());
     a.add_series_transition (s0, s0, ss4);
-    a.add_io_transition(s0, s1, "1", 20);
-    a.add_io_transition(s1, s2, 10, "2#2");
+    input_word = monoid_elt_t(a.structure().series().monoid());
+    parse_word(input_word, "1");
+    a.add_io_transition(s0, s1, input_word, 20);
+    output_word = monoid_elt_t(a.structure().series().semiring().monoid());
+    parse_word(output_word, "2#2");
+    a.add_io_transition(s1, s2, 10, output_word);
 
     std::cout << automaton_saver(a, string_out(), xml::XML());
   }

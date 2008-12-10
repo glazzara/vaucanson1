@@ -68,20 +68,6 @@ namespace vcsn {
 	       SELECTOR(std::basic_string<typename A::letter_t>),
 	       const typename A::letter_t& c);
 
-    // one can create words from its literal representation as std::string
-    template<typename A>
-    std::basic_string<typename A::letter_t>
-    op_convert(SELECTOR(algebra::FreeMonoid<A>),
-	       SELECTOR(std::basic_string<typename A::letter_t>),
-	       const std::string& c);
-
-    // one can create words from its literal representation as char*
-    template<typename A>
-    std::basic_string<typename A::letter_t>
-    op_convert(SELECTOR(algebra::FreeMonoid<A>),
-	       SELECTOR(std::basic_string<typename A::letter_t>),
-	       const char* c);
-
     /*---------------------------------------------------------------------.
     | word_traits<FreeMonoid<A>, std::basic_string<typename A::letter_t> > |
     `---------------------------------------------------------------------*/

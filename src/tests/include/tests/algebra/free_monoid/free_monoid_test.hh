@@ -2,7 +2,7 @@
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,6 +33,50 @@ bool free_monoid_test(tests::Tester& t)
   typedef typename element_t::set_t			freemonoid_t;
   typedef typename freemonoid_t::alphabets_elt_t	alphabet_t;
   typedef typename freemonoid_t::letter_t		letter_t;
+
+  // Basic test for the monoid_elt_constructor.
+  alphabet_t at;
+  letter_t l1 = at.random_letter();
+  letter_t l2 = at.random_letter();
+  while (l1 == l2) l2 = at.random_letter();
+  at.insert(l1);
+  at.insert(l2);
+
+  // When building the monoid without representation, a good epsilon
+  // representation should be selected.
+  freemonoid_t M(at);
+
+  // There should be a problem is the concat representation is empty.
+  if (M.representation()->concat == "")
+  {
+    std::string ambiguous_word;
+    ambiguous_word += algebra::letter_traits<letter_t>::letter_to_literal(l1);
+    ambiguous_word += M.representation()->concat;
+    ambiguous_word += algebra::letter_traits<letter_t>::letter_to_literal(l2);
+
+    // Now we use this ambiguous word as the epsilon representation.
+    typename freemonoid_t::monoid_rep_t rep;
+    rep.empty = ambiguous_word;
+
+    // Now we build a new monoid.
+    freemonoid_t N(at, rep);
+
+    // And two monoid elements of interest.
+    element_t m1(N, ambiguous_word);
+    T mref;
+    mref += l1;
+    mref += l2;
+    element_t m2(N);
+    parse_word(m2, ambiguous_word);
+
+    // The first construct MUST NOT call parse_word, ie m1 must be the word
+    // with two letters, l1 and l2.
+    TEST(t, "Basic test (no parse_word from CTOR).", m1.value() == mref);
+
+    // On the contrary, if calling parse_word on ambiguous_word, it should
+    // return the empty word, as ambiguous_word is the epsilon representation.
+    TEST(t, "Basic test (parse_word gives epsilon).", m2.value().size() == 0);
+  }
 
   alphabet_t		base;
   size_t		test_sizes[] =
@@ -117,7 +161,7 @@ bool free_monoid_test(tests::Tester& t)
       TEST(t, "iterators [3].", (ab == old_ba) and (ba == old_ab));
 
 
-      TEST_MSG("Get the neural element of this free monoid.");
+      TEST_MSG("Get the neutral element of this free monoid.");
       element_t e = freemonoid.identity(SELECT(T));
 
       test_design_pattern<S, T>(const_freemonoid);

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -136,8 +136,8 @@ bool series_test(tests::Tester& t)
 	    random_values.find(m);
 	  if (i == random_values.end())
 	    {
-	      TEST_FAIL_SAVE("series",
-			     n_test,
+	      TEST_FAIL_SAVE("krat_series_choose",
+			     j,
 			     "m is " << m
 			     << " and has not been found in random_values."
 			     << std::endl);
@@ -145,8 +145,8 @@ bool series_test(tests::Tester& t)
 	    }
 	  else if (i->second != s5.get(m))
 	    {
-	      TEST_FAIL_SAVE("series",
-			     n_test,
+	      TEST_FAIL_SAVE("krat_series_choose",
+			     j,
 			     "get(" << m << ") is " << s5.get(m)
 			     << " instead of " << i->second
 			     << '.' << std::endl);
@@ -187,17 +187,17 @@ bool series_test(tests::Tester& t)
 	    random_values.find(mirror(m));
 	  if (i == random_values.end())
 	    {
-	      TEST_FAIL_SAVE("series",
-			     n_test,
-			     "m is " << m
+	      TEST_FAIL_SAVE("krat_series_transpose",
+			     j,
+			     "mirror(m) is " << mirror(m)
 			     << " and has not been found in random_values."
 			     << std::endl);
 	      allright = false;
 	    }
 	  else if (i->second != s5.get(m))
 	    {
-	      TEST_FAIL_SAVE("series",
-			     n_test,
+	      TEST_FAIL_SAVE("krat_series_transpose",
+			     j,
 			     "get(" << m << ") is " << s5.get(m)
 			     << " instead of " << i->second
 			     << '.' << std::endl);

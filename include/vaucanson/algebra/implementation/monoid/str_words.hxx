@@ -180,27 +180,6 @@ namespace vcsn {
       return str;
     }
 
-    template<typename A>
-    std::basic_string<typename A::letter_t>
-    op_convert(SELECTOR(algebra::FreeMonoid<A>) mon,
-	       SELECTOR(std::basic_string<typename A::letter_t>),
-	       const std::string& str)
-    {
-      Element<algebra::FreeMonoid<A>,
-	      std::basic_string<typename A::letter_t> > x(mon);
-      parse_word(x, str);
-      return x.value();
-    }
-
-    template<typename A>
-    std::basic_string<typename A::letter_t>
-    op_convert(SELECTOR(algebra::FreeMonoid<A>) M,
-	       SELECTOR(std::basic_string<typename A::letter_t>) bs,
-	       const char* str)
-    {
-      return op_convert(M, bs, std::string(str));
-    }
-
     template <class A>
     Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >
     op_choose(const algebra::FreeMonoid<A>& s,

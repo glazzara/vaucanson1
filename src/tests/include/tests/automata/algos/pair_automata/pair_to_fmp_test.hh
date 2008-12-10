@@ -50,7 +50,8 @@ pair_to_fmp_test(tests::Tester& t)
 
   // Construct the series.
 # define MAKE_SERIES(str, a) \
-  monoid_elt_t x##str (M, a); \
+  monoid_elt_t x##str (M); \
+  parse_word(x##str, a); \
   series_set_elt_t s##str (aut.structure().series()); \
   s##str .assoc( x##str , true)
 

@@ -1,3 +1,19 @@
+2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix op_convert for string based monoid (Close #198).
+	* include/vaucanson/algebra/implementation/monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/monoid/str_words.hxx:
+	  Remove `op_convert' as its meaning may be ambiguous when the word
+	  implementation is the same as the literal implementation.
+	* src/tests/include/tests/algebra/free_monoid/free_monoid_test.hh:
+	  New regression test. Fix a typo.
+	* src/tests/include/tests/algebra/series/misc/series_test.hh: Fix
+	  some typos so that errors are more meaningful.
+	* src/tests/xml/xml_int_trans_tester.cc,
+	* src/tests/xml/xml_int_z_trans_tester.cc,
+	* src/tests/include/tests/automata/algos/pair_automata/pair_to_fmp_test.hh:
+	  Adjust by calling `parse_word'.
+
 2008-12-08  Reuben Thomas  <rrt@sc3d.org>
 
 	Use type abbreviations for delta_iterators.
