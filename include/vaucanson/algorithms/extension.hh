@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,8 +27,8 @@
  */
 /** @} */
 
-// INTERFACE: Transducer extension(const Automaton& a) { return vcsn::extension(*a); }
-// INTERFACE: void extension(const Automaton& a, Transducer& res) { vcsn::extension(*a, *t); }
+// Interface: Transducer extension(const Automaton& a) { return vcsn::extension(*a); }
+// Interface: void extension(const Automaton& a, Transducer& res) { vcsn::extension(*a, *t); }
 
 # include <vaucanson/automata/concept/transducer.hh>
 

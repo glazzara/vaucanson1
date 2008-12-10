@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,9 +27,9 @@
  */
 /** @} */
 
-// INTERFACE: std::pair<Exp, bool> derivate(const Exp& e, Letter l) { return vcsn::derivate(*e, l); }
-// The following line is a potential INTERFACE lines which has been disabled because of the Word pseudo-type.
-// Interface: std::pair<Exp, bool> word_derivate(const Exp& e, Word a) { return vcsn::word_derivate(*e, a); }
+// FIXME: std::pair<Exp, bool> needs to be replaced by a pseudo-type
+// Interface: std::pair<Exp, bool> derivate(const Exp& e, Letter l) { return vcsn::derivate(e, l); }
+// Interface: std::pair<Exp, bool> word_derivate(const Exp& e, Word a) { return vcsn::word_derivate(e, a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

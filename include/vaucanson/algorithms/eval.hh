@@ -29,9 +29,8 @@
  */
 /** @} */
 
-// The following two lines are potential INTERFACE lines which have been disabled because of the Word pseudo-type.
-// Interface: Automaton::semiring_elt_t eval(const Automaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
-// Interface: Automaton::semiring_elt_t eval(const GenAutomaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
+// INTERFACE: Automaton::semiring_elt_t eval(const Automaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
+// INTERFACE: Automaton::semiring_elt_t eval(const GenAutomaton& a, const Word& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).structure().series().monoid(), s)).value(); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algorithms/is_empty.hh>

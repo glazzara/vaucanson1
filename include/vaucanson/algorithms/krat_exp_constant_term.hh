@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
  */
 /** @} */
 
-// INTERFACE: std::pair<Exp::semiring_elt_t, bool> constant_term(const Exp& e) { return vcsn::constant_term(*e); }
+// INTERFACE: std::pair<Exp::semiring_elt_t, bool> constant_term(const Exp& e) { return vcsn::constant_term(e); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <utility>

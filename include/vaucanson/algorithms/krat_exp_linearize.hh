@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ namespace vcsn {
 /** @addtogroup algorithms *//** @{ */
 
 // The following line is a potential INTERFACE lines which has been disabled because of the LinExp pseudo-type.
-// Interface: LinExp linearize(const Exp& e) { return vcsn::linearize(*e); }
+// Interface: LinExp linearize(const Exp& e) { return vcsn::linearize(e); }
 
   /// The types of a linearized expression
   template <typename S, typename T>

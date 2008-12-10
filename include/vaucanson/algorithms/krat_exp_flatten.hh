@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
  */
 /** @} */
 
-// INTERFACE: std::list<Exp::set_t::monoid_t::alphabet_t::letter_t> flatten(const Exp& e) { return vcsn::flatten(*e); }
+// INTERFACE: std::list<Exp::set_t::monoid_t::alphabet_t::letter_t> flatten(const Exp& e) { return vcsn::flatten(e); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

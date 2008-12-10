@@ -1,5 +1,23 @@
 2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix some algorithms interfaces.
+	* include/vaucanson/algorithms/krat_exp_derivation.hh: Disable
+	  the remaining interface as it do not work with Vaucanswig.
+	* include/vaucanson/algorithms/eval.hh: Enable the interfaces as the
+	  `Word' pseudo-type is handled correctly by Vaucanswig.
+	* include/vaucanson/algorithms/krat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/krat_exp_derivation.hh,
+	* include/vaucanson/algorithms/krat_exp_flatten.hh,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh: Replace
+	  `*e' by `e' as rat exp need not be dereferenced.
+	* include/vaucanson/algorithms/extension.hh: Disable the interfaces
+	  as the `Transducer' pseudo-type cannot be handled by Vaucanswig
+	  (Vaucanswig do not work for transducers).
+	* vaucanswig/expand.sh: Add support for the `Letter' pseudo
+	  type.
+
+2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix constant for rat::exp (Close #196).
 	* include/vaucanson/algebra/implementation/series/krat.hxx
 	  (op_assign): Name the first argument, so that it is used
