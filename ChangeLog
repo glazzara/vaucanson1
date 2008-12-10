@@ -1,5 +1,16 @@
 2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix constant for rat::exp (Close #196).
+	* include/vaucanson/algebra/implementation/series/krat.hxx
+	  (op_assign): Name the first argument, so that it is used
+	  subsequently. (op_series_set): Use `op_convert' instead of
+	  manually calling `constant' (factor more code). Pass the series to
+	  various `op_convert' calls. Cosmetic changes.
+	* src/tests/include/tests/algebra/series/misc/series_test.hh: Add
+	  regression test.
+
+2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix global_consistency test.
 	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
 	  Be more generic with respect to series representations.

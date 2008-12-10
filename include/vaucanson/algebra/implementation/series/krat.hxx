@@ -279,10 +279,9 @@ namespace vcsn
 				SELECTOR(M),
 				const oTm& m_value)
     {
-      // FIXME: this is completely broken. It should break up m_value
-      // into letters.
       if (m_value == identity_value(SELECT(M), SELECT(oTm)))
 	return rat::exp<Tm, Tw>::one();
+
       return rat::exp<Tm, Tw>::constant(op_convert(s.monoid(), SELECT(Tm),
 						   m_value));
     }
@@ -304,27 +303,26 @@ namespace vcsn
       return ret;
     }
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-    void op_assign(const algebra::Series<W, M>&,
-		   const M&,
+    template <typename W, typename M, typename Tm, typename Tw, typename oTm>
+    void op_assign(SELECTOR2(algebra::Series<W, M>) s,
+		   SELECTOR(M),
 		   rat::exp<Tm, Tw>& dst,
 		   const oTm& src)
     {
-      // FIXME: this is completely broken also.
-      if (src == identity_value(SELECT(M), SELECT(oTm)))
-	dst = rat::exp<Tm, Tw>::one();
-      else
-	dst = rat::exp<Tm, Tw>::constant(src);
+      dst = op_convert(s,
+		       SELECT2(rat::exp<Tm, Tw>),
+		       SELECT(M), src);
     }
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-    void op_assign(const algebra::Series<W, M>&,
-		   const W& semiring,
+    template <typename W, typename M, typename Tm, typename Tw, typename oTw>
+    void op_assign(SELECTOR2(algebra::Series<W, M>) s,
+		   SELECTOR(W),
 		   rat::exp<Tm, Tw>& dst,
 		   const oTw& src)
     {
-      dst = op_convert
-      (SELECT2(algebra::Series<W, M>), SELECT2(rat::exp<Tm, Tw>), SELECT(W), src);
+      dst = op_convert(s,
+		       SELECT2(rat::exp<Tm, Tw>),
+		       SELECT(W), src);
     }
 
     /*-----.
@@ -369,7 +367,7 @@ namespace vcsn
 		   rat::exp<Tm, Tw>& dst,
 		   const oTm& src)
     {
-      op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
+      op_in_add(s, dst, op_convert(s,
 				   SELECT2(rat::exp<Tm, Tw>),
 				   SELECT(M),
 				   src));
@@ -408,7 +406,7 @@ namespace vcsn
 		   const oTw& src)
     {
       precondition(& s.semiring() == & semiring);
-      op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
+      op_in_add(s, dst, op_convert(s,
 				   SELECT2(rat::exp<Tm, Tw>),
 				   SELECT(W),
 				   src));
@@ -643,10 +641,9 @@ namespace vcsn
       bool exist = false;
       for_all_const_(support_t, e, supp)
       {
-	rat::exp<Tm, Tw> ret =
-	rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
-					      SELECT(Tm),
-					      *e));
+	rat::exp<Tm, Tw> ret = op_convert(s,
+					  SELECT2(rat::exp<Tm, Tw>),
+					  SELECT(M), *e);
 	if (*e == m)
 	{
 	  exist = true;
@@ -654,13 +651,14 @@ namespace vcsn
 	}
 	else
 	  sw = op_series_get(s, pp, *e);
+
 	op_in_add(s, p, op_mul(s.semiring(), s, sw, ret));
       }
       if (!exist)
 	op_in_add(s, p, op_mul(s.semiring(), s, w,
-			       rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
-								     SELECT(Tm),
-								     m))));
+			       op_convert(s,
+					  SELECT2(rat::exp<Tm, Tw>),
+					  SELECT(M), m)));
     }
 
   } // ! algebra

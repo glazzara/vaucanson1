@@ -70,6 +70,11 @@ bool series_test(tests::Tester& t)
       semiring_t	semiring;
       series_set_t		series(semiring, monoid);
 
+      // Check that assoc on the empty word value is ok.
+      monoid_elt_t empty_word(monoid);
+      series_set_elt_t basic_series(series);
+      basic_series.assoc(empty_word.value(), semiring_elt_t().value());
+
       monoid_elt_t	w1 = monoid.choose(SELECT(monoid_elt_value_t));
       monoid_elt_t	w2 (monoid);
       do
