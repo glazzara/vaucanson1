@@ -1,5 +1,12 @@
 2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Add a specialisation of std::swap to help gcc.
+	* include/vaucanson/design_pattern/element_ops.hxx: The other
+	  specialisation with a template T1 for the first element and a
+	  template T2 for the second was ambigous for gcc.
+
+2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Add op_neg and op_div to real semirings.
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:

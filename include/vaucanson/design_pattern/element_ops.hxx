@@ -232,7 +232,16 @@ namespace std
   }
 
   template<typename S, typename T>
-  void 
+  void
+  swap(vcsn::Element<S, T>& e1,
+       vcsn::Element<S, T>& e2)
+  {
+    assertion(&e1.structure() == &e2.structure());
+    op_swap(e1.structure(), e1.value(), e2.value());
+  }
+
+  template<typename S, typename T>
+  void
   swap(vcsn::Element<S, T>& e1, T& v2)
   {
     op_swap(e1.structure(), e1.value(), v2);
