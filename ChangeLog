@@ -1,3 +1,10 @@
+2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add op_neg and op_div to real semirings.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	  Add op_neg and op_div functions to real semirings.
+
 2008-11-17  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Release 1.2.94.

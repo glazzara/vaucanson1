@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -119,7 +119,6 @@ namespace vcsn {
     /*-----------------------------.
     | specializations for Booleans |
     `-----------------------------*/
-    template<typename T>
     void op_in_mul(const algebra::NumericalSemiring&,
 			  bool& dst, bool src)
     {
@@ -184,6 +183,36 @@ namespace vcsn {
     /*--------------------------------------------.
     | specialization for floating point numbers.  |
     `--------------------------------------------*/
+
+    inline float op_sub(const algebra::NumericalSemiring&, const float& a, const float& b)
+    {
+      return a - b;
+    }
+
+    inline double op_sub(const algebra::NumericalSemiring&, const double& a, const double& b)
+    {
+      return a - b;
+    }
+
+    inline float op_div(const algebra::NumericalSemiring&, const float& a, const float& b)
+    {
+      return a / b;
+    }
+
+    inline double op_div(const algebra::NumericalSemiring&, const double& a, const double& b)
+    {
+      return a / b;
+    }
+
+    inline bool op_eq(const algebra::NumericalSemiring&, float& a, float& b)
+    {
+      return abs(a - b) < 0.00001;
+    }
+
+    inline bool op_eq(const algebra::NumericalSemiring&, double& a, double& b)
+    {
+      return abs(a - b) < 0.00001;
+    }
 
     template<typename T>
     bool op_starable(const algebra::NumericalSemiring&, T v)
