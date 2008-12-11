@@ -1,3 +1,9 @@
+2008-12-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix invert-test for boolean_rw_transducers.
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh:
+	  Do not generate invalid alphabets.
+
 2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix some algorithms interfaces.

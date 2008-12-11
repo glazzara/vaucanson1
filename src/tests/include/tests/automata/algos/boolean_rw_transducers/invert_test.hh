@@ -38,6 +38,15 @@ static bool test_exp(const Auto& trans,
 			automaton::standard_of(exp3));
 }
 
+template <typename T>
+bool
+is_valid(T l)
+{
+  typedef algebra::letter_traits<T> traits_t;
+
+  // . will be used as the series times representation
+  return traits_t::letter_to_literal(l) != ".";
+}
 
 template <class Auto>
 bool invert_test(tests::Tester& tg)
@@ -52,8 +61,9 @@ bool invert_test(tests::Tester& tg)
 
   alphabet_t alpha;
   letter_t a = alpha.random_letter();
+  while (!is_valid(a)) a = alpha.random_letter();
   letter_t b = alpha.random_letter();
-  while (a == b) b = alpha.random_letter();
+  while (!is_valid(b) or a == b) b = alpha.random_letter();
   alpha.insert(a);
   alpha.insert(b);
 
