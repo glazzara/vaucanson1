@@ -53,7 +53,7 @@ subnormalized_composition_test(tests::Tester& t)
   second_alphabet_t		third_at;
   second_letter_t u = third_at.random_letter();
   second_letter_t v = third_at.random_letter();
-  while (u == v) y = third_at.random_letter();
+  while (u == v) v = third_at.random_letter();
   third_at.insert(u);
   third_at.insert(v);
 

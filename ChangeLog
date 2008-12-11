@@ -1,5 +1,12 @@
 2008-12-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Fix a typo in normalized and subnormalized composition tests.
+	* src/tests/include/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	* src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh:
+	  Replace `y' by `v'.
+
+2008-12-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix make_rat_exp function calls in the test-suite.
 	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh,
 	* src/tests/include/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh,
