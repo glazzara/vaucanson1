@@ -95,7 +95,9 @@ bool invert_test(tests::Tester& tg)
   std::ostringstream rat;
   rat << a << "." << b << "." << a << "." << b;
 
-  automaton::rat_exp_t exp1 = automaton::make_rat_exp(alpha, rat.str());
+  automaton::rat_exp_t exp1 = automaton::make_rat_exp(alpha, rat.str(),
+						      *(trans.series().monoid().representation()),
+						      *(trans.series().semiring().representation()));
 
   test_num++;
   if (test_exp(trans, trans_inverse, exp1))
@@ -105,7 +107,9 @@ bool invert_test(tests::Tester& tg)
 
   rat << "." << a << "." << b;
 
-  exp1 = automaton::make_rat_exp(alpha, rat.str());
+  exp1 = automaton::make_rat_exp(alpha, rat.str(),
+				 *(trans.series().monoid().representation()),
+				 *(trans.series().semiring().representation()));
   test_num++;
   if (test_exp(trans, trans_inverse, exp1))
     nb_succeed++;

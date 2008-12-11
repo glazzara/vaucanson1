@@ -180,7 +180,9 @@ normalized_composition_test(tests::Tester& t)
       << b << "." << a;
 
   automaton::rat_exp_t exp =
-    automaton::make_rat_exp(first_at, rat.str());
+    automaton::make_rat_exp(first_at, rat.str(),
+			    *(t1.series().monoid().first_monoid().representation()),
+			    t1.series().representation()->first_representation());
 
   automaton::automaton_t res1 =
     automaton::standard_of

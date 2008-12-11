@@ -115,7 +115,9 @@ evaluation_fmp_test(tests::Tester& t)
       << b << "." << a << "." << b << "." << a;
 
   automaton::rat_exp_t exp =
-    automaton::make_rat_exp(first_at, rat.str());
+    automaton::make_rat_exp(first_at, rat.str(),
+			    *(t1.series().monoid().first_monoid().representation()),
+			    t1.series().representation()->first_representation());
 
   automaton::automaton_t res_aut =
     automaton::make_automaton(second_at);
