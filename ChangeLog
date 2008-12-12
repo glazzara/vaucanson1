@@ -1,5 +1,14 @@
 2008-12-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Add a new taf-kit for r_automaton and add reduce to libvcsn-r.
+	* lib/generate_libvcsn.rb: Add reduce to libvcsn-r.
+	* include/vaucanson/contexts/automaton_functions.thh: Add reduce.
+	* taf-kit/src/Makefile.am,
+	* taf-kit/src/r_commands.cc,
+	* taf-kit/tests/Makefile.am: Generate tafkit for Real semiring.
+
+2008-12-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Revert part of r2578.
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh:

@@ -57,6 +57,7 @@ check_SCRIPTS =					\
   vcsn-char-fmp-b				\
   vcsn-char-fmp-z				\
   vcsn-char-z					\
+  vcsn-char-r					\
   vcsn-int-b					\
   vcsn-int-fmp-b				\
   vcsn-int-fmp-z				\
