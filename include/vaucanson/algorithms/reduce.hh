@@ -18,7 +18,22 @@
 #ifndef VCSN_ALGORITHMS_REDUCE_HH
 # define VCSN_ALGORITHMS_REDUCE_HH
 
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/direction.hh>
+
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   reduce.hh
+ *
+ * This files declares the reduce algorithm.
+ *
+ * @see reduce()
+ */
+/** @} */
+
+// INTERFACE: Automaton reduce(const Automaton& a, vcsn::misc::direction_type dir) { return vcsn::reduce(*a); }
+
+// INTERFACE: void reduce_here(Automaton& a, vcsn::misc::direction_type dir) { return vcsn::reduce_here(*a); }
 
 namespace vcsn {
 

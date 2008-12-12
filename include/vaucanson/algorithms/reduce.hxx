@@ -17,9 +17,13 @@
 
 #ifndef VCSN_ALGORITHMS_REDUCE_HXX
 # define VCSN_ALGORITHMS_REDUCE_HXX
+# include <queue>
 # include <vector>
 # include <map>
 # include <vaucanson/misc/usual_macros.hh>
+/* DEBUG */
+# include <iostream>
+/* DEBUG */
 
 namespace vcsn {
 
@@ -30,7 +34,6 @@ namespace vcsn {
     typedef Element<A, AI> Auto;
     AUTOMATON_TYPES(Auto);
     AUTOMATON_FREEMONOID_TYPES(Auto);
-    // AUTOMATA_SET_TYPES(automata_set_t);
     typedef std::vector<semiring_elt_t> semiring_vector_t;
     typedef std::vector<std::map<std::size_t, semiring_elt_t> > semiring_matrix_t;
     typedef std::map<monoid_elt_t, semiring_matrix_t> semiring_matrix_set_t;
@@ -282,6 +285,10 @@ namespace vcsn {
     void
     release()
     {
+      // Clear output_
+      automaton_t empty(output_.structure());
+      output_ = empty;
+
       std::vector<hstate_t> new_states(nb_states_);
 
       // Create all states and set them to initial or final if necessary.
@@ -289,9 +296,17 @@ namespace vcsn {
       {
 	new_states[i] = output_.add_state();
 	if (init_[i] != semiring_elt_zero_)
-	  ;//output_.set_initial(new_states[i], init_[i]);
+	{
+	  series_set_elt_t s(output_.structure().series());
+	  s.assoc(monoid_identity_, init_[i]);
+	  output_.set_initial(new_states[i], s);
+	}
 	if (final_[i] != semiring_elt_zero_)
-	  ;//output_.set_final(new_states[i], final_[i]);
+	{
+	  series_set_elt_t s(output_.structure().series());
+	  s.assoc(monoid_identity_, final_[i]);
+	  output_.set_final(new_states[i], s);
+	}
       }
 
       // Create all transitions.
@@ -302,14 +317,17 @@ namespace vcsn {
 	  {
 	    typename std::map<std::size_t, semiring_elt_t>::iterator tmp;
 	    if ((tmp = lit->second[i].find(j)) != lit->second[i].end())
-	      ;//output_.add_series_transition(new_states[i], new_states[i], *tmp);
+	    {
+	      output_.add_weighted_transition(new_states[i], new_states[j],
+					      tmp->second, lit->first.value());
+	    }
 	  }
     }
 
+    /* DEBUG */
     void
     check()
     {
-      /* DEBUG */
       for (typename semiring_matrix_set_t::iterator lit = letter_matrix_set_.begin();
 	   lit != letter_matrix_set_.end(); lit++)
       {
@@ -334,8 +352,8 @@ namespace vcsn {
 	if (final_[i] != semiring_elt_zero_)
 	  std::cout << i << " : " << final_[i] << " // ";
       std::cout << std::endl;
-      /* DEBUG */
     }
+    /* DEBUG */
 
   private:
     // zero and identity of used algebraic structure.
