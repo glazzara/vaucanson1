@@ -67,6 +67,7 @@ namespace vcsn {
     /*-----------------------------.
     | specializations for Booleans |
     `-----------------------------*/
+    template<typename T>
     void op_in_mul(const algebra::NumericalSemiring& s1,
 			  bool& dst, bool src);
 

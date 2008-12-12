@@ -1,3 +1,10 @@
+2008-12-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Revert part of r2578.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh:
+	  revert.
+
 2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add reduce algorithm.
