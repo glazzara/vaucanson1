@@ -16,6 +16,7 @@ include $(top_srcdir)/build-aux/check.mk
 TESTS =						\
   vcsn-char-b.test				\
   vcsn-char-z.test				\
+  vcsn-char-r.test				\
   vcsn-char-fmp-b.test				\
   vcsn-char-fmp-z.test				\
   vcsn-int-b.test				\
