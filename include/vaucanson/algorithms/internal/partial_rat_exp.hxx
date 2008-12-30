@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -255,9 +255,15 @@ namespace vcsn
     for (i++; i != e.end(); ++i)
     {
       if (i.on_node())
-	o << '|' << typename PartialExp<S, T>::series_set_elt_value_t(i.node());
+	{
+	  typename PartialExp<S, T>::series_set_elt_value_t v(i.node());
+	  typename PartialExp<S, T>::exp_t val(e.exp().structure(), v);
+	  o << '|' << val;
+	}
       else
-	o << '|' << i.semiring_elt();
+	{
+	  o << '|' << i.semiring_elt();
+	}
     }
     return o << ']';
   }
