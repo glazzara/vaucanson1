@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,14 +51,14 @@ namespace std
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)		\
      if (!undef)					\
      {							\
-       std::cout << "Deriv "				\
+       std::cerr << "Deriv "				\
 		 << e					\
 		 << " by "				\
 		 << l					\
 		 << " ="				\
 		 << std::endl;				\
-       std::cout << s << std::endl;			\
-       std::cout << std::endl;				\
+       std::cerr << s << std::endl;			\
+       std::cerr << std::endl;				\
      }
 
 # else

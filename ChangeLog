@@ -1,5 +1,10 @@
 2008-12-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/derived_term_automaton.hxx
+	(DERIVATES_TRACE_DEBUG): Send traces to cerr, not cout.
+
+2008-12-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix the << operator for PartialExp.  Since 2008-10-22 we cannot
 	output rational expressions without knowing their structural
 	element.
