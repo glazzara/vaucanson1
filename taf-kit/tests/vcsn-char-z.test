@@ -191,6 +191,18 @@ done <<EOF
 [Nothing]      ({4}a.b){5}       ({4} a.b) {5}
 EOF
 
+while read before after; do
+  test "x`$VCSN -aabc realtime-exp $before`" = "x$after"
+done <<EOF
+1                1
+abc              a.b.c
+abc{2}           (a.b.c) {2}
+ab{2}ca          a.b.{2} (c.a)
+ab{2}*ca         ((a.b) {2})*.c.a
+(ab{2})c         (a.b) {2}.c
+(1+ab)*          (1+a.b)*
+EOF
+
 ## -------------------- ##
 ## Test div3base10.xml. ##
 ## -------------------- ##

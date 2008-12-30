@@ -98,6 +98,11 @@ DEFINE_COMMAND (NAME (identity_exp)
 		KEEP (get_exp (args, 1))
 		RETURNVALUE (0));
 
+DEFINE_COMMAND (NAME (realtime_exp)
+		CODE (/* Empty */)
+		KEEP (realtime (get_exp (args, 1)))
+		RETURNVALUE (0));
+
 DEFINE_COMMAND (NAME (expand)
 		CODE (/* Empty */)
 		KEEP (expand (get_exp (args, 1)))
@@ -116,6 +121,8 @@ DEFINE_COMMAND (NAME (expand)
     COMMAND_ENTRY (expand, Exp, "Expand `exp'."),			\
     COMMAND_ENTRY (identity_exp, Exp,					\
                    "Output `exp' after trivial simplifications."),	\
+    COMMAND_ENTRY (realtime_exp, Exp,					\
+                   "Make `exp' realtime."),	\
     COMMAND_ENTRY_CN (standard, standard_of, Exp,			\
 		      "Give the standard automaton of `exp'."),		\
     COMMAND_ENTRY_CN (thompson, thompson_of, Exp,			\

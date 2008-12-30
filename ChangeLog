@@ -1,5 +1,10 @@
 2008-12-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/ratexp_commands.hh (realtime_exp): New command.
+	* taf-kit/tests/vcsn-char-z.test: Add some tests.
+
+2008-12-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/derived_term_automaton.hxx
 	(DERIVATES_TRACE_DEBUG): Send traces to cerr, not cout.
 
