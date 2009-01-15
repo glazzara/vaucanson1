@@ -392,6 +392,8 @@ vaucanson/algorithms/realtime.hh				\
 vaucanson/algorithms/realtime.hxx				\
 vaucanson/algorithms/realtime_decl.hh				\
 vaucanson/algorithms/realtime_decl.hxx				\
+vaucanson/algorithms/reduce.hh					\
+vaucanson/algorithms/reduce.hxx					\
 vaucanson/algorithms/rw_composition.hh				\
 vaucanson/algorithms/rw_composition.hxx				\
 vaucanson/algorithms/rw_to_fmp.hh				\

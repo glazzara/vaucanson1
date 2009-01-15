@@ -1,3 +1,21 @@
+2009-01-15  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Merge of the reduction branch.
+	* ChangeLog: .
+	* configure.ac: .
+	* include/Makefile.am: .
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh: .
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx: .
+	* include/vaucanson/algorithms/reduce.hh: New.
+	* include/vaucanson/algorithms/reduce.hxx: New.
+	* include/vaucanson/contexts/automaton_functions.thh: .
+	* include/vaucanson/design_pattern/element_ops.hxx: .
+	* lib/generate_libvcsn.rb: .
+	* taf-kit/src/Makefile.am: .
+	* taf-kit/src/r_commands.cc: New.
+	* taf-kit/tests/Makefile.am: .
+	* taf-kit/tests/vcsn-char-r.test: New.
+
 2008-12-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/ratexp_commands.hh (realtime_exp): New command.
@@ -17,6 +35,37 @@
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx
 	(operator<<): Build a rational expression with a structural
 	element, for printing.
+
+2008-12-16  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add a wrapper for vcsn-char-r and a first test for reduce.
+	* configure.ac: Generate vcsn-char-r wrapper.
+	* taf-kit/tests/Makefile.am,
+	* taf-kit/tests/vcsn-char-r.test: Add test on the equivalence of two
+	  R-automata using reduce.
+
+2008-12-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	End of reduce algorithm implementation.
+	* include/vaucanson/algorithms/reduce.hh,
+	* include/vaucanson/algorithms/reduce.hxx: Add building of the new
+	  automaton from the matrix version
+
+2008-12-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add a new taf-kit for r_automaton and add reduce to libvcsn-r.
+	* lib/generate_libvcsn.rb: Add reduce to libvcsn-r.
+	* include/vaucanson/contexts/automaton_functions.thh: Add reduce.
+	* taf-kit/src/Makefile.am,
+	* taf-kit/src/r_commands.cc,
+	* taf-kit/tests/Makefile.am: Generate tafkit for Real semiring.
+
+2008-12-12  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Revert part of r2578.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh:
+	  revert.
 
 2008-12-11  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
@@ -39,6 +88,27 @@
 	Fix invert-test for boolean_rw_transducers.
 	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh:
 	  Do not generate invalid alphabets.
+
+2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add reduce algorithm.
+	* include/Makefile.am: Add reduce.h{h,xx}.
+	* include/vaucanson/algorithms/reduce.hh: New.
+	* include/vaucanson/algorithms/reduce.hxx: New.
+
+2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add a specialisation of std::swap to help gcc.
+	* include/vaucanson/design_pattern/element_ops.hxx: The other
+	  specialisation with a template T1 for the first element and a
+	  template T2 for the second was ambigous for gcc.
+
+2008-12-10  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add op_neg and op_div to real semirings.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	  Add op_neg and op_div functions to real semirings.
 
 2008-12-10  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 

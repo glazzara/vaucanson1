@@ -16,7 +16,7 @@ include $(top_srcdir)/vaucanson.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS += $(TERMLIBS)
 
-bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-fmp-b \
+bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b \
                vcsn-int-b vcsn-int-z vcsn-int-fmp-b \
 	       vcsn-int-fmp-z vcsn-char-fmp-z \
 	       vcsn-char-char-b vcsn-int-int-b \
@@ -64,6 +64,16 @@ vcsn_char_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton -DVCSN_USE_LIB \
 			-DWITH_WEIGHTS
 vcsn_char_z_LDADD = $(LDADD)				\
 		  $(top_builddir)/lib/libvcsn-z.la	\
+		  $(top_builddir)/lib/libkrat_exp.la
+
+vcsn_char_r_SOURCES = $(COMMON_SOURCES)			\
+		      ratexp_commands.hh		\
+                      common_automaton_commands.hh 	\
+                      r_commands.cc
+vcsn_char_r_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=r_automaton -DVCSN_USE_LIB \
+			-DWITH_WEIGHTS
+vcsn_char_r_LDADD = $(LDADD)				\
+		  $(top_builddir)/lib/libvcsn-r.la	\
 		  $(top_builddir)/lib/libkrat_exp.la
 
 vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) \

@@ -68,6 +68,13 @@ def create?(type, file)
       file !~ /\/projection.hh/ and		# FMP transducer (identity)
       file !~ /ltl_to_pair.hh/ and		# FMP transducer
       file !~ /is_ltl.hh/ and			# FMP transducer
+      ( # Real Semiring only
+	("vcsn-r" == type
+	) or
+	(
+	  file !~ /reduce.hh/
+	)
+      ) and
       ( # Pair letters only filters.
 	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
 	      "vcsn-int-int-b" == type
@@ -113,6 +120,7 @@ def create?(type, file)
       file !~ /minimization_moore.hh/ and
       file !~ /realtime_decl.hh/ and
       file !~ /realtime.hh/ and
+      file !~ /reduce.hh/ and
       file !~ /standard.hh/ and
       file !~ /standard_of.hh/ and
       file !~ /thompson.hh/ and
@@ -139,7 +147,7 @@ def create?(type, file)
 	      file !~ /\/projection.hh/ and		# FMP transducer (identity)
 	      file !~ /composition_cover.hh/		# FMP transducer
 	    )
-      )
+      ) 
     )
   )
 end

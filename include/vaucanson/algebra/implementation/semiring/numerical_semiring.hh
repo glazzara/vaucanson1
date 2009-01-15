@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -98,6 +98,21 @@ namespace vcsn {
     /*-------------------------.
     | goodies for real numbers |
     `-------------------------*/
+
+    /* Operators only available for fields */
+    inline float op_sub(const algebra::NumericalSemiring&, const float& a, const float& b);
+
+    inline double op_sub(const algebra::NumericalSemiring&, const double& a, const double& b);
+
+    inline float op_div(const algebra::NumericalSemiring&, const float& a, const float& b);
+
+    inline double op_div(const algebra::NumericalSemiring&, const double& a, const double& b);
+    /**/
+
+    inline bool op_eq(const algebra::NumericalSemiring&, float& a, float& b);
+
+    inline bool op_eq(const algebra::NumericalSemiring&, double& a, double& b);
+
     template<typename T>
     bool op_starable(const algebra::NumericalSemiring& s, T v);
 
