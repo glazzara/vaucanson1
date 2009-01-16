@@ -1,3 +1,9 @@
+2009-01-16  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Prevent vaucanswig from compiling reduce algorithm.
+	* vaucanswig/expand.sh: Prevent vaucanswig from compiling reduce
+	  algorithm.
+
 2009-01-15  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Merge of the reduction branch.

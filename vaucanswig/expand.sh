@@ -156,6 +156,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh | sort
      # so we disable aut_projection and pair_to_fmp.
      if	[ "$candidate_family" = "invert" ] || \
 	[ "$candidate_family" = "domain" ] || \
+	[ "$candidate_family" = "reduce" ] || \
 	[ "$candidate_family" = "image" ] || \
 	[ "$candidate_family" = "ltl_to_pair" ] || \
 	[ "$candidate_family" = "is_ltl" ] || \
