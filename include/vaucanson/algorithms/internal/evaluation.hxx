@@ -37,16 +37,18 @@
 
 namespace vcsn
 {
-  template<typename U, typename V,
-           typename Trans_t, typename M>
+  template<typename SS, typename SM, typename V,
+	   typename Series_t, typename Trans_t,
+	   typename M>
   void
-  do_partial_evaluation(const U& E,
+  do_partial_evaluation(const algebra::Series<SS, SM>&,
+			const Series_t& E,
 			const TransducerBase<V>&,
 			const Trans_t& S,
 			const typename Trans_t::hstate_t& p,
 			M& res)
   {
-    // type helpers
+    // Type helpers.
     typedef typename Trans_t::value_t W;
     typedef typename output_projection_helper<V, W>::ret Auto_t;
     AUTOMATON_TYPES(Auto_t);
@@ -68,10 +70,7 @@ namespace vcsn
 
     // Hold standard_of(E).
     Auto_t A(auto_structure);
-    // The expression must come from a realtime automaton.
-    assertion(E.supp().size() == 1);
-    monoid_elt_t word(E.structure().monoid(), *E.supp().begin());
-    standard_of(A, E.get(word).value());
+    standard_of(A, E.value());
 
     //
     // Part 2.
@@ -175,16 +174,16 @@ namespace vcsn
     }
   }
 
-  template<typename S1, typename T1, 
-  typename S2, typename T2, 
-  typename M>
+  template <typename S1, typename T1,
+	    typename S2, typename T2,
+	    typename M>
   void
   partial_evaluation(const Element<S1, T1>& E,
 		     const Element<S2, T2>& S,
 		     const typename Element<S2, T2>::hstate_t& p,
 		     M& res)
   {
-    do_partial_evaluation(E, S.structure(), S, p, res);
+    do_partial_evaluation(E.structure(), E, S.structure(), S, p, res);
   }
 
   template<typename S, typename Auto_t, typename M, typename Chooser_t>

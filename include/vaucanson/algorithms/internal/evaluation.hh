@@ -54,18 +54,26 @@ namespace vcsn
 		      M& state_exp_pair);
 
   /**
-   * This function computes a set of expression
-   * according to the rw_composition algorithm
-   * description.
+   * Partial evaluation of a K RatExp E over a realtime transducer S,
+   * starting from a given state p.
+   *
+   * The result is a set of states accessible by reading a word in E from
+   * p and for each state q, the corresponding image of all the paths
+   * from p to q labeled by words from E.
+   *
+   * S must be realtime. Note though, that we do not add a precondition
+   * as this function is internal, and may be called a lot of time.
+   *
+   * @todo we may try to assess the use of memoization
    *
    * @param E lhs
    * @param S rhs
    * @param p the state from which the evaluation is run
    * @param res the output map
    */
-  template<typename S1, typename T1, 
-	   typename S2, typename T2, 
-	   typename M>
+  template <typename S1, typename T1,
+	    typename S2, typename T2,
+	    typename M>
   void
   partial_evaluation(const Element<S1, T1>& E,
 		     const Element<S2, T2>& S,

@@ -36,15 +36,23 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  /// Composition for Rational-Weight transducers.
+  /**
+   * @brief Composition for Rational-Weight transducers.
+   *
+   * @pre @a rhs must be realtime.
+   */
   template<typename S, typename T>
   void
-  rw_composition(const Element<S, T>&, const Element<S, T>&, Element<S, T>&);
+  rw_composition(const Element<S, T>& lhs, const Element<S, T>& rhs, Element<S, T>& ret);
 
-  /// Composition for Rational-Weight transducers.
+  /**
+   * @brief Composition for Rational-Weight transducers.
+   *
+   * @pre @a rhs must be realtime.
+   */
   template<typename S, typename T>
   Element<S, T>
-  rw_composition(const Element<S, T>&, const Element<S, T>&);
+  rw_composition(const Element<S, T>& lhs, const Element<S, T>& rhs);
 
   /** @} */
 

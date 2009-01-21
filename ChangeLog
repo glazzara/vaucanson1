@@ -1,5 +1,28 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	rw_composition: Fix a bug for transitions with a polynomial in R.
+	Reported by Sylvain Lombardy.
+	* include/vaucanson/algorithms/internal/evaluation.hh: Improve
+	  documentation. Cosmetic changes.
+	* include/vaucanson/algorithms/internal/evaluation.hxx
+	  (do_partial_evaluation): Be more precise when receiving dispatch
+	  by requiring the first argument to be a `Series'. Call
+	  `standard_of' on the whole input expression instead of just the
+	  first element in the support. (partial_evaluation): Update
+	  according to the new dispatch of `do_partial_evaluation'.
+	* include/vaucanson/algorithms/rw_composition.hh: Update the
+	  documentation.
+	* include/vaucanson/algorithms/rw_composition.hxx: Include the
+	  header file `realtime.hh' required by `is_realtime'.
+	  (do_rw_composition): Add a precondition on `S'. Improve comments
+	  and cosmetic changes. Update the algorithm according to the change
+	  to `partial_evaluation'.
+	* src/tests/include/Makefile.am: Add a new test to the distribution.
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/rw_composition_test.hh:
+	  New regression test.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	rw_composition: Fix a bug in partial_evaluation.
 	* include/vaucanson/algorithms/internal/evaluation.hxx
 	  (do_partial_evaluation): Iterate through all the states in `Sp'
