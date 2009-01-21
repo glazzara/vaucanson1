@@ -1,3 +1,9 @@
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Remove dead code.
+	* include/Makefile.am: Remove file from the distribution.
+	* include/vaucanson/design_pattern/factory.hh: Remove.
+
 2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Comment and add directions for reduce algorithm..

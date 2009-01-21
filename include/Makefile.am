@@ -153,7 +153,6 @@ vaucanson/design_pattern/element.hxx			\
 vaucanson/design_pattern/element_op_traits.hh		\
 vaucanson/design_pattern/element_ops.hh			\
 vaucanson/design_pattern/element_ops.hxx		\
-vaucanson/design_pattern/factory.hh			\
 vaucanson/design_pattern/meta_element_root.hh		\
 vaucanson/design_pattern/meta_element_root.hxx		\
 vaucanson/design_pattern/predecls.hh			\
