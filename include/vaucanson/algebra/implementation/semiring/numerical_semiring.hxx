@@ -206,12 +206,12 @@ namespace vcsn {
 
     inline bool op_eq(const algebra::NumericalSemiring&, float& a, float& b)
     {
-      return fabsf(a - b) < 0.00001;
+      return std::abs(a - b) < 0.00001;
     }
 
     inline bool op_eq(const algebra::NumericalSemiring&, double& a, double& b)
     {
-      return fabs(a - b) < 0.00001;
+      return std::abs(a - b) < 0.00001;
     }
 
     template<typename T>

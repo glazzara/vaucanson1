@@ -1,5 +1,11 @@
 2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Use std::abs instead of fabs / fabsf ...
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	  std::abs does the dispatch.
+
+2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Use fabs / fabsf instead of abs.
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
 	  Replace abs by fabs and fabsf in op_eq for float and double.
