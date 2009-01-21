@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,7 +14,6 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-//#include "one_rule_rewriting.hh"
 
 #include <sstream>
 
@@ -22,140 +21,13 @@
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/fmp_transducer.hh>
 
-#ifdef DEBUG
 #include <vaucanson/tools/xml_dump.hh>
-#include <vaucanson/tools/dot_display.hh>
-#endif
 
+#include "one_rule_rewriting.hh"
 #include "shortest.hh"
 
-using namespace std;
-using namespace vcsn;
-using namespace vcsn::boolean_transducer;
-
-int
-string_to_int(const string& s)
-{
-  stringstream ss(s);
-  int res;
-  ss >> res;
-  if (!ss.eof ()) {
-    cerr << "invalid integer: " << s << endl;
-    exit (1);
-  }
-  return res;
-}
-
-string
-prefsuf(const string& u, const string& v)
-{
-  int vs = v.size();
-  int s = min(u.size(), v.size());
-
-  for (int n = s; n > 0; n--) {
-    string tmp = u.substr(0, n);
-    if (tmp == v.substr(vs - n, n))
-      return tmp;
-  }
-
-  return "";
-}
-
-string
-alpha_convert(const map<letter_t, letter_t>& conv_map,
-              const string& str)
-{
-  string r;
-  int n = str.size();
-  r.reserve(n);
-
-  for (int i = 0; i < n; i++)
-    r += conv_map.find(str[i])->second;
-
-  return r;
-}
-
-map<letter_t, letter_t>
-alpha_map(const alphabet_t& A, const alphabet_t& B)
-{
-  typedef alphabet_t::const_iterator alphabet_iterator;
-
-  map<letter_t, letter_t> m;
-  alphabet_iterator j = B.begin();
-  for_all_letters(i, A)
-    m[*i] = *j++;
-
-  return m;
-}
-
-automaton_t
-replace_left(const string& from, const string& to,
-             const alphabet_t& A, const alphabet_t& B)
-{
-  automaton_t a = make_automaton(A, B);
-  int n = from.size();
-
-  // Create a map between the two alphabets.
-  map<letter_t, letter_t> a2b = alpha_map(A, B);
-
-  // Create a vector to handle all the states.
-  vector<hstate_t> s(n);
-
-  // Create states and set them all final.
-  for (int i = 0; i < n; i++)
-  {
-    s[i] = a.add_state();
-    a.set_o_final(s[i], alpha_convert(a2b, from.substr(0, i)));
-  }
-
-  // Set the first state initial.
-  a.set_initial(s[0]);
-
-  // Create all the edges of the type (ui | 1).
-  for (int i = 0; i < n - 1; i++)
-  {
-    const letter_t l[] = {from[i], 0};
-    a.add_io_transition(s[i], s[i + 1], l, "");
-  }
-
-  // Create the backward edges.
-  for (int i = 0; i < n; i++)
-    for_all_letters(j, A)
-      if (*j != from[i])
-      {
-        const letter_t l[] = {*j, 0};
-        const string in = from.substr(0, i) + *j;
-        const string factor = prefsuf(from, in);
-        const int len = factor.size();
-        
-        a.add_io_transition(s[i], s[len], l,
-                            alpha_convert(a2b, in.substr(0, i - len + 1)));
-      }
-
-  // Last state goes back to state i (length of w) with an edge
-  // of type (un | y) (to = y.w)
-  const letter_t l[] = {from[n - 1], 0};
-  string f = prefsuf(alpha_convert(a2b, from), to);
-  a.add_io_transition(s[n - 1], s[f.size()], l, to.substr(0, to.size() - f.size()));
-
-  return a;
-}
-
-automaton_t
-replace_right(const string& from, const string& to,
-              const alphabet_t& A, const alphabet_t& B)
-{
-  monoid_elt_t from_elt(A, from);
-  monoid_elt_t to_elt(B, to);
-  from_elt.mirror();
-  to_elt.mirror();
-
-  automaton_t left = replace_left(from_elt.value(), to_elt.value(), A, B);
-  return transpose(left);
-}
-
-boolean_automaton::automaton_t
-qcq(const boolean_automaton::automaton_t& a)
+vcsn::boolean_automaton::automaton_t
+qcq(const vcsn::boolean_automaton::automaton_t& a)
 {
   return transpose(quotient(transpose(quotient(a))));
 }
@@ -163,77 +35,119 @@ qcq(const boolean_automaton::automaton_t& a)
 static void
 usage(int, char** argv)
 {
-  cerr << "Usage: " << argv[0] <<
-    " <no_of_letters> <word> <replace_word> <name>" << endl;
+  std::cerr << "Usage: " << argv[0] << " <no_of_letters> <word> <replace_word>" << std::endl;
   exit(1);
 }
 
 int
 main(int argc, char** argv)
 {
-  // Read the parameters
-  if (argc != 5)
-    usage(argc, argv);
-  int nb_letter = string_to_int(argv[1]);
-  string from = argv[2];
-  string to = argv[3];
-  string name = argv[4];
+  using namespace vcsn;
+  using namespace vcsn::boolean_transducer;
 
-  // Creation of the alphabet
+  // Read the parameters.
+  if (argc != 4)
+    usage(argc, argv);
+
+  // Get the number of letters.
+  std::stringstream ss(argv[1]);
+  int nb_letter = 0;
+  ss >> nb_letter;
+
+  // Check nb_letter is valid.
+  if (!nb_letter)
+    usage(argc, argv);
+
+  std::string from = argv[2];
+  std::string to = argv[3];
+
+  // Creation of the alphabet.
   alphabet_t A;
   for (int i = 0; i < nb_letter; i++)
     A.insert('a' + i);
 
-  // Compute an automaton for the non-reduced words
+  // Compute an automaton for the non-reduced words.
   boolean_automaton::rat_exp_t expA = boolean_automaton::make_rat_exp(A, "0");
+  // expA = (a+b+...)*
   for_all_letters (x, A)
     expA += *x;
-  boolean_automaton::rat_exp_t expfrom = boolean_automaton::make_rat_exp(A, from);
   expA.star();
+
+  // Convert the "from" string to a rat exp.
+  boolean_automaton::rat_exp_t expfrom = boolean_automaton::make_rat_exp(A, from);
+
+  // expL = (a+b+...)*.expfrom.(a+b+...)*
   boolean_automaton::rat_exp_t expL = expA * expfrom * expA;
+
+  // Compute the automaton.
   boolean_automaton::automaton_t autL = qcq(boolean_automaton::standard_of(expL));
 
-  // The cautious transducers
-  automaton_t left_tdc = replace_left(from, to, A, A);
-  automaton_t right_tdc = replace_right(from, to, A, A);
+  // The cautious transducers.
+  automaton_t left_tdc = ORR::replace_left(from, to, A, A);
+  automaton_t right_tdc = ORR::replace_right(from, to, A, A);
 
-  // Perform the iterated composition
-  string lr_name = name + "_lr";
+  // Composition of the left cautious and the right cautious.
+  // Call trim to improve performances by removing useless states.
   automaton_t lr_tdc = trim(rw_composition(left_tdc, right_tdc));
-  automaton_t iter_tdc = right_tdc;
-  for (int iteration = 1; true; iteration++)
+
+  // Initialize the first iteration.
+  automaton_t iter_tdc = lr_tdc;
+  int iteration = 1;
+
+  while (1)
   {
+    std::cout << "Iteration " << iteration << std::endl
+	      << "iter_tdc: " << iter_tdc << std::endl;
+
+    // Calculate the image of iter_tdc.
     boolean_automaton::automaton_t iter_ima = boolean_automaton::make_automaton(A);
-    iter_tdc = trim(rw_composition(iter_tdc, lr_tdc));
     fmp_transducer::automaton_t iter_fmp = fmp_transducer::make_automaton(A, A);
     rw_to_fmp(iter_tdc, iter_fmp);
+
     image(iter_fmp, iter_ima);
+    std::cout << "iter_ima: " << iter_ima << std::endl;
+
+    // Dump the image of iteration.
+    std::ofstream file;
+    std::stringstream filename;
+    filename << "iter_ima_" << iteration << ".xml";
+    file.open(filename.str().c_str());
+    tools::xml_dump(file, iter_ima, "iter_ima");
+    file.close();
+
     boolean_automaton::automaton_t iter_imac = qcq(realtime(iter_ima));
-    cout << "Iteration: " << iteration << ": "
-         << iter_imac.states().size() << " states, "
-         << iter_imac.transitions().size() << " transitions" << endl;
-#ifdef DEBUG
-    tools::xml_dump(cout, iter_imac, lr_name);
-    tools::dot_display(iter_imac, lr_name, true);
-#endif
-    
+    std::cout << "iter_imac: " << iter_imac << std::endl;
+
+    // Is it reduced?
     boolean_automaton::automaton_t autR = product(iter_imac, autL);
-    if (trim(autR).states().size() == 0) // Is it reduced?
-      cerr << "Reduction complete" << endl;
+
+    if (trim(autR).states().size() == 0)
+    {
+      // We can stop because all the words are reduced in the image.
+      std::cout << "Reduction complete." << std::endl;
+      break;
+    }
     else
     {
-      cerr << "Shortest unreduced word: " << shortest(autR) << endl
-           << "Do you want to iterate [y/n]? " ;
-      string user_string;
-      getline(cin, user_string);
-      if (user_string == "y")
-        continue;
+      std::cout << "Reduction incomplete. Searching the shortest unreduced word..." << std::endl;
+      std::cout << "Shortest unreduced word: " << shortest(autR) << std::endl;
+
+      // Ask whether or not to iterate as it may never stop.
+      std::cout << "Do you want to iterate [y/n]? ";
+
+      // Get user input.
+      std::string user_string;
+      getline(std::cin, user_string);
+
+      if (user_string != "y")
+	// The user do not want to iterate anymore.
+        break;
     }
-    break;
+
+    // Iterate.
+    iter_tdc = trim(rw_composition(iter_tdc, lr_tdc));
+    iteration++;
   }
 
-#ifdef DEBUG
-    tools::xml_dump(cout, iter_imac, lr_name);
-    tools::dot_display(iter_imac, lr_name, true);
-#endif
+  return 0;
 }

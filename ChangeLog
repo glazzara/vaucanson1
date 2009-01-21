@@ -1,5 +1,21 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Demos: Factor more code in ORR_iterate, fix typos.
+	* src/demos/one_rule_rewriting/ORR_iterate.cc: Remove all the
+	  references to the macro `DEBUG'. Do not include
+	  `tools/dot_display.hh' anymore. Include the header
+	  `one_rule_rewriting.hh', and subsequently remove all the redundant
+	  function definitions (prefsuf, alpha_convert, alpha_map,
+	  replace_left and replace_right). Sanitize namespace usages.
+	  (usage): Remove the help about the argument `name'. (main): Do not
+	  use argv[4]. Simplify the code by removing the use of the
+	  auxiliary function `string_to_int'. Add more comments, and
+	  cosmetic changes. Fix the initialization of the loop. Add some
+	  code to dump the `iter_ima' variable. When printing informations
+	  about automaton: use the already defined `operator<<'.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Demos: Cleanup shortest.hh to be more in line with vcsn.
 	* src/demos/one_rule_rewriting/shortest.hh: Add the Copyright
 	  notice. Add guards. Cosmetic changes.
