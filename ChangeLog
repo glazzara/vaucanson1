@@ -1,3 +1,11 @@
+2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/main.cc (predefined_string): Compute it at startup...
+	(main) ... not here.
+	* taf-kit/src/predefined_alphabets.hxx,
+	taf-kit/src/predefined_alphabets.hh (build_predefined_string):
+	Return a pointer to a static string.
+
 2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.Ar>
 
 	* build-aux/vcsn-xml.m4, include/vaucanson/xml/internal/ios.hh,

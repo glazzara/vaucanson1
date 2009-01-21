@@ -51,9 +51,9 @@ std::string build_default_eps(std::string alphabet)
   return M.representation()->empty;
 }
 
-void build_predefined_string(char* buffer)
+const char* build_predefined_string()
 {
-  std::string output;
+  static std::string output;
 
   // Build the string with dynamic values for epsilon representations.
   output += "The following alphabets are predefined:\n"
@@ -70,12 +70,7 @@ void build_predefined_string(char* buffer)
 	 + build_default_eps(ALPHABET_ASCII)
 	 + " as epsilon\n";
 
-  // Reset buffer because this function is called for each command,
-  // and we may overflow the buffer.
-  buffer[0] = 0;
-
-  // Concatenate output with buffer.
-  std::strcat(buffer, output.c_str());
+  return output.c_str();
 }
 
 #endif /* !PREDEFINED_ALPHABETS_HXX */

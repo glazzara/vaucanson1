@@ -37,7 +37,7 @@
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ALPHABET_DIGITS "0123456789"
 
-void build_predefined_string(char* buffer);
+const char* build_predefined_string();
 
 # include "predefined_alphabets.hxx"
 

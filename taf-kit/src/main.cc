@@ -82,7 +82,7 @@ namespace
   const char doc[] = "VCSN TAF-Kit -- a toolkit for working with automata";
   const char args_doc[] = "<command> <args...>";
 #ifndef NO_PREDEF_ALPHABETS
-  char predefined_string[1024];
+  const char* predefined_string = build_predefined_string();
 #endif
   const argp_option options[] = {
     {"list-commands",	'l', 0, 0,
@@ -311,9 +311,6 @@ int main (int argc, char* argv[])
   for (std::list<pipe_command>::iterator li = command_list.begin ();
        li != command_list.end (); ++li)
     {
-#ifndef NO_PREDEF_ALPHABETS
-      build_predefined_string(predefined_string);
-#endif
       argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
 
       try
