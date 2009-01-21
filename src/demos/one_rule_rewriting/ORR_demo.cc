@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -46,9 +46,6 @@ main()
 
   automaton_t left_auto = replace_left(from, to, A, A);
 
-  // we need the left automaton to be realtime
-  realtime_here(left_auto);
-
   eval_an_expression(left_auto, "L");
 
   /*------------------.
@@ -56,6 +53,9 @@ main()
   `------------------*/
 
   automaton_t right_auto = replace_right(from, to, A, A);
+
+  // We need the right automaton (S) to be realtime.
+  realtime_here(right_auto);
 
   eval_an_expression(right_auto, "R");
 

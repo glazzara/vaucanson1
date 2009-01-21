@@ -1,5 +1,13 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Demos: Fix a typo in ORR_demo.
+	* src/demos/one_rule_rewriting/ORR_demo.cc (main): Call
+	  `realtime_here' on `right_auto' as it is passed as the second
+	  argument of `rw_composition', and there is a `is_realtime'
+	  precondition on this argument.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	rw_composition: New evaluation_rw algorithm.
 	* include/Makefile.am: Add new files to the distribution.
 	* include/vaucanson/algorithms/evaluation_rw.hh: New.
