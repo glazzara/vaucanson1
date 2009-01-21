@@ -27,7 +27,7 @@
  *
  * This files declares the reduce algorithm.
  *
- * @see reduce()
+ * @see reduce(), reduce_here()
  */
 /** @} */
 
@@ -37,13 +37,49 @@
 
 namespace vcsn {
 
+  /**
+   * Reduce of an automaton (default right_left)
+   *
+   * This algorithm computes the reduce representation of an automaton with
+   * weights in a field (division ring)
+   *
+   * It is based on the explanation made by Sylvain Lombardy.
+   * A technical report about this algorithm is available here :
+   * http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200901-Seminar-Delmon
+   * Proof and explanations are also available in ETA Chapter 3, Sec 4.3
+   *
+   * @param a    The weighted automaton to reduce.
+   * @param dir  The order in which reductions are computed.
+   *
+   * @see reduce_here()
+   *
+   * @author Vivien Delmon
+   */
   template<typename A, typename AI>
   Element<A, AI>
-  reduce(const Element<A, AI>& a, misc::direction_type dir = misc::backward);
+  reduce(const Element<A, AI>& a, misc::direction_type dir = misc::right_left);
 
+  /**
+   * In place reduce of an automaton (default right_left)
+   *
+   * This algorithm computes the reduce representation of an automaton with
+   * weights in a field (division ring)
+   *
+   * It is based on the explanation made by Sylvain Lombardy.
+   * A technical report about this algorithm is available here :
+   * http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200901-Seminar-Delmon
+   * Proof and explanations are also available in ETA Chapter 3, Sec 4.3
+   *
+   * @param a    The weighted automaton to reduce.
+   * @param dir  The order in which reductions are computed.
+   *
+   * @see reduce()
+   *
+   * @author Vivien Delmon
+   */
   template<typename A, typename AI>
   void
-  reduce_here(Element<A, AI>& a, misc::direction_type dir = misc::backward);
+  reduce_here(Element<A, AI>& a, misc::direction_type dir = misc::right_left);
 
 } // vcsn
 

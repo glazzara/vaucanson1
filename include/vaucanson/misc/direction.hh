@@ -32,7 +32,7 @@ namespace vcsn
      *
      * @see realtime(), eps_removal()
      */
-    enum direction_type { forward, backward };
+    enum direction_type { forward, backward, left_right, right_left };
 
   } // end of namespace misc.
 } // end of namespace vcsn.

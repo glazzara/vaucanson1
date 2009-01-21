@@ -378,12 +378,12 @@ namespace vcsn {
   {
     Element<A, AI> output(a.structure());
     reducer<A, AI> r(a, output);
-    if (dir == misc::backward)
+    if (dir == misc::right_left)
       r.transpose();
     r.left_reduce();
     r.transpose();
     r.left_reduce();
-    if (dir == misc::forward)
+    if (dir == misc::left_right)
       r.transpose();
     r.release();
     return output;
@@ -394,12 +394,12 @@ namespace vcsn {
   reduce_here(Element<A, AI>& a, misc::direction_type dir)
   {
     reducer<A, AI> r(a, a);
-    if (dir == misc::backward)
+    if (dir == misc::right_left)
       r.transpose();
     r.left_reduce();
     r.transpose();
     r.left_reduce();
-    if (dir == misc::forward)
+    if (dir == misc::left_right)
       r.transpose();
     r.release();
   }

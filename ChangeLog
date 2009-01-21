@@ -1,5 +1,15 @@
 2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
+	Comment and add directions for reduce algorithm..
+	* include/vaucanson/algorithms/reduce.hh: Add comments about reduce
+	  algorithm.
+	* include/vaucanson/algorithms/reduce.hxx: replace backward by
+	  right_left and forward by left_right.
+	* include/vaucanson/misc/direction.hh: add left_right and right_left
+	  directions.
+
+2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
 	Use std::abs instead of fabs / fabsf ...
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
 	  std::abs does the dispatch.
