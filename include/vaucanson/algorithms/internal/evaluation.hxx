@@ -81,16 +81,14 @@ namespace vcsn
     // Does a copy of S,
     Trans_t Sp = S;
     state_state_map_t Sp_to_S;
-    for_all_const_initial_states_(t_, q, Sp)
+    for_all_const_states_(t_, q, Sp)
     {
-      if (*q == Sp.get_state(size_t(p)))
+      hstate_t pSp = Sp_to_S[*q] = S.get_state(size_t(*q));
+      if (pSp == p)
 	Sp.set_initial(*q);
       else
 	Sp.unset_initial(*q);
     }
-    // FIXME: initial or all states?
-    for_all_const_states_(t_, q, Sp)
-    Sp_to_S[*q] = S.get_state(size_t(*q));
 
     //
     // evaluation(A, Sp)

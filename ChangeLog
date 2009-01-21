@@ -1,5 +1,15 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	rw_composition: Fix a bug in partial_evaluation.
+	* include/vaucanson/algorithms/internal/evaluation.hxx
+	  (do_partial_evaluation): Iterate through all the states in `Sp'
+	  instead of only the initial ones.
+	* src/tests/include/Makefile.am: Add new file to the distribution.
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/partial_evaluation_test.hh:
+	  New regression test.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Demos: Factor more code in ORR_iterate, fix typos.
 	* src/demos/one_rule_rewriting/ORR_iterate.cc: Remove all the
 	  references to the macro `DEBUG'. Do not include

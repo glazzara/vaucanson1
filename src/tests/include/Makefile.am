@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2008 The Vaucanson Group.
+## Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -68,6 +68,7 @@ tests/automata/algos/boolean_automata/complete_test.hh				      \
 tests/automata/algos/boolean_automata/minimization_test.hh			      \
 tests/automata/algos/pair_automata/pair_to_fmp_test.hh				      \
 tests/automata/algos/boolean_rw_transducers/invert_test.hh			      \
+tests/automata/algos/boolean_rw_transducers/partial_evaluation_test.hh		      \
 tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh			      \
 tests/automata/algos/fmp_transducers/is_ltl_test.hh				      \
 tests/automata/algos/fmp_transducers/normalized_composition_test.hh		      \
