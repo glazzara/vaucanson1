@@ -1,3 +1,8 @@
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a typo in the ChangeLog.
+	* ChangeLog: Fix an email address.
+
 2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/predefined_alphabets.hxx (build_predefined_string):
@@ -14,7 +19,7 @@
 	taf-kit/src/predefined_alphabets.hh (build_predefined_string):
 	Return a pointer to a static string.
 
-2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.Ar>
+2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* build-aux/vcsn-xml.m4, include/vaucanson/xml/internal/ios.hh,
 	include/vaucanson/xml/internal/ios.hxx: Change the Xerces version
