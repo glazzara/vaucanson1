@@ -1,5 +1,12 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup dead code.
+	* include/Makefile.am: Remove files from the distribution.
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh: Remove.
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx: Remove.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix a segfault when handling more than one space (Close #180).
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
 	  (Lexer::Lexer): Reserve seven elements only for `token_tab_'.

@@ -1,6 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson
-## Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
+## The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -259,8 +259,6 @@ vaucanson/algebra/implementation/series/rat/reverse_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/star_height_visitor.hh		     \
 vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx		     \
-vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh			     \
-vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx			     \
 vaucanson/algebra/implementation/series/series.hh				     \
 vaucanson/algebra/implementation/series/series.hxx				     \
 vaucanson/algebra/implementation/series/series_rep.hh				     \
