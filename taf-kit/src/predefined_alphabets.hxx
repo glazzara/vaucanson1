@@ -23,27 +23,27 @@
 
 # include "predefined_alphabets.hh"
 
-// FIXME: " and \0 (\\0)
-# define ALPHABET_ASCII							\
-  "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-# define ALPHABET_AZ				\
-  "abcdefghijklmnopqrstuvwxyz"
-# define ALPHABET_AZAZ						\
-  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define ALPHABET_DIGITS "0123456789"
-
-
 #ifndef NO_PREDEF_ALPHABETS
 namespace {
   const struct alphabet
   {
     const char*	name;
     const char*	alphabet;
-  } predefined_alphabets[] = { { "letters", ALPHABET_AZ },
-			       { "alpha", ALPHABET_AZAZ },
-			       { "digits", ALPHABET_DIGITS },
-			       { "ascii", ALPHABET_ASCII },
-			       { 0, 0 } };
+    const char* shortdef;
+  } predefined_alphabets[] = {
+    { "letters",
+      "abcdefghijklmnopqrstuvwxyz",
+      "[a-z]" },
+    { "alpha",
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "[a-zA-Z]" },
+    { "digits",
+      "0123456789",
+      "[0-9]" },
+    { "ascii",
+      "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+      "all ascii characters" },
+    { 0, 0 } };
 }
 #endif
 
@@ -90,22 +90,22 @@ std::string build_default_eps(std::string alphabet)
 const char* build_predefined_string()
 {
   static std::string output;
-
+#ifndef NO_PREDEF_ALPHABETS
   // Build the string with dynamic values for empty word representations.
-  output += "The following alphabets are predefined:\n"
-	   "	 `letters': Use [a-z] as the alphabet, "
-	 + build_default_eps(ALPHABET_AZ)
-	 + " as empty word\n"
-	 + "	 `alpha': Use [a-zA-Z] as the alphabet, "
-	 + build_default_eps(ALPHABET_AZAZ)
-	 + " as empty word\n"
-	 + "	 `digits': Use [0-9] as the alphabet, "
-	 + build_default_eps(ALPHABET_DIGITS)
-	 + " as empty word\n"
-	 + "	 `ascii': Use ascii characters as the alphabet, "
-	 + build_default_eps(ALPHABET_ASCII)
-	 + " as empty word\n";
+  output += "The following alphabets are predefined:\n";
 
+  const struct alphabet* p;
+  for (p = predefined_alphabets; p->name; ++p)
+    {
+      output += "\t `";
+      output += p->name;
+      output += "': Use ";
+      output += p->shortdef;
+      output += " as the alphabet and `";
+      output += build_default_eps(p->alphabet);
+      output += "' as empty word\n";
+    }
+#endif
   return output.c_str();
 }
 
