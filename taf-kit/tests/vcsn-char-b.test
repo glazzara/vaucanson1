@@ -490,6 +490,9 @@ done
 $VCSN -aab --parser="SPACE=toto SPACE=tata" thompson 'a+b' 1>/dev/null 2>stderr
 diff stderr stderr.ref
 
+# Check predefined alphabets in help.
+$VCSN --help |grep predefined
+
 ## ------------------- ##
 ## Test div3base2.xml. ##
 ## ------------------- ##

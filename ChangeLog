@@ -1,5 +1,24 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Disable predefined alphabets for pair contexts.
+	* taf-kit/src/Makefile.am: Define `NO_PREDEF_ALPHABETS' for the
+	  `vcsn-char-char-b', `vcsn-char-int-b' and `vcsn-int-int-b'
+	  executables.
+	* taf-kit/tests/vcsn-char-b.test,
+	* taf-kit/tests/vcsn-char-char-b.test,
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	* taf-kit/tests/vcsn-char-fmp-z.test,
+	* taf-kit/tests/vcsn-char-int-b.test,
+	* taf-kit/tests/vcsn-char-z.test,
+	* taf-kit/tests/vcsn-int-b.test,
+	* taf-kit/tests/vcsn-int-fmp-b.test,
+	* taf-kit/tests/vcsn-int-fmp-z.test,
+	* taf-kit/tests/vcsn-int-int-b.test,
+	* taf-kit/tests/vcsn-int-z.test: Check whether or not a predefined
+	  alphabet is defined.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Add support for xerces-c 3.0 (Close #193).
 	* build-aux/vcsn-xml.m4: Update the macro `_VCSN_CHECK_XML' to check
 	  for xerces-c version x such as 2.3 <= x <= 3. Update the C++ ABI

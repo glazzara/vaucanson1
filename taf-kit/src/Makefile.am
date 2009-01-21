@@ -1,5 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008,
+## 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -152,7 +153,7 @@ vcsn_char_char_b_SOURCES = $(COMMON_SOURCES) \
 			    common_automaton_commands.hh \
 			    b_commands.cc
 vcsn_char_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_char_boolean_automaton \
-			      -DVCSN_USE_LIB \
+			      -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
 			      -DSECOND_PROJECTION_CONTEXT=boolean_automaton \
 			      -DNO_SECOND_OPERATOR
@@ -165,7 +166,7 @@ vcsn_char_int_b_SOURCES = $(COMMON_SOURCES) \
 			    common_automaton_commands.hh \
 			    b_commands.cc
 vcsn_char_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_int_boolean_automaton \
-			      -DVCSN_USE_LIB \
+			      -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
 			      -DSECOND_PROJECTION_CONTEXT=int_boolean_automaton
 vcsn_char_int_b_LDADD = $(LDADD) \
@@ -177,7 +178,7 @@ vcsn_int_int_b_SOURCES = $(COMMON_SOURCES) \
 			    common_automaton_commands.hh \
 			    b_commands.cc
 vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
-			    -DVCSN_USE_LIB \
+			    -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			    -DFIRST_PROJECTION_CONTEXT=int_boolean_automaton \
 			    -DSECOND_PROJECTION_CONTEXT=int_boolean_automaton \
 			    -DNO_SECOND_OPERATOR
