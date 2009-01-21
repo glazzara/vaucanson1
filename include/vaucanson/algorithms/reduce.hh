@@ -41,7 +41,7 @@ namespace vcsn {
    * Reduce of an automaton (default right_left)
    *
    * This algorithm computes the reduce representation of an automaton with
-   * weights in a field (division ring)
+   * weights in a division ring.
    *
    * It is based on the explanation made by Sylvain Lombardy.
    * A technical report about this algorithm is available here :
@@ -50,6 +50,8 @@ namespace vcsn {
    *
    * @param a    The weighted automaton to reduce.
    * @param dir  The order in which reductions are computed.
+   * @pre The automaton @a a must be realtime.
+   * @pre The weights of the automaton @a a must be defined in a division ring.
    *
    * @see reduce_here()
    *
@@ -63,7 +65,7 @@ namespace vcsn {
    * In place reduce of an automaton (default right_left)
    *
    * This algorithm computes the reduce representation of an automaton with
-   * weights in a field (division ring)
+   * weights in a division ring.
    *
    * It is based on the explanation made by Sylvain Lombardy.
    * A technical report about this algorithm is available here :
@@ -72,6 +74,8 @@ namespace vcsn {
    *
    * @param a    The weighted automaton to reduce.
    * @param dir  The order in which reductions are computed.
+   * @pre The automaton @a a must be realtime.
+   * @pre The weights of the automaton @a a must be defined in a division ring.
    *
    * @see reduce()
    *

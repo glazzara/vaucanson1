@@ -1,3 +1,10 @@
+2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Add preconditions and remove debug code.
+	* include/vaucanson/algorithms/reduce.hh,
+	* include/vaucanson/algorithms/reduce.hxx: Add preconditions and
+	  remove debug code.
+
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Remove dead code.

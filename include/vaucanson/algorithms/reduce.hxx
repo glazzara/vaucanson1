@@ -21,16 +21,12 @@
 # include <vector>
 # include <map>
 # include <vaucanson/misc/usual_macros.hh>
-/* DEBUG */
-# include <iostream>
-/* DEBUG */
 
 namespace vcsn {
 
   template<typename A, typename AI>
   class reducer
   {
-    // preconditions : letterized //
     typedef Element<A, AI> Auto;
     AUTOMATON_TYPES(Auto);
     AUTOMATON_FREEMONOID_TYPES(Auto);
@@ -324,37 +320,6 @@ namespace vcsn {
 	  }
     }
 
-    /* DEBUG */
-    void
-    check()
-    {
-      for (typename semiring_matrix_set_t::iterator lit = letter_matrix_set_.begin();
-	   lit != letter_matrix_set_.end(); lit++)
-      {
-	std::cout << lit->first << std::endl;
-	for (std::size_t i = 0; i < nb_states_; i++)
-	{
-	  for (typename std::map<std::size_t, semiring_elt_t>::iterator it = lit->second[i].begin();
-	       it != lit->second[i].end(); it++)
-	    std::cout << it->first << " : " << it->second << " // ";
-	  std::cout << std::endl;
-	}
-      }
-
-      std::cout << "Initial : ";
-      for (std::size_t i = 0; i < init_.size(); i++)
-	if (init_[i] != semiring_elt_zero_)
-	  std::cout << i << " : " << init_[i] << " // ";
-      std::cout << std::endl;
-
-      std::cout << "Final : ";
-      for (std::size_t i = 0; i < final_.size(); i++)
-	if (final_[i] != semiring_elt_zero_)
-	  std::cout << i << " : " << final_[i] << " // ";
-      std::cout << std::endl;
-    }
-    /* DEBUG */
-
   private:
     // zero and identity of used algebraic structure.
     series_set_elt_t	null_series_;
@@ -376,6 +341,7 @@ namespace vcsn {
   Element<A, AI>
   reduce(const Element<A, AI>& a, misc::direction_type dir)
   {
+    precondition(is_realtime(a));
     Element<A, AI> output(a.structure());
     reducer<A, AI> r(a, output);
     if (dir == misc::right_left)
@@ -393,6 +359,7 @@ namespace vcsn {
   void
   reduce_here(Element<A, AI>& a, misc::direction_type dir)
   {
+    precondition(is_realtime(a));
     reducer<A, AI> r(a, a);
     if (dir == misc::right_left)
       r.transpose();
