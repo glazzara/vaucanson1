@@ -485,10 +485,13 @@ do
 done
 )
 
-# Check behavior when given more than one space.
+# Check behavior when given more than one space.
 : >stderr.ref
-$VCSN -aab --parser="SPACE=toto SPACE=tata" thompson 'a+b' 1>/dev/null 2>stderr
+$VCSN -aab --parser="SPACE=toto SPACE=tata" thompson 'atoto+tatab' >1.xml 2>stderr
 diff stderr stderr.ref
+$VCSN -aab --parser="SPACE=toto SPACE=tata" thompson 'a+b' >2.xml 2>stderr
+diff stderr stderr.ref
+$VCSN -v are-equivalent 1.xml 2.xml
 
 # Check predefined alphabets in help.
 $VCSN --help |grep predefined
