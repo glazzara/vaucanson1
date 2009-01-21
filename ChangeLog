@@ -1,3 +1,11 @@
+2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.Ar>
+
+	* build-aux/vcsn-xml.m4, include/vaucanson/xml/internal/ios.hh,
+	include/vaucanson/xml/internal/ios.hxx: Change the Xerces version
+	check not to print "Bad version" (the fact we do not support a
+	version does not mean that version is bad) and not disallow future
+	versions.
+
 2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-b.test: Augment the test for two spaces

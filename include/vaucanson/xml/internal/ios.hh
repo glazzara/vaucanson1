@@ -37,10 +37,10 @@
 # if (XERCES_VERSION_MAJOR == 2)
 #  define XMLSize_t unsigned int
 #  define XERCES_FILEPOS XMLSize_t
-# elif (XERCES_VERSION_MAJOR == 3)
+# elif (XERCES_VERSION_MAJOR > 2)
 #  define XERCES_FILEPOS XMLFilePos
 # else
-#  error "Bad Xerces-C++ major version."
+#  error "Unsupported Xerces-C++ major version (too old)."
 # endif
 
 XERCES_CPP_NAMESPACE_BEGIN

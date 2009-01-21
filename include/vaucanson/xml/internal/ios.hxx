@@ -78,7 +78,7 @@ namespace vcsn
 	writer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
 
       writer->writeNode(outstream, *root);
-# elif XERCES_VERSION_MAJOR == 3
+# elif XERCES_VERSION_MAJOR > 2
       DOMLSSerializer* writer = impl->createLSSerializer();
       DOMLSOutput *target = impl->createLSOutput();
       target->setByteStream(outstream);
@@ -89,7 +89,7 @@ namespace vcsn
 
       writer->write(root, target);
 # else
-#  error "Bad Xerces-C++ major version."
+#  error "Unsupported Xerces-C++ major version (too old)."
 # endif
 
       writer->release();

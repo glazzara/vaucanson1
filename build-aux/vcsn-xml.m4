@@ -39,11 +39,11 @@ AC_DEFUN([_VCSN_CHECK_XML],
         AC_CHECK_HEADER([xercesc/util/XercesVersion.hpp],
                         [AC_COMPILE_IFELSE([AC_LANG_SOURCE([
 #include <xercesc/util/XercesVersion.hpp>
-#if XERCES_VERSION_MAJOR < 2 || XERCES_VERSION_MAJOR > 3
-# error "Bad Xerces-C++ major version."
+#if XERCES_VERSION_MAJOR < 2
+# error "Unsupported Xerces-C++ major version (too old)."
 #endif
 #if XERCES_VERSION_MAJOR == 2 && XERCES_VERSION_MINOR < 3
-# error "Bad Xerces-C++ minor version."
+# error "Unsupported Xerces-C++ minor version (too old)."
 #endif
                                                       ])],
                                             [vcsn_cv_xerces=yes])])
@@ -71,10 +71,10 @@ AC_DEFUN([_VCSN_CHECK_XML],
 # if (XERCES_VERSION_MAJOR == 2)
 #  define XMLSize_t unsigned int
 #  define XERCES_FILEPOS XMLSize_t
-# elif (XERCES_VERSION_MAJOR == 3)
+# elif (XERCES_VERSION_MAJOR > 2)
 #  define XERCES_FILEPOS XMLFilePos
 # else
-#  error "Bad Xerces-C++ major version."
+#  error "Unsupported Xerces-C++ major version."
 # endif
 
 int main() {
