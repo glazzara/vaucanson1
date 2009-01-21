@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -38,7 +38,10 @@
 #include "argp.h"
 #include "progname.h"
 
-#include "predefined_alphabets.hh"
+#ifndef NO_PREDEF_ALPHABETS
+# include "predefined_alphabets.hh"
+#endif
+
 #include "commands.hh"
 #include "interface.hh"
 #include "parser_options.hh"
@@ -78,6 +81,9 @@ namespace
 {
   const char doc[] = "VCSN TAF-Kit -- a toolkit for working with automata";
   const char args_doc[] = "<command> <args...>";
+#ifndef NO_PREDEF_ALPHABETS
+  char predefined_string[1024];
+#endif
   const argp_option options[] = {
     {"list-commands",	'l', 0, 0,
      "List the commands handled by the program", 0 },
@@ -116,11 +122,7 @@ namespace
       "Set the parsing options for rational expressions", 0 },
 
 #ifndef NO_PREDEF_ALPHABETS
-    { 0, 0, 0, 0, "The following alphabets are predefined:\n"
-      "	 `letters': Use [a-z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `alpha': Use [a-zA-Z] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `digits': Use [0-9] as the alphabet, " DEFAULT_EPSILON " as epsilon\n"
-      "	 `ascii': Use ascii characters as the alphabet, " DEFAULT_EPSILON " as epsilon\n", 0},
+    { 0, 0, 0, 0, predefined_string, 0},
 #endif
 
     { 0, 0, 0, 0, 0, 0 }
@@ -131,12 +133,11 @@ namespace
   {
     const char*	name;
     const char*	alphabet;
-    const char*	epsilon;
-  } predefined_alphabets[] = { { "letters", ALPHABET_AZ, DEFAULT_EPSILON },
-			       { "alpha", ALPHABET_AZAZ, DEFAULT_EPSILON },
-			       { "digits", ALPHABET_DIGITS, DEFAULT_EPSILON },
-			       { "ascii", ALPHABET_ASCII, DEFAULT_EPSILON },
-			       { 0, 0, 0 } };
+  } predefined_alphabets[] = { { "letters", ALPHABET_AZ },
+			       { "alpha", ALPHABET_AZAZ },
+			       { "digits", ALPHABET_DIGITS },
+			       { "ascii", ALPHABET_ASCII },
+			       { 0, 0 } };
 #endif
 
   error_t parse_opt (int key, char* arg, argp_state* state)
@@ -154,21 +155,12 @@ namespace
 	  if (std::string (alpha->name) == arg)
 	  {
 	    if (key == 'a')
-	    {
 #ifdef WITH_TWO_ALPHABETS
 	      args.add_parser1_option("ALPHABET", alpha->alphabet);
-	      args.add_parser1_option("ONE", alpha->epsilon);
+	    else
+	      args.add_parser2_option("ALPHABET", alpha->alphabet);
 #else
 	      args.add_parser_option("ALPHABET", alpha->alphabet);
-	      args.add_parser_option("ONE", alpha->epsilon);
-#endif /* ! WITH_TWO_ALPHABETS */
-	    }
-#ifdef WITH_TWO_ALPHABETS
-	    else
-	    {
-	      args.add_parser2_option("ALPHABET", alpha->alphabet);
-	      args.add_parser2_option("ONE", alpha->epsilon);
-	    }
 #endif /* ! WITH_TWO_ALPHABETS */
 	    found = true;
 	    break;
@@ -319,6 +311,9 @@ int main (int argc, char* argv[])
   for (std::list<pipe_command>::iterator li = command_list.begin ();
        li != command_list.end (); ++li)
     {
+#ifndef NO_PREDEF_ALPHABETS
+      build_predefined_string(predefined_string);
+#endif
       argp_parse (&argp_setup, li->length, li->arg, 0, 0, &(li->args));
 
       try

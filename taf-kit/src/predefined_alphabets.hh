@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,6 +26,8 @@
  * Predefined alphabets as macros.
  */
 
+# include "parser_options.hh"
+
 // FIXME: " and \0 (\\0)
 # define ALPHABET_ASCII							\
   "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
@@ -35,6 +37,8 @@
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ALPHABET_DIGITS "0123456789"
 
-# define DEFAULT_EPSILON "1"
+void build_predefined_string(char* buffer);
+
+# include "predefined_alphabets.hxx"
 
 #endif /* !PREDEFINED_ALPHABETS_HH */

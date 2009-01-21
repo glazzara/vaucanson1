@@ -36,6 +36,7 @@ COMMON_SOURCES = commands.hh			\
 		 interface.hh			\
 		 main.cc			\
 		 predefined_alphabets.hh	\
+		 predefined_alphabets.hxx	\
 		 pipe.hh			\
 		 pipe.hxx			\
 		 pipe_command_sequence.hh	\

@@ -1,5 +1,25 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	TAF-Kit: Fix the epsilon of predefined alphabets in --help.
+	* taf-kit/src/Makefile.am: Add new file to the distribution.
+	* taf-kit/src/main.cc: Only include the `predefined_alphabets.hh'
+	  header if relevant. Remove any reference to the `DEFAULT_EPSILON'
+	  macro. New variable `predefined_string', to hold the dynamically
+	  calculated string displayed when using --help.
+	  (main) [!NO_PREDEF_ALPHABETS]: Call the new
+	  `build_predefined_string' to populate `predefined_string'.
+	* taf-kit/src/predefined_alphabets.hh: Include the
+	  `parser_options.hh' header file. Remove the definition of
+	  `DEFAULT_EPSILON'. Declare new function `build_predefined_string'.
+	* taf-kit/src/predefined_alphabets.hxx: New: Add the implementation
+	  of the `build_predefined_string'.
+	* taf-kit/tests/vcsn-char-b.test,
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	* taf-kit/tests/vcsn-char-fmp-z.test,
+	* taf-kit/tests/vcsn-char-z.test: Add the regression test.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Disable predefined alphabets for pair contexts.
 	* taf-kit/src/Makefile.am: Define `NO_PREDEF_ALPHABETS' for the
 	  `vcsn-char-char-b', `vcsn-char-int-b' and `vcsn-int-int-b'
