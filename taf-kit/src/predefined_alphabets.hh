@@ -28,16 +28,11 @@
 
 # include "parser_options.hh"
 
-// FIXME: " and \0 (\\0)
-# define ALPHABET_ASCII							\
-  "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-# define ALPHABET_AZ				\
-  "abcdefghijklmnopqrstuvwxyz"
-# define ALPHABET_AZAZ						\
-  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define ALPHABET_DIGITS "0123456789"
-
 const char* build_predefined_string();
+
+/** Find the definition of a predefined alphabet.
+    Return NAME as-is if not found, because we assume this is the alphabet.  */
+const char* alphabet_lookup(const char* name);
 
 # include "predefined_alphabets.hxx"
 

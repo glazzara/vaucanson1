@@ -38,9 +38,7 @@
 #include "argp.h"
 #include "progname.h"
 
-#ifndef NO_PREDEF_ALPHABETS
-# include "predefined_alphabets.hh"
-#endif
+#include "predefined_alphabets.hh"
 
 #include "commands.hh"
 #include "interface.hh"
@@ -128,57 +126,23 @@ namespace
     { 0, 0, 0, 0, 0, 0 }
   };
 
-#ifndef NO_PREDEF_ALPHABETS
-  const struct alphabet
-  {
-    const char*	name;
-    const char*	alphabet;
-  } predefined_alphabets[] = { { "letters", ALPHABET_AZ },
-			       { "alpha", ALPHABET_AZAZ },
-			       { "digits", ALPHABET_DIGITS },
-			       { "ascii", ALPHABET_ASCII },
-			       { 0, 0 } };
-#endif
-
   error_t parse_opt (int key, char* arg, argp_state* state)
   {
-    bool found = false;
     arguments_t& args = *(static_cast <arguments_t*> (state->input));
 
     switch (key)
     {
       case 'a':
-      case 'A':
-#ifndef NO_PREDEF_ALPHABETS
-	for (const alphabet* alpha = predefined_alphabets; alpha->name; ++alpha)
-	{
-	  if (std::string (alpha->name) == arg)
-	  {
-	    if (key == 'a')
-#ifdef WITH_TWO_ALPHABETS
-	      args.add_parser1_option("ALPHABET", alpha->alphabet);
-	    else
-	      args.add_parser2_option("ALPHABET", alpha->alphabet);
-#else
-	      args.add_parser_option("ALPHABET", alpha->alphabet);
-#endif /* ! WITH_TWO_ALPHABETS */
-	    found = true;
-	    break;
-	  }
-	}
-#endif
-	if (!found)
-	{
-	  if (key == 'a')
-#ifdef WITH_TWO_ALPHABETS
-	    args.add_parser1_option("ALPHABET", arg);
-	  else
-	    args.add_parser2_option("ALPHABET", arg);
-#else
-	    args.add_parser_option("ALPHABET", arg);
-#endif /* ! WITH_TWO_ALPHABETS */
-	}
+#ifndef WITH_TWO_ALPHABETS
+	args.add_parser_option("ALPHABET", alphabet_lookup(arg));
 	break;
+#else
+	args.add_parser1_option("ALPHABET", alphabet_lookup(arg));
+	break;
+      case 'A':
+	args.add_parser2_option("ALPHABET", alphabet_lookup(arg));
+	break;
+#endif
       case 'p':
 	args.add_parser_option(NULL, arg);
 	break;

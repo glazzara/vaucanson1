@@ -23,6 +23,42 @@
 
 # include "predefined_alphabets.hh"
 
+// FIXME: " and \0 (\\0)
+# define ALPHABET_ASCII							\
+  "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+# define ALPHABET_AZ				\
+  "abcdefghijklmnopqrstuvwxyz"
+# define ALPHABET_AZAZ						\
+  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define ALPHABET_DIGITS "0123456789"
+
+
+#ifndef NO_PREDEF_ALPHABETS
+namespace {
+  const struct alphabet
+  {
+    const char*	name;
+    const char*	alphabet;
+  } predefined_alphabets[] = { { "letters", ALPHABET_AZ },
+			       { "alpha", ALPHABET_AZAZ },
+			       { "digits", ALPHABET_DIGITS },
+			       { "ascii", ALPHABET_ASCII },
+			       { 0, 0 } };
+}
+#endif
+
+const char* alphabet_lookup(const char* name)
+{
+#ifndef NO_PREDEF_ALPHABETS
+  for (const alphabet* alpha = predefined_alphabets; alpha->name; ++alpha)
+    if (strcasecmp(alpha->name, name) == 0)
+      return alpha->alphabet;
+#endif
+  return name;
+}
+
+
+static
 std::string build_default_eps(std::string alphabet)
 {
   // Type helpers.

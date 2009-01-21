@@ -1,3 +1,16 @@
+2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/predefined_alphabets.hh,
+	taf-kit/src/predefined_alphabets.hxx (alphabet_lookup): New function.
+	* taf-kit/src/main.cc (parse_opt): Use alphabet_lookup()
+	to simplify the detection of predefined alphabet.
+	(alphabet): Move this structure...
+	* taf-kit/src/predefined_alphabets.hxx (alphabet): ... here.
+	* taf-kit/src/predefined_alphabets.hh (ALPHABET_ASCII,
+	ALPHABET_AZ, ALPHABET_AZAZ, ALPHABET_DIGITS): Move these
+	definitions...
+	* taf-kit/src/predefined_alphabets.hxx: ... here.
+
 2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Add preconditions and remove debug code.
