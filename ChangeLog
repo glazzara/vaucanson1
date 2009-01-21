@@ -1,5 +1,9 @@
 2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/predefined_alphabets.hh: More doc.
+
+2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/predefined_alphabets.hxx (ALPHABET_ASCII,
 	ALPHABET_AZ, ALPHABET_AZAZ, ALPHABET_DIGITS): Get rid of these
 	macros.

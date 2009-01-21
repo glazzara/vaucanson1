@@ -20,14 +20,13 @@
 
 /**
  * @file predefined_alphabets.hh
- * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
- *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
- * Predefined alphabets as macros.
+ * Access to predefined alphabets.
  */
 
 # include "parser_options.hh"
 
+/** Return a help string for predefined alphabets. */
 const char* build_predefined_string();
 
 /** Find the definition of a predefined alphabet.
