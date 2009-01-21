@@ -1,5 +1,12 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Use createElementNS when creating DOM nodes.
+	* include/vaucanson/xml/tools.hxx (create_element): Use the proper
+	  name-space aware function `createElementNS' as Vaucanson has its
+	  own name-space.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Cleanup dead code.
 	* include/Makefile.am: Remove files from the distribution.
 	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh: Remove.
