@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 # include <algorithm>
 # include <sstream>
 
+# include <vaucanson/xml/tools.hh>
 # include <vaucanson/xml/strings.hh>
 # include <vaucanson/xml/builders.hh>
 
@@ -32,7 +33,7 @@ namespace vcsn {
     template<typename M_, typename W_>
     XmlExpVisitor<M_,W_>::XmlExpVisitor(xercesc::DOMDocument* doc, const char* node_name) :
       doc_(doc),
-      label_(doc_->createElement(transcode(node_name))),
+      label_(xml::tools::create_element(doc_, node_name)),
       current_(label_)
     {}
 
@@ -59,7 +60,7 @@ namespace vcsn {
 				   const Node<M_, W_>* right_)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(transcode("product"));
+      current_ = xml::tools::create_element(doc_, "product");
       sum_or_product(left_, right_);
       tmp->appendChild(current_);
       current_ = tmp;
@@ -71,7 +72,7 @@ namespace vcsn {
 			       const Node<M_, W_>* right_)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(transcode("sum"));
+      current_ = xml::tools::create_element(doc_, "sum");
       sum_or_product(left_, right_);
       tmp->appendChild(current_);
       current_ = tmp;
@@ -82,7 +83,7 @@ namespace vcsn {
     XmlExpVisitor<M_, W_>::star(const Node<M_, W_>* node)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(transcode("star"));
+      current_ = xml::tools::create_element(doc_, "star");
       weight_or_star(node);
       tmp->appendChild(current_);
       current_ = tmp;
@@ -93,7 +94,7 @@ namespace vcsn {
     void
     XmlExpVisitor<M_, W_>::set_weight(const T& w, xercesc::DOMElement* node)
     {
-      xercesc::DOMElement* weight = doc_->createElement(transcode("weight"));
+      xercesc::DOMElement* weight = xml::tools::create_element(doc_, "weight");
       std::stringstream ss;
       ss << w;
       weight->setAttribute(transcode("value"), transcode(ss.str()));
@@ -115,7 +116,7 @@ namespace vcsn {
     XmlExpVisitor<M_, W_>::left_weight(const W_& w, const Node<M_, W_>* node)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(transcode("leftExtMul"));
+      current_ = xml::tools::create_element(doc_, "leftExtMul");
       set_weight(w, current_);
       weight_or_star(node);
       tmp->appendChild(current_);
@@ -127,7 +128,7 @@ namespace vcsn {
     XmlExpVisitor<M_, W_>::right_weight(const W_& w, const Node<M_, W_>* node)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(transcode("rightExtMul"));
+      current_ = xml::tools::create_element(doc_, "rightExtMul");
       set_weight(w, current_);
       weight_or_star(node);
       tmp->appendChild(current_);
@@ -144,14 +145,14 @@ namespace vcsn {
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::zero()
     {
-      xercesc::DOMElement* zero = doc_->createElement(transcode("zero"));
+      xercesc::DOMElement* zero = xml::tools::create_element(doc_, "zero");
       current_->appendChild(zero);
     }
 
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::one()
     {
-      xercesc::DOMElement* identity = doc_->createElement(transcode("one"));
+      xercesc::DOMElement* identity = xml::tools::create_element(doc_, "one");
       current_->appendChild(identity);
     }
 

@@ -1,5 +1,11 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Factor more code with create_element.
+	* include/vaucanson/xml/xml_exp_visitor.hxx: Replace each call of
+	  `createElement' by a corresponding call of `create_element'.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Use createElementNS when creating DOM nodes.
 	* include/vaucanson/xml/tools.hxx (create_element): Use the proper
 	  name-space aware function `createElementNS' as Vaucanson has its
