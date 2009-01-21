@@ -1,3 +1,9 @@
+2009-01-21  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Use fabs / fabsf instead of abs.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	  Replace abs by fabs and fabsf in op_eq for float and double.
+
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a typo in the ChangeLog.
