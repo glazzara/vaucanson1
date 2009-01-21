@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -71,7 +71,8 @@ namespace vcsn
 	parser_(parser),
 	lex_trace_(lex_trace),
 	close_weight_("}"),
-	token_tab_(8),
+	// Reserve seven elements for the "visible" tokens.
+	token_tab_(7),
 	error_(error)
       {
 	// Get the series representation.
@@ -85,10 +86,9 @@ namespace vcsn
 	token_tab_[5] = rep->zero;
 	token_tab_[6] = rep->open_weight;
 	close_weight_ = rep->close_weight;
-	for (unsigned i = 0; i < rep->spaces.size(); i++)
-	{
-	  token_tab_[7 + i] = rep->spaces[i];
-	}
+
+	// Concat the spaces representation vector.
+	token_tab_.insert(token_tab_.end(), rep->spaces.begin(), rep->spaces.end());
 
 	std::string::const_iterator sit;
 	semiring_elt_t ww(e_.structure().semiring());

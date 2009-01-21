@@ -1,3 +1,12 @@
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a segfault when handling more than one space (Close #180).
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+	  (Lexer::Lexer): Reserve seven elements only for `token_tab_'.
+	  Rewrite a loop using an STL idiom.
+	* taf-kit/tests/vcsn-char-b.test: Add the regression test for this
+	  bug.
+
 2009-01-16  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
 
 	Prevent vaucanswig from compiling reduce algorithm.
