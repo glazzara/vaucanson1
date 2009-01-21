@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,42 +19,24 @@
 
 # include <vaucanson/algorithms/internal/evaluation.hh>
 
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 
+// FIXME: check dead code
+//# include <vaucanson/algorithms/standard.hh>
+
+# include <vaucanson/algorithms/standard_of.hh>
+
+// Required by DefaultChooser.
+# include <vaucanson/algorithms/aut_to_exp.hh>
+
+# include <vaucanson/algorithms/extension.hh>
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/trim.hh>
-# include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/extension.hh>
 # include <vaucanson/algorithms/image.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/misc/usual_macros.hh>
 
-namespace vcsn {
-
-  template <typename SA, typename ST, typename SRET,
-	    typename Auto_t, typename Trans_t, typename Ret_t>
-  void
-  do_evaluation(const AutomataBase<SA>&,
-		const TransducerBase<ST>&,
-		const AutomataBase<SRET>&,
-		const Auto_t& a,
-		const Trans_t& t,
-		Ret_t& ret)
-  {
-    image(trim(product(t, extension(a, t))), ret);
-  }
-
-  template<typename SA, typename TA, typename ST,
-	   typename TT, typename SRET, typename TRET>
-  void
-  evaluation(const Element<SA, TA>& a, const Element<ST, TT>& t,
-	     Element<SRET, TRET>& ret)
-  {
-    do_evaluation(a.structure(), t.structure(), ret.structure(), a, t, ret);
-  }
-
+namespace vcsn
+{
   template<typename U, typename V,
            typename Trans_t, typename M>
   void

@@ -308,6 +308,8 @@ vaucanson/algorithms/eval.hh					\
 vaucanson/algorithms/eval.hxx					\
 vaucanson/algorithms/evaluation_fmp.hh				\
 vaucanson/algorithms/evaluation_fmp.hxx				\
+vaucanson/algorithms/evaluation_rw.hh				\
+vaucanson/algorithms/evaluation_rw.hxx				\
 vaucanson/algorithms/extension.hh				\
 vaucanson/algorithms/extension.hxx				\
 vaucanson/algorithms/finite_support_conversion.hh		\

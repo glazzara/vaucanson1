@@ -1,5 +1,22 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	rw_composition: New evaluation_rw algorithm.
+	* include/Makefile.am: Add new files to the distribution.
+	* include/vaucanson/algorithms/evaluation_rw.hh: New.
+	* include/vaucanson/algorithms/evaluation_rw.hxx: New.
+	* include/vaucanson/algorithms/internal/evaluation.hxx: Move the
+	  functions `evaluation' and `do_evaluation' to `evaluation_rw' and
+	  `do_evaluation_rw' respectively (see `evaluation_rw.hh'). Cleanup
+	  included headers.
+	* include/vaucanson/algorithms/rw_composition.hxx: Include the header
+	  file `internal/evaluation.hh'.
+	* include/vaucanson/contexts/transducer_functions.thh,
+	* include/vaucanson/contexts/transducer_maker.thxx: Include
+	  `evaluation_rw.hh' instead of `internal/evaluation.hh'. Call
+	  `evaluation_rw' instead of `evaluation'.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	TAF-Kit: Fix the epsilon of predefined alphabets in --help.
 	* taf-kit/src/Makefile.am: Add new file to the distribution.
 	* taf-kit/src/main.cc: Only include the `predefined_alphabets.hh'

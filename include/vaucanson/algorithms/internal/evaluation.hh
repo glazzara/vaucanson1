@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_EVALUATION_HH
 
 /** @addtogroup algorithms *//** @{ */
+// FIXME: rename this file to partial_evaluation, split with partial_elimination.
 /**
  * @file evaluation.hh
  *
@@ -31,26 +32,9 @@
 
 # include <vaucanson/automata/concept/handlers.hh>
 
-namespace vcsn {
-
+namespace vcsn
+{
   /** @addtogroup algorithms *//** @{ */
-
-  // FIXME: be more precise in the documentation
-  /**
-   * Evaluate for a "letterized" automaton and a realtime transducer.
-   *
-   * @param a lhs
-   * @param t rhs
-   * @param ret the result of the evaluation
-   */
-  template<typename SA, typename TA,
-	   typename ST, typename TT,
-	   typename SARET, typename TARET>
-  void
-  evaluation(const Element<SA, TA>& a,
-	     const Element<ST, TT>& t,
-	     Element<SARET, TARET>& ret);
-
   /**
    * This function computes a set of expression, after
    * having eliminated all states which are not initial
@@ -90,10 +74,10 @@ namespace vcsn {
 
   /** @} */
 
-}
+} // ! vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
 #  include <vaucanson/algorithms/internal/evaluation.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_EVALUATION_HH
