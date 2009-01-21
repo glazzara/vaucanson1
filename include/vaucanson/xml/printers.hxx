@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,10 +20,11 @@
 
 # include <fstream>
 
-# include <vaucanson/xml/xml_xerces_stream.hh>
 # include <vaucanson/xml/strings.hh>
 # include <vaucanson/xml/tools.hh>
 # include <vaucanson/xml/builders.hh>
+
+# include <vaucanson/xml/internal/ios.hh>
 
 namespace vcsn
 {
@@ -106,17 +107,10 @@ namespace vcsn
 	create_final(*f, node);
 
       // Print it!
-
-      XMLXercesStream<std::ostream>* target = new XMLXercesStream<std::ostream>(out);
-      DOMWriter* writer = impl_->createDOMWriter();
-
-      if (writer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-	writer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
-      writer->writeNode(target, *root_);
-      writer->release();
+      print_xml(out, impl_, root_);
       out << std::endl;
+
       delete doc_;
-      delete target;
     }
 
     template <class Auto>

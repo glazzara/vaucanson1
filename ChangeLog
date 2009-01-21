@@ -1,5 +1,30 @@
 2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	XML: Add support for xerces-c 3.0 (Close #193).
+	* build-aux/vcsn-xml.m4: Update the macro `_VCSN_CHECK_XML' to check
+	  for xerces-c version x such as 2.3 <= x <= 3. Update the C++ ABI
+	  check with code from `internal/ios.hh'.
+	* include/Makefile.am: Update distributed files.
+	* include/vaucanson/xml/parsers.hxx: Include `xml/internal/ios.hh'
+	  instead of `xml/ios.hh'.
+	* include/vaucanson/xml/printers.hxx (AutPrinter::print): Use the
+	  new `print_xml' function declared in `internal/ios.hh'.
+	* include/vaucanson/xml/ios.hh,
+	* include/vaucanson/xml/ios.hxx,
+	* include/vaucanson/xml/xml_xerces_stream.hh,
+	* include/vaucanson/xml/xml_xerces_stream.hxx: Merge these files in
+	  the new internal `ios.hh' and `ios.hxx'.
+	* include/vaucanson/xml/internal/ios.hh,
+	* include/vaucanson/xml/internal/ios.hxx: These files declare all
+	  the low level stream handling of Vaucanson, and xerces-c major
+	  version dependent code: New `print_xml' function to hide from user
+	  level code the XERCES_VERSION_MAJOR macro.
+	  (BinCxxInputStream::curPos, BinCxxInputStream::readBytes,
+	  XMLXercesStream::writeChars): Update prototype to use `XMLSize_t'
+	  and `XERCES_FILEPOS'.
+
+2009-01-21  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	XML: Factor more code with create_element.
 	* include/vaucanson/xml/xml_exp_visitor.hxx: Replace each call of
 	  `createElement' by a corresponding call of `create_element'.

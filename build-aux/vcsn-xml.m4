@@ -1,6 +1,6 @@
 # vcsn-xml.m4					-*- Autoconf -*-
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2005, 2006 The Vaucanson Group.
+# Copyright (C) 2005, 2006, 2009 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -39,10 +39,10 @@ AC_DEFUN([_VCSN_CHECK_XML],
         AC_CHECK_HEADER([xercesc/util/XercesVersion.hpp],
                         [AC_COMPILE_IFELSE([AC_LANG_SOURCE([
 #include <xercesc/util/XercesVersion.hpp>
-#if XERCES_VERSION_MAJOR != 2
+#if XERCES_VERSION_MAJOR < 2 || XERCES_VERSION_MAJOR > 3
 # error "Bad Xerces-C++ major version."
 #endif
-#if XERCES_VERSION_MINOR < 3
+#if XERCES_VERSION_MAJOR == 2 && XERCES_VERSION_MINOR < 3
 # error "Bad Xerces-C++ minor version."
 #endif
                                                       ])],
@@ -67,6 +67,16 @@ AC_DEFUN([_VCSN_CHECK_XML],
 #include <xercesc/util/XMLUniDefs.hpp>
 #include <xercesc/util/XMLString.hpp>
 
+/// The type used by Xerces-C++ for the file position type.
+# if (XERCES_VERSION_MAJOR == 2)
+#  define XMLSize_t unsigned int
+#  define XERCES_FILEPOS XMLSize_t
+# elif (XERCES_VERSION_MAJOR == 3)
+#  define XERCES_FILEPOS XMLFilePos
+# else
+#  error "Bad Xerces-C++ major version."
+# endif
+
 int main() {
   const char *foo = "foo";
   using namespace xercesc;
@@ -85,7 +95,7 @@ int main() {
 #include <xercesc/sax/InputSource.hpp>
 #include <xercesc/util/BinInputStream.hpp>
 
-// Taken from vaucanson/xml/ios.h{h,xx}.
+// Taken from vaucanson/xml/internal/ios.h{h,xx}.
 namespace vcsn
 {
     namespace xml
@@ -98,7 +108,7 @@ namespace vcsn
 
       public:
 	BinCxxInputStream(std::istream* in) : _in(in), _pos(0) { }
-	virtual unsigned int curPos() const;
+	virtual XERCES_FILEPOS curPos() const;
 	virtual unsigned readBytes (XMLByte *const toFill,
 				    const unsigned int maxToRead);
       };
@@ -115,7 +125,7 @@ namespace vcsn
       }
 
       inline
-      unsigned int
+      XERCES_FILEPOS
       BinCxxInputStream::curPos() const
       {
 	return _pos;

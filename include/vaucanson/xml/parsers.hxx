@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 # include <cstring>
 # include <xercesc/sax2/XMLReaderFactory.hpp>
 
-# include <vaucanson/xml/ios.hh>
+# include <vaucanson/xml/internal/ios.hh>
 
 namespace vcsn
 {

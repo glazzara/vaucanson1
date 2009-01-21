@@ -538,8 +538,6 @@ vaucanson/xml/handlers.hh			\
 vaucanson/xml/handlers.hxx			\
 vaucanson/xml/handlers_base.hh			\
 vaucanson/xml/handlers_base.hxx			\
-vaucanson/xml/ios.hh				\
-vaucanson/xml/ios.hxx				\
 vaucanson/xml/parsers.hh			\
 vaucanson/xml/parsers.hxx			\
 vaucanson/xml/printers.hh			\
@@ -550,13 +548,13 @@ vaucanson/xml/strings.hh			\
 vaucanson/xml/strings.hxx			\
 vaucanson/xml/tools.hh				\
 vaucanson/xml/tools.hxx				\
-vaucanson/xml/xml_xerces_stream.hh 		\
-vaucanson/xml/xml_xerces_stream.hxx		\
 vaucanson/xml/xml_exp_visitor.hh		\
 vaucanson/xml/xml_exp_visitor.hxx		\
 vaucanson/xml/xmleq.hh				\
 vaucanson/xml/xmleq.hxx				\
 vaucanson/xml/XML.hh				\
-vaucanson/xml/XML.hxx
+vaucanson/xml/XML.hxx				\
+vaucanson/xml/internal/ios.hh			\
+vaucanson/xml/internal/ios.hxx
 
 include $(top_srcdir)/include/generic_contexts.mk
