@@ -55,20 +55,20 @@ const char* build_predefined_string()
 {
   static std::string output;
 
-  // Build the string with dynamic values for epsilon representations.
+  // Build the string with dynamic values for empty word representations.
   output += "The following alphabets are predefined:\n"
 	   "	 `letters': Use [a-z] as the alphabet, "
 	 + build_default_eps(ALPHABET_AZ)
-	 + " as epsilon\n"
+	 + " as empty word\n"
 	 + "	 `alpha': Use [a-zA-Z] as the alphabet, "
 	 + build_default_eps(ALPHABET_AZAZ)
-	 + " as epsilon\n"
+	 + " as empty word\n"
 	 + "	 `digits': Use [0-9] as the alphabet, "
 	 + build_default_eps(ALPHABET_DIGITS)
-	 + " as epsilon\n"
+	 + " as empty word\n"
 	 + "	 `ascii': Use ascii characters as the alphabet, "
 	 + build_default_eps(ALPHABET_ASCII)
-	 + " as epsilon\n";
+	 + " as empty word\n";
 
   return output.c_str();
 }

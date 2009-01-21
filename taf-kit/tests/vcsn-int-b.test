@@ -71,7 +71,7 @@ $VCSN is-deterministic 33.xml
 $VCSN complete 33.xml \| is-complete -
 $VCSN determinize 33.xml \| is-deterministic -
 
-# Test epsilon
+# Test empty word
 $VCSN --alphabet=12,11 standard '(11 + e).12' > e.xml
 test 1 = `$VCSN eval e.xml '12'`
 test 0 = `$VCSN eval e.xml '11'`

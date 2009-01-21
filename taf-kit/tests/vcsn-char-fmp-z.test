@@ -162,11 +162,11 @@ diff wd-new.xml wd-ref.xml
 
 # Check predefined alphabets in help.
 $VCSN --help |grep predefined
-eps=`$VCSN --help |sed -e "/letters'/s/.*, \([^ ]*\) as epsilon/\1/p;d"`
+eps=`$VCSN --help |sed -e "/letters'/s/.*, \([^ ]*\) as empty word/\1/p;d"`
 test x"$eps" = x"1"
-eps=`$VCSN --help |sed -e "/alpha'/s/.*, \([^ ]*\) as epsilon/\1/p;d"`
+eps=`$VCSN --help |sed -e "/alpha'/s/.*, \([^ ]*\) as empty word/\1/p;d"`
 test x"$eps" = x"1"
-eps=`$VCSN --help |sed -e "/digits'/s/.*, \([^ ]*\) as epsilon/\1/p;d"`
+eps=`$VCSN --help |sed -e "/digits'/s/.*, \([^ ]*\) as empty word/\1/p;d"`
 test x"$eps" = x"e"
-eps=`$VCSN --help |sed -e "/ascii'/s/.*, \([^ ]*\) as epsilon/\1/p;d"`
+eps=`$VCSN --help |sed -e "/ascii'/s/.*, \([^ ]*\) as empty word/\1/p;d"`
 test x"$eps" = x"_e"

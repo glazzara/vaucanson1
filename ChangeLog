@@ -1,5 +1,13 @@
 2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/predefined_alphabets.hxx (build_predefined_string):
+	Write "empty word" not "epsilon".
+	* taf-kit/tests/vcsn-char-b.test, taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test, taf-kit/tests/vcsn-char-z.test,
+	taf-kit/tests/vcsn-int-b.test: Likewise.
+
+2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/main.cc (predefined_string): Compute it at startup...
 	(main) ... not here.
 	* taf-kit/src/predefined_alphabets.hxx,
