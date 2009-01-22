@@ -1,3 +1,9 @@
+2009-01-22  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Set the correct rights in lrde-upload.sh.
+	* lrde-upload.sh: Add read permissions for everyone on
+	  `vaucanson-manual.pdf'.
+
 2009-01-22  Alex Hamelin  <hamelin@lrde.epita.fr>
 
 	Release 1.2.95.
