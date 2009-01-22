@@ -1,3 +1,12 @@
+2009-01-22  Alex Hamelin  <hamelin@lrde.epita.fr>
+
+	Release 1.2.95.
+	* AUTHORS: Add new author.
+	* configure.ac: Change version number.
+	* doc/News.txt: Update for release.
+	* doc/share/styles/myacronym.sty,
+	* doc/share/styles/misc.hva: make share-up.
+	
 2009-01-21  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/predefined_alphabets.hh: More doc.
