@@ -1,5 +1,5 @@
 Vaucanson, a generic library for finite state machines.
-Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The
 Vaucanson Group.
 
 This program is free software; you can redistribute it and/or
@@ -16,8 +16,6 @@ The Vaucanson Group consists of people listed in the 'AUTHORS' file.
  Introduction to Vaucanson
 ===========================
 
-:Date: 2006-05-31
-
 Vaucanson_, a C++ generic library for weighted finite state machines.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
@@ -28,29 +26,29 @@ Vaucanson_, a C++ generic library for weighted finite state machines.
 Overview
 ========
 
-Initiated  by Jacques  Sakarovitch  in 2000,  Vaucanson  is a  project
-developed by the École Nationale Supérieure des Télécommunications [1]
-and the EPITA Research and Development Laboratory (LRDE) [2].
+Initiated by Jacques Sakarovitch in 2000, Vaucanson is a project
+developed by the `École Nationale Supérieure des Télécommunications`__
+and the `EPITA Research and Development Laboratory (LRDE)`__.
 
-.. [1] http://www.enst.fr
+__ http://www.enst.fr
+__ http://www.lrde.epita.fr
 
-.. [2] http://www.lrde.epita.fr
+The goal of this library is to enable the development of C++ programs
+manipulating weighted finite automata in an abstract and general way
+with, at the same time, a large specialization power.  On the one
+hand, we can write algorithms working on every automaton with weights
+in any semiring and with words from any free monoids.  And on the
+other hand, a particular algorithm can be specialized for a particular
+data structure.
 
-The goal of this library is  to enable the development of C++ programs
-in  an abstract  and  general way  with,  at the  same  time, a  large
-specialization  power.   Indeed,  on   the  one  hand,  we  can  write
-algorithms working on every  automaton with weights over any semirings
-and  with words  from any  free  monoids.  And  on the  other hand,  a
-particular  algorithm  can  be   specialized  for  a  particular  data
-structure implementing only a pseudo behaviour.
-
-Yet,   Vaucanson  is  an   ongoing  development   project.   Therefore
-algorithms,  data  structures and  the  general  architecture are  not
+Yet, Vaucanson is an ongoing development project.  Therefore
+algorithms, data structures and the general architecture are not
 totally stable and well tested.
 
-Please send  any question or comments  to vaucanson@lrde.epita.fr, and
+Please send any question or comments to vaucanson@lrde.epita.fr, and
 report bugs to either our issue tracker http://vaucanson.lrde.org/, or
 to vaucanson-bugs@lrde.epita.fr.
+
 
 Installation
 ============
@@ -83,8 +81,8 @@ check the whole library.  Running the test suite may require up to
 Additional features
 -------------------
 
-There  is a  Python  interpreter in  the  package. It  is disabled  by
-default because its compilation takes  several hours. If you have time
+There is a Python interpreter in the package. It is disabled by
+default because its compilation takes several hours. If you have time
 to spare, use::
 
 	./configure --enable-vaucanswig
@@ -97,6 +95,13 @@ To specify a special path for the Boost-C++ library::
 
 	./configure --with-boost=/absolute/path/to/boost
 
+Vaucanson can use two graph implementations: ``listg`` is a
+representation based on adjacency lists, while ``bmig`` is a
+representation using Boost Multi-Index containers.  The default
+implementation is ``bmig`` and you can select the other with::
+
+	./configure --default-graph-impl=listg
+
 For further configure options, type::
 
 	./configure --help
@@ -107,35 +112,44 @@ Layout of the tarball
 
 The Vaucanson project directory layout is as follows:
 
-argp
-   A freestanding version of the GNU C Library's argp, a powerful
-   command line argument parser.  Used by TAF-Kit.
-
 build-aux
-   Auxialiary tools used by the GNU Build System during "make"
-   stages.
+   Auxialiary tools used by the GNU Build System during ``configure``
+   and ``make`` stages.
 
 data
-   Files to be installed on your system.
+   Data files to be installed on your system.  They include an XML schema,
+   example automata, and Emacs customizations.
 
 debian
-   Data to generated Debian packages.
+   Data to generate Debian packages.
 
 doc
-   The documentations.
+   The documentation.
 
    manual
       The Vaucanson User Guide.
    share
       LaTeX components used to generate the documentation.
-   xml
-      The XML Proposal for Automata I/O.
+   ref
+      _Doxygen documentation (automatically generated from the source code)
+
+gnulib
+   Portability functions from the ``gnulib`` library.
+
+lib
+   Instantiation of some contexts as libraries.
 
 include
    The code of the Vaucanson C++ Library.
 
+m4
+   Portability macros from the ``gnulib`` library.
+
 src
-   Demonstration tools, tests.
+   Benchmarks, demonstration executables, and test cases.
+
+tools
+   Developer scripts.
 
 taf-kit
    TAF-Kit sources and tests.
@@ -146,22 +160,22 @@ vaucanswig
 Requirements
 ============
 
-Vaucanson was tested with the `GNU Compiler Collection (GCC)`_ version 4.1.x
-and 4.2.x, and with ICC_ version 9 and 10.1.   The code is  fully compliant
-with  the  ISO  C++  standard  (ISO-IEC  14882)  to  permit  a  higher
+Vaucanson was tested with the `GNU Compiler Collection (GCC)`_ version
+4.1.x and 4.2.x, and with ICC_ version 9 and 10.1.  The code is fully
+compliant with the ISO C++ standard (ISO-IEC 14882) to permit a higher
 portability in the future.
 
 .. _GNU Compiler Collection (GCC): http://gcc.gnu.org/
 .. _ICC: http://www.intel.com/software/products/compilers/
 
-High verbose  mode of the testing  suites uses the AT&T  dot format to
-save automaton in  a human readable file.  Use  Graphviz_ to visualize
-these .dot files.
+TAF-Kit and some test cases can use the AT&T dot format to save
+automaton in a human readable file.  You should install Graphviz_ to
+visualize these ``.dot`` files or run the test suite.
 
 .. _Graphviz: http://www.research.att.com/sw/tools/graphviz/
 
-If  you want  to use  the XML  I/O system,  you will  need  the Apache
-`Xerces-C++`_ library version 2.3 or above.
+The XML I/O system is based on the Apache `Xerces-C++`_ library
+version 2.3 or above.
 
 .. _Xerces-C++: http://xml.apache.org/xerces-c/
 
@@ -172,9 +186,9 @@ DarwinPorts on MacOS should pay attention to the compiler that was
 used to build their version of the Xerces-C++ library, as it might
 differ from the one used to build Vaucanson.
 
-.. _Boost-C++: http://www.boost.org/
+.. _Boost: http://www.boost.org/
 
-`Boost-C++`_ has been introduced since Vaucanson 1.1. It is a C++ library
+`Boost`_ has been introduced since Vaucanson 1.1. It is a C++ library
 which provides many useful objects, including hash tables. Currently,
 Boost is used in algorithms only, but its use shall be extended to
 automata structures and other portions of code. You must install this
@@ -206,15 +220,8 @@ There are other sources of interest in the distribution.
 
 - Frequently asked questions are answered in the file ``FAQ``.
 
-- Some information about input and output of automata can be found in
-  the file ``README-IO``.
-
-- Documentation  about the  XML  I/O  subsystem can  be  found in  the
-  ``doc/xml`` subdirectory.
-
 - The library  reference manual, generated by Doxygen_,  is located in
-  ``doc/ref``. It comes distributed as an archive of HTML files called
-  ``ref.tar.gz``.
+  ``doc/ref``.
 
 - Information about  the test suite generation mechanism  can be found
   in the file ``src/tests/test-suites/README``.
@@ -241,22 +248,24 @@ addresses follow.
 * Vaucanson - ENST
 
   | Jacques Sakarovitch
+  | Ecole nationale supérieure des télécommunications
   | 46, rue Barrault
-  | F-75013 Paris
+  | 75634 Paris CEDEX 13
   | France
 
-* Vaucanson - LIAFA
+* Vaucanson - IGR
 
   | Sylvain Lombardy
-  | 175, rue du Chevaleret
-  | F-75013 Paris
+  | Laboratoire d'informatique de l'Institut Gaspard Monge
+  | Université Paris-Est Marne-la-Vallée
+  | 77454 Marne-la-Vallée CEDEX 2
   | France
 
 * Vaucanson - LRDE
 
-  | 24,rue Pasteur
-  | Paristalie, batiment X, aile Mistral
-  | F-94270 Le Kremlin Bicêtre cedex
+  | Laboratoire de Recherche et Développement de l'EPITA
+  | 14-16 rue Voltaire
+  | 94276 Le Kremlin-Bicêtre CEDEX
   | France
 
 .. Local Variables:
