@@ -11,33 +11,29 @@ This document describes major updates to the Vaucanson_ project.
 Vaucanson 1.2.95, January 22th, 2009
 ====================================
 
-- Enable choosing default implementation by using the option 
+- Enable choosing default implementation by using the option
   ``--with-default-graph-impl`` at configure time.
 
 - The Vaucanson library
 
   + The following iterator interfaces have been removed: ``deltac``,
     ``rdeltac``, ``delta_state_iterator``, ``rdelta_state_iterator``.
-
-  + Monoids and Series representations have been overhauled (Static 
+  + Monoids and Series representations have been overhauled (Static
     polymorphism via CRTP).
-
-  + New interface ``parse_letter`` to parse literal strings as letters.   
-
+  + New interface ``parse_letter`` to parse literal strings as letters.
   + New reduce algorithm to minimize non-deterministic automatons with weights
     in division rings.
 
 - XML
 
   + New program quotkbaseb in the automaton library.
-
   + Support of Xerces 3.0.
 
 - TAF-Kit
 
   + ``$VCSN_DATA_PATH`` now supports colons.
-
-  + New instances: ``vcsn-char-r``.
+  + New instance: ``vcsn-char-r``.
+  + New command: ``realtime-exp``.
 
 - Demo
 

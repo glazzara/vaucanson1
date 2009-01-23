@@ -1,5 +1,9 @@
 2009-01-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/NEWS.txt: Mention realtime-exp and fix a typo.
+
+2009-01-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/FAQ.txt: Delete.  Of the three entries that was in this
 	FAQ two are obsolete (NAN and getopt), and one is not really a
 	FAQ.
