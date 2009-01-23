@@ -103,7 +103,7 @@ Don't do these steps from memory.
   - Make sure ``doc/NEWS.txt`` is up-to-date.
     (Mention important known bugs!)
   - Make sure ``doc/README.txt`` is up-to-date.
-  - Make sure ``doc/FAQ.txt`` is up-to-date.
+  - Make sure ``doc/HACKING.txt`` is up-to-date.
 
   - Make sure AUTHORS is up-to-date.
 
@@ -219,6 +219,26 @@ called ``libtool``, GNU ``libtool`` is usually installed as
 ``glibtool``.  Alternatively, you may want to use the copy of
 ``libtool`` output by ``configure`` at the root of Vaucanson's build
 tree.
+
+
+How can I choose a specific graph implementation?
+-------------------------------------------------
+
+Use ``configure``'s ``--with-default-graph-impl`` option to control
+the default graph implementation of the library.  The default is
+``bmig`` (a graph represented using Boost Multi Indexes), the other
+choice is ``listg`` (a graph represented using adjacency lists).  For
+instance if you want to compile Vaucanson using ``listg`` by default,
+use::
+
+  ./configure --with-default-graph-impl=listg
+
+The Vaucanson libraries will be compiled with this default
+implementation, but if you do not use these libraries you can switch
+the default graph implementation at any time using the
+``VCSN_DEFAULT_GRAPH_IMPL`` preprocessor macro, for instance::
+
+  make CPPFLAGS=-DVCSN_DEFAULT_GRAPH_IMPL=listg myprogram
 
 .. Local Variables:
 .. mode: rst

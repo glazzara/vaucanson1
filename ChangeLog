@@ -1,5 +1,15 @@
 2009-01-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/FAQ.txt: Delete.  Of the three entries that was in this
+	FAQ two are obsolete (NAN and getopt), and one is not really a
+	FAQ.
+	(VCSN_DEFAULT_GRAPH_IMPL): Move this documentation ...
+	* doc/HACKING.txt: ... here.
+	* doc/README.txt: Do not mention de FAQ.
+	* doc/Makefile.am (EXTRA_DIST, dist_pdf_DATA): Update.
+
+2009-01-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/README.txt: Remove the date as it hasn't been updated since
 	2006.
 	(Overview): Mention weighted finite automata.
