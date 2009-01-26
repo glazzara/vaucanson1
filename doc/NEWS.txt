@@ -18,21 +18,24 @@ Vaucanson 1.2.95, January 22th, 2009
 
   + The following iterator interfaces have been removed: ``deltac``,
     ``rdeltac``, ``delta_state_iterator``, ``rdelta_state_iterator``.
-  + Monoids and Series representations have been overhauled (Static
-    polymorphism via CRTP).
-  + New interface ``parse_letter`` to parse literal strings as letters.
-  + New reduce algorithm to minimize non-deterministic automatons with weights
-    in division rings.
+  + New interface ``parse_letter`` to check whether a character string
+    represents a single letter of an alphabet or not.
+  + Add an implementation of the reduce algorithm for automata with weights
+    in a division ring.
+
+- Automaton library
+
+  + New program quotkbaseb.
 
 - XML
 
-  + New program quotkbaseb in the automaton library.
   + Support of Xerces 3.0.
 
 - TAF-Kit
 
   + ``$VCSN_DATA_PATH`` now supports colons.
-  + New instance: ``vcsn-char-r``.
+  + New instance: ``vcsn-char-r`` for automata on a free monoid of char
+    and with weights in R (implemented as floats).
   + New command: ``realtime-exp``.
 
 - Demo

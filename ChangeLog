@@ -1,3 +1,8 @@
+2009-01-26  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix NEWS.txt.
+	* doc/NEWS.txt: Be more precise about the new features.
+
 2009-01-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/NEWS.txt: Mention realtime-exp and fix a typo.
