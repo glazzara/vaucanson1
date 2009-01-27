@@ -1,3 +1,10 @@
+2009-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/Makefile.am (TEXI2DVI_FLAGS): Do not hardcode the build
+	directory to prevent race conditions during parallel builds of
+	several PDF files.
+	(mostlyclean-local): Delete all *.t2d directories.
+
 2009-01-26  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix NEWS.txt.

@@ -94,6 +94,9 @@ uninstall-local:
 maintainer-clean-local:
 	rm -rf $(DOCDIR) $(srcdir)/$(DOCDIR)
 
+mostlyclean-local:
+	rm -rf *.t2d
+
 ## ------------------- ##
 ## RST documentation.  ##
 ## ------------------- ##
@@ -102,7 +105,7 @@ dist_pdf_DATA = README.pdf HACKING.pdf NEWS.pdf
 MAINTAINERCLEANFILES = $(dist_pdf_DATA) $(srcdir)/stamp
 
 TEXI2DVI = $(srcdir)/share/bin/texi2dvi
-TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch
+TEXI2DVI_FLAGS = --tidy --batch
 
 TEXI2PDF = $(TEXI2DVI) --pdf
 TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
