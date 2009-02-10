@@ -73,11 +73,27 @@ namespace vcsn
 	parse (std::istream& in);
 
       protected:
-	DocHandler<Auto>*	doc_handler_;
+	DocAutHandler<Auto>*	doc_handler_;
 	Auto&			a_;
     };
 
-    // TODO RegExp Parser
+    /*
+     * Parser class dedicated to the parse a rational expression.
+     */
+    template <typename T>
+    class RegExpParser : public Parser
+    {
+      public:
+	RegExpParser (T& r, bool check = true);
+	virtual ~RegExpParser ();
+
+	void
+	parse (std::istream& in);
+
+      protected:
+	DocRegExpHandler<T>*	doc_handler_;
+	T&			r_;
+    };
   } // !xml
 } // !vcsn
 

@@ -1,5 +1,45 @@
 2009-02-10  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add XML support for rational expressions.
+	We can now load and save rational expressions following the same
+	syntax used for automata, using regexp_loader and regexp_saver 
+	instead of automaton_loader and automaton_saver.
+
+	The code added might definitely be optimized:
+	  - Some parts of the code could definitely be merged.
+	  - It might not be necessary to have TransitionConverter and
+	    Format in regexp_loader, since we (currently) have only this 
+	    way to print rational expressions.
+	  - The names were arbitrarily chosen. (Especially: It now exists
+	    a RegExpHandler and a RegexpHandler [-> typedRegExpHandler ?])
+
+	Not yet done: an exhaustive list of tests.
+
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx: Added some typedefs
+	  and some functions so that Series could have a behavior closer to
+	  automata (it allows to factorize the code when printing the rational
+	  expression).
+	* include/vaucanson/tools/io.hh: Add regexp_saver mechanism.
+	* include/vaucanson/tools/io.hxx: Add regexp_saver mechanism.
+	* include/vaucanson/xml/XML.hh: Specialize operator() with the provided
+	  loader/saver.
+	* include/vaucanson/xml/XML.hxx: Specialize operator() with the
+	  provided loader/saver.
+	* include/vaucanson/xml/builders.hxx: Simplified.
+	* include/vaucanson/xml/contexts/fmp.hxx: Simplified.
+	* include/vaucanson/xml/contexts/rw.hxx: Simplified.
+	* include/vaucanson/xml/handlers.hh: Add DocAutHandler,
+	  DocRegExpHandler, RegExpHandler.
+	* include/vaucanson/xml/handlers.hxx: Add DocAutHandler,
+	  DocRegExpHandler, RegExpHandler.
+	* include/vaucanson/xml/parsers.hh: Add RegExpParser.
+	* include/vaucanson/xml/parsers.hxx: Add RegExpParser.
+	* include/vaucanson/xml/printers.hh: Add RegExpPrinter.
+	* include/vaucanson/xml/printers.hxx: AddRegExpPrinter.
+
+2009-02-10  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fix bug in XML support.
 	A counter was not initialized which could make it impossible
 	to read XML files with <star> tokens...

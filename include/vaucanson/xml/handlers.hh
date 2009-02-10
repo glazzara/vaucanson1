@@ -344,18 +344,74 @@ namespace vcsn
     };
 
     /**
-     * DocHandler class, root class
+     * RegExpHandler class
+     */
+    template <typename RE>
+    class RegExpHandler : public Handler
+    {
+      public:
+	RegExpHandler (xercesc::SAX2XMLReader* parser,
+		       Handler& root,
+		       RE& regexp);
+
+	void
+	start (const XMLCh* const uri,
+		      const XMLCh* const localname,
+		      const XMLCh* const qname,
+		      const xercesc::Attributes& attrs);
+	void
+	end (const XMLCh* const uri,
+		    const XMLCh* const localname,
+		    const XMLCh* const qname);
+      private:
+	RE&			regexp_;
+
+	TypeHandler<RE>	typeh_;
+	RegexpHandler<RE>	contenth_;
+	UnsupHandler	unsuph_;
+    };
+
+    /**
+     * DocExpHandler class, root class
+     *
+     * Reads \c<fsmxml>
+     */
+    template <typename RE>
+    class DocRegExpHandler : public Handler
+    {
+      public:
+	DocRegExpHandler (xercesc::SAX2XMLReader* parser,
+			  xercesc::DefaultHandler& root,
+			  RE& regexp,
+			  XMLEq& eq);
+	void
+	start (const XMLCh* const uri,
+		      const XMLCh* const localname,
+		      const XMLCh* const qname,
+		      const xercesc::Attributes& attrs);
+	void
+	end (const XMLCh* const uri,
+		    const XMLCh* const localname,
+		    const XMLCh* const qname);
+      private:
+	RE& regexp_;
+
+	RegExpHandler<RE>	regexph_;
+    };
+
+    /**
+     * DocAutHandler class, root class
      *
      * Reads \c<fsmxml>
      */
     template <typename T>
-    class DocHandler : public Handler
+    class DocAutHandler : public Handler
     {
       public:
-	DocHandler (xercesc::SAX2XMLReader* parser,
-		    xercesc::DefaultHandler& root,
-		    T& aut,
-		    XMLEq& eq);
+	DocAutHandler (xercesc::SAX2XMLReader* parser,
+		       xercesc::DefaultHandler& root,
+		       T& aut,
+		       XMLEq& eq);
 	void
 	start (const XMLCh* const uri,
 		      const XMLCh* const localname,
@@ -369,7 +425,6 @@ namespace vcsn
 	T& aut_;
 
 	AutHandler<T>	auth_;
-	//TypeHandler<T>	typeh_;
     };
 
   } // !xml

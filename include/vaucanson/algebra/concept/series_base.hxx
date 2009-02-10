@@ -136,6 +136,13 @@ namespace vcsn {
     return op_support(this->structure(), this->value());
   }
 
+  template <typename Self, typename T>
+  typename MetaElement<algebra::SeriesBase<Self>, T>::series_set_t
+  MetaElement<algebra::SeriesBase<Self>, T>::series() const
+  {
+    return this->structure();
+  }
+
   template<typename Self, typename T>
   MetaElement<algebra::SeriesBase<Self>, T>::MetaElement()
   {}

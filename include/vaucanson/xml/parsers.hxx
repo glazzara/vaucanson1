@@ -118,7 +118,7 @@ namespace vcsn
     AutParser<Auto>::AutParser (Auto& a, bool check)
       : Parser(check), a_(a)
     {
-      doc_handler_ = new DocHandler<Auto>(parser_, *err_handler_, a_, eq_);
+      doc_handler_ = new DocAutHandler<Auto>(parser_, *err_handler_, a_, eq_);
       parser_->setContentHandler(doc_handler_);
     }
 
@@ -131,6 +131,31 @@ namespace vcsn
     template <typename Auto>
     void
     AutParser<Auto>::parse (std::istream& in)
+    {
+      CxxInputSource is(&in);
+      parser_->parse(is);
+    }
+
+    /*
+     * RegExpParser class.
+     */
+    template <typename T>
+    RegExpParser<T>::RegExpParser (T& r, bool check)
+      : Parser(check), r_(r)
+    {
+      doc_handler_ = new DocRegExpHandler<T>(parser_, *err_handler_, r_, eq_);
+      parser_->setContentHandler(doc_handler_);
+    }
+
+    template <typename T>
+    RegExpParser<T>::~RegExpParser ()
+    {
+      delete doc_handler_;
+    }
+
+    template <typename T>
+    void
+    RegExpParser<T>::parse (std::istream& in)
     {
       CxxInputSource is(&in);
       parser_->parse(is);

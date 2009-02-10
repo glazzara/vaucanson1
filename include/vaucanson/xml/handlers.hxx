@@ -27,10 +27,50 @@ namespace vcsn
   namespace xml
   {
     /*
-     * DocHandler
+     * DocRegExpHandler
      */
     template <typename T>
-    DocHandler<T>::DocHandler (xercesc::SAX2XMLReader* parser,
+    DocRegExpHandler<T>::DocRegExpHandler (xercesc::SAX2XMLReader* parser,
+			       xercesc::DefaultHandler& root,
+			       T& regexp,
+			       XMLEq& eq)
+      : Handler(parser, root, eq),
+	regexp_(regexp),
+	regexph_(parser, *this, regexp)
+    {
+    }
+
+    template <typename T>
+    void
+    DocRegExpHandler<T>::start (const XMLCh* const,
+				 const XMLCh* const localname,
+				 const XMLCh* const,
+				 const xercesc::Attributes&)
+    {
+      using namespace xercesc;
+      if (XMLString::equals(eq_.fsmxml, localname))
+      {
+	// T version
+	// T xmlns
+	parser_->setContentHandler(&regexph_);
+      }
+      else
+	error::token(localname);
+    }
+
+    template <typename T>
+    void
+    DocRegExpHandler<T>::end (const XMLCh* const,
+			       const XMLCh* const,
+			       const XMLCh* const)
+    {
+    }
+
+    /*
+     * DocAutHandler
+     */
+    template <typename T>
+    DocAutHandler<T>::DocAutHandler (xercesc::SAX2XMLReader* parser,
 			       xercesc::DefaultHandler& root,
 			       T& aut,
 			       XMLEq& eq)
@@ -42,7 +82,7 @@ namespace vcsn
 
     template <typename T>
     void
-    DocHandler<T>::start (const XMLCh* const,
+    DocAutHandler<T>::start (const XMLCh* const,
 				 const XMLCh* const localname,
 				 const XMLCh* const,
 				 const xercesc::Attributes&)
@@ -60,10 +100,63 @@ namespace vcsn
 
     template <typename T>
     void
-    DocHandler<T>::end (const XMLCh* const,
+    DocAutHandler<T>::end (const XMLCh* const,
 			       const XMLCh* const,
 			       const XMLCh* const)
     {
+    }
+
+    /**
+     * RegExpHandler
+     */
+    template <typename T>
+    RegExpHandler<T>::RegExpHandler (xercesc::SAX2XMLReader* parser,
+			       Handler& root,
+			       T& regexp)
+      : Handler(parser, root),
+	regexp_(regexp),
+	typeh_(parser, *this, regexp),
+	contenth_(parser, *this, regexp, eq_.typedRegExp),
+	unsuph_(parser, *this)
+    {
+    }
+
+    template <typename T>
+    void
+    RegExpHandler<T>::start (const XMLCh* const uri,
+				 const XMLCh* const localname,
+				 const XMLCh* const,
+				 const xercesc::Attributes& attrs)
+    {
+      using namespace xercesc;
+      if (XMLString::equals(eq_.regExp, localname))
+      {
+	// nothing to do ?
+      }
+      else if (XMLString::equals(eq_.drawing, localname))
+	parser_->setContentHandler(&unsuph_);
+      else if (XMLString::equals(eq_.geometry, localname))
+	parser_->setContentHandler(&unsuph_);
+      else if (XMLString::equals(eq_.valueType, localname))
+	parser_->setContentHandler(&typeh_);
+      else if (XMLString::equals(eq_.typedRegExp, localname))
+	parser_->setContentHandler(&contenth_);
+      else
+	error::token(localname);
+    }
+
+    template <typename T>
+    void
+    RegExpHandler<T>::end (const XMLCh* const,
+			       const XMLCh* const localname,
+			       const XMLCh* const)
+    {
+      using namespace xercesc;
+      if (XMLString::equals(eq_.regExp, localname))
+      {
+	parser_->setContentHandler(&root_);
+	regexp_ = contenth_.series();
+      }
     }
 
     /**
@@ -432,7 +525,7 @@ namespace vcsn
 	aut_(aut),
 	src_(src),
 	dst_(dst),
-	s_(aut.structure().series()),
+	s_(aut.series()),
 	labelh_(parser, *this, s_, eq_.label),
 	unsuph_(parser, *this)
     {

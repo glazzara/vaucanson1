@@ -34,7 +34,7 @@ namespace vcsn
     | Output |
     `-------*/
 
-    template<typename Auto, typename TransitionConverter, typename Format>
+    template <typename Auto, typename TransitionConverter, typename Format>
     struct automaton_saver_
     {
 	typedef Auto automaton_t;
@@ -59,7 +59,7 @@ namespace vcsn
     };
 
 
-    template<typename Auto, typename TransitionConverter, typename Format>
+    template <typename Auto, typename TransitionConverter, typename Format>
     std::ostream&
     operator<<(std::ostream&,
 	       const automaton_saver_<Auto, TransitionConverter, Format>&);
@@ -76,9 +76,9 @@ namespace vcsn
 
     };
 
-  }
+  } // ! tools
 
-  template<typename Auto, typename TransitionConverter, typename Format>
+  template <typename Auto, typename TransitionConverter, typename Format>
   tools::automaton_saver_<Auto, TransitionConverter, Format>
   automaton_saver(const Auto&,
 		  const TransitionConverter& e = TransitionConverter(),
@@ -87,11 +87,57 @@ namespace vcsn
 
   namespace tools
   {
+
+    /*-------.
+    | Output |
+    `-------*/
+
+    template <typename RE, typename TransitionConverter, typename Format>
+    struct regexp_saver_
+    {
+	typedef RE rat_exp_t;
+	typedef TransitionConverter transition_converter_t;
+	typedef Format format_t;
+
+	regexp_saver_(const RE&,
+		      const TransitionConverter&,
+		      const Format&);
+
+	rat_exp_t& rat_exp();
+	const rat_exp_t& rat_exp() const;
+
+      protected:
+	const rat_exp_t& r_;
+	transition_converter_t conv_;
+	format_t format_;
+
+	template<typename A, typename E, typename F>
+	friend std::ostream&
+	operator<<(std::ostream&, const regexp_saver_<A, E, F>&);
+    };
+
+
+    template <typename RE, typename TransitionConverter, typename Format>
+    std::ostream&
+    operator<<(std::ostream&,
+	       const regexp_saver_<RE, TransitionConverter, Format>&);
+
+  } // ! tools
+
+  template <typename RE, typename TransitionConverter, typename Format>
+  tools::regexp_saver_<RE, TransitionConverter, Format>
+  regexp_saver(const RE&,
+	       const TransitionConverter& e = TransitionConverter(),
+	       const Format& f = Format());
+
+
+  namespace tools
+  {
     /*------.
     | Input |
     `------*/
 
-    template<typename Auto, typename TransitionConverter, typename Format>
+    template <typename Auto, typename TransitionConverter, typename Format>
     struct automaton_loader_
     {
 	typedef Auto automaton_t;
@@ -127,20 +173,57 @@ namespace vcsn
 	operator>>(std::istream&, automaton_loader_<A, E, F>);
     };
 
-    template<typename Auto, typename TransitionConverter, typename Format>
+    template <typename Auto, typename TransitionConverter, typename Format>
     std::istream&
     operator>>(std::istream&, automaton_loader_<Auto, TransitionConverter, Format>);
 
 
-  } //tools
+  } // ! tools
 
 
-  template<typename Auto, typename TransitionConverter, typename Format>
+  template <typename Auto, typename TransitionConverter, typename Format>
   tools::automaton_loader_<Auto, TransitionConverter, Format>
   automaton_loader(Auto& a,
 		   const TransitionConverter& e = TransitionConverter(),
 		   const Format& f = Format(),
 		   bool merge_states = false);
+
+  namespace tools
+  {
+    template <typename RE, typename TransitionConverter, typename Format>
+    struct regexp_loader_
+    {
+	typedef RE rat_exp_t;
+	typedef TransitionConverter transition_converter_t;
+	typedef Format format_t;
+
+	regexp_loader_(rat_exp_t& r,
+		       const transition_converter_t& conv,
+		       const format_t& format);
+
+	rat_exp_t& rat_exp();
+	const rat_exp_t& rat_exp() const;
+
+      protected:
+	rat_exp_t& r_;
+	transition_converter_t conv_;
+	format_t format_;
+
+	template <typename R, typename T, typename F>
+	friend std::istream&
+	operator>>(std::istream&, regexp_loader_<R, T, F>);
+    };
+
+    template <typename RE, typename TransitionConverter, typename Format>
+    std::istream&
+    operator>>(std::istream&, regexp_loader_<RE, TransitionConverter, Format>);
+  } // ! tools
+
+  template <typename RE, typename TransitionConverter, typename Format>
+  tools::regexp_loader_<RE, TransitionConverter, Format>
+  regexp_loader(RE& r,
+		const TransitionConverter& e = TransitionConverter(),
+		const Format& f = Format());
 } // vcsn
 
 

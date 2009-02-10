@@ -31,11 +31,27 @@
 # include <string>
 # include <iostream>
 
+
+
 namespace vcsn
 {
+  namespace tools
+  {
+    template <typename Auto, typename T, typename Format>
+    struct automaton_saver_;
+
+    template <typename RE, typename T, typename Format>
+    struct regexp_saver_;
+
+    template <typename Auto, typename T, typename Format>
+    struct automaton_loader_;
+
+    template <typename RE, typename T, typename Format>
+    struct regexp_loader_;
+  } // !tools
+
   namespace xml
   {
-    class Handler;
 
     class XML
     {
@@ -47,16 +63,31 @@ namespace vcsn
 	/**
 	 * Write the automaton in the saver @a s to @a out.
 	 */
-	template <typename Saver, typename Conv>
+	template <typename Auto, typename T, typename Format, typename Conv>
 	void operator()(std::ostream& out,
-			const Saver& s,
+			const vcsn::tools::automaton_saver_<Auto, T, Format>& s,
+			const Conv& conv) const;
+
+	/**
+	 * Write the rational expression in the saver @a s to @a out.
+	 */
+	template <typename RE, typename T, typename Format, typename Conv>
+	void operator()(std::ostream& out,
+			const vcsn::tools::regexp_saver_<RE, T, Format>& s,
 			const Conv& conv) const;
 
         /**
 	 * Load an automaton from @a in into the loader @a l.
 	 */
-	template <typename Loader>
-	void operator()(std::istream& in, Loader& l, bool check = true); // FIXME set to false
+	template <typename Auto, typename T, typename Format>
+	void operator()(std::istream& in, vcsn::tools::automaton_loader_<Auto, T, Format>& l, bool check = true);
+
+	/**
+	 * Load a rational expression from @a in into the loader @a l.
+	 */
+	template <typename RE, typename T, typename Format>
+	void operator()(std::istream& in, vcsn::tools::regexp_loader_<RE, T, Format>& l, bool check = true);
+
 
 	/**
 	 * Counter of instances of XML

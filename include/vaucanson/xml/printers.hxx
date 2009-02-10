@@ -167,7 +167,7 @@ namespace vcsn
       root->appendChild(node);
       tools::set_attribute(node, "state", state2str_[s]);
       typename Auto::series_set_elt_t tmp = aut_.get_initial(s);
-      if (tmp != algebra::identity_as<typename Auto::series_set_elt_t::value_t>::of(aut_.structure().series()).value())
+      if (tmp != algebra::identity_as<typename Auto::series_set_elt_t::value_t>::of(aut_.series()).value())
 	builders::create_regexp_node(tmp, doc_, node);
     }
     template <class Auto>
@@ -179,9 +179,58 @@ namespace vcsn
       root->appendChild(node);
       tools::set_attribute(node, "state", state2str_[s]);
       typename Auto::series_set_elt_t tmp = aut_.get_final(s);
-      if (tmp != algebra::identity_as<typename Auto::series_set_elt_t::value_t>::of(aut_.structure().series()).value())
+      if (tmp != algebra::identity_as<typename Auto::series_set_elt_t::value_t>::of(aut_.series()).value())
 	builders::create_regexp_node(tmp, doc_, node);
     }
+
+    /*
+     * RegExpPrinter class.
+     */
+    template <typename RE>
+    RegExpPrinter<RE>::RegExpPrinter (const RE& regexp, const std::string& name)
+      : regexp_(regexp), name_(name)
+    {
+    }
+
+    template <typename RE>
+    RegExpPrinter<RE>::~RegExpPrinter ()
+    {
+    }
+
+    template <typename RE>
+    void
+    RegExpPrinter<RE>::print (std::ostream& out)
+    {
+      using namespace xercesc;
+
+      // Document creation.
+      impl_ = DOMImplementationRegistry::getDOMImplementation(transcode("LS"));
+      doc_ = impl_->createDocument(transcode(VCSN_XMLNS),
+				   transcode("fsmxml"), 0);
+      root_ = doc_->getDocumentElement();
+
+      tools::set_attribute(root_, "version", "1.0"); // FIXME should be... a macro?
+
+      DOMElement* regexp = tools::create_element(doc_, "regExp");
+      root_->appendChild(regexp);
+
+      DOMElement* valueType = tools::create_element(doc_, "valueType");
+      regexp->appendChild(valueType);
+      builders::create_semiring_node(regexp_, doc_, valueType);
+      builders::create_monoid_node(regexp_, doc_, valueType);
+
+      DOMElement* content = tools::create_element(doc_, "typedRegExp");
+      regexp->appendChild(content);
+
+      builders::create_regexp_node(regexp_, doc_, content);
+
+      // Print it!
+      print_xml(out, impl_, root_);
+      out << std::endl;
+
+      delete doc_;
+    }
+
   } // !xml
 } // !vcsn
 

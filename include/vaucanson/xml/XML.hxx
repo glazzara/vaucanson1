@@ -46,28 +46,48 @@ namespace vcsn
       XML::inst_ += 1;
     }
 
-    template<typename Saver, typename Conv>
+    template <typename Auto, typename T, typename Format, typename Conv>
     void XML::operator()(std::ostream& out,
-			 const Saver& s,
+			 const vcsn::tools::automaton_saver_<Auto, T, Format>& s,
 			 const Conv&) const
     {
-      typedef typename Saver::automaton_t automaton_t;
-      AutPrinter<automaton_t>* printer = new AutPrinter<automaton_t>(s.automaton(), name_);
+      AutPrinter<Auto>* printer = new AutPrinter<Auto>(s.automaton(), name_);
       printer->print(out);
       delete printer;
     }
 
-    template <typename Loader>
+    template <typename RE, typename T, typename Format, typename Conv>
+    void XML::operator()(std::ostream& out,
+			 const vcsn::tools::regexp_saver_<RE, T, Format>& s,
+			 const Conv&) const
+    {
+      RegExpPrinter<RE>* printer = new RegExpPrinter<RE>(s.rat_exp(), name_);
+      printer->print(out);
+      delete printer;
+    }
+
+    template <typename Auto, typename T, typename Format>
     void
     XML::operator()(std::istream& in,
-		    Loader& l,
+		    vcsn::tools::automaton_loader_<Auto, T, Format>& l,
 		    bool check)
     {
-      typedef typename Loader::automaton_t	automaton_t;
-      AutParser<automaton_t>* parser = new AutParser<automaton_t>(l.automaton(), check);
+      AutParser<Auto>* parser = new AutParser<Auto>(l.automaton(), check);
       parser->parse(in);
       delete parser;
     }
+
+    template <typename RE, typename T, typename Format>
+    void
+    XML::operator()(std::istream& in,
+		    vcsn::tools::regexp_loader_<RE, T, Format>& l,
+		    bool check)
+    {
+      RegExpParser<RE>* parser = new RegExpParser<RE>(l.rat_exp(), check);
+      parser->parse(in);
+      delete parser;
+    }
+
 
     int XML::inst_ = 0;
   } // !xml

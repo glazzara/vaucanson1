@@ -137,7 +137,7 @@ namespace vcsn
 	tools::set_attribute(monoid, "genDescrip", "enum");
 	tools::set_attribute(monoid, "genKind", algebra::letter_traits<typename TRANStype::semiring_t::monoid_t::alphabet_t::letter_t>::kind());
 	typedef typename TRANStype::semiring_t::monoid_t::alphabet_t::const_iterator alphabet_iterator;
-	for_all_letters(l, aut.structure().series().semiring().monoid().alphabet())
+	for_all_letters(l, aut.series().semiring().monoid().alphabet())
 	{
 	  std::ostringstream letter;
 	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
@@ -145,7 +145,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  monoid->appendChild(gen);
 	}
-	tools::set_attribute(monoid, "genSort", get_monoid_gen_sort(*(aut.structure().series().semiring().monoid().alphabet().begin())));
+	tools::set_attribute(monoid, "genSort", get_monoid_gen_sort(*(aut.series().semiring().monoid().alphabet().begin())));
 	node->appendChild(semiringn);
 	node->appendChild(monoid);
 	root->appendChild(node);

@@ -97,6 +97,28 @@ namespace vcsn
 	xercesc::DOMDocument*		doc_;
 	xercesc::DOMElement*		root_;
     };
+
+    /*
+     * Printer class dedicated to the parse a rational expression.
+     */
+    template <typename RE>
+    class RegExpPrinter : public Printer
+    {
+      public:
+	RegExpPrinter (const RE& regexp, const std::string& name = "");
+	virtual ~RegExpPrinter ();
+
+	void
+	print (std::ostream& out);
+
+      protected:
+	const RE&			regexp_;
+	const std::string&		name_;
+
+	xercesc::DOMImplementation*	impl_;
+	xercesc::DOMDocument*		doc_;
+	xercesc::DOMElement*		root_;
+    };
   } // !xml
 } // !vcsn
 

@@ -411,7 +411,7 @@ namespace vcsn
 	first->appendChild(writingData1);
 
 	typedef typename FMPtype::monoid_t::first_monoid_t::alphabet_t::const_iterator first_alphabet_iterator;
-	for_all_letters_(first_, l, aut.structure().series().monoid().first_monoid().alphabet())
+	for_all_letters_(first_, l, aut.series().monoid().first_monoid().alphabet())
 	{
 	  std::ostringstream letter;
 	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
@@ -419,7 +419,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  first->appendChild(gen);
 	}
-	tools::set_attribute(first, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().first_monoid().alphabet().begin())));
+	tools::set_attribute(first, "genSort", get_monoid_gen_sort(*(aut.series().monoid().first_monoid().alphabet().begin())));
 	xercesc::DOMElement* second = tools::create_element(doc, "monoid");
 	tools::set_attribute(second, "type", "free");
 	tools::set_attribute(second, "genDescrip", "enum");
@@ -432,7 +432,7 @@ namespace vcsn
 	second->appendChild(writingData2);
 
 	typedef typename FMPtype::monoid_t::second_monoid_t::alphabet_t::const_iterator second_alphabet_iterator;
-	for_all_letters_(second_, l, aut.structure().series().monoid().second_monoid().alphabet())
+	for_all_letters_(second_, l, aut.series().monoid().second_monoid().alphabet())
 	{
 	  std::ostringstream letter;
 	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
@@ -440,7 +440,7 @@ namespace vcsn
 	  tools::set_attribute(gen, "value", letter.str());
 	  second->appendChild(gen);
 	}
-	tools::set_attribute(second, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().second_monoid().alphabet().begin())));
+	tools::set_attribute(second, "genSort", get_monoid_gen_sort(*(aut.series().monoid().second_monoid().alphabet().begin())));
       }
 
       /* FIXME there should not be 2 but one function here... however,

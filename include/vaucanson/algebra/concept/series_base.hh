@@ -130,6 +130,15 @@ namespace vcsn {
     /// type of the element of the monoid.
     typedef Element<typename Self::monoid_t, monoid_elt_value_t>	 monoid_elt_t;
 
+    /// type of the monoid.
+    typedef typename Self::monoid_t	monoid_t;
+
+    /// type of the semiring
+    typedef typename Self::semiring_t	semiring_t;
+
+    /// type of the semiring
+    typedef Self	series_set_t;
+
     /// type of the series.
     typedef Element<Self, T>				 element_t;
 
@@ -169,6 +178,8 @@ namespace vcsn {
      * The support is accessible only if is_finite_app is true.
      */
     support_t		supp() const;
+
+    series_set_t	series() const;
 
   protected:
     /// Default constructor is protected since it is an abstract class.

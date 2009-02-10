@@ -590,7 +590,7 @@ namespace vcsn
 			   xercesc::DOMElement* root)
       {
 	typedef typename T::semiring_elt_t semiring_elt_t;
-	semiring_elt_t semiring(aut.structure().series().semiring());
+	semiring_elt_t semiring(aut.series().semiring());
 	xercesc::DOMElement* node = tools::create_element(doc, "semiring");
 	tools::set_attribute(node, "type", "numerical");
 	tools::set_attribute(node, "set", get_semiring_set(semiring.value()));
@@ -618,7 +618,7 @@ namespace vcsn
 	typedef typename T::monoid_t::alphabet_t::const_iterator alphabet_iterator;
 
 	if (letter_kind == "simple")
-	  tools::set_attribute(node, "genSort", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin())));
+	  tools::set_attribute(node, "genSort", get_monoid_gen_sort(*(aut.series().monoid().alphabet().begin())));
 	else
 	{
 	  std::stringstream genDim;
@@ -631,13 +631,13 @@ namespace vcsn
 	  for (int i = 0; i != dim; i++)
 	  {
 	    genCompSort = tools::create_element(doc, "genCompSort");
-	    tools::set_attribute(genCompSort, "value", get_monoid_gen_sort(*(aut.structure().series().monoid().alphabet().begin()), i));
+	    tools::set_attribute(genCompSort, "value", get_monoid_gen_sort(*(aut.series().monoid().alphabet().begin()), i));
 	    genSort->appendChild(genCompSort);
 	  }
 	}
 
 	create_monGen_node<typename T::monoid_t::alphabet_t::letter_t> monGen_maker;
-	for_all_letters(l, aut.structure().series().monoid().alphabet())
+	for_all_letters(l, aut.series().monoid().alphabet())
 	  monGen_maker(*l, doc, node);
 
       }
