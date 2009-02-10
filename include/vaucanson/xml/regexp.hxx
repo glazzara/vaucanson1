@@ -106,7 +106,8 @@ namespace vcsn
     StarHandler<T>::StarHandler (xercesc::SAX2XMLReader* parser,
 			       Handler& root,
 			       T param)
-      : RegexpHandler<T>(parser, root, param)
+      : RegexpHandler<T>(parser, root, param),
+	in_(0)
     {
       end_ = eq_.star;
     }
