@@ -85,19 +85,24 @@ DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t, "alphabet2");
 /// Getter for RatExp.
 static rat_exp_t get_exp(const arguments_t& args, const int& n)
 {
-  const std::string& exp = args.args[n];
+  const std::string& s = args.args[n];
   const std::vector<std::string>& alphabet = args.alphabet;
 
   // Build a monoid and a series with smart token representations.
+#ifdef GLOBAL_RESULT
+  alphabet_t alpha;
+  monoid_t M((GLOBAL_RESULT.input_exp_type == INPUT_TYPE_EXP) ? get_alphabet(alphabet) : alpha);
+#else
   monoid_t M(get_alphabet(alphabet));
+#endif
   semiring_t S;
   series_set_t series(S, M);
 
-  set_monoid_writing_data_(*(M.representation()), args.mrep, args.cf);
-  set_series_writing_data_(*(series.representation()), args.srep, args.cf);
+
+  rat_exp_t	e(series);
 
 # ifdef GLOBAL_RESULT
-  if (exp == "-")
+  if (s == "-")
   {
     return boost::apply_visitor(rat_exp_getter(M.alphabet(),
 					       GLOBAL_RESULT.name,
@@ -105,12 +110,72 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
 					       *(series.representation())),
 				GLOBAL_RESULT.output);
   }
-# endif // !GLOBAL_RESULT
 
-  return make_rat_exp(M.alphabet(),
-		      exp,
-		      *(M.representation()),
-		      *(series.representation()));
+  switch (GLOBAL_RESULT.input_exp_type)
+  {
+    case INPUT_TYPE_XML:
+    {
+      std::istream* is = new std::ifstream (s.c_str ());
+      if (is->fail ())
+      {
+	const std::list<std::string>& path = get_automata_path(args);
+
+	std::list<std::string>::const_iterator i;
+	for (i = path.begin(); i != path.end(); ++i)
+	{
+	  delete is;
+	  std::string file = *i + "/" + s;
+	  is = new std::ifstream (file.c_str ());
+	  if (not is->fail())
+	    break;
+	}
+      }
+      if (not is->fail ())
+      {
+	using namespace vcsn::tools;
+	using namespace vcsn::xml;
+
+	*is >> regexp_loader(e, string_out (), XML ());
+
+	delete is;
+
+	// Set the writing data before return.
+	//set_writing_data(e, args); // FIXME ?
+
+	return e;
+      }
+      else
+      {
+	std::cerr << "Error: cannot open `" << s << "'." << std::endl;
+	exit (-3);
+      }
+      break;
+    }
+    case INPUT_TYPE_EXP:
+    {
+      set_monoid_writing_data_(*(M.representation()), args.mrep, args.cf);
+      set_series_writing_data_(*(series.representation()), args.srep, args.cf);
+
+      e = make_rat_exp(M.alphabet(),
+		       s,
+		       *(M.representation()),
+		       *(series.representation()));
+
+      break;
+    }
+    default:
+      std::cerr << "FATAL: Could not load rational expression." << std::endl;
+      exit(1);
+  }
+# else
+
+  e = make_rat_exp(M.alphabet(),
+		   s,
+		   *(M.representation()),
+		   *(series.representation()));
+
+# endif // !GLOBAL_RESULT
+  return e;
 }
 
 
@@ -140,7 +205,7 @@ static automaton_t get_aut (const arguments_t& args, int n)
     {
       automaton_t a = boost::apply_visitor
 	(automaton_getter (GLOBAL_RESULT.name,
-			   GLOBAL_RESULT.input_type), GLOBAL_RESULT.output);
+			   GLOBAL_RESULT.input_aut_type), GLOBAL_RESULT.output);
 
       // Set the writing data before return.
       set_writing_data(a, args);
@@ -179,7 +244,7 @@ static automaton_t get_aut (const arguments_t& args, int n)
 # endif // !WITH_TWO_ALPHABETS
 
 # ifdef GLOBAL_RESULT
-    switch (GLOBAL_RESULT.input_type)
+    switch (GLOBAL_RESULT.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());
@@ -222,7 +287,7 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
   {
     IOAUT_CONTEXT::automaton_t a =
       boost::apply_visitor(boolean_automaton_getter
-			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_type),
+			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_aut_type),
 			   GLOBAL_RESULT.output);
 
     // Set the writing data before return.
@@ -242,7 +307,7 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
       IOAUT_CONTEXT::make_automaton(first_alphabet_t());
 
 # ifdef GLOBAL_RESULT
-    switch (GLOBAL_RESULT.input_type)
+    switch (GLOBAL_RESULT.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());

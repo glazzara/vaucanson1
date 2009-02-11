@@ -115,7 +115,8 @@ struct arguments_t
 	report_time (false),
 	export_time_dot (false),
 	export_time_xml (false),
-	input_type (INPUT_TYPE_XML),
+	input_aut_type (INPUT_TYPE_XML),
+	input_exp_type (INPUT_TYPE_EXP),
 	output_aut_type (OUTPUT_TYPE_XML),
 	output_exp_type (OUTPUT_TYPE_EXP)
     {}
@@ -165,7 +166,8 @@ struct arguments_t
 
     bool        export_time_xml;
 
-    input_format_t	input_type;
+    input_format_t	input_aut_type;
+    input_format_t	input_exp_type;
     output_format_t	output_aut_type;
     output_format_t	output_exp_type;
 

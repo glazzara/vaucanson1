@@ -1,5 +1,21 @@
 2009-02-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
+	Add XML support for rational expressions in TAF-Kit.
+	Now, it is possible to execute things like:
+	./vcsn-char-b -o XML --alphabet=ab identity-exp "(a+b)*.a.(a+b)*"
+	./vcsn-char-b -i XML identity-exp exp1.xml
+	./vcsn-char-b -i XML -o XML identity-exp exp1.xml
+
+	* taf-kit/src/common.hh: Split input_type into input_exp_type and 
+	    input_aut_type (Allow XML by default for aut and EXP for regexp).
+	* taf-kit/src/getters.hxx: Add XML input for rat_exp.
+	* taf-kit/src/main.cc: input_exp_type/input_aut_type.
+	* taf-kit/src/pipe.hh: input_exp_type/input_aut_type.
+	* taf-kit/src/pipe.hxx: input_exp_type/input_aut_type.
+	* taf-kit/src/pipe_writers.hxx: Add XML output for rat exp.
+
+2009-02-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
 	Fix XML support of rational expressions.
 	* xml/handlers.hxx: Here.
 	* xml/regexp.hh: Here.

@@ -79,7 +79,7 @@ pipe_stream_writer::operator() (rat_exp_t& a) const
   switch (exp_f)
     {
     case OUTPUT_TYPE_XML:
-      // FIXME when implemented add support for xml output
+      o << regexp_saver (a, string_out (), XML ());
       break;
     case OUTPUT_TYPE_EXP:
       o << a << std::endl;

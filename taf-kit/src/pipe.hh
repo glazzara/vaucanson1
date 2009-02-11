@@ -131,7 +131,8 @@ public:
   int                    status;
   std::string		 name;
   bool			 empty;
-  input_format_t	 input_type;
+  input_format_t	 input_aut_type;
+  input_format_t	 input_exp_type;
   output_format_t	 output_aut_type;
   output_format_t	 output_exp_type;
 };

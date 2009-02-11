@@ -26,6 +26,7 @@
 // Include common.hh first, because it includes config.h which might
 // define macros (such as restrict) that are used in gnulib's
 // replacements for standard header files.
+
 #include "common.hh"
 
 #include <stdlib.h>
@@ -181,9 +182,20 @@ namespace
 
       case 'i':
 	if (strcasecmp(arg, "XML") == 0)
-	  args.input_type = INPUT_TYPE_XML;
+	{
+	  args.input_aut_type = INPUT_TYPE_XML;
+	  args.input_exp_type = INPUT_TYPE_XML;
+	}
 	else if (strcasecmp(arg, "FSM") == 0)
-	  args.input_type = INPUT_TYPE_FSM;
+	{
+	  args.input_aut_type = INPUT_TYPE_FSM;
+	  args.input_exp_type = INPUT_TYPE_FSM;
+	}
+	else if (strcasecmp(arg, "EXP") == 0)
+	{
+	  args.input_aut_type = INPUT_TYPE_EXP;
+	  args.input_exp_type = INPUT_TYPE_EXP;
+	}
 	else
 	{
 	  std::cerr << "Unknown input type: " << arg << std::endl;
@@ -345,7 +357,8 @@ int main (int argc, char* argv[])
 	      GLOBAL_RESULT.set_name (args.args[0]);
 	      GLOBAL_RESULT.output_aut_type = args.output_aut_type;
 	      GLOBAL_RESULT.output_exp_type = args.output_exp_type;
-	      GLOBAL_RESULT.input_type = args.input_type;
+	      GLOBAL_RESULT.input_aut_type = args.input_aut_type;
+	      GLOBAL_RESULT.input_exp_type = args.input_exp_type;
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
 	      TIMER_SCOPED(os.str () + std::string (args.args[0]));

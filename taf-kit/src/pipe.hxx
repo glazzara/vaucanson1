@@ -27,7 +27,8 @@
 command_output::command_output ()
   : name        (""),
     empty       (true),
-    input_type  (INPUT_TYPE_XML),
+    input_aut_type  (INPUT_TYPE_XML),
+    input_exp_type  (INPUT_TYPE_EXP),
     output_aut_type (OUTPUT_TYPE_XML),
     output_exp_type (OUTPUT_TYPE_EXP)
 {
