@@ -75,6 +75,8 @@ namespace vcsn
 		    const XMLCh* const qname);
 
 	T& series();
+
+	T& series(T& param);
 	// Create the Handler accordingly to localname
 	// Return 0 if localname is incorrect.
 	RegexpHandler<T>*

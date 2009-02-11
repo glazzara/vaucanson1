@@ -140,7 +140,10 @@ namespace vcsn
       else if (XMLString::equals(eq_.valueType, localname))
 	parser_->setContentHandler(&typeh_);
       else if (XMLString::equals(eq_.typedRegExp, localname))
+      {
+	contenth_.series(regexp_);
 	parser_->setContentHandler(&contenth_);
+      }
       else
 	error::token(localname);
     }

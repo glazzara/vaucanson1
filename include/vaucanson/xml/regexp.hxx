@@ -99,6 +99,14 @@ namespace vcsn
       return param_;
     }
 
+    template <typename T>
+    T&
+    RegexpHandler<T>::series(T& param)
+    {
+      param_ = param;
+      return param_;
+    }
+
     /*
      * StarHandler
      */

@@ -1,3 +1,10 @@
+2009-02-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Fix XML support of rational expressions.
+	* xml/handlers.hxx: Here.
+	* xml/regexp.hh: Here.
+	* xml/regexp.hxx: Here.
+
 2009-02-10  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add XML support for rational expressions.
