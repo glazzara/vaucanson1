@@ -87,7 +87,6 @@ improved further!
 
 The build system has recently (at the time of writing) been improved to
 build the libraries much faster, but there's further room for speed-ups.
-For example: make the tests use ``-DVCSN_USE_LIB``.
 
 
 Making a release

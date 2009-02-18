@@ -1,3 +1,9 @@
+2009-02-18  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update HACKING.txt.
+	* doc/HACKING.txt: Remove the example as it does not improve the
+	  build time further.
+
 2009-02-11  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add XML support for rational expressions in TAF-Kit.
