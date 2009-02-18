@@ -17,11 +17,11 @@ include $(top_srcdir)/vaucanson.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS += $(TERMLIBS)
 
-bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b \
-               vcsn-int-b vcsn-int-z vcsn-int-fmp-b \
-	       vcsn-int-fmp-z vcsn-char-fmp-z \
-	       vcsn-char-char-b vcsn-int-int-b \
-	       vcsn-char-int-b
+bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b 	\
+               vcsn-int-b vcsn-int-z vcsn-int-fmp-b 			\
+	       vcsn-int-fmp-z vcsn-char-fmp-z 				\
+	       vcsn-char-char-b vcsn-int-int-b 				\
+	       vcsn-char-int-b vcsn-char-zmin vcsn-char-zmax
 
 COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\
@@ -186,6 +186,27 @@ vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 vcsn_int_int_b_LDADD = $(LDADD) \
 			  $(top_builddir)/lib/libkrat_exp.la \
 			  $(top_builddir)/lib/libvcsn-int-int-b.la
+
+
+
+vcsn_char_zmin_SOURCES = $(COMMON_SOURCES)			\
+		      ratexp_commands.hh			\
+	              common_automaton_commands.hh		\
+                      b_commands.cc
+vcsn_char_zmin_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_min_plus_automaton -DVCSN_USE_LIB
+vcsn_char_zmin_LDADD = $(LDADD)					\
+		    $(top_builddir)/lib/libvcsn-z-min.la	\
+		    $(top_builddir)/lib/libkrat_exp.la
+
+vcsn_char_zmax_SOURCES = $(COMMON_SOURCES)			\
+		      ratexp_commands.hh			\
+	              common_automaton_commands.hh		\
+                      b_commands.cc
+vcsn_char_zmax_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_max_plus_automaton -DVCSN_USE_LIB
+vcsn_char_zmax_LDADD = $(LDADD)					\
+		    $(top_builddir)/lib/libvcsn-z-max.la	\
+		    $(top_builddir)/lib/libkrat_exp.la
+
 
 
 LDADD = $(top_builddir)/gnulib/libgnu.la

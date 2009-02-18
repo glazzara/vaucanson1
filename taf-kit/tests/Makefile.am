@@ -26,6 +26,8 @@ TESTS =						\
   vcsn-char-char-b.test				\
   vcsn-char-int-b.test				\
   vcsn-int-int-b.test				\
+  vcsn-char-zmin.test				\
+  vcsn-char-zmax.test				\
   completeness.test
 
 XFAIL_TESTS = completeness.test
@@ -52,6 +54,8 @@ EXTRA_DIST = $(TESTS)				\
   automata/int-b/int-b.xml			\
   automata/int-z/int-z.xml
 
+
+
 # Each test case depends on defs.
 check_SCRIPTS =					\
   defs						\
@@ -66,7 +70,9 @@ check_SCRIPTS =					\
   vcsn-int-z					\
   vcsn-char-char-b				\
   vcsn-char-int-b				\
-  vcsn-int-int-b
+  vcsn-int-int-b				\
+  vcsn-char-zmin				\
+  vcsn-char-zmax
 
 distclean-local:
 	-rm -rf $(TESTS:.test=.dir)

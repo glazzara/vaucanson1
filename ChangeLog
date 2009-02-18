@@ -1,3 +1,12 @@
+2009-02-18  Maurice Audin  <audin@lrde.epita.fr>
+
+	Add two new TAF-Kits, char-zmin and char-zmax, with basic tests.
+	* configure.ac: Add new files and wrappers.
+	* taf-kit/src/Makefile.am: Add two new contexts.
+	* taf-kit/tests/Makefile.am: Add tests for the new contexts.
+	* taf-kit/tests/vcsn-char-zmax.test,
+	* taf-kit/tests/vcsn-char-zmin.test: Add two basic tests (non-determinist automata include).
+
 2009-02-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/aci_canonical.hh (canonical):
