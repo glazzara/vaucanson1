@@ -1,3 +1,8 @@
+2009-02-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/aci_canonical.hh (canonical):
+	Document it.
+
 2009-02-18  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Update HACKING.txt.
