@@ -1,5 +1,13 @@
 2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
 
+	Optimization of Standard visitor.
+	* include/vaucanson/algorithms/standard_of.hh: Add information
+	about the function's behavior.
+	* include/vaucanson/algorithms/standard_of.hxx: Improve Standard
+	visitor by preventing creation of several useless automata.
+
+2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
+
 	Factorize and document Standard algorithm.  
 	* include/vaucanson/algorithms/standard.hh: Add link to Trac's page
 	speaking about standard automata.

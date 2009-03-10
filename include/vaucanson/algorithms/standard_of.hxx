@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -68,37 +68,112 @@ namespace vcsn {
 
       public :
 
-	Standard_OfVisitor(const series_set_t& series) :
-	  automata_set_(series)
-	{}
+	Standard_OfVisitor(automaton_t& a) :
+	  automata_set_(a.series()),
+          auto_(&a)
+	{
+        }
 
 	INHERIT_CONSTRUCTORS(this_class, Exp_, Auto_*, Dispatch_);
 
+        // Could not use standard.hh functions because of the storing system.
+        // No map needed here.
 	MATCH__(Product, lhs, rhs)
 	{
-	  automaton_ptr_t tmp_	= match(rhs);
-	  automaton_ptr_t auto_ = match(lhs);
-	  concat_of_standard_here(*auto_, *tmp_);
-	  delete (tmp_);
-	  return auto_;
+          AUTOMATON_TYPES(automaton_t);
+	  match(lhs);
+
+          hstate_t lhs_i = initial_;
+
+          // Store final states and final values and clear it.
+          typedef typename std::list<std::pair<hstate_t, series_set_elt_t> >
+            list_fin_st_t;
+
+          list_fin_st_t lhs_tmp;
+
+          for_all_final_states(f, *auto_)
+            lhs_tmp.push_back (std::pair<hstate_t, series_set_elt_t>
+                                  (*f, auto_->get_final(*f)));
+          auto_->clear_final();
+
+	  match(rhs);
+
+          // Restore the previously saved data.
+          typedef std::list<hstate_t> list_st_t;
+
+          list_st_t lhs_finals;
+
+          for (typename list_fin_st_t::iterator i = lhs_tmp.begin();
+               i != lhs_tmp.end();
+               ++i)
+          {
+            auto_->set_final(i->first, i->second);
+            lhs_finals.push_back (i->first);
+          }
+
+          concat_of_standard_here_common(auto_->structure(),
+                                         *auto_,
+                                         *auto_,
+                                         initial_,
+                                         lhs_finals.begin(),
+                                         lhs_finals.end(),
+                                         identity_);
+
+          // Clean the automata from rhs_ini and its transitions.
+          for (typename automaton_t::delta_iterator i(auto_->value(), initial_);
+               ! i.done();
+               i.next())
+            auto_->del_transition(*i);
+
+          auto_->del_state(initial_);
+          initial_ = lhs_i;
+          return auto_;
 	}
 	END
 
 	MATCH__(Sum, lhs, rhs)
 	{
-	  automaton_ptr_t tmp_	= match(rhs);
-	  automaton_ptr_t auto_ = match(lhs);
-	  union_of_standard_here(*auto_, *tmp_);
-	  delete (tmp_);
+          AUTOMATON_TYPES(automaton_t);
+          typedef typename std::list<std::pair<hstate_t, series_set_elt_t> >
+            list_fin_st_t;
+
+          match(lhs);
+
+          // Store lhs initial state.
+          hstate_t left_i = initial_;
+
+          // Store final states and final values and clear it.
+          list_fin_st_t lhs_tmp;
+
+          for_all_const_final_states(f, *auto_)
+            lhs_tmp.push_back (std::pair<hstate_t, series_set_elt_t>
+                               (*f, auto_->get_final(*f)));
+
+          auto_->clear_final();
+
+          match(rhs);
+
+          // Restore the previously saved data.
+          for (typename list_fin_st_t::iterator i = lhs_tmp.begin();
+               i != lhs_tmp.end();
+               ++i)
+            auto_->set_final(i->first, i->second);
+
+          union_of_standard_here_common(auto_->structure(),
+                                        *auto_,
+                                        left_i,
+                                        initial_);
+
+          initial_ = left_i;
 	  return auto_;
 	}
 	END
 
 	MATCH_(Star, node)
 	{
-	  automaton_ptr_t stared = match(node);
-	  star_of_standard_here(*stared);
-	  return stared;
+	  match(node);
+	  star_of_standard_here_common(auto_->structure(), *auto_, initial_);
+	  return auto_;
 	}
 	END
 
@@ -106,43 +181,39 @@ namespace vcsn {
 	{
 	  const semiring_t&	semiring = automata_set_.series().semiring();
 	  const semiring_elt_t	weight (semiring, w);
-	  automaton_ptr_t	auto_ = match(node);
+	  match(node);
 
-	  for (typename automaton_t::initial_iterator i = auto_->initial().begin();
-	       i != auto_->initial().end();
-	       ++i)
-	  {
-            std::list<htransition_t>	e;
-            for (typename automaton_t::delta_iterator j(auto_->value(), *i);
-                 ! j.done();
-                 j.next())
-              e.push_back(*j);
-            for (typename std::list<htransition_t>::const_iterator j = e.begin();
-                 j != e.end();
-                 ++j)
-	    {
-	      // FIXME: The following code is only correct when labels are
-	      // FIXME: series. We should add meta code to make the code
-	      // FIXME: fail at runtime when this function is called
-	      // FIXME: with label as letters. However, we cannot afford
-	      // FIXME: an error at compile time, because the rest
-	      // FIXME: of this matcher is valid for Boolean automata when
-	      // FIXME: labels are letter.
-	      typedef typename automaton_t::label_t	label_t;
-	      typedef Element<series_set_t, label_t>	label_elt_t;
+          std::list<htransition_t>	e;
+          for (typename automaton_t::delta_iterator j(auto_->value(), initial_);
+               ! j.done();
+               j.next())
+            e.push_back(*j);
+          for (typename std::list<htransition_t>::const_iterator j = e.begin();
+               j != e.end();
+               ++j)
+          {
+            // FIXME: The following code is only correct when labels are
+            // FIXME: series. We should add meta code to make the code
+            // FIXME: fail at runtime when this function is called
+            // FIXME: with label as letters. However, we cannot afford
+            // FIXME: an error at compile time, because the rest
+            // FIXME: of this matcher is valid for Boolean automata when
+            // FIXME: labels are letter.
+            typedef typename automaton_t::label_t	label_t;
+            typedef Element<series_set_t, label_t>	label_elt_t;
 
-	      label_elt_t label (automata_set_.series(), auto_->label_of(*j));
-	      label  = weight * label;
+            label_elt_t label (automata_set_.series(), auto_->label_of(*j));
+            label  = weight * label;
 
-	      hstate_t dst = auto_->dst_of(*j);
-	      auto_->del_transition(*j);
+            hstate_t dst = auto_->dst_of(*j);
+            auto_->del_transition(*j);
 
-	      if (label != zero_as<label_t>::of(automata_set_.series()))
-		auto_->add_transition(*i, dst, label.value());
-	    }
-	    auto_->set_final(*i, weight * auto_->get_final(*i));
-	  }
-	  return auto_;
+            if (label != zero_as<label_t>::of(automata_set_.series()))
+              auto_->add_transition(initial_, dst, label.value());
+          }
+
+          auto_->set_final(initial_, weight * auto_->get_final(initial_));
+          return auto_;
 	}
 	END
 
@@ -150,7 +221,7 @@ namespace vcsn {
 	{
 	  const semiring_t&	semiring = automata_set_.series().semiring();
 	  const semiring_elt_t	weight (semiring, w);
-	  automaton_ptr_t	auto_ = match(node);
+	  match(node);
 
 	  for (typename automaton_t::final_iterator f, next = auto_->final().begin();
 	       next != auto_->final().end();)
@@ -163,16 +234,17 @@ namespace vcsn {
 	    next++;
 	    auto_->set_final(*f, auto_->get_final(*f) * weight);
 	  }
+
 	  return auto_;
 	}
 	END
 
 	MATCH_(Constant, m)
 	{
-	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
-	  hstate_t new_i = auto_->add_state();
-	  hstate_t last = new_i;
-	  hstate_t new_f = new_i;
+	  initial_ = auto_->add_state();
+	  hstate_t last = initial_;
+	  hstate_t new_f = initial_;
+
 	  for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	       i != m.end(); ++i)
 	  {
@@ -180,33 +252,47 @@ namespace vcsn {
 	    auto_->add_letter_transition(last, new_f, *i);
 	    last = new_f;
 	  }
-	  auto_->set_initial(new_i);
+	  auto_->set_initial(initial_);
 	  auto_->set_final(new_f);
+
 	  return auto_;
 	}
 	END
 
 	MATCH(Zero)
 	{
-	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
-	  hstate_t s = auto_->add_state();
-	  auto_->set_initial(s);
+	  initial_ = auto_->add_state();
+	  auto_->set_initial(initial_);
 	  return auto_;
 	}
 	END
 
 	MATCH(One)
 	{
-	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
-	  hstate_t new_i = auto_->add_state();
-	  auto_->set_initial(new_i);
-	  auto_->set_final(new_i);
+	  initial_ = auto_->add_state();
+	  auto_->set_initial(initial_);
+	  auto_->set_final(initial_);
 	  return auto_;
 	}
-      END
+        END
 
       private:
 	automata_set_t automata_set_;
+        // The automata used for construction
+        hstate_t initial_;
+        automaton_ptr_t auto_;
+
+        typedef
+        class
+        {
+          public:
+            inline hstate_t operator[] (hstate_t a)
+            {
+              return a;
+            }
+        } ident_t;
+
+        ident_t identity_;
     };
 
   }
@@ -220,10 +306,9 @@ namespace vcsn {
 		 const Exp& kexp)
   {
     algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> >
-      m(output.structure().series());
-    Output* res = m.match(kexp);
-    output = *res;
-    delete res;
+      m(output);
+
+    m.match(kexp);
   }
 
   template<typename A,

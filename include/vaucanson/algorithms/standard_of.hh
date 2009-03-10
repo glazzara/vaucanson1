@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,7 +43,8 @@ namespace vcsn {
    * Convert a rational expression into a standard automaton.
    *
    * @param  e The expression to convert.
-   * @param  a The automaton to store the result.
+   * @param  a The automaton to store the result. Note that the result
+   *           will be stored in "a" even if it is not empty.
    *
    * @note The automaton is used to enable the use of different series
    *       from the expression.
