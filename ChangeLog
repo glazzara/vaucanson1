@@ -1,5 +1,17 @@
 2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
 
+	Fix tests of Standard and Thompson.
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh:
+	Modify Thompson Tests for product to respect the right behavior. Add
+	a test of equivalence between "ab" and "a.b".
+	* src/tests/include/tests/automata/algos/label_aware_graphs/standard_of_regression_test.hh:
+	Fix a bug using two times the same automaton to be filled without it 
+	being emptied before. 
+	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
+	Same fix as above.
+	
+2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
+
 	Optimization of Standard visitor.
 	* include/vaucanson/algorithms/standard_of.hh: Add information
 	about the function's behavior.

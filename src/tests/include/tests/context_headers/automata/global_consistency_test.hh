@@ -129,6 +129,7 @@ global_consistency_test(tests::Tester& t)
       automaton_t a1 = make_automaton(at);
       automaton_t a2 = make_automaton(at.begin(), at.end());
       automaton_t a3 (aa);
+      automaton_t a3bis (aa);
       automaton_t a4 = standard_of(e);
       automaton_t a5 = thompson_of(e);
       automaton_t a6 = make_automaton(other_at);
@@ -150,8 +151,8 @@ global_consistency_test(tests::Tester& t)
       standard_of(a3, e.value());
       TEST(t, "standard_of is consistent.", a3 == a4);
 
-      thompson_of(a3, e.value());
-      TEST(t, "thompson_of is consistent.", a3 == a5);
+      thompson_of(a3bis, e.value());
+      TEST(t, "thompson_of is consistent.", a3bis == a5);
       test_done = true;
     }
     catch (...)

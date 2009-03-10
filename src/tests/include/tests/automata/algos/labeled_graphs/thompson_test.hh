@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 # include <vaucanson/algorithms/thompson.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/algorithms/equivalent.hh>
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/tools/xml_dump.hh>
 
@@ -126,11 +127,11 @@ bool thompson_test(tests::Tester& tg)
   TEST_ON("1", identity_as<exp_t>::of(ss), 2, 0, 0, 1);
   TEST_ON("a", a, 2, 1, 0, 0);
   TEST_ON("b", b, 2, 0, 1, 0);
-  TEST_ON("ab", ab, 3, 1, 1, 0);
-  TEST_ON("a.b", a * b, 3, 1, 1, 0);
+  TEST_ON("ab", ab, 4, 1, 1, 1);
+  TEST_ON("a.b", a * b, 4, 1, 1, 1);
   TEST_ON("a+b", a + b, 6, 1, 1, 4);
   TEST_ON("a*", krat_t (a).star(), 4, 1, 0, 4);
-  TEST_ON("(a+b)*a(a+b)*", (a + b).star() * a * (a + b).star(), 16, 3, 2, 16);
+  TEST_ON("(a+b)*a(a+b)*", (a + b).star() * a * (a + b).star(), 18, 3, 2, 18);
 
   {
     TEST_MSG("Tests on random expressions.");
@@ -187,6 +188,23 @@ bool thompson_test(tests::Tester& tg)
     SUCCESS_RATE(rate, success, nb_test_done);
     TEST(t, "Random test " + rate, success == nb_test_done);
   }
+
+  {
+    TEST_MSG("Tests of equivalence.");
+    automaton_t	au1 (aa);
+    automaton_t	au2 (aa);
+
+    // Equivalence between ab and a.b
+    {
+      // krat_t ab (ss, mamb); // Defined above.
+      krat_t aconsb = a * b;
+      thompson_of(au1, ab.value ());
+      thompson_of(au2, aconsb.value ());
+      TEST(t, "Equivalence between ab and a.b.", are_equivalent(au1, au2));
+    }
+  }
+
+
   return t.all_passed();
 }
 
