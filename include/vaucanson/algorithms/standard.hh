@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,6 +29,8 @@
  * For Boolean automata, see ETA Chapter 1, Section 5.1.
  * For K-automata, see ETA Chapter 3, Section 2.
  * See also the correction of the exercice 2.24 p.540.
+ * You can also find a page about standard automata at:
+ * https://trac.lrde.org/vaucanson/wiki/StandardNormalizedAutomata
  *
  * @see standardize(), is_standard(), concat_of_standard(),
  *      union_of_standard(), star_of_standard()

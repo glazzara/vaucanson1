@@ -1,3 +1,11 @@
+2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
+
+	Factorize and document Standard algorithm.  
+	* include/vaucanson/algorithms/standard.hh: Add link to Trac's page
+	speaking about standard automata.
+	* include/vaucanson/algorithms/standard.hxx: Factorize functions' body
+	for standard_of modifications.
+
 2009-03-08  Alex Hamelin  <hamelin@lrde.epita.fr>
 
 	Thompson Optimization.

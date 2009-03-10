@@ -2,8 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
-// Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
+// The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -103,40 +103,63 @@ namespace vcsn {
     precondition(is_standard(rhs));
 
     TIMER_SCOPED("union_of_standard");
+
     typedef Element<A, AI1> lhs_t;
-    typedef Element<A, AI2> rhs_t;
-    typedef std::list<typename lhs_t::htransition_t> edelta_ret_t;
 
     // The resulting initial state is that of lhs.
     typename lhs_t::hstate_t new_i = *lhs.initial().begin();
     sum_here(lhs, rhs);
 
-    // Adjust new_i, and handle old_i, the state that was the initial
-    // state of rhs.
-    typename lhs_t::initial_support_t initial = lhs.initial();
-
-    // There are two initial states, old_i is the other.
-    assertion (initial.size() == 2);
-    typename lhs_t::initial_iterator i = initial.begin();
+    assertion (lhs.initial().size() == 2);
+    typename lhs_t::initial_iterator i = lhs.initial().begin();
     typename lhs_t::hstate_t old_i = *i != new_i ? *i : *++i;
 
-    lhs.set_final(new_i,
-		  lhs.get_final(new_i) + lhs.get_final(old_i));
+    union_of_standard_here_common(lhs.structure(), lhs, new_i, old_i);
+  }
 
-    // Add output transitions of old_i to new_i.
-    edelta_ret_t dst;
-    for (typename lhs_t::delta_iterator d(lhs.value(), old_i);
-         ! d.done();
-         d.next())
-      dst.push_back(*d);
-    for_all_const_(edelta_ret_t, d, dst)
+  // Group the common part of the union of standard automata algorithm,
+  // considering the two automata we want to unify are contained in 'a'.
+  // 'new_i' being the initial state of the resulting automata (the initial
+  // state of the "first" automata), only linking and deleting is done here.
+  template<typename A, typename AI>
+  void
+  union_of_standard_here_common(const AutomataBase<A>&,
+                                Element<A, AI>& a,
+                                typename Element<A, AI>::hstate_t& new_i,
+                                typename Element<A, AI>::hstate_t& old_i)
+  {
+    typedef Element<A, AI>                       automaton_t;
+    typedef typename automaton_t::htransition_t  htransition_t;
+    typedef typename automaton_t::delta_iterator delta_iterator_t;
+    typedef std::list<htransition_t>             delta_ret_t;
+
+    // Merge old_i with new_i, thus letting in a only new_i as
+    // initial state, making a standard.
+    a.set_final(new_i,
+                a.get_final(new_i) + a.get_final(old_i));
+
+    // All the storage done here is the consequence of implementation
+    // concerns as BMIG structure used for transitions' representation
+    // is modified whenever a transition is added to the automata.
+    // Thus, when add_series_transition is called, the delta_iterator
+    // we could have used would have been modified, provocking data
+    // corruption.
+    delta_ret_t dst;
+
+    for (delta_iterator_t i(a.value(), old_i);
+         ! i.done();
+         i.next())
+      dst.push_back(*i);
+
+    for_all_const_(delta_ret_t, d, dst)
     {
-      lhs.add_transition(new_i,
-			 lhs.dst_of(*d),
-			 lhs.label_of(*d));
-      lhs.del_transition(*d);
+      a.add_series_transition(new_i,
+                              a.dst_of(*d),
+                              a.series_of(*d));
+      a.del_transition(*d);
     }
-    lhs.del_state(old_i);
+
+    a.del_state(old_i);
   }
 
   template<typename A, typename AI1, typename AI2>
@@ -158,7 +181,7 @@ namespace vcsn {
   /*--------------.
   | is_standard.  |
   `--------------*/
-  template <typename A, typename AI>
+  template<typename A, typename AI>
   bool
   do_is_standard(const AutomataBase<A>&, const Element<A, AI>& a)
   {
@@ -202,16 +225,15 @@ namespace vcsn {
     TIMER_SCOPED("concat_of_standard");
     typedef Element<A, AI1> lhs_t;
     typedef Element<A, AI2> rhs_t;
-    AUTOMATON_TYPES(lhs_t);
-    typedef std::map<hstate_t, hstate_t>	map_t;
-    typedef std::list<htransition_t>		delta_ret_t;
+    typedef typename lhs_t::hstate_t l_hstate_t;
+    typedef typename rhs_t::hstate_t r_hstate_t;
+    typedef std::map<l_hstate_t, r_hstate_t>	map_t;
 
     /*------------------.
     | Concat of states. |
     `------------------*/
     map_t	map_h;
-    delta_ret_t	dst;
-    hstate_t	new_state;
+    l_hstate_t	new_state;
 
     // Add states except the initial one.
     for (typename rhs_t::state_iterator s = rhs.states().begin();
@@ -237,38 +259,78 @@ namespace vcsn {
 			     rhs.label_of(*d));
       }
 
-    // Concat final states of lhs to the initial state of rhs.
-    hstate_t rhs_i = *rhs.initial().begin();
-    dst.clear();
-    for (typename rhs_t::delta_iterator i(rhs.value(), rhs_i);
-         ! i.done();
-         i.next())
-      dst.push_back(*i);
-    for_all_const_final_states(f, lhs)
-    {
-      typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
-      for_all_const_(delta_ret_t, d, dst)
-	lhs.add_series_transition(*f,
-				  map_h[rhs.dst_of(*d)],
-				  weight * rhs.label_of(*d));
-    }
 
-    // Multiply final transitions of lhs by the final multiplicity of the
-    // initial state of rhs.
-    typename lhs_t::series_set_elt_t rhs_iw = rhs.get_final(rhs_i);
-    typename lhs_t::final_support_t support = lhs.final();
-    for (typename lhs_t::final_iterator next = lhs.final().begin();
-	 next != lhs.final().end();)
-    {
-      typename lhs_t::final_iterator f = next;
-      next++;
-      lhs.set_final(*f, lhs.get_final(*f) * rhs_iw);
-    }
+    r_hstate_t rhs_i = *rhs.initial().begin();
+
+    concat_of_standard_here_common(lhs.structure(),
+                                   lhs,
+                                   rhs,
+                                   rhs_i,
+                                   lhs.final().begin(),
+                                   lhs.final().end(),
+                                   map_h);
 
     // Set transitions coming from rhs to final if needed.
     for_all_const_(map_t, nf, map_h)
       if (rhs.is_final(nf->first))
 	lhs.set_final(nf->second, rhs.get_final(nf->first));
+  }
+
+  // Group the common part of the concat of standard automata algorithm.
+  // - 'lhs' and 'rhs' are the to automaton to concatanate.
+  // - 'rhs_i' is the initial state of rhs.
+  // - 'lhs_final_*' are respectively the begin and end iterator of the set
+  // containing the final states of lhs.
+  // - accessor is a view of the states of lhs states corresponding to rhs
+  // states
+  template<typename A, typename AI1, typename AI2, typename T1, typename T2>
+  void
+  concat_of_standard_here_common(const AutomataBase<A>&,
+                                 Element<A, AI1>& lhs,
+                                 const Element<A, AI2>& rhs,
+                                 typename Element<A, AI2>::hstate_t& rhs_i,
+                                 const T1& lhs_finals_b,
+                                 const T1& lhs_finals_e,
+                                 T2& accessor)
+  {
+    typedef Element<A, AI1>                     lhs_t;
+    typedef Element<A, AI2>                     rhs_t;
+    typedef T1                                  lhs_final_it_t;
+    typedef typename rhs_t::delta_iterator      delta_iterator_t;
+    typedef typename lhs_t::htransition_t       htransition_t;
+    typedef std::list<htransition_t>            delta_ret_t;
+
+    delta_ret_t dst;
+
+    for (delta_iterator_t i(rhs.value(), rhs_i);
+         ! i.done();
+         i.next())
+      dst.push_back(*i);
+
+    // Concat final states of lhs to the rhs' intial state's followers.
+    for (lhs_final_it_t f = lhs_finals_b;
+         f != lhs_finals_e;
+         ++f)
+    {
+      typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
+
+      for_all_const_(delta_ret_t, d, dst)
+        lhs.add_series_transition(*f,
+                                  accessor[rhs.dst_of(*d)],
+                                  weight * rhs.label_of(*d));
+    }
+
+    // Multiply final transitions of lhs by the final multiplicity of the
+    // initial state of rhs.
+    typename lhs_t::series_set_elt_t rhs_iw = rhs.get_final(rhs_i);
+
+    for (lhs_final_it_t next = lhs_finals_b;
+	 next != lhs_finals_e;)
+    {
+      lhs_final_it_t f = next;
+      next++;
+      lhs.set_final(*f, lhs.get_final(*f) * rhs_iw);
+    }
   }
 
   template<typename A, typename AI1, typename AI2>
@@ -298,27 +360,49 @@ namespace vcsn {
     precondition(is_standard(a));
 
     TIMER_SCOPED("star_of_standard");
-    typedef Element<A, AI> automaton_t;
-    AUTOMATON_TYPES(automaton_t);
-    typedef std::list<htransition_t>		edelta_ret_t;
 
-    edelta_ret_t			dst;
-    hstate_t				new_i = *a.initial().begin();
+    assertion (a.initial().size() == 1);
+    typename Element<A, AI>::hstate_t new_i = *a.initial().begin();
+    star_of_standard_here_common(a.structure(), a, new_i);
+  }
+
+  // Group the common part of the star of standard automata algorithm.
+  template<typename A, typename AI>
+  void
+  star_of_standard_here_common(const AutomataBase<A>&,
+                               Element<A, AI>& a,
+                               typename Element<A, AI>::hstate_t& new_i)
+  {
+    typedef Element<A, AI>              automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+    typedef std::list<htransition_t>    delta_ret_t;
+
+    // Let p a final state of A and i the initial state of A
+    // and Tp the current value of the final transition of p
+    // We have here: Tp = Tp * Ti.
+    // We add transitions from p to all i's followers, labeled by
+    // Ti*Tp*E(i,j) with E(i,j) the value of the transition from i to j.
+
     series_set_elt_t			out_mult = a.get_final(new_i);
 
     out_mult.star();
+
+    delta_ret_t dst;
+
     for (delta_iterator i(a.value(), new_i);
          ! i.done();
          i.next())
       dst.push_back(*i);
+
     for_all_final_states(f, a)
     {
       if (*f != new_i)
       {
 	series_set_elt_t f_mult = a.get_final(*f) * out_mult;
 	a.set_final(*f, f_mult);
-	for_all_const_(edelta_ret_t, d, dst)
-	  a.add_series_transition(*f, a.dst_of(*d), f_mult * a.label_of(*d));
+
+        for_all_const_(delta_ret_t, d, dst)
+          a.add_series_transition(*f, a.dst_of(*d), f_mult * a.label_of(*d));
       }
     }
     a.set_final(new_i, out_mult);
