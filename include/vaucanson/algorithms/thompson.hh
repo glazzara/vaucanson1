@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ namespace vcsn {
    * This  function build  the  automaton associated  to the  rational
    * expression implemented by a krat_exp, using Thompson algorithm.
    *
-   * @param out The resulting automaton
+   * @param out The resulting automaton. `out' must be empty.
    * @param kexp The rational expression
    */
   template<typename A,      typename T,

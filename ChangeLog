@@ -1,3 +1,13 @@
+2009-03-08  Alex Hamelin  <hamelin@lrde.epita.fr>
+
+	Thompson Optimization.
+	* include/vaucanson/algorithms/thompson.hxx: Improve Thompson
+	Visitor by preventing creation of multiple useless automata.
+	Correct a bug in product construction by adding a spontaneous
+	transition.
+	* include/vaucanson/algorithms/thompson.hh: Add documentation about
+	thompson_of behavior.
+
 2009-02-18  Maurice Audin  <audin@lrde.epita.fr>
 
 	Add two new TAF-Kits, char-zmin and char-zmax, with basic tests.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,10 +17,11 @@
 #ifndef VCSN_ALGORITHMS_THOMPSON_HXX
 # define VCSN_ALGORITHMS_THOMPSON_HXX
 
+# include <utility>
+
 # include <vaucanson/algorithms/thompson.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
@@ -28,9 +29,6 @@ namespace vcsn {
   /*----------------.
   | ThompsonVisitor |
   `----------------*/
-  // FIXME : Non optimal version.
-  //	     There are too much construction of automaton.
-
   // FIXME : from now, it is only working over LetterAutomaton
 
   template <class Auto_, class Monoid_, class Semiring_>
@@ -50,7 +48,8 @@ namespace vcsn {
 
     public :
 
-      ThompsonVisitor(const series_set_t& s) : series_(s)
+      ThompsonVisitor(automaton_t &a)
+        : auto_ (a)
       {}
 
       virtual
@@ -60,29 +59,56 @@ namespace vcsn {
       virtual void
       product(const node_t* lhs, const node_t* rhs)
       {
-	automaton_t	*tmp_;
-	rhs->accept(*this);
-	tmp_ = auto_;
+        // Visit left tree
 	lhs->accept(*this);
-	concatenate_of_normalized_here(*auto_, *tmp_);
-	delete(tmp_);
+        // Store results
+        std::pair<hstate_t, hstate_t>     left_ini_fin = ini_fin_;
+        // Visit right tree
+	rhs->accept(*this);
+        // Create spontaneous link between
+        // final of left automaton and initial of right automaton.
+	auto_.add_spontaneous(left_ini_fin.second, ini_fin_.first);
+
+        // Save new initial state.
+        ini_fin_.first = left_ini_fin.first;
       }
 
       virtual void
       sum(const node_t* lhs, const node_t* rhs)
       {
-	automaton_t	*tmp_;
 	lhs->accept(*this);
-	tmp_ = auto_;
+
+        std::pair<hstate_t, hstate_t>     left_ini_fin = ini_fin_;
+        hstate_t new_i = auto_.add_state();
+        hstate_t new_f = auto_.add_state();
+
+        auto_.add_spontaneous(new_i, left_ini_fin.first);
+        auto_.add_spontaneous(left_ini_fin.second, new_f);
+
 	rhs->accept(*this);
-	union_of_normalized_here(*auto_, *tmp_);
+
+        auto_.add_spontaneous(new_i, ini_fin_.first);
+        auto_.add_spontaneous(ini_fin_.second, new_f);
+
+        ini_fin_.first = new_i;
+        ini_fin_.second = new_f;
       }
 
       virtual void
       star(const node_t* node)
       {
 	node->accept(*this);
-	star_of_normalized_here(*auto_);
+	auto_.add_spontaneous(ini_fin_.second, ini_fin_.first);
+
+        hstate_t new_i = auto_.add_state();
+        hstate_t new_f = auto_.add_state();
+
+        auto_.add_spontaneous(new_i, new_f);
+        auto_.add_spontaneous(new_i, ini_fin_.first);
+        auto_.add_spontaneous(ini_fin_.second, new_f);
+
+        ini_fin_.first = new_i;
+        ini_fin_.second = new_f;
       }
 
       virtual void
@@ -90,25 +116,17 @@ namespace vcsn {
       {
 	node->accept(*this);
 
-	AUTOMATON_TYPES(automaton_t);
+	hstate_t new_i = auto_.add_state();
+	hstate_t new_f = auto_.add_state();
 
-	hstate_t new_i = auto_->add_state();
-	hstate_t new_f = auto_->add_state();
+        series_set_elt_t t = auto_.series().zero_;
+        t.assoc(auto_.series().monoid().identity(SELECT(monoid_elt_value_t)), w);
+        auto_.add_series_transition(new_i, ini_fin_.first, t);
 
-	for_all_const_initial_states(i, *auto_)
-	{
-	  series_set_elt_t t = auto_->series().zero_;
-	  t.assoc(auto_->series().monoid().identity(SELECT(monoid_elt_value_t)), w);
-	  auto_->add_series_transition(new_i, *i, t);
-	}
-	for_all_const_final_states(f, *auto_)
-	  auto_->add_spontaneous(*f, new_f);
+        auto_.add_spontaneous(ini_fin_.second, new_f);
 
-	auto_->clear_initial();
-	auto_->clear_final();
-
-	auto_->set_initial(new_i);
-	auto_->set_final(new_f);
+        ini_fin_.first = new_i;
+	ini_fin_.second = new_f;
       }
 
       virtual void
@@ -116,72 +134,77 @@ namespace vcsn {
       {
 	node->accept(*this);
 
-	AUTOMATON_TYPES(automaton_t);
+	hstate_t new_i = auto_.add_state();
+	hstate_t new_f = auto_.add_state();
 
-	hstate_t new_i = auto_->add_state();
-	hstate_t new_f = auto_->add_state();
+        auto_.add_spontaneous(new_i, ini_fin_.first);
 
-	for_all_const_initial_states(i, *auto_)
-	  auto_->add_spontaneous(new_i, *i);
-	for_all_const_final_states(f, *auto_)
-	{
-	  series_set_elt_t t = auto_->series().zero_;
-	  t.assoc(auto_->series().monoid().identity(SELECT(monoid_elt_value_t)), w);
-	  auto_->add_series_transition(*f, new_f, t);
-	}
+        series_set_elt_t t = auto_.series().zero_;
+        t.assoc(auto_.series().monoid().identity(SELECT(monoid_elt_value_t)), w);
+        auto_.add_series_transition(ini_fin_.second, new_f, t);
 
-	auto_->clear_initial();
-	auto_->clear_final();
-
-	auto_->set_initial(new_i);
-	auto_->set_final(new_f);
+        ini_fin_.first = new_i;
+	ini_fin_.second = new_f;
       }
 
       virtual void
       constant(const monoid_elt_value_t& m)
       {
-	auto_ = new automaton_t(automata_set_t(series_));
-	hstate_t new_i = auto_->add_state();
-	hstate_t last = new_i;
-	hstate_t new_f;
-	for (typename monoid_elt_value_t::const_iterator i = m.begin();
-	     i != m.end(); ++i)
+	ini_fin_.first = auto_.add_state();
+	hstate_t link_state;
+
+        typename monoid_elt_value_t::const_iterator i = m.begin();
+
+        ini_fin_.second = auto_.add_state();
+        auto_.add_letter_transition(ini_fin_.first, ini_fin_.second, *i);
+        ++i;
+
+	while (i != m.end())
 	{
-	  new_f = auto_->add_state();
-	  auto_->add_letter_transition(last, new_f, *i);
-	  last = new_f;
+          link_state = auto_.add_state();
+          auto_.add_spontaneous(ini_fin_.second, link_state);
+	  ini_fin_.second = auto_.add_state();
+	  auto_.add_letter_transition(link_state, ini_fin_.second, *i);
+          ++i;
 	}
-	auto_->set_initial(new_i);
-	auto_->set_final(new_f);
       }
 
       virtual void
       zero()
       {
-	auto_ = new automaton_t(automata_set_t(series_));
-	auto_->set_initial(auto_->add_state());
-	auto_->set_final(auto_->add_state());
+        ini_fin_.first = auto_.add_state();
+	ini_fin_.second = auto_.add_state();
       }
 
       virtual void
       one()
       {
-	auto_ = new automaton_t(automata_set_t(series_));
-	hstate_t new_i = auto_->add_state();
-	hstate_t new_f = auto_->add_state();
-	auto_->set_initial(new_i);
-	auto_->set_final(new_f);
-	auto_->add_spontaneous(new_i, new_f);
+	ini_fin_.first = auto_.add_state();
+	ini_fin_.second = auto_.add_state();
+	auto_.add_spontaneous(ini_fin_.first, ini_fin_.second);
       }
 
       const automaton_t		&get_auto() const
       {
-	return *auto_;
+        auto_.clear_initial();
+        auto_.clear_final();
+        auto_.set_initial(ini_fin_.first);
+        auto_.set_final(ini_fin_.second);
+	return auto_;
+      }
+
+      // finalize is used to only set initial and final states of auto_
+      // only once (to spare the multiple set and unset required elsewise).
+      void
+      finalize() const
+      {
+        auto_.set_initial(ini_fin_.first);
+        auto_.set_final(ini_fin_.second);
       }
 
     private :
-      automaton_t		*auto_;
-      const series_set_t	&series_;
+      automaton_t                       &auto_;
+      std::pair<hstate_t, hstate_t>     ini_fin_;
   };
 
   template <typename A, typename auto_t,
@@ -191,13 +214,13 @@ namespace vcsn {
 		 auto_t& output,
 		 const rat::exp<Letter, Weight>& kexp)
   {
-    ThompsonVisitor<auto_t, Letter, Weight> visitor(output.structure().series());
-
+    // You should provide an empty automaton as output.
+    ThompsonVisitor<auto_t, Letter, Weight> visitor(output);
     // FIXME :
     // Static assert : Letter = monoid_elt_value_t,
     //		       Weight = semiring_elt_value_t
     kexp.accept(visitor);
-    output = visitor.get_auto();
+    visitor.finalize();
   }
 
   template<typename A,	    typename T,
