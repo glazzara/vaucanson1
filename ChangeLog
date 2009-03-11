@@ -1,5 +1,13 @@
 2009-03-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Do not use the SCM revision in the version of Vaucanson.
+	Let's keep the source code as independent of the SCM as we can.
+
+	* configure.ac (VCSN_PRE_RELEASE): Don't call.
+	(VCSN_PRE_RELEASE, VCSN_DETECT_SVN_REVISION): Remove.
+
+2009-03-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* AUTHORS: Add Maurice.
 
 2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
@@ -9,11 +17,11 @@
 	Modify Thompson Tests for product to respect the right behavior. Add
 	a test of equivalence between "ab" and "a.b".
 	* src/tests/include/tests/automata/algos/label_aware_graphs/standard_of_regression_test.hh:
-	Fix a bug using two times the same automaton to be filled without it 
-	being emptied before. 
+	Fix a bug using two times the same automaton to be filled without it
+	being emptied before.
 	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
 	Same fix as above.
-	
+
 2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
 
 	Optimization of Standard visitor.
@@ -24,7 +32,7 @@
 
 2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
 
-	Factorize and document Standard algorithm.  
+	Factorize and document Standard algorithm.
 	* include/vaucanson/algorithms/standard.hh: Add link to Trac's page
 	speaking about standard automata.
 	* include/vaucanson/algorithms/standard.hxx: Factorize functions' body

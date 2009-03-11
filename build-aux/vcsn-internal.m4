@@ -1,7 +1,7 @@
 # vcsn.m4                                     -*- Autoconf -*-
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -35,37 +35,4 @@ AC_DEFUN([AC_CHECK_SWIG13],
 		  if test `expr $swig_major \* 100 + $swig_minor 2>/dev/null` -ge 103 >/dev/null 2>&1; then
 		      ac_cv_recent_swig=yes
 		  fi])
-])
-
-
-# VCSN_DETECT_SVN_REVISION
-# ------------------------
-# Detecting SVN revision. Inspired by Stratego/XT.
-AC_DEFUN([VCSN_DETECT_SVN_REVISION],
-[
-  AC_MSG_CHECKING([for the SVN revision of the source tree])
-  # Use the `Rev:' line of the ChangeLog.
-  if test -e "${srcdir}/ChangeLog"; then
-    [SVN_REVISION=$(sed -n '/^\$Rev:/s/[^0-9]//gp' "${srcdir}/ChangeLog")]
-    AC_MSG_RESULT($SVN_REVISION)
-  else
-    SVN_REVISION="0"
-    AC_MSG_RESULT([not available, defaulting to 0])
-  fi
-  AC_SUBST([SVN_REVISION])
-])
-
-
-# VCSN_PRE_RELEASE
-# ----------------
-# Pre-release numbering.
-AC_DEFUN([VCSN_PRE_RELEASE],
-[
-  case $PACKAGE_VERSION in
-    [*[a-z]*])
-      VCSN_DETECT_SVN_REVISION
-      VERSION="${VERSION}pre${SVN_REVISION}"
-      PACKAGE_VERSION="${PACKAGE_VERSION}pre${SVN_REVISION}"
-      ;;
-  esac
 ])
