@@ -1,5 +1,9 @@
 2009-03-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* configure.ac (Swig check): Do not mention SVN in the warning.
+
+2009-03-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Do not use the SCM revision in the version of Vaucanson.
 	Let's keep the source code as independent of the SCM as we can.
 

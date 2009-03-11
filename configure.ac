@@ -91,7 +91,7 @@ AC_CHECK_SWIG13
 # We distribute the product of swig, so do not error out (just warn)
 # if swig is too old : it might not be needed.
 if test "x$ac_cv_recent_swig" != xyes; then
-  AC_MSG_WARN([You need swig >= 1.3 to compile vaucanswig from a fresh SVN checkout.])
+  AC_MSG_WARN([You need swig >= 1.3 to compile vaucanswig from a fresh checkout.])
 fi
 
 if test "x$enable_vaucanswig" = xyes; then
