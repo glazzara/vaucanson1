@@ -23,7 +23,7 @@
  *
  * Conversion between finite support application types.
  *
- * This file  contains a generic  algorithm to convert  finite support
+ * This file contains a generic algorithm to convert finite support
  * applications from one type to another.
  *
  * @see finite_support_convert()
@@ -43,7 +43,7 @@ namespace vcsn
   /**
    * Finite support conversion.
    *
-   * This algorithm  copies the value of a  finite support application
+   * This algorithm copies the value of a finite support application
    * to another, possibly changing its type.
    *
    * @param org The source application to convert.
