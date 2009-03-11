@@ -1,3 +1,7 @@
+2009-03-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* AUTHORS: Add Maurice.
+
 2009-03-10  Alex Hamelin  <hamelin@lrde.epita.fr>
 
 	Fix tests of Standard and Thompson.
@@ -64,7 +68,7 @@
 	./vcsn-char-b -i XML identity-exp exp1.xml
 	./vcsn-char-b -i XML -o XML identity-exp exp1.xml
 
-	* taf-kit/src/common.hh: Split input_type into input_exp_type and 
+	* taf-kit/src/common.hh: Split input_type into input_exp_type and
 	    input_aut_type (Allow XML by default for aut and EXP for regexp).
 	* taf-kit/src/getters.hxx: Add XML input for rat_exp.
 	* taf-kit/src/main.cc: input_exp_type/input_aut_type.
@@ -83,13 +87,13 @@
 
 	Add XML support for rational expressions.
 	We can now load and save rational expressions following the same
-	syntax used for automata, using regexp_loader and regexp_saver 
+	syntax used for automata, using regexp_loader and regexp_saver
 	instead of automaton_loader and automaton_saver.
 
 	The code added might definitely be optimized:
 	  - Some parts of the code could definitely be merged.
 	  - It might not be necessary to have TransitionConverter and
-	    Format in regexp_loader, since we (currently) have only this 
+	    Format in regexp_loader, since we (currently) have only this
 	    way to print rational expressions.
 	  - The names were arbitrarily chosen. (Especially: It now exists
 	    a RegExpHandler and a RegexpHandler [-> typedRegExpHandler ?])
