@@ -468,8 +468,6 @@ diff stderr stderr.ref
 
 # ascii
 # FIXME:  still have a problem with the ' ' (space) character.
-
-
 (
 parser="OPAR=op CPAR=cp PLUS=++ TIMES=.. STAR=** OWEIGHT=ow CWEIGHT=cw ZERO=00 ONE=11"
 end=126 # '~'
@@ -548,5 +546,13 @@ ret=`$VCSN -a"ab" -p"ZERO=x" standard x \| aut-to-exp -`
 test x"$ret" = x"x"
 ret=`$VCSN -a"ab" -p"ZERO=x" thompson x \| aut-to-exp -`
 test x"$ret" = x"x"
+
+
+# Test writing data in RegExp when output as XML.
+$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 \| aut-to-exp -o xml - > regex.xml
+# Make sure we do not need to specify the alphabet or the writing data
+$VCSN exp-to-aut -i xml regex.xml
+ret=`$VCSN expand -i xml regex.xml`
+test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
 exit 0
