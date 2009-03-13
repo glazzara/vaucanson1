@@ -1,5 +1,18 @@
 2009-03-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Do not read the alphabet from the command line with a rational
+	expression has just been read.  Use the alphabet from the
+	expression instead.
+
+	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx (get_alphabet):
+	New overload to retrieve the alphabet of a rat_exp_t.
+	* taf-kit/src/ratexp_commands.hh (standard_of, thompson_of):
+	Do not call make_automaton and get_alphabet.
+	(derived_term_automaton): retrieve the alphabet of the expression
+	that has been read, do not request it from the command line.
+
+2009-03-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Replace <typedRegExp><label>...</label></typedRegExp> by
 	<typedRegExp>...</typedRegExp> in the XML output of rational
 	expressions.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -63,8 +63,7 @@ using vcsn::xml::XML;
 DEFINE_COMMAND (NAME (standard_of)
 		CODE (
 		      rat_exp_t e = get_exp(args, 1);
-		      automaton_t a = make_automaton(get_alphabet(args.alphabet));
-		      a = standard_of(e);
+		      automaton_t a = standard_of(e);
 		      set_writing_data(a, args))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
@@ -73,8 +72,7 @@ DEFINE_COMMAND (NAME (standard_of)
 DEFINE_COMMAND (NAME (thompson_of)
 		CODE (
 		      rat_exp_t e = get_exp(args, 1);
-		      automaton_t a = make_automaton(get_alphabet(args.alphabet));
-		      a = thompson_of(e);
+		      automaton_t a = thompson_of(e);
 		      set_writing_data(a, args))
 		KEEP_AUTOMATON (a)
 		RETURNVALUE (0));
@@ -82,7 +80,7 @@ DEFINE_COMMAND (NAME (thompson_of)
 DEFINE_COMMAND (NAME (derived_term_automaton)
 		CODE (
 		      rat_exp_t e = get_exp(args, 1);
-		      automaton_t a = make_automaton(get_alphabet(args.alphabet));
+		      automaton_t a = make_automaton(get_alphabet(e));
 		      derived_term_automaton(a, e);
 		      set_writing_data(a, args))
 		KEEP_AUTOMATON (a)

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@ using namespace vcsn;
 
 # ifndef WITH_TWO_ALPHABETS
 static alphabet_t get_alphabet (const std::vector<std::string>&);
+static alphabet_t get_alphabet (const rat_exp_t&);
 # else
 static first_alphabet_t get_first_alphabet (const std::vector<std::string>&);
 static second_alphabet_t get_second_alphabet (const std::vector<std::string>&);

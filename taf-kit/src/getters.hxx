@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -73,6 +73,11 @@ static Type Name (const std::vector<std::string>& al)			\
 # ifndef WITH_TWO_ALPHABETS
 
 DEFINE_GET_ALPHABET(get_alphabet, alphabet_t, "alphabet");
+
+static alphabet_t get_alphabet (const rat_exp_t& exp)
+{
+  return exp.structure().monoid().alphabet();
+}
 
 # else
 
