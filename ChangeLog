@@ -1,3 +1,16 @@
+2009-03-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Replace <typedRegExp><label>...</label></typedRegExp> by
+	<typedRegExp>...</typedRegExp> in the XML output of rational
+	expressions.
+
+	* include/vaucanson/xml/builders.hh,
+	include/vaucanson/xml/builders.hxx (create_regexp_node): Take
+	a root_name argument, and use it to replace the	<label> tag.
+	* include/vaucanson/xml/printers.hxx (RegExpPrinter<RE>::print):
+	Do not create the <typedRegExp> tag, instead call create_regexp_node()
+	with "typedRegExp" as root_name.
+
 2009-03-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac (Swig check): Do not mention SVN in the warning.

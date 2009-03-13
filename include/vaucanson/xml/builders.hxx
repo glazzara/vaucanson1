@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -646,7 +646,8 @@ namespace vcsn
       void
       create_regexp_node(const T& e,
 			 xercesc::DOMDocument* doc,
-			 xercesc::DOMElement* root)
+			 xercesc::DOMElement* root,
+			 const char* root_name)
       {
 	typedef typename T::value_t::monoid_elt_value_t	monoid_elt_value_t;
 	typedef typename T::value_t::semiring_elt_value_t	semiring_elt_value_t;
@@ -655,7 +656,7 @@ namespace vcsn
 	typedef Element<typename T::set_t, krat_exp_impl_t > krat_exp_t;
 
 	krat_exp_t res(e);
-	rat::XmlExpVisitor<monoid_elt_value_t, semiring_elt_value_t> v(doc, "label");
+	rat::XmlExpVisitor<monoid_elt_value_t, semiring_elt_value_t> v(doc, root_name);
 	res.value().accept(v);
 	root->appendChild(v.get());
       }

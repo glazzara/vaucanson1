@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -89,7 +89,7 @@ namespace vcsn
 
     /**
      * monGenHandler
-     * 
+     *
      * @arg T the type of the monoid
      * @arg U the type of the object we will act on
      */
@@ -120,7 +120,7 @@ namespace vcsn
 
     /**
      * monGenTupleHandler
-     * 
+     *
      * @arg T the type of the monoid
      * @arg U the type of the object we will act on
      */
@@ -343,7 +343,8 @@ namespace vcsn
       void
       create_regexp_node(const T&,
 			 xercesc::DOMDocument* doc,
-			 xercesc::DOMElement* root);
+			 xercesc::DOMElement* root,
+			 const char* root_name = "label");
 
       template <typename T>
       void

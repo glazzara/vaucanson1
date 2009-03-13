@@ -216,13 +216,11 @@ namespace vcsn
 
       DOMElement* valueType = tools::create_element(doc_, "valueType");
       regexp->appendChild(valueType);
+      builders::create_type_writingData_node(regexp_, doc_, valueType);
       builders::create_semiring_node(regexp_, doc_, valueType);
       builders::create_monoid_node(regexp_, doc_, valueType);
 
-      DOMElement* content = tools::create_element(doc_, "typedRegExp");
-      regexp->appendChild(content);
-
-      builders::create_regexp_node(regexp_, doc_, content);
+      builders::create_regexp_node(regexp_, doc_, regexp, "typedRegExp");
 
       // Print it!
       print_xml(out, impl_, root_);
