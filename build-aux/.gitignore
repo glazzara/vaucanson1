@@ -1,0 +1,9 @@
+/config.guess
+/config.sub
+/depcomp
+/elisp-comp
+/install-sh
+/ltmain.sh
+/missing
+/py-compile
+/tests.m4

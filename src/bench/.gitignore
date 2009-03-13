@@ -1,0 +1,3 @@
+*-bench.cc
+*/Makefile.am
+!common/Makefile.am

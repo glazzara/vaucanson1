@@ -1,0 +1,11 @@
+generate_headers.sh
+generic_contexts.mk
+/vaucanson/boolean_*.hh
+/vaucanson/char_*.hh
+/vaucanson/fmp_*.hh
+/vaucanson/int_*.hh
+/vaucanson/r_*.hh
+/vaucanson/z_*.hh
+/vaucanson/contexts/bmig/
+/vaucanson/contexts/listg/
+/vaucanson/config/pconf.hh
