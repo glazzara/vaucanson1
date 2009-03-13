@@ -694,10 +694,6 @@
 	* include/vaucanson/misc/usual_macros.hh: Make new iterator
 	  types line up with everything else.
 
-2008-12-08  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some ignores for new tests.
-
 2008-12-03  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix typo.
@@ -1179,10 +1175,6 @@
 
 2008-11-27  Reuben Thomas  <rrt@sc3d.org>
 
-	Add some ignores.
-
-2008-11-27  Reuben Thomas  <rrt@sc3d.org>
-
 	cderivate is not built into libs, so don't guard it.
 	* include/vaucanson/algorithms/krat_exp_cderivation.hh: This file is
 	  never included in libs, so comment out the VCSN_USE_LIB guard and
@@ -1192,14 +1184,6 @@
 
 	Flag a problem with FIXME.
 	* src/tests/bin/generate-test-suite.sh: .
-
-2008-11-26  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some more ignores.
-
-2008-11-26  Reuben Thomas  <rrt@sc3d.org>
-
-	Add svn:ignore properties.
 
 2008-11-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
@@ -3050,10 +3034,6 @@
 	* include/vaucanson/algorithms/internal/build_pattern.hxx:
 	  "an other" -> "another".
 
-2008-10-30  Reuben Thomas  <rrt@sc3d.org>
-
-	Add new test suites to svn:ignore property.
-
 2008-10-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add more filters to generate_libvcsn.rb and expand.sh.
@@ -3213,11 +3193,6 @@
 	* /include/vaucanson/automata/conceptautomata_base.hh: "states"
 	  should be "transitions".
 
-2008-10-28  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
-
-	Simplify svn ignore of sanity.
-	Replace the list of exhaustive files by vaucanson_*_hh.cc
-
 2008-10-27  Reuben Thomas  <rrt@sc3d.org>
 
 	Fix English typo.
@@ -3307,10 +3282,6 @@
 	Use English for automaton names.
 	* src/demos/one_rule_rewriting/ORR_demo.cc: Use "L" and "R"
 	  rather than "G" and "D" in name labels.
-
-2008-10-24  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some missing tests to svn:ignore list.
 
 2008-10-24  Reuben Thomas  <rrt@sc3d.org>
 
@@ -4182,10 +4153,6 @@
 
 2008-10-03  Reuben Thomas  <rrt@sc3d.org>
 
-	Add config.h.in to svn:ignore properties.
-
-2008-10-03  Reuben Thomas  <rrt@sc3d.org>
-
 	Remove use of AX_BOOST_WSERIALIZATION.
 	* build-aux/ax_boost_wserialization.m4: Remove.
 	* configure.ac: Don't use AX_BOOST_WSERIALIZATION, as it
@@ -4229,14 +4196,6 @@
 
 	Add missing semi-column.
 	* algebra/concept/letter.hxx: here.
-
-2008-09-30  Reuben Thomas  <rrt@sc3d.org>
-
-	Add .libs to svn:ignore.
-
-2008-09-30    <rrt@sc3d.org>
-
-	Add some svn:ignore patterns.
 
 2008-09-29  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
@@ -4325,66 +4284,6 @@
 
 2008-09-25  Reuben Thomas  <rrt@sc3d.org>
 
-	Add HACKING.pdf to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add Makefile to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add more svn:ignore patterns.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add .deps to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add Makefile to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add more svn:ignore names.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add more names to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add rw_tdc to svn:ignore, remove functions_library.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add function_library to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some patterns to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some names to svn:ignore property.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add vaucanson_config_pconf_hh.cc to svn:ignore.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add Makefile to svn:ignore property.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Update and simplify ignore patterns.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some ignore properties.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
 	Write ChangeLog for r2182.
 	* ChangeLog: Write what should have gone in r2182.
 
@@ -4400,10 +4299,6 @@
 	  a few (but not many) .cc files for tightly-coupled algorithms,
 	  so that we don't have to rebuild entire libraries when only
 	  changing one algorithm.
-
-2008-09-25  Reuben Thomas  <rrt@sc3d.org>
-
-	Add some ignore patterns to svn:ignore.
 
 2008-09-25  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
@@ -5142,10 +5037,6 @@ instances to them.
 
 2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
-	Update svn:ignore on lib.
-
-2008-08-06  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
-
 	Update taf-kit to use new letter_traits.
 	* taf-kit/src/b_commands.cc: Add letter context.
 	* taf-kit/src/commands_macros.hh: Add macro to import letter context.
@@ -5268,7 +5159,6 @@ instances to them.
 2008-08-04  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add int_z_transducer context.
-	Update svn ignore
 
 	* include/vaucanson/automata/generic_contexts/int_z_transducer.hh: New.
 	* include/vaucanson/automata/generic_contexts/int_z_transducer_structures.hh: New.
@@ -5288,8 +5178,6 @@ instances to them.
 2008-08-03  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Add integer based z_fmp_transducers context.
-
-	Update ignore properties on include/vaucanson
 
 	* include/Makefile.am: Add files to the sources.
 	* include/vaucanson/automata/generic_contexts/int_z_fmp_transducer.hh: New.
@@ -5386,11 +5274,6 @@ instances to them.
 	taf-kit/tests/automata/int-z/int-z.xml: New files.
 	* taf-kit/tests/Makefile.am: Adjust.
 	* taf-kit/tests/defs.in (int_z): New variable.
-
-2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
-
-	Update ignores on sanity tests.
-	* src/tests/sanity: Add new contexts generated files to ignore list.
 
 2008-08-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
@@ -5994,10 +5877,6 @@ instances to them.
 	FSMXML, Remove rat exp dependence on xml_exp_visitor.
 	* implementation/series/rat/exp.hh: Here.
 	* implementation/series/rat/exp.hxx: Here.
-
-2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
-
-	FSMXML, Update sanity ignore.
 
 2008-06-19  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
@@ -7960,10 +7839,6 @@ instances to them.
 
   2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
 
-	update svn:ignore property
-
-  2007-10-18  Guillaume Lazzara  <z@lrde.epita.fr>
-
 	Enable generic Graph structure conversion.
 	By default, the source Graph was just copied to the destination one.
 	Since the structures can be different, I needed to implement a generic
@@ -8773,10 +8648,6 @@ instances to them.
 
 	Optimisation of eps_removal_sp.
 	* include/vaucanson/algorithms/eps_removal_sp.hxx: .
-
-2008-03-03  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
-
-	Add missing svn:ignore and svn:executable properties.
 
 2008-03-02  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
@@ -9752,10 +9623,6 @@ instances to them.
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/xml_chooser.hh,
 	* taf-kit/src/common_commands.hh: replace old header includes.
-
-2007-07-27  Guillaume Lazzara  <z@lrde.epita.fr>
-
-	Update svn ignore property
 
 2007-07-27  Guillaume Lazzara  <z@lrde.epita.fr>
 
