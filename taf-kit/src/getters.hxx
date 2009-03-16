@@ -95,7 +95,8 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
 
   // Build a monoid and a series with smart token representations.
   alphabet_t alpha;
-  monoid_t M(((s == "-") || (GLOBAL_RESULT.input_exp_type == INPUT_TYPE_EXP))
+  monoid_t M(((s == "-") ||
+	      (global_result.input_exp_type == INPUT_TYPE_EXP))
 	     ? get_alphabet(alphabet) : alpha);
   semiring_t S;
   series_set_t series(S, M);
@@ -106,13 +107,13 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
   if (s == "-")
   {
     return boost::apply_visitor(rat_exp_getter(M.alphabet(),
-					       GLOBAL_RESULT.name,
+					       global_result.name,
 					       *(M.representation()),
 					       *(series.representation())),
-				GLOBAL_RESULT.output);
+				global_result.output);
   }
 
-  switch (GLOBAL_RESULT.input_exp_type)
+  switch (global_result.input_exp_type)
   {
     case INPUT_TYPE_XML:
     {
@@ -197,8 +198,8 @@ static automaton_t get_aut (const arguments_t& args, int n)
   if (s == "-")
     {
       automaton_t a = boost::apply_visitor
-	(automaton_getter (GLOBAL_RESULT.name,
-			   GLOBAL_RESULT.input_aut_type), GLOBAL_RESULT.output);
+	(automaton_getter (global_result.name,
+			   global_result.input_aut_type), global_result.output);
 
       // Set the writing data before return.
       set_writing_data(a, args);
@@ -235,7 +236,7 @@ static automaton_t get_aut (const arguments_t& args, int n)
     automaton_t a = make_automaton(first_alphabet_t(), second_alphabet_t());
 # endif // !WITH_TWO_ALPHABETS
 
-    switch (GLOBAL_RESULT.input_aut_type)
+    switch (global_result.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());
@@ -274,8 +275,8 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
   {
     IOAUT_CONTEXT::automaton_t a =
       boost::apply_visitor(boolean_automaton_getter
-			   (GLOBAL_RESULT.name, GLOBAL_RESULT.input_aut_type),
-			   GLOBAL_RESULT.output);
+			   (global_result.name, global_result.input_aut_type),
+			   global_result.output);
 
     // Set the writing data before return.
     set_boolean_writing_data(a, args);
@@ -292,7 +293,7 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
     IOAUT_CONTEXT::automaton_t a =
       IOAUT_CONTEXT::make_automaton(first_alphabet_t());
 
-    switch (GLOBAL_RESULT.input_aut_type)
+    switch (global_result.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());

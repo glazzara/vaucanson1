@@ -66,7 +66,7 @@ vcsn::misc::Timer global_timer;
 vcsn::misc::Bencher bencher;
 
 // A global command output;
-command_output last_command_output;
+command_output global_result;
 #include "pipe_command_sequence.hh"
 
 // Writer for final output
@@ -279,7 +279,7 @@ int main (int argc, char* argv[])
     }
   command_list.push_back (pipe_command (argv, j, i));
 
-  GLOBAL_RESULT.set_state (PIPE_GET_FROM_STDIN);
+  global_result.set_state (PIPE_GET_FROM_STDIN);
 
   arguments_t args(program_name);
 
@@ -353,12 +353,12 @@ int main (int argc, char* argv[])
 
 	  try
 	    {
-	      GLOBAL_RESULT.clear ();
-	      GLOBAL_RESULT.set_name (args.args[0]);
-	      GLOBAL_RESULT.output_aut_type = args.output_aut_type;
-	      GLOBAL_RESULT.output_exp_type = args.output_exp_type;
-	      GLOBAL_RESULT.input_aut_type = args.input_aut_type;
-	      GLOBAL_RESULT.input_exp_type = args.input_exp_type;
+	      global_result.clear ();
+	      global_result.set_name (args.args[0]);
+	      global_result.output_aut_type = args.output_aut_type;
+	      global_result.output_exp_type = args.output_exp_type;
+	      global_result.input_aut_type = args.input_aut_type;
+	      global_result.input_exp_type = args.input_exp_type;
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
 	      TIMER_SCOPED(os.str () + std::string (args.args[0]));
@@ -369,17 +369,17 @@ int main (int argc, char* argv[])
 	    status = -1;
 	  }
 
-	  GLOBAL_RESULT.status = status;
+	  global_result.status = status;
 	  // Break upon error
 	  if (status != 0)
 	    break;
 	}
 
-      if (!GLOBAL_RESULT.empty)
+      if (!global_result.empty)
 	boost::apply_visitor (pipe_stream_writer (std::cout,
-						  GLOBAL_RESULT.output_aut_type,
-						  GLOBAL_RESULT.output_exp_type),
-			      GLOBAL_RESULT.output);
+						  global_result.output_aut_type,
+						  global_result.output_exp_type),
+			      global_result.output);
 
       TIMER_STOP ();
 
@@ -393,7 +393,7 @@ int main (int argc, char* argv[])
       if (args.export_time_xml)
 	TIMER_DUMP(std::cerr);
 
-      GLOBAL_RESULT.set_state (PIPE_BENCH);
+      global_result.set_state (PIPE_BENCH);
     }
 
   if (args.bench)
@@ -401,5 +401,5 @@ int main (int argc, char* argv[])
   if (!args.plot_output_filename.empty())
     BENCH_SAVE_PLOT(args.plot_output_filename.c_str());
 
-  return GLOBAL_RESULT.status;
+  return global_result.status;
 }

@@ -39,13 +39,13 @@
 # define CODE(Code) Code,
 # define RETURNVALUE(ReturnValue) (ReturnValue)
 
-# define KEEP_AUTOMATON(Output) GLOBAL_RESULT.keep (Output),
-# define KEEP(Output) GLOBAL_RESULT.keep (Output),
-# define PRINT_RESULT(Output) GLOBAL_RESULT.init ();		\
-                              GLOBAL_RESULT.stream << Output;	\
-                              GLOBAL_RESULT.finalize ()
+# define KEEP_AUTOMATON(Output) global_result.keep (Output),
+# define KEEP(Output) global_result.keep (Output),
+# define PRINT_RESULT(Output) global_result.init ();		\
+                              global_result.stream << Output;	\
+                              global_result.finalize ()
 # define SET_RETURN_VALUE(ReturnValue)		\
-           GLOBAL_RESULT.status = ReturnValue
+           global_result.status = ReturnValue
 
 # define OUTPUT(Output) PRINT_RESULT(Output),
 # define OUTPUT_ON_VERBOSE(Output) PRINT_RESULT((args.verbose ? Output : "")),

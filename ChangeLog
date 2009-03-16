@@ -1,5 +1,12 @@
 2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/getters.hxx, taf-kit/src/commands_macros.hh,
+	taf-kit/src/common.hh, taf-kit/src/main.cc: replace the
+	GLOBAL_RESULT macro and the associated variable
+	last_command_output, by the variable global_result.
+
+2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/commands_macros.hh, taf-kit/src/getters.hxx: Get rid
 	of all GLOBAL_RESULT "#ifdef"s.
 
