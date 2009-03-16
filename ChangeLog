@@ -1,5 +1,9 @@
 2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/pipe_command_sequence.hh: Remove useless includes.
+
+2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Merge KEEP_AUTOMATON with KEEP in Taf-Kit.
 
 	* taf-kit/src/commands_macros.hh (KEEP_AUTOMATON): Remove.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,9 +27,6 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
-# include <vaucanson/tools/io.hh>
-
-# include <boost/variant.hpp>
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
@@ -39,7 +36,7 @@ struct pipe_command
 {
   pipe_command (char*  argv[],
 		int    start,
-		int    end);		
+		int    end);
   arguments_t args;
   int	      length;
   int	      status;
