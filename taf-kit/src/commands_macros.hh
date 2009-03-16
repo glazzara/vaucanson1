@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,28 +39,16 @@
 # define CODE(Code) Code,
 # define RETURNVALUE(ReturnValue) (ReturnValue)
 
-# ifdef GLOBAL_RESULT
-#  define KEEP_AUTOMATON(Output) GLOBAL_RESULT.keep (Output),
-#  define KEEP(Output) GLOBAL_RESULT.keep (Output),
-#  define PRINT_RESULT(Output) GLOBAL_RESULT.init ();		\
-                               GLOBAL_RESULT.stream << Output;	\
-                               GLOBAL_RESULT.finalize ()
-#  define SET_RETURN_VALUE(ReturnValue)		\
-            GLOBAL_RESULT.status = ReturnValue
-# else
-#  define KEEP(Output) echo_ (Output),
-#  define KEEP_AUTOMATON(Output)					\
-            echo_ (automaton_saver (Output, string_out (), XML ())),
-#  define PRINT_RESULT(Output) echo_ (Output)
-#  define SET_RETURN_VALUE(ReturnValue) ((void) 0)
-# endif /* !GLOBAL_RESULT */
+# define KEEP_AUTOMATON(Output) GLOBAL_RESULT.keep (Output),
+# define KEEP(Output) GLOBAL_RESULT.keep (Output),
+# define PRINT_RESULT(Output) GLOBAL_RESULT.init ();		\
+                              GLOBAL_RESULT.stream << Output;	\
+                              GLOBAL_RESULT.finalize ()
+# define SET_RETURN_VALUE(ReturnValue)		\
+           GLOBAL_RESULT.status = ReturnValue
 
 # define OUTPUT(Output) PRINT_RESULT(Output),
 # define OUTPUT_ON_VERBOSE(Output) PRINT_RESULT((args.verbose ? Output : "")),
-
-# ifdef GLOBAL_RESULT						\
-
-# endif /* !GLOBAL_RESULT */					\
 
 // Command without any special form.
 # define DEFINE_COMMAND_(CodeName, Code, Output, ReturnValue)	\

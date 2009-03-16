@@ -1,3 +1,8 @@
+2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/src/commands_macros.hh, taf-kit/src/getters.hxx: Get rid
+	of all GLOBAL_RESULT "#ifdef"s.
+
 2009-03-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-b.test: Add more tests for rational
