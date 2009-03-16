@@ -1,3 +1,11 @@
+2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Do not force --alphabet to be used with rat_exps on internal pipe.
+
+	* taf-kit/src/getters.hxx (get_exp): Do not force calls
+	to get_alphabet when reading from "-".
+	* taf-kit/tests/vcsn-char-b.test: Add a test case.
+
 2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Preserve the representations in standard_of and thompson_of.

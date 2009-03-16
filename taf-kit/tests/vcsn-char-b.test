@@ -555,4 +555,12 @@ $VCSN exp-to-aut -i xml regex.xml
 ret=`$VCSN expand -i xml regex.xml`
 test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
+# Chain many pipes.  Note that these pipes have two types: they can be
+# automata or rational expressions.
+ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 \| aut-to-exp - \|\
+     identity-exp - \| identity-exp - \| exp-to-aut - \| identity - \|\
+     aut-to-exp - \| identity-exp - \| expand -`
+test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
+
+
 exit 0

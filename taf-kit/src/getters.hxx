@@ -20,7 +20,7 @@
 
 /**
  * @file getters.hxx
- * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
+ * @author Michaï¿½l Cadilhac <michael.cadilhac@lrde.org>
  *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
  * This file contains the implementation of the getters.
@@ -94,9 +94,15 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
   const std::vector<std::string>& alphabet = args.alphabet;
 
   // Build a monoid and a series with smart token representations.
+  //
+  // FIXME: ideally we should call get_alphabet() when s == "-" and we
+  // are reading from STDIN, but it's not clear how to detect that
+  // here.  When s == "-", there is more chances that we are reading
+  // the output of the previous command and we should not force the
+  // call to get_alphabet().
   alphabet_t alpha;
-  monoid_t M(((s == "-") ||
-	      (global_result.input_exp_type == INPUT_TYPE_EXP))
+  monoid_t M((!alphabet.empty() ||
+	      (s != "-" && global_result.input_exp_type == INPUT_TYPE_EXP))
 	     ? get_alphabet(alphabet) : alpha);
   semiring_t S;
   series_set_t series(S, M);
