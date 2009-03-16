@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,19 +57,19 @@ using vcsn::xml::XML;
   `---------------------------------------*/
 
 
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (trim));
+DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
+		       ALGO(trim));
 
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (transpose));
+DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
+		       ALGO(transpose));
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal)
-				  ARG_KIND (aut)
-				  ALGOS (accessible, eps_removal));
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(eps_removal)
+				 ARG_KIND(aut)
+				 ALGOS(accessible, eps_removal));
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
-				  ARG_KIND (aut)
-				  ALGOS (accessible, eps_removal_sp));
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(eps_removal_sp)
+				 ARG_KIND(aut)
+				 ALGOS(accessible, eps_removal_sp));
 
 /*DEFINE_COMMAND (NAME (are_isomorphic)
 		CODE (bool b = are_isomorphic(get_aut(args, 1),
@@ -83,44 +83,43 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal_sp)
 
 DEFINE_IS_PROPERTY_COMMAND(empty);
 
-DEFINE_COMMAND (NAME (has_succ_comp)
-		CODE (
-                      bool succ_comp = has_succ_comp(get_aut(args, 1)))
-		OUTPUT_ON_VERBOSE (
-		  (succ_comp ? "Input has successful computation\n" : "Input has no successful computation\n"))
-		RETURNVALUE (succ_comp ? 0: 1));
+DEFINE_COMMAND(NAME(has_succ_comp)
+	       CODE(bool succ_comp = has_succ_comp(get_aut(args, 1)))
+	       OUTPUT_ON_VERBOSE(
+		  (succ_comp ? "Input has successful computation\n"
+		   : "Input has no successful computation\n"))
+	       RETURNVALUE(succ_comp ? 0: 1));
 
-DEFINE_COMMAND (NAME (info)
-		CODE (automaton_t a = get_aut(args, 1))
-		OUTPUT (
+DEFINE_COMMAND(NAME(info)
+	       CODE(automaton_t a = get_aut(args, 1))
+	       OUTPUT(
 		  "States: " << a.states ().size () << std::endl
 		  << "Transitions: " << a.transitions ().size () << std::endl
 		  << "Initial states: " << a.initial ().size () << std::endl
 		  << "Final states: " << a.final ().size () << std::endl)
-		RETURNVALUE (0));
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (identity)
-		CODE (automaton_t a = get_aut(args, 1))
-		KEEP_AUTOMATON (a)
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(identity)
+	       CODE(automaton_t a = get_aut(args, 1))
+	       KEEP(a)
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (display)
-		CODE (bool b = vcsn::tools::dot_display(get_aut(args, 1),
+DEFINE_COMMAND(NAME(display)
+	       CODE(bool b = vcsn::tools::dot_display(get_aut(args, 1),
 							"A", true))
-		OUTPUT ("")
-		RETURNVALUE ((b ? 0 : 1)));
+	       OUTPUT("")
+	       RETURNVALUE((b ? 0 : 1)));
 
 # define USE_IO_COMMAND_GROUP()						\
-  COMMAND_GROUP (							\
+  COMMAND_GROUP(							\
     "Input/output work:",						\
 									\
-    COMMAND_ENTRY (display, Aut, "Display `aut'."),			\
-    COMMAND_ENTRY (edit_automaton, File,				\
-		   "Edit an automaton."),				\
-    COMMAND_ENTRY (identity, Aut, "Return `aut'."),			\
-    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'."),	\
-    COMMAND_ENTRY (list_automata, Nil, "List predefined automata.")	\
-									\
+    COMMAND_ENTRY(display, Aut, "Display `aut'."),			\
+    COMMAND_ENTRY(edit_automaton, File,					\
+		  "Edit an automaton."),				\
+    COMMAND_ENTRY(identity, Aut, "Return `aut'."),			\
+    COMMAND_ENTRY(info, Aut, "Print useful infos about `aut'."),	\
+    COMMAND_ENTRY(list_automata, Nil, "List predefined automata.")	\
     )
 
 #endif /* !COMMON_COMMANDS_HH */

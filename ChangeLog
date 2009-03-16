@@ -1,5 +1,15 @@
 2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Merge KEEP_AUTOMATON with KEEP in Taf-Kit.
+
+	* taf-kit/src/commands_macros.hh (KEEP_AUTOMATON): Remove.
+	* taf-kit/src/commands_macros.hh, common_automaton_commands.hh,
+	taf-kit/src/common_commands.hh, taf-kit/src/fmp_commands.cc,
+	taf-kit/src/ratexp_commands.hh: Replace all uses of KEEP_AUTOMATON
+	by uses of KEEP.
+
+2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/getters.hxx, taf-kit/src/commands_macros.hh,
 	taf-kit/src/common.hh, taf-kit/src/main.cc: replace the
 	GLOBAL_RESULT macro and the associated variable

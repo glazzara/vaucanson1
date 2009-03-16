@@ -60,71 +60,71 @@ using vcsn::xml::XML;
 // 2 - it will probably require to rewrite bits of the
 //     standard_of _algorithm_ to use automaton traits, so we should probably
 //     wait for the automaton_maker & co files being obsoleted.
-DEFINE_COMMAND (NAME (standard_of)
-		CODE (
-		      rat_exp_t e = get_exp(args, 1);
-		      automaton_t a = standard_of(e);
-		      set_writing_data(a, args))
-		KEEP_AUTOMATON (a)
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(standard_of)
+	       CODE(
+		 rat_exp_t e = get_exp(args, 1);
+		 automaton_t a = standard_of(e);
+		 set_writing_data(a, args))
+	       KEEP(a)
+	       RETURNVALUE(0));
 
 // FIXME: Same apply as for standard_of.
-DEFINE_COMMAND (NAME (thompson_of)
-		CODE (
-		      rat_exp_t e = get_exp(args, 1);
-		      automaton_t a = thompson_of(e);
-		      set_writing_data(a, args))
-		KEEP_AUTOMATON (a)
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(thompson_of)
+	       CODE(
+		 rat_exp_t e = get_exp(args, 1);
+		 automaton_t a = thompson_of(e);
+		 set_writing_data(a, args))
+	       KEEP(a)
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (derived_term_automaton)
-		CODE (
-		      rat_exp_t e = get_exp(args, 1);
-		      automaton_t a = make_automaton(get_alphabet(e));
-		      derived_term_automaton(a, e);
-		      set_writing_data(a, args))
-		KEEP_AUTOMATON (a)
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(derived_term_automaton)
+	       CODE(
+		 rat_exp_t e = get_exp(args, 1);
+		 automaton_t a = make_automaton(get_alphabet(e));
+		 derived_term_automaton(a, e);
+		 set_writing_data(a, args))
+	       KEEP(a)
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (aut_to_exp)
-		CODE (/* Empty */)
-		KEEP (aut_to_exp (get_aut(args, 1), DMChooser ()))
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(aut_to_exp)
+	       CODE(/* Empty */)
+	       KEEP(aut_to_exp(get_aut(args, 1), DMChooser()))
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (identity_exp)
-		CODE (/* Empty */)
-		KEEP (get_exp (args, 1))
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(identity_exp)
+	       CODE(/* Empty */)
+	       KEEP(get_exp(args, 1))
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (realtime_exp)
-		CODE (/* Empty */)
-		KEEP (realtime (get_exp (args, 1)))
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(realtime_exp)
+	       CODE(/* Empty */)
+	       KEEP(realtime(get_exp(args, 1)))
+	       RETURNVALUE(0));
 
-DEFINE_COMMAND (NAME (expand)
-		CODE (/* Empty */)
-		KEEP (expand (get_exp (args, 1)))
-		RETURNVALUE (0));
+DEFINE_COMMAND(NAME(expand)
+	       CODE(/* Empty */)
+	       KEEP(expand(get_exp(args, 1)))
+	       RETURNVALUE(0));
 
 # define USE_RATEXP_COMMAND_GROUP()					\
-  COMMAND_GROUP (							\
+  COMMAND_GROUP(							\
     "Conversion between automata and expressions:",			\
 									\
-    COMMAND_ENTRY (aut_to_exp, Aut,					\
-		   "Give the automaton associated to `aut'."),		\
-    COMMAND_ENTRY_CN (derived-term, derived_term_automaton, Exp,	\
-		      "Use derivative to compute the automaton of `exp'."), \
-    COMMAND_ENTRY_CN (exp-to-aut, standard_of, Exp,			\
-		      "Alias of `standard'."),				\
-    COMMAND_ENTRY (expand, Exp, "Expand `exp'."),			\
-    COMMAND_ENTRY (identity_exp, Exp,					\
-                   "Output `exp' after trivial simplifications."),	\
-    COMMAND_ENTRY (realtime_exp, Exp,					\
-                   "Make `exp' realtime."),	\
-    COMMAND_ENTRY_CN (standard, standard_of, Exp,			\
-		      "Give the standard automaton of `exp'."),		\
-    COMMAND_ENTRY_CN (thompson, thompson_of, Exp,			\
-		      "Give the Thompson automaton of `exp'.")		\
+    COMMAND_ENTRY(aut_to_exp, Aut,					\
+		  "Give the automaton associated to `aut'."),		\
+    COMMAND_ENTRY_CN(derived-term, derived_term_automaton, Exp,		\
+		     "Use derivative to compute the automaton of `exp'."), \
+    COMMAND_ENTRY_CN(exp-to-aut, standard_of, Exp,			\
+		     "Alias of `standard'."),				\
+    COMMAND_ENTRY(expand, Exp, "Expand `exp'."),			\
+    COMMAND_ENTRY(identity_exp, Exp,					\
+		  "Output `exp' after trivial simplifications."),	\
+    COMMAND_ENTRY(realtime_exp, Exp,					\
+		  "Make `exp' realtime."),				\
+    COMMAND_ENTRY_CN(standard, standard_of, Exp,			\
+		     "Give the standard automaton of `exp'."),		\
+    COMMAND_ENTRY_CN(thompson, thompson_of, Exp,			\
+		     "Give the Thompson automaton of `exp'.")		\
 									\
     )
 
