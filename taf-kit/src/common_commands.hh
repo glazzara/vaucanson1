@@ -34,7 +34,7 @@
 # include <vaucanson/tools/dot_display.hh>
 # include <vaucanson/algorithms/isomorph.hh>
 # include <vaucanson/algorithms/is_empty.hh>
-# include <vaucanson/algorithms/has_succ_comp.hh>
+# include <vaucanson/algorithms/is_useless.hh>
 
 using namespace CONTEXT_NAMESPACE;
 
@@ -83,11 +83,11 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(eps_removal_sp)
 
 DEFINE_IS_PROPERTY_COMMAND(empty);
 
-DEFINE_COMMAND(NAME(has_succ_comp)
-	       CODE(bool succ_comp = has_succ_comp(get_aut(args, 1)))
+DEFINE_COMMAND(NAME(is_useless)
+	       CODE(bool succ_comp = is_useless(get_aut(args, 1)))
 	       OUTPUT_ON_VERBOSE(
-		  (succ_comp ? "Input has successful computation\n"
-		   : "Input has no successful computation\n"))
+		  (succ_comp ? "Input has no successful computation\n"
+		   : "Input has a successful computation\n"))
 	       RETURNVALUE(succ_comp ? 0: 1));
 
 DEFINE_COMMAND(NAME(info)

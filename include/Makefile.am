@@ -319,8 +319,8 @@ vaucanson/algorithms/ltl_to_pair.hh				\
 vaucanson/algorithms/ltl_to_pair.hxx				\
 vaucanson/algorithms/pair_to_fmp.hh				\
 vaucanson/algorithms/pair_to_fmp.hxx				\
-vaucanson/algorithms/has_succ_comp.hh				\
-vaucanson/algorithms/has_succ_comp.hxx				\
+vaucanson/algorithms/is_useless.hh				\
+vaucanson/algorithms/is_useless.hxx				\
 vaucanson/algorithms/image.hh					\
 vaucanson/algorithms/image.hxx					\
 vaucanson/algorithms/initial_derivation.hh			\

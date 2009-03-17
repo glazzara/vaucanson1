@@ -1,5 +1,20 @@
 2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Rename has_succ_comp() to is_useless() and reverse its result.
+
+	* include/vaucanson/algorithms/has_succ_comp.hh,
+	include/vaucanson/algorithms/has_succ_comp.hxx (has_succ_comp):
+	Rename as...
+	* include/vaucanson/algorithms/is_useless.hh,
+	include/vaucanson/algorithms/is_useless.hxx (is_useless): ... this.
+	* include/Makefile.am, include/vaucanson/standard_algorithms.hh,
+	taf-kit/src/b_commands.cc, taf-kit/src/common_commands.hh,
+	taf-kit/src/fmp_commands.cc, taf-kit/src/r_commands.cc,
+	taf-kit/src/z_commands.cc, taf-kit/tests/vcsn-char-b.test: Adjust
+	all uses.
+
+2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/common_automaton_commands.hh: Rename co-accessible
 	as coaccessible.
 

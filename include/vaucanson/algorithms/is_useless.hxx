@@ -1,8 +1,8 @@
-// has_succ_comp.hxx: this file is part of the Vaucanson project.
+// is_useless.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,10 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_HAS_SUCC_COMP_HXX
-# define VCSN_ALGORITHMS_HAS_SUCC_COMP_HXX
+#ifndef VCSN_ALGORITHMS_IS_USELESS_HXX
+# define VCSN_ALGORITHMS_IS_USELESS_HXX
 
-# include <vaucanson/algorithms/has_succ_comp.hh>
+# include <vaucanson/algorithms/is_useless.hh>
 # include <vaucanson/algorithms/trim.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -28,11 +28,11 @@ namespace vcsn {
 
   template<typename A, typename AI>
   bool
-  has_succ_comp(const Element<A, AI>& a)
+  is_useless(const Element<A, AI>& a)
   {
-    return trim (a).states ().size () > 0;
+    return trim(a).states().size() == 0;
   }
 
 } // vcsn
 
-#endif // ! VCSN_ALGORITHMS_HAS_SUCC_COMP_HXX
+#endif // ! VCSN_ALGORITHMS_IS_USELESS_HXX

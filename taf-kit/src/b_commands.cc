@@ -80,9 +80,9 @@ const command_t command_map[] =
 		  "Return whether `aut' is deterministic."),
     COMMAND_ENTRY(is_empty, Aut,
 		  "Return whether `aut' is empty."),
-    COMMAND_ENTRY(has_succ_comp, Aut,
-		  "Return whether `aut' has successful computations"
-		  " (trimmed `aut` is not empty)."),
+    COMMAND_ENTRY(is_useless, Aut,
+		  "Return whether `aut' has no successful computations"
+		  " (trimmed `aut` is empty)."),
     //    COMMAND_ENTRY(is_normalized, Aut,
     //		  "Return whether `aut' is normalized."),
     COMMAND_ENTRY(is_realtime, Aut,

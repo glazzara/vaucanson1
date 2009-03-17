@@ -1,8 +1,8 @@
-// has_succ_comp.hh: this file is part of the Vaucanson project.
+// is_useless.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,20 +14,20 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_HAS_SUCC_COMP_HH
-# define VCSN_ALGORITHMS_HAS_SUCC_COMP_HH
+#ifndef VCSN_ALGORITHMS_IS_USELESS_HH
+# define VCSN_ALGORITHMS_IS_USELESS_HH
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file has_succ_comp.hh
+ * @file is_useless.hh
  *
- * Declaration of has_succ_comp().
+ * Declaration of is_useless().
  *
- * @see has_succ_comp()
+ * @see is_useless()
  */
 /** @} */
 
-// INTERFACE: bool has_succ_comp(const Automaton& a) { return vcsn::has_succ_comp(*a); }
+// INTERFACE: bool is_useless(const Automaton& a) { return vcsn::is_useless(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>
@@ -39,25 +39,26 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * @brief Return true if the automaton has successful computation.
+   * @brief Return true if the automaton has no successful computation.
    *
-   * Return true if the automaton has successful computation,
-   * false otherwise.
-   * Having a successful complete means to have at least one state
-   * that is both accessible and co-accessible.
+   * Return false if the automaton has a successful computation,
+   * true otherwise.
+   *
+   * An automaton has a successful computation if it has at least
+   * one state that is both accessible and co-accessible.
    *
    * @param a The input automaton.
    */
   template<typename A, typename AI>
   bool
-  has_succ_comp(const Element<A, AI>& a);
+  is_useless(const Element<A, AI>& a);
 
   /** @} */
 
 } // vcsn
 
 # if !defined VCSN_USE_INTERFACE_ONLY && !defined VCSN_USE_LIB
-#  include <vaucanson/algorithms/has_succ_comp.hxx>
+#  include <vaucanson/algorithms/is_useless.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGORITHMS_HAS_SUCC_COMP_HH
+#endif // ! VCSN_ALGORITHMS_IS_USELESS_HH

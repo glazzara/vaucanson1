@@ -355,10 +355,10 @@ fail1 $VCSN is-empty a1.xml
 fail1 $VCSN is_empty all.xml
 fail1 $VCSN is-empty 2snf.xml
 
-# has-succ-comp.
-fail1 $VCSN has-succ-comp empty.xml
-fail1 $VCSN has-succ-comp 2snf.xml
-      $VCSN has-succ-comp all.xml
+# is-useless
+      $VCSN is-useless empty.xml
+      $VCSN is-useless 2snf.xml
+fail1 $VCSN is-useless all.xml
 
 # is-normalized.
 #fail1 $VCSN is-normalized a1.xml

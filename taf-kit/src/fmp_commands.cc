@@ -194,9 +194,9 @@ const command_t command_map[] =
 //		   "Test if `aut1' and `aut2' are isomorphic."),
     COMMAND_ENTRY(is_empty, Aut,
 		  "Return whether `aut' is empty."),
-    COMMAND_ENTRY(has_succ_comp, Aut,
-		  "Return whether `aut' has successful computations"
-		  " (trimmed `aut` is not empty)."),
+    COMMAND_ENTRY(is_useless, Aut,
+		  "Return whether `aut' has no successful computations"
+		  " (trimmed `aut` is empty)."),
     COMMAND_ENTRY(is_sub_normalized, Aut, "Test if `aut' is sub-normalized."),
     COMMAND_ENTRY(is_ltl, Aut, "Test if `aut' is letter-to-letter.")
     ),
