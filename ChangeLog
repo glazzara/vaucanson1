@@ -1,3 +1,13 @@
+2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Preserve the representations in standard_of and thompson_of.
+
+	* include/vaucanson/contexts/automaton_maker.thxx (do_standard_of,
+	do_thompson_of): Preserve the representations.
+	* taf-kit/src/ratexp_commands.hh (standard_of, thompson_of,
+	derived_term_automaton): Do not call set_writing_data, we simply
+	keep the writing data of the rational expression.
+
 2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/pipe_command_sequence.hh: Remove useless includes.

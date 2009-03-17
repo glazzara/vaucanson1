@@ -52,37 +52,28 @@ using vcsn::xml::XML;
   | Command definition of RatExp specific algorithms.  |
   `---------------------------------------------------*/
 
-// FIXME: This code could be simplified, but because standard_of (see
-// automaton_maker) does not correctly pass the structures, we need to
-// set again the writing data after constructing the automaton. The proper
-// way to fix this would be to:
-// 1 - ask ourselves whether or not standard_of needs to be in automaton_maker
-// 2 - it will probably require to rewrite bits of the
-//     standard_of _algorithm_ to use automaton traits, so we should probably
-//     wait for the automaton_maker & co files being obsoleted.
 DEFINE_COMMAND(NAME(standard_of)
 	       CODE(
 		 rat_exp_t e = get_exp(args, 1);
-		 automaton_t a = standard_of(e);
-		 set_writing_data(a, args))
+		 automaton_t a = standard_of(e))
 	       KEEP(a)
 	       RETURNVALUE(0));
 
-// FIXME: Same apply as for standard_of.
 DEFINE_COMMAND(NAME(thompson_of)
 	       CODE(
 		 rat_exp_t e = get_exp(args, 1);
-		 automaton_t a = thompson_of(e);
-		 set_writing_data(a, args))
+		 automaton_t a = thompson_of(e))
 	       KEEP(a)
 	       RETURNVALUE(0));
 
 DEFINE_COMMAND(NAME(derived_term_automaton)
 	       CODE(
 		 rat_exp_t e = get_exp(args, 1);
-		 automaton_t a = make_automaton(get_alphabet(e));
-		 derived_term_automaton(a, e);
-		 set_writing_data(a, args))
+		 automaton_t a =
+		   make_automaton(get_alphabet(e),
+				  *e.structure().monoid().representation(),
+				  *e.structure().representation());
+		 derived_term_automaton(a, e))
 	       KEEP(a)
 	       RETURNVALUE(0));
 
