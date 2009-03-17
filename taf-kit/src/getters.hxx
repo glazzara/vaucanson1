@@ -114,6 +114,7 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
   {
     return boost::apply_visitor(rat_exp_getter(M.alphabet(),
 					       global_result.name,
+					       global_result.input_exp_type,
 					       *(M.representation()),
 					       *(series.representation())),
 				global_result.output);

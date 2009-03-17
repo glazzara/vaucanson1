@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -54,6 +54,7 @@ class rat_exp_getter
 {
 public:
   rat_exp_getter (alphabet_t, std::string& command,
+		  input_format_t,
 		  const monoid_rep_t& mrep,
 		  const series_rep_t& srep);
 
@@ -68,6 +69,7 @@ public:
   std::string command;
   const monoid_rep_t& mrep_;
   const series_rep_t& srep_;
+  input_format_t f;
 };
 # endif // !WITH_TWO_ALPHABETS
 

@@ -562,5 +562,16 @@ ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 \| aut-to-exp - \|\
      aut-to-exp - \| identity-exp - \| expand -`
 test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
+# Likewise with external pipes.
+ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 |
+     $VCSN aut-to-exp -o xml - |
+     $VCSN identity-exp -i xml -o xml - |
+     $VCSN identity-exp -i xml -o xml - |
+     $VCSN exp-to-aut -i xml - |
+     $VCSN identity - |
+     $VCSN aut-to-exp -o xml - |
+     $VCSN identity-exp -i xml -o xml - |
+     $VCSN expand -i xml -`
+test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
 exit 0

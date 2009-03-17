@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -122,27 +122,46 @@ automaton_getter::operator()(T&) const
 
 
 # ifndef WITH_TWO_ALPHABETS
-rat_exp_getter::rat_exp_getter (alphabet_t a, std::string& cmd,
-				const monoid_rep_t& mrep,
-				const series_rep_t& srep)
-  : alphabet (a),
-    command  (cmd),
-    mrep_ (mrep),
-    srep_ (srep)
+rat_exp_getter::rat_exp_getter(alphabet_t a, std::string& cmd,
+			       input_format_t f,
+			       const monoid_rep_t& mrep,
+			       const series_rep_t& srep)
+  : alphabet(a),
+    command(cmd),
+    mrep_(mrep),
+    srep_(srep),
+    f(f)
 {
 }
 
 rat_exp_t
 rat_exp_getter::operator() (std::string& str) const
 {
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      {
+	alphabet_t	alphabet;
+        monoid_t	monoid(alphabet, mrep_);
+        semiring_t	semiring;
+        series_set_t	series(semiring, monoid, srep_);
+        rat_exp_t	e(series);
+	std::istringstream is(str);
+	is >> regexp_loader(e, string_out (), XML ());
+	return e;
+      }
+    case INPUT_TYPE_EXP:
+      break;
+    default:
+      std::cerr << "FATAL: Unsupported expression format." << std::endl;
+      exit(1);
+    }
   return make_rat_exp (alphabet, str, mrep_, srep_);
 }
 
 rat_exp_t
 rat_exp_getter::operator() (command_output_status& i) const
 {
-  std::string str;
-
   if (i != PIPE_GET_FROM_STDIN)
     {
       if (i == PIPE_BENCH)
@@ -158,6 +177,26 @@ rat_exp_getter::operator() (command_output_status& i) const
       exit (1);
     }
 
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      {
+	alphabet_t	alphabet;
+        monoid_t	monoid(alphabet, mrep_);
+        semiring_t	semiring;
+        series_set_t	series(semiring, monoid, srep_);
+        rat_exp_t	e(series);
+	std::cin >> regexp_loader(e, string_out (), XML ());
+	return e;
+      }
+    case INPUT_TYPE_EXP:
+      break;
+    default:
+      std::cerr << "FATAL: Unsupported expression format." << std::endl;
+      exit(1);
+    }
+
+  std::string str;
   std::cin >> str;
   return make_rat_exp (alphabet, str, mrep_, srep_);
 }

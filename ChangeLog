@@ -1,3 +1,16 @@
+2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make it possible to read a XML rat_exp from a Unix pipe.
+
+	* taf-kit/src/getters.hxx (get_exp): Pass the input format
+	to the rat_exp_getter.
+	* taf-kit/src/pipe_getters.hh, taf-kit/src/pipe_getters.hxx
+	(rat_exp_getter::f, rat_exp_getter::rat_exp_getter) Store the
+	input format.
+	(rat_exp_getter::operator): Add support for reading XML from
+	string or pipe, depending on the input format.
+	* taf-kit/tests/vcsn-char-b.test: Test the external pipe.
+
 2009-03-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Do not force --alphabet to be used with rat_exps on internal pipe.
