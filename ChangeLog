@@ -1,5 +1,11 @@
 2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/common_automaton_commands.hh: Rename co-accessible
+	as coaccessible.
+
+2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+
 	Hide minimize-moore and eps-removal-sp from --list-commands.  Show
 	them only with the new --list-all-commands option.
 

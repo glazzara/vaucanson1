@@ -194,8 +194,8 @@ COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'."),
 		   "Give `aut' closed over epsilon transitions."),	\
     COMMAND_ENTRY_EXPERT(eps_removal_sp, Aut,				\
 		   "Give `aut' closed over epsilon transitions."),	\
-    COMMAND_ENTRY_CN(co-accessible, coaccessible, Aut,			\
-		      "Give the maximal coaccessible subautomaton of `aut'."), \
+    COMMAND_ENTRY(coaccessible, Aut,					\
+		  "Give the maximal coaccessible subautomaton of `aut'."), \
     COMMAND_ENTRY(complete, Aut, "Give the complete version of `aut'."), \
     COMMAND_ENTRY(concatenate, AutAut, "Concatenate `aut1' and `aut2'."), \
     /*  COMMAND_ENTRY(normalize, Aut,					\
