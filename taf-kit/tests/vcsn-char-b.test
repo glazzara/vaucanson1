@@ -574,4 +574,16 @@ ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 |
      $VCSN expand -i xml -`
 test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
+
+# Try replacing writing data:
+ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 \| aut-to-exp - \|\
+     identity-exp - --parser=PLUS=w \| expand -`
+test x"$ret" = x"1w0+0" || test x"$ret" = x"0+0w1"
+# Likewise with external pipes:
+ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 |
+     $VCSN aut-to-exp -o xml - |
+     $VCSN identity-exp --parser=PLUS=w -i xml -o xml - |
+     $VCSN expand -i xml -`
+test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
+
 exit 0

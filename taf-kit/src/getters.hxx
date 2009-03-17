@@ -112,12 +112,17 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
 
   if (s == "-")
   {
-    return boost::apply_visitor(rat_exp_getter(M.alphabet(),
-					       global_result.name,
-					       global_result.input_exp_type,
-					       *(M.representation()),
-					       *(series.representation())),
-				global_result.output);
+    rat_exp_t e =
+      boost::apply_visitor(rat_exp_getter(M.alphabet(),
+					  global_result.name,
+					  global_result.input_exp_type,
+					  *(M.representation()),
+					  *(series.representation())),
+			   global_result.output);
+    // Overwrite the writing data before return if any where supplied
+    // on the command line.
+    set_writing_data(e, args);
+    return e;
   }
 
   switch (global_result.input_exp_type)
@@ -148,9 +153,9 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
 
 	delete is;
 
-	// Set the writing data before return.
-	//set_writing_data(e, args); // FIXME ?
-
+	// Overwrite the writing data before return if any where supplied
+	// on the command line.
+	set_writing_data(e, args);
 	return e;
       }
       else
@@ -389,6 +394,15 @@ void set_writing_data(automaton_t& a, const arguments_t& args)
   set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
 			   args.mrep, args.cf);
 }
+
+void set_writing_data(rat_exp_t& e, const arguments_t& args)
+{
+  set_series_writing_data_(*(e.structure().representation()),
+			   args.srep, args.cf);
+  set_monoid_writing_data_(*(e.structure().monoid().representation()),
+			   args.mrep, args.cf);
+}
+
 # endif // ! WITH_TWO_ALPHABETS
 
 #endif // ! GETTERS_HXX

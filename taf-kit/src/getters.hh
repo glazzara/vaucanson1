@@ -67,9 +67,10 @@ void set_series_writing_data_(T& dst, const T& src, const cmd_flags_t& flags);
 
 void set_writing_data(automaton_t&, const arguments_t&);
 # ifdef WITH_TWO_ALPHABETS
-void set_boolean_writing_data(IOAUT_CONTEXT::automaton_t&,
-			      const arguments_t&);
-# endif // ! WITH_TWO_ALPHABETS
+void set_boolean_writing_data(IOAUT_CONTEXT::automaton_t&, const arguments_t&);
+#else // !WITH_TWO_ALPHABETS
+void set_writing_data(rat_exp_t& e, const arguments_t& args);
+# endif // !WITH_TWO_ALPHABETS
 
 # include "getters.hxx"
 

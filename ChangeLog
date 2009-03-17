@@ -1,5 +1,16 @@
 2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make it possible to override the writing data of an XML rat_exp.
+
+	* taf-kit/src/getters.hxx (get_exp): Overwrite the writing data
+	with any data supplied on the command line after reading the
+	rat_exp_t.
+	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx
+	(set_writing_data): New function for rat_exp_t.
+	* taf-kit/tests/vcsn-char-b.test: Add more tests.
+
+2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Make it possible to read a XML rat_exp from a Unix pipe.
 
 	* taf-kit/src/getters.hxx (get_exp): Pass the input format
