@@ -1,5 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009
+##   The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -13,7 +14,11 @@
 
 include $(srcdir)/subdirs.mk
 
+# Even if find_tests.sh says subdirs.mk needs not be updated, we
+# want it to be more recent than find_tests.sh.
 $(srcdir)/subdirs.mk: $(top_srcdir)/build-aux/find_tests.sh
-	cd $(top_srcdir) && build-aux/find_tests.sh && $(MAKE) am--refresh
+	cd $(top_srcdir) && build-aux/find_tests.sh
+	touch $@
+	cd $(top_builddir) && $(MAKE) am--refresh
 
 EXTRA_DIST += generate-all.sh test-suite.mk

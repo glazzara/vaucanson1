@@ -1,5 +1,13 @@
 2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix a distcheck failure.
+
+	* src/tests/test-suites/Makefile.am ($(srcdir)/subdirs.mk): Do
+	not run am--refresh in the srcdir, the makefile is in the buildir.
+	Also touch the destination file.
+
+2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename has_succ_comp() to is_useless() and reverse its result.
 
 	* include/vaucanson/algorithms/has_succ_comp.hh,
