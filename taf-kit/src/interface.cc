@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,18 +40,21 @@ inline void write_with_dashs (const char* s)
 }
 
 /// List all the commands.
-void list_commands ()
+void list_commands (bool all)
 {
   echo ("List of available commands:");
   for (const command_t* command = command_map; command->docstring; ++command)
     if (command->name)
-    {
-      echo_ ("   - ");
-      write_with_dashs (command->name);
-      if (command->n_params)
-	echo_ (" " << command->params);
-      echo (": " << command->docstring);
-    }
+      {
+	if (!command->expert || all)
+	  {
+	    echo_ ("   - ");
+	    write_with_dashs (command->name);
+	    if (command->n_params)
+	      echo_ (" " << command->params);
+	    echo (": " << command->docstring);
+	  }
+      }
     else
       echo (" * " << command->docstring);
 }

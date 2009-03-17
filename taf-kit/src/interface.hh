@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 
 # include "common.hh"
 
-int execute_command (const arguments_t&);
-void list_commands ();
+int execute_command(const arguments_t&);
+void list_commands(bool all = false);
 
 #endif /* !INTERFACE_HH */

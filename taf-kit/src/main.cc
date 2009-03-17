@@ -84,8 +84,10 @@ namespace
   const char* predefined_string = build_predefined_string();
 #endif
   const argp_option options[] = {
-    {"list-commands",	'l', 0, 0,
-     "List the commands handled by the program", 0 },
+    {"list-commands", 'l', 0, 0,
+     "List usual commands", 0 },
+    {"list-all-commands", 'L', 0, 0,
+     "List all commands, including debug commands", 0 },
     { "verbose",		'v', 0, 0,
       "Be more verbose (print boolean results)", 0 },
     { "report-time",	'T', "VERBOSE_DEGREE", OPTION_ARG_OPTIONAL,
@@ -156,9 +158,11 @@ namespace
 	break;
 #endif /* ! WITH_TWO_ALPHABETS */
       case 'l':
-	list_commands ();
-	exit (0);
-	break;
+	list_commands(false);
+	exit(0);
+      case 'L':
+	list_commands(true);
+	exit(0);
       case 'T':
 	args.report_time = true;
 	args.report_degree = arg ? atoi(arg) : 2;

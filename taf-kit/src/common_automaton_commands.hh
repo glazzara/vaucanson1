@@ -192,7 +192,7 @@ COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'."),
     SECOND_PROJECTION_COMMAND_ENTRY					\
     COMMAND_ENTRY(eps_removal, Aut,					\
 		   "Give `aut' closed over epsilon transitions."),	\
-    COMMAND_ENTRY(eps_removal_sp, Aut,					\
+    COMMAND_ENTRY_EXPERT(eps_removal_sp, Aut,				\
 		   "Give `aut' closed over epsilon transitions."),	\
     COMMAND_ENTRY_CN(co-accessible, coaccessible, Aut,			\
 		      "Give the maximal coaccessible subautomaton of `aut'."), \

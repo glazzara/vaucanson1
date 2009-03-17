@@ -100,14 +100,18 @@
 | Command entries ; meant for arg parsing & co.  |
 `-----------------------------------------------*/
 
-# define COMMAND_ENTRY_CN_(Name, CodeName, Params, NParams, Docstring)	\
-  { # Name, CodeName ## _command, Params, NParams, Docstring }
+# define COMMAND_ENTRY_CN_(Name, CodeName, Params, NParams, Docstring, Expert) \
+  { # Name, CodeName ## _command, Params, NParams, Docstring, Expert }
 # define COMMAND_ENTRY_CN(Name, CodeName, BlockParams, Docstring)	\
-  COMMAND_ENTRY_CN_ (Name, CodeName, BlockParams, Docstring)
+  COMMAND_ENTRY_CN_ (Name, CodeName, BlockParams, Docstring, 0)
 # define COMMAND_ENTRY(Name, BlockParams, Docstring)		\
-  COMMAND_ENTRY_CN_ (Name, Name, BlockParams, Docstring)
+  COMMAND_ENTRY_CN_ (Name, Name, BlockParams, Docstring, 0)
+# define COMMAND_ENTRY_EXPERT_CN(Name, CodeName, BlockParams, Docstring) \
+  COMMAND_ENTRY_CN_ (Name, CodeName, BlockParams, Docstring, 1)
+# define COMMAND_ENTRY_EXPERT(Name, BlockParams, Docstring) \
+  COMMAND_ENTRY_CN_ (Name, Name, BlockParams, Docstring, 1)
 # define COMMAND_GROUP(Text, Group...)		\
-  { 0, 0, 0, 0, Text },				\
+  { 0, 0, 0, 0, Text, 0 },			\
     Group
 
 # define Exp "exp", 1

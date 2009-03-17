@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,11 +28,19 @@
 
 struct command_t
 {
-    const char*	name;
-    int	(*command)(const arguments_t&);
-    const char*	params;
-    int		n_params;
-    const char*	docstring;
+  // Name of the command.
+  const char* name;
+  // Associated function.
+  int (*command)(const arguments_t&);
+  // Description of the parameters.
+  const char* params;
+  // Number of parameters.
+  int n_params;
+  // Short documentation of the command.
+  const char* docstring;
+  // Set EXPERT to true for commands that should be shown by
+  // --list-all-commands but not --list-commands.
+  bool expert;
 };
 
 extern const command_t command_map[];
