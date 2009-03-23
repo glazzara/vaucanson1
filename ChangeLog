@@ -1,3 +1,16 @@
+2009-03-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Remove Vaucanswig.
+
+	* vaucanswig/: Delete.
+	* Makefile.am (SUBDIRS): Adjust.
+	* build-aux/vcsn-internal.m4: Delete.
+	* build-aux/Makefile.am (EXTRA_DIST): Adjust.
+	* configure.ac: Remove Python and Swig checks.
+	* vaucanson.spec, debian/rules: Remove --disable-vaucanswig and
+	--disable-build-demos.
+	* bootstrap: Do not call vaucanswig/expand.sh.
+
 2009-03-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix a distcheck failure.

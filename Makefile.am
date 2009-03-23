@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -16,16 +16,13 @@ include $(top_srcdir)/vaucanson.mk
 if ENABLE_TAF_KIT
   MAYBE_TAF_KIT = taf-kit
 endif
-if ENABLE_VAUCANSWIG
-  MAYBE_VAUCANSWIG = vaucanswig
-endif
 
-SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
+SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) \
 	  tools doc build-aux debian
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS m4/gnulib-cache.m4
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-bench --enable-vaucanswig \
+DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-bench \
   $(MORE_DISTCHECK_CONFIGURE_FLAGS)
 
 # Prevent accidental edition of generated files.
