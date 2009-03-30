@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+## Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -54,13 +54,11 @@ manual = $(srcdir)/vaucanson-manual.pdf
 pdf: $(manual)
 
 # We use vaucanson-g, which requires plain DVI compilation.
-TEXI2PDF_FLAGS += --dvipdf -I manual.ext
+TEXI2PDF_FLAGS += --dvipdf
 
 dist_pdf_DATA = $(manual)
 
-$(manual): $(vaucanson_manual_sources) $(srcdir)/extex.pl
-	$(MAKE) $(AM_MAKEFLAGS) manual.ext
-	cd manual.ext && $(MAKE) $(AM_MAKEFLAGS) dvi
+$(manual): $(vaucanson_manual_sources)
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
 vaucanson_manual_sources =			\
@@ -77,35 +75,16 @@ xml.tex						\
 specification.tex				\
 version.tex
 
-$(srcdir)/automata.tex: generate-automata.sh
-# Use the TAF-Kit wrappers.
-	PATH=$(top_builddir)/taf-kit/tests:$$PATH \
-	$(srcdir)/generate-automata.sh >$@-t
-	mv $@-t $@
-
 $(srcdir)/version.tex: $(top_srcdir)/configure.ac
 	echo '\def\VcsnVersion{$(VERSION)}' > $*.tmp
 	echo "\def\VcsnDate{`LANG=C date +%Y-%m-%d`}" >> $*.tmp
 	mv -f $*.tmp $@
 
-EXTRA_DIST = $(vaucanson_manual_sources) $(manual)  \
-	 generate-automata.sh extex.pl extex.mk
+EXTRA_DIST = $(vaucanson_manual_sources) $(manual)
 
-# Extract commands that must be run to produce figures.
-manual.ext: $(vaucanson_manual_sources) $(srcdir)/extex.pl
-	perl -I$(top_srcdir)/build-aux -w	\
-	  $(srcdir)/extex.pl			\
-	  --output-dir=$@			\
-	  --srcdir=$(srcdir)			\
-	  --top_srcdir=$(top_srcdir)		\
-	  --builddir=.				\
-	  --top_builddir=$(top_builddir)	\
-          $(vaucanson_manual_sources)
-	touch $@
-
-MAINTAINERCLEANFILES = $(vcsndldir_data) automata.tex
+MAINTAINERCLEANFILES = $(vcsndldir_data)
 maintainer-clean-local:
-	rm -rf manual.ext tmp.t2d
+	rm -rf tmp.t2d
 
 ## ---------------------------- ##
 ## Installing on LRDE servers.  ##

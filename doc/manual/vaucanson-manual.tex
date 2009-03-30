@@ -117,51 +117,6 @@
 }
 
 
-%% --------------------------------- %%
-%% Automatic generation of content.  %%
-%% --------------------------------- %%
-
-% These two commands are recognized by extex which will extract the
-% code to run to produce the generated files.  LaTeX will later
-% include them.
-%
-% If you know a simpler means to do that, be my guest...
-%
-% Note that this system "caches" the result, and uses a Makefile to
-% avoid useless recompilation of snippets that did not change.
-
-% This one is not traced, so we can use it to factor definitions
-% making the same calls (e.g., includegenerateddot and execdisplay).
-%
-% Beware that files with an embedded dots in the base name are
-% improperly handled: includegraphics tries to interpret it as an extensions.
-\newcommand{\includegenerated}[1]{\includegraphics[scale=.6]{#1}}
-
-% This one is scanned by extex.pl.
-\newcommand{\includegenerateddot}[1]{\includegenerated{#1}}
-
-% \execcaption{TAG}{COMMAND}
-% --------------------------
-% Run the COMMAND, which is a Unix pipe, and save the result in a file
-% named TAG.tex.  Input it here.  Make explicit the input/output of
-% the COMMAND.
-%
-% If there are redirections, *THEY MUST STICK TO THE FILE*!!!
-% Do not pass `echo toto > foo', but `echo toto >foo'.
-\newcommand{\execcaption}[2]{\input{#1}}
-
-% \execdisplay{TAG}{PRE-COMMAND}{POST-COMMAND}
-% --------------------------------------------
-% Run a taf-kit pipe ending with a display, and include the resulting
-% automaton.  It will run `PRE-COMMAND display POST-COMMAND >TAG.dot',
-% and include the latter.
-
-% Typical use is:
-%
-% \execdisplay{a1}{vcsn-b}{a1}
-%
-\newcommand{\execdisplay}[3]{\includegenerated{#1}}
-
 \title{The \Vauc \TFKv Manual}
 \author{The \Vauc \textsc{Group}}
 \date{\VcsnDate}
@@ -179,9 +134,7 @@
 \input{introduction}
 \input{installation}
 \input{taf-kit}
-\input{vaucanswig}
 \input{library}
-\input{developer}
 
 \appendix
 
