@@ -1,4 +1,14 @@
 2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Streamline the user manual.
+
+	* doc/manual/Makefile.am: Remove the minidist target. Remove
+	library.tex from the sources.
+	* doc/manual/extex.pl, doc/manual/extex.mk, doc/manual/library.tex,
+	doc/manual/generate-automata.sh: Remove.
+	* doc/manual/vaucanson-manual.tex: Do not include library.tex.
+
+2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 	
 	Remove make dist depency on make (Close #140).
 

@@ -67,7 +67,6 @@ introduction.tex				\
 installation.tex				\
 taf-kit.tex					\
 vaucanswig.tex					\
-library.tex					\
 developer.tex					\
 theory.tex					\
 automata.tex					\
@@ -108,28 +107,3 @@ install-epita: $(vcsndldir_data)
 deep-clean: clean maintainer-clean-local
 	-rm -f $(MAINTAINERCLEANFILES)
 
-
-## ---------- ##
-## minidist.  ##
-## ---------- ##
-
-# Useful to ship just the sources.  It would be nice to be able to
-# ship share/ too, but it's one level higher currently.
-
-EXTRA_MINIDIST = $(EXTRA_DIST)
-MINIDISTDIR = vaucanson-manual
-# Files to remove from the tarball.
-MINIDIST_IGNORE = \
-  -name '*~' -o -name '.svn' -o -name '+committed'
-minidistdir:
-	rm -rf $(MINIDISTDIR)
-	mkdir $(MINIDISTDIR)
-# Use tar, not cp, to preserve the directory parts (cp bar/baz foo/ yields
-# foo/baz, not foo/bar/baz).
-	(cd $(srcdir) && tar cf - $(EXTRA_MINIDIST)) | (cd $(MINIDISTDIR) && tar xf -)
-	find $(MINIDISTDIR) $(MINIDIST_IGNORE) | xargs rm -fr
-
-
-minidist: minidistdir
-	tar zcf $(MINIDISTDIR).tar.gz $(MINIDISTDIR)
-	rm -rf $(MINIDISTDIR)
