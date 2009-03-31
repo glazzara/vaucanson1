@@ -131,16 +131,1564 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 
-\input{introduction}
-\input{installation}
-\input{taf-kit}
+\chapter*{Introduction}
+\label{sec:intro}
+
+The \Vauc software platform is dedicated to the computation with
+finite state automata.  Here, `finite state automata' is to be
+understood in the broadest sense: \emph{weighted} automata on a free
+monoid --- that is, automata that not only accept, or recognize,
+\emph{words} but compute for every word a \emph{multiplicity} which is
+taken a priori in \emph{an arbitrary semiring} --- and even weighted
+automata on \emph{non free monoids}.  The latter become far too
+general objects.  As for now, are implemented in \Vauc only the
+(weighted) automata on (direct) products of free monoids, machines
+that are often called \emph{transducers} --- that is automata that
+realize (weighted) relations between words\footnote{When the relation
+  is ``weighted'' the multiplicity has to be taken in a
+  \emph{commutative} semiring.}.
+
+When designing \Vauc, we had three main goals in mind: we wanted
+\begin{enumerate}
+\item a \emph{general purpose} software,
+\item a software that allows a programming style natural to computer
+  scientists who work with automata and transducers,
+\item  an open and free software.
+\end{enumerate}
+
+This is the reason why we implemented so to say \emph{on top} of the
+\Vauc platform a library that allows to apply a number of functions on
+automata, and even to define and edit automata, without having to
+bother with subtleties of \Cxx programming.  The drawback of this is
+obviously that the user is given a \emph{fixed} set of functions that
+apply to \emph{already typed} automata.  This library of functions
+does not allow to write new algorithms on automata but permits to
+combine or compose without much difficulties nor efforts a rather
+large set of commands.  We call it \tafkit, standing for \emph{Typed
+  Automata Function Kit}, as these commands take as input, and output,
+automata whose type is fixed.  \tafkit is presented in
+\autoref{sec:tafkit}.
+
+\chapter{Installation}
+
+\section{Getting \Vauc}
+
+The latest stable version of the \Vauc platform can be downloaded
+from \url{http://vaucanson.lrde.epita.fr/}.  The current development
+version can be retrieved from its Subversion\footnote{%
+%%
+  Subversion can be found at \url{http://subversion.tigris.org/}.
+%%
+} repository as follows:
+
+\begin{shell}
+# \kbd{svn checkout https://svn.lrde.epita.fr/svn/vaucanson/trunk vaucanson}
+\end{shell}
+
+\section{Building \Vauc}
+
+The following commands build and install the platform:
+\begin{shell}
+# \kbd{cd vaucanson-\VcsnVersion}
+\end{shell}
+Then:
+\begin{shell}
+# \kbd{./configure}
+...
+# \kbd{make}
+...
+# \kbd{sudo make install}
+...
+\end{shell}
+
+More detailed information is provided in the files \file{INSTALL},
+which is generic to all packages using the GNU Build System, and
+\file{README} which details \Vauc's specific build process.
+
+\chapter{The \Vauc toolkit}
+\label{sec:tafkit}
+
+This chapter presents a simple interface to \Vauc: a set of programs
+tailored to be used from a traditional shell.  Since they exchange
+\emph{typed} XML files, there is one program per automaton type.  Each
+program supports a set of operations which depends on the type of the
+automaton.
+
+Many users of automata consider only automata whose transitions are
+labeled by letters taken in an alphabet, which we call, roughly
+speaking, \emph{classical} automata or \emph{Boolean} automata.  The
+first program of the \tafkit, \command{vcsn-char-b}, allows to compute
+with classical automata and is described in \autoref{sec:vcsn-char-b}.
+A variant of this program called \command{vcsn-int-b} handles Boolean
+automata whose letters are integers.
+
+\autoref{sec:vcsn-char-fmp-b} describes the program
+\command{vcsn-char-fmp-b} which allows to compute with transducers, that
+is, automata whose transitions are labeled by pair of words, which are
+elements of a \emph{product of free monoids}, hence the name.  A
+variant of this program called \command{vcsn-int-fmp-b} handles
+transducers whose letters are integers.
+
+In \autoref{sec:vcsn-char-z} we consider the programs of the \tafkit
+that compute with automata over a free monoid and with multiplicity,
+or \emph{weight} taken in the set of integers equipped with the usual
+operations of addition and multiplication, that is, the semiring $\Z$.
+A variant of this program called \command{vcsn-int-z} is specialized
+to handle $\Z$-automata whose letters are integers.
+
+% ,
+% or with the operations of $\min$ and addition, or the operations of
+% $\max$ and addition, that is, the semirings $\Z,\min,+$ and
+% $\Z,\max,+$.  Finally, the forth section describes the program
+% \command{vcsn-char-rw} which allows to compute with transducers, viewed
+% as automata on a free monoid (the input monoid) with multiplicity
+% taken in the semiring of finite and even rational subsets of another
+% free monoid (the output monoid).
+
+\medskip
+
+
+It is planned that a forthcoming version will include also:
+
+\begin{description}
+\item[vcsn-char-zmin] for automata over a free monoid with multiplicity in
+  the semiring (\Z, \min, +)
+
+\item[vcsn-char-zmax] for automata over a free monoid with multiplicity in the
+  semiring (\Z, \max, +)
+
+\item[vcsn-char-rw] for transducers viewed as automata over a free
+  monoid with multiplicity in the semiring of rational sets (or
+  series) over (another) free monoid.
+\end{description}
+
+\newpage
+
+\section{Boolean automata}
+\label{sec:vcsn-char-b}
+
+This section focuses on the program \Index{\command{vcsn-char-b}}, the
+\tafkit component dedicated to Boolean automata.
+
+\subsection{First Contacts}
+
+\command{vcsn-char-b} and its peer components of \tafkit all share the same
+simple interface:
+
+\begin{shell}
+# vcsn-char-b \var{function} \var{automaton} \var{arguments...}
+\end{shell}
+
+\noindent
+The \var{function} is the name of the operation to perform on the
+\var{automaton}, specified as an XML file.  Some functions, such as
+\taffn{evaluation}, require additional arguments, such as the word to
+evaluate.  Some others, such as \taffn{exp-to-aut} do not have an
+\var{automaton} argument.
+
+\tafkit is made to work with Unix \emph{pipes}, that is to say, chains
+of commands which feed each other.  Therefore, all the functions
+produce a result on the standard output, and if an \var{automaton} is
+\samp{-}, then the standard input is used.
+
+\smallskip
+
+A typical line of commands from the \tafkit reads as follows:
+\begin{shell}
+# \kbd{vcsn-char-b determinize-nodep a1.xml > a1det.xml}
+\end{shell}
+and should be understood, or analyzed, as follows.
+\begin{enumerate}
+\item \command{vcsn-char-b} is the call to a \command{shell} command
+  that will launch a \Vauc function.  \command{vcsn-char-b} has 2
+  arguments, the first one being the \var{function} which will be
+  launched, the second being the \var{automaton} that is the input
+  argument of the \var{function}.
+
+\item \taffn{determinize} is, as just said, a \Vauc function.  And as
+  it can easily be guessed, \taffn{determinize} takes an
+  \var{automaton} as argument, performs the subset construction on it
+  and outputs the result on the standard output.
+
+\item \file{a1.xml} is the description of an automaton --- of the
+  automaton of \autoref{char-b:a1} indeed --- in an XML format that is
+  understood\footnote{%
+    This format is not exactly part of the \Vauc platform.  It has
+    been developed for providing a means of communication between
+    various programs dealing with automata.  And then it has been used
+    as a communication tool between the invocations of \Vauc function
+    by the \tafkit.  A lay user of the \tafkit should not need to know
+    how this format is defined
+    but a rough description of it is provided in \autoref{sec:xml} of
+    the Appendix.}
+  by \Vauc. This file must exist before the line is executed.  The
+  \file{data/automata} directory provides a number of XML files for
+  examples of automata, a number of programs that produce the XML
+  files for automata whose definition depend upon some variables and
+  the \tafkit itself allows to define automata and thus to produce the
+  corresponding XML files (cf. below).
+
+\item \samp{>a1det.xml} puts the result of \taffn{determinize} into
+  the file \file{a1det.xml}, that is, the XML file which describes the
+  determinized automaton of $\Ac_{1}$.
+\end{enumerate}
+
+\bigskip
+
+As a more elaborate example, consider the following command
+
+\begin{verbatim}
+vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - | vcsn-char-b minimize - | vcsn-char-b info -
+\end{verbatim}
+
+\noindent
+It fetches the automaton \code{a1} from the automaton library,
+determinizes it, minimizes the result, and finally displays
+information about the resulting automaton.
+
+Please, note the typographic conventions: user input is represented
+\texttt{\# \kbd{like this}}, standard output follows \texttt{like
+  this}, followed by standard error output \texttt{error: like this},
+and finally, if different from 0, the exit status is represented
+\texttt{=> like this}.  For instance:
+
+\begin{verbatim}
+vcsn-char-b identity-nodep a1.xml | vcsn-char-b info -
+\end{verbatim}
+
+\smallskip
+
+Other than that, the interface of the \tafkit components is usual,
+including options such as \option{--version} and \option{--help}:
+
+\begin{verbatim}
+vcsn-char-b --help
+\end{verbatim}
+
+The whole list of supported commands is available via
+\option{--list-commands}.
+
+\subsection{A first example}
+
+\Vauc provides a set of common automata.  The function
+\Index{\taffn{list-automata}} lists them all:
+
+\begin{verbatim}
+vcsn-char-b list-automata
+\end{verbatim}
+
+\begin{figure}[ht] \centering
+  \begin{VCPicture}{(0,-2)(6,2)}
+    % states
+    \State{(0,0)}{A}
+    \State{(3,0)}{B}
+    \State{(6,0)}{C}
+    % initial--final
+    \Initial{A}
+    \Final{C}
+    % transitions
+    \EdgeL{A}{B}{a}
+    \EdgeL{B}{C}{b}
+    \LoopS[.5]{A}{b}
+    \LoopN[.5]{A}{a}
+    \LoopS[.5]{C}{b}
+    \LoopN[.5]{C}{a}
+  \end{VCPicture}
+  \begin{legend}
+    The graphical layout of this automaton was described by hand,
+    using the Vaucanson-G \LaTeX{} package.  However, the following
+    figures are generated by \tafkit, giving a very nice layout, yet
+    slightly less artistic.\index{A1@$\Ac_1$}
+    The automaton is taken from \citet[Fig. I.1.1, p. 58]{sakarovitch.03.eta.}
+  \end{legend}
+  \caption{The automaton $\Ac_1$}
+  \label{fig:a1}
+\end{figure}
+
+Let's consider the Boolean automaton $\Ac_1$ (\autoref{fig:a1}), part
+of the standard library.  It can be dumped using
+\Index{\taffn{identity}}:
+
+\begin{verbatim}
+vcsn-char-b identity-nodep a1.xml
+\end{verbatim}
+
+Usual shell indirections (\samp{|}, \samp{>}, and \samp{<}) can be
+used to combine \tafkit commands.  For instance, this is an easy means
+to bring a local copy of this file:
+
+\begin{verbatim}
+vcsn-char-b identity-nodep a1.xml >my-a1.xml
+\end{verbatim}
+
+\tafkit uses XML to exchange automata, to get graphical rendering of
+the automaton, you may either invoke \Index{\taffn{-o dot identity}} and then
+use a Dot compliant program, or use \Index{\taffn{display}} that does
+both.
+
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity-nodep a1.xml >a1.dot
+\end{verbatim}
+
+
+\subsubsection{Determinization of $\Ac_1$}
+To determinize a Boolean automaton, call the
+\Index{\taffn{determinize}} function:
+
+\begin{verbatim}
+vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - >a1det.xml
+\end{verbatim}
+
+To get information about an automaton, call the \Index{\taffn{info}} function:
+\begin{verbatim}
+vcsn-char-b info a1det.xml
+\end{verbatim}
+
+Or use dotty to visualize it:
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity a1det.xml >a1det.dot
+\end{verbatim}
+
+\subsubsection{Evaluation}
+
+To \index{\taffn{eval}}evaluate whether a word is accepted:
+
+\begin{verbatim}
+vcsn-char-b eval-nodep a1.xml 'abab'
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b eval-nodep a1.xml 'bbba'
+\end{verbatim}
+
+\noindent
+where 1 (resp. 0) means that the word is accepted (resp. not accepted)
+by the automaton.
+
+\subsection{Interactive Definition of Automata}
+
+\tafkit provides a text interface to define automata interactively,
+rather than having to deal with XML files.  Two functions are
+available:
+\begin{description}
+\item[\taffn{define-automaton}] to build a fresh automaton from scratch,
+\item[\taffn{edit-automaton}] to modify an existing automaton,
+\end{description}
+
+The interface is based on a menu of choices:
+\begin{shell}
+# \kbd{vcsn-char-b --alphabet=ab define-automaton all.xml}
+Automaton description:
+  States: (none)
+  Initial states: (none)
+  Final states: (none)
+
+  Transitions: (none)
+
+Please choose your action:
+  1. Add states.
+  2. Delete a state.
+
+  3. Add a transition.
+  4. Delete a transition.
+
+  5. Set a state to be initial.
+  6. Set a state not to be initial.
+
+  7. Set a state to be final.
+  8. Set a state not to be final.
+
+  9. Display the automaton in Dotty.
+
+  10. Exit.
+
+Your choice [1-10]:
+\end{shell}
+
+\noindent
+If you enter \kbd{1}, you will then be prompted for the number of
+states to add, say \kbd{1} again.  The state \code{0} was created.  To
+make it initial select \kbd{5}, and:
+
+\begin{shell}
+Your choice [1-10]: \kbd{5}
+  For state: \kbd{0}
+\end{shell}
+
+Likewise to make it final, using choice \kbd{7}.  Finally, let's add a
+transition:
+
+\begin{shell}
+Your choice [1-10]: \kbd{3}
+  Add a transition from state: \kbd{0}
+  To state: \kbd{0}
+  Labeled by the expression: \kbd{a+b}
+\end{shell}
+
+\noindent
+The automaton is generalized, that is to say, rational expressions are
+valid labels.
+
+On top of the interactive menu, the current definition of the
+automaton is reported in a textual yet readable form:
+
+\begin{shell}
+Automaton description:
+  States: 0
+  Initial states: 0
+  Final states: 0
+
+  Transitions:
+    1: From 0 to 0 labeled by (\withweighttt{1}{a})+(\withweighttt{1}{b})
+\end{shell}
+
+\noindent
+Interestingly enough, states are numbered from 0, but transitions
+numbers start at 1.  Also, not that weights are reported, although
+only \code{1} is valid for Boolean automata.
+
+Finally, hit \kbd{10} to save the resulting automaton in the file
+\file{all.xml}.
+
+\subsection{Rational expressions and Boolean automata}
+
+\Vauc provides functions to manipulate rational expressions associated
+to Boolean automata.  This provides an alternative means to create
+automata:
+
+\begin{verbatim}
+vcsn-char-b --alphabet=ab exp-to-aut '(a+b)*' >all.xml
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity all.xml >all.dot
+\end{verbatim}
+
+\subsection{Token representations}
+
+When dealing with rational expressions in \tafkit, one may be willing to,
+for example, change the representation of the epsilon. More generally,
+the rational expressions parser understand $10$ such tokens. They are:
+
+\begin{itemize}
+\item \verb-OPAR-: the opening association parenthesis.
+\item \verb-CPAR-: the closing association parenthesis.
+\item \verb-PLUS-: the semi-ring additive law.
+\item \verb-TIMES-: the monoid concatenation law.
+\item \verb-STAR-: the Kleene star.
+\item \verb-ONE-: the identity of the monoid.
+\item \verb-ZERO-: the zero of the semi-ring.
+\item \verb-OWEIGHT-: the opening weight brace.
+\item \verb-CWEIGHT-: the closing weight brace.
+\item \verb-SPACE-: a whitespace character.
+\end{itemize}
+
+\noindent
+Each token must be a non-empty string, with arbitrary length. Some checks
+will be done by \tafkit, to ensure tokens do not collide. You can also
+use the \verb-ALPHABET- token an arbitrary number of times, to append letters
+to the current alphabet. The following commands:
+
+%% FIXME: include ({1} a) in the example
+\begin{verbatim}
+vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity parser.xml >parser.dot
+\end{verbatim}
+
+\noindent
+, will give the same results as:
+%% FIXME: include ({1} a) in the example
+\begin{verbatim}
+vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot
+\end{verbatim}
+
+\noindent
+With the \verb-ALPHABET- token, you can specify two types of letters:
+
+\begin{itemize}
+\item letters: one character is used to represent a letter.
+\item words: many characters are used to represent a letter.
+\end{itemize}
+
+For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
+$\{\verb-a-, \verb-b-, \verb-c-\}$, while \verb-ALPHABET=words:abc- defines the
+alphabet with only one letter $\{\verb-abc-\}$. Letters are separated by commas, and
+each \tafkit context defaults to either letters (vcsn-char-b eg) or words
+(vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
+\verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
+
+Everywhere you want to use special characters used by the \verb|--parser|
+option, prepending a backslash character will escape it. So, you can write:
+\verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
+and \verb-=-.
+
+Finally whenever you may put a single character you may write a pair a words.
+The following construction is then valid: \verb|ALPHABET=(\,,\))|, and defines
+the alphabet with only one letter: the pair whose first component is \verb-,-
+and the second one is \verb-)-.
+
+For more details, the grammar of the \verb|--parser| option is included in the
+source code in EBNF notations.
+
+\subsubsection{Minimizing}
+
+This automaton, constructed following the Thompson algorithm, is not
+the simplest one: it can be \index{minimize@\taffn{minimize}}minimized:
+
+\begin{verbatim}
+vcsn-char-b minimize all.xml >allmin.xml
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity allmin.xml >allmin.dot
+\end{verbatim}
+
+\bigskip
+
+Computing the language recognized by a Boolean automaton can be done
+using \Index{\taffn{aut-to-exp}}:
+
+\begin{verbatim}
+vcsn-char-b aut-to-exp all.xml
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b aut-to-exp allmin.xml
+\end{verbatim}
+
+\Vauc provides several algorithms that build an automaton that
+recognizes a given language.  The following sequence computes the
+minimal automaton of \samp{(a+b)*ab(a+b)*}.
+
+\begin{verbatim}
+vcsn-char-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-char-b quotient - >l1.xml
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity l1.xml >l1.dot
+\end{verbatim}
+
+\subsection{Available functions}
+
+The whole list of supported commands is available via
+\option{--list-commands}:
+
+\begin{verbatim}
+vcsn-char-b --list-commands
+\end{verbatim}
+
+
+%% Une definition plus rigoureuse des algorithmes devrait etre fournie
+%% en annexe.
+%% This section gives a brief definition of all functions that \Vauc
+%% provides for manipulating Boolean automata.  All these algorithms are
+%% invoked using \samp{vcsn-char-b \var{algorithm-name} [\var{arguments}]}. If
+%% the argument is replaced by \samp{-} then the program will read an
+%% argument from the standard input.  All algorithms dump their result to
+%% the standard output, except the ``tests'' functions that also return
+%% an exit status (0 if the test is successful, anything else otherwise).
+%%
+%% In the following:
+%% \begin{itemize}
+%% \item \var{a1} and \var{a2} are two Boolean automata described
+%%   in \Vauc XML format;
+%% \item \var{w} is a word, for example \samp{"aabb"} if you are
+%%   working on an alphabet that contains the letters \samp{a} and
+%%   \samp{b};
+%% \item \var{exp} is a rational expression denoting a language;
+%% \item \var{n} is a non-negative integer.
+%% \end{itemize}
+%%
+%%
+%% \begin{fnsection}{Input/output work with automata}
+%% \item{define-automaton}{}{Define an automaton from scratch.}
+%% \item{edit-automaton}{a1}{Edit an existing automaton.}
+%% \item{info}{a1}{Print the number of states, transitions, initial and
+%%     final states of \var{a1}.}
+%% \item{display}{a1}{Display the automaton using Dotty.}
+%% \item{dump}{a1}{Dump the automaton to Dot format.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Tests and evaluation on automata}
+%% \item{are-isomorphic}{a1 a2}{Test whether \var{a1} and \var{a2} are
+%%     isomorphic.}
+%% \item{evaluation}{a1 w}{Test whether the word \var{w} is accepted by
+%%     \var{a1}.}
+%% \item{is-deterministic}{a1}{Test whether \var{a1} is deterministic.}
+%% \item{is-empty}{a1}{Test whether \var{a1} accepts no word.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata}
+%% \item{accessible}{a1}{Extract the sub-automaton of accessible states
+%%     of \var{a1}.}
+%% \item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
+%%     states of \var{a1}.}
+%% \item{trim}{a1}{Trim the automaton \var{a1}.}
+%% \item{transpose}{a1}{Compute the automaton accepting the mirror
+%%     language of the one accepted by \var{a1}.}
+%%
+%% \item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
+%% \item{sum}{aut1 aut2}{Compute the sum of \var{a1} and \var{a2}.}
+%% %\item{normalize}{aut1}{Compute an automaton with unique initial and
+%% %    final states, with $\varepsilon$-transitions.}
+%% %\item{standardize}{aut1}{Compute an automaton with unique initial
+%% %    state without adding $\varepsilon$-transitions.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata on letters}
+%% \item{rational-weight}{[-bf] a1}{$\varepsilon$-removal algorithm and make
+%%     every transition labeled by a letter.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
+%%     \var{a2}.}
+%% \item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
+%%     itself \var{n} times.}
+%% \item{quotient}{a1}{Compute the minimal automaton in bi-simulation
+%%     with \var{a1}.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Algorithms specific to Boolean automata}
+%% \item{determinize}{a1}{Compute the determinized automaton of
+%%     \var{a1}.}
+%% \item{complement}{a1}{Compute an automaton that accepts the complement
+%%     language of the one accepted by \var{a1}.}
+%% \item{minimize}{[-hm] a1}{Minimize the {\em deterministic} automaton
+%%     \var{a1}.}
+%%   & \option{-h} : use the Hopcroft algorithm\\
+%%   & \option{-m} : use the Moore algorithm\\
+%%   \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Conversion between automata and expressions}
+%% \item{aut-to-exp}{a1}{Print a rational expression denoting the
+%%     language accepted by \var{a1}.}
+%% \item{expand}{exp}{Partially expand rational expressions. For
+%%     instance, expanding \samp{a(b+ab(a+b))} will produce
+%%     \samp{aab.(a+b)*+ab}}
+%% \item{derived-term}{exp}{Compute the derived term automaton of
+%%     \var{exp}.}
+%% \item{standard}{exp}{Compute the standard (Glushkov) automaton of
+%%     \var{exp}.}
+%% \item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
+%%   \hline
+%% \end{fnsection}
+%%
+
+\newpage
+\section{Transducers}
+\label{sec:vcsn-char-fmp-b}
+
+While the \Vauc library supports two views of transducers, currently
+\tafkit only provides one view:
+
+\begin{description}
+\item[vcsn-char-fmp-b] considering a transducer as a weighted automaton of a
+  product of free monoid,
+\end{description}
+
+In a forthcoming release, \tafkit will provide:
+
+\begin{description}
+\item[vcsn-char-rw] considering a transducer as a machine that takes a
+  word as input and produce another word as (two-tape automata).
+\end{description}
+
+Both views are equivalent and \Vauc provides algorithms to pass from a
+view to the other one.
+
+\subsection{Example}
+
+\begin{figure}[tp]
+  \begin{center}
+    \begin{VCPicture}{(0,-2)(6,2)}
+      % states
+      \State{(0,0)}{A} \State{(3,0)}{B} \State{(6,0)}{C}
+      \Initial[w]{A}
+      \Final[s]{A}
+      % transitions
+      \LoopN[.5]{A}{\IOL{0}{0}}
+      \LoopN[.5]{C}{\IOL{1}{1}}
+      \ArcL{A}{B}{\IOL{1}{0}}
+      \ArcL{B}{A}{\IOL{1}{1}}
+      \ArcL{B}{C}{\IOL{0}{0}}
+      \ArcL{C}{B}{\IOL{0}{1}}
+    \end{VCPicture}
+    \begin{legend}
+      The transducer computing the quotient by 3 of a binary number.
+    \end{legend}
+    \caption{Rational-weight transducer $\Tc_1$}
+    \label{fig:t1}
+  \end{center}
+\end{figure}
+
+%% \begin{figure}[tp]
+%%   \begin{center}
+%%     \begin{VCPicture}{(0,-2)(3,2)}
+%%       % states
+%%       \State{(0,0)}{A} \State{(3,0)}{B}
+%%       \Initial[w]{A}
+%%       \FinalL{s}{A}{(,1)}
+%%       \Final[e]{B}
+%%       % transitions
+%%       \LoopN[.5]{A}{(1,0)}
+%%       \LoopN[.5]{B}{(1,1)}
+%%       \LoopS[.5]{B}{(0,0)}
+%%       \EdgeL{A}{B}{(0,1)}
+%%     \end{VCPicture}
+%%     \caption{Transducer $\Tc_2$ adding 1 to a binary number}
+%%     \label{fig:t2}
+%%   \end{center}
+%% \end{figure}
+
+To experiment with transducers, we will use \index{T1@$\Tc_1$}$\Tc_1$,
+described in \autoref{fig:t1}, and part of the automaton library
+(\autoref{char-fmp-b:t1}).
+
+%% \subsubsection{Evaluation}
+%%
+%% Currently \tafkit requires the user to specify the alphabets to use
+%% using \option{--alphabet1} and \option{--alphabet2}.
+%%
+%% \begin{verbatim}
+%% vcsn-char-fmp-b --alphabet1=ab eval t1.xml 'bba'
+%% \end{verbatim}
+
+\subsubsection{Domain}
+The transducer $T$ only accepts binary numbers divisible by 3.
+
+\begin{verbatim}
+vcsn-char-fmp-b identity-nodep t1.xml | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml
+\end{verbatim}
+
+Now the file \file{divisible-by-3.xml} contains the description of a
+Boolean automaton that accepts only the numbers divisible by 3:
+
+\begin{verbatim}
+vcsn-char-b --output-type=dot identity div-by-3.xml >div-by-3.dot
+\end{verbatim}
+
+
+%% \subsubsection{to-tdc}
+%% Each transducer can be transformed to the other type of transducer
+%% thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
+%% \begin{shell}
+%% # vcsn-char-rw to-tdc quot_3_rw.xml > quot_3.xml
+%% # vcsn-char-fmp-b to-rw-tdc add1.xml > add1_rw.xml
+%% \end{shell}
+%%
+%% \subsubsection{Composing}
+%% \begin{shell}
+%% # vcsn-char-fmp-b compose quot_3.xml add1.xml
+%% \end{shell}
+
+\subsection{Available functions}
+The following functions are available for both \command{vcsn-char-rw}
+and \command{vcsn-char-fmp-b} programs.  To invoke them, run
+\samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
+
+\begin{verbatim}
+vcsn-char-fmp-b --list-commands
+\end{verbatim}
+
+%% In the following:
+%%
+%% \begin{itemize}
+%% \item \var{t1} and \var{t2} are two transducers (either ``rational-weight''
+%%   or not) described in \Vauc XML format;
+%% \item \var{w} is a word, for example \samp{"aabb"} if you are working
+%%   on an alphabet that contains the letters \samp{a} and \samp{b};
+%% \item \var{a} is a Boolean automaton;
+%% \item \var{t1-rw} is a rational-weight transducer;
+%% \item \var{t1-fmp} is a transducer (seen as an automaton over a free
+%%   monoid product).
+%% \end{itemize}
+%%
+%% \begin{fnsection}{Input/output work with transducers}
+%% \item{define-automaton}{}{Define a transducer from scratch.}
+%% \item{edit-automaton}{t1}{Edit an existing transducer.}
+%% \item{info}{t1}{Print the number of states, transitions, initial and
+%%     final states of \var{t1}.}
+%% \item{display}{t1}{Display the transducer using DOTTY.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Tests and evaluation on transducers}
+%% \item{are-isomorphic}{t1 t2}{Test if the two transducers are
+%%     isomorphic.}
+%% \item{evaluation}{t1 w}{Compute the evaluation of \var{w} by
+%%     \var{t1}.}
+%% \item{is-empty}{t1}{Test if \var{t1} realizes the empty relation.}
+%%   \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithm for transducers}
+%% \item{closure}{t1}{$\varepsilon$-removal algorithm.}
+%%
+%% \item{compose}{t1 t2}{Compute a transducer realizing $f_2 \circ f_1$,
+%%     where $f_1$ (resp. $f_2$) is the function associated to \var{t1}
+%%     (resp. \var{t2}).}
+%%
+%% \item{domain}{t1}{Compute an automaton accepting all input accepted by
+%%     the transducer t1.}
+%%
+%% \item{evaluation}{t1}{Compute the evaluation of w by t1.}
+%%
+%% \item{evaluation-aut}{t1}{Compute a Boolean automaton describing the
+%%     words produced by the language described by a evaluated by t1.}
+%%
+%% \item{image}{t1}{Compute an automaton describing all output produced
+%%     by the transducer t1.}
+%%
+%% %\item{transpose}{t1}{Compute the transposed of the transducer t1.}
+%%
+%% \item{trim}{t1}{Compute the trimmed transducer of t1.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Algorithms for transducers}
+%% \item{sub-normalize}{t1-fmp}{Compute the sub-normalized transducer of
+%%     \var{t1-fmp}.}
+%% \item{is-sub-normalized}{t1-fmp}{Test if \var{t1-fmp} is
+%%     sub-normalized.}
+%% \item{composition-cover}{t1-fmp}{.}%%FIXME
+%% \item{composition-co-cover}{t1-fmp}{.}%%FIXME
+%% \item{b-compose}{t1-fmp t2-fmp}{Compose \var{t1-fmp} and
+%%     \var{t2-fmp}, two unweighted normalized or sub-normalized
+%%     transducers.}
+%% \item{to-rw-tdc}{t1-fmp}{Compute the equivalent realtime transducer
+%%     of \var{t1-fmp}.}
+%% \item{intersection}{a}{Transform \var{a} in a fmp transducer by
+%%     creating, for each word, a pair containing twice this word.}
+%%   \hline
+%% \end{fnsection}
+%%
+%%
+%% \begin{fnsection}{Algorithms for ``realtime'' transducers}
+%% \item{realtime}{t1-rw}{Compute the realtime transducer of  \var{t1-rw}.}
+%% \item{is-realtime}{t1-rw}{Test if \var{t1-rw} is realtime.}
+%% \item{to-tdc}{t1-rw}{Compute the equivalent fmp transducer of \var{t1-rw}.}
+%% \hline
+%% \end{fnsection}
+
+\newpage
+\section{\Z-Automata}
+\label{sec:vcsn-char-z}
+
+This part shows the use of the program \Index{\command{vcsn-char-z}}, but
+all comments should also stand for the programs
+\command{vcsn-char-z-min-plus} and \command{vcsn-char-z-max-plus}.
+
+Again, we will toy with some of the automata provided by
+\command{vcsn-char-z}, see \autoref{sec:auto:char-z}.
+
+\subsection{Counting \samp{b}s}
+
+\begin{figure}[tp] \centering
+  \begin{VCPicture}{(0,-2)(3,2)}
+    % states
+    \State{(0,0)}{A}
+    \State{(3,0)}{B}
+    % initial--final
+    \Initial{A} \Final{B}
+    % transitions
+    \EdgeL{A}{B}{b}
+    \LoopS[.5]{A}{b}
+    \LoopN[.5]{A}{a}
+    \LoopS[.5]{B}{b}
+    \LoopN[.5]{B}{a}
+  \end{VCPicture}
+  \begin{legend}
+    Considered without weight, $\Bc_1$ accepts words with a \samp{b}.
+    With weights, it counts the number of \samp{b}s.
+    Taken from \citet[Fig. III.2.2, p.  434]{sakarovitch.03.eta}.\index{B1@$\Bc_1$}
+  \end{legend}
+  \caption{The automaton $\Bc_1$}
+  \label{fig:b1}
+\end{figure}
+
+Let's consider $\Bc_1$ (\autoref{fig:b1}), an
+\index{N-automaton@$\mathbb{N}$-automaton}$\mathbb{N}$-automaton,
+\textit{i.e.}  an automaton whose label's weights are in $\mathbb{N}$.
+This time the evaluation of the word \var{w} by the automaton
+$\Bc_1$ will produce a number, rather than simply accept or
+reject \var{w}.  For instance let's evaluate \samp{abab} and
+\samp{bbab}:
+
+\begin{verbatim}
+vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abbb'
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abab'
+\end{verbatim}
+
+\noindent
+Indeed, $\Bc_1$ counts the number of \samp{b}s.
+
+\subsubsection{Power}
+
+Now let's consider the $\Bc_1^n$, where
+\begin{displaymath}
+  \Bc_1^n = \prod_{i=1}^n \Bc_1, n > 0
+\end{displaymath}
+
+\noindent
+This is implemented by the \Index{\taffn{power}} function:
+
+\begin{verbatim}
+vcsn-char-z identity-nodep b1.xml | vcsn-char-z power - 4 >b4.xml
+\end{verbatim}
+\begin{shell}
+# vcsn-char-z power b1.xml 4 > b4.xml
+\end{shell}
+
+\noindent
+The file \file{b4.xml} now contains the automaton $\Bc_1^4$.  Let's
+check that the evaluation of the words \samp{abab} and \samp{bbab} by
+$\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
+
+\begin{verbatim}
+vcsn-char-z eval b4.xml 'abbb'
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-z eval b4.xml 'abab'
+\end{verbatim}
+
+\subsubsection{Quotient}
+
+Successive products of an automaton create a lot of new states and
+transitions.
+
+\begin{verbatim}
+vcsn-char-z identity-nodep b1.xml | vcsn-char-z info -
+\end{verbatim}
+\begin{verbatim}
+vcsn-char-z info b4.xml
+\end{verbatim}
+
+One way of reducing the size of our automaton is to use the
+\Index{\taffn{quotient}} algorithm.
+
+\begin{verbatim}
+vcsn-char-z quotient b4.xml | vcsn-char-z info -
+\end{verbatim}
+
+
+\subsection{Available functions}
+
+In this section you will find a brief definition of all functions for
+manipulating weighted automata. The following functions are available
+for both.  They are called using \command{vcsn-char-z},
+\command{vcsn-char-z-max-plus}, and \command{vcsn-char-z-min-plus} run as
+\samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
+
+\begin{verbatim}
+vcsn-char-z --list-commands
+\end{verbatim}
+
+%% \smallskip
+%%
+%% In the following:
+%%
+%% \begin{itemize}
+%% \item \var{a1} and \var{a2} are two weighted automata described in
+%%   \Vauc XML format;
+%% \item \var{w} is a word, for example \samp{aabb} if you are working on
+%%   an alphabet that contains the letters \samp{a} and \samp{b};
+%% \item \var{exp} is a rational expression denoting a language;
+%% \item \var{n} is a non-negative integer.
+%% \end{itemize}
+%%
+%%
+%% \begin{fnsection}{Input/output work with weighted automata}
+%% \item{define-automaton}{}{Define an automaton from scratch.}
+%% \item{edit-automaton}{a1}{Edit an existing automaton.}
+%% \item{info}{a1}{Print the number of states, transitions, initial and
+%%     final states of \var{a1}.}
+%% \item{display}{a1}{Display the automaton using DOTTY.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Tests and evaluation on weighted automata}
+%% \item{are-isomorphic}{a1 a2}{Test if the two automata are isomorphic.}
+%% \item{evaluation}{a1 w}{Compute the evaluation of \var{w} by
+%%     \var{a1}.}
+%% \item{is-empty}{a1}{.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata}
+%% \item{accessible}{a1}{Extract the sub-automaton of accessible states
+%%     of \var{a1}.}
+%% \item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
+%%     states of \var{a1}.}
+%% \item{trim}{a1}{Trim the automaton \var{a1}.}
+%% \item{transpose}{a1}{Compute the automaton accepting the mirror
+%%     language of the one accepted by \var{a1}.}
+%% \item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
+%% \item{sum}{a1 a2}{Compute the sum of \var{a1} and \var{a2}.}
+%% %\item{normalize}{a1}{Compute an automaton with unique initial and
+%% %    final states, with $\varepsilon$-transitions.}
+%% %\item{standardize}{a1}{Compute an automaton with unique initial state
+%% %    without adding $\varepsilon$-transitions.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata on letters}
+%% \item{realtime}{[-bf] a1}{$\varepsilon$-removal algorithm and make
+%%     every transition labeled by a letter.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
+%%     \var{a1}.}
+%% \item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
+%%     itself \var{n} times.}
+%% \item{quotient}{a1}{Compute the $\mathbb{Z}$-quotient of \var{a1}.}
+%%   \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Conversion between automata and expressions}
+%% \item{aut-to-exp}{a1}{.}%%FIXME
+%% \item{expand}{exp}{Partially expand rational expressions.}
+%% \item{derived-term}{exp}{Compute the derived term automaton of
+%%     \var{exp}.}
+%% \item{standard}{exp}{Compute the standard (Glushkov) automaton of
+%%     \var{exp}.}
+%% \item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
+%%   \hline
+%% \end{fnsection}
+
+
+% \section{Building your own automaton}
+%%FIXME: Here we should give the usage of define_automaton function.
 
 \appendix
 
-\input{automata}
-\input{theory}
-\input{xml}
-\input{specification}
+\chapter{Automaton Library}
+
+\Vauc comes with a set of interesting automata that can be used to toy
+with \tafkit (\autoref{sec:tafkit}) for instance.  In the chapter, we
+present each one of these automata.
+
+\chapter{Bits of Automaton Theory}
+\label{sec:theory}
+
+\section{On standard and normalized automata}
+
+\subsection{Standard automata}
+
+\subsubsection{Definition}
+
+\begin{definition}[\Index{Standard Automaton}]
+  An automaton (any kind, automata over any monoid with any
+  multiplicity) is said to be \dfn{standard} if it has a unique
+  initial state which is the destination of no transition and whose
+  'initial multiplicity' is equal to the identity (of the multiplicity
+  semiring or of the series semiring, according to the current
+  convention).
+\end{definition}
+
+\begin{remark}
+  These terminology and definition are to be found in ETA and are not
+  (yet) universally known or accepted.
+\end{remark}
+
+\subsubsection{Standardization}
+
+Not only every automaton is equivalent to a standard one, but a simple
+procedure, called 'standardization', transforms every automaton $A$ in
+an equivalent standard one, and goes as follows.
+
+\begin{enumerate}
+\item Add a new state $s$, make it initial, with initial multiplicity
+  equal to the identity.
+
+\item For every initial state i of $A$, with initial multiplicity
+  $I(i)$, add a transition from $s$ to i with label I(i), and set I(i)
+  to 0 (the zero of the semiring, or of the series -- as above).
+
+\item\label{ite:suppress} Suppress all epsilon-transition from the
+  created transitions by a backward closure.
+
+\item\label{ite:take} Take the accessible part of the result.
+\end{enumerate}
+
+\begin{remark}
+  Steps \autoref{ite:suppress} and \autoref{ite:take} are necessary to
+  insure the following property:
+
+  The standardization of a standard automaton $A$ is isomorphic to $A$ .
+
+  More informally, but more generally, they insure that the result of
+  the standardization is of the same "kind" as the automaton on which
+  it is applied (in particular, without epsilon-transition if $A$ is
+  without epsilon-transition).
+\end{remark}
+
+
+
+\subsubsection{Standard automaton of an expression}
+
+A classical algorithm --- often credited to Glushkov --- transforms a
+rational (ie regular) expression (of literal length n ) into a
+standard automaton (with n+1 states). This automaton is known in the
+literature as the 'Glushkov automaton' or as the 'position automaton'
+of the expression.
+
+\begin{remark}
+  It is folklore that the epsilon-transition removal --- via a
+  "backward closure" --- applied to the 'Thompson automaton' of a
+  rational expression produces the standard automaton of the
+  expression.
+\end{remark}
+
+\begin{remark}
+  These definitions, constructions and properties are fairly classical
+  for classical automata. Their generalization to automata with
+  multiplicity is more recent (mostly written by the "Rouen school"
+  around the year 2000).
+\end{remark}
+
+\subsection{Normalized automaton}
+
+\subsubsection{Definition}
+
+
+An automaton (any kind, automata over any monoid with any
+multiplicity) is said to be \index{normalized}\dfn{normalized} if
+
+\begin{enumerate}
+\item it has a unique initial state
+  \begin{itemize}
+  \item which is the destination of no transition,
+  \item whose 'initial multiplicity' is equal to the identity (of the
+    multiplicity semiring or of the series semiring, according to the
+    current convention),
+  \item and whose 'final multiplicity' is equal to the zero (with the
+    same convention);
+  \end{itemize}
+
+\item and, symmetrically, it has a unique final state
+  \begin{itemize}
+  \item which is the source of no transition,
+  \item whose 'final multiplicity' is equal to the identity,
+  \item and whose 'initial multiplicity' is equal to the zero.
+  \end{itemize}
+\end{enumerate}
+
+\begin{remark}
+  The terminology is rather unfortunate, for there are already so many
+  different "normalized" things. The notion however, is rather
+  classical, under this name, at least for classical Boolean
+  automata, because of one classical proof of Kleene theorem. For the
+  same reason, it is a proposition credited to Schutzenberger that
+  every weighted automaton $A$ is equivalent to a normalized one,
+  provided the empty word is not in the support of the series realized
+  by $A$, although the word normalized is not used there. The
+  terminology is even more unfortunate since "normalized transducer"
+  has usually an other meaning, and corresponds to transducers whose
+  transitions have label of the form either (a,1) or (1,b) .
+\end{remark}
+
+\subsubsection{Normalization}
+
+It is not true that every automaton is equivalent to a normalized one.
+This holds only for automata whose accepted language does not contain
+the empty word (for classical automata) or whose realized series gives
+a zero coefficient to the empty word (for weighted automata). There
+exists however a "normalization procedure" which plays mutatis
+mutandis the same role as the standardization and which is best
+described with the help of the standardization.
+
+Let $A$ be an automaton.
+
+Let $B$ = standardize(transpose(standardize(transpose(A))))
+
+Let i be the (unique) initial state of $B$ and let C be the automaton
+obtained from $B$ by setting T(i)=0 --- ie setting to 0 the terminal
+function. Then, C is normalized, we write C = normalize(A) and it
+holds:
+
+for classical automata: The language accepted by normalize(A) is equal
+to the language accepted by $A$ minus the empty word (if it is accepted
+by A):
+
+\begin{displaymath}
+  L(normalize(A))  =  L(A) \ 1_{X^*}
+\end{displaymath}
+
+\noindent
+(where  X  is the alphabet.)
+
+for weighted automata: the series realized by normalize(A) is eke to
+the one realized by $A$, but for the coefficient of $1_{X^*}$ which is 0:
+
+%% FIXME: Can't use \circledot here.  What is the package for it?
+\begin{displaymath}
+  |normalize(A)|  =  |A| \odot  char(X^+)
+\end{displaymath}
+
+\noindent
+(where  $char(X^+)$  is the characteristic series of  $X^+$.
+
+that is, in both cases, normalize(A) accepts or realizes the 'proper'
+part of the language accepted, or of the series realized by, $A$ .
+
+\subsection{Operations on automata}
+
+These families of automata have been considered in order to establish
+one direction of Kleene's theorem, the one that amounts to show that
+languages accepted (or series realized) by finite automata are closed
+under rational operations: sum, product and star.
+
+\subsubsection{The sum}
+
+The sum is never a problem: the union of two automata is an automaton
+whose behavior is the sum of the behaviors of these automata.
+
+\begin{remark}
+  If we consider automata with unique initial and/or final state, it
+  would be a bad idea to realize the sum by merging the initial and/or
+  final states of the two automata in order to recover automata of the
+  same kind --- unless these initial states have no incoming
+  transitions and/or these final states have no outgoing transitions,
+  that is if we consider standard automata, transpose of standard
+  automata, or normalized automata.
+\end{remark}
+\subsubsection{The concatenation}
+
+The product (of accepted language or of realized series) is carried
+out by the "concatenation" of automata --- since we keep the word
+"product" for the Cartesian product of automata which realizes the
+intersection of languages or the Hadamard product of series. For
+classical automata, the concatenation of $A$ and $B$ can be described as
+follows: add an epsilon-transition from every final state of $A$ to
+every initial state of $B$, and suppress the epsilon-transition (if
+necessary, and by any closure algorithm). For weighted automata, the
+'same' algorithm is more easily described by using a standardization
+step: compute A' the 'co-standardized' automaton of $A$, compute B' the
+standardized automaton of $B$, add an epsilon-transition (with label
+identity) from the unique final state of A' to the unique initial
+state of B' and suppress this new transition (if necessary and by any
+closure algorithm).
+
+\begin{remark}
+  Along the same line as above, if $A$ has a unique final state $t$ and
+  B a unique initial state $j$, it would be a bad idea to realize the
+  concatenation of $A$ and $B$ by merging t and $j$ ---unless t has no
+  outgoing transition, that is if $A$ is 'co-standard' or normalized.
+\end{remark}
+
+
+\subsubsection{The star}
+
+The "star" of an automaton $A$, realizing the star of the accepted
+language or of the realized series, is even more subtle.
+
+If $A$ is normalized, it is easily carried out by the merging of the
+initial and final states of $A$ . Since the series accepted by a
+normalized automaton is proper, its star is always defined, this is
+the advantage of the construction. On the other hand, star(A) is not
+normalized anymore, and if this operation is used inside an algorithm
+that builds an automaton from an expression, it yields an explosion of
+the number of states.
+
+If $A$ is standard, with initial state $i$ and initial multiplicity c
+(usually a scalar), the star of |A| is defined if, and only if, the
+$c^{*}$ is defined \cite[Prop. III.2.6]{sakarovitch.03.eta} --- if $A$ has
+no epsilon-transition.  In this case, star(A) is defined as follows:
+
+\begin{enumerate}
+\item replace the initial multiplicity by $c^*$;
+
+\item for every final state $t$ of $A$, add a new transition from $t$
+  to $i$ with label $T(t) \times 1_{X^*}$;
+
+\item Suppress the epsilon-transition via backward closure.
+\end{enumerate}
+\begin{remark}
+  If $A$ is not standard, it would be a bad idea to use the above
+  construction, even letting aside the multiplicity --- although it
+  may have occurred to knowledgeable people.
+\end{remark}
+
+\subsection{Conclusion}
+
+Normalized and standard automata have been introduced in relation with
+the proof of Kleene's theorem. If one does not want to introduce
+epsilon-transition, the notion of normalized automata yields certainly
+the most straightforward argument. The advantage of standard automata
+is that they not only can be used for the same proof, but they also
+yields an efficient algorithm, both for the size of the result and for
+the computational complexity, to transform a rational expression into
+an automaton.
+
+It took me some times to get to this conclusion. If I were to rewrite
+a new edition of \cite{sakarovitch.03.eta}, I would not mention
+normalized automata besides exercises and historical notes. All the
+theory would be presented with standard automata only.
+
+\chapter{A proposal for an XML format for automata}
+\label{sec:xml}
+
+This is not a complete description of the \Vauc proposal for an XML
+format for automata.  The interested reader will find such a
+description at the following URL.  We just present here few examples
+of files, that should give an idea on how these files are built.
+
+\begin{lstlisting}
+<fsmxml xmlns="http://vaucanson.lrde.epita.fr" version="1.0">
+
+  <automaton>
+    <valueType>
+      <semiring operations="classical" set="B" type="numerical"/>
+      <monoid genDescrip="enum" genKind="simple" genSort="letters" type="free">
+        <monGen value="a"/>
+        <monGen value="b"/>
+      </monoid>
+    </valueType>
+    <automatonStruct>
+      <states>
+        <state id="s0"/>
+        <state id="s1"/>
+        <state id="s2"/>
+      </states>
+      <transitions>
+        <transition source="s1" target="s2">
+          <label>
+            <monElmt>
+              <monGen value="b"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition source="s0" target="s0">
+          <label>
+            <monElmt>
+              <monGen value="b"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition source="s0" target="s1">
+          <label>
+            <monElmt>
+              <monGen value="a"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition source="s0" target="s0">
+          <label>
+            <monElmt>
+              <monGen value="a"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition source="s2" target="s2">
+          <label>
+            <monElmt>
+              <monGen value="b"/>
+            </monElmt>
+          </label>
+        </transition>
+        <transition source="s2" target="s2">
+          <label>
+            <monElmt>
+              <monGen value="a"/>
+            </monElmt>
+          </label>
+        </transition>
+        <initial state="s0"/>
+        <final state="s2"/>
+      </transitions>
+    </automatonStruct>
+  </automaton>
+
+\end{lstlisting}
+
+\chapter{Algorithms specifications}
+\label{chap:specification}
+
+\section{Vocabulary}
+
+In \Vauc, we use a precise vocabulary to speak about automaton. As is
+it specific to our project and some expressions may be not widely used
+or approved by the automata community, we choose to define them here.
+
+\begin{description}
+\item[$\mathbb{B}$] Boole's semiring.
+
+\item[Boolean automaton] is a ``classical'' automaton. Precisely, it
+  is a automaton over a free monoid which transitions are labeled by
+  letters of an alphabet with multiplicity in $\mathbb{B}$.
+
+\item[automaton with multiplicity in $\mathbb{B}$] is an automaton
+  over any kind of monoid (in \Vauc we have free monoid and product
+  of free monoids) with its multiplicity in $\mathbb{B}$.
+
+\item[realtime automaton] is an automaton over a monoid which
+  transitions are labelled by letters only (not words).
+
+\item[FMP-transducer] is a transducer over a free monoid product.
+
+\item[RW-transducer] is a transducer over a series $\mathbb{K'}<< \mathbb{K}<<A^*>> >>$.
+\end{description}
+
+\section{Algorithms applicability in \Vauc}
+
+%% FIXME: Precise which algorithms takes only realtime, deterministic,
+%% automata as input.
+
+%% FIXME: Precise what we can expect from resulting automaton.
+
+
+\subsection{Algorithms on graph}
+
+\begin{description}
+\item[accessible] (accessible.hh)
+\item[accessible\_states] (accessible.hh)
+\item[coaccessible] (accessible.hh)
+\item[coaccessible\_states] (accessible.hh)
+\item[trim] (trim.hh)
+\item[useful\_states] (trim.hh)
+\item[sub\_automaton] (sub\_automaton.hh)
+\item[is\_void] %% FIXME: is it called is_empty in vaucanson?
+\end{description}
+
+\subsection{Algorithms on labeled graphs}
+%% Algorithmes sur les graphes étiquetés (sans interpreter les étiquettes)}
+
+\begin{description}
+\item[are\_isomorphic] (isomorph.hh)
+\item[aut\_to\_exp] (aut\_to\_exp.hh)
+\item[sum] (sum.hh)
+\item[thompson\_of] (thompson.hh)
+\item[is\_normalized] (normalized.hh)
+\item[normalize] (normalized.hh)
+\item[union\_of\_normalized] (normalized.hh)
+\item[concatenate\_of\_normalized] (normalized.hh)
+\item[star\_of\_normalized] (normalized.hh)
+\item[standard\_of] (standard\_of.hh)
+\item[standardize] (standard.hh)
+\item[is\_standard] (standard.hh)
+\item[union\_of\_standard] (standard.hh)
+\item[concat\_of\_standard] (standard.hh)
+\item[star\_of\_standard] (standard.hh)
+\end{description}
+
+\subsection{Algorithms on labeled graphs (epsilon-transitions are distinguish)}
+%%== Algorithmes sur les graphes étiquetés ( trans. spontanees distinguees) ==
+
+\begin{description}
+\item[generalized]
+\item[closure] (closure.hh)
+\item[backward\_closure] (closure.hh)
+\item[forward\_closure] (closure.hh)
+\item[concatenate] (concatenate.hh)
+\item[cut\_up] (cut\_up.hh)
+\end{description}
+
+\subsection{Algorithms on graphs labeled on $\mathbb{K}<<A^*>>$}
+%%== Algorithmes sur les graphes étiquetés sur K << A* >> ==
+
+\begin{description}
+\item[is\_realtime] (realtime\_decl.hh)
+\item[backward\_realtime] (backward\_realtime.hh)
+\item[forward\_realtime] (forward\_realtime.hh)
+\item[realtime] (realtime.hh)
+\end{description}
+
+\subsection{Algorithms on graphs labeled on series of letter with
+  multiplicities ($\sum{(a, \mathbb{K}_{a*}a)}$)}
+%%== Algorithmes sur les graphes étiquetés sur une série de lettres à coefficients (sum(a, k_a*a)) ==
+
+\begin{description}
+\item[product] (product.hh)
+\item[eval] (eval.hh)
+\item[evaluation] (evaluation.hh)
+\item[is\_ambiguous]
+\item[is\_deterministic] (determinize.hh)
+\item[is\_sequential]
+\item[quotient] (minimization\_hopcroft.hh)
+\item[derived\_term\_automaton] (derived\_term\_automaton.hh)
+\item[broken\_derived\_term\_automaton] (derived\_term\_automaton.hh)
+\item[complete] (complete.hh)
+\item[is\_complete] (complete.hh)
+\item[transpose] (transpose.hh)
+\end{description}
+
+\subsection{Algorithms on Boolean automata}
+%%== Algorithmes sur les automates booléens ==
+
+\begin{description}
+\item[determinize] (determinize.hh)
+\item[brzozowski] (brzozowski.hh)
+\item[berry\_sethi] (berry\_sethi.hh)
+\item[canonical] (aci\_canonical.hh)
+\item[complement] (complement.hh)
+\item[minimization\_moore] (minimization\_moore.hh)
+\item[co\_minimization\_moore] (minimization\_moore.hh)
+\item[minimization\_hopcroft] (minimization\_hopcroft.hh)
+\item[search] (search.hh)
+\end{description}
+
+\subsection{Algorithms on automata with multiplicities in $\mathbb{K}<<A^*>>$}
+%%== Algorithmes sur les automates à multiplicité dans K<<A*>> (rw-transducers) ==
+%% Les algorithmes V fonctionnent evidemment dans cette classe
+
+\begin{description}
+\item[domain]
+\item[image]
+\item[extension] (extension.hh)
+\item[inverse]
+\end{description}
+
+\subsection{Algorithms on realtime transducers}
+%%== Algorithmes sur les transducteurs realtime ==
+
+\begin{description}
+\item[evaluation] (evaluation.hh)
+\item[realtime\_composition] (realtime\_composition.hh)
+\item[realtime\_to\_fmp] (realtime\_to\_fmp.hh)
+\end{description}
+
+\subsection{Algorithms on realtime RW-transducers}
+%%== Algorithmes sur les RW-transducteurs lettre a letter ==
+
+\begin{description}
+\item[letter\_to\_letter\_composition] (letter\_to\_letter\_composition.hh)
+\end{description}
+
+\subsection{Algorithms on FMP-transducers}
+%%== Algorithmes sur les FMP ==
+
+\begin{description}
+\item[domain] (projections\_fmp.hh)
+\item[image] (projections\_fmp.hh)
+\item[extension] (extension.hh)
+\item[identity] (projections\_fmp.hh)
+\item[evaluation\_fmp] (evaluation\_fmp.hh)
+\item[inverse]
+\item[insplitting] (outsplitting.hh)
+\item[outsplitting] (outsplitting.hh)
+\item[sub\_normalize] (sub\_normalize.hh)
+\item[normalized\_composition] (normalized\_composition.hh)
+\item[fmp\_to\_realtime] (fmp\_to\_realtime.hh)
+\end{description}
+
+\subsection{Algorithms on Boolean FMP-transducers}
+%%== Algorithmes sur les FMP booleens ==
+
+\begin{description}
+\item[b\_composition] (normalized\_composition.hh)
+\end{description}
+
+\subsection{Algorithms on regular expressions over $\mathbb{K}<<A^*>>$}
+%%== Algorithmes sur les expressions sur K<<A*>> ==
+
+\begin{description}
+\item[flatten] (krat\_exp\_flatten.hh)
+\item[expand] (krat\_exp\_expand.hh)
+\end{description}
 
 \printindex
 
@@ -153,5 +1701,12 @@
 %%% Local Variables:
 %%% mode: latex
 %%% ispell-local-dictionary: "american"
-%%% TeX-master: t
 %%% End:
+
+% LocalWords:  priori semiring monoids tafkit
+% LocalWords:  svn vaucanson cd sudo
+% LocalWords:  determinize vcsn semiring rw tdc TAF aut dmi determinizes bz xml
+% LocalWords:  det detmin eval abab bbba aabb determinized Hopcroft aab fmp dom
+% LocalWords:  Glushkov thompson realtime bbab abbb monoids zmin zmax
+% LocalWords:  semiring ite Glushkov Rouen Kleene Schutzenberger mutatis
+% LocalWords:  mutandis Kleene's Hadamard

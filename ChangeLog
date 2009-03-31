@@ -1,3 +1,17 @@
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Only use one tex file for the user manual.
+
+	* doc/manual/Makefile.am: Remove introduction.tex, installation.tex,
+	taf-kit.tex, theory.tex, automata.tex, xml.tex, specification.tex from
+	the distribution.
+	* doc/manual/automata.tex, doc/manual/installation.tex,
+	doc/manual/introduction.tex, doc/manual/specification.tex,
+	doc/manual/taf-kit.tex, doc/manual/theory.tex, doc/manual/xml.tex:
+	Remove.
+	* doc/manual/vaucanson-manual.tex: Merge the previously named files
+	into this one.
+
 2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Streamline the user manual.

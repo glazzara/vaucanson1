@@ -63,15 +63,8 @@ $(manual): $(vaucanson_manual_sources)
 
 vaucanson_manual_sources =			\
 vaucanson-manual.tex				\
-introduction.tex				\
-installation.tex				\
-taf-kit.tex					\
 vaucanswig.tex					\
 developer.tex					\
-theory.tex					\
-automata.tex					\
-xml.tex						\
-specification.tex				\
 version.tex
 
 $(srcdir)/version.tex: $(top_srcdir)/configure.ac
