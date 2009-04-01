@@ -1,5 +1,33 @@
 2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Remove share dependencies.
+
+	* doc/manual/developer.tex, doc/README.txt, doc/HACKING.txt: Remove
+	references to share.
+	* doc/Makefile.am: Remove the share-up target. Use texi2pdf.
+	* doc/manual/Makefile.am: Remove the variables share_dir,
+	share_bin_dir, share_style_dir and share_bib_dir. Do not use the
+	--dvipdf flag (TikZ is used instead of Vaucanson-G so plain DVI
+	compilation is no more required).
+	* doc/manual/vaucanson-manual.tex: Convert all Vaucanson-G pictures to
+	TikZ ones. Use babel, hyperref, tikz instead of mybabel, myhyperref,
+	Vaucanon-G respectively. Do not include myacronym, texi and misc.
+	Include xspace. Many tweaks.
+	* doc/share/README, doc/share/bib/vaucanson.bib,
+	doc/share/bin/texi2dvi, doc/share/styles/VCpatch-pstricks-1-10.tex,
+	doc/share/styles/Vaucanson-G.tex, doc/share/styles/hevea.sty,
+	doc/share/styles/ldf/stl.sty, doc/share/styles/ldf/vaucanson.sty,
+	doc/share/styles/misc.hva, doc/share/styles/misc.sty,
+	doc/share/styles/myacronym.hva, doc/share/styles/myacronym.sty,
+	doc/share/styles/mybabel.hva, doc/share/styles/mybabel.sty,
+	doc/share/styles/mycxx.sty, doc/share/styles/myhyperref.hva,
+	doc/share/styles/myhyperref.sty, doc/share/styles/myifthen.hva,
+	doc/share/styles/myifthen.sty, doc/share/styles/myindex.hva,
+	doc/share/styles/myindex.sty, doc/share/styles/texi.hva,
+	doc/share/styles/texi.sty, doc/share/styles/vaucanson-g.sty: Remove.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update .gitignore.
 
 	* .gitignore: Add NEWS and README.

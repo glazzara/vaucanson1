@@ -23,39 +23,6 @@ doc:
 	-rm -f $(srcdir)/stamp
 	$(MAKE) $(srcdir)/stamp
 
-# Run "make share-up" to update the files from the share/ directory.
-WGET = wget --no-check-certificate
-WGETL = $(WGET) https://svn.lrde.epita.fr/svn/lrde-publis/trunk/
-SHAREFILES = \
-  share/bib/vaucanson.bib \
-  share/bin/texi2dvi \
-  share/styles/hevea.sty \
-  share/styles/ldf/stl.sty \
-  share/styles/ldf/vaucanson.sty \
-  share/styles/misc.hva \
-  share/styles/misc.sty \
-  share/styles/myacronym.sty \
-  share/styles/mybabel.hva \
-  share/styles/mybabel.sty \
-  share/styles/mycxx.sty \
-  share/styles/myhyperref.hva \
-  share/styles/myhyperref.sty \
-  share/styles/myifthen.hva \
-  share/styles/myifthen.sty \
-  share/styles/myindex.hva \
-  share/styles/myindex.sty \
-  share/styles/texi.hva \
-  share/styles/texi.sty \
-  share/styles/vaucanson-g.sty \
-  share/styles/Vaucanson-G.tex \
-  share/styles/VCpatch-pstricks-1-10.tex
-
-.PHONY: share-up
-share-up:
-	for f in $(SHAREFILES); do \
-	  $(WGETL)$$f -O $(top_srcdir)/doc/$$f || exit 1; \
-	done
-
 ## ----------------------- ##
 ## Doxygen documentation.  ##
 ## ----------------------- ##
@@ -104,11 +71,8 @@ mostlyclean-local:
 dist_pdf_DATA = README.pdf HACKING.pdf NEWS.pdf
 MAINTAINERCLEANFILES = $(dist_pdf_DATA) $(srcdir)/stamp
 
-TEXI2DVI = $(srcdir)/share/bin/texi2dvi
-TEXI2DVI_FLAGS = --tidy --batch
-
-TEXI2PDF = $(TEXI2DVI) --pdf
-TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
+TEXI2PDF = texi2pdf
+TEXI2PDF_FLAGS = --tidy --batch
 
 SUFFIXES = .txt .tex .pdf
 
@@ -121,7 +85,7 @@ SUFFIXES = .txt .tex .pdf
 
 
 EXTRA_DIST = README.txt HACKING.txt NEWS.txt \
-	     $(SHAREFILES) share/README $(srcdir)/stamp $(srcdir)/$(DOCDIR)
+	     $(srcdir)/stamp $(srcdir)/$(DOCDIR)
 
 ## ------------------ ##
 ## Unit compilation.  ##

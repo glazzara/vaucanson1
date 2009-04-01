@@ -128,8 +128,6 @@ doc
 
    manual
       The Vaucanson User Guide.
-   share
-      LaTeX components used to generate the documentation.
    ref
       _Doxygen documentation (automatically generated from the source code)
 

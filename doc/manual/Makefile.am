@@ -15,29 +15,15 @@ all: pdf
 
 include $(top_srcdir)/vaucanson.mk
 
-share_dir = $(top_srcdir)/doc/share
-share_bin_dir = $(share_dir)/bin
-share_style_dir = $(share_dir)/styles
-share_bib_dir = $(share_dir)/bib
-
-TEXI2DVI = $(share_bin_dir)/texi2dvi
-TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I $(share_style_dir) -I $(share_bib_dir)
-
-TEXI2PDF = $(TEXI2DVI) --pdf
-TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
-
-share_tex_dependencies = \
-$(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
+TEXI2PDF = texi2pdf
+TEXI2PDF_FLAGS = --tidy --build-dir=tmp.t2d --batch
 
 ## ----- ##
 ## *.tex ##
 ## ----- ##
 
-%.pdf: %.tex $(share_tex_dependencies)
+%.pdf: %.tex
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
-
-%.dvi: %.tex $(share_tex_dependencies)
-	$(TEXI2DVI) $(TEXI2DVI_FLAGS) -o $@ $<
 
 .PHONY: tex-mostlyclean
 tex-mostlyclean:
@@ -52,9 +38,6 @@ mostlyclean-local: tex-mostlyclean
 manual = $(srcdir)/vaucanson-manual.pdf
 
 pdf: $(manual)
-
-# We use vaucanson-g, which requires plain DVI compilation.
-TEXI2PDF_FLAGS += --dvipdf
 
 dist_pdf_DATA = $(manual)
 
