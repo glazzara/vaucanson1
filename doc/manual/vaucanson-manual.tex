@@ -221,15 +221,15 @@ the latest development version can be found on
 
 The following commands build and install the platform:
 \begin{shell}
-# \kbd{cd vaucanson-\VcsnVersion}
+$ \kbd{cd vaucanson-\VcsnVersion}
 \end{shell}
 Then:
 \begin{shell}
-# \kbd{./configure}
+$ \kbd{./configure}
 ...
-# \kbd{make}
+$ \kbd{make}
 ...
-# \kbd{sudo make install}
+$ \kbd{sudo make install}
 ...
 \end{shell}
 
@@ -308,7 +308,7 @@ This section focuses on the program \Index{\command{vcsn-char-b}}, the
 simple interface:
 
 \begin{shell}
-# vcsn-char-b \var{function} \var{automaton} \var{arguments...}
+$ vcsn-char-b \var{function} \var{automaton} \var{arguments...}
 \end{shell}
 
 \noindent
@@ -327,7 +327,7 @@ produce a result on the standard output, and if an \var{automaton} is
 
 A typical line of commands from the \tafkit reads as follows:
 \begin{shell}
-# \kbd{vcsn-char-b determinize-nodep a1.xml > a1det.xml}
+$ \kbd{vcsn-char-b determinize-nodep a1.xml > a1det.xml}
 \end{shell}
 and should be understood, or analyzed, as follows.
 \begin{enumerate}
@@ -369,9 +369,9 @@ and should be understood, or analyzed, as follows.
 
 As a more elaborate example, consider the following command
 
-\begin{verbatim}
-vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - | vcsn-char-b minimize - | vcsn-char-b info -
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - | vcsn-char-b minimize - | vcsn-char-b info -}
+\end{shell}
 
 \noindent
 It fetches the automaton \code{a1} from the automaton library,
@@ -384,18 +384,18 @@ Please, note the typographic conventions: user input is represented
 and finally, if different from 0, the exit status is represented
 \texttt{=> like this}.  For instance:
 
-\begin{verbatim}
-vcsn-char-b identity-nodep a1.xml | vcsn-char-b info -
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b identity-nodep a1.xml | vcsn-char-b info -}
+\end{shell}
 
 \smallskip
 
 Other than that, the interface of the \tafkit components is usual,
 including options such as \option{--version} and \option{--help}:
 
-\begin{verbatim}
-vcsn-char-b --help
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --help}
+\end{shell}
 
 The whole list of supported commands is available via
 \option{--list-commands}.
@@ -405,9 +405,9 @@ The whole list of supported commands is available via
 \Vauc provides a set of common automata.  The function
 \Index{\taffn{list-automata}} lists them all:
 
-\begin{verbatim}
-vcsn-char-b list-automata
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b list-automata}
+\end{shell}
 
 \begin{figure}[ht] \centering
   \begin{tikzpicture}[automaton]
@@ -436,56 +436,56 @@ Let's consider the Boolean automaton $\Ac_1$ (\autoref{fig:a1}), part
 of the standard library.  It can be dumped using
 \Index{\taffn{identity}}:
 
-\begin{verbatim}
-vcsn-char-b identity-nodep a1.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b identity-nodep a1.xml}
+\end{shell}
 
 Usual shell indirections (\samp{|}, \samp{>}, and \samp{<}) can be
 used to combine \tafkit commands.  For instance, this is an easy means
 to bring a local copy of this file:
 
-\begin{verbatim}
-vcsn-char-b identity-nodep a1.xml >my-a1.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b identity-nodep a1.xml >my-a1.xml}
+\end{shell}
 
 \tafkit uses XML to exchange automata, to get graphical rendering of
 the automaton, you may either invoke \Index{\taffn{-o dot identity}} and then
 use a Dot compliant program, or use \Index{\taffn{display}} that does
 both.
 
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity-nodep a1.xml >a1.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity-nodep a1.xml >a1.dot}
+\end{shell}
 
 
 \subsubsection{Determinization of $\Ac_1$}
 To determinize a Boolean automaton, call the
 \Index{\taffn{determinize}} function:
 
-\begin{verbatim}
-vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - >a1det.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - >a1det.xml}
+\end{shell}
 
 To get information about an automaton, call the \Index{\taffn{info}} function:
-\begin{verbatim}
-vcsn-char-b info a1det.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b info a1det.xml}
+\end{shell}
 
 Or use dotty to visualize it:
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity a1det.xml >a1det.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity a1det.xml >a1det.dot}
+\end{shell}
 
 \subsubsection{Evaluation}
 
 To \index{\taffn{eval}}evaluate whether a word is accepted:
 
-\begin{verbatim}
-vcsn-char-b eval-nodep a1.xml 'abab'
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b eval-nodep a1.xml 'bbba'
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b eval-nodep a1.xml 'abab'}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b eval-nodep a1.xml 'bbba'}
+\end{shell}
 
 \noindent
 where 1 (resp. 0) means that the word is accepted (resp. not accepted)
@@ -503,7 +503,7 @@ available:
 
 The interface is based on a menu of choices:
 \begin{shell}
-# \kbd{vcsn-char-b --alphabet=ab define-automaton all.xml}
+$ \kbd{vcsn-char-b --alphabet=ab define-automaton all.xml}
 Automaton description:
   States: (none)
   Initial states: (none)
@@ -582,12 +582,12 @@ Finally, hit \kbd{10} to save the resulting automaton in the file
 to Boolean automata.  This provides an alternative means to create
 automata:
 
-\begin{verbatim}
-vcsn-char-b --alphabet=ab exp-to-aut '(a+b)*' >all.xml
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity all.xml >all.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '(a+b)*' >all.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity all.xml >all.dot}
+\end{shell}
 
 \subsection{Token representations}
 
@@ -615,22 +615,22 @@ use the \verb-ALPHABET- token an arbitrary number of times, to append letters
 to the current alphabet. The following commands:
 
 %% FIXME: include ({1} a) in the example
-\begin{verbatim}
-vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity parser.xml >parser.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity parser.xml >parser.dot}
+\end{shell}
 
 \noindent
 , will give the same results as:
 %% FIXME: include ({1} a) in the example
-\begin{verbatim}
-vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot}
+\end{shell}
 
 \noindent
 With the \verb-ALPHABET- token, you can specify two types of letters:
@@ -665,44 +665,44 @@ source code in EBNF notations.
 This automaton, constructed following the Thompson algorithm, is not
 the simplest one: it can be \index{minimize@\taffn{minimize}}minimized:
 
-\begin{verbatim}
-vcsn-char-b minimize all.xml >allmin.xml
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity allmin.xml >allmin.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b minimize all.xml >allmin.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity allmin.xml >allmin.dot}
+\end{shell}
 
 \bigskip
 
 Computing the language recognized by a Boolean automaton can be done
 using \Index{\taffn{aut-to-exp}}:
 
-\begin{verbatim}
-vcsn-char-b aut-to-exp all.xml
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b aut-to-exp allmin.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b aut-to-exp all.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b aut-to-exp allmin.xml}
+\end{shell}
 
 \Vauc provides several algorithms that build an automaton that
 recognizes a given language.  The following sequence computes the
 minimal automaton of \samp{(a+b)*ab(a+b)*}.
 
-\begin{verbatim}
-vcsn-char-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-char-b quotient - >l1.xml
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity l1.xml >l1.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-char-b quotient - >l1.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity l1.xml >l1.dot}
+\end{shell}
 
 \subsection{Available functions}
 
 The whole list of supported commands is available via
 \option{--list-commands}:
 
-\begin{verbatim}
-vcsn-char-b --list-commands
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --list-commands}
+\end{shell}
 
 
 %% Une definition plus rigoureuse des algorithmes devrait etre fournie
@@ -881,36 +881,36 @@ described in \autoref{fig:t1}, and part of the automaton library
 %% Currently \tafkit requires the user to specify the alphabets to use
 %% using \option{--alphabet1} and \option{--alphabet2}.
 %%
-%% \begin{verbatim}
-%% vcsn-char-fmp-b --alphabet1=ab eval t1.xml 'bba'
-%% \end{verbatim}
+%% \begin{shell}
+%% $ \kbd{vcsn-char-fmp-b --alphabet1=ab eval t1.xml 'bba'}
+%% \end{shell}
 
 \subsubsection{Domain}
 The transducer $T$ only accepts binary numbers divisible by 3.
 
-\begin{verbatim}
-vcsn-char-fmp-b identity-nodep t1.xml | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-fmp-b identity-nodep t1.xml | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml}
+\end{shell}
 
 Now the file \file{divisible-by-3.xml} contains the description of a
 Boolean automaton that accepts only the numbers divisible by 3:
 
-\begin{verbatim}
-vcsn-char-b --output-type=dot identity div-by-3.xml >div-by-3.dot
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity div-by-3.xml >div-by-3.dot}
+\end{shell}
 
 
 %% \subsubsection{to-tdc}
 %% Each transducer can be transformed to the other type of transducer
 %% thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
 %% \begin{shell}
-%% # vcsn-char-rw to-tdc quot_3_rw.xml > quot_3.xml
-%% # vcsn-char-fmp-b to-rw-tdc add1.xml > add1_rw.xml
+%% $ \kbd{vcsn-char-rw to-tdc quot_3_rw.xml > quot_3.xml}
+%% $ \kbd{vcsn-char-fmp-b to-rw-tdc add1.xml > add1_rw.xml}
 %% \end{shell}
 %%
 %% \subsubsection{Composing}
 %% \begin{shell}
-%% # vcsn-char-fmp-b compose quot_3.xml add1.xml
+%% $ \kbd{vcsn-char-fmp-b compose quot_3.xml add1.xml}
 %% \end{shell}
 
 \subsection{Available functions}
@@ -918,9 +918,9 @@ The following functions are available for both \command{vcsn-char-rw}
 and \command{vcsn-char-fmp-b} programs.  To invoke them, run
 \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
 
-\begin{verbatim}
-vcsn-char-fmp-b --list-commands
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-fmp-b --list-commands}
+\end{shell}
 
 %% In the following:
 %%
@@ -1043,12 +1043,12 @@ $\Bc_1$ will produce a number, rather than simply accept or
 reject \var{w}.  For instance let's evaluate \samp{abab} and
 \samp{bbab}:
 
-\begin{verbatim}
-vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abbb'
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abab'
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abbb'}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abab'}
+\end{shell}
 
 \noindent
 Indeed, $\Bc_1$ counts the number of \samp{b}s.
@@ -1063,11 +1063,11 @@ Now let's consider the $\Bc_1^n$, where
 \noindent
 This is implemented by the \Index{\taffn{power}} function:
 
-\begin{verbatim}
-vcsn-char-z identity-nodep b1.xml | vcsn-char-z power - 4 >b4.xml
-\end{verbatim}
 \begin{shell}
-# vcsn-char-z power b1.xml 4 > b4.xml
+$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z power - 4 >b4.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-z power b1.xml 4 > b4.xml}
 \end{shell}
 
 \noindent
@@ -1075,31 +1075,31 @@ The file \file{b4.xml} now contains the automaton $\Bc_1^4$.  Let's
 check that the evaluation of the words \samp{abab} and \samp{bbab} by
 $\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
 
-\begin{verbatim}
-vcsn-char-z eval b4.xml 'abbb'
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-z eval b4.xml 'abab'
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-z eval b4.xml 'abbb'}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-z eval b4.xml 'abab'}
+\end{shell}
 
 \subsubsection{Quotient}
 
 Successive products of an automaton create a lot of new states and
 transitions.
 
-\begin{verbatim}
-vcsn-char-z identity-nodep b1.xml | vcsn-char-z info -
-\end{verbatim}
-\begin{verbatim}
-vcsn-char-z info b4.xml
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z info -}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-z info b4.xml}
+\end{shell}
 
 One way of reducing the size of our automaton is to use the
 \Index{\taffn{quotient}} algorithm.
 
-\begin{verbatim}
-vcsn-char-z quotient b4.xml | vcsn-char-z info -
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-z quotient b4.xml | vcsn-char-z info -}
+\end{shell}
 
 
 \subsection{Available functions}
@@ -1110,9 +1110,9 @@ for both.  They are called using \command{vcsn-char-z},
 \command{vcsn-char-z-max-plus}, and \command{vcsn-char-z-min-plus} run as
 \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
 
-\begin{verbatim}
-vcsn-char-z --list-commands
-\end{verbatim}
+\begin{shell}
+$ \kbd{vcsn-char-z --list-commands}
+\end{shell}
 
 %% \smallskip
 %%

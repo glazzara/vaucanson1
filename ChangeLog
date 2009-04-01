@@ -1,5 +1,12 @@
 2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Cleanup command display in the user manual.
+
+	* doc/manual/vaucanson-manual.tex: Use $ as prompt in the shell
+	environments. Convert all verbatim environments to shell ones.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Update the automaton TikZ style in the user manual.
 
 	* doc/manual/vaucanson-manual.tex: Make states bolder, and loops
