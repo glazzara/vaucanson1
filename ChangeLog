@@ -1,3 +1,13 @@
+2009-04-02  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+
+	More developer documentation.
+
+	* doc/HACKING.txt (Version control): New section to discuss Git
+	and how to work with Git.
+	(Parallel make): Remove Fixme and simplify command.
+	(distcc, ccache): More text
+	(Improve the build system): Remove.
+
 2009-04-02  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Move the user manual check from check to maintainer-check.
