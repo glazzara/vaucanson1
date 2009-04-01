@@ -24,7 +24,15 @@
                        node distance=2cm,
                        pos=.4,
                        >=stealth',
+                       every state/.style={draw,very thick,minimum size=7mm},
+                       every edge/.style={draw,thick},
+                       initial distance=7mm,
+                       accepting distance=7mm,
                        initial text=]
+\tikzstyle{loop right}=[right,out=25,in=-25,loop,pos=.5]
+\tikzstyle{loop above}=[above,out=115,in=65,loop,pos=.5]
+\tikzstyle{loop left}=[left,out=205,in=155,loop,pos=.5]
+\tikzstyle{loop below}=[below,out=295,in=245,loop,pos=.5]
 \tikzstyle{accepting}=[accepting by arrow]
 \tikzoption{initial angle}{\tikzaddafternodepathoption{\def\tikz@initial@angle{#1}}}
 \tikzoption{accepting angle}{\tikzaddafternodepathoption{\def\tikz@accepting@angle{#1}}}
