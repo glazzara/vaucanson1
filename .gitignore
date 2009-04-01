@@ -20,3 +20,5 @@ Makefile
 /config.hin
 /configure
 /aclocal.m4
+NEWS
+README
