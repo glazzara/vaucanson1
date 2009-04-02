@@ -155,6 +155,7 @@ taf-kit
 vaucanswig
    VaucanSWIG sources and tests.  Very experimental.
 
+
 Requirements
 ============
 
@@ -191,10 +192,6 @@ which provides many useful objects, including hash tables. Currently,
 Boost is used in algorithms only, but its use shall be extended to
 automata structures and other portions of code. You must install this
 library on your system.
-
-.. _python-docutils: http://www.python.org
-
-You may need python-docutils_ if you want to build the documentation.
 
 
 Using Vaucanson
