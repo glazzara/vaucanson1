@@ -1,5 +1,15 @@
 2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Remove some unused Makefile rules.
+
+	* Makefile.am (install-epita): Remove.
+	* doc/manual/Makefile.am (install-epita, deep-clean,
+	vcsndldir_data): Remove.
+	(EXTRA_DIST): Do not distribute the manual a second time, it
+	is already in dist_pdf_DATA.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/manual/Makefile.am (check_doc.py): Add missing $(srcdir)/
 	on dependency.
 

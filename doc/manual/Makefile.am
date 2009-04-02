@@ -49,36 +49,15 @@ vaucanson-manual.tex				\
 vaucanswig.tex					\
 developer.tex
 
-EXTRA_DIST = $(vaucanson_manual_sources) $(manual)
+EXTRA_DIST = $(vaucanson_manual_sources)
 
 CLEANFILES += check_doc.py
 nodist_noinst_SCRIPTS = check_doc.py
 
-MAINTAINERCLEANFILES = $(vcsndldir_data)
+MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 maintainer-clean-local:
 	rm -rf tmp.t2d
 
-## ---------------------------- ##
-## Installing on LRDE servers.  ##
-## ---------------------------- ##
-
-vcsndldir_data =				\
-$(dist_pdf_DATA)
-
-install-epita: $(vcsndldir_data)
-	$(INSTALL_DATA) $(vcsndldir_data) $(vcsndldir)
-.PHONY: install-epita
-
-
-## ------------ ##
-## Deep-clean.  ##
-## ------------ ##
-
-# Remove all the is generated, included if it requires maintainer
-# tools, but do not call maintainer-clean nor distclean, since we do
-# not want to have to reconfigure etc.
-deep-clean: clean maintainer-clean-local
-	-rm -f $(MAINTAINERCLEANFILES)
 
 check_doc.py: $(srcdir)/check_doc.py.in Makefile.am
 	sed 's|[@]vcsn_version[@]|$(VERSION)|' $(srcdir)/check_doc.py.in > $@
