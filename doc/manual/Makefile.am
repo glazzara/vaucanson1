@@ -80,7 +80,7 @@ install-epita: $(vcsndldir_data)
 deep-clean: clean maintainer-clean-local
 	-rm -f $(MAINTAINERCLEANFILES)
 
-check_doc.py: check_doc.py.in Makefile.am
+check_doc.py: $(srcdir)/check_doc.py.in Makefile.am
 	sed 's|[@]vcsn_version[@]|$(VERSION)|' $(srcdir)/check_doc.py.in > $@
 	chmod a+x $@
 

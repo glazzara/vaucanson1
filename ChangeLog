@@ -1,3 +1,8 @@
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/manual/Makefile.am (check_doc.py): Add missing $(srcdir)/
+	on dependency.
+
 2009-04-02  Alexandre Duret-Lutz  <adl@va-et-vient.net>
 
 	More developer documentation.
@@ -111,7 +116,7 @@
 	* doc/manual/vaucanson-manual.tex: Do not include library.tex.
 
 2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
-	
+
 	Remove make dist depency on make (Close #140).
 
 	* doc/.gitignore: Remove automata.tex and manual.ext as they are no
