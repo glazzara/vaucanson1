@@ -1,5 +1,10 @@
 2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* Makefile.am (maintainer-check): Call maintainer-check in
+	doc/manual.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Remove some unused Makefile rules.
 
 	* Makefile.am (install-epita): Remove.

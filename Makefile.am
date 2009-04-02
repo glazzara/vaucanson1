@@ -87,6 +87,7 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
+	cd doc/manual && $(MAKE) maintainer-check
 
 # Build debian packages.
 deb:
