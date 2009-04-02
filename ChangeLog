@@ -1,3 +1,14 @@
+2009-04-02  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Move the user manual check from check to maintainer-check.
+
+	* configure.ac: Only check for python when building vaucanswig.
+	* doc/.gitignore: Remove check_doc.py.
+	* doc/manual/Makefile.am: Do not distribute check_doc.py and
+	check_doc.py.in. Only run check_doc.py when invoking the
+	maintainer-check target.
+	* doc/HACKING.txt: Add a step when making a release.
+
 2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Cleanup command display in the user manual.

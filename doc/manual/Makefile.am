@@ -49,10 +49,10 @@ vaucanson-manual.tex				\
 vaucanswig.tex					\
 developer.tex
 
-EXTRA_DIST = $(vaucanson_manual_sources) $(manual) check_doc.py.in
+EXTRA_DIST = $(vaucanson_manual_sources) $(manual)
 
-CLEANFILES += $(srcdir)/check_doc.py
-dist_noinst_SCRIPTS = $(srcdir)/check_doc.py
+CLEANFILES += check_doc.py
+nodist_noinst_SCRIPTS = check_doc.py
 
 MAINTAINERCLEANFILES = $(vcsndldir_data)
 maintainer-clean-local:
@@ -80,10 +80,13 @@ install-epita: $(vcsndldir_data)
 deep-clean: clean maintainer-clean-local
 	-rm -f $(MAINTAINERCLEANFILES)
 
-$(srcdir)/check_doc.py: check_doc.py.in Makefile.am
-	sed 's|[@]vcsn_version[@]|$(VERSION)|' $(srcdir)/check_doc.py.in > $(srcdir)/$@
-	chmod a+x $(srcdir)/$@
+check_doc.py: check_doc.py.in Makefile.am
+	sed 's|[@]vcsn_version[@]|$(VERSION)|' $(srcdir)/check_doc.py.in > $@
+	chmod a+x $@
 
-# Check the user manual
-check-local: $(srcdir)/check_doc.py
-	$(PYTHON) $(srcdir)/check_doc.py $(srcdir)/vaucanson-manual.tex
+maintainer-check: check_doc.py
+	if python --version >/dev/null 2>&1; then \
+	  ./check_doc.py $(srcdir)/vaucanson-manual.tex; \
+	else \
+	  echo "$@: python is required" >&2; \
+	fi

@@ -94,7 +94,9 @@ if test "x$ac_cv_recent_swig" != xyes; then
   AC_MSG_WARN([You need swig >= 1.3 to compile vaucanswig from a fresh checkout.])
 fi
 
-VCSN_CHECK_PYTHON
+if test "x$enable_vaucanswig" = xyes; then
+  VCSN_CHECK_PYTHON
+fi
 
 AC_CONFIG_FILES([vaucanswig/Makefile
 		 vaucanswig/meta/Makefile
