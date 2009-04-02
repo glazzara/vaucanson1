@@ -1,5 +1,11 @@
 2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Copy some sections from developer.tex into HACKING.txt
+
+	* doc/HACKING.txt (Tools): New section.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/README.txt: python-docutils is not needed by end-users.
 
 2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>

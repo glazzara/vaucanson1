@@ -1,4 +1,125 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Vaucanson's Developer's Guide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This document does not target users of the Vaucanson library.  It is
+meant for developers and those who wish to contribute code to
+Vaucanson.
+
 .. contents::
+
+=======
+ Tools
+=======
+
+Maintainer Tools
+================
+
+We use a number of tools during development which we call `maintainer
+tools`, because they are not required by the end user.  You should
+have these tools installed on your build machine in order to build a
+fresh checkout of the Vaucanson repository.
+
+Autoconf, Automake, and Libtool
+  Generate the GNU Build System.
+
+Doxygen
+  Is used to build a reference documentation from comments in the
+  source code.
+
+rst2latex
+  Is used to convert reStructuredText into LaTex.  This document
+  is written using reStructuredText.  ``rst2latex`` is often
+  distributed in a package called ``python-docutils`` or ``py-docutils``.
+
+
+Note about some developer tools
+===============================
+
+Some tools help to improve the code.  Use them liberally!
+
+Valgrind and the C++ standard library
+-------------------------------------
+
+Valgrind help catching incorrect memory usage: double deletes, memory
+leaks, uninitialized memory readings, and so forth.  Usually, to
+optimize speed, implementations of the C++ library don't free all the
+memory they allocated unless asked.  You should ``export GLIBCXX_FORCE_NEW=1``
+to force GCC's C++ library to free allocated structure.
+
+See the `C++ Library FAQ`_ for help for details.
+
+.. _C++ Library FAQ: http://gcc.gnu.org/onlinedocs/libstdc++/faq/#4_4_leak
+
+
+To check memory leaks use ``valgrind --leak-check=yes``.  To get more
+details, add ``--num-callers=20 --leak-resolution=high --show-reachable=yes``.
+
+
+Using ``gdb`` or ``valgrind`` on TAF-Kit
+----------------------------------------
+
+The executables that are built in ``taf-kit/src/`` are ``libtool``
+scripts that call the true executables (usually hidden under
+``taf-kit/src/.libs/``).  You cannot run ``gdb`` directly on these
+scripts, you should always ask ``libtool`` to do it for you::
+
+  % cd taf-kit/src
+  % export VCSN_DATA_PATH=$PWD/../../data
+  % libtool --mode=execute gdb ./vcsn-int-b
+  (gdb) run determinize x.xml
+  ...
+
+It's often more convenient to run the scripts from taf-kit/tests
+because they export ``VCSN_DATA_PATH`` and run the corresponding
+executable from ``taf-kit/src`` for you.  In that case you have to use
+the ``PREVCSN`` environment variable to specify these ``libtool``
+options::
+
+  % cd taf-kit/tests
+  % PREVCSN='libtool --mode=execute gdb' ./vcsn-int-b
+  (gdb) run determinize x.xml
+  ...
+
+The same commands can of course be used to run other tools like
+Valgrind.  Here is how to run TAF-Kit under Valgrind and attach a
+debugger on the first error::
+
+  % cd taf-kit/tests
+  % PREVCSN='libtool --mode=execute valgrind --db-attach' ./vcsn-int-b
+
+A note for Darwin users: because your system comes with another tool
+called ``libtool``, GNU ``libtool`` is usually installed as
+``glibtool``.  Alternatively, you may want to use the copy of
+``libtool`` output by ``configure`` at the root of Vaucanson's build
+tree.
+
+
+Debugging STL
+-------------
+
+The GNU standard C++ library comes with some useful debugging
+features.  Just add ``-D_GLIBCXX_DEBUG`` to your ``CPPFLAGS``
+when compiling Vaucanson.
+
+You are likely to encounter issues with `singular` iterators.  It
+refers to default-constructed iterators, which is not the same thing
+as being the ``end()`` of a given container.  They are write-only
+according to the STL, and copying them is not allowed.
+
+As a result, the following code is incorrect::
+
+  std::vector<std::list<int>::iterator> is(10);
+
+This is because this vector constructor builds a single default object
+(here a default ``std::list<int>::iterator``, then `copies` it ten
+times, which is (ten times) forbidden.  As there is no clear means to
+rewrite the code to avoid this violation, you might want to use
+``end()`` iterators, which can be used in comparisons, can be copied,
+but cannot be dereferenced::
+
+  std::vector<std::list<int>::iterator> is(10, std::list<int>().end());
+
 
 =================
  Version control
@@ -432,45 +553,6 @@ The ``VCSN_GRAPH_IMPL`` macro must only appear in three locations:
 
 Any other use is irrelevant and may be very harmful. Moreover this
 macro must never be used in a file with guards.
-
-
-Using ``gdb`` or ``valgrind`` on TAF-Kit
-========================================
-
-The executables that are built in ``taf-kit/src/`` are ``libtool``
-scripts that call the true executables (usually hidden under
-``taf-kit/src/.libs/``).  You cannot run ``gdb`` directly on these
-scripts, you should always ask ``libtool`` to do it for you::
-
-  % cd taf-kit/src
-  % export VCSN_DATA_PATH=$PWD/../../data
-  % libtool --mode=execute gdb ./vcsn-int-b
-  (gdb) run determinize x.xml
-  ...
-
-It's often more convenient to run the scripts from taf-kit/tests
-because they export ``VCSN_DATA_PATH`` and run the corresponding
-executable from ``taf-kit/src`` for you.  In that case you have to use
-the ``PREVCSN`` environment variable to specify these ``libtool``
-options::
-
-  % cd taf-kit/tests
-  % PREVCSN='libtool --mode=execute gdb' ./vcsn-int-b
-  (gdb) run determinize x.xml
-  ...
-
-The same commands can of course be used to run other tools like
-Valgrind.  Here is how to run TAF-Kit under Valgrind and attach a
-debugger on the first error::
-
-  % cd taf-kit/tests
-  % PREVCSN='libtool --mode=execute valgrind --db-attach' ./vcsn-int-b
-
-A note for Darwin users: because your system comes with another tool
-called ``libtool``, GNU ``libtool`` is usually installed as
-``glibtool``.  Alternatively, you may want to use the copy of
-``libtool`` output by ``configure`` at the root of Vaucanson's build
-tree.
 
 
 How can I choose a specific graph implementation?
