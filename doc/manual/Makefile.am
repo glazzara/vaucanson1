@@ -41,8 +41,8 @@ pdf: $(manual)
 
 dist_pdf_DATA = $(manual)
 
-$(manual): $(vaucanson_manual_sources)
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
+$(manual): vaucanson-manual.tex
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ vaucanson-manual.tex
 
 vaucanson_manual_sources =			\
 vaucanson-manual.tex				\
@@ -51,21 +51,9 @@ developer.tex
 
 EXTRA_DIST = $(vaucanson_manual_sources)
 
-CLEANFILES += check_doc.py
-nodist_noinst_SCRIPTS = check_doc.py
-
 MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 maintainer-clean-local:
 	rm -rf tmp.t2d
 
-
-check_doc.py: $(srcdir)/check_doc.py.in Makefile.am
-	sed 's|[@]vcsn_version[@]|$(VERSION)|' $(srcdir)/check_doc.py.in > $@
-	chmod a+x $@
-
-maintainer-check: check_doc.py
-	if python --version >/dev/null 2>&1; then \
-	  ./check_doc.py $(srcdir)/vaucanson-manual.tex; \
-	else \
-	  echo "$@: python is required" >&2; \
-	fi
+maintainer-check: vaucanson-manual.tex
+	grep "^\\\\def\\\\VcsnVersion{$(VERSION)}" vaucanson-manual.tex

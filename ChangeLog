@@ -1,5 +1,14 @@
 2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Replace check_doc.py by a call to grep.
+
+	* doc/manual/Makefile.am (maintainer-check): Replace the
+	call to check_doc.py by a simple call to grep.
+	(CLEANFILES, check_doc.py): Do not build check_doc.py anymore.
+	* doc/manual/check_doc.py.in: Delete.
+
+2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/FAQ.txt: Really delete it, as intended on 2009-01-23.
 
 2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
