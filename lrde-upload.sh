@@ -6,21 +6,35 @@
 set -e
 set -x
 
-cd doc/manual
-make vaucanson-manual.pdf
-cd ../..
+# Find out which branch has been compiled.
+rev=`git name-rev --name-only HEAD`
 
-rm -rf /lrde/dload/vaucanson/snapshot/ref.tmp
-cp -pR doc/ref /lrde/dload/vaucanson/snapshot/ref.tmp
-chmod -R a+rX /lrde/dload/vaucanson/snapshot/ref.tmp
+case $rev in
+  next|hive) rev=snapshot-$rev;;
+  master) rev=snapshot;;
+  # Don't upload any other branch.
+  *) exit;;
+esac
 
-cp doc/manual/vaucanson-manual.pdf /lrde/dload/vaucanson/snapshot/
-chmod a+rX /lrde/dload/vaucanson/snapshot/vaucanson-manual.pdf
+DEST=/lrde/dload/vaucanson/$rev
 
-cp -f vaucanson-*.tar.gz /lrde/dload/vaucanson/snapshot/vaucanson-snapshot.tar.gz
-chmod a+rX /lrde/dload/vaucanson/snapshot/vaucanson-snapshot.tar.gz
+# Retrieve the package version
+VERSION=`autoconf --trace='AC_INIT:$2'`
 
-mv -f /lrde/dload/vaucanson/snapshot/ref \
-      /lrde/dload/vaucanson/snapshot/ref.old || true
-mv -f /lrde/dload/vaucanson/snapshot/ref.tmp /lrde/dload/vaucanson/snapshot/ref
-rm -rf /lrde/dload/vaucanson/snapshot/ref.old
+# Always do "cp then mv" when uploading the file, so that someone
+# cannot start a download why the destination file is incomplete.
+
+# Upload the tarball
+mkdir -p $DEST
+cp -f vaucanson-$VERSION.tar.gz $DEST/vaucanson-$rev.tar.gz.tmp
+mv -f $DEST/vaucanson-$rev.tar.gz.tmp $DEST/vaucanson-$rev.tar.gz
+chmod -R a+r $DEST/vaucanson-$rev.tar.gz
+
+# Upload a copy of the reference manual
+rm -rf $DEST/ref.tmp
+cp -pR doc/ref $DEST/ref.tmp
+cp doc/manual/vaucanson-manual.pdf $DEST/
+chmod -R a+rX $DEST/
+mv -f $DEST/ref $DEST/ref.old || true
+mv -f $DEST/ref.tmp $DEST/ref
+rm -rf $DEST/ref.old

@@ -1,5 +1,9 @@
 2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* lrde-upload.sh: Update to take Git branches into account.
+
+2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Replace check_doc.py by a call to grep.
 
 	* doc/manual/Makefile.am (maintainer-check): Replace the
