@@ -1,5 +1,20 @@
 2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Manual: some work on the title page and the introduction.
+
+	* doc/manual/vaucanson-manual.tex (\TFK,\TFKv): Remove these
+	unused macros.
+	(\title,\author): Remove and replace by a custom titlepage.
+	Also change the title from "The Vaucanson TAF-Kit 1.2.95"
+	to "Vaucanson User's Manual".
+	(Introduction): Rewrite to introduce the library, TAF-Kit, and
+	the automata repository.
+	(Automaton Library): Rename as ...
+	(Automaton Repository): ... to avoid ambiguities with Vaucanson
+	being an Automaton Library too.
+
+2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* lrde-upload.sh: Update to take Git branches into account.
 
 2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
