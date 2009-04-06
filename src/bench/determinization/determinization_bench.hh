@@ -14,6 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
+
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <iostream>
@@ -36,8 +38,18 @@ void determinization_bench(int n_states)
   alpha.insert('c');
   automaton_t a = make_automaton(alpha);
   aut_2n(n_states, a);
-  VCSN_BENCH_START;
+
+  BENCH_START("determinize", "Vaucanson - determinization.");
+
   automaton_t ret = determinize(a);
-  VCSN_BENCH_STOP_AND_PRINT;
+
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_states", (long) n_states);
+
+  std::stringstream name;
+  name << "bench_determinize_" << n_states;
+
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

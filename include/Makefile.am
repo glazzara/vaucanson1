@@ -100,8 +100,6 @@ vaucanson/misc/window.hxx
 
 nobase_include_HEADERS +=			\
 vaucanson/tools/automaton_tools.hh		\
-vaucanson/tools/bencher.hh			\
-vaucanson/tools/bencher.hxx			\
 vaucanson/tools/dot_display.hh			\
 vaucanson/tools/dot_display.hxx			\
 vaucanson/tools/dot_dump.hh			\

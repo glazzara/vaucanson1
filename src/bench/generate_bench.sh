@@ -55,7 +55,7 @@ EOF
 
 #include <iostream>
 
-#include <vaucanson/tools/bencher.hh>
+#include <common/bench_macros.hh>
 EOF
 
         # Precise this-bench related things

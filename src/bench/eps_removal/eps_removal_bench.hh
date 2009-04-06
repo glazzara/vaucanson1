@@ -41,8 +41,13 @@ void eps_removal_bench(int n_states)
   automaton_t a = make_automaton(alpha);
   aut_linear_eps(n_states, a);
 
-  VCSN_BENCH_START;
+  BENCH_START("eps removal", "Vaucanson - eps removal.");
   automaton_t ret = eps_removal(a);
-  VCSN_BENCH_STOP_AND_PRINT;
-}
+  BENCH_STOP();
 
+  BENCH_PARAMETER("n_states", (long) n_states);
+
+  std::stringstream name;
+  name << "bench_eps_removal_" << n_states;
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
+}

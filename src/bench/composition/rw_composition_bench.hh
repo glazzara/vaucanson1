@@ -14,7 +14,6 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#include <vaucanson/tools/bencher.hh>
 
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/boolean_transducer.hh>
@@ -133,19 +132,29 @@ void rw_composition_bench(int n_value)
     to += "a";
   }
 
-  VCSN_BENCH_START;
-  automaton_t	left_auto = replace_left(from, to, A, B);
-  std::cout << "left nb states: " << left_auto.states().size() << std::endl;
-  std::cout << "left nb transitions: " << left_auto.transitions().size()
-	    << std::endl;
-  automaton_t	right_auto = replace_right(from, to, B, C);
-  std::cout << "right nb states: " << right_auto.states().size() << std::endl;
-  std::cout << "right nb transitions: " << right_auto.transitions().size()
-	    << std::endl;
-  automaton_t	res_auto = make_automaton(A, C);
-  rw_composition(left_auto, right_auto, res_auto);
-  std::cout << "nb states: " << res_auto.states().size() << std::endl;
-  std::cout << "nb transitions: " << res_auto.transitions().size() << std::endl;
+  std::stringstream n_value_str;
+  n_value_str << n_value;
 
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_START("rw_composition", "Vaucanson - rw composition");
+
+  automaton_t	left_auto = replace_left(from, to, A, B);
+  automaton_t	right_auto = replace_right(from, to, B, C);
+  automaton_t	res_auto = make_automaton(A, C);
+
+  rw_composition(left_auto, right_auto, res_auto);
+
+  BENCH_STOP();
+
+  // Set extra parameters/results
+  BENCH_RESULT("left states", (long) left_auto.states().size());
+  BENCH_RESULT("left transitions", (long) left_auto.transitions().size());
+  BENCH_RESULT("right states", (long) right_auto.states().size());
+  BENCH_RESULT("right transitions",(long) right_auto.states().size());
+  BENCH_RESULT("states", (long) res_auto.states().size());
+  BENCH_RESULT("transitions", (long) res_auto.states().size());
+
+  std::string name = "bench_rw_composition_" + n_value_str.str();
+
+  // Save and print
+  BENCH_VCSN_SAVE_AND_PRINT(name);
 }

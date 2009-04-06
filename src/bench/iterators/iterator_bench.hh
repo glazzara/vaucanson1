@@ -32,10 +32,10 @@ using namespace vcsn::CONTEXT;
 # include <common/bench_constructs.hh>
 
 static void run_through_using_deltai(const automaton_t& a)
-{									
-  AUTOMATON_TYPES_EXACT(automaton_t);					
-  for_all_states(s, a)							
-    for (delta_iterator i(a.value(), *s); ! i.done(); i.next());	
+{
+  AUTOMATON_TYPES_EXACT(automaton_t);
+  for_all_states(s, a)
+    for (delta_iterator i(a.value(), *s); ! i.done(); i.next());
 }
 
 void iterator_bench(int n_states)
@@ -51,19 +51,39 @@ void iterator_bench(int n_states)
   automaton_t a = make_automaton(alpha);
   std::vector<hstate_t>	state_list;
 
-  std::cerr << "Benching complete automaton building process." << std::endl;
-  VCSN_BENCH_START;
-  for (int i = 0; i < n_states; ++i)
-    state_list.push_back(a.add_state());
-  for (std::vector<hstate_t>::iterator i = state_list.begin(); i != state_list.end(); ++i)
-    for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
-      a.add_spontaneous(*i, *j);
-  VCSN_BENCH_STOP_AND_PRINT;
+  {
+    BENCH_START("iterator building process",
+		"Vaucanson - iterator.\n"
+		"Complete automaton building process.");
 
-  std::cerr << std::endl << "Benching deltai" << std::endl;
-  VCSN_BENCH_START;						
-  run_through_using_deltai(a);					
-  VCSN_BENCH_STOP_AND_PRINT;					
+    for (int i = 0; i < n_states; ++i)
+      state_list.push_back(a.add_state());
+    for (std::vector<hstate_t>::iterator i = state_list.begin(); i != state_list.end(); ++i)
+      for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
+	a.add_spontaneous(*i, *j);
+
+    BENCH_STOP();
+
+    BENCH_PARAMETER("n_states", (long) n_states);
+    std::stringstream name;
+    name << "bench_iterator_building_process_" << n_states;
+    BENCH_VCSN_SAVE_AND_PRINT(name.str());
+  }
+
+  {
+    BENCH_START("iterator deltai",
+		"Vaucanson - iterator.\n"
+		"Deltai.");
+
+    run_through_using_deltai(a);
+
+    BENCH_STOP();
+
+    BENCH_PARAMETER("n_states", (long) n_states);
+    std::stringstream name;
+    name << "bench_iterator_deltai_" << n_states;
+    BENCH_VCSN_SAVE_AND_PRINT(name.str());
+  }
 }
 
 #endif // ! BENCHS_ITERATORS_ITERATOR_BENCH_HH

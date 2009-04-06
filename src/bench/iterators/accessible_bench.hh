@@ -53,10 +53,17 @@ void accessible_bench(int n_states)
     for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
       a.add_spontaneous(*i, *j);
 
-  VCSN_BENCH_START;
+  BENCH_START("accessible", "Vaucanson - accessible");
 //automaton_t ret = accessible(a);
   accessible_states(a);
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_states", (long) n_states);
+
+  std::stringstream name;
+  name << "bench_accessible_" << n_states;
+
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 
 #endif // ! BENCHS_ITERATORS_ACCESSIBLE_BENCH_HH

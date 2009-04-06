@@ -55,16 +55,31 @@ void quotient_z_bench(int n_power)
   binary(a);
   automaton_t an = a;
 
+  std::stringstream n_power_str;
+  n_power_str << n_power;
+
   n_power--;
   while (n_power--)
     a = product(a, an);
 
-  std::cout << "Product has " << a.states ().size () << " states and "
-	    << a.transitions ().size () << "transitions." << std::endl;
-  VCSN_BENCH_START;
+  BENCH_START("quotient", "Vaucanson - quotient (over Z).");
+
   automaton_t b = quotient(a);
-  VCSN_BENCH_STOP_AND_PRINT;
-  std::cout << "Quotient has " << b.states ().size () << " states and "
-	    << b.transitions ().size () << "transitions." << std::endl;
+
+  BENCH_STOP();
+
+  // Set extra parameters/results
+  BENCH_PARAMETER("over", "Z");
+  BENCH_PARAMETER("n_power", n_power_str.str());
+  BENCH_PARAMETER("product states", (long) a.states().size());
+  BENCH_PARAMETER("product transitions", (long) a.transitions().size());
+
+  BENCH_RESULT("quotient states", (long) b.states().size());
+  BENCH_RESULT("quotient transitions", (long) b.transitions().size());
+
+  std::string name = "bench_quotient_z_" + n_power_str.str();
+
+  // Save and print
+  BENCH_VCSN_SAVE_AND_PRINT(name);
 }
 

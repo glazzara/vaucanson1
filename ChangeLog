@@ -5,7 +5,16 @@
 	CBS version: e97a404a44e5b5d19d4a869aa1f43524386c5b09.
 	See cbs/Changelog.
 
-2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Link taf-kit, libs and benches with $(benchlib).
+
+	* vaucanson.mk: Define benchlib.
+	* lib/generate_libvcsn.rb,
+	* taf-kit/src/Makefile.am,
+	* src/bench/generate_bench.sh: Use it.
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Replace timer and global_timer with cbs.
 
@@ -105,6 +114,57 @@
 	* include/vaucanson/algorithms/trim.hxx,
 	* include/vaucanson/tools/io.hxx: Replace TIMER_SCOPED with
 	BENCH_TASK_SCOPED.
+
+2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Equip bench with CBS
+
+	Note: Squash previous related patches with this one.
+
+	3 Steps:
+
+	1) Use CBS files.
+	2) Remove obsolete tools.
+	3) Equip all benches.
+
+	1) Use CBS files:
+
+	* src/bench/common/bench_macros.hh: New.
+	Include cbs/bench/bench.hh, define handy macros.
+	* src/bench/common/Makefile.am: Add file.
+	* src/bench/generate_bench.sh: Include common/bench_macros.hh in
+	generated Makefiles.
+
+	2) Remove obsolete tools:
+
+	* include/vaucanson/tools/bencher.hh,
+	* include/vaucanson/tools/bencher.hxx: Deleted.
+	Served the same purpose as the cbs timer, with less flexibility.
+
+	3) Equip all benches:
+
+	Replace macros VCSN_BENCH_XXX with the CBS equivalent.
+	Add parameters and results when applicable (all the info
+	previously printed on cout/cerr are now parameters and results).
+
+	3 files are generated for each bench.  There are between 5 and 10
+	benches per file below.  See common/bench_macros.hh to change that.
+
+	* src/bench/composition/normalized_composition_bench.hh,
+	* src/bench/composition/rw_composition_bench.hh,
+	* src/bench/derived_terms/derived_terms_bench.hh,
+	* src/bench/determinization/determinization_bench.hh,
+	* src/bench/eps_removal/eps_removal_bench.hh,
+	* src/bench/iterators/accessible_bench.hh,
+	* src/bench/iterators/iterator_bench.hh,
+	* src/bench/minimization_2n/minimization_2n_brzozowski_bench.h,
+	* src/bench/minimization_2n/minimization_2n_hopcroft_bench.hh,
+	* src/bench/minimization_2n/minimization_2n_moore_bench.hh,
+	* src/bench/minimization_debruijn/minimization_debruijn_brzozo,
+	* src/bench/minimization_debruijn/minimization_debruijn_hopcro,
+	* src/bench/minimization_debruijn/minimization_debruijn_moore_,
+	* src/bench/quotient/quotient_bool_bench.hh,
+	* src/bench/quotient/quotient_z_bench.hh: Do that.
 
 2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
 

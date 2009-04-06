@@ -14,7 +14,6 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#include <vaucanson/tools/bencher.hh>
 
 #include <vaucanson/algorithms/normalized_composition.hh>
 #include <vaucanson/algorithms/sub_normalize.hh>
@@ -136,8 +135,6 @@ void normalized_composition_bench(int n_value)
     to += "a";
   }
 
-
-  VCSN_BENCH_START;
   automaton_t	left_auto = replace_left(from, to, A, B);
 
   fmp_transducer::automaton_t fmp_left_auto =
@@ -145,41 +142,55 @@ void normalized_composition_bench(int n_value)
   fmp_transducer::automaton_t sub_left_auto =
     fmp_transducer::make_automaton(A,B);
 
-  std::cerr << "Left sub-normalisation" << std::endl;
-  VCSN_BENCH_START;
-  rw_to_fmp(left_auto, fmp_left_auto);
-  sub_normalize(fmp_left_auto, sub_left_auto);
-  std::cout << "nb states: " << sub_left_auto.states().size() << std::endl;
-  std::cout << "nb transitions: " << sub_left_auto.transitions().size() << std::endl;
-  VCSN_BENCH_STOP_AND_PRINT;
-
-  automaton_t	right_auto = replace_right(from, to, B, C);
+  automaton_t  right_auto = replace_right(from, to, B, C);
 
   fmp_transducer::automaton_t fmp_right_auto =
     fmp_transducer::make_automaton(B,C);
   fmp_transducer::automaton_t sub_right_auto =
     fmp_transducer::make_automaton(B,C);
 
-  std::cerr << "Right sub-normalisation" << std::endl;
-  VCSN_BENCH_START;
-  rw_to_fmp(right_auto, fmp_right_auto);
-  sub_normalize(fmp_right_auto, sub_right_auto);
-  std::cout << "nb states: " << sub_right_auto.states().size() << std::endl;
-  std::cout << "nb transitions: " << sub_right_auto.transitions().size()
-	    << std::endl;
-  VCSN_BENCH_STOP_AND_PRINT;
 
-  std::cerr << "Normalized composition" << std::endl;
-  VCSN_BENCH_START;
+  std::stringstream n_value_str;
+  n_value_str << n_value;
+
+  BENCH_START("Normalized composition", "Vaucanson - normalized composition");
+
+  {
+    BENCH_TASK_SCOPED("Left sub-normalisation");
+
+    rw_to_fmp(left_auto, fmp_left_auto);
+    sub_normalize(fmp_left_auto, sub_left_auto);
+  }
+
+  {
+    BENCH_TASK_SCOPED("Right sub-normalisation");
+
+    rw_to_fmp(right_auto, fmp_right_auto);
+    sub_normalize(fmp_right_auto, sub_right_auto);
+  }
 
   fmp_transducer::automaton_t res_auto = fmp_transducer::make_automaton(A,C);
 
-  u_compose(sub_left_auto, sub_right_auto, res_auto);
+  {
+    BENCH_TASK_SCOPED("Composition");
 
-  std::cout << "nb states: " << res_auto.states().size() << std::endl;
-  std::cout << "nb transitions: " << res_auto.transitions().size()
-	    << std::endl;
+    u_compose(sub_left_auto, sub_right_auto, res_auto);
+  }
 
-  VCSN_BENCH_STOP_AND_PRINT;
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  // Set extra parameters/results
+  BENCH_RESULT("sub left states", (long) sub_left_auto.states().size());
+  BENCH_RESULT("sub left transitions",
+	       (long) sub_left_auto.transitions().size());
+  BENCH_RESULT("sub right states", (long) sub_right_auto.states().size());
+  BENCH_RESULT("sub right transitions",
+	       (long) sub_right_auto.transitions().size());
+  BENCH_RESULT("states", (long) res_auto.states().size());
+  BENCH_RESULT("transitions", (long) res_auto.transitions().size());
+
+  std::string name = "bench_normalized_composition_" + n_value_str.str();
+
+  // Save and print
+  BENCH_VCSN_SAVE_AND_PRINT(name);
 }

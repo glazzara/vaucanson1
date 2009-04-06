@@ -34,8 +34,16 @@ void minimization_debruijn_brzozowski_bench(int n_value)
   automaton_t an = make_automaton(alpha);
 
   debruijn(n_value, an);
-  VCSN_BENCH_START;
+
+  BENCH_START("minimization debruijn brzozowski",
+	      "Vaucanson - minimization debruijn brzozowski.");
   automaton_t dn = determinize(transpose(determinize(transpose(an))));
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_value", (long) n_value);
+
+  std::stringstream name;
+  name << "bench_minimization_debruijn_brzozowski_" << n_value;
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

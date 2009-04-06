@@ -34,8 +34,15 @@ void minimization_debruijn_moore_bench(int n_value)
   automaton_t an = make_automaton(alpha);
   debruijn(n_value, an);
 
-  VCSN_BENCH_START;
+  BENCH_START("minimization debruijn moore",
+	      "Vaucanson - minimization debruijn moore.");
   minimization_moore(an);
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_value", (long) n_value);
+
+  std::stringstream name;
+  name << "bench_minimization_debruijn_moore_" << n_value;
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

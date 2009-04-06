@@ -44,8 +44,15 @@ void minimization_2n_hopcroft_bench(int n_states)
   fsm_dump(tmp_o_file, a);
   tmp_o_file.close();
 
-  VCSN_BENCH_START;
+  BENCH_START("minimization 2n hopcroft",
+	      "Vaucanson - minimization 2n hopcroft.");
   minimization_hopcroft(a);
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_states", (long) n_states);
+
+  std::stringstream name;
+  name << "bench_minimization_2n_hopcroft_" << n_states;
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

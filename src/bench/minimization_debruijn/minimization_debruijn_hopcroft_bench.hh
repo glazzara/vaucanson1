@@ -29,7 +29,7 @@ using namespace vcsn::boolean_automaton;
 void minimization_debruijn_hopcroft_bench(int n_value)
 {
   AUTOMATON_TYPES_EXACT(automaton_t);
-  
+
   alphabet_t	alpha;
   alpha.insert('a');
   alpha.insert('b');
@@ -43,8 +43,15 @@ void minimization_debruijn_hopcroft_bench(int n_value)
   fsm_dump(tmp_o_file, an);
   tmp_o_file.close();
 
-  VCSN_BENCH_START;
+  BENCH_START("minimization debruijn hopcroft",
+	      "Vaucanson - minimization debruijn hopcroft.");
   automaton_t dn = minimization_hopcroft(an);
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_value", (long) n_value);
+
+  std::stringstream name;
+  name << "bench_minimization_debruijn_hopcroft_" << n_value;
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

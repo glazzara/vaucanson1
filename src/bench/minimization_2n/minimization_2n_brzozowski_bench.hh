@@ -40,8 +40,15 @@ void minimization_2n_brzozowski_bench(int n_states)
   aut_2n(n_states, a);
   a = determinize(a);
 
-  VCSN_BENCH_START;
+  BENCH_START("minimization 2n brzozowski",
+	      "Vaucanson - minimization 2n brzozowski.");
   determinize(transpose(determinize(transpose(a))));
-  VCSN_BENCH_STOP_AND_PRINT;
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n_states", (long) n_states);
+
+  std::stringstream name;
+  name << "bench_minimization_2n_brzozowski_" << n_states;
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 
