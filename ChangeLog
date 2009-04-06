@@ -21,6 +21,13 @@
 
 2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Use cbs for bench compilation.
+
+	* src/bench/generate_bench.sh: Add LDADD in generated Makefile.am.
+	* vaucanson.mk: Add proper include flags.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Add cbs (libbench).
 
 	* cbs: Add directory.

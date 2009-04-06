@@ -203,7 +203,7 @@ def write_makefile(type, context)
 	     "",
 	     "lib_LTLIBRARIES\t+= lib" + type + ".la",
 	     "lib" + type_ + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
-	     "lib" + type_ + "_la_LIBADD\t= $(LIBOBJS)",
+	     "lib" + type_ + "_la_LIBADD\t= $(LIBOBJS) $(LIBADD) $(benchlib)",
              "lib" + type_ + "_la_SOURCES\t= " + type + "/all.cc",
 	     "## all.cc includes all the source files below.  We declare them",
 	     "## as EXTRA_*_SOURCES so they are distributed and so we can",

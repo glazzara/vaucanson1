@@ -86,6 +86,7 @@ EOF
 noinst_PROGRAMS += $BENCH_NAME-bench
 $(echo "$BENCH_NAME" | sed 's/-/_/g')_bench_SOURCES = $BENCH_NAME-bench.cc \
 						      $BENCH_HEADER
+$(echo "$BENCH_NAME" | sed 's/-/_/g')_bench_LDADD = \$(benchlib)
 EOF
     done
     if [ -r $BENCH_DIR/Makefile.bench ]; then

@@ -17,7 +17,11 @@ AM_CPPFLAGS = \
 -I$(top_builddir) \
 -I$(top_builddir)/include \
 -I$(top_srcdir)/include \
+-I$(top_srcdir)/cbs/include \
+-I$(top_builddir)/cbs/include \
 $(BOOST_CPPFLAGS)
+
+benchlib = $(top_builddir)/cbs/lib/libbench.la
 
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 
