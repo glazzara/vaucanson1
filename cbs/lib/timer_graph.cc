@@ -168,6 +168,8 @@ namespace timer
 	      << c_[i].self.user
 	      << "\\lSelf syst. time: " << std::setw (7)
 	      << c_[i].self.system
+	      << "\\lSelf wall time:  " << std::setw (7)
+	      << c_[i].self.wall
 	      << "\\lSelf average:    " << std::setw (7)
 	      << c_[i].self.average
 	      << "\\lSelf charge:     " << std::setw (7)
@@ -286,6 +288,8 @@ namespace timer
 	  << g_[v].self.user
 	  << "\\lSelf system time:" << std::setw (7)
 	  << g_[v].self.system
+	  << "\\lSelf wall time:  " << std::setw (7)
+	  << g_[v].self.system
 	  << "\\lSelf average:    " << std::setw (7)
 	  << g_[v].self.average
 	  << "\\lSelf charge:     "
@@ -388,6 +392,7 @@ namespace timer
   {
     cpu.clear ();
     user.clear ();
+    wall.clear ();
     system.clear ();
   }
 
@@ -400,7 +405,8 @@ namespace timer
     o << "<time name=\"" << name
       << "\" user=\"" << user.to_ms ()
       << "\" system=\"" << system.to_ms ()
-      << "\" cpu=\"" << cpu. to_ms ()
+      << "\" cpu=\"" << cpu.to_ms ()
+      << "\" wall=\"" << wall.to_ms ()
       << "\" average=\"" << average.to_ms ()
       << "\" charge=\"" << charge
       << "\" />";
@@ -431,12 +437,14 @@ namespace timer
     this->total.user      += total.user_;
     this->total.system    += total.sys_;
     this->total.cpu       += total.sys_ + total.user_;
+    this->total.wall      += total.wall_;
     this->total.average   = this->total.cpu / double (count);
     this->total.charge    =
       100 * this->total.cpu.s () / (program.sys_ + program.user_).s ();
     this->self.user       += self.user_;
     this->self.system     += self.sys_;
     this->self.cpu        += self.sys_ + self.user_;
+    this->self.wall       += self.wall_;
     this->self.average    = this->self.cpu / double (count);
     this->self.charge     =
       100 * this->self.cpu.s () / (program.sys_ + program.user_).s ();
@@ -452,6 +460,7 @@ namespace timer
     this->self.user     += self.user_;
     this->self.system   += self.sys_;
     this->self.cpu      += self.sys_ + self.user_;
+    this->self.wall     += self.wall_;
   }
 
   INLINE_TIMER_CC
@@ -464,6 +473,7 @@ namespace timer
     this->total.user    += total.user_;
     this->total.system  += total.sys_;
     this->total.cpu     += total.sys_ + total.user_;
+    this->total.wall    += total.wall_;
   }
 
   INLINE_TIMER_CC
@@ -503,6 +513,7 @@ namespace timer
     this->total.user     += total.user_;
     this->total.system   += total.sys_;
     this->total.cpu      += total.sys_ + total.user_;
+    this->total.wall     += total.wall_;
     this->total.average  = this->total.cpu / double (count);
     this->total.charge   =
       (program.sys_ + program.user_ == 0 ? 0 :
@@ -511,6 +522,7 @@ namespace timer
     this->self.user      += self.user_;
     this->self.system    += self.sys_;
     this->self.cpu       += self.sys_ + self.user_;
+    this->self.wall      += self.wall_;
     this->self.average   = this->self.cpu / double (count);
     this->self.charge    =
       (program.sys_ + program.user_ == 0 ? 0 :
@@ -527,6 +539,7 @@ namespace timer
     this->self.user    += self.user_;
     this->self.system  += self.sys_;
     this->self.cpu     += self.sys_ + self.user_;
+    this->self.wall    += self.wall_;
   }
 
   INLINE_TIMER_CC
@@ -569,6 +582,7 @@ namespace timer
     self.cpu    += task.self.cpu;
     self.user   += task.self.user;
     self.system += task.self.system;
+    self.wall   += task.self.wall;
   }
 
   INLINE_TIMER_CC
@@ -578,6 +592,7 @@ namespace timer
     total.cpu    += call.total.cpu;
     total.user   += call.total.user;
     total.system += call.total.system;
+    total.wall   += call.total.wall;
 
     calls += call.count;
 

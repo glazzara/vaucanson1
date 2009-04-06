@@ -49,9 +49,30 @@ namespace timer
 
   inline
   long
-  Timer::time ()
+  Timer::time () const
   {
-    return last_time_;
+    return last_time_.to_ms ();
+  }
+
+  inline
+  long
+  Timer::time_user () const
+  {
+    return last_time_.user_to_ms ();
+  }
+
+  inline
+  long
+  Timer::time_system () const
+  {
+    return last_time_.system_to_ms ();
+  }
+
+  inline
+  long
+  Timer::time_wall () const
+  {
+    return last_time_.wall_to_ms ();
   }
 
   /*--------------.

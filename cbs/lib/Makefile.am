@@ -17,9 +17,8 @@ include $(top_srcdir)/cbs.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 
 lib_LTLIBRARIES = libbench.la
-libbench_la_SOURCES = bench.cc				\
-                      timer.cc				\
+libbench_la_SOURCES = bench.cc			\
+                      timer.cc			\
                       timer_graph.cc		\
                       timer_gathering.cc
-libbench_la_LDFLAGS = -module -export-dynamic $(AM_LDFLAGS)
 libbench_la_CPPFLAGS = $(AM_CPPFLAGS)

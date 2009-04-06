@@ -75,6 +75,7 @@ namespace timer
   {
     user_.clear ();
     sys_.clear ();
+    wall_.clear();
   }
 
   INLINE_TIMER_CC
@@ -86,6 +87,11 @@ namespace timer
     getrusage (RUSAGE_SELF, &ru);
     user_.set (ru.ru_utime);
     sys_.set (ru.ru_stime);
+
+    struct timeval wall;
+    gettimeofday (&wall, 0);
+
+    wall_.set (wall);
   }
 
   INLINE_TIMER_CC
@@ -98,6 +104,11 @@ namespace timer
 
     user_ = (TimeVal (ru.ru_utime)) - user_;
     sys_  = (TimeVal (ru.ru_stime)) - sys_;
+
+    struct timeval wall;
+    gettimeofday (&wall, 0);
+
+    wall_ = (TimeVal (wall)) - wall_;
   }
 
   INLINE_TIMER_CC
@@ -106,6 +117,7 @@ namespace timer
   {
     user_ += rhs.user_;
     sys_  += rhs.sys_;
+    wall_ += rhs.wall_;
 
     return *this;
   }
@@ -116,6 +128,7 @@ namespace timer
   {
     user_ -= rhs.user_;
     sys_  -= rhs.sys_;
+    wall_  -= rhs.wall_;
 
     return *this;
   }

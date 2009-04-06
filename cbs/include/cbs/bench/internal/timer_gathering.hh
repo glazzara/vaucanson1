@@ -146,6 +146,15 @@ namespace timer
     // Get the total time in ms
     long to_ms () const;
 
+    // Get the total user time in ms
+    long user_to_ms () const;
+
+    // Get the total system time in ms
+    long system_to_ms () const;
+
+    // Get the total system time in ms
+    long wall_to_ms () const;
+
     std::ostream& print (std::ostream& o) const;
 
     TimeStamp& operator+= (const TimeStamp& rhs);
@@ -155,8 +164,9 @@ namespace timer
     bool operator< (const TimeStamp& rhs) const;
 
   private:
-    TimeVal   user_;
-    TimeVal   sys_;
+    TimeVal   user_; // Time spent in user code
+    TimeVal   sys_;  // Time spent in system calls
+    TimeVal   wall_; // Wall clock (observed time)
   };
 
   // Data collection classes

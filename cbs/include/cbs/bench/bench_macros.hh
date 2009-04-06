@@ -43,7 +43,7 @@
 #  endif //!BENCH_CALLGRAPH_DISABLED
 
 #  ifndef BENCH_MEMPLOT_DISABLED
-#   define BENCH_MEMPLOT(Description)     bench::mem_plot(Description)
+#   define BENCH_MEMPLOT(Description)     bench::memplot(Description)
 #  else
 #   define BENCH_MEMPLOT(Decription)      void(0)
 #  endif //!BENCH_MEMPLOT_DISABLED

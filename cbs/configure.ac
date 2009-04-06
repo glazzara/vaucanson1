@@ -45,6 +45,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	demo/Makefile
 	  demo/timer/Makefile
+	  demo/timer-bench/Makefile
 	  demo/bench/Makefile])
 
 AC_OUTPUT

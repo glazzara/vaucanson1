@@ -276,7 +276,7 @@ namespace timer
   std::ostream&
   TimeStamp::print (std::ostream& o) const
   {
-    return o << '(' << user_ << ", " << sys_ << ')';
+    return o << '(' << user_ << ", " << sys_ << ", " << wall_ << ')';
   }
 
   inline
@@ -291,6 +291,27 @@ namespace timer
   TimeStamp::to_ms () const
   {
     return user_.to_ms () + sys_.to_ms ();
+  }
+
+  inline
+  long
+  TimeStamp::user_to_ms () const
+  {
+    return user_.to_ms ();
+  }
+
+  inline
+  long
+  TimeStamp::system_to_ms () const
+  {
+    return sys_.to_ms ();
+  }
+
+  inline
+  long
+  TimeStamp::wall_to_ms () const
+  {
+    return wall_.to_ms ();
   }
 
   /*--------------.

@@ -18,6 +18,30 @@
 #ifndef BENCH_MEMPLOT_HH_
 # define BENCH_MEMPLOT_HH_
 
+# include <cbs/bench/bench.hh>
 
+namespace memplot
+{
+  struct Plot
+  {
+    std::string task;
+    std::string description;
+
+    long int memory;
+    long int time;
+  };
+
+  // Measure the memory usage at a given time.
+  void plot(const std::string& task, const std::string& description);
+
+  // Clear all data.
+  void clear();
+
+  // Return the maximum memory used.
+  const Plot& max();
+
+  // Export the current data.
+  void dump(std::ostream& stream, bench::Options options);
+}
 
 #endif //!BENCH_MEMPLOT_HH_

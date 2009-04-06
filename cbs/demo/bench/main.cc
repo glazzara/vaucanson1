@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <list>
 #include <cbs/bench/bench_macros.hh>
 
 #define WAIT(Duration)				\
@@ -24,6 +25,17 @@
       int* i = new int(4);			\
       delete i;					\
     }
+
+#define CONSUME(Memory)				\
+  {						\
+    std::list<int> list;			\
+    for (int j = 0; j < Memory; ++j)		\
+      for (int k = 0; k < 250000; ++k)		\
+      {						\
+        list.push_back(k);			\
+      }						\
+    list.clear();				\
+  }
 
 void a();
 void b(int);
@@ -45,6 +57,8 @@ int main()
     for (int i = 0; i < n; ++i)
       e();
 
+    CONSUME(130 + iter * 20)
+
     BENCH_STOP();
 
     {
@@ -61,6 +75,10 @@ int main()
       BENCH_PARAMETER("n", parameter.str());
 
       std::string name = "benchmark_" + parameter.str();
+
+      BENCH_PRINT(bench::Options(bench::Options::VE_NORMAL,
+				 bench::Options::FO_TEXT,
+				 0));
 
       BENCH_SAVE(name + ".out", bench::Options(bench::Options::VE_NORMAL,
 					       bench::Options::FO_TEXT,
@@ -114,7 +132,7 @@ void e()
 {
   BENCH_TASK_SCOPED("Task E");
 
-  WAIT(3)
+  WAIT(1)
 
   d(0);
 }

@@ -324,6 +324,10 @@ namespace timer
     /// \param name     the task name.
     unsigned int task (const std::string& name);
 
+    /// Return the name of the current task.
+    /// The timer has to be running.
+    std::string current_task () const;
+
     /// Clear any data in the timer (task names associations and
     /// results) and start the data gathering process (the timer is
     /// now running).
@@ -365,8 +369,8 @@ namespace timer
     /// The timer must be running.
     void push (const std::string& name);
 
-    // Start a sub-timer for a task using its id number (which must
-    // be declared beforehand).
+    /// Start a sub-timer for a task using its id number (which must
+    /// be declared beforehand).
     /// The timer must be running.
     void push (const unsigned int i);
 
@@ -384,7 +388,19 @@ namespace timer
 
     /// Return the measured time, in ms.
     /// The time is recorded after the timer has been stopped.
-    long time ();
+    long time () const;
+
+    /// Return the measured user time, in ms.
+    /// The time is recorded after the timer has been stopped.
+    long time_user () const;
+
+    /// Return the measured system time, in ms.
+    /// The time is recorded after the timer has been stopped.
+    long time_system () const;
+
+    /// Return the measured wall clock (observed) time, in ms.
+    /// The time is recorded after the timer has been stopped.
+    long time_wall () const;
 
     /// \brief Comparison between two Timers.
     /// This operator enables the use of std::min and std::max.
@@ -448,6 +464,7 @@ namespace timer
     timer::task_vector          tasks_;
     timer::task_names_map       names_;
     timer::TimeStamp            time_;
+    timer::TimeStamp            last_time_;
 
     timer::output_graph         graph_;
     timer::component_id_vector  comp_id_;
@@ -459,7 +476,6 @@ namespace timer
 
     bool                        cleared_;
 
-    long last_time_;
   };
 } // namespace timer
 

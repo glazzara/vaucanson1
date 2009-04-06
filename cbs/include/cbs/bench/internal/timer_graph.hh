@@ -71,6 +71,7 @@ namespace timer
     TimeVal   user;
     TimeVal   system;
     TimeVal   cpu;
+    TimeVal   wall;
     TimeVal   average;
     double    charge;
 

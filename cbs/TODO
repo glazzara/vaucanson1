@@ -1,0 +1,9 @@
+To do:
+  - Implement memplot
+  - Add more system info (e.g. hostname)
+  - Allow bench loops
+
+vcsn:
+  - Equip bench
+  - Gather xml files
+  - Generate html

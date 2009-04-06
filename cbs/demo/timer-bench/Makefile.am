@@ -14,14 +14,7 @@
 
 include $(top_srcdir)/cbs.mk
 
-nobase_include_HEADERS =			\
-    cbs/bench/memplot.hh			\
-    cbs/bench/bench.hh				\
-    cbs/bench/bench_internals.hh		\
-    cbs/bench/bench_macros.hh			\
-    cbs/bench/timer.hh				\
-    cbs/bench/timer.hxx				\
-    cbs/bench/internal/timer_gathering.hh	\
-    cbs/bench/internal/timer_gathering.hxx	\
-    cbs/bench/internal/timer_graph.hh		\
-    cbs/bench/internal/timer_graph.hxx
+noinst_PROGRAMS = demo-timer-bench
+demo_timer_bench_SOURCES = main.cc
+demo_timer_bench_LDADD = $(top_builddir)/lib/libbench.la
+demo_timer_bench_CPPFLAGS = $(AM_CPPFLAGS)

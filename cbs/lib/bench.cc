@@ -26,9 +26,11 @@
 # include <fstream>
 # include <iostream>
 # include <cassert>
+# include <ctime>
 
 // Internal
 # include <cbs/bench/bench.hh>
+# include <cbs/bench/bench_internals.hh>
 # include <cbs/bench/timer.hh>
 
 namespace bench
@@ -38,6 +40,7 @@ namespace bench
 
   static std::string name;
   static std::string description;
+  static std::string date;
 
   typedef std::map<std::string, std::string> string_map;
 
@@ -52,6 +55,13 @@ namespace bench
   {
     name        = _name;
     description = _description;
+
+    time_t rawtime;
+    struct tm* timeinfo;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    date = asctime(timeinfo);
 
     parameters.clear();
     results.clear();
@@ -70,10 +80,54 @@ namespace bench
     completed = true;
     started   = false;
 
-    std::stringstream time;
-    time << timer.time();
+    {
+      std::stringstream time;
+      time << timer.time();
 
-    result("time", time.str());
+      result("time", time.str());
+    }
+    {
+      std::stringstream time;
+      time << timer.time_user();
+
+      result("time (user)", time.str());
+    }
+    {
+      std::stringstream time;
+      time << timer.time_system();
+
+      result("time (system)", time.str());
+    }
+    {
+      std::stringstream time;
+      time << timer.time_wall();
+
+      result("time (wall)", time.str());
+    }
+  }
+
+  // Restart the benchmark using the same parameters and results.
+  // Note: date time, and memory results will be updated when the
+  // benchmark is stopped.
+  void restart()
+  {
+    time_t rawtime;
+    struct tm* timeinfo;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    date = asctime(timeinfo);
+
+    timer.start();
+
+    completed = false;
+    started   = true;
+  }
+
+  // Return the underlying timer instance.
+  const timer::Timer& current_timer()
+  {
+    return timer;
   }
 
   // Add a parameter
@@ -84,12 +138,48 @@ namespace bench
     parameters.insert(std::pair<std::string, std::string>(name, value));
   }
 
+  // Convenient overload
+  void parameter(std::string name,
+		 long value)
+  {
+    std::stringstream s;
+    s << value;
+    parameter(name, s.str());
+  }
+
+  // Convenient overload
+  void parameter(std::string name,
+		 double value)
+  {
+    std::stringstream s;
+    s << value;
+    parameter(name, s.str());
+  }
+
   // Add a result
   void result(std::string name,
 	      std::string value)
   {
     results.erase(name);
     results.insert(std::pair<std::string, std::string>(name, value));
+  }
+
+  // Convenient overload
+  void result(std::string name,
+	      long value)
+  {
+    std::stringstream s;
+    s << value;
+    result(name, s.str());
+  }
+
+  // Convenient overload
+  void result(std::string name,
+	      double value)
+  {
+    std::stringstream s;
+    s << value;
+    result(name, s.str());
   }
 
   // Start a task
@@ -120,7 +210,7 @@ namespace bench
   }
 
   // Plot the memory usage
-  void mem_plot(std::string description)
+  void memplot(std::string description)
   {
     // FIXME: Not implemented
   }
@@ -131,6 +221,7 @@ namespace bench
 
     stream << "<bench>" << std::endl
 	   << "  <name>" << name << "</name>" << std::endl
+	   << "  <date>" << date << "</date>" << std::endl
 	   << "  <description>" << description << "</description>" << std::endl
 	   << "  <parameters>" << std::endl;
 
@@ -161,7 +252,11 @@ namespace bench
   {
     stream << name << std::endl
 	   << std::endl
+           << "[Description:]" << std::endl
 	   << description << std::endl
+	   << std::endl
+	   << "[Infos:]" << std::endl
+	   << "  * Date: " << date
 	   << std::endl
 	   << "[Parameters:]" << std::endl;
 
@@ -192,6 +287,7 @@ namespace bench
 
   static void output(std::ostream& stream, Options options)
   {
+    bool output_summary = !(options.contents & Options::CO_NOSUMMARY);
     bool output_timer = (options.contents & Options::CO_CALLGRAPH);
     bool output_memplot = (options.contents & Options::CO_MEMPLOT);
 
@@ -215,21 +311,24 @@ namespace bench
     switch (options.format)
     {
     case Options::FO_TEXT:
-      output_text(stream, options);
+      if (output_summary)
+	output_text(stream, options);
       if (output_timer)
 	timer.print(stream, timer_vd);
       if (output_memplot)
 	;
       break;
     case Options::FO_DOT:
-      output_dot(stream, options);
+      if (output_summary)
+	output_dot(stream, options);
       if (output_timer)
 	timer.export_dot(stream, timer_vd);
       if (output_memplot)
 	;
       break;
     case Options::FO_XML:
-      output_xml(stream, options);
+      if (output_summary)
+	output_xml(stream, options);
       if (output_timer)
 	timer.dump(stream);
       if (output_memplot)
@@ -281,6 +380,24 @@ namespace bench
     verbosity = verbosity_;
     format = format_;
     contents = contents_;
+  }
+
+  // Return the verbosity level corresponding to the parameter.
+  Options::Verbosity Options::get_verbosity(int i)
+  {
+    switch (i)
+    {
+    case 0:
+      return Options::VE_NONE;
+    case 1:
+      return Options::VE_MINIMAL;
+    case 2:
+      return Options::VE_NORMAL;
+    case 3:
+      return Options::VE_FULL;
+    default:
+      return Options::VE_NORMAL;
+    }
   }
 
 }

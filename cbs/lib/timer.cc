@@ -47,8 +47,7 @@ namespace timer
     : comp_count_    (0),
       task_count_    (1),
       is_running_    (false),
-      cleared_       (true),
-      last_time_     (0)
+      cleared_       (true)
   {
   }
 
@@ -101,6 +100,7 @@ namespace timer
     tasks_.clear ();
     names_.clear ();
     time_.clear ();
+    last_time_.clear();
 
     graph_.clear ();
     comp_id_.clear ();
@@ -110,7 +110,6 @@ namespace timer
     task_count_ = 1;
     is_running_ = false;
     cleared_    = true;
-    last_time_  = 0;
   }
 
   INLINE_TIMER_CC
@@ -141,7 +140,7 @@ namespace timer
 
         time_.set_to_lap ();
 
-	last_time_ = time_.to_ms ();
+	last_time_ = time_;
 
         task_count_ = tasks_.size ();
 
@@ -190,6 +189,20 @@ namespace timer
 
     _call.called_ = i;
     calls_.push (_call);
+  }
+
+  INLINE_TIMER_CC
+  std::string
+  Timer::current_task () const
+  {
+    if (!(calls_.empty ()))
+    {
+      return tasks_[calls_.top ().called_].name_;
+    }
+    std::cerr << "Timer.current_task: No tasks. Timer may not be running."
+	      << std::endl;
+    assert (false);
+    return "";
   }
 
   INLINE_TIMER_CC
@@ -285,7 +298,7 @@ namespace timer
       }
     else
       {
-        std::cout << "Timer.pop: Call stack empty" << std::endl;
+        std::cerr << "Timer.pop: Call stack empty" << std::endl;
         assert (false);
       }
   }
@@ -1051,6 +1064,9 @@ namespace timer
         o << "Self system time:       " << std::setw (10)
 	  << std::setprecision (2) << task.self.system
           << '\n';
+        o << "Self wall time:         " << std::setw (10)
+	  << std::setprecision (2) << task.self.wall
+          << '\n';
 
         o << "Self average cpu time:  " << std::setw (10)
 	  << std::setprecision (2)
@@ -1068,6 +1084,9 @@ namespace timer
           << '\n';
         o << "Total system time:      " << std::setw (10)
 	  << std::setprecision (2) << task.total.system
+          << '\n';
+        o << "Total wall time:        " << std::setw (10)
+	  << std::setprecision (2) << task.total.wall
           << '\n';
 
         o << "Total average cpu time: " << std::setw (10)

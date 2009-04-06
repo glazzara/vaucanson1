@@ -1,0 +1,75 @@
+Libbench: measure performance of equiped C++ code.
+
+Influence on equiped code (in time taken per 1 million measure):
+
+2Ghz Intel Centrino, 1GB RAM:
+
+ 2.5s for 1 task (1.25s in parent, 1.25s in child).
++3.5s for 100k different tasks.
+
+i.e. using CBS to measure 100 different tasks for 100000 measures takes:
+  100 000 * 2.5s / 1 000 000 (= 250 ms)
++ 100 000 * 3.5s / 1 000 000 * 100 / 100 000 (= 0.350ms)
+total: ~250ms.
+
+Use the timer-bench demo to compute those figures on another system.
+
+Typical usage:
+
+(see demo/bench/main.cc)
+
+________________________________________________________
+
+#include <cbs/bench/bench_macros.hh>
+
+int main()
+{
+  BENCH_START("My benchmark", "My description");
+
+  BENCH_PARAMETER("My parameter", "My value");
+
+  do_some_tests();
+
+  BENCH_RESULT("My parameter", "My result");
+
+  BENCH_PRINT(bench::Options(bench::Options::VE_NORMAL,
+			     bench::Options::FO_TEXT,
+                             0));
+
+  BENCH_SAVE("benchmark.xml", bench::Options());
+
+  return 0;
+}
+
+void do_some_tests()
+{
+  // Only one scoped task per scope.
+  BENCH_TASK_SCOPED("tests");
+
+  BENCH_TASK_START("tests_main");
+
+    {
+      BENCH_TASK_SCOPED("tests_inner_scope");
+      work();
+      // tests_inner_scope ends here.
+    }
+
+  // All tasks started with BENCH_TASK_START
+  // have to be stopped.
+  BENCH_TASK_STOP(); // tests_main
+
+  // tests ends here.
+}
+________________________________________________________
+
+Note:
+Parameters and results are std::string.
+Use std::stringstream to convert other values:
+
+  #include <stringstream>
+
+  int n = 42;
+  std::stringstream n_str;
+  n_str << n;
+  BENCH_PARAMETER("n", n_str.str());
+
