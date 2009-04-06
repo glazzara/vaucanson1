@@ -1,0 +1,27 @@
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add .gitignore files in empty directories.
+
+	* build-aux/.gitignore: New.
+	* m4/.gitignore: New.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update README.
+
+	* README: Update.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Install headers in the proper directory.
+
+	$(includedir)/cbs/bench/
+
+	* include/Makefile.am: Install all headers.
+	* configure.ac: Remove unused headers.
+	* include/cbs/Makefile.am: Deleted.
+	* include/cbs/bench/Makefile.am: Deleted.
+
+2009-04-03  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Use Autotools.

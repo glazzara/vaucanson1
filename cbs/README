@@ -1,0 +1,8 @@
+CBS, a C++ benchmarking suite
+
+This project is being developed at the LRDE to provide performance analysis
+tools for the Vaucanson library.
+
+CBS contains:
+
+  * libbench: measure performance of equiped C++ code.

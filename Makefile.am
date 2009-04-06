@@ -20,7 +20,7 @@ if ENABLE_VAUCANSWIG
   MAYBE_VAUCANSWIG = vaucanswig
 endif
 
-SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
+SUBDIRS = gnulib cbs lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
 	  tools doc build-aux debian
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS m4/gnulib-cache.m4

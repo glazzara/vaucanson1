@@ -23,6 +23,8 @@ AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.10 tar-ustar no-define foreign dist-bzip2])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
+AC_CONFIG_SUBDIRS([cbs])
+
 # Check the default graph implementation near the top, this way we can
 # quickly react to incorrect values.
 ac_default_graph_impl=bmig
