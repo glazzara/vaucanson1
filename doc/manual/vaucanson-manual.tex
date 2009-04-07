@@ -220,34 +220,54 @@ Presently it only documents \tafkit because that is the more
 accessible part of \Vauc.
 
 
-\chapter{Installation}
+\chapter{Administrativia}
 
 \section{Getting \Vauc}
 
-The latest stable version of the \Vauc platform can be downloaded
-from \url{http://vaucanson.lrde.epita.fr/}.  Instructions to get
-the latest development version can be found on
-\url{http://vaucanson.lrde.epita.fr/Download}.
+The latest version of the \Vauc platform can be downloaded from
+\url{http://vaucanson.lrde.epita.fr/}.
+
+\section{Licensing}
+
+Vaucanson is a free software released under the GNU General Public
+Licence version 2. If you are unfamiliar with this license, please
+read the file \file{COPYING} (at the root of the source tree) for
+details.
 
 \section{Building \Vauc}
 
-The following commands build and install the platform:
+Detailed information is provided in the files \file{INSTALL}, which is
+generic to all packages using the GNU Build System, and
+\file{doc/README.pdf} which details \Vauc's specific build process.
+The typical installation commands will install \Vauc in
+\file{/usr/local/}.
+
 \begin{shell}
 $ \kbd{cd vaucanson-\VcsnVersion}
-\end{shell}
-Then:
-\begin{shell}
 $ \kbd{./configure}
-...
 $ \kbd{make}
-...
 $ \kbd{sudo make install}
-...
 \end{shell}
 
-More detailed information is provided in the files \file{INSTALL},
-which is generic to all packages using the GNU Build System, and
-\file{README} which details \Vauc's specific build process.
+Although we discourage it, you may also use \Vauc without installing
+it: you would have to use \kbd{-I
+  /full-path-to/vaucanson-\VcsnVersion/include} when compiling C++
+programs, and move to directory
+\file{vaucanson-\VcsnVersion/taf-kit/tests/} to execute \tafkit.  (The
+\file{taf-kit/tests/} directory contains wrapper around the real
+\tafkit programs from \file{taf-kit/tests/} that enable them to run
+locally.)
+
+\section{Getting in Touch}
+
+Please send any question or comments to \url{vaucanson@lrde.epita.fr}, and
+report bugs to either our issue tracker at \url{http://vaucanson.lrde.org/} or
+by mailing \url{vaucanson-bugs@lrde.epita.fr}.
+
+You can subscribe to these mailing lists at
+\url{https://www.lrde.epita.fr/cgi-bin/mailman/listinfo/vaucanson} and
+\url{https://www.lrde.epita.fr/cgi-bin/mailman/listinfo/vaucanson-bugs}
+if you like, but this is not a requirement for sending mails.
 
 \chapter{The \Vauc toolkit}
 \label{sec:tafkit}
