@@ -1,5 +1,13 @@
 2009-04-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Rework the TAF-Kit introduction.
+
+	* doc/manual/vaucanson-manual.tex (The \Vauc toolkit): Rename
+	as...
+	(\tafkit): ... this and add more text.
+
+2009-04-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	More administrativia.
 
 	* doc/manual/vaucanson-manual.tex (Installation): Rename as...

@@ -42,6 +42,7 @@
 \renewcommand{\max}{\textrm{max}}
 \renewcommand{\min}{\textrm{min}}
 \newcommand{\Z}{\texorpdfstring{\ensuremath{\mathbb{Z}}}{Z}}
+\newcommand{\R}{\texorpdfstring{\ensuremath{\mathbb{R}}}{R}}
 \newcommand{\B}{\texorpdfstring{\ensuremath{\mathbb{B}}}{B}}
 \newcommand{\Ae}{\ensuremath{A^{*}}}
 \newcommand{\SerSAnMon}[2]%
@@ -234,7 +235,7 @@ Licence version 2. If you are unfamiliar with this license, please
 read the file \file{COPYING} (at the root of the source tree) for
 details.
 
-\section{Building \Vauc}
+\section{Building \Vauc}\label{sec:building}
 
 Detailed information is provided in the files \file{INSTALL}, which is
 generic to all packages using the GNU Build System, and
@@ -269,64 +270,291 @@ You can subscribe to these mailing lists at
 \url{https://www.lrde.epita.fr/cgi-bin/mailman/listinfo/vaucanson-bugs}
 if you like, but this is not a requirement for sending mails.
 
-\chapter{The \Vauc toolkit}
+\chapter{\tafkit}
 \label{sec:tafkit}
 
-This chapter presents a simple interface to \Vauc: a set of programs
-tailored to be used from a traditional shell.  Since they exchange
-\emph{typed} XML files, there is one program per automaton type.  Each
-program supports a set of operations which depends on the type of the
-automaton.
+\tafkit is command-line interface to \Vauc.  It is a set of programs
+that should be called from the shell and that can be chain operations
+on automata.
 
-Many users of automata consider only automata whose transitions are
-labeled by letters taken in an alphabet, which we call, roughly
-speaking, \emph{classical} automata or \emph{Boolean} automata.  The
-first program of the \tafkit, \command{vcsn-char-b}, allows to compute
-with classical automata and is described in \autoref{sec:vcsn-char-b}.
-A variant of this program called \command{vcsn-int-b} handles Boolean
-automata whose letters are integers.
+\section{\tafkit Instances}
 
-\autoref{sec:vcsn-char-fmp-b} describes the program
-\command{vcsn-char-fmp-b} which allows to compute with transducers, that
-is, automata whose transitions are labeled by pair of words, which are
-elements of a \emph{product of free monoids}, hence the name.  A
-variant of this program called \command{vcsn-int-fmp-b} handles
-transducers whose letters are integers.
-
-In \autoref{sec:vcsn-char-z} we consider the programs of the \tafkit
-that compute with automata over a free monoid and with multiplicity,
-or \emph{weight} taken in the set of integers equipped with the usual
-operations of addition and multiplication, that is, the semiring $\Z$.
-A variant of this program called \command{vcsn-int-z} is specialized
-to handle $\Z$-automata whose letters are integers.
-
-% ,
-% or with the operations of $\min$ and addition, or the operations of
-% $\max$ and addition, that is, the semirings $\Z,\min,+$ and
-% $\Z,\max,+$.  Finally, the forth section describes the program
-% \command{vcsn-char-rw} which allows to compute with transducers, viewed
-% as automata on a free monoid (the input monoid) with multiplicity
-% taken in the semiring of finite and even rational subsets of another
-% free monoid (the output monoid).
+Because of the generic programming paradigm used in the \Vauc library,
+the types of the automata manipulated needs to be known at
+compile-time.  \tafkit has therefore been compiled for several
+predefined types of automata.  It is actually the same program, but
+\emph{instantiated} for different kinds of alphabets and weights.
+Here are the names of these instances, and the kind of automata they
+represent:
 
 \medskip
 
+\begin{tabular}{llll}
+program name & automaton type & alphabet type & weight semiring \\
+\hline
+\command{vcsn-char-b} & automata &
+  characters & $\langle\B,\lor,\land\rangle$ \\
+\command{vcsn-int-b} & automata &
+  integers & $\langle\B,\lor,\land\rangle$ \\
+\command{vcsn-char-z} & automata &
+  characters & $\langle\Z,+,\times\rangle$\\
+\command{vcsn-char-zmax} & automata &
+  characters & $\langle\Z,\max,+\rangle$\\
+\command{vcsn-char-zmin} & automata &
+  characters & $\langle\Z,\min,+\rangle$\\
+\command{vcsn-char-r} & automata &
+  characters & $\langle\R,+,\times\rangle$\\
+\command{vcsn-char-char-b} & automata &
+  pairs of characters & $\langle\B,\lor,\land\rangle$\\
+\command{vcsn-char-int-b} & automata &
+  pairs of character and integer & $\langle\B,\lor,\land\rangle$\\
+\command{vcsn-int-int-b} & automata &
+  pairs of integers & $\langle\B,\lor,\land\rangle$\\
+\command{vcsn-char-fmp-b} & transducers &
+  characters & $\langle\B,\lor,\land\rangle$\\
+\command{vcsn-char-fmp-z} & transducers &
+  integers & $\langle\Z,+,\times\rangle$\\
+\command{vcsn-int-fmp-b} & transducers &
+  characters & $\langle\B,\lor,\land\rangle$\\
+\command{vcsn-int-fmp-z} & transducers &
+  integers & $\langle\Z,+,\times\rangle$\\
+\hline
+\end{tabular}
 
-It is planned that a forthcoming version will include also:
+\medskip
 
-\begin{description}
-\item[vcsn-char-zmin] for automata over a free monoid with multiplicity in
-  the semiring (\Z, \min, +)
+Many users of automata consider only automata whose transitions are
+labeled by letters taken in an alphabet, which we call, roughly
+speaking, \emph{classical} automata or \emph{Boolean}
+automata. \command{vcsn-char-b} is the \tafkit instance they should
+use.  A variant of this program, called \command{vcsn-int-b}, handles
+Boolean automata whose letters are integers.  Other variants such as
+\command{vcsn-char-char-b}, \command{vcsn-char-int-b}, or
+\command{vcsn-int-int-b}, support alphabets of pairs.  All these are
+called Boolean automata because each word is associated to a Boolean
+\emph{weight}: either the word as accepted and its weight is
+\emph{true}, or it is not and its weight is \emph{false}.
 
-\item[vcsn-char-zmax] for automata over a free monoid with multiplicity in the
-  semiring (\Z, \max, +)
+\Vauc actually supports automata with multiplicities, where words can
+be associated to weights taken in any semiring.  For instance
+\command{vcsn-char-z} associate each word to an integer.
 
-\item[vcsn-char-rw] for transducers viewed as automata over a free
-  monoid with multiplicity in the semiring of rational sets (or
-  series) over (another) free monoid.
-\end{description}
+\Vauc also supports transducers, that are able to read and write
+weighted words.  These transducers are actually automata over a
+product two free monoids.  In \Vauc we call these FMP, for \emph{free
+  monoïd products}.  The above table lists a few \tafkit instance for
+FMP.
 
-\newpage
+\section{A First Contact}\label{sec:firstcontact}
+
+If you have fully installed \Vauc (\autoref{sec:building}) you should
+be able to just type any of the following commands and observe their
+results.  If you only compiled \Vauc without installing it, you should
+\command{cd} into the \file{vaucanson-\VcsnVersion/taf-kit/tests/}
+directory and type \kbd{./vcsn-char-b} instead of \kbd{vcsn-char-b}
+for each of the following commands.
+
+\begin{figure}[tbp] \centering
+  \begin{tikzpicture}[automaton]
+    % states
+    \node[state, initial] (A) at (0,0) {};
+    \node[state] (B) at (2,0) {};
+    \node[state, accepting] (C) at (4,0) {};
+    % initial--final
+    % transitions
+    \path[->] (A) edge node[above] {$a$} (B);
+    \path[->] (B) edge node[above] {$b$} (C);
+    \path[->] (A) edge [loop below] node[below] {$b$} (A);
+    \path[->] (A) edge [loop above] node[above] {$a$} (A);
+    \path[->] (C) edge [loop below] node[below] {$b$} (C);
+    \path[->] (C) edge [loop above] node[above] {$a$} (C);
+  \end{tikzpicture}
+  \caption{The automaton $\Ac_1$, defined over the alphabet
+    $\Sigma=\{a,b\}$.  It recognizes any word of $\Sigma^\star$ that
+    contains $ab$. \label{fig:a1}}
+\end{figure}
+
+We are about to play with automaton $\Ac_1$ pictured
+on~\autoref{fig:a1}.  \tafkit comes with a set of predefined automata,
+and $\Ac_1$ happens to be one of those: it is called \file{a1.xml}.
+This is a Boolean automaton whose alphabet consists in two characters
+$\{a,b\}$ so will shall use the \command{vcsn-char-b} instance of
+\tafkit.
+
+The following command will just make sure that \tafkit knows about
+this automaton.  It will display the number of states, transitions,
+initial states, and final states of $\Ac_1$.
+
+\begin{shell}
+$ \kbd{vcsn-char-b info a1.xml}
+States: 3
+Transitions: 6
+Initial states: 1
+Final states: 1
+\end{shell}%$
+
+If you have the GraphViz package installed (see \file{doc/README.pdf}
+for links) you can also display that automaton with:
+
+\begin{shell}
+$ \kbd{vcsn-char-b display a1.xml}
+\end{shell}%$
+
+\noindent
+The displayed automaton won't have a layout as pretty as
+\autoref{fig:a1}, but it represents the same automaton nonetheless.
+
+$\Ac_1$ is a non-deterministic automaton.  We could determinize it
+with the \command{determinize} command of \tafkit.  As most commands
+of \tafkit, \command{determinize} produce its output (an XML file
+representing the automaton) on the standard output, so we will want to
+divert it to a file.
+
+\begin{shell}
+$ \kbd{vcsn-char-b determinize a1.xml > a1det.xml}
+$ \kbd{vcsn-char-b info a1det.xml}
+States: 4
+Transitions: 8
+Initial states: 1
+Final states: 2
+\end{shell}%$
+
+\noindent
+The determinized automaton has 4 states and 8 transitions.
+
+Please note that \file{a1det.xml} is a file that we just created into
+the current directory while \file{a1.xml} is a file that is predefined
+in \Vauc's predefined automata repository.  We can call command
+\command{info} on either files using the same syntax because \tafkit
+will look for automata in both places.  The command \samp{vcsn-char-b
+  list-automata} will list all predefined automata for this instance
+of \tafkit.
+
+In the pure Unix tradition, we can of course chain commands with
+pipes.  For instance the above two commands could be rewritten
+
+\begin{shell}
+$ \kbd{vcsn-char-b determinize a1.xml | vcsn-char-b info -}
+States: 4
+Transitions: 8
+Initial states: 1
+Final states: 2
+\end{shell}%$
+\noindent
+where \samp{-} stands for `\emph{read from standard input}'.
+
+
+\tafkit actually supports a more efficient way of chaining commands,
+called the \emph{internal pipe}.  It's called \emph{internal pipe}
+because the pipe logic is taken care of by \tafkit himself, but
+actually it is not using a Unix pipe at all: the commands are simply
+serialized in the same process, using the automata object created by
+the previous one.  It is more efficient because the automaton does not
+have to be converted into XML for output, and then parsed as input of
+the next command in the chain.  Here is how the \emph{internal pipe}
+looks like; notice how the \samp{|} symbol is protected from its
+evaluation by the shell.
+
+\begin{shell}
+$ \kbd{vcsn-char-b determinize a1.xml \textbackslash| info -}
+States: 4
+Transitions: 8
+Initial states: 1
+Final states: 2
+\end{shell}%$
+\noindent
+
+\noindent In the above command, \samp{-} does not designate the
+standard input, it denotes \emph{the result of the previous command}.
+
+\section{\tafkit's Modus Operandi}
+
+All \tafkit instances work identically.  They just differ on the type
+of automata they handle, and may offer different algorithms because
+not all algorithms work on any automata type.
+
+Any time \tafkit is run, it breaks its command line into command names
+and arguments.
+
+\[
+  \underbrace{\text{\texttt{vcsn-char-b}}}_{\text{\tafkit instance}}~
+  \underbrace{\underbrace{\text{\texttt{determinize}}}_{\text{name}}~
+              \underbrace{\text{\texttt{a1.xml}}}_{\text{arg.}}}_{\text{command 1}}
+  \text{\texttt{\textbackslash|}}
+  \underbrace{\underbrace{\text{\texttt{info}}}_{\text{name}}
+              \underbrace{\text{\texttt{-}}}_{\text{arg.}}}_{\text{command 2}}
+\]
+
+The \emph{internal pipe}, \samp{\textbackslash|}, is used to separate
+commands.  A command start with a name, is can be followed by several
+arguments (although only one is used in the above two commands).
+These arguments can be very different depending on the command.  The
+far we have used filenames as well as \samp{-} (to designate either
+the standard input or the result of the previous command).  Some
+commands will also accept plain text representing for instance a word
+or a rational expression.
+
+All commands will also accept some options.  There are options to
+define what the alphabet is, options to define the types to use for
+input and output, even options to fine-tune how some symbols will be
+printed.  We shall get back to these options later.
+
+
+For each command, \tafkit will
+\begin{enumerate}
+\item parse any options
+\item parse all expected arguments
+      (using indications that may have been given as option)
+\item apply the algorithm
+\item print the result (in a format that can be controlled using
+  options)
+\end{enumerate}
+
+When commands are chained internally using \samp{\textbackslash|} and
+\samp{-}, the parsing steps and printing steps are of course omitted.
+
+
+\section{Command I/O options}
+
+The full list of options can be obtained with \kbd{vcsn-char-b --help}.
+
+Here we only cover the options that may modify the Input/Output
+behaviors of commands.
+
+\subsection{Specifying an alphabet}
+
+When \tafkit reads an XML file, there is not need to specify any other
+information besides the name of the file.  For instance when we read
+\file{a1.xml} in~\autoref{sec:firstcontact} and determinized this
+automaton, we did not have to tell \tafkit that the alphabet was
+$\Sigma=\{a,b\}$.  The XML is self-contained and already contains this
+information.
+
+Here is a situation where specifying an alphabet is mandatory:
+\begin{shell}
+$ \kbd{./vcsn-char-b standard aba+a}
+Error: alphabet should be explicitly defined using --alphabet
+\end{shell}%$
+
+\command{standard} is a command that takes a rational expression and
+converts it into an automaton.  To be able to parse the rational
+expression, \Vauc need to know what alphabet it its using.  Here there
+is no ways it can guess whether the alphabet is $\Sigma=\{a,b\}$ and
+the \samp{+} is a rational operator or if it is $\Sigma=\{a,b,+\}$ and
+the \samp{+} is just a letter.  Specifying the alphabet can be done
+using \option{--alphabet=ab} for instance.
+
+\begin{shell}
+$ \kbd{./vcsn-char-b standard --alphabet=ab aba+a > aut.xml}
+\end{shell}%$
+
+In practice, the long \option{--alphabet=} option can be tedious
+to type and we will often prefer its short equivalent \option{-a}:
+
+\begin{shell}
+$ \kbd{./vcsn-char-b standard -aab aba+a > aut.xml}
+\end{shell}%$
+
 
 \section{Boolean automata}
 \label{sec:vcsn-char-b}
@@ -441,28 +669,6 @@ The whole list of supported commands is available via
 $ \kbd{vcsn-char-b list-automata}
 \end{shell}
 
-\begin{figure}[ht] \centering
-  \begin{tikzpicture}[automaton]
-    % states
-    \node[state, initial] (A) at (0,0) {};
-    \node[state] (B) at (3,0) {};
-    \node[state, accepting] (C) at (6,0) {};
-    % initial--final
-    % transitions
-    \path[->] (A) edge node[above] {$a$} (B);
-    \path[->] (B) edge node[above] {$b$} (C);
-    \path[->] (A) edge [loop below] node[below] {$b$} (A);
-    \path[->] (A) edge [loop above] node[above] {$a$} (A);
-    \path[->] (C) edge [loop below] node[below] {$b$} (C);
-    \path[->] (C) edge [loop above] node[above] {$a$} (C);
-  \end{tikzpicture}
-  \begin{legend}
-    The graphical layout of this automaton was described by hand,
-    using the \tikzname package.\index{A1@$\Ac_1$}
-  \end{legend}
-  \caption{The automaton $\Ac_1$}
-  \label{fig:a1}
-\end{figure}
 
 Let's consider the Boolean automaton $\Ac_1$ (\autoref{fig:a1}), part
 of the standard library.  It can be dumped using
