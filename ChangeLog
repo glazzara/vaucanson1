@@ -1,3 +1,12 @@
+2009-04-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix spurious "the token ' ' is already defined as a word" messages.
+
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx
+	(literal_to_letter): Do not skip spaces when translating numbers.
+	* taf-kit/tests/vcsn-int-b.test: Add a test case.
+	Thanks to Jérôme for the help.
+
 2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* lrde-upload.sh: Update to take Git branches into account.

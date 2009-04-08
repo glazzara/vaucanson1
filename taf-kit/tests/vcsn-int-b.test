@@ -143,4 +143,12 @@ diff wd-new.xml wd-ref.xml
 # Check predefined alphabets in help.
 $VCSN --help |fail1 grep predefined
 
+# Taf-kit should choke on the ";" but should not complain about
+# some ' ' character.
+$VCSN -a-1,0,1 expand '1;1' 2>stderr && exit 1
+grep "' '" stderr && exit 1
+grep "Lexer error" stderr
+
+
+
 exit 0
