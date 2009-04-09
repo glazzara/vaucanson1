@@ -93,7 +93,7 @@ namespace vcsn
   do_ltl_to_pair(const Element<S, T>& src,
 		 typename MUTE_TRAITS::ret& res)
   {
-    TIMER_SCOPED("ltl_to_pair");
+    BENCH_TASK_SCOPED("ltl_to_pair");
 
     // The input FMP transducer must be `letter-to-letter'.
     precondition(is_ltl(src));

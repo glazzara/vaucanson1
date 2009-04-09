@@ -97,7 +97,7 @@ namespace vcsn {
   bool
   is_deterministic(const Element<A, AI>& a)
   {
-    TIMER_SCOPED("is_deterministic");
+    BENCH_TASK_SCOPED("is_deterministic");
     return do_is_deterministic(a.structure(), a);
   }
 

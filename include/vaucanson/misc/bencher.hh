@@ -21,10 +21,24 @@
 #ifndef BENCHER_HH
 # define BENCHER_HH
 
+// STL
 # include <vector>
 # include <iostream>
 
-# include <vaucanson/misc/timer.hh>
+// CBS
+# include <cbs/bench/timer.hh>
+
+// Vaucanson
+# ifdef VAUCANSON
+#  define NAMESPACE_VCSN_BEGIN namespace vcsn {
+#  define NAMESPACE_VCSN_END   } // namespace vcsn
+#  include <vaucanson/misc/contract.hh>
+# else
+#  define NAMESPACE_VCSN_BEGIN
+#  define NAMESPACE_VCSN_END
+#  include <cassert>
+#  define precondition(C) assert(C)
+# endif
 
 NAMESPACE_VCSN_BEGIN
 
@@ -34,7 +48,7 @@ namespace misc
   {
   public:
     /// Add \a t to timers list.
-    void push (const Timer& t);
+    void push (const timer::Timer& t);
 
     /// Display all timers + summary
     std::ostream& print (std::ostream& o) const;
@@ -42,23 +56,23 @@ namespace misc
     void plot (std::ostream& o) const;
 
     /// Sum of all the timers.
-    Timer sum() const;
+    timer::Timer sum() const;
 
     /// Arithmetic mean of all the timers.
-    Timer mean() const;
+    timer::Timer mean() const;
 
     /// Smallest profile.
-    Timer min() const;
+    timer::Timer min() const;
 
     /// Largest profile.
-    Timer max() const;
+    timer::Timer max() const;
 
   private:
     /// Ensure they all use the same visual appearance.
-    Timer prepare (Timer t) const;
+    timer::Timer prepare (timer::Timer t) const;
 
     /// Collected timers
-    std::vector<Timer> timers_;
+    std::vector<timer::Timer> timers_;
   };
 
 

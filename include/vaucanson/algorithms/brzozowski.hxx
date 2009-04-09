@@ -81,7 +81,7 @@ namespace vcsn {
   void
   brzozowski(Element<A, T>& out, const Exp& kexp)
   {
-    TIMER_SCOPED("brzozowski");
+    BENCH_TASK_SCOPED("brzozowski");
     out = *do_brzozowski(out, kexp);
   }
 

@@ -39,7 +39,7 @@ namespace vcsn {
   do_useful_states(const AutomataBase<A>&,
 		   const Element<A, AI>&   a)
   {
-    TIMER_SCOPED("useful_states");
+    BENCH_TASK_SCOPED("useful_states");
     typedef typename Element<A, AI>::hstate_t hstate_t;
 
     std::set<hstate_t> start = accessible_states(a);

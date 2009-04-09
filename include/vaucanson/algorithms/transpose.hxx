@@ -28,7 +28,7 @@ namespace vcsn
   void
   transpose(Element<A, AI1>& dst, const Element<A, AI2>& from)
   {
-    TIMER_SCOPED("transpose");
+    BENCH_TASK_SCOPED("transpose");
     typedef Element<A, AI1> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     auto_copy(dst, transpose_view(from));

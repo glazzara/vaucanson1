@@ -43,18 +43,18 @@ namespace misc
 {
 
   INLINE_BENCHER_CC
-  Timer
+  timer::Timer
   Bencher::sum () const
   {
-    Timer res;
-    for (std::vector< Timer >::const_iterator i = timers_.begin ();
+    timer::Timer res;
+    for (std::vector< timer::Timer >::const_iterator i = timers_.begin ();
 	 i != timers_.end (); ++i)
       res += *i;
     return res;
   }
 
   INLINE_BENCHER_CC
-  Timer
+  timer::Timer
   Bencher::mean () const
   {
     precondition (!timers_.empty());
@@ -62,7 +62,7 @@ namespace misc
   }
 
   INLINE_BENCHER_CC
-  Timer
+  timer::Timer
   Bencher::min () const
   {
     precondition (!timers_.empty());
@@ -70,7 +70,7 @@ namespace misc
   }
 
   INLINE_BENCHER_CC
-  Timer
+  timer::Timer
   Bencher::max () const
   {
     precondition (!timers_.empty());
@@ -78,8 +78,8 @@ namespace misc
   }
 
   INLINE_BENCHER_CC
-  Timer
-  Bencher::prepare (Timer t) const
+  timer::Timer
+  Bencher::prepare (timer::Timer t) const
   {
     precondition (!timers_.empty());
     return t;
@@ -90,7 +90,7 @@ namespace misc
   Bencher::print (std::ostream& o) const
   {
     const char* line = "-------------------------";
-    std::vector< Timer >::const_iterator i;
+    std::vector< timer::Timer >::const_iterator i;
     for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
     {
       o << line << std::endl
@@ -109,7 +109,7 @@ namespace misc
   void
   Bencher::plot (std::ostream& o) const
   {
-    std::vector< Timer >::const_iterator i;
+    std::vector< timer::Timer >::const_iterator i;
     for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
     {
       o << (*i)
@@ -152,7 +152,7 @@ main ()
 #  endif
 
   misc::Bencher b;
-  misc::Timer timer;
+  timer::Timer timer;
   enum timevar
     {
       One = 1,

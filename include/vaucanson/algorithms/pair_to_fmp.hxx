@@ -79,7 +79,7 @@ namespace vcsn
   do_pair_to_fmp(const Element<S, T>& src,
 		 typename MUTE_TRAITS::ret& res)
   {
-    TIMER_SCOPED("pair_to_fmp");
+    BENCH_TASK_SCOPED("pair_to_fmp");
 
     // Type helpers.
     typedef typename MUTE_TRAITS::automaton_t automaton_t;

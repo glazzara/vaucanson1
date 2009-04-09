@@ -30,7 +30,7 @@ namespace vcsn
   void
   finite_support_convert(Element<S, T>& dst, const Element<Ss, Ts>& org)
   {
-    TIMER_SCOPED("finite_support_convert");
+    BENCH_TASK_SCOPED("finite_support_convert");
     precondition(org.is_finite_app());
 
     typedef typename Element<S, T>::monoid_elt_t me_t;

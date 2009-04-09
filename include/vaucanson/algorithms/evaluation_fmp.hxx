@@ -49,7 +49,7 @@ namespace vcsn
 		 const typename input_projection_helper<ST, TT>::ret& aut,
 		 typename output_projection_helper<ST, TT>::ret& res)
   {
-    TIMER_SCOPED("evaluation_fmp");
+    BENCH_TASK_SCOPED("evaluation_fmp");
     do_evaluation_fmp(trans.structure(), trans.structure().series().monoid(),
 		      aut.structure(), aut.structure().series().monoid(),
 		      res.structure(), res.structure().series().monoid(),

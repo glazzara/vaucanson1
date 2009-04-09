@@ -748,7 +748,7 @@ namespace vcsn
   bool
   are_isomorphic(const Element<A, T>& a, const Element<A, T>& b)
   {
-    TIMER_SCOPED("are_isomorphic");
+    BENCH_TASK_SCOPED("are_isomorphic");
 
     Isomorpher<A, T> isomorpher(a, b);
 

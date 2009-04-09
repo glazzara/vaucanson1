@@ -89,7 +89,7 @@ namespace vcsn
 	      const algebra::FreeMonoidProduct<M1,M2>&,
 	      const auto_t& aut, trans_t& res)
   {
-    TIMER_SCOPED("identity");
+    BENCH_TASK_SCOPED("identity");
     AUTOMATON_TYPES_(auto_t, aut_);
     AUTOMATON_TYPES(trans_t);
 

@@ -296,7 +296,7 @@ namespace vcsn
   Element<A, AI>
   minimization_hopcroft(const Element<A, AI>& a)
   {
-    TIMER_SCOPED ("minimization_hopcroft");
+    BENCH_TASK_SCOPED("minimization_hopcroft");
     precondition(is_deterministic(a));
     precondition(is_complete(a));
     Element<A, AI> output(a.structure());
@@ -452,6 +452,8 @@ namespace vcsn
 	      Element<A, AI2>&		output,
 	      const Element<A, AI1>&	input)
   {
+    BENCH_TASK_SCOPED("do_quotient");
+
     typedef Element<A, AI1> input_t;
     typedef Element<A, AI2> output_t;
     AUTOMATON_TYPES(input_t);
@@ -486,6 +488,7 @@ namespace vcsn
     /*-------------------------.
     | Initialize the partition |
     `-------------------------*/
+    BENCH_TASK_START("initialize partition");
 
     // In the general case, we have two sets, part[0] and part[1] One
     // holds the final states, the other the non-final states.	In
@@ -512,9 +515,12 @@ namespace vcsn
       max_partitions = std::max(max_partitions, c + 1);
     }
 
+    BENCH_TASK_STOP();
+
     /*------------------------------.
     | Initialize the list of (P, a) |
     `------------------------------*/
+    BENCH_TASK_START("initialize partition");
 
     if (max_partitions > 0)
       for_all_const_letters (e, alphabet_)
@@ -524,13 +530,17 @@ namespace vcsn
       for_all_const_letters (e, alphabet_)
 	to_treat.push_back(pair_t(1, *e));
 
+    BENCH_TASK_STOP();
+
     /*----------.
     | Main loop |
     `----------*/
+    BENCH_TASK_START("main loop");
     {
       quotient_splitter<input_t> splitter(input, class_, max_states);
       while (!to_treat.empty())
       {
+	BENCH_TASK_SCOPED("inner loop");
 	pair_t c = to_treat.front();
 	to_treat.pop_front();
 	unsigned p = c.first;
@@ -538,15 +548,24 @@ namespace vcsn
 
 	if (!splitter.compute_going_in_states(part[p], a))
 	  continue;
-	splitter.split(part, max_partitions);
-
-	splitter.add_new_partitions(to_treat, part);
+	{
+	  BENCH_TASK_SCOPED("splitter.split");
+	  splitter.split(part, max_partitions);
+	}
+	{
+	  BENCH_TASK_SCOPED("splitter.add_new_partitions");
+	  splitter.add_new_partitions(to_treat, part);
+	}
       }
     }
+
+    BENCH_TASK_STOP();
 
     /*------------------------------------.
     | Construction of the ouput automaton |
     `------------------------------------*/
+    BENCH_TASK_START("construct output automaton");
+
     // Create the states
     for (unsigned i = 0; i < max_partitions; ++i)
       output.add_state();
@@ -586,6 +605,8 @@ namespace vcsn
     // Set initial states.
     for_all_const_initial_states(i, input)
       output.set_initial(class_[*i]);
+
+    BENCH_TASK_STOP();
   }
 
 # undef QUOTIENT_TYPES
@@ -872,7 +893,7 @@ namespace vcsn
   Element<A, AI>
   quotient(const Element<A, AI>& a)
   {
-    TIMER_SCOPED ("quotient");
+    BENCH_TASK_SCOPED("quotient");
     precondition(is_realtime(a));
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);

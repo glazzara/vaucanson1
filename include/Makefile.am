@@ -69,7 +69,7 @@ vaucanson/misc/escaper.hh			\
 vaucanson/misc/escaper.hxx			\
 vaucanson/misc/functors.hh			\
 vaucanson/misc/functors.hxx			\
-vaucanson/misc/global_timer.hh			\
+vaucanson/misc/global_bencher.hh		\
 vaucanson/misc/hash.hh				\
 vaucanson/misc/hash.hxx				\
 vaucanson/misc/iomanip.hh			\
@@ -87,15 +87,6 @@ vaucanson/misc/special_char_traits.hh		\
 vaucanson/misc/static.hh			\
 vaucanson/misc/support.hh			\
 vaucanson/misc/support.hxx			\
-vaucanson/misc/timer.hh				\
-vaucanson/misc/timer.hxx			\
-vaucanson/misc/timer.cc				\
-vaucanson/misc/timer_internal_gathering.hh 	\
-vaucanson/misc/timer_internal_gathering.hxx 	\
-vaucanson/misc/timer_internal_gathering.cc 	\
-vaucanson/misc/timer_internal_graph.hh 		\
-vaucanson/misc/timer_internal_graph.hxx		\
-vaucanson/misc/timer_internal_graph.cc 		\
 vaucanson/misc/bencher.hh			\
 vaucanson/misc/bencher.hxx			\
 vaucanson/misc/bencher.cc			\

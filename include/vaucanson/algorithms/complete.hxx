@@ -42,7 +42,7 @@ namespace vcsn {
     // Note that this algorithm may be used on non-deterministic
     // automata.
     precondition(is_realtime(work));
-    TIMER_SCOPED("complete");
+    BENCH_TASK_SCOPED("complete");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
@@ -107,7 +107,7 @@ namespace vcsn {
   is_complete(const Element<A, AI>& e)
   {
     precondition(is_realtime(e));
-    TIMER_SCOPED("is_complete");
+    BENCH_TASK_SCOPED("is_complete");
     if (e.states().size() ==  0)
       return false;
     typedef Element<A, AI> automaton_t;

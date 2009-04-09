@@ -97,7 +97,7 @@ namespace vcsn {
   letter_to_letter_composition(const Element<S, T>& lhs,
 			       const Element<S, T>& rhs)
   {
-    TIMER_SCOPED("letter_to_letter_composition");
+    BENCH_TASK_SCOPED("letter_to_letter_composition");
     return do_letter_to_letter_composition(lhs.structure(), lhs, rhs);
   }
 

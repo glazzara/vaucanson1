@@ -59,9 +59,6 @@ const char* argp_program_version =
 
 const char* argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 
-/// A global timer.
-vcsn::misc::Timer global_timer;
-
 /// A global bencher.
 vcsn::misc::Bencher bencher;
 
@@ -341,11 +338,12 @@ int main (int argc, char* argv[])
 	args.plot_output_filename = li->args.plot_output_filename;
     }
 
-  BENCH_DO(args.nb_iterations)
+  BENCHER_DO(args.nb_iterations)
     {
       int task_number = 0;
 
-      TIMER_START ();
+      BENCH_START("Taf-kit command bench",
+		  "Chain of command executed by tar-kit.");
 
       // Execute commands
       for (std::list<pipe_command>::iterator li = command_list.begin ();
@@ -365,7 +363,7 @@ int main (int argc, char* argv[])
 	      global_result.input_exp_type = args.input_exp_type;
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
-	      TIMER_SCOPED(os.str () + std::string (args.args[0]));
+	      BENCH_TASK_SCOPED(os.str () + std::string (args.args[0]));
 	      status = execute_command (args);
 	    }
 	  catch (const std::logic_error& err) {
@@ -385,25 +383,29 @@ int main (int argc, char* argv[])
 						  global_result.output_exp_type),
 			      global_result.output);
 
-      TIMER_STOP ();
+      BENCH_STOP ();
 
       if (args.report_time)
-	TIMER_PRINT_VD(std::cerr,
-		       timer::get_verbose_degree (args.report_degree));
+	BENCH_DUMP(std::cerr,
+		   bench::Options(bench::Options::get_verbosity
+				  (args.report_degree),
+				  bench::Options::FO_TEXT));
+
       if (args.export_time_dot)
-	TIMER_EXPORT_DOT_VD(std::cerr,
-			    timer::get_verbose_degree
-			(args.export_dot_degree));
+	BENCH_DUMP(std::cerr,
+		   bench::Options(bench::Options::get_verbosity
+				  (args.report_degree),
+				  bench::Options::FO_DOT));
       if (args.export_time_xml)
-	TIMER_DUMP(std::cerr);
+	BENCH_DUMP(std::cerr, bench::Options());
 
       global_result.set_state (PIPE_BENCH);
     }
 
   if (args.bench)
-    BENCH_PRINT(std::cerr);
+    BENCHER_PRINT(std::cerr);
   if (!args.plot_output_filename.empty())
-    BENCH_SAVE_PLOT(args.plot_output_filename.c_str());
+    BENCHER_SAVE_PLOT(args.plot_output_filename.c_str());
 
   return global_result.status;
 }

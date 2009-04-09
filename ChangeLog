@@ -1,30 +1,110 @@
-2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
+2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update cbs.
 
 	CBS version: e97a404a44e5b5d19d4a869aa1f43524386c5b09.
 	See cbs/Changelog.
 
-2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
 
-	Update cbs.
+	Replace timer and global_timer with cbs.
 
-	CBS version: d60af6daaf8fa20e8a9fe92017fb69f4db30f9ba.
-	See cbs/Changelog.
+	Note: bencher and global_bencher remain.
 
-2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
+	4 steps:
+	1) Remove the timer system.
+	2) Fix taf-kit.
+	3) Disable bench in data/automata.
+	4) Use cbs in algorithms/*.hxx and tools/*.hxx.
 
-	Update cbs.
+	Most modifications were only macro renaming.
 
-	CBS version: bbef600f610af475eda1ace19a8ca60a30c1faca.
-	See cbs/Changelog.
+	Tests:
+	/!\ make check should be done on this patch.
+	Taf-kit was quickly tested.
+	make bench was quickly tested as well.
 
-2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+	Files patched:
 
-	Use cbs for bench compilation.
+	1) Remove the timer system:
 
-	* src/bench/generate_bench.sh: Add LDADD in generated Makefile.am.
-	* vaucanson.mk: Add proper include flags.
+	* include/vaucanson/misc/global_bencher.hh: New.
+	Gather bencher-related macros.  Bench using the timer from cbs.
+	* include/vaucanson/misc/global_timer.hh: Removed.
+	Remove timer-related macros, put the rest in global_bencher.hh.
+	* include/vaucanson/misc/usual_macros.hh: Include the proper files.
+	* include/Makefile.am: Add/remove files.
+	* include/vaucanson/misc/global_timer.hh,
+	* include/vaucanson/misc/timer.cc,
+	* include/vaucanson/misc/timer.hh,
+	* include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/timer_internal_gathering.cc,
+	* include/vaucanson/misc/timer_internal_gathering.hh,
+	* include/vaucanson/misc/timer_internal_gathering.hxx,
+	* include/vaucanson/misc/timer_internal_graph.cc,
+	* include/vaucanson/misc/timer_internal_graph.hh,
+	* include/vaucanson/misc/timer_internal_graph.hxx: Removed.
+
+	2) Fix taf-kit:
+
+	* taf-kit/src/common.hh,
+	* taf-kit/src/main.cc: Remove global_timer. Fix macros.
+
+	3) Disable bench in data/automata:
+
+	* data/automata/char-b/Makefile.am,
+	* data/automata/char-fmp-b/Makefile.am,
+	* data/automata/char-z/Makefile.am:
+	Set -DBENCH_DISABLED in AM_CPPFLAGS.
+
+	4) Use cbs in algorithms/*.hxx and tools/*.hxx:
+
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/aci_canonical.hxx,
+	* include/vaucanson/algorithms/aut_projection.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/composition_cover.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/cut_up.hxx,
+	* include/vaucanson/algorithms/derived_term_automaton.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/domain.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/eps_removal_sp.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/evaluation_fmp.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hxx,
+	* include/vaucanson/algorithms/fmp_to_rw.hxx,
+	* include/vaucanson/algorithms/image.hxx,
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/is_ambiguous.hxx,
+	* include/vaucanson/algorithms/is_deterministic.hxx,
+	* include/vaucanson/algorithms/is_ltl.hxx,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.h,
+	* include/vaucanson/algorithms/ltl_to_pair.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/pair_to_fmp.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/rw_composition.hxx,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/transpose.hxx,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/tools/io.hxx: Replace TIMER_SCOPED with
+	BENCH_TASK_SCOPED.
 
 2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
 

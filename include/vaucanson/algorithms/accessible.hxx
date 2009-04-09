@@ -82,7 +82,7 @@ namespace vcsn {
   std::set<typename Element<A, AI>::hstate_t>
   accessible_states(const Element<A, AI>& a)
   {
-    TIMER_SCOPED ("accessible_states");
+    BENCH_TASK_SCOPED("accessible_states");
     return do_accessible_states(a.structure(), a);
   }
 

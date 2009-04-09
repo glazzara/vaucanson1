@@ -180,7 +180,7 @@ namespace vcsn
   Element<S, SI>
   canonical(const Element<S, SI>& exp)
   {
-    TIMER_SCOPED ("canonical");
+    BENCH_TASK_SCOPED("canonical");
     return do_canonical(exp.structure(), exp);
   }
 
