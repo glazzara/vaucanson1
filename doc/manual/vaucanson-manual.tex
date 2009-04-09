@@ -70,7 +70,7 @@
 }
 \makeatother
 
-\def\tikzname{Ti\emph{k}Z\xspace}
+\newcommand{\bslash}{\texttt{\symbol{92}}}
 
 %% FIXME: it should be (#1,#2) for FMP transducers
 % A transition for a transducer.
@@ -254,16 +254,16 @@ Although we discourage it, you may also use \Vauc without installing
 it: you would have to use \kbd{-I
   /full-path-to/vaucanson-\VcsnVersion/include} when compiling C++
 programs, and move to directory
-\file{vaucanson-\VcsnVersion/taf-kit/tests/} to execute \tafkit.  (The
-\file{taf-kit/tests/} directory contains wrapper around the real
-\tafkit programs from \file{taf-kit/tests/} that enable them to run
-locally.)
+\file{vaucanson-\VcsnVersion/taf-kit/tests/} to execute \tafkit.
+(This directory contains wrapper around the real \tafkit programs from
+\file{taf-kit/tests/} that enable them to run locally.)
 
 \section{Getting in Touch}
 
-Please send any question or comments to \url{vaucanson@lrde.epita.fr}, and
-report bugs to either our issue tracker at \url{http://vaucanson.lrde.org/} or
-by mailing \url{vaucanson-bugs@lrde.epita.fr}.
+Please send any question or comment to \url{vaucanson@lrde.epita.fr},
+and report bugs to either our issue tracker at
+\url{http://vaucanson.lrde.org/} or by mail to
+\url{vaucanson-bugs@lrde.epita.fr}.
 
 You can subscribe to these mailing lists at
 \url{https://www.lrde.epita.fr/cgi-bin/mailman/listinfo/vaucanson} and
@@ -273,7 +273,7 @@ if you like, but this is not a requirement for sending mails.
 \chapter{\tafkit}
 \label{sec:tafkit}
 
-\tafkit is command-line interface to \Vauc.  It is a set of programs
+\tafkit is a command-line interface to \Vauc.  It is a set of programs
 that should be called from the shell and that can be chain operations
 on automata.
 
@@ -287,8 +287,7 @@ predefined types of automata.  It is actually the same program, but
 Here are the names of these instances, and the kind of automata they
 represent:
 
-\medskip
-
+\begin{center}
 \begin{tabular}{llll}
 program name & automaton type & alphabet type & weight semiring \\
 \hline
@@ -320,6 +319,7 @@ program name & automaton type & alphabet type & weight semiring \\
   integers & $\langle\Z,+,\times\rangle$\\
 \hline
 \end{tabular}
+\end{center}
 
 \medskip
 
@@ -456,7 +456,7 @@ looks like; notice how the \samp{|} symbol is protected from its
 evaluation by the shell.
 
 \begin{shell}
-$ \kbd{vcsn-char-b determinize a1.xml \textbackslash| info -}
+$ \kbd{vcsn-char-b determinize a1.xml \bslash| info -}
 States: 4
 Transitions: 8
 Initial states: 1
@@ -467,7 +467,7 @@ Final states: 2
 \noindent In the above command, \samp{-} does not designate the
 standard input, it denotes \emph{the result of the previous command}.
 
-\section{\tafkit's Modus Operandi}
+\section{\tafkit's Modus Operandi}\label{sec:modusoperandi}
 
 All \tafkit instances work identically.  They just differ on the type
 of automata they handle, and may offer different algorithms because
@@ -480,12 +480,12 @@ and arguments.
   \underbrace{\text{\texttt{vcsn-char-b}}}_{\text{\tafkit instance}}~
   \underbrace{\underbrace{\text{\texttt{determinize}}}_{\text{name}}~
               \underbrace{\text{\texttt{a1.xml}}}_{\text{arg.}}}_{\text{command 1}}
-  \text{\texttt{\textbackslash|}}
+  \text{\texttt{\bslash|}}
   \underbrace{\underbrace{\text{\texttt{info}}}_{\text{name}}
               \underbrace{\text{\texttt{-}}}_{\text{arg.}}}_{\text{command 2}}
 \]
 
-The \emph{internal pipe}, \samp{\textbackslash|}, is used to separate
+The \emph{internal pipe}, \samp{\bslash|}, is used to separate
 commands.  A command start with a name, is can be followed by several
 arguments (although only one is used in the above two commands).
 These arguments can be very different depending on the command.  The
@@ -502,26 +502,42 @@ printed.  We shall get back to these options later.
 
 For each command, \tafkit will
 \begin{enumerate}
-\item parse any options
+\item parse the options
 \item parse all expected arguments
-      (using indications that may have been given as option)
-\item apply the algorithm
+      (using indications that may have been given as options)
+\item execute the algorithm
 \item print the result (in a format that can be controlled using
   options)
 \end{enumerate}
 
-When commands are chained internally using \samp{\textbackslash|} and
+When commands are chained internally using \samp{\bslash|} and
 \samp{-}, the parsing steps and printing steps are of course omitted.
 
 
 \section{Command I/O options}
 
+As we said in~\autoref{sec:modusoperandi}, each \tafkit command has to
+read its input and write its output.  In this section we only cover
+the options that may modify the Input/Output behaviors of commands.
+
+\begin{center}
+\begin{tabular}{llp{.5\textwidth}l}
+  long option & short & purpose & documentation \\
+  \hline
+  \samp{--alphabet} & \samp{-a} & specify the alphabet of automata or rational expressions  & \autoref{sec:--alphabet}\\
+  \samp{--alphabet1} & \samp{-a} & specify the first alphabet on transducers & \autoref{sec:--alphabet}\\
+  \samp{--alphabet2} & \samp{-A} & specify the second alphabet on transducers & \autoref{sec:--alphabet}\\
+  \samp{--input} & \samp{-i} & select input format for automata and rational expressions & \autoref{sec:formats}\\
+  \samp{--output} & \samp{-o} & select output format for automata and rational expressions & \autoref{sec:formats}\\
+  \samp{--parser} & \samp{-p} & fine-tune the symbols used for input and output of rational expressions and automata & \autoref{sec:writingdata}\\
+\hline
+\end{tabular}
+ \end{center}
+
+\noindent
 The full list of options can be obtained with \kbd{vcsn-char-b --help}.
 
-Here we only cover the options that may modify the Input/Output
-behaviors of commands.
-
-\subsection{Specifying an alphabet}
+\subsection{Specifying alphabets}\label{sec:--alphabet}
 
 When \tafkit reads an XML file, there is not need to specify any other
 information besides the name of the file.  For instance when we read
@@ -532,11 +548,11 @@ information.
 
 Here is a situation where specifying an alphabet is mandatory:
 \begin{shell}
-$ \kbd{./vcsn-char-b standard aba+a}
+$ \kbd{vcsn-char-b exp-to-aut aba+a}
 Error: alphabet should be explicitly defined using --alphabet
 \end{shell}%$
 
-\command{standard} is a command that takes a rational expression and
+\command{exp-to-aut} is a command that takes a rational expression and
 converts it into an automaton.  To be able to parse the rational
 expression, \Vauc need to know what alphabet it its using.  Here there
 is no ways it can guess whether the alphabet is $\Sigma=\{a,b\}$ and
@@ -545,15 +561,324 @@ the \samp{+} is just a letter.  Specifying the alphabet can be done
 using \option{--alphabet=ab} for instance.
 
 \begin{shell}
-$ \kbd{./vcsn-char-b standard --alphabet=ab aba+a > aut.xml}
+$ \kbd{vcsn-char-b exp-to-aut --alphabet=ab aba+a > aut.xml}
 \end{shell}%$
 
 In practice, the long \option{--alphabet=} option can be tedious
 to type and we will often prefer its short equivalent \option{-a}:
 
 \begin{shell}
-$ \kbd{./vcsn-char-b standard -aab aba+a > aut.xml}
+$ \kbd{vcsn-char-b exp-to-aut -aab aba+a > aut.xml}
 \end{shell}%$
+
+\paragraph{Character alphabets}
+
+For characters alphabets (as with the \samp{char} \tafkit instances
+used in the above examples), the letters of the alphabets can be
+arbitrary ASCII characters, and need just to be listed after
+the \samp{--alphabet=} or \samp{-a} option.
+
+When specifying characters alphabets, some characters like \samp{ } (space),
+\samp{"}, \samp{(}, \samp{)}, and \samp{'} have to be escaped.  For
+instance the following command will create an automaton that
+recognize numbers of the form \samp{12,456,789}, where a comma must
+be used as thousand separator: note how the comma must be escaped in the
+alphabet
+
+\begin{shell}
+$ \kbd{d="(0+1+2+3+4+5+6+7+8+9)"}
+$ \kbd{vcsn-char-b exp-to-aut -a'0123456789\bslash,' "($d+$d$d+$d$d$d)(,$d$d$d)*" > numbers.xml}
+\end{shell}%$
+
+Some character alphabets are predefined.  These are:
+
+\begin{center}
+\begin{tabular}{ll}
+\samp{letters} & The lower case letters $\{a,b,\ldots,z\}$.\\
+\samp{alpha} & The upper and lower case letters $\{a,b,ldots,z,A,B,\ldots,Z\}$.\\
+\samp{digit} & All digits $\{0,1,\ldots,9\}$.\\
+\samp{ascii} & All ASCII characters.\\
+\end{tabular}
+\end{center}
+
+\noindent
+This means that \samp{-aletters} is an abbreviation for
+\samp{-aabcdefghijklmnopqrstuvwxyz}.  You get always get the above
+list by typing \samp{vcsn-char-b --help}.
+
+\paragraph{Integer alphabets}
+
+Using integers alphabets, letters must be specified as signed integer
+(they are represented by the \texttt{int} C++ type), and should be
+separated by commas.  For instance the following commands will
+construct an automaton that reads any sequence of coins of $1$, $2$,
+$5$, $10$, $20$, or $50$ cents, as long as the values are increasing.
+
+\begin{shell}
+$ \kbd{vcsn-int-b exp-to-aut -a1,2,5,10,20,50 '1*2*5*10*20*50*' > coins.xml}
+\end{shell}%$
+
+\paragraph{Pair alphabets}
+
+Pair alphabets should be specified using parenthesis group pairs and
+commas to separate the constituents of a pair.  For instance:
+
+\begin{shell}
+$ \kbd{vcsn-char-int-b exp-to-aut -a'(a,1)(b,2)(a,-1)' '(a,-1)(a,1)+(b,2)' > misc.xml}
+\end{shell}%$
+
+\paragraph{Transducer alphabets}
+
+Free monoïd products have two alphabets, one for each monoïd.  The
+instances of \tafkit that handle transducers consequently support two
+options \samp{--alphabet1=} and \samp{--alphabet2=}, that can be
+abbreviated respectively \samp{-a} and \samp{-A}.
+
+
+\subsection{Input and Output Formats}\label{sec:formats}
+
+\tafkit can input and output several kind of objects: automata,
+rational expressions, words, weights and Boolean results.
+
+\begin{description}
+\item[words] are always read as strings given on the command line, and
+  written on standard output.
+\item[automata] are read from a filename specified on the command
+  line, and output on standard output.  \Vauc can read automata in two
+  formats: FSMXML (the default), or the textual format of FSM.  It can
+  also write automata in these formats, or the \samp{dot} format, used
+  for graphical output.
+\item[rational expression] are by default read as strings given on the
+  command line, and output as strings on standard output.
+  Alternatively rational expression can be read from an FSMXML file whose
+  filename is given on the command line, and output in FSMXML as well.
+\item[weight results] (such as the result of the evaluation of a word on
+  an automaton) are simply output as strings on the standard output
+\item[Boolean results] (such as the result of asking whether an automaton
+  is empty) are returned using the status code of the
+  \tafkit instance, so that these commands can be used as conditions
+  in shell scripts.
+\end{description}
+
+\paragraph{Changing the format for automata and rational expressions}
+
+The format used to input automata and rational expressions can be
+controlled using the \samp{--input=} and \samp{--output=} options (or
+\samp{-i}, \samp{-o} for short).  These options control the I/O
+formats for both automata and rational expressions at once.  So for
+instance using \samp{-ixml} will ask \tafkit to read any automaton or
+rational expression using the FSMXML format.  Because rational
+expression are not supported in as much formats as automata, they will
+be read or written as text string if an unsupported format is
+requested.
+
+\begin{center}
+\begin{tabular}{lll}
+  values for \samp{-i} or \samp{-o}    & format for automata & format for rational expressions \\
+  \hline
+  (none)     & FSMXML              & text string \\
+  \samp{xml} & FSMXML              & FSMXML \\
+  \samp{fsm} & FSM                 & text string \\
+  \samp{dot} (for output only) & dot   & text string \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+For instance to convert an automaton from XML to dot\footnote{dot
+  files can be processed using the GraphViz package}, we would use:
+
+\begin{shell}
+$ \kbd{vcsn-char-b identity -odot aut.xml > aut.dot}
+\end{shell}%$
+
+
+\paragraph{Verbose Boolean results}
+
+As said above boolean results are returned using the program's status
+code using the Unix convention (that is: $0$ for \emph{true} and any
+other value for \emph{false}). The shell makes this value available in
+the \samp{\$?} variable.  The \tafkit option \samp{--verbose} or \samp{-v}
+can be used to request an English interpretation of this value.
+
+\begin{shell}
+$ \kbd{vcsn-int-b is-empty coins.xml}
+$ \kbd{echo $?}
+1
+$ \kbd{vcsn-int-b is-empty -v coins.xml}
+Input is not empty
+\end{shell}%$
+
+\subsection{Empty word and null series}
+
+The default representation of the empty word (identity of the monoïd)
+is \samp{1} when using characters or pair alphabets.  For instance let
+us try the command \command{expand}, that distributes concatenations
+over disjunctions:
+
+\begin{shell}
+$ \kbd{vcsn-char-b expand -aab '(a+1)(1+b)'}
+a+ab+b+1
+\end{shell}%$
+
+Of course if we use \samp{1} as one character in the alphabet, the
+same symbol cannot be used for representing the empty word.  \Vauc
+actually choose the first available representation of the empty word
+from the following list of candidate symbols: \samp{1}, \samp{e}, and
+\samp{\_e}, \samp{eps}.
+
+\begin{shell}
+$ \kbd{vcsn-char-b expand -a01 '(0+e)(e+1)'}
+0+01+1+e
+$ \kbd{vcsn-char-b expand -a1e '(1+\_e)(\_e+e)'}
+1+1e+e+_e
+\end{shell}%$
+
+For integer alphabet, the empty word is of course always \samp{e}.
+
+Similarly the symbol use to represent the null series defaults the
+first representation from the following list that is not in conflict
+with the alphabet: \samp{0}, \samp{z}, \samp{\_z}, \samp{zero}.
+
+Next section shows how you can actually specify symbols of your own
+for these tokens.
+
+
+\subsection{Specifying writing data}\label{sec:writingdata}
+
+Previous section showed how the empty word and null series can have
+different symbols.  \Vauc actually allows other symbols used in
+rational expression to be changed.
+
+Here is the list of named symbols with their meaning and default
+values:
+
+\begin{center}
+\begin{tabular}{lll}
+symbol & meaning & default value(s) \\
+\hline
+\samp{OPAR} & group start & \samp{(} \\
+\samp{CPAR} & group end & \samp{)} \\
+\samp{PLUS} & disjunction (additive law of the series) & \samp{+} \\
+\samp{TIMES} & concatenation (multiplicative law of the series) & \samp{.}\\
+\samp{STAR} & Kleene star & \samp{*} \\
+\samp{ONE} & empty word (identity of the monoïd) & \samp{1},\samp{e},\samp{\_e},\samp{eps}\\
+\samp{ZERO} & null series & \samp{0},\samp{z},\samp{\_z},\samp{zero} \\
+\samp{OWEIGHT} & weight start & \samp{\{} \\
+\samp{CWEIGHT} & weight end & \samp{\}} \\
+\samp{SPACE} & space characters (to ignore) & \samp{ } \\
+\hline
+\end{tabular}
+\end{center}
+
+The \samp{--parser=} can be used to change the value of the above
+tokens. Each of them must be defined as a non-empty string.  \tafkit
+will check that these tokens do not collide.
+For instance to use $\{(,)\}$ as alphabet, we should obviously rename
+the \samp{OPAR} and \samp{CPAR} tokens.
+
+The following command creates an automaton that recognizes the words
+\samp{()}, \samp{(())}, \samp{(()())}, \samp{(()()())}, etc.
+
+
+\begin{shell}
+$ \kbd{vcsn-char-b -a'\(\)' --parser='OPAR=[ CPAR=]' exp-to-aut '([()]*)' >parens.xml}
+\end{shell}%$
+
+
+The values of these symbols, which we call the \emph{writing data},
+are stored in the XML file, so there is no need to specify this again
+when working from a file.
+
+\begin{shell}
+$ \kbd{vcsn-char-b aut-to-exp parens.xml}
+(.(.[).(]*.).)+(.)
+$ \kbd{vcsn-char-b eval parens.xml '(()())'}
+1
+\end{shell}%$
+
+
+\paragraph{Overwriting the writing data}
+
+When \tafkit reads an automaton or a rational expression from an XML
+file (that contains writing data) or from the internal pipe, it does
+not need additional information to read its input.  However the
+\samp{--parser=} option can still be used to modify the way the object
+will be \emph{output}.
+
+Here is an example where we create a rational expression over the
+alphabet $\{(,)\}$ using $[$ and $]$ for grouping and store it into
+the file \file{p.xml}.  We can them convert this file back into a
+string using either the stored writing data, or overwriting these data
+with different ones (here $<$ and $>$ for grouping.
+
+\begin{shell}
+$ \kbd{vcsn-char-b -a'\(\)' --parser='OPAR=[ CPAR=]' identity-exp -oxml '([()]*)' >p.xml}
+$ \kbd{vcsn-char-b identity-exp -ixml p.xml}
+(.[(.)]*.)
+$ \kbd{vcsn-char-b --parser='OPAR=< CPAR=>' identity-exp -ixml p.xml}
+(.<(.)>*.)
+\end{shell}%$
+
+\noindent the command \command{indentity-exp} used in the above
+example does not apply any algorithm on the rational expression.  Its
+only purpose is to read and write the rational expression using any
+I/O option supplied on the command-line.\footnote{When reading a
+  rational expression, trivial identities are also rewritten. (FIXME:
+  ref).}
+
+\hrule
+
+You can also use the \verb-ALPHABET- token an arbitrary number of
+times, to append letters to the current alphabet. The following
+commands:
+
+%% FIXME: include ({1} a) in the example
+\begin{shell}
+$ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity parser.xml >parser.dot}
+\end{shell}
+
+\noindent
+will give the same results as:
+%% FIXME: include ({1} a) in the example
+\begin{shell}
+$ \kbd{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
+\end{shell}
+\begin{shell}
+$ \kbd{vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot}
+\end{shell}
+
+\noindent
+With the \verb-ALPHABET- token, you can specify two types of letters:
+
+\begin{itemize}
+\item letters: one character is used to represent a letter.
+\item words: many characters are used to represent a letter.
+\end{itemize}
+
+For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
+$\{\verb-a-, \verb-b-, \verb-c-\}$, while \verb-ALPHABET=words:abc- defines the
+alphabet with only one letter $\{\verb-abc-\}$. Letters are separated by commas, and
+each \tafkit context defaults to either letters (vcsn-char-b eg) or words
+(vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
+\verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
+
+Everywhere you want to use special characters used by the \verb|--parser|
+option, prepending a backslash character will escape it. So, you can write:
+\verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
+and \verb-=-.
+
+Finally whenever you may put a single character you may write a pair a words.
+The following construction is then valid: \verb|ALPHABET=(\,,\))|, and defines
+the alphabet with only one letter: the pair whose first component is \verb-,-
+and the second one is \verb-)-.
+
+For more details, the grammar of the \verb|--parser| option is included in the
+source code in EBNF notations.
 
 
 \section{Boolean automata}
@@ -829,74 +1154,6 @@ $ \kbd{vcsn-char-b --output-type=dot identity all.xml >all.dot}
 
 \subsection{Token representations}
 
-When dealing with rational expressions in \tafkit, one may be willing to,
-for example, change the representation of the epsilon. More generally,
-the rational expressions parser understand $10$ such tokens. They are:
-
-\begin{itemize}
-\item \verb-OPAR-: the opening association parenthesis.
-\item \verb-CPAR-: the closing association parenthesis.
-\item \verb-PLUS-: the semi-ring additive law.
-\item \verb-TIMES-: the monoid concatenation law.
-\item \verb-STAR-: the Kleene star.
-\item \verb-ONE-: the identity of the monoid.
-\item \verb-ZERO-: the zero of the semi-ring.
-\item \verb-OWEIGHT-: the opening weight brace.
-\item \verb-CWEIGHT-: the closing weight brace.
-\item \verb-SPACE-: a whitespace character.
-\end{itemize}
-
-\noindent
-Each token must be a non-empty string, with arbitrary length. Some checks
-will be done by \tafkit, to ensure tokens do not collide. You can also
-use the \verb-ALPHABET- token an arbitrary number of times, to append letters
-to the current alphabet. The following commands:
-
-%% FIXME: include ({1} a) in the example
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity parser.xml >parser.dot}
-\end{shell}
-
-\noindent
-, will give the same results as:
-%% FIXME: include ({1} a) in the example
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot}
-\end{shell}
-
-\noindent
-With the \verb-ALPHABET- token, you can specify two types of letters:
-
-\begin{itemize}
-\item letters: one character is used to represent a letter.
-\item words: many characters are used to represent a letter.
-\end{itemize}
-
-For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
-$\{\verb-a-, \verb-b-, \verb-c-\}$, while \verb-ALPHABET=words:abc- defines the
-alphabet with only one letter $\{\verb-abc-\}$. Letters are separated by commas, and
-each \tafkit context defaults to either letters (vcsn-char-b eg) or words
-(vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
-\verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
-
-Everywhere you want to use special characters used by the \verb|--parser|
-option, prepending a backslash character will escape it. So, you can write:
-\verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
-and \verb-=-.
-
-Finally whenever you may put a single character you may write a pair a words.
-The following construction is then valid: \verb|ALPHABET=(\,,\))|, and defines
-the alphabet with only one letter: the pair whose first component is \verb-,-
-and the second one is \verb-)-.
-
-For more details, the grammar of the \verb|--parser| option is included in the
-source code in EBNF notations.
 
 \subsubsection{Minimizing}
 
