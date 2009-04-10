@@ -232,6 +232,7 @@ vaucanson/algebra/implementation/series/krat_exp_proxy.hh			     \
 vaucanson/algebra/implementation/series/krat_exp_proxy.hxx			     \
 vaucanson/algebra/implementation/series/krat_exp_parser.hh			     \
 vaucanson/algebra/implementation/series/krat_exp_parser.hxx			     \
+vaucanson/algebra/implementation/series/krat_exp_parser_private.hh		     \
 vaucanson/algebra/implementation/series/krat_exp_pattern.hh			     \
 vaucanson/algebra/implementation/series/krat_exp_pattern.hxx			     \
 vaucanson/algebra/implementation/series/krat_exp_support.hxx			     \

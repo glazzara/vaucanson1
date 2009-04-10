@@ -21,31 +21,8 @@
 # include <queue>
 # include <set>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
-
-// Declaration to link with libkrat_exp
-namespace yy
-{
-  struct token_queue;
-
-  // WARNING: this struct declaration is also in
-  //   lib/krat_exp/krat_exp_bison.yy
-  // until someone factors these, you have to update both.
-  struct krat_exp_parser
-  {
-    krat_exp_parser();
-    ~krat_exp_parser();
-    void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_weight(vcsn::algebra::semiring_virtual* sem);
-    void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_token(int i, std::string* str);
-    int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
-
-    // Attributs
-    token_queue* tok_q_;
-   }; // krat_exp_parser
-} // yy
+# include <vaucanson/algebra/implementation/series/krat_exp_parser_private.hh>
 
 namespace vcsn
 {

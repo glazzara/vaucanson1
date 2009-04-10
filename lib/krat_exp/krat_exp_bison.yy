@@ -4,7 +4,7 @@
 %error-verbose
 
 %{
-# include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser_private.hh>
 # include <map>
 # include <queue>
 # include <string>
@@ -85,23 +85,6 @@ namespace yy
       >
     > self;
   };
-
-  // WARNING: this struct declaration is also in
-  //   include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
-  // until someone factors these, you have to update both.
-  struct krat_exp_parser
-  {
-    krat_exp_parser();
-    ~krat_exp_parser();
-    void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_weight(vcsn::algebra::semiring_virtual* sem);
-    void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_token(int i, std::string* str);
-    int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
-
-    // Attributs
-    token_queue* tok_q_;
-  }; // krat_exp_parser
 } // yy
 
 yy::krat_exp_parser::krat_exp_parser()

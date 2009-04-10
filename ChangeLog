@@ -1,3 +1,15 @@
+2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Factor the two definitions of yy::krat_exp_parser in a single place.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+	(yy::krat_exp_parser): Move to...
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser_private.hh:
+	This new file.
+	* include/Makefile.am: Distribute and install the new file.
+	* lib/krat_exp/krat_exp_bison.yy (yy::krat_exp_parser): Delete
+	and include krat_exp_parser_private.hh instead.
+
 2009-04-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix spurious "the token ' ' is already defined as a word" messages.
