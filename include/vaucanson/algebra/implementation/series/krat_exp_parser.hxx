@@ -40,7 +40,7 @@ namespace vcsn
 
       Lexer(const std::string& from,
 	    Element<S, T>& e,
-	    yy::krat_exp_parser& parser,
+	    vcsnyy::krat_exp_parser& parser,
 	    bool lex_trace,
 	    std::string& error) :
 	from_(from),
@@ -210,7 +210,7 @@ namespace vcsn
 
       const std::string& from_;
       Element<S, T>& e_;
-      yy::krat_exp_parser& parser_;
+      vcsnyy::krat_exp_parser& parser_;
       bool lex_trace_;
       std::string close_weight_;
       std::vector<std::string> token_tab_;
@@ -226,7 +226,7 @@ namespace vcsn
     {
       parse_trace = parse_trace;
       std::string error;
-      yy::krat_exp_parser parser;
+      vcsnyy::krat_exp_parser parser;
       Lexer<S, T> lex(from, exp, parser, lex_trace, error);
       if (!lex.lex())
 	return std::make_pair(true, error);

@@ -19,7 +19,7 @@
 
 // These definitions really belong to lib/krat_exp/krat_exp_bison.yy,
 // but we need to have them in the public headers so they are installed.
-namespace yy
+namespace vcsnyy
 {
   struct token_queue;
 
@@ -35,4 +35,4 @@ namespace yy
 
     token_queue* tok_q_;
    };
-} // yy
+} // vcsnyy
