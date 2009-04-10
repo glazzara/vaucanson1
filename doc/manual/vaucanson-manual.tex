@@ -189,6 +189,8 @@ automata over a free monoid, and even \emph{weighted} automata on some
 \emph{non free monoids} (currently only products of free
 monoids---a.k.a. transducers---are supported).
 
+\bigskip
+
 The platform consists in a couple of components:
 \begin{description}
 \item[The \Vauc library] is a \Cxx library that implements objects for
@@ -274,15 +276,15 @@ if you like, but this is not a requirement for sending mails.
 \label{sec:tafkit}
 
 \tafkit is a command-line interface to \Vauc.  It is a set of programs
-that should be called from the shell and that can be chain operations
-on automata.
+that should be called from the shell and that can be used to chain
+operations on automata.
 
 \section{\tafkit Instances}
 
 Because of the generic programming paradigm used in the \Vauc library,
-the types of the automata manipulated needs to be known at
-compile-time.  \tafkit has therefore been compiled for several
-predefined types of automata.  It is actually the same program, but
+the types of the automata manipulated have to be known at compile
+time.  \tafkit has therefore been compiled for several predefined
+types of automata.  It is actually the same program that is
 \emph{instantiated} for different kinds of alphabets and weights.
 Here are the names of these instances, and the kind of automata they
 represent:
@@ -337,22 +339,23 @@ called Boolean automata because each word is associated to a Boolean
 
 \Vauc actually supports automata with multiplicities, where words can
 be associated to weights taken in any semiring.  For instance
-\command{vcsn-char-z} associate each word to an integer.
+\command{vcsn-char-z} associates each word to an integer.  The previous
+table show other semirings that can be used as well.
 
-\Vauc also supports transducers, that are able to read and write
-weighted words.  These transducers are actually automata over a
-product two free monoids.  In \Vauc we call these FMP, for \emph{free
-  monoïd products}.  The above table lists a few \tafkit instance for
-FMP.
+\Vauc also supports weighted transducers.  These transducers are
+actually automata over a product two free monoids.  In \Vauc we call
+these FMP, for \emph{free monoïd products}.  The above table lists a
+few \tafkit instance for FMP.
 
 \section{A First Contact}\label{sec:firstcontact}
 
-If you have fully installed \Vauc (\autoref{sec:building}) you should
-be able to just type any of the following commands and observe their
-results.  If you only compiled \Vauc without installing it, you should
-\command{cd} into the \file{vaucanson-\VcsnVersion/taf-kit/tests/}
-directory and type \kbd{./vcsn-char-b} instead of \kbd{vcsn-char-b}
-for each of the following commands.
+If you have fully installed \Vauc (see \autoref{sec:building}) you
+should be able to just type any of the following commands and observe
+their results.  If you only compiled \Vauc without installing it, you
+should \command{cd} into the
+\file{vaucanson-\VcsnVersion/taf-kit/tests/} directory and type
+\kbd{./vcsn-char-b} instead of \kbd{vcsn-char-b} for each of the
+following commands.
 
 \begin{figure}[tbp] \centering
   \begin{tikzpicture}[automaton]
@@ -514,6 +517,173 @@ When commands are chained internally using \samp{\bslash|} and
 \samp{-}, the parsing steps and printing steps are of course omitted.
 
 
+\section{Writing Rational Expressions}
+
+\subsection{Rational operators}
+
+\Vauc supports the following operators for writing regular expressions.
+
+\begin{center}
+  \begin{tabular}{ll}
+    \hline
+    $e_1$$e_2$ & implicit concatenation \\
+    $e_1$\code{.}$e_2$ & explicit concatenation \\
+    $e_1$\code{+}$e_2$ & disjunction \\
+    $e$\code{*} & Kleen star \\
+    \code{(}$e$\code{)} & grouping \\
+    \hline
+  \end{tabular}
+\end{center}
+
+On the alphabet $\Sigma=\{a,b\}$, the language denoted by the rational
+expression \samp{(a+b)*ab(a+b)*} contains all words that contain
+\samp{ab}.
+
+The \Vauc library always needs to know on which alphabet a rational
+expression is defined in order to parse it.  This alphabet can be
+indicated using option \option{--alphabet=ab} or the shorter form
+\option{-aab} (see \autoref{sec:--alphabet} for more details).
+
+For instance, here is how to create an automaton that recognizes the
+same language as \samp{(a+b)*ab(a+b)*}, and make sure this automaton
+is equivalent to the automaton $\Ac_1$ of \autoref{fig:a1}.
+
+\begin{shell}
+$ \kbd{vcsn-char-b exp-to-aut -aab "(a+b)*ab(a+b)*" > aut.xml}
+$ \kbd{vcsn-char-b are-equivalent -v aut.xml a1.xml}
+\end{shell}%$
+
+\noindent The \option{-v} is used to request a plain English output
+from \command{are-equivalent}.  Without it, \tafkit would just set its
+status code.  (See \autoref{sec:verbose} for more details.)
+
+\subsection{Empty word and null series}\label{sec:emptyword}
+
+The default representation of the empty word (identity of the monoïd)
+is \samp{1} when using characters or pair alphabets.  For instance let
+us try the command \command{expand}, that distributes concatenations
+over disjunctions:
+
+\begin{shell}
+$ \kbd{vcsn-char-b expand -aab '(a+1)(1+b)'}
+a+ab+b+1
+\end{shell}%$
+
+Of course if we use \samp{1} as one character in the alphabet, the
+same symbol cannot be used for representing the empty word.  \Vauc
+actually choose the first available representation of the empty word
+from the following list of candidate symbols: \samp{1}, \samp{e}, and
+\samp{\_e}, \samp{eps}.
+
+\begin{shell}
+$ \kbd{vcsn-char-b expand -a01 '(0+e)(e+1)'}
+0+01+1+e
+$ \kbd{vcsn-char-b expand -a1e '(1+\_e)(\_e+e)'}
+1+1e+e+_e
+\end{shell}%$
+
+For integer alphabets, the empty word is of course always \samp{e}.
+
+Similarly the symbol used to represent the null series defaults to the
+first representation from the following list that is compatible with
+the alphabet: \samp{0}, \samp{z}, \samp{\_z}, \samp{zero}.
+
+Section~\ref{sec:writingdata} shows how you can actually specify you
+own representation for these symbols
+
+
+\subsection{Weights}
+
+
+\subsection{Interactive Definition of Automata}
+
+The \tafkit command \taffn{edit-automaton} provides a textual
+interface to define automata interactively.  The commands takes the
+filename of the automata to define or modify in argument.  If the
+files does not yet exist, you should specify the alphabet of your
+automaton on the command line (using \option{--alphabet=} or
+\option{-a} as will any other command), and the file will be created
+when you exit the editor.  If the file does exist, the alphabet will
+be read from the file along with the automaton itself, and the file
+will be overwritten upon exit.
+
+The interface is based on a menu of choices:
+\begin{shell}
+$ \kbd{vcsn-char-b edit-automaton --alphabet=ab test.xml}
+Automaton description:
+  States: (none)
+  Initial states: (none)
+  Final states: (none)
+
+  Transitions: (none)
+
+Please choose your action:
+  1. Add states.
+  2. Delete a state.
+
+  3. Add a transition.
+  4. Delete a transition.
+
+  5. Set a state to be initial.
+  6. Set a state not to be initial.
+
+  7. Set a state to be final.
+  8. Set a state not to be final.
+
+  9. Display the automaton in Dotty.
+
+  10. Exit.
+
+Your choice [1-10]:
+\end{shell}
+
+\noindent
+If you enter \kbd{1}, you will then be prompted for the number of
+states to add, say \kbd{1} again.  The state \code{0} was created.  To
+make it initial select \kbd{5}, and:
+
+\begin{shell}
+Your choice [1-10]: \kbd{5}
+  For state: \kbd{0}
+\end{shell}
+
+Likewise to make it final, using choice \kbd{7}.  Finally, let's add a
+transition:
+
+\begin{shell}
+Your choice [1-10]: \kbd{3}
+  Add a transition from state: \kbd{0}
+  To state: \kbd{0}
+  Labeled by the expression: \kbd{a+b}
+\end{shell}
+
+\noindent
+The automaton is generalized, that is to say, rational expressions are
+valid labels.
+
+On top of the interactive menu, the current definition of the
+automaton is reported in a textual yet readable form:
+
+\begin{shell}
+Automaton description:
+  States: 0
+  Initial states: 0
+  Final states: 0
+
+  Transitions:
+    1: From 0 to 0 labeled by (\withweighttt{1}{a})+(\withweighttt{1}{b})
+\end{shell}
+
+\noindent
+States are numbered from 0, but transitions numbers start at 1.  Also,
+note that weights are reported, although only \code{1} is valid for
+Boolean automata.
+
+Finally, hit \kbd{10} to save the resulting automaton in the file
+\file{test.xml}.
+
+
+
 \section{Command I/O options}
 
 As we said in~\autoref{sec:modusoperandi}, each \tafkit command has to
@@ -539,7 +709,7 @@ The full list of options can be obtained with \kbd{vcsn-char-b --help}.
 
 \subsection{Specifying alphabets}\label{sec:--alphabet}
 
-When \tafkit reads an XML file, there is not need to specify any other
+When \tafkit reads an XML file, there is no need to specify any other
 information besides the name of the file.  For instance when we read
 \file{a1.xml} in~\autoref{sec:firstcontact} and determinized this
 automaton, we did not have to tell \tafkit that the alphabet was
@@ -554,7 +724,7 @@ Error: alphabet should be explicitly defined using --alphabet
 
 \command{exp-to-aut} is a command that takes a rational expression and
 converts it into an automaton.  To be able to parse the rational
-expression, \Vauc need to know what alphabet it its using.  Here there
+expression, \Vauc needs to know what alphabet it its using.  Here there
 is no ways it can guess whether the alphabet is $\Sigma=\{a,b\}$ and
 the \samp{+} is a rational operator or if it is $\Sigma=\{a,b,+\}$ and
 the \samp{+} is just a letter.  Specifying the alphabet can be done
@@ -578,12 +748,12 @@ used in the above examples), the letters of the alphabets can be
 arbitrary ASCII characters, and need just to be listed after
 the \samp{--alphabet=} or \samp{-a} option.
 
-When specifying characters alphabets, some characters like \samp{ } (space),
-\samp{"}, \samp{(}, \samp{)}, and \samp{'} have to be escaped.  For
-instance the following command will create an automaton that
-recognize numbers of the form \samp{12,456,789}, where a comma must
-be used as thousand separator: note how the comma must be escaped in the
-alphabet
+When specifying characters alphabets, some characters like \samp{ }
+(space), \samp{"}, \samp{(}, \samp{)}, \samp{'}, and \samp{=} have to
+be escaped with a backslash.  For instance the following command will
+create an automaton that recognize numbers of the form
+\samp{12,456,789}, where a comma must be used as thousand separator:
+note how the comma must be escaped in the alphabet
 
 \begin{shell}
 $ \kbd{d="(0+1+2+3+4+5+6+7+8+9)"}
@@ -694,7 +864,7 @@ $ \kbd{vcsn-char-b identity -odot aut.xml > aut.dot}
 \end{shell}%$
 
 
-\paragraph{Verbose Boolean results}
+\paragraph{Verbose Boolean results}\label{sec:verbose}
 
 As said above boolean results are returned using the program's status
 code using the Unix convention (that is: $0$ for \emph{true} and any
@@ -710,46 +880,11 @@ $ \kbd{vcsn-int-b is-empty -v coins.xml}
 Input is not empty
 \end{shell}%$
 
-\subsection{Empty word and null series}
-
-The default representation of the empty word (identity of the monoïd)
-is \samp{1} when using characters or pair alphabets.  For instance let
-us try the command \command{expand}, that distributes concatenations
-over disjunctions:
-
-\begin{shell}
-$ \kbd{vcsn-char-b expand -aab '(a+1)(1+b)'}
-a+ab+b+1
-\end{shell}%$
-
-Of course if we use \samp{1} as one character in the alphabet, the
-same symbol cannot be used for representing the empty word.  \Vauc
-actually choose the first available representation of the empty word
-from the following list of candidate symbols: \samp{1}, \samp{e}, and
-\samp{\_e}, \samp{eps}.
-
-\begin{shell}
-$ \kbd{vcsn-char-b expand -a01 '(0+e)(e+1)'}
-0+01+1+e
-$ \kbd{vcsn-char-b expand -a1e '(1+\_e)(\_e+e)'}
-1+1e+e+_e
-\end{shell}%$
-
-For integer alphabet, the empty word is of course always \samp{e}.
-
-Similarly the symbol use to represent the null series defaults the
-first representation from the following list that is not in conflict
-with the alphabet: \samp{0}, \samp{z}, \samp{\_z}, \samp{zero}.
-
-Next section shows how you can actually specify symbols of your own
-for these tokens.
-
-
 \subsection{Specifying writing data}\label{sec:writingdata}
 
-Previous section showed how the empty word and null series can have
-different symbols.  \Vauc actually allows other symbols used in
-rational expression to be changed.
+Section~\ref{sec:emptyword} showed how the empty word and null series
+can have different symbols.  \Vauc actually allows other symbols used
+in rational expression to be changed.
 
 Here is the list of named symbols with their meaning and default
 values:
@@ -785,7 +920,6 @@ The following command creates an automaton that recognizes the words
 \begin{shell}
 $ \kbd{vcsn-char-b -a'\(\)' --parser='OPAR=[ CPAR=]' exp-to-aut '([()]*)' >parens.xml}
 \end{shell}%$
-
 
 The values of these symbols, which we call the \emph{writing data},
 are stored in the XML file, so there is no need to specify this again
@@ -828,479 +962,59 @@ I/O option supplied on the command-line.\footnote{When reading a
   rational expression, trivial identities are also rewritten. (FIXME:
   ref).}
 
-\hrule
-
-You can also use the \verb-ALPHABET- token an arbitrary number of
-times, to append letters to the current alphabet. The following
-commands:
-
-%% FIXME: include ({1} a) in the example
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity parser.xml >parser.dot}
-\end{shell}
-
-\noindent
-will give the same results as:
-%% FIXME: include ({1} a) in the example
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot}
-\end{shell}
-
-\noindent
-With the \verb-ALPHABET- token, you can specify two types of letters:
-
-\begin{itemize}
-\item letters: one character is used to represent a letter.
-\item words: many characters are used to represent a letter.
-\end{itemize}
-
-For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
-$\{\verb-a-, \verb-b-, \verb-c-\}$, while \verb-ALPHABET=words:abc- defines the
-alphabet with only one letter $\{\verb-abc-\}$. Letters are separated by commas, and
-each \tafkit context defaults to either letters (vcsn-char-b eg) or words
-(vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
-\verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
-
-Everywhere you want to use special characters used by the \verb|--parser|
-option, prepending a backslash character will escape it. So, you can write:
-\verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
-and \verb-=-.
-
-Finally whenever you may put a single character you may write a pair a words.
-The following construction is then valid: \verb|ALPHABET=(\,,\))|, and defines
-the alphabet with only one letter: the pair whose first component is \verb-,-
-and the second one is \verb-)-.
-
-For more details, the grammar of the \verb|--parser| option is included in the
-source code in EBNF notations.
-
-
-\section{Boolean automata}
-\label{sec:vcsn-char-b}
-
-This section focuses on the program \Index{\command{vcsn-char-b}}, the
-\tafkit component dedicated to Boolean automata.
-
-\subsection{First Contacts}
-
-\command{vcsn-char-b} and its peer components of \tafkit all share the same
-simple interface:
-
-\begin{shell}
-$ vcsn-char-b \var{function} \var{automaton} \var{arguments...}
-\end{shell}
-
-\noindent
-The \var{function} is the name of the operation to perform on the
-\var{automaton}, specified as an XML file.  Some functions, such as
-\taffn{evaluation}, require additional arguments, such as the word to
-evaluate.  Some others, such as \taffn{exp-to-aut} do not have an
-\var{automaton} argument.
-
-\tafkit is made to work with Unix \emph{pipes}, that is to say, chains
-of commands which feed each other.  Therefore, all the functions
-produce a result on the standard output, and if an \var{automaton} is
-\samp{-}, then the standard input is used.
-
-\smallskip
-
-A typical line of commands from the \tafkit reads as follows:
-\begin{shell}
-$ \kbd{vcsn-char-b determinize-nodep a1.xml > a1det.xml}
-\end{shell}
-and should be understood, or analyzed, as follows.
-\begin{enumerate}
-\item \command{vcsn-char-b} is the call to a \command{shell} command
-  that will launch a \Vauc function.  \command{vcsn-char-b} has 2
-  arguments, the first one being the \var{function} which will be
-  launched, the second being the \var{automaton} that is the input
-  argument of the \var{function}.
-
-\item \taffn{determinize} is, as just said, a \Vauc function.  And as
-  it can easily be guessed, \taffn{determinize} takes an
-  \var{automaton} as argument, performs the subset construction on it
-  and outputs the result on the standard output.
-
-\item \file{a1.xml} is the description of an automaton --- of the
-  automaton of \autoref{char-b:a1} indeed --- in an XML format that is
-  understood\footnote{%
-    This format is not exactly part of the \Vauc platform.  It has
-    been developed for providing a means of communication between
-    various programs dealing with automata.  And then it has been used
-    as a communication tool between the invocations of \Vauc function
-    by the \tafkit.  A lay user of the \tafkit should not need to know
-    how this format is defined
-    but a rough description of it is provided in \autoref{sec:xml} of
-    the Appendix.}
-  by \Vauc. This file must exist before the line is executed.  The
-  \file{data/automata} directory provides a number of XML files for
-  examples of automata, a number of programs that produce the XML
-  files for automata whose definition depend upon some variables and
-  the \tafkit itself allows to define automata and thus to produce the
-  corresponding XML files (cf. below).
-
-\item \samp{>a1det.xml} puts the result of \taffn{determinize} into
-  the file \file{a1det.xml}, that is, the XML file which describes the
-  determinized automaton of $\Ac_{1}$.
-\end{enumerate}
-
-\bigskip
-
-As a more elaborate example, consider the following command
-
-\begin{shell}
-$ \kbd{vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - | vcsn-char-b minimize - | vcsn-char-b info -}
-\end{shell}
-
-\noindent
-It fetches the automaton \code{a1} from the automaton library,
-determinizes it, minimizes the result, and finally displays
-information about the resulting automaton.
-
-Please, note the typographic conventions: user input is represented
-\texttt{\# \kbd{like this}}, standard output follows \texttt{like
-  this}, followed by standard error output \texttt{error: like this},
-and finally, if different from 0, the exit status is represented
-\texttt{=> like this}.  For instance:
-
-\begin{shell}
-$ \kbd{vcsn-char-b identity-nodep a1.xml | vcsn-char-b info -}
-\end{shell}
-
-\smallskip
-
-Other than that, the interface of the \tafkit components is usual,
-including options such as \option{--version} and \option{--help}:
-
-\begin{shell}
-$ \kbd{vcsn-char-b --help}
-\end{shell}
-
-The whole list of supported commands is available via
-\option{--list-commands}.
-
-\subsection{A first example}
-
-\Vauc provides a set of common automata.  The function
-\Index{\taffn{list-automata}} lists them all:
-
-\begin{shell}
-$ \kbd{vcsn-char-b list-automata}
-\end{shell}
-
-
-Let's consider the Boolean automaton $\Ac_1$ (\autoref{fig:a1}), part
-of the standard library.  It can be dumped using
-\Index{\taffn{identity}}:
-
-\begin{shell}
-$ \kbd{vcsn-char-b identity-nodep a1.xml}
-\end{shell}
-
-Usual shell indirections (\samp{|}, \samp{>}, and \samp{<}) can be
-used to combine \tafkit commands.  For instance, this is an easy means
-to bring a local copy of this file:
-
-\begin{shell}
-$ \kbd{vcsn-char-b identity-nodep a1.xml >my-a1.xml}
-\end{shell}
-
-\tafkit uses XML to exchange automata, to get graphical rendering of
-the automaton, you may either invoke \Index{\taffn{-o dot identity}} and then
-use a Dot compliant program, or use \Index{\taffn{display}} that does
-both.
-
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity-nodep a1.xml >a1.dot}
-\end{shell}
-
-
-\subsubsection{Determinization of $\Ac_1$}
-To determinize a Boolean automaton, call the
-\Index{\taffn{determinize}} function:
-
-\begin{shell}
-$ \kbd{vcsn-char-b identity-nodep a1.xml | vcsn-char-b determinize - >a1det.xml}
-\end{shell}
-
-To get information about an automaton, call the \Index{\taffn{info}} function:
-\begin{shell}
-$ \kbd{vcsn-char-b info a1det.xml}
-\end{shell}
-
-Or use dotty to visualize it:
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity a1det.xml >a1det.dot}
-\end{shell}
-
-\subsubsection{Evaluation}
-
-To \index{\taffn{eval}}evaluate whether a word is accepted:
-
-\begin{shell}
-$ \kbd{vcsn-char-b eval-nodep a1.xml 'abab'}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b eval-nodep a1.xml 'bbba'}
-\end{shell}
-
-\noindent
-where 1 (resp. 0) means that the word is accepted (resp. not accepted)
-by the automaton.
-
-\subsection{Interactive Definition of Automata}
-
-\tafkit provides a text interface to define automata interactively,
-rather than having to deal with XML files.  Two functions are
-available:
-\begin{description}
-\item[\taffn{define-automaton}] to build a fresh automaton from scratch,
-\item[\taffn{edit-automaton}] to modify an existing automaton,
-\end{description}
-
-The interface is based on a menu of choices:
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=ab define-automaton all.xml}
-Automaton description:
-  States: (none)
-  Initial states: (none)
-  Final states: (none)
-
-  Transitions: (none)
-
-Please choose your action:
-  1. Add states.
-  2. Delete a state.
-
-  3. Add a transition.
-  4. Delete a transition.
-
-  5. Set a state to be initial.
-  6. Set a state not to be initial.
-
-  7. Set a state to be final.
-  8. Set a state not to be final.
-
-  9. Display the automaton in Dotty.
-
-  10. Exit.
-
-Your choice [1-10]:
-\end{shell}
-
-\noindent
-If you enter \kbd{1}, you will then be prompted for the number of
-states to add, say \kbd{1} again.  The state \code{0} was created.  To
-make it initial select \kbd{5}, and:
-
-\begin{shell}
-Your choice [1-10]: \kbd{5}
-  For state: \kbd{0}
-\end{shell}
-
-Likewise to make it final, using choice \kbd{7}.  Finally, let's add a
-transition:
-
-\begin{shell}
-Your choice [1-10]: \kbd{3}
-  Add a transition from state: \kbd{0}
-  To state: \kbd{0}
-  Labeled by the expression: \kbd{a+b}
-\end{shell}
-
-\noindent
-The automaton is generalized, that is to say, rational expressions are
-valid labels.
-
-On top of the interactive menu, the current definition of the
-automaton is reported in a textual yet readable form:
-
-\begin{shell}
-Automaton description:
-  States: 0
-  Initial states: 0
-  Final states: 0
-
-  Transitions:
-    1: From 0 to 0 labeled by (\withweighttt{1}{a})+(\withweighttt{1}{b})
-\end{shell}
-
-\noindent
-Interestingly enough, states are numbered from 0, but transitions
-numbers start at 1.  Also, not that weights are reported, although
-only \code{1} is valid for Boolean automata.
-
-Finally, hit \kbd{10} to save the resulting automaton in the file
-\file{all.xml}.
-
-\subsection{Rational expressions and Boolean automata}
-
-\Vauc provides functions to manipulate rational expressions associated
-to Boolean automata.  This provides an alternative means to create
-automata:
-
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '(a+b)*' >all.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity all.xml >all.dot}
-\end{shell}
-
-\subsection{Token representations}
-
-
-\subsubsection{Minimizing}
-
-This automaton, constructed following the Thompson algorithm, is not
-the simplest one: it can be \index{minimize@\taffn{minimize}}minimized:
-
-\begin{shell}
-$ \kbd{vcsn-char-b minimize all.xml >allmin.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity allmin.xml >allmin.dot}
-\end{shell}
-
-\bigskip
-
-Computing the language recognized by a Boolean automaton can be done
-using \Index{\taffn{aut-to-exp}}:
-
-\begin{shell}
-$ \kbd{vcsn-char-b aut-to-exp all.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b aut-to-exp allmin.xml}
-\end{shell}
-
-\Vauc provides several algorithms that build an automaton that
-recognizes a given language.  The following sequence computes the
-minimal automaton of \samp{(a+b)*ab(a+b)*}.
-
-\begin{shell}
-$ \kbd{vcsn-char-b --alphabet=ab standard "(a+b)*a.b.(a+b)*" | vcsn-char-b quotient - >l1.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity l1.xml >l1.dot}
-\end{shell}
-
-\subsection{Available functions}
-
-The whole list of supported commands is available via
-\option{--list-commands}:
-
-\begin{shell}
-$ \kbd{vcsn-char-b --list-commands}
-\end{shell}
-
-
-%% Une definition plus rigoureuse des algorithmes devrait etre fournie
-%% en annexe.
-%% This section gives a brief definition of all functions that \Vauc
-%% provides for manipulating Boolean automata.  All these algorithms are
-%% invoked using \samp{vcsn-char-b \var{algorithm-name} [\var{arguments}]}. If
-%% the argument is replaced by \samp{-} then the program will read an
-%% argument from the standard input.  All algorithms dump their result to
-%% the standard output, except the ``tests'' functions that also return
-%% an exit status (0 if the test is successful, anything else otherwise).
+%%%% This is really too much detail, with no obvious usage.
+%%%%
+%% You can also use the \verb-ALPHABET- token an arbitrary number of
+%% times, to append letters to the current alphabet. The following
+%% commands:
 %%
-%% In the following:
+%% %% FIXME: include ({1} a) in the example
+%% \begin{shell}
+%% $ \kbd{vcsn-char-b --alphabet=ab exp-to-aut '((a) + b)*' >parser.xml}
+%% \end{shell}
+%% \begin{shell}
+%% $ \kbd{vcsn-char-b --output-type=dot identity parser.xml >parser.dot}
+%% \end{shell}
+%%
+%% \noindent
+%% will give the same results as:
+%% %% FIXME: include ({1} a) in the example
+%% \begin{shell}
+%% $ \kbd{vcsn-char-b --alphabet=a --parser="ALPHABET=b ONE=e STAR=star" exp-to-aut '(a + b)star' >parser2.xml}
+%% \end{shell}
+%% \begin{shell}
+%% $ \kbd{vcsn-char-b --output-type=dot identity parser2.xml >parser2.dot}
+%% \end{shell}
+%%
+%% \noindent
+%% With the \verb-ALPHABET- token, you can specify two types of letters:
+%%
 %% \begin{itemize}
-%% \item \var{a1} and \var{a2} are two Boolean automata described
-%%   in \Vauc XML format;
-%% \item \var{w} is a word, for example \samp{"aabb"} if you are
-%%   working on an alphabet that contains the letters \samp{a} and
-%%   \samp{b};
-%% \item \var{exp} is a rational expression denoting a language;
-%% \item \var{n} is a non-negative integer.
+%% \item letters: one character is used to represent a letter.
+%% \item words: many characters are used to represent a letter.
 %% \end{itemize}
 %%
+%% For example, \verb-ALPHABET=letters:abc- defines the alphabet with three letters
+%% $\{\verb-a-, \verb-b-, \verb-c-\}$, while \verb-ALPHABET=words:abc- defines the
+%% alphabet with only one letter $\{\verb-abc-\}$. Letters are separated by commas, and
+%% each \tafkit context defaults to either letters (vcsn-char-b eg) or words
+%% (vcsn-int-b eg). \verb|vcsn-int-b --alphabet=0,1,2,3,4,5,6,7,8,9| and
+%% \verb|vcsn-int-b --alphabet=letters:0123456789'| will give the same alphabets.
 %%
-%% \begin{fnsection}{Input/output work with automata}
-%% \item{define-automaton}{}{Define an automaton from scratch.}
-%% \item{edit-automaton}{a1}{Edit an existing automaton.}
-%% \item{info}{a1}{Print the number of states, transitions, initial and
-%%     final states of \var{a1}.}
-%% \item{display}{a1}{Display the automaton using Dotty.}
-%% \item{dump}{a1}{Dump the automaton to Dot format.}  \hline
-%% \end{fnsection}
+%% Everywhere you want to use special characters used by the \verb|--parser|
+%% option, prepending a backslash character will escape it. So, you can write:
+%% \verb|ALPHABET=\,,\=| which defines the alphabet with the two letters \verb-,-
+%% and \verb-=-.
 %%
-%% \begin{fnsection}{Tests and evaluation on automata}
-%% \item{are-isomorphic}{a1 a2}{Test whether \var{a1} and \var{a2} are
-%%     isomorphic.}
-%% \item{evaluation}{a1 w}{Test whether the word \var{w} is accepted by
-%%     \var{a1}.}
-%% \item{is-deterministic}{a1}{Test whether \var{a1} is deterministic.}
-%% \item{is-empty}{a1}{Test whether \var{a1} accepts no word.}  \hline
-%% \end{fnsection}
+%% Finally whenever you may put a single character you may write a pair a words.
+%% The following construction is then valid: \verb|ALPHABET=(\,,\))|, and defines
+%% the alphabet with only one letter: the pair whose first component is \verb-,-
+%% and the second one is \verb-)-.
 %%
-%% \begin{fnsection}{Generic algorithms for automata}
-%% \item{accessible}{a1}{Extract the sub-automaton of accessible states
-%%     of \var{a1}.}
-%% \item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
-%%     states of \var{a1}.}
-%% \item{trim}{a1}{Trim the automaton \var{a1}.}
-%% \item{transpose}{a1}{Compute the automaton accepting the mirror
-%%     language of the one accepted by \var{a1}.}
-%%
-%% \item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
-%%   & \option{-b} : backward closure\\
-%%   & \option{-f} : forward closure\\
-%% \item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
-%% \item{sum}{aut1 aut2}{Compute the sum of \var{a1} and \var{a2}.}
-%% %\item{normalize}{aut1}{Compute an automaton with unique initial and
-%% %    final states, with $\varepsilon$-transitions.}
-%% %\item{standardize}{aut1}{Compute an automaton with unique initial
-%% %    state without adding $\varepsilon$-transitions.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Generic algorithms for automata on letters}
-%% \item{rational-weight}{[-bf] a1}{$\varepsilon$-removal algorithm and make
-%%     every transition labeled by a letter.}
-%%   & \option{-b} : backward closure\\
-%%   & \option{-f} : forward closure\\
-%% \item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
-%%     \var{a2}.}
-%% \item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
-%%     itself \var{n} times.}
-%% \item{quotient}{a1}{Compute the minimal automaton in bi-simulation
-%%     with \var{a1}.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Algorithms specific to Boolean automata}
-%% \item{determinize}{a1}{Compute the determinized automaton of
-%%     \var{a1}.}
-%% \item{complement}{a1}{Compute an automaton that accepts the complement
-%%     language of the one accepted by \var{a1}.}
-%% \item{minimize}{[-hm] a1}{Minimize the {\em deterministic} automaton
-%%     \var{a1}.}
-%%   & \option{-h} : use the Hopcroft algorithm\\
-%%   & \option{-m} : use the Moore algorithm\\
-%%   \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Conversion between automata and expressions}
-%% \item{aut-to-exp}{a1}{Print a rational expression denoting the
-%%     language accepted by \var{a1}.}
-%% \item{expand}{exp}{Partially expand rational expressions. For
-%%     instance, expanding \samp{a(b+ab(a+b))} will produce
-%%     \samp{aab.(a+b)*+ab}}
-%% \item{derived-term}{exp}{Compute the derived term automaton of
-%%     \var{exp}.}
-%% \item{standard}{exp}{Compute the standard (Glushkov) automaton of
-%%     \var{exp}.}
-%% \item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
-%%   \hline
-%% \end{fnsection}
-%%
+%% For more details, the grammar of the \verb|--parser| option is included in the
+%% source code in EBNF notations.
 
-\newpage
+
 \section{Transducers}
 \label{sec:vcsn-char-fmp-b}
 
@@ -1597,101 +1311,53 @@ $ \kbd{vcsn-char-z quotient b4.xml | vcsn-char-z info -}
 \end{shell}
 
 
-\subsection{Available functions}
-
-In this section you will find a brief definition of all functions for
-manipulating weighted automata. The following functions are available
-for both.  They are called using \command{vcsn-char-z},
-\command{vcsn-char-z-max-plus}, and \command{vcsn-char-z-min-plus} run as
-\samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
-
-\begin{shell}
-$ \kbd{vcsn-char-z --list-commands}
-\end{shell}
-
-%% \smallskip
-%%
-%% In the following:
-%%
-%% \begin{itemize}
-%% \item \var{a1} and \var{a2} are two weighted automata described in
-%%   \Vauc XML format;
-%% \item \var{w} is a word, for example \samp{aabb} if you are working on
-%%   an alphabet that contains the letters \samp{a} and \samp{b};
-%% \item \var{exp} is a rational expression denoting a language;
-%% \item \var{n} is a non-negative integer.
-%% \end{itemize}
-%%
-%%
-%% \begin{fnsection}{Input/output work with weighted automata}
-%% \item{define-automaton}{}{Define an automaton from scratch.}
-%% \item{edit-automaton}{a1}{Edit an existing automaton.}
-%% \item{info}{a1}{Print the number of states, transitions, initial and
-%%     final states of \var{a1}.}
-%% \item{display}{a1}{Display the automaton using DOTTY.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Tests and evaluation on weighted automata}
-%% \item{are-isomorphic}{a1 a2}{Test if the two automata are isomorphic.}
-%% \item{evaluation}{a1 w}{Compute the evaluation of \var{w} by
-%%     \var{a1}.}
-%% \item{is-empty}{a1}{.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Generic algorithms for automata}
-%% \item{accessible}{a1}{Extract the sub-automaton of accessible states
-%%     of \var{a1}.}
-%% \item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
-%%     states of \var{a1}.}
-%% \item{trim}{a1}{Trim the automaton \var{a1}.}
-%% \item{transpose}{a1}{Compute the automaton accepting the mirror
-%%     language of the one accepted by \var{a1}.}
-%% \item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
-%%   & \option{-b} : backward closure\\
-%%   & \option{-f} : forward closure\\
-%% \item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
-%% \item{sum}{a1 a2}{Compute the sum of \var{a1} and \var{a2}.}
-%% %\item{normalize}{a1}{Compute an automaton with unique initial and
-%% %    final states, with $\varepsilon$-transitions.}
-%% %\item{standardize}{a1}{Compute an automaton with unique initial state
-%% %    without adding $\varepsilon$-transitions.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Generic algorithms for automata on letters}
-%% \item{realtime}{[-bf] a1}{$\varepsilon$-removal algorithm and make
-%%     every transition labeled by a letter.}
-%%   & \option{-b} : backward closure\\
-%%   & \option{-f} : forward closure\\
-%% \item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
-%%     \var{a1}.}
-%% \item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
-%%     itself \var{n} times.}
-%% \item{quotient}{a1}{Compute the $\mathbb{Z}$-quotient of \var{a1}.}
-%%   \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Conversion between automata and expressions}
-%% \item{aut-to-exp}{a1}{.}%%FIXME
-%% \item{expand}{exp}{Partially expand rational expressions.}
-%% \item{derived-term}{exp}{Compute the derived term automaton of
-%%     \var{exp}.}
-%% \item{standard}{exp}{Compute the standard (Glushkov) automaton of
-%%     \var{exp}.}
-%% \item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
-%%   \hline
-%% \end{fnsection}
-
-
-% \section{Building your own automaton}
-%%FIXME: Here we should give the usage of define_automaton function.
-
-\appendix
 
 \chapter{Automaton Repository}
 
 \Vauc comes with a set of interesting automata that can be used to toy
-with \tafkit (\autoref{sec:tafkit}) for instance.  In the chapter, we
+with \tafkit (\autoref{sec:tafkit}) for instance.  In this chapter, we
 present each one of these automata.
+
+\section{\B{} automata}
+
+\subsection{\file{a1.xml} ($\Ac_1$)}
+
+\begin{tikzpicture}[automaton]
+  % states
+  \node[state, initial] (A) at (0,0) {};
+  \node[state] (B) at (2,0) {};
+  \node[state, accepting] (C) at (4,0) {};
+  % initial--final
+  % transitions
+  \path[->] (A) edge node[above] {$a$} (B);
+  \path[->] (B) edge node[above] {$b$} (C);
+  \path[->] (A) edge [loop below] node[below] {$b$} (A);
+  \path[->] (A) edge [loop above] node[above] {$a$} (A);
+  \path[->] (C) edge [loop below] node[below] {$b$} (C);
+  \path[->] (C) edge [loop above] node[above] {$a$} (C);
+\end{tikzpicture}
+
+The automaton $\Ac_1$, defined over the alphabet $\Sigma=\{a,b\}$,
+recognizes any word of $\Sigma^\star$ that contains $ab$.
+
+\subsection{\file{b1.xml} $\Bc_1$}
+\subsection{\file{div3base2.xml}}
+
+The \command{divkbaseb} program....
+
+\subsection{\file{double-3-1.xml}}
+
+The \command{double\_ring} program....
+
+\subsection{\file{ladybird-6.xml}}
+
+The \command{ladybird} program....
+
+
+
+\section{\Z{} automata}
+
+\section{\B{} FMP}
 
 \end{document}
 

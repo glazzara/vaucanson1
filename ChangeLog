@@ -1,3 +1,14 @@
+2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make a new section of rational expressions.
+
+	* doc/manual/vaucanson-manual.tex (Writing Rational Expression):
+	New section.
+	(Empty word and null series): Move into the previous section.
+	(Interactive Definition of Automata): Create a new section out of...
+	(Boolean automata): ... some text from here, and delete the rest.
+	(Automaton Repository): Complete.
+
 2009-04-09  Alexandre Duret-Lutz  <adl@va-et-vient.net>
 
 	* doc/manual/vaucanson-manual.tex (\tafkit) More text.
