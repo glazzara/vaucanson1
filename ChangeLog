@@ -1,3 +1,8 @@
+2009-04-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* lib/krat_exp/krat_exp_bison.yy: Use "%name-prefix=" instead
+	of "%name-prefix " to please Bison < 2.4.
+
 2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Rename the yy:: namespace into vcsnyy:: to prevent potential

@@ -2,7 +2,7 @@
 %defines
 %define "parser_class_name" "krat_exp_bison"
 %error-verbose
-%name-prefix "vcsnyy"
+%name-prefix="vcsnyy"
 
 %{
 # include <vaucanson/algebra/implementation/series/krat_exp_parser_private.hh>
