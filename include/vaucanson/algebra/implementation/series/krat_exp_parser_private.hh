@@ -15,6 +15,9 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_PRIVATE_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_PRIVATE_HH
+
 # include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
 
 // These definitions really belong to lib/krat_exp/krat_exp_bison.yy,
@@ -36,3 +39,5 @@ namespace vcsnyy
     token_queue* tok_q_;
    };
 } // vcsnyy
+
+#endif // VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_PRIVATE_HH
