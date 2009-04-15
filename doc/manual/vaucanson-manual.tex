@@ -21,7 +21,7 @@
 \usetikzlibrary{arrows}
 \tikzstyle{automaton}=[shorten >=1pt,
                        node distance=2cm,
-                       pos=.4,
+                       pos=.5,
                        >=stealth',
                        every state/.style={draw,very thick,minimum size=7mm},
                        every edge/.style={draw,thick},
@@ -32,9 +32,22 @@
 \tikzstyle{loop above}=[above,out=115,in=65,loop,pos=.5]
 \tikzstyle{loop left}=[left,out=205,in=155,loop,pos=.5]
 \tikzstyle{loop below}=[below,out=295,in=245,loop,pos=.5]
+\tikzstyle{loop 60}=[out=85,in=35,loop,pos=.5]
+\tikzstyle{loop 120}=[out=145,in=95,loop,pos=.5]
+\tikzstyle{loop -60}=[out=-35,in=-85,loop,pos=.5]
+\tikzstyle{loop -120}=[out=-95,in=-145,loop,pos=.5]
 \tikzstyle{accepting}=[accepting by arrow]
+
+\makeatletter
 \tikzoption{initial angle}{\tikzaddafternodepathoption{\def\tikz@initial@angle{#1}}}
 \tikzoption{accepting angle}{\tikzaddafternodepathoption{\def\tikz@accepting@angle{#1}}}
+\makeatother
+
+\newcommand{\acceptingstate}[4]{\draw[->] (#1.#2) -- node[#3] {#4} +(#2:7mm);}
+\newcommand{\acceptingright}[2]{\acceptingstate{#1}{0}{above}{#2};}
+\newcommand{\acceptingleft}[2]{\acceptingstate{#1}{180}{above}{#2};}
+\newcommand{\acceptingabove}[2]{\acceptingstate{#1}{90}{right}{#2};}
+\newcommand{\acceptingbelow}[2]{\acceptingstate{#1}{-90}{right}{#2};}
 
 %% ---------------------- %%
 %% Mathematical symbols.  %%
@@ -72,9 +85,8 @@
 
 \newcommand{\bslash}{\texttt{\symbol{92}}}
 
-%% FIXME: it should be (#1,#2) for FMP transducers
 % A transition for a transducer.
-\newcommand{\IOL}[2]{#1\!\mid\! #2}
+\newcommand{\IOL}[2]{\ensuremath{(#1,#2)}}
 
 %% ------- %%
 %% Index.  %%
@@ -96,13 +108,6 @@
   frame=single,
   language=C++,
   float}
-
-% Document a figure.
-\newenvironment{legend}{%
-  \begin{quote}%
-    }{%
-  \end{quote}%
-}
 
 %% Display an interactive session.
 \usepackage{alltt}
@@ -134,8 +139,6 @@
 \newcommand{\taffn}[1]{\code{#1}}
 \newcommand{\tafkit}{\textsc{TAF-Kit}\xspace}
 \newcommand{\Vauc}{\textsc{Vaucanson}\xspace}
-%% Attach weights in a type writer environment.
-\newcommand{\withweighttt}[2]{\symbol{`\{}#1\symbol{`\}} #2}
 
 % \begin{fnsection}{NAME}
 % -----------------------
@@ -521,15 +524,16 @@ When commands are chained internally using \samp{\bslash|} and
 
 \subsection{Rational operators}
 
-\Vauc supports the following operators for writing regular expressions.
+Any word can be used as a rational expression.  Additionally the
+following operators can be used to combine rational expressions.
 
 \begin{center}
   \begin{tabular}{ll}
     \hline
+    $e$\code{*} & Kleen star \\
     $e_1$$e_2$ & implicit concatenation \\
     $e_1$\code{.}$e_2$ & explicit concatenation \\
     $e_1$\code{+}$e_2$ & disjunction \\
-    $e$\code{*} & Kleen star \\
     \code{(}$e$\code{)} & grouping \\
     \hline
   \end{tabular}
@@ -556,6 +560,13 @@ $ \kbd{vcsn-char-b are-equivalent -v aut.xml a1.xml}
 \noindent The \option{-v} is used to request a plain English output
 from \command{are-equivalent}.  Without it, \tafkit would just set its
 status code.  (See \autoref{sec:verbose} for more details.)
+
+\textbf{Caveat:} because \Vauc builds rational expressions on the of
+words, the Kleen star operator and the weights (introduced in
+\autoref{sec:weight}) apply to words and not letters as it is usually
+the case.  For instance \samp{ab*} is the same rational expression as
+\samp{(ab)*}, but it is different from \samp{a.b*} or \samp{a.(b*)}.
+
 
 \subsection{Empty word and null series}\label{sec:emptyword}
 
@@ -592,8 +603,19 @@ Section~\ref{sec:writingdata} shows how you can actually specify you
 own representation for these symbols
 
 
-\subsection{Weights}
+\subsection{Weights}\label{sec:weight}
 
+Weights are written in braces as in \samp{\{3\}}.
+
+For instance the automaton $\Cc_1$ from \autoref{sec:z:c1} corresponds
+to the rational expression \samp{(a+b)*.b.(\{2\}a+\{2\}b)*}.
+
+\begin{shell}
+$ \kbd{vcsn-char-z aut-to-exp c1.xml}
+(a+b)*.b.(\{2\} a+\{2\} b)*
+\end{shell}%$
+
+FIXME: Explain Left/Right weights.
 
 \subsection{Interactive Definition of Automata}
 
@@ -671,7 +693,7 @@ Automaton description:
   Final states: 0
 
   Transitions:
-    1: From 0 to 0 labeled by (\withweighttt{1}{a})+(\withweighttt{1}{b})
+    1: From 0 to 0 labeled by (\{1\} a)+(\{1\} b)
 \end{shell}
 
 \noindent
@@ -765,7 +787,7 @@ Some character alphabets are predefined.  These are:
 \begin{center}
 \begin{tabular}{ll}
 \samp{letters} & The lower case letters $\{a,b,\ldots,z\}$.\\
-\samp{alpha} & The upper and lower case letters $\{a,b,ldots,z,A,B,\ldots,Z\}$.\\
+\samp{alpha} & The upper and lower case letters $\{a,b,\ldots,z,A,B,\ldots,Z\}$.\\
 \samp{digit} & All digits $\{0,1,\ldots,9\}$.\\
 \samp{ascii} & All ASCII characters.\\
 \end{tabular}
@@ -942,10 +964,11 @@ not need additional information to read its input.  However the
 will be \emph{output}.
 
 Here is an example where we create a rational expression over the
-alphabet $\{(,)\}$ using $[$ and $]$ for grouping and store it into
-the file \file{p.xml}.  We can them convert this file back into a
-string using either the stored writing data, or overwriting these data
-with different ones (here $<$ and $>$ for grouping.
+alphabet $\{\code{(},\code{)}\}$ using \samp{[} and \samp{]} for
+grouping, and store it into the file \file{p.xml}.  We can then
+convert this file back into a string using either the original writing
+data that were stored in the file, or overwriting these data with
+different ones (here using \samp{<} and \samp{>} for grouping).
 
 \begin{shell}
 $ \kbd{vcsn-char-b -a'\(\)' --parser='OPAR=[ CPAR=]' identity-exp -oxml '([()]*)' >p.xml}
@@ -961,6 +984,103 @@ only purpose is to read and write the rational expression using any
 I/O option supplied on the command-line.\footnote{When reading a
   rational expression, trivial identities are also rewritten. (FIXME:
   ref).}
+
+\section{An example of \Z-automaton}
+
+This part shows some uses of the program \command{vcsn-char-z}.
+
+\subsection{Counting \samp{b}s}
+
+\begin{figure}[tp] \centering
+  \begin{tikzpicture}[automaton]
+    \node[state, initial] (A) at (0,0) {};
+    \node[state, accepting] (B) at (2,0) {};
+    \path[->] (A) edge node[above] {$b$} (B);
+    \path[->] (A) edge[loop below] node[below] {$b$} (A);
+    \path[->] (A) edge[loop above] node[above] {$a$} (A);
+    \path[->] (B) edge[loop below] node[below] {$b$} (B);
+    \path[->] (B) edge[loop above] node[above] {$a$} (B);
+  \end{tikzpicture}
+  \caption{$\Bc_1$: When defined over the Boolean semiring $\langle
+    \B,\lor,\land \rangle$, $\Bc_1$ accepts words with at least one
+    $b$.  When defined over the integer semiring $\langle \Z,+,\times
+    \rangle$, $\Bc_1$ counts the number of $b$ in a word.\label{fig:b1}}
+\end{figure}
+
+Let's consider $\Bc_1$ (\autoref{fig:b1}), an
+\index{N-automaton@$\mathbb{N}$-automaton}$\mathbb{N}$-automaton,
+\textit{i.e.}  an automaton whose label's weights are in $\mathbb{N}$.
+This time the evaluation of the word \var{w} by the automaton
+$\Bc_1$ will produce a number, rather than simply accept or
+reject \var{w}.  For instance let's evaluate \samp{abab} and
+\samp{bbab}:
+
+\begin{shell}
+$ \kbd{vcsn-char-z eval b1.xml abbb}
+3
+$ \kbd{vcsn-char-z eval b1.xml abab}
+2
+\end{shell}
+
+\noindent
+Indeed, $\Bc_1$ counts the number of \samp{b}s.
+
+\subsubsection{Power}
+
+Now let's consider the $\Bc_1^n$, where
+\begin{displaymath}
+  \Bc_1^n = \prod_{i=1}^n \Bc_1, n > 0
+\end{displaymath}
+
+\noindent
+This is implemented by the \Index{\taffn{power}} function:
+
+\begin{shell}
+$ \kbd{vcsn-char-z power b1.xml 4 > b4.xml}
+\end{shell}%$
+
+\noindent
+The file \file{b4.xml} now contains the automaton $\Bc_1^4$.  Let's
+check that the evaluation of the words \samp{abab} and \samp{bbab} by
+$\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
+
+\begin{shell}
+$ \kbd{vcsn-char-z eval b4.xml abbb}
+81
+$ \kbd{vcsn-char-z eval b4.xml abab}
+14
+\end{shell}%$
+
+\subsubsection{Quotient}
+
+Successive products of an automaton create a lot of new states and
+transitions.
+
+\begin{shell}
+$ \kbd{vcsn-char-z info b1.xml}
+States: 2
+Transitions: 5
+Initial states: 1
+Final states: 1
+$ \kbd{vcsn-char-z info b4.xml}
+States: 16
+Transitions: 97
+Initial states: 1
+Final states: 1
+\end{shell}%$
+
+\noindent
+One way of reducing the size of our automaton is to use the
+\Index{\taffn{quotient}} algorithm.
+
+\begin{shell}
+$ \kbd{vcsn-char-z quotient b4.xml \bslash| vcsn-char-z info -}
+States: 5
+Transitions: 15
+Initial states: 1
+Final states: 1
+\end{shell}%$
+
 
 %%%% This is really too much detail, with no obvious usage.
 %%%%
@@ -1015,51 +1135,29 @@ I/O option supplied on the command-line.\footnote{When reading a
 %% source code in EBNF notations.
 
 
-\section{Transducers}
-\label{sec:vcsn-char-fmp-b}
+% \section{Transducers}
+% \label{sec:vcsn-char-fmp-b}
+%
+% While the \Vauc library supports two views of transducers, currently
+% \tafkit only provides one view:
+%
+% \begin{description}
+% \item[vcsn-char-fmp-b] considering a transducer as a weighted automaton of a
+%   product of free monoid,
+% \end{description}
+%
+% In a forthcoming release, \tafkit will provide:
+%
+% \begin{description}
+% \item[vcsn-char-rw] considering a transducer as a machine that takes a
+%   word as input and produce another word as (two-tape automata).
+% \end{description}
+%
+% Both views are equivalent and \Vauc provides algorithms to pass from a
+% view to the other one.
+%
+% \subsection{Example}
 
-While the \Vauc library supports two views of transducers, currently
-\tafkit only provides one view:
-
-\begin{description}
-\item[vcsn-char-fmp-b] considering a transducer as a weighted automaton of a
-  product of free monoid,
-\end{description}
-
-In a forthcoming release, \tafkit will provide:
-
-\begin{description}
-\item[vcsn-char-rw] considering a transducer as a machine that takes a
-  word as input and produce another word as (two-tape automata).
-\end{description}
-
-Both views are equivalent and \Vauc provides algorithms to pass from a
-view to the other one.
-
-\subsection{Example}
-
-\begin{figure}[tp]
-  \begin{center}
-    \begin{tikzpicture}[automaton]
-      % states
-      \node[state, initial left, accepting below] (A) at (0,0) {};
-      \node[state] (B) at (3,0) {};
-      \node[state] (C) at (6,0) {};
-      % transitions
-      \path[->] (A) edge [loop above] node[above] {$\IOL{0}{0}$} (A);
-      \path[->] (C) edge [loop above] node[above] {$\IOL{1}{1}$} (C);
-      \path[->] (A) edge [bend left] node[above] {$\IOL{1}{0}$} (B);
-      \path[->] (B) edge [bend left] node[above] {$\IOL{1}{1}$} (A);
-      \path[->] (B) edge [bend left] node[above] {$\IOL{0}{0}$} (C);
-      \path[->] (C) edge [bend left] node[above] {$\IOL{0}{1}$} (B);
-    \end{tikzpicture}
-    \begin{legend}
-      The transducer computing the quotient by 3 of a binary number.
-    \end{legend}
-    \caption{Rational-weight transducer $\Tc_1$}
-    \label{fig:t1}
-  \end{center}
-\end{figure}
 
 %% \begin{figure}[tp]
 %%   \begin{center}
@@ -1081,9 +1179,9 @@ view to the other one.
 %%   \end{center}
 %% \end{figure}
 
-To experiment with transducers, we will use \index{T1@$\Tc_1$}$\Tc_1$,
-described in \autoref{fig:t1}, and part of the automaton library
-(\autoref{char-fmp-b:t1}).
+% To experiment with transducers, we will use \index{T1@$\Tc_1$}$\Tc_1$,
+% described in \autoref{fig:t1}, and part of the automaton library
+% (\autoref{char-fmp-b:t1}).
 
 %% \subsubsection{Evaluation}
 %%
@@ -1094,221 +1192,43 @@ described in \autoref{fig:t1}, and part of the automaton library
 %% $ \kbd{vcsn-char-fmp-b --alphabet1=ab eval t1.xml 'bba'}
 %% \end{shell}
 
-\subsubsection{Domain}
-The transducer $T$ only accepts binary numbers divisible by 3.
+% \subsubsection{Domain}
+% The transducer $T$ only accepts binary numbers divisible by 3.
+%
+% \begin{shell}
+% $ \kbd{vcsn-char-fmp-b identity-nodep t1.xml | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml}
+% \end{shell}
+%
+% Now the file \file{divisible-by-3.xml} contains the description of a
+% Boolean automaton that accepts only the numbers divisible by 3:
+%
+% \begin{shell}
+% $ \kbd{vcsn-char-b --output-type=dot identity div-by-3.xml >div-by-3.dot}
+% \end{shell}
+%
+%
+% %% \subsubsection{to-tdc}
+% %% Each transducer can be transformed to the other type of transducer
+% %% thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
+% %% \begin{shell}
+% %% $ \kbd{vcsn-char-rw to-tdc quot_3_rw.xml > quot_3.xml}
+% %% $ \kbd{vcsn-char-fmp-b to-rw-tdc add1.xml > add1_rw.xml}
+% %% \end{shell}
+% %%
+% %% \subsubsection{Composing}
+% %% \begin{shell}
+% %% $ \kbd{vcsn-char-fmp-b compose quot_3.xml add1.xml}
+% %% \end{shell}
+%
+% \subsection{Available functions}
+% The following functions are available for both \command{vcsn-char-rw}
+% and \command{vcsn-char-fmp-b} programs.  To invoke them, run
+% \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
+%
+% \begin{shell}
+% $ \kbd{vcsn-char-fmp-b --list-commands}
+% \end{shell}
 
-\begin{shell}
-$ \kbd{vcsn-char-fmp-b identity-nodep t1.xml | vcsn-char-fmp-b --alphabet1=ab domain - >div-by-3.xml}
-\end{shell}
-
-Now the file \file{divisible-by-3.xml} contains the description of a
-Boolean automaton that accepts only the numbers divisible by 3:
-
-\begin{shell}
-$ \kbd{vcsn-char-b --output-type=dot identity div-by-3.xml >div-by-3.dot}
-\end{shell}
-
-
-%% \subsubsection{to-tdc}
-%% Each transducer can be transformed to the other type of transducer
-%% thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
-%% \begin{shell}
-%% $ \kbd{vcsn-char-rw to-tdc quot_3_rw.xml > quot_3.xml}
-%% $ \kbd{vcsn-char-fmp-b to-rw-tdc add1.xml > add1_rw.xml}
-%% \end{shell}
-%%
-%% \subsubsection{Composing}
-%% \begin{shell}
-%% $ \kbd{vcsn-char-fmp-b compose quot_3.xml add1.xml}
-%% \end{shell}
-
-\subsection{Available functions}
-The following functions are available for both \command{vcsn-char-rw}
-and \command{vcsn-char-fmp-b} programs.  To invoke them, run
-\samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
-
-\begin{shell}
-$ \kbd{vcsn-char-fmp-b --list-commands}
-\end{shell}
-
-%% In the following:
-%%
-%% \begin{itemize}
-%% \item \var{t1} and \var{t2} are two transducers (either ``rational-weight''
-%%   or not) described in \Vauc XML format;
-%% \item \var{w} is a word, for example \samp{"aabb"} if you are working
-%%   on an alphabet that contains the letters \samp{a} and \samp{b};
-%% \item \var{a} is a Boolean automaton;
-%% \item \var{t1-rw} is a rational-weight transducer;
-%% \item \var{t1-fmp} is a transducer (seen as an automaton over a free
-%%   monoid product).
-%% \end{itemize}
-%%
-%% \begin{fnsection}{Input/output work with transducers}
-%% \item{define-automaton}{}{Define a transducer from scratch.}
-%% \item{edit-automaton}{t1}{Edit an existing transducer.}
-%% \item{info}{t1}{Print the number of states, transitions, initial and
-%%     final states of \var{t1}.}
-%% \item{display}{t1}{Display the transducer using DOTTY.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Tests and evaluation on transducers}
-%% \item{are-isomorphic}{t1 t2}{Test if the two transducers are
-%%     isomorphic.}
-%% \item{evaluation}{t1 w}{Compute the evaluation of \var{w} by
-%%     \var{t1}.}
-%% \item{is-empty}{t1}{Test if \var{t1} realizes the empty relation.}
-%%   \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Generic algorithm for transducers}
-%% \item{closure}{t1}{$\varepsilon$-removal algorithm.}
-%%
-%% \item{compose}{t1 t2}{Compute a transducer realizing $f_2 \circ f_1$,
-%%     where $f_1$ (resp. $f_2$) is the function associated to \var{t1}
-%%     (resp. \var{t2}).}
-%%
-%% \item{domain}{t1}{Compute an automaton accepting all input accepted by
-%%     the transducer t1.}
-%%
-%% \item{evaluation}{t1}{Compute the evaluation of w by t1.}
-%%
-%% \item{evaluation-aut}{t1}{Compute a Boolean automaton describing the
-%%     words produced by the language described by a evaluated by t1.}
-%%
-%% \item{image}{t1}{Compute an automaton describing all output produced
-%%     by the transducer t1.}
-%%
-%% %\item{transpose}{t1}{Compute the transposed of the transducer t1.}
-%%
-%% \item{trim}{t1}{Compute the trimmed transducer of t1.}  \hline
-%% \end{fnsection}
-%%
-%% \begin{fnsection}{Algorithms for transducers}
-%% \item{sub-normalize}{t1-fmp}{Compute the sub-normalized transducer of
-%%     \var{t1-fmp}.}
-%% \item{is-sub-normalized}{t1-fmp}{Test if \var{t1-fmp} is
-%%     sub-normalized.}
-%% \item{composition-cover}{t1-fmp}{.}%%FIXME
-%% \item{composition-co-cover}{t1-fmp}{.}%%FIXME
-%% \item{b-compose}{t1-fmp t2-fmp}{Compose \var{t1-fmp} and
-%%     \var{t2-fmp}, two unweighted normalized or sub-normalized
-%%     transducers.}
-%% \item{to-rw-tdc}{t1-fmp}{Compute the equivalent realtime transducer
-%%     of \var{t1-fmp}.}
-%% \item{intersection}{a}{Transform \var{a} in a fmp transducer by
-%%     creating, for each word, a pair containing twice this word.}
-%%   \hline
-%% \end{fnsection}
-%%
-%%
-%% \begin{fnsection}{Algorithms for ``realtime'' transducers}
-%% \item{realtime}{t1-rw}{Compute the realtime transducer of  \var{t1-rw}.}
-%% \item{is-realtime}{t1-rw}{Test if \var{t1-rw} is realtime.}
-%% \item{to-tdc}{t1-rw}{Compute the equivalent fmp transducer of \var{t1-rw}.}
-%% \hline
-%% \end{fnsection}
-
-\newpage
-\section{\Z-Automata}
-\label{sec:vcsn-char-z}
-
-This part shows the use of the program \Index{\command{vcsn-char-z}}, but
-all comments should also stand for the programs
-\command{vcsn-char-z-min-plus} and \command{vcsn-char-z-max-plus}.
-
-Again, we will toy with some of the automata provided by
-\command{vcsn-char-z}, see \autoref{sec:auto:char-z}.
-
-\subsection{Counting \samp{b}s}
-
-\begin{figure}[tp] \centering
-  \begin{tikzpicture}[automaton]
-    % states
-    \node[state, initial] (A) at (0,0) {};
-    \node[state, accepting] (B) at (3,0) {};
-    % initial--final
-    % transitions
-    \path[->] (A) edge node[above] {$b$} (B);
-    \path[->] (A) edge [loop below] node[below] {$b$} (A);
-    \path[->] (A) edge [loop above] node[above] {$a$} (A);
-    \path[->] (B) edge [loop below] node[below] {$b$} (B);
-    \path[->] (B) edge [loop above] node[above] {$a$} (B);
-  \end{tikzpicture}
-  \begin{legend}
-    Considered without weight, $\Bc_1$ accepts words with a \samp{b}.
-    With weights, it counts the number of \samp{b}s.
-    \index{B1@$\Bc_1$}
-  \end{legend}
-  \caption{The automaton $\Bc_1$}
-  \label{fig:b1}
-\end{figure}
-
-Let's consider $\Bc_1$ (\autoref{fig:b1}), an
-\index{N-automaton@$\mathbb{N}$-automaton}$\mathbb{N}$-automaton,
-\textit{i.e.}  an automaton whose label's weights are in $\mathbb{N}$.
-This time the evaluation of the word \var{w} by the automaton
-$\Bc_1$ will produce a number, rather than simply accept or
-reject \var{w}.  For instance let's evaluate \samp{abab} and
-\samp{bbab}:
-
-\begin{shell}
-$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abbb'}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z eval - 'abab'}
-\end{shell}
-
-\noindent
-Indeed, $\Bc_1$ counts the number of \samp{b}s.
-
-\subsubsection{Power}
-
-Now let's consider the $\Bc_1^n$, where
-\begin{displaymath}
-  \Bc_1^n = \prod_{i=1}^n \Bc_1, n > 0
-\end{displaymath}
-
-\noindent
-This is implemented by the \Index{\taffn{power}} function:
-
-\begin{shell}
-$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z power - 4 >b4.xml}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-z power b1.xml 4 > b4.xml}
-\end{shell}
-
-\noindent
-The file \file{b4.xml} now contains the automaton $\Bc_1^4$.  Let's
-check that the evaluation of the words \samp{abab} and \samp{bbab} by
-$\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
-
-\begin{shell}
-$ \kbd{vcsn-char-z eval b4.xml 'abbb'}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-z eval b4.xml 'abab'}
-\end{shell}
-
-\subsubsection{Quotient}
-
-Successive products of an automaton create a lot of new states and
-transitions.
-
-\begin{shell}
-$ \kbd{vcsn-char-z identity-nodep b1.xml | vcsn-char-z info -}
-\end{shell}
-\begin{shell}
-$ \kbd{vcsn-char-z info b4.xml}
-\end{shell}
-
-One way of reducing the size of our automaton is to use the
-\Index{\taffn{quotient}} algorithm.
-
-\begin{shell}
-$ \kbd{vcsn-char-z quotient b4.xml | vcsn-char-z info -}
-\end{shell}
 
 
 
@@ -1320,44 +1240,247 @@ present each one of these automata.
 
 \section{\B{} automata}
 
+The following automata are predefined files that can be loaded with
+\command{vcsn-char-b}.
+
 \subsection{\file{a1.xml} ($\Ac_1$)}
 
 \begin{tikzpicture}[automaton]
-  % states
   \node[state, initial] (A) at (0,0) {};
   \node[state] (B) at (2,0) {};
   \node[state, accepting] (C) at (4,0) {};
-  % initial--final
-  % transitions
   \path[->] (A) edge node[above] {$a$} (B);
   \path[->] (B) edge node[above] {$b$} (C);
-  \path[->] (A) edge [loop below] node[below] {$b$} (A);
-  \path[->] (A) edge [loop above] node[above] {$a$} (A);
-  \path[->] (C) edge [loop below] node[below] {$b$} (C);
-  \path[->] (C) edge [loop above] node[above] {$a$} (C);
+  \path[->] (A) edge[loop below] node[below] {$b$} (A);
+  \path[->] (A) edge[loop above] node[above] {$a$} (A);
+  \path[->] (C) edge[loop below] node[below] {$b$} (C);
+  \path[->] (C) edge[loop above] node[above] {$a$} (C);
 \end{tikzpicture}
 
 The automaton $\Ac_1$, defined over the alphabet $\Sigma=\{a,b\}$,
 recognizes any word of $\Sigma^\star$ that contains $ab$.
 
-\subsection{\file{b1.xml} $\Bc_1$}
+\subsection{\file{b1.xml} ($\Bc_1$)}\label{sec:b:b1}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial] (A) at (0,0) {};
+  \node[state, accepting] (B) at (2,0) {};
+  \path[->] (A) edge node[above] {$b$} (B);
+  \path[->] (A) edge[loop below] node[below] {$b$} (A);
+  \path[->] (A) edge[loop above] node[above] {$a$} (A);
+  \path[->] (B) edge[loop below] node[below] {$b$} (B);
+  \path[->] (B) edge[loop above] node[above] {$a$} (B);
+\end{tikzpicture}
+
+The Boolean automaton $\Bc_1$ accepts words with at least one $b$.
+
+See also \autoref{sec:z:b1} where $\Bc_1$ is defined over
+$\langle \Z,+,\times\rangle$.
+
 \subsection{\file{div3base2.xml}}
 
-The \command{divkbaseb} program....
+\begin{tikzpicture}[automaton]
+  \node[state, initial above, accepting below]  (S0) at (0,0) {$0$};
+  \node[state] (S1) at (2,0) {$1$};
+  \node[state] (S2) at (4,0) {$2$};
+  \path[->] (S0) edge[loop left] node[left] {$0$} (S0);
+  \path[->] (S0) edge[bend left] node[above] {$1$} (S1);
+  \path[->] (S1) edge[bend left] node[above] {$0$} (S2);
+  \path[->] (S2) edge[loop right] node[right] {$1$} (S2);
+  \path[->] (S2) edge[bend left] node[below] {$0$} (S1);
+  \path[->] (S1) edge[bend left] node[below] {$1$} (S0);
+\end{tikzpicture}
+
+This deterministic automaton is defined on the alphabet
+$\Sigma=\{0,1\}$ and recognizes the base-2 representations of all the
+integers that are divisible by $3$.
+
+The source code distribution of \Vauc actually comes with a
+programs called \command{divkbaseb} that can generate a divisor
+by any integer $k$ in any base $b$.  The program is located
+in \file{data/automata/char-b/divkbaseb} in the source tree,
+and take $k$ and $b$ as arguments.
+
+In the general case the binary digits should be read from left to
+right.  In the case of \file{div3base2.xml} the digits can also be
+read from right to left because the automaton is symmetric.
 
 \subsection{\file{double-3-1.xml}}
 
-The \command{double\_ring} program....
+\begin{tikzpicture}[automaton]
+  \node[state, initial]  (S0) at  (180:1.5cm) {$0$};
+  \node[state, accepting] (S1) at (-60:1.5cm) {$1$};
+  \node[state]                    (S2) at (60:1.5cm) {$2$};
+  \path[->] (S0) edge[bend right=20] node[auto] {$a$} (S1);
+  \path[->] (S1) edge[bend right=20] node[auto] {$a$} (S2);
+  \path[->] (S2) edge[bend right=20] node[auto] {$a$} (S0);
+  \path[->] (S2) edge[bend left=45] node[auto] {$b$} (S1);
+  \path[->] (S1) edge[bend left=45] node[auto] {$b$} (S0);
+  \path[->] (S0) edge[bend left=45] node[auto] {$b$} (S2);
+\end{tikzpicture}
+
+This deterministic automaton has three states organized as a double
+ring.  It can read $a$ in one direction and $b$ in the other
+direction.
+
+The program \command{data/automata/char-b/double\_ring} can be used to
+generate a ring of any number of states.  It takes that number of
+states as first argument, and the list of initial states in the
+remaining arguments.  The above example uses $3$ states and state $1$
+as initial state, hence the name \file{double-3-1.xml}.
+
 
 \subsection{\file{ladybird-6.xml}}
 
-The \command{ladybird} program....
+\begin{tikzpicture}[automaton, initial angle=45, accepting angle=-45]
+  \node[state, initial, accepting]  (S0) at  (0:1.5cm) {};
+  \node[state] (S1) at (-60:1.5cm) {};
+  \node[state] (S2) at (-120:1.5cm) {};
+  \node[state] (S3) at (-180:1.5cm) {};
+  \node[state] (S4) at (-240:1.5cm) {};
+  \node[state] (S5) at (-300:1.5cm) {};
+  \path[->] (S0) edge[bend left] node[auto] {$a$} (S1);
+  \path[->] (S1) edge[bend left] node[auto] {$a$} (S2);
+  \path[->] (S2) edge[bend left] node[auto] {$a$} (S3);
+  \path[->] (S3) edge[bend left] node[auto] {$a$} (S4);
+  \path[->] (S4) edge[bend left] node[auto] {$a$} (S5);
+  \path[->] (S5) edge[bend left] node[auto] {$a$} (S0);
 
+  \path[->] (S1) edge[loop -60]  node[below] {$b,c$} (S1);
+  \path[->] (S2) edge[loop -120] node[below] {$b,c$} (S2);
+  \path[->] (S3) edge[loop left] node[left]  {$b,c$} (S3);
+  \path[->] (S4) edge[loop 120]  node[above] {$b,c$} (S4);
+  \path[->] (S5) edge[loop 60]   node[above] {$b,c$} (S5);
 
+  \path[->] (S1) edge node[left] {$c$} (S0);
+  \path[->] (S2) edge node[above] {$c$} (S0);
+  \path[->] (S3) edge node[above] {$c$} (S0);
+  \path[->] (S4) edge node[above] {$c$} (S0);
+  \path[->] (S5) edge node[left] {$c$} (S0);
+\end{tikzpicture}
+
+A non-deterministic automaton of $6$ states whose determinized version
+(using the powerset construction) has $2^6$ states.  We call it
+ladybird simply because its drawing looks like a \emph{Coccinella}.
+
+The \command{data/automata/char-b/ladybird} program can be used to
+produce ladybirds of any size, just pass the number of states $n$ as
+first argument.  We like to use ladybirds for benchmarking because
+their determinization always produce the worst case with $2^n$ states.
 
 \section{\Z{} automata}
 
+The following automata are predefined files that can be loaded with
+\command{vcsn-char-z}.
+
+\subsection{\file{b1.xml} ($\Bc_1$)}\label{sec:z:b1}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial] (A) at (0,0) {};
+  \node[state, accepting] (B) at (2,0) {};
+  \path[->] (A) edge node[above] {$b$} (B);
+  \path[->] (A) edge[loop below] node[below] {$b$} (A);
+  \path[->] (A) edge[loop above] node[above] {$a$} (A);
+  \path[->] (B) edge[loop below] node[below] {$b$} (B);
+  \path[->] (B) edge[loop above] node[above] {$a$} (B);
+\end{tikzpicture}
+
+This automaton has the same structure as the one from
+\autoref{sec:b:b1} but a different type.  When defined over the
+$\langle \Z,+,\times\rangle$ semiring, this automaton is counting the
+number of $b$ in a word.
+
+\subsection{\file{c1.xml} ($\Cc_1$)}\label{sec:z:c1}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial] (A) at (0,0) {};
+  \node[state, accepting] (B) at (2,0) {};
+  \path[->] (A) edge node[above] {$b$} (B);
+  \path[->] (A) edge[loop above] node[above] {$a+b$} (A);
+  \path[->] (B) edge[loop above] node[above] {$\{2\}a+\{2\}b$} (B);
+\end{tikzpicture}
+
+FIXME: Document this automaton.
+
+\subsection{\file{div3base10.xml}}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial]   (S0) at (-180:1.5cm) {$0$};
+  \node[state] (S1) at (60:1.5cm) {$1$};
+  \node[state] (S2) at (-60:1.5) {$2$};
+
+  \acceptingright{S1}{$e$}
+  \acceptingright{S2}{$\{2\}e$}
+
+  \path[->] (S0) edge[loop 120] node[above] {$0,3,6,9$} (S0);
+  \path[->] (S0) edge[bend left] node[above=1mm] {$1,4,7$} (S1);
+  \path[->] (S0) edge node[above=-.5ex, sloped] {$2,5,8$} (S2);
+
+  \path[->] (S1) edge[loop above] node[above] {$0,3,6,9$} (S1);
+  \path[->] (S1) edge node[below, sloped] {$2,5,8$} (S0);
+  \path[->] (S1) edge[bend left] node[right] {$1,4,7$} (S2);
+
+  \path[->] (S2) edge[loop below] node[below] {$0,3,6,9$} (S2);
+  \path[->] (S2) edge[bend left] node[below left] {$1,4,7$} (S0);
+  \path[->] (S2) edge node[left] {$2,5,8$} (S1);
+\end{tikzpicture}
+
+This automaton computes the remainder of an integer division by $3$.
+The integer to divide should be expressed in base $10$ and its digits
+should be read from left to right (although it does not matter in the
+case of a division by $3$).
+
+The program \file{data/automata/char-z/divkbaseb}, in the source tree,
+can be used to construct such a divisor by $k$ in any base $b$.
+
 \section{\B{} FMP}
+
+The following transducers are predefined files that can be loaded with
+\command{vcsn-char-fmp-b}.
+
+\subsection{\file{quot3base2.xml}}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial above, accepting below] (A) at (0,0) {$0$};
+  \node[state] (B) at (2,0) {$1$};
+  \node[state] (C) at (4,0) {$2$};
+  \path[->] (A) edge[loop left] node[left] {$\IOL{0}{0}$} (A);
+  \path[->] (C) edge[loop right] node[right] {$\IOL{1}{1}$} (C);
+  \path[->] (A) edge[bend left] node[above] {$\IOL{1}{0}$} (B);
+  \path[->] (B) edge[bend left] node[below] {$\IOL{1}{1}$} (A);
+  \path[->] (B) edge[bend left] node[above] {$\IOL{0}{0}$} (C);
+  \path[->] (C) edge[bend left] node[below] {$\IOL{0}{1}$} (B);
+\end{tikzpicture}
+
+A transducer computing the quotient by $3$ of a binary number, read
+from left to right.
+
+The program \file{data/automata/char-fmp-b/quotkbaseb}, in the source
+tree, can be used to construct such a divisor by $k$ in any base $b$.
+
+\subsection{\file{t1.xml}}
+
+\begin{tikzpicture}[automaton]
+  \node[state, accepting below]                (A) at (0,0) {};
+  \node[state, accepting below, initial above] (B) at (2,0) {};
+  \node[state]                                 (C) at (4,0) {};
+  \path[->] (A) edge[bend left] node[above] {$\IOL{1}{y}$} (B);
+  \path[->] (B) edge[bend left] node[below] {$\IOL{a}{1}$} (A);
+  \path[->] (B) edge[bend left] node[above] {$\IOL{1}{x}$} (C);
+  \path[->] (C) edge[bend left] node[below] {$\IOL{b}{1}$} (B);
+\end{tikzpicture}
+
+\subsection{\file{u1.xml}}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial above]                  (A) at (0,0) {};
+  \node[state, accepting below, initial above] (B) at (2,0) {};
+  \node[state]                                 (C) at (4,0) {};
+  \path[->] (A) edge[bend left] node[above] {$\IOL{x}{1}$} (B);
+  \path[->] (B) edge[bend left] node[below] {$\IOL{1}{v}$} (A);
+  \path[->] (B) edge[bend left] node[above] {$\IOL{y}{1}$} (C);
+  \path[->] (C) edge[bend left] node[below] {$\IOL{1}{u}$} (B);
+\end{tikzpicture}
 
 \end{document}
 

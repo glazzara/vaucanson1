@@ -1,5 +1,13 @@
 2009-04-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	More documentation.
+
+	* doc/manual/vaucanson-manual.tex: Fill the automaton repository.
+	Add some words about weights.  Kill the old examples from the doc
+	except the part about Z-automata.
+
+2009-04-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* lrde-upload.sh: Do not use git to compute the name of the
 	branch.  Buildbot will now pass the branch name as first argument.
 
