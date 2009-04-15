@@ -6,8 +6,8 @@
 set -e
 set -x
 
-# Find out which branch has been compiled.
-rev=`git name-rev --name-only HEAD`
+# Buildbot will tell us the name of the branch being compiled using $1.
+rev=$1
 
 case $rev in
   next|hive) rev=snapshot-$rev;;
