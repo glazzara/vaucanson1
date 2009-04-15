@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,7 +57,10 @@ namespace vcsn
 	  return std::make_pair(false, 0);
 
 	int ret = 0;
-	sstr >> ret;
+	// Do not skip spaces when translating numbers, otherwise a
+	// blank string such as " " would be translated into 0 without
+	// any problem.
+ 	sstr >> std::noskipws >> ret;
 
 	// Check if something is left in the stream.
 	if (!sstr.eof())
