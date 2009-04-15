@@ -1,3 +1,24 @@
+2009-04-16  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix make check.
+
+	Use CBS in demos, disable CBS in tests (for faster
+	compilation/link), disable CBS in vaucanswig.
+
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/one_rule_rewriting/Makefile.am,
+	* src/demos/vgrep/Makefile.am:
+	Add cbs include dir, link with libbench.la.
+
+	* src/tests/xml/Makefile.am,
+	* src/tests/check/check-flags.mk,
+	* src/tests/sanity/Makefile.am:
+	Add cbs include dir. Disable bench (-DBENCH_DISABLED).
+
+	* vaucanswig/expand.sh,
+	* vaucanswig/meta/Makefile.am:
+	Add cbs include dir. Disable bench (-DBENCH_DISABLED).
+
 2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update cbs.

@@ -229,8 +229,9 @@ cat <<EOF
 ##
 
 INCLUDES = -I\$(PYTHON_INCLUDEDIR) -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
-    -I\$(top_srcdir)/include -I\$(top_builddir)/include
-AM_CPPFLAGS = \$(BOOST_CPPFLAGS) -DINTERNAL_CHECKS -DSTRICT -DVCSN_DEFAULT_GRAPH_IMPL=listg
+           -I\$(top_srcdir)/include -I\$(top_builddir)/include \\
+           -I\$(top_srcdir)/cbs/include -I\$(top_builddir)/cbs/include
+AM_CPPFLAGS = \$(BOOST_CPPFLAGS) -DINTERNAL_CHECKS -DSTRICT -DVCSN_DEFAULT_GRAPH_IMPL=listg -DBENCH_DISABLED
 AM_CXXFLAGS = \$(CXXFLAGS_DEBUG)
 AM_LDFLAGS = -avoid-version
 

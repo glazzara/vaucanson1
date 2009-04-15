@@ -11,7 +11,8 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-INCLUDES = -I$(srcdir) -I$(top_srcdir)/include -I$(top_builddir)/include
+INCLUDES = -I$(srcdir) -I$(top_srcdir)/include -I$(top_builddir)/include \
+	   -I$(top_srcdir)/cbs/include -I$(top_builddir)/cbs/include
 
 EXTRA_DIST =					\
 	automaton.hh				\
@@ -28,5 +29,5 @@ EXTRA_DIST =					\
 lib_LTLIBRARIES = libvv.la
 
 libvv_la_SOURCES = vcontext.cc vauto.cc
-libvv_la_CPPFLAGS = -DVCSN_DEFAULT_GRAPH_IMPL=listg
+libvv_la_CPPFLAGS = -DVCSN_DEFAULT_GRAPH_IMPL=listg -DBENCH_DISABLED
 libvv_la_LIBADD = $(top_builddir)/lib/libvcsn-common-ex.la
