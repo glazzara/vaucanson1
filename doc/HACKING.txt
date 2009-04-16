@@ -102,7 +102,7 @@ The GNU standard C++ library comes with some useful debugging
 features.  Just add ``-D_GLIBCXX_DEBUG`` to your ``CPPFLAGS``
 when compiling Vaucanson.
 
-You are likely to encounter issues with `singular` iterators.  It
+You are likely to encounter issues with *singular* iterators.  It
 refers to default-constructed iterators, which is not the same thing
 as being the ``end()`` of a given container.  They are write-only
 according to the STL, and copying them is not allowed.
@@ -112,7 +112,7 @@ As a result, the following code is incorrect::
   std::vector<std::list<int>::iterator> is(10);
 
 This is because this vector constructor builds a single default object
-(here a default ``std::list<int>::iterator``, then `copies` it ten
+(here a default ``std::list<int>::iterator``, then *copies* it ten
 times, which is (ten times) forbidden.  As there is no clear means to
 rewrite the code to avoid this violation, you might want to use
 ``end()`` iterators, which can be used in comparisons, can be copied,
@@ -257,7 +257,7 @@ will eventually be merged into ``master`` when preparing a release.
   any time you have to fix a bug on ``hive``, please fix it in
   the appropriate ``exp/*`` branch and merge it back into ``hive``.
 
-- When preparing a release we will want to pick `some` of the mature
+- When preparing a release we will want to pick *some* of the mature
   ``exp/*`` branches and merge them into ``master``.  (This is why you
   should never fix ``hive`` directly.)  Once a branch has been merged
   into ``master``, it can be erased.
@@ -291,8 +291,8 @@ the maturity of a branch.
   - Define precisely what is being computed.
 
     For instance the Doxygen documentation for the function
-    ``realtime()``, that converts an automaton to a `realtime
-    automaton`, is a good place to define what a `realtime automaton`
+    ``realtime()``, that converts an automaton to a *realtime
+    automaton*, is a good place to define what a *realtime automaton*
     is.  Other places that use realtime automata should point to this
     definition.
 
@@ -422,7 +422,7 @@ branches.  A cache size of 4GB can be setup with::
   ccache -M 4G
 
 Note the because Vaucanson usually compiles a lot of header files into
-a single program, it's likely that a change to a `common` include file
+a single program, it's likely that a change to a *common* include file
 will invalidate most of your cache.
 
 
