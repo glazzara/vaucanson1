@@ -1,5 +1,13 @@
 2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix spurious calls to find_tests.sh and potential race conditions.
+
+	* build-aux/find_tests.sh: Use $$ in temporary files to prevent
+	races if this script is run more than once.
+	* Makefile.am (build-aux/tests.m4): Always touch the output.
+
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/manual/vaucanson-manual.tex (Trivial Identities): New section.
 
 2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
