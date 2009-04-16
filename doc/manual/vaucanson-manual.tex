@@ -619,6 +619,57 @@ $ \kbd{vcsn-char-z aut-to-exp c1.xml}
 
 FIXME: Explain Left/Right weights.
 
+\subsection{Trivial Identities}
+
+Anytime a rational expression is constructed inside \Vauc, the
+following rewriting, called \emph{trivial identities}, are
+automatically applied.
+
+Here $E$ stands for any rational expression, $w$ is any word, and $k$
+and $h$ are weights.  In these notations it should also be obvious
+that $0$ and $1$ designate the identity of the monoïd (empty word) and
+null series, while $\{0\}$ and $\{1\}$ designate the zero and identity
+of the semiring (weights).  Any subexpression of a form listed to the
+left of a `$\Rightarrow$' is rewritten as indicated on the right.
+
+\begin{align*}
+  E+0 = 0+E &\Rightarrow E
+& E.1 = 1.E  &\Rightarrow  E
+& \{k\}(\{h\}E) &\Rightarrow \{kh\}E
+\\
+  E.0 = 0.E &\Rightarrow 0
+& \{1\}E = E\{1\} &\Rightarrow  E
+& (E\{k\})\{h\} &\Rightarrow E\{kh\}
+\\
+  0^\star  &\Rightarrow 1
+& 1\{k\} &\Rightarrow  \{k\}1
+& (\{k\}E)\{h\} &\Rightarrow \{k\}(E\{h\})
+\\
+  \{k\}0 = 0\{k\} &\Rightarrow 0
+& (\{k\}1).E  &\Rightarrow  \{k\}E
+& w\{k\}        &\Rightarrow \{k\}w
+\\
+  \{0\}E = E\{0\} &\Rightarrow 0
+& E.(\{k\}1)  &\Rightarrow  E\{k\}
+\\
+\end{align*}
+
+These rewriting mean that it is \emph{impossible} for \Vauc to emit a
+rational expression such as \samp{(\{3\}(0(ab)))*\{4\}}.  This
+expression is \emph{by construction} equal to \samp{\{4\}1}.  We can
+verify this using the \command{identity-exp}:
+
+\begin{shell}
+$ \kbd{vcsn-char-z identity-exp --alphabet=ab "(\{3\}(0(ab)))*\{4\}"}
+\{4\} 1
+\end{shell}
+
+\noindent the command \command{identity-exp} does not apply any
+algorithm on the rational expression.  Its only purpose is to read and
+write the rational expression using any I/O option supplied on the
+command-line.  The trivial identities are performed while reading the
+expression.
+
 \section{Interactive Definition of Automata}
 
 The \tafkit command \taffn{edit-automaton} provides a textual
@@ -981,12 +1032,6 @@ $ \kbd{vcsn-char-b --parser='OPAR=< CPAR=>' identity-exp -ixml p.xml}
 (.<(.)>*.)
 \end{shell}%$
 
-\noindent the command \command{indentity-exp} used in the above
-example does not apply any algorithm on the rational expression.  Its
-only purpose is to read and write the rational expression using any
-I/O option supplied on the command-line.\footnote{When reading a
-  rational expression, trivial identities are also rewritten. (FIXME:
-  ref).}
 
 \section{An example of \Z-automaton}
 
