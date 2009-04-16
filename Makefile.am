@@ -49,8 +49,11 @@ BUILT_SOURCES = include/vaucanson/config/pconf.hh
 ###
 ACLOCAL_AMFLAGS = -I build-aux -I m4
 
+# Even if find_tests.sh says tests.m4 needs not be updated, we want it
+# to be newer than find_tests.sh.
 $(top_srcdir)/build-aux/tests.m4: $(top_srcdir)/build-aux/find_tests.sh
 	cd $(top_srcdir) && build-aux/find_tests.sh
+	touch $@
 
 ###
 ### Making the demos. (. is builddir)
