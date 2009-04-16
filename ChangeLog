@@ -1,5 +1,10 @@
 2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* src/tests/test-suites/algebra_numerical_semiring_int.defs: Add a
+	newline at EOF to kill a GCC warning.
+
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix spurious calls to find_tests.sh and potential race conditions.
 
 	* build-aux/find_tests.sh: Use $$ in temporary files to prevent
