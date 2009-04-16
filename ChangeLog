@@ -1,3 +1,8 @@
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/manual/vaucanson-manual.tex: Fix some typos and reword some
+	phrases.
+
 2009-04-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	More documentation.

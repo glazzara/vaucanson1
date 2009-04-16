@@ -202,11 +202,11 @@ The platform consists in a couple of components:
   possible to write an algorithm once and apply it to different types
   of automata.  However this genericity is achieved in a way that
   should not cause any slowdown at runtime: because the type of the
-  automata manipulated is known at compile time, compiling an
+  automaton manipulated is known at compile time, compiling an
   algorithm will generate code that is almost as efficient as an
-  algorithm dedicated to this type of automaton.
+  algorithm written specifically for this type of automaton.
 
-\item[\tafkit] is a command-line interface to the library, that allows
+\item[\tafkit] is a command-line interface to the library that allows
   user to execute \Vauc's algorithms without any knowledge of \Cxx.
   Because the \Vauc library needs to know the type of automata at
   compile time, the \tafkit interface has been instantiated for a
@@ -222,7 +222,7 @@ The platform consists in a couple of components:
 \end{description}
 
 Ideally this manual should document all of these components.
-Presently it only documents \tafkit because that is the more
+Presently it mostly documents \tafkit, because that is the more
 accessible part of \Vauc.
 
 
@@ -245,7 +245,7 @@ details.
 Detailed information is provided in the files \file{INSTALL}, which is
 generic to all packages using the GNU Build System, and
 \file{doc/README.pdf} which details \Vauc's specific build process.
-The typical installation commands will install \Vauc in
+The following installation commands will install \Vauc in
 \file{/usr/local/}.
 
 \begin{shell}
@@ -257,11 +257,11 @@ $ \kbd{sudo make install}
 
 Although we discourage it, you may also use \Vauc without installing
 it: you would have to use \kbd{-I
-  /full-path-to/vaucanson-\VcsnVersion/include} when compiling C++
+  /full-path-to/vaucanson-\VcsnVersion/include} when compiling \Cxx
 programs, and move to directory
 \file{vaucanson-\VcsnVersion/taf-kit/tests/} to execute \tafkit.
 (This directory contains wrapper around the real \tafkit programs from
-\file{taf-kit/tests/} that enable them to run locally.)
+\file{taf-kit/src/} that enable them to run locally.)
 
 \section{Getting in Touch}
 
@@ -273,7 +273,7 @@ and report bugs to either our issue tracker at
 You can subscribe to these mailing lists at
 \url{https://www.lrde.epita.fr/cgi-bin/mailman/listinfo/vaucanson} and
 \url{https://www.lrde.epita.fr/cgi-bin/mailman/listinfo/vaucanson-bugs}
-if you like, but this is not a requirement for sending mails.
+if you like, but this is not a requirement for sending e-mails.
 
 \chapter{\tafkit}
 \label{sec:tafkit}
@@ -284,13 +284,12 @@ operations on automata.
 
 \section{\tafkit Instances}
 
-Because of the generic programming paradigm used in the \Vauc library,
-the types of the automata manipulated have to be known at compile
-time.  \tafkit has therefore been compiled for several predefined
-types of automata.  It is actually the same program that is
-\emph{instantiated} for different kinds of alphabets and weights.
-Here are the names of these instances, and the kind of automata they
-represent:
+In the generic programming paradigm used in the \Vauc library, the
+types of the automata manipulated have to be known at compile time.
+\tafkit has therefore been compiled for several predefined types of
+automata.  It is actually the same program that is \emph{instantiated}
+for different kinds of alphabets and weights.  Here are the names of
+these instances, and the kind of automata they represent:
 
 \begin{center}
 \begin{tabular}{llll}
@@ -335,9 +334,9 @@ automata. \command{vcsn-char-b} is the \tafkit instance they should
 use.  A variant of this program, called \command{vcsn-int-b}, handles
 Boolean automata whose letters are integers.  Other variants such as
 \command{vcsn-char-char-b}, \command{vcsn-char-int-b}, or
-\command{vcsn-int-int-b}, support alphabets of pairs.  All these are
-called Boolean automata because each word is associated to a Boolean
-\emph{weight}: either the word as accepted and its weight is
+\command{vcsn-int-int-b}, support alphabets of pairs.  All of these
+are called Boolean automata because each word is associated to a
+Boolean \emph{weight}: either the word as accepted and its weight is
 \emph{true}, or it is not and its weight is \emph{false}.
 
 \Vauc actually supports automata with multiplicities, where words can
@@ -351,14 +350,6 @@ these FMP, for \emph{free monoïd products}.  The above table lists a
 few \tafkit instance for FMP.
 
 \section{A First Contact}\label{sec:firstcontact}
-
-If you have fully installed \Vauc (see \autoref{sec:building}) you
-should be able to just type any of the following commands and observe
-their results.  If you only compiled \Vauc without installing it, you
-should \command{cd} into the
-\file{vaucanson-\VcsnVersion/taf-kit/tests/} directory and type
-\kbd{./vcsn-char-b} instead of \kbd{vcsn-char-b} for each of the
-following commands.
 
 \begin{figure}[tbp] \centering
   \begin{tikzpicture}[automaton]
@@ -376,7 +367,7 @@ following commands.
     \path[->] (C) edge [loop above] node[above] {$a$} (C);
   \end{tikzpicture}
   \caption{The automaton $\Ac_1$, defined over the alphabet
-    $\Sigma=\{a,b\}$.  It recognizes any word of $\Sigma^\star$ that
+    $\Sigma=\{a,b\}$ recognizes any word of $\Sigma^\star$ that
     contains $ab$. \label{fig:a1}}
 \end{figure}
 
@@ -386,6 +377,14 @@ and $\Ac_1$ happens to be one of those: it is called \file{a1.xml}.
 This is a Boolean automaton whose alphabet consists in two characters
 $\{a,b\}$ so will shall use the \command{vcsn-char-b} instance of
 \tafkit.
+
+If you have fully installed \Vauc (see \autoref{sec:building}) you
+should be able to just type any of the following commands and observe
+their results.  If you only compiled \Vauc without installing it, you
+should \command{cd} into the
+\file{vaucanson-\VcsnVersion/taf-kit/tests/} directory and type
+\samp{./vcsn-char-b} instead of \samp{vcsn-char-b} for each of the
+following commands.
 
 The following command will just make sure that \tafkit knows about
 this automaton.  It will display the number of states, transitions,
@@ -412,9 +411,9 @@ The displayed automaton won't have a layout as pretty as
 
 $\Ac_1$ is a non-deterministic automaton.  We could determinize it
 with the \command{determinize} command of \tafkit.  As most commands
-of \tafkit, \command{determinize} produce its output (an XML file
+of \tafkit, \command{determinize} produces its output (an XML file
 representing the automaton) on the standard output, so we will want to
-divert it to a file.
+divert it to a file using a shell redirection.
 
 \begin{shell}
 $ \kbd{vcsn-char-b determinize a1.xml > a1det.xml}
@@ -434,7 +433,8 @@ in \Vauc's predefined automata repository.  We can call command
 \command{info} on either files using the same syntax because \tafkit
 will look for automata in both places.  The command \samp{vcsn-char-b
   list-automata} will list all predefined automata for this instance
-of \tafkit.
+of \tafkit.  See also \autoref{chap:autrepository} for a presentation
+of these files.
 
 In the pure Unix tradition, we can of course chain commands with
 pipes.  For instance the above two commands could be rewritten
@@ -450,16 +450,16 @@ Final states: 2
 where \samp{-} stands for `\emph{read from standard input}'.
 
 
-\tafkit actually supports a more efficient way of chaining commands,
-called the \emph{internal pipe}.  It's called \emph{internal pipe}
-because the pipe logic is taken care of by \tafkit himself, but
-actually it is not using a Unix pipe at all: the commands are simply
-serialized in the same process, using the automata object created by
-the previous one.  It is more efficient because the automaton does not
-have to be converted into XML for output, and then parsed as input of
-the next command in the chain.  Here is how the \emph{internal pipe}
-looks like; notice how the \samp{|} symbol is protected from its
-evaluation by the shell.
+\tafkit actually supports a more efficient way of chaining commands:
+the \emph{internal pipe}.  It's called \emph{internal pipe} because
+the pipe logic is taken care of by \tafkit himself, but actually it is
+not using a Unix pipe at all: the commands are simply serialized in
+the same process, using the automata object created by the previous
+one.  It is more efficient because the automaton does not have to be
+converted into XML for output, and then parsed back as input of the
+next command in the chain.  Here is how the above command would look
+using an \emph{internal pipe}; notice how the \samp{|} symbol is
+protected from its evaluation by the shell.
 
 \begin{shell}
 $ \kbd{vcsn-char-b determinize a1.xml \bslash| info -}
@@ -493,7 +493,7 @@ and arguments.
 
 The \emph{internal pipe}, \samp{\bslash|}, is used to separate
 commands.  A command start with a name, is can be followed by several
-arguments (although only one is used in the above two commands).
+arguments (although only one is used in the above example).
 These arguments can be very different depending on the command.  The
 far we have used filenames as well as \samp{-} (to designate either
 the standard input or the result of the previous command).  Some
@@ -503,8 +503,9 @@ or a rational expression.
 All commands will also accept some options.  There are options to
 define what the alphabet is, options to define the types to use for
 input and output, even options to fine-tune how some symbols will be
-printed.  We shall get back to these options later.
+printed.  We shall get back to these options in \autoref{sec:iooptions}.
 
+\medskip
 
 For each command, \tafkit will
 \begin{enumerate}
@@ -539,9 +540,9 @@ following operators can be used to combine rational expressions.
   \end{tabular}
 \end{center}
 
-On the alphabet $\Sigma=\{a,b\}$, the language denoted by the rational
-expression \samp{(a+b)*ab(a+b)*} contains all words that contain
-\samp{ab}.
+For instance, on the alphabet $\Sigma=\{a,b\}$, the language denoted
+by the rational expression \samp{(a+b)*ab(a+b)*} contains all words
+that contain \samp{ab}.
 
 The \Vauc library always needs to know on which alphabet a rational
 expression is defined in order to parse it.  This alphabet can be
@@ -561,11 +562,12 @@ $ \kbd{vcsn-char-b are-equivalent -v aut.xml a1.xml}
 from \command{are-equivalent}.  Without it, \tafkit would just set its
 status code.  (See \autoref{sec:verbose} for more details.)
 
-\textbf{Caveat:} because \Vauc builds rational expressions on the of
+\textbf{Caveat:} because \Vauc builds rational expressions on top of
 words, the Kleen star operator and the weights (introduced in
 \autoref{sec:weight}) apply to words and not letters as it is usually
-the case.  For instance \samp{ab*} is the same rational expression as
-\samp{(ab)*}, but it is different from \samp{a.b*} or \samp{a.(b*)}.
+the case in other application.  For instance \samp{ab*} is the same
+rational expression as \samp{(ab)*} for \Vauc, but it is different
+from \samp{a.b*} or \samp{a.(b*)}.
 
 
 \subsection{Empty word and null series}\label{sec:emptyword}
@@ -583,8 +585,8 @@ a+ab+b+1
 Of course if we use \samp{1} as one character in the alphabet, the
 same symbol cannot be used for representing the empty word.  \Vauc
 actually choose the first available representation of the empty word
-from the following list of candidate symbols: \samp{1}, \samp{e}, and
-\samp{\_e}, \samp{eps}.
+from the following list of candidate symbols: \samp{1}, \samp{e},
+\samp{\_e}, or \samp{eps}.
 
 \begin{shell}
 $ \kbd{vcsn-char-b expand -a01 '(0+e)(e+1)'}
@@ -597,7 +599,7 @@ For integer alphabets, the empty word is of course always \samp{e}.
 
 Similarly the symbol used to represent the null series defaults to the
 first representation from the following list that is compatible with
-the alphabet: \samp{0}, \samp{z}, \samp{\_z}, \samp{zero}.
+the alphabet: \samp{0}, \samp{z}, \samp{\_z}, or \samp{zero}.
 
 Section~\ref{sec:writingdata} shows how you can actually specify you
 own representation for these symbols
@@ -617,7 +619,7 @@ $ \kbd{vcsn-char-z aut-to-exp c1.xml}
 
 FIXME: Explain Left/Right weights.
 
-\subsection{Interactive Definition of Automata}
+\section{Interactive Definition of Automata}
 
 The \tafkit command \taffn{edit-automaton} provides a textual
 interface to define automata interactively.  The commands takes the
@@ -706,7 +708,7 @@ Finally, hit \kbd{10} to save the resulting automaton in the file
 
 
 
-\section{Command I/O options}
+\section{Command I/O options}\label{sec:iooption}
 
 As we said in~\autoref{sec:modusoperandi}, each \tafkit command has to
 read its input and write its output.  In this section we only cover
@@ -735,8 +737,8 @@ When \tafkit reads an XML file, there is no need to specify any other
 information besides the name of the file.  For instance when we read
 \file{a1.xml} in~\autoref{sec:firstcontact} and determinized this
 automaton, we did not have to tell \tafkit that the alphabet was
-$\Sigma=\{a,b\}$.  The XML is self-contained and already contains this
-information.
+$\Sigma=\{a,b\}$.  The XML file is self-contained and already contains
+this information.
 
 Here is a situation where specifying an alphabet is mandatory:
 \begin{shell}
@@ -770,10 +772,10 @@ used in the above examples), the letters of the alphabets can be
 arbitrary ASCII characters, and need just to be listed after
 the \samp{--alphabet=} or \samp{-a} option.
 
-When specifying characters alphabets, some characters like \samp{ }
-(space), \samp{"}, \samp{(}, \samp{)}, \samp{'}, and \samp{=} have to
-be escaped with a backslash.  For instance the following command will
-create an automaton that recognize numbers of the form
+When specifying characters alphabets, the characters \samp{ } (space),
+\samp{"}, \samp{(}, \samp{)}, \samp{'}, \samp{=}, and \samp{\bslash},
+have to be escaped with a backslash.  For instance the following
+command will create an automaton that recognize numbers of the form
 \samp{12,456,789}, where a comma must be used as thousand separator:
 note how the comma must be escaped in the alphabet
 
@@ -795,8 +797,8 @@ Some character alphabets are predefined.  These are:
 
 \noindent
 This means that \samp{-aletters} is an abbreviation for
-\samp{-aabcdefghijklmnopqrstuvwxyz}.  You get always get the above
-list by typing \samp{vcsn-char-b --help}.
+\samp{-aabcdefghijklmnopqrstuvwxyz}.  You can always get the above
+list of predefined alphabet by typing \samp{vcsn-char-b --help}.
 
 \paragraph{Integer alphabets}
 
@@ -812,8 +814,8 @@ $ \kbd{vcsn-int-b exp-to-aut -a1,2,5,10,20,50 '1*2*5*10*20*50*' > coins.xml}
 
 \paragraph{Pair alphabets}
 
-Pair alphabets should be specified using parenthesis group pairs and
-commas to separate the constituents of a pair.  For instance:
+Pair alphabets should be specified using parentheses and commans to
+form pairs.  For instance:
 
 \begin{shell}
 $ \kbd{vcsn-char-int-b exp-to-aut -a'(a,1)(b,2)(a,-1)' '(a,-1)(a,1)+(b,2)' > misc.xml}
@@ -834,18 +836,18 @@ rational expressions, words, weights and Boolean results.
 
 \begin{description}
 \item[words] are always read as strings given on the command line, and
-  written on standard output.
-\item[automata] are read from a filename specified on the command
-  line, and output on standard output.  \Vauc can read automata in two
-  formats: FSMXML (the default), or the textual format of FSM.  It can
-  also write automata in these formats, or the \samp{dot} format, used
-  for graphical output.
+  written to standard output.
+\item[automata] are read from a file whose filename specified on the
+  command line, and output on standard output.  \Vauc can read
+  automata in two formats: FSMXML (the default), or the textual format
+  of FSM.  It can also write automata in these formats, as well as in the
+  \samp{dot} format that can be used for graphical output.
 \item[rational expression] are by default read as strings given on the
   command line, and output as strings on standard output.
   Alternatively rational expression can be read from an FSMXML file whose
   filename is given on the command line, and output in FSMXML as well.
 \item[weight results] (such as the result of the evaluation of a word on
-  an automaton) are simply output as strings on the standard output
+  an automaton) are simply output as strings on the standard output.
 \item[Boolean results] (such as the result of asking whether an automaton
   is empty) are returned using the status code of the
   \tafkit instance, so that these commands can be used as conditions
@@ -888,8 +890,8 @@ $ \kbd{vcsn-char-b identity -odot aut.xml > aut.dot}
 
 \paragraph{Verbose Boolean results}\label{sec:verbose}
 
-As said above boolean results are returned using the program's status
-code using the Unix convention (that is: $0$ for \emph{true} and any
+As said above, boolean results are returned using the program's status
+code using the Unix convention (that is $0$ for \emph{true} and any
 other value for \emph{false}). The shell makes this value available in
 the \samp{\$?} variable.  The \tafkit option \samp{--verbose} or \samp{-v}
 can be used to request an English interpretation of this value.
@@ -905,8 +907,9 @@ Input is not empty
 \subsection{Specifying writing data}\label{sec:writingdata}
 
 Section~\ref{sec:emptyword} showed how the empty word and null series
-can have different symbols.  \Vauc actually allows other symbols used
-in rational expression to be changed.
+can have different representations depending on the alphabet.  \Vauc
+actually allows other symbols used in rational expression to be
+changed to arbitrary strings.
 
 Here is the list of named symbols with their meaning and default
 values:
@@ -944,7 +947,7 @@ $ \kbd{vcsn-char-b -a'\(\)' --parser='OPAR=[ CPAR=]' exp-to-aut '([()]*)' >paren
 \end{shell}%$
 
 The values of these symbols, which we call the \emph{writing data},
-are stored in the XML file, so there is no need to specify this again
+are stored in the XML file, so there is no need to specify them again
 when working from a file.
 
 \begin{shell}
@@ -1007,13 +1010,11 @@ This part shows some uses of the program \command{vcsn-char-z}.
     \rangle$, $\Bc_1$ counts the number of $b$ in a word.\label{fig:b1}}
 \end{figure}
 
-Let's consider $\Bc_1$ (\autoref{fig:b1}), an
-\index{N-automaton@$\mathbb{N}$-automaton}$\mathbb{N}$-automaton,
-\textit{i.e.}  an automaton whose label's weights are in $\mathbb{N}$.
-This time the evaluation of the word \var{w} by the automaton
-$\Bc_1$ will produce a number, rather than simply accept or
-reject \var{w}.  For instance let's evaluate \samp{abab} and
-\samp{bbab}:
+Let's consider $\Bc_1$ for \autoref{fig:b1}: a \Z-automaton,
+\textit{i.e.}  an automaton whose label's weights are in \Z.  This
+time the evaluation of the word \var{w} by the automaton $\Bc_1$ will
+produce a number, rather than simply accept or reject \var{w}.  For
+instance let's evaluate \samp{abab} and \samp{bbab}:
 
 \begin{shell}
 $ \kbd{vcsn-char-z eval b1.xml abbb}
@@ -1232,7 +1233,7 @@ Final states: 1
 
 
 
-\chapter{Automaton Repository}
+\chapter{Automaton Repository}\label{chap:autrepository}
 
 \Vauc comes with a set of interesting automata that can be used to toy
 with \tafkit (\autoref{sec:tafkit}) for instance.  In this chapter, we
