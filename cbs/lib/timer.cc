@@ -33,6 +33,7 @@
 
 #define INLINE_TIMER_CC
 
+#define MAIN_TASK_NAME "_program"
 
 namespace timer
 {
@@ -121,8 +122,8 @@ namespace timer
 
     tasks_.resize (1);
 
-    names_["_program_"] = 0;
-    tasks_[0].name_     = "_Program_";
+    names_[MAIN_TASK_NAME] = 0;
+    tasks_[0].name_     = MAIN_TASK_NAME;
     tasks_[0].id_       = 0;
 
     time_.set_to_now ();
@@ -199,10 +200,7 @@ namespace timer
     {
       return tasks_[calls_.top ().called_].name_;
     }
-    std::cerr << "Timer.current_task: No tasks. Timer may not be running."
-	      << std::endl;
-    assert (false);
-    return "";
+    return MAIN_TASK_NAME;
   }
 
   INLINE_TIMER_CC

@@ -1,3 +1,10 @@
+2009-04-28  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: aef3055d95b926d6242ebbce64a128df044cbba2.
+	See cbs/Changelog.
+
 2009-04-16  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Fix make check.

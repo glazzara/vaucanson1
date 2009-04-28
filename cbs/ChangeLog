@@ -1,3 +1,115 @@
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update README_LIBBENCH figures.
+
+	* README_LIBBENCH: Update figures.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add data from vcsn tests.
+
+	* demo/vcsn/vcsn-quotient-fix-1.data,
+	* demo/vcsn/vcsn-quotient-fix.data,
+	* demo/vcsn/vcsn-quotient-orig.data,
+	* demo/vcsn/vcsn-quotient.plot: New.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add plotting helpers to timer-bench.
+
+	* demo/timer-bench/get-results.sh,
+	* demo/timer-bench/timer-many-tasks-memory.plot,
+	* demo/timer-bench/timer-many-tasks.plot,
+	* demo/timer-bench/timer-recursion-memory.plot,
+	* demo/timer-bench/timer-recursion-time.plot,
+	* demo/timer-bench/timer-scoped-memory.plot,
+	* demo/timer-bench/timer-scoped.plot: New.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update comparaison demo.
+
+	* demo/comparison/main.cc: Update.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add memplot bench demo.
+
+	* configure.ac: Add Makefile.
+	* demo/Makefile.am: Add subdir.
+	* demo/memplot-bench/Makefile.am: New.
+	* demo/memplot-bench/main.cc: New.
+	* demo/memplot-bench/get-results.sh,
+	* demo/memplot-bench/results-memory.plot,
+	* demo/memplot-bench/results-time.plot: New.  Plotting helpers.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add comparison demo for several profilers.
+
+	Works with CBS, gprof, kcachegrind.
+
+	* configure.ac: Add Makefile.
+	* demo/Makefile.am: Add subdir.
+	* demo/comparison/Makefile.am,
+	* demo/comparison/README,
+	* demo/comparison/main.cc: Add demo.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Remove obsolete demo scripts.
+
+	* demo/bench/demo.sh: Deleted.
+	* demo/bench/display.sh: Deleted.
+	* demo/bench/plot.sh: Deleted.
+	* demo/timer/demo.sh: Deleted.
+	* demo/timer/display.sh: Deleted.
+	* demo/timer/timer-demo.sh: Deleted.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	(Memplot) Fix measure.
+
+	* lib/memplot.cc: Remove loop.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	(Memplot) Remove brk measure.
+
+	* include/cbs/bench/memplot.hh,
+	* lib/memplot.cc: Remove memory_brk.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update demos.
+
+	* demo/Makefile.am: Add new dir.
+	* demo/bench/main.cc: Add memplot, tweak.
+	* demo/memplot/Makefile.am,
+	* demo/memplot/main.cc: Add memplot demo.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Tweak timer main task name.
+
+	* lib/timer.cc: Add macro for name, change name.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update TODO.
+
+	* TODO: Update.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add memplot implementation.
+
+	* configure.ac: Add new Makefile.
+	* include/cbs/bench/memplot.hh: Update interface.
+	* lib/Makefile.am: Add new file.
+	* lib/bench.cc: Add implementation.
+	* lib/memplot.cc: Add implementation.
+
 2009-04-12  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Add convenient overloads for result/parameter.

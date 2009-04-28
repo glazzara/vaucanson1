@@ -18,30 +18,59 @@
 #ifndef BENCH_MEMPLOT_HH_
 # define BENCH_MEMPLOT_HH_
 
+// STL
+# include <ctime>
+# include <iostream>
+# include <vector>
+# include <string>
+
+// CBS
 # include <cbs/bench/bench.hh>
 
 namespace memplot
 {
-  struct Plot
+  class Memplot
   {
-    std::string task;
-    std::string description;
+  public:
+    struct Plot
+    {
+      std::string task;
+      std::string description;
 
-    long int memory;
-    long int time;
+      unsigned memory;
+      unsigned memory_rss;
+      time_t rawtime;
+
+      Plot(std::string task, std::string description);
+      Plot(const Plot& plot);
+      const Plot& operator=(const Plot& plot);
+
+      bool operator<(const Plot& plot);
+    };
+
+    Memplot();
+    ~Memplot();
+
+    // Measure the memory usage at a given time.
+    void plot(const std::string& task, const std::string& description);
+
+    // Clear all data.
+    void clear();
+
+    // Return the maximum memory used.
+    const Plot& max();
+
+    // Export the current data.
+    void dump(std::ostream& stream, bench::Options options);
+
+  private:
+    void dump_xml_(std::ostream& stream, bench::Options options);
+    void dump_text_(std::ostream& stream, bench::Options options);
+    void dump_dot_(std::ostream& stream, bench::Options options);
+
+    Plot max_;
+    std::vector<Plot> plots_;
   };
-
-  // Measure the memory usage at a given time.
-  void plot(const std::string& task, const std::string& description);
-
-  // Clear all data.
-  void clear();
-
-  // Return the maximum memory used.
-  const Plot& max();
-
-  // Export the current data.
-  void dump(std::ostream& stream, bench::Options options);
 }
 
 #endif //!BENCH_MEMPLOT_HH_

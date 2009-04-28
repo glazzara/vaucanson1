@@ -44,8 +44,11 @@ AC_CONFIG_FILES([
 	lib/Makefile
 	include/Makefile
 	demo/Makefile
+	  demo/comparison/Makefile
 	  demo/timer/Makefile
 	  demo/timer-bench/Makefile
+	  demo/memplot-bench/Makefile
+	  demo/memplot/Makefile
 	  demo/bench/Makefile])
 
 AC_OUTPUT

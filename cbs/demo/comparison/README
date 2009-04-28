@@ -1,0 +1,26 @@
+-- Using CBS --
+
+In build dir:
+
+   time ./demo-cbs <n>
+
+
+-- Using gprof --
+
+In build dir:
+
+   time ./demo-gprof <n>
+   gprof ./demo-gprof
+
+Note: results seem wrong.
+
+
+-- Using callgrind --
+
+In build dir:
+
+   time valgrind --tool=callgrind --dump-every-bb=10000000 ./demo-generic <n>
+   kcachegrind
+   rm callgrind.*
+
+Note: callgrind files would stack between multiple executions.

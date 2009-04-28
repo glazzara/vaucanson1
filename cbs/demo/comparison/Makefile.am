@@ -14,12 +14,17 @@
 
 include $(top_srcdir)/cbs.mk
 
-AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
+noinst_PROGRAMS = demo-cbs demo-gprof demo-generic
 
-lib_LTLIBRARIES = libbench.la
-libbench_la_SOURCES = bench.cc			\
-                      memplot.cc		\
-                      timer.cc			\
-                      timer_graph.cc		\
-                      timer_gathering.cc
-libbench_la_CPPFLAGS = $(AM_CPPFLAGS)
+demo_cbs_SOURCES = main.cc
+demo_cbs_LDADD = $(top_builddir)/lib/libbench.la
+demo_cbs_CPPFLAGS = $(AM_CPPFLAGS)
+
+demo_gprof_SOURCES = main.cc
+demo_gprof_LDADD =
+demo_gprof_CPPFLAGS = $(AM_CPPFLAGS) -DBENCH_DISABLED -pg
+demo_gprof_LDFLAGS = -pg
+
+demo_generic_SOURCES = main.cc
+demo_generic_LDADD =
+demo_generic_CPPFLAGS = $(AM_CPPFLAGS) -DBENCH_DISABLED

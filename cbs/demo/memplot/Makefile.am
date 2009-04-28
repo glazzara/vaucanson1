@@ -14,12 +14,7 @@
 
 include $(top_srcdir)/cbs.mk
 
-AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
-
-lib_LTLIBRARIES = libbench.la
-libbench_la_SOURCES = bench.cc			\
-                      memplot.cc		\
-                      timer.cc			\
-                      timer_graph.cc		\
-                      timer_gathering.cc
-libbench_la_CPPFLAGS = $(AM_CPPFLAGS)
+noinst_PROGRAMS = demo-memplot
+demo_memplot_SOURCES = main.cc
+demo_memplot_LDADD = $(top_builddir)/lib/libbench.la
+demo_memplot_CPPFLAGS = $(AM_CPPFLAGS)

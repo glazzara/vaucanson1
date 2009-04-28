@@ -18,51 +18,42 @@
 #include <list>
 #include <cbs/bench/bench_macros.hh>
 
-#define WAIT(Duration)				\
-  for (int j = 0; j < 10; ++j)			\
-    for (int k = 0; k < 270 * Duration; ++k)	\
-    {						\
-      int* i = new int(4);			\
-      delete i;					\
-    }
-
-#define CONSUME(Memory)				\
-  {						\
-    std::list<int> list;			\
-    for (int j = 0; j < Memory; ++j)		\
-      for (int k = 0; k < 250000; ++k)		\
-      {						\
-        list.push_back(k);			\
-      }						\
-    BENCH_MEMPLOT("Memory consumption");	\
-    list.clear();				\
-  }
-
-void a();
-void b(int);
-void c(int);
-void d(int);
-void e();
-
 int main()
 {
-  for (int n = 1, iter = 0; iter <= 20; n *= 2, ++iter)
+  for (int n = 1; n <= 4; ++n)
   {
 
     BENCH_START("Bench demo", "A simple benchmark with a single parameter");
 
-    std::cout << "[" << iter << "] Bench for n=" << n << "..." << std::endl;
+    std::cout << "[" << n << "] Bench for n=" << n << "..." << std::endl;
 
-    a();
+    std::list<int> ilist;
+    std::list<std::string> slist;
 
-    for (int i = 0; i < n; ++i)
-      e();
-
-    CONSUME(10 + iter * 10)
+    {
+      BENCH_TASK_SCOPED("ilist");
+      for (int j = 0; j < n * 100; ++j)
+	for (int k = 0; k < 25000; ++k)
+	{
+	  ilist.push_back(k);
+	}
+      BENCH_MEMPLOT("ilist filled");
+    }
+    {
+      BENCH_TASK_SCOPED("slist");
+      for (int j = 0; j < n * 20; ++j)
+	for (int k = 0; k < 25000; ++k)
+	{
+	  slist.push_back("Memplot test string");
+	}
+      BENCH_MEMPLOT("slist filled");
+    }
+    ilist.clear();
+    BENCH_MEMPLOT("ilist cleared");
+    slist.clear();
+    BENCH_MEMPLOT("slist cleared");
 
     BENCH_STOP();
-
-    BENCH_PARAMETER("iteration", (long) iter);
 
     BENCH_PARAMETER("n", (long) n);
 
@@ -81,52 +72,4 @@ int main()
     BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
 					     bench::Options::FO_DOT));
   }
-}
-
-void a()
-{
-  BENCH_TASK_SCOPED("Task A");
-
-  for (int i = 0; i < 42; ++i)
-  {
-    b(5);
-  }
-}
-
-void b(int x)
-{
-  BENCH_TASK_SCOPED("Task B");
-
-  WAIT(2)
-
-  c(x);
-}
-
-void c(int x)
-{
-  BENCH_TASK_SCOPED("Task C");
-
-  WAIT(4)
-
-  d(x);
-}
-
-void d(int x)
-{
-  BENCH_TASK_SCOPED("Task D");
-
-  WAIT(1)
-
-  if (x > 0)
-    b(x - 1);
-}
-
-void e()
-{
-  BENCH_TASK_SCOPED("Task E");
-
-  CONSUME(50)
-  WAIT(1)
-
-  d(0);
 }

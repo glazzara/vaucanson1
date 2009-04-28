@@ -14,4 +14,4 @@
 
 include $(top_srcdir)/cbs.mk
 
-SUBDIRS = timer bench timer-bench
+SUBDIRS = timer bench timer-bench memplot comparison memplot-bench

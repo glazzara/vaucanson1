@@ -1,8 +1,12 @@
 Libbench: measure performance of equiped C++ code.
 
-Influence on equiped code (in time taken per 1 million measure):
+## Influence on instrumented code performance ##
 
-2Ghz Intel Centrino, 1GB RAM:
+Measures made on a 2GHz Intel Centrino, 1GB RAM.
+
+-- CPU Time measures (BENCH_TASK) --
+
+For 1 million measures:
 
  2.5s for 1 task (1.25s in parent, 1.25s in child).
 +3.5s for 100k different tasks.
@@ -12,9 +16,23 @@ i.e. using CBS to measure 100 different tasks for 100000 measures takes:
 + 100 000 * 3.5s / 1 000 000 * 100 / 100 000 (= 0.350ms)
 total: ~250ms.
 
-Use the timer-bench demo to compute those figures on another system.
+-- Memory measures (BENCH_MEMPLOT) --
 
-Typical usage:
+Time:
+ 2s per 100 000 measures.
+
+Memory:
+ 10MB per 100 000 measures.
+
+
+-- Benchmarking on another machine --
+
+Use the timer-bench and memplot-bench demos to compute those figures
+on your system.
+
+
+
+## Typical usage ##
 
 (see demo/bench/main.cc)
 
@@ -63,13 +81,13 @@ void do_some_tests()
 ________________________________________________________
 
 Note:
-Parameters and results are std::string.
-Use std::stringstream to convert other values:
+Parameters and results are std::string, long or double.
+Use explicit cast or std::stringstream to convert other values:
 
   #include <stringstream>
 
   int n = 42;
   std::stringstream n_str;
   n_str << n;
-  BENCH_PARAMETER("n", n_str.str());
-
+  BENCH_PARAMETER("n (string)", n_str.str());
+  BENCH_PARAMETER("n (long)", (long) n));
