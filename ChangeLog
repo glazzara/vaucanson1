@@ -1,5 +1,14 @@
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Introduce d2.xml.
+
+	* data/automata/char-z/d2.cc: New file.
+	* data/automata/char-z/Makefile.am: Build d2.xml.
+	* taf-kit/tests/vcsn-char-z.test: Test d2.xml.
+	* doc/manual/taf-kit-manual.tex (d2.xml): New section.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Remove dev3base10.xml: it is not a pertinent example of Z automaton.
 
 	* data/automata/char-z/divkbaseb.cc: Delete.

@@ -36,6 +36,9 @@ $VCSN info c1.xml
 #  $VCSN are-isomorphic c1.xml c1.xml
 #
 test $($VCSN eval c1.xml 101010) -eq 42
+test $($VCSN eval d2.xml ababbbabb) -eq -3
+test $($VCSN eval d2.xml baaaba) -eq 2
+
       $VCSN is-ambiguous c1.xml
 fail1 $VCSN is-empty c1.xml
       $VCSN is-realtime c1.xml

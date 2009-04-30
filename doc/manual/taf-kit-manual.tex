@@ -68,6 +68,7 @@
 \newcal{A}
 \newcal{B}
 \newcal{C}
+\newcal{D}
 \newcal{T}
 
 \newtheorem{theorem}             {Theorem}[chapter]
@@ -1451,6 +1452,19 @@ instance the word \samp{101010} is associated to the weight $42$.
 Note that the alphabet is $A=\{0,1\}$ while the weights are taken in
 $\Z$.  Because weights are always specified in braces, there is no
 confusion possible.
+
+\subsection{\file{d2.xml} ($\Dc_1$)}\label{sec:z:d2}
+
+\begin{tikzpicture}[automaton]
+  \node[state, initial] (A) at (0,0) {};
+  \node[state, accepting] (B) at (3,0) {};
+  \path[->] (A) edge node[above] {$a+\{-1\}b$} (B);
+  \path[->] (A) edge[loop above] node[above] {$a+b$} (A);
+  \path[->] (B) edge[loop above] node[above] {$a+b$} (B);
+\end{tikzpicture}
+
+This automaton defined on the alphabet $A=\{a,b\}$ computes the
+difference between the number of $a$ and $b$ in a word.
 
 \section{\B{} FMP}
 
