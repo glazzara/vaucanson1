@@ -35,7 +35,10 @@ $VCSN info c1.xml
 # defined.
 #  $VCSN are-isomorphic c1.xml c1.xml
 #
-test $($VCSN eval c1.xml bababa) -eq 42
+test $($VCSN eval c1.xml 101010) -eq 42
+test $($VCSN eval d2.xml ababbbabb) -eq -3
+test $($VCSN eval d2.xml baaaba) -eq 2
+
       $VCSN is-ambiguous c1.xml
 fail1 $VCSN is-empty c1.xml
       $VCSN is-realtime c1.xml
@@ -202,19 +205,6 @@ ab{2}*ca         ((a.b) {2})*.c.a
 (ab{2})c         (a.b) {2}.c
 (1+ab)*          (1+a.b)*
 EOF
-
-## -------------------- ##
-## Test div3base10.xml. ##
-## -------------------- ##
-
-i=0
-end=100
-while [ $i -le $end ];
-do
-  out=`$VCSN eval div3base10.xml "$i"`
-  test $out = `expr $i % 3`
-  i=`expr $i + 1`
-done
 
 ## --------------------------- ##
 ## Test writing data handling. ##

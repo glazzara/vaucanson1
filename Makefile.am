@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -90,6 +90,7 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
+	cd doc/manual && $(MAKE) maintainer-check
 
 # Build debian packages.
 deb:
@@ -158,16 +159,3 @@ distcheck: dist
 	@(echo "$(distdir) archives ready for distribution: "; \
 	  list='$(DIST_ARCHIVES)'; for i in $$list; do echo $$i; done) | \
 	  sed -e '1{h;s/./=/g;p;x;}' -e '$${p;x;}'
-
-
-## ---------------------------- ##
-## Installing on LRDE servers.  ##
-## ---------------------------- ##
-
-install-epita:
-# If the dload directory does not exist, bail out.
-	if test ! -d $(dloaddir); then			\
-	  echo >&2 "no such directory: $(dloaddir)";	\
-	fi
-	cd doc && $(MAKE) $(AM_MAKEFLAGS) install-epita
-.PHONY: install-epita
