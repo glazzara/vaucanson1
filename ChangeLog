@@ -1,3 +1,9 @@
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Enable callgraph in benchmark dot output.
+
+	* src/bench/common/bench_macros.hh: Fix macro.
+
 2009-04-28  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update cbs.
