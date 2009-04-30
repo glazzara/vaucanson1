@@ -21,31 +21,8 @@
 # include <queue>
 # include <set>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
-
-// Declaration to link with libkrat_exp
-namespace yy
-{
-  struct token_queue;
-
-  // WARNING: this struct declaration is also in
-  //   lib/krat_exp/krat_exp_bison.yy
-  // until someone factors these, you have to update both.
-  struct krat_exp_parser
-  {
-    krat_exp_parser();
-    ~krat_exp_parser();
-    void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_weight(vcsn::algebra::semiring_virtual* sem);
-    void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_token(int i, std::string* str);
-    int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
-
-    // Attributs
-    token_queue* tok_q_;
-   }; // krat_exp_parser
-} // yy
+# include <vaucanson/algebra/implementation/series/krat_exp_parser_private.hh>
 
 namespace vcsn
 {
@@ -63,7 +40,7 @@ namespace vcsn
 
       Lexer(const std::string& from,
 	    Element<S, T>& e,
-	    yy::krat_exp_parser& parser,
+	    vcsnyy::krat_exp_parser& parser,
 	    bool lex_trace,
 	    std::string& error) :
 	from_(from),
@@ -233,7 +210,7 @@ namespace vcsn
 
       const std::string& from_;
       Element<S, T>& e_;
-      yy::krat_exp_parser& parser_;
+      vcsnyy::krat_exp_parser& parser_;
       bool lex_trace_;
       std::string close_weight_;
       std::vector<std::string> token_tab_;
@@ -249,7 +226,7 @@ namespace vcsn
     {
       parse_trace = parse_trace;
       std::string error;
-      yy::krat_exp_parser parser;
+      vcsnyy::krat_exp_parser parser;
       Lexer<S, T> lex(from, exp, parser, lex_trace, error);
       if (!lex.lex())
 	return std::make_pair(true, error);

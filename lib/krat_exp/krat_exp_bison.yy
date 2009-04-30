@@ -2,12 +2,14 @@
 %defines
 %define "parser_class_name" "krat_exp_bison"
 %error-verbose
+%name-prefix="vcsnyy"
 
 %{
-# include <vaucanson/algebra/implementation/series/krat_exp_proxy.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser_private.hh>
 # include <map>
 # include <queue>
 # include <string>
+# include <cassert>
 //_DEBUG_
 # include <iostream>
 %}
@@ -26,8 +28,8 @@
 
 %{
 int
-yylex(yy::krat_exp_bison::semantic_type* yylval,
-      std::queue<std::pair<yy::krat_exp_bison::token_type, yy::krat_exp_bison::semantic_type> >& tok_q);
+yylex(vcsnyy::krat_exp_bison::semantic_type* yylval,
+      std::queue<std::pair<vcsnyy::krat_exp_bison::token_type, vcsnyy::krat_exp_bison::semantic_type> >& tok_q);
 %}
 
 %token	<str> OPAR
@@ -72,7 +74,7 @@ rexp :
 
 %%
 
-namespace yy
+namespace vcsnyy
 {
   struct token_queue
   {
@@ -85,37 +87,20 @@ namespace yy
       >
     > self;
   };
+} // vcsnyy
 
-  // WARNING: this struct declaration is also in
-  //   include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
-  // until someone factors these, you have to update both.
-  struct krat_exp_parser
-  {
-    krat_exp_parser();
-    ~krat_exp_parser();
-    void insert_word(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_weight(vcsn::algebra::semiring_virtual* sem);
-    void insert_zero(vcsn::algebra::krat_exp_virtual* rexp);
-    void insert_token(int i, std::string* str);
-    int parse(vcsn::algebra::krat_exp_virtual& rexp, std::string& error);
-
-    // Attributs
-    token_queue* tok_q_;
-  }; // krat_exp_parser
-} // yy
-
-yy::krat_exp_parser::krat_exp_parser()
+vcsnyy::krat_exp_parser::krat_exp_parser()
 {
   tok_q_ = new token_queue;
 }
 
-yy::krat_exp_parser::~krat_exp_parser()
+vcsnyy::krat_exp_parser::~krat_exp_parser()
 {
   delete tok_q_;
 }
 
 void
-yy::krat_exp_parser::insert_word(vcsn::algebra::krat_exp_virtual* rexp)
+vcsnyy::krat_exp_parser::insert_word(vcsn::algebra::krat_exp_virtual* rexp)
 {
   krat_exp_bison::semantic_type tmp;
   tmp.rexp = rexp;
@@ -123,7 +108,7 @@ yy::krat_exp_parser::insert_word(vcsn::algebra::krat_exp_virtual* rexp)
 }
 
 void
-yy::krat_exp_parser::insert_weight(vcsn::algebra::semiring_virtual* sem)
+vcsnyy::krat_exp_parser::insert_weight(vcsn::algebra::semiring_virtual* sem)
 {
   krat_exp_bison::semantic_type tmp;
   tmp.sem = sem;
@@ -131,7 +116,7 @@ yy::krat_exp_parser::insert_weight(vcsn::algebra::semiring_virtual* sem)
 }
 
 void
-yy::krat_exp_parser::insert_zero(vcsn::algebra::krat_exp_virtual* rexp)
+vcsnyy::krat_exp_parser::insert_zero(vcsn::algebra::krat_exp_virtual* rexp)
 {
   krat_exp_bison::semantic_type tmp;
   tmp.rexp = rexp;
@@ -139,7 +124,7 @@ yy::krat_exp_parser::insert_zero(vcsn::algebra::krat_exp_virtual* rexp)
 }
 
 void
-yy::krat_exp_parser::insert_token(int i, std::string* str)
+vcsnyy::krat_exp_parser::insert_token(int i, std::string* str)
 {
   krat_exp_bison::semantic_type tmp;
   tmp.str = str;
@@ -160,24 +145,24 @@ yy::krat_exp_parser::insert_token(int i, std::string* str)
     case 4 :
       tok_q_->self.push(std::make_pair(krat_exp_bison::token::STAR, tmp));
       break;
-    default : // this sted should never append
-      std::cout << "Error in insert_token" << std::endl;
+    default : // this step should never append
+      assert(false);
       break;
   }
 }
 
 int
-yy::krat_exp_parser::parse(vcsn::algebra::krat_exp_virtual& rexp_, std::string& error_)
+vcsnyy::krat_exp_parser::parse(vcsn::algebra::krat_exp_virtual& rexp_, std::string& error_)
 {
-  yy::krat_exp_bison parser(tok_q_->self , rexp_, error_);
+  vcsnyy::krat_exp_bison parser(tok_q_->self , rexp_, error_);
   return parser.parse();
 }
 
 int
-yylex(yy::krat_exp_bison::semantic_type* yylval,
-      std::queue<std::pair<yy::krat_exp_bison::token_type, yy::krat_exp_bison::semantic_type> >& tok_q)
+vcsnyylex(vcsnyy::krat_exp_bison::semantic_type* yylval,
+      std::queue<std::pair<vcsnyy::krat_exp_bison::token_type, vcsnyy::krat_exp_bison::semantic_type> >& tok_q)
 {
-  yy::krat_exp_bison::token_type res;
+  vcsnyy::krat_exp_bison::token_type res;
   if (tok_q.empty())
     return 0;
   else
@@ -190,7 +175,7 @@ yylex(yy::krat_exp_bison::semantic_type* yylval,
 }
 
 void
-yy::krat_exp_bison::error(const yy::krat_exp_bison::location_type& loc, const std::string& s)
+vcsnyy::krat_exp_bison::error(const vcsnyy::krat_exp_bison::location_type& loc, const std::string& s)
 {
   error_ += s + '\n';
 }
