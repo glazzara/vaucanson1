@@ -1,5 +1,14 @@
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Remove dev3base10.xml: it is not a pertinent example of Z automaton.
+
+	* data/automata/char-z/divkbaseb.cc: Delete.
+	* data/automata/char-z/Makefile.am,
+	taf-kit/tests/vcsn-char-z.test: Adjust.
+	* doc/manual/taf-kit-manual.tex (div3base10.xml): Remove.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Use alphabet {0,1} for c1.xml.
 
 	* data/automata/char-z/c1.cc: Rewrite using alphabet {0,1} instead

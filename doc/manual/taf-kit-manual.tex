@@ -1452,37 +1452,6 @@ Note that the alphabet is $A=\{0,1\}$ while the weights are taken in
 $\Z$.  Because weights are always specified in braces, there is no
 confusion possible.
 
-\subsection{\file{div3base10.xml}}
-
-\begin{tikzpicture}[automaton]
-  \node[state, initial]   (S0) at (-180:1.5cm) {$0$};
-  \node[state] (S1) at (60:1.5cm) {$1$};
-  \node[state] (S2) at (-60:1.5) {$2$};
-
-  \acceptingright{S1}{$e$}
-  \acceptingright{S2}{$\{2\}e$}
-
-  \path[->] (S0) edge[loop 120] node[above] {$0,3,6,9$} (S0);
-  \path[->] (S0) edge[bend left] node[above=1mm] {$1,4,7$} (S1);
-  \path[->] (S0) edge node[above=-.5ex, sloped] {$2,5,8$} (S2);
-
-  \path[->] (S1) edge[loop above] node[above] {$0,3,6,9$} (S1);
-  \path[->] (S1) edge node[below, sloped] {$2,5,8$} (S0);
-  \path[->] (S1) edge[bend left] node[right] {$1,4,7$} (S2);
-
-  \path[->] (S2) edge[loop below] node[below] {$0,3,6,9$} (S2);
-  \path[->] (S2) edge[bend left] node[below left] {$1,4,7$} (S0);
-  \path[->] (S2) edge node[left] {$2,5,8$} (S1);
-\end{tikzpicture}
-
-This automaton computes the remainder of an integer division by $3$.
-The integer to divide should be expressed in base $10$ and its digits
-should be read from left to right (although it does not matter in the
-case of a division by $3$).
-
-The program \file{data/automata/char-z/divkbaseb}, in the source tree,
-can be used to construct such a divisor by $k$ in any base $b$.
-
 \section{\B{} FMP}
 
 The following transducers are predefined files that can be loaded with

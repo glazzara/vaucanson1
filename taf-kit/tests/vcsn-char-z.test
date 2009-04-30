@@ -203,19 +203,6 @@ ab{2}*ca         ((a.b) {2})*.c.a
 (1+ab)*          (1+a.b)*
 EOF
 
-## -------------------- ##
-## Test div3base10.xml. ##
-## -------------------- ##
-
-i=0
-end=100
-while [ $i -le $end ];
-do
-  out=`$VCSN eval div3base10.xml "$i"`
-  test $out = `expr $i % 3`
-  i=`expr $i + 1`
-done
-
 ## --------------------------- ##
 ## Test writing data handling. ##
 ## --------------------------- ##
