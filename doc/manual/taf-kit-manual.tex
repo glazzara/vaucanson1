@@ -316,9 +316,9 @@ program name & automaton type & alphabet type & weight semiring \\
 \command{vcsn-char-fmp-b} & transducers &
   characters & $\langle\B,\lor,\land\rangle$\\
 \command{vcsn-char-fmp-z} & transducers &
-  integers & $\langle\Z,+,\times\rangle$\\
+  characters & $\langle\Z,+,\times\rangle$\\
 \command{vcsn-int-fmp-b} & transducers &
-  characters & $\langle\B,\lor,\land\rangle$\\
+  integers & $\langle\B,\lor,\land\rangle$\\
 \command{vcsn-int-fmp-z} & transducers &
   integers & $\langle\Z,+,\times\rangle$\\
 \hline
@@ -336,7 +336,7 @@ Boolean automata whose letters are integers.  Other variants such as
 \command{vcsn-char-char-b}, \command{vcsn-char-int-b}, or
 \command{vcsn-int-int-b}, support alphabets of pairs.  All of these
 are called Boolean automata because each word is associated to a
-Boolean \emph{weight}: either the word as accepted and its weight is
+Boolean \emph{weight}: either the word is accepted and its weight is
 \emph{true}, or it is not and its weight is \emph{false}.
 
 \Vauc actually supports automata with multiplicities, where words can
@@ -346,7 +346,7 @@ table show other semirings that can be used as well.
 
 \Vauc also supports weighted transducers.  These transducers are
 actually automata over a product two free monoids.  In \Vauc we call
-these FMP, for \emph{free monoïd products}.  The above table lists a
+these FMP, for \emph{free monoid products}.  The above table lists a
 few \tafkit instance for FMP.
 
 \section{A First Contact}\label{sec:firstcontact}
@@ -367,7 +367,7 @@ few \tafkit instance for FMP.
     \path[->] (C) edge [loop above] node[above] {$a$} (C);
   \end{tikzpicture}
   \caption{The automaton $\Ac_1$, defined over the alphabet
-    $\Sigma=\{a,b\}$ recognizes any word of $\Sigma^\star$ that
+    $A=\{a,b\}$ recognizes any word of $A^\star$ that
     contains $ab$. \label{fig:a1}}
 \end{figure}
 
@@ -531,7 +531,7 @@ following operators can be used to combine rational expressions.
 \begin{center}
   \begin{tabular}{ll}
     \hline
-    $e$\code{*} & Kleen star \\
+    $e$\code{*} & Kleene star \\
     $e_1$$e_2$ & implicit concatenation \\
     $e_1$\code{.}$e_2$ & explicit concatenation \\
     $e_1$\code{+}$e_2$ & disjunction \\
@@ -540,7 +540,7 @@ following operators can be used to combine rational expressions.
   \end{tabular}
 \end{center}
 
-For instance, on the alphabet $\Sigma=\{a,b\}$, the language denoted
+For instance, on the alphabet $A=\{a,b\}$, the language denoted
 by the rational expression \samp{(a+b)*ab(a+b)*} contains all words
 that contain \samp{ab}.
 
@@ -563,7 +563,7 @@ from \command{are-equivalent}.  Without it, \tafkit would just set its
 status code.  (See \autoref{sec:verbose} for more details.)
 
 \textbf{Caveat:} because \Vauc builds rational expressions on top of
-words, the Kleen star operator and the weights (introduced in
+words, the Kleene star operator and the weights (introduced in
 \autoref{sec:weight}) apply to words and not letters as it is usually
 the case in other application.  For instance \samp{ab*} is the same
 rational expression as \samp{(ab)*} for \Vauc, but it is different
@@ -572,7 +572,7 @@ from \samp{a.b*} or \samp{a.(b*)}.
 
 \subsection{Empty word and null series}\label{sec:emptyword}
 
-The default representation of the empty word (identity of the monoïd)
+The default representation of the empty word (identity of the monoid)
 is \samp{1} when using characters or pair alphabets.  For instance let
 us try the command \command{expand}, that distributes concatenations
 over disjunctions:
@@ -627,7 +627,7 @@ automatically applied.
 
 Here $E$ stands for any rational expression, $w$ is any word, and $k$
 and $h$ are weights.  In these notations it should also be obvious
-that $0$ and $1$ designate the identity of the monoïd (empty word) and
+that $0$ and $1$ designate the identity of the monoid (empty word) and
 null series, while $\{0\}$ and $\{1\}$ designate the zero and identity
 of the semiring (weights).  Any subexpression of a form listed to the
 left of a `$\Rightarrow$' is rewritten as indicated on the right.
@@ -769,12 +769,12 @@ the options that may modify the Input/Output behaviors of commands.
 \begin{tabular}{llp{.5\textwidth}l}
   long option & short & purpose & documentation \\
   \hline
-  \samp{--alphabet} & \samp{-a} & specify the alphabet of automata or rational expressions  & \autoref{sec:--alphabet}\\
-  \samp{--alphabet1} & \samp{-a} & specify the first alphabet on transducers & \autoref{sec:--alphabet}\\
-  \samp{--alphabet2} & \samp{-A} & specify the second alphabet on transducers & \autoref{sec:--alphabet}\\
-  \samp{--input} & \samp{-i} & select input format for automata and rational expressions & \autoref{sec:formats}\\
-  \samp{--output} & \samp{-o} & select output format for automata and rational expressions & \autoref{sec:formats}\\
-  \samp{--parser} & \samp{-p} & fine-tune the symbols used for input and output of rational expressions and automata & \autoref{sec:writingdata}\\
+  \samp{--alphabet} & \samp{-a} & specify the alphabet of automata or rational expressions  & \S\ref{sec:--alphabet}\\
+  \samp{--alphabet1} & \samp{-a} & specify the first alphabet on transducers & \S\ref{sec:--alphabet}\\
+  \samp{--alphabet2} & \samp{-A} & specify the second alphabet on transducers & \S\ref{sec:--alphabet}\\
+  \samp{--input} & \samp{-i} & select input format for automata and rational expressions & \S\ref{sec:formats}\\
+  \samp{--output} & \samp{-o} & select output format for automata and rational expressions & \S\ref{sec:formats}\\
+  \samp{--parser} & \samp{-p} & fine-tune the symbols used for input and output of rational expressions and automata & \S\ref{sec:writingdata}\\
 \hline
 \end{tabular}
  \end{center}
@@ -788,7 +788,7 @@ When \tafkit reads an XML file, there is no need to specify any other
 information besides the name of the file.  For instance when we read
 \file{a1.xml} in~\autoref{sec:firstcontact} and determinized this
 automaton, we did not have to tell \tafkit that the alphabet was
-$\Sigma=\{a,b\}$.  The XML file is self-contained and already contains
+$A=\{a,b\}$.  The XML file is self-contained and already contains
 this information.
 
 Here is a situation where specifying an alphabet is mandatory:
@@ -800,8 +800,8 @@ Error: alphabet should be explicitly defined using --alphabet
 \command{exp-to-aut} is a command that takes a rational expression and
 converts it into an automaton.  To be able to parse the rational
 expression, \Vauc needs to know what alphabet it its using.  Here there
-is no ways it can guess whether the alphabet is $\Sigma=\{a,b\}$ and
-the \samp{+} is a rational operator or if it is $\Sigma=\{a,b,+\}$ and
+is no ways it can guess whether the alphabet is $A=\{a,b\}$ and
+the \samp{+} is a rational operator or if it is $A=\{a,b,+\}$ and
 the \samp{+} is just a letter.  Specifying the alphabet can be done
 using \option{--alphabet=ab} for instance.
 
@@ -874,7 +874,7 @@ $ \kbd{vcsn-char-int-b exp-to-aut -a'(a,1)(b,2)(a,-1)' '(a,-1)(a,1)+(b,2)' > mis
 
 \paragraph{Transducer alphabets}
 
-Free monoïd products have two alphabets, one for each monoïd.  The
+Free monoid products have two alphabets, one for each monoid.  The
 instances of \tafkit that handle transducers consequently support two
 options \samp{--alphabet1=} and \samp{--alphabet2=}, that can be
 abbreviated respectively \samp{-a} and \samp{-A}.
@@ -974,7 +974,7 @@ symbol & meaning & default value(s) \\
 \samp{PLUS} & disjunction (additive law of the series) & \samp{+} \\
 \samp{TIMES} & concatenation (multiplicative law of the series) & \samp{.}\\
 \samp{STAR} & Kleene star & \samp{*} \\
-\samp{ONE} & empty word (identity of the monoïd) & \samp{1},\samp{e},\samp{\_e},\samp{eps}\\
+\samp{ONE} & empty word (identity of the monoid) & \samp{1},\samp{e},\samp{\_e},\samp{eps}\\
 \samp{ZERO} & null series & \samp{0},\samp{z},\samp{\_z},\samp{zero} \\
 \samp{OWEIGHT} & weight start & \samp{\{} \\
 \samp{CWEIGHT} & weight end & \samp{\}} \\
@@ -1059,7 +1059,7 @@ Let's consider $\Bc_1$ for \autoref{fig:b1}: a \Z-automaton,
 \textit{i.e.}  an automaton whose label's weights are in \Z.  This
 time the evaluation of the word \var{w} by the automaton $\Bc_1$ will
 produce a number, rather than simply accept or reject \var{w}.  For
-instance let's evaluate \samp{abab} and \samp{bbab}:
+instance let's evaluate \samp{abbb} and \samp{abab}:
 
 \begin{shell}
 $ \kbd{vcsn-char-z eval b1.xml abbb}
@@ -1094,7 +1094,7 @@ $\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
 $ \kbd{vcsn-char-z eval b4.xml abbb}
 81
 $ \kbd{vcsn-char-z eval b4.xml abab}
-14
+16
 \end{shell}%$
 
 \subsubsection{Quotient}
@@ -1303,8 +1303,8 @@ The following automata are predefined files that can be loaded with
   \path[->] (C) edge[loop above] node[above] {$a$} (C);
 \end{tikzpicture}
 
-The automaton $\Ac_1$, defined over the alphabet $\Sigma=\{a,b\}$,
-recognizes any word of $\Sigma^\star$ that contains $ab$.
+The automaton $\Ac_1$, defined over the alphabet $A=\{a,b\}$,
+recognizes any word of $A^\star$ that contains $ab$.
 
 \subsection{\file{b1.xml} ($\Bc_1$)}\label{sec:b:b1}
 
@@ -1338,7 +1338,7 @@ $\langle \Z,+,\times\rangle$.
 \end{tikzpicture}
 
 This deterministic automaton is defined on the alphabet
-$\Sigma=\{0,1\}$ and recognizes the base-2 representations of all the
+$A=\{0,1\}$ and recognizes the base-2 representations of all the
 integers that are divisible by $3$.
 
 The source code distribution of \Vauc actually comes with a

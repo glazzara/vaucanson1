@@ -1,5 +1,10 @@
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/manual/taf-kit-manual.tex: Minor corrections from Jacques
+	Sakarovitch.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Turn the Vaucanson User's manual into a Taf-Kit documentation.
 
 	* doc/manual/vaucanson-manual.tex: Rename as ...
