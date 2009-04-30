@@ -25,8 +25,7 @@
   BENCH_SAVE(Name + ".out", bench::Options(bench::Options::VE_MINIMAL,	\
 					   bench::Options::FO_TEXT));	\
   BENCH_SAVE(Name + ".dot", bench::Options(bench::Options::VE_NORMAL,	\
-					   bench::Options::FO_DOT,	\
-					   0));				\
+					   bench::Options::FO_DOT));	\
   BENCH_PRINT(bench::Options(bench::Options::VE_NORMAL,			\
 			     bench::Options::FO_TEXT,			\
 			     0));
