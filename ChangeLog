@@ -1,5 +1,15 @@
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Use alphabet {0,1} for c1.xml.
+
+	* data/automata/char-z/c1.cc: Rewrite using alphabet {0,1} instead
+	of {a,b}.
+	* taf-kit/tests/vcsn-char-z.test: Adjust test.
+	* doc/manual/taf-kit-manual.tex (c1.xml): Adjust and document
+	the figure.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/manual/taf-kit-manual.tex: Minor corrections from Jacques
 	Sakarovitch.
 

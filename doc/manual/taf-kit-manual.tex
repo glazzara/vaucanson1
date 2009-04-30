@@ -1441,12 +1441,16 @@ number of $b$ in a word.
 \begin{tikzpicture}[automaton]
   \node[state, initial] (A) at (0,0) {};
   \node[state, accepting] (B) at (2,0) {};
-  \path[->] (A) edge node[above] {$b$} (B);
-  \path[->] (A) edge[loop above] node[above] {$a+b$} (A);
-  \path[->] (B) edge[loop above] node[above] {$\{2\}a+\{2\}b$} (B);
+  \path[->] (A) edge node[above] {$1$} (B);
+  \path[->] (A) edge[loop above] node[above] {$0+1$} (A);
+  \path[->] (B) edge[loop above] node[above] {$\{2\}0+\{2\}1$} (B);
 \end{tikzpicture}
 
-FIXME: Document this automaton.
+This automaton converts a binary representation into an integer.  For
+instance the word \samp{101010} is associated to the weight $42$.
+Note that the alphabet is $A=\{0,1\}$ while the weights are taken in
+$\Z$.  Because weights are always specified in braces, there is no
+confusion possible.
 
 \subsection{\file{div3base10.xml}}
 
