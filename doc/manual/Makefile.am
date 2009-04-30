@@ -34,18 +34,18 @@ tex-mostlyclean:
 mostlyclean-local: tex-mostlyclean
 
 
-# We compile and ship vaucanson-manual.pdf.
-manual = $(srcdir)/vaucanson-manual.pdf
+# We compile and ship taf-kit-manual.pdf.
+manual = $(srcdir)/taf-kit-manual.pdf
 
 pdf: $(manual)
 
 dist_pdf_DATA = $(manual)
 
-$(manual): vaucanson-manual.tex
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ vaucanson-manual.tex
+$(manual): taf-kit-manual.tex
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ taf-kit-manual.tex
 
 vaucanson_manual_sources =			\
-vaucanson-manual.tex				\
+taf-kit-manual.tex				\
 vaucanswig.tex					\
 developer.tex
 
@@ -55,5 +55,5 @@ MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 maintainer-clean-local:
 	rm -rf tmp.t2d
 
-maintainer-check: vaucanson-manual.tex
-	grep "^\\\\def\\\\VcsnVersion{$(VERSION)}" vaucanson-manual.tex
+maintainer-check: taf-kit-manual.tex
+	grep "^\\\\def\\\\VcsnVersion{$(VERSION)}" taf-kit-manual.tex
