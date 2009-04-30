@@ -40,8 +40,6 @@ void binary(automaton_t& an)
 
   an.add_letter_transition(c[1], c[1], 'a');
   an.add_letter_transition(c[1], c[1], 'b');
-  an.add_letter_transition(c[1], c[1], 'a');
-  an.add_letter_transition(c[1], c[1], 'b');
 }
 
 void quotient_bool_bench(int n_power)
