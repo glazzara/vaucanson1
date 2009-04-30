@@ -180,6 +180,7 @@ void normalized_composition_bench(int n_value)
   BENCH_STOP();
 
   // Set extra parameters/results
+  BENCH_PARAMETER("n", (long) n_value);
   BENCH_RESULT("sub left states", (long) sub_left_auto.states().size());
   BENCH_RESULT("sub left transitions",
 	       (long) sub_left_auto.transitions().size());

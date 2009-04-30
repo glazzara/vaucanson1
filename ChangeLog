@@ -1,5 +1,13 @@
 2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
 
+       Fix composition bench.
+
+       * src/bench/composition/normalized_composition_bench.hh,
+       * src/bench/composition/rw_composition_bench.hh:
+       Add missing CBS parameter (n).
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Fix quotient bench automaton.
 
 	The previous automaton made no sense to Jacques and looked like

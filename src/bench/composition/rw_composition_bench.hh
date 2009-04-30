@@ -146,6 +146,7 @@ void rw_composition_bench(int n_value)
   BENCH_STOP();
 
   // Set extra parameters/results
+  BENCH_PARAMETER("n", (long) n_value);
   BENCH_RESULT("left states", (long) left_auto.states().size());
   BENCH_RESULT("left transitions", (long) left_auto.transitions().size());
   BENCH_RESULT("right states", (long) right_auto.states().size());
