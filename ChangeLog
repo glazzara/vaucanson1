@@ -1,5 +1,13 @@
 2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Optimize quotient on boolean automata.
+
+	(As mentioned during the meeting on April 10th)
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Do that.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Fix quotient bench automaton.
 
 	The previous automaton made no sense to Jacques and looked like
