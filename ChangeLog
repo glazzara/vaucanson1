@@ -1,10 +1,19 @@
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Adjust bench to complete in a reasonable time.
+
+	* src/bench/minimization_2n/Makefile.bench: Do not bench
+	minimization_brzozowski past n=12 (already 8min on seattle).
+
+	* src/bench/eps_removal/Makefile.bench: Bench up to 200.
+
 2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
 
-       Fix composition bench.
+	Fix composition bench.
 
-       * src/bench/composition/normalized_composition_bench.hh,
-       * src/bench/composition/rw_composition_bench.hh:
-       Add missing CBS parameter (n).
+	* src/bench/composition/normalized_composition_bench.hh,
+	* src/bench/composition/rw_composition_bench.hh:
+	Add missing CBS parameter (n).
 
 2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
 

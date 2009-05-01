@@ -6,7 +6,7 @@ bench: $(noinst_PROGRAMS)
 	echo '====================================';			\
 	echo "$$FSM_PATH/fsmcompile -i../common/alpha.syms init_o_tmp.fsm |"\
 	     "sh -c 'time $$FSM_PATH/fsmminimize' > /dev/null" > tmp.min;\
-	for n_states in $$(seq 11 15); do				\
+	for n_states in $$(seq 11 12); do				\
 	    echo "----------------------For $$n_states states";		\
 	    echo "--------------VCSN (moore):";				\
 	    ./minimization_2n_moore-bench $$n_states;			\
@@ -14,6 +14,17 @@ bench: $(noinst_PROGRAMS)
 	    ./minimization_2n_hopcroft-bench $$n_states;		\
 	    echo "--------------VCSN (brzozowski):";			\
 	    ./minimization_2n_brzozowski-bench $$n_states;		\
+	    if [ ! -z "$$FSM_PATH" ]; then				\
+	      echo "--------------FSM:";				\
+	      sh tmp.min;						\
+	    fi;								\
+	done;								\
+	for n_states in $$(seq 13 16); do				\
+	    echo "----------------------For $$n_states states";		\
+	    echo "--------------VCSN (moore):";				\
+	    ./minimization_2n_moore-bench $$n_states;			\
+	    echo "--------------VCSN (hopcroft):";			\
+	    ./minimization_2n_hopcroft-bench $$n_states;		\
 	    if [ ! -z "$$FSM_PATH" ]; then				\
 	      echo "--------------FSM:";				\
 	      sh tmp.min;						\

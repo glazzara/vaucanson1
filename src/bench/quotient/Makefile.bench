@@ -4,7 +4,7 @@ bench: $(noinst_PROGRAMS)
 	@echo '================';					\
 	echo '|Quotient bench|';					\
 	echo '================';					\
-	for n_states in $$(seq 5 20); do				\
+	for n_states in $$(seq 5 13); do				\
 	    echo "----------------------For power $$n_states";		\
 	    echo "--------------VCSN (over Z):";			\
 	    ./quotient_z-bench $$n_states;				\
