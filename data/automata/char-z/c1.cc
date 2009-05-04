@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,21 +20,18 @@ using namespace vcsn;
 using namespace vcsn::z_automaton;
 #include <vaucanson/tools/dumper.hh>
 
-// This guy comes from ETA p. 435, example 2.5.
-   /*------------------------------------------------------------.
-   | This automaton comes from the book ETA (Fig 2.6 p.437 ). |
-   `-----------------------------------------------------------*/
-
+// This automaton comes from ETA p. 435, example 2.5.  With {a,b}
+// changed into {0,1}.
 
 int
 main(int argc, char **argv)
 {
   alphabet_t	A;
-  A.insert('a');
-  A.insert('b');
+  A.insert('0');
+  A.insert('1');
   monoid_t	Astar (A);
-  monoid_elt_t	a (Astar, "a");
-  monoid_elt_t	b (Astar, "b");
+  monoid_elt_t	a (Astar, "0");
+  monoid_elt_t	b (Astar, "1");
 
   /*------------------------------.
   | Creation of the automaton C_1 |
@@ -53,7 +50,7 @@ main(int argc, char **argv)
   sq.assoc(a, 2);
   sq.assoc(b, 2);
 
-  c1.add_letter_transition(p, q, 'b');
+  c1.add_letter_transition(p, q, '1');
   c1.add_series_transition(q, q, sq);
   c1.add_series_transition(p, p, sp);
   c1.set_initial(p);

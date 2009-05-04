@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+## Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -15,29 +15,15 @@ all: pdf
 
 include $(top_srcdir)/vaucanson.mk
 
-share_dir = $(top_srcdir)/doc/share
-share_bin_dir = $(share_dir)/bin
-share_style_dir = $(share_dir)/styles
-share_bib_dir = $(share_dir)/bib
-
-TEXI2DVI = $(share_bin_dir)/texi2dvi
-TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I $(share_style_dir) -I $(share_bib_dir)
-
-TEXI2PDF = $(TEXI2DVI) --pdf
-TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
-
-share_tex_dependencies = \
-$(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
+TEXI2PDF = texi2pdf
+TEXI2PDF_FLAGS = --tidy --build-dir=tmp.t2d --batch
 
 ## ----- ##
 ## *.tex ##
 ## ----- ##
 
-%.pdf: %.tex $(share_tex_dependencies)
+%.pdf: %.tex
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
-
-%.dvi: %.tex $(share_tex_dependencies)
-	$(TEXI2DVI) $(TEXI2DVI_FLAGS) -o $@ $<
 
 .PHONY: tex-mostlyclean
 tex-mostlyclean:
@@ -48,109 +34,26 @@ tex-mostlyclean:
 mostlyclean-local: tex-mostlyclean
 
 
-# We compile and ship vaucanson-manual.pdf.
-manual = $(srcdir)/vaucanson-manual.pdf
+# We compile and ship taf-kit-manual.pdf.
+manual = $(srcdir)/taf-kit-manual.pdf
 
 pdf: $(manual)
 
-# We use vaucanson-g, which requires plain DVI compilation.
-TEXI2PDF_FLAGS += --dvipdf -I manual.ext
-
 dist_pdf_DATA = $(manual)
 
-$(manual): $(vaucanson_manual_sources) $(srcdir)/extex.pl
-	$(MAKE) $(AM_MAKEFLAGS) manual.ext
-	cd manual.ext && $(MAKE) $(AM_MAKEFLAGS) dvi
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
+$(manual): taf-kit-manual.tex
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ taf-kit-manual.tex
 
 vaucanson_manual_sources =			\
-vaucanson-manual.tex				\
-introduction.tex				\
-installation.tex				\
-taf-kit.tex					\
+taf-kit-manual.tex				\
 vaucanswig.tex					\
-library.tex					\
-developer.tex					\
-theory.tex					\
-automata.tex					\
-xml.tex						\
-specification.tex				\
-version.tex
+developer.tex
 
-$(srcdir)/automata.tex: generate-automata.sh
-# Use the TAF-Kit wrappers.
-	PATH=$(top_builddir)/taf-kit/tests:$$PATH \
-	$(srcdir)/generate-automata.sh >$@-t
-	mv $@-t $@
+EXTRA_DIST = $(vaucanson_manual_sources)
 
-$(srcdir)/version.tex: $(top_srcdir)/configure.ac
-	echo '\def\VcsnVersion{$(VERSION)}' > $*.tmp
-	echo "\def\VcsnDate{`LANG=C date +%Y-%m-%d`}" >> $*.tmp
-	mv -f $*.tmp $@
-
-EXTRA_DIST = $(vaucanson_manual_sources) $(manual)  \
-	 generate-automata.sh extex.pl extex.mk
-
-# Extract commands that must be run to produce figures.
-manual.ext: $(vaucanson_manual_sources) $(srcdir)/extex.pl
-	perl -I$(top_srcdir)/build-aux -w	\
-	  $(srcdir)/extex.pl			\
-	  --output-dir=$@			\
-	  --srcdir=$(srcdir)			\
-	  --top_srcdir=$(top_srcdir)		\
-	  --builddir=.				\
-	  --top_builddir=$(top_builddir)	\
-          $(vaucanson_manual_sources)
-	touch $@
-
-MAINTAINERCLEANFILES = $(vcsndldir_data) automata.tex
+MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 maintainer-clean-local:
-	rm -rf manual.ext tmp.t2d
+	rm -rf tmp.t2d
 
-## ---------------------------- ##
-## Installing on LRDE servers.  ##
-## ---------------------------- ##
-
-vcsndldir_data =				\
-$(dist_pdf_DATA)
-
-install-epita: $(vcsndldir_data)
-	$(INSTALL_DATA) $(vcsndldir_data) $(vcsndldir)
-.PHONY: install-epita
-
-
-## ------------ ##
-## Deep-clean.  ##
-## ------------ ##
-
-# Remove all the is generated, included if it requires maintainer
-# tools, but do not call maintainer-clean nor distclean, since we do
-# not want to have to reconfigure etc.
-deep-clean: clean maintainer-clean-local
-	-rm -f $(MAINTAINERCLEANFILES)
-
-
-## ---------- ##
-## minidist.  ##
-## ---------- ##
-
-# Useful to ship just the sources.  It would be nice to be able to
-# ship share/ too, but it's one level higher currently.
-
-EXTRA_MINIDIST = $(EXTRA_DIST)
-MINIDISTDIR = vaucanson-manual
-# Files to remove from the tarball.
-MINIDIST_IGNORE = \
-  -name '*~' -o -name '.svn' -o -name '+committed'
-minidistdir:
-	rm -rf $(MINIDISTDIR)
-	mkdir $(MINIDISTDIR)
-# Use tar, not cp, to preserve the directory parts (cp bar/baz foo/ yields
-# foo/baz, not foo/bar/baz).
-	(cd $(srcdir) && tar cf - $(EXTRA_MINIDIST)) | (cd $(MINIDISTDIR) && tar xf -)
-	find $(MINIDISTDIR) $(MINIDIST_IGNORE) | xargs rm -fr
-
-
-minidist: minidistdir
-	tar zcf $(MINIDISTDIR).tar.gz $(MINIDISTDIR)
-	rm -rf $(MINIDISTDIR)
+maintainer-check: taf-kit-manual.tex
+	grep "^\\\\def\\\\VcsnVersion{$(VERSION)}" taf-kit-manual.tex

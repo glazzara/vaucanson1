@@ -8,6 +8,34 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
+Vaucanson 1.2.96, May 4th, 2009
+===============================
+
+- Out-of-date documentation has been trashed away.  What remains
+  is an overhauled documentation for TAF-Kit that can be read in
+  ``doc/manual/taf-kit-manual.pdf``.
+
+- Vaucanson library
+
+  + The ``has_succ_comp()`` function has been renamed to ``is_useless()``,
+    and its result reversed.
+  + Rational expression can be exported into XML.
+  + ``standard_of()`` and ``thompson_of`` have been improved to build
+    the automaton in place.
+
+- TAF-Kit
+
+  + The ``has-succ-comp`` command has been replaced by the ``is-useless``
+    command, following the change in the library.
+  + The ``co-accessible`` command is now spelled ``coaccessible``.
+  + Commands that output rational expression will output XML files
+    if given the ``-o xml`` option, and will read XML files if given
+    the ``-i xml`` option.
+  + Two new instances: ``vcsn-char-zmin`` and ``vcsn-char-zmax``.
+  + A couple of unusual commands have been removed from the output
+    of ``--list-commands`` and are now only shown by the new
+    ``--list-all-commands`` option.
+
 Vaucanson 1.2.95, January 22th, 2009
 ====================================
 

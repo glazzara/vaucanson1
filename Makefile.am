@@ -46,8 +46,11 @@ BUILT_SOURCES = include/vaucanson/config/pconf.hh
 ###
 ACLOCAL_AMFLAGS = -I build-aux -I m4
 
+# Even if find_tests.sh says tests.m4 needs not be updated, we want it
+# to be newer than find_tests.sh.
 $(top_srcdir)/build-aux/tests.m4: $(top_srcdir)/build-aux/find_tests.sh
 	cd $(top_srcdir) && build-aux/find_tests.sh
+	touch $@
 
 ###
 ### Making the demos. (. is builddir)
@@ -84,6 +87,7 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
+	cd doc/manual && $(MAKE) maintainer-check
 
 # Build debian packages.
 deb:
@@ -152,16 +156,3 @@ distcheck: dist
 	@(echo "$(distdir) archives ready for distribution: "; \
 	  list='$(DIST_ARCHIVES)'; for i in $$list; do echo $$i; done) | \
 	  sed -e '1{h;s/./=/g;p;x;}' -e '$${p;x;}'
-
-
-## ---------------------------- ##
-## Installing on LRDE servers.  ##
-## ---------------------------- ##
-
-install-epita:
-# If the dload directory does not exist, bail out.
-	if test ! -d $(dloaddir); then			\
-	  echo >&2 "no such directory: $(dloaddir)";	\
-	fi
-	cd doc && $(MAKE) $(AM_MAKEFLAGS) install-epita
-.PHONY: install-epita

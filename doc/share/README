@@ -1,8 +1,0 @@
-All the files in this directory (except this README) are maintained in
-  https://svn.lrde.epita.fr/svn/lrde-publis/trunk/share/
-
-You can update them by running "make share-up" in the doc/ directory.
-
-Do not modify these files directly or your changes will be lost
-the next time someone runs "make share-up".  If you need to fix
-something, fix it in the aforementioned SVN repository.

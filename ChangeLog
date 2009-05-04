@@ -1,7 +1,131 @@
+2009-05-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* configure.ac: Bump to 1.2.96a.
+	* doc/manual/taf-kit-manual.tex: Likewise.
+
+2009-05-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Release 1.2.96.
+
+	* configure.ac: Bump to 1.2.96.
+	* doc/manual/taf-kit-manual.tex: Likewise.
+	* doc/NEWS.txt: Document 1.2.96.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* data/automata/char-z/d2.cc: Really add this file.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce d2.xml.
+
+	* data/automata/char-z/d2.cc: New file.
+	* data/automata/char-z/Makefile.am: Build d2.xml.
+	* taf-kit/tests/vcsn-char-z.test: Test d2.xml.
+	* doc/manual/taf-kit-manual.tex (d2.xml): New section.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Remove dev3base10.xml: it is not a pertinent example of Z automaton.
+
+	* data/automata/char-z/divkbaseb.cc: Delete.
+	* data/automata/char-z/Makefile.am,
+	taf-kit/tests/vcsn-char-z.test: Adjust.
+	* doc/manual/taf-kit-manual.tex (div3base10.xml): Remove.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Use alphabet {0,1} for c1.xml.
+
+	* data/automata/char-z/c1.cc: Rewrite using alphabet {0,1} instead
+	of {a,b}.
+	* taf-kit/tests/vcsn-char-z.test: Adjust test.
+	* doc/manual/taf-kit-manual.tex (c1.xml): Adjust and document
+	the figure.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/manual/taf-kit-manual.tex: Minor corrections from Jacques
+	Sakarovitch.
+
+2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Turn the Vaucanson User's manual into a Taf-Kit documentation.
+
+	* doc/manual/vaucanson-manual.tex: Rename as ...
+	* doc/manual/taf-kit-manual.tex: ... this.  And change
+	the title to "Taf-Kit Documentation"
+	* doc/manual/Makefile.am, lrde-upload.sh: Adjust.
+
+2009-04-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* src/tests/test-suites/algebra_numerical_semiring_int.defs: Add a
+	newline at EOF to kill a GCC warning.
+
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/HACKING.txt: Use *this* for italics, not `this`.
+
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix spurious calls to find_tests.sh and potential race conditions.
+
+	* build-aux/find_tests.sh: Use $$ in temporary files to prevent
+	races if this script is run more than once.
+	* Makefile.am (build-aux/tests.m4): Always touch the output.
+
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/manual/vaucanson-manual.tex (Trivial Identities): New section.
+
+2009-04-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/manual/vaucanson-manual.tex: Fix some typos and reword some
+	phrases.
+
+2009-04-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	More documentation.
+
+	* doc/manual/vaucanson-manual.tex: Fill the automaton repository.
+	Add some words about weights.  Kill the old examples from the doc
+	except the part about Z-automata.
+
 2009-04-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* lrde-upload.sh: Do not use git to compute the name of the
 	branch.  Buildbot will now pass the branch name as first argument.
+
+2009-04-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser_private.hh:
+	Add header guards.
+
+2009-04-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* lib/krat_exp/krat_exp_bison.yy: Use "%name-prefix=" instead
+	of "%name-prefix " to please Bison < 2.4.
+
+2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rename the yy:: namespace into vcsnyy:: to prevent potential
+	conflicts with a user defined parser.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx,
+	include/vaucanson/algebra/implementation/series/krat_exp_parser_private.hh,
+	lib/krat_exp/krat_exp_bison.yy: Rename yy as vcsnyy.
+
+2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Factor the two definitions of yy::krat_exp_parser in a single place.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx
+	(yy::krat_exp_parser): Move to...
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser_private.hh:
+	This new file.
+	* include/Makefile.am: Distribute and install the new file.
+	* lib/krat_exp/krat_exp_bison.yy (yy::krat_exp_parser): Delete
+	and include krat_exp_parser_private.hh instead.
 
 2009-04-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
@@ -12,9 +136,224 @@
 	* taf-kit/tests/vcsn-int-b.test: Add a test case.
 	Thanks to Jérôme for the help.
 
+2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make a new section of rational expressions.
+
+	* doc/manual/vaucanson-manual.tex (Writing Rational Expression):
+	New section.
+	(Empty word and null series): Move into the previous section.
+	(Interactive Definition of Automata): Create a new section out of...
+	(Boolean automata): ... some text from here, and delete the rest.
+	(Automaton Repository): Complete.
+
+2009-04-09  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+
+	* doc/manual/vaucanson-manual.tex (\tafkit) More text.
+
+2009-04-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rework the TAF-Kit introduction.
+
+	* doc/manual/vaucanson-manual.tex (The \Vauc toolkit): Rename
+	as...
+	(\tafkit): ... this and add more text.
+
+2009-04-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	More administrativia.
+
+	* doc/manual/vaucanson-manual.tex (Installation): Rename as...
+	(Administrativia): ... this, and add more text.
+
+2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Manual: some work on the title page and the introduction.
+
+	* doc/manual/vaucanson-manual.tex (\TFK,\TFKv): Remove these
+	unused macros.
+	(\title,\author): Remove and replace by a custom titlepage.
+	Also change the title from "The Vaucanson TAF-Kit 1.2.95"
+	to "Vaucanson User's Manual".
+	(Introduction): Rewrite to introduce the library, TAF-Kit, and
+	the automata repository.
+	(Automaton Library): Rename as ...
+	(Automaton Repository): ... to avoid ambiguities with Vaucanson
+	being an Automaton Library too.
+
 2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* lrde-upload.sh: Update to take Git branches into account.
+
+2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Replace check_doc.py by a call to grep.
+
+	* doc/manual/Makefile.am (maintainer-check): Replace the
+	call to check_doc.py by a simple call to grep.
+	(CLEANFILES, check_doc.py): Do not build check_doc.py anymore.
+	* doc/manual/check_doc.py.in: Delete.
+
+2009-04-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/FAQ.txt: Really delete it, as intended on 2009-01-23.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Copy some sections from developer.tex into HACKING.txt
+
+	* doc/HACKING.txt (Tools): New section.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/README.txt: python-docutils is not needed by end-users.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* Makefile.am (maintainer-check): Call maintainer-check in
+	doc/manual.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Remove some unused Makefile rules.
+
+	* Makefile.am (install-epita): Remove.
+	* doc/manual/Makefile.am (install-epita, deep-clean,
+	vcsndldir_data): Remove.
+	(EXTRA_DIST): Do not distribute the manual a second time, it
+	is already in dist_pdf_DATA.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/manual/Makefile.am (check_doc.py): Add missing $(srcdir)/
+	on dependency.
+
+2009-04-02  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+
+	More developer documentation.
+
+	* doc/HACKING.txt (Version control): New section to discuss Git
+	and how to work with Git.
+	(Parallel make): Remove Fixme and simplify command.
+	(distcc, ccache): More text
+	(Improve the build system): Remove.
+
+2009-04-02  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Move the user manual check from check to maintainer-check.
+
+	* configure.ac: Only check for python when building vaucanswig.
+	* doc/.gitignore: Remove check_doc.py.
+	* doc/manual/Makefile.am: Do not distribute check_doc.py and
+	check_doc.py.in. Only run check_doc.py when invoking the
+	maintainer-check target.
+	* doc/HACKING.txt: Add a step when making a release.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Cleanup command display in the user manual.
+
+	* doc/manual/vaucanson-manual.tex: Use $ as prompt in the shell
+	environments. Convert all verbatim environments to shell ones.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update the automaton TikZ style in the user manual.
+
+	* doc/manual/vaucanson-manual.tex: Make states bolder, and loops
+	larger (code by Alexandre Duret-Lutz).
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Remove share dependencies.
+
+	* doc/manual/developer.tex, doc/README.txt, doc/HACKING.txt: Remove
+	references to share.
+	* doc/Makefile.am: Remove the share-up target. Use texi2pdf.
+	* doc/manual/Makefile.am: Remove the variables share_dir,
+	share_bin_dir, share_style_dir and share_bib_dir. Do not use the
+	--dvipdf flag (TikZ is used instead of Vaucanson-G so plain DVI
+	compilation is no more required).
+	* doc/manual/vaucanson-manual.tex: Convert all Vaucanson-G pictures to
+	TikZ ones. Use babel, hyperref, tikz instead of mybabel, myhyperref,
+	Vaucanon-G respectively. Do not include myacronym, texi and misc.
+	Include xspace. Many tweaks.
+	* doc/share/README, doc/share/bib/vaucanson.bib,
+	doc/share/bin/texi2dvi, doc/share/styles/VCpatch-pstricks-1-10.tex,
+	doc/share/styles/Vaucanson-G.tex, doc/share/styles/hevea.sty,
+	doc/share/styles/ldf/stl.sty, doc/share/styles/ldf/vaucanson.sty,
+	doc/share/styles/misc.hva, doc/share/styles/misc.sty,
+	doc/share/styles/myacronym.hva, doc/share/styles/myacronym.sty,
+	doc/share/styles/mybabel.hva, doc/share/styles/mybabel.sty,
+	doc/share/styles/mycxx.sty, doc/share/styles/myhyperref.hva,
+	doc/share/styles/myhyperref.sty, doc/share/styles/myifthen.hva,
+	doc/share/styles/myifthen.sty, doc/share/styles/myindex.hva,
+	doc/share/styles/myindex.sty, doc/share/styles/texi.hva,
+	doc/share/styles/texi.sty, doc/share/styles/vaucanson-g.sty: Remove.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Update .gitignore.
+
+	* .gitignore: Add NEWS and README.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Do not depend on version.tex in the user manual.
+
+	* configure.ac: Always check for python.
+	* doc/.gitignore: Remove version.tex, add check_doc.py.
+	* doc/manual/Makefile.am: Do not generate version.tex at build
+	time. Use a script (check_doc.py.in) to check the user manual.
+	* doc/manual/vaucanson-manual.tex: Add the VcsnVersion tag. Let
+	\maketitle build the date.
+	* doc/manual/check_doc.py.in: New.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Cleanup the user manual further.
+
+	* doc/manual/vaucanson-manual.tex: Remove sections from the old
+	developer manual.
+
+2009-04-01  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Only use one tex file for the user manual.
+
+	* doc/manual/Makefile.am: Remove introduction.tex, installation.tex,
+	taf-kit.tex, theory.tex, automata.tex, xml.tex, specification.tex from
+	the distribution.
+	* doc/manual/automata.tex, doc/manual/installation.tex,
+	doc/manual/introduction.tex, doc/manual/specification.tex,
+	doc/manual/taf-kit.tex, doc/manual/theory.tex, doc/manual/xml.tex:
+	Remove.
+	* doc/manual/vaucanson-manual.tex: Merge the previously named files
+	into this one.
+
+2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Streamline the user manual.
+
+	* doc/manual/Makefile.am: Remove the minidist target. Remove
+	library.tex from the sources.
+	* doc/manual/extex.pl, doc/manual/extex.mk, doc/manual/library.tex,
+	doc/manual/generate-automata.sh: Remove.
+	* doc/manual/vaucanson-manual.tex: Do not include library.tex.
+
+2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Remove make dist depency on make (Close #140).
+
+	* doc/.gitignore: Remove automata.tex and manual.ext as they are no
+	more generated.
+	* doc/manual/Makefile.am: Disable the extraction of commands in
+	taf-kit.tex, and the generation of automata.tex.
+	* doc/manual/automata.tex: New.
+	* doc/manual/taf-kit.tex: Replace each occurrence of execcaption by a
+	verbatim environment. Remove each occurrence of includegenerateddot.
+	* doc/manual/vaucanson-manual.tex: Remove the commands
+	includegenerated, includegenerateddot, execcaption and execdisplay. Do
+	not use vaucanswig.tex and developer.tex.
 
 2009-03-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
