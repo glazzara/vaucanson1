@@ -1,3 +1,11 @@
+2009-05-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Release 1.2.96.
+
+	* configure.ac: Bump to 1.2.96.
+	* doc/manual/taf-kit-manual.tex: Likewise.
+	* doc/NEWS.txt: Document 1.2.96.
+
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* data/automata/char-z/d2.cc: Really add this file.
