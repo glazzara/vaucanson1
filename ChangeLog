@@ -1,3 +1,9 @@
+2009-05-05  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix call graph export in taf-kit.
+
+	* taf-kit/src/main.cc: Use the correct variable.
+
 2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Adjust bench to complete in a reasonable time.

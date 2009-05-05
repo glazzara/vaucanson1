@@ -394,7 +394,7 @@ int main (int argc, char* argv[])
       if (args.export_time_dot)
 	BENCH_DUMP(std::cerr,
 		   bench::Options(bench::Options::get_verbosity
-				  (args.report_degree),
+				  (args.export_dot_degree),
 				  bench::Options::FO_DOT));
       if (args.export_time_xml)
 	BENCH_DUMP(std::cerr, bench::Options());
