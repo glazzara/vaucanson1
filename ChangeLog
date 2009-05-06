@@ -1,3 +1,17 @@
+2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Document left and right weight multiplications.
+
+	* doc/manual/taf-kit-manual.tex (Writing Rational Expressions):
+	Rename as ...
+	(Writing (Weighted) Rational Expressions): ... this.
+	(Rational operators): Show the result of the are-equivalent
+	example.
+	(Weights): Document left and right weights using text from
+	Jacques Sakarovitch.
+	(Trivial Identities): Write "weighted rational expression"
+	instead of "rational expression" to avoid ambiguities.
+
 2009-05-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac: Bump to 1.2.96a.

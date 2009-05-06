@@ -522,7 +522,7 @@ When commands are chained internally using \samp{\bslash|} and
 \samp{-}, the parsing steps and printing steps are of course omitted.
 
 
-\section{Writing Rational Expressions}
+\section{Writing (Weighted) Rational Expressions}
 
 \subsection{Rational operators}
 
@@ -557,6 +557,7 @@ is equivalent to the automaton $\Ac_1$ of \autoref{fig:a1}.
 \begin{shell}
 $ \kbd{vcsn-char-b exp-to-aut -aab "(a+b)*ab(a+b)*" > aut.xml}
 $ \kbd{vcsn-char-b are-equivalent -v aut.xml a1.xml}
+Automata are equivalent
 \end{shell}%$
 
 \noindent The \option{-v} is used to request a plain English output
@@ -611,27 +612,43 @@ own representation for these symbols
 Weights are written in braces as in \samp{\{3\}}.
 
 For instance the automaton $\Cc_1$ from \autoref{sec:z:c1} corresponds
-to the rational expression \samp{(a+b)*.b.(\{2\}a+\{2\}b)*}.
+to the (weighted) rational expression
+\samp{(a+b)*.b.(\{2\}a+\{2\}b)*}.
 
 \begin{shell}
 $ \kbd{vcsn-char-z aut-to-exp c1.xml}
 (a+b)*.b.(\{2\} a+\{2\} b)*
 \end{shell}%$
 
-FIXME: Explain Left/Right weights.
+In \Vauc, and even if this does not appear yet in the \tafkit
+instances, the weight semirings are not necessarily commutative: the
+simple case where this will occur is when an "FMP transducer" will be
+transformed into an automaton with weights in the semiring of rational
+languages over the output alphabet.
+
+For this reason, the multiplication by a weight on the left and on the
+right are two distinct operations in the building of weighted rational
+expressions. For instance, \samp{\{3\}(\{2\}a+b)} and
+\samp{(\{2\}a+b)\{3\}} are two distinct expressions even if they
+denote the same polynomial: \samp{\{6\}a + \{3\}b}, in the same way as
+\samp{\{y\}(\{x\}a+b)} and \samp{(\{x\}a+b)\{y\}} are distinct
+expressions, which denote distinct polynomials: \samp{\{yx\}a +
+  \{y\}b} and \samp{\{xy\}a + \{y\}b} respectively.
+
 
 \subsection{Trivial Identities}
 
-Anytime a rational expression is constructed inside \Vauc, the
-following rewriting, called \emph{trivial identities}, are
+Anytime a weighted rational expression is constructed inside \Vauc,
+the following rewritings, called \emph{trivial identities}, are
 automatically applied.
 
-Here $E$ stands for any rational expression, $w$ is any word, and $k$
-and $h$ are weights.  In these notations it should also be obvious
-that $0$ and $1$ designate the identity of the monoid (empty word) and
-null series, while $\{0\}$ and $\{1\}$ designate the zero and identity
-of the semiring (weights).  Any subexpression of a form listed to the
-left of a `$\Rightarrow$' is rewritten as indicated on the right.
+Here $E$ stands for any weighted rational expression, $w$ is any word,
+and $k$ and $h$ are weights.  In these notations it should also be
+obvious that $0$ and $1$ designate the identity of the monoid (empty
+word) and null series, while $\{0\}$ and $\{1\}$ designate the zero
+and identity of the semiring (weights).  Any subexpression of a form
+listed to the left of a `$\Rightarrow$' is rewritten as indicated on
+the right.
 
 \begin{align*}
   E+0 = 0+E &\Rightarrow E
@@ -658,7 +675,7 @@ left of a `$\Rightarrow$' is rewritten as indicated on the right.
 These rewriting mean that it is \emph{impossible} for \Vauc to emit a
 rational expression such as \samp{(\{3\}(0(ab)))*\{4\}}.  This
 expression is \emph{by construction} equal to \samp{\{4\}1}.  We can
-verify this using the \command{identity-exp}:
+verify this using \command{identity-exp}:
 
 \begin{shell}
 $ \kbd{vcsn-char-z identity-exp --alphabet=ab "(\{3\}(0(ab)))*\{4\}"}
@@ -668,7 +685,7 @@ $ \kbd{vcsn-char-z identity-exp --alphabet=ab "(\{3\}(0(ab)))*\{4\}"}
 \noindent the command \command{identity-exp} does not apply any
 algorithm on the rational expression.  Its only purpose is to read and
 write the rational expression using any I/O option supplied on the
-command-line.  The trivial identities are performed while reading the
+command-line.  The trivial identities are rewritten while reading the
 expression.
 
 \section{Interactive Definition of Automata}
