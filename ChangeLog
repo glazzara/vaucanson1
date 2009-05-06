@@ -11,6 +11,14 @@
 	* doc/manual/taf-kit-manual.tex: Likewise.
 	* doc/NEWS.txt: Document 1.2.96.
 
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Optimize quotient on boolean automata.
+
+	(As mentioned during the meeting on April 10th)
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Do that.
+
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* data/automata/char-z/d2.cc: Really add this file.

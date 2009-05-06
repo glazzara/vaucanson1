@@ -347,12 +347,16 @@ namespace vcsn
 	  for_all_(going_in_t, s, going_in_)
 	    *s = false;
 
+
+	  semiring_elt_t weight_zero = input_.series().semiring().wzero_;
+	  monoid_elt_t w(input_.series().monoid(), a);
+
 	  for_all_(partition_t, s, p)
           {
             for (rdelta_iterator t(input_.value(), *s); ! t.done(); t.next())
 	    {
-              monoid_elt_t w(input_.series_of(*t).structure().monoid(), a);
-              if (input_.series_of(*t).get(w) != input_.series().semiring().wzero_)
+	      series_set_elt_t st = input_.series_of(*t);
+              if (st.get(w) != weight_zero)
 	      {
                 hstate_t s = input_.src_of(*t);
                 if (!going_in_[s])
