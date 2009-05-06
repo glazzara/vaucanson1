@@ -1,5 +1,10 @@
 2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/NEWS.txt: Make clearer that the documentation is incomplete.
+	Suggested by Jacques Sakarovitch.
+
+2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename d2.xml as d1.xml.
 
 	* data/automata/char-z/d2.cc: Rename as...
