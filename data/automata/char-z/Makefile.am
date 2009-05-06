@@ -15,12 +15,12 @@
 include $(top_srcdir)/vaucanson.mk
 
 # Z automata.
-noinst_PROGRAMS = c1 d2
+noinst_PROGRAMS = c1 d1
 
 nodist_char_z_automata_DATA =		\
   b1.xml				\
   c1.xml				\
-  d2.xml
+  d1.xml
 
 CLEANFILES += $(nodist_char_z_automata_DATA)
 
@@ -35,8 +35,8 @@ c1.xml: c1$(EXEEXT)
 	./c1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
-d2_CPPFLAGS = $(AM_CPPFLAGS)
-d2_SOURCES = d2.cc
-d2.xml: d2$(EXEEXT)
-	./d2$(EXEEXT) xml >$@.tmp
+d1_CPPFLAGS = $(AM_CPPFLAGS)
+d1_SOURCES = d1.cc
+d1.xml: d1$(EXEEXT)
+	./d1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
