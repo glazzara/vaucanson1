@@ -1,3 +1,10 @@
+2009-05-11  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix out of tree building for the TAF-Kit manual.
+
+	* doc/manual/Makefile.am: Correct the path to taf-kit-manual.tex by
+	prefixing the old path with $(srcdir).
+
 2009-05-10  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add support for boost multi-index >= 1.36.

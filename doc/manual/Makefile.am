@@ -42,7 +42,7 @@ pdf: $(manual)
 dist_pdf_DATA = $(manual)
 
 $(manual): taf-kit-manual.tex
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ taf-kit-manual.tex
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $(srcdir)/taf-kit-manual.tex
 
 vaucanson_manual_sources =			\
 taf-kit-manual.tex				\
