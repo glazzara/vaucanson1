@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,24 +52,24 @@ namespace vcsn
 
   using boost::multi_index::detail::hashed_index_iterator;
 
-  template<typename T, typename U, typename V>
-  bool operator==(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
-  template<typename T, typename U, typename V>
-  bool operator!=(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
-  template<typename T, typename U, typename V>
-  bool operator<(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
-		 const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
-  template<typename T, typename U, typename V>
-  bool operator>(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
-		 const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
-  template<typename T, typename U, typename V>
-  bool operator<=(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
-  template<typename T, typename U, typename V>
-  bool operator>=(const handler<transition_h, hashed_index_iterator<T, U, V> >& h1,
-		  const handler<transition_h, hashed_index_iterator<T, U, V> >& h2);
+  template<typename T, typename U>
+  bool operator==(const handler<transition_h, hashed_index_iterator<T, U> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U> >& h2);
+  template<typename T, typename U>
+  bool operator!=(const handler<transition_h, hashed_index_iterator<T, U> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U> >& h2);
+  template<typename T, typename U>
+  bool operator<(const handler<transition_h, hashed_index_iterator<T, U> >& h1,
+		 const handler<transition_h, hashed_index_iterator<T, U> >& h2);
+  template<typename T, typename U>
+  bool operator>(const handler<transition_h, hashed_index_iterator<T, U> >& h1,
+		 const handler<transition_h, hashed_index_iterator<T, U> >& h2);
+  template<typename T, typename U>
+  bool operator<=(const handler<transition_h, hashed_index_iterator<T, U> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U> >& h2);
+  template<typename T, typename U>
+  bool operator>=(const handler<transition_h, hashed_index_iterator<T, U> >& h1,
+		  const handler<transition_h, hashed_index_iterator<T, U> >& h2);
 
   template<>
   bool operator==(const handler<state_h, boost::shared_ptr<std::size_t> >& h1,

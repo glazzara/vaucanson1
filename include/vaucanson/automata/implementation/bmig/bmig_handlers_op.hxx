@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@
 
 //Operator for htransition_t storing iterators
 #define HOPERATOR(Op)					\
-template<typename T, typename U, typename V>		\
-bool operator Op (const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,\
-                  const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2)\
+template<typename T, typename U>			\
+bool operator Op (const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U> >& h1,\
+                  const handler<transition_h, boost::multi_index::detail::hashed_index_iterator<T, U> >& h2)\
 {							\
   if (h1.value()->from_ == h2.value()->from_)		\
     if (h1.value()->to_ == h2.value()->to_)		\
@@ -46,11 +46,11 @@ namespace vcsn
 #undef HOPERATOR
 
 #define HOPERATOR(Op)					\
-template<typename T, typename U, typename V>		\
+template<typename T, typename U>			\
 bool operator Op (const handler<transition_h,		\
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h1,\
+				boost::multi_index::detail::hashed_index_iterator<T, U> >& h1,\
                   const handler<transition_h,		\
-				boost::multi_index::detail::hashed_index_iterator<T, U, V> >& h2)\
+				boost::multi_index::detail::hashed_index_iterator<T, U> >& h2)\
 {							\
   return h1.value() Op h2.value();			\
 }
