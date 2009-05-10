@@ -1,5 +1,11 @@
 2009-05-11  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
 
+	Remove the vcs directory.
+
+	* vcs/vaucanson.rb: Remove.
+
+2009-05-11  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+
 	Fix out of tree building for the TAF-Kit manual.
 
 	* doc/manual/Makefile.am: Correct the path to taf-kit-manual.tex by
