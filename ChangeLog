@@ -1,3 +1,10 @@
+2009-05-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix errors reported by g++ 4.4.0.
+
+	* include/vaucanson/algebra/implementation/series/transpose.hh:
+	Do not name a argument T when T is also a template parameter.
+
 2009-05-11  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Remove the vcs directory.
