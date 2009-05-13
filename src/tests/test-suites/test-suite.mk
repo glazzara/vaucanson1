@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2006, 2007, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ EXTRA_DIST = failcomp.sh
 
 AM_CPPFLAGS += $(BOOST_CPPFLAGS) -DEXCEPTION_TRAPS -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
 
-LDADD += $(top_builddir)/lib/libkrat_exp.la 
+LDADD += $(top_builddir)/lib/libvcsn-common.la 
 
 TESTS_ENVIRONMENT = CXX="$(CXX)" \
 		    CXXFLAGS="$(AM_CPPFLAGS) $(CPPFLAGS)"

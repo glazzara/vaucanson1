@@ -1,3 +1,20 @@
+2009-05-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rename libkrat_exp.la as libvcsn_common.la, and move lib/krat_exp/
+	to lib/src/krat_exp/, so that we can later integrate more code
+	into libvcsn_common.la.
+
+	* bootstrap: Don't run bison, the Makefile will do it.
+	* lib/krat_exp/krat_exp_bison.yy: Move ...
+	* lib/src/krat_exp/krat_exp_bison.yy: ... here.
+	* lib/krat_exp/libkrat_exp.mk: Rename as ...
+	* lib/src/libcommon.mk: ... this, and adjust to the new names.
+	* src/demos/algorithms/Makefile.am,
+	src/demos/one_rule_rewriting/Makefile.am,
+	src/demos/vgrep/Makefile.am, src/tests/xml/Makefile.am,
+	taf-kit/src/Makefile.am, lib/Makefile.am: Change all references to
+	libkrat_exp.la into libvcsn-common.la.
+
 2009-05-12  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix errors reported by g++ 4.4.0.

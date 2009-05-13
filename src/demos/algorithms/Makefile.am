@@ -1,5 +1,5 @@
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -25,10 +25,10 @@ aut_are_equivalent_SOURCES = aut_are_equivalent.cc equivalent_functions.cc
 aut_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-aut_are_equivalent_LDADD = $(top_builddir)/lib/libkrat_exp.la
+aut_are_equivalent_LDADD = $(top_builddir)/lib/libvcsn-common.la
 
 exp_are_equivalent_SOURCES = exp_are_equivalent.cc equivalent_functions.cc
 exp_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-exp_are_equivalent_LDADD = $(top_builddir)/lib/libkrat_exp.la
+exp_are_equivalent_LDADD = $(top_builddir)/lib/libvcsn-common.la

@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -90,7 +90,7 @@ int_z_trans_tester_SOURCES = xml_int_z_trans_tester.cc
 geometry_tester_SOURCES = xml_geometry_tester.cc
 
 label_node_tester_SOURCES = xml_label_node_tester.cc
-label_node_tester_LDADD = $(top_builddir)/lib/libkrat_exp.la
+label_node_tester_LDADD = $(top_builddir)/lib/libvcsn-common.la
 
 ## ------------------------ ##
 ## Running the test suite.  ##

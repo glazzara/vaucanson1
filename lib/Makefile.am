@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2007, 2008 The Vaucanson Group.
+## Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 lib_LTLIBRARIES =
 MAINTAINERCLEANFILES =
 
-include krat_exp/libkrat_exp.mk
+include src/libcommon.mk
 include vcsn-b/libvcsn-b.mk
 include vcsn-int-b/libvcsn-int-b.mk
 include vcsn-r/libvcsn-r.mk
@@ -52,8 +52,7 @@ maintainer-clean-local:
 	       $(top_builddir)/lib/vcsn-tdc		\
 	       $(top_builddir)/lib/vcsn-char-char-b	\
 	       $(top_builddir)/lib/vcsn-char-int-b	\
-	       $(top_builddir)/lib/vcsn-int-int-b	\
-	       $(top_builddir)/lib/krat_exp
+	       $(top_builddir)/lib/vcsn-int-int-b
 	rm -rf $(top_srcdir)/lib/vcsn-b			\
 	       $(top_srcdir)/lib/vcsn-int-b		\
 	       $(top_srcdir)/lib/vcsn-r			\
@@ -69,6 +68,4 @@ maintainer-clean-local:
 	       $(top_srcdir)/lib/vcsn-tdc		\
 	       $(top_srcdir)/lib/vcsn-char-char-b	\
 	       $(top_srcdir)/lib/vcsn-char-int-b	\
-	       $(top_srcdir)/lib/vcsn-int-int-b		\
-	       $(top_srcdir)/lib/krat_exp
-
+	       $(top_srcdir)/lib/vcsn-int-int-b
