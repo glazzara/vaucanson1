@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -166,7 +166,8 @@ namespace vcsn {
 	const int denom = vcsn::algebra::lcm (min.denom (), max.denom ());
 	const int num1 = min.num ()*denom/min.denom ();
 	const int num2 = max.num ()*denom/max.denom ();
-	const int maxi = std::max (std::max (abs (num1), abs (num2)),denom);
+	const int maxi = std::max(std::max(std::abs(num1),
+					   std::abs(num2)), denom);
 	const int ratio = (vcsn::misc::limits<int>::max ()-1)/maxi;
 	return
 	  vcsn::algebra::RationalNumber (generate<int> (num1*ratio, num2*ratio),

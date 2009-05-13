@@ -1,5 +1,14 @@
 2009-05-13  Alexandre Duret-Lutz  <adl@va-et-vient.net>
 
+	abs() no longer works with g++ 4.4., we must write std::abs().
+
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	include/vaucanson/misc/random.hxx: Use std::abs() instead of abs().
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx:
+	Likewise, and also include <cstdlib> for abs(int).
+
+2009-05-13  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+
 	Introduce libvcsn-common-ex.la in addition to libvcsn-common.la
 	to decide whether exceptions should be used in preconditions.
 

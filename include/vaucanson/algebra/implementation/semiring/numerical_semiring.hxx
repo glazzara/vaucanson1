@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -342,7 +342,7 @@ namespace vcsn {
 			    const algebra::RationalNumber& r)
     {
       int denom = r.denom();
-      return abs(r.num()) < denom;
+      return std::abs(r.num()) < denom;
     }
 
     inline void op_in_star(const algebra::NumericalSemiring&,
@@ -350,7 +350,7 @@ namespace vcsn {
     {
       int denom = r.denom();
       algebra::RationalNumber one = algebra::RationalNumber(1, 1);
-      if (denom > abs(r.num()))
+      if (denom > std::abs(r.num()))
 	r = (one / (r - one));
       else
 	assertion(! "star not defined.");
@@ -389,7 +389,7 @@ namespace vcsn {
 	  res = misc::random::generate<algebra::RationalNumber>();
 	  denom = res.denom();
 	}
-      while (denom > abs(res.num()));
+      while (denom > std::abs(res.num()));
       return
 	Element<algebra::NumericalSemiring, algebra::RationalNumber>
 	(set, res);

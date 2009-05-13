@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/limits.hh>
 # include <cmath>
+# include <cstdlib>
 
 /**
  * @file   rational_number.hxx
@@ -77,7 +78,7 @@ namespace vcsn
     inline
     RationalNumber&	RationalNumber::set_result(int num,unsigned int denom)
     {
-      const int n = gcd(abs(num), denom);
+      const int n = gcd(std::abs(num), denom);
       num_ = num/n;
       denom_ = denom/n;
       return *this;
@@ -86,7 +87,7 @@ namespace vcsn
     inline
     RationalNumber&	RationalNumber::set_result()
     {
-      const int n = gcd(abs(num_), denom_);
+      const int n = gcd(std::abs(num_), denom_);
       num_ /= n;
       denom_ /= n;
       return *this;
@@ -261,7 +262,7 @@ namespace vcsn
     int	lcm(int a, unsigned int b)
     {
       int d;
-      if (!a || !b || !(d = gcd(abs(a), b)))
+      if (!a || !b || !(d = gcd(std::abs(a), b)))
 	return 0;
       int r = a * b / d;
 
