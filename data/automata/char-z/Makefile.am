@@ -14,6 +14,8 @@
 
 include $(top_srcdir)/vaucanson.mk
 
+LDADD = $(top_builddir)/lib/libvcsn-common.la
+
 # Z automata.
 noinst_PROGRAMS = c1 d2
 

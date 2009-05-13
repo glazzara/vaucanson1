@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2003, 2004, 2006, 2008 The Vaucanson Group.
+## Copyright (C) 2003, 2004, 2006, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -29,3 +29,4 @@ lib_LTLIBRARIES = libvv.la
 
 libvv_la_SOURCES = vcontext.cc vauto.cc
 libvv_la_CPPFLAGS = -DVCSN_DEFAULT_GRAPH_IMPL=listg
+libvv_la_LIBADD = $(top_builddir)/lib/libvcsn-common-ex.la

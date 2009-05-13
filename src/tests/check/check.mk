@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -22,7 +22,9 @@
 LAZY_TEST_SUITE = 1
 
 include $(top_srcdir)/src/tests/check/check-flags.mk
-LDADD = $(top_builddir)/src/tests/check/libcheck.a
+LDADD = \
+  $(top_builddir)/src/tests/check/libcheck.la \
+  $(top_builddir)/lib/libvcsn-common-ex.la
 
 TESTS = $(EXTRA_PROGRAMS)
 # Automake does not automatically clean EXTRA_PROGRAMS.

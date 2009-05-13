@@ -50,9 +50,6 @@
 #  define VCSN_USE_INTERFACE_ONLY 1
 # endif /* 0 */
 
-/* Turn VCSN traps into exception. */
-# define EXCEPTION_TRAPS 1
-
 # include <string>
 
 // Use a global timer and bencher.

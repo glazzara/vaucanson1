@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -15,8 +15,10 @@ include $(top_srcdir)/src/tests/check/check-flags.mk
 
 # It should be check_LIBRARIES, but this is safer, in case we want to
 # run check in a specific subdir.
-noinst_LIBRARIES = libcheck.a
+noinst_LTLIBRARIES = libcheck.la
 
-libcheck_a_SOURCES =			\
+libcheck_la_SOURCES =			\
   tester.cc				\
   unique.cc
+
+libcheck_a_LIBADD = $(top_builddir)/lib/libvcsn-common-ex.la

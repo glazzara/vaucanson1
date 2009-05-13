@@ -14,6 +14,8 @@
 include $(top_srcdir)/vaucanson.mk
 include $(top_srcdir)/build-aux/check.mk
 
+LDADD = $(top_builddir)/lib/libvcsn-common.la
+
 AM_CPPFLAGS += $(XSD_CPPFLAGS)
 
 TESTS_ENVIRONMENT = srcdir=$(srcdir)
@@ -90,7 +92,6 @@ int_z_trans_tester_SOURCES = xml_int_z_trans_tester.cc
 geometry_tester_SOURCES = xml_geometry_tester.cc
 
 label_node_tester_SOURCES = xml_label_node_tester.cc
-label_node_tester_LDADD = $(top_builddir)/lib/libvcsn-common.la
 
 ## ------------------------ ##
 ## Running the test suite.  ##

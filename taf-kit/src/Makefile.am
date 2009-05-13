@@ -183,7 +183,7 @@ vcsn_char_zmax_SOURCES = $(COMMON_SOURCES)			\
 vcsn_char_zmax_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_max_plus_automaton -DVCSN_USE_LIB
 vcsn_char_zmax_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z-max.la
 
-
-
-LDADD = $(top_builddir)/gnulib/libgnu.la $(top_builddir)/lib/libvcsn-common.la
+LDADD = \
+  $(top_builddir)/gnulib/libgnu.la \
+  $(top_builddir)/lib/libvcsn-common-ex.la
 AM_CPPFLAGS += -I$(top_srcdir)/gnulib

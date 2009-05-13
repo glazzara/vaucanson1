@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -16,6 +16,7 @@ EXTRA_DIST = generate_files.sh hhck.pl
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include \
 	      $(BOOST_CPPFLAGS) -DVCSN_SANITY_CHECK
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
+LDADD = $(top_builddir)/lib/libvcsn-common.la
 
 # FIXME: Currently files are generated in srcdir, they should be in builddir,
 # and generated from the Makefile.am.

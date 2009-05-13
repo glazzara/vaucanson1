@@ -1,3 +1,38 @@
+2009-05-13  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+
+	Introduce libvcsn-common-ex.la in addition to libvcsn-common.la
+	to decide whether exceptions should be used in preconditions.
+
+	This fixes errors in taf-kit's test-suite when compiled with GCC
+	4.4.  The code was making the bogus assumption that the inline
+	function trap() was not inlined in the context libraries (compiled
+	without exceptions) and could therefore be overwritten as a weak
+	symbol in TAF-Kit (to use exceptions).
+
+	* include/vaucanson/misc/contract.hh (vcsn::misc::contract::trap):
+	Leave only a declaration and move the definition...
+	* src/misc/contract.cc: ... in this new file.
+	* lib/src/libcommon.mk: Adjust for contract.cc and build two
+	libraries: libvcsn-common.la (with abort()) and
+	libvcsn-common-ex.la (with exceptions).
+	* data/automata/char-b/Makefile.am,
+	data/automata/char-fmp-b/Makefile.am,
+	data/automata/char-z/Makefile.am, taf-kit/src/Makefile.am,
+	vaucanswig/meta/Makefile.am, src/tests/sanity/Makefile.am,
+	src/tests/xml/Makefile.am: Link with libvcsn-common.la or
+	libvcsn-common-ex.la.
+	* taf-kit/src/common.hh (EXCEPTION_TRAPS): Remove #define.
+	* src/bench/common/bench.mk (AM_CPPFLAGS): Remove useless
+	-DEXCEPTION_TRAPS.
+	* vaucanswig/expand.sh: Likewise.
+	* src/tests/check/Makefile.am: Build libcheck.la instead
+	of libcheck.a, so we can depend on libvcsn-common-ex.la
+	* src/tests/check/check.mk: Use libcheck.la and
+	libvcsn-common-ex.la.
+	* src/tests/test-suites/test-suite.mk: Don't define
+	EXCEPTION_TRAPS and don't add libvcsn-common-ex.la to LDADD
+	(check.mk already does it).
+
 2009-05-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Rename libkrat_exp.la as libvcsn_common.la, and move lib/krat_exp/

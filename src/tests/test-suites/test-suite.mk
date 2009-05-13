@@ -17,9 +17,7 @@ include $(top_srcdir)/src/tests/check/check.mk
 TESTS += failcomp.sh
 EXTRA_DIST = failcomp.sh
 
-AM_CPPFLAGS += $(BOOST_CPPFLAGS) -DEXCEPTION_TRAPS -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
-
-LDADD += $(top_builddir)/lib/libvcsn-common.la 
+AM_CPPFLAGS += $(BOOST_CPPFLAGS) -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
 
 TESTS_ENVIRONMENT = CXX="$(CXX)" \
 		    CXXFLAGS="$(AM_CPPFLAGS) $(CPPFLAGS)"

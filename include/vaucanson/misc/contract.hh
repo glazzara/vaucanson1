@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,13 +28,6 @@
 
 #  include <iostream>
 #  include <string>
-
-#  ifdef EXCEPTION_TRAPS
-#   include <sstream>
-#   include <stdexcept>
-#  else // ! EXCEPTION_TRAPS
-#   include <cstdlib>
-#  endif // EXCEPTION_TRAP
 
 namespace vcsn {
   namespace misc {
@@ -117,27 +110,9 @@ namespace vcsn {
       /** @} */
 
       /// Internal function to report errors in failed contract macros.
-      inline
       void trap (const char *file, int line,
 		 const char *location,
-		 const std::string& message)
-      {
-#  ifdef EXCEPTION_TRAPS
-	std::ostringstream os;
-	os << file << ':' << line << ':'
-	   << (location ? location : "")
-	   << (location ? ": " : " ")
-	   << message;
-	throw std::logic_error (os.str ());
-#  else // ! EXCEPTION_TRAPS
-	std::cerr << file << ':' << line << ':'
-		  << (location ? location : "")
-		  << std::endl
-		  << '\t' << message
-		  << std::endl;
-	abort ();
-#  endif // EXCEPTION_TRAPS
-      }
+		 const std::string& message);
 
       template<typename T>
       struct fail;

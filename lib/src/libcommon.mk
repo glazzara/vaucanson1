@@ -38,7 +38,20 @@ $(FROM_KRAT_EXP_BISON_YY_OTHERS): $(FROM_KRAT_EXP_BISON_YY_MAIN)
 
 EXTRA_DIST = src/krat_exp/$(KRAT_EXP_BISON_YY)
 
+common_sources = \
+  $(FROM_KRAT_EXP_BISON_YY) \
+  src/misc/contract.cc
+
+AM_CPPFLAGS = \
+  -I$(top_srcdir)/src/lib/krat_exp \
+  -I$(top_builddir)/include \
+  -I$(top_srcdir)/include
+
 lib_LTLIBRARIES	+= libvcsn-common.la
-libvcsn_common_la_CXXFLAGS	= $(CXXFLAGS) -I$(top_srcdir)/src/lib/krat_exp
-libvcsn_common_la_LIBADD	= $(LIBOBJS)
-libvcsn_common_la_SOURCES	= $(FROM_KRAT_EXP_BISON_YY)
+libvcsn_common_la_LIBADD = $(LIBOBJS)
+libvcsn_common_la_SOURCES = $(common_sources)
+
+lib_LTLIBRARIES	+= libvcsn-common-ex.la
+libvcsn_common_ex_la_CPPFLAGS = $(AM_CPPFLAGS) -DEXCEPTION_TRAPS
+libvcsn_common_ex_la_LIBADD = $(LIBOBJS)
+libvcsn_common_ex_la_SOURCES = $(common_sources)
