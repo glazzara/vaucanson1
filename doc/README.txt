@@ -127,7 +127,7 @@ doc
    The documentation.
 
    manual
-      The Vaucanson User Guide.
+      The Taf-Kit manual.
    ref
       _Doxygen documentation (automatically generated from the source code)
 
@@ -201,8 +201,8 @@ Vaucanson comes with several demos.  Looking  at them is a good way to
 see what Vaucanson can do and how  it works.  They can be found in the
 ``src/demos`` directory.
 
-The TAF-Kit  (Typed Automata Functions) documentation can  be found as
-the first chapter of the User's Manual (see ``doc/manual``).
+The TAF-Kit (Typed Automata Functions) documentation can be found in
+``doc/manual``.
 
 
 See Also
