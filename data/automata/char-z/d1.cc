@@ -1,4 +1,4 @@
-// d2.cc: this file is part of the Vaucanson project.
+// d1.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -20,7 +20,7 @@ using namespace vcsn;
 using namespace vcsn::z_automaton;
 #include <vaucanson/tools/dumper.hh>
 
-// This automaton comes from ETA p. 437.
+// This automaton comes from ETA: exercise 2.15, p. 437.
 
 int
 main(int argc, char **argv)
@@ -32,24 +32,24 @@ main(int argc, char **argv)
   monoid_elt_t	a (Astar, "a");
   monoid_elt_t	b (Astar, "b");
 
-  automaton_t d2 = make_automaton(A);
+  automaton_t d1 = make_automaton(A);
 
-  hstate_t p = d2.add_state();
-  hstate_t q = d2.add_state();
+  hstate_t p = d1.add_state();
+  hstate_t q = d1.add_state();
 
-  series_set_elt_t sp (d2.structure().series());
+  series_set_elt_t sp (d1.structure().series());
   sp.assoc(a, 1);
   sp.assoc(b, 1);
 
-  series_set_elt_t sq (d2.structure().series());
+  series_set_elt_t sq (d1.structure().series());
   sq.assoc(a, 1);
   sq.assoc(b, -1);
 
-  d2.set_initial(p);
-  d2.add_series_transition(p, p, sp);
-  d2.add_series_transition(p, q, sq);
-  d2.add_series_transition(q, q, sp);
-  d2.set_final(q);
+  d1.set_initial(p);
+  d1.add_series_transition(p, p, sp);
+  d1.add_series_transition(p, q, sq);
+  d1.add_series_transition(q, q, sp);
+  d1.set_final(q);
 
-  tools::dumper(argc, argv)(std::cout, d2, "d2");
+  tools::dumper(argc, argv)(std::cout, d1, "d1");
 }

@@ -1,3 +1,34 @@
+2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/NEWS.txt: Make clearer that the documentation is incomplete.
+	Suggested by Jacques Sakarovitch.
+
+2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rename d2.xml as d1.xml.
+
+	* data/automata/char-z/d2.cc: Rename as...
+	* data/automata/char-z/d1.cc: ... this.
+	* data/automata/char-z/Makefile.am: Adjust to build d1 and create
+	d1.xml
+	* taf-kit/tests/vcsn-char-z.test: Adjust to use d1.xml.
+	* doc/manual/taf-kit-manual.tex: Rename d2.xml as d1.xml.
+
+2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+
+	Document left and right weight multiplications.
+
+	* doc/manual/taf-kit-manual.tex (Writing Rational Expressions):
+	Rename as ...
+	(Writing (Weighted) Rational Expressions): ... this.
+	(Rational operators): Show the result of the are-equivalent
+	example.
+	(Weights): Document left and right weights using text from
+	Jacques Sakarovitch.
+	(Trivial Identities): Write "weighted rational expression"
+	instead of "rational expression" to avoid ambiguities.
+
 2009-05-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/README.txt: Update references to the Taf-Kit manual.
@@ -109,6 +140,14 @@
 	* configure.ac: Bump to 1.2.96.
 	* doc/manual/taf-kit-manual.tex: Likewise.
 	* doc/NEWS.txt: Document 1.2.96.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Optimize quotient on boolean automata.
+
+	(As mentioned during the meeting on April 10th)
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Do that.
 
 2009-04-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 

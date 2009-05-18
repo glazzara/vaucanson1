@@ -11,8 +11,9 @@ This document describes major updates to the Vaucanson_ project.
 Vaucanson 1.2.96, May 4th, 2009
 ===============================
 
-- Out-of-date documentation has been trashed away.  What remains
-  is an overhauled documentation for TAF-Kit that can be read in
+- Out-of-date documentation has been trashed away.  What remains is an
+  overhauled documentation for TAF-Kit, but still partial and under
+  ongoing writing.  It can be read in
   ``doc/manual/taf-kit-manual.pdf``.
 
 - Vaucanson library
