@@ -20,4 +20,3 @@ include ../demo.mk
 noinst_PROGRAMS = vgrep
 
 vgrep_SOURCES = vgrep.cc
-vgrep_LDADD = $(top_builddir)/lib/libvcsn-common.la

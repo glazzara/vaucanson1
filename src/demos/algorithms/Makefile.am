@@ -25,10 +25,8 @@ aut_are_equivalent_SOURCES = aut_are_equivalent.cc equivalent_functions.cc
 aut_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-aut_are_equivalent_LDADD = $(top_builddir)/lib/libvcsn-common.la
 
 exp_are_equivalent_SOURCES = exp_are_equivalent.cc equivalent_functions.cc
 exp_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-exp_are_equivalent_LDADD = $(top_builddir)/lib/libvcsn-common.la

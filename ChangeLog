@@ -1,3 +1,13 @@
+2009-05-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Use libvcsn-common.la for all demos.
+
+	* src/demos/demo.mk (LDADD): Define globally.
+	* src/demos/algorithms/Makefile.am (aut_are_equivalent_LDADD,
+	exp_are_equivalent_LDADD): Remove.
+	* src/demos/one_rule_rewriting/Makefile.am (LDADD): Likewise.
+	* src/demos/vgrep/Makefile.am (LDADD): Likewise.
+
 2009-05-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/NEWS.txt: Make clearer that the documentation is incomplete.

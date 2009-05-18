@@ -26,8 +26,6 @@ noinst_PROGRAMS = \
   ORR_fmp \
   check_rw
 
-LDADD = $(top_builddir)/lib/libvcsn-common.la
-
 fibonacci_demo_SOURCES = fibonacci_demo.cc
 fibonacci_rw_comp_SOURCES = fibonacci_rw_composition.cc
 fibonacci_rw_SOURCES = fibonacci_rw_gen.cc
