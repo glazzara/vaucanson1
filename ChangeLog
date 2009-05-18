@@ -1,3 +1,7 @@
+2009-05-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* AUTHORS: Update Sylvain's email.
+
 2009-05-13  Alexandre Duret-Lutz  <adl@va-et-vient.net>
 
 	abs() no longer works with g++ 4.4., we must write std::abs().
