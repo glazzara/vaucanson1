@@ -21,4 +21,4 @@ libcheck_la_SOURCES =			\
   tester.cc				\
   unique.cc
 
-libcheck_a_LIBADD = $(top_builddir)/lib/libvcsn-common-ex.la
+libcheck_la_LIBADD = $(top_builddir)/lib/libvcsn-common-ex.la
