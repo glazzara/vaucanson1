@@ -129,7 +129,7 @@ doc
    manual
       The Taf-Kit manual.
    ref
-      _Doxygen documentation (automatically generated from the source code)
+      Doxygen_ documentation (automatically generated from the source code)
 
 gnulib
    Portability functions from the ``gnulib`` library.
