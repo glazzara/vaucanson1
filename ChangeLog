@@ -524,7 +524,7 @@
 
 2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
-	Remove make dist depency on make (Close #140).
+	Remove make dist dependency on make (Close #140).
 
 	* doc/.gitignore: Remove automata.tex and manual.ext as they are no
 	more generated.
@@ -17042,7 +17042,7 @@ instances to them.
 	features.
 	Don't use `_', but `-' to separate TAF-kit program and function
 	name components.
-	* doc/manual/Makefile.am (users_manual.dvi): Declare the depencencies.
+	* doc/manual/Makefile.am (users_manual.dvi): Declare the dependencies.
 
 2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
 
