@@ -1,5 +1,12 @@
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make pair_to_fmp() available in FMP contexts.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh:
+	include pair_to_fmp.hh.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Make mute_ltl_to_pair<S,T>::make_automaton available.
 
 	* include/vaucanson/algorithms/ltl_to_pair.hxx (make_automaton):
