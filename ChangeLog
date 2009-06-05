@@ -1,5 +1,21 @@
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Add the pair-to-fmp command to TAF-Kit.
+
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_b_LDADD,
+	vcsn_char_fmp_z_LDADD, vcsn_int_fmp_b_LDADD,
+	vcsn_int_fmp_z_LDADD): Add the corresponding pair automaton
+	library.
+	* taf-kit/src/fmp_commands.cc (pair_to_fmp): New command.
+	* taf-kit/src/getters.hxx (get_pair_aut): New function.
+	* taf-kit/src/pipe_getters.hh, taf-kit/src/pipe_getters.hxx
+	(pair_automaton_getter): New class.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Add more tests for ltl-to-pair
+	and pair-to-fmp.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Make pair_to_fmp() available in FMP contexts.
 
 	* include/vaucanson/contexts/fmp_transducer_functions.thh:
