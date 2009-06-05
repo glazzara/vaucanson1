@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2002, 2004-2008 Free Software Foundation, Inc.
+/* Copyright (C) 2001-2002, 2004-2009 Free Software Foundation, Inc.
    Written by Paul Eggert, Bruno Haible, Sam Steingold, Peter Burwood.
    This file is part of gnulib.
 
@@ -89,15 +89,6 @@
 # include <sys/bitypes.h>
 #endif
 
-#if ! defined __cplusplus || defined __STDC_CONSTANT_MACROS
-
-/* Get WCHAR_MIN, WCHAR_MAX.  */
-# if ! (defined WCHAR_MIN && defined WCHAR_MAX)
-#  include <wchar.h>
-# endif
-
-#endif
-
 #undef _GL_JUST_INCLUDE_SYSTEM_INTTYPES_H
 
 /* Minimum and maximum values for a integer type under the usual assumption.
@@ -150,7 +141,8 @@ typedef long int gl_int64_t;
 # define GL_INT64_T
 #elif defined _MSC_VER
 # undef int64_t
-# define int64_t __int64
+typedef __int64 gl_int64_t;
+# define int64_t gl_int64_t
 # define GL_INT64_T
 #elif @HAVE_LONG_LONG_INT@
 # undef int64_t
@@ -166,7 +158,8 @@ typedef unsigned long int gl_uint64_t;
 # define GL_UINT64_T
 #elif defined _MSC_VER
 # undef uint64_t
-# define uint64_t unsigned __int64
+typedef unsigned __int64 gl_uint64_t;
+# define uint64_t gl_uint64_t
 # define GL_UINT64_T
 #elif @HAVE_UNSIGNED_LONG_LONG_INT@
 # undef uint64_t
@@ -250,8 +243,8 @@ typedef unsigned long int gl_uint_fast32_t;
 #undef intptr_t
 #undef uintptr_t
 typedef long int gl_intptr_t;
-#define intptr_t gl_intptr_t
 typedef unsigned long int gl_uintptr_t;
+#define intptr_t gl_intptr_t
 #define uintptr_t gl_uintptr_t
 
 /* 7.18.1.5. Greatest-width integer types */
@@ -441,10 +434,20 @@ typedef int _verify_intmax_size[2 * (sizeof (intmax_t) == sizeof (uintmax_t)) - 
 /* ptrdiff_t limits */
 #undef PTRDIFF_MIN
 #undef PTRDIFF_MAX
-#define PTRDIFF_MIN  \
-   _STDINT_MIN (1, @BITSIZEOF_PTRDIFF_T@, 0@PTRDIFF_T_SUFFIX@)
-#define PTRDIFF_MAX  \
-   _STDINT_MAX (1, @BITSIZEOF_PTRDIFF_T@, 0@PTRDIFF_T_SUFFIX@)
+#if @APPLE_UNIVERSAL_BUILD@
+# ifdef _LP64
+#  define PTRDIFF_MIN  _STDINT_MIN (1, 64, 0l)
+#  define PTRDIFF_MAX  _STDINT_MAX (1, 64, 0l)
+# else
+#  define PTRDIFF_MIN  _STDINT_MIN (1, 32, 0)
+#  define PTRDIFF_MAX  _STDINT_MAX (1, 32, 0)
+# endif
+#else
+# define PTRDIFF_MIN  \
+    _STDINT_MIN (1, @BITSIZEOF_PTRDIFF_T@, 0@PTRDIFF_T_SUFFIX@)
+# define PTRDIFF_MAX  \
+    _STDINT_MAX (1, @BITSIZEOF_PTRDIFF_T@, 0@PTRDIFF_T_SUFFIX@)
+#endif
 
 /* sig_atomic_t limits */
 #undef SIG_ATOMIC_MIN
@@ -459,9 +462,26 @@ typedef int _verify_intmax_size[2 * (sizeof (intmax_t) == sizeof (uintmax_t)) - 
 
 /* size_t limit */
 #undef SIZE_MAX
-#define SIZE_MAX  _STDINT_MAX (0, @BITSIZEOF_SIZE_T@, 0@SIZE_T_SUFFIX@)
+#if @APPLE_UNIVERSAL_BUILD@
+# ifdef _LP64
+#  define SIZE_MAX  _STDINT_MAX (0, 64, 0ul)
+# else
+#  define SIZE_MAX  _STDINT_MAX (0, 32, 0ul)
+# endif
+#else
+# define SIZE_MAX  _STDINT_MAX (0, @BITSIZEOF_SIZE_T@, 0@SIZE_T_SUFFIX@)
+#endif
 
 /* wchar_t limits */
+/* Get WCHAR_MIN, WCHAR_MAX.
+   This include is not on the top, above, because on OSF/1 4.0 we have a sequence of nested
+   includes <wchar.h> -> <stdio.h> -> <getopt.h> -> <stdlib.h>, and the latter includes
+   <stdint.h> and assumes its types are already defined.  */
+#if ! (defined WCHAR_MIN && defined WCHAR_MAX)
+# define _GL_JUST_INCLUDE_SYSTEM_WCHAR_H
+# include <wchar.h>
+# undef _GL_JUST_INCLUDE_SYSTEM_WCHAR_H
+#endif
 #undef WCHAR_MIN
 #undef WCHAR_MAX
 #define WCHAR_MIN  \
