@@ -1,3 +1,17 @@
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce contexts for char-char-z and int-int-z automata.
+
+	* include/vaucanson/automata/generic_contexts/char_char_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/char_char_z_automaton_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton_structures.hh:
+	New files.
+	* include/Makefile.am (nobase_include_HEADERS): Add them.
+	* lib/generate_libvcsn.rb: Adjust to build int-int-z and
+	char-char-z contexts.
+	* lib/Makefile.am: Include the new libraries' makefiles.
+
 2009-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac: Bump version to 1.3.0a.
