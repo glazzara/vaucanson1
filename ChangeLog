@@ -1,5 +1,15 @@
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make mute_ltl_to_pair<S,T>::make_automaton available.
+
+	* include/vaucanson/algorithms/ltl_to_pair.hxx (make_automaton):
+	Move the code...
+	* include/vaucanson/algorithms/ltl_to_pair.hh (make_automaton):
+	... here, so it is available even if VCSN_USE_INTERFACE_ONLY
+	is defined.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Introduce contexts for char-char-z and int-int-z automata.
 
 	* include/vaucanson/automata/generic_contexts/char_char_z_automaton.hh,
