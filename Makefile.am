@@ -16,16 +16,13 @@ include $(top_srcdir)/vaucanson.mk
 if ENABLE_TAF_KIT
   MAYBE_TAF_KIT = taf-kit
 endif
-if ENABLE_VAUCANSWIG
-  MAYBE_VAUCANSWIG = vaucanswig
-endif
 
-SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) $(MAYBE_VAUCANSWIG) \
+SUBDIRS = gnulib lib include src data $(MAYBE_TAF_KIT) \
 	  tools doc build-aux debian
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS m4/gnulib-cache.m4
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-bench --enable-vaucanswig \
+DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-bench \
   $(MORE_DISTCHECK_CONFIGURE_FLAGS)
 
 # Prevent accidental edition of generated files.
