@@ -42,16 +42,13 @@ common_sources = \
   $(FROM_KRAT_EXP_BISON_YY) \
   src/misc/contract.cc
 
-AM_CPPFLAGS = \
-  -I$(top_srcdir)/src/lib/krat_exp \
-  -I$(top_builddir)/include \
-  -I$(top_srcdir)/include
-
 lib_LTLIBRARIES	+= libvcsn-common.la
 libvcsn_common_la_LIBADD = $(LIBOBJS)
 libvcsn_common_la_SOURCES = $(common_sources)
+libvcsn_common_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/src/lib/krat_exp
 
 lib_LTLIBRARIES	+= libvcsn-common-ex.la
-libvcsn_common_ex_la_CPPFLAGS = $(AM_CPPFLAGS) -DEXCEPTION_TRAPS
 libvcsn_common_ex_la_LIBADD = $(LIBOBJS)
 libvcsn_common_ex_la_SOURCES = $(common_sources)
+libvcsn_common_ex_la_CPPFLAGS = $(AM_CPPFLAGS) -DEXCEPTION_TRAPS \
+                                -I$(top_srcdir)/src/lib/krat_exp

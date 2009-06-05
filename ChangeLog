@@ -1,3 +1,13 @@
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	BOOST_CPPFLAGS were ignored while compiling lib/.
+
+	* lib/src/libcommon.mk: Do not overwrite AM_CPPFLAGS with a list
+	of include directories that is less complete than the one in
+	vaucanson.mk, use...
+	(libvcsn_common_la_CPPFLAGS, libvcsn_common_ex_la_CPPFLAGS):
+	... these variable to augmant AM_CPPFLAGS instead.
+
 2009-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac: Bump version to 1.3.0a.
