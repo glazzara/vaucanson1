@@ -1,3 +1,11 @@
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make listg the default graph implementation, since we now know
+	that bmig is slower.
+
+	* configure.ac (ac_default_graph_impl): Make listg the default.
+	* doc/README.txt: Adjust documentation of --default-graph-impl.
+
 2009-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac: Bump version to 1.3.0a.

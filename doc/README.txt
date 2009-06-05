@@ -98,9 +98,9 @@ To specify a special path for the Boost-C++ library::
 Vaucanson can use two graph implementations: ``listg`` is a
 representation based on adjacency lists, while ``bmig`` is a
 representation using Boost Multi-Index containers.  The default
-implementation is ``bmig`` and you can select the other with::
+implementation is ``listg`` and you can select the other with::
 
-	./configure --default-graph-impl=listg
+	./configure --default-graph-impl=bmig
 
 For further configure options, type::
 
