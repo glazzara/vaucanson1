@@ -68,7 +68,7 @@ run include               ./generate_headers.sh
 run lib			  ./generate_libvcsn.rb
 run src/tests/sanity      ./generate_files.sh .
 
-# Will also boostrap argp/.
+# Will also boostrap cbs/.
 run .                     $AUTORECONF -v -f -i
 
 echo "Reconfiguration done."

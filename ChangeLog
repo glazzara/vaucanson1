@@ -1,3 +1,7 @@
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* bootstrap: Update to mention cbs/ instead of argp/.
+
 2009-05-05  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Fix call graph export in taf-kit.
