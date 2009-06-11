@@ -1,3 +1,17 @@
+2009-06-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+            Pierre-Yves Angrand  <pangrand@gmail.com>
+
+	Attempt to fix derived-term, at least for Boolean automata.
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx
+	(PartialExp::insert): Break the left terms of leading products
+	in the partial rational expressions.
+	(prat_exp_list): Delete, insert does the work now.
+	(prat_exp_convert): Use insert directly instead of calling
+	prat_exp_list.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh
+	(PartialExp::insert): Adjust prototype.
+
 2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Integrate Sylvain Lombardy's shortest() and enumerate()

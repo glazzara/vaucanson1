@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,13 +51,26 @@ namespace vcsn
     semiring_elt_list_.push_back(w);
   }
 
+
   template <typename Series, typename T>
+  template <typename M, typename W>
   PartialExp<Series, T>&
-  PartialExp<Series, T>::insert(const node_t *v)
+  PartialExp<Series, T>::insert(const rat::Node<M, W>* v)
   {
+    // Break initial left products.
+    if (node_list_.empty() && v->what() == rat::Node<M, W>::prod)
+      {
+	const rat::Product<M, W>* p =
+	  dynamic_cast<const rat::Product<M, W>*>(v);
+	insert(p->left_);
+
+	v = p->right_;
+      }
+
     node_list_.push_back(v);
-    semiring_elt_list_.push_back(rat_exp_->structure().semiring().identity(
-      SELECT(typename semiring_elt_t::value_t)));
+    semiring_elt_list_.push_back(
+       rat_exp_->structure().semiring().
+          identity(SELECT(typename semiring_elt_t::value_t)));
     return *this;
   }
 
@@ -269,21 +282,6 @@ namespace vcsn
   }
 
   template <typename S, typename T, typename M, typename W>
-  void prat_exp_list(PartialExp<S, T>&		pexp,
-		     const rat::Node<M, W>*	node)
-  {
-    if (node->what() == rat::Node<M, W>::prod)
-    {
-      const rat::Product<M, W>* p =
-	dynamic_cast<const rat::Product<M, W>*>(node);
-      prat_exp_list(pexp, p->left_);
-      prat_exp_list(pexp, p->right_);
-    }
-    else
-      pexp.insert(node);
-  }
-
-  template <typename S, typename T, typename M, typename W>
   PartialExp<S, T> prat_exp_convert(const Element<S, T>& exp,
 				    const rat::Node<M, W>* node)
   {
@@ -310,7 +308,7 @@ namespace vcsn
 	node = p->child_;
       }
     PartialExp<S, T>	res(exp);
-    prat_exp_list(res, node);
+    res.insert(node);
     res >>= lw;
     res <<= rw;
     return res;
