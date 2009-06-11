@@ -1,3 +1,50 @@
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Add the pair-to-fmp command to TAF-Kit.
+
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_b_LDADD,
+	vcsn_char_fmp_z_LDADD, vcsn_int_fmp_b_LDADD,
+	vcsn_int_fmp_z_LDADD): Add the corresponding pair automaton
+	library.
+	* taf-kit/src/fmp_commands.cc (pair_to_fmp): New command.
+	* taf-kit/src/getters.hxx (get_pair_aut): New function.
+	* taf-kit/src/pipe_getters.hh, taf-kit/src/pipe_getters.hxx
+	(pair_automaton_getter): New class.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Add more tests for ltl-to-pair
+	and pair-to-fmp.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make pair_to_fmp() available in FMP contexts.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh:
+	include pair_to_fmp.hh.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make mute_ltl_to_pair<S,T>::make_automaton available.
+
+	* include/vaucanson/algorithms/ltl_to_pair.hxx (make_automaton):
+	Move the code...
+	* include/vaucanson/algorithms/ltl_to_pair.hh (make_automaton):
+	... here, so it is available even if VCSN_USE_INTERFACE_ONLY
+	is defined.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce contexts for char-char-z and int-int-z automata.
+
+	* include/vaucanson/automata/generic_contexts/char_char_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/char_char_z_automaton_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton_structures.hh:
+	New files.
+	* include/Makefile.am (nobase_include_HEADERS): Add them.
+	* lib/generate_libvcsn.rb: Adjust to build int-int-z and
+	char-char-z contexts.
+	* lib/Makefile.am: Include the new libraries' makefiles.
+
 2009-03-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Remove Vaucanswig.

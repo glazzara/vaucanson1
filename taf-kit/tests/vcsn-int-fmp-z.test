@@ -58,8 +58,6 @@ sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit-automat
 10
 EOF
 
-
-
 # The evaluation of a word on FMP transducers internally uses
 # aut-to-exp which may produce different results depending on the
 # order used to remove the states of the automaton.  The following
@@ -81,6 +79,73 @@ test "x$res" = "x{150} 22#22#20#22"
 res=`$VCSN image x.xml | vcsn-int-z aut-to-exp -`
 res=`vcsn-int-z expand --alphabet=22,20 "$res"`
 test "x$res" = "x{30} (({5} 22#22#20)*.22)"
+
+
+fail1 $VCSN is-ltl x.xml
+fail1 $VCSN sub-normalize x.xml \| is-ltl -
+
+sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit-automaton y.xml
+# Add states
+1
+# Add two states
+3
+# Set a state to be initial.
+5
+# Which state
+0
+# Weight?
+2
+# Set a state to be final.
+7
+# Which state
+2
+# Weight
+3
+# Add transition
+3
+# From and to
+0
+1
+# Label (word,word,weight)
+10#11
+22#20
+5
+# Add transition
+3
+# From and to
+1
+2
+# Label
+11#12
+22#20
+1
+# Add transition
+3
+# From and to
+2
+1
+# Label
+e
+e
+1
+# Exit.
+10
+EOF
+
+fail1 $VCSN is-ltl y.xml
+fail1 $VCSN sub-normalize y.xml \| is-ltl -
+fail1 $VCSN eps-removal y.xml \| is-ltl -
+      $VCSN sub-normalize y.xml \| eps-removal - \| is-ltl -
+
+$VCSN eps-removal y.xml \| sub-normalize - > yl.xml
+$VCSN is-ltl yl.xml
+$VCSN ltl-to-pair yl.xml > yp.xml
+$VCSN pair-to-fmp yp.xml > yl2.xml
+$VCSN info yl.xml > yl.info
+$VCSN info yl2.xml > yl2.info
+diff yl.info yl2.info
+
+
 
 ## --------------------------- ##
 ## Test writing data handling. ##
