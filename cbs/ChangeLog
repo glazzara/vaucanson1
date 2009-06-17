@@ -1,3 +1,52 @@
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Timer: Fix text ouput.
+
+	* lib/timer.cc: Add missing endlines.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update README.
+
+	* README: Add info on including CBS to an autoconf project.
+	* README_LIBBENCH: Reorganize, add compilation flags info.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Demos: Update plot scripts.
+
+	Make them more robust to changes in libbench.
+
+	* demo/memplot-bench/generate-figures.sh,
+	* demo/timer-bench/generate-figures.sh: Handpick parameters/results.
+	* demo/memplot-bench/results-time.plot.in,
+	* demo/timer-bench/timer-many-tasks-time.plot.in,
+	* demo/timer-bench/timer-recursion-time.plot.in,
+	* demo/timer-bench/timer-scoped-time.plot.in: Use the handpicked values.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Memplot: Select probe method via macro.
+
+	* lib/memplot.cc: Use sbrk() or parse /proc/self/stat
+	according to MEMPLOT_USE_PROC_SELF_STAT.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Libbench: add time spent in children processes.
+
+	* include/cbs/bench/internal/timer_gathering.hh,
+	* include/cbs/bench/internal/timer_graph.hh,
+	* include/cbs/bench/timer.hh: Add to interface.
+
+	* include/cbs/bench/internal/timer_gathering.hxx,
+	* include/cbs/bench/timer.hxx,
+	* lib/timer.cc,
+	* lib/timer_gathering.cc,
+	* lib/timer_graph.cc: Implement.
+
+	* lib/bench.cc: Add in results.
+
 2009-06-14  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Libbench: add total number of timer measures.

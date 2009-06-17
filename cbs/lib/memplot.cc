@@ -36,6 +36,10 @@
 // Internal
 #include <cbs/bench/memplot.hh>
 
+// Unset to use sbrk (fast execution time but no rss value)
+// Set to parse /proc/self/stat (slow, but rss value available)
+//#define MEMPLOT_USE_PROC_SELF_STAT
+
 namespace memplot
 {
   Memplot::Plot::Plot(std::string task_, std::string description_)
@@ -50,10 +54,10 @@ namespace memplot
 
     time = wall.tv_usec / 1000 + 1000 * wall.tv_sec;
 
-    // FIXME: choose between this and /proc/self/stat
+#ifndef MEMPLOT_USE_PROC_SELF_STAT
     memory = (unsigned long) sbrk(0);
     return;
-
+#else
     std::ifstream file;
     std::string str_;
     unsigned val_;
@@ -94,6 +98,7 @@ namespace memplot
 
     memory = vm_size_;
     memory_rss = rss_;
+#endif // MEMPLOT_USE_SBRK
   }
 
   Memplot::Plot::Plot(const Memplot::Plot& plot)

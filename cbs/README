@@ -7,3 +7,21 @@ CBS contains:
 
   * libbench: measure performance of equiped C++ code.
   * plot helpers: extract results from xml files in gnuplot format.
+
+
+=======================================
+-- Adding CBS to an autoconf project --
+=======================================
+
+1. From the CBS archive:
+
+Copy the cbs directory to the project directory.
+Add AC_CONFIG_SUBDIRS([cbs]) to configure.ac.
+
+2. From the CBS git repository:
+
+Generate the CBS archive:
+  git archive --prefix=cbs/ HEAD | gzip > cbs-<sha1>.tar.gz
+Copy the archive to the project directory.
+Extract the archive.
+Add AC_CONFIG_SUBDIRS([cbs]) to configure.ac.

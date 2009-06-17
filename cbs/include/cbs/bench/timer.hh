@@ -386,7 +386,9 @@ namespace timer
     /// The timer must be running.
     void pop ();
 
-    /// Return the measured time, in ms.
+    /// Return the measured cpu time, in ms.
+    /// Includes cpu time for the current process and its children
+    /// (started and terminated while the timer was running).
     /// The time is recorded after the timer has been stopped.
     long time () const;
 
@@ -397,6 +399,14 @@ namespace timer
     /// Return the measured system time, in ms.
     /// The time is recorded after the timer has been stopped.
     long time_system () const;
+
+    /// Return the measured user time in terminated children processes, in ms.
+    /// The time is recorded after the timer has been stopped.
+    long time_children_user () const;
+
+    /// Return the measured system time in terminated children processes, in ms.
+    /// The time is recorded after the timer has been stopped.
+    long time_children_system () const;
 
     /// Return the measured wall clock (observed) time, in ms.
     /// The time is recorded after the timer has been stopped.

@@ -75,6 +75,8 @@ namespace timer
   {
     user_.clear ();
     sys_.clear ();
+    cuser_.clear ();
+    csys_.clear ();
     wall_.clear();
   }
 
@@ -87,6 +89,10 @@ namespace timer
     getrusage (RUSAGE_SELF, &ru);
     user_.set (ru.ru_utime);
     sys_.set (ru.ru_stime);
+
+    getrusage (RUSAGE_CHILDREN, &ru);
+    cuser_.set (ru.ru_utime);
+    csys_.set (ru.ru_stime);
 
     struct timeval wall;
     gettimeofday (&wall, 0);
@@ -105,6 +111,11 @@ namespace timer
     user_ = (TimeVal (ru.ru_utime)) - user_;
     sys_  = (TimeVal (ru.ru_stime)) - sys_;
 
+    getrusage (RUSAGE_CHILDREN, &ru);
+
+    cuser_ = (TimeVal (ru.ru_utime)) - cuser_;
+    csys_  = (TimeVal (ru.ru_stime)) - csys_;
+
     struct timeval wall;
     gettimeofday (&wall, 0);
 
@@ -117,6 +128,8 @@ namespace timer
   {
     user_ += rhs.user_;
     sys_  += rhs.sys_;
+    cuser_ += rhs.cuser_;
+    csys_  += rhs.csys_;
     wall_ += rhs.wall_;
 
     return *this;
@@ -128,6 +141,8 @@ namespace timer
   {
     user_ -= rhs.user_;
     sys_  -= rhs.sys_;
+    cuser_ -= rhs.cuser_;
+    csys_  -= rhs.csys_;
     wall_  -= rhs.wall_;
 
     return *this;

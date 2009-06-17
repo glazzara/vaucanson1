@@ -70,6 +70,8 @@ namespace timer
   {
     TimeVal   user;
     TimeVal   system;
+    TimeVal   cuser;
+    TimeVal   csystem;
     TimeVal   cpu;
     TimeVal   wall;
     TimeVal   average;

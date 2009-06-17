@@ -70,6 +70,20 @@ namespace timer
 
   inline
   long
+  Timer::time_children_user () const
+  {
+    return last_time_.user_children_to_ms ();
+  }
+
+  inline
+  long
+  Timer::time_children_system () const
+  {
+    return last_time_.system_children_to_ms ();
+  }
+
+  inline
+  long
   Timer::time_wall () const
   {
     return last_time_.wall_to_ms ();

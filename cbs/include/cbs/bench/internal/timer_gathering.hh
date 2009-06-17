@@ -152,6 +152,12 @@ namespace timer
     // Get the total system time in ms
     long system_to_ms () const;
 
+    // Get the total user time in ms for children processes
+    long user_children_to_ms () const;
+
+    // Get the total system time in ms for children processes
+    long system_children_to_ms () const;
+
     // Get the total system time in ms
     long wall_to_ms () const;
 
@@ -164,9 +170,11 @@ namespace timer
     bool operator< (const TimeStamp& rhs) const;
 
   private:
-    TimeVal   user_; // Time spent in user code
-    TimeVal   sys_;  // Time spent in system calls
-    TimeVal   wall_; // Wall clock (observed time)
+    TimeVal   user_;  // Time spent in user code
+    TimeVal   sys_;   // Time spent in system calls
+    TimeVal   cuser_; // Time spent in user code (children processes)
+    TimeVal   csys_;  // Time spent in system calls (children processes)
+    TimeVal   wall_;  // Wall clock (observed time)
   };
 
   // Data collection classes

@@ -1,52 +1,22 @@
 Libbench: measure performance of equiped C++ code.
 
-## Influence on instrumented code performance ##
 
-Measures made on a 2GHz Intel Centrino, 1GB RAM.
+=======================
+-- Compilation flags --
+=======================
 
--- CPU Time measures (BENCH_TASK) --
+BENCH_DISABLED: Disable Libbench.
+BENCH_CALLGRAPH_DISABLED: Disable callgraph.
+BENCH_MEMPLOT_DISABLED: Disable Memplot.
 
-For 1 million measures:
-
- 2.5s for 1 task (1.25s in parent, 1.25s in child).
-+3.5s for 100k different tasks.
-
-i.e. using CBS to measure 100 different tasks for 100000 measures takes:
-  100 000 * 2.5s / 1 000 000 (= 250 ms)
-+ 100 000 * 3.5s / 1 000 000 * 100 / 100 000 (= 0.350ms)
-total: ~250ms.
-
--- Memory measures (BENCH_MEMPLOT) --
-
-Time:
- 2s per 100 000 measures.
-
-Memory:
- 10MB per 100 000 measures.
+MEMPLOT_USE_PROC_SELF_STAT: Parse /proc/self/stat instead of using sbrk(0).
+Note: This is a much slower alternative, but the rss value is only available
+      in this mode.  The rss value is only stored in xml result files.
 
 
--- Benchmarking on another machine --
-
-Adapt and use demo/generate-plot-files.sh to generate proper plot files
-for your system.
-
-Use the timer-bench and memplot-bench demos to compute those figures
-on your system.
-
-Note on the memory measures: For each module, although all the measures
-are written in a single source file, the test process uses fork()
-to make sure measures are independent.
-
-
--- Vaucanson Benchmark --
-
-Some helper scripts are provided to use Vaucanson benchmark results:
-
-1) Adapt and run demo/generate-plot-files.sh
-2) Look in demo/vcsn, adapt and use .sh files.
-
-
-## Typical usage ##
+===================
+-- Usage example --
+===================
 
 (see demo/bench/main.cc)
 
@@ -112,3 +82,57 @@ Use explicit cast or std::stringstream to convert other values:
   n_str << n;
   BENCH_PARAMETER("n (string)", n_str.str());
   BENCH_PARAMETER("n (long)", (long) n));
+
+================================================
+-- Influence on instrumented code performance --
+================================================
+
+Measures made on a 2GHz Intel Centrino, 1GB RAM.
+
+## CPU Time measures (BENCH_TASK) ##
+
+For 1 million measures:
+
+ 2.5s for 1 task (1.25s in parent, 1.25s in child).
++3.5s for 100k different tasks.
+
+i.e. using CBS to measure 100 different tasks for 100000 measures takes:
+  100 000 * 2.5s / 1 000 000 (= 250 ms)
++ 100 000 * 3.5s / 1 000 000 * 100 / 100 000 (= 0.350ms)
+total: ~250ms.
+
+
+## Memory measures (BENCH_MEMPLOT) ##
+
+Note: using MEMPLOT_USE_POC_SELF_STAT.
+
+Time:
+ 2s per 100 000 measures.
+
+Memory:
+ 10MB per 100 000 measures.
+
+
+=====================================
+-- Benchmarking on another machine --
+=====================================
+
+Adapt and use demo/generate-plot-files.sh to generate proper plot files
+for your system.
+
+Use the timer-bench and memplot-bench demos to compute those figures
+on your system.
+
+Note on the memory measures: For each module, although all the measures
+are written in a single source file, the test process uses fork()
+to make sure measures are independent.
+
+
+============================
+-- Benchmarking Vaucanson --
+============================
+
+Some helper scripts are provided to use Vaucanson benchmark results:
+
+1) Adapt and run demo/generate-plot-files.sh
+2) Look in demo/vcsn, adapt and use .sh files.

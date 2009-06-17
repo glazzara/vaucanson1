@@ -358,13 +358,17 @@ namespace timer
         vd  = *vx;
         vd2 = *vx2;
 
-        graph_[vd].total.user   += rhs.graph_[vd2].total.user;
-        graph_[vd].total.system += rhs.graph_[vd2].total.system;
-        graph_[vd].total.cpu    += rhs.graph_[vd2].total.cpu;
+        graph_[vd].total.user    += rhs.graph_[vd2].total.user;
+        graph_[vd].total.system  += rhs.graph_[vd2].total.system;
+        graph_[vd].total.cuser   += rhs.graph_[vd2].total.cuser;
+        graph_[vd].total.csystem += rhs.graph_[vd2].total.csystem;
+        graph_[vd].total.cpu     += rhs.graph_[vd2].total.cpu;
 
-        graph_[vd].self.user    += rhs.graph_[vd2].self.user;
-        graph_[vd].self.system  += rhs.graph_[vd2].self.system;
-        graph_[vd].self.cpu     += rhs.graph_[vd2].self.cpu;
+        graph_[vd].self.user     += rhs.graph_[vd2].self.user;
+        graph_[vd].self.system   += rhs.graph_[vd2].self.system;
+        graph_[vd].self.cuser    += rhs.graph_[vd2].self.cuser;
+        graph_[vd].self.csystem  += rhs.graph_[vd2].self.csystem;
+        graph_[vd].self.cpu      += rhs.graph_[vd2].self.cpu;
 
         graph_[vd].count            += rhs.graph_[vd2].count;
         graph_[vd].recursive_count  += rhs.graph_[vd2].recursive_count;
@@ -380,13 +384,17 @@ namespace timer
         ed  = *ei;
         ed2 = *ei2;
 
-        graph_[ed].total.user   += rhs.graph_[ed2].total.user;
-        graph_[ed].total.system += rhs.graph_[ed2].total.system;
-        graph_[ed].total.cpu    += rhs.graph_[ed2].total.cpu;
+        graph_[ed].total.user    += rhs.graph_[ed2].total.user;
+        graph_[ed].total.system  += rhs.graph_[ed2].total.system;
+        graph_[ed].total.cuser   += rhs.graph_[ed2].total.cuser;
+        graph_[ed].total.csystem += rhs.graph_[ed2].total.csystem;
+        graph_[ed].total.cpu     += rhs.graph_[ed2].total.cpu;
 
-        graph_[ed].self.user    += rhs.graph_[ed2].self.user;
-        graph_[ed].self.system  += rhs.graph_[ed2].self.system;
-        graph_[ed].self.cpu     += rhs.graph_[ed2].self.cpu;
+        graph_[ed].self.user     += rhs.graph_[ed2].self.user;
+        graph_[ed].self.system   += rhs.graph_[ed2].self.system;
+        graph_[ed].self.cuser    += rhs.graph_[ed2].self.cuser;
+        graph_[ed].self.csystem  += rhs.graph_[ed2].self.csystem;
+        graph_[ed].self.cpu      += rhs.graph_[ed2].self.cpu;
 
         graph_[ed].compute_average (total_cpu);
       }
@@ -425,13 +433,17 @@ namespace timer
       {
         vd = *vx;
 
-        graph_[vd].total.user   /= rhs;
-        graph_[vd].total.system /= rhs;
-        graph_[vd].total.cpu    /= rhs;
+        graph_[vd].total.user    /= rhs;
+        graph_[vd].total.system  /= rhs;
+        graph_[vd].total.cuser   /= rhs;
+        graph_[vd].total.csystem /= rhs;
+        graph_[vd].total.cpu     /= rhs;
 
-        graph_[vd].self.user    /= rhs;
-        graph_[vd].self.system  /= rhs;
-        graph_[vd].self.cpu     /= rhs;
+        graph_[vd].self.user     /= rhs;
+        graph_[vd].self.system   /= rhs;
+        graph_[vd].self.cuser    /= rhs;
+        graph_[vd].self.csystem  /= rhs;
+        graph_[vd].self.cpu      /= rhs;
 
         graph_[vd].count                /= rhs;
         graph_[vd].recursive_count      /= rhs;
@@ -445,15 +457,19 @@ namespace timer
       {
         ed = *ei;
 
-        graph_[ed].total.user   /= rhs;
-        graph_[ed].total.system /= rhs;
-        graph_[ed].total.cpu    /= rhs;
+        graph_[ed].total.user    /= rhs;
+        graph_[ed].total.system  /= rhs;
+        graph_[ed].total.cuser   /= rhs;
+        graph_[ed].total.csystem /= rhs;
+        graph_[ed].total.cpu     /= rhs;
 
-        graph_[ed].self.user    /= rhs;
-        graph_[ed].self.system  /= rhs;
-        graph_[ed].self.cpu     /= rhs;
+        graph_[ed].self.user     /= rhs;
+        graph_[ed].self.system   /= rhs;
+        graph_[ed].self.cuser    /= rhs;
+        graph_[ed].self.csystem  /= rhs;
+        graph_[ed].self.cpu      /= rhs;
 
-        graph_[ed].count        /= rhs;
+        graph_[ed].count         /= rhs;
 
         graph_[ed].compute_average (total_cpu);
       }
@@ -806,6 +822,8 @@ namespace timer
 
       }
 
+    o << std::endl;
+
     if (vd < timer::VERBOSE_NORMAL)
       return;
 
@@ -894,6 +912,8 @@ namespace timer
               }
           }
       }
+
+    o << std::endl;
 
     o << "__________________________________"
          "______________________________________________\n\n\n";
@@ -1032,6 +1052,9 @@ namespace timer
             o << std::endl;
           }
       }
+
+    o << std::endl;
+
     if (vd < timer::VERBOSE_MAXIMAL)
       return;
 
@@ -1051,55 +1074,67 @@ namespace timer
         o << '[' << task.id << "] " << task.name
           << "\n\n";
 
-        o << "Calls from exterior:    " << std::setw (10) << task.count
+        o << "Calls from exterior:        " << std::setw (10) << task.count
           << '\n';
-        o << "Calls from within cycle:" << std::setw (10) << task.int_count
+        o << "Calls from within cycle:    " << std::setw (10) << task.int_count
           << '\n';
-        o << "Recursive calls:        " << std::setw (10)
+        o << "Recursive calls:            " << std::setw (10)
           << task.recursive_count << '\n';
 
         o << '\n';
 
         o << std::setiosflags (std::ios::fixed);
 
-        o << "Self cpu time:          " << std::setw (10)
+        o << "Self cpu time:              " << std::setw (10)
 	  << std::setprecision (2) << task.self.cpu
           << '\n';
-        o << "Self user time:         " << std::setw (10)
+        o << "Self user time:             " << std::setw (10)
 	  << std::setprecision (2) << task.self.user
           << '\n';
-        o << "Self system time:       " << std::setw (10)
+        o << "Self system time:           " << std::setw (10)
 	  << std::setprecision (2) << task.self.system
           << '\n';
-        o << "Self wall time:         " << std::setw (10)
+        o << "Self children user time:    " << std::setw (10)
+	  << std::setprecision (2) << task.self.cuser
+          << '\n';
+        o << "Self children system time:  " << std::setw (10)
+	  << std::setprecision (2) << task.self.csystem
+          << '\n';
+        o << "Self wall time:             " << std::setw (10)
 	  << std::setprecision (2) << task.self.wall
           << '\n';
 
-        o << "Self average cpu time:  " << std::setw (10)
+        o << "Self average cpu time:      " << std::setw (10)
 	  << std::setprecision (2)
           << task.self.average << '\n';
-        o << "Self charge:            " << std::setw (10)
+        o << "Self charge:                " << std::setw (10)
 	  << std::setprecision (1)
           << task.self.charge << "%\n";
 
         o << '\n';
-        o << "Total cpu time:         " << std::setw (10)
+        o << "Total cpu time:             " << std::setw (10)
 	  << std::setprecision (2) << task.total.cpu
           << '\n';
-        o << "Total user time:        " << std::setw (10)
+        o << "Total user time:            " << std::setw (10)
 	  << std::setprecision (2) << task.total.user
           << '\n';
-        o << "Total system time:      " << std::setw (10)
+        o << "Total system time:          " << std::setw (10)
 	  << std::setprecision (2) << task.total.system
           << '\n';
-        o << "Total wall time:        " << std::setw (10)
+        o << "Total children user time:   " << std::setw (10)
+	  << std::setprecision (2) << task.total.cuser
+          << '\n';
+        o << "Total children system time: " << std::setw (10)
+	  << std::setprecision (2) << task.total.csystem
+          << '\n';
+        o << "Total wall time:            " << std::setw (10)
 	  << std::setprecision (2) << task.total.wall
           << '\n';
 
-        o << "Total average cpu time: " << std::setw (10)
+        o << "Total average cpu time:     " << std::setw (10)
 	  << std::setprecision (2)
           << task.total.average << '\n';
-        o << "Total charge:           " << std::setw (10)
+        o << "Total charge:               " << std::setw (10)
 	  << std::setprecision (1)
           << task.total.charge << "%\n";
 

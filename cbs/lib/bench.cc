@@ -138,42 +138,14 @@ namespace bench
     started   = false;
 
     result("timer measures", (long) timer.total_calls());
-    {
-      std::stringstream time;
-      time << timer.time();
-
-      result("time", time.str());
-    }
-    {
-      std::stringstream time;
-      time << timer.time_user();
-
-      result("time (user)", time.str());
-    }
-    {
-      std::stringstream time;
-      time << timer.time_system();
-
-      result("time (system)", time.str());
-    }
-    {
-      std::stringstream time;
-      time << timer.time_wall();
-
-      result("time (wall)", time.str());
-    }
-    {
-      std::stringstream memory;
-      memory << mp.max().memory;
-
-      result("memory peak", memory.str());
-    }
-    {
-      std::stringstream memory;
-      memory << mp.relative_max().memory;
-
-      result("relative memory usage", memory.str());
-    }
+    result("time", (long) timer.time());
+    result("time (user)", (long) timer.time_user());
+    result("time (system)", (long) timer.time_system());
+    result("time (children, user)", (long) timer.time_children_user());
+    result("time (children, system)", (long) timer.time_children_system());
+    result("time (wall)", (long) timer.time_wall());
+    result("memory peak", (long) mp.max().memory);
+    result("relative memory usage", (long) mp.relative_max().memory);
   }
 
   // Restart the benchmark using the same parameters and results.
