@@ -1,0 +1,16 @@
+# accessible/Makefile.bench				* -*- Makefile -*-
+
+bench: all
+	@mkdir default;					\
+	echo '==================';			\
+	echo '|accessible bench|';			\
+	echo '==================';			\
+	for n in 1000 2000 3000 4000 5000; do		\
+	   echo "----------------------For $$n:";	\
+	   echo "-------------- accessible:";		\
+	   ./accessible_bench $$n;			\
+	done
+
+bench-clean:
+	rm -rf default
+

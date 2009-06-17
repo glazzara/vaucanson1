@@ -1,0 +1,72 @@
+# minimization_2n/Makefile.bench				* -*- Makefile -*-
+
+if ENABLE_OPENFST
+  HAS_OPENFST="yes"
+endif
+
+bench: all aut_2n aut_debruijn
+
+bench-clean: aut_2n-clean aut_debruijn-clean
+
+aut_2n:
+	@mkdir aut_2n_moore;				\
+	mkdir aut_2n_hopcroft;				\
+	mkdir aut_2n_brzozowski;				\
+	if [ ! -z $(HAS_OPENFST) ]; then		\
+	  mkdir aut_2n_openfst;				\
+	fi;						\
+	echo '====================================';	\
+	echo '|Minimization bench - 2^n automaton|';	\
+	echo '====================================';	\
+	for n in $$(seq 11 16); do			\
+	  echo "----------------------For $$n states";	\
+	  echo "--------------VCSN (moore):";		\
+	  ./minimization_aut_2n_moore_bench $$n;		\
+	  echo "--------------VCSN (hopcroft):";	\
+	  ./minimization_aut_2n_hopcroft_bench $$n;	\
+	  if [ $$n -lt 13 ]; then			\
+	    echo "--------------VCSN (brzozowski):";	\
+	    ./minimization_aut_2n_brzozowski_bench $$n;	\
+	  fi;						\
+	  if [ ! -z $(HAS_OPENFST) ]; then		\
+	    echo "--------------OpenFST:";		\
+	    ./minimization_aut_2n_openfst_bench $$n;	\
+	  fi;						\
+	done;
+
+aut_2n-clean:
+	rm -rf aut_2n_moore
+	rm -rf aut_2n_hopcroft
+	rm -rf aut_2n_brzozowski
+	rm -rf aut_2n_openfst
+
+aut_debruijn:
+	@mkdir aut_debruijn_moore;				\
+	mkdir aut_debruijn_hopcroft;			\
+	mkdir aut_debruijn_brzozowski;			\
+	if [ ! -z $(HAS_OPENFST) ]; then		\
+	  mkdir aut_debruijn-openfst;			\
+	fi;						\
+	echo '================================';	\
+	echo '|Minimization bench - De Bruijn|';	\
+	echo '================================';	\
+	for n in $$(seq 15 18); do			\
+	  echo "----------------------For $$n states";	\
+	  echo "--------------VCSN (moore):";		\
+	  ./minimization_aut_debruijn_moore_bench $$n;	\
+	  echo "--------------VCSN (hopcroft):";	\
+	  ./minimization_aut_debruijn_hopcroft_bench $$n;	\
+	  echo "--------------VCSN (brzozowski):";	\
+	  ./minimization_aut_debruijn_brzozowski_bench $$n;	\
+	  if [ ! -z $(HAS_OPENFST) ]; then		\
+	    echo "--------------OpenFST:";		\
+	    ./minimization_aut_2n_openfst_bench $$n;	\
+	  fi;						\
+	done;
+
+aut_debruijn-clean:
+	rm -rf aut_debruijn_moore
+	rm -rf aut_debruijn_hopcroft
+	rm -rf aut_debruijn_brzozowski
+	rm -rf aut_debruijn_openfst
+

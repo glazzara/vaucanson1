@@ -1,4 +1,4 @@
-// minimization_debruijn_brzozowski_bench.hh: this file is part of the Vaucanson project.
+// minimization_aut_2n_brzozowski_bench.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,36 +14,38 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/transpose.hh>
+
 #include <iostream>
+#include <fstream>
 
 using namespace vcsn;
 using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>
 
-void minimization_debruijn_brzozowski_bench(int n_value)
+void minimization_aut_2n_brzozowski_bench(int n)
 {
-  alphabet_t	alpha;
-  alpha.insert('a');
-  alpha.insert('b');
-  alpha.insert('c');
+  AUTOMATON_TYPES_EXACT(automaton_t);
 
-  automaton_t an = make_automaton(alpha);
+  automaton_t a = aut_2n(n);
+  a = determinize(a);
 
-  debruijn(n_value, an);
-
-  BENCH_START("minimization debruijn brzozowski",
-	      "Vaucanson - minimization debruijn brzozowski.");
-  automaton_t dn = determinize(transpose(determinize(transpose(an))));
+  BENCH_START("Vaucanson minimization (brzozowski)",
+	      "FIXME.");
+  determinize(transpose(determinize(transpose(a))));
   BENCH_STOP();
 
-  BENCH_PARAMETER("n_value", (long) n_value);
+  BENCH_PARAMETER("_n_", (long) n);
+  BENCH_PARAMETER("program", "Vaucanson");
+  BENCH_PARAMETER("algoritm", "brzozowski");
+  BENCH_PARAMETER("input automaton", "aut_2n");
 
   std::stringstream name;
-  name << "bench_minimization_debruijn_brzozowski_" << n_value;
+  name << "aut_2n_brzozowski/bench_minimization_aut_2n_brzozowski_" << n;
   BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

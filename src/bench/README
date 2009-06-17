@@ -1,0 +1,22 @@
+Benchmarking system:
+
+This file describes the benchmarking system in Vaucanson.
+
+See common/README for file descriptions.
+See common/README_AUTOMATA for automata descriptions.
+See <algorithm>/README for information on specific benchmarks.
+
+
+==================
+-- Organization --
+==================
+
+Fixme.
+
+
+=============
+-- OpenFST --
+=============
+
+Fixme.
+

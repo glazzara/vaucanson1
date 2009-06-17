@@ -1,13 +1,18 @@
-# composition/Makefile.bench				* -*- Makefile -*-
+# iterators/Makefile.bench				* -*- Makefile -*-
 
-bench: $(noinst_PROGRAMS)
-	@echo '================';				\
-	echo '|iterator bench|';				\
-	echo '================';				\
-	for n_value in 1000 2000 3000 4000 5000; do		\
-	   echo "----------------------For $$n_value:";		\
-	   echo "-------------- accessible:";			\
-	   ./accessible-bench $$n_value;			\
-	   echo "-------------- iterator:";			\
-	   ./iterator-bench $$n_value;				\
+bench: all
+	@mkdir building_process;			\
+	mkdir deltai;					\
+	echo '================';			\
+	echo '|iterator bench|';			\
+	echo '================';			\
+	for n in 1000 2000 3000 4000 5000; do		\
+	   echo "----------------------For $$n:";	\
+	   echo "-------------- iterator:";		\
+	   ./iterator_bench $$n;			\
 	done
+
+bench-clean:
+	rm -rf building_process
+	rm -rf deltai
+

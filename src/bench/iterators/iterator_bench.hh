@@ -1,4 +1,4 @@
-// accessible_bench.hh: this file is part of the Vaucanson project.
+// iterator_bench.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,6 +14,7 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #ifndef BENCHS_ITERATORS_ITERATOR_BENCH_HH
 # define BENCHS_ITERATORS_ITERATOR_BENCH_HH
 
@@ -29,8 +30,6 @@
 using namespace vcsn;
 using namespace vcsn::CONTEXT;
 
-# include <common/bench_constructs.hh>
-
 static void run_through_using_deltai(const automaton_t& a)
 {
   AUTOMATON_TYPES_EXACT(automaton_t);
@@ -38,9 +37,9 @@ static void run_through_using_deltai(const automaton_t& a)
     for (delta_iterator i(a.value(), *s); ! i.done(); i.next());
 }
 
-void iterator_bench(int n_states)
+void iterator_bench(int n)
 {
-  if (not n_states)
+  if (not n)
     return;
 
   AUTOMATON_TYPES_EXACT(automaton_t);
@@ -52,11 +51,10 @@ void iterator_bench(int n_states)
   std::vector<hstate_t>	state_list;
 
   {
-    BENCH_START("iterator building process",
-		"Vaucanson - iterator.\n"
-		"Complete automaton building process.");
+    BENCH_START("Vaucanson iterator building process",
+		"FIXME.");
 
-    for (int i = 0; i < n_states; ++i)
+    for (int i = 0; i < n; ++i)
       state_list.push_back(a.add_state());
     for (std::vector<hstate_t>::iterator i = state_list.begin(); i != state_list.end(); ++i)
       for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
@@ -64,24 +62,25 @@ void iterator_bench(int n_states)
 
     BENCH_STOP();
 
-    BENCH_PARAMETER("n_states", (long) n_states);
+    BENCH_PARAMETER("_n_", (long) n);
+
     std::stringstream name;
-    name << "bench_iterator_building_process_" << n_states;
+    name << "building_process/bench_iterator_building_process_" << n;
     BENCH_VCSN_SAVE_AND_PRINT(name.str());
   }
 
   {
-    BENCH_START("iterator deltai",
-		"Vaucanson - iterator.\n"
-		"Deltai.");
+    BENCH_START("Vaucanson iterator deltai",
+		"FIXME.");
 
     run_through_using_deltai(a);
 
     BENCH_STOP();
 
-    BENCH_PARAMETER("n_states", (long) n_states);
+    BENCH_PARAMETER("_n_", (long) n);
+
     std::stringstream name;
-    name << "bench_iterator_deltai_" << n_states;
+    name << "deltai/bench_iterator_deltai_" << n;
     BENCH_VCSN_SAVE_AND_PRINT(name.str());
   }
 }

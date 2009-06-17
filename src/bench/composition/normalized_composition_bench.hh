@@ -110,7 +110,7 @@ replace_right(const std::string& from,	const std::string& to,
   return transpose(left);
 }
 
-void normalized_composition_bench(int n_value)
+void normalized_composition_bench(int n)
 {
   alphabet_t	A;
   A.insert('a');
@@ -129,7 +129,7 @@ void normalized_composition_bench(int n_value)
   from = "a";
   to = "b";
 
-  for (int i = 0; i < n_value; ++i)
+  for (int i = 0; i < n; ++i)
   {
     from += "b";
     to += "a";
@@ -150,10 +150,11 @@ void normalized_composition_bench(int n_value)
     fmp_transducer::make_automaton(B,C);
 
 
-  std::stringstream n_value_str;
-  n_value_str << n_value;
+  std::stringstream n_str;
+  n_str << n;
 
-  BENCH_START("Normalized composition", "Vaucanson - normalized composition");
+  BENCH_START("Vaucanson composition (normalized)",
+	      "FIXME.");
 
   {
     BENCH_TASK_SCOPED("Left sub-normalisation");
@@ -180,7 +181,7 @@ void normalized_composition_bench(int n_value)
   BENCH_STOP();
 
   // Set extra parameters/results
-  BENCH_PARAMETER("n", (long) n_value);
+  BENCH_PARAMETER("_n_", (long) n);
   BENCH_RESULT("sub left states", (long) sub_left_auto.states().size());
   BENCH_RESULT("sub left transitions",
 	       (long) sub_left_auto.transitions().size());
@@ -190,7 +191,7 @@ void normalized_composition_bench(int n_value)
   BENCH_RESULT("states", (long) res_auto.states().size());
   BENCH_RESULT("transitions", (long) res_auto.transitions().size());
 
-  std::string name = "bench_normalized_composition_" + n_value_str.str();
+  std::string name = "normalized/bench_normalized_composition_" + n_str.str();
 
   // Save and print
   BENCH_VCSN_SAVE_AND_PRINT(name);

@@ -28,26 +28,20 @@ using namespace vcsn::CONTEXT;
 
 #include <common/bench_constructs.hh>
 
-void eps_removal_bench(int n_states)
+void eps_removal_bench(int n)
 {
-  if (not n_states)
+  if (not n)
     return;
 
-  AUTOMATON_TYPES_EXACT(automaton_t);
+  automaton_t a = aut_linear_eps(n);
 
-  alphabet_t alpha;
-  alpha.insert('a');
-
-  automaton_t a = make_automaton(alpha);
-  aut_linear_eps(n_states, a);
-
-  BENCH_START("eps removal", "Vaucanson - eps removal.");
+  BENCH_START("Vaucanson epsilon removal", "FIXME.");
   automaton_t ret = eps_removal(a);
   BENCH_STOP();
 
-  BENCH_PARAMETER("n_states", (long) n_states);
+  BENCH_PARAMETER("_n_", (long) n);
 
   std::stringstream name;
-  name << "bench_eps_removal_" << n_states;
+  name << "aut_linear_eps/bench_eps_removal_" << n;
   BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }

@@ -1,4 +1,4 @@
-// rw_composition_bench.hh: this file is part of the Vaucanson project.
+// realtime_composition_bench.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -107,7 +107,7 @@ replace_right(const std::string& from,	const std::string& to,
   return transpose(left);
 }
 
-void rw_composition_bench(int n_value)
+void realtime_composition_bench(int n)
 {
   alphabet_t	A;
   A.insert('a');
@@ -126,16 +126,17 @@ void rw_composition_bench(int n_value)
   from = "a";
   to = "b";
 
-  for (int i = 0; i < n_value; ++i)
+  for (int i = 0; i < n; ++i)
   {
     from += "b";
     to += "a";
   }
 
-  std::stringstream n_value_str;
-  n_value_str << n_value;
+  std::stringstream n_str;
+  n_str << n;
 
-  BENCH_START("rw_composition", "Vaucanson - rw composition");
+  BENCH_START("Vaucanson composition (realtime)",
+	      "FIXME.");
 
   automaton_t	left_auto = replace_left(from, to, A, B);
   automaton_t	right_auto = replace_right(from, to, B, C);
@@ -146,7 +147,7 @@ void rw_composition_bench(int n_value)
   BENCH_STOP();
 
   // Set extra parameters/results
-  BENCH_PARAMETER("n", (long) n_value);
+  BENCH_PARAMETER("n", (long) n);
   BENCH_RESULT("left states", (long) left_auto.states().size());
   BENCH_RESULT("left transitions", (long) left_auto.transitions().size());
   BENCH_RESULT("right states", (long) right_auto.states().size());
@@ -154,7 +155,7 @@ void rw_composition_bench(int n_value)
   BENCH_RESULT("states", (long) res_auto.states().size());
   BENCH_RESULT("transitions", (long) res_auto.states().size());
 
-  std::string name = "bench_rw_composition_" + n_value_str.str();
+  std::string name = "realtime/bench_realtime_composition_" + n_str.str();
 
   // Save and print
   BENCH_VCSN_SAVE_AND_PRINT(name);

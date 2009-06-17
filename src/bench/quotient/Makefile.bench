@@ -1,13 +1,19 @@
 # minimization_2n/Makefile.bench				* -*- Makefile -*-
 
-bench: $(noinst_PROGRAMS)
-	@echo '================';					\
-	echo '|Quotient bench|';					\
-	echo '================';					\
-	for n_states in $$(seq 5 13); do				\
-	    echo "----------------------For power $$n_states";		\
-	    echo "--------------VCSN (over Z):";			\
-	    ./quotient_z-bench $$n_states;				\
-	    echo "--------------VCSN (over B):";			\
-	    ./quotient_bool-bench $$n_states;				\
+bench: all
+	@mkdir bool;					\
+	mkdir z;					\
+	echo '================';			\
+	echo '|Quotient bench|';			\
+	echo '================';			\
+	for n in $$(seq 5 13); do			\
+	    echo "----------------------For power $$n";	\
+	    echo "--------------VCSN (over Z):";	\
+	    ./quotient_z_bench $$n;			\
+	    echo "--------------VCSN (over B):";	\
+	    ./quotient_bool_bench $$n;			\
 	done;
+
+bench-clean:
+	rm -rf bool
+	rm -rf z

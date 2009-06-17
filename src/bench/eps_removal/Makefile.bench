@@ -1,11 +1,14 @@
 # eps_removal/Makefile.bench				* -*- Makefile -*-
 
-bench: $(noinst_PROGRAMS)
-	@echo '===================';				\
-	echo '|eps_removal bench|';				\
-	echo '===================';				\
-	for n_value in $$(seq 1 20); do				\
-	   n_value=$${n_value}0					\
-	   echo "----------------------For $${n_value}0:";	\
-	   ./eps_removal-bench $${n_value};			\
+bench: all
+	@mkdir aut_linear_eps;					\
+	echo '===================';			\
+	echo '|eps_removal bench|';			\
+	echo '===================';			\
+	for n in $$(seq 1 20); do			\
+	   echo "----------------------For $${n}0:";	\
+	   ./eps_removal_bench $${n}0;			\
 	done
+
+bench-clean:
+	rm -rf aut_linear_eps

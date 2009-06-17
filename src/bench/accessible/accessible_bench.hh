@@ -14,8 +14,9 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef BENCHS_ITERATORS_ACCESSIBLE_BENCH_HH
-# define BENCHS_ITERATORS_ACCESSIBLE_BENCH_HH
+
+#ifndef BENCHS_ACCESSIBLE_ACCESSIBLE_BENCH_HH
+# define BENCHS_ACCESSIBLE_ACCESSIBLE_BENCH_HH
 
 # define CONTEXT boolean_automaton
 
@@ -29,11 +30,9 @@
 using namespace vcsn;
 using namespace vcsn::CONTEXT;
 
-# include <common/bench_constructs.hh>
-
-void accessible_bench(int n_states)
+void accessible_bench(int n)
 {
-  if (not n_states)
+  if (not n)
     return;
 
   AUTOMATON_TYPES_EXACT(automaton_t);
@@ -44,7 +43,7 @@ void accessible_bench(int n_states)
   automaton_t a = make_automaton(alpha);
   std::vector<hstate_t>	state_list;
 
-  for (int i = 0; i < n_states; ++i)
+  for (int i = 0; i < n; ++i)
     state_list.push_back(a.add_state());
   a.set_initial(a.get_state(0));
   a.set_final(a.get_state(0));
@@ -53,17 +52,17 @@ void accessible_bench(int n_states)
     for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
       a.add_spontaneous(*i, *j);
 
-  BENCH_START("accessible", "Vaucanson - accessible");
-//automaton_t ret = accessible(a);
+  BENCH_START("Vaucanson accessible", "FIXME.");
+  //automaton_t ret = accessible(a);
   accessible_states(a);
   BENCH_STOP();
 
-  BENCH_PARAMETER("n_states", (long) n_states);
+  BENCH_PARAMETER("_n_", (long) n);
 
   std::stringstream name;
-  name << "bench_accessible_" << n_states;
+  name << "default/bench_accessible_" << n;
 
   BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 
-#endif // ! BENCHS_ITERATORS_ACCESSIBLE_BENCH_HH
+#endif // ! BENCHS_ACCESSIBLE_ACCESSIBLE_BENCH_HH

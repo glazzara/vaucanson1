@@ -1,4 +1,4 @@
-// minimization_2n_hopcroft_bench.hh: this file is part of the Vaucanson project.
+// minimization_aut_debruijn_brzozowski_bench.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,45 +14,34 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/tools/fsm_dump.hh>
 #include <vaucanson/algorithms/determinize.hh>
-#include <vaucanson/algorithms/minimization_hopcroft.hh>
+#include <vaucanson/algorithms/transpose.hh>
+
 #include <iostream>
-#include <fstream>
 
 using namespace vcsn;
-using namespace vcsn::tools;
 using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>
 
-void minimization_2n_hopcroft_bench(int n_states)
+void minimization_aut_debruijn_brzozowski_bench(int n)
 {
-  AUTOMATON_TYPES_EXACT(automaton_t);
+  automaton_t a = aut_debruijn(n);
 
-  alphabet_t	alpha;
-  alpha.insert('a');
-  alpha.insert('b');
-  alpha.insert('c');
-
-  automaton_t a = make_automaton(alpha);
-  aut_2n(n_states, a);
-  a = determinize(a);
-
-  std::ofstream tmp_o_file("init_o_tmp.fsm");
-  fsm_dump(tmp_o_file, a);
-  tmp_o_file.close();
-
-  BENCH_START("minimization 2n hopcroft",
-	      "Vaucanson - minimization 2n hopcroft.");
-  minimization_hopcroft(a);
+  BENCH_START("Vaucanson minimization (brzozowski)",
+	      "FIXME.");
+  automaton_t d = determinize(transpose(determinize(transpose(a))));
   BENCH_STOP();
 
-  BENCH_PARAMETER("n_states", (long) n_states);
+  BENCH_PARAMETER("_n_", (long) n);
+  BENCH_PARAMETER("program", "Vaucanson");
+  BENCH_PARAMETER("algorithm", "brzozowski");
+  BENCH_PARAMETER("input automaton", "aut_debruijn");
 
   std::stringstream name;
-  name << "bench_minimization_2n_hopcroft_" << n_states;
+  name << "aut_debruijn_brzozowski/bench_minimization_aut_debruijn_brzozowski_" << n;
   BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

@@ -41,6 +41,21 @@ case $ac_default_graph_impl in
   *) AC_ERROR([Unknown graph implementation: $ac_default_graph_impl]);;
 esac
 
+# Specify the path OpenFST binaries for benchmarks.
+ac_openfst_path=/usr/local/bin # default install dir in OpenFST 1.1
+AC_ARG_WITH([openfst],
+  [AC_HELP_STRING([--with-openfst@<:@=DIR@:>@],
+     [specify the path to OpenFST binaries for benchmarks])],
+     [ac_openfst_path="$withval"],[])
+
+AM_CONDITIONAL([ENABLE_OPENFST], [test -e "${ac_openfst_path}/fstcompile"])
+if test -e "${ac_openfst_path}/fstcompile"; then
+  AC_DEFINE_UNQUOTED([OPENFST_PATH], ["$ac_openfst_path"],
+                     [Path to OpenFST binaries.])
+else
+  AC_MSG_WARN([OpenFST binaries not found in ${ac_openfst_path}, OpenFST benchmarks are disabled.])
+fi
+
 # Some C and C++ code used.
 AC_PROG_CXX
 AC_PROG_CC
@@ -282,8 +297,8 @@ AC_CONFIG_FILES([
 	    src/bench/determinization/Makefile
 	    src/bench/eps_removal/Makefile
 	    src/bench/iterators/Makefile
-	    src/bench/minimization_2n/Makefile
-	    src/bench/minimization_debruijn/Makefile
+	    src/bench/accessible/Makefile
+	    src/bench/minimization/Makefile
 	    src/bench/quotient/Makefile
 	tools/Makefile
 	include/Makefile

@@ -14,12 +14,14 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/derived_term_automaton.hh>
 #include <vaucanson/algebra/implementation/series/krat.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -45,7 +47,7 @@ struct Data
     int n_so_transitions;
     double r_time_quot_dt;
     double r_time_quot_so;
-    int n_min_states;
+    int n_min;
     int n_min_transitions;
 
     bool operator()(const Data& a, const Data& b) const
@@ -55,7 +57,7 @@ struct Data
 };
 
 
-void derived_terms_bench(int n_states)
+void derived_terms_bench(int n)
 {
   AUTOMATON_TYPES_EXACT(automaton_t);
   AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
@@ -63,19 +65,21 @@ void derived_terms_bench(int n_states)
   typedef std::vector<Data>  datas_t;
   RandomChooser chooser;
   datas_t	datas(SAMPLES);
-  alphabet_t	alpha;
+  alphabet_t    alpha;
+
   alpha.insert('a');
   alpha.insert('b');
   alpha.insert('c');
+
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 
-  automaton_t a = make_automaton(alpha);
-  aut_2n(n_states, a);
+  // Automaton creation
+  automaton_t a = aut_2n(n);
 
-  BENCH_START("derived terms",
-	      "Vaucanson - derived terms.\n"
-	      "Times in ms.");
+  BENCH_START("Vaucanson derived terms",
+	      "FIXME.\n"
+	      "Times in ms.\n");
 
   // Get all data.
   for (int i = 0; i < SAMPLES; ++i)
@@ -107,7 +111,7 @@ void derived_terms_bench(int n_states)
     automaton_t q = quotient(dt);
     timer.stop();
     data.r_time_quot_dt = (double) timer.time();
-    data.n_min_states = q.states().size();
+    data.n_min = q.states().size();
     data.n_min_transitions = q.transitions().size();
 
     // Minimize so.
@@ -132,7 +136,7 @@ void derived_terms_bench(int n_states)
     int n_dt_states = 0;
     double r_time_quot_dt = 0;
     double r_time_quot_so = 0;
-    int n_min_states = 0;
+    int n_min = 0;
     int n_dt_transitions = 0;
     int n_so_transitions = 0;
     int n_min_transitions = 0;
@@ -146,7 +150,7 @@ void derived_terms_bench(int n_states)
       n_dt_transitions += idata->n_dt_transitions;
       r_time_quot_dt += idata->r_time_quot_dt;
       r_time_quot_so += idata->r_time_quot_so;
-      n_min_states += idata->n_min_states;
+      n_min += idata->n_min;
       n_min_transitions += idata->n_min_transitions;
       ++idata;
     }
@@ -156,7 +160,7 @@ void derived_terms_bench(int n_states)
     n_dt_states /= SAMPLES_PER_CLASS;
     r_time_quot_dt /= SAMPLES_PER_CLASS;
     r_time_quot_so /= SAMPLES_PER_CLASS;
-    n_min_states /= SAMPLES_PER_CLASS;
+    n_min /= SAMPLES_PER_CLASS;
     n_dt_transitions /= SAMPLES_PER_CLASS;
     n_so_transitions /= SAMPLES_PER_CLASS;
     n_min_transitions /= SAMPLES_PER_CLASS;
@@ -174,7 +178,7 @@ void derived_terms_bench(int n_states)
     BENCH_RESULT(prefix + "average so transitions", (long) n_so_transitions);
     BENCH_RESULT(prefix + "average quot time on dt", (double) r_time_quot_dt);
     BENCH_RESULT(prefix + "average quot time on so", (double) r_time_quot_so);
-    BENCH_RESULT(prefix + "average min states", (long) n_min_states);
+    BENCH_RESULT(prefix + "average min states", (long) n_min);
     BENCH_RESULT(prefix + "average min transitions", (long) n_min_transitions);
   }
 
@@ -182,10 +186,10 @@ void derived_terms_bench(int n_states)
   BENCH_PARAMETER("samples per class", (long) SAMPLES_PER_CLASS);
   BENCH_PARAMETER("samples", (long) SAMPLES);
 
-  BENCH_PARAMETER("n_states", (long) n_states);
+  BENCH_PARAMETER("_n_", (long) n);
 
   std::stringstream name;
-  name << "bench_derived_terms_" << n_states;
+  name << "default/bench_derived_terms_" << n;
 
   BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }

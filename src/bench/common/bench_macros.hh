@@ -18,7 +18,18 @@
 #ifndef VCSN_BENCHS_COMMON_BENCH_MACROS_HH
 # define VCSN_BENCHS_COMMON_BENCH_MACROS_HH
 
+# include <config.h>
 # include <cbs/bench/bench_macros.hh>
+
+# define BENCH_OPENFST_ISYMBOLS VCSN_SRC_DIR "/src/bench/common/alpha.syms"
+
+# define BENCH_OPENFST_DUMP(Name, Automaton)		\
+  do {							\
+    std::ofstream dumpfile(Name.c_str());		\
+    fsm_dump(dumpfile, Automaton);			\
+    dumpfile.close();					\
+  } while (0)
+
 
 # define BENCH_VCSN_SAVE_AND_PRINT(Name)				\
   BENCH_SAVE(Name + ".xml", bench::Options());				\

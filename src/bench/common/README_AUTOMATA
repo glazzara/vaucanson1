@@ -1,0 +1,32 @@
+This file describes the automata used for benchmarking.
+Functions to create these automata are located in bench_constructs.hh.
+
+
+============
+-- aut_2n --
+============
+
+Boolean automaton on {a, b, c}.
+Has n states in its original form and 2^n states once determinized.
+
+
+==================
+-- aut_debruijn --
+==================
+
+FIXME.
+
+
+====================
+-- aut_linear_eps --
+====================
+
+FIXME.
+
+
+============
+-- aut_ab --
+============
+
+FIXME.
+
