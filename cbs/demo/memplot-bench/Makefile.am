@@ -18,3 +18,6 @@ noinst_PROGRAMS = demo-memplot-bench
 demo_memplot_bench_SOURCES = main.cc
 demo_memplot_bench_LDADD = $(top_builddir)/lib/libbench.la
 demo_memplot_bench_CPPFLAGS = $(AM_CPPFLAGS)
+
+bench: all
+	./demo-memplot-bench

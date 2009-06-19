@@ -20,13 +20,15 @@
 
 int main()
 {
-  for (int n = 1; n <= 4; ++n)
+  BENCH_START("Bench demo", "A simple benchmark with a single parameter");
+
+  int maxn = 6;
+
+  std::cout << "Benchmarking (n = " << maxn << ")..." << std::endl;
+
+  int n = 1;
+  for (; n <= maxn; ++n)
   {
-
-    BENCH_START("Bench demo", "A simple benchmark with a single parameter");
-
-    std::cout << "[" << n << "] Bench for n=" << n << "..." << std::endl;
-
     std::list<int> ilist;
     std::list<std::string> slist;
 
@@ -53,23 +55,26 @@ int main()
     slist.clear();
     BENCH_MEMPLOT("slist cleared");
 
-    BENCH_STOP();
-
-    BENCH_PARAMETER("n", (long) n);
-
-    std::stringstream name_str;
-    name_str << "benchmark_" << n;
-    std::string name = name_str.str();
-
-    BENCH_PRINT(bench::Options(bench::Options::VE_NORMAL,
-			       bench::Options::FO_TEXT,
-			       0));
-
-    BENCH_SAVE(name + ".out", bench::Options(bench::Options::VE_NORMAL,
-					     bench::Options::FO_TEXT,
-					     0));
-    BENCH_SAVE(name + ".xml", bench::Options());
-    BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
-					     bench::Options::FO_DOT));
   }
+
+  BENCH_STOP();
+
+  BENCH_PARAMETER("n", (long) maxn);
+
+  std::stringstream name_str;
+  name_str << "benchmark_" << maxn;
+  std::string name = name_str.str();
+
+  BENCH_PRINT(bench::Options(bench::Options::VE_NORMAL,
+			     bench::Options::FO_TEXT,
+			     0));
+
+  BENCH_SAVE(name + ".out", bench::Options(bench::Options::VE_NORMAL,
+					   bench::Options::FO_TEXT));
+  BENCH_SAVE(name + ".xml", bench::Options());
+  BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
+					   bench::Options::FO_DOT));
+  BENCH_SAVE(name + ".plot", bench::Options(bench::Options::VE_NORMAL,
+					    bench::Options::FO_GNUPLOT,
+					    bench::Options::CO_MEMPLOT));
 }

@@ -69,6 +69,12 @@ int main(int argc, char** argv)
   BENCH_SAVE(name + ".xml", bench::Options());
   BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_FULL,
 					   bench::Options::FO_DOT));
+  BENCH_SAVE(name + "_simple.dot", bench::Options(bench::Options::VE_MINIMAL,
+						  bench::Options::FO_DOT));
+  BENCH_SAVE(name + ".plot", bench::Options(bench::Options::VE_NORMAL,
+					    bench::Options::FO_GNUPLOT,
+					    bench::Options::CO_MEMPLOT));
+
 }
 
 void parent(int n)

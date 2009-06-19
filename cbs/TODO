@@ -1,6 +1,9 @@
 To do:
 
   - Add more system info (e.g. hostname)
+  - Fix date in xml output (\n)
+
+  - Write proper XSD file, adapt XML output.
 
   ~ Allow bench loops:
       CBS works with vcsn's global bencher.
@@ -8,12 +11,14 @@ To do:
   ~ Support Windows & Mac:
       Write windows & mac versions of the timing primitives.
 
-vcsn:
-  - Equip bench:
-      Done, run make bench on a powerful machine
+  ~ Consider changing memory probe to sbrk(0) again.
 
+vcsn:
   - Gather xml files:
       Keep the directories as they are in make bench?
+
+  - Plot algorithms together between versions (bars)
+      Use one version as reference?
 
   - Generate html:
       Probably not necessary.

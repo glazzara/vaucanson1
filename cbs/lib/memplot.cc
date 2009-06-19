@@ -43,9 +43,16 @@ namespace memplot
       description(description_),
       memory(0),
       memory_rss(0),
-      rawtime(0)
+      time(0)
   {
-    time(&rawtime);
+    struct timeval wall;
+    gettimeofday(&wall, 0);
+
+    time = wall.tv_usec / 1000 + 1000 * wall.tv_sec;
+
+    // FIXME: choose between this and /proc/self/stat
+    memory = (unsigned long) sbrk(0);
+    return;
 
     std::ifstream file;
     std::string str_;
@@ -94,7 +101,7 @@ namespace memplot
       description(plot.description),
       memory(plot.memory),
       memory_rss(plot.memory_rss),
-      rawtime(plot.rawtime)
+      time(plot.time)
   {
   }
 
@@ -108,7 +115,20 @@ namespace memplot
     description = plot.description;
     memory = plot.memory;
     memory_rss = plot.memory_rss;
-    rawtime = plot.rawtime;
+    time = plot.time;
+
+    return *this;
+  }
+
+  const Memplot::Plot&
+  Memplot::Plot::operator-(const Memplot::Plot& plot)
+  {
+    if (this == &plot)
+      return *this;
+
+    description += " (relative to " + plot.description + ")";
+    memory -= plot.memory;
+    memory_rss -= plot.memory_rss;
 
     return *this;
   }
@@ -122,7 +142,8 @@ namespace memplot
   }
 
   Memplot::Memplot()
-    : max_("", "Starting memory usage")
+    : start_("", "Starting memory")
+    , max_(start_)
   {
   }
 
@@ -148,7 +169,8 @@ namespace memplot
   Memplot::clear()
   {
     plots_.clear();
-    max_ = Plot("", "Starting memory usage");
+    start_ = Plot("", "Starting memory");
+    max_ = start_;
   }
 
   // Return the maximum memory used.
@@ -156,6 +178,14 @@ namespace memplot
   Memplot::max()
   {
     return max_;
+  }
+
+  // Return the maximum memory used (relatively to the starting memory
+  // usage).
+  const Memplot::Plot&
+  Memplot::relative_max()
+  {
+    return max_ - start_;
   }
 
   // Export the current data.
@@ -173,7 +203,27 @@ namespace memplot
     case bench::Options::FO_XML:
       dump_xml_(stream, options);
       break;
+    case bench::Options::FO_GNUPLOT:
+      dump_gnuplot_(stream, options);
+      break;
     }
+  }
+
+  inline static void plot_dump_xml_(std::ostream& stream,
+				    bench::Options options,
+				    const Memplot::Plot& plot,
+				    unsigned long time_offset)
+  {
+    stream << "  <plot>" << std::endl
+	   << "    <time>" << plot.time - time_offset << "</time>"
+	   << std::endl
+	   << "    <memory>" << plot.memory << "</memory>" << std::endl
+	   << "    <memory_rss>"
+	   << plot.memory_rss << "</memory_rss>" << std::endl
+	   << "    <task>" << plot.task << "</task>" << std::endl
+	   << "    <description>"
+	   << plot.description << "</description>" << std::endl
+	   << "  </plot>" << std::endl;
   }
 
   void
@@ -181,30 +231,79 @@ namespace memplot
   {
     stream << "<memplot>" << std::endl;
 
+    plot_dump_xml_(stream, options, start_, start_.time);
+
     for (std::vector<Plot>::iterator it = plots_.begin();
 	 it != plots_.end();
 	 ++it)
     {
-      stream << "  <plot>" << std::endl
-	     << "    <time>" << (*it).rawtime << "</time>" << std::endl
-	     << "    <memory>" << (*it).memory << "</memory>" << std::endl
-	     << "    <memory_rss>"
-	     << (*it).memory_rss << "</memory_rss>" << std::endl
-	     << "    <task>" << (*it).task << "</task>" << std::endl
-	     << "    <description>"
-	     << (*it).description << "</description>" << std::endl
-	     << "  </plot>" << std::endl;
+      plot_dump_xml_(stream, options, (*it), start_.time);
     }
     stream << "</memplot>" << std::endl;
+  }
+
+  inline static void plot_dump_text_(std::ostream& stream,
+				     bench::Options options,
+				     const Memplot::Plot& plot,
+				     unsigned long time_offset)
+  {
+    stream << "  * (" << plot.time - time_offset << ")"
+	   << "(" << plot.task << "): "
+	   << plot.memory << "B - " << plot.description << std::endl;
   }
 
   void
   Memplot::dump_text_(std::ostream& stream, bench::Options options)
   {
+    stream << "[Memplot:]" << std::endl << std::endl;
+
+    plot_dump_text_(stream, options, start_, start_.time);
+
+    for (std::vector<Plot>::iterator it = plots_.begin();
+	 it != plots_.end();
+	 ++it)
+    {
+      plot_dump_text_(stream, options, (*it), start_.time);
+    }
+    stream << std::endl;
   }
 
   void
   Memplot::dump_dot_(std::ostream& stream, bench::Options options)
   {
+  }
+
+  inline static void plot_dump_gnuplot_(std::ostream& stream,
+					bench::Options options,
+					const Memplot::Plot& plot,
+					unsigned long time_offset)
+  {
+    stream << plot.time - time_offset << " "
+	   << "\"" << plot.task << "\" "
+	   << plot.memory << " "
+	   << plot.memory_rss << " "
+	   << "\"" << plot.description << "\"" << std::endl;
+  }
+
+  void
+  Memplot::dump_gnuplot_(std::ostream& stream, bench::Options options)
+  {
+    stream << "# Memplot:" << std::endl
+	   << "#" << std::endl
+	   << "# * Time" << std::endl
+	   << "# * \"Task name\"" << std::endl
+	   << "# * Virtual memory (B)" << std::endl
+	   << "# * RSS (MB)" << std::endl
+	   << "# * \"Description\"" << std::endl;
+
+    plot_dump_gnuplot_(stream, options, start_, start_.time);
+
+    for (std::vector<Plot>::iterator it = plots_.begin();
+	 it != plots_.end();
+	 ++it)
+    {
+      plot_dump_gnuplot_(stream, options, (*it), start_.time);
+    }
+    stream << std::endl;
   }
 }

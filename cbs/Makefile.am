@@ -17,3 +17,6 @@ include $(top_srcdir)/cbs.mk
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = lib demo include
+
+bench:
+	cd demo && $(MAKE) $(AM_MAKEFLAGS) bench

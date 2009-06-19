@@ -6,3 +6,4 @@ tools for the Vaucanson library.
 CBS contains:
 
   * libbench: measure performance of equiped C++ code.
+  * plot helpers: extract results from xml files in gnuplot format.

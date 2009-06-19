@@ -1,3 +1,10 @@
+2009-06-14  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: 17a18a174536d6b05c5364dd5f96f420b5ca75ef.
+	See cbs/Changelog.
+
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* bootstrap: Update to mention cbs/ instead of argp/.

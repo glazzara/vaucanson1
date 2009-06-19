@@ -18,3 +18,6 @@ noinst_PROGRAMS = demo-timer-bench
 demo_timer_bench_SOURCES = main.cc
 demo_timer_bench_LDADD = $(top_builddir)/lib/libbench.la
 demo_timer_bench_CPPFLAGS = $(AM_CPPFLAGS)
+
+bench: all
+	./demo-timer-bench

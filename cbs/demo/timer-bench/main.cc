@@ -14,6 +14,10 @@
 //
 
 #include <iostream>
+
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include <cbs/bench/timer.hh>
 #include <cbs/bench/bench_macros.hh>
 
@@ -29,12 +33,32 @@ void recursion(int n)
   BENCH_TASK_STOP();
 }
 
+static pid_t fork_in()
+{
+  pid_t forked = fork();
+  if (forked < 0)
+  {
+    std::cerr << "Warning: failed to fork, running in parent." << std::endl
+	      << "Memory usage is most likely inaccurate." << std::endl;
+  }
+  return forked;
+}
+
 int main()
 {
   int n;
 
   for (n = 100000; n < 5000000; n *= 2)
   {
+    // Do nasty stuff in another process so that the memory usage is accurate
+    pid_t forked = fork_in();
+    if (forked > 0)
+    {
+      // Parent waits
+      waitpid(forked, NULL, 0);
+      continue;
+    }
+
     BENCH_START("timer-scoped", "Empty scoped tasks.");
 
     for (int i = 0; i < n; ++i)
@@ -65,10 +89,22 @@ int main()
       BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
 					       bench::Options::FO_DOT));
     }
+
+    if (forked == 0)
+      exit(0); // kill the child;
   }
 
   for (n = 100000; n < 5000000; n *= 2)
   {
+    // Do nasty stuff in another process so that the memory usage is accurate
+    pid_t forked = fork_in();
+    if (forked > 0)
+    {
+      // Parent waits
+      waitpid(forked, NULL, 0);
+      continue;
+    }
+
     BENCH_START("timer-start-stop", "Empty tasks started and stopped.");
 
     for (int i = 0; i < n; ++i)
@@ -100,20 +136,36 @@ int main()
       BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
 					       bench::Options::FO_DOT));
     }
+
+    if (forked == 0)
+      exit(0); // kill the child;
   }
 
-  for (n = 10; n < 100; n += 20)
+  for (n = 0; n < 100; n += 20)
   {
+    // Do nasty stuff in another process so that the memory usage is accurate
+    pid_t forked = fork_in();
+    if (forked > 0)
+    {
+      // Parent waits
+      waitpid(forked, NULL, 0);
+      continue;
+    }
+
     BENCH_START("timer-many-tasks", "Many empty tasks (started and stopped).");
 
     global_timer.start();
 
     BENCH_TASK_START("init");
+    std::string names[n + 1];
+    names[0] = "task_0";
+
     for (int i = 0; i < n; ++i)
     {
       std::stringstream parameter;
       parameter << i;
-      global_timer.push("task_" + parameter.str());
+      names[i] = "task_" + parameter.str();
+      global_timer.push(names[i]);
       global_timer.pop();
     }
     BENCH_TASK_STOP();
@@ -121,11 +173,9 @@ int main()
     BENCH_TASK_START("test");
     for (int i = 0, j = 0; i < 1000000; ++i, ++j)
     {
-      if (j == n)
+      if (j >= n)
 	j = 0;
-      std::stringstream parameter;
-      parameter << j;
-      global_timer.push("task_" + parameter.str());
+      global_timer.push(names[j]);
       global_timer.pop();
     }
     BENCH_TASK_STOP();
@@ -159,10 +209,22 @@ int main()
       BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
 					       bench::Options::FO_DOT));
     }
+
+    if (forked == 0)
+      exit(0); // kill the child;
   }
 
   for (n = 10000; n < 100000; n += 20000)
   {
+    // Do nasty stuff in another process so that the memory usage is accurate
+    pid_t forked = fork_in();
+    if (forked > 0)
+    {
+      // Parent waits
+      waitpid(forked, NULL, 0);
+      continue;
+    }
+
     BENCH_START("timer-many-tasks", "Many empty tasks (started and stopped).");
 
     global_timer.start();
@@ -218,10 +280,22 @@ int main()
       BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
 					       bench::Options::FO_DOT));
     }
+
+    if (forked == 0)
+      exit(0); // kill the child;
   }
 
   for (n = 1; n < 100000; n *= 2)
   {
+    // Do nasty stuff in another process so that the memory usage is accurate
+    pid_t forked = fork_in();
+    if (forked > 0)
+    {
+      // Parent waits
+      waitpid(forked, NULL, 0);
+      continue;
+    }
+
     BENCH_START("timer-recursion", "Many nested tasks.");
 
     recursion(n);
@@ -248,6 +322,9 @@ int main()
       BENCH_SAVE(name + ".dot", bench::Options(bench::Options::VE_MINIMAL,
 					       bench::Options::FO_DOT));
     }
+
+    if (forked == 0)
+      exit(0); // kill the child;
   }
 }
 

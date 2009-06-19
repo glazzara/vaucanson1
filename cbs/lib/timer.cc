@@ -47,6 +47,7 @@ namespace timer
   Timer::Timer ()
     : comp_count_    (0),
       task_count_    (1),
+      total_calls_   (0),
       is_running_    (false),
       cleared_       (true)
   {
@@ -63,6 +64,7 @@ namespace timer
       comp_          (rhs.comp_),
       comp_count_    (rhs.comp_count_),
       task_count_    (rhs.task_count_),
+      total_calls_   (rhs.total_calls_),
       is_running_    (rhs.is_running_),
       cleared_       (rhs.cleared_),
       last_time_     (rhs.last_time_)
@@ -83,6 +85,7 @@ namespace timer
     comp_          = rhs.comp_;
     comp_count_    = rhs.comp_count_;
     task_count_    = rhs.task_count_;
+    total_calls_   = rhs.total_calls_;
     tasks_         = rhs.tasks_;
     is_running_    = rhs.is_running_;
     cleared_       = rhs.cleared_;
@@ -119,6 +122,8 @@ namespace timer
   {
     clear ();
     cleared_ = false;
+
+    total_calls_ = 0;
 
     tasks_.resize (1);
 
@@ -477,6 +482,8 @@ namespace timer
     timer::vertex_range   vxrange;
     timer::out_edge_range oerange;
 
+    total_calls_ = 1;
+
     for (vxrange = vertices (graph_), vx = vxrange.first;
          vx != vxrange.second; ++vx)
       {
@@ -486,6 +493,8 @@ namespace timer
           {
             ed   = *oe;
             call = & (task->call (graph_[ed].to));
+
+	    total_calls_ += call->count_;
 
             graph_[ed].add_times (call->total_, call->self_,
                                   time_, call->count_);
@@ -1096,6 +1105,7 @@ namespace timer
 
 	o << std::resetiosflags (std::ios::fixed);
       }
+    o << std::endl;
   }
 } // namespace timer
 

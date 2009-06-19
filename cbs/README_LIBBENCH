@@ -27,9 +27,23 @@ Memory:
 
 -- Benchmarking on another machine --
 
+Adapt and use demo/generate-plot-files.sh to generate proper plot files
+for your system.
+
 Use the timer-bench and memplot-bench demos to compute those figures
 on your system.
 
+Note on the memory measures: For each module, although all the measures
+are written in a single source file, the test process uses fork()
+to make sure measures are independent.
+
+
+-- Vaucanson Benchmark --
+
+Some helper scripts are provided to use Vaucanson benchmark results:
+
+1) Adapt and run demo/generate-plot-files.sh
+2) Look in demo/vcsn, adapt and use .sh files.
 
 
 ## Typical usage ##
@@ -39,6 +53,9 @@ on your system.
 ________________________________________________________
 
 #include <cbs/bench/bench_macros.hh>
+
+void do_some_tests();
+void work();
 
 int main()
 {
@@ -77,6 +94,10 @@ void do_some_tests()
   BENCH_TASK_STOP(); // tests_main
 
   // tests ends here.
+}
+
+void work()
+{
 }
 ________________________________________________________
 

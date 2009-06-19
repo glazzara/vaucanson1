@@ -39,11 +39,12 @@ namespace memplot
 
       unsigned memory;
       unsigned memory_rss;
-      time_t rawtime;
+      unsigned long time;
 
       Plot(std::string task, std::string description);
       Plot(const Plot& plot);
       const Plot& operator=(const Plot& plot);
+      const Plot& operator-(const Plot& plot);
 
       bool operator<(const Plot& plot);
     };
@@ -60,6 +61,9 @@ namespace memplot
     // Return the maximum memory used.
     const Plot& max();
 
+    // Return the maximum memory used.
+    const Plot& relative_max();
+
     // Export the current data.
     void dump(std::ostream& stream, bench::Options options);
 
@@ -67,7 +71,9 @@ namespace memplot
     void dump_xml_(std::ostream& stream, bench::Options options);
     void dump_text_(std::ostream& stream, bench::Options options);
     void dump_dot_(std::ostream& stream, bench::Options options);
+    void dump_gnuplot_(std::ostream& stream, bench::Options options);
 
+    Plot start_;
     Plot max_;
     std::vector<Plot> plots_;
   };

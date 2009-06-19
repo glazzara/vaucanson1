@@ -402,6 +402,10 @@ namespace timer
     /// The time is recorded after the timer has been stopped.
     long time_wall () const;
 
+    /// Return the total number of measures made.
+    /// Recorded after the timer has been stopped.
+    unsigned total_calls () const;
+
     /// \brief Comparison between two Timers.
     /// This operator enables the use of std::min and std::max.
     /// It checks only the \a total cpu time, so it's a strict weak ordering.
@@ -471,6 +475,7 @@ namespace timer
     timer::component_vector     comp_;
     unsigned int                comp_count_;
     unsigned int                task_count_;
+    unsigned int                total_calls_;
 
     bool                        is_running_;
 

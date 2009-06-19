@@ -1,3 +1,220 @@
+2009-06-14  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Libbench: add total number of timer measures.
+
+	* include/cbs/bench/timer.hh,
+	* include/cbs/bench/timer.hxx,
+	* lib/timer.cc: Implement.
+	* lib/bench.cc: Add in results.
+
+2009-06-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Libbench: add system infos.
+
+	* lib/bench.cc: Add info.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update demos.
+
+	* demo/comparison/main.cc,
+	* demo/generate-plot-files.sh,
+	* demo/memplot/main.cc: Update.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update memplot: Add gnuplot & text output, fix bugs.
+
+	* include/cbs/bench/bench.hh: Add gnuplot format.
+	* include/cbs/bench/memplot.hh: Fix time probe.
+	* lib/bench.cc: Add gnuplot format support.
+	* lib/memplot.cc: Add new output, fix time probe.
+	* lib/timer.cc: Add missing \n.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update documentation.
+
+	* README,
+	* README_LIBBENCH,
+	* TODO: Update.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update .gitignore.
+
+	* .gitignore: Update.
+
+2009-06-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add XSD file draft.
+
+	* cbs.xsd: Add (incomplete).
+
+2009-06-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update TODO.
+
+	* TODO: Update.
+
+2009-05-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update stats script file.
+
+	* stats.sh: Update.
+
+2009-05-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add stats script file.
+
+	* stats.sh: New.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update helper scripts.
+
+	(All .plot.in files): Add macro from machine and machine shot
+	name.
+
+	* demo/generate-plot-files.sh: Update.
+	* demo/vcsn/get-data.sh: Update.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Tweak & document demos.
+
+	* demo/memplot-bench/README,
+	* demo/timer-bench/README: More infos.
+
+	* demo/timer-bench/main.cc: Tweak.
+
+	* demo/vcsn/vcsn-quotient-fix.data,
+	* demo/vcsn/vcsn-quotient-orig.data: Remove (generated).
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add basic machine selection script for plots.
+
+	* demo/generate-plot-files.sh: New.
+	* README_LIBBENCH: Update.
+
+	Rename plot files in demo/.
+
+	* memplot-bench/results-memory.plot: Renamed as:
+	memplot-bench/results-memory.plot.in.
+	* memplot-bench/results-time.plot: Renamed as:
+	memplot-bench/results-time.plot.in.
+	* timer-bench/timer-many-tasks-memory.plot: Renamed as:
+	timer-bench/timer-many-tasks-memory.plot.in.
+	* timer-bench/timer-many-tasks-time.plot: Renamed as:
+	timer-bench/timer-many-tasks-time.plot.in.
+	* timer-bench/timer-recursion-memory.plot: Renamed as:
+	timer-bench/timer-recursion-memory.plot.in.
+	* timer-bench/timer-recursion-time.plot: Renamed as:
+	timer-bench/timer-recursion-time.plot.in.
+	* timer-bench/timer-scoped-memory.plot: Renamed as:
+	timer-bench/timer-scoped-memory.plot.in.
+	* timer-bench/timer-scoped-time.plot: Renamed as:
+	timer-bench/timer-scoped-time.plot.in.
+	* vcsn/vcsn-composition-normalized-memory.plot: Renamed as:
+	vcsn/vcsn-composition-normalized-memory.plot.in.
+	* vcsn/vcsn-composition-normalized.plot: Renamed as:
+	vcsn/vcsn-composition-normalized.plot.in.
+	* vcsn/vcsn-composition-rw-memory.plot: Renamed as:
+	vcsn/vcsn-composition-rw-memory.plot.in.
+	* vcsn/vcsn-composition-rw.plot: Renamed as:
+	vcsn/vcsn-composition-rw.plot.in.
+	* vcsn/vcsn-determinize-memory.plot: Renamed as:
+	vcsn/vcsn-determinize-memory.plot.in.
+	* vcsn/vcsn-determinize.plot: Renamed as:
+	vcsn/vcsn-determinize.plot.in.
+	* vcsn/vcsn-quotient-bool-memory.plot: Renamed as:
+	vcsn/vcsn-quotient-bool-memory.plot.in.
+	* vcsn/vcsn-quotient-bool.plot: Renamed as:
+	vcsn/vcsn-qu.ent-bool.plot.in: .
+	* vcsn/vcsn-quotient-z-memory.plot: Renamed as:
+	vcsn/vcsn-quotient-z-memory.plot.in.
+	* vcsn/vcsn-quotient-z.plot: Renamed as:
+	vcsn/vcsn-quo.nt-z.plot.in.
+	* vcsn/v.-quotient.plot: Renamed as:
+	vcsn/vcsn-quotient.plot.in.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add/tweak plot examples & helper scripts.
+
+	Note: allow changing the current machine easily.
+
+	* demo/vcsn/display-figures.sh,
+	* demo/vcsn/generate-figures.sh,
+	* demo/vcsn/get-data.sh: Do that.
+
+	* demo/memplot-bench/results-memory.plot,
+	* demo/memplot-bench/results-time.plot,
+	* demo/timer-bench/timer-many-tasks-memory.plot,
+	* demo/timer-bench/timer-many-tasks-time.plot,
+	* demo/timer-bench/timer-recursion-memory.plot,
+	* demo/timer-bench/timer-recursion-time.plot,
+	* demo/timer-bench/timer-scoped-memory.plot,
+	* demo/timer-bench/timer-scoped-time.plot: Update.
+
+	* demo/vcsn/vcsn-composition-normalized-memory.plot,
+	* demo/vcsn/vcsn-composition-normalized.plot,
+	* demo/vcsn/vcsn-composition-rw-memory.plot,
+	* demo/vcsn/vcsn-composition-rw.plot,
+	* demo/vcsn/vcsn-determinize-memory.plot,
+	* demo/vcsn/vcsn-determinize.plot,
+	* demo/vcsn/vcsn-quotient-bool-memory.plot,
+	* demo/vcsn/vcsn-quotient-bool.plot,
+	* demo/vcsn/vcsn-quotient-z-memory.plot,
+	* demo/vcsn/vcsn-quotient-z.plot,
+	* demo/vcsn/vcsn-quotient.plot: New.
+
+	* demo/vcsn/vcsn-quotient-fix-1.data: Remove.
+	* demo/vcsn/vcsn-quotient-fix.data,
+	* demo/vcsn/vcsn-quotient-orig.data: Update.
+
+
+2009-04-29  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add bench makefile target.
+
+	* Makefile.am,
+	* demo/Makefile.am,
+	* demo/memplot-bench/Makefile.am,
+	* demo/timer-bench/Makefile.am: Do that.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	(Memplot) Add relative memory usage, update demos.
+
+	* include/cbs/bench/memplot.hh,
+	* lib/bench.cc,
+	* lib/memplot.cc: Add relative_max.
+
+	* README_LIBBENCH: More infos.
+
+	* demo/memplot-bench/generate-figures.sh: New.
+	* demo/memplot-bench/get-results.sh: Delete.
+	* demo/timer-bench/generate-figures.sh: New.
+	* demo/timer-bench/get-results.sh: Delete.
+
+	* demo/memplot-bench/main.cc,
+	* demo/timer-bench/main.cc: Fork() so that measures
+	are independent.
+
+	* demo/memplot-bench/results-memory.plot,
+	* demo/memplot-bench/results-time.plot,
+	* demo/timer-bench/timer-many-tasks-memory.plot,
+	* demo/timer-bench/timer-many-tasks-time.plot,
+	* demo/timer-bench/timer-many-tasks.plot,
+	* demo/timer-bench/timer-recursion-memory.plot,
+	* demo/timer-bench/timer-recursion-time.plot,
+	* demo/timer-bench/timer-scoped-memory.plot,
+	* demo/timer-bench/timer-scoped-time.plot,
+	* demo/timer-bench/timer-scoped.plot,
+	* demo/vcsn/vcsn-quotient.plot: Update.
+
 2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update README_LIBBENCH figures.

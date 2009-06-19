@@ -42,6 +42,9 @@ namespace bench
   static std::string name;
   static std::string description;
   static std::string date;
+  static std::string hostname;
+  static std::string cpuinfo;
+  static std::string meminfo;
 
   typedef std::map<std::string, std::string> string_map;
 
@@ -53,6 +56,55 @@ namespace bench
 
   static time_t rawtime;
 
+  static void
+  get_infos_()
+  {
+    struct tm* timeinfo;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    date = asctime(timeinfo);
+    date[date.size() - 1] = '\0';
+
+    std::ifstream file;
+    std::string str_;
+
+    hostname = "";
+    file.open("/etc/hostname");
+    if (file.is_open())
+    {
+      file >> hostname;
+      file.close();
+    }
+
+    meminfo = "";
+    file.open("/proc/meminfo");
+    if (file.is_open())
+    {
+      file >> str_ >> meminfo >> str_;
+      meminfo += " " + str_;
+      file.close();
+    }
+
+    cpuinfo = "";
+    file.open("/proc/cpuinfo");
+    if (file.is_open())
+    {
+      bool done = false;
+      while (!done && !file.eof())
+      {
+	getline(file, str_);
+	if (str_.substr(0, 10) == "model name")
+	{
+	  int pos = str_.find_first_of(':');
+	  cpuinfo = str_.substr(pos + 2);
+	  done = true;
+	}
+      }
+      file.close();
+    }
+  }
+
   // Start a benchmark
   void
   start(std::string _name,
@@ -61,11 +113,7 @@ namespace bench
     name        = _name;
     description = _description;
 
-    struct tm* timeinfo;
-
-    time(&rawtime);
-    timeinfo = localtime(&rawtime);
-    date = asctime(timeinfo);
+    get_infos_();
 
     parameters.clear();
     results.clear();
@@ -89,6 +137,7 @@ namespace bench
     completed = true;
     started   = false;
 
+    result("timer measures", (long) timer.total_calls());
     {
       std::stringstream time;
       time << timer.time();
@@ -118,6 +167,12 @@ namespace bench
       memory << mp.max().memory;
 
       result("memory peak", memory.str());
+    }
+    {
+      std::stringstream memory;
+      memory << mp.relative_max().memory;
+
+      result("relative memory usage", memory.str());
     }
   }
 
@@ -251,6 +306,9 @@ namespace bench
     stream << "<bench>" << std::endl
 	   << "  <name>" << name << "</name>" << std::endl
 	   << "  <date>" << date << "</date>" << std::endl
+	   << "  <hostname>" << hostname << "</hostname>" << std::endl
+	   << "  <cpuinfo>" << cpuinfo << "</cpuinfo>" << std::endl
+	   << "  <meminfo>" << meminfo << "</meminfo>" << std::endl
 	   << "  <time>" << rawtime << "</time>" << std::endl
 	   << "  <description>" << description << "</description>" << std::endl
 	   << "  <parameters>" << std::endl;
@@ -287,7 +345,10 @@ namespace bench
 	   << description << std::endl
 	   << std::endl
 	   << "[Infos:]" << std::endl
-	   << "  * Date: " << date
+	   << "  * Date:      " << date << std::endl
+	   << "  * Host name: " << hostname << std::endl
+	   << "  * CPU:       " << cpuinfo << std::endl
+	   << "  * Memory:    " << meminfo << std::endl
 	   << std::endl
 	   << "[Parameters:]" << std::endl;
 
@@ -364,6 +425,14 @@ namespace bench
 	output_xml(stream, options);
       if (output_timer)
 	timer.dump(stream);
+      if (output_memplot)
+	mp.dump(stream, options);
+      break;
+    case Options::FO_GNUPLOT:
+      if (output_summary)
+	;
+      if (output_timer)
+	;
       if (output_memplot)
 	mp.dump(stream, options);
       break;

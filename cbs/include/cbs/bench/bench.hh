@@ -107,7 +107,8 @@ namespace bench
     {
       FO_TEXT,
       FO_DOT,
-      FO_XML
+      FO_XML,
+      FO_GNUPLOT
     };
 
     /// Contents, i.e. what parts of the benchmark are exported.

@@ -75,6 +75,13 @@ namespace timer
     return last_time_.wall_to_ms ();
   }
 
+  inline
+  unsigned
+  Timer::total_calls () const
+  {
+    return total_calls_;
+  }
+
   /*--------------.
   | Timer.        |
   | Arithmetics.  |
