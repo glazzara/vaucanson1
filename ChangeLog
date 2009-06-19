@@ -1,3 +1,10 @@
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Benchmarks: add documentation.
+
+	* src/bench/README,
+	* src/bench/common/README_AUTOMATA: Update.
+
 2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update benchmarks.

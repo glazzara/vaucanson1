@@ -11,12 +11,129 @@ See <algorithm>/README for information on specific benchmarks.
 -- Organization --
 ==================
 
-Fixme.
+Each subdirectory contains benchmark for a type of function
+or algorithm in Vaucanson:
+
+* Accessible
+* Composition
+* Derived terms
+* Determinization
+* Epsilon removal
+* Eval
+* Iterators
+* Minimization
+* Product
+* Quotient
+
+In each subdirectory, there is one program per benchmark.
+A benchmark is characterized by:
+
+* Input automaton (see common/README_AUTOMATA)
+* Program (e.g. Vaucanson, OpenFST)
+* Algorithm (e.g. minimization_moore(), minimization_hopcroft())
+
+A benchmark is an execution of a program for different values of
+a parameter _n_.
+
+_n_ can have different meanings, including:
+
+* Size of the input automaton.
+* Number of times an operation is repeated.
+
+Benchmark are run using `make bench'
+
+
+=============
+-- Results --
+=============
+
+Results are located is subdirectories within the benchmark directory,
+named according to the benchmark characteristics.
+Results are composed of three files for each value of _n_:
+
+* bench_<algorithm>_<input>_<_n_>.out: Benchmark text summary.
+* bench_<algorithm>_<input>_<_n_>.dot: DOT ouput of the callgraph.
+* bench_<algorithm>_<input>_<_n_>.xml: Raw result for processing with CBS.
+
+To process XML files with CBS, use plot.pl, located in cbs/bin (source dir).
+This script generates a result table for a set of XML files.
+The result table is readable by gnuplot and can be used to generate plots.
+
+The result text summary shows information about one execution for a given _n_.
+It follows the following format (variable content between <>):
+
+<Benchmark name>
+
+[Description:]
+<Benchmark description>
+<Process:>
+<1. Step 1 (not included in measures)>
+<2* Step * (included in measures - notice the star after the leading number)>
+
+[Infos:]
+<General informations such as date, host name, CPU type and speed, memory>
+
+[Parameters:]
+<List of benchmark parameters, including _n_>
+
+[Results:]
+<List of results, including:>
+<memory peak: maximum memory usage measures (in bytes).>
+<time: total cpu time (in ms, as with all the other time values).>
+
+[Task list:]
+<Flat profile of the benchmark.>
+
+[Memplot:]
+<List of memory measures.>
+
+For more information, see the CBS documentation.
+
+
+============================
+-- Benchmark source files --
+============================
+
+Each benchmark program has a single source file ending in _bench.hh
+(.cc files are generated automatically by generate_bench.sh).
+
+This file is instrumented with CBS, Vaucanson's benchmarking utility.
+See cbs/README (source dir) for more info on CBS.
+
+These are the general steps:
+
+1. Generate the input automaton (not measured).
+2* Apply the algorithm.
+3. Remove temporary files, write results (not measured).
+
+Note that step 1 can take longer that step 2.
 
 
 =============
 -- OpenFST --
 =============
 
-Fixme.
+If OpenFST is available on the current host, some extra benchmarks are
+made.
+
+Use the `--with-openfst' configuration option to specify the path
+to OpenFST binaries.
+
+OpenFST benchmarks are similar to Vaucanson benchmarks and a corresponding
+source file ending in _openfst_bench.hh
+
+The process is however more complex, as it relies on fork() and execl() to
+execute OpenFST on a given input.
+
+These are the general steps:
+
+1. Generate the input automaton.
+2. Write the input automaton to a separate file in FSM format.
+3* Run fstcompile on the input:
+     - Use the symbol table in common/alpha.syms.
+     - Measured because it is suspected to do pre-processing,
+       such as minimization.
+4* Run fst<command>, where <command> is the OpenFST equivalent
+   of the benchmarked algorithm.
+5. Remove temporary files, write results.
 
