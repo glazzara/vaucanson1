@@ -29,7 +29,7 @@ using namespace vcsn::boolean_automaton;
 
 void quotient_bool_bench(int n)
 {
-  automaton_t a = aut_ab();
+  automaton_t a = aut_b();
   automaton_t an = a;
 
   std::stringstream n_str;
@@ -48,7 +48,7 @@ void quotient_bool_bench(int n)
   // Set extra parameters/results
   BENCH_PARAMETER("_n_", n_str.str());
   BENCH_PARAMETER("over", "B");
-  BENCH_PARAMETER("input automaton", "aut_ab");
+  BENCH_PARAMETER("input automaton", "aut_b");
   BENCH_PARAMETER("product states", (long) a.states ().size ());
   BENCH_PARAMETER("product transitions", (long) a.transitions ().size ());
 

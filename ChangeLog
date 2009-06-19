@@ -1,5 +1,13 @@
 2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Benchmarks: rename aut_ab into aut_b.
+
+	* src/bench/common/bench_constructs.hh,
+	* src/bench/quotient/quotient_bool_bench.hh,
+	* src/bench/quotient/quotient_z_bench.hh: Do that.
+
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Update accessible benchmark.
 
 	* src/bench/accessible/Makefile.bench: Adjust benchmark values.

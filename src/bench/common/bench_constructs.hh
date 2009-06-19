@@ -108,16 +108,15 @@ automaton_t aut_linear_eps(unsigned n)
   return a;
 }
 
-/// Create a autab automaton (for quotient).
-/// See README_AUTOMATA for autab.
-automaton_t aut_ab()
+/// Create a aut_b automaton (for quotient).
+/// See README_AUTOMATA for aut_b.
+automaton_t aut_b()
 {
   AUTOMATON_TYPES_EXACT(automaton_t);
 
   alphabet_t	alpha;
   alpha.insert('a');
   alpha.insert('b');
-  alpha.insert('c');
 
   automaton_t a = make_automaton(alpha);
 
