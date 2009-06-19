@@ -19,12 +19,12 @@
 SUBDIRS = common determinization		\
 	  minimization derived_terms		\
 	  quotient composition eps_removal	\
-	  iterators accessible
+	  iterators accessible product
 
 BENCHDIRS = determinization minimization	\
 	    derived_terms quotient		\
 	    composition eps_removal		\
-	    iterators accessible
+	    iterators accessible product
 
 bench:
 	for f in $(BENCHDIRS); do				\

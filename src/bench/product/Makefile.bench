@@ -1,0 +1,19 @@
+# product/Makefile.bench				* -*- Makefile -*-
+
+bench: all
+	@mkdir aut_b_bool;				\
+	mkdir aut_b_z;					\
+	echo '===============';				\
+	echo '|Product bench|';				\
+	echo '===============';				\
+	for n in $$(seq 5 13); do			\
+	    echo "----------------------For $$n";	\
+	    echo "--------------VCSN (over Z):";	\
+	    ./product_aut_b_z_bench $$n;		\
+	    echo "--------------VCSN (over B):";	\
+	    ./product_aut_b_bool_bench $$n;		\
+	done;
+
+bench-clean:
+	rm -rf aut_b_bool
+	rm -rf aut_b_z

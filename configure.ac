@@ -299,6 +299,7 @@ AC_CONFIG_FILES([
 	    src/bench/iterators/Makefile
 	    src/bench/accessible/Makefile
 	    src/bench/minimization/Makefile
+	    src/bench/product/Makefile
 	    src/bench/quotient/Makefile
 	tools/Makefile
 	include/Makefile

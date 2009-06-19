@@ -1,4 +1,4 @@
-#!/bin/sh
+e#!/bin/sh
 
 # Vaucanson, a generic library for finite state machines.
 # Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
@@ -101,7 +101,7 @@ case $1:$# in
 	BENCH_DIRS="determinization		\
 	 minimization derived_terms		\
          quotient composition eps_removal	\
-         iterators accessible"
+         iterators accessible product"
 	;;
     --all:* | *:0)
 	echo >&2 "invalid arguments: $@"
