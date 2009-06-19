@@ -1,5 +1,13 @@
 2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Update accessible benchmark.
+
+	* src/bench/accessible/Makefile.bench: Adjust benchmark values.
+	* src/bench/accessible/accessible_bench.hh,
+	* src/bench/common/bench_constructs.hh: Move automaton creation.
+
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Benchmarks: add documentation.
 
 	* src/bench/README,

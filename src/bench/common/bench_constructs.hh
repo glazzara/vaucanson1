@@ -141,4 +141,29 @@ automaton_t aut_ab()
 }
 
 
+/// Create a aut_complete automaton
+/// (spontaneous transition between any two states).
+/// See README_AUTOMATA for aut_complete.
+automaton_t aut_complete(int n)
+{
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  alphabet_t alpha;
+  alpha.insert('a');
+
+  automaton_t a = make_automaton(alpha);
+  std::vector<hstate_t>	state_list;
+
+  for (int i = 0; i < n; ++i)
+    state_list.push_back(a.add_state());
+  a.set_initial(a.get_state(0));
+  a.set_final(a.get_state(0));
+
+  for (std::vector<hstate_t>::iterator i = state_list.begin(); i != state_list.end(); ++i)
+    for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
+      a.add_spontaneous(*i, *j);
+
+  return a;
+}
+
 #endif // ! VCSN_BENCH_COMMON_BENCH_CONSTRUCTS_HH

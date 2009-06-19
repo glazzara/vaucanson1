@@ -5,7 +5,7 @@ bench: all
 	echo '==================';			\
 	echo '|accessible bench|';			\
 	echo '==================';			\
-	for n in 1000 2000 3000 4000 5000; do		\
+	for n in 500 1000 1500 2000 2500; do		\
 	   echo "----------------------For $$n:";	\
 	   echo "-------------- accessible:";		\
 	   ./accessible_bench $$n;			\

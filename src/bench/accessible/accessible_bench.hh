@@ -24,36 +24,34 @@
 
 # include CONTEXT_HEADER
 # include <vaucanson/algorithms/accessible.hh>
+
 # include <iostream>
 # include <vector>
 
 using namespace vcsn;
 using namespace vcsn::CONTEXT;
 
+#include <common/bench_constructs.hh>
+
 void accessible_bench(int n)
 {
   if (not n)
     return;
 
-  AUTOMATON_TYPES_EXACT(automaton_t);
+  automaton_t a = aut_complete(n);
 
-  alphabet_t alpha;
-  alpha.insert('a');
-
-  automaton_t a = make_automaton(alpha);
-  std::vector<hstate_t>	state_list;
-
-  for (int i = 0; i < n; ++i)
-    state_list.push_back(a.add_state());
-  a.set_initial(a.get_state(0));
-  a.set_final(a.get_state(0));
-
-  for (std::vector<hstate_t>::iterator i = state_list.begin(); i != state_list.end(); ++i)
-    for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
-      a.add_spontaneous(*i, *j);
-
-  BENCH_START("Vaucanson accessible", "FIXME.");
-  //automaton_t ret = accessible(a);
+  BENCH_START("Vaucanson accessible",
+	      "Benchmark for listing the accessible states of an automaton\n"
+              "using Vaucanson.\n"
+	      "\n"
+	      "Input is a complete automaton with n states:\n"
+	      "Between any two states, there exists a spontaneous transition.\n"
+	      "(see src/bench/common/README_AUTOMATA for aut_complete).\n"
+	      "\n"
+	      "Process:\n"
+	      "\n"
+	      "1. Generate the input automaton (with parameter _n_).\n"
+	      "2* Run accessible_states on the input automaton.\n");
   accessible_states(a);
   BENCH_STOP();
 
