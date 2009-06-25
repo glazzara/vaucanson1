@@ -1,13 +1,19 @@
 # composition/Makefile.bench				* -*- Makefile -*-
 
-bench: $(noinst_PROGRAMS)
-	@echo '===================';				\
-	echo '|Composition bench|';				\
-	echo '===================';				\
-	for n_value in $$(seq 20 40); do			\
-	   echo "----------------------For $$n_value:";		\
-	   echo "--------------VCSN (Realtime):";		\
-	   ./rw_composition-bench $$n_value;		\
-	   echo "--------------VCSN (Normalized):";		\
-	   ./normalized_composition-bench $$n_value;		\
+bench: all
+	@mkdir normalized;				\
+	mkdir realtime;					\
+	echo '===================';			\
+	echo '|Composition bench|';			\
+	echo '===================';			\
+	for n in $$(seq 20 40); do			\
+	   echo "----------------------For $$n:";	\
+	   echo "--------------VCSN (Realtime):";	\
+	   ./realtime_composition_bench $$n;		\
+	   echo "--------------VCSN (Normalized):";	\
+	   ./normalized_composition_bench $$n;		\
 	done
+
+bench-clean:
+	rm -rf normalized
+	rm -rf realtime

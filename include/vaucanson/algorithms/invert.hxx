@@ -343,7 +343,7 @@ namespace vcsn
   Element<S, T>&
   invert(const Element<S, T>& t)
   {
-    TIMER_SCOPED("invert");
+    BENCH_TASK_SCOPED("invert");
     return do_invert(t.structure(), t);
   }
 
@@ -352,7 +352,7 @@ namespace vcsn
   invert(const Element<S, T>& t,
 	 Element<S, T>& res)
   {
-    TIMER_SCOPED("invert");
+    BENCH_TASK_SCOPED("invert");
     do_invert(t.structure(), t, res);
   }
 }

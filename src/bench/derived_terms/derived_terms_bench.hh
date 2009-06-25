@@ -14,12 +14,14 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/derived_term_automaton.hh>
 #include <vaucanson/algebra/implementation/series/krat.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -33,6 +35,7 @@ using namespace vcsn;
 using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>
+#include <cbs/bench/timer.hh>
 
 struct Data
 {
@@ -44,7 +47,7 @@ struct Data
     int n_so_transitions;
     double r_time_quot_dt;
     double r_time_quot_so;
-    int n_min_states;
+    int n_min;
     int n_min_transitions;
 
     bool operator()(const Data& a, const Data& b) const
@@ -54,7 +57,7 @@ struct Data
 };
 
 
-void derived_terms_bench(int n_states)
+void derived_terms_bench(int n)
 {
   AUTOMATON_TYPES_EXACT(automaton_t);
   AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
@@ -62,15 +65,21 @@ void derived_terms_bench(int n_states)
   typedef std::vector<Data>  datas_t;
   RandomChooser chooser;
   datas_t	datas(SAMPLES);
-  alphabet_t	alpha;
+  alphabet_t    alpha;
+
   alpha.insert('a');
   alpha.insert('b');
   alpha.insert('c');
+
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 
-  automaton_t a = make_automaton(alpha);
-  aut_2n(n_states, a);
+  // Automaton creation
+  automaton_t a = aut_2n(n);
+
+  BENCH_START("Vaucanson derived terms",
+	      "FIXME.\n"
+	      "Times in ms.\n");
 
   // Get all data.
   for (int i = 0; i < SAMPLES; ++i)
@@ -78,34 +87,42 @@ void derived_terms_bench(int n_states)
     Data data;
     krat_t e = aut_to_exp(a, chooser);
 
+    timer::Timer timer;
+
     // Get derived terms automaton of e.
     data.n_len = e.value(). length();
     automaton_t dt = make_automaton(alpha);
-    VCSN_BENCH_START_QUIET;
+    timer.start();
     derived_term_automaton(dt, e);
-    VCSN_BENCH_STOP_QUIET(data.r_time_dt);
+    timer.stop();
+    data.r_time_dt = (double) timer.time();
     data.n_dt_states = dt.states().size();
     data.n_dt_transitions = dt.transitions().size();
 
     // Get standart automaton of e.
-    VCSN_BENCH_START_QUIET;
+    timer.start();
     automaton_t so = standard_of(e);
-    VCSN_BENCH_STOP_QUIET(data.r_time_so);
+    timer.stop();
+    data.r_time_so = (double) timer.time();
     data.n_so_transitions = so.transitions().size();
 
     // Minimize dt.
-    VCSN_BENCH_START_QUIET;
+    timer.start();
     automaton_t q = quotient(dt);
-    VCSN_BENCH_STOP_QUIET(data.r_time_quot_dt);
-    data.n_min_states = q.states().size();
+    timer.stop();
+    data.r_time_quot_dt = (double) timer.time();
+    data.n_min = q.states().size();
     data.n_min_transitions = q.transitions().size();
 
     // Minimize so.
-    VCSN_BENCH_START_QUIET;
+    timer.start();
     quotient(so);
-    VCSN_BENCH_STOP_QUIET(data.r_time_quot_so);
+    timer.stop();
+    data.r_time_quot_so = (double) timer.time();
     datas[i] = data;
   }
+
+  BENCH_STOP();
 
   sort(datas.begin(), datas.end(), Data());
 
@@ -119,7 +136,7 @@ void derived_terms_bench(int n_states)
     int n_dt_states = 0;
     double r_time_quot_dt = 0;
     double r_time_quot_so = 0;
-    int n_min_states = 0;
+    int n_min = 0;
     int n_dt_transitions = 0;
     int n_so_transitions = 0;
     int n_min_transitions = 0;
@@ -133,7 +150,7 @@ void derived_terms_bench(int n_states)
       n_dt_transitions += idata->n_dt_transitions;
       r_time_quot_dt += idata->r_time_quot_dt;
       r_time_quot_so += idata->r_time_quot_so;
-      n_min_states += idata->n_min_states;
+      n_min += idata->n_min;
       n_min_transitions += idata->n_min_transitions;
       ++idata;
     }
@@ -143,21 +160,37 @@ void derived_terms_bench(int n_states)
     n_dt_states /= SAMPLES_PER_CLASS;
     r_time_quot_dt /= SAMPLES_PER_CLASS;
     r_time_quot_so /= SAMPLES_PER_CLASS;
-    n_min_states /= SAMPLES_PER_CLASS;
+    n_min /= SAMPLES_PER_CLASS;
     n_dt_transitions /= SAMPLES_PER_CLASS;
     n_so_transitions /= SAMPLES_PER_CLASS;
     n_min_transitions /= SAMPLES_PER_CLASS;
-    std::cerr << "Class " << i + 1 << std::endl
-	      << "Average length: " << n_len << std::endl
-	      << "Average dt time: " << r_time_dt << std::endl
-	      << "Average so time: " << r_time_so << std::endl
-	      << "Average dt states: " << n_dt_states << std::endl
-	      << "Average dt transitions: " << n_dt_transitions << std::endl
-	      << "Average so transitions: " << n_so_transitions << std::endl
-	      << "Average quot time on dt: " << r_time_quot_dt << std::endl
-	      << "Average quot time on so: " << r_time_quot_so << std::endl
-	      << "Average min states: " << n_min_states << std::endl
-	      << "Average min transitions: " << n_min_transitions << std::endl;
+
+    std::stringstream class_str;
+    class_str << i + 1;
+
+    std::string prefix = "[" + class_str.str() + "] ";
+
+    BENCH_RESULT(prefix + "average length", (long) n_len);
+    BENCH_RESULT(prefix + "average dt time", (double) r_time_dt);
+    BENCH_RESULT(prefix + "average so time", (double) r_time_so);
+    BENCH_RESULT(prefix + "average dt states", (long) n_dt_states);
+    BENCH_RESULT(prefix + "average dt transitions", (long) n_dt_transitions);
+    BENCH_RESULT(prefix + "average so transitions", (long) n_so_transitions);
+    BENCH_RESULT(prefix + "average quot time on dt", (double) r_time_quot_dt);
+    BENCH_RESULT(prefix + "average quot time on so", (double) r_time_quot_so);
+    BENCH_RESULT(prefix + "average min states", (long) n_min);
+    BENCH_RESULT(prefix + "average min transitions", (long) n_min_transitions);
   }
+
+  BENCH_PARAMETER("classes", (long) CLASSES);
+  BENCH_PARAMETER("samples per class", (long) SAMPLES_PER_CLASS);
+  BENCH_PARAMETER("samples", (long) SAMPLES);
+
+  BENCH_PARAMETER("_n_", (long) n);
+
+  std::stringstream name;
+  name << "default/bench_derived_terms_" << n;
+
+  BENCH_VCSN_SAVE_AND_PRINT(name.str());
 }
 

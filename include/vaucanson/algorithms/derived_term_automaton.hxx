@@ -163,7 +163,7 @@ namespace vcsn {
   void
   derived_term_automaton(Element<A, T>& out, const Exp& kexp)
   {
-    TIMER_SCOPED("derived_term_automaton");
+    BENCH_TASK_SCOPED("derived_term_automaton");
     Element<A, T>* res = do_derived_term_automaton(out, kexp);
     if (res)
       out = *res;

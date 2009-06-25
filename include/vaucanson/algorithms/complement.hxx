@@ -37,7 +37,7 @@ namespace vcsn {
   void
   complement_here(Element<A, AI>& a)
   {
-    TIMER_SCOPED("complement");
+    BENCH_TASK_SCOPED("complement");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 

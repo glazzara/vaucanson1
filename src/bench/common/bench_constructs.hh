@@ -14,12 +14,21 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH
-# define VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH
+#ifndef VCSN_BENCH_COMMON_BENCH_CONSTRUCTS_HH
+# define VCSN_BENCH_COMMON_BENCH_CONSTRUCTS_HH
 
-/// Create a nice automaton which will have 2^n states once determinized.
-void aut_2n(unsigned n, automaton_t& a)
+/// Create an aut_2n automaton (has 2^n states once determinized).
+/// See README_AUTOMATA for aut2n.
+automaton_t aut_2n(unsigned n)
 {
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  alphabet_t alpha;
+  alpha.insert('a');
+  alpha.insert('b');
+  alpha.insert('c');
+  automaton_t a = make_automaton(alpha);
+
   std::vector<hstate_t>	c(n);
   for (unsigned i = 0; i < n; ++i)
     c[i] = a.add_state();
@@ -34,27 +43,48 @@ void aut_2n(unsigned n, automaton_t& a)
   }
   a.set_initial(c[0]);
   a.set_final(c[0]);
+
+  return a;
 }
 
-void debruijn(unsigned n_value, automaton_t& an)
+/// Create a aut_debruijn automaton.
+/// See README_AUTOMATA for debruijn.
+automaton_t aut_debruijn(unsigned n)
 {
-  unsigned n = 1 << n_value;
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  alphabet_t alpha;
+  alpha.insert('a');
+  alpha.insert('b');
+  alpha.insert('c');
+  automaton_t a = make_automaton(alpha);
+
+  n = 1 << n;
 
   for (unsigned i = 0; i < n; ++i)
-    an.add_state();
-  an.set_initial(0);
+    a.add_state();
+  a.set_initial(0);
   for (unsigned i = 0; i < n; ++i)
   {
-    an.add_letter_transition(i, (i*2)%n, 'a');
-    an.add_letter_transition(i, (i*2+1)%n, 'b');
+    a.add_letter_transition(i, (i * 2) % n, 'a');
+    a.add_letter_transition(i, (i * 2 + 1) % n, 'b');
     if ((i << 1) & n)
-      an.set_final(i);
+      a.set_final(i);
   }
+
+  return a;
 }
 
-/// Create a special automaton for benching eps_removal
-void aut_linear_eps(unsigned n, automaton_t& a)
+/// Create a aut_linear_eps automaton (for epsilon removal).
+/// See README_AUTOMATA for aut_linear_eps.
+automaton_t aut_linear_eps(unsigned n)
 {
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  alphabet_t alpha;
+  alpha.insert('a');
+  automaton_t a = make_automaton(alpha);
+
   int size = n * 500;
 
   std::vector<hstate_t> c(size);
@@ -74,6 +104,65 @@ void aut_linear_eps(unsigned n, automaton_t& a)
       a.add_letter_transition(c[i], c[(i+1) % size], 'a');
   a.set_initial(c[0]);
   a.set_final(c[size - 1]);
+
+  return a;
 }
 
-#endif // ! VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH
+/// Create a aut_b automaton (for quotient).
+/// See README_AUTOMATA for aut_b.
+automaton_t aut_b()
+{
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  alphabet_t	alpha;
+  alpha.insert('a');
+  alpha.insert('b');
+
+  automaton_t a = make_automaton(alpha);
+
+  std::vector<hstate_t>	       c(2);
+
+  c[0] = a.add_state();
+  c[1] = a.add_state();
+
+  a.set_initial(c[0]);
+  a.set_final(c[1]);
+
+  a.add_letter_transition(c[0], c[0], 'a');
+  a.add_letter_transition(c[0], c[0], 'b');
+
+  a.add_letter_transition(c[0], c[1], 'b');
+
+  a.add_weighted_transition(c[1], c[1], 2, "a");
+  a.add_weighted_transition(c[1], c[1], 2, "b");
+
+  return a;
+}
+
+
+/// Create a aut_complete automaton
+/// (spontaneous transition between any two states).
+/// See README_AUTOMATA for aut_complete.
+automaton_t aut_complete(int n)
+{
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  alphabet_t alpha;
+  alpha.insert('a');
+
+  automaton_t a = make_automaton(alpha);
+  std::vector<hstate_t>	state_list;
+
+  for (int i = 0; i < n; ++i)
+    state_list.push_back(a.add_state());
+  a.set_initial(a.get_state(0));
+  a.set_final(a.get_state(0));
+
+  for (std::vector<hstate_t>::iterator i = state_list.begin(); i != state_list.end(); ++i)
+    for (std::vector<hstate_t>::iterator j = state_list.begin(); j != state_list.end(); ++j)
+      a.add_spontaneous(*i, *j);
+
+  return a;
+}
+
+#endif // ! VCSN_BENCH_COMMON_BENCH_CONSTRUCTS_HH

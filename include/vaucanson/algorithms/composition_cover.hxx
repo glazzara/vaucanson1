@@ -43,7 +43,7 @@ namespace vcsn {
 			const Auto_t& fmp,
 			Auto_t& ret)
   {
-    TIMER_SCOPED("composition_cover");
+    BENCH_TASK_SCOPED("composition_cover");
     AUTOMATON_TYPES(Auto_t);
     ret = splitting::outsplitting (fmp);
   }
@@ -56,7 +56,7 @@ namespace vcsn {
 			   const Auto_t& fmp,
 			   Auto_t& ret)
   {
-    TIMER_SCOPED("composition_co_cover");
+    BENCH_TASK_SCOPED("composition_co_cover");
     AUTOMATON_TYPES(Auto_t);
     ret = splitting::insplitting (fmp);
   }

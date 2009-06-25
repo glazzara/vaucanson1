@@ -110,7 +110,7 @@ namespace vcsn {
   typename identity_transducer_helper<S, K, T>::ret
   extension(const Element<S, T>& a)
   {
-    TIMER_SCOPED("extension/1");
+    BENCH_TASK_SCOPED("extension/1");
     return do_extension(a.structure(), a);
   }
 
@@ -204,7 +204,7 @@ namespace vcsn {
   Element<ST, TT>
   extension(const Element<SA, TA>& a, const Element<ST, TT>& t)
   {
-    TIMER_SCOPED("extension/2");
+    BENCH_TASK_SCOPED("extension/2");
     return do_extension(a.structure(), t.structure(), a, t);
   }
 

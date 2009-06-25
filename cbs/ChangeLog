@@ -1,0 +1,536 @@
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Timer: Fix text ouput.
+
+	* lib/timer.cc: Add missing endlines.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update README.
+
+	* README: Add info on including CBS to an autoconf project.
+	* README_LIBBENCH: Reorganize, add compilation flags info.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Demos: Update plot scripts.
+
+	Make them more robust to changes in libbench.
+
+	* demo/memplot-bench/generate-figures.sh,
+	* demo/timer-bench/generate-figures.sh: Handpick parameters/results.
+	* demo/memplot-bench/results-time.plot.in,
+	* demo/timer-bench/timer-many-tasks-time.plot.in,
+	* demo/timer-bench/timer-recursion-time.plot.in,
+	* demo/timer-bench/timer-scoped-time.plot.in: Use the handpicked values.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Memplot: Select probe method via macro.
+
+	* lib/memplot.cc: Use sbrk() or parse /proc/self/stat
+	according to MEMPLOT_USE_PROC_SELF_STAT.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Libbench: add time spent in children processes.
+
+	* include/cbs/bench/internal/timer_gathering.hh,
+	* include/cbs/bench/internal/timer_graph.hh,
+	* include/cbs/bench/timer.hh: Add to interface.
+
+	* include/cbs/bench/internal/timer_gathering.hxx,
+	* include/cbs/bench/timer.hxx,
+	* lib/timer.cc,
+	* lib/timer_gathering.cc,
+	* lib/timer_graph.cc: Implement.
+
+	* lib/bench.cc: Add in results.
+
+2009-06-14  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Libbench: add total number of timer measures.
+
+	* include/cbs/bench/timer.hh,
+	* include/cbs/bench/timer.hxx,
+	* lib/timer.cc: Implement.
+	* lib/bench.cc: Add in results.
+
+2009-06-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Libbench: add system infos.
+
+	* lib/bench.cc: Add info.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update demos.
+
+	* demo/comparison/main.cc,
+	* demo/generate-plot-files.sh,
+	* demo/memplot/main.cc: Update.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update memplot: Add gnuplot & text output, fix bugs.
+
+	* include/cbs/bench/bench.hh: Add gnuplot format.
+	* include/cbs/bench/memplot.hh: Fix time probe.
+	* lib/bench.cc: Add gnuplot format support.
+	* lib/memplot.cc: Add new output, fix time probe.
+	* lib/timer.cc: Add missing \n.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update documentation.
+
+	* README,
+	* README_LIBBENCH,
+	* TODO: Update.
+
+2009-06-08  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update .gitignore.
+
+	* .gitignore: Update.
+
+2009-06-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add XSD file draft.
+
+	* cbs.xsd: Add (incomplete).
+
+2009-06-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update TODO.
+
+	* TODO: Update.
+
+2009-05-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update stats script file.
+
+	* stats.sh: Update.
+
+2009-05-02  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add stats script file.
+
+	* stats.sh: New.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update helper scripts.
+
+	(All .plot.in files): Add macro from machine and machine shot
+	name.
+
+	* demo/generate-plot-files.sh: Update.
+	* demo/vcsn/get-data.sh: Update.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Tweak & document demos.
+
+	* demo/memplot-bench/README,
+	* demo/timer-bench/README: More infos.
+
+	* demo/timer-bench/main.cc: Tweak.
+
+	* demo/vcsn/vcsn-quotient-fix.data,
+	* demo/vcsn/vcsn-quotient-orig.data: Remove (generated).
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add basic machine selection script for plots.
+
+	* demo/generate-plot-files.sh: New.
+	* README_LIBBENCH: Update.
+
+	Rename plot files in demo/.
+
+	* memplot-bench/results-memory.plot: Renamed as:
+	memplot-bench/results-memory.plot.in.
+	* memplot-bench/results-time.plot: Renamed as:
+	memplot-bench/results-time.plot.in.
+	* timer-bench/timer-many-tasks-memory.plot: Renamed as:
+	timer-bench/timer-many-tasks-memory.plot.in.
+	* timer-bench/timer-many-tasks-time.plot: Renamed as:
+	timer-bench/timer-many-tasks-time.plot.in.
+	* timer-bench/timer-recursion-memory.plot: Renamed as:
+	timer-bench/timer-recursion-memory.plot.in.
+	* timer-bench/timer-recursion-time.plot: Renamed as:
+	timer-bench/timer-recursion-time.plot.in.
+	* timer-bench/timer-scoped-memory.plot: Renamed as:
+	timer-bench/timer-scoped-memory.plot.in.
+	* timer-bench/timer-scoped-time.plot: Renamed as:
+	timer-bench/timer-scoped-time.plot.in.
+	* vcsn/vcsn-composition-normalized-memory.plot: Renamed as:
+	vcsn/vcsn-composition-normalized-memory.plot.in.
+	* vcsn/vcsn-composition-normalized.plot: Renamed as:
+	vcsn/vcsn-composition-normalized.plot.in.
+	* vcsn/vcsn-composition-rw-memory.plot: Renamed as:
+	vcsn/vcsn-composition-rw-memory.plot.in.
+	* vcsn/vcsn-composition-rw.plot: Renamed as:
+	vcsn/vcsn-composition-rw.plot.in.
+	* vcsn/vcsn-determinize-memory.plot: Renamed as:
+	vcsn/vcsn-determinize-memory.plot.in.
+	* vcsn/vcsn-determinize.plot: Renamed as:
+	vcsn/vcsn-determinize.plot.in.
+	* vcsn/vcsn-quotient-bool-memory.plot: Renamed as:
+	vcsn/vcsn-quotient-bool-memory.plot.in.
+	* vcsn/vcsn-quotient-bool.plot: Renamed as:
+	vcsn/vcsn-qu.ent-bool.plot.in: .
+	* vcsn/vcsn-quotient-z-memory.plot: Renamed as:
+	vcsn/vcsn-quotient-z-memory.plot.in.
+	* vcsn/vcsn-quotient-z.plot: Renamed as:
+	vcsn/vcsn-quo.nt-z.plot.in.
+	* vcsn/v.-quotient.plot: Renamed as:
+	vcsn/vcsn-quotient.plot.in.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add/tweak plot examples & helper scripts.
+
+	Note: allow changing the current machine easily.
+
+	* demo/vcsn/display-figures.sh,
+	* demo/vcsn/generate-figures.sh,
+	* demo/vcsn/get-data.sh: Do that.
+
+	* demo/memplot-bench/results-memory.plot,
+	* demo/memplot-bench/results-time.plot,
+	* demo/timer-bench/timer-many-tasks-memory.plot,
+	* demo/timer-bench/timer-many-tasks-time.plot,
+	* demo/timer-bench/timer-recursion-memory.plot,
+	* demo/timer-bench/timer-recursion-time.plot,
+	* demo/timer-bench/timer-scoped-memory.plot,
+	* demo/timer-bench/timer-scoped-time.plot: Update.
+
+	* demo/vcsn/vcsn-composition-normalized-memory.plot,
+	* demo/vcsn/vcsn-composition-normalized.plot,
+	* demo/vcsn/vcsn-composition-rw-memory.plot,
+	* demo/vcsn/vcsn-composition-rw.plot,
+	* demo/vcsn/vcsn-determinize-memory.plot,
+	* demo/vcsn/vcsn-determinize.plot,
+	* demo/vcsn/vcsn-quotient-bool-memory.plot,
+	* demo/vcsn/vcsn-quotient-bool.plot,
+	* demo/vcsn/vcsn-quotient-z-memory.plot,
+	* demo/vcsn/vcsn-quotient-z.plot,
+	* demo/vcsn/vcsn-quotient.plot: New.
+
+	* demo/vcsn/vcsn-quotient-fix-1.data: Remove.
+	* demo/vcsn/vcsn-quotient-fix.data,
+	* demo/vcsn/vcsn-quotient-orig.data: Update.
+
+
+2009-04-29  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add bench makefile target.
+
+	* Makefile.am,
+	* demo/Makefile.am,
+	* demo/memplot-bench/Makefile.am,
+	* demo/timer-bench/Makefile.am: Do that.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	(Memplot) Add relative memory usage, update demos.
+
+	* include/cbs/bench/memplot.hh,
+	* lib/bench.cc,
+	* lib/memplot.cc: Add relative_max.
+
+	* README_LIBBENCH: More infos.
+
+	* demo/memplot-bench/generate-figures.sh: New.
+	* demo/memplot-bench/get-results.sh: Delete.
+	* demo/timer-bench/generate-figures.sh: New.
+	* demo/timer-bench/get-results.sh: Delete.
+
+	* demo/memplot-bench/main.cc,
+	* demo/timer-bench/main.cc: Fork() so that measures
+	are independent.
+
+	* demo/memplot-bench/results-memory.plot,
+	* demo/memplot-bench/results-time.plot,
+	* demo/timer-bench/timer-many-tasks-memory.plot,
+	* demo/timer-bench/timer-many-tasks-time.plot,
+	* demo/timer-bench/timer-many-tasks.plot,
+	* demo/timer-bench/timer-recursion-memory.plot,
+	* demo/timer-bench/timer-recursion-time.plot,
+	* demo/timer-bench/timer-scoped-memory.plot,
+	* demo/timer-bench/timer-scoped-time.plot,
+	* demo/timer-bench/timer-scoped.plot,
+	* demo/vcsn/vcsn-quotient.plot: Update.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update README_LIBBENCH figures.
+
+	* README_LIBBENCH: Update figures.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add data from vcsn tests.
+
+	* demo/vcsn/vcsn-quotient-fix-1.data,
+	* demo/vcsn/vcsn-quotient-fix.data,
+	* demo/vcsn/vcsn-quotient-orig.data,
+	* demo/vcsn/vcsn-quotient.plot: New.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add plotting helpers to timer-bench.
+
+	* demo/timer-bench/get-results.sh,
+	* demo/timer-bench/timer-many-tasks-memory.plot,
+	* demo/timer-bench/timer-many-tasks.plot,
+	* demo/timer-bench/timer-recursion-memory.plot,
+	* demo/timer-bench/timer-recursion-time.plot,
+	* demo/timer-bench/timer-scoped-memory.plot,
+	* demo/timer-bench/timer-scoped.plot: New.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update comparaison demo.
+
+	* demo/comparison/main.cc: Update.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add memplot bench demo.
+
+	* configure.ac: Add Makefile.
+	* demo/Makefile.am: Add subdir.
+	* demo/memplot-bench/Makefile.am: New.
+	* demo/memplot-bench/main.cc: New.
+	* demo/memplot-bench/get-results.sh,
+	* demo/memplot-bench/results-memory.plot,
+	* demo/memplot-bench/results-time.plot: New.  Plotting helpers.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add comparison demo for several profilers.
+
+	Works with CBS, gprof, kcachegrind.
+
+	* configure.ac: Add Makefile.
+	* demo/Makefile.am: Add subdir.
+	* demo/comparison/Makefile.am,
+	* demo/comparison/README,
+	* demo/comparison/main.cc: Add demo.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Remove obsolete demo scripts.
+
+	* demo/bench/demo.sh: Deleted.
+	* demo/bench/display.sh: Deleted.
+	* demo/bench/plot.sh: Deleted.
+	* demo/timer/demo.sh: Deleted.
+	* demo/timer/display.sh: Deleted.
+	* demo/timer/timer-demo.sh: Deleted.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	(Memplot) Fix measure.
+
+	* lib/memplot.cc: Remove loop.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	(Memplot) Remove brk measure.
+
+	* include/cbs/bench/memplot.hh,
+	* lib/memplot.cc: Remove memory_brk.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update demos.
+
+	* demo/Makefile.am: Add new dir.
+	* demo/bench/main.cc: Add memplot, tweak.
+	* demo/memplot/Makefile.am,
+	* demo/memplot/main.cc: Add memplot demo.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Tweak timer main task name.
+
+	* lib/timer.cc: Add macro for name, change name.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update TODO.
+
+	* TODO: Update.
+
+2009-04-26  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add memplot implementation.
+
+	* configure.ac: Add new Makefile.
+	* include/cbs/bench/memplot.hh: Update interface.
+	* lib/Makefile.am: Add new file.
+	* lib/bench.cc: Add implementation.
+	* lib/memplot.cc: Add implementation.
+
+2009-04-12  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add convenient overloads for result/parameter.
+
+	* lib/bench.cc,
+	* include/cbs/bench/bench.hh: Do that.
+
+2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add timer benchmark demo.
+
+	Use it to bench CBS itself.
+
+	* README_LIBBENCH: Add some bench figures.
+	* configure.ac,
+	* demo/Makefile.am: Add new files.
+	* demo/timer-bench/Makefile.am: New.
+	* demo/timer-bench/main.cc: New.
+
+2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add Perl script for parameter extraction.
+
+	* bin/plot.pl: .
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Document.
+
+	* README_LIBBENCH: Add typical usage section.
+	* include/cbs/bench/bench.hh (bench): Add comments.
+	* include/cbs/bench/timer.hh: Fix comments.
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Allow disabling summary in export functions.
+
+	* include/cbs/bench/bench.hh (bench),
+	* lib/bench.cc (bench): Add option to enum, use it.
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Improve option handling in export functions.
+
+	* include/cbs/bench/bench.hh (bench),
+	* lib/bench.cc (bench): Add get_verbosity().
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Allow access to the internal timer.
+
+	* include/Makefile.am (nobase_include_HEADERS): Add new header.
+	* include/cbs/bench/bench_internals.hh: New.
+	Allow access to	the internal timer.
+	* lib/bench.cc: Implement new functions.
+	* include/cbs/bench/bench_macros.hh: Fixes.
+
+2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Tweak Makefile.am
+
+	* lib/Makefile.am: Simplify.
+
+2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add memplot interface.
+
+	* include/cbs/bench/bench.hh: Rename mem_plot() into memplot().
+	* include/cbs/bench/memplot.hh: Add interface.
+	* include/cbs/bench/timer.hh: Add needed getter.
+	* lib/bench.cc: Rename mem_plot() into memplot().
+	* lib/timer.cc: Add needed getter.
+
+
+2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Implement wall time.
+
+	Add missing const.
+
+	* lib/timer_graph.cc: .
+	* include/cbs/bench/internal/timer_gathering.hh: .
+	* include/cbs/bench/internal/timer_gathering.hxx: .
+	* include/cbs/bench/internal/timer_graph.hh: .
+	* include/cbs/bench/timer.hh: .
+	* include/cbs/bench/timer.hxx: .
+	* lib/bench.cc: .
+	* lib/timer.cc: .
+	* lib/timer_gathering.cc: .
+	* lib/timer_graph.cc: .
+
+2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add .gitignore.
+
+	* .gitignore: Add generated files.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add memory consumption to bench demo.
+
+	* demo/bench/main.cc (main): Add memory consumption.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Cosmetic fix.
+
+	* lib/bench.cc (bench): Change time parameter names.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add TODO.
+
+	* TODO: New.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update libbench.
+
+	Add:
+	  - Date info.
+	  - User time result.
+	  - System time result.
+
+	* include/cbs/bench/internal/timer_gathering.hh: .
+	* include/cbs/bench/internal/timer_gathering.hxx: .
+	* include/cbs/bench/timer.hh: .
+	* include/cbs/bench/timer.hxx: .
+	* lib/bench.cc: .
+	* lib/timer.cc: .
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add .gitignore files in empty directories.
+
+	* build-aux/.gitignore: New.
+	* m4/.gitignore: New.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update README.
+
+	* README: Update.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Install headers in the proper directory.
+
+	$(includedir)/cbs/bench/
+
+	* include/Makefile.am: Install all headers.
+	* configure.ac: Remove unused headers.
+	* include/cbs/Makefile.am: Deleted.
+	* include/cbs/bench/Makefile.am: Deleted.
+
+2009-04-03  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Use Autotools.

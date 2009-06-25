@@ -30,7 +30,7 @@ namespace vcsn
   void
   do_fmp_domain(const src_t& src, dst_t& dst)
   {
-    TIMER_SCOPED("fmp_domain");
+    BENCH_TASK_SCOPED("fmp_domain");
     AUTOMATON_TYPES_(src_t, trans_);
     AUTOMATON_TYPES(dst_t);
 
@@ -74,7 +74,7 @@ namespace vcsn
   void
   do_rw_domain(const src_t& src, dst_t& dst)
   {
-    TIMER_SCOPED("rw_domain");
+    BENCH_TASK_SCOPED("rw_domain");
     std::map<typename src_t::hstate_t, typename dst_t::hstate_t> m;
     AUTOMATON_TYPES(src_t);
 

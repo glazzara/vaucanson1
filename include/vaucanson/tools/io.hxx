@@ -57,7 +57,7 @@ namespace vcsn
     operator<<(std::ostream& o,
 	       const automaton_saver_<Auto, TransitionConverter, Format>& s)
     {
-      TIMER_SCOPED ("automaton output");
+      BENCH_TASK_SCOPED("automaton output");
       s.format_(o, s, s.conv_);
       return o;
     }
@@ -121,7 +121,7 @@ namespace vcsn
     operator<<(std::ostream& o,
 	       const regexp_saver_<RE, TransitionConverter, Format>& s)
     {
-      TIMER_SCOPED ("regexp output");
+      BENCH_TASK_SCOPED("regexp output");
       s.format_(o, s, s.conv_);
       return o;
     }
@@ -219,7 +219,7 @@ namespace vcsn
     operator>>(std::istream& in,
 	       automaton_loader_<Auto, TransitionConverter, Format> l)
     {
-      TIMER_SCOPED ("automaton input");
+      BENCH_TASK_SCOPED("automaton input");
       l.format_(in, l);
       return in;
     }
@@ -272,7 +272,7 @@ namespace vcsn
     operator>>(std::istream& in,
 	       regexp_loader_<RE, TransitionConverter, Format> l)
     {
-      TIMER_SCOPED ("regexp input");
+      BENCH_TASK_SCOPED("regexp input");
       l.format_(in, l);
       return in;
     }

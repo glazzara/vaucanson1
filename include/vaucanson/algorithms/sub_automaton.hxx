@@ -38,7 +38,7 @@ namespace vcsn {
 			const HStatesSet& selected,
 			bool check_states)
   {
-    TIMER_SCOPED("sub_automaton");
+    BENCH_TASK_SCOPED("sub_automaton");
     typedef Element<A, AI> automaton_t;
     std::list<typename automaton_t::hstate_t> to_be_removed;
     for (typename automaton_t::state_iterator i = a.states().begin();

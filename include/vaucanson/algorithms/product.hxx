@@ -67,7 +67,7 @@ class Product
 		const rhs_t& rhs,
 		pair_map_t& m)
     {
-      TIMER_SCOPED("product");
+      BENCH_TASK_SCOPED("product");
       visited_.clear();
 
       precondition(is_realtime(lhs));

@@ -56,7 +56,7 @@ namespace vcsn {
   void
   do_minimization_moore(const Element<A, AI>& input, Element<A, AI>& output)
   {
-    TIMER_SCOPED("minimization_moore");
+    BENCH_TASK_SCOPED("minimization_moore");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);

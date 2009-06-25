@@ -347,7 +347,7 @@ namespace vcsn {
 		      Auto& a,
 		      misc::direction_type dir)
   {
-    TIMER_SCOPED("eps_removal");
+    BENCH_TASK_SCOPED("eps_removal");
 
     EpsilonRemoverSp<A_, Auto, Weight> algo(a_set, a);
     algo(dir);

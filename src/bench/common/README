@@ -1,0 +1,6 @@
+Contents:
+
+README_AUTOMATA - Description of the benchmark input automata.
+alpha.syms - Table of symbols to use with OpenFST.
+bench_constructs.hh - Construction of test automata.
+bench_macros.hh - Convenient macros.

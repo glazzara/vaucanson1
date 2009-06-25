@@ -49,7 +49,7 @@ namespace vcsn {
   bool
   is_normalized_transducer(const Element<S, A>& a)
   {
-    TIMER_SCOPED("is_normalized_transducer");
+    BENCH_TASK_SCOPED("is_normalized_transducer");
     return do_is_normalized_transducer(a.structure(), a);
   }
 }
