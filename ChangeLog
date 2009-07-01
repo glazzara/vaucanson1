@@ -1,3 +1,16 @@
+2009-07-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix standard_of() w.r.t. listg.
+
+	* include/vaucanson/algorithms/standard_of.hxx
+	(Standard_OfVisitor): After concatenating to automata, and before
+	erasing the obsolete initial state of the RHS, do not explicitly
+	erase the transition leaving that initial state.  This is useless
+	because del_state() already does the work.  This was bogus because
+	del_transition invalidates the delta_iterator in the listg
+	implementation.
+	* include/vaucanson/algorithms/standard.hxx: Typos.
+
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Make listg the default graph implementation, since we now know
