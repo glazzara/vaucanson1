@@ -27,10 +27,10 @@ AC_CONFIG_SUBDIRS([cbs])
 
 # Check the default graph implementation near the top, this way we can
 # quickly react to incorrect values.
-ac_default_graph_impl=bmig
+ac_default_graph_impl=listg
 AC_ARG_WITH([default-graph-impl],
   [AC_HELP_STRING([--with-default-graph-impl@<:@=IMPL@:>@],
-     [choose default graph implementation: bmig (default) or listg])],
+     [choose default graph implementation: listg (default) or bmig])],
      [ac_default_graph_impl="$withval"],[])
 
 AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [$ac_default_graph_impl],
