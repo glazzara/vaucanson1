@@ -81,12 +81,6 @@ check the whole library.  Running the test suite may require up to
 Additional features
 -------------------
 
-There is a Python interpreter in the package. It is disabled by
-default because its compilation takes several hours. If you have time
-to spare, use::
-
-	./configure --enable-vaucanswig
-
 To specify a special path for the Xerces-C library::
 
 	./configure --with-xerces=/absolute/path/to/xerces
@@ -152,9 +146,8 @@ tools
 taf-kit
    TAF-Kit sources and tests.
 
-vaucanswig
-   VaucanSWIG sources and tests.  Very experimental.
-
+cbs
+   C++ Benchmarking Suite.
 
 Requirements
 ============
