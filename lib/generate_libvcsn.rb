@@ -2,7 +2,7 @@
 # generate_libvcsn.rb: this file is part of the Vaucanson project.
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2007, 2008 The Vaucanson Group.
+# Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,8 +30,10 @@ vcsn = Hash[
   "vcsn-int-z-fmp-tdc" => "int_z_fmp_transducer",
   "vcsn-z-tdc" => "z_transducer",
   "vcsn-char-char-b" => "char_char_boolean_automaton",
+  "vcsn-char-char-z" => "char_char_z_automaton",
   "vcsn-char-int-b" => "char_int_boolean_automaton",
   "vcsn-int-int-b" => "int_int_boolean_automaton",
+  "vcsn-int-int-z" => "int_int_z_automaton",
 ]
 
 # Creating directories in lib/
@@ -51,8 +53,9 @@ def create?(type, file)
       ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
         "vcsn-int-b" == type or "vcsn-int-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type or
-	"vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
-	"vcsn-int-int-b" == type
+	"vcsn-char-char-b" == type or "vcsn-char-char-z" == type or
+	"vcsn-char-int-b" == type or "vcsn-int-int-b" == type or
+	"vcsn-int-int-z" == type
       ) and
       file !~ /realtime_decl.hh/ and
       file !~ /extension.hh/ and		# transducer
@@ -76,8 +79,11 @@ def create?(type, file)
 	)
       ) and
       ( # Pair letters only filters.
-	not ( "vcsn-char-char-b" == type or "vcsn-char-int-b" == type or
-	      "vcsn-int-int-b" == type
+	not ( "vcsn-char-char-b" == type or
+	      "vcsn-char-char-z" == type or
+	      "vcsn-char-int-b" == type or
+	      "vcsn-int-int-b" == type or
+              "vcsn-int-int-z" == type
 	    ) or
 	    (
 	      file !~ /berry_sethi.hh/		# algorithm not generic with letter_t
@@ -147,7 +153,7 @@ def create?(type, file)
 	      file !~ /\/projection.hh/ and		# FMP transducer (identity)
 	      file !~ /composition_cover.hh/		# FMP transducer
 	    )
-      ) 
+      )
     )
   )
 end
@@ -203,7 +209,7 @@ def write_makefile(type, context)
 	     "",
 	     "lib_LTLIBRARIES\t+= lib" + type + ".la",
 	     "lib" + type_ + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
-	     "lib" + type_ + "_la_LIBADD\t= $(LIBOBJS)",
+	     "lib" + type_ + "_la_LIBADD\t= $(LIBOBJS) $(LIBADD) $(benchlib)",
              "lib" + type_ + "_la_SOURCES\t= " + type + "/all.cc",
 	     "## all.cc includes all the source files below.  We declare them",
 	     "## as EXTRA_*_SOURCES so they are distributed and so we can",

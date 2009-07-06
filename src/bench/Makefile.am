@@ -1,6 +1,6 @@
 # src/bench/Makefile.am                       -*- Makefile -*-
 #
-# Vaucanson, a generic library for finite state machines.  
+# Vaucanson, a generic library for finite state machines.
 # Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
 # Vaucanson Group.
 #
@@ -16,17 +16,22 @@
 #
 
 
-SUBDIRS = common determinization 				\
-	  minimization_debruijn	minimization_2n derived_terms	\
-	  quotient composition eps_removal			\
-	  iterators
+SUBDIRS = common determinization		\
+	  minimization derived_terms		\
+	  quotient composition eps_removal	\
+	  iterators accessible product
 
-BENCHDIRS = determinization minimization_debruijn 		\
-	    derived_terms minimization_2n quotient		\
-	    composition eps_removal				\
-	    iterators
+BENCHDIRS = determinization minimization	\
+	    derived_terms quotient		\
+	    composition eps_removal		\
+	    iterators accessible product
 
 bench:
 	for f in $(BENCHDIRS); do				\
 	  (cd $$f && $(MAKE) $(AM_MAKEFLAGS) bench || exit 1)	\
+	done
+
+bench-clean:
+	for f in $(BENCHDIRS); do					\
+	  (cd $$f && $(MAKE) $(AM_MAKEFLAGS) bench-clean || exit 1)	\
 	done

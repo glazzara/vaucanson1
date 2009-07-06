@@ -36,7 +36,7 @@ namespace vcsn {
   template <typename A, typename AI>
   bool is_cut_up(const Element<A, AI>& a)
   {
-    TIMER_SCOPED("is_cut_up");
+    BENCH_TASK_SCOPED("is_cut_up");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
@@ -149,7 +149,7 @@ namespace vcsn {
   void
   cut_up(const Element<A, AI>& a, Element<A, AI>& res)
   {
-    TIMER_SCOPED("cut_up");
+    BENCH_TASK_SCOPED("cut_up");
     typedef typename Element<A, AI>::series_set_elt_t::value_t series_impl_t;
     do_cut_up(a.structure(), SELECT(series_impl_t), a, res);
   }

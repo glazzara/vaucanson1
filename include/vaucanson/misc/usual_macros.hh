@@ -245,6 +245,7 @@
 # define GRAPH_CONTEXT_HEADER_(Context) \
     <VCSN_CONTEXT_INCLUDE_PATH/VCSN_GRAPH_IMPL/Context>
 
-# include <vaucanson/misc/global_timer.hh>
+# include <vaucanson/misc/global_bencher.hh>
+# include <cbs/bench/bench_macros.hh>
 
 #endif // ! VCSN_MISC_USUAL_MACROS_HH

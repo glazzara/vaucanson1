@@ -28,7 +28,7 @@ namespace vcsn
 		      typename projection_traits<S, T>::
 		      first_projection_t& dst)
   {
-    TIMER_SCOPED("first_projection");
+    BENCH_TASK_SCOPED("first_projection");
 
     // Type helpers.
     typedef Element<S, T> automaton_t;
@@ -79,7 +79,7 @@ namespace vcsn
 		       typename projection_traits<S, T>::
 		       second_projection_t& dst)
   {
-    TIMER_SCOPED("second_projection");
+    BENCH_TASK_SCOPED("second_projection");
 
     // Type helpers.
     typedef Element<S, T> automaton_t;

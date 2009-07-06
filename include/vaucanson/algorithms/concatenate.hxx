@@ -32,7 +32,7 @@ namespace vcsn {
 		    Element<A, AI>&		lhs,
 		    const Element<A, AI>&	rhs)
   {
-    TIMER_SCOPED("concatentate");
+    BENCH_TASK_SCOPED("concatentate");
     typedef Element<A, AI>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     std::map<hstate_t, hstate_t>	trans;

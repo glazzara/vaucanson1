@@ -1,3 +1,571 @@
+2009-07-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix standard_of() w.r.t. listg.
+
+	* include/vaucanson/algorithms/standard_of.hxx
+	(Standard_OfVisitor): After concatenating to automata, and before
+	erasing the obsolete initial state of the RHS, do not explicitly
+	erase the transition leaving that initial state.  This is useless
+	because del_state() already does the work.  This was bogus because
+	del_transition invalidates the delta_iterator in the listg
+	implementation.
+	* include/vaucanson/algorithms/standard.hxx: Typos.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make listg the default graph implementation, since we now know
+	that bmig is slower.
+
+	* configure.ac (ac_default_graph_impl): Make listg the default.
+	* doc/README.txt: Adjust documentation of --default-graph-impl.
+
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add benchmark for product.
+
+	* configure.ac,
+	* src/bench/Makefile.am,
+	* src/bench/generate_bench.sh: Add new makefiles/directories.
+	* src/bench/product/Makefile.bench,
+	* src/bench/product/product_aut_b_bool_bench.hh,
+	* src/bench/product/product_aut_b_z_bench.hh: New. Implementation.
+
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Benchmarks: rename aut_ab into aut_b.
+
+	* src/bench/common/bench_constructs.hh,
+	* src/bench/quotient/quotient_bool_bench.hh,
+	* src/bench/quotient/quotient_z_bench.hh: Do that.
+
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update accessible benchmark.
+
+	* src/bench/accessible/Makefile.bench: Adjust benchmark values.
+	* src/bench/accessible/accessible_bench.hh,
+	* src/bench/common/bench_constructs.hh: Move automaton creation.
+
+2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Benchmarks: add documentation.
+
+	* src/bench/README,
+	* src/bench/common/README_AUTOMATA: Update.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update benchmarks.
+
+	This is a compound patch that can hardly be divided into separate
+	patches.  It includes:
+
+
+	1. OpenFST integration.
+
+	  If OpenFST is present, OpenFST benchmarks are made for some
+	  algorithms.
+
+	2. Some (incomplete) documentation.
+
+	  Describe the benchmarking process, input automata, and results.
+
+	3. Clean up & name consistency.
+
+	  Move existing benchmarks into directories with consistent names
+	  (the benchmarked algorithms), store results in a specific
+	  directory according to input and other parameters.
+
+
+	Patch details:
+
+	1. OpenFST integration:
+
+	* configure.ac: Add --with-openfst option.
+	* src/bench/common/alpha.syms: Add missing line.
+	* src/bench/common/bench.mk: Fix -DVCSN_SRC_DIR flag.
+	* src/bench/common/bench_macros.hh: Add convenient macros
+
+	* src/bench/determinization/Makefile.bench: Add OpenFST bench.
+	* src/bench/determinization/determinization_aut_2n_openfst_bench.hh:
+	New (OpenFST benchmark program).
+
+	* src/bench/minimization/Makefile.bench: New (add OpenFST bench).
+	* src/bench/minimization/minimization_aut_2n_openfst_bench.hh:
+	New (OpenFST benchmark program).
+	* src/bench/minimization/minimization_aut_debruijn_openfst_bench.hh,
+	New (OpenFST benchmark program).
+
+	2. Some (incomplete) documentation:
+
+	* src/bench/README: New.  General information.
+	* src/bench/common/README: New.
+	* src/bench/common/README_AUTOMATA: New.
+
+	3. Clean up & name consistency:
+
+	* configure.ac: Add/remove makefiles.
+	* src/bench/Makefile.am: Add/remove directories.
+	* src/bench/generate_bench.sh: Add/remove directories.
+
+	* src/bench/common/Makefile.am: Clean up.
+	* src/bench/common/bench_automaton.hh: Remove (unused).
+	* src/bench/common/bench_constructs.hh: Clean up, add automata.
+
+	Move accessible to its own directory:
+
+	* src/bench/accessible/Makefile.bench: New.
+	* src/bench/iterators/accessible_bench.hh:
+	Rename into src/bench/accessible/accessible_bench.hh.
+
+	Clean up composition:
+
+	* src/bench/composition/Makefile.bench,
+	* src/bench/composition/normalized_composition_bench.hh: Consistency.
+	* src/bench/composition/rw_composition_bench.hh: Rename into
+	src/bench/composition/realtime_composition_bench.hh.
+
+	Clean up derived-terms:
+
+	* src/bench/derived_terms/Makefile.bench,
+	* src/bench/derived_terms/derived_terms_bench.hh: Consistency.
+
+	Clean up determinization:
+
+	* src/bench/determinization/Makefile.bench: Consistency.
+	* src/bench/determinization/determinization_bench.hh: Rename into
+	src/bench/determinization/determinization_aut_2n_bench.hh.
+	* src/bench/determinization/determinization_bench_fsm.cc:
+	Remove (unused).
+
+	Clean up eps_removal:
+
+	* src/bench/eps_removal/Makefile.bench,
+	* src/bench/eps_removal/eps_removal_bench.hh: Consistency.
+
+	Clean up iterators:
+
+	* src/bench/iterators/Makefile.bench,
+	* src/bench/iterators/iterator_bench.hh: Consistency.
+
+	Clean up quotient:
+
+	* src/bench/quotient/Makefile.bench,
+	* src/bench/quotient/quotient_bool_bench.hh,
+	* src/bench/quotient/quotient_z_bench.hh: Consistency.
+
+	Clean up minimization:
+
+	* src/bench/minimization/Makefile.bench: New (merge from
+	minimization_2n and minimization_debruijn).
+	* src/bench/minimization_2n/Makefile.bench: Remove (unused).
+	* src/bench/minimization_debruijn/Makefile.bench: Remove (unused).
+
+	* src/bench/minimization_2n/minimization_2n_brzozowski_bench.hh:
+	Rename into
+	src/bench/minimization/minimization_aut_2n_brzozowski_bench.hh.
+	* src/bench/minimization_2n/minimization_2n_hopcroft_bench.hh:
+	Rename into
+	src/bench/minimization/minimization_aut_2n_hopcroft_bench.hh.
+	* src/bench/minimization_2n/minimization_2n_moore_bench.hh:
+	Rename into
+	src/bench/minimization/minimization_aut_2n_moore_bench.hh.
+	* src/bench/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh:
+	Rename into
+	src/bench/minimization/minimization_aut_debruijn_brzozowski_bench.hh.
+	* src/bench/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh:
+	Rename into
+	src/bench/minimization/minimization_aut_debruijn_hopcroft_bench.hh.
+	* src/bench/minimization_debruijn/minimization_debruijn_moore_bench.hh:
+	Rename into
+	src/bench/minimization/minimization_aut_debruijn_moore_bench.hh.
+
+2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: f2cc74d682bddc0da7386a5ce1017b591c2c6e47.
+	See cbs/Changelog.
+
+2009-06-14  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: 17a18a174536d6b05c5364dd5f96f420b5ca75ef.
+	See cbs/Changelog.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* bootstrap: Update to mention cbs/ instead of argp/.
+
+2009-05-05  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix call graph export in taf-kit.
+
+	* taf-kit/src/main.cc: Use the correct variable.
+
+2009-05-01  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Adjust bench to complete in a reasonable time.
+
+	* src/bench/minimization_2n/Makefile.bench: Do not bench
+	minimization_brzozowski past n=12 (already 8min on seattle).
+
+	* src/bench/eps_removal/Makefile.bench: Bench up to 200.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix composition bench.
+
+	* src/bench/composition/normalized_composition_bench.hh,
+	* src/bench/composition/rw_composition_bench.hh:
+	Add missing CBS parameter (n).
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix quotient bench automaton.
+
+	The previous automaton made no sense to Jacques and looked like
+	there has been a fishy copy/paste.
+
+	It now is:
+
+	A -a-> A
+	A -b-> A
+	A -b-> B
+	B -a-> B
+	B -b-> B
+
+	* src/bench/quotient/quotient_bool_bench.hh: Do that.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Enable callgraph in benchmark dot output.
+
+	* src/bench/common/bench_macros.hh: Fix macro.
+
+2009-04-28  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: aef3055d95b926d6242ebbce64a128df044cbba2.
+	See cbs/Changelog.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Optimize quotient on boolean automata.
+
+	(As mentioned during the meeting on April 10th)
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Do that.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix quotient bench automaton.
+
+	The previous automaton made no sense to Jacques and looked like
+	there has been a fishy copy/paste.
+
+	It now is:
+
+	A -a-> A
+	A -b-> A
+	A -b-> B
+	B -a-> B
+	B -b-> B
+
+	* src/bench/quotient/quotient_bool_bench.hh: Do that.
+
+2009-04-30  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Enable callgraph in benchmark dot output.
+
+	* src/bench/common/bench_macros.hh: Fix macro.
+
+2009-04-28  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: aef3055d95b926d6242ebbce64a128df044cbba2.
+	See cbs/Changelog.
+
+2009-04-16  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix make check.
+
+	Use CBS in demos, disable CBS in tests (for faster
+	compilation/link), disable CBS in vaucanswig.
+
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/one_rule_rewriting/Makefile.am,
+	* src/demos/vgrep/Makefile.am:
+	Add cbs include dir, link with libbench.la.
+
+	* src/tests/xml/Makefile.am,
+	* src/tests/check/check-flags.mk,
+	* src/tests/sanity/Makefile.am:
+	Add cbs include dir. Disable bench (-DBENCH_DISABLED).
+
+	* vaucanswig/expand.sh,
+	* vaucanswig/meta/Makefile.am:
+	Add cbs include dir. Disable bench (-DBENCH_DISABLED).
+
+2009-04-09  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: e97a404a44e5b5d19d4a869aa1f43524386c5b09.
+	See cbs/Changelog.
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Link taf-kit, libs and benches with $(benchlib).
+
+	* vaucanson.mk: Define benchlib.
+	* lib/generate_libvcsn.rb,
+	* taf-kit/src/Makefile.am,
+	* src/bench/generate_bench.sh: Use it.
+
+2009-04-10  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Replace timer and global_timer with cbs.
+
+	Note: bencher and global_bencher remain.
+
+	4 steps:
+	1) Remove the timer system.
+	2) Fix taf-kit.
+	3) Disable bench in data/automata.
+	4) Use cbs in algorithms/*.hxx and tools/*.hxx.
+
+	Most modifications were only macro renaming.
+
+	Tests:
+	/!\ make check should be done on this patch.
+	Taf-kit was quickly tested.
+	make bench was quickly tested as well.
+
+	Files patched:
+
+	1) Remove the timer system:
+
+	* include/vaucanson/misc/global_bencher.hh: New.
+	Gather bencher-related macros.  Bench using the timer from cbs.
+	* include/vaucanson/misc/global_timer.hh: Removed.
+	Remove timer-related macros, put the rest in global_bencher.hh.
+	* include/vaucanson/misc/usual_macros.hh: Include the proper files.
+	* include/Makefile.am: Add/remove files.
+	* include/vaucanson/misc/global_timer.hh,
+	* include/vaucanson/misc/timer.cc,
+	* include/vaucanson/misc/timer.hh,
+	* include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/timer_internal_gathering.cc,
+	* include/vaucanson/misc/timer_internal_gathering.hh,
+	* include/vaucanson/misc/timer_internal_gathering.hxx,
+	* include/vaucanson/misc/timer_internal_graph.cc,
+	* include/vaucanson/misc/timer_internal_graph.hh,
+	* include/vaucanson/misc/timer_internal_graph.hxx: Removed.
+
+	2) Fix taf-kit:
+
+	* taf-kit/src/common.hh,
+	* taf-kit/src/main.cc: Remove global_timer. Fix macros.
+
+	3) Disable bench in data/automata:
+
+	* data/automata/char-b/Makefile.am,
+	* data/automata/char-fmp-b/Makefile.am,
+	* data/automata/char-z/Makefile.am:
+	Set -DBENCH_DISABLED in AM_CPPFLAGS.
+
+	4) Use cbs in algorithms/*.hxx and tools/*.hxx:
+
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/aci_canonical.hxx,
+	* include/vaucanson/algorithms/aut_projection.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/composition_cover.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/cut_up.hxx,
+	* include/vaucanson/algorithms/derived_term_automaton.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/domain.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/eps_removal_sp.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/evaluation_fmp.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hxx,
+	* include/vaucanson/algorithms/fmp_to_rw.hxx,
+	* include/vaucanson/algorithms/image.hxx,
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/is_ambiguous.hxx,
+	* include/vaucanson/algorithms/is_deterministic.hxx,
+	* include/vaucanson/algorithms/is_ltl.hxx,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.h,
+	* include/vaucanson/algorithms/ltl_to_pair.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/pair_to_fmp.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/rw_composition.hxx,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/transpose.hxx,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/tools/io.hxx: Replace TIMER_SCOPED with
+	BENCH_TASK_SCOPED.
+
+2009-04-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Equip bench with CBS
+
+	Note: Squash previous related patches with this one.
+
+	3 Steps:
+
+	1) Use CBS files.
+	2) Remove obsolete tools.
+	3) Equip all benches.
+
+	1) Use CBS files:
+
+	* src/bench/common/bench_macros.hh: New.
+	Include cbs/bench/bench.hh, define handy macros.
+	* src/bench/common/Makefile.am: Add file.
+	* src/bench/generate_bench.sh: Include common/bench_macros.hh in
+	generated Makefiles.
+
+	2) Remove obsolete tools:
+
+	* include/vaucanson/tools/bencher.hh,
+	* include/vaucanson/tools/bencher.hxx: Deleted.
+	Served the same purpose as the cbs timer, with less flexibility.
+
+	3) Equip all benches:
+
+	Replace macros VCSN_BENCH_XXX with the CBS equivalent.
+	Add parameters and results when applicable (all the info
+	previously printed on cout/cerr are now parameters and results).
+
+	3 files are generated for each bench.  There are between 5 and 10
+	benches per file below.  See common/bench_macros.hh to change that.
+
+	* src/bench/composition/normalized_composition_bench.hh,
+	* src/bench/composition/rw_composition_bench.hh,
+	* src/bench/derived_terms/derived_terms_bench.hh,
+	* src/bench/determinization/determinization_bench.hh,
+	* src/bench/eps_removal/eps_removal_bench.hh,
+	* src/bench/iterators/accessible_bench.hh,
+	* src/bench/iterators/iterator_bench.hh,
+	* src/bench/minimization_2n/minimization_2n_brzozowski_bench.h,
+	* src/bench/minimization_2n/minimization_2n_hopcroft_bench.hh,
+	* src/bench/minimization_2n/minimization_2n_moore_bench.hh,
+	* src/bench/minimization_debruijn/minimization_debruijn_brzozo,
+	* src/bench/minimization_debruijn/minimization_debruijn_hopcro,
+	* src/bench/minimization_debruijn/minimization_debruijn_moore_,
+	* src/bench/quotient/quotient_bool_bench.hh,
+	* src/bench/quotient/quotient_z_bench.hh: Do that.
+
+2009-04-06  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add cbs (libbench).
+
+	* cbs: Add directory.
+	* configure.ac: Add AC_CONFIG_SUBDIRS for cbs.
+	* Makefile.am: Add cbs subdir.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Update to gnulib 567f85cfcdb0a63cf96730d0858581b013765d59.
+
+	* gnulib/Makefile.am, gnulib/argp-fmtstream.c, gnulib/getopt1.c,
+	gnulib/gettext.h, gnulib/progname.c, gnulib/stdint.in.h ,
+	gnulib/stdio.in.h, gnulib/stdlib.in.h, gnulib/strerror.c ,
+	gnulib/unistd.in.h, gnulib/vasnprintf.c, gnulib/wchar.in.h ,
+	gnulib/xmalloc.c, m4/alloca.m4, m4/argp.m4 ,
+	m4/double-slash-root.m4, m4/errno_h.m4, m4/extensions.m4 ,
+	m4/gnulib-cache.m4, m4/gnulib-common.m4, m4/gnulib-comp.m4 ,
+	m4/include_next.m4, m4/inline.m4, m4/intmax_t.m4 ,
+	m4/inttypes_h.m4, m4/longlong.m4, m4/malloc.m4, m4/mempcpy.m4 ,
+	m4/printf.m4, m4/size_max.m4, m4/stdbool.m4, m4/stdint.m4 ,
+	m4/stdint_h.m4, m4/stdio_h.m4, m4/stdlib_h.m4, m4/strcase.m4 ,
+	m4/strchrnul.m4, m4/strndup.m4, m4/strnlen.m4, m4/unistd_h.m4 ,
+	m4/vasnprintf.m4, m4/wchar.m4, m4/wchar_t.m4, m4/wint_t.m4 ,
+	m4/xsize.m4: Update.
+	m4/00gnulib.m4, m4/multiarch.m4: New files.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Add the pair-to-fmp command to TAF-Kit.
+
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_b_LDADD,
+	vcsn_char_fmp_z_LDADD, vcsn_int_fmp_b_LDADD,
+	vcsn_int_fmp_z_LDADD): Add the corresponding pair automaton
+	library.
+	* taf-kit/src/fmp_commands.cc (pair_to_fmp): New command.
+	* taf-kit/src/getters.hxx (get_pair_aut): New function.
+	* taf-kit/src/pipe_getters.hh, taf-kit/src/pipe_getters.hxx
+	(pair_automaton_getter): New class.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Add more tests for ltl-to-pair
+	and pair-to-fmp.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make pair_to_fmp() available in FMP contexts.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh:
+	include pair_to_fmp.hh.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make mute_ltl_to_pair<S,T>::make_automaton available.
+
+	* include/vaucanson/algorithms/ltl_to_pair.hxx (make_automaton):
+	Move the code...
+	* include/vaucanson/algorithms/ltl_to_pair.hh (make_automaton):
+	... here, so it is available even if VCSN_USE_INTERFACE_ONLY
+	is defined.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce contexts for char-char-z and int-int-z automata.
+
+	* include/vaucanson/automata/generic_contexts/char_char_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/char_char_z_automaton_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton_structures.hh:
+	New files.
+	* include/Makefile.am (nobase_include_HEADERS): Add them.
+	* lib/generate_libvcsn.rb: Adjust to build int-int-z and
+	char-char-z contexts.
+	* lib/Makefile.am: Include the new libraries' makefiles.
+
+2009-03-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Remove Vaucanswig.
+
+	* vaucanswig/: Delete.
+	* Makefile.am (SUBDIRS): Adjust.
+	* build-aux/vcsn-internal.m4: Delete.
+	* build-aux/Makefile.am (EXTRA_DIST): Adjust.
+	* configure.ac: Remove Python and Swig checks.
+	* vaucanson.spec, debian/rules: Remove --disable-vaucanswig and
+	--disable-build-demos.
+	* bootstrap: Do not call vaucanswig/expand.sh.
+
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	BOOST_CPPFLAGS were ignored while compiling lib/.

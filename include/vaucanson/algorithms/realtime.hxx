@@ -163,7 +163,7 @@ namespace vcsn {
   bool
   do_is_realtime(const AutomataBase<A>&, const Element<A, AI>& a)
   {
-    TIMER_SCOPED("is_realtime (automaton)");
+    BENCH_TASK_SCOPED("is_realtime (automaton)");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     for_all_const_initial_states(e, a)

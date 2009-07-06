@@ -15,4 +15,4 @@
 include $(top_srcdir)/vaucanson.mk
 
 AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
-LDADD = $(top_builddir)/lib/libvcsn-common.la
+LDADD = $(top_builddir)/lib/libvcsn-common.la $(benchlib)

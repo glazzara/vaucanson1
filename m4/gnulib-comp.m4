@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2008 Free Software Foundation, Inc.
+# Copyright (C) 2002-2009 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -69,6 +69,7 @@ AC_SUBST([LTALLOCA])
   gl_STDLIB_MODULE_INDICATOR([malloc-posix])
   gl_FUNC_MEMPCPY
   gl_STRING_MODULE_INDICATOR([mempcpy])
+  gl_MULTIARCH
   gl_FUNC_RAWMEMCHR
   gl_STRING_MODULE_INDICATOR([rawmemchr])
   gl_SIZE_MAX
@@ -298,6 +299,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/xsize.h
   lib/xstrndup.c
   lib/xstrndup.h
+  m4/00gnulib.m4
   m4/alloca.m4
   m4/argp.m4
   m4/dirname.m4
@@ -317,6 +319,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/longlong.m4
   m4/malloc.m4
   m4/mempcpy.m4
+  m4/multiarch.m4
   m4/printf.m4
   m4/rawmemchr.m4
   m4/size_max.m4

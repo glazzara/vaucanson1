@@ -1,21 +1,27 @@
 # determinization/Makefile.bench			* -*- Makefile -*-
 
-noinst_PROGRAMS += determinization_bench_fsm
-determinization_bench_fsm_SOURCES = determinization_bench_fsm.cc
+if ENABLE_OPENFST
+  HAS_OPENFST="yes"
+endif
 
-bench: $(noinst_PROGRAMS)
-	@echo '=======================';				\
-	echo '|Determinization bench|';					\
-	echo '=======================';					\
-	echo "./determinization_bench_fsm \$$1 | $$FSM_PATH/fsmcompile |"\
-	   	"$$FSM_PATH/fsmdeterminize > /dev/null" > tmp.det;	\
-	for n_states in $$(seq 14 20); do				\
-		echo "----------------------For $$n_states states";	\
-		echo "--------------VCSN:";				\
-		./determinization-bench $$n_states;			\
-		if [ ! -z "$$FSM_PATH" ]; then				\
-		  echo "--------------FSM:";				\
-		  time sh tmp.det $$n_states;				\
-		fi;							\
-	done;								\
-	rm -f tmp.det
+bench: all
+	@mkdir aut_2n;					\
+	if [ ! -z $(HAS_OPENFST) ]; then		\
+	  mkdir aut_2n_openfst;				\
+	fi;						\
+	echo '=======================';			\
+	echo '|Determinization bench|';			\
+	echo '=======================';			\
+	for n in $$(seq 14 20); do			\
+	  echo "----------------------For $$n states";	\
+	  echo "--------------VCSN:";			\
+	  ./determinization_aut_2n_bench $$n;		\
+	  if [ ! -z $(HAS_OPENFST) ]; then		\
+	    echo "--------------OpenFST:";		\
+	    ./determinization_aut_2n_openfst_bench $$n;	\
+	  fi;						\
+	done;
+
+bench-clean:
+	rm -rf aut_2n
+	rm -rf aut_2n_openfst

@@ -15,6 +15,7 @@
 include $(top_srcdir)/vaucanson.mk
 
 LDADD = $(top_builddir)/lib/libvcsn-common.la
+AM_CPPFLAGS += -DBENCH_DISABLED
 
 noinst_PROGRAMS = t1 u1 quotkbaseb
 

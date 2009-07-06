@@ -110,7 +110,7 @@ namespace vcsn {
   typename Element<A, AI>::semiring_elt_t
   eval(const Element<A, AI>& a, const W& word)
   {
-    TIMER_SCOPED("eval");
+    BENCH_TASK_SCOPED("eval");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     semiring_elt_t ret(a.structure().series().semiring());

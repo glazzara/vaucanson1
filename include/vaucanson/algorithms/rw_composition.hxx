@@ -39,7 +39,7 @@ namespace vcsn
 		    const Trans_t& S,
 		    Trans_t& T)
   {
-    TIMER_SCOPED("rw_composition");
+    BENCH_TASK_SCOPED("rw_composition");
 
     // The second transducer must be realtime.
     precondition(is_realtime(S));

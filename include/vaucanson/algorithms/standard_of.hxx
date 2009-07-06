@@ -119,12 +119,7 @@ namespace vcsn {
                                          lhs_finals.end(),
                                          identity_);
 
-          // Clean the automata from rhs_ini and its transitions.
-          for (typename automaton_t::delta_iterator i(auto_->value(), initial_);
-               ! i.done();
-               i.next())
-            auto_->del_transition(*i);
-
+          // Remove the obsolete initial state of rhs
           auto_->del_state(initial_);
           initial_ = lhs_i;
           return auto_;

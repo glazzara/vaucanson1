@@ -16,7 +16,10 @@ include $(top_srcdir)/build-aux/check.mk
 
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 
-AM_CPPFLAGS += $(XSD_CPPFLAGS)
+# Note: To enable/disable Libbench in xml tests,
+# use the flag -DBENCH_DISABLED below and link
+# with $(benchlib) as needed.
+AM_CPPFLAGS += $(XSD_CPPFLAGS) -DBENCH_DISABLED
 
 TESTS_ENVIRONMENT = srcdir=$(srcdir)
 

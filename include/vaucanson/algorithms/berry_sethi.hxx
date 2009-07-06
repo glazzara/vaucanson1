@@ -221,7 +221,7 @@ namespace vcsn {
   void
   berry_sethi(Element<A, T>& out, const Exp& kexp)
   {
-    TIMER_SCOPED("berry_sethi");
+    BENCH_TASK_SCOPED("berry_sethi");
     Element<A, T>* tmp = do_berry_sethi(out, kexp);
     out = *tmp;
     delete tmp;

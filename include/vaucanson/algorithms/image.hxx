@@ -27,7 +27,7 @@ namespace vcsn
   static void
   do_fmp_image(const trans_t& fmp_trans, auto_t& res)
   {
-    TIMER_SCOPED("image");
+    BENCH_TASK_SCOPED("image");
     AUTOMATON_TYPES_(trans_t, trans_);
     AUTOMATON_TYPES(auto_t);
 
@@ -68,7 +68,7 @@ namespace vcsn
   do_rw_image(const Trans_t& t,
 	      Auto_t& ret)
   {
-    TIMER_SCOPED("image (transducer to automaton)");
+    BENCH_TASK_SCOPED("image (transducer to automaton)");
     AUTOMATON_TYPES(Trans_t);
     AUTOMATON_TYPES_(Auto_t, auto_);
     std::map<hstate_t, auto_hstate_t> m;
@@ -123,7 +123,7 @@ namespace vcsn
 	      Auto_t& ret,
 	      std::map<typename Auto_t::hstate_t, typename T::hstate_t>& m_)
   {
-    TIMER_SCOPED("image (transducer to automaton)");
+    BENCH_TASK_SCOPED("image (transducer to automaton)");
     typedef Element<S, T>  Trans_t;
     AUTOMATON_TYPES(Trans_t);
 

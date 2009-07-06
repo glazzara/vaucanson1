@@ -155,7 +155,7 @@ namespace vcsn {
 		 std::map<typename Element<A, AI>::hstate_t,
 		          std::set<typename Element<A, AI>::hstate_t> >& m)
   {
-    TIMER_SCOPED ("determinize");
+    BENCH_TASK_SCOPED("determinize");
     precondition(is_realtime(input));
     do_subset_construction(a_set, output, input, m);
   }

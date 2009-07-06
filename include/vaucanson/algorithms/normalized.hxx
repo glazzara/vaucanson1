@@ -37,7 +37,7 @@ namespace vcsn {
   do_normalize_here(const AutomataBase<A>&,
 		    Element<A, AI>& a)
   {
-    TIMER_SCOPED("normalize");
+    BENCH_TASK_SCOPED("normalize");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
@@ -85,7 +85,7 @@ namespace vcsn {
 			      Element<A, AI1>& lhs,
 			      const Element<A, AI2>& rhs)
   {
-    TIMER_SCOPED("union_of_normalized");
+    BENCH_TASK_SCOPED("union_of_normalized");
     typedef Element<A, AI1> lhs_t;
     typedef Element<A, AI2> rhs_t;
     AUTOMATON_TYPES(lhs_t);
@@ -134,7 +134,7 @@ namespace vcsn {
   do_is_normalized(const AutomataBase<A>&,
 		   const Element<A, AI>& a)
   {
-    TIMER_SCOPED("is_normalized");
+    BENCH_TASK_SCOPED("is_normalized");
     typedef Element<A, AI> automaton_t;
     typedef typename automaton_t::series_set_elt_value_t	series_set_elt_value_t;
     typedef typename automaton_t::series_set_elt_t		series_set_elt_t;
@@ -170,7 +170,7 @@ namespace vcsn {
 				    Element<A, AI1>& lhs,
 				    const Element<A, AI2>& rhs)
   {
-    TIMER_SCOPED("concatenate_of_normalized");
+    BENCH_TASK_SCOPED("concatenate_of_normalized");
     typedef Element<A, AI1> lhs_t;
     typedef Element<A, AI2> rhs_t;
     AUTOMATON_TYPES(rhs_t);
@@ -258,7 +258,7 @@ namespace vcsn {
   void
   do_star_of_normalized_here(const AutomataBase<A>&, Element<A, AI>& a)
   {
-    TIMER_SCOPED("star_of_normalized");
+    BENCH_TASK_SCOPED("star_of_normalized");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     monoid_elt_t monoid_identity =

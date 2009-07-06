@@ -14,57 +14,50 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #include <vaucanson/z_automaton.hh>
 #include <vaucanson/algorithms/product.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
+
 #include <iostream>
 #include <fstream>
 
 using namespace vcsn;
 using namespace vcsn::z_automaton;
 
-void binary(automaton_t& an)
+#include <common/bench_constructs.hh>
+
+void quotient_z_bench(int n)
 {
-  std::vector<hstate_t>	       c(2);
-
-  c[0] = an.add_state();
-  c[1] = an.add_state();
-
-  an.set_initial(c[0]);
-  an.set_final(c[1]);
-
-  an.add_letter_transition(c[0], c[0], 'a');
-  an.add_letter_transition(c[0], c[0], 'b');
-
-  an.add_letter_transition(c[0], c[1], 'b');
-
-  an.add_weighted_transition(c[1], c[1], 2, "a");
-  an.add_weighted_transition(c[1], c[1], 2, "b");
-}
-
-void quotient_z_bench(int n_power)
-{
-  AUTOMATON_TYPES_EXACT(automaton_t);
-
-  alphabet_t	alpha;
-  alpha.insert('a');
-  alpha.insert('b');
-  alpha.insert('c');
-
-  automaton_t a = make_automaton(alpha);
-  binary(a);
+  automaton_t a = aut_b();
   automaton_t an = a;
 
-  n_power--;
-  while (n_power--)
+  std::stringstream n_str;
+  n_str << n;
+
+  n--;
+  while (n--)
     a = product(a, an);
 
-  std::cout << "Product has " << a.states ().size () << " states and "
-	    << a.transitions ().size () << "transitions." << std::endl;
-  VCSN_BENCH_START;
+  BENCH_START("Vaucanson quotient (over Z)", "FIXME.");
+
   automaton_t b = quotient(a);
-  VCSN_BENCH_STOP_AND_PRINT;
-  std::cout << "Quotient has " << b.states ().size () << " states and "
-	    << b.transitions ().size () << "transitions." << std::endl;
+
+  BENCH_STOP();
+
+  // Set extra parameters/results
+  BENCH_PARAMETER("_n_", n_str.str());
+  BENCH_PARAMETER("over", "Z");
+  BENCH_PARAMETER("input automaton", "aut_b");
+  BENCH_PARAMETER("product states", (long) a.states().size());
+  BENCH_PARAMETER("product transitions", (long) a.transitions().size());
+
+  BENCH_RESULT("quotient states", (long) b.states().size());
+  BENCH_RESULT("quotient transitions", (long) b.transitions().size());
+
+  std::string name = "z/bench_quotient_z_" + n_str.str();
+
+  // Save and print
+  BENCH_VCSN_SAVE_AND_PRINT(name);
 }
 

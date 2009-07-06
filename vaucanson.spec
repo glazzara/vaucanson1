@@ -9,7 +9,7 @@ Group: Development/Tools
 Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
-# Requires: 
+# Requires:
 
 %description
 The goal of this library is to enable the development of C++ programs
@@ -28,10 +28,7 @@ totally stable and well tested.
 %setup -n %{name}-%{version}*
 
 %build
-./configure \
-  --prefix=/usr \
-  --disable-vaucanswig \
-  --disable-build-demo
+./configure --prefix=/usr
 make
 
 %install
@@ -54,5 +51,5 @@ rm -rf $RPM_BUILD_ROOT
 - Change to noarch
 - Add docs and examples
 
-* Mon Jul 4 2005 Olivier Gournet <victor@lrde.epita.fr> 
+* Mon Jul 4 2005 Olivier Gournet <victor@lrde.epita.fr>
 - RPM integration.

@@ -34,7 +34,7 @@ namespace vcsn {
 	 typename Element<Automata<Series, Kind>, T>::letter_t eol,
 	 FoundFunctor& f)
   {
-    TIMER_SCOPED("search");
+    BENCH_TASK_SCOPED("search");
     FindBestSearch::search(a, begin, end, eol, f);
   }
 

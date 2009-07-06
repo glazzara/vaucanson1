@@ -1,0 +1,49 @@
+This file describes the automata used for benchmarking.
+Functions to create these automata are located in bench_constructs.hh.
+
+n is the parameter specified during the automaton creation (integer).
+
+FIXME: Add references.
+
+
+============
+-- aut_2n --
+============
+
+Automaton on the `abc' alphabet.
+Has n states in its original form and 2^n states once determinized.
+
+
+==================
+-- aut_debruijn --
+==================
+
+FIXME.
+
+
+====================
+-- aut_linear_eps --
+====================
+
+FIXME.
+
+
+===========
+-- aut_b --
+===========
+
+A simple automaton that recognizes words containing `b' on the
+`ab' alphabet.
+
+
+==================
+-- aut_complete --
+==================
+
+A complete automaton on the `a' alphabet:
+For any two states, there exists a spontaneous transition between
+the two states.
+
+* n states.
+* state 0 is initial and final.
+

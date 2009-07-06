@@ -94,6 +94,31 @@ public:
   std::string command;
   input_format_t f;
 };
+
+class pair_automaton_getter
+  : public boost::static_visitor<mute_ltl_to_pair<automaton_t::set_t,
+						  automaton_t::value_t>::ret>
+{
+public:
+  typedef mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t> trait;
+  typedef trait::ret pair_t;
+
+  pair_automaton_getter (std::string& command, input_format_t);
+
+  pair_t
+  operator() (pair_t& a) const;
+
+  pair_t
+  operator() (std::string& str) const;
+
+  pair_t operator() (command_output_status& i) const;
+
+  template<typename T>
+  pair_t operator() (T&) const;
+
+  std::string command;
+  input_format_t f;
+};
 # endif // !WITH_TWO_ALPHABETS
 
 #endif /* !PIPE_GETTERS_HH */

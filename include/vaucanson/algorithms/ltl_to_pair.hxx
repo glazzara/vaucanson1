@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -47,18 +47,6 @@ namespace vcsn
   template <typename S, typename T>
   inline typename MUTE_TRAITS::ret
   MUTE_TRAITS::
-  make_automaton(const typename MUTE_TRAITS::ret_alphabet_t& A)
-  {
-    semiring_t semiring;
-    ret_monoid_t freemonoid(A);
-    typename ret::series_set_t series(semiring, freemonoid);
-
-    return ret(Automata<typename ret::series_set_t, typename ret::kind_t>(series));
-  }
-
-  template <typename S, typename T>
-  inline typename MUTE_TRAITS::ret
-  MUTE_TRAITS::
   make_automaton(const Element<S, T>& A)
   {
     ret_alphabet_t E = cartesian_product(A.structure().series().monoid().
@@ -93,7 +81,7 @@ namespace vcsn
   do_ltl_to_pair(const Element<S, T>& src,
 		 typename MUTE_TRAITS::ret& res)
   {
-    TIMER_SCOPED("ltl_to_pair");
+    BENCH_TASK_SCOPED("ltl_to_pair");
 
     // The input FMP transducer must be `letter-to-letter'.
     precondition(is_ltl(src));

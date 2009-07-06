@@ -206,7 +206,7 @@ namespace vcsn
   fmp_to_rw(const vcsn::Element<S, T>& fmp,
 	    vcsn::Element<SS, TT>& res)
   {
-    TIMER_SCOPED("fmp_to_rw");
+    BENCH_TASK_SCOPED("fmp_to_rw");
     do_fmp_to_rw(fmp.structure(), res.structure(),
 		 fmp.structure().series().monoid(),
 		 fmp, res);

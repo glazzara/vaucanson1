@@ -15,6 +15,7 @@
 include $(top_srcdir)/vaucanson.mk
 
 LDADD = $(top_builddir)/lib/libvcsn-common.la
+AM_CPPFLAGS += -DBENCH_DISABLED
 
 noinst_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 

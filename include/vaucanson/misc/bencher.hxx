@@ -30,7 +30,7 @@ namespace misc
 
   inline
   void
-  Bencher::push (const Timer& t)
+  Bencher::push (const timer::Timer& t)
   {
     timers_.push_back (t);
   }

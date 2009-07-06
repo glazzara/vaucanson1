@@ -358,7 +358,7 @@ namespace vcsn {
   typename Element<A, AI>::series_set_elt_t
   aut_to_exp(const Element<A, AI>& a, const Chooser& c)
   {
-    TIMER_SCOPED("aut_to_exp");
+    BENCH_TASK_SCOPED("aut_to_exp");
     Element<A, AI> ret(a);
     return do_in_aut_to_exp(ret.structure(), ret, c);
   }

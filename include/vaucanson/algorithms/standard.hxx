@@ -37,7 +37,7 @@ namespace vcsn {
   void
   do_in_standardize(const AutomataBase<A>&, Element<A, AI>& a)
   {
-    TIMER_SCOPED("standardize");
+    BENCH_TASK_SCOPED("standardize");
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
@@ -102,7 +102,7 @@ namespace vcsn {
     precondition(is_standard(lhs));
     precondition(is_standard(rhs));
 
-    TIMER_SCOPED("union_of_standard");
+    BENCH_TASK_SCOPED("union_of_standard");
 
     typedef Element<A, AI1> lhs_t;
 
@@ -185,7 +185,7 @@ namespace vcsn {
   bool
   do_is_standard(const AutomataBase<A>&, const Element<A, AI>& a)
   {
-    TIMER_SCOPED("is_standard");
+    BENCH_TASK_SCOPED("is_standard");
     typedef Element<A, AI> automaton_t;
     typedef typename automaton_t::series_set_elt_value_t	series_set_elt_value_t;
 
@@ -222,7 +222,7 @@ namespace vcsn {
     precondition(is_standard(lhs));
     precondition(is_standard(rhs));
 
-    TIMER_SCOPED("concat_of_standard");
+    BENCH_TASK_SCOPED("concat_of_standard");
     typedef Element<A, AI1> lhs_t;
     typedef Element<A, AI2> rhs_t;
     typedef typename lhs_t::hstate_t l_hstate_t;
@@ -277,7 +277,7 @@ namespace vcsn {
   }
 
   // Group the common part of the concat of standard automata algorithm.
-  // - 'lhs' and 'rhs' are the to automaton to concatanate.
+  // - 'lhs' and 'rhs' are the two automata to concatanate.
   // - 'rhs_i' is the initial state of rhs.
   // - 'lhs_final_*' are respectively the begin and end iterator of the set
   // containing the final states of lhs.
@@ -359,7 +359,7 @@ namespace vcsn {
   {
     precondition(is_standard(a));
 
-    TIMER_SCOPED("star_of_standard");
+    BENCH_TASK_SCOPED("star_of_standard");
 
     assertion (a.initial().size() == 1);
     typename Element<A, AI>::hstate_t new_i = *a.initial().begin();

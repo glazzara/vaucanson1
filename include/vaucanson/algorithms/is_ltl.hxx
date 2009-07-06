@@ -34,7 +34,7 @@ namespace vcsn
 	    const algebra::FreeMonoidProduct<A, B>&,
 	    const T& t)
   {
-    TIMER_SCOPED("is_ltl");
+    BENCH_TASK_SCOPED("is_ltl");
 
     // Type helper.
     AUTOMATON_TYPES(T);

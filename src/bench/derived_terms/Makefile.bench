@@ -1,11 +1,15 @@
 # derived_terms/Makefile.bench				* -*- Makefile -*-
 
-bench: $(noinst_PROGRAMS)
-	@echo '=====================';				\
-	echo '|Derived Terms bench|';				\
-	echo '=====================';				\
-	for n_states in $$(seq 15 15); do			\
-	   echo "----------------------For $$n_states states";	\
-	   echo "--------------VCSN:";				\
-	   ./derived_terms-bench $$n_states;			\
+bench: all
+	@mkdir default;					\
+	echo '=====================';			\
+	echo '|Derived Terms bench|';			\
+	echo '=====================';			\
+	for n in $$(seq 15 15); do			\
+	   echo "----------------------For $$n states";	\
+	   echo "--------------VCSN:";			\
+	   ./derived_terms_bench $$n;			\
 	done
+
+bench-clean:
+	rm -rf default

@@ -1,0 +1,4 @@
+1. Execute benches in build dir:
+  make && ./demo-timer-bench
+2. Generate figures in src dir:
+  ./generate_figures.sh.

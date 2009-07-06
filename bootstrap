@@ -61,14 +61,13 @@ do
 done
 
 run src/tests/test-suites ./generate-all.sh
-run vaucanswig            ./expand.sh .
 run src/bench             ./generate_bench.sh --all
 run .                     build-aux/find_tests.sh
 run include               ./generate_headers.sh
 run lib			  ./generate_libvcsn.rb
 run src/tests/sanity      ./generate_files.sh .
 
-# Will also boostrap argp/.
+# Will also boostrap cbs/.
 run .                     $AUTORECONF -v -f -i
 
 echo "Reconfiguration done."
