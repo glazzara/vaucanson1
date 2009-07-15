@@ -1,5 +1,12 @@
 2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Update cbs.
+
+	CBS version: d0cef86a72e495219ff5e3d63d081b9baefe2cf2.
+	See cbs/Changelog.
+
+2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Add README_AUTOMATA in EXTRA_DIST.
 
 	* src/bench/common/Makefile.am: Do that.

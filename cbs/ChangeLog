@@ -1,3 +1,23 @@
+2009-07-15 d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix distribution.
+
+	* Makefile.am: Add EXTRA_DIST.
+	* demo/Makefile.am: Add EXTRA_DIST.
+	* demo/memplot-bench/Makefile.am: Add EXTRA_DIST.
+	* demo/timer-bench/Makefile.am: Add EXTRA_DIST.
+	* configure.ac: Handle boost.
+	* bin/Makefile.am: Add EXTRA_DIST.
+	* m4/ax_boost_base.m4: Handle boost.
+
+2009-07-15 d-halluin  <d-halluin@lrde.epita.fr>
+
+	License under WTFPL.
+
+	* COPYING: Add license text.
+
+	(most files): Change header info.
+
 2009-06-17  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Timer: Fix text ouput.
