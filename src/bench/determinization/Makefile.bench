@@ -5,23 +5,39 @@ if ENABLE_OPENFST
 endif
 
 bench: all
-	@mkdir aut_2n;					\
-	if [ ! -z $(HAS_OPENFST) ]; then		\
-	  mkdir aut_2n_openfst;				\
-	fi;						\
-	echo '=======================';			\
-	echo '|Determinization bench|';			\
-	echo '=======================';			\
-	for n in $$(seq 14 20); do			\
-	  echo "----------------------For $$n states";	\
-	  echo "--------------VCSN:";			\
-	  ./determinization_aut_2n_bench $$n;		\
-	  if [ ! -z $(HAS_OPENFST) ]; then		\
-	    echo "--------------OpenFST:";		\
-	    ./determinization_aut_2n_openfst_bench $$n;	\
-	  fi;						\
+	@mkdir aut_2n;						\
+	mkdir aut_ladybird;					\
+	if [ ! -z $(HAS_OPENFST) ]; then			\
+	  mkdir aut_2n_openfst;					\
+	  mkdir aut_ladybird_openfst;				\
+	fi;							\
+	echo '======================================';		\
+	echo '|Determinization bench - aut_ladybird|';		\
+	echo '======================================';		\
+	for n in $$(seq 12 20); do				\
+	  echo "----------------------For $$n";			\
+	  echo "--------------VCSN:";				\
+	  ./determinization_aut_ladybird_bench $$n;		\
+	  if [ ! -z $(HAS_OPENFST) ]; then			\
+	    echo "--------------OpenFST:";			\
+	    ./determinization_aut_ladybird_openfst_bench $$n;	\
+	  fi;							\
+	done;							\
+	echo '================================';		\
+	echo '|Determinization bench - aut_2n|';		\
+	echo '================================';		\
+	for n in $$(seq 14 20); do				\
+	  echo "----------------------For $$n states";		\
+	  echo "--------------VCSN:";				\
+	  ./determinization_aut_2n_bench $$n;			\
+	  if [ ! -z $(HAS_OPENFST) ]; then			\
+	    echo "--------------OpenFST:";			\
+	    ./determinization_aut_2n_openfst_bench $$n;		\
+	  fi;							\
 	done;
 
 bench-clean:
 	rm -rf aut_2n
 	rm -rf aut_2n_openfst
+	rm -rf aut_ladybird
+	rm -rf aut_ladybird_openfst

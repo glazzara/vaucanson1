@@ -1,5 +1,16 @@
 2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Add determinize benchmark on ladybird.
+
+	* src/bench/common/README_AUTOMATA,
+	* src/bench/common/bench_constructs.hh: Add ladybird.
+	* src/bench/determinization/Makefile.bench: Add case.
+	* src/bench/determinization/determinization_aut_ladybird_bench.hh,
+	* src/bench/determinization/determinization_aut_ladybird_openfst_bench.hh:
+	New.  Implementation.
+
+2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Update cbs.
 
 	CBS version: d0cef86a72e495219ff5e3d63d081b9baefe2cf2.
