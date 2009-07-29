@@ -1,5 +1,12 @@
 2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Bench: rename parameter "over" into "context".
+
+	* src/bench/product/product_aut_b_bool_bench.hh,
+	* src/bench/product/product_aut_b_z_bench.hh: Do that.
+
+2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Add eval benchmark.
 
 	* configure.ac: Add Makefile.
