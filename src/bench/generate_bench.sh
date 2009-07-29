@@ -101,7 +101,7 @@ case $1:$# in
 	BENCH_DIRS="determinization		\
 	 minimization derived_terms		\
          quotient composition eps_removal	\
-         iterators accessible product"
+         iterators accessible product eval"
 	;;
     --all:* | *:0)
 	echo >&2 "invalid arguments: $@"
