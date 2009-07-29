@@ -22,7 +22,7 @@ bench: all
 	echo '====================';				\
 	echo '|Eval bench - aut_b|';				\
 	echo '====================';				\
-	for n in $$(seq 12 20); do				\
+	for n in $$(seq 1 10); do				\
 	  echo "----------------------For $$n";			\
 	  echo "--------------VCSN:";				\
 	  ./eval_aut_b_bench $$n;				\

@@ -1,5 +1,12 @@
 2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Tweak eval benchmark.
+
+	* src/bench/eval/Makefile.bench: Tweak sequence for aut_b bench.
+	* src/bench/eval/eval_aut_b_bench.hh: Remove debug output, fix display.
+
+2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Bench: rename parameter "over" into "context".
 
 	* src/bench/product/product_aut_b_bool_bench.hh,

@@ -35,8 +35,8 @@ void eval_aut_b_bench(int n)
   automaton_t a = aut_b();
   automaton_t b = a;
 
-  n--;
-  while (n--)
+  int np = n - 1;
+  while (np--)
     a = product(a, b);
 
   std::string word;
@@ -48,7 +48,6 @@ void eval_aut_b_bench(int n)
     else
       word += "b";
   }
-  std::cout << word << std::endl;
 
   BENCH_START("Vaucanson eval",
 	      "Automaton eval benchmark using Vaucanson.\n"
