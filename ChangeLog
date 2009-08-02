@@ -1,3 +1,18 @@
+2009-07-08  Alex Hamelin  <hamelin@lrde.epita.fr>
+
+	* configure.ac: Bump version to 1.3.1a.
+	* doc/manual/taf-kit-manual.tex: Likewise.
+
+2009-07-08  Alex Hamelin  <hamelin@lrde.epita.fr>
+
+	Release 1.3.1.
+	
+	* doc/README.txt: Add information about CBS, Remove
+	information about VaucanSWIG.
+	* doc/NEWS.txt: Update for 1.3.1.
+	* doc/manual/taf-kit-manual.tex: Likewise.
+	* configure.ac: Bump version to 1.3.1.
+
 2009-07-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix standard_of() w.r.t. listg.
@@ -1156,7 +1171,7 @@
 
 2009-03-30  Jerome Galtier  <jerome.galtier@lrde.epita.fr>
 
-	Remove make dist depency on make (Close #140).
+	Remove make dist dependency on make (Close #140).
 
 	* doc/.gitignore: Remove automata.tex and manual.ext as they are no
 	more generated.
@@ -17674,7 +17689,7 @@ instances to them.
 	features.
 	Don't use `_', but `-' to separate TAF-kit program and function
 	name components.
-	* doc/manual/Makefile.am (users_manual.dvi): Declare the depencencies.
+	* doc/manual/Makefile.am (users_manual.dvi): Declare the dependencies.
 
 2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
 
