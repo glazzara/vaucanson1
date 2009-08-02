@@ -1,3 +1,10 @@
+2009-08-02  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a typo in generate_bench.sh.
+
+	* src/bench/generate_bench.sh: Remove the e letter introduced by
+	commit b29a54029698aa76b7c4b4218f43e56ce8e7c739.
+
 2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Tweak eval benchmark.

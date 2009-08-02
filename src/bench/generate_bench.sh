@@ -1,4 +1,4 @@
-e#!/bin/sh
+#!/bin/sh
 
 # Vaucanson, a generic library for finite state machines.
 # Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
