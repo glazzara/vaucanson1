@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,18 +42,6 @@ namespace vcsn
     }
 
     return E;
-  }
-
-  template <typename S, typename T>
-  inline typename MUTE_TRAITS::ret
-  MUTE_TRAITS::
-  make_automaton(const typename MUTE_TRAITS::ret_alphabet_t& A)
-  {
-    semiring_t semiring;
-    ret_monoid_t freemonoid(A);
-    typename ret::series_set_t series(semiring, freemonoid);
-
-    return ret(Automata<typename ret::series_set_t, typename ret::kind_t>(series));
   }
 
   template <typename S, typename T>

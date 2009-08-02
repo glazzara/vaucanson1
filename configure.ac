@@ -27,10 +27,10 @@ AC_CONFIG_SUBDIRS([cbs])
 
 # Check the default graph implementation near the top, this way we can
 # quickly react to incorrect values.
-ac_default_graph_impl=bmig
+ac_default_graph_impl=listg
 AC_ARG_WITH([default-graph-impl],
   [AC_HELP_STRING([--with-default-graph-impl@<:@=IMPL@:>@],
-     [choose default graph implementation: bmig (default) or listg])],
+     [choose default graph implementation: listg (default) or bmig])],
      [ac_default_graph_impl="$withval"],[])
 
 AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [$ac_default_graph_impl],
@@ -79,51 +79,6 @@ AC_ARG_ENABLE([bench],
 	                [build benchmarks during "make all"])])
 AM_CONDITIONAL([ENABLE_BENCH], [test "x$enable_bench" = "xyes"])
 
-
-## ------------ ##
-## Vaucanswig.  ##
-## ------------ ##
-
-# SWIG and Python used.
-AC_ARG_ENABLE([vaucanswig],
-	[AC_HELP_STRING([--enable-vaucanswig],
-			[enable building vaucanswig])])
-
-AC_ARG_WITH([python],
-	[AC_HELP_STRING([--with-python@<:@=DIR@:>@],
-			[set python prefix (default is PREFIX)])],
-	[ac_python_path="$withval"],[])
-
-
-AC_SUBST([MORE_DISTCHECK_CONFIGURE_FLAGS])
-if test "${with_python+set}" = set; then
-  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-python=$with_python"
-fi
-
-# Always check for swig: it is needed by `make dist' (that will recurse
-# vaucanswig) in case the *.py files do not exist already.  E.g., after
-# a fresh checkout.
-AC_CHECK_SWIG13
-
-# We distribute the product of swig, so do not error out (just warn)
-# if swig is too old : it might not be needed.
-if test "x$ac_cv_recent_swig" != xyes; then
-  AC_MSG_WARN([You need swig >= 1.3 to compile vaucanswig from a fresh checkout.])
-fi
-
-if test "x$enable_vaucanswig" = xyes; then
-  VCSN_CHECK_PYTHON
-fi
-
-AC_CONFIG_FILES([vaucanswig/Makefile
-		 vaucanswig/meta/Makefile
-		 vaucanswig/src/Makefile
-		 vaucanswig/python/Makefile])
-
-AM_CONDITIONAL([ENABLE_VAUCANSWIG],
-	       [test "x$enable_vaucanswig" = "xyes"])
-
-
 # Boost
 AX_BOOST_BASE([1.34])
 # Do not require boost::serialization headers.
@@ -131,6 +86,7 @@ BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_MULTI_INDEX_DISABLE_SERIALIZATION"
 # FIXME: It would be nice to check that the Boost package we require
 # (boost::graph, boost::multi_index...)
 
+AC_SUBST([MORE_DISTCHECK_CONFIGURE_FLAGS])
 if test "${with_boost+set}" = set; then
   MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-boost=$with_boost"
 fi

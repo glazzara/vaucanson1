@@ -296,6 +296,85 @@ boolean_automaton_getter::operator() (T&) const
 	    << std::endl;
   exit (1);
 }
+
+
+
+pair_automaton_getter::pair_automaton_getter (std::string& cmd,
+					      input_format_t fmt)
+  : command (cmd),
+    f (fmt)
+{
+}
+
+pair_automaton_getter::pair_t
+pair_automaton_getter::operator() (pair_automaton_getter::pair_t& a) const
+{
+  return a;
+}
+
+pair_automaton_getter::pair_t
+pair_automaton_getter::operator() (std::string& str) const
+{
+  std::istringstream is (str);
+
+  // Representations will be build by the automaton loader.
+  pair_automaton_getter::pair_t a =
+    pair_automaton_getter::trait::make_automaton(trait::ret_alphabet_t());
+
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      is >> automaton_loader(a, string_out (), XML ());
+      break;
+    case INPUT_TYPE_FSM:
+      fsm_load(is, a);
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
+  return a;
+}
+
+pair_automaton_getter::pair_t
+pair_automaton_getter::operator() (command_output_status& i) const
+{
+  if (i != PIPE_GET_FROM_STDIN)
+    {
+      std::cerr << command
+		<< ": Incorrect input type"
+		<< std::endl;
+      exit (1);
+    }
+
+  // Representations will be build by the automaton loader.
+  pair_automaton_getter::pair_t a =
+    pair_automaton_getter::trait::make_automaton(trait::ret_alphabet_t());
+
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      std::cin >> automaton_loader(a, string_out (), XML ());
+      break;
+    case INPUT_TYPE_FSM:
+      fsm_load(std::cin, a);
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
+  return a;
+}
+
+template<typename T>
+pair_automaton_getter::pair_t
+pair_automaton_getter::operator() (T&) const
+{
+  std::cerr << command
+	    << ": Incorrect input type"
+	    << std::endl;
+  exit (1);
+}
 # endif // !WITH_TWO_ALPHABETS
 
 #endif /* !PIPE_GETTERS_HXX */

@@ -1,3 +1,24 @@
+2009-07-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix standard_of() w.r.t. listg.
+
+	* include/vaucanson/algorithms/standard_of.hxx
+	(Standard_OfVisitor): After concatenating to automata, and before
+	erasing the obsolete initial state of the RHS, do not explicitly
+	erase the transition leaving that initial state.  This is useless
+	because del_state() already does the work.  This was bogus because
+	del_transition invalidates the delta_iterator in the listg
+	implementation.
+	* include/vaucanson/algorithms/standard.hxx: Typos.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make listg the default graph implementation, since we now know
+	that bmig is slower.
+
+	* configure.ac (ac_default_graph_impl): Make listg the default.
+	* doc/README.txt: Adjust documentation of --default-graph-impl.
+
 2009-08-02  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a typo in generate_bench.sh.
@@ -528,6 +549,86 @@
 	* cbs: Add directory.
 	* configure.ac: Add AC_CONFIG_SUBDIRS for cbs.
 	* Makefile.am: Add cbs subdir.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Update to gnulib 567f85cfcdb0a63cf96730d0858581b013765d59.
+
+	* gnulib/Makefile.am, gnulib/argp-fmtstream.c, gnulib/getopt1.c,
+	gnulib/gettext.h, gnulib/progname.c, gnulib/stdint.in.h ,
+	gnulib/stdio.in.h, gnulib/stdlib.in.h, gnulib/strerror.c ,
+	gnulib/unistd.in.h, gnulib/vasnprintf.c, gnulib/wchar.in.h ,
+	gnulib/xmalloc.c, m4/alloca.m4, m4/argp.m4 ,
+	m4/double-slash-root.m4, m4/errno_h.m4, m4/extensions.m4 ,
+	m4/gnulib-cache.m4, m4/gnulib-common.m4, m4/gnulib-comp.m4 ,
+	m4/include_next.m4, m4/inline.m4, m4/intmax_t.m4 ,
+	m4/inttypes_h.m4, m4/longlong.m4, m4/malloc.m4, m4/mempcpy.m4 ,
+	m4/printf.m4, m4/size_max.m4, m4/stdbool.m4, m4/stdint.m4 ,
+	m4/stdint_h.m4, m4/stdio_h.m4, m4/stdlib_h.m4, m4/strcase.m4 ,
+	m4/strchrnul.m4, m4/strndup.m4, m4/strnlen.m4, m4/unistd_h.m4 ,
+	m4/vasnprintf.m4, m4/wchar.m4, m4/wchar_t.m4, m4/wint_t.m4 ,
+	m4/xsize.m4: Update.
+	m4/00gnulib.m4, m4/multiarch.m4: New files.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Add the pair-to-fmp command to TAF-Kit.
+
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_b_LDADD,
+	vcsn_char_fmp_z_LDADD, vcsn_int_fmp_b_LDADD,
+	vcsn_int_fmp_z_LDADD): Add the corresponding pair automaton
+	library.
+	* taf-kit/src/fmp_commands.cc (pair_to_fmp): New command.
+	* taf-kit/src/getters.hxx (get_pair_aut): New function.
+	* taf-kit/src/pipe_getters.hh, taf-kit/src/pipe_getters.hxx
+	(pair_automaton_getter): New class.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Add more tests for ltl-to-pair
+	and pair-to-fmp.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make pair_to_fmp() available in FMP contexts.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh:
+	include pair_to_fmp.hh.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make mute_ltl_to_pair<S,T>::make_automaton available.
+
+	* include/vaucanson/algorithms/ltl_to_pair.hxx (make_automaton):
+	Move the code...
+	* include/vaucanson/algorithms/ltl_to_pair.hh (make_automaton):
+	... here, so it is available even if VCSN_USE_INTERFACE_ONLY
+	is defined.
+
+2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce contexts for char-char-z and int-int-z automata.
+
+	* include/vaucanson/automata/generic_contexts/char_char_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/char_char_z_automaton_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton.hh,
+	include/vaucanson/automata/generic_contexts/int_int_z_automaton_structures.hh:
+	New files.
+	* include/Makefile.am (nobase_include_HEADERS): Add them.
+	* lib/generate_libvcsn.rb: Adjust to build int-int-z and
+	char-char-z contexts.
+	* lib/Makefile.am: Include the new libraries' makefiles.
+
+2009-03-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Remove Vaucanswig.
+
+	* vaucanswig/: Delete.
+	* Makefile.am (SUBDIRS): Adjust.
+	* build-aux/vcsn-internal.m4: Delete.
+	* build-aux/Makefile.am (EXTRA_DIST): Adjust.
+	* configure.ac: Remove Python and Swig checks.
+	* vaucanson.spec, debian/rules: Remove --disable-vaucanswig and
+	--disable-build-demos.
+	* bootstrap: Do not call vaucanswig/expand.sh.
 
 2009-06-05  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 

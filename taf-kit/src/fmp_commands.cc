@@ -82,6 +82,14 @@ DEFINE_COMMAND(NAME(ltl_to_pair)
 	       KEEP(dst)
 	       RETURNVALUE(0));
 
+DEFINE_COMMAND(NAME(pair_to_fmp)
+	       CODE(
+		 vcsn::mute_ltl_to_pair_t::ret src = get_pair_aut(args, 1);
+		 automaton_t dst = pair_to_fmp(src);
+	         set_writing_data(dst, args))
+	       KEEP(dst)
+	       RETURNVALUE(0));
+
 DEFINE_COMMAND (NAME(evaluation)
 		CODE(automaton_t src = get_aut(args, 1))
 		OUTPUT(
@@ -214,7 +222,9 @@ const command_t command_map[] =
 		     "Evaluate the language described by the\n\t"
 		     IOAUT_NAME " automaton `aut2' on the transducer `aut1'."),
     COMMAND_ENTRY(ltl_to_pair, Aut,
-		  "Give an automaton defined over a pair letter alphabet same as `aut'."),
+		  "Convert `Aut' into an automaton defined over a pair letter alphabet."),
+    COMMAND_ENTRY(pair_to_fmp, Aut,
+		  "Convert an automata `Aut' using pair letters into an FMP."),
     COMMAND_ENTRY(image, Aut,
 		  "Give an automaton that accepts all output produced by `aut'."),
     COMMAND_ENTRY(transpose, Aut,

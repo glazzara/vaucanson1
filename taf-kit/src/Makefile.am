@@ -81,7 +81,8 @@ vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DRW_CONTEXT=boolean_transducer -DVCSN_USE_LIB
 vcsn_char_fmp_b_LDADD = $(LDADD) \
 			 $(top_builddir)/lib/libvcsn-fmp-tdc.la \
-			 $(top_builddir)/lib/libvcsn-b.la
+			 $(top_builddir)/lib/libvcsn-b.la \
+			 $(top_builddir)/lib/libvcsn-char-char-b.la
 
 vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES) \
 			   fmp_commands.cc
@@ -93,7 +94,8 @@ vcsn_char_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DWITH_WEIGHTS
 vcsn_char_fmp_z_LDADD = $(LDADD) \
 			 $(top_builddir)/lib/libvcsn-z-fmp-tdc.la \
-			 $(top_builddir)/lib/libvcsn-z.la
+			 $(top_builddir)/lib/libvcsn-z.la \
+                         $(top_builddir)/lib/libvcsn-char-char-z.la
 
 vcsn_int_b_SOURCES = $(COMMON_SOURCES)			\
 		      ratexp_commands.hh		\
@@ -121,7 +123,8 @@ vcsn_int_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \
 			   -DRW_CONTEXT=int_boolean_transducer -DVCSN_USE_LIB
 vcsn_int_fmp_b_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libvcsn-int-b.la \
-			$(top_builddir)/lib/libvcsn-int-fmp-tdc.la
+			$(top_builddir)/lib/libvcsn-int-fmp-tdc.la \
+			$(top_builddir)/lib/libvcsn-int-int-b.la
 
 vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES) \
 			  fmp_commands.cc
@@ -133,7 +136,8 @@ vcsn_int_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_fmp_transducer \
 			   -DVCSN_USE_LIB
 vcsn_int_fmp_z_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libvcsn-int-z.la \
-			$(top_builddir)/lib/libvcsn-int-z-fmp-tdc.la
+			$(top_builddir)/lib/libvcsn-int-z-fmp-tdc.la \
+			$(top_builddir)/lib/libvcsn-int-int-z.la
 
 vcsn_char_char_b_SOURCES = $(COMMON_SOURCES) \
 			    ratexp_commands.hh \

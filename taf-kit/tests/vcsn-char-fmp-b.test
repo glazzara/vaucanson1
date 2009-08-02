@@ -323,6 +323,12 @@ x
 EOF
 $VCSN is-ltl ltl.xml
 $VCSN ltl-to-pair ltl.xml > ltl-pair.xml
+$VCSN pair-to-fmp ltl-pair.xml > ltl2.xml
+$VCSN is-ltl ltl2.xml
+# We should use are-isomorphic here
+$VCSN info ltl.xml > ltl.info
+$VCSN info ltl2.xml > ltl2.info
+diff ltl.info ltl2.info
 
 # Now we will check with first_projection and second_projection
 # on one side (pair), and image and domain on the other side (FMP).

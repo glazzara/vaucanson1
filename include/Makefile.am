@@ -470,11 +470,15 @@ vaucanson/automata/generic_contexts/int_z_min_plus_automaton_structures.hh \
 vaucanson/automata/generic_contexts/int_z_fmp_transducer.hh		\
 vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh	\
 vaucanson/automata/generic_contexts/char_char_boolean_automaton.hh	\
+vaucanson/automata/generic_contexts/char_char_z_automaton.hh		\
 vaucanson/automata/generic_contexts/char_int_boolean_automaton.hh	\
 vaucanson/automata/generic_contexts/int_int_boolean_automaton.hh	\
+vaucanson/automata/generic_contexts/int_int_z_automaton.hh		\
 vaucanson/automata/generic_contexts/char_char_boolean_automaton_structures.hh \
+vaucanson/automata/generic_contexts/char_char_z_automaton_structures.hh \
 vaucanson/automata/generic_contexts/char_int_boolean_automaton_structures.hh \
 vaucanson/automata/generic_contexts/int_int_boolean_automaton_structures.hh \
+vaucanson/automata/generic_contexts/int_int_z_automaton_structures.hh	\
 vaucanson/automata/implementation/automaton_view.hh			\
 vaucanson/automata/implementation/automaton_view.hxx			\
 vaucanson/automata/implementation/bmig/bmig_functors.hh 		\

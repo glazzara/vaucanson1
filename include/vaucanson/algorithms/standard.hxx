@@ -277,7 +277,7 @@ namespace vcsn {
   }
 
   // Group the common part of the concat of standard automata algorithm.
-  // - 'lhs' and 'rhs' are the to automaton to concatanate.
+  // - 'lhs' and 'rhs' are the two automata to concatanate.
   // - 'rhs_i' is the initial state of rhs.
   // - 'lhs_final_*' are respectively the begin and end iterator of the set
   // containing the final states of lhs.
