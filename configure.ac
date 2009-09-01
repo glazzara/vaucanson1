@@ -93,8 +93,7 @@ fi
 
 
 # Libtool used
-AC_DISABLE_STATIC
-AC_PROG_LIBTOOL
+LT_INIT([disable-static])
 
 # Where to install Emacs files.
 AM_PATH_LISPDIR

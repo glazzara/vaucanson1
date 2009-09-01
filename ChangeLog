@@ -1,5 +1,11 @@
 2009-09-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Switch to Libtool 2.2, which is more that one year old now.
+
+	* configure.ac: Use LT_INIT instead of AC_PROG_LIBTOOL.
+
+2009-09-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Let Automake 11.1 handle parallel and color tests.
 
 	* configure.ac: Require Automake 1.11 and use the new
