@@ -1,3 +1,14 @@
+2009-09-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Let Automake 11.1 handle parallel and color tests.
+
+	* configure.ac: Require Automake 1.11 and use the new
+	color-tests and parallel-tests options.
+	* build-aux/check.mk: Delete.
+	* src/tests/check/check.mk, src/tests/xml/Makefile.am,
+	taf-kit/tests/Makefile.am: Do not include build-aux/check.mk
+	anymore.
+
 2009-07-08  Alex Hamelin  <hamelin@lrde.epita.fr>
 
 	* configure.ac: Bump version to 1.3.1a.

@@ -12,7 +12,6 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 include $(top_srcdir)/vaucanson.mk
-include $(top_srcdir)/build-aux/check.mk
 
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 

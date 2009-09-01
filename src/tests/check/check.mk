@@ -29,9 +29,3 @@ LDADD = \
 TESTS = $(EXTRA_PROGRAMS)
 # Automake does not automatically clean EXTRA_PROGRAMS.
 CLEANFILES = $(EXTRA_PROGRAMS)
-
-TEST_LOGS = $(TESTS:=.log)
-
-# Parallel replacement of Automake's check-TESTS target.
-# Include it last: TEST_LOGS has a default value there.
-include $(top_srcdir)/build-aux/check.mk
