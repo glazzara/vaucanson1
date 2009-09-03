@@ -74,14 +74,14 @@ MAINTAINERCLEANFILES = $(dist_pdf_DATA) $(srcdir)/stamp
 TEXI2PDF = texi2pdf
 TEXI2PDF_FLAGS = --tidy --batch
 
-SUFFIXES = .txt .tex .pdf
+SUFFIXES = .txt .pdf
 
-.tex.pdf:
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
-
-.txt.tex:
-	$(RST2LATEX) --halt=warning --input-encoding=iso-8859-1 $< >$@.tmp
-	mv $@.tmp $@
+# We used to have two .txt.tex and .tex.pdf rules, but BSD Make will always
+# rebuilt the missing .tex file.  So use a single rule instead.
+.txt.pdf:
+	$(RST2LATEX) --halt=warning --input-encoding=iso-8859-1 $< >$*.tex
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $*.tex
+	rm -f $*.tex
 
 
 EXTRA_DIST = README.txt HACKING.txt NEWS.txt \

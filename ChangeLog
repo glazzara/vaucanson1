@@ -1,5 +1,12 @@
 2009-09-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/Makefile.am (.txt.tex, .tex.pdf): Rewrite as a single
+	.txt.pdf rule, to please BSD Make.
+	* doc/manual/Makefile.am (%.pdf: %.tex): Rewrite as a portable
+	.tex.pdf rule.
+
+2009-09-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/unit-compile.mk: Delete this unused Makefile that uses
 	unportable %-rules.
 	* doc/Makefile.am (dist_doc_DATA): Remove.

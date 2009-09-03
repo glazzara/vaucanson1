@@ -22,7 +22,7 @@ TEXI2PDF_FLAGS = --tidy --build-dir=tmp.t2d --batch
 ## *.tex ##
 ## ----- ##
 
-%.pdf: %.tex
+.tex.pdf:
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
 .PHONY: tex-mostlyclean
