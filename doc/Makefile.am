@@ -87,12 +87,6 @@ SUFFIXES = .txt .tex .pdf
 EXTRA_DIST = README.txt HACKING.txt NEWS.txt \
 	     $(srcdir)/stamp $(srcdir)/$(DOCDIR)
 
-## ------------------ ##
-## Unit compilation.  ##
-## ------------------ ##
-
-dist_doc_DATA = unit-compile.mk
-
 ## ---------------------------- ##
 ## Installing on LRDE servers.  ##
 ## ---------------------------- ##
