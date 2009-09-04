@@ -1,0 +1,10 @@
+set term postscript eps enhanced
+set output "quotient-z-listg-bmig-memory-@MEXT@.eps"
+set size 0.7,0.7
+
+set title "Graph implementation influence on quotient() over Z\n(@MACHINE@)"
+set xlabel "Automaton complexity"
+set ylabel "Memory (MB)"
+set key top left
+plot 'vcsn-quotient-z-bmig.data' using 1:($5/1024/1024) title "Memory (bmig)" smooth unique  w linespoints pt 5 lc 2 lw 2 lt 1, \
+     'vcsn-quotient-z-listg.data' using 1:($5/1024/1024) title "Memory (listg)" smooth unique w linespoints pt 5 lc 1 lw 2 lt 1

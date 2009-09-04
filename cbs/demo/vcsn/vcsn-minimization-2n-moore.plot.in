@@ -1,0 +1,14 @@
+set term postscript eps enhanced
+set output "minimization-2n-moore-listg-bmig-@MEXT@.eps"
+set size 0.7,0.7
+
+set title "Graph implementation influence on minimization-2n-moore()\n(@MACHINE@)"
+set xlabel "Automaton complexity"
+set ylabel "Time (ms)"
+set key top left
+plot 'vcsn-minimization-2n-moore-bmig.data' using 1:3 title "CPU time (bmig)" smooth unique  w linespoints pt 5 lc 2 lw 2 lt 1, \
+     'vcsn-minimization-2n-moore-bmig.data' using 1:5 title "user (bmig)" smooth unique w linespoints pt 6 lc 2 lt 2,     \
+     'vcsn-minimization-2n-moore-bmig.data' using 1:4 title "system (bmig)" smooth unique w linespoints pt 3 lc 2 lt 3,   \
+     'vcsn-minimization-2n-moore-listg.data' using 1:3 title "CPU time (listg)" smooth unique w linespoints pt 5 lc 1 lw 2 lt 1,      \
+     'vcsn-minimization-2n-moore-listg.data' using 1:5 title "user (listg)" smooth unique w linespoints pt 6 lc 1 lt 2,          \
+     'vcsn-minimization-2n-moore-listg.data' using 1:4 title "system (listg)" smooth unique w linespoints pt 3 lc 1 lt 3

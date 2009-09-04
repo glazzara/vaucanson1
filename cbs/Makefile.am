@@ -15,7 +15,7 @@ include $(top_srcdir)/cbs.mk
 
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = lib demo include bin
+SUBDIRS = lib include bin
 
 EXTRA_DIST = README README_LIBBENCH NEWS COPYING \
 	     m4/ax_boost_base.m4 cbs.mk cbs.xsd bootstrap

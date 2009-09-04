@@ -1,0 +1,9 @@
+set term postscript eps enhanced
+set output "timer-memory-consumption-many-tasks-@MEXT@.eps"
+set size 0.7,0.7
+
+set title "Memory usage of CBS Timer on many tasks\n(@MACHINE@)"
+set xlabel "Number of tasks"
+set ylabel "Memory usage (MB)"
+set key top left
+plot 'timer-many-tasks.data' using ($2):($3/1024/1024) t "Memory usage" smooth unique w linespoints pt 5 lc 1 lw 2 lt 1

@@ -1,5 +1,12 @@
 2009-09-04  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Update CBS.
+
+	CBS version: 01c2191d02af066c21e04e6247c78778155d6724.
+	See cbs/Changelog.
+
+2009-09-04  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Fix .gitignore.
 
 	* .gitignore: Do not ignore *.in files,
