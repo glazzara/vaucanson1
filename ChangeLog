@@ -1,5 +1,15 @@
 2009-09-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix run-time computation of automata path.
+
+	* taf-kit/src/library_commands.hh (get_automata_path): Search for
+	vcsn- in program_name, do not assume it is at the beginning.  This
+	was causing trouble when Taf-Kit was run as './vcsn-char-b' for
+	instance, because it would then remove the first five characters
+	and look for a directory named '/n-char-b'.
+
+2009-09-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix configure-time computation of VCSN_DATA_PATH.
 
 	* configure.ac (VCSN_DATA_PATH): Fix underquoted code in $prefix
