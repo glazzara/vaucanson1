@@ -111,16 +111,17 @@ VCSN_TAF_KIT
 ## Package header configuration.
 ##
 
-# Tell what's the default pkgdata dir.
+# Compute the default pkgdata dir.
+# $datadir is defined as '${prefix}/share/' with ${prefix} unexpansed,
+# so that users can change ${prefix} at make-time if they want.  The
+# GNU Standards require this, but we won't support this use case as we
+# need the value encoded into pconf.hh.  We have to expand $prefix here.
+
 old_prefix=$prefix
 case $prefix in
-  [\\/]* | ?:[\\/]* ) ;;
+  [[\\/]]* | ?:[[\\/]]* ) ;;
   *) prefix=$ac_default_prefix ;;
 esac
-# This expansion by hand is a PITA, but we don't have much choice,
-# Autoconf provides no standard means to do that, since RMS wants to
-# support make-time changes of $prefix.  We do not support this silly
-# idea.
 VCSN_DATA_PATH=$(eval echo $(eval echo "$datadir/vaucanson/"))
 AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$VCSN_DATA_PATH"],
 		   [Directory where Vaucaunson data is installed.])
