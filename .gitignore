@@ -1,4 +1,3 @@
-*.in
 *.o
 *.lo
 *.la
@@ -14,6 +13,7 @@
 autom4te.cache
 defs
 stamp-h*
+Makefile.in
 Makefile
 /libtool
 /config.h
