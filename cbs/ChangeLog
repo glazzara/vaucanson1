@@ -1,3 +1,10 @@
+2009-09-07 d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix make dist.
+
+	* Makefile.am: add DIST_SUBDIRS,
+	add demo rule.
+
 2009-09-04 d-halluin  <d-halluin@lrde.epita.fr>
 
 	Do not compile demos with make all.
