@@ -1,3 +1,7 @@
+2009-09-08  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+
+	* bootstrap: force Automake-1.11 if available.
+
 2009-09-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/Makefile.am (.txt.tex, .tex.pdf): Rewrite as a single
