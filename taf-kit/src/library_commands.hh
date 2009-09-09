@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -67,8 +67,10 @@ get_automata_path(const arguments_t& args)
 	base_path = VCSN_DATA_PATH;
 
       // Strip "vcsn-" from the program name.
-      const std::string lib_dir =
-	std::string("/automata/") + (program_name + 5);
+      const char* suffix = strrchr(program_name, '/');
+      suffix = suffix ? suffix + 6 : program_name + 5;
+
+      const std::string lib_dir = std::string("/automata/") + suffix;
 
       std::string path;
 
