@@ -1,0 +1,33 @@
+# eval/Makefile.bench				* -*- MAKEFILE -*-
+
+bench: all
+	@mkdir aut_b;						\
+	mkdir aut_ladybird;					\
+	echo '===========================';			\
+	echo '|Eval bench - aut_ladybird|';			\
+	echo '===========================';			\
+	for n in $$(seq 10 18); do				\
+	  echo "----------------------For $$n";			\
+	  echo "--------------VCSN:";				\
+	  ./eval_aut_ladybird_bench $$n;			\
+	done;							\
+	echo '==========================================';	\
+	echo '|Eval bench - aut_ladybird (determinized)|';	\
+	echo '==========================================';	\
+	for n in $$(seq 10 18); do				\
+	  echo "----------------------For $$n";			\
+	  echo "--------------VCSN:";				\
+	  ./eval_aut_ladybird_determinized_bench $$n;		\
+	done;							\
+	echo '====================';				\
+	echo '|Eval bench - aut_b|';				\
+	echo '====================';				\
+	for n in $$(seq 1 10); do				\
+	  echo "----------------------For $$n";			\
+	  echo "--------------VCSN:";				\
+	  ./eval_aut_b_bench $$n;				\
+	done;
+
+bench-clean:
+	rm -rf aut_b
+	rm -rf aut_ladybird

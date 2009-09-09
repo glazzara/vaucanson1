@@ -1,3 +1,24 @@
+2009-09-07  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update CBS.
+
+	CBS version: f19d09ad8c6566888b72a87bbed5aa628da3dbf1.
+	See cbs/Changelog.
+
+2009-09-04  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update CBS.
+
+	CBS version: 01c2191d02af066c21e04e6247c78778155d6724.
+	See cbs/Changelog.
+
+2009-09-04  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Fix .gitignore.
+
+	* .gitignore: Do not ignore *.in files,
+	ignore Makefile.in instead.
+
 2009-09-08  Alexandre Duret-Lutz  <adl@va-et-vient.net>
 
 	* bootstrap: force Automake-1.11 if available.
@@ -67,6 +88,70 @@
 
 	* configure.ac (ac_default_graph_impl): Make listg the default.
 	* doc/README.txt: Adjust documentation of --default-graph-impl.
+
+2009-08-02  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+
+	Fix a typo in generate_bench.sh.
+
+	* src/bench/generate_bench.sh: Remove the e letter introduced by
+	commit b29a54029698aa76b7c4b4218f43e56ce8e7c739.
+
+2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Tweak eval benchmark.
+
+	* src/bench/eval/Makefile.bench: Tweak sequence for aut_b bench.
+	* src/bench/eval/eval_aut_b_bench.hh: Remove debug output, fix display.
+
+2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Bench: rename parameter "over" into "context".
+
+	* src/bench/product/product_aut_b_bool_bench.hh,
+	* src/bench/product/product_aut_b_z_bench.hh: Do that.
+
+2009-07-29  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add eval benchmark.
+
+	* configure.ac: Add Makefile.
+	* src/bench/Makefile.am,
+	* src/bench/generate_bench.sh: Add directory.
+	* src/bench/eval/Makefile.bench,
+	* src/bench/eval/eval_aut_b_bench.hh,
+	* src/bench/eval/eval_aut_ladybird_bench.hh,
+	* src/bench/eval/eval_aut_ladybird_determinized_bench.hh:
+	New. Implementation
+
+2009-07-16  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update .gitignore in benchmarks.
+
+	* src/bench/.gitignore: Update.
+
+2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add determinize benchmark on ladybird.
+
+	* src/bench/common/README_AUTOMATA,
+	* src/bench/common/bench_constructs.hh: Add ladybird.
+	* src/bench/determinization/Makefile.bench: Add case.
+	* src/bench/determinization/determinization_aut_ladybird_bench.hh,
+	* src/bench/determinization/determinization_aut_ladybird_openfst_bench.hh:
+	New.  Implementation.
+
+2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update cbs.
+
+	CBS version: d0cef86a72e495219ff5e3d63d081b9baefe2cf2.
+	See cbs/Changelog.
+
+2009-07-15  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Add README_AUTOMATA in EXTRA_DIST.
+
+	* src/bench/common/Makefile.am: Do that.
 
 2009-06-19  d-halluin  <d-halluin@lrde.epita.fr>
 

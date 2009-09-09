@@ -3,11 +3,10 @@
 # Copyright (C) 2007, 2009 The CBS Authors.
 #
 # This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+# modify it under the terms of the Do What The Fuck You Want To
+# Public License (WTFPL) version 2.
 #
-# The complete GNU General Public Licence Notice can be found as the
+# The complete WTFPL license text can be found as the
 # `COPYING' file in the root directory.
 #
 # The CBS Authors consists of people listed in the `AUTHORS' file.
@@ -27,6 +26,8 @@ AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
 
 # Checks for libraries.
+# Boost
+AX_BOOST_BASE([1.34])
 
 # Checks for header files.
 AC_CHECK_HEADERS([sys/time.h unistd.h])
@@ -42,6 +43,7 @@ AC_HEADER_TIME
 AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
+	bin/Makefile
 	include/Makefile
 	demo/Makefile
 	  demo/comparison/Makefile

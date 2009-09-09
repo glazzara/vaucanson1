@@ -53,7 +53,7 @@ void product_aut_b_z_bench(int n)
 
   // Set extra parameters/results
   BENCH_PARAMETER("_n_", n_str.str());
-  BENCH_PARAMETER("over", "Z");
+  BENCH_PARAMETER("context", "Z");
 
   BENCH_RESULT("product states", (long) a.states().size());
   BENCH_RESULT("product transitions", (long) a.transitions().size());

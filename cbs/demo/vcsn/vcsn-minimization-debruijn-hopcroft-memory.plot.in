@@ -1,0 +1,10 @@
+set term postscript eps enhanced
+set output "minimization-debruijn-hopcroft-listg-bmig-memory-@MEXT@.eps"
+set size 0.7,0.7
+
+set title "Graph implementation influence on minimization-debruijn-hopcroft()\n(@MACHINE@)"
+set xlabel "Automaton complexity"
+set ylabel "Memory (MB)"
+set key top left
+plot 'vcsn-minimization-debruijn-hopcroft-bmig.data' using 1:($2/1024/1024) title "Memory (bmig)" smooth unique  w linespoints pt 5 lc 2 lw 2 lt 1, \
+     'vcsn-minimization-debruijn-hopcroft-listg.data' using 1:($2/1024/1024) title "Memory (listg)" smooth unique w linespoints pt 5 lc 1 lw 2 lt 1

@@ -251,6 +251,7 @@ AC_CONFIG_FILES([
 	    src/bench/derived_terms/Makefile
 	    src/bench/determinization/Makefile
 	    src/bench/eps_removal/Makefile
+	    src/bench/eval/Makefile
 	    src/bench/iterators/Makefile
 	    src/bench/accessible/Makefile
 	    src/bench/minimization/Makefile

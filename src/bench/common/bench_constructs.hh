@@ -18,7 +18,7 @@
 # define VCSN_BENCH_COMMON_BENCH_CONSTRUCTS_HH
 
 /// Create an aut_2n automaton (has 2^n states once determinized).
-/// See README_AUTOMATA for aut2n.
+/// See README_AUTOMATA for aut_2n.
 automaton_t aut_2n(unsigned n)
 {
   AUTOMATON_TYPES_EXACT(automaton_t);
@@ -43,6 +43,39 @@ automaton_t aut_2n(unsigned n)
   }
   a.set_initial(c[0]);
   a.set_final(c[0]);
+
+  return a;
+}
+
+/// Create an aut_ladybird automaton.
+/// See README_AUTOMATA for aut_ladybird.
+automaton_t aut_ladybird(unsigned n)
+{
+  AUTOMATON_TYPES_EXACT(automaton_t);
+
+  // Alphabet.
+  alphabet_t alpha;
+  alpha.insert('a');
+  alpha.insert('b');
+  alpha.insert('c');
+
+  // Automaton.
+  automaton_t a = make_automaton (alpha);
+
+  hstate_t p = a.add_state ();
+  hstate_t x = p;
+  for(unsigned i = 1; i < n; ++i)
+  {
+    hstate_t y = a.add_state();
+    a.add_letter_transition(x, y, 'a');
+    a.add_letter_transition(y, y, 'b');
+    a.add_letter_transition(y, y, 'c');
+    a.add_letter_transition(y, p, 'c');
+    x = y;
+  }
+  a.add_letter_transition(x, p, 'a');
+  a.set_initial(p);
+  a.set_final(p);
 
   return a;
 }
