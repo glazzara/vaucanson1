@@ -1,5 +1,18 @@
 2009-09-11  d-halluin  <d-halluin@lrde.epita.fr>
 
+	Remove seq in benchmarks.
+
+	* src/bench/composition/Makefile.bench,
+	* src/bench/derived_terms/Makefile.bench,
+	* src/bench/determinization/Makefile.bench,
+	* src/bench/eps_removal/Makefile.bench,
+	* src/bench/eval/Makefile.bench,
+	* src/bench/minimization/Makefile.bench,
+	* src/bench/product/Makefile.bench,
+	* src/bench/quotient/Makefile.bench: List all the values instead.
+
+2009-09-11  d-halluin  <d-halluin@lrde.epita.fr>
+
 	Remove --with-openfst.
 
 	* configure.ac: Enable OpenFST benchmarks if fstcompile

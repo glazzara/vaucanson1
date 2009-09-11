@@ -6,7 +6,7 @@ bench: all
 	echo '================';			\
 	echo '|Quotient bench|';			\
 	echo '================';			\
-	for n in $$(seq 5 13); do			\
+	for n in 5 6 7 8 9 10 11 12 13; do		\
 	    echo "----------------------For power $$n";	\
 	    echo "--------------VCSN (over Z):";	\
 	    ./quotient_z_bench $$n;			\
