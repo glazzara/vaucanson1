@@ -41,20 +41,15 @@ case $ac_default_graph_impl in
   *) AC_ERROR([Unknown graph implementation: $ac_default_graph_impl]);;
 esac
 
-# Specify the path OpenFST binaries for benchmarks.
-ac_openfst_path=/usr/local/bin # default install dir in OpenFST 1.1
-AC_ARG_WITH([openfst],
-  [AC_HELP_STRING([--with-openfst@<:@=DIR@:>@],
-     [specify the path to OpenFST binaries for benchmarks])],
-     [ac_openfst_path="$withval"],[])
-
-AM_CONDITIONAL([ENABLE_OPENFST], [test -e "${ac_openfst_path}/fstcompile"])
-if test -e "${ac_openfst_path}/fstcompile"; then
-  AC_DEFINE_UNQUOTED([OPENFST_PATH], ["$ac_openfst_path"],
-                     [Path to OpenFST binaries.])
+# Enable OpenFST benchmarks if fstcompile is available.
+ac_enable_openfst=no
+if [fstcompile < /dev/null > /dev/null]; then
+  ac_enable_openfst=yes
+  AC_MSG_NOTICE([OpenFST benchmarks are enabled.])
 else
-  AC_MSG_WARN([OpenFST binaries not found in ${ac_openfst_path}, OpenFST benchmarks are disabled.])
+  AC_MSG_WARN([OpenFST binaries are not directly accessible; OpenFST benchmarks are disabled.])
 fi
+AM_CONDITIONAL([ENABLE_OPENFST], [test "x$ac_enable_openfst" = "xyes"])
 
 # Some C and C++ code used.
 AC_PROG_CXX

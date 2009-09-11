@@ -1,3 +1,10 @@
+2009-09-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Remove --with-openfst.
+
+	* configure.ac: Enable OpenFST benchmarks if fstcompile
+	is accessible from the current PATH.
+
 2009-09-07  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update CBS.
