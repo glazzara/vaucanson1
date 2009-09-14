@@ -1,9 +1,16 @@
 This file describes the automata used for benchmarking.
+
 Functions to create these automata are located in bench_constructs.hh.
+The program bench-constructs generates .dot files of the benchmark
+automata.  These files can be used to generate figures using dot/circo:
+
+  circo -Tpng aut_ladybird_6.dot -o aut_ladybird_6.png
+
 
 n is the parameter specified during the automaton creation (integer).
 
-FIXME: Add references.
+The TAF-Kit manual (doc/manual/taf-koit-manual.pdf) also lists
+some of these automata, along with their representation (chapter 3).
 
 
 ============
@@ -13,26 +20,10 @@ FIXME: Add references.
 Automaton on the `abc' alphabet.
 Has n states in its original form and 2^n states once determinized.
 
+Note: aut_ladybird has the same property and is the preferred benchmark
+      automaton.
 
-==================
--- aut_debruijn --
-==================
-
-FIXME.
-
-
-==================
--- aut_ladybird --
-==================
-
-FIXME.
-
-
-====================
--- aut_linear_eps --
-====================
-
-FIXME.
+FIXME: Remove, since aut_ladybird is very similar to aut_2n.
 
 
 ===========
@@ -41,6 +32,8 @@ FIXME.
 
 A simple automaton that recognizes words containing `b' on the
 `ab' alphabet.
+
+[See 'b1.xml' in TAF-Kit manual]
 
 
 ==================
@@ -54,3 +47,34 @@ the two states.
 * n states.
 * state 0 is initial and final.
 
+
+==================
+-- aut_debruijn --
+==================
+
+Automaton used for minimization benchmarks.
+
+FIXME: Add details.
+
+
+==================
+-- aut_ladybird --
+==================
+
+Non-deterministic automaton on the `abc' alphabet.
+Has n states in its original form and 2^n states once determinized.
+Because of this property, it is used in many benchmarks.
+
+[See 'ladybird-6.xml' in TAF-Kit manual]
+
+
+====================
+-- aut_linear_eps --
+====================
+
+Automaton on the 'a' alphabet.
+Has n * 500 states.
+Each state with an even index has a spontaneous transition to the next state.
+Each state with an odd index has a transition labeled by 'a' to the next state.
+
+This automaton is used solely for the eps-removal benchmark.

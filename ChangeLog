@@ -1,3 +1,13 @@
+2009-09-14  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update benchmark documentation.
+
+	* src/bench/README,
+	* src/bench/common/README_AUTOMATA: Update.
+	* src/bench/common/Makefile.am: Add file.
+	* src/bench/common/bench_constructs.cc: New program, generate a
+	sample of the benchmark automata in dot format.
+
 2009-09-11  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Remove seq in benchmarks.
