@@ -1,4 +1,11 @@
-2009-09-08  Alexandre Duret-Lutz  <adl@va-et-vient.net>
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	More make portability for FreeBSD.
+
+	* data/automata/char-z/Makefile.am (b1.xml): Do not use $< in a
+	non-suffix rules.
+
+2009-09-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* bootstrap: force Automake-1.11 if available.
 
