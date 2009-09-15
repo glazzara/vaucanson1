@@ -30,7 +30,7 @@
 	without using --with.  People will set CPPFLAGS and LDFLAGS if
 	they have an unusual Boost installation root.  Take the minimum
 	version as argument.
-	* configure.ac: Adjust call eo VCSN_XML, and remove the definition
+	* configure.ac: Adjust call to VCSN_XML, and remove the definition
 	of MORE_DISTCHECK_CONFIGURE_FLAGS.
 
 2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
