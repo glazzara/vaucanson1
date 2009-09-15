@@ -29,7 +29,7 @@ CLEANFILES += $(nodist_char_z_automata_DATA)
 
 # This automaton counts the number of bs.
 b1.xml: ../char-b/b1.xml
-	sed -e 's/set="B"/set="Z"/g' $< >$@.tmp
+	sed -e 's/set="B"/set="Z"/g' ../char-b/b1.xml >$@.tmp
 	mv $@.tmp $@
 
 c1_CPPFLAGS = $(AM_CPPFLAGS)
