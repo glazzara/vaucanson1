@@ -1,3 +1,15 @@
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Do not use AX_BOOST_BASE.
+
+	* build-aux/ax_boost_base.m4: Delete.
+	* build-aux/Makefile.am (dist_m4data_DATA): Remove
+	ax_boost_base.m4.
+	* build-aux/vcsn-boost.m4: New file.
+	* configure.ac: Use VCSN_BOOST instead of AX_BOOST_BASE.  The
+	latter did too much and we want people to simply set CPPFLAGS
+	and LDFLAGS if they have an unusual Boost installation root.
+
 2009-09-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix run-time computation of automata path.
