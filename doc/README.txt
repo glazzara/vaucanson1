@@ -78,16 +78,59 @@ check the whole library.  Running the test suite may require up to
 10GB of free space and several hours.
 
 
-Additional features
--------------------
+Requirements
+============
 
-To specify a special path for the Xerces-C library::
+Vaucanson was tested with the `GNU Compiler Collection (GCC)`_ version
+4.1.x to 4.4.x.
 
-	./configure --with-xerces=/absolute/path/to/xerces
+.. _GNU Compiler Collection (GCC): http://gcc.gnu.org/
+.. _ICC: http://www.intel.com/software/products/compilers/
 
-To specify a special path for the Boost-C++ library::
+TAF-Kit and some test cases can use the AT&T dot format to save
+automaton in a human readable file.  You should install Graphviz_ to
+visualize these ``.dot`` files or run the test suite.
 
-	./configure --with-boost=/absolute/path/to/boost
+.. _Graphviz: http://www.research.att.com/sw/tools/graphviz/
+
+The XML I/O system is based on the Apache `Xerces-C++`_ library
+version 2.3 or above.
+
+.. _Xerces-C++: http://xml.apache.org/xerces-c/
+
+The C++ Application Binary Interface (ABI) of the Xerces-C++ library
+must be the same as the C++ ABI of the compiler used to built
+Vaucanson's XML I/O system.  In particular, users of Fink or
+DarwinPorts on MacOS should pay attention to the compiler that was
+used to build their version of the Xerces-C++ library, as it might
+differ from the one used to build Vaucanson.  Vaucanson should work
+with any version after 2.3.
+
+.. _Boost: http://www.boost.org/
+
+`Boost`_ has been used since Vaucanson 1.1. It is a C++ library which
+provides many useful objects, including hash tables. Currently, Boost
+is used in algorithms only, but its use shall be extended to automata
+structures and other portions of code. You must install this library
+on your system.  Vaucanson should support any version after 1.34.
+
+
+Libraries installed in non-standard directories
+-----------------------------------------------
+
+If you have installed Xerces-C++ or Boost in a non-standard directory
+(i.e., a directory that is not searched by default by your C++
+compiler), you will have to set the ``CPPFLAGS`` and ``LDFLAGS``
+variables to pass the necessary ``-I`` and ``-L`` options to the
+preprocessor and linker.
+
+For instance if you installed Xerces-C++ in ``/opt/xerces/`` and Boost in ``/opt/boost/`` you should run ``./configure`` as follows::
+
+	./configure CPPFLAGS="-I/opt/xerces -I/opt/boost" LDFLAGS="-L/opt/xerces -L/opt/boost"
+
+
+Graph implementations
+---------------------
 
 Vaucanson can use two graph implementations: ``listg`` is a
 representation based on adjacency lists, while ``bmig`` is a
@@ -148,43 +191,6 @@ taf-kit
 
 cbs
    C++ Benchmarking Suite.
-
-Requirements
-============
-
-Vaucanson was tested with the `GNU Compiler Collection (GCC)`_ version
-4.1.x and 4.2.x, and with ICC_ version 9 and 10.1.  The code is fully
-compliant with the ISO C++ standard (ISO-IEC 14882) to permit a higher
-portability in the future.
-
-.. _GNU Compiler Collection (GCC): http://gcc.gnu.org/
-.. _ICC: http://www.intel.com/software/products/compilers/
-
-TAF-Kit and some test cases can use the AT&T dot format to save
-automaton in a human readable file.  You should install Graphviz_ to
-visualize these ``.dot`` files or run the test suite.
-
-.. _Graphviz: http://www.research.att.com/sw/tools/graphviz/
-
-The XML I/O system is based on the Apache `Xerces-C++`_ library
-version 2.3 or above.
-
-.. _Xerces-C++: http://xml.apache.org/xerces-c/
-
-The C++ Application Binary Interface (ABI) of the Xerces-C++ library
-must be the same as the C++ ABI of the compiler used to built
-Vaucanson's XML I/O system.  In particular, users of Fink or
-DarwinPorts on MacOS should pay attention to the compiler that was
-used to build their version of the Xerces-C++ library, as it might
-differ from the one used to build Vaucanson.
-
-.. _Boost: http://www.boost.org/
-
-`Boost`_ has been introduced since Vaucanson 1.1. It is a C++ library
-which provides many useful objects, including hash tables. Currently,
-Boost is used in algorithms only, but its use shall be extended to
-automata structures and other portions of code. You must install this
-library on your system.
 
 
 Using Vaucanson
