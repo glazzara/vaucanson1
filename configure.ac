@@ -25,6 +25,11 @@ AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 AC_CONFIG_SUBDIRS([cbs])
 
+
+# Propagate configure arguments to distcheck.
+AC_SUBST([DISTCHECK_CONFIGURE_FLAGS],
+         [$ac_configure_args --enable-demos --enable-bench])
+
 # Check the default graph implementation near the top, this way we can
 # quickly react to incorrect values.
 ac_default_graph_impl=listg
