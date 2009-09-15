@@ -88,12 +88,8 @@ LT_INIT([disable-static])
 # Where to install Emacs files.
 AM_PATH_LISPDIR
 
-VCSN_XML
-
-AC_SUBST([MORE_DISTCHECK_CONFIGURE_FLAGS])
-if test "${with_xerces+set}" = set; then
-  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-xerces=$with_xerces"
-fi
+# Xerces-C++ >= 2.3
+VCSN_XML(2,3)
 
 VCSN_TAF_KIT
 

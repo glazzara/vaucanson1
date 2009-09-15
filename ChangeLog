@@ -1,5 +1,16 @@
 2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Remove --with-xerces.
+
+	* build-aux/vcsn-xml.m4: Rewrite using a more recent syntax, and
+	without using --with.  People will set CPPFLAGS and LDFLAGS if
+	they have an unusual Boost installation root.  Take the minimum
+	version as argument.
+	* configure.ac: Adjust call eo VCSN_XML, and remove the definition
+	of MORE_DISTCHECK_CONFIGURE_FLAGS.
+
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Do not use AX_BOOST_BASE.
 
 	* build-aux/ax_boost_base.m4: Delete.
