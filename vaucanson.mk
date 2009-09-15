@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -18,14 +18,11 @@ AM_CPPFLAGS = \
 -I$(top_builddir)/include \
 -I$(top_srcdir)/include \
 -I$(top_srcdir)/cbs/include \
--I$(top_builddir)/cbs/include \
-$(BOOST_CPPFLAGS)
+-I$(top_builddir)/cbs/include
 
 benchlib = $(top_builddir)/cbs/lib/libbench.la
 
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
-
-AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 # Add this to CPPFLAGS to use the shipped data.
 XSD_CPPFLAGS = -DVCSN_DATA_PATH="\"$(top_srcdir)/data\""

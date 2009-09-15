@@ -1,5 +1,15 @@
 2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Eradicate empty variables tied to --with options.
+
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Remove
+	MORE_DISTCHECK_CONFIGURE_FLAGS.
+	* vaucanson.mk (AM_CPPFLAGS): Remove BOOST_FLAGS.
+	(AM_LDFLAGS): Remove.
+	* taf-kit/src/Makefile.am (AM_LDFLAGS): Set with =, not +=.
+
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Remove --with-xerces.
 
 	* build-aux/vcsn-xml.m4: Rewrite using a more recent syntax, and
