@@ -1,5 +1,9 @@
 2009-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/generate_headers.sh: Use the full name to erase a file.
+
+2009-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/generate_headers.sh: Remove stray context files.
 
 2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>

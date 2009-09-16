@@ -187,8 +187,8 @@ main()
   for header in `find vaucanson/contexts -type f -name '*.hh'`; do
     base=${header##*/}
     if ! test -f "vaucanson/automata/generic_contexts/$base"; then
-	echo deleting $base
-	rm -f $base
+	echo deleting $header
+	rm -f $header
     fi
   done
 }
