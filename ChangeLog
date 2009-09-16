@@ -1,3 +1,50 @@
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Propagate configure arguments to distcheck.
+
+	* configure.ac (DISTCHECK_CONFIGURE_FLAGS): Substitute it from
+	here, and include $ac_configure_args.
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Remove.
+
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* doc/README.txt: Update instructions for building with Boost
+	and Xerces in a non-standard directory.  Move the "Requirements"
+	section before these instructions.
+
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Eradicate empty variables tied to --with options.
+
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Remove
+	MORE_DISTCHECK_CONFIGURE_FLAGS.
+	* vaucanson.mk (AM_CPPFLAGS): Remove BOOST_FLAGS.
+	(AM_LDFLAGS): Remove.
+	* taf-kit/src/Makefile.am (AM_LDFLAGS): Set with =, not +=.
+
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Remove --with-xerces.
+
+	* build-aux/vcsn-xml.m4: Rewrite using a more recent syntax, and
+	without using --with.  People will set CPPFLAGS and LDFLAGS if
+	they have an unusual Boost installation root.  Take the minimum
+	version as argument.
+	* configure.ac: Adjust call to VCSN_XML, and remove the definition
+	of MORE_DISTCHECK_CONFIGURE_FLAGS.
+
+2009-09-15  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Do not use AX_BOOST_BASE.
+
+	* build-aux/ax_boost_base.m4: Delete.
+	* build-aux/Makefile.am (dist_m4data_DATA): Remove
+	ax_boost_base.m4.
+	* build-aux/vcsn-boost.m4: New file.
+	* configure.ac: Use VCSN_BOOST instead of AX_BOOST_BASE.  The
+	latter did too much and we want people to simply set CPPFLAGS
+	and LDFLAGS if they have an unusual Boost installation root.
+
 2009-09-16  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/generate_headers.sh: Use the full name to erase a file.

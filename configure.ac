@@ -25,6 +25,11 @@ AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 AC_CONFIG_SUBDIRS([cbs])
 
+
+# Propagate configure arguments to distcheck.
+AC_SUBST([DISTCHECK_CONFIGURE_FLAGS],
+         [$ac_configure_args --enable-demos --enable-bench])
+
 # Check the default graph implementation near the top, this way we can
 # quickly react to incorrect values.
 ac_default_graph_impl=listg
@@ -80,17 +85,7 @@ AC_ARG_ENABLE([bench],
 AM_CONDITIONAL([ENABLE_BENCH], [test "x$enable_bench" = "xyes"])
 
 # Boost
-AX_BOOST_BASE([1.34])
-# Do not require boost::serialization headers.
-BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_MULTI_INDEX_DISABLE_SERIALIZATION"
-# FIXME: It would be nice to check that the Boost package we require
-# (boost::graph, boost::multi_index...)
-
-AC_SUBST([MORE_DISTCHECK_CONFIGURE_FLAGS])
-if test "${with_boost+set}" = set; then
-  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-boost=$with_boost"
-fi
-
+VCSN_BOOST([1.34], [103400])
 
 # Libtool used
 LT_INIT([disable-static])
@@ -98,11 +93,8 @@ LT_INIT([disable-static])
 # Where to install Emacs files.
 AM_PATH_LISPDIR
 
-VCSN_XML
-
-if test "${with_xerces+set}" = set; then
-  MORE_DISTCHECK_CONFIGURE_FLAGS="$MORE_DISTCHECK_CONFIGURE_FLAGS --with-xerces=$with_xerces"
-fi
+# Xerces-C++ >= 2.3
+VCSN_XML(2,3)
 
 VCSN_TAF_KIT
 

@@ -22,9 +22,6 @@ SUBDIRS = gnulib cbs lib include src data $(MAYBE_TAF_KIT) \
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS m4/gnulib-cache.m4
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-demos --enable-bench \
-  $(MORE_DISTCHECK_CONFIGURE_FLAGS)
-
 # Prevent accidental edition of generated files.
 $(srcdir)/README: $(srcdir)/doc/README.txt
 	rm -f $(srcdir)/README
