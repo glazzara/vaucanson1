@@ -11,17 +11,17 @@ bench-clean: aut_2n-clean aut_debruijn-clean
 aut_2n:
 	@mkdir aut_2n_moore;				\
 	mkdir aut_2n_hopcroft;				\
-	mkdir aut_2n_brzozowski;				\
+	mkdir aut_2n_brzozowski;			\
 	if [ ! -z $(HAS_OPENFST) ]; then		\
 	  mkdir aut_2n_openfst;				\
 	fi;						\
 	echo '====================================';	\
 	echo '|Minimization bench - 2^n automaton|';	\
 	echo '====================================';	\
-	for n in $$(seq 11 16); do			\
+	for n in 11 12 13 14 15 16; do			\
 	  echo "----------------------For $$n states";	\
 	  echo "--------------VCSN (moore):";		\
-	  ./minimization_aut_2n_moore_bench $$n;		\
+	  ./minimization_aut_2n_moore_bench $$n;	\
 	  echo "--------------VCSN (hopcroft):";	\
 	  ./minimization_aut_2n_hopcroft_bench $$n;	\
 	  if [ $$n -lt 13 ]; then			\
@@ -42,26 +42,26 @@ aut_2n-clean:
 
 aut_debruijn:
 	@mkdir aut_debruijn_moore;				\
-	mkdir aut_debruijn_hopcroft;			\
-	mkdir aut_debruijn_brzozowski;			\
-	if [ ! -z $(HAS_OPENFST) ]; then		\
-	  mkdir aut_debruijn-openfst;			\
-	fi;						\
-	echo '================================';	\
-	echo '|Minimization bench - De Bruijn|';	\
-	echo '================================';	\
-	for n in $$(seq 15 18); do			\
-	  echo "----------------------For $$n states";	\
-	  echo "--------------VCSN (moore):";		\
-	  ./minimization_aut_debruijn_moore_bench $$n;	\
-	  echo "--------------VCSN (hopcroft):";	\
+	mkdir aut_debruijn_hopcroft;				\
+	mkdir aut_debruijn_brzozowski;				\
+	if [ ! -z $(HAS_OPENFST) ]; then			\
+	  mkdir aut_debruijn-openfst;				\
+	fi;							\
+	echo '================================';		\
+	echo '|Minimization bench - De Bruijn|';		\
+	echo '================================';		\
+	for n in 15 16 17 18; do				\
+	  echo "----------------------For $$n states";		\
+	  echo "--------------VCSN (moore):";			\
+	  ./minimization_aut_debruijn_moore_bench $$n;		\
+	  echo "--------------VCSN (hopcroft):";		\
 	  ./minimization_aut_debruijn_hopcroft_bench $$n;	\
-	  echo "--------------VCSN (brzozowski):";	\
+	  echo "--------------VCSN (brzozowski):";		\
 	  ./minimization_aut_debruijn_brzozowski_bench $$n;	\
-	  if [ ! -z $(HAS_OPENFST) ]; then		\
-	    echo "--------------OpenFST:";		\
-	    ./minimization_aut_2n_openfst_bench $$n;	\
-	  fi;						\
+	  if [ ! -z $(HAS_OPENFST) ]; then			\
+	    echo "--------------OpenFST:";			\
+	    ./minimization_aut_2n_openfst_bench $$n;		\
+	  fi;							\
 	done;
 
 aut_debruijn-clean:

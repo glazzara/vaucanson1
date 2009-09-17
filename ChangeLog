@@ -84,6 +84,36 @@
 	computation.  This was causing the wrong value of VCSN_DATA_PATH
 	to be defined on my test installation on FreeBSD.
 
+2009-09-14  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Update benchmark documentation.
+
+	* src/bench/README,
+	* src/bench/common/README_AUTOMATA: Update.
+	* src/bench/common/Makefile.am: Add file.
+	* src/bench/common/bench_constructs.cc: New program, generate a
+	sample of the benchmark automata in dot format.
+
+2009-09-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Remove seq in benchmarks.
+
+	* src/bench/composition/Makefile.bench,
+	* src/bench/derived_terms/Makefile.bench,
+	* src/bench/determinization/Makefile.bench,
+	* src/bench/eps_removal/Makefile.bench,
+	* src/bench/eval/Makefile.bench,
+	* src/bench/minimization/Makefile.bench,
+	* src/bench/product/Makefile.bench,
+	* src/bench/quotient/Makefile.bench: List all the values instead.
+
+2009-09-11  d-halluin  <d-halluin@lrde.epita.fr>
+
+	Remove --with-openfst.
+
+	* configure.ac: Enable OpenFST benchmarks if fstcompile
+	is accessible from the current PATH.
+
 2009-09-07  d-halluin  <d-halluin@lrde.epita.fr>
 
 	Update CBS.

@@ -114,10 +114,8 @@ Note that step 1 can take longer that step 2.
 =============
 
 If OpenFST is available on the current host, some extra benchmarks are
-made.
-
-Use the `--with-openfst' configuration option to specify the path
-to OpenFST binaries.
+made.  These benchmarks are activated during the ./configure if fstcompile
+is directly available from the PATH.
 
 OpenFST benchmarks are similar to Vaucanson benchmarks and a corresponding
 source file ending in _openfst_bench.hh
@@ -137,3 +135,5 @@ These are the general steps:
    of the benchmarked algorithm.
 5. Remove temporary files, write results.
 
+Note that contrary to Vaucanson benchmarks, OpenFST benchmarks
+include file I/O.  This may introduce a bias in the results.

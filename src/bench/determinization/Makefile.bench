@@ -14,7 +14,7 @@ bench: all
 	echo '======================================';		\
 	echo '|Determinization bench - aut_ladybird|';		\
 	echo '======================================';		\
-	for n in $$(seq 12 20); do				\
+	for n in 12 13 14 15 16 17 18 19 20; do			\
 	  echo "----------------------For $$n";			\
 	  echo "--------------VCSN:";				\
 	  ./determinization_aut_ladybird_bench $$n;		\
@@ -26,7 +26,7 @@ bench: all
 	echo '================================';		\
 	echo '|Determinization bench - aut_2n|';		\
 	echo '================================';		\
-	for n in $$(seq 14 20); do				\
+	for n in 14 15 16 17 18 19 20; do			\
 	  echo "----------------------For $$n states";		\
 	  echo "--------------VCSN:";				\
 	  ./determinization_aut_2n_bench $$n;			\
