@@ -184,9 +184,8 @@ main()
   # (e.g. src/tests/sanity/generate_files.sh) will glob for files to
   # generate code.  Let's remove these files.  (This fix is only a
   # hack; the real fix is to stop globbing.  Globbing is evil.)
-  for header in `find vaucanson/contexts -type f -name '*.hh'`; do
-    base=${header##*/}
-    if ! test -f "vaucanson/automata/generic_contexts/$base"; then
+  for header in `find vaucanson/contexts -type f -name '*.hh'` vaucanson/*.hh; do
+    if grep -F -q "$header" Makefile.am generic_contexts.mk; then :; else
 	echo deleting $header
 	rm -f $header
     fi
