@@ -7,3 +7,5 @@
 /missing
 /py-compile
 /tests.m4
+/libtool.m4
+/lt*.m4
