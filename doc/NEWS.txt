@@ -2,11 +2,40 @@
  Release notes for Vaucanson_
 ==============================
 
-:Contact: vaucanson@lrde.epita.fr
-
 This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
+
+:Contact: vaucanson@lrde.epita.fr
+
+Vaucanson 1.3.2, September 22th, 2009
+=====================================
+
+This release contains minor adjustments to the build infrastructure,
+and a couple of bug fixes for TAF-Kit.
+
+- The build infrastructure has been updated to newer Autotools
+  (Autoconf 1.64, Automake 1.11, Libtool 2.2.6).  This simplified our
+  test-suite, and speeded-up ``configure``.
+
+- We removed the ``--with[out]-xerces`` and ``--with[out]-boost``
+  options from ``configure``.  These libraries are always needed, and
+  if you have them installed in a non-standard location, you should
+  specify ``CPPFLAGS`` and ``LDFLAGS`` as explained in the ``README``
+  file.
+
+- Makefiles are compatibles with BSD Make.
+
+- The demos of ``cbs/`` are no longer built by default because some of
+  them require profiling libraries which are not always installed.
+
+- Two bugs have been corrected in TAF-Kit:
+
+  + the default ``VCSN_DATA_PATH`` is now correctly derived from
+    the ``--prefix`` option passed to ``configure``.
+  + looking up automata from the automata library will now work
+    even if TAF-Kit is called using an absolute path.
+
 
 Vaucanson 1.3.1, July 8th, 2009
 ===============================
@@ -33,7 +62,7 @@ Vaucanson 1.3.1, July 8th, 2009
   + CBS (C++ Benchmarking Suite) has been added into Vaucanson to
     measure its performances.
   + Algorithms have been equiped with CBS.
-  + Benchmarks can be launched with ``make bench`` generating 
+  + Benchmarks can be launched with ``make bench`` generating
     callgraphs in dot format and text files.
 
 Vaucanson 1.3, May 26th, 2009
