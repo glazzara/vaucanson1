@@ -22,7 +22,7 @@ DEST=/lrde/dload/vaucanson/$rev
 VERSION=`autoconf --trace='AC_INIT:$2'`
 
 # Always do "cp then mv" when uploading the file, so that someone
-# cannot start a download why the destination file is incomplete.
+# cannot start a download while the destination file is incomplete.
 
 # Upload the tarball
 mkdir -p $DEST
