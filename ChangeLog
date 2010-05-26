@@ -1,5 +1,12 @@
 2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix code for detection of OpenFST.
+
+	* configure.ac (fstcompile): Run it in a subshell to hide the
+	error message if it is missing.
+
+2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* configure.ac (DISTCHECK_CONFIGURE_FLAGS): Add missing quotes.
 
 2009-09-30  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>

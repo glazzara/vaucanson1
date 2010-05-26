@@ -48,7 +48,7 @@ esac
 
 # Enable OpenFST benchmarks if fstcompile is available.
 ac_enable_openfst=no
-if [fstcompile < /dev/null > /dev/null]; then
+if (fstcompile) < /dev/null >/dev/null 2>/dev/null; then
   ac_enable_openfst=yes
   AC_MSG_NOTICE([OpenFST benchmarks are enabled.])
 else
