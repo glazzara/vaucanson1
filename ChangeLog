@@ -1,5 +1,23 @@
 2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Disable the 'ascii' alphabet.
+
+	Presently we cannot parse 'a ++ b' with the ascii alphabet even if
+	OP_PLUS=++.  The above is parsed as the concatenation of six
+	ascii letters.
+
+	* taf-kit/src/predefined_alphabets.hxx (predefined_alphabets):
+	Remove the ascii entry.
+	* doc/manual/taf-kit-manual.tex (Character alphabets): Do not
+	mention the ascii alphabet.
+	* taf-kit/tests/vcsn-char-b.test,
+	taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-char-z.test: Disable all tests that use
+	the ASCII alphabet, or rewrite them using another alphabet.
+
+2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/HACKING.txt: Typo.
 
 2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
