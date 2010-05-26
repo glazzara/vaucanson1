@@ -1,3 +1,43 @@
+2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce one_eps_closure() and rewrite standard.hh algorithms
+	using it.
+
+	* include/vaucanson/algorithms/one_eps_closure.hh,
+	include/vaucanson/algorithms/one_eps_closure.hxx: New files
+	originally written by Sylvain Lombardy for Vaucanson 2, and
+	adapted to this code base.
+	* include/vaucanson/algorithms/standard.hh,
+	include/vaucanson/algorithms/standard.hxx: Rewriting of
+	most algorithms by Jacques Sakarovitch for Vaucanson 2,
+	and then backported to this code base.
+	* include/vaucanson/algorithms/standard_of.hxx: Adjust calls,
+	and use functions of standard.hh when appropriate.
+	* include/vaucanson/algorithms/sum.hh,
+	include/vaucanson/algorithms/sum.hxx: Delete.
+	* include/Makefile.am: Remove sum.hh and sum.hxx, add
+	one_eps_closure.hh and one_eps_closure.hxx.
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	Add a op_starable() specialization that matches the test
+	in the op_in_star() specialization.
+	* include/vaucanson/algorithms/normalized.hxx: Call
+	union_here() instead of sum_here() and adjust include.
+	* include/vaucanson/contexts/automaton_functions.thh: Do not
+	include sum.hh.
+	* taf-kit/src/common_automaton_commands.hh: Rename sum to union_
+	and union_of_standard to sum_of_standard.
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh:
+	Rename as ...
+	* src/tests/include/tests/automata/algos/label_aware_graphs/union_test.hh:
+	... this and change calls to sum() as calls to union_().
+	* src/tests/include/Makefile.am (noinst_HEADERS): Adjust.
+	* taf-kit/tests/vcsn-char-z.test, taf-kit/tests/vcsn-char-r.test:
+	Rename calls to union-of-standard as sum-of-standard.
+	* taf-kit/tests/vcsn-char-b.test: Add a test case for standard.
+	* taf-kit/tests/vcsn-char-r.test: New tests for standard and
+	quotient.
+
 2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Disable the 'ascii' alphabet.

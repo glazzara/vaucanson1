@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  *
  * Several algorithms concerning standard automata.
  *
- * This  file contains different  operations which  can be  applied on
+ * This file contains different operations which can be applied on
  * standard automata.
  *
  * For Boolean automata, see ETA Chapter 1, Section 5.1.
@@ -33,21 +33,27 @@
  * https://trac.lrde.org/vaucanson/wiki/StandardNormalizedAutomata
  *
  * @see standardize(), is_standard(), concat_of_standard(),
- *      union_of_standard(), star_of_standard()
+ *      sum_of_standard(), star_of_standard(), union_()
  */
 /** @} */
 
-// INTERFACE: void standardize(Automaton& a) { return vcsn::standardize(*a); }
-// INTERFACE: void standardize(GenAutomaton& a) { return vcsn::standardize(*a); }
+// INTERFACE: void union_here(Automaton& a1, const Automaton& a2) { return vcsn::union_here(*a1, *a2); }
+// INTERFACE: void union_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_here(*a1, *a2); }
+
+// INTERFACE: Automaton union_(const Automaton& a1, const Automaton& a2) { return vcsn::union_(*a1, *a2); }
+// INTERFACE: GenAutomaton union_(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_(*a1, *a2); }
 
 // INTERFACE: bool is_standard(const Automaton& a) { return vcsn::is_standard(*a); }
 // INTERFACE: bool is_standard(const GenAutomaton& a) { return vcsn::is_standard(*a); }
 
-// INTERFACE: void union_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
-// INTERFACE: void union_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
+// INTERFACE: void standardize(Automaton& a) { return vcsn::standardize(*a); }
+// INTERFACE: void standardize(GenAutomaton& a) { return vcsn::standardize(*a); }
 
-// INTERFACE: Automaton union_of_standard(const Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard(*a1, *a2); }
-// INTERFACE: GenAutomaton union_of_standard(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard(*a1, *a2); }
+// INTERFACE: void sum_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::sum_of_standard_here(*a1, *a2); }
+// INTERFACE: void sum_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum_of_standard_here(*a1, *a2); }
+
+// INTERFACE: Automaton sum_of_standard(const Automaton& a1, const Automaton& a2) { return vcsn::sum_of_standard(*a1, *a2); }
+// INTERFACE: GenAutomaton sum_of_standard(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum_of_standard(*a1, *a2); }
 
 // INTERFACE: void concat_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::concat_of_standard_here(*a1, *a2); }
 // INTERFACE: void concat_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concat_of_standard_here(*a1, *a2); }
@@ -68,6 +74,52 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
+   * In place union of two automata.
+   *
+   * This function adds states and transitions of a second automaton
+   * to states and transitions of a first automaton.
+   *
+   * @param lhs  First automaton and destination of the union
+   * @param rhs  Second automaton of the union
+   *
+   * @see union_()
+   */
+  template<typename A, typename AI1, typename AI2>
+  void
+  union_here(Element<A, AI1>& lhs, const Element<A, AI2>& rhs);
+
+  /**
+   * Union of two automata.
+   *
+   * This function returns the fresh union of two automata.  It puts
+   * transitions and states of the two automata together, and create
+   * a new one with the result.
+   *
+   * @param lhs  First automaton of the union
+   * @param rhs  Second automaton of the union
+   *
+   * @note the name is @c union_ instead of @c union because the
+   * latter is a reserved keyword.
+   *
+   * @see union_here()
+   */
+  template<typename A, typename AI1, typename AI2>
+  Element<A, AI1>
+  union_(const Element<A, AI1>& lhs, const Element<A, AI2>& rhs);
+
+
+  /**
+   * Returns true iff the input automaton is standard.
+   *
+   * @param a The automaton to test
+   *
+   * @see standardize()
+   */
+  template<typename A, typename AI>
+  bool
+  is_standard(const Element<A, AI>& a);
+
+  /**
    * Returns a standard automaton associated to the input.
    *
    * @param a The automaton to standardize
@@ -79,55 +131,44 @@ namespace vcsn {
   standardize(Element<A, AI>& a);
 
   /**
-   * Returns true if the input automaton is standard.
+   * In-place sum of two standard automata.
    *
-   * @param a The automaton to test
+   * This function makes the sum of two standard automata.
+   * The result is a standard automaton.
    *
-   * @see standardize()
-   */
-  template<typename A, typename AI>
-  bool
-  is_standard(const Element<A, AI>& a);
-
-  /**
-   * In-place union of two standard automata.
-   *
-   * This function make the union of two standard automata. The result is a
-   * standard automaton.
-   *
-   * @param lhs The first automaton (will contain the result)
+   * @param lhs The first automaton (it will contain the result)
    * @param rhs The second automaton
    *
-   * @see standardize(), is_standard(), union_of_standard()
+   * @see standardize(), is_standard(), sum_of_standard()
    */
   template<typename A, typename AI1, typename AI2>
   void
-  union_of_standard_here(Element<A, AI1>& lhs,
-			 const Element<A, AI2>& rhs);
+  sum_of_standard_here(Element<A, AI1>& lhs,
+		       const Element<A, AI2>& rhs);
 
   /**
-   * Return a fresh union of two standard automata.
+   * Return a fresh sum of two standard automata.
    *
-   * As @c union_of_standard_here, this function build the union of two
-   * automatons, but it builds a new one.
+   * As @c sum_of_standard_here, this function build the sum of two
+   * standard automata, but it builds a new one.
    *
    * @param lhs The first automaton
    * @param rhs The second automaton
    *
-   * @see standardize(), is_standard(), union_of_standard_here()
+   * @see standardize(), is_standard(), sum_of_standard_here()
    */
   template<typename A, typename AI1, typename AI2>
   Element<A, AI1>
-  union_of_standard(const Element<A, AI1>& lhs,
-		    const Element<A, AI2>& rhs);
+  sum_of_standard(const Element<A, AI1>& lhs,
+		  const Element<A, AI2>& rhs);
 
   /**
    * In-place concatenation of two standard automata.
    *
-   * This function make the concatenation of two standard automata. The
-   * result is a standard automaton.
+   * This function makes the concatenation of two standard
+   * automata. The result is a standard automaton.
    *
-   * @param lhs The first automaton (will contain the result)
+   * @param lhs The first automaton (it will contain the result)
    * @param rhs The second automaton
    *
    * @see standardize(), is_standard(), concat_of_standard()
@@ -140,8 +181,8 @@ namespace vcsn {
   /**
    * Return a fresh concatenation of two standard automata.
    *
-   * As @c concat_of_standard_here, this function build the union of two
-   * automatons, but it builds a new one.
+   * As @c concat_of_standard_here, this function builds the union of
+   * two automata, but it builds a new one.
    *
    * @param lhs The first automaton
    * @param rhs The second automaton
@@ -152,12 +193,11 @@ namespace vcsn {
   Element<A, AI1>
   concat_of_standard(const Element<A, AI1>& lhs,
 		     const Element<A, AI2>& rhs);
-
   /**
-   * In-place star transformation of a standard automata.
+   * In-place star transformation of a standard automaton.
    *
-   * This function make the star transformation of a standard automaton,
-   * and replace those given by the result.
+   * This function makes the star transformation of a standard
+   * automaton, and replaces those given by the result.
    *
    * @param a The automaton to transform
    *
@@ -170,8 +210,8 @@ namespace vcsn {
   /**
    * Return the fresh star transformation of a standard automata.
    *
-   * As @c star_of_standard_here, this function applies star on an automaton,
-   * but it build a new automaton.
+   * As @c star_of_standard_here, this function applies star on an
+   * automaton, but it builds a new automaton.
    *
    * @param a The automaton on which star must be applied.
    *

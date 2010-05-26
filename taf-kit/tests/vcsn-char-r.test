@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+# Copyright (C) 2006, 2007, 2008, 2010 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -22,7 +22,15 @@ VCSN=vcsn-char-r
 
 $VCSN -aab standard '{2}a + b' > s2ab.xml
 $VCSN -aab thompson '{-1}({2}a + b)' \| eps-removal - > t2ab.xml
-$VCSN union-of-standard s2ab.xml t2ab.xml > u2ab.xml
+$VCSN sum-of-standard s2ab.xml t2ab.xml > u2ab.xml
 $VCSN reduce u2ab.xml \| is-empty -
 rm s2ab.xml t2ab.xml u2ab.xml
 
+
+$VCSN -aab standard '((a.a*)(a.a*)*)' \| quotient - > a2.xml
+$VCSN -aab standard 'a({2}a)*' \| quotient - > a2b.xml
+cmp a2.xml a2b.xml
+
+$VCSN -aab standard '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' \| quotient - > a3.xml
+$VCSN -aab standard 'a({3}a)*' \| quotient - > a3b.xml
+cmp a3.xml a3b.xml

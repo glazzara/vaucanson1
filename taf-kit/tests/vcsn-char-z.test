@@ -67,8 +67,8 @@ test $($VCSN eval star_2a_41.xml a) -eq 8
 test $($VCSN eval star_2a_41.xml aa) -eq 64
 test $($VCSN eval star_2a_41.xml aaa) -eq 512
 
-# union-of-standard
-$VCSN union-of-standard $standard_c1 $standard_c1 \| is-standard -
+# sum-of-standard
+$VCSN sum-of-standard $standard_c1 $standard_c1 \| is-standard -
 
 # concat-of-standard
 $VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -

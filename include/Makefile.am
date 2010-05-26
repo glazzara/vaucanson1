@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
 ## The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
@@ -371,6 +371,8 @@ vaucanson/algorithms/normalized.hh				\
 vaucanson/algorithms/normalized.hxx				\
 vaucanson/algorithms/normalized_composition.hh			\
 vaucanson/algorithms/normalized_composition.hxx			\
+vaucanson/algorithms/one_eps_closure.hh				\
+vaucanson/algorithms/one_eps_closure.hxx			\
 vaucanson/algorithms/product.hh					\
 vaucanson/algorithms/product.hxx				\
 vaucanson/algorithms/projection.hh				\
@@ -397,8 +399,6 @@ vaucanson/algorithms/sub_automaton.hh				\
 vaucanson/algorithms/sub_automaton.hxx				\
 vaucanson/algorithms/sub_normalize.hh				\
 vaucanson/algorithms/sub_normalize.hxx				\
-vaucanson/algorithms/sum.hh					\
-vaucanson/algorithms/sum.hxx					\
 vaucanson/algorithms/thompson.hh				\
 vaucanson/algorithms/thompson.hxx				\
 vaucanson/algorithms/transpose.hh				\

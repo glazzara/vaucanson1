@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -88,7 +88,7 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(quotient)
 
 DEFINE_COMMAND(NAME(union)
 	       CODE(/* Empty */)
-	       KEEP(sum(get_aut(args, 1), get_aut(args,2)))
+	       KEEP(union_(get_aut(args, 1), get_aut(args,2)))
 	       RETURNVALUE(0));
 
 DEFINE_TWO_ARGS_COMMAND(ARG_KIND(aut)
@@ -154,7 +154,7 @@ DEFINE_COMMAND(NAME(second_projection)
 		 KEEP(a)					\
 		 RETURNVALUE(0))
 
-DEFINE_COMMAND_OF_STANDARD(union);
+DEFINE_COMMAND_OF_STANDARD(sum);
 
 DEFINE_COMMAND_OF_STANDARD(concat);
 
@@ -205,7 +205,7 @@ COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'."),
     COMMAND_ENTRY(quotient, Aut, "Give the quotient of `aut'."),	\
     COMMAND_ENTRY(realtime, Aut, "Give the realtime version of `aut'."), \
     COMMAND_ENTRY(standardize, Aut, "Give the standard automaton of `aut'."),	\
-    COMMAND_ENTRY(union_of_standard, AutAut,				\
+    COMMAND_ENTRY(sum_of_standard, AutAut,				\
 		   "Give the union of standard automata."),		\
     COMMAND_ENTRY(concat_of_standard, AutAut,				\
 		   "Give the concatenation of standard automata."),	\

@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2010
+// The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -111,16 +112,9 @@ namespace vcsn {
             lhs_finals.push_back (i->first);
           }
 
-          concat_of_standard_here_common(auto_->structure(),
-                                         *auto_,
-                                         *auto_,
-                                         initial_,
-                                         lhs_finals.begin(),
-                                         lhs_finals.end(),
-                                         identity_);
+          concat_of_standard_inside(auto_->structure(),
+				    *auto_, lhs_finals, initial_);
 
-          // Remove the obsolete initial state of rhs
-          auto_->del_state(initial_);
           initial_ = lhs_i;
           return auto_;
 	}
@@ -154,10 +148,8 @@ namespace vcsn {
                ++i)
             auto_->set_final(i->first, i->second);
 
-          union_of_standard_here_common(auto_->structure(),
-                                        *auto_,
-                                        left_i,
-                                        initial_);
+          sum_of_standard_inside(auto_->structure(),
+				 *auto_, left_i, initial_);
 
           initial_ = left_i;
 	  return auto_;
@@ -166,8 +158,22 @@ namespace vcsn {
 
 	MATCH_(Star, node)
 	{
+          AUTOMATON_TYPES(automaton_t);
 	  match(node);
-	  star_of_standard_here_common(auto_->structure(), *auto_, initial_);
+
+	  precondition(auto_->get_final(initial_).starable());
+
+          typedef typename std::list<hstate_t> list_fin_st_t;
+
+          // Store final states and final values and clear it.
+          list_fin_st_t tmp;
+
+          for_all_final_states(f, *auto_)
+	    if (*f != initial_)
+	      tmp.push_back(*f);
+
+	  star_of_standard_inside(auto_->structure(),
+				  *auto_, initial_, tmp);
 	  return auto_;
 	}
 	END
@@ -176,38 +182,11 @@ namespace vcsn {
 	{
 	  const semiring_t&	semiring = automata_set_.series().semiring();
 	  const semiring_elt_t	weight (semiring, w);
+	  const series_set_elt_t ws(auto_->series(), weight);
 	  match(node);
 
-          std::list<htransition_t>	e;
-          for (typename automaton_t::delta_iterator j(auto_->value(), initial_);
-               ! j.done();
-               j.next())
-            e.push_back(*j);
-          for (typename std::list<htransition_t>::const_iterator j = e.begin();
-               j != e.end();
-               ++j)
-          {
-            // FIXME: The following code is only correct when labels are
-            // FIXME: series. We should add meta code to make the code
-            // FIXME: fail at runtime when this function is called
-            // FIXME: with label as letters. However, we cannot afford
-            // FIXME: an error at compile time, because the rest
-            // FIXME: of this matcher is valid for Boolean automata when
-            // FIXME: labels are letter.
-            typedef typename automaton_t::label_t	label_t;
-            typedef Element<series_set_t, label_t>	label_elt_t;
-
-            label_elt_t label (automata_set_.series(), auto_->label_of(*j));
-            label  = weight * label;
-
-            hstate_t dst = auto_->dst_of(*j);
-            auto_->del_transition(*j);
-
-            if (label != zero_as<label_t>::of(automata_set_.series()))
-              auto_->add_transition(initial_, dst, label.value());
-          }
-
-          auto_->set_final(initial_, weight * auto_->get_final(initial_));
+	  left_ext_mult_of_standard_inside(auto_->structure(),
+					   *auto_, initial_, ws);
           return auto_;
 	}
 	END
@@ -218,13 +197,15 @@ namespace vcsn {
 	  const semiring_elt_t	weight (semiring, w);
 	  match(node);
 
-	  for (typename automaton_t::final_iterator f, next = auto_->final().begin();
+	  for (typename automaton_t::final_iterator
+		 f, next = auto_->final().begin();
 	       next != auto_->final().end();)
 	  {
-	    //We need to store the next iterator before using the current one
-	    //to avoid an invalid iterator after having called set_final.
-	    //Indeed, set_final can delete the iterator if its second parameter
-	    //is the zero of the serie.
+	    // We need to store the next iterator before using the
+	    // current one to avoid an invalid iterator after having
+	    // called set_final.  Indeed, set_final() can delete the
+	    // iterator if its second parameter is the zero of the
+	    // series.
 	    f = next;
 	    next++;
 	    auto_->set_final(*f, auto_->get_final(*f) * weight);

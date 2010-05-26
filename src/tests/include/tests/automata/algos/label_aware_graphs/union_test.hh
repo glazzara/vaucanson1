@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_SUM_TEST_HH
-# define VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_SUM_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_UNION_TEST_HH
+# define VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_UNION_TEST_HH
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -25,7 +25,7 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/sum.hh>
+# include <vaucanson/algorithms/standard.hh>
 # include <time.h>
 
 # include <vaucanson/algorithms/aut_to_exp.hh>
@@ -37,7 +37,7 @@ using namespace vcsn::algebra;
 using namespace vcsn::tools;
 
 template <class Auto>
-unsigned sum_test(tests::Tester& tg)
+unsigned union_test(tests::Tester& tg)
 {
   typedef Auto automaton_t;
   AUTOMATON_TYPES(Auto);
@@ -52,12 +52,12 @@ unsigned sum_test(tests::Tester& tg)
   unsigned	success_states = 0;
   unsigned	success_transitions  = 0;
 
-  unsigned	nb_tests_sum = t.test_num();
-  unsigned	nb_tests_sum_done = 0;
-  unsigned	success_sum = 0;
+  unsigned	nb_tests_union = t.test_num();
+  unsigned	nb_tests_union_done = 0;
+  unsigned	success_union = 0;
   unsigned	iter;
 
-  for (unsigned j = 0; j < nb_tests_sum; ++j)
+  for (unsigned j = 0; j < nb_tests_union; ++j)
   {
     iter = 0;
     automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 1, 3);
@@ -76,7 +76,7 @@ unsigned sum_test(tests::Tester& tg)
       semiring_elt_t semiring_zero =
 	zero_as<semiring_elt_value_t>::of(g_rhs_r.structure().series().semiring());
 
-      automaton_t s = sum(auto_lhs, auto_rhs);
+      automaton_t s = union_(auto_lhs, auto_rhs);
 
       monoid_elt_t word_lhs_unknown = exp_lhs.choose_from_supp();
 
@@ -89,10 +89,10 @@ unsigned sum_test(tests::Tester& tg)
       if (iter < 20)
       {
 	if (eval(realtime(s), word_lhs_unknown) != semiring_zero)
-	  ++success_sum;
+	  ++success_union;
 	else
 	{
-	  TEST_FAIL_SAVE("sum",
+	  TEST_FAIL_SAVE("union",
 			 j,
 			 "in union of "
 			 << exp_lhs
@@ -100,36 +100,38 @@ unsigned sum_test(tests::Tester& tg)
 			 << exp_rhs
 			 << std::endl);
 	}
-	++nb_tests_sum_done;
+	++nb_tests_union_done;
       }
       else
-	++nb_tests_sum;
+	++nb_tests_union;
     }
     catch (std::logic_error& e)
     {
       std::cout << e.what() << std::endl;
       std::cout << "Trying again..." << std::endl;
-      ++nb_tests_sum;
+      ++nb_tests_union;
     }
     catch (...)
     {
       std::cout << "Unexpected exception!" << std::endl;
-      ++nb_tests_sum_done;
+      ++nb_tests_union_done;
     }
   }
-  std::string rate_sum;
-  SUCCESS_RATE(rate_sum, success_sum, nb_tests_sum_done);
-  TEST(t, "Union of automata " + rate_sum, nb_tests_sum_done == success_sum);
+  std::string rate_union;
+  SUCCESS_RATE(rate_union, success_union, nb_tests_union_done);
+  TEST(t, "Union of automata " + rate_union,
+       nb_tests_union_done == success_union);
 
   for (unsigned i = 0 ; i < nb_tests; i++)
   {
     automaton_t a = gen.generate(20, 40);
     automaton_t b = gen.generate(10, 20);
-    automaton_t c = sum(a, b);
+    automaton_t c = union_(a, b);
 
     if (a.states().size() + b.states().size() == c.states().size())
       ++success_states;
-    if (a.transitions().size() + b.transitions().size() == c.transitions().size())
+    if (a.transitions().size() + b.transitions().size()
+	== c.transitions().size())
       ++success_transitions;
   }
   std::string rate_states, rate_transitions;
@@ -141,4 +143,4 @@ unsigned sum_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_SUM_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_UNION_TEST_HH

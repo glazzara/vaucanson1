@@ -399,6 +399,12 @@ fail1 $VCSN is-standard $void_b_automaton
       $VCSN standardize a1.xml \| is-standard -
       $VCSN standard -a ab "1" \| standardize - \| is-standard -
 
+
+$VCSN standard -a ab "a*" > as.xml
+$VCSN standard -a ab "a**" > ass.xml
+cmp as.xml ass.xml
+$VCSN is-standard ass.xml
+
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##

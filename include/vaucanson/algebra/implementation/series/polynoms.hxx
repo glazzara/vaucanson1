@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 The
 // Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -272,6 +272,25 @@ namespace vcsn
 	  return false;
       return true;
     }
+
+    template<typename Self, typename Tm, typename Tw>
+    bool op_starable(const algebra::SeriesBase<Self>&,
+		     const algebra::polynom<Tm, Tw>& m)
+    {
+      int s = m.size();
+      if (s == 0)
+	return true;
+      if (s > 1)
+	return false;
+
+      typename std::pair<Tm, Tw> elt = *m.as_map().begin();
+      if (elt.first != identity_value(SELECT(typename Self::monoid_t),
+				      SELECT(Tm)))
+	return false;
+
+      return op_starable(SELECT(typename Self::semiring_t), elt.second);
+    }
+
 
     template<typename Self, typename Tm, typename Tw>
     void op_in_star(const algebra::SeriesBase<Self>&,

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 The
 // Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>
-# include <vaucanson/algorithms/sum.hh>
+# include <vaucanson/algorithms/standard.hh>
 
 # include <stack>
 
@@ -94,7 +94,7 @@ namespace vcsn {
     hstate_t new_i = lhs.add_state();
     hstate_t new_f = lhs.add_state();
 
-    sum_here(lhs, rhs);
+    union_here(lhs, rhs);
 
     for_all_const_initial_states(i, lhs)
       lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(monoid_identity));
