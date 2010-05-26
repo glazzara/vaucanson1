@@ -589,8 +589,18 @@ test x`$VCSN -aabc standard 'a*.b.a*.b.a*' \| shortest -` = xbb
 $VCSN -aa standard 0 \| shortest - > out && exit 1
 test x`cat out` = x
 
+# Derived terms
+# -------------
 
-# shortest
-
+# These two expressions should give the same automaton.
+$VCSN -aabc derived-term '(a.b).(c.(a.b))*' > aut1.xml
+$VCSN -aabc derived-term '(a.b).((c.a).b)*' > aut2.xml
+cmp aut1.xml aut2.xml
+# These two expressions should give the same automaton.
+$VCSN -aabc derived-term 'a.(b.((c.a).b)*)' > aut3.xml
+$VCSN -aabc derived-term 'a.(b.((c.a).b)*)' > aut4.xml
+cmp aut3.xml aut4.xml
+# The two automata should be different
+cmp aut1.xml aut3.xml && exit 1
 
 exit 0
