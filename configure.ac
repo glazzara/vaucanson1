@@ -1,6 +1,6 @@
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The
-# Vaucanson Group.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
+# The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ AC_CONFIG_SUBDIRS([cbs])
 
 # Propagate configure arguments to distcheck.
 AC_SUBST([DISTCHECK_CONFIGURE_FLAGS],
-         [$ac_configure_args --enable-demos --enable-bench])
+         ["$ac_configure_args --enable-demos --enable-bench"])
 
 # Check the default graph implementation near the top, this way we can
 # quickly react to incorrect values.
