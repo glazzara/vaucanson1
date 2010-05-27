@@ -54,6 +54,9 @@ vaucanson/contexts/transducer_maker.thh        	\
 vaucanson/contexts/transducer_maker.thxx
 
 nobase_include_HEADERS +=			\
+vaucanson/misc/bencher.cc			\
+vaucanson/misc/bencher.hh			\
+vaucanson/misc/bencher.hxx			\
 vaucanson/misc/bitset.hh			\
 vaucanson/misc/bitset.hxx			\
 vaucanson/misc/char_traits.hh			\
@@ -75,21 +78,19 @@ vaucanson/misc/hash.hxx				\
 vaucanson/misc/iomanip.hh			\
 vaucanson/misc/iomanip.hxx			\
 vaucanson/misc/limits.hh			\
+vaucanson/misc/military_order.hh		\
 vaucanson/misc/misc.hh				\
 vaucanson/misc/random.hh			\
 vaucanson/misc/random.hxx			\
+vaucanson/misc/selectors.hh			\
 vaucanson/misc/self_iterator.hh 		\
 vaucanson/misc/self_iterator.hxx 		\
-vaucanson/misc/selectors.hh			\
 vaucanson/misc/sparse_interval.hh		\
 vaucanson/misc/sparse_interval.hxx		\
 vaucanson/misc/special_char_traits.hh		\
 vaucanson/misc/static.hh			\
 vaucanson/misc/support.hh			\
 vaucanson/misc/support.hxx			\
-vaucanson/misc/bencher.hh			\
-vaucanson/misc/bencher.hxx			\
-vaucanson/misc/bencher.cc			\
 vaucanson/misc/unique.hh			\
 vaucanson/misc/unique.hxx			\
 vaucanson/misc/usual_escaped_characters.hh	\
@@ -391,6 +392,8 @@ vaucanson/algorithms/rw_to_fmp.hh				\
 vaucanson/algorithms/rw_to_fmp.hxx				\
 vaucanson/algorithms/search.hh					\
 vaucanson/algorithms/search.hxx					\
+vaucanson/algorithms/shortest.hh				\
+vaucanson/algorithms/shortest.hxx				\
 vaucanson/algorithms/standard.hh				\
 vaucanson/algorithms/standard.hxx				\
 vaucanson/algorithms/standard_of.hh				\

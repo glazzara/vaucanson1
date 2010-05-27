@@ -572,4 +572,25 @@ ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 |
      $VCSN expand -i xml -`
 test x"$ret" = x"1w0+0" || test x"$ret" = x"0+0w1"
 
+# enumerate
+$VCSN -aabc standard 'a*.b.a*.b.a*' \| enumerate - 3 > out
+cat > exp <<EOF
+bb
+abb
+bab
+bba
+EOF
+cmp out exp
+
+# shortest
+test x`$VCSN -aabc standard 'a*.b.a*.b.a*' \| shortest -` = xbb
+
+# the empty language has no shortest word
+$VCSN -aa standard 0 \| shortest - > out && exit 1
+test x`cat out` = x
+
+
+# shortest
+
+
 exit 0

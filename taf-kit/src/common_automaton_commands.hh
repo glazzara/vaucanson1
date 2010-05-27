@@ -105,6 +105,23 @@ DEFINE_COMMAND(NAME(eval)
 		OUTPUT(b << std::endl)
 		RETURNVALUE(0));
 
+DEFINE_COMMAND(NAME(shortest)
+	       CODE(automaton_t a = get_aut (args, 1);
+		    monoid_elt_t w(a.structure().series().monoid());
+		    bool b = shortest(a, w);)
+	       CODE(if (b) {PRINT_RESULT(w << std::endl);})
+	       RETURNVALUE(!b));
+
+DEFINE_COMMAND(NAME(enumerate)
+	       CODE(std::list<monoid_elt_t> res;
+		    enumerate(get_aut (args, 1), get_unsigned(args, 2), res);)
+	       CODE(global_result.init();
+	            for(std::list<monoid_elt_t>::const_iterator i =
+			  res.begin(); i != res.end(); ++i)
+		      global_result.stream << *i << std::endl;
+	            global_result.finalize();)
+	       RETURNVALUE(0));
+
 DEFINE_COMMAND(NAME(power)
 	       CODE(int n = atoi(args.args[2]);
 		    automaton_t a = get_aut(args, 1);
@@ -213,7 +230,9 @@ COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'."),
 		   "Give the star of automaton `aut'."),	\
     COMMAND_ENTRY(union, AutAut, "Give the union of `aut1' and `aut2'."),	\
     COMMAND_ENTRY(transpose, Aut, "Transpose the automaton `aut'."),	\
-    COMMAND_ENTRY(trim, Aut, "Trim the automaton `aut'.")		\
+    COMMAND_ENTRY(trim, Aut, "Trim the automaton `aut'."),		\
+    COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words."), \
+    COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.") \
 									\
     )									\
 

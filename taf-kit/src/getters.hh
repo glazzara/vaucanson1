@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -58,6 +58,8 @@ get_word(Element<S, T>& aut, const std::string& s);
 # endif // !WITH_TWO_ALPHABETS
 
 static automaton_t get_aut (const arguments_t& args, int n);
+
+static unsigned get_unsigned (const arguments_t& args, int n);
 
 template <typename T>
 void set_monoid_writing_data_(T& dst, const T& src, const cmd_flags_t& flags);

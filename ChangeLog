@@ -1,5 +1,24 @@
 2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Integrate Sylvain Lombardy's shortest() and enumerate()
+	algorithms.
+
+	* include/vaucanson/algorithms/shortest.hh,
+	include/vaucanson/algorithms/shortest.hxx: New files.
+	* include/vaucanson/contexts/automaton_functions.thh: Include
+	them.
+	* include/vaucanson/misc/military_order.hh: New file.
+	* include/Makefile.am: Distribute the above three new files.
+	* taf-kit/src/common_automaton_commands.hh: Add code for shortest
+	and enumerate.
+	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx (get_unsigned):
+	New function, used by enumerate_command.
+	* taf-kit/tests/vcsn-char-b.test: Test shortest and enumerate.
+	* lib/generate_libvcsn.rb: Do not try to compile shortest.hh for
+	FMP contexts.
+
+2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Introduce one_eps_closure() and rewrite standard.hh algorithms
 	using it.
 

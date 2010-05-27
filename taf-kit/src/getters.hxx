@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 
 /**
  * @file getters.hxx
- * @author Michaï¿½l Cadilhac <michael.cadilhac@lrde.org>
+ * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *         Jerome Galtier <jerome.galtier@lrde.epita.fr>
  *
  * This file contains the implementation of the getters.
@@ -45,10 +45,30 @@
 # include "pipe.hxx"
 # include "pipe_getters.hxx"
 # include "pipe_writers.hxx"
+#include <boost/lexical_cast.hpp>
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 using namespace vcsn::tools;
+
+
+static unsigned get_unsigned (const arguments_t& args, int n)
+{
+  const std::string& s = args.args[n];
+
+  try {
+    return boost::lexical_cast<unsigned>(s);
+  }
+  catch (boost::bad_lexical_cast &)
+    {
+      std::cerr << "Error: cannot parse `" << s << "' as unsigned integer."
+		<< std::endl;
+      exit (-3);
+    }
+  /* unreached code */
+  return 0;
+}
+
 
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |

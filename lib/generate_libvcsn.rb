@@ -2,7 +2,7 @@
 # generate_libvcsn.rb: this file is part of the Vaucanson project.
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
+# Copyright (C) 2007, 2008, 2009, 2010 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -129,6 +129,7 @@ def create?(type, file)
       file !~ /reduce.hh/ and
       file !~ /standard.hh/ and
       file !~ /standard_of.hh/ and
+      file !~ /shortest.hh/ and
       file !~ /thompson.hh/ and
       ( # FMP transducers only filters.
         not ( "vcsn-fmp-tdc" == type or "vcsn-z-fmp-tdc" == type or

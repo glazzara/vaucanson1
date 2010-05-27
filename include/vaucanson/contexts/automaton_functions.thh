@@ -44,6 +44,7 @@
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/reduce.hh>
+# include <vaucanson/algorithms/shortest.hh>
 # include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/thompson.hh>
