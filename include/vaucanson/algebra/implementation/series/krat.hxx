@@ -2,7 +2,8 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2010 The
+// Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -505,24 +506,40 @@ namespace vcsn
 	return;
       }
 
-      // [1] case ({k'} E) {k} -> {k'} (E {k})
-      // [2] case ({k'} c) {k} -> {k'k} c  if c is a letter
+      // [1] case ({k'} c) {k} -> {k'k} c  if c is a letter or a constant
       // (Note: case [2] is like if you had applied case [1]
       // followed by the c {k} -> {k} c, and then the
       // {k'} (E  {k}) -> {k'k} E rewritings.)
+      // [2] case ({k'} E) {k} -> {k'} (E {k})
+      // subcase: ({k'} (E {k''}) {k} -> {k'} (E {k''k})
       if (this_type == node_t::lweight)
       {
+	// [1]
 	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
-        if (p->child_->what() == node_t::constant
-	    && dynamic_cast<n_const_t*>(p->child_)->value_.size() == 1)
+        if ((p->child_->what() == node_t::constant
+	     && dynamic_cast<n_const_t*>(p->child_)->value_.size() == 1)
+	    || p->child_->what() == node_t::one)
 	  {
 	    p->weight_ = op_mul (s.semiring(), p->weight_,
 				 op_convert(SELECT(W), SELECT(Tw), w));
 	  }
-	else
+	else // [2]
 	  {
-	    p->child_ = new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w),
-					p->child_);
+	    // subcase
+	    if (p->child_->what() == node_t::rweight)
+	      {
+		n_rweight_t* q = dynamic_cast<n_rweight_t*>(p->child_);
+		assert(q);
+		q->weight_ = op_mul (s.semiring(),
+				     q->weight_,
+				     op_convert(SELECT(W), SELECT(Tw), w));
+	      }
+	    else // general case
+	      {
+		p->child_ =
+		  new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w),
+				  p->child_);
+	      }
 	  }
 	return;
       }

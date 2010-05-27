@@ -1,3 +1,13 @@
+2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+            Pierre-Yves Angrand  <pangrand@gmail.com>
+
+	Add new rules for some trivial identities with weights.
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx: New
+	Rewrite ({k'} (E {k''}) {k} as {k'} (E {k''k}),
+	and  ({k'} 1) {k} as {k'k} 1.
+	* taf-kit/tests/vcsn-char-z.test: Test these.
+
 2010-05-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-b.test: Add tests for derived-term.
