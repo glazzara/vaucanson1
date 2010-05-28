@@ -207,10 +207,10 @@ COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'."),
 		   "Give the maximal accessible subautomaton of `aut'."), \
     FIRST_PROJECTION_COMMAND_ENTRY					\
     SECOND_PROJECTION_COMMAND_ENTRY					\
-    COMMAND_ENTRY(eps_removal, Aut,					\
-		   "Give `aut' closed over epsilon transitions."),	\
-    COMMAND_ENTRY_EXPERT(eps_removal_sp, Aut,				\
-		   "Give `aut' closed over epsilon transitions."),	\
+    COMMAND_ENTRY(proper, Aut,						\
+		  "Close `aut' over epsilon transitions."),		\
+    COMMAND_ENTRY_EXPERT(proper_sp, Aut,				\
+			 "Close `aut' over epsilon transitions."),	\
     COMMAND_ENTRY(coaccessible, Aut,					\
 		  "Give the maximal coaccessible subautomaton of `aut'."), \
     COMMAND_ENTRY(complete, Aut, "Give the complete version of `aut'."), \

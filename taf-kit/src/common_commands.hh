@@ -63,12 +63,21 @@ DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
 DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
 		       ALGO(transpose));
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(eps_removal)
+
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(proper)
 				 ARG_KIND(aut)
+				 /* eps_removal() can leave unaccessible
+				    states.  This is unfortunate, and
+				    eventually want to fix eps_removal()
+				    instead of calling accessible here. */
 				 ALGOS(accessible, eps_removal));
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(eps_removal_sp)
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(proper_sp)
 				 ARG_KIND(aut)
+				 /* eps_removal() can leave unaccessible
+				    states.  This is unfortunate, and
+				    eventually want to fix eps_removal()
+				    instead of calling accessible here. */
 				 ALGOS(accessible, eps_removal_sp));
 
 /*DEFINE_COMMAND (NAME (are_isomorphic)

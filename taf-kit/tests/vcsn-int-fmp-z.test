@@ -134,10 +134,10 @@ EOF
 
 fail1 $VCSN is-ltl y.xml
 fail1 $VCSN sub-normalize y.xml \| is-ltl -
-fail1 $VCSN eps-removal y.xml \| is-ltl -
-      $VCSN sub-normalize y.xml \| eps-removal - \| is-ltl -
+fail1 $VCSN proper y.xml \| is-ltl -
+      $VCSN sub-normalize y.xml \| proper - \| is-ltl -
 
-$VCSN eps-removal y.xml \| sub-normalize - > yl.xml
+$VCSN proper y.xml \| sub-normalize - > yl.xml
 $VCSN is-ltl yl.xml
 $VCSN ltl-to-pair yl.xml > yp.xml
 $VCSN pair-to-fmp yp.xml > yl2.xml

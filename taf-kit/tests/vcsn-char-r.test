@@ -21,7 +21,7 @@ DIFF=${top_srcdir}/src/tests/common/xmldiff.sh
 VCSN=vcsn-char-r
 
 $VCSN -aab standard '{2}a + b' > s2ab.xml
-$VCSN -aab thompson '{-1}({2}a + b)' \| eps-removal - > t2ab.xml
+$VCSN -aab thompson '{-1}({2}a + b)' \| proper - > t2ab.xml
 $VCSN sum-of-standard s2ab.xml t2ab.xml > u2ab.xml
 $VCSN reduce u2ab.xml \| is-empty -
 rm s2ab.xml t2ab.xml u2ab.xml

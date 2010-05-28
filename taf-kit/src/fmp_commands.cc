@@ -214,8 +214,8 @@ const command_t command_map[] =
   COMMAND_GROUP(
     "Generic algorithm for transducers:",
 
-    COMMAND_ENTRY(eps_removal, Aut, "epsilon-removal algorithm."),
-    COMMAND_ENTRY(eps_removal_sp, Aut, "epsilon-removal algorithm."),
+    COMMAND_ENTRY(proper, Aut, "Close `Aut' over epsilon transitions."),
+    COMMAND_ENTRY(proper_sp, Aut, "Close `Aut' over epsilon transitions."),
     COMMAND_ENTRY(domain, Aut,
 		   "Give the automaton that accepts all inputs accepted by `aut'."),
     COMMAND_ENTRY_CN(eval, evaluation, AutExp,
