@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,8 +57,7 @@ namespace vcsn
       series_set_elt_t label = t.series_of(*e);
       for_all_const_(series_set_elt_t::support_t, it, label.supp())
       {
-	if (!(((*it).first.size() == ((*it).second.size())) &&
-	      ((*it).second.size() == 1)))
+	if (((*it).first.size() != 1) || ((*it).second.size() != 1))
 	  return false;
       }
     }

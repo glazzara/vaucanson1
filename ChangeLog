@@ -1,5 +1,12 @@
 2010-05-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Simplify is_ltl().
+
+	* include/vaucanson/algorithms/is_ltl.hxx (is_ltl): Simplify
+	condition.
+
+2010-05-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename edit-automaton as edit, and make it explicit how to save.
 
 	* taf-kit/src/common_commands.hh: Rename edit-automaton as edit.
