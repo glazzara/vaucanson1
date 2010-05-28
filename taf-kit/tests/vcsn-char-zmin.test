@@ -21,7 +21,7 @@ VCSN=vcsn-char-zmin
 
 
 # BEWARE: we are mixing the letters O/I with the digits 0/1 below.
-sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit-automaton oi.xml
+sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit oi.xml
 # Add states
 1
 # Add five states
@@ -77,14 +77,14 @@ $VCSN --parser='ONE=I ZERO=O ALPHABET=01' standard '(I+O).1.(I+0)+O'
 
 
 # Test on an empty automaton
-echo 10 | $VCSN --alphabet=ab edit-automaton empty.xml
+echo 10 | $VCSN --alphabet=ab edit empty.xml
 $VCSN eval empty.xml "ab" > out
 test `cat out` = +oo
 
 
 
 # BEWARE: we are mixing the letters O/I with the digits 0/1 below.
-sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit-automaton oi.xml
+sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit oi.xml
 # Add states
 1
 # Add eleven states

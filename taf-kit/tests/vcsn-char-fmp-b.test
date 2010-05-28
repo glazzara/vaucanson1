@@ -99,7 +99,7 @@ fail1 vcsn-char-b eval t1image.xml $input
 # The machine should eat 50 cents and give change if too much has
 # been given.
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=dvc --alphabet2=dvc edit-automaton money.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=dvc --alphabet2=dvc edit money.xml
 # Add states
 1
 # Add 7 states
@@ -277,7 +277,7 @@ EOF
 # ltl.xml
 # a simple random sub-normalized automaton
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xyz edit-automaton ltl.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xyz edit ltl.xml
 # Add states
 1
 # Add 3 states
@@ -354,7 +354,7 @@ diff ltl-image-sorted.xml ltl-second-projection-sorted.xml
 # regression test: check that ltl-to-pair fails when given a subnormalized
 # automaton which is not ltl.
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xy edit-automaton norm.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=ab --alphabet2=xy edit norm.xml
 # Add states
 1
 # Add 2 states
@@ -402,12 +402,12 @@ diff quot3base2-domain.sort.xml div3base2-identity.sort.xml
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
 writing_data1="CPAR=#A# OPAR=#B# PLUS=#C# SPACE=#D# STAR=#E# TIMES=#F# CWEIGHT=#G# OWEIGHT=#H# ZERO=#I# ONE=#J# CONCAT=#K#"
 writing_data2="CPAR=@A@ OPAR=@B@ PLUS=@C@ SPACE=@D@ STAR=@E@ TIMES=@F@ CWEIGHT=@G@ OWEIGHT=@H@ ZERO=@I@ ONE=@J@ CONCAT=@K@"
-sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit wd-ref.xml
 # Exit.
 10
 EOF
 diff $wd_full wd-ref.xml
-sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit wd-empty.xml
 # Exit.
 10
 EOF

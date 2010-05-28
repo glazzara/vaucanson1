@@ -34,7 +34,7 @@ test `$VCSN eval $int_b "11"` = 1
 $VCSN eval $int_b "1" 2> stderr && exit 1
 grep 'Cannot parse' stderr
 
-sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 edit-automaton 33.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet 32,33,34 edit 33.xml
 # Add states
 1
 # Add two states
@@ -121,7 +121,7 @@ test "$r" = '10#100#10#10+100#-5'
 
 # --alphabet is required for defined-automaton; make sure
 # the error message points the user to that option.
-$VCSN edit-automaton x.xml 2>stderr && exit 1
+$VCSN edit x.xml 2>stderr && exit 1
 fgrep ' --alphabet' stderr
 
 ## --------------------------- ##
@@ -129,11 +129,11 @@ fgrep ' --alphabet' stderr
 ## --------------------------- ##
 
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
-sed '/^#/d' <<EOF | $VCSN -a"10,11" -p"$writing_data" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"10,11" -p"$writing_data" edit wd-ref.xml
 # Exit.
 10
 EOF
-sed '/^#/d' <<EOF | $VCSN -a"10,11" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"10,11" edit wd-empty.xml
 # Exit.
 10
 EOF

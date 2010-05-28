@@ -19,7 +19,7 @@ set -e
 
 VCSN=vcsn-char-fmp-z
 
-sed '/^#/d' <<EOF | vcsn-char-z --alphabet=ab edit-automaton cb.xml
+sed '/^#/d' <<EOF | vcsn-char-z --alphabet=ab edit cb.xml
 # Add states
 1
 # Add two states
@@ -61,7 +61,7 @@ res=`$VCSN eval tcz.xml bbb`
 test "x$res" = "x{2} b.b.b"
 
 
-sed '/^#/d' <<EOF | $VCSN -aletters -Aalpha edit-automaton foo.xml
+sed '/^#/d' <<EOF | $VCSN -aletters -Aalpha edit foo.xml
 # Add states
 1
 # Add 3 states
@@ -149,11 +149,11 @@ test "$res" = "{40} zyex"
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
 writing_data1="CPAR=#A# OPAR=#B# PLUS=#C# SPACE=#D# STAR=#E# TIMES=#F# CWEIGHT=#G# OWEIGHT=#H# ZERO=#I# ONE=#J# CONCAT=#K#"
 writing_data2="CPAR=@A@ OPAR=@B@ PLUS=@C@ SPACE=@D@ STAR=@E@ TIMES=@F@ CWEIGHT=@G@ OWEIGHT=@H@ ZERO=@I@ ONE=@J@ CONCAT=@K@"
-sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit wd-ref.xml
 # Exit.
 10
 EOF
-sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit wd-empty.xml
 # Exit.
 10
 EOF

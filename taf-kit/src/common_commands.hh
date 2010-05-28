@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -115,8 +115,7 @@ DEFINE_COMMAND(NAME(display)
     "Input/output work:",						\
 									\
     COMMAND_ENTRY(display, Aut, "Display `aut'."),			\
-    COMMAND_ENTRY(edit_automaton, File,					\
-		  "Edit an automaton."),				\
+    COMMAND_ENTRY(edit, File, "Edit an automaton."),			\
     COMMAND_ENTRY(identity, Aut, "Return `aut'."),			\
     COMMAND_ENTRY(info, Aut, "Print useful infos about `aut'."),	\
     COMMAND_ENTRY(list_automata, Nil, "List predefined automata.")	\

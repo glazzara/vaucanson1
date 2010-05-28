@@ -690,19 +690,18 @@ expression.
 
 \section{Interactive Definition of Automata}
 
-The \tafkit command \taffn{edit-automaton} provides a textual
-interface to define automata interactively.  The commands takes the
-filename of the automata to define or modify in argument.  If the
-files does not yet exist, you should specify the alphabet of your
-automaton on the command line (using \option{--alphabet=} or
-\option{-a} as will any other command), and the file will be created
-when you exit the editor.  If the file does exist, the alphabet will
-be read from the file along with the automaton itself, and the file
-will be overwritten upon exit.
+The \tafkit command \taffn{edit} provides a textual interface to
+define automata interactively.  The commands takes the filename of the
+automata to define or modify in argument.  If the files does not yet
+exist, you should specify the alphabet of your automaton on the
+command line (using \option{--alphabet=} or \option{-a} as will any
+other command), and the file will be created when you exit the editor.
+If the file does exist, the alphabet will be read from the file along
+with the automaton itself, and the file will be overwritten upon exit.
 
 The interface is based on a menu of choices:
 \begin{shell}
-$ \kbd{vcsn-char-b edit-automaton --alphabet=ab test.xml}
+$ \kbd{vcsn-char-b edit --alphabet=ab test.xml}
 Automaton description:
   States: (none)
   Initial states: (none)
@@ -725,9 +724,10 @@ Please choose your action:
 
   9. Display the automaton in Dotty.
 
-  10. Exit.
+  10. Save and exit.
+  11. Exit without saving.
 
-Your choice [1-10]:
+Your choice [1-11]:
 \end{shell}
 
 \noindent

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -38,9 +38,9 @@ extern "C" {
 char *BC, *UP;
 char PC;      /* Pad character */
 short ospeed; /* Terminal output baud rate */
-extern int tgetnum (...), tgetflag (...), tgetent (...);
-extern char *tgetstr (...), *tgoto (...);
-extern void tputs (...);
+extern int tgetnum(...), tgetflag(...), tgetent(...);
+extern char *tgetstr(...), *tgoto(...);
+extern void tputs(...);
 # endif
 }
 
@@ -79,74 +79,74 @@ namespace edition_commands
   struct cancel {};
 
 # ifdef WITH_WEIGHTS
-  static semiring_elt_value_t get_semiring_elt_value ()
+  static semiring_elt_value_t get_semiring_elt_value()
   {
-    echo_ (" With weight: ");
+    echo_(" With weight: ");
 
     semiring_elt_value_t v;
-    char first_char = std::cin.get ();
-    std::cin.unget ();
+    char first_char = std::cin.get();
+    std::cin.unget();
     if (first_char == '\n')
     {
-      discard_inputs ();
-      throw cancel ();
+      discard_inputs();
+      throw cancel();
     }
     std::cin >> v;
-    if (std::cin.fail ())
+    if (std::cin.fail())
     {
-      discard_inputs ();
-      std::cin.clear ();
+      discard_inputs();
+      std::cin.clear();
       throw std::logic_error ("invalid semiring element");
     }
-    discard_inputs ();
+    discard_inputs();
     return v;
   }
 # endif
 
   /// Get an integer from the user.
-  static int get_int ()
+  static int get_int()
   {
     int n = 0;
-    char first_char = std::cin.get ();
-    std::cin.unget ();
+    char first_char = std::cin.get();
+    std::cin.unget();
     if (first_char == '\n')
     {
-      discard_inputs ();
-      throw cancel ();
+      discard_inputs();
+      throw cancel();
     }
     std::cin >> n;
-    if (std::cin.fail () or n < 0)
+    if (std::cin.fail() or n < 0)
     {
-      discard_inputs ();
-      std::cin.clear ();
+      discard_inputs();
+      std::cin.clear();
       throw std::logic_error ("invalid number");
     }
-    discard_inputs ();
+    discard_inputs();
     return n;
   }
 
   /// Get a state of @c a from the user.
-  static hstate_t get_state (const automaton_t& a)
+  static hstate_t get_state(const automaton_t& a)
   {
-    unsigned n_state = get_int ();
+    unsigned n_state = get_int();
 
-    if (not a.has_state (n_state))
+    if (not a.has_state(n_state))
     {
       std::ostringstream os;
       os << "no state " << n_state << " in automaton.";
-      throw std::logic_error (os.str ());
+      throw std::logic_error(os.str());
     }
     return a.get_state(n_state);
   }
 
   // Get a transition of @c a from the user.
-  static htransition_t get_transition (automaton_t& a)
+  static htransition_t get_transition(automaton_t& a)
   {
-    int n_trans = get_int ();
+    int n_trans = get_int();
     int cpt = n_trans;
     htransition_t trans;
 
-    for_all_states (s, a)
+    for_all_states(s, a)
     {
       for (automaton_t::delta_iterator h(a.value(), *s);
            ! h.done(); h.next())
@@ -155,26 +155,26 @@ namespace edition_commands
     }
     std::ostringstream os;
     os << "Error: no transition " << n_trans << ".";
-    throw std::logic_error (os.str ());
+    throw std::logic_error(os.str());
   }
 
 
   /// Add a certain amount of states to @c a .
-  static void add_state (automaton_t& a)
+  static void add_state(automaton_t& a)
   {
-    echo_ ("  How many states to add ? ");
+    echo_("  How many states to add ? ");
 
-    int n_states = get_int ();
+    int n_states = get_int();
     while (n_states--)
-      a.add_state ();
+      a.add_state();
   }
 
   // Del a certain state of @c a .
   static void del_state (automaton_t& a)
   {
-    echo_ ("  Delete state: ");
-    hstate_t n_state = get_state (a);
-    a.del_state (n_state);
+    echo_("  Delete state: ");
+    hstate_t n_state = get_state(a);
+    a.del_state(n_state);
   }
 
   // For classical automata (single alphabet) transitions are
@@ -186,19 +186,19 @@ namespace edition_commands
   // parsing fails.
   static void add_transition (automaton_t& a, const arguments_t& args)
   {
-    echo_ ("  Add a transition from state: ");
+    echo_("  Add a transition from state: ");
     hstate_t n_from = get_state (a);
 
-    echo_ ("  To state: ");
+    echo_("  To state: ");
     hstate_t n_to = get_state (a);
 
 # ifndef WITH_TWO_ALPHABETS
-    echo_ ("  Labeled by the expression: ");
+    echo_("  Labeled by the expression: ");
     char ratexp[1024];
     std::cin.getline (ratexp, 1024);
 
     if (not ratexp[0])
-      throw cancel ();
+      throw cancel();
 
     // The representations used to build the rat_exp are the same as the ones
     // specified in the automaton.
@@ -211,14 +211,14 @@ namespace edition_commands
     // We don't parse ratexps, so we don't use these.
     (void) args;
 
-    echo_ (" First component labeled by the word: ");
+    echo_(" First component labeled by the word: ");
     std::string str1;
     std::getline(std::cin, str1);
     Element<first_monoid_t, std::basic_string<first_monoid_t::letter_t> >
       word1(a.structure().series().monoid().first_monoid());
     parse_word(word1, str1);
 
-    echo_ (" Second component labeled by the word: ");
+    echo_(" Second component labeled by the word: ");
     std::string str2;
     std::getline(std::cin, str2);
     Element<second_monoid_t, std::basic_string<second_monoid_t::letter_t> >
@@ -226,27 +226,27 @@ namespace edition_commands
     parse_word(word2, str2);
 
     // Construct a series from the two components.
-    semiring_elt_t weight (a.structure().series().semiring());
+    semiring_elt_t weight(a.structure().series().semiring());
 #  ifdef WITH_WEIGHTS
     weight = get_semiring_elt_value();
 #  else
     weight = true;
 #  endif
 
-    monoid_elt_t label (a.structure().series().monoid());
+    monoid_elt_t label(a.structure().series().monoid());
     label = monoid_elt_value_t(word1.value(), word2.value());
-    series_set_elt_t s (a.structure().series());
-    s.assoc (label, weight);
-    a.add_series_transition (n_from, n_to, s);
+    series_set_elt_t s(a.structure().series());
+    s.assoc(label, weight);
+    a.add_series_transition(n_from, n_to, s);
 # endif
   }
 
   /// Del a transition in @c a .
   static void del_transition (automaton_t& a)
   {
-    echo_ ("  Delete transition: ");
-    htransition_t trans = get_transition (a);
-    a.del_transition (trans);
+    echo_("  Delete transition: ");
+    htransition_t trans = get_transition(a);
+    a.del_transition(trans);
   }
 
   static const bool set_to_be = true;
@@ -255,46 +255,46 @@ namespace edition_commands
   static const bool final = false;
   /// Set or unset a state to be final or initial according to @c initial
   /// and @c want_set .
-  static void set_unset_initial_final (automaton_t& a, bool want_set,
-				       bool initial)
+  static void set_unset_initial_final(automaton_t& a, bool want_set,
+				      bool initial)
   {
-    echo_ ("  For state: ");
-    hstate_t n_state = get_state (a);
+    echo_("  For state: ");
+    hstate_t n_state = get_state(a);
     series_set_elt_t *weight = 0;
 
 # ifdef WITH_WEIGHTS
     if (want_set)
     {
-      semiring_elt_value_t v = get_semiring_elt_value ();
-      weight = new series_set_elt_t (a.structure ().series ());
-      weight->assoc (identity_value (SELECT (monoid_t),
-				     SELECT (monoid_elt_value_t)), v);
+      semiring_elt_value_t v = get_semiring_elt_value();
+      weight = new series_set_elt_t(a.structure().series());
+      weight->assoc(identity_value(SELECT(monoid_t),
+				   SELECT(monoid_elt_value_t)), v);
     }
 # endif
 
     if (initial)
       if (want_set)
 	if (weight)
-	  a.set_initial (n_state, *weight);
+	  a.set_initial(n_state, *weight);
 	else
-	  a.set_initial (n_state);
+	  a.set_initial(n_state);
       else
-	a.unset_initial (n_state);
+	a.unset_initial(n_state);
     else
       if (want_set)
 	if (weight)
-	  a.set_final (n_state, *weight);
+	  a.set_final(n_state, *weight);
 	else
-	  a.set_final (n_state);
+	  a.set_final(n_state);
       else
-	a.unset_final (n_state);
+	a.unset_final(n_state);
   }
 
   /// Print the automaton @c a .
   static void print_automaton (automaton_t& a)
   {
 # define Print_States(Text, For, ShowWeight, GetInFin)			\
-    echo_ (Text << ": ");						\
+    echo_(Text << ": ");						\
     {									\
       bool first = true;						\
       For (s, a)							\
@@ -302,49 +302,49 @@ namespace edition_commands
 	if (first)							\
 	{								\
 	  first = false;						\
-	  echo_ (*s);							\
+	  echo_(*s);							\
 	}								\
 	else								\
-	  echo_ (", " << *s);						\
-	if (ShowWeight and not type_equal (semiring_elt_value_t, bool))	\
-	  echo_ (" (W: " <<						\
-		 a. GetInFin (*s).					\
-		 get (identity_value (SELECT (monoid_t),		\
-				      SELECT (monoid_elt_value_t))) << ")"); \
+	  echo_(", " << *s);						\
+	if (ShowWeight and not type_equal(semiring_elt_value_t, bool))	\
+	  echo_(" (W: " <<						\
+		 a.GetInFin(*s).					\
+		 get(identity_value(SELECT(monoid_t),			\
+				    SELECT(monoid_elt_value_t))) << ")"); \
       }									\
       if (first)							\
-	echo_ ("(none)");						\
-      echo ("");							\
+	echo_("(none)");						\
+      echo("");								\
     }
 
-    echo ("Automaton description:");
+    echo("Automaton description:");
 
-    Print_States ("  States", for_all_states,
-		  false, get_initial /* Don't care */);
-    Print_States ("  Initial states", for_all_initial_states,
-		  true, get_initial);
-    Print_States ("  Final states", for_all_final_states,
-		  true, get_final);
+    Print_States("  States", for_all_states,
+		 false, get_initial /* Don't care */);
+    Print_States("  Initial states", for_all_initial_states,
+		 true, get_initial);
+    Print_States("  Final states", for_all_final_states,
+		 true, get_final);
 
     echo_ ("\n  Transitions: ");
     unsigned n_trans = 0;
-    for_all_states (s, a)
+    for_all_states(s, a)
     {
       for (automaton_t::delta_iterator h(a.value(), *s);
            ! h.done(); h.next())
       {
 	++n_trans;
 # ifndef WITH_TWO_ALPHABETS
-	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
-	       << " labeled by " << a.series_of (*h));
+	echo_("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
+	      << " labeled by " << a.series_of (*h));
 # else
 #  ifndef WITH_WEIGHTS
-	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
-	       << " labeled by " << a.word_of (*h));
+	echo_("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
+	      << " labeled by " << a.word_of (*h));
 #  else
-	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
-	       << " labeled by " << a.word_of (*h)
-	       << " W: " << a.weight_of (*h));
+	echo_("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
+	      << " labeled by " << a.word_of (*h)
+	      << " W: " << a.weight_of (*h));
 #  endif
 # endif
       }
@@ -355,21 +355,22 @@ namespace edition_commands
   }
 
   /// Interact with the user to let her choose an action.
-  static bool ask_and_treat_choice (automaton_t& a, const arguments_t& args)
+  static bool ask_and_treat_choice(automaton_t& a, const arguments_t& args)
   {
-    echo ("Please choose your action:" << std::endl
-	  << "  1. Add states." << std::endl
-	  << "  2. Delete a state.\n" << std::endl
-	  << "  3. Add a transition." << std::endl
-	  << "  4. Delete a transition.\n" << std::endl
-	  << "  5. Set a state to be initial." << std::endl
-	  << "  6. Set a state not to be initial.\n" << std::endl
-	  << "  7. Set a state to be final." << std::endl
-	  << "  8. Set a state not to be final.\n" << std::endl
-	  << "  9. Display the automaton in Dotty.\n" << std::endl
-	  << "  10. Exit.\n");
+    echo("Please choose your action:" << std::endl
+	 << "  1. Add states." << std::endl
+	 << "  2. Delete a state.\n" << std::endl
+	 << "  3. Add a transition." << std::endl
+	 << "  4. Delete a transition.\n" << std::endl
+	 << "  5. Set a state to be initial." << std::endl
+	 << "  6. Set a state not to be initial.\n" << std::endl
+	 << "  7. Set a state to be final." << std::endl
+	 << "  8. Set a state not to be final.\n" << std::endl
+	 << "  9. Display the automaton in Dotty.\n" << std::endl
+	 << "  10. Save and exit." << std::endl
+	 << "  11. Exit without saving.\n" << std::endl);
 
-    echo_ ("Your choice [1-10]: ");
+    echo_("Your choice [1-11]: ");
 
 # define CHOICE_COMMAND(N, Command)		\
     case N:					\
@@ -377,22 +378,23 @@ namespace edition_commands
       break;
 
     try {
-      switch (get_int ())
+      switch (get_int())
       {
-	CHOICE_COMMAND (1, add_state (a));
-	CHOICE_COMMAND (2, del_state (a));
+	CHOICE_COMMAND(1, add_state(a));
+	CHOICE_COMMAND(2, del_state(a));
 
-	CHOICE_COMMAND (3, add_transition (a, args));
-	CHOICE_COMMAND (4, del_transition (a));
+	CHOICE_COMMAND(3, add_transition(a, args));
+	CHOICE_COMMAND(4, del_transition(a));
 
-	CHOICE_COMMAND (5, set_unset_initial_final (a, set_to_be, initial));
-	CHOICE_COMMAND (6, set_unset_initial_final (a, set_to_not_be, initial));
-	CHOICE_COMMAND (7, set_unset_initial_final (a, set_to_be, final));
-	CHOICE_COMMAND (8, set_unset_initial_final (a, set_to_not_be, final));
+	CHOICE_COMMAND(5, set_unset_initial_final(a, set_to_be, initial));
+	CHOICE_COMMAND(6, set_unset_initial_final(a, set_to_not_be, initial));
+	CHOICE_COMMAND(7, set_unset_initial_final(a, set_to_be, final));
+	CHOICE_COMMAND(8, set_unset_initial_final(a, set_to_not_be, final));
 
-	CHOICE_COMMAND (9, vcsn::tools::dot_display (a, "A", true));
+	CHOICE_COMMAND(9, vcsn::tools::dot_display(a, "A", true));
 
-	case 10: return true;
+        case 10: return true;
+        case 11: exit(0);
       }
     } catch (const std::logic_error& err) {
       // FIXME: this message will never be displayed
@@ -406,25 +408,25 @@ namespace edition_commands
   }
 
   /// Main loop for edit_automaton.
-  static void main_loop (automaton_t& a, const arguments_t& args)
+  static void main_loop(automaton_t& a, const arguments_t& args)
   {
-    char* term = getenv ("TERM");
+    char* term = getenv("TERM");
     char* cl = 0;
 
-    if (term and (tgetent (0, term) != -1))
-      cl = tgetstr ("cl", 0);
+    if (term and (tgetent(0, term) != -1))
+      cl = tgetstr("cl", 0);
     do
     {
       if (cl)
-	tputs (cl, 1, putchar);
-      print_automaton (a);
-    } while (not ask_and_treat_choice (a, args));
+	tputs(cl, 1, putchar);
+      print_automaton(a);
+    } while (not ask_and_treat_choice(a, args));
   }
 
 }
 
 /// Edit automaton command ; let the user edit an automaton.
-static int edit_automaton_command (const arguments_t& args)
+static int edit_command(const arguments_t& args)
 {
   using namespace vcsn::tools;
   using namespace vcsn::xml;
@@ -435,12 +437,12 @@ static int edit_automaton_command (const arguments_t& args)
   automaton_t a = make_automaton(first_alphabet_t(), second_alphabet_t());
 # endif // !WITH_TWO_ALPHABETS
 
-  std::fstream input (args.args[1]);
+  std::fstream input(args.args[1]);
 
-  if (input.is_open ())
+  if (input.is_open())
     {
-      input >> automaton_loader (a, string_out (), XML ());
-      input.close ();
+      input >> automaton_loader(a, string_out(), XML());
+      input.close();
     }
   else
     {
@@ -461,12 +463,12 @@ static int edit_automaton_command (const arguments_t& args)
   // the main loop.
   set_writing_data(a, args);
 
-  edition_commands::main_loop (a, args);
+  edition_commands::main_loop(a, args);
 
   std::ofstream output (args.args[1]);
-  if (not output.good ())
+  if (not output.good())
   {
-    warn ("Error opening `" << args.args[1] << "'.");
+    warn("Error opening `" << args.args[1] << "'.");
     return -1;
   }
   output << automaton_saver(a, string_out(), XML());

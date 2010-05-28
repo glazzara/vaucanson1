@@ -75,7 +75,7 @@ $VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -
 
 
 # BEWARE: we are mixing the letters O/I with the digits 0/1 below.
-sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit-automaton oi.xml
+sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit oi.xml
 # Add states
 1
 # Add two states
@@ -120,7 +120,7 @@ test `cat out` = 72
 
 $VCSN --parser='ONE=I ZERO=O ALPHABET=01' standard '(I+O).1.(I+0)+O'
 
-echo 10 | $VCSN --alphabet=ab edit-automaton empty.xml
+echo 10 | $VCSN --alphabet=ab edit empty.xml
 $VCSN eval empty.xml "ab" > out
 test `cat out` = 0
 
@@ -213,11 +213,11 @@ EOF
 ## --------------------------- ##
 
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
-sed '/^#/d' <<EOF | $VCSN -a"xy" -p"$writing_data" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"xy" -p"$writing_data" edit wd-ref.xml
 # Exit.
 10
 EOF
-sed '/^#/d' <<EOF | $VCSN -a"xy" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"xy" edit wd-empty.xml
 # Exit.
 10
 EOF

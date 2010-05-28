@@ -27,11 +27,11 @@ $VCSN --usage
 ## --------------------------- ##
 
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
-sed '/^#/d' <<EOF | $VCSN -a"(10,11)(12,11)" -p"$writing_data" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"(10,11)(12,11)" -p"$writing_data" edit wd-ref.xml
 # Exit.
 10
 EOF
-sed '/^#/d' <<EOF | $VCSN -a"(10,11)(12,11)" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"(10,11)(12,11)" edit wd-empty.xml
 # Exit.
 10
 EOF

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,12 +22,12 @@
  * @file edition_commands.hh
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *
- * This file contains the declaration of @c edit_automaton_command
+ * This file contains the declaration of @c edit_command
  */
 
 # include "common.hh"
 
-static int edit_automaton_command (const arguments_t& args);
+static int edit_command (const arguments_t& args);
 
 # include "edition_commands.hxx"
 

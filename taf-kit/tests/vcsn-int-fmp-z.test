@@ -19,7 +19,7 @@ set -e
 
 VCSN=vcsn-int-fmp-z
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit-automaton x.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit x.xml
 # Add states
 1
 # Add two states
@@ -84,7 +84,7 @@ test "x$res" = "x{30} (({5} 22#22#20)*.22)"
 fail1 $VCSN is-ltl x.xml
 fail1 $VCSN sub-normalize x.xml \| is-ltl -
 
-sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit-automaton y.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet1=10,11,12 --alphabet2=20,21,22 edit y.xml
 # Add states
 1
 # Add two states
@@ -154,11 +154,11 @@ diff yl.info yl2.info
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
 writing_data1="CPAR=#A# OPAR=#B# PLUS=#C# SPACE=#D# STAR=#E# TIMES=#F# CWEIGHT=#G# OWEIGHT=#H# ZERO=#I# ONE=#J# CONCAT=#K#"
 writing_data2="CPAR=@A@ OPAR=@B@ PLUS=@C@ SPACE=@D@ STAR=@E@ TIMES=@F@ CWEIGHT=@G@ OWEIGHT=@H@ ZERO=@I@ ONE=@J@ CONCAT=@K@"
-sed '/^#/d' <<EOF | $VCSN -a"10,11" -A"12,13" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"10,11" -A"12,13" -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" edit wd-ref.xml
 # Exit.
 10
 EOF
-sed '/^#/d' <<EOF | $VCSN -a"10,11" -A"12,13" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"10,11" -A"12,13" edit wd-empty.xml
 # Exit.
 10
 EOF

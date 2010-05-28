@@ -24,7 +24,7 @@ VCSN=vcsn-char-b
 ## Input/output.  ##
 ## -------------- ##
 
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton all.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit all.xml
 # Add states
 1
 # Add one state
@@ -49,15 +49,15 @@ a+b
 EOF
 
 # Empty automaton (no states).
-echo 10 | $VCSN --alphabet=ab edit-automaton empty.xml
-# edit-automaton used to add a trailing newline at the end of the XML
+echo 10 | $VCSN --alphabet=ab edit empty.xml
+# edit used to add a trailing newline at the end of the XML
 # file; and identity would remove it.  Make sure the two outputs are
 # now identical.
 $VCSN identity empty.xml > empty2.xml
 diff empty.xml empty2.xml
 
 # Two states, no final states (empty language).
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton 2snf.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit 2snf.xml
 # Add states
 1
 # Add two states
@@ -83,7 +83,7 @@ b
 EOF
 
 # (ab)* using one transition
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton ab.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit ab.xml
 # Add states
 1
 # Add one state
@@ -107,7 +107,7 @@ ab
 EOF
 
 # (ab)* using two transitions
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton ab2.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit ab2.xml
 # Add states
 1
 # Add two states
@@ -138,7 +138,7 @@ EOF
 
 # (0)-a->(1)-b->(2)
 # (0)----ab---->(2)
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton nondet.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit nondet.xml
 # Add states
 1
 # Add three states
@@ -176,7 +176,7 @@ EOF
 # (0)-aa->(1)
 # (0)-ab->(1)
 # (0)-b-->(1)
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton comp.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit comp.xml
 # Add states
 1
 # Add two states
@@ -218,7 +218,7 @@ EOF
 # (0)-----b---->(2)
 # (0)<----a-----(2)
 #        (1)<-b-(2)
-sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit-automaton cnd.xml
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit cnd.xml
 # Add states
 1
 # Add three states
@@ -510,11 +510,11 @@ done
 ## --------------------------- ##
 
 writing_data="CPAR=_A_ OPAR=_B_ PLUS=_C_ SPACE=_D_ STAR=_E_ TIMES=_F_ CWEIGHT=_G_ OWEIGHT=_H_ ZERO=_I_ ONE=_J_ CONCAT=_K_"
-sed '/^#/d' <<EOF | $VCSN -a"xy" -p"$writing_data" edit-automaton wd-ref.xml
+sed '/^#/d' <<EOF | $VCSN -a"xy" -p"$writing_data" edit wd-ref.xml
 # Exit.
 10
 EOF
-sed '/^#/d' <<EOF | $VCSN -a"xy" edit-automaton wd-empty.xml
+sed '/^#/d' <<EOF | $VCSN -a"xy" edit wd-empty.xml
 # Exit.
 10
 EOF

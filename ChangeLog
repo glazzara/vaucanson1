@@ -1,3 +1,24 @@
+2010-05-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rename edit-automaton as edit, and make it explicit how to save.
+
+	* taf-kit/src/common_commands.hh: Rename edit-automaton as edit.
+	* taf-kit/src/edition_commands.hh,
+	taf-kit/src/edition_commands.hxx: Rename edit_automaton_command()
+	as edit_command(), and add replace "10. Exit" by "10. Save & exit"
+	and "11. Exit".  (Students used to ask how to save the automaton.)
+	* taf-kit/tests/vcsn-char-b.test,
+	taf-kit/tests/vcsn-char-char-b.test,
+	taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-char-int-b.test,
+	taf-kit/tests/vcsn-char-z.test, taf-kit/tests/vcsn-char-zmax.test,
+	taf-kit/tests/vcsn-char-zmin.test, taf-kit/tests/vcsn-int-b.test,
+	taf-kit/tests/vcsn-int-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test,
+	taf-kit/tests/vcsn-int-int-b.test, taf-kit/tests/vcsn-int-z.test:
+	Rename edit-automaton as edit.
+
 2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
             Pierre-Yves Angrand  <pangrand@gmail.com>
 
@@ -44,6 +65,8 @@
 	* taf-kit/tests/vcsn-char-b.test: Test shortest and enumerate.
 	* lib/generate_libvcsn.rb: Do not try to compile shortest.hh for
 	FMP contexts.
+	* doc/manual/taf-kit-manual.tex (Interactive Definition of
+	Automata): Adjust.
 
 2010-05-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
