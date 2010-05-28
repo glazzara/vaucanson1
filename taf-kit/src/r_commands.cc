@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -54,6 +54,8 @@ const command_t command_map[] =
     COMMAND_ENTRY (is_useless, Aut,
 		   "Return whether `aut' has no successful computations"
 		   " (trimmed `aut` is empty)."),
+    COMMAND_ENTRY(is_proper, Aut,
+		  "Return whether `aut' has no spontaneous transitions."),
     //    COMMAND_ENTRY (is_normalized, Aut,
     //		   "Return whether `aut' is normalized."),
     COMMAND_ENTRY (is_realtime, Aut,

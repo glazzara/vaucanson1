@@ -1,5 +1,19 @@
 2010-05-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Introduce is_proper().
+
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	include/vaucanson/algorithms/eps_removal.hh (do_is_proper,
+	is_proper): New functions.
+	* taf-kit/src/common_commands.hh (is_proper): New command.
+	* taf-kit/src/b_commands.cc, taf-kit/src/fmp_commands.cc,
+	taf-kit/src/r_commands.cc, taf-kit/src/z_commands.cc: Declare
+	is-proper.
+	* taf-kit/tests/vcsn-char-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test: Test is-proper.
+
+2010-05-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Simplify is_ltl().
 
 	* include/vaucanson/algorithms/is_ltl.hxx (is_ltl): Simplify

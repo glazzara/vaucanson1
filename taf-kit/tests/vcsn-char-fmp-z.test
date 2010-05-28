@@ -130,6 +130,8 @@ res=`$VCSN eval foo.xml abbc`
 res=`vcsn-char-z -aletters expand "$res"`
 test "$res" = "{40} xeyz"
 
+$VCSN is-proper foo.xml
+
 $VCSN transpose foo.xml > foot.xml
 
 res=`$VCSN eval foot.xml ba`
@@ -141,6 +143,70 @@ test "$res" = "{6} zy"
 res=`$VCSN eval foot.xml cbba`
 res=`vcsn-char-z -aletters expand "$res"`
 test "$res" = "{40} zyex"
+
+
+sed '/^#/d' <<EOF | $VCSN -aletters -Aalpha edit foo2.xml
+# Add states
+1
+# Add 3 states
+3
+# Set a state to be initial.
+5
+# Which state
+0
+1
+# Set a state to be final.
+7
+# Which state
+2
+1
+# Add transition
+3
+# From, to, in, out, weight
+0
+1
+1
+1
+2
+# Add transition
+3
+# From, to, in, out, weight
+1
+2
+1
+yz
+2
+# Add transition
+3
+# From, to, in, out, weight
+0
+1
+a
+1
+3
+# Add transition
+3
+# From, to, in, out, weight
+1
+2
+b
+e
+4
+# Add transition
+3
+# From, to, in, out, weight
+2
+1
+c
+1
+5
+# Exit.
+10
+EOF
+
+fail1 $VCSN is-proper foo2.xml
+
+
 
 ## --------------------------- ##
 ## Test writing data handling. ##

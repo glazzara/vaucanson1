@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 # include <vaucanson/algorithms/eps_removal.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
 # include <vector>
@@ -28,6 +29,56 @@
 # include <utility>
 
 namespace vcsn {
+
+  // For automata.
+  template <class A, typename M, typename AI>
+  bool
+  do_is_proper(const AutomataBase<A>&, const M&, const Element<A, AI>& a)
+  {
+    BENCH_TASK_SCOPED("is_proper (automaton)");
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+
+    for_all_const_transitions(e, a)
+      {
+	// A transition labelled by "1+a" is not considered to be
+	// spontaneous by is_spontaneous(), yet it cannot belong to a
+	// proper automaton.
+	series_set_elt_t label = a.series_of(*e);
+	for_all_const_(series_set_elt_t::support_t, it, label.supp())
+	  if ((*it).empty())
+	    return false;
+      }
+    return true;
+  }
+
+  // For FMP.
+  template <class A, typename F, typename S, typename AI>
+  bool
+  do_is_proper(const AutomataBase<A>&,
+	       const algebra::FreeMonoidProduct<F, S>&,
+	       const Element<A, AI>& a)
+  {
+    BENCH_TASK_SCOPED("is_proper (FMP)");
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+
+    for_all_const_transitions(e, a)
+      {
+	series_set_elt_t label = a.series_of(*e);
+	for_all_const_(series_set_elt_t::support_t, it, label.supp())
+	  if ((*it).first.empty() && (*it).second.empty())
+	    return false;
+      }
+    return true;
+  }
+
+  template <typename A, typename AI>
+  bool
+  is_proper(const Element<A, AI>& a)
+  {
+    return do_is_proper(a.structure(), a.series().monoid(), a);
+  }
 
   /*--------------------------------------.
   | EpsilonRemover for weighted automaton |
@@ -50,7 +101,6 @@ namespace vcsn {
 	semiring_elt_zero(aut.series().semiring().wzero_),
 	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
     {
-
       /// @bug FIXME: This converters should be removed
       // Initialize converters between matrix index and states.
       index_to_state.resize(size);
@@ -176,7 +226,7 @@ namespace vcsn {
         for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
           transition_list.push_back(*e);
 	int src = state_to_index[*s];
-	for_all_const_(std::list<htransition_t>, e, transition_list)        
+	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
 	  int dst = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
@@ -354,13 +404,13 @@ namespace vcsn {
         sq.pop();
       }
     }
-      
+
     void backward_closure ()
     {
       // Closure.
       Finder<automaton_t> find(a);
       cstates_t st_in;
-      
+
       while (!tr_q.empty())
       {
 	htransition_t t = tr_q.front();

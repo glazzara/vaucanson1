@@ -88,7 +88,9 @@ DEFINE_COMMAND(NAME(is_useless)
 	       OUTPUT_ON_VERBOSE(
 		  (succ_comp ? "Input has no successful computation\n"
 		   : "Input has a successful computation\n"))
-	       RETURNVALUE(succ_comp ? 0: 1));
+	       RETURNVALUE(!succ_comp));
+
+DEFINE_IS_PROPERTY_COMMAND(proper);
 
 DEFINE_COMMAND(NAME(info)
 	       CODE(automaton_t a = get_aut(args, 1))

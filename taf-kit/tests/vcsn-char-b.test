@@ -338,6 +338,10 @@ fail1 $VCSN realtime comp.xml \| is-complete -
       $VCSN realtime comp.xml \| complete - \| is-complete -
       $VCSN is-complete cnd.xml
 
+# is-proper
+      $VCSN is-proper a1.xml
+fail1 $VCSN -aab thompson 'a+b' \| is-proper -
+
 # is-deterministic
 fail1 $VCSN is-deterministic a1.xml
       $VCSN determinize a1.xml \| is-deterministic -
