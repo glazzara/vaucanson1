@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
+# Copyright (C) 2006, 2007, 2008, 2009, 2010 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -230,7 +230,6 @@ done <<EOF
 letters 1
 alpha   1
 digits  e
-ascii   _e
 EOF
 
 exit 0

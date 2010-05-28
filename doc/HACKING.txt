@@ -28,7 +28,7 @@ Doxygen
   source code.
 
 rst2latex
-  Is used to convert reStructuredText into LaTex.  This document
+  Is used to convert reStructuredText into LaTeX.  This document
   is written using reStructuredText.  ``rst2latex`` is often
   distributed in a package called ``python-docutils`` or ``py-docutils``.
 

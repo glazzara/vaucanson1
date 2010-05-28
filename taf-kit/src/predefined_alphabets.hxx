@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,9 +40,6 @@ namespace {
     { "digits",
       "0123456789",
       "[0-9]" },
-    { "ascii",
-      "\\ \"!#$%&'\\(\\)*+\\,-./0123456789\\:;<\\=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
-      "all ascii characters" },
     { 0, 0 } };
 }
 #endif
