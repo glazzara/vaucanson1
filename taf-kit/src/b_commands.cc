@@ -90,7 +90,9 @@ const command_t command_map[] =
     COMMAND_ENTRY(is_realtime, Aut,
 		  "Return whether `aut' is realtime."),
     COMMAND_ENTRY(is_standard, Aut,
-		  "Return whether `aut' is standard.")
+		  "Return whether `aut' is standard."),
+    COMMAND_ENTRY(is_normalized, Aut,
+		  "Return whether `aut' is normalized.")
 
     ),
 

@@ -61,8 +61,6 @@ DEFINE_IS_PROPERTY_COMMAND(ambiguous);
 
 DEFINE_IS_PROPERTY_COMMAND(complete);
 
-//DEFINE_IS_PROPERTY_COMMAND(normalized);
-
 DEFINE_IS_PROPERTY_COMMAND(realtime);
 
 DEFINE_IS_PROPERTY_COMMAND(standard);
@@ -221,7 +219,8 @@ COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'."),
     COMMAND_ENTRY(product, AutAut, "Give the product of `aut1' by `aut2'." ),	\
     COMMAND_ENTRY(quotient, Aut, "Give the quotient of `aut'."),	\
     COMMAND_ENTRY(realtime, Aut, "Give the realtime version of `aut'."), \
-    COMMAND_ENTRY(standardize, Aut, "Give the standard automaton of `aut'."),	\
+    COMMAND_ENTRY(standardize, Aut, "Give the standard automaton of `aut'."), \
+    COMMAND_ENTRY(normalize, Aut, "Give the normalized automaton of `aut'."), \
     COMMAND_ENTRY(sum_of_standard, AutAut,				\
 		   "Give the union of standard automata."),		\
     COMMAND_ENTRY(concat_of_standard, AutAut,				\

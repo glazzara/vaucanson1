@@ -101,6 +101,11 @@ DEFINE_COMMAND(NAME(is_useless)
 
 DEFINE_IS_PROPERTY_COMMAND(proper);
 
+DEFINE_IS_PROPERTY_COMMAND(normalized);
+
+DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
+		       ALGO(normalize));
+
 DEFINE_COMMAND(NAME(info)
 	       CODE(automaton_t a = get_aut(args, 1))
 	       OUTPUT(

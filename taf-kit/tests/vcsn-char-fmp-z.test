@@ -208,6 +208,11 @@ fail1 $VCSN is-proper foo2.xml
 
 
 
+fail1 $VCSN is-normalized foo.xml
+fail1 $VCSN is-normalized foot.xml
+      $VCSN normalize foo.xml \| is-normalized -
+
+
 ## --------------------------- ##
 ## Test writing data handling. ##
 ## --------------------------- ##

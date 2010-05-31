@@ -34,36 +34,38 @@
 
 const command_t command_map[] =
 {
-  USE_IO_COMMAND_GROUP (),
+  USE_IO_COMMAND_GROUP(),
 
-  COMMAND_GROUP (
+  COMMAND_GROUP(
     "Tests and evaluation on automata:",
 
 //    COMMAND_ENTRY (are_isomorphic, AutAut,
 //		   "Return whether `aut1' and `aut2' are isomorphic."),
-    COMMAND_ENTRY (eval, AutWord, "Evaluate `word' on `aut'."),
-    COMMAND_ENTRY (is_ambiguous, Aut,
+    COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on `aut'."),
+    COMMAND_ENTRY(is_ambiguous, Aut,
 		   "Return whether `aut' is ambiguous."),
-    COMMAND_ENTRY (is_complete, Aut,
+    COMMAND_ENTRY(is_complete, Aut,
 		   "Return whether `aut' is complete."),
-    COMMAND_ENTRY (is_empty, Aut,
+    COMMAND_ENTRY(is_empty, Aut,
 		   "Return whether `aut' is empty."),
-    COMMAND_ENTRY (is_useless, Aut,
+    COMMAND_ENTRY(is_useless, Aut,
 		   "Return whether `aut' has no successful computations"
 		   " (trimmed `aut` is empty)."),
     COMMAND_ENTRY(is_proper, Aut,
 		  "Return whether `aut' has no spontaneous transitions."),
     //    COMMAND_ENTRY (is_normalized, Aut,
     //		   "Return whether `aut' is normalized."),
-    COMMAND_ENTRY (is_realtime, Aut,
+    COMMAND_ENTRY(is_realtime, Aut,
 		   "Return whether `aut' is realtime."),
-    COMMAND_ENTRY (is_standard, Aut,
-		   "Return whether `aut' is standard.")
+    COMMAND_ENTRY(is_standard, Aut,
+		  "Return whether `aut' is standard."),
+    COMMAND_ENTRY(is_normalized, Aut,
+		  "Return whether `aut' is normalized.")
     ),
 
-  USE_GENERIC_AUTOMATON_COMMAND_GROUP (),
+  USE_GENERIC_AUTOMATON_COMMAND_GROUP(),
 
-  USE_RATEXP_COMMAND_GROUP (),
+  USE_RATEXP_COMMAND_GROUP(),
 
   {0, 0, 0, 0, 0}
 };

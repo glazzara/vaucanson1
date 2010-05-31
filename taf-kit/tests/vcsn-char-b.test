@@ -409,6 +409,13 @@ $VCSN standard -a ab "a**" > ass.xml
 cmp as.xml ass.xml
 $VCSN is-standard ass.xml
 
+# is-normalized / normalize
+
+fail1 $VCSN is-normalized a1.xml
+      $VCSN normalize a1.xml \| is-normalized -
+fail1 $VCSN -aa standard 'a*' \| is-normalized -
+      $VCSN -aa thompson 'a*' \| is-normalized -
+
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##

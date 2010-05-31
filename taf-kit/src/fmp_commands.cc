@@ -207,6 +207,7 @@ const command_t command_map[] =
 		  " (trimmed `aut` is empty)."),
     COMMAND_ENTRY(is_proper, Aut,
 		  "Return whether `aut' has no spontaneous transitions."),
+    COMMAND_ENTRY(is_normalized, Aut, "Test if `aut' is normalized."),
     COMMAND_ENTRY(is_sub_normalized, Aut, "Test if `aut' is sub-normalized."),
     COMMAND_ENTRY(is_ltl, Aut, "Test if `aut' is letter-to-letter.")
     ),
@@ -237,6 +238,8 @@ const command_t command_map[] =
   COMMAND_GROUP(
     "Algorithms for transducers:",
 
+    COMMAND_ENTRY(normalize, Aut,
+		  "Give the normalized transducer for `aut'."),
     COMMAND_ENTRY(sub_normalize, Aut,
 		  "Give the sub-normalized transducer of `aut'."),
     COMMAND_ENTRY(composition_cover, Aut, "Outsplitting."),
