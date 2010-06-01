@@ -113,11 +113,9 @@ DEFINE_COMMAND(NAME(shortest)
 DEFINE_COMMAND(NAME(enumerate)
 	       CODE(std::list<monoid_elt_t> res;
 		    enumerate(get_aut (args, 1), get_unsigned(args, 2), res);)
-	       CODE(global_result.init();
-	            for(std::list<monoid_elt_t>::const_iterator i =
+	       CODE(for(std::list<monoid_elt_t>::const_iterator i =
 			  res.begin(); i != res.end(); ++i)
-		      global_result.stream << *i << std::endl;
-	            global_result.finalize();)
+		      global_result.stream << *i << std::endl;)
 	       RETURNVALUE(0));
 
 DEFINE_COMMAND(NAME(power)

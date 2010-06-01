@@ -1,5 +1,21 @@
 2010-06-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Remove init() and finalize() calls from PRINT_RESULT().
+
+	* taf-kit/src/commands_macros.hh (PRINT_RESULT): Write directly to
+	the stream.  Do not call global_result.init() and
+	global_result.finalize().
+	* taf-kit/src/common_automaton_commands.hh (enumerate): Likewise.
+	* taf-kit/src/main.cc (main): Call global_result.finilize() after
+	each command.
+	* taf-kit/src/pipe.hh (init): Remove.
+	* taf-kit/src/pipe.hxx (init): Remove.  Clearing the stream
+	is done in finalize() if the stream has been used.
+	(finalize): Check if the stream has received anything.  Dump it to
+	the output if it is the case.
+
+2010-06-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Get rid of SET_RETURN_VALUE().
 
 	* taf-kit/src/commands_macros.hh (DEFINE_COMMAND_): Do not

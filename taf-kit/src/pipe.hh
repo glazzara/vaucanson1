@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -118,8 +118,6 @@ public:
   void set_state (command_output_status);
   void set_name  (const std::string&);
   void set_name  (const char*&);
-
-  void init ();
 
   void finalize ();
 

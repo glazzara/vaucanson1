@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -365,6 +365,7 @@ int main (int argc, char* argv[])
 	      os << "CMD[" << task_number << "]: ";
 	      BENCH_TASK_SCOPED(os.str () + std::string (args.args[0]));
 	      status = execute_command (args);
+	      global_result.finalize();
 	    }
 	  catch (const std::logic_error& err) {
 	    warn (program_name << ": " << err.what ());

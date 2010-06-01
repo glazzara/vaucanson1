@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -62,16 +62,16 @@ void command_output::set_name (const char*& str)
 }
 
 
-void command_output::init ()
-{
-  stream.str ("");
-}
-
 void command_output::finalize ()
 {
-  output = stream.str ();
-  empty = false;
-  stream.str ("");
+  // If something was written to STREAM, make it the output.
+  if (stream.str()[0] != 0)
+    {
+      output = stream.str();
+      empty = false;
+      // Clear the stream for next command.
+      stream.str("");
+    }
 }
 
 template<typename Content>
