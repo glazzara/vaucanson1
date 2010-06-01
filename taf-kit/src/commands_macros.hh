@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,8 +43,6 @@
 # define PRINT_RESULT(Output) global_result.init ();		\
                               global_result.stream << Output;	\
                               global_result.finalize ()
-# define SET_RETURN_VALUE(ReturnValue)		\
-           global_result.status = ReturnValue
 
 # define OUTPUT(Output) PRINT_RESULT(Output),
 # define OUTPUT_ON_VERBOSE(Output) PRINT_RESULT((args.verbose ? Output : "")),
@@ -55,7 +53,6 @@
   {								\
     Code;							\
     Output;							\
-    SET_RETURN_VALUE(ReturnValue);				\
     return ReturnValue;						\
   }
 # define DEFINE_COMMAND(BlockArgs) DEFINE_COMMAND_ (BlockArgs)

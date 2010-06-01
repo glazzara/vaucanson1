@@ -1,3 +1,12 @@
+2010-06-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Get rid of SET_RETURN_VALUE().
+
+	* taf-kit/src/commands_macros.hh (DEFINE_COMMAND_): Do not
+	call SET_RETURN_VALUE, the status of the command is already
+	set in main() using the return value of execute_command().
+	(SET_RETURN_VALUE): Delete.
+
 2010-05-31  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Introduce is-normalized and normalized in TAF-Kit.
