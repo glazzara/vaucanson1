@@ -52,79 +52,114 @@ using vcsn::xml::XML;
 # include "commands_macros.hh"
 
 
-  /*---------------------------------------.
-  | Command definition (RatExp excluded).  |
-  `---------------------------------------*/
+/*---------------------------------------.
+| Command definition (RatExp excluded).  |
+`---------------------------------------*/
+
+static int
+trim_command(const arguments_t& args)
+{
+  g_res.keep(trim(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+is_empty_command(const arguments_t& args)
+{
+  bool b = is_empty(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is empty\n" : "Input is not empty\n");
+  return !b;
+}
+
+static int
+is_useless_command(const arguments_t& args)
+{
+  bool b = is_useless(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input has no successful computation\n" :
+		     "Input has a successful computation\n");
+  return !b;
+}
+
+static int
+proper_command(const arguments_t& args)
+{
+  /* eps_removal() can leave unaccessible states.  This is
+     unfortunate, and eventually want to fix eps_removal() instead of
+     calling accessible here. */
+  g_res.keep(accessible(eps_removal(get_aut(args, 1))));
+  return 0;
+}
+
+//- proper_sp! aut
+static int
+proper_sp_command(const arguments_t& args)
+{
+  /* eps_removal() can leave unaccessible states.  This is
+     unfortunate, and eventually want to fix eps_removal() instead of
+     calling accessible here. */
+  g_res.keep(accessible(eps_removal_sp(get_aut(args, 1))));
+  return 0;
+}
+
+static int
+is_proper_command(const arguments_t& args)
+{
+  bool b = is_proper(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is proper\n": "Input is not properd\n");
+  return !b;
+}
+
+static int
+transpose_command(const arguments_t& args)
+{
+  g_res.keep(transpose(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+is_normalized_command(const arguments_t& args)
+{
+  bool b = is_normalized(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is normalized\n" : "Input is not normalized\n");
+  return !b;
+}
+
+static int
+normalize_command(const arguments_t& args)
+{
+  g_res.keep(normalize(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+info_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  g_res.stream << "States: " << a.states().size () << std::endl
+	       << "Transitions: " << a.transitions().size () << std::endl
+	       << "Initial states: " << a.initial().size () << std::endl
+	       << "Final states: " << a.final().size () << std::endl;
+  return 0;
+}
 
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(trim));
+static int
+identity_command(const arguments_t& args)
+{
+  g_res.keep(get_aut(args, 1));
+  return 0;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(transpose));
-
-
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(proper)
-				 ARG_KIND(aut)
-				 /* eps_removal() can leave unaccessible
-				    states.  This is unfortunate, and
-				    eventually want to fix eps_removal()
-				    instead of calling accessible here. */
-				 ALGOS(accessible, eps_removal));
-
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(proper_sp)
-				 ARG_KIND(aut)
-				 /* eps_removal() can leave unaccessible
-				    states.  This is unfortunate, and
-				    eventually want to fix eps_removal()
-				    instead of calling accessible here. */
-				 ALGOS(accessible, eps_removal_sp));
-
-/*DEFINE_COMMAND (NAME (are_isomorphic)
-		CODE (bool b = are_isomorphic(get_aut(args, 1),
-					      get_aut(args, 2)))
-		OUTPUT_ON_VERBOSE (
-		  (b
-		   ? "Automata are isomorphic\n"
-		   : "Automata are not isomorphic\n"))
-		RETURNVALUE (b ? 0 : 1));
-*/
-
-DEFINE_IS_PROPERTY_COMMAND(empty);
-
-DEFINE_COMMAND(NAME(is_useless)
-	       CODE(bool succ_comp = is_useless(get_aut(args, 1)))
-	       OUTPUT_ON_VERBOSE(
-		  (succ_comp ? "Input has no successful computation\n"
-		   : "Input has a successful computation\n"))
-	       RETURNVALUE(!succ_comp));
-
-DEFINE_IS_PROPERTY_COMMAND(proper);
-
-DEFINE_IS_PROPERTY_COMMAND(normalized);
-
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(normalize));
-
-DEFINE_COMMAND(NAME(info)
-	       CODE(automaton_t a = get_aut(args, 1))
-	       OUTPUT(
-		  "States: " << a.states ().size () << std::endl
-		  << "Transitions: " << a.transitions ().size () << std::endl
-		  << "Initial states: " << a.initial ().size () << std::endl
-		  << "Final states: " << a.final ().size () << std::endl)
-	       RETURNVALUE(0));
-
-DEFINE_COMMAND(NAME(identity)
-	       CODE(automaton_t a = get_aut(args, 1))
-	       KEEP(a)
-	       RETURNVALUE(0));
-
-DEFINE_COMMAND(NAME(display)
-	       CODE(bool b = vcsn::tools::dot_display(get_aut(args, 1),
-							"A", true))
-	       OUTPUT("")
-	       RETURNVALUE((b ? 0 : 1)));
+static int
+display_command(const arguments_t& args)
+{
+  bool b = vcsn::tools::dot_display(get_aut(args, 1), "A", true);
+  return !b;
+}
 
 # define USE_IO_COMMAND_GROUP()						\
   COMMAND_GROUP(							\

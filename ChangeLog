@@ -1,5 +1,23 @@
 2010-06-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Get rid of all command-defining macros.
+
+	The handwritten definitions are slightly larger, but they are more
+	readable and easier to debug and hack.
+
+	* taf-kit/src/commands_macros.hh (NAME, ARG_KIND, ALGO, ALGOS)
+	(CODE, RETURNVALUE, KEEP, PRINT_RESULT, OUTPUT, OUTPUT_ON_VERBOSE)
+	(DEFINE_COMMAND_, DEFINE_COMMAND, DEFINE_ONE_ARG_COMMAND_)
+	(DEFINE_ONE_ARG_COMMAND_TWO_ALGOS_, DEFINE_TWO_ARGS_COMMAND_)
+	(DEFINE_IS_PROPERTY_COMMAND): Remove all these macros.
+	* taf-kit/src/fmp_commands.cc, taf-kit/src/b_commands.cc,
+	taf-kit/src/common_automaton_commands.cc,
+	taf-kit/src/common_commands.hh, taf-kit/src/r_commands.cc,
+	taf-kit/src/ratexp_commands.hh: Define all commands without this
+	macros.
+
+2010-06-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename global_result as g_res to simplify handwritten code.
 
 	* taf-kit/src/commands_macros.hh, taf-kit/src/common.hh,

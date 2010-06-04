@@ -56,130 +56,218 @@ using vcsn::xml::XML;
   | Command definition (RatExp excluded).  |
   `---------------------------------------*/
 
+// FIXME: should also be available on FMP
+static int
+accessible_command(const arguments_t& args)
+{
+  g_res.keep(accessible(get_aut(args, 1)));
+  return 0;
+};
 
-DEFINE_IS_PROPERTY_COMMAND(ambiguous);
+// FIXME: should also be available on FMP
+static int
+coaccessible_command(const arguments_t& args)
+{
+  g_res.keep(coaccessible(get_aut(args, 1)));
+  return 0;
+};
 
-DEFINE_IS_PROPERTY_COMMAND(complete);
+static int
+is_ambiguous_command(const arguments_t& args)
+{
+  bool b = is_ambiguous(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is ambiguous\n" : "Input is not ambiguous\n");
+  return !b;
+}
 
-DEFINE_IS_PROPERTY_COMMAND(realtime);
+static int
+is_complete_command(const arguments_t& args)
+{
+  bool b = is_complete(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is complete\n" : "Input is not complete\n");
+  return !b;
+}
 
-DEFINE_IS_PROPERTY_COMMAND(standard);
+static int
+is_realtime_command(const arguments_t& args)
+{
+  bool b = is_realtime(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is realtime\n" : "Input is not realtime\n");
+  return !b;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(complete));
+// FIXME: should also work for FMP
+static int
+is_standard_command(const arguments_t& args)
+{
+  bool b = is_standard(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is standard\n" : "Input is not standard\n");
+  return !b;
+};
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(realtime));
+static int
+complete_command(const arguments_t& args)
+{
+  g_res.keep(complete(get_aut(args, 1)));
+  return 0;
+};
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(coaccessible));
+static int
+realtime_command(const arguments_t& args)
+{
+  g_res.keep(realtime(get_aut(args, 1)));
+  return 0;
+};
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(accessible));
+static int
+quotient_command(const arguments_t& args)
+{
+  g_res.keep(quotient(realtime(get_aut(args, 1))));
+  return 0;
+};
 
-//DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-//			 ALGO(normalize));
+static int
+union_command(const arguments_t& args)
+{
+  g_res.keep(union_(get_aut(args, 1), get_aut(args, 2)));
+  return 0;
+};
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(quotient)
-				 ARG_KIND(aut)
-				 ALGOS(quotient, realtime));
+static int
+product_command(const arguments_t& args)
+{
+  g_res.keep(product(get_aut(args, 1), get_aut(args, 2)));
+  return 0;
+};
 
-DEFINE_COMMAND(NAME(union)
-	       CODE(/* Empty */)
-	       KEEP(union_(get_aut(args, 1), get_aut(args,2)))
-	       RETURNVALUE(0));
+static int
+concatenate_command(const arguments_t& args)
+{
+  g_res.keep(concatenate(get_aut(args, 1), get_aut(args, 2)));
+  return 0;
+};
 
-DEFINE_TWO_ARGS_COMMAND(ARG_KIND(aut)
-			ALGO(product));
+static int
+eval_command(const arguments_t& args)
+{
+  automaton_t a = realtime(get_aut (args, 1));
+  semiring_elt_t b = eval(a, get_word(a, args.args[2])).value();
+  g_res.stream << b << std::endl;
+  return 0;
+};
 
-DEFINE_TWO_ARGS_COMMAND(ARG_KIND(aut)
-			ALGO(concatenate));
+static int
+shortest_command(const arguments_t& args)
+{
+  automaton_t a = get_aut (args, 1);
+  monoid_elt_t w(a.structure().series().monoid());
+  bool b = shortest(a, w);
+  if (b)
+    g_res.stream << w << std::endl;
+  return !b;
+}
 
-DEFINE_COMMAND(NAME(eval)
-	       CODE(automaton_t a = realtime(get_aut (args, 1));
-		    semiring_elt_t b =
-		      eval(a, get_word(a, args.args[2])).value();
-		    )
-		OUTPUT(b << std::endl)
-		RETURNVALUE(0));
+static int
+enumerate_command(const arguments_t& args)
+{
+  std::list<monoid_elt_t> res;
+  enumerate(get_aut (args, 1), get_unsigned(args, 2), res);
+  for(std::list<monoid_elt_t>::const_iterator i =
+	res.begin(); i != res.end(); ++i)
+    g_res.stream << *i << std::endl;
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(shortest)
-	       CODE(automaton_t a = get_aut (args, 1);
-		    monoid_elt_t w(a.structure().series().monoid());
-		    bool b = shortest(a, w);)
-	       CODE(if (b) {PRINT_RESULT(w << std::endl);})
-	       RETURNVALUE(!b));
+static int
+power_command(const arguments_t& args)
+{
+  int n = atoi(args.args[2]);
+  automaton_t a = get_aut(args, 1);
+  automaton_t p(a);
+  for (int i = 1; i < n; ++i)
+    p = product(p, a);
+  g_res.keep(p);
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(enumerate)
-	       CODE(std::list<monoid_elt_t> res;
-		    enumerate(get_aut (args, 1), get_unsigned(args, 2), res);)
-	       CODE(for(std::list<monoid_elt_t>::const_iterator i =
-			  res.begin(); i != res.end(); ++i)
-		      g_res.stream << *i << std::endl;)
-	       RETURNVALUE(0));
-
-DEFINE_COMMAND(NAME(power)
-	       CODE(int n = atoi(args.args[2]);
-		    automaton_t a = get_aut(args, 1);
-		    automaton_t p(a);
-		    for (int i = 1; i < n; ++i)
-		      p = product(p, a))
-		KEEP(p)
-		RETURNVALUE(0));
-
-DEFINE_COMMAND(NAME(standardize)
-	       CODE(automaton_t a = get_aut(args, 1);
-		    standardize(a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+standardize_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  standardize(a);
+  g_res.keep(a);
+  return 0;
+}
 
 # ifdef FIRST_PROJECTION_CONTEXT
-DEFINE_COMMAND(NAME(first_projection)
-	       CODE(
-		    automaton_t src = get_aut(args, 1);
-		    vcsn::CONTEXT::projection_traits_t::first_projection_t a =
-		    vcsn::CONTEXT::projection_traits_t::first_projection(src);
-		    first_projection(src, a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+first_projection_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  vcsn::CONTEXT::projection_traits_t::first_projection_t a =
+    vcsn::CONTEXT::projection_traits_t::first_projection(src);
+  first_projection(src, a);
+  g_res.keep(a);
+  return 0;
+}
 # endif
 
 # ifdef SECOND_PROJECTION_CONTEXT
-DEFINE_COMMAND(NAME(second_projection)
-	       CODE(
-		    automaton_t src = get_aut(args, 1);
-		    vcsn::CONTEXT::projection_traits_t::second_projection_t a =
-		    vcsn::CONTEXT::projection_traits_t::second_projection(src);
-		    second_projection(src, a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+second_projection_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  vcsn::CONTEXT::projection_traits_t::second_projection_t a =
+    vcsn::CONTEXT::projection_traits_t::second_projection(src);
+  second_projection(src, a);
+  g_res.keep(a);
+  return 0;
+}
+
 # endif
 
-# define DEFINE_COMMAND_OF_STANDARD(Algo)			\
-  DEFINE_COMMAND(NAME(Algo ## _of_standard)			\
-		 CODE(automaton_t a = get_aut(args, 1);		\
-		      automaton_t b = get_aut(args, 2);		\
-		      if (!is_standard(a))			\
-			standardize(a);				\
-		      if (!is_standard(b))			\
-			standardize(b);				\
-		      Algo ## _of_standard_here(a, b))		\
-		 KEEP(a)					\
-		 RETURNVALUE(0))
+static int
+sum_of_standard_command (const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  automaton_t b = get_aut(args, 2);
+  if (!is_standard(a))
+    standardize(a);
+  if (!is_standard(b))
+    standardize(b);
+  sum_of_standard_here(a, b);
+  g_res.keep(a);
+  return 0;
+};
 
-DEFINE_COMMAND_OF_STANDARD(sum);
+static int
+concat_of_standard_command (const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  automaton_t b = get_aut(args, 2);
+  if (!is_standard(a))
+    standardize(a);
+  if (!is_standard(b))
+    standardize(b);
+  concat_of_standard_here(a, b);
+  g_res.keep(a);
+  return 0;
+};
 
-DEFINE_COMMAND_OF_STANDARD(concat);
-
-#undef DEFINE_COMMAND_OF_STANDARD
-
-DEFINE_COMMAND(NAME(star_of_standard)
-	       CODE(automaton_t a = get_aut(args, 1);
-		    if (!is_standard(a))
-		      standardize(a);
-		    star_of_standard_here(a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+star_of_standard_command (const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  if (!is_standard(a))
+    standardize(a);
+  star_of_standard_here(a);
+  g_res.keep(a);
+  return 0;
+};
 
 # ifdef FIRST_PROJECTION_CONTEXT
 #  define FIRST_PROJECTION_COMMAND_ENTRY \

@@ -31,160 +31,200 @@
 | Command definition |
 `-------------------*/
 
-DEFINE_IS_PROPERTY_COMMAND(sub_normalized);
-DEFINE_IS_PROPERTY_COMMAND(ltl);
-
-DEFINE_COMMAND(NAME(compose)
-	       CODE(
-		 automaton_t a = get_aut(args, 1);
-		 automaton_t b = get_aut(args, 2);
-
-		 if (!is_sub_normalized(a))
-		   sub_normalize_here(a);
-
-		 if (!is_sub_normalized(b))
-		   sub_normalize_here(b))
-	       KEEP(compose(a,b))
-	       RETURNVALUE(0));
-
-
-DEFINE_COMMAND(NAME(u_compose)
-	       CODE(
-		 automaton_t a = get_aut(args, 1);
-		 automaton_t b = get_aut(args, 2);
-
-		 if (!is_sub_normalized(a))
-		   sub_normalize_here(a);
-
-		 if (!is_sub_normalized(b))
-		   sub_normalize_here(b))
-	       KEEP(u_compose(a,b))
-	       RETURNVALUE(0));
-
-DEFINE_COMMAND(NAME(invert)
-	       CODE(
-		 automaton_t a = get_aut(args, 1);
-		 automaton_t fmp = invert(a))
-	       KEEP(fmp)
-	       RETURNVALUE(0));
-
-// FIXME: this is a workaround against comma in template argument lists
-// breaking the CODE macro.
-namespace vcsn
+static int
+is_sub_normalized_command(const arguments_t& args)
 {
-typedef mute_ltl_to_pair<automaton_t::set_t,
-	automaton_t::value_t> mute_ltl_to_pair_t;
+  bool b = is_sub_normalized(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is subnormalized\n" :
+		     "Input is not subnormalized\n");
+  return !b;
 }
-DEFINE_COMMAND(NAME(ltl_to_pair)
-	       CODE(
-		 automaton_t src = get_aut(args, 1);
-		 vcsn::mute_ltl_to_pair_t::ret dst = ltl_to_pair(src))
-	       KEEP(dst)
-	       RETURNVALUE(0));
 
-DEFINE_COMMAND(NAME(pair_to_fmp)
-	       CODE(
-		 vcsn::mute_ltl_to_pair_t::ret src = get_pair_aut(args, 1);
-		 automaton_t dst = pair_to_fmp(src);
-	         set_writing_data(dst, args))
-	       KEEP(dst)
-	       RETURNVALUE(0));
+static int
+is_ltl_command(const arguments_t& args)
+{
+  bool b = is_ltl(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is letter-to-letter\n" :
+		     "Input is not letter-to-letter\n");
+  return !b;
+}
 
-DEFINE_COMMAND (NAME(evaluation)
-		CODE(automaton_t src = get_aut(args, 1))
-		OUTPUT(
-		  evaluation(src,
-			     IOAUT_CONTEXT::make_rat_exp(src.structure().
-			       series().monoid().first_monoid().alphabet(),
-			       args.args[2], *(src.structure().series().
-			       monoid().first_monoid().representation()),
-			       src.structure().series().representation()
-			       ->first_representation())) << std::endl)
-		RETURNVALUE(0));
+static int
+compose_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  automaton_t b = get_aut(args, 2);
 
-DEFINE_COMMAND(NAME(evaluation_fmp)
-	       CODE(
-		 automaton_t src = get_aut(args, 1);
-		 IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 2);
-		 IOAUT_CONTEXT::automaton_t res =
-		 IOAUT_CONTEXT::make_automaton(src.structure().series().
-		   monoid().second_monoid().alphabet(), *(src.structure().
-		   series().monoid().second_monoid().representation()),
-		   src.structure().series().representation()
-                   ->second_representation());
-		 evaluation_fmp(src, a, res))
-	       KEEP(res)
-	       RETURNVALUE(0));
+  if (!is_sub_normalized(a))
+    sub_normalize_here(a);
+  if (!is_sub_normalized(b))
+    sub_normalize_here(b);
 
-DEFINE_COMMAND(NAME(domain)
-	       CODE(
-		 automaton_t src = get_aut(args, 1);
-		 IOAUT_CONTEXT::automaton_t a =
-		 IOAUT_CONTEXT::make_automaton(src.structure().series().
-                   monoid().first_monoid().alphabet(), *(src.structure().
-                   series().monoid().first_monoid().representation()),
-		   src.structure().series().representation()
-                   ->first_representation());
-		 domain(src, a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+  g_res.keep(compose(a,b));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(image)
-	       CODE(
-		 automaton_t src = get_aut(args, 1);
-		 IOAUT_CONTEXT::automaton_t a =
-		 IOAUT_CONTEXT::make_automaton(src.structure().series().
-		   monoid().second_monoid().alphabet(), *(src.structure().
-                   series().monoid().second_monoid().representation()),
-		   src.structure().series().representation()
-                   ->second_representation());
-		 image(src, a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+u_compose_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  automaton_t b = get_aut(args, 2);
+
+  if (!is_sub_normalized(a))
+    sub_normalize_here(a);
+  if (!is_sub_normalized(b))
+    sub_normalize_here(b);
+
+  g_res.keep(u_compose(a,b));
+  return 0;
+}
+
+static int
+invert_command(const arguments_t& args)
+{
+  g_res.keep(invert(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+ltl_to_pair_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  vcsn::mute_ltl_to_pair<automaton_t::set_t,
+			 automaton_t::value_t>::ret dst = ltl_to_pair(src);
+  g_res.keep(dst);
+  return 0;
+}
+
+static int
+pair_to_fmp_command(const arguments_t& args)
+{
+  vcsn::mute_ltl_to_pair<automaton_t::set_t,
+			 automaton_t::value_t>::ret src = get_pair_aut(args, 1);
+  automaton_t dst = pair_to_fmp(src);
+  set_writing_data(dst, args);
+  g_res.keep(dst);
+  return 0;
+}
+
+static int
+evaluation_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  g_res.stream <<
+    evaluation(src,
+	       IOAUT_CONTEXT::make_rat_exp
+	       (src.structure().
+		series().monoid().first_monoid().alphabet(), args.args[2],
+		*(src.structure().series().monoid().first_monoid().representation()),
+		src.structure().series().representation()->first_representation()))
+	       << std::endl;
+  return 0;
+}
+
+static int
+evaluation_fmp_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 2);
+  IOAUT_CONTEXT::automaton_t res =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().second_monoid().alphabet(),
+     *(src.structure().series().monoid().second_monoid().representation()),
+     src.structure().series().representation()->second_representation());
+  evaluation_fmp(src, a, res);
+  g_res.keep(res);
+  return 0;
+}
+
+static int
+domain_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().first_monoid().alphabet(),
+     *(src.structure().series().monoid().first_monoid().representation()),
+     src.structure().series().representation()->first_representation());
+  domain(src, a);
+  g_res.keep(a);
+  return 0;
+}
+
+static int
+image_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().second_monoid().alphabet(),
+     *(src.structure().series().monoid().second_monoid().representation()),
+     src.structure().series().representation()->second_representation());
+  image(src, a);
+  g_res.keep(a);
+  return 0;
+}
 
 #ifdef RW_CONTEXT
-DEFINE_COMMAND(NAME(to_rw)
-	       CODE(
-		 automaton_t fmp = get_aut(args, 1);
-		 automaton_t::monoid_t m = fmp.structure().series().monoid();
-		 RW_CONTEXT::automaton_t a =
-		 // FIXME: we should use representations from the fmp
-		 // automaton.
-		 RW_CONTEXT::make_automaton(m.first_monoid().alphabet(),
-					    m.second_monoid().alphabet());
-		 fmp_to_rw(fmp, a))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+to_rw_command(const arguments_t& args)
+{
+  automaton_t fmp = get_aut(args, 1);
+  automaton_t::monoid_t m = fmp.structure().series().monoid();
+  RW_CONTEXT::automaton_t a =
+    // FIXME: we should use representations from the fmp
+    // automaton.
+    RW_CONTEXT::make_automaton(m.first_monoid().alphabet(),
+			       m.second_monoid().alphabet());
+  fmp_to_rw(fmp, a);
+  g_res.keep(a);
+  return 0;
+}
 #endif
 
-DEFINE_COMMAND(NAME(intersection)
-	       CODE(
-		 IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 1);
-		 IOAUT_CONTEXT::alphabet_t A =
-		   a.structure().series().monoid().alphabet();
-		 series_rep_t new_srep = args.srep;
-		 new_srep.first_representation() =
-                   *(a.structure().series().representation());
-		 new_srep.second_representation() =
-		   *(a.structure().series().representation());
-		 automaton_t fmp = make_automaton(A, A, args.mrep,
+static int
+intersection_command(const arguments_t& args)
+{
+  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 1);
+  IOAUT_CONTEXT::alphabet_t A =
+    a.structure().series().monoid().alphabet();
+  series_rep_t new_srep = args.srep;
+  new_srep.first_representation() =
+    *(a.structure().series().representation());
+  new_srep.second_representation() =
+    *(a.structure().series().representation());
+  automaton_t fmp =
+    make_automaton(A, A, args.mrep,
 		   *(a.structure().series().monoid().representation()),
 		   *(a.structure().series().monoid().representation()),
                    new_srep);
-		 identity(a, fmp))
-	       KEEP(fmp)
-	       RETURNVALUE(0));
+  identity(a, fmp);
+  g_res.keep(fmp);
+  return 0;
+}
 
+static int
+sub_normalize_command(const arguments_t& args)
+{
+  g_res.keep(sub_normalize(get_aut(args, 1)));
+  return 0;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(sub_normalize));
+static int
+composition_co_cover_command(const arguments_t& args)
+{
+  g_res.keep(composition_co_cover(get_aut(args, 1)));
+  return 0;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(composition_co_cover));
-
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(composition_cover));
-
+static int
+composition_cover_command(const arguments_t& args)
+{
+  g_res.keep(composition_cover(get_aut(args, 1)));
+  return 0;
+}
 
 /*-----------------------------.
 | Define the set of commands.  |

@@ -28,8 +28,12 @@
 #include "common_commands.hh"
 #include "common_automaton_commands.hh"
 
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (reduce));
+static int
+reduce_command(const arguments_t& args)
+{
+  g_res.keep(reduce(get_aut(args, 1)));
+  return 0;
+}
 
   /*-----------------------------.
   | Define the set of commands.	 |

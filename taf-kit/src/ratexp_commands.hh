@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,50 +52,61 @@ using vcsn::xml::XML;
   | Command definition of RatExp specific algorithms.  |
   `---------------------------------------------------*/
 
-DEFINE_COMMAND(NAME(standard_of)
-	       CODE(
-		 rat_exp_t e = get_exp(args, 1);
-		 automaton_t a = standard_of(e))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+standard_of_command(const arguments_t& args)
+{
+  rat_exp_t e = get_exp(args, 1);
+  g_res.keep(standard_of(e));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(thompson_of)
-	       CODE(
-		 rat_exp_t e = get_exp(args, 1);
-		 automaton_t a = thompson_of(e))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+thompson_of_command(const arguments_t& args)
+{
+  rat_exp_t e = get_exp(args, 1);
+  g_res.keep(thompson_of(e));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(derived_term_automaton)
-	       CODE(
-		 rat_exp_t e = get_exp(args, 1);
-		 automaton_t a =
-		   make_automaton(get_alphabet(e),
-				  *e.structure().monoid().representation(),
-				  *e.structure().representation());
-		 derived_term_automaton(a, e))
-	       KEEP(a)
-	       RETURNVALUE(0));
+static int
+derived_term_automaton_command(const arguments_t& args)
+{
+  rat_exp_t e = get_exp(args, 1);
+  automaton_t a = make_automaton(get_alphabet(e),
+				 *e.structure().monoid().representation(),
+				 *e.structure().representation());
+  derived_term_automaton(a, e);
+  g_res.keep(a);
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(aut_to_exp)
-	       CODE(/* Empty */)
-	       KEEP(aut_to_exp(get_aut(args, 1), DMChooser()))
-	       RETURNVALUE(0));
+static int
+aut_to_exp_command(const arguments_t& args)
+{
+  g_res.keep(aut_to_exp(get_aut(args, 1), DMChooser()));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(identity_exp)
-	       CODE(/* Empty */)
-	       KEEP(get_exp(args, 1))
-	       RETURNVALUE(0));
+static int
+identity_exp_command(const arguments_t& args)
+{
+  g_res.keep(get_exp(args, 1));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(realtime_exp)
-	       CODE(/* Empty */)
-	       KEEP(realtime(get_exp(args, 1)))
-	       RETURNVALUE(0));
+static int
+realtime_exp_command(const arguments_t& args)
+{
+  g_res.keep(realtime(get_exp(args, 1)));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(expand)
-	       CODE(/* Empty */)
-	       KEEP(expand(get_exp(args, 1)))
-	       RETURNVALUE(0));
+static int
+expand_command(const arguments_t& args)
+{
+  g_res.keep(expand(get_exp(args, 1)));
+  return 0;
+}
 
 # define USE_RATEXP_COMMAND_GROUP()					\
   COMMAND_GROUP(							\

@@ -32,29 +32,53 @@
   | Command definition |
   `-------------------*/
 
-DEFINE_IS_PROPERTY_COMMAND(deterministic);
+static int
+is_deterministic_command(const arguments_t& args)
+{
+  bool b = is_deterministic(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is deterministic\n" :
+		     "Input is not neterministic\n");
+  return !b;
+}
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS(NAME(determinize)
-				 ARG_KIND(aut)
-				 ALGOS(determinize, realtime));
+static int
+determinize_command(const arguments_t& args)
+{
+  g_res.keep(determinize(realtime(get_aut(args, 1))));
+  return 0;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(complement));
+static int
+complement_command(const arguments_t& args)
+{
+  g_res.keep(complement(get_aut(args, 1)));
+  return 0;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(minimization_hopcroft));
+static int
+minimization_hopcroft_command(const arguments_t& args)
+{
+  g_res.keep(minimization_hopcroft(get_aut(args, 1)));
+  return 0;
+}
 
-DEFINE_ONE_ARG_COMMAND(ARG_KIND(aut)
-		       ALGO(minimization_moore));
+static int
+minimization_moore_command(const arguments_t& args)
+{
+  g_res.keep(minimization_moore(get_aut(args, 1)));
+  return 0;
+}
 
-DEFINE_COMMAND(NAME(are_equivalent)
-	       CODE(bool b = are_equivalent(get_aut(args, 1),
-					    get_aut(args, 2)))
-	       OUTPUT_ON_VERBOSE(
-		  (b
-		   ? "Automata are equivalent\n"
-		   : "Automata are not equivalent\n"))
-	       RETURNVALUE(b ? 0 : 1));
+static int
+are_equivalent_command(const arguments_t& args)
+{
+  bool b = are_equivalent(get_aut(args, 1), get_aut(args, 2));
+  if (args.verbose)
+    g_res.stream << (b ? "Automata are equivalent\n" :
+		     "Automata are not equivalent\n");
+  return !b;
+}
 
   /*-----------------------------.
   | Define the set of commands.	 |
