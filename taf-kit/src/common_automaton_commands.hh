@@ -115,7 +115,7 @@ DEFINE_COMMAND(NAME(enumerate)
 		    enumerate(get_aut (args, 1), get_unsigned(args, 2), res);)
 	       CODE(for(std::list<monoid_elt_t>::const_iterator i =
 			  res.begin(); i != res.end(); ++i)
-		      global_result.stream << *i << std::endl;)
+		      g_res.stream << *i << std::endl;)
 	       RETURNVALUE(0));
 
 DEFINE_COMMAND(NAME(power)

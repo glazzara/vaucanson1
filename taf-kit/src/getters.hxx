@@ -122,7 +122,7 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
   // call to get_alphabet().
   alphabet_t alpha;
   monoid_t M((!alphabet.empty() ||
-	      (s != "-" && global_result.input_exp_type == INPUT_TYPE_EXP))
+	      (s != "-" && g_res.input_exp_type == INPUT_TYPE_EXP))
 	     ? get_alphabet(alphabet) : alpha);
   semiring_t S;
   series_set_t series(S, M);
@@ -134,18 +134,18 @@ static rat_exp_t get_exp(const arguments_t& args, const int& n)
   {
     rat_exp_t e =
       boost::apply_visitor(rat_exp_getter(M.alphabet(),
-					  global_result.name,
-					  global_result.input_exp_type,
+					  g_res.name,
+					  g_res.input_exp_type,
 					  *(M.representation()),
 					  *(series.representation())),
-			   global_result.output);
+			   g_res.output);
     // Overwrite the writing data before return if any where supplied
     // on the command line.
     set_writing_data(e, args);
     return e;
   }
 
-  switch (global_result.input_exp_type)
+  switch (g_res.input_exp_type)
   {
     case INPUT_TYPE_XML:
     {
@@ -230,8 +230,8 @@ static automaton_t get_aut (const arguments_t& args, int n)
   if (s == "-")
     {
       automaton_t a = boost::apply_visitor
-	(automaton_getter (global_result.name,
-			   global_result.input_aut_type), global_result.output);
+	(automaton_getter (g_res.name,
+			   g_res.input_aut_type), g_res.output);
 
       // Set the writing data before return.
       set_writing_data(a, args);
@@ -268,7 +268,7 @@ static automaton_t get_aut (const arguments_t& args, int n)
     automaton_t a = make_automaton(first_alphabet_t(), second_alphabet_t());
 # endif // !WITH_TWO_ALPHABETS
 
-    switch (global_result.input_aut_type)
+    switch (g_res.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());
@@ -307,8 +307,8 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
   {
     IOAUT_CONTEXT::automaton_t a =
       boost::apply_visitor(boolean_automaton_getter
-			   (global_result.name, global_result.input_aut_type),
-			   global_result.output);
+			   (g_res.name, g_res.input_aut_type),
+			   g_res.output);
 
     // Set the writing data before return.
     set_boolean_writing_data(a, args);
@@ -325,7 +325,7 @@ static IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const
     IOAUT_CONTEXT::automaton_t a =
       IOAUT_CONTEXT::make_automaton(first_alphabet_t());
 
-    switch (global_result.input_aut_type)
+    switch (g_res.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());
@@ -363,8 +363,8 @@ get_pair_aut(const arguments_t& args, const int& n)
   {
     mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::ret a =
       boost::apply_visitor(pair_automaton_getter
-			   (global_result.name, global_result.input_aut_type),
-			   global_result.output);
+			   (g_res.name, g_res.input_aut_type),
+			   g_res.output);
 
     // We don't set the writing data before return because the
     // pair automaton will be passed to pair_to_fmp and we will
@@ -384,7 +384,7 @@ get_pair_aut(const arguments_t& args, const int& n)
       make_automaton(mute_ltl_to_pair<automaton_t::set_t,
 		                      automaton_t::value_t>::ret_alphabet_t());
 
-    switch (global_result.input_aut_type)
+    switch (g_res.input_aut_type)
       {
       case INPUT_TYPE_XML:
 	*is >> automaton_loader(a, string_out (), XML ());

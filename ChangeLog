@@ -1,3 +1,11 @@
+2010-06-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Rename global_result as g_res to simplify handwritten code.
+
+	* taf-kit/src/commands_macros.hh, taf-kit/src/common.hh,
+	taf-kit/src/common_automaton_commands.hh, taf-kit/src/getters.hxx,
+	taf-kit/src/main.cc: Rename all instances.
+
 2010-06-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Remove init() and finalize() calls from PRINT_RESULT().

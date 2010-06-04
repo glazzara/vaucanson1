@@ -39,8 +39,8 @@
 # define CODE(Code) Code,
 # define RETURNVALUE(ReturnValue) (ReturnValue)
 
-# define KEEP(Output) global_result.keep (Output),
-# define PRINT_RESULT(Output) global_result.stream << Output
+# define KEEP(Output) g_res.keep (Output),
+# define PRINT_RESULT(Output) g_res.stream << Output
 
 # define OUTPUT(Output) PRINT_RESULT(Output),
 # define OUTPUT_ON_VERBOSE(Output) PRINT_RESULT((args.verbose ? Output : "")),

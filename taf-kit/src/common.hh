@@ -59,7 +59,7 @@ extern vcsn::misc::Bencher bencher;
 
 // Use a global command result.
 # include "pipe.hh"
-extern command_output global_result;
+extern command_output g_res;
 
 struct cmd_flags_t
 {
