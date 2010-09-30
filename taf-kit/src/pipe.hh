@@ -110,19 +110,19 @@ enum output_format_t
 class command_output
 {
 public:
-  command_output ();
+  inline command_output ();
 
-  void input ();
-  void clear ();
+  inline void input ();
+  inline void clear ();
 
-  void set_state (command_output_status);
-  void set_name  (const std::string&);
-  void set_name  (const char*&);
+  inline void set_state (command_output_status);
+  inline void set_name  (const std::string&);
+  inline void set_name  (const char*&);
 
-  void finalize ();
+  inline void finalize ();
 
   template<typename Content>
-  void keep (const Content& content);
+  inline void keep (const Content& content);
 
   std::ostringstream     stream;
   command_output_variant output;
@@ -134,5 +134,7 @@ public:
   output_format_t	 output_aut_type;
   output_format_t	 output_exp_type;
 };
+
+#include "pipe.hxx"
 
 #endif /* !PIPE_HH */

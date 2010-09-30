@@ -1,8 +1,8 @@
-// interface.hh: this file is part of Vaucanson.
+// cmd_r.cc: this file is part of Vaucanson.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2009 The Vaucanson Group.
+// Copyright (C) 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,19 +14,13 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef INTERFACE_HH
-# define INTERFACE_HH
 
-/**
- * @file interface.hh
- * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
- *
- * Interface for TAF-Kit.
- */
+#include "commands.hh"
 
-# include "common.hh"
+static int
+transpose_command(const arguments_t& args)
+{
+  g_res.keep(transpose(get_aut(args, 1)));
+  return 0;
+};
 
-int execute_command(const arguments_t&);
-void list_commands(bool all = false);
-
-#endif /* !INTERFACE_HH */

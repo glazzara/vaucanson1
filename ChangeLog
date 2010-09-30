@@ -1,3 +1,29 @@
+2010-09-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	This is an incomplete work on TAF-Kit.  Only vcsn-char-b is
+	expected to compile, and the test suite should not pass because
+	many TAF-Kit commands have been renamed.
+
+	* taf-kit/src/interface.cc, taf-kit/src/interface.hh,
+	taf-kit/src/b_commands.cc, taf-kit/src/b_commands.cc,
+	taf-kit/src/commands_macros.hh,
+	taf-kit/src/common_automaton_commands.hh,
+	taf-kit/src/common_commands.hh, taf-kit/src/fmp_commands.cc,
+	taf-kit/src/interface.cc, taf-kit/src/ratexp_commands.hh,
+	taf-kit/src/z_commands.cc: Delete all these files.
+	* cmd_io.cc, cmd_gen.cc, cmd_wt.cc, cmd_b.cc, cmd_r.cc,
+	cmd_fmp.cc, cmd_pair.cc: New files to declare commands according
+	to the sections of the manual.  The last three files are
+	not yet filled.
+	* taf-kit/src/commands.hh: Declare a new command_map interface.
+	* taf-kit/src/commands.cc: New file.
+	* taf-kit/src/getters.hh (write_aut, display_aut): New functions.
+	* taf-kit/src/getters.hxx: Move most functions into ...
+	* taf-kit/src/getters.cc: ... this new file, so they get compiled
+	separately.
+	* taf-kit/src/main.cc: Adjust to the new interface.
+	* taf-kit/src/Makefile: Adjust only fo r
+
 2010-06-04  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Get rid of all command-defining macros.

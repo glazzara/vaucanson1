@@ -32,7 +32,6 @@
 # ifdef WITH_TWO_ALPHABETS
 #  include <vaucanson/xml/contexts/fmp.hh>
 # endif
-# include <vaucanson/xml/XML.hh>
 # include <vaucanson/tools/io.hh>
 # include <string>
 
@@ -42,24 +41,27 @@ using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 
 # ifndef WITH_TWO_ALPHABETS
-static alphabet_t get_alphabet (const std::vector<std::string>&);
-static alphabet_t get_alphabet (const rat_exp_t&);
+alphabet_t get_alphabet (const std::vector<std::string>&);
+alphabet_t get_alphabet (const rat_exp_t&);
 # else
-static first_alphabet_t get_first_alphabet (const std::vector<std::string>&);
-static second_alphabet_t get_second_alphabet (const std::vector<std::string>&);
+first_alphabet_t get_first_alphabet (const std::vector<std::string>&);
+second_alphabet_t get_second_alphabet (const std::vector<std::string>&);
 # endif // !WITH_TWO_ALPHABETS
 
 # ifndef WITH_TWO_ALPHABETS
-static rat_exp_t get_exp(const arguments_t& args, const int& n);
+rat_exp_t get_exp(const arguments_t& args, const int& n);
 
 template <class S, class T>
 static std::basic_string<letter_t>
 get_word(Element<S, T>& aut, const std::string& s);
 # endif // !WITH_TWO_ALPHABETS
 
-static automaton_t get_aut (const arguments_t& args, int n);
+automaton_t get_aut (const arguments_t& args, int n);
 
-static unsigned get_unsigned (const arguments_t& args, int n);
+int write_aut(const automaton_t& aut, const arguments_t& args, int n);
+int display_aut(const automaton_t& aut, const arguments_t& args, int n);
+
+unsigned get_unsigned (const arguments_t& args, int n);
 
 template <typename T>
 void set_monoid_writing_data_(T& dst, const T& src, const cmd_flags_t& flags);

@@ -1,6 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
 ## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008,
-## 2009 The Vaucanson Group.
+## 2009, 2010 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -24,16 +24,17 @@ bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b 	\
 	       vcsn-char-int-b vcsn-char-zmin vcsn-char-zmax
 
 COMMON_SOURCES = commands.hh			\
+		 commands.cc			\
 		 commands_macros.hh		\
-		 common_commands.hh		\
 		 common.hh			\
+	         cmd_io.cc			\
+		 cmd_gen.cc			\
 		 edition_commands.hh		\
 		 edition_commands.hxx		\
 		 library_commands.hh		\
 		 getters.hh			\
 		 getters.hxx			\
-		 interface.cc			\
-		 interface.hh			\
+		 getters.cc			\
 		 main.cc			\
 		 predefined_alphabets.hh	\
 		 predefined_alphabets.hxx	\
@@ -49,31 +50,21 @@ COMMON_SOURCES = commands.hh			\
 		 parser_options.hxx
 
 
-vcsn_char_b_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh		\
-	              common_automaton_commands.hh	\
-                      b_commands.cc
+vcsn_char_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc
 vcsn_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=boolean_automaton -DVCSN_USE_LIB
 vcsn_char_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-b.la
 
-vcsn_char_z_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh		\
-                      common_automaton_commands.hh 	\
-                      z_commands.cc
+vcsn_char_z_SOURCES = $(COMMON_SOURCES) cmd_wt.cc
 vcsn_char_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton -DVCSN_USE_LIB \
 			-DWITH_WEIGHTS
 vcsn_char_z_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z.la
 
-vcsn_char_r_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh		\
-                      common_automaton_commands.hh 	\
-                      r_commands.cc
+vcsn_char_r_SOURCES = $(COMMON_SOURCES)	cmd_wt.cc
 vcsn_char_r_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=r_automaton -DVCSN_USE_LIB \
 			-DWITH_WEIGHTS
 vcsn_char_r_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-r.la
 
-vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) \
-			   fmp_commands.cc
+vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS \
 			    -DIOAUT_CONTEXT=boolean_automaton \
@@ -84,8 +75,7 @@ vcsn_char_fmp_b_LDADD = $(LDADD) \
 			 $(top_builddir)/lib/libvcsn-b.la \
 			 $(top_builddir)/lib/libvcsn-char-char-b.la
 
-vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES) \
-			   fmp_commands.cc
+vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES)
 vcsn_char_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DCONTEXT=z_fmp_transducer -DWITH_TWO_ALPHABETS \
 			    -DIOAUT_CONTEXT=z_automaton \
@@ -97,25 +87,18 @@ vcsn_char_fmp_z_LDADD = $(LDADD) \
 			 $(top_builddir)/lib/libvcsn-z.la \
                          $(top_builddir)/lib/libvcsn-char-char-z.la
 
-vcsn_int_b_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh		\
-	              common_automaton_commands.hh	\
-                      b_commands.cc
+vcsn_int_b_SOURCES = $(COMMON_SOURCES)
 vcsn_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_boolean_automaton \
                       -DNO_PREDEF_ALPHABETS -DVCSN_USE_LIB
 vcsn_int_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-int-b.la
 
-vcsn_int_z_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh		\
-	              common_automaton_commands.hh	\
-                      z_commands.cc
+vcsn_int_z_SOURCES = $(COMMON_SOURCES)
 vcsn_int_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_automaton \
                       -DNO_PREDEF_ALPHABETS -DVCSN_USE_LIB \
 		      -DWITH_WEIGHTS
 vcsn_int_z_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-int-z.la
 
-vcsn_int_fmp_b_SOURCES = $(COMMON_SOURCES) \
-			  fmp_commands.cc
+vcsn_int_fmp_b_SOURCES = $(COMMON_SOURCES)
 vcsn_int_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \
 			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
 			   -DIOAUT_CONTEXT=int_boolean_automaton \
@@ -126,8 +109,7 @@ vcsn_int_fmp_b_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libvcsn-int-fmp-tdc.la \
 			$(top_builddir)/lib/libvcsn-int-int-b.la
 
-vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES) \
-			  fmp_commands.cc
+vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES)
 vcsn_int_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_fmp_transducer \
 			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
 			   -DIOAUT_CONTEXT=int_z_automaton \
@@ -139,10 +121,7 @@ vcsn_int_fmp_z_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libvcsn-int-z-fmp-tdc.la \
 			$(top_builddir)/lib/libvcsn-int-int-z.la
 
-vcsn_char_char_b_SOURCES = $(COMMON_SOURCES) \
-			    ratexp_commands.hh \
-			    common_automaton_commands.hh \
-			    b_commands.cc
+vcsn_char_char_b_SOURCES = $(COMMON_SOURCES)
 vcsn_char_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_char_boolean_automaton \
 			      -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
@@ -150,20 +129,14 @@ vcsn_char_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_char_boolean_automaton
 			      -DNO_SECOND_OPERATOR
 vcsn_char_char_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-char-char-b.la
 
-vcsn_char_int_b_SOURCES = $(COMMON_SOURCES) \
-			    ratexp_commands.hh \
-			    common_automaton_commands.hh \
-			    b_commands.cc
+vcsn_char_int_b_SOURCES = $(COMMON_SOURCES)
 vcsn_char_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_int_boolean_automaton \
 			      -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
 			      -DSECOND_PROJECTION_CONTEXT=int_boolean_automaton
 vcsn_char_int_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-char-int-b.la
 
-vcsn_int_int_b_SOURCES = $(COMMON_SOURCES) \
-			    ratexp_commands.hh \
-			    common_automaton_commands.hh \
-			    b_commands.cc
+vcsn_int_int_b_SOURCES = $(COMMON_SOURCES)
 vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 			    -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			    -DFIRST_PROJECTION_CONTEXT=int_boolean_automaton \
@@ -171,17 +144,11 @@ vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 			    -DNO_SECOND_OPERATOR
 vcsn_int_int_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-int-int-b.la
 
-vcsn_char_zmin_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh			\
-	              common_automaton_commands.hh		\
-                      b_commands.cc
+vcsn_char_zmin_SOURCES = $(COMMON_SOURCES)
 vcsn_char_zmin_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_min_plus_automaton -DVCSN_USE_LIB
 vcsn_char_zmin_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z-min.la
 
-vcsn_char_zmax_SOURCES = $(COMMON_SOURCES)			\
-		      ratexp_commands.hh			\
-	              common_automaton_commands.hh		\
-                      b_commands.cc
+vcsn_char_zmax_SOURCES = $(COMMON_SOURCES)
 vcsn_char_zmax_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_max_plus_automaton -DVCSN_USE_LIB
 vcsn_char_zmax_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z-max.la
 

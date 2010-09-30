@@ -33,13 +33,11 @@
 # ifdef WITH_TWO_ALPHABETS
 #  include <vaucanson/xml/contexts/fmp.hh>
 # endif
-# include <vaucanson/xml/XML.hh>
 
 using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
 using namespace vcsn::tools;
-using vcsn::xml::XML;
 
 # include <iostream>
 # include <sys/types.h>
@@ -47,7 +45,6 @@ using vcsn::xml::XML;
 
 # include "getters.hh"
 # include "commands.hh"
-# include "commands_macros.hh"
 
 # include "progname.h"
 

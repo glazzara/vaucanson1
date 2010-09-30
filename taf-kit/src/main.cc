@@ -42,7 +42,6 @@
 #include "predefined_alphabets.hh"
 
 #include "commands.hh"
-#include "interface.hh"
 #include "parser_options.hh"
 
 
@@ -155,10 +154,10 @@ namespace
 	break;
 #endif /* ! WITH_TWO_ALPHABETS */
       case 'l':
-	list_commands(false);
+	command_map::list(std::cout, false);
 	exit(0);
       case 'L':
-	list_commands(true);
+	command_map::list(std::cout, true);
 	exit(0);
       case 'T':
 	args.report_time = true;
@@ -364,7 +363,7 @@ int main (int argc, char* argv[])
 	      std::ostringstream os;
 	      os << "CMD[" << task_number << "]: ";
 	      BENCH_TASK_SCOPED(os.str () + std::string (args.args[0]));
-	      status = execute_command (args);
+	      status = command_map::execute(args);
 	      g_res.finalize();
 	    }
 	  catch (const std::logic_error& err) {

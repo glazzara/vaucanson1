@@ -52,11 +52,6 @@ extern void tputs(...);
 # include "common.hh"
 
 # include CONTEXT_HEADER
-# ifdef WITH_TWO_ALPHABETS
-#  include <vaucanson/xml/contexts/fmp.hh>
-# endif
-# include <vaucanson/xml/XML.hh>
-# include <vaucanson/tools/dot_display.hh>
 # include <vaucanson/misc/static.hh>
 
 # include "getters.hh"
@@ -391,7 +386,7 @@ namespace edition_commands
 	CHOICE_COMMAND(7, set_unset_initial_final(a, set_to_be, final));
 	CHOICE_COMMAND(8, set_unset_initial_final(a, set_to_not_be, final));
 
-	CHOICE_COMMAND(9, vcsn::tools::dot_display(a, "A", true));
+	CHOICE_COMMAND(9, display_aut(a, args, 1));
 
         case 10: return true;
         case 11: exit(0);
@@ -429,7 +424,6 @@ namespace edition_commands
 static int edit_command(const arguments_t& args)
 {
   using namespace vcsn::tools;
-  using namespace vcsn::xml;
 
 # ifndef WITH_TWO_ALPHABETS
   automaton_t a = make_automaton(alphabet_t());
@@ -441,8 +435,8 @@ static int edit_command(const arguments_t& args)
 
   if (input.is_open())
     {
-      input >> automaton_loader(a, string_out(), XML());
       input.close();
+      a = get_aut(args, 1);
     }
   else
     {
@@ -465,16 +459,7 @@ static int edit_command(const arguments_t& args)
 
   edition_commands::main_loop(a, args);
 
-  std::ofstream output (args.args[1]);
-  if (not output.good())
-  {
-    warn("Error opening `" << args.args[1] << "'.");
-    return -1;
-  }
-  output << automaton_saver(a, string_out(), XML());
-  output.close ();
-
-  return 0;
+  return write_aut(a, args, 1);
 }
 
 
