@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ parser_options<M, S>::options_grammar::options_grammar(typename parser_options<M
 template <typename M, typename S>
 parser_options<M, S>::parser_options(const std::string& str)
 {
-  using namespace boost::spirit;
+  using namespace boost::VCSN_SPIRIT_CLASSIC;
   options_grammar grammar(letters_, mrep_, srep_, cf_);
 
   BOOST_SPIRIT_DEBUG_NODE(grammar);
@@ -151,7 +151,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::definition(const pa
 : al_ref(g.al), mrep_ref(g.mrep), srep_ref(g.srep), cf_ref(g.cf), first_space_(true)
 {
   using namespace boost;
-  using namespace boost::spirit;
+  using namespace boost::VCSN_SPIRIT_CLASSIC;
 
   BOOST_SPIRIT_DEBUG_RULE(parser_properties);
   BOOST_SPIRIT_DEBUG_RULE(property);
@@ -273,7 +273,7 @@ parser_options<M, S>::options_grammar::definition<ScannerT>::escape(const char* 
 
 template <typename M, typename S>
 template <typename ScannerT>
-const boost::spirit::rule<ScannerT>&
+const boost::VCSN_SPIRIT_CLASSIC::rule<ScannerT>&
 parser_options<M, S>::options_grammar::definition<ScannerT>::start() const
 {
   return parser_properties;

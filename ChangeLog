@@ -1,3 +1,15 @@
+2010-09-30  Alex Hamelin  <hamelin@lrde.epita.fr>
+
+	Add a Boost Spirit compatibility macro to TAF-Kit.
+
+	* taf-kit/src/Makefile.am: Add
+	taf-kit/src/boost_spirit_compatibility.hh.
+	* taf-kit/src/boost_spirit_compatibility.hh (VCSN_SPIRIT_CLASSIC):
+	Define a new macro handling namespace changes which occurred in the
+	last versions of Boost Spirit.
+	* taf-kit/src/getters.cc, taf-kit/src/parser_options.hh,
+	taf-kit/src/parser_options.hxx: Use VCSN_SPIRIT_CLASSIC macro.
+
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Make is-unambiguous available to all TAF-Kit instance on free

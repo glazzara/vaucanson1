@@ -37,6 +37,7 @@ using vcsn::xml::XML;
 # include "pipe_writers.hxx"
 #include <boost/lexical_cast.hpp>
 #include <boost/spirit/core.hpp>
+#include "boost_spirit_compatibility.hh"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
@@ -45,14 +46,14 @@ using namespace vcsn::tools;
 // We can not pass rules by value (hence the references).
 # define ALPHABET_DEFINITION(letter_type) \
 void \
-if_is_char_letter(boost::spirit::rule<boost::spirit::scanner<const char*> >& def, \
-		  const boost::spirit::rule<boost::spirit::scanner<const char*> >& case_true, \
-		  const boost::spirit::rule<boost::spirit::scanner<const char*> >& case_false) \
+if_is_char_letter(boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& def, \
+		  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_true, \
+		  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_false) \
 { \
   def = misc::static_if< \
   misc::static_eq<vcsn::algebra::letter_traits<letter_type>::is_char_letter, misc::true_t>::value, \
-  boost::spirit::rule<boost::spirit::scanner<const char*> >&, \
-  boost::spirit::rule<boost::spirit::scanner<const char*> >& \
+  boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >&, \
+  boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& \
   >::choose(case_true, case_false); \
 }
 

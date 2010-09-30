@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 # include <boost/spirit/utility/chset.hpp>
 
 # include <vaucanson/misc/static.hh>
+
+# include "boost_spirit_compatibility.hh"
 
 /**
  * @file parser_options.hh
@@ -84,7 +86,7 @@ private:
   // type helpers
   typedef std::vector<std::string> alphabet_t;
 
-  struct options_grammar : public boost::spirit::grammar<options_grammar>
+  struct options_grammar : public boost::VCSN_SPIRIT_CLASSIC::grammar<options_grammar>
   {
     // CTOR
     options_grammar(alphabet_t& al, M& mrep, S& srep, cmd_flags_t& cf);
@@ -97,7 +99,7 @@ private:
       typedef typename parser_options_t::options_grammar options_grammar_t;
       typedef typename options_grammar_t::template definition<ScannerT> self_t;
 
-      boost::spirit::rule<ScannerT> parser_properties, property,
+      boost::VCSN_SPIRIT_CLASSIC::rule<ScannerT> parser_properties, property,
       alphabet_definition, letters, words, special_name, word_pair,
       word, character, letter, escaped_character, unescaped_character,
       special_character, true_is_char_letter, false_is_char_letter;
@@ -105,7 +107,7 @@ private:
       // CTOR
       definition(const options_grammar& g);
 
-      const boost::spirit::rule<ScannerT>&
+      const boost::VCSN_SPIRIT_CLASSIC::rule<ScannerT>&
       start() const;
 
       // callbacks
@@ -294,9 +296,9 @@ private:
 // Assign case_true to out if the letter trait is_char_letter
 // is true. Otherwise, it assigns case_false to out.
 void
-if_is_char_letter(boost::spirit::rule<boost::spirit::scanner<const char*> >& out,
-		  const boost::spirit::rule<boost::spirit::scanner<const char*> >& case_true,
-		  const boost::spirit::rule<boost::spirit::scanner<const char*> >& case_false);
+if_is_char_letter(boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& out,
+		  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_true,
+		  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_false);
 
 # include "parser_options.hxx"
 
