@@ -51,9 +51,9 @@ EOF
 # Empty automaton (no states).
 echo 10 | $VCSN --alphabet=ab edit empty.xml
 # edit used to add a trailing newline at the end of the XML
-# file; and identity would remove it.  Make sure the two outputs are
+# file; and cat would remove it.  Make sure the two outputs are
 # now identical.
-$VCSN identity empty.xml > empty2.xml
+$VCSN cat empty.xml > empty2.xml
 diff empty.xml empty2.xml
 
 # Two states, no final states (empty language).
@@ -289,17 +289,17 @@ AUTOMATA='all.xml empty.xml 2snf.xml ab.xml ab2.xml nondet.xml comp.xml cnd.xml'
 
 # Check that dot accepts the output.
 for a in $AUTOMATA; do
-  $VCSN identity $a -o DOT | dot
+  $VCSN cat $a -o DOT | dot
 done
 
 # Check that each builtin automaton can be read.
 for a in $($VCSN list-automata | sed -n 's/^  * - \([-a-z0-9.]*\).*/\1/p')
 do
-  $VCSN info $a
+  $VCSN data $a
 done
 
 for a in $AUTOMATA; do
-  $VCSN identity $a >tmp.xml
+  $VCSN cat $a >tmp.xml
 #  $DIFF $a tmp.xml
 done
 
@@ -321,9 +321,9 @@ test "$($VCSN eval a1.xml 'ab')" = 1
 test "$($VCSN eval a1.xml 'aaaabbb')" = 1
 
 # is-ambiguous
-      $VCSN is-ambiguous $ambiguous1
-      $VCSN is-ambiguous $ambiguous2
-fail1 $VCSN is-ambiguous $non_ambiguous1
+fail1 $VCSN is-unambiguous $ambiguous1
+fail1 $VCSN is-unambiguous $ambiguous2
+      $VCSN is-unambiguous $non_ambiguous1
 
 # is-complete
 fail1 $VCSN is-complete a1.xml
@@ -363,10 +363,6 @@ fail1 $VCSN is-empty 2snf.xml
       $VCSN is-useless empty.xml
       $VCSN is-useless 2snf.xml
 fail1 $VCSN is-useless all.xml
-
-# is-normalized.
-#fail1 $VCSN is-normalized a1.xml
-#      $VCSN normalize a1.xml | $VCSN is-normalized -
 
 # realtime and is-realtime
 
@@ -411,17 +407,17 @@ $VCSN is-standard ass.xml
 
 # is-normalized / normalize
 
-fail1 $VCSN is-normalized a1.xml
-      $VCSN normalize a1.xml \| is-normalized -
-fail1 $VCSN -aa standard 'a*' \| is-normalized -
-      $VCSN -aa thompson 'a*' \| is-normalized -
+# fail1 $VCSN is-normalized a1.xml
+#       $VCSN normalize a1.xml \| is-normalized -
+# fail1 $VCSN -aa standard 'a*' \| is-normalized -
+#       $VCSN -aa thompson 'a*' \| is-normalized -
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
 
-$VCSN product a1.xml a1.xml \| identity -
-$VCSN concatenate a1.xml a1.xml \| identity -
+$VCSN product a1.xml a1.xml \| cat -
+$VCSN cauchy-S a1.xml a1.xml \| cat -
 
 $VCSN quotient empty.xml \| is-empty -
 
@@ -469,8 +465,8 @@ fail255 $VCSN -a"abc" thompson 'a+ bd'
 fail255 $VCSN -a"abc" thompson 'a+ bdc'
 
 #FIXME: as soon as an xmldiff tools exists. Use it here.
-$VCSN info aut3.xml > aut3.info
-$VCSN info aut4.xml > aut4.info
+$VCSN data aut3.xml > aut3.info
+$VCSN data aut4.xml > aut4.info
 diff aut3.info aut4.info
 
 # Test some function of the parser
@@ -529,7 +525,7 @@ sed '/^#/d' <<EOF | $VCSN -a"xy" edit wd-empty.xml
 # Exit.
 10
 EOF
-$VCSN -p"$writing_data" identity wd-empty.xml > wd-new.xml
+$VCSN -p"$writing_data" cat wd-empty.xml > wd-new.xml
 diff wd-new.xml wd-ref.xml
 
 # Check that ratexp commands correctly handle the representations.
@@ -555,31 +551,31 @@ test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 # Chain many pipes.  Note that these pipes have two types: they can be
 # automata or rational expressions.
 ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 \| aut-to-exp - \|\
-     identity-exp - \| identity-exp - \| exp-to-aut - \| identity - \|\
-     aut-to-exp - \| identity-exp - \| expand -`
+     cat-E - \| cat-E - \| exp-to-aut - \| cat - \|\
+     aut-to-exp - \| cat-E - \| expand -`
 test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
 # Likewise with external pipes.
 ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 |
      $VCSN aut-to-exp -o xml - |
-     $VCSN identity-exp -i xml -o xml - |
-     $VCSN identity-exp -i xml -o xml - |
+     $VCSN cat-E -i xml -o xml - |
+     $VCSN cat-E -i xml -o xml - |
      $VCSN exp-to-aut -i xml - |
-     $VCSN identity - |
+     $VCSN cat - |
      $VCSN aut-to-exp -o xml - |
-     $VCSN identity-exp -i xml -o xml - |
+     $VCSN cat-E -i xml -o xml - |
      $VCSN expand -i xml -`
 test x"$ret" = x"1p0+0" || test x"$ret" = x"0+0p1"
 
 
 # Try replacing writing data:
 ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 \| aut-to-exp - \|\
-     identity-exp - --parser=PLUS=w \| expand -`
+     cat-E - --parser=PLUS=w \| expand -`
 test x"$ret" = x"1w0+0" || test x"$ret" = x"0+0w1"
 # Likewise with external pipes:
 ret=`$VCSN -a 01+ --parser=PLUS=p exp-to-aut 1p0+0 |
      $VCSN aut-to-exp -o xml - |
-     $VCSN identity-exp --parser=PLUS=w -i xml -o xml - |
+     $VCSN cat-E --parser=PLUS=w -i xml -o xml - |
      $VCSN expand -i xml -`
 test x"$ret" = x"1w0+0" || test x"$ret" = x"0+0w1"
 

@@ -1,5 +1,13 @@
 2010-09-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	vcsn-char-b and vcsn-int-b pass their tests.
+
+	* taf-kit/tests/vcsn-char-b.test, taf-kit/tests/vcsn-int-b.test:
+	Adjust the test to the new name of the commands.
+	* taf-kit/src/Makefile.am: Update to compile vcsn-int-b.
+
+2010-09-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	This is an incomplete work on TAF-Kit.  Only vcsn-char-b is
 	expected to compile, and the test suite should not pass because
 	many TAF-Kit commands have been renamed.
