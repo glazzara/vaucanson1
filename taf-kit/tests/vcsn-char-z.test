@@ -23,8 +23,8 @@ VCSN=vcsn-char-z
 ## Input/output work with automata.  ##
 ## --------------------------------- ##
 
-$VCSN identity -o DOT c1.xml | dot
-$VCSN info c1.xml
+$VCSN cat -o DOT c1.xml | dot
+$VCSN data c1.xml
 
 ## ---------------------------------- ##
 ## Tests and evaluation on automata.  ##
@@ -39,7 +39,6 @@ test $($VCSN eval c1.xml 101010) -eq 42
 test $($VCSN eval d1.xml ababbbabb) -eq -3
 test $($VCSN eval d1.xml baaaba) -eq 2
 
-      $VCSN is-ambiguous c1.xml
 fail1 $VCSN is-empty c1.xml
       $VCSN is-realtime c1.xml
 fail1 $VCSN is-standard c1.xml
@@ -48,19 +47,15 @@ fail1 $VCSN is-standard $void_z_automaton
       $VCSN -a ab standard '({2} a).({4} 1)' > 2a_41.xml
       $VCSN is-standard 2a_41.xml
 
-      $VCSN is-complete c1.xml
-fail1 $VCSN is-complete $void_z_automaton
-      $VCSN complete $void_z_automaton \| is-complete -
-
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
 
-# star-of-standard
-$VCSN star-of-standard $standard_c1 \| is-standard -
+# star
+$VCSN star $standard_c1 \| is-standard -
 
 # construct ((2 a).(4 1))*
-$VCSN star-of-standard 2a_41.xml > star_2a_41.xml
+$VCSN star 2a_41.xml > star_2a_41.xml
 
 $VCSN is-standard star_2a_41.xml
 test $($VCSN eval star_2a_41.xml a) -eq 8
@@ -68,10 +63,10 @@ test $($VCSN eval star_2a_41.xml aa) -eq 64
 test $($VCSN eval star_2a_41.xml aaa) -eq 512
 
 # sum-of-standard
-$VCSN sum-of-standard $standard_c1 $standard_c1 \| is-standard -
+$VCSN sum $standard_c1 $standard_c1 \| is-standard -
 
 # concat-of-standard
-$VCSN concat-of-standard $standard_c1 $standard_c1 \| is-standard -
+$VCSN concatenate $standard_c1 $standard_c1 \| is-standard -
 
 
 # BEWARE: we are mixing the letters O/I with the digits 0/1 below.
@@ -150,7 +145,7 @@ test `cat out` = 0
 # [2.4]  m.:k  ==>  k:.m, for all m in the monoid M
 
 while read rule before after; do
-  test "x`$VCSN -aab identity-exp $before`" = "x$after"
+  test "x`$VCSN -aab cat-E $before`" = "x$after"
 done <<EOF
 [0.1]          a+b+0             a+b
 [0.1]          a+0+b             a+b
@@ -197,7 +192,7 @@ done <<EOF
 EOF
 
 while read before after; do
-  test "x`$VCSN -aabc realtime-exp $before`" = "x$after"
+  test "x`$VCSN -aabc realtime-E $before`" = "x$after"
 done <<EOF
 1                1
 abc              a.b.c
@@ -221,7 +216,7 @@ sed '/^#/d' <<EOF | $VCSN -a"xy" edit wd-empty.xml
 # Exit.
 10
 EOF
-$VCSN -p"$writing_data" identity wd-empty.xml > wd-new.xml
+$VCSN -p"$writing_data" cat wd-empty.xml > wd-new.xml
 diff wd-new.xml wd-ref.xml
 
 # Check predefined alphabets in help.

@@ -98,6 +98,13 @@ thompson_command(const arguments_t& args)
 }
 
 static int
+realtime_E_command(const arguments_t& args)
+{
+  g_res.keep(realtime(get_exp(args, 1)));
+  return 0;
+}
+
+static int
 product_command(const arguments_t& args)
 {
   g_res.keep(product(get_aut(args, 1), get_aut(args, 2)));
@@ -116,6 +123,7 @@ power_command(const arguments_t& args)
   return 0;
 }
 
+
 BEGIN_COMMAND_GROUP(cmd_gen,
 	 "Operations on weighted automata and expressions over free monoids:");
 COMMAND_ENTRY(transpose, Aut, "Transpose the automaton `aut'.");
@@ -127,6 +135,7 @@ COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
 COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
 COMMAND_ENTRY(standard, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY(thompson, Exp, "Build the Thompson automaton for `exp'.");
+COMMAND_ENTRY_EXPERT(realtime_E, Exp, "Make `exp' realtime.");
 COMMAND_ENTRY(product, AutAut, "Build the product of two automata.");
 COMMAND_ENTRY(power, AutInt, "Build the `n'th power of `aut'.");
 END_COMMAND_GROUP
