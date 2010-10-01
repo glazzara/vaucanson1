@@ -82,6 +82,13 @@ enumerate_command(const arguments_t& args)
 }
 
 static int
+aut_to_exp_command(const arguments_t& args)
+{
+  g_res.keep(aut_to_exp(get_aut(args, 1), DMChooser()));
+  return 0;
+}
+
+static int
 standard_command(const arguments_t& args)
 {
   rat_exp_t e = get_exp(args, 1);
@@ -94,6 +101,28 @@ thompson_command(const arguments_t& args)
 {
   rat_exp_t e = get_exp(args, 1);
   g_res.keep(thompson_of(e));
+  return 0;
+}
+
+static int
+cat_E_command(const arguments_t& args)
+{
+  g_res.keep(get_exp(args, 1));
+  return 0;
+}
+
+static int
+expand_command(const arguments_t& args)
+{
+  g_res.keep(expand(get_exp(args, 1)));
+  return 0;
+}
+
+static int
+exp_to_aut_command(const arguments_t& args)
+{
+  rat_exp_t e = get_exp(args, 1);
+  g_res.keep(standard_of(e));
   return 0;
 }
 
@@ -133,8 +162,14 @@ COMMAND_ENTRY(quotient, Aut, "Build the quotient of `aut'.");
 COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on `aut'.");
 COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
 COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
+COMMAND_ENTRY(aut_to_exp, Aut,
+	      "Build an expression denoting the behaviour of `aut'.");
+// Operations on expressions
 COMMAND_ENTRY(standard, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY(thompson, Exp, "Build the Thompson automaton for `exp'.");
+COMMAND_ENTRY(cat_E, Exp, "Return `exp' after trivial simplifications.");
+COMMAND_ENTRY(expand, Exp, "Distribute product over addition in `exp'.");
+COMMAND_ENTRY(exp_to_aut, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY_EXPERT(realtime_E, Exp, "Make `exp' realtime.");
 COMMAND_ENTRY(product, AutAut, "Build the product of two automata.");
 COMMAND_ENTRY(power, AutInt, "Build the `n'th power of `aut'.");

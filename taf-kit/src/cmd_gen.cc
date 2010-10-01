@@ -89,7 +89,7 @@ is_proper_command(const arguments_t& args)
 {
   bool b = is_proper(get_aut(args, 1));
   if (args.verbose)
-    g_res.stream << (b ? "Input is proper\n": "Input is not properd\n");
+    g_res.stream << (b ? "Input is proper\n": "Input is not proper\n");
   return !b;
 }
 
@@ -98,8 +98,7 @@ is_standard_command(const arguments_t& args)
 {
   bool b = is_standard(get_aut(args, 1));
   if (args.verbose)
-    g_res.stream << (b ? "Input is standard\n":
-			     "Input is not standard\n");
+    g_res.stream << (b ? "Input is standard\n": "Input is not standard\n");
   return !b;
 }
 
@@ -147,13 +146,6 @@ star_command(const arguments_t& args)
 };
 
 static int
-aut_to_exp_command(const arguments_t& args)
-{
-  g_res.keep(aut_to_exp(get_aut(args, 1), DMChooser()));
-  return 0;
-}
-
-static int
 sum_S_command(const arguments_t& args)
 {
   automaton_t a = get_aut(args, 1);
@@ -192,21 +184,6 @@ star_S_command(const arguments_t& args)
   return 0;
 };
 
-static int
-expand_command(const arguments_t& args)
-{
-  g_res.keep(expand(get_exp(args, 1)));
-  return 0;
-}
-
-static int
-exp_to_aut_command(const arguments_t& args)
-{
-  rat_exp_t e = get_exp(args, 1);
-  g_res.keep(standard_of(e));
-  return 0;
-}
-
 BEGIN_COMMAND_GROUP(cmd_gen,
 		    "Operations on all automata and rational expressions:");
 // Graphs
@@ -234,8 +211,6 @@ COMMAND_ENTRY(concatenate, AutAut,
 	      "Build the concatenation of two standard automata.");
 COMMAND_ENTRY(star, Aut,
 	      "Build the star of a standard automaton.");
-COMMAND_ENTRY(aut_to_exp, Aut,
-	      "Build an expression denoting the behaviour of `aut'.");
 // Operations on behaviors
 COMMAND_ENTRY(sum_S, AutAut,
 	      "Build a standard sum of two automata.");
@@ -243,7 +218,4 @@ COMMAND_ENTRY(cauchy_S, AutAut,
 	      "Build a standard Cauchy product of two automata.");
 COMMAND_ENTRY(star_S, Aut,
 	      "Build a standard star of an automaton.");
-// Operations on expressions
-COMMAND_ENTRY(expand, Exp, "Distribute product over addition in `exp'.");
-COMMAND_ENTRY(exp_to_aut, Exp, "Build the standard automaton for `exp'.");
 END_COMMAND_GROUP

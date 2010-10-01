@@ -40,13 +40,6 @@ cat_command(const arguments_t& args)
 }
 
 static int
-cat_E_command(const arguments_t& args)
-{
-  g_res.keep(get_exp(args, 1));
-  return 0;
-}
-
-static int
 display_command(const arguments_t& args)
 {
   return display_aut(get_aut(args, 1), args, 1);
@@ -57,7 +50,6 @@ BEGIN_COMMAND_GROUP(io_commands,
 	    "Input/Output functions:");
 COMMAND_ENTRY(data, Aut, "Print useful infos about `aut'.");
 COMMAND_ENTRY(cat, Aut, "Return `aut'.");
-COMMAND_ENTRY(cat_E, Exp, "Return `exp' after trivial simplifications.");
 COMMAND_ENTRY(display, Aut, "Display `aut'.");
 COMMAND_ENTRY(edit, Aut, "Create or edit an automaton interactively.");
 COMMAND_ENTRY(list_automata, None, "List predefined automata.");

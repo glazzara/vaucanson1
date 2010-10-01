@@ -1,5 +1,18 @@
 2010-10-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Define FMP commands.  (TAF-Kit instances for FMP do not yet
+	compile, because many functions from cmd_gen.cc assume automata,
+	not transducers.)
+
+	* taf-kit/src/cmd_fmp.cc: Fill in.
+	* taf-kit/src/cmd_gen.cc (aut_to_exp, expand, exp_to_aut): Move
+	these...
+	* taf-kit/src/cmd_io.cc (cat_E): ... and this ...
+	* taf-kit/src/cmd_wt.cc: ... here, because rat_exp_t is not
+	defined in FMP contexts.
+
+2010-10-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	vcsn-char-z and vcsn-int-z pass their tests.
 
 	* taf-kit/src/cmd_wt.cc (realtime_E_command): New command (was
