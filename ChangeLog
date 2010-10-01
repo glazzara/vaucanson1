@@ -1,5 +1,12 @@
 2010-10-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx,
+	taf-kit/src/library_commands.hh: Do not include
+	vaucanson/xml/contexts/fmp.hh, it is only needed in getters.cc.
+	* b/taf-kit/src/cmd_fmp.cc: Add missing includes.
+
+2010-10-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Define FMP commands.  (TAF-Kit instances for FMP do not yet
 	compile, because many functions from cmd_gen.cc assume automata,
 	not transducers.)

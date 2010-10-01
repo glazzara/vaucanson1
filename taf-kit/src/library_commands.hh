@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,9 +30,6 @@
 # include <unistd.h>
 
 # include CONTEXT_HEADER
-# ifdef WITH_TWO_ALPHABETS
-#  include <vaucanson/xml/contexts/fmp.hh>
-# endif
 
 using namespace CONTEXT_NAMESPACE;
 
