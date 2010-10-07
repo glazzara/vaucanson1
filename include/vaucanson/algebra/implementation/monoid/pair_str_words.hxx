@@ -113,11 +113,13 @@ namespace vcsn {
       return f(v.first.length(), v.second.length());
     }
 
-    template<typename F, typename S>
+    template<typename F, typename S,
+	     typename A1, typename A2, typename A3, typename A4>
     bool
     op_is_atom(const algebra::FreeMonoidProduct<F, S>&,
-	       const std::pair<std::basic_string<typename F::letter_t>,
-			       std::basic_string<typename S::letter_t> >& v)
+	       const std::pair<std::basic_string<typename F::letter_t, A1, A2>,
+			       std::basic_string<typename S::letter_t, A3, A4>
+			       >& v)
     {
       return (v.first.length() <= 1) && (v.second.length() <= 1);
     }

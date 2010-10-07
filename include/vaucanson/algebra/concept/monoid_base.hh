@@ -140,10 +140,6 @@ namespace vcsn {
 
     /// Protected since it is an abstract class.
     MetaElement(const MetaElement& other);
-
-  public:
-    /// Is a word an atom?
-    bool is_atom() const;
   };
 
   /** @} */
@@ -153,9 +149,6 @@ namespace vcsn {
 
     template<typename T, typename Self>
     T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T));
-
-    template<typename Self, typename T>
-    bool op_is_atom(const algebra::MonoidBase<Self>& s, const T& v);
 
   } // algebra
 

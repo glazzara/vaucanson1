@@ -68,10 +68,10 @@ namespace vcsn {
 	       SELECTOR(std::basic_string<typename A::letter_t>),
 	       const typename A::letter_t& c);
 
-    template<typename A>
+    template<typename A, typename B, typename C, typename D>
     bool
     op_is_atom(const algebra::FreeMonoid<A>&,
-	       const std::basic_string<typename A::letter_t>& v);
+	       const std::basic_string<B, C, D>& v);
 
     /*---------------------------------------------------------------------.
     | word_traits<FreeMonoid<A>, std::basic_string<typename A::letter_t> > |

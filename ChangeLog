@@ -1,5 +1,23 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Cleanup op_is_atom() declarations.  This also avoid an infinite
+	loop with op_is_atom() from monoid_base.hxx possibly calling
+	itself when no implementation matches.
+
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	include/vaucanson/algebra/concept/monoid_base.hxx (is_atom,
+	op_is_atom): Remove from the abstract interface.  It needs only
+	to be in the implementation interface.
+	* include/vaucanson/algebra/implementation/monoid/pair_str_words.hh,
+	include/vaucanson/algebra/implementation/monoid/pair_str_words.hxx,
+	include/vaucanson/algebra/implementation/monoid/str_words.hh,
+	include/vaucanson/algebra/implementation/monoid/str_words.hxx
+	(op_is_atop): Use the three template parameters of basic_string,
+	otherwise some call to op_is_atom() will fail to find a matching
+	function.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Make the hulden demo work with the new TAF-Kit commands.
 
 	* taf-kit/demos/hulden/run.in: Adjust to the new semantics.

@@ -180,10 +180,10 @@ namespace vcsn {
       return str;
     }
 
-    template<typename A>
+    template<typename A, typename B, typename C, typename D>
     bool
     op_is_atom(const algebra::FreeMonoid<A>&,
-	       const std::basic_string<typename A::letter_t>& v)
+	       const std::basic_string<B, C, D>& v)
     {
       return v.size() <= 1;
     }
