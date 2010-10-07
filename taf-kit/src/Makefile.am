@@ -25,7 +25,6 @@ bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b 	\
 
 COMMON_SOURCES = commands.hh			\
 		 commands.cc			\
-		 commands_macros.hh		\
 		 common.hh			\
 	         cmd_io.cc			\
 		 cmd_gen.cc			\

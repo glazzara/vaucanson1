@@ -1,5 +1,11 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	"commands_macros.hh" no longer exist.
+
+	* taf-kit/src/Makefile.am (COMMON_SOURCES): Remove commands_macros.hh.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Use sections in -l and -L.
 
 	* taf-kit/src/commands.cc (list): Display commands section by
