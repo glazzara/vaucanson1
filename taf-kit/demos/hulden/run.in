@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2008 The Vaucanson Group.
+# Copyright (C) 2008, 2010 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -63,7 +63,6 @@ L=$2
 # If alpha is "ab", E will be "a+b".
 E=`echo "$alpha" | sed 's/./&+/g;s/+$//;'`
 
-
 # Construct an automaton for
 #
 #  L' = (\Sigma^\star L\Sigma^\star) \setminus
@@ -79,17 +78,14 @@ E=`echo "$alpha" | sed 's/./&+/g;s/+$//;'`
 # ((\Sigma^+L\Sigma^\star)\cap(L\Sigma^\star))      EplExlE.xml
 # ((L\Sigma^+)\cap L))\Sigma^\star                  lEpxl.xml
 
-$VCSN --alphabet=$alpha standard "$L" \| quotient - > l.xml
-$VCSN --alphabet=$alpha standard "($E)*" \| quotient - > E.xml
-$VCSN --alphabet=$alpha standard "($E).($E)*" \| quotient - > Ep.xml
+$VCSN --alphabet=$alpha standard "$L" > l.xml
+$VCSN --alphabet=$alpha standard "($E)*" > E.xml
+$VCSN --alphabet=$alpha standard "($E).($E)*" > Ep.xml
 $VCSN concatenate E.xml l.xml \|\
-      concatenate - E.xml \|\
-      realtime - > ElE.xml
+      concatenate - E.xml > ElE.xml
 $VCSN concatenate Ep.xml l.xml \|\
-      concatenate - E.xml \|\
-      realtime - > EplE.xml
-$VCSN concatenate l.xml E.xml \|\
-      realtime - > lE.xml
+      concatenate - E.xml > EplE.xml
+$VCSN concatenate l.xml E.xml > lE.xml
 
 $VCSN product EplE.xml lE.xml \| quotient - > EplExlE.xml
 
@@ -99,6 +95,7 @@ $VCSN concatenate l.xml Ep.xml \|\
       quotient - > lEpxl.xml
 
 $VCSN union EplExlE.xml lEpxl.xml \|\
+      standardize - \|\
       concatenate E.xml - \|\
       concatenate - E.xml \|\
       determinize - \|\

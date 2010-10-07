@@ -1,5 +1,11 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make the hulden demo work with the new TAF-Kit commands.
+
+	* taf-kit/demos/hulden/run.in: Adjust to the new semantics.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Declare commands on alphabets of pairs.
 
 	* taf-kit/src/cmd_pair.cc: Fill in
