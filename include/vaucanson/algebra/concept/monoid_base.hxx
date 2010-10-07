@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -84,6 +84,13 @@ namespace vcsn {
     MetaElement<algebra::SemigroupBase<Self>, T>(other)
   {}
 
+  template<class Self, typename T>
+  bool
+  MetaElement<algebra::MonoidBase<Self>, T>::is_atom() const
+  {
+    return op_is_atom(this->structure, this->value);
+  }
+
   namespace algebra {
 
     template<typename T, typename Self>
@@ -92,6 +99,13 @@ namespace vcsn {
     {
       // By default, an element of a monoid is the identity.
       return identity_value(SELECT(Self), SELECT(T));
+    }
+
+    template<typename Self, typename T>
+    bool
+    op_is_atom(const algebra::MonoidBase<Self>& s, const T& v)
+    {
+      return op_is_atom(s.self(), v);
     }
 
   } // algebra

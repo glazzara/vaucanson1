@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2007, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,6 +49,12 @@ namespace vcsn {
     template <typename Self, typename T, typename Ftor>
     typename Ftor::result_type
     op_length(const FreeMonoidProductBase<Self>&, const T& v, Ftor f);
+
+    template<typename F, typename S>
+    bool
+    op_is_atom(const algebra::FreeMonoidProduct<F, S>&,
+	       const std::pair<std::basic_string<typename F::letter_t>,
+			       std::basic_string<typename S::letter_t> >& v);
 
     template <class F, class S>
     void

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 The Vaucanson
 // Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -67,6 +67,11 @@ namespace vcsn {
     op_convert(SELECTOR(algebra::FreeMonoid<A>),
 	       SELECTOR(std::basic_string<typename A::letter_t>),
 	       const typename A::letter_t& c);
+
+    template<typename A>
+    bool
+    op_is_atom(const algebra::FreeMonoid<A>&,
+	       const std::basic_string<typename A::letter_t>& v);
 
     /*---------------------------------------------------------------------.
     | word_traits<FreeMonoid<A>, std::basic_string<typename A::letter_t> > |

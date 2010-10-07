@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 The Vaucanson
 // Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -140,6 +140,10 @@ namespace vcsn {
 
     /// Protected since it is an abstract class.
     MetaElement(const MetaElement& other);
+
+  public:
+    /// Is a word an atom?
+    bool is_atom() const;
   };
 
   /** @} */
@@ -149,6 +153,9 @@ namespace vcsn {
 
     template<typename T, typename Self>
     T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T));
+
+    template<typename Self, typename T>
+    bool op_is_atom(const algebra::MonoidBase<Self>& s, const T& v);
 
   } // algebra
 

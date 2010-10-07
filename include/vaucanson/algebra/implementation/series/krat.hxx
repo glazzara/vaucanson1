@@ -485,17 +485,15 @@ namespace vcsn
 	return;
       }
 
-      // case c {k} -> {k} c  (where c is a letter, not a word)
-      if (this_type == node_t::constant)
-      {
-	n_const_t* c = dynamic_cast<n_const_t*>(ret.base());
-	if (c->value_.size() == 1)
-	  {
-	    ret.base() = new n_lweight_t
-	      (op_convert(SELECT(W), SELECT(Tw), w), ret.base());
-	    return;
-	  }
-      }
+      // case c {k} -> {k} c  (where c is an atom)
+      if ((this_type == node_t::constant)
+	  && op_is_atom(s.monoid(),
+			dynamic_cast<n_const_t*>(ret.base())->value_))
+	{
+	  ret.base() = new n_lweight_t
+	    (op_convert(SELECT(W), SELECT(Tw), w), ret.base());
+	  return;
+	}
 
       // case (E {k'}) {k} -> E {k'k}
       if (this_type == node_t::rweight)
@@ -506,7 +504,7 @@ namespace vcsn
 	return;
       }
 
-      // [1] case ({k'} c) {k} -> {k'k} c  if c is a letter or a constant
+      // [1] case ({k'} c) {k} -> {k'k} c  if c is an atom or a constant
       // (Note: case [2] is like if you had applied case [1]
       // followed by the c {k} -> {k} c, and then the
       // {k'} (E  {k}) -> {k'k} E rewritings.)
@@ -517,7 +515,8 @@ namespace vcsn
 	// [1]
 	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
         if ((p->child_->what() == node_t::constant
-	     && dynamic_cast<n_const_t*>(p->child_)->value_.size() == 1)
+	     && op_is_atom(s.monoid(),
+			   dynamic_cast<n_const_t*>(p->child_)->value_))
 	    || p->child_->what() == node_t::one)
 	  {
 	    p->weight_ = op_mul (s.semiring(), p->weight_,

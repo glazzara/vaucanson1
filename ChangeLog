@@ -1,3 +1,26 @@
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Introduce op_is_atom() on all monoids, and use it.
+
+	Some trivial simplification performed in krat_exp operations
+	assumed words were defined over a free-monoid implemented as a
+	string.  For instance the rewriting 'c{k} -> {k}c' was performed
+	any time 'c' was a letter or a constant, but the concept of letter
+	makes no sense if the monoid is not free.  Rewrite this code using
+	op_is_atom() to be generic.
+
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	include/vaucanson/algebra/concept/monoid_base.hxx
+	(monoid::is_atom, op_is_atom): New methods.
+	* include/vaucanson/algebra/implementation/monoid/pair_str_words.hh,
+	include/vaucanson/algebra/implementation/monoid/pair_str_words.hxx,
+	include/vaucanson/algebra/implementation/monoid/str_words.hh,
+	include/vaucanson/algebra/implementation/monoid/str_words.hxx
+	(op_is_atom): Implement it for words and pairs of words.
+	* include/vaucanson/algebra/implementation/series/krat.hxx
+	(op_in_mul): Use op_is_atom() instead of checking the size of
+	the node explicitly.
+
 2010-10-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/getters.hh, taf-kit/src/getters.hxx,
