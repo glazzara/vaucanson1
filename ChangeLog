@@ -1,5 +1,14 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Enable cmd_gen.cc to compile for TAF-Kit's FMP instances.
+
+	* lib/generate_libvcsn.rb (standard.hh): Instanciate it also for
+	transducers.
+	* include/vaucanson/contexts/transducer.thh: Define the type
+	gen_automaton_t in transducer contexts too.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Introduce op_is_atom() on all monoids, and use it.
 
 	Some trivial simplification performed in krat_exp operations

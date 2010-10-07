@@ -127,7 +127,6 @@ def create?(type, file)
       file !~ /realtime_decl.hh/ and
       file !~ /realtime.hh/ and
       file !~ /reduce.hh/ and
-      file !~ /standard.hh/ and
       file !~ /standard_of.hh/ and
       file !~ /shortest.hh/ and
       file !~ /thompson.hh/ and

@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -32,6 +32,7 @@ namespace vcsn
 
       typedef vcsn::Transducer<series_set_elt_t::set_t, labels_are_series> automata_set_t;
       typedef Element<automata_set_t, automaton_impl_t>	       automaton_t;
+      typedef vcsn::generalized_traits<automaton_t>::automaton_t gen_automaton_t;
       typedef input_projection_helper<automata_set_t, automaton_impl_t>::ret
       input_projection_automaton_t;
       typedef output_projection_helper<automata_set_t, automaton_impl_t>::ret
