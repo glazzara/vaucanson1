@@ -16,11 +16,18 @@
 //
 
 #include "commands.hh"
+#include "common.hh"
+#include "getters.hh"
 
 static int
-transpose_command(const arguments_t& args)
+reduce_command(const arguments_t& args)
 {
-  g_res.keep(transpose(get_aut(args, 1)));
+  g_res.keep(reduce(get_aut(args, 1)));
   return 0;
 };
 
+BEGIN_COMMAND_GROUP(r_commands,
+		    "Algorithms for automata with weights in a field:");
+COMMAND_ENTRY(reduce, Aut,
+	      "Compute a minimal automaton equivalent to `aut'.");
+END_COMMAND_GROUP

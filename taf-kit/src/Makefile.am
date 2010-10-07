@@ -59,7 +59,7 @@ vcsn_char_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton -DVCSN_USE_LIB \
 			-DWITH_WEIGHTS
 vcsn_char_z_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z.la
 
-vcsn_char_r_SOURCES = $(COMMON_SOURCES)	cmd_wt.cc
+vcsn_char_r_SOURCES = $(COMMON_SOURCES)	cmd_wt.cc cmd_r.cc
 vcsn_char_r_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=r_automaton -DVCSN_USE_LIB \
 			-DWITH_WEIGHTS
 vcsn_char_r_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-r.la
