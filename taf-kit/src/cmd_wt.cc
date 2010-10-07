@@ -27,6 +27,15 @@ transpose_command(const arguments_t& args)
 }
 
 static int
+is_unambiguous_command(const arguments_t& args)
+{
+  bool b = is_ambiguous(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is ambiguous\n" : "Input is unambiguous\n");
+  return !!b;
+}
+
+static int
 is_realtime_command(const arguments_t& args)
 {
   bool b = is_realtime(get_aut(args, 1));
@@ -156,6 +165,8 @@ power_command(const arguments_t& args)
 BEGIN_COMMAND_GROUP(cmd_gen,
 	 "Operations on weighted automata and expressions over free monoids:");
 COMMAND_ENTRY(transpose, Aut, "Transpose the automaton `aut'.");
+COMMAND_ENTRY(is_unambiguous, Aut,
+	      "Return whether `aut' is unambiguous.");
 COMMAND_ENTRY(is_realtime, Aut, "Tell whether `aut' is realtime.");
 COMMAND_ENTRY(realtime, Aut, "Build a realtime version of `aut'.");
 COMMAND_ENTRY(quotient, Aut, "Build the quotient of `aut'.");

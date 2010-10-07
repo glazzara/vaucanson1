@@ -53,15 +53,6 @@ determinize_command(const arguments_t& args)
 }
 
 static int
-is_unambiguous_command(const arguments_t& args)
-{
-  bool b = is_ambiguous(get_aut(args, 1));
-  if (args.verbose)
-    g_res.stream << (b ? "Input is ambiguous\n" : "Input is unambiguous\n");
-  return !!b;
-}
-
-static int
 complement_command(const arguments_t& args)
 {
   g_res.keep(complement(get_aut(args, 1)));
@@ -114,8 +105,6 @@ COMMAND_ENTRY(is_deterministic, Aut,
 	      "Return whether `aut' is deterministic.");
 COMMAND_ENTRY(determinize, Aut,
 	      "Give the determinized automaton of `aut'.");
-COMMAND_ENTRY(is_unambiguous, Aut,
-	      "Return whether `aut' is unambiguous.");
 COMMAND_ENTRY(complement, Aut, "Complement `aut'.");
 
 COMMAND_ENTRY_CN(minimize, minimization_hopcroft, Aut,

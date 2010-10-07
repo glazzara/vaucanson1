@@ -1,5 +1,15 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make is-unambiguous available to all TAF-Kit instance on free
+	monoids.
+
+	* taf-kit/src/cmd_b.cc (is_unambiguous_command): Move ...
+	* taf-kit/src/cmd_wt.cc (is_unambiguous_command): ... here.
+	* taf-kit/tests/vcsn-char-zmin.test: Add tests
+	for is-unambiguous.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	"commands_macros.hh" no longer exist.
 
 	* taf-kit/src/Makefile.am (COMMON_SOURCES): Remove commands_macros.hh.
