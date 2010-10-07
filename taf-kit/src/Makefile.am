@@ -64,7 +64,7 @@ vcsn_char_r_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=r_automaton -DVCSN_USE_LIB \
 			-DWITH_WEIGHTS
 vcsn_char_r_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-r.la
 
-vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES)
+vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DCONTEXT=fmp_transducer -DWITH_TWO_ALPHABETS \
 			    -DIOAUT_CONTEXT=boolean_automaton \
@@ -75,7 +75,7 @@ vcsn_char_fmp_b_LDADD = $(LDADD) \
 			 $(top_builddir)/lib/libvcsn-b.la \
 			 $(top_builddir)/lib/libvcsn-char-char-b.la
 
-vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES)
+vcsn_char_fmp_z_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_char_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) \
 			    -DCONTEXT=z_fmp_transducer -DWITH_TWO_ALPHABETS \
 			    -DIOAUT_CONTEXT=z_automaton \
@@ -98,7 +98,7 @@ vcsn_int_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_automaton \
 		      -DWITH_WEIGHTS
 vcsn_int_z_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-int-z.la
 
-vcsn_int_fmp_b_SOURCES = $(COMMON_SOURCES)
+vcsn_int_fmp_b_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_int_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_fmp_transducer \
 			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
 			   -DIOAUT_CONTEXT=int_boolean_automaton \
@@ -109,7 +109,7 @@ vcsn_int_fmp_b_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libvcsn-int-fmp-tdc.la \
 			$(top_builddir)/lib/libvcsn-int-int-b.la
 
-vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES)
+vcsn_int_fmp_z_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_int_fmp_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_z_fmp_transducer \
 			   -DNO_PREDEF_ALPHABETS -DWITH_TWO_ALPHABETS \
 			   -DIOAUT_CONTEXT=int_z_automaton \

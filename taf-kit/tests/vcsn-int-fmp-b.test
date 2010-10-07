@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2008, 2009 The Vaucanson Group.
+# Copyright (C) 2008, 2009, 2010 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ set -e
 
 VCSN=vcsn-int-fmp-b
 
-$VCSN intersection $int_b > int-b-b.xml
+$VCSN partial-identity $int_b > int-b-b.xml
 res=`$VCSN eval --parser1='ONE=e ZERO=O' int-b-b.xml 11`
 test "x$res" = x11
 
@@ -47,7 +47,7 @@ sed '/^#/d' <<EOF | $VCSN -a"10,11" -A"12,13" edit wd-empty.xml
 # Exit.
 10
 EOF
-$VCSN -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" identity wd-empty.xml > wd-new.xml
+$VCSN -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" cat wd-empty.xml > wd-new.xml
 diff wd-new.xml wd-ref.xml
 
 # Check predefined alphabets in help.

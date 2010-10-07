@@ -1,5 +1,23 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Augment the list of FMP commands and update the tests cases
+	for TAF-Kit's FMP instances.
+
+	* taf-kit/src/cmd_fmp.cc (is_normalized, normalized, to_rw):
+	Add as hidden commands.
+	(transpose, domain, image): New commands.
+	* taf-kit/src/getters.hh [WITH_TWO_ALPHABETS] (get_pair_aut,
+	get_boolean_aut): Declare these functions.
+	* taf-kit/src/Makefile.am (vcsn_char_fmp_b_SOURCES,
+	vcsn_char_fmp_z_SOURCES, vcsn_int_fmp_b_SOURCES,
+	vcsn_int_fmp_z_SOURCES): Add cmd_fmp.cc.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Adjust to new command names.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Enable cmd_gen.cc to compile for TAF-Kit's FMP instances.
 
 	* lib/generate_libvcsn.rb (standard.hh): Instanciate it also for

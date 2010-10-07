@@ -28,6 +28,13 @@ inverse_command(const arguments_t& args)
 }
 
 static int
+transpose_command(const arguments_t& args)
+{
+  g_res.keep(transpose(get_aut(args, 1)));
+  return 0;
+}
+
+static int
 is_subnormalized_command(const arguments_t& args)
 {
   bool b = is_sub_normalized(get_aut(args, 1));
@@ -41,6 +48,22 @@ static int
 subnormalize_command(const arguments_t& args)
 {
   g_res.keep(sub_normalize(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+is_normalized_command(const arguments_t& args)
+{
+  bool b = is_normalized(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is normalized\n" : "Input is not normalized\n");
+  return !b;
+}
+
+static int
+normalize_command(const arguments_t& args)
+{
+  g_res.keep(normalize(get_aut(args, 1)));
   return 0;
 }
 
@@ -128,6 +151,34 @@ pair_to_fmp_command(const arguments_t& args)
 }
 
 static int
+domain_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().first_monoid().alphabet(),
+     *(src.structure().series().monoid().first_monoid().representation()),
+     src.structure().series().representation()->first_representation());
+  domain(src, a);
+  g_res.keep(a);
+  return 0;
+}
+
+static int
+image_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().second_monoid().alphabet(),
+     *(src.structure().series().monoid().second_monoid().representation()),
+     src.structure().series().representation()->second_representation());
+  image(src, a);
+  g_res.keep(a);
+  return 0;
+}
+
+static int
 evaluation_command(const arguments_t& args)
 {
   automaton_t src = get_aut(args, 1);
@@ -179,38 +230,62 @@ partial_identity_command(const arguments_t& args)
   return 0;
 }
 
+#ifdef RW_CONTEXT
+static int
+to_rw_command(const arguments_t& args)
+{
+  automaton_t fmp = get_aut(args, 1);
+  automaton_t::monoid_t m = fmp.structure().series().monoid();
+  RW_CONTEXT::automaton_t a =
+    // FIXME: we should use representations from the fmp
+    // automaton.
+    RW_CONTEXT::make_automaton(m.first_monoid().alphabet(),
+			       m.second_monoid().alphabet());
+  fmp_to_rw(fmp, a);
+  g_res.keep(a);
+  return 0;
+}
+#endif
+
 BEGIN_COMMAND_GROUP(fmp_commands,
 		    "Algorithms for automata on products of free monoïds:");
 COMMAND_ENTRY(inverse, Aut, "Give the inverse of `aut'.");
+COMMAND_ENTRY(transpose, Aut,
+	      "Give the transposed of the transducer `aut'.");
 COMMAND_ENTRY(is_subnormalized, Aut, "Tell whether `aut' is sub-normalized.");
 COMMAND_ENTRY(subnormalize, Aut,
-	      "Build the subnormalized transducer of `aut'.");
+	      "Build a subnormalized transducer of `aut'.");
+COMMAND_ENTRY_EXPERT(is_normalized, Aut,
+	      "Return whether `aut' is normalized.");
+COMMAND_ENTRY_EXPERT(normalize, Aut,
+		     "Build a normalized transducer for `aut'.");
 COMMAND_ENTRY(is_ltl, Aut, "Test if `aut' is letter-to-letter.");
 COMMAND_ENTRY(ltl_to_pair, Aut,
       "Convert `Aut' into an automaton defined over a pair letter alphabet.");
 COMMAND_ENTRY(pair_to_fmp, Aut,
-	      "Convert an automata `Aut' using pair letters into an FMP."),
-
+	      "Convert an automata `Aut' using pair letters into an FMP.");
 COMMAND_ENTRY(composition, AutAut,
-	      "Compose two subnormalized transducers."),
-
+	      "Compose two subnormalized transducers.");
 COMMAND_ENTRY_EXPERT(composition_cover, Aut, "Outsplitting.");
-COMMAND_ENTRY_EXPORT(composition_co_cover, Aut, "Insplitting.");
-    COMMAND_ENTRY(u_compose, AutAut,
+COMMAND_ENTRY_EXPERT(composition_co_cover, Aut, "Insplitting.");
+    COMMAND_ENTRY(u_composition, AutAut,
 		  "Compose two transducers, preserving the number of paths.");
 
-COMMAND_ENTRY(eval, evaluation, AutExp,
-	      "Give the evaluation of `exp' against `aut'.");
-COMMAND_ENTRY(evalutation, evaluation_fmp, AutAut,
-	      "Evaluate the language described by the "
-	      IOAUT_NAME " automaton `aut2' on the transducer `aut1'."),
-
+COMMAND_ENTRY(domain, Aut,
+	      "Give the automaton that accepts all inputs accepted by `aut'.");
+COMMAND_ENTRY(image, Aut,
+	      "Give an automaton that accepts all output produced by `aut'.");
 COMMAND_ENTRY(composition_R, AutAut,
-	      "Compose two transducers."),
+	      "Compose two transducers.");
+COMMAND_ENTRY(evaluation, AutAut,
+	      "Evaluate the language described by the "
+	      IOAUT_NAME " automaton `aut2' on the transducer `aut1'.");
+COMMAND_ENTRY(eval, AutExp,
+	      "Give the evaluation of `exp' against `aut'.");
 
 #ifdef RW_CONTEXT
-    COMMAND_ENTRY(to_rw, Aut,
-		  "Give the equivalent rational weight transducer of `aut'.");
+COMMAND_ENTRY_EXPERT(to_rw, Aut,
+	      "Give the equivalent rational weight transducer of `aut'.");
 #endif
 COMMAND_ENTRY(partial_identity, Aut,
 	      "Transform a " IOAUT_NAME " automaton into an fmp "

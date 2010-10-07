@@ -23,8 +23,8 @@ VCSN=vcsn-char-fmp-b
 ## Input/output work with transducers.  ##
 ## ------------------------------------ ##
 
-$VCSN identity -o DOT t1.xml | dot
-$VCSN info t1.xml
+$VCSN cat -o DOT t1.xml | dot
+$VCSN data t1.xml
 
 
 ## ------------------------------------- ##
@@ -35,7 +35,7 @@ $VCSN info t1.xml
 # as long as this algorithm is not correctly
 # defined.
 #  $VCSN are-isomorphic t1.xml t1.xml
-      $VCSN is-sub-normalized t1.xml
+      $VCSN is-subnormalized t1.xml
 fail1 $VCSN is-empty t1.xml
 
 
@@ -46,11 +46,11 @@ fail1 $VCSN is-empty t1.xml
 
 
 ## Composition test on boolean transducers
-  $VCSN compose t1.xml u1.xml > tmp1.xml
+  $VCSN composition t1.xml u1.xml > tmp1.xml
 #FIXME: Disable xml diff
 #  diff tmp1.xml t1.xml_compose_u1
 
-  $VCSN u_compose t1.xml u1.xml > tmp2.xml
+  $VCSN u_composition t1.xml u1.xml > tmp2.xml
 
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
@@ -58,8 +58,7 @@ fail1 $VCSN is-empty t1.xml
 # fail1 $VCSN are-isomorphic tmp1.xml tmp2.xml
 
 ## Unambiguous composition test on boolean transducers
-  $VCSN u_compose $t2 \
-                     $u2 > tmp.xml
+  $VCSN u_composition $t2 $u2 > tmp.xml
 
 #FIXME: Disable xml diff
 # diff tmp.xml $t2_ucompose_u2
@@ -88,7 +87,7 @@ fail1 vcsn-char-b eval t1image.xml $input
 
   $VCSN to-rw t1.xml
 
-  vcsn-char-b identity a1.xml | $VCSN eval-aut t1.xml - | vcsn-char-b eval - yx
+  vcsn-char-b cat a1.xml | $VCSN evaluation t1.xml - | vcsn-char-b eval - yx
 
 
 
@@ -259,7 +258,7 @@ for i in vddv:d c:1 vdd:0 vdv:1 dvc:dv vdc:dv vvcc:vvc; do
 done
 
 # compute all the coin sequences that can return "c".
-res=`$VCSN invert money.xml \| eval - c`
+res=`$VCSN inverse money.xml \| eval - c`
 res=`vcsn-char-b expand --alphabet=vdc $res`
 echo $res | tr + '\n' | sort >out
 cat <<EOF | cmp - out
@@ -326,8 +325,8 @@ $VCSN ltl-to-pair ltl.xml > ltl-pair.xml
 $VCSN pair-to-fmp ltl-pair.xml > ltl2.xml
 $VCSN is-ltl ltl2.xml
 # We should use are-isomorphic here
-$VCSN info ltl.xml > ltl.info
-$VCSN info ltl2.xml > ltl2.info
+$VCSN data ltl.xml > ltl.info
+$VCSN data ltl2.xml > ltl2.info
 diff ltl.info ltl2.info
 
 # Now we will check with first_projection and second_projection
@@ -389,7 +388,7 @@ test x"$res" = x"0011101"
 # domain(quot3base2.xml) must be div3base2.xml
 # FIXME: we should use are-isomorphic
 $VCSN domain quot3base2.xml > quot3base2-domain.xml
-vcsn-char-b identity div3base2.xml > div3base2-identity.xml
+vcsn-char-b cat div3base2.xml > div3base2-identity.xml
 vcsn-char-b are-equivalent div3base2-identity.xml quot3base2-domain.xml
 sort quot3base2-domain.xml > quot3base2-domain.sort.xml
 sort div3base2-identity.xml > div3base2-identity.sort.xml
@@ -411,7 +410,7 @@ sed '/^#/d' <<EOF | $VCSN -a"ab" -A"xy" edit wd-empty.xml
 # Exit.
 10
 EOF
-$VCSN -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" identity wd-empty.xml > wd-new.xml
+$VCSN -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" cat wd-empty.xml > wd-new.xml
 diff wd-new.xml wd-ref.xml
 
 # Check predefined alphabets in help.

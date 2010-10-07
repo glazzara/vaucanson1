@@ -55,6 +55,14 @@ get_word(Element<S, T>& aut, const std::string& s);
 
 automaton_t get_aut (const arguments_t& args, int n);
 
+#ifdef WITH_TWO_ALPHABETS
+mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::ret
+get_pair_aut(const arguments_t& args, const int& n);
+
+IOAUT_CONTEXT::automaton_t
+get_boolean_aut(const arguments_t& args, const int& n);
+#endif
+
 int write_aut(const automaton_t& aut, const arguments_t& args, int n);
 int display_aut(const automaton_t& aut, const arguments_t& args, int n);
 
