@@ -19,6 +19,7 @@
 #include <cassert>
 #include <iostream>
 #include "common.hh"
+#include <sstream>
 
 command_map::map_t&
 command_map::map_()
@@ -76,12 +77,11 @@ command_map::lookup(const std::string& str)
 std::ostream&
 command_map::list(std::ostream& ostr, bool expert)
 {
-  ostr << "List of available commands:" << std::endl;
+  typedef std::map<std::string, std::ostringstream*> secmap_t;
+  secmap_t secmap;
 
   map_t::const_iterator it;
   map_t& m_ = map_();
-
-  // FIXME: Include sections back.
 
   for (it = m_.begin(); it != m_.end(); ++it)
     {
@@ -90,18 +90,35 @@ command_map::list(std::ostream& ostr, bool expert)
       if (command->expert && !expert)
 	continue;
 
-      ostr << "   - " << it->first;
+      std::string sec(command->section);
+      secmap_t::const_iterator i = secmap.find(sec);
+      std::ostringstream* out;
+      if (i == secmap.end())
+	secmap[sec] = out = new std::ostringstream;
+      else
+	out = i->second;
+
+      *out << "   - " << it->first;
       switch (command->params)
 	{
 	case None: break;
-	case Exp: ostr << " exp"; break;
-	case Aut: ostr << " aut"; break;
-	case AutExp: ostr << " aut exp"; break;
-	case AutAut: ostr << " aut1 aut2"; break;
-	case AutInt: ostr << " aut n"; break;
-	case AutWord: ostr << " aut word"; break;
+	case Exp: *out << " exp"; break;
+	case Aut: *out << " aut"; break;
+	case AutExp: *out << " aut exp"; break;
+	case AutAut: *out << " aut1 aut2"; break;
+	case AutInt: *out << " aut n"; break;
+	case AutWord: *out << " aut word"; break;
 	}
-      ostr << ": " << command->docstring << std::endl;
+      *out << ": " << command->docstring << std::endl;
+    }
+
+  ostr << "List of available commands:" << std::endl;
+  secmap_t::const_iterator si;
+  for (si = secmap.begin(); si != secmap.end(); ++si)
+    {
+      ostr << "  " << si->first << std::endl
+	   << si->second->str();
+      delete si->second;
     }
 }
 

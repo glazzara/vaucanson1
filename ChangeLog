@@ -1,5 +1,12 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Use sections in -l and -L.
+
+	* taf-kit/src/commands.cc (list): Display commands section by
+	section.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Cleanup op_is_atom() declarations.  This also avoid an infinite
 	loop with op_is_atom() from monoid_base.hxx possibly calling
 	itself when no implementation matches.
