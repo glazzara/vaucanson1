@@ -121,7 +121,7 @@ vcsn_int_fmp_z_LDADD = $(LDADD) \
 			$(top_builddir)/lib/libvcsn-int-z-fmp-tdc.la \
 			$(top_builddir)/lib/libvcsn-int-int-z.la
 
-vcsn_char_char_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc
+vcsn_char_char_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc cmd_pair.cc
 vcsn_char_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_char_boolean_automaton \
 			      -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
@@ -129,14 +129,14 @@ vcsn_char_char_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_char_boolean_automaton
 			      -DNO_SECOND_OPERATOR
 vcsn_char_char_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-char-char-b.la
 
-vcsn_char_int_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc
+vcsn_char_int_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc cmd_pair.cc
 vcsn_char_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=char_int_boolean_automaton \
 			      -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			      -DFIRST_PROJECTION_CONTEXT=boolean_automaton \
 			      -DSECOND_PROJECTION_CONTEXT=int_boolean_automaton
 vcsn_char_int_b_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-char-int-b.la
 
-vcsn_int_int_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc
+vcsn_int_int_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc cmd_pair.cc
 vcsn_int_int_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_boolean_automaton \
 			    -DVCSN_USE_LIB -DNO_PREDEF_ALPHABETS \
 			    -DFIRST_PROJECTION_CONTEXT=int_boolean_automaton \

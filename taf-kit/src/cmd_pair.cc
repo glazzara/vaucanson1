@@ -16,11 +16,33 @@
 //
 
 #include "commands.hh"
+#include "common.hh"
+#include "getters.hh"
 
 static int
-transpose_command(const arguments_t& args)
+first_projection_command(const arguments_t& args)
 {
-  g_res.keep(transpose(get_aut(args, 1)));
+  automaton_t src = get_aut(args, 1);
+  vcsn::CONTEXT::projection_traits_t::first_projection_t a =
+    vcsn::CONTEXT::projection_traits_t::first_projection(src);
+  first_projection(src, a);
+  g_res.keep(a);
   return 0;
-};
+}
 
+static int
+second_projection_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  vcsn::CONTEXT::projection_traits_t::second_projection_t a =
+    vcsn::CONTEXT::projection_traits_t::second_projection(src);
+  second_projection(src, a);
+  g_res.keep(a);
+  return 0;
+}
+
+BEGIN_COMMAND_GROUP(pair_commands,
+		    "Algorithms for automata with alphabets of pairs:");
+COMMAND_ENTRY(first_projection, Aut, "Give the first projection of `aut'.");
+COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'.");
+END_COMMAND_GROUP

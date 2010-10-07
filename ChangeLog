@@ -1,10 +1,20 @@
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Declare commands on alphabets of pairs.
+
+	* taf-kit/src/cmd_pair.cc: Fill in
+	* taf-kit/src/Makefile.am (vcsn_char_char_b_SOURCES,
+	vcsn_char_int_b_SOURCES, vcsn_int_int_b_SOURCES): Add cmd_pair.cc.
+	* tests/vcsn-char-char-b.test, tests/vcsn-char-int-b.test,
+	tests/vcsn-int-int-b.test: Adjust to new names.
+
+2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Include "reduce" in vcsn-char-r so it passes its tests.
 
 	* taf-kit/src/cmd_r.cc: Fill in.
 	* taf-kit/src/Makefile.am (vcsn_char_r_SOURCES): Add cmd_r.cc.
-	* taf-kit/tests/vcsn-char-r.test: Adjust to new name.
+	* taf-kit/tests/vcsn-char-r.test: Adjust to new names.
 
 2010-10-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
