@@ -17,8 +17,6 @@
 
 #include "commands.hh"
 #include <cassert>
-#include <iostream>
-#include "common.hh"
 #include <sstream>
 
 command_map::map_t&

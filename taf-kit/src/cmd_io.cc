@@ -16,7 +16,6 @@
 //
 
 #include "commands.hh"
-#include "common.hh"
 #include "edition_commands.hh"
 #include "library_commands.hh"
 

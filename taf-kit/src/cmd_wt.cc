@@ -16,8 +16,6 @@
 //
 
 #include "commands.hh"
-#include "common.hh"
-#include "getters.hh"
 
 static int
 transpose_command(const arguments_t& args)

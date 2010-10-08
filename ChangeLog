@@ -1,4 +1,16 @@
-2010-10-08  Alexandre Duret-Lutz  <adl@gnu.org>
+2010-10-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make sure that config.hh is always included first by including
+	common.hh (which includes config.hh) first in all files.
+	
+	* taf-kit/src/commands.hh: Include common.hh and getters.hh.
+	* taf-kit/src/cmd_fmp.cc, taf-kit/src/cmd_gen.cc,
+	taf-kit/src/cmd_io.cc, taf-kit/src/cmd_pair.cc,
+	taf-kit/src/cmd_r.cc, taf-kit/src/cmd_wt.cc,
+	taf-kit/src/commands.cc: Simplify. Since these include
+	commands.hh, they do not need to include common.hh and getters.hh.
+
+2010-10-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Update to gnulib a1885e2dc2a8f1c79ead4e6ceca1a53827b89048.
 

@@ -23,7 +23,8 @@
  * TAF-Kit command map.
  */
 
-//# include "common.hh"
+#include "common.hh"
+#include "getters.hh"
 
 #include <vector>
 #include <string>

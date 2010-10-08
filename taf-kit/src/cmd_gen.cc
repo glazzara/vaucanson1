@@ -16,8 +16,6 @@
 //
 
 #include "commands.hh"
-#include "common.hh"
-#include "getters.hh"
 #include <vaucanson/algorithms/is_useless.hh>
 
 //-- Graph functions
