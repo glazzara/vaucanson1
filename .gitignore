@@ -22,3 +22,4 @@ libtool
 /aclocal.m4
 NEWS
 README
+*.lineno

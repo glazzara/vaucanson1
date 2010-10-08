@@ -1,4 +1,6 @@
 alloca.h
+arg-nonnull.h
+c++defs.h
 errno.h
 float.h
 getopt.h
@@ -11,3 +13,5 @@ strings.h
 sysexits.h
 unistd.h
 war.h
+warn-on-use.h
+wchar.h
