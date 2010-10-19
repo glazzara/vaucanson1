@@ -25,6 +25,7 @@
 # include <vaucanson/xml/xml_exp_visitor.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
+# include <vaucanson/algebra/concept/tropical_semiring.hh>
 
 namespace vcsn
 {
@@ -532,6 +533,16 @@ namespace vcsn
       template <class S>
       const char* get_semiring_operations(const S&)
       { return "classical"; }
+
+      template <>
+      const char*
+      get_semiring_operations(const algebra::TropicalSemiring<algebra::TropicalMin>&)
+      { return "minPlus"; }
+
+      template <>
+      const char*
+      get_semiring_operations(const algebra::TropicalSemiring<algebra::TropicalMax>&)
+      { return "maxPlus"; }
 
       template <typename T>
       void
