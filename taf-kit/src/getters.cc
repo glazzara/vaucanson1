@@ -72,7 +72,7 @@ unsigned get_unsigned (const arguments_t& args, int n)
     {
       std::cerr << "Error: cannot parse `" << s << "' as unsigned integer."
 		<< std::endl;
-      exit (-3);
+      exit(1);
     }
   /* unreached code */
   return 0;
@@ -114,6 +114,51 @@ DEFINE_GET_ALPHABET (get_first_alphabet, first_alphabet_t, "alphabet1");
 DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t, "alphabet2");
 
 # endif
+
+static
+bool
+file_exists(const char* name, bool abort_if_empty = true)
+{
+  struct stat s;
+  
+  if ((stat(name, &s) != 0))
+    return false;
+
+  if (abort_if_empty && s.st_size == 0)
+    {
+      std::cerr << "Error: `" << name << "' is an empty file." << std::endl;
+      exit(1);
+    }
+
+  return true;
+}
+
+static
+std::string
+locate_file(const arguments_t& args, const std::string& s, 
+	    bool abort_if_empty = true)
+{
+  // First, try to load the file as given.
+  const char* ss = s.c_str();
+  if (file_exists(ss))
+    return s;
+  
+  // Then, try the automata path.
+  const std::list<std::string>& path = get_automata_path(args);
+      
+  std::list<std::string>::const_iterator i;
+  for (i = path.begin(); i != path.end(); ++i)
+    {
+      std::string file = *i + "/" + s;
+      const char* f = file.c_str();
+      if (file_exists(f), abort_if_empty)
+	return file;
+    }
+  
+  // If we failed, return the filename unchanged, so
+  // we can complain about it.
+  return s;
+}
 
 # ifndef WITH_TWO_ALPHABETS
 /// Getter for RatExp.
@@ -158,27 +203,14 @@ rat_exp_t get_exp(const arguments_t& args, const int& n)
   {
     case INPUT_TYPE_XML:
     {
-      std::istream* is = new std::ifstream (s.c_str ());
-      if (is->fail ())
-      {
-	const std::list<std::string>& path = get_automata_path(args);
-
-	std::list<std::string>::const_iterator i;
-	for (i = path.begin(); i != path.end(); ++i)
-	{
-	  delete is;
-	  std::string file = *i + "/" + s;
-	  is = new std::ifstream (file.c_str ());
-	  if (not is->fail())
-	    break;
-	}
-      }
+      std::string ifile = locate_file(args, s);
+      std::istream* is = new std::ifstream(ifile.c_str());
       if (not is->fail ())
       {
 	using namespace vcsn::tools;
 	using namespace vcsn::xml;
 
-	*is >> regexp_loader(e, string_out (), XML ());
+	*is >> regexp_loader(e, string_out(), XML());
 
 	delete is;
 
@@ -189,8 +221,8 @@ rat_exp_t get_exp(const arguments_t& args, const int& n)
       }
       else
       {
-	std::cerr << "Error: cannot open `" << s << "'." << std::endl;
-	exit (-3);
+	std::cerr << "Error: cannot open `" << ifile << "'." << std::endl;
+	exit(1);
       }
       break;
     }
@@ -207,7 +239,7 @@ rat_exp_t get_exp(const arguments_t& args, const int& n)
       break;
     }
     default:
-      std::cerr << "FATAL: Could not load rational expression." << std::endl;
+      std::cerr << "Error: could not load rational expression." << std::endl;
       exit(1);
   }
 
@@ -234,23 +266,8 @@ automaton_t get_aut (const arguments_t& args, int n)
       return a;
     }
 
-  std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str ()));
-
-  // If we failed to open S, try to open the file in our search path.
-  if (is->fail () && s != "-")
-  {
-    const std::list<std::string>& path = get_automata_path(args);
-
-    std::list<std::string>::const_iterator i;
-    for (i = path.begin(); i != path.end(); ++i)
-      {
-	delete is;
-	std::string file = *i + "/" + s;
-	is = new std::ifstream (file.c_str ());
-	if (not is->fail())
-	  break;
-      }
-  }
+  std::string ifile = locate_file(args, s);
+  std::istream* is = new std::ifstream(ifile.c_str());
 
   if (not is->fail ())
   {
@@ -274,12 +291,12 @@ automaton_t get_aut (const arguments_t& args, int n)
 	break;
 # endif // !WITH_TWO_ALPHABETS
       default:
-	std::cerr << "FATAL: Could not load automaton." << std::endl;
+	std::cerr << "Error: could not load automaton `" 
+		  << ifile << "'." << std::endl;
 	exit(1);
       }
 
-    if (s != "-")
-      delete is;
+    delete is;
 
     // Set the writing data before return.
     set_writing_data(a, args);
@@ -288,8 +305,8 @@ automaton_t get_aut (const arguments_t& args, int n)
   }
   else
   {
-    std::cerr << "Error: cannot open `" << s << "'." << std::endl;
-    exit (-3);
+    std::cerr << "Error: cannot open `" << ifile << "'." << std::endl;
+    exit(1);
   }
 }
 
@@ -333,7 +350,9 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
     return a;
   }
 
-  std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
+  std::string ifile = locate_file(args, s);
+  std::istream* is = new std::ifstream(ifile.c_str());
+
   if (not is->fail())
   {
     using namespace vcsn::tools;
@@ -351,12 +370,12 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
 	fsm_load(*is, a);
 	break;
       default:
-	std::cerr << "FATAL: Could not load automaton." << std::endl;
+	std::cerr << "Error: could not load automaton `" 
+		  << ifile << "'." << std::endl;
 	exit(1);
       }
 
-    if (s != "-")
-      delete is;
+    delete is;
 
     // Set the writing data before return.
     set_boolean_writing_data(a, args);
@@ -365,7 +384,8 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
   }
   else
   {
-    std::cerr << "FATAL: Could not load automaton." << std::endl;
+    std::cerr << "Error: could not load automaton `" 
+	      << ifile << "'." << std::endl;
     exit(1);
   }
 }
@@ -389,7 +409,9 @@ get_pair_aut(const arguments_t& args, const int& n)
     return a;
   }
 
-  std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
+  std::string ifile = locate_file(args, s);
+  std::istream* is = new std::ifstream(ifile.c_str());
+
   if (not is->fail())
   {
     using namespace vcsn::tools;
@@ -409,22 +431,22 @@ get_pair_aut(const arguments_t& args, const int& n)
 	fsm_load(*is, a);
 	break;
       default:
-	std::cerr << "FATAL: Could not load automaton." << std::endl;
+	std::cerr << "Error: could not load automaton `" 
+		  << ifile << "'." << std::endl;
 	exit(1);
       }
 
-    if (s != "-")
-      delete is;
+    delete is;
 
     // We don't set the writing data before return because the
     // pair automaton will be passed to pair_to_fmp and we will
     // force the writing data on the resulting fmp.
-
     return a;
   }
   else
   {
-    std::cerr << "FATAL: Could not load automaton." << std::endl;
+    std::cerr << "Error: could not load automaton `" 
+	      << ifile << "'." << std::endl;
     exit(1);
   }
 }

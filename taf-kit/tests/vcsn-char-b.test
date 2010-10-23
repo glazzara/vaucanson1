@@ -610,4 +610,9 @@ cmp aut3.xml aut4.xml
 # The two automata should be different
 cmp aut1.xml aut3.xml && exit 1
 
+# Error on empty files...
+fail1 $VCSN cat a1.xml > a1.xml 2>stderr
+grep -i 'empty file' stderr
+grep 'a1.xml' stderr
+
 exit 0

@@ -1,8 +1,19 @@
+2010-10-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Report an error when attempting to read an empty file, and
+	homogenize exit values.
+
+	* taf-kit/src/getters.cc (file_exists, locate_file): New functions
+	that signal an error when reading an empty file.
+	(get_exp, get_aut, get_boolean_aut, get_pair_aut): Use locate_file.
+	(get_unsigned): exit(1) on error.
+	* taf-kit/tests/vcsn-char-b.test: Add a simple test.
+
 2010-10-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Make sure that config.hh is always included first by including
 	common.hh (which includes config.hh) first in all files.
-	
+
 	* taf-kit/src/commands.hh: Include common.hh and getters.hh.
 	* taf-kit/src/cmd_fmp.cc, taf-kit/src/cmd_gen.cc,
 	taf-kit/src/cmd_io.cc, taf-kit/src/cmd_pair.cc,
