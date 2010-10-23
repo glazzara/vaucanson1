@@ -1,5 +1,14 @@
 2010-10-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Let TAF-Kit warn when an edited automaton is saved without initial
+	or final states.
+
+	* taf-kit/src/edition_commands.hxx (check_common_errors): New function.
+	(ask_and_treat_choice): Call check_common_errors before saving.
+	Also remove all uses of the CHOICE_COMMAND macro.
+
+2010-10-23  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Report an error when attempting to read an empty file, and
 	homogenize exit values.
 

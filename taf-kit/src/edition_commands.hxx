@@ -349,6 +349,33 @@ namespace edition_commands
     echo ("\n");
   }
 
+  static 
+  void
+  check_common_errors(automaton_t& a)
+  {
+    bool empty_init = a.initial().empty();
+    bool empty_final = a.final().empty();
+    if (empty_final && empty_init)
+      {
+	std::cerr << std::endl
+		  << "Warning: automaton has no initial states nor final states"
+		  << std::endl;
+	return;
+      }
+    if (empty_init)
+      {
+	std::cerr << std::endl
+		  << "Warning: automaton has no initial states" << std::endl;
+	return;
+      }
+    if (empty_final)
+      {
+	std::cerr << std::endl
+		  << "Warning: automaton has no final states" << std::endl;
+	return;
+      }
+  }
+
   /// Interact with the user to let her choose an action.
   static bool ask_and_treat_choice(automaton_t& a, const arguments_t& args)
   {
@@ -367,29 +394,20 @@ namespace edition_commands
 
     echo_("Your choice [1-11]: ");
 
-# define CHOICE_COMMAND(N, Command)		\
-    case N:					\
-      Command;					\
-      break;
-
     try {
       switch (get_int())
       {
-	CHOICE_COMMAND(1, add_state(a));
-	CHOICE_COMMAND(2, del_state(a));
-
-	CHOICE_COMMAND(3, add_transition(a, args));
-	CHOICE_COMMAND(4, del_transition(a));
-
-	CHOICE_COMMAND(5, set_unset_initial_final(a, set_to_be, initial));
-	CHOICE_COMMAND(6, set_unset_initial_final(a, set_to_not_be, initial));
-	CHOICE_COMMAND(7, set_unset_initial_final(a, set_to_be, final));
-	CHOICE_COMMAND(8, set_unset_initial_final(a, set_to_not_be, final));
-
-	CHOICE_COMMAND(9, display_aut(a, args, 1));
-
-        case 10: return true;
-        case 11: exit(0);
+      case 1: add_state(a); break;
+      case 2: del_state(a); break;
+      case 3: add_transition(a, args); break;
+      case 4: del_transition(a); break;
+      case 5: set_unset_initial_final(a, set_to_be, initial); break;
+      case 6: set_unset_initial_final(a, set_to_not_be, initial); break;
+      case 7: set_unset_initial_final(a, set_to_be, final); break;
+      case 8: set_unset_initial_final(a, set_to_not_be, final); break;
+      case 9: display_aut(a, args, 1); break;
+      case 10: check_common_errors(a); return true;
+      case 11: exit(0);
       }
     } catch (const std::logic_error& err) {
       // FIXME: this message will never be displayed
