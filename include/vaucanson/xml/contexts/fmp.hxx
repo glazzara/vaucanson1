@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -321,66 +321,146 @@ namespace vcsn
      */
     namespace builders
     {
+
+
+      template <typename S>
+      void
+      do_create_type_writingData_node(const S& s,
+				      xercesc::DOMDocument* doc,
+				      xercesc::DOMElement* root)
+      {
+	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData, "plusSym", s.representation()->plus);
+	tools::set_attribute(writingData, "timesSym", s.representation()->times);
+	tools::set_attribute(writingData, "starSym", s.representation()->star);
+	tools::set_attribute(writingData, "zeroSym", s.representation()->zero);
+	tools::set_attribute(writingData, "weightOpening", s.representation()->open_weight);
+	tools::set_attribute(writingData, "weightClosing", s.representation()->close_weight);
+	tools::set_attribute(writingData, "openPar", s.representation()->open_par);
+	tools::set_attribute(writingData, "closePar", s.representation()->close_par);
+	tools::set_attribute(writingData, "spacesSym", s.representation()->spaces.front());
+
+	xercesc::DOMElement* firstWritingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(firstWritingData, "plusSym",
+			     s.representation()->first_representation().plus);
+	tools::set_attribute(firstWritingData, "timesSym",
+			     s.representation()->first_representation().times);
+	tools::set_attribute(firstWritingData, "starSym",
+			     s.representation()->first_representation().star);
+	tools::set_attribute(firstWritingData, "zeroSym",
+			     s.representation()->first_representation().zero);
+	tools::set_attribute(firstWritingData, "weightOpening",
+			     s.representation()->first_representation().open_weight);
+	tools::set_attribute(firstWritingData, "weightClosing",
+			     s.representation()->first_representation().close_weight);
+	tools::set_attribute(firstWritingData, "openPar",
+			     s.representation()->first_representation().open_par);
+	tools::set_attribute(firstWritingData, "closePar",
+			     s.representation()->first_representation().close_par);
+	tools::set_attribute(firstWritingData, "spacesSym",
+			     s.representation()->first_representation().spaces.front());
+	writingData->appendChild(firstWritingData);
+
+	xercesc::DOMElement* secondWritingData = tools::create_element(doc, "writingData");
+	tools::set_attribute(secondWritingData, "plusSym",
+			     s.representation()->second_representation().plus);
+	tools::set_attribute(secondWritingData, "timesSym",
+			     s.representation()->second_representation().times);
+	tools::set_attribute(secondWritingData, "starSym",
+			     s.representation()->second_representation().star);
+	tools::set_attribute(secondWritingData, "zeroSym",
+			     s.representation()->second_representation().zero);
+	tools::set_attribute(secondWritingData, "weightOpening",
+			     s.representation()->second_representation().open_weight);
+	tools::set_attribute(secondWritingData, "weightClosing",
+			     s.representation()->second_representation().close_weight);
+	tools::set_attribute(secondWritingData, "openPar",
+			     s.representation()->second_representation().open_par);
+	tools::set_attribute(secondWritingData, "closePar",
+			     s.representation()->second_representation().close_par);
+	tools::set_attribute(secondWritingData, "spacesSym",
+			     s.representation()->second_representation().spaces.front());
+	writingData->appendChild(secondWritingData);
+
+	root->appendChild(writingData);
+      }
+
       TParamFMP
       void
       create_type_writingData_node(const FMPtype& aut,
 				   xercesc::DOMDocument* doc,
 				   xercesc::DOMElement* root)
       {
+	do_create_type_writingData_node(aut.series(), doc, root);
+      }
+
+      TParamFMP
+      void
+      create_type_writingData_node(const FMPseries& s,
+				   xercesc::DOMDocument* doc,
+				   xercesc::DOMElement* root)
+      {
+	do_create_type_writingData_node(s.series(), doc, root);
+      }
+
+      TParamFMP
+      void
+      do_create_monoid_node(const vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> >& s,
+			    xercesc::DOMDocument* doc,
+			    xercesc::DOMElement* root)
+      {
+	xercesc::DOMElement* node = tools::create_element(doc, "monoid");
+	tools::set_attribute(node, "type", "product");
+	tools::set_attribute(node, "prodDim", "2");
+	root->appendChild(node);
+
 	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
-	tools::set_attribute(writingData, "plusSym", aut.series().representation()->plus);
-	tools::set_attribute(writingData, "timesSym", aut.series().representation()->times);
-	tools::set_attribute(writingData, "starSym", aut.series().representation()->star);
-	tools::set_attribute(writingData, "zeroSym", aut.series().representation()->zero);
-	tools::set_attribute(writingData, "weightOpening", aut.series().representation()->open_weight);
-	tools::set_attribute(writingData, "weightClosing", aut.series().representation()->close_weight);
-	tools::set_attribute(writingData, "openPar", aut.series().representation()->open_par);
-	tools::set_attribute(writingData, "closePar", aut.series().representation()->close_par);
-	tools::set_attribute(writingData, "spacesSym", aut.series().representation()->spaces.front());
+	tools::set_attribute(writingData, "identitySym", s.monoid().representation()->empty);
+	tools::set_attribute(writingData, "timesSym", s.monoid().representation()->concat);
+	node->appendChild(writingData);
 
-	xercesc::DOMElement* firstWritingData = tools::create_element(doc, "writingData");
-	tools::set_attribute(firstWritingData, "plusSym",
-			     aut.series().representation()->first_representation().plus);
-	tools::set_attribute(firstWritingData, "timesSym",
-			     aut.series().representation()->first_representation().times);
-	tools::set_attribute(firstWritingData, "starSym",
-			     aut.series().representation()->first_representation().star);
-	tools::set_attribute(firstWritingData, "zeroSym",
-			     aut.series().representation()->first_representation().zero);
-	tools::set_attribute(firstWritingData, "weightOpening",
-			     aut.series().representation()->first_representation().open_weight);
-	tools::set_attribute(firstWritingData, "weightClosing",
-			     aut.series().representation()->first_representation().close_weight);
-	tools::set_attribute(firstWritingData, "openPar",
-			     aut.series().representation()->first_representation().open_par);
-	tools::set_attribute(firstWritingData, "closePar",
-			     aut.series().representation()->first_representation().close_par);
-	tools::set_attribute(firstWritingData, "spacesSym",
-			     aut.series().representation()->first_representation().spaces.front());
-	writingData->appendChild(firstWritingData);
+	xercesc::DOMElement* first = tools::create_element(doc, "monoid");
+	tools::set_attribute(first, "type", "free");
+	tools::set_attribute(first, "genDescrip", "enum");
+	tools::set_attribute(first, "genKind", algebra::letter_traits<typename M1::alphabet_t::letter_t>::kind());
+	node->appendChild(first);
 
-	xercesc::DOMElement* secondWritingData = tools::create_element(doc, "writingData");
-	tools::set_attribute(secondWritingData, "plusSym",
-			     aut.series().representation()->second_representation().plus);
-	tools::set_attribute(secondWritingData, "timesSym",
-			     aut.series().representation()->second_representation().times);
-	tools::set_attribute(secondWritingData, "starSym",
-			     aut.series().representation()->second_representation().star);
-	tools::set_attribute(secondWritingData, "zeroSym",
-			     aut.series().representation()->second_representation().zero);
-	tools::set_attribute(secondWritingData, "weightOpening",
-			     aut.series().representation()->second_representation().open_weight);
-	tools::set_attribute(secondWritingData, "weightClosing",
-			     aut.series().representation()->second_representation().close_weight);
-	tools::set_attribute(secondWritingData, "openPar",
-			     aut.series().representation()->second_representation().open_par);
-	tools::set_attribute(secondWritingData, "closePar",
-			     aut.series().representation()->second_representation().close_par);
-	tools::set_attribute(secondWritingData, "spacesSym",
-			     aut.series().representation()->second_representation().spaces.front());
-	writingData->appendChild(secondWritingData);
+	xercesc::DOMElement* writingData1 = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData1, "identitySym", s.monoid().first_monoid().representation()->empty);
+	tools::set_attribute(writingData1, "timesSym", s.monoid().first_monoid().representation()->concat);
+	first->appendChild(writingData1);
 
-	root->appendChild(writingData);
+	typedef typename M1::alphabet_t::const_iterator first_alphabet_iterator;
+	for_all_letters_(first_, l, s.monoid().first_monoid().alphabet())
+	{
+	  std::ostringstream letter;
+	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
+	  letter << *l;
+	  tools::set_attribute(gen, "value", letter.str());
+	  first->appendChild(gen);
+	}
+	tools::set_attribute(first, "genSort", get_monoid_gen_sort(*(s.monoid().first_monoid().alphabet().begin())));
+	xercesc::DOMElement* second = tools::create_element(doc, "monoid");
+	tools::set_attribute(second, "type", "free");
+	tools::set_attribute(second, "genDescrip", "enum");
+	tools::set_attribute(second, "genKind", algebra::letter_traits<typename M2::alphabet_t::letter_t>::kind());
+	node->appendChild(second);
+
+	xercesc::DOMElement* writingData2 = tools::create_element(doc, "writingData");
+	tools::set_attribute(writingData2, "identitySym", s.monoid().second_monoid().representation()->empty);
+	tools::set_attribute(writingData2, "timesSym", s.monoid().second_monoid().representation()->concat);
+	second->appendChild(writingData2);
+
+	typedef typename M2::alphabet_t::const_iterator second_alphabet_iterator;
+	for_all_letters_(second_, l, s.monoid().second_monoid().alphabet())
+	{
+	  std::ostringstream letter;
+	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
+	  letter << *l;
+	  tools::set_attribute(gen, "value", letter.str());
+	  second->appendChild(gen);
+	}
+	tools::set_attribute(second, "genSort", get_monoid_gen_sort(*(s.monoid().second_monoid().alphabet().begin())));
       }
 
       TParamFMP
@@ -389,59 +469,19 @@ namespace vcsn
 			 xercesc::DOMDocument* doc,
 			 xercesc::DOMElement* root)
       {
-	xercesc::DOMElement* node = tools::create_element(doc, "monoid");
-	tools::set_attribute(node, "type", "product");
-	tools::set_attribute(node, "prodDim", "2");
-	root->appendChild(node);
-
-	xercesc::DOMElement* writingData = tools::create_element(doc, "writingData");
-	tools::set_attribute(writingData, "identitySym", aut.series().monoid().representation()->empty);
-	tools::set_attribute(writingData, "timesSym", aut.series().monoid().representation()->concat);
-	node->appendChild(writingData);
-
-	xercesc::DOMElement* first = tools::create_element(doc, "monoid");
-	tools::set_attribute(first, "type", "free");
-	tools::set_attribute(first, "genDescrip", "enum");
-	tools::set_attribute(first, "genKind", algebra::letter_traits<typename FMPtype::monoid_t::first_monoid_t::alphabet_t::letter_t>::kind());
-	node->appendChild(first);
-
-	xercesc::DOMElement* writingData1 = tools::create_element(doc, "writingData");
-	tools::set_attribute(writingData1, "identitySym", aut.series().monoid().first_monoid().representation()->empty);
-	tools::set_attribute(writingData1, "timesSym", aut.series().monoid().first_monoid().representation()->concat);
-	first->appendChild(writingData1);
-
-	typedef typename FMPtype::monoid_t::first_monoid_t::alphabet_t::const_iterator first_alphabet_iterator;
-	for_all_letters_(first_, l, aut.series().monoid().first_monoid().alphabet())
-	{
-	  std::ostringstream letter;
-	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
-	  letter << *l;
-	  tools::set_attribute(gen, "value", letter.str());
-	  first->appendChild(gen);
-	}
-	tools::set_attribute(first, "genSort", get_monoid_gen_sort(*(aut.series().monoid().first_monoid().alphabet().begin())));
-	xercesc::DOMElement* second = tools::create_element(doc, "monoid");
-	tools::set_attribute(second, "type", "free");
-	tools::set_attribute(second, "genDescrip", "enum");
-	tools::set_attribute(second, "genKind", algebra::letter_traits<typename FMPtype::monoid_t::second_monoid_t::alphabet_t::letter_t>::kind());
-	node->appendChild(second);
-
-	xercesc::DOMElement* writingData2 = tools::create_element(doc, "writingData");
-	tools::set_attribute(writingData2, "identitySym", aut.series().monoid().second_monoid().representation()->empty);
-	tools::set_attribute(writingData2, "timesSym", aut.series().monoid().second_monoid().representation()->concat);
-	second->appendChild(writingData2);
-
-	typedef typename FMPtype::monoid_t::second_monoid_t::alphabet_t::const_iterator second_alphabet_iterator;
-	for_all_letters_(second_, l, aut.series().monoid().second_monoid().alphabet())
-	{
-	  std::ostringstream letter;
-	  xercesc::DOMElement* gen = tools::create_element(doc, "monGen");
-	  letter << *l;
-	  tools::set_attribute(gen, "value", letter.str());
-	  second->appendChild(gen);
-	}
-	tools::set_attribute(second, "genSort", get_monoid_gen_sort(*(aut.series().monoid().second_monoid().alphabet().begin())));
+	do_create_monoid_node<S,T,M1,M2>(aut.series(), doc, root);
       }
+
+      TParamFMP
+      void
+      create_monoid_node(const FMPseries& s,
+			 xercesc::DOMDocument* doc,
+			 xercesc::DOMElement* root)
+      {
+	do_create_monoid_node<S,T,M1,M2>(s.series(), doc, root);
+      }
+
+
 
       /* FIXME there should not be 2 but one function here... however,
       ** when we add a template T instead of int the function is not called

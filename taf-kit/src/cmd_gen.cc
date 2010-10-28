@@ -144,6 +144,14 @@ star_command(const arguments_t& args)
 };
 
 static int
+aut_to_exp_command(const arguments_t& args)
+{
+  rat_exp_t e = aut_to_exp(get_aut(args, 1), DMChooser());
+  g_res.keep(e);
+  return 0;
+}
+
+static int
 sum_S_command(const arguments_t& args)
 {
   automaton_t a = get_aut(args, 1);
@@ -209,6 +217,8 @@ COMMAND_ENTRY(concatenate, AutAut,
 	      "Build the concatenation of two standard automata.");
 COMMAND_ENTRY(star, Aut,
 	      "Build the star of a standard automaton.");
+COMMAND_ENTRY(aut_to_exp, Aut,
+	      "Build an expression denoting the behaviour of `aut'.");
 // Operations on behaviors
 COMMAND_ENTRY(sum_S, AutAut,
 	      "Build a standard sum of two automata.");

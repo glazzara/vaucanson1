@@ -107,7 +107,6 @@ def create?(type, file)
 	"vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type
       ) and
       file !~ /aci_canonical.hh/ and
-      file !~ /aut_to_exp.hh/ and
       file !~ /aut_projection.hh/ and
       file !~ /pair_to_fmp.hh/ and
       file !~ /berry_sethi.hh/ and

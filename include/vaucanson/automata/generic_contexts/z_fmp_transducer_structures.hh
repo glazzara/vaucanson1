@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ namespace vcsn
 
 # include <vaucanson/contexts/free_monoid_product.thh>
 # include <vaucanson/contexts/z_semiring.thh>
-# include <vaucanson/contexts/polynom_series.thh>
+# include <vaucanson/contexts/generic_series.thh>
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
 # include <vaucanson/contexts/fmp_transducer.thh>

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,7 +72,6 @@ pipe_stream_writer::operator() (automaton_t& a) const
     }
 }
 
-# ifndef WITH_TWO_ALPHABETS
 void
 pipe_stream_writer::operator() (rat_exp_t& a) const
 {
@@ -88,7 +87,6 @@ pipe_stream_writer::operator() (rat_exp_t& a) const
       std::cerr << "Could not save rationnal expression: unkown output type." << std::endl;
     }
 }
-# endif // !WITH_TWO_ALPHABETS
 
 # ifdef RW_CONTEXT
 void

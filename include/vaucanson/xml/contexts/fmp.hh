@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -212,7 +212,19 @@ namespace vcsn
 
       TParamFMP
       void
+      create_type_writingData_node(const FMPseries& aut,
+				   xercesc::DOMDocument* doc,
+				   xercesc::DOMElement* root);
+
+      TParamFMP
+      void
       create_monoid_node(const FMPtype& aut,
+			 xercesc::DOMDocument* doc,
+			 xercesc::DOMElement* root);
+
+      TParamFMP
+      void
+      create_monoid_node(const FMPseries& aut,
 			 xercesc::DOMDocument* doc,
 			 xercesc::DOMElement* root);
     } // !builders

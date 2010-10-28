@@ -80,6 +80,8 @@ res=`$VCSN image x.xml | vcsn-int-z aut-to-exp -`
 res=`vcsn-int-z expand --alphabet=22,20 "$res"`
 test "x$res" = "x{30} (({5} 22#22#20)*.22)"
 
+res=`$VCSN aut-to-exp x.xml`
+test "x$res" = "x{2} ({5} (10#11,22).(11,22#20))*.{5} ((10#11,22) {3})"
 
 fail1 $VCSN is-ltl x.xml
 fail1 $VCSN subnormalize x.xml \| is-ltl -

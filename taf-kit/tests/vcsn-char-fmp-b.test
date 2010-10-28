@@ -324,6 +324,10 @@ $VCSN is-ltl ltl.xml
 $VCSN ltl-to-pair ltl.xml > ltl-pair.xml
 $VCSN pair-to-fmp ltl-pair.xml > ltl2.xml
 $VCSN is-ltl ltl2.xml
+$VCSN aut-to-exp ltl.xml > ltl.txt
+test "`cat ltl.txt`" = "((a,y)+(a,x).(a,z)).((b,x).(a,z))*" ||
+test "`cat ltl.txt`" = "((a,x).(a,z)+(a,y)).((b,x).(a,z))*"
+
 # We should use are-isomorphic here
 $VCSN data ltl.xml > ltl.info
 $VCSN data ltl2.xml > ltl2.info

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -80,13 +80,13 @@ namespace vcsn {
       typedef algebra::SeriesRepDefault<Semiring, Monoid>
 	default_series_rep_t;
 
-      DumpVisitor(std::ostream& ostr = std::cout,
-		  shared_monoid_rep_t mr = default_monoid_rep_t::
-		  get_instance(),
+      DumpVisitor(std::ostream& ostr,
+		  const Monoid& monoid,
 		  shared_series_rep_t sr = default_series_rep_t::
 		  get_instance())
 	: ostr_(ostr),
-	  monoid_rep_(mr),
+	  monoid_(monoid),
+	  monoid_rep_(monoid.representation()),
 	  series_rep_(sr)
       {
 	if (not ostr_.pword(rat::zero()))
@@ -289,18 +289,7 @@ namespace vcsn {
       void
       constant(const monoid_elt_value_t& m)
       {
-	typename monoid_elt_value_t::const_iterator i = m.begin();
-
-	// Print the first letter.
-	ostr_ << *i;
-	++i;
-
-	// Print subsequent letters using the concat representation.
-	while (i != m.end())
-	{
-	  ostr_ << monoid_rep_->concat << *i;
-	  ++i;
-	}
+	op_rout(monoid_, ostr_, m);
       }
 
       virtual
@@ -321,6 +310,7 @@ namespace vcsn {
 
     protected:
       std::ostream&	ostr_;
+      const Monoid&	monoid_;
       shared_monoid_rep_t monoid_rep_;
       shared_series_rep_t series_rep_;
     };

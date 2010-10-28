@@ -89,13 +89,6 @@ enumerate_command(const arguments_t& args)
 }
 
 static int
-aut_to_exp_command(const arguments_t& args)
-{
-  g_res.keep(aut_to_exp(get_aut(args, 1), DMChooser()));
-  return 0;
-}
-
-static int
 standard_command(const arguments_t& args)
 {
   rat_exp_t e = get_exp(args, 1);
@@ -171,8 +164,6 @@ COMMAND_ENTRY(quotient, Aut, "Build the quotient of `aut'.");
 COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on `aut'.");
 COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
 COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
-COMMAND_ENTRY(aut_to_exp, Aut,
-	      "Build an expression denoting the behaviour of `aut'.");
 // Operations on expressions
 COMMAND_ENTRY(standard, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY(thompson, Exp, "Build the Thompson automaton for `exp'.");

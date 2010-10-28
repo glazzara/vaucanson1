@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -77,6 +77,12 @@ namespace vcsn
       evaluation(const Element<TransStruct, TransImpl>& t,
 		 const Element<ArgStruct, ArgImpl>& input);
 
+      rat_exp_t
+      aut_to_exp(const automaton_t& a);
+
+      template <class Chooser>
+      rat_exp_t
+      aut_to_exp(const automaton_t& a, const Chooser& c);
     } // End of VCSN_CONTEXT_NAMESPACE.
   } // End of VCSN_GRAPH_IMPL
 } // End of namespace vcsn.

@@ -72,9 +72,7 @@ enum command_output_status
 
 typedef boost::variant<command_output_status,
 		       automaton_t,
-# ifndef WITH_TWO_ALPHABETS
 		       rat_exp_t,
-# endif
 # ifdef IOAUT_CONTEXT
 		       IOAUT_CONTEXT::automaton_t,
 		       mute_ltl_to_pair<automaton_t::set_t,

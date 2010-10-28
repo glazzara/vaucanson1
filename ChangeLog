@@ -1,3 +1,45 @@
+2010-11-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Make aut-to-exp work on FMP transducers.
+
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx
+	(DumpVisitor::DumpVisitor): Take a reference to the monoid and store
+	it.
+	(DumpVisitor::constant): Use the monoid's op_rout() function
+	to output the term.
+	* include/vaucanson/algebra/implementation/series/krat.hxx
+	(op_rout): Adjust call to DumpVisitor.
+	* include/vaucanson/automata/generic_contexts/boolean_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/fmp_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_boolean_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_fmp_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_z_fmp_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/int_z_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/z_fmp_transducer_structures.hh,
+	include/vaucanson/automata/generic_contexts/z_transducer_structures.hh:
+	Always include <vaucanson/contexts/generic_series.thh> instead
+	of <vaucanson/contexts/polynom_series.thh>.
+	* include/vaucanson/contexts/fmp_transducer_maker.thh,
+	include/vaucanson/contexts/fmp_transducer_maker.thxx (aut_to_exp):
+	New function.
+	* include/vaucanson/contexts/transducer_maker.thxx
+	(make_automaton_set): New function.
+	(make_automaton): Use it.
+	* include/vaucanson/xml/contexts/fmp.hh
+	(create_type_writingData_node, create_monoid_node): Add
+	specializations for FMP.
+	* include/vaucanson/xml/contexts/fmp.hxx
+	(create_type_writingData_node, create_monoid_node): Overhaul so they
+	can work on automata or rational expressions.
+	* lib/generate_libvcsn.rb: Enable aut_to_exp.hh in transducer
+	contexts.
+	* taf-kit/src/cmd_wt.cc (aut_to_exp_command): Move ...
+	* taf-kit/src/cmd_gen.cc (aut_to_exp_command): ... here.
+	* taf-kit/src/pipe.hh, taf-kit/src/pipe_writers.hh,
+	taf-kit/src/pipe_writers.hxx: Always support rat_exp_t.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Add simple tests for aut-to-exp.
+
 2010-10-19  Alex Hamelin  <hamelin@lrde.epita.fr>
 
 	Remove deprecated files.
