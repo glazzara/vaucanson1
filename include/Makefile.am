@@ -526,10 +526,6 @@ vaucanson/xml/builders.hh			\
 vaucanson/xml/builders.hxx			\
 vaucanson/xml/contexts/fmp.hh			\
 vaucanson/xml/contexts/fmp.hxx			\
-vaucanson/xml/contexts/max_plus.hh		\
-vaucanson/xml/contexts/max_plus.hxx		\
-vaucanson/xml/contexts/min_plus.hh		\
-vaucanson/xml/contexts/min_plus.hxx		\
 vaucanson/xml/contexts/rw.hh			\
 vaucanson/xml/contexts/rw.hxx			\
 vaucanson/xml/handlers.hh			\

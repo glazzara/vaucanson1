@@ -1,5 +1,17 @@
 2010-10-19  Alex Hamelin  <hamelin@lrde.epita.fr>
 
+	Remove deprecated files.
+
+	* include/Makefile.am,
+	include/vaucanson/xml/contexts/max_plus.hh,
+	include/vaucanson/xml/contexts/max_plus.hxx,
+	include/vaucanson/xml/contexts/min_plus.hh,
+	include/vaucanson/xml/contexts/min_plus.hxx,
+	src/tests/xml/xml_automaton_tester.cc: Remove xml max_plus and min_plus
+	specific contexts.
+
+2010-10-19  Alex Hamelin  <hamelin@lrde.epita.fr>
+
 	Fix xml issue for tropical semirings.
 
 	* include/vaucanson/xml/builders.hxx (get_semiring_operations): Add two
