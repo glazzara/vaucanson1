@@ -99,10 +99,8 @@ get_automata_path(const arguments_t& args)
 	    break;
 	}
 
-      if (path_list.empty())
-	FAIL(std::string ("Error: Cannot open ") + path + ".\n"
-	     "Please set VCSN_DATA_PATH to the Vaucanson data directory,\n"
-	     "containing `" + lib_dir + "'.");
+      // if (path_list.empty())
+      // No search path!  It's OK, not all contexts have search directories.
     }
   return path_list;
 }

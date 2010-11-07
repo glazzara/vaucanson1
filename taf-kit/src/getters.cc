@@ -115,9 +115,8 @@ DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t, "alphabet2");
 
 # endif
 
-static
 bool
-file_exists(const char* name, bool abort_if_empty = true)
+file_exists(const char* name, bool abort_if_empty)
 {
   struct stat s;
   
@@ -133,10 +132,9 @@ file_exists(const char* name, bool abort_if_empty = true)
   return true;
 }
 
-static
 std::string
 locate_file(const arguments_t& args, const std::string& s, 
-	    bool abort_if_empty = true)
+	    bool abort_if_empty)
 {
   // First, try to load the file as given.
   const char* ss = s.c_str();

@@ -53,6 +53,10 @@ static std::basic_string<letter_t>
 get_word(Element<S, T>& aut, const std::string& s);
 # endif // !WITH_TWO_ALPHABETS
 
+bool file_exists(const char* name, bool abort_if_empty = true);
+std::string locate_file(const arguments_t& args, const std::string& s, 
+			bool abort_if_empty = true);
+
 automaton_t get_aut (const arguments_t& args, int n);
 
 #ifdef WITH_TWO_ALPHABETS

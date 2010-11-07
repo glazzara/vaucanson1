@@ -449,11 +449,18 @@ static int edit_command(const arguments_t& args)
   automaton_t a = make_automaton(first_alphabet_t(), second_alphabet_t());
 # endif // !WITH_TWO_ALPHABETS
 
-  std::fstream input(args.args[1]);
-
-  if (input.is_open())
+  if (!strcmp(args.args[1], "-"))
     {
-      input.close();
+      std::cerr << "Error: edit cannot handle piped commands."
+		<< " If you want to edit an automaton, you must first save it."
+		<< std::endl;
+      exit(2);
+    }
+
+  std::string src = locate_file(args, args.args[1]);
+
+  if (file_exists(src.c_str()))
+    {
       a = get_aut(args, 1);
     }
   else
