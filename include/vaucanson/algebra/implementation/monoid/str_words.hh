@@ -50,11 +50,11 @@ namespace vcsn {
 	   const std::basic_string<typename A::letter_t>& a,
 	   const std::basic_string<typename A::letter_t>& b);
 
-    template<typename A, typename St>
+    template<typename A, typename St, typename U, typename V>
     St&
     op_rout(const FreeMonoid<A>& s,
 	    St& st,
-	    const std::basic_string<typename A::letter_t>& v);
+	    const std::basic_string<typename A::letter_t, U, V>& v);
 
     template<typename A>
     const std::basic_string<typename A::letter_t>&

@@ -1,3 +1,17 @@
+2010-11-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Kill an infinite loop observed with
+	algebra_series_krat_bool_string/krat_exp_linearize_structure-test.
+
+	* include/vaucanson/algebra/implementation/monoid/str_words.hh,
+	include/vaucanson/algebra/implementation/monoid/str_words.hxx
+	(op_rout): Add second and third template parameters to
+	std::basic_string<...>, otherwise
+	algebra_series_krat_bool_string/krat_exp_linearize_structure-test
+	goes into an infinite loop with FreeMonoidBase's op_rout()
+	calling itself because it does not find the appropriate
+	specialization.
+
 2010-11-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Refuse "edit -", and honor the search path when editing automata.

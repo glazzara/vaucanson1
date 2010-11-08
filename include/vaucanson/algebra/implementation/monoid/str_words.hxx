@@ -97,11 +97,11 @@ namespace vcsn {
       return a + b;
     }
 
-    template<typename A, typename St>
+    template<typename A, typename St, typename U, typename V>
     St&
     op_rout(const FreeMonoid<A>& s,
 	    St& st,
-	    const std::basic_string<typename A::letter_t>& v)
+	    const std::basic_string<typename A::letter_t, U, V>& v)
     {
       if (v.empty())
 	st << s.representation()->empty;
@@ -110,7 +110,8 @@ namespace vcsn {
 	// Type helpers.
 	typedef typename A::letter_t letter_t;
 	typedef algebra::letter_traits<letter_t> letter_traits_t;
-	typedef typename std::basic_string<letter_t>::const_iterator iter_t;
+	typedef typename std::basic_string<letter_t, U, V>::const_iterator
+	  iter_t;
 
 	iter_t i = v.begin();
 
