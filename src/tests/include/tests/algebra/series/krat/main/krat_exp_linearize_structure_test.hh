@@ -25,21 +25,7 @@
  * @file  krat_exp_linearize_structure_test.hh
  *
  * Checks the structure of a linearized expression.
- *
- * This test  redefines the <<  operator in the std  namespace, in
- * order to print linearized expressions without their numeration.  So
- * linearized and original expressions should be printed the same way.
  */
-
-namespace std
-{
-  template <typename U>
-  std::ostream&
-  operator<<(std::ostream& o, const std::pair<U, int>& p)
-  {
-    return o << p.first;
-  }
-}
 
 template <class Expr>
 bool
@@ -65,8 +51,8 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
   tests::Tester t(tg);
 
   alphabet_t	alphabet;
-  letter_t	a = alphabet.random_letter();
-  letter_t	b = alphabet.random_letter();
+  letter_t	a = 'a';
+  letter_t	b = 'b';
   alphabet.insert(a);
   alphabet.insert(b);
   monoid_t	monoid (alphabet);
@@ -83,17 +69,34 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
     std::stringstream	lin_str;
 
     exp_str << exp;
-    // We need to overwrite the zero and id representation set by
-    // the dumper (as it assumes that the letters are pairs).
-    lin_str << vcsn::rat::setzero(s.representation()->zero)
-	    << vcsn::rat::setid(s.monoid().representation()->empty)
-	    << lin;
 
-    if (exp_str.str() != lin_str.str())
+    lin_str << lin;
+    std::string ls = lin_str.str();
+    // Replace (x,y) by x.
+    // I.e. remove the numeration from the linearized expressions.
+    // We should get the original expression.
+    std::string lin_filt;
+    int len = ls.size();
+    for (int i = 0; i < len; ++i)
+      {
+	if ((ls[i] == '(') && (i + 2 < len) && (ls[i + 2] == ','))
+	  {
+	    lin_filt += ls[i + 1];
+	    // Skip until the closing ')'.
+	    i += 4;
+	    while (ls[i] != ')') ++i;
+	  }
+	else
+	  {
+	    lin_filt += ls[i];
+	  }
+      }
+
+    if (exp_str.str() != lin_filt)
     {
       TEST_FAIL_SAVE("exp_linearize_structure",
 		     n,
-		     exp << "!=" << lin << std::endl);
+		     exp_str.str() << "!=" << lin_filt << std::endl);
     }
     else
       ++nb_succs;

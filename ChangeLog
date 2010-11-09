@@ -1,3 +1,11 @@
+2010-11-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix failing krat_exp_linearize_structure-test.
+
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh
+	(krat_exp_linearize_structure_test): Filter the linearized
+	expression by hand, not using a hackish redefinition of <<.
+
 2010-11-08  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Kill an infinite loop observed with
