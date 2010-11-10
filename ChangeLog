@@ -1,11 +1,31 @@
 2010-11-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Move the partial-identity command into the weighted TAF-Kit
+	instances.
+
+	* taf-kit/src/cmd_fmp.cc (partial_identity_command): Move...
+	* taf-kit/src/cmd_wt.cc [FMPI_CONTEXT] (partial_identity_command):
+	... here.
+	* taf-kit/src/getters.cc: Include xml/contexts/fmp.hh if
+	FMPI_CONTEXT is defined.
+	* taf-kit/src/pipe.hh, taf-kit/src/pipe_writers.hh,
+	taf-kit/src/pipe_writers.hxx: Add machinery to store FMP automata
+	in the FMPI_CONTEXT.
+	* taf-kit/src/Makefile.am: Define FMPI_CONTEXT and include
+	the relevant library for all weighted automata that have
+	an associated FMP context.
+	* taf-kit/tests/vcsn-int-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test: Adjust calls to partial-identity.
+
+2010-11-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Move the pair-to-fmp command into the "pair" TAF-Kit instances.
 
 	* taf-kit/src/cmd_fmp.cc (pair_to_fmp_command): Move ...
 	* taf-kit/src/cmd_pair.cc [FMP_CONTEXT] (pair_to_fmp_command):
 	... here.
-	* taf-kit/src/getters.cc: Include xml/fmp.hh if FMP_CONTEXT is set.
+	* taf-kit/src/getters.cc: Include xml/context fmp.hh if
+	FMP_CONTEXT is set.
 	* taf-kit/src/pipe.hh, taf-kit/src/pipe_writers.hh,
 	taf-kit/src/pipe_writers.hxx: Add machinery to store FMP automata.
 	* taf-kit/tests/vcsn-char-fmp-b.test,

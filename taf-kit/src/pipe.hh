@@ -52,8 +52,12 @@
 #  include RW_CONTEXT_HEADER
 # endif
 # ifdef FMP_CONTEXT
-#  define RW_CONTEXT_HEADER <vaucanson/FMP_CONTEXT.hh>
-#  include RW_CONTEXT_HEADER
+#  define FMP_CONTEXT_HEADER <vaucanson/FMP_CONTEXT.hh>
+#  include FMP_CONTEXT_HEADER
+# endif
+# ifdef FMPI_CONTEXT
+#  define FMPI_CONTEXT_HEADER <vaucanson/FMPI_CONTEXT.hh>
+#  include FMPI_CONTEXT_HEADER
 # endif
 # ifdef FIRST_PROJECTION_CONTEXT
 #  define FIRST_PROJECTION_CONTEXT_HEADER <vaucanson/FIRST_PROJECTION_CONTEXT.hh>
@@ -87,6 +91,9 @@ typedef boost::variant<command_output_status,
 # endif
 # ifdef FMP_CONTEXT
 		       FMP_CONTEXT::automaton_t,
+# endif
+# ifdef FMPI_CONTEXT
+		       FMPI_CONTEXT::automaton_t,
 # endif
 # ifdef FIRST_PROJECTION_CONTEXT
 		       FIRST_PROJECTION_CONTEXT::automaton_t,

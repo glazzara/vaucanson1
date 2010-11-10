@@ -52,7 +52,7 @@ b
 10
 EOF
 
-$VCSN partial-identity cb.xml > tcz.xml
+vcsn-char-z partial-identity cb.xml > tcz.xml
 res=`$VCSN eval tcz.xml abbb`
 test "x$res" = "x{2} a.b.b.b"
 res=`$VCSN eval tcz.xml aa`

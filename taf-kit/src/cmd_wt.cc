@@ -57,6 +57,29 @@ quotient_command(const arguments_t& args)
   return 0;
 };
 
+#ifdef FMPI_CONTEXT
+static int
+partial_identity_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  alphabet_t A = a.structure().series().monoid().alphabet();
+  FMPI_CONTEXT::monoid_rep_t new_mrep;
+  FMPI_CONTEXT::series_rep_t new_srep;
+  new_srep.first_representation() =
+    *(a.structure().series().representation());
+  new_srep.second_representation() =
+    *(a.structure().series().representation());
+  FMPI_CONTEXT::automaton_t fmp =
+    FMPI_CONTEXT::make_automaton(A, A, new_mrep,
+		   *(a.structure().series().monoid().representation()),
+		   *(a.structure().series().monoid().representation()),
+                   new_srep);
+  identity(a, fmp);
+  g_res.keep(fmp);
+  return 0;
+}
+#endif
+
 static int
 eval_command(const arguments_t& args)
 {
@@ -161,6 +184,12 @@ COMMAND_ENTRY(is_unambiguous, Aut,
 COMMAND_ENTRY(is_realtime, Aut, "Tell whether `aut' is realtime.");
 COMMAND_ENTRY(realtime, Aut, "Build a realtime version of `aut'.");
 COMMAND_ENTRY(quotient, Aut, "Build the quotient of `aut'.");
+#ifdef FMPI_CONTEXT
+COMMAND_ENTRY(partial_identity, Aut,
+	      "Transform an automaton into an FMP "
+	      "transducer by creating, for each word, "
+	      "a pair containing twice this word.");
+#endif
 COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on `aut'.");
 COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
 COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");

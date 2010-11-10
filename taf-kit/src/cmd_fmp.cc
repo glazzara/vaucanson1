@@ -195,27 +195,6 @@ eval_command(const arguments_t& args)
 }
 
 
-static int
-partial_identity_command(const arguments_t& args)
-{
-  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 1);
-  IOAUT_CONTEXT::alphabet_t A =
-    a.structure().series().monoid().alphabet();
-  series_rep_t new_srep = args.srep;
-  new_srep.first_representation() =
-    *(a.structure().series().representation());
-  new_srep.second_representation() =
-    *(a.structure().series().representation());
-  automaton_t fmp =
-    make_automaton(A, A, args.mrep,
-		   *(a.structure().series().monoid().representation()),
-		   *(a.structure().series().monoid().representation()),
-                   new_srep);
-  identity(a, fmp);
-  g_res.keep(fmp);
-  return 0;
-}
-
 #ifdef RW_CONTEXT
 static int
 to_rw_command(const arguments_t& args)
@@ -271,8 +250,4 @@ COMMAND_ENTRY(eval, AutExp,
 COMMAND_ENTRY_EXPERT(to_rw, Aut,
 	      "Give the equivalent rational weight transducer of `aut'.");
 #endif
-COMMAND_ENTRY(partial_identity, Aut,
-	      "Transform a " IOAUT_NAME " automaton into an fmp "
-	      "transducer by creating, for each word, "
-	      "a pair containing twice this word.");
 END_COMMAND_GROUP

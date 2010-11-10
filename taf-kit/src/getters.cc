@@ -18,7 +18,7 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
-# if defined(WITH_TWO_ALPHABETS) || defined(FMP_CONTEXT)
+# if defined(WITH_TWO_ALPHABETS) || defined(FMP_CONTEXT) || defined(FMPI_CONTEXT)
 #  include <vaucanson/xml/contexts/fmp.hh>
 # endif
 # include <vaucanson/xml/XML.hh>

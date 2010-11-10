@@ -64,6 +64,9 @@ public:
 # ifdef FMP_CONTEXT
   void operator() (FMP_CONTEXT::automaton_t& a) const;
 # endif
+# ifdef FMPI_CONTEXT
+  void operator() (FMPI_CONTEXT::automaton_t& a) const;
+# endif
 
 # ifdef FIRST_PROJECTION_CONTEXT
   void operator() (FIRST_PROJECTION_CONTEXT::automaton_t& a) const;

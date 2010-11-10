@@ -132,6 +132,28 @@ pipe_stream_writer::operator()
 }
 #endif
 
+# ifdef FMPI_CONTEXT
+void
+pipe_stream_writer::operator()
+  (FMPI_CONTEXT::automaton_t& a) const
+{
+  switch (aut_f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
+    }
+}
+#endif
+
 # ifdef IOAUT_CONTEXT
 void
 pipe_stream_writer::operator()

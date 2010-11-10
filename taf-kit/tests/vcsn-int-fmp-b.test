@@ -19,7 +19,7 @@ set -e
 
 VCSN=vcsn-int-fmp-b
 
-$VCSN partial-identity $int_b > int-b-b.xml
+vcsn-int-b partial-identity $int_b > int-b-b.xml
 res=`$VCSN eval --parser1='ONE=e ZERO=O' int-b-b.xml 11`
 test "x$res" = x11
 
