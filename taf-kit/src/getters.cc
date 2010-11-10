@@ -149,7 +149,7 @@ locate_file(const arguments_t& args, const std::string& s,
     {
       std::string file = *i + "/" + s;
       const char* f = file.c_str();
-      if (file_exists(f), abort_if_empty)
+      if (file_exists(f, abort_if_empty))
 	return file;
     }
 
