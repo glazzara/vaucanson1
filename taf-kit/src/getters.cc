@@ -18,7 +18,7 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
-# ifdef WITH_TWO_ALPHABETS
+# if defined(WITH_TWO_ALPHABETS) || defined(FMP_CONTEXT)
 #  include <vaucanson/xml/contexts/fmp.hh>
 # endif
 # include <vaucanson/xml/XML.hh>
@@ -119,7 +119,7 @@ bool
 file_exists(const char* name, bool abort_if_empty)
 {
   struct stat s;
-  
+
   if ((stat(name, &s) != 0))
     return false;
 
@@ -133,17 +133,17 @@ file_exists(const char* name, bool abort_if_empty)
 }
 
 std::string
-locate_file(const arguments_t& args, const std::string& s, 
+locate_file(const arguments_t& args, const std::string& s,
 	    bool abort_if_empty)
 {
   // First, try to load the file as given.
   const char* ss = s.c_str();
   if (file_exists(ss))
     return s;
-  
+
   // Then, try the automata path.
   const std::list<std::string>& path = get_automata_path(args);
-      
+
   std::list<std::string>::const_iterator i;
   for (i = path.begin(); i != path.end(); ++i)
     {
@@ -152,7 +152,7 @@ locate_file(const arguments_t& args, const std::string& s,
       if (file_exists(f), abort_if_empty)
 	return file;
     }
-  
+
   // If we failed, return the filename unchanged, so
   // we can complain about it.
   return s;
@@ -289,7 +289,7 @@ automaton_t get_aut (const arguments_t& args, int n)
 	break;
 # endif // !WITH_TWO_ALPHABETS
       default:
-	std::cerr << "Error: could not load automaton `" 
+	std::cerr << "Error: could not load automaton `"
 		  << ifile << "'." << std::endl;
 	exit(1);
       }
@@ -368,7 +368,7 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
 	fsm_load(*is, a);
 	break;
       default:
-	std::cerr << "Error: could not load automaton `" 
+	std::cerr << "Error: could not load automaton `"
 		  << ifile << "'." << std::endl;
 	exit(1);
       }
@@ -382,7 +382,7 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
   }
   else
   {
-    std::cerr << "Error: could not load automaton `" 
+    std::cerr << "Error: could not load automaton `"
 	      << ifile << "'." << std::endl;
     exit(1);
   }
@@ -429,7 +429,7 @@ get_pair_aut(const arguments_t& args, const int& n)
 	fsm_load(*is, a);
 	break;
       default:
-	std::cerr << "Error: could not load automaton `" 
+	std::cerr << "Error: could not load automaton `"
 		  << ifile << "'." << std::endl;
 	exit(1);
       }
@@ -443,7 +443,7 @@ get_pair_aut(const arguments_t& args, const int& n)
   }
   else
   {
-    std::cerr << "Error: could not load automaton `" 
+    std::cerr << "Error: could not load automaton `"
 	      << ifile << "'." << std::endl;
     exit(1);
   }

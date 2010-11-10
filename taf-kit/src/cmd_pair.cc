@@ -16,6 +16,7 @@
 //
 
 #include "commands.hh"
+#include "vaucanson/algorithms/pair_to_fmp.hh"
 
 static int
 first_projection_command(const arguments_t& args)
@@ -39,8 +40,24 @@ second_projection_command(const arguments_t& args)
   return 0;
 }
 
+// We don't have a FMP context for all kind of pair automata.
+// For instance we don't have a FMP for (char*,int*).
+#ifdef FMP_CONTEXT
+static int
+pair_to_fmp_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  g_res.keep(pair_to_fmp(src));
+  return 0;
+}
+#endif
+
 BEGIN_COMMAND_GROUP(pair_commands,
 		    "Algorithms for automata with alphabets of pairs:");
 COMMAND_ENTRY(first_projection, Aut, "Give the first projection of `aut'.");
 COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'.");
+#ifdef FMP_CONTEXT
+COMMAND_ENTRY(pair_to_fmp, Aut,
+	      "Convert an automata `Aut' using pair letters into an FMP.");
+#endif
 END_COMMAND_GROUP

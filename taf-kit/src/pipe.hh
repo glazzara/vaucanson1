@@ -51,6 +51,10 @@
 #  define RW_CONTEXT_HEADER <vaucanson/RW_CONTEXT.hh>
 #  include RW_CONTEXT_HEADER
 # endif
+# ifdef FMP_CONTEXT
+#  define RW_CONTEXT_HEADER <vaucanson/FMP_CONTEXT.hh>
+#  include RW_CONTEXT_HEADER
+# endif
 # ifdef FIRST_PROJECTION_CONTEXT
 #  define FIRST_PROJECTION_CONTEXT_HEADER <vaucanson/FIRST_PROJECTION_CONTEXT.hh>
 #  include FIRST_PROJECTION_CONTEXT_HEADER
@@ -80,6 +84,9 @@ typedef boost::variant<command_output_status,
 # endif
 # ifdef RW_CONTEXT
 		       RW_CONTEXT::automaton_t,
+# endif
+# ifdef FMP_CONTEXT
+		       FMP_CONTEXT::automaton_t,
 # endif
 # ifdef FIRST_PROJECTION_CONTEXT
 		       FIRST_PROJECTION_CONTEXT::automaton_t,

@@ -137,17 +137,6 @@ composition_cover_command(const arguments_t& args)
 }
 
 static int
-pair_to_fmp_command(const arguments_t& args)
-{
-  vcsn::mute_ltl_to_pair<automaton_t::set_t,
-			 automaton_t::value_t>::ret src = get_pair_aut(args, 1);
-  automaton_t dst = pair_to_fmp(src);
-  set_writing_data(dst, args);
-  g_res.keep(dst);
-  return 0;
-}
-
-static int
 domain_command(const arguments_t& args)
 {
   automaton_t src = get_aut(args, 1);
@@ -259,8 +248,6 @@ COMMAND_ENTRY_EXPERT(normalize, Aut,
 COMMAND_ENTRY(is_ltl, Aut, "Test if `aut' is letter-to-letter.");
 COMMAND_ENTRY(ltl_to_pair, Aut,
       "Convert `Aut' into an automaton defined over a pair letter alphabet.");
-COMMAND_ENTRY(pair_to_fmp, Aut,
-	      "Convert an automata `Aut' using pair letters into an FMP.");
 COMMAND_ENTRY(composition, AutAut,
 	      "Compose two subnormalized transducers.");
 COMMAND_ENTRY_EXPERT(composition_cover, Aut, "Outsplitting.");

@@ -1,5 +1,19 @@
 2010-11-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Move the pair-to-fmp command into the "pair" TAF-Kit instances.
+
+	* taf-kit/src/cmd_fmp.cc (pair_to_fmp_command): Move ...
+	* taf-kit/src/cmd_pair.cc [FMP_CONTEXT] (pair_to_fmp_command):
+	... here.
+	* taf-kit/src/getters.cc: Include xml/fmp.hh if FMP_CONTEXT is set.
+	* taf-kit/src/pipe.hh, taf-kit/src/pipe_writers.hh,
+	taf-kit/src/pipe_writers.hxx: Add machinery to store FMP automata.
+	* taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Adjust test cases.  pair-to-fmp
+	is now in the vcsn-char-char-b or vcsn-int-int-z instance.
+
+2010-11-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Create vcsn-char-char-b and vcsn-int-int-z.
 
 	This is so that we can still test ltl-to-pair/pair-to-fmp after

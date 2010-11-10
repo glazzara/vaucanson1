@@ -142,7 +142,7 @@ fail1 $VCSN proper y.xml \| is-ltl -
 $VCSN proper y.xml \| subnormalize - > yl.xml
 $VCSN is-ltl yl.xml
 $VCSN ltl-to-pair yl.xml > yp.xml
-$VCSN pair-to-fmp yp.xml > yl2.xml
+vcsn-int-int-z pair-to-fmp yp.xml > yl2.xml
 $VCSN data yl.xml > yl.info
 $VCSN data yl2.xml > yl2.info
 diff yl.info yl2.info
