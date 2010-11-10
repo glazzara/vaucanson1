@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
 ## The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
@@ -23,8 +23,10 @@ TESTS =						\
   vcsn-int-fmp-b.test				\
   vcsn-int-fmp-z.test				\
   vcsn-char-char-b.test				\
+  vcsn-char-char-z.test				\
   vcsn-char-int-b.test				\
   vcsn-int-int-b.test				\
+  vcsn-int-int-z.test				\
   vcsn-char-zmin.test				\
   vcsn-char-zmax.test				\
   completeness.test

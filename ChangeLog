@@ -1,3 +1,18 @@
+2010-11-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Create vcsn-char-char-b and vcsn-int-int-z.
+
+	This is so that we can still test ltl-to-pair/pair-to-fmp after
+	next patch.
+
+	* configure.ac: Output taf-kit/tests/vcsn-char-char-z and
+	taf-kit/tests/vcsn-int-int-z.
+	* taf-kit/src/Makefile.am (vcsn-char-char-b, vcsn-int-int-z):
+	Build these.
+	* taf-kit/tests/vcsn-char-char-z.test,
+	taf-kit/tests/vcsn-int-int-z.test: New files.
+	* taf-kit/tests/Makefile.am (TESTS): Add them.
+
 2010-11-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix failing krat_exp_linearize_structure-test.
