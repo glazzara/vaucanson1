@@ -1,3 +1,11 @@
+2010-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Avoid boost::lexical_cast.
+
+	* taf-kit/src/getters.cc (get_unsigned): Use std::stringstream for
+	the conversion instead of boost::lexical_cast.  This removes one
+	unnecessary dependency on Boost.
+
 2010-11-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/src/getters.cc (locate_file): Typo.

@@ -35,7 +35,7 @@ using vcsn::xml::XML;
 # include "pipe.hxx"
 # include "pipe_getters.hxx"
 # include "pipe_writers.hxx"
-#include <boost/lexical_cast.hpp>
+#include <sstream>
 #include <boost/spirit/core.hpp>
 #include "boost_spirit_compatibility.hh"
 
@@ -63,19 +63,16 @@ ALPHABET_DEFINITION(letter_type)
 
 unsigned get_unsigned (const arguments_t& args, int n)
 {
-  const std::string& s = args.args[n];
-
-  try {
-    return boost::lexical_cast<unsigned>(s);
-  }
-  catch (boost::bad_lexical_cast &)
+  const char* s(args.args[n]);
+  std::stringstream ss(s);
+  unsigned result;
+  if ((ss >> result).fail() || !(ss >> std::ws).eof())
     {
       std::cerr << "Error: cannot parse `" << s << "' as unsigned integer."
 		<< std::endl;
       exit(1);
     }
-  /* unreached code */
-  return 0;
+  return result;
 }
 
 
