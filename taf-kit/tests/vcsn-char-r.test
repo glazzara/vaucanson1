@@ -33,3 +33,52 @@ cmp a2.xml a2b.xml
 $VCSN -aab standard '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' \| quotient - > a3.xml
 $VCSN -aab standard 'a({3}a)*' \| quotient - > a3b.xml
 cmp a3.xml a3b.xml
+
+
+
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit c1.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Which weight
+1
+# Set a state to be final.
+7
+# Which state
+1
+# Which weight
+1
+# Add transition
+3
+# From, to, label
+0
+0
+a+b
+# Add transition
+3
+# From, to, label
+0
+1
+b
+# Add transition
+3
+# From, to, label
+1
+1
+{2}a+{2}b
+# Save & Exit.
+10
+EOF
+test "`$VCSN eval c1.xml abab`" = 5
+test "`$VCSN eval c1.xml abba`" = 6
+$VCSN power c1.xml 2 > c2.xml
+test "`$VCSN eval c2.xml abab`" = 25
+test "`$VCSN eval c2.xml abba`" = 36
+$VCSN reduce c2.xml > c2r.xml
+test "`$VCSN eval c2r.xml abab`" = 25
+test "`$VCSN eval c2r.xml abba`" = 36

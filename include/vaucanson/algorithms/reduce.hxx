@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2010 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -210,9 +210,9 @@ namespace vcsn {
 		 mit != m[i].end(); mit++)
 		if ((tmp = lit->second[mit->first].find(k)) != lit->second[mit->first].end())
 		  lm[i][k] += mit->second * tmp->second;
-	  lit->second.resize(m.size());
 	}
 	// Change Base
+	lit->second.resize(m.size());
 	for (std::size_t i = 0; i < m.size(); i++)
 	{ // m , lm[i], lit->second[i]
 	  lit->second[i].clear();

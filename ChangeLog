@@ -1,5 +1,15 @@
 2010-12-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix a segfault in reduce().
+
+	* include/vaucanson/algorithms/reduce.hxx (left_reduce): Fix what
+	seems to be misplaced resize and that was causing segfault or
+	illegal reads on some machines.
+	* taf-kit/tests/vcsn-char-r.test: Add a test case suggested by
+	Jacques Sakarovitch.
+
+2010-12-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Change the 'list-automata' command as a '--list-automata' option.
 
 	* taf-kit/src/main.cc (options, parse_opt): Add an option
