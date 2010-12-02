@@ -42,6 +42,7 @@
 #include "predefined_alphabets.hh"
 
 #include "commands.hh"
+#include "library_commands.hh"
 #include "parser_options.hh"
 
 
@@ -79,11 +80,13 @@ namespace
 #ifndef NO_PREDEF_ALPHABETS
   const char* predefined_string = build_predefined_string();
 #endif
+#define OPT_LIST_AUTOMATA 1
   const argp_option options[] = {
     {"list-commands", 'l', 0, 0,
      "List usual commands", 0 },
     {"list-all-commands", 'L', 0, 0,
      "List all commands, including debug commands", 0 },
+    {"list-automata", OPT_LIST_AUTOMATA, 0, 0, "List predefined automata", 0 },
     { "verbose",		'v', 0, 0,
       "Be more verbose (print boolean results)", 0 },
     { "report-time",	'T', "VERBOSE_DEGREE", OPTION_ARG_OPTIONAL,
@@ -229,6 +232,10 @@ namespace
 
       case 'v':
 	args.verbose = true;
+	break;
+      case OPT_LIST_AUTOMATA:
+	list_automata_command();
+	exit(0);
 	break;
       case ARGP_KEY_ARG:
 	if (state->arg_num < 3)

@@ -418,7 +418,7 @@ $VCSN -p"$writing_data" -P"$writing_data1" -Q"$writing_data2" cat wd-empty.xml >
 diff wd-new.xml wd-ref.xml
 
 # Check predefined alphabets in help.
-$VCSN --help | grep predefined
+$VCSN --help | grep 'alphabet.*predefined'
 while read a l; do
   $VCSN --help | grep "\`$a'.*\`$l' as empty word"
 done <<EOF

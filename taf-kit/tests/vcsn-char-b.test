@@ -293,7 +293,7 @@ for a in $AUTOMATA; do
 done
 
 # Check that each builtin automaton can be read.
-for a in $($VCSN list-automata | sed -n 's/^  * - \([-a-z0-9.]*\).*/\1/p')
+for a in $($VCSN --list-automata | sed -n 's/^  * - \([-a-z0-9.]*\).*/\1/p')
 do
   $VCSN data $a
 done
@@ -486,7 +486,7 @@ diff stderr stderr.ref
 $VCSN -v are-equivalent 1.xml 2.xml
 
 # Check predefined alphabets in help.
-$VCSN --help | grep predefined
+$VCSN --help | grep 'alphabet.*predefined'
 while read a l; do
   $VCSN --help | grep "\`$a'.*\`$l' as empty word"
 done <<EOF

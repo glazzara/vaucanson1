@@ -17,7 +17,6 @@
 
 #include "commands.hh"
 #include "edition_commands.hh"
-#include "library_commands.hh"
 
 static int
 data_command(const arguments_t& args)
@@ -51,5 +50,4 @@ COMMAND_ENTRY(data, Aut, "Print useful infos about `aut'.");
 COMMAND_ENTRY(cat, Aut, "Return `aut'.");
 COMMAND_ENTRY(display, Aut, "Display `aut'.");
 COMMAND_ENTRY(edit, Aut, "Create or edit an automaton interactively.");
-COMMAND_ENTRY(list_automata, None, "List predefined automata.");
 END_COMMAND_GROUP

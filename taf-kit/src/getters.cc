@@ -139,7 +139,7 @@ locate_file(const arguments_t& args, const std::string& s,
     return s;
 
   // Then, try the automata path.
-  const std::list<std::string>& path = get_automata_path(args);
+  const std::list<std::string>& path = get_automata_path();
 
   std::list<std::string>::const_iterator i;
   for (i = path.begin(); i != path.end(); ++i)

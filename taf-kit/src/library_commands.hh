@@ -40,9 +40,6 @@ using namespace vcsn::tools;
 # include <sys/types.h>
 # include <dirent.h>
 
-# include "getters.hh"
-# include "commands.hh"
-
 # include "progname.h"
 
   /*--------------------------------------------.
@@ -50,7 +47,7 @@ using namespace vcsn::tools;
   `--------------------------------------------*/
 
 static const std::list<std::string>&
-get_automata_path(const arguments_t& args)
+get_automata_path()
 {
   static std::list<std::string> path_list;
 
@@ -106,9 +103,9 @@ get_automata_path(const arguments_t& args)
 }
 
 static int
-list_automata_command(const arguments_t& args)
+list_automata_command()
 {
-  const std::list<std::string>& path_list = get_automata_path(args);
+  const std::list<std::string>& path_list = get_automata_path();
 
   std::set<std::string> files;
 

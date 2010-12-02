@@ -1,3 +1,27 @@
+2010-12-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Change the 'list-automata' command as a '--list-automata' option.
+
+	* taf-kit/src/main.cc (options, parse_opt): Add an option
+	--list-automata.
+	* taf-kit/src/cmd_io.cc (list_automata): Undeclare as a command.
+	* taf-kit/src/library_commands.hh (get_automata_path,
+	list_automata_command): Do not take the useless args argument.
+	* taf-kit/tests/vcsn-char-b.test: Adjust usage.
+	* taf-kit/tests/vcsn-char-b.test,
+	taf-kit/tests/vcsn-char-char-b.test,
+	taf-kit/tests/vcsn-char-char-z.test,
+	taf-kit/tests/vcsn-char-fmp-b.test,
+	taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-char-int-b.test,
+	taf-kit/tests/vcsn-char-z.test, taf-kit/tests/vcsn-int-b.test,
+	taf-kit/tests/vcsn-int-fmp-b.test,
+	taf-kit/tests/vcsn-int-fmp-z.test,
+	taf-kit/tests/vcsn-int-int-b.test,
+	taf-kit/tests/vcsn-int-int-z.test, taf-kit/tests/vcsn-int-z.test:
+	Grep for 'alphabet.*predefined' instead of just 'predefined',
+	because the latter occur in the help message for --list-automata.
+
 2010-11-19  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Avoid boost::lexical_cast.

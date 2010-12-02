@@ -141,7 +141,7 @@ $VCSN -p"$writing_data" cat wd-empty.xml > wd-new.xml
 diff wd-new.xml wd-ref.xml
 
 # Check predefined alphabets in help.
-$VCSN --help |fail1 grep predefined
+$VCSN --help | fail1 grep 'alphabet.*predefined'
 
 # Taf-kit should choke on the ";" but should not complain about
 # some ' ' character.
