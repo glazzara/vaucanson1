@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2009, 2010 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -107,19 +107,19 @@ namespace
 
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,
-      "Set the first alphabet for rational expressions or automata", 0 },
+      "Set first monoid alphabet", 0 },
     { "alphabet2",	'A', "ALPHABET", 0,
-      "Set the second alphabet for rational expressions or automata", 0 },
+      "Set second monoid alphabet", 0 },
     { "parser1",	'P', "OPTIONS", 0,
-      "Set the first parsing options for rational expressions", 0 },
+      "Set first monoid parsing options", 0 },
     { "parser2",	'Q', "OPTIONS", 0,
-      "Set the second parsing options for rational expressions", 0 },
+      "Set second monoid parsing options", 0 },
 #else /* ! WITH_TWO_ALPHABETS */
     { "alphabet",		'a', "ALPHABET", 0,
       "Set the alphabet for rational expressions or automata", 0 },
 #endif /* ! WITH_TWO_ALPHABETS */
     { "parser",			'p', "OPTIONS", 0,
-      "Set the parsing options for rational expressions", 0 },
+      "Set parsing options for rational expressions", 0 },
 
 #ifndef NO_PREDEF_ALPHABETS
     { 0, 0, 0, 0, predefined_string, 0},

@@ -1,5 +1,10 @@
 2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/src/main.cc (namespace): Mention the monoids
+	in the descroption of -a -A -P and -Q.
+
+2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Keep enumerate and shortest for boolean automata only, until
 	their implementation is generalized.
 
