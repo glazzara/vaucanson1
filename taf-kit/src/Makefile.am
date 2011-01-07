@@ -1,6 +1,6 @@
 ## Vaucanson, a generic library for finite state machines.
 ## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008,
-## 2009, 2010 The Vaucanson Group.
+## 2009, 2010, 2011 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -174,11 +174,13 @@ vcsn_int_int_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=int_int_z_automaton \
 vcsn_int_int_z_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-int-int-z.la
 
 vcsn_char_zmin_SOURCES = $(COMMON_SOURCES) cmd_wt.cc
-vcsn_char_zmin_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_min_plus_automaton -DVCSN_USE_LIB
+vcsn_char_zmin_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_min_plus_automaton \
+			    -DVCSN_USE_LIB -DWITH_WEIGHTS
 vcsn_char_zmin_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z-min.la
 
 vcsn_char_zmax_SOURCES = $(COMMON_SOURCES) cmd_wt.cc
-vcsn_char_zmax_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_max_plus_automaton -DVCSN_USE_LIB
+vcsn_char_zmax_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_max_plus_automaton \
+			    -DVCSN_USE_LIB -DWITH_WEIGHTS
 vcsn_char_zmax_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z-max.la
 
 LDADD = \

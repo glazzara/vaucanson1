@@ -1,5 +1,15 @@
 2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Ask for weight when declaring initial and final states in automata
+	on tropical semirings.
+
+	* taf-kit/src/Makefile.am (vcsn_char_zmax_CPPFLAGS,
+	vcsn_char_zmin_CPPFLAGS): Add -DWITH_WEIGHTS.
+	* taf-kit/tests/vcsn-char-zmax.test,
+	taf-kit/tests/vcsn-char-zmin.test: Adjust.
+
+2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* taf-kit/src/main.cc (namespace): Mention the monoids
 	in the descroption of -a -A -P and -Q.
 
