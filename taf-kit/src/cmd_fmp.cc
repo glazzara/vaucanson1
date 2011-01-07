@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -213,7 +213,7 @@ to_rw_command(const arguments_t& args)
 #endif
 
 BEGIN_COMMAND_GROUP(fmp_commands,
-		    "Algorithms for automata on products of free monoïds:");
+		    "5. Algorithms for automata on products of free monoïds:");
 COMMAND_ENTRY(inverse, Aut, "Give the inverse of `aut'.");
 COMMAND_ENTRY(transpose, Aut,
 	      "Give the transposed of the transducer `aut'.");

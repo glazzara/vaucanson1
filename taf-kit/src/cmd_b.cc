@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -94,7 +94,7 @@ derived_term_command(const arguments_t& args)
 }
 
 BEGIN_COMMAND_GROUP(b_commands,
-	    "Algorithm specific to Boolean automata and rational expressions:");
+	"4. Algorithms specific to Boolean automata and rational expressions:");
 
 COMMAND_ENTRY(is_complete, Aut,
 	      "Return whether `aut' is complete.");

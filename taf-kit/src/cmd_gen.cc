@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -191,7 +191,7 @@ star_S_command(const arguments_t& args)
 };
 
 BEGIN_COMMAND_GROUP(cmd_gen,
-		    "Operations on all automata and rational expressions:");
+		    "1. Operations on all automata and rational expressions:");
 // Graphs
 COMMAND_ENTRY(accessible, Aut, "Compute the accessible part of `aut'.");
 COMMAND_ENTRY(coaccessible, Aut, "Compute the co-accessible part of `aut'.");

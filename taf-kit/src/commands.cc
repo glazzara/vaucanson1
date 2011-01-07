@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -114,7 +114,7 @@ command_map::list(std::ostream& ostr, bool expert)
   secmap_t::const_iterator si;
   for (si = secmap.begin(); si != secmap.end(); ++si)
     {
-      ostr << "  " << si->first << std::endl
+      ostr << "  " << si->first.c_str() + 3 << std::endl
 	   << si->second->str();
       delete si->second;
     }

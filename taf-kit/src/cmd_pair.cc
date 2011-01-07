@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ pair_to_fmp_command(const arguments_t& args)
 #endif
 
 BEGIN_COMMAND_GROUP(pair_commands,
-		    "Algorithms for automata with alphabets of pairs:");
+		    "6. Algorithms for automata with alphabets of pairs:");
 COMMAND_ENTRY(first_projection, Aut, "Give the first projection of `aut'.");
 COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'.");
 #ifdef FMP_CONTEXT

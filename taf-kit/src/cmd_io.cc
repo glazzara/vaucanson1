@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ display_command(const arguments_t& args)
 
 
 BEGIN_COMMAND_GROUP(io_commands,
-	    "Input/Output functions:");
+	    "0. Input/Output functions:");
 COMMAND_ENTRY(data, Aut, "Print useful infos about `aut'.");
 COMMAND_ENTRY(cat, Aut, "Return `aut'.");
 COMMAND_ENTRY(display, Aut, "Display `aut'.");

@@ -1,3 +1,14 @@
+2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Sort command groups as in the manual.
+
+	* taf-kit/src/cmd_b.cc, taf-kit/src/cmd_fmp.cc,
+	taf-kit/src/cmd_r.cc, taf-kit/src/cmd_gen.cc,
+	taf-kit/src/cmd_io.cc, taf-kit/src/cmd_pair.cc: Number command
+	groups.
+	* taf-kit/src/commands.cc (command_map::list): Strip the number
+	from the command groups.
+
 2010-12-02  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix a segfault in reduce().

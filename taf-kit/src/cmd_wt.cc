@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -177,7 +177,7 @@ power_command(const arguments_t& args)
 
 
 BEGIN_COMMAND_GROUP(cmd_gen,
-	 "Operations on weighted automata and expressions over free monoids:");
+      "2. Operations on weighted automata and expressions over free monoids:");
 COMMAND_ENTRY(transpose, Aut, "Transpose the automaton `aut'.");
 COMMAND_ENTRY(is_unambiguous, Aut,
 	      "Return whether `aut' is unambiguous.");

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010 The Vaucanson Group.
+// Copyright (C) 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@ reduce_command(const arguments_t& args)
 };
 
 BEGIN_COMMAND_GROUP(r_commands,
-		    "Algorithms for automata with weights in a field:");
+		    "3. Algorithms for automata with weights in a field:");
 COMMAND_ENTRY(reduce, Aut,
 	      "Compute a minimal automaton equivalent to `aut'.");
 END_COMMAND_GROUP
