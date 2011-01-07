@@ -1,5 +1,14 @@
 2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Make aut-to-exp commands for DMChooser/HChooser/DefaultChooser.
+
+	* include/vaucanson/algorithms/aut_to_exp.hh: Add INTERFACE
+	for HChooser.
+	* taf-kit/src/cmd_gen (aut_to_exp_DM, aut_to_exp_SO): New functions.
+	* taf-kit/tests/vcsn-int-fmp-z.test: Use aut-to-exp-DM.
+
+2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Ask for weight when declaring initial and final states in automata
 	on tropical semirings.
 

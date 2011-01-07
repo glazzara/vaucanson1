@@ -146,7 +146,23 @@ star_command(const arguments_t& args)
 static int
 aut_to_exp_command(const arguments_t& args)
 {
+  rat_exp_t e = aut_to_exp(get_aut(args, 1), HChooser());
+  g_res.keep(e);
+  return 0;
+}
+
+static int
+aut_to_exp_DM_command(const arguments_t& args)
+{
   rat_exp_t e = aut_to_exp(get_aut(args, 1), DMChooser());
+  g_res.keep(e);
+  return 0;
+}
+
+static int
+aut_to_exp_SO_command(const arguments_t& args)
+{
+  rat_exp_t e = aut_to_exp(get_aut(args, 1), DefaultChooser());
   g_res.keep(e);
   return 0;
 }
@@ -218,7 +234,11 @@ COMMAND_ENTRY(concatenate, AutAut,
 COMMAND_ENTRY(star, Aut,
 	      "Build the star of a standard automaton.");
 COMMAND_ENTRY(aut_to_exp, Aut,
-	      "Build an expression denoting the behaviour of `aut'.");
+	      "Build an expression denoting the behaviour of `aut' (Naive heuristic).");
+COMMAND_ENTRY(aut_to_exp_SO, Aut,
+	      "Build an expression denoting the behaviour of `aut' (State order).");
+COMMAND_ENTRY(aut_to_exp_DM, Aut,
+	      "Build an expression denoting the behaviour of `aut' (Delgado & Morais heuristic).");
 // Operations on behaviors
 COMMAND_ENTRY(sum_S, AutAut,
 	      "Build a standard sum of two automata.");

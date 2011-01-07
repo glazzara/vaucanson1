@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 
 // INTERFACE: Exp aut_to_exp(const GenAutomaton& a) { return vcsn::aut_to_exp(*a); }
 // INTERFACE: Exp aut_to_exp(const GenAutomaton& a, const vcsn::DMChooser& b) { return vcsn::aut_to_exp(*a, b); }
+// INTERFACE: Exp aut_to_exp(const GenAutomaton& a, const vcsn::HChooser& b) { return vcsn::aut_to_exp(*a, b); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
