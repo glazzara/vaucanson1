@@ -93,6 +93,28 @@ derived_term_command(const arguments_t& args)
   return 0;
 }
 
+static int
+shortest_command(const arguments_t& args)
+{
+  automaton_t a = get_aut (args, 1);
+  monoid_elt_t w(a.structure().series().monoid());
+  bool b = shortest(a, w);
+  if (b)
+    g_res.stream << w << std::endl;
+  return !b;
+}
+
+static int
+enumerate_command(const arguments_t& args)
+{
+  std::list<monoid_elt_t> res;
+  enumerate(get_aut (args, 1), get_unsigned(args, 2), res);
+  for(std::list<monoid_elt_t>::const_iterator i =
+	res.begin(); i != res.end(); ++i)
+    g_res.stream << *i << std::endl;
+  return 0;
+}
+
 BEGIN_COMMAND_GROUP(b_commands,
 	"4. Algorithms specific to Boolean automata and rational expressions:");
 
@@ -113,4 +135,6 @@ COMMAND_ENTRY(are_equivalent, AutAut,
 	      "Return whether `aut1' and `aut2' are equivalent.");
 COMMAND_ENTRY(derived_term, Exp,
 	      "Build the derivate-term automaton for `exp'.");
+COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
+COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
 END_COMMAND_GROUP

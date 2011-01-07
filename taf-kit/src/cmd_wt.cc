@@ -90,28 +90,6 @@ eval_command(const arguments_t& args)
 };
 
 static int
-shortest_command(const arguments_t& args)
-{
-  automaton_t a = get_aut (args, 1);
-  monoid_elt_t w(a.structure().series().monoid());
-  bool b = shortest(a, w);
-  if (b)
-    g_res.stream << w << std::endl;
-  return !b;
-}
-
-static int
-enumerate_command(const arguments_t& args)
-{
-  std::list<monoid_elt_t> res;
-  enumerate(get_aut (args, 1), get_unsigned(args, 2), res);
-  for(std::list<monoid_elt_t>::const_iterator i =
-	res.begin(); i != res.end(); ++i)
-    g_res.stream << *i << std::endl;
-  return 0;
-}
-
-static int
 standard_command(const arguments_t& args)
 {
   rat_exp_t e = get_exp(args, 1);
@@ -191,8 +169,6 @@ COMMAND_ENTRY(partial_identity, Aut,
 	      "a pair containing twice this word.");
 #endif
 COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on `aut'.");
-COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
-COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
 // Operations on expressions
 COMMAND_ENTRY(standard, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY(thompson, Exp, "Build the Thompson automaton for `exp'.");

@@ -1,5 +1,13 @@
 2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Keep enumerate and shortest for boolean automata only, until
+	their implementation is generalized.
+
+	* taf-kit/src/cmd_wt.cc (enumerate, shortest): Move ...
+	* taf-kit/src/cmd_b.cc (enumerate, shortest): ... here.
+
+2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Sort command groups as in the manual.
 
 	* taf-kit/src/cmd_b.cc, taf-kit/src/cmd_fmp.cc,
