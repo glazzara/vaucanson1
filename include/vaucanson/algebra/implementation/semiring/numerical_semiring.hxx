@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -68,6 +68,12 @@ namespace vcsn {
     T identity_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
     {
       return T(1);
+    }
+
+    template<typename T>
+    bool show_identity_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
+    {
+      return false;
     }
 
     template<typename T>

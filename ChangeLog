@@ -1,3 +1,21 @@
+2011-01-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Print {0} weights in zmin and zmax contexts.
+
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	include/vaucanson/algebra/implementation/series/krat.hh,
+	include/vaucanson/algebra/implementation/series/krat.hxx
+	(show_identity_value): New function to distinguish between
+	semirings where the 1 must be shown and semiring where it is
+	superfluous.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx
+	(op_rout): Call show_identity_value() to decide whether to print
+	the identity or not.
+	* taf-kit/tests/vcsn-char-zmin.test: Make sure {0} is printed.
+
 2011-01-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Make aut-to-exp commands for DMChooser/HChooser/DefaultChooser.

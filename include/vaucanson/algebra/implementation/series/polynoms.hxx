@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 The
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2011 The
 // Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -643,18 +643,21 @@ namespace vcsn
 	if (i != p.begin())
 	  st << s.representation()->plus;
 
-	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
-	{
-	  st << s.representation()->open_par
-	     << s.representation()->open_weight;
-	  op_rout(s.semiring(), st, i->second);
-	  st << s.representation()->close_weight
-	     << s.representation()->spaces.front();
-	}
+	bool show_weight = (i->second != identity_value(SELECT(W), SELECT(Tw))
+			    || show_identity_value(SELECT(W), SELECT(Tw)));
+
+	if (show_weight)
+	  {
+	    st << s.representation()->open_par
+	       << s.representation()->open_weight;
+	    op_rout(s.semiring(), st, i->second);
+	    st << s.representation()->close_weight
+	       << s.representation()->spaces.front();
+	  }
 
 	op_rout(s.monoid(), st, i->first);
 
-	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
+	if (show_weight)
 	  st << s.representation()->close_par;
 
 	++i;

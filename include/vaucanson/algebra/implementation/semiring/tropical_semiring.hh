@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,6 +33,10 @@ namespace vcsn {
     template<class TropicalKind, typename T>
     T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>),
 		     SELECTOR(T));
+
+    template<class TropicalKind, typename T>
+    bool show_identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>),
+			     SELECTOR(T));
 
     template<typename T>
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>),

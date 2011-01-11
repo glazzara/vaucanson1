@@ -50,7 +50,7 @@ sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit oi.xml
 0
 1
 # Label
-{2} 0
+{0} 0
 # Add transition
 3
 # From and to
@@ -75,6 +75,9 @@ sed '/^#/d' <<EOF | $VCSN --parser='ONE=I ZERO=O ALPHABET=01' edit oi.xml
 # Exit.
 10
 EOF
+
+$VCSN -o dot cat oi.xml > oi.dot
+grep '"({0} I)"' oi.dot
 
 fail1 $VCSN is-unambiguous oi.xml
 

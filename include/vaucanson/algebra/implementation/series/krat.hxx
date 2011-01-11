@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2010 The
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2010, 2011 The
 // Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -102,6 +102,13 @@ namespace vcsn
     {
       static const rat::exp<Tm, Tw> instance = rat::exp<Tm, Tw>::one();
       return instance;
+    }
+
+    template<typename W, typename M, typename Tm, typename Tw>
+    bool show_identity_value(SELECTOR2(algebra::Series<W, M>),
+			     SELECTOR2(rat::exp<Tm, Tw>))
+    {
+      return true;
     }
 
     template<typename W, typename M, typename Tm, typename Tw>
