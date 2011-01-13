@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2008, 2009 The Vaucanson Group.
+## Copyright (C) 2006, 2008, 2009, 2011 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -84,12 +84,10 @@ tests/automata/algos/graphs/extract_test.hh					      \
 tests/automata/algos/graphs/reachable_test.hh					      \
 tests/automata/algos/graphs/sub_automaton_test.hh				      \
 tests/automata/algos/graphs/trim_test.hh					      \
-tests/automata/algos/label_aware_graphs/concat_test.hh				      \
 tests/automata/algos/label_aware_graphs/cut_up_test.hh				      \
 tests/automata/algos/label_aware_graphs/eps_removal_test.hh			      \
 tests/automata/algos/label_aware_graphs/empty_test.hh				      \
 tests/automata/algos/label_aware_graphs/glushkov_test.hh			      \
-tests/automata/algos/label_aware_graphs/in_concat_test.hh			      \
 tests/automata/algos/label_aware_graphs/standard_of_regression_test.hh		      \
 tests/automata/algos/label_aware_graphs/transpose_test.hh			      \
 tests/automata/algos/label_aware_graphs/union_test.hh				      \

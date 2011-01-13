@@ -1,3 +1,17 @@
+2011-01-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Delete the concatenate algorithm.
+
+	concat_of_standard() can be used instead.
+
+	* include/vaucanson/algorithms/concatenate.hh,
+	include/vaucanson/algorithms/concatenate.hxx,
+	src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh:
+	Delete these files.
+	* include/Makefile.am,
+	include/vaucanson/contexts/automaton_functions.thh: Adjust.
+
 2011-01-11  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Print {0} weights in zmin and zmax contexts.
