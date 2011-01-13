@@ -1,6 +1,6 @@
 #!/bin/sh
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2004, 2005, 2006, 2008 The Vaucanson Group.
+# Copyright (C) 2001, 2002, 2004, 2005, 2006, 2008, 2011 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -86,7 +86,7 @@ find_tests ()
       cd $test_include_root
       for d
       do
-	find $d -name \*_$suffix.hh
+	find $d -name \*_$suffix.hh -not -name '*#*'
       done
   )
 }

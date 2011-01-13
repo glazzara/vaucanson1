@@ -1,5 +1,10 @@
 2011-01-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* src/tests/bin/generate-test-suite.sh (test_dirs): Exclude
+	names containing '#', such as emacs temporary files.
+
+2011-01-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Delete the concatenate algorithm.
 
 	concat_of_standard() can be used instead.

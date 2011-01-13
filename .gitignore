@@ -23,3 +23,5 @@ libtool
 NEWS
 README
 *.lineno
+*#*
+
