@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -154,7 +154,7 @@ namespace vcsn
       // This function convert the result the original form.
       exp_t get()
       {
-	return_type l = match(exp_.value());
+	return_type l = this->match(exp_.value());
 	return convert(l);
       }
 
@@ -163,8 +163,8 @@ namespace vcsn
       {
 	typedef typename return_type::iterator		iterator;
 
-	return_type llist = match(lhs);
-	return_type rlist = match(rhs);
+	return_type llist = this->match(lhs);
+	return_type rlist = this->match(rhs);
 	return_type result;
 
 	for (iterator i = llist.begin(); i != llist.end(); ++i)
@@ -176,13 +176,13 @@ namespace vcsn
 
       MATCH__(Sum, lhs, rhs)
       {
-	return list_union(match(lhs), match(rhs));
+	return list_union(this->match(lhs), this->match(rhs));
       }
       END
 
       MATCH_(Star, e)
       {
-	return_type l = match(e);
+	return_type l = this->match(e);
 	return convert(convert(l).star());
       }
       END
@@ -191,7 +191,7 @@ namespace vcsn
       {
 	typedef typename return_type::iterator		iterator;
 
-	return_type	l = match(e);
+	return_type	l = this->match(e);
 	return_type	result;
 
 	for (iterator i = l.begin(); i != l.end(); ++i)
@@ -204,7 +204,7 @@ namespace vcsn
       {
 	typedef typename return_type::iterator		iterator;
 
-	return_type	l = match(e);
+	return_type	l = this->match(e);
 	return_type	result;
 
 	for (iterator i = l.begin(); i != l.end(); ++i)

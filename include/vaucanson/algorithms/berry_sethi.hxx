@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -95,7 +95,7 @@ namespace vcsn {
 	for (iterator i = alpha.begin(); i != alpha.end(); ++i)
 	  if (*i != l)
 	  {
-	    deriv = derivate(exp, *i).first;
+	    Exp deriv = derivate(exp, *i).first;
 	    if (deriv != zero && deriv != exp)
 	      exp_list.push_back(deriv);
 	  }
@@ -185,7 +185,7 @@ namespace vcsn {
       linear_exp_t	continuation_e = linear_exp_continuation(linear_exp, e);
 
       for (iterator i = linear_alpha.begin(); i != linear_alpha.end(); ++i)
-	if (i->first == l 
+	if (i->first == l
 	    && (derivation(continuation_e, *i)
 		== linear_exp_continuation(linear_exp, *i)))
 	  result.insert(*i);

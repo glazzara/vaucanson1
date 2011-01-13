@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,10 +53,10 @@ namespace vcsn {
       {
 	ext_support_t old_supp_ = supp_;
 	supp_.clear();
-	match(lhs);
+	this->match(lhs);
 	ext_support_t lhs_s = supp_;
 	supp_.clear();
-	match(rhs);
+	this->match(rhs);
 	ext_support_t ret;
 	for_all_const_(ext_support_t, c, lhs_s)
 	  for_all_const_(ext_support_t, d, supp_)
@@ -76,8 +76,8 @@ namespace vcsn {
 
       MATCH__(Sum, lhs, rhs)
       {
-	match(lhs);
-	match(rhs);
+	this->match(lhs);
+	this->match(rhs);
 	return 0;
       }
       END
@@ -93,7 +93,7 @@ namespace vcsn {
       {
 	ext_support_t old_supp_ = supp_;
 	supp_.clear();
-	match(node);
+	this->match(node);
 	for_all_(ext_support_t, c, supp_)
 	  c->first = op_mul(series_.semiring(), w, c->first);
 	supp_.insert(supp_.begin(), old_supp_.begin(), old_supp_.end());
@@ -105,7 +105,7 @@ namespace vcsn {
       {
 	ext_support_t old_supp_ = supp_;
 	supp_.clear();
-	match(node);
+	this->match(node);
 	for_all_(ext_support_t, c, supp_)
 	  c->first = op_mul(series_.semiring(), c->first, w);
 	supp_.insert(supp_.begin(), old_supp_.begin(), old_supp_.end());

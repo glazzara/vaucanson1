@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ namespace vcsn {
 
       MATCH__(Product, lhs, rhs)
       {
-	return match(rhs) * match(lhs);
+	return this->match(rhs) * this->match(lhs);
       }
       END
 

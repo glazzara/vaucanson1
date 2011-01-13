@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ namespace vcsn {
     return_type linearize()
     {
       // Build a Element with the correct alphabet.
-      return_type	result = match(exp_.value());
+      return_type	result = this->match(exp_.value());
       l_monoid_t	l_monoid(l_alpha_);
       l_semiring_t	l_semiring;
       return return_type (l_series_set_elt_t (l_semiring, l_monoid),
@@ -73,31 +73,31 @@ namespace vcsn {
 
     MATCH__(Product, lhs, rhs)
     {
-      return match(lhs) * match(rhs);
+      return this->match(lhs) * this->match(rhs);
     }
     END
 
     MATCH__(Sum, lhs, rhs)
     {
-      return match(lhs) + match(rhs);
+      return this->match(lhs) + this->match(rhs);
     }
     END
 
     MATCH_(Star, e)
     {
-      return match(e).star();
+      return this->match(e).star();
     }
     END
 
     MATCH__(LeftWeight, w, e)
     {
-      return l_semiring_elt_t(w) * match(e);
+      return l_semiring_elt_t(w) * this->match(e);
     }
     END
 
     MATCH__(RightWeight, e, w)
     {
-      return match(e) * l_semiring_elt_t(w);
+      return this->match(e) * l_semiring_elt_t(w);
     }
     END
 

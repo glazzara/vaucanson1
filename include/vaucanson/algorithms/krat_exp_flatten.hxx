@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,44 +51,44 @@ namespace vcsn
     return_type
     flatten()
     {
-      return match(exp_.value());
+      return this->match(exp_.value());
     }
 
     MATCH__(Product, lhs, rhs)
     {
-      match(lhs);
-      match(rhs);
+      this->match(lhs);
+      this->match(rhs);
       return res_;
     }
     END
 
     MATCH__(Sum, lhs, rhs)
     {
-      match(lhs);
-      match(rhs);
+      this->match(lhs);
+      this->match(rhs);
       return res_;
     }
     END
 
     MATCH_(Star, e)
     {
-      match(e);
+      this->match(e);
       return res_;
     }
     END
 
     MATCH__(LeftWeight, w, e)
     {
-      w = w; // Dirty trick to avoid warinings.
-      match(e);
+      (void)w;
+      this->match(e);
       return res_;
     }
     END
 
     MATCH__(RightWeight, e, w)
     {
-      w = w; // Dirty trick to avoid warinings.
-      match(e);
+      (void)w;
+      this->match(e);
       return res_;
     }
     END

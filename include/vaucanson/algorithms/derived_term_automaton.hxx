@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -115,7 +115,7 @@ namespace vcsn {
 	undefined = true;
       if (c_term.first !=
 	  e.exp_structure().semiring().zero(SELECT(semiring_elt_value_t)))
-	set_final(series_set_elt_t (e.exp_structure(), c_term.first));
+	this->set_final(series_set_elt_t (e.exp_structure(), c_term.first));
 
       // Create links between current state and states corresponding to
       // partial derivatives of current expression
@@ -134,7 +134,7 @@ namespace vcsn {
 	  s_elt = p_exp.begin().semiring_elt() * s_elt;
 	  p_exp.begin().semiring_elt() =
 	    e.exp_structure().semiring().identity(SELECT(semiring_elt_value_t));
-	  link_to(p_exp, s_elt);
+	  this->link_to(p_exp, s_elt);
 	}
       }
     }

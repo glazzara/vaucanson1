@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2010
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2010, 2011
 // The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
@@ -82,7 +82,7 @@ namespace vcsn {
 	MATCH__(Product, lhs, rhs)
 	{
           AUTOMATON_TYPES(automaton_t);
-	  match(lhs);
+	  this->match(lhs);
 
           hstate_t lhs_i = initial_;
 
@@ -97,7 +97,7 @@ namespace vcsn {
                                   (*f, auto_->get_final(*f)));
           auto_->clear_final();
 
-	  match(rhs);
+	  this->match(rhs);
 
           // Restore the previously saved data.
           typedef std::list<hstate_t> list_st_t;
@@ -126,7 +126,7 @@ namespace vcsn {
           typedef typename std::list<std::pair<hstate_t, series_set_elt_t> >
             list_fin_st_t;
 
-          match(lhs);
+          this->match(lhs);
 
           // Store lhs initial state.
           hstate_t left_i = initial_;
@@ -140,7 +140,7 @@ namespace vcsn {
 
           auto_->clear_final();
 
-          match(rhs);
+          this->match(rhs);
 
           // Restore the previously saved data.
           for (typename list_fin_st_t::iterator i = lhs_tmp.begin();
@@ -159,7 +159,7 @@ namespace vcsn {
 	MATCH_(Star, node)
 	{
           AUTOMATON_TYPES(automaton_t);
-	  match(node);
+	  this->match(node);
 
 	  precondition(auto_->get_final(initial_).starable());
 
@@ -183,7 +183,7 @@ namespace vcsn {
 	  const semiring_t&	semiring = automata_set_.series().semiring();
 	  const semiring_elt_t	weight (semiring, w);
 	  const series_set_elt_t ws(auto_->series(), weight);
-	  match(node);
+	  this->match(node);
 
 	  left_ext_mult_of_standard_inside(auto_->structure(),
 					   *auto_, initial_, ws);
@@ -195,7 +195,7 @@ namespace vcsn {
 	{
 	  const semiring_t&	semiring = automata_set_.series().semiring();
 	  const semiring_elt_t	weight (semiring, w);
-	  match(node);
+	  this->match(node);
 
 	  for (typename automaton_t::final_iterator
 		 f, next = auto_->final().begin();

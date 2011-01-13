@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -95,8 +95,8 @@ namespace vcsn
     // Matches:
     MATCH__(Product, lhs, rhs)
     {
-      set_t lset = apply_sum(match(lhs));
-      set_t rset = apply_sum(match(rhs));
+      set_t lset = apply_sum(this->match(lhs));
+      set_t rset = apply_sum(this->match(rhs));
       put_in(lset, *lset.begin() * *rset.begin());
       return lset;
     }
@@ -104,8 +104,8 @@ namespace vcsn
 
     MATCH__(Sum, lhs, rhs)
     {
-      set_t lset = match(lhs);
-      set_t rset = match(rhs);
+      set_t lset = this->match(lhs);
+      set_t rset = this->match(rhs);
       set_t res;
       merge(lset.begin(), lset.end(),
 		rset.begin(), rset.end(),
@@ -116,7 +116,7 @@ namespace vcsn
 
     MATCH_(Star, e)
     {
-      set_t cset = apply_sum(match(e));
+      set_t cset = apply_sum(this->match(e));
       exp_t exp = *cset.begin();
       put_in(cset, exp.star());
       return cset;
@@ -125,7 +125,7 @@ namespace vcsn
 
     MATCH__(LeftWeight, w, e)
     {
-      set_t	cset = apply_sum(match(e));
+      set_t	cset = apply_sum(this->match(e));
       put_in(cset, semiring_elt_t(w) * *cset.begin());
       return cset;
     }
@@ -133,7 +133,7 @@ namespace vcsn
 
     MATCH__(RightWeight, e, w)
     {
-      set_t	cset = apply_sum(match(e));
+      set_t	cset = apply_sum(this->match(e));
       put_in(cset, *cset.begin() * semiring_elt_t(w));
       return cset;
     }

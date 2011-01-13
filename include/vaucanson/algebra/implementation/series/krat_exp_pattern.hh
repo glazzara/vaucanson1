@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -230,19 +230,19 @@ match_node##N(const N&) 			\
 
 	  MATCH__(Product, lhs, rhs)
 	  {
-	    return match(lhs) * match(rhs);
+	    return this->match(lhs) * this->match(rhs);
 	  }
 	  END
 
 	  MATCH__(Sum, lhs, rhs)
 	  {
-	    return match(lhs) + match(rhs);
+	    return this->match(lhs) + this->match(rhs);
 	  }
 	  END
 
 	  MATCH_(Star, e)
 	  {
-	    return_type r (match(e));
+	    return_type r (this->match(e));
 	    r.star();
 	    return r;
 	  }
@@ -251,14 +251,14 @@ match_node##N(const N&) 			\
 	  MATCH__(LeftWeight, w, e)
 	  {
 	    semiring_elt_t welt (exp_.structure().semiring(), w);
-	    return  welt * match(e);
+	    return  welt * this->match(e);
 	  }
 	  END
 
 	  MATCH__(RightWeight, e, w)
 	  {
 	    semiring_elt_t welt (exp_.structure().semiring(), w);
-	    return match(e) * welt;
+	    return this->match(e) * welt;
 	  }
 	  END
 

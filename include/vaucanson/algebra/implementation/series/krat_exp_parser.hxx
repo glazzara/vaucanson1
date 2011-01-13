@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2008, 2009, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -219,10 +219,8 @@ namespace vcsn
 
     template <class S, class T>
     std::pair<bool, std::string>
-    parse(const std::string& from,
-	Element<S, T>& exp,
-	bool lex_trace = false,
-	bool parse_trace = false)
+    parse(const std::string& from, Element<S, T>& exp,
+	  bool lex_trace, bool parse_trace)
     {
       parse_trace = parse_trace;
       std::string error;
