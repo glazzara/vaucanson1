@@ -1,3 +1,7 @@
+2011-01-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* src/tests/include/tests/automata/implementation_check/epsilon_label_representation_test.hh (epsilon_label_representation_test): Honor show_identity_value.
+
 2011-01-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix many errors reported by clang++.

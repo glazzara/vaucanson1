@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,7 +52,23 @@ unsigned epsilon_label_representation_test(tests::Tester& tg)
   std::stringstream ref;
   std::stringstream sstr;
 
-  ref << automaton.structure().series().monoid().representation()->empty;
+
+  if (show_identity_value(SELECT(semiring_t), SELECT(semiring_elt_value_t)))
+    {
+      series_set_t s = automaton.structure().series();
+      semiring_elt_t one = identity_as<semiring_elt_value_t>::of(semiring);
+      ref << s.representation()->open_par
+	  << s.representation()->open_weight
+	  << one
+	  << s.representation()->close_weight
+	  << s.representation()->spaces.front()
+	  << s.monoid().representation()->empty
+	  << s.representation()->close_par;
+    }
+  else
+    {
+      ref << automaton.structure().series().monoid().representation()->empty;
+    }
 
   sstr << automaton.series_of(h1);
 
