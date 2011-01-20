@@ -55,7 +55,7 @@
 	</label>
       </transition>
       <initial state="s0"/>
-      <final state="s1"/>
+      <final state="s1">
 	<label>
 	  <leftExtMul>
 	    <weight>
@@ -71,4 +71,4 @@
   </automatonStruct>
 </automaton>
 
-<fsmxml/>
+</fsmxml>

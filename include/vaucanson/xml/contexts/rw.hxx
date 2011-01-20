@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -130,6 +130,7 @@ namespace vcsn
 
 	typedef typename TRANStype::semiring_elt_t::semiring_elt_t semiring_elt_t;
 	semiring_elt_t semiring;
+	tools::set_attribute(semiringn, "type", "numerical");
 	tools::set_attribute(semiringn, "set", get_semiring_set(semiring.value()));
 	tools::set_attribute(semiringn, "operations", get_semiring_operations(semiring.structure()));
 

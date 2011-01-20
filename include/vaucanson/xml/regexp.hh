@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -93,7 +93,7 @@ namespace vcsn
 	RegexpHandler<T>*	lefth_;
     };
     /**
-     * WeightHamdlerHandler class
+     * WeightHandlerHandler class
      */
     template <typename T>
     class WeightHandler : public RegexpHandler<T>

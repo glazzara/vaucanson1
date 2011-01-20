@@ -4,11 +4,11 @@
   <valueType>
     <semiring operations="classical" set="B" type="numerical"/>
     <monoid type="product" prodDim="2">
-      <monoid genSort="letters" type="free" genDescrip="enum" genKind="simple">
+      <monoid genSort="integers" type="free" genDescrip="enum" genKind="simple">
         <monGen value="1"/>
         <monGen value="10"/>
       </monoid>
-      <monoid genSort="letters" type="free" genDescrip="enum" genKind="simple">
+      <monoid genSort="integers" type="free" genDescrip="enum" genKind="simple">
         <monGen value="2"/>
         <monGen value="20"/>
       </monoid>

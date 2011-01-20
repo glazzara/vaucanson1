@@ -1,3 +1,30 @@
+2011-01-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix multiple XML error.  All but the first one are in the test
+	suite.
+
+	* include/vaucanson/xml/contexts/rw.hxx: Add missing type=numerical.
+	* include/vaucanson/xml/regexp.hh: Typo in comment.
+	* src/tests/common/xmldiff.sh: Make it a bit stronger.  The previous
+	implementation would only test the inclusion of the set of line
+	of one file into the set of lines of the other (i.e. without doing
+	the reverse check, and ignoring duplicates).
+	* src/tests/xml/int_fmp_ref.xml: Fix genSort to read 'integers' and
+	not 'letters'.
+	* src/tests/xml/int_trans_ref.xml,
+	src/tests/xml/int_z_trans_ref.xml, src/tests/xml/trans_ref.xml,
+	src/tests/xml/z_trans_ref.xml: Fix some syntax errors in the XML.
+	* src/tests/xml/int_z_max_plus_ref.dot,
+	src/tests/xml/int_z_min_plus_ref.dot,
+	src/tests/xml/z_max_plus_ref.dot,
+	src/tests/xml/z_min_plus_ref.dot: Adjust output to the recent
+	changes about the way zmin and zmax weights are printed.
+	* src/tests/xml/xml_int_trans_tester.cc,
+	src/tests/xml/xml_int_z_trans_tester.cc,
+	src/tests/xml/xml_trans_tester.cc,
+	src/tests/xml/xml_z_trans_tester.cc: The default series is 0, so
+	don't use that as a label, use the identity instead.
+
 2011-01-18  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* src/tests/include/tests/automata/implementation_check/epsilon_label_representation_test.hh (epsilon_label_representation_test): Honor show_identity_value.

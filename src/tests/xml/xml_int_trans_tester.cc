@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     parse_word(output_word, "2");
     a.set_o_final(s1, output_word);
 
-    series_set_elt_t ss4(a.structure().series());
+    series_set_elt_t ss4(algebra::identity_as<series_set_elt_t::value_t>::of(a.structure().series()));
     a.add_series_transition (s0, s0, ss4);
     input_word = monoid_elt_t(a.structure().series().monoid());
     parse_word(input_word, "1");
