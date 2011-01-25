@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008, 2010 The Vaucanson Group.
+// Copyright (C) 2008 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 namespace vcsn {
 
-  template<typename A, typename AI>
+  template<typename A, typename AI, typename AO>
   class reducer
   {
     typedef Element<A, AI> Auto;
@@ -34,31 +34,35 @@ namespace vcsn {
     typedef std::vector<std::map<std::size_t, semiring_elt_t> > semiring_matrix_t;
     typedef std::map<monoid_elt_t, semiring_matrix_t> semiring_matrix_set_t;
 
+  /* output may have an implementation different from the implementation of the input;
+     this is for instance the case where input is a transpose view, as in the wrappers.
+     */
+
   public:
-    reducer(const Element<A, AI>& input, Element<A, AI>& output) :
-      null_series_(input.series().zero_),
-      semiring_elt_zero_(input.series().semiring().wzero_),
-      semiring_elt_one_(input.series().semiring().wone_),
-      monoid_identity_(input.series().monoid().VCSN_EMPTY_),
-      output_(output)
+    reducer(const Element<A, AI>& input, Element<A, AO>& output) :
+      zero(input.series().semiring().wzero_),
+      one(input.series().semiring().wone_),
+      empty_word(input.series().monoid().VCSN_EMPTY_),
+      output(output)
     {
       std::map<hstate_t, int>	state_to_index;
       int i = 0;
 
       for_all_const_states(s, input)
 	state_to_index[*s] = i++;
-      nb_states_ = i;
+      nb_states = i;
 
-      init_.resize(i);
-      final_.resize(i);
+      init.resize(i);
+      final.resize(i);
 
       // We  assume that there are only weights on initial and final transitions
 
+	//Conversion of the automaton into linear representation
       for_all_const_initial_states(s, input)
-	init_[state_to_index[*s]] = input.get_initial(*s).get(monoid_identity_);
+	init[state_to_index[*s]] = input.get_initial(*s).get(empty_word);
 
       for_all_const_final_states(s, input)
-	final_[state_to_index[*s]] = input.get_final(*s).get(monoid_identity_);
+	final[state_to_index[*s]] = input.get_final(*s).get(empty_word);
 
       for_all_const_transitions(t, input)
       {
@@ -67,309 +71,229 @@ namespace vcsn {
 	for_all_(series_set_elt_t::support_t, l, s.supp())
 	{
 	  const monoid_elt_t m(input.structure().series().monoid(), *l);
-	  typename semiring_matrix_set_t::iterator it = letter_matrix_set_.find(m);
-	  if (it == letter_matrix_set_.end())
-	    it = letter_matrix_set_.insert(make_pair(m, semiring_matrix_t(nb_states_))).first;
+	  typename semiring_matrix_set_t::iterator it = letter_matrix_set.find(m);
+	  if (it == letter_matrix_set.end())
+	    it = letter_matrix_set.insert(make_pair(m, semiring_matrix_t(nb_states))).first;
 	  it->second[state_to_index[input.src_of(*t)]][state_to_index[input.dst_of(*t)]] = s.get(m);
 	}
       }
     }
 
+	//utility class
+	struct triple_t{
+		hstate_t state;
+		semiring_vector_t vector;
+		monoid_elt_t letter;
+		
+		triple_t(const hstate_t& state, const semiring_vector_t& vector, const monoid_elt_t& letter) : 
+		state(state), vector(vector), letter(letter) {}
+		
+	};
+	
+	//utility methods
+	void product_vector_matrix(const semiring_vector_t& v, const semiring_matrix_t& m, semiring_vector_t& res){
+		for(int i=0; i<nb_states; i++)
+			for( typename std::map<std::size_t, semiring_elt_t>::const_iterator it = m[i].begin(); it!=m[i].end(); ++it){
+				int j=it->first;
+				res[j]+=v[i]*it->second;
+			}
+	}
+	
+	semiring_elt_t scalar_product(const semiring_vector_t& v, const semiring_vector_t& w){
+		semiring_elt_t res(zero);
+		for(int i=0; i<nb_states; i++)
+			res+=v[i]*w[i];
+		return res;
+	}
+
+    //core of the algorithm
     void
     left_reduce()
     {
-      std::queue<semiring_vector_t> q;
-      q.push(init_);
-      semiring_matrix_t m;
-
-      while (!q.empty())
-      {
-	semiring_vector_t curr = q.front();
-	q.pop();
-
-	// first non null index of curr
-	std::size_t curr_fnn = 0;
-
-	// current row of the matrix
-	typename semiring_matrix_t::iterator m_row = m.begin();
-	while (m_row != m.end())
-	{
-	  while (curr_fnn < nb_states_ && curr[curr_fnn] == semiring_elt_zero_)
-	    curr_fnn++;
-
-	  // first non null index of the current row of the matrix
-	  std::size_t m_row_fnn = 0;
-	  while (m_row_fnn < nb_states_ && m_row->find(m_row_fnn) == m_row->end())
-	    m_row_fnn++;
-
-	  // if the first non null value of curr is before the first non null
-	  // value of the current row we must insert it before this line
-	  if (curr_fnn < m_row_fnn)
-	    break;
-
-	  if (curr_fnn == m_row_fnn)
-	  {
-	    semiring_elt_t coef = curr[curr_fnn] / (*m_row)[m_row_fnn];
-	    for (typename std::map<std::size_t, semiring_elt_t>::const_iterator it = (*m_row).begin();
-		 it != (*m_row).end(); it++)
-	    {
-	      semiring_elt_t tmp = curr[it->first] - coef * it->second;
-	      // some semirings have not an exact representation in
-	      // these semirings op_eq is override to handle this problem
-	      if (tmp == semiring_elt_zero_)
-		curr[it->first] = semiring_elt_zero_;
-	      else
-		curr[it->first] = tmp;
-	    }
+      //if the initial vector is null, the reduction is empty
+ 	  {
+ 	    int i;
+        for(i=0; i<nb_states; i++)
+          if (init[i] != zero)
+            break;
+        if( i ==  nb_states )
+          return;
+ 	  }
+      //otherwise...
+      std::queue<triple_t> queue;
+      //The base is a list of vectors, each vector is associated with a state of the output
+      std::list<std::pair<hstate_t,semiring_vector_t> > base;
+      //The initial vector corresponds to the first state and is the first element of the new base
+      hstate_t n_init= output.add_state();
+      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_init,init));
+      output.set_initial(n_init);
+      //Final weight of the initial state
+      semiring_elt_t t=scalar_product(init,final);
+      if(t!= zero)	{
+		  series_set_elt_t s(output.structure().series());
+		  s.assoc(empty_word, t);
+	  	  output.set_final(n_init, s);
 	  }
-	  m_row++;
-	}
-	while (curr_fnn < nb_states_ && curr[curr_fnn] == semiring_elt_zero_)
-	  curr_fnn++;
-	if (curr_fnn != nb_states_) // curr is not full of semiring_elt_zero_
-	{
-	  m_row = m.insert(m_row, std::map<std::size_t, semiring_elt_t>());
-	  for (size_t i = curr_fnn; i < nb_states_; i++)
-	    if (curr[i] != semiring_elt_zero_)
-	      (*m_row)[i] = curr[i];
-
-	  // multiply curr with the matrix representing each letter
-	  // and push it in q
-	  for (typename semiring_matrix_set_t::const_iterator it = letter_matrix_set_.begin();
-	       it != letter_matrix_set_.end(); it++)
+	  /* for each letter a, I.mu(a) is computed and pushed in the queue
+	     with the letter a and the state corresponding to I; it allows to
+	     build the automaton in the same time.
+	  */ 
+	  for (typename semiring_matrix_set_t::const_iterator it = letter_matrix_set.begin();
+	       it != letter_matrix_set.end(); ++it)
 	  {
-	    semiring_vector_t to_push(nb_states_, semiring_elt_zero_);
-	    typename std::map<std::size_t, semiring_elt_t>::const_iterator tmp;
-	    for (size_t i = 0; i < nb_states_; i++)
-	      for (size_t j = 0; j < nb_states_; j++)
-		if ((tmp = it->second[j].find(i)) != it->second[j].end())
-		  to_push[i] += curr[j] * tmp->second;
-	    q.push(to_push);
+	       	semiring_vector_t nv(nb_states);
+	       	product_vector_matrix(init, it->second, nv);
+	        queue.push(triple_t(n_init, nv, it->first));	       	
 	  }
-	}
-      }
-
-      // New Initial Vector
-      semiring_vector_t newinit(m.size(), semiring_elt_zero_);
-      // Change Base
-      for (std::size_t i = 0; i < m.size(); i++)
-      { // m , init_, newinit
-	std::size_t init_fnn = 0;
-	for (std::size_t j = 0; j < m.size(); j++)
-	{
-	  while (init_fnn < nb_states_ && init_[init_fnn] == semiring_elt_zero_)
-	    init_fnn++;
-
-	  std::size_t mj_fnn = 0;
-	  while (mj_fnn < m.size() && m[j].find(mj_fnn) == m[j].end())
-	    mj_fnn++;
-
-	  if (init_fnn == mj_fnn)
-	  {
-	    semiring_elt_t coef = init_[init_fnn] / m[j][mj_fnn];
-	    for (typename std::map<std::size_t, semiring_elt_t>::const_iterator it = m[j].begin();
-		 it != m[j].end(); it++)
-	    {
-	      semiring_elt_t tmp = init_[it->first] - coef * it->second;
-	      // some semirings have not an exact representation in
-	      // these semirings op_eq is override to handle this problem
-	      if (tmp == semiring_elt_zero_)
-		init_[it->first] = semiring_elt_zero_;
-	      else
-		init_[it->first] = tmp;
-	    }
-	    newinit[j] = coef;
-	  }
-	}
-      }
-      std::swap(init_, newinit);
-
-      // New Final Vector
-      semiring_vector_t newfinal(m.size(), semiring_elt_zero_);
-      for (std::size_t i = 0; i < m.size(); i++)
+      while (!queue.empty())
       {
-	for (typename std::map<std::size_t, semiring_elt_t>::iterator it = m[i].begin();
-	     it != m[i].end(); it++)
-	  newfinal[i] += it->second * final_[it->first];
-      }
-      std::swap(final_, newfinal);
-
-      // New Matrices for Letters
-      for (typename semiring_matrix_set_t::iterator lit = letter_matrix_set_.begin();
-	   lit != letter_matrix_set_.end(); lit++)
-      {
-	std::vector<semiring_vector_t> lm(m.size(),
-					  semiring_vector_t(nb_states_,
-							    semiring_elt_zero_));
-	// tmp will be used to perform the multiplication only if necessary
-	typename std::map<std::size_t, semiring_elt_t>::iterator tmp;
-	for (std::size_t i = 0; i < m.size(); i++)
-	{
-	  for (std::size_t k = 0; k < nb_states_; k++)
-	    for (typename std::map<std::size_t, semiring_elt_t>::iterator mit = m[i].begin();
-		 mit != m[i].end(); mit++)
-		if ((tmp = lit->second[mit->first].find(k)) != lit->second[mit->first].end())
-		  lm[i][k] += mit->second * tmp->second;
-	}
-	// Change Base
-	lit->second.resize(m.size());
-	for (std::size_t i = 0; i < m.size(); i++)
-	{ // m , lm[i], lit->second[i]
-	  lit->second[i].clear();
-	  std::size_t lmi_fnn = 0;
-	  for (std::size_t j = 0; j < m.size(); j++)
+	  triple_t& tr = queue.front();
+	  //the triple tr is not yet poped, to keep valid references.
+	  semiring_vector_t& current = tr.vector;
+	  // first non null indices of current and base vectors.
+	  std::size_t curr_fnn = 0;
+	  std::size_t base_fnn = 0;
+	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it = base.begin(); it!=base.end(); ++it)
 	  {
-	    while (lmi_fnn < nb_states_ && lm[i][lmi_fnn] == semiring_elt_zero_)
-	      lmi_fnn++;
-
-	    std::size_t mj_fnn = 0;
-	    while (mj_fnn < m.size() && m[j].find(mj_fnn) == m[j].end())
-	      mj_fnn++;
-
-	    if (lmi_fnn == mj_fnn)
-	    {
-	      semiring_elt_t coef = lm[i][lmi_fnn] / m[j][mj_fnn];
-	      for (typename std::map<std::size_t, semiring_elt_t>::const_iterator it = m[j].begin();
-		   it != m[j].end(); it++)
+	    for(; curr_fnn < nb_states && current[curr_fnn] == zero; ++curr_fnn);
+	    // first non null index of the base vector
+	    // As the matrix is "in stairs" the base_fnn is larger than the previous one
+	 	semiring_vector_t& vbase = it->second;
+	    for(; base_fnn < nb_states && vbase[base_fnn] == zero; ++base_fnn);
+	    // Case A
+	    if(base_fnn < curr_fnn)
+	      // nothing to do in this case
+	      continue;
+	    // Case B
+	    if(base_fnn > curr_fnn)
+	      // current is added to the base before the current base vector
 	      {
-		semiring_elt_t tmp = lm[i][it->first] - coef * it->second;
-		// some semirings have not an exact representation in
-		// these semirings op_eq is override to handle this problem
-		if (tmp == semiring_elt_zero_)
-		  lm[i][it->first] = semiring_elt_zero_;
-		else
-		  lm[i][it->first] = tmp;
-	      }
-	      lit->second[i][j] = coef;
+	        hstate_t n_state= output.add_state();
+	        base.insert(it,std::pair<hstate_t,semiring_vector_t>(n_state,current));
+		    series_set_elt_t s(output.structure().series());
+		    s.assoc(tr.letter, one);
+	        output.add_series_transition(tr.state,n_state, s);
+	        semiring_elt_t t=scalar_product(current,final);
+	        if(t!= zero)
+	        {
+		   series_set_elt_t s(output.structure().series());
+		   s.assoc(empty_word, t);
+	  	   output.set_final(n_state, s);
+		  }
+		  // All the vectors current.mu(a) are put in the queue
+	  	  for (typename semiring_matrix_set_t::const_iterator itm = letter_matrix_set.begin();
+	   		 itm != letter_matrix_set.end(); ++itm)
+	       {
+	    	  semiring_vector_t nv(nb_states);
+	         product_vector_matrix(current, itm->second, nv);
+	         queue.push(triple_t(n_state, nv, itm->first));	       	
+	  	  }
+	  	  //To avoid treatment after exiting the loop:
+	  	  curr_fnn=nb_states;
+	  	  break;
 	    }
+	    // Case C
+	    //Otherwise, current is reduced w.r.t base
+	    semiring_elt_t ratio=current[curr_fnn]/vbase[curr_fnn];
+	    current[curr_fnn] = zero; //This is safer than current[curr_fnn] = current[curr_fnn]-ratio*vbase[curr_fnn];
+	    for(int i=curr_fnn+1; i< nb_states; ++i)
+		current[i]=current[i]-ratio*vbase[i];
+		series_set_elt_t s(output.structure().series());
+		s.assoc(tr.letter, ratio);
+	    output.add_series_transition(tr.state, it->first, s);
 	  }
-	}
-      }
-      nb_states_ = m.size();
-    }
-
-    void
-    transpose()
-    {
-      std::swap(init_, final_);
-      for (typename semiring_matrix_set_t::iterator lit = letter_matrix_set_.begin();
-	   lit != letter_matrix_set_.end(); lit++)
-      {
-	for (std::size_t i = 0; i < nb_states_; i++)
-	  for (std::size_t j = i; j < nb_states_; j++)
-	  {
-	    typename std::map<std::size_t, semiring_elt_t>::iterator ij = lit->second[i].find(j);
-	    typename std::map<std::size_t, semiring_elt_t>::iterator ji = lit->second[j].find(i);
-	    if (ij != lit->second[i].end())
-	      if (ji != lit->second[j].end()) // both exist
-		std::swap(ij->second, ji->second);
-	      else // only ij exist
+	  //If current has not been totally reduced w.r.t the base, it has to be put itself in the base
+	  for(; curr_fnn < nb_states && current[curr_fnn] == zero; ++curr_fnn);
+	  if(nb_states> curr_fnn)
+	   // current is added at the end of the base
+          {
+	      hstate_t n_state= output.add_state();
+	      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_state,current));
+		  series_set_elt_t s(output.structure().series());
+		  s.assoc(tr.letter, one);
+	      output.add_series_transition(tr.state, n_state, s);
+	      semiring_elt_t t=scalar_product(current,final);
+	      if(t!= zero)
 	      {
-		lit->second[j][i] = ij->second;
-		lit->second[i].erase(ij);
+		 series_set_elt_t s(output.structure().series());
+		 s.assoc(empty_word, t);
+	  	 output.set_final(n_state, s);
 	      }
-	    else
-	      if (ji != lit->second[j].end()) // only ji exist
+	      for (typename semiring_matrix_set_t::const_iterator itm = letter_matrix_set.begin();
+	   			itm != letter_matrix_set.end(); ++itm)
 	      {
-		lit->second[i][j] = ji->second;
-		lit->second[j].erase(ji);
+	    	  semiring_vector_t nv(nb_states);
+	         product_vector_matrix(current, itm->second, nv);
+	         queue.push(triple_t(n_state, nv, itm->first));	       	
 	      }
-	  }
+	   }
+	   queue.pop();
       }
-    }
-
-    void
-    release()
-    {
-      // Clear output_
-      automaton_t empty(output_.structure());
-      output_ = empty;
-
-      std::vector<hstate_t> new_states(nb_states_);
-
-      // Create all states and set them to initial or final if necessary.
-      for (std::size_t i = 0; i < nb_states_; i++)
-      {
-	new_states[i] = output_.add_state();
-	if (init_[i] != semiring_elt_zero_)
-	{
-	  series_set_elt_t s(output_.structure().series());
-	  s.assoc(monoid_identity_, init_[i]);
-	  output_.set_initial(new_states[i], s);
-	}
-	if (final_[i] != semiring_elt_zero_)
-	{
-	  series_set_elt_t s(output_.structure().series());
-	  s.assoc(monoid_identity_, final_[i]);
-	  output_.set_final(new_states[i], s);
-	}
-      }
-
-      // Create all transitions.
-      for (typename semiring_matrix_set_t::iterator lit = letter_matrix_set_.begin();
-	  lit != letter_matrix_set_.end(); lit++)
-	for (std::size_t i = 0; i < nb_states_; i++)
-	  for (std::size_t j = 0; j < nb_states_; j++)
+	/* Print the base
+ 	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it = base.begin(); it!=base.end(); ++it)
 	  {
-	    typename std::map<std::size_t, semiring_elt_t>::iterator tmp;
-	    if ((tmp = lit->second[i].find(j)) != lit->second[i].end())
-	    {
-	      output_.add_weighted_transition(new_states[i], new_states[j],
-					      tmp->second, lit->first.value());
-	    }
+	  	std::cerr << it->first << ':';
+	  	for(int i=0; i < nb_states; ++i) 
+ 		  	std::cerr << (it->second)[i] << ',';
+		std::cerr << std::endl;
 	  }
-    }
-
+	  */
+   }
+    
   private:
     // zero and identity of used algebraic structure.
-    series_set_elt_t	null_series_;
-    semiring_elt_t	semiring_elt_zero_;
-    semiring_elt_t	semiring_elt_one_;
-    monoid_elt_t	monoid_identity_;
+    semiring_elt_t	zero;
+    semiring_elt_t	one;
+    monoid_elt_t	empty_word;
 
-    // Automaton in matrix form
-    semiring_vector_t init_;
-    semiring_vector_t final_;
-    semiring_matrix_set_t letter_matrix_set_;
-    size_t nb_states_;
+    // Linear representation of the input automaton in matrix form
+    semiring_vector_t init;
+    semiring_vector_t final;
+    semiring_matrix_set_t letter_matrix_set;
+    size_t nb_states;
 
-    automaton_t& output_;
+    Element<A, AO>& output;
   };
 
+  template<typename A, typename AI, typename AO>
+  void
+  semi_reduce(const Element<A, AI>& a, Element<A, AO>& output)
+  {
+    reducer<A, AI, AO> r(a, output);
+    r.left_reduce();
+  }
+
+  template<typename A, typename AI>
+  Element<A, AI>
+  semi_reduce(const Element<A, AI>& a)
+  {
+    precondition(is_realtime(a));
+    Element<A, AI> output(a.structure());
+	semi_reduce(a, output);
+    return output;
+  }
 
   template<typename A, typename AI>
   Element<A, AI>
   reduce(const Element<A, AI>& a, misc::direction_type dir)
   {
     precondition(is_realtime(a));
+    Element<A, AI> tmp(a.structure());
     Element<A, AI> output(a.structure());
-    reducer<A, AI> r(a, output);
     if (dir == misc::right_left)
-      r.transpose();
-    r.left_reduce();
-    r.transpose();
-    r.left_reduce();
-    if (dir == misc::left_right)
-      r.transpose();
-    r.release();
-    return output;
+    {
+      semi_reduce(transpose_view(a), tmp);
+      semi_reduce(transpose_view(tmp), output);
+	  return output;
+    }
+    else
+    {
+      semi_reduce(a, tmp);
+      semi_reduce(transpose_view(tmp), output);
+	  return transpose(output);
+    }
   }
 
-  template<typename A, typename AI>
-  void
-  reduce_here(Element<A, AI>& a, misc::direction_type dir)
-  {
-    precondition(is_realtime(a));
-    reducer<A, AI> r(a, a);
-    if (dir == misc::right_left)
-      r.transpose();
-    r.left_reduce();
-    r.transpose();
-    r.left_reduce();
-    if (dir == misc::left_right)
-      r.transpose();
-    r.release();
-  }
 
 } // vcsn
 

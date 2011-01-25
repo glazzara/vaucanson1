@@ -27,13 +27,13 @@
  *
  * This files declares the reduce algorithm.
  *
- * @see reduce(), reduce_here()
+ * @see reduce(), semi_reduce()
  */
 /** @} */
 
 // INTERFACE: Automaton reduce(const Automaton& a, vcsn::misc::direction_type dir) { return vcsn::reduce(*a); }
 
-// INTERFACE: void reduce_here(Automaton& a, vcsn::misc::direction_type dir) { return vcsn::reduce_here(*a); }
+// INTERFACE: Automaton semi_reduce(const Automaton& a) { return vcsn::semi_reduce(*a); }
 
 namespace vcsn {
 
@@ -43,7 +43,6 @@ namespace vcsn {
    * This algorithm computes the reduce representation of an automaton with
    * weights in a division ring.
    *
-   * It is based on the explanation made by Sylvain Lombardy.
    * A technical report about this algorithm is available here :
    * http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200901-Seminar-Delmon
    * Proof and explanations are also available in ETA Chapter 3, Sec 4.3
@@ -53,21 +52,20 @@ namespace vcsn {
    * @pre The automaton @a a must be realtime.
    * @pre The weights of the automaton @a a must be defined in a division ring.
    *
-   * @see reduce_here()
+   * @see semi_reduce()
    *
-   * @author Vivien Delmon
+   * @author Vivien Delmon, Sylvain Lombardy
    */
   template<typename A, typename AI>
   Element<A, AI>
   reduce(const Element<A, AI>& a, misc::direction_type dir = misc::right_left);
 
   /**
-   * In place reduce of an automaton (default right_left)
+   * Semi reduction of an automaton
    *
-   * This algorithm computes the reduce representation of an automaton with
+   * This algorithm computes the (left) semi reduction of an automaton with
    * weights in a division ring.
    *
-   * It is based on the explanation made by Sylvain Lombardy.
    * A technical report about this algorithm is available here :
    * http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200901-Seminar-Delmon
    * Proof and explanations are also available in ETA Chapter 3, Sec 4.3
@@ -79,11 +77,11 @@ namespace vcsn {
    *
    * @see reduce()
    *
-   * @author Vivien Delmon
+   * @author Vivien Delmon, Sylvain Lombardy
    */
   template<typename A, typename AI>
-  void
-  reduce_here(Element<A, AI>& a, misc::direction_type dir = misc::right_left);
+  Element<A, AI>
+  semi_reduce(const Element<A, AI>& a);
 
 } // vcsn
 

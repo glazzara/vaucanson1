@@ -1,6 +1,11 @@
+2011-01-27  Sylvain Lombardy  <lombardy@univ-mlv.fr>
+
+	* include/vaucanson/algorithms/reduce.hh,
+	include/vaucanson/algorithms/reduce.cc: Rewrite.
+
 2011-01-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	Fix multiple XML error.  All but the first one are in the test
+	Fix multiple XML errors.  All but the first one are in the test
 	suite.
 
 	* include/vaucanson/xml/contexts/rw.hxx: Add missing type=numerical.
