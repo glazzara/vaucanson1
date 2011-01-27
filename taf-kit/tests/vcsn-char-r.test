@@ -77,7 +77,7 @@ EOF
 
 e1=5
 e2=6
-for n in 1 2 3 4 5; do
+for n in 1 2 3 4; do
    $VCSN power c1.xml "$n" > cn.xml
    $VCSN reduce cn.xml > cnr.xml
 

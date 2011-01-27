@@ -1,5 +1,11 @@
 2011-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* taf-kit/tests/vcsn-char-r.test: remove the power(C_1^n) test
+	case for n=5, it does not pass on all processors due to rounding
+	issues.
+
+2011-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/reduce.hxx (semi_reduce): Rename
 	the two-argument version into...
 	(do_semi_reduce): ... this to avoid complaint from sanity/hhck.
