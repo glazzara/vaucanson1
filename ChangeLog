@@ -1,5 +1,12 @@
 2011-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/reduce.hxx (semi_reduce): Rename
+	the two-argument version into...
+	(do_semi_reduce): ... this to avoid complaint from sanity/hhck.
+	Also fixup whitespace in the whole file.
+
+2011-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/contexts/r_semiring.thh: Store values as
 	double for better precision.
 

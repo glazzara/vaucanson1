@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,8 +34,9 @@ namespace vcsn {
     typedef std::vector<std::map<std::size_t, semiring_elt_t> > semiring_matrix_t;
     typedef std::map<monoid_elt_t, semiring_matrix_t> semiring_matrix_set_t;
 
-  /* output may have an implementation different from the implementation of the input;
-     this is for instance the case where input is a transpose view, as in the wrappers.
+  /* output may have an implementation different from the
+     implementation of the input; this is for instance the case where
+     input is a transpose view, as in the wrappers.
      */
 
   public:
@@ -55,9 +56,10 @@ namespace vcsn {
       init.resize(i);
       final.resize(i);
 
-      // We  assume that there are only weights on initial and final transitions
+      // We assume that there are only weights on initial and final
+      // transitions
 
-	//Conversion of the automaton into linear representation
+      // Conversion of the automaton into linear representation
       for_all_const_initial_states(s, input)
 	init[state_to_index[*s]] = input.get_initial(*s).get(empty_word);
 
@@ -79,167 +81,189 @@ namespace vcsn {
       }
     }
 
-	//utility class
-	struct triple_t{
-		hstate_t state;
-		semiring_vector_t vector;
-		monoid_elt_t letter;
-		
-		triple_t(const hstate_t& state, const semiring_vector_t& vector, const monoid_elt_t& letter) : 
-		state(state), vector(vector), letter(letter) {}
-		
-	};
-	
-	//utility methods
-	void product_vector_matrix(const semiring_vector_t& v, const semiring_matrix_t& m, semiring_vector_t& res){
-		for(int i=0; i<nb_states; i++)
-			for( typename std::map<std::size_t, semiring_elt_t>::const_iterator it = m[i].begin(); it!=m[i].end(); ++it){
-				int j=it->first;
-				res[j]+=v[i]*it->second;
-			}
-	}
-	
-	semiring_elt_t scalar_product(const semiring_vector_t& v, const semiring_vector_t& w){
-		semiring_elt_t res(zero);
-		for(int i=0; i<nb_states; i++)
-			res+=v[i]*w[i];
-		return res;
-	}
+    //utility class
+    struct triple_t
+    {
+      hstate_t state;
+      semiring_vector_t vector;
+      monoid_elt_t letter;
+
+      triple_t(const hstate_t& state, const semiring_vector_t& vector,
+	       const monoid_elt_t& letter) :
+	state(state), vector(vector), letter(letter) {}
+
+    };
+
+    //utility methods
+    void product_vector_matrix(const semiring_vector_t& v,
+			       const semiring_matrix_t& m,
+			       semiring_vector_t& res)
+    {
+      for(int i=0; i<nb_states; i++)
+	for(typename std::map<std::size_t, semiring_elt_t>::const_iterator it
+	      = m[i].begin(); it != m[i].end(); ++it)
+	  {
+	    int j = it->first;
+	    res[j] += v[i] * it->second;
+	  }
+    }
+
+    semiring_elt_t scalar_product(const semiring_vector_t& v,
+				  const semiring_vector_t& w)
+    {
+      semiring_elt_t res(zero);
+      for(int i = 0; i < nb_states; ++i)
+	res += v[i] * w[i];
+      return res;
+    }
 
     //core of the algorithm
     void
     left_reduce()
     {
       //if the initial vector is null, the reduction is empty
- 	  {
- 	    int i;
-        for(i=0; i<nb_states; i++)
+      {
+	int i;
+        for (i = 0; i < nb_states; ++i)
           if (init[i] != zero)
             break;
-        if( i ==  nb_states )
+        if (i == nb_states)
           return;
- 	  }
-      //otherwise...
+      }
+      // otherwise...
       std::queue<triple_t> queue;
-      //The base is a list of vectors, each vector is associated with a state of the output
+      // The base is a list of vectors, each vector is associated with
+      // a state of the output
       std::list<std::pair<hstate_t,semiring_vector_t> > base;
-      //The initial vector corresponds to the first state and is the first element of the new base
-      hstate_t n_init= output.add_state();
-      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_init,init));
+      // The initial vector corresponds to the first state and is the
+      // first element of the new base
+      hstate_t n_init = output.add_state();
+      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_init, init));
       output.set_initial(n_init);
-      //Final weight of the initial state
-      semiring_elt_t t=scalar_product(init,final);
-      if(t!= zero)	{
-		  series_set_elt_t s(output.structure().series());
-		  s.assoc(empty_word, t);
-	  	  output.set_final(n_init, s);
-	  }
-	  /* for each letter a, I.mu(a) is computed and pushed in the queue
-	     with the letter a and the state corresponding to I; it allows to
-	     build the automaton in the same time.
-	  */ 
-	  for (typename semiring_matrix_set_t::const_iterator it = letter_matrix_set.begin();
-	       it != letter_matrix_set.end(); ++it)
-	  {
-	       	semiring_vector_t nv(nb_states);
-	       	product_vector_matrix(init, it->second, nv);
-	        queue.push(triple_t(n_init, nv, it->first));	       	
-	  }
+      // Final weight of the initial state
+      semiring_elt_t t = scalar_product(init, final);
+      if(t != zero)
+	{
+	  series_set_elt_t s(output.structure().series());
+	  s.assoc(empty_word, t);
+	  output.set_final(n_init, s);
+	}
+      /* for each letter a, I.mu(a) is computed and pushed in the queue
+	 with the letter a and the state corresponding to I; it allows to
+	 build the automaton in the same time.
+      */
+      for (typename semiring_matrix_set_t::const_iterator it
+	     = letter_matrix_set.begin(); it != letter_matrix_set.end(); ++it)
+	{
+	  semiring_vector_t nv(nb_states);
+	  product_vector_matrix(init, it->second, nv);
+	  queue.push(triple_t(n_init, nv, it->first));
+	}
       while (!queue.empty())
-      {
+	{
 	  triple_t& tr = queue.front();
 	  //the triple tr is not yet poped, to keep valid references.
 	  semiring_vector_t& current = tr.vector;
 	  // first non null indices of current and base vectors.
 	  std::size_t curr_fnn = 0;
 	  std::size_t base_fnn = 0;
-	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it = base.begin(); it!=base.end(); ++it)
+	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it
+		= base.begin(); it!=base.end(); ++it)
 	  {
-	    for(; curr_fnn < nb_states && current[curr_fnn] == zero; ++curr_fnn);
+	    while (curr_fnn < nb_states && current[curr_fnn] == zero)
+	      ++curr_fnn;
 	    // first non null index of the base vector
 	    // As the matrix is "in stairs" the base_fnn is larger than the previous one
-	 	semiring_vector_t& vbase = it->second;
-	    for(; base_fnn < nb_states && vbase[base_fnn] == zero; ++base_fnn);
+	    semiring_vector_t& vbase = it->second;
+	    while (base_fnn < nb_states && vbase[base_fnn] == zero)
+	      ++base_fnn;
 	    // Case A
-	    if(base_fnn < curr_fnn)
+	    if (base_fnn < curr_fnn)
 	      // nothing to do in this case
 	      continue;
 	    // Case B
-	    if(base_fnn > curr_fnn)
+	    if (base_fnn > curr_fnn)
 	      // current is added to the base before the current base vector
 	      {
 	        hstate_t n_state= output.add_state();
-	        base.insert(it,std::pair<hstate_t,semiring_vector_t>(n_state,current));
-		    series_set_elt_t s(output.structure().series());
-		    s.assoc(tr.letter, one);
-	        output.add_series_transition(tr.state,n_state, s);
-	        semiring_elt_t t=scalar_product(current,final);
-	        if(t!= zero)
+	        base.insert(it,std::pair<hstate_t,semiring_vector_t>(n_state,
+								     current));
+		series_set_elt_t s(output.structure().series());
+		s.assoc(tr.letter, one);
+	        output.add_series_transition(tr.state, n_state, s);
+	        semiring_elt_t t=scalar_product(current, final);
+	        if(t != zero)
 	        {
-		   series_set_elt_t s(output.structure().series());
-		   s.assoc(empty_word, t);
-	  	   output.set_final(n_state, s);
-		  }
-		  // All the vectors current.mu(a) are put in the queue
-	  	  for (typename semiring_matrix_set_t::const_iterator itm = letter_matrix_set.begin();
-	   		 itm != letter_matrix_set.end(); ++itm)
+		  series_set_elt_t s(output.structure().series());
+		  s.assoc(empty_word, t);
+		  output.set_final(n_state, s);
+		}
+		// All the vectors current.mu(a) are put in the queue
+		for (typename semiring_matrix_set_t::const_iterator itm
+		       = letter_matrix_set.begin();
+		     itm != letter_matrix_set.end(); ++itm)
 	       {
 	    	  semiring_vector_t nv(nb_states);
-	         product_vector_matrix(current, itm->second, nv);
-	         queue.push(triple_t(n_state, nv, itm->first));	       	
-	  	  }
-	  	  //To avoid treatment after exiting the loop:
-	  	  curr_fnn=nb_states;
-	  	  break;
-	    }
+		  product_vector_matrix(current, itm->second, nv);
+		  queue.push(triple_t(n_state, nv, itm->first));
+	       }
+		// To avoid treatment after exiting the loop:
+		curr_fnn = nb_states;
+		break;
+	      }
 	    // Case C
-	    //Otherwise, current is reduced w.r.t base
-	    semiring_elt_t ratio=current[curr_fnn]/vbase[curr_fnn];
-	    current[curr_fnn] = zero; //This is safer than current[curr_fnn] = current[curr_fnn]-ratio*vbase[curr_fnn];
-	    for(int i=curr_fnn+1; i< nb_states; ++i)
-		current[i]=current[i]-ratio*vbase[i];
+	    // Otherwise, current is reduced w.r.t base
+	    semiring_elt_t ratio = current[curr_fnn] / vbase[curr_fnn];
+	    // This is safer than current[curr_fnn] = current[curr_fnn]-ratio*vbase[curr_fnn];
+	    current[curr_fnn] = zero;
+	    for(int i = curr_fnn+1; i < nb_states; ++i)
+		current[i ] =current[i] - ratio*vbase[i];
 		series_set_elt_t s(output.structure().series());
 		s.assoc(tr.letter, ratio);
 	    output.add_series_transition(tr.state, it->first, s);
 	  }
-	  //If current has not been totally reduced w.r.t the base, it has to be put itself in the base
-	  for(; curr_fnn < nb_states && current[curr_fnn] == zero; ++curr_fnn);
-	  if(nb_states> curr_fnn)
-	   // current is added at the end of the base
-          {
+	  // If current has not been totally reduced w.r.t the base,
+	  // it has to be put itself in the base
+	  while (curr_fnn < nb_states && current[curr_fnn] == zero)
+	    ++curr_fnn;
+	  if (nb_states> curr_fnn)
+	    // current is added at the end of the base
+	    {
 	      hstate_t n_state= output.add_state();
-	      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_state,current));
-		  series_set_elt_t s(output.structure().series());
-		  s.assoc(tr.letter, one);
+	      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_state,
+								   current));
+	      series_set_elt_t s(output.structure().series());
+	      s.assoc(tr.letter, one);
 	      output.add_series_transition(tr.state, n_state, s);
-	      semiring_elt_t t=scalar_product(current,final);
-	      if(t!= zero)
+	      semiring_elt_t t=scalar_product(current, final);
+	      if(t != zero)
+		{
+		  series_set_elt_t s(output.structure().series());
+		  s.assoc(empty_word, t);
+		  output.set_final(n_state, s);
+		}
+	      for (typename semiring_matrix_set_t::const_iterator itm
+		     = letter_matrix_set.begin();
+		   itm != letter_matrix_set.end(); ++itm)
 	      {
-		 series_set_elt_t s(output.structure().series());
-		 s.assoc(empty_word, t);
-	  	 output.set_final(n_state, s);
-	      }
-	      for (typename semiring_matrix_set_t::const_iterator itm = letter_matrix_set.begin();
-	   			itm != letter_matrix_set.end(); ++itm)
-	      {
-	    	  semiring_vector_t nv(nb_states);
-	         product_vector_matrix(current, itm->second, nv);
-	         queue.push(triple_t(n_state, nv, itm->first));	       	
+		semiring_vector_t nv(nb_states);
+		product_vector_matrix(current, itm->second, nv);
+		queue.push(triple_t(n_state, nv, itm->first));
 	      }
 	   }
-	   queue.pop();
-      }
+	  queue.pop();
+	}
 	/* Print the base
  	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it = base.begin(); it!=base.end(); ++it)
 	  {
 	  	std::cerr << it->first << ':';
-	  	for(int i=0; i < nb_states; ++i) 
+	  	for(int i=0; i < nb_states; ++i)
  		  	std::cerr << (it->second)[i] << ',';
 		std::cerr << std::endl;
 	  }
 	  */
-   }
-    
+    }
+
   private:
     // zero and identity of used algebraic structure.
     semiring_elt_t	zero;
@@ -257,7 +281,7 @@ namespace vcsn {
 
   template<typename A, typename AI, typename AO>
   void
-  semi_reduce(const Element<A, AI>& a, Element<A, AO>& output)
+  do_semi_reduce(const Element<A, AI>& a, Element<A, AO>& output)
   {
     reducer<A, AI, AO> r(a, output);
     r.left_reduce();
@@ -267,9 +291,8 @@ namespace vcsn {
   Element<A, AI>
   semi_reduce(const Element<A, AI>& a)
   {
-    precondition(is_realtime(a));
     Element<A, AI> output(a.structure());
-	semi_reduce(a, output);
+    do_semi_reduce(a, output);
     return output;
   }
 
@@ -282,15 +305,15 @@ namespace vcsn {
     Element<A, AI> output(a.structure());
     if (dir == misc::right_left)
     {
-      semi_reduce(transpose_view(a), tmp);
-      semi_reduce(transpose_view(tmp), output);
-	  return output;
+      do_semi_reduce(transpose_view(a), tmp);
+      do_semi_reduce(transpose_view(tmp), output);
+      return output;
     }
     else
     {
-      semi_reduce(a, tmp);
-      semi_reduce(transpose_view(tmp), output);
-	  return transpose(output);
+      do_semi_reduce(a, tmp);
+      do_semi_reduce(transpose_view(tmp), output);
+      return transpose(output);
     }
   }
 
