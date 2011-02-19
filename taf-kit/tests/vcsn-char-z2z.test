@@ -1,0 +1,140 @@
+#! /bin/sh
+
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2006, 2007, 2008, 2010, 2011 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+
+. ./defs || exit 1
+
+set -e
+
+DIFF=${top_srcdir}/src/tests/common/xmldiff.sh
+VCSN=vcsn-char-z2z
+
+$VCSN -aab standard '{1}a + b' > s2ab.xml
+$VCSN -aab thompson '{-1}({0}a + b)' \| proper - > t2ab.xml
+$VCSN sum s2ab.xml t2ab.xml > u2ab.xml
+$VCSN reduce u2ab.xml \| is-empty -
+rm s2ab.xml t2ab.xml u2ab.xml
+
+$VCSN -aab standard '((a.a*)(a.a*)*)' \| quotient - > a2.xml
+$VCSN -aab standard 'a({1}a)*' \| quotient - > a2b.xml
+cmp a2.xml a2b.xml
+
+$VCSN -aab standard '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' \| quotient - > a3.xml
+$VCSN -aab standard 'a({0}a)*' \| quotient - > a3b.xml
+cmp a3.xml a3b.xml
+
+
+
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit c1.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Which weight
+1
+# Set a state to be final.
+7
+# Which state
+1
+# Which weight
+1
+# Add transition
+3
+# From, to, label
+0
+0
+a+b
+# Add transition
+3
+# From, to, label
+0
+1
+b
+# Add transition
+3
+# From, to, label
+1
+1
+{0}a+{1}b
+# Save & Exit.
+10
+EOF
+
+e1=5
+e2=6
+for n in 1 2 3 4; do
+   $VCSN power c1.xml "$n" > cn.xml
+   $VCSN reduce cn.xml > cnr.xml
+
+   test "`$VCSN eval cn.xml abab`" = $e1
+   test "`$VCSN eval cn.xml abba`" = $e2
+   test "`$VCSN eval cnr.xml abab`" = $e1
+   test "`$VCSN eval cnr.xml abba`" = $e2
+   e1=`expr $e1 \* 5`
+   e2=`expr $e2 \* 6`
+
+   s=`expr $n + 1`
+   $VCSN data cnr.xml | grep "States: $s"
+
+   $VCSN quotient cn.xml > cnq.xml
+   $VCSN data cnq.xml | grep "States: $s"
+done
+
+
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit b1.xml
+# Add states
+1
+# Add two states
+2
+# Set a state to be initial.
+5
+# Which state
+0
+# Which weight
+1
+# Set a state to be final.
+7
+# Which state
+1
+# Which weight
+1
+# Add transition
+3
+# From, to, label
+0
+0
+a+b
+# Add transition
+3
+# From, to, label
+0
+1
+b
+# Add transition
+3
+# From, to, label
+1
+1
+a+b
+# Save & Exit.
+10
+EOF
+
+$VCSN power b1.xml 4 > b4.xml
+$VCSN reduce b4.xml > b4r.xml
+$VCSN data b4r.xml | grep 'States: 5'
