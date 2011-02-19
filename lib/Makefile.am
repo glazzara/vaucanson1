@@ -45,6 +45,7 @@ maintainer-clean-local:
 	       $(top_builddir)/lib/vcsn-r		\
 	       $(top_builddir)/lib/vcsn-q		\
 	       $(top_builddir)/lib/vcsn-z		\
+	       $(top_builddir)/lib/vcsn-z2z		\
 	       $(top_builddir)/lib/vcsn-int-z		\
 	       $(top_builddir)/lib/vcsn-z-min		\
 	       $(top_builddir)/lib/vcsn-z-max		\

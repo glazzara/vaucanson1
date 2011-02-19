@@ -178,7 +178,9 @@ vaucanson/algebra/concept/semiring_base.hxx		\
 vaucanson/algebra/concept/series_base.hh		\
 vaucanson/algebra/concept/series_base.hxx		\
 vaucanson/algebra/concept/tropical_semiring.hh		\
-vaucanson/algebra/concept/tropical_semiring.hxx
+vaucanson/algebra/concept/tropical_semiring.hxx		\
+vaucanson/algebra/concept/cyclic_semiring.hh		\
+vaucanson/algebra/concept/cyclic_semiring.hxx
 
 
 nobase_include_HEADERS +=							     \
@@ -213,6 +215,8 @@ vaucanson/algebra/implementation/semiring/q_number.hh				     \
 vaucanson/algebra/implementation/semiring/q_number.hxx				     \
 vaucanson/algebra/implementation/semiring/tropical_semiring.hh			     \
 vaucanson/algebra/implementation/semiring/tropical_semiring.hxx			     \
+vaucanson/algebra/implementation/semiring/cyclic_semiring.hh			     \
+vaucanson/algebra/implementation/semiring/cyclic_semiring.hxx			     \
 vaucanson/algebra/implementation/series/generalized.hh				     \
 vaucanson/algebra/implementation/series/generalized.hxx				     \
 vaucanson/algebra/implementation/series/krat.hh					     \
