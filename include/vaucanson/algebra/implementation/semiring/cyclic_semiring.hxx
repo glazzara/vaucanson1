@@ -71,12 +71,14 @@ namespace vcsn {
 		   T& dst, U arg)
     {
       dst = (dst * arg) % n;
+      dst = (dst < 0) ? dst + n : dst;
     }
 
     template<unsigned int n, typename T, typename U>
     T op_mul(const algebra::CyclicSemiring<n>&, T a, U b)
     {
-      return (a * b) % n;
+      T res = (a * b) % n;
+      return ((res < 0) ? res + n : res);
     }
 
     /*---------.
@@ -104,12 +106,14 @@ namespace vcsn {
 		   T& dst, U arg)
     {
       dst = (dst / arg) % n;
+      dst = (dst < 0) ? dst + n : dst;
     }
 
     template<unsigned int n, typename T, typename U>
     T op_div(const algebra::CyclicSemiring<n>& s, T a, U b)
     {
-      return (a / b) % n;
+      T res = (a / b) % n;
+      return ((res < 0) ? res + n : res);
     }
 
     /*-------------.
@@ -121,13 +125,15 @@ namespace vcsn {
 		   T& dst, U arg)
     {
       dst = (dst - arg) % n;
+      dst = (dst < 0) ? dst + n : dst;
     }
 
     template<unsigned int n, typename T, typename U>
     T op_sub(const algebra::CyclicSemiring<n>& s,
 	     T a, U b)
     {
-      return (a - b) % n;
+      T res = (a - b) % n;
+      return ((res < 0) ? res + n : res);
     }
 
     /*-----.

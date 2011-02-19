@@ -38,6 +38,7 @@ vaucanson/contexts/generic_series.thh		\
 vaucanson/contexts/polynom_series.thh		\
 vaucanson/contexts/r_semiring.thh		\
 vaucanson/contexts/q_semiring.thh		\
+vaucanson/contexts/z2z_semiring.thh		\
 vaucanson/contexts/ratseries_semiring.thh	\
 vaucanson/contexts/transducer.thh		\
 vaucanson/contexts/fmp_transducer.thh		\
