@@ -52,7 +52,7 @@ generate \
 ## Semiring.  ##
 ## ---------- ##
 
-for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_min; do
+for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_min cyclic_semiring; do
     for semiring_elt_value_t in int double float q bool; do
 	TEST="algebra/semiring";
 	case $semiring_type:$semiring_elt_value_t in
@@ -101,7 +101,7 @@ done
 ## Automaton.  ##
 ## ----------- ##
 
-for kind in boolean int_boolean r z z_max_plus z_min_plus char_char_boolean int_int_boolean
+for kind in boolean int_boolean r z z2z z_max_plus z_min_plus char_char_boolean int_int_boolean
 do
   generate \
       context_headers_${kind} \
