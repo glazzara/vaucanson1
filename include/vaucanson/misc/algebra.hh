@@ -28,26 +28,33 @@
  *
  */
 /// @}
-
-namespace algebra
-{
-  /** @addgroup algebra */
+namespace vcsn {
+  namespace misc {
+  /** @addgroup vcsn */
   /// @{
+  /** @addgroup algebra */
+  ///  @{
   /// @name Prime Number Operator
-  // @{
-  /// @todo FIXME: We might prefer to define gcd and lcm somewhere else.
+  ///   @{
   /// Greatest common divisor.
+  inline
   unsigned int gcd (unsigned int a, unsigned int b);
 
   /// Least common multiple.
+  inline
   unsigned int lpcm (unsigned int a, unsigned int b);
 
   /// Coprime between to int.
-  inline bool is_coprime (unsigned int a, unsigned int b);
+  inline
+  bool is_coprime (unsigned int a, unsigned int b);
 
+  ///   @}
+  ///  @}
+} // !misc
   /// @}
-  /// @}
-}
+} // !vcsn
+# if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
+#  include <vaucanson/misc/algebra.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // !INCLUDE_VAUCANSON_MISC_ALGEBRA_HH
-
