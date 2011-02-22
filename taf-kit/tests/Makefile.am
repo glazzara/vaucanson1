@@ -15,6 +15,7 @@
 TESTS =						\
   vcsn-char-b.test				\
   vcsn-char-z.test				\
+  vcsn-char-q.test				\
   vcsn-char-r.test				\
   vcsn-char-fmp-b.test				\
   vcsn-char-fmp-z.test				\
@@ -65,6 +66,7 @@ check_SCRIPTS =					\
   vcsn-char-fmp-z				\
   vcsn-char-z					\
   vcsn-char-r					\
+  vcsn-char-q					\
   vcsn-int-b					\
   vcsn-int-fmp-b				\
   vcsn-int-fmp-z				\

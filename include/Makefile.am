@@ -57,6 +57,8 @@ vaucanson/contexts/transducer_maker.thh        	\
 vaucanson/contexts/transducer_maker.thxx
 
 nobase_include_HEADERS +=			\
+vaucanson/misc/algebra.hh			\
+vaucanson/misc/algebra.hxx			\
 vaucanson/misc/bencher.cc			\
 vaucanson/misc/bencher.hh			\
 vaucanson/misc/bencher.hxx			\
