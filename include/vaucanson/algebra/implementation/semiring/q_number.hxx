@@ -1,4 +1,4 @@
-// q_semiring.hxx: this file is part of the Vaucanson project.
+// q_number.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,17 +14,19 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_SEMIRING_HXX
-# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_SEMIRING_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX
 
 // # include <cmath>
 // # include <vaucanson/algebra/concept/semiring_base.hh>
+
 # include <vaucanson/algebra/implementation/semiring/q_number.hh>
+
 // # include <vaucanson/misc/random.hh>
 // # include <vaucanson/misc/limits.hh>
 // # include <vaucanson/misc/contract.hh>
 
-#include <iostream>
+# include <iostream>
 
 # include <cassert>
 
@@ -32,32 +34,38 @@ namespace vcsn {
 
   namespace algebra {
 
+    inline
     RationalNumber::RationalNumber ()
-      : num_ (1),
+      : num_ (0), // 0 or 1
 	den_ (1)
     {
     }
 
+    inline
     RationalNumber::RationalNumber (const int num)
       : num_ (num),
 	den_ (1)
     {
     }
 
+    inline
     RationalNumber::RationalNumber (const int num, const unsigned int den)
     {
       set_rational (num, den);
     }
 
+    inline
     RationalNumber::RationalNumber (const RationalNumber& nb)
     {
       set_rational (nb.num_, nb.den_);
     }
 
+    inline
     RationalNumber::~RationalNumber ()
     {
     }
 
+    inline
     RationalNumber&
     RationalNumber::den_set (const unsigned int den)
     {
@@ -65,6 +73,7 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     RationalNumber&
     RationalNumber::set (const int num, const unsigned int den)
     {
@@ -72,6 +81,7 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     RationalNumber&
     RationalNumber::set (const int num)
     {
@@ -79,54 +89,63 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     int
     RationalNumber::num_get () const
     {
       return num_;
     }
 
+    inline
     unsigned int
     RationalNumber::den_get () const
     {
       return den_;
     }
 
+    inline
     std::ostream&
     RationalNumber::print (std::ostream& ostr) const
     {
       return ostr << num_ << '/' << den_;
     }
 
+    inline
     RationalNumber
     RationalNumber::operator+ (const RationalNumber& nb) const
     {
       return RationalNumber (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
     }
 
+    inline
     RationalNumber
     RationalNumber::operator- (const RationalNumber& nb) const
     {
       return RationalNumber (num_ * nb.den_ - nb.num_ * den_, den_ * nb.den_);
     }
 
+    inline
     RationalNumber
     RationalNumber::operator- () const
     {
       return RationalNumber (- num_, den_);
     }
 
+    inline
     RationalNumber
     RationalNumber::operator* (const RationalNumber& nb) const
     {
       return RationalNumber (num_ * nb.num_, den_ * nb.den_);
     }
 
+    inline
     RationalNumber
     RationalNumber::operator/ (const RationalNumber& nb) const
     {
       return RationalNumber (num_ * nb.den_, den_ * nb.num_);
     }
 
+    inline
     RationalNumber&
     RationalNumber::operator+= (const RationalNumber& nb)
     {
@@ -134,6 +153,7 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     RationalNumber&
     RationalNumber::operator-= (const RationalNumber& nb)
     {
@@ -141,6 +161,7 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     RationalNumber&
     RationalNumber::operator*= (const RationalNumber& nb)
     {
@@ -148,6 +169,7 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     RationalNumber&
     RationalNumber::operator/= (const RationalNumber& nb)
     {
@@ -155,76 +177,86 @@ namespace vcsn {
       return (*this);
     }
 
+    inline
     bool
     RationalNumber::operator== (const RationalNumber& nb) const
     {
       return (den_ == nb.den_) && (num_ == nb.num_);
     }
 
+    inline
     bool
     RationalNumber::operator!= (const RationalNumber& nb) const
     {
       return (den_ != nb.den_) || (num_ != nb.num_);
     }
 
+    inline
     bool
     RationalNumber::operator< (const RationalNumber& nb) const
     {
       return num_ * nb.den_ < nb.num_ * den_;
     }
 
+    inline
     bool
     RationalNumber::operator<= (const RationalNumber& nb) const
     {
       return num_ * nb.den_ <= nb.num_ * den_;
     }
 
+    inline
     bool
     RationalNumber::operator> (const RationalNumber& nb) const
     {
       return num_ * nb.den_ > nb.num_ * den_;
     }
 
+    inline
     bool
     RationalNumber::operator>= (const RationalNumber& nb) const
     {
       return num_ * nb.den_ >= nb.num_ * den_;
     }
 
-    RationalNumber::operator int () const
-    {
-      return num_ / den_;
-    }
+//     RationalNumber::operator int () const
+//     {
+//       return num_ / den_;
+//     }
 
+    inline
     RationalNumber::operator float () const
     {
       return (static_cast<float> (num_)) / den_;
     }
 
-    RationalNumber::operator double () const
-    {
-      return (static_cast<double> (num_)) / den_;
-    }
+//     RationalNumber::operator double () const
+//     {
+//       return (static_cast<double> (num_)) / den_;
+//     }
 
+    inline
     int
     RationalNumber::to_int () const
     {
       return num_ / den_;
     }
 
+    inline
     float
     RationalNumber::to_float () const
     {
       return (static_cast<float> (num_)) / den_;
     }
 
+    inline
     double
     RationalNumber::to_double () const
     {
       return (static_cast<double> (num_)) / den_;
     }
 
-
+    inline
     void
     RationalNumber::set_rational (const int num, const unsigned den)
     {
@@ -238,30 +270,33 @@ namespace vcsn {
       assert (is_coprime (num_, den_));
     }
 
+    inline
     void
     RationalNumber::set_rational ()
     {
       set_rational (num_, den_);
     }
 
+    inline
     unsigned int
     gcd (unsigned int a, unsigned int b)
     {
       if (a)
-      {
-	int r;
-	while (true)
 	{
-	  r = a % b;
-	  if (! (r))
-	    return b;
-	  a = b;
-	  b = r;
+	  int r;
+	  while (true)
+	    {
+	      r = a % b;
+	      if (! (r))
+		return b;
+	      a = b;
+	      b = r;
+	    }
 	}
-      }
       return b;
     }
 
+    inline
     unsigned int
     lcm (unsigned int a, unsigned int b)
     {
@@ -271,14 +306,47 @@ namespace vcsn {
       return a * b;
     }
 
+    inline
     bool
     is_coprime (unsigned int a, unsigned int b)
     {
       return 1 == gcd (a, b);
     }
 
+
   } // algebra
 
 } // vcsn
 
-#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_SEMIRING_HXX
+inline
+std::ostream& operator<< (std::ostream& ostr,  vcsn::algebra::RationalNumber& nb)
+{
+  nb.print (ostr);
+  return ostr; 
+}
+
+inline
+std::istream&
+operator>> (std::istream& istr, vcsn::algebra::RationalNumber& a)
+{
+  int num;
+  int den;
+  char slash;
+
+  istr >> num;
+  istr >> slash;
+  assert ('/' == slash);
+  istr >> den;
+  a.set (num, den);
+
+  return istr;
+}
+
+inline
+std::stringstream&
+operator>> (std::stringstream& sstr, vcsn::algebra::RationalNumber&)
+{
+  return sstr;
+}
+
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX

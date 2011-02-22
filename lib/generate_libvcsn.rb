@@ -19,6 +19,7 @@ vcsn = Hash[
   "vcsn-b" => "boolean_automaton",
   "vcsn-int-b" => "int_boolean_automaton",
   "vcsn-r" => "r_automaton",
+  "vcsn-q" => "q_automaton",
   "vcsn-z" => "z_automaton",
   "vcsn-int-z" => "int_z_automaton",
   "vcsn-z-max" => "z_max_plus_automaton",
@@ -50,7 +51,7 @@ def create?(type, file)
     # FIXME: The following tests shall be removed
     # FIXME: more comments with the some specs on the algorithms must be added to do so
     ( # Automata filters.
-      ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
+      ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or "vcsn-q" == type or
         "vcsn-int-b" == type or "vcsn-int-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type or
 	"vcsn-char-char-b" == type or "vcsn-char-char-z" == type or
@@ -72,7 +73,7 @@ def create?(type, file)
       file !~ /ltl_to_pair.hh/ and		# FMP transducer
       file !~ /is_ltl.hh/ and			# FMP transducer
       ( # Real Semiring only
-	("vcsn-r" == type
+	("vcsn-r" == type or "vcsn-q" == type
 	) or
 	(
 	  file !~ /reduce.hh/
@@ -90,7 +91,7 @@ def create?(type, file)
 	    )
       ) and
       ( # Simple letters only filters.
-	not ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
+	not ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or "vcsn-q" == type or
 	      "vcsn-int-b" == type or "vcsn-int-z" == type or
 	      "vcsn-z-max" == type or "vcsn-z-min" == type
 	    ) or

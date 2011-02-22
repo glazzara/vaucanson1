@@ -20,6 +20,7 @@
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/misc/contract.hh>
 # include <string>
+# include <vaucanson/algebra/implementation/semiring/q_number.hh>
 
 namespace vcsn {
 

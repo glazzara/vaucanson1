@@ -18,6 +18,7 @@
 # define VCSN_ALGEBRA_CONCEPT_SEMIRING_BASE_HXX
 
 # include <vaucanson/algebra/concept/semiring_base.hh>
+# include <vaucanson/algebra/implementation/semiring/q_number.hh>
 
 # include <sstream>
 # include <string>
@@ -64,8 +65,6 @@ namespace vcsn {
     {
       return op_choose_non_starable(this->self(), SELECT(T));
     }
-
-
 
   } // algebra
 

@@ -50,4 +50,4 @@ namespace algebra
 }
 
 #endif // !INCLUDE_VAUCANSON_MISC_ALGEBRA_HH
-/home/david/lrde/git/vcsn/include/vaucanson/misc
+

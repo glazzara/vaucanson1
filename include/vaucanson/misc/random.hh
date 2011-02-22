@@ -23,7 +23,7 @@
  */
 
 # include <vaucanson/algebra/implementation/letter/range.hh>
-# include <vaucanson/algebra/implementation/semiring/rational_number.hh>
+# include <vaucanson/algebra/implementation/semiring/q_number.hh>
 
 namespace vcsn {
   namespace misc {

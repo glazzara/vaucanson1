@@ -18,7 +18,7 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_NUMERICAL_SEMIRING_HH
 
 # include <vaucanson/algebra/concept/numerical_semiring.hh>
-# include <vaucanson/algebra/implementation/semiring/rational_number.hh>
+# include <vaucanson/algebra/implementation/semiring/q_number.hh>
 
 namespace vcsn {
 
@@ -164,16 +164,25 @@ namespace vcsn {
     | specializations for rational numbers |
     `-------------------------------------*/
 
+    
+    inline RationalNumber
+    op_sub(const algebra::NumericalSemiring&, const RationalNumber&, const RationalNumber&);
+
+    inline RationalNumber
+    op_div(const algebra::NumericalSemiring&, const RationalNumber&, const RationalNumber&);
+
+
     inline algebra::RationalNumber
     identity_value(SELECTOR(algebra::NumericalSemiring),
 		   SELECTOR(algebra::RationalNumber));
+
 
     inline algebra::RationalNumber
     zero_value(SELECTOR(algebra::NumericalSemiring),
 	       SELECTOR(algebra::RationalNumber));
 
-    template<typename T>
-    bool op_starable(const algebra::NumericalSemiring& s, T v);
+    inline
+    bool op_starable(const algebra::NumericalSemiring& s, RationalNumber& v);
 
     inline bool op_starable(const algebra::NumericalSemiring& s,
 			    const algebra::RationalNumber& r);
@@ -181,17 +190,28 @@ namespace vcsn {
     inline void op_in_star(const algebra::NumericalSemiring& s,
 			   algebra::RationalNumber& r);
 
+    inline
     bool
     op_can_choose_non_starable(const algebra::NumericalSemiring& set,
 			       SELECTOR(algebra::RationalNumber));
 
+    inline
     Element<algebra::NumericalSemiring, algebra::RationalNumber>
     op_choose_starable(const algebra::NumericalSemiring& set,
 		       SELECTOR(algebra::RationalNumber));
 
+    inline
     Element<algebra::NumericalSemiring, algebra::RationalNumber>
     op_choose_non_starable(const algebra::NumericalSemiring& set,
 			   SELECTOR(algebra::RationalNumber));
+
+    template <typename S>
+    inline
+    bool
+    op_parse(const algebra::SemiringBase<S>&,
+	     RationalNumber&			w,
+	     const std::string&			s,
+	     typename std::string::const_iterator& i);
 
   } // algebra
 

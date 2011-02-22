@@ -20,6 +20,7 @@
 # include <cmath>
 # include <vaucanson/algebra/concept/semiring_base.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/limits.hh>
 # include <vaucanson/misc/contract.hh>
@@ -324,7 +325,7 @@ namespace vcsn {
       return
 	Element<algebra::NumericalSemiring, double>
 	  (set, res);
-    }
+   }
 
     inline
     Element<algebra::NumericalSemiring, double>
@@ -343,6 +344,20 @@ namespace vcsn {
     | specialization for rational numbers |
      `------------------------------------*/
 
+
+    inline RationalNumber
+    op_sub(const algebra::NumericalSemiring&, const RationalNumber& a, const RationalNumber& b)
+    {
+      return a - b;
+    }
+
+    inline RationalNumber
+    op_div(const algebra::NumericalSemiring&, const RationalNumber& a, const RationalNumber& b)
+    {
+      return a / b;
+    }
+
+
     inline algebra::RationalNumber
     identity_value(SELECTOR(algebra::NumericalSemiring),
 		   SELECTOR(algebra::RationalNumber))
@@ -357,22 +372,30 @@ namespace vcsn {
       return algebra::RationalNumber(0);
     }
 
-    inline bool op_starable(const algebra::NumericalSemiring&,
-			    const algebra::RationalNumber& r)
+    inline bool
+    op_starable(const algebra::NumericalSemiring&,
+		const algebra::RationalNumber& r)
     {
-      int denom = r.denom();
-      return std::abs(r.num()) < denom;
+      return std::abs(r.num_get()) < r.den_get ();
+    }
+
+    inline bool
+    op_starable(const algebra::NumericalSemiring&,
+		algebra::RationalNumber& r)
+    {
+      return std::abs(r.num_get()) < r.den_get ();
     }
 
     inline void op_in_star(const algebra::NumericalSemiring&,
 			   algebra::RationalNumber& r)
     {
-      int denom = r.denom();
-      algebra::RationalNumber one = algebra::RationalNumber(1, 1);
-      if (denom > std::abs(r.num()))
-	r = (one / (r - one));
+      if (std::abs(r.num_get()) < r.den_get ())
+      {
+	algebra::RationalNumber one = algebra::RationalNumber(1);
+	r = one / (one -= r);
+      }
       else
-	assertion(! "star not defined.");
+	assertion(! "vcsn::algebra::RationalNumber: star not defined.");
     }
 
     inline
@@ -389,30 +412,73 @@ namespace vcsn {
     op_choose_starable(const algebra::NumericalSemiring& set,
 		       SELECTOR(algebra::RationalNumber))
     {
-      algebra::RationalNumber min = algebra::RationalNumber(-1, 1);
-      algebra::RationalNumber max = algebra::RationalNumber(1, 1);
-      return
-	Element<algebra::NumericalSemiring, algebra::RationalNumber>
-	  (set, misc::random::generate<algebra::RationalNumber>(min, max));
-    }
+      algebra::RationalNumber res;
+      do
+      {
+	res = misc::random::generate<algebra::RationalNumber> ();
+      } while (res.den_get () < std::abs (res.num_get ()));
+      return Element<algebra::NumericalSemiring, algebra::RationalNumber> (set, res);
+
+//       algebra::RationalNumber min = algebra::RationalNumber(-1, 1);
+//       algebra::RationalNumber max = algebra::RationalNumber(1, 1);
+//       return
+// 	Element<algebra::NumericalSemiring, algebra::RationalNumber>
+// 	  (set, misc::random::generate<algebra::RationalNumber>(min, max));
+
+//       I don't understand the meaning of max and min. misc::random::generate
+//       can generate negative number ?
+//       Why the structure is differente with op_choose_starable
+   }
 
     inline
     Element<algebra::NumericalSemiring, algebra::RationalNumber>
     op_choose_non_starable(const algebra::NumericalSemiring& set,
 			   SELECTOR(algebra::RationalNumber))
     {
-      algebra::RationalNumber res = algebra::RationalNumber(1, 1);
-      int denom;
+      algebra::RationalNumber res;
       do
 	{
-	  res = misc::random::generate<algebra::RationalNumber>();
-	  denom = res.denom();
+	  res = misc::random::generate<algebra::RationalNumber> ();
 	}
-      while (denom > std::abs(res.num()));
-      return
-	Element<algebra::NumericalSemiring, algebra::RationalNumber>
-	(set, res);
+      while (res.den_get () >= std::abs(res.num_get ()));
+      return Element<algebra::NumericalSemiring, algebra::RationalNumber> (set, res);
     }
+
+
+    template <typename S>
+    inline
+    bool
+    op_parse(const algebra::SemiringBase<S>&,
+	     RationalNumber&			w,
+	     const std::string&			s,
+	     typename std::string::const_iterator& i)
+    {
+      if (*i != '-' && (*i < '0' || *i > '9'))
+	  return false;
+      std::stringstream ret;
+      ret << std::string(i, s.end ());
+      int init = ret.tellg ();
+      int num;
+      ret >> std::dec >> num;
+      if (ret.tellg() < 0)
+	return false;
+      char slash;
+      ret >> slash;
+      if ((slash != '/') || (ret.tellg () < 0))
+	return false;
+      unsigned den;
+      ret >> den;
+      if (ret.tellg () < 0)
+	return false;
+      for (int cur = ret.tellg (); (cur - init - 1) && i != s.end ();
+	   ++i, ++init)
+	;
+      if (*i != '.')
+	++i;
+      w.set (num, den);
+      return true;
+    }
+
 
   } // algebra
 

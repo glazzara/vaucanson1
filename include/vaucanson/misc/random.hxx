@@ -20,6 +20,10 @@
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/limits.hh>
 
+// # include <vaucanson/algebra/implementation/semiring/q_number.hh>
+
+# include <vaucanson/misc/algebra.hh>
+
 # include <cmath>
 # include <cstdlib>
 # include <vector>
@@ -163,9 +167,9 @@ namespace vcsn {
       (const vcsn::algebra::RationalNumber min,
        const vcsn::algebra::RationalNumber max)
       {
-	const int denom = vcsn::algebra::lcm (min.denom (), max.denom ());
-	const int num1 = min.num ()*denom/min.denom ();
-	const int num2 = max.num ()*denom/max.denom ();
+	const int denom = vcsn::algebra::lcm (min.den_get (), max.den_get ());
+	const int num1 = min.num_get ()*denom/min.den_get ();
+	const int num2 = max.num_get ()*denom/max.den_get ();
 	const int maxi = std::max(std::max(std::abs(num1),
 					   std::abs(num2)), denom);
 	const int ratio = (vcsn::misc::limits<int>::max ()-1)/maxi;

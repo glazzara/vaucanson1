@@ -22,7 +22,8 @@ bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b 	\
 	       vcsn-int-fmp-z vcsn-char-fmp-z 				\
 	       vcsn-char-char-b vcsn-char-char-z			\
 	       vcsn-int-int-b vcsn-int-int-z				\
-	       vcsn-char-int-b vcsn-char-zmin vcsn-char-zmax
+	       vcsn-char-int-b vcsn-char-zmin vcsn-char-zmax		\
+	       vcsn-char-q
 
 COMMON_SOURCES = commands.hh			\
 		 commands.cc			\
@@ -68,6 +69,11 @@ vcsn_char_r_SOURCES = $(COMMON_SOURCES)	cmd_wt.cc cmd_r.cc
 vcsn_char_r_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=r_automaton \
 		       -DVCSN_USE_LIB -DWITH_WEIGHTS
 vcsn_char_r_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-r.la
+
+vcsn_char_q_SOURCES = $(COMMON_SOURCES)	cmd_wt.cc cmd_r.cc
+vcsn_char_q_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=q_automaton \
+		       -DVCSN_USE_LIB -DWITH_WEIGHTS
+vcsn_char_q_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-q.la
 
 vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \
