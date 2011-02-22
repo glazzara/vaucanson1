@@ -17,17 +17,10 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX
 
-// # include <cmath>
-// # include <vaucanson/algebra/concept/semiring_base.hh>
-
 # include <vaucanson/algebra/implementation/semiring/q_number.hh>
-
-// # include <vaucanson/misc/random.hh>
-// # include <vaucanson/misc/limits.hh>
-// # include <vaucanson/misc/contract.hh>
+# include <vaucanson/misc/algebra.hh>
 
 # include <iostream>
-
 # include <cassert>
 
 namespace vcsn {
@@ -36,7 +29,7 @@ namespace vcsn {
 
     inline
     RationalNumber::RationalNumber ()
-      : num_ (0), // 0 or 1
+      : num_ (1), // 0 or 1
 	den_ (1)
     {
     }
@@ -219,21 +212,11 @@ namespace vcsn {
       return num_ * nb.den_ >= nb.num_ * den_;
     }
 
-//     RationalNumber::operator int () const
-//     {
-//       return num_ / den_;
-//     }
-
     inline
     RationalNumber::operator float () const
     {
       return (static_cast<float> (num_)) / den_;
     }
-
-//     RationalNumber::operator double () const
-//     {
-//       return (static_cast<double> (num_)) / den_;
-//     }
 
     inline
     int
@@ -260,14 +243,12 @@ namespace vcsn {
     void
     RationalNumber::set_rational (const int num, const unsigned den)
     {
-      // assert or assertion
-      assert (den != 0);
+      assertion (den != 0);
 
-      unsigned int div = gcd (num, den);
+      unsigned int div = vcsn::misc::gcd (num, den);
       num_ = num / div;
       den_ = den / div;
-      // assert or assertion
-      assert (is_coprime (num_, den_));
+      assertion (vcsn::misc::is_coprime (num_, den_));
     }
 
     inline
@@ -277,49 +258,12 @@ namespace vcsn {
       set_rational (num_, den_);
     }
 
-    inline
-    unsigned int
-    gcd (unsigned int a, unsigned int b)
-    {
-      if (a)
-	{
-	  int r;
-	  while (true)
-	    {
-	      r = a % b;
-	      if (! (r))
-		return b;
-	      a = b;
-	      b = r;
-	    }
-	}
-      return b;
-    }
+  } // !algebra
 
-    inline
-    unsigned int
-    lcm (unsigned int a, unsigned int b)
-    {
-      unsigned int res = gcd (a, b);
-      if (res)
-	return a * b / res;
-      return a * b;
-    }
-
-    inline
-    bool
-    is_coprime (unsigned int a, unsigned int b)
-    {
-      return 1 == gcd (a, b);
-    }
-
-
-  } // algebra
-
-} // vcsn
+} // !vcsn
 
 inline
-std::ostream& operator<< (std::ostream& ostr,  vcsn::algebra::RationalNumber& nb)
+std::ostream& operator<< (std::ostream& ostr, vcsn::algebra::RationalNumber& nb)
 {
   nb.print (ostr);
   return ostr; 
@@ -340,13 +284,6 @@ operator>> (std::istream& istr, vcsn::algebra::RationalNumber& a)
   a.set (num, den);
 
   return istr;
-}
-
-inline
-std::stringstream&
-operator>> (std::stringstream& sstr, vcsn::algebra::RationalNumber&)
-{
-  return sstr;
 }
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX

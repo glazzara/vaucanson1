@@ -412,22 +412,11 @@ namespace vcsn {
     op_choose_starable(const algebra::NumericalSemiring& set,
 		       SELECTOR(algebra::RationalNumber))
     {
-      algebra::RationalNumber res;
-      do
-      {
-	res = misc::random::generate<algebra::RationalNumber> ();
-      } while (res.den_get () < std::abs (res.num_get ()));
-      return Element<algebra::NumericalSemiring, algebra::RationalNumber> (set, res);
-
-//       algebra::RationalNumber min = algebra::RationalNumber(-1, 1);
-//       algebra::RationalNumber max = algebra::RationalNumber(1, 1);
-//       return
-// 	Element<algebra::NumericalSemiring, algebra::RationalNumber>
-// 	  (set, misc::random::generate<algebra::RationalNumber>(min, max));
-
-//       I don't understand the meaning of max and min. misc::random::generate
-//       can generate negative number ?
-//       Why the structure is differente with op_choose_starable
+      algebra::RationalNumber min = algebra::RationalNumber(-1, 1);
+      algebra::RationalNumber max = algebra::RationalNumber(1, 1);
+      return
+ 	Element<algebra::NumericalSemiring, algebra::RationalNumber>
+	(set, misc::random::generate<algebra::RationalNumber>(min, max));
    }
 
     inline

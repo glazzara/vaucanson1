@@ -19,9 +19,6 @@
 
 #include <iostream>
 
-// # include <vaucanson/algebra/concept/q_number.hh>
-
-
 /** @addtogroup algebra *//* @{ */
 /** @addtogroup semiring *//* @{ */
 /**
@@ -34,7 +31,6 @@
  */
 /** @} */
 /** @} */
-
 
 namespace vcsn
 {
@@ -185,34 +181,23 @@ namespace vcsn
       //// @}
     }; // RationalNumber
 
-    /// @name Prime Number Operator
-    // @{
-    /// @todo FIXME: We might prefer to define gcd and lcm somewhere else.
-    /// Greatest common divisor.
-    inline
-    unsigned int gcd (unsigned int a, unsigned int b);
-
-    /// Least common multiple.
-    inline
-    unsigned int lpcm (unsigned int a, unsigned int b);
-
-    /// Coprime between to int.
-    inline bool is_coprime (unsigned int a, unsigned int b);
     /// @}
-    /// @}
-  } // algebra
+  } // !algebra
+
   /// @}
-} // vcsn
+} // !vcsn
+
 
 inline
-std::ostream& operator<< (std::ostream&,  vcsn::algebra::RationalNumber&);
+std::ostream& operator<< (std::ostream&, vcsn::algebra::RationalNumber&);
 
 inline
-std::istream& operator>> (std::istream&, vcsn::algebra::RationalNumber&);
+std::iostream&
+operator>> (std::iostream&, vcsn::algebra::RationalNumber&);
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/implementation/semiring/q_number.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HH
