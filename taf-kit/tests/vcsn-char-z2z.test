@@ -20,18 +20,18 @@ set -e
 DIFF=${top_srcdir}/src/tests/common/xmldiff.sh
 VCSN=vcsn-char-z2z
 
-$VCSN -aab standard '{1}a + b' > s2ab.xml
-$VCSN -aab thompson '{-1}({0}a + b)' \| proper - > t2ab.xml
+$VCSN -aab standard 'a + b' > s2ab.xml
+$VCSN -aab thompson 'a + b' \| proper - > t2ab.xml
 $VCSN sum s2ab.xml t2ab.xml > u2ab.xml
 $VCSN reduce u2ab.xml \| is-empty -
 rm s2ab.xml t2ab.xml u2ab.xml
 
-$VCSN -aab standard '((a.a*)(a.a*)*)' \| quotient - > a2.xml
-$VCSN -aab standard 'a({1}a)*' \| quotient - > a2b.xml
+$VCSN -aab standard '(a.a*)*' \| quotient - > a2.xml
+$VCSN -aab standard 'a + 1' \| quotient - > a2b.xml
 cmp a2.xml a2b.xml
 
 $VCSN -aab standard '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' \| quotient - > a3.xml
-$VCSN -aab standard 'a({0}a)*' \| quotient - > a3b.xml
+$VCSN -aab standard 'a.a*' \| quotient - > a3b.xml
 cmp a3.xml a3b.xml
 
 
@@ -70,25 +70,23 @@ b
 # From, to, label
 1
 1
-{0}a+{1}b
+a+b
 # Save & Exit.
 10
 EOF
 
-e1=5
-e2=6
+e1=1
+e2=0
 for n in 1 2 3 4; do
    $VCSN power c1.xml "$n" > cn.xml
    $VCSN reduce cn.xml > cnr.xml
 
-   test "`$VCSN eval cn.xml abab`" = $e1
-   test "`$VCSN eval cn.xml abba`" = $e2
-   test "`$VCSN eval cnr.xml abab`" = $e1
-   test "`$VCSN eval cnr.xml abba`" = $e2
-   e1=`expr $e1 \* 5`
-   e2=`expr $e2 \* 6`
+   test "`$VCSN eval cn.xml abab`" = $e2
+   test "`$VCSN eval cn.xml aaab`" = $e1
+   test "`$VCSN eval cnr.xml abab`" = $e2
+   test "`$VCSN eval cnr.xml aaab`" = $e1
 
-   s=`expr $n + 1`
+   s=2
    $VCSN data cnr.xml | grep "States: $s"
 
    $VCSN quotient cn.xml > cnq.xml
@@ -137,4 +135,4 @@ EOF
 
 $VCSN power b1.xml 4 > b4.xml
 $VCSN reduce b4.xml > b4r.xml
-$VCSN data b4r.xml | grep 'States: 5'
+$VCSN data b4r.xml | grep 'States: 2'
