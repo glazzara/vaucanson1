@@ -20,10 +20,59 @@
 # include <vaucanson/algebra/implementation/semiring/cyclic_semiring.hh>
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/limits.hh>
+# include <boost/swap.hpp>
+# include <boost/tuple/tuple.hpp>
 
 namespace vcsn {
 
   namespace algebra {
+
+    /**
+    ** @brief This algorithm computes the extended gcd of a and b.
+    ** It solves the equality ax + by = d with d = gcd (a, b).
+    ** If d = 1, then a and b are coprimes and x is the multiplicative
+    ** inverse of a modulo b, and y is the multiplicative inverse of b
+    ** modulo a.
+    ** @return Returns a boost tuple corresponding to the tuple
+    **         (d, x, y).
+    */
+    inline
+    boost::tuple<uint, int, int>
+    ext_gcd (uint a, uint b)
+    {
+      uint q, r;
+      int x1 = 0;
+      int x2 = 1;
+      int y1 = 1;
+      int y2 = 0;
+      int x, y;
+
+      if (a < b)
+	{
+	  boost::swap (a, b);
+	  boost::swap (x1, x2);
+	  boost::swap (y1, y2);
+	}
+
+      if (b == 0)
+	return boost::tuple<uint, int, int> (a, 1, 0);
+
+      while (b > 0)
+	{
+	  q = a / b;
+	  r = a - q * b;
+	  x = x2 - q * x1;
+	  y = y2 - q * y1;
+	  a = b;
+	  b = r;
+	  x2 = x1;
+	  x1 = x;
+	  y2 = y1;
+	  y1 = y;
+	}
+
+      return boost::tuple<uint, int, int> (a, x2, y2);
+    }
 
     /*---------------.
     | Identity value |
@@ -63,9 +112,9 @@ namespace vcsn {
       return true;
     }
 
-    /*--------------------.
-    | Multiplication is * |
-    `--------------------*/
+    /*---------------.
+    | Multiplication |
+    `---------------*/
     template<unsigned int n, typename T, typename U>
     void op_in_mul(const algebra::CyclicSemiring<n>&,
 		   T& dst, U arg)
@@ -102,18 +151,29 @@ namespace vcsn {
     `---------*/
 
     template<unsigned int n, typename T, typename U>
-    void op_in_div(const algebra::CyclicSemiring<n>& s1,
-		   T& dst, U arg)
+    void op_in_div (const algebra::CyclicSemiring<n>& s1,
+		    T& dst, U arg)
     {
-      dst = (dst / arg) % n;
-      dst = (dst < 0) ? dst + n : dst;
+      boost::tuple<uint , int, int> res = ext_gcd (dst, arg);
+      if (res.get<0> () == 1)
+	{
+	  op_in_mul (s1, dst, res.get<2> ());
+	  return;
+	}
+
+      assertion(! "tried to divide by a number"
+		" without multiplicative inverse.");
     }
 
     template<unsigned int n, typename T, typename U>
-    T op_div(const algebra::CyclicSemiring<n>& s, T a, U b)
+    T op_div (const algebra::CyclicSemiring<n>& s, T a, U b)
     {
-      T res = (a / b) % n;
-      return ((res < 0) ? res + n : res);
+      boost::tuple<uint , int, int> res = ext_gcd (a, b);
+      if (res.get<0> () == 1)
+	return (op_mul (s, a, res.get<2> ()));
+
+      assertion(! "tried to divide by a number"
+		" without multiplicative inverse.");
     }
 
     /*-------------.
@@ -154,7 +214,7 @@ namespace vcsn {
     {
       if (b == T(0))
 	{
-	  b = T(0);
+	  b = T(1);
 	  return;
 	}
       assertion(! "star not defined.");
@@ -196,7 +256,7 @@ namespace vcsn {
       T r;
       do
 	r = op_choose(set, SELECT(T));
-      while (!op_starable(set, r));
+      while (op_starable(set, r));
       return r;
     }
 
