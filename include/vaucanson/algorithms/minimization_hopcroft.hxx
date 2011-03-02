@@ -595,7 +595,7 @@ namespace vcsn
             if (already_linked.find(c) == already_linked.end())
             {
               already_linked.insert(c);
-              output.add_letter_transition(i, c, *e);
+	      output.add_letter_transition(i, c, *e);
             }
           }
 	}
@@ -883,9 +883,10 @@ namespace vcsn
 	}
 
       for_all_const_(set<unsigned>, cs, met_classes)
-	output.add_series_transition(out_states[i],
-				     out_states[*cs],
-				     seriesof[*cs]);
+	if (seriesof[*cs] != null_series)
+	  output.add_series_transition(out_states[i],
+				       out_states[*cs],
+				       seriesof[*cs]);
     }
   }
 

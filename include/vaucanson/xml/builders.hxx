@@ -525,6 +525,7 @@ namespace vcsn
       const char* get_semiring_set(const T&)	\
       { return Value; }
 
+      // FIXME: We should not depend on the implementation of the semiring, but on its concept.
       GET_SEMIRING_SET(bool, "B")
       GET_SEMIRING_SET(double, "R")
       GET_SEMIRING_SET(float, "R")
