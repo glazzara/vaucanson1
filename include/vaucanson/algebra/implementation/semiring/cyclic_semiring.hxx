@@ -77,6 +77,7 @@ namespace vcsn {
     /*---------------.
     | Identity value |
     `---------------*/
+
     template<unsigned int n, typename T>
     T identity_value(SELECTOR(algebra::CyclicSemiring<n>), SELECTOR(T))
     {
@@ -130,6 +131,23 @@ namespace vcsn {
       return ((res < 0) ? res + n : res);
     }
 
+    /*-----------------------.
+    | Mutiplication for Z/2Z |
+    `-----------------------*/
+
+    template<>
+    void op_in_mul<2, bool, bool>(const algebra::CyclicSemiring<2>&,
+				  bool& dst, bool arg)
+    {
+      dst = dst && arg;
+    }
+
+    template<>
+    bool op_mul<2, bool, bool>(const algebra::CyclicSemiring<2>&, bool a, bool b)
+    {
+      return (a && b);
+    }
+
     /*---------.
     | Addition |
     `---------*/
@@ -144,6 +162,23 @@ namespace vcsn {
     T op_add(const algebra::CyclicSemiring<n>&, T a, U b)
     {
       return ((a + b) + (2 * n)) % n;
+    }
+
+    /*------------------.
+    | Addition for Z/2Z |
+    `------------------*/
+
+    template<>
+    void op_in_add<2, bool, bool>(const algebra::CyclicSemiring<2>&,
+				  bool& dst, bool arg)
+    {
+      dst = dst ^ arg;
+    }
+
+    template<>
+    bool op_add<2, bool, bool>(const algebra::CyclicSemiring<2>&, bool a, bool b)
+    {
+      return a ^ b;
     }
 
     /*---------.
@@ -176,6 +211,27 @@ namespace vcsn {
 		" without multiplicative inverse.");
     }
 
+    /*------------------.
+    | Division for Z/2Z |
+    `------------------*/
+
+    template<>
+    void op_in_div<2, bool, bool> (const algebra::CyclicSemiring<2>& s1,
+				   bool& dst, bool arg)
+    {
+      if (arg == 1)
+	return;
+      assertion (! "Division by zero.");
+    }
+
+    template<>
+    bool op_div<2, bool, bool> (const algebra::CyclicSemiring<2>& s, bool a, bool b)
+    {
+      if (b == 1)
+	return (a);
+      assertion(! "Division by zero.");
+    }
+
     /*-------------.
     | Substraction |
     `-------------*/
@@ -196,9 +252,29 @@ namespace vcsn {
       return ((res < 0) ? res + n : res);
     }
 
+    /*----------------------.
+    | Substraction for Z/2Z |
+    `----------------------*/
+
+    template<>
+    void op_in_sub<2, bool, bool> (const algebra::CyclicSemiring<2>& s1,
+				   bool& dst, bool arg)
+    {
+      dst = dst ^ arg;
+    }
+
+    template<>
+    inline
+    bool op_sub(const algebra::CyclicSemiring<2>& s,
+		bool a, bool b)
+    {
+      return (a ^ b);
+    }
+
     /*-----.
     | Star |
     `-----*/
+
     template <unsigned int n, typename T>
     bool
     op_starable(const algebra::CyclicSemiring<n>&, T b)

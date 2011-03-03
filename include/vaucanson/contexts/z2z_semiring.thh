@@ -31,7 +31,7 @@ namespace vcsn
     {
 
       typedef vcsn::algebra::CyclicSemiring<2>	semiring_t;
-      typedef int				semiring_elt_value_t;
+      typedef bool				semiring_elt_value_t;
 
       typedef
 	vcsn::Element<semiring_t, semiring_elt_value_t>

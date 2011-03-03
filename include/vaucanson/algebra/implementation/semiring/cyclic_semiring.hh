@@ -65,6 +65,17 @@ namespace vcsn {
     template<unsigned int n, typename T, typename U>
     T op_mul(const algebra::CyclicSemiring<n>& s, T a, U b);
 
+    /*-----------------------.
+    | Mutiplication for Z/2Z |
+    `-----------------------*/
+
+    template<>
+    void op_in_mul<2, bool, bool>(const algebra::CyclicSemiring<2>&,
+				  bool& dst, bool arg);
+
+    template<>
+    bool op_mul<2, bool, bool>(const algebra::CyclicSemiring<2>&, bool a, bool b);
+
     /*---------.
     | Addition |
     `---------*/
@@ -75,6 +86,17 @@ namespace vcsn {
     template<unsigned int n, typename T, typename U>
     T op_add(const algebra::CyclicSemiring<n>& s,
 	     T a, U b);
+
+    /*------------------.
+    | Addition for Z/2Z |
+    `------------------*/
+
+    template<>
+    void op_in_add<2, bool, bool>(const algebra::CyclicSemiring<2>&,
+				  bool& dst, bool arg);
+
+    template<>
+    bool op_add<2, bool, bool>(const algebra::CyclicSemiring<2>&, bool a, bool b);
 
     /*---------.
     | Division |
@@ -87,6 +109,17 @@ namespace vcsn {
     template<unsigned int n, typename T, typename U>
     T op_div(const algebra::CyclicSemiring<n>& s, T a, U b);
 
+    /*------------------.
+    | Division for Z/2Z |
+    `------------------*/
+
+    template<>
+    void op_in_div<2, bool, bool> (const algebra::CyclicSemiring<2>& s1,
+				   bool& dst, bool arg);
+
+    template<>
+    bool op_div<2, bool, bool> (const algebra::CyclicSemiring<2>& s, bool a, bool b);
+
     /*-------------.
     | Substraction |
     `-------------*/
@@ -98,6 +131,18 @@ namespace vcsn {
     template<unsigned int n, typename T, typename U>
     T op_sub(const algebra::CyclicSemiring<n>& s,
 	     T a, U b);
+
+    /*----------------------.
+    | Substraction for Z/2Z |
+    `----------------------*/
+
+    template<>
+    void op_in_sub<2, bool, bool> (const algebra::CyclicSemiring<2>& s1,
+				   bool& dst, bool arg);
+
+    template<>
+    bool op_sub(const algebra::CyclicSemiring<2>& s,
+		bool a, bool b);
 
     /*-----.
     | Star |
