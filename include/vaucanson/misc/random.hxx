@@ -25,6 +25,8 @@
 # include <cstdlib>
 # include <vector>
 
+# include <iostream>
+
 namespace vcsn {
   namespace misc {
     namespace random {
@@ -164,15 +166,33 @@ namespace vcsn {
       (const vcsn::algebra::RationalNumber min,
        const vcsn::algebra::RationalNumber max)
       {
-	const int denom = vcsn::misc::lcm (min.den_get (), max.den_get ());
-	const int num1 = min.num_get ()*denom/min.den_get ();
-	const int num2 = max.num_get ()*denom/max.den_get ();
-	const int maxi = std::max(std::max(std::abs(num1),
-					   std::abs(num2)), denom);
-	const int ratio = (vcsn::misc::limits<int>::max ()-1)/maxi;
+	int left = min.num_get () ;
+	int right = max.num_get ();
+	int den = min.den_get () * max.den_get ();
+
+	const int ratio = right - left;
+
+	int n1 = generate<int> (0, (vcsn::misc::limits<int>::max () - 1) / ratio);
+	int n2 = generate<int> (0, (vcsn::misc::limits<int>::max () - 1) / ratio);
+
+	if (n1 > n2)
+	  {
+	    int swap = n1;
+	    n1 = n2;
+	    n2 = swap;
+	  }
+
+	n2 *= den;
+
+	n1 = n1 * ratio + (left * n2);
+
+	if (n1 == n2)
+	  --n1;
+	if (-n1 == n2)
+	  ++n1;
+
 	return
-	  vcsn::algebra::RationalNumber (generate<int> (num1*ratio, num2*ratio),
-					 denom * ratio);
+	  vcsn::algebra::RationalNumber (n1, n2);
       }
 
 # define MAKE_PAIR_SPECIALIZATION(TYPE1, TYPE2) \

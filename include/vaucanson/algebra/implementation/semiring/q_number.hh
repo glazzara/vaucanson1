@@ -170,6 +170,7 @@ namespace vcsn
        */
       inline void set_rational ();
       inline void set_rational (const int num, const unsigned int den);
+      inline void set_unsafe_rational (const int num, const unsigned int den);
       /// @}
     protected:
       /// @name RationalNumber attributs

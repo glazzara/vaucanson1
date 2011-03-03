@@ -27,19 +27,29 @@ namespace vcsn {
     unsigned int
     gcd (unsigned int a, unsigned int b)
     {
-      if (a)
+      if (0 == a)
+	return b;
+      int r;
+      while (0 != b)
 	{
-	  int r;
-	  while (true)
-	    {
-	      r = a % b;
-	      if (! (r))
-		return b;
-	      a = b;
-	      b = r;
-	    }
+	  r = a % b;
+	  a = b;
+	  b = r;
 	}
-      return b;
+      return a;
+//       if (a)
+// 	{
+// 	  int r;
+// 	  while (true)
+// 	    {
+// 	      r = a % b;
+// 	      if (! (r))
+// 		return b;
+// 	      a = b;
+// 	      b = r;
+// 	    }
+// 	}
+//       return b;
     }
 
     inline
@@ -57,6 +67,12 @@ namespace vcsn {
     is_coprime (unsigned int a, unsigned int b)
     {
       return 1 == gcd (a, b);
+    }
+
+    inline
+    unsigned int abs (int a)
+    {
+      return a > 0 ? a : -a;
     }
   } // !misc
 

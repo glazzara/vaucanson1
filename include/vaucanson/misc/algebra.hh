@@ -48,6 +48,9 @@ namespace vcsn {
   inline
   bool is_coprime (unsigned int a, unsigned int b);
 
+  inline
+  unsigned int abs (int a);
+
   ///   @}
   ///  @}
 } // !misc

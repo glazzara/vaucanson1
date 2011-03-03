@@ -19,6 +19,7 @@
 
 # include <vaucanson/algebra/implementation/semiring/q_number.hh>
 # include <vaucanson/misc/algebra.hh>
+# include <vaucanson/misc/contract.hh>
 
 # include <iostream>
 # include <cassert>
@@ -29,7 +30,7 @@ namespace vcsn {
 
     inline
     RationalNumber::RationalNumber ()
-      : num_ (1), // 0 or 1
+      : num_ (0), // 0 or 1
 	den_ (1)
     {
     }
@@ -135,13 +136,27 @@ namespace vcsn {
     RationalNumber
     RationalNumber::operator/ (const RationalNumber& nb) const
     {
-      return RationalNumber (num_ * nb.den_, den_ * nb.num_);
+      int numgcd = vcsn::misc::gcd (vcsn::misc::abs (num_), vcsn::misc::abs (nb.num_));
+      int dengcd = vcsn::misc::gcd (den_, nb.den_);
+      return RationalNumber ((num_ / numgcd) * (nb.den_ / dengcd),
+			     (den_ / dengcd) * (nb.num_ / numgcd));
     }
 
     inline
     RationalNumber&
     RationalNumber::operator+= (const RationalNumber& nb)
     {
+//       unsigned int d1 = vcsn::misc::gcd (den_, nb.den_);
+//       if (d1 == 1)
+//       {
+// 	set_unsafe_rational ((num_ * nb.den_) + (den_ * nb.num_), den_ * nb.den_);
+//       }
+//       else
+//       {
+// 	unsigned int t = num_ * (nb.den_ / d1) + nb.num_ * (den_ / d1);
+// 	unsigned int d2 = vcsn::misc::gcd (t, d1);
+// 	set_unsafe_rational (t / d2, (den_ * d1) * (nb.den_ * d2));
+//       }
       set_rational (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
       return (*this);
     }
@@ -150,6 +165,17 @@ namespace vcsn {
     RationalNumber&
     RationalNumber::operator-= (const RationalNumber& nb)
     {
+//       unsigned int d1 = vcsn::misc::gcd (den_, nb.den_);
+//       if (d1 == 1)
+//       {
+// 	set_unsafe_rational ((num_ * nb.den_) + (den_ * nb.num_), den_ * nb.den_);
+//       }
+//       else
+//       {
+// 	unsigned int t = num_ * (nb.den_ / d1) + nb.num_ * (den_ / d1);
+// 	unsigned int d2 = vcsn::misc::gcd (t, d1);
+// 	set_unsafe_rational (t / d2, (den_ * d1) * (nb.den_ * d2));
+//       }
       set_rational (num_ * nb.den_ - nb.num_ * den_, den_ * nb.den_);
       return (*this);
     }
@@ -158,7 +184,11 @@ namespace vcsn {
     RationalNumber&
     RationalNumber::operator*= (const RationalNumber& nb)
     {
-      set_rational (num_ * nb.num_, den_ * nb.den_);
+      // Delete overflow of 'num_ * nb.num_get ()' and 'den_ * nb.den_get ()'
+      unsigned int d1 = vcsn::misc::gcd (num_, nb.den_get ());
+      unsigned int d2 = vcsn::misc::gcd (den_, nb.num_get ());
+      set_unsafe_rational ((num_ / d1) * (nb.num_get () / d2), (den_ / d2) * (nb.den_get () / d1));
+      // set_rational (num_ * nb.num_get (), den_ * nb.den_get ());
       return (*this);
     }
 
@@ -166,7 +196,11 @@ namespace vcsn {
     RationalNumber&
     RationalNumber::operator/= (const RationalNumber& nb)
     {
-      set_rational (num_ * nb.den_, den_ * nb.num_);
+      // Delete overflow of 'num_ * nb.den_get ()' and 'den_ * nb.num_get ()'
+      unsigned int d1 = vcsn::misc::gcd (num_, nb.num_get ());
+      unsigned int d2 = vcsn::misc::gcd (den_, nb.den_get ());
+      set_unsafe_rational ((num_ / d1) * (nb.den_get () / d1), (den_ / d2) * (nb.num_get () / d1));
+      // set_rational (num_ * nb.den_, den_ * nb.num_);
       return (*this);
     }
 
@@ -243,12 +277,26 @@ namespace vcsn {
     void
     RationalNumber::set_rational (const int num, const unsigned den)
     {
-      assertion (den != 0);
+      assert (den);
 
-      unsigned int div = vcsn::misc::gcd (num, den);
+      int div = vcsn::misc::gcd (vcsn::misc::abs (num), den); //
+
       num_ = num / div;
       den_ = den / div;
-      assertion (vcsn::misc::is_coprime (num_, den_));
+
+      assert (1 == vcsn::misc::gcd (vcsn::misc::abs (num_), den_));
+    }
+
+    inline
+    void
+    RationalNumber::set_unsafe_rational (const int num, const unsigned den)
+    {
+      assert (den != 0);
+
+      num_ = num;
+      den_ = den;
+
+      assert (vcsn::misc::is_coprime (num_, den_));
     }
 
     inline
