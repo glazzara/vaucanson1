@@ -163,7 +163,7 @@ namespace vcsn {
     bool
     op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, T b)
     {
-      if (b < 0)
+      if (b < T(0))
 	return false;
       return true;
     }
@@ -172,9 +172,9 @@ namespace vcsn {
     void
     op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, T& b)
     {
-      if (b >= 0)
+      if (b >= T(0))
 	{
-	  b = 0;
+	  b = T(0);
 	  return;
 	}
       assertion(! "star not defined.");
@@ -200,7 +200,7 @@ namespace vcsn {
     bool
     op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b)
     {
-      if (b > 0)
+      if (b > T(0))
 	return false;
       return true;
     }
@@ -209,9 +209,9 @@ namespace vcsn {
     void
     op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>&, T& b)
     {
-      if (b <= 0)
+      if (b <= T(0))
 	{
-	  b = 0;
+	  b = T(0);
 	  return;
 	}
       assertion(! "star not defined.");

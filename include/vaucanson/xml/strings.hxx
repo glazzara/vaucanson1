@@ -44,7 +44,6 @@ namespace vcsn
       return transcode (s.c_str());
     }
 
-
     inline
     std::string
     xmlstr(const XMLCh* xmlstr)
