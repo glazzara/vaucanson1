@@ -153,6 +153,160 @@
 	* include/vaucanson/algorithms/reduce.hxx (semi_reduce): Check
 	precondition.
 
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Update file, for compilable with the RationalNumber.
+
+        * vcsn/algebra/implementation/semiring/tropical_semiring.hxx:
+    	The construction of null value is generic. RationalNumber
+    	interface is available for this file.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Update Numerical test for accept RationalNumber.
+
+	* src/tests/include/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
+	Update the test. Now, the test accumulator is a float. The Overflow for the
+	RationalNumber is deleted.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Add RationalNumber type for Xml reading.
+
+	The Rational Number are defined on the Xml with the 'Q' letters.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Update Generate for tests suites. Add RationalNumber.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Delete old contexts for RationalNumber class.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Update Test for RationalNumber taf-kit.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Update Context for RationalNumber class Tests.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Delete old interface for RationalNumber class.
+
+        * include/vaucanson/algebra/implementation/semiring/rational_number.hh:
+        Delete dead code for RationalNumber class.
+        * include/vaucanson/algebra/implementation/semiring/rational_number.hxx:
+        Delete dead code for RationalNumber class.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Correct bug in RationalNumber class.
+
+	* include/vaucanson/algebra/implementation/semiring/q_number.hxx:
+    	Correct bug for operator>> in the class RationalNumber.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Update op_parse specialized for RationalNumber
+        * vcsn/algebra/implementation/semiring/numerical_semiring.hxx
+        Write op_parse for accept Integer number (ie without the denominator
+    	part).
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Optmize RationalNumber and correct bugs.
+    	Fix Bugs:
+    	* include/vaucanson/misc/algebra.hh:
+    	* include/vaucanson/misc/algebra.hxx:
+    		Fix the random Number.
+    		Delete old version.
+    	* include/vaucanson/algebra/implem/semiring/q_number.hh:
+    	* include/vaucanson/algebra/implem/semiring/q_number.hxx:
+    	Optimize multiplication, division, addition and soustraction.
+    	Optimize comment for test debug.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Add context for test in src/test/test-suites
+    	Add:
+    	* algebra_numerical_semiring_q.defs
+    	* algebra_tropical_semiring_max_q.defs
+    	* algebra_tropical_semiring_min_q.defs
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Clean Rational Number files. Fix misc/random.hxx.
+
+    	* vcsn/algebra/implementation/semiring/numerical_semiring.hxx
+    	* include/vaucanson/algebra/implementation/semiring/q_number.hh
+    	* include/vaucanson/algebra/implementation/semiring/q_number.hxx
+    	Move gcd, lcm and is_coprime in misc/algebra.hh.
+    	Must update misc/random.hxx on RationalNumber generate:
+    	* include/vaucanson/misc/random.hxx
+
+    	Delete for clean:
+    	* include/vaucanson/algebra/implementation/semiring/q_semiring.hh
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Add test for Rational Number
+
+    	Modified for include Rational Number test:
+    	* configure.ac
+    	* include/Makefile.am
+    	* taf-kit/tests/Makefile.am
+    	Add the Rational Number test:
+    	* taf-kit/tests/vcsn-char-q.test
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Clean operator on Prime Number.
+
+    	Delete :
+    	* include/vaucanson/misc/algebra.cc
+    	Add & Clean :
+    	* include/vaucanson/misc/algebra.hh
+    	* include/vaucanson/misc/algebra.hxx
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+	Fix reduce.hh bug
+
+    	* include/vaucanson/algorithms/reduce.hxx: Fix bug.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Add Rational Number. Fix op_parse for RationalNumber class
+
+    	op_parse must be specialized for RationalNumber.
+    	Change Makefile.am and rb script for generate RationalNumber's
+    	tak-kits.
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Include Rational Number on the projet
+
+    	Modified file for compile into the project.
+    	Include to tak-kit
+
+    	Do not compile cause an undifined operator>>
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Create algreba.hh file in misc/ for prime number operation.
+
+    	Implement gcd, lcm and is_coprime
+
+2011-03-24  David Moreira <moreira@lrde.epita.fr>
+
+	Rational Number impletation.
+
+    	Add Header of rational number with the following file :
+    	include/vaucanson/algebra/implementation/semiring/q_number.hh
+    	Implementation on the following file :
+    	include/vaucanson/algebra/implementation/semiring/q_number.hxx
+
 2011-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* taf-kit/tests/vcsn-char-r.test: remove the power(C_1^n) test
