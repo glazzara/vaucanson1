@@ -53,7 +53,7 @@ generate \
 ## ---------- ##
 
 for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_min; do
-    for semiring_elt_value_t in int double float rational bool; do
+    for semiring_elt_value_t in int double float q bool; do
 	TEST="algebra/semiring";
 	case $semiring_type:$semiring_elt_value_t in
 	    numerical_semiring:bool)
