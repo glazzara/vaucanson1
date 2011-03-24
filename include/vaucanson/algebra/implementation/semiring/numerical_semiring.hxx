@@ -392,7 +392,7 @@ namespace vcsn {
       if (std::abs(r.num_get()) < r.den_get ())
       {
 	algebra::RationalNumber one = algebra::RationalNumber(1);
-	r = one / (one -= r);
+	r = one / (one - r);
       }
       else
 	assertion(! "vcsn::algebra::RationalNumber: star not defined.");
@@ -433,7 +433,6 @@ namespace vcsn {
       return Element<algebra::NumericalSemiring, algebra::RationalNumber> (set, res);
     }
 
-
     template <typename S>
     inline
     bool
@@ -443,32 +442,39 @@ namespace vcsn {
 	     typename std::string::const_iterator& i)
     {
       if (*i != '-' && (*i < '0' || *i > '9'))
-	  return false;
+	return false;
       std::stringstream ret;
       ret << std::string(i, s.end ());
       int init = ret.tellg ();
       int num;
       ret >> std::dec >> num;
-      if (ret.tellg() < 0)
-	return false;
-      char slash;
-      ret >> slash;
-      if ((slash != '/') || (ret.tellg () < 0))
-	return false;
-      unsigned den;
-      ret >> den;
       if (ret.tellg () < 0)
-	return false;
+      	return false;
+      char slash = '\0';
+
+      ret >> slash;
+      unsigned den = 0;
+
+      if ((slash == '/') && (ret.tellg () >= 0))
+      {
+      	ret >> den;
+      	if (ret.tellg () < 0)
+      	  return false;
+      }
+      else
+      {
+      	if (ret.tellg () >= 0)
+      	  ret.unget ();
+      	den = 1;
+      }
       for (int cur = ret.tellg (); (cur - init - 1) && i != s.end ();
-	   ++i, ++init)
-	;
+      	   ++i, ++init)
+      	;
       if (*i != '.')
-	++i;
+        ++i;
       w.set (num, den);
       return true;
     }
-
-
   } // algebra
 
 } // vcsn
