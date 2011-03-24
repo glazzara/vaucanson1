@@ -34,23 +34,22 @@ bool numerical_semiring_test(tests::Tester& t)
   int timeout = 0;
   bool result_test = true;
   element_t nb = semiring.choose_starable(SELECT(T));
-  T average_value(0);
+  float average_value(0);
 
   try
     {
       do
 	{
 	  result_test = result_test &&
-	    (-T(1) < nb.value() and nb.value() < T(1));
+	    ((-1.0 < (float) nb.value()) && ((float) nb.value() < 1.0));
 	  ++timeout;
 	  nb = semiring.choose_starable(SELECT(T));
 	  average_value += nb.value();
 	}
       while (timeout < 2000);
-      average_value = average_value < T(0) ? -average_value : average_value;
       TEST(t,
 	   "starable distribution is correct",
-	   (average_value / T(2000)) <= (T(1) / T(10))
+	   (std::abs (average_value) / 2000) <= 0.1
 	   );
 
     }
