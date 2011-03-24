@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2006, 2007, 2008, 2010, 2011 The Vaucanson Group.
+# Copyright (C) 2011 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -74,10 +74,10 @@ b
 # Save & Exit.
 10
 EOF
-
+echo Save '&' Exit c1.xml
 e1=5
 e2=6
-for n in 1 2 3 4; do
+for n in `seq 1 6`; do
    $VCSN power c1.xml "$n" > cn.xml
    $VCSN reduce cn.xml > cnr.xml
 
@@ -137,4 +137,4 @@ EOF
 
 $VCSN power b1.xml 4 > b4.xml
 $VCSN reduce b4.xml > b4r.xml
-$VCSN data b4r.xml | grep 'States: 5'
+$VCSN data b4r.xml | grep 'States: 6'

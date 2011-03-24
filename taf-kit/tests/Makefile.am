@@ -13,9 +13,9 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 TESTS =						\
+  vcsn-char-q.test				\
   vcsn-char-b.test				\
   vcsn-char-z.test				\
-  vcsn-char-q.test				\
   vcsn-char-r.test				\
   vcsn-char-fmp-b.test				\
   vcsn-char-fmp-z.test				\
