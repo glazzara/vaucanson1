@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2007, 2008, 2009, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
+# include <vaucanson/algebra/implementation/semiring/q_number.hh>
 
 namespace vcsn
 {
@@ -528,6 +529,7 @@ namespace vcsn
       GET_SEMIRING_SET(double, "R")
       GET_SEMIRING_SET(float, "R")
       GET_SEMIRING_SET(int, "Z")
+      GET_SEMIRING_SET(vcsn::algebra::RationalNumber, "Q")
 # undef GET_SEMIRING_SET
 
       template <class S>
