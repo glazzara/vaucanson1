@@ -181,6 +181,12 @@ namespace vcsn
       unsigned int den_;
       //// @}
     }; // RationalNumber
+    
+    std::ostream& operator<< (std::ostream&, const RationalNumber&);
+
+    inline
+    std::iostream&
+    operator>> (std::iostream&, RationalNumber&);
 
     /// @}
   } // !algebra
@@ -189,12 +195,7 @@ namespace vcsn
 } // !vcsn
 
 
-inline
-std::ostream& operator<< (std::ostream&, vcsn::algebra::RationalNumber&);
 
-inline
-std::iostream&
-operator>> (std::iostream&, vcsn::algebra::RationalNumber&);
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
 #  include <vaucanson/algebra/implementation/semiring/q_number.hxx>
