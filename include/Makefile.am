@@ -37,9 +37,7 @@ vaucanson/contexts/generic_automaton_impl.thh	\
 vaucanson/contexts/generic_series.thh		\
 vaucanson/contexts/polynom_series.thh		\
 vaucanson/contexts/r_semiring.thh		\
-\
 vaucanson/contexts/q_semiring.thh		\
-\
 vaucanson/contexts/ratseries_semiring.thh	\
 vaucanson/contexts/transducer.thh		\
 vaucanson/contexts/fmp_transducer.thh		\
@@ -172,6 +170,7 @@ vaucanson/algebra/concept/letter.hxx			\
 vaucanson/algebra/concept/monoid_base.hh		\
 vaucanson/algebra/concept/monoid_base.hxx		\
 vaucanson/algebra/concept/numerical_semiring.hh		\
+vaucanson/algebra/concept/numerical_semiring.hxx	\
 vaucanson/algebra/concept/semigroup_base.hh		\
 vaucanson/algebra/concept/semigroup_base.hxx		\
 vaucanson/algebra/concept/semiring_base.hh		\
@@ -180,6 +179,7 @@ vaucanson/algebra/concept/series_base.hh		\
 vaucanson/algebra/concept/series_base.hxx		\
 vaucanson/algebra/concept/tropical_semiring.hh		\
 vaucanson/algebra/concept/tropical_semiring.hxx
+
 
 nobase_include_HEADERS +=							     \
 vaucanson/algebra/implementation/alphabets/alphabets.hh				     \
@@ -209,10 +209,8 @@ vaucanson/algebra/implementation/letter/range.hh				     \
 vaucanson/algebra/implementation/letter/range.hxx				     \
 vaucanson/algebra/implementation/semiring/numerical_semiring.hh			     \
 vaucanson/algebra/implementation/semiring/numerical_semiring.hxx		     \
-\
 vaucanson/algebra/implementation/semiring/q_number.hh				     \
 vaucanson/algebra/implementation/semiring/q_number.hxx				     \
-\
 vaucanson/algebra/implementation/semiring/tropical_semiring.hh			     \
 vaucanson/algebra/implementation/semiring/tropical_semiring.hxx			     \
 vaucanson/algebra/implementation/series/generalized.hh				     \
@@ -442,7 +440,8 @@ vaucanson/automata/concept/transducer_ops.hh				\
 vaucanson/automata/concept/transducer_ops.hxx				\
 vaucanson/automata/concept/translate.hh					\
 vaucanson/automata/concept/translate.hxx				\
-\
+vaucanson/automata/generic_contexts/q_automaton.hh			\
+vaucanson/automata/generic_contexts/q_automaton_structures.hh		\
 vaucanson/automata/generic_contexts/boolean_automaton.hh		\
 vaucanson/automata/generic_contexts/boolean_automaton_structures.hh     \
 vaucanson/automata/generic_contexts/boolean_transducer.hh		\
