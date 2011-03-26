@@ -15,3 +15,4 @@ SUBDIRS =					\
 	algorithms				\
 	one_rule_rewriting			\
 	vgrep
+

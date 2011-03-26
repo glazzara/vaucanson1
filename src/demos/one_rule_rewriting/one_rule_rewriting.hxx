@@ -174,7 +174,7 @@ namespace ORR
 	// Required by setpm and MODE_STAR.
 	using namespace vcsn::rat;
 
-	rat_exp_t exp = make_rat_exp(alphabet, user_string);
+	vcsn::boolean_automaton::rat_exp_t exp = make_rat_exp(alphabet, user_string);
 	std::stringstream sstr;
 	sstr << setpm (MODE_STAR) << expand(evaluation(t, exp));
 	sstr >> final;

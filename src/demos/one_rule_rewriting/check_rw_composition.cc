@@ -35,7 +35,7 @@ check_an_expression(const vcsn::boolean_transducer::automaton_t& t,
   using namespace vcsn::boolean_automaton;
   using namespace vcsn::rat; // For setpm and MODE_STAR.
 
-  rat_exp_t exp = make_rat_exp(alphabet, str);
+  vcsn::boolean_automaton::rat_exp_t exp = make_rat_exp(alphabet, str);
 
   s_res << setpm(MODE_STAR) << expand(evaluation(t, exp));
   std::string res;
