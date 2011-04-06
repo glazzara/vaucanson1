@@ -84,6 +84,7 @@ tests/automata/algos/graphs/extract_test.hh					      \
 tests/automata/algos/graphs/reachable_test.hh					      \
 tests/automata/algos/graphs/sub_automaton_test.hh				      \
 tests/automata/algos/graphs/trim_test.hh					      \
+tests/automata/algos/graphs/is_trim_test.hh					      \
 tests/automata/algos/label_aware_graphs/cut_up_test.hh				      \
 tests/automata/algos/label_aware_graphs/eps_removal_test.hh			      \
 tests/automata/algos/label_aware_graphs/empty_test.hh				      \

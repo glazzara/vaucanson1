@@ -408,6 +408,8 @@ vaucanson/algorithms/thompson.hh				\
 vaucanson/algorithms/thompson.hxx				\
 vaucanson/algorithms/transpose.hh				\
 vaucanson/algorithms/transpose.hxx				\
+vaucanson/algorithms/is_trim.hh					\
+vaucanson/algorithms/is_trim.hxx				\
 vaucanson/algorithms/trim.hh					\
 vaucanson/algorithms/trim.hxx
 
