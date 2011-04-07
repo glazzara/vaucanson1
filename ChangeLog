@@ -193,6 +193,10 @@
 	include/vaucanson/algorithms/prefix.hxx: Implementation of the
 	prefix algorithm.
 
+2011-04-07  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Update ChangeLog.
+
 2011-03-24  David Moreira <moreira@lrde.epita.fr>
 
 	Update file, for compilable with the RationalNumber.
@@ -346,6 +350,119 @@
     	include/vaucanson/algebra/implementation/semiring/q_number.hh
     	Implementation on the following file :
     	include/vaucanson/algebra/implementation/semiring/q_number.hxx
+
+2011-02-22  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Fix the semi_reduce algorithm.
+
+	* include/vaucanson/algorithms/reduce.hxx: Fixed semi_reduce ()
+	for make check. Make check failed because semi-reduce did not
+	check for the automaton to be realtime.
+
+2011-03-03  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Z/2Z semiring now uses booleans instead of integers.
+
+	* algebra/implementation/semiring/cyclic_semiring.hxx,
+	algebra/implementation/semiring/cyclic_semiring.hh: Specialized
+	the cyclic semiring implementation for Z/2Z (Z/nZ with n = 2)
+	using booleans.
+	* include/vaucanson/contexts/z2z_semiring.thh: Modified the Z/2Z
+	context accordingly.
+
+2011-03-02  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	* taf-kit/tests/vcsn-char-z2z.test: Tests on Z/2Z are now valid.
+
+2011-03-02  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Fix the quotient algorithm.
+
+	* algorithms/minimization_hopcroft.hxx: Fix the quotient
+	algorithm so it does not add transitions labeled by zero.
+	This can happenens while working on a Z/2Z semiring.
+	* xml/builders.hxx: Added a FIXME in the writer.
+
+2011-03-02  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Fix bugged operations in the cyclic semiring.
+
+	* algebra/implementation/semiring/cyclic_semiring.hxx: Fixed
+	some bugged operations (op_in_star and choose_non_starable).
+
+2011-02-20  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Deleted useless files.
+
+2011-02-19  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	More tests for the Z/2Z semiring.
+
+	* taf-kit/tests/vcsn-char-z2z.test: Test for the Z/2Z
+	semiring. Does not work as said before, but don't
+	know why yet.
+
+2011-02-19  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Add tests for the cyclic semiring in taf-kit.
+
+	* configure.ac
+	* src/tests/test-suites/generate-all.sh
+	* taf-kit/tests/Makefile.am: Add tests for the Z/nZ
+	semiring. Not working yet, seems there is a problem
+	with the "proper" command during tests.
+
+2011-02-19  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Fix some operations of the Z/2Z semiring.
+
+	* Makefile.am: Add some missing dependencies.
+	* implementation/semiring/cyclic_semiring.hxx: Modify basic
+	operations (+, *, -, ...) to make them more generic and
+	exact. Negative numbers are handled, but results will
+	always be positive (positive equivalent modulo n).
+
+2011-02-19  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Modification of Makefiles and scripts for the Z/2Z
+	automaton.
+
+	* include/Makefile.am: Added new .hh and .hxx to dependencies.
+	* lib/Makefile.am: Added the new library vcsn-z2z to
+	compilation process.
+	* lib/generate_libvcsn.rb: Added the new z2z context, so that
+	the Makefile for the library compilation is produced.
+	* taf-kit/src/Makefile.am: Added the commands needed for
+	the vcsn-char-z2z executable to be produced.
+
+	Next step is to add tests.
+
+2011-02-19  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Creation of a new context for Z/2Z semirings.
+
+	* automata/generic_contexts/z2z_automaton.hh,
+	automata/generic_contexts/z2z_automaton_structures.hh,
+	contexts/z2z_semiring.thh,
+	z2z_automaton.hh,
+	z2z_automaton_structures.hh: Creation of a new context for
+	automatons using the Z/2Z semiring. This is a restricted
+	use of CyclicSemiring, representing Z/nZ. It uses
+	integers for now. Any new automaton based on CyclicSemiring
+	can be createdin the exact same way.
+
+2011-02-19  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Beginning of the implementation of the new Z/2Z semiring.
+
+	* implementation/semiring/cyclic_semiring.hh,
+	implementation/semiring/cyclic_semiring.hxx: Implementation
+	of the new cyclic semiring. This is a generic semiring over Z/nZ.
+	Currently, most of the operations implemented might not be valid
+	in some cases. Need more documentation as well.
+	* algebra/concept/cyclic_semiring.hh,
+	algebra/concept/cyclic_semiring.hxx: The concept associated to
+	the new cyclic semiring. Might need some more documentation.
 
 2011-01-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
