@@ -17,6 +17,7 @@
 
 #include "commands.hh"
 #include <vaucanson/algorithms/is_useless.hh>
+#include <vaucanson/algorithms/is_trim.hh>
 
 //-- Graph functions
 
@@ -32,6 +33,15 @@ coaccessible_command(const arguments_t& args)
 {
   g_res.keep(coaccessible(get_aut(args, 1)));
   return 0;
+}
+
+static int
+is_trim_command(const arguments_t& args)
+{
+  bool b = is_trim(get_aut(args, 1));
+  if (args.verbose)
+    g_res.stream << (b ? "Input is trim\n" : "Input is not trim\n");
+  return !b;
 }
 
 static int
@@ -257,6 +267,7 @@ BEGIN_COMMAND_GROUP(cmd_gen,
 // Graphs
 COMMAND_ENTRY(accessible, Aut, "Compute the accessible part of `aut'.");
 COMMAND_ENTRY(coaccessible, Aut, "Compute the co-accessible part of `aut'.");
+COMMAND_ENTRY(is_trim, Aut, "Test if the `aut' is trim.");
 COMMAND_ENTRY(trim, Aut, "Compute the trim part of `aut'.");
 COMMAND_ENTRY(is_empty, Aut, "Tell whether `aut' is empty.'")
 COMMAND_ENTRY(is_useless, Aut,
