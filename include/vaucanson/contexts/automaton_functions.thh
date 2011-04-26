@@ -33,6 +33,7 @@
 # include <vaucanson/algorithms/eps_removal_sp.hh>
 # include <vaucanson/algorithms/equivalent.hh>
 # include <vaucanson/algorithms/eval.hh>
+# include <vaucanson/algorithms/factor.hh>
 # include <vaucanson/algorithms/is_ambiguous.hh>
 # include <vaucanson/algorithms/is_deterministic.hh>
 # include <vaucanson/algorithms/isomorph.hh>
@@ -40,12 +41,14 @@
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/algorithms/prefix.hh>
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/reduce.hh>
 # include <vaucanson/algorithms/shortest.hh>
 # include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/algorithms/suffix.hh>
 # include <vaucanson/algorithms/thompson.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/trim.hh>

@@ -304,6 +304,8 @@ vaucanson/algorithms/evaluation_rw.hh				\
 vaucanson/algorithms/evaluation_rw.hxx				\
 vaucanson/algorithms/extension.hh				\
 vaucanson/algorithms/extension.hxx				\
+vaucanson/algorithms/factor.hh					\
+vaucanson/algorithms/factor.hxx					\
 vaucanson/algorithms/finite_support_conversion.hh		\
 vaucanson/algorithms/finite_support_conversion.hxx		\
 vaucanson/algorithms/fmp_to_rw.hh				\
@@ -312,6 +314,8 @@ vaucanson/algorithms/ltl_to_pair.hh				\
 vaucanson/algorithms/ltl_to_pair.hxx				\
 vaucanson/algorithms/pair_to_fmp.hh				\
 vaucanson/algorithms/pair_to_fmp.hxx				\
+vaucanson/algorithms/prefix.hh					\
+vaucanson/algorithms/prefix.hxx					\
 vaucanson/algorithms/is_useless.hh				\
 vaucanson/algorithms/is_useless.hxx				\
 vaucanson/algorithms/image.hh					\
@@ -404,6 +408,8 @@ vaucanson/algorithms/sub_automaton.hh				\
 vaucanson/algorithms/sub_automaton.hxx				\
 vaucanson/algorithms/sub_normalize.hh				\
 vaucanson/algorithms/sub_normalize.hxx				\
+vaucanson/algorithms/suffix.hh					\
+vaucanson/algorithms/suffix.hxx					\
 vaucanson/algorithms/thompson.hh				\
 vaucanson/algorithms/thompson.hxx				\
 vaucanson/algorithms/transpose.hh				\

@@ -155,6 +155,15 @@
 
 2011-04-26  Fiette Guillaume <fiette@lrde.epita.fr>
 
+	Add the new algorithms to taf-kit.
+
+	* include/Makefile.am,
+	include/vaucanson/contexts/automaton_functions.thh,
+	taf-kit/src/cmd_gen.cc: The commands currently work with
+	any automaton because of a problem with is_realtime.
+
+2011-04-26  Fiette Guillaume <fiette@lrde.epita.fr>
+
 	Add the suffix and factor algorithms.
 
 	* include/vaucanson/algorithms/factor.hh,
