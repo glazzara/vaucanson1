@@ -153,6 +153,14 @@
 	* include/vaucanson/algorithms/reduce.hxx (semi_reduce): Check
 	precondition.
 
+2011-04-26  Fiette Guillaume <fiette@lrde.epita.fr>
+
+	Add the prefix algorithm.
+
+	* include/vaucanson/algorithms/prefix.hh,
+	include/vaucanson/algorithms/prefix.hxx: Implementation of the
+	prefix algorithm.
+
 2011-03-24  David Moreira <moreira@lrde.epita.fr>
 
 	Update file, for compilable with the RationalNumber.
