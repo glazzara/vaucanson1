@@ -16,6 +16,7 @@
 //
 
 #include "commands.hh"
+#include <vaucanson/algorithms/is_useless.hh>
 
 static int
 reduce_command(const arguments_t& args)
@@ -24,8 +25,35 @@ reduce_command(const arguments_t& args)
   return 0;
 };
 
+static int
+are_equivalent_command(const arguments_t& args)
+{
+  automaton_t a = realtime(get_aut(args, 1));
+  automaton_t b = realtime(get_aut(args, 2));
+
+  standardize(a);
+  standardize(b);
+
+  series_set_elt_t w(a.structure().series());
+  w.assoc(identity_value(SELECT(monoid_t),
+                         SELECT(monoid_elt_value_t)), -1);
+
+  left_mult_of_standard_here(b, w);
+  sum_of_standard_here(a, b);
+
+  bool c = is_useless(reduce(a));
+  if (args.verbose)
+    g_res.stream << (c ? "Automata are equivalent\n" :
+		     "Automata are not equivalent\n");
+  return !c;
+};
+
+
+
 BEGIN_COMMAND_GROUP(r_commands,
 		    "3. Algorithms for automata with weights in a field:");
 COMMAND_ENTRY(reduce, Aut,
 	      "Compute a minimal automaton equivalent to `aut'.");
+COMMAND_ENTRY(are_equivalent, AutAut,
+	      "Tell whether two automata are equivalent.");
 END_COMMAND_GROUP

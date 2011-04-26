@@ -21,14 +21,16 @@ DIFF=${top_srcdir}/src/tests/common/xmldiff.sh
 VCSN=vcsn-char-r
 
 $VCSN -aab standard '{2}a + b' > s2ab.xml
-$VCSN -aab thompson '{-1}({2}a + b)' \| proper - > t2ab.xml
-$VCSN sum s2ab.xml t2ab.xml > u2ab.xml
+$VCSN -aab thompson '({2}a + b)' \| proper - > t2ab.xml
+$VCSN left-mult -- s2ab.xml -1 \| sum - t2ab.xml > u2ab.xml
 $VCSN reduce u2ab.xml \| is-empty -
-rm s2ab.xml t2ab.xml u2ab.xml
+$VCSN are-equivalent -v s2ab.xml t2ab.xml
 
 $VCSN -aab standard '((a.a*)(a.a*)*)' \| quotient - > a2.xml
 $VCSN -aab standard 'a({2}a)*' \| quotient - > a2b.xml
 cmp a2.xml a2b.xml
+
+fail1 $VCSN are-equivalent -v s2ab.xml a2b.xml
 
 $VCSN -aab standard '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' \| quotient - > a3.xml
 $VCSN -aab standard 'a({3}a)*' \| quotient - > a3b.xml
