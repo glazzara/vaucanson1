@@ -1,5 +1,12 @@
 2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Implement are-equivalent-E for expressions with Boolean weights.
+
+	* taf-kit/src/cmd_b.cc (are_equivalent_E_command): New command.
+	* taf-kit/tests/vcsn-char-b.test: Add some small tests.
+
+2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Implement are-equivalent-E for expressions with weights in fields.
 
 	* taf-kit/src/cmd_r.cc (are_equivalent_E_command): New command.

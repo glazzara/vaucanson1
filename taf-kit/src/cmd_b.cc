@@ -82,6 +82,18 @@ are_equivalent_command(const arguments_t& args)
 }
 
 static int
+are_equivalent_E_command(const arguments_t& args)
+{
+  bool b = are_equivalent(standard_of(get_exp(args, 1)),
+			  standard_of(get_exp(args, 2)));
+  if (args.verbose)
+    g_res.stream << (b ? "Expressions are equivalent\n" :
+		     "Expressions are not equivalent\n");
+  return !b;
+}
+
+
+static int
 derived_term_command(const arguments_t& args)
 {
   rat_exp_t e = get_exp(args, 1);
@@ -132,7 +144,9 @@ COMMAND_ENTRY_CN(minimize, minimization_hopcroft, Aut,
 COMMAND_ENTRY_EXPERT_CN(minimize-moore, minimization_moore, Aut,
 			"Give the minimized of `aut' (Moore algorithm).");
 COMMAND_ENTRY(are_equivalent, AutAut,
-	      "Return whether `aut1' and `aut2' are equivalent.");
+	      "Return whether `aut1' and `aut2' realize the same series.");
+COMMAND_ENTRY(are_equivalent_E, ExpExp,
+	      "Return whether `exp1' and `exp2' denote the same language.");
 COMMAND_ENTRY(derived_term, Exp,
 	      "Build the derivate-term automaton for `exp'.");
 COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");

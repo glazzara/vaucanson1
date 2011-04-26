@@ -390,6 +390,14 @@ fail1 $VCSN is-realtime $finalword
 
       $VCSN are-equivalent initialreal.xml finalreal.xml
 
+      $VCSN aut-to-exp -o XML initialreal.xml > iexp.xml
+      $VCSN aut-to-exp -o XML finalreal.xml > fexp.xml
+      $VCSN are-equivalent-E -i XML -v iexp.xml fexp.xml
+
+      $VCSN are-equivalent-E -aa -v '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' 'a.a*'
+      $VCSN are-equivalent-E -aa -v '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' 'a*.a'
+fail1 $VCSN are-equivalent-E -aa -v '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' 'a*.a*'
+
 fail1 test "`$VCSN is-realtime $initialseries`" = 1
       # $VCSN realtime $initialseries   is bogus currently.
 
