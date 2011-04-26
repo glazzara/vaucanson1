@@ -291,6 +291,7 @@ namespace vcsn {
   Element<A, AI>
   semi_reduce(const Element<A, AI>& a)
   {
+    precondition(is_realtime(a));
     Element<A, AI> output(a.structure());
     do_semi_reduce(a, output);
     return output;
