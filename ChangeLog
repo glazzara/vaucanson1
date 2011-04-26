@@ -1,5 +1,14 @@
 2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix op_parse for weights.
+
+	* include/vaucanson/algebra/concept/semiring_base.hxx (op_parse):
+	Rewrite using stringstream::eof() instead of assuming that tellg()
+	will return 0 at the end (not the case with my compiler/libstdc++
+	combination, most of the TAF-Kit tests were failing).
+
+2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Update to gnulib 7d06b32684363a39fae65c616b84bc7589768106.
 
 	* gnulib/dosname.h: New file.

@@ -171,13 +171,17 @@ namespace vcsn {
       ret << std::string(i, s.end());
       int init = ret.tellg();
       ret >> std::dec >> res;
-      if (ret.tellg() < 0)
-	return false;
-      for (int cur = ret.tellg();
-	   (cur - init - 1) && i != s.end(); ++i, ++init)
-	;
-      if (*i != '.')
-	++i;
+      if (ret.eof())
+	{
+	  i = s.end();
+	}
+      else
+	{
+	  int cur = ret.tellg();
+	  if (cur < 0)
+	    return false;
+	  i += cur - init;
+	}
       w = res;
       return true;
     }
