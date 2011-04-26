@@ -1,5 +1,16 @@
 2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix operator precedence for kratexp parser.
+
+	* lib/src/krat_exp/krat_exp_bison.yy: Do not declare token twice
+	i.e, once for type and once for precedence.  Do not declare "("
+	and ")" as associative operators, it breaks proper grouping in
+	"a+b(a)".
+	* taf-kit/tests/vcsn-char-b.test: Add test cases.
+	Reported by Jacques Sakarovitch.
+
+2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Implement are-equivalent-E for expressions with Boolean weights.
 
 	* taf-kit/src/cmd_b.cc (are_equivalent_E_command): New command.

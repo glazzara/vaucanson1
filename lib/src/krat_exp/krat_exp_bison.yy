@@ -1,6 +1,7 @@
 %skeleton "lalr1.cc"
 %defines
 %define "parser_class_name" "krat_exp_bison"
+//%debug
 %error-verbose
 %name-prefix="vcsnyy"
 
@@ -19,6 +20,8 @@
 %parse-param { std::string& error_ }
 %lex-param { std::queue<std::pair<krat_exp_bison::token_type, krat_exp_bison::semantic_type> >& tok_q }
 
+%printer { debug_stream() << *$$; } <str>
+
 %union
 {
   vcsn::algebra::krat_exp_virtual * rexp;
@@ -32,32 +35,23 @@ yylex(vcsnyy::krat_exp_bison::semantic_type* yylval,
       std::queue<std::pair<vcsnyy::krat_exp_bison::token_type, vcsnyy::krat_exp_bison::semantic_type> >& tok_q);
 %}
 
-%token	<str> OPAR
-%token	<str> CPAR
-%token	<str> PLUS
-%token	<str> TIMES
-%token	<str> STAR
-%token	<sem> WEIGHT
-%token	<rexp> ZERO
-%token	<rexp> WORD
-%token  LPROD
 %type <rexp> rexp
 
-%left OPAR;
-%left PLUS;
-%left TIMES;
-%left TIMES2;
-%left WEIGHT;
-%left LPROD;
-%left STAR;
-%nonassoc ZERO;
-%nonassoc WORD;
+%token <str> OPAR CPAR
+%left <str> PLUS
+%left <str> TIMES
+%left TIMES2
+%left <sem> WEIGHT
+%left LPROD
+%left <str> STAR
+%nonassoc <rexp> ZERO
+%nonassoc <rexp> WORD
 
 %%
 %start exp;
 
 exp :
-  rexp {exp = *$1; delete $1;}
+  rexp {exp = *$1; delete $1; }
   ;
 
 rexp :
@@ -155,6 +149,9 @@ int
 vcsnyy::krat_exp_parser::parse(vcsn::algebra::krat_exp_virtual& rexp_, std::string& error_)
 {
   vcsnyy::krat_exp_bison parser(tok_q_->self , rexp_, error_);
+#if YYDEBUG
+  parser.set_debug_level(true);
+#endif
   return parser.parse();
 }
 

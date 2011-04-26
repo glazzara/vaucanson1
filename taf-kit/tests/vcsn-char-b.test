@@ -458,10 +458,6 @@ fail1 $VCSN are-equivalent ab2.xml 2snf.xml
 # transpose
 #  $VCSN transpose $b_to_transpose \| are-isomorphic $b_transposed -
 
-## --------------------------------------- ##
-## Boolean automaton specific algorithms.  ##
-## --------------------------------------- ##
-
 ## --------------------------------------------- ##
 ## Conversion between automata and expressions.  ##
 ## --------------------------------------------- ##
@@ -516,6 +512,16 @@ letters 1
 alpha   1
 digits  e
 EOF
+
+# operator precedence
+$VCSN -a'abc' are-equivalent-E 'b(a+b)*+(a+b)(a+b)*c(a+b)(a+b)*' \
+                               'b(a+b)*+((a+b)(a+b)*c(a+b)(a+b)*)'
+$VCSN -a'abc' are-equivalent-E 'b(a+b)*+(a+b)(a+b)*.c.(a+b)(a+b)*' \
+                               'b(a+b)*+((a+b)(a+b)*c(a+b)(a+b)*)'
+fail1 $VCSN -a'abc' are-equivalent-E 'b(a+b)*+(a+b)(a+b)*c(a+b)(a+b)*' \
+                                     '(b.(a+b)*+a+b).(a+b)*.c.(a+b).(a+b)*'
+
+
 
 ## ------------------- ##
 ## Test div3base2.xml. ##
