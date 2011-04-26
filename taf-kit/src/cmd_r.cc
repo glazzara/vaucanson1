@@ -48,6 +48,26 @@ are_equivalent_command(const arguments_t& args)
   return !c;
 };
 
+static int
+are_equivalent_E_command(const arguments_t& args)
+{
+  automaton_t a = standard_of(get_exp(args, 1));
+  automaton_t b = standard_of(get_exp(args, 2));
+
+  series_set_elt_t w(a.structure().series());
+  w.assoc(identity_value(SELECT(monoid_t),
+                         SELECT(monoid_elt_value_t)), -1);
+
+  left_mult_of_standard_here(b, w);
+  sum_of_standard_here(a, b);
+
+  bool c = is_useless(reduce(a));
+  if (args.verbose)
+    g_res.stream << (c ? "Expressions are equivalent\n" :
+		     "Expressions are not equivalent\n");
+  return !c;
+};
+
 
 
 BEGIN_COMMAND_GROUP(r_commands,
@@ -55,5 +75,7 @@ BEGIN_COMMAND_GROUP(r_commands,
 COMMAND_ENTRY(reduce, Aut,
 	      "Compute a minimal automaton equivalent to `aut'.");
 COMMAND_ENTRY(are_equivalent, AutAut,
-	      "Tell whether two automata are equivalent.");
+	      "Tell whether two automata realize the same series.");
+COMMAND_ENTRY(are_equivalent_E, ExpExp,
+	      "Tell whether two expressions denote the same language.");
 END_COMMAND_GROUP

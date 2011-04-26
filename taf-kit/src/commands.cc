@@ -39,6 +39,7 @@ command_map::register_cmd(const char* section,
     {
     case None:      n_params = 0; break;
     case Exp:       n_params = 1; break;
+    case ExpExp:    n_params = 2; break;
     case Aut:       n_params = 1; break;
     case AutExp:    n_params = 2; break;
     case AutAut:    n_params = 2; break;
@@ -102,6 +103,7 @@ command_map::list(std::ostream& ostr, bool expert)
 	{
 	case None: break;
 	case Exp: *out << " exp"; break;
+	case ExpExp: *out << " exp1 exp2"; break;
 	case Aut: *out << " aut"; break;
 	case AutExp: *out << " aut exp"; break;
 	case AutAut: *out << " aut1 aut2"; break;

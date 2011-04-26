@@ -37,6 +37,7 @@ struct arguments_t;
 enum command_params {
   None,
   Exp,
+  ExpExp,
   Aut,
   AutExp,
   AutAut,

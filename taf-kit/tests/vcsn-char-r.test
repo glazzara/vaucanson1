@@ -36,7 +36,8 @@ $VCSN -aab standard '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' \| quotient - > a3.xml
 $VCSN -aab standard 'a({3}a)*' \| quotient - > a3b.xml
 cmp a3.xml a3b.xml
 
-
+      $VCSN are-equivalent-E -aa -v '((a.a*)(a.a*)*)((a.a*)(a.a*)*)*' 'a({3}a)*'
+fail1 $VCSN are-equivalent-E -aa -v '((a.a*)(a*.a)*)((a.a*)(a.a*)*)'  'a({3}a)*'
 
 sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit c1.xml
 # Add states
