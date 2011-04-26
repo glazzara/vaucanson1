@@ -35,6 +35,7 @@ namespace vcsn {
   suffix_here (Element<A, AI>& a)
   {
     // FIXME: Missing preconditions is_realtime and is_trim
+    precondition(is_realtime(a));
 
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES (automaton_t);

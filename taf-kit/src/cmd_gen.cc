@@ -17,9 +17,6 @@
 
 #include "commands.hh"
 #include <vaucanson/algorithms/is_useless.hh>
-#include <vaucanson/algorithms/is_trim.hh>
-#include <vaucanson/algorithms/prefix.hh>
-#include <vaucanson/algorithms/suffix.hh>
 
 //-- Graph functions
 
@@ -264,27 +261,6 @@ semiring_info_command(const arguments_t& args)
   return 0;
 }
 
-static int
-prefix_command (const arguments_t& args)
-{
-  g_res.keep(prefix(get_aut(args, 1)));
-  return 0;
-};
-
-static int
-suffix_command (const arguments_t& args)
-{
-  g_res.keep(suffix(get_aut(args, 1)));
-  return 0;
-};
-
-static int
-factor_command (const arguments_t& args)
-{
-  g_res.keep(factor(get_aut(args, 1)));
-  return 0;
-};
-
 BEGIN_COMMAND_GROUP(cmd_gen,
 		    "1. Operations on all automata and rational expressions:");
 // Graphs
@@ -304,12 +280,6 @@ COMMAND_ENTRY_EXPERT(proper_sp, Aut, "Compute a proper automaton "
 		     "equivalent to `aut' using shorter paths.");
 COMMAND_ENTRY(is_standard, Aut, "Tell whethwe `aut' is standard");
 COMMAND_ENTRY(standardize, Aut, "Give the standard automaton of `aut'.");
-COMMAND_ENTRY(prefix, Aut,
-	      "Build an automaton which accepts any prefix of the given automaton.");
-COMMAND_ENTRY(suffix, Aut,
-	      "Build an automaton which accepts any suffix of the given automaton.");
-COMMAND_ENTRY(factor, Aut,
-	      "Build an automaton which accepts any factor of the given automaton.");
 // Operations
 COMMAND_ENTRY(union, AutAut,
 		 "Build the union of two automata.");

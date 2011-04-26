@@ -153,6 +153,26 @@ power_command(const arguments_t& args)
   return 0;
 }
 
+static int
+prefix_command (const arguments_t& args)
+{
+  g_res.keep(prefix(get_aut(args, 1)));
+  return 0;
+};
+
+static int
+suffix_command (const arguments_t& args)
+{
+  g_res.keep(suffix(get_aut(args, 1)));
+  return 0;
+};
+
+static int
+factor_command (const arguments_t& args)
+{
+  g_res.keep(factor(get_aut(args, 1)));
+  return 0;
+};
 
 BEGIN_COMMAND_GROUP(cmd_gen,
       "2. Operations on weighted automata and expressions over free monoids:");
@@ -178,4 +198,10 @@ COMMAND_ENTRY(exp_to_aut, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY_EXPERT(realtime_E, Exp, "Make `exp' realtime.");
 COMMAND_ENTRY(product, AutAut, "Build the product of two automata.");
 COMMAND_ENTRY(power, AutInt, "Build the `n'th power of `aut'.");
+COMMAND_ENTRY(prefix, Aut,
+	      "Build an automaton which accepts any prefix of the given automaton.");
+COMMAND_ENTRY(suffix, Aut,
+	      "Build an automaton which accepts any suffix of the given automaton.");
+COMMAND_ENTRY(factor, Aut,
+	      "Build an automaton which accepts any factor of the given automaton.");
 END_COMMAND_GROUP

@@ -155,6 +155,18 @@
 
 2011-04-26  Fiette Guillaume <fiette@lrde.epita.fr>
 
+	Add the is_realtime precondition to the new algorithms.
+
+	* include/vaucanson/algorithms/factor.hxx,
+	include/vaucanson/algorithms/prefix.hxx,
+	include/vaucanson/algorithms/suffix.hxx: Add the precondition.
+	* lib/generate_libvcsn.rb,
+	taf-kit/src/cmd_gen.cc,
+	taf-kit/src/cmd_wt.cc: Do not include these
+	algorithms for transducers.
+
+2011-04-26  Fiette Guillaume <fiette@lrde.epita.fr>
+
 	Add the new algorithms to taf-kit.
 
 	* include/Makefile.am,
