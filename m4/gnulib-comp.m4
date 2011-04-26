@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2010 Free Software Foundation, Inc.
+# Copyright (C) 2002-2011 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -32,6 +32,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module argp:
   # Code from module c++defs:
   # Code from module dirname-lgpl:
+  # Code from module dosname:
   # Code from module double-slash-root:
   # Code from module errno:
   # Code from module extensions:
@@ -56,11 +57,9 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdint:
   # Code from module stdio:
   # Code from module stdlib:
-  # Code from module strcase:
   # Code from module strchrnul:
   # Code from module strerror:
   # Code from module string:
-  # Code from module strings:
   # Code from module strndup:
   # Code from module strnlen:
   # Code from module sysexits:
@@ -103,6 +102,7 @@ AC_SUBST([LTALLOCA])
   # Code from module c++defs:
   # Code from module dirname-lgpl:
   gl_DIRNAME_LGPL
+  # Code from module dosname:
   # Code from module double-slash-root:
   gl_DOUBLE_SLASH_ROOT
   # Code from module errno:
@@ -155,8 +155,6 @@ AC_SUBST([LTALLOCA])
   gl_STDIO_H
   # Code from module stdlib:
   gl_STDLIB_H
-  # Code from module strcase:
-  gl_STRCASE
   # Code from module strchrnul:
   gl_FUNC_STRCHRNUL
   gl_STRING_MODULE_INDICATOR([strchrnul])
@@ -165,8 +163,6 @@ AC_SUBST([LTALLOCA])
   gl_STRING_MODULE_INDICATOR([strerror])
   # Code from module string:
   gl_HEADER_STRING_H
-  # Code from module strings:
-  gl_HEADER_STRINGS_H
   # Code from module strndup:
   gl_FUNC_STRNDUP
   gl_STRING_MODULE_INDICATOR([strndup])
@@ -346,6 +342,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/basename-lgpl.c
   lib/dirname-lgpl.c
   lib/dirname.h
+  lib/dosname.h
   lib/errno.in.h
   lib/float+.h
   lib/float.in.h
@@ -372,17 +369,13 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdbool.in.h
   lib/stddef.in.h
   lib/stdint.in.h
-  lib/stdio-write.c
   lib/stdio.in.h
   lib/stdlib.in.h
-  lib/strcasecmp.c
   lib/strchrnul.c
   lib/strchrnul.valgrind
   lib/strerror.c
   lib/string.in.h
-  lib/strings.in.h
   lib/stripslash.c
-  lib/strncasecmp.c
   lib/strndup.c
   lib/strnlen.c
   lib/sysexits.in.h
@@ -396,9 +389,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/00gnulib.m4
   m4/alloca.m4
   m4/argp.m4
-  m4/asm-underscore.m4
   m4/dirname.m4
-  m4/dos.m4
   m4/double-slash-root.m4
   m4/errno_h.m4
   m4/extensions.m4
@@ -424,11 +415,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdint_h.m4
   m4/stdio_h.m4
   m4/stdlib_h.m4
-  m4/strcase.m4
   m4/strchrnul.m4
   m4/strerror.m4
   m4/string_h.m4
-  m4/strings_h.m4
   m4/strndup.m4
   m4/strnlen.m4
   m4/sysexits.m4

@@ -1,5 +1,48 @@
 2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Update to gnulib 7d06b32684363a39fae65c616b84bc7589768106.
+
+	* gnulib/dosname.h: New file.
+	* gnulib/stdio-write.c, gnulib/strcasecmp.c, gnulib/strings.in.h,
+	gnulib/strncasecmp.c, m4/asm-underscore.m4, m4/dos.m4,
+	m4/strcase.m4, m4/strings_h.m4: Delete.
+	* build-aux/arg-nonnull.h, build-aux/c++defs.h,
+	build-aux/warn-on-use.h, gnulib/alloca.c, gnulib/alloca.in.h,
+	gnulib/argp-ba.c, gnulib/argp-eexst.c, gnulib/argp-fmtstream.c,
+	gnulib/argp-fmtstream.h, gnulib/argp-fs-xinl.c, gnulib/argp.h,
+	gnulib/argp-help.c, gnulib/argp-namefrob.h, gnulib/argp-parse.c,
+	gnulib/argp-pin.c, gnulib/argp-pv.c, gnulib/argp-pvh.c,
+	gnulib/argp-xinl.c, gnulib/asnprintf.c, gnulib/basename-lgpl.c,
+	gnulib/dirname.h, gnulib/dirname-lgpl.c, gnulib/errno.in.h,
+	gnulib/float+.h, gnulib/float.in.h, gnulib/getopt1.c,
+	gnulib/getopt.c, gnulib/getopt.in.h, gnulib/getopt_int.h,
+	gnulib/gettext.h, gnulib/intprops.h, gnulib/Makefile.am,
+	gnulib/malloc.c, gnulib/memchr.c, gnulib/mempcpy.c,
+	gnulib/printf-args.c, gnulib/printf-args.h, gnulib/printf-parse.c,
+	gnulib/printf-parse.h, gnulib/progname.c, gnulib/progname.h,
+	gnulib/rawmemchr.c, gnulib/size_max.h, gnulib/sleep.c,
+	gnulib/stdbool.in.h, gnulib/stddef.in.h, gnulib/stdint.in.h,
+	gnulib/stdio.in.h, gnulib/stdlib.in.h, gnulib/strchrnul.c,
+	gnulib/strerror.c, gnulib/string.in.h, gnulib/stripslash.c,
+	gnulib/strndup.c, gnulib/strnlen.c, gnulib/sysexits.in.h,
+	gnulib/unistd.in.h, gnulib/vasnprintf.c, gnulib/vasnprintf.h,
+	gnulib/verify.h, gnulib/vsnprintf.c, gnulib/wchar.in.h adl@haze,
+	gnulib/xsize.h, m4/00gnulib.m4, m4/alloca.m4, m4/argp.m4,
+	m4/dirname.m4, m4/double-slash-root.m4, m4/errno_h.m4,
+	m4/extensions.m4, m4/float_h.m4, m4/getopt.m4, m4/gnulib-cache.m4,
+	m4/gnulib-common.m4, m4/gnulib-comp.m4, m4/gnulib-tool.m4,
+	m4/include_next.m4, m4/intmax_t.m4, m4/inttypes_h.m4,
+	m4/longlong.m4, m4/malloc.m4, m4/memchr.m4, m4/mempcpy.m4,
+	m4/mmap-anon.m4, m4/multiarch.m4, m4/printf.m4, m4/rawmemchr.m4,
+	m4/size_max.m4, m4/sleep.m4, m4/stdbool.m4, m4/stddef_h.m4,
+	m4/stdint_h.m4, m4/stdint.m4, m4/stdio_h.m4, m4/stdlib_h.m4,
+	m4/strchrnul.m4, m4/strerror.m4, m4/string_h.m4, m4/strndup.m4,
+	m4/strnlen.m4, m4/sysexits.m4, m4/unistd_h.m4, m4/vasnprintf.m4,
+	m4/vsnprintf.m4, m4/warn-on-use.m4, m4/wchar_h.m4, m4/wchar_t.m4,
+	m4/wint_t.m4, m4/xsize.m4: Update.
+
+2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/reduce.hxx (semi_reduce): Check
 	precondition.
 

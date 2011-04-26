@@ -1,6 +1,6 @@
 /* A GNU-like <stdlib.h>.
 
-   Copyright (C) 1995, 2001-2004, 2006-2010 Free Software Foundation, Inc.
+   Copyright (C) 1995, 2001-2004, 2006-2011 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -49,18 +49,23 @@
 # include <sys/loadavg.h>
 #endif
 
+#if @GNULIB_RANDOM_R@
+
 /* OSF/1 5.1 declares 'struct random_data' in <random.h>, which is included
-   from <stdlib.h> if _REENTRANT is defined.  Include it always.  */
-#if @HAVE_RANDOM_H@
-# include <random.h>
-#endif
+   from <stdlib.h> if _REENTRANT is defined.  Include it whenever we need
+   'struct random_data'.  */
+# if @HAVE_RANDOM_H@
+#  include <random.h>
+# endif
 
-#if !@HAVE_STRUCT_RANDOM_DATA@ || (@GNULIB_RANDOM_R@ && !@HAVE_RANDOM_R@) \
-    || defined GNULIB_POSIXCHECK
-# include <stdint.h>
-#endif
+# if !@HAVE_STRUCT_RANDOM_DATA@ || !@HAVE_RANDOM_R@
+#  include <stdint.h>
+# endif
 
-#if !@HAVE_STRUCT_RANDOM_DATA@
+# if !@HAVE_STRUCT_RANDOM_DATA@
+/* Define 'struct random_data'.
+   But allow multiple gnulib generated <stdlib.h> replacements to coexist.  */
+#  if !GNULIB_defined_struct_random_data
 struct random_data
 {
   int32_t *fptr;                /* Front pointer.  */
@@ -71,6 +76,9 @@ struct random_data
   int rand_sep;                 /* Distance between front and rear.  */
   int32_t *end_ptr;             /* Pointer behind state table.  */
 };
+#   define GNULIB_defined_struct_random_data 1
+#  endif
+# endif
 #endif
 
 #if (@GNULIB_MKSTEMP@ || @GNULIB_GETSUBOPT@ || defined GNULIB_POSIXCHECK) && ! defined __GLIBC__ && !((defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__)
@@ -80,10 +88,10 @@ struct random_data
 # include <unistd.h>
 #endif
 
-#ifndef __attribute__
-# if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 8)
-#  define __attribute__(Spec)   /* empty */
-# endif
+#if 3 <= __GNUC__ || __GNUC__ == 2 && 8 <= __GNUC_MINOR__
+# define _GL_ATTRIBUTE_NORETURN __attribute__ ((__noreturn__))
+#else
+# define _GL_ATTRIBUTE_NORETURN
 #endif
 
 /* The definitions of _GL_FUNCDECL_RPL etc. are copied here.  */
@@ -111,7 +119,7 @@ struct random_data
 /* Terminate the current process with the given return code, without running
    the 'atexit' handlers.  */
 # if !@HAVE__EXIT@
-_GL_FUNCDECL_SYS (_Exit, void, (int status) __attribute__ ((__noreturn__)));
+_GL_FUNCDECL_SYS (_Exit, void, (int status) _GL_ATTRIBUTE_NORETURN);
 # endif
 _GL_CXXALIAS_SYS (_Exit, void, (int status));
 _GL_CXXALIASWARN (_Exit);
@@ -247,9 +255,14 @@ _GL_WARN_ON_USE (ptsname, "grantpt is not portable - "
 # endif
 #endif
 
+/* If _GL_USE_STDLIB_ALLOC is nonzero, the including module does not
+   rely on GNU or POSIX semantics for malloc and realloc (for example,
+   by never specifying a zero size), so it does not need malloc or
+   realloc to be redefined.  */
 #if @GNULIB_MALLOC_POSIX@
 # if @REPLACE_MALLOC@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#  if !((defined __cplusplus && defined GNULIB_NAMESPACE) \
+        || _GL_USE_STDLIB_ALLOC)
 #   undef malloc
 #   define malloc rpl_malloc
 #  endif
@@ -259,11 +272,26 @@ _GL_CXXALIAS_RPL (malloc, void *, (size_t size));
 _GL_CXXALIAS_SYS (malloc, void *, (size_t size));
 # endif
 _GL_CXXALIASWARN (malloc);
-#elif defined GNULIB_POSIXCHECK
+#elif defined GNULIB_POSIXCHECK && !_GL_USE_STDLIB_ALLOC
 # undef malloc
 /* Assume malloc is always declared.  */
 _GL_WARN_ON_USE (malloc, "malloc is not POSIX compliant everywhere - "
                  "use gnulib module malloc-posix for portability");
+#endif
+
+/* Convert a multibyte character to a wide character.  */
+#if @GNULIB_MBTOWC@
+# if @REPLACE_MBTOWC@
+#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#   undef mbtowc
+#   define mbtowc rpl_mbtowc
+#  endif
+_GL_FUNCDECL_RPL (mbtowc, int, (wchar_t *pwc, const char *s, size_t n));
+_GL_CXXALIAS_RPL (mbtowc, int, (wchar_t *pwc, const char *s, size_t n));
+# else
+_GL_CXXALIAS_SYS (mbtowc, int, (wchar_t *pwc, const char *s, size_t n));
+# endif
+_GL_CXXALIASWARN (mbtowc);
 #endif
 
 #if @GNULIB_MKDTEMP@
@@ -508,7 +536,8 @@ _GL_WARN_ON_USE (setstate_r, "setstate_r is unportable - "
 
 #if @GNULIB_REALLOC_POSIX@
 # if @REPLACE_REALLOC@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#  if !((defined __cplusplus && defined GNULIB_NAMESPACE) \
+        || _GL_USE_STDLIB_ALLOC)
 #   undef realloc
 #   define realloc rpl_realloc
 #  endif
@@ -518,7 +547,7 @@ _GL_CXXALIAS_RPL (realloc, void *, (void *ptr, size_t size));
 _GL_CXXALIAS_SYS (realloc, void *, (void *ptr, size_t size));
 # endif
 _GL_CXXALIASWARN (realloc);
-#elif defined GNULIB_POSIXCHECK
+#elif defined GNULIB_POSIXCHECK && !_GL_USE_STDLIB_ALLOC
 # undef realloc
 /* Assume realloc is always declared.  */
 _GL_WARN_ON_USE (realloc, "realloc is not POSIX compliant everywhere - "
@@ -579,7 +608,7 @@ _GL_FUNCDECL_RPL (setenv, int,
 _GL_CXXALIAS_RPL (setenv, int,
                   (const char *name, const char *value, int replace));
 # else
-#  if !@HAVE_SETENV@
+#  if !@HAVE_DECL_SETENV@
 _GL_FUNCDECL_SYS (setenv, int,
                   (const char *name, const char *value, int replace)
                   _GL_ARG_NONNULL ((1)));
@@ -587,7 +616,9 @@ _GL_FUNCDECL_SYS (setenv, int,
 _GL_CXXALIAS_SYS (setenv, int,
                   (const char *name, const char *value, int replace));
 # endif
+# if !(@REPLACE_SETENV@ && !@HAVE_DECL_SETENV@)
 _GL_CXXALIASWARN (setenv);
+# endif
 #elif defined GNULIB_POSIXCHECK
 # undef setenv
 # if HAVE_RAW_DECL_SETENV
@@ -697,18 +728,35 @@ _GL_WARN_ON_USE (unlockpt, "unlockpt is not portable - "
 _GL_FUNCDECL_RPL (unsetenv, int, (const char *name) _GL_ARG_NONNULL ((1)));
 _GL_CXXALIAS_RPL (unsetenv, int, (const char *name));
 # else
-#  if !@HAVE_UNSETENV@
+#  if !@HAVE_DECL_UNSETENV@
 _GL_FUNCDECL_SYS (unsetenv, int, (const char *name) _GL_ARG_NONNULL ((1)));
 #  endif
 _GL_CXXALIAS_SYS (unsetenv, int, (const char *name));
 # endif
+# if !(@REPLACE_UNSETENV@ && !@HAVE_DECL_UNSETENV@)
 _GL_CXXALIASWARN (unsetenv);
+# endif
 #elif defined GNULIB_POSIXCHECK
 # undef unsetenv
 # if HAVE_RAW_DECL_UNSETENV
 _GL_WARN_ON_USE (unsetenv, "unsetenv is unportable - "
                  "use gnulib module unsetenv for portability");
 # endif
+#endif
+
+/* Convert a wide character to a multibyte character.  */
+#if @GNULIB_WCTOMB@
+# if @REPLACE_WCTOMB@
+#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#   undef wctomb
+#   define wctomb rpl_wctomb
+#  endif
+_GL_FUNCDECL_RPL (wctomb, int, (char *s, wchar_t wc));
+_GL_CXXALIAS_RPL (wctomb, int, (char *s, wchar_t wc));
+# else
+_GL_CXXALIAS_SYS (wctomb, int, (char *s, wchar_t wc));
+# endif
+_GL_CXXALIASWARN (wctomb);
 #endif
 
 
