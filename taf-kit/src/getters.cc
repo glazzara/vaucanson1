@@ -1,8 +1,8 @@
-// getters.xx: this file is part of the Vaucanson project.
+// getters.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -75,6 +75,19 @@ unsigned get_unsigned (const arguments_t& args, int n)
   return result;
 }
 
+semiring_elt_value_t get_weight(const arguments_t& args, int n)
+{
+  const char* s(args.args[n]);
+  std::stringstream ss(s);
+  semiring_elt_value_t result;
+  if ((ss >> result).fail() || !(ss >> std::ws).eof())
+    {
+      std::cerr << "Error: cannot parse `" << s << "' as a weight."
+		<< std::endl;
+      exit(1);
+    }
+  return result;
+}
 
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |

@@ -37,13 +37,14 @@ command_map::register_cmd(const char* section,
   int n_params;
   switch (params)
     {
-    case None:    n_params = 0; break;
-    case Exp:     n_params = 1; break;
-    case Aut:     n_params = 1; break;
-    case AutExp:  n_params = 2; break;
-    case AutAut:  n_params = 2; break;
-    case AutInt:  n_params = 2; break;
-    case AutWord: n_params = 2; break;
+    case None:      n_params = 0; break;
+    case Exp:       n_params = 1; break;
+    case Aut:       n_params = 1; break;
+    case AutExp:    n_params = 2; break;
+    case AutAut:    n_params = 2; break;
+    case AutInt:    n_params = 2; break;
+    case AutWord:   n_params = 2; break;
+    case AutWeight: n_params = 2; break;
     }
 
   std::string s = name;
@@ -106,6 +107,7 @@ command_map::list(std::ostream& ostr, bool expert)
 	case AutAut: *out << " aut1 aut2"; break;
 	case AutInt: *out << " aut n"; break;
 	case AutWord: *out << " aut word"; break;
+	case AutWeight: *out << " aut weight"; break;
 	}
       *out << ": " << command->docstring << std::endl;
     }

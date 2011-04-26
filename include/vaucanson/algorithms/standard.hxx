@@ -3,7 +3,7 @@
 // Vaucanson, a generic library for finite state machines.
 //
 // Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-// 2010 The Vaucanson Group.
+// 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -435,6 +435,16 @@ namespace vcsn {
       }
   }
 
+  template <typename A, typename AI>
+  void
+  left_mult_of_standard_here(Element<A, AI>& aut,
+			     const typename Element<A, AI>::series_set_elt_t& k)
+  {
+    precondition(is_standard(aut));
+    left_ext_mult_of_standard_inside(aut.structure(), aut,
+				     *aut.initial().begin(), k);
+  }
+
   /*----------------------------------.
   | right_ext_mult_of_standard_inside  |
   `----------------------------------*/
@@ -455,6 +465,21 @@ namespace vcsn {
       aut.set_final(*it, aut.get_final(*it) * k);
   }
 
+  template <typename A, typename AI>
+  void
+  right_mult_of_standard_here(Element<A, AI>& aut,
+			      const typename Element<A, AI>::series_set_elt_t& k)
+  {
+    typedef Element<A, AI> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+
+    precondition(is_standard(aut));
+    std::list<hstate_t> finals;
+    for_all_final_states(it, aut)  finals.push_back(*it);
+
+    right_ext_mult_of_standard_inside(aut.structure(), aut,
+				      finals, k);
+  }
 
   /*------------------.
   | star_of_standard  |

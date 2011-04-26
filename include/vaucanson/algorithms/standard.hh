@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2010 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -66,6 +66,11 @@
 
 // INTERFACE: Automaton star_of_standard(const Automaton& a) { return vcsn::star_of_standard(*a); }
 // INTERFACE: GenAutomaton star_of_standard(const GenAutomaton& a) { return vcsn::star_of_standard(*a); }
+
+// INTERFACE: void left_mult_of_standard_here(Automaton& a, const Automaton::series_set_elt_t& k) { return vcsn::left_mult_of_standard_here(a, k);
+// INTERFACE: void left_mult_of_standard_here(GenAutomaton& a, const GenAutomaton::series_set_elt_t& k) { return vcsn::left_mult_of_standard_here(a, k);
+// INTERFACE: void right_mult_of_standard_here(Automaton& a, const Automaton::series_set_elt_t& k) { return vcsn::right_mult_of_standard_here(a, k);
+// INTERFACE: void right_mult_of_standard_here(GenAutomaton& a, const GenAutomaton::series_set_elt_t& k) { return vcsn::right_mult_of_standard_here(a, k);
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
@@ -220,6 +225,26 @@ namespace vcsn {
   template<typename A, typename AI>
   Element<A, AI>
   star_of_standard(const Element<A, AI>& a);
+
+  /**
+   * In-place left exterior multiplication by a weight.
+   *
+   * @see standardize(), is_standard(), right_mult_of_standard_here()
+   */
+  template <typename A, typename AI>
+  void
+  left_mult_of_standard_here(Element<A, AI>& aut,
+			     const typename Element<A, AI>::series_set_elt_t& k);
+
+  /**
+   * In-place right exterior multiplication by a weight.
+   *
+   * @see standardize(), is_standard(), left_mult_of_standard_here()
+   */
+  template <typename A, typename AI>
+  void
+  right_mult_of_standard_here(Element<A, AI>& aut,
+			      const typename Element<A, AI>::series_set_elt_t& k);
 
   /** @} */
 

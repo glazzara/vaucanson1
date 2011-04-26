@@ -1,5 +1,22 @@
 2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Implement left-mult and right-mult.
+
+	* include/vaucanson/algorithms/standard.hh,
+	include/vaucanson/algorithms/standard.hxx
+	(left_mult_of_standard_here, right_mult_of_standard_here): New
+	functions.
+	* taf-kit/src/cmd_gen.cc (left_mult_command, right_mult_command):
+	New commands.
+	* taf-kit/src/getters.cc, taf-kit/src/getters.hh (get_weight): New
+	function.
+	* taf-kit/src/commands.cc, taf-kit/src/commands.hh: Add support
+	for the "AutWeight" command prototype.
+	* taf-kit/tests/vcsn-char-b.test, taf-kit/tests/vcsn-char-r.test:
+	Add some tests.
+
+2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix op_parse for weights.
 
 	* include/vaucanson/algebra/concept/semiring_base.hxx (op_parse):

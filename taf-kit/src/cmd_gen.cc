@@ -144,6 +144,34 @@ star_command(const arguments_t& args)
 };
 
 static int
+left_mult_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+
+  series_set_elt_t w(a.structure().series());
+  w.assoc(identity_value(SELECT(monoid_t),
+			 SELECT(monoid_elt_value_t)), get_weight(args, 2));
+
+  left_mult_of_standard_here(a, w);
+  g_res.keep(a);
+  return 0;
+};
+
+static int
+right_mult_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+
+  series_set_elt_t w(a.structure().series());
+  w.assoc(identity_value(SELECT(monoid_t),
+			 SELECT(monoid_elt_value_t)), get_weight(args, 2));
+
+  right_mult_of_standard_here(a, w);
+  g_res.keep(a);
+  return 0;
+};
+
+static int
 aut_to_exp_command(const arguments_t& args)
 {
   rat_exp_t e = aut_to_exp(get_aut(args, 1), HChooser());
@@ -206,6 +234,8 @@ star_S_command(const arguments_t& args)
   return 0;
 };
 
+
+
 BEGIN_COMMAND_GROUP(cmd_gen,
 		    "1. Operations on all automata and rational expressions:");
 // Graphs
@@ -233,6 +263,10 @@ COMMAND_ENTRY(concatenate, AutAut,
 	      "Build the concatenation of two standard automata.");
 COMMAND_ENTRY(star, Aut,
 	      "Build the star of a standard automaton.");
+COMMAND_ENTRY(left_mult, AutWeight,
+	      "Build the left-product of `aut' and `weight'.");
+COMMAND_ENTRY(right_mult, AutWeight,
+	      "Build the right-product of `aut' and `weight'.");
 COMMAND_ENTRY(aut_to_exp, Aut,
 	      "Build an expression denoting the behaviour of `aut' (Naive heuristic).");
 COMMAND_ENTRY(aut_to_exp_SO, Aut,
