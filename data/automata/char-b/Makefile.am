@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2011 The
 ## Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
@@ -17,7 +17,8 @@ include $(top_srcdir)/vaucanson.mk
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
-noinst_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
+noinst_PROGRAMS = a1 b1
+bin_PROGRAMS = divkbaseb-char-b ladybird-char-b doublering-char-b
 
 nodist_char_b_automata_DATA =			\
   a1.xml					\
@@ -43,20 +44,20 @@ b1.xml: b1$(EXEEXT)
 	./b1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
-divkbaseb_CPPFLAGS = $(AM_CPPFLAGS)
-divkbaseb_SOURCES = divkbaseb.cc
-div3base2.xml: divkbaseb$(EXEEXT)
-	./divkbaseb$(EXEEXT) 3 2 xml >$@.tmp
+divkbaseb_char_b_CPPFLAGS = $(AM_CPPFLAGS)
+divkbaseb_char_b_SOURCES = divkbaseb.cc
+div3base2.xml: divkbaseb-char-b$(EXEEXT)
+	./divkbaseb-char-b$(EXEEXT) 3 2 xml >$@.tmp
 	mv $@.tmp $@
 
-ladybird_CPPFLAGS = $(AM_CPPFLAGS)
-ladybird_SOURCES = ladybird.cc
-ladybird-6.xml: ladybird$(EXEEXT)
-	./ladybird$(EXEEXT) 6 xml >$@.tmp
+ladybird_char_b_CPPFLAGS = $(AM_CPPFLAGS)
+ladybird_char_b_SOURCES = ladybird.cc
+ladybird-6.xml: ladybird-char-b$(EXEEXT)
+	./ladybird-char-b$(EXEEXT) 6 xml >$@.tmp
 	mv $@.tmp $@
 
-double_ring_CPPFLAGS = $(AM_CPPFLAGS)
-double_ring_SOURCES = double_ring.cc
-double-3-1.xml: double_ring$(EXEEXT)
-	./double_ring$(EXEEXT) 3 1 xml >$@.tmp
+doublering_char_b_CPPFLAGS = $(AM_CPPFLAGS)
+doublering_char_b_SOURCES = double_ring.cc
+double-3-1.xml: doublering-char-b$(EXEEXT)
+	./doublering-char-b$(EXEEXT) 3 1 xml >$@.tmp
 	mv $@.tmp $@

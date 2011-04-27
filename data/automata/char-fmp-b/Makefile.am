@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009 The
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2011 The
 ## Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
@@ -17,7 +17,8 @@ include $(top_srcdir)/vaucanson.mk
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
-noinst_PROGRAMS = t1 u1 quotkbaseb
+noinst_PROGRAMS = t1 u1
+bin_PROGRAMS = quotkbaseb-char-fmp-b
 
 nodist_char_fmp_b_automata_DATA =	\
 	t1.xml				\
@@ -40,9 +41,9 @@ u1.xml: u1$(EXEEXT)
 	./u1$(EXEEXT) >$@.tmp
 	mv $@.tmp $@
 
-quotkbaseb_CPPFLAGS = $(AM_CPPFLAGS)
-quotkbaseb_SOURCES = quotkbaseb.cc
+quotkbaseb_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS)
+quotkbaseb_char_fmp_b_SOURCES = quotkbaseb.cc
 
-quot3base2.xml: quotkbaseb$(EXEEXT)
-	./quotkbaseb$(EXEEXT) 3 2 >$@.tmp
+quot3base2.xml: quotkbaseb-char-fmp-b$(EXEEXT)
+	./quotkbaseb-char-fmp-b$(EXEEXT) 3 2 >$@.tmp
 	mv $@.tmp $@

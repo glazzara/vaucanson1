@@ -1,3 +1,14 @@
+2011-04-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Install some automaton factories.
+
+	* data/automata/char-b/Makefile.am (divkbaseb, ladybird,
+	double_ring): Rename these as...
+	(divkbaseb-char-b, ladybird-char-b, doublering-char-b): ... these,
+	and install them.
+	* data/automata/char-fmp-b/Makefile.am (quotkbaseb): Rename as ...
+	(quotkbaseb-char-fmp-b): ... this and install it.
+
 2011-04-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix operator precedence for kratexp parser.
