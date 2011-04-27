@@ -56,7 +56,10 @@ get_word(Element<S, T>& aut, const std::string& s);
 bool file_exists(const char* name, bool abort_if_empty = true);
 std::string locate_file(const arguments_t& args, const std::string& s,
 			bool abort_if_empty = true);
-
+# ifdef WITH_TWO_ALPHABETS
+std::string locate_fmp_file(const arguments_t& args, const std::string& s,
+			bool abort_if_empty = true);
+# endif // !WITH_TWO_ALPHABETS
 automaton_t get_aut (const arguments_t& args, int n);
 
 #ifdef WITH_TWO_ALPHABETS

@@ -1,3 +1,16 @@
+2011-04-27  David Moreira <moreira@lrde.epita.fr>
+
+	Fix search path for automaton with two alphabets
+
+	* taf-kit/src/getter.cc: Create the locate_fmp_file
+	calling get_fmp_aut_path into library_commands.hh.
+	Fix get_boolean_aut for calling locate_fmp_file.
+	* taf-kit/src/getter.hh: Create the locate_fmp_file
+	function.
+	* /taf-kit/src/library_commands.hh: Create
+	get_fmp_aut_path deleting the pattern '-fmp' from the program
+	name. Factorize get_automata to avoid copying code.
+
 2011-04-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Implement a is_positive_semiring() function in semiring implementations.

@@ -168,6 +168,34 @@ locate_file(const arguments_t& args, const std::string& s,
   return s;
 }
 
+# ifdef WITH_TWO_ALPHABETS
+std::string
+locate_fmp_file(const arguments_t& args, const std::string& s,
+	    bool abort_if_empty)
+{
+  // First, try to load the file as given.
+  const char* ss = s.c_str();
+  if (file_exists(ss))
+    return s;
+
+  // Then, try the automata path.
+  const std::list<std::string>& path = get_fmp_automata_path();
+
+  std::list<std::string>::const_iterator i;
+  for (i = path.begin(); i != path.end(); ++i)
+    {
+      std::string file = *i + "/" + s;
+      const char* f = file.c_str();
+      if (file_exists(f, abort_if_empty))
+	return file;
+    }
+
+  // If we failed, return the filename unchanged, so
+  // we can complain about it.
+  return s;
+}
+#endif //! WITH_TWO_ALPHABETS
+
 # ifndef WITH_TWO_ALPHABETS
 /// Getter for RatExp.
 rat_exp_t get_exp(const arguments_t& args, const int& n)
@@ -358,7 +386,7 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
     return a;
   }
 
-  std::string ifile = locate_file(args, s);
+  std::string ifile = locate_fmp_file(args, s);
   std::istream* is = new std::ifstream(ifile.c_str());
 
   if (not is->fail())
