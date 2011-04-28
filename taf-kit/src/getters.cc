@@ -425,67 +425,6 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
     exit(1);
   }
 }
-
-mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::ret
-get_pair_aut(const arguments_t& args, const int& n)
-{
-  const std::string& s = args.args[n];
-
-  if (s == "-")
-  {
-    mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::ret a =
-      boost::apply_visitor(pair_automaton_getter
-			   (g_res.name, g_res.input_aut_type),
-			   g_res.output);
-
-    // We don't set the writing data before return because the
-    // pair automaton will be passed to pair_to_fmp and we will
-    // force the writing data on the resulting fmp.
-
-    return a;
-  }
-
-  std::string ifile = locate_file(args, s);
-  std::istream* is = new std::ifstream(ifile.c_str());
-
-  if (not is->fail())
-  {
-    using namespace vcsn::tools;
-    using namespace vcsn::xml;
-
-    mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::ret a =
-      mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::
-      make_automaton(mute_ltl_to_pair<automaton_t::set_t,
-		                      automaton_t::value_t>::ret_alphabet_t());
-
-    switch (g_res.input_aut_type)
-      {
-      case INPUT_TYPE_XML:
-	*is >> automaton_loader(a, string_out (), XML ());
-	break;
-      case INPUT_TYPE_FSM:
-	fsm_load(*is, a);
-	break;
-      default:
-	std::cerr << "Error: could not load automaton `"
-		  << ifile << "'." << std::endl;
-	exit(1);
-      }
-
-    delete is;
-
-    // We don't set the writing data before return because the
-    // pair automaton will be passed to pair_to_fmp and we will
-    // force the writing data on the resulting fmp.
-    return a;
-  }
-  else
-  {
-    std::cerr << "Error: could not load automaton `"
-	      << ifile << "'." << std::endl;
-    exit(1);
-  }
-}
 #endif // !WITH_TWO_ALPHABETS
 
 # ifdef WITH_TWO_ALPHABETS

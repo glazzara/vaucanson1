@@ -1,3 +1,12 @@
+2011-04-28  David Moreira  <moreira@knokke-le-zout.lrde.epita.fr>
+
+	Clean code on taf-kit sources.
+
+	* taf-kit/src/library_commands.hh: Delete dead code from search
+	path fix from taf-kit.
+	* taf-kit/src/getters.cc, taf-kit/src/getters.hh: Delete the
+	get_pair_aut function (cause: unused).
+
 2011-04-27  David Moreira <moreira@lrde.epita.fr>
 
 	Fix search path for automaton with two alphabets
@@ -7,7 +16,7 @@
 	Fix get_boolean_aut for calling locate_fmp_file.
 	* taf-kit/src/getter.hh: Create the locate_fmp_file
 	function.
-	* /taf-kit/src/library_commands.hh: Create
+	* taf-kit/src/library_commands.hh: Create
 	get_fmp_aut_path deleting the pattern '-fmp' from the program
 	name. Factorize get_automata to avoid copying code.
 

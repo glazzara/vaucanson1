@@ -128,62 +128,6 @@ get_fmp_automata_path()
 }
 #endif // !WITH_TO_ALPHABETS
 
-// static const std::list<std::string>&
-// get_automata_path()
-// {
-//   static std::list<std::string> path_list;
-
-//   if (path_list.empty())
-//     {
-//       const char* base_path = getenv("VCSN_DATA_PATH");
-//       if (base_path == 0)
-// 	base_path = VCSN_DATA_PATH;
-
-//       // Strip "vcsn-" from the program name.
-//       const char* suffix = strrchr(program_name, '/');
-//       suffix = suffix ? suffix + 6 : program_name + 5;
-
-//       const std::string lib_dir = std::string("/automata/") + suffix;
-
-//       std::string path;
-
-//       while (*base_path)
-// 	{
-// 	  const char* sep = strchr(base_path, ':');
-
-// 	  if (sep == base_path)
-// 	    {
-// 	      // Ignore an empty path.
-// 	      ++ base_path;
-// 	      continue;
-// 	    }
-
-// 	  // Did we find a colon?
-// 	  if (sep > 0)
-// 	    path = std::string(base_path, sep - base_path) + lib_dir;
-// 	  else
-// 	    path = std::string(base_path) + lib_dir;
-
-// 	  base_path = sep + 1;
-
-// 	  struct stat s;
-
-// 	  if ((stat(path.c_str(), &s) == 0) && (S_ISDIR(s.st_mode)))
-// 	    {
-// 	      path_list.push_back(path);
-// 	    }
-
-// 	  // No colon found, do not loop.
-// 	  if (sep == 0)
-// 	    break;
-// 	}
-
-//       // if (path_list.empty())
-//       // No search path!  It's OK, not all contexts have search directories.
-//     }
-//   return path_list;
-// }
-
 static int
 list_automata_command()
 {

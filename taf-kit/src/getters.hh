@@ -63,9 +63,6 @@ std::string locate_fmp_file(const arguments_t& args, const std::string& s,
 automaton_t get_aut (const arguments_t& args, int n);
 
 #ifdef WITH_TWO_ALPHABETS
-mute_ltl_to_pair<automaton_t::set_t, automaton_t::value_t>::ret
-get_pair_aut(const arguments_t& args, const int& n);
-
 IOAUT_CONTEXT::automaton_t
 get_boolean_aut(const arguments_t& args, const int& n);
 #endif
