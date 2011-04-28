@@ -101,7 +101,7 @@ done
 ## Automaton.  ##
 ## ----------- ##
 
-for kind in boolean int_boolean r z z2z z_max_plus z_min_plus char_char_boolean int_int_boolean
+for kind in boolean int_boolean r z f2 z_max_plus z_min_plus char_char_boolean int_int_boolean
 do
   generate \
       context_headers_${kind} \

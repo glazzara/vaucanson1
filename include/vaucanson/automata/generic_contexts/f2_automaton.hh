@@ -1,4 +1,4 @@
-// z2z_automaton.hh: this file is part of the Vaucanson project.
+// f2_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -20,9 +20,9 @@
  * VCSN_GRAPH_IMPL could be changed.
  */
 
-# include GRAPH_CONTEXT_HEADER_(z2z_automaton_structures.hh)
+# include GRAPH_CONTEXT_HEADER_(f2_automaton_structures.hh)
 
-# define VCSN_CONTEXT_NAMESPACE namespace z2z_automaton
+# define VCSN_CONTEXT_NAMESPACE namespace f2_automaton
 
 # include <vaucanson/contexts/automaton_functions.thh>
 

@@ -38,7 +38,7 @@ vaucanson/contexts/generic_series.thh		\
 vaucanson/contexts/polynom_series.thh		\
 vaucanson/contexts/r_semiring.thh		\
 vaucanson/contexts/q_semiring.thh		\
-vaucanson/contexts/z2z_semiring.thh		\
+vaucanson/contexts/f2_semiring.thh		\
 vaucanson/contexts/ratseries_semiring.thh	\
 vaucanson/contexts/transducer.thh		\
 vaucanson/contexts/fmp_transducer.thh		\
@@ -461,6 +461,8 @@ vaucanson/automata/generic_contexts/boolean_transducer.hh		\
 vaucanson/automata/generic_contexts/boolean_transducer_structures.hh    \
 vaucanson/automata/generic_contexts/fmp_transducer.hh			\
 vaucanson/automata/generic_contexts/fmp_transducer_structures.hh        \
+vaucanson/automata/generic_contexts/f2_automaton.hh   			\
+vaucanson/automata/generic_contexts/f2_automaton_structures.hh     	\
 vaucanson/automata/generic_contexts/r_automaton.hh			\
 vaucanson/automata/generic_contexts/r_automaton_structures.hh           \
 vaucanson/automata/generic_contexts/z_automaton.hh			\

@@ -18,7 +18,7 @@ AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
 bin_PROGRAMS = vcsn-char-b vcsn-char-z vcsn-char-r vcsn-char-fmp-b 	\
-               vcsn-int-b vcsn-int-z vcsn-int-fmp-b vcsn-char-z2z	\
+               vcsn-int-b vcsn-int-z vcsn-int-fmp-b vcsn-char-f2	\
 	       vcsn-int-fmp-z vcsn-char-fmp-z 				\
 	       vcsn-char-char-b vcsn-char-char-z			\
 	       vcsn-int-int-b vcsn-int-int-z				\
@@ -75,10 +75,10 @@ vcsn_char_q_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=q_automaton \
 		       -DVCSN_USE_LIB -DWITH_WEIGHTS
 vcsn_char_q_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-q.la
 
-vcsn_char_z2z_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_r.cc
-vcsn_char_z2z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z2z_automaton \
+vcsn_char_f2_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_r.cc
+vcsn_char_f2_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=f2_automaton \
 			-DVCSN_USE_LIB -DWITH_WEIGHTS
-vcsn_char_z2z_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-z2z.la
+vcsn_char_f2_LDADD = $(LDADD) $(top_builddir)/lib/libvcsn-f2.la
 
 vcsn_char_fmp_b_SOURCES = $(COMMON_SOURCES) cmd_fmp.cc
 vcsn_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS) \

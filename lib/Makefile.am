@@ -23,6 +23,7 @@ include vcsn-b/libvcsn-b.mk
 include vcsn-int-b/libvcsn-int-b.mk
 include vcsn-r/libvcsn-r.mk
 include vcsn-q/libvcsn-q.mk
+include vcsn-f2/libvcsn-f2.mk
 include vcsn-z/libvcsn-z.mk
 include vcsn-int-z/libvcsn-int-z.mk
 include vcsn-z-max/libvcsn-z-max.mk
@@ -45,7 +46,7 @@ maintainer-clean-local:
 	       $(top_builddir)/lib/vcsn-r		\
 	       $(top_builddir)/lib/vcsn-q		\
 	       $(top_builddir)/lib/vcsn-z		\
-	       $(top_builddir)/lib/vcsn-z2z		\
+	       $(top_builddir)/lib/vcsn-f2		\
 	       $(top_builddir)/lib/vcsn-int-z		\
 	       $(top_builddir)/lib/vcsn-z-min		\
 	       $(top_builddir)/lib/vcsn-z-max		\
@@ -64,6 +65,7 @@ maintainer-clean-local:
 	       $(top_srcdir)/lib/vcsn-int-b		\
 	       $(top_srcdir)/lib/vcsn-r			\
 	       $(top_srcdir)/lib/vcsn-q			\
+	       $(top_srcdir)/lib/vcsn-f2		\
 	       $(top_srcdir)/lib/vcsn-z			\
 	       $(top_srcdir)/lib/vcsn-int-z		\
 	       $(top_srcdir)/lib/vcsn-z-min		\
