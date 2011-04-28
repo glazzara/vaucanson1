@@ -234,7 +234,23 @@ star_S_command(const arguments_t& args)
   return 0;
 };
 
-
+static int
+semiring_info_command(const arguments_t& args)
+{
+  std::cout << "zero: ";
+  op_rout(SELECT(semiring_t), std::cout,
+	  zero_value(SELECT(semiring_t), SELECT(semiring_elt_value_t)));
+  std::cout << "\nidentity: ";
+  op_rout(SELECT(semiring_t), std::cout,
+	  identity_value(SELECT(semiring_t), SELECT(semiring_elt_value_t)));
+  std::cout
+    << "\nis positive: "
+    << is_positive_semiring(SELECT(semiring_t), SELECT(semiring_elt_value_t))
+    << "\nshow identity: "
+    << show_identity_value(SELECT(semiring_t), SELECT(semiring_elt_value_t))
+    << std::endl;
+  return 0;
+}
 
 BEGIN_COMMAND_GROUP(cmd_gen,
 		    "1. Operations on all automata and rational expressions:");
@@ -280,4 +296,7 @@ COMMAND_ENTRY(cauchy_S, AutAut,
 	      "Build a standard Cauchy product of two automata.");
 COMMAND_ENTRY(star_S, Aut,
 	      "Build a standard star of an automaton.");
+// Miscelaneous commands
+COMMAND_ENTRY_EXPERT(semiring_info, None,
+		     "Debug information about the semiring.");
 END_COMMAND_GROUP

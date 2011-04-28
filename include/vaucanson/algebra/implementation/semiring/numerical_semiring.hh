@@ -52,6 +52,10 @@ namespace vcsn {
     Element<algebra::NumericalSemiring, T>
     op_choose(const algebra::NumericalSemiring& s, SELECTOR(T));
 
+    template<typename T>
+    bool
+    is_positive_semiring(SELECTOR(algebra::NumericalSemiring), SELECTOR(T));
+
     /*-----------------------------.
     | specializations for integers |
     `-----------------------------*/
@@ -97,6 +101,9 @@ namespace vcsn {
     Element<algebra::NumericalSemiring, bool>
     op_choose_non_starable(const algebra::NumericalSemiring& set,
 			   SELECTOR(bool));
+
+    inline bool
+    is_positive_semiring(SELECTOR(algebra::NumericalSemiring), SELECTOR(bool));
 
     /*-------------------------.
     | goodies for real numbers |
