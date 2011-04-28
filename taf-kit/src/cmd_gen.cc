@@ -16,6 +16,7 @@
 //
 
 #include "commands.hh"
+#include <vaucanson/algorithms/is_trim.hh>
 #include <vaucanson/algorithms/is_useless.hh>
 
 //-- Graph functions

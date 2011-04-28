@@ -1,5 +1,11 @@
 2011-04-28  Guillaume Fiette  <fiette@lrde.epita.fr>
 
+	Add missing include in taf-kit.
+
+	* taf-kit/src/cmd_gen.cc: Include is_trim algorithm.
+
+2011-04-28  Guillaume Fiette  <fiette@lrde.epita.fr>
+
 	Change z2z to f2.
 
 	* include/vaucanson/automata/generic_contexts/f2_automaton.hh,
