@@ -1,5 +1,11 @@
 2011-05-02  Guillaume Fiette  <fiette@lrde.epita.fr>
 
+	Add tests for f2 in taf-kit.
+
+	* taf-kit/tests/vcsn-char-f2.test: Add tests for f2.
+
+2011-05-02  Guillaume Fiette  <fiette@lrde.epita.fr>
+
 	Fix some problems due to the previous rebase on next.
 
 	* taf-kit/src/cmd_r.cc: Fix bug in are_equivalent_command
