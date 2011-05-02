@@ -135,15 +135,15 @@ namespace vcsn {
     | Mutiplication for Z/2Z |
     `-----------------------*/
 
-    template<>
-    void op_in_mul<2, bool, bool>(const algebra::CyclicSemiring<2>&,
+    inline
+    void op_in_mul(const algebra::CyclicSemiring<2>&,
 				  bool& dst, bool arg)
     {
       dst = dst && arg;
     }
 
-    template<>
-    bool op_mul<2, bool, bool>(const algebra::CyclicSemiring<2>&, bool a, bool b)
+    inline
+    bool op_mul(const algebra::CyclicSemiring<2>&, bool a, bool b)
     {
       return (a && b);
     }
@@ -168,15 +168,15 @@ namespace vcsn {
     | Addition for Z/2Z |
     `------------------*/
 
-    template<>
-    void op_in_add<2, bool, bool>(const algebra::CyclicSemiring<2>&,
+    inline
+    void op_in_add(const algebra::CyclicSemiring<2>&,
 				  bool& dst, bool arg)
     {
       dst = dst ^ arg;
     }
 
-    template<>
-    bool op_add<2, bool, bool>(const algebra::CyclicSemiring<2>&, bool a, bool b)
+    inline
+    bool op_add(const algebra::CyclicSemiring<2>&, bool a, bool b)
     {
       return a ^ b;
     }
@@ -215,8 +215,8 @@ namespace vcsn {
     | Division for Z/2Z |
     `------------------*/
 
-    template<>
-    void op_in_div<2, bool, bool> (const algebra::CyclicSemiring<2>& s1,
+    inline
+    void op_in_div (const algebra::CyclicSemiring<2>& s1,
 				   bool& dst, bool arg)
     {
       if (arg == 1)
@@ -224,8 +224,8 @@ namespace vcsn {
       assertion (! "Division by zero.");
     }
 
-    template<>
-    bool op_div<2, bool, bool> (const algebra::CyclicSemiring<2>& s, bool a, bool b)
+    inline
+    bool op_div (const algebra::CyclicSemiring<2>& s, bool a, bool b)
     {
       if (b == 1)
 	return (a);
@@ -256,14 +256,13 @@ namespace vcsn {
     | Substraction for Z/2Z |
     `----------------------*/
 
-    template<>
-    void op_in_sub<2, bool, bool> (const algebra::CyclicSemiring<2>& s1,
+    inline
+    void op_in_sub(const algebra::CyclicSemiring<2>& s1,
 				   bool& dst, bool arg)
     {
       dst = dst ^ arg;
     }
 
-    template<>
     inline
     bool op_sub(const algebra::CyclicSemiring<2>& s,
 		bool a, bool b)

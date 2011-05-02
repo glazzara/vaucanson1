@@ -1,3 +1,15 @@
+2011-05-02  Guillaume Fiette  <fiette@lrde.epita.fr>
+
+	Fix some problems due to the previous rebase on next.
+
+	* taf-kit/src/cmd_r.cc: Fix bug in are_equivalent_command
+	for compatibility with the f2 semiring.
+	* include/vaucanson/algebra/implementation/semiring/cyclic_semiring.hxx:
+	Remove useless inlines.
+	* include/vaucanson/algebra/implementation/semiring/q_number.hh,
+	include/vaucanson/algebra/implementation/semiring/q_number.hxx:
+	Fix the >> operator.
+
 2011-04-28  Guillaume Fiette  <fiette@lrde.epita.fr>
 
 	Add missing include in taf-kit.

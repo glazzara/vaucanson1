@@ -36,7 +36,11 @@ are_equivalent_command(const arguments_t& args)
 
   series_set_elt_t w(a.structure().series());
   w.assoc(identity_value(SELECT(monoid_t),
-                         SELECT(monoid_elt_value_t)), -1);
+                         SELECT(monoid_elt_value_t)),
+	  zero_value(SELECT(semiring_t),
+		     SELECT(semiring_elt_value_t)) -
+	  identity_value(SELECT(semiring_t),
+			 SELECT(semiring_elt_value_t)));
 
   left_mult_of_standard_here(b, w);
   sum_of_standard_here(a, b);

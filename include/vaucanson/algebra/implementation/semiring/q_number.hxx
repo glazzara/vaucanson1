@@ -330,9 +330,15 @@ namespace vcsn {
       return ostr;
     }
 
+  } // !algebra
+
+} // !vcsn
+
+namespace std {
+
     inline
     std::istream&
-    operator>> (std::istream& istr, RationalNumber& a)
+    operator>> (std::istream& istr, vcsn::algebra::RationalNumber& a)
     {
       int num;
 
@@ -353,9 +359,6 @@ namespace vcsn {
 
       return istr;
     }
-
-  } // !algebra
-
-} // !vcsn
+}
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX

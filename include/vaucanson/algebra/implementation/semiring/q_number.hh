@@ -45,7 +45,7 @@ namespace vcsn
      * Implementation of rational numbers
      *
      * Constructors are able to product simplified rational
-     * number. 
+     * number.
      *
      * Operation maintain num_ and den_ coprime.
      *
@@ -181,20 +181,20 @@ namespace vcsn
       unsigned int den_;
       //// @}
     }; // RationalNumber
-    
+
     std::ostream& operator<< (std::ostream&, const RationalNumber&);
-
-    inline
-    std::iostream&
-    operator>> (std::iostream&, RationalNumber&);
-
     /// @}
   } // !algebra
 
   /// @}
 } // !vcsn
 
+namespace std {
 
+    inline
+    std::istream&
+    operator>> (std::istream&, vcsn::algebra::RationalNumber&);
+}
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB
