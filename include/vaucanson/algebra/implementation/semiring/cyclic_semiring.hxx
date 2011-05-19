@@ -37,10 +37,10 @@ namespace vcsn {
     **         (d, x, y).
     */
     inline
-    boost::tuple<uint, int, int>
-    ext_gcd (uint a, uint b)
+    boost::tuple<unsigned int, int, int>
+    ext_gcd (unsigned int a, unsigned int b)
     {
-      uint q, r;
+      unsigned int q, r;
       int x1 = 0;
       int x2 = 1;
       int y1 = 1;
@@ -55,7 +55,7 @@ namespace vcsn {
 	}
 
       if (b == 0)
-	return boost::tuple<uint, int, int> (a, 1, 0);
+	return boost::tuple<unsigned int, int, int> (a, 1, 0);
 
       while (b > 0)
 	{
@@ -71,7 +71,7 @@ namespace vcsn {
 	  y1 = y;
 	}
 
-      return boost::tuple<uint, int, int> (a, x2, y2);
+      return boost::tuple<unsigned int, int, int> (a, x2, y2);
     }
 
     /*---------------.
@@ -189,7 +189,7 @@ namespace vcsn {
     void op_in_div (const algebra::CyclicSemiring<n>& s1,
 		    T& dst, U arg)
     {
-      boost::tuple<uint , int, int> res = ext_gcd (dst, arg);
+      boost::tuple<unsigned int , int, int> res = ext_gcd (dst, arg);
       if (res.get<0> () == 1)
 	{
 	  op_in_mul (s1, dst, res.get<2> ());
@@ -203,7 +203,7 @@ namespace vcsn {
     template<unsigned int n, typename T, typename U>
     T op_div (const algebra::CyclicSemiring<n>& s, T a, U b)
     {
-      boost::tuple<uint , int, int> res = ext_gcd (a, b);
+      boost::tuple<unsigned int , int, int> res = ext_gcd (a, b);
       if (res.get<0> () == 1)
 	return (op_mul (s, a, res.get<2> ()));
 

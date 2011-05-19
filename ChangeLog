@@ -1,3 +1,10 @@
+2011-05-19  Guillaume Fiette  <fiette@fiette.lrde.epita.fr>
+
+	Correct a bug in cyclic semiring.
+
+	* include/vaucanson/algebra/implementation/semiring/cyclic_semiring.hxx:
+	remove "unit" for "unsigned int".
+
 2011-05-02  Guillaume Fiette  <fiette@lrde.epita.fr>
 
 	Add tests for f2 in taf-kit.
