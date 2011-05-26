@@ -1,3 +1,7 @@
+2011-05-26  Sylvain Lombardy  <lombardy@univ-mlv.fr>
+
+	* include/vaucanson/algorithms/eps_removal.hxx: Rewrite.
+
 2011-04-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Implement a is_positive_semiring() function in semiring implementations.

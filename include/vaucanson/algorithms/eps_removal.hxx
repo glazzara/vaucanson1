@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005, 2006, 2008, 2010 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006, 2008, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,8 +23,7 @@
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
-# include <vector>
-# include <queue>
+# include <list>
 # include <map>
 # include <utility>
 
@@ -89,232 +88,15 @@ namespace vcsn {
   class EpsilonRemover
   {
     AUTOMATON_TYPES(Auto);
-    typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
-    typedef std::vector<series_set_elt_t>		vector_series_t;
-
-  public:
-    EpsilonRemover(const AutomataBase<A_>&,
-		   Auto& aut)
-      : a(aut),
-	size(aut.states().size()),
-	null_series(aut.series().zero_),
-	semiring_elt_zero(aut.series().semiring().wzero_),
-	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
-    {
-      /// @bug FIXME: This converters should be removed
-      // Initialize converters between matrix index and states.
-      index_to_state.resize(size);
-      int i = 0;
-      for_all_const_states(s, a)
-      {
-	index_to_state[i] = *s;
-	state_to_index[*s] = i++;
-      }
-
-      // Initialize m_semiring_elt matrix with epsilon transitions,
-      // and suppress them.
-      m_semiring_elt.resize(size);
-      for (int i = 0; i < size; i++)
-	m_semiring_elt[i].resize(size, semiring_elt_zero);
-
-      for_all_const_states(s, a)
-      {
-	std::list<htransition_t>	transition_list;
-	int src = state_to_index[*s];
-
-        for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
-          transition_list.push_back(*e);
-	for_all_const_(std::list<htransition_t>, e, transition_list)
-	{
-	  int dst = state_to_index[a.dst_of(*e)];
-	  series_set_elt_t t = a.series_of(*e);
-
-	  m_semiring_elt[src][dst] += t.get(monoid_identity);
-	  t.assoc(monoid_identity.value(), semiring_elt_zero.value());
-	  if (t != null_series)
-	    a.add_series_transition(*s, a.dst_of(*e), t);
-	  a.del_transition(*e);
-	}
-      }
-    }
-
-    void operator() (misc::direction_type dir)
-    {
-      star_matrix();
-      if (dir == misc::backward)
-	backward_remove();
-      else
-	forward_remove();
-    }
-
-  private:
-    // Compute the star of the matrix,
-    // it's equivalent to a transitive closure.
-    void star_matrix()
-    {
-      for (int r = 0; r < size; r++)
-      {
-	result_not_computable_if(!m_semiring_elt[r][r].starable());
-
-	semiring_elt_t w = m_semiring_elt[r][r].star();
-	m_semiring_elt[r][r] = w;
-	for (int i = 0; i < size; i++)
-	  if (i != r)
-	  {
-	    semiring_elt_t z = m_semiring_elt[i][r] * w;
-	    m_semiring_elt[i][r] = z;
-	    if (z != semiring_elt_zero)
-	      for (int j = 0; j < size; j++)
-		if (j != r)
-		  m_semiring_elt[i][j] += z * m_semiring_elt[r][j];
-	  }
-	for (int j = 0; j < size; j++)
-	  if (j != r)
-	    m_semiring_elt[r][j] = w * m_semiring_elt[r][j];
-      }
-    }
-
-    void backward_remove()
-    {
-      // Backward_eps_removal
-      // Initialize the m_wfinal
-      vector_series_t	m_wfinal (size, null_series);
-      for_all_const_final_states(p, a)
-	m_wfinal[state_to_index[*p]] = a.get_final(*p);
-      a.clear_final();
-
-      // Compute the backward_eps_removal
-      for_all_const_states(s, a)
-      {
-	std::list<htransition_t> transition_list;
-        for (rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
-          transition_list.push_back(*e);
-	int dst = state_to_index[*s];
-	for_all_const_(std::list<htransition_t>, e, transition_list)
-	{
-	  int src = state_to_index[a.src_of(*e)];
-	  series_set_elt_t t = a.series_of(*e);
-	  for (int k = 0; k < size; k++)
-	  {
-	    semiring_elt_t w = m_semiring_elt[k][src];
-	    if (w != semiring_elt_zero)
-	      a.add_series_transition(index_to_state[k], *s, w * t);
-	  }
-	  a.del_transition(*e);
-	}
-	series_set_elt_t tw = null_series;
-	for (int k = 0; k < size; k++)
-	  tw += m_semiring_elt[dst][k] * m_wfinal[k];
-	if (tw != null_series)
-	  a.set_final(*s, tw);
-      }
-    }
-
-    void forward_remove()
-    {
-      // Forward eps_removal
-      // Initialize the m_wfinal
-      vector_series_t	m_winitial (size, null_series);
-      for_all_const_initial_states(p, a)
-	m_winitial[state_to_index[*p]] = a.get_initial(*p);
-      a.clear_initial();
-
-      // Compute the forward_eps_removal
-      for_all_const_states(s, a)
-      {
-	std::list<htransition_t> transition_list;
-        for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
-          transition_list.push_back(*e);
-	int src = state_to_index[*s];
-	for_all_const_(std::list<htransition_t>, e, transition_list)
-	{
-	  int dst = state_to_index[a.dst_of(*e)];
-	  series_set_elt_t t = a.series_of(*e);
-	  for (int k = 0; k < size; k++)
-	  {
-	    semiring_elt_t w = m_semiring_elt[dst][k];
-	    if (w != semiring_elt_zero)
-	      a.add_series_transition(*s, index_to_state[k], t * w);
-	  }
-	  a.del_transition(*e);
-	}
-	series_set_elt_t tw = null_series;
-	for (int k = 0; k < size; k++)
-	  tw += m_winitial[k] * m_semiring_elt[k][src];
-	if (tw != null_series)
-	  a.set_initial(*s, tw);
-      }
-    }
-
+	typedef typename series_set_elt_t::support_t support_t;
 
     automaton_t&	a;
-    // Number of states in a.
-    // Use as the dimension of the matrix m_semiring_elt.
-    int			size;
-
     // zero and identity of used algebraic structure.
     series_set_elt_t	null_series;
-    semiring_elt_t	semiring_elt_zero;
+    semiring_elt_t	semiring_elt_zero,
+      semiring_elt_unit;
     monoid_elt_t	monoid_identity;
 
-    // Matrix of epsilon transition.
-    matrix_semiring_elt_t	m_semiring_elt;
-
-    // Maps between states and matrix indexes.
-    std::vector<hstate_t>	index_to_state;
-    std::map<hstate_t, int>	state_to_index;
-  };
-
-
-  /*--------------------------------------.
-  | Find a transition (src, label, dst).  |
-  `---------------------------------------*/
-
-  template <typename Auto>
-  class Finder
-  {
-    AUTOMATON_TYPES(Auto);
-
-  public:
-    Finder (const automaton_t& aut)
-      : a_(aut)
-    {
-      for_all_const_transitions(t, a_)
-	map_[make_pair(a_.src_of(*t), make_pair(a_.label_of(*t),
-						a_.dst_of(*t)))] = true;
-    }
-
-    void insert(const hstate_t src, const label_t l, const hstate_t dst)
-    {
-      map_[make_pair(src, make_pair(l, dst))] = true;
-    }
-
-    bool operator() (const hstate_t src, const label_t l, const hstate_t dst)
-    {
-      return map_[make_pair(src, make_pair(l, dst))];
-    }
-
-  private:
-    const automaton_t& a_;
-    std::map<std::pair<hstate_t, std::pair<label_t, hstate_t> >, bool> map_;
-  };
-
-
-
-  /*------------------------------------------------------.
-  | EpsilonRemover for automaton with multiplicity in B.  |
-  `------------------------------------------------------*/
-
-  template <class A_, typename Auto>
-  class EpsilonRemover<A_, Auto, bool>
-  {
-    AUTOMATON_TYPES(Auto);
-    typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
-    typedef std::vector<series_set_elt_t>		vector_series_t;
-    typedef std::queue<htransition_t>			tr_queue_t;
-    typedef std::queue<hstate_t>			state_queue_t;
-    typedef std::vector<htransition_t>			ctransitions_t;
-    typedef std::vector<hstate_t>			cstates_t;
 
   public:
     EpsilonRemover(const AutomataBase<A_>&,
@@ -322,154 +104,476 @@ namespace vcsn {
       : a(aut),
 	null_series(aut.series().zero_),
 	semiring_elt_zero(aut.series().semiring().wzero_),
+	semiring_elt_unit(aut.series().semiring().wone_),
 	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
-    {
-      for_all_const_transitions(t, a)
-	tr_q.push(*t);
-    }
+    {}
 
     void operator() (misc::direction_type dir)
     {
-      if (dir == misc::forward)
-	forward_closure();
+      if(!is_positive_semiring(SELECT(semiring_t), SELECT(semiring_elt_value_t)))
+	test_for_non_positive_semiring();
+      std::list<hstate_t> eps_states;
+       if (dir == misc::backward)
+	this->epsilon_covering(eps_states);
       else
-	backward_closure();
-      suppress_epsilon_transitions();
+	this->epsilon_co_covering(eps_states);
+      result_not_computable_if(!spontaneous_suppression(eps_states));
+      merge_transitions();
     }
 
-    void suppress_epsilon_transitions ()
+    private:
+
+  	/* This method computes a covering of the automaton such
+  	   that, in this covering, there are two kinds of states:
+  	   -- states whose incoming transitions are not spontaneous;
+  	   -- non initial states whose incoming transitions are spontaneous.
+  	   The argument is filled with the states which belong to the second kind.
+	*/
+    void epsilon_covering(std::list<hstate_t>& spontaneous_states)
     {
-      for_all_transitions(t, a)
-      {
-	series_set_elt_t s = a.series_of(*t);
-	if (s.get(monoid_identity) == semiring_elt_zero)
-	  continue;
+      //list of states to split
+      std::list<hstate_t> split_states;
+      for_all_states(s, a)
+	{
+	  bool eps_in = false;
+	  bool other_in = a.is_initial(*s);
 
-	s.assoc(monoid_identity.value(), semiring_elt_zero.value());
-	if (s != null_series)
-	  a.add_series_transition(a.src_of(*t), a.dst_of(*t), s);
-	a.del_transition(*t);
-      }
+	  // Test whether there are different types of incoming transitions.
+
+	  std::list<htransition_t> transitions;
+	  for (rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, transitions)
+	    {
+	      series_set_elt_t t = a.series_of(*e);
+	      semiring_elt_t eps_weight= t.get(monoid_identity);
+	      if(eps_weight == semiring_elt_zero)
+		other_in=true ;
+	      else
+		{
+		  eps_in=true;
+		  if(t.supp().size()>1)
+	  	    other_in=true;
+		}
+	    }
+	  if(eps_in)
+	    {
+	      if(other_in)
+		split_states.push_back(*s);
+	      else
+		spontaneous_states.push_back(*s);
+	    }
+	}
+      //Split the states which have to
+      for_all_(std::list<hstate_t>, s, split_states)
+	{
+	  hstate_t eps_state = a.add_state();
+	  spontaneous_states.push_back(eps_state);
+	  //incoming transitions (the original state remains initial if it is)
+	  std::list<htransition_t> transitions;
+	  for(rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, transitions)
+	    {
+	      series_set_elt_t t = a.series_of(*e);
+	      semiring_elt_t eps_weight= t.get(monoid_identity);
+	      if(eps_weight == semiring_elt_zero)
+		continue;
+	      series_set_elt_t eps_label(a.structure().series());
+	      eps_label.assoc(monoid_identity, eps_weight.value());
+	      //which remains on the transition without epsilon:
+	      t.assoc(monoid_identity, semiring_elt_zero.value());
+	      hstate_t source=a.src_of(*e);
+	      a.add_series_transition(source, eps_state, eps_label);
+	      if (t != null_series)
+	    	a.add_series_transition(source, *s, t);
+	      a.del_transition(*e);
+	    }
+	  //outgoing transitions and final states
+	  if(a.is_final(*s))
+	    a.set_final(eps_state,a.get_final(*s));
+	  for(delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    a.add_series_transition(eps_state, a.dst_of(*e), a.series_of(*e));
+	  /* Notice that if there is a loop on *s, with label a+1, the step "incoming transitions"
+	     turns it into a loop with label 'a' and a transition from *s to eps_state with label 1,
+	     and the step "outgoing transitions" build a transition from eps_state to *s with label '1'
+	     and a loop on eps_state with label 1, which is what it is expected */
+	}
     }
 
-    void forward_closure ()
+    /* Initial and final cleaner
+       This method adds if necessary an initial and/or a final state
+       such that series labelling initial and final arrows are constant
+       This method is presently unused.
+    */
+    void initial_final_cleaner()
     {
-      // Closure.
-      Finder<automaton_t> find(a);
-      cstates_t st_out;
-
-      while (!tr_q.empty())
       {
-	htransition_t t = tr_q.front();
-	hstate_t src = a.src_of(t);
-	hstate_t mid = a.dst_of(t);
-	label_t l = a.label_of(t);
-
-	st_out.clear();
-        for (delta_iterator t(a.value(), mid); ! t.done(); t.next())
-          if (a.is_spontaneous(*t))
-            st_out.push_back(a.dst_of(*t));
-	for_all_const(typename cstates_t, dst, st_out)
-        {
-          if (!find(src, l, *dst))
-          {
-            htransition_t new_tr = a.add_transition(src, *dst, l);
-            tr_q.push(new_tr);
-            find.insert(src, l, *dst);
-          }
-        }
-	tr_q.pop();
+	//Initial
+	std::list<hstate_t> initial_states;
+	for_all_initial_states(s, a)
+	  initial_states.push_back(*s);
+	hstate_t new_initial=a.add_state();
+	for_all_(std::list<hstate_t>, s, initial_states)
+	  {
+	    series_set_elt_t t = a.get_initial(*s);
+	    semiring_elt_t eps_weight= t.get(monoid_identity);
+	    t.assoc(monoid_identity, semiring_elt_zero.value());
+	    if(t != null_series)
+	      {
+		a.unset_initial(*s);
+		a.add_series_transition(new_initial, *s, t);
+		if(eps_weight != semiring_elt_zero)
+		  {
+		    series_set_elt_t cst(a.structure().series());
+		    cst.assoc(monoid_identity, eps_weight.value());
+		    a.set_initial(*s, cst);
+		  }
+	      }
+	  }
+	delta_iterator test(a.value(), new_initial);
+	if(test.done())
+	  a.del_state(new_initial);
+	else
+	  a.set_initial(new_initial);
       }
-      // Set initial state.
-      state_queue_t sq;
-
-      for_all_const_initial_states(s, a)
-	sq.push(*s);
-      while (!sq.empty())
       {
-	hstate_t i = sq.front();
-
-	st_out.clear();
-        for (delta_iterator t(a.value(), i); ! t.done(); t.next())
-          if (a.is_spontaneous(*t))
-            st_out.push_back(a.dst_of(*t));
-	for_all_const(typename cstates_t, s, st_out)
-        {
-          if (!a.is_initial(*s))
-          {
-            a.set_initial(*s);
-            sq.push(*s);
-          }
-        }
-        sq.pop();
+	//Final
+	std::list<hstate_t> final_states;
+	for_all_final_states(s, a)
+	  final_states.push_back(*s);
+	hstate_t new_final=a.add_state();
+	for_all_(std::list<hstate_t>, s, final_states)
+	  {
+	    series_set_elt_t t = a.get_final(*s);
+	    semiring_elt_t eps_weight= t.get(monoid_identity);
+	    t.assoc(monoid_identity, semiring_elt_zero.value());
+	    if(t != null_series)
+	      {
+		a.unset_final(*s);
+		a.add_series_transition(*s, new_final, t);
+		if(eps_weight != semiring_elt_zero)
+		  {
+		    series_set_elt_t cst(a.structure().series());
+		    cst.assoc(monoid_identity, eps_weight.value());
+		    a.set_final(*s, cst);
+		  }
+	      }
+	  }
+	rdelta_iterator test(a.value(), new_final);
+	if(test.done())
+	  a.del_state(new_final);
+	else
+	  a.set_final(new_final);
       }
     }
 
-    void backward_closure ()
+    /* This method computes a co-covering of the automaton such
+       that, in this co-covering, there are two kinds of states:
+       -- states whose outgoing transitions are not spontaneous;
+       -- non final states whose outgoing transitions are spontaneous.
+       The argument is filled with the states which belong to the second kind.
+    */
+    void epsilon_co_covering(std::list<hstate_t>& spontaneous_states)
     {
-      // Closure.
-      Finder<automaton_t> find(a);
-      cstates_t st_in;
+      //list of states to split
+      std::list<hstate_t> split_states;
+      for_all_states(s, a)
+	{
+	  bool eps_out = false;
+	  bool other_out = a.is_final(*s);
 
-      while (!tr_q.empty())
-      {
-	htransition_t t = tr_q.front();
-	hstate_t mid = a.src_of(t);
-	hstate_t dst = a.dst_of(t);
-	label_t l = a.label_of(t);
+	  // Test whether there are different types of outgoing transitions.
 
-	st_in.clear();
-        for (rdelta_iterator t(a.value(), mid); ! t.done(); t.next())
-          if (a.is_spontaneous(*t))
-            st_in.push_back(a.src_of(*t));
-	for_all_const(typename cstates_t, src, st_in)
-        {
-          if (!find(*src, l, dst))
-          {
-            htransition_t new_tr = a.add_transition(*src, dst, l);
-            tr_q.push(new_tr);
-            find.insert(*src, l, dst);
-          }
-        }
-	tr_q.pop();
-      }
-      // Set final state.
-      state_queue_t sq;
-
-      for_all_const_final_states(s, a)
-	sq.push(*s);
-      while (!sq.empty())
-      {
-	hstate_t i = sq.front();
-
-        st_in.clear();
-        for (rdelta_iterator t(a.value(), i); ! t.done(); t.next())
-          if (a.is_spontaneous(*t))
-            st_in.push_back(a.src_of(*t));
-        for_all_const(typename cstates_t, s, st_in)
-        {
-          if (!a.is_final(*s))
-          {
-            a.set_final(*s);
-            sq.push(*s);
-          }
-        }
-	sq.pop();
-      }
+	  std::list<htransition_t> transitions;
+	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, transitions)
+	    {
+	      series_set_elt_t t = a.series_of(*e);
+	      semiring_elt_t eps_weight= t.get(monoid_identity);
+	      if(eps_weight == semiring_elt_zero)
+		other_out=true ;
+	      else
+		{
+		  eps_out=true;
+		  if(t.supp().size()>1)
+	  	    other_out=true;
+		}
+	    }
+	  if(eps_out)
+	    {
+	      if(other_out)
+		split_states.push_back(*s);
+	      else
+		spontaneous_states.push_back(*s);
+	    }
+	}
+      //Split the states which have to
+      for_all_(std::list<hstate_t>, s, split_states)
+	{
+	  hstate_t eps_state = a.add_state();
+	  spontaneous_states.push_back(eps_state);
+	  //outgoing transitions (the original state remains final if it is)
+	  std::list<htransition_t> transitions;
+	  for(delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, transitions)
+	    {
+	      series_set_elt_t t = a.series_of(*e);
+	      semiring_elt_t eps_weight= t.get(monoid_identity);
+	      if(eps_weight == semiring_elt_zero)
+		continue;
+	      series_set_elt_t eps_label(a.structure().series());
+	      eps_label.assoc(monoid_identity, eps_weight.value());
+	      //which remains on the transition without epsilon:
+	      t.assoc(monoid_identity, semiring_elt_zero.value());
+	      hstate_t target=a.dst_of(*e);
+	      a.add_series_transition(eps_state, target, eps_label);
+	      if (t != null_series)
+		a.add_series_transition(*s, target, t);
+	      a.del_transition(*e);
+	    }
+	  //incoming transitions and initial states
+	  if(a.is_initial(*s))
+	    a.set_initial(eps_state,a.get_initial(*s));
+	  for(rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    a.add_series_transition(a.src_of(*e), eps_state, a.series_of(*e));
+	  /* Notice that if there is a loop on *s, with label a+1, the step "outgoing transitions"
+	     turns it into a loop with label 'a' and a transition from eps_state to *s with label 1,
+	     and the step "incoming transitions" build a transition from *s to eps_state with label '1'
+	     and a loop on eps_state with label 1, which is what it is expected */
+	}
     }
 
-  private:
-    automaton_t&	a;
 
-    // zero and identity of used algebraic structure.
-    const series_set_elt_t	null_series;
-    const semiring_elt_t	semiring_elt_zero;
-    const monoid_elt_t		monoid_identity;
 
-    // Queue of transitions.
-    tr_queue_t		tr_q;
+    /* This method computes an equivalent K-automaton with only positive transitions
+       (excepted final arrows).
+       A second copy of the automaton is built, a negative weight makes switch from a copy to another.
+       Two final states are added, one where positive paths end, the other one where negative paths
+       end. In the result, all the edges have positive weight; the two final states have resp.
+       weights equal to 1 and -1.
+    */
+    void positive_path_covering()
+    {
+      std::map<hstate_t,hstate_t> clones;
+      std::list<hstate_t> states;
+      for_all_states(s, a)
+	states.push_back(*s);
+      for_all_(std::list<hstate_t>, s, states)
+	clones[*s]=a.add_state();
+      hstate_t pos_final_state=a.add_state();
+      hstate_t neg_final_state=a.add_state();
+      std::list<htransition_t> transitions;
+      for_all_transitions(e, a)
+	transitions.push_back(*e);
+      for_all_(std::list<htransition_t>, e, transitions)
+	{
+	  series_set_elt_t posit = a.series_of(*e);
+	  series_set_elt_t negat(a.structure().series());
+	  for_all_(support_t, x, posit.supp())
+  	    {
+	      semiring_elt_t weight=posit.get(*x);
+	      if(weight.value()<0)
+  	    	{
+  	    	  negat.assoc(*x,-weight.value());
+  	    	  posit.assoc(*x,semiring_elt_zero.value());
+  	    	}
+  	    }
+	  hstate_t src=a.src_of(*e), dst=a.dst_of(*e);
+	  if(posit!=null_series)
+	    a.add_series_transition(clones[src], clones[dst], posit);
+	  if(negat!=null_series)
+  	    {
+	      a.add_series_transition(src, clones[dst], negat);
+	      a.add_series_transition(clones[src], dst, negat);
+	      if(posit!=null_series)
+		a.add_series_transition(src, dst, posit);
+	      a.del_transition(*e);
+  	    }
+	}
+      states.clear();
+      for_all_initial_states(s, a)
+	states.push_back(*s);
+      for_all_(std::list<hstate_t>, s, states)
+	{
+	  series_set_elt_t posit = a.get_initial(*s);
+	  series_set_elt_t negat(a.structure().series());
+	  for_all_(support_t, x, posit.supp())
+  	    {
+	      semiring_elt_t weight=posit.get(*x);
+	      if(weight.value()<0)
+  	    	{
+  	    	  negat.assoc(*x,-weight.value());
+  	    	  posit.assoc(*x,semiring_elt_zero.value());
+  	    	}
+  	    }
+	  if(negat!=null_series)
+  	    {
+	      a.set_initial(clones[*s], negat);
+	      a.unset_initial(*s);
+	      if(posit!=null_series)
+		a.set_initial(*s,posit);
+  	    }
+	}
+      states.clear();
+      for_all_final_states(s, a)
+	states.push_back(*s);
+      for_all_(std::list<hstate_t>, s, states)
+	{
+	  series_set_elt_t posit = a.get_final(*s);
+	  series_set_elt_t negat(a.structure().series());
+	  for_all_(support_t, x, posit.supp())
+  	    {
+	      semiring_elt_t weight=posit.get(*x);
+	      if(weight.value()<0)
+  	    	{
+  	    	  negat.assoc(*x,-weight.value());
+  	    	  posit.assoc(*x,semiring_elt_zero.value());
+  	    	}
+  	    }
+	  if(negat!=null_series)
+  	    {
+	      a.add_series_transition(*s, neg_final_state, negat);
+	      a.add_series_transition(clones[*s], pos_final_state, negat);
+  	    }
+	  a.unset_final(*s);
+	  if(posit!=null_series)
+  	    {
+	      a.add_series_transition(*s, pos_final_state, posit);
+	      a.add_series_transition(clones[*s], neg_final_state, posit);
+  	    }
+	}
+      a.set_final(pos_final_state);
+      series_set_elt_t mss=a.get_final(pos_final_state);
+      mss.assoc(monoid_identity,-semiring_elt_unit.value());
+      a.set_final(neg_final_state,mss);
+      accessible_here(a);
+    }
+
+    /*supression of "epsilon-states"
+      epsilon_covering should have been called before
+      This part of the algorithm is symmetrical and is exactly
+      the "elimination state method" applicated to a list of states.
+      We consider the case where the state is initial or final, even if
+      in the backward case the 'epsilon state' cannot be initial for instance
+     */
+    bool spontaneous_suppression(std::list<hstate_t>& sp_states){
+      for_all_(std::list<hstate_t>, s, sp_states)
+    	{
+	  std::list<htransition_t> incoming_transitions;
+	  //list of incoming transitions, beginning with loops
+	  for (rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    {
+	      if(a.src_of(*e)==a.dst_of(*e))
+		incoming_transitions.push_front(*e);
+	      else
+		incoming_transitions.push_back(*e);
+	    }
+	  bool hasloop=false;
+	  series_set_elt_t loop_series(a.structure().series());
+	  //loops are removed from incoming transitions;
+	  while(!incoming_transitions.empty()){
+	    htransition_t& loop=incoming_transitions.front();
+	    if(a.src_of(loop)==a.dst_of(loop))
+	      {
+		hasloop=true;
+		loop_series += a.series_of(loop);
+		incoming_transitions.pop_front();
+	      }
+	    else
+	      break;
+	  }
+	  if(hasloop)
+	    {
+	      if(!loop_series.get(monoid_identity).starable())
+		return false;
+	      loop_series = loop_series.star();
+	    }
+	  std::list<htransition_t> outgoing_transitions;
+	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	      if(a.src_of(*e)!=a.dst_of(*e))
+		outgoing_transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, incoming_transitions)
+	    for_all_(std::list<htransition_t>, f, outgoing_transitions)
+	      if(hasloop)
+		a.add_series_transition(a.src_of(*e), a.dst_of(*f),
+					a.series_of(*e)*loop_series*a.series_of(*f));
+	      else
+		a.add_series_transition(a.src_of(*e), a.dst_of(*f),
+					a.series_of(*e)*a.series_of(*f));
+	  if(a.is_final(*s))
+	    {
+	      series_set_elt_t final_s=a.get_final(*s);
+	      for_all_(std::list<htransition_t>, e, incoming_transitions)
+		{
+		  hstate_t p=a.src_of(*e);
+		  series_set_elt_t t=a.get_final(p);
+		  if(hasloop)
+		    t+=a.series_of(*e)*loop_series*final_s;
+		  else
+		    t+=a.series_of(*e)*final_s;
+		  a.unset_final(p);
+		  if(t!= null_series)
+		    a.set_final(p,t);
+		}
+	    }
+	  if(a.is_initial(*s))
+	    {
+	      series_set_elt_t initial_s=a.get_initial(*s);
+	      for_all_(std::list<htransition_t>, f, outgoing_transitions)
+		{
+		  hstate_t p=a.dst_of(*f);
+		  series_set_elt_t t=a.get_initial(p);
+		  if(hasloop)
+		    t+=initial_s*loop_series*a.series_of(*f);
+		  else
+		    t+=initial_s*a.series_of(*f);
+		  a.unset_initial(p);
+		  if(t!= null_series)
+		    a.set_initial(p,t);
+		}
+	    }
+	  a.del_state(*s);
+    	}
+      return true;
+    }
+
+    //merge transitions with the same ends
+    void merge_transitions(){
+      typedef std::map<hstate_t, series_set_elt_t> map_t;
+      for_all_states(s, a)
+	{
+	  map_t map;
+	  std::list<htransition_t> transitions;
+	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    {
+	      hstate_t target = a.dst_of(*e);
+	      transitions.push_back(*e);
+	      typename map_t::iterator it = map.find(target);
+	      if(it == map.end())
+		map.insert(std::pair<hstate_t, series_set_elt_t>(target,a.series_of(*e)));
+	      else
+		it->second+=a.series_of(*e);
+	    }
+	  for_all_(std::list<htransition_t>, e, transitions)
+	    a.del_transition(*e);
+	  for_all_(map_t, it, map)
+	    a.add_series_transition(*s, it->first, it->second);
+	}
+    }
+
+
+    bool test_for_non_positive_semiring(){
+      std::list<hstate_t> eps_states;
+      automaton_t test(a);
+      EpsilonRemover epsTest(test.structure(), test);
+      epsTest.positive_path_covering();
+      epsTest.epsilon_covering(eps_states);
+      return epsTest.spontaneous_suppression(eps_states);
+    }
   };
-
 
   /*--------------.
   | eps_removal.  |
