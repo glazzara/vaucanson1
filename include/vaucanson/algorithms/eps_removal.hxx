@@ -108,9 +108,10 @@ namespace vcsn {
 	monoid_identity(aut.series().monoid().VCSN_EMPTY_)
     {}
 
-    void operator() (misc::direction_type dir)
+    void operator()(misc::direction_type dir)
     {
-      if(!is_positive_semiring(SELECT(semiring_t), SELECT(semiring_elt_value_t)))
+      if (!is_positive_semiring(SELECT(semiring_t),
+				SELECT(semiring_elt_value_t)))
 	test_for_non_positive_semiring();
       std::list<hstate_t> eps_states;
        if (dir == misc::backward)
@@ -147,18 +148,18 @@ namespace vcsn {
 	    {
 	      series_set_elt_t t = a.series_of(*e);
 	      semiring_elt_t eps_weight= t.get(monoid_identity);
-	      if(eps_weight == semiring_elt_zero)
-		other_in=true ;
+	      if (eps_weight == semiring_elt_zero)
+		other_in = true ;
 	      else
 		{
 		  eps_in=true;
-		  if(t.supp().size()>1)
-	  	    other_in=true;
+		  if (t.supp().size() > 1)
+	  	    other_in = true;
 		}
 	    }
-	  if(eps_in)
+	  if (eps_in)
 	    {
-	      if(other_in)
+	      if (other_in)
 		split_states.push_back(*s);
 	      else
 		spontaneous_states.push_back(*s);
@@ -171,13 +172,13 @@ namespace vcsn {
 	  spontaneous_states.push_back(eps_state);
 	  //incoming transitions (the original state remains initial if it is)
 	  std::list<htransition_t> transitions;
-	  for(rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
+	  for (rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
 	    transitions.push_back(*e);
 	  for_all_(std::list<htransition_t>, e, transitions)
 	    {
 	      series_set_elt_t t = a.series_of(*e);
 	      semiring_elt_t eps_weight= t.get(monoid_identity);
-	      if(eps_weight == semiring_elt_zero)
+	      if (eps_weight == semiring_elt_zero)
 		continue;
 	      series_set_elt_t eps_label(a.structure().series());
 	      eps_label.assoc(monoid_identity, eps_weight.value());
@@ -190,21 +191,23 @@ namespace vcsn {
 	      a.del_transition(*e);
 	    }
 	  //outgoing transitions and final states
-	  if(a.is_final(*s))
+	  if (a.is_final(*s))
 	    a.set_final(eps_state,a.get_final(*s));
-	  for(delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
 	    a.add_series_transition(eps_state, a.dst_of(*e), a.series_of(*e));
-	  /* Notice that if there is a loop on *s, with label a+1, the step "incoming transitions"
-	     turns it into a loop with label 'a' and a transition from *s to eps_state with label 1,
-	     and the step "outgoing transitions" build a transition from eps_state to *s with label '1'
-	     and a loop on eps_state with label 1, which is what it is expected */
+	  /* Notice that if there is a loop on *s, with label a+1, the
+	     step "incoming transitions" turns it into a loop with
+	     label 'a' and a transition from *s to eps_state with
+	     label 1, and the step "outgoing transitions" build a
+	     transition from eps_state to *s with label '1' and a loop
+	     on eps_state with label 1, which is what it is
+	     expected */
 	}
     }
 
-    /* Initial and final cleaner
-       This method adds if necessary an initial and/or a final state
-       such that series labelling initial and final arrows are constant
-       This method is presently unused.
+    /* Initial and final cleaner. This method adds if necessary an
+       initial and/or a final state such that series labelling initial
+       and final arrows are constant. This method is presently unused.
     */
     void initial_final_cleaner()
     {
@@ -219,11 +222,11 @@ namespace vcsn {
 	    series_set_elt_t t = a.get_initial(*s);
 	    semiring_elt_t eps_weight= t.get(monoid_identity);
 	    t.assoc(monoid_identity, semiring_elt_zero.value());
-	    if(t != null_series)
+	    if (t != null_series)
 	      {
 		a.unset_initial(*s);
 		a.add_series_transition(new_initial, *s, t);
-		if(eps_weight != semiring_elt_zero)
+		if (eps_weight != semiring_elt_zero)
 		  {
 		    series_set_elt_t cst(a.structure().series());
 		    cst.assoc(monoid_identity, eps_weight.value());
@@ -232,7 +235,7 @@ namespace vcsn {
 	      }
 	  }
 	delta_iterator test(a.value(), new_initial);
-	if(test.done())
+	if (test.done())
 	  a.del_state(new_initial);
 	else
 	  a.set_initial(new_initial);
@@ -248,7 +251,7 @@ namespace vcsn {
 	    series_set_elt_t t = a.get_final(*s);
 	    semiring_elt_t eps_weight= t.get(monoid_identity);
 	    t.assoc(monoid_identity, semiring_elt_zero.value());
-	    if(t != null_series)
+	    if (t != null_series)
 	      {
 		a.unset_final(*s);
 		a.add_series_transition(*s, new_final, t);
@@ -261,7 +264,7 @@ namespace vcsn {
 	      }
 	  }
 	rdelta_iterator test(a.value(), new_final);
-	if(test.done())
+	if (test.done())
 	  a.del_state(new_final);
 	else
 	  a.set_final(new_final);
@@ -286,7 +289,7 @@ namespace vcsn {
 	  // Test whether there are different types of outgoing transitions.
 
 	  std::list<htransition_t> transitions;
-	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	  for (delta_iterator e(a.value(), *s); !e.done(); e.next())
 	    transitions.push_back(*e);
 	  for_all_(std::list<htransition_t>, e, transitions)
 	    {
@@ -297,13 +300,13 @@ namespace vcsn {
 	      else
 		{
 		  eps_out=true;
-		  if(t.supp().size()>1)
+		  if (t.supp().size() > 1)
 	  	    other_out=true;
 		}
 	    }
-	  if(eps_out)
+	  if (eps_out)
 	    {
-	      if(other_out)
+	      if (other_out)
 		split_states.push_back(*s);
 	      else
 		spontaneous_states.push_back(*s);
@@ -316,13 +319,13 @@ namespace vcsn {
 	  spontaneous_states.push_back(eps_state);
 	  //outgoing transitions (the original state remains final if it is)
 	  std::list<htransition_t> transitions;
-	  for(delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	  for (delta_iterator e(a.value(), *s); !e.done(); e.next())
 	    transitions.push_back(*e);
 	  for_all_(std::list<htransition_t>, e, transitions)
 	    {
 	      series_set_elt_t t = a.series_of(*e);
 	      semiring_elt_t eps_weight= t.get(monoid_identity);
-	      if(eps_weight == semiring_elt_zero)
+	      if (eps_weight == semiring_elt_zero)
 		continue;
 	      series_set_elt_t eps_label(a.structure().series());
 	      eps_label.assoc(monoid_identity, eps_weight.value());
@@ -335,25 +338,27 @@ namespace vcsn {
 	      a.del_transition(*e);
 	    }
 	  //incoming transitions and initial states
-	  if(a.is_initial(*s))
+	  if (a.is_initial(*s))
 	    a.set_initial(eps_state,a.get_initial(*s));
-	  for(rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
+	  for (rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
 	    a.add_series_transition(a.src_of(*e), eps_state, a.series_of(*e));
-	  /* Notice that if there is a loop on *s, with label a+1, the step "outgoing transitions"
-	     turns it into a loop with label 'a' and a transition from eps_state to *s with label 1,
-	     and the step "incoming transitions" build a transition from *s to eps_state with label '1'
-	     and a loop on eps_state with label 1, which is what it is expected */
+	  /* Notice that if there is a loop on *s, with label a+1, the
+	     step "outgoing transitions" turns it into a loop with
+	     label 'a' and a transition from eps_state to *s with
+	     label 1, and the step "incoming transitions" build a
+	     transition from *s to eps_state with label '1' and a loop
+	     on eps_state with label 1, which is what it is
+	     expected */
 	}
     }
 
-
-
-    /* This method computes an equivalent K-automaton with only positive transitions
-       (excepted final arrows).
-       A second copy of the automaton is built, a negative weight makes switch from a copy to another.
-       Two final states are added, one where positive paths end, the other one where negative paths
-       end. In the result, all the edges have positive weight; the two final states have resp.
-       weights equal to 1 and -1.
+    /* This method computes an equivalent K-automaton with only
+       positive transitions (excepted final arrows).  A second copy of
+       the automaton is built, a negative weight makes switch from a
+       copy to another.  Two final states are added, one where
+       positive paths end, the other one where negative paths end. In
+       the result, all the edges have positive weight; the two final
+       states have resp.  weights equal to 1 and -1.
     */
     void positive_path_covering()
     {
@@ -375,20 +380,20 @@ namespace vcsn {
 	  for_all_(support_t, x, posit.supp())
   	    {
 	      semiring_elt_t weight=posit.get(*x);
-	      if(weight.value()<0)
+	      if (weight < semiring_elt_zero)
   	    	{
   	    	  negat.assoc(*x,-weight.value());
   	    	  posit.assoc(*x,semiring_elt_zero.value());
   	    	}
   	    }
 	  hstate_t src=a.src_of(*e), dst=a.dst_of(*e);
-	  if(posit!=null_series)
+	  if (posit != null_series)
 	    a.add_series_transition(clones[src], clones[dst], posit);
-	  if(negat!=null_series)
+	  if (negat != null_series)
   	    {
 	      a.add_series_transition(src, clones[dst], negat);
 	      a.add_series_transition(clones[src], dst, negat);
-	      if(posit!=null_series)
+	      if (posit != null_series)
 		a.add_series_transition(src, dst, posit);
 	      a.del_transition(*e);
   	    }
@@ -402,18 +407,18 @@ namespace vcsn {
 	  series_set_elt_t negat(a.structure().series());
 	  for_all_(support_t, x, posit.supp())
   	    {
-	      semiring_elt_t weight=posit.get(*x);
-	      if(weight.value()<0)
+	      semiring_elt_t weight = posit.get(*x);
+	      if (weight < semiring_elt_zero)
   	    	{
   	    	  negat.assoc(*x,-weight.value());
   	    	  posit.assoc(*x,semiring_elt_zero.value());
   	    	}
   	    }
-	  if(negat!=null_series)
+	  if (negat != null_series)
   	    {
 	      a.set_initial(clones[*s], negat);
 	      a.unset_initial(*s);
-	      if(posit!=null_series)
+	      if (posit != null_series)
 		a.set_initial(*s,posit);
   	    }
 	}
@@ -427,26 +432,26 @@ namespace vcsn {
 	  for_all_(support_t, x, posit.supp())
   	    {
 	      semiring_elt_t weight=posit.get(*x);
-	      if(weight.value()<0)
+	      if (weight < semiring_elt_zero)
   	    	{
   	    	  negat.assoc(*x,-weight.value());
   	    	  posit.assoc(*x,semiring_elt_zero.value());
   	    	}
   	    }
-	  if(negat!=null_series)
+	  if (negat != null_series)
   	    {
 	      a.add_series_transition(*s, neg_final_state, negat);
 	      a.add_series_transition(clones[*s], pos_final_state, negat);
   	    }
 	  a.unset_final(*s);
-	  if(posit!=null_series)
+	  if (posit != null_series)
   	    {
 	      a.add_series_transition(*s, pos_final_state, posit);
 	      a.add_series_transition(clones[*s], neg_final_state, posit);
   	    }
 	}
       a.set_final(pos_final_state);
-      series_set_elt_t mss=a.get_final(pos_final_state);
+      series_set_elt_t mss = a.get_final(pos_final_state);
       mss.assoc(monoid_identity,-semiring_elt_unit.value());
       a.set_final(neg_final_state,mss);
       accessible_here(a);
@@ -459,14 +464,15 @@ namespace vcsn {
       We consider the case where the state is initial or final, even if
       in the backward case the 'epsilon state' cannot be initial for instance
      */
-    bool spontaneous_suppression(std::list<hstate_t>& sp_states){
+    bool spontaneous_suppression(std::list<hstate_t>& sp_states)
+    {
       for_all_(std::list<hstate_t>, s, sp_states)
     	{
 	  std::list<htransition_t> incoming_transitions;
 	  //list of incoming transitions, beginning with loops
 	  for (rdelta_iterator e(a.value(), *s); ! e.done(); e.next())
 	    {
-	      if(a.src_of(*e)==a.dst_of(*e))
+	      if (a.src_of(*e) == a.dst_of(*e))
 		incoming_transitions.push_front(*e);
 	      else
 		incoming_transitions.push_back(*e);
@@ -474,64 +480,65 @@ namespace vcsn {
 	  bool hasloop=false;
 	  series_set_elt_t loop_series(a.structure().series());
 	  //loops are removed from incoming transitions;
-	  while(!incoming_transitions.empty()){
-	    htransition_t& loop=incoming_transitions.front();
-	    if(a.src_of(loop)==a.dst_of(loop))
-	      {
-		hasloop=true;
-		loop_series += a.series_of(loop);
-		incoming_transitions.pop_front();
-	      }
-	    else
-	      break;
-	  }
-	  if(hasloop)
+	  while (!incoming_transitions.empty())
 	    {
-	      if(!loop_series.get(monoid_identity).starable())
+	      htransition_t& loop=incoming_transitions.front();
+	      if(a.src_of(loop)==a.dst_of(loop))
+		{
+		  hasloop=true;
+		  loop_series += a.series_of(loop);
+		  incoming_transitions.pop_front();
+		}
+	      else
+		break;
+	    }
+	  if (hasloop)
+	    {
+	      if (!loop_series.get(monoid_identity).starable())
 		return false;
 	      loop_series = loop_series.star();
 	    }
 	  std::list<htransition_t> outgoing_transitions;
 	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
-	      if(a.src_of(*e)!=a.dst_of(*e))
+	      if (a.src_of(*e)!=a.dst_of(*e))
 		outgoing_transitions.push_back(*e);
 	  for_all_(std::list<htransition_t>, e, incoming_transitions)
 	    for_all_(std::list<htransition_t>, f, outgoing_transitions)
-	      if(hasloop)
+	      if (hasloop)
 		a.add_series_transition(a.src_of(*e), a.dst_of(*f),
 					a.series_of(*e)*loop_series*a.series_of(*f));
 	      else
 		a.add_series_transition(a.src_of(*e), a.dst_of(*f),
 					a.series_of(*e)*a.series_of(*f));
-	  if(a.is_final(*s))
+	  if (a.is_final(*s))
 	    {
-	      series_set_elt_t final_s=a.get_final(*s);
+	      series_set_elt_t final_s = a.get_final(*s);
 	      for_all_(std::list<htransition_t>, e, incoming_transitions)
 		{
-		  hstate_t p=a.src_of(*e);
-		  series_set_elt_t t=a.get_final(p);
-		  if(hasloop)
-		    t+=a.series_of(*e)*loop_series*final_s;
+		  hstate_t p = a.src_of(*e);
+		  series_set_elt_t t = a.get_final(p);
+		  if (hasloop)
+		    t += a.series_of(*e)*loop_series*final_s;
 		  else
-		    t+=a.series_of(*e)*final_s;
+		    t += a.series_of(*e)*final_s;
 		  a.unset_final(p);
-		  if(t!= null_series)
+		  if (t != null_series)
 		    a.set_final(p,t);
 		}
 	    }
-	  if(a.is_initial(*s))
+	  if (a.is_initial(*s))
 	    {
 	      series_set_elt_t initial_s=a.get_initial(*s);
 	      for_all_(std::list<htransition_t>, f, outgoing_transitions)
 		{
-		  hstate_t p=a.dst_of(*f);
-		  series_set_elt_t t=a.get_initial(p);
-		  if(hasloop)
-		    t+=initial_s*loop_series*a.series_of(*f);
+		  hstate_t p = a.dst_of(*f);
+		  series_set_elt_t t = a.get_initial(p);
+		  if (hasloop)
+		    t += initial_s*loop_series*a.series_of(*f);
 		  else
-		    t+=initial_s*a.series_of(*f);
+		    t += initial_s*a.series_of(*f);
 		  a.unset_initial(p);
-		  if(t!= null_series)
+		  if (t != null_series)
 		    a.set_initial(p,t);
 		}
 	    }
@@ -541,7 +548,8 @@ namespace vcsn {
     }
 
     //merge transitions with the same ends
-    void merge_transitions(){
+    void merge_transitions()
+    {
       typedef std::map<hstate_t, series_set_elt_t> map_t;
       for_all_states(s, a)
 	{
@@ -552,10 +560,11 @@ namespace vcsn {
 	      hstate_t target = a.dst_of(*e);
 	      transitions.push_back(*e);
 	      typename map_t::iterator it = map.find(target);
-	      if(it == map.end())
-		map.insert(std::pair<hstate_t, series_set_elt_t>(target,a.series_of(*e)));
+	      if (it == map.end())
+		map.insert(std::pair<hstate_t, series_set_elt_t>(target,
+								 a.series_of(*e)));
 	      else
-		it->second+=a.series_of(*e);
+		it->second += a.series_of(*e);
 	    }
 	  for_all_(std::list<htransition_t>, e, transitions)
 	    a.del_transition(*e);

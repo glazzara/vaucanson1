@@ -1,3 +1,12 @@
+2011-06-01  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix compilation of eps_removal.hxx on Q (it still does not compile
+	on FMP).
+
+	* include/vaucanson/algorithms/eps_removal.hxx
+	(positive_path_covering): Use "weight < semiring_elt_zero" instead
+	of "weight.value() < 0".
+
 2011-05-26  Sylvain Lombardy  <lombardy@univ-mlv.fr>
 
 	* include/vaucanson/algorithms/eps_removal.hxx: Rewrite.
