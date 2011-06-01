@@ -2,7 +2,7 @@
 //
 // CBS, a C++ benchmarking suite.
 //
-// Copyright (C) 2007, 2008, 2009 The CBS authors.
+// Copyright (C) 2007, 2008, 2009, 2011 The CBS authors.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -490,7 +490,6 @@ namespace timer
     timer::Call*        call = 0;
 
     timer::output_graph::vertex_iterator   vx;
-    timer::output_graph::vertex_iterator   vx2;
     timer::output_graph::vertex_descriptor vd;
     timer::output_graph::out_edge_iterator oe;
     timer::output_graph::edge_descriptor   ed;
@@ -515,8 +514,7 @@ namespace timer
             graph_[ed].add_times (call->total_, call->self_,
                                   time_, call->count_);
 
-            vx2 = (target (ed, graph_));
-            vd  = *vx2;
+            vd  = target (ed, graph_);
 
             if (comp_id_[graph_[ed].to] == comp_id_[graph_[ed].from])
               {
@@ -595,7 +593,7 @@ namespace timer
     timer::Task*        task = 0;
     timer::Call*        call = 0;
 
-    timer::output_graph::vertex_iterator        vx;
+    timer::output_graph::vertex_descriptor      vd;
     timer::output_graph::edge_descriptor        ed;
 
     timer::vertex_range vxrange;
@@ -604,10 +602,10 @@ namespace timer
          task_ != tasks_.end (); ++task_)
       {
         task = & (*task_);
-        vx   = add_vertex (graph_);
+        vd   = add_vertex (graph_);
 
-        graph_[*vx].name = task->name_;
-        graph_[*vx].id   = task->id_;
+        graph_[vd].name = task->name_;
+        graph_[vd].id   = task->id_;
       }
 
     for (timer::task_vector::iterator task_ = tasks_.begin ();
