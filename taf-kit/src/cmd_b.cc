@@ -127,6 +127,28 @@ enumerate_command(const arguments_t& args)
   return 0;
 }
 
+static int
+prefix_command(const arguments_t& args)
+{
+  g_res.keep(prefix(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+suffix_command(const arguments_t& args)
+{
+  g_res.keep(suffix(get_aut(args, 1)));
+  return 0;
+}
+
+static int
+factor_command(const arguments_t& args)
+{
+  g_res.keep(factor(get_aut(args, 1)));
+  return 0;
+}
+
+
 BEGIN_COMMAND_GROUP(b_commands,
 	"4. Algorithms specific to Boolean automata and rational expressions:");
 
@@ -151,4 +173,10 @@ COMMAND_ENTRY(derived_term, Exp,
 	      "Build the derivate-term automaton for `exp'.");
 COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
 COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
+COMMAND_ENTRY(prefix, Aut,
+	      "Build an automaton which accepts any prefix of Aut.");
+COMMAND_ENTRY(suffix, Aut,
+	      "Build an automaton which accepts any suffix of Aut.");
+COMMAND_ENTRY(factor, Aut,
+	      "Build an automaton which accepts any factor of Aut.");
 END_COMMAND_GROUP
