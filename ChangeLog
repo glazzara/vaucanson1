@@ -1,5 +1,11 @@
 2011-06-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Implement chain.
+
+	* taf-kit/src/cmd_gen.cc (command_chain): New function.
+
+2011-06-03  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Restrict prefix, suffix, and factor to Boolean automata.
 
 	* taf-kit/src/cmd_wt.cc (prefix_command, suffix_command,

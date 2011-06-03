@@ -143,6 +143,20 @@ concatenate_command(const arguments_t& args)
 };
 
 static int
+chain_command(const arguments_t& args)
+{
+  int n = atoi(args.args[2]);
+  automaton_t a = get_aut(args, 1);
+  automaton_t p(a);
+  for (int i = 1; i < n; ++i)
+    p = concat_of_standard(p, a);
+  g_res.keep(p);
+  return 0;
+};
+
+
+
+static int
 star_command(const arguments_t& args)
 {
   automaton_t a = get_aut(args, 1);
@@ -288,6 +302,8 @@ COMMAND_ENTRY(sum, AutAut,
 	      "Build the sum of two standard automata.");
 COMMAND_ENTRY(concatenate, AutAut,
 	      "Build the concatenation of two standard automata.");
+COMMAND_ENTRY(chain, AutInt,
+	      "Concatenate a standard automaton n times with itself.");
 COMMAND_ENTRY(star, Aut,
 	      "Build the star of a standard automaton.");
 COMMAND_ENTRY(left_mult, AutWeight,
