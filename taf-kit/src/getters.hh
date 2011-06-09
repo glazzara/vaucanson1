@@ -29,6 +29,7 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
+# include BOOL_CONTEXT_HEADER
 # include <vaucanson/tools/io.hh>
 # include <string>
 
@@ -62,9 +63,13 @@ std::string locate_fmp_file(const arguments_t& args, const std::string& s,
 # endif // !WITH_TWO_ALPHABETS
 automaton_t get_aut (const arguments_t& args, int n);
 
+BOOL_CONTEXT::automaton_t get_boolean_aut (const arguments_t& args, int n);
+std::string locate_boolean_file(const arguments_t& args, const std::string& s,
+				bool abort_if_empty = true);
+
 #ifdef WITH_TWO_ALPHABETS
 IOAUT_CONTEXT::automaton_t
-get_boolean_aut(const arguments_t& args, const int& n);
+get_single_band_aut(const arguments_t& args, int n);
 #endif
 
 int write_aut(const automaton_t& aut, const arguments_t& args, int n);
@@ -81,8 +86,9 @@ template <typename T>
 void set_series_writing_data_(T& dst, const T& src, const cmd_flags_t& flags);
 
 void set_writing_data(automaton_t&, const arguments_t&);
+void set_boolean_writing_data(BOOL_CONTEXT::automaton_t&, const arguments_t&);
 # ifdef WITH_TWO_ALPHABETS
-void set_boolean_writing_data(IOAUT_CONTEXT::automaton_t&, const arguments_t&);
+void set_single_band_writing_data(IOAUT_CONTEXT::automaton_t&, const arguments_t&);
 #else // !WITH_TWO_ALPHABETS
 void set_writing_data(rat_exp_t& e, const arguments_t& args);
 # endif // !WITH_TWO_ALPHABETS

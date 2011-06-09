@@ -283,6 +283,8 @@ vaucanson/algorithms/berry_sethi.hh				\
 vaucanson/algorithms/berry_sethi.hxx				\
 vaucanson/algorithms/brzozowski.hh				\
 vaucanson/algorithms/brzozowski.hxx				\
+vaucanson/algorithms/characteristic.hh				\
+vaucanson/algorithms/characteristic.hxx				\
 vaucanson/algorithms/complement.hh				\
 vaucanson/algorithms/complement.hxx				\
 vaucanson/algorithms/complete.hh				\

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,9 +42,13 @@
 # ifndef CONTEXT
 #  error "CONTEXT has to be declared."
 # endif
+# ifndef BOOL_CONTEXT
+#  error "BOOL_CONTEXT has to be declared."
+# endif
 
 # define CONTEXT_HEADER    <vaucanson/CONTEXT.hh>
 # define CONTEXT_NAMESPACE vcsn::CONTEXT
+# define BOOL_CONTEXT_HEADER <vaucanson/BOOL_CONTEXT.hh>
 
 # if 0 /* @bug Should use this with dynamic libraries. */
 #  define VCSN_USE_INTERFACE_ONLY 1

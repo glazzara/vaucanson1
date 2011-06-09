@@ -1,3 +1,26 @@
+2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Implement the characteristic command (for free monoids only).
+
+	* include/vaucanson/algorithms/characteristic.hxx,
+	include/vaucanson/algorithms/characteristic.hh: New files.
+	* include/Makefile.am: Add them.
+	* taf-kit/src/Makefile.am: Define BOOL_CONTEXT macros for
+	all instances.
+	* taf-kit/src/cmd_wt.cc (characteristic_command): New function.
+	* taf-kit/src/common.hh (BOOL_CONTEXT_HEADER): Define.
+	* taf-kit/src/getters.cc, taf-kit/src/getters.hh
+	(get_boolean_aut): Rename as ...
+	(get_single_band_aut): ... this because the automaton we
+	read with this function is not always Boolean.
+	(get_boolean_aut, locate_boolean_file): New functions.
+	* taf-kit/src/cmd_fmp.cc (evaluation_command): Adjust call.
+	* taf-kit/src/library_commands.hh (get_base_path): Define
+	base_path as static so that it is computed only once.
+	* taf-kit/src/pipe.hh, taf-kit/src/pipe_getters.hh,
+	taf-kit/src/pipe_getters.hxx, taf-kit/src/pipe_writers.hxx:
+	Implement I/O for BOOL_CONTEXT.
+
 2011-06-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Add missing interface for aut_to_exp().

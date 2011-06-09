@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2010 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -71,6 +71,27 @@ pipe_stream_writer::operator() (automaton_t& a) const
       std::cerr << "Could not save automaton: unkown output type." << std::endl;
     }
 }
+
+# ifndef DUPBOOL
+void
+pipe_stream_writer::operator() (BOOL_CONTEXT::automaton_t& a) const
+{
+  switch (aut_f)
+    {
+    case OUTPUT_TYPE_XML:
+      o << automaton_saver (a, string_out (), XML ());
+      break;
+    case OUTPUT_TYPE_FSM:
+      fsm_dump (o, a);
+      break;
+    case OUTPUT_TYPE_DOT:
+      dot_dump (o, a, "");
+      break;
+    default:
+      std::cerr << "Could not save automaton: unkown output type." << std::endl;
+    }
+}
+#endif
 
 void
 pipe_stream_writer::operator() (rat_exp_t& a) const

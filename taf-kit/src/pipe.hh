@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2010 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,6 +43,8 @@
 
 # include <boost/variant.hpp>
 
+# include BOOL_CONTEXT_HEADER
+
 # ifdef IOAUT_CONTEXT
 #  define IOAUT_CONTEXT_HEADER <vaucanson/IOAUT_CONTEXT.hh>
 #  include IOAUT_CONTEXT_HEADER
@@ -81,6 +83,7 @@ enum command_output_status
 typedef boost::variant<command_output_status,
 		       automaton_t,
 		       rat_exp_t,
+		       BOOL_CONTEXT::automaton_t,
 # ifdef IOAUT_CONTEXT
 		       IOAUT_CONTEXT::automaton_t,
 		       mute_ltl_to_pair<automaton_t::set_t,

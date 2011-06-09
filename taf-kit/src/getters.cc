@@ -196,6 +196,33 @@ locate_fmp_file(const arguments_t& args, const std::string& s,
 }
 #endif //! WITH_TWO_ALPHABETS
 
+std::string
+locate_boolean_file(const arguments_t& args, const std::string& s,
+		    bool abort_if_empty)
+{
+  // First, try to load the file as given.
+  const char* ss = s.c_str();
+  if (file_exists(ss))
+    return s;
+
+  // Then, try the automata path.
+  std::list<std::string> path;
+  get_automata_path(path, BOOL_DIR, get_base_path());
+
+  std::list<std::string>::const_iterator i;
+  for (i = path.begin(); i != path.end(); ++i)
+    {
+      std::string file = *i + "/" + s;
+      const char* f = file.c_str();
+      if (file_exists(f, abort_if_empty))
+	return file;
+    }
+
+  // If we failed, return the filename unchanged, so
+  // we can complain about it.
+  return s;
+}
+
 # ifndef WITH_TWO_ALPHABETS
 /// Getter for RatExp.
 rat_exp_t get_exp(const arguments_t& args, const int& n)
@@ -369,19 +396,20 @@ display_aut(const automaton_t& aut, const arguments_t& args, int n)
 }
 
 #ifdef WITH_TWO_ALPHABETS
-IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n)
+IOAUT_CONTEXT::automaton_t get_single_band_aut(const arguments_t& args,
+					       int n)
 {
   const std::string& s = args.args[n];
 
   if (s == "-")
   {
     IOAUT_CONTEXT::automaton_t a =
-      boost::apply_visitor(boolean_automaton_getter
+      boost::apply_visitor(single_band_automaton_getter
 			   (g_res.name, g_res.input_aut_type),
 			   g_res.output);
 
     // Set the writing data before return.
-    set_boolean_writing_data(a, args);
+    set_single_band_writing_data(a, args);
 
     return a;
   }
@@ -414,7 +442,7 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
     delete is;
 
     // Set the writing data before return.
-    set_boolean_writing_data(a, args);
+    set_single_band_writing_data(a, args);
 
     return a;
   }
@@ -427,18 +455,102 @@ IOAUT_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args, const int& n
 }
 #endif // !WITH_TWO_ALPHABETS
 
+BOOL_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args,
+					       int n)
+{
+  const std::string& s = args.args[n];
+
+  if (s == "-")
+  {
+    BOOL_CONTEXT::automaton_t a =
+      boost::apply_visitor(boolean_automaton_getter
+			   (g_res.name, g_res.input_aut_type),
+			   g_res.output);
+
+    // Set the writing data before return.
+    set_boolean_writing_data(a, args);
+
+    return a;
+  }
+
+  std::string ifile = locate_boolean_file(args, s);
+  std::istream* is = new std::ifstream(ifile.c_str());
+
+  if (not is->fail())
+  {
+    using namespace vcsn::tools;
+    using namespace vcsn::xml;
+
+# ifndef WITH_TWO_ALPHABETS
+    BOOL_CONTEXT::automaton_t a =
+      BOOL_CONTEXT::make_automaton(alphabet_t());
+# else
+    BOOL_CONTEXT::automaton_t a =
+      BOOL_CONTEXT::make_automaton(first_alphabet_t());
+#endif
+
+    switch (g_res.input_aut_type)
+      {
+      case INPUT_TYPE_XML:
+	*is >> automaton_loader(a, string_out (), XML ());
+	break;
+      case INPUT_TYPE_FSM:
+	fsm_load(*is, a);
+	break;
+      default:
+	std::cerr << "Error: could not load automaton `"
+		  << ifile << "'." << std::endl;
+	exit(1);
+      }
+
+    delete is;
+
+    // Set the writing data before return.
+    set_boolean_writing_data(a, args);
+
+    return a;
+  }
+  else
+  {
+    std::cerr << "Error: could not load automaton `"
+	      << ifile << "'." << std::endl;
+    exit(1);
+  }
+}
+
+
+void set_boolean_writing_data(BOOL_CONTEXT::automaton_t& a,
+			      const arguments_t& args)
+{
+#ifndef WITH_TWO_ALPHABETS
+  //FIXME: Do not know how to rewrite this.
+  //set_series_writing_data_(*(a.structure().series().representation()),
+  // args.srep, args.cf);
+  set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
+			   args.mrep, args.cf);
+#else
+  (void)a;
+  (void)args;
+  //set_series_writing_data_(*(a.structure().series().representation()),
+  //args.srep.first_representation(), args.cf1);
+  //set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
+  //			   args.mrep1, args.cf1);
+#endif
+}
+
 # ifdef WITH_TWO_ALPHABETS
 
 LETTER_CONTEXT(automaton_t::monoid_t::first_monoid_t::letter_t)
 
-void set_boolean_writing_data(IOAUT_CONTEXT::automaton_t& a,
-			      const arguments_t& args)
+void set_single_band_writing_data(IOAUT_CONTEXT::automaton_t& a,
+				  const arguments_t& args)
 {
   set_series_writing_data_(*(a.structure().series().representation()),
 			   args.srep.first_representation(), args.cf1);
   set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
 			   args.mrep1, args.cf1);
 }
+
 void set_writing_data(automaton_t& a, const arguments_t& args)
 {
   set_series_writing_data_(*(a.structure().series().representation()),

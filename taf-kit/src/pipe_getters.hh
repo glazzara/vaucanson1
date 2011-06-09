@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -73,12 +73,33 @@ public:
 };
 # endif // !WITH_TWO_ALPHABETS
 
-# ifdef WITH_TWO_ALPHABETS
 class boolean_automaton_getter
-  : public boost::static_visitor<IOAUT_CONTEXT::automaton_t>
+  : public boost::static_visitor<BOOL_CONTEXT::automaton_t>
 {
 public:
   boolean_automaton_getter (std::string& command, input_format_t);
+
+  BOOL_CONTEXT::automaton_t
+  operator() (BOOL_CONTEXT::automaton_t& a) const;
+
+  BOOL_CONTEXT::automaton_t
+  operator() (std::string& str) const;
+
+  BOOL_CONTEXT::automaton_t operator() (command_output_status& i) const;
+
+  template<typename T>
+  BOOL_CONTEXT::automaton_t operator() (T&) const;
+
+  std::string command;
+  input_format_t f;
+};
+
+# ifdef WITH_TWO_ALPHABETS
+class single_band_automaton_getter
+  : public boost::static_visitor<IOAUT_CONTEXT::automaton_t>
+{
+public:
+  single_band_automaton_getter (std::string& command, input_format_t);
 
   IOAUT_CONTEXT::automaton_t
   operator() (IOAUT_CONTEXT::automaton_t& a) const;

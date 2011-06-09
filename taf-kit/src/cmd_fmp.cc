@@ -168,7 +168,7 @@ static int
 evaluation_command(const arguments_t& args)
 {
   automaton_t src = get_aut(args, 1);
-  IOAUT_CONTEXT::automaton_t a = get_boolean_aut(args, 2);
+  IOAUT_CONTEXT::automaton_t a = get_single_band_aut(args, 2);
   IOAUT_CONTEXT::automaton_t res =
     IOAUT_CONTEXT::make_automaton
     (src.structure().series().monoid().second_monoid().alphabet(),

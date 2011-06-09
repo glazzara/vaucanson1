@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
+// Copyright (C) 2006, 2007, 2008, 2009, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -218,8 +218,6 @@ rat_exp_getter::operator() (T&) const
 }
 # endif // !WITH_TWO_ALPHABETS
 
-
-# ifdef WITH_TWO_ALPHABETS
 boolean_automaton_getter::boolean_automaton_getter (std::string& cmd,
 						    input_format_t fmt)
   : command (cmd),
@@ -227,14 +225,103 @@ boolean_automaton_getter::boolean_automaton_getter (std::string& cmd,
 {
 }
 
+BOOL_CONTEXT::automaton_t
+boolean_automaton_getter::operator() (BOOL_CONTEXT::automaton_t& a) const
+{
+  return a;
+}
+
+BOOL_CONTEXT::automaton_t
+boolean_automaton_getter::operator() (std::string& str) const
+{
+  std::istringstream is (str);
+
+  // Representations will be build by the automaton loader.
+# ifndef WITH_TWO_ALPHABETS
+  BOOL_CONTEXT::automaton_t a =
+    BOOL_CONTEXT::make_automaton (alphabet_t());
+#else
+  BOOL_CONTEXT::automaton_t a =
+    BOOL_CONTEXT::make_automaton (first_alphabet_t());
+#endif
+
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      is >> automaton_loader(a, string_out (), XML ());
+      break;
+    case INPUT_TYPE_FSM:
+      fsm_load(is, a);
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
+  return a;
+}
+
+BOOL_CONTEXT::automaton_t
+boolean_automaton_getter::operator() (command_output_status& i) const
+{
+  if (i != PIPE_GET_FROM_STDIN)
+    {
+      std::cerr << command
+		<< ": Incorrect input type"
+		<< std::endl;
+      exit (1);
+    }
+
+  // Representations will be build by the automaton loader.
+# ifndef WITH_TWO_ALPHABETS
+  BOOL_CONTEXT::automaton_t a =
+    BOOL_CONTEXT::make_automaton (alphabet_t ());
+# else
+  BOOL_CONTEXT::automaton_t a =
+    BOOL_CONTEXT::make_automaton (first_alphabet_t ());
+#endif
+
+  switch (f)
+    {
+    case INPUT_TYPE_XML:
+      std::cin >> automaton_loader(a, string_out (), XML ());
+      break;
+    case INPUT_TYPE_FSM:
+      fsm_load(std::cin, a);
+      break;
+    default:
+      std::cerr << "FATAL: Could not load automaton." << std::endl;
+      exit(1);
+    }
+  return a;
+}
+
+template<typename T>
+BOOL_CONTEXT::automaton_t
+boolean_automaton_getter::operator() (T&) const
+{
+  std::cerr << command
+	    << ": Incorrect input type"
+	    << std::endl;
+  exit (1);
+}
+
+
+# ifdef WITH_TWO_ALPHABETS
+single_band_automaton_getter::single_band_automaton_getter (std::string& cmd,
+						    input_format_t fmt)
+  : command (cmd),
+    f (fmt)
+{
+}
+
 IOAUT_CONTEXT::automaton_t
-boolean_automaton_getter::operator() (IOAUT_CONTEXT::automaton_t& a) const
+single_band_automaton_getter::operator() (IOAUT_CONTEXT::automaton_t& a) const
 {
   return a;
 }
 
 IOAUT_CONTEXT::automaton_t
-boolean_automaton_getter::operator() (std::string& str) const
+single_band_automaton_getter::operator() (std::string& str) const
 {
   std::istringstream is (str);
 
@@ -258,7 +345,7 @@ boolean_automaton_getter::operator() (std::string& str) const
 }
 
 IOAUT_CONTEXT::automaton_t
-boolean_automaton_getter::operator() (command_output_status& i) const
+single_band_automaton_getter::operator() (command_output_status& i) const
 {
   if (i != PIPE_GET_FROM_STDIN)
     {
@@ -289,7 +376,7 @@ boolean_automaton_getter::operator() (command_output_status& i) const
 
 template<typename T>
 IOAUT_CONTEXT::automaton_t
-boolean_automaton_getter::operator() (T&) const
+single_band_automaton_getter::operator() (T&) const
 {
   std::cerr << command
 	    << ": Incorrect input type"

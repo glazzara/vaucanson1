@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009, 2010 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -83,7 +83,7 @@ static
 const char*
 get_base_path()
 {
-  const char* base_path = getenv("VCSN_DATA_PATH");
+  static const char* base_path = getenv("VCSN_DATA_PATH");
   if (base_path)
     return base_path;
   return VCSN_DATA_PATH;

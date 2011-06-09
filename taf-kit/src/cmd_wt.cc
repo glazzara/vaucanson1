@@ -16,6 +16,7 @@
 //
 
 #include "commands.hh"
+#include <vaucanson/algorithms/characteristic.hh>
 
 static int
 transpose_command(const arguments_t& args)
@@ -153,6 +154,23 @@ power_command(const arguments_t& args)
   return 0;
 }
 
+static int
+characteristic_command(const arguments_t& args)
+{
+  BOOL_CONTEXT::automaton_t a = get_boolean_aut(args, 1);
+# ifndef WITH_TWO_ALPHABETS
+  automaton_t res =
+    make_automaton(a.structure().series().monoid().alphabet());
+# else
+  automaton_t res =
+    make_automaton(a.structure().series().monoid().first_monoid().alphabet());
+# endif // !WITH_TWO_ALPHABETS
+  characteristic(res, a);
+  g_res.keep(res);
+  return 0;
+}
+
+
 BEGIN_COMMAND_GROUP(cmd_gen,
       "2. Operations on weighted automata and expressions over free monoids:");
 COMMAND_ENTRY(transpose, Aut, "Transpose the automaton `aut'.");
@@ -177,4 +195,5 @@ COMMAND_ENTRY(exp_to_aut, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY_EXPERT(realtime_E, Exp, "Make `exp' realtime.");
 COMMAND_ENTRY(product, AutAut, "Build the product of two automata.");
 COMMAND_ENTRY(power, AutInt, "Build the `n'th power of `aut'.");
+COMMAND_ENTRY(characteristic, Aut, "Build an automaton from the Boolean automaton `aut'.");
 END_COMMAND_GROUP
