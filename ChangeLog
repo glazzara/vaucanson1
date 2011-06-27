@@ -1,5 +1,13 @@
 2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Call eps_removal after composition.
+
+	* include/vaucanson/algorithms/normalized_composition.hxx
+	(do_compose): Call eps_removal_here() after composing two
+	Boolean transducers.
+
+2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename composition as b-composition.
 
 	* taf-kit/src/cmd_fmp.cc (composition, composition_R): Rename as ...
