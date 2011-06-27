@@ -85,15 +85,16 @@ ltl_to_pair_command(const arguments_t& args)
 }
 
 
+#ifndef WITH_WEIGHTS
 static int
-composition_command(const arguments_t& args)
+b_composition_command(const arguments_t& args)
 {
   g_res.keep(compose(get_aut(args, 1), get_aut(args, 2)));
   return 0;
 }
 
 static int
-composition_R_command(const arguments_t& args)
+b_composition_R_command(const arguments_t& args)
 {
   automaton_t a = get_aut(args, 1);
   automaton_t b = get_aut(args, 2);
@@ -106,6 +107,7 @@ composition_R_command(const arguments_t& args)
   g_res.keep(compose(a,b));
   return 0;
 }
+#endif
 
 static int
 u_composition_command(const arguments_t& args)
@@ -227,8 +229,12 @@ COMMAND_ENTRY_EXPERT(normalize, Aut,
 COMMAND_ENTRY(is_ltl, Aut, "Test if `aut' is letter-to-letter.");
 COMMAND_ENTRY(ltl_to_pair, Aut,
       "Convert `Aut' into an automaton defined over a pair letter alphabet.");
-COMMAND_ENTRY(composition, AutAut,
+#ifndef WITH_WEIGHTS
+COMMAND_ENTRY(b_composition, AutAut,
 	      "Compose two subnormalized transducers.");
+COMMAND_ENTRY(b_composition_R, AutAut,
+	      "Compose two transducers.");
+#endif
 COMMAND_ENTRY_EXPERT(composition_cover, Aut, "Outsplitting.");
 COMMAND_ENTRY_EXPERT(composition_co_cover, Aut, "Insplitting.");
     COMMAND_ENTRY(u_composition, AutAut,
@@ -238,8 +244,6 @@ COMMAND_ENTRY(domain, Aut,
 	      "Give the automaton that accepts all inputs accepted by `aut'.");
 COMMAND_ENTRY(image, Aut,
 	      "Give an automaton that accepts all output produced by `aut'.");
-COMMAND_ENTRY(composition_R, AutAut,
-	      "Compose two transducers.");
 COMMAND_ENTRY(evaluation, AutAut,
 	      "Evaluate the language described by the "
 	      IOAUT_NAME " automaton `aut2' on the transducer `aut1'.");

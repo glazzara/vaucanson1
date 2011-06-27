@@ -1,5 +1,14 @@
 2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Rename composition as b-composition.
+
+	* taf-kit/src/cmd_fmp.cc (composition, composition_R): Rename as ...
+	(b_composition, b_composition_R): ... these.  And compile
+	only for Boolean weights.
+	* taf-kit/tests/vcsn-char-fmp-b.test: Adjust.
+
+2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Implement the characteristic command (for free monoids only).
 
 	* include/vaucanson/algorithms/characteristic.hxx,
