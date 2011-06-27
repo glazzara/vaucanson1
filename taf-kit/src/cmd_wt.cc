@@ -17,6 +17,8 @@
 
 #include "commands.hh"
 #include <vaucanson/algorithms/characteristic.hh>
+#include <vaucanson/algorithms/shuffle.hh>
+#include <vaucanson/algorithms/infiltration.hh>
 
 static int
 transpose_command(const arguments_t& args)
@@ -143,6 +145,20 @@ product_command(const arguments_t& args)
 }
 
 static int
+shuffle_command(const arguments_t& args)
+{
+  g_res.keep(shuffle(get_aut(args, 1), get_aut(args, 2)));
+  return 0;
+}
+
+static int
+infiltration_command(const arguments_t& args)
+{
+  g_res.keep(infiltration(get_aut(args, 1), get_aut(args, 2)));
+  return 0;
+}
+
+static int
 power_command(const arguments_t& args)
 {
   int n = atoi(args.args[2]);
@@ -194,6 +210,8 @@ COMMAND_ENTRY(expand, Exp, "Distribute product over addition in `exp'.");
 COMMAND_ENTRY(exp_to_aut, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY_EXPERT(realtime_E, Exp, "Make `exp' realtime.");
 COMMAND_ENTRY(product, AutAut, "Build the product of two automata.");
+COMMAND_ENTRY(shuffle, AutAut, "Build the shuffle product of two automata.");
+COMMAND_ENTRY(infiltration, AutAut, "Build the infiltration product of two automata.");
 COMMAND_ENTRY(power, AutInt, "Build the `n'th power of `aut'.");
 COMMAND_ENTRY(characteristic, Aut, "Build an automaton from the Boolean automaton `aut'.");
 END_COMMAND_GROUP

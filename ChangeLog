@@ -1,5 +1,20 @@
 2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Integrate shuffle and infiltration algorithm, from Pierre-Yves
+	Angrand <pangrand@gmail.com>.
+
+	* include/vaucanson/algorithms/infiltration.hh,
+	include/vaucanson/algorithms/infiltration.hxx,
+	include/vaucanson/algorithms/shuffle.hh,
+	include/vaucanson/algorithms/shuffle.hxx: New files.
+	* include/Makefile.am: Add them.
+	* lib/generate_libvcsn.rb (create?): Do not compile these
+	in FMP contexts.
+	* taf-kit/src/cmd_wt.cc (shuffle_command, infiltration_command):
+	New functions.
+
+2011-06-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename u-composition as composition.
 
 	* taf-kit/src/cmd_fmp.cc (u_composition): Rename as ...

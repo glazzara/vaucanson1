@@ -2,7 +2,7 @@
 # generate_libvcsn.rb: this file is part of the Vaucanson project.
 #
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2007, 2008, 2009, 2010 The Vaucanson Group.
+# Copyright (C) 2007, 2008, 2009, 2010, 2011 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -144,7 +144,9 @@ def create?(type, file)
 	      file !~ /complete.hh/ and
 	      file !~ /is_deterministic.hh/ and
               file !~ /rw_composition.hh/ and
-	      file !~ /product.hh/
+	      file !~ /product.hh/ and
+	      file !~ /shuffle.hh/ and
+	      file !~ /infiltration.hh/
 	    )
       ) and
       ( # RW transducers only filters.

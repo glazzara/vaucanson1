@@ -327,6 +327,8 @@ vaucanson/algorithms/is_useless.hh				\
 vaucanson/algorithms/is_useless.hxx				\
 vaucanson/algorithms/image.hh					\
 vaucanson/algorithms/image.hxx					\
+vaucanson/algorithms/infiltration.hh				\
+vaucanson/algorithms/infiltration.hxx				\
 vaucanson/algorithms/initial_derivation.hh			\
 vaucanson/algorithms/initial_derivation.hxx			\
 vaucanson/algorithms/internal/build_pattern.hh			\
@@ -407,6 +409,8 @@ vaucanson/algorithms/search.hh					\
 vaucanson/algorithms/search.hxx					\
 vaucanson/algorithms/shortest.hh				\
 vaucanson/algorithms/shortest.hxx				\
+vaucanson/algorithms/shuffle.hh					\
+vaucanson/algorithms/shuffle.hxx				\
 vaucanson/algorithms/standard.hh				\
 vaucanson/algorithms/standard.hxx				\
 vaucanson/algorithms/standard_of.hh				\
