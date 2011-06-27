@@ -50,7 +50,7 @@ fail1 $VCSN is-empty t1.xml
 #FIXME: Disable xml diff
 #  diff tmp1.xml t1.xml_compose_u1
 
-  $VCSN u_composition t1.xml u1.xml > tmp2.xml
+  $VCSN composition t1.xml u1.xml > tmp2.xml
 
 #FIXME: Disable are-isomorphic test
 # as long as this algorithm is not correctly
@@ -58,7 +58,7 @@ fail1 $VCSN is-empty t1.xml
 # fail1 $VCSN are-isomorphic tmp1.xml tmp2.xml
 
 ## Unambiguous composition test on boolean transducers
-  $VCSN u_composition $t2 $u2 > tmp.xml
+  $VCSN composition $t2 $u2 > tmp.xml
 
 #FIXME: Disable xml diff
 # diff tmp.xml $t2_ucompose_u2

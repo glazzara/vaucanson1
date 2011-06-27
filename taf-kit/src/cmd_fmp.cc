@@ -110,7 +110,17 @@ b_composition_R_command(const arguments_t& args)
 #endif
 
 static int
-u_composition_command(const arguments_t& args)
+composition_command(const arguments_t& args)
+{
+  automaton_t a = get_aut(args, 1);
+  automaton_t b = get_aut(args, 2);
+
+  g_res.keep(u_compose(a,b));
+  return 0;
+}
+
+static int
+composition_R_command(const arguments_t& args)
 {
   automaton_t a = get_aut(args, 1);
   automaton_t b = get_aut(args, 2);
@@ -237,8 +247,10 @@ COMMAND_ENTRY(b_composition_R, AutAut,
 #endif
 COMMAND_ENTRY_EXPERT(composition_cover, Aut, "Outsplitting.");
 COMMAND_ENTRY_EXPERT(composition_co_cover, Aut, "Insplitting.");
-    COMMAND_ENTRY(u_composition, AutAut,
-		  "Compose two transducers, preserving the number of paths.");
+COMMAND_ENTRY(composition, AutAut,
+	      "Compose two subnormalized transducers, preserving the number of paths.");
+COMMAND_ENTRY(composition_R, AutAut,
+	      "Compose two transducers, preserving the number of paths.");
 
 COMMAND_ENTRY(domain, Aut,
 	      "Give the automaton that accepts all inputs accepted by `aut'.");
