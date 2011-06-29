@@ -323,42 +323,41 @@ namespace vcsn {
       set_rational (num_, den_);
     }
 
+
     inline
-    std::ostream& operator<< (std::ostream& ostr, const RationalNumber& nb)
+    std::ostream&
+    operator<< (std::ostream& ostr, const RationalNumber& nb)
     {
       nb.print (ostr);
       return ostr;
     }
 
-  } // !algebra
-
-} // !vcsn
-
-namespace std {
-
     inline
     std::istream&
-    operator>> (std::istream& istr, vcsn::algebra::RationalNumber& a)
+    operator>> (std::istream& istr, RationalNumber& a)
     {
       int num;
 
       istr >> num;
       char slash;
-      istr.read (&slash, 1);
+      if (!istr.eof())
+	istr.get(slash);
       if ('/' != slash) // Test if a slash is present.
       {
-       	istr.unget ();
-       	a.set (num, 1);
+       	istr.unget();
+       	a.set(num, 1);
        	return istr;
        }
 
       // Otherwise read the denominator.
       int den;
       istr >> den;
-      a.set (num, den);
+      a.set(num, den);
 
       return istr;
     }
-}
+  } // !algebra
+
+} // !vcsn
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_Q_NUMBER_HXX

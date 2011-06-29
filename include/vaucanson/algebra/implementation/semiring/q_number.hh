@@ -182,19 +182,17 @@ namespace vcsn
       //// @}
     }; // RationalNumber
 
+    inline
     std::ostream& operator<< (std::ostream&, const RationalNumber&);
+
+    inline
+    std::istream& operator>> (std::istream&, RationalNumber&);
+
     /// @}
   } // !algebra
 
   /// @}
 } // !vcsn
-
-namespace std {
-
-    inline
-    std::istream&
-    operator>> (std::istream&, vcsn::algebra::RationalNumber&);
-}
 
 
 # if !defined VCSN_USE_INTERFACE_ONLY || defined VCSN_USE_LIB

@@ -1,5 +1,21 @@
 2011-06-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix parsing of Q numbers with g++-4.6.
+
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx
+	(op_parse): Remove this overloading for RationalNumber.  Its
+	incorrect usage of tellg() broke with g++-4.6, and the general
+	definition of op_parse() in
+	include/vaucanson/algebra/concept/semiring_base.hxx will call the
+	operator<< code that is specialized for RationalNumber already.
+	* include/vaucanson/algebra/implementation/semiring/q_number.hh,
+	include/vaucanson/algebra/implementation/semiring/q_number.hxx
+	(operator<<): Move into the vcsn::algebra namespace, so that Koening
+	lookup works.  Also to not try to read past the end of the stream.
+
+2011-06-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Do not call realtime in quotient.
 
 	* taf-kit/src/cmd_wt.cc (quotient_command): Do not call realtime.

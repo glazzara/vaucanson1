@@ -164,7 +164,7 @@ namespace vcsn {
     | specializations for rational numbers |
     `-------------------------------------*/
 
-    
+
     inline RationalNumber
     op_sub(const algebra::NumericalSemiring&, const RationalNumber&, const RationalNumber&);
 
@@ -204,14 +204,6 @@ namespace vcsn {
     Element<algebra::NumericalSemiring, algebra::RationalNumber>
     op_choose_non_starable(const algebra::NumericalSemiring& set,
 			   SELECTOR(algebra::RationalNumber));
-
-    template <typename S>
-    inline
-    bool
-    op_parse(const algebra::SemiringBase<S>&,
-	     RationalNumber&			w,
-	     const std::string&			s,
-	     typename std::string::const_iterator& i);
 
   } // algebra
 
