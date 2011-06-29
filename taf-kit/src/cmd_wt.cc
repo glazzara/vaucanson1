@@ -56,6 +56,13 @@ realtime_command(const arguments_t& args)
 static int
 quotient_command(const arguments_t& args)
 {
+  g_res.keep(quotient(get_aut(args, 1)));
+  return 0;
+};
+
+static int
+quotient_S_command(const arguments_t& args)
+{
   g_res.keep(quotient(realtime(get_aut(args, 1))));
   return 0;
 };
@@ -204,7 +211,7 @@ COMMAND_ENTRY(is_unambiguous, Aut,
 	      "Return whether `aut' is unambiguous.");
 COMMAND_ENTRY(is_realtime, Aut, "Tell whether `aut' is realtime.");
 COMMAND_ENTRY(realtime, Aut, "Build a realtime version of `aut'.");
-COMMAND_ENTRY(quotient, Aut, "Build the quotient of `aut'.");
+COMMAND_ENTRY(quotient, Aut, "Build the quotient of the realtime automaton `aut'.");
 #ifdef FMPI_CONTEXT
 COMMAND_ENTRY(partial_identity, Aut,
 	      "Transform an automaton into an FMP "

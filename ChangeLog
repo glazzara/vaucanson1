@@ -1,9 +1,17 @@
 2011-06-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Do not call realtime in quotient.
+
+	* taf-kit/src/cmd_wt.cc (quotient_command): Do not call realtime.
+	* taf-kit/tests/vcsn-int-z.test, taf-kit/tests/vcsn-int-b.test: Adjust.
+	Do not call realtime in quotient.
+
+2011-06-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Introduce eval-S.
 
 	* taf-kit/src/cmd_wt.cc (eval_command): Rename as ...
-	(eval_S_command): ... this
+	(eval_S_command): ... this.
 	(eval_command): New version that does not call realtime.
 	* taf-kit/tests/vcsn-char-b.test,
 	taf-kit/tests/vcsn-char-fmp-b.test,

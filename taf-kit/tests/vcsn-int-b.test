@@ -78,7 +78,7 @@ test 1 = `$VCSN eval e.xml '12'`
 test 0 = `$VCSN eval e.xml '11'`
 test 1 = `$VCSN eval e.xml '11#12'`
 
-$VCSN --alphabet=33,34,35 thompson '(33* + 35).34' \| quotient -
+$VCSN --alphabet=33,34,35 thompson '(33* + 35).34' \| realtime - \| quotient -
 $VCSN --alphabet=33,34,35 standard '(33* + 35).34' > m.xml
 
 $VCSN transpose m.xml > mt.xml

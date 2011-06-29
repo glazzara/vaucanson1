@@ -70,7 +70,7 @@ EOF
 
 test `$VCSN eval 33.xml '32#33#32'` = 175
 
-$VCSN --alphabet=33,34,35 thompson '(33 {2}* + 35).34' \| quotient -
+$VCSN --alphabet=33,34,35 thompson '(33 {2}* + 35).34' \| realtime - \| quotient -
 
 $VCSN --alphabet=33,34,35 standard '(33 {2}* + 35).34' > m.xml
 
