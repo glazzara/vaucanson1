@@ -373,16 +373,18 @@ fail1 $VCSN is-realtime ab.xml
       $VCSN realtime $realtime_test \| is-realtime -
 
 fail1 $VCSN is-realtime $initialword
-      test "`$VCSN eval $initialword aba`" = 1
-      test "`$VCSN eval $initialword ab`" = 0
+fail255 $VCSN eval $initialword aba
+      test "`$VCSN eval-S $initialword aba`" = 1
+      test "`$VCSN eval-S $initialword ab`" = 0
       $VCSN realtime $initialword > initialreal.xml
       $VCSN is-realtime initialreal.xml
       test "`$VCSN eval initialreal.xml aba`" = 1
       test "`$VCSN eval initialreal.xml ab`" = 0
 
 fail1 $VCSN is-realtime $finalword
-      test "`$VCSN eval $finalword aba`" = 1
-      test "`$VCSN eval $finalword ab`" = 0
+fail255 $VCSN eval $finalword aba
+      test "`$VCSN eval-S $finalword aba`" = 1
+      test "`$VCSN eval-S $finalword ab`" = 0
       $VCSN realtime $finalword > finalreal.xml
       $VCSN is-realtime finalreal.xml
       test "`$VCSN eval finalreal.xml aba`" = 1

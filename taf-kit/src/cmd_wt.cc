@@ -86,6 +86,16 @@ partial_identity_command(const arguments_t& args)
 static int
 eval_command(const arguments_t& args)
 {
+  automaton_t a = get_aut (args, 1);
+  precondition(is_realtime(a));
+  semiring_elt_t b = eval(a, get_word(a, args.args[2])).value();
+  g_res.stream << b << std::endl;
+  return 0;
+};
+
+static int
+eval_S_command(const arguments_t& args)
+{
   automaton_t a = realtime(get_aut (args, 1));
   semiring_elt_t b = eval(a, get_word(a, args.args[2])).value();
   g_res.stream << b << std::endl;
@@ -201,7 +211,8 @@ COMMAND_ENTRY(partial_identity, Aut,
 	      "transducer by creating, for each word, "
 	      "a pair containing twice this word.");
 #endif
-COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on `aut'.");
+COMMAND_ENTRY(eval, AutWord, "Evaluate `word' on the realtime automaton `aut'.");
+COMMAND_ENTRY(eval_S, AutWord, "Evaluate `word' on `aut'.");
 // Operations on expressions
 COMMAND_ENTRY(standard, Exp, "Build the standard automaton for `exp'.");
 COMMAND_ENTRY(thompson, Exp, "Build the Thompson automaton for `exp'.");

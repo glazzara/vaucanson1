@@ -70,10 +70,10 @@ fail1 $VCSN is-empty t1.xml
 #  $VCSN invert t1.xml \| are-isomorphic $inverted_t1 -
 
   input=`$VCSN eval t1.xml abba`
-  $VCSN domain t1.xml | vcsn-char-b eval - abba
+  $VCSN domain t1.xml | vcsn-char-b eval-S - abba
   $VCSN image t1.xml > t1image.xml
 # The following test must fail because input is a series and not a word...
-fail1 vcsn-char-b eval t1image.xml $input
+fail1 vcsn-char-b eval-S t1image.xml $input
 # ... so we expand it ...
   expanded_input=`vcsn-char-b -a"xy" expand $input`
 # ... split it at the + (it should be yxx+yxxy) ...
@@ -82,12 +82,12 @@ fail1 vcsn-char-b eval t1image.xml $input
 # ... check the two parts are not the same ...
   test x"$first_input" != x"$second_input"
 # ... and eval the image of t1.xml on both of them.
-  vcsn-char-b eval t1image.xml $first_input
-  vcsn-char-b eval t1image.xml $second_input
+  vcsn-char-b eval-S t1image.xml $first_input
+  vcsn-char-b eval-S t1image.xml $second_input
 
   $VCSN to-rw t1.xml
 
-  vcsn-char-b cat a1.xml | $VCSN evaluation t1.xml - | vcsn-char-b eval - yx
+  vcsn-char-b cat a1.xml | $VCSN evaluation t1.xml - | vcsn-char-b eval-S - yx
 
 
 
