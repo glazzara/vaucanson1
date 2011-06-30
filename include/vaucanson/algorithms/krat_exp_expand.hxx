@@ -39,7 +39,7 @@ namespace vcsn
       typedef std::map<exp_list_t, semiring_elt_t>	ret_t;
     };
 
-    // The Expander class. It break up the expression to build a map
+    // The Expander class. It breaks up the expression to build a map
     // and then rebuild it.
     template <class Series, class T, class Dispatch>
     struct KRatExpExpander : algebra::KRatExpMatcher<
@@ -124,18 +124,32 @@ namespace vcsn
 	return result;
       }
 
-      // Compute the concatenation of two list, regarding to handled elements.
+      // Compute the concatenation of two lists
       exp_list_t list_concat(const exp_list_t& left, const exp_list_t& right)
       {
-	typedef typename exp_list_t::const_iterator	const_iterator;
 
-	typename T::n_const_t* left_node =
-	  dynamic_cast<typename T::n_const_t*>(left.back().value().base());
-	typename T::n_const_t* right_node =
-	  dynamic_cast<typename T::n_const_t*>(right.front().value().base());
+	typename T::node_t* lnode = left.back().value().base();
+	typename T::node_t* rnode = right.front().value().base();
 
+	// Handle concatenations when one operand is a constant (ONE or ZERO)
+	if (dynamic_cast<typename T::n_one_t*>(lnode))
+	  return right;
+	if (dynamic_cast<typename T::n_one_t*>(rnode))
+	  return left;
+	if (dynamic_cast<typename T::n_zero_t*>(lnode))
+	  return left;
+	if (dynamic_cast<typename T::n_zero_t*>(rnode))
+	  return right;
+
+	typedef typename exp_list_t::const_iterator const_iterator;
 	std::list<exp_t>	result(left);
 
+	// If the last exp from left and the first exp from right
+	// are words, concatenate them.
+	typename T::n_const_t* left_node =
+	  dynamic_cast<typename T::n_const_t*>(lnode);
+	typename T::n_const_t* right_node =
+	  dynamic_cast<typename T::n_const_t*>(rnode);
 	if (left_node and right_node)
 	{
 	  result.back() = exp_t(exp_.structure(),
@@ -169,7 +183,15 @@ namespace vcsn
 
 	for (iterator i = llist.begin(); i != llist.end(); ++i)
 	  for (iterator j = rlist.begin(); j != rlist.end(); ++j)
-	    result[list_concat(i->first, j->first)] = i->second * j->second;
+	    {
+	      exp_list_t p = list_concat(i->first, j->first);
+
+	      iterator pi = result.find(p);
+	      if (pi != result.end())
+		pi->second += i->second * j->second;
+	      else
+		result[p] = i->second * j->second;
+	    }
 	return result;
       }
       END

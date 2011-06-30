@@ -232,4 +232,9 @@ alpha   1
 digits  e
 EOF
 
+test "`$VCSN -aab expand '(a+1)(a+1)'`" = "{2} a+aa+1"
+test "`$VCSN -aab expand '(ab+a)(a+ba)'`" = "aa+{2} aba+abba"
+test "`$VCSN -aab expand '(aa+a)(a+aa)'`" = "aa+{2} aaa+aaaa"
+test "`$VCSN -aab expand '(aa+a)(1+a)'`" = "a+{2} aa+aaa"
+
 exit 0

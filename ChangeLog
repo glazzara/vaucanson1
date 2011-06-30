@@ -1,3 +1,14 @@
+2011-06-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix two bugs in expand.
+
+	* include/vaucanson/algorithms/krat_exp_expand.hxx (list_concat):
+	Handle ONE and ZERO in lists.
+	(MATCH__(Product, lhs, rhs)): Sum weights of identical element
+	generated while expansing the product.
+	* taf-kit/tests/vcsn-char-z.test: Add some test cases based on
+	a report by Jacques Sakarovitch.
+
 2011-06-29  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix parsing of Q numbers with g++-4.6.
