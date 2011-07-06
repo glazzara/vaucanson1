@@ -23,6 +23,7 @@
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/automata/implementation/transpose_view.hh>
 # include <vaucanson/misc/usual_macros.hh>
+# include <vaucanson/algorithms/is_trim.hh>
 
 namespace vcsn {
 
@@ -34,8 +35,8 @@ namespace vcsn {
   void
   factor_here (Element<A, AI>& a)
   {
-    // FIXME: Missing preconditions is_realtime and is_trim
     precondition(is_realtime(a));
+    precondition(is_trim(a));
 
     typedef Element<A, AI> automaton_t;
     AUTOMATON_TYPES (automaton_t);

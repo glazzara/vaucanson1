@@ -44,7 +44,7 @@ namespace vcsn {
    *
    * @param a The realtime automaton to work on.
    *
-   * @pre @a a must be realtime.
+   * @pre @a a must be realtime and trim
    */
   template<typename A, typename AI>
   void
@@ -55,7 +55,7 @@ namespace vcsn {
    *
    * @param a The realtime automaton to work on.
    *
-   * @pre @a a must be realtime.
+   * @pre @a a must be realtime and trim
    */
   template<typename A, typename AI>
   Element<A, AI>

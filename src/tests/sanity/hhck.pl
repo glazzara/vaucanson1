@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2008 The Vaucanson Group.
+# Copyright (C) 2008, 2011 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -177,6 +177,7 @@ sub read_hh($)
 	push @tags, "realtime" if $pre =~ /\brealtime\b/;
 #	push @tags, "boolean" if $pre =~ /\bboolean\b/;
 	push @tags, "normalized" if $pre =~ /\bnormalized\b/;
+	push @tags, "trim" if $pre =~ /\b(is_)?trim\b/;
 	push @tags, "complete" if $pre =~ /\bcomplete\b/;
 	push @tags, "deterministic" if $pre =~ /(?<!co-)\bdeterministic\b/;
 
@@ -267,6 +268,7 @@ sub read_hxx($@)
 
 	my @p = ();
 	push @p, "realtime" if $str =~ /is_realtime\(/;
+	push @p, "trim" if $str =~ /is_trim\(/;
 	push @p, "deterministic" if $str =~ /is_deterministic\(/;
 	push @p, "normalized" if $str =~ /is_normalized\(/;
 	push @p, "complete" if $str =~ /is_complete\(/;

@@ -1,3 +1,17 @@
+2011-07-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Check is_trim() in prefix(), factor(), and suffix().
+
+	* include/vaucanson/algorithms/factor.hh,
+	include/vaucanson/algorithms/factor.hxx,
+	include/vaucanson/algorithms/prefix.hh,
+	include/vaucanson/algorithms/prefix.hxx,
+	include/vaucanson/algorithms/suffix.hh,
+	include/vaucanson/algorithms/suffix.hxx: Add is_trim precondition
+	as reported by Jacques Sakarovitch.
+	* src/tests/sanity/hhck.pl: Add support from checking is_trim()
+	preconditions.
+
 2011-06-30  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix two bugs in expand.
