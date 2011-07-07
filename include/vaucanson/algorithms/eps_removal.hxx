@@ -79,16 +79,40 @@ namespace vcsn {
     return do_is_proper(a.structure(), a.series().monoid(), a);
   }
 
+
+  // Forward declaration.
+  template <class A_, typename Auto, typename Weight>
+  class EpsilonRemover;
+
+  template <class A_, typename Auto, typename Weight, int>
+  struct test_for_non_positive_semiring
+  {
+    bool run(const Auto&) const
+    {
+      return true;
+    }
+  };
+
+  template <class A_, typename Auto, typename Weight>
+  struct test_for_non_positive_semiring<A_, Auto, Weight, 0>
+  {
+    bool run(const Auto& a) const; // See After the EpsilonRemover declaration.
+  };
+
   /*--------------------------------------.
   | EpsilonRemover for weighted automaton |
   `--------------------------------------*/
 
-  template
-  <class A_, typename Auto, typename Weight>
+  template <class A_, typename Auto, typename Weight>
   class EpsilonRemover
   {
     AUTOMATON_TYPES(Auto);
 	typedef typename series_set_elt_t::support_t support_t;
+
+    friend struct test_for_non_positive_semiring
+    <A_, Auto, Weight, semiring_traits<semiring_t,
+				       semiring_elt_value_t>::is_positive>;
+
 
     automaton_t&	a;
     // zero and identity of used algebraic structure.
@@ -110,9 +134,12 @@ namespace vcsn {
 
     void operator()(misc::direction_type dir)
     {
-      if (!is_positive_semiring(SELECT(semiring_t),
-				SELECT(semiring_elt_value_t)))
-	test_for_non_positive_semiring();
+      test_for_non_positive_semiring
+	<A_, Auto, Weight, semiring_traits<semiring_t,
+					   semiring_elt_value_t>::is_positive>
+	nps;
+      result_not_computable_if(!nps.run(a));
+
       std::list<hstate_t> eps_states;
        if (dir == misc::backward)
 	this->epsilon_covering(eps_states);
@@ -181,9 +208,9 @@ namespace vcsn {
 	      if (eps_weight == semiring_elt_zero)
 		continue;
 	      series_set_elt_t eps_label(a.structure().series());
-	      eps_label.assoc(monoid_identity, eps_weight.value());
+	      eps_label.assoc(monoid_identity.value(), eps_weight.value());
 	      //which remains on the transition without epsilon:
-	      t.assoc(monoid_identity, semiring_elt_zero.value());
+	      t.assoc(monoid_identity.value(), semiring_elt_zero.value());
 	      hstate_t source=a.src_of(*e);
 	      a.add_series_transition(source, eps_state, eps_label);
 	      if (t != null_series)
@@ -328,9 +355,9 @@ namespace vcsn {
 	      if (eps_weight == semiring_elt_zero)
 		continue;
 	      series_set_elt_t eps_label(a.structure().series());
-	      eps_label.assoc(monoid_identity, eps_weight.value());
+	      eps_label.assoc(monoid_identity.value(), eps_weight.value());
 	      //which remains on the transition without epsilon:
-	      t.assoc(monoid_identity, semiring_elt_zero.value());
+	      t.assoc(monoid_identity.value(), semiring_elt_zero.value());
 	      hstate_t target=a.dst_of(*e);
 	      a.add_series_transition(eps_state, target, eps_label);
 	      if (t != null_series)
@@ -573,20 +600,28 @@ namespace vcsn {
 	}
     }
 
-
-    bool test_for_non_positive_semiring(){
-      std::list<hstate_t> eps_states;
-      automaton_t test(a);
-      EpsilonRemover epsTest(test.structure(), test);
-      epsTest.positive_path_covering();
-      epsTest.epsilon_covering(eps_states);
-      return epsTest.spontaneous_suppression(eps_states);
-    }
   };
 
+
+  template <class A_, typename Auto, typename Weight>
+  bool test_for_non_positive_semiring<A_, Auto, Weight, 0>::run(const Auto& a) const
+  {
+    AUTOMATON_TYPES(Auto);
+
+    std::list<hstate_t> eps_states;
+    automaton_t test(a);
+    EpsilonRemover<A_, Auto, Weight> epsTest(test.structure(), test);
+    epsTest.positive_path_covering();
+    epsTest.epsilon_covering(eps_states);
+    return epsTest.spontaneous_suppression(eps_states);
+  }
+
+
+
+
   /*--------------.
-  | eps_removal.  |
-  `--------------*/
+    | eps_removal.  |
+    `--------------*/
 
   template<class A_, typename Auto, typename Weight>
   void
@@ -596,7 +631,7 @@ namespace vcsn {
 		      misc::direction_type dir)
   {
     BENCH_TASK_SCOPED("eps_removal");
-
+    AUTOMATON_TYPES(Auto);
     EpsilonRemover<A_, Auto, Weight> algo(a_set, a);
     algo(dir);
   }
