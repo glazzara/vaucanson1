@@ -404,7 +404,8 @@ namespace vcsn {
 	{
 	  series_set_elt_t posit = a.series_of(*e);
 	  series_set_elt_t negat(a.structure().series());
-	  for_all_(support_t, x, posit.supp())
+	  support_t su = posit.supp();
+	  for_all_(support_t, x, su)
   	    {
 	      semiring_elt_t weight=posit.get(*x);
 	      if (weight < semiring_elt_zero)
@@ -432,7 +433,8 @@ namespace vcsn {
 	{
 	  series_set_elt_t posit = a.get_initial(*s);
 	  series_set_elt_t negat(a.structure().series());
-	  for_all_(support_t, x, posit.supp())
+	  support_t su = posit.supp();
+	  for_all_(support_t, x, su)
   	    {
 	      semiring_elt_t weight = posit.get(*x);
 	      if (weight < semiring_elt_zero)
@@ -456,7 +458,8 @@ namespace vcsn {
 	{
 	  series_set_elt_t posit = a.get_final(*s);
 	  series_set_elt_t negat(a.structure().series());
-	  for_all_(support_t, x, posit.supp())
+	  support_t su = posit.supp();
+	  for_all_(support_t, x, su)
   	    {
 	      semiring_elt_t weight=posit.get(*x);
 	      if (weight < semiring_elt_zero)

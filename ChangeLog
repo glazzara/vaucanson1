@@ -1,5 +1,12 @@
 2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix a bug in positive_path_covering().
+
+	* include/vaucanson/algorithms/eps_removal.hxx
+	(positive_path_covering): Fix iteration on supp().
+
+2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix XML output for F2.
 
 	* include/vaucanson/xml/builders.hxx (get_semiring_operations):
