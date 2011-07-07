@@ -104,6 +104,9 @@ pipe_stream_writer::operator() (rat_exp_t& a) const
     case OUTPUT_TYPE_EXP:
       o << a << std::endl;
       break;
+    case OUTPUT_TYPE_FPEXP:
+      o << vcsn::rat::setpm(vcsn::rat::MODE_ALL) << a << std::endl;
+      break;
     default:
       std::cerr << "Could not save rationnal expression: unkown output type." << std::endl;
     }

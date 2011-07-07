@@ -1,5 +1,13 @@
 2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Add a way to output fully parenthesized expressions.
+
+	* taf-kit/src/pipe.hh: Declare OUTPUT_TYPE_FPEXP.
+	* taf-kit/src/pipe_writers.hxx: Handle it.
+	* taf-kit/src/main.cc: Handle "-o EXP" and "-o FPEXP".
+
+2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix specialization of eps_removal for positive semirings.
 
 	* include/vaucanson/algorithms/eps_removal.hxx

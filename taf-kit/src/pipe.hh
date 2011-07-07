@@ -119,7 +119,8 @@ enum output_format_t
   OUTPUT_TYPE_FSM,
   OUTPUT_TYPE_XML,
   OUTPUT_TYPE_DOT,
-  OUTPUT_TYPE_EXP
+  OUTPUT_TYPE_EXP,
+  OUTPUT_TYPE_FPEXP
 };
 
 class command_output

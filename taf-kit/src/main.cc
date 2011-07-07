@@ -101,9 +101,9 @@ namespace
       "Bench output filename", 0 },
 
     { "input-type", 'i', "INPUT_TYPE", 0,
-      "Automaton input type (FSM or XML)", 0 },
+      "Automaton/Expression input type (FSM,XML,EXP)", 0 },
     { "output-type", 'o', "OUTPUT_TYPE", 0,
-      "Automaton output type (FSM, XML or DOT)", 0 },
+      "Automaton/Expression output type (FSM,XML,DOT,EXP,FPEXP)", 0 },
 
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,
@@ -221,6 +221,16 @@ namespace
 	{
 	  args.output_aut_type = OUTPUT_TYPE_DOT;
 	  args.output_exp_type = OUTPUT_TYPE_DOT;
+	}
+	else if (strcasecmp(arg, "EXP") == 0)
+	{
+	  args.output_aut_type = OUTPUT_TYPE_EXP;
+	  args.output_exp_type = OUTPUT_TYPE_EXP;
+	}
+	else if (strcasecmp(arg, "FPEXP") == 0)
+	{
+	  args.output_aut_type = OUTPUT_TYPE_FPEXP;
+	  args.output_exp_type = OUTPUT_TYPE_FPEXP;
 	}
 	else
 	{
