@@ -27,6 +27,7 @@
 # include <vaucanson/algebra/implementation/monoid/monoid_rep.hh>
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
 # include <vaucanson/algebra/implementation/semiring/q_number.hh>
+# include <vaucanson/algebra/implementation/semiring/cyclic_semiring.hh>
 
 namespace vcsn
 {
@@ -546,6 +547,13 @@ namespace vcsn
       const char*
       get_semiring_operations(const algebra::TropicalSemiring<algebra::TropicalMax>&)
       { return "maxPlus"; }
+
+      // This assumes that n is prime.  Actually, because we do
+      // not output n in XML, we only support n==2.
+      template <unsigned int n>
+      const char*
+      get_semiring_operations(const algebra::CyclicSemiring<n>&)
+      { return "field"; }
 
       template <typename T>
       void

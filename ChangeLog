@@ -1,5 +1,13 @@
 2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Fix XML output for F2.
+
+	* include/vaucanson/xml/builders.hxx (get_semiring_operations):
+	Add specialization to output CyclicSemirings as "field".
+	* data/vaucanson.xsd: Update it.
+
+2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Add a way to output fully parenthesized expressions.
 
 	* taf-kit/src/pipe.hh: Declare OUTPUT_TYPE_FPEXP.

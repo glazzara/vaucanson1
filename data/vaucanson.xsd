@@ -230,7 +230,7 @@ Writing data can be added.
     <!-- if type="numerical" then use="required" else shouldn't be use -->
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="classical|minPlus|maxPlus|minMax"/>
+	<xs:pattern value="classical|minPlus|maxPlus|minMax|field"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
