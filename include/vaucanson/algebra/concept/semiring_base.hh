@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -112,6 +112,17 @@ namespace vcsn {
   struct op_star_traits
   {
     typedef Element<S, T> ret_t;
+  };
+
+
+  /// \brief Is the semiring positive?
+  ///
+  /// This is false by default.  This traits should be specialized in
+  /// semirings where this is true.
+  template <typename S, typename T>
+  struct semiring_traits
+  {
+    enum { is_positive = 0 };
   };
 
   /// Returns a fresh weight that is the star of w.

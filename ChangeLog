@@ -1,3 +1,19 @@
+2011-04-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Implement a is_positive_semiring() function in semiring implementations.
+
+	* include/vaucanson/algebra/concept/semiring_base.hh
+	(semiring_traits<T,U>): New trait.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	include/vaucanson/algebra/implementation/series/krat.hh,
+	include/vaucanson/algebra/implementation/series/krat.hxx
+	(is_positive_semiring): Remove and...
+	(semiring_traits<T,U>): ... specialize.
+	* taf-kit/src/cmd_gen.cc (semiring-info): Adjust caller.
+
 2011-07-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Check is_trim() in prefix(), factor(), and suffix().

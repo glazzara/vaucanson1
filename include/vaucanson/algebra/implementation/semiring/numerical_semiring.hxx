@@ -92,13 +92,6 @@ namespace vcsn {
 	  (set, misc::random::generate<T>());
     }
 
-    template<typename T>
-    bool
-    is_positive_semiring(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
-    {
-      return false;
-    }
-
     /*-----------------------------.
     | specializations for integers |
     `-----------------------------*/
@@ -192,12 +185,6 @@ namespace vcsn {
     {
       assertion_(false, "Cannot choose non-starable boolean: all boolean are starable.");
       return Element<algebra::NumericalSemiring, bool>(set, false);
-    }
-
-    inline bool
-    is_positive_semiring(SELECTOR(algebra::NumericalSemiring), SELECTOR(bool))
-    {
-      return true;
     }
 
     /*--------------------------------------------.

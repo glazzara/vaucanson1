@@ -84,9 +84,6 @@ namespace vcsn {
     bool show_identity_value(SELECTOR2(algebra::Series<W, M>),
 			     SELECTOR2(rat::exp<Tm, Tw>));
 
-    template<typename W, typename M, typename Tm, typename Tw>
-    bool is_positive_semiring(SELECTOR2(algebra::Series<W, M>),
-			      SELECTOR2(rat::exp<Tm, Tw>));
 
     template<typename W, typename M, typename Tm, typename Tw>
     const rat::exp<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
@@ -301,6 +298,12 @@ namespace vcsn {
 
 
   } // algebra
+
+  template<typename W, typename M, typename Tm, typename Tw>
+  struct semiring_traits<algebra::Series<W, M>, rat::exp<Tm, Tw> >
+  {
+    enum { is_positive = 1 };
+  };
 
 } // vcsn
 

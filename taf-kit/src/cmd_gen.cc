@@ -269,7 +269,7 @@ semiring_info_command(const arguments_t& args)
 	  identity_value(SELECT(semiring_t), SELECT(semiring_elt_value_t)));
   std::cout
     << "\nis positive: "
-    << is_positive_semiring(SELECT(semiring_t), SELECT(semiring_elt_value_t))
+    << semiring_traits<semiring_t, semiring_elt_value_t>::is_positive
     << "\nshow identity: "
     << show_identity_value(SELECT(semiring_t), SELECT(semiring_elt_value_t))
     << std::endl;

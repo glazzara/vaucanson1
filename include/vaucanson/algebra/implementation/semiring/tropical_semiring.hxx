@@ -43,14 +43,6 @@ namespace vcsn {
       return true;
     }
 
-    template<class TropicalKind, typename T>
-    bool
-    is_positive_semiring(SELECTOR(algebra::TropicalSemiring<TropicalKind>),
-			 SELECTOR(T))
-    {
-      return true;
-    }
-
     template<typename T>
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T))
     {

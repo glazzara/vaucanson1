@@ -1,3 +1,4 @@
+
 // numerical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
@@ -52,10 +53,6 @@ namespace vcsn {
     Element<algebra::NumericalSemiring, T>
     op_choose(const algebra::NumericalSemiring& s, SELECTOR(T));
 
-    template<typename T>
-    bool
-    is_positive_semiring(SELECTOR(algebra::NumericalSemiring), SELECTOR(T));
-
     /*-----------------------------.
     | specializations for integers |
     `-----------------------------*/
@@ -101,9 +98,6 @@ namespace vcsn {
     Element<algebra::NumericalSemiring, bool>
     op_choose_non_starable(const algebra::NumericalSemiring& set,
 			   SELECTOR(bool));
-
-    inline bool
-    is_positive_semiring(SELECTOR(algebra::NumericalSemiring), SELECTOR(bool));
 
     /*-------------------------.
     | goodies for real numbers |
@@ -206,6 +200,18 @@ namespace vcsn {
 			   SELECTOR(algebra::RationalNumber));
 
   } // algebra
+
+  template <typename T>
+  struct semiring_traits<algebra::NumericalSemiring, T>
+  {
+    enum { is_positive = 0 };
+  };
+
+  template <>
+  struct semiring_traits<algebra::NumericalSemiring, bool>
+  {
+    enum { is_positive = 1 };
+  };
 
 } // vcsn
 

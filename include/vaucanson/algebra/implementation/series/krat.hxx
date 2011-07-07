@@ -112,13 +112,6 @@ namespace vcsn
     }
 
     template<typename W, typename M, typename Tm, typename Tw>
-    bool is_positive_semiring(SELECTOR2(algebra::Series<W, M>),
-			      SELECTOR2(rat::exp<Tm, Tw>))
-    {
-      return true;
-    }
-
-    template<typename W, typename M, typename Tm, typename Tw>
     const rat::exp<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
 				       SELECTOR2(rat::exp<Tm, Tw>))
     {
