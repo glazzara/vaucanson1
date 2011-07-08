@@ -15,6 +15,6 @@
 include $(top_srcdir)/vaucanson.mk
 
 SUBDIRS = char-b char-char-b char-f2 char-fmp-b char-fmp-z char-q \
-char-r char-rw-b char-z char-zmin char-zmax int-b int-z
+char-r char-z char-zmin char-zmax int-b int-z
 
 automata_DATA = README

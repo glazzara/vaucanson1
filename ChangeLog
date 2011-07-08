@@ -1,5 +1,36 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Change type for RationalNumber.
+
+	* include/vaucanson/algebra/implementation/semiring/q_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/q_number.hh:
+	Chagen type for RationalNumber.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
+	Correct demonstration.
+
+	* modified:   configure.ac
+	* data/automata/Makefile.am,
+	* data/automata/char-q/Makefile.am,
+	* data/automata/char-q/b1.cc,
+	* data/automata/char-q/c1.cc,
+	* data/automata/char-q/d1.cc,
+	* data/automata/char-r/Makefile.am,
+	* data/automata/char-r/b1.cc,
+	* data/automata/char-r/c1.cc,
+	* data/automata/char-r/d1.cc,
+	* data/automata/char-rw-b/Makefile.am,
+	* data/automata/char-rw-b/add1-rw.xml,
+	* data/automata/char-rw-b/quot-3-rw.xml,
+	* data/automata/char-z/Makefile.am,
+	* data/automata/char-z/b1.cc,
+	* vaucanson.mk: Correct demonstration
+	and compile.
+
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Correct Rational Number.
 	* include/vaucanson/algebra/implementation/semiring/q_number.hxx:
 	Correct rational number operator.

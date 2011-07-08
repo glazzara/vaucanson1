@@ -226,14 +226,13 @@ AC_CONFIG_FILES([
   data/Makefile
     data/automata/Makefile
       data/automata/char-b/Makefile
+      data/automata/char-z/Makefile
       data/automata/char-char-b/Makefile
       data/automata/char-f2/Makefile
       data/automata/char-fmp-b/Makefile
       data/automata/char-fmp-z/Makefile
       data/automata/char-q/Makefile
       data/automata/char-r/Makefile
-      data/automata/char-rw-b/Makefile
-      data/automata/char-z/Makefile
       data/automata/char-zmax/Makefile
       data/automata/char-zmin/Makefile
       data/automata/int-b/Makefile

@@ -36,7 +36,6 @@ char_fmp_b_automatadir = $(automatadir)/char-fmp-b
 char_fmp_z_automatadir = $(automatadir)/char-fmp-z
 char_q_automatadir = $(automatadir)/char-q$
 char_r_automatadir = $(automatadir)/char-r
-char_rw_b_automatadir = $(automatadir)/char-rw-b
 char_z_automatadir = $(automatadir)/char-z
 char_zmin_automatadir = $(automatadir)/char-zmin
 char_zmax_automatadir = $(automatadir)/char-zmax

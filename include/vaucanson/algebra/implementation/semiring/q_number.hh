@@ -185,7 +185,7 @@ namespace vcsn
     inline
     std::istream& operator>> (std::istream&, TRationalNumber<NUMType, DENType>&);
 
-    typedef TRationalNumber<long long, long long> RationalNumber;
+    typedef TRationalNumber<long long, unsigned long long> RationalNumber;
 
     /// @}
   } // !algebra

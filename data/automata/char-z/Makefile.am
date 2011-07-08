@@ -18,7 +18,7 @@ LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
 # Z automata.
-noinst_PROGRAMS = c1 d1
+noinst_PROGRAMS = b1 c1 d1
 
 nodist_char_z_automata_DATA =		\
   b1.xml				\
@@ -27,9 +27,10 @@ nodist_char_z_automata_DATA =		\
 
 CLEANFILES += $(nodist_char_z_automata_DATA)
 
-# This automaton counts the number of bs.
-b1.xml: ../char-b/b1.xml
-	sed -e 's/set="B"/set="Z"/g' ../char-b/b1.xml >$@.tmp
+b1_CPPFLAGS = $(AM_CPPFLAGS)
+b1_SOURCES = b1.cc
+b1.xml: b1$(EXEEXT)
+	./b1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
 c1_CPPFLAGS = $(AM_CPPFLAGS)
