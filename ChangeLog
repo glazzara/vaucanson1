@@ -1,3 +1,10 @@
+2011-07-08    <moreira@lrde.epita.fr>
+
+	Correct bug in Taf-kit
+
+	* taf-kit/src/library_command.hh: Correct three letters file
+	bug.
+
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
 	Correct operator== and change data type in Rational Number.

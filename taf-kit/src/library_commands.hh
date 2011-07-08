@@ -142,9 +142,10 @@ list_automata_command()
       dirent* file;
 
       while ((file = readdir(directory)))
-	{
+      {
 	  std::string filename = file->d_name;
-	  if (filename.rfind(".xml") == filename.size() - 4)
+	  int l = filename.rfind(".xml");
+	  if ((l != -1) && (l == filename.size() - 4))
 	    files.insert(filename);
 	}
       closedir(directory);
