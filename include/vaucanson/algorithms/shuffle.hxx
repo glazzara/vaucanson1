@@ -129,10 +129,37 @@ class Shuffle
 
 
       }
+      merge_transitions(output);
       return output;
     }
 
   private:
+      //merge transitions with the same ends
+    void merge_transitions(output_t& a)
+    {
+      typedef std::map<hstate_t, series_set_elt_t> map_t;
+      for_all_states(s, a)
+	{
+	  map_t map;
+	  std::list<htransition_t> transitions;
+	  for (delta_iterator e(a.value(), *s); ! e.done(); e.next())
+	    {
+	      hstate_t target = a.dst_of(*e);
+	      transitions.push_back(*e);
+	      typename map_t::iterator it = map.find(target);
+	      if (it == map.end())
+		map.insert(std::pair<hstate_t, series_set_elt_t>(target,
+								 a.series_of(*e)));
+	      else
+		it->second += a.series_of(*e);
+	    }
+	  for_all_(std::list<htransition_t>, e, transitions)
+	    a.del_transition(*e);
+	  for_all_(map_t, it, map)
+	    a.add_series_transition(*s, it->first, it->second);
+	}
+    }
+  
     // Some little graphic tools
     class grphx
     {

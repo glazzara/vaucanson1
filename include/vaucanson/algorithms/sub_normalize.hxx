@@ -76,10 +76,63 @@ namespace vcsn {
   `--------------*/
 
   template <class Auto, class Label>
+  int do_sub_normalize_initial_final(Auto& a,
+				  typename Auto::hstate_t s,
+				  const Label& label, bool initial)
+  {
+    BENCH_TASK_SCOPED("sub_normalize_transition");
+    AUTOMATON_TYPES(Auto);
+    hstate_t			s0;
+    hstate_t			s1;
+    typedef typename monoid_elt_t::first_monoid_elt_value_t
+      first_monoid_elt_value_t;
+    typedef typename monoid_elt_t::second_monoid_elt_value_t
+      second_monoid_elt_value_t;
+    typedef typename series_set_elt_t::support_t	support_t;
+
+    monoid_elt_t m1(a.structure().series().monoid(),
+		    *(label.supp().begin()));
+    first_monoid_elt_value_t w1 = m1.value().first;
+    second_monoid_elt_value_t w2 = m1.value().second;
+
+    int size1 = w1.size();
+    int size2 = w2.size();
+
+    unsigned int size = std::max(w1.size(), w2.size());
+
+		if(size>0 || label.supp().size()>1)
+   	    {
+   	      if(initial)
+   	      {
+  		    s0 = a.add_state();
+  		    s1 = s;
+		    a.set_initial(s0);
+		    a.unset_initial(s);
+   	      }
+		  else // case final
+   	      {
+  		    s0 = s;
+  		    s1 = a.add_state();
+		    a.set_final(s1);
+		    a.unset_final(s);
+   	      }
+          for_all_(support_t, supp, label.supp())
+	      {
+	        const monoid_elt_t	 supp_elt (a.structure().series().monoid(), *supp);
+	        const semiring_elt_t weight = label.get(supp_elt);
+            series_set_elt_t in_series(a.structure().series());
+	        in_series.assoc(supp_elt, weight);
+		    a.add_series_transition(s0, s1, in_series);
+	      }
+   	    }
+		return 0;
+  }
+
+  template <class Auto, class Label>
   int do_sub_normalize_transition(Auto& a,
 				  typename Auto::hstate_t start,
 				  typename Auto::hstate_t stop,
-				  const Label& label, bool initial, bool final)
+				  const Label& label)
   {
     BENCH_TASK_SCOPED("sub_normalize_transition");
     AUTOMATON_TYPES(Auto);
@@ -123,25 +176,15 @@ namespace vcsn {
 
       semiring_elt_t s = label.get(m1);
       series_set_elt_t in_series(a.structure().series());
-
+	  
       m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
 			 cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
 
       in_series.assoc(m, s);
 
-      if (initial)
-      {
-	s0 = a.add_state();
-	a.set_initial(s0, in_series);
-	a.unset_initial(stop);
-	s1 = s0;
-      }
-      else
-      {
 	s0 = start;
 	s1 = a.add_state();
 	a.add_series_transition(s0, s1, in_series);
-      }
 
       for (unsigned int i = 1; i < size - 1; ++i)
       {
@@ -160,12 +203,6 @@ namespace vcsn {
       series_set_elt_t out_series(a.structure().series());
       out_series.assoc(m, s_ident);
 
-      if (final)
-      {
-	a.unset_final(start);
-	a.set_final(s1, out_series);
-      }
-      else
 	a.add_series_transition(s1, stop, out_series);
 
       return 1;
@@ -173,7 +210,6 @@ namespace vcsn {
 
     return 0;
   }
-
 
 
   template <class M1, class M2, class Auto, class Ret>
@@ -187,7 +223,6 @@ namespace vcsn {
 
     auto_copy(res, cut_up(a));
 
-    transitions_t transitions = res.transitions();
     vector_t i_states; i_states.reserve(res.initial().size());
     vector_t f_states; f_states.reserve(res.final().size());
 
@@ -197,16 +232,18 @@ namespace vcsn {
       f_states.push_back(*i);
 
     for_all_(vector_t, i, i_states)
-      do_sub_normalize_transition(res, hstate_t(), *i,
-				  res.get_initial(*i), true, false);
+      do_sub_normalize_initial_final(res, *i,
+				  res.get_initial(*i), true);
 
     for_all_(vector_t, f, f_states)
-      do_sub_normalize_transition(res, *f, hstate_t(),
-				  res.get_final(*f), false, true);
+      do_sub_normalize_initial_final(res, *f,
+				  res.get_final(*f), false);
+    //transitions may have be modified by initial and final treatment.
+    transitions_t transitions = res.transitions();
 
     for_all_(transitions_t, e, transitions)
       if (do_sub_normalize_transition(res, res.src_of(*e), res.dst_of(*e),
-				      res.series_of(*e), false, false))
+				      res.series_of(*e)))
 	res.del_transition(*e);
   }
 

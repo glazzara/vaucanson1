@@ -1,5 +1,13 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Work on infiltration, sub_normalize, and shuffle
+	* include/vaucanson/algorithms/infiltration.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/shuffle.hxx: Correct
+	bug.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Change type for RationalNumber.
 
 	* include/vaucanson/algebra/implementation/semiring/q_number.hh,
