@@ -1,4 +1,10 @@
-2011-07-08  David Moreira  <moreira@knokke-le-zout.lrde.epita.fr>
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
+	Include star alphabet (taf-kit) command.
+
+	* taf-kit/src/Makefile.am: Add star alphabets.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
 	Update domain and image algorithms.
 

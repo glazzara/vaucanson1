@@ -49,9 +49,9 @@ COMMON_SOURCES = commands.hh			\
 		 pipe_writers.hxx		\
 		 parser_options.hh		\
 		 parser_options.hxx		\
-		 boost_spirit_compatibility.hh	\
 		 star_alphabet_command.hh	\
-		 star_alphabet_command.hxx
+		 star_alphabet_command.hxx	\
+		 boost_spirit_compatibility.hh
 
 
 vcsn_char_b_SOURCES = $(COMMON_SOURCES) cmd_wt.cc cmd_b.cc
