@@ -1,5 +1,14 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Add star_alphabet in taf-kit.
+
+	* taf-kit/src/cmd_wt.cc,
+	* taf-kit/src/star_alphabet_command.hh,
+	* taf-kit/src/star_alphabet_command.hxx:
+	Add star_alphabet in taf-kit factory.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Create demonstration in data/automata
 	* configure.ac,
 	* data/automata/Makefile.am,
