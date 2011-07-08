@@ -28,269 +28,272 @@ namespace vcsn {
 
   namespace algebra {
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber::RationalNumber ()
-      : num_ (0), // 0 or 1
-	den_ (1)
+    TRationalNumber<NUMType, DENType>::TRationalNumber ()
+    : num_ (NUMType(0)), // 0 or 1
+      den_ (DENType(1))
     {
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber::RationalNumber (const int num)
-      : num_ (num),
-	den_ (1)
+    TRationalNumber<NUMType, DENType>::TRationalNumber (const NUMType num)
+    : num_ (num),
+      den_ (DENType(1))
     {
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber::RationalNumber (const int num, const unsigned int den)
+    TRationalNumber<NUMType, DENType>::TRationalNumber (const NUMType num, const DENType den)
     {
       set_rational (num, den);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber::RationalNumber (const RationalNumber& nb)
+    TRationalNumber<NUMType, DENType>::TRationalNumber (const TRationalNumber<NUMType, DENType>& nb)
     {
       set_rational (nb.num_, nb.den_);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber::~RationalNumber ()
-    {
-    }
+    TRationalNumber<NUMType, DENType>::~TRationalNumber ()
+    {}
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber&
-    RationalNumber::den_set (const unsigned int den)
-    {
-      set_rational (num_, den);
-      return (*this);
-    }
-
-    inline
-    RationalNumber&
-    RationalNumber::set (const int num, const unsigned int den)
+    vcsn::algebra::TRationalNumber<NUMType, DENType>&
+    TRationalNumber<NUMType, DENType>::set (const NUMType num, const DENType den)
     {
       set_rational (num, den);
       return (*this);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber&
-    RationalNumber::set (const int num)
-    {
-      set_rational (num, 1);
-      return (*this);
-    }
-
-    inline
-    int
-    RationalNumber::num_get () const
+    NUMType
+    TRationalNumber<NUMType, DENType>::num_get () const
     {
       return num_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    unsigned int
-    RationalNumber::den_get () const
+    DENType
+    TRationalNumber<NUMType, DENType>::den_get () const
     {
       return den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     std::ostream&
-    RationalNumber::print (std::ostream& ostr) const
+    TRationalNumber<NUMType, DENType>::print (std::ostream& ostr) const
     {
       if (den_ != 1)
 	return ostr << num_ << '/' << den_;
       return ostr << num_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber
-    RationalNumber::operator+ (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>
+    TRationalNumber<NUMType, DENType>::operator+ (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return RationalNumber (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
+      return TRationalNumber<NUMType, DENType> (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber
-    RationalNumber::operator- (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>
+    TRationalNumber<NUMType, DENType>::operator- (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return RationalNumber (num_ * nb.den_ - nb.num_ * den_, den_ * nb.den_);
+      return TRationalNumber<NUMType, DENType> (num_ * nb.den_ - nb.num_ * den_, den_ * nb.den_);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber
-    RationalNumber::operator- () const
+    TRationalNumber<NUMType, DENType>
+    TRationalNumber<NUMType, DENType>::operator- () const
     {
-      return RationalNumber (- num_, den_);
+      return TRationalNumber<NUMType, DENType> (- num_, den_);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber
-    RationalNumber::operator* (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>
+    TRationalNumber<NUMType, DENType>::operator* (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      unsigned int d1 = vcsn::misc::gcd (num_, nb.den_get ());
-      unsigned int d2 = vcsn::misc::gcd (den_, nb.num_get ());
-      return RationalNumber ((num_ / d1) * (nb.num_get () / d2), (den_ / d2) * (nb.den_get () / d1));
-      // return RationalNumber (num_ * nb.num_, den_ * nb.den_);
+      DENType d1 = vcsn::misc::gcd (num_, nb.den_get ());
+      DENType d2 = vcsn::misc::gcd (den_, nb.num_get ());
+      return TRationalNumber<NUMType, DENType> ((num_ / d1) * (nb.num_get () / d2),
+			     (den_ / d2) * (nb.den_get () / d1));
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber
-    RationalNumber::operator/ (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>
+    TRationalNumber<NUMType, DENType>::operator/ (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      int numgcd = vcsn::misc::gcd (vcsn::misc::abs (num_), vcsn::misc::abs (nb.num_));
-      int dengcd = vcsn::misc::gcd (den_, nb.den_);
-      return RationalNumber ((num_ / numgcd) * (nb.den_ / dengcd),
+      DENType numgcd = vcsn::misc::gcd (vcsn::misc::abs (num_), vcsn::misc::abs (nb.num_));
+      DENType dengcd = vcsn::misc::gcd (den_, nb.den_);
+      return TRationalNumber<NUMType, DENType> ((num_ / numgcd) * (nb.den_ / dengcd),
 			     (den_ / dengcd) * (nb.num_ / numgcd));
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber&
-    RationalNumber::operator+= (const RationalNumber& nb)
+    TRationalNumber<NUMType, DENType>&
+    TRationalNumber<NUMType, DENType>::operator+= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      // unsigned int d1 = vcsn::misc::gcd (den_, nb.den_);
-      // if (d1 == 1)
-      // {
-      // 	set_unsafe_rational ((num_ * nb.den_) + (den_ * nb.num_), den_ * nb.den_);
-      // }
-      // else
-      // {
-      // 	unsigned int t = num_ * (nb.den_ / d1) + nb.num_ * (den_ / d1);
-      // 	unsigned int d2 = vcsn::misc::gcd (t, d1);
-      // 	set_unsafe_rational (t / d2, (den_ * d1) * (nb.den_ * d2));
-      // }
-
       set_rational (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
       return (*this);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber&
-    RationalNumber::operator-= (const RationalNumber& nb)
+    TRationalNumber<NUMType, DENType>&
+    TRationalNumber<NUMType, DENType>::operator-= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      // unsigned int d1 = vcsn::misc::gcd (den_, nb.den_);
-      // if (d1 == 1)
-      // {
-      // 	set_unsafe_rational ((num_ * nb.den_) + (den_ * nb.num_), den_ * nb.den_);
-      // }
-      // else
-      // {
-      // 	unsigned int t = num_ * (nb.den_ / d1) + nb.num_ * (den_ / d1);
-      // 	unsigned int d2 = vcsn::misc::gcd (t, d1);
-      // 	set_unsafe_rational (t / d2, (den_ * d1) * (nb.den_ * d2));
-      // }
       set_rational (num_ * nb.den_ - nb.num_ * den_, den_ * nb.den_);
       return (*this);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber&
-    RationalNumber::operator*= (const RationalNumber& nb)
+    TRationalNumber<NUMType, DENType>&
+    TRationalNumber<NUMType, DENType>::operator*= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      // Delete overflow of 'num_ * nb.num_get ()' and 'den_ * nb.den_get ()'
-      unsigned int d1 = vcsn::misc::gcd (num_, nb.den_get ());
-      unsigned int d2 = vcsn::misc::gcd (den_, nb.num_get ());
+      DENType d1 = vcsn::misc::gcd (num_, nb.den_get ());
+      DENType d2 = vcsn::misc::gcd (den_, nb.num_get ());
       set_unsafe_rational ((num_ / d1) * (nb.num_get () / d2), (den_ / d2) *
 			   (nb.den_get () / d1));
-      // set_rational (num_ * nb.num_get (), den_ * nb.den_get ());
       return (*this);
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber&
-    RationalNumber::operator/= (const RationalNumber& nb)
+    TRationalNumber<NUMType, DENType>&
+    TRationalNumber<NUMType, DENType>::operator/= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      // Delete overflow of 'num_ * nb.den_get ()' and 'den_ * nb.num_get ()'
-      unsigned int d1 = vcsn::misc::gcd (num_, nb.num_get ());
-      unsigned int d2 = vcsn::misc::gcd (den_, nb.den_get ());
+      DENType d1 = vcsn::misc::gcd (num_, nb.num_get ());
+      DENType d2 = vcsn::misc::gcd (den_, nb.den_get ());
       set_unsafe_rational ((num_ / d1) * (nb.den_get () / d1), (den_ / d2) *
 			   (nb.num_get () / d1));
-      // set_rational (num_ * nb.den_, den_ * nb.num_);
       return (*this);
     }
 
+    template<typename NUMType, typename DENType>
     inline
     bool
-    RationalNumber::operator== (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>::operator== (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return (den_ == nb.den_) && (num_ == nb.num_);
+      return (den_ * nb.num_ == nb.den_ * num_);
+      // if (!num_)
+      // 	return (!nb.num_);
+      // return (den_ == nb.den_) && (num_ == nb.num_);
     }
 
+    template<typename NUMType, typename DENType>
     inline
     bool
-    RationalNumber::operator!= (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>::operator!= (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return (den_ != nb.den_) || (num_ != nb.num_);
+      return (den_ * nb.num_ != nb.den_ * num_);
+      // return (den_ != nb.den_) || (num_ != nb.num_);
     }
 
+    template<typename NUMType, typename DENType>
     inline
     bool
-    RationalNumber::operator< (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>::operator< (const TRationalNumber<NUMType, DENType>& nb) const
     {
       return num_ * nb.den_ < nb.num_ * den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     bool
-    RationalNumber::operator<= (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>::operator<= (const TRationalNumber<NUMType, DENType>& nb) const
     {
       return num_ * nb.den_ <= nb.num_ * den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     bool
-    RationalNumber::operator> (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>::operator> (const TRationalNumber<NUMType, DENType>& nb) const
     {
       return num_ * nb.den_ > nb.num_ * den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     bool
-    RationalNumber::operator>= (const RationalNumber& nb) const
+    TRationalNumber<NUMType, DENType>::operator>= (const TRationalNumber<NUMType, DENType>& nb) const
     {
       return num_ * nb.den_ >= nb.num_ * den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
-    RationalNumber::operator float () const
+    TRationalNumber<NUMType, DENType>::operator float () const
     {
       return to_float ();
-      // return (static_cast<float> (num_)) / den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     int
-    RationalNumber::to_int () const
+    TRationalNumber<NUMType, DENType>::to_int () const
     {
       return num_ / den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     float
-    RationalNumber::to_float () const
+    TRationalNumber<NUMType, DENType>::to_float () const
     {
       return (static_cast<float> (num_)) / den_;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     double
-    RationalNumber::to_double () const
+    TRationalNumber<NUMType, DENType>::to_double () const
     {
       return (static_cast<double> (num_)) / den_;
     }
-
+#include <iostream>
+    template<typename NUMType, typename DENType>
     inline
     void
-    RationalNumber::set_rational (const int num, const unsigned den)
+    TRationalNumber<NUMType, DENType>::set_rational (const NUMType num, const DENType den)
     {
-      if (den)
-      {
-	assert (den);
+      if (den) {
 
-	int div = vcsn::misc::gcd (vcsn::misc::abs (num), den);
+	std::cout << "DEBUG: " << num << '\t' << den << '\t'
+		  << num / (long long) den
+		  << '\t'
+		  << num / den
+		  << std::endl;
+      } else {
+	std::cout << "DEBUG: den NULL" << std::endl;
+      }
+      if (num)
+      {
+	//assert (den);
+	if (!den)
+	{
+	  num_ = 0;
+	  den_ = 1;
+	  return;
+	}
+	NUMType div = vcsn::misc::gcd (vcsn::misc::abs (num), den);
 
 	num_ = num / div;
 	den_ = den / div;
@@ -298,15 +301,16 @@ namespace vcsn {
 	assert (1 == vcsn::misc::gcd (vcsn::misc::abs (num_), den_));
       }
       else
-	{
-	  num_ = 0;
-	  den_ = 1;
-	}
+      {
+	num_ = 0;
+	den_ = 1;
+      }
     }
 
+    template<typename NUMType, typename DENType>
     inline
     void
-    RationalNumber::set_unsafe_rational (const int num, const unsigned den)
+    TRationalNumber<NUMType, DENType>::set_unsafe_rational (const NUMType num, const DENType den)
     {
       assert (den != 0);
 
@@ -316,27 +320,29 @@ namespace vcsn {
       assert (vcsn::misc::is_coprime (num_, den_));
     }
 
+    template<typename NUMType, typename DENType>
     inline
     void
-    RationalNumber::set_rational ()
+    TRationalNumber<NUMType, DENType>::set_rational ()
     {
       set_rational (num_, den_);
     }
 
-
+    template<typename NUMType, typename DENType>
     inline
     std::ostream&
-    operator<< (std::ostream& ostr, const RationalNumber& nb)
+    operator<< (std::ostream& ostr, const TRationalNumber<NUMType, DENType>& nb)
     {
       nb.print (ostr);
       return ostr;
     }
 
+    template<typename NUMType, typename DENType>
     inline
     std::istream&
-    operator>> (std::istream& istr, RationalNumber& a)
+    operator>> (std::istream& istr, TRationalNumber<NUMType, DENType>& a)
     {
-      int num;
+      NUMType num;
 
       istr >> num;
       char slash;
@@ -350,7 +356,7 @@ namespace vcsn {
        }
 
       // Otherwise read the denominator.
-      int den;
+      DENType den;
       istr >> den;
       a.set(num, den);
 

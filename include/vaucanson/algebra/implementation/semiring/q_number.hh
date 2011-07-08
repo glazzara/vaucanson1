@@ -54,48 +54,43 @@ namespace vcsn
      * @author David Moreira <david.moreira@epita.fr>
      */
 
-    class RationalNumber
+    template<typename NUMType, typename DENType>
+    class TRationalNumber
     {
     public:
       /// @name Standart constructors.
       /// @{
       /// Default constructor.
       inline
-      RationalNumber ();
+      TRationalNumber ();
       /// Constructor define numerator. Denominator set at 1.
       inline
-      RationalNumber (const int num);
+      TRationalNumber (const NUMType num);
       /// Constructor define numerator and denominator.
       inline
-      RationalNumber (const int num, const unsigned int den);
+      TRationalNumber (const NUMType num, const DENType den);
       /// Copy Constructor
       inline
-      RationalNumber (const RationalNumber& nb);
+      TRationalNumber (const TRationalNumber<NUMType, DENType>& nb);
       // Object destructor.
       inline
-      ~RationalNumber ();
+      ~TRationalNumber ();
       ///  @}
     public:
       /// @name Setters
       /// @{
       /// Set the numerator and the denominator.
       inline
-      RationalNumber& set (const int num, const unsigned int den);
-      /// Set the numerator.
-      inline
-      RationalNumber& set (const int num);
-      /// Set the denominator.
-      inline
-      RationalNumber& den_set (const unsigned int den);
+      TRationalNumber& set (const NUMType num, const DENType den = 1);
       /// @}
       /// @name Accessors
       /// @{
       /// Get the numerator.
       inline
-      int num_get () const;
+      NUMType num_get () const;
       /// Get the denominator.
       inline
-      unsigned int den_get () const;
+      DENType den_get () const;
       /// Printing method.
       inline
       std::ostream& print (std::ostream& ostr) const;
@@ -106,38 +101,38 @@ namespace vcsn
       /// @{
       /// Usual Arithemetics Operator.
       inline
-      RationalNumber operator+ (const RationalNumber& nb) const;
+      TRationalNumber<NUMType, DENType> operator+ (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      RationalNumber operator- (const RationalNumber& nb) const;
+      TRationalNumber<NUMType, DENType> operator- (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      RationalNumber operator- () const;
+      TRationalNumber<NUMType, DENType> operator- () const;
       inline
-      RationalNumber operator* (const RationalNumber& nb) const;
+      TRationalNumber<NUMType, DENType> operator* (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      RationalNumber operator/ (const RationalNumber& nb) const;
+      TRationalNumber<NUMType, DENType> operator/ (const TRationalNumber<NUMType, DENType>& nb) const;
 
       inline
-      RationalNumber& operator+= (const RationalNumber& nb);
+      TRationalNumber<NUMType, DENType>& operator+= (const TRationalNumber<NUMType, DENType>& nb);
       inline
-      RationalNumber& operator-= (const RationalNumber& nb);
+      TRationalNumber<NUMType, DENType>& operator-= (const TRationalNumber<NUMType, DENType>& nb);
       inline
-      RationalNumber& operator*= (const RationalNumber& nb);
+      TRationalNumber<NUMType, DENType>& operator*= (const TRationalNumber<NUMType, DENType>& nb);
       inline
-      RationalNumber& operator/= (const RationalNumber& nb);
+      TRationalNumber<NUMType, DENType>& operator/= (const TRationalNumber<NUMType, DENType>& nb);
 
       /// Usual Boolean Opertor.
       inline
-      bool operator== (const RationalNumber& nb) const;
+      bool operator== (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      bool operator!= (const RationalNumber& nb) const;
+      bool operator!= (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      bool operator< (const RationalNumber& nb) const;
+      bool operator< (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      bool operator<= (const RationalNumber& nb) const;
+      bool operator<= (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      bool operator> (const RationalNumber& nb) const;
+      bool operator> (const TRationalNumber<NUMType, DENType>& nb) const;
       inline
-      bool operator>= (const RationalNumber& nb) const;
+      bool operator>= (const TRationalNumber<NUMType, DENType>& nb) const;
 
       // @}
 
@@ -169,24 +164,28 @@ namespace vcsn
        *
        */
       inline void set_rational ();
-      inline void set_rational (const int num, const unsigned int den);
-      inline void set_unsafe_rational (const int num, const unsigned int den);
+      inline void set_rational (const NUMType num, const DENType den);
+      inline void set_unsafe_rational (const NUMType num, const DENType den);
       /// @}
     protected:
-      /// @name RationalNumber attributs
+      /// @name TRationalNumber<NUMType, DENType> attributs
       /// @{
       /// Fraction's numerator.
-      int num_;
+      NUMType num_;
       /// Fraction's denominator.
-      unsigned int den_;
+      DENType den_;
       //// @}
-    }; // RationalNumber
+    }; // TRationalNumber<NUMType, DENType>
 
+    template<typename NUMType, typename DENType>
     inline
-    std::ostream& operator<< (std::ostream&, const RationalNumber&);
+    std::ostream& operator<< (std::ostream&, const TRationalNumber<NUMType, DENType>&);
 
+    template<typename NUMType, typename DENType>
     inline
-    std::istream& operator>> (std::istream&, RationalNumber&);
+    std::istream& operator>> (std::istream&, TRationalNumber<NUMType, DENType>&);
+
+    typedef TRationalNumber<long long, long long> RationalNumber;
 
     /// @}
   } // !algebra

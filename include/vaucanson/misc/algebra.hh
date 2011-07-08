@@ -38,18 +38,18 @@ namespace vcsn {
   ///   @{
   /// Greatest common divisor.
   inline
-  unsigned int gcd (unsigned int a, unsigned int b);
+  unsigned long long gcd (unsigned long long a, unsigned long long b);
 
   /// Least common multiple.
   inline
-  unsigned int lpcm (unsigned int a, unsigned int b);
+  unsigned long long lcm (unsigned long long a, unsigned long long b);
 
   /// Coprime between to int.
   inline
-  bool is_coprime (unsigned int a, unsigned int b);
+  bool is_coprime (unsigned long long a, unsigned long long b);
 
   inline
-  unsigned int abs (int a);
+  unsigned long long abs (long long a);
 
   ///   @}
   ///  @}

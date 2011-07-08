@@ -23,13 +23,15 @@
 namespace vcsn {
 
   namespace misc {
+
+
     inline
-    unsigned int
-    gcd (unsigned int a, unsigned int b)
+    unsigned long long
+    gcd (unsigned long long a, unsigned long long b)
     {
       if (0 == a)
 	return b;
-      int r;
+      unsigned long long r;
       while (0 != b)
 	{
 	  r = a % b;
@@ -37,26 +39,13 @@ namespace vcsn {
 	  b = r;
 	}
       return a;
-//       if (a)
-// 	{
-// 	  int r;
-// 	  while (true)
-// 	    {
-// 	      r = a % b;
-// 	      if (! (r))
-// 		return b;
-// 	      a = b;
-// 	      b = r;
-// 	    }
-// 	}
-//       return b;
     }
 
     inline
-    unsigned int
-    lcm (unsigned int a, unsigned int b)
+    unsigned long
+    lcm (unsigned long long a, unsigned long b)
     {
-      unsigned int res = gcd (a, b);
+      unsigned long long res = gcd (a, b);
       if (res)
 	return a * b / res;
       return a * b;
@@ -64,13 +53,13 @@ namespace vcsn {
 
     inline
     bool
-    is_coprime (unsigned int a, unsigned int b)
+    is_coprime (unsigned long long a, unsigned long long b)
     {
       return 1 == gcd (a, b);
     }
 
     inline
-    unsigned int abs (int a)
+    unsigned long long abs (long long a)
     {
       return a > 0 ? a : -a;
     }

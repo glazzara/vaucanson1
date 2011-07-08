@@ -1,3 +1,15 @@
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
+	Correct operator== and change data type in Rational Number.
+
+	* include/vaucanson/algebra/implementation/q_number.hh,
+	* include/vaucanson/algebra/implementation/q_number.hxx: Change
+	data type to 'long long' instead of int. Correct operator== for
+	null numbers.
+	* include/vaucanson/misc/algebra.hh,
+	* include/vaucanson/misc/algebra.hxx: Change type for lcm pgm
+	and is_coprime functions (unsigned long long).
+
 2011-07-07  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Fix a bug in positive_path_covering().
