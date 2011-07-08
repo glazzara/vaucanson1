@@ -111,7 +111,11 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>
     TRationalNumber<NUMType, DENType>::operator- (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return TRationalNumber<NUMType, DENType> (num_ * nb.den_ - nb.num_ * den_, den_ * nb.den_);
+      using vcsn::misc::abs;
+      NUMType a = den_;
+      NUMType b = nb.den_;
+
+      return TRationalNumber<NUMType, DENType> ((num_ * b) - (nb.num_ * a), den_ * nb.den_);
     }
 
     template<typename NUMType, typename DENType>
@@ -127,8 +131,9 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>
     TRationalNumber<NUMType, DENType>::operator* (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      DENType d1 = vcsn::misc::gcd (num_, nb.den_get ());
-      DENType d2 = vcsn::misc::gcd (den_, nb.num_get ());
+      NUMType d1 = vcsn::misc::gcd (vcsn::misc::abs(num_), nb.den_get ());
+      NUMType d2 = vcsn::misc::gcd (den_, vcsn::misc::abs(nb.num_get ()));
+
       return TRationalNumber<NUMType, DENType> ((num_ / d1) * (nb.num_get () / d2),
 			     (den_ / d2) * (nb.den_get () / d1));
     }
@@ -138,10 +143,17 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>
     TRationalNumber<NUMType, DENType>::operator/ (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      DENType numgcd = vcsn::misc::gcd (vcsn::misc::abs (num_), vcsn::misc::abs (nb.num_));
-      DENType dengcd = vcsn::misc::gcd (den_, nb.den_);
-      return TRationalNumber<NUMType, DENType> ((num_ / numgcd) * (nb.den_ / dengcd),
-			     (den_ / dengcd) * (nb.num_ / numgcd));
+      NUMType signe = 1;
+      assert(nb.num_ != 0);
+      NUMType numgcd = vcsn::misc::gcd (vcsn::misc::abs (num_), vcsn::misc::abs (nb.num_));
+      NUMType dengcd = vcsn::misc::gcd (den_, nb.den_);
+      if(nb.num_ < 0)
+	signe = -1;
+      return TRationalNumber<NUMType, DENType> (signe * ((num_ / numgcd)
+							 * ((NUMType) nb.den_get() /dengcd)),
+						(signe * nb.num_get()
+							 / numgcd) *
+						(den_ / dengcd));
     }
 
     template<typename NUMType, typename DENType>
@@ -149,6 +161,9 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>&
     TRationalNumber<NUMType, DENType>::operator+= (const TRationalNumber<NUMType, DENType>& nb)
     {
+      // std::cout << "+=" << std::endl;
+      // std::cout << *this << '+' << nb << "= " << num_ * nb.den_ +
+      // 	nb.num_ * den_ << '\'' << den_ * nb.den_<< std::endl;
       set_rational (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
       return (*this);
     }
@@ -167,10 +182,10 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>&
     TRationalNumber<NUMType, DENType>::operator*= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      DENType d1 = vcsn::misc::gcd (num_, nb.den_get ());
-      DENType d2 = vcsn::misc::gcd (den_, nb.num_get ());
-      set_unsafe_rational ((num_ / d1) * (nb.num_get () / d2), (den_ / d2) *
-			   (nb.den_get () / d1));
+      DENType d1 = vcsn::misc::gcd (vcsn::misc::abs(num_), nb.den_get ());
+      DENType d2 = vcsn::misc::gcd (den_, vcsn::misc::abs(nb.num_get ()));
+      set_unsafe_rational ((num_ / d1) * (nb.num_get () / d2),
+			   (den_ / d2) * (nb.den_get () / d1));
       return (*this);
     }
 
@@ -179,11 +194,15 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>&
     TRationalNumber<NUMType, DENType>::operator/= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      DENType d1 = vcsn::misc::gcd (num_, nb.num_get ());
-      DENType d2 = vcsn::misc::gcd (den_, nb.den_get ());
-      set_unsafe_rational ((num_ / d1) * (nb.den_get () / d1), (den_ / d2) *
-			   (nb.num_get () / d1));
-      return (*this);
+      NUMType signe = 1;
+      assert(nb.num_ != 0);
+      NUMType numgcd = vcsn::misc::gcd (vcsn::misc::abs (num_), vcsn::misc::abs (nb.num_));
+      NUMType dengcd = vcsn::misc::gcd (den_, nb.den_);
+      if(nb.num_ < 0)
+	signe = -1;
+      set_unsafe_rational (signe * ((num_ / numgcd) * ((NUMType) nb.den_get() /dengcd)),
+						(signe * nb.num_get() / numgcd) * (den_ / dengcd));
+      return *this;
     }
 
     template<typename NUMType, typename DENType>
@@ -191,10 +210,10 @@ namespace vcsn {
     bool
     TRationalNumber<NUMType, DENType>::operator== (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return (den_ * nb.num_ == nb.den_ * num_);
-      // if (!num_)
-      // 	return (!nb.num_);
-      // return (den_ == nb.den_) && (num_ == nb.num_);
+      //return (den_ * nb.num_ == nb.den_ * num_);
+       if (!num_)
+	 return (!nb.num_);
+       return (den_ == nb.den_) && (num_ == nb.num_);
     }
 
     template<typename NUMType, typename DENType>
@@ -202,8 +221,10 @@ namespace vcsn {
     bool
     TRationalNumber<NUMType, DENType>::operator!= (const TRationalNumber<NUMType, DENType>& nb) const
     {
-      return (den_ * nb.num_ != nb.den_ * num_);
-      // return (den_ != nb.den_) || (num_ != nb.num_);
+      // return (den_ * nb.num_ != nb.den_ * num_);
+      if (!num_)
+	return (!!nb.num_);
+      return (den_ != nb.den_) || (num_ != nb.num_);
     }
 
     template<typename NUMType, typename DENType>
@@ -274,36 +295,20 @@ namespace vcsn {
     void
     TRationalNumber<NUMType, DENType>::set_rational (const NUMType num, const DENType den)
     {
-      if (den) {
-
-	std::cout << "DEBUG: " << num << '\t' << den << '\t'
-		  << num / (long long) den
-		  << '\t'
-		  << num / den
-		  << std::endl;
-      } else {
-	std::cout << "DEBUG: den NULL" << std::endl;
-      }
       if (num)
       {
-	//assert (den);
-	if (!den)
-	{
-	  num_ = 0;
-	  den_ = 1;
-	  return;
-	}
-	NUMType div = vcsn::misc::gcd (vcsn::misc::abs (num), den);
-
+	assert(den);
+	NUMType div = vcsn::misc::gcd(vcsn::misc::abs(num), den);
 	num_ = num / div;
 	den_ = den / div;
-
-	assert (1 == vcsn::misc::gcd (vcsn::misc::abs (num_), den_));
+	assert(1 == vcsn::misc::gcd(vcsn::misc::abs(num_), den_));
+	return;
       }
       else
       {
 	num_ = 0;
 	den_ = 1;
+	return;
       }
     }
 

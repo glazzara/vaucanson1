@@ -1,5 +1,11 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Correct Rational Number.
+	* include/vaucanson/algebra/implementation/semiring/q_number.hxx:
+	Correct rational number operator.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Add star_alphabet in taf-kit.
 
 	* taf-kit/src/cmd_wt.cc,
