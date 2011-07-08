@@ -1,6 +1,15 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Add star_alphabet_command file
+
+	* taf-kit/src/Makefile.am: add
+	taf-kit/src/star_alphabet_command.hh, and
+	taf-kit/src/star_alphabet_command.hx
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Work on infiltration, sub_normalize, and shuffle
+
 	* include/vaucanson/algorithms/infiltration.hxx,
 	* include/vaucanson/algorithms/sub_normalize.hxx,
 	* include/vaucanson/algorithms/shuffle.hxx: Correct
@@ -18,7 +27,6 @@
 
 	Correct demonstration.
 
-	* modified:   configure.ac
 	* data/automata/Makefile.am,
 	* data/automata/char-q/Makefile.am,
 	* data/automata/char-q/b1.cc,
