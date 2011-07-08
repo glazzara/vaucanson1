@@ -1,5 +1,11 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Update AUTHORS file.
+
+	* AUTHORS: Add 2013 students.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Include star alphabet (taf-kit) command.
 
 	* taf-kit/src/Makefile.am: Add star alphabets.
