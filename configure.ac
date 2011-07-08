@@ -39,7 +39,7 @@ AC_ARG_WITH([default-graph-impl],
      [ac_default_graph_impl="$withval"],[])
 
 AC_DEFINE_UNQUOTED([VCSN_DEFAULT_GRAPH_IMPL], [$ac_default_graph_impl],
-		   [Default graph implementation.])
+       [Default graph implementation.])
 
 case $ac_default_graph_impl in
   listg|bmig);;
@@ -72,11 +72,11 @@ AC_PROG_AWK
 
 
 AC_ARG_ENABLE([demos],
-	[AC_HELP_STRING([--enable-demos], [build demos during "make all"])])
+  [AC_HELP_STRING([--enable-demos], [build demos during "make all"])])
 AM_CONDITIONAL([ENABLE_DEMOS], [test "x$enable_demos" = "xyes"])
 AC_ARG_ENABLE([bench],
-	[AC_HELP_STRING([--enable-bench],
-	                [build benchmarks during "make all"])])
+  [AC_HELP_STRING([--enable-bench],
+                  [build benchmarks during "make all"])])
 AM_CONDITIONAL([ENABLE_BENCH], [test "x$enable_bench" = "xyes"])
 
 # Boost
@@ -110,22 +110,22 @@ case $prefix in
 esac
 VCSN_DATA_PATH=$(eval echo $(eval echo "$datadir/vaucanson/"))
 AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$VCSN_DATA_PATH"],
-		   [Directory where Vaucaunson data is installed.])
+       [Directory where Vaucaunson data is installed.])
 prefix=$old_prefix
 
 # Package misc variables.
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_NAME], ["$PACKAGE_NAME"],
                    [Package Full name.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_BUGREPORT], ["$PACKAGE_BUGREPORT"],
-		   [Bug report address.])
+       [Bug report address.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_STRING], ["$PACKAGE_STRING"],
-		   [Full name and version.])
+       [Full name and version.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"],
                    [Package Version.])
 
 # XML namespace.
 AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
-		   [Root of the XML namespace.])
+       [Root of the XML namespace.])
 
 
 ## --------------- ##
@@ -137,24 +137,24 @@ AC_DEFINE_UNQUOTED([VCSN_XMLNS], ["http://vaucanson.lrde.epita.fr"],
 m4_define([VCSN_ARG_PROGS],
 [AC_ARG_VAR(m4_toupper([$1]), [$2])
 AC_CHECK_PROGS(m4_toupper([$1]), [m4_default([$3], [$1])],
-	       [$am_aux_dir/missing $1])
+         [$am_aux_dir/missing $1])
 ])
 
 
 VCSN_ARG_PROGS([doxygen],   [the Doxygen documentation generation program])
 VCSN_ARG_PROGS([texi2dvi],  [program to create DVI from TeX files])
 VCSN_ARG_PROGS([rst2latex],
-	       [reStructuredText to LaTeX converter],
-	       [rst2latex rst2latex.py])
+         [reStructuredText to LaTeX converter],
+         [rst2latex rst2latex.py])
 VCSN_ARG_PROGS([rst2html],
-	       [reStructuredText to HTML converter],
-	       [rst2html rst2html.py])
+         [reStructuredText to HTML converter],
+         [rst2html rst2html.py])
 VCSN_ARG_PROGS([tar],       [the tape archiver program])
 
 AC_CONFIG_FILES([
    doc/Makefile
    doc/doc.doxy
-	doc/manual/Makefile
+  doc/manual/Makefile
 ])
 
 
@@ -163,11 +163,11 @@ AC_CONFIG_FILES([
 ## ------- ##
 
 AC_CONFIG_FILES([
-	taf-kit/Makefile
-	  taf-kit/src/Makefile
-	  taf-kit/tests/Makefile
-	  taf-kit/demos/Makefile
-	  taf-kit/demos/hulden/Makefile
+  taf-kit/Makefile
+    taf-kit/src/Makefile
+    taf-kit/tests/Makefile
+    taf-kit/demos/Makefile
+    taf-kit/demos/hulden/Makefile
 ])
 
 # Prevent accidental edition of generated files.
@@ -178,7 +178,7 @@ AC_CONFIG_FILES([taf-kit/tests/defs], [chmod a-w taf-kit/tests/defs])
 # Create a testing wrapper for the TAF-KIT-COMPONENT-NAME.
 m4_define([VCSN_CONFIG_WRAPPER],
 [AC_CONFIG_FILES([taf-kit/tests/$1:taf-kit/tests/wrapper.in],
-		 [chmod a+x taf-kit/tests/$1])
+     [chmod a+x taf-kit/tests/$1])
 ])
 VCSN_CONFIG_WRAPPER([vcsn-char-b])
 VCSN_CONFIG_WRAPPER([vcsn-char-fmp-b])
@@ -221,37 +221,46 @@ src/tests/xml/Makefile
 ## ---------------- ##
 
 AC_CONFIG_FILES([
-	Makefile
-	build-aux/Makefile
-	data/Makefile
-	  data/automata/Makefile
-	    data/automata/char-b/Makefile
-	    data/automata/char-fmp-b/Makefile
-	    data/automata/char-rw-b/Makefile
-	    data/automata/char-z/Makefile
-	  data/emacs/Makefile
+  Makefile
+  build-aux/Makefile
+  data/Makefile
+    data/automata/Makefile
+      data/automata/char-b/Makefile
+      data/automata/char-char-b/Makefile
+      data/automata/char-f2/Makefile
+      data/automata/char-fmp-b/Makefile
+      data/automata/char-fmp-z/Makefile
+      data/automata/char-q/Makefile
+      data/automata/char-r/Makefile
+      data/automata/char-rw-b/Makefile
+      data/automata/char-z/Makefile
+      data/automata/char-zmax/Makefile
+      data/automata/char-zmin/Makefile
+      data/automata/int-b/Makefile
+      data/automata/int-z/Makefile
+    data/emacs/Makefile
         gnulib/Makefile
-	lib/Makefile
-	src/Makefile
-	  src/demos/Makefile
-	    src/demos/algorithms/Makefile
-	    src/demos/one_rule_rewriting/Makefile
-	    src/demos/vgrep/Makefile
-	  src/bench/Makefile
-	    src/bench/common/Makefile
-	    src/bench/composition/Makefile
-	    src/bench/derived_terms/Makefile
-	    src/bench/determinization/Makefile
-	    src/bench/eps_removal/Makefile
-	    src/bench/eval/Makefile
-	    src/bench/iterators/Makefile
-	    src/bench/accessible/Makefile
-	    src/bench/minimization/Makefile
-	    src/bench/product/Makefile
-	    src/bench/quotient/Makefile
-	tools/Makefile
-	include/Makefile
-	debian/Makefile])
+  lib/Makefile
+  src/Makefile
+    src/demos/Makefile
+      src/demos/algorithms/Makefile
+      src/demos/one_rule_rewriting/Makefile
+      src/demos/vgrep/Makefile
+    src/bench/Makefile
+      src/bench/common/Makefile
+      src/bench/composition/Makefile
+      src/bench/derived_terms/Makefile
+      src/bench/determinization/Makefile
+      src/bench/eps_removal/Makefile
+      src/bench/eval/Makefile
+      src/bench/iterators/Makefile
+      src/bench/accessible/Makefile
+      src/bench/minimization/Makefile
+      src/bench/product/Makefile
+      src/bench/quotient/Makefile
+  tools/Makefile
+  include/Makefile
+  debian/Makefile])
 
 m4_include([build-aux/tests.m4])
 

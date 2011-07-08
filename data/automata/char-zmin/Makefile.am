@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2011 The
 ## Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
@@ -14,7 +14,28 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = char-b char-char-b char-f2 char-fmp-b char-fmp-z char-q \
-char-r char-rw-b char-z char-zmin char-zmax int-b int-z
+LDADD = $(top_builddir)/lib/libvcsn-common.la
+AM_CPPFLAGS += -DBENCH_DISABLED
 
-automata_DATA = README
+noinst_PROGRAMS = minab sag
+
+nodist_char_zmin_automata_DATA =			\
+  minab.xml \
+  sag.xml
+
+CLEANFILES += $(nodist_char_zmin_automata_DATA)
+
+minab_CPPFLAGS = $(AM_CPPFLAGS)
+minab_SOURCES = minab.cc
+
+minab.xml: minab$(EXEEXT)
+	./minab$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@
+
+sag_CPPFLAGS = $(AM_CPPFLAGS)
+sag_SOURCES = sag.cc
+
+sag.xml: sag$(EXEEXT)
+	./sag$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@
+

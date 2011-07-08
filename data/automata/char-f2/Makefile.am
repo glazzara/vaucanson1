@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008 The
+## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2008, 2009, 2011 The
 ## Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
@@ -14,7 +14,20 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = char-b char-char-b char-f2 char-fmp-b char-fmp-z char-q \
-char-r char-rw-b char-z char-zmin char-zmax int-b int-z
+LDADD = $(top_builddir)/lib/libvcsn-common.la
+AM_CPPFLAGS += -DBENCH_DISABLED
 
-automata_DATA = README
+noinst_PROGRAMS =
+
+bin_PROGRAMS = ring-char-f2
+
+nodist_char_f2_automata_DATA = \
+	ring-7-0-2-3.xml
+
+CLEANFILES += $(nodist_char_f2_automata_DATA)
+
+ring_char_f2_CPPFLAGS = $(AM_CPPFLAGS)
+ring_char_f2_SOURCES = ring.cc
+ring-7-0-2-3.xml: ring-char-f2$(EXEEXT)
+	./ring-char-f2$(EXEEXT) 7 0 2 3 xml >$@.tmp
+	mv $@.tmp $@

@@ -30,9 +30,18 @@ XSD_CPPFLAGS = -DVCSN_DATA_PATH="\"$(top_srcdir)/data\""
 ## Where we store automata.
 automatadir = $(pkgdatadir)/automata
 char_b_automatadir = $(automatadir)/char-b
-char_z_automatadir = $(automatadir)/char-z
+char_char_b_automatadir = $(automatadir)/char-char-b
+char_f2_automatadir = $(automatadir)/char-f2
 char_fmp_b_automatadir = $(automatadir)/char-fmp-b
+char_fmp_z_automatadir = $(automatadir)/char-fmp-z
+char_q_automatadir = $(automatadir)/char-q$
+char_r_automatadir = $(automatadir)/char-r
 char_rw_b_automatadir = $(automatadir)/char-rw-b
+char_z_automatadir = $(automatadir)/char-z
+char_zmin_automatadir = $(automatadir)/char-zmin
+char_zmax_automatadir = $(automatadir)/char-zmax
+int_b_automatadir = $(automatadir)/int-b
+int_z_automatadir = $(automatadir)/int-z
 
 ## Where documentation is uploaded on EPITA servers.
 dloaddir = /mnt/dload

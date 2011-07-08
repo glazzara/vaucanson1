@@ -1,3 +1,31 @@
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
+	Create demonstration in data/automata
+	* configure.ac,
+	* data/automata/Makefile.am,
+	* data/automata/char-b/Makefile.am,
+	* data/automata/char-b/evena.cc,
+	* data/automata/char-b/oddb.cc,
+	* data/automata/char-char-b/Makefile.am,
+	* data/automata/char-f2/Makefile.am,
+	* data/automata/char-f2/ring.cc,
+	* data/automata/char-fmp-z/Makefile.am,
+	* ata/automata/char-int-b/Makefile.am,
+	* data/automata/char-q/Makefile.am,
+	* data/automata/char-r/Makefile.am,
+	* data/automata/char-zmax/Makefile.am,
+	* data/automata/char-zmax/gag.cc,
+	* data/automata/char-zmax/maxab.cc,
+	* data/automata/char-zmin/Makefile.am,
+	* data/automata/char-zmin/minab.cc,
+	* data/automata/char-zmin/sag.cc,
+	* data/automata/int-b/Makefile.am,
+	* data/automata/int-z/Makefile.am: Create demonstration
+	in data/automata for int-z, int-b, char-zmin, char-zmax,
+	char-r, char-q, char-int-b, char-fmp-z, char-f2, char-char-b,
+	and char-b. Create Makefile.am for demonstration, and update
+	main Makefile.am
+
 2011-07-08    <moreira@lrde.epita.fr>
 
 	Correct bug in Taf-kit

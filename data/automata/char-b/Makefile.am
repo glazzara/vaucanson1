@@ -17,7 +17,7 @@ include $(top_srcdir)/vaucanson.mk
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
-noinst_PROGRAMS = a1 b1
+noinst_PROGRAMS = a1 b1 evena oddb
 bin_PROGRAMS = divkbaseb-char-b ladybird-char-b doublering-char-b
 
 nodist_char_b_automata_DATA =			\
@@ -25,13 +25,14 @@ nodist_char_b_automata_DATA =			\
   b1.xml					\
   div3base2.xml					\
   ladybird-6.xml				\
-  double-3-1.xml
+  double-3-1.xml        \
+  evena.xml \
+  oddb.xml
 
 CLEANFILES += $(nodist_char_b_automata_DATA)
 
 a1_CPPFLAGS = $(AM_CPPFLAGS)
 a1_SOURCES = a1.cc
-
 a1.xml: a1$(EXEEXT)
 	./a1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
@@ -60,4 +61,16 @@ doublering_char_b_CPPFLAGS = $(AM_CPPFLAGS)
 doublering_char_b_SOURCES = double_ring.cc
 double-3-1.xml: doublering-char-b$(EXEEXT)
 	./doublering-char-b$(EXEEXT) 3 1 xml >$@.tmp
+	mv $@.tmp $@
+
+evena_CPPFLAGS = $(AM_CPPFLAGS)
+evena_SOURCES = evena.cc
+evena.xml: evena$(EXEEXT)
+	./evena$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@
+
+oddb_CPPFLAGS = $(AM_CPPFLAGS)
+oddb_SOURCES = oddb.cc
+oddb.xml: oddb$(EXEEXT)
+	./oddb$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
