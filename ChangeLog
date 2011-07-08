@@ -1,5 +1,11 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Update Vaucanson version (1.3.9)
+
+	* configure.ac: Update Vaucanson version to 1.3.9.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Downgrade sub_normalized.hxx
 	* include/vaucanson/algorithms/sub_normalized.hxx: Downgrade (check
 	error for fmp).
