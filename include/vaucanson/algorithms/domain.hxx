@@ -42,7 +42,46 @@ namespace vcsn
     const trans_monoid_t&	trans_monoid =
       src.structure().series().monoid();
 
-    set_states(src, dst, stmap);
+   for_all_const_states(fmp_s, src)
+    {
+      hstate_t s = dst.add_state();
+      stmap[*fmp_s] = s;
+
+      if (src.is_initial(*fmp_s))
+      {
+      const trans_series_set_elt_t	trans_series_elt =
+    	src.get_initial(*fmp_s);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+        const trans_monoid_elt_t	trans_monoid_elt
+	     (trans_monoid, *(trans_supp.begin()));
+
+        const monoid_elt_value_t	word(trans_monoid_elt.value().first);
+
+        series_set_elt_t		series_elt(series);
+
+        series_elt.assoc(monoid_elt_t(monoid, word),
+		       trans_series_elt.get(trans_monoid_elt));
+
+	    dst.set_initial(s, series_elt);
+      }
+      if (src.is_final(*fmp_s))
+      {
+      const trans_series_set_elt_t	trans_series_elt =
+    	src.get_final(*fmp_s);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+        const trans_monoid_elt_t	trans_monoid_elt
+	     (trans_monoid, *(trans_supp.begin()));
+
+        const monoid_elt_value_t	word(trans_monoid_elt.value().first);
+
+        series_set_elt_t		series_elt(series);
+
+        series_elt.assoc(monoid_elt_t(monoid, word),
+		       trans_series_elt.get(trans_monoid_elt));
+
+	    dst.set_final(s, series_elt);
+      }
+    }
 
     for_all_const_transitions_(trans_, fmp_e, src)
     {

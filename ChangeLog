@@ -1,3 +1,11 @@
+2011-07-08  David Moreira  <moreira@knokke-le-zout.lrde.epita.fr>
+
+	Update domain and image algorithms.
+
+	* include/vaucanson/algorithms/domain.hxx,
+	* include/vaucanson/algorithms/image.hxx: Add latest
+	version for domain and image algorithms.
+
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
 	Update vcsn-char-q.test and vcsn-char-r.test
