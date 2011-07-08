@@ -1,5 +1,12 @@
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
+	Update vcsn-char-q.test and vcsn-char-r.test
+	* taf-kit/tests/vcsn-char-r.test: Read the alphabet '01'
+	instead of 'ab'.
+	* taf-kit/tests/vcsn-char-q.test: Delete latest test.
+
+2011-07-08  David Moreira  <moreira@lrde.epita.fr>
+
 	Update Vaucanson version (1.3.9)
 
 	* configure.ac: Update Vaucanson version to 1.3.9.

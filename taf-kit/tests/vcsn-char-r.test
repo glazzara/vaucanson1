@@ -108,15 +108,15 @@ $VCSN data b4r.xml | grep 'States: 5'
 
 for i in left right; do
       $VCSN standardize c1.xml \| $i-mult - 0 > l0.xml
-      test "`$VCSN eval l0.xml abab`" = 0
+      test "`$VCSN eval l0.xml 0101`" = 0
       $VCSN is-useless l0.xml
       $VCSN standardize c1.xml \| $i-mult - 1 > l1.xml
-      test "`$VCSN eval l1.xml abab`" = 5
+      test "`$VCSN eval l1.xml 0101`" = 5
 fail1 $VCSN is-useless l1.xml
       $VCSN standardize c1.xml \| $i-mult - 2 > l2.xml
-      test "`$VCSN eval l2.xml abab`" = 10
+      test "`$VCSN eval l2.xml 0101`" = 10
 fail1 $VCSN is-useless l2.xml
       $VCSN standardize c1.xml \| $i-mult -- - -3 > l3.xml
-      test "`$VCSN eval l3.xml abab`" = -15
+      test "`$VCSN eval l3.xml 0101`" = -15
 fail1 $VCSN is-useless l3.xml
 done

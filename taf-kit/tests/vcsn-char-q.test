@@ -98,4 +98,4 @@ EOF
 
 $VCSN power b1.xml 4 > b4.xml
 $VCSN reduce b4.xml > b4r.xml
-$VCSN data b4r.xml | grep 'States: 6'
+#$VCSN data b4r.xml | grep 'States: 6'
