@@ -1,3 +1,11 @@
+2011-07-09  David Moreira  <moreira@lrde.epita.fr>
+
+	Clean rational number code.
+
+	* include/vaucanson/algebra/implementation/semiring/q_number.hxx:
+	Delete debug information. Check at the end of set_rational if the
+	denominator is 'not null'.
+
 2011-07-08  David Moreira  <moreira@lrde.epita.fr>
 
 	Update AUTHORS file.

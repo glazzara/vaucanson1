@@ -299,8 +299,6 @@ namespace vcsn {
       {
 	assert(den);
 	NUMType div = vcsn::misc::gcd(vcsn::misc::abs(num), den);
-	if (div < 0)
-	  std::cout << "false";
 	num_ = num / div;
 	den_ = den / div;
 	if (1  != vcsn::misc::gcd(vcsn::misc::abs(num_), den_)) {
@@ -309,6 +307,7 @@ namespace vcsn {
 
 
 	assert(1u == vcsn::misc::gcd(vcsn::misc::abs(num_), den_));
+	assert(den_);
 	return;
       }
       else
