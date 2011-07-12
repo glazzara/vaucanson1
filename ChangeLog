@@ -1,3 +1,11 @@
+2011-07-12  David Moreira  <moreira@lrde.epita.fr>
+
+	Ignore some generating files.
+
+	* include/.gitignore: Ignore include/vaucanson/f2_*.hh
+	and include/vaucanson/q_*.hh (file generate for Z/2Z and
+	Q semirings.)
+
 2011-07-09  David Moreira  <moreira@lrde.epita.fr>
 
 	Clean rational number code.

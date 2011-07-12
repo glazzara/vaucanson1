@@ -6,6 +6,8 @@ generic_contexts.mk
 /vaucanson/int_*.hh
 /vaucanson/r_*.hh
 /vaucanson/z_*.hh
+/vaucanson/f2_*.hh
+/vaucanson/q_*.hh
 /vaucanson/contexts/bmig/
 /vaucanson/contexts/listg/
 /vaucanson/config/pconf.hh
