@@ -18,12 +18,14 @@ LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
 noinst_PROGRAMS = t1 u1
-bin_PROGRAMS = quotkbaseb-char-fmp-b
+bin_PROGRAMS = quotkbaseb-char-fmp-b ORR-char-fmp-b
 
 nodist_char_fmp_b_automata_DATA =	\
-	t1.xml				\
-	u1.xml				\
-	quot3base2.xml
+	t1.xml				                  \
+	u1.xml				                  \
+	quot3base2.xml                  \
+	ORR_abbc_bac_right.xml          \
+	ORR_abbc_bac_left.xml
 
 CLEANFILES += $(nodist_char_fmp_b_automata_DATA)
 
@@ -47,3 +49,11 @@ quotkbaseb_char_fmp_b_SOURCES = quotkbaseb.cc
 quot3base2.xml: quotkbaseb-char-fmp-b$(EXEEXT)
 	./quotkbaseb-char-fmp-b$(EXEEXT) 3 2 >$@.tmp
 	mv $@.tmp $@
+
+ORR_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS)
+ORR_char_fmp_b_SOURCES = ORR.cc
+
+ORR_abbc_bac_right.xml: ORR-char-fmp-b$(EXEEXT)
+	./ORR-char-fmp-b$(EXEEXT) abbc bac ORR_abbc_bac xml
+
+ORR_abbc_bac_left.xml:ORR_abbc_bac_right.xml

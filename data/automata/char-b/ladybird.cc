@@ -23,9 +23,12 @@ using namespace vcsn::boolean_automaton;
 
 int main(int argc, char** argv)
 {
-  if (argc != 2 && argc != 3)
+  if ((argc != 2 && argc != 3))
   {
-    std::cerr << "Usage: " << argv[0] << " <n> [<fmt>]" << std::endl;
+    const char* program = strrchr(argv[0], '/');
+    program = program? program+1 : argv[0];
+    std::cerr << "Usage: " << std::endl
+              << '\t' << program << " <n> [<fmt>]" << std::endl;
     return 1;
   }
 

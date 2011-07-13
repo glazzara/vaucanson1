@@ -128,8 +128,44 @@ get_fmp_automata_path()
 }
 #endif // !WITH_TO_ALPHABETS
 
+//static int
+//list_automata_command()
+//{
+  //const std::list<std::string>& path_list = get_automata_path();
+//
+  //std::set<std::string> files;
+//
+  //for (std::list<std::string>::const_iterator i = path_list.begin();
+       //i != path_list.end(); ++i)
+    //{
+      //DIR* directory = opendir(i->c_str());
+      //dirent* file;
+//
+      //while ((file = readdir(directory)))
+      //{
+    //std::string filename = file->d_name;
+    //int l = filename.rfind(".xml");
+    //if ((l != -1) && (l == filename.size() - 4))
+      //files.insert(filename);
+  //}
+      //closedir(directory);
+    //}
+//
+  //if (files.empty())
+    //{
+      //echo("No automata are predefined for this type.");
+    //}
+  //else
+    //{
+      //echo("The following automata are predefined:");
+      //for_all(std::set<std::string>, ifile, files)
+  //echo("  - " << *ifile);
+    //}
+  //return 0;
+//}
+
 static int
-list_automata_command()
+list_data_file_ending_with(std::string suffix, std::string name)
 {
   const std::list<std::string>& path_list = get_automata_path();
 
@@ -137,31 +173,93 @@ list_automata_command()
 
   for (std::list<std::string>::const_iterator i = path_list.begin();
        i != path_list.end(); ++i)
-    {
-      DIR* directory = opendir(i->c_str());
-      dirent* file;
+  {
+    DIR* directory = opendir(i->c_str());
+    dirent* file;
 
-      while ((file = readdir(directory)))
-      {
-	  std::string filename = file->d_name;
-	  int l = filename.rfind(".xml");
-	  if ((l != -1) && (l == filename.size() - 4))
-	    files.insert(filename);
-	}
-      closedir(directory);
+    while ((file = readdir(directory)))
+    {
+      std::string filename = file->d_name;
+      int l = filename.rfind(suffix);
+      if ((l != -1) && (l == filename.size() - suffix.size()))
+        files.insert(filename);
     }
+    closedir(directory);
+  }
 
   if (files.empty())
     {
-      echo("No automata are predefined for this type.");
+      std::string msg = std::string("No ")
+                        + name
+                        + std::string(" are predefined for this type.");
+      echo(msg);
     }
   else
     {
-      echo("The following automata are predefined:");
+      std::string msg = std::string("The following ")
+                        + name
+                        + std::string(" are predefined :");
+      echo(msg);
       for_all(std::set<std::string>, ifile, files)
-	echo("  - " << *ifile);
+        echo("  - " << *ifile);
     }
   return 0;
 }
+
+static int
+list_factory_command()
+{
+  const char* suffix = strrchr(program_name, '/');
+  suffix = suffix ? suffix + 6 : program_name + 5;
+  //std::string vcsnsuffix (suffix);
+  return (list_data_file_ending_with(std::string(suffix),
+                                     std::string("factories")));
+}
+
+static int
+list_automata_command()
+{
+  std::string suffix(".xml");
+  return (list_data_file_ending_with(std::string(".xml"),
+                                     std::string("automata")));
+}
+//static int
+//list_factory_command()
+//{
+  //const std::list<std::string>& path_list = get_automata_path();
+//
+  //std::set<std::string> files;
+//
+  //for (std::list<std::string>::const_iterator i = path_list.begin();
+       //i != path_list.end(); ++i)
+    //{
+      //DIR* directory = opendir(i->c_str());
+      //dirent* file;
+//
+      //while ((file = readdir(directory)))
+      //{
+    //std::string filename = file->d_name;
+    //const char* suffix = strrchr(program_name, '/');
+    //suffix = suffix ? suffix + 6 : program_name + 5;
+    //std::string vcsnsuffix (suffix);
+    //int l = filename.rfind(vcsnsuffix);
+    //if ((l != -1) && (l == filename.size() - vcsnsuffix.size()))
+      //files.insert(filename);
+  //}
+      //closedir(directory);
+    //}
+//
+  //if (files.empty())
+    //{
+      //echo("No factories are predefined for this type.");
+    //}
+  //else
+    //{
+      //echo("The following factories are predefined:");
+      //for_all(std::set<std::string>, ifile, files)
+        //echo("  - " << *ifile);
+    //}
+  //return 0;
+//}
 
 #endif /* !AUTOMATON_LIBRARY_COMMANDS_HH */

@@ -28,8 +28,10 @@ main(int argc, char** argv)
 {
   if (argc != 3 && argc != 4)
   {
+    const char* program = strrchr(argv[0], '/');
+    program = program? program+1 : argv[0];
     std::cerr << "Usage:" << std::endl
-	      << "\t" << argv[0] << " <divisor> <base> [<fmt>]" << std::endl;
+        << "\t" << program << " <divisor> <base> <format>" << std::endl;
     return 1;
   }
 

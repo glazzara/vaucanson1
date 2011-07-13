@@ -7,6 +7,19 @@
 	* include/vaucanson/algorithms/product.hxx,
 	* include/vaucanson/algorithms/shuffle.hxx: Improve
 	implementation.
+2011-07-13  David Moreira  <moreira@lrde.epita.fr>
+
+	Minor changes on data automata.
+
+	* data/automata/char-b/divkbaseb.cc,
+	* data/automata/char-b/double_ring.cc,
+	* data/automata/char-b/ladybird.cc,
+	* data/automata/char-f2/ring.cc,
+	* data/automata/char-fmp-b/Makefile.am,
+	* data/automata/char-fmp-b/quotkbaseb.cc: Some
+	bugs corrected.
+	* taf-kit/src/library_commands.hh,
+	* taf-kit/src/main.cc: Minor changes.
 
 2011-07-12  David Moreira  <moreira@lrde.epita.fr>
 

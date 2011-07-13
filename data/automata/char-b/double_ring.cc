@@ -25,11 +25,13 @@ using namespace vcsn::boolean_automaton;
 int
 main(int argc, char** argv)
 {
-  if (argc < 3)
+  if (argc  < 3)
   {
+    const char* program = strrchr(argv[0], '/');
+    program = program? program+1 : argv[0];
     std::cerr << "Usage:" << std::endl
-	      << "\t" << argv[0] << " <number of states>"
-	      << " [list of final states...] [format]" << std::endl;
+        << "\t" << program << " <number of states>"
+        << " [list of final states...] [<fmt>]" << std::endl;
     return 1;
   }
 

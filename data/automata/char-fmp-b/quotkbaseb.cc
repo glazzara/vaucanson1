@@ -18,24 +18,27 @@
 #include <vector>
 
 #include <vaucanson/fmp_transducer.hh>
+using namespace vcsn::fmp_transducer;
 #include <vaucanson/xml/contexts/fmp.hh>
-#include <vaucanson/tools/xml_dump.hh>
+#include <vaucanson/tools/dumper.hh>
 
 // See divkbaseb in char-b. With a minor addition, this file build the FMP
 // transducer whose output is the quotient in the division of n by k.
 int
 main(int argc, char** argv)
 {
-  using namespace vcsn::fmp_transducer;
+
 
   // Type helpers.
   typedef vcsn::algebra::letter_traits<first_alphabet_t::letter_t> ftraits;
   typedef vcsn::algebra::letter_traits<second_alphabet_t::letter_t> straits;
 
-  if (argc != 3)
+  if ((argc != 3) && (argc != 4))
   {
+    const char* program = strrchr(argv[0], '/');
+    program = program? program+1 : argv[0];
     std::cerr << "Usage:" << std::endl
-	      << "\t" << argv[0] << " <divisor> <base>" << std::endl;
+        << "\t" << program << " <divisor> <base> [<fmt>]" << std::endl;
     return 1;
   }
 
@@ -76,12 +79,12 @@ main(int argc, char** argv)
       int d = (e + l) % divisor;
       int f = (e + l) / divisor;
       a.add_weighted_transition(i, d, true, make_couple(A, B,
-	ftraits::letter_to_literal(int_to_letter[l]),
-	straits::letter_to_literal(int_to_letter[f])).value());
+  ftraits::letter_to_literal(int_to_letter[l]),
+  straits::letter_to_literal(int_to_letter[f])).value());
     }
   }
 
   std::stringstream name;
   name << "quot" << divisor << "base" << base;
-  vcsn::tools::xml_dump(std::cout, a, name.str());
+  vcsn::tools::dumper(argc, argv, 3)(std::cout, a, name.str());
 }
