@@ -9,6 +9,12 @@
 	implementation.
 2011-07-13  David Moreira  <moreira@lrde.epita.fr>
 
+	Add orr as data automata
+	* data/automata/char-fmp-b/ORR.cc: Add one
+	rule rewriting in automata data.
+
+2011-07-13  David Moreira  <moreira@lrde.epita.fr>
+
 	Minor changes on data automata.
 
 	* data/automata/char-b/divkbaseb.cc,
