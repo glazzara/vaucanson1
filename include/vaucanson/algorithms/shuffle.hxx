@@ -156,7 +156,8 @@ class Shuffle
 	  for_all_(std::list<htransition_t>, e, transitions)
 	    a.del_transition(*e);
 	  for_all_(map_t, it, map)
-	    a.add_series_transition(*s, it->first, it->second);
+	    if(it->second != a.series().zero_)
+		    a.add_series_transition(*s, it->first, it->second);
 	}
     }
   

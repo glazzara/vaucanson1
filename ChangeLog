@@ -1,3 +1,13 @@
+2011-07-14  David Moreira  <moreira@lrde.epita.fr>
+
+	Update some algorithms.
+
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/infiltration.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/shuffle.hxx: Improve
+	implementation.
+
 2011-07-12  David Moreira  <moreira@lrde.epita.fr>
 
 	Ignore some generating files.

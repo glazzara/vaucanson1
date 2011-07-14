@@ -83,12 +83,16 @@ class Product
 	const hstate_t lhs_s	     = current_pair.first;
 	const hstate_t rhs_s	     = current_pair.second;
 	const hstate_t current_state = visited_[current_pair];
-
-	output.set_initial(current_state,
-			   lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
-	output.set_final(current_state,
-			 lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
-
+  {
+	    series_set_elt_t	prod_series(series_);
+	    if (is_product_not_null(lhs.get_initial(lhs_s), rhs.get_initial(rhs_s), prod_series))
+			output.set_initial(current_state, prod_series);
+  }
+  {
+	    series_set_elt_t	prod_series(series_);
+	    if (is_product_not_null(lhs.get_final(lhs_s), rhs.get_final(rhs_s), prod_series))
+			output.set_final(current_state, prod_series);
+  }
         for (typename lhs_t::delta_iterator l(lhs.value(), lhs_s);
              ! l.done();
              l.next())
@@ -98,7 +102,7 @@ class Product
 	  {
 	    series_set_elt_t	prod_series(series_);
 
-	    if (is_product_not_null(lhs, rhs, l, r, prod_series))
+	    if (is_product_not_null(lhs.series_of(*l), rhs.series_of(*r), prod_series))
 	    {
 	      const pair_hstate_t new_pair(lhs.dst_of(*l), rhs.dst_of(*r));
 	      typename visited_t::const_iterator found = visited_.find(new_pair);
@@ -265,17 +269,14 @@ misc::static_eq<Type1, Type2>::value
     }
 
     inline bool
-    is_product_not_null (const lhs_t& lhs,
-			 const rhs_t& rhs,
-			 const typename lhs_t::delta_iterator& l,
-			 const typename rhs_t::delta_iterator& r,
+    is_product_not_null (const series_set_elt_t	left_series,
+			 const series_set_elt_t	right_series,
 			 series_set_elt_t&  prod_series) const
     {
-      const series_set_elt_t	left_series  = lhs.series_of(*l);
-      const series_set_elt_t	right_series = rhs.series_of(*r);
-
       bool			prod_is_not_null = false;
-      for_all_(support_t, supp, left_series.supp())
+      //the alphabet of rhs is a subset of the alphbet of rhs
+      //thus, we consider monomials in right_series; they are compatible with lhs.
+      for_all_(support_t, supp, right_series.supp())
 	{
 	  const monoid_elt_t	 supp_elt (monoid_, *supp);
 	  const semiring_elt_t l = left_series.get(supp_elt);
@@ -316,7 +317,7 @@ product (const Element<A, T>& lhs, const Element<A, U>& rhs,
 	 std::pair<typename T::hstate_t, typename U::hstate_t> >& m,
 	 const bool use_geometry)
 {
-  Element<A, T> ret(rhs.structure());
+  Element<A, T> ret(lhs.structure());
   Product<A, T, U> do_product(ret.structure(), use_geometry);
   return do_product (ret, lhs, rhs, m);
 }
