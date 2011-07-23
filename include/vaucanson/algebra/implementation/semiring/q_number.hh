@@ -139,10 +139,8 @@ namespace vcsn
       /// @name Cast function
       /// @{
       /// Implicit cast
-      // operator int () const;
       inline
       operator float () const;
-      // operator double () const;
 
       /// Explecit cast
       inline

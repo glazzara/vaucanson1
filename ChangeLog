@@ -1,3 +1,11 @@
+2011-07-21  David Moreira  <moreira@lrde.epita.fr>
+
+	Clean code from RationalNumber class.
+
+	* include/vaucanson/algebra/implementation/semiring/q_number.hh
+	* include/vaucanson/algebra/implementation/semiring/q_number.hxx:
+	Delete debug info and useless methods.
+
 2011-07-14  David Moreira  <moreira@lrde.epita.fr>
 
 	Update some algorithms.

@@ -21,7 +21,6 @@
 # include <vaucanson/misc/algebra.hh>
 # include <vaucanson/misc/contract.hh>
 
-# include <iostream>
 # include <cassert>
 
 namespace vcsn {
@@ -31,7 +30,7 @@ namespace vcsn {
     template<typename NUMType, typename DENType>
     inline
     TRationalNumber<NUMType, DENType>::TRationalNumber ()
-    : num_ (NUMType(0)), // 0 or 1
+    : num_ (NUMType(0)),
       den_ (DENType(1))
     {
     }
@@ -161,9 +160,6 @@ namespace vcsn {
     TRationalNumber<NUMType, DENType>&
     TRationalNumber<NUMType, DENType>::operator+= (const TRationalNumber<NUMType, DENType>& nb)
     {
-      // std::cout << "+=" << std::endl;
-      // std::cout << *this << '+' << nb << "= " << num_ * nb.den_ +
-      // 	nb.num_ * den_ << '\'' << den_ * nb.den_<< std::endl;
       set_rational (num_ * nb.den_ + nb.num_ * den_, den_ * nb.den_);
       return (*this);
     }
@@ -301,10 +297,6 @@ namespace vcsn {
 	NUMType div = vcsn::misc::gcd(vcsn::misc::abs(num), den);
 	num_ = num / div;
 	den_ = den / div;
-	if (1  != vcsn::misc::gcd(vcsn::misc::abs(num_), den_)) {
-	  std::cout << num_ << ' ' << den_ << std::endl;
-	}
-
 
 	assert(1u == vcsn::misc::gcd(vcsn::misc::abs(num_), den_));
 	assert(den_);
