@@ -72,6 +72,13 @@ minimization_moore_command(const arguments_t& args)
 }
 
 static int
+intersection_command(const arguments_t& args)
+{
+  g_res.keep(product(realtime(get_aut(args, 1)), realtime(get_aut(args, 2))));
+  return 0;
+}
+
+static int
 are_equivalent_command(const arguments_t& args)
 {
   bool b = are_equivalent(get_aut(args, 1), get_aut(args, 2));
@@ -165,6 +172,7 @@ COMMAND_ENTRY_CN(minimize, minimization_hopcroft, Aut,
 		 "Give the minimized of `aut' (Hopcroft algorithm).");
 COMMAND_ENTRY_EXPERT_CN(minimize-moore, minimization_moore, Aut,
 			"Give the minimized of `aut' (Moore algorithm).");
+COMMAND_ENTRY(intersection, AutAut, "Build the intersection of two automata.");
 COMMAND_ENTRY(are_equivalent, AutAut,
 	      "Return whether `aut1' and `aut2' realize the same series.");
 COMMAND_ENTRY(are_equivalent_E, ExpExp,
