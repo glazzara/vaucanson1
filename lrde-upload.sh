@@ -44,3 +44,4 @@ rm -rf $DEST/ref.old
 
 # Upload index description
 echo "AddDescription \"`git describe`\" ???*" > $DEST/.htaccess
+chmod a+r $DEST/.htaccess
