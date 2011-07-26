@@ -16,7 +16,10 @@ case $rev in
   *) exit;;
 esac
 
-DEST=/lrde/dload/vaucanson/$rev
+case `hostname` in
+  vcsn*) DEST=/var/lib/buildbot/tar/$rev;;
+  *)     DEST=/lrde/dload/vaucanson/$rev;;
+esac
 
 # Retrieve the package version
 VERSION=`autoconf --trace='AC_INIT:$2'`
@@ -38,3 +41,6 @@ chmod -R a+rX $DEST/
 mv -f $DEST/ref $DEST/ref.old || true
 mv -f $DEST/ref.tmp $DEST/ref
 rm -rf $DEST/ref.old
+
+# Upload index description
+echo "AddDescription \"`git describe`\" ???*" > $DEST/.htaccess

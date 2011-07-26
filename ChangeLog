@@ -1,3 +1,17 @@
+2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Bump version.
+
+	* configure.ac: Bump version to 1.3.9a.
+	* doc/manual/taf-kit-manual.tex: Likewise.
+
+2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Update lrde-upload.sh for vcsn.
+
+	* lrde-upload.sh: Adjust path for vcsn.enst.fr, and
+	output the git description in .htaccess
+
 2011-07-21  David Moreira  <moreira@lrde.epita.fr>
 
 	Clean code from RationalNumber class.
