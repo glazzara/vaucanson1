@@ -1,5 +1,9 @@
 2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/HACKING.txt: Explain how to tag new versions.
+
+2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Bump version.
 
 	* configure.ac: Bump version to 1.3.9a.

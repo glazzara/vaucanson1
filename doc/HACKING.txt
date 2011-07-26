@@ -483,16 +483,18 @@ Don't do these steps from memory.
 Make sure your system has up-to-date tools (Autotools, Swig, Doxygen,
 ...)  before continuing.
 
-  - Bump the version number in ``configure.ac``.
+  - Bump the version number in ``configure.ac``
+    and in ``doc/manual/taf-kit-manual.tex``.
   - Run ``bootstrap``.
   - Write the ``ChangeLog`` entry for all the above changes
-    (But don't commit it before ``distcheck``.)
+    (But don't push it before ``distcheck``.)
 
   - Run ``make distcheck``.
-  - Commit all changes on success.  Commit suicide otherwise.
+  - Push all changes on success.
   - Tag the repository for the release.
+    The command should look like ``git tag -a v1.2.3 -m 'Vaucanson 1.2.3'``.
 
-  - Append a ``a`` to the version number in ``configure.ac`` and commit
+  - Append a ``a`` to the version number in ``configure.ac`` and commit/push
     this new change so that the next run of the autobuilder won't
     create a release.
 
