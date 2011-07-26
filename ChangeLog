@@ -1,5 +1,9 @@
 2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/NEWS.txt: Fix identation.
+
+2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* lrde-upload.sh: Fix .htaccess rights.
 
 2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>

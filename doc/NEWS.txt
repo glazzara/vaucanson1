@@ -42,10 +42,10 @@ new algorithms, a lot of renaming.
   * The --list-automata option replace the old list-automata command.
 - Important bug-fixes
   * eps_removal() has been fixed to deal with non-positive semirings when
-    possible, and detect when not.
+  possible, and detect when not.
   * reduce() has been mostly rewritten
   * The parser for rational expressions no longer parses a+b(a)
-    as (a+b)(a).
+  as (a+b)(a).
 - aut-to-exp will work on FMP transducers.
 - TAF-Kit will warn when reading an empty file (usually the result
   for running something like "command file > file"), and the "edit"
