@@ -1,3 +1,13 @@
+2011-09-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Revert part of bff6ab2e0a3cbe1935ab3dd36d7683c449ba90df.
+
+	It contains a feature (--list-factory) that cannot work, and
+	multiple useless commented functions (!?!?).
+
+	* taf-kit/src/library_commands.hh, taf-kit/src/main.cc: Restore
+	these files as they were before 2011-07-13.
+
 2011-07-26  David Moreira <moreira@lrde.epita.fr>
 
 	Update domain and Image. Add universal algorithms.
