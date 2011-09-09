@@ -1,3 +1,22 @@
+2011-07-26  David Moreira <moreira@lrde.epita.fr>
+
+	Update domain and Image. Add universal algorithms.
+
+	* include/vaucanson/algorithms/domain.hxx,
+	* include/vaucanson/algorithms/image.hxx: Update, Fix
+	FIXME.
+	* include/vaucanson/algorithms/universal.hh,
+	* include/vaucanson/algorithms/universal.hxx: Create universal
+	algorithms.
+	* include/Makefile.am: Include
+	include/vaucanson/algorithms/universal.hh
+	and include/vaucanson/algorithms/universal.hxx to the vaucanson
+	dist tarball.
+	* lib/generate_libvcsn.rb: universal algorithms is for automata.
+	* data/.gitignore: Ignore new binary.
+	* taf-kit/src/cmd_b.cc, taf-kit/src/cmd_r.cc: Add universal command
+	to boolean and real automata.
+
 2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/NEWS.txt: Fix identation.

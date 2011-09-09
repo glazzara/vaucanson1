@@ -28,7 +28,83 @@ namespace vcsn
 
   template <typename src_t, typename dst_t>
   void
-  do_fmp_domain(const src_t& src, dst_t& dst)
+  do_fmp_domain(const src_t& input, dst_t& dst)
+  {
+    BENCH_TASK_SCOPED("fmp_domain");
+    AUTOMATON_TYPES_(src_t, trans_);
+    AUTOMATON_TYPES(dst_t);
+
+    typedef typename trans_series_set_elt_t::support_t	trans_support_t;
+    std::map<trans_hstate_t, hstate_t>	stmap;
+
+    const series_set_t&		series = dst.structure().series();
+    const monoid_t&		monoid = dst.structure().series().monoid();
+    const trans_monoid_t&	trans_monoid =
+      input.structure().series().monoid();
+    const semiring_elt_t&	unit = input.structure().series().semiring().wone_;
+
+	src_t src=cut_up(input);
+
+   for_all_const_states(fmp_s, src)
+    {
+      hstate_t s = dst.add_state();
+      stmap[*fmp_s] = s;
+
+      if (src.is_initial(*fmp_s))
+      {
+      const trans_series_set_elt_t	trans_series_elt =
+    	src.get_initial(*fmp_s);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+        const trans_monoid_elt_t	trans_monoid_elt
+	     (trans_monoid, *(trans_supp.begin()));
+
+        const monoid_elt_value_t	word(trans_monoid_elt.value().first);
+
+        series_set_elt_t		series_elt(series);
+
+        series_elt.assoc(monoid_elt_t(monoid, word), unit);
+
+	    dst.set_initial(s, series_elt);
+      }
+      if (src.is_final(*fmp_s))
+      {
+      const trans_series_set_elt_t	trans_series_elt =
+    	src.get_final(*fmp_s);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+        const trans_monoid_elt_t	trans_monoid_elt
+	     (trans_monoid, *(trans_supp.begin()));
+
+        const monoid_elt_value_t	word(trans_monoid_elt.value().first);
+
+        series_set_elt_t		series_elt(series);
+
+        series_elt.assoc(monoid_elt_t(monoid, word), unit);
+
+	    dst.set_final(s, series_elt);
+      }
+    }
+
+    for_all_const_transitions_(trans_, fmp_e, src)
+    {
+      const trans_series_set_elt_t	trans_series_elt =
+	src.series_of(*fmp_e);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+      const trans_monoid_elt_t	trans_monoid_elt
+	(trans_monoid, *(trans_supp.begin()));
+      const monoid_elt_value_t	word(trans_monoid_elt.value().first);
+
+      series_set_elt_t		series_elt(series);
+
+      series_elt.assoc(monoid_elt_t(monoid, word), unit);
+
+      dst.add_series_transition(stmap[src.src_of(*fmp_e)],
+				stmap[src.dst_of(*fmp_e)], series_elt);
+    }
+  }
+
+  template <typename src_t, typename dst_t>
+  void
+  do_fmp_weighted_domain(const src_t& src, dst_t& dst)
   {
     BENCH_TASK_SCOPED("fmp_domain");
     AUTOMATON_TYPES_(src_t, trans_);
@@ -101,8 +177,6 @@ namespace vcsn
 				stmap[src.dst_of(*fmp_e)], series_elt);
     }
   }
-
-// FIXME: non void version
 
 
   /*----------.

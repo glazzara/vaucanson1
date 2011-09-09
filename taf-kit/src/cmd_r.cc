@@ -17,6 +17,7 @@
 
 #include "commands.hh"
 #include <vaucanson/algorithms/is_useless.hh>
+#include <vaucanson/algorithms/universal.hh>
 
 static int
 reduce_command(const arguments_t& args)
@@ -72,6 +73,12 @@ are_equivalent_E_command(const arguments_t& args)
   return !c;
 };
 
+static int
+universal_command(const arguments_t& args)
+{
+  g_res.keep(universal(get_aut(args, 1)));
+  return 0;
+}
 
 
 BEGIN_COMMAND_GROUP(r_commands,
@@ -82,4 +89,5 @@ COMMAND_ENTRY(are_equivalent, AutAut,
 	      "Tell whether two automata realize the same series.");
 COMMAND_ENTRY(are_equivalent_E, ExpExp,
 	      "Tell whether two expressions denote the same language.");
+COMMAND_ENTRY(universal, Aut, "Build the universal automaton of an automaton.")
 END_COMMAND_GROUP

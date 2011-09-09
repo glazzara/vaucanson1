@@ -16,6 +16,7 @@
 //
 
 #include "commands.hh"
+#include <vaucanson/algorithms/universal.hh>
 
 static int
 is_complete_command(const arguments_t& args)
@@ -155,6 +156,13 @@ factor_command(const arguments_t& args)
   return 0;
 }
 
+static int
+universal_command(const arguments_t& args)
+{
+  g_res.keep(universal(get_aut(args, 1)));
+  return 0;
+}
+
 
 BEGIN_COMMAND_GROUP(b_commands,
 	"4. Algorithms specific to Boolean automata and rational expressions:");
@@ -187,4 +195,5 @@ COMMAND_ENTRY(suffix, Aut,
 	      "Build an automaton which accepts any suffix of Aut.");
 COMMAND_ENTRY(factor, Aut,
 	      "Build an automaton which accepts any factor of Aut.");
+COMMAND_ENTRY(universal, Aut, "Build the universal automaton of an automaton.");
 END_COMMAND_GROUP

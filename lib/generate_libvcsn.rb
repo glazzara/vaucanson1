@@ -60,7 +60,7 @@ def create?(type, file)
 	"vcsn-char-int-b" == type or "vcsn-int-int-b" == type or
 	"vcsn-int-int-z" == type
       ) and
-      file !~ /realtime_decl.hh/ and
+       file !~ /realtime_decl.hh/ and
       file !~ /extension.hh/ and		# transducer
       file !~ /invert.hh/ and			# transducer
       file !~ /is_normalized.hh/ and		# transducer
@@ -110,6 +110,7 @@ def create?(type, file)
 	"vcsn-z-fmp-tdc" == type or "vcsn-z-tdc" == type or
 	"vcsn-int-fmp-tdc" == type or "vcsn-int-z-fmp-tdc" == type
       ) and
+      file !~ /universal.hh/ and
       file !~ /prefix.hh/ and
       file !~ /suffix.hh/ and
       file !~ /factor.hh/ and

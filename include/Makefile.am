@@ -297,6 +297,8 @@ vaucanson/algorithms/derived_term_automaton.hh			\
 vaucanson/algorithms/derived_term_automaton.hxx			\
 vaucanson/algorithms/determinize.hh				\
 vaucanson/algorithms/determinize.hxx				\
+vaucanson/algorithms/domain.hh					\
+vaucanson/algorithms/domain.hxx					\
 vaucanson/algorithms/eps_removal.hh				\
 vaucanson/algorithms/eps_removal.hxx				\
 vaucanson/algorithms/eps_removal_sp.hh				\
@@ -325,6 +327,8 @@ vaucanson/algorithms/prefix.hh					\
 vaucanson/algorithms/prefix.hxx					\
 vaucanson/algorithms/is_useless.hh				\
 vaucanson/algorithms/is_useless.hxx				\
+vaucanson/algorithms/is_trim.hh					\
+vaucanson/algorithms/is_trim.hxx				\
 vaucanson/algorithms/image.hh					\
 vaucanson/algorithms/image.hxx					\
 vaucanson/algorithms/infiltration.hh				\
@@ -393,8 +397,6 @@ vaucanson/algorithms/product.hh					\
 vaucanson/algorithms/product.hxx				\
 vaucanson/algorithms/projection.hh				\
 vaucanson/algorithms/projection.hxx				\
-vaucanson/algorithms/domain.hh					\
-vaucanson/algorithms/domain.hxx					\
 vaucanson/algorithms/realtime.hh				\
 vaucanson/algorithms/realtime.hxx				\
 vaucanson/algorithms/realtime_decl.hh				\
@@ -425,10 +427,10 @@ vaucanson/algorithms/thompson.hh				\
 vaucanson/algorithms/thompson.hxx				\
 vaucanson/algorithms/transpose.hh				\
 vaucanson/algorithms/transpose.hxx				\
-vaucanson/algorithms/is_trim.hh					\
-vaucanson/algorithms/is_trim.hxx				\
 vaucanson/algorithms/trim.hh					\
-vaucanson/algorithms/trim.hxx
+vaucanson/algorithms/trim.hxx					\
+vaucanson/algorithms/universal.hh				\
+vaucanson/algorithms/universal.hxx
 
 nobase_include_HEADERS +=						\
 vaucanson/automata/concept/automata.hh					\
