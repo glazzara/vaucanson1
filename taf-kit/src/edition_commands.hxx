@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2010 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2010, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -349,7 +349,7 @@ namespace edition_commands
     echo ("\n");
   }
 
-  static 
+  static
   void
   check_common_errors(automaton_t& a)
   {
@@ -379,18 +379,16 @@ namespace edition_commands
   /// Interact with the user to let her choose an action.
   static bool ask_and_treat_choice(automaton_t& a, const arguments_t& args)
   {
-    echo("Please choose your action:" << std::endl
-	 << "  1. Add states." << std::endl
-	 << "  2. Delete a state.\n" << std::endl
-	 << "  3. Add a transition." << std::endl
-	 << "  4. Delete a transition.\n" << std::endl
-	 << "  5. Set a state to be initial." << std::endl
-	 << "  6. Set a state not to be initial.\n" << std::endl
-	 << "  7. Set a state to be final." << std::endl
-	 << "  8. Set a state not to be final.\n" << std::endl
-	 << "  9. Display the automaton in Dotty.\n" << std::endl
-	 << "  10. Save and exit." << std::endl
-	 << "  11. Exit without saving.\n" << std::endl);
+    echo("Please choose your action:") << std::endl
+         << "  1. Add states             5. Set initial      "
+	 << "  9. Display\n"
+         << "  2. Delete a state         6. Set not initial\n"
+	 << "                                                "
+	 << "  10. Save and exit\n"
+         << "  3. Add a transition       7. Set final        "
+	 << "  11. Exit without saving\n"
+         << "  4. Delete a transition    8. Set not final\n"
+	 << std::endl;
 
     echo_("Your choice [1-11]: ");
 

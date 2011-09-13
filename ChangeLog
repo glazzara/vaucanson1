@@ -1,5 +1,13 @@
 2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Save space in the output of the editor.
+
+	* taf-kit/src/edition_commands.hxx (ask_and_treat_choice): Squeeze
+	the display of actions on three columns to save space.  Suggested
+	by Jacques.
+
+2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	"chain a.xml 0" should return an automaton recognizing 1.
 
 	* taf-kit/src/cmd_wt.cc (chain): Handle the 0th power specifically.
