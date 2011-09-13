@@ -1,5 +1,12 @@
 2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Implement support.
+
+	* taf-kit/src/cmd_wt.cc (support_command): New command.
+	* taf-kit/tests/vcsn-char-z.test: Add a new test.
+
+2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Implement w-image and w-domain.
 
 	* include/vaucanson/algorithms/image.hxx,

@@ -237,4 +237,8 @@ test "`$VCSN -aab expand '(ab+a)(a+ba)'`" = "aa+{2} aba+abba"
 test "`$VCSN -aab expand '(aa+a)(a+aa)'`" = "aa+{2} aaa+aaaa"
 test "`$VCSN -aab expand '(aa+a)(1+a)'`" = "a+{2} aa+aaa"
 
+x=`$VCSN support c1.xml \| characteristic - \| aut-to-exp -`
+y=`$VCSN support c1.xml | vcsn-char-b aut-to-exp -`
+test "$x" = "$y"
+
 exit 0
