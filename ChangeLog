@@ -1,3 +1,16 @@
+2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Cleanup star_alphabet_command and handle 0th power specifically.
+
+	* taf-kit/src/star_alphabet_command.hh,
+	taf-kit/src/star_alphabet_command.hx: Remove these files.  Merge
+	them into ...
+	* taf-kit/src/cmd_wt.cc (star_alphabet_command): ... here.
+	(power_command): Handle the 0th power specifically.
+	* taf-kit/tests/vcsn-char-b.test: Add a new test.
+	* taf-kit/src/Makefile.am (COMMON_SOURCES): Remove
+	star_alphabet_command.hh and star_alphabet_command.hxx.
+
 2011-09-09  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Revert part of bff6ab2e0a3cbe1935ab3dd36d7683c449ba90df.

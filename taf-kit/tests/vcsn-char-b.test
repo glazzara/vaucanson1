@@ -20,6 +20,7 @@ set -e
 DIFF=${top_srcdir}/src/tests/common/xmldiff.sh
 VCSN=vcsn-char-b
 
+
 ## -------------- ##
 ## Input/output.  ##
 ## -------------- ##
@@ -644,5 +645,8 @@ cmp aut1.xml aut3.xml && exit 1
 fail1 $VCSN cat a1.xml > a1.xml 2>stderr
 grep -i 'empty file' stderr
 grep 'a1.xml' stderr
+
+# The 0th power of any automaton recognizes only 1.
+test "`$VCSN power b1.xml 0 \| aut-to-exp -`" = '(a+b)*'
 
 exit 0

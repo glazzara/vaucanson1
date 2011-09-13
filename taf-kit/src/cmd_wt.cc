@@ -16,7 +16,6 @@
 //
 
 #include "commands.hh"
-#include "star_alphabet_command.hh"
 #include <vaucanson/algorithms/characteristic.hh>
 #include <vaucanson/algorithms/shuffle.hh>
 #include <vaucanson/algorithms/infiltration.hh>
@@ -177,14 +176,48 @@ infiltration_command(const arguments_t& args)
 }
 
 static int
+star_alphabet_command(const arguments_t& args)
+{
+  alphabet_t alpha= get_alphabet(args.alphabet);
+  //  Create a single state automaton
+  automaton_t a = make_automaton(alpha);
+  hstate_t q = a.add_state();
+  a.set_initial(q);
+  a.set_final(q);
+
+  // Add a loop on the single state labeled by every letter of the alphabet
+  for(alphabet_iterator i = alpha.begin() ; i != alpha.end(); ++i)
+    a.add_letter_transition(q, q, *i);
+  g_res.keep(a);
+  return 0;
+}
+
+static int
 power_command(const arguments_t& args)
 {
   int n = atoi(args.args[2]);
+  precondition(n >= 0);
   automaton_t a = get_aut(args, 1);
-  automaton_t p(a);
-  for (int i = 1; i < n; ++i)
-    p = product(p, a);
-  g_res.keep(p);
+  if (n > 0)
+    {
+      automaton_t p(a);
+      for (int i = 1; i < n; ++i)
+	p = product(p, a);
+      g_res.keep(p);
+    }
+  else // n == 0
+    {
+      alphabet_t alpha = a.structure().series().monoid().alphabet();
+      automaton_t p = make_automaton(alpha);
+      hstate_t s = p.add_state();
+      p.set_initial(s);
+      p.set_final(s);
+
+      // Add a loop on the single state labeled by every letter of the alphabet
+      for(alphabet_iterator i = alpha.begin(); i != alpha.end(); ++i)
+	p.add_letter_transition(s, s, *i);
+      g_res.keep(p);
+    }
   return 0;
 }
 

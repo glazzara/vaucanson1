@@ -49,8 +49,6 @@ COMMON_SOURCES = commands.hh			\
 		 pipe_writers.hxx		\
 		 parser_options.hh		\
 		 parser_options.hxx		\
-		 star_alphabet_command.hh	\
-		 star_alphabet_command.hxx	\
 		 boost_spirit_compatibility.hh
 
 
