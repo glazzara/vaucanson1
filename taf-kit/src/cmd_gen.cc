@@ -146,11 +146,32 @@ static int
 chain_command(const arguments_t& args)
 {
   int n = atoi(args.args[2]);
+  precondition(n >= 0);
   automaton_t a = get_aut(args, 1);
-  automaton_t p(a);
-  for (int i = 1; i < n; ++i)
-    p = concat_of_standard(p, a);
-  g_res.keep(p);
+  if (n > 0)
+    {
+      automaton_t p(a);
+      for (int i = 1; i < n; ++i)
+	p = concat_of_standard(p, a);
+      g_res.keep(p);
+    }
+  else // n == 0
+    {
+# ifndef WITH_TWO_ALPHABETS
+      alphabet_t alpha = a.structure().series().monoid().alphabet();
+      automaton_t p = make_automaton(alpha);
+# else
+      first_alphabet_t alpha1
+	= a.structure().series().monoid().first_monoid().alphabet();
+      second_alphabet_t alpha2
+	= a.structure().series().monoid().second_monoid().alphabet();
+      automaton_t p = make_automaton(alpha1, alpha2);
+# endif
+      hstate_t s = p.add_state();
+      p.set_initial(s);
+      p.set_final(s);
+      g_res.keep(p);
+    }
   return 0;
 };
 

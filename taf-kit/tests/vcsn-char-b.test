@@ -649,4 +649,7 @@ grep 'a1.xml' stderr
 # The 0th power of any automaton recognizes only 1.
 test "`$VCSN power b1.xml 0 \| aut-to-exp -`" = '(a+b)*'
 
+# The 0th power of any automaton recognizes only 1.
+test "`$VCSN chain b1.xml 0 \| aut-to-exp -`" = '1'
+
 exit 0
