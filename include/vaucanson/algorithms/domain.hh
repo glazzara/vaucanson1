@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
  */
 /** @} */
 
-// INTERFACE: void domain(const Automaton& a1, InputProjection& a2) { return vcsn::domain(*a1, *a2); }
+// INTERFACE: void domain(const Automaton& a1, InputProjection& a2, bool w) { return vcsn::domain(*a1, *a2); }
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
@@ -48,7 +48,7 @@ namespace vcsn
 
   template <typename S, typename S2, typename T, typename T2>
   void
-  domain(const Element<S,T>& src, Element<S2, T2>& dst);
+  domain(const Element<S,T>& src, Element<S2, T2>& dst, bool weighted = true);
 
   // FMP version of domain.
   template <typename src_t, typename dst_t>

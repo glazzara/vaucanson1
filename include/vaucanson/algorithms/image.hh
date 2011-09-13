@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2006, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
  */
 /** @} */
 
-// INTERFACE: void image(const Automaton& a, OutputProjection& b) { return vcsn::image(*a, *b); }
+// INTERFACE: void image(const Automaton& a, OutputProjection& b, bool w) { return vcsn::image(*a, *b, w); }
 
 # include <map>
 
@@ -46,7 +46,9 @@ namespace vcsn
 
   template <typename S, typename T>
   void
-  image(const Element<S, T>& aut, typename output_projection_helper<S, T>::ret& res);
+  image(const Element<S, T>& aut,
+	typename output_projection_helper<S, T>::ret& res,
+	bool weighted = true);
 
   template <class S, class T>
   typename output_projection_helper<S, T>::ret

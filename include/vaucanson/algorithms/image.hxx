@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,13 +19,14 @@
 # define VCSN_ALGORITHMS_IMAGE_HXX
 
 # include <vaucanson/algorithms/image.hh>
+# include <vaucanson/algorithms/cut_up.hh>
 # include <vaucanson/algorithms/projection.hh>
 
 namespace vcsn
 {
   template <typename auto_t, typename trans_t>
   static void
-  do_fmp_image(const trans_t& fmp_trans, auto_t& res)
+  do_fmp_image(const trans_t& fmp_trans, auto_t& res, bool weighted)
   {
     BENCH_TASK_SCOPED("image");
     AUTOMATON_TYPES_(trans_t, trans_);
@@ -34,72 +35,74 @@ namespace vcsn
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
     std::map<trans_hstate_t, hstate_t>	stmap;
 
-    const series_set_t&		series = res.structure().series();
-    const monoid_t&		monoid = res.structure().series().monoid();
-    const trans_monoid_t&	trans_monoid =
+    const series_set_t& series = res.structure().series();
+    const monoid_t& monoid = res.structure().series().monoid();
+    const semiring_elt_t& unit = res.structure().series().semiring().wone_;
+    const trans_monoid_t& trans_monoid =
       fmp_trans.structure().series().monoid();
 
-   for_all_const_states(fmp_s, fmp_trans)
-    {
-      hstate_t s = res.add_state();
-      stmap[*fmp_s] = s;
-
-      if (fmp_trans.is_initial(*fmp_s))
+    for_all_const_states(fmp_s, fmp_trans)
       {
-      const trans_series_set_elt_t	trans_series_elt =
-    	fmp_trans.get_initial(*fmp_s);
-      trans_support_t			trans_supp = trans_series_elt.supp();
-                const trans_monoid_elt_t	trans_monoid_elt
-	     (trans_monoid, *(trans_supp.begin()));
+	hstate_t s = res.add_state();
+	stmap[*fmp_s] = s;
 
-        const monoid_elt_value_t	word(trans_monoid_elt.value().second);
+	if (fmp_trans.is_initial(*fmp_s))
+	  {
+	    const trans_series_set_elt_t trans_series_elt =
+	      fmp_trans.get_initial(*fmp_s);
+	    trans_support_t trans_supp = trans_series_elt.supp();
+	    const trans_monoid_elt_t trans_monoid_elt(trans_monoid,
+						      *(trans_supp.begin()));
 
-        series_set_elt_t		series_elt(series);
+	    const monoid_elt_value_t word(trans_monoid_elt.value().second);
 
-        series_elt.assoc(monoid_elt_t(monoid, word),
-		       trans_series_elt.get(trans_monoid_elt));
+	    series_set_elt_t series_elt(series);
+
+	    series_elt.assoc(monoid_elt_t(monoid, word),
+			     weighted ?
+			     trans_series_elt.get(trans_monoid_elt) : unit);
 
 	    res.set_initial(s, series_elt);
-      }
-      if (fmp_trans.is_final(*fmp_s))
-      {
-      const trans_series_set_elt_t	trans_series_elt =
-    	fmp_trans.get_final(*fmp_s);
-      trans_support_t			trans_supp = trans_series_elt.supp();
-        const trans_monoid_elt_t	trans_monoid_elt
-	     (trans_monoid, *(trans_supp.begin()));
+	  }
+	if (fmp_trans.is_final(*fmp_s))
+	  {
+	    const trans_series_set_elt_t trans_series_elt =
+	      fmp_trans.get_final(*fmp_s);
+	    trans_support_t trans_supp = trans_series_elt.supp();
+	    const trans_monoid_elt_t trans_monoid_elt(trans_monoid,
+						      *(trans_supp.begin()));
 
-        const monoid_elt_value_t	word(trans_monoid_elt.value().second);
+	    const monoid_elt_value_t word(trans_monoid_elt.value().second);
 
-        series_set_elt_t		series_elt(series);
+	    series_set_elt_t series_elt(series);
 
-        series_elt.assoc(monoid_elt_t(monoid, word),
-		       trans_series_elt.get(trans_monoid_elt));
-
+	    series_elt.assoc(monoid_elt_t(monoid, word),
+			     weighted ? trans_series_elt.get(trans_monoid_elt)
+			     : unit);
 	    res.set_final(s, series_elt);
+	  }
       }
-    }
 
     for_all_const_transitions_(trans_, fmp_e, fmp_trans)
-    {
-      const trans_series_set_elt_t	trans_series_elt =
-	fmp_trans.series_of(*fmp_e);
-      trans_support_t			trans_supp = trans_series_elt.supp();
-      const trans_monoid_elt_t	trans_monoid_elt
-	(trans_monoid, *(trans_supp.begin()));
+      {
+	const trans_series_set_elt_t trans_series_elt =
+	  fmp_trans.series_of(*fmp_e);
+	trans_support_t trans_supp = trans_series_elt.supp();
+	const trans_monoid_elt_t trans_monoid_elt(trans_monoid,
+						  *(trans_supp.begin()));
 
-      const monoid_elt_value_t	word(trans_monoid_elt.value().second);
+	const monoid_elt_value_t	word(trans_monoid_elt.value().second);
 
-      series_set_elt_t		series_elt(series);
+	series_set_elt_t series_elt(series);
 
-      series_elt.assoc(monoid_elt_t(monoid, word),
-		       trans_series_elt.get(trans_monoid_elt));
+	series_elt.assoc(monoid_elt_t(monoid, word),
+			 weighted ? trans_series_elt.get(trans_monoid_elt)
+			 : unit);
 
-      res.add_series_transition(stmap[fmp_trans.src_of(*fmp_e)],
-				stmap[fmp_trans.dst_of(*fmp_e)], series_elt);
-    }
+	res.add_series_transition(stmap[fmp_trans.src_of(*fmp_e)],
+				  stmap[fmp_trans.dst_of(*fmp_e)], series_elt);
+      }
   }
-
 
 
   template<typename Trans_t, typename Auto_t>
@@ -202,7 +205,7 @@ namespace vcsn
   image_dispatch(const Element<S,T>& src,
 		 const TransducerBase<ST>&,
 		 const algebra::FreeMonoidBase<M1>&,
-		 Element<S2, T2>& dst)
+		 Element<S2, T2>& dst, bool)
   {
     do_rw_image(src, dst);
   }
@@ -248,7 +251,7 @@ namespace vcsn
 	output_projection_helper<S, T>::make_output_projection_automaton(src);
 
     image_dispatch(src, src.structure(),
-		   src.structure().series().monoid(), dst);
+		   src.structure().series().monoid(), dst, true);
     return dst;
   }
 
@@ -260,12 +263,10 @@ namespace vcsn
   image_dispatch(const Element<S,T>& src,
 		 const AutomataBase<ST>&,
 		 const algebra::FreeMonoidProductBase<M1>&,
-		 Element<S2, T2>& dst)
+		 Element<S2, T2>& dst, bool weighted)
   {
-    do_fmp_image(src, dst);
+    do_fmp_image(src, dst, weighted);
   }
-
-
 
   /*---------------.
   | IMAGE FACADES. |
@@ -273,11 +274,13 @@ namespace vcsn
 
   template <typename S, typename T>
   void
-  image(const Element<S, T>& src, typename output_projection_helper<S, T>::ret& dst)
+  image(const Element<S, T>& src,
+	typename output_projection_helper<S, T>::ret& dst,
+	bool weighted)
   {
     image_dispatch(src, src.structure(),
 		   src.structure().series().monoid(),
-		   dst);
+		   dst, weighted);
   }
 
   template <typename S, typename T>

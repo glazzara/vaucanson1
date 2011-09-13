@@ -1,5 +1,21 @@
 2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Implement w-image and w-domain.
+
+	* include/vaucanson/algorithms/image.hxx,
+	include/vaucanson/algorithms/image.hh (image): Add an optional
+	parameter to keep the weights.
+	* include/vaucanson/algorithms/domain.hxx,
+	include/vaucanson/algorithms/domain.hh (domain): Likewise.
+	(do_fmp_weighted_domain): Remove this copy of do_fmp_domain()
+	which now has a Boolean parameter to decide what to do with
+	weights.
+	* taf-kit/src/cmd_fmp.cc (image, domain): Remove weights.
+	(w_image, w_domain): New commands that keep weights.
+	* taf-kit/tests/vcsn-int-fmp-z.test: Adjust test.
+
+2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	The input of evaluation_fmp should be subnormalized.
 
 	* include/vaucanson/algorithms/evaluation_fmp.hxx: Do not

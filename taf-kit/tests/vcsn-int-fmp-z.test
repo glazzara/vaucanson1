@@ -77,7 +77,7 @@ res=`$VCSN eval xs.xml 10#11.11#10.11`
 res=`vcsn-int-z expand --alphabet=20,22 "$res"`
 test "x$res" = "x{150} 22#22#20#22"
 
-res=`$VCSN image x.xml | vcsn-int-z aut-to-exp-DM -`
+res=`$VCSN w-image x.xml | vcsn-int-z aut-to-exp-DM -`
 res=`vcsn-int-z expand --alphabet=22,20 "$res"`
 test "x$res" = "x{30} (({5} 22#22#20)*.22)"
 

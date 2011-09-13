@@ -157,7 +157,21 @@ domain_command(const arguments_t& args)
     (src.structure().series().monoid().first_monoid().alphabet(),
      *(src.structure().series().monoid().first_monoid().representation()),
      src.structure().series().representation()->first_representation());
-  domain(src, a);
+  domain(src, a, false);
+  g_res.keep(a);
+  return 0;
+}
+
+static int
+w_domain_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().first_monoid().alphabet(),
+     *(src.structure().series().monoid().first_monoid().representation()),
+     src.structure().series().representation()->first_representation());
+  domain(src, a, true);
   g_res.keep(a);
   return 0;
 }
@@ -171,7 +185,21 @@ image_command(const arguments_t& args)
     (src.structure().series().monoid().second_monoid().alphabet(),
      *(src.structure().series().monoid().second_monoid().representation()),
      src.structure().series().representation()->second_representation());
-  image(src, a);
+  image(src, a, false);
+  g_res.keep(a);
+  return 0;
+}
+
+static int
+w_image_command(const arguments_t& args)
+{
+  automaton_t src = get_aut(args, 1);
+  IOAUT_CONTEXT::automaton_t a =
+    IOAUT_CONTEXT::make_automaton
+    (src.structure().series().monoid().second_monoid().alphabet(),
+     *(src.structure().series().monoid().second_monoid().representation()),
+     src.structure().series().representation()->second_representation());
+  image(src, a, true);
   g_res.keep(a);
   return 0;
 }
@@ -253,9 +281,13 @@ COMMAND_ENTRY(composition_R, AutAut,
 	      "Compose two transducers, preserving the number of paths.");
 
 COMMAND_ENTRY(domain, Aut,
-	      "Give the automaton that accepts all inputs accepted by `aut'.");
+	      "Give an automaton that accepts all inputs accepted by `aut'.");
+COMMAND_ENTRY(w_domain, Aut,
+	      "Give a weighted automaton that accepts all inputs accepted by `aut'.");
 COMMAND_ENTRY(image, Aut,
 	      "Give an automaton that accepts all output produced by `aut'.");
+COMMAND_ENTRY(w_image, Aut,
+	      "Give a weighted automaton that accepts all output produced by `aut'.");
 COMMAND_ENTRY(evaluation, AutAut,
 	      "Evaluate the language described by the "
 	      IOAUT_NAME " automaton `aut2' on the transducer `aut1'.");
