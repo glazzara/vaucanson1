@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_DOMAIN_HXX
 
 # include <vaucanson/algorithms/domain.hh>
+# include <vaucanson/algorithms/cut_up.hh>
 
 namespace vcsn
 {
@@ -28,11 +29,13 @@ namespace vcsn
 
   template <typename src_t, typename dst_t>
   void
-  do_fmp_domain(const src_t& src, dst_t& dst, bool weighted)
+  do_fmp_domain(const src_t& input, dst_t& dst, bool weighted)
   {
     BENCH_TASK_SCOPED("fmp_domain");
     AUTOMATON_TYPES_(src_t, trans_);
     AUTOMATON_TYPES(dst_t);
+
+    src_t src = cut_up(input);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
     std::map<trans_hstate_t, hstate_t>	stmap;

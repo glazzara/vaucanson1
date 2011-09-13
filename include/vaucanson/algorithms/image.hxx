@@ -26,11 +26,13 @@ namespace vcsn
 {
   template <typename auto_t, typename trans_t>
   static void
-  do_fmp_image(const trans_t& fmp_trans, auto_t& res, bool weighted)
+  do_fmp_image(const trans_t& input, auto_t& res, bool weighted)
   {
     BENCH_TASK_SCOPED("image");
     AUTOMATON_TYPES_(trans_t, trans_);
     AUTOMATON_TYPES(auto_t);
+
+    trans_t fmp_trans = cut_up(input);
 
     typedef typename trans_series_set_elt_t::support_t	trans_support_t;
     std::map<trans_hstate_t, hstate_t>	stmap;
