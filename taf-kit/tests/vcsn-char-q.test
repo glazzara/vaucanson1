@@ -38,7 +38,7 @@ cmp a3.xml a3b.xml
 echo Save '&' Exit c1.xml
 e1=5
 e2=6
-for n in `seq 1 6`; do
+for n in `seq 1 5`; do
    $VCSN power c1.xml "$n" > cn.xml
    $VCSN reduce cn.xml > cnr.xml
 
@@ -99,3 +99,62 @@ EOF
 $VCSN power b1.xml 4 > b4.xml
 $VCSN reduce b4.xml > b4r.xml
 #$VCSN data b4r.xml | grep 'States: 6'
+
+sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit undef.xml
+# Add states
+1
+# Add four states
+4
+# Set a state to be initial.
+5
+# Which state
+0
+# Which weight
+1
+# Set a state to be final.
+7
+# Which state
+2
+# Which weight
+1
+# Add transition
+3
+# From, to, label
+0
+0
+{1/2}1
+# Add transition
+3
+# From, to, label
+0
+1
+a
+# Add transition
+3
+# From, to, label
+1
+2
+{1/2}1
+# Add transition
+3
+# From, to, label
+2
+1
+1
+# Add transition
+3
+# From, to, label
+2
+3
+1
+# Add transition
+3
+# From, to, label
+3
+1
+{-1}1
+# Save & Exit.
+10
+EOF
+
+fail255 $VCSN proper undef.xml

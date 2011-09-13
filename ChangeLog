@@ -1,3 +1,8 @@
+2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* taf-kit/tests/vcsn-char-q.test: Adjust test for reduce,
+	and add a test case where proper should not work.
+
 2011-09-13  Sylvain Lombardy  <lombardy@univ-mlv.fr>
 
 	Fix implementation of proper() for Q.
