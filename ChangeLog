@@ -1,5 +1,17 @@
 2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	The input of evaluation_fmp should be subnormalized.
+
+	* include/vaucanson/algorithms/evaluation_fmp.hxx: Do not
+	subnormalize the input.  At it as a precondition.
+	* include/vaucanson/algorithms/evaluation_fmp.hh: Document it.
+	* src/tests/sanity/hhck.pl (read_hh): Handle subnormalized
+	preconditions.
+	* taf-kit/tests/vcsn-char-fmp-z.test,
+	taf-kit/tests/vcsn-int-fmp-z.test: Adjust tests.
+
+2011-09-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Save space in the output of the editor.
 
 	* taf-kit/src/edition_commands.hxx (ask_and_treat_choice): Squeeze

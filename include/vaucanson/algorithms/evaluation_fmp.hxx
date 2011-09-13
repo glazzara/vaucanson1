@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,10 +35,11 @@ namespace vcsn
 		    const AutomataBase<S3>&, const algebra::FreeMonoid<M4>&,
 		    const trans_t& trans, const auto_t& aut, res_t& res)
   {
+    precondition(is_sub_normalized(trans));
+    precondition(is_realtime(aut));
     trans_t id_aut(trans.structure());
     identity(aut, id_aut);
-    trans_t res_composition = compose(sub_normalize(id_aut),
-				      sub_normalize(trans));
+    trans_t res_composition = compose(id_aut, trans);
     image(res_composition, res);
   }
 

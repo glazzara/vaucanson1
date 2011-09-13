@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2008 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2008, 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -41,13 +41,14 @@ namespace vcsn {
  /**
    * Evaluation over normalized and sub-normalized transducers, seen
    * as automata over a free monoid product.
+   *
+   * @pre @a trans is a subnormalized automaton, @a aut is realtime.
    */
-
   template<typename ST, typename TT>
   void
-  evaluation_fmp(const Element<ST, TT>&,
-		 const typename input_projection_helper<ST, TT>::ret&,
-		 typename output_projection_helper<ST, TT>::ret&);
+  evaluation_fmp(const Element<ST, TT>& trans,
+		 const typename input_projection_helper<ST, TT>::ret& aut,
+		 typename output_projection_helper<ST, TT>::ret& res);
 
   /// @}
 

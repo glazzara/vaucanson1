@@ -177,6 +177,7 @@ sub read_hh($)
 	push @tags, "realtime" if $pre =~ /\brealtime\b/;
 #	push @tags, "boolean" if $pre =~ /\bboolean\b/;
 	push @tags, "normalized" if $pre =~ /\bnormalized\b/;
+	push @tags, "subnormalized" if $pre =~ /\bsub_normalized\b/;
 	push @tags, "trim" if $pre =~ /\b(is_)?trim\b/;
 	push @tags, "complete" if $pre =~ /\bcomplete\b/;
 	push @tags, "deterministic" if $pre =~ /(?<!co-)\bdeterministic\b/;
