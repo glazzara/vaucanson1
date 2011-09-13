@@ -25,41 +25,53 @@ namespace vcsn {
   namespace misc {
 
 
+    template<typename T>
     inline
-    unsigned long long
-    gcd (unsigned long long a, unsigned long long b)
+    T
+    gcd (T a, T b)
     {
       if (0 == a)
-	return b;
-      unsigned long long r;
+		return b;
+    	T s=1;
+    	if(b < 0){
+    		s=-1;
+    		b=-b;
+    	}
+    	if(a<0)
+    	  a=-a;
+      T r;
       while (0 != b)
 	{
 	  r = a % b;
 	  a = b;
 	  b = r;
 	}
-      return a;
+      return a*s;
     }
 
+    template<typename T>
     inline
-    unsigned long
-    lcm (unsigned long long a, unsigned long b)
+	T
+    lcm (T a, T b)
     {
-      unsigned long long res = gcd (a, b);
+      T res = gcd (a, b);
       if (res)
-	return a * b / res;
-      return a * b;
+	    return a /res * b;
+      return T(0);
     }
 
+    template<typename T>
     inline
     bool
-    is_coprime (unsigned long long a, unsigned long long b)
+    is_coprime (T a, T b)
     {
-      return 1 == gcd (a, b);
+      T g=gcd (a, b);
+      return 1 == g || -1 == g;
     }
 
+    template<typename T>
     inline
-    unsigned long long abs (long long a)
+    T abs (T a)
     {
       return a > 0 ? a : -a;
     }

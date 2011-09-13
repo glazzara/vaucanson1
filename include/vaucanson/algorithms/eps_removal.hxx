@@ -139,7 +139,6 @@ namespace vcsn {
 					   semiring_elt_value_t>::is_positive>
 	nps;
       result_not_computable_if(!nps.run(a));
-
       std::list<hstate_t> eps_states;
        if (dir == misc::backward)
 	this->epsilon_covering(eps_states);
@@ -387,106 +386,159 @@ namespace vcsn {
        the result, all the edges have positive weight; the two final
        states have resp.  weights equal to 1 and -1.
     */
-    void positive_path_covering()
-    {
-      std::map<hstate_t,hstate_t> clones;
-      std::list<hstate_t> states;
-      for_all_states(s, a)
-	states.push_back(*s);
-      for_all_(std::list<hstate_t>, s, states)
-	clones[*s]=a.add_state();
-      hstate_t pos_final_state=a.add_state();
-      hstate_t neg_final_state=a.add_state();
-      std::list<htransition_t> transitions;
-      for_all_transitions(e, a)
-	transitions.push_back(*e);
-      for_all_(std::list<htransition_t>, e, transitions)
+	void positive_path_covering()
 	{
-	  series_set_elt_t posit = a.series_of(*e);
-	  series_set_elt_t negat(a.structure().series());
-	  support_t su = posit.supp();
-	  for_all_(support_t, x, su)
-  	    {
-	      semiring_elt_t weight=posit.get(*x);
-	      if (weight < semiring_elt_zero)
-  	    	{
-  	    	  negat.assoc(*x,-weight.value());
-  	    	  posit.assoc(*x,semiring_elt_zero.value());
-  	    	}
-  	    }
+	  std::map<hstate_t,hstate_t> clones;
+	  std::list<hstate_t> states;
+	  for_all_states(s, a)
+	    states.push_back(*s);
+	  for_all_(std::list<hstate_t>, s, states)
+	    clones[*s]=a.add_state();
+	  hstate_t pos_final_state=a.add_state();
+	  hstate_t neg_final_state=a.add_state();
+	  std::list<htransition_t> transitions;
+	  for_all_transitions(e, a)
+	     transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, transitions)
+	  {
+	    series_set_elt_t posit = a.series_of(*e);
+	    series_set_elt_t negat(a.structure().series());
+	    support_t su = posit.supp();
+	    for_all_(support_t, x, su)
+  		{
+		  semiring_elt_t weight=posit.get(*x);
+		  if (weight < semiring_elt_zero)
+  			{
+  			  negat.assoc(*x,-weight.value());
+  			  posit.assoc(*x,semiring_elt_zero.value());
+  			}
+  		}
 	  hstate_t src=a.src_of(*e), dst=a.dst_of(*e);
 	  if (posit != null_series)
-	    a.add_series_transition(clones[src], clones[dst], posit);
+		a.add_series_transition(clones[src], clones[dst], posit);
 	  if (negat != null_series)
-  	    {
-	      a.add_series_transition(src, clones[dst], negat);
-	      a.add_series_transition(clones[src], dst, negat);
-	      if (posit != null_series)
+  		{
+		  a.add_series_transition(src, clones[dst], negat);
+		  a.add_series_transition(clones[src], dst, negat);
+		  if (posit != null_series)
 		a.add_series_transition(src, dst, posit);
-	      a.del_transition(*e);
-  	    }
+		  a.del_transition(*e);
+  		}
 	}
-      states.clear();
-      for_all_initial_states(s, a)
+	  states.clear();
+	  for_all_initial_states(s, a)
 	states.push_back(*s);
-      for_all_(std::list<hstate_t>, s, states)
+	  for_all_(std::list<hstate_t>, s, states)
 	{
 	  series_set_elt_t posit = a.get_initial(*s);
 	  series_set_elt_t negat(a.structure().series());
 	  support_t su = posit.supp();
 	  for_all_(support_t, x, su)
-  	    {
-	      semiring_elt_t weight = posit.get(*x);
-	      if (weight < semiring_elt_zero)
-  	    	{
-  	    	  negat.assoc(*x,-weight.value());
-  	    	  posit.assoc(*x,semiring_elt_zero.value());
-  	    	}
-  	    }
+  		{
+		  semiring_elt_t weight = posit.get(*x);
+		  if (weight < semiring_elt_zero)
+  			{
+  			  negat.assoc(*x,-weight.value());
+  			  posit.assoc(*x,semiring_elt_zero.value());
+  			}
+  		}
 	  if (negat != null_series)
-  	    {
-	      a.set_initial(clones[*s], negat);
-	      a.unset_initial(*s);
-	      if (posit != null_series)
+  		{
+		  a.set_initial(clones[*s], negat);
+		  a.unset_initial(*s);
+		  if (posit != null_series)
 		a.set_initial(*s,posit);
-  	    }
+  		}
 	}
-      states.clear();
-      for_all_final_states(s, a)
+	  states.clear();
+	  for_all_final_states(s, a)
 	states.push_back(*s);
-      for_all_(std::list<hstate_t>, s, states)
+	  for_all_(std::list<hstate_t>, s, states)
 	{
 	  series_set_elt_t posit = a.get_final(*s);
 	  series_set_elt_t negat(a.structure().series());
 	  support_t su = posit.supp();
 	  for_all_(support_t, x, su)
-  	    {
-	      semiring_elt_t weight=posit.get(*x);
-	      if (weight < semiring_elt_zero)
-  	    	{
-  	    	  negat.assoc(*x,-weight.value());
-  	    	  posit.assoc(*x,semiring_elt_zero.value());
-  	    	}
-  	    }
+  		{
+		  semiring_elt_t weight=posit.get(*x);
+		  if (weight < semiring_elt_zero)
+  			{
+  			  negat.assoc(*x,-weight.value());
+  			  posit.assoc(*x,semiring_elt_zero.value());
+  			}
+  		}
 	  if (negat != null_series)
-  	    {
-	      a.add_series_transition(*s, neg_final_state, negat);
-	      a.add_series_transition(clones[*s], pos_final_state, negat);
-  	    }
+  		{
+		  a.add_series_transition(*s, neg_final_state, negat);
+		  a.add_series_transition(clones[*s], pos_final_state, negat);
+  		}
 	  a.unset_final(*s);
 	  if (posit != null_series)
-  	    {
-	      a.add_series_transition(*s, pos_final_state, posit);
-	      a.add_series_transition(clones[*s], neg_final_state, posit);
-  	    }
+  		{
+		  a.add_series_transition(*s, pos_final_state, posit);
+		  a.add_series_transition(clones[*s], neg_final_state, posit);
+  		}
 	}
-      a.set_final(pos_final_state);
-      series_set_elt_t mss = a.get_final(pos_final_state);
-      mss.assoc(monoid_identity,-semiring_elt_unit.value());
-      a.set_final(neg_final_state,mss);
-      accessible_here(a);
-    }
+	  a.set_final(pos_final_state);
+	  series_set_elt_t mss = a.get_final(pos_final_state);
+	  mss.assoc(monoid_identity,-semiring_elt_unit.value());
+	  a.set_final(neg_final_state,mss);
+	  accessible_here(a);
+	}
 
+    /* This method makes every weight in the K-automaton positive
+    */
+	void absolute_weight()
+	{
+	  std::list<htransition_t> transitions;
+	  for_all_transitions(e, a)
+	     transitions.push_back(*e);
+	  for_all_(std::list<htransition_t>, e, transitions)
+	  {
+	    series_set_elt_t label = a.series_of(*e);
+	    support_t support = label.supp();
+	    for_all_(support_t, x, support)
+  		{
+		  semiring_elt_t weight=label.get(*x);
+		  if (weight < semiring_elt_zero) 
+  			  label.assoc(*x,-weight.value());
+  		}
+	  hstate_t src=a.src_of(*e), dst=a.dst_of(*e);
+	  a.del_transition(*e);
+	  a.add_series_transition(src, dst, label);
+	  }
+	  std::list<hstate_t> states;
+	  for_all_initial_states(s, a)
+     	states.push_back(*s);
+	  for_all_(std::list<hstate_t>, s, states)
+	  {
+	  series_set_elt_t label = a.get_initial(*s);
+	  support_t support = label.supp();
+	  for_all_(support_t, x, support)
+  		{
+		  semiring_elt_t weight = label.get(*x);
+		  if (weight < semiring_elt_zero)
+  			  label.assoc(*x,-weight.value());
+  		}
+		a.set_initial(*s,label);
+      }
+	  states.clear();
+	  for_all_final_states(s, a)
+     	states.push_back(*s);
+	  for_all_(std::list<hstate_t>, s, states)
+	{
+	  series_set_elt_t label = a.get_final(*s);
+	  support_t support = label.supp();
+	  for_all_(support_t, x, support)
+  		{
+		  semiring_elt_t weight = label.get(*x);
+		  if (weight < semiring_elt_zero)
+  			  label.assoc(*x,-weight.value());
+  		}
+		a.set_final(*s,label);
+	}
+	}
+	
     /*supression of "epsilon-states"
       epsilon_covering should have been called before
       This part of the algorithm is symmetrical and is exactly
@@ -615,7 +667,7 @@ namespace vcsn {
     std::list<hstate_t> eps_states;
     automaton_t test(a);
     EpsilonRemover<A_, Auto, Weight> epsTest(test.structure(), test);
-    epsTest.positive_path_covering();
+    epsTest.absolute_weight();
     epsTest.epsilon_covering(eps_states);
     return epsTest.spontaneous_suppression(eps_states);
   }

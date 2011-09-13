@@ -37,19 +37,24 @@ namespace vcsn {
   /// @name Prime Number Operator
   ///   @{
   /// Greatest common divisor.
+  /// Beware that gcd is not symmetric: the sign of the result is the sign of b
+  template<typename T>
   inline
-  unsigned long long gcd (unsigned long long a, unsigned long long b);
+  T gcd (T a, T b);
 
   /// Least common multiple.
+  template<typename T>
   inline
-  unsigned long long lcm (unsigned long long a, unsigned long long b);
+  T lcm (T a, T b);
 
   /// Coprime between to int.
+  template<typename T>
   inline
-  bool is_coprime (unsigned long long a, unsigned long long b);
+  bool is_coprime (T a, T b);
 
+  template<typename T>
   inline
-  unsigned long long abs (long long a);
+  T abs (T a);
 
   ///   @}
   ///  @}

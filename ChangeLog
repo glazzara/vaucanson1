@@ -1,5 +1,15 @@
 2011-09-13  Sylvain Lombardy  <lombardy@univ-mlv.fr>
 
+	Fix implementation of proper() for Q.
+
+	* include/vaucanson/algebra/implementation/semiring/q_number.hh,
+	include/vaucanson/algebra/implementation/semiring/q_number.hxx,
+	include/vaucanson/algorithms/eps_removal.hxx,
+	include/vaucanson/misc/algebra.hh,
+	include/vaucanson/misc/algebra.hxx: Here.
+
+2011-09-13  Sylvain Lombardy  <lombardy@univ-mlv.fr>
+
 	Fix image and domain.
 
 	* include/vaucanson/algorithms/image.hxx,
