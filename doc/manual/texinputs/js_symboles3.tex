@@ -1,0 +1,796 @@
+% -*- coding: mac-roman -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                           %
+%                  js_symboles.tex                         %
+%
+%       Fichier general de symboles                         %
+%                                                           %
+%   (doit etre complete par un fichier general de           %
+%               commandes et de macros                      %
+%   et par fichier particulier pour chaque article)         %
+%                                                           %
+%                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%     Symboles mathematiques   abreviations de LaTeX
+%
+\newcommand{\fa}{\forall}
+\newcommand{\ext}{\exists}
+\newcommand{\extuni}{\ext \, \mathbf{!} \, } % il existe un unique 990926
+\newcommand{\es}{\emptyset}
+\newcommand{\ORA}{\overrightarrow}
+\newcommand{\OA}{\overrightarrow} % pour compatibilit\'e
+\newcommand{\OLA}{\overleftarrow}
+\newcommand{\OL}{\overline}
+\newcommand{\UL}{\underline}
+\newcommand{\ULS}[1]{\underline{\rule[-.4ex]{0pt}{1ex} #1}}% 000426
+\newcommand{\WH}{\widehat}
+\newcommand{\WT}{\widetilde}
+\newcommand{\UB}{\underbrace}
+\newcommand{\OB}{\overbrace}
+\newcommand{\bk}{\mathrel{\backslash }}
+\newcommand{\sm}{\setminus}
+\newcommand{\mto}{\mapsto}
+\newcommand{\lmto}{\longmapsto}
+%%%%%% \section{mep formules}
+%       commandes de mise en page des formules
+\newcommand{\e}{\text{\quad}}                 % un moins petit espace
+\newcommand{\ee}{\text{\qquad}}               % un espace
+\newcommand{\eee}{\text{\qquad \qquad}} % et un grand
+%%% nouvelle programmation des espaces mode math 021009
+\newsavebox{\InterSymbolSpace}
+\savebox{\InterSymbolSpace}{\hspace{0.125em}}
+\newsavebox{\SideFormulaSpace}
+\savebox{\SideFormulaSpace}{\hspace{0.2em}}
+\newcommand{\msp}{\usebox{\SideFormulaSpace}} % espace pour faire ressortir
+\newcommand{\xmd}{\usebox{\InterSymbolSpace}} % espace entre les symboles
+% ponctuation (dependra peut-etre de la langue)
+\newcommand{\eqpnt}{\makebox[0pt][l]{\: .}}
+\newcommand{\eqpntvrg}{\makebox[0pt][l]{\: ;}}
+\newcommand{\eqvrg}{\makebox[0pt][l]{\: ,}}
+\newcommand{\EqVrgInt}{\: , \e }
+\newcommand{\EqVrgSmInt}{\: , \ }
+\newcommand{\EqPntVrgInt}{\: ; \e }
+\newcommand{\EqVrg}{\: ,}
+\newcommand{\EqPnt}{\: .}
+\newcommand{\EgalComp}{\: : \; \;}
+\newcommand{\quantvrg}{\, , \;}
+\newcommand{\quantsp}{\ee }
+\newcommand{\quantsmsp}{\e }
+%
+\newcommand{\ine}{\, \in \,}
+\newcommand{\ege}{\quad = \quad}
+%%%%%% \section{texte formules}
+%%% 070127 new definition 
+\newcommand{\TextInFormula}[1]{\text{\quad #1 \quad }}
+%
+\newcommand{\et}{\TextInFormula{and}}
+\newcommand{\finite}{\TextInFormula{finite}}
+\newcommand{\si}{\TextInFormula{if}}
+\newcommand{\isin}{\TextInFormula{is in}}
+\newcommand{\ou}{\TextInFormula{or}}
+\newcommand{\otherwise}{\TextInFormula{otherwise}}
+\newcommand{\suchthat}{\TextInFormula{such that}}
+\newcommand{\alors}{\TextInFormula{then}}
+\newcommand{\where}{\TextInFormula{where}}
+\newcommand{\with}{\TextInFormula{with}}
+%%%%%%
+%%%%%% \section{abr. latines}
+% abbreviations de locutions latines
+%%% 070127 new definition 
+\newcommand{\LatinLocution}[1]{{\itshape #1}\xspace}
+% 
+\newcommand{\acontrario}{\LatinLocution{a contrario}} %
+\newcommand{\Acontrario}{\LatinLocution{A contrario}} %
+\newcommand{\adhoc}{\LatinLocution{ad hoc}}
+\newcommand{\apriori}{\LatinLocution{a priori}} %
+\newcommand{\Apriori}{\LatinLocution{A priori}} %
+\newcommand{\afortiori}{\LatinLocution{a fortiori}\xspace}
+\newcommand{\artcit}{\LatinLocution{art. cit.}\xspace}
+\newcommand{\cf}{\LatinLocution{cf.}}
+\newcommand{\Cf}{\LatinLocution{Cf.}}
+\newcommand{\defacto}{\textit{de facto}\xspace}
+\newcommand{\eg}{\LatinLocution{e.g.}}
+\newcommand{\etalii}{\LatinLocution{et~al.}}
+\newcommand{\etc}{\LatinLocution{etc.}} % 
+\newcommand{\ibid}{\LatinLocution{ibid.}}
+\newcommand{\idem}{\LatinLocution{idem}}
+\newcommand{\Idem}{\LatinLocution{Idem}}
+\newcommand{\ie}{{that is, }}
+\newcommand{\NB}{\LatinLocution{N.B.}}
+\newcommand{\infra}{\LatinLocution{infra}\xspace}
+\newcommand{\ipsofacto}{\LatinLocution{ipso facto}\xspace}
+\newcommand{\itin}{\LatinLocution{in}\xspace}
+\newcommand{\Itin}{\LatinLocution{In}\xspace}
+\newcommand{\modulo}{\LatinLocution{modulo}\xspace}
+\newcommand{\mutmat}{\LatinLocution{mutatis mutandis}\xspace} 
+\newcommand{\opcit}{\LatinLocution{op. cit.}\xspace}
+\newcommand{\redadabs}{\LatinLocution{reductio ad absurdum}\xspace}
+\newcommand{\sed}{\LatinLocution{sed}\xspace}
+\newcommand{\sqq}{\LatinLocution{et seq.}}
+\newcommand{\supra}{\LatinLocution{supra}\xspace}
+\newcommand{\via}{via\xspace}
+\newcommand{\verbat}{\LatinLocution{verbatim}\xspace}% verbatim 
+\newcommand{\vv}{\LatinLocution{vice versa}\xspace} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 990508 implications (param\'etr\'ees)
+\newcommand{\jsImpli}[2]{\noindent
+   \makebox[5em][c]{$\mathrm{#1} \; \Rightarrow \; \mathrm{#2}$ }}
+%
+\newcommand{\ieii}{\jsImpli{(i)}{(ii)}}
+\newcommand{\iieiii}{\jsImpli{(ii)}{(iii)}}
+\newcommand{\iiiei}{\jsImpli{(iii)}{(i)}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% quelques chiffres en "oldstyle"
+% \def\zold{\oldstyle{0}}
+% \def\uold{\oldstyle{1}}
+% \def\dold{\oldstyle{2}}
+% en attendant mieux
+\def\zold{\mathbf{0}}
+\def\uold{\mathbf{1}}
+\def\dold{\mathbf{2}}
+\def\told{\mathbf{3}}
+\def\qold{\mathbf{4}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% parametrage des fontes pour certains symboles 
+\newcommand{\mathjsu}[1]{\mathsf{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{capitales grasses}
+% Lettres capitales grasses avec corps evide
+%    (pour les semi-anneaux)
+%  nouvelle version uniquement \mathbb 000510
+%%% 070127 new definition 
+\newcommand{\Ambb}{\mathbb{A}}
+\newcommand{\Bmbb}{\mathbb{B}}
+\newcommand{\Cmbb}{\mathbb{C}} 
+\newcommand{\Dmbb}{\mathbb{D}}
+\newcommand{\Embb}{\mathbb{E}}
+\newcommand{\Fmbb}{\mathbb{F}}
+\newcommand{\Gmbb}{\mathbb{G}}
+\newcommand{\Hmbb}{\mathbb{H}}
+\newcommand{\Imbb}{\mathbb{I}}
+\newcommand{\Jmbb}{\mathbb{J}}
+\newcommand{\Kmbb}{\mathbb{K}}
+\newcommand{\Lmbb}{\mathbb{L}}
+\newcommand{\Mmbb}{\mathbb{M}}
+\newcommand{\Nmbb}{\mathbb{N}}
+\newcommand{\Ombb}{\mathbb{O}}
+\newcommand{\Pmbb}{\mathbb{P}}
+\newcommand{\Qmbb}{\mathbb{Q}}
+\newcommand{\Rmbb}{\mathbb{R}}
+\newcommand{\Smbb}{\mathbb{S}}
+\newcommand{\Tmbb}{\mathbb{T}}
+\newcommand{\Umbb}{\mathbb{U}} 
+\newcommand{\Vmbb}{\mathbb{V}}
+\newcommand{\Wmbb}{\mathbb{W}}
+\newcommand{\Xmbb}{\mathbb{X}}
+\newcommand{\Ymbb}{\mathbb{Y}}
+\newcommand{\Zmbb}{\mathbb{Z}}
+%
+\newcommand{\UNmbb}{{\mathchoice
+{\hbox{$\textstyle\rm 1\kern-0.2em I$}}%
+{\hbox{$\textstyle\rm 1\kern-0.2em I$}}%
+{\hbox{$\scriptstyle\rm 1\kern-0.15em I$}}%
+{\hbox{$\scriptscriptstyle\rm 1\kern-0.1em I$}}%
+}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{cap. cal}
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\Hc}{\mathcal{H}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Jc}{\mathcal{J}}
+\newcommand{\Kc}{\mathcal{K}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Qc}{\mathcal{Q}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Uc}{\mathcal{U}}
+\newcommand{\Vc}{\mathcal{V}}
+\newcommand{\Wc}{\mathcal{W}}
+\newcommand{\Xc}{\mathcal{X}}
+\newcommand{\Yc}{\mathcal{Y}}
+\newcommand{\Zc}{\mathcal{Z}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lettres grasses
+%%%%%% \section{boldface}
+% lettres "boldface" pour les maths
+\newcommand{\ambf}{\mathbf{a}}
+\newcommand{\bmbf}{\mathbf{b}}
+\newcommand{\cmbf}{\mathbf{c}}
+\newcommand{\dmbf}{\mathbf{d}}
+\newcommand{\embf}{\mathbf{e}}
+\newcommand{\fmbf}{\mathbf{f}}
+\newcommand{\gmbf}{\mathbf{g}}
+\newcommand{\hmbf}{\mathbf{h}}
+\newcommand{\imbf}{\mathbf{i}}
+\newcommand{\jmbf}{\mathbf{j}}
+\newcommand{\kmbf}{\mathbf{k}}
+\newcommand{\lmbf}{\mathbf{l}}
+\newcommand{\mmbf}{\mathbf{m}}
+\newcommand{\nmbf}{\mathbf{n}}
+\newcommand{\ombf}{\mathbf{o}}
+\newcommand{\pmbf}{\mathbf{p}}
+\newcommand{\qmbf}{\mathbf{q}}
+\newcommand{\rmbf}{\mathbf{r}}
+\newcommand{\smbf}{\mathbf{s}}
+\newcommand{\tmbf}{\mathbf{t}}
+\newcommand{\umbf}{\mathbf{u}}
+\newcommand{\vmbf}{\mathbf{v}}
+\newcommand{\wmbf}{\mathbf{w}}
+\newcommand{\xmbf}{\mathbf{x}}
+\newcommand{\ymbf}{\mathbf{y}}
+\newcommand{\zmbf}{\mathbf{z}}
+%
+\newcommand{\Ambf}{\mathbf{A}}
+\newcommand{\Bmbf}{\mathbf{B}}
+\newcommand{\Cmbf}{\mathbf{C}}
+\newcommand{\Dmbf}{\mathbf{D}}
+\newcommand{\Embf}{\mathbf{E}}
+\newcommand{\Fmbf}{\mathbf{F}}
+\newcommand{\Gmbf}{\mathbf{G}}
+\newcommand{\Hmbf}{\mathbf{H}}
+\newcommand{\Imbf}{\mathbf{I}}
+\newcommand{\Jmbf}{\mathbf{J}}
+\newcommand{\Kmbf}{\mathbf{K}}
+\newcommand{\Lmbf}{\mathbf{L}}
+\newcommand{\Mmbf}{\mathbf{M}}
+\newcommand{\Nmbf}{\mathbf{N}}
+\newcommand{\Ombf}{\mathbf{O}}
+\newcommand{\Pmbf}{\mathbf{P}}
+\newcommand{\Qmbf}{\mathbf{Q}}
+\newcommand{\Rmbf}{\mathbf{R}}
+\newcommand{\Smbf}{\mathbf{S}}
+\newcommand{\Tmbf}{\mathbf{T}}
+\newcommand{\Umbf}{\mathbf{U}}
+\newcommand{\Vmbf}{\mathbf{V}}
+\newcommand{\Wmbf}{\mathbf{W}}
+\newcommand{\Xmbf}{\mathbf{X}}
+\newcommand{\Ymbf}{\mathbf{Y}}
+\newcommand{\Zmbf}{\mathbf{Z}}
+%%%%%% \section{boldsymbol}
+% lettres "boldsymbol" pour les maths
+\newcommand{\absy}{\boldsymbol{a}}
+\newcommand{\bbsy}{\boldsymbol{b}}
+\newcommand{\cbsy}{\boldsymbol{c}}
+\newcommand{\dbsy}{\boldsymbol{d}}
+\newcommand{\ebsy}{\boldsymbol{e}}
+\newcommand{\fbsy}{\boldsymbol{f}}
+\newcommand{\gbsy}{\boldsymbol{g}}
+\newcommand{\hbsy}{\boldsymbol{h}}
+\newcommand{\ibsy}{\boldsymbol{i}}
+\newcommand{\jbsy}{\boldsymbol{j}}
+\newcommand{\kbsy}{\boldsymbol{k}}
+\newcommand{\lbsy}{\boldsymbol{l}}
+\newcommand{\mbsy}{\boldsymbol{m}}
+\newcommand{\nbsy}{\boldsymbol{n}}
+\newcommand{\obsy}{\boldsymbol{o}}
+\newcommand{\pbsy}{\boldsymbol{p}}
+\newcommand{\qbsy}{\boldsymbol{q}}
+\newcommand{\rbsy}{\boldsymbol{r}}
+\newcommand{\sbsy}{\boldsymbol{s}}
+\newcommand{\tbsy}{\boldsymbol{t}}
+\newcommand{\ubsy}{\boldsymbol{u}}
+\newcommand{\vbsy}{\boldsymbol{v}}
+\newcommand{\wbsy}{\boldsymbol{w}}
+\newcommand{\xbsy}{\boldsymbol{x}}
+\newcommand{\ybsy}{\boldsymbol{y}}
+\newcommand{\zbsy}{\boldsymbol{z}}
+%
+\newcommand{\Absy}{\boldsymbol{A}}
+\newcommand{\Bbsy}{\boldsymbol{B}}
+\newcommand{\Cbsy}{\boldsymbol{C}}
+\newcommand{\Dbsy}{\boldsymbol{D}}
+\newcommand{\Ebsy}{\boldsymbol{E}}
+\newcommand{\Fbsy}{\boldsymbol{F}}
+\newcommand{\Gbsy}{\boldsymbol{G}}
+\newcommand{\Hbsy}{\boldsymbol{H}}
+\newcommand{\Ibsy}{\boldsymbol{I}}
+\newcommand{\Jbsy}{\boldsymbol{J}}
+\newcommand{\Kbsy}{\boldsymbol{K}}
+\newcommand{\Lbsy}{\boldsymbol{L}}
+\newcommand{\Mbsy}{\boldsymbol{M}}
+\newcommand{\Nbsy}{\boldsymbol{N}}
+\newcommand{\Obsy}{\boldsymbol{O}}
+\newcommand{\Pbsy}{\boldsymbol{P}}
+\newcommand{\Qbsy}{\boldsymbol{Q}}
+\newcommand{\Rbsy}{\boldsymbol{R}}
+\newcommand{\Sbsy}{\boldsymbol{S}}
+\newcommand{\Tbsy}{\boldsymbol{T}}
+\newcommand{\Ubsy}{\boldsymbol{U}}
+\newcommand{\Vbsy}{\boldsymbol{V}}
+\newcommand{\Wbsy}{\boldsymbol{W}}
+\newcommand{\Xbsy}{\boldsymbol{X}}
+\newcommand{\Ybsy}{\boldsymbol{Y}}
+\newcommand{\Zbsy}{\boldsymbol{Z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{sans serif}
+% lettres "sans serif" pour les maths
+\newcommand{\amsf}{\mathsf{a}}
+\newcommand{\bmsf}{\mathsf{b}}
+\newcommand{\cmsf}{\mathsf{c}}
+\newcommand{\dmsf}{\mathsf{d}}
+\newcommand{\emsf}{\mathsf{e}}
+\newcommand{\fmsf}{\mathsf{f}}
+\newcommand{\gmsf}{\mathsf{g}}
+\newcommand{\hmsf}{\mathsf{h}}
+\newcommand{\imsf}{\mathsf{i}}
+\newcommand{\jmsf}{\mathsf{j}}
+\newcommand{\kmsf}{\mathsf{k}}
+\newcommand{\lmsf}{\mathsf{l}}
+\newcommand{\mmsf}{\mathsf{m}}
+\newcommand{\nmsf}{\mathsf{n}}
+\newcommand{\omsf}{\mathsf{o}}
+\newcommand{\pmsf}{\mathsf{p}}
+\newcommand{\qmsf}{\mathsf{q}}
+\newcommand{\rmsf}{\mathsf{r}}
+\newcommand{\smsf}{\mathsf{s}}
+\newcommand{\tmsf}{\mathsf{t}}
+\newcommand{\umsf}{\mathsf{u}}
+\newcommand{\vmsf}{\mathsf{v}}
+\newcommand{\wmsf}{\mathsf{w}}
+\newcommand{\xmsf}{\mathsf{x}}
+\newcommand{\ymsf}{\mathsf{y}}
+\newcommand{\zmsf}{\mathsf{z}}
+%
+\newcommand{\Amsf}{\mathsf{A}}
+\newcommand{\Bmsf}{\mathsf{B}}
+\newcommand{\Cmsf}{\mathsf{C}}
+\newcommand{\Dmsf}{\mathsf{D}}
+\newcommand{\Emsf}{\mathsf{E}}
+\newcommand{\Fmsf}{\mathsf{F}}
+\newcommand{\Gmsf}{\mathsf{G}}
+\newcommand{\Hmsf}{\mathsf{H}}
+\newcommand{\Imsf}{\mathsf{I}}
+\newcommand{\Jmsf}{\mathsf{J}}
+\newcommand{\Kmsf}{\mathsf{K}}
+\newcommand{\Lmsf}{\mathsf{L}}
+\newcommand{\Mmsf}{\mathsf{M}}
+\newcommand{\Nmsf}{\mathsf{N}}
+\newcommand{\Omsf}{\mathsf{O}}
+\newcommand{\Pmsf}{\mathsf{P}}
+\newcommand{\Qmsf}{\mathsf{Q}}
+\newcommand{\Rmsf}{\mathsf{R}}
+\newcommand{\Smsf}{\mathsf{S}}
+\newcommand{\Tmsf}{\mathsf{T}}
+\newcommand{\Umsf}{\mathsf{U}}
+\newcommand{\Vmsf}{\mathsf{V}}
+\newcommand{\Wmsf}{\mathsf{W}}
+\newcommand{\Xmsf}{\mathsf{X}}
+\newcommand{\Ymsf}{\mathsf{Y}}
+\newcommand{\Zmsf}{\mathsf{Z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{lettres surlignees}
+% lettres "barr\'ees"
+% toutes les barres sont ˆ la mme hauteur, 
+% indŽpendamment de la lettre
+\newcommand{\ETAbar}[1]{\overline{\rule{0pt}{1.5ex}\smash{#1}}}
+\newcommand{\abar}{\ETAbar{a}}
+\newcommand{\bbar}{\ETAbar{b}}
+\newcommand{\cbar}{\ETAbar{c}}
+\newcommand{\dbar}{\ETAbar{d}}
+\newcommand{\ebar}{\ETAbar{e}}
+\newcommand{\fbar}{\ETAbar{f}}
+\newcommand{\gbar}{\ETAbar{g}}
+\newcommand{\hbarjs}{\ETAbar{h}}
+\newcommand{\ibar}{\ETAbar{i}}
+\newcommand{\jbar}{\ETAbar{j}}
+\newcommand{\kbar}{\ETAbar{k}}
+\newcommand{\lbar}{\ETAbar{l}}
+\newcommand{\mbar}{\ETAbar{m}}
+\newcommand{\nbar}{\ETAbar{n}}
+\newcommand{\obar}{\ETAbar{o}}
+\newcommand{\pbar}{\ETAbar{p}}
+\newcommand{\qbar}{\ETAbar{q}}
+\newcommand{\rbar}{\ETAbar{r}}
+\newcommand{\sbar}{\ETAbar{s}}
+\newcommand{\tbar}{\ETAbar{t}}
+\newcommand{\ubar}{\ETAbar{u}}
+\newcommand{\vbar}{\ETAbar{v}}
+\newcommand{\wbar}{\ETAbar{w}}
+\newcommand{\xbar}{\ETAbar{x}}
+\newcommand{\ybar}{\ETAbar{y}}
+\newcommand{\zbar}{\ETAbar{z}}
+\newcommand{\unbar}{\ETAbar{1}}
+%
+\newcommand{\Abar}{\ETAbar{A}}
+\newcommand{\Bbar}{\ETAbar{B}}
+\newcommand{\Cbar}{\ETAbar{C}}
+\newcommand{\Dbar}{\ETAbar{D}}
+\newcommand{\Ebar}{\ETAbar{E}}
+\newcommand{\Fbar}{\ETAbar{F}}
+\newcommand{\Gbar}{\ETAbar{G}}
+\newcommand{\Hbar}{\ETAbar{H}}
+\newcommand{\Ibar}{\ETAbar{I}}
+\newcommand{\Jbar}{\ETAbar{J}}
+\newcommand{\Kbar}{\ETAbar{K}}
+\newcommand{\Lbar}{\ETAbar{L}}
+\newcommand{\Mbar}{\ETAbar{M}}
+\newcommand{\Nbar}{\ETAbar{N}}
+\newcommand{\Obar}{\ETAbar{O}}
+\newcommand{\Pbar}{\ETAbar{P}}
+\newcommand{\Qbar}{\ETAbar{Q}}
+\newcommand{\Rbar}{\ETAbar{R}}
+\newcommand{\Sbar}{\ETAbar{S}}
+\newcommand{\Tbar}{\ETAbar{T}}
+\newcommand{\Ubar}{\ETAbar{U}}
+\newcommand{\Vbar}{\ETAbar{V}}
+\newcommand{\Wbar}{\ETAbar{W}}
+\newcommand{\Xbar}{\ETAbar{X}}
+\newcommand{\Ybar}{\ETAbar{Y}}
+\newcommand{\Zbar}{\ETAbar{Z}}
+%%% 070328  de js-macros3
+% entiers sign\'es 021110 c'est le boxon y a deux sortes de
+% lettres barr\'ees cf js_symboles.tex  \abar et \bara
+\newcommand{\jsBar}[1]{\bar{#1}}
+\newcommand{\baru}{\jsBar{1}}
+\newcommand{\bard}{\jsBar{2}}
+\newcommand{\bart}{\jsBar{3}}
+\newcommand{\barq}{\jsBar{4}}
+\newcommand{\barc}{\jsBar{5}}
+\newcommand{\bars}{\jsBar{6}}
+\newcommand{\barl}{\jsBar{l}}
+\newcommand{\barh}{\jsBar{h}}
+% % lettres "tild\'ees"
+\newcommand{\Atil}{\widetilde{A}}
+\newcommand{\Btil}{\widetilde{B}}
+\newcommand{\Ctil}{\widetilde{C}}
+\newcommand{\Dtil}{\widetilde{D}}
+\newcommand{\Etil}{\widetilde{E}}
+\newcommand{\Ftil}{\widetilde{F}}
+\newcommand{\Gtil}{\widetilde{G}}
+\newcommand{\Htil}{\widetilde{H}}
+\newcommand{\Itil}{\widetilde{I}}
+\newcommand{\Jtil}{\widetilde{J}}
+\newcommand{\Ktil}{\widetilde{K}}
+\newcommand{\Ltil}{\widetilde{L}}
+\newcommand{\Mtil}{\widetilde{M}}
+\newcommand{\Ntil}{\widetilde{N}}
+\newcommand{\Otil}{\widetilde{O}}
+\newcommand{\Ptil}{\widetilde{P}}
+\newcommand{\Qtil}{\widetilde{Q}}
+\newcommand{\Rtil}{\widetilde{R}}
+\newcommand{\Stil}{\widetilde{S}}
+\newcommand{\Ttil}{\widetilde{T}}
+\newcommand{\Util}{\widetilde{U}}
+\newcommand{\Vtil}{\widetilde{V}}
+\newcommand{\Wtil}{\widetilde{W}}
+\newcommand{\Xtil}{\widetilde{X}}
+\newcommand{\Ytil}{\widetilde{Y}}
+\newcommand{\Ztil}{\widetilde{Z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{zeros et uns}
+% gros chiffres (pour les matrices en blocs
+% 010128
+\newcommand{\bigz}{\mbox{\large{$0$}}}
+\newcommand{\Bigz}{\mbox{\Large{$0$}}}
+\newcommand{\BIGz}{\mbox{\LARGE{$0$}}}
+\newcommand{\bz}{\BIGz}% compatibilit\'e
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{symboles rŽduits}
+%%% symboles rŽduits, plus jolis dans le texte
+%%%%%%\section{adresse internet}   030821
+\newcommand{\tildett}{$\scriptstyle{\pmb{\sim}}$}
+%%% dollard \dol 010128
+\def\dol{{\mathchoice
+{\hbox{{\small $\textstyle \$ $}}}%
+{\hbox{{\small $\textstyle \$ $}}}%
+{\hbox{$\scriptstyle \$ $}}%
+{\hbox{$\scriptscriptstyle \$ $}}%
+}}
+%%% infini 020223 (NB utilise \scalebox, donc pstricks!}
+\newcommand{\etainfty}{\scalebox{0.85}{\scalebox{0.85}{+}\infty}}
+\newcommand{\etamininfty}{\scalebox{0.85}{\scalebox{0.85}{-}\infty}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% macros utilisŽes dans les figures
+\newcommand{\jesBar}[1]{\text{\textbf{-}}{#1}}
+\newcommand{\sunBe}{\scalebox{0.8}{\unBe}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{h\'ebreu}
+% 020116
+\newcommand{\etabeth}{\scalebox{0.85}{\beth}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% \section{diagrammes}
+% environnement pour les diagrammes (utilise pstricks)
+%
+\newcommand{\diagechu}{0.8}     %% echelle 1
+% syle de diagramme pour les slides
+\newlength{\ArrowDiagSize}
+\setlength{\ArrowDiagSize}{6pt}
+\newlength{\ArrowDiagWidth}
+\setlength{\ArrowDiagWidth}{2pt}
+\newpsstyle{SLDiagStyle}%
+   {colsep=6ex,rowsep=5ex,nodesep=1ex,npos=.45,%
+    arrows=->,linewidth=\ArrowDiagWidth,arrowsize=\ArrowDiagSize,%
+        linestyle=solid,linecolor=\ArrowDiagColor}
+\newcommand{\SLDiagStyle}{\psset{style=SLDiagStyle}}
+%
+\newenvironment{SLDiag}%
+   {\psset{style=SLDiagStyle}\begin{psmatrix}}%
+   {\end{psmatrix}}%
+\newcommand{\CDSL}{\begin{SLDiag}}
+\newcommand{\CDSLF}{\end{SLDiag}}
+%
+\newenvironment{DiagraBig}%
+{\psmatrix[colsep=7ex,rowsep=6ex,arrows=->,nodesep=1ex,npos=.45]}%
+{\endpsmatrix}
+\newcommand{\CDB}{\begin{DiagraBig}}
+\newcommand{\CDBF}{\end{DiagraBig}}
+% la meme chose en plus petit
+\newenvironment{DiagraSmall}%
+{\psmatrix[colsep=3ex,rowsep=3ex,arrows=->,nodesep=1ex,npos=.45]}%
+{\endpsmatrix}
+\newcommand{\CDS}{\begin{DiagraSmall}}
+\newcommand{\CDSF}{\end{DiagraSmall}}
+% exemple d'utilisation des diagrammes
+% a reprendre par copier coller
+% \CD
+% [name=A] F & & [name=B] E \\[0ex]
+% [name=C] R & & [name=D] Q
+% \ncline{A}{B}^{\varphi }
+% \ncline{A}{C}<{\iota }
+% \ncline{B}{D}>{\iota }
+% \ncline{C}{D}_{\varphi }
+% \CDF
+\newcommand{\uddots}{\scalebox{1 -1}{\ddots}}
+%%%%%% diagramme sp\'ecial pour le groupe libre (II.6) %%%%%
+\newcommand{\DiaGroLibU}{\etaCD
+[name=A] \Atileto & &  [name=B] F(A) \\[0ex]
+        & [name=C] \Atileto &
+\ncline{A}{B}^{\gamma _{A}}
+\ncline{A}{C}<{\rho _{A}}
+\psset{offset=.5ex}
+\ncline{C}{B}
+\naput[npos=.3]{\gamma _{A}}
+\ncline{B}{C}
+\naput[npos=.3]{\iota }
+\etaCDF}
+%%%%%% \section{matrices et vecteurs}
+%    Matrices et vecteurs
+%
+%  commandes pour rapprocher les colonnes et ecarter les
+%  lignes des matrices. Retablissent les valeurs habituelles
+%  a la sortie de chaque macro de matrices
+%
+%%% mod 010130  utilisation de \pmatrix, etc. (AmsTeX)
+%  Matrice 1 x 1
+\newcommand{\matriceuu}[1]%
+    {\begin{pmatrix} #1 \end{pmatrix}}
+%  Matrice 2 x 2  modif 010128
+\newcommand{\matricedd}[4]%
+    {\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}
+%  Vecteur-colonne de dimension 2 modif 010128
+\newcommand{\vecteurd}[2]%
+    {\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+%  Vecteur-ligne de dimension 2 modif 010128
+\newcommand{\ligned}[2]%
+    {\begin{pmatrix} #1 & #2 \end{pmatrix}}
+%  Matrice 3 x 3
+\newcommand{\matricett}[9]%
+    {\begin{pmatrix}  #1 & #2 & #3 \\
+                      #4 & #5 & #6 \\
+                      #7 & #8 & #9 \end{pmatrix}}
+%  Vecteur-colonne de dimension 3
+\newcommand{\vecteurt}[3]%
+    {\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+%  Vecteur-ligne de dimension 3
+\newcommand{\lignet}[3]%
+    {\begin{pmatrix} #1 & #2 & #3 \end{pmatrix}}
+    %%%%%%%%%%%%%% 030211
+    \newcommand{\matricein}
+        {\addtolength{\arraycolsep}{-0.5\arraycolsep}%
+          \renewcommand{\arraystretch}{2}}
+    \newcommand{\matriceout}
+        {\addtolength{\arraycolsep}{\arraycolsep}%
+          \renewcommand{\arraystretch}{1}}
+    \newcommand{\MatBlocIn}
+        {\addtolength{\arraycolsep}{-0.5\arraycolsep}%
+          \renewcommand{\arraystretch}{1.5}}
+    \newcommand{\MatBlocOut}
+        {\addtolength{\arraycolsep}{\arraycolsep}%
+          \renewcommand{\arraystretch}{1}}
+% construction de matrices-blocs
+\newlength{\jsWidthCol}
+\setlength{\jsWidthCol}{0pt}
+\newcommand{\Ent}[1]{\makebox[\jsWidthCol]{$#1$}}
+\newlength{\blocinterligne}
+\setlength{\blocinterligne}{1.4ex}
+\newcommand{\bitl}{\rule[-\blocinterligne]{0 mm}{\blocinterligne}}
+\newlength{\blocinterligned}
+\setlength{\blocinterligned}{2ex}
+\newcommand{\bitld}{\rule[-\blocinterligned]{0 mm}{\blocinterligned}}
+%
+\newcommand{\blocmattt}[9]{%
+{\scriptstyle \ematricett{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}}
+\newcommand{\blocligt}[3]{%
+{\scriptstyle \elignet{#1}{#2}{#3}}}
+\newcommand{\blocvect}[3]{%
+{\scriptstyle \evecteurt{#1}{#2}{#3}}}
+% %  r\'eduction des grosse matrices
+% \newcommand{\redmatu}[1]{\scalebox{0.83}{#1}}
+% \newcommand{\redmatd}[1]{\scalebox{0.66}{#1}}
+%
+%
+% cadres pour visualiser la decomposition des matrices en blocs
+%
+\newlength{\temparraycolsep}
+\newlength{\longueurbloc}
+\newlength{\hauteurbloc}
+\newlength{\centragebloc}
+\setlength{\longueurbloc}{9ex}
+\setlength{\hauteurbloc}{7ex}
+\setlength{\centragebloc}{-3ex}
+% nouvelle longueurs 020927
+\newlength{\longueurblc}
+\newlength{\hauteurblc}
+\newlength{\centrageblc}
+\setlength{\longueurblc}{6.5ex}
+\setlength{\hauteurblc}{5ex}
+\setlength{\centrageblc}{-2ex}
+%
+\newcommand{\blocligne}[1]%
+    {\framebox[\longueurbloc]{$#1$}}
+\newcommand{\blocmatrice}[1]%
+    {\framebox[\longueurbloc]{\rule[\centragebloc]{0mm}{\hauteurbloc}$#1$}}
+\newcommand{\blocvecteur}[1]%
+    {\framebox{\rule[\centragebloc]{0mm}{\hauteurbloc}$#1$}}
+%
+\newcommand{\blcligne}[1]%
+    {\framebox[\longueurblc]{$#1$}}
+\newcommand{\blcmatrice}[1]%
+    {\framebox[\longueurblc]{\rule[\centrageblc]{0mm}{\hauteurblc}$#1$}}
+\newcommand{\blcvecteur}[1]%
+    {\framebox{\rule[\centrageblc]{0mm}{\hauteurblc}$#1$}}
+%
+%  Matrice 2 x 2  avec blocs visualis\'es 020927
+\newcommand{\matriceddblvs}[4]%%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.3pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{cc}%
+                #1  & \blcligne{#2} \\
+            \blcvecteur{#3} & \blcmatrice{#4}
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%  Vecteur-colonne de dimension 2
+\newcommand{\vecteurdblvs}[2]%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{c}%
+                #1  \\
+            \blcvecteur{#2}
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%     {\begin{pmatrix} #1 \\ \blcvecteur{#2} \end{pmatrix}}
+%  Vecteur-ligne de dimension 2
+\newcommand{\lignedblvs}[2]%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{cc}%
+                #1  & \blcligne{#2}
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%     {\begin{pmatrix} #1 & \blcligne{#2} \end{pmatrix}}
+%
+%  Matrice 3 x 3  avec blocs visualis\'es 020928
+\newcommand{\matricettblvs}[9]%%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{ccc}%
+                #1  & \blcligne{#2} & #3\\
+            \blcvecteur{#4} & \blcmatrice{#5} & \blcvecteur{#6}\\
+                #7  & \blcligne{#8} & #9\\
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%  Vecteur-colonne de dimension 3
+\newcommand{\vecteurtblvs}[3]%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{c}%
+                #1  \\
+            \blcvecteur{#2}\\
+                #3
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%  Vecteur-ligne de dimension 3
+\newcommand{\lignetblvs}[3]%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{ccc}%
+                #1  & \blcligne{#2} & #3
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%
+%  Matrice 3 x 3  avec blocs visualis\'es 020928
+%  autre sorte de blocs
+\newcommand{\matricettblblvs}[9]%%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{ccc}%
+                #1  & \blcligne{#2} & \blcligne{#3}\\
+            \blcvecteur{#4} & \blcmatrice{#5} & \blcmatrice{#6}\\
+                \blcvecteur{#7}  & \blcmatrice{#8} & \blcmatrice{#9}\\
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%  Vecteur-colonne de dimension 3
+\newcommand{\vecteurtblblvs}[3]%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{c}%
+                #1  \\
+            \blcvecteur{#2}\\
+                \blcvecteur{#3}
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%     {\begin{pmatrix} #1 \\ \blcvecteur{#2} \end{pmatrix}}
+%  Vecteur-ligne de dimension 3
+\newcommand{\lignetblblvs}[3]%
+   {\setlength{\temparraycolsep}{\arraycolsep}%
+    \setlength{\arraycolsep}{1.5pt}%
+        \renewcommand{\arraystretch}{1.2}%
+        \left (%
+    \begin{array}{ccc}%
+                #1  & \blcligne{#2} & \blcligne{#3}
+        \end{array}%
+        \right )%
+    \setlength{\arraycolsep}{\temparraycolsep}%
+        \renewcommand{\arraystretch}{1.0}%
+   }%
+%     {\begin{pmatrix} #1 & \blcligne{#2} \end{pmatrix}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\endinput
+%%%%%%%%

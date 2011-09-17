@@ -1,0 +1,668 @@
+
+\chapter{{FSM\,XML}, \protect\\ \e an \code{XML} format for automata}
+\label{chp:fsm-xml}%
+
+\newlength{\tagindentl}\newlength{\taglnskp}
+\newlength{\tagspl}
+\setlength{\tagindentl}{1.5em}
+\setlength{\tagspl}{3em}
+\setlength{\taglnskp}{-0.1ex}
+% \pagestyle{plain}
+\renewcommand\thesubsection{\arabic{subsection}}
+\renewcommand\theenumii{\arabic{enumii}}
+\renewcommand\theenumiii{\arabic{enumiii}}
+\renewcommand\labelenumii{\theenumi.\theenumii.}
+\renewcommand\labelenumiii{\theenumi.\theenumii.\theenumiii.}
+\setcounter{subsection}{0}
+
+% \endinput
+
+\begin{Com}
+    This appendix gives the description  of the 
+    format \fsmxml that had been given in May 2008 under a layout 
+    that is lighter than the reference card that can be found on the 
+    web page of format.
+    
+    This description is not up to date anymore and has to be 
+    updated.
+\end{Com}
+
+\fsmxml is an \xml format proposal for the description of 
+weighted automata, transducers, and regular expressions.
+
+
+The aim of this \xml format is to make possible, and hopefully easy,
+the communication between the various programs and systems that deal
+with weighted automata and transducters.  
+\fsmxml is part of the \vcsn Project.  
+In particular, \fsmxml is the
+input/output format of \tafkit, the command line interface to the
+\vcsn library.
+
+This document gives a pseudo-formal description of the format.
+
+All tags of the format are listed, with their children, and attributes.
+
+\newpage 
+\subsection{The root tag}
+\begin{enumerate}%
+\addtocounter{enumi}{-1}%
+
+\item  \xtagf{fsmxml}
+
+\smallskip
+The unique possible root of an \fsmxml file, which can contain any 
+number of automata and standalone rational expressions.
+
+\begin{tabbing}
+\xtag{fsmxml xmlns="" version=""}      \\[\taglnskp]
+\tagindent\xtagf{automaton}\tagsp\= \kill
+\tagindent\xtagf{automaton}\> 0 or more \occ \\[\taglnskp]
+\tagindent\xtagf{regExp}   \> 0 or more \occ \\[\taglnskp]
+\xftag{fsmxml}
+\end{tabbing}
+
+
+
+\end{enumerate}
+\setcounter{enumitemp}{\value{enumi}}
+
+\subsection{The value type tags}
+
+Both \xtagf{automaton} and \xtagf{regExp} have a child in common:
+the \xtagf{valueType} tag which describes the `type' of the
+behaviour of the automaton or of the series denoted by the
+expression.
+
+\begin{enumerate}
+\addtocounter{enumi}{\value{enumitemp}}
+
+\item  \xtagf{valueType}
+\begin{tabbing}
+\xtag{valueType}      \\[\taglnskp]
+\tagindent\xtagf{writingData}\tagsp\= \kill
+\tagindent\xtagf{writingData} \>  \opt\\[\taglnskp]
+% \tagindent\xtagf{semiring}\tagsp\= \kill
+\tagindent\xtagf{semiring}\>  \req\\[\taglnskp]
+\tagindent\xtagf{monoid}  \>  \req\\[\taglnskp]
+\xftag{valueType}
+\end{tabbing}
+
+\item  \xtagf{semiring}
+
+% \smallskip
+\begin{tabbing}
+\ptn
+Pivotal att.: \xattr{type} = \xval{numerical}$|$\xval{series}\tagsp
+                      \token   \req
+\end{tabbing}
+
+
+\begin{enumerate}
+
+\item  \xattr{type} = \xval{numerical}
+
+\begin{tabbing}
+\xtag{semiring  type=numerical  set='' operation='' }\\[\taglnskp]
+\tagindent\xtagf{writingData}\tagsp\= \kill
+\tagindent\xtagf{writingData} \>  \opt\\[\taglnskp]
+\xftag{semiring}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att: \ \ \=\xattr{operation} \= = \ \= \xval{classical}$|$
+                        \xval{minPlus}$|$
+                         \xval{maxPlus} \tagsp \=\token \req
+                         \kill
+\ptn
+Att:\>\> \xattr{set} \' =
+   \> \xval{B}$|$\xval{N}$|$\xval{Z}$|$\xval{Q}$|$\xval{R}$|$\xval{C}
+   \> \token  \req \\
+   \>\>\xattr{operation} \' = \>\xval{classical}$|$
+                                \xval{minPlus}$|$
+                                \xval{maxPlus} \tagsp \>\token\req
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Tag \xtagf{writingData  identitySymbol='' zeroSymbol=''} \\
+\tagindent\ptn Att.: \xattr{identitySymbol} \= = ' '
+                                     \tagsp \=  \strng  \req \+ \\
+         \xattr{zeroSymbol}\' = ' '  \tagsp   \> \strng  \req
+\end{tabbing}
+
+
+
+\item  \xattr{type} = \xval{series}
+
+\begin{tabbing}
+\xtag{semiring  type=series}      \\[\taglnskp]
+\tagindent\xtagf{writingData}\tagsp\= \kill
+\tagindent\xtagf{writingData}\> \oneocc \opt\\[\taglnskp]
+\tagindent\xtagf{semiring}\> \oneocc \req\\[\taglnskp]
+\tagindent\xtagf{monoid} \> \oneocc \req\\[\taglnskp]
+\xftag{semiring}
+\end{tabbing}
+
+\ptn Constraint: \xtagf{monoid} should not be of \xattr{type} = \xval{unit}
+
+\end{enumerate}
+\clearpage  
+
+\item  \xtagf{monoid}
+
+\begin{tabbing}
+\ptn Pivotal att.: \xattr{type} =
+            \xval{unit}$|$\xval{free}$|$\xval{product}  \tagsp   \token   \req
+\end{tabbing}
+
+\begin{enumerate}
+
+\item  \xattr{type} = \xval{unit}
+
+\smallskip
+This type means 'no monoid' and gives the possibility of describing
+     within the format graphs valued by numerical semirings only.
+
+\begin{tabbing}
+\xtagf{monoid type=unit}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Constraint: 
+\= not allowed in  \=\xtagf{semiring type=series}  (\cf 2.2)\\
+\>\>   nor in \'\xtagf{monoid type=product}  (\cf 3.3)\\
+\end{tabbing}
+
+\item  \xattr{type} = \xval{free}
+
+\smallskip
+\begin{tabbing}
+\ptn Pivotal att.:\= \ \ \ \ \xattr{genDescrip} \= = \xval{enum}$|$\xval{range}$|$\xval{set}
+                            \tagsp \=\token   \req \kill 
+\ptn Pivotal att.: 
+\>\> \xattr{genKind} \'= \xval{simple}$|$\xval{tuple} 
+\> \token   \req\\
+
+\ptn Pivotal att.: 
+\>\> \xattr{genDescrip} \'= \xval{enum}$|$\xval{range}$|$\xval{set}
+                        \>\token   \req  
+\end{tabbing}
+
+
+This attribute \xattr{genDescrip} is put for further development.
+         No alternative value is described here.
+
+         \smallskip
+\begin{enumerate}
+
+\item  \xattr{genKind} = \xval{simple}
+
+\smallskip
+\begin{tabbing}
+\xtag{monoid  type=free  genKind=simple  genDescrip='enum'  genSort=''}      \\[\taglnskp]
+\tagindent\xtagf{writingData}\tagsp \=1+ \occ \=\opt \kill
+\tagindent\xtagf{writingData} \> \> \opt\\[\taglnskp]
+\tagindent\xtagf{monGen} \>  1+ \occ \>\req \\[\taglnskp]
+\xftag{monoid}
+\end{tabbing}
+% (\xattr{genDescrip} = \xval{enum})
+
+\smallskip
+\begin{tabbing}
+\ptn Att.: \xattr{genSort} =
+    \xval{letter}$|$\xval{digit}$|$\xval{alphanum}$|$\xval{integer} 
+    \tagsp \token \req \\
+
+\ptn Tag  \xtagf{writingData  identitySymbol=''}  \\
+\tagindent \xattr{identitySymbol} = ' ' \tagsp \strng \\ Tells how the
+                                        identity of the monoid should
+                                        be written when output (\eg
+                                        in expressions)
+                                    \end{tabbing}
+
+                                    \smallskip
+\item  \xattr{genKind} = \xval{tuple}
+
+\smallskip
+\begin{tabbing}
+\xtag{monoid  type=free  genKind=tuple  genDim=''   genDescrip='enum'}      \\[\taglnskp]
+\tagindent\tagindent
+   \xtagf{genCompSort}\tagsp\=\=\xval{"genDim"}\=\occ \=\req \kill
+\tagindent\xtagf{writingData}\> \> \> \>\opt\\[\taglnskp]
+\tagindent\xtag{genSort}\> \> \>\oneocc \>\req \\[\taglnskp]
+\tagindent\tagindent\xtagf{genCompSort}\> \>\>\xval{"genDim"} \' \occ \>\req \\[\taglnskp]
+\tagindent\xftag{genSort}\\[\taglnskp]
+\tagindent\xtagf{monGen} \> \> \> 1+ \'\occ  \>\req \\[\taglnskp]
+\xftag{monoid}
+\end{tabbing}
+%  (\xattr{genDescrip} = \xval{enum})
+
+\smallskip
+\begin{tabbing}
+\ptn Att.: \xattr{genDim} = ' '   \tagsp   integer strictly larger 
+than 1, \req\\
+
+\ptn Tag \xtagf{genSort}       holds the \xval{"genDim"}   
+\xtagf{genCompSort} tags\\
+
+\ptn Tag \xtagf{genCompSort value=''}  \\
+\tagindent \xattr{value} = ' ' \tagsp\= has the same role as the attribute  
+\xattr{genSort} in  3.2.1\\
+\>       for the corresponding coordinate of the monoid generator\\
+\>       and can take the same token values.
+\end{tabbing}
+
+\end{enumerate}
+
+\smallskip
+\item  \xattr{type} = \xval{product}
+
+\begin{tabbing}
+\xtag{monoid  type=product   prodDim=''}      \\[\taglnskp]
+\tagindent\xtagf{writingData}\tagsp\=\xval{"prodDim"} \= \occ \= \req \kill
+\tagindent\xtagf{writingData} \> \> \> \opt\\[\taglnskp]
+\tagindent\xtagf{monoid}\> \> \xval{"prodDim"} \' \occ \>\req \\[\taglnskp]
+\xftag{monoid}
+\end{tabbing}
+
+\smallskip
+\begin{tabbing}
+\ptn Att.: \xattr{prodDim} = ' '   \tagsp   integer strictly larger 
+than 1, \req\\
+~\\
+\trt Constraint: no children  \xtagf{monoid} can be of \xattr{type} = \xval{unit}
+\end{tabbing}
+
+\end{enumerate}
+
+ 
+
+\item \xtagf{monGen}
+
+Describes a monoid generator for a free monoid.\\
+Its form will depend on the pivotal attribute  \xattr{genKind}.\\
+(The only case considered here is when  \xattr{genDescrip} = \xval{enum}.)
+
+\begin{enumerate}
+
+\item  \xattr{genKind} = \xval{simple}
+
+\begin{tabbing}
+\xtagf{monGen  value=''}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \xattr{value} \tagsp must be consistent with \xattr{genSort} \req
+\end{tabbing}
+
+\item  \xattr{genKind} = \xval{tuple}
+
+\begin{tabbing}
+\xtag{monGen} \\[\taglnskp]
+\tagindent\xtagf{monCompGen}\tagsp\xval{"genDim"} \occ \req \\[\taglnskp]
+\xftag{monGen}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Tag \xtagf{monCompGen  value=''}
+\end{tabbing}
+
+\trt Constraint: each \xattr{value} must be consistent with the
+corresponding \xattr{genCompSort}
+
+\end{enumerate}
+
+\end{enumerate}
+\setcounter{enumitemp}{\value{enumi}}
+
+\newpage 
+\subsection{The rational (regular) expressions}
+
+\begin{enumerate}
+\addtocounter{enumi}{\value{enumitemp}}
+
+\item \xtagf{regExp}
+
+\begin{tabbing}
+\xtag{regExp name=""}      \\[\taglnskp]
+\tagindent\xtagf{typedRegExp}\tagsp\=\oneocc \=\req\kill
+\tagindent\xtagf{valueType}   \>\oneocc \>\req \\[\taglnskp]
+\tagindent\xtagf{typedRegExp} \>\oneocc \>\req \\[\taglnskp]
+\xftag{regExp}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \xattr{name}= ' ' \tagsp  \strng   \opt
+\end{tabbing}
+
+\trt Constraint: the  \xtagf{monoid} cannot be of \xattr{type} = \xval{unit}
+
+\trt    At this stage, one could think of a  \xtagf{writingData}  tag which would contains
+    writing options for the expressions: a dot or nothing for the product,
+    delimitors for the weight, etc.
+
+\smallskip
+\item \xtagf{typedRegExp}
+
+\begin{tabbing}
+\xtag{typedRegExp}      \\[\taglnskp]
+\tagindent\BTRE \tagsp  plays the role of a non terminal in a grammar.\\[\taglnskp]
+\xftag{typedRegExp}
+\end{tabbing}
+
+\begin{tabbing}
+\BTRE =  \=\xtagf{sum}$|$\xtagf{product}$|$\xtagf{star}$|$\\
+         \>\xtagf{rightExtMul}$|$\xtagf{leftExtMul}$|$\\
+         \>\xtagf{zero}$|$\xtagf{one}$|$\xtagf{monElmt}
+\end{tabbing}
+
+\item \xtagf{sum}
+
+\begin{tabbing}
+\xtag{sum}\\[\taglnskp]
+\tagindent\BTRE\\[\taglnskp]
+\tagindent\BTRE\\[\taglnskp]
+\xftag{sum}
+\end{tabbing}
+
+
+\item \xtagf{product}
+
+\begin{tabbing}
+\xtag{product}\\[\taglnskp]
+\tagindent\BTRE\\[\taglnskp]
+\tagindent\BTRE\\[\taglnskp]
+\xftag{product}
+\end{tabbing}
+
+
+\item \xtagf{star}
+
+\begin{tabbing}
+\xtag{star}\\[\taglnskp]
+\tagindent\BTRE\\[\taglnskp]
+\xftag{star}
+\end{tabbing}
+
+
+\item \xtagf{rightExtMul} or \xtagf{leftExtMul}
+
+\begin{tabbing}
+\xtag{xxxExtMul}\\[\taglnskp]
+\tagindent\xtagf{weight}\\[\taglnskp]
+\tagindent\BTRE\\[\taglnskp]
+\xftag{xxxExtMul}
+\end{tabbing}
+
+
+\item \xtagf{zero}   and   \xtagf{one}       "final" tags
+
+
+\smallskip
+\item \xtagf{monElmt}
+
+\smallskip
+Depends on the pivotal attribute \xattr{type}  of the
+\xtagf{monoid}  in the  \xtagf{valueType}.
+
+\begin{enumerate}
+
+\item   \xattr{type} = \xval{free}
+
+\begin{tabbing}
+\xtag{monElmt}\\[\taglnskp]
+\tagindent\xtagf{monGen}\tagsp    1+  \occ  \req \\[\taglnskp]
+\xftag{monElmt}
+\end{tabbing}
+
+\item \xattr{type} = \xval{product}
+
+\begin{tabbing}
+\xtag{monElmt}\\[\taglnskp]
+\tagindent\xtagf{one}$|$\xtagf{monElmt}\tagsp
+                 \xval{"prodDim"} \occ\req \\[\taglnskp]
+\xftag{monElmt}
+\end{tabbing}
+
+\end{enumerate}
+
+\smallskip
+\item \xtagf{weight}
+
+\smallskip
+Depends on the  pivotal attribute \xattr{type}  of the
+\xtagf{semiring}  in the  \xtagf{valueType}.
+
+\begin{enumerate}
+
+\item  \xattr{type} = \xval{numerical}
+
+\begin{tabbing}
+\xtagf{weight value=''}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.:  \xattr{value}= ' ' \tagsp \strng that will be interpreted
+                          according to the  attribute \xattr{set}
+\end{tabbing}
+
+\trt If  \xattr{set} =\xval{Q} ,  one can think of having 2
+integers values.
+
+\smallskip
+\item \xattr{type} = \xval{series}
+
+\begin{tabbing}
+\xtag{weight}\\[\taglnskp]
+\tagindent\BTRE  \tagsp    of the \xtagf{valueType}  defined by  \xtagf{semiring}\\[\taglnskp]
+\xftag{weight}
+\end{tabbing}
+
+\end{enumerate}
+
+\end{enumerate}
+\setcounter{enumitemp}{\value{enumi}}
+
+\newpage 
+\subsection{The automata}
+\begin{enumerate}
+\addtocounter{enumi}{\value{enumitemp}}
+
+\item  \xtagf{automaton}
+
+\begin{tabbing}
+\xtag{automaton  name=''  readingDir=''}\\[\taglnskp]
+\tagindent\xtagf{automatonStruct}\tagsp \= \oneocc \= \req    \kill
+\tagindent\xtagf{geometricData}       \>\oneocc \>\opt \\[\taglnskp]
+\tagindent \xtagf{drawingData}        \>\oneocc \> \opt\\[\taglnskp]
+\tagindent\xtagf{valueType}           \>\oneocc \> \req   \\[\taglnskp]
+\tagindent\xtagf{automatonStruct}     \>\oneocc \> \req    \\[\taglnskp]
+\xftag{automaton}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \=  \xattr{readingDir} \== ' ' \tagsp   \strng   \opt \kill
+\ptn Att.:\>\>  \xattr{name} \'= ' ' \tagsp   \strng   \opt \\
+         \>\>  \xattr{readingDir} \'= \xval{left}$|$\xval{right}
+         \tagsp \token\\   %\opt   default = \xval{left}
+
+\ptn Tag \xtagf{geometricData  x=''  y=''} \tagsp     gives relative
+origin\\
+
+\ptn Tag \xtagf{drawingData   drawingClass='' } \tagsp
+or something more complicated
+\end{tabbing}
+
+
+\item  \xtagf{automStruct}
+
+\begin{tabbing}
+\xtag{automStruct}\\[\taglnskp]
+\tagindent\xtagf{transitions}\tagsp \= \oneocc \= \req    \kill
+\tagindent\xtagf{states}      \>\oneocc \> \req\\[\taglnskp]
+\tagindent\xtagf{transitions} \>\oneocc \> \req\\[\taglnskp]
+\xftag{automStruct}
+\end{tabbing}
+
+
+\item  \xtagf{states}
+
+\begin{tabbing}
+\xtag{states}\\[\taglnskp]
+\tagindent\xtagf{state}\tagsp 0 or more  \occ \\[\taglnskp]
+\xftag{states}
+\end{tabbing}
+
+
+\item  \xtagf{state}
+
+\begin{tabbing}
+\xtag{state  id=''  name=''  key='' }\\[\taglnskp]
+\tagindent\xtagf{geometricData}\tagsp \= \oneocc \= \opt \\[\taglnskp]
+\tagindent\xtagf{drawingData}   \>\oneocc \>\opt\\[\taglnskp]
+\xftag{state}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \=  \xattr{name} \== ' ' \tagsp  \= \strng   \opt \kill
+\ptn Att.:  \>\>\xattr{id}  \' = ' '  \>\strng   \req
+                           must be unique in the whole automaton. \\
+            \>\> \xattr{name} \'= ' '  \> \strng   \opt   \\
+            \>\>\xattr{key}  \'= ' '  \> integer  \opt    may be used
+            to pass an ordering on the states. \\
+
+\ptn Tag  \xtagf{geometricData  x=''  y=''}  \tagsp   coordinates of
+the state\\
+
+\ptn Tag \xtagf{drawingData   drawingClass='' } \tagsp or something more complicated
+\end{tabbing}
+\clearpage 
+
+\item  \xtagf{transitions}
+
+\begin{tabbing}
+\xtag{transitions}\\[\taglnskp]
+\tagindent\xtagf{transition} \tagsp \= 0 or more \= \occ \kill
+\tagindent\xtagf{transition} \>0 or more \> \occ \\[\taglnskp]
+\tagindent\xtagf{initial}  \>0 or more \> \occ \\[\taglnskp]
+\tagindent\xtagf{final}    \>0 or more \> \occ \\[\taglnskp]
+\xftag{transitions}
+\end{tabbing}
+
+
+
+\item  \xtagf{transition}
+
+\begin{tabbing}
+\xtag{transition  source=''  target=''}\\[\taglnskp]
+\tagindent\xtagf{geometricData}\tagsp \= \oneocc \= \opt \kill
+\tagindent\xtagf{geometricData} \>\oneocc \>\opt \\[\taglnskp]
+\tagindent\xtagf{drawingData}   \>\oneocc \>\opt\\[\taglnskp]
+\tagindent\xtagf{label}         \>\oneocc \>\req  \\[\taglnskp]
+\xftag{transition}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \=  \xattr{source} \== ' ' \tagsp  \= \strng   \opt \kill
+\ptn Att.: \>\> \xattr{source}  \' = ' '  \> \strng   \req   must be
+a valid \xattr{id}\\
+           \>\> \xattr{target}  \' = ' '  \> \strng   \req   must be
+           a valid \xattr{id}\\[.7ex]
+\ptn Tag \xtagf{geometricData  transitionType='' labelPos='' labelDist=''
+loopDir=''} \\[.5ex]
+\pushtabs
+\tagindent\= \ptn Pivotal att.: \= \xattr{transitionType} \==
+\xval{EdgeL}$|$\xval{EdgeR}$|$\xval{ArcL}$|$\xval{ArcR} \tagsp\= \token  \req  \kill
+\> \ptn Pivotal att.: \>\xattr{transitionType} \>=
+\xval{EdgeL}$|$\xval{EdgeR}$|$\xval{ArcL}$|$\xval{ArcR}
+\> \token  \req\\
+\>\>\>\tagsp\xattr{source} must be different from \xattr{target}\\
+             \>\>\xattr{transitionType} \> = \xval{Loop}  \tagsp
+             \xattr{source} must be equal to  \xattr{target} \\[.5ex]
+
+\>   \ptn Att.: \>\>\xattr{loopDir}\' =
+\xval{N}$|$\xval{S}$|$\xval{E}$|$\xval{W}$|$%
+\xval{NE}$|$\xval{NW}$|$\xval{SE}$|$\xval{SW}
+\token \req  \\
+\>\>\>\tagsp or integer between 0 and 360   (\xval{E}~0) \\
+\>\>\>\tagsp but only if  \xattr{transitionType} = \xval{Loop}\\
+\>\>\> \xattr{labelPos}\'= ' '   float   \opt\\
+\>\>\> \xattr{labelDist}\'= ' '   float    \opt\\[.7ex]
+
+\poptabs
+\ptn Tag \xtagf{drawingData   drawingClass='' }  or something more complicated
+\end{tabbing}
+
+
+\item  \xtagf{initial}
+
+\begin{tabbing}
+\xtag{initial  state=''}\\[\taglnskp]
+\tagindent\xtagf{geometricData}\tagsp \= \oneocc \= \opt \kill
+\tagindent\xtagf{geometricData} \>\oneocc \>\opt \\[\taglnskp]
+\tagindent\xtagf{drawingData}   \>\oneocc \>\opt\\[\taglnskp]
+\tagindent\xtagf{label}         \>\oneocc \>\req  \\[\taglnskp]
+\xftag{initial}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \xattr{state}  = ' '  \tagsp \strng   \req   must be a valid \xattr{id}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Tag \xtagf{geometricData  initialDir='' labelPos=''
+labelDist=''} \\[.5ex]
+\tagindent (\cf 19)
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Tag \xtagf{drawingData   drawingClass='' }  or something more complicated
+\end{tabbing}
+
+It is assumed that initial states are marked with an incoming arrow.
+
+\smallskip\smallskip
+\item  \xtagf{final}
+
+\begin{tabbing}
+\xtag{final  state=''}\\[\taglnskp]
+\tagindent\xtagf{geometricData}\tagsp \= \oneocc \= \opt \kill
+\tagindent\xtagf{geometricData} \>\oneocc \>\opt \\[\taglnskp]
+\tagindent\xtagf{drawingData}   \>\oneocc \>\opt\\[\taglnskp]
+\tagindent\xtagf{label}         \>\oneocc \>\req  \\[\taglnskp]
+\xftag{final}
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Att.: \xattr{state}  = ' '  \tagsp \strng   \req   must be a valid \xattr{id}
+\end{tabbing}
+
+\begin{tabbing}
+    \ptn Tag \xtagf{geometricData  finalMod='' finalDir='' 
+    labelPos='' labelDist=''}\\[.5ex] 
+
+\tagindent\= \ptn Pivotal att.: \= \xattr{finalMod} \==
+\xval{circle}$|$\xval{arrow} \tagsp\= \token  \req  \\
+\tagindent \ptn  Other att: \ \cf 19.
+\end{tabbing}
+
+\begin{tabbing}
+\ptn Tag \xtagf{drawingData   drawingClass='' }  or something more complicated
+\end{tabbing}
+
+\smallskip\smallskip
+\item \xtagf{label}
+
+\begin{tabbing}
+\xtag{label}\\[\taglnskp]
+\tagindent\BTRE       \\[\taglnskp]
+\xftag{label}
+\end{tabbing}
+
+
+
+\end{enumerate}
+
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+\endinput

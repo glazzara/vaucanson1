@@ -1,3 +1,26 @@
+2011-09-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Integrate Jacques' documentation.
+
+	* doc/manual/TAFK.tex, doc/manual/TFKD-ch0.tex,
+	doc/manual/TFKD-ch1.tex, doc/manual/TFKD-ch2-1.tex,
+	doc/manual/TFKD-ch2-2.tex, doc/manual/TFKD-ch2-3.tex,
+	doc/manual/TFKD-ch2-4.tex, doc/manual/TFKD-ch2-5.tex,
+	doc/manual/TFKD-ch2-6.tex, doc/manual/TFKD-ch2.tex,
+	doc/manual/TFKD-chA.tex, doc/manual/TFKD-chB.tex,
+	doc/manual/TFKD-chC.tex, doc/manual/TFKD-chD.tex,
+	doc/manual/TFKD-chE.tex, doc/manual/TFKD-chZ.tex,
+	doc/manual/TFKD-intro.tex, doc/manual/TFKD-title.tex,
+	doc/manual/Z6Z-1345-univ-v2.tex,
+	doc/manual/texinputs/accent_keys.tex,
+	doc/manual/texinputs/js_macros3.tex,
+	doc/manual/texinputs/js_symboles3.tex: New files.
+	* doc/manual/figures/: New directory, full of postscript
+	files.
+	* doc/manual/developer.tex, doc/manual/taf-kit-manual.tex,
+	doc/manual/vaucanswig.tex: Delete.
+	* doc/manual/Makefile: Update.
+
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Remove gag: it's a duplicate of maxblocka.

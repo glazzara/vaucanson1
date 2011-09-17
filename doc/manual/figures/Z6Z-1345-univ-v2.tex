@@ -1,0 +1,154 @@
+% -*- coding: mac-roman -*-
+%%%%%%%%%%%%%% Z6Z-1345-univ-v2  %%%%%%%%%%%%
+%    automate en hexagone
+%    000221 Z/6Z
+%    020730 v. V4 +
+%           accepte 1, 3, 4, ou 5
+%           automate universel du prŽcŽdent
+%    060830  version Vaucanson-G
+%           + nouveau nom (Z6-1345-univ-v1) plus cohŽrent 
+%           avec la fig prŽcŽdente
+%    071029  modif pour mettre les Žtats "devant" les transitions 
+%    spontanŽes
+%    071030  new positionning and new frame 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{VCPicture}{(-13,-17.8)(12,1.3)}%{(-10,-19.5)(10,2.5)}
+	%
+	\LargeState
+        \ChgStateLabelScale{0.7}
+	\renewcommand{\ArrowOnStateCoef}{1.1}
+	\SetAOS 
+	\psset{fillcolor=lightgray,fillstyle=solid,linecolor=white,%
+	        linestyle=solid,linewidth=0pt}
+	\VCPut{(-1.5,-1)}{\psellipse(-5.5,-7)(5.5,3)}%(-5,-7)(5,3)
+	%%%%%%%%%%%%%%%
+        \HideState
+	% aut A
+	\VCPut{(-7.5,-1.5)}{%0
+	\State[0]{(.5,-.5)}{0}\State[1]{(3,1)}{1}
+	\State[2]{(6,1.5)}{2}\State[3]{(9,1.5)}{3}
+	\State[4]{(12,1)}{4}\State[5]{(14.5,-.5)}{5}}
+	\Initial[n]{0}
+	\Final[n]{1}\Final[n]{3}
+	\Final[n]{4}\Final[n]{5}
+	%%%%%%%%%%%%%%%
+	% aut AB
+	\VCPut{(3,-10)}{%1.5,-11
+	\State[0,\!1]{(0,0)}{01}\State[1,\!2]{(0.76,2.35)}{12}
+	\State[2,\!3]{(2.76,3.81)}{23}\State[3,\!4]{(5.24,3.81)}{34}
+	\State[4,\!5]{(7.24,2.35)}{45}\State[0,\!5]{(8,0)}{05}}
+	\Initial[s]{01}\Initial[s]{05}
+	\Final[n]{34}\Final[n]{45}
+	%%%%%%%%%%%%%%%
+	% aut AD
+        \VCPut{(-1.5,-1)}{%
+        \VCPut{(-8,-7)}{%(-7,-7)
+	\State[0,\!3]{(-2,0)}{03}
+	\State[1,\!4]{(1,1.732)}{14}
+	\State[2,\!5]{(1,-1.732)}{25}}
+	%%%%%%%%%%%%%%%
+	% aut ACE
+	\VCPut{(-4,-7)}{%
+	\StateVar[0,\!2,\!4]{(0,0)}{024}
+	\StateVar[1,\!3,\!5]{(3,0)}{135}}}
+        \Initial[s]{03}\Final{14}
+	\Initial[s]{024}\Final[s]{135}
+	%%%%%%%%%%%%%%%
+	% aut ABCE
+	\VCPut{(-7.5,-14.5)}{%-16
+	\StateVar[0,\!1,\!2,\!4]{(0.5,0.5)}{0124}
+	\StateVar[1,\!2,\!3,\!5]{(3,-1.3)}{1235}
+	\StateVar[0,\!2,\!3,\!4]{(6,-2)}{0234}
+	\StateVar[1,\!3,\!4,\!5]{(9,-2)}{1345}
+	\StateVar[0,\!2,\!4,\!5]{(12,-1.3)}{0245}
+	\StateVar[0,\!1,\!3,\!5]{(14.5,0.5)}{0135}}
+	\Initial[s]{0124}\Initial[s]{0234}
+	\Initial[s]{0245}\Initial[s]{0135}
+	\Final[s]{1345}
+        \ShowState
+        %%%%%%%%%%%%%%%
+	\ChgEdgeLineWidth{2.2}
+% 	\ChgEdgeLineWidth{1.8}
+% transitions internes A
+	\EdgeL{0}{1}{}\EdgeL{1}{2}{}\EdgeL{2}{3}{}
+	\EdgeL{3}{4}{}\EdgeL{4}{5}{}
+	\EdgeL{5}{0}{}
+	% transitions internes AB
+	\EdgeL{01}{12}{}\EdgeL{12}{23}{}\EdgeL{23}{34}{}
+	\EdgeL{34}{45}{}\EdgeL{45}{05}{}
+	\EdgeL{05}{01}{}
+	% transitions internes AD
+	\ArcL{03}{14}{}\ArcL{14}{25}{}\ArcL{25}{03}{}
+	% transitions internes ACE
+	\ArcL{024}{135}{}\ArcL{135}{024}{}
+	% transitions internes ABCE
+	\EdgeL[.6]{0124}{1235}{}\EdgeL{1235}{0234}{}
+	\EdgeL{0234}{1345}{}\EdgeL{1345}{0245}{}
+	\EdgeL{0245}{0135}{}
+	\EdgeL{0135}{0124}{}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\ChgEdgeLineStyle{dotted}
+	\ChgEdgeLineWidth{1.2}
+	%% transitions A -> AB
+	\EdgeL{0}{01}{}\EdgeL{1}{12}{}\EdgeL{2}{23}{}
+	\EdgeL{3}{34}{}\EdgeL{4}{45}{}\ArcL{5}{05}{}
+	%
+	\EdgeL{0}{05}{}\EdgeL{1}{01}{}\EdgeL{2}{12}{}
+	\EdgeL{3}{23}{}\EdgeL{4}{34}{}\EdgeL{5}{45}{}
+	%% transitions A -> AD
+	\EdgeL{0}{03}{}\EdgeL{1}{14}{}\EdgeL{2}{25}{}
+	\EdgeL{3}{03}{}\EdgeL{4}{14}{}\EdgeL{5}{25}{}
+	%% transitions A -> ACE
+	\EdgeL{0}{024}{}\EdgeL{1}{135}{}\EdgeL{2}{024}{}
+	\EdgeL{3}{135}{}\EdgeL{4}{024}{}\EdgeL{5}{135}{}
+	%% transitions AB -> ABCE
+	\EdgeL{12}{1235}{}\EdgeL{23}{0234}{}\EdgeL{34}{1345}{}
+	\EdgeL{45}{0245}{}\EdgeL{05}{0135}{}\EdgeL{01}{0124}{}
+	%
+	\EdgeL{23}{1235}{}\EdgeL{34}{0234}{}\EdgeL{45}{1345}{}
+	\EdgeL{05}{0245}{}\EdgeL{01}{0135}{}\EdgeL{12}{0124}{}
+	%% transitions AD -> ABCE
+	\EdgeL{25}{1235}{}\EdgeL{03}{0234}{}\EdgeL{14}{1345}{}
+	\EdgeL{25}{0245}{}\EdgeL{03}{0135}{}\EdgeL{14}{0124}{}
+	%% transitions ACE -> ABCE
+	\EdgeL{135}{1235}{}\EdgeL{024}{0234}{}\EdgeL{135}{1345}{}
+	\EdgeL{024}{0245}{}\EdgeL{135}{0135}{}\EdgeL{024}{0124}{}
+        %%%%%%%%%%%%%%%
+        % aut A
+        \VCPut{(-7.5,-1.5)}{%0
+        \State[0]{(.5,-.5)}{0}\State[1]{(3,1)}{1}
+        \State[2]{(6,1.5)}{2}\State[3]{(9,1.5)}{3}
+        \State[4]{(12,1)}{4}\State[5]{(14.5,-.5)}{5}}
+        %%%%%%%%%%%%%%%
+        % aut AB
+        \VCPut{(3,-10)}{%1.5,-11
+        \State[0,\!1]{(0,0)}{01}\State[1,\!2]{(0.76,2.35)}{12}
+        \State[2,\!3]{(2.76,3.81)}{23}\State[3,\!4]{(5.24,3.81)}{34}
+        \State[4,\!5]{(7.24,2.35)}{45}\State[0,\!5]{(8,0)}{05}}
+        %%%%%%%%%%%%%%%
+        % aut AD
+        \VCPut{(-1.5,-1)}{%
+        \VCPut{(-8,-7)}{%(-7,-7)
+        \State[0,\!3]{(-2,0)}{03}
+        \State[1,\!4]{(1,1.732)}{14}
+        \State[2,\!5]{(1,-1.732)}{25}}
+        %%%%%%%%%%%%%%%
+        % aut ACE
+        \VCPut{(-4,-7)}{%
+        \StateVar[0,\!2,\!4]{(0,0)}{024}
+        \StateVar[1,\!3,\!5]{(3,0)}{135}}}
+        %%%%%%%%%%%%%%%
+        % aut ABCE
+        \VCPut{(-7.5,-14.5)}{%-16
+        \StateVar[0,\!1,\!2,\!4]{(0.5,0.5)}{0124}
+        \StateVar[1,\!2,\!3,\!5]{(3,-1.3)}{1235}
+        \StateVar[0,\!2,\!3,\!4]{(6,-2)}{0234}
+        \StateVar[1,\!3,\!4,\!5]{(9,-2)}{1345}
+        \StateVar[0,\!2,\!4,\!5]{(12,-1.3)}{0245}
+        \StateVar[0,\!1,\!3,\!5]{(14.5,0.5)}{0135}}
+        %%%%%%%%%%%%%%%
+	%
+\end{VCPicture}
+%
+\endinput
+%%%%%%%%%%%

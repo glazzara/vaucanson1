@@ -1,0 +1,111 @@
+
+
+\section{Weighted automata on free monoids \protect\\
+\eee over alphabets of pairs}
+\label{sec:alp-pai}
+
+
+An alphabet of pairs $A$ is defined by a pair of alphabets $B$ and $C$
+and letters in $A$ are pairs 
+$(b,c)$ with $b$ in $B$ and $c$ in $C$. $A$ is thus a subset
+of $B\x C$, $(B\x C)^{*}$ is easily identified with a subset of 
+$\Be\x\Ce$ and in this way
+some functions apply to automata over~$\Ae$ that correspond to functions on
+automata over~$\Be\x\Ce$.
+
+The alphabets of pairs are the key to several constructions on 
+automata and transducers.
+One example is when letters within an expression or an automaton are 
+\emph{indexed}; another one is the treatment of letter-to-letter 
+transducers as automata on a free monoid.
+In \tafkitv there are not many functions special to automata 
+over such alphabets. 
+There will be more in subsequent versions.
+At this stage, what is more important is the mere existence of this 
+type of automata whithin \tafkit, which already allows to demonstrate the 
+usefulness of going forth and back between the class of transducers 
+and the one of automata (\cf \figur{ltl-pai}). 
+
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}}
+
+\begin{enumerate}
+
+\item Transformations of automata
+
+\begin{enumerate}
+\item \Fctaut{first-projection}, \Fctaut{second-projection} 
+\item \Fctaut{pair-to-fmp}
+% \item \Fctaut{index-to-sequentialize}, \Fctaut{index-to-cosequentialize}
+% \item \Fctexp{linearize}
+\end{enumerate}
+
+\end{enumerate}
+
+
+\subsection{Transformations of automata}
+
+\subsubsection{\Fct{first-projection}, \Fct{second-projection}}
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{vcsn first-projection a.xml > b.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Yields an automaton over $\Be$ (resp. $\Ce$), by keeping the first 
+    (resp. second) component of every letter.
+\end{SwClTxt}%
+\IndexFct{first-projection}
+\IndexFct{second-projection}
+
+% \Comt
+% In view of alphabets of $k$-tuples (as planned in the XML format) 
+% these functions could have the following syntax:
+% 
+% \kbd{projection a.xml i}
+% 
+% where i=1 or 2.
+
+
+\subsubsection{\Fct{pair-to-fmp}}
+
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{vcsn pair-to-fmp a.xml > t.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    yields \fmpt over $\Be\x\Ce$ every letter $(b,c)$ to the 
+    corresponding element of $\Be\x\Ce$.
+\end{SwClTxt}%
+\IndexFct{pair-to-fmp}
+
+\Spec 
+A transition 
+labelled by $(a,x)(b,x)(a,y)$ becomes a transition labelled by 
+$(aba,xxy)$.
+
+% \Comt
+% One of the key tools for dealing with \emph{synchronous} transducers.
+
+% \subsubsection{\Fct{index-to-sequentialize}, \Fct{index-to-sequentialize}}
+% 
+% \begin{ComV}
+%     \tha does not exist now. reminder.
+% 
+%     \thb would be useful if one wants to play with the HECCA algorithm (cf. 
+% SL+JS's paper) within \tafkit.
+% \end{ComV}
+% 
+% \subsubsection{\Fct{linearize}}
+% 
+% \begin{ComV}
+%     \tha does not exist now. reminder.
+% 
+%     \thb takes advantage of the existence of the alphabet of pairs and opens the 
+% possibility of a classical construction of automata from expressions 
+% (so-called Berry-Sethi construction)
+% \end{ComV}
+% 
+\endinput

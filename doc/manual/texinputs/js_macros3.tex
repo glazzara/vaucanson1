@@ -1,0 +1,1327 @@
+% -*- coding: mac-roman -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                           %
+%                  js_macros3.tex                           %
+%                                                           %
+% Remise à plat, et en ordre, du fichier  js_macros3.tex    %
+%                                                           %
+% Doit permettre la paramétrisation des symboles d'alphabet %
+%                                                           %
+% 070328                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%% 030120  Mise \`a plat compl\`ete %%%%
+% % 030203
+% %
+% %%%% operateur math %(Paul Gastin) (mod. js 941031; 970919)
+% % Grace a \math, on peut, mais il n'est pas necessaire d'utiliser $$.
+% % Par exemple, $\N$ et \N donneront (presque) la meme chose.
+% % En mode LR, laisse un blanc apres; mathnosp supprime ce blanc
+% % mod 991211 utilisation de \xspace pour supprimer l'interet de
+% % \mathnosp; de toute facon, je n'utilise plus \math
+% \def\math#1{\ifmmode #1\else \mbox{$#1$}\xspace \fi}
+% \def\mathnosp#1{\ifmmode #1\else \mbox{$#1$}\fi}
+%%%%%%%\section{intervalles}%%%%%%%%%%%%%%%%%%
+%  intervalles d'entiers (mod. 971017)
+%  mod.9904
+%  mod.070328 call to math suppressed
+\newcommand{\jsInter}[1]{\mathbf{#1}}
+\newcommand{\kinter}{\jsInter{k}}
+\newcommand{\linter}{\jsInter{l}}
+\newcommand{\hinter}{\jsInter{h}}
+%
+\newcommand{\jsTerval}[1]{[{#1}]} % 011224 supp. math
+\newcommand{\kterval}{\jsTerval{k}}
+\newcommand{\hterval}{\jsTerval{h}}
+\newcommand{\lterval}{\jsTerval{l}}
+\newcommand{\mterval}{\jsTerval{m}}
+\newcommand{\nterval}{\jsTerval{n}}
+\newcommand{\Nterval}{\jsTerval{N}}
+\newcommand{\pterval}{\jsTerval{p}}
+\newcommand{\qterval}{\jsTerval{q}}
+\newcommand{\rterval}{\jsTerval{r}}
+\newcommand{\sterval}{\jsTerval{s}}
+%
+\newcommand{\jsAvi}[1]{\scalebox{1.2}{\mathfrak{#1}}}
+\newcommand{\kAvi}{\jsAvi{k}}
+\newcommand{\aAvi}{\jsAvi{a}}
+\newcommand{\bAvi}{\jsAvi{b}}
+% % entiers sign\'es 021110 c'est le boxon y a deux sortes de
+% % lettres barr\'ees cf js_symboles.tex  \abar et \bara
+% \newcommand{\jsBar}[1]{{\bar{#1}}}
+% \newcommand{\baru}{\jsBar{1}}
+% \newcommand{\bard}{\jsBar{2}}
+% \newcommand{\bart}{\jsBar{3}}
+% \newcommand{\barq}{\jsBar{4}}
+% \newcommand{\barl}{\jsBar{l}}
+% \newcommand{\barh}{\jsBar{h}}
+%
+\newcommand{\jsCard}[1]{{\|{#1}\|}}
+\newcommand{\fracts}[2]{{\textstyle \frac{#1}{#2}}}
+%%%%%%%%%%%%%%%\section{fonctions}%%%%%%%%%%
+%  Signes diacritiques constructeurs de fonctions
+%   010104
+%
+%%% extension d'une fonction 030102
+\newcommand{\ExtnF}[1]%
+   {\overset{{\scriptscriptstyle \pmb{\smile}}}{#1}}
+\newcommand{\Extngam}{\ExtnF{\gamma}}
+% \newcommand{\jsTop}[1]{\OB{#1}^{\circ}} % pas une bonne id\'ee
+\newcommand{\jsTop}[1]{\overset{{\scriptstyle \circ}}{#1}}
+\newcommand{\Topa}{\jsTop{\alpha}}
+%%% quotient d'une fonction 990728
+\newcommand{\jsQuotF}[2]{{#1}{\pmb{/}}\!\raisebox{-.4ex}{$#2$}}
+\newcommand{\Qaf}{\jsQuotF{\alpha}{f}}
+\newcommand{\Qag}{\jsQuotF{\alpha}{g}}
+\newcommand{\Qau}{\jsQuotF{\alpha}{\unAe}}
+%%% differentielle d'une fonction 010104
+\newcommand{\DiffF}[1]%
+   {\overset{{\scriptscriptstyle \pmb{\lor}}}{#1}}
+%    {\overset{{\scriptscriptstyle \leftrightharpoons}}{#1}}
+\newcommand{\Dal}{\DiffF{\alpha}}
+%%% localisation d'une fonction 010118
+\newcommand{\LocaF}[1]%
+   {\overset{{\scriptscriptstyle \leftrightarrow}}{#1}}
+\newcommand{\Lal}{\LocaF{\alpha}}
+%
+\newcommand{\jsCrocU}[1]{\left[\rule{0pt}{2.8ex} \smash{#1}\right]}
+%%%%%%%%%%%%%%%\section{type log}%%%%%%%%%%
+%  Fonctions type log (mod. 970917)
+%        mise en sans s\'erif 990925 (pour certains)
+%        991211  pour d'autres
+\newcommand{\Dom}{\mathsf{Dom}\,}
+\renewcommand{\Im}{\mathsf{Im}\,}
+\newcommand{\Ker}{\mathsf{Ker}\,}
+% dimension 000629
+\newcommand{\jsDim}[1]{\operatorname{{\mathsf{dim}}_{#1}}}
+\newcommand{\Dim}{\jsDim{}}
+\newcommand{\DimK}{\jsDim{\K}}
+% distance 001023
+% \newcommand{\di}{{\rm d}\,}
+\newcommand{\jsDist}[2][{}]%
+%    {\operatorname{\mathbf{d}_{#1}}(#2)} corr 070313
+   {\operatorname{\mathbf{d}_{#1}}\left(#2\right)}
+\newcommand{\di}{{\operatorname{\mathbf{d}}}}
+\newcommand{\dic}{{\operatorname{\mathbf{c}}}}
+\newcommand{\distl}{{\operatorname{\mathbf{l}}}} % 000511
+\newcommand{\did}{{\operatorname{\mathsf{d}}}}
+%%% distance pr\'efixe 990801
+\newcommand{\jsDistP}[1]{\jsDist[p]{#1}}
+%%% profondeur d'une expression 010208
+\newcommand{\Dept}[1]{\operatorname{\mathsf{d}}(#1)}
+% \newcommand{\ec}{{\rm e}\,}
+\newcommand{\ec}{{\operatorname{\mathbf{e}}}}
+\newcommand{\jsval}{{\operatorname{\mathbf{v}}}}
+\newcommand{\Valu}[1]{\jsval (#1)}
+% \newcommand{\supp}{{\rm supp}\,}
+\newcommand{\supp}{\operatorname{{\mathsf{supp}\,}}}
+% \renewcommand{\Card}{{\rm Card}\,}
+\newcommand{\Card}{{\rm Card}\,}
+\newcommand{\Pre}{{\operatorname{{\mathsf{Pre}}}}}
+\newcommand{\Suf}{{\operatorname{{\mathsf{Suf}}}}}
+\newcommand{\Fac}{{\operatorname{{\mathsf{Fac}}}}}
+\newcommand{\Conj}{{\operatorname{{\mathsf{Conj}}}}}
+\newcommand{\jsPer}{\operatorname{{\mathsf{per}}}}% 020528
+\newcommand{\Var}{{\rm Var}\,}
+\newcommand{\pgcd}{{\operatorname{pgcd}}} % supprime l'arg.
+%                                              % 981006
+%%% d\'ecalage and such modif 001114
+\newcommand{\jsdel}{\operatorname{\mathsf{del}}}
+\newcommand{\delp}[1]{\jsdel (#1)}
+\newcommand{\jsdec}{\operatorname{\mathsf{lag}}}
+\newcommand{\decp}[1]{\jsdec (#1)}
+\newcommand{\jsdiv}{\operatorname{\mathsf{lag}}}
+\newcommand{\divp}[1]{\jsdiv (#1)}
+\newcommand{\jsrang}{\operatorname{\mathsf{r}}}
+\newcommand{\Rang}[1]{\jsrang (#1)}
+%
+\newcommand{\jsRelMat}[1]{{\operatorname{\mathsf{m}}(#1)}}
+\newcommand{\arelmat}{\jsRelMat{\alpha}}
+%
+\newcommand{\jsHaut}[1]{{\operatorname{\mathsf{h}}[#1]}}
+\newcommand{\HautGen}[1]{{\operatorname{\mathsf{gsh}}[#1]}}
+%
+\newcommand{\jsEnla}[1]{{\operatorname{\mathsf{lc}}(#1)}}
+%
+\newcommand{\iEB}[1]{{\operatorname{\mathsf{i}_{\EBzi}}(#1)}}
+\newcommand{\EBC}[1]{{\operatorname{\mathsf{E}_{\BzCi}}(#1)}}
+% 000226 reprogrammation de min et max
+\renewcommand{\min}{{\operatornamewithlimits{\mathsf{min}}}}
+\renewcommand{\max}{{\operatornamewithlimits{\mathsf{max}}}}
+\renewcommand{\inf}{{\operatornamewithlimits{\mathsf{inf}}}}
+\renewcommand{\sup}{{\operatornamewithlimits{\mathsf{sup}}}}
+\renewcommand{\lim}{{\operatornamewithlimits{\mathsf{lim}}}}
+\newcommand{\limsp}{{\operatorname{\mathsf{lim}\xmd}}}
+%%%%%%%%%%%%%%%%%%%\section{\'equivalences}
+\newcommand{\ClasE}[2]{{#1}/{#2}}
+% 010105 programmation des classes
+\newcommand{\Clas}[2]{[#1]_{#2}}
+\newcommand{\Glas}[1]{[{#1}]}% 010213
+% 000831 programmation des modulo et des quotients
+\newcommand{\mmod}[1]{\e [#1]}
+\newcommand{\mmoda}{\mmod{\alpha}}
+\newcommand{\qquot}[2]{\ClasE{#1}{#2}}
+%%% congruence % 000704 %050826 \Modu supprimé
+\newcommand{\modu}[1]{\mod #1}
+% 010101 ind\'efini
+\newcommand{\Inde}{\top}
+% 030203 tranches de langages \section{tranche}
+\newcommand{\etaFH}[1]{\operatorname{\mathsf{FH}}(#1)}
+\newcommand{\etaFT}[1]{\operatorname{\mathsf{FT}}(#1)}
+\newcommand{\etaST}[1]{\operatorname{\mathsf{ST}}(#1)}
+\newcommand{\FHL}{\etaFH{L}}
+\newcommand{\FHg}{\etaFH{g}}
+\newcommand{\FTL}{\etaFT{L}}
+\newcommand{\STL}{\etaST{L}}
+\newcommand{\etaSMl}[1]{{\mathsf{F_{#1}}}}
+\newcommand{\etaSM}[2]{\operatorname{\mathsf{F_{#1}}}(#2)}
+\newcommand{\FaL}{\etaSM{\alpha}{L}}
+%%%%%%%%%%%%%%%%%%%\section{parties de mono\"\i des}
+%  Ensembles (semi-anneaux) des parties (mod. 970501)
+%
+\newcommand{\Pfrak}{\mathfrak{P}}
+%
+\newcommand{\jsPart}[1]{{\Pfrak(#1)}}
+\newcommand{\jspart}[1]{\jsPart{#1}} % compatibilit\'e
+\newcommand{\jsPartF}[1]{{\Pfrak_{\mathjsu{fin}}(#1)}}
+% \newcommand{\jsPartK}[2]{{\Pfrak_{\mathjsu{(#2)}}(#1)}}
+\newcommand{\jsPartK}[2]{{\Pfrak_{(#2)}(#1)}}
+\newcommand{\jsFin}[1]{#1_{\mathsf{f}}}
+\newcommand{\jsInf}[1]{#1_{\infty}}
+\newcommand{\tauF}{\jsFin{\tau}}
+\newcommand{\tauI}{\jsInf{\tau}}
+%
+\newcommand{\PdAe}{\jspart{\Ae}}
+\newcommand{\PcAe}{\PdAe} % compatibilit\'e
+\newcommand{\PdBe}{\jspart{\Be}}
+%\newcommand{\PdCe}{\jspart{\Ce}}
+\newcommand{\PdE}{\jspart{E}}
+\newcommand{\PdF}{\jspart{F}}
+\newcommand{\PdM}{\jspart{M}}
+\newcommand{\PcM}{\PdM} % compatibilit\'e
+\newcommand{\PdN}{\jspart{N}}
+\newcommand{\PcN}{\PdN} % compatibilit\'e
+\newcommand{\PdQ}{\jspart{Q}}
+\newcommand{\PcQ}{\PdQ} % compatibilit\'e
+\newcommand{\PdV}{\jsPart{V}}
+% Ensemble des applications 990712
+% mod 991211 sur les conseils de sylvain
+% \newcommand{\Afrak}{\mathfrak{A}}
+\newcommand{\jsRela}[1]{{\mathfrak{R}_{#1}}}
+\newcommand{\jsGSym}[1]{{\mathfrak{S}_{#1}}}
+\newcommand{\jsTran}[1]{{\mathfrak{T}_{#1}}}
+% \newcommand{\jsRela}[1]{{\mathfrak{R}(#1)}}
+% \newcommand{\jsGSym}[1]{{\mathfrak{S}(#1)}}
+\newcommand{\jsTranp}[1]{{\mathfrak{T}(#1)}}
+\newcommand{\jsAppl}[1]{{\mathfrak{A}(#1)}}
+\newcommand{\FdQ}{\jsTranp{Q}}
+\newcommand{\TcS}{\jsTran{S}}
+% Ideal (pour un ordre) engendr\'e 001102
+% pour remplacer un \WH malheureux
+\newcommand{\Idea}[1]{\mathsf{I}(#1)}
+%%% complement 981015 (requires amssymb pack.)
+\newcommand{\jsComp}[2][{}]{\complement _{#1} #2}
+% Def pour le theor EPR 990727
+%    compl\'et\'e 991215
+\newcommand{\Efrak}{\mathfrak{E}}
+\newcommand{\jsEhreN}[2]{{\Efrak_{#2}(#1)}}
+\newcommand{\jsEhreNp}[2]{{\Efrak'_{#2}(#1)}}
+\newcommand{\jsEhreNk}{{\Efrak_{k}}}
+\newcommand{\jsEhreNh}{{\Efrak_{h}}}
+\newcommand{\jsEhreNn}{{\Efrak_{n}}}
+\newcommand{\jsEhreNpk}{{\Efrak'_{k}}}
+\newcommand{\jsEhreNph}{{\Efrak'_{h}}}
+\newcommand{\Jfrak}{\mathfrak{J}}
+\newcommand{\jsJaff}[2]{{\Jfrak_{#2}(#1)}}
+\newcommand{\jsJaffp}[2]{{\Jfrak'_{#2}(#1)}}
+\newcommand{\jsJaffk}{{\Jfrak_{k}}}
+\newcommand{\jsJaffpk}{{\Jfrak'_{k}}}
+\newcommand{\jsJaffh}{{\Jfrak_{h}}}
+\newcommand{\jsJaffph}{{\Jfrak'_{h}}}
+% \newcommand{\jsEhreN}[2]{{\Efrak_{\mathjsu{#2}}(#1)}}
+% Def pour le theor Dejean-Schutz 000104
+\newcommand{\Wfrak}{\mathfrak{W}}
+\newcommand{\EggSch}[1]{{\Wfrak_{#1}}}
+\newcommand{\EggSchk}{\EggSch{k}}
+%%% Plus long prefixe commun 990727
+\newcommand{\jsPLPC}[2][{}]{\bigwedge _{#1} #2}
+\newcommand{\jsPlpc}{\pmb{\land}}
+%%%%%%%%%%%%%%%%%\section{semi-anneaux}
+% Structure 000702
+\newcommand{\StruSA}[1]{\aut{#1}}
+% Structure 091231
+\newcommand{\Stru}[1]%
+   {\left\langle \thinspace #1 \thinspace \right\rangle}
+%    unit\'es (param\'etr\'ees 000702)
+\newcommand{\ETAze}[1]{0_{#1}}
+\newcommand{\ETAun}[1]{1_{#1}}
+\newcommand{\zeK}{\ETAze{\K}}
+\newcommand{\zeL}{\ETAze{\Lb}}
+\newcommand{\zeB}{\ETAze{\B}}
+\newcommand{\unK}{\ETAun{\K}}
+\newcommand{\unL}{\ETAun{\Lb}}
+\newcommand{\unB}{\ETAun{\B}}
+\newcommand{\unT}{\ETAun{\T}}
+\newcommand{\unZ}{\ETAun{\Z}}
+%
+%%% quotients de \N 010218
+\newcommand{\NQuot}[2]{\N_{#1,#2}}
+\newcommand{\Nru}{\NQuot{r}{1}}
+\newcommand{\Nrp}{\NQuot{r}{p}}
+%   Semi-anneaux composes
+\newcommand{\x}{\! \times \!}
+% exposants
+\newcommand{\QpQ}{Q \x Q}
+\newcommand{\RpR}{\mathnosp{R \x R}}
+%
+\newcommand{\BQQ}{{{\B}^{Q \x Q}}}
+\newcommand{\BRR}{{{\B}^{R \x R}}}
+\newcommand{\BQun}{{{\B}^{Q \x 1}}}
+\newcommand{\BQu}{\BQun} % compatibilit\'e
+\newcommand{\BunQ}{{{\B}^{1 \x Q}}}
+\newcommand{\BuQ}{\BunQ} % compatibilit\'e
+%
+\newcommand{\KQQ}{{\K}^{Q \x Q}}
+\newcommand{\KRR}{{{\K}^{R \x R}}}
+\newcommand{\KunQ}{{{\K}^{1 \x Q}}}
+\newcommand{\KQun}{{{\K}^{Q \x 1}}}
+\newcommand{\KQu}{\KQun} % compatibilit\'e
+\newcommand{\KuQ}{\KunQ} % compatibilit\'e
+%
+\newcommand{\McQQ}{{{\Mc}^{Q \x Q}}}
+% centre
+\newcommand{\KCent}[1]{{#1}_{\mathsf{c}}}
+\newcommand{\Kcent}{\KCent{\K}}
+% dual 000703
+\newcommand{\Dual}[1]{{#1}^{\star}}
+\newcommand{\DDual}[1]{{#1}^{\star \star}}%000908
+\newcommand{\Orth}[1]{{#1}^{\pmb{\bot}}}
+% groupe des unit\'es 001104
+\newcommand{\Uplu}[1]{\mathsf{U}_{+}({#1})}
+%%%%%%%%%\section{s\'eries}
+% terme constant, partie propre 000911
+\newcommand{\TermCst}[1]{{\operatorname{\mathsf{c}}(#1)}}
+\newcommand{\PartProp}[1]{#1_{\mathsf{p}}}
+\newcommand{\spr}{\PartProp{s}}
+%   Semi-anneaux de series  (mod. 970501)
+%%% 070328  suppressed
+\newcommand{\SerSAnMon}[2]%
+    {#1 \langle \! \langle  #2  \rangle \! \rangle }
+\newcommand{\SerSAnMonD}[2]%
+    {\left[#1\right] \langle \! \langle  #2  \rangle \! \rangle }
+\newcommand{\SerMon}[1]%
+    {\!\langle \! \langle  #1  \rangle \! \rangle }
+\newcommand{\SD}[1]{\SerMon{#1}} % compatibilit\'e
+%
+\newcommand{\BAe}{\SerSAnMon{\B}{\Ae }}
+\newcommand{\BBe}{\SerSAnMon{\B}{\Be }}
+\newcommand{\BM}{\SerSAnMon{\B}{M}}
+\newcommand{\BN}{\SerSAnMon{\B}{N}}
+\newcommand{\BMN}{\SerSAnMon{\B}{M \x N}}
+\newcommand{\KAe}{\SerSAnMon{\K}{\Ae }}
+\newcommand{\KBe}{\SerSAnMon{\K}{\Be }}
+\newcommand{\KCe}{\SerSAnMon{\K}{\Ce }}
+\newcommand{\KA}{\KAe} % compatibilit\'e
+\newcommand{\KM}{\SerSAnMon{\K}{M}}
+\newcommand{\KcM}{\SerSAnMon{\Kcent}{M}}
+\newcommand{\KMQQ}{\KM ^{Q \x Q}}
+\newcommand{\KN}{\SerSAnMon{\K}{N}}
+\newcommand{\KcN}{\SerSAnMon{\Kcent}{N}}
+\newcommand{\KMN}{\SerSAnMon{\K}{M \x N}}
+\newcommand{\KcMN}{\SerSAnMon{\Kcent}{M \x N}}
+\newcommand{\KNeM}{\SerSAnMon{\left[\KN\right]}{M}}
+\newcommand{\KMeN}{\SerSAnMon{\left[\KM\right]}{N}}
+\newcommand{\KcNeM}{\SerSAnMon{\left[\KcN\right]}{M}}
+\newcommand{\KcMeN}{\SerSAnMon{\left[\KcM\right]}{N}}
+\newcommand{\KPMexe}{\SerSAnMon{\left[\KPM \right]}{x^{*}}}
+\newcommand{\KP}{\SerSAnMon{\K}{P}}
+\newcommand{\KcP}{\SerSAnMon{\Kcent}{P}}
+\newcommand{\KQQAe}{\SerSAnMon{\KQQ }{\Ae }}
+\newcommand{\KQQM}{\SerSAnMon{\KQQ }{M}}
+\newcommand{\Kxe}{\SerSAnMon{\K}{x^{*}}}
+\newcommand{\LbM}{\SerSAnMon{\Lb}{M}}
+\newcommand{\LbMN}{\SerSAnMon{\Lb}{M \x N}}
+\newcommand{\Nae}{\SerSAnMon{\N}{a^{*}}}
+\newcommand{\NAe}{\SerSAnMon{\N}{\Ae }}
+\newcommand{\NBe}{\SerSAnMon{\N}{\Be }}
+\newcommand{\NAeBe}{\SerSAnMon{\N}{\Ae \x \Be}}
+\newcommand{\NM}{\SerSAnMon{\N}{M}}
+\newcommand{\NN}{\SerSAnMon{\N}{N}}
+\newcommand{\NMN}{\SerSAnMon{\N}{M \x N}}
+\newcommand{\Nxe}{\SerSAnMon{\N}{x^{*}}}
+\newcommand{\Naexe}{\SerSAnMon{\N}{a\begin{property}
+^{*} \x x^{*}}}
+\newcommand{\Ncae}{\SerSAnMon{\Nc}{a^{*}}}
+\newcommand{\QM}{\SerSAnMon{\Q}{M}}
+\newcommand{\QN}{\SerSAnMon{\Q}{N}}
+\newcommand{\Qcae}{\SerSAnMon{\Qc}{a^{*}}}
+\newcommand{\ZAe}{\SerSAnMon{\Z}{\Ae }}
+\newcommand{\ZA}{\ZAe} % compatibilit\'e
+%
+\newcommand{\McAe}{\SerSAnMon{\Mc}{\Ae}}
+%{{{\Mc}\!\! \ll \! \Ae \! \gg}}
+\newcommand{\McAte}{\SerSAnMon{\Mc}{\Ate}}
+% \newcommand{\McAte}{{{\Mc}\!\! \ll \! \Ate \! \gg}}
+% series sur un groupe ordonne
+% parametrisation 000319
+\newcommand{\etaWO}[1]{{#1}_{\mathsf{wo}}}
+\newcommand{\Kwog}{\SerSAnMon{\etaWO{\K}}{G}}
+\newcommand{\KwoFA}{\SerSAnMon{\etaWO{\K}}{F(\Alph)}}
+\newcommand{\KwoFB}{\SerSAnMon{\etaWO{\K}}{F(\Blph)}}
+\newcommand{\KwoFAuk}{\SerSAnMon{\etaWO{\K}}%
+                  {F(\Alph_{1})\x \cdots \x F(\Alph_{k})}}
+\newcommand{\KwoFAdk}{\SerSAnMon{\etaWO{\K}}%
+                  {F(\Alph_{2})\x \cdots \x F(\Alph_{k})}}
+\newcommand{\Kmog}{\SerSAnMon{{\K}_{\mathsf{m}}}{G}}
+\newcommand{\Pwog}{\SerSAnMon{\etaWO{\P}}{G}}
+\newcommand{\Qwog}{\SerSAnMon{\etaWO{\Q}}{G}}
+\newcommand{\QwoZ}{\SerSAnMon{\etaWO{\Q}}{\Z}}
+\newcommand{\Qwofa}{\SerSAnMon{\etaWO{\Q}}{F(\Alph)}}
+%
+\newcommand{\KD}[1]{\SerSAnMon{\K}{#1}}
+% Transformation d'Harju Karhumaki 001103
+\newcommand{\HKx}[1]{{#1}^{\mathsf{(x)}}}
+%%%%%%%%\section{polynomes}
+%   Semi-anneaux de polynomes
+%
+\newcommand{\PolSAnMon}[2]%
+    {{#1 \langle  #2 \rangle }}
+\newcommand{\PolMon}[1]%
+    {{\!\langle  #1 \rangle }}
+\newcommand{\SP}[1]{\PolMon{#1}}
+%
+\newcommand{\KPA}{\PolSAnMon{\K}{\Ae}}
+\newcommand{\KPBe}{\PolSAnMon{\K}{\Be}}
+\newcommand{\KPM}{\PolSAnMon{\K}{M}}
+\newcommand{\KPN}{\PolSAnMon{\K}{N}}
+\newcommand{\KcPN}{\PolSAnMon{\Kcent}{N}}
+\newcommand{\KPMN}{\PolSAnMon{\K}{M\x N}}
+\newcommand{\KcPMN}{\PolSAnMon{\Kcent}{M\x N}}
+\newcommand{\KPNeM}{\PolSAnMon{\left[\KPN\right]}{M}}
+\newcommand{\KPMeN}{\PolSAnMon{\left[\KPM\right]}{N}}
+\newcommand{\ZPA}{\PolSAnMon{\Z}{\Ae }}
+\newcommand{\NPae}{\PolSAnMon{\N}{a^{*}}}
+\newcommand{\NPxe}{\PolSAnMon{\N}{x^{*}}}
+%
+\newcommand{\KPD}[1]{\PolSAnMon{\K}{#1}}
+%%% new version 021009
+\newsavebox{\LeftBraket}
+\savebox{\LeftBraket}{\scalebox{0.7 1.2}{$<$}}
+\newsavebox{\RightBraket}
+\savebox{\RightBraket}{\scalebox{0.7 1.2}{$>$}}
+\newcommand{\bra}[1]{\hbox{}\usebox{\LeftBraket}%
+                           #1\usebox{\RightBraket}\hbox{}}
+%
+\newcommand{\Hank}[1]{H^{({\textstyle{#1}})}}
+\newcommand{\Hks}{\Hank{s}}
+%%%%%%%%%%%%%%%%%%\section{parties rationnelles}
+%   Familles de parties rationnelles
+%
+\newcommand{\Fin}{\mathrm{Fin}\,}
+\newcommand{\Rec}{\mathrm{Rec}\,}
+\newcommand{\rec}{\mathrm{Rec}\,} % pour rendre coh\'erentes toutes les notations
+\newcommand{\Rat}{\mathrm{Rat}\,}
+\newcommand{\rat}{\mathrm{Rat}\,} % pour rendre coh\'erentes toutes les notations
+\newcommand{\Rna}{\mathrm{Rna}\,}
+\newcommand{\DRat}{\mathrm{DRat}\,}
+\newcommand{\DpRat}{\mathrm{D'Rat}\,}
+\newcommand{\PRat}{\mathrm{PRat}\,}
+\newcommand{\URat}{\mathrm{URat}\,}
+\newcommand{\SYn}{\mathrm{Syn}\,}
+% \newcommand{\bldRat}{\mathrm{bld-}\Rat}
+\newcommand{\bldRat}{\Rat_{\!\!\mathsf{bld}}\,}
+%
+\newcommand{\Find}{{\Fin _2}}
+\newcommand{\Recd}{{\Rec _2}}
+\newcommand{\Ratd}{{\Rat _2}}
+\newcommand{\bldRatd}{{{\rm bld-Rat}\, _2}}
+\newcommand{\DRatd}{{\DRat _2}}
+\newcommand{\DpRatd}{{\DpRat _2}}
+\newcommand{\Recn}{{\Rec _n}}
+\newcommand{\Ratn}{{\Rat _n}}
+\newcommand{\DRatn}{{\DRat _n}}
+\newcommand{\DpRatn}{{\DpRat _n}}
+%
+\newcommand{\recc}{{\mathrm{Rec}_2}}   %%%
+\newcommand{\rr}{{\mathrm{Rat}_2}}     % sacrifices \`a
+\newcommand{\drr}{{\mathrm{DRat}_2}}   % la compatibilit\'e
+\newcommand{\drrr}{{\mathrm{D'Rat}_2}} %%%
+%
+\newcommand{\NRat}{\N \Rat}
+\newcommand{\KRat}{\K \Rat}
+\newcommand{\BRat}{\B \Rat}
+\newcommand{\KRec}{\K \Rec}
+\newcommand{\LRec}{\Lb \Rec}
+%
+\newcommand{\recA}{{{\Rec \Ae}}}
+\newcommand{\recB}{{{\Rec \Be}}}
+\newcommand{\recC}{{{\Rec \Ce}}}
+\newcommand{\ratA}{{{\Rat \Ae}}}
+\newcommand{\ratB}{{{\Rat \Be}}}
+\newcommand{\ratC}{{{\Rat \Ce}}}
+\newcommand{\RecA}{\Rec \Ae}
+\newcommand{\RecB}{{{\Rec \Be}}}
+\newcommand{\RecC}{{{\Rec \Ce}}}
+\newcommand{\RatA}{{{\Rat \Ae}}}
+\newcommand{\RatB}{{{\Rat \Be}}}
+\newcommand{\RatC}{{{\Rat \Ce}}}
+\newcommand{\NRata}{{{\N \Rat \Ae}}}
+\newcommand{\PRatA}{{{\PRat \Ae}}}
+%\newcommand{\nrata}{{{\N}{\rm Rat}\,\Ae}}
+\newcommand{\NRatb}{{{\N \Rat \Be}}}
+\newcommand{\Ratbqq}{{(\Rat \Be)^{Q \x Q}}}
+\newcommand{\Ratcrr}{{(\Rat \Ce)^{R \x R}}}
+\newcommand{\NRatuk}{{{\N \Rat (A_1^* \x \cdots \x A_k^*)}}}
+\newcommand{\NRatdk}{{{\N \Rat (A_2^* \x \cdots \x A_k^*)}}}
+\newcommand{\RatABe}{{{\Rat \ABe}}}
+\newcommand{\ratab}{{{\Rat \ABe}}}
+\newcommand{\RecABe}{{{\Rec \ABe}}}
+\newcommand{\recab}{{{\Rec \ABe}}}
+\newcommand{\dratab}{{{\DRat \ABe}}}
+\newcommand{\recac}{{{\Rec (\Ae \x \Ce)}}}
+\newcommand{\ratac}{{{\Rat (\Ae \x \Ce)}}}
+\newcommand{\dratac}{{{\DRat (\Ae \x \Ce)}}}
+%
+\newcommand{\utheta}{{U_{\theta }}}
+% \newcommand{\umu}{{U_{\mu }}}
+\newcommand{\uthetab}{{\OL{U_{\theta }}}}
+\newcommand{\umub}{{\OL{U_{\mu }}}}
+\newcommand{\vtheta}{{V_{\theta }}}
+\newcommand{\vmu}{{V_{\mu }}}
+\newcommand{\vthetab}{{\OL{V_{\theta }}}}
+\newcommand{\vmub}{{\OL{V_{\mu }}}}
+%
+%%%%%% \section{repr\'esentation}
+% representations
+%
+\newcommand{\lmn}{{(\lambda , \mu , \nu )}}
+\newcommand{\lmnp }{{(\lambda ', \mu ', \nu ')}}
+\newcommand{\lmnv}[1]{{(\lambda _{#1}, \mu _{#1}, \nu _{#1})}}
+\newcommand{\lmnpv}[1]{{(\lambda' _{#1}, \mu' _{#1}, \nu' _{#1})}}
+\newcommand{\lmnu}{{(\lambda _1, \mu _1, \nu _1)}}
+\newcommand{\lmnd}{{(\lambda _2, \mu _2, \nu _2)}}
+\newcommand{\lmmn}{{\lambda \cdot  m\mu \cdot  \nu }}
+\newcommand{\lnmn}{{(\lambda \cdot  n\mu \cdot  \nu )}}
+\newcommand{\lfmn}{\lambda \cdot  f\mu \cdot  \nu } % mod. 000601
+\newcommand{\lgmn}{{(\lambda \cdot  g\mu \cdot  \nu )}}
+%
+\newcommand{\lmnpd}{{({\lambda'} _2, {\mu'} _2, {\nu'} _2)}}
+\newcommand{\ekxd}{{(\eta _2,\kappa _2,\xi _2)}}
+\newcommand{\ekxpd}{{({\eta'} _2,{\kappa'} _2,{\xi'} _2)}}
+\newcommand{\cppd}{{(\chi _2,\pi _2,\psi _2)}}
+\newcommand{\cpppd}{{({\chi'} _2,{\pi'} _2,{\psi'} _2)}}
+%
+\newcommand{\ekz}{{(\eta ,\kappa ,\zeta )}}
+\newcommand{\epkpzp}{{(\eta ' ,\kappa ' ,\zeta ' )}}
+\newcommand{\ekxv}[1]{{(\eta _{#1},\kappa _{#1},\xi _{#1})}}
+\newcommand{\efkz}{{(\eta \cdot f\kappa \cdot \zeta )}}
+\newcommand{\lkz}{{(\lambda ,\kappa ,\zeta )}}
+\newcommand{\ekx}{{(\eta ,\kappa ,\xi )}}
+\newcommand{\ekc}{{(\eta ,\kappa , \chi )}}
+\newcommand{\ekxp}{{(\eta' ,\kappa' ,\xi' )}}
+\newcommand{\ekxu}{{(\eta _1,\kappa _1,\xi _1)}}
+\newcommand{\zso}{{(\zeta ,\sigma ,\omega )}}
+\newcommand{\zpo}{{(\zeta , \pi ,\omega )}}
+\newcommand{\zsop}{{(\zeta' ,\sigma' ,\omega' )}}
+\newcommand{\zsou}{{(\zeta _{1} ,\sigma _{1} ,\omega _{1} )}}
+\newcommand{\esx}{{(\eta ,\sigma ,\xi )}}
+\newcommand{\esxp}{{(\eta' ,\sigma' ,\xi' )}}
+%
+\newcommand{\cpp}{{(\chi ,\pi ,\psi )}}
+\newcommand{\cppu}{{(\chi _1,\pi _1,\psi _1)}}
+\newcommand{\cfpp}{{(\chi \cdot  f\pi \cdot  \psi )}}
+%
+% representation du (co-)revetement de schutz
+\newcommand{\jscol}[1]{| #1 |}
+\newcommand{\jsrow}[1]{\underline{\overline{#1}}}
+% ???
+\newcommand{\jsbin}[2]{{\mathrm{C}_{#1}^{#2}}}
+\newcommand{\TS}{\theta\xmd\sigma}
+\newcommand{\TSC}{\widehat{\theta\xmd\sigma}}
+\newcommand{\RED}{{\mapsto }}
+\newcommand{\REDS}{{\stackrel{\star}{\mapsto}}}
+\newcommand{\doubleslash}{{/ \! \! \! /}}
+% pour matrices prefixes
+%   param\'etrisation 010129
+\newcommand{\jspbul}{\, \bullet}% compatibilit\'e
+% \newcommand{\mpbul}{m_{p \jsSumLigMat }}
+% \newcommand{\Mpbul}{M_{p \jsSumLigMat }}
+\newcommand{\SommLign}[2]{#1_{#2\, \bullet}}
+\newcommand{\mpbul}{\SommLign{m}{p}}
+\newcommand{\Mpbul}{\SommLign{M}{p}}
+%
+% Trace d'une matrice 000607
+\newcommand{\Trac}[1]{\mathsf{Tr}(#1)}
+%
+%%%%%% \section{mono\"\i de libre}
+%  monoides libres, monoides, elements neutres de monoides
+%  070408 param\'etrisation de l'alphabet
+\renewcommand{\Alph}{A}
+\newcommand{\Blph}{B}
+\newcommand{\Clph}{C}
+\newcommand{\Dlph}{D}
+%  990502 param\'etrisation de l'\'etoile 
+\newcommand{\jsStar}[1]{{{#1}^{*}}}
+\newcommand{\Ae}{\jsStar{\Alph}}
+\newcommand{\Be}{\jsStar{\Blph}}
+\newcommand{\Ce}{\jsStar{\Clph}}
+\newcommand{\De}{\jsStar{D}}
+\newcommand{\Xe}{\jsStar{X}}
+\newcommand{\Ye}{\jsStar{Y}}
+\newcommand{\Ze}{\jsStar{Z}}
+\newcommand{\jsPlus}[1]{{{#1}^{+}}}
+\newcommand{\Ap}{\jsPlus{\Alph}}
+\newcommand{\Bp}{\jsPlus{\Blph}}
+\newcommand{\Cp}{\jsPlus{\Clph}}
+\newcommand{\Dp}{\jsPlus{D}}
+\newcommand{\Xp}{\jsPlus{X}}
+\newcommand{\Yp}{\jsPlus{Y}}
+\newcommand{\Zp}{\jsPlus{Z}}
+\newcommand{\azu}{{\{0, 1 \}}}
+\newcommand{\azue}{\jsStar{\azu}}
+\newcommand{\alphab}{{\{ a, b \}}}
+\newcommand{\alphabe}{\jsStar{\alphab}}
+\newcommand{\AtA}{{\Alph \x \Alph}}
+\newcommand{\AtB}{{\Alph \x \Blph}}
+\newcommand{\AtC}{{\Alph \x \Clph}}
+\newcommand{\BtC}{{\Blph \x \Clph}}
+\newcommand{\AtAe}{\jsStar{(\AtA )}} % erreur corrig\'ee 990916
+\newcommand{\AtBe}{\jsStar{(\AtB )}} % idem
+\newcommand{\ABe}{{\Ae \x \Be }}
+\newcommand{\AAe}{{\Ae \x \Ae }}
+\newcommand{\BeBe}{{\Be \x \Be }}
+\newcommand{\AuAne}{\Alph_{1}^* \x \Alph_{2}^* \x \cdots \x \Alph_{n}^*}
+\newcommand{\AuAke}{\Alph_{1}^* \x \Alph_{2}^* \x \cdots \x \Alph_{k}^*}
+\newcommand{\AdAke}{\Alph_{2}^* \x \cdots \x \Alph_{k}^*}
+\newcommand{\AedBed}{{\Ae \dol \x \Be \dol}}
+\newcommand{\Ace}{{\Ae \x \Ce}}
+%%%990421 parametrisation de V(), verbum de
+\newcommand{\jsVer}[1]{{\mathrm{V}(#1)}}
+\newcommand{\va}{\jsVer{\Ae}}
+\newcommand{\vp}{\jsVer{P}}
+\newcommand{\vs}{\jsVer{S}}
+\newcommand{\vx}{\jsVer{X}}
+% alphabets avec dollar pour les relations deterministes
+%%%990421 parametrisation -- 090602 modification
+\newcommand{\dole}{\dol^{*}}
+\newcommand{\Adol}{\Alph_{\dol}}
+\newcommand{\Ad}{\Adol } %compatibilit\'e
+\newcommand{\Adole}{\Adol^{*}}
+\newcommand{\Bdol}{\Blph_{\dol}}
+\newcommand{\Bd}{\Bdol } %compatibilit\'e
+\newcommand{\Bdole}{\Bdol^{*}}
+\newcommand{\AdAde}{{\Adole \x \Adole}}
+\newcommand{\AdBde}{{\Adole \x \Bdole}}
+\newcommand{\AdBds}{\AdBde } %compatibilit\'e
+%%%%% 990502 rapatriement alphabet morse
+\newcommand{\morpoint}{\mbox{\boldmath $\cdot $}}
+\newcommand{\mortrait}{\mbox{\hspace{1pt}{\textbf{--}}\hspace{1pt}}}
+%%%%% 001114 valeur absolue de diff\'erence de longueurs
+\newcommand{\Abso}[1]{\bigl | #1\bigr |}
+%%%%%% \section{mon. commutatif libre}
+%  monoides commutatif libres
+%
+\newcommand{\jsStarCom}{\pmb{\oplus}}
+\newcommand{\jsCom}[1]{{{#1}^{\jsStarCom}}}
+\newcommand{\jsGrCom}[1]{{{#1}^{\circledcirc }}}
+\newcommand{\Amc }{\jsCom{\Alph}}
+\newcommand{\Bmc }{\jsCom{\Blph}}
+\newcommand{\Cmc }{\jsCom{\Clph}}
+\newcommand{\Pmc }{\jsCom{P}}
+\newcommand{\Nbk }{{\N^{k}}}
+% 990502 rapatriement entiers positifs
+\newcommand{\Npos}{\N_{*}}
+%
+% produit de monoides (relations synchronis\'ees)
+\newcommand{\dff}{{(\Ae \x \unBe ) \cup (\unAe \x \Be )}}
+\newcommand{\dflk}{{(\Alph^{\jsleq k} \x \unBe ) \cup
+    (\unAe \x \Blph^{\jsleq k})}}
+\newcommand{\dfk}{{(\Alph^{k} \x \unBe ) \cup (\unAe \x \Blph^{k})}}
+\newcommand{\Dfk}{{{\mathrm{Diff}_{k}}\,}}
+\newcommand{\Dfi}{{{\mathrm{Diff}_{i}}}}
+\newcommand{\Dfrat}{{{\mathrm{Diff}_{\mathsf{rat}}}\,}}
+\newcommand{\Dfiek}{{{\mathrm{Diff}_{\jsleq k}}}}
+\newcommand{\Synm}[1]{{\WT{#1}}}
+\newcommand{\Syn}{\mathrm{Syn}}
+\newcommand{\Synd}{\mathrm{Syn}_{2}}
+\newcommand{\syns}{\Synd}% pour compatibilit\'e
+% \newcommand{\syns}{\mbox{$\mbox{{\rm Synch}}_2$}}
+\newcommand{\jsCont}[2]{{\mathrm{Cont}_{#1}(#2)}}
+\newcommand{\ContR}[1]{\jsCont{R}{#1}}
+% \newcommand{\Synn}{{{\mathrm{Syn}_{n}}}}
+% \newcommand{\Synu}{{{\mathrm{Syn}_{1}}}}
+% \newcommand{\Synnmu}{{{\mathrm{Syn}_{n-1}}}}
+\newcommand{\abtb}{\mbox{${\cal A} \bowtie {\cal B}$}}
+\newcommand{\abtbu}{\mbox{$({\cal A} \bowtie {\cal B})_1$}}
+\newcommand{\abtbd}{\mbox{$({\cal A} \bowtie {\cal B})_2$}}
+\newcommand{\adbtb}{\mbox{${\cal A} \db {\cal B}$}}
+%
+%%%%%% \section{groupe, groupe libre}
+%%% 000226 index
+\newcommand{\IndGro}[2]{{\pmb{[} #1 \pmb{:}  #2 \,\pmb{]}}}
+%%% 001106 commutateur
+\newcommand{\Comu}[2]{{\pmb{[} #1 \pmb{,}  #2 \,\pmb{]}}}
+%
+%%%990421 parametrisation de F(), groupe libre
+\newcommand{\jsGL}[1]{{\mathrm{F}(#1)}}
+\newcommand{\fga}{\jsGL{\Alph}}
+\newcommand{\fgb}{\jsGL{\Blph}}
+%%%010103 parametrisation du groupe libre par exposant
+% \newcommand{\GLExp}[1]{#1^{\circledast}}
+% \newcommand{\GLExp}[1]{#1^{\circ \hspace{-.9ex} \ast}}
+\newcommand{\GLExp}[1]{\jsGL{#1}}
+\newcommand{\Afg}{\GLExp{\Alph}}
+\newcommand{\Bfg}{\GLExp{\Blph}}
+% alphabets pour le groupe libre
+% 990609 parametrisation jsTil
+\newcommand{\jsTil}[1]{\widetilde{#1}}
+% \newcommand{\Atil}{\jsTil{A}} dans js_symboles, mais pas param\'etr\'e
+\newcommand{\Atileto}{\jsTil{\Alph}^{*}}
+\newcommand{\Bte}{\jsTil{\Blph}^{*}}
+\newcommand{\unAte}{1_{\Atileto}}
+\newcommand{\unFA}{1_{\fga}}
+\newcommand{\unFB}{1_{\fgb}}
+\newcommand{\unAfg}{1_{\Afg}}
+\newcommand{\unBfg}{1_{\Bfg}}
+%
+\newcommand{\deltau}{\underline{\delta}}
+\newcommand{\dyckA}{{D_{\! \! A}^{\, *}}}
+\newcommand{\dyckAp}{{D_{\! A}}}
+\newcommand{\shamA}{{P_{\! \! A}^{\, *}}}
+\newcommand{\shamAp}{{P_{\! A}}}
+% symboles pour les simplifications
+\newcommand{\Upie}{{U_{\Pi}^{\, *}}}
+\newcommand{\Upi}{U_{\ShiftInd{\Pi}}}
+\newcommand{\Tpi}{T_{\ShiftInd{\Pi}}}
+\newcommand{\Spi}{S_{\ShiftInd{\Pi}}}
+% \newcommand{\thetapi}{{\theta _{\Pi}}}
+\newcommand{\thetapi}{\theta_{\ShiftInd{\Pi}}}
+\newcommand{\etapi}{\eta_{\ShiftInd{\Pi}}}
+\newcommand{\pipi}{\pi_{\ShiftInd{\Pi}}}
+\newcommand{\iotapi}{\iota_{\ShiftInd{\Pi}}}
+\newcommand{\alphapi}{\alpha_{\ShiftInd{\Pi}}}
+\newcommand{\iotaK}{\iota_{\ShiftInd{K}}}
+\newcommand{\iotaL}{\iota_{\ShiftInd{L}}}
+\newcommand{\iotaR}{\iota_{\ShiftInd{R}}}
+\newcommand{\iotaT}{\iota_{\ShiftInd{T}}}
+\newcommand{\chiK}{\chi_{\ShiftInd{K}}}
+%
+\newcommand{\dyckrA}{{{D_{\! \! A}'}^{\, *}}} % compat article flavio
+%%%%%% \section{app. mon. lib.}
+% applications entre monoides libres
+\newcommand{\AefAe}{{\Ae \to \Ae}}
+\newcommand{\AefBe}{{\Ae \to \Be}}
+\newcommand{\AefCe}{{\Ae \to \Ce}}
+\newcommand{\BefCe}{{\Be \to \Ce}}
+\newcommand{\CefBe}{{\Ce \to \Be}}
+\newcommand{\XefYe}{{X^* \to Y^*}}
+\newcommand{\ZefAe}{{Z^* \to \Ae}}
+\newcommand{\ZefBe}{{Z^* \to \Be}}
+\newcommand{\alAB}{{\alpha \colon \Ae \to \Be}}
+\newcommand{\betBC}{{\beta \colon \Be \to \Ce}}
+\newcommand{\gamAC}{{\gamma \colon \Ae \to \Ce}}
+\newcommand{\phiZA}{{\varphi \colon Z^* \to \Ae}}
+\newcommand{\psiZB}{{\psi \colon Z^* \to \Be}}
+\newcommand{\phiza}{\phiZA} % compatibilit\'e
+\newcommand{\psizb}{\psiZB} % compatibilit\'e
+% produit avec un element neutre
+\newcommand{\AunBe}{{(A \x \{ 1_{\Be} \})}}
+\newcommand{\Aeub}{{\Ae \x \{ 1_{\Be} \}}}
+\newcommand{\unAeB}{{(\{ 1_{\Ae} \}\x B)}}
+\newcommand{\uaBe}{{\{ 1_{\Ae} \}\x \Be}}
+\newcommand{\ABgen}{{(A \x \{ 1_{\Be} \})%
+                        \cup (\{ 1_{\Ae} \}\x B)}}
+\newcommand{\unAe}{{1_{\Ae}}}
+\newcommand{\unBe}{{1_{\Be}}}
+\newcommand{\unCe}{{1_{\Ce}}}
+\newcommand{\unae}{{1_{\Ae}}}
+\newcommand{\unbe}{{1_{\Be}}}
+\newcommand{\unxe}{{1_{x^*}}}
+\newcommand{\uAe}{\unAe} % compatibilit\'e
+\newcommand{\uBe}{\unBe} % compatibilit\'e
+\newcommand{\Aub}{\AunBe} % compatibilit\'e
+\newcommand{\uaB}{\unAeB}
+%
+\newcommand{\unBde}{{1_{B_{\$}^*}}}
+\newcommand{\unAde}{{1_{A_{\$}^*}}}
+\newcommand{\AdunBde}{{A_{ \$} \x \{ 1_{B_{\$}^*} \}}}
+\newcommand{\unAdBd}{{\{ 1_{A_{\$}^*}}\} \x B_{ \$} }
+\newcommand{\uBds}{\unBde}     % compatibilit\'e
+\newcommand{\uAds}{\unAde}     % compatibilit\'e papiers
+\newcommand{\AduBds}{\AdunBde} % compatibilit\'e Maryse
+\newcommand{\uAdsBd}{\unAdBd}  % compatibilit\'e
+%%%%%% \section{monoides g\'en\'eraux}
+%  monoides g\'en\'eraux, elements neutres de monoides
+%
+\newcommand{\unM}{{1_{M}}}
+\newcommand{\unN}{{1_{N}}}
+\newcommand{\unG}{{1_{G}}}
+\newcommand{\unR}{1_{R}}
+\newcommand{\zeU}{{0_{U}}}
+\newcommand{\zeV}{{0_{V}}}
+\newcommand{\zeW}{{0_{W}}}
+\newcommand{\zeM}{{0_{M}}}
+%
+%%% sous-mono\"\i de engendr\'e % mod 000210\!\!
+\newcommand{\jsSMono}[1]{{\pmb{\langle}  #1  \,\pmb{\rangle} }}
+% \newcommand{\jsSMono}[1]{{\boldsymbol{\langle}  #1  \,\boldsymbol{\rangle} }}
+\newcommand{\ssm}[1]{\jsSMono{#1}} % pour compatibilit\'e
+%%% produit direct
+\newcommand{\MN}{{M \x N}}
+\newcommand{\MNp}{{M' \x N'}}
+\newcommand{\Mu}{{M \x 1}}
+\newcommand{\uN}{{1 \x N}}
+\newcommand{\MP}{{M \x P}}
+%
+%%%%%% \section{parties de monoides}
+\newcommand{\RecM}{{{\Rec M}}}
+\newcommand{\RecN}{{{\Rec N}}}
+%\newcommand{\recC}{{{\Rec \Ce}}}
+\newcommand{\RatM}{{{\Rat M}}}
+\newcommand{\RatN}{{{\Rat N}}}
+%\newcommand{\ratC}{{{\Rat \Ce}}}
+%\newcommand{\NRata}{{{\N \Rat \Ae}}}
+% congruences syntaxiques, ensembles de contextes, etc.
+\newcommand{\alpharel}{{\mathrel{\alpha }}}
+\newcommand{\rhoP}{\mathrel{\rhop}}
+\newcommand{\synP}{\mathrel{\sigmap}}
+\newcommand{\ConP}[1]{\mathsf{C}_{P}( #1)}
+\newcommand{\RConP}[1]{\mathsf{RC}_{P}( #1)}
+\newcommand{\RConL}[1]{\mathsf{RC}_{L}( #1)}
+\newcommand{\Synt}[1]{{M}_{\ShiftInd{#1}}}
+%
+% applications entre monoides g\'en\'eraux
+\newcommand{\MfN}{{M \to N}}
+\newcommand{\MfNp}{{M \to N'}}
+%
+\newcommand{\alMN}{{\alpha \colon M \to N}}
+%\newcommand{\betBC}{{\beta \colon \Be \to \Ce}}
+%\newcommand{\gamAC}{{\gamma \colon \Ae \to \Ce}}
+%
+% pr\'esentation de monoides
+\newcommand{\jspre}[2]{%
+   {\mbox{$\langle \thinspace #1 \thinspace ;
+   \thinspace #2 \thinspace \rangle $}}}
+%%%%%% \section{operateurs}
+% op\'erateurs et autres symboles compos\'es (970919)
+\newcommand{\compos}{\ccdot }
+% \newcommand{\xmd}{\,} transf\'er\'e dans js_symboles, avec les espaces
+\newcommand{\matmul}{\mathbin{\cdot}}
+\newcommand{\minint}{\mathbin{\overset{\cdot}{\smash{-}}}}
+% \newcommand{\minint}{\mathbin{\dot{-}}}[-.15ex]\rule{0pt}{.7ex}
+% \newcommand{\minint}{\mathbin{\raisebox{0ex}%
+%   {$\stackrel{\cdot }{-}$}}}
+\newcommand{\starcom }{\oplus }
+\newcommand{\prosyn}{\mathbin{\bowtie}}
+% op\'erateurs rationnels (020212)
+\newcommand{\plusopr}{\mathbin{\mathjsu{+}}}
+\newcommand{\prodopr}{\mathbin{\mathjsu{\cdot}}}
+\newcommand{\staropr}{\mathbin{\mathjsu{*}}}
+%%%%%%%%%%
+%%%%%% \section{reductions}
+% relations
+\newcommand{\jstrans}{\star}
+\newcommand{\FTrans}[1]{\mathrel{\overset{\jstrans}{#1}}}
+\newcommand{\FTransP}[1]{\mathrel{\overset{+}{#1}}}
+\newcommand{\Cong}[1]{\left[#1\,\right]}
+\newcommand{\EquR}{\jsSimMist{R}}
+\newcommand{\EquRe}{\mathrel{\stackrel{\jstrans}{\EquR }}}
+% r\'eductions (commandes generales)
+\newcommand{\jsRedu}{\mathrel{%
+   \, \rule{0.12ex}{1ex}\rule[0.44ex]{2.2em}{0.12ex} \,}}
+\newcommand{\jsRedd}{\mathrel{%
+   \, \rule{0.12ex}{1ex}\rule[0.44ex]{2em}{0.12ex} \,}}
+\newcommand{\jsRedt}{\mathrel{%
+   \, \rule{0.12ex}{1ex}\rule[0.44ex]{1.6em}{0.12ex} \,}}
+\newcommand{\jsDerd}{\mathrel{%
+   \, \rule[0.44ex]{2.2em}{0.12ex}\rule{0.12ex}{1ex} \,}}
+\newcommand{\jsDert}{\mathrel{%
+   \, \rule[0.44ex]{1.6em}{0.12ex}\rule{0.12ex}{1ex} \,}}
+\newcommand{\jsRedDerd}{\mathrel{%
+   \, \rule{0.12ex}{1ex}\rule[0.44ex]{2.2em}{0.12ex}\rule{0.12ex}{1ex} \,}}
+\newcommand{\jsRedDert}{\mathrel{%
+   \, \rule{0.12ex}{1ex}\rule[0.44ex]{1em}{0.12ex}\rule{0.12ex}{1ex} \,}}
+\newcommand{\jsRedDerq}{\mathrel{% incoherence pour compatibilite
+   \, \rule{0.12ex}{1ex}\rule[0.44ex]{1.6em}{0.12ex}\rule{0.12ex}{1ex} \,}}
+\newcommand{\jsSimu}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedu }{\scriptstyle #1}$}}}
+\newcommand{\jsSimd}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedd }{\scriptstyle #1}$}}}
+\newcommand{\jsSimt}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedt }{\scriptstyle #1}$}}}
+\newcommand{\jsMisd}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsDerd }{\scriptstyle #1}$}}}
+\newcommand{\jsMist}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsDert }{\scriptstyle #1}$}}}
+\newcommand{\jsSimMisd}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedDerd }{\scriptstyle #1}$}}}
+\newcommand{\jsSimMist}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedDert }{\scriptstyle #1}$}}}
+\newcommand{\jsSimMisq}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedDerq }{\scriptstyle #1}$}}}
+% calcul d'une machine 000209
+\newcommand{\CalTurA}{\mathrel{\jsSimd{\Ac}}}
+\newcommand{\CalTurAe}{\mathrel{\stackrel{\jstrans}{\CalTurA}}}
+% d\'eduction logique
+\newcommand{\dedjs}{\mathrel{%
+   \, \rule{0.12ex}{1.5ex}\rule[0.69ex]{1em}{0.12ex} \,} \ee }
+% r\'eductions de dyck
+\newcommand{\rdyckA}{\jsSimu{\Delta _{A}}}
+\newcommand{\rdyck}{\jsSimd{\Delta }}
+\newcommand{\redjs}{\jsRedt }
+\newcommand{\rdyckAe}{\mathrel{\stackrel{\jstrans}{\rdyckA }}}
+\newcommand{\rdycke}{\mathrel{\stackrel{\jstrans}{\rdyck }}}
+\newcommand{\redjse}{\mathrel{\stackrel{\jstrans}{\redjs }}}
+% r\'eductions de shamir
+\newcommand{\rshamA}{\jsSimu{\Sigma _{A}}}
+\newcommand{\rshamAe}{\mathrel{\stackrel{\jstrans}{\rshamA }}}
+% simplifications
+\newcommand{\simpi}{\jsSimt{\Pi}}
+\newcommand{\simpie}{\mathrel{\stackrel{\jstrans}{\simpi }}}
+\newcommand{\mispi}{\jsMist{\Pi }}
+\newcommand{\equpi}{\jsSimMisq{\Pi }}
+\newcommand{\equpie}{\mathrel{\stackrel{\jstrans}{\equpi }}}
+% 020805 d\'erivation parall\`ele
+\newcommand{\jsRedpar}{\mathrel{%
+   \, \rule{0.12ex}{1ex}%
+   \rule[0.34ex]{1.6em}{0.10ex}%
+   \hspace{-1.6em}%
+   \rule[0.54ex]{1.6em}{0.10ex}%
+   \,}}
+\newcommand{\jsSimpar}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedpar }{\scriptstyle #1}$}}}
+\newcommand{\simparpi}{\jsSimpar{\Pi}}
+\newcommand{\simparpie}{\mathrel{\stackrel{\jstrans}{\simparpi }}}
+\newcommand{\simparpik}[1]{\mathrel{\stackrel{#1}{\simparpi }}}
+%
+% r\'eductions de Buchi
+% modif 981227
+\newcommand{\jsRedBucu}{\mathrel{%
+   \, \rule{0.12ex}{1.2ex}%
+   \smash{\makebox[0pt]{\raisebox{-.75ex}{$\,\,\, \scriptscriptstyle \Bc $}}}%
+   \rule[0.54ex]{2.5em}{0.12ex} \,}}
+\newcommand{\jsRedBucd}{\mathrel{%
+   \, \rule{0.12ex}{1.2ex}%
+   \makebox[0pt]{\raisebox{-.75ex}{$\,\,\, \scriptscriptstyle \Bc $}}%
+   \rule[0.54ex]{2.2em}{0.12ex} \,}}
+\newcommand{\rBucK}[1]{\mathrel{\raisebox{-1.6ex}%
+  {$\stackrel{\textstyle \jsRedBucu }{\scriptstyle #1}$}}}
+\newcommand{\rBucKe}[1]{\mathrel{\stackrel{\jstrans}{\rBucK{#1}}}}
+\newcommand{\rBucKn}[2]{\mathrel{\stackrel{#2}{\rBucK{#1}}}}
+\newcommand{\rBuc}{\jsRedBucd }
+\newcommand{\rBuce}{\mathrel{\stackrel{\jstrans}{\jsRedBucd }}}
+%
+\newcommand{\REDSP}[1]{\mbox{ $ \stackrel{\star}
+{\stackrel{\textstyle \mapsto}{\scriptstyle #1} }$ }}
+%%% identit\'es rationnelle comme r\'eduction 020409
+\newcommand{\redIdRD}{\mathrel{\msp \jsSimt{\IdRD}\msp}}
+\newcommand{\redIdRI}{\mathrel{\msp \jsSimt{\IdRI}\msp}}
+\newcommand{\redIdRDe}{\mathrel{\stackrel{\jstrans}{\msp \jsSimt{\IdRD}\msp}}}
+\newcommand{\redIdRIe}{\mathrel{\stackrel{\jstrans}{\msp \jsSimt{\IdRI}\msp}}}
+%%% interieur de l'inverse
+\newcommand{\jsInvInt}[1]{\breve{#1}}
+\newcommand{\sigInt}{\jsInvInt{\sigma}}
+%%% presentation ???  981015 mod 030211
+\newcommand{\jspres}{\, ; \,}
+\newcommand{\ETAPres}[2]{\langle \thinspace #1 \thinspace ;
+                       \thinspace #2 \thinspace\rangle}
+% op\'erations
+\newcommand{\Mel}{\mathbin{\between}}
+\newcommand{\shuffle}{\mathbin{\circ \! \! \wr }}
+\newcommand{\Infil}{\mathbin{\uparrow }}
+\newcommand{\infiltration}{\mathbin{\uparrow }}
+\newcommand{\kron}{\mathbin{\circ}}
+\newcommand{\tensord}{\mathbin{\otimes}} %%% added 061202
+\newcommand{\tensor}{\mathbin{\! \otimes \!}}
+\newcommand{\tensorsmall}{\mathbin{{\scriptstyle  \otimes }}}
+% \renewcommand{\tensorsmall}%
+% {\raisebox{0.2ex}{$ \,{\scriptstyle  \otimes } \, $}} %960728
+\newcommand{\hadam}{\mathbin{\odot }}
+\newcommand{\hadamsmalld}{\mathbin{{\scriptstyle \odot }}}
+\newcommand{\hadamsmall}{\mathbin{{\scriptstyle \! \odot \!}}}
+\newcommand{\hadamsmallsmall}{\mathbin{{\scriptscriptstyle \odot }}}
+\newcommand{\plusMc}{\mathbin{\raisebox{-1ex}%
+  {$\, \stackrel{{\scriptstyle +}}{{\scriptscriptstyle \Mc}}\, $}}}
+\newcommand{\timesMc}{\mathbin{\raisebox{-1ex}%
+  {$\, \stackrel{{\scriptscriptstyle \bullet}}{{\scriptscriptstyle \Mc}}\, $}}}
+%
+%%%%%% \section{prod morphismes}
+\newcommand{\psiA}{\psi_{\ShiftInd{A}}}
+\newcommand{\psiC}{\psi_{\ShiftInd{C}}}
+\newcommand{\varphiA}{\varphi_{\ShiftInd{A}}}
+\newcommand{\varphiC}{\varphi_{\ShiftInd{C}}}
+\newcommand{\varphiCi}{\varphi_{\ShiftInd{C}}^{\scriptscriptstyle{-1}}}
+\newcommand{\varphiR}{\varphi_{\ShiftInd{R}}}
+\newcommand{\tauR}{\tau_{\ShiftInd{R}}}
+\newcommand{\psiCi}{\psi_{\ShiftInd{C}}^{\scriptscriptstyle{-1}}}
+\newcommand{\phitpsi}{{\mathop{\varphi \x \psi }}}
+\newcommand{\phiikpsi}%
+{{\varphi ^{-1}\! \compos        \iotaK \! \compos \! \psi }}
+\newcommand{\phiiotpsi}[1]%
+{{\varphi ^{-1}\! \compos        \iota _{\ShiftInd{#1}} \! \compos \! \psi }}
+\newcommand{\phiintkpsi}[1]%
+{{(#1\varphi ^{-1}\! \cap K) \psi }}
+\newcommand{\mutenskap}{\, \mu \tensorsmall \kappa }
+\newcommand{\lamtenseta}{\, \lambda \tensorsmall \eta }
+\newcommand{\nutenszet}{\, \nu \tensorsmall \zeta }
+\newcommand{\phisuppsi}{{\mathop{\varphi \lor \psi }}}
+%
+% \section{ordres}
+% \renewcommand{\leq}{\leqslant }
+\newcommand{\jsleq}{\leqslant }
+\newcommand{\jsgeq}{\geqslant }
+\newcommand{\jsless}% 001102
+   {\mathrel{\leqslant_{\!\!\!\!\scriptscriptstyle{/}}}}
+\newcommand{\jsgrea}% 020120
+   {\mathrel{\geqslant_{\!\!\!\!\scriptscriptstyle{\backslash}}}}
+%
+\newcommand{\jsleqpi}{\jsleq_{\ShiftInd{\Pi}}}
+\newcommand{\Psipi}[1]{\Psi_{\ShiftInd{\Pi}}^{{\scriptscriptstyle{(#1)}}}}
+\newcommand{\Omegapi}[1]{\Omega_{\ShiftInd{\Pi}}^{{\scriptscriptstyle{(#1)}}}}
+%
+\newcommand{\lexico}{\preccurlyeq }
+\newcommand{\lexiconeq}% 010125
+   {\preccurlyeq_{\!\!\!\!\!\scalebox{1.8 1}{\scriptscriptstyle{\pmb{/}}}}}
+\newcommand{\lexicost}{\lexiconeq}% compatibilit\'e 010125
+\newcommand{\nonlexico}{\not \preccurlyeq  }
+\newcommand{\ordnat}{\leqslant }
+\newcommand{\nonordnat}{\not \leqslant }
+\newcommand{\milit}{\sqsubseteq }
+% selection et uniformisation 010125
+% modif 070303
+% \ifenglish
+\newcommand{\jsmil}{\mathsf{rad}}
+% \fi
+% \iffrench
+% \newcommand{\jsmil}{\mathsf{mil}}
+% \fi
+\newcommand{\jslex}{\mathsf{lex}}
+\newcommand{\Mili}[1]{#1_{\jsmil}}
+\newcommand{\Lexi}[1]{#1_{\xmd \jslex}}
+\newcommand{\thetamil}{\Mili{\theta}}
+\newcommand{\thetalex}{\Lexi{\theta}}
+\newcommand{\Mlex}{\Lexi{M}}
+%  transfert de js_symboles 001107
+\newcommand{\odiveq}{\mathrel{\unlhd}}
+\newcommand{\odiv}{\mathrel{\lhd}}
+\newcommand{\jsmid}{\mathrel{\big |}}
+% \newcommand{\jsmid}{\mathrel{\mid }}
+%
+%%%%%% \section{automates}
+%   automates (modification 970919)
+%%%  mod 990114 \langle pour <
+%%%  mod 990119 supprim\'e l'espace \;
+%%%  mod 061026 supprim\'e l'appel à 
+%%%             pour Tranah \lrangle de taille variable, 
+%%%             adapté au contenu
+\newcommand{\jsAutUn}[1]%  
+   {\mbox{$\left\langle \thinspace #1 \thinspace \right\rangle $}}
+\newcommand{\aut}[1]{\jsAutUn{#1}} % pour compatibilit\'e
+\newcommand{\auta}{\jsAutUn{Q,A,E,I,T}}
+\newcommand{\autaf}{\jsAutUn{Q,A,\delta ,I,T}}
+\newcommand{\autadet}{\jsAutUn{\PdQ,A,F,\{I\},U}}
+\newcommand{\bauta}{\jsAutUn{R,A,F,J,U}}
+\newcommand{\autm}{\jsAutUn{Q,M,E,I,T}}
+\newcommand{\bautm}{\jsAutUn{R,M,F,J,U}}
+\newcommand{\autad}{\jsAutUn{Q,A,E,i,T}}
+\newcommand{\autadf}{\jsAutUn{Q,A,\delta ,i,T}}
+\newcommand{\autv}[3]{\jsAutUn{#1 , #2  , #3}}
+\newcommand{\autiet}{\jsAutUn{I, E ,T}}
+\newcommand{\autjfu}{\jsAutUn{J, F ,U}}
+% aut gauche et droit 990519
+\newcommand{\jsGSymb}{\rightsquigarrow}
+\newcommand{\jsDSymb}{\scalebox{-0.9 0.9}{\jsGSymb}}
+\newcommand{\jsAutG}[1]{\overset{\jsGSymb}{#1}}
+\newcommand{\jsAutD}[1]{\overset{\jsDSymb}{#1}}
+%  001114  transitions
+\newcommand{\Tran}[1]{\bigl ( #1\bigr )}
+%%% \'etiquette de transducteur: entr\'ee et sortie
+% pour le texte mod de la macro dans Vaucanson 010104
+\newcommand{\IOLt}[2]{#1\mid #2}
+%   2-automates
+\newcommand{\autab}{\jsAutUn{Q,A,B,E,I,T}}
+% transposition 000118 % 020223
+\newcommand{\jsTrsp}[1]{#1^{\mathsf{t}}}
+% normalisation 990524 mod 990711
+\newcommand{\jsNorm}[1]{{#1_{\mathsf{nor}}}}
+% normalisation pour morphisme 000215
+\newcommand{\NormMor}[1]{{#1_{\mathsf{n}}}}
+% \'emondation 990524
+\newcommand{\jsEmon}[1]{{#1_{\mathsf{m}}}}%\acute{e}
+% compl\'etion  991212
+\newcommand{\AutComp}[1]{{{#1}_{\mathsf{c}}}}
+% compl\'ement  020206
+\newcommand{\AutCpl}[1]{{#1}^{\mathsf{c}}}
+% complexit\'e n \'etats  020521
+\newcommand{\StatComp}[1]{\mathsf{Sc}({#1})}
+%% determinisation (modification 980417)
+% mod 990711 remplacement de \Dc
+% mod 991214 sur le modele des \jsEmon, etc.
+\newcommand{\jsdet}{\mathsf{det}}
+\newcommand{\jscod}{\mathsf{cod}}
+\newcommand{\jsDeter}[1]{{{#1}_{\jsdet}}}%
+\newcommand{\jsCodet}[1]{{{#1}_{\jscod}}}%
+\newcommand{\Acdet}{\jsDeter{\Ac}}%{{\Ac_{\jsdet }}}
+\newcommand{\Accod}{\jsCodet{\Ac}}%{{\Ac_{\jscod }}}
+\newcommand{\Acu}{{{\Ac_{1}}}}
+\newcommand{\Acudet}{\jsDeter{\Acu}}%{{{\Ac_{1}}_{\jsdet }}}
+\newcommand{\piaud}{{\pi_{\Acudet}}}
+\newcommand{\pibu}{{\pi_{\Bc_{1}}}}
+%% bouquets (modification 971016,990907)
+% 000215 passage en sans serif
+\newcommand{\jsOut}[2]{{{\mathsf{Out}}_{#1}( #2)}}
+\newcommand{\jsIn}[2]{{{\mathsf{In}}_{#1}( #2)}}
+% \newcommand{\jsOut}[2]{{{\rm Out}_{#1}( #2)}}
+% \newcommand{\jsIn}[2]{{{\rm In}_{#1}( #2)}}
+%
+\newcommand{\outa}[1]{\jsOut{\Ac}{#1}}
+\newcommand{\outat}[1]{\jsOut{\jsTrsp{\Ac}}{#1}}
+\newcommand{\outb}[1]{\jsOut{\Bc}{#1}}
+\newcommand{\outc}[1]{\jsOut{\Cc}{#1}}
+\newcommand{\outab}[1]{\jsOut{\Ac \x \Bc}{#1}}
+\newcommand{\outba}[1]{\jsOut{\Bc \x \Ac}{#1}}
+%
+\newcommand{\ina}[1]{\jsIn{\Ac}{#1}}
+\newcommand{\inb}[1]{\jsIn{\Bc}{#1}}
+\newcommand{\stara}[1]{{{\rm Star}_{\Ac}( #1)}}
+\newcommand{\costara}[1]{{{\mathrm{co-Star}}_{\Ac}( #1)}}
+%% \section{passe-present-futur} (971030)
+% 000215 passage en sans serif
+% 020712 mod sur l'indice
+\newcommand{\jsPast}[2]{{\mathsf{Past}}_{\ShiftInd{#1}}(#2)}
+\newcommand{\jsPres}[2]{{\mathsf{Pres}}_{\ShiftInd{#1}}(#2)}
+\newcommand{\jsFut}[2]{{\mathsf{Fut}}_{\ShiftInd{#1}}(#2)}
+\newcommand{\jsTrans}[2]{{\mathsf{Trans}}_{\ShiftInd{#1}}(#2)}
+%
+\newcommand{\pasta}[1]{\jsPast{\Ac}{#1}}
+\newcommand{\pastv}[1]{\jsPast{\Vc}{#1}}
+\newcommand{\presa}[1]{\jsPres{\Ac}{#1}}
+\newcommand{\futa}[1]{\jsFut{\Ac}{#1}}
+\newcommand{\futv}[1]{\jsFut{\Vc}{#1}}
+\newcommand{\transa}[1]{\jsTrans{\Ac}{#1}}
+\newcommand{\futacb}[1]{\jsFut{\Ac_{CB}}{#1}}
+%
+\newcommand{\pastuk}[1]{\jsPast{\Uc_{K}}{#1}}
+\newcommand{\futuk}[1]{\jsFut{\Uc_{K}}{#1}}
+%% automate universel (020711)
+\newcommand{\ShiftInd}[1]{\raisebox{-0.3ex}{$\scriptstyle{#1}$}}
+\newcommand{\SymbWShiftInd}[2]{#1_{\ShiftInd{#2}}}% mod 020722
+\newcommand{\RaiseExp}[1]{\raisebox{0.3ex}{$\scriptstyle{\,#1}$}}
+%
+\newcommand{\Univ}[1]{\Uc_{\ShiftInd{#1}}}
+\newcommand{\EFac}[1]{E_{\ShiftInd{#1}}}
+\newcommand{\FFac}[1]{F_{\ShiftInd{#1}}}
+\newcommand{\IFac}[1]{I_{\ShiftInd{#1}}}
+\newcommand{\QFac}[1]{Q_{\ShiftInd{#1}}}
+\newcommand{\TFac}[1]{T_{\ShiftInd{#1}}}
+\newcommand{\Univrel}[2]{\Uc_{\ShiftInd{#1}}^{{\scriptscriptstyle{(#2)}}}}
+\newcommand{\EFacrel}[2]{E_{\ShiftInd{#1}}^{{\scriptscriptstyle{(#2)}}}}
+\newcommand{\FFacrel}[2]{F_{\ShiftInd{#1}}^{{\scriptscriptstyle{(#2)}}}}
+%
+\newcommand{\Uk}{\SymbWShiftInd{\Uc}{K}}
+\newcommand{\Ek}{\SymbWShiftInd{E}{K}}
+\newcommand{\Fk}{\SymbWShiftInd{F}{K}}
+\newcommand{\Ik}{\SymbWShiftInd{I}{K}}
+\newcommand{\Qk}{\SymbWShiftInd{Q}{K}}
+\newcommand{\Tk}{\SymbWShiftInd{T}{K}}
+\newcommand{\Ekg}{\EFacrel{K}{G}}
+\newcommand{\Fkg}{\FFacrel{K}{G}}
+\newcommand{\Uka}{\Univrel{K}{A}}
+\newcommand{\Ukg}{\Univrel{K}{G}}
+\newcommand{\Eke}{E_{K}^{\raisebox{0.3ex}{$\scriptstyle{\,*}$}}}
+\newcommand{\Ekp}{E_{K}^{\raisebox{0.3ex}{$\scriptstyle{\,+}$}}}
+\newcommand{\Fke}{F_{K}^{\raisebox{0.3ex}{$\scriptstyle{\,*}$}}}
+\newcommand{\Fkp}{F_{K}^{\raisebox{0.3ex}{$\scriptstyle{\,+}$}}}
+%
+\newcommand{\Qp}{\SymbWShiftInd{Q}{P}}
+\newcommand{\rhop}{\SymbWShiftInd{\rho}{P}}
+\newcommand{\sigmap}{\SymbWShiftInd{\sigma}{P}}
+%
+\newcommand{\Expan}[1]{{#1}_{\ShiftInd{\text{\rmfamily{CB}}}}}
+\newcommand{\Acb}{\Expan{\Ac}}
+%%%%%% \section{actions}
+% action d'un mono\"\i de sur un ensemble (modif 971019)
+\newcommand{\ActMor}[1]{\overset{{\scriptscriptstyle \pmb{\lor}}}{#1}}%
+% \newcommand{\ActMor}[1]{\check{#1}}%
+\newcommand{\act}{\mathbin{\boldsymbol{\cdot}}}
+% \newcommand{\act}{\mathbin{\pmb{\cdot}}}
+\newcommand{\actseq }{\mathbin{*}}
+\newcommand{\jsAct}[1]{\mathbin{\raisebox{-1ex}{$%
+  \stackrel{\boldsymbol{\cdot}}%
+%   \stackrel{\pmb{\cdot}}%
+      {\makebox[0pt][c]{${\scriptscriptstyle \rule{0pt}{0.7ex} \smash[t]{ #1}}$}}$}
+          }}
+\newcommand{\jsActW}[1]{\mathbin{\raisebox{-1ex}{$%
+  \stackrel{\boldsymbol{\cdot}}%
+%   \stackrel{\pmb{\cdot}}%
+      {\makebox[0.8\width][c]{${\scriptscriptstyle \rule{0pt}{0.7ex} \smash[t]{ #1}}$}}$}
+          }}
+\newcommand{\actM}{\jsAct{M}}
+\newcommand{\actS}{\jsAct{S}}
+\newcommand{\actT}{\jsAct{T}}
+\newcommand{\actAccod}{\jsAct{\Accod}}
+%% fausse action (transducteur d\'eterministe) 990621
+\newcommand{\actb}{\mathbin{\raisebox{0.2ex}%
+                        {${\scriptscriptstyle \circ} $}}}
+\newcommand{\ccdot}{\actb} % pour compatibilit\'e
+% action Avance ou Retard  990802
+\newcommand{\ADzero}{\pmb{\mathsf{0}}}
+\newcommand{\ZeroAAR}{\ADzero} % pour compatibilit\'e
+% macros parametrees 991124
+\newcommand{\ADbase}[1]{H_{#1}}
+\newcommand{\ADbB}{\ADbase{B}}
+\newcommand{\ADact}[1]{\omega_{#1}}
+\newcommand{\ADaB}{\ADact{B}}
+%% automate d'une action
+\newcommand{\Ddel}{\SymbWShiftInd{\Dc}{\delta}}
+\newcommand{\DFacrel}[2]{\Dc_{\ShiftInd{#1}}^{{\scriptscriptstyle{(#2)}}}}
+\newcommand{\Ddelg}{\DFacrel{\delta}{G}}
+%% applications indicees (971030)
+\newcommand{\psiM}{{\psi _{M}}}
+\newcommand{\psiN}{{\psi _{N}}}
+\newcommand{\psiAe}{{\psi _{\Ae}}}
+%
+\newcommand{\pia}{{\pi_{\Ac}}}
+\newcommand{\piap}{{\pi_{\Ac'}}}
+\newcommand{\piad}{{\pi_{\Acdet}}}
+\newcommand{\piacd}{{\pi_{\Accod}}}
+\newcommand{\pib}{{\pi_{\Bc}}}
+%
+\newcommand{\LpA}{{L_p(\Ac)}}
+\newcommand{\LqA}{{L_q(\Ac)}}
+\newcommand{\LiA}{{L_i(\Ac)}}
+%
+\newcommand{\dil}{{\delta_{1}^{L}}}
+\newcommand{\dik}{{\delta_{1}^{K}}}
+\newcommand{\dpT}{{\delta_{p,T}}} %000521
+\newcommand{\dpt}{\dpT} %000521
+\newcommand{\dpI}{{\delta_{p,I}}} %000521
+%% param\'etrisation - mod pour trans. det. (990620)
+\newcommand{\CompAuto}[1]{{\pmb{|}{#1}\pmb{|}}}
+\newcommand{\LangAuto}[1]{{L\left({#1}\right)}}
+%%% 071110 compAuto with small space on the right
+\newcommand{\CompAutoRS}[1]{\pmb{|}{#1}\xmd\pmb{|}}
+\newcommand{\compaut}[1]{\CompAuto{#1}}  % pour compatibilit\'e
+\newcommand{\compA}{\CompAuto{\Ac}}
+\newcommand{\compB}{\CompAuto{\Bc}}
+\newcommand{\compT}{\CompAuto{\Tc}}
+\newcommand{\compautv}[3]{\CompAuto{\jsAutUn{#1 , #2  , #3 }}}
+\newcommand{\CompHBal}[1]{{\CompAuto{#1}_{\dol}}}
+\newcommand{\compAdol}{\CompHBal{\Ac}}
+\newcommand{\compTdol}{\CompHBal{\Tc}}
+\newcommand{\DCompAuto}[1]{{|{#1}|}} %????
+\newcommand{\compdaut}[1]{\DCompAuto{#1}} % pour compatibilit\'e
+\newcommand{\compdA}{\DCompAuto{\Ac}}
+%%%%%% \section{McNaugton}
+\newcommand{\mBC}[2]{{\mathjsu{E}}^{(#1)}(#2)}% _{\BzCi}
+\newcommand{\mMNY}[2]{{\mathjsu{M}}^{(#1)}_{#2}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bornedeuxlignes}[2]%
+{\mbox{$
+\renewcommand{\arraystretch}{0.5}%
+\begin{array}{c}{\scriptstyle #1}\\ {\scriptstyle #2} \end{array}
+\renewcommand{\arraystretch}{2}%
+       $}}
+% \newcommand{\bdl}[2]{\bornedeuxlignes{#1}{#2}}
+%% modif 000825
+\newcommand{\bdl}[2]{%
+\makebox%
+% [0pt]
+% [\width{%
+% \mbox{$
+% \scriptstyle #1
+% $}
+% }]%
+% [c]%
+{$ \renewcommand{\arraystretch}{0.5}%
+\begin{array}{c}{\scriptstyle #1}\\ {\scriptstyle #2} \end{array}%
+\renewcommand{\arraystretch}{2} $}}
+%
+\newcommand{\bdld}[2]{%
+   \makebox{$ \renewcommand{\arraystretch}{0.66667}%
+   \begin{array}{c}{\scriptstyle #1}\\ {\scriptstyle #2} \end{array}%
+   \renewcommand{\arraystretch}{1.5} $}}
+%%%%%% \section{chemins}
+% d\'eclaration de chemins
+\newcommand{\eqcal}{\mathrel{\; : = \; }\ }
+% 990521 version fleche extensible, merci marie-pierre
+\newcommand{\path}[1]{\xrightarrow{\ #1 \ }}
+\newcommand{\pathaut}[2]{\underset{#2}{\path{#1}}}
+% \newcommand{\path}[1]{\stackrel{#1}{\longrightarrow}}
+% \newcommand{\pathaut}[2]{\raisebox{-1.3ex}{ $ \stackrel{#1}
+% {\stackrel{\textstyle \longrightarrow}{\scriptstyle #2} }$ }}
+\newcommand{\pathl}[1]{@>{#1}>>}
+\newcommand{\pathlaut}[2]{@>{#1}>{#2}>}
+%%%%%% \section{expressions}
+\newcommand{\RatE}{\mathjsu{RatE}\,}% mod. 020212
+\newcommand{\URatE}{\mathjsu{URatE}\,}% mod. 020413
+\newcommand{\GRatE}{\mathjsu{GRatE}\,}% mod. 020413
+\newcommand{\Ratx}{\RatE}
+\newcommand{\URatx}{\URatE}
+\newcommand{\GRatx}{\GRatE}
+\newcommand{\RatEA}{\mathjsu{RatE}\,\Ae}% mod. 020430,030123
+\newcommand{\RatExp}[2]{{#1\,\mathjsu{RatE}\,#2}}
+\newcommand{\KRA}{\RatExp{\K}{\Ae}}
+\newcommand{\KREM}{\RatExp{\K}{M}}
+%   expressions (d\'ebut 000201)
+% \newcommand{\TermCst}[1]{{\operatorname{\mathsf{c}}(#1)}}
+% mise en sans serif le 000510
+%%%%%% \section{expression derivation}
+\newcommand{\ExpDer}[2][a]%
+   {{\operatorname{\frac{\partial}{\partial \mbox{$#1$}}}#2}}
+\newcommand{\ExpDerr}[2][a]%
+    {\operatorname{\frac{\partial_{\mathrm{R}}}{\partial \mbox{$#1$}}}#2}
+\newcommand{\ExpDerB}[2][a]% 020429
+   {{\operatorname{\frac{\partial '}{\partial '\mbox{$#1$}}}#2}}
+\newcommand{\NomDer}[1]{{\operatorname{bf{nd}}(#1)}}
+\newcommand{\InitDer}[1]{\operatorname{\mathrm{d}}\!\left(#1\right)}
+\newcommand{\InitDerSub}[1]{\operatorname{\mathrm{d}}\left(#1\right)}
+\newcommand{\GTermCst}[1]{\operatorname{\mathsf{c}}\left(#1\right)}
+\newcommand{\Depth}[1]{\operatorname{\mathsf{d}}(#1)}
+\newcommand{\DerTer}[2][{}]{{\mathrm{D}_{#1}}(#2)}
+\newcommand{\TruDerTer}[2][{}]{{\mathrm{TD}_{#1}}(#2)}
+\newcommand{\DerTerw}[1]{\DerTer[w]{#1}}
+\newcommand{\DerTerB}[2][{}]{{\mathrm{BD}_{#1}}(#2)}
+\newcommand{\TruDerTerB}[2][{}]{{\mathrm{TBD}_{#1}}(#2)}
+%%% complement 000103 pour expression generalis\'ee
+\newcommand{\CompExp}[1]{\OL{#1}}% malheureux! 020413
+%%%
+\newcommand{\CompExpr}[1]{{\pmb{|}{#1}\pmb{|}}}
+%
+\newcommand{\Kadd}{\oplus}
+\newcommand{\Ksum}{\bigoplus}
+\newcommand{\LitLength}{\operatorname{\ell}}
+\newcommand{\LitL}[1]{\LitLength (#1)}
+\newcommand{\VCoef}[3]{{#2}^{\scriptscriptstyle (#1)}_{#3}}
+\newcommand{\kCoef}[2][a]{{k}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\kfCoef}[2][f]{{k}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\lCoef}[2][a]{{l}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\zCoef}[2][a]{{z}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\ICoef}[2][a]{{I}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\JCoef}[2][a]{{J}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\HCoef}[2][a]{{H}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\SCoef}[2][a]{{S}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\RCoef}[2][a]{{R}^{{\scriptscriptstyle (#1)}}_{#2}}
+\newcommand{\QCoef}[2][a]{{Q}^{{\scriptscriptstyle (#1)}}_{#2}}
+%%%%%% \section{produit libre}
+%  Produits libres
+% mod et param\'etrisation 000830
+\newcommand{\ETAmun}[1]{{#1}_{\bullet}}
+\newcommand{\Mmun}{\ETAmun{M}}
+\newcommand{\Nmun}{\ETAmun{N}}
+% \newcommand{\Mmun}{{ M^\bullet }}
+% \newcommand{\Nmun}{{ N^\bullet }}
+\newcommand{\MlN}{{ M \! * \! N }}
+\newcommand{\unMlN}{1_{\MlN}}
+\newcommand{\MlNi}{{ \scriptstyle{M \! * \! N} }}
+\newcommand{\philpsi}{{ \varphi \! * \! \psi }}
+\newcommand{\MlNmun}{{ (M \! * \! N)^\bullet }}
+\newcommand{\MAT}{{ {\rm M} (A,\theta ) }}
+\newcommand{\MI}{{\rm MI}}
+\newcommand{\MF}{{\rm MF}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\endinput
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

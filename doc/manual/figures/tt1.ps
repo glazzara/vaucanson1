@@ -1,0 +1,664 @@
+%!PS-Adobe-2.0
+%%Creator: dot version 1.13 (v16) (Mon August 23, 2004)
+%%For: (jsaka) Jacques Sakarovitch
+%%Title: vcsn
+%%Pages: (atend)
+%%BoundingBox: 35 35 361 415
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+
+EncodingVector
+  dup 306 /AE
+  dup 301 /Aacute
+  dup 302 /Acircumflex
+  dup 304 /Adieresis
+  dup 300 /Agrave
+  dup 305 /Aring
+  dup 303 /Atilde
+  dup 307 /Ccedilla
+  dup 311 /Eacute
+  dup 312 /Ecircumflex
+  dup 313 /Edieresis
+  dup 310 /Egrave
+  dup 315 /Iacute
+  dup 316 /Icircumflex
+  dup 317 /Idieresis
+  dup 314 /Igrave
+  dup 334 /Udieresis
+  dup 335 /Yacute
+  dup 376 /thorn
+  dup 337 /germandbls
+  dup 341 /aacute
+  dup 342 /acircumflex
+  dup 344 /adieresis
+  dup 346 /ae
+  dup 340 /agrave
+  dup 345 /aring
+  dup 347 /ccedilla
+  dup 351 /eacute
+  dup 352 /ecircumflex
+  dup 353 /edieresis
+  dup 350 /egrave
+  dup 355 /iacute
+  dup 356 /icircumflex
+  dup 357 /idieresis
+  dup 354 /igrave
+  dup 360 /dcroat
+  dup 361 /ntilde
+  dup 363 /oacute
+  dup 364 /ocircumflex
+  dup 366 /odieresis
+  dup 362 /ograve
+  dup 365 /otilde
+  dup 370 /oslash
+  dup 372 /uacute
+  dup 373 /ucircumflex
+  dup 374 /udieresis
+  dup 371 /ugrave
+  dup 375 /yacute
+  dup 377 /ydieresis  
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+	dup 1 exch div /InvScaleFactor exch def
+	dup scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw aligned label in bounding box aligned to current point
+/alignedtext {			% width adj text
+	/text exch def
+	/adj exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			text stringwidth pop adj mul 0 rmoveto
+		} if
+		[] 0 setdash
+		text show
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: 36 36 361 415
+%%PageOrientation: Portrait
+gsave
+35 35 326 380 boxprim clip newpath
+36 36 translate
+0 0 1 beginpage
+0 0 translate 0 rotate
+[ /CropBox [36 36 361 415] /PAGES pdfmark
+0.000 0.000 0.000 graphcolor
+14.00 /Times-Roman set_font
+gsave 10 dict begin
+162 7 moveto 307.6 -0.5 (tt1.xml { 5 states, 7 transitions, #I = 2, #T = 2 }) alignedtext
+end grestore
+
+%	tt1.xml1
+gsave 10 dict begin
+invis
+0.266 1.000 0.776 nodecolor
+296 130 1 0 ellipse_path
+stroke
+end grestore
+
+%	tt1.xml0
+gsave 10 dict begin
+bold
+0.266 1.000 0.776 nodecolor
+234 218 18 18 ellipse_path
+stroke
+gsave 10 dict begin
+0.717 1.000 0.498 nodecolor
+234 213 moveto 7.0 -0.5 (0) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml0 -> tt1.xml1
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 246 204 moveto
+251 197 258 189 264 182 curveto
+274 167 284 150 290 140 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 293 141 moveto
+296 131 lineto
+288 137 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 293 141 moveto
+296 131 lineto
+288 137 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+275 169 moveto 7.0 -0.5 (1) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml2
+gsave 10 dict begin
+bold
+0.266 1.000 0.776 nodecolor
+172 130 18 18 ellipse_path
+stroke
+gsave 10 dict begin
+0.717 1.000 0.498 nodecolor
+172 125 moveto 7.0 -0.5 (1) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml0 -> tt1.xml2
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 218 210 moveto
+207 203 194 194 186 182 curveto
+181 175 178 166 176 158 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 179 157 moveto
+174 148 lineto
+173 158 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 179 157 moveto
+174 148 lineto
+173 158 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+203 169 moveto 26.8 -0.5 (\(1,y\)) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml3
+gsave 10 dict begin
+invis
+0.266 1.000 0.776 nodecolor
+129 218 1 0 ellipse_path
+stroke
+end grestore
+
+%	tt1.xml3 -> tt1.xml2
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 129 217 moveto
+130 212 134 185 143 166 curveto
+145 161 149 156 153 151 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 156 153 moveto
+159 143 lineto
+150 149 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 156 153 moveto
+159 143 lineto
+150 149 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+147 169 moveto 7.0 -0.5 (1) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml2 -> tt1.xml0
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 188 139 moveto
+199 146 206 151 216 166 curveto
+221 173 225 182 227 190 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 224 191 moveto
+230 200 lineto
+230 189 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 224 191 moveto
+230 200 lineto
+230 189 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+239 169 moveto 26.0 -0.5 (\(a,1\)) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml4
+gsave 10 dict begin
+invis
+0.266 1.000 0.776 nodecolor
+234 42 1 0 ellipse_path
+stroke
+end grestore
+
+%	tt1.xml2 -> tt1.xml4
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 184 116 moveto
+190 110 196 101 202 94 curveto
+212 79 222 62 228 52 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 231 53 moveto
+234 43 lineto
+226 49 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 231 53 moveto
+234 43 lineto
+226 49 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+217 81 moveto 7.0 -0.5 (1) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml5
+gsave 10 dict begin
+bold
+0.266 1.000 0.776 nodecolor
+110 42 18 18 ellipse_path
+stroke
+gsave 10 dict begin
+0.717 1.000 0.498 nodecolor
+110 37 moveto 7.0 -0.5 (2) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml2 -> tt1.xml5
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 156 122 moveto
+145 115 132 106 124 94 curveto
+119 87 116 78 114 70 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 117 69 moveto
+112 60 lineto
+111 70 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 117 69 moveto
+112 60 lineto
+111 70 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+141 81 moveto 26.8 -0.5 (\(1,x\)) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml5 -> tt1.xml2
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 126 51 moveto
+137 58 144 63 154 78 curveto
+159 85 163 94 166 102 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 163 103 moveto
+168 112 lineto
+169 102 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 163 103 moveto
+168 112 lineto
+169 102 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+179 81 moveto 26.8 -0.5 (\(b,1\)) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml7
+gsave 10 dict begin
+invis
+0.266 1.000 0.776 nodecolor
+233 377 1 0 ellipse_path
+stroke
+end grestore
+
+%	tt1.xml6
+gsave 10 dict begin
+bold
+0.266 1.000 0.776 nodecolor
+233 306 18 18 ellipse_path
+stroke
+gsave 10 dict begin
+0.717 1.000 0.498 nodecolor
+233 301 moveto 7.0 -0.5 (3) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml7 -> tt1.xml6
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 233 376 moveto
+233 372 233 352 233 334 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 237 334 moveto
+233 324 lineto
+230 334 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 237 334 moveto
+233 324 lineto
+230 334 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+236 345 moveto 7.0 -0.5 (1) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml6 -> tt1.xml0
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 227 289 moveto
+223 279 220 266 222 254 curveto
+222 251 223 248 224 245 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 227 246 moveto
+227 235 lineto
+221 244 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 227 246 moveto
+227 235 lineto
+221 244 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+228 257 moveto 7.0 -0.5 (1) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml6 -> tt1.xml0
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 233 288 moveto
+234 276 234 260 234 246 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 238 246 moveto
+234 236 lineto
+231 246 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 238 246 moveto
+234 236 lineto
+231 246 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+259 257 moveto 53.3 -0.5 (\(aab,xyx\)) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml8
+gsave 10 dict begin
+bold
+0.266 1.000 0.776 nodecolor
+34 130 18 18 ellipse_path
+stroke
+gsave 10 dict begin
+0.717 1.000 0.498 nodecolor
+34 125 moveto 7.0 -0.5 (4) alignedtext
+end grestore
+end grestore
+
+%	tt1.xml8 -> tt1.xml5
+gsave 10 dict begin
+0.006 1.000 0.667 edgecolor
+newpath 45 116 moveto
+53 105 64 90 75 78 curveto
+80 73 85 67 90 62 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.006 1.000 0.667 edgecolor
+newpath 92 65 moveto
+97 55 lineto
+87 60 lineto
+closepath
+fill
+0.006 1.000 0.667 edgecolor
+newpath 92 65 moveto
+97 55 lineto
+87 60 lineto
+closepath
+stroke
+end grestore
+gsave 10 dict begin
+0.341 1.000 0.325 edgecolor
+96 81 moveto 40.0 -0.5 (\(ab,yx\)) alignedtext
+end grestore
+end grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+end
+restore
+%%EOF

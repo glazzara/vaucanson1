@@ -1,0 +1,678 @@
+\chapter{Benching functions in \vcsn}
+\label{app:ben-fun-vcs}
+
+\begin{ComVd}{110602}
+	Cet appendice est rŽservŽ au groupe \vcsn et n'appara”tra pas 
+	dans le manuel distribuŽ avec \vcsnv. 
+	J'y reproduis mes essais d'utilisation de \code{cbs}.
+\end{ComVd}%
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{>{\ttfamily}l>{\ttfamily\e}lp{.4\textwidth}}
+\hline
+\multicolumn{1}{c}{long option} & 
+\multicolumn{1}{c}{short} & 
+\multicolumn{1}{c}{purpose of the option} \\
+\hline
+--report-time[=VERBOSE\_DEGREE] & -T & 
+Report time statistics
+    \\ 
+--export-time-dot[=VERBOSE\_DEGREE] & -D & 
+Export time statistics in DOT format 
+\\ 
+--export-time-xml[=VERBOSE\_DEGREE] & -X & 
+Export time statistics in XML format
+    \\ 
+\hline
+--bench=NB\_ITERATIONS & -B & 
+Bench 
+\\ 
+--bench-plot-output=OUTPUT\_FILENAME & -O & 
+Bench output filename
+    \\ 
+\hline
+\end{tabular}
+\end{center}
+\caption{Benchmarking options and formats}
+\label{tab:ben-opt}
+\end{table}
+
+\section{Time statistics}
+\label{sec:tim-sta-A}
+
+At \sbsct{ben-opt}, we gave the following example:
+\begin{shell}
+$ \kbd{vcsn-char-b -T1 determinize ladybird-10.xml > ldb10det.xml 2> ldb10-time.txt}
+\end{shell}%$
+\clearpage 
+The real file \code{ldb10-time.txt} reads as follow:
+\begin{shell}
+Taf-kit command bench
+
+[Description:]
+Chain of command executed by tar-kit.
+
+[Infos:]
+  * Date:      Thu Jun  2 18:44:42 2011
+  * Host name: 
+  * CPU:       
+  * Memory:    
+
+[Parameters:]
+
+[Results:]
+  * memory peak: 15728640
+  * relative memory usage: 0
+  * time: 356
+  * time (children, system): 0
+  * time (children, user): 0
+  * time (system): 15
+  * time (user): 341
+  * time (wall): 409
+  * timer measures: 10
+
+[Task list:]
+
+Charge  id:        <name>        total     self     calls   self avg. total avg.
+100.0\%  0:          _program  356.54ms 356.54ms        1      0.36s      0.36s 
+ 62.0\%  9:  automaton output  221.02ms 221.02ms        1      0.22s      0.22s 
+ 29.8\%  7:       determinize  106.45ms 106.39ms        1    106.39ms   106.45ms
+  4.8\%  1:CMD[0]: determiniz  135.29ms  17.13ms        1     17.13ms   135.29ms
+  2.9\%  2:   automaton input   10.48ms  10.48ms        1     10.48ms    10.48ms
+  0.2\%  3:            cut_up    0.62ms   0.62ms        1      0.62ms     0.62ms
+  0.2\%  4:       eps_removal    0.54ms   0.54ms        1      0.54ms     0.54ms
+  0.0\%  8:is_realtime (autom    0.07ms   0.07ms        1      0.07ms     0.07ms
+  0.0\%  5: accessible_states    0.05ms   0.05ms        1      0.05ms     0.05ms
+  0.0\%  6:     sub_automaton    0.01ms   0.01ms        1      0.01ms     0.01ms
+
+[Memplot:]
+
+  * (0)(): 15728640B - Starting memory
+  * (0)(): 15728640B - Initial memory usage
+  * (409)(): 15728640B - Final memory usage
+\end{shell}%$
+\clearpage 
+
+The same data may be stored under the \code{dot} format via the 
+\code{D} option, and then displayed with \code{dotty}.
+
+\begin{shell}
+$ \kbd{vcsn-char-b -D1 determinize ladybird-10.xml > ldb10det.xml 2> ldb10-time.dot}
+$ \kbd{dotty ldb10-time.dot}
+\end{shell}%$
+
+\begin{figure}[ht]
+    \centering
+% \includegraphics[scale=0.4]{ldb10stat.ps}
+\caption{Graphic output for time statistics, \code{VERBOSE\_DEGREE}=1}
+\end{figure}
+
+\begin{ComVd}{110603}
+	Pour une raison que je ne suis pas arrivŽ ˆ comprendre, les 
+	fichiers \code{.dot} produits par \code{cbs} sont lisibles par 
+	\code{dotty} mais une fois exportŽs (toujours par \code{dotty}) 
+	en format PostScript --- selon la procŽdure utilisŽe pour produire 
+	les images des autres figures --- donnent des fichiers 
+	\code{.ps} qui ne sont pas lisibles par la commande 
+	\code{pstopdf}, \cf message d'erreur ci-dessous.
+\end{ComVd}%
+
+\begin{shell}
+\%\%[ Error: undefined; OffendingCommand: new ]\%\%
+
+Stack:
+/courier
+14.0
+-save-
+
+
+\%\%[ Flushing: rest of job (to end-of-file) will be ignored ]\%\%
+\%\%[ Warning: PostScript error. No PDF file produced. ] \%\%
+pstopdf failed on file SAFK.ps with error code -31000
+\end{shell}%$
+
+
+\clearpage 
+The other two values \code{2} and \code{3} for the 
+\samp{VERBOSE\_DEGREE} yield the following outputs. 
+
+\begin{shell}
+$ \kbd{vcsn-char-b -T2 determinize ladybird-10.xml > ldb10det.xml 2> ldb10-time.txt}
+\end{shell}%$
+
+{\footnotesize
+\begin{shell}
+Taf-kit command bench
+
+[Description:]
+Chain of command executed by tar-kit.
+
+[Infos:]
+  * Date:      Thu Jun  2 18:53:56 2011
+  * Host name: 
+  * CPU:       
+  * Memory:    
+
+[Parameters:]
+
+[Results:]
+  * memory peak: 15728640
+  * relative memory usage: 0
+  * time: 349
+  * time (children, system): 0
+  * time (children, user): 0
+  * time (system): 15
+  * time (user): 334
+  * time (wall): 375
+  * timer measures: 10
+
+[Task list:]
+
+Charge  id:        <name>        total     self     calls   self avg. total avg.
+100.0\%  0:          _program  350.28ms 350.28ms        1      0.35s      0.35s 
+ 63.8\%  9:  automaton output  223.64ms 223.64ms        1      0.22s      0.22s 
+ 29.5\%  7:       determinize  103.34ms 103.30ms        1    103.30ms   103.34ms
+  4.1\%  1:CMD[0]: determiniz  126.34ms  14.19ms        1     14.19ms   126.34ms
+  2.4\%  2:   automaton input    8.27ms   8.27ms        1      8.27ms     8.27ms
+  0.1\%  4:       eps_removal    0.28ms   0.28ms        1      0.28ms     0.28ms
+  0.1\%  3:            cut_up    0.23ms   0.23ms        1      0.23ms     0.23ms
+  0.0\%  8:is_realtime (autom    0.04ms   0.04ms        1      0.04ms     0.04ms
+  0.0\%  5: accessible_states    0.03ms   0.03ms        1      0.03ms     0.03ms
+  0.0\%  6:     sub_automaton    0.01ms   0.01ms        1      0.01ms     0.01ms
+
+________________________________________________________________________________
+
+[Call graph:]
+
+
+Cycles:
+<cycle>  charge   total     self   calls:e/i    int avg.   self avg.  total avg.
+
+________________________________________________________________________________
+
+\end{shell}%$
+
+\clearpage
+\begin{shell}
+
+Tasks:
+D  id:        <name>   charge   total    self        calls  self avg. total avg.
+................................................................................
+[0] _program
+
+    0:        _program 100.0\%  0.35s   0.35s            1     0.35s      0.35s 
+
+->  1:CMD[0]: determin 100.0\%         14.19ms           1    14.19ms
+->  9:automaton output 100.0\%          0.22s            1     0.22s 
+................................................................................
+[1] CMD[0]: determinize
+
+<-  0:        _program 100.0\%         14.19ms           1    14.19ms
+
+    1:CMD[0]: determin   4.1\%126.34ms 14.19ms           1    14.19ms   126.34ms
+
+->  2: automaton input 100.0\%          8.27ms           1     8.27ms
+->  3:          cut_up 100.0\%          0.23ms           1     0.23ms
+->  4:     eps_removal 100.0\%          0.28ms           1     0.28ms
+->  5:accessible_state 100.0\%          0.03ms           1     0.03ms
+->  6:   sub_automaton 100.0\%          0.01ms           1     0.01ms
+->  7:     determinize 100.0\%        103.30ms           1   103.30ms
+................................................................................
+[2] automaton input
+
+<-  1:CMD[0]: determin 100.0\%          8.27ms           1     8.27ms
+
+    2: automaton input   2.4\%  8.27ms  8.27ms           1     8.27ms     8.27ms
+................................................................................
+[3] cut_up
+
+<-  1:CMD[0]: determin 100.0\%          0.23ms           1     0.23ms
+
+    3:          cut_up   0.1\%  0.23ms  0.23ms           1     0.23ms     0.23ms
+................................................................................
+[4] eps_removal
+
+<-  1:CMD[0]: determin 100.0\%          0.28ms           1     0.28ms
+
+    4:     eps_removal   0.1\%  0.28ms  0.28ms           1     0.28ms     0.28ms
+................................................................................
+[5] accessible_states
+
+<-  1:CMD[0]: determin 100.0\%          0.03ms           1     0.03ms
+
+    5:accessible_state   0.0\%  0.03ms  0.03ms           1     0.03ms     0.03ms
+................................................................................
+[6] sub_automaton
+
+<-  1:CMD[0]: determin 100.0\%          0.01ms           1     0.01ms
+
+    6:   sub_automaton   0.0\%  0.01ms  0.01ms           1     0.01ms     0.01ms
+................................................................................
+[7] determinize
+
+<-  1:CMD[0]: determin 100.0\%        103.30ms           1   103.30ms
+
+    7:     determinize  29.5\%103.34ms103.30ms           1   103.30ms   103.34ms
+
+->  8:is_realtime (aut 100.0\%          0.04ms           1     0.04ms
+................................................................................
+[8] is_realtime (automaton)
+
+<-  7:     determinize 100.0\%          0.04ms           1     0.04ms
+
+    8:is_realtime (aut   0.0\%  0.04ms  0.04ms           1     0.04ms     0.04ms
+................................................................................
+[9] automaton output
+
+<-  0:        _program 100.0\%          0.22s            1     0.22s 
+
+    9:automaton output  63.8\%  0.22s   0.22s            1     0.22s      0.22s 
+
+
+[Memplot:]
+
+  * (0)(): 15728640B - Starting memory
+  * (0)(): 15728640B - Initial memory usage
+  * (376)(): 15728640B - Final memory usage
+\end{shell}%$
+}
+
+\clearpage 
+\begin{shell}
+$ \kbd{vcsn-char-b -T3 determinize ladybird-10.xml > ldb10det.xml 2> ldb10-time.txt}
+\end{shell}%$
+
+{\footnotesize 
+\begin{shell}
+Taf-kit command bench
+
+[Description:]
+Chain of command executed by tar-kit.
+
+[Infos:]
+  * Date:      Fri Jun  3 09:56:16 2011
+  * Host name: 
+  * CPU:       
+  * Memory:    
+
+[Parameters:]
+
+[Results:]
+  * memory peak: 15728640
+  * relative memory usage: 0
+  * time: 362
+  * time (children, system): 0
+  * time (children, user): 0
+  * time (system): 20
+  * time (user): 342
+  * time (wall): 522
+  * timer measures: 10
+
+[Task list:]
+
+Charge  id:        <name>        total     self     calls   self avg. total avg.
+100.0\%  0:          _program  362.03ms 362.03ms        1      0.36s      0.36s 
+ 61.0\%  9:  automaton output  220.72ms 220.72ms        1      0.22s      0.22s 
+ 28.2\%  7:       determinize  102.23ms 102.18ms        1    102.18ms   102.23ms
+  6.2\%  1:CMD[0]: determiniz  141.04ms  22.34ms        1     22.34ms   141.04ms
+  4.3\%  2:   automaton input   15.67ms  15.67ms        1     15.67ms    15.67ms
+  0.1\%  4:       eps_removal    0.42ms   0.42ms        1      0.42ms     0.42ms
+  0.1\%  3:            cut_up    0.33ms   0.33ms        1      0.33ms     0.33ms
+  0.0\%  8:is_realtime (autom    0.05ms   0.05ms        1      0.05ms     0.05ms
+  0.0\%  5: accessible_states    0.04ms   0.04ms        1      0.04ms     0.04ms
+  0.0\%  6:     sub_automaton    0.01ms   0.01ms        1      0.01ms     0.01ms
+
+________________________________________________________________________________
+
+[Call graph:]
+
+
+Cycles:
+<cycle>  charge   total     self   calls:e/i    int avg.   self avg.  total avg.
+
+________________________________________________________________________________
+\end{shell}%$
+
+\clearpage
+\begin{shell}
+Tasks:
+D  id:        <name>   charge   total    self        calls  self avg. total avg.
+................................................................................
+[0] _program
+
+    0:        _program 100.0\%  0.36s   0.36s            1     0.36s      0.36s 
+
+->  1:CMD[0]: determin 100.0\%         22.34ms           1    22.34ms
+->  9:automaton output 100.0\%          0.22s            1     0.22s 
+................................................................................
+[1] CMD[0]: determinize
+
+<-  0:        _program 100.0\%         22.34ms           1    22.34ms
+
+    1:CMD[0]: determin   6.2\%141.04ms 22.34ms           1    22.34ms   141.04ms
+
+->  2: automaton input 100.0\%         15.67ms           1    15.67ms
+->  3:          cut_up 100.0\%          0.33ms           1     0.33ms
+->  4:     eps_removal 100.0\%          0.42ms           1     0.42ms
+->  5:accessible_state 100.0\%          0.04ms           1     0.04ms
+->  6:   sub_automaton 100.0\%          0.01ms           1     0.01ms
+->  7:     determinize 100.0\%        102.18ms           1   102.18ms
+................................................................................
+[2] automaton input
+
+<-  1:CMD[0]: determin 100.0\%         15.67ms           1    15.67ms
+
+    2: automaton input   4.3\% 15.67ms 15.67ms           1    15.67ms    15.67ms
+................................................................................
+[3] cut_up
+
+<-  1:CMD[0]: determin 100.0\%          0.33ms           1     0.33ms
+
+    3:          cut_up   0.1\%  0.33ms  0.33ms           1     0.33ms     0.33ms
+................................................................................
+[4] eps_removal
+
+<-  1:CMD[0]: determin 100.0\%          0.42ms           1     0.42ms
+
+    4:     eps_removal   0.1\%  0.42ms  0.42ms           1     0.42ms     0.42ms
+................................................................................
+[5] accessible_states
+
+<-  1:CMD[0]: determin 100.0\%          0.04ms           1     0.04ms
+
+    5:accessible_state   0.0\%  0.04ms  0.04ms           1     0.04ms     0.04ms
+................................................................................
+[6] sub_automaton
+
+<-  1:CMD[0]: determin 100.0\%          0.01ms           1     0.01ms
+
+    6:   sub_automaton   0.0\%  0.01ms  0.01ms           1     0.01ms     0.01ms
+................................................................................
+[7] determinize
+
+<-  1:CMD[0]: determin 100.0\%        102.18ms           1   102.18ms
+
+    7:     determinize  28.2\%102.23ms102.18ms           1   102.18ms   102.23ms
+
+->  8:is_realtime (aut 100.0\%          0.05ms           1     0.05ms
+................................................................................
+[8] is_realtime (automaton)
+
+<-  7:     determinize 100.0\%          0.05ms           1     0.05ms
+
+    8:is_realtime (aut   0.0\%  0.05ms  0.05ms           1     0.05ms     0.05ms
+................................................................................
+[9] automaton output
+
+<-  0:        _program 100.0\%          0.22s            1     0.22s 
+
+    9:automaton output  61.0\%  0.22s   0.22s            1     0.22s      0.22s 
+________________________________________________________________________________
+
+\end{shell}%$
+
+\clearpage
+\begin{shell}
+[Detailed tasks:]
+
+................................................................................
+[0] _program
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.36s 
+Self user time:                   0.34s 
+Self system time:                20.00ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.52s 
+Self average cpu time:            0.36s 
+Self charge:                     100.0\%
+
+Total cpu time:                   0.36s 
+Total user time:                  0.34s 
+Total system time:               20.00ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.52s 
+Total average cpu time:           0.36s 
+Total charge:                    100.0\%
+................................................................................
+[1] CMD[0]: determinize
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                   22.34ms
+Self user time:                  15.86ms
+Self system time:                 6.48ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                 132.21ms
+Self average cpu time:           22.34ms
+Self charge:                       6.2\%
+
+Total cpu time:                 141.04ms
+Total user time:                130.48ms
+Total system time:               10.55ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.30s 
+Total average cpu time:         141.04ms
+Total charge:                     39.0\%
+................................................................................
+[2] automaton input
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                   15.67ms
+Self user time:                  13.24ms
+Self system time:                 2.43ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                  64.84ms
+Self average cpu time:           15.67ms
+Self charge:                       4.3\%
+
+Total cpu time:                  15.67ms
+Total user time:                 13.24ms
+Total system time:                2.43ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                 64.84ms
+Total average cpu time:          15.67ms
+Total charge:                      4.3\%
+................................................................................
+[3] cut_up
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.33ms
+Self user time:                   0.29ms
+Self system time:                 0.04ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.33ms
+Self average cpu time:            0.33ms
+Self charge:                       0.1\%
+
+Total cpu time:                   0.33ms
+Total user time:                  0.29ms
+Total system time:                0.04ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.33ms
+Total average cpu time:           0.33ms
+Total charge:                      0.1\%
+................................................................................
+[4] eps_removal
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.42ms
+Self user time:                   0.38ms
+Self system time:                 0.04ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.42ms
+Self average cpu time:            0.42ms
+Self charge:                       0.1\%
+
+Total cpu time:                   0.42ms
+Total user time:                  0.38ms
+Total system time:                0.04ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.42ms
+Total average cpu time:           0.42ms
+Total charge:                      0.1\%
+................................................................................
+[5] accessible_states
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.04ms
+Self user time:                   0.04ms
+Self system time:                 0.01ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.04ms
+Self average cpu time:            0.04ms
+Self charge:                       0.0\%
+
+Total cpu time:                   0.04ms
+Total user time:                  0.04ms
+Total system time:                0.01ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.04ms
+Total average cpu time:           0.04ms
+Total charge:                      0.0\%
+................................................................................
+[6] sub_automaton
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.01ms
+Self user time:                   0.01ms
+Self system time:                 0.00ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.01ms
+Self average cpu time:            0.01ms
+Self charge:                       0.0\%
+
+Total cpu time:                   0.01ms
+Total user time:                  0.01ms
+Total system time:                0.00ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.01ms
+Total average cpu time:           0.01ms
+Total charge:                      0.0\%
+................................................................................
+[7] determinize
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                  102.18ms
+Self user time:                 100.63ms
+Self system time:                 1.55ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                 102.23ms
+Self average cpu time:          102.18ms
+Self charge:                      28.2\%
+
+Total cpu time:                 102.23ms
+Total user time:                100.67ms
+Total system time:                1.56ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                102.28ms
+Total average cpu time:         102.23ms
+Total charge:                     28.2\%
+................................................................................
+[8] is_realtime (automaton)
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.05ms
+Self user time:                   0.04ms
+Self system time:                 0.01ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.06ms
+Self average cpu time:            0.05ms
+Self charge:                       0.0\%
+
+Total cpu time:                   0.05ms
+Total user time:                  0.04ms
+Total system time:                0.01ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.06ms
+Total average cpu time:           0.05ms
+Total charge:                      0.0\%
+................................................................................
+[9] automaton output
+
+Calls from exterior:                 1
+Calls from within cycle:             0
+Recursive calls:                     0
+
+Self cpu time:                    0.22s 
+Self user time:                   0.21s 
+Self system time:                 9.40ms
+Self children user time:          0.00ms
+Self children system time:        0.00ms
+Self wall time:                   0.22s 
+Self average cpu time:            0.22s 
+Self charge:                      61.0\%
+
+Total cpu time:                   0.22s 
+Total user time:                  0.21s 
+Total system time:                9.40ms
+Total children user time:         0.00ms
+Total children system time:       0.00ms
+Total wall time:                  0.22s 
+Total average cpu time:           0.22s 
+Total charge:                     61.0\%
+
+[Memplot:]
+
+  * (0)(): 15728640B - Starting memory
+  * (0)(): 15728640B - Initial memory usage
+  * (522)(): 15728640B - Final memory usage
+\end{shell}%$
+}
+
+
+
+
+
+
+\endinput
+%%
+
+\subsection{}
+\label{sec:}
+

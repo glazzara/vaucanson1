@@ -1,0 +1,1893 @@
+\chapter{Algorithm specification, \protect\\
+\ee description and discussion}
+\label{app:alg-spe}
+
+\section{General automata and rational expressions functions }
+\label{sec:aut-fct-spe-A}
+
+\subsection{Graph functions}
+\label{sec:gra-fct-A}
+
+\addtocounter{subsubsection}{-1}
+\subsubsection{\Fct{reverse}}
+
+This is a hidden (and ancillary) graph function, not accessible to the user through 
+\tafkit (because it would be somewhat confusing with \Fct{transpose}). 
+It builds the transpose of the graph including the initial and final 
+function that can be seen as labels of arcs from subliminal to real 
+states, but leaves the labels untouched. 
+
+\subsubsection{\Fct{accessible}, \Fct{coaccessible}, \Fct{trim}}
+
+Graph traversal. Implemented by breadth-first search.
+
+\longonly{%
+Even this simple algorithm is to be described with more details:
+whether it is in-place or not, \etc.
+This discussion is not relevant for \vcsnv indeed, but for \vcsn~2.0.
+}%
+
+% \begin{enumerate}
+%     
+% \addtocounter{enumi}{-1}
+% \item \Fct{transpose-g}
+% 
+% 
+% \item \Fct{accessible}, \Fct{coaccessible}, \Fct{trim}
+% 
+% 
+% The algorithm should access \emph{entries} rather than 
+% \emph{transitions}.
+% 
+% \Fctp{coaccessible} = \Fctq{transpose-g}{\Fctq{accessible}{\Fctp{transpose-g}}}
+% 
+% \Fctp{trim} = \Fctq{coaccessible}{\Fctp{accessible}}
+% 
+% Complexity should be  proportional to the size \emph{of the result}.
+% This implies that tags `number of states' and `number of transitions' 
+% but attached to automata, and updated by every function that modify 
+% these parameters. 
+% 
+% This can be considered too heavy, in which case these functions will have 
+% a complexity proportional to the size \emph{of the input}.
+% 
+% \item \Fct{is-accessible}, \Fct{is-coaccessible}, \Fct{is-trim}
+% 
+% Boolean answer. Silent in the non-verbose mode.
+% 
+% Raise the question of having flag tags that could be used in trusted 
+% components.
+% 
+% \item \Fct{is-empty}, \Fct{is-useless}
+% 
+% cf. la note : sur la nature du vide. Introuvable maintenant sur le 
+% trac.
+% 
+% \end{enumerate}
+
+
+\subsection{Transformations of automata}
+
+\subsubsection{\Fct{proper}}
+\label{ssc:aut-pro-A}%
+
+
+From a theoretical point of view, the algorithm \Fct{proper} cannot 
+be described, nor  
+understood, before addressing the problem of the star in a semiring 
+of series. 
+
+\thnu
+If~$M$ is graded, then~$\KM$, equipped with the Cauchy product, is a 
+semiring as well.\footnote{%
+   If~$M$ is not graded, this may not be the case 
+   anymore, but is out of the scope of \vcsn for the time being, and 
+   for certain while.}
+
+
+If~$\T$ is a semiring, and~$t$ is in~$\T$, by definition
+\begin{equation}
+    t^{*}=\sum_{n\in \N} t^{n}
+    \notag
+%     \label{}
+\end{equation}
+and as infinite sums are not always defined, $t^{*}$ is not always 
+defined.
+Hence a semiring should be equipped with two supplementary methods 
+(supplementary to the defining operations of the semiring)
+\Fctp{is-starable} and \Fctp{star}, with obvious meaning and result.
+
+If~$s$ is a series in~$\KM$, we denote by~$\TermCst{s}$ its \emph{constant 
+term}, that is, the coefficient of~$\unM$.
+Thus, a series~$s$ is {proper} if its constant term is nul:
+$\TermCst{s}=\zeK$.
+And the \emph{proper part} of an arbitrary series~$s$ is the proper 
+series~$\spr$ such that 
+$s = \TermCst{s}\xmd\unM + \spr$.
+Under a natural, and not restrictive, hypothesis on~$\K$ (\cf 
+\cite{Saka03,Saka09}), the following property holds.
+
+\begin{property}
+    A series~$s$ in~$\KM$ is starable if, and only if, $\TermCst{s}$ 
+    is starable and it holds:
+    $ s^{*}= (\TermCst{s})^{*}\left(\spr\xmd(\TermCst{s})^{*}\right)^{*}$
+\end{property}
+
+As a conclusion to this paragraph, we can say that star is not always 
+defined in~$\K$, and thus in~$\KM$. 
+
+\thnd
+Let~$\Ac$ be an automaton over~$M$ with multiplicityin~$\K$.
+We say that the \emph{behaviour of}~$\Ac$, $\CompAuto{\Ac}$, is 
+defined if, and only if, for every pair of states~$p$ and~$q$ 
+in~$\Ac$, the family of labels of computations from~$p$ to~$q$ is 
+\emph{summable}.
+
+Let~$\Ac_{0}$ be the automaton obtained 
+from~$\Ac$ by retaining the transitions labelled by~$\unM$ only.
+We then have:
+\begin{property}
+    The behaviour of~$\Ac$ is defined if, and only if, 
+    the behaviour of~$\Ac_{0}$ is.
+\end{property}
+
+
+\thnt
+Let
+$\msp\Ac=\aut{I,E,T}\msp$
+and
+$\msp\Ac_{0}=\aut{I,E_{0},T}\msp$
+be their respective matrix description.
+We write~$\PartProp{E}$ for the proper matrix such that
+$\msp E= \PartProp{E}+E_{0}\msp$.
+
+\begin{property}
+    If the behaviour of~$\Ac$ is defined, we have:
+    \begin{equation}
+        \CompAuto{\Ac} = 
+        I\cdot 
+        \left({E_{0}}^{*}\cdot\PartProp{E}\right)^{*}\cdot{E_{0}}^{*}
+        \cdot T
+        \eqpnt
+        \notag
+%         \label{}
+    \end{equation}
+\end{property}
+
+It is important to note that it is not true that~$\CompAuto{\Ac}$ is 
+necessarily defined when~${E_{0}}^{*}$, and thus
+$\msp I\cdot 
+        \left({E_{0}}^{*}\cdot\PartProp{E}\right)^{*}\cdot{E_{0}}^{*}
+        \cdot T
+\msp$
+are defined (\cf \cite{Saka03,Saka09} for more details and example).
+
+The algorithm, whose implementation depends indeed on~$\K$, has the 
+double goal of deciding if the behaviour of~$\Ac_{0}$ is defined and 
+of computing~${E_{0}}^{*}\cdot\PartProp{E}$ and~${E_{0}}^{*}\cdot T$.
+It will be described in \cite{LombSakaXX}.
+
+
+\subsubsection{\Fct{standardize}}
+\label{ssc:aut-sta-A}%
+
+An automaton is
+said to be \emph{standard} if it has a \emph{unique initial state} which is the
+destination of no transition and whose \emph{initial multiplicity} is equal to
+the \emph{unit} (of the multiplicity semiring).
+
+Not only every automaton is equivalent to a standard one, but a simple
+procedure, called `standardization', transforms every 
+automaton~$\Ac$ in an equivalent standard one.
+The difficulty in specifying standardization comes from the fact that 
+on the one hand side a standard automaton is not necessarily proper 
+nor accessible and on the other the initial function of a state may a 
+priori be any polynomial. 
+
+
+The procedure goes as follows.
+
+\thi Add a new state~$s$ , make it initial, with initial multiplicity equal to
+the {unit} of the multiplicity semiring.
+
+\thii For every initial state~$i$ of~$\Ac$ , with initial function~$I(i)$ , 
+add a transition from~$s$ to~$i$ with label~$I(i)$, and set~$I(i)$ 
+to~$\zeK$
+(the zero of the multiplicity semiring) --- which is equivalent to 
+say that~$i$ is \emph{not initial anymore}.
+
+\thiii Suppress  by a \emph{backward closure}
+every \emph{spontaneous transition} that has been created in~(ii).
+
+By \emph{convention}, we consider that a transition from~$s$ to~$i$ 
+is spontaneous if~$I(i)$ is \emph{scalar}, that is, if the support 
+of~$I(i)$, seen 
+as a polynomial over~$\Ae$, is restricted to the 
+identity~$\unAe$.  
+
+\thiv Remove the former initial states of~$\Ac$ that are the 
+destination of no incoming transition.
+
+\Comt 
+\tha Steps~(iii) and~(iv) are necessary to insure the following property:
+
+\emph{The standardization of a standard automaton~$\Ac$ is isomorphic to~$\Ac$}.
+
+\thb We say `by convention' in~(iii) as we could have chosen 
+different policies without loosing the above property (which is in 
+the specification of \Fct{standardize}).
+
+-- A non-proper polynomial~$I(i)$ could give rise to a spontaneous 
+transition labelled with its constant term.
+We prefered not to do it in order to change as few things as possible.
+
+-- We could have decided to perform no closure  as soon as there 
+exists at least one initial function which is not scalar.
+We have prefered to have a choice which is more local to every intial 
+state, but this is certainly disputable.
+
+
+\subsection{Operations on automata}
+\label{sec:ope-on-aut-A}
+
+
+A small sketch is worth a long speech.
+
+Let $\Ac=\bra{Q,A,E,\{i\},T}$ and $\Bc=\bra{R,A,F,\{j\},U}$ be two standard automata: 
+
+
+\FixVCScale{.5}
+\ChgEdgeLabelScale{.8}
+% \ShowFrame 
+% \qquad\qquad
+\medskip 
+\noindent 
+~\hfill
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i}
+    \FinalR{e}{Q}{T_q}
+    \FinalL{e}{R}{T_r}
+                                %
+    \EdgeL{I}{P}{E_{i,p}}
+    \EdgeR{I}{Q}{E_{i,q}}
+    \VCPut{(1,0)}{\scalebox{3}{$\Ac$}}
+  \end{VCPicture}
+}
+\hfill\hfill
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[j]{(-4,0)}{I}
+    \State[s]{(-1,1)}{P}
+    \State[t]{(-1,-1)}{Q}
+    \State[u]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{U_j}
+    \FinalR{e}{Q}{U_t}
+    \FinalL{e}{R}{U_u}
+                                %
+    \EdgeL{I}{P}{F_{j,s}}
+    \EdgeR{I}{Q}{F_{j,t}}
+    \VCPut{(1,0)}{\scalebox{3}{$\Bc$}}
+  \end{VCPicture}
+}
+\hfill
+~
+
+
+\subsubsection{\Fct{union}}
+
+Just the union of the two automata. It is a graph function indeed.
+
+\subsubsection{\Fct{sum}}
+\label{ssc:aut-sta-sum-A}
+
+\Prec
+\Prm{a.xml} and \Prm{b.xml} are \emph{standard} 
+for the sum operation is defined only on standard automata.
+
+\Spec 
+
+\noindent 
+$\bullet$ The standard automaton $\Ac\autplus\Bc=\bra{Q\cup R\setminus\{j\},A,G,\{i\},V}$ is defined as:
+\\
+\begin{minipage}{7cm}
+\begin{align*}
+\forall p,q\in & Q\cup R\setminus\{j\}\, ,\\
+\ G_{p,q}&=
+\begin{cases}
+E_{p,q}&\quad {if}\quad p,q\in Q\\
+F_{p,q}&\quad {if}\quad p,q\in R\\
+F_{j,q}&\quad {if}\quad p=i\text{ and }q\in R\\
+0_\K &\quad {otherwise}
+\end{cases}\\[.5em]
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}{6cm}
+%\begin{align*}
+\forall p\in& Q\cup R\setminus\{j\}\, ,\\
+\ V_p&=
+\begin{cases}
+T_i\oplus U_j &\quad {if}\quad p=i\\
+T_p&\quad {if}\quad p\in Q\setminus\{i\}\\
+U_p&\quad {if}\quad p\in R
+\end{cases}
+\end{align*}
+\end{minipage}
+\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-7,-7)(5,2.5)}
+    \psellipse[linecolor=gray](.8,-2.25)(4.5,4.5)
+    \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+    \State{(-5,-2.25)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i\oplus U_j}
+    \FinalR{e}{Q}{T_q}
+    \FinalL{e}{R}{T_r}
+                                %
+    \ArcL{I}{P}{E_{i,p}}
+    \ArcL{I}{Q}{}\LabelR{E_{i,q}}
+    \VCPut{(0,-4.5)}{%
+      \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+      \State[s]{(-1,1)}{S}
+      \State[t]{(-1,-1)}{T}
+      \State[u]{(3,.5)}{U}
+                                %
+      \FinalR{e}{T}{U_t}
+      \FinalL{e}{U}{U_u}
+                                %
+      \ArcR{I}{S}{}\LabelL{F_{j,s}}
+      \ArcR{I}{T}{F_{j,t}}
+    }
+    \VCPut{(1,-2.25)}{\scalebox{3}{$\Ac\autplus\Bc$}}
+  \end{VCPicture}}
+
+\subsubsection{\Fct{concatenate}}
+\label{ssc:aut-sta-con-A}
+
+\Prec
+\Prm{a.xml} and \Prm{b.xml} are \emph{standard} 
+for the concatenation operation is defined only on standard automata.
+
+\Spec 
+\noindent 
+$\bullet$ The standard automaton 
+$\Ac\autprod\Bc=\bra{Q\cup R\setminus\{j\},A,G,\{i\},V}$ is:
+\\
+\begin{minipage}[t]{6cm}
+\begin{align*}
+\forall p,q\in & Q\cup R\setminus\{j\}\, ,\\
+\ G_{p,q}&=
+\begin{cases}
+E_{p,q}&\quad {if}\quad p,q\in Q\\
+F_{p,q}&\quad {if}\quad p,q\in R\\
+T_pF_{j,q}&\quad {if}\quad p\in Q\text{ and }q\in R\\
+0_\K &\quad {otherwise}
+\end{cases}
+\end{align*}
+\end{minipage}
+\quad 
+\begin{minipage}[t]{6cm}
+\begin{align*}
+\forall p\in& Q\cup R\setminus\{j\}\, ,\\
+\\
+\ V_p&=
+\begin{cases}
+U_p &\quad {if}\quad p\in R\\
+T_p\,U_j&\quad {if}\quad p\in Q
+\end{cases}
+\end{align*}
+\end{minipage}
+
+\begin{center}
+\VCDraw{%
+  \begin{VCPicture}{(-5,-4)(14,4)}
+    \psellipse[linecolor=gray](5.3,0)(8.5,3.5)
+    \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i\,U_j}
+    \FinalR[.5]{n}{Q}{T_q\,U_j}
+    \FinalL[.5]{n}{R}{T_r\,U_j}
+                                %
+    \VArcL{arcangle=50,ncurv=1}{I}{P}{E_{i,p}}
+%{I}{P}{}\LabelR{E_{i,p}}
+    \ArcR{I}{Q}{}\LabelL{E_{i,q}}
+    \VCPut{(9,0)}{%
+      \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+      \State[s]{(-1,1)}{S}
+      \State[t]{(-1,-1)}{T}
+      \State[u]{(3,.5)}{U}
+                                %
+      \FinalR{e}{T}{U_t}
+      \FinalL{e}{U}{U_u}
+    }
+                                %
+    \LArcL[.8]{I}{S}{T_i\,F_{j,s}}
+    \LArcR[.8]{I}{T}{T_i\,F_{j,t}}
+    \EdgeL[.3]{Q}{S}{T_q\,F_{j,s}}
+    \EdgeR{Q}{T}{T_q\,F_{j,t}}
+    \EdgeL{R}{S}{T_r\,F_{j,s}}
+    \EdgeL[.8]{R}{T}{T_r\,F_{j,s}}
+                                %
+    \VCPut{(9,-2.25)}{\scalebox{3}{$\Ac\autprod\Bc$}}
+  \end{VCPicture}}
+\end{center}
+
+\bigskip 
+\subsubsection{\Fct{star}}
+\label{ssc:aut-sta-sta-A}
+
+\Prec
+\Prm{a.xml} is \emph{standard} 
+for the star operation is defined only on standard automata.
+
+\Spec
+
+\noindent 
+$\bullet$ The standard automaton $\autstar{\Ac}=\bra{Q,A,E^{(\autstarsymb)},\{i\},T^{(\autstarsymb)}}$ is:
+\\\begin{minipage}{6cm}
+\begin{align*}
+\forall p,q\in & Q,\\
+\ E^{(\autstarsymb)}_{p,q}&=
+\begin{cases}
+T_i^*E_{i,q}&\quad {if}\quad p=i\\
+T_pT_i^*E_{i,q}\oplus E_{p,q}&\quad {otherwise}
+\end{cases}\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}{6cm}
+%\begin{align*}
+\forall p\in& Q,\\
+\ T^{(\autstarsymb)}_p&=
+\begin{cases}
+T_i^*&\quad {if}\quad p=i\\
+T_pT_i^*&\quad {otherwise}
+\end{cases}
+\end{align*}
+\end{minipage}
+\qquad\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-7,-3)(5,3)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2.5)
+    \State[i]{(-5,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i^*}
+    \FinalL{se}{Q}{T_qT_i^*}
+    \FinalL{e}{R}{T_rT_i^*}
+                                %
+    \ArcL{I}{P}{T_i^*\,E_{i,p}}
+    \ArcR{I}{Q}{T_i^*\,E_{i,q}}
+    \VArcR{arcangle=-130,ncurv=1}{R}{P}{T_r\,T_i^*\,E_{i,p}}
+    \VArcL{arcangle=130,ncurv=1.1}{R}{Q}{T_r\,T_i^*\,E_{i,q}}
+    \VCurveL{angleA=80,angleB=-160}{Q}{P}{T_q\,T_i^*\,E_{i,p}}
+    \CLoopR[.5]{20}{Q}{T_q\,T_i^*\,E_{i,q}}
+    \VCPut{(1,1)}{\scalebox{3}{$\autstar{\Ac}$}}
+  \end{VCPicture}
+}
+
+
+\bigskip 
+\subsubsection{\Fct{left-mult}}
+\label{ssc:aut-sta-lft-mlt-A}
+
+\Prec
+\Prm{a.xml} is \emph{standard} for the left 
+`exterior' multiplication
+operation is defined only on standard automata. 
+
+\Spec
+
+\noindent 
+$\bullet$ The standard automata $k\Ac=\bra{Q,A,E^{(k.)},\{i\},T^{(k.)}}$ is defined by:
+\\
+\begin{minipage}{8cm}
+\begin{align*}
+\forall p,q\in Q\, ,\qquad E^{(k.)}_{p,q}&=
+\begin{cases}
+k\,E_{p,q}&\quad {if}\quad p=i\\
+E_{p,q}&\quad {otherwise}
+\end{cases}\\
+\forall p\in Q\, ,\qquad T^{(k.)}_p&=
+\begin{cases}
+k\,T_p&\quad {if}\quad p=i\\
+T_p&\quad {otherwise}
+\end{cases}
+\end{align*}
+\end{minipage}
+\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{k\,T_i}
+    \FinalR{e}{Q}{T_q}
+    \FinalL{e}{R}{T_r}
+                                %
+    \EdgeL{I}{P}{k\,E_{i,p}}
+    \EdgeR{I}{Q}{k\,E_{i,q}}
+    \VCPut{(1,0)}{\scalebox{3}{$k\Ac$}}
+  \end{VCPicture}}
+
+
+  \bigskip 
+\subsubsection{\Fct{right-mult}}
+\label{ssc:aut-sta-rgt-mlt-A}
+
+\Prec
+\Prm{a.xml} is \emph{standard} for the right 
+`exterior' multiplication
+operation is defined only on standard automata. 
+
+\Spec
+\noindent 
+$\bullet$ The standard automata $\Ac k=\bra{Q,A,E,\{i\},T^{(.k)}}$ is defined by:
+\\
+\begin{minipage}{8cm}
+\begin{equation*}
+\forall p\in Q\, , \qquad T^{(.k)}_p=T_p\,k
+\qquad \qquad 
+\end{equation*}
+\end{minipage}
+\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i\,k}
+    \FinalR{e}{Q}{T_q\,k}
+    \FinalL{e}{R}{T_r\,k}
+                                %
+    \EdgeL{I}{P}{E_{i,p}}
+    \EdgeR{I}{Q}{E_{i,q}}
+    \VCPut{(1,0)}{\scalebox{3}{$\Ac k$}}
+  \end{VCPicture}}
+
+\bigskip 
+
+\subsection{From automata to expressions}
+\label{ssc:aut-to-exp-A}
+
+\vcsn implements the \emph{state elimination method} for computing 
+the rational expression that denotes the behaviour of an automaton.
+\index{state elimination method}%
+The outcome of the algorithme depends upon the order in which the 
+states are `eliminated'.
+
+In \vcsn library, this order of states is given to the fonction as a 
+second parameter called `\code{chooser}'.
+The \code{chooser} either runs over a list of states that is given 
+explicitely, or implements a heuristics that computes at each step 
+the next state to be suppressed.
+Two heuristics are implemented in the library: the \emph{'na{\"\i}ve 
+heuristics} which is described below, and a variant of it which takes 
+into account not only the number of transitions incident to every 
+given state, but also the length of the expressions that label these 
+transitions it is due to Delgado and Morais and described in 
+\cite{DelgMora04}.
+
+Note that in any case and for a precise specification (in view of the derivation 
+procedure in particular), one should specify the bracketting:
+\begin{equation}
+    p\path{\Fmsf}q\path{\Gmsf}q\path{\Hmsf}r
+    \e \text{gives}\e
+    p\path{(\Fmsf\cdot\Gmsf^{*})\cdot\Hmsf}r
+\label{equ:eli-met}
+\end{equation}
+after the elimination of the state~$q$.
+
+
+\subsubsection{The `na{\"\i}ve' heuristics}
+
+\tha Make real the initial and final subliminal states~$i$ and~$t$. 
+From~$i$ to every initial state~$p$, there is thus a transition with 
+label~$I(p)$.
+Dually, from every final state~$r$ to~$t$, there is thus a transition with 
+label~$T(r)$.
+
+\thb For every state~$p$ (outside~$i$ and~$t$) compute a two component 
+index~$(l(p),k(p))$:\\
+\tiret $l(p)=1$ if~$p$ is the origin of a loop, $l(p)=0$ otherwise;\\
+\tiret $k(p)= [i(p)-1][o(p)-1]$ where~$i(p)$ is the in-degree of~$p$ 
+and~$o(p)$ its out-degree.\\
+\tiret Lexicographically order the states by their index.
+
+\thc While there remains states,\\
+\tiret choose the state~$q$ with smallest index,\\
+\tiret remove it and replace the incoming and outgoing transitions 
+according to~\equnm{eli-met},\\
+\tiret recompute the index for those states 
+that were adjacent to~$q$.
+
+\thd Return the label of the transition from~$i$ to~$t$.
+
+
+\longonly{%
+\begin{ComVd}{101206}
+        
+\thi It is to be carefully checked whether the \code{NHChooser} and 
+the \code{DMChooser} correctly implement the na{\"\i}ve and the 
+Delgado--Morais heuristics respectively.
+
+
+\thii I do not see why we put 
+$k(p)= [i(p)-1][o(p)-1]$ rather than $k(p)= [i(p)][o(p)]$ in the 
+description of the `na{\"\i}ve heuristics. 
+\end{ComVd}
+}%
+
+% \thiii The implementation of the algorithm probably implies that the 
+% automaton is transformed into a \code{labels-are-series} automaton, 
+% whatever its native kind. 
+% 
+
+% \addtocounter{section}{1}
+\section{Weighted automata and rational expressions over free monoids}
+\label{sec:aut-fre-mul-spe}
+
+\addtocounter{subsection}{1}
+% \subsection{Transformations of automata}
+
+% \addtocounter{subsubsection}{1}
+% \subsubsection{\Fct{quotient}}
+% \label{ssc:aut-mul-quo-A}%
+% 
+% As announced, a variant of Hopcroft's algorithm.
+% 
+% \begin{ComVd}{101205}
+%     Mérite d'être décrit, au moins dans les grandes lignes.
+% \end{ComVd}
+
+\subsection{Behaviour of automata}
+\label{ssc:aut-mul-beh-A}%
+
+\subsubsection{\Fct{eval}}
+\label{ssc:evl-wrd-A}%
+
+As the automaton~$\Ac$ implemented by \code{a.xml} is supposed to be 
+\emph{realtime}, it is described by a representation~$\lmn$.
+The coefficient of a word~$w$ in the series~$\CompAuto{\Ac}$ realised 
+by~$\Ac$ is 
+$\msp\lambda\matmul\mu(w)\matmul\nu\msp$
+(\cf \cite[Sect.~III.3]{Saka03}).
+The vector $\msp\lambda\matmul\mu(w)\msp$ is computed by induction 
+on~$\ell=\lgt{w}$, the length of~$w$.
+The overall complexity of the algorithm 
+is~$\mathrm{O}(\ell\xmd d^{2})$ where~$d$ is the dimension of~$\Ac$.
+
+
+
+
+
+% \addtocounter{section}{1}
+\section{Automata and rational expressions on free monoids with 
+weights in a field}
+\label{sec:aut-fre-fld-A}
+
+\subsection{Operations on automata}
+
+\subsubsection{Reduction of representations over a field}
+
+
+\paragraph{Automata and representation}~
+
+Any finite automaton over~$\Ae$ with multiplicity in~$\K$ is 
+equivalent to a \emph{realtime} automaton~$\Ac$ with set of 
+states~$Q$:
+$\msp \Ac=\aut{I,E,T}\msp$ 
+where~$I$ and~$T$ are vectors in~$\K^{Q}$ and~$E$ is a square matrix 
+of dimension~$Q$, whose entries are \emph{linear combination} with 
+coefficients in~$\K$ \emph{of letters in}~$A$.
+One can then write:
+\begin{equation}
+    E = \sum_{a \in A} a\mu a
+    \notag
+%     \label{}
+\end{equation}
+where every~$a\mu$ is a square matrix of dimension~$Q$ with entries 
+in~$\K$.
+These matices define a morphism~$\mu$ from~$\Ae$ into~$\K^{Q\x Q}$, 
+and for every~$w$ in~$\Ae$ the coefficient of~$w$ in the series~$s$ 
+realised by~$\Ac$ is
+$\msp\bra{s,w}=I\cdot w\mu\cdot T\msp$.
+The tuple~$(I,\mu,T)$ is called a \emph{representation} (of 
+dimension~$Q$) of~$s$.
+
+
+\paragraph{Rational series over a field}~
+
+If~$\K$ is a \emph{field}~$\F$, 
+for every $\F$-rational series~$s$, there exists an integer~$r$, 
+called the \emph{rank} of~$s$ which is the minimal dimension of any 
+representation of~$s$.
+A representation of minimal dimension is said to be \emph{reduced}.
+
+\begin{theorem}[Sch\"utzenberger]
+    A reduced representation of a $\F$-rational series~$s$ is 
+    effectively computable from any representation of~$s$.
+\end{theorem}
+
+A reduced representation of a rational series is an object comparable 
+to the minimal automaton of a rational language, to the extent it is 
+not unique but defined up to a basis transformation within~$\F^{^Q}$.
+The theorem implies two $\F$-automata which realize~$s$ and~$t$ are 
+equivalent if, and only if the reduced representation of the 
+series~$s-t$ is of dimension~$0$ and this is decidable.
+
+
+\paragraph{The algorithm}~
+
+A representation~$(I,\mu,T)$ of dimension~$Q$ being given, the 
+algorithm that  
+underlies the theorem amounts to find a maximal prefix-closed subset~$P$ 
+of~$\Ae$ such that the vectors~$I\matmul p\mu$ are independent 
+(in~$\F^{Q}$).
+Such set of vectors allows in turn to compute a new and equivalent 
+representation, of dimension~$P$.
+The substance of the theorem is that it is sufficient to perform this 
+algorithm twice in a row, on the given representation and then on its 
+transpose in order to get the reduced representation.
+
+The elementary step in this algorithm is thus to determine whether a 
+given vector belongs to a subspace generated by a set of given 
+independent vectors and in the positive case to compute its 
+coordinates in this system, that is to solve a system of linear 
+equations.
+In order to reach the optimal complexity, and also to be able to 
+treat the case of non-commutative fields (a case which does not 
+appear in \vcsnv), these systems are solved by an iterative 
+method of Gaussian elimination.
+
+
+\addtocounter{section}{1}
+% \section{Boolean automata and rational expressions on free monoids}
+% \label{sec:aut-fre-boo-spe-A}
+
+% \subsection{Operations on automata}
+% 
+% \subsubsection{\Fct{minimize}}
+% \label{ssc:aut-boo-min-A}%
+% 
+% As announced, \vcsn implements Hopcroft's algorithm.
+% 
+% \begin{ComVd}{101205}
+%     Mérite d'être décrit, au moins dans les grandes lignes.
+% \end{ComVd}
+
+% \addtocounter{subsection}{1}
+% \subsection{Operations on expressions}
+% 
+% \subsubsection{\Fct{derived-term}}
+% \label{ssc:der-ter-A}%
+% 
+% % L'algorithme pour construire l'automate des termes dérivés booléens
+% % dans vaucanson est le suivant:
+% 
+% The derived term automaton is constructed (in the Boolean case) by 
+% the following algorithm (rédigé par PYA):
+% 
+% % \begin{ComVd}{}
+% 
+% 
+% \thi L'expression est transformée en \code{prat\_exp}\\
+% (\code{include/vaucanson/algorithms/internal/partial\_rat\_exp.hxx}).
+% Il s'agit
+% d'une liste de noeuds représentant donc une concaténation de 
+% sous-expressions. En fait: 
+% 
+%  - $\mathtt{prat}(\Ed+\Fd) = \Ed+\Fd$
+%  
+%  - $\mathtt{prat}(\Ed*) = \Ed*$
+%  
+%  - $\mathtt{prat}(\Ed.\Fd) = \mathtt{prat}(\Ed) , \Fd$
+%  
+% Les états de l'automate vont être des \code{prat\_exp}, la transformation de
+% l'expression initiale donne l'état initial, l'automate est construit
+% de manière incrémentale. 
+% 
+% \thii A chaque état:
+% 
+%  - on vérifie le terme constant de la \code{prat\_exp} et on rend l'état final
+%    en fonction
+%    
+%  - pour chaque lettre de l'alphabet on dérive la \code{prat\_exp}\\
+%    (\code{include/vaucanson/algorithms/internal/partial\_rat\_exp\_derivation.hxx})
+%    et on ajoute une transition en fonction.
+% 
+% Les états sont identifiés grace à l'opérateur \code{==} défini sur les
+% \code{prat\_exp} dans\\
+% \code{include/vaucanson/algorithms/internal/partial\_rat\_exp.hxx} .
+% % \end{ComVd}
+
+% \addtocounter{section}{1}
+\section{Weighted automata over a product of two free monoids}
+\label{sec:fmp-fct-spe-A}
+
+\addtocounter{subsection}{1}
+% \subsection{Transformations of transducers}
+
+\subsection{Operations on transducers}
+
+\addtocounter{subsubsection}{1}
+
+\subsubsection{\Fct{composition}, \Fct{b-composition}}
+\label{ssc:fmp-com-E}%
+
+The Composition Theorem, due to Elgot and Mezei (\cf \cite{Saka03})
+is one of the basic results on rational relations and finite 
+transducers. 
+The composition algorithm described here has been presented 
+in~\cite{ClavEtAl05}.
+We describe first the algorithm that realises the \Fct{b-composition} 
+and then the more sophisticated one that realises the 
+\Fct{composition}. 
+
+\paragraph{Product of normalized transducers}~
+
+We first consider two proper \emph{normalized} transducers:
+\begin{equation}
+    \Tc = \aut{Q,\Ae\x \Be,E,I,T}
+    \ee\text{and}\ee
+    \Uc = \aut{R,\Be\x \Ce,F,J,U}
+    \eqvrg
+    \notag
+%     \label{}
+\end{equation}
+% $\msp \Tc = \aut{Q,\Ae\x \Be,E,I,T}\msp $ and
+% $\msp \Uc = \aut{R,\Be\x \Ce,F,J,U}\msp $,
+that is, the transitions of $\Tc$ are labelled in $A\x 1$ or in $1\x B$
+and those of $\Uc$ are labelled in $B\x 1$ or in $1\x C$.
+
+The proof of the Composition Theorem
+% as presented in \cite{Bers79}
+is equivalent to the construction of the transducer
+\begin{equation*}
+     \Tc\bowtie\Uc = \aut{Q\x R,A^{*}\x C^{*},G,I\x J,T\x U}
+\end{equation*}
+by the following rules.
+
+\noindent
+(i) If $\msp \Tran{p,(a,1),q} \in E\msp$
+then for all $r\in R$
+$\msp \Tran{(p,r),(a,1),(q,r)} \in G\msp$.
+
+\noindent
+(ii) If $\msp \Tran{r,(1,u),s} \in F\msp$
+then for all $q\in Q$
+$\msp \Tran{(q,r),(1,u),(q,s)} \in G\msp$.
+
+\noindent
+(iii) If $\msp \Tran{p,(1,x),q} \in E\msp$ \emph{and}
+$\msp (r,(x,1),s) \in F\msp$
+then
+$\msp \Tran{(p,r),(1,1),(q,s)} \in G\msp$.
+
+A next possible step is to eliminate the transitions with label
+$(1,1)$ by means of a classical closure algorithm.
+% 
+\figur{tra-pro} shows an example of such product, before and after the 
+elimination of spontaneous transitions.
+
+
+\begin{figure}[htbp]
+     \centering
+\ee
+\VCDraw{%[.9]
+\begin{VCPicture}{(-8,-4)(4,7)}
+\SmallState
+%
+\VCPut{(-7,0)}{%
+\State{(0,0)}{A}\State{(0,3)}{B}\State{(0,-3)}{C}
+\VCPut{(-2,3)}{\scalebox{3}{$\Tc_{1}$}}
+               }%
+%[n][s][s]
+\Initial{A}\Final{A}\Final{C}
+%
+\ArcR{C}{A}{\IOL{1}{y}}\ArcR{A}{B}{\IOL{1}{x}}
+\ArcR{B}{A}{\IOL{b}{1}}\ArcR{A}{C}{\IOL{a}{1}}
+%%%%
+\VCPut{(0,6)}{%
+\State{(0,0)}{X}\State{(3,0)}{Y}\State{(-3,0)}{Z}
+\VCPut{(-5,0)}{\scalebox{3}{$\Uc_{1}$}}         }%
+\Initial[n]{X}\Final[s]{X}\Initial[n]{Z}
+%
+\ArcR{Z}{X}{\IOL{x}{1}}\ArcR{X}{Y}{\IOL{y}{1}}
+\ArcR{Y}{X}{\IOL{1}{u}}\ArcR{X}{Z}{\IOL{1}{v}}
+\VCPut{(-3,0)}{%
+\State{(0,0)}{AZ}\State{(0,3)}{BZ}\State{(0,-3)}{CZ}
+          }%
+\VCPut{(0,0)}{%
+\State{(0,0)}{AX}\State{(0,3)}{BX}\State{(0,-3)}{CX}
+          }%
+\VCPut{(3,0)}{%
+\State{(0,0)}{AY}\State{(0,3)}{BY}\State{(0,-3)}{CY}
+          }%
+%
+\Initial[nw]{AX}\Final[sw]{AX}\Initial[nw]{AZ}\Final[se]{CX}
+%
+\ChgEdgeLabelScale{.9}
+\ArcR{BZ}{AZ}{\IOL{b}{1}}
+\ArcR{AZ}{CZ}{\IOL{a}{1}}
+\ArcR{BX}{AX}{}\LabelL{\IOL{b}{1}}
+\ArcR{AX}{CX}{\IOL{a}{1}}
+\ArcR{BY}{AY}{}\LabelL{\IOL{b}{1}}
+\ArcR{AY}{CY}{}\LabelL{\IOL{a}{1}}
+\ArcR{AY}{AX}{\IOL{1}{u}}
+\ArcR{AX}{AZ}{}\LabelL{\IOL{1}{v}}
+\ArcR{BY}{BX}{\IOL{1}{u}}
+\ArcR{BX}{BZ}{\IOL{1}{v}}
+\ArcR{CY}{CX}{}\LabelL{\IOL{1}{u}}
+\ArcR{CX}{CZ}{}\LabelL{\IOL{1}{v}}
+\EdgeLineDouble
+\ChgEdgeLabelScale{.8}
+\EdgeL[.55]{AZ}{BX}{\IOL{1}{1}}
+\EdgeL[.55]{CX}{AY}{\IOL{1}{1}}
+\EdgeLineSimple
+%%%
+\end{VCPicture}}%
+\eee
+\ee
+\VCDraw{%[.9]
+\begin{VCPicture}{(-4,-4)(4,7)}
+\SmallState
+%
+\VCPut{(0,6)}{\scalebox{3}{$\Tc_{1}\bowtie\Uc_{1}$}}
+\VCPut{(0,0)}{%
+\VCPut{(-3,0)}{%
+\State{(0,0)}{AZ}\State{(0,3)}{BZ}
+\DimState\State{(0,-3)}{CZ}\RstState
+          }%
+\VCPut{(0,0)}{%
+\State{(0,0)}{AX}\State{(0,-3)}{CX}
+\DimState\State{(0,3)}{BX}\RstState
+          }%
+\VCPut{(3,0)}{%
+\State{(0,-3)}{CY}
+\DimState\State{(0,0)}{AY}\State{(0,3)}{BY}\RstState
+          }%
+         }%
+%
+\Initial[ne]{AX}\Final[se]{AX}
+\Initial[nw]{AZ}\Final[sw]{CX}
+%
+\ChgEdgeLabelScale{.9}
+\ArcR{BZ}{AZ}{\IOL{b}{1}}
+\DimEdge
+\ArcR{AZ}{CZ}{}%{\IOL{a}{1}}
+\ArcR{BX}{AX}{}%{\IOL{b}{1}}
+\RstEdge
+\ChgEdgeLabelScale{.9}
+\ArcR[.55]{AX}{CX}{\IOL{a}{1}}
+\DimEdge
+\ArcR{BY}{AY}{}%{\IOL{b}{1}}
+\ArcR{AY}{CY}{}%{\IOL{a}{1}}
+\ArcR{AY}{AX}{}%{\IOL{1}{u}}
+\RstEdge
+\ChgEdgeLabelScale{.9}
+\ArcR{AX}{AZ}{\IOL{1}{v}}
+\DimEdge
+\ArcR{BY}{BX}{}%{\IOL{1}{u}}
+\ArcR{BX}{BZ}{}%{\IOL{1}{v}}
+\ArcR{CX}{CZ}{}%{\IOL{1}{v}}
+\RstEdge
+\ChgEdgeLabelScale{.9}
+\ArcR{CY}{CX}{\IOL{1}{u}}
+\ArcR[.55]{AZ}{AX}{\IOL{b}{1}}
+\ArcR[.55]{AZ}{BZ}{\IOL{1}{v}}
+\ArcR{CX}{CY}{\IOL{a}{1}}
+\ArcR[.55]{CX}{AX}{\IOL{1}{u}}
+%	
+\end{VCPicture}}%
+\ee
+\caption{Composition Theorem on Boolean transducers}
+\label{fig:tra-pro}
+\end{figure}
+
+
+
+\paragraph{Product of subnormalized transducers}~
+
+This construction can easily be extended to \emph{subnormalized} 
+transducers, which are such that transitions are 
+labelled in
+$\msp \widehat{A}\x\widehat{B} \setminus (1,1)\msp$
+where $\msp\widehat{A} = A \cup \{1\}\msp$.
+It amounts to replace (iii) by
+
+\noindent
+(iii') If $\msp \Tran{p,(a',x),q} \in E\msp$ with $a'\in\widehat{A}$
+\emph{and}
+$\msp \Tran{r,(x,u'),s} \in F\msp$ with $u'\in\widehat{C}$\\
+\ee then
+$\msp \Tran{(p,r),(a',u'),(q,s)} \in G\msp$.
+
+In this form, it contains as a particular case the composition of
+letter-to-letter transducers.
+
+\paragraph{Product of subnormalized transducers and composition}~
+
+It is known that this construction, which works perfectly well for 
+Boolean transducers, does not yields a transducer for the composition 
+if the multiplicities are to be taken into account.
+% Let us say that two paths in $\Tc\bowtie\Uc$ are \emph{equivalent}
+% if they correspond to the same pair of paths in $\Tc$ and $\Uc$.
+
+For instance, there is one path labeled $(aa,y)$ in $\Tc_{1}$ and one
+path labeled $(y,u)$ in $\Uc_{1}$; and there are \emph{two}
+ paths labeled $(aa,u)$ in $\Tc_{1}\bowtie\Uc_{1}$.
+Hence,  $\Tc\bowtie\Uc$ does not realize the composition of the
+weighted relations realized by $\Tc$ and $\Uc$.
+
+\paragraph{Preparation of transducers for the composition}~
+
+In order to have a product of transducers that realises the weighted 
+composition, we performa preliminary operation on both operands that 
+distinguishes between transitions and the take advantage of this 
+supplementary information in order to supress some transitions in the 
+product.
+
+
+The construction on $\Tc$ and $\Uc$ can be described
+as follows:
+
+\tha Split the states of $\Tc$ and their \emph{outgoing}
+transitions in such a way they are labeled either in $(A\x 1)$ ---
+black states --- or in $\widehat{A}\x B$ (or the state is final) ---
+white states; the incoming transitions are duplicated on split states.
+This is transducer $\Tc'$.
+
+\thb Split the states of $\Uc$ and their \emph{incoming}
+transitions in such a way they are labeled either in $(1\x C)$ ---
+black states --- or in $B\x \widehat{C}$ (or the state is initial) ---
+white states; the outgoing transitions are duplicated on split states.
+This is transducer $\Uc'$.
+
+\thc Apply the preceeding algorithm [steps (i), (ii) and (iii')] to
+$\Tc'$ and $\Uc'$ in order to  build $\Tc'\bowtie\Uc'$.
+
+\thd Delete the black-black states (every state in $\Tc'\bowtie\Uc'$
+is a pair of states).
+
+\thejs Trim and eliminate the transitions with label $(1,1)$ by
+classical closure.
+
+Figure~\ref{fig:com-mul} shows the construction applied to $\Tc_{1}$ and 
+$\Uc_{1}$.
+
+
+\begin{figure}[htbp]
+      \centering
+\VCDraw[.9]{%
+\begin{VCPicture}{(-9,-8)(8,9)}
+\SmallState
+%
+\VCPut{(-7,0)}{%
+\State{(0,0)}{A}
+\ChgStateFillColor{lightgray}
+\State{(0,3)}{B}
+\State{(0,-3)}{AA}
+\RstStateFillColor
+\State{(0,-6)}{C}
+           }%
+%[n][s][s]
+\Initial{A}\Initial{AA}\Final{A}\Final{C}
+%
+\ChgLArcAngle{50}
+\ChgLArcCurvature{.9}
+\ChgEdgeLabelScale{.85}
+\LArcR[.7]{C}{A}{\IOL{1}{y}}
+\ArcR{C}{AA}{\IOL{1}{y}}
+\ArcR{A}{B}{\IOL{1}{x}}
+\ArcR{B}{A}{\IOL{b}{1}}
+\LArcR[.7]{B}{AA}{\IOL{b}{1}}
+\ArcR{AA}{C}{\IOL{a}{1}}
+%%%%
+\VCPut{(0,7)}{%
+\State{(0,0)}{X}
+\ChgStateFillColor{lightgray}
+\State{(-3,0)}{Z}
+\State{(3,0)}{XX}
+\RstStateFillColor
+\State{(6,0)}{Y}
+}%
+\Initial[n]{X}\Final[s]{X}\Final[s]{XX}\Initial[n]{Z}
+%
+\ArcR{Z}{X}{\IOL{x}{1}}
+\LArcR[.3]{X}{Y}{\IOL{y}{1}}
+\ArcR{XX}{Y}{\IOL{y}{1}}
+\ArcR{Y}{XX}{\IOL{1}{u}}
+\ArcR{X}{Z}{\IOL{1}{v}}
+\LArcR[.3]{XX}{Z}{\IOL{1}{v}}
+\VCPut{(-3,0)}{%
+\State{(0,0)}{AZ}
+\DimState
+\ChgStateFillColor{lightgray}
+\State{(0,3)}{BZ}\State{(0,-3)}{AAZ}
+\RstStateFillColor
+\State{(0,-6)}{CZ}
+\RstState
+           }%
+\VCPut{(0,0)}{%
+\DimState\State{(0,3)}{BX}\RstState
+\State{(0,0)}{AX}\State{(0,-3)}{AAX}\State{(0,-6)}{CX}
+           }%
+\VCPut{(3,0)}{%
+\DimState
+\ChgStateFillColor{lightgray}
+\State{(0,3)}{BXX}\State{(0,-3)}{AAXX}
+\RstStateFillColor
+\RstState
+\State{(0,0)}{AXX}\State{(0,-6)}{CXX}
+           }%
+\VCPut{(6,0)}{%
+\DimState
+\State{(0,0)}{AY}\State{(0,3)}{BY}
+\State{(0,-3)}{AAY}
+\RstState
+\State{(0,-6)}{CY}
+           }%
+%[se]
+\Initial[nw]{AZ}\Initial[ne]{AX}\Final[se]{AX}
+\Initial[w]{AAX}\Final{AXX}
+\Final[sw]{CX}\Final[sw]{CXX}
+%
+\ArcR{AX}{AZ}{\IOL{1}{v}}
+\LArcR[.3]{AXX}{AZ}{\IOL{1}{v}}
+\ArcR[.55]{AZ}{AX}{\IOL{b}{1}}
+\ArcR[.55]{AZ}{AAX}{\IOL{b}{1}}
+\ArcR{AAX}{CX}{\IOL{a}{1}}
+\ArcR{CY}{CXX}{\IOL{1}{u}}
+\ArcR{CXX}{CY}{\IOL{a}{1}}
+\LArcR{CX}{CY}{\IOL{a}{1}}
+\ArcR{CX}{AXX}{}\LabelL[.7]{\IOL{1}{u}}
+\ArcR[.6]{CXX}{AXX}{\IOL{1}{u}}
+%
+\end{VCPicture}}
+      \caption{A composition that preserves multiplicity}
+      \label{fig:com-mul}
+\end{figure}
+
+
+
+% \section{Weighted automata on free monoids over alphabets of pairs}
+% \label{sec:alp-pai-spe}
+%%%%%%%%%%%%%%%%
+\endinput
+
+
+
+
+
+
+\addtocounter{section}{-1}
+
+\section{General considerations}
+
+\begin{ComV} (091226)
+    
+This section has to be written.
+\end{ComV}
+
+
+\subsection{Ancillary, hidden and non-public functions}
+\label{ssc:anc-hidd-npb-A}
+
+\begin{ComV} (091226)
+    
+A classification that is meant first for the \vcsn Group.
+
+\emph{Hidden} means: `not accessible from \tafkit but accessible from 
+the library', 
+\emph{non-public} means: `not accessible from the library',
+\emph{ancillary} means: `accessible from \tafkit, not of interest 
+by itself but as it allows to build other functions.
+
+As we want to test as much functions as possible from \tafkit, it may 
+be the case that `hidden' and even `non-public' functions may be 
+called indeed from \tafkit: the distinction being more on what is 
+described to the user and what is not.
+\end{ComV}
+
+
+\subsection{In-place and not in-place algorithms}
+\label{ssc:inp-nin-A}
+
+This distinction is not relevant for \tafkit functions as they output 
+the result in the file which is given as output file, and as they 
+will not write on the input file.
+
+\begin{QstV} (091226)
+    
+    What happens if the output file is equal to (one of) the input 
+    file(s)?
+\end{QstV}
+
+
+But the question is certainly to be settled for the functions in the 
+library. 
+In many cases, there will be two versions of the same function.
+
+\subsection{Complexity}
+\label{ssc:com-plx-A}
+
+
+
+
+
+\section{Graph functions}
+\label{sec:gra-fun-A}
+
+\begin{enumerate}
+    
+\addtocounter{enumi}{-1}
+\item \Fct{transpose-g}
+
+This is a hidden (and ancillary) graph function, not accessible to the user through 
+\tafkit (because it would be somewhat confusing with the true \Fct{transpose}. 
+It builds the transpose of the graph, but leaves the labels untouched.
+
+\item \Fct{accessible}, \Fct{coaccessible}, \Fct{trim}
+
+Graph traversal. Implemented by depth-first, or breadth-first search?
+
+Should be in-place by default in the library.
+
+The algorithm should access \emph{entries} rather than 
+\emph{transitions}.
+
+\Fctp{coaccessible} = \Fctq{transpose-g}{\Fctq{accessible}{\Fctp{transpose-g}}}
+
+\Fctp{trim} = \Fctq{coaccessible}{\Fctp{accessible}}
+
+Complexity should be  proportional to the size \emph{of the result}.
+This implies that tags `number of states' and `number of transitions' 
+but attached to automata, and updated by every function that modify 
+these parameters. 
+
+This can be considered too heavy, in which case these functions will have 
+a complexity proportional to the size \emph{of the input}.
+
+\item \Fct{is-accessible}, \Fct{is-coaccessible}, \Fct{is-trim}
+
+Boolean answer. Silent in the non-verbose mode.
+
+Raise the question of having flag tags that could be used in trusted 
+components.
+
+\item \Fct{is-empty}, \Fct{is-useless}
+
+cf. la note : sur la nature du vide. Introuvable maintenant sur le 
+trac.
+
+\end{enumerate}
+
+
+\section{Automata-RatExp functions}
+
+\subsection{Properties and transformations of automata}
+
+\subsubsection{\Fct{standardize}}
+
+An automaton is
+said to be \emph{standard} if it has a \emph{unique initial state} which is the
+destination of no transition and whose \emph{initial multiplicity} is equal to
+the identity (of the multiplicity semiring or of the series semiring,
+according to the current convention).
+
+Not only every automaton is equivalent to a standard one, but a simple
+procedure, called ''standardization'', transforms every 
+automaton~$\Ac$ in an
+equivalent standard one, and goes as follows.
+
+\thi Add a new state~$s$ , make it initial, with initial multiplicity equal to
+the identity.
+
+\thii For every initial state~$i$ of~$\Ac$ , with initial 
+function~$I(i)$ , add a
+transition from~$s$ to~$i$ with label~$I(i)$, and set~$I(i)$ to~$0$
+(the zero of the semiring, or of the series -- as above).
+
+\thiii Suppress all spontaneous transition that have been created in~(ii) by a
+`backward closure".
+
+\thiv Remove the former initial states of~$\Ac$ that are the 
+destination of no incoming transition.
+
+Steps~(iii) and~(iv) are necessary to insure the following property:
+
+''The standardization of a standard automaton~$\Ac$ is isomorphic to~$\Ac$ ''.
+
+More informally, but more generally, they insure that the result of the
+standardization is of the same "kind" as the automaton on which it is
+applied (in particular, proper if~$\Ac$ is proper).
+
+As this is informal, it is ambiguous too.
+The problem comes from~(iii): when are the transitions created 
+at~(ii) \emph{spontaneous}?
+The proposed answer is as follows:
+
+The initial function~$I(i)$ is either in the multiplicity semiring 
+(\code{labels-are-letters} automata), or a linear combination of 
+atoms (\code{labels-are-atoms} automata) or of words 
+(\code{labels-are-words} automata) or a series 
+(\code{labels-are-series} automata). 
+In the first case, the created transitions are all spontaneous, in 
+the three latter cases, the transition created between~$s$ and~$i$ is 
+spontaneous if the support of~$I(i)$ is~$\unM$.
+
+
+
+\subsubsection{\Fct{normalize}}
+
+It is not true that every automaton is equivalent to a normalized 
+one, at least if one wants to stay in the same class of automata: 
+\code{labels-are-letters} automata or proper automata.
+But if the behaviour of a proper automaton~$\Ac$ is proper, 
+then~$\Ac$ is equivalent to a (proper) normalized automaton by a 
+"normalization procedure" which plays mutatis mutandis the same role 
+as the standardization and which is best described with the help of the
+standardization.
+
+
+The basic idea is
+
+\Fctq{normalize}{$\Ac$} = 
+\Fctq{standardize}{\Fctq{transpose-g}{\Fctq{standardize}{\Fctq{transpose-g}{$\Ac$}}}} 
+
+but is not completely true.
+Let 
+
+$\Bc$ = 
+\Fctq{standardize}{\Fctq{transpose-g}{\Fctq{standardize}{\Fctq{transpose-g}{$\Ac$}}}}. 
+
+
+\thi If~$\Ac$ is proper,
+let~$i$ be the (unique) initial state of~$\Bc$ and let~$\Cc$ be the automaton
+obtained from~$\Bc$ by setting~$T(i)=0$ --- \ie setting to~$0$ the 
+final function. Then, $\Cc$ is normalized and we write 
+$\Cc$ = \Fctq{normalize}{$\Ac$}.
+
+If~$\Ac$ is an automaton over a free monoid~$\Ae$ (anyway, if~$\Ac$ is a 
+transducer (fmp), \emph{normalized} would have another meaning), it 
+holds:
+\begin{equation}
+    \LangAuto{\Cc}=\LangAuto{\Ac}\bk\unAe 
+    \e\text{if~$\Ac$ is a Boolean automaton}\e
+    \CompAuto{\Cc}=\CompAuto{\Ac}\hadam\UL{\Ap}
+    \e\text{if~$\Ac$ is a weighted automaton}
+    \EqVrg 
+    \notag
+%     \label{}
+\end{equation}
+that is, in both cases, \Fctq{normalize}{$\Ac$} accepts or realizes 
+the 'proper' part 
+of the language accepted, or of the series realized by, $\Ac$.
+
+\thii If~$\Ac$ is \emph{not proper}, it seems that the most logical 
+definition would be the following.
+
+Let~$i$ be the (unique) initial state of~$\Bc$ and let~$\Cc$ be the automaton
+obtained from~$\Bc$ by adding a transition from~$i$ to~$t$, the 
+(unique) initial state of~$\Bc$, with label~$T(i)$, that is, a 
+spontaneous transition as soon as~$T(i)$ is a scalar.  
+Then, $\Cc$ is normalized and we write 
+$\Cc$ = \Fctq{normalize}{$\Ac$} and it holds:
+\begin{equation}
+    \LangAuto{\Cc}=\LangAuto{\Ac} 
+    \e\text{if~$\Ac$ is a Boolean automaton}\e
+    \CompAuto{\Cc}=\CompAuto{\Ac}
+    \e\text{if~$\Ac$ is a weighted automaton}
+    \EqVrg 
+    \notag
+%     \label{}
+\end{equation}
+that is, in both cases, \Fctq{normalize}{$\Ac$} accepts or realizes 
+the same language or series as $\Ac$.
+
+\begin{ComV}
+The discrepancy between the two cases leads me to think that we 
+should change policy.
+    
+    Either we should simply suppress this function from \tafkit (and 
+    \vcsn).
+    Or we should we should reserve it for proper Boolean automata, or 
+    for \code{labels-are-letters} automata.
+\end{ComV}
+
+
+
+\subsection{Operations on automata}
+\label{sec:ope-on-aut-A}
+
+
+A small sketch is worth a long speech.\footnote{Attributed to Napoléon.}
+
+Let $\Ac=\bra{Q,A,E,\{i\},T}$ and $\Bc=\bra{R,A,F,\{j\},U}$ be two standard automata: 
+
+
+\FixVCScale{.5}
+\ChgEdgeLabelScale{.8}
+% \ShowFrame 
+% \qquad\qquad
+\medskip 
+\noindent 
+~\hfill
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i}
+    \FinalR{e}{Q}{T_q}
+    \FinalL{e}{R}{T_r}
+                                %
+    \EdgeL{I}{P}{E_{i,p}}
+    \EdgeR{I}{Q}{E_{i,q}}
+    \VCPut{(1,0)}{\scalebox{3}{$\Ac$}}
+  \end{VCPicture}
+}
+\hfill\hfill
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[j]{(-4,0)}{I}
+    \State[s]{(-1,1)}{P}
+    \State[t]{(-1,-1)}{Q}
+    \State[u]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{U_j}
+    \FinalR{e}{Q}{U_t}
+    \FinalL{e}{R}{U_u}
+                                %
+    \EdgeL{I}{P}{F_{j,s}}
+    \EdgeR{I}{Q}{F_{j,t}}
+    \VCPut{(1,0)}{\scalebox{3}{$\Bc$}}
+  \end{VCPicture}
+}
+\hfill
+~
+
+
+\subsubsection{\Fct{union}}
+
+Just the union of the two automata. It is a graph function indeed.
+
+\subsubsection{\Fct{sum}}
+
+\emph{Precondition}:  \Prm{a.xml} and \Prm{b.xml} are \emph{standard} 
+for the sum operation is defined only on standard automata.
+
+Defined in DWM.
+
+\bigskip 
+
+\noindent 
+$\bullet$ The standard automaton $\Ac\autplus\Bc=\bra{Q\cup R\setminus\{j\},A,G,\{i\},V}$ is defined as:
+\\
+\begin{minipage}{7cm}
+\begin{align*}
+\forall p,q\in & Q\cup R\setminus\{j\}\, ,\\
+\ G_{p,q}&=
+\begin{cases}
+E_{p,q}&\quad {if}\quad p,q\in Q\\
+F_{p,q}&\quad {if}\quad p,q\in R\\
+F_{j,q}&\quad {if}\quad p=i\text{ and }q\in R\\
+0_\K &\quad {otherwise}
+\end{cases}\\[.5em]
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}{6cm}
+%\begin{align*}
+\forall p\in& Q\cup R\setminus\{j\}\, ,\\
+\ V_p&=
+\begin{cases}
+T_i\oplus U_j &\quad {if}\quad p=i\\
+T_p&\quad {if}\quad p\in Q\setminus\{i\}\\
+U_p&\quad {if}\quad p\in R
+\end{cases}
+\end{align*}
+\end{minipage}
+\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-7,-7)(5,2.5)}
+    \psellipse[linecolor=gray](.8,-2.25)(4.5,4.5)
+    \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+    \State{(-5,-2.25)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i\oplus U_j}
+    \FinalR{e}{Q}{T_q}
+    \FinalL{e}{R}{T_r}
+                                %
+    \ArcL{I}{P}{E_{i,p}}
+    \ArcL{I}{Q}{}\LabelR{E_{i,q}}
+    \VCPut{(0,-4.5)}{%
+      \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+      \State[s]{(-1,1)}{S}
+      \State[t]{(-1,-1)}{T}
+      \State[u]{(3,.5)}{U}
+                                %
+      \FinalR{e}{T}{U_t}
+      \FinalL{e}{U}{U_u}
+                                %
+      \ArcR{I}{S}{}\LabelL{F_{j,s}}
+      \ArcR{I}{T}{F_{j,t}}
+    }
+    \VCPut{(1,-2.25)}{\scalebox{3}{$\Ac\autplus\Bc$}}
+  \end{VCPicture}}
+
+\subsubsection{\Fct{concatenate}}
+
+\emph{Precondition}:  \Prm{a.xml} and \Prm{b.xml} are \emph{standard} 
+for the concatenation operation is defined only on standard automata.
+
+Defined in DWM.
+
+\noindent 
+$\bullet$ The standard automaton 
+$\Ac\autprod\Bc=\bra{Q\cup R\setminus\{j\},A,G,\{i\},V}$ is:
+\\
+\begin{minipage}[t]{6cm}
+\begin{align*}
+\forall p,q\in & Q\cup R\setminus\{j\}\, ,\\
+\ G_{p,q}&=
+\begin{cases}
+E_{p,q}&\quad {if}\quad p,q\in Q\\
+F_{p,q}&\quad {if}\quad p,q\in R\\
+T_pF_{j,q}&\quad {if}\quad p\in Q\text{ and }q\in R\\
+0_\K &\quad {otherwise}
+\end{cases}
+\end{align*}
+\end{minipage}
+\quad 
+\begin{minipage}[t]{6cm}
+\begin{align*}
+\forall p\in& Q\cup R\setminus\{j\}\, ,\\
+\\
+\ V_p&=
+\begin{cases}
+U_p &\quad {if}\quad p\in R\\
+T_p\,U_j&\quad {if}\quad p\in Q
+\end{cases}
+\end{align*}
+\end{minipage}
+
+\begin{center}
+\VCDraw{%
+  \begin{VCPicture}{(-5,-4)(14,4)}
+    \psellipse[linecolor=gray](5.3,0)(8.5,3.5)
+    \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i\,U_j}
+    \FinalR[.5]{n}{Q}{T_q\,U_j}
+    \FinalL[.5]{n}{R}{T_r\,U_j}
+                                %
+    \VArcL{arcangle=50,ncurv=1}{I}{P}{E_{i,p}}
+%{I}{P}{}\LabelR{E_{i,p}}
+    \ArcR{I}{Q}{}\LabelL{E_{i,q}}
+    \VCPut{(9,0)}{%
+      \psellipse[linecolor=lightgray](.8,0)(3.3,2)
+      \State[s]{(-1,1)}{S}
+      \State[t]{(-1,-1)}{T}
+      \State[u]{(3,.5)}{U}
+                                %
+      \FinalR{e}{T}{U_t}
+      \FinalL{e}{U}{U_u}
+    }
+                                %
+    \LArcL[.8]{I}{S}{T_i\,F_{j,s}}
+    \LArcR[.8]{I}{T}{T_i\,F_{j,t}}
+    \EdgeL[.3]{Q}{S}{T_q\,F_{j,s}}
+    \EdgeR{Q}{T}{T_q\,F_{j,t}}
+    \EdgeL{R}{S}{T_r\,F_{j,s}}
+    \EdgeL[.8]{R}{T}{T_r\,F_{j,s}}
+                                %
+    \VCPut{(9,-2.25)}{\scalebox{3}{$\Ac\autprod\Bc$}}
+  \end{VCPicture}}
+\end{center}
+
+\bigskip 
+\subsubsection{\Fct{star}}
+
+\emph{Precondition}:  \Prm{a.xml} is \emph{standard} 
+for the star operation is defined only on standard automata.
+
+Defined in DWM.
+
+\noindent 
+$\bullet$ The standard automaton $\autstar{\Ac}=\bra{Q,A,E^{(\autstarsymb)},\{i\},T^{(\autstarsymb)}}$ is:
+\\\begin{minipage}{6cm}
+\begin{align*}
+\forall p,q\in & Q,\\
+\ E^{(\autstarsymb)}_{p,q}&=
+\begin{cases}
+T_i^*E_{i,q}&\quad {if}\quad p=i\\
+T_pT_i^*E_{i,q}\oplus E_{p,q}&\quad {otherwise}
+\end{cases}\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}{6cm}
+%\begin{align*}
+\forall p\in& Q,\\
+\ T^{(\autstarsymb)}_p&=
+\begin{cases}
+T_i^*&\quad {if}\quad p=i\\
+T_pT_i^*&\quad {otherwise}
+\end{cases}
+\end{align*}
+\end{minipage}
+\qquad\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-7,-3)(5,3)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2.5)
+    \State[i]{(-5,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i^*}
+    \FinalL{se}{Q}{T_qT_i^*}
+    \FinalL{e}{R}{T_rT_i^*}
+                                %
+    \ArcL{I}{P}{T_i^*\,E_{i,p}}
+    \ArcR{I}{Q}{T_i^*\,E_{i,q}}
+    \VArcR{arcangle=-130,ncurv=1}{R}{P}{T_r\,T_i^*\,E_{i,p}}
+    \VArcL{arcangle=130,ncurv=1.1}{R}{Q}{T_r\,T_i^*\,E_{i,q}}
+    \VCurveL{angleA=80,angleB=-160}{Q}{P}{T_q\,T_i^*\,E_{i,p}}
+    \CLoopR[.5]{20}{Q}{T_q\,T_i^*\,E_{i,q}}
+    \VCPut{(1,1)}{\scalebox{3}{$\autstar{\Ac}$}}
+  \end{VCPicture}
+}
+
+
+
+
+\bigskip 
+\subsubsection{\Fct{left-mult}}
+
+\emph{Precondition}:  \Prm{a.xml} is \emph{standard} for the left 
+`exterior' multiplication
+operation is defined only on standard automata. 
+
+Beware that although the multiplication is on the left the operand 
+\Prm{k} is the \emph{second} argument, and thus written on the right 
+of \Prm{a.xml}.
+
+
+
+\noindent 
+$\bullet$ The standard automata $k\Ac=\bra{Q,A,E^{(k.)},\{i\},T^{(k.)}}$ is defined by:
+\\
+\begin{minipage}{8cm}
+\begin{align*}
+\forall p,q\in Q\, ,\qquad E^{(k.)}_{p,q}&=
+\begin{cases}
+k\,E_{p,q}&\quad {if}\quad p=i\\
+E_{p,q}&\quad {otherwise}
+\end{cases}\\
+\forall p\in Q\, ,\qquad T^{(k.)}_p&=
+\begin{cases}
+k\,T_p&\quad {if}\quad p=i\\
+T_p&\quad {otherwise}
+\end{cases}
+\end{align*}
+\end{minipage}
+\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{k\,T_i}
+    \FinalR{e}{Q}{T_q}
+    \FinalL{e}{R}{T_r}
+                                %
+    \EdgeL{I}{P}{k\,E_{i,p}}
+    \EdgeR{I}{Q}{k\,E_{i,q}}
+    \VCPut{(1,0)}{\scalebox{3}{$k\Ac$}}
+  \end{VCPicture}}
+
+\bigskip 
+\subsubsection{\Fct{right-mult}}
+
+\emph{Precondition}:  \Prm{a.xml} is \emph{standard} for the right 
+`exterior' multiplication
+operation is defined only on standard automata. 
+
+\noindent 
+$\bullet$ The standard automata $\Ac k=\bra{Q,A,E,\{i\},T^{(.k)}}$ is defined by:
+\\
+\begin{minipage}{8cm}
+\begin{equation*}
+\forall p\in Q\, , \qquad T^{(.k)}_p=T_p\,k
+\qquad \qquad 
+\end{equation*}
+\end{minipage}
+\qquad
+\VCDraw{%
+  \begin{VCPicture}{(-5,-2.5)(5,2.5)}
+    \psellipse[linecolor=gray](.8,0)(3.3,2)
+    \State[i]{(-4,0)}{I}
+    \State[p]{(-1,1)}{P}
+    \State[q]{(-1,-1)}{Q}
+    \State[r]{(3,.5)}{R}
+                                %
+    \Initial{I}
+                                %
+    \FinalR{s}{I}{T_i\,k}
+    \FinalR{e}{Q}{T_q\,k}
+    \FinalL{e}{R}{T_r\,k}
+                                %
+    \EdgeL{I}{P}{E_{i,p}}
+    \EdgeR{I}{Q}{E_{i,q}}
+    \VCPut{(1,0)}{\scalebox{3}{$\Ac k$}}
+  \end{VCPicture}}
+
+\bigskip 
+
+
+\subsection{From automata to expressions}
+\label{ssc:aut-to-exp-A}
+
+
+The function \Fct{aut-to-exp} implements the state elimination 
+method, guided by  
+the `na{\"\i}ve' heuristics.
+
+\thi For precise specification, and in view of the derivation 
+procedure, one should specify the bracketting:
+\begin{equation}
+    p\path{\Fmsf}q\path{\Gmsf}q\path{\Hmsf}r
+    \e \text{gives}\e
+    p\path{(\Fmsf\cdot\Gmsf^{*})\cdot\Hmsf}r
+\label{equ:eli-met}
+\end{equation}
+after the elimination of the state~$q$.
+
+\thii The `na{\"\i}ve' heuristics: 
+
+\tha Make real the initial and final subliminal states~$i$ and~$t$. 
+From~$i$ to every initial state~$p$, there is thus a transition with 
+label~$I(p)$.
+Dually, from every final state~$r$ to~$t$, there is thus a transition with 
+label~$T(r)$.
+
+\thb For every state~$p$ (outside~$i$ and~$t$) compute a two component 
+index~$(l(p),k(p))$:\\
+\tiret $l(p)=1$ if~$p$ is the origin of a loop, $l(p)=0$ otherwise;\\
+\tiret $k(p)= [i(p)-1][o(p)-1]$ where~$i(p)$ is the in-degree of~$p$ 
+and~$o(p)$ its out-degree.\\
+\tiret Lexicographically order the states by their index.
+
+\thc While there remains states,\\
+\tiret choose the state~$q$ with smallest index,\\
+\tiret remove it and replace the incoming and outgoing transitions 
+according to~\equnm{eli-met},\\
+\tiret recompute the index for those states 
+that were adjacent to~$q$.
+
+\thd Return the label of the transition from~$i$ to~$t$.
+
+\thiii The implementation of the algorithm probably implies that the 
+automaton is transformed into a \code{labels-are-series} automaton, 
+whatever its native kind. 
+
+\thiv there exists other heuristics. In particular, at some point, 
+the `Delgado--Morais' heuristics has been encoded in \vcsn.
+Could be revived, and used for demonstration of the test bench.
+
+\subsection{From expressions to automata}
+\label{ssc:exp-to-aut-A}
+
+
+The function \Fct{exp-to-aut} implements the construction of the 
+`position automaton' by the recursive use of the operations on 
+sttandard automata as described at~\secti{ope-on-aut-A}.
+
+\begin{ComV}
+May be Alex could be more explicit (if necessary).
+\end{ComV}
+
+\section{Functions on Automata-RatExp over free monoids with numerical weights}
+
+\subsection{Properties and transformations of automata}
+
+
+\subsubsection{\Fct{quotient}}
+\label{ssc:quo-A}
+
+\subsection{Behaviour of automata}
+
+\subsubsection{\Fct{eval}}
+\label{ssc:evl-wrd-A}
+
+
+\subsection{Operations on automata}
+
+\subsubsection{\Fct{product}}
+\label{ssc:pro-duc-A}
+
+\addtocounter{section}{1}
+% \section{Boolean Automata-RatExp on free monoids}
+% 
+% \subsection{Properties and transformations of automata}
+% 
+% \subsubsection{\Fct{minimize}}
+% 
+% \subsection{Operations on automata}
+% 
+% \subsubsection{\Fct{determinize}}
+
+
+\section{Automata-RatExp on product of two free monoids}
+\label{sec:fmp-fct-D}
+
+\subsection{Properties and transformations of transducers}
+
+\subsection{Operations on transducers}
+
+\subsubsection{\Fct{composition}}
+
+\endinput

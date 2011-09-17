@@ -1,0 +1,763 @@
+
+\chapter{Automata repository and factory}
+\label{chp:aut-rep-fac}
+
+The \vcsnv distribution contains a folder
+\command{data/automata/} where a number of automata and of \vcsn
+programs which build automata are ready for use by the \tafkit
+commands.
+
+\section{$\B$-automata}
+
+\subsection{Repository}
+
+The following automata files are stored
+\file{data/automata/char-b/} directory (and accessible by the command
+\command{vcsn-char-b cat}).
+
+
+\subsubsection{\file{a1.xml}  for $\Ac_1$}
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw{%
+\begin{VCPicture}{(-1.4,-1.4cm)(7.4,1.4cm)}
+% etats[p][r][q]
+\State{(0,0)}{A}\State{(3,0)}{B}\State{(6,0)}{C}
+%
+\Initial{A}\Final{C}
+% transitions
+\EdgeL{A}{B}{a}\EdgeL{B}{C}{b}
+%
+\LoopN{A}{a}\LoopS[.22]{A}{b}
+\LoopN{C}{a}\LoopS[.22]{C}{b}
+%
+\end{VCPicture}}
+% \end{center}
+    \caption{The Boolean automaton $\Ac_1$ over
+    $\{a,b\}^{*}$ (\cf \protect\figur{a1}). }
+\label{fig:a1-app}
+\end{figure}
+
+\subsubsection{\file{b1.xml}  for $\Bc_1$}
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw{%
+\begin{VCPicture}{(-1.4,-1.4cm)(5.4,1.4cm)}
+% etats[p][r][q]\State{(3,0)}{B}
+\State{(0,0)}{A}\State{(4,0)}{C}
+%
+\Initial{A}\Final{C}
+% transitions \EdgeL{A}{B}{a}
+\EdgeL{A}{C}{b}
+%
+\LoopN{A}{a}\LoopS[.22]{A}{b}
+\LoopN{C}{a}\LoopS[.22]{C}{b}
+%
+\end{VCPicture}}
+% \end{center}
+    \caption{The Boolean automaton $\Bc_1$ over
+    $\{a,b\}^{*}$. }
+\label{fig:b1-app}
+\end{figure}
+\pagebreak
+\subsubsection{\file{evena.xml}}
+
+\begin{figure}[ht]
+    \centering
+\VCDraw{%
+\begin{VCPicture}{(-1.4,-1.4cm)(5.4,1.4cm)}
+\State{(0,0)}{A}\State{(4,0)}{C}
+
+\Initial[n]{A}\Final[s]{A}
+\ArcL{A}{C}{a}\ArcL{C}{A}{a}
+%
+\LoopW{A}{b}
+\LoopE{C}{b}
+%
+\end{VCPicture}}
+    \caption{The Boolean automaton \file{evena.xml} over
+    $\{a,b\}^{*}$. }
+\label{fig:evena-app}
+\end{figure}
+
+\subsubsection{\file{oddb.xml}}
+
+\begin{figure}[ht]
+    \centering
+\VCDraw{%
+\begin{VCPicture}{(-1.4,-1.4cm)(5.4,1.4cm)}
+\State{(0,0)}{A}\State{(4,0)}{C}
+
+\Initial[n]{A}\Final[s]{C}
+\ArcL{A}{C}{b}\ArcL{C}{A}{b}
+%
+\LoopW{A}{a}
+\LoopE{C}{a}
+%
+\end{VCPicture}}
+    \caption{The Boolean automaton \file{oddb.xml}  over
+    $\{a,b\}^{*}$. }
+\label{fig:oddb-app}
+\end{figure}
+
+\subsection{Factory}
+
+The following programs are in the
+\file{data/automata/char-b/} directory.
+
+\subsubsection{Program \file{divkbaseb}}
+
+
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{divkbaseb 4 3 > div4base3.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Generates an automaton over the digit alphabet $\{0,\ldots,b-1\}$
+    that recognises the writing in base~\Prm{b} of the numbers
+    divisible by the integer~\Prm{k}.
+\end{SwClTxt}%
+
+\Comt
+The `divisor' \file{div3base2.xml} (\figur{div-3b2}) is already in the
+repository.
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw{%
+\begin{VCPicture}{(-1.5,-1.4)(7.5,1.4)}
+% etats[\zold][\uold][\dold]
+\MediumState
+\State{(0,0)}{A}
+\State{(3,0)}{B}
+\State{(6,0)}{C}
+%
+\Initial[n]{A}\Final[s]{A}
+% transitions
+\ArcL{A}{B}{1}\ArcL{B}{A}{1}
+\ArcL{B}{C}{0}\ArcL{C}{B}{0}
+%
+\LoopW{A}{0}\LoopE{C}{1}
+%
+\end{VCPicture}
+}
+% \end{center}
+    \caption{The `divisor' \file{div3base2.xml} over
+    $\{0,1\}^{*}$. }
+\label{fig:div-3b2}
+\end{figure}
+
+\subsubsection{Program \file{double\_ring}}
+\SetTwClPrm{\TwClThree}%
+
+
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{double\_ring 6 1 3 4 5 > double-6-1-3-4-5.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Generates an~\Prm{n} state automaton over the alphabet $\{a,b\}$
+    that consists in a double ring of transitions: a counter
+    clockwise ring of transitions labelled by~\Prm{a} and a clockwise
+    ring of transitions labelled by~\Prm{b}.
+\end{SwClTxt}%
+
+\Spec
+The states are labelled from~\Prm{0} to~\Prm{n-1}.
+State~\Prm{0} is initial.
+The number of states~\Prm{n} is the first parameter and the next
+parameters give the list of final states.
+\figur{H6-app} shows the automaton built by the above command.
+
+\Comt
+The double-ring automata are closely related to the star-height
+problem.
+Sch\"utzenberger used them to give the first example of automata over
+a 2 letter alphabet that have arbitrary large loop complexity and
+McNaughton to give the simplest example of minimal automata which do
+not achieve the minimal loop complexity for the language the recognize.
+This was then reinterpreted in terms of \emph{universal automata}
+(\cf \cite[Sec.~II.8]{Saka03}).
+
+The automaton \file{double-3-1.xml} (\figur{H6-app}) is already in the
+repository.
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw[1.4]{%
+\begin{VCPicture}{(-3,-2.5)(3,2.5)}
+\MediumState
+% etats
+\State[0]{(-2,0)}{A}
+\State[1]{(-1,\SQRThree)}{B}
+\State[2]{(1,\SQRThree)}{C}
+\State[3]{(2,0)}{D}
+\State[4]{(1,-\SQRThree)}{E}
+\State[5]{(-1,-\SQRThree)}{F}
+%
+\Initial{A}
+\Final[n]{B}
+% \Final[n]{C}
+\Final{D}\Final[s]{E}\Final[s]{F}
+% transitions
+\ArcL{A}{B}{a}
+\ArcL{B}{C}{a}
+\ArcL{C}{D}{a}
+\ArcL{D}{E}{a}
+\ArcL{E}{F}{a}
+\ArcL{F}{A}{a}
+%
+\ArcL{A}{F}{b}
+\ArcL{F}{E}{b}
+\ArcL{E}{D}{b}
+\ArcL{D}{C}{b}
+\ArcL{C}{B}{b}
+\ArcL{B}{A}{b}
+%
+\end{VCPicture}
+}
+\eee
+\VCDraw[1.2]{%
+\begin{VCPicture}{(-3,-2.5)(3,2.5)}
+\MediumState
+% etats
+\State[0]{(-2,0)}{A}
+% \State[1]{(-1,\SQRThree)}{B}
+\State[1]{(1,\SQRThree)}{C}
+% \State[3]{(2,0)}{D}
+\State[2]{(1,-\SQRThree)}{E}
+% \State[5]{(-1,-\SQRThree)}{F}
+%
+\Initial{A}
+% \Final[n]{B}
+\Final[e]{C}
+% \Final{D}\Final[s]{E}\Final[s]{F}
+% transitions
+\ArcL{A}{C}{a}
+% \ArcL{B}{C}{a}
+\ArcL{C}{E}{a}
+% \ArcL{D}{E}{a}
+\ArcL{E}{A}{a}
+% \ArcL{F}{A}{a}
+%
+\EdgeL{A}{E}{b}
+% \ArcL{F}{E}{b}
+\EdgeL{E}{C}{b}
+% \ArcL{D}{C}{b}
+\EdgeL{C}{A}{b}
+% \ArcL{B}{A}{b}
+%
+\end{VCPicture}
+}
+% \end{center}
+\caption{The `double rings' $\Hc_{6}$ and \file{double-3-1.xml}}
+\label{fig:H6-app}
+\end{figure}
+
+\SetTwClPrm{\TwClOne}%
+
+
+\subsubsection{Program \file{ladybird}}
+
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{ladybird 6  > ladybird-6.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Generates an~\Prm{n} state automaton over the alphabet $\{a,b,c\}$
+    whose equivalent minimal deterministic automaton has~$2^{n}$
+    states.
+\end{SwClTxt}%
+
+\Spec
+The
+states are labelled from~\Prm{0} to~\Prm{n-1}.
+State~\Prm{0} is initial and final.
+The number of states~\Prm{n} is the first parameter and the next
+parameters give the list of final states.
+\figur{H6-app} shows the automaton built by the above command.
+
+\Comt
+The determinisation of \file{ladybird-n} has~$2^{n}$ states and is
+minimal as it is co-deterministic.
+
+\file{ladybird-n} is used in the benchmarking of \vcsn.
+
+The automaton \file{ladybird-6.xml} (\figur{ldb-6}) is already in the
+repository.
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw[1.4]{%
+\begin{VCPicture}{(-3,-3)(3,3)}
+\MediumState
+% etats
+\State[0]{(-2,0)}{A}
+\State[1]{(-1,\SQRThree)}{B}
+\State[2]{(1,\SQRThree)}{C}
+\State[3]{(2,0)}{D}
+\State[4]{(1,-\SQRThree)}{E}
+\State[5]{(-1,-\SQRThree)}{F}
+%
+\Initial[nw]{A}\Final[sw]{A}
+% transitions
+\ArcL{A}{B}{a}
+\ArcL{B}{C}{a}
+\ArcL{C}{D}{a}
+\ArcL{D}{E}{a}
+\ArcL{E}{F}{a}
+\ArcL{F}{A}{a}
+%
+\EdgeR{F}{A}{c}
+\EdgeR{E}{A}{c}
+\EdgeR{D}{A}{c}
+\EdgeR{C}{A}{c}
+\EdgeL{B}{A}{c}
+%
+\LoopS{F}{b,c}
+\LoopS[.75]{E}{b,c}
+\LoopE{D}{b,c}
+\LoopN[.75]{C}{b,c}
+\LoopN{B}{b,c}
+\end{VCPicture}
+}
+% \end{center}
+\caption{The `ladybird' $\Lc_{6}$}
+\label{fig:ldb-6}
+\end{figure}
+
+
+
+\section{$\Z$-automata}
+
+\subsection{Repository}
+
+The following automata files are stored
+\file{data/automata/char-z/} directory (and accessible by the command
+\command{vcsn-char-z cat}).
+
+\subsubsection{\file{b1.xml}}
+
+The chacteristic automaton of the automaton~$\Bc_1$ (\cf
+\figur{b1-app}).
+The different outcomes of functions such as
+\command{power n b1.xml \bslash quotient -} on the automaton
+\file{b1.xml} illustrate well the influence of the weights.
+
+\subsubsection{\file{c1.xml} for~$\Cc_1$ }
+
+\Comt
+The series realised by~$\Cc_1$ associates every word~$w$
+of~$\{a,b\}^{*}$ with its value in the binary notation, when~$a$ is
+interpreted as~$0$ and~$b$ as~$1$.
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw{%
+\begin{VCPicture}{(-1.4,-1.4cm)(5.4,1.4cm)}
+% etats[p][r][q]\State{(3,0)}{B}
+\State{(0,0)}{A}\State{(4,0)}{C}
+%
+\Initial{A}\Final{C}
+% transitions \EdgeL{A}{B}{a}
+\EdgeL{A}{C}{b}
+%
+\LoopN{A}{a}\LoopS[.22]{A}{b}
+\LoopN{C}{2\xmd a}\LoopS[.22]{C}{2\xmd b}
+%
+\end{VCPicture}}
+% \end{center}
+    \caption{The $\Z$-automaton $\Cc_1$ over
+    $\{a,b\}^{*}$. }
+\label{fig:c1-app}
+\end{figure}
+
+\subsubsection{\file{d1.xml}}
+
+\Comt
+The series realised by this automaton associates every word~$w$
+of~$\{a,b\}^{*}$ with its number of `a' minus its number of `b'.
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw{%
+\begin{VCPicture}{(-1.4,-1.4cm)(5.4,1.4cm)}
+% etats[p][r][q]\State{(3,0)}{B}
+\State{(0,0)}{A}\State{(4,0)}{C}
+%
+\Initial{A}\Final{C}
+% transitions \EdgeL{A}{B}{a}
+\ArcL{A}{C}{a}
+\ArcR{A}{C}{-b}
+%
+\LoopN{A}{a}\LoopS[.22]{A}{b}
+\LoopN{C}{a}\LoopS[.22]{C}{b}
+%
+\end{VCPicture}}
+% \end{center}
+    \caption{The $\Z$-automaton \file{d1.xml} over
+    $\{a,b\}^{*}$. }
+\label{fig:d1-app}
+\end{figure}
+
+
+
+%\subsection{Factory}
+
+%The following program is in the
+%\file{data/automata/char-z/} directory.
+
+
+%\subsubsection{Program \file{rem\_divkbaseb}}
+%\SetTwClPrm{\TwClThree}%
+
+
+%\begin{SwClCmd}
+%\begin{shell}
+%$ \kbd{rem\_divkbaseb 4 3 > rem-div4base3.xml}
+%$
+%\end{shell}%
+%\end{SwClCmd}%
+%\begin{SwClTxt}
+    %Generates an automaton over the digit alphabet $\{0,\ldots,b-1\}$
+    %that computes the remainder of the division by the
+    %integer~\Prm{k} of the numbers written in base~\Prm{b} (\cf
+    %\figur{rem-app}).
+%\end{SwClTxt}%
+
+%\Comt
+%The `divisor' \file{rem-div3base10.xml} is already in the
+%repository.
+
+%\begin{figure}[ht]
+    %\centering
+%% \begin{center}
+%\VCDraw{%
+%\begin{VCPicture}{(-2,-5)(8,5)}
+%% etats
+%\MediumState
+%\State[0]{(0,0)}{A}\State[3]{(6,0)}{C}
+%\State[1]{(3,3)}{B}\State[2]{(3,-3)}{D}
+%\Initial[n]{A}
+%\FinalL{e}{B}{\{1\}\xmd e}%
+%\FinalL{s}{C}{\{3\}\xmd e}%
+%\FinalR{e}{D}{\{2\}\xmd e}%
+%% transitions
+%\ArcL{A}{B}{1}\ArcL{B}{A}{1}\ArcL{B}{C}{0}\ArcL{C}{B}{0}
+%\ArcL{A}{D}{2}\ArcL{D}{A}{2}\ArcL{D}{C}{1}\ArcL{C}{D}{1}
+%\LoopW{A}{0}\LoopE{C}{2}
+%\LoopN{B}{2}\LoopS{D}{0}
+%%
+%\end{VCPicture}
+%}
+%% \end{center}
+    %\caption{The `divisor' \file{rem-div4base3.xml} over
+    %$\{0,1,2\}^{*}$. }
+%\label{fig:rem-app}
+%\end{figure}
+
+%\SetTwClPrm{\TwClOne}%
+
+
+
+
+\section{$\Zmin$-automata}
+\subsection{Repository}
+
+The following automata files are stored
+\file{data/automata/char-zmin/} directory (and accessible by the command
+\command{vcsn-char-zmin cat}).
+
+\subsubsection{\file{minab.xml}}
+
+\Comt
+The series realised by this automaton associates every word~$w$
+of~$\{a,b\}^{*}$ with $min$(number of `$a$', number of `$b$').
+
+\begin{figure}[ht]
+\centering
+\VCDraw{%[.9]
+\begin{VCPicture}{(0,-1.4)(6,1.4)}
+% \SmallState
+%
+% \VCPut{(0,6)}{%
+\State{(0,0)}{X} \State{(6,0)}{Y}
+% }
+\Initial[n]{X}\Final[s]{X}\Initial[n]{Y}\Final[s]{Y}
+%
+\LoopW{X}{\{1\}\xmd a}
+\LoopE{X}{\{0\}\xmd b}
+\LoopW{Y}{\{0\}\xmd a}
+\LoopE{Y}{\{1\}\xmd b}
+%%%
+\end{VCPicture}
+}%
+\caption{The $\Zmin$-automaton \file{minab.xml} over $\{a,b\}^*$}
+\label{fig:minab-app}
+\end{figure}
+
+\subsubsection{\file{minblocka.xml}}
+
+\Comt
+The series realised by this automaton associates every word~$w$
+of~$\{a,b\}^{*}$ with the length of the smallest block of `$a$' between two `$b$'s.
+
+\begin{figure}[ht]
+\centering
+\VCDraw{%[.9]
+\begin{VCPicture}{(0,-1.4)(9,2)}
+% \SmallState
+%
+% \VCPut{(0,6)}{%
+\State{(0,0)}{X} \State{(4,0)}{Y}\State{(8,0)}{Z}
+% }
+\Initial[w]{X}\Final[e]{Z}
+%
+\LoopN{X}{\{0\}\xmd a}
+\LoopS{X}{\{0\}\xmd b}
+\LoopN[0.5]{Y}{\{1\}\xmd a}
+\LoopN[0.75]{Z}{\{0\}\xmd a}
+\LoopS[0.75]{Z}{\{0\}\xmd b}
+
+\EdgeL{X}{Y}{\{0\}\xmd b}
+\EdgeL{Y}{Z}{\{0\}\xmd b}
+%%%
+\end{VCPicture}
+}%
+\caption{The $\Zmin$-automaton \file{sag.xml} over $\{a,b\}^*$}
+\label{fig:minblocka-app}
+\end{figure}
+
+\subsubsection{\file{slowgrow.xml}}
+
+\Comt
+The smallest word associated with the value $n$ is $abaab\cdots a^{(n-1)} b a^n b$.
+
+\begin{figure}[ht]
+\centering
+\VCDraw{%[.9]
+\begin{VCPicture}{(0,-1.4)(9,1.8)}
+% \SmallState
+%
+% \VCPut{(0,6)}{%
+\State{(0,0)}{X} \State{(4,0)}{Y}\State{(8,0)}{Z}
+% }
+\Initial[w]{X}\Final[e]{Z}
+%
+\LoopN{X}{\{0\}\xmd a}
+\LoopS{X}{\{0\}\xmd b}
+\LoopN[0.5]{Y}{\{1\}\xmd a}
+\LoopN[0.75]{Z}{\{0\}\xmd a}
+
+
+\EdgeL{X}{Y}{\{0\}\xmd b}
+\ArcL[0.5]{Y}{Z}{\{0\}\xmd b}
+\ArcL[0.5]{Z}{Y}{\{1\}\xmd a}
+%%%
+\end{VCPicture}
+}%
+\caption{The $\Zmin$-automaton \file{sag.xml} over $\{a,b\}^*$}
+\label{fig:slowgrow-app}
+\end{figure}
+
+\section{$\Zmax$-automata}
+\subsection{Repository}
+
+The following automata files are stored
+\file{data/automata/char-zmax/} directory (and accessible by the command
+\command{vcsn-char-zmax cat}).
+
+\subsubsection{\file{maxab}}
+\Comt
+The series realised by this automaton associates every word~$w$
+of~$\{a,b\}^{*}$ with $max$(number of `$a$', number of `$b$') (\cf \figur{minab-app}).
+
+
+\subsubsection{\file{maxblocka.xml}}
+
+\Comt
+The series realised by this automaton associates every word~$w$
+of~$\{a,b\}^{*}$ with the length of the greatest block of `$a$'.
+
+\begin{figure}[ht]
+\centering
+\VCDraw{%[.9]
+\begin{VCPicture}{(0,-1.4)(9,2)}
+% \SmallState
+%
+% \VCPut{(0,6)}{%
+\State{(0,0)}{X} \VCPut[22.5]{(4,0)}{\State{(0,0)}{Y}}\State{(8,0)}{Z}
+% }
+\Initial[w]{X}\Final[e]{Z}
+\Initial[sw]{Y}\Final[s]{Y}
+%
+\LoopN{X}{\{0\}\xmd a}
+\LoopS{X}{\{0\}\xmd b}
+\LoopN[0.5]{Y}{\{1\}\xmd a}
+\LoopN[0.75]{Z}{\{0\}\xmd a}
+\LoopS[0.75]{Z}{\{0\}\xmd b}
+
+\EdgeL{X}{Y}{\{0\}\xmd b}
+\EdgeL{Y}{Z}{\{0\}\xmd b}
+%%%
+\end{VCPicture}
+}%
+\caption{The $\Zmin$-automaton \file{maxblocka.xml} over $\{a,b\}^*$}
+\label{fig:maxblocka-app}
+\end{figure}
+
+\section{$\B$-\fmpts}
+
+\subsection{Repository}
+
+The following automata files are stored
+\file{data/automata/char-fmp-b/} directory (and accessible by the command
+\command{vcsn-char-fmp-b cat}).
+
+\subsubsection{\file{t1.xml} for~$\Tc_{1}$}
+
+\begin{figure}[ht]
+\centering
+\VCDraw{%[.9]
+\begin{VCPicture}{(-3,-1.4)(3,1.4)}
+% \SmallState
+%
+% \VCPut{(0,6)}{%
+\State{(0,0)}{X}\State{(3,0)}{Y}\State{(-3,0)}{Z}%
+% }
+\Initial[n]{X}\Final[s]{X}\Final[s]{Z}
+%
+\ArcR{X}{Z}{\IOL{a}{1}}\ArcR{X}{Y}{\IOL{1}{x}}
+\ArcR{Y}{X}{\IOL{b}{1}}\ArcR{Z}{X}{\IOL{1}{y}}
+%%%
+\end{VCPicture}
+}%
+\caption{The \fmpt $\Tc_{1}$ over $\{a,b\}^{*}\x\{x,y\}^{*}$
+(\cf \protect\sbsct{fmp-com-E}).}
+\label{fig:t1-app}
+\end{figure}
+
+\subsubsection{\file{u1.xml} for~$\Uc_{1}$}
+
+
+\begin{figure}[ht]
+\centering
+\VCDraw{%[.9]
+\begin{VCPicture}{(-3,-1.4)(3,1.4)}
+% \SmallState
+%
+% \VCPut{(0,6)}{%
+\State{(0,0)}{X}\State{(3,0)}{Y}\State{(-3,0)}{Z}%
+% }
+\Initial[n]{X}\Final[s]{X}\Initial[n]{Z}
+%
+\ArcR{Z}{X}{\IOL{x}{1}}\ArcR{X}{Y}{\IOL{y}{1}}
+\ArcR{Y}{X}{\IOL{1}{u}}\ArcR{X}{Z}{\IOL{1}{v}}
+%%%
+\end{VCPicture}
+}%
+\caption{The \fmpt $\Uc_{1}$ over $\{x,y\}^{*}\x\{u,v\}^{*}$
+(\cf \protect\sbsct{fmp-com-E}).}
+\label{fig:u1-app}
+\end{figure}
+
+
+\subsection{Factory}
+
+The following program is in the
+\file{data/automata/char-fmp-b/} directory.
+
+
+\subsubsection{Program \file{quotkbaseb}}
+% \SetTwClPrm{\TwClThree}%
+
+
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{quotkbaseb 3 2 > quot3base2.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Generates an \fmpt over the digit alphabets $\{0,\ldots,b-1\}$
+    that computes the \emph{integer quotient} of the division by the
+    integer~\Prm{k} (first parameter) of the numbers written in
+    base~\Prm{b} (second parameter).
+\end{SwClTxt}%
+
+\Comt
+The `divisor' \file{quot3base2.xml} (\cf
+    \figur{quo-app}) is already in the
+repository.
+
+\begin{figure}[ht]
+    \centering
+% \begin{center}
+\VCDraw{%
+\begin{VCPicture}{(-1.5,-1.4)(7.5,1.4)}
+% etats[\zold][\uold][\dold]
+\MediumState
+\State{(0,0)}{A}
+\State{(3,0)}{B}
+\State{(6,0)}{C}
+%
+\Initial[n]{A}\Final[s]{A}
+% transitions
+\ArcL{A}{B}{\IOL{1}{0}}\ArcL{B}{A}{\IOL{1}{1}}
+\ArcL{B}{C}{\IOL{0}{0}}\ArcL{C}{B}{\IOL{0}{1}}
+%
+\LoopW{A}{\IOL{0}{0}}\LoopE{C}{\IOL{1}{1}}
+%
+\end{VCPicture}
+}
+% \end{center}
+    \caption{The `divisor' \file{quot3base2.xml} over
+    $\{0,1,2\}^{*}$. }
+\label{fig:quo-app}
+\end{figure}
+
+\subsubsection{Program \file{ORR}}
+% \SetTwClPrm{\TwClThree}%
+
+
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{ORR abb baa fibred}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Generates two \fmpts over the alphabets guessed from the two patterns (first two parameters).
+    The first transducer is left-sequential; it realises the replacement of the
+    first pattern by the second in a left to right reading of the input. The
+    second is right-sequential; it realises the replacement of the first pattern by the second
+    in a right to left reading of the input.
+
+    The third parameter of the program, completed by \code{\_left} and \code{\_right}, gives the
+    name of the two transducers.
+
+\end{SwClTxt}%
+
+\Comt
+The \fmpts \file{fibred\_left.xml} and \file{fibred\_right.xml} are already in the repository.
+
+
+
+\SetTwClPrm{\TwClOne}%
+
+\endinput

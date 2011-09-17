@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2007, 2008, 2009 The Vaucanson Group.
+## Copyright (C) 2006, 2007, 2008, 2009, 2011 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -15,15 +15,19 @@ all: pdf
 
 include $(top_srcdir)/vaucanson.mk
 
-TEXI2PDF = texi2pdf
-TEXI2PDF_FLAGS = --tidy --build-dir=tmp.t2d --batch
+TEXI2PS = texi2dvi
+TEXI2PS_FLAGS = --ps --tidy --build-dir=tmp.t2d --batch
+PS2PDF = ps2pdf
 
 ## ----- ##
 ## *.tex ##
 ## ----- ##
 
-.tex.pdf:
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
+.tex.ps:
+	$(TEXI2PS) $(TEXI2PS_FLAGS) -o $@.ps $<
+.ps.pdf:
+	ps2ps $< $<.tmp
+	ps2pdf $<.tmp $@
 
 .PHONY: tex-mostlyclean
 tex-mostlyclean:
@@ -34,26 +38,45 @@ tex-mostlyclean:
 mostlyclean-local: tex-mostlyclean
 
 
-# We compile and ship taf-kit-manual.pdf.
-manual = $(srcdir)/taf-kit-manual.pdf
+# We compile and ship TAFK.pdf.
+manual = $(srcdir)/TAFK.pdf
 
 pdf: $(manual)
 
 dist_pdf_DATA = $(manual)
 
-$(manual): taf-kit-manual.tex
-	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $(srcdir)/taf-kit-manual.tex
+$(manual): TAFK.tex $(vaucanson_manual_sources)
+	$(TEXI2PS) $(TEXI2PS_FLAGS) -o $(@:.pdf=.ps) $(srcdir)/TAFK.tex
+	ps2ps $(@:.pdf=.ps) $(@:.pdf=.ps.tmp)
+	ps2pdf -sPAPERSIZE=a4 -dOptimize=true $(@:.pdf=.ps.tmp) $@
 
 vaucanson_manual_sources =			\
-taf-kit-manual.tex				\
-vaucanswig.tex					\
-developer.tex
+  TAFK.tex					\
+  TFKD-ch0.tex					\
+  TFKD-ch1.tex					\
+  TFKD-ch2-1.tex				\
+  TFKD-ch2-2.tex				\
+  TFKD-ch2-3.tex				\
+  TFKD-ch2-4.tex				\
+  TFKD-ch2-5.tex				\
+  TFKD-ch2-6.tex				\
+  TFKD-ch2.tex					\
+  TFKD-chA.tex					\
+  TFKD-chB.tex					\
+  TFKD-chC.tex					\
+  TFKD-chD.tex					\
+  TFKD-chE.tex					\
+  TFKD-chZ.tex					\
+  TFKD-intro.tex				\
+  TFKD-title.tex				\
+  texinputs/accent_keys.tex			\
+  texinputs/js_macros3.tex			\
+  texinputs/js_symboles3.tex
 
-EXTRA_DIST = $(vaucanson_manual_sources)
+EXTRA_DIST = \
+  $(vaucanson_manual_sources) \
+  figures
 
 MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 maintainer-clean-local:
 	rm -rf tmp.t2d
-
-maintainer-check: taf-kit-manual.tex
-	grep "^\\\\def\\\\VcsnVersion{$(VERSION)}" taf-kit-manual.tex

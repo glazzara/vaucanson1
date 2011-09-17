@@ -1,0 +1,165 @@
+
+\chapter{Specification of functions on automata and rational 
+expressions}
+\label{chp:spe-fun}%
+
+Functions are classified according to the type of automata they are 
+applied to. 
+They depend upon the type of the monoid: free monoid or direct 
+product of two free monoids at this stage for \tafkitv and 
+upon the type of the multiplicity semiring: `numerical' semirings
+of different kinds.
+% in 
+% general, and $\R$ (implemented as \code{float}) as an example of a 
+% \emph{field} and Boolean semiring in particular.
+Some functions are specialised to even more particular type of 
+alphabets.
+Note that \tafkitv  offers no instance where the multiplicity 
+semiring is a semiring of series (over 
+a free monoid with multiplicity in a numerical semiring).\footnote{%
+   Whereas this possibility is offered within the \emph{library} 
+   \vcsnv, but it is out of the scope of this user's manual.}
+In this chapter, we give the specifications of the functions, that 
+is, the preconditions on their arguments, and the description of the 
+result and how it is related to the argument.
+% How this result is computed, if it does not influence the result, 
+% will be described at \appnd{alg-spe}.
+
+\begin{enumerate}
+\item General automata and rational expressions 
+\item Weighted  automata and rational expressions over free monoids
+\item Automata and rational expressions over free monoids with 
+weights in a field.
+\item Boolean automata and rational expressions over free monoids
+\item Weighted automata over product of two free monoids
+\item Weighted automata over free monoids over alphabets of pairs
+\end{enumerate}
+
+This classification is used to organise the lists of commands.
+Every instance of \tafkit contains the commands of the first section 
+and of one or several others, as indicated in \tabla{tfk-ins-com} 
+below.
+A command with input and output arguments with different types 
+belongs to the instance corresponding to the \emph{input} type.
+Moreover, such a command exists only if the type of the \emph{output} 
+argument is instanciated as well (\cf \Fct{partial-identity},  
+\sbsct{par-ide}).
+
+Every section begins with the list of commands that are then 
+described in the section. 
+
+\longonly{%
+\begin{ComVd}{110725}
+Cette liste est complŽtŽe celle des commandes qui n'ont finalement 
+pas ŽtŽ implŽmentŽes dans \tafkitv, ou qui ont ŽtŽ implŽmentŽes pour 
+une classe plus restreinte d'automates, mais dont on garde la trace 
+pour les versions ˆ venir.
+\end{ComVd}
+}%
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ll>\e l>\ee l}
+\hline
+\multicolumn{1}{c}{command name} & 
+\multicolumn{1}{c}{alphabet type} & 
+\multicolumn{1}{c}{weight semiring} & 
+\multicolumn{1}{c}{function sections} \\
+\hline
+\command{vcsn-char-b} 
+% & automata 
+& characters & $\langle\B,\lor,\land\rangle$ 
+& 1, 2, 4  \\
+\command{vcsn-int-b} 
+% & automata 
+& integers & $\langle\B,\lor,\land\rangle$ 
+& 1, 2, 4  \\
+\hline 
+\command{vcsn-char-z} 
+% & automata 
+& characters & $\langle\Z,+,\times\rangle$
+& 1, 2  \\
+\command{vcsn-int-z} 
+% & automata 
+& integers & $\langle\Z,+,\times\rangle$
+& 1, 2 \\
+\command{vcsn-char-zmax} 
+% & automata 
+& characters & $\langle\Z,\max,+\rangle$
+& 1, 2 \\
+\command{vcsn-char-zmin} 
+% & automata 
+& characters & $\langle\Z,\min,+\rangle$
+& 1, 2 \\
+\command{vcsn-char-r} 
+% & automata 
+& characters & $\langle\R,+,\times\rangle$
+& 1, 2, 3 \\
+\command{vcsn-char-q} 
+% & automata 
+& characters & $\langle\Q,+,\times\rangle$
+& 1, 2, 3 \\
+\command{vcsn-char-f2} 
+% & automata 
+&  characters & $\langle\F_{2},+,\times\rangle$
+& 1, 2, 3 \\
+\hline 
+\command{vcsn-char-char-b}\e 
+% & automata 
+& pairs of characters & $\langle\B,\lor,\land\rangle$
+& 1, 2, 4, 6 \\
+\command{vcsn-char-int-b} 
+% & automata 
+& pairs of character and integer & $\langle\B,\lor,\land\rangle$
+& 1, 2, 4, 6 \\
+\command{vcsn-int-int-b} 
+% & automata 
+& pairs of integers & $\langle\B,\lor,\land\rangle$
+& 1, 2, 4, 6 \\
+\command{vcsn-char-char-z} 
+% & automata 
+& pairs of characters & $\langle\Z,+,\times\rangle$
+& 1, 2, 6 \\
+\command{vcsn-int-int-z} 
+% & automata 
+& pairs of integers & $\langle\Z,+,\times\rangle$
+& 1, 2, 6 \\
+\hline
+\command{vcsn-char-fmp-b} 
+% & transducers 
+& characters & $\langle\B,\lor,\land\rangle$
+& 1, 5 \\
+\command{vcsn-char-fmp-z} 
+% & transducers 
+& characters & $\langle\Z,+,\times\rangle$
+& 1, 5 \\
+\command{vcsn-int-fmp-b} 
+% & transducers 
+& integers & $\langle\B,\lor,\land\rangle$
+& 1, 5 \\
+\command{vcsn-int-fmp-z} 
+% & transducers 
+& integers & $\langle\Z,+,\times\rangle$
+& 1, 5 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{The \tafkit instances in \vcsnv and their commands}
+\label{tab:tfk-ins-com}
+\end{table}
+\clearpage 
+
+
+\input{TFKD-ch2-1}
+\clearpage 
+\input{TFKD-ch2-2}
+\clearpage 
+\input{TFKD-ch2-3}
+\clearpage 
+\input{TFKD-ch2-4}
+\clearpage 
+\input{TFKD-ch2-5}
+\clearpage 
+\input{TFKD-ch2-6}
+
+\endinput
