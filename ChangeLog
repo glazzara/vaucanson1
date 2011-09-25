@@ -1,5 +1,17 @@
 2011-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Handle execvp() failures.
+
+	When running `Display' in TAF-Kit's editor would enter a warp zone
+	if dotty is not in PATH: because of the missing exit() after
+	execvp(), two forks of TAF-Kit's editor would compete for the
+	terminal.
+
+	* include/vaucanson/tools/out_display.hxx (out_display): Exit
+	if execvp returns an error, and report the failure.
+
+2011-09-25  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Use AC_LANG_SOURCE.
 
 	* build-aux/vcsn.m4: Use AC_LANG_SOURCE when calling AC_LINK_IFELSE.
