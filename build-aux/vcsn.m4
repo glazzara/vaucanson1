@@ -1,7 +1,8 @@
 # vcsn.m4                                     -*- Autoconf -*-
 #
-# Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 The Vaucanson Group.
+# Vaucanson, a generic library for finite state machines.  Copyright
+# (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2011 The
+# Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -144,24 +145,24 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
 		  vcsn_save_CPPFLAGS=$CPPFLAGS
 		  vcsn_save_CXXFLAGS=$CXXFLAGS
 		  CPPFLAGS="$CPPFLAGS -DTDEPTH=$cxx_tdepth"
-		  AC_LINK_IFELSE([template<unsigned n>
+		  AC_LINK_IFELSE([AC_LANG_SOURCE([[template<unsigned n>
 				  struct rec {
 				     typedef typename rec<n-1>::ret ret;
 				  };
 				  template<> struct rec<0>
 				  { typedef int ret; };
 				  int main(void)
-				  { rec<TDEPTH>::ret i = 0; return i; }],
+				  { rec<TDEPTH>::ret i = 0; return i; }]])],
 		      [],
 		      [CXXFLAGS="$CXXFLAGS -ftemplate-depth-$cxx_tdepth"
-		       AC_LINK_IFELSE([template<unsigned n>
+		       AC_LINK_IFELSE([AC_LANG_SOURCE([[template<unsigned n>
 				       struct rec {
 					   typedef typename rec<n-1>::ret ret;
 				       };
 				      template<> struct rec<0>
 				      { typedef int ret; };
 				      int main(void)
-				      { rec<TDEPTH>::ret i = 0; return i; }],
+				      { rec<TDEPTH>::ret i = 0; return i; }]])],
 		       [cxx_cv_cxx_template_flags="-ftemplate-depth-$cxx_tdepth"],
 		       [cxx_cv_cxx_template_flags=unsupported])])
 		  CPPFLAGS=$vcsn_save_CPPFLAGS
@@ -256,12 +257,13 @@ AC_DEFUN([AC_CXX_CHECK_MATH],
   AC_CACHE_CHECK([for flags to enable $1() from C++],
 		 [cxx_cv_$1_flags],
 		 [cxx_save_CPPFLAGS=$CPPFLAGS
-		  AC_LINK_IFELSE([@%:@include <cmath>
-				  int main() { $3 }],
+		  AC_LINK_IFELSE([AC_LANG_SOURCE([[@%:@include <cmath>
+				  int main() { $3 }]])],
 				 [cxx_cv_$1_flags=unneeded],
 				 [CPPFLAGS="$CPPFLAGS -D_ISOC99_SOURCE=1"
-				  AC_LINK_IFELSE([@%:@include <cmath>
-						  int main() { $3 }],
+				  AC_LINK_IFELSE(
+                                       [AC_LANG_SOURCE([[@%:@include <cmath>
+							 int main() { $3 }]])],
 				       [cxx_cv_$1_flags=isodef],
 				       [cxx_cv_$1_flags=redef])])
 		  CPPFLAGS=$cxx_save_CPPFLAGS])
