@@ -35,7 +35,7 @@ software).
   \code{libxerces28-dev}, or \code{libxerces28} and \code{libxerces28-dev}).
 \Indextt{Xerces}%
 
-\item[\code{Boost}] \code{Boost} provides free peer-reviewed 
+\item[\code{Boost}] \code{Boost} provides free peer-reviewed
 portable \Cpp source
   libraries (On Ubuntu/Debian, install the following packages:
   l\code{ibboost-dev}, \code{libboost-serialization-dev}, \code{libboost-graph},
@@ -45,7 +45,7 @@ portable \Cpp source
   compiler through the configure file:
   \code{CPPFLAGS='-DBOOST\_SPIRIT\_USE\_OLD\_NAMESPACE'}.
 \Indextt{Boost}%
-  
+
 \item[\code{Ncurses}] needed for building \tafkit  (On Ubuntu/Debian, install
   the following packages: \code{libncurses5}, \code{libncurses-dev}).
 \Indextt{Ncurses}%
@@ -53,7 +53,7 @@ portable \Cpp source
 \item[\code{Graphviz}] The display of automata is made using AT\&T \code{GraphViz}
   application (On Ubuntu/Debian, install the following package: \code{graphviz}).
 \Indextt{Graphviz}%
-  
+
 \end{description}
 
 \section{Building \vcsn}
@@ -93,9 +93,9 @@ $ ./configure   CPPFLAGS='-I/usr/user\_name/home/my\_path\_to\_boost/include'
                 LDFLAGS='/usr/user\_name/home/my\_path\_to\_boost/lib'
 \end{shell}%
 
-If \vcsn is not installed but simply compiled it, 
+If \vcsn is not installed but simply compiled it,
 the \tafkit binaries are to be found in the directory
-'\code{vaucanson-\VcsnVersion/taf-kit/tests/}' (This directory 
+'\code{vaucanson-\VcsnVersion/taf-kit/tests/}' (This directory
 contains wrappers
 around the real \tafkit programs from '\code{vaucanson-\VcsnVersion/taf-kit/src/}'
 that enable them to run locally).
@@ -109,23 +109,23 @@ than onto other Linux systems.
 First, the Mac\xmd OS\xmd X system should be up-to-date before
 going through the rest of the installation process.
 
-Second, the \code{macports} software will be used to get all the 
+Second, the \code{macports} software will be used to get all the
 prerequisites and should be installed first on the computer
-(see \code{http://www.macports.org/}). 
+(see \code{http://www.macports.org/}).
 A complete guide
-to its installation is available from \code{http://guide.macports.org/}.  
-If \code{macports} is already installed, it should be made up-to date 
-by synchronising the local port tree with the global \code{macports} 
+to its installation is available from \code{http://guide.macports.org/}.
+If \code{macports} is already installed, it should be made up-to date
+by synchronising the local port tree with the global \code{macports}
 ports by the following command.
 \begin{shell}
 $ sudo port selfupdate
 \end{shell}%
 
 Three libraries are to be installed in order to
-build \vcsn (see Prerequisite for details): 
-\code{Boost}, 
+build \vcsn (see Prerequisite for details):
+\code{Boost},
 \code{Xerces}, and
-\code{Ncurses}. 
+\code{Ncurses}.
 \begin{shell}
 $ sudo port install ncurses
 ...
@@ -135,23 +135,23 @@ $ sudo port install xercesc
 ...
 $
 \end{shell}%
-Note that executing each of these commands may take a while 
+Note that executing each of these commands may take a while
 (especially when installing \code{Boost}).
 %
-By default, \code{macports} will install each of these three 
-libraries in the \code{/opt/local} directory, which is not standard 
+By default, \code{macports} will install each of these three
+libraries in the \code{/opt/local} directory, which is not standard
 with respect to the Unix organisation.
-In order to build \vcsn, this directory is therefore to be specified 
+In order to build \vcsn, this directory is therefore to be specified
 to the \code{configure} command by the following options:
 \begin{shell}
 $ ./configure CPPFLAGS='-I/opt/local/include' LDFLAGS='-L/opt/local/lib'
 \end{shell}%
 
-Moreover, if the installed version of \code{Boost}  is greater than 
-or equal to~1.44 it is necessary to add another option to the 
+Moreover, if the installed version of \code{Boost}  is greater than
+or equal to~1.44 it is necessary to add another option to the
 \code{configure} command:
 \begin{shell}
-$ ./configure CPPFLAGS='-I/opt/local/include -DBOOST\_SPIRIT\_USE\_OLD\_NAMESPACE' 
+$ ./configure CPPFLAGS='-I/opt/local/include -DBOOST\_SPIRIT\_USE\_OLD\_NAMESPACE'
               LDFLAGS='-L/opt/local/lib'
 \end{shell}%
 The installation is then to be completed by the classical two lines:
@@ -160,44 +160,39 @@ $ make
 $ sudo make install
 \end{shell}%
 
-The \code{Graphviz} application, which is used to displaying automata 
-while looking for a dedicated graphic interface, is normally launched 
+The \code{Graphviz} application, which is used to displaying automata
+while looking for a dedicated graphic interface, is normally launched
 in an \code{X11} window.
-It is to be acknowledged that the call of \code{Graphviz} by \tafkit 
+It is to be acknowledged that the call of \code{Graphviz} by \tafkit
 is not well tuned and that the output is rather poor.
-It is not too difficult however for Mac users to get a rendering of 
+It is not too difficult however for Mac users to get a rendering of
 automata of much better quality (\cf \figur{gra-viz}).
 This can be done in three steps.
 
-First download the \code{Graphviz} application for Mac from 
+First download the \code{Graphviz} application for Mac from
 \code{www.pixelglow.com/graphviz/}.
-Although already old and outdated by the \code{2.xx} versions, the 
-\code{1.13 (v16)} version is recommended as the settings is easier to 
+Although already old and outdated by the \code{2.xx} versions, the
+\code{1.13 (v16)} version is recommended as the settings is easier to
 handle in that version.
-Complete the installation by putting the \code{Graphviz.app} folder 
+Complete the installation by putting the \code{Graphviz.app} folder
 in the \code{Applications} folder.
 
-Second, write the following script in a file called \code{dotty}: 
+Second, write the following script in a file called \code{dotty}:
 \begin{shell}
-#! /bin/sh 
-if [ "$1" = "-" ]; then
-  out=""
-  endline='
-'
-  while read n; do
-    out="$out$n$endline"
-  done
-  echo "$out" > /tmp/tmpdotty.dot
-  open -a Graphviz /tmp/tmpdotty.dot
+#! /bin/sh
+if [ "x$1" = x- ]; then
+ cat >/tmp/tmpdotty$$.dot
+ open -W -a Graphviz /tmp/tmpdotty$$.dot
+ rm -f /tmp/tmpdotty$$.dot
 else
-  open -a Graphviz $1
+ open -W -a Graphviz "$1"
 fi
 \end{shell}%
 
-Finally, make this file executable, store it in a folder, and put the 
-address of this folder in the \code{PATH} variable before 
+Finally, make this file executable, store it in a folder, and put the
+full name of this folder in the \code{PATH} variable before
 \code{/usr/local/bin:} and \code{/usr/X11/bin:}.
-The appearance of the automata will be determined by fixing the 
+The appearance of the automata will be determined by fixing the
 settings in the interface.
 
 \begin{figure}[ht]
