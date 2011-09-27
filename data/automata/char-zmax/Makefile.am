@@ -17,12 +17,11 @@ include $(top_srcdir)/vaucanson.mk
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
-noinst_PROGRAMS = maxab maxblocka gag
+noinst_PROGRAMS = maxab maxblocka
 
-nodist_char_zmax_automata_DATA =			\
-  maxab.xml \
-  maxblocka.xml \
-  gag.xml
+nodist_char_zmax_automata_DATA =		\
+  maxab.xml					\
+  maxblocka.xml
 
 CLEANFILES += $(nodist_char_zmax_automata_DATA)
 
@@ -39,11 +38,3 @@ maxblocka_SOURCES = maxblocka.cc
 maxblocka.xml: maxblocka$(EXEEXT)
 	./maxblocka$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
-
-gag_CPPFLAGS = $(AM_CPPFLAGS)
-gag_SOURCES = gag.cc
-
-gag.xml: gag$(EXEEXT)
-	./gag$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
-

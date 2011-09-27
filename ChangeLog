@@ -1,5 +1,12 @@
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Remove gag: it's a duplicate of maxblocka.
+
+	* data/automata/char-zmax/gag.cc: Delete.
+	* data/automata/char-zmax/Makefile.am: Remove it.
+
+2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename sag as minblocka.
 
 	* data/automata/char-zmin/sag.cc: Rename as ...
