@@ -1,6 +1,6 @@
 Vaucanson, a generic library for finite state machines.
-Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 The
-Vaucanson Group.
+Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+2011 The Vaucanson Group.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -82,7 +82,7 @@ Requirements
 ============
 
 Vaucanson was tested with the `GNU Compiler Collection (GCC)`_ version
-4.1.x to 4.4.x.
+4.1.x to 4.6.x.
 
 .. _GNU Compiler Collection (GCC): http://gcc.gnu.org/
 .. _ICC: http://www.intel.com/software/products/compilers/

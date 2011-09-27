@@ -1,8 +1,12 @@
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/NEWS.txt, doc/HACKING.txt, doc/README.txt: Adjust for 1.4.
+
+2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/manual/TFKD-ch0.tex: Fix the `dotty' script.
 
-2011-09-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Integrate Jacques' documentation.
 
@@ -209,7 +213,7 @@
 
 2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
-	* doc/NEWS.txt: Fix identation.
+	* doc/NEWS.txt: Fix indentation.
 
 2011-07-26  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
