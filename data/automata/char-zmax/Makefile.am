@@ -19,12 +19,12 @@ AM_CPPFLAGS += -DBENCH_DISABLED
 
 noinst_PROGRAMS = maxab maxblocka gag
 
-nodist_char_zmin_automata_DATA =			\
+nodist_char_zmax_automata_DATA =			\
   maxab.xml \
   maxblocka.xml \
   gag.xml
 
-CLEANFILES += $(nodist_char_zmin_automata_DATA)
+CLEANFILES += $(nodist_char_zmax_automata_DATA)
 
 maxab_CPPFLAGS = $(AM_CPPFLAGS)
 maxab_SOURCES = maxab.cc
