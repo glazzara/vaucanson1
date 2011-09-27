@@ -1,5 +1,13 @@
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Change the ORR example.
+
+	* data/automata/char-fmp-b/Makefile.am: Change the ORR
+	demo to replace abb by baa, and rename its output to
+	fibred_left.xml and fibred_right.xml.
+
+2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Rename slowbig as slowgrow.
 
 	* data/automata/char-zmin/slowbig.cc: Rename as...

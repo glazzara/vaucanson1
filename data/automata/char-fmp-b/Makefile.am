@@ -20,12 +20,12 @@ AM_CPPFLAGS += -DBENCH_DISABLED
 noinst_PROGRAMS = t1 u1
 bin_PROGRAMS = quotkbaseb-char-fmp-b ORR-char-fmp-b
 
-nodist_char_fmp_b_automata_DATA =	\
-	t1.xml				                  \
-	u1.xml				                  \
-	quot3base2.xml                  \
-	ORR_abbc_bac_right.xml          \
-	ORR_abbc_bac_left.xml
+nodist_char_fmp_b_automata_DATA =		\
+	t1.xml					\
+	u1.xml					\
+	quot3base2.xml				\
+	fibred_right.xml			\
+	fibred_left.xml
 
 CLEANFILES += $(nodist_char_fmp_b_automata_DATA)
 
@@ -53,7 +53,7 @@ quot3base2.xml: quotkbaseb-char-fmp-b$(EXEEXT)
 ORR_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS)
 ORR_char_fmp_b_SOURCES = ORR.cc
 
-ORR_abbc_bac_right.xml: ORR-char-fmp-b$(EXEEXT)
-	./ORR-char-fmp-b$(EXEEXT) abbc bac ORR_abbc_bac xml
+fibred_right.xml: ORR-char-fmp-b$(EXEEXT)
+	./ORR-char-fmp-b$(EXEEXT) abb baa fibred xml
 
-ORR_abbc_bac_left.xml:ORR_abbc_bac_right.xml
+fibred_left.xml: fibred_right.xml
