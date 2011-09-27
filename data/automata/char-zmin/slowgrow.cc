@@ -1,4 +1,4 @@
-// slowbig.cc: this file is part of the Vaucanson project.
+// slowgrow.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //

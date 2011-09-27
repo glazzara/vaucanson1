@@ -17,20 +17,20 @@ include $(top_srcdir)/vaucanson.mk
 LDADD = $(top_builddir)/lib/libvcsn-common.la
 AM_CPPFLAGS += -DBENCH_DISABLED
 
-noinst_PROGRAMS = slowbig minab sag
+noinst_PROGRAMS = slowgrow minab sag
 
 nodist_char_zmin_automata_DATA =			\
-  slowbig.xml \
+  slowgrow.xml \
   minab.xml \
   sag.xml
 
 CLEANFILES += $(nodist_char_zmin_automata_DATA)
 
-slowbig_CPPFLAGS = $(AM_CPPFLAGS)
-slowbig_SOURCES = slowbig.cc
+slowgrow_CPPFLAGS = $(AM_CPPFLAGS)
+slowgrow_SOURCES = slowgrow.cc
 
-slowbig.xml: slowbig$(EXEEXT)
-	./slowbig$(EXEEXT) xml >$@.tmp
+slowgrow.xml: slowgrow$(EXEEXT)
+	./slowgrow$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
 minab_CPPFLAGS = $(AM_CPPFLAGS)
