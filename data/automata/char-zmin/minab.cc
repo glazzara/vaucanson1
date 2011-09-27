@@ -20,8 +20,7 @@ using namespace vcsn;
 using namespace vcsn::z_min_plus_automaton;
 #include <vaucanson/tools/dumper.hh>
 
-// This automaton comes from ETA p. 435, example 2.5.  With {a,b}
-// changed into {0,1}.
+// This automaton comes from EAT p. 407, example 2.7.  
 
 int
 main(int argc, char **argv)
