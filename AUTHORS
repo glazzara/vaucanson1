@@ -12,16 +12,16 @@ Permanent staff
   - Project manager,
   - Implementation of crucial algorithms.
 
-* Akim Demaille				akim.demaille@lrde.epita.fr
+* Akim Demaille (2004-2007)		akim.demaille@lrde.epita.fr
   - Project manager.
 
-* Alexandre Duret-Lutz			alexandre.duret-lutz@lrde.epita.fr
+* Alexandre Duret-Lutz (2007-)		alexandre.duret-lutz@lrde.epita.fr
   - Project manager.
 
 
-==================
-Year 2003 students
-==================
+===================
+Epita students 2003
+===================
 
 * Yann Regis-Gianas			yann.regis-gianas@lrde.epita.fr
   - Initial code and releases up to 0.4,
@@ -34,9 +34,9 @@ Year 2003 students
   - Code maintenance.
 
 
-==================
-Year 2005 students
-==================
+========================
+Epita students 2003-2005
+========================
 
 * Thomas Claveirole			thomas.claveirole@lrde.epita.fr
   - Lots of code maintenance,
@@ -60,9 +60,9 @@ Year 2005 students
   - First XML code.
 
 
-==================
-Year 2006 students
-==================
+========================
+Epita students 2005-2006
+========================
 
 * Sarah O'Connor			sarah.o-connor@lrde.epita.fr
   - Improvement of transducers on Rat(B*),
@@ -78,9 +78,9 @@ Year 2006 students
   - Many bug fixes.
 
 
-==================
-Year 2007 students
-==================
+========================
+Epita students 2005-2007
+========================
 
 * Robert Bigaignon			robert.bigaignon@lrde.epita.fr
   - Coordinator of the brainstorms on Vaucanson v2.0,
@@ -106,9 +106,9 @@ Year 2007 students
   - Bug fixes.
 
 
-==================
-Year 2008 students
-==================
+========================
+Epita students 2006-2008
+========================
 
 * Matthieu Varin			matthieu.varin@lrde.epita.fr
   - is_ambiguous algorithm,
@@ -127,9 +127,16 @@ Year 2008 students
   - Bug fixes.
 
 
-==================
-Year 2009 students
-==================
+============
+2008 Visitor
+============
+
+* Reuben Thomas				rrt@sc3d.org
+
+
+========================
+Epita students 2007-2009
+========================
 
 * Vivien Delmon				vivien.delmon@lrde.epita.fr
   - eps_removal algorithm,
@@ -149,12 +156,13 @@ Year 2009 students
   - Bug fixes.
 
 
-==================
-Year 2010 students
-==================
+========================
+Epita students 2008-2010
+========================
 
 * Florent D'Halluin			florent.dhalluin@lrde.epita.fr
   - Internal pipes in TAF-Kit,
+  - libbench,
   - Bug fixes.
 
 * Jerome Galtier			jerome.galtier@lrde.epita.fr
@@ -163,21 +171,26 @@ Year 2010 students
   - Bug fixes.
 
 
-===================
-Year 2011 strudents
-===================
+========================
+Epita students 2009-2011
+========================
 
 * Alex Hamelin                          hamelin@lrde.epita.fr
-* Maurice Audin				audin@lrde.epita.fr
+* Maurice Audin	(2009)			audin@lrde.epita.fr
 
-===================
-Year 2011 strudents
-===================
+
+========================
+Epita students 2011-2012
+========================
 
 * David Moreira				moreira@lrde.epita.fr
+* Guillaume Fiette (2011)               fiette@fiette.lrde.epita.fr
 
-============
-2008 Visitor
-============
 
-* Reuben Thomas				rrt@sc3d.org
+=============
+ENST Students
+=============
+
+* Rodrigo de Souza (2005)
+* Pierre-Yves Angrand (2007-)           angrand@gmail.com
+* Victor Marsault (2011-)               victor.marsault@gmail.com

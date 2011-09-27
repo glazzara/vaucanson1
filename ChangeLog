@@ -1,5 +1,12 @@
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Add missing authors...
+
+	* AUTHORS: Add Guillaume Fiette, Rodrigo de Souza, Pierre-Yves
+	Angrand, and Victor Marsault.
+
+2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/NEWS.txt, doc/HACKING.txt, doc/README.txt: Adjust for 1.4.
 
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
