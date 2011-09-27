@@ -1,5 +1,13 @@
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Rename sag as minblocka.
+
+	* data/automata/char-zmin/sag.cc: Rename as ...
+	* data/automata/char-zmin/minblocka.cc: ... this.
+	* data/automata/char-zmin/Makefile.am: Adjust.
+
+2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Change the ORR example.
 
 	* data/automata/char-fmp-b/Makefile.am: Change the ORR

@@ -1,8 +1,8 @@
-// c1.cc: this file is part of the Vaucanson project.
+// minblocka.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006, 2009 The Vaucanson Group.
+// Copyright (C) 2011 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
