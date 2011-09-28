@@ -36,7 +36,7 @@ chmod -R a+r $DEST/vaucanson-$rev.tar.gz
 # Upload a copy of the reference manual
 rm -rf $DEST/ref.tmp
 cp -pR doc/ref $DEST/ref.tmp
-cp doc/manual/taf-kit-manual.pdf $DEST/
+cp doc/manual/TAFK.pdf $DEST/
 chmod -R a+rX $DEST/
 mv -f $DEST/ref $DEST/ref.old || true
 mv -f $DEST/ref.tmp $DEST/ref
