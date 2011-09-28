@@ -1,5 +1,9 @@
 2011-09-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/NEWS.txt: Fix formatting.
+
+2011-09-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* lrde-upload.sh: Fix name of manual.
 
 2011-09-27  Alexandre Duret-Lutz  <adl@lrde.epita.fr>

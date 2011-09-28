@@ -15,14 +15,15 @@ Vaucanson 1.4, September 28th, 2011
   algorithms and example automata available via TAF-Kit.  (113 pages)
 - Add several new example automata.
 - New TAF-Kit commands:
-  * w-image
-  * w-domain
-  * support
-  * universal
-  * intersection
-- Fix bugs in:
-  * image, domain, proper (for Q), evaluation (for fmp),
-  chain, star-alphabet, edit
+
+  + ``w-image``
+  + ``w-domain``
+  + ``support``
+  + ``universal``
+  + ``intersection``
+
+- Fix bugs in: ``image``, ``domain``, ``proper`` (for Q),
+  ``evaluation`` (for FMP), ``chain``, ``star-alphabet``, ``edit``.
 - Improve the command menu of TAF-Kit's editor.
 
 
@@ -33,45 +34,53 @@ This is an intermediate release before 1.4.  It features new semirings,
 new algorithms, a lot of renaming.
 
 - Two new semirings (that are actually fields) have been implemented:
-  * Q   for rational numbers represented by a pair of 64bit integers
-  * F2  (a.k.a. Z/2Z) to implement xor automata
+
+  + Q   for rational numbers represented by a pair of 64bit integers
+  + F2  (a.k.a. Z/2Z) to implement xor automata
+
 - Many TAF-Kit commands have been renamed and reorganized.  Use option
-  -l to list them.  Some suffixes are used to distinguish commands
-  that work on (-E) rational expressions, (-S) series, and (-R)
-  relations.  The suffixes -S/-R are used when a command has two
-  flavors: one efficient with strict preconditions, and one less
-  efficient without prereconditions: for instance "eval" evaluates a
-  word on a realtime automaton while "eval-S" evaluates a word on an
-  automaton that is not necessarily realtime.
-- New TAF-Kit commands
-  * star-alphabet
-  * infiltration, shuffle
-  * characteristic
-  * chain
-  * prefix, suffix, factor
-  * is-trim
-  * left-mult, right-mult
-  * are-equivalent (for automata with weights in fields)
-  * are-equivalent-E (for rational expressions with weights in fields)
-  * enumerate, shortest
-  * normalize, is-normalized
+  ``-l`` to list them.  Some suffixes are used to distinguish commands
+  that work on (``-E``) rational expressions, (``-S``) series, and
+  (``-R``) relations.  The suffixes ``-S``/``-R`` are used when a
+  command has two flavors: one efficient with strict preconditions,
+  and one less efficient without prereconditions: for instance
+  ``eval`` evaluates a word on a realtime automaton while ``eval-S``
+  evaluates a word on an automaton that is not necessarily realtime.
+- New TAF-Kit commands:
+
+  + ``star-alphabet``
+  + ``infiltration``, ``shuffle``
+  + ``characteristic``
+  + ``chain``
+  + ``prefix``, ``suffix``, ``factor``
+  + ``is-trim``
+  + ``left-mult``, ``right-mult``
+  + ``are-equivalent`` (for automata with weights in fields)
+  + ``are-equivalent-E`` (for rational expressions with weights in fields)
+  + ``enumerate``, ``shortest``
+  + ``normalize``, ``is-normalized``
+
 - New TAF-Kit option:
-  * Use "-o FPEXP" to print a fully-parenthesized expression.
-  * The --list-automata option replace the old list-automata command.
+
+  + Use ``-o FPEXP`` to print a fully-parenthesized expression.
+  + The ``--list-automata`` option replace the old list-automata command.
+
 - Important bug-fixes
-  * eps_removal() has been fixed to deal with non-positive semirings when
-  possible, and detect when not.
-  * reduce() has been mostly rewritten
-  * The parser for rational expressions no longer parses a+b(a)
-  as (a+b)(a).
-- aut-to-exp will work on FMP transducers.
+
+  + ``eps_removal()`` has been fixed to deal with non-positive semirings when
+    possible, and detect when not.
+  + ``reduce()`` has been mostly rewritten
+  + The parser for rational expressions no longer parses ``a+b(a)``
+    as ``(a+b)(a)``.
+
+- ``aut-to-exp`` will work on FMP transducers.
 - TAF-Kit will warn when reading an empty file (usually the result
-  for running something like "command file > file"), and the "edit"
+  for running something like ``command file > file``), and the ``edit``
   command will warn when creating automata without initial or final
   states.
 - Automata factories are now installed, prividing commands such
-  as divkbaseb-char-b, ladybird-char-b, etc.
-- {0} weights are displayed in Zmin and Zmax contexts.
+  as ``divkbaseb-char-b``, ``ladybird-char-b``, etc.
+- ``{0}`` weights are displayed in Zmin and Zmax contexts.
 
 
 Vaucanson 1.3.2, September 22th, 2009
