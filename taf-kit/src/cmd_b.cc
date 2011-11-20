@@ -167,33 +167,37 @@ universal_command(const arguments_t& args)
 BEGIN_COMMAND_GROUP(b_commands,
 	"4. Algorithms specific to Boolean automata and rational expressions:");
 
-COMMAND_ENTRY(is_complete, Aut,
+COMMAND_ENTRY(is_complete, Aut, Boolean,
 	      "Return whether `aut' is complete.");
-COMMAND_ENTRY(complete, Aut, "Give the complete version of `aut'.");
-COMMAND_ENTRY(is_deterministic, Aut,
+COMMAND_ENTRY(complete, Aut, Aut, "Give the complete version of `aut'.");
+COMMAND_ENTRY(is_deterministic, Aut, Boolean,
 	      "Return whether `aut' is deterministic.");
-COMMAND_ENTRY(determinize, Aut,
+COMMAND_ENTRY(determinize, Aut, Aut,
 	      "Give the determinized automaton of `aut'.");
-COMMAND_ENTRY(complement, Aut, "Complement `aut'.");
+COMMAND_ENTRY(complement, Aut, Aut, "Complement `aut'.");
 
-COMMAND_ENTRY_CN(minimize, minimization_hopcroft, Aut,
+COMMAND_ENTRY_CN(minimize, minimization_hopcroft, Aut, Aut,
 		 "Give the minimized of `aut' (Hopcroft algorithm).");
-COMMAND_ENTRY_EXPERT_CN(minimize-moore, minimization_moore, Aut,
+COMMAND_ENTRY_EXPERT_CN(minimize-moore, minimization_moore, Aut, Aut,
 			"Give the minimized of `aut' (Moore algorithm).");
-COMMAND_ENTRY(intersection, AutAut, "Build the intersection of two automata.");
-COMMAND_ENTRY(are_equivalent, AutAut,
+COMMAND_ENTRY(intersection, AutAut, Aut,
+	      "Build the intersection of two automata.");
+COMMAND_ENTRY(are_equivalent, AutAut, Boolean,
 	      "Return whether `aut1' and `aut2' realize the same series.");
-COMMAND_ENTRY(are_equivalent_E, ExpExp,
+COMMAND_ENTRY(are_equivalent_E, ExpExp, Boolean,
 	      "Return whether `exp1' and `exp2' denote the same language.");
-COMMAND_ENTRY(derived_term, Exp,
+COMMAND_ENTRY(derived_term, Exp, Aut,
 	      "Build the derivate-term automaton for `exp'.");
-COMMAND_ENTRY(shortest, Aut, "Return one of the shortest accepted words.");
-COMMAND_ENTRY(enumerate, AutInt, "Enumerate all accepted words of length <=n.");
-COMMAND_ENTRY(prefix, Aut,
+COMMAND_ENTRY(shortest, Aut, Text,
+	      "Return one of the shortest accepted words.");
+COMMAND_ENTRY(enumerate, AutInt, Text,
+	      "Enumerate all accepted words of length <=n.");
+COMMAND_ENTRY(prefix, Aut, Aut,
 	      "Build an automaton which accepts any prefix of Aut.");
-COMMAND_ENTRY(suffix, Aut,
+COMMAND_ENTRY(suffix, Aut, Aut,
 	      "Build an automaton which accepts any suffix of Aut.");
-COMMAND_ENTRY(factor, Aut,
+COMMAND_ENTRY(factor, Aut, Aut,
 	      "Build an automaton which accepts any factor of Aut.");
-COMMAND_ENTRY(universal, Aut, "Build the universal automaton of an automaton.");
+COMMAND_ENTRY(universal, Aut, Aut,
+	      "Build the universal automaton of an automaton.");
 END_COMMAND_GROUP

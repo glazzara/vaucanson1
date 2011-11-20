@@ -83,11 +83,12 @@ universal_command(const arguments_t& args)
 
 BEGIN_COMMAND_GROUP(r_commands,
 		    "3. Algorithms for automata with weights in a field:");
-COMMAND_ENTRY(reduce, Aut,
+COMMAND_ENTRY(reduce, Aut, Aut,
 	      "Compute a minimal automaton equivalent to `aut'.");
-COMMAND_ENTRY(are_equivalent, AutAut,
+COMMAND_ENTRY(are_equivalent, AutAut, Boolean,
 	      "Tell whether two automata realize the same series.");
-COMMAND_ENTRY(are_equivalent_E, ExpExp,
+COMMAND_ENTRY(are_equivalent_E, ExpExp, Boolean,
 	      "Tell whether two expressions denote the same language.");
-COMMAND_ENTRY(universal, Aut, "Build the universal automaton of an automaton.")
+COMMAND_ENTRY(universal, Aut, Aut,
+	      "Build the universal automaton of an automaton.")
 END_COMMAND_GROUP

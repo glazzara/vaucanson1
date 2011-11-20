@@ -46,8 +46,8 @@ display_command(const arguments_t& args)
 
 BEGIN_COMMAND_GROUP(io_commands,
 	    "0. Input/Output functions:");
-COMMAND_ENTRY(data, Aut, "Print useful infos about `aut'.");
-COMMAND_ENTRY(cat, Aut, "Return `aut'.");
-COMMAND_ENTRY(display, Aut, "Display `aut'.");
-COMMAND_ENTRY(edit, Aut, "Create or edit an automaton interactively.");
+COMMAND_ENTRY(data, Aut, Text, "Print useful infos about `aut'.");
+COMMAND_ENTRY(cat, Aut, Aut, "Return `aut'.");
+COMMAND_ENTRY(display, Aut, None, "Display `aut'.");
+COMMAND_ENTRY(edit, Aut, None, "Create or edit an automaton interactively.");
 END_COMMAND_GROUP

@@ -1,3 +1,18 @@
+2011-11-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Add option to list commands with their input and output specifications.
+
+	* taf-kit/src/main.cc: Add option --list-all-commands-json.
+	* taf-kit/src/Makefile.am: #define the name of all contexts
+	for all instances.
+	* taf-kit/src/commands.hh, taf-kit/src/commands.cc:
+	Add new specifiers to describe parameters, and implement
+	a list_json() method.
+	* taf-kit/src/cmd_wt.cc, taf-kit/src/cmd_b.cc,
+	taf-kit/src/cmd_fmp.cc, taf-kit/src/cmd_gen.cc,
+	taf-kit/src/cmd_io.cc, taf-kit/src/cmd_pair.cc,
+	taf-kit/src/cmd_r.cc, taf-kit/src/cmd_wt.cc: Specify output.
+
 2011-09-28  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* doc/NEWS.txt: Fix formatting.

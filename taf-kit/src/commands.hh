@@ -36,11 +36,21 @@ struct arguments_t;
 // Parameters to commands.
 enum command_params {
   None,
+  Boolean,
+  Text,
   Exp,
+  Exp1,  // Expression on the first alphabet
   ExpExp,
   Aut,
+  AutB,  // Weight changed to Boolean
+  AutM,  // Monoid kind changed FM <-> FMP
+  Aut1,  // First projection (for pair alphabets or FMP)
+  Aut2,  // Second projection (for pair alphabets or FMP)
+  AutR,  // RationalWeight Automaton
   AutExp,
+  AutExp1,
   AutAut,
+  AutAut1,
   AutInt,
   AutWord,
   AutWeight,
@@ -54,6 +64,8 @@ struct command_t
   int (*command)(const arguments_t&);
   // Description of the parameters.
   command_params params;
+  // Description of the output.
+  command_params output;
   // Number of parameters.
   int n_params;
   // Short documentation of the command.
@@ -72,12 +84,14 @@ public:
 			   const char* name,
 			   int (*command)(const arguments_t&),
 			   command_params params,
+			   command_params output,
 			   const char* docstring,
 			   bool expert = false);
 
   static const command_t* lookup(const std::string& str);
 
   static std::ostream& list(std::ostream& ostr, bool expert = false);
+  static std::ostream& list_json(std::ostream& ostr, bool expert = false);
 
   static int execute(const arguments_t& args);
 
@@ -87,16 +101,16 @@ private:
 };
 
 
-# define COMMAND_ENTRY_CN_(Name, CodeName, Params, Docstring, Expert) \
-  register_cmd(sec, #Name, CodeName##_command, Params, Docstring, Expert);
-# define COMMAND_ENTRY_CN(Name, CodeName, BlockParams, Docstring)	\
-  COMMAND_ENTRY_CN_ (Name, CodeName, BlockParams, Docstring, 0)
-# define COMMAND_ENTRY(Name, BlockParams, Docstring)		\
-  COMMAND_ENTRY_CN_ (Name, Name, BlockParams, Docstring, 0)
-# define COMMAND_ENTRY_EXPERT_CN(Name, CodeName, BlockParams, Docstring) \
-  COMMAND_ENTRY_CN_ (Name, CodeName, BlockParams, Docstring, 1)
-# define COMMAND_ENTRY_EXPERT(Name, BlockParams, Docstring) \
-  COMMAND_ENTRY_CN_ (Name, Name, BlockParams, Docstring, 1)
+# define COMMAND_ENTRY_CN_(Name, CodeName, Params, Output, Docstring, Expert) \
+  register_cmd(sec, #Name, CodeName##_command, Params, Output, Docstring, Expert);
+# define COMMAND_ENTRY_CN(Name, CodeName, Params, Output, Docstring)	\
+  COMMAND_ENTRY_CN_ (Name, CodeName, Params, Output, Docstring, 0)
+# define COMMAND_ENTRY(Name, Params, Output, Docstring)	\
+  COMMAND_ENTRY_CN_ (Name, Name, Params, Output, Docstring, 0)
+# define COMMAND_ENTRY_EXPERT_CN(Name, CodeName, Params, Output, Docstring) \
+  COMMAND_ENTRY_CN_ (Name, CodeName, Params, Output, Docstring, 1)
+# define COMMAND_ENTRY_EXPERT(Name, Params, Output, Docstring)	\
+  COMMAND_ENTRY_CN_ (Name, Name, Params, Output, Docstring, 1)
 
 #define BEGIN_COMMAND_GROUP(Name, Text)		\
   namespace {					\

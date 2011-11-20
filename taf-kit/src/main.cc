@@ -81,11 +81,14 @@ namespace
   const char* predefined_string = build_predefined_string();
 #endif
 #define OPT_LIST_AUTOMATA 1
+#define OPT_LIST_ALGORITHMS_JSON 2
   const argp_option options[] = {
     {"list-commands", 'l', 0, 0,
      "List usual commands", 0 },
     {"list-all-commands", 'L', 0, 0,
      "List all commands, including debug commands", 0 },
+    {"list-all-commands-json", OPT_LIST_ALGORITHMS_JSON, 0, 0,
+     "List all commands, in json format", 0 },
     {"list-automata", OPT_LIST_AUTOMATA, 0, 0, "List predefined automata", 0 },
     { "verbose",		'v', 0, 0,
       "Be more verbose (print boolean results)", 0 },
@@ -161,6 +164,9 @@ namespace
 	exit(0);
       case 'L':
 	command_map::list(std::cout, true);
+	exit(0);
+      case OPT_LIST_ALGORITHMS_JSON:
+	command_map::list_json(std::cout, true);
 	exit(0);
       case 'T':
 	args.report_time = true;

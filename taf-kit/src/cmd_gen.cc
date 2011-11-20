@@ -300,51 +300,52 @@ semiring_info_command(const arguments_t& args)
 BEGIN_COMMAND_GROUP(cmd_gen,
 		    "1. Operations on all automata and rational expressions:");
 // Graphs
-COMMAND_ENTRY(accessible, Aut, "Compute the accessible part of `aut'.");
-COMMAND_ENTRY(coaccessible, Aut, "Compute the co-accessible part of `aut'.");
-COMMAND_ENTRY(is_trim, Aut, "Test if the `aut' is trim.");
-COMMAND_ENTRY(trim, Aut, "Compute the trim part of `aut'.");
-COMMAND_ENTRY(is_empty, Aut, "Tell whether `aut' is empty.'")
-COMMAND_ENTRY(is_useless, Aut,
+COMMAND_ENTRY(accessible, Aut, Aut, "Compute the accessible part of `aut'.");
+COMMAND_ENTRY(coaccessible, Aut, Aut,
+	      "Compute the co-accessible part of `aut'.");
+COMMAND_ENTRY(is_trim, Aut, Boolean, "Test if the `aut' is trim.");
+COMMAND_ENTRY(trim, Aut, Aut, "Compute the trim part of `aut'.");
+COMMAND_ENTRY(is_empty, Aut, Boolean, "Tell whether `aut' is empty.'")
+COMMAND_ENTRY(is_useless, Aut, Boolean,
 	      "Tell whether `aut' has a successful compitation.");
 // Transformations
-COMMAND_ENTRY(proper, Aut, "Compute a proper automaton equivalent to "
+COMMAND_ENTRY(proper, Aut, Aut, "Compute a proper automaton equivalent to "
 	      "`aut' by eliminating spontaneous transitions.");
-COMMAND_ENTRY(is_proper, Aut,
+COMMAND_ENTRY(is_proper, Aut, Boolean,
 	      "Return whether `aut' has no spontaneous transitions.");
-COMMAND_ENTRY_EXPERT(proper_sp, Aut, "Compute a proper automaton "
+COMMAND_ENTRY_EXPERT(proper_sp, Aut, Aut, "Compute a proper automaton "
 		     "equivalent to `aut' using shorter paths.");
-COMMAND_ENTRY(is_standard, Aut, "Tell whethwe `aut' is standard");
-COMMAND_ENTRY(standardize, Aut, "Give the standard automaton of `aut'.");
+COMMAND_ENTRY(is_standard, Aut, Boolean, "Tell whethwe `aut' is standard");
+COMMAND_ENTRY(standardize, Aut, Aut, "Give the standard automaton of `aut'.");
 // Operations
-COMMAND_ENTRY(union, AutAut,
+COMMAND_ENTRY(union, AutAut, Aut,
 		 "Build the union of two automata.");
-COMMAND_ENTRY(sum, AutAut,
+COMMAND_ENTRY(sum, AutAut, Aut,
 	      "Build the sum of two standard automata.");
-COMMAND_ENTRY(concatenate, AutAut,
+COMMAND_ENTRY(concatenate, AutAut, Aut,
 	      "Build the concatenation of two standard automata.");
-COMMAND_ENTRY(chain, AutInt,
+COMMAND_ENTRY(chain, AutInt, Aut,
 	      "Concatenate a standard automaton n times with itself.");
-COMMAND_ENTRY(star, Aut,
+COMMAND_ENTRY(star, Aut, Aut,
 	      "Build the star of a standard automaton.");
-COMMAND_ENTRY(left_mult, AutWeight,
+COMMAND_ENTRY(left_mult, AutWeight, Aut,
 	      "Build the left-product of `aut' and `weight'.");
-COMMAND_ENTRY(right_mult, AutWeight,
+COMMAND_ENTRY(right_mult, AutWeight, Aut,
 	      "Build the right-product of `aut' and `weight'.");
-COMMAND_ENTRY(aut_to_exp, Aut,
+COMMAND_ENTRY(aut_to_exp, Aut, Exp,
 	      "Build an expression denoting the behaviour of `aut' (Naive heuristic).");
-COMMAND_ENTRY(aut_to_exp_SO, Aut,
+COMMAND_ENTRY(aut_to_exp_SO, Aut, Exp,
 	      "Build an expression denoting the behaviour of `aut' (State order).");
-COMMAND_ENTRY(aut_to_exp_DM, Aut,
+COMMAND_ENTRY(aut_to_exp_DM, Aut, Exp,
 	      "Build an expression denoting the behaviour of `aut' (Delgado & Morais heuristic).");
 // Operations on behaviors
-COMMAND_ENTRY(sum_S, AutAut,
+COMMAND_ENTRY(sum_S, AutAut, Aut,
 	      "Build a standard sum of two automata.");
-COMMAND_ENTRY(cauchy_S, AutAut,
+COMMAND_ENTRY(cauchy_S, AutAut, Aut,
 	      "Build a standard Cauchy product of two automata.");
-COMMAND_ENTRY(star_S, Aut,
+COMMAND_ENTRY(star_S, Aut, Aut,
 	      "Build a standard star of an automaton.");
 // Miscelaneous commands
-COMMAND_ENTRY_EXPERT(semiring_info, None,
+COMMAND_ENTRY_EXPERT(semiring_info, None, Text,
 		     "Debug information about the semiring.");
 END_COMMAND_GROUP

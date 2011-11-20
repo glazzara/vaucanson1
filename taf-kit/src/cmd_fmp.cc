@@ -254,48 +254,50 @@ to_rw_command(const arguments_t& args)
 
 BEGIN_COMMAND_GROUP(fmp_commands,
 		    "5. Algorithms for automata on products of free monoïds:");
-COMMAND_ENTRY(inverse, Aut, "Give the inverse of `aut'.");
-COMMAND_ENTRY(transpose, Aut,
+COMMAND_ENTRY(inverse, Aut, Aut, "Give the inverse of `aut'.");
+COMMAND_ENTRY(transpose, Aut, Aut,
 	      "Give the transposed of the transducer `aut'.");
-COMMAND_ENTRY(is_subnormalized, Aut, "Tell whether `aut' is sub-normalized.");
-COMMAND_ENTRY(subnormalize, Aut,
+COMMAND_ENTRY(is_subnormalized, Aut, Boolean,
+	      "Tell whether `aut' is sub-normalized.");
+COMMAND_ENTRY(subnormalize, Aut, Aut,
 	      "Build a subnormalized transducer of `aut'.");
-COMMAND_ENTRY_EXPERT(is_normalized, Aut,
+COMMAND_ENTRY_EXPERT(is_normalized, Aut, Boolean,
 	      "Return whether `aut' is normalized.");
-COMMAND_ENTRY_EXPERT(normalize, Aut,
+COMMAND_ENTRY_EXPERT(normalize, Aut, Aut,
 		     "Build a normalized transducer for `aut'.");
-COMMAND_ENTRY(is_ltl, Aut, "Test if `aut' is letter-to-letter.");
-COMMAND_ENTRY(ltl_to_pair, Aut,
+COMMAND_ENTRY(is_ltl, Aut, Boolean,
+	      "Test if `aut' is letter-to-letter.");
+COMMAND_ENTRY(ltl_to_pair, Aut, AutM,
       "Convert `Aut' into an automaton defined over a pair letter alphabet.");
 #ifndef WITH_WEIGHTS
-COMMAND_ENTRY(b_composition, AutAut,
+COMMAND_ENTRY(b_composition, AutAut, Aut,
 	      "Compose two subnormalized transducers.");
-COMMAND_ENTRY(b_composition_R, AutAut,
+COMMAND_ENTRY(b_composition_R, AutAut, Aut,
 	      "Compose two transducers.");
 #endif
-COMMAND_ENTRY_EXPERT(composition_cover, Aut, "Outsplitting.");
-COMMAND_ENTRY_EXPERT(composition_co_cover, Aut, "Insplitting.");
-COMMAND_ENTRY(composition, AutAut,
-	      "Compose two subnormalized transducers, preserving the number of paths.");
-COMMAND_ENTRY(composition_R, AutAut,
+COMMAND_ENTRY_EXPERT(composition_cover, Aut, Aut, "Outsplitting.");
+COMMAND_ENTRY_EXPERT(composition_co_cover, Aut, Aut, "Insplitting.");
+COMMAND_ENTRY(composition, AutAut, Aut,
+      "Compose two subnormalized transducers, preserving the number of paths.");
+COMMAND_ENTRY(composition_R, AutAut, Aut,
 	      "Compose two transducers, preserving the number of paths.");
 
-COMMAND_ENTRY(domain, Aut,
+COMMAND_ENTRY(domain, Aut, Aut1,
 	      "Give an automaton that accepts all inputs accepted by `aut'.");
-COMMAND_ENTRY(w_domain, Aut,
-	      "Give a weighted automaton that accepts all inputs accepted by `aut'.");
-COMMAND_ENTRY(image, Aut,
+COMMAND_ENTRY(w_domain, Aut, Aut1,
+      "Give a weighted automaton that accepts all inputs accepted by `aut'.");
+COMMAND_ENTRY(image, Aut, Aut2,
 	      "Give an automaton that accepts all output produced by `aut'.");
-COMMAND_ENTRY(w_image, Aut,
-	      "Give a weighted automaton that accepts all output produced by `aut'.");
-COMMAND_ENTRY(evaluation, AutAut,
+COMMAND_ENTRY(w_image, Aut, Aut2,
+      "Give a weighted automaton that accepts all output produced by `aut'.");
+COMMAND_ENTRY(evaluation, AutAut1, Aut2,
 	      "Evaluate the language described by the "
 	      IOAUT_NAME " automaton `aut2' on the transducer `aut1'.");
-COMMAND_ENTRY(eval, AutExp,
+COMMAND_ENTRY(eval, AutExp1, Text,
 	      "Give the evaluation of `exp' against `aut'.");
 
 #ifdef RW_CONTEXT
-COMMAND_ENTRY_EXPERT(to_rw, Aut,
+COMMAND_ENTRY_EXPERT(to_rw, Aut, AutR,
 	      "Give the equivalent rational weight transducer of `aut'.");
 #endif
 END_COMMAND_GROUP

@@ -54,10 +54,12 @@ pair_to_fmp_command(const arguments_t& args)
 
 BEGIN_COMMAND_GROUP(pair_commands,
 		    "6. Algorithms for automata with alphabets of pairs:");
-COMMAND_ENTRY(first_projection, Aut, "Give the first projection of `aut'.");
-COMMAND_ENTRY(second_projection, Aut, "Give the second projection of `aut'.");
+COMMAND_ENTRY(first_projection, Aut, Aut1,
+	      "Give the first projection of `aut'.");
+COMMAND_ENTRY(second_projection, Aut, Aut2,
+	      "Give the second projection of `aut'.");
 #ifdef FMP_CONTEXT
-COMMAND_ENTRY(pair_to_fmp, Aut,
+COMMAND_ENTRY(pair_to_fmp, Aut, AutM,
 	      "Convert an automata `Aut' using pair letters into an FMP.");
 #endif
 END_COMMAND_GROUP
