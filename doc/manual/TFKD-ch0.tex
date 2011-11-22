@@ -3,7 +3,7 @@
 \section{Getting \vcsnv}
 The version \VcsnVersion\xspace of the \vcsn platform can be downloaded
 from \\
-\code{http://www.lrde.epita.fr/cgi-bin/twiki/view/Vaucanson/Vaucanson\VcsnVersion}
+\code{http://vaucanson.lrde.epita.fr/Vaucanson\VcsnVersion}
 
 Other previous versions of the \vcsn platform can be downloaded
 from \\
@@ -27,12 +27,12 @@ software).
 \label{sec:pre-req}%
 
 \begin{description}
-\item[\Cpp compiler] \code{G++ 4.x} where \code{x} $<$ 5.
+\item[\Cpp compiler] \code{G++ 4.x} or later.
 
 \item[\XML] The \XML I/O system is based on the use of the Apache \code{Xerces}
-  \Cpp library version 2.7+ (\code{http://apache.org/xerces-c/}). (On
-  Ubuntu/Debian, install the following packages: \code{libxerces27} and
-  \code{libxerces28-dev}, or \code{libxerces28} and \code{libxerces28-dev}).
+  \Cpp library version 2.7 or later (\code{http://apache.org/xerces-c/}). (On
+  Ubuntu/Debian, install packages with names similar to: \code{libxerces28} and \code{libxerces28-dev},
+  or \code{libxerces-c3.1} and \code{libxerces-c-dev}),
 \Indextt{Xerces}%
 
 \item[\code{Boost}] \code{Boost} provides free peer-reviewed
@@ -40,10 +40,7 @@ portable \Cpp source
   libraries (On Ubuntu/Debian, install the following packages:
   l\code{ibboost-dev}, \code{libboost-serialization-dev}, \code{libboost-graph},
   \code{libboost-graph-dev}).
-  \vcsn is compatible with \code{Boost} versions $>$= \code{1.34}. It shall be
-  noted that with \code{Boost 1.44}, a special flag must be given to the
-  compiler through the configure file:
-  \code{CPPFLAGS='-DBOOST\_SPIRIT\_USE\_OLD\_NAMESPACE'}.
+  \vcsn is compatible with \code{Boost} versions \code{1.34} or later.
 \Indextt{Boost}%
 
 \item[\code{Ncurses}] needed for building \tafkit  (On Ubuntu/Debian, install

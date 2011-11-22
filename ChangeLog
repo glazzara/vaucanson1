@@ -1,3 +1,11 @@
+2011-11-22  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Update prerequisites.
+
+	* doc/README.txt: Mention Ncurses in the README.  Update the
+	version of Xerces-C++.
+	* doc/manual/TFKD-ch0.tex: Update prerequisites.
+
 2011-11-20  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Add option to list commands with their input and output specifications.

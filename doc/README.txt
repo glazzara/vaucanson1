@@ -94,7 +94,7 @@ visualize these ``.dot`` files or run the test suite.
 .. _Graphviz: http://www.research.att.com/sw/tools/graphviz/
 
 The XML I/O system is based on the Apache `Xerces-C++`_ library
-version 2.3 or above.
+version 2.7 or above.
 
 .. _Xerces-C++: http://xml.apache.org/xerces-c/
 
@@ -114,6 +114,12 @@ is used in algorithms only, but its use shall be extended to automata
 structures and other portions of code. You must install this library
 on your system.  Vaucanson should support any version after 1.34.
 
+.. _Ncurses: http://www.gnu.org/s/ncurses/
+
+Ncurses_ is used by the interactive editor of TAF-Kit.  We use only a
+very small part of its stable interface so any version should work.
+If Ncurses_ is not installed on your system, the compilation of
+TAF-Kit will be disabled.
 
 Libraries installed in non-standard directories
 -----------------------------------------------
