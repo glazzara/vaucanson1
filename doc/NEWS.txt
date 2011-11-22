@@ -8,6 +8,13 @@ This document describes major updates to the Vaucanson_ project.
 
 :Contact: vaucanson@lrde.epita.fr
 
+Vaucanson 1.4a, unreleased
+==========================
+
+- A new TAF-Kit option ``--list-all-commands-json`` outputs the list of
+  all command in a format (json) that may be parsed by third-party
+  tools to interface with TAF-Kit.
+
 Vaucanson 1.4, September 28th, 2011
 ===================================
 

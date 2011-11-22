@@ -18,7 +18,7 @@ m4_pattern_forbid([^VCSN_])
 
 AC_PREREQ([2.61])
 
-AC_INIT([vaucanson], [1.4], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [1.4a], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.11 tar-ustar no-define foreign dist-xz color-tests parallel-tests])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
