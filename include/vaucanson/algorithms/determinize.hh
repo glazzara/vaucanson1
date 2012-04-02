@@ -23,7 +23,7 @@
  *
  * Boolean automata determinization.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 19:13:10 2003
  *
  * @see determinize()

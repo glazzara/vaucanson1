@@ -20,7 +20,7 @@
 /** @addtogroup algorithms *//** @{ */
 /**
  * @file   eval.hh
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 17:50:38 2003
  *
  * @brief  This file provides the evaluation of a word w.r.t an automaton.

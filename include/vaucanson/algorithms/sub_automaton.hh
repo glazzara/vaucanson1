@@ -23,7 +23,7 @@
  *
  * This file provides the extraction of sub automaton.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 20:37:59 2003
  *
  * @see sub_automaton(), sub_automaton_here()

@@ -50,7 +50,7 @@ namespace vcsn {
    * @param a the automaton to complete.
    * @pre @a a must be a realtime automaton over a free-monoid.
    * @see complete(), is_complete()
-   * @author Yann Régis-Gianas
+   * @author Yann RÃ©gis-Gianas
    */
   template <typename A, typename AI>
   void
@@ -66,7 +66,7 @@ namespace vcsn {
    * @param a the automaton to complete.
    * @pre @a a must be a realtime automaton over a free-monoid.
    * @see complete_here(), is_complete()
-   * @author Yann Régis-Gianas
+   * @author Yann RÃ©gis-Gianas
    */
   template <typename A, typename AI>
   Element<A, AI>
@@ -89,7 +89,7 @@ namespace vcsn {
    * @return true if the automaton @a a is complete.
    * @pre @a a must be a realtime automaton over a free-monoid.
    * @see complete(), complete_here(), is_deterministic()
-   * @author Yann Régis-Gianas
+   * @author Yann RÃ©gis-Gianas
    */
   template <typename A, typename AI>
   bool

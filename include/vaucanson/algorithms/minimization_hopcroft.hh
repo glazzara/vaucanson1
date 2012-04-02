@@ -23,7 +23,7 @@
  *
  * This file provides minimization and quotient algorithms.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 21:08:54 2003
  *
  * @see minimization_hopcroft(), quotient()

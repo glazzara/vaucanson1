@@ -25,7 +25,7 @@
  *
  * This file declares the parse() function.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>,
  *         Thomas Claveirole <thomas@lrde.epita.fr>
  *	   Vivien Delmon <vivien@lrde.epita.fr>
  * @see parse()
@@ -81,7 +81,7 @@ namespace vcsn {
      * @param lex_trace Enable lexer trace (for debuging purposes).
      * @param parse_trace Enable parser trace (for debuging purposes).
      *
-     * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
+     * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>,
      *         Thomas Claveirole <thomas@lrde.epita.fr>
      *	       Vivien Delmon <vivien@lrde.epita.fr>
      */

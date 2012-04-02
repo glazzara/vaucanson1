@@ -48,7 +48,7 @@ namespace vcsn {
    * @pre @a a must be deterministic.
    *
    * @see complement()
-   * @author Yann Régis-Gianas
+   * @author Yann RÃ©gis-Gianas
    */
   template <typename A, typename AI>
   void
@@ -63,7 +63,7 @@ namespace vcsn {
    * @pre @a a must be deterministic.
    *
    * @see complement_here()
-   * @author Yann Régis-Gianas
+   * @author Yann RÃ©gis-Gianas
    */
   template <typename A, typename AI>
   Element<A, AI>

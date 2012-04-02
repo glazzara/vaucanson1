@@ -23,7 +23,7 @@
  *
  * Provides a converter from expression to automaton based on derivatives.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 17:58:19 2003
  *
  * @see derived_term_automaton()

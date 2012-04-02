@@ -23,11 +23,11 @@ Permanent staff
 Epita students 2003
 ===================
 
-* Yann Regis-Gianas			yann.regis-gianas@lrde.epita.fr
+* Yann Régis-Gianas			yann.regis-gianas@lrde.epita.fr
   - Initial code and releases up to 0.4,
   - Everything else.
 
-* Raphael Poss				raphael.poss@lrde.epita.fr
+* Raphaël Poss				raphael.poss@lrde.epita.fr
   - Initial code and releases up to 0.4,
   - Lots of code rewriting and optimization,
   - Vaucanswig,
@@ -48,7 +48,7 @@ Epita students 2003-2005
   - Algorithms writing,
   - Lots of cleaning and bug fixes.
 
-* Loic Fosse				loic.fosse@lrde.epita.fr
+* Loïc Fosse				loic.fosse@lrde.epita.fr
   - Code maintenance,
   - New automata construction,
   - Rational expression expander,
@@ -70,7 +70,7 @@ Epita students 2005-2006
   - Algorithms dedicated to transducers,
   - Demo for transducers.
 
-* Louis-Noel Pouchet			louis-noel.pouchet@lrde.epita.fr
+* Louis-Noël Pouchet			louis-noel.pouchet@lrde.epita.fr
   - Release manager for Vaucanson 0.7, 0.7.1 and 0.7.2,
   - New XML I/O system including new XSD grammar,
   - Code maintenance,
@@ -89,7 +89,7 @@ Epita students 2005-2007
   - Heuristic implementations for state elimination algorithm,
   - Bug fixes.
 
-* Micha�l Cadilhac			michael.cadilhac@lrde.epita.fr
+* Michaël Cadilhac			michael.cadilhac@lrde.epita.fr
   - Release manager for Vaucanson 0.8 and 1.0,
   - TAF-Kit,
   - Renaming campaign,
@@ -165,7 +165,7 @@ Epita students 2008-2010
   - libbench,
   - Bug fixes.
 
-* Jerome Galtier			jerome.galtier@lrde.epita.fr
+* Jérôme Galtier			jerome.galtier@lrde.epita.fr
   - rw_composition,
   - one rule rewriting,
   - Bug fixes.
@@ -194,3 +194,8 @@ ENST Students
 * Rodrigo de Souza (2005)
 * Pierre-Yves Angrand (2007-)           angrand@gmail.com
 * Victor Marsault (2011-)               victor.marsault@gmail.com
+
+--
+Local Variables:
+coding: utf-8
+End:

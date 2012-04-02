@@ -23,7 +23,7 @@
  *
  * This module contains definitions for the design pattern used in
  * Vaucanson, so called "Element". This design pattern is more deeply
- * described in the paper by Yann Régis-Gianas and Raphaël Poss:
+ * described in the paper by Yann RÃ©gis-Gianas and RaphaÃ«l Poss:
  * <em>On orthogonal specialization in C++: Dealing with efficiency
  * and algebraic abstraction in Vaucanson</em>. In the proceedings of
  * the Parallel/High-performance Object-Oriented Scientific Computing

@@ -2082,7 +2082,7 @@
 
 	* configure.ac (DISTCHECK_CONFIGURE_FLAGS): Add missing quotes.
 
-2009-09-30  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+2009-09-30  JÃ©rÃ´me Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a typo in lrde-upload.sh.
 
@@ -2349,7 +2349,7 @@
 	* configure.ac (ac_default_graph_impl): Make listg the default.
 	* doc/README.txt: Adjust documentation of --default-graph-impl.
 
-2009-08-02  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+2009-08-02  JÃ©rÃ´me Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix a typo in generate_bench.sh.
 
@@ -3111,20 +3111,20 @@
 	* include/vaucanson/algebra/implementation/series/transpose.hh:
 	Do not name a argument T when T is also a template parameter.
 
-2009-05-11  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+2009-05-11  JÃ©rÃ´me Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Remove the vcs directory.
 
 	* vcs/vaucanson.rb: Remove.
 
-2009-05-11  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+2009-05-11  JÃ©rÃ´me Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Fix out of tree building for the TAF-Kit manual.
 
 	* doc/manual/Makefile.am: Correct the path to taf-kit-manual.tex by
 	prefixing the old path with $(srcdir).
 
-2009-05-10  Jérôme Galtier  <jerome.galtier@lrde.epita.fr>
+2009-05-10  JÃ©rÃ´me Galtier  <jerome.galtier@lrde.epita.fr>
 
 	Add support for boost multi-index >= 1.36.
 
@@ -3278,7 +3278,7 @@
 	* include/vaucanson/algebra/implementation/letter/int_letter.hxx
 	(literal_to_letter): Do not skip spaces when translating numbers.
 	* taf-kit/tests/vcsn-int-b.test: Add a test case.
-	Thanks to Jérôme for the help.
+	Thanks to JÃ©rÃ´me for the help.
 
 2009-04-10  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
@@ -12653,12 +12653,12 @@ instances to them.
 	* doc/manual/installation.tex, doc/manual/vaucanson-user-manual.tex:
 	Use the definitions from version.tex.
 
-2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
+2007-12-13  MichaÃ«l Cadilhac  <michael@cadilhac.name>
 
 	* minimization_2n/Makefile.bench,
 	* minimization_debruijn/Makefile.bench: Time only the relevant part.
 
-2007-12-13  Michaël Cadilhac  <michael@cadilhac.name>
+2007-12-13  MichaÃ«l Cadilhac  <michael@cadilhac.name>
 
 	* include/vaucanson/tools/bencher.hh (VCSN_BENCH_START_QUIET)
 	(VCSN_BENCH_START, VCSN_BENCH_STOP_QUIET, VCSN_BENCH_STOP)
@@ -16529,7 +16529,7 @@ instances to them.
 
 	* AUTHORS: Correct the mistake in the file.
 
-2006-08-30  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-08-30  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/emacs/vaucanson.el: Require the CL package.
 	(in-vaucanson-p): New. Tell if a path is in a Vaucanson distribution.
@@ -16859,7 +16859,7 @@ instances to them.
 	* include/vaucanson/misc/random.hxx: Formatting changes.
 	* include/vaucanson/misc/deferrer.hxx: Typo in Dox.
 
-2006-08-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-08-21  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/emacs/vaucanson.el: Require rebox.  Minor aesthetical changes.
 	(doxymacs-check-group-consistency): New function. Check for good use
@@ -16869,7 +16869,7 @@ instances to them.
 	in `vaucansonize-buffer'.
 	* data/emacs/rebox.el: Provide rebox using Elisp scheme.
 
-2006-08-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-08-05  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Provide a new implementation of Hopcroft (det).
 
@@ -16986,7 +16986,7 @@ instances to them.
 	* include/vaucanson/algorithms/forward_realtime.hxx,
 	* include/vaucanson/algorithms/eps_removal.hxx: Aesthetical changes.
 
-2006-08-03  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-08-03  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
 	Include iostream.
@@ -17271,41 +17271,41 @@ instances to them.
 	* doc/manual/Makefile.am, doc/manual/vaucanson-user-manual.tex:
 	Adjust.
 
-2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-29  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* configure.ac: Bump to 1.1pre.
 
-2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-29  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Release 1.0.
 
 	* configure.ac: Remove the `PRE_RELEASE' thing.
 
-2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-29  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/Makefile.am: Don't force the remake of the doc on
 	distributed package.
 
-2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-29  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/tests/Makefile.am: Add XML test files to the distribution.
 
-2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-29  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/boolean_transducer.hh,
 	* include/vaucanson/z_transducer.hh: Undef AUTOMATON_CONTEXT.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/common_commands.hh (transpose): Move...
 	* taf-kit/src/common_automaton_commands.hh (transpose): ...Here.  It
 	should be moved back once the algorithm is fixed for TDCs.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/tdc_commands.cc: Fix some docstrings.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/NEWS.txt: Minor changes.
 
@@ -17316,11 +17316,11 @@ instances to them.
 	* taf-kit/src/tdc_commands.cc: Add and suppress some \n \t at
 	strategic points.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/NEWS.txt: Fix typo.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/Makefile.am: Add missing files.
 
@@ -17345,7 +17345,7 @@ instances to them.
 	* src/demos/one_rule_rewriting/Makefile.am: Fix relative backward
 	path.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/tdc_commands.cc: Use USE_IO_COMMAND_GROUP ().
 	* taf-kit/src/common_commands.hh: Typo.
@@ -17418,7 +17418,7 @@ instances to them.
 	* src/tests/include/tests/algebra/series/misc/series_test.hh:
 	Disable those tests.
 
-2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-28  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Rearrange command organization in TAF.
 
@@ -17899,7 +17899,7 @@ instances to them.
 	* doc/manual/taf-kit.tex: More about vcsn-tdc, but it fails to
 	evaluate...
 
-2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-26  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/developer.tex: Add a comment on CPP use.
 
@@ -17914,7 +17914,7 @@ instances to them.
 	* data/automata/tdc-rw/add1-rw.xml: here.
 	* doc/manual/taf-kit.tex: More documentation.
 
-2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-26  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/tdc_commands.cc: Name `eval' instead of `evaluation'.
 
@@ -17948,11 +17948,11 @@ instances to them.
 	* src/demos/vgrep/Makefile.am,
 	* src/tests/xml/Makefile.am: Adjust to the location of vaucanson.mk.
 
-2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-26  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
 
-2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-26  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/automata/tdc/Makefile.in: Remove.  Useless.
 
@@ -17997,7 +17997,7 @@ instances to them.
 	* doc/manual/examples/a1.xml: Remove.
 	* doc/manual/taf-kit.tex: Add a noindent.
 
-2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-26  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
 
@@ -18368,16 +18368,16 @@ instances to them.
 
 	* doc/manual/developer.tex (Includes): New.
 
-2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-24  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/vaucanson.el: Use `file-name-nondirectory' on
 	non-include/vaucanson files.
 
-2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-24  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/vaucanson.el: Fix use of `c-header-file-extensions'.
 
-2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-24  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/misc.el: Move...
 	* data/vaucanson.el: Here.  Add `cpp-check-guard' that checks the CPP
@@ -18385,7 +18385,7 @@ instances to them.
 	M-x vaucansonize-buffer RET.  Provide `vaucanson' package.
 	* data/Makefile.am: Update accordingly.
 
-2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-24  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/misc/unique.hcc: Remove.  `unique.hxx' is the name.
 	* src/vaucanswig/meta/vauto.cc: Remove useless `include' in comment.
@@ -18435,7 +18435,7 @@ instances to them.
 	Cut long strings in two.
 	* taf-kit/src/edition_commands.hxx: Reindent macros.
 
-2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Put things in utility:: in vcsn::misc::.
 
@@ -18595,11 +18595,11 @@ instances to them.
 	* src/vaucanswig/meta/context.hh,
 	* taf-kit/src/edition_commands.hxx: Update accordingy.
 
-2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/tests/defs.in: Use data/automata as automata_dir.
 
-2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix use of normalized/b_composition.
 
@@ -18610,17 +18610,17 @@ instances to them.
 	* src/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh:
 	s/normalized_composition/u_compose/, s/b_composition/compose/.
 
-2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/normalized.hxx: Use get_initial on the
 	initial state and get_final on the final one.
 
-2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/tools/dumper.hh: Don't sanity check, as the
 	prerequisites for including this file aren't fulfilled.
 
-2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/taf-kit.tex: Fix `dump-automaton' use in doc.
 
@@ -18647,7 +18647,7 @@ instances to them.
 	* include/vaucanson/algorithms/composition_cover.hxx: New. Add two
 	composition_cover and composition_co_cover, required by vcsn-tdc.
 
-2006-07-22  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-22  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Remove `fsm' demo.
 	This demo is deprecated and is real drag to use.  People who want to
@@ -18695,7 +18695,7 @@ instances to them.
 	functions has_predecessors and has_successors.
 	* include/Makefile.am: Update accordingly.
 
-2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-21  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Add library support in TAF-Kit.
 
@@ -18748,7 +18748,7 @@ instances to them.
 
 	* data/vaucanson.xsd: Remove annoying default range.
 
-2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-21  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Move automaton library to data/automata.
 
@@ -18769,7 +18769,7 @@ instances to them.
 	* src/demos/function_library/tdc_algorithms.cc: Change the good path
 	to the file outsplitting.
 
-2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-21  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/misc.el: Add the non-optional (in Emacs 21) nil as third
 	argument of (indent-region).
@@ -18795,7 +18795,7 @@ instances to them.
 	* doc/manual/taf-kit.tex (\includegenerateddot, \execcaption):
 	New.
 
-2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-21  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
 
@@ -18808,7 +18808,7 @@ instances to them.
 
 	* include/vaucanson/algorithms/internal/outsplitting.hh: Change comments.
 
-2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-21  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Store `getenv' result in
 	a char*.
@@ -18931,7 +18931,7 @@ instances to them.
 	* include/vaucanson/automata/concept/transducer_ops.hxx: Do
 	  not use Support::operator*.
 
-2006-07-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-20  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/vaucanson-user-manual.tex: Add missing myacronym package.
 	* doc/manual/developer.tex: Describe directories. Add a rule on macros.
@@ -18960,12 +18960,12 @@ instances to them.
 
 	* doc/manual/developer.tex: Some specialized var names..
 
-2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-19  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/b_commands.cc,
 	* taf-kit/src/z_commands.cc: Some _CN are still needed.
 
-2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-19  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	TAF: Lessen the use of _CN macros.
 	_CN macros of TAF-Kit are used to precise a `Code Name' when it
@@ -19015,7 +19015,7 @@ instances to them.
 	context.
 	Don't declare variables too widely.
 
-2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-19  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Add TAF-Kit for Z weighted automata.
 
@@ -19037,7 +19037,7 @@ instances to them.
 	* include/vaucanson/algorithms/normalized_composition.hxx
 	(composition_traits, add_transition): New.
 
-2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-19  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hxx: Don't talk
 	about unused arguments.
@@ -19110,11 +19110,11 @@ instances to them.
 	* include/vaucanson/automata/concept/transducer_ops.hxx,
 	* include/vaucanson/automata/concept/kinds.hxx: Use it.
 
-2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-19  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/NEWS.txt: Document `deltaf' functions.
 
-2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-19  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Permit functors to return Booleans used as a loop stopper.
 
@@ -19128,7 +19128,7 @@ instances to them.
 	false on an input.
 	* include/vaucanson/automata/concept/automata_base.hh: Document.
 
-2006-07-18  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-18  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/tools/usual_macros.hh: Pacify check_xml.sh.
 
@@ -19146,13 +19146,13 @@ instances to them.
 	I have a file using `-' instead of `_', and that broke the
 	generation of Makefile.ams.
 
-2006-07-11  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-11  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hxx: Don't give a
 	name to the structure.
 	* src/benchs/generate_benchs.sh: Output `<<', not `\<\<'.
 
-2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-08  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/eval.hh,
 	* include/vaucanson/algorithms/eval.hxx: Use `deltaf', remove the
@@ -19161,11 +19161,11 @@ instances to them.
 	Remove the use of Boolean flag of `eval'. THIS TEST IS NOW BROKEN,
 	in particular for z_automata.
 
-2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-08  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/misc.el: Use `c-set-style'.
 
-2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-08  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Cleanup delta declarations, add `deltaf' for functor.
 
@@ -19183,12 +19183,12 @@ instances to them.
 	* include/vaucanson/automata/concept/automata_base.hxx: Factor delta
 	functions thanks to `kind', declare `deltaf' functions.
 
-2006-07-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-07  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/evaluation.hxx: Use `trim_here', avoid
 	the use of temp variables.
 
-2006-07-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-07-07  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Add a missing '\' in CPP use.
 
@@ -19519,12 +19519,12 @@ instances to them.
 
 	* include/vaucanson/algorithms/is_ambiguous.hh: Fix typo.
 
-2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-14  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/tests/defs.in: Only hide stderr when not verbose.
 	* taf-kit/tests/vcsn-b.test: Use history to print the failed command.
 
-2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-14  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/complete.hxx: Add the loop on the sink
 	state.
@@ -19546,7 +19546,7 @@ instances to them.
 	* taf-kit/tests/ambiguous.xml: New. Test samples.
 	* taf-kit/tests/defs.in: Add some variable for the new tests.
 
-2006-06-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change `for_each' loops to `for_all'.
 	Rewrite these macros.
@@ -19615,7 +19615,7 @@ instances to them.
 	* src/demos/transducers/one_rule_rewriting/ORR_demo.cc,
 	* taf-kit/src/edit_automaton.hxx: Update accordingly.
 
-2006-06-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/misc.el: Don't use 'cl macros. Indent macros before buffer.
 
@@ -19635,13 +19635,13 @@ instances to them.
 	* src/tests/automata/implementation_check/Makefile.am:
 	  Add a new entry for this test.
 
-2006-06-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-12  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
 	* include/vaucanson/algorithms/closure.hxx: Rename non-sense
 	`series_identity' to `null_series'.
 
-2006-06-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-12  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Add VCSN_INCLUDE_XML() macro to factorize some CPP test handling.
 
@@ -19668,7 +19668,7 @@ instances to them.
 	* build-aux/check_xml.sh: Say that VCSN_INCLUDE_XML() is a valid test
 	of XML include'ability.
 
-2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-10  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Move `vaucanson.xsd' from src/ to data/.
 
@@ -19685,7 +19685,7 @@ instances to them.
 
 	* doc/xml/xml_proposal.tex: Update the URL to the XSD.
 
-2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-10  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data: New.
 	* data/Makefile.am: New.
@@ -19694,7 +19694,7 @@ instances to them.
 
 	* data/misc.el: New. Indentation for Vaucanson and other minor stuff.
 
-2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-10  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* bootstrap.sh (run): Call directly the parameters without invoking
 	/bin/sh. It fixes an issue when having different versions of
@@ -19755,7 +19755,7 @@ instances to them.
 	* build-aux/fix-rights: New.
 	Use it.
 
-2006-06-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-06-05  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/implementation/geometry.hxx,
 	* include/vaucanson/automata/implementation/geometry.hh: Add a
@@ -19926,7 +19926,7 @@ instances to them.
 	Exit with failure on failures.
 	* doc/xml/Makefile.am: Make sure check_xml.sh is happy.
 
-2006-05-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* build-aux/check_xml.sh: Fix XML use warnings.
 
@@ -20085,16 +20085,16 @@ instances to them.
 	* build-aux: here.
 	* bootstrap.sh: Adjust.
 
-2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-15  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/demos/utilities/Makefile.am: Fix typos.
 
-2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-15  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/installation.tex,
 	* doc/manual/vaucanson_toolkit.tex: Fix typos.
 
-2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-15  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/hevea.sty: New. Needed by `texi.sty'.
 	* doc/Makefile.am: Add it in the EXTRA_DIST together with Vaucanson-G
@@ -20109,13 +20109,13 @@ instances to them.
 	Several fixes.
 	* doc/Makefile.am (EXTRA_DIST): Adjust.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/node.hxx: Put a space in template use to avoid
 	macro expansion that leads to `>>'.
 	* include/vaucanson/xml/tools.hxx: Don't `static_cast' in `const'.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Prepare the release.
 
@@ -20135,7 +20135,7 @@ instances to them.
 	Add forgotten `in' and `out' label nodes in `initial_transducer' and
 	`final_transducer' nodes.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Don't consider - or _ in command name of TAF-Kit.
 
@@ -20144,15 +20144,15 @@ instances to them.
 	* src/taf-kit/edit_automaton.hxx: Update accordingly.
 	* src/taf-kit/b_commands.cc: String compare without considering _ or -.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/tests/xml/Makefile.am: Add back `tester.sh' in EXTRA_DIST.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/taf-kit/Makefile.am: Minor fix.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Rework distribution (autotools'ing and directory location).
 
@@ -20198,16 +20198,16 @@ instances to them.
 	* doc/xml/Makefile.am: Compile the xml proposal even if
 	VCSN_USE_XML is not set.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/vaucanson.xsd: s/type/label_type/.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/Makefile.am: Don't force the user to recompile the reference
 	documentation.
 
-2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Enhance SVN revision detection.
 
@@ -20216,12 +20216,12 @@ instances to them.
 	would be duplicated with ChangeLog `Rev' entry.
 	* ChangeLog: Last line contains SVN related informations.
 
-2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-12  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/Makefile.am: Add `xml_exp_visitor.{hh,hxx}' to distributed
 	files.
 
-2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-12  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Bump to 0.8pre and add (back) a pre-release numbering system.
 
@@ -20231,7 +20231,7 @@ instances to them.
 	* Makefile.am: Dumping the SVN_REVISION in a svn-revision file so that
 	users can build a more or less rightly numbered tarball.
 
-2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-12  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Remove Stroppa's bench and distribute other ones.
 	Benchs weren't distributed because copyright's owning of Nicolas
@@ -20243,12 +20243,12 @@ instances to them.
 	* configure.ac: Update accordingly.
 	* Makefile.am: Remove hacks.
 
-2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-12  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/xml/Makefile.am,
 	* doc/manual/Makefile.am: Add PDF sources in EXTRA_DIST.
 
-2006-05-11  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-11  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hh: Comment fix.
 
@@ -20296,7 +20296,7 @@ instances to them.
 	* include/vaucanson/xml/tools.hxx: Change the parsing of the XML input
 	so as to read correctly a label written as a node.
 
-2006-05-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-08  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Precise where the XSD must
 	be put on the error ``XSD not found''.
@@ -20323,7 +20323,7 @@ instances to them.
 	* src/taf-kit/common_commands.hh: Add dump function that
 	performs DOT dump on COUT.
 
-2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-07  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Add TAF-Kit for Boolean automata.
 	TAF-Kit stands for Typed Automata Function Kit, that is to say,
@@ -20356,7 +20356,7 @@ instances to them.
 	of TAF-Kit on demand.
 	* configure.ac: Update accordingly.
 
-2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-07  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix VCSN_NDEBUG use.
 
@@ -20370,12 +20370,12 @@ instances to them.
 	* include/vaucanson/design_pattern/default_ops.hxx: Fix warnings with
 	VCSN_NDEBUG set.
 
-2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-07  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat.hxx: Don't
 	#undef `echo' as it's not defined.
 
-2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-07  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Minor fixes.
 
@@ -20407,7 +20407,7 @@ instances to them.
 	* ChangeLog.2: New. ... And this one  for years 2004-2005.
 	* Makefile.am: Add to `EXTRA_DIST'.
 
-2006-05-06  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-05-06  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	More inlining.
 
@@ -20428,13 +20428,13 @@ instances to them.
 	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am:
 	Update accordingly.
 
-2006-04-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-26  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Minor fix in autotools use of `doc'.
 
 	* doc/Makefile.am: Add `manual' and `xml' to the SUBDIRS variable.
 
-2006-04-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-23  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change "type" to "label_type", part II.
 
@@ -20453,7 +20453,7 @@ instances to them.
 	* doc/manual/examples/add1_rt.xml,
 	* doc/manual/examples/quot_3_rt.xml: s/type/label_type.
 
-2006-04-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-14  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix use of XML according to VCSN_USE_XML or XML_CHECK.
 
@@ -20472,7 +20472,7 @@ instances to them.
 	* doc/xml/Makefile.am: Surround code by tests for VCSN_USE_XML or
 	XML_CHECK.
 
-2006-04-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change `origin_of' to `src_of' and `aim_of' to `dst_of'.
 
@@ -20527,7 +20527,7 @@ instances to them.
 	* src/demos/vaucanswig/meta/vauto.hh: s/origin_of/src_of/;
 	s/aim_of/dst_of/.
 
-2006-04-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change `new_*' functions to `make_*'.
 	Reindendation made on modified files.
@@ -20590,7 +20590,7 @@ instances to them.
 
 	* doc/NEWS.txt: Not concerned by the renamming, so revert it.
 
-2006-04-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change `edge' to `transition'.
 	Some bugs fixed in algorithms/ and xml/.
@@ -20755,7 +20755,7 @@ instances to them.
 	* doc/README-IO.txt,
 	* doc/NEWS.txt: s/edge/transition/. Nearly everywhere.
 
-2006-04-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Clean up `config.h' use.
 
@@ -20772,14 +20772,14 @@ instances to them.
 
 	* config/vcsn_xml.m4: Fix typos.
 
-2006-04-06  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-06  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx (get_label): Fix a previous patch
 	that used `0' as the null series. The specialisation for
 	`polynom<S, bool>' should be kept to avoid the writing of `label = 1'
 	in Boolean automata.
 
-2006-04-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-05  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Remove `vauc'.
 
@@ -20806,7 +20806,7 @@ instances to them.
 	`geometry_full' to `geometry_global'. Remove attribute edgeStyle from
 	the `geometry_global' complexType.
 
-2006-04-03  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-04-03  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/ios.hxx,
 	* include/vaucanson/algorithms/isomorph.hxx: Add missing `inline'.
@@ -20816,7 +20816,7 @@ instances to them.
 	* include/vaucanson/xml/tools.hxx: Use a stringstream to fix a
 	bug that occured in the xml_session test.
 
-2006-03-22  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-22  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix sanity check with and without XML enabled.
 
@@ -20839,7 +20839,7 @@ instances to them.
 	* include/vaucanson/tools/xml_load.hh: If we're checking sanity
 	(defined (VCSN_SANITY_CHECK)), don't #error on VCSN_USE_XML undefined.
 
-2006-03-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-20  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Cosmetic changes on Makefiles.
 
@@ -20853,7 +20853,7 @@ instances to them.
 	* doc/manual/Makefile.am: Use TEXINPUTS env variable instead of
 	  making symlinks for Vaucanson-G.
 
-2006-03-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-20  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Cosmetic changes for 1105.
 
@@ -20900,16 +20900,16 @@ instances to them.
 	* src/tests/xml/fmp_ref.xml,
 	* src/tests/xml/session_ref.xml: Change the reference files.
 
-2006-03-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-20  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* Makefile.am: s/vaucanson_xml.m4/vcsn_xml.m4/.
 
-2006-03-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-20  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* config/vaucanson_xml.m4: Move to...
 	* config/vcsn_xml.m4: ... here, and fix a `test'.
 
-2006-03-17  Raphaël Poss  <raph@lrde.epita.fr>
+2006-03-17  RaphaÃ«l Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/tools/simple_dump.hh,
 	* include/vaucanson/tools/simple_dump.hxx: Fix headers.
@@ -20917,7 +20917,7 @@ instances to them.
 	* include/vaucanson/tools/simple_dump.hh,
 	* include/vaucanson/tools/dot_dump.hh: Use VCSN_USE_INTERFACE_ONLY.
 
-2006-03-17  Raphaël Poss  <raph@lrde.epita.fr>
+2006-03-17  RaphaÃ«l Poss  <raph@lrde.epita.fr>
 
 	Make Vaucanson a bit more usable when Xerces-C++ is not available.
 
@@ -20976,25 +20976,25 @@ instances to them.
 	* doc/xml/xml_proposal.tex: New version. Change structure and
 	content according to discussions.
 
-2006-03-16  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-16  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Allow the user to override default XSD path in her code.
 
 	* include/vaucanson/xml/xerces_parser-hh.in: Add a guard macro for
 	  `VCSN_XSD_PATH'.
 
-2006-03-16  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-16  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/Makefile.am: Add `xerces_parser-hh.in' to EXTRA_DIST.
 
-2006-03-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-15  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix small bug in XML output.
 
 	* include/vaucanson/xml/tools.hxx: Make sure "0" is output on
 	  transitions labeled by the no-word.
 
-2006-03-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-15  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Be more flexible on XML's XSD location.
 	XML's XSD file is now searched :
@@ -21023,7 +21023,7 @@ instances to them.
 	* configure.ac: Compute the default XSD path and substitute a variable
 	  in `xerces_parser-hh.in'.
 
-2006-03-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-03-15  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/contexts/automaton_functions.thh: Add some
 	  algorithms, sort them in alphabetical order.
@@ -21078,7 +21078,7 @@ instances to them.
 	* doc/manual/examples: New.
 	* doc/manual/examples/a1.xml: New.
 
-2006-02-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+2006-02-13  MichaÃ«l Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Minor fix in Graph::exists().
 
@@ -21089,6 +21089,7 @@ See ChangeLog.2 for earlier changes.
 
 Local Variables:
 ispell-local-dictionary: "american"
+coding: utf-8
 End:
 
 $Rev$

@@ -23,7 +23,7 @@
  *
  * This file provides a converter from expression to standard automaton.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 20:46:53 2003
  *
  * @see standard_of()

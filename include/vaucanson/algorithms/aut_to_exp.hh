@@ -20,7 +20,7 @@
 /** @addtogroup algorithms *//** @{ */
 /**
  * @file   aut_to_exp.hh
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 19:21:17 2003
  *
  * @brief  This file provides converter from automaton to expression.

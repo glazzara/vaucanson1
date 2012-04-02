@@ -23,7 +23,7 @@
  *
  * Test for transducer normalization.
  *
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @author Yann RÃ©gis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:49:07 2003
  *
  * @see is_normalized_transducer()
