@@ -20,7 +20,9 @@ AC_PREREQ([2.61])
 
 AC_INIT([vaucanson], [1.4a], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([1.11 tar-ustar no-define foreign dist-xz color-tests parallel-tests])
+AM_INIT_AUTOMAKE([1.11 tar-ustar no-define foreign dist-xz
+                  color-tests parallel-tests silent-rules])
+AM_SILENT_RULES([yes])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 AC_CONFIG_SUBDIRS([cbs])
