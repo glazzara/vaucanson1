@@ -11,7 +11,7 @@ tests ()
 
 subdirs ()
 {
-  echo -n >>$subdirs_mk.$$tmp "$@"
+  printf "$@" >>$subdirs_mk.$$tmp
 }
 
 
