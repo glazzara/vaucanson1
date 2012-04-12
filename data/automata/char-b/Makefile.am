@@ -32,45 +32,34 @@ nodist_char_b_automata_DATA =			\
 CLEANFILES += $(nodist_char_b_automata_DATA)
 
 a1_CPPFLAGS = $(AM_CPPFLAGS)
-a1_SOURCES = a1.cc
 a1.xml: a1$(EXEEXT)
-	./a1$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./a1$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 # Accepts words with a `b'.
 # See ETA Fig. III.2.3, p. 434.
 b1_CPPFLAGS = $(AM_CPPFLAGS)
-b1_SOURCES = b1.cc
 b1.xml: b1$(EXEEXT)
-	./b1$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./b1$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 divkbaseb_char_b_CPPFLAGS = $(AM_CPPFLAGS)
 divkbaseb_char_b_SOURCES = divkbaseb.cc
 div3base2.xml: divkbaseb-char-b$(EXEEXT)
-	./divkbaseb-char-b$(EXEEXT) 3 2 xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./divkbaseb-char-b$(EXEEXT) 3 2 xml >$@.tmp && mv $@.tmp $@
 
 ladybird_char_b_CPPFLAGS = $(AM_CPPFLAGS)
 ladybird_char_b_SOURCES = ladybird.cc
 ladybird-6.xml: ladybird-char-b$(EXEEXT)
-	./ladybird-char-b$(EXEEXT) 6 xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./ladybird-char-b$(EXEEXT) 6 xml >$@.tmp && mv $@.tmp $@
 
 doublering_char_b_CPPFLAGS = $(AM_CPPFLAGS)
 doublering_char_b_SOURCES = double_ring.cc
 double-3-1.xml: doublering-char-b$(EXEEXT)
-	./doublering-char-b$(EXEEXT) 3 1 xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./doublering-char-b$(EXEEXT) 3 1 xml >$@.tmp && mv $@.tmp $@
 
 evena_CPPFLAGS = $(AM_CPPFLAGS)
-evena_SOURCES = evena.cc
 evena.xml: evena$(EXEEXT)
-	./evena$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./evena$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 oddb_CPPFLAGS = $(AM_CPPFLAGS)
-oddb_SOURCES = oddb.cc
 oddb.xml: oddb$(EXEEXT)
-	./oddb$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./oddb$(EXEEXT) xml >$@.tmp && mv $@.tmp $@

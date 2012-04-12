@@ -29,5 +29,4 @@ CLEANFILES += $(nodist_char_f2_automata_DATA)
 ring_char_f2_CPPFLAGS = $(AM_CPPFLAGS)
 ring_char_f2_SOURCES = ring.cc
 ring-7-0-2-3.xml: ring-char-f2$(EXEEXT)
-	./ring-char-f2$(EXEEXT) 7 0 2 3 xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./ring-char-f2$(EXEEXT) 7 0 2 3 xml >$@.tmp && mv $@.tmp $@

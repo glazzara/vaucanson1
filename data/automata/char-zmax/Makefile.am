@@ -26,15 +26,9 @@ nodist_char_zmax_automata_DATA =		\
 CLEANFILES += $(nodist_char_zmax_automata_DATA)
 
 maxab_CPPFLAGS = $(AM_CPPFLAGS)
-maxab_SOURCES = maxab.cc
-
 maxab.xml: maxab$(EXEEXT)
-	./maxab$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./maxab$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 maxblocka_CPPFLAGS = $(AM_CPPFLAGS)
-maxblocka_SOURCES = maxblocka.cc
-
 maxblocka.xml: maxblocka$(EXEEXT)
-	./maxblocka$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./maxblocka$(EXEEXT) xml >$@.tmp && mv $@.tmp $@

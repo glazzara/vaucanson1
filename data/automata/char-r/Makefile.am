@@ -27,22 +27,16 @@ nodist_char_r_automata_DATA = \
 CLEANFILES += $(nodist_char_r_automata_DATA)
 
 b1_CPPFLAGS = $(AM_CPPFLAGS)
-b1_SOURCES = b1.cc
 b1.xml: b1$(EXEEXT)
-	./b1$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./b1$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 c1_CPPFLAGS = $(AM_CPPFLAGS)
-c1_SOURCES = c1.cc
 c1.xml: c1$(EXEEXT)
-	./c1$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./c1$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 d1_CPPFLAGS = $(AM_CPPFLAGS)
-d1_SOURCES = d1.cc
 d1.xml: d1$(EXEEXT)
-	./d1$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./d1$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 
 

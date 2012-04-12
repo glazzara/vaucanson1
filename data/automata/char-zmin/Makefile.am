@@ -30,20 +30,17 @@ slowgrow_CPPFLAGS = $(AM_CPPFLAGS)
 slowgrow_SOURCES = slowgrow.cc
 
 slowgrow.xml: slowgrow$(EXEEXT)
-	./slowgrow$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./slowgrow$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 minab_CPPFLAGS = $(AM_CPPFLAGS)
 minab_SOURCES = minab.cc
 
 minab.xml: minab$(EXEEXT)
-	./minab$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./minab$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 
 minblocka_CPPFLAGS = $(AM_CPPFLAGS)
 minblocka_SOURCES = minblocka.cc
 
 minblocka.xml: minblocka$(EXEEXT)
-	./minblocka$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./minblocka$(EXEEXT) xml >$@.tmp && mv $@.tmp $@
 

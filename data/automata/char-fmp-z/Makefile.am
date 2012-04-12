@@ -26,10 +26,8 @@ nodist_char_fmp_z_automata_DATA = \
 CLEANFILES += $(nodist_char_fmp_z_automata_DATA)
 
 t1.xml: ../char-fmp-b/t1.xml
-	sed -e 's/set="B"/set="Z"/g' ../char-fmp-b/t1.xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) sed -e 's/set="B"/set="Z"/g' ../char-fmp-b/t1.xml >$@.tmp && mv $@.tmp $@
 
 u1.xml: ../char-fmp-b/u1.xml
-	sed -e 's/set="B"/set="Z"/g' ../char-fmp-b/u1.xml >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) sed -e 's/set="B"/set="Z"/g' ../char-fmp-b/u1.xml >$@.tmp && mv $@.tmp $@
 

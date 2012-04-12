@@ -33,22 +33,19 @@ t1_CPPFLAGS = $(AM_CPPFLAGS)
 t1_SOURCES = t1.cc
 
 t1.xml: t1$(EXEEXT)
-	./t1$(EXEEXT) >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./t1$(EXEEXT) >$@.tmp && mv $@.tmp $@
 
 u1_CPPFLAGS = $(AM_CPPFLAGS)
 u1_SOURCES = u1.cc
 
 u1.xml: u1$(EXEEXT)
-	./u1$(EXEEXT) >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./u1$(EXEEXT) >$@.tmp && mv $@.tmp $@
 
 quotkbaseb_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS)
 quotkbaseb_char_fmp_b_SOURCES = quotkbaseb.cc
 
 quot3base2.xml: quotkbaseb-char-fmp-b$(EXEEXT)
-	./quotkbaseb-char-fmp-b$(EXEEXT) 3 2 >$@.tmp
-	mv $@.tmp $@
+	$(AM_V_GEN) ./quotkbaseb-char-fmp-b$(EXEEXT) 3 2 >$@.tmp && mv $@.tmp $@
 
 ORR_char_fmp_b_CPPFLAGS = $(AM_CPPFLAGS)
 ORR_char_fmp_b_SOURCES = ORR.cc
