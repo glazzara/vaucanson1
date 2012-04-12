@@ -28,9 +28,9 @@
 
 # include <boost/bind.hpp>
 # include <boost/function.hpp>
-# include <boost/spirit/core.hpp>
-# include <boost/spirit/utility/lists.hpp>
-# include <boost/spirit/utility/chset.hpp>
+# include <boost/spirit/include/classic_core.hpp>
+# include <boost/spirit/include/classic_lists.hpp>
+# include <boost/spirit/include/classic_chset.hpp>
 
 # include <vaucanson/misc/static.hh>
 
