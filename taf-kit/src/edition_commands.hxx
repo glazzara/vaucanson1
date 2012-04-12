@@ -422,10 +422,10 @@ namespace edition_commands
   static void main_loop(automaton_t& a, const arguments_t& args)
   {
     char* term = getenv("TERM");
-    char* cl = 0;
-
-    if (term and (tgetent(0, term) != -1))
-      cl = tgetstr("cl", 0);
+    char* cl =
+      term and (tgetent(0, term) != -1)
+      ? tgetstr((char*) "cp", 0)
+      : 0;
     do
     {
       if (cl)
