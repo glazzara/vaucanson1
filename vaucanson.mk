@@ -11,6 +11,9 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+## When _SOURCES is not specified, use PROGRAM.cc, not PROGRAM.c.
+AM_DEFAULT_SOURCE_EXT = .cc
+
 ## -I directories are consulted in the same order as the command
 ## line, so put build dirs first.
 AM_CPPFLAGS = \
