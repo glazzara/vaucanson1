@@ -14,11 +14,17 @@ vaucanson.xsd version 0.5
 element.
 -->
 <xs:complexType name="geometryState">
+  <xs:sequence>
+    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
   <xs:attribute name="x" type="xs:decimal"/>
   <xs:attribute name="y" type="xs:decimal"/>
 </xs:complexType>
 
 <xs:complexType name="geometryTrans">
+  <xs:sequence>
+    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
   <xs:attribute name="transitionType">
     <xs:simpleType>
       <xs:restriction base="xs:string">
@@ -43,9 +49,13 @@ element.
     </xs:simpleType>
   </xs:attribute>
   <xs:attribute name="labelDist" type="xs:decimal"/>
+  <xs:anyAttribute processContents="skip"/>
 </xs:complexType>
 
 <xs:complexType name="geometryInitial">
+  <xs:sequence>
+    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
   <xs:attribute name="initialDir">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
@@ -63,9 +73,13 @@ element.
     </xs:simpleType>
   </xs:attribute>
   <xs:attribute name="labelDist" type="xs:decimal"/>
+  <xs:anyAttribute processContents="skip"/>
 </xs:complexType>
 
 <xs:complexType name="geometryFinal">
+  <xs:sequence>
+    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
   <xs:attribute name="finalDir">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
@@ -90,6 +104,7 @@ element.
     </xs:simpleType>
   </xs:attribute>
   <xs:attribute name="labelDist" type="xs:decimal"/>
+  <xs:anyAttribute processContents="skip"/>
 </xs:complexType>
 
 <xs:complexType name="geometryAut">
@@ -104,6 +119,10 @@ element.
 This tag has not been specified yet.
 -->
 <xs:complexType name="drawing" mixed="true">
+  <xs:sequence>
+    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+  <xs:anyAttribute processContents="skip"/>
 </xs:complexType>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

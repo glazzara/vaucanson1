@@ -1,3 +1,8 @@
+2012-05-22  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* data/vaucanson.xsd: Allow any unknown elements in
+	<geometricData> and any unknown attributes in <drawingData>.
+
 2011-11-22  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac: Bump version to 1.4a.
