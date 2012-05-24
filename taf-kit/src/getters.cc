@@ -35,9 +35,9 @@ using vcsn::xml::XML;
 # include "pipe.hxx"
 # include "pipe_getters.hxx"
 # include "pipe_writers.hxx"
-#include <sstream>
-#include <boost/spirit/core.hpp>
-#include "boost_spirit_compatibility.hh"
+# include <sstream>
+# include <boost/spirit/include/classic_core.hpp>
+# include "boost_spirit_compatibility.hh"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
