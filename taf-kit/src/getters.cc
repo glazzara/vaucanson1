@@ -45,10 +45,10 @@ using namespace vcsn::tools;
 
 // We can not pass rules by value (hence the references).
 # define ALPHABET_DEFINITION(letter_type) \
-void \
+  void                                                                  \
 if_is_char_letter(boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& def, \
-		  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_true, \
-		  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_false) \
+                  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_true, \
+                  const boost::VCSN_SPIRIT_CLASSIC::rule<boost::VCSN_SPIRIT_CLASSIC::scanner<const char*> >& case_false) \
 { \
   def = misc::static_if< \
   misc::static_eq<vcsn::algebra::letter_traits<letter_type>::is_char_letter, misc::true_t>::value, \
@@ -69,7 +69,7 @@ unsigned get_unsigned (const arguments_t& args, int n)
   if ((ss >> result).fail() || !(ss >> std::ws).eof())
     {
       std::cerr << "Error: cannot parse `" << s << "' as unsigned integer."
-		<< std::endl;
+                << std::endl;
       exit(1);
     }
   return result;
@@ -83,7 +83,7 @@ semiring_elt_value_t get_weight(const arguments_t& args, int n)
   if ((ss >> result).fail() || !(ss >> std::ws).eof())
     {
       std::cerr << "Error: cannot parse `" << s << "' as a weight."
-		<< std::endl;
+                << std::endl;
       exit(1);
     }
   return result;
@@ -92,19 +92,19 @@ semiring_elt_value_t get_weight(const arguments_t& args, int n)
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |
   `---------------------------------------------*/
-# define DEFINE_GET_ALPHABET(Name, Type, Opt)				\
-Type Name (const std::vector<std::string>& al)			\
-{									\
-  Type a;								\
-  if (al.empty())							\
-  {									\
-    warn ("Error: alphabet should be explicitly defined using --" Opt);	\
-    exit (-2);								\
-  }									\
-  for (std::vector<std::string>::const_iterator i = al.begin();		\
-       i != al.end(); ++i)						\
-    a.insert (*i);							\
-  return a;								\
+# define DEFINE_GET_ALPHABET(Name, Type, Opt)                           \
+Type Name (const std::vector<std::string>& al)                  \
+{                                                                       \
+  Type a;                                                               \
+  if (al.empty())                                                       \
+  {                                                                     \
+    warn ("Error: alphabet should be explicitly defined using --" Opt); \
+    exit (-2);                                                          \
+  }                                                                     \
+  for (std::vector<std::string>::const_iterator i = al.begin();         \
+       i != al.end(); ++i)                                              \
+    a.insert (*i);                                                      \
+  return a;                                                             \
 }
 
 
@@ -144,7 +144,7 @@ file_exists(const char* name, bool abort_if_empty)
 
 std::string
 locate_file(const arguments_t& args, const std::string& s,
-	    bool abort_if_empty)
+            bool abort_if_empty)
 {
   // First, try to load the file as given.
   const char* ss = s.c_str();
@@ -160,7 +160,7 @@ locate_file(const arguments_t& args, const std::string& s,
       std::string file = *i + "/" + s;
       const char* f = file.c_str();
       if (file_exists(f, abort_if_empty))
-	return file;
+        return file;
     }
 
   // If we failed, return the filename unchanged, so
@@ -171,7 +171,7 @@ locate_file(const arguments_t& args, const std::string& s,
 # ifdef WITH_TWO_ALPHABETS
 std::string
 locate_fmp_file(const arguments_t& args, const std::string& s,
-	    bool abort_if_empty)
+            bool abort_if_empty)
 {
   // First, try to load the file as given.
   const char* ss = s.c_str();
@@ -187,7 +187,7 @@ locate_fmp_file(const arguments_t& args, const std::string& s,
       std::string file = *i + "/" + s;
       const char* f = file.c_str();
       if (file_exists(f, abort_if_empty))
-	return file;
+        return file;
     }
 
   // If we failed, return the filename unchanged, so
@@ -198,7 +198,7 @@ locate_fmp_file(const arguments_t& args, const std::string& s,
 
 std::string
 locate_boolean_file(const arguments_t& args, const std::string& s,
-		    bool abort_if_empty)
+                    bool abort_if_empty)
 {
   // First, try to load the file as given.
   const char* ss = s.c_str();
@@ -215,7 +215,7 @@ locate_boolean_file(const arguments_t& args, const std::string& s,
       std::string file = *i + "/" + s;
       const char* f = file.c_str();
       if (file_exists(f, abort_if_empty))
-	return file;
+        return file;
     }
 
   // If we failed, return the filename unchanged, so
@@ -239,23 +239,23 @@ rat_exp_t get_exp(const arguments_t& args, const int& n)
   // call to get_alphabet().
   alphabet_t alpha;
   monoid_t M((!alphabet.empty() ||
-	      (s != "-" && g_res.input_exp_type == INPUT_TYPE_EXP))
-	     ? get_alphabet(alphabet) : alpha);
+              (s != "-" && g_res.input_exp_type == INPUT_TYPE_EXP))
+             ? get_alphabet(alphabet) : alpha);
   semiring_t S;
   series_set_t series(S, M);
 
 
-  rat_exp_t	e(series);
+  rat_exp_t     e(series);
 
   if (s == "-")
   {
     rat_exp_t e =
       boost::apply_visitor(rat_exp_getter(M.alphabet(),
-					  g_res.name,
-					  g_res.input_exp_type,
-					  *(M.representation()),
-					  *(series.representation())),
-			   g_res.output);
+                                          g_res.name,
+                                          g_res.input_exp_type,
+                                          *(M.representation()),
+                                          *(series.representation())),
+                           g_res.output);
     // Overwrite the writing data before return if any where supplied
     // on the command line.
     set_writing_data(e, args);
@@ -270,22 +270,22 @@ rat_exp_t get_exp(const arguments_t& args, const int& n)
       std::istream* is = new std::ifstream(ifile.c_str());
       if (not is->fail ())
       {
-	using namespace vcsn::tools;
-	using namespace vcsn::xml;
+        using namespace vcsn::tools;
+        using namespace vcsn::xml;
 
-	*is >> regexp_loader(e, string_out(), XML());
+        *is >> regexp_loader(e, string_out(), XML());
 
-	delete is;
+        delete is;
 
-	// Overwrite the writing data before return if any where supplied
-	// on the command line.
-	set_writing_data(e, args);
-	return e;
+        // Overwrite the writing data before return if any where supplied
+        // on the command line.
+        set_writing_data(e, args);
+        return e;
       }
       else
       {
-	std::cerr << "Error: cannot open `" << ifile << "'." << std::endl;
-	exit(1);
+        std::cerr << "Error: cannot open `" << ifile << "'." << std::endl;
+        exit(1);
       }
       break;
     }
@@ -295,9 +295,9 @@ rat_exp_t get_exp(const arguments_t& args, const int& n)
       set_series_writing_data_(*(series.representation()), args.srep, args.cf);
 
       e = make_rat_exp(M.alphabet(),
-		       s,
-		       *(M.representation()),
-		       *(series.representation()));
+                       s,
+                       *(M.representation()),
+                       *(series.representation()));
 
       break;
     }
@@ -320,8 +320,8 @@ automaton_t get_aut (const arguments_t& args, int n)
   if (s == "-")
     {
       automaton_t a = boost::apply_visitor
-	(automaton_getter (g_res.name,
-			   g_res.input_aut_type), g_res.output);
+        (automaton_getter (g_res.name,
+                           g_res.input_aut_type), g_res.output);
 
       // Set the writing data before return.
       set_writing_data(a, args);
@@ -346,17 +346,17 @@ automaton_t get_aut (const arguments_t& args, int n)
     switch (g_res.input_aut_type)
       {
       case INPUT_TYPE_XML:
-	*is >> automaton_loader(a, string_out (), XML ());
-	break;
+        *is >> automaton_loader(a, string_out (), XML ());
+        break;
 # ifndef WITH_TWO_ALPHABETS
       case INPUT_TYPE_FSM:
-	fsm_load(*is, a);
-	break;
+        fsm_load(*is, a);
+        break;
 # endif // !WITH_TWO_ALPHABETS
       default:
-	std::cerr << "Error: could not load automaton `"
-		  << ifile << "'." << std::endl;
-	exit(1);
+        std::cerr << "Error: could not load automaton `"
+                  << ifile << "'." << std::endl;
+        exit(1);
       }
 
     delete is;
@@ -397,7 +397,7 @@ display_aut(const automaton_t& aut, const arguments_t& args, int n)
 
 #ifdef WITH_TWO_ALPHABETS
 IOAUT_CONTEXT::automaton_t get_single_band_aut(const arguments_t& args,
-					       int n)
+                                               int n)
 {
   const std::string& s = args.args[n];
 
@@ -405,8 +405,8 @@ IOAUT_CONTEXT::automaton_t get_single_band_aut(const arguments_t& args,
   {
     IOAUT_CONTEXT::automaton_t a =
       boost::apply_visitor(single_band_automaton_getter
-			   (g_res.name, g_res.input_aut_type),
-			   g_res.output);
+                           (g_res.name, g_res.input_aut_type),
+                           g_res.output);
 
     // Set the writing data before return.
     set_single_band_writing_data(a, args);
@@ -428,15 +428,15 @@ IOAUT_CONTEXT::automaton_t get_single_band_aut(const arguments_t& args,
     switch (g_res.input_aut_type)
       {
       case INPUT_TYPE_XML:
-	*is >> automaton_loader(a, string_out (), XML ());
-	break;
+        *is >> automaton_loader(a, string_out (), XML ());
+        break;
       case INPUT_TYPE_FSM:
-	fsm_load(*is, a);
-	break;
+        fsm_load(*is, a);
+        break;
       default:
-	std::cerr << "Error: could not load automaton `"
-		  << ifile << "'." << std::endl;
-	exit(1);
+        std::cerr << "Error: could not load automaton `"
+                  << ifile << "'." << std::endl;
+        exit(1);
       }
 
     delete is;
@@ -449,14 +449,14 @@ IOAUT_CONTEXT::automaton_t get_single_band_aut(const arguments_t& args,
   else
   {
     std::cerr << "Error: could not load automaton `"
-	      << ifile << "'." << std::endl;
+              << ifile << "'." << std::endl;
     exit(1);
   }
 }
 #endif // !WITH_TWO_ALPHABETS
 
 BOOL_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args,
-					       int n)
+                                               int n)
 {
   const std::string& s = args.args[n];
 
@@ -464,8 +464,8 @@ BOOL_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args,
   {
     BOOL_CONTEXT::automaton_t a =
       boost::apply_visitor(boolean_automaton_getter
-			   (g_res.name, g_res.input_aut_type),
-			   g_res.output);
+                           (g_res.name, g_res.input_aut_type),
+                           g_res.output);
 
     // Set the writing data before return.
     set_boolean_writing_data(a, args);
@@ -492,15 +492,15 @@ BOOL_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args,
     switch (g_res.input_aut_type)
       {
       case INPUT_TYPE_XML:
-	*is >> automaton_loader(a, string_out (), XML ());
-	break;
+        *is >> automaton_loader(a, string_out (), XML ());
+        break;
       case INPUT_TYPE_FSM:
-	fsm_load(*is, a);
-	break;
+        fsm_load(*is, a);
+        break;
       default:
-	std::cerr << "Error: could not load automaton `"
-		  << ifile << "'." << std::endl;
-	exit(1);
+        std::cerr << "Error: could not load automaton `"
+                  << ifile << "'." << std::endl;
+        exit(1);
       }
 
     delete is;
@@ -513,28 +513,28 @@ BOOL_CONTEXT::automaton_t get_boolean_aut(const arguments_t& args,
   else
   {
     std::cerr << "Error: could not load automaton `"
-	      << ifile << "'." << std::endl;
+              << ifile << "'." << std::endl;
     exit(1);
   }
 }
 
 
 void set_boolean_writing_data(BOOL_CONTEXT::automaton_t& a,
-			      const arguments_t& args)
+                              const arguments_t& args)
 {
 #ifndef WITH_TWO_ALPHABETS
   //FIXME: Do not know how to rewrite this.
   //set_series_writing_data_(*(a.structure().series().representation()),
   // args.srep, args.cf);
   set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
-			   args.mrep, args.cf);
+                           args.mrep, args.cf);
 #else
   (void)a;
   (void)args;
   //set_series_writing_data_(*(a.structure().series().representation()),
   //args.srep.first_representation(), args.cf1);
   //set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
-  //			   args.mrep1, args.cf1);
+  //                       args.mrep1, args.cf1);
 #endif
 }
 
@@ -543,30 +543,30 @@ void set_boolean_writing_data(BOOL_CONTEXT::automaton_t& a,
 LETTER_CONTEXT(automaton_t::monoid_t::first_monoid_t::letter_t)
 
 void set_single_band_writing_data(IOAUT_CONTEXT::automaton_t& a,
-				  const arguments_t& args)
+                                  const arguments_t& args)
 {
   set_series_writing_data_(*(a.structure().series().representation()),
-			   args.srep.first_representation(), args.cf1);
+                           args.srep.first_representation(), args.cf1);
   set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
-			   args.mrep1, args.cf1);
+                           args.mrep1, args.cf1);
 }
 
 void set_writing_data(automaton_t& a, const arguments_t& args)
 {
   set_series_writing_data_(*(a.structure().series().representation()),
-			   args.srep, args.cf);
+                           args.srep, args.cf);
   set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
-			   args.mrep, args.cf);
+                           args.mrep, args.cf);
 
   set_series_writing_data_(a.structure().series().representation()->first_representation(),
-			   args.srep.first_representation(), args.cf1);
+                           args.srep.first_representation(), args.cf1);
   set_monoid_writing_data_(*(a.structure().series().monoid().first_monoid().representation()),
-			   args.mrep1, args.cf1);
+                           args.mrep1, args.cf1);
 
   set_series_writing_data_(a.structure().series().representation()->second_representation(),
-			   args.srep.second_representation(), args.cf2);
+                           args.srep.second_representation(), args.cf2);
   set_monoid_writing_data_(*(a.structure().series().monoid().second_monoid().representation()),
-			   args.mrep2, args.cf2);
+                           args.mrep2, args.cf2);
 }
 # else
 
@@ -575,17 +575,17 @@ LETTER_CONTEXT(letter_t)
 void set_writing_data(automaton_t& a, const arguments_t& args)
 {
   set_series_writing_data_(*(a.structure().series().representation()),
-			   args.srep, args.cf);
+                           args.srep, args.cf);
   set_monoid_writing_data_(*(a.structure().series().monoid().representation()),
-			   args.mrep, args.cf);
+                           args.mrep, args.cf);
 }
 
 void set_writing_data(rat_exp_t& e, const arguments_t& args)
 {
   set_series_writing_data_(*(e.structure().representation()),
-			   args.srep, args.cf);
+                           args.srep, args.cf);
   set_monoid_writing_data_(*(e.structure().monoid().representation()),
-			   args.mrep, args.cf);
+                           args.mrep, args.cf);
 }
 
 # endif // ! WITH_TWO_ALPHABETS
