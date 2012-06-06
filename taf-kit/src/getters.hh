@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006, 2008, 2009, 2010, 2011 The Vaucanson Group.
+// Copyright (C) 2006, 2008, 2009, 2010, 2011, 2012 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,6 +72,7 @@ IOAUT_CONTEXT::automaton_t
 get_single_band_aut(const arguments_t& args, int n);
 #endif
 
+int write_aut(const automaton_t& aut, std::ostream& out);
 int write_aut(const automaton_t& aut, const arguments_t& args, int n);
 int display_aut(const automaton_t& aut, const arguments_t& args, int n);
 

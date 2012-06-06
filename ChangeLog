@@ -1,3 +1,11 @@
+2012-06-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Add a gui command that starts vgi.
+
+	* taf-kit/src/cmd_io.cc (gui_command): New command.
+	* taf-kit/src/getters.cc, taf-kit/src/getters.hh (write_aut): New
+	function.
+
 2012-05-22  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Allow any unknown elements in
