@@ -1,6 +1,7 @@
 % -*- coding: mac-roman -*-
 %%%%%%%   TAF-Kit 1.4 Documentation   %%%%%%%%%%
 %%%  version x                   110913      %%%
+%%%  version 1.4.1               120710      %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% flag definition
 % draft controls  frames, labels showing, footer, comments, etc.
@@ -246,7 +247,8 @@
 \newcommand{\latex}{\LaTeX\xspace}
 \newcommand{\tafkit}{\textsc{TAF-Kit}\xspace}
 \newcommand{\vcsn}{\textsc{Vaucanson}\xspace}
-\def\VcsnVersion{1.4}
+\def\VcsnVersion{1.4.1}
+% \def\VcsnVersion{1.4}
 % \def\VcsnVersion{1.3.9}
 \newcommand{\vcsnv}{\vcsn\VcsnVersion\xspace}
 \newcommand{\tafkitv}{\tafkit\VcsnVersion\xspace}
@@ -421,21 +423,23 @@
 %%%
 \SetTwClPrm{\TwClOne}%
 \SetVCDirectory{figures/}
+% \newcommand{\VGIFig}{figures/VGI/}
 % \ShowFrame
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \includeonly{%
 TFKD-title,%
-TFKD-intro,%
-TFKD-ch0,%
-TFKD-ch1,%
-TFKD-ch1-1,%
-TFKD-ch2,%
-TFKD-bib-ind,% 
-% TFKD-chZ,%
-TFKD-chA,%
-% % TFKD-chB,
-% % TFKD-chC,%
-TFKD-chD,%
+% TFKD-intro,%
+% TFKD-ch0,%
+% TFKD-ch1,%
+% TFKD-ch1-1,%
+% TFKD-ch2,%
+% TFKD-bib-ind,% 
+% % TFKD-chZ,%
+% TFKD-chA,%
+% TFKD-chVGI,%
+% % % TFKD-chB,
+% % % TFKD-chC,%
+% TFKD-chD,%
 % % TFKD-chE,%
 }
 \makeindex 
@@ -455,6 +459,7 @@ TFKD-chD,%
 \appendix
 % \include{TFKD-chZ}
 \include{TFKD-chA}
+\include{TFKD-chVGI}
 \longonly{\include{TFKD-chB}}
 % \include{TFKD-chC}
 \include{TFKD-chD}
