@@ -21,13 +21,13 @@
 /**
  * @file projection.hh
  *
- * @brief Build an FMP transducer that realizes the identity relation.
- * x -> (x,x)
+ * @brief Build FMP transducers from automata.
  *
  */
 /** @} */
 
 // INTERFACE: void identity(const InputProjection& a, Automaton& b) { return vcsn::identity(*a, *b); }
+// INTERFACE: void partial_erase(const InputProjection& a, Automaton& b) { return vcsn::identity(*a, *b); }
 
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/automata/concept/transducer.hh>
@@ -45,10 +45,23 @@ namespace vcsn {
   | Identity |
   `---------*/
 
+ /** @brief Build an FMP transducer that realizes the identity relation.
+   * x -> (x,x)
+   */
   template <typename S, typename S2, typename T, typename T2>
   void
   identity(const Element<S,T>& aut, Element<S2, T2>& res);
 
+  /*--------------.
+  | Partial erase |
+  `--------------*/
+
+ /** @brief Build an FMP transducer that realizes the projection on the empty word.
+   * x -> (x,1)
+   */
+  template <typename S, typename S2, typename T, typename T2>
+  void
+  partial_erase(const Element<S,T>& aut, Element<S2, T2>& res);
   /** @} */
 
 } // ! vcsn

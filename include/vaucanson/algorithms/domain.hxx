@@ -91,8 +91,10 @@ namespace vcsn
     {
       const trans_series_set_elt_t trans_series_elt = src.series_of(*fmp_e);
       trans_support_t trans_supp = trans_series_elt.supp();
+	for_all_const_(trans_support_t, trans_value, trans_supp)
+	{
       const trans_monoid_elt_t trans_monoid_elt(trans_monoid,
-						*(trans_supp.begin()));
+						*trans_value);
       const monoid_elt_value_t word(trans_monoid_elt.value().first);
 
       series_set_elt_t series_elt(series);
@@ -103,6 +105,7 @@ namespace vcsn
 
       dst.add_series_transition(stmap[src.src_of(*fmp_e)],
 				stmap[src.dst_of(*fmp_e)], series_elt);
+	}
     }
   }
 

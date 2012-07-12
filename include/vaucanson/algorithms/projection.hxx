@@ -133,6 +133,65 @@ namespace vcsn
 		res.structure(), res.structure().series().monoid(), aut, res);
   }
 
+  /*--------------.
+  | Partial erase |
+  `--------------*/
+
+  template <typename S1, typename S2, typename M1, typename M2,
+	    typename auto_t, typename trans_t>
+  void
+  do_partial_erase(const AutomataBase<S1>&,
+	      const algebra::FreeMonoidBase<M1>&,
+	      const AutomataBase<S2>&,
+	      const algebra::FreeMonoidProduct<M1,M2>&,
+	      const auto_t& aut, trans_t& res)
+  {
+    BENCH_TASK_SCOPED("partial erase");
+    AUTOMATON_TYPES_(auto_t, aut_);
+    AUTOMATON_TYPES(trans_t);
+
+    std::map<hstate_t, aut_hstate_t>	stmap;
+    typedef typename aut_series_set_elt_t::support_t	aut_support_t;
+
+    const series_set_t&		series = res.structure().series();
+    const monoid_t&		monoid = res.structure().series().monoid();
+    const aut_monoid_t&		aut_monoid = aut.structure().series().monoid();
+    aut_monoid_elt_value_t empty_word =
+    		algebra::identity_as<aut_monoid_elt_value_t>::of(aut_monoid).value();
+
+    set_states(aut, res, stmap);
+
+    for_all_const_transitions_(aut_, aut_e, aut)
+    {
+      const aut_series_set_elt_t aut_series_elt = aut.series_of(*aut_e);
+
+      // If the transition is labeled by a+bc, we want to output
+      // two transitions labeled by (a,a) and (bc,bc).
+      aut_support_t aut_supp = aut_series_elt.supp();
+      for_all_const_(aut_support_t, label, aut_supp)
+	{
+	  const aut_monoid_elt_t aut_monoid_elt(aut_monoid, *label);
+	  const monoid_elt_value_t word(aut_monoid_elt.value(),
+					empty_word);
+
+	  series_set_elt_t series_elt(series);
+	  series_elt.assoc(monoid_elt_t(monoid, word),
+			   aut_series_elt.get(aut_monoid_elt));
+
+	  res.add_series_transition(stmap[aut.src_of(*aut_e)],
+				    stmap[aut.dst_of(*aut_e)], series_elt);
+	}
+    }
+  }
+
+  template <typename S, typename S2, typename T, typename T2>
+  void
+  partial_erase(const Element<S,T>& aut, Element<S2, T2>& res)
+  {
+    do_partial_erase(aut.structure(), aut.structure().series().monoid(),
+		res.structure(), res.structure().series().monoid(), aut, res);
+  }
+
 } // ! vcsn
 
 #endif // ! VCSN_ALGORITHMS_PROJECTION_HXX

@@ -52,7 +52,8 @@ namespace vcsn
 	    break;
 	  }
       }
-    a.add_series_transition(src, dst, val);
+	if (val != a.series().zero_)
+    	a.add_series_transition(src, dst, val);
   }
 
   /*-------------------------------------------.

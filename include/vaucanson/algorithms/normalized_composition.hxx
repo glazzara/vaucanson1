@@ -227,57 +227,63 @@ namespace vcsn {
       for (delta_iterator l(lhs.value(), lhs_s); ! l.done(); l.next())
 	{
 	  const lhs_series_set_elt_t left_series = lhs.series_of(*l);
-	  const lhs_monoid_elt_t left_supp_elt (lhs_monoid,
-						*left_series.supp().begin());
-
-	  // (i)
-	  // If the outgoing transition is of type (*, 1).
-	  if (left_supp_elt.value().second == lhs_second_identity.value())
+	  for_all_const_(lhs_support_t, left_supp_value,left_series.supp())
+	  {
+	    const lhs_monoid_elt_t left_supp_elt (lhs_monoid, *left_supp_value);
+	    // (i)
+	    // If the outgoing transition is of type (*, 1).
+	    if (left_supp_elt.value().second == lhs_second_identity.value())
 	    {
 	      series_set_elt_t s =
-		series_product (left_supp_elt.value().first,
+		  series_product (left_supp_elt.value().first,
 				rhs_second_identity.value(),
 				left_series.get(left_supp_elt));
 	      add_transition (current_state,
 			      lhs.dst_of(*l), rhs_s, s);
 	    }
-	  // (iii')
-	  else
+	    // (iii')
+	    else
 	    {
-              for (delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
-		{
-		  const rhs_series_set_elt_t right_series =
-		    rhs.series_of(*r);
-		  const rhs_monoid_elt_t right_supp_elt
-		    (rhs_monoid, *right_series.supp().begin());
+          for (delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
+		  {
+		    const rhs_series_set_elt_t right_series =
+		        rhs.series_of(*r);
+         	for_all_const_(rhs_support_t, right_supp_value, right_series.supp())
+         	{
+	  	      const rhs_monoid_elt_t right_supp_elt
+		            (rhs_monoid, *right_supp_value);
 
-		  // If the incoming transition is not of type (1, *).
-		  if (right_supp_elt.value().first !=
-		      rhs_first_identity.value())
-		    //  we try to connect a transition of lhs and
-		    // a transition of rhs.
-		    if (left_supp_elt.value().second ==
-			right_supp_elt.value().first)
+		      // If the incoming transition is not of type (1, *).
+		      if (right_supp_elt.value().first !=
+		           rhs_first_identity.value())
+		      //  we try to connect a transition of lhs and
+		      // a transition of rhs.
+		      if (left_supp_elt.value().second ==
+			     right_supp_elt.value().first)
 		      {
-			series_set_elt_t s =
-			  series_product (left_supp_elt.value().first,
+			     series_set_elt_t s =
+			     series_product (left_supp_elt.value().first,
 					  right_supp_elt.value().second,
 					  left_series.get(left_supp_elt)
 					  * right_series.get(right_supp_elt));
-			add_transition
+			   add_transition
 			  (current_state,
 			   lhs.dst_of(*l), rhs.dst_of(*r),
 			   s);
 		      }
-		}
+         	}
+		  }
 	    }
+	  }
 	}
 
       for (delta_iterator r(rhs.value(), rhs_s); ! r.done(); r.next())
 	{
 	  const rhs_series_set_elt_t right_series = rhs.series_of(*r);
-	  const rhs_monoid_elt_t right_supp_elt (rhs_monoid,
-						 *right_series.supp().begin());
+      for_all_const_(rhs_support_t, right_supp_value, right_series.supp())
+      {
+	    const rhs_monoid_elt_t right_supp_elt (rhs_monoid,
+						 *right_supp_value);
 
 	  // (ii)
 	  if (right_supp_elt.value().first == rhs_first_identity.value())
@@ -289,6 +295,7 @@ namespace vcsn {
 	      add_transition (current_state,
 			      lhs_s, rhs.dst_of(*r), s);
 	    }
+      }
 	}
 
     }
