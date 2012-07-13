@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2008 The Vaucanson Group.
+// Copyright (C) 2008, 2012 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
  * if (1) the support of every of its transitions is in
  * @f$A^\times B@f$, and (2) its initial and final weights are scalar.
  *
- * @remarks Synonyms: ltl, letter-to-letter, lettre-à-lettre
+ * @remarks Synonyms: ltl, letter-to-letter, lettre-a-lettre
  *
  * @see is_ltl(), is_sub_normalized(), is_normalized()
  */
