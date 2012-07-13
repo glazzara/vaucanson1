@@ -1,3 +1,7 @@
+2012-07-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	* data/vaucanson.xsd: Update from Jason.
+
 2012-06-06  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	Add a gui command that starts vgi.

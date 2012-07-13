@@ -19,6 +19,7 @@ element.
   </xs:sequence>
   <xs:attribute name="x" type="xs:decimal"/>
   <xs:attribute name="y" type="xs:decimal"/>
+  <xs:anyAttribute processContents="skip"/>
 </xs:complexType>
 
 <xs:complexType name="geometryTrans">
