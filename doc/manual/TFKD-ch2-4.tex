@@ -52,16 +52,17 @@ are specific to Boolean automata.
 \longonly{%
 \begin{ComVd}{110726}
     
-    \thi Pas implémentées, 
-    les commandes en \code{co}:  \Fct{is-cocomplete}, 
+    \thi not implemented:
+    the \code{co} commands   \Fct{is-cocomplete}, 
     \Fct{cocomplete}, \Fct{is-codeterministic}, \Fct{codeterminize}, 
     \Fct{cominimize}.
             
-    \thii Déplacées en attendant de les avoir dans un cadre plus général:
+    \thii transfered in this section for want to have them 
+	implemented in a more general framework:
     \Fct{enumerate}, \Fct{shortest},
     \Fct{derived-term};
     
-    \thiii Non documentée, cachée, mais existe quand même:
+    \thiii hidden, not documented, but still implemented:
     \Fct{minimize-moore}.
     
 \end{ComVd}
@@ -420,7 +421,7 @@ automata and implements the \emph{Hopcroft algorithm}.
 \includegraphics[scale=0.5]{figures/a1cmp.ps}
 \ee
 \includegraphics[scale=0.5]{figures/a1min.ps}
-\caption{The complement of \code{a1det.xml} and its minimisation.}
+\caption{The complement and the minimisation of \code{a1det.xml}.}
 \label{fig:cmp-min-a1}
 \end{figure}
 
@@ -585,18 +586,16 @@ bbb
 
 \longonly{%
 \begin{ComVd}{110704}
-Cette fonction ne devrait pas être spécialisée aux fonctions sur les 
-automates booléens, mais s'appliquer aux automates sur un monoïde 
-libre. 
-Dans ce cas, chaque mot du support de la série devrait être listé 
-\emph{avec son coefficient}. 
-
-Il faudra alors prendre garde que l'implémentation actuelle, qui 
-pourrait déjà s'appliquer à des automates à multiplicité, est en fait 
-une fonction de \emph{graphes}, et donne la liste des mots qui sont 
-l'étiquette d'un chemin réussi dans l'automate, \emph{même si le 
-coefficient de ce mot est~$\zeK$} et non pas la liste des mots du 
-support de la série.
+	This function should not be specialised to Boolean automata but 
+	applied to weighted automaton on a free monoid.
+	In this case, every word of the support of the series should be 
+	listed \emph{together with its coefficient}.
+	
+One should then be careful that the present implementation, which 
+could already work with weighted automata, is indeed a \emph{graph} 
+function, and gives the list of words which are the label of a 
+successful path \emph{even if the coefficient of this word is~$\zeK$} 
+and not the list of words of the support of the series.
 \end{ComVd}
 }%
 
@@ -623,7 +622,7 @@ non-zero \code{exit} code.
 
 \longonly{%
 \begin{ComVd}{110704}
-    Mêmes remarques que pour \Fct{enumerate}.
+	The same remarks as for \Fct{enumerate} apply.
 \end{ComVd}
 }%
 
@@ -755,20 +754,7 @@ A complete and systematic presentation of the universal automaton is
 given in~\cite{LombSaka07}, including the computation algorithm that 
 is implemented in \vcsn.
 
-% It is large, complex, complicated to compute, but hopefully contains 
-% It contains 
-% many interesting informations on the language.
-% In particular, it contains a copy of \emph{any minimal NFA} which recognizes 
-% the language.
-% In order to solve two dual problems of \emph{approximation} of 
-% languages, 
-% J.~H.~Conway also defined the universal automaton in~\cite{Conw71}.
-% 
-% A complete and systematic presentation of the universal automaton is 
-% given in~\cite{LombSaka07}, including the computation algorithm that 
-% is implemented in \vcsn.
-
-\clearpage 
+\shortclear  
 \Exam 
 \medskipneg
 \begin{shell}
@@ -837,7 +823,7 @@ languages}, an automaton of minimal loop complexity is to be found
 within the universal automaton (\cf \cite{LombSaka07}).
 
 The universal automaton however becomes soon very complex, as 
-witnessed in the figure below, and a more structured view on it is 
+witnessed at \figur{uni-H6}, and a more structured view on it is 
 necessary to discover the interesting properties.
 
 \begin{figure}[ht]
@@ -897,7 +883,7 @@ $
 The definition of the derived term automaton of an expression in the 
 Boolean case is due to Antimirov~\cite{Anti96} and can be found in 
 other references 
-\cite{AngrEtAl10,{AngrEtAl10},{LombSaka05a},{Saka03}}.
+\cite{{AngrEtAl10},{LombSaka05a},{Saka03}}.
 
 % % The expression \Prm{e.xml} is first letterised.
 % The precise specification of \Fct{derived-term} is to be found 
@@ -910,8 +896,9 @@ for this function.
 
 \Exam
 As shown with the next commands and \figur{der-ter}, the automaton 
-\code{div3base2.xml} yields again a good example  (\cf 
-\cite[Exer.~I.5.5]{Saka03}).
+\code{div3base2.xml} yields again a good example, where the derived 
+term automaton is significatively smaller than the standard automaton 
+of the same expression  (\cf \cite[Exer.~I.5.5]{Saka03}).
 
 \begin{shell}
 $ \kbd{vcsn-char-b aut-to-exp-SO div3base2.xml}

@@ -29,12 +29,17 @@ and the weight semiring (numerical, and commutative) by~$\K$ --- in
 \tafkitv, $\B$ or~$\Z$.
 We denote the transducers by \Prm{tdc} rather than by \Prm{aut}.
 
-As automata over~$\Ae\x\Be$, \code{fmp-transducers} are 
+As automata over~$\Ae\x\Be$, \code{fmp-transducers} are \apriori
 eligible to functions listed in \secti{aut-fct} and that apply to 
 all automata.
-For technical reasons, functions which involve reading rational 
+However,
+% For technical reasons, 
+all functions which involve \emph{reading} rational 
 expressions: \FctInd{cat-E},  
-\FctInd{exp-to-aut}, are not implemented in \tafkitv.
+\FctInd{exp-to-aut}, \FctInd{expand},
+\emph{are not implemented} in \tafkitv.
+The function \FctInd{aut-to-expt} is nevertheless implemented for 
+transducers.
 On the other hand, a number of functions are specific to transducers, 
 and are described in this section.
 
@@ -87,7 +92,7 @@ and are described in this section.
 \longonly{%
 \begin{ComVd}{110709}
     
-Fonctions pas implémentées:
+Not implemented:
  \Fct{evaluation-S}.
 \end{ComVd}
 }%
@@ -307,7 +312,7 @@ inverse, and its transpose}
 \label{fig:fib}
 \end{figure}
 
-\clearpage 
+\shortclear 
 \subsubsection{\Fct{is-subnormalized}, \Fct{subnormalize}}
 
 \begin{SwClCmd}
@@ -415,7 +420,8 @@ other, and more sophisticated, algorithms.
 \Exam
 \figur{sbn} shows a $\Z$-transducer and its subnormalization.
 Note that the transducer \code{fx1.xml} cannot be built, nor edited,
-with the \FctInd{edit} function.
+with the \FctInd{edit} function, as this function does not create nor 
+handle labels of transition that are sums.
 
 \begin{figure}[ht]
     \centering
@@ -512,7 +518,7 @@ vcsn-char-fmp-b: command `complete' doesn't exist.
 \includegraphics[scale=0.4]{figures/trx-pair.ps}
 \PushLine 
 \includegraphics[scale=0.4]{figures/trx-pair-cmp.ps}
-\caption{A letter-to-letter transducer, its pair of characters 
+\caption{A letter-to-letter transducer, its pair-of-characters 
 version, and the complement}
 \label{fig:ltl-pai}
 \end{figure}
@@ -663,6 +669,7 @@ $
 monoids (output of \Prm{t.xml} = input of \Prm{u.xml}) and same 
 weight semirings.
 
+\longclear
 \Spec
 The composition algorithm used in \tafkit 
 is described at \sbsct{fmp-com-E}.
@@ -744,6 +751,11 @@ correct.
 
 This error will be corrected in subsequent versions.
 
+\longonly{%
+\begin{ComVd}{10208}
+Not to be forgotten.
+\end{ComVd}
+}%
 
 
 % \subsubsection{\Fct{domain-restriction}, \Fct{image-restriction}}
@@ -819,9 +831,11 @@ fxp
 \Prec \Prm{t.xml} is subnormalized, \Prm{exp} is an expression
  over the input monoid of \Prm{t.xml}.
 
-% \Spec
-% \Fctq{eval}{t.xml, w} = 
-% \Fctq{evaluation}{t.xml, \Fctq{standard}{w}}
+\longonly{%
+\Spec
+\Fctq{eval}{t.xml, w} = 
+\Fctq{evaluation}{t.xml, \Fctq{standard}{w}}
+}%
 
 \Comt
 Just a wrapper for \Fct{evaluation}.
@@ -832,11 +846,12 @@ the string format: the \ShortOpt{i} and \ShortOpt{o} options have no effect
 on this function.
 
 
-
-% \begin{ComVd}{100602}
-%     Reminder. 
-%     It is not clear that this function should exists. 
-% \end{ComVd}
+\longonly{%
+\begin{ComVd}{100602}
+    Reminder. 
+    It is not clear that this function should exists. 
+\end{ComVd}
+}%
 
 
 
@@ -867,10 +882,12 @@ weight semiring.
 \Fctq{composition-R}{t.xml, u.aml} = 
 \Fctq{composition}{\Fctq{subnormalize}{t.xml}, \Fctq{subnormalize}{u.xml}}
 
-% \begin{ComV}
-%     Problems with the definition (on non-complete weight semiring). 
-% \end{ComV}
-% 
+\longonly{%
+\begin{ComV}
+    The problems with the definition of the function (on non-complete 
+	weight semiring) should not be forgotten. 
+\end{ComV}
+}% 
 
 
 
@@ -902,7 +919,7 @@ weight semiring.
 \longonly{%
 \medskip\medskip
 \begin{ComVd}{110710}
-    \Fct{evaluation-S} pas implémentée.
+    Reminder: \Fct{evaluation-S} not implemented.
 \end{ComVd}
 }%
 

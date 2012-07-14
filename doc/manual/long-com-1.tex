@@ -1,0 +1,54 @@
+\begin{ComVd}{110626}
+	The last sentence refers to a first test I have made on an 
+	example of expression matching considered by 
+	Russ Cox with his software \code{RE2} (\cf 
+	\code{http://swtch.com/$\sim$rsc/regexp/}) 
+	and by Thomas Wilke in his paper to ICFP'10 (\cf 
+	\code{http://sebfisch.github.com/haskell-regexp/}).
+	
+	We are far from being competitive, but the purpose of \vcsn is not 
+	expression matching.
+\end{ComVd}
+
+
+\begin{shell}
+$ \kbd{vcsn-char-b -T exp-to-aut -aa '1+a' \bslash| chain - 1000 > e.xml}
+Charge  id:        <name>        total     self     calls   self avg. total avg.
+100.0\%   0:          \_program  357.13s  357.13s         1      5.95m      5.95m 
+ 58.1\%   2:     CMD[1]: chain  334.75s  207.43s         1    207.43s      5.58m 
+ 35.6\%   4:concat\_of\_standard  127.30s  127.30s       999    127.43ms   127.43ms
+  6.3\%   5:  automaton output   22.37s   22.37s         1     22.37s     22.37s 
+  0.0\%   3:       is\_standard    0.02s    0.02s      1998      0.01ms     0.01ms
+  0.0\%   1:CMD[0]: exp-to-aut    0.00s    0.00s         1      0.31ms     0.31ms
+$ \kbd{vcsn-char-b data e.xml}
+States: 1001
+Transitions: 500500
+Initial states: 1
+Final states: 1001
+$ \kbd{vcsn-char-b -T exp-to-aut -aa 'a' \bslash| chain - 1000 > f.xml}
+Charge  id:        <name>        total     self     calls   self avg. total avg.
+100.0\%   0:          \_program  870.36ms 870.36ms        1      0.87s      0.87s 
+ 58.4\%   2:     CMD[1]: chain  814.54ms 508.55ms        1      0.51s      0.81s 
+ 34.6\%   4:concat\_of\_standard  300.73ms 300.73ms      999      0.30ms     0.30ms
+  5.9\%   5:  automaton output   51.30ms  51.30ms        1     51.30ms    51.30ms
+  0.6\%   3:       is\_standard    5.27ms   5.27ms     1998      0.00ms     0.00ms
+  0.0\%   1:CMD[0]: exp-to-aut    0.21ms   0.21ms        1      0.21ms     0.21ms
+$ \kbd{vcsn-char-b data f.xml}
+States: 1001
+Transitions: 1000
+Initial states: 1
+Final states: 1
+$ \kbd{vcsn-char-b concatenate e.xml f.xml > g.xml}
+$ \kbd{vcsn-char-b -T eval g.xml 'a\^ 1024'}\footnotemark
+Charge  id:        <name>        total     self     calls   self avg. total avg.
+100.0\%   0:          \_program  410.71s  410.71s         1      6.85m      6.85m 
+ 67.7\%   7:              eval  277.97s  277.97s         1    277.97s    277.97s 
+ 27.7\%   4:       eps\_removal  113.62s  113.62s         1    113.62s    113.62s 
+  3.6\%   2:   automaton input   14.77s   14.77s         1     14.77s     14.77s 
+  0.5\%   1:      CMD[0]: eval  410.71s    2.12s         1      2.12s      6.85m 
+  0.5\%   3:            cut\_up    1.88s    1.88s         1      1.88s      1.88s 
+  0.1\%   5: accessible\_states    0.33s    0.33s         1      0.33s      0.33s 
+  0.0\%   6:     sub\_automaton    0.03s    0.03s         1     26.80ms    26.80ms
+\end{shell}%
+\footnotetext{%
+   Of course, not under this form.}

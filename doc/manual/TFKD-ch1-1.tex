@@ -249,7 +249,7 @@ written in base~2, and then display the quotient\footnote{%
 	transitions and diplaying it would have been messy.}.
 
 \begin{shell}
-$ \kbd{vcsn-char-b -a'01\bslash,' exp-to-aut '1(0+1)*+1(0+1)*,(0+1)(0+1)*' > dec-bin.xml}
+$ \kbd{vcsn-char-b -a'01\bslash,' exp-to-aut '1(0+1)*+(1(0+1)*+0),(0+1)(0+1)*' > dec-bin.xml}
 $ \kbd{vcsn-char-b quotient dec-bin.xml \bslash| display -}
 \end{shell}
 
@@ -484,9 +484,9 @@ $ \kbd{vcsn-char-b -ofsm cat b1.xml}
 1   1   a    0
 1   1   b    0
 1    0
-$ \kbd{vcsn-char-z -ofsm cat b1.xml \bslash| -ifsm eval - 'bab'}
-2
 \end{shell}%
+% $ \kbd{vcsn-char-z -ofsm cat b1.xml \bslash| -ifsm eval - 'bab'}
+% 2
 
 \Cave 
 The \code{fsm} format is not really implemented in \tafkitv.
@@ -497,16 +497,28 @@ format within \vcsn.
 First, the automata than can be described with the \code{fsm} format 
 must meet several conditions: one initial state only, labels are 
 letters (or integers that refer to a symbol table).
-Second, \vcsn does not code the weights correctly.
+Second, \vcsn does not code the weights correctly for \fst.
 It is thus inadequate to try to use the \code{fsm} format for another 
 automata than `letterized' Boolean automata with a unique initial 
 state.
+The following two examples of commands use the \code{fsm} format for 
+$\Z$-automata.
+The first one gives a correct answer, as the weights are all equal 
+to~``1'';
+the second one demonstrates that \vcsn is not even able to read 
+correctly the \code{fsm} file it has written.
+
+
+\begin{shell}
+$ \kbd{vcsn-char-z -ofsm cat b1.xml \bslash| -ifsm eval - 'bab'}
+2
+\end{shell}%
 
 \begin{shell}
 $ \kbd{vcsn-char-z -ofsm cat c1.xml}
 0	1	1	 0
 0	0	0+1	 0
-1	1	({2} 0)+({2} 1)	 0
+1	1	(\{2\} 0)+(\{2\} 1)	 0
 1	 0
 $ \kbd{vcsn-char-z -ofsm cat c1.xml | vcsn-char-z -ifsm -ofsm cat -}
 0	1	e	 0
@@ -540,7 +552,7 @@ By default, rational expressions are \emph{read} as strings given on
 the \emph{command line}, 
 and \emph{output} as strings on the \emph{standard output}.
 Both can be diverted in the Unix way, but a \emph{string} written in a file 
-cannot be read by \tafkit in this file.
+cannot be read by \tafkit directly in this file (\cf \sbsct{fct-cat-E}).
 
 \begin{shell}
 $ \kbd{vcsn-char-b -aab cat-E '(a+b(a(b)*a)*b)*'}
@@ -579,14 +591,6 @@ $ \kbd{vcsn-char-b -ixml cat-E exp.xml}
 (a+b.(a.b*.a)*.b)*
 \end{shell}%$
 
-\longonly{%
-\begin{ComVd}{110515}
-	Contrarily to what had been written in an earlier version of this 
-	document, ``rational expressions will \emph{not} be read or written as text string if an 
-unsupporting format is requested'' but very logically the reading or 
-writing in that format will be denied..
-\end{ComVd}%
-}%
 
 
 \subsubsection{Word formats}
@@ -598,13 +602,17 @@ command line, and written on the standard output.
 \Cave
 Although \emph{words} are, from a formal point of view, a (simple) 
 instance of a rational expression, \tafkitv handles them as objects 
-of different and uninterchangeable types.
+of different and uninterchangeable types (\cf \sbsct{evl-wrd}).
 We come back to the subject in the next section.
 
 \longonly{%
 \begin{ComVd}{110515}
-	It is not clear whether there exists indeed a command which 
+	The command \Fct{eval} reads a word, and not an expression.
+	It does not seem that there exists indeed a command which 
 	outputs a `word' (and not an automaton or an expression).
+	
+	This will be reworked in the framework where there will be two 
+	kinds of expressions.
 \end{ComVd}%
 }%
 
@@ -620,6 +628,11 @@ $ \kbd{vcsn-char-z eval c1.xml '101101'}
 \end{shell}%$
 The way they are input, as strings as well, as part of a rational 
 expression, is described in the next section.
+
+In one case (in two similar cases indeed), weights will be input as 
+argument of a function and not as part of a rational expression. They 
+will be written as strings as well, which will raise some problem 
+(\cf \sbsct{aut-sta-ext-mul}).
 
 
 \subsubsection{Boolean result formats}
@@ -747,7 +760,7 @@ by other programs.
 \longonly{%
 \begin{ComVd}{110723}
 The \code{-D} option yields a \code{dot} file which is correctly 
-dispalyed on the screen but when exported as a \code{ps} file and 
+displayed on the screen but when exported as a \code{ps} file and 
 incorporated in the \tex output sends the \code{pstopdf} command into 
 error. 
 \end{ComVd}%
@@ -795,10 +808,11 @@ Charge  id:       <name>        total     self   calls   self avg.  total avg.
 
 \longonly{%
 \begin{ComVd}{110529}
-	I report some of my experiments and findings about \code{cbs} in 
-	a special appendix which will not appear in the distributed 
+	Some experiments and findings about \code{cbs} are reported at
+	\apndx{ben-fun-vcs}, 
+	an appendix which does not appear in the distributed 
 	version of the \tafkit documentation.
-	It should help us to profile the version of \code{cbs} in \vcsn2.
+	It should help us to profile the version of \code{cbs} in \vcsn~2.
 \end{ComVd}%
 }%
 
@@ -941,45 +955,17 @@ is rewritten as indicated on the right.
 (\{k\}\Ed)\{h\} \Rightarrow \{k\}(\Ed\{h\})
 \tag{$\mathbf{A}_{\K}$}
 \\[.7ex]
-  \und\{k\}  \Rightarrow  \{k\}\und \ee
+%   \und\{k\}  \Rightarrow  \{k\}\und \ee
   \Ed.(\{k\}\und)   \Rightarrow  \Ed\{k\} \ee
   (\{k\}\und).\Ed   \Rightarrow  \{k\}\Ed
 \tag{$\mathbf{U}_{\K}$}\\[.7ex]
   \und \{k\}\Rightarrow \{k\}\und \ee x\{k\}\Rightarrow \{k\}x 
 \tag{$\mathbf{C}_{\mathsf{at}}$}
+\label{equ:c-at}
 \end{gather}
 \caption{The trivial identities}
 \label{tab:tri-ide}%
 \end{table}
-
-
-\longonly{%
-\begin{ComVd}{110723}
-  La définition de l'identité 
-  correspond à ce qui est implémenté dans
-  Elle est due à un quiproquo sur la signification du mot `atome':
-  \emph{atome} d'une expression rationnelle et \emph{atome} des 
-  \code{labels-are-atoms} pour la définition des \emph{kinds} dans 
-  \vcsn~2.xx.
-  
-  Une définition plus naturelle serait:
-%   \begin{equation*}
-%   	m\{k\}\Rightarrow \{k\}m
-% %
-%   \end{equation*}
-  où~$m$ est n'importe quel élément du monoïde.
-  
-  De toutes façons cette identité doit être revue à la lumière de 
-  l'écriture de  pour les weighted automata.
-\end{ComVd}%
-}%
-
-% \begin{shell}
-% $ \kbd{vcsn-char-z -aab cat-E '\{2\}ab\{3\}'}
-% \{2\} (ab \{3\})
-% $ \kbd{vcsn-char-z -aab cat-E '\{2\}a\{3\}'}
-% \{6\} a
-% \end{shell}%$
 
 These rewriting rules mean that it is \emph{impossible} for \vcsn to 
 output a rational expression such as \samp{(\{3\}(0(ab)))*\{4\}}.  
@@ -1001,20 +987,33 @@ expression.
 \Cave 
 The definition of the identity 
   $\mathbf{C}_{\mathsf{at}}$ 
-corresponds to what is actually implemented in \vcsnv and is somehow 
+corresponds to what is implemented in \vcsnv and is somehow 
 a mistake.
 A more natural definition would be 
   $\msp m\{k\}\Rightarrow \{k\}m\msp$
 with~$m$ any element of the monoid.
-This may be corrected in forthcoming revisions of \vcsnv but should 
-anyway be reevaluated in connection with the definition of the 
-function \code{derived-term} for the weighthed automata.
+It may be corrected in forthcoming revisions of \vcsnv, if any.
 
-% When we wrote `denoted' above, we refer to the way we represent 
-% expressions \emph{in this document}.
-% We describe now how the same expressions are \emph{read} (as in the 
-% \FctInd{exp-to-aut}) or \emph{written} (as in the 
-% \FctInd{aut-to-exp}) by \vcsn. 
+Note that this identity raises a problem anyway.
+It is consistent with common usage in 
+the computation with \emph{series}, but not with the definition of 
+operations on (standard) automata (\cf 
+\sbsct{aut-sta-lft-mlt-A}).
+
+
+
+\longonly{%
+\begin{ComVd}{110723}
+	The mistake is due to a misunderstanding on the meaning of the word 
+	\emph{atom}: \emph{atom} of a rational expression versus 
+	\emph{atom} in `\code{labels-are-atoms}' for the definition of 
+	\emph{kinds} in \vcsn~2.xx.
+  
+  In any case, this identity should be considered again in relation 
+  with the definition of the standard automaton and of the writing of 
+  the function \FctInd{derived-term} for weighted expressions. 
+\end{ComVd}%
+}%
 
 \subsection{Parsing strings into expressions}
 \label{ssc:par-str-exp}%
@@ -1667,6 +1666,7 @@ expressions are described in the next chapter.
 \item \Fctexp{cat-E}
 \item \Fctaut{display}
 \item \Fctaut{edit}
+\item \Fctaut{gui}
 \end{enumerate}
 
 
@@ -1761,6 +1761,7 @@ the shorcomings of the conversion between the \code{xml} and the
 \SubIndtt{xml}{format}\SubIndtt{fsm}{format}%
 
 \subsection{\Fct{cat-E}}
+\label{ssc:fct-cat-E}%
 
 \SetTwClPrm{\TwClThree}%
 \begin{SwClCmd}
@@ -1784,8 +1785,16 @@ $ \kbd{vcsn-char-b -ixml cat-E e.xml}
 \Comt
 The different behaviours of the \Fct{cat-E} function according to the 
 possible formats have been described at \sbsct{rat-exp-for}.
+Note that the \code{shell} syntax may be combined with the \tafkit 
+options for format.
+For instance, the following command will read a \emph{string} from 
+the \emph{file} \Prm{<file>}.
 
-A rational espression output by \Fct{cat-E} is in reduced form (\cf 
+\begin{shell}
+$ \kbd{vcsn-char-b -aab cat-E "`cat \Prm{<file>}`"}
+\end{shell}%
+
+A rational expression output by \Fct{cat-E} is in reduced form (\cf 
 \sbsct{red-exp}).
 \index{expression!reduced}%
 
@@ -1888,6 +1897,8 @@ calls the \code{edit} command.
 For Boolean automata or transducers, setting a state initial or final 
 requires the specification of a state only; for weighted ones, it 
 requires the specification of a state and of a weight. 
+
+% \shortclear
 \begin{shell}
 $ \kbd{vcsn-char-fmp-b edit t1.xml}
 ...
@@ -1947,6 +1958,7 @@ a weigted pair of words.
 After the origin and end of the transition, the user 
 is asked for the first component of the pair, then for the second 
 component, and finally for the weight.
+
 \begin{shell}
 $ \kbd{vcsn-char-fmp-z -aab -Aab edit test-fmp.xml}
 ...\footnotemark
@@ -1972,7 +1984,7 @@ created with one state, both initial anf final.}%
 \Cave
 The automata created with the \Fct{edit} function have the property 
 that the initial and final functions are scalar functions, that is, 
-the labels of initail and final arrows are restricted to be 
+the labels of initial and final arrows are restricted to be 
 \emph{weights}.
 
 This restriction does not come from a theoretical limitation.
@@ -1991,7 +2003,24 @@ with by \tafkitv meet this restriction, which we call the
 \index{condition!scalar end-function}
 
 
+\subsection{\Fct{gui}}
+\label{ssc:io-edi}%
 
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{vcsn edit a.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Create and edit the automaton
+    \Prm{a.xml} \via the graphical user interface \vgi.
+\end{SwClTxt}%
+\IndexFct{gui}%
+
+\Comt
+The graphical user interface \vgi is described at
+\apndx{vgi}.
 
 
 

@@ -80,7 +80,7 @@ resolution of
 linear systems of equations which becomes problematic when the 
 dimension of the systems grows. 
 The following example shows an error occurs when dealing with systems 
-of dimension 32 (dans~$\R$) ou 1024 (dans~$\Q$): the number of states 
+of dimension 32 (in~$\R$) ou 1024 (in~$\Q$): the number of states 
 should be~$6$ in the first case, $11$~in the second.\footnote{%
    These data depend heavily on the examples, \emph{and also} on the machine on 
    which the examples are run.}
@@ -124,7 +124,7 @@ Automata are not equivalent
 
 \longonly{%
 \begin{ComVd}{110709}
-Implémenté dans \tafkitv:
+In \tafkitv,  what is really implemented is:
 	
 \noindent 	
 \Fctq{are-equivalent}{{a.xml},{b.xml}} =\\  
@@ -133,7 +133,7 @@ Implémenté dans \tafkitv:
 \Fctq{left-mult}{\Fctq{standardize}{\Fctq{realtime}{b.xml}},-1}}}}
 	
 \noindent
-mais ça revient au même.
+but it is equivalent.
 \end{ComVd}%
 }%
 
@@ -169,7 +169,7 @@ given as strings.
 
 \Exam
 
-\medskipneg 
+\shortonly{\medskipneg}  
 \begin{shell}
 $ \kbd{vcsn-char-q -aab -v are-equivalent-E 'b*((\{2\}a).b*)*' '((\{2\}a)*b)*(\{2\}a)*'}
 Expressions are equivalent

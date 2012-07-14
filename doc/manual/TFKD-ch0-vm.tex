@@ -5,7 +5,7 @@ The \vcsn \textsc{Project}  has a web site:
 	\code{http://www.vaucanson-project.org}
 \end{center}
 where all information and documentation on the different components 
-of the project, including the present manual can easily be found and 
+of the project, including the present manual, can easily be found and 
 downloaded.
 
 \section{Getting \vcsnv}
@@ -15,14 +15,17 @@ from the \vcsn \textsc{Project} site.
 
 % The version \VcsnVersion\xspace of the \vcsn platform can be downloaded
 % from 
-
+\medskip 
 Alternatively, it can also be found at\\
-\code{http://vaucanson.lrde.epita.fr/Vaucanson\VcsnVersion}
+\PushLine
+\code{http://vaucanson.lrde.epita.fr/Vaucanson\VcsnVersion}.
+\PushLine
 
 Other previous versions of the \vcsn platform can be downloaded
 from \\
-\code{http://vaucanson.lrde.epita.fr/}
-
+\PushLine
+\code{http://vaucanson.lrde.epita.fr/}.
+\PushLine
 % Please note this manual is not meant to be backward compatible with
 % \vcsn versions prior to \VcsnVersion.
 
@@ -32,14 +35,15 @@ with earlier versions and
 this manual is not meant to document the differences with
 \vcsn versions prior to \VcsnVersion\xspace (which had never been really 
 documented).
-In one word, no other version than \vcsnv or \vcsn\VcsnVrsnOld should be used.
+In one word, no other version than \vcsnv or \vcsn\VcsnVrsnOld\xspace should be used.
 
 
 
 \section{Licensing}
 \vcsnv is a free software released under the GNU General
-Public Licence version 2. If you are unfamiliar with this license,
-please refer to \code{http://www.gnu.org/licenses/gpl-2.0.txt} (a copy of
+Public Licence version 2. 
+More information on this license is to be found at
+\code{http://www.gnu.org/licenses/gpl-2.0.txt} (a copy of
 this license is included in each copy of \vcsn in the file
 \emph{COPYING}).
 
@@ -93,28 +97,33 @@ $ sudo make install
 \end{shell}%
 
 
-Depending on your architecture, both \code{Boost} and \code{Xerces} might be located
-in non-standard directories. If you are unsure of the location of your
-libraries, you may type in your shell:
+Depending on the architecture, both \code{Boost} and \code{Xerces} might be located
+in non-standard directories. 
+The location of these
+libraries may known via the following command:
 
 \begin{shell}
 $ whereis boost
 \end{shell}%
 
-These commands will return the paths to \code{Boost} headers. You can
-then specify this directories to the \code{configure} file through the use of
+This command returns the paths to \code{Boost} headers. 
+These directories are then
+specified  to the \code{configure} file by means of
 two environment variables: \code{CPPFLAGS} for the header files and \code{LDFLAGS}
-for the library files. For instance, if your \code{Boost} headers are located
-in '\code{/usr/user\_name/home/my\_path\_to\_boost/include}' and its library
-files in '\code{/usr/user\_name/home/my\_path\_to\_boost/lib}' you will use the
-following configure line:
+for the library files. 
+For instance, if \code{Boost} headers are located
+in:\\
+'\code{/usr/user\_name/home/my\_path\_to\_boost/include}' and its library
+files in:\\
+'\code{/usr/user\_name/home/my\_path\_to\_boost/lib}', the
+following configure line should be invoked:
 
 \begin{shell}
 $ ./configure   CPPFLAGS='-I/usr/user\_name/home/my\_path\_to\_boost/include'
                 LDFLAGS='/usr/user\_name/home/my\_path\_to\_boost/lib'
 \end{shell}%
 
-If \vcsn is not installed but simply compiled it,
+If \vcsn is not installed but only compiled,
 the \tafkit binaries are to be found in the directory
 '\code{vaucanson-\VcsnVersion/taf-kit/tests/}' (This directory
 contains wrappers
@@ -124,13 +133,13 @@ that enable them to run locally).
 \section{Mac\xmd OS\xmd X specifics}
 
 The installation process of \vcsn
-and its dependencies on Mac\xmd OS\xmd X is less straightforward
+and its dependencies on Mac\xmd OS\xmd X may be less straightforward
 than onto other Linux systems.
 
-First, the Mac\xmd OS\xmd X system should be up-to-date before
-going through the rest of the installation process.
+% First, the Mac\xmd OS\xmd X system should be up-to-date before
+% going through the rest of the installation process.
 
-Second, the \code{macports} software will be used to get all the
+First, the \code{macports} software will be used to get all the
 prerequisites and should be installed first on the computer
 (see \code{http://www.macports.org/}).
 A complete guide
@@ -175,20 +184,26 @@ or equal to~1.44 it is necessary to add another option to the
 $ ./configure CPPFLAGS='-I/opt/local/include -DBOOST\_SPIRIT\_USE\_OLD\_NAMESPACE'
               LDFLAGS='-L/opt/local/lib'
 \end{shell}%
-The installation is then to be completed by the classical two lines:
+The installation is then to be completed by the usual two commands:
 \begin{shell}
 $ make
 $ sudo make install
 \end{shell}%
 
-The \code{Graphviz} application, which is used to displaying automata
-while looking for a dedicated graphic interface, is normally launched
+\section{Improving the display quality}
+
+As long as a dedicated graphical interface is not fully operational, 
+displaying automata is processed by the \code{Graphviz} application, which 
+is normally launched
 in an \code{X11} window.
-It is to be acknowledged that the call of \code{Graphviz} by \tafkit
-is not well tuned and that the output is rather poor.
-It is not too difficult however for Mac users to get a rendering of
+It is to be acknowledged that the call to \code{Graphviz} by \tafkit
+is not well-tuned and that the output is rather poor.
+It is not too difficult however to get a rendering of
 automata of much better quality (\cf \figur{gra-viz}).
-This can be done in three steps.
+This can be done in three steps and in a slightly different way for 
+Mac and Linux users.
+
+\subsection{\code{Graphviz} for Mac}
 
 First download the \code{Graphviz} application for Mac from
 \code{www.pixelglow.com/graphviz/}.
@@ -216,6 +231,25 @@ full name of this folder in the \code{PATH} variable before
 The appearance of the automata will be determined by fixing the
 settings in the interface.
 
+
+\subsection{\code{Graphviz} for Linux}
+
+For Linux users, the process is almost same except that the program 
+required is \code{xpdf} and the \code{dotty} script is:
+
+\begin{shell}
+#!/bin/sh
+f=/tmp/pd$$.png
+if test "x$1" = x-; then
+  dot -Tpdf > $f
+else
+  dot -Tpdf "$@" > $f
+fi
+xpdf $f
+rm -f $f
+\end{shell}%
+
+
 \begin{figure}[ht]
     \centering
 \includegraphics[scale=0.25]{figures/a1-dotty.ps}
@@ -226,6 +260,47 @@ settings in the interface.
 \end{figure}
 
 
+\section{VGI}
 
-\endinput
+The availability of the Graphical User Interface \vgi, developped at 
+NTU, is one of the novelty of \vcsnv with respect to \vcsnvo.
+Every instance of \tafkit has a function \code{gui} that launches 
+\vgi (\cf \secti{taf-io-fun}).
+For this function to work, \tafkit needs to be specified where is \vgi.
+
+Download the \code{vgi.jar} archive from 
+\code{http://vaucanson-project.org/resources/vgi.jar},  store it in a 
+folder denoted by \code{/path/to/vgi/folder}  in the following.
+
+There is two methods to specify to \vcsn where this archive is 
+stored: either by setting the environment variable \code{VGIJAR}
+with the command:
+
+\begin{shell}
+$ export VGIJAR=/path/to/vgi/folder/vgi.jar
+\end{shell}
+
+\noindent
+or by puting the following script named "\code{vgi}" in a directory of the 
+path (for instance \code{/usr/local/bin}): 
+
+\begin{shell}
+#!/bin/sh
+exec java -jar /path/to/vgi/folder/vgi.jar "$@"
+\end{shell}
+
+\noindent
+and making it executable. 
+A call to the \code{gui} function will then open a window such as the 
+one shown at \figur{vgi} (\cf \apndx{vgi}).
+
+
+\begin{figure}[ht]
+    \centering
+\includegraphics[width=3in]{\VGIFig fig14.eps}
+\caption{The \vgi window }
+\label{fig:vgi}%
+\end{figure}
+
 %%%%%%%%%%%
+\endinput

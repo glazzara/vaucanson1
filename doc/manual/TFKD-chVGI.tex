@@ -1,0 +1,303 @@
+% \documentclass{article}
+% \usepackage{graphicx}
+% %
+% %\setlength{\textheight}{9.9in} \setlength{\textwidth}{7.41in}
+% %\setlength{\topmargin}{-0.7in} \setlength{\evensidemargin}{-.031in}
+% %\setlength{\oddsidemargin}{-.51in}
+
+
+\setlength{\parskip}{0.1in} \setlength{\parindent}{0in}
+
+\newcommand{\exercise}[2]{{\bf Exercise #1.} #2}
+\newcommand\xmatch{\mathop{{\bf match}}}
+\newcommand\xwith{\mathrel{{\bf with}}}
+% \newcommand\xbar{\mathrel{|}}
+\newcommand\xif{\mathop{{\bf if}}}
+\newcommand\xthen{\mathrel{{\bf then}}}
+\newcommand\xelse{\mathrel{{\bf else}}}
+\newcommand\xlet{\mathop{{\bf let}}}
+\newcommand\xrec{\mathrel{{\bf rec}}}
+\newcommand\Unit{{\it Unit}}
+\newcommand\Void{{\it Void}}
+\newcommand\xext{\quad\mathop{\hbox{{\it ext}}}}
+\newcommand\nat{{\mathbb N}}
+
+% \newcommand\vbar{\mathrel{|}}
+
+\newcommand\mb[1]{{\bf #1}}
+\newcommand\ms[1]{{\it #1}}
+
+% \newcommand\tab{\hskip3em}
+% \newenvironment{code}{%
+%   \begin{tabbing}
+%     \tab\=\tab\=\tab\=\tab\=\tab\=\tab\=\tab\=\tab\=\kill}
+%   {\end{tabbing}}
+
+% \begin{document}
+% \begin{center}
+% \begin{Large}
+
+
+% \newcommand{\VGIFig}{figures/VGI/}
+
+\chapter{Vaucanson Graphical Interface (VGI)}
+\label{chp:vgi}
+Vaucanson Graphical Interface (VGI)
+% \end{Large}
+% \end{center}
+
+\noindent
+Available at:  \code{http://code.google.com/p/vgi/} \\
+Date last updated:
+July 11, 2012
+
+% \bigskip
+
+% \noindent
+% \begin{Large}
+\section{Overview}
+% \end{Large}
+
+
+
+Vaucanson Graphical Interface (VGI) is a graphical user interface
+(GUI) for the Vaucanson library, a software platform dedicated to
+the manipulation of weighted finite state automata.  VGI provides
+the functionalities to visualize and edit finite state automata
+graphically while the Vaucanson library provides computations and
+algorithms operating on automata.
+
+% \bigskip
+\section{Installation}
+
+% \noindent
+% \begin{Large}
+\subsection{Requirements}
+% \end{Large}
+
+\noindent
+\underline{Minimum for Visualization and Graphical Editing} \\
+Any operating system that supports Java (Tested on Windows XP,
+Windows 7, Ubuntu, and Mac OS X) \\ Java SE 6 Runtime Environment
+(JRE 6)
+
+\noindent \underline{For Running Algorithms Provided by Vaucanson}\\
+Requires TAF-Kit from the Vaucanson library, which can be compiled
+from source on Unix-like operating system (Tested on Ubuntu and Mac
+OS X)
+
+\noindent \underline{For Development and Modification of Source
+Code}\\ Any operating system that supports Java (Tested on Windows
+XP, Windows 7, Ubuntu, and Mac OS X) \\ Java SE 6 Development Kit
+(JDK 6) \\ NetBeans IDE 7.1 optional but highly recommended
+
+
+
+
+% \noindent
+% \begin{Large}
+\subsection{Installation and Start-up}
+% \end{Large}
+
+
+As long as the minimum required operating system and Java runtime
+environments are available, no installation is needed to use the
+visualization and graphical editing functions of VGI.  To run
+algorithms implemented in Vaucanson, please compile the library to
+produce TAF-Kit following the instructions for Vaucanson.
+
+To start VGI, simply double click on the {\tt vgi.jar} file in the
+downloaded package.  Alternatively, one can start VGI from a
+terminal window by first navigating to the directory containing {\tt
+vgi.jar} and then typing the following command:
+\begin{center} {\tt java -jar vgi.jar} \end{center}
+
+
+
+% \bigskip
+% 
+% \noindent
+% \begin{Large}
+\subsection{Getting and Compiling the Source Code}
+% \end{Large}
+
+
+Since VGI is developed using the NetBeans IDE, it is highly
+recommended that NetBeans be used to get and compile the source
+code.  The complete source code is available online in the Git
+repository https://code.google.com/p/vgi/ and can be downloaded
+using NetBeans' built-in Git client by the following steps:
+\begin{enumerate}
+\item   In the menu bar of NetBeans, select {\bf Team -$>$ Git -$>$ Clone
+...}
+\item
+For the Remote Repository step, enter {\bf
+https://code.google.com/p/vgi/} for the Repository URL field, leave
+the User and Password fields empty, and click on the Next button.
+Note:  The repository URL starts with {\bf https} not http.
+\item For the Remote Branches step, check the box beside the {\bf
+master} branch and click on the Next button.
+\item  For the Destination Directory step, adjust the fields as
+desired or leave them as default and click on the Finish button.
+\end{enumerate}
+
+Alternatively, one can use the command-line Git client to clone the
+VGI source code repository by the following command in a terminal
+window: {\tt git clone  https://code.google.com/p/vgi/}
+
+With the source code downloaded and the project opened in NetBeans,
+VGI can be readily compiled and run by selecting {\bf Run -$>$ Run
+Project} menu item in the menu bar.
+
+
+
+% \bigskip
+% 
+% \noindent
+% \begin{Large}
+\section{Using VGI}
+
+\subsection{Create a New Automaton}
+% \end{Large}
+
+\begin{enumerate}
+\item   Select File -$>$ New in the menu bar of the VGI window.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig1.eps}
+\end{center}
+
+\item   Select a semiring for the weight and edit the alphabet symbols
+to define basic information for a weighted automaton.
+Alternatively, click the Default button to quickly define a
+Boolean automaton with symbols 'a' and 'b' in the alphabet
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig2.eps}
+\end{center}
+
+\item   Click the OK button to create a new, empty automaton with the specified settings.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig3.eps}
+\end{center}
+
+\item A majority of VGI's functions are available in the context pop-up menu
+after clicking the right mouse button on an object.  Try clicking the right mouse button
+anywhere in the empty space in the newly created, untitled window
+and the {\bf Add State} option will appear.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig4.eps}
+\end{center}
+
+\item  Click the right mouse button on the newly added state
+$s0$ and different options appear.  Select the {\bf Add Transition
+(From)} option.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig5.eps}
+\end{center}
+
+\item  Click the right mouse button on the state $s0$ again and select
+the {\bf Add Transition (To)} option.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig6.eps}
+\end{center}
+
+\item A loop transition is added to the state $s0$.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig7.eps}
+\end{center}
+
+\item   Add another state s1 and add a transition from $s0$ to $s1$.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig8.eps}
+\end{center}
+
+\item   Double click on the transition from $s0$ to $s1$ and the Weighted Regular Expression Editor appears.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig9.eps}
+\end{center}
+
+\item  Click on the {\bf Alphabet Symbol} drop-down menu and select $'b'$.  Then click on the OK button.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig10.eps}
+\end{center}
+
+\item 11. Click on the state $s0$ and check the {\bf Initial State}
+ check box in the properties panel on the left hand side of the window to set $s0$ as an initial state.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig11.eps}
+\end{center}
+
+\item  Continue editing the automaton until it appears as the screenshot below,
+which contains a Boolean (classical) finite state automaton that
+accepts the regular expression $a^*ba^*$.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig12.eps}
+\end{center}
+
+\item  Selecting {\bf File -$>$ Save} to save the newly created automaton
+somewhere so it can be used for the next part.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig13.eps}
+\end{center}
+\end{enumerate}
+
+
+% \bigskip
+% 
+% 
+% \noindent
+% \begin{Large}
+\subsection{Running Algorithms Provided by Vaucanson}
+% \end{Large}
+% 
+% \bigskip
+
+\noindent
+ Requirement:  compiled TAF-Kit
+\begin{enumerate}
+\item  Open the automaton that accepts the regular expression
+$a^*ba^*$ and select {\bf Algorithms -$>$ Set TAF-Kit path ...} in
+the menu bar of the VGI window.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig14.eps}
+\end{center}
+
+\item  Working TAF-Kit scripts are usually available in the {\bf
+taf-kit/tests}
+subdirectory under the {\bf vaucanson-1.4} directory.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig15.eps}
+\end{center}
+
+\item   Select {\bf Algorithms -$>$ Operations on all automata and rational
+expressions: -$>$ aut-to-exp}.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig16.eps}
+\end{center}
+
+\item The result of converting this automaton to regular expression is as expected.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig17.eps}
+\end{center}
+\end{enumerate}
+
+
+% \noindent
+% \begin{Large}
+\subsection{Layout}
+% \end{Large}
+
+\begin{enumerate}
+\item  Here is an example of an automaton laid out haphazardly.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig18.eps}
+\end{center}
+
+\item    Select {\bf  Layout -$>$ feature}
+in the menu bar of the VGI window, and a more reasonable layout for the same automaton results.
+\begin{center}
+\includegraphics[width=3in]{\VGIFig fig19.eps}
+\end{center}
+
+\end{enumerate}
+
+\endinput

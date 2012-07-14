@@ -6,8 +6,10 @@
 
 The following functions concern automata over a free monoid --- as 
 opposed to automata over a direct product of free monoids.
+Their behaviours are series over~$\Ae$, \ie weighted subsets 
+of~$\Ae$. 
 % 
-\Apriori, there is no assumption on the multiplicity semiring.
+\Apriori, there is no assumption on the multiplicity (or weight) semiring.
 However, in \vcsnv, \tafkit gives access to automata with weight in 
 `numerical' \emph{commutative} semirings only.
 
@@ -26,9 +28,10 @@ automata with multiplicity in a field ($\R$, $\Q$ and~$\F_{2}$) and in~$\B$ resp
 \begin{enumerate}
 % \item \Fctaut{is-letterized}, \Fctaut{letterize} 
 \item \Fctaut{transpose}
-\item \Fctaut{is-realtime}, \Fctaut{realtime}
+\item \Fctaut{is-realtime}\vrglst \Fctaut{realtime}
 \item \Fctaut{is-unambiguous}
-\item \Fctaut{partial-identity}
+\item \Fctaut{partial-identity}\vrglst \Fctaut{partial-erase}
+% \item \Fctaut{partial-erase}
 \item \Fctaut{characteristic}
 \item \Fctaut{support}
 % \item \Fctexp{is-letterized-E}, \Fctexp{letterize-E}
@@ -48,17 +51,19 @@ automata with multiplicity in a field ($\R$, $\Q$ and~$\F_{2}$) and in~$\B$ resp
 \begin{enumerate}
 \item \Fctexp{standard}
 \item \Fctexp{thompson}
-\item \Fctexp{star-alphabet}
+\item \Fct{alphabet}\vrglst \Fct{star-alphabet}
+% \item \Fct{star-alphabet}
 % \item \Fctexp{derived-term}
 \end{enumerate}
 
 \item Operations on automata
 
 \begin{enumerate}
-\item \Fctaut{quotient}  %, \Fctaut{coquotient}
+\item \Fctaut{quotient}\vrglst \Fctaut{coquotient}
 \item \FctautD{product}
 \item \FctParD{power}{aut}{n}
-\item \FctautD{shuffle}, \FctautD{infiltration}
+\item \FctautD{shuffle}\vrglst \FctautD{infiltration}
+% \item \FctautD{infiltration}
 \end{enumerate}
 
 % \item Operations on behaviours of automata (commutative multiplicity semiring)
@@ -72,19 +77,23 @@ automata with multiplicity in a field ($\R$, $\Q$ and~$\F_{2}$) and in~$\B$ resp
 
 \longonly{%
 \begin{ComV}%{101205}
-    \thi Pas implŽmentŽes:
-%     
-    \Fct{is-letterized}, \Fct{letterize}; \Fct{coquotient};
-	\Fct{support};
-%     \Fct{eval-S}; 
-    \Fct{hadamard-S}, \Fct{shuffle-S}, \Fct{infiltration-S};
-
-    les commandes en \code{co}: .
     
-    \thii DŽplacŽes:
+    \thi not implemented:
+%     
+    \Fct{is-letterized}, \Fct{letterize}; 
+
+	\Fct{hadamard-S}, \Fct{shuffle-S}, \Fct{infiltration-S};
+
+    the \code{co} commands: \Fct{coquotient}.
+    
+    \thii transfered to other sections:
 %     
     \Fct{derived-term};
+	
     \Fct{shortest}, \Fct{enumerate}.
+	
+	\thiii there is no reason why \Fct{charasteristic} or 
+	\Fct{support} should not be called for \fmpts, but they are not...
 
 \end{ComV}
 }%
@@ -127,8 +136,8 @@ $
 
 \Spec
 Builds the transposition of the underlying graph, 
-and  \emph{exchanges} the initial and final functions
-(that is, realises the function \Fct{reverse} (\cf 
+and  \emph{exchanges} the initial and final functions,
+that is, realises the function \Fct{reverse} (\cf 
 \secti{aut-fct}).
 Finally, transposes 
 the labels as well, that is, takes the \emph{mirror} image of the 
@@ -172,7 +181,7 @@ and proper.
 \Cave
 The label of a transition of a realtime automaton is not necessarily 
 a weighted letter but may be a \emph{sum} of weighted letters as 
-shown on the followng example (\cf \figur{c1} for the 
+shown on the following example (\cf \figur{c1} for the 
 automaton~\code{c1.xml}). 
 \begin{shell}
 $ \kbd{vcsn-char-z -v is-realtime c1.xml}
@@ -203,7 +212,7 @@ $
 has been mentioned at \sbsct{aut-pro}.
 
 \thii \Fctq{letterize}{\Fctq{proper}{a.xml}}
-is another realtime automaton, which has potentially many more states 
+is another realtime automaton, which has potentially (many) more states 
 and transitions than \Fctq{realtime}{a.xml}.
 
 
@@ -243,7 +252,7 @@ product $\Ac\x\Ac$ contains a state outside of the diagonal.
 }%
 
 
-\subsubsection{\Fct{partial-identity}}
+\subsubsection{\Fct{partial-identity}, \Fct{partial-erase}}
 \label{ssc:par-ide}%
 % \SetTwClPrm{\TwClThree}%
 
@@ -308,10 +317,40 @@ behave correctly.
 
 \longonly{%
 \begin{ComVd}{110709}
-	Another occurence of the usefulness of subliminal initial and 
+	Another occurrence of the usefulness of subliminal initial and 
 	final states.
 \end{ComVd}
 }%
+
+% \subsubsection{\Fct{partial-erase}}
+% \label{ssc:par-era}%
+% % \SetTwClPrm{\TwClThree}%
+\medskip\medskip
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{vcsn partial-erase a.xml > t.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Transforms the automaton \Prm{a.xml} over~$\Ae$ into an automaton 
+    over~$\Ae\x\Ae$ (a \code{fmp-transducer}) which projects the 
+    behaviour of \Prm{a.xml} onto the empty word and writes the result in 
+    \Prm{t.xml}. 
+\end{SwClTxt}%
+\SetTwClPrm{\TwClOne}%
+\IndexFct{partial-erase}%
+
+\Prec
+no precondition.
+
+\Spec 
+Every transition of \Prm{t.xml} is obtained from a transition of  
+\Prm{a.xml} by keeping the same weight and by replacing the label~$f$ 
+by the pair~$(f,\unAe)$. 
+
+The same restriction as for \Fct{partial-identity} apply to 
+\Fct{partial-erase}.
 
 
 \subsubsection{\Fct{characteristic}}
@@ -533,12 +572,12 @@ $ \kbd{vcsn-char-b display c1spp.xml}
 \subsection{Behaviour of automata}
 \label{ssc:aut-mul-beh}%
 
-The function \Fct{aut-to-exp} and its variant (\cf 
+The function \Fct{aut-to-exp} and its variants (\cf 
 \sbsct{aut-to-exp}) apply to these automata. 
 \Indextt{aut-to-exp}
 
 \subsubsection{\Fct{eval}}
-\label{evl-wrd}%
+\label{ssc:evl-wrd}%
 
 \begin{SwClCmd}
 \begin{shell}
@@ -571,7 +610,7 @@ $ \kbd{vcsn-char-z eval c10.xml '10'}
 
 \Cave
 The parameter \Prm{word} must be a sequence of letters, and not an 
-expression which denotes a word.
+expression which denotes a word (\cf \sbsct{wor-for}).
 \begin{shell}
 $ \kbd{vcsn-char-z eval c10.xml '1 0'}
 FATAL: Cannot parse 1 0
@@ -609,14 +648,16 @@ of \Prm{a.xml}.
 
 \longonly{%
 \begin{ComV}
- 	{\Fct{enumerate}} et {\Fct{shortest}} dŽplacŽes pour les 
-	automates boolŽens (\cf \sbsct{aut-boo-beh}).
+ 	{\Fct{enumerate}} et {\Fct{shortest}} functions have been 
+	implemented for Boolean automata only, although they can be given 
+	coherent meaning for general weighted automata over free monoids 
+	(\cf \sbsct{aut-boo-beh}). 
 \end{ComV}
 }%
 
 
 \subsection{From expressions to automata}
-\label{ssc:aut-mul-eta}%
+\label{ssc:exp-to-aut}%
 
 \subsubsection{\Fct{standard}}
 \label{ssc:aut-mul-sta}%
@@ -656,12 +697,14 @@ It is to be noted that
 \emph{the} standard automaton of an expression is 
 defined for letterized expression on a free monoid only, whereas a 
 standard automaton is defined in full generality.
-In the former case they are synonymous.
+In the former case they are synonymous (\cf also the comment at 
+\sbsct{exp-to-aut}).
 \end{ComVd}
 }%
 
 
 \subsubsection{\Fct{thompson}}
+\label{ssc:exp-aut-tho}%
 
     
 \begin{SwClCmd}
@@ -693,10 +736,41 @@ algorithmic one.
 It is also useful to building tests (because of the above 
 equation).
 
-\subsubsection{\Fct{star-alphabet}}
+\subsubsection{\Fct{alphabet}, \Fct{star-alphabet}}
+% \label{ssc:aut-mul-alp}%
 \label{ssc:aut-mul-sta}%
 
     
+\SetTwClPrm{\TwClThree}%
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{vcsn --alphabet=\Prm{alpha}  alphabet > a.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Creates the automaton \Prm{a.xml} whose behaviour is the 
+	characteristic series  
+	of the alphabet \Prm{alpha}.
+\end{SwClTxt}%
+\SetTwClPrm{\TwClOne}%
+\IndexFct{alphabet}
+
+\Spec
+The automaton \Prm{a.xml} has two states, one initial and one final, and 
+one transition from the initial state to the final state for every 
+letter in \Prm{alpha}. 
+
+\longonly{%
+\begin{ComVd}{120714}
+	Added in \vcsnv. \cf comment below.
+\end{ComVd}
+}%
+
+% \subsubsection{\Fct{star-alphabet}}
+% \label{ssc:aut-mul-sta}%
+
+\medskip\medskip   
 \SetTwClPrm{\TwClThree}%
 \begin{SwClCmd}
 \begin{shell}
@@ -716,18 +790,24 @@ $
 The automaton \Prm{a.xml} has one state, both initial and final, and 
 a transition for every letter in \Prm{alpha}.
 
+\Comt 
+These commands that build automata rather than transforming them are 
+convenient for writing scripts (\cf \sbsct{aut-pro} for instance).
+
+
 \longonly{%
 \begin{ComVd}{110725}
 Should be an automaton factory rather than a command.
-It is so in \tafkitv as it makes the reading of the parameter 
+It is a command in \tafkitv as it makes the reading of the parameter 
 \Prm{alpha} easier.
 \end{ComVd}
 }%
 
 
 \subsection{Operations on automata}
+\label{ssc:ope-aut}%
 
-\subsubsection{\Fct{quotient}} %, \Fct{coquotient}
+\subsubsection{\Fct{quotient}, \Fct{coquotient}}
 \label{ssc:aut-mul-quo}%
 
 \begin{SwClCmd}
@@ -749,16 +829,48 @@ $
 The \Fct{quotient} function
 implements an iterative refinement of equivalences over  
 states (by a variant of Hopcroft's algorithm).
+It is a \emph{weighted} quotient, what is called $\K$-quotient 
+in~\cite{Saka03,Saka09}. 
 For an example, \cf \figur{pow-cc1}.
 
+For Boolean automata, \Fct{quotient} computes what is sometimes 
+called the \emph{smallest simulation}.  
+\index{bisimulation}%
+Two Boolean automata are in \emph{in bisimulation} if they have the 
+same (isomorphic) quotient.
+
 \longonly{%
-\cf \sbsct{aut-mul-quo-A}.
 \begin{ComVd}{110724}
-	 On pourrait imaginer que \Fct{quotient} soit implŽmentŽe pour 
-des automates non real-time, et mme des transducteurs.
+	One could imagine that \Fct{quotient} be implemented for non 
+	real-time automata, or even for transducers --- but it is not
+	(\cf \sbsct{aut-mul-quo-A}).
 \end{ComVd}
 }%
 
+\medskip\medskip 
+\begin{SwClCmd}
+\begin{shell}
+$ \kbd{vcsn coquotient a.xml > b.xml}
+$
+\end{shell}%
+\end{SwClCmd}%
+\begin{SwClTxt}
+    Computes the coquotient of \Prm{a.xml}  
+     and writes the result in \Prm{b.xml}.
+\end{SwClTxt}%
+\IndexFct{quotient}
+
+\Prec
+\Prm{a.xml} is a \emph{realtime} automaton.
+
+\Spec 
+\Fctq{coquotient}{a.xml} = 
+\Fctq{transpose}{\Fctq{quotient}{\Fctq{transpose}{a.xml}}}.
+
+\Comt 
+In contrast with morphisms of Boolean automata, $\K$-quotients of 
+weighted automata are directed, hence the usefulness of a 
+\Fct{coquotient} command.
 
 \subsubsection{\Fct{product}}
 \label{ssc:aut-pro}
@@ -895,7 +1007,7 @@ and the quotient of \code{cc2.xml} }
 \label{fig:pow-cc1}
 \end{figure}
 
-\subsubsection{\Fct{shuffle}}
+\subsubsection{\Fct{shuffle}, \Fct{infiltration}}
     
 \begin{SwClCmd}
 \begin{shell}
@@ -919,7 +1031,7 @@ and obey the two argument convention.
 meaningful, that the weight semiring be \emph{commutative}, and this 
 is  the case for all the instances implemented in the \tafkitv.
 
-\clearpage
+% \shortclear
 \Spec 
 The shuffle of \Prm{a.xml} and \Prm{b.xml} is, by definition (\cf 
 \cite[Sect.~III.3.2.6]{Saka03}), 
@@ -988,8 +1100,8 @@ abab+\{2\} abba+\{2\} baab+baba
 % Note also that the shuffle product of two $\Z$-series gives rise to interesting 
 % identities.
 
-\clearpage
-\subsubsection{\Fct{infiltration}}
+% \shortclear
+% \subsubsection{\Fct{infiltration}}
 \SetTwClPrm{\TwClThree}%
     
 \begin{SwClCmd}

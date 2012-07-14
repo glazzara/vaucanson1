@@ -9,67 +9,208 @@ automata over a free monoid, and even \emph{weighted} automata on some
 \emph{non-free monoids} (currently only automata on products of two
 free monoids--- also known as \emph{transducers}---are supported).
 
+
 \bigskip
 
-The platform consists in a few components:
+From user's point of view, the platform consists in two main components:
 
 \begin{description}
-\item[The \vcsn library] is a \Cxx library that implements objects for
+\item[The {\textnormal{\textsc{Vaucanson}}} library] is a \Cpp library that implements objects for
   automata, rational expressions, as well as algorithms on these
-  objects.  This library is generic, in the sense that it makes it
-  possible to write an algorithm once and apply it to different types
-  of automata.  However this genericity is achieved in a way that
-  should not cause any slowdown at runtime: because the type of the
-  automaton manipulated is known at compile time, compiling an
-  algorithm will generate code that is almost as efficient as an
-  algorithm written specifically for this type of automaton.
+  objects.  
+  This library is written under the static genericity paradigm.
 
-\item[\tafkit] is a command-line interface to the library that allows
-  user to execute \vcsn's algorithms without any knowledge of \Cxx.
-  Because the \vcsn library needs to know the type of automata at
-  compile time, the \tafkit interface has been instantiated for a
-  predefined set of common automaton types.
-
-  \tafkit does not allow to write new algorithms nor to manipulate new
-  types of automata, but it makes it possible to combine without
-  efforts a large set of algorithms on common automata types.
-
-\item[A repository of automata] that shows examples of automata of
-  various types, and also contains programs, called 
-  \emph{automata-factory}, which create parametrized families of
-  automata.
-
+\item[\tafkit] is a \emph{command-line interface} to the library that allows
+  user to execute \vcsn's algorithms without any knowledge of \Cpp 
+  nor of \vcsn API.
+  This  interface is instantiated for a
+  predefined set of commonly used automaton types.
+  
 \end{description}
-It is coupled with some other modules:
+
+The platform is coupled with two other communication modules:
 
 \begin{description}
-\item[An \xml format for automata] and expressions, called \fsmxml.
-This format aims at being an interchange format for automata and thus 
-at making possible, and hopefully easy, the communication between 
-various programs that input or output automata.
-So far,  this format is used as the normal, and default, input and 
-output format for \tafkit.
+\item[An \xml format for automata and expressions\textnormal{,}] called \fsmxml,
+aims at being a general purpose interchange format for weighted
+automata and regular expressions. 
+It is used as the normal, and default, input and 
+output format for \tafkit and thus for the communication between 
+\tafkit and \vgi.
 
-\item[A graphic user interface] called \vgi, especially dedicated to
-\vcsn is under development at the EE Department of the National Taiwan
-University in Taipeh.  It will allow to describe automata and to visualize
-the result of operation on automata in a graphical way.  All functions
-defined in \tafkit will be called via the menu of \vgi.
-
+\item[A Graphical User Interface] called \vgi and especially dedicated to
+\vcsn,
+allows to describe automata and to visualize
+the result of operations on automata in an interactive and graphical 
+way.   
+All functions
+defined in \tafkit can be called via the menu of \vgi.
 
 \end{description}
 
-Ideally, a user's manual for \vcsn should document all of these components.
-We decided not to do so, not so much because it is a lot of work, but 
-also as this work would not be so useful.
+The \vcsn platform is currently under a thorough revision and its
+core is rebuilt with a new design that changes the interface and the
+associated API. The ultimate version of the first phase of the
+project, coined \vcsnvo, has been 
+eventually released in September~2011. 
+The novelty of the \vcsnv version, just released in July~2012, is
+the integration of the Graphical User Interface \vgi.
 
-After several years of hard and complex developments, the evolution 
-and progress of the \vcsn platform are now stuck and we have reached 
-the conclusion that we have to undertake a thorough revision of the 
-\vcsn library that will most probably change its interface and the one 
-of the associated API.
-These new developments will give rise to a new series of 
-versions of \vcsn, coined \vcsn 2.x.
+
+\medskip
+
+Ideally, a user's manual for \vcsn should document all of these 
+components. 
+We decided not to do so, not so much because it is a lot of work, but 
+also as this work would not be so useful since the new design is 
+likely to make most of the description soon obsolete.
+On the other hand, we want to have a version of the platform that 
+will serve as  
+a landmark for both functionalities and  
+performance of the first phase of \vcsn.
+
+
+This version is coined \vcsnv and we consider it is accessible 
+through the \tafkit only.
+There will be a \tafkit for the future versions of \vcsn,
+its  functionalities will include all those of the present one,
+and its interface will essentially be the same as the \tafkit of 
+\vcsnv.
+\tafkit will be the only documented part of \vcsnv.
+
+
+% It is accessible through the
+% \tafkit only, which is also the only part that is documented.
+% presented at FSMNLP~2011, and
+
+\tafkit stands for \emph{Typed Automata Function Kit}. In the static
+generic programming paradigm used in the \vcsn library, the
+\emph{types} of the automata that are treated have to be known at
+compile time. The command-line interface \tafkit is a set of
+programs called from the \code{shell} and used to chain operations
+on automata. At the installation of \vcsn, \tafkit is therefore
+compiled for several predefined types of automata.
+
+\tafkit does not allow to write new algorithms nor to manipulate new
+types of automata, but it makes it possible, without efforts, to use
+\emph{already programmed} functions on automata of \emph{predefined
+types}. \tafkit gives a \emph{restricted access} to \vcsn
+functionalities, but it is a \emph{direct access}, without any need
+of programming skill. A basic familiarity with Unix command syntax
+only is sufficient to make use of \tafkit.
+
+
+The type of an automaton is determined by: (a) the fact it is an
+automaton over a free monoid, or over a product of two free monoids,
+(b) the type of the generators of the free monoid(s), (c) the weight
+semiring. The weight semiring can be~$\B$, $\Z$, $\Q$, $\R$,
+$\F_{2}$, $\Zmin$,   or~$\Zmax$. The generators may be
+\emph{characters}, \emph{integers} or \emph{pairs} of these. At the
+installation of \vcsn, \tafkit is instanciated for 18 combinations
+of weights and generators types.
+
+Besides basic editing commands, most of `classical' operations on
+automata, together with less classical ones, are available in the
+\tafkit instances: from transformations of automata into expressions
+and back to operations such as quotient, product, and shuffle, from
+operations for Boolean automata such as determinisation or
+computation of the universal automaton to operations on transducers
+such as composition or evaluation, from reduction of automata with
+weights in a field to transformation of automata over pairs into
+transducers.
+
+
+
+
+This version \tafkitv has been presented at the CIAA~2012 conference held in 
+Porto (Portugal).
+All users are encouraged to send us remarks, comments, and bug reports.
+We shall make our possible to take them into account in the minor 
+revisions that will be made to \vcsnv until the release of \vcsn~2.0.
+
+\endinput 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \bigskip
+% 
+% The platform consists in a few components:
+% 
+% \begin{description}
+% \item[The \vcsn library] is a \Cpp library that implements objects for
+%   automata, rational expressions, as well as algorithms on these
+%   objects.  This library is generic, in the sense that it makes it
+%   possible to write an algorithm once and apply it to different types
+%   of automata.  However this genericity is achieved in a way that
+%   should not cause any slowdown at runtime: because the type of the
+%   automaton manipulated is known at compile time, compiling an
+%   algorithm will generate code that is almost as efficient as an
+%   algorithm written specifically for this type of automaton.
+% 
+% \item[\tafkit] is a command-line interface to the library that allows
+%   user to execute \vcsn's algorithms without any knowledge of \Cpp.
+%   Because the \vcsn library needs to know the type of automata at
+%   compile time, the \tafkit interface has been instantiated for a
+%   predefined set of common automaton types.
+% 
+%   \tafkit does not allow to write new algorithms nor to manipulate new
+%   types of automata, but it makes it possible to combine without
+%   efforts a large set of algorithms on common automata types.
+% 
+% \item[A repository of automata] that shows examples of automata of
+%   various types, and also contains programs, called 
+%   \emph{automata-factory}, which create parametrized families of
+%   automata.
+% 
+% \end{description}
+% It is coupled with some other modules:
+% 
+% \begin{description}
+% \item[An \xml format for automata] and expressions, called \fsmxml.
+% This format aims at being an interchange format for automata and thus 
+% at making possible, and hopefully easy, the communication between 
+% various programs that input or output automata.
+% So far,  this format is used as the normal, and default, input and 
+% output format for \tafkit.
+% 
+% \item[A graphic user interface] called \vgi, especially dedicated to
+% \vcsn is under development at the EE Department of the National Taiwan
+% University in Taipeh.  It will allow to describe automata and to visualize
+% the result of operation on automata in a graphical way.  All functions
+% defined in \tafkit will be called via the menu of \vgi.
+
+
+% \end{description}
+% 
+% Ideally, a user's manual for \vcsn should document all of these components.
+% We decided not to do so, not so much because it is a lot of work, but 
+% also as this work would not be so useful.
+% 
+% After several years of hard and complex developments, the evolution 
+% and progress of the \vcsn platform are now stuck and we have reached 
+% the conclusion that we have to undertake a thorough revision of the 
+% \vcsn library that will most probably change its interface and the one 
+% of the associated API.
+% These new developments will give rise to a new series of 
+% versions of \vcsn, coined \vcsn 2.x.
 
 % On the other hand, there will be a \tafkit for these future versions of 
 % \vcsn, whose functionalities will include all those of the present 

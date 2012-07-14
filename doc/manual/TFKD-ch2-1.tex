@@ -25,7 +25,7 @@ They are thus called by any instance of \tafkit, for automata of
 \begin{enumerate}
 %     \addtocounter{enumii}{-1}
 % \item \Fctaut{reverse}
-\item \Fctaut{accessible}, \Fctaut{coaccessible}%, \Fctaut{is-accessible} 
+\item \Fctaut{accessible}\vrglst \Fctaut{coaccessible}%, \Fctaut{is-accessible} 
 %\item , \Fctaut{is-coaccessible}
 \item \Fctaut{trim}, \Fctaut{is-trim}
 \item \Fctaut{is-empty}
@@ -35,8 +35,8 @@ They are thus called by any instance of \tafkit, for automata of
 \item Transformations of automata
 
 \begin{enumerate}
-\item \Fctaut{proper}, \Fctaut{is-proper}
-\item \Fctaut{standardize}, \Fctaut{is-standard}
+\item \Fctaut{proper}\vrglst \Fctaut{is-proper}
+\item \Fctaut{standardize}\vrglst \Fctaut{is-standard}
 % \item \Fctaut{normalize}, \Fctaut{is-normalized}
 % \item \Fctaut{support}
 % \item \Fctaut{characteristic}
@@ -49,8 +49,8 @@ They are thus called by any instance of \tafkit, for automata of
 \item \FctautD{sum}
 \item \FctautD{concatenate}
 \item \Fctaut{star}
-\item \Fctkaut{left-mult}
-\item \Fctkaut{right-mult}
+\item \Fctkaut{left-mult}\vrglst \Fctkaut{right-mult}
+% \item \Fctkaut{right-mult}
 \item \FctParD{chain}{aut}{n}
 \end{enumerate}
 
@@ -72,7 +72,7 @@ They are thus called by any instance of \tafkit, for automata of
 \item Automata and expressions; operations on expressions
 
 \begin{enumerate}
-\item \Fctaut{aut-to-exp}, \Fctaut{aut-to-exp-DM}, 
+\item \Fctaut{aut-to-exp}\vrglst \Fctaut{aut-to-exp-DM}\vrglst 
 \Fctaut{aut-to-exp-SO}
     \item \Fctexp{expand}
     % \item \FctexpD{sum-E}
@@ -84,23 +84,25 @@ They are thus called by any instance of \tafkit, for automata of
 \end{enumerate}
 \end{enumerate}
 
+\shortclear
+
 \longonly{%
 \begin{ComVd}{110724}
     
-    \thi Pas implémentées:
+    \thi not implemented:
         
-    les commandes en \code{is-}: \Fctaut{is-accessible}, 
+    the \code{is-} commands: \Fctaut{is-accessible}, 
     \Fctaut{is-coaccessible}.
     
-    \thii Déplacées, ou posent problème:
+    \thii transfered to other sections:
     
     \Fctaut{support}, \Fctaut{characteristic};
 
     \Fctexp{expand}.
 	
-	\thiii Implémentée avec un scope restreint: \Fctexp{exp-to-aut}.
+	\thiii Implemented with a restricted scope: \Fctexp{exp-to-aut}.
     
-    \thiv Non documentées, cachées, mais existent quand même:
+    \thiv Hidden, not documented, but stil exist:
 
     \Fct{normalize}, \Fct{is-normalized}.
 
@@ -297,6 +299,8 @@ Input is not proper
 \end{SwClTxt}%
 \IndexFctIs{proper}%
 
+
+\shortclear 
 \Spec
 An automaton is \emph{proper} if it has no \emph{spontaneous 
 transitions},\footnote{%
@@ -332,8 +336,13 @@ $
 \thii The procedure eliminates the \emph{spontaneous transitions} 
 of the automaton. 
 The result may not be defined for some automata of certain type.
-We follow the definition taken in~\cite{Saka03,Saka09} and consider 
-that the result is defined if, and only if, the family of weights of 
+For the consistency of the definitions in full generality we had to 
+depart from the definition taken in~\cite{Saka03,Saka09} and consider 
+a very restricted definition of \emph{validity} of an automaton 
+(\cite{LombSaka12,LombSakaXX}.
+For the weight semirings that are implemented in \tafkitv however,
+the new definition of validity amounts to the old one and an 
+automaton is valid if, and only if, the family of weights of 
 computations labelled by the identity is \emph{summable}.
 
 \thiii
@@ -347,7 +356,7 @@ which is the opposite of tbe positive part
 Finally, the case of~$\K=\F_{2}$ is treated separately.
 
 Altogether, the algorithm is valid for all instances of \tafkitv.
-It is (will be indeed) documented in~\cite{LombSakaXX}.
+It is documented in~\cite{LombSaka12,LombSakaXX}.
 
 
 \Exam
@@ -385,17 +394,6 @@ transitions such that one gets a valid automaton, the behaviour of
 \label{fig:prp-tst}
 \end{figure}
 
-\longonly{%
-\begin{ComVd}{110724}
-J'ai refait les tests avec next-168 (du 14/07).
-
-Je ne comprends pas très bien ce qui a été inclus comme algorithme
-proper dans cette version, mais il donne un automate pour des valeurs
-1 et 1/2 du poids de la transition 3, alors qu'il devrait sortir en
-erreur.  Je suis allé voir \code{eps\_removal.hxx} , ça a pourtant l'air
-d'être le programme écrit par Sylvain.  Mystère, mystère.
-\end{ComVd}
-}%
 
 \subsubsection{\Fct{is-standard}, \Fct{standardize}}
 \label{ssc:aut-sta}%
@@ -796,7 +794,8 @@ operation is defined only on standard automata.
 
 
 
-\subsubsection{\Fct{left-mult}}
+\subsubsection{\Fct{left-mult}, \Fct{right-mult}}
+\label{ssc:aut-sta-ext-mul}
 
 \begin{SwClCmd}
 \begin{shell}
@@ -811,20 +810,7 @@ $
 \end{SwClTxt}%
 \IndexFct{left-mult}
 
-\Prec \Prm{a.xml} is \emph{standard}, for the left 
-`exterior' multiplication
-operation is defined only on standard automata. 
-
-\Spec
-\cf \sbsct{aut-sta-lft-mlt-A}
-
-\Comt 
-Beware that although the multiplication is on the left, the operand 
-\Prm{k} is the \emph{second} argument, and thus written on the right 
-of \Prm{a.xml}.
-
-\subsubsection{\Fct{right-mult}}
-
+\medskip\medskip 
 \begin{SwClCmd}
 \begin{shell}
 $ \kbd{vcsn right-mult a.xml k > b.xml}
@@ -838,12 +824,40 @@ $
 \end{SwClTxt}%
 \IndexFct{right-mult}
 
-\Prec \Prm{a.xml} is \emph{standard} for the right 
+
+\Prec \Prm{a.xml} is \emph{standard}, for the left and right
 `exterior' multiplication
-operation is defined only on standard automata. 
+operations are defined only on standard automata. 
 
 \Spec
-\cf \sbsct{aut-sta-rgt-mlt-A}
+\cf \sbsct{aut-sta-lft-mlt-A}
+
+\Comt 
+Beware that although the multiplication is on the left, the operand 
+\Prm{k} is the \emph{second} argument, and thus written on the right 
+of \Prm{a.xml}.
+
+% \subsubsection{\Fct{right-mult}}
+% 
+% \begin{SwClCmd}
+% \begin{shell}
+% $ \kbd{vcsn right-mult a.xml k > b.xml}
+% $
+% \end{shell}%
+% \end{SwClCmd}%
+% \begin{SwClTxt}
+%     Build the automaton that is obtained by multiplication on the 
+%     right of \Prm{a.xml} by \Prm{k} and writes the 
+%     result in \Prm{b.xml}.
+% \end{SwClTxt}%
+% \IndexFct{right-mult}
+% 
+% \Prec \Prm{a.xml} is \emph{standard} for the right 
+% `exterior' multiplication
+% operation is defined only on standard automata. 
+% 
+% \Spec
+% \cf \sbsct{aut-sta-rgt-mlt-A}
 
 \Exam
 \figur{ext-mul} shows the effect of a left and a right exterior 
@@ -863,6 +877,23 @@ $ \kbd{vcsn-char-z standardize c1.xml \bslash| right-mult - 5 \bslash| display -
 \label{fig:ext-mul}
 \end{figure}
 
+\Cave
+The second argument of these two functions is a \emph{weight} and 
+still is given as a character chain.
+In the case of~$\Z$, $\Q$, and~$\R$ as weight semirings, and for 
+\emph{negative} \Prm{k}, the `\code{-}' that gives the sign is indeed 
+interpreted as announcing an \emph{option} on the command line.
+The solution is to use an argument `\code{-{}-}' after the function 
+name in order to indicate that any following arguments should be 
+treated as operands, even if they begin with the `\code{-}' character.
+
+\begin{shell}
+$ \kbd{vcsn-char-z standardize c1.xml > c1s.xml}
+$ \kbd{vcsn-char-z left-mult c1s.xml -1}
+$ \kbd{vcsn-char-z: invalid option -- '1'}
+$ \kbd{Try `vcsn-char-z --help' or `vcsn-char-z --usage' for more information.}
+$ \kbd{vcsn-char-z left-mult -- c1s.xml -1}
+\end{shell}%
 
 \subsubsection{\Fct{chain}}
 
@@ -914,63 +945,8 @@ Note that it may easily yield large automata and entail long
 execution time.
 
 \longonly{%
-\begin{ComVd}{110626}
-	La dernière phrase renvoie à un premier test que j'ai fait sur 
-	un exemple de matching d'expression rationnelle considéré par 
-	Russ Cox avec son logiciel \code{RE2} (\cf 
-	\code{http://swtch.com/$\sim$rsc/regexp/}) et par Thomas Wilke  
-	dans son papier à ICFP'10 (\cf également 
-	\code{http://sebfisch.github.com/haskell-regexp/}).
-	
-	Nous sommes évidemment encore très loin du compte mais ce n'est 
-	pas l'objectif de \vcsn de faire du matching d'expressions 
-	rationnelles.
-\end{ComVd}
+\input{long-com-1.tex}
 }
-	
-\longonly{%
-\begin{shell}
-$ \kbd{vcsn-char-b -T exp-to-aut -aa '1+a' \bslash| chain - 1000 > e.xml}
-Charge  id:        <name>        total     self     calls   self avg. total avg.
-100.0\%   0:          _program  357.13s  357.13s         1      5.95m      5.95m 
- 58.1\%   2:     CMD[1]: chain  334.75s  207.43s         1    207.43s      5.58m 
- 35.6\%   4:concat_of_standard  127.30s  127.30s       999    127.43ms   127.43ms
-  6.3\%   5:  automaton output   22.37s   22.37s         1     22.37s     22.37s 
-  0.0\%   3:       is_standard    0.02s    0.02s      1998      0.01ms     0.01ms
-  0.0\%   1:CMD[0]: exp-to-aut    0.00s    0.00s         1      0.31ms     0.31ms
-$ \kbd{vcsn-char-b data e.xml}
-States: 1001
-Transitions: 500500
-Initial states: 1
-Final states: 1001
-$ \kbd{vcsn-char-b -T exp-to-aut -aa 'a' \bslash| chain - 1000 > f.xml}
-Charge  id:        <name>        total     self     calls   self avg. total avg.
-100.0\%   0:          _program  870.36ms 870.36ms        1      0.87s      0.87s 
- 58.4\%   2:     CMD[1]: chain  814.54ms 508.55ms        1      0.51s      0.81s 
- 34.6\%   4:concat_of_standard  300.73ms 300.73ms      999      0.30ms     0.30ms
-  5.9\%   5:  automaton output   51.30ms  51.30ms        1     51.30ms    51.30ms
-  0.6\%   3:       is_standard    5.27ms   5.27ms     1998      0.00ms     0.00ms
-  0.0\%   1:CMD[0]: exp-to-aut    0.21ms   0.21ms        1      0.21ms     0.21ms
-$ \kbd{vcsn-char-b data f.xml}
-States: 1001
-Transitions: 1000
-Initial states: 1
-Final states: 1
-$ \kbd{vcsn-char-b concatenate e.xml f.xml > g.xml}
-$ \kbd{vcsn-char-b -T eval g.xml 'a^1024'}\footnotemark
-Charge  id:        <name>        total     self     calls   self avg. total avg.
-100.0\%   0:          _program  410.71s  410.71s         1      6.85m      6.85m 
- 67.7\%   7:              eval  277.97s  277.97s         1    277.97s    277.97s 
- 27.7\%   4:       eps_removal  113.62s  113.62s         1    113.62s    113.62s 
-  3.6\%   2:   automaton input   14.77s   14.77s         1     14.77s     14.77s 
-  0.5\%   1:      CMD[0]: eval  410.71s    2.12s         1      2.12s      6.85m 
-  0.5\%   3:            cut_up    1.88s    1.88s         1      1.88s      1.88s 
-  0.1\%   5: accessible_states    0.33s    0.33s         1      0.33s      0.33s 
-  0.0\%   6:     sub_automaton    0.03s    0.03s         1     26.80ms    26.80ms
-\end{shell}%
-\footnotetext{%
-   Of course, not under this form.}
-}%
 
 
 
@@ -1061,7 +1037,7 @@ $
 \subsection{Automata and expressions; operations on expressions}
 \label{ssc:aut-exp-ope}
 
-\subsubsection{\Fct{aut-to-exp}, \Fctaut{aut-to-exp-DM}, \Fctaut{aut-to-exp-SO}}
+\subsubsection{\Fct{aut-to-exp}, \Fct{aut-to-exp-DM}, \Fct{aut-to-exp-SO}}
 \label{ssc:aut-to-exp}
 
 In \vcsn, expressions are computed from automata by the \emph{state 
@@ -1118,7 +1094,7 @@ The same functions apply of course to weighted automata and
 transducers as well.
 \begin{shell}
 $ \kbd{vcsn-char-z aut-to-exp c1.xml}
-(0+1)*.1.({2} 0+{2} 1)*
+(0+1)*.1.(\{2\} 0+\{2\} 1)*
 $ \kbd{vcsn-char-fmp-b aut-to-exp t1.xml}
 ((a,1).(1,y)+(1,x).(b,1))*.((a,1)+1)
 $ \kbd{vcsn-char-fmp-b aut-to-exp-SO t1.xml}
@@ -1136,12 +1112,12 @@ $ \kbd{vcsn-char-fmp-b aut-to-exp-SO t1.xml}
 \longonly{%
 \begin{ComVd}{110724}
 \thi 
-Il ne serait pas inutile de vérifier que le \code{DMChooser} correspond 
-bien aux spécifications de Delgado-Morais.
+It would probably be useful to check that the \code{DMChooser} 
+corresponds indeed to the specifications in Delgado-Morais paper.
 
 \thii 
-Si on a accès à un générateur aléatoire d'automates, on pourrait 
-reprendre sérieusement la comparaison entre les heuristiques.
+If we had access to a random generator of automata, one could 
+seriously compare the two heuristics.
 
 \thiii
 One could also think of an interactive algorithm (when the VGI will 
@@ -1194,7 +1170,7 @@ This is one of the reasons for which it is not implemented for the
 
 \Exam
 The \Fct{exp-to-aut} function is not implemented for transducers, but 
-is for weigted automata, as shown at \figur{III-2-24}, result of the 
+is for weighted automata, as shown at \figur{III-2-24}, result of the 
 following command (\cf \cite[Exer.~III.2.24]{Saka03}).
 \begin{shell}
 $ \kbd{vcsn-char-q -aab exp-to-aut '({1/6}a* + {1/3}b*)*' \bslash| display -}
@@ -1211,11 +1187,10 @@ $ \kbd{vcsn-char-q -aab exp-to-aut '({1/6}a* + {1/3}b*)*' \bslash| display -}
 
 \longonly{%
 \begin{ComV}%{101205}
-Il a été convenu que dans les versions ultérieures, la spécification 
-de \Fct{exp-to-aut} consisterait à construire un automate standard 
-dons les transitions sont étiquetées par les \emph{atomes} de 
-l'expression. 
-(La commande \Fct{standard} conservera sa spécification actuelle).
+It has been agreed that in forthcoming versions of \vcsn, the 
+\Fct{exp-to-aut} specification will yield a standard automaton whose 
+transitions will be labelled by the \emph{atoms} of the expression
+(the \Fct{standard} command will keep its actual specification).
 \end{ComV}
 }
 
@@ -1249,7 +1224,7 @@ For the specification of the expression formats, \cf
 $ \kbd{vcsn-char-b -aabc expand '(a+b+1)((a+ba)(ca+cc))*' }
 a.(aca+acc+baca+bacc)*+b.(aca+acc+baca+bacc)*+(aca+acc+baca+bacc)*
 $ \kbd{vcsn-char-z -aabc expand 'a(b(c+a)*+c(b)*)+ac(1+b)(b*)' }
-ab.(a+c)*+{2} (ac.b*)+acb.b*
+ab.(a+c)*+\{2\} (ac.b*)+acb.b*
 \end{shell}%
 
 \Cave
@@ -1258,22 +1233,23 @@ over a direct product of free monoids.
 
 \longonly{%
 \begin{ComVd}{110626}
-	Fonction de service, pour présenter certains résultats de façon 
-	plus naturelle et lisible.
+	Utilitarian function, providing more natural and readable output 
+	for certain results.
+
+	It seems that the present implementation gives every expression a 
+	canonical form modulo the identities~$(\mathbf{T})$ 
+	and~$(\mathbf{A})$  
+	 for the addition and product and the identity~$(\mathbf{C})$ for 
+	 the addition.
+	 
+	In an older specification of the same function, distributivity was 
+	applied recursively from left to right until the first starred 
+	subexpression was reached and then stopped there, without going 
+	further nor entering the subexpression.
 	
-	Dans mon souvenir, la distributivité s'effectuait récursivement 
-	de gauche à droite, jusqu'à la première sous-expression étoilée, 
-	et s'arrêtait alors, sans franchir cette sous-expression et sans 
-	rentrer dedans.
-	
-	Je pense que cette fonction peut avoir différents comportements, 
-	l'actuel, celui décrit précédemment, et peut-être d'autres, 
-	commandés par un paramètre. Il faudrait aller y voir de plus près.
-	
-	J'ai l'impression que l'implémentation actuelle donne de chaque 
-	expression une \emph{forme canonique} modulo les identités 
-	$(\mathbf{T})$, $(\mathbf{A})$ (pour l'addition et le produit) et 
-	$(\mathbf{C})$ (pour l'addition).
+	This function may have indeed many distinct behaviours: the 
+	present one, the one described above, and probably others, 
+	controlled by a parameter. This has to be looked at more closely.
 \end{ComVd}
 }%
 

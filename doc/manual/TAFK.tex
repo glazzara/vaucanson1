@@ -248,9 +248,10 @@
 \newcommand{\tafkit}{\textsc{TAF-Kit}\xspace}
 \newcommand{\vcsn}{\textsc{Vaucanson}\xspace}
 \def\VcsnVersion{1.4.1}
-% \def\VcsnVersion{1.4}
+\def\VcsnVrsnOld{1.4}
 % \def\VcsnVersion{1.3.9}
 \newcommand{\vcsnv}{\vcsn\VcsnVersion\xspace}
+\newcommand{\vcsnvo}{\vcsn\VcsnVrsnOld\xspace}
 \newcommand{\tafkitv}{\tafkit\VcsnVersion\xspace}
 \newcommand{\Vauc}{\vcsn}% for compatibility
 \newcommand{\fsmxml}{\textsc{Fsm\,XML}\xspace}
@@ -265,6 +266,7 @@
 \newcommand{\Comt}{\medskip\noindent\textbf{\textsl{Comments}:}\xspace}
 \newcommand{\Cave}{\medskip\noindent\textbf{\textsl{Caveat}:}\xspace}
 \newcommand{\Exam}{\medskip\noindent\textbf{\textsl{Example}:}\xspace}
+\newcommand{\vrglst}{,\e}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeatletter
 \newcommand{\Cxx}{%
@@ -423,24 +425,29 @@
 %%%
 \SetTwClPrm{\TwClOne}%
 \SetVCDirectory{figures/}
-% \newcommand{\VGIFig}{figures/VGI/}
+\newcommand{\VGIFig}{figures/VGI/}
 % \ShowFrame
+%========== hyphenation===========================
+% add words to TeX's hyphenation exception list
+\hyphenation{semi-ring}
+\hyphenation{simu-la-tion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \includeonly{%
 TFKD-title,%
-% TFKD-intro,%
-% TFKD-ch0,%
-% TFKD-ch1,%
-% TFKD-ch1-1,%
-% TFKD-ch2,%
-% TFKD-bib-ind,% 
-% % TFKD-chZ,%
-% TFKD-chA,%
-% TFKD-chVGI,%
-% % % TFKD-chB,
-% % % TFKD-chC,%
-% TFKD-chD,%
+TFKD-table,%
+TFKD-intro,%
+TFKD-ch0-vm,%
+TFKD-ch1,%
+TFKD-ch1-1,%
+TFKD-ch2,%
+% TFKD-chZ,%
+TFKD-chA,%
+TFKD-chVGI,%
+% % TFKD-chB,
+% % TFKD-chC,%
+TFKD-chD,%
 % % TFKD-chE,%
+TFKD-bib-ind,% 
 }
 \makeindex 
 \markboth{\leftmark}{\rightmark} 
@@ -450,12 +457,12 @@ TFKD-title,%
 %%%%%
 \addtocounter{chapter}{-1}
 \include{TFKD-title}
+\include{TFKD-table}
 \include{TFKD-intro}
-\include{TFKD-ch0}
+\include{TFKD-ch0-vm}
 \include{TFKD-ch1}
 \include{TFKD-ch1-1}
 \include{TFKD-ch2}
-\include{TFKD-bib-ind}
 \appendix
 % \include{TFKD-chZ}
 \include{TFKD-chA}
@@ -464,8 +471,9 @@ TFKD-title,%
 % \include{TFKD-chC}
 \include{TFKD-chD}
 \longonly{\include{TFKD-chE}}
+\include{TFKD-bib-ind}
 %%%%%%%%%%%%%%%%%%%
-\printindex 
+% \printindex 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%

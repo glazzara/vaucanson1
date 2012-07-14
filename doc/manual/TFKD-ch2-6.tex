@@ -5,10 +5,10 @@
 \label{sec:alp-pai}
 
 
-An alphabet of pairs $A$ is defined by a pair of alphabets $B$ and $C$
-and letters in $A$ are pairs 
-$(b,c)$ with $b$ in $B$ and $c$ in $C$. $A$ is thus a subset
-of $B\x C$, $(B\x C)^{*}$ is easily identified with a subset of 
+An alphabet of pairs~$A$ is defined by a pair of alphabets~$B$ and~$C$
+and letters in~$A$ are pairs~$(b,c)$ with~$b$ in~$B$ and~$c$ in~$C$. 
+The alphabet~$A$ is thus a subset
+of~$B\x C$, $(B\x C)^{*}$ is easily identified with a subset of 
 $\Be\x\Ce$ and in this way
 some functions apply to automata over~$\Ae$ that correspond to functions on
 automata over~$\Be\x\Ce$.
@@ -33,7 +33,7 @@ and the one of automata (\cf \figur{ltl-pai}).
 \item Transformations of automata
 
 \begin{enumerate}
-\item \Fctaut{first-projection}, \Fctaut{second-projection} 
+\item \Fctaut{first-projection}\vrglst \Fctaut{second-projection} 
 \item \Fctaut{pair-to-fmp}
 % \item \Fctaut{index-to-sequentialize}, \Fctaut{index-to-cosequentialize}
 % \item \Fctexp{linearize}
@@ -76,7 +76,7 @@ $
 \end{shell}%
 \end{SwClCmd}%
 \begin{SwClTxt}
-    yields \fmpt over $\Be\x\Ce$ every letter $(b,c)$ to the 
+    yields a \fmpt over $\Be\x\Ce$, every letter $(b,c)$ being mapped to the 
     corresponding element of $\Be\x\Ce$.
 \end{SwClTxt}%
 \IndexFct{pair-to-fmp}
