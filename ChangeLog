@@ -1,5 +1,10 @@
 2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* doc/manual/Makefile.am (vaucanson_manual_sources): Add missing
+	files.
+
+2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Fix permissions.
 
 	* doc/manual/TFKD-chVGI.tex, doc/manual/figures/VGI/fig1.eps,

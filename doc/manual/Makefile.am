@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2006, 2007, 2008, 2009, 2011 The Vaucanson Group.
+## Copyright (C) 2006, 2007, 2008, 2009, 2011, 2012 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -52,22 +52,27 @@ $(manual): TAFK.tex $(vaucanson_manual_sources)
 
 vaucanson_manual_sources =			\
   TAFK.tex					\
+  TFKD-bib-ind.tex				\
   TFKD-ch0.tex					\
+  TFKD-ch0-vm.tex				\
   TFKD-ch1.tex					\
+  TFKD-ch1-1.tex				\
+  TFKD-ch2.tex					\
   TFKD-ch2-1.tex				\
   TFKD-ch2-2.tex				\
   TFKD-ch2-3.tex				\
   TFKD-ch2-4.tex				\
   TFKD-ch2-5.tex				\
   TFKD-ch2-6.tex				\
-  TFKD-ch2.tex					\
   TFKD-chA.tex					\
   TFKD-chB.tex					\
   TFKD-chC.tex					\
   TFKD-chD.tex					\
   TFKD-chE.tex					\
+  TFKD-chVGI.tex				\
   TFKD-chZ.tex					\
   TFKD-intro.tex				\
+  TFKD-table.tex				\
   TFKD-title.tex				\
   texinputs/accent_keys.tex			\
   texinputs/js_macros3.tex			\
