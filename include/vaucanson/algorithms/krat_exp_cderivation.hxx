@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2012 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ namespace vcsn {
 
       MATCH__(Product, lhs, rhs)
       {
-	return_type match_lhs = match(lhs);
+	return_type match_lhs = this->match(lhs);
 
 	// FIXME: Following code only valid for series over Boolean semirings.
 	if (match_lhs != zero_as<T>::of(exp_.structure()))
@@ -63,39 +63,39 @@ namespace vcsn {
 	else
 	  {
 	    std::pair<semiring_elt_t, bool> ret = constant_term(series(lhs));
-	    return ret.first * match(rhs);
+	    return ret.first * this->match(rhs);
 	  }
       }
       END
 
       MATCH__(Sum, lhs, rhs)
       {
-	return_type match_lhs = match(lhs);
+	return_type match_lhs = this->match(lhs);
 
 	// FIXME: Following code only valid for series over Boolean semirings.
 	if (match_lhs != zero_as<T>::of(exp_.structure()))
 	  return match_lhs;
 	else
-	  return match(rhs);
+	  return this->match(rhs);
       }
       END
 
       MATCH_(Star, e)
       {
 	// FIXME: Following code only valid for series over Boolean semirings.
-	return match(e) * e.clone().star();
+	return this->match(e) * e.clone().star();
       }
       END
 
       MATCH__(LeftWeight, w, e)
       {
-	return semiring_elt_t(w) * match(e);
+	return semiring_elt_t(w) * this->match(e);
       }
       END
 
       MATCH__(RightWeight, e, w)
       {
-	return match(e) * semiring_elt_t(w);
+	return this->match(e) * semiring_elt_t(w);
       }
       END
 

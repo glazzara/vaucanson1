@@ -1,6 +1,6 @@
 # Vaucanson, a generic library for finite state machines.
 # Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-# 2010, 2011 The Vaucanson Group.
+# 2010, 2011, 2012 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@ m4_pattern_forbid([^VCSN_])
 
 AC_PREREQ([2.61])
 
-AC_INIT([vaucanson], [1.4a], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [1.4.1], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.11 tar-ustar no-define foreign dist-xz
                   color-tests parallel-tests silent-rules])

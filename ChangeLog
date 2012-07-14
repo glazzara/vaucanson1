@@ -1,5 +1,15 @@
 2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	Release Vaucanson 1.4.1.
+
+	* configure.ac, doc/NEWS.txt: Update and bump version to 1.4.1.
+
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx,
+	include/vaucanson/algorithms/krat_exp_cderivation.hxx: Fix errors
+	reported by g++-4.7
+
+2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	* doc/manual/Makefile.am (vaucanson_manual_sources): Add missing
 	files.
 

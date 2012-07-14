@@ -8,12 +8,26 @@ This document describes major updates to the Vaucanson_ project.
 
 :Contact: vaucanson@lrde.epita.fr
 
-Vaucanson 1.4a, unreleased
-==========================
+Vaucanson 1.4.1, July 14th, 2012
+================================
+
+- New TAF-Kit commands:
+
+  + ``coquotient``
+  + ``alphabet``
+  + ``partial-erase``
+  + ``gui``
+
+- Bug fixes:
+
+  + never create 0-labeled transitions in ``proper``.
+  + fix support of transitions that are linear combinations of pairs
+    in FMP transducers
 
 - A new TAF-Kit option ``--list-all-commands-json`` outputs the list of
   all command in a format (json) that may be parsed by third-party
   tools to interface with TAF-Kit.
+
 
 Vaucanson 1.4, September 28th, 2011
 ===================================
