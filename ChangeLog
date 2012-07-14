@@ -1,5 +1,9 @@
 2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
+	* configure.ac, doc/NEWS.txt: Bump version to 1.4.1a.
+
+2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
 	Release Vaucanson 1.4.1.
 
 	* configure.ac, doc/NEWS.txt: Update and bump version to 1.4.1.

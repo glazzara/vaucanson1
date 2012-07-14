@@ -8,6 +8,11 @@ This document describes major updates to the Vaucanson_ project.
 
 :Contact: vaucanson@lrde.epita.fr
 
+Vaucanson 1.4.1a (unreleased)
+=============================
+
+  No changes yet.
+
 Vaucanson 1.4.1, July 14th, 2012
 ================================
 
