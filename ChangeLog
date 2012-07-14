@@ -1,3 +1,25 @@
+2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix permissions.
+
+	* doc/manual/TFKD-chVGI.tex, doc/manual/figures/VGI/fig1.eps,
+	doc/manual/figures/VGI/fig10.eps,
+	doc/manual/figures/VGI/fig11.eps,
+	doc/manual/figures/VGI/fig12.eps,
+	doc/manual/figures/VGI/fig13.eps,
+	doc/manual/figures/VGI/fig14.eps,
+	doc/manual/figures/VGI/fig15.eps,
+	doc/manual/figures/VGI/fig16.eps,
+	doc/manual/figures/VGI/fig17.eps,
+	doc/manual/figures/VGI/fig18.eps,
+	doc/manual/figures/VGI/fig19.eps, doc/manual/figures/VGI/fig2.eps,
+	doc/manual/figures/VGI/fig3.eps, doc/manual/figures/VGI/fig4.eps,
+	doc/manual/figures/VGI/fig5.eps, doc/manual/figures/VGI/fig6.eps,
+	doc/manual/figures/VGI/fig7.eps, doc/manual/figures/VGI/fig8.eps,
+	doc/manual/figures/VGI/fig9.eps,
+	doc/manual/texinputs/accent_keys.tex: These files are not
+	executable.
+
 2012-07-13  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/is_ltl.hh: Remove non-ascii
