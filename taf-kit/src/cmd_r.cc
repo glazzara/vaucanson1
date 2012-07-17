@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2010, 2011 The Vaucanson Group.
+// Copyright (C) 2010, 2011, 2012 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -73,14 +73,6 @@ are_equivalent_E_command(const arguments_t& args)
   return !c;
 };
 
-static int
-universal_command(const arguments_t& args)
-{
-  g_res.keep(universal(get_aut(args, 1)));
-  return 0;
-}
-
-
 BEGIN_COMMAND_GROUP(r_commands,
 		    "3. Algorithms for automata with weights in a field:");
 COMMAND_ENTRY(reduce, Aut, Aut,
@@ -89,6 +81,4 @@ COMMAND_ENTRY(are_equivalent, AutAut, Boolean,
 	      "Tell whether two automata realize the same series.");
 COMMAND_ENTRY(are_equivalent_E, ExpExp, Boolean,
 	      "Tell whether two expressions denote the same language.");
-COMMAND_ENTRY(universal, Aut, Aut,
-	      "Build the universal automaton of an automaton.")
 END_COMMAND_GROUP
