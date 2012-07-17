@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2011 The Vaucanson Group.
+// Copyright (C) 2011, 2012 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -152,7 +152,7 @@ namespace vcsn {
     TRationalNumber<IntType>&
     TRationalNumber<IntType>::operator+= (const TRationalNumber<IntType>& nb)
     {
-      IntType g = vcsn::misc::gcd(den_,nb.den_); 
+      IntType g = vcsn::misc::gcd(den_,nb.den_);
       set_rational (nb.den_ / g * num_+ den_ / g * nb.num_, den_ / g * nb.den_);
       return (*this);
     }
@@ -162,7 +162,7 @@ namespace vcsn {
     TRationalNumber<IntType>&
     TRationalNumber<IntType>::operator-= (const TRationalNumber<IntType>& nb)
     {
-      IntType g = vcsn::misc::gcd(den_,nb.den_); 
+      IntType g = vcsn::misc::gcd(den_,nb.den_);
       set_rational (nb.den_ / g * num_ - den_ / g * nb.num_, den_ / g * nb.den_);
       return (*this);
     }
@@ -323,16 +323,22 @@ namespace vcsn {
 
       istr >> num;
       char slash;
-      if (!istr.eof())
-	istr.get(slash);
-      if ('/' != slash) // Test if a slash is present.
+      if (istr.eof())
+	{
+	  a.set(num, 1);
+	  return istr;
+	}
+
+      // Do we have a slash?
+      istr.get(slash);
+      if ('/' != slash)
       {
        	istr.unget();
        	a.set(num, 1);
        	return istr;
        }
 
-      // Otherwise read the denominator.
+      // Read the denominator.
       IntType den;
       istr >> den;
       a.set(num, den);

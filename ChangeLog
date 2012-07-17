@@ -1,3 +1,11 @@
+2012-07-17  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
+
+	Fix parsing of rational numbers without denominator.
+
+	* include/vaucanson/algebra/implementation/semiring/q_number.hxx
+	(operator>>): Fix parsing of rational numbers without denominator.
+	* taf-kit/tests/vcsn-char-q.test: Test it.
+
 2012-07-14  Alexandre Duret-Lutz  <adl@lrde.epita.fr>
 
 	* configure.ac, doc/NEWS.txt: Bump version to 1.4.1a.

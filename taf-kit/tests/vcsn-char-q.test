@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2011 The Vaucanson Group.
+# Copyright (C) 2011, 2012 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -99,6 +99,12 @@ EOF
 $VCSN power b1.xml 4 > b4.xml
 $VCSN reduce b4.xml > b4r.xml
 #$VCSN data b4r.xml | grep 'States: 6'
+
+# Make sure we don't need to use a denominator.
+$VCSN exp-to-aut -aa a > c.xml
+$VCSN right-mult c.xml 2 > ca.xml
+$VCSN right-mult c.xml 2/1 > cb.xml
+cmp ca.xml cb.xml
 
 sed '/^#/d' <<EOF | $VCSN --alphabet=ab edit undef.xml
 # Add states
