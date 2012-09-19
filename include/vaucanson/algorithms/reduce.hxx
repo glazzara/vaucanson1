@@ -46,6 +46,8 @@ namespace vcsn {
       empty_word(input.series().monoid().VCSN_EMPTY_),
       output(output)
     {
+
+      assert(is_realtime(input));
       std::map<hstate_t, int>	state_to_index;
       int i = 0;
 
@@ -55,9 +57,6 @@ namespace vcsn {
 
       init.resize(i);
       final.resize(i);
-
-      // We assume that there are only weights on initial and final
-      // transitions
 
       // Conversion of the automaton into linear representation
       for_all_const_initial_states(s, input)
@@ -69,7 +68,6 @@ namespace vcsn {
       for_all_const_transitions(t, input)
       {
 	series_set_elt_t s = input.series_of(*t);
-	assert(is_support_in_alphabet(s));
 	for_all_(series_set_elt_t::support_t, l, s.supp())
 	{
 	  const monoid_elt_t m(input.structure().series().monoid(), *l);
@@ -80,19 +78,6 @@ namespace vcsn {
 	}
       }
     }
-
-    //utility class
-    struct triple_t
-    {
-      hstate_t state;
-      semiring_vector_t vector;
-      monoid_elt_t letter;
-
-      triple_t(const hstate_t& state, const semiring_vector_t& vector,
-	       const monoid_elt_t& letter) :
-	state(state), vector(vector), letter(letter) {}
-
-    };
 
     //utility methods
     void product_vector_matrix(const semiring_vector_t& v,
@@ -121,140 +106,111 @@ namespace vcsn {
     void
     left_reduce()
     {
-      //if the initial vector is null, the reduction is empty
-      {
-	int i;
-        for (i = 0; i < nb_states; ++i)
-          if (init[i] != zero)
-            break;
-        if (i == nb_states)
-          return;
-      }
-      // otherwise...
-      std::queue<triple_t> queue;
+      // If the initial vector is null, the function immediatly returns
+
+      // this allows to find a pivot for reducing further vectors
+      // this pivot is a non zero entry, if one entry is equal to 1
+      // it is chosen as a pivot
+      unsigned nonzero= nb_states;
+      for (unsigned i = 0; i <nb_states; ++i) 
+	if(init[i] != zero)
+	{
+	  nonzero=i;
+	  if(init[i] == one)
+	    break;
+	}
+      if(nonzero == nb_states) //all components of init are 0
+	return;
+      
       // The base is a list of vectors, each vector is associated with
       // a state of the output
-      std::list<std::pair<hstate_t,semiring_vector_t> > base;
+      std::vector<semiring_vector_t> base;
+      std::vector<hstate_t> new_states;
       // The initial vector corresponds to the first state and is the
       // first element of the new base
-      hstate_t n_init = output.add_state();
-      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_init, init));
-      output.set_initial(n_init);
-      // Final weight of the initial state
-      semiring_elt_t t = scalar_product(init, final);
-      if(t != zero)
+      hstate_t initial=output.add_state();
+      series_set_elt_t si(output.structure().series());
+      si.assoc(empty_word, init[nonzero]);
+      output.set_initial(initial, si);
+      for (unsigned i = 0; i <nb_states; ++i)
+	init[i]=init[i]/init[nonzero];
+      base.push_back(init);
+      new_states.push_back(initial);
+      // To each vector of the base, the index of the pivot is store in
+      // the pivot array, which is a permutation.
+      unsigned pivot[nb_states];
+      for (unsigned i = 0; i < nb_states; ++i)
+	pivot[i] = i;
+      // The pivot of the first base vector is pivot[0];
+      pivot[0]=nonzero; pivot[nonzero]=0;
+      // To each vector of the base, all the successor vectors are computed,
+      // reduced to respect to the base, and finally, if linearly independant,
+      // pushed at the end of the base itself.
+      for(unsigned nb=0; nb<base.size(); ++nb)
+      {
+	//Set the final weight
+	semiring_elt_t t=scalar_product(base[nb], final);
+	if (t != zero)
 	{
 	  series_set_elt_t s(output.structure().series());
 	  s.assoc(empty_word, t);
-	  output.set_final(n_init, s);
+	  output.set_final(new_states[nb], s);
 	}
-      /* for each letter a, I.mu(a) is computed and pushed in the queue
-	 with the letter a and the state corresponding to I; it allows to
-	 build the automaton in the same time.
-      */
-      for (typename semiring_matrix_set_t::const_iterator it
-	     = letter_matrix_set.begin(); it != letter_matrix_set.end(); ++it)
+	// All the vectors base[nb].mu(a) are processed
+	for (typename semiring_matrix_set_t::const_iterator itm
+	       = letter_matrix_set.begin();
+	     itm != letter_matrix_set.end(); ++itm)
 	{
-	  semiring_vector_t nv(nb_states);
-	  product_vector_matrix(init, it->second, nv);
-	  queue.push(triple_t(n_init, nv, it->first));
-	}
-      while (!queue.empty())
-	{
-	  triple_t& tr = queue.front();
-	  //the triple tr is not yet poped, to keep valid references.
-	  semiring_vector_t& current = tr.vector;
-	  // first non null indices of current and base vectors.
-	  std::size_t curr_fnn = 0;
-	  std::size_t base_fnn = 0;
-	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it
-		= base.begin(); it!=base.end(); ++it)
+	  semiring_vector_t current(nb_states);
+	  product_vector_matrix(base[nb], itm->second, current);
+	  monoid_elt_t a = itm->first;
+	  
+	  //reduction of current w.r.t each base vector;
+	  for (unsigned b=0; b<base.size(); ++b)
 	  {
-	    while (curr_fnn < nb_states && current[curr_fnn] == zero)
-	      ++curr_fnn;
-	    // first non null index of the base vector
-	    // As the matrix is "in stairs" the base_fnn is larger than the previous one
-	    semiring_vector_t& vbase = it->second;
-	    while (base_fnn < nb_states && vbase[base_fnn] == zero)
-	      ++base_fnn;
-	    // Case A
-	    if (base_fnn < curr_fnn)
-	      // nothing to do in this case
+	    unsigned p = pivot[b];
+	    if (current[p] == zero)
 	      continue;
-	    // Case B
-	    if (base_fnn > curr_fnn)
-	      // current is added to the base before the current base vector
-	      {
-	        hstate_t n_state= output.add_state();
-	        base.insert(it,std::pair<hstate_t,semiring_vector_t>(n_state,
-								     current));
-		series_set_elt_t s(output.structure().series());
-		s.assoc(tr.letter, one);
-	        output.add_series_transition(tr.state, n_state, s);
-	        semiring_elt_t t=scalar_product(current, final);
-	        if(t != zero)
-	        {
-		  series_set_elt_t s(output.structure().series());
-		  s.assoc(empty_word, t);
-		  output.set_final(n_state, s);
-		}
-		// All the vectors current.mu(a) are put in the queue
-		for (typename semiring_matrix_set_t::const_iterator itm
-		       = letter_matrix_set.begin();
-		     itm != letter_matrix_set.end(); ++itm)
-	       {
-	    	  semiring_vector_t nv(nb_states);
-		  product_vector_matrix(current, itm->second, nv);
-		  queue.push(triple_t(n_state, nv, itm->first));
-	       }
-		// To avoid treatment after exiting the loop:
-		curr_fnn = nb_states;
-		break;
-	      }
-	    // Case C
-	    // Otherwise, current is reduced w.r.t base
-	    semiring_elt_t ratio = current[curr_fnn] / vbase[curr_fnn];
-	    // This is safer than current[curr_fnn] = current[curr_fnn]-ratio*vbase[curr_fnn];
-	    current[curr_fnn] = zero;
-	    for(int i = curr_fnn+1; i < nb_states; ++i)
-		current[i ] =current[i] - ratio*vbase[i];
-		series_set_elt_t s(output.structure().series());
-		s.assoc(tr.letter, ratio);
-	    output.add_series_transition(tr.state, it->first, s);
+	    semiring_vector_t& vbase = base[b];
+	    semiring_elt_t ratio = current[p] / vbase[p];
+	    // This is safer than current[p] = current[p]-ratio*vbase[p];
+	    current[p] = zero;
+	    for (int i = b+1; i < nb_states; ++i)
+	      current[pivot[i]] = current[pivot[i]] - ratio*vbase[pivot[i]];
+	    series_set_elt_t s(output.structure().series());
+	    s.assoc(a, ratio);
+	    output.add_series_transition(new_states[nb], new_states[b], s);
 	  }
-	  // If current has not been totally reduced w.r.t the base,
-	  // it has to be put itself in the base
-	  while (curr_fnn < nb_states && current[curr_fnn] == zero)
-	    ++curr_fnn;
-	  if (nb_states> curr_fnn)
-	    // current is added at the end of the base
+	  nonzero=nb_states;
+	  for (unsigned i = base.size(); i < nb_states; ++i)
+	    if(current[pivot[i]] != zero)
 	    {
-	      hstate_t n_state= output.add_state();
-	      base.push_back(std::pair<hstate_t,semiring_vector_t>(n_state,
-								   current));
-	      series_set_elt_t s(output.structure().series());
-	      s.assoc(tr.letter, one);
-	      output.add_series_transition(tr.state, n_state, s);
-	      semiring_elt_t t=scalar_product(current, final);
-	      if(t != zero)
-		{
-		  series_set_elt_t s(output.structure().series());
-		  s.assoc(empty_word, t);
-		  output.set_final(n_state, s);
-		}
-	      for (typename semiring_matrix_set_t::const_iterator itm
-		     = letter_matrix_set.begin();
-		   itm != letter_matrix_set.end(); ++itm)
-	      {
-		semiring_vector_t nv(nb_states);
-		product_vector_matrix(current, itm->second, nv);
-		queue.push(triple_t(n_state, nv, itm->first));
-	      }
-	   }
-	  queue.pop();
+	      nonzero=i;
+	      if(current[pivot[i]] == one)
+		break;
+	    }
+	  if (nonzero != nb_states) //otherwise, current is null
+	  {
+	    unsigned j= pivot[nonzero];
+	    pivot[nonzero]=pivot[base.size()]; pivot[base.size()]=j;//this is the pivot
+	    semiring_elt_t k=current[j];
+	    if(k != one)
+	    {
+	      current[j]=one;
+	      for(unsigned r=base.size()+1; r<nb_states; ++r)
+		current[pivot[r]]=current[pivot[r]]/k;
+	    }
+	    hstate_t n_state= output.add_state();
+	    base.push_back(current);
+	    new_states.push_back(n_state);
+	    series_set_elt_t s(output.structure().series());
+	    s.assoc(a, k);
+	    output.add_series_transition(new_states[nb], n_state, s);
+	  }
 	}
+      }
 	/* Print the base
- 	  for(typename std::list<std::pair<hstate_t,semiring_vector_t> >::iterator it = base.begin(); it!=base.end(); ++it)
+ 	  for(typename std::vector<std::pair<hstate_t,semiring_vector_t> >::iterator it = base.begin(); it!=base.end(); ++it)
 	  {
 	  	std::cerr << it->first << ':';
 	  	for(int i=0; i < nb_states; ++i)
